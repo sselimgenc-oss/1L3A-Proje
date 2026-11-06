@@ -1,0 +1,12 @@
+[
+ {
+  "kart_id": "scalp__trend-gunu-toparlanma__heikinashi",
+  "parametreler": {
+   "long": false,
+   "geri_min": 2,
+   "geri_maks": 3
+  },
+  "cikis_ayarlari": null,
+  "not": "Kitapta düşüş trend günü kısa toparlanmada short (long yok)."
+ }
+]

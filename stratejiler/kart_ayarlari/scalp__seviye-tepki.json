@@ -1,0 +1,39 @@
+[
+ {
+  "kart_id": "scalp__50-100-seviye__lama",
+  "parametreler": {
+   "seviye_tipi": "yuvarlak",
+   "tepki_modu": "red"
+  },
+  "cikis_ayarlari": null,
+  "not": "50/100 puan seviyesi -> fiyat ölçeğine göre yuvarlak basamak; limit emri 5 puan öncesi/stop 12 puan kapanış-bazlı tepki ve ATR tamponuna çevrildi."
+ },
+ {
+  "kart_id": "scalp__destek-direnc-ha-donus__heikinashi",
+  "parametreler": {
+   "seviye_tipi": "pivot",
+   "tepki_modu": "ha"
+  },
+  "cikis_ayarlari": null,
+  "not": "Destek/direnç seviyesinde HA dönüşü."
+ },
+ {
+  "kart_id": "scalp__onceki-gun-swing-ha__heikinashi",
+  "parametreler": {
+   "seviye_tipi": "onceki_seans",
+   "tepki_modu": "ha"
+  },
+  "cikis_ayarlari": null,
+  "not": "Önceki gün dibi/tepesinde HA dönüşü; stop 5 pip -> ATR tamponu."
+ },
+ {
+  "kart_id": "scalp__yuvarlak-sayi-dip-ha__heikinashi",
+  "parametreler": {
+   "seviye_tipi": "yuvarlak",
+   "tepki_modu": "ha",
+   "short": false
+  },
+  "cikis_ayarlari": null,
+  "not": "Kitapta yalnız long; yuvarlak sayıda çift dip + HA dönüşü."
+ }
+]

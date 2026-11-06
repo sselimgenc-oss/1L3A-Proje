@@ -1,0 +1,50 @@
+[
+ {
+  "kart_id": "swing__talep-bolgesi-dbr-rbr__christopher",
+  "parametreler": {
+   "giris_modu": "tepki",
+   "hacim_onay": false,
+   "hedef_r": 3.0,
+   "short": false,
+   "baz_maks": 1
+  },
+  "cikis_ayarlari": null,
+  "not": "Proximal çizgiye dönüşte long, stop distal altı, 1:3. Tek baz mum tercih."
+ },
+ {
+  "kart_id": "swing__arz-bolgesi-rbd-dbd__christopher",
+  "parametreler": {
+   "giris_modu": "tepki",
+   "hacim_onay": false,
+   "hedef_r": 3.0,
+   "long": false,
+   "baz_maks": 1
+  },
+  "cikis_ayarlari": null,
+  "not": "Talebin aynası (short)."
+ },
+ {
+  "kart_id": "swing__talep-bolgesi-hacim-onay__christopher",
+  "parametreler": {
+   "giris_modu": "tepki",
+   "hacim_onay": true,
+   "hedef_r": 3.0,
+   "short": false,
+   "baz_maks": 1
+  },
+  "cikis_ayarlari": null,
+  "not": "Bölge + hacim teyidi (Vaka-1: hacim önceki mumdan büyük)."
+ },
+ {
+  "kart_id": "swing__arz-bolgesi-hacim-onay__christopher",
+  "parametreler": {
+   "giris_modu": "tepki",
+   "hacim_onay": true,
+   "hedef_r": 3.0,
+   "long": false,
+   "baz_maks": 1
+  },
+  "cikis_ayarlari": null,
+  "not": "Arz tarafı hacim teyidi."
+ }
+]

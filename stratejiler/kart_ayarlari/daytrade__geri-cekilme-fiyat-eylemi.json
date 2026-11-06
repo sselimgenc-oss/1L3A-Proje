@@ -1,0 +1,22 @@
+[
+ {
+  "kart_id": "daytrade__trend-cubugu-arizasi__woods",
+  "parametreler": {
+   "geri_min": 1,
+   "geri_maks": 1,
+   "zayif": false
+  },
+  "cikis_ayarlari": null,
+  "not": "A trend çubuğu + B = tek karşı mum; B'nin yükseğinin üstü."
+ },
+ {
+  "kart_id": "daytrade__zayif-geri-cekme__woods",
+  "parametreler": {
+   "geri_min": 2,
+   "geri_maks": 2,
+   "zayif": true
+  },
+  "cikis_ayarlari": null,
+  "not": "Zayıf geri çekilme: 3+ karşı mum yok, 2 ardışık trend çubuğu yok; ikinci salınım şartı kodlanmadı."
+ }
+]
