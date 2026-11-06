@@ -16,6 +16,8 @@ _Son güncelleme: 2026-11-06 (Aşama 1 ara durum)_
 6. Binance: kripto + TradFi (ABD hisse, emtia) perpetual'ları. BIST yok.
 7. Önce paper trading (Binance testnet değil, canlı veri + kendi simülasyon motoru).
 8. DigitalOcean'da çalışır; dashboard + Telegram.
+9. (2026-11-06) **Az enstrüman, derin uzmanlık:** ajan yüzlerce enstrümanda işlem kovalamaz; az sayıda enstrümanda iyi işlem yapar.
+10. (2026-11-06) Önceki projelerden aday stratejileri lider seçer (enstrüman sayısına bakmadan, işe yarayacağını düşündükleri); hepsi 1L3A'da yeniden test edilir. Delist/hayatta kalma yanlılığı ile uğraşılmaz.
 
 ## Aşama 0 — tamamlandı
 - 50 PDF → `veri/kartlar_ham/` altında **438 kart** (scalp 94, day trade 126, swing 218).
@@ -66,7 +68,7 @@ Ana ders: önceki sonuçlar OOS'a bakılarak seçilmiş ve kâr birkaç işlemde
 4. Sert limit değerleri (TASLAK: %1 risk, %3 günlük, 3x, %20 kill switch). Günlük limitte açık pozisyon kapatılsın mı?
 5. Sunucu bölgesi: Binance ABD'yi engelliyor → öneri Frankfurt/Singapur.
 6. TradFi kısa veri: öneri — seçim kriptoda (2020–), TradFi'de yalnızca doğrulama.
-7. Önceki projelerin adayları (A, B, KGT, KMN, S1–S3) 1L3A aday havuzuna eklensin mi? KMN portföy stratejisi.
+7. ~~Önceki projelerin adayları~~ → karar 10 ile çözüldü.
 8. arsiv/OZET.md §1'deki test disiplini kuralları (OOS seçimde görülmez, deneme sayısı kaydı vb.) onaylansın mı?
 9. Her stratejide ilk stop dışında zorunlu çıkış (hedef / iz süren / zaman) kuralı.
 
