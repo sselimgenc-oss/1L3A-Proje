@@ -1,0 +1,186 @@
+90f5f69 2026-10-13 15:59:40 +0300 sselimgenc-oss
+    Merge pull request #7 from sselimgenc-oss/claude/exciting-hypatia-lxexf6
+daaf093 2026-10-13 12:59:23 +0000 Claude
+    Panel: BTC, S&P 500, Nasdaq 100, BIST 100 karşılaştırması (kiyas-durum dalından)
+63027f1 2026-10-13 12:58:19 +0000 Claude
+    Panel için karşılaştırma endeksleri iş akışı (BTC, S&P 500, Nasdaq 100, BIST 100)
+9352440 2026-10-13 12:37:16 +0000 Claude
+    Panel: Strateji Karnesi, Koç bulguları, gölge öğrenme, aylık rapor, işlem açıklaması çekmecesi, Claude'a sor
+be8ebf5 2026-10-13 12:18:26 +0000 Claude
+    Panel: Football Manager tarzı sol menü; her bölüm ayrı sayfa, özet ayrı sekmede
+2dddc51 2026-10-13 12:14:00 +0000 Claude
+    Panel: takvim gün detayında açık pozisyonların pozisyon bazında günlük değişimi
+c564374 2026-10-13 12:11:03 +0000 Claude
+    Panel: tablo sütunları sıralanabilir; takvim gün detayında kapanan/açık pozisyon ayrımı
+20ba982 2026-10-12 22:54:36 +0000 Claude
+    Koordinatör devir notu
+fb0590e 2026-10-12 22:52:37 +0000 Claude
+    EKIP: ekip oturumları arşivlendi, bakım koordinatörde
+a0fb123 2026-10-12 22:49:40 +0000 Claude
+    EKIP: token tasarrufu düzeni
+e9bf87f 2026-10-12 22:42:06 +0000 Claude
+    Denetim: kurumsal çapraz denetim nihai özeti
+9f67291 2026-10-12 22:33:07 +0000 Claude
+    Denetim: Codex raporunun bizim depolara uygulanabilirlik analizi
+254a7e4 2026-10-12 17:55:00 +0000 Claude
+    Panel: mevduat ölçüt çizgisi, alt portföy eğrileri varsayılan gizli (eksen ezilmesi); portföy dağılım analizi
+6bbef98 2026-10-12 17:49:48 +0000 Claude
+    Panel: strateji işlemlerinde yön sütunu okunur
+1397804 2026-10-12 17:49:11 +0000 Claude
+    Panel: kısmi kâr satırları ana işleme eklenir (algo partial, strateji tp1); işlem sayısı ve kazanma oranı şişmez
+8eb2ada 2026-10-12 17:44:33 +0000 Claude
+    Denetim raporu (12 Ekim), trend enstrüman metni gerçek sepetle
+39301e8 2026-10-12 17:41:54 +0000 Claude
+    Panel denetim düzeltmeleri: ağ hatasında hesap sıfırlanmaz, 00:00 saatleri korunur, küçük fiyatlar anlamlı basamakla, günler İstanbul gününe göre, düşüş kart/grafik tutarlı, alt hesap tekrarları tek sayılır, koni sarısı uyarı üretmez, canlı bayatlık uyarısı
+e71b88d 2026-10-12 17:33:56 +0000 Claude
+    Koni: kısa ufukta bant normal yaklaşımla genişletildi (işlem kapanışında yazılan backtest serisi ilk günlerde koniyi yapay daraltıyordu; algo'da yanlış alarm)
+c8bed6e 2026-10-12 15:59:58 +0000 Claude
+    Panel: büyük takvim sekmesi, pozisyon görselleri (dağılım, anlık K/Z, R cetveli), İstatistik sekmesi
+9964658 2026-10-12 15:48:35 +0000 Claude
+    EKIP: 22 Ekim kartında strateji kaldıracı KGT2x_KMN1x serisiyle
+99cb168 2026-10-12 15:48:04 +0000 Claude
+    Koni: strateji hesabı ekibin günlük bileşik serisinden (KGT_KMN_50_50)
+8e82f5b 2026-10-12 15:46:29 +0000 Claude
+    Panel: algo'nun yeni metin çıkış nedenleri (be_stop, trail, ema_exit) doğru gruplanıyor
+2211e25 2026-10-12 15:44:32 +0000 Claude
+    Panel faz B: Monte Carlo beklenti konisi, rota ışığı ve kaldıraçlı batma olasılığı
+e12fccc 2026-10-12 15:38:54 +0000 Claude
+    Panel A grubu: bot sağlık bilgisi, düşüş süresi + su altı grafiği, olasılıklı Sharpe, TL karşılığı, çıkış nedenleri
+3c59250 2026-10-12 15:36:57 +0000 Claude
+    EKIP: panel yol haritası (beyin fırtınası sonucu)
+6e9bcd5 2026-10-12 15:24:02 +0000 Claude
+    Meta-etiketleme denemesi (swing): ML sinyal filtresi işe yaramadı; öğrenme katmanı notu
+c80523f 2026-10-12 15:22:58 +0000 Claude
+    Panel: ders motoru (canlı sonuç ↔ backtest istatistiksel karşılaştırma, kayıp serisi, saat kümelenmesi, çıkış nedenleri)
+d1e7b08 2026-10-12 15:21:19 +0000 Claude
+    Panel: Analiz sekmesi (strateji çıkarma simülatörü, takvim ısı haritası, gün/saat, R dağılımı ve kayıp serisi)
+7df1d70 2026-10-12 15:13:33 +0000 Claude
+    Panel: açık pozisyonlarda alt hesap tekrarları tek satırda birleşir (×N)
+d43b5f4 2026-10-12 12:05:09 +0000 Claude
+    Panel: varlık sütunu daraltıldı (USDT eki yok, uzun listeler ilk 3 + sayı)
+48c24ca 2026-10-12 11:17:08 +0000 Claude
+    EKIP: panel saatlik güncellemeye geçti (yardımcı oturum)
+667f2df 2026-10-12 10:36:59 +0300 sselimgenc-oss
+    Merge pull request #5 from sselimgenc-oss/claude/exciting-hypatia-lxexf6
+1b048e8 2026-10-12 07:33:47 +0000 Claude
+    Kağıt bot: dönem öncesi pozisyonların yeni sinyalleri engellemesini önle; dolmayacak bekleyen emirleri gösterme
+8343d05 2026-10-12 01:47:20 +0000 Claude
+    EKIP: strateji kaldıraç sonucu ve tüm hesaplar kaldıraç özeti
+69416db 2026-10-12 01:46:31 +0000 Claude
+    Stop genişliği deneyi (Trend Molası) ve EKIP notu
+0066876 2026-10-11 22:58:08 +0000 Claude
+    EKIP: algo ve day-trade kaldıraç sonuçları işlendi
+6675a08 2026-10-11 22:57:19 +0000 Claude
+    EKIP: kullanıcının mevduat karşılaştırma ölçütü ve dolar karşılığı
+5a7bb14 2026-10-11 22:53:52 +0000 Claude
+    EKIP: Aralık eleme çerçevesi (rol başına bir strateji, en fazla 3-4)
+077537f 2026-10-11 22:51:04 +0000 Claude
+    EKIP: gerçek para planı v1 (sermaye, kaldıraç, short kararları) ve kaldıraç görevleri
+1289603 2026-10-11 22:42:16 +0000 Claude
+    Kaldıraç senaryoları deneyi (swing S1+S2+S3: teminat azaltma ve büyütme, fonlama, tasfiye)
+6329435 2026-10-11 22:33:08 +0000 Claude
+    Panel ve raporlar için kullanıcı dostu strateji adları
+3e9436a 2026-10-11 22:31:23 +0000 Claude
+    Panel: son 24 saat özeti, alarm bandı, normal aralık, varlık yoğunlaşması, korelasyon, telefon düzeni
+5d4f5a7 2026-10-11 22:27:03 +0000 Claude
+    Kağıt hesaplar paneli: veri üretici ve claude.ai panel sayfası
+13caf55 2026-10-11 21:59:31 +0000 Claude
+    Codex ikinci liste: 6 yeni repo denetimi, 3 fikrin testi; gizli uyumsuzluk S4 adayı
+12ec101 2026-10-11 21:51:00 +0000 Claude
+    Codex GitHub strateji listesi: 11 repo denetimi ve 4 adayın testi (hiçbiri sisteme eklenmedi)
+04a1af3 2026-10-11 17:43:06 +0000 Claude
+    Ekip: algo düzeltmesi doğrulandı
+7c18247 2026-10-11 16:18:16 +0000 Claude
+    Ekip: day trade rejim filtresi sonucu
+f526c87 2026-10-11 16:09:09 +0000 Claude
+    Ekip: day trade stres testi sonucu ve karar
+bbd7a52 2026-10-11 15:56:44 +0000 Claude
+    Ekip: algo görev durumu
+646918e 2026-10-11 15:56:06 +0000 Claude
+    Ekip: iletişim kuralı (sorular koordinatöre)
+10bf2f6 2026-10-11 15:54:21 +0000 Claude
+    Ekip: görev durumları güncellendi
+e928128 2026-10-11 15:53:04 +0000 Claude
+    Swing hayatta kalma stres testi: 22 eski/çöken coinde KO %57, PF_R 2,47 (ana evrenle aynı)
+0d299d9 2026-10-11 15:52:40 +0000 Claude
+    Hayatta kalma stres testi betiği
+00cb53d 2026-10-11 15:52:30 +0000 github-actions[bot]
+    Veri güncellemesi: 2026-10-11
+7d83e19 2026-10-11 15:48:41 +0000 Claude
+    Ekip: ortak standart tablosu, denetim bulguları ve açık görevler
+94a7bc7 2026-10-11 15:48:21 +0000 Claude
+    Hayatta kalma stres testi için çöken/listeden çıkan coin verisi
+8bb39de 2026-10-11 15:46:18 +0000 Claude
+    Ekip görev dağılımı ve denetim kuralları
+d6b0398 2026-10-11 15:44:03 +0000 Claude
+    Tüm kağıt hesapların (5 repo) haftalık karşılaştırma betiği
+4eb29dc 2026-10-11 17:46:07 +0300 sselimgenc-oss
+    Merge pull request #3 from sselimgenc-oss/claude/exciting-hypatia-lxexf6
+890411c 2026-10-11 14:43:30 +0000 Claude
+    Trend deneme: head ile kırık boru hatasını önle
+a85ba49 2026-10-11 14:43:20 +0000 Claude
+    Trend kağıt: boş swing özsermayesine dayanıklı karşılaştırma; denemede hata maskelenmesin
+c0cba4a 2026-10-11 14:40:03 +0000 Claude
+    Trend kolları: geliştirme/duyarlılık testleri, emtia ETF, ay sonu düzeltmesi ve ikinci kağıt hesap
+0cc8fdd 2026-10-11 14:35:54 +0000 github-actions[bot]
+    Veri güncellemesi: 2026-10-11
+09913da 2026-10-11 14:32:37 +0000 Claude
+    Emtia ETF verisini geniş evrene ekle
+3e0c696 2026-10-11 14:25:09 +0000 Claude
+    brainbrick long-only stratejileri: düzeltilmiş yeniden test ve swing ile birleşim
+a45c18f 2026-10-11 14:22:37 +0000 Claude
+    Trend/portföy stratejileri modülü ve test programı
+a7a4039 2026-10-11 14:22:23 +0000 github-actions[bot]
+    Veri güncellemesi: 2026-10-11
+f693cf5 2026-10-11 14:19:17 +0000 Claude
+    Trend/portföy stratejileri için geniş evren verisi indirme
+db73317 2026-10-10 15:01:15 +0000 github-actions[bot]
+    Veri güncellemesi: 2026-10-10
+9601166 2026-10-10 14:59:54 +0000 Claude
+    Kağıt botu için uçtan uca deneme iş akışı
+14b3bb6 2026-10-10 17:59:26 +0300 sselimgenc-oss
+    Merge pull request #1 from sselimgenc-oss/claude/exciting-hypatia-lxexf6
+88b6dfd 2026-10-10 14:59:06 +0000 Claude
+    Kağıt al-sat botu: 10.000$ sanal bakiye, 60 gün, günde 2 çalıştırma
+bf55639 2026-10-10 14:18:28 +0000 Claude
+    Strateji dokümanı, sonuç raporu, README ve günlük sinyal iş akışı
+07b1171 2026-10-10 14:15:20 +0000 Claude
+    İnce ayar: S1 rejim filtresi, S2 kısmi kâr 1.5R
+66bce0a 2026-10-10 14:13:56 +0000 Claude
+    Piyasa rejimi filtresi, BIST USD değerlendirmesi ve strateji-sınıf eşlemesi
+cd3681b 2026-10-10 14:11:57 +0000 Claude
+    BIST USD sağlamlık testi
+3695470 2026-10-10 14:10:33 +0000 github-actions[bot]
+    Veri güncellemesi: 2026-10-10
+aa828d5 2026-10-10 14:08:47 +0000 Claude
+    Güncel sinyal tarayıcısı; kapanmamış kripto mumunu dışla
+b0b0854 2026-10-10 14:07:52 +0000 github-actions[bot]
+    Veri güncellemesi: 2026-10-10
+d3b61d9 2026-10-10 14:07:48 +0000 Claude
+    Seçili ayarlar, birleşik sistem raporu; endeks verilerini yardımcı serilere ekle
+9509bc7 2026-10-10 14:07:12 +0000 Claude
+    S3 için çıkış modu seçeneği ve ikinci tarama
+1e3d8b9 2026-10-10 14:05:47 +0000 Claude
+    Portföy simülasyonunda kaldıracı engelle, USDTRY yardımcı verisini ekle
+118cb2c 2026-10-10 14:03:41 +0000 Claude
+    Kısmi kâr alma, limit giriş, momentum filtresi ve ızgara tarama deneyleri
+a0481eb 2026-10-10 13:49:42 +0000 Claude
+    Backtest motoru, göstergeler ve üç strateji ekle
+972e195 2026-10-10 13:46:40 +0000 github-actions[bot]
+    Veri güncellemesi: 2026-10-10
+b6cff25 2026-10-10 13:46:24 +0000 Claude
+    İlerleme kaydı ekle
+574b0bd 2026-10-10 13:44:53 +0000 Claude
+    Veri indirme betiği ve GitHub Actions iş akışı ekle
+5c72647 2026-10-10 13:43:13 +0000 Claude
+    PDF metinlerini metinler/ klasörüne .md olarak çıkar
+fea4441 2026-10-10 16:39:39 +0300 sselimgenc-oss
+    Add files via upload
+4c5df87 2026-10-10 16:38:10 +0300 sselimgenc-oss
+    Add files via upload
+c58940a 2026-10-10 16:36:49 +0300 sselimgenc-oss
+    Add files via upload
+9c1a62f 2026-10-10 16:35:33 +0300 sselimgenc-oss
+    Add files via upload
+a59a6bb 2026-10-10 16:34:07 +0300 sselimgenc-oss
+    Add files via upload
