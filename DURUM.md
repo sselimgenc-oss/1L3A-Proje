@@ -68,14 +68,19 @@ Ana ders: önceki sonuçlar OOS'a bakılarak seçilmiş ve kâr birkaç işlemde
     OOS parametre seçiminde asla görülmez (seçim yalnız walk-forward eğitim pencerelerinde).
 14. **Sert limitler kesin:** işlem başı %1, günlük %3 (dolunca açık pozisyon da kapanır), 3x, %20 kill switch.
 15. **Sunucu:** DigitalOcean Frankfurt.
-16. **Veri/seçim:** stratejiler BTC+ETH 2020– verisinde seçilir; altın + 1–2 TradFi yalnız doğrulama.
-17. **Enstrüman:** başlangıçta 3–5 (BTC, ETH, XAU + en fazla 1–2). README'deki ~25 enstrüman planı iptal.
+16. ~~Veri/seçim: BTC+ETH 2020–; TradFi yalnız doğrulama.~~ (2026-11-06 kullanıcı kararıyla değişti → karar 22)
+17. ~~Enstrüman: başlangıçta 3–5 (BTC, ETH, XAU + 1–2).~~ (2026-11-06 → karar 22). README'deki ~25 enstrüman planı iptal.
 19. (2026-11-06) **Hepsi test edilir, erken eleme yok:** ~700 aday (438 kart + 160 TradingView + 68 freqtrade + ~30 dış kural).
     Huni: (1) hepsi kodlanır → (2) geniş tarama, yalnız apaçık umutsuzlar elenir → (3) walk-forward (karar 13) →
     (4) kilitli dönem → ajan başına ~3.
 20. (2026-11-06) **Kilitli dönem:** 2025-11-01 00:00 UTC sonrası veri kasada. Tarama/walk-forward/seçimde kullanılmaz;
     final seçimde yalnız BİR kez açılır (açılış kayda geçer).
 21. (2026-11-06) KGT iki aday: `onceki__kgt` (swing, orijinal, günlerce tutar) + `onceki__kgt-gun` (day trade, gün sonu kapanır).
+22. (2026-11-06) **Test evreni (kullanıcı kararı):** yalnız kripto değil. Kripto: BTC, ETH, SOL (Binance verisi).
+    TradFi: Magnificent 7 (AAPL, MSFT, GOOGL, AMZN, NVDA, META, TSLA) + altın (XAU) + petrol (WTI) + bakır.
+    TradFi geçmişi Binance'ta kısa olduğundan veri **Dukascopy**'den çekilir (`DK_` önekli semboller); canlı işlem
+    Binance TradFi perp'lerinde. Maliyet modeli Binance'ınki; Dukascopy verisinde funding yok. Kilit tarihi aynı.
+    Canlıda yine az enstrüman (karar 9): enstrüman seçimi testlerin sonucuna göre yapılır.
 18. Önceki projelerden alınanlar: 4S kırılım (algo-sg A + swing-sg S2 birleşik), KGT, S1; yedek B. KMN ve S3 alınmadı.
 
 ## Yol haritası (2026-11-06)
@@ -88,10 +93,10 @@ Ana ders: önceki sonuçlar OOS'a bakılarak seçilmiş ve kâr birkaç işlemde
 - Bitiş: tüm adaylar kodlu, lookahead testli, 1A özellikleri testli.
 
 **Aşama 2 — Test ve seçim**
-- BTC+ETH 2020–: her aday için walk-forward (OOS seçimde görülmez), karar 13 ölçütleri.
+- Karar 22 evreni (kripto + Mag7 + XAU/WTI/bakır): her aday için walk-forward (OOS seçimde görülmez), karar 13 ölçütleri.
 - Geçenler: rejim analizi (boğa/ayı/yatay), parametre duyarlılığı, rastgele giriş karşılaştırması, maliyet ×2 stresi.
 - Hedef: canlıda **ajan başına ortalama ~3 strateji** (10 aday bilerek fazla tutuldu, eleme beklenir). Aralarında korelasyon kontrolü.
-- TradFi doğrulama: XAU + 1–2 hisse (kısa veri; yalnız "bozulmuyor mu").
+- TradFi: Dukascopy uzun geçmişiyle tam test (karar 22); Binance TradFi verisi (2025-12+) kilitli dönemde fiyat tutarlılığı kontrolü.
 - Bitiş: her stil için onaylı final listesi + beklenti aralıkları (paper'da karşılaştırmak için).
 
 **Aşama 3 — Pano**
