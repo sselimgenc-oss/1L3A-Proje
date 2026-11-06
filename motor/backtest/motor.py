@@ -4,13 +4,17 @@ Zamanlama
   - Sinyal mum i KAPANIŞINDA üretilir; giriş/çıkış mum i+1 AÇILIŞINDA yapılır.
   - Stop/hedef mum içi yüksek/düşükle kontrol edilir. Aynı mumda ikisi de değerse STOP sayılır.
   - Fiyat stopun ötesinde açılırsa (gap) dolum açılış fiyatındandır.
-  - Stop, gap ve piyasa çıkışlarına kayma uygulanır; hedef (limit) dolumuna uygulanmaz.
+  - Giriş ve sinyal/zaman çıkışlarına `kayma_bps`; stop, stop_gap ve kill_switch çıkışlarına
+    `stop_kayma_bps` uygulanır. Hedef (limit) dolumuna kayma uygulanmaz.
 Funding
   - Pozisyon açıkken her funding zamanı f için `nominal * oran * yön` ödenir (pozitif oran long öder).
   - f, giriş zamanından SONRA ve çıkış zamanına (dahil) kadar olanlar için uygulanır.
   - İşlem tablosundaki `funding` sütunu ÖDENEN tutardır (negatif = tahsil edilen).
 Risk
   - SERT_LIMITLER her zaman uygulanır; MotorAyarlari bunları aşarsa tavana kırpılır.
+  - limit_modu="olc": günlük kayıp ve kill switch işlemi DURDURMAZ, yalnızca `limit_olaylari`na
+    kaydedilir. YALNIZCA araştırma/backtest içindir; canlı ve paper'da kullanılmaz.
+    İşlem başı risk ve kaldıraç tavanı her iki modda da uygulanır.
 Muhasebe Decimal ile yapılır; çıktı tablosu float'tır.
 """
 from dataclasses import dataclass, field
@@ -48,7 +52,12 @@ class MotorAyarlari:
     komisyon_taker_yuzde: float = 0.05
     komisyon_maker_yuzde: float = 0.02
     hedef_limit_emri: bool = False           # True: hedef dolumlarında maker komisyonu
-    kayma_bps: float = 2.0
+    kayma_bps: float = 2.0                   # giriş, sinyal ve zaman çıkışları
+    stop_kayma_bps: float = 5.0              # stop, stop_gap ve kill_switch çıkışları
+    # "uygula": günlük kayıp / kill switch işlemi durdurur (varsayılan).
+    # "olc": durdurmaz, sadece limit_olaylari'na kaydeder. YALNIZCA araştırma/backtest;
+    # canlı ve paper'da kullanılmaz. İşlem başı risk ve kaldıraç tavanı her iki modda uygulanır.
+    limit_modu: str = "uygula"
     kurallar: SembolKurallari = field(default_factory=SembolKurallari)
 
 
@@ -59,6 +68,7 @@ class SonucBacktest:
     reddedilenler: list
     uyarilar: list
     baslangic_sermaye: float
+    limit_olaylari: list = field(default_factory=list)   # {tur, zaman, ozsermaye, dusus_yuzde}
 
 
 @dataclass
@@ -108,6 +118,12 @@ def backtest(mumlar: pd.DataFrame, strateji: Strateji, ayarlar: MotorAyarlari = 
     tick, step = D(kural.tick_size), D(kural.step_size)
     taker, maker = D(ayarlar.komisyon_taker_yuzde) / 100, D(ayarlar.komisyon_maker_yuzde) / 100
     kayma = D(ayarlar.kayma_bps) / 10000
+    stop_kayma = D(ayarlar.stop_kayma_bps) / 10000
+    if ayarlar.limit_modu not in ("uygula", "olc"):
+        raise ValueError("limit_modu 'uygula' veya 'olc' olmalı")
+    olc = ayarlar.limit_modu == "olc"
+    limit_olaylari = []
+    kill_asildi, gunluk_kaydedildi = False, False
 
     # --- sinyaller ---
     sig = strateji.sinyaller(mumlar)
@@ -183,9 +199,9 @@ def backtest(mumlar: pd.DataFrame, strateji: Strateji, ayarlar: MotorAyarlari = 
         })
         return brut - cikis_kom
 
-    def piyasa_fiyati(p: _Poz, ham: float) -> Decimal:
+    def piyasa_fiyati(p: _Poz, ham: float, k: Decimal = kayma) -> Decimal:
         """Çıkış tarafına kayma uygula (long satar -> düşük, short alır -> yüksek)."""
-        return _tick(D(ham) * (1 - p.yon * kayma), tick)
+        return _tick(D(ham) * (1 - p.yon * k), tick)
 
     for i in range(n):
         t = zaman[i]
@@ -193,12 +209,14 @@ def backtest(mumlar: pd.DataFrame, strateji: Strateji, ayarlar: MotorAyarlari = 
 
         if t.date() != gun:
             gun, gun_basi, gunluk_blok = t.date(), onceki_ozs, False
+            gunluk_kaydedildi = False
 
         # 1) açılışta: funding + bekleyen çıkış
         if poz is not None:
             nakit -= funding_ode(poz, t, dahil=True)
             if bekleyen_cikis:
-                nakit += kapat(poz, piyasa_fiyati(poz, o), t, bekleyen_cikis, taker)
+                nakit += kapat(poz, piyasa_fiyati(poz, o, stop_kayma if bekleyen_cikis == "kill_switch" else kayma),
+                                  t, bekleyen_cikis, taker)
                 poz = None
         bekleyen_cikis = None
 
@@ -258,11 +276,11 @@ def backtest(mumlar: pd.DataFrame, strateji: Strateji, ayarlar: MotorAyarlari = 
                 hedef_vur = p.hedef is not None and l <= p.hedef
             cikis = None
             if stop_gap:
-                cikis = (piyasa_fiyati(p, o), "stop_gap", t, taker)
+                cikis = (piyasa_fiyati(p, o, stop_kayma), "stop_gap", t, taker)
             elif hedef_gap:
                 cikis = (_tick(D(o), tick), "hedef", t, maker if ayarlar.hedef_limit_emri else taker)
             elif stop_vur:
-                cikis = (piyasa_fiyati(p, float(p.stop)), "stop", t + aralik, taker)
+                cikis = (piyasa_fiyati(p, float(p.stop), stop_kayma), "stop", t + aralik, taker)
             elif hedef_vur:
                 cikis = (p.hedef, "hedef", t + aralik, maker if ayarlar.hedef_limit_emri else taker)
             if cikis is not None:
@@ -283,10 +301,26 @@ def backtest(mumlar: pd.DataFrame, strateji: Strateji, ayarlar: MotorAyarlari = 
         ozs.append(ozs_i)
         onceki_ozs = ozs_i
         zirve = max(zirve, ozs_i)
-        if not kill and (zirve - ozs_i) / zirve * 100 >= D(L.kill_switch_dusus_yuzde):
+        dusus = (zirve - ozs_i) / zirve * 100
+        if olc:
+            if dusus >= D(L.kill_switch_dusus_yuzde):
+                if not kill_asildi:
+                    kill_asildi = True
+                    limit_olaylari.append({"tur": "kill_switch", "zaman": t,
+                                           "ozsermaye": float(ozs_i), "dusus_yuzde": float(dusus)})
+            else:
+                kill_asildi = False
+        elif not kill and dusus >= D(L.kill_switch_dusus_yuzde):
             kill = True
-        if (ozs_i - gun_basi) / gun_basi * 100 <= -D(L.gunluk_max_kayip_yuzde):
-            gunluk_blok = True
+        gunluk_pct = (ozs_i - gun_basi) / gun_basi * 100
+        if gunluk_pct <= -D(L.gunluk_max_kayip_yuzde):
+            if olc:
+                if not gunluk_kaydedildi:
+                    gunluk_kaydedildi = True
+                    limit_olaylari.append({"tur": "gunluk_kayip", "zaman": t,
+                                           "ozsermaye": float(ozs_i), "dusus_yuzde": float(-gunluk_pct)})
+            else:
+                gunluk_blok = True
 
         # 6) mum kapanışı: sonraki açılış için kararlar
         if poz is not None:
@@ -314,4 +348,4 @@ def backtest(mumlar: pd.DataFrame, strateji: Strateji, ayarlar: MotorAyarlari = 
 
     ozsermaye = pd.Series([float(x) for x in ozs], index=idx, name="ozsermaye")
     df = pd.DataFrame(islemler, columns=KOLONLAR)
-    return SonucBacktest(df, ozsermaye, reddedilenler, uyarilar, float(ayarlar.baslangic_sermaye))
+    return SonucBacktest(df, ozsermaye, reddedilenler, uyarilar, float(ayarlar.baslangic_sermaye), limit_olaylari)

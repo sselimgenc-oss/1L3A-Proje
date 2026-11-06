@@ -51,11 +51,12 @@ def walk_forward(strateji: Strateji, mumlar: pd.DataFrame, ayarlar: MotorAyarlar
         s = backtest(dilim, strateji.yeni(**param), replace(ayarlar, baslangic_sermaye=baslangic_sermaye),
                      fd, islem_baslangic=bas)
         s.ozsermaye = s.ozsermaye[s.ozsermaye.index >= bas]
+        s.limit_olaylari = [o for o in s.limit_olaylari if o["zaman"] >= bas]
         return s
 
     pencereler = pencereler_uret(mumlar.index[min(isinma_mum, len(mumlar) - 1)], mumlar.index[-1] + pd.Timedelta(1, "ns"),
                                  egitim_gun, test_gun)
-    rapor, islemler, egriler = [], [], []
+    rapor, islemler, egriler, limit_olaylari = [], [], [], []
     sermaye = float(ayarlar.baslangic_sermaye)
     for e0, e1, t0, t1 in pencereler:
         en_iyi, en_skor = None, -np.inf
@@ -71,11 +72,14 @@ def walk_forward(strateji: Strateji, mumlar: pd.DataFrame, ayarlar: MotorAyarlar
             sermaye = float(s.ozsermaye.iloc[-1])
             islemler.append(s.islemler[s.islemler["giris_zamani"] >= t0])
             egriler.append(s.ozsermaye)
+            kayit["limit_olay_sayisi"] = len(s.limit_olaylari)
+            limit_olaylari.extend(s.limit_olaylari)
         rapor.append(kayit)
 
     islem_df = pd.concat(islemler, ignore_index=True) if islemler else pd.DataFrame()
     egri = pd.concat(egriler) if egriler else pd.Series(dtype=float)
-    sonuc = {"pencereler": rapor, "islemler": islem_df, "ozsermaye": egri}
+    sonuc = {"pencereler": rapor, "islemler": islem_df, "ozsermaye": egri,
+             "limit_olaylari": limit_olaylari, "limit_modu": ayarlar.limit_modu}
     sonuc["metrikler"] = (mtr.hesapla(islem_df, egri, ayarlar.baslangic_sermaye)
                           if len(egri) > 1 else {})
     return sonuc
