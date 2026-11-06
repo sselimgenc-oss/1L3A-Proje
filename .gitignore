@@ -22,3 +22,6 @@ veri/mumlar/
 *.parquet
 *.sqlite
 *.db
+
+# Büyük tarama dökümleri (sıkıştırılmış .csv.gz sürümü repoda)
+sonuclar/tarama/k2_izgara.csv
