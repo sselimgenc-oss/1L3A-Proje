@@ -1,0 +1,11 @@
+[
+ {
+  "kart_id": "scalp__ak47-seviye-testi__vezi",
+  "parametreler": {
+   "seviye_tipi": "onceki_seans",
+   "tepki_modu": "red"
+  },
+  "cikis_ayarlari": null,
+  "not": "Önceki gün dibi/tepesi testi ve sıçrama; '3 vektör' hareket ve sabit 30 pip stop kodlanmadı (ATR tampon)."
+ }
+]

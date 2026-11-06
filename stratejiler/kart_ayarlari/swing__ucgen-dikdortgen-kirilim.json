@@ -1,0 +1,71 @@
+[
+ {
+  "kart_id": "daytrade__ucgen-kirilim-hacim__singhal",
+  "parametreler": {
+   "ucgen": true,
+   "simetrik": false,
+   "dikdortgen": false,
+   "short": false,
+   "hacim_k": 1.5,
+   "hedef_olcu": 1.0,
+   "min_rr": 2.0
+  },
+  "cikis_ayarlari": null,
+  "not": "Hacimli yükselen üçgen kırılımı, min 1:2."
+ },
+ {
+  "kart_id": "daytrade__yukselen-ucgen-3-gun-kapanis__bulkowski",
+  "parametreler": {
+   "ucgen": true,
+   "simetrik": false,
+   "dikdortgen": false,
+   "short": false
+  },
+  "cikis_ayarlari": null,
+  "not": "3. gün çıkışı CikisAyarlari ile (zaman_cikisi_mum)."
+ },
+ {
+  "kart_id": "daytrade__alcalan-ucgen-asagi-kirilim-satis__bulkowski",
+  "parametreler": {
+   "ucgen": true,
+   "simetrik": false,
+   "dikdortgen": false,
+   "long": false
+  },
+  "cikis_ayarlari": null,
+  "not": "Alçalan üçgen aşağı kırılım (ayna)."
+ },
+ {
+  "kart_id": "daytrade__simetrik-ucgen-satis__bulkowski",
+  "parametreler": {
+   "ucgen": false,
+   "simetrik": true,
+   "dikdortgen": false,
+   "long": false
+  },
+  "cikis_ayarlari": null,
+  "not": "Simetrik üçgen aşağı kırılım satışı."
+ },
+ {
+  "kart_id": "daytrade__dikdortgen-ust-21sma-3gun__bulkowski",
+  "parametreler": {
+   "ucgen": false,
+   "simetrik": false,
+   "dikdortgen": true,
+   "short": false
+  },
+  "cikis_ayarlari": null,
+  "not": "Dikdörtgen üst; 21 SMA filtresi ve 3. gün çıkışı kodlanmadı/CikisAyarlari."
+ },
+ {
+  "kart_id": "daytrade__dikdortgen-alt-kirilim-3gun__bulkowski",
+  "parametreler": {
+   "ucgen": false,
+   "simetrik": false,
+   "dikdortgen": true,
+   "long": false
+  },
+  "cikis_ayarlari": null,
+  "not": "Dikdörtgen alt kırılım satışı."
+ }
+]

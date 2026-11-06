@@ -1,0 +1,15 @@
+[
+ {
+  "kart_id": "swing__sahte-kopus-ters-yon__heikinashi",
+  "parametreler": {
+   "pencere": 40,
+   "geri_don_mum": 3,
+   "min_dokunus": 2,
+   "kapanis_disi": true,
+   "hedef_modu": "karsi",
+   "min_rr": 2.0
+  },
+  "cikis_ayarlari": null,
+  "not": "Kart: >=2 dokunuşlu aralık, kapanış dışarıda, 3-5 mum içinde içeri dönüş, hedef karşı sınır ve en az 1:2. Haber/HA teyidi kodlanmadı."
+ }
+]

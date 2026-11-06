@@ -1,0 +1,12 @@
+[
+ {
+  "kart_id": "swing__ucgen-kirilim__kratter",
+  "parametreler": {
+   "ucgen": true,
+   "simetrik": false,
+   "dikdortgen": false
+  },
+  "cikis_ayarlari": null,
+  "not": "Yükselen/alçalan üçgen kırılımı; 'ikinci dış kapanış' ilk kırılım kapanışıyla yaklaşıldı, H4 dürtü filtresi yok."
+ }
+]

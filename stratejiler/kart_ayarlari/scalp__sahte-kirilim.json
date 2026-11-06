@@ -1,0 +1,12 @@
+[
+ {
+  "kart_id": "scalp__sahte-kopus-vwap__stevenson",
+  "parametreler": {
+   "adx_esik": 25.0,
+   "pencere": 32,
+   "geri_don_mum": 2
+  },
+  "cikis_ayarlari": null,
+  "not": "Yalnız ADX<25 yatay filtresi + sahte kırılım; VWAP 1SD/Stokastik/Expo göstergesi kodlanmadı."
+ }
+]
