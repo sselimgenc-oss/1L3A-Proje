@@ -1,0 +1,50 @@
+[
+ {
+  "kart_id": "daytrade__stokastik-rsi-ema20-2dk__backus",
+  "parametreler": {
+   "trend_ema": 20,
+   "k_periyot": 12,
+   "k_yumusat": 3,
+   "d_periyot": 5,
+   "asiri_esik": 20.0
+  },
+  "cikis_ayarlari": null,
+  "not": "YAKLAŞIK: EMA20 üstü + Stokastik(12,3,5) %K %D'yi keser; RSI(9) ve çoklu çıkış koşulları yok."
+ },
+ {
+  "kart_id": "daytrade__stokastik-20-donus-yuzde-1__backus",
+  "parametreler": {
+   "trend_ema": 20,
+   "k_periyot": 12,
+   "k_yumusat": 3,
+   "d_periyot": 5,
+   "asiri_esik": 20.0,
+   "hedef_r": 1.0
+  },
+  "cikis_ayarlari": null,
+  "not": "YAKLAŞIK: %1 stop/%1 hedef ~ 1R varsayımı; S&P yön filtresi yok. Çıkış: %K %D'yi ters keser."
+ },
+ {
+  "kart_id": "scalp__macd-stokastik-m1-m5__eseckal",
+  "parametreler": {
+   "k_periyot": 8,
+   "k_yumusat": 3,
+   "d_periyot": 3,
+   "asiri_esik": 20.0
+  },
+  "cikis_ayarlari": null,
+  "not": "YAKLAŞIK: Stokastik(8,3,3) 20 yukarı geçiş; MACD>0 filtresi yok (EMA trend filtresi varsayılan). Pip hedef ATR'ye çevrilmedi."
+ },
+ {
+  "kart_id": "scalp__bir-dakika-ema50-100-stoch__ellis",
+  "parametreler": {
+   "trend_ema": 50,
+   "k_periyot": 5,
+   "k_yumusat": 3,
+   "d_periyot": 3,
+   "asiri_esik": 20.0
+  },
+  "cikis_ayarlari": null,
+  "not": "YAKLAŞIK: EMA50>EMA100 yerine fiyat>EMA50; Stokastik(5,3,3) 20 yukarı geçiş."
+ }
+]

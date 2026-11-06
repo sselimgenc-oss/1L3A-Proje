@@ -1,0 +1,29 @@
+[
+ {
+  "kart_id": "daytrade__nr7-dar-aralik-kirilim__bulkowski",
+  "parametreler": {
+   "mod": "nr",
+   "nr_pencere": 7,
+   "gecerlilik": 7
+  },
+  "cikis_ayarlari": null,
+  "not": "NR7 sonrası 7 mum içinde kırılım; kartta hedef yok, varsayılan hedef_r 2 kaldı."
+ },
+ {
+  "kart_id": "swing__ic-bar-kirilim__graham",
+  "parametreler": {
+   "mod": "ic_bar"
+  },
+  "cikis_ayarlari": null,
+  "not": "İç bar kırılımı; stop karşı kenar (sınıf kuralı)."
+ },
+ {
+  "kart_id": "swing__ic-bar-devam__day",
+  "parametreler": {
+   "mod": "ic_bar",
+   "trend_ma": 50
+  },
+  "cikis_ayarlari": null,
+  "not": "YAKLAŞIK: iç bar küme kırılımı, 'yalnız trendde' için SMA50 trend filtresi (kartta büyük ilk mum şartı yok)."
+ }
+]

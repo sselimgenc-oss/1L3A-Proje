@@ -1,0 +1,22 @@
+[
+ {
+  "kart_id": "daytrade__vwap-2sd-ortalamaya-donus__singhal",
+  "parametreler": {
+   "bant_k": 2.0,
+   "hedef_tipi": "vwap"
+  },
+  "cikis_ayarlari": null,
+  "not": "VWAP ±2 sd dışı kapanış + dönüş; hedef 1 = VWAP (hedef 2 karşı bant kodlanmadı)."
+ },
+ {
+  "kart_id": "daytrade__rsi-vwap-scalp-1dk__singhal",
+  "parametreler": {
+   "bant_k": 1.5,
+   "rsi_periyot": 14,
+   "rsi_esik": 30.0,
+   "hedef_tipi": "karsi_bant"
+  },
+  "cikis_ayarlari": null,
+  "not": "YAKLAŞIK: RSI(14)<30 + VWAP alt bandı (kart VWAP'ın kendisinde destek der); hedef karşı bant."
+ }
+]
