@@ -1,0 +1,47 @@
+[
+ {
+  "kart_id": "swing__uc-cizgi-vurus__graham",
+  "parametreler": {
+   "desenler": "uc_cizgi",
+   "short": false
+  },
+  "cikis_ayarlari": null,
+  "not": "Kart yalnız boğa (long) tanımlar."
+ },
+ {
+  "kart_id": "swing__terk-edilmis-bebek__graham",
+  "parametreler": {
+   "desenler": "terk_bebek",
+   "short": false
+  },
+  "cikis_ayarlari": null,
+  "not": "Kart yalnız boğa (long). Boşluk gevşek tanım (7/24 kriptoda nadir)."
+ },
+ {
+  "kart_id": "swing__iki-bosluk-deseni__graham",
+  "parametreler": {
+   "desenler": "iki_bosluk",
+   "long": false
+  },
+  "cikis_ayarlari": null,
+  "not": "Kart yalnız short. Boşluk gevşek tanım; kriptoda çok seyrek."
+ },
+ {
+  "kart_id": "swing__uc-kara-karga__graham",
+  "parametreler": {
+   "desenler": "uc_kara_karga",
+   "long": false
+  },
+  "cikis_ayarlari": null,
+  "not": "Kart yalnız short (yükseliş tepesi)."
+ },
+ {
+  "kart_id": "swing__harami-capraz__graham",
+  "parametreler": {
+   "desenler": "harami_capraz",
+   "hacim_filtre": 1
+  },
+  "cikis_ayarlari": null,
+  "not": "Doji'de hacim düşüşü + yutan mum teyidi; her iki yön (kart ayıyı şekille anlatır)."
+ }
+]
