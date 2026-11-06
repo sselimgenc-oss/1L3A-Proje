@@ -1,0 +1,14 @@
+[
+ {
+  "kart_id": "scalp__kopus__uko",
+  "parametreler": {
+   "sikisma_pencere": 96,
+   "sikisma_yuzdelik": 15.0,
+   "hacim_k": 1.5,
+   "stop_modu": "kutu",
+   "hedef_r": 2.0
+  },
+  "cikis_ayarlari": null,
+  "not": "YAKLAŞIK: kart genel kopuş + hacim/volatilite artışı der; BB sıkışması bizim yorumumuz. Kopuş seviyesine geri çekilme girişi kodlanmadı."
+ }
+]

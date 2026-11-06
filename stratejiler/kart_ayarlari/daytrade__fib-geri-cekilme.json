@@ -1,0 +1,15 @@
+[
+ {
+  "kart_id": "daytrade__macd-fibonacci-geri-cekilme__singhal",
+  "parametreler": {
+   "pivot_k": 4,
+   "giris_alt": 0.382,
+   "giris_ust": 0.786,
+   "stop_seviyesi": 1.0,
+   "hedef_uzatma": 1.0,
+   "short": false
+  },
+  "cikis_ayarlari": null,
+  "not": "Kart yalnız long. MACD>sinyal onayı kodlanmadı. Hedef Fib %0 (önceki swing tepesi); min 1:2 R/R filtresi yok."
+ }
+]

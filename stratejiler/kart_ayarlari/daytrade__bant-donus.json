@@ -1,0 +1,25 @@
+[
+ {
+  "kart_id": "daytrade__bollinger-ema9-bant__singhal",
+  "parametreler": {
+   "bb_periyot": 20,
+   "bb_sapma": 2.0,
+   "adx_esik": 0.0,
+   "trend_ma": 50,
+   "hedef_tipi": "karsi"
+  },
+  "cikis_ayarlari": null,
+  "not": "Trend yönünde banttan tepki; hedef karşı bant. Trend = EMA50 (kartta tanım yok); 9 EMA mesafe koşulu kodlanmadı."
+ },
+ {
+  "kart_id": "swing__bollinger-bant-ihlal-ters__day",
+  "parametreler": {
+   "bb_periyot": 20,
+   "bb_sapma": 3.0,
+   "adx_esik": 0.0,
+   "hedef_tipi": "karsi"
+  },
+  "cikis_ayarlari": null,
+  "not": "BB 20/3 ihlali sonrası bant içine dönüş (teyit mumu); karşı banda çıkış. Stop kartta 'bandın uç noktasının ötesi' -> ihlal mumu ucu."
+ }
+]
