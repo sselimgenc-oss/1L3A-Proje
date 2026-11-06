@@ -1,0 +1,68 @@
+[
+ {
+  "kart_id": "daytrade__saf-fiyat-ralli-konsolidasyon-hacim__singhal",
+  "parametreler": {
+   "hacim_k": 1.5,
+   "hedef_olcu": 1.0
+  },
+  "cikis_ayarlari": null,
+  "not": "YAKLAŞIK: hacim ani artışı (1.5x), ralli ön koşulu (%15-20) yok; hedef kutu ölçüsü, R/R 1:2-1:3 çıkış değil."
+ },
+ {
+  "kart_id": "daytrade__tikanikliktan-kirilim__bulkowski",
+  "parametreler": {
+   "hacim_k": 0.0,
+   "short": false
+  },
+  "cikis_ayarlari": {
+   "zaman_cikisi_mum": 3
+  },
+  "not": "Düşük hacimli tıkanıklıktan kırılım (hacim filtresi kapalı); kırılımdan ~3 gün sonra çıkış. Yalnız long."
+ },
+ {
+  "kart_id": "swing__hacim-patlamasi__ladha",
+  "parametreler": {
+   "hacim_k": 10.0,
+   "short": false
+  },
+  "cikis_ayarlari": {
+   "kismi": [
+    [
+     1.0,
+     0.5
+    ]
+   ]
+  },
+  "not": "YAKLAŞIK: hacim >= 10x ortalama; günlük %5 artış, endeks trendi, 2.5 gün yarı çıkış yok. Yalnız long."
+ },
+ {
+  "kart_id": "swing__kesilmis-fiyat-kopusu__make",
+  "parametreler": {
+   "uzunluk": 5,
+   "hacim_k": 0.0,
+   "hedef_olcu": 0.0
+  },
+  "cikis_ayarlari": {
+   "sabit_r_hedefi": 2.0
+  },
+  "not": "YAKLAŞIK: 3+ bar yatay konsolidasyon, hacim yok; pip stop ATR/kutu ucu ile değiştirildi; hedef 2R."
+ },
+ {
+  "kart_id": "swing__kopus-hacim-onayi__hogan",
+  "parametreler": {
+   "hacim_k": 1.0
+  },
+  "cikis_ayarlari": {
+   "zaman_cikisi_mum": 10
+  },
+  "not": "Kırılış mumu hacmi ortalamanın üstünde; 5-10 işlem günü zaman çıkışı. %2-3 stop ATR kutu ucu ile."
+ },
+ {
+  "kart_id": "swing__kirilim-hacim-onayli__johnson",
+  "parametreler": {
+   "hacim_k": 1.5
+  },
+  "cikis_ayarlari": null,
+  "not": "Yatay direnç kırılımı + yüksek hacim (eşik kartta yok, 1.5x)."
+ }
+]

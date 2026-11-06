@@ -1,0 +1,25 @@
+[
+ {
+  "kart_id": "daytrade__supertrend-pivot-r1s1__singhal",
+  "parametreler": {
+   "gosterge": "supertrend",
+   "atr_periyot": 7,
+   "carpan": 3.0
+  },
+  "cikis_ayarlari": null,
+  "not": "YAKLAŞIK: Supertrend ATR 7 (çarpan kartta null, 3); R1/S1 kırılım filtresi yok."
+ },
+ {
+  "kart_id": "daytrade__sar-rsi-heikin-ashi-3dk__singhal",
+  "parametreler": {
+   "gosterge": "psar",
+   "psar_adim": 0.02,
+   "psar_maks": 0.2,
+   "rsi_periyot": 14,
+   "rsi_esik": 50.0,
+   "hedef_r": 2.0
+  },
+  "cikis_ayarlari": null,
+  "not": "YAKLAŞIK: PSAR 0.02/0.2 + RSI(14) 50 filtresi, R/R 1:2; Heikin-Ashi yok."
+ }
+]

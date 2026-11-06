@@ -1,0 +1,46 @@
+[
+ {
+  "kart_id": "swing__bollinger-bant-donus__make",
+  "parametreler": {
+   "bb_sapma": 2.0,
+   "hedef_tipi": "orta"
+  },
+  "cikis_ayarlari": null,
+  "not": "Bant ucu dönüşü; periyot kartta null (20). Yatay piyasa için ADX<25 varsayılan. YAKLAŞIK: teyit şartı kartta yok."
+ },
+ {
+  "kart_id": "swing__bb-alt-bant-rsi30__johnson",
+  "parametreler": {
+   "bb_periyot": 20,
+   "bb_sapma": 2.0,
+   "rsi_periyot": 14,
+   "rsi_esik": 30.0,
+   "hedef_tipi": "orta",
+   "adx_esik": 0.0,
+   "short": false
+  },
+  "cikis_ayarlari": null,
+  "not": "Alt bant + RSI(14)<30; hedef orta bant. ADX filtresi kapalı. Yalnız long."
+ },
+ {
+  "kart_id": "swing__bb-ortalamaya-donus__johnson",
+  "parametreler": {
+   "bb_periyot": 20,
+   "bb_sapma": 2.0,
+   "hedef_tipi": "orta",
+   "adx_esik": 0.0
+  },
+  "cikis_ayarlari": null,
+  "not": "Kapanış bant dışında -> ortalamaya dönüş, hedef orta bant; ADX filtresi kapalı."
+ },
+ {
+  "kart_id": "swing__gimmee-bar-bollinger__kratter",
+  "parametreler": {
+   "bb_sapma": 2.0,
+   "hedef_tipi": "orta",
+   "short": false
+  },
+  "cikis_ayarlari": null,
+  "not": "YAKLAŞIK: alt banda dokunup yükselen kapanış (ADX yatay filtresi varsayılan 25 altı); Gimmee çubuğu tetiği ve hedef kartta yok (orta bant varsayıldı). Yalnız long."
+ }
+]

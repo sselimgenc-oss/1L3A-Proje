@@ -1,0 +1,65 @@
+[
+ {
+  "kart_id": "swing__macd-sinyal-sifir-gecis__boxer",
+  "parametreler": {
+   "hizli": 12,
+   "yavas": 26,
+   "sinyal": 9,
+   "mod": "sinyal"
+  },
+  "cikis_ayarlari": null,
+  "not": "YAKLAŞIK: MACD x sinyal kesişimi 12/26/9; 'sinyalin üstünde 3 gün kalma' filtresi yok."
+ },
+ {
+  "kart_id": "swing__macd-sinyal-kesisimi__make",
+  "parametreler": {
+   "hizli": 12,
+   "yavas": 26,
+   "sinyal": 9,
+   "mod": "sinyal"
+  },
+  "cikis_ayarlari": null,
+  "not": "MACD x sinyal çizgisi; sinyal periyodu kartta null -> 9 varsayıldı."
+ },
+ {
+  "kart_id": "swing__macd-12-26-9__hogan",
+  "parametreler": {
+   "hizli": 12,
+   "yavas": 26,
+   "sinyal": 9,
+   "mod": "sinyal"
+  },
+  "cikis_ayarlari": null,
+  "not": "MACD 12/26/9 sinyal kesişimi; ters kesişimde çıkış."
+ },
+ {
+  "kart_id": "swing__macd-sifir-gecisi__graham",
+  "parametreler": {
+   "mod": "sifir"
+  },
+  "cikis_ayarlari": null,
+  "not": "MACD'nin sıfır çizgisini geçmesi; periyotlar kartta yok (varsayılan 12/26/9). Swing stop yerine ATR stop."
+ },
+ {
+  "kart_id": "swing__macd-sinyal-kesisim__johnson",
+  "parametreler": {
+   "hizli": 12,
+   "yavas": 26,
+   "sinyal": 9,
+   "mod": "sinyal",
+   "sifir_filtre": true
+  },
+  "cikis_ayarlari": null,
+  "not": "MACD x sinyal 12/26/9 + sıfır çizgisi filtresi (kitap önerisi)."
+ },
+ {
+  "kart_id": "swing__macd-sifir-caprazi__kratter",
+  "parametreler": {
+   "hizli": 12,
+   "yavas": 26,
+   "mod": "sifir"
+  },
+  "cikis_ayarlari": null,
+  "not": "MACD sıfır çizgisi geçişi 12/26."
+ }
+]

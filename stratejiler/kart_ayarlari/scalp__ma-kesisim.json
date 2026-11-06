@@ -1,0 +1,56 @@
+[
+ {
+  "kart_id": "daytrade__ema9-21-kesisim-kirilim__singhal",
+  "parametreler": {
+   "hizli": 9,
+   "yavas": 21,
+   "ma_tipi": "ema",
+   "hedef_r": 2.0
+  },
+  "cikis_ayarlari": null,
+  "not": "YAKLAŞIK: 9/21 EMA kesişimi, ort. R/R 1:2 -> hedef_r 2; konsolidasyon kırılımı şartı yok."
+ },
+ {
+  "kart_id": "scalp__ema14-50-kesisim__waqar",
+  "parametreler": {
+   "hizli": 14,
+   "yavas": 50,
+   "ma_tipi": "ema",
+   "hedef_r": 2.0
+  },
+  "cikis_ayarlari": null,
+  "not": "YAKLAŞIK: 14/50 EMA; 10-20 pip hedef ~ 1.5-3 ATR varsayımıyla hedef_r 2; konsolidasyonda işlem yok = ADX filtresi 20."
+ },
+ {
+  "kart_id": "scalp__ma3-ma7-bollinger-trend-kirilim__simvour",
+  "parametreler": {
+   "hizli": 3,
+   "yavas": 7,
+   "ma_tipi": "ema",
+   "trend_ma": 200
+  },
+  "cikis_ayarlari": null,
+  "not": "YAKLAŞIK: 3/7 MA kesişimi, 200 MA trend filtresi; momentum ve Bollinger şartları ile Fibonacci hedefi yok."
+ },
+ {
+  "kart_id": "scalp__petrol-ema5-34-rsi-10dk__schroder",
+  "parametreler": {
+   "hizli": 5,
+   "yavas": 34,
+   "ma_tipi": "ema"
+  },
+  "cikis_ayarlari": null,
+  "not": "YAKLAŞIK: EMA 5/34 kesişimi, ters kesişimde çıkış; RSI(2) 10/90 bağlamı yok."
+ },
+ {
+  "kart_id": "scalp__kisa-momentum-ema8-34__ellis",
+  "parametreler": {
+   "hizli": 8,
+   "yavas": 34,
+   "ma_tipi": "ema",
+   "hedef_r": 2.0
+  },
+  "cikis_ayarlari": null,
+  "not": "YAKLAŞIK: EMA 8/34; risk-ödül 1:2 -> hedef_r 2; çoklu zaman dilimi şartı yok."
+ }
+]

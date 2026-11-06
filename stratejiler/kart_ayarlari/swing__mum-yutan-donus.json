@@ -1,0 +1,39 @@
+[
+ {
+  "kart_id": "swing__yutan-mum-doji-donus__jordan",
+  "parametreler": {},
+  "cikis_ayarlari": null,
+  "not": "YAKLAŞIK: yutan mum kodlanır; doji (mezar taşı/yusufçuk) ve destek/direnç onayı yok."
+ },
+ {
+  "kart_id": "swing__yutma-formasyonu__hogan",
+  "parametreler": {},
+  "cikis_ayarlari": null,
+  "not": "Trend sonunda 2 mumlu yutma; sınıf varsayılanları."
+ },
+ {
+  "kart_id": "swing__yutan-mum-hacim__graham",
+  "parametreler": {
+   "hacim_k": 1.0,
+   "hedef_r": 2.0
+  },
+  "cikis_ayarlari": null,
+  "not": "Yutan mum + hacim artışı; ödül >= 2x risk -> hedef_r 2."
+ },
+ {
+  "kart_id": "swing__yutan-mum-trend-sonu__day",
+  "parametreler": {
+   "stop_modu": "yarim"
+  },
+  "cikis_ayarlari": null,
+  "not": "Trend sonu yutan mum; stop daha büyük mumun %50 seviyesi (yarim)."
+ },
+ {
+  "kart_id": "swing__iki-bar-tersine-donus__day",
+  "parametreler": {
+   "stop_modu": "yarim"
+  },
+  "cikis_ayarlari": null,
+  "not": "YAKLAŞIK: iki bar geri alma yutma olarak ifade edildi; stop iki mumun %50 seviyesi."
+ }
+]

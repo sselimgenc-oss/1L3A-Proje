@@ -1,0 +1,40 @@
+[
+ {
+  "kart_id": "daytrade__pivot-geri-cekilme-devam-donus__singhal",
+  "parametreler": {
+   "mod": "tepki",
+   "seviyeler": "p_s1_s2",
+   "hedef_modu": "sonraki"
+  },
+  "cikis_ayarlari": null,
+  "not": "P, S1/S2, R1/R2 seviyelerinde tepki; hedef bir sonraki pivot. YAKLAŞIK: pivot kırıp devam (kırılım) ayrımı tek modda yok."
+ },
+ {
+  "kart_id": "daytrade__cpr-genis-dar-kirilim__singhal",
+  "parametreler": {
+   "mod": "tepki",
+   "cpr_filtre": "uygun",
+   "hedef_modu": "sonraki"
+  },
+  "cikis_ayarlari": null,
+  "not": "YAKLAŞIK: yalnız geniş CPR günü tepki varyantı; dar CPR kırılım varyantı ayrı mod gerektirir (kodlanmadı)."
+ },
+ {
+  "kart_id": "scalp__pivot-noktasi__lama",
+  "parametreler": {
+   "mod": "tepki",
+   "seviyeler": "p_s1",
+   "temas_atr": 0.25
+  },
+  "cikis_ayarlari": {
+   "kismi": [
+    [
+     1.0,
+     0.5
+    ]
+   ],
+   "basabas_r_esigi": 1.0
+  },
+  "not": "YAKLAŞIK: P/S1 tepkisi; 7 puan stop ve 10 puan hedef ~ 1R varsayımıyla ATR'ye çevrilmedi, ilk %50 1R'de kapanır, kalan başabaş. HA çıkışı yok."
+ }
+]

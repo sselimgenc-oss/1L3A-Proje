@@ -1,0 +1,55 @@
+[
+ {
+  "kart_id": "daytrade__eve-eve-cift-dip__bulkowski",
+  "parametreler": {
+   "tolerans_yuzde": 5.0,
+   "min_arasi": 20,
+   "short": false
+  },
+  "cikis_ayarlari": null,
+  "not": "İki dip farkı <=%5; aralarında ~2 ay (günlük ~40 mum) -> min_arasi 20. Yalnız long."
+ },
+ {
+  "kart_id": "daytrade__cirkin-cift-dip__bulkowski",
+  "parametreler": {
+   "tolerans_yuzde": 13.0,
+   "short": false
+  },
+  "cikis_ayarlari": null,
+  "not": "YAKLAŞIK: dip farkı %5-13 aralığı; sınıfta alt sınır yok, tolerans 13 (en yüksek). Yalnız long."
+ },
+ {
+  "kart_id": "swing__cift-dip-tepe__sharpe",
+  "parametreler": {},
+  "cikis_ayarlari": null,
+  "not": "Çift dip/tepe boyun çizgisi kırılımı; sınıf varsayılanları. Kartta sayısal parametre yok."
+ },
+ {
+  "kart_id": "swing__cift-dip-tepe__heikinashi",
+  "parametreler": {},
+  "cikis_ayarlari": null,
+  "not": "YAKLAŞIK: Heikin-Ashi ve ters dönüş mumu teyidi kodlanmadı; sınıf varsayılanları."
+ },
+ {
+  "kart_id": "swing__cift-dip-tepe-donus__penn",
+  "parametreler": {},
+  "cikis_ayarlari": null,
+  "not": "YAKLAŞIK: kartta tetik tanımsız; boyun kırılımı varsayıldı, sınıf varsayılanları."
+ },
+ {
+  "kart_id": "swing__cift-ust-dip-kirilim__graham",
+  "parametreler": {},
+  "cikis_ayarlari": null,
+  "not": "Çift üst/dip, destek/boyun kırılımı; sınıf varsayılanları."
+ },
+ {
+  "kart_id": "swing__cift-dip-boyun-kirilim__johnson",
+  "parametreler": {
+   "rsi_esik": 30.0,
+   "rsi_periyot": 14,
+   "hedef_olcu": 1.0
+  },
+  "cikis_ayarlari": null,
+  "not": "Boyun kırılımı + RSI(14) aşırı satım teyidi; hedef = formasyon yüksekliği."
+ }
+]

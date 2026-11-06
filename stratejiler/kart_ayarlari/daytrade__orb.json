@@ -1,0 +1,22 @@
+[
+ {
+  "kart_id": "daytrade__acilis-araligi-kirilimi__bulkowski",
+  "parametreler": {
+   "aralik_dk": 30,
+   "ust_yari_filtre": true,
+   "gunde_tek": true
+  },
+  "cikis_ayarlari": null,
+  "not": "İlk 30 dk açılış aralığı kırılımı, kapanış aralığın üst/alt yarısında; gün sonu çıkışı. 10 sent stop ATR/karşı uç ile. NEGATİF KANIT: Bulkowski ORB'nin mekanik çıkışlarla zararlı olduğunu bulmuş."
+ },
+ {
+  "kart_id": "swing__bosluk-aralik-kirilim__penn",
+  "parametreler": {
+   "aralik_dk": 60,
+   "ust_yari_filtre": false,
+   "stop_modu": "karsi"
+  },
+  "cikis_ayarlari": null,
+  "not": "YAKLAŞIK: ilk saat aralığı kırılımı; boşluk (gap) şartı kodlanmadı. %8/%4 stop yerine karşı uç."
+ }
+]

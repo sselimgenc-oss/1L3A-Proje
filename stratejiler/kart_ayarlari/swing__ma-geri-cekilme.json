@@ -1,0 +1,66 @@
+[
+ {
+  "kart_id": "swing__dip-alim-geri-cekilme__ladha",
+  "parametreler": {
+   "ma_periyot": 20,
+   "ma_tipi": "ema",
+   "trend_ma": 50,
+   "short": false
+  },
+  "cikis_ayarlari": null,
+  "not": "YAKLAŞIK: 10/20/50 EMA'dan 20 seçildi; momentum şartları (%20/30/50 yükseliş), düşük hacim, %3-5 sıçrama ve yarı çıkış yok. Yalnız long."
+ },
+ {
+  "kart_id": "swing__50sma-geri-cekilme__sharpe",
+  "parametreler": {
+   "ma_periyot": 50,
+   "ma_tipi": "sma"
+  },
+  "cikis_ayarlari": null,
+  "not": "50 SMA'ya geri çekilme/sıçrama; trend kartta nitel, trend_ma varsayılan (200) kaldı: YAKLAŞIK."
+ },
+ {
+  "kart_id": "swing__ma-50-geri-cekilme__penn",
+  "parametreler": {
+   "ma_periyot": 50,
+   "ma_tipi": "sma",
+   "stop_tampon_atr": 1.0,
+   "short": false
+  },
+  "cikis_ayarlari": null,
+  "not": "50 MA geri çekilmesi; stop swing dibinin 1 ATR altı (kart). Yalnız long."
+ },
+ {
+  "kart_id": "swing__20ema-dinamik-destek__graham",
+  "parametreler": {
+   "ma_periyot": 20,
+   "ma_tipi": "ema"
+  },
+  "cikis_ayarlari": null,
+  "not": "20 EMA dinamik destek; stop EMA altı (tampon ATR). Short kartta varsayım."
+ },
+ {
+  "kart_id": "swing__ema50-geri-cekilme-red__kratter",
+  "parametreler": {
+   "ma_periyot": 50,
+   "ma_tipi": "ema",
+   "trend_ma": 200,
+   "short": false
+  },
+  "cikis_ayarlari": null,
+  "not": "YAKLAŞIK: 50 EMA bölgesi + 200 MA trend filtresi; çekiç/yutan teyit mumu ve haftalık uyum yok. Yalnız long."
+ },
+ {
+  "kart_id": "swing__adx30-sma20-geri-cekilme__kratter",
+  "parametreler": {
+   "ma_periyot": 20,
+   "ma_tipi": "sma",
+   "adx_esik": 30.0,
+   "adx_periyot": 30,
+   "temas_atr": 0.0,
+   "short": false
+  },
+  "cikis_ayarlari": null,
+  "not": "ADX(30)>30 + 20 SMA'ya temas; 'ADX yükseliyor' şartı ve temas mumu yükseği üstü giriş sınıfta farklı. Yalnız long."
+ }
+]
