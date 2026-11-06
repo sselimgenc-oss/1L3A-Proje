@@ -42,7 +42,7 @@ def sinyal_yap(df, girisler=(), cikislar=()):
     return s
 
 
-SIFIR = dict(komisyon_taker_yuzde=0.0, kayma_bps=0.0)
+SIFIR = dict(komisyon_taker_yuzde=0.0, kayma_bps=0.0, stop_kayma_bps=0.0)
 
 
 def test_tek_long_pnl_komisyon_kayma():
@@ -202,3 +202,45 @@ def test_atr_iz_suren_stop_sadece_yukari_gider():
     t = r.islemler.iloc[0]
     assert t.cikis_nedeni in ("stop", "stop_gap")
     assert t.cikis_fiyati > 100.0   # ilk stop 100'dü, iz süren onu yukarı çekti
+
+
+def test_stop_kaymasi_ayri_uygulanir():
+    df = mumlar_yap([(100, 100, 100, 100), (100, 101, 97, 100), (100, 100, 100, 100)])
+    sig = sinyal_yap(df, {0: (1, 98.0, np.nan)})
+    ay = dict(komisyon_taker_yuzde=0.0, kayma_bps=0.0)
+    a = backtest(df, Hazir(sig), MotorAyarlari(**ay, stop_kayma_bps=0.0))
+    b = backtest(df, Hazir(sig), MotorAyarlari(**ay, stop_kayma_bps=100.0))
+    assert a.islemler.iloc[0].cikis_fiyati == pytest.approx(98.0)
+    assert b.islemler.iloc[0].cikis_fiyati == pytest.approx(97.02)   # 98*(1-0.01)
+    assert b.islemler.iloc[0].giris_fiyati == pytest.approx(100.0)   # giriş kayma_bps kullanır
+
+
+def test_olc_modunda_kill_switch_durdurmaz_ve_kaydeder():
+    satir = [(100, 100, 100, 100), (100, 100, 99.95, 100), (80, 81, 79, 80),
+             (80, 80, 80, 80), (80, 80, 80, 80), (80, 80, 80, 80), (80, 80, 80, 80)]
+    df = mumlar_yap(satir)
+    sig = sinyal_yap(df, {0: (1, 99.9, np.nan), 3: (1, 79.0, np.nan)})
+    r = backtest(df, Hazir(sig), MotorAyarlari(kayma_bps=0.0, limit_modu="olc"))
+    assert all(x["neden"] != "kill_switch" for x in r.reddedilenler)
+    assert len(r.islemler) == 2                       # ikinci giriş engellenmedi
+    turler = [o["tur"] for o in r.limit_olaylari]
+    assert "kill_switch" in turler
+    o = next(o for o in r.limit_olaylari if o["tur"] == "kill_switch")
+    assert o["dusus_yuzde"] >= 20 and o["ozsermaye"] < 8000
+
+
+def test_uygula_modu_varsayilan_ve_olay_yok():
+    df = mumlar_yap([(100, 100, 100, 100), (100, 100, 99.95, 100), (80, 81, 79, 80)] + [(80, 80, 80, 80)] * 4)
+    sig = sinyal_yap(df, {0: (1, 99.9, np.nan), 3: (1, 79.0, np.nan)})
+    assert MotorAyarlari().limit_modu == "uygula"
+    r = backtest(df, Hazir(sig), MotorAyarlari(kayma_bps=0.0))
+    assert r.limit_olaylari == [] and len(r.islemler) == 1
+    with pytest.raises(ValueError):
+        backtest(df, Hazir(sig), MotorAyarlari(limit_modu="x"))
+
+
+def test_olc_modunda_risk_tavani_hala_uygulanir():
+    df = mumlar_yap([(100, 100, 100, 100)] * 4)
+    sig = sinyal_yap(df, {0: (1, 98.0, np.nan)}, cikislar=[1])
+    r = backtest(df, Hazir(sig), MotorAyarlari(**SIFIR, risk_yuzde=5.0, kaldirac=50, limit_modu="olc"))
+    assert len(r.uyarilar) == 2

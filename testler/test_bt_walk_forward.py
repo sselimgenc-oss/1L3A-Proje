@@ -50,3 +50,14 @@ def test_metrikler_basit():
     assert m["kazanma_orani"] == 0.75 and m["islem_sayisi"] == 4
     assert m["toplam_komisyon"] == 4.0 and m["ortalama_tutma_saat"] == 24.0
     assert abs(m["beklenen_deger"] - 7.5) < 1e-12
+
+
+def test_walk_forward_limit_modu_ve_olay_sayisi():
+    df = rastgele_mumlar(n=24 * 200, seed=3)
+    s = MaKesisim()
+    s.parametre_izgarasi = {"hizli": [5], "yavas": [21]}
+    from motor.backtest.motor import MotorAyarlari
+    r = walk_forward(s, df, MotorAyarlari(limit_modu="olc"), egitim_gun=60, test_gun=20,
+                     min_islem=1, isinma_mum=100)
+    assert r["limit_modu"] == "olc"
+    assert all("limit_olay_sayisi" in p for p in r["pencereler"] if p["secilen"])
