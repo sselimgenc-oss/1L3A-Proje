@@ -37,6 +37,11 @@ class Strateji(ABC):
         """Aynı yapılandırmada, bazı parametreleri değişmiş kopya (walk-forward için)."""
         return type(self)(cikis_ayarlari=self.cikis_ayarlari, **{**self.parametreler, **parametreler})
 
+    def cikis_var_mi(self) -> bool:
+        """Strateji mevcut parametreleriyle kendi hedefini veya `cikis` sinyalini üretiyor mu?
+        Üretmiyorsa (False) ve CikisAyarlari'nda da çıkış yoksa backtest() ValueError verir."""
+        return False
+
     @abstractmethod
     def sinyaller(self, mumlar: pd.DataFrame) -> pd.DataFrame:
         ...

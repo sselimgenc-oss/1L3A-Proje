@@ -108,3 +108,7 @@ class FibGeriCekilme(Strateji):
                         hedef[t] = B - (uz - 1.0) * R
                         kullanilan_s = di
         return sinyal_cercevesi(mumlar.index, yon, stop, hedef)
+
+    def cikis_var_mi(self) -> bool:
+        """Hedef her zaman var."""
+        return True

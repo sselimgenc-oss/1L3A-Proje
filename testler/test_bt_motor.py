@@ -18,6 +18,9 @@ class Hazir(Strateji):
         super().__init__(cikis_ayarlari=cikis_ayarlari)
         self._s = sinyal
 
+    def cikis_var_mi(self):
+        return True     # eski testler: çıkış kuralı testin kendisinde
+
     def sinyaller(self, mumlar):
         return self._s
 

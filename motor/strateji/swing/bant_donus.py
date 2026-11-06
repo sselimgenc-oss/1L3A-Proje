@@ -71,3 +71,7 @@ class BantDonus(Strateji):
         else:
             h_l = h_s = None
         return sinyal_cercevesi(mumlar.index, long_ok, short_ok, stop_l, stop_s, h_l, h_s)
+
+    def cikis_var_mi(self) -> bool:
+        """hedef_tipi='yok' ise hedef/çıkış sinyali yok."""
+        return self.parametreler["hedef_tipi"] != "yok"

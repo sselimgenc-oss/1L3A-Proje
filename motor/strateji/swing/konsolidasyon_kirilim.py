@@ -68,3 +68,7 @@ class KonsolidasyonKirilim(Strateji):
         olcu = (p["hedef_olcu"] * genislik).to_numpy()
         hedef = np.where(long_ok, kap.to_numpy() + olcu, np.where(short_ok, kap.to_numpy() - olcu, np.nan))
         return sinyal_cercevesi(mumlar.index, yon, stop, hedef)
+
+    def cikis_var_mi(self) -> bool:
+        """Hedef ölçü > 0 ise var."""
+        return self.parametreler["hedef_olcu"] > 0

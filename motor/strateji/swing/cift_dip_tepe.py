@@ -114,3 +114,7 @@ class CiftDipTepe(Strateji):
                         hedef[t] = h
                     kur_s = None
         return sinyal_cercevesi(mumlar.index, yon, stop, hedef)
+
+    def cikis_var_mi(self) -> bool:
+        """Hedef formasyon ölçüsü."""
+        return self.parametreler["hedef_olcu"] > 0

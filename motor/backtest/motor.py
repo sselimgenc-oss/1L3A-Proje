@@ -4,6 +4,12 @@ Zamanlama
   - Sinyal mum i KAPANIŞINDA üretilir; giriş/çıkış mum i+1 AÇILIŞINDA yapılır.
   - Stop/hedef mum içi yüksek/düşükle kontrol edilir. Aynı mumda ikisi de değerse STOP sayılır.
   - Fiyat stopun ötesinde açılırsa (gap) dolum açılış fiyatındandır.
+  - Kısmi kâr (CikisAyarlari.kismi): seviye mum içinde görülürse o fiyattan (limit, hedefle aynı komisyon
+    kuralı) pozisyonun belirtilen oranı kapanır; miktar step'e AŞAĞI yuvarlanır, kalan < min_qty ise tamamı
+    kapanır. Aynı mumda stop da değerse önce stop sayılır, kısmi uygulanmaz. İşlem tablosunda pozisyon başına
+    TEK satır vardır (net_pnl/komisyon/R tüm parçaları içerir); `miktar` ilk miktardır.
+    `kismi_pnl` = kısmi parçaların brüt K/Z'si eksi o parçaların çıkış komisyonu (giriş komisyonu hariç).
+    Funding kalan miktar üzerinden ödenir.
   - Giriş ve sinyal/zaman çıkışlarına `kayma_bps`; stop, stop_gap ve kill_switch çıkışlarına
     `stop_kayma_bps` uygulanır. Hedef (limit) dolumuna kayma uygulanmaz.
 Funding
@@ -15,6 +21,9 @@ Risk
   - limit_modu="olc": günlük kayıp ve kill switch işlemi DURDURMAZ, yalnızca `limit_olaylari`na
     kaydedilir. YALNIZCA araştırma/backtest içindir; canlı ve paper'da kullanılmaz.
     İşlem başı risk ve kaldıraç tavanı her iki modda da uygulanır.
+  - limit_modu="uygula": günlük kayıp limiti mum kapanışında aşılırsa açık pozisyon sonraki açılışta
+    `stop_kayma_bps` ile kapanır (neden "gunluk_limit"); o UTC günü yeni giriş yok.
+Zorunlu çıkış: strateji.cikis_var_mi() False ve CikisAyarlari'nda hiç çıkış yoksa ValueError.
 Muhasebe Decimal ile yapılır; çıktı tablosu float'tır.
 """
 from dataclasses import dataclass, field
@@ -86,10 +95,24 @@ class _Poz:
     zaman_limit: Optional[int]
     funding: Decimal = Decimal(0)
     tutulan: int = 0
+    ilk_miktar: Decimal = Decimal(0)
+    brut_toplam: Decimal = Decimal(0)         # realize edilmiş brüt (kısmi parçalar dahil)
+    cikis_kom_toplam: Decimal = Decimal(0)
+    kismi_sayisi: int = 0
+    kismi_net: Decimal = Decimal(0)           # kısmi parçaların brüt - çıkış komisyonu
+    kismi_bekleyen: tuple = ()                # ((seviye_fiyati, oran), ...) henüz dolmamış
+
+
+class CikisYokHatasi(ValueError):
+    """Hiçbir çıkış mekanizması yok (yalnızca ilk stop)."""
+
+
+MESAJ_CIKIS_YOK = "ilk stop dışında çıkış yok"
 
 
 KOLONLAR = ["yon", "giris_zamani", "giris_fiyati", "cikis_zamani", "cikis_fiyati", "miktar",
-            "brut_pnl", "komisyon", "funding", "net_pnl", "r", "cikis_nedeni"]
+            "brut_pnl", "komisyon", "funding", "net_pnl", "r", "cikis_nedeni",
+            "kismi_sayisi", "kismi_pnl"]
 
 
 def _tick(fiyat: Decimal, tick: Decimal) -> Decimal:
@@ -105,6 +128,11 @@ def backtest(mumlar: pd.DataFrame, strateji: Strateji, ayarlar: MotorAyarlari = 
              islem_baslangic: Optional[pd.Timestamp] = None) -> SonucBacktest:
     """islem_baslangic: bu zamandan önceki mumlarda yeni giriş yapılmaz (ısınma payı için)."""
     ayarlar = ayarlar or MotorAyarlari()
+    ca = strateji.cikis_ayarlari
+    # Kısmi kâr ve başabaş tek başına çıkış sayılmaz: kalan pozisyon yine yalnız stopla kapanır (lider kararı).
+    if not (strateji.cikis_var_mi() or ca.atr_iz_suren_k or ca.zaman_cikisi_mum
+            or ca.sabit_r_hedefi):
+        raise CikisYokHatasi(MESAJ_CIKIS_YOK)
     L = SERT_LIMITLER
     uyarilar = []
     risk_yuzde = min(ayarlar.risk_yuzde, L.islem_basi_max_risk_yuzde)
@@ -186,18 +214,32 @@ def backtest(mumlar: pd.DataFrame, strateji: Strateji, ayarlar: MotorAyarlari = 
         return toplam
 
     def kapat(p: _Poz, fiyat: Decimal, t, neden: str, komisyon_orani: Decimal) -> Decimal:
-        brut = (fiyat - p.giris) * p.miktar * p.yon
-        cikis_kom = fiyat * p.miktar * komisyon_orani
+        """Kalan miktarı kapatır, işlem satırını yazar; nakde eklenecek tutarı döner."""
+        brut_son = (fiyat - p.giris) * p.miktar * p.yon
+        kom_son = fiyat * p.miktar * komisyon_orani
+        brut = p.brut_toplam + brut_son
+        cikis_kom = p.cikis_kom_toplam + kom_son
         net = brut - p.giris_komisyon - cikis_kom - p.funding
-        risk_tutar = p.miktar * abs(p.giris - p.ilk_stop)
+        risk_tutar = p.ilk_miktar * abs(p.giris - p.ilk_stop)
         islemler.append({
             "yon": p.yon, "giris_zamani": p.zaman, "giris_fiyati": float(p.giris),
-            "cikis_zamani": t, "cikis_fiyati": float(fiyat), "miktar": float(p.miktar),
+            "cikis_zamani": t, "cikis_fiyati": float(fiyat), "miktar": float(p.ilk_miktar),
             "brut_pnl": float(brut), "komisyon": float(p.giris_komisyon + cikis_kom),
             "funding": float(p.funding), "net_pnl": float(net),
             "r": float(net / risk_tutar) if risk_tutar else np.nan, "cikis_nedeni": neden,
+            "kismi_sayisi": p.kismi_sayisi, "kismi_pnl": float(p.kismi_net),
         })
-        return brut - cikis_kom
+        return brut_son - kom_son
+
+    def kismi_kapat(p: _Poz, fiyat: Decimal, qty: Decimal, komisyon_orani: Decimal) -> Decimal:
+        brut = (fiyat - p.giris) * qty * p.yon
+        kom = fiyat * qty * komisyon_orani
+        p.brut_toplam += brut
+        p.cikis_kom_toplam += kom
+        p.kismi_net += brut - kom
+        p.kismi_sayisi += 1
+        p.miktar -= qty
+        return brut - kom
 
     def piyasa_fiyati(p: _Poz, ham: float, k: Decimal = kayma) -> Decimal:
         """Çıkış tarafına kayma uygula (long satar -> düşük, short alır -> yüksek)."""
@@ -215,7 +257,7 @@ def backtest(mumlar: pd.DataFrame, strateji: Strateji, ayarlar: MotorAyarlari = 
         if poz is not None:
             nakit -= funding_ode(poz, t, dahil=True)
             if bekleyen_cikis:
-                nakit += kapat(poz, piyasa_fiyati(poz, o, stop_kayma if bekleyen_cikis == "kill_switch" else kayma),
+                nakit += kapat(poz, piyasa_fiyati(poz, o, stop_kayma if bekleyen_cikis in ("kill_switch", "gunluk_limit") else kayma),
                                   t, bekleyen_cikis, taker)
                 poz = None
         bekleyen_cikis = None
@@ -260,7 +302,10 @@ def backtest(mumlar: pd.DataFrame, strateji: Strateji, ayarlar: MotorAyarlari = 
                 kom = miktar * fiyat * taker
                 nakit -= kom
                 zc_n = int(zc) if not np.isnan(zc) else cks_ayar.zaman_cikisi_mum
-                poz = _Poz(yon, miktar, fiyat, t, stop, stop, hedef, kom, t, float(fiyat), zc_n)
+                kis = tuple((_tick(D(cks.r_hedef_fiyati(yon, float(fiyat), float(risk_birim), r_k)), tick), D(oran))
+                            for r_k, oran in sorted(cks_ayar.kismi))
+                poz = _Poz(yon, miktar, fiyat, t, stop, stop, hedef, kom, t, float(fiyat), zc_n,
+                           ilk_miktar=miktar, kismi_bekleyen=kis)
         bekleyen_giris = None
 
         # 3) mum içi stop / hedef
@@ -283,6 +328,33 @@ def backtest(mumlar: pd.DataFrame, strateji: Strateji, ayarlar: MotorAyarlari = 
                 cikis = (piyasa_fiyati(p, float(p.stop), stop_kayma), "stop", t + aralik, taker)
             elif hedef_vur:
                 cikis = (p.hedef, "hedef", t + aralik, maker if ayarlar.hedef_limit_emri else taker)
+            if p.kismi_bekleyen and (cikis is None or (cikis[1] == "hedef" and not hedef_gap)):
+                kom_k = maker if ayarlar.hedef_limit_emri else taker
+                kalan_seviye = []
+                for seviye, oran in p.kismi_bekleyen:
+                    if p.hedef is not None and (seviye - p.hedef) * p.yon >= 0:
+                        continue    # hedefin ötesi: hedef zaten önce dolar
+                    gorulen = (o >= seviye) if p.yon == 1 else (o <= seviye)
+                    vurdu = (h >= seviye) if p.yon == 1 else (l <= seviye)
+                    if not (gorulen or vurdu):
+                        kalan_seviye.append((seviye, oran))
+                        continue
+                    fiyat_k = _tick(D(o), tick) if gorulen else seviye
+                    t_k = t if gorulen else t + aralik
+                    qty = min(_step_asagi(p.ilk_miktar * oran, step), p.miktar)
+                    if qty <= 0:
+                        continue    # yuvarlama sıfır: seviye atlanır
+                    if t_k != t:
+                        nakit -= funding_ode(p, t_k, dahil=False)
+                        if f_zaman is not None:     # t_k'dan önceki funding'ler ödendi; t_k'dakiler sonra
+                            b_ = f_zaman.searchsorted(t_k, side="left")
+                            if b_ > 0 and f_zaman[b_ - 1] > p.son_f:
+                                p.son_f = f_zaman[b_ - 1]
+                    if p.miktar - qty < D(kural.min_qty):
+                        cikis = (fiyat_k, "kismi_tam", t_k, kom_k)
+                        break
+                    nakit += kismi_kapat(p, fiyat_k, qty, kom_k)
+                p.kismi_bekleyen = tuple(kalan_seviye)
             if cikis is not None:
                 fiyat_c, neden, t_c, kom_o = cikis
                 if t_c != t:
@@ -339,6 +411,8 @@ def backtest(mumlar: pd.DataFrame, strateji: Strateji, ayarlar: MotorAyarlari = 
                 p.stop = yeni_d
             if kill:
                 bekleyen_cikis = "kill_switch"
+            elif gunluk_blok and not olc:
+                bekleyen_cikis = "gunluk_limit"
             elif s_cikis[i]:
                 bekleyen_cikis = "sinyal"
             elif cks.zaman_doldu(p.tutulan, p.zaman_limit):

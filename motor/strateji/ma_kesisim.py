@@ -55,3 +55,7 @@ class MaKesisim(Strateji):
             "hedef": np.nan,
             "cikis": (yukari | asagi).astype(bool),
         })
+
+    def cikis_var_mi(self) -> bool:
+        """Ters kesişimde `cikis` üretir (her zaman)."""
+        return True

@@ -71,3 +71,7 @@ class AralikTicareti(Strateji):
         stop = np.where(long_ok, stop_l, np.where(short_ok, stop_s, np.nan))
         hedef = np.where(long_ok, ust, np.where(short_ok, alt, np.nan))
         return sinyal_cercevesi(mumlar.index, yon, stop, hedef)
+
+    def cikis_var_mi(self) -> bool:
+        """Hedef her zaman karşı sınır."""
+        return True

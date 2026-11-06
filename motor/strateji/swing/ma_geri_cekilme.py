@@ -73,3 +73,7 @@ class MaGeriCekilme(Strateji):
         cikis = (((k < ma) & (k.shift(1) >= ma.shift(1))) |
                  ((k > ma) & (k.shift(1) <= ma.shift(1)))) & gecerli
         return sinyal_cercevesi(mumlar.index, long_ok, short_ok, stop_l, stop_s, h_l, h_s, cikis)
+
+    def cikis_var_mi(self) -> bool:
+        """MA'nın karşı tarafında kapanış `cikis` üretir (her zaman)."""
+        return True
