@@ -1,0 +1,95 @@
+dalga_grubu,kaynak,ad,dosya,mekanik_ozet,zaman_dilimi
+D1,tv,[3Commas] BCH Heikin Ashi RSI Fade — Short Strategy,arsiv/strateji-sg/tv_eleme_dali/pine/nuqVC5F7.pine,"RSI(100)>46 ve 7 ardışık yükselen HA mumunda short; %2.1 hedef, %2.5 stop.",
+D1,tv,[3Commas] MA-CCI Trailing Long,arsiv/strateji-sg/tv_eleme_dali/pine/d117dN6D.pine,"Saatlik SMA24 SMA31'i aşağı keserken ve CCI(11) −80'i aşağı keserse 3 mum içinde long; %3.25 stop, izleyen stop.",
+D1,tv,AO/AC Trading Zones Strategy [Skyrexio] ,arsiv/strateji-sg/tv_eleme_dali/pine/Tkrjao7P.pine,"AO ve AC yükselirken yeşil bar serisinde giriş, en çok 5 kademe; trend dönünce ya da seri kırılınca kapanış.",
+D1,tv,ATR_RSI_Strategy v2[liwei666],arsiv/strateji-sg/tv_eleme_dali/pine/mqh6UJ9p.pine,"ATR oynaklık bandında RSI(15)>60 ise long, <40 ise short; tepeden %1.5 izleyen stop, hedef %3/%6.",
+D1,tv,Aurora KAMA Trend,arsiv/strateji-sg/tv/pine/kbYTJ8V2.pine,"KAMA(10) 3 bar yükselir ve fiyat SMA200 üstündeyse long (aşağıda short); %4 stop, %6 izleyen stop.",
+D1,tv,Bilateral Stochastic Oscillator Strategy,arsiv/strateji-sg/tv_eleme_dali/pine/NJb4BQ5n.pine,EURUSD: TMA önfiltreli bull/bear çiftinin kesişimiyle long/short; sinyal çizgisi altında kapanışla çıkış.,
+D1,tv,BIST30 to S&P 500 — ATR Momentum Rider,arsiv/strateji-sg/tv_eleme_dali/pine/jd1KSVn7.pine,HMA(8)>HMA(9)>HMA(20) rejimi başlarsa long; MFE≥1.5 ATR sonrası tepeden %5.75 izleyen stop.,
+D1,tv,Built-in Kelly ratio for position sizing,arsiv/strateji-sg/tv/pine/bFXf4IXh.pine,EMA20 ± ATR bandının üst bandı kırılınca stop-al; TP/SL kapalı; Kelly boyutlandırma çevrilmedi.,
+D1,tv,CleanTradeQuantum_v7.2_OB_FVG_INTEGRATED,arsiv/strateji-sg/tv/pine/JeRCEqWU.pine,"Order block ve FVG bölgelerinde UT Bot, EMA9/21 kesişimi ve MACD/RSI teyidiyle giriş.",
+D1,tv,Confluence Rank Trend Strategy [Jayadev Rana],arsiv/strateji-sg/tv/pine/LcA4mcE6.pine,"Beş bileşenli 0-100 skor; ≥85 olunca giriş, <35 olunca çıkış; 3 ATR izleyen stop.",
+D1,tv,Daily Close Comparison Strategy (by ChartArt),arsiv/strateji-sg/tv/pine/XK8XbDhT.pine,"Son günün kapanışı bir öncekinden yüksekse long, düşükse short; en basit kapanış karşılaştırması.",
+D1,tv,Elliott Wave Impulse Strategy | Wave 5 & Reversal Entries,arsiv/strateji-sg/tv/pine/rvBgD3aP.pine,ZigZag'da 5 dalgalı itki veya dalga-4 geri çekilişi tespit edilince yön değiştirme ve giriş.,
+D1,tv,EMA MACD Forecast Predictor - Dual Engine [Backtest + Forecast],arsiv/strateji-sg/tv/pine/f9xLZqpF.pine,"EMA MACD, RSI ve stokastik kesişimlerinin birleşimi ve tahmin motoru ile giriş.",
+D1,tv,EMA Ribbon Fan Angle Strategy,arsiv/strateji-sg/tv/pine/X0F9OE4L.pine,"Beş EMA yelpazesi açılırken RSI ve hacim süzgecinde giriş; ATR×2 stop, 2R hedef, yelpaze kapanınca çıkış.",
+D1,tv,EMA200 + BOS/CHoCH + STRICT 2x FVG Backtest Strategy,arsiv/strateji-sg/tv/pine/x3kpQqJ5.pine,EMA200 ve yapı (BOS/CHoCH) teyidi ile FVG girişi; çift FVG onayı; çoklu stop ve hedef.,
+D1,tv,Fractal Breakout Strategy (by ChartArt),arsiv/strateji-sg/tv/pine/EjLwVtgp.pine,Son üç fraktal tepe ortalaması yükselirken fiyat son fraktali kırarsa long; 3 bar içinde bozulursa çıkış.,
+D1,tv,Fractal Breakout Trend Following Strategy,arsiv/strateji-sg/tv_eleme_dali/pine/IqUET4xO.pine,Alligator dişi üstünde yukarı fraktalda stop-giriş (düşük oynaklıkta); stop %3 ya da aşağı fraktal.,
+D1,tv,Gaussian Channel Strategy,arsiv/strateji-sg/tv/pine/erJi1tWf.pine,"Fiyat Gaussian orta çizgiyi yukarı keserse long, aşağı keserse short; filtrelenmiş TR bandı.",
+D1,tv,Golden Trident | Swing-Anchored VWAP Trend System,arsiv/strateji-sg/tv/pine/Eq4kPrrJ.pine,Tepe/dip yapısıyla yön; yukarıda EMA200 ve geniş aralıkta yeni long; yön dönünce çıkar; 8 ATR felaket stopu.,
+D1,tv,GRAM RSI Strategy [3Commas],arsiv/strateji-sg/tv/pine/6kaqC3R8.pine,"RSI/VWAP sinyalinde taban emir, ortalama düşüren ek emirler (3Commas); ortalamaya göre çıkış.",
+D1,tv,ICT 10AM First FVG Daily Strategy,arsiv/strateji-sg/tv/pine/Za5HKgrL.pine,10:00 NY'de ilk FVG tespitinde gün içi giriş; kısa vadeli ve tek olay.,
+D1,tv,JUP RSI Long Strategy [3Commas],arsiv/strateji-sg/tv_eleme_dali/pine/0wggzSk5.pine,"RSI sinyalinde taban emri; düşen sapmalarda ek alım, ortalama maliyetten kâr; zarar-durdur yok.",
+D1,tv,KST Strategy [Skyrexio],arsiv/strateji-sg/tv_eleme_dali/pine/Pv1GvUVs.pine,"KST yukarı keser, fiyat LSMA200 ve Alligator üstündeyse long; 1.5 ATR stop, 3.5 ATR hedef.",
+D1,tv,Laguerre RSI,arsiv/strateji-sg/tv/pine/vWG3tMJh.pine,Laguerre filtresinin yukarı/aşağı bileşenleri kesişince long/short; hep piyasada.,
+D1,tv,LUBE,arsiv/strateji-sg/tv/pine/i9tJOtjl.pine,Son 500 mumda bugünkü kapanışı içeren aralık oranı düşükken FIR eğimine göre long/short; orta eşikte çıkış.,
+D1,tv,Monthly Returns in PineScript Strategies,arsiv/strateji-sg/tv/pine/kzp8e4X3.pine,"Onaylı pivot tepesinin üstüne stop-al, pivot dibinde stop-sat emri; hep piyasada.",
+D1,tv,MTF Momentum Stack + Stochastic,arsiv/strateji-sg/tv/pine/8Ti8z8QO.pine,"Üç zaman dilimi RSI skoru aynı yönde ve 15dk Stoch kesişimi → giriş; 1.5 ATR stop, 3 ATR hedef.",
+D1,tv,MTF Range Flip HTF Market Structure Bias,arsiv/strateji-sg/tv/pine/RQHNSLbH.pine,HTF piyasa yapısı önyargısına göre aralık dönüşünde limit giriş; stop ve TP.,
+D1,tv,Multi-Factor Adaptive Z-Score Strategy,arsiv/strateji-sg/tv/pine/W67tJltC.pine,"ROC, RSI ve hacim z-skorlarının uyarlamalı bileşiği sıfırı keserse giriş (ATR×2 stop), ters kesişimde çıkış.",
+D1,tv,MultiLayer Acceleration/Deceleration Strategy [Skyrexio],arsiv/strateji-sg/tv_eleme_dali/pine/ErcSuPyN.pine,AC dönüş desenlerinde stop-giriş; fiyat EMA100 üstünde; trend dönünce tüm kademeler kapanır.,
+D1,tv,MultiLayer Awesome Oscillator Saucer Strategy [Skyrexio],arsiv/strateji-sg/tv_eleme_dali/pine/HyzpDR9t.pine,Trend onayında AO tabak deseninde sinyal tepesine stop-giriş; trend aşağı dönünce tüm kademeler kapanır.,
+D1,tv,NORN WEAVE | THURISAZ,arsiv/strateji-sg/tv/pine/ab5k064U.pine,"Trend ve pivot koşullarıyla long/short; SL, başa-baş (BE) ve trend değişimi çıkışları.",
+D2,tv,NORN WEAVE ᚠ FEHU,arsiv/strateji-sg/tv_eleme_dali/pine/teYPT1m0.pine,"NORN WEAVE (FEHU): trend ve pivot koşullarıyla long/short; SL, başa-baş ve trend değişimi çıkışları.",
+D2,tv,NQ/MNQ Super Scalper [BACKTEST],arsiv/strateji-sg/tv_eleme_dali/pine/6ve1ax1D.pine,NQ/MNQ çok girişli süper scalper; 20 kademeli ekleme ve 20 desenli akıllı çıkış.,
+D2,tv,OBS Volume Spike Reaction Fade [NQ],arsiv/strateji-sg/tv/pine/fmPC9fWd.pine,Chicago saatinde NQ hacim şokuna tepki veren gün içi kural; kısa vadeli.,
+D2,tv,ONEUSDT(1)_MR1,arsiv/strateji-sg/tv_eleme_dali/pine/8I2576zL.pine,ONE/USDT: iki mumda %5-7 düşüşte long; tepe kırılımı veya ATR izleyen stop ile çıkış.,
+D2,tv,RSI Range Compression (Momentum Coil Breakout),arsiv/strateji-sg/tv/pine/dwgn7hrE.pine,RSI aralığı sıkışıp kırılırsa EMA50 eğimi yönünde giriş; ATR×2 stop. (Pine hedef hatası düzeltilmiş.),
+D2,tv,RSI-Adaptive T3 + Squeeze Momentum Strategy,arsiv/strateji-sg/tv_eleme_dali/pine/7UNWrm2O.pine,RSI'ye göre uzunluğu değişen T3 yön değiştirir; sıkışma ve momentum aynı yönde ise long/short.,
+D2,tv,RSI-Gauss-Velocity-Strategy-WiP,arsiv/strateji-sg/tv_eleme_dali/pine/T5kd1bJ2.pine,Gauss filtresi yükselirken kapanış bant üstündeyse ve Stoch(RSI) K>D ise long; bant altında çıkış.,
+D2,tv,Smart Trend Strategy | julzALGO,arsiv/strateji-sg/tv/pine/Sg2qyDDe.pine,"Trend yönü ve yapı kırılımı (BOS/CHoCH) birlikte görülünce giriş; 3 ATR stop, ters sinyalde çıkış.",
+D2,tv,SMC Pro BTC - ICT Order Blocks & FVG [DOE],arsiv/strateji-sg/tv/pine/QMvHkvdQ.pine,"HTF ve MTF yön uyumu, likidite süpürme ve iskonto/prim bölgesinde order block veya FVG girişi.",
+D2,tv,SMC Strategy - OB + FVG + Liquidity Sweep,arsiv/strateji-sg/tv/pine/jSNZ1CmV.pine,Yapı kırılımı (BOS) ve order block/FVG girişleri; stop ve hedef.,
+D2,tv,Sovereign Horizon Matrix (SHM) v8.0,arsiv/strateji-sg/tv/pine/wVNfdkHu.pine,Hızlı ve makro WMA kesişimi; kapanış SMA41 üstünde ve RSI 42-48 bandında ise giriş.,
+D2,tv,SPY Bear Regime Short System,arsiv/strateji-sg/tv_eleme_dali/pine/bA9UFcgj.pine,"SMA250'nin %2 altında, SMA5 üstünde RSI(3) 70'i yukarı keserse short (SPY); SMA5 altı ya da SMA250 üstünde çıkış.",
+D2,tv,Squeeze Momentum on Reversal Strategy,arsiv/strateji-sg/tv/pine/Fckzv8iH.pine,"Momentum sıfırın altında yukarı dönünce long, üstünde aşağı dönünce short; hep piyasada.",
+D2,tv,Stochastic Optimized Trend Tracker,arsiv/strateji-sg/tv/pine/cJhpIJ2w.pine,Stokastik tabanlı VAR serisine OTT uygulanır; seri OTT[2]'yi keserse yön değiştirir.,
+D2,tv,TASC 2026.03 One Percent A Week,arsiv/strateji-sg/tv/pine/nVECqIQx.pine,Pazartesi açılışının %1 altına limit alış; +%1 hedef; cuma kapanışında çıkış.,
+D2,tv,Tomukas Elite SMC,arsiv/strateji-sg/tv/pine/83hmaEOQ.pine,"EMA200 trendinde likidite süpürme, yapı kırılımı ve FVG geri çekilmesinde giriş; iki bacaklı çıkış.",
+D2,tv,TRADLEWARE-Gaussian Channel + StochRSI BTC,arsiv/strateji-sg/tv/pine/d1JxXpid.pine,Gaussian kanal ve StochRSI (K>80 ya da <15) ile giriş; alt bant stop.,
+D2,tv,TRADLEWARE-Gaussian Channel ETH,arsiv/strateji-sg/tv/pine/egTb7TgJ.pine,Gaussian kanal ve StochRSI K>80 ya da <25 ile SMA200 rejiminde giriş; yeşil mum şartı; alt bant stop.,
+D2,tv,Trend Analysis Strategy,arsiv/strateji-sg/tv/pine/Z8EhgIzs.pine,Trend yönü değişince long/short; güçlü sinyalde ek giriş; karşıt sinyalde kapanış.,
+D2,tv,Vix FIX / StochRSI Strategy,arsiv/strateji-sg/tv/pine/TDxSLJRA.pine,VIX Fix filtreli dip dönüşünde long; stokastik aşırı alım kesişiminde çıkış; yalnız long.,
+D2,tv,Vol-Target Trend Engine,arsiv/strateji-sg/tv_eleme_dali/pine/2wyXTTMc.pine,"SMA200 üstünde oynaklığa göre maruziyet; haftalık yeniden dengeleme, rejim bozulunca tam çıkış.",
+D2,tv,VP Value-Area Reversion & Breakout,arsiv/strateji-sg/tv/pine/1OnkbAiE.pine,Hacim profili değer alanı (VAH/VAL) dışına hacimli kırılımda giriş; sabit stop ve hedef.,
+D2,tv,XAU Clear EMA ATR Strategy TP SL Voice V6,arsiv/strateji-sg/tv/pine/zudiHFjK.pine,"XAU 15 dk EMA-ATR kesişimi, sesli uyarı; gün içi.",
+D2,freqtrade,ADXMomentum,arsiv/algo-sg/dis_kaynak/ft/strategies/ADXMomentum.py,"ADX>25 ve +DI>-DI, momentum pozitifken long; ADX veya momentum bozulunca çıkış.",1h
+D2,freqtrade,AlmgrenChrissStrategy,arsiv/algo-sg/dis_kaynak/ft/strategies/AlmgrenChrissStrategy.py,RSI 45/55 eşiklerinde giriş; Almgren-Chriss yürütme mantığı; 15 dk testte tamamlanamadı.,15m
+D2,freqtrade,BinHV27,arsiv/algo-sg/dis_kaynak/ft/strategies/BinHV27.py,"Fiyat SMA bantlarının altında, -DI ve RSI yükselirken long; SMA üstünde çıkış.",5m
+D2,freqtrade,BinHV45,arsiv/algo-sg/dis_kaynak/ft/strategies/BinHV45.py,"Bant genişliği, kapanış farkı ve uzun alt kuyruk eşikleriyle alt banda uzak düşüşte long.",1m
+D2,freqtrade,EMASkipPump,arsiv/algo-sg/dis_kaynak/ft/strategies/EMASkipPump.py,Pump-dump koşullarını (hacim patlaması) atlayıp EMA altında dip alımı; EMA üstünde çıkış.,5m
+D2,freqtrade,FixedRiskRewardLoss,arsiv/algo-sg/dis_kaynak/ft/strategies/FixedRiskRewardLoss.py,Sabit risk/ödül oranını custom_stoploss ile uygulayan örnek; giriş RSI/ATR koşullu.,
+D2,freqtrade,FSampleStrategy,arsiv/algo-sg/dis_kaynak/ft/strategies/FSampleStrategy.py,RSI 30 ve 70 kesişimlerinde TEMA ve Bollinger orta bant koşuluyla long/short; RSI 70'te çıkış.,1h
+D2,freqtrade,GodStra,arsiv/algo-sg/dis_kaynak/ft/strategies/GodStra.py,"Koşullu kesişim girişi (12 saat); normalizasyon şüpheli, mekanik kural net değil.",12h
+D3,freqtrade,Heracles,arsiv/algo-sg/dis_kaynak/ft/strategies/Heracles.py,Hyperopt ile belirlenen alım koşulları; kural optimizasyonla seçilir.,4h
+D3,freqtrade,HourBasedStrategy,arsiv/algo-sg/dis_kaynak/ft/strategies/HourBasedStrategy.py,"Belirli saat aralığında alış, başka saat aralığında satış; zaman tabanlı.",1h
+D3,freqtrade,MultiMa,arsiv/algo-sg/dis_kaynak/ft/strategies/MultiMa.py,Birden çok MA'nın geçmiş değerle karşılaştırması ile giriş; ters koşulda çıkış.,4h
+D3,freqtrade,PowerTower,arsiv/algo-sg/dis_kaynak/ft/strategies/PowerTower.py,Son üç kapanışın üst üste güçlü yükselişinde long; kapanış dizisi bozulunca çıkış.,5m
+D3,freqtrade,Quickie,arsiv/algo-sg/dis_kaynak/ft/strategies/Quickie.py,ADX>30 ve TEMA yükselirken kısa vadeli long; TEMA Bollinger orta üstüne çıkınca çıkış.,5m
+D3,freqtrade,SmoothOperator,arsiv/algo-sg/dis_kaynak/ft/strategies/SmoothOperator.py,"MFI, RSI ve CCI karışımı yumuşatılmış ortalama 4 bar artınca long; >100 ve düşüşte çıkış.",5m
+D3,freqtrade,Strategy005,arsiv/algo-sg/dis_kaynak/ft/strategies/Strategy005.py,"Hacim ortalamanın 4 katı, fiyat SMA altı ve Stoch D>K iken long; RSI satım eşiğini yukarı kesince çıkış.",5m
+D3,freqtrade,TDSequentialStrategy,arsiv/algo-sg/dis_kaynak/ft/strategies/TDSequentialStrategy.py,TD Sequential sayımı 8'i aşınca alım; satım sayımı 8'i aşınca satım; ters bölgede çıkış.,1h
+D3,freqtrade,TechnicalExampleStrategy,arsiv/algo-sg/dis_kaynak/ft/strategies/TechnicalExampleStrategy.py,Chaikin para akışı (CMF) sıfırın altına ya da üstüne geçişinde short/long; örnek strateji.,5m
+D3,freqtrade,TrendFollowingStrategy,arsiv/algo-sg/dis_kaynak/ft/strategies/TrendFollowingStrategy.py,Kapanış trend çizgisini yukarı keserken OBV yükseliyorsa long; aşağı kesişte çıkış.,5m
+D3,freqtrade,TWAPStrategy,arsiv/algo-sg/dis_kaynak/ft/strategies/TWAPStrategy.py,RSI 45/55 eşiklerinde TWAP yürütme ile alım/satım; işlemleri zamana yayar.,15m
+D3,freqtrade,VolatilitySystem,arsiv/algo-sg/dis_kaynak/ft/strategies/VolatilitySystem.py,"Kapanış değişimi ATR'yi aşarsa long (aşağı ise short), ters sinyalde çıkış; volatilite kırılımı.",1h
+D3,freqtrade,wtc,arsiv/algo-sg/dis_kaynak/ft/strategies/wtc.py,WaveTrend kesişimi ve stokastik/def aralık filtreleriyle long/short; ters kesişimde çıkış.,30m
+D3,kural,EMA21 ±%2 (4h),arsiv/algo-sg/dis_kaynak/kurallar.py,Fiyat EMA21'den %2 uzaklaşınca ortalamaya dönüş.,4h
+D3,kural,EMA50 sapma (4h),arsiv/algo-sg/dis_kaynak/kurallar.py,EMA50'den sapmada ortalamaya dönüş işlemi.,4h
+D3,kural,"Hafta günü braket (Sa/Pe/Cu, ±%3, 7 gün)",arsiv/algo-sg/dis_kaynak/kurallar.py,"Belirli haftanın günlerinde ±%3 braket emir, 7 gün tut.",1D
+D3,kural,Kapanış > 1.01 x MA5,arsiv/algo-sg/dis_kaynak/kurallar.py,Kapanış SMA5'in %1 üzerindeyse long.,1D
+D3,kural,"SMA200 üstü long altı short, %10 vol hedefi",arsiv/algo-sg/dis_kaynak/kurallar.py,"SMA200 üstünde long, altında short; %10 hedef volatilite ile boyutlandırma.",1D
+D3,kural,TechIndicator ROC20 L/S,arsiv/algo-sg/dis_kaynak/kurallar.py,"20 günlük getiri pozitifse long, negatifse short.",1D
+D3,kural,"Trailing Trade (1h, örnek ayar)",arsiv/algo-sg/dis_kaynak/kurallar.py,Binance bot örnek ayarı: iz süren giriş-çıkış.,1h
+D3,kural,Trend yargısı + %5 stop,arsiv/algo-sg/dis_kaynak/kurallar.py,Çoklu koşullu trend yargısı ile long; %5 stop.,1D
+D3,kural,Üç ortalama boğa mumu + SMA60 trend,arsiv/algo-sg/dis_kaynak/kurallar.py,"Üç ortalamayı kesen boğa mumu, SMA60 trend süzgeci ile long.",1D
+D3,kural,Üç ortalamayı kesen boğa mumu,arsiv/algo-sg/dis_kaynak/kurallar.py,Üç ortalamayı kesen boğa mumunda long; ters koşulda short.,1D
+D3,awesome,Ay dönümü,arsiv/algo-sg/dis_kaynak/awesome.py,"Ay dönümü günlerinde BTC alımı, takvim tabanlı.",1D
+D3,awesome,Aşırı tepki ertesi gün (Caporale-Plastun),arsiv/algo-sg/dis_kaynak/awesome.py,Aşırı tepkiden sonra ertesi gün ters yönde işlem (Caporale-Plastun).,1D
+D3,awesome,Bitcoin gün içi mevsimsellik 22-00 UTC,arsiv/algo-sg/dis_kaynak/awesome.py,BTC gün içi mevsimsellik: 22-00 UTC arası işlem.,1h
+D3,awesome,Maaş günü (15->16),arsiv/algo-sg/dis_kaynak/awesome.py,"Ayın 15-16'sı arasında BTC, takvim tabanlı.",1D
+D3,awesome,MIN: 10 gün dibinde long (Padysak-Vojtko),arsiv/algo-sg/dis_kaynak/awesome.py,10 gün dibinde long (Padysak-Vojtko MIN).,1D
+D3,awesome,Ocak barometresi,arsiv/algo-sg/dis_kaynak/awesome.py,Ocak ayı mevsimselliği ile BTC işlemi.,1D
+D3,awesome,Vade haftası (son Cuma),arsiv/algo-sg/dis_kaynak/awesome.py,"Son Cuma'nın bulunduğu vade haftası, takvim tabanlı.",1D
+D3,jesuistm,JT_Awesome_osilator,arsiv/algo-sg/dis_kaynak/jesuistm.py,AO işaret değişiminde long/short (günlük).,1D
