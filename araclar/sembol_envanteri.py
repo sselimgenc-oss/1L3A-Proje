@@ -153,7 +153,7 @@ def main():
                 "ilk_ay": ilk_ay,
                 "son_ay": son_ay,
                 "ay_sayisi": len(aylar),
-                "tur": tur,
+                "tur_tahmini": tur,
             }
         )
         if sayac % 50 == 0:
@@ -169,7 +169,7 @@ def main():
 
     sayilar = {}
     for satir in satirlar:
-        sayilar[satir["tur"]] = sayilar.get(satir["tur"], 0) + 1
+        sayilar[satir["tur_tahmini"]] = sayilar.get(satir["tur_tahmini"], 0) + 1
     print(f"Yazildi: {CIKTI_YOLU} ({len(satirlar)} satir)")
     print(f"Tur dagilimi: {sayilar}")
 
