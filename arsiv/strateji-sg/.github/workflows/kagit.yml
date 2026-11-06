@@ -1,0 +1,58 @@
+# Kağıt al-sat botu (KGT v3 + KMN, 10.000$ sanal bakiye, 2 ay). Saatlik çalışır; kaçırılan saatleri telafi eder.
+# Durum ve kayıtlar ayrı bir dalda tutulur: kagit-durum (main'i kirletmez). Günlük rapor GitHub issue'ya yazılır.
+name: kagit-al-sat
+on:
+  schedule:
+    # GitHub zamanlayıcısı yoğunlukta tetiklemeleri düşürüyor (ilk 13 saatte 2 zamanlanmış çalışma). İkinci zaman
+    # yalnız bir önceki saat kaçırıldıysa iş yapar (bot yalnız yeni kapanmış mumları işler); ayda ~1.440 dk'nın altında.
+    - cron: "7 * * * *"
+    - cron: "37 * * * *"
+  workflow_dispatch:
+permissions:
+  contents: write
+  issues: write
+concurrency:
+  group: kagit
+  cancel-in-progress: false
+jobs:
+  calis:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: pip
+          cache-dependency-path: canli/gereksinimler.txt
+      - run: pip install -q -r canli/gereksinimler.txt
+      - name: Durum dalını hazırla
+        run: |
+          git config --global user.name "kagit-bot"
+          git config --global user.email "kagit-bot@users.noreply.github.com"
+          if git ls-remote --exit-code --heads origin kagit-durum >/dev/null; then
+            git fetch -q origin kagit-durum
+            git worktree add -q -B kagit-durum kagit_durum FETCH_HEAD
+          else
+            git worktree add -q --orphan -b kagit-durum kagit_durum
+          fi
+      - name: Kağıt al-sat
+        run: python -m canli.kagit --durum kagit_durum
+      - name: Durumu kaydet
+        run: |
+          cd kagit_durum
+          git add -A
+          git commit -q -m "durum $(date -u +%FT%H:%MZ)" || exit 0
+          git push -q origin kagit-durum
+      - name: Günlük raporu GitHub issue'ya yaz
+        if: hashFiles('kagit_durum/gunluk_rapor.md') != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          baslik="Kağıt al-sat raporu (KGT + KMN, 10.000 USD)"
+          n=$(gh issue list --state open --limit 50 --json number,title -q ".[] | select(.title==\"$baslik\") | .number" | head -1)
+          if [ -z "$n" ]; then
+            n=$(gh issue create --title "$baslik" --body "Kağıt al-sat botunun günlük raporları bu konuya yazılır. Gerçek para yoktur." | grep -o '[0-9]*$')
+          fi
+          gh issue comment "$n" --body-file kagit_durum/gunluk_rapor.md
+          cd kagit_durum && git rm -q gunluk_rapor.md && git commit -q -m "rapor gönderildi" && git push -q origin kagit-durum

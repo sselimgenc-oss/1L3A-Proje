@@ -1,0 +1,50 @@
+{
+ "ad": "alphatrend",
+ "pine_id": "3wdQu7P3",
+ "tf": "1d",
+ "evren": [
+  "kripto",
+  "abd",
+  "bist",
+  "emtia"
+ ],
+ "neden": "Yazar BTCUSDT günlük test etmiş; günlük, tüm pazarlar.",
+ "olcut": {
+  "n": 2733,
+  "kar": 64906.35336145652,
+  "pf": 2.5574018687542743,
+  "sharpe": 0.8770776377557107,
+  "beklenti_R": 0.9601983713322183,
+  "kazanma": 0.3834613977314307,
+  "maxdd": 0.38181001322259245,
+  "dd_gun": 1982,
+  "cagr": 0.18635374376040592,
+  "calmar": 0.4880797708460387,
+  "psr": 0.9990744029709508,
+  "tutma_gun": 38.0,
+  "ort_islem_getiri": 0.08787175537409042,
+  "netR_toplam": 2624.2221488509526,
+  "sharpe_egitim": 1.0122987376701735,
+  "sharpe_oos": 0.7820666086654731,
+  "oos_kar": 6250.656342079252,
+  "tur": "swing",
+  "pf_maliyet2x": 2.501316483241813,
+  "komsu_n": 12,
+  "komsu_karda": 1.0,
+  "enstr_n": 37,
+  "enstr_karda": 0.972972972972973,
+  "maks_kor": 0.26932495849643007
+ },
+ "kurallar": {
+  "1_islem_sayisi": true,
+  "2_maks_dusus<=20": false,
+  "3_beklenti>=0.15R": true,
+  "4a_kf>=1.3": true,
+  "4b_sharpe>=1": false,
+  "5_oos": true,
+  "6_maliyet2x_kf>=1.1": true,
+  "7_komsu>=70": true,
+  "8_enstr>=60": true
+ },
+ "gecti": false
+}

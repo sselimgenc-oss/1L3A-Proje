@@ -1,0 +1,9 @@
+{
+  "start": "2026-10-10T00:00:00Z",
+  "days": 60,
+  "capital": 10000,
+  "sleeve_weights": {"A": 0.5, "B": 0.5},
+  "kline_source": "binance_spot (data-api.binance.vision)",
+  "funding_source": "okx swap funding-rate-history",
+  "overlap_start": "2026-10-01T00:00:00Z"
+}

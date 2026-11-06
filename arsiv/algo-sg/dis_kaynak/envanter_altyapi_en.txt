@@ -1,0 +1,674 @@
+STRATEGY INVENTORY: six repos (OctoBot, QuantDinger, ai_quant_trade, backtrader, backtesting.py, finmarketpy)
+
+Root for all paths: /tmp/claude-0/-home-user/1af268a6-2a72-5906-82dc-dbec1a2a96df/scratchpad/ext/
+
+Conventions:
+- "TF" means timeframe.
+- "dup" means a duplicate of, or near-identical to, another entry.
+- The note "rules exactly as coded" means the description follows the code, quirks included.
+- In OctoBot, evaluator notes run from -1 to +1, and **-1 = BUY/long, +1 = SELL/short**. Mode thresholds are applied to the averaged note.
+- Pure infrastructure, data feeds and indicator-only demos are excluded. Excluded samples are listed under each repo where relevant.
+
+==========================================================================
+1. backtrader (backtrader/, samples/, contrib/)
+==========================================================================
+Default data unless noted: bundled daily sample files (datas/2005-2006-day-001.txt, 2006-day-001.txt, yhoo/orcl/nvda daily). Asset class is generic stock/futures. Default sizing is the backtrader default of 1 unit (FixedSize stake 1) unless a stake is given.
+
+A. Fast/slow moving-average crossover family (all dups of the same idea)
+ B1. backtrader/strategies/sma_crossover.py — MA_CrossOver (alias SMA_CrossOver). Built-in.
+     - Defaults: fast 10, slow 30, SMA (_movav configurable). Long-only, market orders.
+     - Entry: flat and CrossOver(fast, slow) > 0 → buy.
+     - Exit: CrossOver < 0 while in position → sell.
+     - Used by samples/vwr/vwr.py and samples/sharpe-timereturn/sharpe-timereturn.py.
+ B2. samples/sigsmacross/sigsmacross.py — SmaCross (SignalStrategy).
+     - SMA 10/20, SIGNAL_LONG: long on cross up, closed on cross down. Never short.
+     - YHOO from Yahoo, cash 10000, stake 1.
+ B3. samples/sigsmacross/sigsmacross2.py — SmaCross. SMA 10/30, SIGNAL_LONG. YHOO 2011-01-01 to 2012-12-31. Dup.
+ B4. samples/order-history/order-history.py — SmaCross. SMA 10/20 SIGNAL_LONG. Dup.
+ B5. samples/strategy-selection/strategy-selection.py.
+     - St0: SMA 10/30 cross, SIGNAL_LONG.
+     - St1: close crossing SMA10, SIGNAL_LONG.
+     - Both are optimized together via StFetcher.
+ B6. samples/calmar/calmar-test.py — St. SMA 15/50 SIGNAL_LONG. ORCL 1995–2014.
+ B7. samples/cheat-on-open/cheat-on-open.py — St.
+     - SMA 10/30 crossover, long-only.
+     - Buy on cross up; close on cross down.
+     - Optionally decides and executes at the next open (cheat_on_open).
+ B8. samples/credit-interest/credit-interest.py — SMACrossOver signal 10/30.
+     - Default SIGNAL_LONGSHORT (always in market, reverses). --long / --short restrict it.
+     - Optional NoExit keeps the first position forever.
+     - Stake 10, cash 50000; tests credit interest.
+ B9. samples/slippage/slippage.py — SlipSt. Signal SMA 10/30, LONGSHORT (or long-only). Cash 50000. Dup.
+ B10. samples/pyfolio2/pyfoliotest.py (+ backtrader-pyfolio.ipynb) — St.
+     - SMA 13/50 SIGNAL_LONG (LONGSHORT with --short).
+     - Stake param 1000. Data 2013-01-01 to 2015-12-31.
+ B11. samples/multi-copy/multi-copy.py — TheStrategy and TheStrategy2.
+     - TheStrategy: two independent signals on the target data, SMA 10/30 cross and MACD 12/26/9 (macd vs signal) cross.
+       - Each up-cross buys stake/2 (stake 100).
+       - Each down-cross closes half (or all if size ≠ stake).
+     - TheStrategy2: stake 200, MACD 15/22/7, SMA 15/50.
+     - YHOO 1996–2014, cash 50000.
+ B12. samples/bracket/bracket.py — St.
+     - SMA 5/15 cross up while flat → bracket order.
+     - Entry: limit buy p1 = close×(1−0.005), valid 3 days.
+     - Stop-loss: p1 − 0.02×close.
+     - Take-profit limit: p1 + 0.02×close (valid 1000 days).
+     - The "hold 10" param is a no-op.
+ B13. samples/oco/oco.py — St.
+     - SMA 5/15 cross up → three OCO-linked limit buys (size 1) at close×(1−0.005), close×(1−0.02) and close×(1−0.045). Valid 3 days, 1000 days and 1000 days.
+     - Exit: close after holding 10 bars.
+ B14. samples/stop-trading/stop-loss-approaches.py — BaseStrategy with EMA 10/20 CrossUp entry (long). Three variants:
+     - ManualStopOrStopTrail: after the fill, stop at entry×(1−0.02), or StopTrail with trailamount if --trail.
+     - ManualStopOrStopTrailCheat: same, but with cheat-on-close, so the stop is placed at signal close×0.98.
+     - AutoStopOrStopTrail: parent/child bracket with a stop at close×0.98 (or trail); optional limit entry at close×(1−buy_limit).
+     - No take-profit and no signal exit (stop only).
+ B15. samples/stoptrail/trail.py — St.
+     - SMA 10/30 CrossUp → market buy.
+     - Then a protective sell, StopTrail (default) or StopTrailLimit, using trailamount / trailpercent / limitoffset. All default 0.0, so they must be set on the CLI.
+
+B. Close crossing a single SMA (dups)
+ B16. samples/analyzer-annualreturn/analyzer-annualreturn.py — LongShortStrategy.
+     - Close crosses SMA15 up → close any short and buy 1. Cross down → close and sell 1 (unless onlylong). Stop-and-reverse.
+     - Futures-style commission: comm 2, mult 10, margin 2000. Cash 100000.
+ B17. samples/writer-test/writer-test.py — LongShortStrategy. Exact dup of B16.
+ B18. samples/multitrades/multitrades.py — MultiTradeStrategy. Same as B16, with tradeid cycling 0/1/2.
+ B19. samples/commission-schemes/commission-schemes.py — SMACrossOver.
+     - Close crosses SMA30 up → buy stake 1 (can pyramid). Down-cross with a position → sell 1.
+ B20. samples/observer-benchmark/observer-benchmark.py — St.
+     - Close crosses SMA (param 10, CLI default 30) up → buy 1000. Down → close. Long-only.
+ B21. samples/observers/observers-default-drawdown.py — MyStrategy. Close crosses SMA15 long-only. Dup.
+ B22. samples/observers/observers-orderobserver.py — MyStrategy.
+     - Close crosses SMA15 up → limit buy at close×(1−1%), valid 7 days.
+     - Down-cross → sell.
+ B23. samples/order-execution/order-execution.py — OrderExecutionStrategy.
+     - Close crosses SMA15 up → buy as Market, Close, Limit (close×(1−perc1%)), Stop (close×(1+perc1%)) or StopLimit (plimit close×(1+perc2%)).
+     - Down-cross → sell. perc defaults 0 on the CLI.
+ B24. samples/sizertest/sizertest.py — CloseSMA.
+     - Close crosses SMA15 → buy / sell.
+     - Combined with the LongOnly sizer or the FixedReverser sizer (2× stake when reversing). Stake 1.
+ B25. samples/multidata-strategy/multidata-strategy.py — MultiDataStrategy.
+     - Signal on data1 (YHOO): close crosses SMA15.
+     - Up → buy 10 of data0 (ORCL) and 10 of data1. Down → sell both. Long-only.
+     - Commission 0.5%, 2003–2005.
+     - multidata-strategy-unaligned.py: same, but trades data0 only.
+ B26. samples/signals-strategy/signals-strategy.py.
+     - Main signal SMACloseSignal = close − SMA30: >0 long, <0 short. Default 'longshort'; 'longonly' / 'shortonly' available.
+     - Optional exit signal SMAExitSignal = SMA5 − SMA30.
+     - Bug: the 'shortexit' option is mapped to LONGEXIT.
+
+C. Other directional rule strategies
+ B27. samples/kselrsi/ksignal.py — TheStrategy (SignalStrategy).
+     - Indicator: RSI(14), bands 65/35. A warmup SMA(35) is used only to delay the start.
+     - Long entry: RSI crosses up through 35. Long exit: RSI > 50.
+     - Short entry: RSI crosses down through 65. Short exit: RSI < 50.
+     - XOM 2012-09-01 to 2016-01-01, cash 100000, stake 100.
+ B28. samples/macd-settings/macd-settings.py — TheStrategy (Van K. Tharp style). Long-only.
+     - Entry: MACD(12,26,9) macd crosses above signal AND SMA30 < SMA30 ten bars ago (falling SMA).
+     - Stop: close − 3.0×ATR(14) at entry. Ratchets up each bar to max(stop, close − 3×ATR).
+     - Exit: close < stop.
+     - Sizing: FixedPerc sizer, 20% of cash.
+     - Data yhoo/orcl/nvda from 2005, cash 50000, commission 0.0033.
+ B29. samples/btfd/btfd.py — St, "Buy The F* Dip".
+     - Market: ^GSPC daily, 1990-01-01 to 2016-10-01.
+     - Entry: pctdown ≤ −1%, where "highlow" (default) = low/high − 1. Alternatives: closeclose, openclose, highclose.
+     - Order: order_target_percent 100%, cheat-on-close, leverage 2.0.
+     - Exit: time exit after 2 bars.
+ B30. samples/pinkfish-challenge/pinkfish-challenge.py — St.
+     - Day bars are replayed in 2 steps (OHL first, then C).
+     - Entry: buy when today's high equals the 20-bar Highest(high). Uses a Close order (Market with --market).
+     - Exit: time exit, sell 2 bars later.
+     - YHOO 2005–2006, cash 50000.
+ B31. contrib/samples/pair-trading/pair-trading.py — PairTradingStrategy (stat-arb).
+     - Spread: OLS_TransformationN z-score of PEP vs KO, period 10.
+     - z > 2.1 → short PEP and long KO. z < −2.1 → long PEP and short KO.
+     - Sizing: each leg 50% of a fixed 10000 notional (portfolio_value param), plus the existing qty to reverse.
+     - Exit: none (the ±0.5 exit band is commented out). Only reversal.
+     - 1997-01-01 to 1998-06-01, commission 0.5%, cash 100000.
+ B32. samples/multi-example/mult-values.py — St.
+     - Three datas: NVDA, YHOO, ORCL.
+     - Entry: when flat and the weekday equals enter=[1,3,4] (per data), place a bracket. Limit entry at close×(1−1.5%), stop entry×(1−3%), take-profit entry×(1+3%), valid 10 days.
+     - Time exit after hold=[7,10,15] bars (cancels the stop leg).
+
+D. Random / plumbing demos that do trade (trivial, listed for completeness)
+ B33. samples/future-spot/future-spot.py — random coin flip buys data0 (future); sells data1 (spot) after 10 bars.
+ B34. samples/order-close/close-daily.py and close-minute.py.
+     - Daily: random 1-in-6 enter or exit with Close orders.
+     - Minute: buy at close every 2 days, close after 2 days.
+ B35. samples/pyfoliotest/pyfoliotest.py — random toss 1–10.
+     - Flat and toss < 5 → buy 1000. Holding and toss > 5 → sell half. NVDA/YHOO/ORCL 2005–2006.
+ B36. samples/volumefilling/volumefilling.py — alternate buy 10% of bar volume and close, every 10 bars (filler test).
+ B37. samples/order_target/order_target.py — target size/value/percent set from the calendar day-of-month. The docstring copies macd-settings; it is not a real strategy.
+ B38. samples/timers/scheduled.py and scheduled-min.py — single buy at a timer when cheat is enabled.
+ B39. samples/ibtest/ibtest.py, samples/oandatest/oandatest.py, samples/vctest/vctest.py — TestStrategy live-broker tests.
+     - SMA5 is computed but unused.
+     - When live and flat: buy stake 10. IB: limit 0.90×close, optional bracket stop 0.81×, TP 1.10×close, OCO or StopTrail. Oanda: bracket ±0.10.
+     - Then sell stake/2.
+ B40. tests/test_strategy_unoptimized.py and test_strategy_optimized.py — close crosses SMA15 test fixture (dup of B21).
+
+Excluded (no orders or indicator-only): gold-vs-sp500 (MACrossOver plots only), optimization, renko, psar, talib, lrsi, pivot-point, relative-volume, data-*, daysteps, mixing-timeframes, memory-savings, rollover, sratio, calendar-days, etc.
+
+==========================================================================
+2. backtesting.py (doc/examples/*.py and .ipynb pairs, backtesting/lib.py)
+==========================================================================
+ P1. doc/examples/Quick Start User Guide.py/.ipynb — SmaCross.
+     - Market: GOOG daily 2004–2013, cash 10000, commission 0.2%.
+     - Rules: SMA n1 = 10, n2 = 20. Cross up → close and buy. Cross down → close and sell. Stop-and-reverse, full size.
+     - Optimization grid: n1 5..30 step 5, n2 10..70 step 5. Result: 10/15.
+     - README.md has the same 10/20 strategy with exclusive_orders=True (dup).
+ P2. backtesting/test/_test.py — SmaCross, fast 10 / slow 30, stop-and-reverse. The comment says "values also used on the website". Dup of P1.
+ P3. doc/examples/Strategies Library.py — SmaCross(SignalStrategy, TrailingStrategy).
+     - SMA 10/25. Long only: entry on cross up with size 0.95 of equity.
+     - Exit: trailing stop 2×ATR(100) only. GOOG, commission 0.2%.
+ P4. backtesting/lib.py — TrailingStrategy (composable base).
+     - Trails SL at close − n_atr×ATR (default n_atr 6, ATR period 100). set_trailing_pct default 5%.
+     - lib.SignalStrategy: vectorized entry_size / exit_portion signal base.
+ P5. doc/examples/Parameter Heatmap & Optimization.py — Sma4Cross.
+     - Defaults: n1 50, n2 100, n_enter 20, n_exit 10.
+     - Trend filter: SMA(n1) > SMA(n2) → long only, else short only.
+     - Entry: close crosses above SMA(n_enter) for long, or below it for short.
+     - Exit: close crosses back through SMA(n_exit).
+     - GOOG, commission 0.2%. Optimized by randomized grid (200 tries) and SAMBO, with constraint n_exit < n_enter < n1 < n2.
+ P6. doc/examples/Multiple Time Frames.py — System. Long only, GOOG daily.
+     - Entry: daily RSI(30) > 70 AND weekly RSI(30) (W-FRI resample) > 70 AND weekly RSI > daily RSI AND MA10 > MA20 > MA50 > MA100 AND close > MA10.
+     - Stop: fixed 8% (sl = 0.92×price).
+     - Exit: close < 0.98×MA10.
+     - Commission 0.2%. Optimized d_rsi and w_rsi 10..30, level 30..70.
+ P7. doc/examples/Trading with Machine Learning.py — MLTrainOnceStrategy (ML).
+     - Market: EUR/USD hourly.
+     - Features: (close − SMA10/20/50/100)/close; SMA deltas 10−20, 20−50, 50−100; 2-bar momentum; BB(20,2) upper/lower/width on hlc3; a fake sentiment flag; day-of-week; hour.
+     - Label: 48-bar forward return. +1 if > 0.4%, −1 if < −0.4%, else 0.
+     - Model: kNN(7) trained on the first 400 bars.
+     - Rules: forecast +1 and not long → buy 20% of equity. Forecast −1 and not short → sell 20%.
+     - TP/SL: ±0.4% from close.
+     - Time rule: trades older than 2 days get SL tightened to the current bar low (long) or high (short).
+     - Margin 0.05 (20:1), commission 0.0002.
+ P8. Same file — MLWalkForwardStrategy. Same rules; retrains every 20 bars on the last 400 bars.
+
+==========================================================================
+3. finmarketpy (finmarketpy_examples/, src/finmarketpy/economics/techindicator.py)
+==========================================================================
+Signals are +1/−1 position weights fed to a vectorized Backtest. The BacktestRequest has optional per-trade stop_loss/take_profit, via calculate_risk_stop_signals in src/finmarketpy/backtest/backtestengine.py.
+
+ F1. finmarketpy_examples/tradingmodelfxtrend_example.py — TradingModelFXTrend_Example ("FX trend", CTA).
+     - Market: G10 USD crosses EURUSD, USDJPY, GBPUSD, AUDUSD, USDCAD, NZDUSD, USDCHF, USDNOK, USDSEK. Daily FRED/ALFRED spot from 04 Jan 1989.
+     - Rule (TechIndicator "SMA"): close > SMA(200) → +1 long, else −1 short. Always in the market.
+     - Sizing: per-signal vol target 10% (20-day vol, 252 obs/yr, max leverage 5, rebalance BME) and portfolio vol target 10% (same settings).
+     - Costs: spot TC 0.5 bp.
+     - Also runs sensitivities: vol target on/off, TC 0–2 bp, day-of-month.
+ F2. finmarketpy_examples/tradingmodelfxtrend_bbg_example.py — same as F1 on Bloomberg "CR CMPN Curncy" total-return indices. Dup.
+ F3. finmarketpy_examples/backtest_example.py, run_example 1.
+     - Same 9 crosses, SMA200 long/short.
+     - Signal vol target 5% (60-day, max leverage 3, BM rebalance). TC 2.5 bp.
+ F4. backtest_example.py, run_example 2 — EURUSD only, SMA200, only_allow_longs (long or flat), TC 2.5 bp, no vol target.
+ F5. finmarketpy_examples/finmarketpy_notebooks/backtest_example.ipynb — same as F3 with TC 0. Dup.
+ F6. src/finmarketpy/economics/techindicator.py — TechIndicator built-in signal rules (the library behind F1–F5):
+     - "SMA": price > SMA → +1, else −1. TechParams default sma_period 20.
+     - "EMA": price > EMA → +1, else −1.
+     - "ROC": ROC > 0 → +1, else −1.
+     - "polarity": input > 0 → +1, else −1.
+     - "SMA2": SMA(sma_period) > SMA(sma2_period) → +1, else −1.
+     - "GMMA": mean of EMAs [3,5,7,10,12,15] > mean of EMAs [30,35,40,45,50,60] → +1, else −1.
+     - "BB": close > upper (mean + bb_mult×std over bb_period) → +1; close < lower → −1; forward-filled (breakout).
+     - "RSI": buggy as coded. It compares price (not RSI) to rsi_lower/upper using shift(−1), which is look-ahead. Buy is a cross up through upper; sell is a cross down through lower; forward-filled.
+     - "long-only" / "short-only": constant +1 / −1.
+     - ATR and VWAP produce no signal.
+     - Modifiers: only_allow_longs, only_allow_shorts, signal_mult.
+ F7. finmarketpy_examples/fx_options_indices_examples.py — systematic option roll strategies (non-directional overlay):
+     - (a) AUDUSD long 1M ATM European call, rolled at expiry (roll_days_before 0, roll_months 1), from 01 Jan 2007, daily MTM. Option TC 5 bp, spot TC 2 bp.
+     - (b) AUDUSD long 1M 10-delta OTM put, rolled at expiry. Also a "hedged" portfolio of spot total return + put. The label says "2*option", but the code adds 1×.
+     - (c) USDJPY short 1W ATM straddle (position_multiplier −1), rolled at expiry, from 08 Mar 2007, freeze_implied_vol, multiplicative index.
+ F8. finmarketpy_examples/fx_forwards_indices_examples.py — forward carry roll indices:
+     - USDBRL long 1M forward, rolled 5 business days before month-end.
+     - USDBRL 3M forward, rolled 5 business days before month-end, every 3 months.
+     - AUDJPY built from crosses. Compared against Bloomberg indices.
+ F9. finmarketpy_examples/fx_spot_indices_examples.py — passive spot + deposit total-return indices for AUDJPY daily and GBPUSD intraday. Buy-and-hold carry index; trivial.
+Excluded: seasonality, events, vol-stats, vol-surface, technicals_example (ATR plot), vwap_example, quandl and quickchart examples.
+
+==========================================================================
+4. QuantDinger (backend_api_python/migrations/strategy_v2_templates.sql, docs/examples, docs/strategies, docs/trading/STRATEGY_DEV_GUIDE(.md/_CN.md), backend_api_python/app/services/...)
+==========================================================================
+All script strategies use the Strategy API V2.
+- Default target_pct is 0.95 of equity (order_target_percent).
+- Decisions are made on completed bars and filled at the next open.
+
+A. System preset CTA templates (strategy_v2_templates.sql; 8 CTA)
+ Q1. strategy_v2_single_ma — Single Moving Average.
+     - Market: USStock:SPY, 1d, long_only.
+     - Entry: close > SMA(ma_period = 50) of the prior bars → target 95%.
+     - Exit: close ≤ SMA → 0.
+ Q2. strategy_v2_double_ma — Dual Moving Average.
+     - Market: Crypto BTC/USDT perpetual swap, 4h, one_way, max leverage 20.
+     - Regime: SMA(20) > SMA(60) bullish.
+     - Bullish: close any short, open long 95%. Bearish: close any long, open short −95% (allow_short true). Close-before-reverse.
+ Q3. strategy_v2_bullish_three_lines — Bullish candle through three averages.
+     - Market: CNStock 600519.SH (A-share), 1d, long_only.
+     - Entry: candle body (close−open)/open ≥ 2%, open ≤ min(SMA5, SMA10, SMA20) and close ≥ max of the three (prior-bar SMAs).
+     - Exit: close < SMA20.
+ Q4. strategy_v2_bullish_three_lines_trend — Q3 plus a trend filter.
+     - Filter: close > SMA60 and SMA60 rising versus 5 bars ago.
+     - Exit: close < SMA20 or the trend filter fails.
+ Q5. strategy_v2_turtle — Turtle Trading.
+     - Market: SPY, 1d, long_only.
+     - Entry: close > highest high of the prior 20 bars.
+     - Exit: close < lowest low of the prior 10 bars, OR close < avg_cost − 2×ATR(14).
+ Q6. strategy_v2_indicator_resonance — Indicator Resonance.
+     - Market: QQQ, 1d, long_only.
+     - Long while MACD(12,26,9) histogram > 0 AND 50 < RSI(14) < 75 AND ADX(14) > 20.
+     - Exit when that condition is false.
+ Q7. strategy_v2_macd_kdj — MACD and KDJ Confirmation.
+     - Market: BTC/USDT swap, 4h, long_only, max leverage 5.
+     - Entry: histogram > 0 AND (histogram crosses up through 0 OR slow K crosses above D), with K < 85. STOCH params 9/3/3.
+     - Exit signal: histogram ≤ 0 OR K crosses below D.
+     - Attached protection: stop-loss 2%; trailing stop 1% activated after +5%.
+ Q8. strategy_v2_supertrend — SuperTrend.
+     - Market: SPY, 1d, long_only.
+     - Bands: ATR(10)×3 around HL2, persistent bands.
+     - Close > previous upper → trend up → long 95%. Close < previous lower → trend down → exit.
+
+B. System preset portfolio templates (same SQL; 4 rebalancing)
+- Universe: AAPL, MSFT, NVDA, AMZN, META, GOOGL, AVGO, COST, JPM, XOM.
+- Rebalanced weekly on Monday 09:35. Benchmark SPY. Long-only.
+- Names that drop out are sold.
+ Q9. strategy_v2_market_cap_barbell.
+     - Filter ROE ≥ 0 (min_roe). Rank by market cap; hold the smallest 3 and largest 3 (per_side 3).
+     - Weight min(20%, 1/N).
+ Q10. strategy_v2_momentum_top_n.
+     - 60-day return. Top 4 with score > 0. Weight min(25%, 1/N).
+ Q11. strategy_v2_low_volatility.
+     - Lowest 60-day daily-return std, top 4. Weight min(25%, 1/N).
+ Q12. strategy_v2_quality_growth.
+     - Filter ROE ≥ 0.10, revenue growth ≥ 0, debt/equity ≤ 2.
+     - Score = pct-rank(ROE) + pct-rank(growth) − pct-rank(D/E). Top 5.
+     - Weight min(20%, 1/N).
+
+C. Documentation / example strategies
+ Q13. docs/examples/strategy_v2_dual_ema_long.py — named "Dual EMA", but it uses simple means (SMA 20/50).
+     - SPY 1d. Target 95% if fast > slow, else 0. Entry stop-loss 5%.
+ Q14. docs/trading/STRATEGY_DEV_GUIDE.md §15 (and the _CN guide) — Dual EMA Long Trend.
+     - SPY 1d. True EMA 20/50.
+     - Long 95% with a 5% stop when fast > slow. Exit when fast < slow. No short.
+ Q15. STRATEGY_DEV_GUIDE §1 quick start — SPY 20-day MA.
+     - Long 95% when close > SMA20, with a 5% stop. Exit when close ≤ SMA20.
+ Q16. STRATEGY_DEV_GUIDE §4 — Gate HK equity SMA example.
+     - Market: "Crypto:00700/HKD@gate:spot" (Tencent tokenized on Gate), 1d, long_only.
+     - Long 20% with a 3% stop when close > SMA20. Exit below SMA20.
+ Q17. STRATEGY_DEV_GUIDE §6.1 — multi-timeframe BTC/USDT swap.
+     - Entry: 1m SMA10/SMA30 golden cross AND 1h SMA20 > SMA50 → 95%.
+     - Exit: 1m death cross OR the hourly filter turns false.
+ Q18. STRATEGY_DEV_GUIDE §14 — BTC long core with short hedge (OKX swap hedge mode, 1h, leverage 5).
+     - Always hold a 1-contract long.
+     - Add a 1-contract short leg while close < SMA50; remove it when close ≥ SMA50.
+ Q19. STRATEGY_DEV_GUIDE §16 — S&P 500 momentum basket.
+     - Point-in-time S&P 500 pool, weekly Monday 09:35.
+     - Top 5 by factor momentum_20. Weight min(18%, 0.95/N).
+ Q20. docs/strategies/sp500_profitable_top50.py — S&P 500 Profitable Top 50 MA20/MA60. Daily, long-only.
+     - Universe: S&P 500 members with net income > 0 (reported, not TTM); the top 50 by market cap.
+     - Entry: fresh bullish SMA20/SMA60 cross. Limit buy at the signal close, whole shares, budget USD 1000 including fees (commission param 0.001). At most 10 held or reserved names. Unfilled entries are cancelled after one daily fill window.
+     - Exit: bearish SMA20/SMA60 cross only. Rank changes do not trigger an exit.
+
+D. Visual robot templates (non-directional bots)
+Code: app/services/strategy_runtime/executors.py preview defaults and robot_v2.py generators.
+ Q21. Grid robot (also app/services/grid/*, bot_scripts/grid_runtime.py).
+     - Defaults: crypto swap, 1m, long side, dynamic anchor, range 0.98–1.02 × anchor, grid_count 8 cells, arithmetic (geometric optional).
+     - initial_position_pct 0.6.
+     - Equity-level take-profit 10%, stop-loss 6%, equity trailing 5% activation / 3% callback.
+     - max_open_orders 4, min spread between orders 0.05%. limit_price 0.97.
+     - Mechanics: each filled cell entry arms its paired cell exit (resting limit orders live).
+     - Boundary action: pause / stop_loss / hold.
+     - Adaptive bounds defaults: lookback 48, ATR 14 × 2.0, min width 2%, max shift 8%, edge 12%.
+     - Waterfall protection: 3% drop within 6 bars / 300 s; cooldown 12 bars / 900 s.
+     - Neutral grid variant (_build_neutral_grid_v2_source): long and short legs, requires hedge mode. Spot grids are long-only.
+ Q22. DCA robot. Crypto spot, long-only.
+     - Defaults: 1H timeframe, buy every 1440 min, max 5 orders, total budget 95% of starting cash. Per-order % is user-set (dca_order_pct).
+     - Optional price filter: buy only if price ≤ anchor×(1+5%); disabled by default.
+     - TP 0.6% with trailing (activation 0.6%, callback 0.2%). When trailing is on, the fixed TP is set to 0.
+     - Hard stop 12% from average cost. Equity TP 10% / SL 6% / trailing 5%/3%. Max entry drift 3%.
+ Q23. Martingale robot. Swap, long, 1m.
+     - Base order 0.8, safety order 1. First safety at −1.2% (price_deviation_pct).
+     - Step multiplier 1.4, volume multiplier 1.6, max 5 layers.
+     - TP 0.5% (trailing 0.5% activation / 0.2% callback). Hard stop 12%. Equity TP 10% / SL 6% / trailing 5%/3%. Max entry drift 3%.
+     - No restart after stop. The final level uses the remaining budget.
+ Q24. Layered martingale robot.
+     - 5 layers × 3 orders per layer, base size 1, volume multiplier 1.8.
+     - Intra-layer spacing 0.5% and 0.8%. Inter-layer spacing 1.2%, 1.5%, 1.8%, 2.2%.
+     - TP 0.6% (trailing 0.6% / 0.2%). Hard stop 12%. Same equity guards.
+ Q25. "trend" bot type (app/services/strategy_bot_recommend.py; listed in strategy_runtime/bot_type.py).
+     - Schema only, used by the LLM recommender. No backend generator was found.
+     - Params: maPeriod 20 (5–200), maType EMA, confirmBars 2, positionPct 50, direction both, optional trailing TP 5% activation / 1% callback.
+     - The same recommender also suggests grid (gridCount 10, adaptive ATR mult 2, waterfall 3%), martingale (multiplier 2, 5 layers, drop 3%, TP 2%, SL 12%) and DCA (daily, dip threshold 5%). Risk defaults SL 10%, TP 20%.
+
+E. AI / LLM decision components
+ Q26. app/services/ai_decision_filter.py — LLM ("Jev") pre-trade entry gate. Fail-open.
+     - Applies to open/add long/short and buy/sell entries. Grid/DCA/martingale are excluded.
+     - The LLM answers 4 choice questions: data_quality, signal_alignment (aligned/mixed/conflict), market_regime (favorable/neutral/adverse), risk_check and execution_quality (clear/caution/block).
+     - Rejects if risk_check or execution_quality = block, or if (signal_alignment = conflict AND regime = adverse, both with confidence ≥ min_confidence 0.55).
+ Q27. app/services/fast_analysis.py and fast_analysis_scoring.py — AI asset analysis with a BUY/SELL/HOLD decision.
+     - Objective score = weighted technical 0.35, fundamental 0.20, sentiment 0.25, macro 0.20, normalized over the parts present.
+     - Score ≥ +20 → BUY, ≤ −20 → SELL, else HOLD. Thresholds can be calibrated per market.
+     - The LLM decision is reconciled with the score and timeframe votes.
+
+F. Chart-only signal indicators (buy/sell markers, no execution)
+ Q28. app/services/builtin_indicators.py — "[Sample] SuperTrend Trend-Following": ATR 10 (Wilder), multiplier 3.0, direction-flip markers.
+ Q29. docs/examples/chart_indicator_dual_ema.py — Dual EMA Viewer: EMA 12/26 golden/death markers.
+ Q30. docs/examples/multi_indicator_composite.py.
+     - Buy: SMA10 > SMA30 AND RSI14 ≤ 30 (AND MACD hist > 0 if use_macd; AND volume > 1.5×MA20 volume if use_volume).
+     - Sell: SMA10 < SMA30 AND RSI ≥ 70 (AND MACD hist < 0).
+ Q31. app/services/indicator_default_template.py — default template: EMA 10/30 golden/death markers.
+
+==========================================================================
+5. ai_quant_trade (egs_trade, egs_online_platform, egs_llm, ai_notes, ...)
+==========================================================================
+Market is China A-shares unless noted. Costs are typical A-share: buy commission 0.03%, sell commission 0.03% + 0.1% stamp tax, minimum 5 CNY, 100-share lots.
+ A1. egs_trade/vanilla/double_ma (back_tester.py, src/rules/timing_ctrl/moving_average.py, conf/double_ma.yaml) — dual MA timing.
+     - Data: Tushare daily, 000001.SZ and 600000.SH, 2018-01-01 to 2019-12-30, capital 100000.
+     - Entry: previous-day MA10 ≥ MA20 and not holding → buy at today's close.
+     - Exit: MA10 < MA20 while holding → sell all.
+     - Sizing: equal cash allocation over unfilled slots (cash / (stock_num − positions)), 100-share lots. Slippage 0.
+ A2. egs_trade/paper_trade/wind/double_ma.py — live/paper version through WindPy.
+     - Real-time MA5 vs MA20, same rule as A1.
+     - Self-selected pool, up to 350 holdings, each total_asset/350.
+     - LMT orders at the last price, 100-share lots. Runs at 09:30 on trading days.
+ A3. egs_trade/vanilla/momentum_rotation (strategy.py, conf/momentum_rotation.yaml) — cross-sectional momentum rotation.
+     - Universe: all listed A-shares (Tushare stock_basic). Excludes ST names and names listed < 180 days. Requires 20-day average turnover ≥ 50,000,000 CNY.
+     - Score: 0.5×R20 + 0.3×R60 + 0.2×R120 − 0.5×std(20-day returns). A name is valid only if close ≥ SMA20 and close ≥ SMA60.
+     - Market filter: CSI300 close ≥ SMA60, else go to cash.
+     - Rebalance: monthly (first trading day of the month), decided on prior-day data and executed at the open. Equal weight over top_n (default 10).
+     - Trailing stop: close ≤ high-water × (1 − 0.15) → sell next open.
+     - Grid: top_n {5, 10, 20}, trailing {0.10, 0.15, 0.20}, market filter on/off.
+     - Train 2016-01-01 to 2022-12-31, test 2023-01-01 to 2026-06-17. Benchmark 000300.SH. Slippage 5 bp. Cash 100000.
+ A4. egs_online_platform/聚宽_JoinQuant/03_模拟盘及实盘/01_股票规则类/小市值+多均线.py (JoinQuant) — small cap + multiple MAs.
+     - Universe: market cap 20–30 (亿 CNY), ascending order, paused names removed.
+     - Buy: MA5 > MA10 > MA30 and close > 1.02×MA5, with cash split over (5 − positions) slots. Max 5 holdings.
+     - Sell: MA5 < MA10 < MA30 and close < 0.98×MA5.
+     - Runs every bar (daily). refresh_rate 20 is unused. Benchmark HS300.
+ A5. .../强势股+趋势预测.py (JoinQuant) — strong stocks + trend judgment.
+     - Pool: the first 200 codes from valuation, kept if close > MA100. The option is set to '强势股'; the '龙头股' branch does billboard selection.
+     - trend_judgement: if |close/MA5 − 1| > 5%, compare the mean of the last 20 closes with the 20 before ("short"); else compare the mean of the last 100 closes with the prior 100 ("long"). Rising → 'raise', otherwise 'fall'.
+     - Buy: 'raise', cash split over (3 − positions) slots. Max 3 holdings.
+     - Sell: 'fall', or buy price > 1.05×current (a 5% stop).
+ A6. .../龙虎榜+均线.py (JoinQuant) — Dragon-Tiger billboard + MA.
+     - Pool: the previous day's billboard names with net_value > 0 (rank 1–5), sorted by net and total value; the first 3 with close > 1.03×MA100.
+     - Buy: close > 1.01×MA20. There is a sizing bug: it uses avg_cash when cash < avg_cash.
+     - Sell: close < MA20, or close < 0.95×(2-bar mean). The code's "MA5" is a count = 2 mean.
+ A7. .../龙虎榜+震荡区间过滤.py (JoinQuant) — billboard pool + oscillation filter + the A5 trend rules.
+     - Pool: billboard names with close > MA100 and not "vibrating". Vibrating means more than 10 local lows in 20 days and a low-range spread > 5%; names with fewer than 300 bars are also dropped.
+     - Buy and sell are the same as A5 (trend 'raise' / 'fall', 5% stop). 3 holdings.
+ A8. .../02_股票机器学习类/SVM动态因子选择策略.py (JoinQuant, ML), plus the research notebook 02_股票分析研究/svm动态因子选股.ipynb (dup / analysis).
+     - Universe: HS300. Rebalance every 10 days.
+     - Features: market cap, net working capital, net debt, debt/equity, non-current asset ratio, equity ratio, revenue YoY, turnover, PE, PB, PS, ROA, MTM10, VOL10, OBV10, DMA10, EMA10, MA10, BIAS10.
+     - Step 1: label = 50-day return ≥ cross-sectional mean. A DecisionTree picks the top 10 features.
+     - Step 2: an SVR regresses market cap on those features. Buy the 3 most "undervalued" names (real cap − predicted cap, ascending).
+     - Market filter: buy only if the HS300 5-day return > −1%. Sell everything if the index return ≤ −1%.
+     - Also sell if price/avg_cost < 0.95 or the name is not in the buy list.
+     - Equal cash per slot, 3 holdings.
+ A9. 聚宽_JoinQuant/01_模板使用说明/模板.py — template strategy. 函数分解说明/6_开盘时运行函数.py is a dup.
+     - Single stock 000001.XSHE.
+     - Buy all cash if close > 1.01×MA5. Sell all if close < MA5.
+ A10. 02_股票分析研究/LGB_topK_dropN.ipynb (ML research).
+     - Universe: HS300, first 10 names. Features: 60 JoinQuant factors plus daily OHLCV.
+     - Label: next-day up (1) or down (0).
+     - Model: LGBMClassifier (objective binary, num_leaves 50, learning rate 0.05, 100 trees; GridSearchCV over leaves {31, 50, 100}, trees {100, 500, 1000}, lr {0.01, 0.05}).
+     - Train 2020-06-30 to 2020-12-30, eval 2021-01-01 to 2021-02-20, test 2021-03-31 to 2021-05-30.
+     - Rule (TopKDropN): buy the top-K (3) by P(up); close the top-N (3) held names by P(down).
+ A11. egs_trade/ms_qlib/3_策略/快速入门.ipynb — Qlib benchmark.
+     - Market: CSI300, Alpha158 features, LGBModel (mse, learning rate 0.0421, num_leaves 210).
+     - Train 2008–2014, valid 2015–2016, test and backtest 2017-01-01 to 2020-08-01.
+     - TopkDropoutStrategy topk 50, n_drop 5. Account 1e8, deal at close, limit threshold 9.5%, open cost 0.05%, close cost 0.15%, min 5. Benchmark SH000300.
+ A12. egs_trade/rl/a001_proto_sb3 (main.py, src/rl/envs/StockTradingEnv0.py) — RL single stock.
+     - Model: SB3 PPO MlpPolicy, 1e4 timesteps. Data from baostock daily.
+     - Observation: OHLCV, amount, pctChg, PE, PB, PS, account state (19 dims).
+     - Action: [type 0–3, fraction 0–1]. Type < 1 buys fraction × cash; type < 2 sells fraction × shares; otherwise hold. Fill price is random between open and close.
+     - Reward: +1 if net worth > initial, else −100.
+     - Train 1990-01-01 to 2019-11-29, test Dec 2019. Initial 10000. Loops over codes 600000+.
+ A13. egs_trade/rl/a002_finRL_tutorial/a01_Stock_NeurIPS2018 (1_Data, 2_Train, 3_Backtest notebooks, RESULT.md) — FinRL.
+     - Market: DOW 30, daily. Train 2009-01-01 to 2020-07-01, trade 2020-07-01 to 2021-10-29. FinRL INDICATORS plus VIX and turbulence.
+     - Environment: hmax 100, initial 1,000,000, buy/sell cost 0.1%, reward scaling 1e-4.
+     - A2C: 50k timesteps. SAC: batch 128, buffer 100k, learning rate 1e-4, entropy auto_0.1, 70k timesteps.
+     - Trade environment risk switch: turbulence_threshold 70 on the VIX column (liquidate when exceeded).
+     - Baseline: mean-variance max-Sharpe (PyPortfolioOpt, weights 0–0.5).
+     - Reported A2C: Sharpe 2.17, annual return 53%, max drawdown −10.4%. Reported SAC: Sharpe 1.60.
+ A14. egs_trade/vanilla/portfolio_optimization Lesson3–7 notebooks — allocation methods (rebalancing, non-signal).
+     - Data: DJIA 2014-04-11 to 2019-04-11.
+     - Lesson 3: k-means asset clustering, 15 clusters (one asset per cluster → k-portfolio).
+     - Lesson 4: equal weight and inverse-volatility weight.
+     - Lesson 5: mean-variance efficient frontier (minimum risk / maximum return).
+     - Lesson 6: maximum Sharpe (SLSQP, weights 0–1, Rf 3%).
+     - Lesson 7: constrained bi-criteria optimization with high- and low-volatility asset buckets (beta from DJIA market data 2016–2019).
+ A15. egs_llm/a01_train/a01_unsloth_stock_forcaster (+ egs_courses/01_推理型股价预测大模型训练教程.md) — LLM forecaster.
+     - Model: Qwen3-0.6B (unsloth bnb-4bit) LoRA fine-tune on IDEA-FinAI/Finance-R1-Reasoning (DeepSeek-R1 distilled reasoning).
+     - Input: prior-5-day news for an A-share stock. Output: [上涨] (up) or [下跌] (down) for the next day. 1000 train / 1000 test samples.
+     - Reported accuracy: 49% versus base 47.4% and DeepSeek-R1 45.6%.
+     - No explicit trading rule (signal only).
+ A16. egs_fin_nlp/emotion_analysis/01_StructBert_Binary_Class — StructBERT Chinese news sentiment (positive/negative probability) on 财联社 news from qstock. Signal only, no trading rule.
+ A17. ai_notes/02_理论/3_选股/小市值策略.md — doc-only small-cap strategy.
+     - Stocks with market cap 20–30亿 CNY; take the 3 smallest.
+     - Buy at the open, hold 5 trading days, then rotate (sell and rebuy).
+ A18. ai_notes/02_理论/3_选股/01_规则选股.md and 4_择时/01_规则择时.md — doc-only rules.
+     - Trend template (Minervini-style): price > MA150 and MA200; MA150 > MA200; MA200 rising ≥ 1 month; MA50 > MA150 and MA200; price > MA50; price ≥ 1.3×52-week low; price within 25% of the 52-week high; relative strength replaced by RPS120 > 90.
+     - Stop: sell if price < buy price × 0.9 (10% stop).
+     - "大周期看涨小周期买入": daily MA100 uptrend for the pool; buy on a 30m/1h MA20 breakout.
+     - Trend-line timing: short MA in fast moves, long MA in slow moves.
+Excluded: egs_alpha (factor libraries: alpha101, ta-lib, stockstats, tsfresh), egs_data, egs_aide/excel_stock_monitor (price/percent-change alert thresholds only), egs_skill (broker research report parsing; its BACKTEST_REPORT.md is about parsers, not trading), egs_llm hot-topic report, awesome_projects (external link lists).
+
+==========================================================================
+6. OctoBot (packages/tentacles/Evaluator, Trading/Mode, profiles, docs)
+==========================================================================
+Asset class: crypto (spot and futures). Polymarket prediction markets where noted. Configuration defaults come from <tentacle>/config/*.json; profile overrides come from profiles/*/specific_config.
+
+A. TA evaluators — packages/tentacles/Evaluator/TA (signal generators; sign convention: −1 buy, +1 sell)
+ O1. momentum_evaluator/momentum.py — RSIMomentumEvaluator.
+     - RSI 14. trend_change_identifier true (default): additive notes from short trend averages [7,5,4,3,2,1] versus long averages [40,30,20,15,10] of RSI. A turn up gives −short_trend; a turn down gives +short_trend. Plus RSI/200 if RSI > 50, else (RSI − 100)/200. Clamped to ±1.
+     - Threshold mode: RSI ≥ 70 → +1 (sell); RSI ≤ 30 → −1 (buy).
+ O2. RSIWeightMomentumEvaluator (dip weighting).
+     - RSI 14. Slow mean of the last 16 values, fast mean of the last 4.
+     - When an RSI minimum has just been reached (window 0.95, delay 2), the slow/fast threshold table returns price and volume weights 1–3.
+     - Table (slow < 30: fast < 20 → weights (2,2), fast < 30 → (1,1); then slow 35/45/55/65/70 tiers). See config RSIWeightMomentumEvaluator.json.
+ O3. BBMomentumEvaluator.
+     - BB(20, 2). Close > upper → +1 (sell). Close < lower → −1 (buy).
+     - Inside the bands: ±((distance from middle)/(half-band width))². Mean reversion.
+ O4. EMAMomentumEvaluator.
+     - EMA 21, threshold 2%. Close ≥ EMA×1.02 → +1 (sell). Close ≤ EMA×0.98 → −1 (buy).
+     - reverse_signal flips the sign.
+ O5. ADXMomentumEvaluator.
+     - ADX 14 (min 7.5, neutral 25, max 45). Sign is −1 if EMA2 < EMA20, else +1.
+     - Strength comes from ADX relative to its recent maximum or 25 (as coded).
+ O6. MACDMomentumEvaluator.
+     - MACD 12/26/9 histogram pattern. W or V → negative (buy). M or Λ → positive (sell).
+     - Weighted by the histogram ratio and the pattern-duration estimate.
+ O7. KlingerOscillatorMomentumEvaluator.
+     - KVO(35, 55) − EMA13 of KVO, scaled by its std. Factor 0.2, 0.5 or 1 depending on whether the peak has been reached. Clipped to ±1.
+     - Positive value → positive note (sell side in OctoBot convention).
+ O8. KlingerOscillatorReversalConfirmationMomentumEvaluator — boolean: KVO−EMA difference has just reached a minimum (≤ 7 points since the last zero cross, window 0.9).
+ O9. trend_evaluator/trend.py — SuperTrendEvaluator.
+     - ATR 10 × 3 around HL2. Bullish switch (close > upper) or bullish state → −1 (buy). Bearish → +1.
+     - reversals_only option.
+ O10. DeathAndGoldenCrossEvaluator.
+     - SMA 50 / SMA 200 (EMA, WMA, LSMA, KAMA, DEMA, TEMA, VWMA selectable). Golden cross → −1 (buy). Death cross → +1 (sell).
+ O11. DoubleMovingAverageTrendEvaluator.
+     - SMA2 versus SMA5 and SMA10. Note = mean of normalized differences with crossing-move estimation. SMA2 above → positive (sell).
+ O12. EMADivergenceTrendEvaluator.
+     - EMA 50. diff = close/EMA×100 − 100. diff ≤ long 2 → −1. Otherwise, diff ≥ short −2 → +1.
+     - Quirk: with the defaults, any diff ≤ 2% is a buy and anything above is a sell.
+ O13. volatility_evaluator/volatility.py — StochasticRSIVolatilityEvaluator.
+     - StochRSI 14. ≥ 98 → +1 (sell). ≤ 1 → −1 (buy). Otherwise stochrsi − 0.5.
+ O14. ai_evaluator/ai.py — GPTEvaluator (LLM).
+     - Prompt: "Predict: {up or down} {confidence%}". Input is the last 10 values of an indicator (raw candles, EMA, SMA, KAMA, "Hull" (actually KAMA), RSI or DPO) on the chosen source. Defaults: period 2, source Close.
+     - "up" → −1×confidence (buy); "down" → +1×confidence.
+     - Confidence: parsed %, or high 80 / medium 50 / low 30. If ≥ min_confidence_threshold (default 100), confidence becomes 100%.
+     - Model: the interface model by default.
+
+B. Real-time evaluators — Evaluator/RealTime
+ O15. instant_fluctuations.py — InstantFluctuationsEvaluator.
+     - 1m candles, segment averages over [10,8,6,5,4,3,2,1] bars.
+     - Volume trigger: last volume > (1 + 400%) × average. Price trigger: ±1% versus the segment average.
+     - Note = ±cos(1 − price_trigger×volume_trigger). Price up → positive (sell). Notifies on a change ≥ 0.15.
+ O16. InstantMAEvaluator.
+     - 1m SMA(6), threshold 0.5% (config; the code default is 5%).
+     - Price above MA×(1+thr) → +(ratio − 1), capped at 1. Below MA×(1−thr) → −(1 − ratio).
+ O17. dsl_realtime_evaluator.py — DSLRealtimeEvaluator. User DSL script evaluated on the ohlcv, kline, ticker or all_tickers channel. Used by profile O54.
+
+C. Social evaluators — Evaluator/Social (signal generators)
+ O18. RedditForumEvaluator — text sentiment × −1 on configured subreddits; overall-state analyser.
+ O19. TwitterNewsEvaluator — tweet sentiment × −1 for configured accounts.
+ O20. CryptoNewsEvaluator — mean news sentiment (POSITIVE +1, NEGATIVE −1). This sign is opposite to OctoBot's −1 = buy convention. Language "en".
+ O21. FearAndGreedIndexEvaluator — trend of the index history over averages [40,30,20,15,10].
+ O22. SocialScoreEvaluator — latest coin sentiment value.
+ O23. GoogleTrendsEvaluator — recent trend changes (sqrt). Refresh 86400 s, 3 months of history.
+ O24. MarketCapEvaluator — trend of global market-cap history over averages [40,30,20,15,10].
+ O25. CryptoMarketCapEvaluator (CoinGecko top 100).
+     - Note = (clip(mcap 24h % change/50) × 0.6 + clip(price 24h % change/20) × 0.3 + volume factor × 0.1) × max(0.7, 1 − (rank − 1)/100).
+ O26. TelegramSignalEvaluator — parses "[x]" in a message, x in [−1, 1].
+ O27. TelegramChannelSignalEvaluator — regex MARKET_BUY → −1, MARKET_SELL → +1.
+
+D. Strategy evaluators — Evaluator/Strategies (combine evaluator notes)
+ O28. mixed_strategies.py — SimpleStrategyEvaluator.
+     - Plain average of all valid TA, social and real-time notes over the required time frames (default 1h; config 1h, 4h, 1d).
+     - Social timeout 3600 s. Default evaluators: DoubleMA + RSI.
+ O29. TechnicalAnalysisStrategyEvaluator — time-frame weighted average: 30m 30, 1h 50, 2h 50, 4h 50, 1d 30.
+ O30. dip_analyser_strategy.py — DipAnalyserStrategyEvaluator.
+     - When KlingerReversalConfirmation is true, outputs the RSIWeight price/volume weights.
+     - Real-time (InstantFluctuations) events trigger TA re-evaluation. Time frame 4h in config.
+ O31. move_signals_strategy.py — MoveSignalsStrategyEvaluator.
+     - Signal = Klinger, weight = BB, on 30m (weight 4), 1h (3) and 4h (3).
+     - Per time frame: if |signal| ≥ 0.15 and signal×BB > 0, then min(2×signal×BB, 1) × side × TF weight.
+     - Final value is the sum over total weights.
+ O32. ai_strategies.py — CryptoLLMAIStrategyEvaluator (LLM).
+     - Aggregates TA (MACD, RSI, EMADivergence, DoubleMA, BB, ADX) and SocialScore notes on 1h, 4h and 1d.
+     - Runs an agent team (TA, Sentiment and RealTime agents → Summarization; optional deep agent) to produce eval_note plus description and confidence.
+ O33. GlobalLLMAIStrategyEvaluator — same, on FearAndGreed, MarketCap and CryptoNews (1d), market-wide.
+ O34. BlankStrategyEvaluator — passthrough for scripted evaluators, 1h, 200 candles.
+
+E. Trading modes — Trading/Mode
+ O35. daily_trading_mode/daily_trading.py — DailyTradingMode.
+     - Averages strategy notes into a state (thresholds shifted by 0.2×risk): VERY_LONG < −0.85, LONG < −0.25, NEUTRAL < 0.25, SHORT < 0.85, else VERY_SHORT. Orders only when the state changes to a non-neutral state.
+     - VERY_LONG: market buy. LONG: limit buy at 0.98–0.995×price (risk-scaled) plus an OCO stop.
+     - SHORT: limit sell at 1.005–1.02× plus an OCO stop at 0.95–0.99×price (stop factor 0.99 − risk×0.04). VERY_SHORT: market sell.
+     - Quantity is risk-based (limit orders 10–90%, market 30–100%; sells use a 5× multiplier).
+     - Target-profits mode: entries only. Take-profit 5%, stop-loss 2.5%, optional position increase.
+     - Other config: use_stop_orders true, close_to_current_price_difference 0.005 (config; code default 0.02), max_currency_percent 100.
+ O36. signal_trading_mode/signal_trading.py — SignalTradingMode (DailyTradingMode subclass).
+     - Thresholds −0.88 / −0.4 / 0.4 / 0.88, risk 0.15.
+     - Buy limit 0.99–0.995×. Stop 0.95–0.99×. Market quantity 50–100%. Requires MoveSignalsStrategyEvaluator.
+ O37. dip_analyser_trading_mode/dip_analyser_trading.py — DipAnalyserTradingMode (buys only on signal; sells only after fills).
+     - Entry: limit buy at 0.995×price (market buy optional).
+     - Size: volume weight 1/2/3 → 0.5/0.7/1.0 × available funds × (1 + (risk − 0.5)×0.2). Soft maximum 33% of holdings.
+     - New signals replace older buy orders.
+     - Exit: after a fill, 3 limit sells spaced evenly from the buy price up to buy price × 1.04 / 1.07 / 1.10 (price weight light / medium / heavy).
+     - Stop-loss multiplier 0 (disabled; otherwise stop = buy price × multiplier).
+ O38. dca_trading_mode/dca_trading.py — DCATradingMode.
+     - Trigger: "Time based" (default) every 10080 min (weekly), "Always trigger long", or "Maximum evaluators signals based" (eval == −1).
+     - Amount: config 50q, i.e. 50 units of quote.
+     - Entries: market (config true) or limit at 5% below. Secondary entries 0 by default.
+     - Exits: take-profit limit 5% above (off by default). Secondary exits optional. Stop-loss 10% (off by default).
+     - cancel_open_orders_at_each_entry true. Max asset holding 100%.
+ O39. grid_trading_mode/grid_trading.py — GridTradingMode (grid, non-directional).
+     - Unconfigured default: spread 1.5%, increment 0.5%, 20 buy and 20 sell orders.
+     - Shipped config: BTC/USDT flat spread 2000, increment 1000, 25/25 orders. ETH/USDT 10/5. ADA/ETH 0.00002/0.00001.
+     - Mirror order on every fill. reinvest_profits true. Optional trailing up/down. Funds redispatch every 24 h (off).
+ O40. staggered_orders_trading_mode/staggered_orders_trading.py — StaggeredOrdersTradingMode (wide-range grid).
+     - Funds-allocation modes: neutral, mountain, valley, sell slope, buy slope.
+     - Config BTC/USDT: mountain, spread 6%, increment 3%, bounds 3000–6000 (profile 30000–60000), operational depth 100. ETH/USDT: 0.7% / 0.3%, 400–500.
+     - Mirror orders on fill. Health check every 3 days.
+ O41. market_making_trading_mode — MarketMakingTradingMode (market making).
+     - Bids and asks 3 / 3. Min spread 2%. Max spread 6% in code, 10% in config, 5% in the profile. Reference exchange "local".
+     - Budget capped at what covers 2% of daily volume within the first 3% of book depth.
+ O42. simple_market_making_trading_mode — SimpleMarketMakingTradingMode (advanced market making).
+     - BTC/USDT: spread 0.5–5%, 5 bids / 5 asks, depth (cumulated volume 1%, 2% of daily volume), linear order distribution, "valley" funds distribution, auto-adapt.
+     - Max base 0.1 BTC, max quote 3000. Reference price kucoin (weight 1). Refresh 30.
+     - Also has scheduled-volume and hedging engines.
+ O43. arbitrage_trading_mode/arbitrage_trading.py — ArbitrageTradingMode.
+     - Trigger: |local price − average of other exchanges| > 0.25% (profile 0.35%).
+     - Entry: limit at the local price using 25% of the portfolio.
+     - On fill: exit limit at the cross-exchange average, plus a stop 0.1% beyond the own entry price.
+     - The entry is cancelled once the local price reaches the average. No fund transfers between exchanges.
+ O44. index_trading_mode/index_trading.py — IndexTradingMode (rebalancing).
+     - Equal weight across traded coins, or custom index_content.
+     - Check every 1 day. Rebalance if any coin is outside target ± 5% (quote-asset trigger 10%).
+ O45. ai_trading_mode/ai_index_trading.py (+ team.py, deep_agent_team.py, resources/skills) — AIIndexTradingMode (LLM rebalancing).
+     - Uses the CryptoLLM and GlobalLLM strategy outputs. An agent team (signal analyst, bull and bear researchers, risk judge, distribution agent) emits instructions: reduce/increase exposure, add/remove asset, update ratio, increase/decrease fiat ratio.
+     - These are applied to the index distribution. Refresh 1 day, rebalance cap 5%.
+     - Distribution skill guidance: confidence modifiers 1.5× above 0.85, 1.0× at 0.70–0.85, 0.75× at 0.50–0.70, 0.25× or skip below 0.50. Total exposure ≤ 80%, single position ≤ 25%, correlated positions < 40%, cash reserve ≥ 20%.
+ O46. profile_copy_trading_mode — ProfileCopyTradingMode (copy trading, Index subclass, Polymarket).
+     - Copies tracked profiles' distributions. 20% of the portfolio per profile, allocation padding 20%, min order size margin 1, allow_skip_asset.
+     - Optional filters: unrealized PnL, mark price, position size. Rebalance cap 5%.
+ O47. remote_trading_signals_trading_mode — RemoteTradingSignalsTradingMode. Follows OctoBot cloud community strategy signals; max volume 50%.
+ O48. trading_view_signals_trading_mode — TradingViewSignalsTradingMode.
+     - Executes TradingView alerts: SIGNAL=BUY/SELL/CANCEL, plus optional ORDER_TYPE, VOLUME, PRICE, STOP_PRICE, TAKE_PROFIT_PRICE(_n) with volume ratios, REDUCE_ONLY, LEVERAGE, TAG.
+     - Market orders by default. close_to_current_price_difference 0.02.
+ O49. dsl_trading_mode — DSLTradingMode. Runs a configured DSL statement when triggered.
+ O50. blank_trading_mode — BlankTradingMode. No trading.
+ (packages/trading/octobot_trading/modes/scripted_trading_mode is only a base class.)
+
+F. Shipped profiles — packages/tentacles/profiles/*/ (preset strategy configurations)
+ O51. daily_trading
+     - DailyTradingMode + SimpleStrategy (DoubleMA 5/10 + RSI 14 trend-change).
+     - Time frames 1h, 4h, 1d. BTC/USDT on Binance, risk 0.5, stop orders on.
+ O52. signal_trading — SignalTradingMode + MoveSignals (Klinger, BB, InstantFluctuations), 30m/1h/4h. BTC/USDT, ETH/BTC, ETH/USDT.
+ O53. dip_analyser — DipAnalyser mode/strategy, 4h, Klinger reversal + RSIWeight + InstantFluctuations (1%, 400%). Sells 3 orders at +4 / 7 / 10%.
+ O54. itm_predictions_market — Polymarket, USDC reference.
+     - DSL real-time (all tickers, refresh 100 s): market expiry within 24 h AND 0.90 ≤ ticker close < 0.999.
+     - Action: limit buy 5% of available USDC at price −1%, take-profit at 0.99.
+ O55. simple_dca — DCA buys 5% of total ("5%t") at market every 10080 min (weekly). No exits, no stop.
+ O56. smart_dca — DCA in signal mode, triggered by EMAMomentum (EMA 9, threshold 0%, i.e. close ≤ EMA9 → buy) on 4h via SimpleStrategy.
+     - Entries: limit at −0.2%, plus 2 secondary entries spaced 0.5%, each 5%t.
+     - Exits: take-profit +0.35%, plus 1 secondary exit at 0.5% spacing. No stop.
+ O57. gpt_trading ("GPT Smart DCA") — GPTEvaluator (gpt-3.5-turbo, full candles, 20 periods) via SimpleStrategy on 4h. Risk 1.
+     - DCA signal mode: 8%t entry limit at −1.3% plus 1 secondary entry at −1.3% (8%t). Take-profit +2%. No stop.
+     - The config key "max_confidence_threshold": 60 is not read by the code, which reads min_confidence_threshold (default 100).
+ O58. grid_trading — BTC/USDT spread 2000 / increment 1000, 25 / 25 orders.
+ O59. trailing_grid_trading — BTC/USDT spread 1300 / increment 800, 15 / 15 orders, trailing up enabled.
+ O60. staggered_orders_trading — BTC/USDT mountain 6% / 3%, 30000–60000.
+ O61. market_making — BTC/USDC, 3 / 3 orders, spread 2–5%, risk 1.0.
+ O62. arbitrage_trading — BTC/USDT on Binance, Coinbase and Kucoin. Delta 0.35%, 25% per trade, stop 0.1%.
+ O63. index_trading — BTC, ETH and SOL against USDT, equal weight, rebalance cap 5%, daily.
+ O64. ai_trading — AIIndexTradingMode + CryptoLLM and GlobalLLM. BTC/USDT and ETH/USDT, risk 0.3.
+ O65. copy_trading — RemoteTradingSignals (placeholder strategy id).
+ O66. profile_copy_trading — ProfileCopyTrading on Polymarket.
+ O67. tradingview_trading — TradingView signals, market orders, maximum-size orders.
+ O68. non-trading — Blank mode.
+
+G. Strategies defined in docs — OctoBot/docs/content
+ O69. octobot-script/strategies.md and getting-started.md — RSI strategy (pre-computed and iterative versions; dup).
+     - Market: BTC/USDT 1d from timestamp 1505606400.
+     - Entry: RSI(10) < 28 → market buy 10% of the portfolio.
+     - Exits: stop-loss −15%, take-profit +25%.
+ O70. investing/tradingview-strategies-tutorials/automating-a-tradingview-death-and-golden-cross-strategy.md.
+     - Market: BTC/USDT on Binance, 5m.
+     - EMA 9 crossing above EMA 21 → buy with 50% of USDT. Cross below → sell all BTC. Market orders.
+ O71. investing/tradingview-strategies-tutorials/bull-market-strategy-from-tradingview-using-rsi-with-video.mdx — Solana example.
+     - Indicator: RSI 14 on close with an RSI-based MA (SMMA, length 9).
+     - Buys when the RSI MA crosses up through 39.57 (extreme) and 48.62 (regular).
+     - Sells when the RSI MA crosses down through 67.45 (extreme) and 53.63 (regular).
+     - Amounts are user-defined.
+ (Blog posts such as smart-dca-making-of describe the Smart DCA and GPT profiles above. They recommend take-profit targets around 0.8% for top-50 altcoins and 1.5% for rank 100–200.)
+
+==========================================================================
+COUNT PER REPO (entries listed above)
+==========================================================================
+- **backtrader: 40.**
+  - Directional strategies: B1–B32 = 32. Within those, about 26 are MA/SMA-cross variants: B1–B26 (B1–B15 fast/slow crosses, B16–B26 close-vs-SMA).
+  - Random/plumbing demos: B33–B39 = 7.
+  - Test fixture: B40 = 1.
+- **backtesting.py: 8.** P1–P8, of which 2 are SMA-cross dups and 2 are ML.
+- **finmarketpy: 9.**
+  - FX trend family F1–F5: one SMA200 FX trend strategy in 5 variants.
+  - TechIndicator rule library F6: about 9 rules.
+  - Option-roll strategies F7: 3.
+  - Forward-roll strategies F8: 2–3.
+  - Spot total-return index F9: 1.
+- **QuantDinger: 31.**
+  - Preset templates: 8 CTA + 4 portfolio.
+  - Docs examples: 8.
+  - Bots: 5 (grid, neutral grid inside Q21, DCA, martingale, layered martingale, plus the recommender-only trend bot).
+  - AI decision components: 2.
+  - Chart-only signal indicators: 4.
+- **ai_quant_trade: 18.**
+  - Rule-based code: 9 (A1–A9).
+  - ML/RL/LLM: 7 (A8 also counted here, A10–A13, A15, A16).
+  - Portfolio allocation lessons: 1 group of about 6 methods (A14).
+  - Doc-only: 2 (A17, A18).
+- **OctoBot: 71.**
+  - Evaluators: 14 TA + 3 real-time + 10 social + 7 strategy.
+  - Trading modes: 16.
+  - Shipped profiles: 18.
+  - Doc strategies: 3.

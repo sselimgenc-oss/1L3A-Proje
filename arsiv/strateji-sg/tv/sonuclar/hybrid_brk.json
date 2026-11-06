@@ -1,0 +1,50 @@
+{
+ "ad": "hybrid_brk",
+ "pine_id": "hezSShJr",
+ "tf": "1d",
+ "evren": [
+  "kripto",
+  "abd",
+  "bist",
+  "emtia"
+ ],
+ "neden": "Zaman dilimi belirtilmemiş; günlük (200 gün SMA, Minervini tarzı), yalnız long.",
+ "olcut": {
+  "n": 570,
+  "kar": 29483.46298924809,
+  "pf": 1.8944844437017228,
+  "sharpe": 1.355056272282899,
+  "beklenti_R": 0.5172537366534753,
+  "kazanma": 0.443859649122807,
+  "maxdd": 0.10918183465028544,
+  "dd_gun": 559,
+  "cagr": 0.12360467480995352,
+  "calmar": 1.1320992654672375,
+  "psr": 0.9999983856319155,
+  "tutma_gun": 29.0,
+  "ort_islem_getiri": 0.041380298932278015,
+  "netR_toplam": 294.8346298924809,
+  "sharpe_egitim": 1.3416033621611418,
+  "sharpe_oos": 1.6131532641129551,
+  "oos_kar": 10324.015666900283,
+  "tur": "swing",
+  "pf_maliyet2x": 1.8408711646130897,
+  "komsu_n": 24,
+  "komsu_karda": 1.0,
+  "enstr_n": 37,
+  "enstr_karda": 0.8648648648648649,
+  "maks_kor": 0.23668747975180363
+ },
+ "kurallar": {
+  "1_islem_sayisi": true,
+  "2_maks_dusus<=20": true,
+  "3_beklenti>=0.15R": true,
+  "4a_kf>=1.3": true,
+  "4b_sharpe>=1": true,
+  "5_oos": true,
+  "6_maliyet2x_kf>=1.1": true,
+  "7_komsu>=70": true,
+  "8_enstr>=60": true
+ },
+ "gecti": true
+}

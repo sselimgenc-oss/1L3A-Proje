@@ -1,0 +1,30 @@
+name: fetch-data
+on:
+  push:
+    branches-ignore: [main, kagit-durum]
+    paths: [".github/workflows/fetch-data.yml", "scripts/fetch_data.py", "data/REFRESH"]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+        with: { ref: "${{ github.ref_name }}" }
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - run: python scripts/fetch_data.py data
+      - name: Stres testi evreni (eski büyük / delist edilmiş coinler)
+        env:
+          SYMBOLS: "LUNAUSDT FTTUSDT SRMUSDT MATICUSDT EOSUSDT WAVESUSDT XMRUSDT ALGOUSDT ICPUSDT SANDUSDT MANAUSDT AXSUSDT CRVUSDT EGLDUSDT THETAUSDT VETUSDT XTZUSDT ZECUSDT DASHUSDT COMPUSDT"
+        run: python scripts/fetch_data.py data_extra
+      - name: Commit data
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data data_extra
+          git commit -m "Binance USDT-M 1h kline ve funding verisini güncelle" || exit 0
+          git pull --rebase origin "${{ github.ref_name }}"
+          git push origin "HEAD:${{ github.ref_name }}"

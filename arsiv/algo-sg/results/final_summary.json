@@ -1,0 +1,262 @@
+{
+  "A": {
+    "trade_level": {
+      "ALL": {
+        "trades": 3147,
+        "win_rate": 50.08,
+        "pf": 1.606,
+        "avg_R": 0.254,
+        "total_R": 800.5,
+        "cagr": 71.6,
+        "total_ret": 3644.9,
+        "max_dd": -29.4,
+        "sharpe": 1.19,
+        "avg_bars": 127.5,
+        "longs": 1435
+      },
+      "IS": {
+        "trades": 1713,
+        "win_rate": 51.37,
+        "pf": 1.661,
+        "avg_R": 0.267,
+        "total_R": 457.3,
+        "cagr": 71.5,
+        "total_ret": 744.1,
+        "max_dd": -24.8,
+        "sharpe": 1.74,
+        "avg_bars": 128.6,
+        "longs": 822
+      },
+      "OOS": {
+        "trades": 1434,
+        "win_rate": 48.54,
+        "pf": 1.545,
+        "avg_R": 0.239,
+        "total_R": 343.1,
+        "cagr": 71.3,
+        "total_ret": 343.7,
+        "max_dd": -29.4,
+        "sharpe": 0.92,
+        "avg_bars": 126.2,
+        "longs": 613
+      }
+    },
+    "modules": {
+      "A1": 2877,
+      "A2": 270
+    },
+    "portfolio_realized_compounded": {
+      "cagr": 55.6,
+      "max_dd": -29.6,
+      "sharpe": 1.14,
+      "mar": 1.88,
+      "yearly": {
+        "2020": -5.0,
+        "2021": 142.8,
+        "2022": 55.1,
+        "2023": 58.0,
+        "2024": 178.6,
+        "2025": 19.3,
+        "2026": 3.4
+      }
+    },
+    "portfolio_mtm_simple": {
+      "ann_return_simple": 26.9,
+      "mtm_max_dd": -34.2,
+      "sharpe": 0.99,
+      "mar": 0.78
+    },
+    "sleeve": {
+      "risk": 0.005,
+      "max_open": 10
+    },
+    "yearly": {
+      "2020": {
+        "n": 389,
+        "win_rate": 46.5,
+        "pf": 1.17,
+        "avg_R": 0.073
+      },
+      "2021": {
+        "n": 510,
+        "win_rate": 53.1,
+        "pf": 2.04,
+        "avg_R": 0.403
+      },
+      "2022": {
+        "n": 268,
+        "win_rate": 59.7,
+        "pf": 1.91,
+        "avg_R": 0.323
+      },
+      "2023": {
+        "n": 546,
+        "win_rate": 49.1,
+        "pf": 1.58,
+        "avg_R": 0.251
+      },
+      "2024": {
+        "n": 551,
+        "win_rate": 51.5,
+        "pf": 2.21,
+        "avg_R": 0.51
+      },
+      "2025": {
+        "n": 565,
+        "win_rate": 50.6,
+        "pf": 1.17,
+        "avg_R": 0.07
+      },
+      "2026": {
+        "n": 318,
+        "win_rate": 39.6,
+        "pf": 1.14,
+        "avg_R": 0.071
+      }
+    },
+    "symbols_profitable": 21,
+    "symbols": 25
+  },
+  "B": {
+    "trade_level": {
+      "ALL": {
+        "trades": 996,
+        "win_rate": 63.96,
+        "pf": 1.78,
+        "avg_R": 0.157,
+        "total_R": 156.1,
+        "cagr": 18.8,
+        "total_ret": 218.0,
+        "max_dd": -16.5,
+        "sharpe": 0.9,
+        "avg_bars": 85.0,
+        "longs": 996
+      },
+      "IS": {
+        "trades": 645,
+        "win_rate": 60.78,
+        "pf": 1.413,
+        "avg_R": 0.091,
+        "total_R": 58.5,
+        "cagr": 11.6,
+        "total_ret": 53.8,
+        "max_dd": -16.5,
+        "sharpe": 0.67,
+        "avg_bars": 85.1,
+        "longs": 645
+      },
+      "OOS": {
+        "trades": 351,
+        "win_rate": 69.8,
+        "pf": 2.672,
+        "avg_R": 0.278,
+        "total_R": 97.6,
+        "cagr": 30.1,
+        "total_ret": 106.8,
+        "max_dd": -14.1,
+        "sharpe": 1.18,
+        "avg_bars": 85.0,
+        "longs": 351
+      }
+    },
+    "modules": {
+      "B": 996
+    },
+    "portfolio_realized_compounded": {
+      "cagr": 17.0,
+      "max_dd": -17.1,
+      "sharpe": 0.91,
+      "mar": 1.0,
+      "yearly": {
+        "2020": 3.1,
+        "2021": 29.0,
+        "2022": -5.1,
+        "2023": 16.3,
+        "2024": 42.8,
+        "2025": 29.8,
+        "2026": 5.4
+      }
+    },
+    "portfolio_mtm_simple": {
+      "ann_return_simple": 12.1,
+      "mtm_max_dd": -18.5,
+      "sharpe": 0.86,
+      "mar": 0.66
+    },
+    "sleeve": {
+      "risk": 0.0075,
+      "max_open": 25
+    },
+    "yearly": {
+      "2020": {
+        "n": 122,
+        "win_rate": 66.4,
+        "pf": 1.19,
+        "avg_R": 0.045
+      },
+      "2021": {
+        "n": 320,
+        "win_rate": 58.8,
+        "pf": 1.6,
+        "avg_R": 0.117
+      },
+      "2022": {
+        "n": 168,
+        "win_rate": 56.0,
+        "pf": 0.95,
+        "avg_R": -0.016
+      },
+      "2023": {
+        "n": 35,
+        "win_rate": 82.9,
+        "pf": 16.7,
+        "avg_R": 0.527
+      },
+      "2024": {
+        "n": 160,
+        "win_rate": 69.4,
+        "pf": 2.85,
+        "avg_R": 0.328
+      },
+      "2025": {
+        "n": 144,
+        "win_rate": 72.9,
+        "pf": 2.55,
+        "avg_R": 0.262
+      },
+      "2026": {
+        "n": 47,
+        "win_rate": 61.7,
+        "pf": 2.31,
+        "avg_R": 0.156
+      }
+    },
+    "symbols_profitable": 24,
+    "symbols": 25
+  },
+  "COMBINED_equal_weight_mtm": {
+    "ann_return_simple": 21.1,
+    "mtm_max_dd": -15.2,
+    "sharpe": 1.45,
+    "mar": 1.39
+  },
+  "COMBINED_yearly_pct": {
+    "2020": 12.9,
+    "2021": 56.8,
+    "2022": 12.9,
+    "2023": 19.8,
+    "2024": 35.4,
+    "2025": 10.3,
+    "2026": 2.1
+  },
+  "daily_corr_mtm": {
+    "A": {
+      "A": 1.0,
+      "B": -0.27
+    },
+    "B": {
+      "A": -0.27,
+      "B": 1.0
+    }
+  }
+}
