@@ -84,21 +84,29 @@ Ana ders: önceki sonuçlar OOS'a bakılarak seçilmiş ve kâr birkaç işlemde
 **Aşama 2 — Test ve seçim**
 - BTC+ETH 2020–: her aday için walk-forward (OOS seçimde görülmez), karar 13 ölçütleri.
 - Geçenler: rejim analizi (boğa/ayı/yatay), parametre duyarlılığı, rastgele giriş karşılaştırması, maliyet ×2 stresi.
-- Stil başına final (sayı Aşama 2 sonunda kullanıcıyla), aralarında korelasyon kontrolü.
+- Hedef: canlıda **ajan başına ortalama ~3 strateji** (10 aday bilerek fazla tutuldu, eleme beklenir). Aralarında korelasyon kontrolü.
 - TradFi doğrulama: XAU + 1–2 hisse (kısa veri; yalnız "bozulmuyor mu").
 - Bitiş: her stil için onaylı final listesi + beklenti aralıkları (paper'da karşılaştırmak için).
 
-**Aşama 3 — Paper trading**
-- DigitalOcean Frankfurt; Binance WS canlı veri; sanal dolum + hesap/risk/Telegram (sg-arge'den uyarlanır, Decimal).
+**Aşama 3 — Pano**
+- sg-arge `copytrade/canli/pano.py` örnek alınır. İlke: **pano yeni hesap yapmaz**, yalnız motorun yazdığı durum/kayıt
+  dosyalarını biçimler (motor ile pano asla farklı sayı göstermez).
+- İçerik: ajan/strateji bazında özsermaye, açık pozisyonlar, kapanan işlemler, risk limitleri durumu, backtest
+  beklenti aralığına göre konum, sağlık (veri bayatlığı, servis çalışıyor mu). Telefondan okunur; Telegram özetiyle uyumlu.
+- Önce Aşama 2 backtest sonuçlarıyla çalışır, sonra paper verisine bağlanır.
+- Bitiş: pano paper'ın ilk gününden hazır.
+
+**Aşama 4 — Paper trading**
+- DigitalOcean Frankfurt; Binance WS canlı veri; sanal dolum + hesap/risk/Telegram (sg-arge'den uyarlanır, Decimal), pano bağlı.
 - Kağıt motoru = backtest motoru doğrulaması (aynı dönem aynı işlemler); dashboard.
 - Süre ≥ 8 hafta; sonuç backtest beklenti aralığıyla karşılaştırılır.
 - Bitiş: kesintisiz çalışma + sonuçların beklenti aralığında olması.
 
-**Aşama 4 — Lider ajan ve öğrenme** (Aşama 3 sırasında başlar)
+**Aşama 5 — Lider ajan ve öğrenme** (Aşama 4 sırasında başlar)
 - ≥15 dk aralıkla: rejim tespiti, stiller arası sermaye dağılımı, işlem sonrası analiz, haftalık rapor.
 - Değişiklik önerisi → walk-forward test → kullanıcı onayı. Canlıda kendini değiştiren kod yok.
 
-**Aşama 5 — Küçük bütçeyle canlı**
+**Aşama 6 — Küçük bütçeyle canlı**
 - Gerçek emir yürütücü, borsa filtreleri (exchangeInfo), mutabakat; küçük bütçe; sert limitler aynı.
 
 ## Yeniden kullanılacak eski kod
