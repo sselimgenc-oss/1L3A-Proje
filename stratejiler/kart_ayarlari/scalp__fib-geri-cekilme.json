@@ -1,0 +1,15 @@
+[
+ {
+  "kart_id": "daytrade__ma200-fibonacci-5dk__singhal",
+  "parametreler": {
+   "pivot_k": 3,
+   "giris_alt": 0.236,
+   "giris_ust": 0.786,
+   "trend_ema": 200,
+   "stop_seviyesi": 1.0,
+   "hedef_uzatma": 1.0
+  },
+  "cikis_ayarlari": null,
+  "not": "EMA200 konumu (kartta SMA200 eğimi); short'ta ayı yutan mum şartı yerine düşüş mumu; stop bacak başı (kartta alt Fib seviyesi)."
+ }
+]

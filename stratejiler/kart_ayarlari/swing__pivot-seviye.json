@@ -1,0 +1,15 @@
+[
+ {
+  "kart_id": "daytrade__pivot-pozisyonel-destek__singhal",
+  "parametreler": {
+   "pivot_periyodu": "hafta",
+   "mod": "tepki",
+   "seviyeler": "p_s1_s2",
+   "trend_ema": 50,
+   "hedef_modu": "sonraki",
+   "min_r": 1.0
+  },
+  "cikis_ayarlari": null,
+  "not": "Pozisyonel pivot dönemi kartta yok (haftalık varsayım); trend = EMA50 (varsayım); hedef sonraki pivot seviyesi."
+ }
+]

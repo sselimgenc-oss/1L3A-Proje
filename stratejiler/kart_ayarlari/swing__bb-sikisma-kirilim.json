@@ -1,0 +1,16 @@
+[
+ {
+  "kart_id": "swing__bb-sikisma-kirilim__johnson",
+  "parametreler": {
+   "bb_periyot": 20,
+   "bb_sapma": 2.0,
+   "sikisma_pencere": 120,
+   "sikisma_yuzdelik": 15.0,
+   "hacim_k": 0.0,
+   "stop_modu": "orta",
+   "hedef_r": 0.0
+  },
+  "cikis_ayarlari": null,
+  "not": "Kartta stop/hedef/sıkışma ölçüsü yok: orta bant stopu, orta banttan geri kesişimde çıkış, alt %15 yüzdelik varsayım."
+ }
+]

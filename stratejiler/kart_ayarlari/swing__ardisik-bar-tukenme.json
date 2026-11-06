@@ -1,0 +1,56 @@
+[
+ {
+  "kart_id": "swing__3-5-mum-tukenme__velez",
+  "parametreler": {
+   "desen": "renk",
+   "seri_n": 3,
+   "zincir": false,
+   "tetik": "seri_sonu",
+   "hedef_r": 2.0
+  },
+  "cikis_ayarlari": null,
+  "not": "Kartta stop/hedef yok: seri ucu stopu, 2R hedef (varsayım). Seri 3-5 -> n=3 (ızgara 3-5)."
+ },
+ {
+  "kart_id": "swing__pristine-anahtar-alis-pbs__velez",
+  "parametreler": {
+   "desen": "renk",
+   "seri_n": 3,
+   "zincir": true,
+   "tetik": "kirilim",
+   "stop_tampon_atr": 0.1,
+   "hedef_r": 2.0,
+   "short": false
+  },
+  "cikis_ayarlari": null,
+  "not": "Yalnız long (PBS). Hedef kartta yok (2R); iz süren stop CikisAyarlari ile."
+ },
+ {
+  "kart_id": "swing__pristine-anahtar-satis-pss__velez",
+  "parametreler": {
+   "desen": "renk",
+   "seri_n": 3,
+   "zincir": true,
+   "tetik": "kirilim",
+   "stop_tampon_atr": 0.1,
+   "hedef_r": 2.0
+  },
+  "cikis_ayarlari": null,
+  "not": "Yalnız short (PSS); sınıf long tarafını da üretir (kapatılamaz). Hedef kartta yok (2R)."
+ },
+ {
+  "kart_id": "swing__2-5-gun-geri-donus__ladha",
+  "parametreler": {
+   "desen": "renk",
+   "seri_n": 2,
+   "zincir": false,
+   "tetik": "seri_sonu",
+   "trend_ma": 50,
+   "short": false,
+   "hedef_r": 2.0,
+   "zaman_cikisi_mum": 3
+  },
+  "cikis_ayarlari": null,
+  "not": "YAKLAŞIK: 2 gün düşüş + yükseliş trendi (SMA50); hacim azalması ve %5-8 hedef kodlanmadı; zaman çıkışı ~2.5 gün -> 3 mum (1d TF)."
+ }
+]
