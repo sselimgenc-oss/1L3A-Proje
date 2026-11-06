@@ -42,7 +42,7 @@ import pandas as pd
 from motor.strateji import gostergeler as g
 from motor.strateji.cikislar import CikisAyarlari
 from motor.strateji.htf import ust_zaman
-from motor.strateji.onceki._ortak import cerceve, hacim_serisi, olay, yone_gore_cikis
+from motor.strateji.onceki._ortak import cerceve, hacim_serisi, olay
 from motor.strateji.temel import Strateji
 
 
@@ -124,9 +124,8 @@ class Kirilim4S(Strateji):
         if m:
             cl |= kap < du.shift(1).rolling(m, min_periods=m).min()
             cs |= kap > yu.shift(1).rolling(m, min_periods=m).max()
-        yon_ham = pd.Series(np.where(long_ok, 1, np.where(short_ok, -1, 0)), index=mumlar.index)
-        cikis = yone_gore_cikis(yon_ham, cl, cs)
-        return cerceve(mumlar.index, long_ok, short_ok, stop_l, stop_s, cikis, p["max_mum"])
+        return cerceve(mumlar.index, long_ok, short_ok, stop_l, stop_s, None, p["max_mum"],
+                       cikis_long=cl, cikis_short=cs)
 
     def cikis_var_mi(self) -> bool:
         p = self.parametreler

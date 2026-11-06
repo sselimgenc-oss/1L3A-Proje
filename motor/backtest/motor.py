@@ -23,6 +23,9 @@ Risk
     İşlem başı risk ve kaldıraç tavanı her iki modda da uygulanır.
   - limit_modu="uygula": günlük kayıp limiti mum kapanışında aşılırsa açık pozisyon sonraki açılışta
     `stop_kayma_bps` ile kapanır (neden "gunluk_limit"); o UTC günü yeni giriş yok.
+Yönlü çıkış: sinyal tablosunda opsiyonel `cikis_long` / `cikis_short` sütunları varsa long pozisyon yalnız
+  `cikis_long` (veya genel `cikis`) ile, short yalnız `cikis_short` (veya `cikis`) ile kapanır. Sütunlar yoksa
+  `cikis` her iki yönü kapatır (eski davranış).
 Zorunlu çıkış: strateji.cikis_var_mi() False ve CikisAyarlari'nda hiç çıkış yoksa ValueError.
 Muhasebe Decimal ile yapılır; çıktı tablosu float'tır.
 """
@@ -164,6 +167,11 @@ def backtest(mumlar: pd.DataFrame, strateji: Strateji, ayarlar: MotorAyarlari = 
     s_stop = sig["stop"].to_numpy(dtype=float)
     s_hedef = sig["hedef"].to_numpy(dtype=float)
     s_cikis = sig["cikis"].to_numpy(dtype=bool)
+    # Yönlü çıkış: long için cikis | cikis_long, short için cikis | cikis_short (sütun yoksa yalnız cikis).
+    s_cikis_l = s_cikis | (sig["cikis_long"].fillna(False).to_numpy(dtype=bool)
+                           if "cikis_long" in sig.columns else False)
+    s_cikis_s = s_cikis | (sig["cikis_short"].fillna(False).to_numpy(dtype=bool)
+                           if "cikis_short" in sig.columns else False)
     s_zc = (sig["zaman_cikisi_mum"].to_numpy(dtype=float) if "zaman_cikisi_mum" in sig.columns
             else np.full(len(sig), np.nan))
     if np.any((s_yon != 0) & np.isnan(s_stop)):
@@ -413,7 +421,7 @@ def backtest(mumlar: pd.DataFrame, strateji: Strateji, ayarlar: MotorAyarlari = 
                 bekleyen_cikis = "kill_switch"
             elif gunluk_blok and not olc:
                 bekleyen_cikis = "gunluk_limit"
-            elif s_cikis[i]:
+            elif (s_cikis_l[i] if p.yon == 1 else s_cikis_s[i]):
                 bekleyen_cikis = "sinyal"
             elif cks.zaman_doldu(p.tutulan, p.zaman_limit):
                 bekleyen_cikis = "zaman"

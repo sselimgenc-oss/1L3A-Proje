@@ -4,7 +4,12 @@ sinyaller(mumlar) vektörel çalışır ve mumlarla AYNI indeksli bir DataFrame 
   yon               1 long, -1 short, 0 yok
   stop              fiyat; yon != 0 ise zorunlu
   hedef             fiyat veya NaN
-  cikis             bool: açık pozisyonu kapat
+  cikis             bool: açık pozisyonu kapat (yönden bağımsız, long ve short'u kapatır)
+  cikis_long        (opsiyonel) bool: yalnız açık LONG pozisyonu kapat
+  cikis_short       (opsiyonel) bool: yalnız açık SHORT pozisyonu kapat
+                    Motor: long pozisyon `cikis_long` VEYA `cikis` ile, short `cikis_short` VEYA `cikis` ile
+                    kapanır. İki sütun da yoksa davranış yalnız `cikis`tir. Yönlü çıkışı strateji "sanal
+                    pozisyon / son giriş yönü" ile kestirmemeli; her mumda koşulu yazıp motora bırakmalı.
   zaman_cikisi_mum  (opsiyonel) int/NaN
 Sinyal mum KAPANIŞINDA hesaplanır; motor bir sonraki mumun açılışında işlem yapar.
 Gelecek verisine bakmak (lookahead) yasaktır.

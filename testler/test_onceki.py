@@ -178,7 +178,7 @@ def test_4s_kirilim_short_ayna_ve_kapali():
 
 
 def test_4s_ema_cikis_yonlu():
-    """Long pozisyon: kapanış EMA altına inince cikis; short pozisyon aynı barlarda cikis olmaz."""
+    """Long için kapanış EMA altına inince cikis_long; aynı barlarda cikis_short olmaz (yönlü çıkış)."""
     kap = _yatay()
     kap[250] = 105.0
     hc = np.ones(300)
@@ -187,7 +187,9 @@ def test_4s_ema_cikis_yonlu():
     df = mumlar_kapanistan(kap, "4h", genlik=0.1, hacim=hc)
     sig = Kirilim4S(ema_trend=20, gunluk_ema=0).sinyaller(df)
     assert sig.yon.iloc[250] == 1
-    assert sig.cikis.iloc[251:].any() and not sig.cikis.iloc[:250].any()
+    assert sig.cikis_long.iloc[251:].any()
+    assert not (sig.cikis_long & sig.cikis_short).any()
+    assert not sig.cikis.any()
 
 
 # ----------------------------------------------------------------------------- kapitülasyon
@@ -303,7 +305,7 @@ def test_kgt_4s_trend_cikisi():
     s = Kgt(cpr_esik=100.0, pencere_bit=24)      # CPR filtresi pratikte kapalı
     sig = s.sinyaller(df)
     assert (sig.yon == 1).any()
-    assert sig.cikis.iloc[1200:].any() and not sig.cikis.iloc[:1000].any()
+    assert sig.cikis_long.iloc[1200:].any() and not sig.cikis_long.iloc[:1000].any()
 
 
 # ----------------------------------------------------------------------------- S1
