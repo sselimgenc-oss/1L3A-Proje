@@ -1,0 +1,535 @@
+TradingView – En iyi performanslı 100 strateji
+Hazırlanma: 13.10.2026 · Taranan strateji: 1138 · Sayfası okunan: 1137 · Kazanma oranı / kar faktörü / Sharpe paylaşan: 132
+
+Yöntem
+Yalnızca strateji türündeki betikler tarandı (tradingview.com/scripts, strateji filtresi; ayrıca etiket sayfaları, 3Commas ve Skyrexio yayınları ile web araması). TradingView'ın
+"Strateji raporu" sekmesi sayfa metninde bulunmadığından değerler yazarların açıklamada paylaştığı backtest sonuçlarından alındı; doğrulanmadılar. Hiç rakam
+paylaşmayan stratejiler listeye giremedi.
+Skor (0–100) = ağırlıklı ortalama × güvenilirlik × kapsam. Kar faktörü (ağırlık %45): log(PF)/log(4), PF ≥ 4 tam puan. Kazanma oranı (%30): %30 → 0, %80 ve üzeri → tam puan.
+Sharpe (%25): 2,5 ve üzeri tam puan. Eksik metriklerin ağırlığı diğerlerine dağıtılır. Güvenilirlik: işlem sayısına göre (200+ işlem = 1,0; az işlemde 0,4'e kadar düşer; işlem sayısı
+bilinmiyorsa 0,8). Kapsam: tek metrik 0,8, iki metrik 0,95, üçü birden 1,0.
+Dikkat: DCA/grid stratejileri (ör. 3Commas) yüksek kazanma oranı ve kar faktörü gösterir ama net kârları küçük, riskleri kuyrukta saklıdır. Yazar beyanları farklı semboller,
+dönemler, komisyon ve kaldıraç varsayımlarıyla üretilmiştir; birbirleriyle birebir karşılaştırılamaz. Yatırım tavsiyesi değildir.
+
+#   Skor   Strateji / yazar                            Kazanma Kar f.   Sharpe Net kâr    Maks.     İşlem   Sembol · TF · dönem              Beğeni   Kaynak / not
+                                                       %                       %          DD %
+
+1   95.0   [3Commas] Silicon Vault Long - INTC DCA     88.75    23.7    –       11.2      3.1       320     BITGET:INTCUSDT.P · 15m · Jan    36       Net Profit: +55.96 USDT (+11.19%) ... Percent
+           Strategy                                                                                         2025 - May 2026 (stated                   Profitable: 88.75% (284 / 320)
+           3Commas                                                                                          inconsistently)                           figures from description; DCA strategy (very high PF
+                                                                                                                                                      typical of averaging); open-source
+
+2   95.0   [3Commas] Equity Pulse Long - DCA on        86.42    10.54   –       6.7       3.1       243     BITGET:GOOGLUSDT.P · 15m ·       –        Net Profit: +33.57 USDT (+6.71%) ... Max Drawdown:
+           Tokenized Stocks                                                                                 2025-08-26 to 2026-05-15                  16.37 USDT (3.11%) ... Percent Profitable: 86.42%
+           3Commas                                                                                                                                    (210 / 243) ... Total Closed Trades: 243
+                                                                                                                                                      PF 10.54 in results but text also cites 'Profit Factor
+                                                                                                                                                      (8.78)' - inconsistent; long-only DCA
+
+3   86.0   Dual RSI DCA - Long Strategy                82.64    11.7    –       4.5       0.7       121     BYBIT:HYPEUSDT.P · 3m · Feb 23   498      Percent Profitable: 82.64% (100 / 121) ... Profit
+           3Commas                                                                                          2026 - May 20 2026                        Factor: 11.703 ... Net Profit: +450.18 USDT (+4.50%)
+                                                                                                                                                      figures from description; short ~3 month test;
+                                                                                                                                                      open-source
+
+4   81.9   ETH DCA Strategy [3Commas & Quantpilot]     71.64    7.51    –       14.5      4.4       134     BYBIT:ETHUSDT.P · 4H ·           30       Net Profit: +14,518.03 USDT (+14.52%) ... Win rate
+           3Commas                                                                                          2024-01-01 to 2026-07                     71.64% (96/134), Profit factor 7.513
+                                                                                                                                                      figures from description; optimized in-sample config
+                                                                                                                                                      (RSI<36, TP 4.5%); baseline: WR 68.82%, PF 5.019,
+                                                                                                                                                      NP 5.79%, DD 3.83%, 93 trades
+
+5   80.7   INJ DCA Long Strategy [3Commas &            82.22    17.89   –       15.8      5.7       90      BYBIT:INJUSDT.P · 4h · 2024-01-01 –       Percent Profitable: 82.22% (74 / 90); Profit Factor:
+           QuantPilot]                                                                                      to 2026-07-16                             17.886
+           3Commas                                                                                                                                    in-sample optimized TP 9%; baseline 71.43% PF
+                                                                                                                                                      4.925
+
+6   79.0   [3Commas] Gold Vault Long                   80.49    6.15    –       0.9       1.7       82      BYBIT:XAUTUSDT · 2h · Apr 11     15       Percent Profitable: 80.49% (66 / 82) ... Profit Factor:
+           3Commas                                                                                          2025 - May 16 2026                        6.15 ... Net Profit: +4.66 USDT (+0.93%)
+                                                                                                                                                      figures from description; DCA; open-source
+
+7   78.9   [3Commas] TAO RSI Oversold Doubling DCA -   77.53    7.26    –       7.6       6.3       89      BYBIT:TAOUSDT.P · 4h ·           16       Percent Profitable: 77.53% (69 / 89) ... Profit Factor:
+           Long Strategy                                                                                    2024-04-11 to 2026-06-15                  7.259 ... Net Profit: +7,556.08 USDT (+7.56%) ... Max
+           3Commas                                                                                                                                    Equity Drawdown: 6,321.40 USDT (6.29%)
+                                                                                                                                                      figures from description; author notes <100 trades;
+                                                                                                                                                      open-source
+
+8   78.9   BTC DCA Strategy [3Commas & QuantPilot]     76.34    10.45   –       9.2       3.7       93      BYBIT:BTCUSDT.P · 4h ·           –        Net Profit: +9,250.25 USDT (+9.25%) ... Percent
+           3Commas                                                                                          2024-01-01 to 2026-07-17                  Profitable 76.34% (71 / 93), Profit Factor 10.454
+                                                                                                                                                      in-sample optimized; baseline WR 70.97% PF 4.028
+
+
+
+
+                                                                                                                                                                                                       Sayfa 1
+#    Skor   Strateji / yazar                                Kazanma Kar f.   Sharpe Net kâr   Maks.   İşlem   Sembol · TF · dönem               Beğeni   Kaynak / not
+                                                            %                       %         DD %
+
+9    78.8   HBAR RSI Strategy [3Commas]                     82.72    11.25   –      3.9       0.9     81      BYBIT:HBARUSDT.P · 4H ·           36       Net Profit: +3,902.32 USDT (+3.90%) ... Max Equity
+            3Commas                                                                                           2024-01-01 to 2026-07-02                   Drawdown: 938.07 USDT (0.92%) ... Percent
+                                                                                                                                                         Profitable: 82.72% (67 / 81) ... Profit Factor: 11.248
+                                                                                                                                                         figures from description; long-only DCA, no stop loss;
+                                                                                                                                                         low net profit
+
+10   78.2   BNB Grid Bot - Long Strategy                    72.42    3.06    –      13.2      5.4     330     BYBIT:BNBUSDT.P · 15m ·           34       Net Profit: +1,316.40 USDT (+13.16%)
+            3Commas                                                                                           2026-02-08 to 2026-06-02                   grid bot long
+
+11   77.9   [3Commas] Triple RSI DCA Long - Risk            73.08    3.91    –      13.3      5.5     104     OKX:COINUSDT.P · 3m ·             35       Net Profit: +26.56 USDT (+13.28%)
+            Adjusted Averaging Strategy                                                                       2026-02-26 to 2026-05-07                   DCA long; signal TFs 5m/30m
+            3Commas
+
+12   76.0   CASCADE DCA - Spot Long Strategy                89.71    23.97   –      –         –       –       AIOTUSDT · 1H · 13 months         37       AIOTUSDT | 13 months | 89.71% | 23.97 | +$816.92
+            neurodoc                                                                                                                                     multiple symbols tested — headline shown; 8 Binance
+                                                                                                                                                         altcoin pairs, WR 76-93.6%, PF 1.87-23.97; figures
+                                                                                                                                                         from description table
+
+13   76.0   Hammer Long strategy with filtered and          90       7.42    –      26.9      –       –       RENUSDT                           –        Percent profitable 90%, profit factor 7.418, net profit
+            enforced alerts                                                                                                                              26.95%
+            Skyrexio                                                                                                                                     invite-only; no trade count/period
+
+14   75.4   Mutanabby_AI | ONEUSDT_MR1                      74.68    4.02    0.36   417.7     51.1    237     BINANCE:ONEUSDT · 1H · Jun        135      ONEUSDT Mean-Reversion Strategy | 74.68% Win
+            Mutanabby_AI                                                                                      2019 - Dec 2025                            Rate | 417% Net Profit
+                                                                                                                                                         B&H -80.44%; comments counter ambiguous
+                                                                                                                                                         (possibly doubled digit)
+
+15   74.9   XRP RSI Strategy [3Commas]                      76       13.06   –      3.5       1       75      BYBIT:XRPUSDT.P · 4h ·            –        Percent Profitable: 76.00% (57 / 75); Profit Factor:
+            3Commas                                                                                           2024-01-01 to 2026-06-29                   13.058
+                                                                                                                                                         DCA, no SL
+
+16   74.6   Bullish Divergent Bar DCA Strategy [Skyrexio]   82.64    2.95    –      9.3       6.2     121     2025-01-01 to 2026-01-01          –        Total Trades: 121 (82.64% win rate)
+            Skyrexio                                                                                                                                     DD = max accumulated loss
+
+17   74.4   Vol-Target Trend Engine                         67.7     3.33    –      3862      41.9    155     TQQQ · 1D · Feb 2010 - Aug 2026   56       +3,862% realized net, profit factor 3.33, 155
+            mateosandoval1025                                                                                                                            rebalance events (67.7% profitable), max drawdown
+                                                                                                                                                         41.9%
+                                                                                                                                                         trades = rebalance events
+
+18   74.2   BCH RSI Strategy [3Commas]                      87.79    2.82    –      4.6       1.7     131     BYBIT:BCHUSDT.P · 15m ·           –        Net Profit: +462.89 USDT (+4.63%) ... Max Equity
+            3Commas                                                                                           2025-05-01 to 2026-06-23                   Drawdown: 173.62 USDT (1.73%) ... Total Closed
+                                                                                                                                                         Trades: 131 ... Percent Profitable: 87.79% (115 / 131)
+                                                                                                                                                         ... Profit Factor: 2.821
+                                                                                                                                                         short-only DCA
+
+19   74.0   ETH RSI Strategy [3Commas]                      68.82    5.02    –      5.8       3.8     93      BYBIT:ETHUSDT.P · 4h ·            –        Percent Profitable: 68.82% (64 / 93); Profit Factor:
+            3Commas                                                                                           2024-01-01 to 2026-06-28                   5.019
+                                                                                                                                                         DCA, no SL
+
+20   73.4   [3Commas] DOT RSI Reversal DCA - Short          88.55    2.76    –      3.9       1.6     131     BYBIT:DOTUSDT.P · 3m ·            20       Percent Profitable: 88.55% (116 / 131) ... Profit
+            Strategy                                                                                          2026-03-23 to 2026-06-17                   Factor: 2.764 ... Net Profit: +389.13 USDT (+3.89%)
+            3Commas                                                                                                                                      ... Max Equity Drawdown: 165.35 USDT (1.62%)
+                                                                                                                                                         figures from description; open-source
+
+21   72.8   JUP RSI Long Strategy [3Commas]                 69.88    5.66    –      4         1.6     83      BYBIT:JUPUSDT.P · 4H ·            46       Net Profit: +3,990.21 USDT (+3.99%)
+            3Commas                                                                                           2024-01-31 to 2026-06-25                   DCA long-only
+
+22   71.9   POL RSI Long Strategy [3Commas]                 72.22    7.9     –      3.6       0.9     72      BYBIT:POLUSDT.P · 4H ·            –        Net Profit: +3,583.76 USDT (+3.58%) ... Max Equity
+            3Commas                                                                                           2024-09-13 to 2026-06-24                   Drawdown: 944.08 USDT (0.94%) ... Total Closed
+                                                                                                                                                         Trades: 72 ... Percent Profitable: 72.22% (52 / 72) ...
+                                                                                                                                                         Profit Factor: 7.9
+                                                                                                                                                         DCA long-only
+
+
+
+
+                                                                                                                                                                                                         Sayfa 2
+#    Skor   Strateji / yazar                            Kazanma Kar f.   Sharpe Net kâr   Maks.   İşlem   Sembol · TF · dönem             Beğeni   Kaynak / not
+                                                        %                       %         DD %
+
+23   71.4   GRAM RSI Strategy [3Commas]                 69.23    4.79    –      3.8       2.2     78      GRAMUSDT · 4h · 2024-01-01 to   –        Percent Profitable: 69.23% (54 / 78)
+            3Commas                                                                                       2026-07-03                               DCA, no SL
+
+24   70.2   [3Commas] XRP Grid Bot - Long Strategy      66.54    2.81    –      9.5       5.8     269     BYBIT:XRPUSDT.P · 15m ·         17       Percent Profitable: 66.54% (179 / 269) ... Profit
+            3Commas                                                                                       2025-04-01 to 2026-06-13                 Factor: 2.809 ... Net Profit: +952.38 USDT (+9.52%)
+                                                                                                                                                   ... Max Equity Drawdown: 662.20 USDT (5.78%)
+                                                                                                                                                   figures from description; open-source
+
+25   70.1   SOL RSI DCA Strategy [3Commas & QuantPilot] 67.53    4.58    –      5.2       5.5     77      BYBIT:SOLUSDT.P · 4H ·          38       Percent Profitable: 67.53% (52 / 77) ... Profit Factor:
+            3Commas                                                                                       2024-01-01 to 2026-07                    4.582 ... Net Profit: +5,178.77 USDT (+5.18%)
+                                                                                                                                                   figures from description; WR/PF are baseline config
+                                                                                                                                                   (RSI<28, TP 3%); optimized config NP +10.40%, DD
+                                                                                                                                                   5.32%, WR/PF not reported
+
+26   69.8   XMR Grid Bot - Long Strategy                72.71    2.48    –      14.2      3.6     733     BYBIT:XMRUSDT.P · 15m ·         26       Net Profit: +1,418.07 USDT (+14.18%); Max Equity
+            3Commas                                                                                       2026-02-22 to 2026-05-30                 Drawdown: 375.32 USDT (3.59%)
+                                                                                                                                                   figures from description
+
+27   68.7   BTC RSI Strategy [3Commas]                  70.97    4.03    –      3.1       3.8     62      BYBIT:BTCUSDT.P · 4h ·          –        Percent Profitable: 70.97% (44 / 62); Profit Factor:
+            3Commas                                                                                       2024-01-01 to 2026-06-29                 4.028
+                                                                                                                                                   DCA, no SL; same as baseline in 5Tg2Es4G
+
+28   67.8   ATOM RSI Strategy [3Commas]                 70.24    3.42    –      4.7       4.6     84      BYBIT:ATOMUSDT.P · 4H ·         –        Net Profit: +4,739.50 USDT (+4.74%) ... Max Equity
+            3Commas                                                                                       2024-01-01 to 2026-06-24                 Drawdown: 4,608.66 USDT (4.57%) ... Total Closed
+                                                                                                                                                   Trades: 84 ... Percent Profitable: 70.24% (59 / 84) ...
+                                                                                                                                                   Profit Factor: 3.417
+                                                                                                                                                   long-only DCA
+
+29   67.6   [3Commas] BCH Overbought RSI Fade - Short   84.38    2.21    –      4         1.8     160     BYBIT:BCHUSDT.P · 5m ·          40       Percent Profitable: 84.38% (135 / 160)
+            Strategy                                                                                      2026-01-26 to 2026-06-19                 short-only
+            3Commas
+
+30   67.0   TON Grid Bot - Long Strategy                60.81    2.89    –      10        3       768     BINANCE:TONUSDT · 15m ·         –        Percent Profitable: 60.81% (467 / 768); Profit Factor:
+            3Commas                                                                                       2026-01-23 to 2026-05-23                 2.888; Net Profit: +1,001.46 USDT (+10.01%)
+                                                                                                                                                   grid bot
+
+31   66.8   XMR RSI Short Strategy [3Commas]            85.71    2.01    –      5.6       1.8     238     BYBIT:XMRUSDT.P · 5m ·          –        Net Profit: +559.02 USDT (+5.59%) ... Max Equity
+            3Commas                                                                                       2026-01-26 to 2026-06-20                 Drawdown: 188.33 USDT (1.79%) ... Total Closed
+                                                                                                                                                   Trades: 238 ... Percent Profitable: 85.71% (204 / 238)
+                                                                                                                                                   ... Profit Factor: 2.013
+                                                                                                                                                   short-only DCA
+
+32   66.4   RSI Oversold AO - Long Strategy             77.27    5.79    –      1.3       1       44      BINANCE:DOGEUSDT · 1H ·         26       Percent Profitable: 77.27% (34 / 44); Net Profit:
+            3Commas                                                                                       2026-02-01 to 2026-05-28                 +126.22 USDT (+1.26%)
+                                                                                                                                                   figures from description
+
+33   64.9   ETH Grid Bot - Long Strategy                67.32    2.43    –      11.3      4.1     355     BYBIT:ETHUSDT.P · 15m ·         19       Net Profit: +1,133.70 USDT (+11.34%); Max Equity
+            3Commas                                                                                       2026-02-08 to 2026-05-31                 Drawdown: 422.86 USDT (4.08%)
+                                                                                                                                                   figures from description
+
+34   64.7   [3Commas] EURUSD Grid Bot - Long Strategy   62.35    2.83    –      0.6       0.2     162     KRAKEN:EURUSD · 15m ·           10       Percent Profitable: 62.35% (101 / 162) ... Profit
+            3Commas                                                                                       2025-04-01 to 2025-05-25                 Factor: 2.832 ... Net Profit: +121.76 USD (+0.61%) ...
+                                                                                                                                                   Max Equity Drawdown: 49.94 USD (0.25%)
+                                                                                                                                                   figures from description; short test window;
+                                                                                                                                                   open-source
+
+35   64.0   DIY Custom Strategy Builder [ZP] - v1       80       –       –      –         –       –                                       97       Win Rate: around 80%
+            (Strategy)                                                                                                                             figures from description; approximate claim, no
+            maris_schmidlin                                                                                                                        symbol/period
+
+36   64.0   RSI-Gauss-Velocity-Strategy-WiP             –        5.78    –      45383     20.3    –       Nov 2014 - Mar 2026             38       Total P&L: Increased from +2,610% to +45,383%.
+            RS374                                                                                                                                  optimized; original PF 5.69 / +2,610%; symbol not
+                                                                                                                                                   stated (BTC/ETH target)
+
+
+
+
+                                                                                                                                                                                                    Sayfa 3
+#    Skor   Strateji / yazar                              Kazanma Kar f.   Sharpe Net kâr   Maks.   İşlem   Sembol · TF · dönem                 Beğeni   Kaynak / not
+                                                          %                       %         DD %
+
+37   64.0   Flawless Victory Strategy - 15min BTC Machine –        –       7.5    –         –       –       BTC (Binance) · 15m · ~1 year       –        The first version has a Sharpe Ratio of 7.5 which is
+            Learning Strategy                                                                               (in-sample)                                  amazing
+            Trebor_Namor                                                                                                                                 v2 with SL/TP Sharpe 2.5; re-optimized v1 13.5
+                                                                                                                                                         (release notes); in-sample ML optimization
+
+38   63.3   Mean Reversion Setup LliterH                  73.05    2.1     –      –         14.8    1232    S&P 500, Nasdaq, XAUUSD ·           53       Win Rate: 73.05% ... Max Drawdown : 14.82%
+            LliterH                                                                                         4H/1D · 2006-2026                            figures from description; aggregate over multiple
+                                                                                                                                                         symbols (SPX, NDX, Gold) and timeframes;
+                                                                                                                                                         open-source
+
+39   63.2   Compression Breakout System                   59       4.33    –      899       14.4    –       AAPL · 1D · 2005-2026               46       On AAPL daily 2005-2026 the default configuration
+            mateosandoval1025                                                                                                                            shows +899% net, profit factor 4.33, 59% winners,
+                                                                                                                                                         max drawdown 14.4%.
+                                                                                                                                                         split-sample: 2005-15 +164% PF 3.35, 2015-26
+                                                                                                                                                         +293% PF 4.97; NVDA +658% PF 3.26; MSFT +46%
+                                                                                                                                                         PF 1.32
+
+40   62.9   [3Commas] Ether Vault Grid - ETH/USDT         63.49    2.49    –      10.9      7.1     367     BYBIT:ETHUSDT · 15m · Jan 17        12       Percent Profitable: 63.49% (233 / 367) ... Profit
+            3Commas                                                                                         2026 - May 18 2026                           Factor: 2.488 ... Net Profit: +655.01 USDT (+10.92%)
+                                                                                                                                                         figures from description; open-source
+
+41   62.5   BIST30 to S&P 500 — ATR Momentum Rider        –        3.46    –      39.3      –       102     5 index futures (Mini-DAX, ES,      17       Median profit factor: 3.46 versus 1.94 without the
+            newton61                                                                                        RTY, STOXX50, Nikkei mini) · 1D ·            slope filter
+                                                                                                            Jan 2024-Jul 2026 held-out                   figures from author's description; median across 5
+                                                                                                                                                         futures (held-out); return/maxDD ratio 2.32; BIST
+                                                                                                                                                         stress test median PF 0.77; no commissions
+
+42   62.0   XAU Grid Bot - Long Strategy                  67.27    2.27    –      1         0.6     556     BYBIT:XAUTUSDT · 15m · Sep 1        45       Percent Profitable: 67.27% (374 / 556) ... Profit
+            3Commas                                                                                         2025 - May 21 2026                           Factor: 2.267 ... Net Profit: +101.99 USDT (+1.02%)
+                                                                                                                                                         figures from description; open-source
+
+43   60.4   SOL RSI DCA - Long Strategy                   86.21    22.26   –      0.8       0.6     29      BINANCE:SOLUSDT · 1H ·              –        Net Profit: +82.90 USDT (+0.83%) ... Max Equity
+            3Commas                                                                                         2026-02-16 to 2026-06-01                     Drawdown: 63.27 USDT (0.63%) ... Percent Profitable:
+                                                                                                                                                         86.21% (25 / 29) ... Profit Factor: 22.256
+                                                                                                                                                         small sample; long-only DCA
+
+44   57.4   Strict 1-Trade/Day SMC + ORB                  67       3.1     –      50        10      59      NQ · last 30 days                   107      best result on nq last 30days 59 trades, P/L +50%,
+            Ross1992gg                                                                                                                                   max drawdown 10%, 67% win rate(40/59), profit
+                                                                                                                                                         factor 3.1.
+                                                                                                                                                         'best result', very short window
+
+45   57.0   [3Commas] SOL RSI Reversal DCA - Short        87       1.96    –      2.1       2.1     100     BYBIT:SOLUSDT.P · 3m ·              18       Net Profit: +208.29 USDT (+2.08%) ... Percent
+            Strategy                                                                                        2026-03-16 to 2026-06-08                     Profitable: 87.00% (87 / 100) ... Profit Factor: 1.955 ...
+            3Commas                                                                                                                                      Max Equity Drawdown: 214.94 USDT (2.11%)
+                                                                                                                                                         figures from description; open-source
+
+46   56.6   [Bybit BTCUSD.P] 7Years Backtest Results.     79.17    8       –      2609.1    7       24      BYBIT:BTCUSD.P · 1D ·               14       Cumulative Return: 2,609.14% (compounded growth
+            2,609% +Non-Repainting                                                                          2018-11-14 to 2025-11-08                     over 7 years)
+            SystematicAtlas                                                                                                                              invite-only/protected; figures from description; only
+                                                                                                                                                         24 trades; boosts/comments unlabeled on page;
+                                                                                                                                                         0.333% commission
+
+47   56.1   Gap Filling Strategy                          65.07    –       –      –         –       272     AMD · 15m                           1400     Profitability: 65.07 %
+            alexgrover                                                                                                                                   also NVDA 60.27% / 297 trades (net -$215.54),
+                                                                                                                                                         Seagate 65.9% / 261 trades (net -$4.32); AMD net
+                                                                                                                                                         -$12.22; small-$ losses despite high win rate;
+                                                                                                                                                         comments counter a…
+
+48   55.4   [3Commas] AMZN RSI Oversold Doubling DCA - 90.91       22      –      0.8       0.2     22      BITGET:AMZNUSDT.P · 4H ·            –        Net Profit: +807.71 USDT (+0.81%) ... Max Equity
+            Long Strategy                                                                                   2025-08-26 to 2026-06-05                     Drawdown: 199.15 USDT (0.20%) ... Total Closed
+            3Commas                                                                                                                                      Trades: 22 ... Percent Profitable: 90.91% (20 / 22) ...
+                                                                                                                                                         Profit Factor: 21.997
+                                                                                                                                                         small sample; long-only DCA
+
+
+
+
+                                                                                                                                                                                                           Sayfa 4
+#    Skor   Strateji / yazar                            Kazanma Kar f.   Sharpe Net kâr   Maks.   İşlem   Sembol · TF · dönem                  Beğeni   Kaynak / not
+                                                        %                       %         DD %
+
+49   55.1   NORN WEAVE | FEHU                           70.7     1.8     –      25.4      1.7     557     DOGE · 2H · Jan 2021 - Mar 2026      70       Net profit +25.4%, max drawdown 1.71%, win rate
+            mm_mitsuya                                                                                                                                  70.7%, profit factor 1.80, total trades 557.
+
+50   55.0   Gold NY ORB v19 Close 20:00                 73       –       –      –         –       –       XAUUSD · 15m · training set (no      58       Results (training set): ~73% win rate on XAUUSD
+            YukozB                                                                                        dates)                                        15m
+                                                                                                                                                        approximate in-sample win rate from description
+
+51   53.7   BTC MTF Engulfing Flip Strategy (1H, 2X)    41.9     4.63    –      3539      19.7    74      BTCUSDT.P · 1H · Sep 2019 - Apr      7        Win Rate: 41.9% (31W / 43L) ... Profit Factor: 4.63 ...
+            jagadeeshmanne                                                                                2026                                          (+3,539%) ... Max DD: -19.7%
+                                                                                                                                                        figures from description (author's Python backtest, 2x
+                                                                                                                                                        leverage)
+
+52   52.8   Simplified 30m Event Strategy - Reverse     63       –       –      –         –       8600    30m · ~1 year                        –        This is a 30-minute event contract script with a 63%
+            mbdalq                                                                                                                                      win rate in backtesting over a year. With 8600 trades
+                                                                                                                                                        a year
+                                                                                                                                                        event-contract (binary) style; counters ambiguous
+
+53   52.8   ETH Momentum Breakout Strategy              56       3.08    –      197       14      –       ETH · 2H · Oct 2020 - Feb 2026       –        Net Profit: ~$29,700 on $10,000 (197%) ... Win Rate:
+            [geektrade.online]                                                                                                                          56% (wins 2.4x larger than losses) ... Profit Factor:
+            grinaypps                                                                                                                                   3.08 ... Max Drawdown: ~$4,200 (14% of peak)
+                                                                                                                                                        intro claims 65% win rate (inconsistent); ~12
+                                                                                                                                                        trades/year; CAGR ~29%
+
+54   52.7   MultiLayer Awesome Oscillator Saucer        42.99    3.36    –      28.4      3       107     BTCUSDT · 3h · 2023-01-01 to         –        Net Profit: +2838.58 USDT (+28.39%)
+            Strategy [Skyrexio]                                                                           2024-11-25                                    DD = max accumulated loss
+            Skyrexio
+
+55   51.6   [3Commas] XLM Grid Bot - Long Strategy      62.27    1.93    –      21.7      7.5     1076    BYBIT:XLMUSDT.P · 15m ·              –        Percent Profitable: 62.27% (670 / 1,076); Profit
+            3Commas                                                                                       2026-02-01 to 2026-06-09                      Factor: 1.932
+                                                                                                                                                        grid bot
+
+56   51.5   Silver Risk Management outperformed Buy &   –        3.7     –      326       16      37      Silver · 1D · 2021-01-01 - present   732      Strategy return: 326% ... Profit factor: 3.7 ... Max
+            Hold                                                                                                                                        equity drawdown: 16% ... Total trades: 37
+            CuriousMacroX                                                                                                                               figures from description; Buy&Hold 179%;
+                                                                                                                                                        open-source; counts from script page
+
+57   51.4   SPY Bear Regime Short System                70.16    –       –      –         –       –       SPY · 1D · 1994-2025                 –        Win rate: 70.16%
+            thetrading                                                                                                                                  short system; per-year returns listed for
+                                                                                                                                                        2000/2001/2002/2008/2022
+
+58   48.7   BTC MTF Engulfing Flip + Pyramid Strategy   34.2     5.54    –      8308      20.3    73      BTCUSDT.P · 1H · Sep 2019 - Apr      21       Win Rate: 34.2% (25W / 48L) ... Profit Factor: 5.54 ...
+            (1H, 2X)                                                                                      2026                                          Max DD: -20.3% ... (+8,308%)
+            jagadeeshmanne                                                                                                                              figures from description (author's Python backtest, 2x
+                                                                                                                                                        leverage); V3 release notes: 62 trades PF 7.29 DD
+                                                                                                                                                        20.6%
+
+59   48.2   BTC Mean Reversion - RSI + Bollinger        60.1     –       –      –         –       1181    BTCUSD · 10s · 2026-02-16 to         –        Total trades: 1,181 ... Profitable trades: 710 / 1,181
+            connorgeary150                                                                                2026-02-23                                    (≈ 60.1%)
+                                                                                                                                                        one-week window
+
+60   47.6   VIX MACD Long                               67.1     –       –      –         –       70      Nikkei 225 (VIX MACD signal)         11          | 67.1% ...         | 70 ... net +921,137 , max
+            ryoma3119                                                                                                                                   DD approx -173,434
+                                                                                                                                                        figures from description (Japanese); profit/DD in yen
+                                                                                                                                                        only; open-source
+
+61   46.7   [3Commas] Static Geometric Grid             55.26    1.95    –      18.3      26      1026    OKX:APEUSDT · 15m · 2026-01-12 –              Net Profit: +365.72 USDT (+18.29%) ... Max
+            3Commas                                                                                       to 2026-05-14                                 Drawdown: 540.57 USDT (26.04%) ... Percent
+                                                                                                                                                        Profitable: 55.26% (567 / 1,026) ... Total Closed
+                                                                                                                                                        Trades: 1,026 ... Profit Factor: 1.952
+                                                                                                                                                        long-only spot grid
+
+62   45.8   Channel Reversion System                    64       2.28    –      104       15.2    58      QQQ · 1D · Mar 1999 - Aug 2026       35       +104% net, profit factor 2.28, 64% winners, 58
+            mateosandoval1025                                                                                                                           trades, max drawdown 15.2%
+                                                                                                                                                        SPY: +67%, PF 1.80, WR 62%, DD 8.5%
+
+
+
+                                                                                                                                                                                                         Sayfa 5
+#    Skor   Strateji / yazar                               Kazanma Kar f.    Sharpe Net kâr   Maks.   İşlem   Sembol · TF · dönem             Beğeni   Kaynak / not
+                                                           %                        %         DD %
+
+63   45.8   [3Commas] NOT Grid Bot - Long Strategy         58.26    1.81     –      32.9      12.1    1011    BYBIT:NOTUSDT.P · 15m ·         –        Percent Profitable: 58.26% (589 / 1,011); Profit
+            3Commas                                                                                           2025-04-01 to 2026-06-10                 Factor: 1.808
+                                                                                                                                                       grid bot
+
+64   44.7   RSI Dip + EMA Trend Long DCA - Strategy        74.07    1.31     –      30.8      18      779     BYBIT:XMRUSDT.P · 15m ·         13       Net Profit: +3,078.80 USDT (+30.79%)
+            3Commas                                                                                           2025-04-01 to 2026-05-26                 figures from description
+
+65   44.0   LINK Grid Bot - Long Strategy                  61.79    1.62     –      14.8      10      1285    BINANCE:LINKUSDT · 15m ·        8        Net Profit: +1,482.00 USDT (+14.82%); Max Equity
+            3Commas                                                                                           2026-02-11 to 2026-05-27                 Drawdown: 1,092.02 USDT (9.96%); Percent
+                                                                                                                                                       Profitable: 61.79% (794 / 1,285)
+                                                                                                                                                       figures from description
+
+66   43.0   LTC RSI Oversold Doubling DCA - Long           100      1661.5   –      13.9      6.5     11      COINBASE:LTCUSD · 4H ·          10       Net Profit: +13,907.58 USD (+13.91%); Percent
+            Strategy                                                                                          2022-05-01 to 2026-05-29                 Profitable: 100.00% (11 / 11)
+            3Commas                                                                                                                                    figures from description; only 11 trades, no stop loss
+
+67   42.2   ITF26 BB Fade SOL 1m                           73       1.26     –      –         3.1     245     BITGET:SOLUSDT.P · 1m ·         97       Trades : ~245 Win rate : ~73% Profit Factor : 1.26
+            mariellangsaez                                                                                    2025-05-26 to 2026-05-26                 Max drawdown : ~3.1%
+                                                                                                                                                       figures from description (approx.); 5m variant: WR
+                                                                                                                                                       ~62%, PF 1.71, DD ~1.62%, ~222 trades
+
+68   41.4   RSI-Adaptive T3 + Squeeze Momentum             47.8     2.01     –      –         5.8     181     BTCUSD · 30m · 2024-01-01 to    177      Win Rate: 47.8%
+            Strategy                                                                                          2025-07-03                               net profit 173.16 (units unspecified); DD quoted as
+            PakunFX                                                                                                                                    '5.77% or 24.91 (0.79%)' — ambiguous
+
+69   41.3   ARB RSI Short Strategy [3Commas]               80       16.19    –      5.3       4.5     10      BYBIT:ARBUSDT.P · 4H ·          –        Net Profit: +530.08 USDT (+5.30%) ... Max Equity
+            3Commas                                                                                           2023-03-23 to 2026-06-21                 Drawdown: 448.19 USDT (4.48%) ... Total Closed
+                                                                                                                                                       Trades: 10 ... Percent Profitable: 80.00% (8 / 10) ...
+                                                                                                                                                       Profit Factor: 16.189
+                                                                                                                                                       tiny sample; short-only DCA
+
+70   40.9   15 Min ORB Real Version MNQ                    71       1.62     –      27.4      11.3    –       MNQ1! · 15m · Sep 2025 - Apr    64       Profit Factor: 1.624 Win Rate: 71% Total Return:
+            NoSlJr                                                                                            2026                                     +27.36% Max Drawdown: 11.27%
+                                                                                                                                                       figures from description; open-source
+
+71   40.2   ATR_RSI_Strategy v2 with no repaint [liwei666] –        –        1.4    –         –       116     BINANCE:BTCUSDT.P · 15m         –        Sharpe ratio: 1.4, trade times: 116
+            liwei666
+
+72   39.7   AO/AC Trading Zones Strategy [Skyrexio]        39.57    2.2      –      43.8      5.4     278     BTCUSDT · 4h · 2023-01-01 to    –        Net Profit: +4374.70 USDT (+43.75%) ... Total
+            Skyrexio                                                                                          2024-12-31                               Trades: 278 (39.57% win rate)
+                                                                                                                                                       DD = max accumulated loss
+
+73   39.0   KST Strategy [Skyrexio]                        56.67    1.75     –      51.8      9.1     120     BTCUSDT · 1h · 2023-01-01 to    –        Net Profit: +5175.20 USDT (+51.75%) ... Total
+            Skyrexio                                                                                          2025-05-01                               Trades: 120 (56.67% win rate) ... Profit Factor: 1.747
+                                                                                                                                                       DD = max accumulated loss
+
+74   38.9   [3Commas] JUP Grid Bot - Long Strategy         57.34    1.55     –      18.7      11.6    865     JUPUSDT · 15m · 2026-02-06 to   –        Net Profit: +1,866.03 USDT (+18.66%) ... Max Equity
+            3Commas                                                                                           2026-06-06                               Drawdown: 1,244.70 USDT (11.60%) ... Total Closed
+                                                                                                                                                       Trades: 865 ... Percent Profitable: 57.34% (496 / 865)
+                                                                                                                                                       ... Profit Factor: 1.555
+                                                                                                                                                       long-only grid
+
+75   38.6   Bilateral Stochastic Oscillator Strategy       57.89    3.23     –      –         –       19      EURUSD · 15m                    –        EURUSD ... PP : 57.89 % ... Profit Factor : 3.228
+            alexgrover                                                                                                                                 also GBPUSD PF 0.938/55%, EURAUD 0.698/40%,
+                                                                                                                                                       EURCHF 1.103/54.17%; author says insufficient
+                                                                                                                                                       performance
+
+76   37.5   SuperTrend AI Adaptive - Strategy [BTC]        46.1     1.94     –      2091      28.2    154     BTC                             –        Total P&L: +2,091%; Profit Factor: 1.94; Win Rate:
+                                                                                                                                                       46.10% (71 of 154 trades); Max Drawdown: 28.16%
+                                                                                                                                                       fetch error on page twice; figures from
+                                                                                                                                                       /scripts/backtest/ listing excerpt
+
+
+
+
+                                                                                                                                                                                                        Sayfa 6
+#    Skor   Strateji / yazar                                Kazanma Kar f.   Sharpe Net kâr   Maks.   İşlem   Sembol · TF · dönem             Beğeni   Kaynak / not
+                                                            %                       %         DD %
+
+77   37.1   Drop's Opening Range Breakout (ORB)             68.42    3.46    0.34   11.9      1.8     19      2026-04-05 to 2026-05-28        –        Win Rate: 68.42% (13 wins out of 19 total trades) ...
+            drop_trades                                                                                                                                Profit Factor: 3.456 ... Sharpe Ratio: 0.343
+                                                                                                                                                       tiny sample; unannualized Sharpe
+
+78   36.5   SUPPORT RESISTANCE STRATEGY [5MIN TF]           60       1.8     0.49   –         –       100     NSE:TCS · 5m · 6 months         –        Profit Factor of 1.8 ,net Profit of 30,000 Rs profit ...
+            The_Algo_Engineer                                                                                                                          Sharpe Ratio : 0.49 ... Sortino Ratio : 1.4
+                                                                                                                                                       net profit 30,000 INR absolute
+
+79   36.5   MultiLayer Acceleration/Deceleration Strategy   36.94    2.39    –      21.1      3       111     BTCUSDT · 3h · 2023-01-01 to    –        Net Profit: +2108.85 USDT (+21.09%)
+            [Skyrexio]                                                                                        2024-11-01                               DD = max accumulated loss
+            Skyrexio
+
+80   36.1   FIL Grid Strategy [3Commas]                     57.96    1.43    –      16.2      15.1    1294    BYBIT:FILUSDT.P · 15m ·         –        Net Profit: +1,624.42 USDT (+16.24%) ... Max Equity
+            3Commas                                                                                           2025-05-01 to 2026-06-26                 Drawdown: 1,838.06 USDT (15.13%) ... Total Closed
+                                                                                                                                                       Trades: 1,294 ... Percent Profitable: 57.96% (750 /
+                                                                                                                                                       1,294) ... Profit Factor: 1.434
+                                                                                                                                                       grid
+
+81   35.9   Ichimoku Clouds Strategy Long and Short         51.26    1.77    –      109       22.9    119     1h · 2023-01-01 to 2024-01-04   –        Net Profit: +10 901.95 USDT (+109.02%) ... Profit
+            Skyrexio                                                                                                                                   Factor: 1.775 ... Total Trades: 119 (51.26%
+                                                                                                                                                       profitability)
+                                                                                                                                                       DD is 'maximum accumulated loss'
+
+82   35.4   SuperTrend Regime Confluence                    46.4     1.8     –      824       24.6    168     BTCUSDT · 4H · Jan 2020 - Sep   442      Return +824%, max drawdown 24.55%, profit factor
+            DefinedEdge                                                                                       2026                                     1.80, win rate 46.4%, 168 trades.
+
+83   35.3   [3Commas] Alligator Strategy                    47.57    1.93    –      3.6       0.6     103     BINANCE:BTCUSDT · 1D · all      –        Percent Profitable 47.57%, Profit Factor 1.927, Net
+            3Commas                                                                                           available history                        Profit +355.68 USDT (+3.56%)
+
+84   35.0   Triple CCI Strategy MFI Confirmed [Skyrexio]    44.44    2.01    –      54.2      7.8     108     BTCUSDT · 2h · 2022-04-01 to    –        Net Profit: +5421.21 USDT (+54.21%) ... Total
+            Skyrexio                                                                                          2024-11-25                               Trades: 108 (44.44% win rate) ... Profit Factor: 2.006
+                                                                                                                                                       DD = max accumulated loss
+
+85   34.8   XAUUSD 10-Minute Strategy                       53.99    1.44    1.73   676.3     56.3    –       XAUUSD · 10m                    –        Win Rate: 53.99%; Profit Factor: 1.44; Sharpe Ratio:
+            NineLivesTrading                                                                                                                           1.726; Net Profit: $4,733.90 USD (676.27% increase)
+                                                                                                                                                       page fetch error twice; figures from
+                                                                                                                                                       /scripts/macd/page-2 listing excerpt; DD $819.75
+                                                                                                                                                       (56.33% of equity)
+
+86   34.6   Double CCI Confirmed Hull Moving Average        36.54    2.31    –      149       9.6     104     BTCUSDT · 2h · 2022-07-01 to    –        Net Profit: +14897.94 USDT (+148.98%) ... Total
+            Reversal Strategy                                                                                 2024-08-01                               Trades: 104 (36.54% win rate) ... Profit Factor: 2.312
+            Skyrexio                                                                                                                                   DD = max accumulated loss
+
+87   33.4   SMC Pro BTC - ICT Order Blocks & FVG [DOE]      45.56    1.95    –      14.4      1.4     90      BINANCE:BTCUSDT · 4H · Jan 2021 580      The Selective mode sacrifices P&L for risk control —
+            DOE_Trade                                                                                         - Feb 2026                               the maximum drawdown over 5 years was just
+                                                                                                                                                       1.23%.
+                                                                                                                                                       Aggressive mode figures; Selective mode: 29 trades,
+                                                                                                                                                       51.72% WR, +1.10%, PF 1.324, DD 1.23%
+
+88   32.0   NQ/MNQ Super Scalper [BACKTEST]                 63.7     1.23    0.51   –         –       2934    MNQ · 1m · 1 year               1100     2,934 trades | 63.7% win rate
+            Crispigino
+
+89   31.9   Hash Supertrend [Hash Capital Research]         45       2       –      –         18      –       SOL · 12H                       76       Profit Factor 2.0+ Win Rate: ~45%
+            Hash_Capital                                                                                                                               approximate (~45%, PF 2.0+, DD ~18%) on 12H; 4H
+                                                                                                                                                       PF 1.4 -> 1.6+ after optimization
+
+90   31.2   [3Commas] Trail Hunter - Reversal Long          69.7     1.25    –      0.1       0.1     66      COINBASE:BTCUSD · 1h ·          –        Percent Profitable: 69.70% (46 / 66); Profit Factor:
+            3Commas                                                                                           2025-05-12 to 2026-05-12                 1.254
+
+91   29.7   [3Commas] Turtle Strategy                       40.21    1.7     –      5.2       0.9     281     BINANCE:ETHUSDT · 4h · all      –        Net Profit: +516.87 USDT (+5.17%). Percent
+            3Commas                                                                                           available history                        Profitable: 40.21%. Profit Factor: 1.704.
+
+
+
+
+                                                                                                                                                                                                          Sayfa 7
+#     Skor   Strateji / yazar                              Kazanma Kar f.   Sharpe Net kâr   Maks.   İşlem   Sembol · TF · dönem               Beğeni   Kaynak / not
+                                                           %                       %         DD %
+
+92    29.4   Williams R Zone Scalper v1.0[BullByte]        55.05    1.29    –      5         3.1     198     BINANCE:BTCUSD · 5m ·             355      +50.70 USD (+5.05 %)
+             BullByte                                                                                        2025-03-24 to 2025-04-28                   Williams %R alone baseline: -2.09%, DD 6.00%, 543
+                                                                                                                                                        trades, 60.22% WR, PF 0.943
+
+93    29.3   [3Commas] BCH Heikin Ashi RSI Fade - Short    61.02    1.17    –      0.9       0.5     177     BINANCE:BCHUSDT · 15m ·           –        Net Profit: +87.53 USDT (+0.88%) ... Max Equity
+             Strategy                                                                                        2025-11-19 to 2026-06-03                   Drawdown: 52.55 USDT (0.52%) ... Total Closed
+             3Commas                                                                                                                                    Trades: 177 ... Percent Profitable: 61.02% (108 / 177)
+                                                                                                                                                        ... Profit Factor: 1.169
+                                                                                                                                                        short-only
+
+94    28.9   [3Commas] POL Grid Bot - Long Strategy        53.25    1.31    –      8.8       12.9    800     POLUSDT · 15m · 2026-02-06 to     –        Net Profit: +883.23 USDT (+8.83%) ... Max Equity
+             3Commas                                                                                         2026-06-04                                 Drawdown: 1,380.62 USDT (12.94%) ... Total Closed
+                                                                                                                                                        Trades: 800 ... Percent Profitable: 53.25% (426 / 800)
+                                                                                                                                                        ... Profit Factor: 1.315
+                                                                                                                                                        long-only grid
+
+95    28.2   MACD with 1D Stochastic Confirmation          44.72    1.62    –      44.7      5.5     123     BTCUSDT · 45m · 2023-01-01 to     –        Total Trades: 123 (44.72% win rate) ... Net Profit:
+             Reversal Strategy                                                                               2024-08-01                                 +2361.33 USDT (+44.72%)
+             Skyrexio                                                                                                                                   44.72 appears twice; net profit likely 23.61% (2361
+                                                                                                                                                        on 10k) - possible typo
+
+96    27.5   Liquidity Sweep + Delta Absorption [PineGen   47.83    2.23    –      5.7       2       23      BTCUSDT · 2h · Jan 1 2022 – Sep   63       Net profit: +$568.41 (+5.68%); Win rate: 47.83%
+             AI]                                                                                             19 2026                                    (11/23 trades)
+             PinegenAI                                                                                                                                  Open-source; figures from description. Small sample
+                                                                                                                                                        (23 trades).
+
+97    25.2   XGBoost Mini Strategy [The Quant Science]     54.88    1.36    –      20.1      3.3     –       2018-2026                         480      Total PnL: +2,010 USDT (+20.10%).
+             thequantscience                                                                                                                            after Sep 19 update: WR ~70%, PF ~1.41
+
+98    24.5   Trendline Breaks with Multi Fibonacci         –        1.92    0.13   1517      1.2     –                                         3000     Profit factor of 1.924 across all trades (2.153 for long
+             Supertrend Strategy                                                                                                                        positions)
+             FibonacciFlux                                                                                                                              conflicting figures: original (return 1517%+, PF 1.924,
+                                                                                                                                                        Sortino 3.691) vs addendum (PF 1.376, Sharpe 0.129,
+                                                                                                                                                        Sortino 0.262, DD 1.16%); WR '>35%'; no
+                                                                                                                                                        symbol/perio…
+
+99    23.8   BTCUSDT.P Grid Bot - Long Strategy            60.51    1.02    –      0.9       8.6     428     BYBIT:BTCUSDT.P · 15m ·           17       Percent Profitable: 60.51% (259 / 428) ... Profit
+             3Commas                                                                                         2025-04-01 to 2026-06-07                   Factor: 1.016 ... Net Profit: +90.32 USDT (+0.90%) ...
+                                                                                                                                                        Max Equity Drawdown: 924.71 USDT (8.63%)
+                                                                                                                                                        figures from description; open-source
+
+100   23.0   Fractal Breakout Trend Following Strategy     28.92    1.95    –      30.4      8.3     83      BTCUSDT · 4h · 2023-01-01 to      –        Total Trades: 83 (28.92% win rate) ... Profit Factor:
+             Skyrexio                                                                                        2024-05-01                                 1.953
+                                                                                                                                                        DD = max accumulated loss
+
+
+
+
+                                                                                                                                                                                                        Sayfa 8
+

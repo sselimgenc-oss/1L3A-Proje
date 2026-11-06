@@ -1,0 +1,311 @@
+ TradingView Strateji Araştırması
+ Performans iddiaları ve kullanıcı ilgisi yüksek 100 strateji | İnceleme tarihi: 13 Ekim 2026
+
+
+
+ Araştırmanın kapsamı
+ İki ayrı liste hazırlandı: (1) TradingView’de bulabildiğim ve yayımlanmış sayısal geriye dönük test sonuçları bulunan strateji örnekleri, kâr faktörüne göre yüksekten düşüğe; (2) TradingView
+ strateji filtresindeki popüler sıralamanın taranan bölümünde en yüksek “güçlendirme” sayısına sahip 100 kayıt.
+ Önemli: Bu çalışma yatırım tavsiyesi değildir. Backtest sonuçları strateji yazarlarının yayımladığı, farklı sembol, dönem, zaman aralığı ve varsayımlara dayanan iddialardır; bağımsız olarak
+ aynı koşullarda yeniden çalıştırılmamıştır. Geçmiş testler gelecek performansı göstermez.
+
+
+
+ Okuma notları
+ • Performans sıralaması: Yayınlarda sayısal Sharpe değeri bulamadığım için bileşik bir puan üretilemedi. Performans örnekleri açıklanmış kâr faktörüne göre sıralandı. Kazanma oranı tek
+ başına yeterli değildir; işlem sayısı, düşüş, komisyon, kayma ve dönem de incelenmelidir.
+ • Sharpe: Aşağıdaki performans örneklerinde Sharpe sayısı yayımlanmamıştı. Bu nedenle her satırda “Belirtilmemiş” yazıyor; Sharpe kriterinin karşılandığı sonucu çıkarılamaz.
+ • Popülerlik metriği: TradingView kartlarında görünen “güçlendirme” (boost) sayısı kullanıldı. Bu, beğeni/yıldız/favori sayısıyla aynı ölçü değildir. Kısaltmalı değerler (ör. 2.5K) sitede gösterildiği
+ biçimde korunmuştur.
+ • Popüler liste kapsamı: Strateji türü filtresinde popüler sıralamanın ilk 15 sayfasında görünen 360 kart tarandı; aynı olmayan kayıtlar arasından görünen güçlendirme değerine göre ilk 100
+ seçildi. Bu, TradingView’deki tüm stratejilerin evrensel sıralaması değildir. Kartta güncelleme tarihi görünen değer aynen aktarılmış, görünmeyen alan boş bırakılmıştır.
+
+
+
+ Kısa sonuç
+ Bu taramada herkese açık ve sayısal metrikleri okunabilir örnek sayısı sınırlı kaldı. Sharpe yayımlanmadığı için kriterlerin üçünün birden (kazanma oranı, kâr faktörü, Sharpe) doğrulandığı bir
+ “en iyi strateji” sıralaması sunulamıyor. Aşağıdaki ilk tablo, incelenebilir backtest iddialarını ve bağlantılarını; ikinci tablo ise popülerlik sinyali güçlü adayları verir.
+
+ 1. Yayımlanmış performans örnekleri
+ Tablo sıralaması kâr faktörüne göredir. Aynı stratejinin farklı piyasa rejimi ve zaman aralığı testleri ayrı satırdır. Net getiri “yaklaşık” olarak kaynakta verildiyse bu not tabloda korunmuştur.
+
+
+
+
+TradingView strateji taraması | 13 Ekim 2026                                                                                                                                                           Sayfa 1
+   Strateji / yazılım                    Sembol ve test bağlamı                                        İşlem     Kazanan        PF         Maks. DD        Net getiri       Sharpe           Kaynak
+
+   Alpha AI Essential - Multi-Market     ORCL | 6 saat | yayımlanan test aralığı Tem 2026 sonuna       103       93.20%         7.25       15.27%          +143.44%         Belirtilmemiş       Aç
+   Trading Strategy                      kadar
+
+   Scalping Strategy Signal v2           BTC/USDT | ayı | 30dk grafik, 4s üst zaman | Oca-Haz 2022     450       52.22%         3.461      5.34%           +258.77%         Belirtilmemiş       Aç
+
+   Scalping Strategy Signal v2           BTC/USDT | ayı | 15dk grafik, 4s üst zaman | Oca-Haz 2022     473       44.40%         3.419      3.74%           +239.80%         Belirtilmemiş       Aç
+
+   Scalping Strategy Signal v2           BTC/USDT | boğa | 30dk grafik, 4s üst zaman | Tem-Ara 2023    472       49.58%         3.140      2.34%           +116.85%         Belirtilmemiş       Aç
+
+   Scalping Strategy Signal v2           BTC/USDT | boğa | 15dk grafik, 4s üst zaman | Tem-Ara 2023    496       42.74%         3.074      1.99%           +108.00%         Belirtilmemiş       Aç
+
+   Scalping Strategy Signal v2           BTC/USDT | yatay | 15dk grafik, 4s üst zaman | Oca-Haz 2021   488       51.84%         2.924      9.59%           +340.33%         Belirtilmemiş       Aç
+
+   Scalping Strategy Signal v2           BTC/USDT | yatay | 30dk grafik, 4s üst zaman | Oca-Haz 2021   479       55.11%         2.598      7.21%           +315.42%         Belirtilmemiş       Aç
+
+   ICT Sessions & Liquidity Sweeps       NQ1! | 15dk | Eki 2025-Ağu 2026                               53        58.50%         2.18       8.90%           Belirtilmemiş    Belirtilmemiş       Aç
+   Strategy
+
+   ICT Sessions & Liquidity Sweeps       MNQ | 15dk | Eki 2025-Ağu 2026                                126       50.80%         2.01       3.40%           Belirtilmemiş    Belirtilmemiş       Aç
+   Strategy
+
+   SMC Pro BTC - ICT Order Blocks &      BTC | Aggressive ayar | Oca 2021-Şub 2026                     90        45.56%         1.95       1.36%           +14.36%          Belirtilmemiş       Aç
+   FVG [DOE]
+
+   The Rook Algo PRO                     MNQ | 15dk | May 2024-Mar 2025                                119       ~37%           1.40       Belirtilmemiş   ~+200%           Belirtilmemiş       Aç
+
+
+
+ Backtest kaynak notları
+ Alpha AI sayfasında ORCL 6 saatlik örnek için başlangıç sermayesi 40.000 USD, işlem başına tahsis %2, komisyon %0,1 ve kayma 2 tik olarak belirtilmiş. Scalping Strategy sayfası BTC/USDT için farklı piyasa rejimlerinde 15 ve 30
+ dakikalık testleri, ATR tabanlı stop/hedef varsayımlarını raporluyor. ICT Sessions sayfası 15 dakikalık ve yaklaşık 10,5 aylık örnek dönem bildiriyor; sonuçlar sembole göre değişiyor. SMC Pro satırı yazarın “Aggressive” ayarlarına
+ dayanıyor. The Rook satırındaki getiri yaklaşık değer, maksimum düşüş yayımlanmamış.
+
+
+
+
+TradingView strateji taraması | 13 Ekim 2026                                                                                                                                                                                     Sayfa 2
+ 2. Kullanıcı ilgisi yüksek 100 strateji
+ TradingView strateji filtresindeki popüler sıralama taramasında görülen güçlendirme sayısına göre azalan sırada. Başlık bağlantısı her stratejinin TradingView sayfasını açar.
+
+   Sıra       Strateji başlığı                                                                             Yazar                               Güçlendirme          Kart tarihi          TradingView
+
+   1          UT Bot v2 - ATR Trailing Stop                                                                QuantNomad                          2.5K                 Güncellendi Haz 14      Sayfayı aç
+
+   2          Sweep & Reverse | Liquidity Sweep Reversal Strategy                                          blitz_locked                        2.4K                 Eyl 11                  Sayfayı aç
+
+   3          EWO,RSI advanced Signals Strategy - Exhaustion Filter                                        Pridarasx                           1.8K                 Güncellendi Tem 3       Sayfayı aç
+
+   4          Momentum Sequence Strategy+ [Herman]                                                         helmans13                           1.1K                 Eyl 4                   Sayfayı aç
+
+   5          Ultimate Prop Firm [Artillery]                                                               ArtilleryTrades                     1.1K                 Ağu 10                  Sayfayı aç
+
+   6          ICT 10AM First FVG Daily Strategy                                                            mehmettopbas_                       916                  Güncellendi Eyl 21      Sayfayı aç
+
+   7          Bitcoin SuperFlip | Supertrend EMA Trend-Following Strategy                                  blitz_locked                        817                  Eyl 4                   Sayfayı aç
+
+   8          TP/SL Toolkit [AxeAlgo]                                                                      AxeAlgo                             810                  Ağu 13                  Sayfayı aç
+
+   9          McGinley T3 Flow Campaign [NICK789] v.1                                                      NICK789                             753                  Haz 27                  Sayfayı aç
+
+   10         Golden Trident | Swing-Anchored VWAP Trend System                                            blitz_locked                        723                  Eyl 2                   Sayfayı aç
+
+   11         TrendShift | Supertrend + ADX Regime-Adaptive Strategy                                       blitz_locked                        702                  Ağu 17                  Sayfayı aç
+
+   12         HalfTrend SNIPERMONKEY                                                                       YashikaSatya                        697                  Haz 27                  Sayfayı aç
+
+   13         Gold Breakout 15M Strategy [WillyAlgoTrader]                                                 WillyAlgoTrader                     696                  17 saat önce            Sayfayı aç
+
+   14         Sequence Snap | RSI-Confirmed Reversal Scalper                                               blitz_locked                        649                  Eyl 8                   Sayfayı aç
+
+   15         TASC 2026.08 An Ag Selling Model                                                             PineCodersTASC                      642                  Tem 21                  Sayfayı aç
+
+   16         ORB Pro | Session Breakout Scalper                                                           blitz_locked                        550                  —                       Sayfayı aç
+
+   17         Cluster Breakout Strategy v6 (Robust)                                                        ruchiragrawal                       533                  Güncellendi Haz 28      Sayfayı aç
+
+   18         Fibonacci Cloud | Multi-Timeframe Fibonacci Scanner                                          blitz_locked                        486                  Güncellendi Eyl 6       Sayfayı aç
+
+   19         XGBoost Mini Strategy [The Quant Science]                                                    thequantscience                     482                  Güncellendi Eyl 19      Sayfayı aç
+
+   20         Adaptive Dual-Engine Strategy - Momentum + Mean Reversion [BT]                               patelanishp                         467                  Güncellendi Eyl 5       Sayfayı aç
+
+   21         SuperTrend Regime Confluence                                                                 DefinedEdge                         460                  Eyl 13                  Sayfayı aç
+
+   22         Gravity Trend | ADX Strength Meter & Quality-Scored DMI System                               blitz_locked                        454                  —                       Sayfayı aç
+
+   23         MACD Pullback Sniper | Trend + ADX Filtered Strategy                                         blitz_locked                        439                  Eyl 21                  Sayfayı aç
+
+   24         Universal Strategy Feed                                                                      Options360                          424                  Güncellendi Haz 29      Sayfayı aç
+
+   25         Tomukas Elite SMC                                                                            Tomukasss                           419                  Tem 3                   Sayfayı aç
+
+
+
+
+TradingView strateji taraması | 13 Ekim 2026                                                                                                                                                             Sayfa 3
+ Kullanıcı ilgisi yüksek 100 strateji | 26-50
+ Güçlendirme sayısına göre azalan sıra devamı. Bağlantılar TradingView’deki strateji sayfalarını açar.
+
+   Sıra       Strateji başlığı                                                                           Yazar                  Güçlendirme   Kart tarihi          TradingView
+
+   26         Apex Trail | Trend Agreement Scalper with ATR Trailing Stop                                blitz_locked           416           Eki 3                   Sayfayı aç
+
+   27         Trend Engine | Scored Trend Strategy with Squeeze Breakout                                 blitz_locked           408           Eki 1                   Sayfayı aç
+
+   28         Gradient Ribbon | EMA Ribbon Slope-Acceleration System                                     blitz_locked           393           Ağu 25                  Sayfayı aç
+
+   29         Initial Balance BO Strategy                                                                MIKMani                390           Haz 26                  Sayfayı aç
+
+   30         TRADLEWARE-Gaussian Channel + StochRSI ETH                                                 cs_lev                 389           —                       Sayfayı aç
+
+   31         Cloud Pro | Ichimoku Confluence                                                            blitz_locked           381           —                       Sayfayı aç
+
+   32         Trend Trigger | EMA Trend Filter + MTF Stochastic Entry with ATR                           blitz_locked           370           Ağu 29                  Sayfayı aç
+
+   33         Super-trend Signal Engine Strat [QUANTUM EDGE]                                             Quantum-Edge-Capital   364           Tem 7                   Sayfayı aç
+
+   34         Patterns Strategy v1                                                                       dipalishah94           358           Eyl 17                  Sayfayı aç
+
+   35         Elliott Wave Impulse Strategy | Wave 5 & Reversal Entries                                  blitz_locked           346           Eki 8                   Sayfayı aç
+
+   36         1 Trendline Strategy                                                                       egoigor1976            321           Haz 15                  Sayfayı aç
+
+   37         Shinobi                                                                                    Takumi_algo            310           Haz 29                  Sayfayı aç
+
+   38         Breakout Pulse | Volume-Confirmed Support/Resistance Strategy                              blitz_locked           303           Güncellendi Eyl 27      Sayfayı aç
+
+   39         STRATEGY SCRIPT Sweep Return v1                                                            everevolving365        298           Eyl 12                  Sayfayı aç
+
+   40         Alpha S/R Channel Strategy                                                                 Awab_Hassan            297           Ağu 12                  Sayfayı aç
+
+   41         Aurora KAMA | KAMA Adaptive Trend Strategy                                                 blitz_locked           296           Eyl 12                  Sayfayı aç
+
+   42         Harmonic Pulse | XABCD Fibonacci Pattern Strategy                                          blitz_locked           295           Eyl 25                  Sayfayı aç
+
+   43         OBS Volume Spike Reaction Fade [NQ]                                                        TurkishTraderUsa_      294           Haz 11                  Sayfayı aç
+
+   44         Liquidity Sweep Tracker | Smart Money Stop Hunts                                           blitz_locked           288           —                       Sayfayı aç
+
+   45         Power Surge | BB Momentum Squeeze Release                                                  blitz_locked           284           Ağu 27                  Sayfayı aç
+
+   46         Velocity Breakout Strategy (VBS)                                                           vasanth_mvk            282           Haz 10                  Sayfayı aç
+
+   47         Tomukas Scale-In V2                                                                        Tomukasss              279           Güncellendi Haz 26      Sayfayı aç
+
+   48         FlyTV - a real fruit fly connectome trading on your chart                                  gsoloviev              272           Güncellendi Eyl 30      Sayfayı aç
+
+   49         Liquidity Hunter | SMC System - Full Suite                                                 blitz_locked           267           —                       Sayfayı aç
+
+   50         Bollinger Squeeze Breakout + Volume                                                        PinegenAI              254           Haz 30                  Sayfayı aç
+
+
+
+
+TradingView strateji taraması | 13 Ekim 2026                                                                                                                                       Sayfa 4
+ Kullanıcı ilgisi yüksek 100 strateji | 51-75
+ Güçlendirme sayısına göre azalan sıra devamı. Bağlantılar TradingView’deki strateji sayfalarını açar.
+
+   Sıra       Strateji başlığı                                                                           Yazar             Güçlendirme   Kart tarihi          TradingView
+
+   51         Scam or Slam - Day Trading Rauf Strategy                                                   MrWickTrading     246           Haz 27                  Sayfayı aç
+
+   52         GRAM RSI Strategy [3Commas]                                                                3Commas           242           Tem 10                  Sayfayı aç
+
+   53         8PM (MGC 5M)                                                                               Edge-Session      238           Eki 4                   Sayfayı aç
+
+   54         Surgical Sweep - Original Restored                                                         Abhivish          231           Haz 7                   Sayfayı aç
+
+   55         Trend Structure Scale-In                                                                   Tomukasss         223           Haz 13                  Sayfayı aç
+
+   56         Smart Trend Strategy | julzALGO                                                            julzALGO          215           Haz 5                   Sayfayı aç
+
+   57         Volume Vault | Volume Order Block Retest Strategy                                          blitz_locked      211           Eki 10                  Sayfayı aç
+
+   58         QuantumForexTrader_SniperFusion_Strategy_v2                                                finnp17           206           Eyl 16                  Sayfayı aç
+
+   59         VWAP Reversal Strategy V1                                                                  DerAndi72         200           Eyl 19                  Sayfayı aç
+
+   60         TrendBreaker Pro | Auto Trendline Break Strategy with Momentum                             blitz_locked      197           Eki 5                   Sayfayı aç
+
+   61         Momentum Bands | Breakout                                                                  blitz_locked      187           Ağu 14                  Sayfayı aç
+
+   62         Bull & Wolf Nifty Indicator                                                                Bull-and-Wolf     180           Eki 7                   Sayfayı aç
+
+   63         TrendLock | Multi-Timeframe Supertrend Donchian Breakout                                   blitz_locked      178           Eyl 20                  Sayfayı aç
+
+   64         CleanTradeQuantum_v7.2_OB_FVG_INTEGRATED                                                   finnp17           170           Eyl 18                  Sayfayı aç
+
+   65         VWAP Trend Momentum [Artillery]                                                            ArtilleryTrades   166           Ağu 13                  Sayfayı aç
+
+   66         Z-Edge | Confluence Z-score Strategy                                                       blitz_locked      163           —                       Sayfayı aç
+
+   67         Glow Ribbon Flip | Trend-Following Strategy with ATR Band Stops                            blitz_locked      162           21 saat önce            Sayfayı aç
+
+   68         Sovereign Horizon Matrix (SHM) v8.0                                                        Kenpachi_ii       161           —                       Sayfayı aç
+
+   69         Zone Flow S/R Strategy                                                                     Awab_Hassan       161           —                       Sayfayı aç
+
+   70         Coil Breaker | RSI Range Compression                                                       blitz_locked      156           Ağu 24                  Sayfayı aç
+
+   71         ICT Daily Liquidity Sweep [PineGen AI]                                                     PinegenAI         152           Eyl 13                  Sayfayı aç
+
+   72         High Activity Penny Stock Strategy V6                                                      Pridarasx         150           Haz 20                  Sayfayı aç
+
+   73         NORN WEAVE | THURISAZ                                                                      mm_mitsuya        147           Güncellendi Haz 14      Sayfayı aç
+
+   74         HTF Level Breakout                                                                         vanchesz          145           Eki 10                  Sayfayı aç
+
+   75         EMA200 REGIME + BOS/CHoCH + 2x FVG Strategy                                                Bystry1991        128           Güncellendi Eyl 19      Sayfayı aç
+
+
+
+
+TradingView strateji taraması | 13 Ekim 2026                                                                                                                                  Sayfa 5
+ Kullanıcı ilgisi yüksek 100 strateji | 76-100
+ Güçlendirme sayısına göre azalan sıra devamı. Bağlantılar TradingView’deki strateji sayfalarını açar.
+
+   Sıra       Strateji başlığı                                                                           Yazar                Güçlendirme   Kart tarihi          TradingView
+
+   76         UT Bot + STC Conjunction Strategy Tester v4.8                                              WellmanApex          128           Güncellendi Haz 16      Sayfayı aç
+
+   77         INJ DCA Long Strategy [3Commas & QuantPilot]                                               3Commas              127           Tem 16                  Sayfayı aç
+
+   78         Confluence Rank Trend Strategy [Jayadev Rana]                                              JayadevRana          121           Eki 4                   Sayfayı aç
+
+   79         [Kpt-Ahab] Poor Man's Orderflow Simple AlgoPilot                                           Kpt-Ahab             119           —                       Sayfayı aç
+
+   80         VWAP Suite | Trend & Mean Reversion with Adaptive Filters                                  blitz_locked         119           Tem 26                  Sayfayı aç
+
+   81         Hybrid Breakout | VCP-Inspired Trend                                                       blitz_locked         118           Ağu 10                  Sayfayı aç
+
+   82         TZ_Gold_Round_Levels_Strategy                                                              TradZoo              113           Eyl 25                  Sayfayı aç
+
+   83         Fractional EMA Cross Backtest Strategy                                                     Yesid_Correa_Cano    109           Eyl 19                  Sayfayı aç
+
+   84         TRADLEWARE-Ichimoku TK-Cross + MFI SOL                                                     cs_lev               106           —                       Sayfayı aç
+
+   85         XAU Clear EMA ATR Strategy TP SL Voice V6                                                  ionplesu88           98            Tem 4                   Sayfayı aç
+
+   86         China A-Share Long Trend Resonance System (CLR System)                                     p181342x             98            Haz 8                   Sayfayı aç
+
+   87         RSI Bullish Divergence (Oversold) Breakout                                                 sunnychalloo         97            Eyl 17                  Sayfayı aç
+
+   88         Technical Summay & Crowd Consensus _ Lite _ Triggon                                        Triggon_             96            —                       Sayfayı aç
+
+   89         [Kpt-Ahab] Moving Average Simple AlgoPilot                                                 Kpt-Ahab             95            Güncellendi Ağu 30      Sayfayı aç
+
+   90         Clean Trend System - HTF Bias Filtered                                                     Pridarasx            95            Haz 20                  Sayfayı aç
+
+   91         Yuri Garcia Narrow State Strategy (YGILS)                                                  YGD_CONSULTING_LLC   89            Haz 15                  Sayfayı aç
+
+   92         ORB + Fib Breakout Signals (Strategy)                                                      chadsingh            89            Haz 7                   Sayfayı aç
+
+   93         Tomukas Wave VWAP DCA Scalper PRO                                                          Tomukasss            88            Haz 14                  Sayfayı aç
+
+   94         StackLight MTF | MTF Momentum Stack + Stochastic Confluence                                blitz_locked         86            Ağu 12                  Sayfayı aç
+
+   95         HVN Fade & Break | Volume Profile Fade & Breakout Strategy                                 blitz_locked         85            Eyl 29                  Sayfayı aç
+
+   96         MTF Range Flip HTF Market Structure Bias                                                   Mikey2timez          85            Eyl 7                   Sayfayı aç
+
+   97         Universal Aggressive Trend MACD v3.3 - Trailing TP                                         finnp17              85            Eyl 6                   Sayfayı aç
+
+   98         TRADLEWARE-Gaussian Channel + StochRSI BTC                                                 cs_lev               79            —                       Sayfayı aç
+
+   99         TM 50% Fib Strategy v2.5                                                                   jferheart            78            Eki 5                   Sayfayı aç
+
+   100        3% max drawdown - Performs just as good as Nasdaq                                          finnick1111          78            Haz 25                  Sayfayı aç
+
+
+
+
+TradingView strateji taraması | 13 Ekim 2026                                                                                                                                     Sayfa 6
+

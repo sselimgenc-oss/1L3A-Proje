@@ -1,0 +1,48 @@
+{
+ "ad": "gap_fill",
+ "pine_id": "ghocsiv7",
+ "tf": "1h",
+ "evren": [
+  "abd",
+  "bist"
+ ],
+ "neden": "Seans başı boşluk mantığı gün içi grafik ister; saatlik hisse.",
+ "olcut": {
+  "n": 6973,
+  "kar": -6476.212192808234,
+  "pf": 0.7441611429446431,
+  "sharpe": -2.6154453999396803,
+  "beklenti_R": -0.10973956997742329,
+  "kazanma": 0.5710598020937904,
+  "maxdd": 0.6578981661403069,
+  "dd_gun": 1037,
+  "cagr": -0.30120275207828096,
+  "calmar": -0.45782579672679136,
+  "psr": 2.8378798928585525e-06,
+  "tutma_gun": 0.9583333333333334,
+  "ort_islem_getiri": -0.001857511026189082,
+  "netR_toplam": -765.2140214525726,
+  "sharpe_egitim": -2.7121607328446453,
+  "sharpe_oos": -2.5098564090586057,
+  "oos_kar": -1531.1179961376529,
+  "tur": "gun",
+  "pf_maliyet2x": 0.5834161972713522,
+  "komsu_n": 8,
+  "komsu_karda": 0.0,
+  "enstr_n": 20,
+  "enstr_karda": 0.0,
+  "maks_kor": 0.038786767563948936
+ },
+ "kurallar": {
+  "1_islem_sayisi": true,
+  "2_maks_dusus<=20": false,
+  "3_beklenti>=0.15R": false,
+  "4a_kf>=1.3": false,
+  "4b_sharpe>=1": false,
+  "5_oos": false,
+  "6_maliyet2x_kf>=1.1": false,
+  "7_komsu>=70": false,
+  "8_enstr>=60": false
+ },
+ "gecti": false
+}

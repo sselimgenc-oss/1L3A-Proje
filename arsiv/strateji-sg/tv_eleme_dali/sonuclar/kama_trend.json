@@ -1,0 +1,50 @@
+{
+ "ad": "kama_trend",
+ "pine_id": "kbYTJ8V2",
+ "tf": "4h",
+ "evren": [
+  "kripto",
+  "abd",
+  "bist",
+  "emtia"
+ ],
+ "neden": "Zaman dilimi belirtilmemiş; 4 saatlik. Girişler arası min. 5 bar kuralı uygulanmadı (motor yeniden girişi zaten stop sonrası bir sonraki sinyalde yapar).",
+ "olcut": {
+  "n": 13685,
+  "kar": -2360.9678627755566,
+  "pf": 0.9972092138714697,
+  "sharpe": 0.47422178592833036,
+  "beklenti_R": -0.0017252231368473311,
+  "kazanma": 0.34804530507855314,
+  "maxdd": 0.9586150002209496,
+  "dd_gun": 1876,
+  "cagr": -0.03401975444341132,
+  "calmar": -0.03548844367714898,
+  "psr": 0.9188593756938703,
+  "tutma_gun": 1.1666666666666667,
+  "ort_islem_getiri": -6.900892547389269e-05,
+  "netR_toplam": -23.609678627755727,
+  "sharpe_egitim": 0.3500943672517324,
+  "sharpe_oos": 0.6874807771787351,
+  "oos_kar": -4104.945502794256,
+  "tur": "swing",
+  "pf_maliyet2x": 0.9288758923790703,
+  "komsu_n": 20,
+  "komsu_karda": 0.35,
+  "enstr_n": 37,
+  "enstr_karda": 0.5945945945945946,
+  "maks_kor": 0.234868379454761
+ },
+ "kurallar": {
+  "1_islem_sayisi": true,
+  "2_maks_dusus<=20": false,
+  "3_beklenti>=0.15R": false,
+  "4a_kf>=1.3": false,
+  "4b_sharpe>=1": false,
+  "5_oos": false,
+  "6_maliyet2x_kf>=1.1": false,
+  "7_komsu>=70": false,
+  "8_enstr>=60": false
+ },
+ "gecti": false
+}

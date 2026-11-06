@@ -1,0 +1,47 @@
+{
+ "ad": "ichimoku_sky",
+ "pine_id": "uycyVpIq",
+ "tf": "4h",
+ "evren": [
+  "kripto"
+ ],
+ "neden": "Zaman dilimi belirtilmemiş; Skyrexio kripto stratejileri genelde saatlik/4 saatlik: 4 saat kripto.",
+ "olcut": {
+  "n": 2673,
+  "kar": 46084.19386917703,
+  "pf": 1.639578359544227,
+  "sharpe": 1.3133141132033415,
+  "beklenti_R": 0.32373719433720133,
+  "kazanma": 0.49382716049382713,
+  "maxdd": 0.21992446592168186,
+  "dd_gun": 841,
+  "cagr": 0.24807293930897356,
+  "calmar": 1.1279915505049618,
+  "psr": 0.9998930498862093,
+  "tutma_gun": 7.333333333333333,
+  "ort_islem_getiri": 0.024136876699157442,
+  "netR_toplam": 865.3495204633391,
+  "sharpe_egitim": 1.5622083208145139,
+  "sharpe_oos": 0.37051994180633857,
+  "oos_kar": 3924.1153832822456,
+  "tur": "swing",
+  "pf_maliyet2x": 1.577699800323688,
+  "komsu_n": 16,
+  "komsu_karda": 1.0,
+  "enstr_n": 14,
+  "enstr_karda": 1.0,
+  "maks_kor": 0.5332193183360027
+ },
+ "kurallar": {
+  "1_islem_sayisi": true,
+  "2_maks_dusus<=20": false,
+  "3_beklenti>=0.15R": true,
+  "4a_kf>=1.3": true,
+  "4b_sharpe>=1": true,
+  "5_oos": false,
+  "6_maliyet2x_kf>=1.1": true,
+  "7_komsu>=70": true,
+  "8_enstr>=60": true
+ },
+ "gecti": false
+}

@@ -1,0 +1,48 @@
+{
+ "ad": "spy_bear",
+ "pine_id": "bA9UFcgj",
+ "tf": "1d",
+ "evren": [
+  "endeks",
+  "abd"
+ ],
+ "neden": "SPY günlük (1994-2025) → ABD endeks ETF'leri + ABD hisseleri, günlük.",
+ "olcut": {
+  "n": 405,
+  "kar": -1903.4683200749434,
+  "pf": 0.7337679462525784,
+  "sharpe": -0.34145214906524135,
+  "beklenti_R": -0.12161217269943955,
+  "kazanma": 0.5432098765432098,
+  "maxdd": 0.22059338624257563,
+  "dd_gun": 2478,
+  "cagr": -0.017767343008771808,
+  "calmar": -0.08054340754003358,
+  "psr": 0.12097288141268414,
+  "tutma_gun": 6.0,
+  "ort_islem_getiri": -0.005639906133555388,
+  "netR_toplam": -49.25292994327302,
+  "sharpe_egitim": -0.19119754117216275,
+  "sharpe_oos": -0.9980397156306864,
+  "oos_kar": -1025.058129620118,
+  "tur": "swing",
+  "pf_maliyet2x": 0.7013018031939113,
+  "komsu_n": 18,
+  "komsu_karda": 0.0,
+  "enstr_n": 12,
+  "enstr_karda": 0.3333333333333333,
+  "maks_kor": 0.04991297825943173
+ },
+ "kurallar": {
+  "1_islem_sayisi": true,
+  "2_maks_dusus<=20": false,
+  "3_beklenti>=0.15R": false,
+  "4a_kf>=1.3": false,
+  "4b_sharpe>=1": false,
+  "5_oos": false,
+  "6_maliyet2x_kf>=1.1": false,
+  "7_komsu>=70": false,
+  "8_enstr>=60": false
+ },
+ "gecti": false
+}

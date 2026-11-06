@@ -1,0 +1,49 @@
+{
+ "ad": "seq_snap",
+ "pine_id": "49jNhJXM",
+ "tf": "1h",
+ "evren": [
+  "kripto",
+  "abd",
+  "emtia"
+ ],
+ "neden": "Vadeli (marjin) gün içi; saatlik.",
+ "olcut": {
+  "n": 4677,
+  "kar": 822.0716323008673,
+  "pf": 1.0040221414483987,
+  "sharpe": 0.18032436236191238,
+  "beklenti_R": -0.008869737372587738,
+  "kazanma": 0.4246311738293778,
+  "maxdd": 0.5061518029147064,
+  "dd_gun": 1845,
+  "cagr": 0.010205030416375882,
+  "calmar": 0.02016199558632328,
+  "psr": 0.6961751359638976,
+  "tutma_gun": 0.875,
+  "ort_islem_getiri": 0.0009218701681945707,
+  "netR_toplam": -41.483761691592846,
+  "sharpe_egitim": 0.2792825286075261,
+  "sharpe_oos": -0.011668747896103147,
+  "oos_kar": -1603.3030259992702,
+  "tur": "gun",
+  "pf_maliyet2x": 0.9230332926077689,
+  "komsu_n": 18,
+  "komsu_karda": 0.7222222222222222,
+  "enstr_n": 27,
+  "enstr_karda": 0.6296296296296297,
+  "maks_kor": 0.41620920813768425
+ },
+ "kurallar": {
+  "1_islem_sayisi": true,
+  "2_maks_dusus<=20": false,
+  "3_beklenti>=0.15R": false,
+  "4a_kf>=1.3": false,
+  "4b_sharpe>=1": false,
+  "5_oos": false,
+  "6_maliyet2x_kf>=1.1": false,
+  "7_komsu>=70": true,
+  "8_enstr>=60": true
+ },
+ "gecti": false
+}

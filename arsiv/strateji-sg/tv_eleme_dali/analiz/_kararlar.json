@@ -1,0 +1,1928 @@
+{
+ "0vvrOpg1": {
+  "gerekce": "Kod okundu; kesin-eleme listesinde (kapalı kaynak, strategy() yok, repaint/lookahead, DCA/grid/martingale, veri yok) değil → `tv/stratejiler/halftrend.py` olarak çevrildi ve test edildi. Sonuç ve eşik tablosu RAPOR.md'de. Yazar Hint gün içi (NSE) için yazmış; seans/gün sonu kuralı atılıp 1 saatlik, tüm pazarlarda test.",
+  "hedef": "halftrend",
+  "karar": "al",
+  "pazar": "kripto,abd,bist,emtia",
+  "tf": "1h (çeviri)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "0wggzSk5": {
+  "gerekce": "KESİN ELEME: DCA / ortalama düşürme (B2 kuralı). Taban emir + ek emirler + ortalama maliyetten çıkış kuyruk riskini gizler: kazanma oranı ve kâr faktörü şişer, tek bir derin düşüşte tüm ek emirler dolar. Girişin kendisi (RSI eşiği) ayrı test edilebilir ama bu betiğin sonucu DCA yapısına ait.",
+  "hedef": null,
+  "karar": "ele",
+  "pazar": "tek sembol (kripto/hisse tokeni/altın)",
+  "tf": "15dk–4s (betiğin sembol/süresine göre)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "14l4u5gJ": {
+  "gerekce": "KESİN ELEME: katlamalı büyüklük (q1..q5 = 10/10/20/40/80) ve zarar-durdurusuz ekleme = martingale benzeri (B2).",
+  "hedef": null,
+  "karar": "ele",
+  "pazar": "?",
+  "tf": "?",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "25Ffpyo0": {
+  "gerekce": "Önceki tur gerekçesi: «likidite süpürme pivot girişi (repaint riski)». B2 kesin-eleme listesinde (kapalı kaynak, strategy() yok, gerçek repaint/lookahead, DCA/grid/martingale, veri yok) bu betik YOK; kod okundu ve `tv/stratejiler/sweep_sky.py` olarak çevrilip test edildi.",
+  "hedef": "sweep_sky",
+  "karar": "al",
+  "pazar": "kripto,abd,emtia",
+  "tf": "1h (çeviri)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "2SC4QXCp": {
+  "gerekce": "KESİN ELEME: DCA / ortalama düşürme (B2 kuralı). Taban emir + ek emirler + ortalama maliyetten çıkış kuyruk riskini gizler: kazanma oranı ve kâr faktörü şişer, tek bir derin düşüşte tüm ek emirler dolar. Girişin kendisi (RSI eşiği) ayrı test edilebilir ama bu betiğin sonucu DCA yapısına ait.",
+  "hedef": null,
+  "karar": "ele",
+  "pazar": "tek sembol (kripto/hisse tokeni/altın)",
+  "tf": "15dk–4s (betiğin sembol/süresine göre)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "2lGyzYkC": {
+  "gerekce": "KESİN ELEME: altyapı/şablon — sinyal dış kaynak (B2: strategy mantığı yok).",
+  "hedef": null,
+  "karar": "ele",
+  "pazar": "?",
+  "tf": "?",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "2wyXTTMc": {
+  "gerekce": "Aday. Yaklaşık çeviri: yeniden dengeleme (kısmi ekle/azalt) motorda yok; rejim girişinde hedef maruziyet kadar boyutlanıp rejim bitince çıkılıyor.",
+  "hedef": "vol_target",
+  "karar": "al",
+  "pazar": "ABD ETF (TQQQ)/hisse",
+  "tf": "1g",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "3SHJZytF": {
+  "gerekce": "Kod okundu; kesin-eleme listesinde (kapalı kaynak, strategy() yok, repaint/lookahead, DCA/grid/martingale, veri yok) değil → `tv/stratejiler/hma_st.py` olarak çevrildi ve test edildi. Sonuç ve eşik tablosu RAPOR.md'de. Zaman dilimi belirtilmemiş; 4 saatlik (Yahoo 1s 2 yıl, kripto 2019+).",
+  "hedef": "hma_st",
+  "karar": "al",
+  "pazar": "kripto,abd,bist,emtia",
+  "tf": "4h (çeviri)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "3VLM19TH": {
+  "gerekce": "KESİN ELEME: grid (B2 kuralı). Her seviyede küçük kâr, aralık dışı düşüşte sınırsız zarar; kazanma oranı yapay yüksek, getiri aralık varsayımına bağlı.",
+  "hedef": null,
+  "karar": "ele",
+  "pazar": "tek sembol",
+  "tf": "15dk–1s",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "3fea8k4Z": {
+  "gerekce": "Aday.",
+  "hedef": "double_cci",
+  "karar": "al",
+  "pazar": "kripto (BTC)",
+  "tf": "2s",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "3k4TWbWm": {
+  "gerekce": "KESİN ELEME: gerekli veri yok (Çin A-hisse).",
+  "hedef": null,
+  "karar": "ele",
+  "pazar": "Çin A hisse",
+  "tf": "?",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "3wdQu7P3": {
+  "gerekce": "Kod okundu; kesin-eleme listesinde (kapalı kaynak, strategy() yok, repaint/lookahead, DCA/grid/martingale, veri yok) değil → `tv/stratejiler/alphatrend.py` olarak çevrildi ve test edildi. Sonuç ve eşik tablosu RAPOR.md'de. Yazar BTCUSDT günlük test etmiş; günlük, tüm pazarlar.",
+  "hedef": "alphatrend",
+  "karar": "al",
+  "pazar": "kripto,abd,bist,emtia",
+  "tf": "1d (çeviri)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "49jNhJXM": {
+  "gerekce": "Önceki tur gerekçesi: «scalper (5dk veri yok)». B2 kesin-eleme listesinde (kapalı kaynak, strategy() yok, gerçek repaint/lookahead, DCA/grid/martingale, veri yok) bu betik YOK; kod okundu ve `tv/stratejiler/seq_snap.py` olarak çevrilip test edildi. Betik 5 dk ile sınırlı değil (hiçbir saat/seans kodu yok), saatlik test edildi.",
+  "hedef": "seq_snap",
+  "karar": "al",
+  "pazar": "kripto,abd,emtia",
+  "tf": "1h (çeviri)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "4OsZ6QMo": {
+  "gerekce": "KESİN ELEME: DCA / ortalama düşürme (B2 kuralı). Taban emir + ek emirler + ortalama maliyetten çıkış kuyruk riskini gizler: kazanma oranı ve kâr faktörü şişer, tek bir derin düşüşte tüm ek emirler dolar. Girişin kendisi (RSI eşiği) ayrı test edilebilir ama bu betiğin sonucu DCA yapısına ait.",
+  "hedef": null,
+  "karar": "ele",
+  "pazar": "tek sembol (kripto/hisse tokeni/altın)",
+  "tf": "15dk–4s (betiğin sembol/süresine göre)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "4jxYYaGU": {
+  "gerekce": "KESİN ELEME: araç — kendi giriş sinyali yok, sinyal kullanıcıdan.",
+  "hedef": null,
+  "karar": "ele",
+  "pazar": "?",
+  "tf": "?",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "5Tg2Es4G": {
+  "gerekce": "KESİN ELEME: DCA / ortalama düşürme (B2 kuralı). Taban emir + ek emirler + ortalama maliyetten çıkış kuyruk riskini gizler: kazanma oranı ve kâr faktörü şişer, tek bir derin düşüşte tüm ek emirler dolar. Girişin kendisi (RSI eşiği) ayrı test edilebilir ama bu betiğin sonucu DCA yapısına ait.",
+  "hedef": null,
+  "karar": "ele",
+  "pazar": "tek sembol (kripto/hisse tokeni/altın)",
+  "tf": "15dk–4s (betiğin sembol/süresine göre)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "6HYQYnFl": {
+  "gerekce": "KESİN ELEME: 1 dk ölçeği (<1 dk-altı olmasa da 1 dk scalping) ve MNQ 1 dk geçmişi yok (görev kuralı: 1 dk altı/scalping, yeterli geçmiş yok).",
+  "hedef": null,
+  "karar": "ele",
+  "pazar": "MNQ vadeli",
+  "tf": "1 dk",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "6XPbhz9C": {
+  "gerekce": "Aday. Kısmi çıkış iki bacak olarak (olcek=0.5) modellendi; Pine'daki ardışık %50 azaltmalar tek sefer sayıldı.",
+  "hedef": "ibs_rev",
+  "karar": "al",
+  "pazar": "ABD endeks (SPX), ayrıca Nasdaq/altın",
+  "tf": "1g",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "6kaqC3R8": {
+  "gerekce": "KESİN ELEME: DCA / ortalama düşürme (B2).",
+  "hedef": null,
+  "karar": "ele",
+  "pazar": "?",
+  "tf": "?",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "6ve1ax1D": {
+  "gerekce": "KESİN ELEME: gerekli veri yok (NQ 1–5 dk geçmişi) ve scalper (<5 dk, pyramiding=20). Aynı zamanda 3291 satır çok bileşenli ICT sistemi.",
+  "hedef": null,
+  "karar": "ele",
+  "pazar": "NQ/MNQ vadeli",
+  "tf": "1–5 dk",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "6zYF9Xts": {
+  "gerekce": "Aday (aynı mantık Kivanc Supertrend'in parametre farkı ama kesin eleme nedeni değil; kendi varsayılanlarıyla test).",
+  "hedef": "hash_st",
+  "karar": "al",
+  "pazar": "kripto (SOL)",
+  "tf": "12s",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "71yKm18B": {
+  "gerekce": "Önceki tur gerekçesi: «kopya (Ichimoku; boHD0HzE tutuldu)». B2 kesin-eleme listesinde (kapalı kaynak, strategy() yok, gerçek repaint/lookahead, DCA/grid/martingale, veri yok) bu betik YOK; kod okundu ve `tv/stratejiler/ichi_sol.py` olarak çevrilip test edildi. TK-kesişim + MFI + bulut tabanı stopu → boHD0HzE'den farklı mantık.",
+  "hedef": "ichi_sol",
+  "karar": "al",
+  "pazar": "kripto",
+  "tf": "4h (çeviri)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "7OLnQI4B": {
+  "gerekce": "KESİN ELEME: gerekli veri yok — gün içi seans (≤15 dk) geçmişi Yahoo'da yalnız 60 gündür (Aşama-1 kuralı), ≥300 işlem/gün içi eşiği bu veriyle sağlanamaz.",
+  "hedef": null,
+  "karar": "ele",
+  "pazar": "vadeli/altın/hisse gün içi",
+  "tf": "5dk–15dk",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "7SSRGEbI": {
+  "gerekce": "KESİN ELEME: gerekli veri yok — 09:30–09:45 aralığı ve 11:30 kesimi için ≤5 dk mum gerekir; Yahoo gün içi 60 günle sınırlı (Aşama-1 kuralı: 15 dk hisse yalnız 60 gün).",
+  "hedef": null,
+  "karar": "ele",
+  "pazar": "ABD hisse/endeks vadeli",
+  "tf": "1–5 dk gün içi",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "7UNWrm2O": {
+  "gerekce": "Aday.",
+  "hedef": "t3_sqz",
+  "karar": "al",
+  "pazar": "kripto (BTC)",
+  "tf": "30dk",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "7cAVZopZ": {
+  "gerekce": "KESİN ELEME: grid (B2 kuralı). Her seviyede küçük kâr, aralık dışı düşüşte sınırsız zarar; kazanma oranı yapay yüksek, getiri aralık varsayımına bağlı.",
+  "hedef": null,
+  "karar": "ele",
+  "pazar": "tek sembol",
+  "tf": "15dk–1s",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "7xkIvA4u": {
+  "gerekce": "KESİN ELEME: kaynak kapalı / bulunamadı (B2). Sayfa kimliği (`PUB;…`) alınamadıysa yayın kaldırılmış.",
+  "hedef": null,
+  "karar": "ele",
+  "pazar": "?",
+  "tf": "?",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "83hmaEOQ": {
+  "gerekce": "Kod okundu; kesin-eleme listesinde (kapalı kaynak, strategy() yok, repaint/lookahead, DCA/grid/martingale, veri yok) değil → `tv/stratejiler/tomukas_smc.py` olarak çevrildi ve test edildi. Sonuç ve eşik tablosu RAPOR.md'de. Seans süzgeçli gün içi (5 dk olabilir); saatlik uyarlama.",
+  "hedef": "tomukas_smc",
+  "karar": "al",
+  "pazar": "kripto,abd,emtia",
+  "tf": "1h (çeviri)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "8I2576zL": {
+  "gerekce": "Aday: strateji(), basit, repaint yok. Zaman dilimi yazarın PDF kaydında 1s (ONE); evrenimizde günlük + saatlik gerekir — günlük çevrildi.",
+  "hedef": "mr_2bar",
+  "karar": "al",
+  "pazar": "kripto",
+  "tf": "1g (belirsiz; PDF'te 1s)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "8K1gTPV0": {
+  "gerekce": "KESİN ELEME: DCA / ortalama düşürme (B2 kuralı). Taban emir + ek emirler + ortalama maliyetten çıkış kuyruk riskini gizler: kazanma oranı ve kâr faktörü şişer, tek bir derin düşüşte tüm ek emirler dolar. Girişin kendisi (RSI eşiği) ayrı test edilebilir ama bu betiğin sonucu DCA yapısına ait.",
+  "hedef": null,
+  "karar": "ele",
+  "pazar": "tek sembol (kripto/hisse tokeni/altın)",
+  "tf": "15dk–4s (betiğin sembol/süresine göre)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "8OS1nbr8": {
+  "gerekce": "KESİN ELEME: martingale (B2).",
+  "hedef": null,
+  "karar": "ele",
+  "pazar": "kripto",
+  "tf": "?",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "8Ti8z8QO": {
+  "gerekce": "Önceki tur gerekçesi: «çoklu zaman dilimi + pyramiding». B2 kesin-eleme listesinde (kapalı kaynak, strategy() yok, gerçek repaint/lookahead, DCA/grid/martingale, veri yok) bu betik YOK; kod okundu ve `tv/stratejiler/mtf_stack.py` olarak çevrilip test edildi.",
+  "hedef": "mtf_stack",
+  "karar": "al",
+  "pazar": "kripto",
+  "tf": "15m (çeviri)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "8z6wbyw5": {
+  "gerekce": "KESİN ELEME: strateji değil, altyapı/şablon — kodun varsayılan ayarları anlamlı bir sinyal üretmez (yazarın kendi test sonucu da yok).",
+  "hedef": null,
+  "karar": "ele",
+  "pazar": "herhangi",
+  "tf": "herhangi",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "95JBkzXV": {
+  "gerekce": "Aday. Yazarın tek haftalık 10 sn testi anlamsız, 1s ile test ediliyor.",
+  "hedef": "btc_mr_bb",
+  "karar": "al",
+  "pazar": "kripto",
+  "tf": "10 sn (yazar) → 1s",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "97gxVA5b": {
+  "gerekce": "Aday. process_orders_on_close=true → sinyal mumunun kapanışında dolum. Risk sabit %4 (bizde %1).",
+  "hedef": "compress_brk",
+  "karar": "al",
+  "pazar": "ABD (AAPL)",
+  "tf": "1g",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "9Iwinz7I": {
+  "gerekce": "KESİN ELEME: eğitim örneği; kâr hedefi sembolün tick'ine bağlı mutlak 100 tick ve sınırsız ekleme (pyramiding=100) — stratejik kural yok.",
+  "hedef": null,
+  "karar": "ele",
+  "pazar": "?",
+  "tf": "?",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "9cxy1Yu9": {
+  "gerekce": "Kod okundu; kesin-eleme listesinde (kapalı kaynak, strategy() yok, repaint/lookahead, DCA/grid/martingale, veri yok) değil → `tv/stratejiler/kripto_mom.py` olarak çevrildi ve test edildi. Sonuç ve eşik tablosu RAPOR.md'de. Betik kripto için; kripto günlük. Piyasa filtresi için TOTAL verisi yok → BTC vekil.",
+  "hedef": "kripto_mom",
+  "karar": "al",
+  "pazar": "kripto",
+  "tf": "1d (çeviri)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "9ht1ea8N": {
+  "gerekce": "KESİN ELEME: grid (B2 kuralı). Her seviyede küçük kâr, aralık dışı düşüşte sınırsız zarar; kazanma oranı yapay yüksek, getiri aralık varsayımına bağlı.",
+  "hedef": null,
+  "karar": "ele",
+  "pazar": "tek sembol",
+  "tf": "15dk–1s",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "9pHwOZsM": {
+  "gerekce": "KESİN ELEME: grid (B2 kuralı). Her seviyede küçük kâr, aralık dışı düşüşte sınırsız zarar; kazanma oranı yapay yüksek, getiri aralık varsayımına bağlı.",
+  "hedef": null,
+  "karar": "ele",
+  "pazar": "tek sembol",
+  "tf": "15dk–1s",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "9qFCuXqF": {
+  "gerekce": "Aday (kesin eleme nedeni yok: DCA botuna sinyal gönderen alanlar stratejinin mantığında değil).",
+  "hedef": "turtle3c",
+  "karar": "al",
+  "pazar": "kripto (ETH)",
+  "tf": "4s",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "ABkXz6BY": {
+  "gerekce": "KESİN ELEME: grid (B2 kuralı). Her seviyede küçük kâr, aralık dışı düşüşte sınırsız zarar; kazanma oranı yapay yüksek, getiri aralık varsayımına bağlı.",
+  "hedef": null,
+  "karar": "ele",
+  "pazar": "tek sembol",
+  "tf": "15dk–1s",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "ADx8qrBK": {
+  "gerekce": "KESİN ELEME: DCA / ortalama düşürme (B2 kuralı). Taban emir + ek emirler + ortalama maliyetten çıkış kuyruk riskini gizler: kazanma oranı ve kâr faktörü şişer, tek bir derin düşüşte tüm ek emirler dolar. Girişin kendisi (RSI eşiği) ayrı test edilebilir ama bu betiğin sonucu DCA yapısına ait.",
+  "hedef": null,
+  "karar": "ele",
+  "pazar": "tek sembol (kripto/hisse tokeni/altın)",
+  "tf": "15dk–4s (betiğin sembol/süresine göre)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "Ab8n9Rx5": {
+  "gerekce": "KESİN ELEME: DCA / ortalama düşürme (B2 kuralı). Taban emir + ek emirler + ortalama maliyetten çıkış kuyruk riskini gizler: kazanma oranı ve kâr faktörü şişer, tek bir derin düşüşte tüm ek emirler dolar. Girişin kendisi (RSI eşiği) ayrı test edilebilir ama bu betiğin sonucu DCA yapısına ait.",
+  "hedef": null,
+  "karar": "ele",
+  "pazar": "tek sembol (kripto/hisse tokeni/altın)",
+  "tf": "15dk–4s (betiğin sembol/süresine göre)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "AeYVHi9k": {
+  "gerekce": "KESİN ELEME: gerekli veri yok — gün içi seans (ORB, 15:00 kesim) 5 dk mum ister; Yahoo gün içi 60 günle sınırlı.",
+  "hedef": null,
+  "karar": "ele",
+  "pazar": "ABD endeks/hisse",
+  "tf": "5 dk gün içi",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "B7MQqWes": {
+  "gerekce": "Kod okundu; kesin-eleme listesinde (kapalı kaynak, strategy() yok, repaint/lookahead, DCA/grid/martingale, veri yok) değil → `tv/stratejiler/ewo_rsi.py` olarak çevrildi ve test edildi. Sonuç ve eşik tablosu RAPOR.md'de. Zaman dilimi belirtilmemiş; 4 saatlik.",
+  "hedef": "ewo_rsi",
+  "karar": "al",
+  "pazar": "kripto,abd,bist,emtia",
+  "tf": "4h (çeviri)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "BR74LOKo": {
+  "gerekce": "KESİN ELEME: grid (B2 kuralı). Her seviyede küçük kâr, aralık dışı düşüşte sınırsız zarar; kazanma oranı yapay yüksek, getiri aralık varsayımına bağlı.",
+  "hedef": null,
+  "karar": "ele",
+  "pazar": "tek sembol",
+  "tf": "15dk–1s",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "BtDUET5k": {
+  "gerekce": "Aday.",
+  "hedef": "macd_stoch1d",
+  "karar": "al",
+  "pazar": "kripto (BTC)",
+  "tf": "45dk",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "CItvSvqk": {
+  "gerekce": "Kod okundu; kesin-eleme listesinde (kapalı kaynak, strategy() yok, repaint/lookahead, DCA/grid/martingale, veri yok) değil → `tv/stratejiler/hacim_sr.py` olarak çevrildi ve test edildi. Sonuç ve eşik tablosu RAPOR.md'de. Zaman dilimi belirtilmemiş; 4 saatlik. Pivotlar 10 bar sonra onaylanır (repaint yok).",
+  "hedef": "hacim_sr",
+  "karar": "al",
+  "pazar": "kripto,abd,bist,emtia",
+  "tf": "4h (çeviri)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "CMZfvk2e": {
+  "gerekce": "KESİN ELEME: DCA / ortalama düşürme (B2 kuralı). Taban emir + ek emirler + ortalama maliyetten çıkış kuyruk riskini gizler: kazanma oranı ve kâr faktörü şişer, tek bir derin düşüşte tüm ek emirler dolar. Girişin kendisi (RSI eşiği) ayrı test edilebilir ama bu betiğin sonucu DCA yapısına ait.",
+  "hedef": null,
+  "karar": "ele",
+  "pazar": "tek sembol (kripto/hisse tokeni/altın)",
+  "tf": "15dk–4s (betiğin sembol/süresine göre)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "CtFpKECD": {
+  "gerekce": "Önceki tur gerekçesi: «Heikin Ashi + pivot; temsilci seçilmedi». B2 kesin-eleme listesinde (kapalı kaynak, strategy() yok, gerçek repaint/lookahead, DCA/grid/martingale, veri yok) bu betik YOK; kod okundu ve `tv/stratejiler/shinobi_ha.py` olarak çevrilip test edildi.",
+  "hedef": "shinobi_ha",
+  "karar": "al",
+  "pazar": "kripto,abd,emtia",
+  "tf": "1h (çeviri)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "DG9ePZuk": {
+  "gerekce": "Önceki tur gerekçesi: «kopya (Supertrend; tutulanlar var)». B2 kesin-eleme listesinde (kapalı kaynak, strategy() yok, gerçek repaint/lookahead, DCA/grid/martingale, veri yok) bu betik YOK; kod okundu ve `tv/stratejiler/st_rg.py` olarak çevrilip test edildi. SL/izleyen stop + 1 mum gecikmeli giriş içeren farklı strateji.",
+  "hedef": "st_rg",
+  "karar": "al",
+  "pazar": "kripto,abd,bist,emtia",
+  "tf": "1d (çeviri)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "DkDNMQsn": {
+  "gerekce": "KESİN ELEME: gerekli veri yok — NSE seans penceresi (09:15–15:30 IST) ve seans sonu kapanışı ≤15 dk veri ister; Yahoo gün içi 60 gün (Aşama-1 kuralı). `maxTradesPerDay`, `exitEod` ile gün içi sistem.",
+  "hedef": null,
+  "karar": "ele",
+  "pazar": "NSE",
+  "tf": "gün içi (1–15 dk)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "DwdC6FT4": {
+  "gerekce": "Kod okundu; kesin-eleme listesinde (kapalı kaynak, strategy() yok, repaint/lookahead, DCA/grid/martingale, veri yok) değil → `tv/stratejiler/pivot_st.py` olarak çevrildi ve test edildi. Sonuç ve eşik tablosu RAPOR.md'de. Zaman dilimi belirtilmemiş; günlük. Pivot onayı prd bar sonra gelir (repaint yok: yalnız geçmiş).",
+  "hedef": "pivot_st",
+  "karar": "al",
+  "pazar": "kripto,abd,bist,emtia",
+  "tf": "1d (çeviri)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "EA1AXZui": {
+  "gerekce": "KESİN ELEME: gerekli veri yok — gün içi seans (≤15 dk) geçmişi Yahoo'da yalnız 60 gündür (Aşama-1 kuralı), ≥300 işlem/gün içi eşiği bu veriyle sağlanamaz.",
+  "hedef": null,
+  "karar": "ele",
+  "pazar": "vadeli/altın/hisse gün içi",
+  "tf": "5dk–15dk",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "EcEYc8ap": {
+  "gerekce": "Önceki tur gerekçesi: «temsilci seçilmedi». B2 kesin-eleme listesinde (kapalı kaynak, strategy() yok, gerçek repaint/lookahead, DCA/grid/martingale, veri yok) bu betik YOK; kod okundu ve `tv/stratejiler/dmi_adx3.py` olarak çevrilip test edildi.",
+  "hedef": "dmi_adx3",
+  "karar": "al",
+  "pazar": "kripto,abd,bist,emtia",
+  "tf": "1d (çeviri)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "EjLwVtgp": {
+  "gerekce": "Kod okundu; kesin-eleme listesinde (kapalı kaynak, strategy() yok, repaint/lookahead, DCA/grid/martingale, veri yok) değil → `tv/stratejiler/fractal_brk.py` olarak çevrildi ve test edildi. Sonuç ve eşik tablosu RAPOR.md'de. Zaman dilimi belirtilmemiş; günlük (klasik 2016 betiği), yalnız long.",
+  "hedef": "fractal_brk",
+  "karar": "al",
+  "pazar": "kripto,abd,bist,emtia",
+  "tf": "1d (çeviri)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "Eq4kPrrJ": {
+  "gerekce": "Önceki tur gerekçesi: «swing-anchored VWAP; temsilci seçilmedi». B2 kesin-eleme listesinde (kapalı kaynak, strategy() yok, gerçek repaint/lookahead, DCA/grid/martingale, veri yok) bu betik YOK; kod okundu ve `tv/stratejiler/golden_trident.py` olarak çevrilip test edildi.",
+  "hedef": "golden_trident",
+  "karar": "al",
+  "pazar": "ALTIN,GUMUS,PETROL",
+  "tf": "1d (çeviri)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "ErcSuPyN": {
+  "gerekce": "Kod okundu; kesin-eleme listesinde (kapalı kaynak, strategy() yok, repaint/lookahead, DCA/grid/martingale, veri yok) değil → `tv/stratejiler/accel_ml.py` olarak çevrildi ve test edildi. Sonuç ve eşik tablosu RAPOR.md'de. PDF: BTCUSDT 3 saat.",
+  "hedef": "accel_ml",
+  "karar": "al",
+  "pazar": "kripto",
+  "tf": "3h (çeviri)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "FDeprmix": {
+  "gerekce": "Kod okundu; kesin-eleme listesinde (kapalı kaynak, strategy() yok, repaint/lookahead, DCA/grid/martingale, veri yok) değil → `tv/stratejiler/st_donchian.py` olarak çevrildi ve test edildi. Sonuç ve eşik tablosu RAPOR.md'de. Zaman dilimi belirtilmemiş; 1 saatlik (HTF 4s onayıyla uyumlu), yalnız long (Pine varsayılanı).",
+  "hedef": "st_donchian",
+  "karar": "al",
+  "pazar": "kripto,abd,bist,emtia",
+  "tf": "1h (çeviri)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "FJZvYKaB": {
+  "gerekce": "Aday (saatlik uyarlama; 15 dk altın geçmişi yalnız 60 gün).",
+  "hedef": "gold_orb",
+  "karar": "al",
+  "pazar": "altın",
+  "tf": "15dk",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "Fckzv8iH": {
+  "gerekce": "Önceki tur gerekçesi: «temsilci seçilmedi». B2 kesin-eleme listesinde (kapalı kaynak, strategy() yok, gerçek repaint/lookahead, DCA/grid/martingale, veri yok) bu betik YOK; kod okundu ve `tv/stratejiler/sq_reversal.py` olarak çevrilip test edildi.",
+  "hedef": "sq_reversal",
+  "karar": "al",
+  "pazar": "kripto,abd,bist,emtia",
+  "tf": "1d (çeviri)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "G40dtEbK": {
+  "gerekce": "Kod okundu; kesin-eleme listesinde (kapalı kaynak, strategy() yok, repaint/lookahead, DCA/grid/martingale, veri yok) değil → `tv/stratejiler/sqzmom.py` olarak çevrildi ve test edildi. Sonuç ve eşik tablosu RAPOR.md'de. Zaman dilimi belirtilmemiş; günlük, tüm pazarlar.",
+  "hedef": "sqzmom",
+  "karar": "al",
+  "pazar": "kripto,abd,bist,emtia",
+  "tf": "1d (çeviri)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "G5ro3y87": {
+  "gerekce": "Kod okundu; kesin-eleme listesinde (kapalı kaynak, strategy() yok, repaint/lookahead, DCA/grid/martingale, veri yok) değil → `tv/stratejiler/macd_stoch.py` olarak çevrildi ve test edildi. Sonuç ve eşik tablosu RAPOR.md'de. Zaman dilimi belirtilmemiş; günlük (klasik 2016 betiği).",
+  "hedef": "macd_stoch",
+  "karar": "al",
+  "pazar": "kripto,abd,bist,emtia",
+  "tf": "1d (çeviri)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "GM1bUrIF": {
+  "gerekce": "KESİN ELEME: DCA / ortalama düşürme (B2).",
+  "hedef": null,
+  "karar": "ele",
+  "pazar": "?",
+  "tf": "?",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "GhH6mW5c": {
+  "gerekce": "KESİN ELEME: DCA / ortalama düşürme (B2 kuralı). Taban emir + ek emirler + ortalama maliyetten çıkış kuyruk riskini gizler: kazanma oranı ve kâr faktörü şişer, tek bir derin düşüşte tüm ek emirler dolar. Girişin kendisi (RSI eşiği) ayrı test edilebilir ama bu betiğin sonucu DCA yapısına ait.",
+  "hedef": null,
+  "karar": "ele",
+  "pazar": "tek sembol (kripto/hisse tokeni/altın)",
+  "tf": "15dk–4s (betiğin sembol/süresine göre)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "GoeqO1ev": {
+  "gerekce": "Önceki tur gerekçesi: «likidite süpürme pivot girişi (repaint riski); temsilci seçilmedi». B2 kesin-eleme listesinde (kapalı kaynak, strategy() yok, gerçek repaint/lookahead, DCA/grid/martingale, veri yok) bu betik YOK; kod okundu ve `tv/stratejiler/sweep_rev.py` olarak çevrilip test edildi.",
+  "hedef": "sweep_rev",
+  "karar": "al",
+  "pazar": "kripto,emtia",
+  "tf": "1h (çeviri)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "H2U52D79": {
+  "gerekce": "KESİN ELEME: grid (B2 kuralı). Her seviyede küçük kâr, aralık dışı düşüşte sınırsız zarar; kazanma oranı yapay yüksek, getiri aralık varsayımına bağlı.",
+  "hedef": null,
+  "karar": "ele",
+  "pazar": "tek sembol",
+  "tf": "15dk–1s",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "HDSdFMa3": {
+  "gerekce": "Önceki tur gerekçesi: «kopya (Bollinger+RSI; uCV8I4xA tutuldu)». B2 kesin-eleme listesinde (kapalı kaynak, strategy() yok, gerçek repaint/lookahead, DCA/grid/martingale, veri yok) bu betik YOK; kod okundu ve `tv/stratejiler/bb_rsi_lo.py` olarak çevrilip test edildi. Parametreler farklı (RSI6, BB200, yalnız long, çıkış kuralı var) → kopya değil.",
+  "hedef": "bb_rsi_lo",
+  "karar": "al",
+  "pazar": "kripto,abd,bist,emtia",
+  "tf": "1d (çeviri)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "HPbRZvsV": {
+  "gerekce": "Önceki tur gerekçesi: «kopya (OTT; ycDUERPO tutuldu)». B2 kesin-eleme listesinde (kapalı kaynak, strategy() yok, gerçek repaint/lookahead, DCA/grid/martingale, veri yok) bu betik YOK; kod okundu ve `tv/stratejiler/ott_ex.py` olarak çevrilip test edildi. Farklı varsayılanlar (VAR(2), %1.4) ve fiyat kesişimi → kopya değil.",
+  "hedef": "ott_ex",
+  "karar": "al",
+  "pazar": "kripto,abd,bist,emtia",
+  "tf": "1d (çeviri)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "HnelYN0A": {
+  "gerekce": "KESİN ELEME: gerekli veri yok — gün içi seans (≤15 dk) geçmişi Yahoo'da yalnız 60 gündür (Aşama-1 kuralı), ≥300 işlem/gün içi eşiği bu veriyle sağlanamaz.",
+  "hedef": null,
+  "karar": "ele",
+  "pazar": "vadeli/altın/hisse gün içi",
+  "tf": "5dk–15dk",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "Hrc7Gfqe": {
+  "gerekce": "Kod okundu; kesin-eleme listesinde (kapalı kaynak, strategy() yok, repaint/lookahead, DCA/grid/martingale, veri yok) değil → `tv/stratejiler/mcg_flow.py` olarak çevrildi ve test edildi. Sonuç ve eşik tablosu RAPOR.md'de. Zaman dilimi belirtilmemiş; 4 saatlik.",
+  "hedef": "mcg_flow",
+  "karar": "al",
+  "pazar": "kripto,abd,emtia",
+  "tf": "4h (çeviri)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "HyzpDR9t": {
+  "gerekce": "Kod okundu; kesin-eleme listesinde (kapalı kaynak, strategy() yok, repaint/lookahead, DCA/grid/martingale, veri yok) değil → `tv/stratejiler/saucer_ml.py` olarak çevrildi ve test edildi. Sonuç ve eşik tablosu RAPOR.md'de. PDF: BTCUSDT 3 saat.",
+  "hedef": "saucer_ml",
+  "karar": "al",
+  "pazar": "kripto",
+  "tf": "3h (çeviri)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "IGJPEi7L": {
+  "gerekce": "Kod okundu; kesin-eleme listesinde (kapalı kaynak, strategy() yok, repaint/lookahead, DCA/grid/martingale, veri yok) değil → `tv/stratejiler/stoch_rsi.py` olarak çevrildi ve test edildi. Sonuç ve eşik tablosu RAPOR.md'de. Zaman dilimi belirtilmemiş; günlük (klasik 2015 betiği).",
+  "hedef": "stoch_rsi",
+  "karar": "al",
+  "pazar": "kripto,abd,bist,emtia",
+  "tf": "1d (çeviri)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "IHVPG6TS": {
+  "gerekce": "Önceki tur 'eğitim/şablon' diye elemişti; sinyal SMA(14/28) kesişimi gerçek bir kural → ortak sinyal `tv/stratejiler/ma_demo.py` ile test edildi (SL/TP/zaman penceresi örneklerinin kendileri çevrilmedi: sinyal aynı).",
+  "hedef": "ma_demo",
+  "karar": "al",
+  "pazar": "kripto,abd,bist,emtia",
+  "tf": "1g (çeviri)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "Ip667jzb": {
+  "gerekce": "Önceki 'kopya/genel' gerekçesi geçersiz; varsayılan ayarlarla çevrildi.",
+  "hedef": "ma_cross_dyn",
+  "karar": "al",
+  "pazar": "hepsi",
+  "tf": "1g",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "IqUET4xO": {
+  "gerekce": "Aday. Bekleyen stop emri bir mum geçerli (Pine'da kalıcı).",
+  "hedef": "fractal_sky",
+  "karar": "al",
+  "pazar": "kripto (BTC)",
+  "tf": "4s",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "IvMdQJNW": {
+  "gerekce": "KESİN ELEME: grid (B2 kuralı). Her seviyede küçük kâr, aralık dışı düşüşte sınırsız zarar; kazanma oranı yapay yüksek, getiri aralık varsayımına bağlı.",
+  "hedef": null,
+  "karar": "ele",
+  "pazar": "tek sembol",
+  "tf": "15dk–1s",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "JtopWlYQ": {
+  "gerekce": "KESİN ELEME: DCA / ortalama düşürme (B2 kuralı). Taban emir + ek emirler + ortalama maliyetten çıkış kuyruk riskini gizler: kazanma oranı ve kâr faktörü şişer, tek bir derin düşüşte tüm ek emirler dolar. Girişin kendisi (RSI eşiği) ayrı test edilebilir ama bu betiğin sonucu DCA yapısına ait.",
+  "hedef": null,
+  "karar": "ele",
+  "pazar": "tek sembol (kripto/hisse tokeni/altın)",
+  "tf": "15dk–4s (betiğin sembol/süresine göre)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "KOfsPM9h": {
+  "gerekce": "KESİN ELEME: gerekli veri yok — NSE 5 dk verisi yok; Yahoo 5 dk yalnız 60 gün. Seans kuralı (09:15–14:45) ve komisyon (30 birim sabit) Hint piyasasına özgü.",
+  "hedef": null,
+  "karar": "ele",
+  "pazar": "NSE hisse/vadeli",
+  "tf": "5 dk",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "KX7AgFeB": {
+  "gerekce": "KESİN ELEME: gerekli veri yok — gün içi seans (≤15 dk) geçmişi Yahoo'da yalnız 60 gündür (Aşama-1 kuralı), ≥300 işlem/gün içi eşiği bu veriyle sağlanamaz.",
+  "hedef": null,
+  "karar": "ele",
+  "pazar": "vadeli/altın/hisse gün içi",
+  "tf": "5dk–15dk",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "LcA4mcE6": {
+  "gerekce": "Önceki tur gerekçesi: «temsilci seçilmedi». B2 kesin-eleme listesinde (kapalı kaynak, strategy() yok, gerçek repaint/lookahead, DCA/grid/martingale, veri yok) bu betik YOK; kod okundu ve `tv/stratejiler/conf_rank.py` olarak çevrilip test edildi.",
+  "hedef": "conf_rank",
+  "karar": "al",
+  "pazar": "kripto,abd,bist,emtia",
+  "tf": "1d (çeviri)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "LxrgnsTO": {
+  "gerekce": "KESİN ELEME: kaynak kapalı / bulunamadı (B2). Sayfa kimliği (`PUB;…`) alınamadıysa yayın kaldırılmış.",
+  "hedef": null,
+  "karar": "ele",
+  "pazar": "?",
+  "tf": "?",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "M6uONKNI": {
+  "gerekce": "Önceki tur gerekçesi: «temsilci seçilmedi». B2 kesin-eleme listesinde (kapalı kaynak, strategy() yok, gerçek repaint/lookahead, DCA/grid/martingale, veri yok) bu betik YOK; kod okundu ve `tv/stratejiler/bb_power.py` olarak çevrilip test edildi.",
+  "hedef": "bb_power",
+  "karar": "al",
+  "pazar": "kripto,abd,emtia",
+  "tf": "1h (çeviri)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "M9taaIkp": {
+  "gerekce": "KESİN ELEME: analiz aracı (pyramiding=500; ayarlanabilir sinyal seçici).",
+  "hedef": null,
+  "karar": "ele",
+  "pazar": "?",
+  "tf": "?",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "MQDDEl1e": {
+  "gerekce": "KESİN ELEME: emir akışı verisi gerekir (B2).",
+  "hedef": null,
+  "karar": "ele",
+  "pazar": "?",
+  "tf": "?",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "MvlwAzSg": {
+  "gerekce": "Kod okundu; kesin-eleme listesinde (kapalı kaynak, strategy() yok, repaint/lookahead, DCA/grid/martingale, veri yok) değil → `tv/stratejiler/bj_bot.py` olarak çevrildi ve test edildi. Sonuç ve eşik tablosu RAPOR.md'de. Zaman dilimi belirtilmemiş; 4 saatlik.",
+  "hedef": "bj_bot",
+  "karar": "al",
+  "pazar": "kripto,abd,bist,emtia",
+  "tf": "4h (çeviri)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "N1OCoFkf": {
+  "gerekce": "Kod okundu; kesin-eleme listesinde (kapalı kaynak, strategy() yok, repaint/lookahead, DCA/grid/martingale, veri yok) değil → `tv/stratejiler/sikisma_bb.py` olarak çevrildi ve test edildi. Sonuç ve eşik tablosu RAPOR.md'de. Zaman dilimi belirtilmemiş; 1 saatlik, tüm pazarlar.",
+  "hedef": "sikisma_bb",
+  "karar": "al",
+  "pazar": "kripto,abd,bist,emtia",
+  "tf": "1h (çeviri)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "NJb4BQ5n": {
+  "gerekce": "Aday (varsayılanda martingale kapalı); `strategy.order` net-pozisyon mantığı basitleştirildi. Forex yok → saatlik kripto/ABD/emtia.",
+  "hedef": "bilateral_stoch",
+  "karar": "al",
+  "pazar": "forex (EURUSD)",
+  "tf": "15dk",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "NfihxKxr": {
+  "gerekce": "Önceki tur gerekçesi: «temsilci seçilmedi». B2 kesin-eleme listesinde (kapalı kaynak, strategy() yok, gerçek repaint/lookahead, DCA/grid/martingale, veri yok) bu betik YOK; kod okundu ve `tv/stratejiler/penny_st.py` olarak çevrilip test edildi.",
+  "hedef": "penny_st",
+  "karar": "al",
+  "pazar": "kripto,abd,bist,emtia",
+  "tf": "1d (çeviri)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "NgSIfKQx": {
+  "gerekce": "Kod okundu; kesin-eleme listesinde (kapalı kaynak, strategy() yok, repaint/lookahead, DCA/grid/martingale, veri yok) değil → `tv/stratejiler/st_ema_btc.py` olarak çevrildi ve test edildi. Sonuç ve eşik tablosu RAPOR.md'de. Yazar BTCUSD 1 saatlik için yazmış; kripto 1 saatlik (14 coin).",
+  "hedef": "st_ema_btc",
+  "karar": "al",
+  "pazar": "kripto",
+  "tf": "1h (çeviri)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "OEeqwUwB": {
+  "gerekce": "KESİN ELEME: grid (B2 kuralı). Her seviyede küçük kâr, aralık dışı düşüşte sınırsız zarar; kazanma oranı yapay yüksek, getiri aralık varsayımına bağlı.",
+  "hedef": null,
+  "karar": "ele",
+  "pazar": "tek sembol",
+  "tf": "15dk–1s",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "OTfw8b2a": {
+  "gerekce": "KESİN ELEME: alım-satım stratejisi değil, işlem raporu oynatıcı.",
+  "hedef": null,
+  "karar": "ele",
+  "pazar": "?",
+  "tf": "?",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "OUOx3rYT": {
+  "gerekce": "Önceki tur gerekçesi: «temsilci seçilmedi». B2 kesin-eleme listesinde (kapalı kaynak, strategy() yok, gerçek repaint/lookahead, DCA/grid/martingale, veri yok) bu betik YOK; kod okundu ve `tv/stratejiler/ribbon_flip.py` olarak çevrilip test edildi.",
+  "hedef": "ribbon_flip",
+  "karar": "al",
+  "pazar": "kripto,abd,bist,emtia",
+  "tf": "4h (çeviri)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "OvE4qQgh": {
+  "gerekce": "KESİN ELEME: gerekli veri yok — delta için alt zaman dilimi (tick/dakika) hacim ayrımı gerekir; yalnız OHLCV'den doğru üretilemez (emir akışı verisi).",
+  "hedef": null,
+  "karar": "ele",
+  "pazar": "kripto/vadeli",
+  "tf": "15 dk–1 s (deltaTF alt dilim)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "P5Gu6F8k": {
+  "gerekce": "Kod okundu; kesin-eleme listesinde (kapalı kaynak, strategy() yok, repaint/lookahead, DCA/grid/martingale, veri yok) değil → `tv/stratejiler/st_kivanc.py` olarak çevrildi ve test edildi. Sonuç ve eşik tablosu RAPOR.md'de. Yazar zaman dilimi belirtmemiş; günlük, tüm pazarlar (trend takip her yerde anlamlı).",
+  "hedef": "st_kivanc",
+  "karar": "al",
+  "pazar": "kripto,abd,bist,emtia",
+  "tf": "1d (çeviri)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "PETNavGq": {
+  "gerekce": "Aday.",
+  "hedef": "triple_cci",
+  "karar": "al",
+  "pazar": "kripto (BTC)",
+  "tf": "2s",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "PdJvHIfQ": {
+  "gerekce": "Kod okundu; kesin-eleme listesinde (kapalı kaynak, strategy() yok, repaint/lookahead, DCA/grid/martingale, veri yok) değil → `tv/stratejiler/htf_level.py` olarak çevrildi ve test edildi. Sonuç ve eşik tablosu RAPOR.md'de. HTF=günlük, betik gün içi grafikte çalışır; saatlik.",
+  "hedef": "htf_level",
+  "karar": "al",
+  "pazar": "kripto,abd,emtia",
+  "tf": "1h (çeviri)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "Pv1GvUVs": {
+  "gerekce": "Aday.",
+  "hedef": "kst_sky",
+  "karar": "al",
+  "pazar": "kripto (BTC)",
+  "tf": "1s",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "QQcgQT51": {
+  "gerekce": "KESİN ELEME: DCA / ortalama düşürme (B2 kuralı). Taban emir + ek emirler + ortalama maliyetten çıkış kuyruk riskini gizler: kazanma oranı ve kâr faktörü şişer, tek bir derin düşüşte tüm ek emirler dolar. Girişin kendisi (RSI eşiği) ayrı test edilebilir ama bu betiğin sonucu DCA yapısına ait.",
+  "hedef": null,
+  "karar": "ele",
+  "pazar": "tek sembol (kripto/hisse tokeni/altın)",
+  "tf": "15dk–4s (betiğin sembol/süresine göre)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "Qg1Jra51": {
+  "gerekce": "Önceki tur gerekçesi: «temsilci seçilmedi». B2 kesin-eleme listesinde (kapalı kaynak, strategy() yok, gerçek repaint/lookahead, DCA/grid/martingale, veri yok) bu betik YOK; kod okundu ve `tv/stratejiler/rsi_bulldiv.py` olarak çevrilip test edildi.",
+  "hedef": "rsi_bulldiv",
+  "karar": "al",
+  "pazar": "kripto,abd,bist,emtia",
+  "tf": "1d (çeviri)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "SBFz8vXU": {
+  "gerekce": "KESİN ELEME: grid (B2 kuralı). Her seviyede küçük kâr, aralık dışı düşüşte sınırsız zarar; kazanma oranı yapay yüksek, getiri aralık varsayımına bağlı.",
+  "hedef": null,
+  "karar": "ele",
+  "pazar": "tek sembol",
+  "tf": "15dk–1s",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "Sg2qyDDe": {
+  "gerekce": "Kod okundu; kesin-eleme listesinde (kapalı kaynak, strategy() yok, repaint/lookahead, DCA/grid/martingale, veri yok) değil → `tv/stratejiler/smart_trend.py` olarak çevrildi ve test edildi. Sonuç ve eşik tablosu RAPOR.md'de. Zaman dilimi belirtilmemiş (7 günlük pencere = gün içi/saatlik); saatlik.",
+  "hedef": "smart_trend",
+  "karar": "al",
+  "pazar": "kripto,abd,emtia",
+  "tf": "1h (çeviri)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "T5kd1bJ2": {
+  "gerekce": "Aday. Pine filtresi sıfırdan başlıyor (nz) — birebir aynı başlangıç.",
+  "hedef": "rsi_gauss",
+  "karar": "al",
+  "pazar": "kripto/ABD",
+  "tf": "1g (2014'ten)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "TDxSLJRA": {
+  "gerekce": "Kod okundu; kesin-eleme listesinde (kapalı kaynak, strategy() yok, repaint/lookahead, DCA/grid/martingale, veri yok) değil → `tv/stratejiler/vixfix.py` olarak çevrildi ve test edildi. Sonuç ve eşik tablosu RAPOR.md'de. Zaman dilimi belirtilmemiş; günlük, yalnız long (dip alma).",
+  "hedef": "vixfix",
+  "karar": "al",
+  "pazar": "kripto,abd,bist,emtia",
+  "tf": "1d (çeviri)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "TJuVmOfk": {
+  "gerekce": "Aday (15 dk kripto; 5 dk ayrıca).",
+  "hedef": "williams_zone",
+  "karar": "al",
+  "pazar": "kripto (BTC)",
+  "tf": "5dk",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "TbK1rB5B": {
+  "gerekce": "Kod okundu; kesin-eleme listesinde (kapalı kaynak, strategy() yok, repaint/lookahead, DCA/grid/martingale, veri yok) değil → `tv/stratejiler/st_rejim.py` olarak çevrildi ve test edildi. Sonuç ve eşik tablosu RAPOR.md'de. Zaman dilimi belirtilmemiş; 1 saatlik. Trailing/TP varsayılanı kapalı (yalnız dönüşle çıkış).",
+  "hedef": "st_rejim",
+  "karar": "al",
+  "pazar": "kripto,abd,bist,emtia",
+  "tf": "1h (çeviri)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "Tkrjao7P": {
+  "gerekce": "Kod okundu; kesin-eleme listesinde (kapalı kaynak, strategy() yok, repaint/lookahead, DCA/grid/martingale, veri yok) değil → `tv/stratejiler/ao_ac_zones.py` olarak çevrildi ve test edildi. Sonuç ve eşik tablosu RAPOR.md'de. PDF: BTCUSDT 4 saat.",
+  "hedef": "ao_ac_zones",
+  "karar": "al",
+  "pazar": "kripto",
+  "tf": "4h (çeviri)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "Tl9RRJAT": {
+  "gerekce": "KESİN ELEME: DCA / ortalama düşürme (B2 kuralı). Taban emir + ek emirler + ortalama maliyetten çıkış kuyruk riskini gizler: kazanma oranı ve kâr faktörü şişer, tek bir derin düşüşte tüm ek emirler dolar. Girişin kendisi (RSI eşiği) ayrı test edilebilir ama bu betiğin sonucu DCA yapısına ait.",
+  "hedef": null,
+  "karar": "ele",
+  "pazar": "tek sembol (kripto/hisse tokeni/altın)",
+  "tf": "15dk–4s (betiğin sembol/süresine göre)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "U0wTnRuE": {
+  "gerekce": "Önceki tur gerekçesi: «geleceği gören request.security (lookahead_on, ofsetsiz)». B2 kesin-eleme listesinde (kapalı kaynak, strategy() yok, gerçek repaint/lookahead, DCA/grid/martingale, veri yok) bu betik YOK; kod okundu ve `tv/stratejiler/rf_ha.py` olarak çevrilip test edildi.",
+  "hedef": "rf_ha",
+  "karar": "al",
+  "pazar": "kripto",
+  "tf": "15m (çeviri)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "U3mcySX9": {
+  "gerekce": "KESİN ELEME: gerekli veri yok (kalabalık/duygu verisi).",
+  "hedef": null,
+  "karar": "ele",
+  "pazar": "?",
+  "tf": "?",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "UVosPbFA": {
+  "gerekce": "Kod okundu; kesin-eleme listesinde (kapalı kaynak, strategy() yok, repaint/lookahead, DCA/grid/martingale, veri yok) değil → `tv/stratejiler/macd_aggr.py` olarak çevrildi ve test edildi. Sonuç ve eşik tablosu RAPOR.md'de. Zaman dilimi belirtilmemiş (Almanca arayüz, 'Kerzen'); saatlik.",
+  "hedef": "macd_aggr",
+  "karar": "al",
+  "pazar": "kripto,abd,emtia",
+  "tf": "1h (çeviri)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "V87nRt9v": {
+  "gerekce": "Önceki tur gerekçesi: «temsilci seçilmedi». B2 kesin-eleme listesinde (kapalı kaynak, strategy() yok, gerçek repaint/lookahead, DCA/grid/martingale, veri yok) bu betik YOK; kod okundu ve `tv/stratejiler/macd_sniper.py` olarak çevrilip test edildi.",
+  "hedef": "macd_sniper",
+  "karar": "al",
+  "pazar": "kripto,abd,emtia",
+  "tf": "4h (çeviri)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "VFzCk3HX": {
+  "gerekce": "KESİN ELEME: gerekli veri yok (tarım vadelisi, mahsul yılı takvimi) ve kademeli ekleme.",
+  "hedef": null,
+  "karar": "ele",
+  "pazar": "tarım vadeli",
+  "tf": "?",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "VO6DY8s1": {
+  "gerekce": "Kod okundu; kesin-eleme listesinde (kapalı kaynak, strategy() yok, repaint/lookahead, DCA/grid/martingale, veri yok) değil → `tv/stratejiler/macd_reloaded.py` olarak çevrildi ve test edildi. Sonuç ve eşik tablosu RAPOR.md'de. Zaman dilimi belirtilmemiş; günlük, tüm pazarlar. MA türü varsayılan VAR.",
+  "hedef": "macd_reloaded",
+  "karar": "al",
+  "pazar": "kripto,abd,bist,emtia",
+  "tf": "1d (çeviri)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "VuYM89Tw": {
+  "gerekce": "Kod okundu; kesin-eleme listesinde (kapalı kaynak, strategy() yok, repaint/lookahead, DCA/grid/martingale, veri yok) değil → `tv/stratejiler/grover.py` olarak çevrildi ve test edildi. Sonuç ve eşik tablosu RAPOR.md'de. Zaman dilimi belirtilmemiş; günlük, tüm pazarlar (uzun ATR: günlükte ~2 yıl).",
+  "hedef": "grover",
+  "karar": "al",
+  "pazar": "kripto,abd,bist,emtia",
+  "tf": "1d (çeviri)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "W67tJltC": {
+  "gerekce": "Kod okundu; kesin-eleme listesinde (kapalı kaynak, strategy() yok, repaint/lookahead, DCA/grid/martingale, veri yok) değil → `tv/stratejiler/zscore.py` olarak çevrildi ve test edildi. Sonuç ve eşik tablosu RAPOR.md'de. Zaman dilimi belirtilmemiş; 4 saatlik.",
+  "hedef": "zscore",
+  "karar": "al",
+  "pazar": "kripto,abd,bist,emtia",
+  "tf": "4h (çeviri)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "WhxmHc8H": {
+  "gerekce": "KESİN ELEME: grid (B2 kuralı). Her seviyede küçük kâr, aralık dışı düşüşte sınırsız zarar; kazanma oranı yapay yüksek, getiri aralık varsayımına bağlı.",
+  "hedef": null,
+  "karar": "ele",
+  "pazar": "tek sembol",
+  "tf": "15dk–1s",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "WpJ5ym7u": {
+  "gerekce": "Önceki tur gerekçesi: «pivot bazlı giriş (repaint riski)». B2 kesin-eleme listesinde (kapalı kaynak, strategy() yok, gerçek repaint/lookahead, DCA/grid/martingale, veri yok) bu betik YOK; kod okundu ve `tv/stratejiler/pps.py` olarak çevrilip test edildi.",
+  "hedef": "pps",
+  "karar": "al",
+  "pazar": "kripto,abd,bist,emtia",
+  "tf": "1d (çeviri)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "X0F9OE4L": {
+  "gerekce": "Kod okundu; kesin-eleme listesinde (kapalı kaynak, strategy() yok, repaint/lookahead, DCA/grid/martingale, veri yok) değil → `tv/stratejiler/ribbon_fan.py` olarak çevrildi ve test edildi. Sonuç ve eşik tablosu RAPOR.md'de. Yazar zaman dilimi belirtmemiş; 4 saatlik.",
+  "hedef": "ribbon_fan",
+  "karar": "al",
+  "pazar": "kripto,abd,bist,emtia",
+  "tf": "4h (çeviri)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "XGqSzuxJ": {
+  "gerekce": "Aday. Kısmi kâr (6R'de %15) ve DD durdurma modellenmedi.",
+  "hedef": "btc_flip",
+  "karar": "al",
+  "pazar": "kripto (BTC)",
+  "tf": "1s",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "XK8XbDhT": {
+  "gerekce": "Kod okundu; kesin-eleme listesinde (kapalı kaynak, strategy() yok, repaint/lookahead, DCA/grid/martingale, veri yok) değil → `tv/stratejiler/gunluk_kapanis.py` olarak çevrildi ve test edildi. Sonuç ve eşik tablosu RAPOR.md'de. Betik günlük kapanışlara bakar; günlük. Eşik 0 yerine 0.0001 (sayısal ±%20 testi için sıfırdan farklı).",
+  "hedef": "gunluk_kapanis",
+  "karar": "al",
+  "pazar": "kripto,abd,bist,emtia",
+  "tf": "1d (çeviri)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "XRZCjbFr": {
+  "gerekce": "Aday.",
+  "hedef": "channel_rev",
+  "karar": "al",
+  "pazar": "ABD ETF (QQQ/SPY)",
+  "tf": "1g",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "XuFsLXAW": {
+  "gerekce": "KESİN ELEME: DCA / ortalama düşürme (B2 kuralı). Taban emir + ek emirler + ortalama maliyetten çıkış kuyruk riskini gizler: kazanma oranı ve kâr faktörü şişer, tek bir derin düşüşte tüm ek emirler dolar. Girişin kendisi (RSI eşiği) ayrı test edilebilir ama bu betiğin sonucu DCA yapısına ait.",
+  "hedef": null,
+  "karar": "ele",
+  "pazar": "tek sembol (kripto/hisse tokeni/altın)",
+  "tf": "15dk–4s (betiğin sembol/süresine göre)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "YBB12317": {
+  "gerekce": "KESİN ELEME: DCA / ortalama düşürme (B2 kuralı). Taban emir + ek emirler + ortalama maliyetten çıkış kuyruk riskini gizler: kazanma oranı ve kâr faktörü şişer, tek bir derin düşüşte tüm ek emirler dolar. Girişin kendisi (RSI eşiği) ayrı test edilebilir ama bu betiğin sonucu DCA yapısına ait.",
+  "hedef": null,
+  "karar": "ele",
+  "pazar": "tek sembol (kripto/hisse tokeni/altın)",
+  "tf": "15dk–4s (betiğin sembol/süresine göre)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "YfPnKE22": {
+  "gerekce": "Önceki tur gerekçesi: «temsilci seçilmedi». B2 kesin-eleme listesinde (kapalı kaynak, strategy() yok, gerçek repaint/lookahead, DCA/grid/martingale, veri yok) bu betik YOK; kod okundu ve `tv/stratejiler/macd_ashi.py` olarak çevrilip test edildi.",
+  "hedef": "macd_ashi",
+  "karar": "al",
+  "pazar": "kripto,abd,bist,emtia",
+  "tf": "1d (çeviri)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "ZLcmWQtj": {
+  "gerekce": "Önceki tur gerekçesi: «kopya (PMax/OTT ailesi; temsilciler tutuldu)». B2 kesin-eleme listesinde (kapalı kaynak, strategy() yok, gerçek repaint/lookahead, DCA/grid/martingale, veri yok) bu betik YOK; kod okundu ve `tv/stratejiler/pmax_rsi.py` olarak çevrilip test edildi. RSI üzerinde T3 + PMax → fiyat PMax'inden farklı gösterge.",
+  "hedef": "pmax_rsi",
+  "karar": "al",
+  "pazar": "kripto,abd,bist,emtia",
+  "tf": "1d (çeviri)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "ZNXTGgKN": {
+  "gerekce": "KESİN ELEME: DCA / ortalama düşürme (B2 kuralı). Taban emir + ek emirler + ortalama maliyetten çıkış kuyruk riskini gizler: kazanma oranı ve kâr faktörü şişer, tek bir derin düşüşte tüm ek emirler dolar. Girişin kendisi (RSI eşiği) ayrı test edilebilir ama bu betiğin sonucu DCA yapısına ait.",
+  "hedef": null,
+  "karar": "ele",
+  "pazar": "tek sembol (kripto/hisse tokeni/altın)",
+  "tf": "15dk–4s (betiğin sembol/süresine göre)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "Za5HKgrL": {
+  "gerekce": "KESİN ELEME: gerekli veri yok — gün içi seans (≤15 dk) geçmişi Yahoo'da yalnız 60 gündür (Aşama-1 kuralı), ≥300 işlem/gün içi eşiği bu veriyle sağlanamaz.",
+  "hedef": null,
+  "karar": "ele",
+  "pazar": "vadeli/altın/hisse gün içi",
+  "tf": "5dk–15dk",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "ZiHWqvCl": {
+  "gerekce": "KESİN ELEME: DCA / ortalama düşürme (B2 kuralı). Taban emir + ek emirler + ortalama maliyetten çıkış kuyruk riskini gizler: kazanma oranı ve kâr faktörü şişer, tek bir derin düşüşte tüm ek emirler dolar. Girişin kendisi (RSI eşiği) ayrı test edilebilir ama bu betiğin sonucu DCA yapısına ait.",
+  "hedef": null,
+  "karar": "ele",
+  "pazar": "tek sembol (kripto/hisse tokeni/altın)",
+  "tf": "15dk–4s (betiğin sembol/süresine göre)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "apaoI4Zr": {
+  "gerekce": "KESİN ELEME: grid (B2 kuralı). Her seviyede küçük kâr, aralık dışı düşüşte sınırsız zarar; kazanma oranı yapay yüksek, getiri aralık varsayımına bağlı.",
+  "hedef": null,
+  "karar": "ele",
+  "pazar": "tek sembol",
+  "tf": "15dk–1s",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "bA9UFcgj": {
+  "gerekce": "Aday (yalnız short; az işlem beklenir).",
+  "hedef": "spy_bear",
+  "karar": "al",
+  "pazar": "ABD (SPY)",
+  "tf": "1g",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "bFXf4IXh": {
+  "gerekce": "Önceki tur gerekçesi: «eğitim (Kelly boyutlandırma örneği)». B2 kesin-eleme listesinde (kapalı kaynak, strategy() yok, gerçek repaint/lookahead, DCA/grid/martingale, veri yok) bu betik YOK; kod okundu ve `tv/stratejiler/kelly_bands.py` olarak çevrilip test edildi. Örnek ama gerçek bir bant-kırılım giriş kuralı içeriyor.",
+  "hedef": "kelly_bands",
+  "karar": "al",
+  "pazar": "kripto,abd,bist,emtia",
+  "tf": "1d (çeviri)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "bajhb6V9": {
+  "gerekce": "KESİN ELEME: ortalama düşürme + katlanan boyut (B2).",
+  "hedef": null,
+  "karar": "ele",
+  "pazar": "?",
+  "tf": "?",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "bjoh9PTd": {
+  "gerekce": "KESİN ELEME: grid (B2 kuralı). Her seviyede küçük kâr, aralık dışı düşüşte sınırsız zarar; kazanma oranı yapay yüksek, getiri aralık varsayımına bağlı.",
+  "hedef": null,
+  "karar": "ele",
+  "pazar": "tek sembol",
+  "tf": "15dk–1s",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "boHD0HzE": {
+  "gerekce": "Kod okundu; kesin-eleme listesinde (kapalı kaynak, strategy() yok, repaint/lookahead, DCA/grid/martingale, veri yok) değil → `tv/stratejiler/ichimoku.py` olarak çevrildi ve test edildi. Sonuç ve eşik tablosu RAPOR.md'de. Zaman dilimi belirtilmemiş; günlük (Ichimoku klasik).",
+  "hedef": "ichimoku",
+  "karar": "al",
+  "pazar": "kripto,abd,bist,emtia",
+  "tf": "1d (çeviri)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "cJhpIJ2w": {
+  "gerekce": "Kod okundu; kesin-eleme listesinde (kapalı kaynak, strategy() yok, repaint/lookahead, DCA/grid/martingale, veri yok) değil → `tv/stratejiler/sott.py` olarak çevrildi ve test edildi. Sonuç ve eşik tablosu RAPOR.md'de. Zaman dilimi belirtilmemiş; günlük (250 barlık %K).",
+  "hedef": "sott",
+  "karar": "al",
+  "pazar": "kripto,abd,bist,emtia",
+  "tf": "1d (çeviri)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "d117dN6D": {
+  "gerekce": "Aday. 'Safety order' yalnız başlıkta 'disabled' denmiş.",
+  "hedef": "ma_cci_trail",
+  "karar": "al",
+  "pazar": "kripto (ETH)",
+  "tf": "1s",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "d1JxXpid": {
+  "gerekce": "Önceki tur gerekçesi: «kopya (Gaussian Channel; erJi1tWf tutuldu)». B2 kesin-eleme listesinde (kapalı kaynak, strategy() yok, gerçek repaint/lookahead, DCA/grid/martingale, veri yok) bu betik YOK; kod okundu ve `tv/stratejiler/gauss_btc.py` olarak çevrilip test edildi. Giriş mantığı erJi1tWf'den farklı.",
+  "hedef": "gauss_btc",
+  "karar": "al",
+  "pazar": "kripto",
+  "tf": "4h (çeviri)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "dLdjnPLD": {
+  "gerekce": "KESİN ELEME: DCA / ortalama düşürme (B2 kuralı). Taban emir + ek emirler + ortalama maliyetten çıkış kuyruk riskini gizler: kazanma oranı ve kâr faktörü şişer, tek bir derin düşüşte tüm ek emirler dolar. Girişin kendisi (RSI eşiği) ayrı test edilebilir ama bu betiğin sonucu DCA yapısına ait.",
+  "hedef": null,
+  "karar": "ele",
+  "pazar": "tek sembol (kripto/hisse tokeni/altın)",
+  "tf": "15dk–4s (betiğin sembol/süresine göre)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "dU643vz2": {
+  "gerekce": "KESİN ELEME: DCA / ortalama düşürme (B2 kuralı). Taban emir + ek emirler + ortalama maliyetten çıkış kuyruk riskini gizler: kazanma oranı ve kâr faktörü şişer, tek bir derin düşüşte tüm ek emirler dolar. Girişin kendisi (RSI eşiği) ayrı test edilebilir ama bu betiğin sonucu DCA yapısına ait.",
+  "hedef": null,
+  "karar": "ele",
+  "pazar": "tek sembol (kripto/hisse tokeni/altın)",
+  "tf": "15dk–4s (betiğin sembol/süresine göre)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "dwgn7hrE": {
+  "gerekce": "Kod okundu; kesin-eleme listesinde (kapalı kaynak, strategy() yok, repaint/lookahead, DCA/grid/martingale, veri yok) değil → `tv/stratejiler/rsi_coil.py` olarak çevrildi ve test edildi. Sonuç ve eşik tablosu RAPOR.md'de. Zaman dilimi belirtilmemiş; 1 saatlik.",
+  "hedef": "rsi_coil",
+  "karar": "al",
+  "pazar": "kripto,abd,bist,emtia",
+  "tf": "1h (çeviri)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "dxhgQwyI": {
+  "gerekce": "Kod okundu; kesin-eleme listesinde (kapalı kaynak, strategy() yok, repaint/lookahead, DCA/grid/martingale, veri yok) değil → `tv/stratejiler/gvto.py` olarak çevrildi ve test edildi. Sonuç ve eşik tablosu RAPOR.md'de. Zaman dilimi belirtilmemiş; günlük, tüm pazarlar.",
+  "hedef": "gvto",
+  "karar": "al",
+  "pazar": "kripto,abd,bist,emtia",
+  "tf": "1d (çeviri)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "eENf7NpJ": {
+  "gerekce": "Kod okundu; kesin-eleme listesinde (kapalı kaynak, strategy() yok, repaint/lookahead, DCA/grid/martingale, veri yok) değil → `tv/stratejiler/tott.py` olarak çevrildi ve test edildi. Sonuç ve eşik tablosu RAPOR.md'de. Zaman dilimi belirtilmemiş; günlük, tüm pazarlar.",
+  "hedef": "tott",
+  "karar": "al",
+  "pazar": "kripto,abd,bist,emtia",
+  "tf": "1d (çeviri)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "eZsaqsZY": {
+  "gerekce": "KESİN ELEME: DCA / ortalama düşürme (B2 kuralı). Taban emir + ek emirler + ortalama maliyetten çıkış kuyruk riskini gizler: kazanma oranı ve kâr faktörü şişer, tek bir derin düşüşte tüm ek emirler dolar. Girişin kendisi (RSI eşiği) ayrı test edilebilir ama bu betiğin sonucu DCA yapısına ait.",
+  "hedef": null,
+  "karar": "ele",
+  "pazar": "tek sembol (kripto/hisse tokeni/altın)",
+  "tf": "15dk–4s (betiğin sembol/süresine göre)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "edChhkxo": {
+  "gerekce": "Kod okundu; kesin-eleme listesinde (kapalı kaynak, strategy() yok, repaint/lookahead, DCA/grid/martingale, veri yok) değil → `tv/stratejiler/harmonik.py` olarak çevrildi ve test edildi. Sonuç ve eşik tablosu RAPOR.md'de. Zaman dilimi belirtilmemiş; 4 saatlik.",
+  "hedef": "harmonik",
+  "karar": "al",
+  "pazar": "kripto,abd,emtia",
+  "tf": "4h (çeviri)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "egTb7TgJ": {
+  "gerekce": "Önceki tur gerekçesi: «kopya (Gaussian Channel; erJi1tWf tutuldu)». B2 kesin-eleme listesinde (kapalı kaynak, strategy() yok, gerçek repaint/lookahead, DCA/grid/martingale, veri yok) bu betik YOK; kod okundu ve `tv/stratejiler/gauss_eth.py` olarak çevrilip test edildi. Giriş mantığı erJi1tWf'den farklı (bant kırılımı + StochRSI + SMA200 rejimi + alt bant stop).",
+  "hedef": "gauss_eth",
+  "karar": "al",
+  "pazar": "kripto",
+  "tf": "4h (çeviri)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "erJi1tWf": {
+  "gerekce": "Kod okundu; kesin-eleme listesinde (kapalı kaynak, strategy() yok, repaint/lookahead, DCA/grid/martingale, veri yok) değil → `tv/stratejiler/gaussian.py` olarak çevrildi ve test edildi. Sonuç ve eşik tablosu RAPOR.md'de. Zaman dilimi belirtilmemiş; günlük, tüm pazarlar. Bant çizgileri yalnız görsel (sinyal orta çizgi).",
+  "hedef": "gaussian",
+  "karar": "al",
+  "pazar": "kripto,abd,bist,emtia",
+  "tf": "1d (çeviri)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "f8HJ9TuJ": {
+  "gerekce": "KESİN ELEME: grid (B2 kuralı). Her seviyede küçük kâr, aralık dışı düşüşte sınırsız zarar; kazanma oranı yapay yüksek, getiri aralık varsayımına bağlı.",
+  "hedef": null,
+  "karar": "ele",
+  "pazar": "tek sembol",
+  "tf": "15dk–1s",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "fmPC9fWd": {
+  "gerekce": "KESİN ELEME: gerekli veri yok — gün içi seans (≤15 dk) geçmişi Yahoo'da yalnız 60 gündür (Aşama-1 kuralı), ≥300 işlem/gün içi eşiği bu veriyle sağlanamaz.",
+  "hedef": null,
+  "karar": "ele",
+  "pazar": "vadeli/altın/hisse gün içi",
+  "tf": "5dk–15dk",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "gU6RDuh5": {
+  "gerekce": "KESİN ELEME: altyapı — sinyal dış gösterge çıktısı (kendi mantığı yok).",
+  "hedef": null,
+  "karar": "ele",
+  "pazar": "?",
+  "tf": "?",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "ghocsiv7": {
+  "gerekce": "Önceki tur gerekçesi: «temsilci seçilmedi». B2 kesin-eleme listesinde (kapalı kaynak, strategy() yok, gerçek repaint/lookahead, DCA/grid/martingale, veri yok) bu betik YOK; kod okundu ve `tv/stratejiler/gap_fill.py` olarak çevrilip test edildi. Gün içi mantık: saatlik hisse verisiyle.",
+  "hedef": "gap_fill",
+  "karar": "al",
+  "pazar": "abd,bist",
+  "tf": "1h (çeviri)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "gqaZYhUN": {
+  "gerekce": "Kod okundu; kesin-eleme listesinde (kapalı kaynak, strategy() yok, repaint/lookahead, DCA/grid/martingale, veri yok) değil → `tv/stratejiler/mom_exhaust.py` olarak çevrildi ve test edildi. Sonuç ve eşik tablosu RAPOR.md'de. Zaman dilimi belirtilmemiş; 1 saatlik.",
+  "hedef": "mom_exhaust",
+  "karar": "al",
+  "pazar": "kripto,abd,bist,emtia",
+  "tf": "1h (çeviri)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "hezSShJr": {
+  "gerekce": "Kod okundu; kesin-eleme listesinde (kapalı kaynak, strategy() yok, repaint/lookahead, DCA/grid/martingale, veri yok) değil → `tv/stratejiler/hybrid_brk.py` olarak çevrildi ve test edildi. Sonuç ve eşik tablosu RAPOR.md'de. Zaman dilimi belirtilmemiş; günlük (200 gün SMA, Minervini tarzı), yalnız long.",
+  "hedef": "hybrid_brk",
+  "karar": "al",
+  "pazar": "kripto,abd,bist,emtia",
+  "tf": "1d (çeviri)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "hoCPm5UY": {
+  "gerekce": "KESİN ELEME: gerçek bir giriş kuralı yok (bar sayacı modülo) — eğitim örneği.",
+  "hedef": null,
+  "karar": "ele",
+  "pazar": "?",
+  "tf": "?",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "i3Uc79fF": {
+  "gerekce": "Aday (varsayılan sürüm 1). Pine v4 `when=` sözdizimi; mantık basit.",
+  "hedef": "flawless",
+  "karar": "al",
+  "pazar": "kripto (BTC)",
+  "tf": "15dk",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "i90KnZdf": {
+  "gerekce": "KESİN ELEME: DCA / ortalama düşürme (B2 kuralı). Taban emir + ek emirler + ortalama maliyetten çıkış kuyruk riskini gizler: kazanma oranı ve kâr faktörü şişer, tek bir derin düşüşte tüm ek emirler dolar. Girişin kendisi (RSI eşiği) ayrı test edilebilir ama bu betiğin sonucu DCA yapısına ait.",
+  "hedef": null,
+  "karar": "ele",
+  "pazar": "tek sembol (kripto/hisse tokeni/altın)",
+  "tf": "15dk–4s (betiğin sembol/süresine göre)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "i9tJOtjl": {
+  "gerekce": "Önceki tur gerekçesi: «temsilci seçilmedi». B2 kesin-eleme listesinde (kapalı kaynak, strategy() yok, gerçek repaint/lookahead, DCA/grid/martingale, veri yok) bu betik YOK; kod okundu ve `tv/stratejiler/lube.py` olarak çevrilip test edildi.",
+  "hedef": "lube",
+  "karar": "al",
+  "pazar": "kripto,abd,bist,emtia",
+  "tf": "1d (çeviri)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "id8IPHdu": {
+  "gerekce": "KESİN ELEME: DCA / ortalama düşürme (B2 kuralı). Taban emir + ek emirler + ortalama maliyetten çıkış kuyruk riskini gizler: kazanma oranı ve kâr faktörü şişer, tek bir derin düşüşte tüm ek emirler dolar. Girişin kendisi (RSI eşiği) ayrı test edilebilir ama bu betiğin sonucu DCA yapısına ait.",
+  "hedef": null,
+  "karar": "ele",
+  "pazar": "tek sembol (kripto/hisse tokeni/altın)",
+  "tf": "15dk–4s (betiğin sembol/süresine göre)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "j36wYVnI": {
+  "gerekce": "KESİN ELEME: DCA / ortalama düşürme (B2 kuralı). Taban emir + ek emirler + ortalama maliyetten çıkış kuyruk riskini gizler: kazanma oranı ve kâr faktörü şişer, tek bir derin düşüşte tüm ek emirler dolar. Girişin kendisi (RSI eşiği) ayrı test edilebilir ama bu betiğin sonucu DCA yapısına ait.",
+  "hedef": null,
+  "karar": "ele",
+  "pazar": "tek sembol (kripto/hisse tokeni/altın)",
+  "tf": "15dk–4s (betiğin sembol/süresine göre)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "jXxP2m1Q": {
+  "gerekce": "KESİN ELEME: DCA / ortalama düşürme (B2 kuralı). Taban emir + ek emirler + ortalama maliyetten çıkış kuyruk riskini gizler: kazanma oranı ve kâr faktörü şişer, tek bir derin düşüşte tüm ek emirler dolar. Girişin kendisi (RSI eşiği) ayrı test edilebilir ama bu betiğin sonucu DCA yapısına ait.",
+  "hedef": null,
+  "karar": "ele",
+  "pazar": "tek sembol (kripto/hisse tokeni/altın)",
+  "tf": "15dk–4s (betiğin sembol/süresine göre)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "jd1KSVn7": {
+  "gerekce": "Aday.",
+  "hedef": "atr_rider",
+  "karar": "al",
+  "pazar": "endeks vadeli",
+  "tf": "1g",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "jjhUHcje": {
+  "gerekce": "Önceki tur 'eğitim/şablon' diye elemişti; sinyal SMA(14/28) kesişimi gerçek bir kural → ortak sinyal `tv/stratejiler/ma_demo.py` ile test edildi (SL/TP/zaman penceresi örneklerinin kendileri çevrilmedi: sinyal aynı).",
+  "hedef": "ma_demo",
+  "karar": "al",
+  "pazar": "kripto,abd,bist,emtia",
+  "tf": "1g (çeviri)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "kAYwdfND": {
+  "gerekce": "KESİN ELEME: gerekli veri yok — 5 dk geçmişi (endeks/altın vadeli) Yahoo'da 60 günle sınırlı, 164+92 betikte tek sembol belirtilmemiş; 6 mumluk (30 dk) tutma = gün içi, ≥300 işlem kuralı bu veriyle sağlanamaz.",
+  "hedef": null,
+  "karar": "ele",
+  "pazar": "belirsiz: minRange=5 puan → endeks/altın vadeli",
+  "tf": "5 dk (altı 30 dk request.security)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "kZVrTReu": {
+  "gerekce": "KESİN ELEME: kaynak kapalı / bulunamadı (B2). Sayfa kimliği (`PUB;…`) alınamadıysa yayın kaldırılmış.",
+  "hedef": null,
+  "karar": "ele",
+  "pazar": "?",
+  "tf": "?",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "kbYTJ8V2": {
+  "gerekce": "Kod okundu; kesin-eleme listesinde (kapalı kaynak, strategy() yok, repaint/lookahead, DCA/grid/martingale, veri yok) değil → `tv/stratejiler/kama_trend.py` olarak çevrildi ve test edildi. Sonuç ve eşik tablosu RAPOR.md'de. Zaman dilimi belirtilmemiş; 4 saatlik. Girişler arası min. 5 bar kuralı uygulanmadı (motor yeniden girişi zaten stop sonrası bir sonraki sinyalde yapar).",
+  "hedef": "kama_trend",
+  "karar": "al",
+  "pazar": "kripto,abd,bist,emtia",
+  "tf": "4h (çeviri)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "kuuXl2Gc": {
+  "gerekce": "KESİN ELEME: DCA / ortalama düşürme (B2 kuralı). Taban emir + ek emirler + ortalama maliyetten çıkış kuyruk riskini gizler: kazanma oranı ve kâr faktörü şişer, tek bir derin düşüşte tüm ek emirler dolar. Girişin kendisi (RSI eşiği) ayrı test edilebilir ama bu betiğin sonucu DCA yapısına ait.",
+  "hedef": null,
+  "karar": "ele",
+  "pazar": "tek sembol (kripto/hisse tokeni/altın)",
+  "tf": "15dk–4s (betiğin sembol/süresine göre)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "kxCXnuU6": {
+  "gerekce": "KESİN ELEME: grid (B2 kuralı). Her seviyede küçük kâr, aralık dışı düşüşte sınırsız zarar; kazanma oranı yapay yüksek, getiri aralık varsayımına bağlı.",
+  "hedef": null,
+  "karar": "ele",
+  "pazar": "tek sembol",
+  "tf": "15dk–1s",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "kzp8e4X3": {
+  "gerekce": "Kod okundu; kesin-eleme listesinde (kapalı kaynak, strategy() yok, repaint/lookahead, DCA/grid/martingale, veri yok) değil → `tv/stratejiler/pivot_rev.py` olarak çevrildi ve test edildi. Sonuç ve eşik tablosu RAPOR.md'de. Örnek betik; zaman dilimi yok; günlük, tüm pazarlar.",
+  "hedef": "pivot_rev",
+  "karar": "al",
+  "pazar": "kripto,abd,bist,emtia",
+  "tf": "1d (çeviri)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "lDGmh7ou": {
+  "gerekce": "Kod okundu; kesin-eleme listesinde (kapalı kaynak, strategy() yok, repaint/lookahead, DCA/grid/martingale, veri yok) değil → `tv/stratejiler/utbot.py` olarak çevrildi ve test edildi. Sonuç ve eşik tablosu RAPOR.md'de. UT Bot genelde saatlik/4 saatlikte kullanılır; 4 saatlik.",
+  "hedef": "utbot",
+  "karar": "al",
+  "pazar": "kripto,abd,bist,emtia",
+  "tf": "4h (çeviri)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "lnBGmMLT": {
+  "gerekce": "KESİN ELEME: DCA / ortalama düşürme (B2 kuralı). Taban emir + ek emirler + ortalama maliyetten çıkış kuyruk riskini gizler: kazanma oranı ve kâr faktörü şişer, tek bir derin düşüşte tüm ek emirler dolar. Girişin kendisi (RSI eşiği) ayrı test edilebilir ama bu betiğin sonucu DCA yapısına ait.",
+  "hedef": null,
+  "karar": "ele",
+  "pazar": "tek sembol (kripto/hisse tokeni/altın)",
+  "tf": "15dk–4s (betiğin sembol/süresine göre)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "m1JDhFR9": {
+  "gerekce": "Kod okundu; kesin-eleme listesinde (kapalı kaynak, strategy() yok, repaint/lookahead, DCA/grid/martingale, veri yok) değil → `tv/stratejiler/vbs.py` olarak çevrildi ve test edildi. Sonuç ve eşik tablosu RAPOR.md'de. Zaman dilimi belirtilmemiş; 4 saatlik.",
+  "hedef": "vbs",
+  "karar": "al",
+  "pazar": "kripto,abd,emtia",
+  "tf": "4h (çeviri)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "mfw4fJST": {
+  "gerekce": "Aday (28 satır). VIX verisi Yahoo ^VIX.",
+  "hedef": "vix_macd",
+  "karar": "al",
+  "pazar": "endeks/ABD",
+  "tf": "1g",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "mmrInMTp": {
+  "gerekce": "Önceki tur gerekçesi: «temsilci seçilmedi». B2 kesin-eleme listesinde (kapalı kaynak, strategy() yok, gerçek repaint/lookahead, DCA/grid/martingale, veri yok) bu betik YOK; kod okundu ve `tv/stratejiler/mom_seq.py` olarak çevrilip test edildi.",
+  "hedef": "mom_seq",
+  "karar": "al",
+  "pazar": "kripto,abd,emtia",
+  "tf": "1h (çeviri)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "mpjNqADq": {
+  "gerekce": "Kod okundu; kesin-eleme listesinde (kapalı kaynak, strategy() yok, repaint/lookahead, DCA/grid/martingale, veri yok) değil → `tv/stratejiler/st_regime_conf.py` olarak çevrildi ve test edildi. Sonuç ve eşik tablosu RAPOR.md'de. Zaman dilimi belirtilmemiş; 4 saatlik.",
+  "hedef": "st_regime_conf",
+  "karar": "al",
+  "pazar": "kripto,abd,emtia",
+  "tf": "4h (çeviri)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "mqh6UJ9p": {
+  "gerekce": "Aday.",
+  "hedef": "atr_rsi",
+  "karar": "al",
+  "pazar": "kripto (BTC)",
+  "tf": "15dk",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "mzv5SGie": {
+  "gerekce": "Önceki tur gerekçesi: «temsilci seçilmedi». B2 kesin-eleme listesinde (kapalı kaynak, strategy() yok, gerçek repaint/lookahead, DCA/grid/martingale, veri yok) bu betik YOK; kod okundu ve `tv/stratejiler/silver_macro.py` olarak çevrilip test edildi. Veri: ^TNX (Yahoo); DXY çıkışı varsayılanda kapalı.",
+  "hedef": "silver_macro",
+  "karar": "al",
+  "pazar": "GUMUS,ALTIN",
+  "tf": "1d (çeviri)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "n8bgynWl": {
+  "gerekce": "KESİN ELEME: altyapı/şablon.",
+  "hedef": null,
+  "karar": "ele",
+  "pazar": "?",
+  "tf": "?",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "n9ty3SVh": {
+  "gerekce": "Önceki tur gerekçesi: «temsilci seçilmedi». B2 kesin-eleme listesinde (kapalı kaynak, strategy() yok, gerçek repaint/lookahead, DCA/grid/martingale, veri yok) bu betik YOK; kod okundu ve `tv/stratejiler/quantum_st.py` olarak çevrilip test edildi.",
+  "hedef": "quantum_st",
+  "karar": "al",
+  "pazar": "kripto,abd,bist,emtia",
+  "tf": "1d (çeviri)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "nHGK4Qtp": {
+  "gerekce": "Kod okundu; kesin-eleme listesinde (kapalı kaynak, strategy() yok, repaint/lookahead, DCA/grid/martingale, veri yok) değil → `tv/stratejiler/pmax.py` olarak çevrildi ve test edildi. Sonuç ve eşik tablosu RAPOR.md'de. Zaman dilimi belirtilmemiş; günlük, tüm pazarlar. MA türü varsayılan EMA.",
+  "hedef": "pmax",
+  "karar": "al",
+  "pazar": "kripto,abd,bist,emtia",
+  "tf": "1d (çeviri)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "nRklAGPI": {
+  "gerekce": "Önceki tur gerekçesi: «temsilci seçilmedi». B2 kesin-eleme listesinde (kapalı kaynak, strategy() yok, gerçek repaint/lookahead, DCA/grid/martingale, veri yok) bu betik YOK; kod okundu ve `tv/stratejiler/qqq_macro.py` olarak çevrilip test edildi. Betikteki çöküş-eşiği (%20) oran olarak karşılaştırıldığından hiç tetiklenmez: çıkarıldı.",
+  "hedef": "qqq_macro",
+  "karar": "al",
+  "pazar": "QQQ",
+  "tf": "1d (çeviri)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "nVECqIQx": {
+  "gerekce": "Önceki tur gerekçesi: «eğitim (TASC makale örneği)». B2 kesin-eleme listesinde (kapalı kaynak, strategy() yok, gerçek repaint/lookahead, DCA/grid/martingale, veri yok) bu betik YOK; kod okundu ve `tv/stratejiler/one_pct_week.py` olarak çevrilip test edildi. TASC makalesi örnek kod ama gerçek bir alım-satım kuralı (haftalık -%1 limit alış, +%1 hedef) içeriyor.",
+  "hedef": "one_pct_week",
+  "karar": "al",
+  "pazar": "endeks,abd",
+  "tf": "1d (çeviri)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "neQ6iZoX": {
+  "gerekce": "KESİN ELEME: grid (B2 kuralı). Her seviyede küçük kâr, aralık dışı düşüşte sınırsız zarar; kazanma oranı yapay yüksek, getiri aralık varsayımına bağlı.",
+  "hedef": null,
+  "karar": "ele",
+  "pazar": "tek sembol",
+  "tf": "15dk–1s",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "njQsSFjo": {
+  "gerekce": "KESİN ELEME: gerçek lookahead (B2): HTF `close`/EMA ofsetsiz + lookahead_on. (Karşılaştırma: U0wTnRuE aynı lookahead_on'u `d[1]` ile kullandığı için GEÇERLİDİR.)",
+  "hedef": null,
+  "karar": "ele",
+  "pazar": "hepsi",
+  "tf": "grafiğe göre (switch ile HTF)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "nuqVC5F7": {
+  "gerekce": "Aday. 3Commas şablonunda ortalama alımı (DCA) kapalı olduğundan eleme kuralına girmiyor.",
+  "hedef": "ha_rsi_fade",
+  "karar": "al",
+  "pazar": "kripto (BCH)",
+  "tf": "15dk",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "o9dV6uWc": {
+  "gerekce": "Önceki tur gerekçesi: «temsilci seçilmedi». B2 kesin-eleme listesinde (kapalı kaynak, strategy() yok, gerçek repaint/lookahead, DCA/grid/martingale, veri yok) bu betik YOK; kod okundu ve `tv/stratejiler/ema_mtf_stoch.py` olarak çevrilip test edildi.",
+  "hedef": "ema_mtf_stoch",
+  "karar": "al",
+  "pazar": "kripto,abd,emtia",
+  "tf": "1h (çeviri)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "ouvmvItR": {
+  "gerekce": "Önceki tur gerekçesi: «hacim order block (SMC), 83hmaEOQ temsilci». B2 kesin-eleme listesinde (kapalı kaynak, strategy() yok, gerçek repaint/lookahead, DCA/grid/martingale, veri yok) bu betik YOK; kod okundu ve `tv/stratejiler/ob_retest.py` olarak çevrilip test edildi.",
+  "hedef": "ob_retest",
+  "karar": "al",
+  "pazar": "kripto,abd,emtia",
+  "tf": "1h (çeviri)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "oxvR5vMy": {
+  "gerekce": "KESİN ELEME: martingale/grid (B2). `size := loss ? size[1]*mf : ...` zarardan sonra lot ikiye katlanıyor.",
+  "hedef": null,
+  "karar": "ele",
+  "pazar": "?",
+  "tf": "?",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "pMOjQJwT": {
+  "gerekce": "Aday (5 dk Binance verisi).",
+  "hedef": "bb_fade_sol",
+  "karar": "al",
+  "pazar": "kripto (SOL)",
+  "tf": "5dk",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "qgofvS9I": {
+  "gerekce": "KESİN ELEME: DCA / ortalama düşürme (B2 kuralı). Taban emir + ek emirler + ortalama maliyetten çıkış kuyruk riskini gizler: kazanma oranı ve kâr faktörü şişer, tek bir derin düşüşte tüm ek emirler dolar. Girişin kendisi (RSI eşiği) ayrı test edilebilir ama bu betiğin sonucu DCA yapısına ait.",
+  "hedef": null,
+  "karar": "ele",
+  "pazar": "tek sembol (kripto/hisse tokeni/altın)",
+  "tf": "15dk–4s (betiğin sembol/süresine göre)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "qnirD0Kg": {
+  "gerekce": "KESİN ELEME: kaynak kapalı / bulunamadı (B2). Sayfa kimliği (`PUB;…`) alınamadıysa yayın kaldırılmış.",
+  "hedef": null,
+  "karar": "ele",
+  "pazar": "?",
+  "tf": "?",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "qp9BoNyS": {
+  "gerekce": "Kod okundu; kesin-eleme listesinde (kapalı kaynak, strategy() yok, repaint/lookahead, DCA/grid/martingale, veri yok) değil → `tv/stratejiler/sqz_lb.py` olarak çevrildi ve test edildi. Sonuç ve eşik tablosu RAPOR.md'de. Zaman dilimi belirtilmemiş; günlük, tüm pazarlar.",
+  "hedef": "sqz_lb",
+  "karar": "al",
+  "pazar": "kripto,abd,bist,emtia",
+  "tf": "1d (çeviri)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "rKsnPJbJ": {
+  "gerekce": "Önceki tur gerekçesi: «temsilci seçilmedi». B2 kesin-eleme listesinde (kapalı kaynak, strategy() yok, gerçek repaint/lookahead, DCA/grid/martingale, veri yok) bu betik YOK; kod okundu ve `tv/stratejiler/fib_conf.py` olarak çevrilip test edildi.",
+  "hedef": "fib_conf",
+  "karar": "al",
+  "pazar": "kripto,abd,bist,emtia",
+  "tf": "1d (çeviri)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "rkHHEvJ1": {
+  "gerekce": "KESİN ELEME: gerekli veri yok — gün içi seans (≤15 dk) geçmişi Yahoo'da yalnız 60 gündür (Aşama-1 kuralı), ≥300 işlem/gün içi eşiği bu veriyle sağlanamaz.",
+  "hedef": null,
+  "karar": "ele",
+  "pazar": "vadeli/altın/hisse gün içi",
+  "tf": "5dk–15dk",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "rvBgD3aP": {
+  "gerekce": "Kod okundu; kesin-eleme listesinde (kapalı kaynak, strategy() yok, repaint/lookahead, DCA/grid/martingale, veri yok) değil → `tv/stratejiler/elliott.py` olarak çevrildi ve test edildi. Sonuç ve eşik tablosu RAPOR.md'de. Zaman dilimi belirtilmemiş; 4 saatlik.",
+  "hedef": "elliott",
+  "karar": "al",
+  "pazar": "kripto,abd,emtia",
+  "tf": "4h (çeviri)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "sf4Hf10r": {
+  "gerekce": "KESİN ELEME: gerekli veri yok — gün içi seans (≤15 dk) geçmişi Yahoo'da yalnız 60 gündür (Aşama-1 kuralı), ≥300 işlem/gün içi eşiği bu veriyle sağlanamaz.",
+  "hedef": null,
+  "karar": "ele",
+  "pazar": "vadeli/altın/hisse gün içi",
+  "tf": "5dk–15dk",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "sk6MVZEb": {
+  "gerekce": "KESİN ELEME: gerekli veri yok — gün içi seans (≤15 dk) geçmişi Yahoo'da yalnız 60 gündür (Aşama-1 kuralı), ≥300 işlem/gün içi eşiği bu veriyle sağlanamaz.",
+  "hedef": null,
+  "karar": "ele",
+  "pazar": "vadeli/altın/hisse gün içi",
+  "tf": "5dk–15dk",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "t7Tp4qnu": {
+  "gerekce": "KESİN ELEME: gerekli veri yok — gün içi seans (≤15 dk) geçmişi Yahoo'da yalnız 60 gündür (Aşama-1 kuralı), ≥300 işlem/gün içi eşiği bu veriyle sağlanamaz.",
+  "hedef": null,
+  "karar": "ele",
+  "pazar": "vadeli/altın/hisse gün içi",
+  "tf": "5dk–15dk",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "tDAQfHmS": {
+  "gerekce": "KESİN ELEME: DCA / ortalama düşürme (B2 kuralı). Taban emir + ek emirler + ortalama maliyetten çıkış kuyruk riskini gizler: kazanma oranı ve kâr faktörü şişer, tek bir derin düşüşte tüm ek emirler dolar. Girişin kendisi (RSI eşiği) ayrı test edilebilir ama bu betiğin sonucu DCA yapısına ait.",
+  "hedef": null,
+  "karar": "ele",
+  "pazar": "tek sembol (kripto/hisse tokeni/altın)",
+  "tf": "15dk–4s (betiğin sembol/süresine göre)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "u4g3IrXS": {
+  "gerekce": "KESİN ELEME: DCA / ortalama düşürme (B2 kuralı). Taban emir + ek emirler + ortalama maliyetten çıkış kuyruk riskini gizler: kazanma oranı ve kâr faktörü şişer, tek bir derin düşüşte tüm ek emirler dolar. Girişin kendisi (RSI eşiği) ayrı test edilebilir ama bu betiğin sonucu DCA yapısına ait.",
+  "hedef": null,
+  "karar": "ele",
+  "pazar": "tek sembol (kripto/hisse tokeni/altın)",
+  "tf": "15dk–4s (betiğin sembol/süresine göre)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "uCV8I4xA": {
+  "gerekce": "Kod okundu; kesin-eleme listesinde (kapalı kaynak, strategy() yok, repaint/lookahead, DCA/grid/martingale, veri yok) değil → `tv/stratejiler/bb_rsi.py` olarak çevrildi ve test edildi. Sonuç ve eşik tablosu RAPOR.md'de. Zaman dilimi belirtilmemiş; günlük (klasik 2016 betiği).",
+  "hedef": "bb_rsi",
+  "karar": "al",
+  "pazar": "kripto,abd,bist,emtia",
+  "tf": "1d (çeviri)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "uycyVpIq": {
+  "gerekce": "Aday.",
+  "hedef": "ichimoku_sky",
+  "karar": "al",
+  "pazar": "kripto",
+  "tf": "?",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "vWG3tMJh": {
+  "gerekce": "Kod okundu; kesin-eleme listesinde (kapalı kaynak, strategy() yok, repaint/lookahead, DCA/grid/martingale, veri yok) değil → `tv/stratejiler/laguerre.py` olarak çevrildi ve test edildi. Sonuç ve eşik tablosu RAPOR.md'de. Zaman dilimi belirtilmemiş; günlük, tüm pazarlar.",
+  "hedef": "laguerre",
+  "karar": "al",
+  "pazar": "kripto,abd,bist,emtia",
+  "tf": "1d (çeviri)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "vnCdOkpO": {
+  "gerekce": "KESİN ELEME: DCA / ortalama düşürme (B2 kuralı). Taban emir + ek emirler + ortalama maliyetten çıkış kuyruk riskini gizler: kazanma oranı ve kâr faktörü şişer, tek bir derin düşüşte tüm ek emirler dolar. Girişin kendisi (RSI eşiği) ayrı test edilebilir ama bu betiğin sonucu DCA yapısına ait.",
+  "hedef": null,
+  "karar": "ele",
+  "pazar": "tek sembol (kripto/hisse tokeni/altın)",
+  "tf": "15dk–4s (betiğin sembol/süresine göre)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "wVNfdkHu": {
+  "gerekce": "Kod okundu; kesin-eleme listesinde (kapalı kaynak, strategy() yok, repaint/lookahead, DCA/grid/martingale, veri yok) değil → `tv/stratejiler/shm.py` olarak çevrildi ve test edildi. Sonuç ve eşik tablosu RAPOR.md'de. RSI'si günlük (1440) kilitli, WMA(510) uzun; gün içi grafik → saatlik.",
+  "hedef": "shm",
+  "karar": "al",
+  "pazar": "kripto,abd,emtia",
+  "tf": "1h (çeviri)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "x39mKkAp": {
+  "gerekce": "Önceki tur gerekçesi: «temsilci seçilmedi». B2 kesin-eleme listesinde (kapalı kaynak, strategy() yok, gerçek repaint/lookahead, DCA/grid/martingale, veri yok) bu betik YOK; kod okundu ve `tv/stratejiler/narrow_state.py` olarak çevrilip test edildi.",
+  "hedef": "narrow_state",
+  "karar": "al",
+  "pazar": "kripto,abd,bist,emtia",
+  "tf": "1d (çeviri)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "xAEG4ZJG": {
+  "gerekce": "Önceki tur 'eğitim/şablon' diye elemişti; sinyal SMA(14/28) kesişimi gerçek bir kural → ortak sinyal `tv/stratejiler/ma_demo.py` ile test edildi (SL/TP/zaman penceresi örneklerinin kendileri çevrilmedi: sinyal aynı).",
+  "hedef": "ma_demo",
+  "karar": "al",
+  "pazar": "kripto,abd,bist,emtia",
+  "tf": "1g (çeviri)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "xJ5iSXIS": {
+  "gerekce": "KESİN ELEME: DCA / ortalama düşürme (B2).",
+  "hedef": null,
+  "karar": "ele",
+  "pazar": "?",
+  "tf": "?",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "xx3enmiW": {
+  "gerekce": "Önceki tur gerekçesi: «kopya (Ichimoku; boHD0HzE tutuldu)». B2 kesin-eleme listesinde (kapalı kaynak, strategy() yok, gerçek repaint/lookahead, DCA/grid/martingale, veri yok) bu betik YOK; kod okundu ve `tv/stratejiler/ichi_tier.py` olarak çevrilip test edildi. Kademeli (güçlü/nötr/zayıf) kesişim + HTF onayı → farklı mantık.",
+  "hedef": "ichi_tier",
+  "karar": "al",
+  "pazar": "kripto,abd,emtia",
+  "tf": "4h (çeviri)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "yMCa3XZD": {
+  "gerekce": "Kod okundu; kesin-eleme listesinde (kapalı kaynak, strategy() yok, repaint/lookahead, DCA/grid/martingale, veri yok) değil → `tv/stratejiler/macd_sma200.py` olarak çevrildi ve test edildi. Sonuç ve eşik tablosu RAPOR.md'de. Yazar SPX/DOWI günlük test etmiş; günlük, tüm pazarlar.",
+  "hedef": "macd_sma200",
+  "karar": "al",
+  "pazar": "kripto,abd,bist,emtia",
+  "tf": "1d (çeviri)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "ycDUERPO": {
+  "gerekce": "Kod okundu; kesin-eleme listesinde (kapalı kaynak, strategy() yok, repaint/lookahead, DCA/grid/martingale, veri yok) değil → `tv/stratejiler/ott.py` olarak çevrildi ve test edildi. Sonuç ve eşik tablosu RAPOR.md'de. Zaman dilimi belirtilmemiş; günlük, tüm pazarlar.",
+  "hedef": "ott",
+  "karar": "al",
+  "pazar": "kripto,abd,bist,emtia",
+  "tf": "1d (çeviri)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "ykKHn2Gf": {
+  "gerekce": "KESİN ELEME: kaynak kapalı / bulunamadı (B2). Sayfa kimliği (`PUB;…`) alınamadıysa yayın kaldırılmış.",
+  "hedef": null,
+  "karar": "ele",
+  "pazar": "?",
+  "tf": "?",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "zopumZ8a": {
+  "gerekce": "Önceki tur gerekçesi: «kopya (Bollinger+RSI; uCV8I4xA tutuldu)». B2 kesin-eleme listesinde (kapalı kaynak, strategy() yok, gerçek repaint/lookahead, DCA/grid/martingale, veri yok) bu betik YOK; kod okundu ve `tv/stratejiler/bb_rsi_b.py` olarak çevrilip test edildi. RSI16/45 ve BB20 → uCV8I4xA'dan (RSI6/BB200) farklı varsayılanlar.",
+  "hedef": "bb_rsi_b",
+  "karar": "al",
+  "pazar": "kripto,abd,bist,emtia",
+  "tf": "1d (çeviri)",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "zpIyp7KB": {
+  "gerekce": "KESİN ELEME: gerekli veri yok — gün içi seans (≤15 dk) geçmişi Yahoo'da yalnız 60 gündür (Aşama-1 kuralı), ≥300 işlem/gün içi eşiği bu veriyle sağlanamaz.",
+  "hedef": null,
+  "karar": "ele",
+  "pazar": "vadeli/altın/hisse gün içi",
+  "tf": "5dk–15dk",
+  "tur": "strategy",
+  "tur_no": null
+ },
+ "zudiHFjK": {
+  "gerekce": "KESİN ELEME: gerekli veri yok — gün içi seans (≤15 dk) geçmişi Yahoo'da yalnız 60 gündür (Aşama-1 kuralı), ≥300 işlem/gün içi eşiği bu veriyle sağlanamaz.",
+  "hedef": null,
+  "karar": "ele",
+  "pazar": "vadeli/altın/hisse gün içi",
+  "tf": "5dk–15dk",
+  "tur": "strategy",
+  "tur_no": null
+ }
+}

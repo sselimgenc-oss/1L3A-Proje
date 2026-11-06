@@ -1,0 +1,50 @@
+{
+ "ad": "gunluk_kapanis",
+ "pine_id": "XK8XbDhT",
+ "tf": "1d",
+ "evren": [
+  "kripto",
+  "abd",
+  "bist",
+  "emtia"
+ ],
+ "neden": "Betik günlük kapanışlara bakar; günlük. Eşik 0 yerine 0.0001 (sayısal ±%20 testi için sıfırdan farklı).",
+ "olcut": {
+  "n": 53566,
+  "kar": -35537.89312106212,
+  "pf": 0.8410747282151584,
+  "sharpe": -0.09952167332355806,
+  "beklenti_R": -0.10249175808922362,
+  "kazanma": 0.35509464959115855,
+  "maxdd": 3.5249857834828395,
+  "dd_gun": 4289,
+  "cagr": null,
+  "calmar": null,
+  "psr": 0.3626953961163801,
+  "tutma_gun": 2.0,
+  "ort_islem_getiri": -0.002454732564461223,
+  "netR_toplam": -5490.073513807352,
+  "sharpe_egitim": -0.12288176638174782,
+  "sharpe_oos": 1.0402583019058105,
+  "oos_kar": -6562.871581902251,
+  "tur": "swing",
+  "pf_maliyet2x": 0.753351159103899,
+  "komsu_n": 10,
+  "komsu_karda": 0.0,
+  "enstr_n": 37,
+  "enstr_karda": 0.02702702702702703,
+  "maks_kor": 0.05347017809097554
+ },
+ "kurallar": {
+  "1_islem_sayisi": true,
+  "2_maks_dusus<=20": false,
+  "3_beklenti>=0.15R": false,
+  "4a_kf>=1.3": false,
+  "4b_sharpe>=1": false,
+  "5_oos": false,
+  "6_maliyet2x_kf>=1.1": false,
+  "7_komsu>=70": false,
+  "8_enstr>=60": false
+ },
+ "gecti": false
+}

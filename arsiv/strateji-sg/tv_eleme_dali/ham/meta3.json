@@ -1,0 +1,830 @@
+[
+ {
+  "id": "GhH6mW5c",
+  "link": "https://www.tradingview.com/script/GhH6mW5c-3Commas-Silicon-Vault-Long-INTC-DCA-Strategy/",
+  "ad": "[3Commas] INTCUSDT Long DCA — RSI Exit",
+  "yazar": "3Commas",
+  "pub": "PUB;694a9d4e41c84c5daa3b2e9298fe1b67",
+  "erisim": "open_no_auth",
+  "tur": "strategy"
+ },
+ {
+  "id": "8K1gTPV0",
+  "link": "https://www.tradingview.com/script/8K1gTPV0-3Commas-Equity-Pulse-Long-DCA-on-Tokenized-Stocks/",
+  "ad": "[3Commas] GOOGLUSDT Long DCA — RSI Exit",
+  "yazar": "3Commas",
+  "pub": "PUB;03b5c42557d44dbcae24c97f09620067",
+  "erisim": "open_no_auth",
+  "tur": "strategy"
+ },
+ {
+  "id": "qgofvS9I",
+  "link": "https://www.tradingview.com/script/qgofvS9I-Dual-RSI-DCA-Long-Strategy/",
+  "ad": "Dual RSI DCA — Long Strategy",
+  "yazar": "3Commas",
+  "pub": "PUB;56eaac3bd6364416be90a7c241d4d72c",
+  "erisim": "open_no_auth",
+  "tur": "strategy"
+ },
+ {
+  "id": "jXxP2m1Q",
+  "link": "https://www.tradingview.com/script/jXxP2m1Q-ETH-DCA-Strategy-3Commas-Quantpilot/",
+  "ad": "ETH DCA Strategy [3Commas & Quantpilot]",
+  "yazar": "3Commas",
+  "pub": "PUB;a4f028e226dc4991b3bc45c6a15d6883",
+  "erisim": "open_no_auth",
+  "tur": "strategy"
+ },
+ {
+  "id": "j36wYVnI",
+  "link": "https://www.tradingview.com/script/j36wYVnI-3Commas-Gold-Vault-Long/",
+  "ad": "[3Commas] Gold DCA Long — XAUT/USDT",
+  "yazar": "3Commas",
+  "pub": "PUB;486aaa41a7ca4dfea4f6152637710875",
+  "erisim": "open_no_auth",
+  "tur": "strategy"
+ },
+ {
+  "id": "XuFsLXAW",
+  "link": "https://www.tradingview.com/script/XuFsLXAW-3Commas-TAO-RSI-Oversold-Doubling-DCA-Long-Strategy/",
+  "ad": "[3Commas] TAO RSI Oversold Doubling DCA — Long Strategy",
+  "yazar": "3Commas",
+  "pub": "PUB;b4e4376ec9314506a61509d18de3b65c",
+  "erisim": "open_no_auth",
+  "tur": "strategy"
+ },
+ {
+  "id": "5Tg2Es4G",
+  "link": "https://www.tradingview.com/script/5Tg2Es4G-BTC-DCA-Strategy-3Commas-QuantPilot/",
+  "ad": "BTC DCA Strategy [3Commas & QuantPilot]",
+  "yazar": "3Commas",
+  "pub": "PUB;81267dc2f3014539b0325ea3a4b6b247",
+  "erisim": "open_no_auth",
+  "tur": "strategy"
+ },
+ {
+  "id": "4OsZ6QMo",
+  "link": "https://www.tradingview.com/script/4OsZ6QMo-HBAR-RSI-Strategy-3Commas/",
+  "ad": "HBAR RSI Strategy [3Commas]",
+  "yazar": "3Commas",
+  "pub": "PUB;16ee1927dae84c8b8aa1e433afc2e7f8",
+  "erisim": "open_no_auth",
+  "tur": "strategy"
+ },
+ {
+  "id": "9pHwOZsM",
+  "link": "https://www.tradingview.com/script/9pHwOZsM-BNB-Grid-Bot-Long-Strategy/",
+  "ad": "BNB Grid Bot — Long Strategy",
+  "yazar": "3Commas",
+  "pub": "PUB;7e2df6c874c24d84aa444c2a304e8623",
+  "erisim": "open_no_auth",
+  "tur": "strategy"
+ },
+ {
+  "id": "u4g3IrXS",
+  "link": "https://www.tradingview.com/script/u4g3IrXS-3Commas-Triple-RSI-DCA-Long-Risk-Adjusted-Averaging-Strategy/",
+  "ad": "Multi Long Bot — Single-Pair Replica",
+  "yazar": "3Commas",
+  "pub": "PUB;9b4419feca3441c59e706e414558184a",
+  "erisim": "open_no_auth",
+  "tur": "strategy"
+ },
+ {
+  "id": "id8IPHdu",
+  "link": "https://www.tradingview.com/script/id8IPHdu/",
+  "ad": "CASCADE DCA 🌊 — Spot Long 1.4",
+  "yazar": "neurodoc",
+  "pub": "PUB;e670ace2f0c64d6497d10194cfb01a8e",
+  "erisim": "open_no_auth",
+  "tur": "strategy"
+ },
+ {
+  "id": "7xkIvA4u",
+  "link": "https://www.tradingview.com/script/7xkIvA4u-Hammer-Long-strategy-with-filtered-and-enforced-alerts/",
+  "ad": "Hammer Long strategy with filtered and enforced alerts by Skyrexio",
+  "yazar": "Skyrexio",
+  "pub": "PUB;PSqOT901HRi1herqyv33jaCX0xcEcfX3",
+  "erisim": "?",
+  "tur": "?"
+ },
+ {
+  "id": "8I2576zL",
+  "link": "https://www.tradingview.com/script/8I2576zL-Mutanabby-AI-ONEUSDT-MR1/",
+  "ad": "ONEUSDT(1)_MR1",
+  "yazar": "Mutanabby_AI",
+  "pub": "PUB;41c066c08e9046fbb205086a77d7d296",
+  "erisim": "open_no_auth",
+  "tur": "strategy"
+ },
+ {
+  "id": "dLdjnPLD",
+  "link": "https://www.tradingview.com/script/dLdjnPLD-XRP-RSI-Strategy-3Commas/",
+  "ad": "XRP RSI Strategy [3Commas]",
+  "yazar": "3Commas",
+  "pub": "PUB;ad53e7fe758f4cd69aec09ae2f36d91b",
+  "erisim": "open_no_auth",
+  "tur": "strategy"
+ },
+ {
+  "id": "QQcgQT51",
+  "link": "https://www.tradingview.com/script/QQcgQT51-Bullish-Divergent-Bar-DCA-Strategy-Skyrexio/",
+  "ad": "Bullish Divergent Bar DCA Strategy [Skyrexio]",
+  "yazar": "Skyrexio",
+  "pub": "PUB;a770f68d8d6e450b83abfe5b993e9a6c",
+  "erisim": "open_no_auth",
+  "tur": "strategy"
+ },
+ {
+  "id": "2wyXTTMc",
+  "link": "https://www.tradingview.com/script/2wyXTTMc-Vol-Target-Trend-Engine/",
+  "ad": "Vol-Target Trend Engine",
+  "yazar": "mateosandoval1025",
+  "pub": "PUB;c753cb806b364d93a86b1468bca5d44b",
+  "erisim": "open_no_auth",
+  "tur": "strategy"
+ },
+ {
+  "id": "dU643vz2",
+  "link": "https://www.tradingview.com/script/dU643vz2-BCH-RSI-Strategy-3Commas/",
+  "ad": "BCH RSI Strategy [3Commas]",
+  "yazar": "3Commas",
+  "pub": "PUB;ae7db22698d049699ecb6b2068b87916",
+  "erisim": "open_no_auth",
+  "tur": "strategy"
+ },
+ {
+  "id": "i90KnZdf",
+  "link": "https://www.tradingview.com/script/i90KnZdf-ETH-RSI-Strategy-3Commas/",
+  "ad": "ETH RSI Strategy [3Commas]",
+  "yazar": "3Commas",
+  "pub": "PUB;55509726e0ca4e2fb2f62ee70d49dd10",
+  "erisim": "open_no_auth",
+  "tur": "strategy"
+ },
+ {
+  "id": "2SC4QXCp",
+  "link": "https://www.tradingview.com/script/2SC4QXCp-3Commas-DOT-RSI-Reversal-DCA-Short-Strategy/",
+  "ad": "[3Commas] DOT RSI Reversal DCA — Short Strategy",
+  "yazar": "3Commas",
+  "pub": "PUB;5e7278cdb10b47c6a0d56fe54afeb44a",
+  "erisim": "open_no_auth",
+  "tur": "strategy"
+ },
+ {
+  "id": "0wggzSk5",
+  "link": "https://www.tradingview.com/script/0wggzSk5-JUP-RSI-Long-Strategy-3Commas/",
+  "ad": "JUP RSI Long Strategy [3Commas]",
+  "yazar": "3Commas",
+  "pub": "PUB;8e52ad540d484361bac2133b5aa982df",
+  "erisim": "open_no_auth",
+  "tur": "strategy"
+ },
+ {
+  "id": "YBB12317",
+  "link": "https://www.tradingview.com/script/YBB12317-POL-RSI-Long-Strategy-3Commas/",
+  "ad": "POL RSI Long Strategy [3Commas]",
+  "yazar": "3Commas",
+  "pub": "PUB;d3ddb37d291a4fb9a20b5bfd39f24857",
+  "erisim": "open_no_auth",
+  "tur": "strategy"
+ },
+ {
+  "id": "3VLM19TH",
+  "link": "https://www.tradingview.com/script/3VLM19TH-3Commas-XRP-Grid-Bot-Long-Strategy/",
+  "ad": "XRP Grid Bot — Long Strategy",
+  "yazar": "3Commas",
+  "pub": "PUB;112b8f7396804359bdf0860f12670365",
+  "erisim": "open_no_auth",
+  "tur": "strategy"
+ },
+ {
+  "id": "tDAQfHmS",
+  "link": "https://www.tradingview.com/script/tDAQfHmS-SOL-RSI-DCA-Strategy-3Commas-QuantPilot/",
+  "ad": "SOL RSI DCA Strategy [3Commas & QuantPilot]",
+  "yazar": "3Commas",
+  "pub": "PUB;c26911063ec74b62ad2621c382e91c76",
+  "erisim": "open_no_auth",
+  "tur": "strategy"
+ },
+ {
+  "id": "IvMdQJNW",
+  "link": "https://www.tradingview.com/script/IvMdQJNW-XMR-Grid-Bot-Long-Strategy/",
+  "ad": "XMR Grid Bot — Long Strategy",
+  "yazar": "3Commas",
+  "pub": "PUB;81e0aba3c9734b19b83a36771b032871",
+  "erisim": "open_no_auth",
+  "tur": "strategy"
+ },
+ {
+  "id": "eZsaqsZY",
+  "link": "https://www.tradingview.com/script/eZsaqsZY-BTC-RSI-Strategy-3Commas/",
+  "ad": "BTC RSI Strategy [3Commas]",
+  "yazar": "3Commas",
+  "pub": "PUB;58e4bac723aa47e18f23e93bdb0b6bc4",
+  "erisim": "open_no_auth",
+  "tur": "strategy"
+ },
+ {
+  "id": "lnBGmMLT",
+  "link": "https://www.tradingview.com/script/lnBGmMLT-ATOM-RSI-Strategy-3Commas/",
+  "ad": "ATOM RSI Strategy [3Commas]",
+  "yazar": "3Commas",
+  "pub": "PUB;5d3cba40fc5343c9bdaf200e6e12f4cc",
+  "erisim": "open_no_auth",
+  "tur": "strategy"
+ },
+ {
+  "id": "vnCdOkpO",
+  "link": "https://www.tradingview.com/script/vnCdOkpO-3Commas-BCH-Overbought-RSI-Fade-Short-Strategy/",
+  "ad": "[3Commas] BCH Overbought RSI Fade — Short Strategy",
+  "yazar": "3Commas",
+  "pub": "PUB;ec72505ed06f47a6be41d66f63bc05c0",
+  "erisim": "open_no_auth",
+  "tur": "strategy"
+ },
+ {
+  "id": "H2U52D79",
+  "link": "https://www.tradingview.com/script/H2U52D79-TON-Grid-Bot-Long-Strategy/",
+  "ad": "TON Grid Bot — Long Strategy",
+  "yazar": "3Commas",
+  "pub": "PUB;e3a5e959acc044668c900b3cb9255bbf",
+  "erisim": "open_no_auth",
+  "tur": "strategy"
+ },
+ {
+  "id": "CMZfvk2e",
+  "link": "https://www.tradingview.com/script/CMZfvk2e-XMR-RSI-Short-Strategy-3Commas/",
+  "ad": "XMR RSI Short Strategy",
+  "yazar": "3Commas",
+  "pub": "PUB;67c346c92d51487b9577d8c905814626",
+  "erisim": "open_no_auth",
+  "tur": "strategy"
+ },
+ {
+  "id": "JtopWlYQ",
+  "link": "https://www.tradingview.com/script/JtopWlYQ-RSI-Oversold-AO-Long-Strategy/",
+  "ad": "RSI Oversold AO DCA — Long Strategy",
+  "yazar": "3Commas",
+  "pub": "PUB;e4d6f6d4f28b4ec7a2e5a4810970d60c",
+  "erisim": "open_no_auth",
+  "tur": "strategy"
+ },
+ {
+  "id": "WhxmHc8H",
+  "link": "https://www.tradingview.com/script/WhxmHc8H-ETH-Grid-Bot-Long-Strategy/",
+  "ad": "ETH Grid Bot — Long Strategy",
+  "yazar": "3Commas",
+  "pub": "PUB;81b30a5ad41946fca4e6ed9392b86665",
+  "erisim": "open_no_auth",
+  "tur": "strategy"
+ },
+ {
+  "id": "kxCXnuU6",
+  "link": "https://www.tradingview.com/script/kxCXnuU6-3Commas-EURUSD-Grid-Bot-Long-Strategy/",
+  "ad": "[3Commas] EURUSD Grid Bot — Long Strategy",
+  "yazar": "3Commas",
+  "pub": "PUB;ff0808918b2446fd99bc06526ec079d8",
+  "erisim": "open_no_auth",
+  "tur": "strategy"
+ },
+ {
+  "id": "8z6wbyw5",
+  "link": "https://www.tradingview.com/script/8z6wbyw5/",
+  "ad": "DIY Custom Strategy Builder  [ZP] - v1 (Strategy)",
+  "yazar": "maris_schmidlin",
+  "pub": "PUB;664d6e438d0146b18adf258e222bfb77",
+  "erisim": "open_no_auth",
+  "tur": "strategy"
+ },
+ {
+  "id": "T5kd1bJ2",
+  "link": "https://www.tradingview.com/script/T5kd1bJ2-RSI-Gauss-Velocity-Strategy-WiP/",
+  "ad": "RSI-Gauss-Velocity-Strategy-WiP",
+  "yazar": "RS374",
+  "pub": "PUB;a1c4a5d23e2b428e956df879ca98a57f",
+  "erisim": "open_no_auth",
+  "tur": "strategy"
+ },
+ {
+  "id": "i3Uc79fF",
+  "link": "https://www.tradingview.com/script/i3Uc79fF-Flawless-Victory-Strategy-15min-BTC-Machine-Learning-Strategy/",
+  "ad": "Flawless Victory Strategy",
+  "yazar": "Trebor_Namor",
+  "pub": "PUB;1BVZuaaWOUGrbnKzHCECJiO5DMdrSK36",
+  "erisim": "open_no_auth",
+  "tur": "strategy"
+ },
+ {
+  "id": "6XPbhz9C",
+  "link": "https://www.tradingview.com/script/6XPbhz9C/",
+  "ad": "Mean Reversion Setup LliterH",
+  "yazar": "LliterH",
+  "pub": "PUB;b3cc06d99d7b442a81921f60a1b7b7c4",
+  "erisim": "open_no_auth",
+  "tur": "strategy"
+ },
+ {
+  "id": "97gxVA5b",
+  "link": "https://www.tradingview.com/script/97gxVA5b-Compression-Breakout-System/",
+  "ad": "Compression Breakout System",
+  "yazar": "mateosandoval1025",
+  "pub": "PUB;c821c51c640b4ea0bde28eba39b0b08d",
+  "erisim": "open_no_auth",
+  "tur": "strategy"
+ },
+ {
+  "id": "OEeqwUwB",
+  "link": "https://www.tradingview.com/script/OEeqwUwB-3Commas-Ether-Vault-Grid-ETH-USDT/",
+  "ad": "[3Commas] Ether Vault Grid — ETH",
+  "yazar": "3Commas",
+  "pub": "PUB;c445186a7fc9411a8e2ec81229b5204d",
+  "erisim": "open_no_auth",
+  "tur": "strategy"
+ },
+ {
+  "id": "jd1KSVn7",
+  "link": "https://www.tradingview.com/script/jd1KSVn7/",
+  "ad": "BIST30 to S&P 500 — ATR Momentum Rider",
+  "yazar": "newton61",
+  "pub": "PUB;b1838c70c00a4dc2b41d2852a2506496",
+  "erisim": "open_no_auth",
+  "tur": "strategy"
+ },
+ {
+  "id": "bjoh9PTd",
+  "link": "https://www.tradingview.com/script/bjoh9PTd-XAU-Grid-Bot-Long-Strategy/",
+  "ad": "XAU Grid Bot — Long Strategy",
+  "yazar": "3Commas",
+  "pub": "PUB;0d2d56107d3f43dab0eab62f9d603c56",
+  "erisim": "open_no_auth",
+  "tur": "strategy"
+ },
+ {
+  "id": "ADx8qrBK",
+  "link": "https://www.tradingview.com/script/ADx8qrBK-SOL-RSI-DCA-Long-Strategy/",
+  "ad": "SOL RSI DCA — Long Strategy",
+  "yazar": "3Commas",
+  "pub": "PUB;08999818aee74c64980c609186cb8f58",
+  "erisim": "open_no_auth",
+  "tur": "strategy"
+ },
+ {
+  "id": "AeYVHi9k",
+  "link": "https://www.tradingview.com/script/AeYVHi9k-Strict-1-Trade-Day-SMC-ORB/",
+  "ad": "Strict 1-Trade/Day SMC v13",
+  "yazar": "Ross1992gg",
+  "pub": "PUB;faa1f1855db344ba8c64c859d7666f3e",
+  "erisim": "open_no_auth",
+  "tur": "strategy"
+ },
+ {
+  "id": "ZNXTGgKN",
+  "link": "https://www.tradingview.com/script/ZNXTGgKN-3Commas-SOL-RSI-Reversal-DCA-Short-Strategy/",
+  "ad": "SOL RSI Reversal DCA — Short Strategy",
+  "yazar": "3Commas",
+  "pub": "PUB;d3cfd83035a54fbf95b0172d28ee5856",
+  "erisim": "open_no_auth",
+  "tur": "strategy"
+ },
+ {
+  "id": "qnirD0Kg",
+  "link": "https://www.tradingview.com/script/qnirD0Kg/",
+  "ad": "[Bybit BTCUSD.P] 7Years Backtest Results. 2,609% +Non-Repainting — Strategy by SystematicAtlas",
+  "yazar": "SystematicAtlas",
+  "pub": "PUB;5ef851bcf62547589d908be1c780c518",
+  "erisim": "?",
+  "tur": "?"
+ },
+ {
+  "id": "kuuXl2Gc",
+  "link": "https://www.tradingview.com/script/kuuXl2Gc-3Commas-AMZN-RSI-Oversold-Doubling-DCA-Long-Strategy/",
+  "ad": "AMZN RSI Oversold Doubling DCA — Long Strategy",
+  "yazar": "3Commas",
+  "pub": "PUB;b71e656412da42cba8dbe20475ed9f67",
+  "erisim": "open_no_auth",
+  "tur": "strategy"
+ },
+ {
+  "id": "teYPT1m0",
+  "link": "https://www.tradingview.com/script/teYPT1m0/",
+  "ad": "NORN WEAVE ᚠ FEHU",
+  "yazar": "mm_mitsuya",
+  "pub": "PUB;6a7f6744f1474fe0a3fdbea6199b1914",
+  "erisim": "open_no_auth",
+  "tur": "strategy"
+ },
+ {
+  "id": "FJZvYKaB",
+  "link": "https://www.tradingview.com/script/FJZvYKaB-Gold-NY-ORB-v19-Close-20-00/",
+  "ad": "Gold NY ORB v19 [Ahmed] — 2.5:1 Close 20:00",
+  "yazar": "YukozB",
+  "pub": "PUB;57a5448ea08448dfaf8208f8bdd1c388",
+  "erisim": "open_no_auth",
+  "tur": "strategy"
+ },
+ {
+  "id": "XGqSzuxJ",
+  "link": "https://www.tradingview.com/script/XGqSzuxJ-BTC-MTF-Engulfing-Flip-Strategy-1H-2X/",
+  "ad": "BTC Flip Bot V1 — MTF + SL-Flip",
+  "yazar": "jagadeeshmanne",
+  "pub": "PUB;72dac215a42849559b7935e6dc6f1d81",
+  "erisim": "open_no_auth",
+  "tur": "strategy"
+ },
+ {
+  "id": "kAYwdfND",
+  "link": "https://www.tradingview.com/script/kAYwdfND/",
+  "ad": "Simplified 30m Event Strategy - Reverse",
+  "yazar": "mbdalq",
+  "pub": "PUB;c3f33b8e61424b31894e28aae6d875d9",
+  "erisim": "open_no_auth",
+  "tur": "strategy"
+ },
+ {
+  "id": "T3t4yoJx",
+  "link": "https://www.tradingview.com/script/T3t4yoJx-ETH-Momentum-Breakout-Strategy-geektrade-online/",
+  "ad": "ETH Momentum Breakout v15.0",
+  "yazar": "grinaypps",
+  "pub": "PUB;868048e95545432aa6fffde28e2db4c7",
+  "erisim": "open_no_auth",
+  "tur": "strategy"
+ },
+ {
+  "id": "HyzpDR9t",
+  "link": "https://www.tradingview.com/script/HyzpDR9t-MultiLayer-Awesome-Oscillator-Saucer-Strategy-Skyrexio/",
+  "ad": "MultiLayer Awesome Oscillator Saucer Strategy [Skyrexio]",
+  "yazar": "Skyrexio",
+  "pub": "PUB;329337d8dddd4bb49c1877d3471f5295",
+  "erisim": "open_no_auth",
+  "tur": "strategy"
+ },
+ {
+  "id": "9ht1ea8N",
+  "link": "https://www.tradingview.com/script/9ht1ea8N-3Commas-XLM-Grid-Bot-Long-Strategy/",
+  "ad": "XLM Grid Bot — Long Strategy",
+  "yazar": "3Commas",
+  "pub": "PUB;e55cefdfd1054c97b032416ac7dd1c75",
+  "erisim": "open_no_auth",
+  "tur": "strategy"
+ },
+ {
+  "id": "bA9UFcgj",
+  "link": "https://www.tradingview.com/script/bA9UFcgj-SPY-Bear-Regime-Short-System/",
+  "ad": "SPY Bear Regime Short System",
+  "yazar": "thetrading",
+  "pub": "PUB;b181cdff06ed483897627691f4051ad8",
+  "erisim": "open_no_auth",
+  "tur": "strategy"
+ },
+ {
+  "id": "GoUoySJs",
+  "link": "https://www.tradingview.com/script/GoUoySJs-BTC-MTF-Engulfing-Flip-Pyramid-Strategy-1H-2X/",
+  "ad": "BTC Flip Bot V3 — MTF + SL-Flip + Pyramid + Tuned",
+  "yazar": "jagadeeshmanne",
+  "pub": "PUB;1f5ef7239fac4a07bed1092c7e1d33a4",
+  "erisim": "open_no_auth",
+  "tur": "strategy"
+ },
+ {
+  "id": "95JBkzXV",
+  "link": "https://www.tradingview.com/script/95JBkzXV-BTC-Mean-Reversion-RSI-Bollinger/",
+  "ad": "BTC Mean Reversion - RSI + Bollinger",
+  "yazar": "connorgeary150",
+  "pub": "PUB;7d567f640600420d997840a880808d35",
+  "erisim": "open_no_auth",
+  "tur": "strategy"
+ },
+ {
+  "id": "mfw4fJST",
+  "link": "https://www.tradingview.com/script/mfw4fJST/",
+  "ad": "VIX MACD Long",
+  "yazar": "ryoma3119",
+  "pub": "PUB;d436bd860df34a43b27fe46cd10e5c41",
+  "erisim": "open_no_auth",
+  "tur": "strategy"
+ },
+ {
+  "id": "apaoI4Zr",
+  "link": "https://www.tradingview.com/script/apaoI4Zr-3Commas-Static-Geometric-Grid/",
+  "ad": "[3Commas] Static Geometric Grid — APE",
+  "yazar": "3Commas",
+  "pub": "PUB;11e9fff2a10648dd9ec09ad539c38e4c",
+  "erisim": "open_no_auth",
+  "tur": "strategy"
+ },
+ {
+  "id": "XRZCjbFr",
+  "link": "https://www.tradingview.com/script/XRZCjbFr-Channel-Reversion-System/",
+  "ad": "Channel Reversion System",
+  "yazar": "mateosandoval1025",
+  "pub": "PUB;9feac257748d4caca17c5a9f823a957f",
+  "erisim": "open_no_auth",
+  "tur": "strategy"
+ },
+ {
+  "id": "SBFz8vXU",
+  "link": "https://www.tradingview.com/script/SBFz8vXU-3Commas-NOT-Grid-Bot-Long-Strategy/",
+  "ad": "NOT Grid Bot — Long Strategy",
+  "yazar": "3Commas",
+  "pub": "PUB;3242c4d4250a4a4a88ee6124026fb906",
+  "erisim": "open_no_auth",
+  "tur": "strategy"
+ },
+ {
+  "id": "Tl9RRJAT",
+  "link": "https://www.tradingview.com/script/Tl9RRJAT-RSI-Dip-EMA-Trend-Long-DCA-Strategy/",
+  "ad": "RSI Dip + EMA Trend Long DCA — Leveraged Strategy",
+  "yazar": "3Commas",
+  "pub": "PUB;4e21c751a380404f806aa9d2628c4fc9",
+  "erisim": "open_no_auth",
+  "tur": "strategy"
+ },
+ {
+  "id": "ABkXz6BY",
+  "link": "https://www.tradingview.com/script/ABkXz6BY-LINK-Grid-Bot-Long-Strategy/",
+  "ad": "LINK Grid Bot — Long Strategy",
+  "yazar": "3Commas",
+  "pub": "PUB;01584a3075df46bfa73d6727228234e4",
+  "erisim": "open_no_auth",
+  "tur": "strategy"
+ },
+ {
+  "id": "Ab8n9Rx5",
+  "link": "https://www.tradingview.com/script/Ab8n9Rx5-LTC-RSI-Oversold-Doubling-DCA-Long-Strategy/",
+  "ad": "LTC RSI Oversold Doubling DCA — Long Strategy",
+  "yazar": "3Commas",
+  "pub": "PUB;f6c5a331577547edb33e276f8abe82b8",
+  "erisim": "open_no_auth",
+  "tur": "strategy"
+ },
+ {
+  "id": "pMOjQJwT",
+  "link": "https://www.tradingview.com/script/pMOjQJwT/",
+  "ad": "ITF26 B1 — BB Fade SOL 5m",
+  "yazar": "mariellangsaez",
+  "pub": "PUB;4c58e97f6f03435abe0159732e8d833d",
+  "erisim": "open_no_auth",
+  "tur": "strategy"
+ },
+ {
+  "id": "7UNWrm2O",
+  "link": "https://www.tradingview.com/script/7UNWrm2O-RSI-Adaptive-T3-Squeeze-Momentum-Strategy/",
+  "ad": "RSI-Adaptive T3 + Squeeze Momentum Strategy",
+  "yazar": "PakunFX",
+  "pub": "PUB;e70ad70d9b8c4f2fa7a84c326f29ad14",
+  "erisim": "open_no_auth",
+  "tur": "strategy"
+ },
+ {
+  "id": "ZiHWqvCl",
+  "link": "https://www.tradingview.com/script/ZiHWqvCl-ARB-RSI-Short-Strategy-3Commas/",
+  "ad": "ARB RSI Short Strategy [3Commas]",
+  "yazar": "3Commas",
+  "pub": "PUB;f745cb3c509545fe8b6eaaa123223f6c",
+  "erisim": "open_no_auth",
+  "tur": "strategy"
+ },
+ {
+  "id": "6HYQYnFl",
+  "link": "https://www.tradingview.com/script/6HYQYnFl-15-Min-ORB-Real-Version-MNQ/",
+  "ad": "[M4] ORB Real Version – MNQ",
+  "yazar": "NoSlJr",
+  "pub": "PUB;529149ef0f984eedb245ed58f647b555",
+  "erisim": "open_no_auth",
+  "tur": "strategy"
+ },
+ {
+  "id": "mqh6UJ9p",
+  "link": "https://www.tradingview.com/script/mqh6UJ9p-ATR-RSI-Strategy-v2-with-no-repaint-liwei666/",
+  "ad": "ATR_RSI_Strategy v2[liwei666]",
+  "yazar": "liwei666",
+  "pub": "PUB;4eb69f4b1eac466bb974ad22a095428b",
+  "erisim": "open_no_auth",
+  "tur": "strategy"
+ },
+ {
+  "id": "Tkrjao7P",
+  "link": "https://www.tradingview.com/script/Tkrjao7P-AO-AC-Trading-Zones-Strategy-Skyrexio/",
+  "ad": "AO/AC Trading Zones Strategy [Skyrexio] ",
+  "yazar": "Skyrexio",
+  "pub": "PUB;15061c8521a445d898b7c000d25ef19e",
+  "erisim": "open_no_auth",
+  "tur": "strategy"
+ },
+ {
+  "id": "Pv1GvUVs",
+  "link": "https://www.tradingview.com/script/Pv1GvUVs-KST-Strategy-Skyrexio/",
+  "ad": "KST Strategy [Skyrexio]",
+  "yazar": "Skyrexio",
+  "pub": "PUB;8ce567ef204e4eca8df1af439f8607f3",
+  "erisim": "open_no_auth",
+  "tur": "strategy"
+ },
+ {
+  "id": "f8HJ9TuJ",
+  "link": "https://www.tradingview.com/script/f8HJ9TuJ-3Commas-JUP-Grid-Bot-Long-Strategy/",
+  "ad": "JUP Grid Bot — Long Strategy",
+  "yazar": "3Commas",
+  "pub": "PUB;ef8adefa88444401a54b1efa8759a49e",
+  "erisim": "open_no_auth",
+  "tur": "strategy"
+ },
+ {
+  "id": "NJb4BQ5n",
+  "link": "https://www.tradingview.com/script/NJb4BQ5n-Bilateral-Stochastic-Oscillator-Strategy/",
+  "ad": "Bilateral Stochastic Oscillator Strategy",
+  "yazar": "alexgrover",
+  "pub": "PUB;TuvX8JPrUw7oDY6QCk734sbMzNbUPHtW",
+  "erisim": "open_no_auth",
+  "tur": "strategy"
+ },
+ {
+  "id": "kZVrTReu",
+  "link": "https://www.tradingview.com/script/kZVrTReu-SuperTrend-AI-Adaptive-Strategy-BTC/",
+  "ad": "Publication not found",
+  "yazar": "",
+  "pub": null,
+  "erisim": "?",
+  "tur": "?"
+ },
+ {
+  "id": "7SSRGEbI",
+  "link": "https://www.tradingview.com/script/7SSRGEbI-Drop-s-Opening-Range-Breakout-ORB/",
+  "ad": "Drop&#039;s Opening Range Breakout (ORB)",
+  "yazar": "drop_trades",
+  "pub": "PUB;32d3f7c084634182b102099d13d4fe82",
+  "erisim": "open_no_auth",
+  "tur": "strategy"
+ },
+ {
+  "id": "KOfsPM9h",
+  "link": "https://www.tradingview.com/script/KOfsPM9h-SUPPORT-RESISTANCE-STRATEGY-5MIN-TF/",
+  "ad": "SUPPORT RESISTANCE STRATEGY [5MIN TF]",
+  "yazar": "The_Algo_Engineer",
+  "pub": "PUB;c5551799ee7e4698a6ed53d8c5a995c9",
+  "erisim": "open_no_auth",
+  "tur": "strategy"
+ },
+ {
+  "id": "ErcSuPyN",
+  "link": "https://www.tradingview.com/script/ErcSuPyN-MultiLayer-Acceleration-Deceleration-Strategy-Skyrexio/",
+  "ad": "MultiLayer Acceleration/Deceleration Strategy [Skyrexio]",
+  "yazar": "Skyrexio",
+  "pub": "PUB;09643a813129428786efdf2411b13402",
+  "erisim": "open_no_auth",
+  "tur": "strategy"
+ },
+ {
+  "id": "7cAVZopZ",
+  "link": "https://www.tradingview.com/script/7cAVZopZ-FIL-Grid-Strategy-3Commas/",
+  "ad": "FIL Grid Long Strategy [3Commas]",
+  "yazar": "3Commas",
+  "pub": "PUB;041fe131144343369db2f1c2bd95390d",
+  "erisim": "open_no_auth",
+  "tur": "strategy"
+ },
+ {
+  "id": "uycyVpIq",
+  "link": "https://www.tradingview.com/script/uycyVpIq-Ichimoku-Clouds-Strategy-Long-and-Short/",
+  "ad": "Advanced Ichimoku Clouds Strategy Long and Short",
+  "yazar": "Skyrexio",
+  "pub": "PUB;cc500835089d498c8bf7e3e20135eb83",
+  "erisim": "open_no_auth",
+  "tur": "strategy"
+ },
+ {
+  "id": "ykKHn2Gf",
+  "link": "https://www.tradingview.com/script/ykKHn2Gf-3Commas-Alligator-Strategy/",
+  "ad": "  [3Commas] Alligator Strategy by 3Commas",
+  "yazar": "3Commas",
+  "pub": "PUB;f9852e57731a419d83d7b74fb219fa49",
+  "erisim": "?",
+  "tur": "?"
+ },
+ {
+  "id": "PETNavGq",
+  "link": "https://www.tradingview.com/script/PETNavGq-Triple-CCI-Strategy-MFI-Confirmed-Skyrexio/",
+  "ad": "Triple CCI Strategy MFI Confirmed [Skyrexio]",
+  "yazar": "Skyrexio",
+  "pub": "PUB;7b1eb75c2fa94ea798dc324bb6027311",
+  "erisim": "open_no_auth",
+  "tur": "strategy"
+ },
+ {
+  "id": "LxrgnsTO",
+  "link": "https://www.tradingview.com/script/LxrgnsTO-XAUUSD-10-Minute-Strategy/",
+  "ad": "Publication not found",
+  "yazar": "",
+  "pub": null,
+  "erisim": "?",
+  "tur": "?"
+ },
+ {
+  "id": "3fea8k4Z",
+  "link": "https://www.tradingview.com/script/3fea8k4Z-Double-CCI-Confirmed-Hull-Moving-Average-Reversal-Strategy/",
+  "ad": "Double CCI Confirmed Hull Moving Average Reversal Strategy",
+  "yazar": "Skyrexio",
+  "pub": "PUB;453ddc6240fd4af8b085aec838df8820",
+  "erisim": "open_no_auth",
+  "tur": "strategy"
+ },
+ {
+  "id": "6ve1ax1D",
+  "link": "https://www.tradingview.com/script/6ve1ax1D-NQ-MNQ-Super-Scalper-BACKTEST/",
+  "ad": "NQ/MNQ Super Scalper [BACKTEST]",
+  "yazar": "Crispigino",
+  "pub": "PUB;46d5b26375f24999b868cd9627b1d8de",
+  "erisim": "open_no_auth",
+  "tur": "strategy"
+ },
+ {
+  "id": "6zYF9Xts",
+  "link": "https://www.tradingview.com/script/6zYF9Xts-Hash-Supertrend-Hash-Capital-Research/",
+  "ad": "Hash Supertrend",
+  "yazar": "Hash_Capital",
+  "pub": "PUB;b162fb78c0ef410b8a389777c96b31b9",
+  "erisim": "open_no_auth",
+  "tur": "strategy"
+ },
+ {
+  "id": "d117dN6D",
+  "link": "https://www.tradingview.com/script/d117dN6D-3Commas-Trail-Hunter-Reversal-Long/",
+  "ad": "[3Commas] MA-CCI Trailing Long",
+  "yazar": "3Commas",
+  "pub": "PUB;e275c3df7a164057a7b38a0a2f80e15d",
+  "erisim": "open_no_auth",
+  "tur": "strategy"
+ },
+ {
+  "id": "9qFCuXqF",
+  "link": "https://www.tradingview.com/script/9qFCuXqF-3Commas-Turtle-Strategy/",
+  "ad": "[3Commas] Turtle Strategy",
+  "yazar": "3Commas",
+  "pub": "PUB;8c932bbcfb7d4afbafc7ee3be054191c",
+  "erisim": "open_no_auth",
+  "tur": "strategy"
+ },
+ {
+  "id": "TJuVmOfk",
+  "link": "https://www.tradingview.com/script/TJuVmOfk-Williams-R-Zone-Scalper-v1-0-BullByte/",
+  "ad": "Williams R Zone Scalper v1.0[BullByte]",
+  "yazar": "BullByte",
+  "pub": "PUB;48010f7aff08446b86d3b27e08e65428",
+  "erisim": "open_no_auth",
+  "tur": "strategy"
+ },
+ {
+  "id": "nuqVC5F7",
+  "link": "https://www.tradingview.com/script/nuqVC5F7-3Commas-BCH-Heikin-Ashi-RSI-Fade-Short-Strategy/",
+  "ad": "[3Commas] BCH Heikin Ashi RSI Fade — Short Strategy",
+  "yazar": "3Commas",
+  "pub": "PUB;3cbfea7c15004d60a79fb6ce6ed6db02",
+  "erisim": "open_no_auth",
+  "tur": "strategy"
+ },
+ {
+  "id": "neQ6iZoX",
+  "link": "https://www.tradingview.com/script/neQ6iZoX-3Commas-POL-Grid-Bot-Long-Strategy/",
+  "ad": "POL Grid Bot — Long Strategy",
+  "yazar": "3Commas",
+  "pub": "PUB;90815f0cfb8b43959bed21e14551a39d",
+  "erisim": "open_no_auth",
+  "tur": "strategy"
+ },
+ {
+  "id": "BtDUET5k",
+  "link": "https://www.tradingview.com/script/BtDUET5k-MACD-with-1D-Stochastic-Confirmation-Reversal-Strategy/",
+  "ad": "MACD with 1D Stochastic Confirmation Reversal Strategy",
+  "yazar": "Skyrexio",
+  "pub": "PUB;7f1ddef89aa14067a257bbb01f736bd8",
+  "erisim": "open_no_auth",
+  "tur": "strategy"
+ },
+ {
+  "id": "OvE4qQgh",
+  "link": "https://www.tradingview.com/script/OvE4qQgh-Liquidity-Sweep-Delta-Absorption-PineGen-AI/",
+  "ad": "Liquidity Sweep + Delta Absorption [PineGen AI]",
+  "yazar": "PinegenAI",
+  "pub": "PUB;94365a2d53d14b3cb25b0143d321562e",
+  "erisim": "open_no_auth",
+  "tur": "strategy"
+ },
+ {
+  "id": "BR74LOKo",
+  "link": "https://www.tradingview.com/script/BR74LOKo-BTCUSDT-P-Grid-Bot-Long-Strategy/",
+  "ad": "BTCUSDT.P Grid Bot — Long Strategy",
+  "yazar": "3Commas",
+  "pub": "PUB;35b1d327d4ca474891884332f939b426",
+  "erisim": "open_no_auth",
+  "tur": "strategy"
+ },
+ {
+  "id": "IqUET4xO",
+  "link": "https://www.tradingview.com/script/IqUET4xO-Fractal-Breakout-Trend-Following-Strategy/",
+  "ad": "Fractal Breakout Trend Following Strategy",
+  "yazar": "Skyrexio",
+  "pub": "PUB;0921ada5d19344ef8418fa437269e6a0",
+  "erisim": "open_no_auth",
+  "tur": "strategy"
+ }
+]

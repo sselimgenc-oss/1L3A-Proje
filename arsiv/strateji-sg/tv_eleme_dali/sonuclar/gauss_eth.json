@@ -1,0 +1,47 @@
+{
+ "ad": "gauss_eth",
+ "pine_id": "egTb7TgJ",
+ "tf": "4h",
+ "evren": [
+  "kripto"
+ ],
+ "neden": "Başlık ETH; saat dilimi belirtilmemiş, 4 saatlik kripto.",
+ "olcut": {
+  "n": 3029,
+  "kar": 40542.5126543512,
+  "pf": 1.750277378922189,
+  "sharpe": 1.5511486297031336,
+  "beklenti_R": 0.13728395611916813,
+  "kazanma": 0.2944866292505777,
+  "maxdd": 0.11132520531413588,
+  "dd_gun": 490,
+  "cagr": 0.23149605470333334,
+  "calmar": 2.0794576937909173,
+  "psr": 0.9999985806016853,
+  "tutma_gun": 1.3333333333333333,
+  "ort_islem_getiri": 0.012649325543272012,
+  "netR_toplam": 415.83310308496027,
+  "sharpe_egitim": 1.7405996580387628,
+  "sharpe_oos": 1.0066872914581548,
+  "oos_kar": 7531.132079453222,
+  "tur": "swing",
+  "pf_maliyet2x": 1.5779723387663431,
+  "komsu_n": 16,
+  "komsu_karda": 1.0,
+  "enstr_n": 14,
+  "enstr_karda": 0.8571428571428571,
+  "maks_kor": 0.5615682723895242
+ },
+ "kurallar": {
+  "1_islem_sayisi": true,
+  "2_maks_dusus<=20": true,
+  "3_beklenti>=0.15R": false,
+  "4a_kf>=1.3": true,
+  "4b_sharpe>=1": true,
+  "5_oos": true,
+  "6_maliyet2x_kf>=1.1": true,
+  "7_komsu>=70": true,
+  "8_enstr>=60": true
+ },
+ "gecti": false
+}

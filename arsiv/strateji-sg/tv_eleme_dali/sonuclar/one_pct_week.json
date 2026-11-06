@@ -1,0 +1,48 @@
+{
+ "ad": "one_pct_week",
+ "pine_id": "nVECqIQx",
+ "tf": "1d",
+ "evren": [
+  "endeks",
+  "abd"
+ ],
+ "neden": "Haftalık seans mantığı; günlük hisse/ETF.",
+ "olcut": {
+  "n": 4022,
+  "kar": 14556.974802686702,
+  "pf": 2.1149090520098617,
+  "sharpe": 2.5683390025102617,
+  "beklenti_R": 0.15994592814761074,
+  "kazanma": 0.856539035305818,
+  "maxdd": 0.038624319324329005,
+  "dd_gun": 147,
+  "cagr": 0.0792617141077967,
+  "calmar": 2.0521193769716657,
+  "psr": 0.9999999999999949,
+  "tutma_gun": 0.0,
+  "ort_islem_getiri": 0.004343204814327211,
+  "netR_toplam": 643.3025230096904,
+  "sharpe_egitim": 2.5226024288309064,
+  "sharpe_oos": 3.1428254296540783,
+  "oos_kar": 4543.797038161902,
+  "tur": "gun",
+  "pf_maliyet2x": 1.8830795609159052,
+  "komsu_n": 12,
+  "komsu_karda": 1.0,
+  "enstr_n": 12,
+  "enstr_karda": 1.0,
+  "maks_kor": 0.06547402017257932
+ },
+ "kurallar": {
+  "1_islem_sayisi": true,
+  "2_maks_dusus<=20": true,
+  "3_beklenti>=0.15R": true,
+  "4a_kf>=1.3": true,
+  "4b_sharpe>=1": true,
+  "5_oos": true,
+  "6_maliyet2x_kf>=1.1": true,
+  "7_komsu>=70": true,
+  "8_enstr>=60": true
+ },
+ "gecti": true
+}

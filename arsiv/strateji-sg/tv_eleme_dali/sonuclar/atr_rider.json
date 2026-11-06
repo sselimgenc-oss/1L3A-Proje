@@ -1,0 +1,51 @@
+{
+ "ad": "atr_rider",
+ "pine_id": "jd1KSVn7",
+ "tf": "1d",
+ "evren": [
+  "endeks",
+  "abd",
+  "bist",
+  "emtia",
+  "kripto"
+ ],
+ "neden": "PDF: endeks vadelileri, günlük → tüm pazarlar günlük.",
+ "olcut": {
+  "n": 2897,
+  "kar": 17580.774862615028,
+  "pf": 1.794963639989065,
+  "sharpe": 1.3501126014602998,
+  "beklenti_R": 0.344383627264852,
+  "kazanma": 0.5667932343803935,
+  "maxdd": 0.10954968775602635,
+  "dd_gun": 382,
+  "cagr": 0.08991128735585896,
+  "calmar": 0.8207352225055787,
+  "psr": 0.9999986156496341,
+  "tutma_gun": 18.0,
+  "ort_islem_getiri": 0.023667594740834866,
+  "netR_toplam": 997.6793681862763,
+  "sharpe_egitim": 1.4344790866755854,
+  "sharpe_oos": 1.130465048304725,
+  "oos_kar": 5034.032819549586,
+  "tur": "swing",
+  "pf_maliyet2x": 1.7231930168973266,
+  "komsu_n": 22,
+  "komsu_karda": 1.0,
+  "enstr_n": 39,
+  "enstr_karda": 0.9230769230769231,
+  "maks_kor": 0.3183729208375838
+ },
+ "kurallar": {
+  "1_islem_sayisi": true,
+  "2_maks_dusus<=20": true,
+  "3_beklenti>=0.15R": true,
+  "4a_kf>=1.3": true,
+  "4b_sharpe>=1": true,
+  "5_oos": true,
+  "6_maliyet2x_kf>=1.1": true,
+  "7_komsu>=70": true,
+  "8_enstr>=60": true
+ },
+ "gecti": true
+}
