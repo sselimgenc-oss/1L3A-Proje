@@ -54,3 +54,7 @@ class MacdSinyal(Strateji):
             mumlar.index, long_ok, short_ok,
             kap - p["atr_k"] * atr, kap + p["atr_k"] * atr,
             cikis=(yukari | asagi) & gecerli)
+
+    def cikis_var_mi(self) -> bool:
+        """Ters kesişim `cikis` üretir (her zaman)."""
+        return True

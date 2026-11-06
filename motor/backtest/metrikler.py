@@ -1,4 +1,6 @@
 """Performans metrikleri."""
+import math
+
 import numpy as np
 import pandas as pd
 
@@ -31,6 +33,12 @@ def hesapla(islemler: pd.DataFrame, ozsermaye: pd.Series, baslangic_sermaye: flo
     asagi = np.sqrt((np.minimum(getiri, 0.0) ** 2).mean()) if len(getiri) else np.nan
     m["sortino"] = getiri.mean() / asagi * np.sqrt(ppy) if asagi and asagi > 0 else np.nan
 
+    # Günlük MTM düşüş: UTC gün sonu özsermaye değerleri (açık pozisyon K/Z'si dahil);
+    # başlangıç sermayesi ilk zirve sayılır.
+    gunluk = ozsermaye.groupby(ozsermaye.index.floor("D")).last()
+    gz = pd.concat([pd.Series([bas]), gunluk.reset_index(drop=True)], ignore_index=True)
+    m["gunluk_mtm_max_dusus"] = float(((gz.cummax() - gz) / gz.cummax()).max())
+
     k = len(islemler)
     m["islem_sayisi"] = k
     if k:
@@ -40,12 +48,19 @@ def hesapla(islemler: pd.DataFrame, ozsermaye: pd.Series, baslangic_sermaye: flo
         m["kazanma_orani"] = float((net > 0).mean())
         m["ortalama_r"] = float(islemler["r"].mean())
         m["beklenen_deger"] = float(net.mean())          # işlem başına ortalama net PnL
+        # En iyi %5 işlem (net_pnl'e göre, yukarı yuvarlanır, en az 1) çıkarılınca kalan
+        kes = max(1, math.ceil(0.05 * k))
+        kalan = net.sort_values(ascending=False).iloc[kes:]
+        m["en_iyi_yuzde5_haric_net"] = float(kalan.sum())
+        kz, ky = kalan[kalan > 0].sum(), -kalan[kalan < 0].sum()
+        m["en_iyi_yuzde5_haric_pf"] = float(kz / ky) if ky > 0 else (np.inf if kz > 0 else np.nan)
         m["toplam_komisyon"] = float(islemler["komisyon"].sum())
         m["toplam_funding"] = float(islemler["funding"].sum())   # pozitif = ödenen
         m["ortalama_tutma_saat"] = float(
             (islemler["cikis_zamani"] - islemler["giris_zamani"]).dt.total_seconds().mean() / 3600)
     else:
-        for a in ["profit_factor", "kazanma_orani", "ortalama_r", "beklenen_deger", "ortalama_tutma_saat"]:
+        for a in ["profit_factor", "kazanma_orani", "ortalama_r", "beklenen_deger", "ortalama_tutma_saat",
+                  "en_iyi_yuzde5_haric_net", "en_iyi_yuzde5_haric_pf"]:
             m[a] = np.nan
         m["toplam_komisyon"] = 0.0
         m["toplam_funding"] = 0.0

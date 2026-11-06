@@ -12,7 +12,8 @@ import numpy as np
 import pandas as pd
 
 from motor.backtest import metrikler as mtr
-from motor.backtest.motor import MotorAyarlari, backtest
+from motor.backtest import deneme_kaydi
+from motor.backtest.motor import CikisYokHatasi, MotorAyarlari, backtest
 from motor.strateji.temel import Strateji
 
 
@@ -27,6 +28,16 @@ def pencereler_uret(baslangic: pd.Timestamp, bitis: pd.Timestamp, egitim_gun: in
     return out
 
 
+def _aralik_etiketi(td) -> str:
+    if td is None or pd.isna(td):
+        return None
+    sn = int(td.total_seconds())
+    for birim, k in (("d", 86400), ("h", 3600), ("m", 60)):
+        if sn % k == 0:
+            return f"{sn // k}{birim}"
+    return f"{sn}s"
+
+
 def _skor(metrik: dict, hedef: str, min_islem: int) -> float:
     if metrik["islem_sayisi"] < min_islem:
         return -np.inf
@@ -38,13 +49,20 @@ def _skor(metrik: dict, hedef: str, min_islem: int) -> float:
 
 def walk_forward(strateji: Strateji, mumlar: pd.DataFrame, ayarlar: MotorAyarlari = None,
                  funding: pd.DataFrame = None, egitim_gun: int = 180, test_gun: int = 30,
-                 hedef: str = "profit_factor", min_islem: int = 30, isinma_mum: int = 300) -> dict:
+                 hedef: str = "profit_factor", min_islem: int = 30, isinma_mum: int = 300,
+                 sembol: str = None, deneme_kaydi_yolu=None, deneme_kaydi_yaz: bool = True) -> dict:
+    """ "ilk stop dışında çıkış yok" hatası veren kombinasyonlar atlanır ve `atlanan` ile raporlanır.
+    Her çağrı sonunda deneme kaydına bir satır eklenir (deneme_kaydi_yaz=False ile kapatılır)."""
     ayarlar = ayarlar or MotorAyarlari()
     izgara = strateji.parametre_izgarasi
     adlar = list(izgara)
     kombinasyonlar = [dict(zip(adlar, v)) for v in product(*izgara.values())] or [{}]
 
+    kosu_sayisi = 0
+
     def kos(bas, bit, baslangic_sermaye, **param):
+        nonlocal kosu_sayisi
+        kosu_sayisi += 1
         ilk = mumlar.index.searchsorted(bas)
         dilim = mumlar.iloc[max(ilk - isinma_mum, 0):mumlar.index.searchsorted(bit)]
         fd = funding.loc[(funding.index >= dilim.index[0]) & (funding.index < bit)] if funding is not None else None
@@ -57,11 +75,17 @@ def walk_forward(strateji: Strateji, mumlar: pd.DataFrame, ayarlar: MotorAyarlar
     pencereler = pencereler_uret(mumlar.index[min(isinma_mum, len(mumlar) - 1)], mumlar.index[-1] + pd.Timedelta(1, "ns"),
                                  egitim_gun, test_gun)
     rapor, islemler, egriler, limit_olaylari = [], [], [], []
+    atlanan = []      # çıkışsız kombinasyonlar (tekrarsız)
     sermaye = float(ayarlar.baslangic_sermaye)
     for e0, e1, t0, t1 in pencereler:
         en_iyi, en_skor = None, -np.inf
         for param in kombinasyonlar:
-            s = kos(e0, e1, ayarlar.baslangic_sermaye, **param)
+            try:
+                s = kos(e0, e1, ayarlar.baslangic_sermaye, **param)
+            except CikisYokHatasi:
+                if param not in atlanan:
+                    atlanan.append(param)
+                continue
             skor = _skor(mtr.hesapla(s.islemler, s.ozsermaye, s.baslangic_sermaye), hedef, min_islem)
             if skor > en_skor:
                 en_iyi, en_skor = param, skor
@@ -79,7 +103,13 @@ def walk_forward(strateji: Strateji, mumlar: pd.DataFrame, ayarlar: MotorAyarlar
     islem_df = pd.concat(islemler, ignore_index=True) if islemler else pd.DataFrame()
     egri = pd.concat(egriler) if egriler else pd.Series(dtype=float)
     sonuc = {"pencereler": rapor, "islemler": islem_df, "ozsermaye": egri,
-             "limit_olaylari": limit_olaylari, "limit_modu": ayarlar.limit_modu}
+             "limit_olaylari": limit_olaylari, "limit_modu": ayarlar.limit_modu,
+             "atlanan": atlanan, "toplam_kosu": kosu_sayisi}
     sonuc["metrikler"] = (mtr.hesapla(islem_df, egri, ayarlar.baslangic_sermaye)
                           if len(egri) > 1 else {})
+    if deneme_kaydi_yaz:
+        aralik = pd.Series(mumlar.index).diff().median() if len(mumlar) > 1 else None
+        deneme_kaydi.kaydet(strateji.ad or type(strateji).__name__, sembol,
+                            _aralik_etiketi(aralik), len(kombinasyonlar), len(pencereler), kosu_sayisi,
+                            deneme_kaydi_yolu)
     return sonuc

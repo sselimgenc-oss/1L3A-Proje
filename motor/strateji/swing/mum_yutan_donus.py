@@ -77,3 +77,7 @@ class MumYutanDonus(Strateji):
         hedef = np.where(long_ok, k + p["hedef_r"] * risk_l.to_numpy(),
                          np.where(short_ok, k - p["hedef_r"] * risk_s.to_numpy(), np.nan))
         return sinyal_cercevesi(mumlar.index, yon, stop, hedef)
+
+    def cikis_var_mi(self) -> bool:
+        """hedef_r > 0 ise hedef var."""
+        return self.parametreler["hedef_r"] > 0

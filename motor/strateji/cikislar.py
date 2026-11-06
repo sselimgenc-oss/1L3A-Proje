@@ -15,6 +15,8 @@ class CikisAyarlari:
     zaman_cikisi_mum: Optional[int] = None      # N mum tutulduysa çık
     sabit_r_hedefi: Optional[float] = None      # hedef = giriş +/- R*risk (sinyalde hedef yoksa)
     basabas_r_esigi: Optional[float] = None     # örn. 1.0: kâr 1R'ye ulaşınca stop girişe çekilir
+    # Kısmi kâr: ((r, oran), ...) örn. ((1.0, 0.25),) = 1R'de ilk pozisyonun %25'i kapanır.
+    kismi: tuple = ()
 
 
 def r_hedef_fiyati(yon: int, giris: float, risk_birim: float, r: float) -> float:

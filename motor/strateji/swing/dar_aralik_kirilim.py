@@ -102,3 +102,7 @@ class DarAralikKirilim(Strateji):
         else:
             h_l = h_s = None
         return sinyal_cercevesi(idx, long_ok, short_ok, stop_l, stop_s, h_l, h_s)
+
+    def cikis_var_mi(self) -> bool:
+        """hedef_r=0 ise hedef yok."""
+        return bool(self.parametreler["hedef_r"])
