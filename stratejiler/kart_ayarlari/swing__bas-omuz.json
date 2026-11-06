@@ -1,0 +1,45 @@
+[
+ {
+  "kart_id": "daytrade__karmasik-bas-omuz-ust-satis__bulkowski",
+  "parametreler": {
+   "long": false,
+   "hedef_olcu": 0.53
+  },
+  "cikis_ayarlari": null,
+  "not": "Yalnız tepe (short). Yakın hedef = yükseklik x %53 (kart); minimum hedef tam yükseklik. Stop: sağ omuz üstü (kart)."
+ },
+ {
+  "kart_id": "daytrade__bas-omuz-ust-satis__bulkowski",
+  "parametreler": {
+   "long": false,
+   "hedef_olcu": 1.0,
+   "stop_modu": "omuz"
+  },
+  "cikis_ayarlari": null,
+  "not": "Yalnız tepe (short). Hedef = baş - boyun yüksekliği kırılımdan aşağı; stop sağ omuz üstü. Onaylı (kapanışla) kırılım."
+ },
+ {
+  "kart_id": "swing__bas-omuz__sharpe",
+  "parametreler": {},
+  "cikis_ayarlari": null,
+  "not": "Stop/hedef kartta yok: ailenin varsayılan omuz stopu ve ölçü hedefi (varsayım). Pivot tanımı kartta yok -> zigzag."
+ },
+ {
+  "kart_id": "swing__bas-omuz-boyun-kirilim__penn",
+  "parametreler": {
+   "egim_tol": 0.5
+  },
+  "cikis_ayarlari": null,
+  "not": "Boyun çizgisi düz veya biraz eğimli (egim_tol). Stop/hedef kartta yok: varsayılan ölçü hedefi."
+ },
+ {
+  "kart_id": "swing__bas-omuz-boyun-cizgisi__kratter",
+  "parametreler": {
+   "long": false,
+   "hedef_olcu": 1.0,
+   "egim_tol": 0.8
+  },
+  "cikis_ayarlari": null,
+  "not": "Kart yalnız tepe (short) formasyonunu anlatır. Ölçülü hedef = baş-boyun mesafesi kırılımdan aşağı. Aşağı eğimli boyun tercihi parametreyle ifade edilmedi (egim_tol gevşetildi)."
+ }
+]

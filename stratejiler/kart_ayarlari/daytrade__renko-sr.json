@@ -1,0 +1,11 @@
+[
+ {
+  "kart_id": "daytrade__renko-atr14-rsi-stokastik__singhal",
+  "parametreler": {
+   "renko_k": 1.0,
+   "hedef_r": 3.0
+  },
+  "cikis_ayarlari": null,
+  "not": "Renko kutu = ATR(14); RSI/StochRSI aşırı bölge eşikleri kartta yok (35/20 varsayım); min 1:3 R/R; destek = son sr_n mum dibi."
+ }
+]
