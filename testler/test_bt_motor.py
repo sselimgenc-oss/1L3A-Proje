@@ -247,3 +247,42 @@ def test_olc_modunda_risk_tavani_hala_uygulanir():
     sig = sinyal_yap(df, {0: (1, 98.0, np.nan)}, cikislar=[1])
     r = backtest(df, Hazir(sig), MotorAyarlari(**SIFIR, risk_yuzde=5.0, kaldirac=50, limit_modu="olc"))
     assert len(r.uyarilar) == 2
+
+
+# ------------------------------------------------------------------ yönlü çıkış
+def _yonlu_senaryo(**kolonlar):
+    df = mumlar_yap([(100, 101, 99.5, 100)] * 8)
+    sig = sinyal_yap(df, {0: (1, 90.0, np.nan)})
+    for ad, mumlar in kolonlar.items():
+        sig[ad] = False
+        for i in mumlar:
+            sig.iloc[i, sig.columns.get_loc(ad)] = True
+    return df, sig
+
+
+def test_yonlu_cikis_long_cikis_short_sutunu_kapatmaz():
+    df, sig = _yonlu_senaryo(cikis_short=[2])
+    r = backtest(df, Hazir(sig), MotorAyarlari(**SIFIR))
+    assert r.islemler.iloc[0].cikis_nedeni == "veri_sonu"      # long'u short çıkışı kapatmadı
+
+
+def test_yonlu_cikis_long_cikis_long_sutunu_kapatir():
+    df, sig = _yonlu_senaryo(cikis_long=[2])
+    t = backtest(df, Hazir(sig), MotorAyarlari(**SIFIR)).islemler.iloc[0]
+    assert t.cikis_nedeni == "sinyal" and t.cikis_zamani == df.index[3]
+
+
+def test_yonlu_cikis_short_pozisyon_ve_genel_cikis():
+    df = mumlar_yap([(100, 101, 99.5, 100)] * 8)
+    sig = sinyal_yap(df, {0: (-1, 110.0, np.nan)})
+    sig["cikis_long"] = False
+    sig["cikis_short"] = False
+    sig.iloc[2, sig.columns.get_loc("cikis_long")] = True      # short'u kapatmaz
+    sig.iloc[4, sig.columns.get_loc("cikis_short")] = True
+    t = backtest(df, Hazir(sig), MotorAyarlari(**SIFIR)).islemler.iloc[0]
+    assert t.cikis_nedeni == "sinyal" and t.cikis_zamani == df.index[5]
+    # genel `cikis` her iki yönü kapatır (sütun varken de)
+    sig2 = sinyal_yap(df, {0: (-1, 110.0, np.nan)}, cikislar=[1])
+    sig2["cikis_long"] = False
+    t2 = backtest(df, Hazir(sig2), MotorAyarlari(**SIFIR)).islemler.iloc[0]
+    assert t2.cikis_zamani == df.index[2]

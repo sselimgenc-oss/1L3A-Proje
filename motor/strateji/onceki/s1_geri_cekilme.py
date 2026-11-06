@@ -42,7 +42,7 @@ import pandas as pd
 from motor.strateji import gostergeler as g
 from motor.strateji.cikislar import CikisAyarlari
 from motor.strateji.htf import ust_zaman
-from motor.strateji.onceki._ortak import cerceve, heikin_ashi, yone_gore_cikis
+from motor.strateji.onceki._ortak import cerceve, heikin_ashi
 from motor.strateji.temel import Strateji
 
 
@@ -105,9 +105,8 @@ class S1GeriCekilme(Strateji):
         stop_s = np.maximum(sw_h, kap + atr) + p["stop_atr"] * atr * 0.5
         long_ok = long_ok.fillna(False)
         short_ok = short_ok.fillna(False)
-        yon_ham = pd.Series(np.where(long_ok, 1, np.where(short_ok, -1, 0)), index=idx)
-        cikis = yone_gore_cikis(yon_ham, (kap < ey), (kap > ey))
-        return cerceve(idx, long_ok, short_ok, stop_l, stop_s, cikis, p["max_mum"])
+        return cerceve(idx, long_ok, short_ok, stop_l, stop_s, None, p["max_mum"],
+                       cikis_long=(kap < ey), cikis_short=(kap > ey))
 
     def cikis_var_mi(self) -> bool:
         """Kapanış EMA(yavaş) ters tarafında -> `cikis` (her zaman)."""

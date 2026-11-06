@@ -53,7 +53,7 @@ import pandas as pd
 from motor.strateji import gostergeler as g
 from motor.strateji.cikislar import CikisAyarlari
 from motor.strateji.htf import ust_zaman
-from motor.strateji.onceki._ortak import cerceve, gun_sonu_maskesi, yone_gore_cikis
+from motor.strateji.onceki._ortak import cerceve, gun_sonu_maskesi
 from motor.strateji.temel import Strateji
 
 
@@ -122,15 +122,16 @@ class Kgt(Strateji):
         stop_l, stop_s = kap - dl, kap + ds
 
         h4 = ust_zaman(mumlar, "4h", lambda u: self._h4_yon(u, int(p["h4_hizli"]), int(p["h4_yavas"])))
-        yon_ham = pd.Series(np.where(long_ok, 1, np.where(short_ok, -1, 0)), index=idx)
-        cikis = yone_gore_cikis(yon_ham, h4 < 0, h4 > 0)
-
+        # Yönlü çıkış: 4S trend long için aşağı (h4<0), short için yukarı (h4>0) döndüğünde; hangi pozisyonun
+        # açık olduğunu motor bilir. Gün sonu çıkışı yönsüz `cikis`tir.
+        cikis = None
         if p["gun_sonu_kapat"]:
             son = pd.Series(gun_sonu_maskesi(idx), index=idx)
             long_ok &= ~son
             short_ok &= ~son
-            cikis = cikis | son
-        return cerceve(idx, long_ok, short_ok, stop_l, stop_s, cikis)
+            cikis = son
+        return cerceve(idx, long_ok, short_ok, stop_l, stop_s, cikis,
+                       cikis_long=(h4 < 0), cikis_short=(h4 > 0))
 
     @staticmethod
     def _h4_yon(u: pd.DataFrame, hizli: int, yavas: int) -> pd.Series:

@@ -5,8 +5,8 @@ Kural: kapanış önceki `giris_n` mumun en yükseğini (kırılım yüzdesi kir
 ayna) ve hacim > hacim_k*20 mum ortalama hacim. Stop (zorunlu): stop_modu "atr" -> kapanış -/+ stop_atr*ATR;
 "kanal" -> karşı çıkış kanalı (önceki cikis_n mumun düşüğü/zirvesi); "bar" -> kırılım mumunun dibi/zirvesi -/+
 stop_tampon_atr*ATR. Hedef: hedef_r*R (0: yok). Çıkış: pozisyon yönüne göre karşı `cikis_n` mum kanalının kırılması
-(long için önceki cikis_n mumun en düşüğünün altında kapanış; short ayna) -> `cikis`. Çıkış yönü strateji içinde
-sanal pozisyon durumuyla izlenir (stop ile kapanmış pozisyon sanal durumu etkilemez; zararsızdır).
+(long için önceki cikis_n mumun en düşüğünün altında kapanış; short ayna) -> `cikis`. Çıkış YÖNLÜDÜR
+(`cikis_long` / `cikis_short` sütunları; hangi pozisyonun açık olduğunu motor bilir).
 Kaynak kartlar: swing__aralik-kirilimi__ladha (1G; 10/20 günlük zirveyi %3-5 aşarak kapanış, stop kırılma günü dibinin
   %1 altı, çıkış 10/20 günlük EMA altı kapanış; hisse/endeks filtreleri -> kirilim_pct=3, stop_modu="bar"),
   swing__gann-cift-tepe-kirilim__razaq (çift tepe formasyonu: KODLANMADI), daytrade kartları (fraktal+SMA50 ve Donchian
@@ -17,7 +17,6 @@ Varsayımlar: kapanış bazlı kırılım ve kapanış bazlı kanal çıkışı;
 Negatif kanıt: arşivde 1S Donchian başarısız (arsiv/OZET.md §3, kısa TF + maliyet); Scheier/Bulkowski: kırılımların
   çoğu başarısız. Trend takip: az kazanç oranı, büyük kazançlar; kâr yoğunlaşması beklenir.
 """
-import numpy as np
 import pandas as pd
 
 from motor.strateji import gostergeler as g
@@ -73,32 +72,16 @@ class DonchianKirilim(Strateji):
             h_s = k - p["hedef_r"] * (stop_s - k)
         else:
             h_l = h_s = None
-        cikis = None
+        sig = cerceve(mumlar, long_ok, short_ok, stop_l, stop_s, h_l, h_s, None,
+                      gun_sonu=gun_sonu, seans_saat=seans_saat)
+        sig["cikis_long"] = False
+        sig["cikis_short"] = False
         if p["cikis_n"] > 0:
-            cikis = self._kanal_cikisi(k.to_numpy(), ck["alt"].to_numpy(), ck["ust"].to_numpy(),
-                                       long_ok.to_numpy() & (stop_l < k).to_numpy(),
-                                       short_ok.to_numpy() & (stop_s > k).to_numpy(), mumlar.index)
-        return cerceve(mumlar, long_ok, short_ok, stop_l, stop_s, h_l, h_s, cikis,
-                       gun_sonu=gun_sonu, seans_saat=seans_saat)
-
-    @staticmethod
-    def _kanal_cikisi(k, c_alt, c_ust, l_giris, s_giris, index) -> pd.Series:
-        """Sanal pozisyon yönüne göre kanal çıkışı: long -> kapanış < c_alt; short -> kapanış > c_ust."""
-        n = len(k)
-        cikis = np.zeros(n, dtype=bool)
-        durum = 0
-        for i in range(n):
-            if durum == 1 and k[i] < c_alt[i]:
-                cikis[i] = True
-                durum = 0
-            elif durum == -1 and k[i] > c_ust[i]:
-                cikis[i] = True
-                durum = 0
-            if l_giris[i]:
-                durum = 1
-            elif s_giris[i]:
-                durum = -1
-        return pd.Series(cikis, index=index)
+            # Yönlü çıkış: long -> kapanış < karşı kanal altı; short -> kapanış > karşı kanal üstü. Pozisyonun
+            # hangi yönde olduğunu motor bilir (sanal pozisyon izlenmez).
+            sig["cikis_long"] = (k < ck["alt"]).fillna(False).astype(bool)
+            sig["cikis_short"] = (k > ck["ust"]).fillna(False).astype(bool)
+        return sig
 
     def sinyaller(self, mumlar: pd.DataFrame) -> pd.DataFrame:
         return self._cekirdek(mumlar)

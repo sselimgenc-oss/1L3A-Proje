@@ -56,17 +56,8 @@ def gun_sonu_maskesi(index: pd.DatetimeIndex) -> np.ndarray:
     return (kapanis.floor("D") != index.floor("D")) & gecerli
 
 
-def yone_gore_cikis(yon: pd.Series, cikis_long: pd.Series, cikis_short: pd.Series) -> pd.Series:
-    """`cikis` yönsüz bir bool olduğundan: pozisyon yönü = son giriş sinyalinin yönü kabul edilir.
-    (Pozisyon açıkken gelen ters yönlü sinyal motorca yok sayılır ama burada yönü değiştirir; nadir bir
-    yaklaşıklık. Yalnız-long kullanımda hiçbir etkisi yoktur.)"""
-    son = yon.where(yon != 0).ffill()
-    cl = cikis_long.fillna(False).astype(bool)
-    cs = cikis_short.fillna(False).astype(bool)
-    return (((son == 1) & cl) | ((son == -1) & cs)).astype(bool)
-
-
-def cerceve(index, long_ok, short_ok, stop_long, stop_short, cikis=None, zaman_cikisi_mum=None) -> pd.DataFrame:
+def cerceve(index, long_ok, short_ok, stop_long, stop_short, cikis=None, zaman_cikisi_mum=None,
+            cikis_long=None, cikis_short=None) -> pd.DataFrame:
     """yon/stop/hedef/cikis çerçevesi. Stop NaN veya yanlış tarafta ise sinyal düşer (kapanışa göre
     kontrol çağıran tarafta yapılır: stop_long < kapanış varsayılır; burada yalnız NaN elenir)."""
     long_ok = long_ok.fillna(False).astype(bool) & stop_long.notna()
@@ -79,6 +70,11 @@ def cerceve(index, long_ok, short_ok, stop_long, stop_short, cikis=None, zaman_c
     stop[short_ok] = stop_short[short_ok]
     cik = pd.Series(False, index=index) if cikis is None else cikis.fillna(False).astype(bool)
     out = pd.DataFrame({"yon": yon, "stop": stop, "hedef": np.nan, "cikis": cik})
+    # Yönlü çıkış (motor: long cikis_long|cikis, short cikis_short|cikis ile kapanır).
+    if cikis_long is not None:
+        out["cikis_long"] = cikis_long.fillna(False).astype(bool)
+    if cikis_short is not None:
+        out["cikis_short"] = cikis_short.fillna(False).astype(bool)
     if zaman_cikisi_mum:
         out["zaman_cikisi_mum"] = float(zaman_cikisi_mum)
     return out

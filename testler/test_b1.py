@@ -147,7 +147,8 @@ def test_cerceve_stop_hedef_tarafi_ve_cikis(s):
     h = gir.hedef.dropna()
     yh = gir.yon[h.index]
     assert (h[yh == 1] > kap[h.index][yh == 1]).all() and (h[yh == -1] < kap[h.index][yh == -1]).all()
-    assert sig.cikis.any() or gir.hedef.notna().any() or "zaman_cikisi_mum" in sig.columns
+    yonlu = any(c in sig.columns and sig[c].any() for c in ("cikis_long", "cikis_short"))
+    assert sig.cikis.any() or yonlu or gir.hedef.notna().any() or "zaman_cikisi_mum" in sig.columns
     assert (sig.loc[sig.yon == 0, "stop"].isna()).all()
 
 
@@ -259,7 +260,7 @@ def test_donchian_kirilim_giris_ve_kanal_cikisi():
     assert len(longlar) == 1 and 40 <= longlar[0] <= 43
     i = longlar[0]
     assert sig.stop.iloc[i] == pytest.approx(df.kapanis.iloc[i] - 2.0 * g.atr(df.yuksek, df.dusuk, df.kapanis, 14).iloc[i])
-    cks = np.flatnonzero(sig.cikis.to_numpy())
+    cks = np.flatnonzero(sig.cikis_long.to_numpy())
     cks = cks[cks > i]
     assert len(cks) >= 1 and cks[0] > 70            # çıkış yalnız düşüş fazında (yükselişte değil)
     # kanal modu: stop = önceki cikis_n mumun dibi
@@ -274,7 +275,7 @@ def test_donchian_kirilim_giris_ve_kanal_cikisi():
 def test_donchian_cikis_yonlu_long_yukselisinde_cikis_yok():
     kap = np.r_[np.full(40, 100.0), np.linspace(100, 140, 60)]
     sig = SwDonchian(giris_n=20, cikis_n=5, short=False).sinyaller(kapanistan(kap, genlik=0.3, freq="1D"))
-    assert sig.cikis.sum() == 0     # sürekli yeni zirve: karşı kanal yüksekliği long'u kapatmaz
+    assert sig.cikis_long.sum() == 0     # sürekli yeni zirve: karşı kanal yüksekliği long'u kapatmaz
 
 
 def test_ardisik_bar_tukenme_uc_dusus_sonra_kirilim():
@@ -478,3 +479,16 @@ def test_kart_ayarlari_gecerli(s):
         assert r["cikis_ayarlari"] is None and r["not"]
         yeni = type(s)(**r["parametreler"])          # bilinmeyen parametre ValueError verir
         yeni.sinyaller(veri(s.stil, 1200))           # çalışır
+
+
+def test_donchian_yonlu_cikis_sanal_pozisyonsuz():
+    """Çıkış her mumda yönlü koşuldur: giriş sırası/yönü sinyallere bağlı değildir."""
+    kap = np.r_[np.full(40, 100.0), np.linspace(100, 130, 30), np.linspace(130, 100, 40)]
+    df = kapanistan(kap, genlik=0.3, freq="1D")
+    s = SwDonchian(giris_n=20, cikis_n=10)
+    a = s.sinyaller(df)
+    b = s.yeni(short=False).sinyaller(df)
+    pdt.assert_series_equal(a.cikis_long, b.cikis_long)      # short girişleri long çıkışını değiştirmez
+    pdt.assert_series_equal(a.cikis_short, b.cikis_short)
+    assert not a.cikis.any()
+    assert (a.cikis_long & a.cikis_short).sum() == 0
