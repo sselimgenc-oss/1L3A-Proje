@@ -70,6 +70,12 @@ Ana ders: önceki sonuçlar OOS'a bakılarak seçilmiş ve kâr birkaç işlemde
 15. **Sunucu:** DigitalOcean Frankfurt.
 16. **Veri/seçim:** stratejiler BTC+ETH 2020– verisinde seçilir; altın + 1–2 TradFi yalnız doğrulama.
 17. **Enstrüman:** başlangıçta 3–5 (BTC, ETH, XAU + en fazla 1–2). README'deki ~25 enstrüman planı iptal.
+19. (2026-11-06) **Hepsi test edilir, erken eleme yok:** ~700 aday (438 kart + 160 TradingView + 68 freqtrade + ~30 dış kural).
+    Huni: (1) hepsi kodlanır → (2) geniş tarama, yalnız apaçık umutsuzlar elenir → (3) walk-forward (karar 13) →
+    (4) kilitli dönem → ajan başına ~3.
+20. (2026-11-06) **Kilitli dönem:** 2025-11-01 00:00 UTC sonrası veri kasada. Tarama/walk-forward/seçimde kullanılmaz;
+    final seçimde yalnız BİR kez açılır (açılış kayda geçer).
+21. (2026-11-06) KGT iki aday: `onceki__kgt` (swing, orijinal, günlerce tutar) + `onceki__kgt-gun` (day trade, gün sonu kapanır).
 18. Önceki projelerden alınanlar: 4S kırılım (algo-sg A + swing-sg S2 birleşik), KGT, S1; yedek B. KMN ve S3 alınmadı.
 
 ## Yol haritası (2026-11-06)
