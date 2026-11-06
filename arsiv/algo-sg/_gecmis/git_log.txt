@@ -1,0 +1,102 @@
+dfe7973 2026-10-13 16:36:19 +0300 sselimgenc-oss
+    Merge pull request #7 from sselimgenc-oss/claude/optimistic-franklin-9w0pdk
+0a830f6 2026-10-13 13:36:06 +0000 Claude
+    Kağıt botu: saatte iki kez çalış (:13, :43), strateji-sg ile aynı düzen
+e19d072 2026-10-12 22:35:43 +0000 Claude
+    day-trade-sg çapraz denetim raporu (salt okunur)
+37fa8f2 2026-10-12 20:48:25 +0300 sselimgenc-oss
+    Merge pull request #6 from sselimgenc-oss/claude/optimistic-franklin-9w0pdk
+b5355e9 2026-10-12 17:45:30 +0000 Claude
+    Kağıt motoru: islemler.csv'ye kısmi kâr satırları; başabaş stop etiketi düzeltmesi
+395ea47 2026-10-12 18:46:09 +0300 sselimgenc-oss
+    Merge pull request #5 from sselimgenc-oss/claude/optimistic-franklin-9w0pdk
+7f33a4e 2026-10-12 15:40:29 +0000 Claude
+    Kağıt motoru: islemler.csv'de çıkış nedeni metin (stop/be_stop/trail/tp/ema_exit/time/exit_signal)
+ded8936 2026-10-12 15:37:23 +0000 Claude
+    ortak/backtest_islemleri.csv: panelin rota göstergesi için standart backtest işlem listesi
+37de482 2026-10-11 22:56:48 +0000 Claude
+    A v2 (rejime bağlı short) ve kaldıraç testi (ekip lideri görevi)
+2d03cfa 2026-10-11 21:54:17 +0000 Claude
+    Dış depo strateji analizi tamamlandı: dakikalık freqtrade sonuçları, ileriye bakma düzeltmeleri, tam rapor
+c225303 2026-10-11 21:41:21 +0000 github-actions[bot]
+    Dakikalık freqtrade testi parça 0
+87ffded 2026-10-11 21:40:01 +0000 github-actions[bot]
+    Dakikalık freqtrade testi parça 1
+78cdf3b 2026-10-11 21:36:34 +0000 github-actions[bot]
+    Dakikalık freqtrade testi parça 4
+7aa4e63 2026-10-11 21:34:00 +0000 github-actions[bot]
+    Dakikalık freqtrade testi parça 3
+b85ae9b 2026-10-11 21:30:09 +0000 github-actions[bot]
+    Dakikalık freqtrade testi parça 2
+dd85c44 2026-10-11 21:09:06 +0000 Claude
+    dis-dakika: 5 paralel parça, parça içinde sıralı koşu (runner bellek taşması), ara kayıt
+805e055 2026-10-11 20:58:58 +0000 Claude
+    Dış depo strateji analizi: test düzeneği, sonuçlar ve rapor taslağı
+c59bfbd 2026-10-11 20:53:37 +0000 Claude
+    dis-dakika: funding zaman damgası düzeltmesi (Series.dt.floor) ve mikrosaniye koruması
+c36f422 2026-10-11 20:44:29 +0000 Claude
+    Dakikalık freqtrade stratejileri için tek seferlik toplu Actions testi
+44d7db5 2026-10-11 20:38:04 +0000 github-actions[bot]
+    Geleneksel piyasa günlük verisi (Mag7, BIST10, altın, petrol)
+a772100 2026-10-11 20:37:22 +0000 Claude
+    fetch_yf: kur verisiyle yeniden çalıştır (önceki koşu eşzamanlı push çakışmasıyla düştü)
+00640e9 2026-10-11 20:35:01 +0000 github-actions[bot]
+    Geleneksel piyasa günlük verisi (Mag7, BIST10, altın, petrol)
+fb4758f 2026-10-11 20:34:39 +0000 Claude
+    fetch_yf: USDTRY kuru eklendi (BIST dolar bazında test edilecek)
+d3ae704 2026-10-11 20:34:23 +0000 Claude
+    fetch_yf: zaman damgası ms birimine sabitlendi (pandas 3 saniye çözünürlüğü)
+cb82302 2026-10-11 20:33:01 +0000 github-actions[bot]
+    Geleneksel piyasa günlük verisi (Mag7, BIST10, altın, petrol)
+7ab65c2 2026-10-11 20:32:18 +0000 Claude
+    Geleneksel piyasa verisi çekme iş akışı (Mag7, BIST 30 ilk 10, altın, petrol)
+6b31550 2026-10-11 15:55:43 +0000 Claude
+    PROGRESS: PR #2 ve #4 birleştirildi, kağıt bot durumu güncellendi
+8732a71 2026-10-11 18:54:00 +0300 sselimgenc-oss
+    Kağıt motoru: ilk günlük rapordan sonraki çökme düzeltildi (#4)
+fc02c95 2026-10-11 15:48:13 +0000 Claude
+    Kağıt motoru: ilk günlük rapordan sonraki çökme düzeltildi
+32f8e6b 2026-10-10 14:17:08 +0300 sselimgenc-oss
+    Merge pull request #2 from sselimgenc-oss/claude/optimistic-franklin-9w0pdk
+9e6c519 2026-10-10 04:47:44 +0000 Claude
+    Kağıt bot zamanlamasını yoğun olmayan :43 dakikasına taşı
+3db584c 2026-10-10 03:24:24 +0000 Claude
+    Haftalık yön + günlük işlem (1W/1D) strateji çalışması
+810f3af 2026-10-09 22:25:06 +0000 github-actions[bot]
+    Binance USDT-M 1h kline ve funding verisini güncelle
+ec48374 2026-10-10 01:23:12 +0300 sselimgenc-oss
+    Merge pull request #1 from sselimgenc-oss/claude/optimistic-franklin-9w0pdk
+9081503 2026-10-09 22:21:00 +0000 Claude
+    İlerleme: kağıt botu aşaması
+e7d3b28 2026-10-09 22:19:13 +0000 Claude
+    Kağıt al-sat botu: motor, canlı veri çekici, iş akışları
+902ffa4 2026-10-09 22:10:18 +0000 Claude
+    GitHub Actions'tan canlı veri uç noktası erişim testi
+b8e84a8 2026-10-09 22:04:17 +0000 Claude
+    Denetim: bug düzeltmeleri, C'nin A'ya birleştirilmesi, kırılgan filtrenin kaldırılması
+4c8b1bb 2026-10-09 21:49:23 +0000 Claude
+    Strateji raporu, stres testi sonuçları ve MTM düşüş analizi
+458eeeb 2026-10-09 21:48:29 +0000 github-actions[bot]
+    Binance USDT-M 1h kline ve funding verisini güncelle
+1c09f5a 2026-10-09 21:44:08 +0000 Claude
+    Rapor betiği ve nihai backtest sonuçları
+395eb4a 2026-10-09 21:42:27 +0000 Claude
+    Final strateji tanımları (A/B/C) ve stres testi evreni için veri adımı
+aa0870d 2026-10-09 21:29:48 +0000 Claude
+    Strateji araştırması: 4H Donchian+hacim kırılımı (A) hedefleri karşılıyor
+81bb4d7 2026-10-09 21:22:45 +0000 Claude
+    Backtest motoru, özellik hattı ve ilk strateji iskeletleri
+be2e40b 2026-10-09 21:20:03 +0000 github-actions[bot]
+    Binance USDT-M 1h kline ve funding verisini güncelle
+9a01a9c 2026-10-09 21:17:13 +0000 Claude
+    Binance veri çekme betiği ve GitHub Actions iş akışı ekle
+549d641 2026-10-09 21:14:48 +0000 Claude
+    PDF metinlerini metinler/ klasörüne .md olarak çıkar
+8d6489e 2026-10-10 00:07:32 +0300 sselimgenc-oss
+    Add files via upload
+49a8941 2026-10-10 00:06:54 +0300 sselimgenc-oss
+    Add files via upload
+5047c88 2026-10-10 00:05:54 +0300 sselimgenc-oss
+    Add files via upload
+60f9e94 2026-10-10 00:05:09 +0300 sselimgenc-oss
+    Add files via upload
