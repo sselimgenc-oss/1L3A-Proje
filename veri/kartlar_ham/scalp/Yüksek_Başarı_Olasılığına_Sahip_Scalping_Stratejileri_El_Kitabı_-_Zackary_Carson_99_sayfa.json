@@ -1,0 +1,846 @@
+[
+  {
+    "kart_id": "scalp__sma500-hma30-stokastik-rsi__carson",
+    "ad": "500 SMA + 30 HMA + Stokastik RSI Trend Yönlü Scalp (Kitap Örneği)",
+    "stil": "scalp",
+    "kaynak": {"pdf": "Yüksek_Başarı_Olasılığına_Sahip_Scalping_Stratejileri_El_Kitabı_-_Zackary_Carson_99_sayfa.pdf", "sayfalar": [12, 13]},
+    "ozet": "Fiyat 500 SMA'nın üstündeyken (yükseliş trendi), Stokastik RSI 50'nin altında yukarı çaprazlanınca ve fiyat 30 HMA'yı yukarı geçince uzun açılır. Stop giriş mumunun altına konur. Çıkış, fiyat 30 HMA'nın altına inince. Kitap yalnızca uzun tarafı tarif ediyor.",
+    "kategori": "trend_takip",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {"islem": "5m (kitap önerisi)", "ust_filtre": "4h veya günlük (kitap trend için önerdi)"},
+    "gostergeler": [
+      {"ad": "SMA", "parametreler": {"periyot": 500}},
+      {"ad": "HMA", "parametreler": {"periyot": 30}},
+      {"ad": "Stokastik RSI", "parametreler": {"K": 8, "D": 3, "RSI_uzunluk": 14, "stokastik_uzunluk": 14}}
+    ],
+    "long_giris": [
+      "Fiyat 500 SMA'nın üzerinde",
+      "Stokastik RSI 50'nin altında ve yukarı yönde çaprazlanmış",
+      "Fiyat 30 HMA'nın üzerine çıkınca uzun giriş"
+    ],
+    "short_giris": [],
+    "stop_loss": "Giriş mumunun hemen altı",
+    "kar_al": "Sabit hedef yok; çıkış, fiyat 30 HMA'nın altına düşünce",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": ["500 SMA ile trend yönü (yalnızca üstündeyken uzun)"],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": "Kitapta bu örnek için sayısal performans yok.",
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "SMA, HMA, Stokastik RSI eşikleri ve çaprazı, giriş ve stop mekanik. Kısa taraf ve kâr hedefi yok; Stokastik RSI sinyal çizgisinin tanımı eksik."
+    },
+    "belirsizlikler": [
+      "Kısa taraf kitapta tarif edilmemiş",
+      "Zaman dilimi kesin değil (5dk girişi, 4S/günlük trend filtresi önerisi)",
+      "Stokastik RSI'da hangi çizginin (K veya D) çaprazı kullanılacağı belirtilmemiş",
+      "Kâr hedefi yok",
+      "Kitap 'hızlı' ve 'uzun vadeli' trend tanımı için hangi filtrenin zorunlu olduğunu açıkça söylemiyor"
+    ],
+    "uyumluluk_notu": "1L3A için: 5dk'da uygulanabilir (500 SMA 5dk'da uzun bir pencere; 1L3A zaman dilimi yapısıyla uyumlu test edilmeli). Forex, kripto, hisse, emtia için genel. Hacim verisi gerekmez.",
+    "varyantlar": [
+      "Yüksek zaman dilimi trend filtresi (4S veya günlük, kitap önerisi)"
+    ],
+    "anahtar_kelimeler": ["sma500", "hma30", "stokastik-rsi", "trend-yonu", "uzun", "zarar-durdur-mum-alti", "scalp"]
+  },
+  {
+    "kart_id": "scalp__amazing-oscillator-rsi__carson",
+    "ad": "Amazing Oscillator (AO) + RSI Sinyali [Algoalpha]",
+    "stil": "scalp",
+    "kaynak": {"pdf": "Yüksek_Başarı_Olasılığına_Sahip_Scalping_Stratejileri_El_Kitabı_-_Zackary_Carson_99_sayfa.pdf", "sayfalar": [48, 49]},
+    "ozet": "Algoalpha Amazing Oscillator göstergesinin ürettiği yeşil X (alım) ve kırmızı X (satış) işaretleri giriş tetiği olarak kullanılır. Gösterge AO'ya RSI hesaplaması uygulayan bir birleşimdir; kitap scalping için RSI periyodunu 7 öneriyor.",
+    "kategori": "momentum",
+    "piyasa_rejimi": "herhangi",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {"islem": "belirtilmemiş", "ust_filtre": null},
+    "gostergeler": [{"ad": "Amazing Oscillator (Algoalpha) + RSI", "parametreler": {"RSI_periyot_onerilen": 7}}],
+    "long_giris": ["Yeşil X işareti oluşur (kitap: RSI'nın -30 seviyesinin üzerine geçişi)"],
+    "short_giris": ["Kırmızı X işareti oluşur (kitap: RSI'nın 30 seviyesinin altına geçişi)"],
+    "stop_loss": null,
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": "Kitap 'yanlış sinyalleri azaltır' ve 'ultra hassas' diyor; sayısal kanıt yok.",
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Sinyal eşiği tarif ediliyor, ama gösterge kapalı kaynaklı bir AO+RSI birleşimi; hesap formülü ve stop/çıkış kuralı kitapta yok."
+    },
+    "belirsizlikler": [
+      "AO+RSI birleşiminin hesap formülü yok",
+      "Kitap '-30' ve '30' eşiklerini birlikte yazıyor (işaret tutarsızlığı olabilir)",
+      "Stop ve çıkış kuralı yok",
+      "Zaman dilimi belirtilmemiş"
+    ],
+    "uyumluluk_notu": "1L3A için: TradingView'de kapalı gösterge; kodlamak için AO ve RSI yeniden tanımlanmalı. Hacim verisi gerekmez.",
+    "varyantlar": [],
+    "anahtar_kelimeler": ["amazing-oscillator", "ao", "rsi-7", "algoalpha", "x-sinyal", "scalp"]
+  },
+  {
+    "kart_id": "scalp__fisher-plus-osc__carson",
+    "ad": "Fisher+ [OSC] Renk Dönüşü Sinyali",
+    "stil": "scalp",
+    "kaynak": {"pdf": "Yüksek_Başarı_Olasılığına_Sahip_Scalping_Stratejileri_El_Kitabı_-_Zackary_Carson_99_sayfa.pdf", "sayfalar": [50, 51]},
+    "ozet": "Fisher+ [OSC] göstergesinde hareketli ortalama çizgisinin maviye dönmesi (veya alt bölgede mavi ok) alım, kırmızıya dönmesi (veya üst bölgede kırmızı ok) satım sinyali olarak kullanılır.",
+    "kategori": "momentum",
+    "piyasa_rejimi": "herhangi",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {"islem": "belirtilmemiş", "ust_filtre": null},
+    "gostergeler": [{"ad": "Fisher+ [OSC] (s3raphic333)", "parametreler": {"uzunluk": null, "not": "Bölüm 4 #2'de Fisher+ uzunluk 7, MA filtresi 60 olarak verilmiş"}}],
+    "long_giris": ["MA çizgisi maviye döner veya göstergenin alt kısmında mavi ok belirir (boğa ayrışması etiketi)"],
+    "short_giris": ["MA çizgisi kırmızıya döner veya göstergenin üst kısmında kırmızı ok belirir (ayı sapma etiketi)"],
+    "stop_loss": null,
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": "Kitap 'çok sayıda son derece doğru trend dönüşü sinyali' diyor; sayısal kanıt yok.",
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Renk değişimi ve ok sinyali görsel tanımlı; gösterge formülü ve renk değişim eşiği kitapta açık değil."
+    },
+    "belirsizlikler": [
+      "MA renginin maviye/kırmızıya dönme koşulu (eşik, çapraz) tanımsız",
+      "Bölüm 3'te Fisher+ parametreleri verilmemiş (Bölüm 4'te uzunluk 7 ve MA 60 var)",
+      "Stop ve çıkış yok",
+      "'Boğa/ayı ayrışması' etiketi ile ok sinyali arasındaki fark belirsiz"
+    ],
+    "uyumluluk_notu": "1L3A için: kapalı gösterge; renk ve ok kuralı açık formülle yeniden kurulmadan kodlanamaz. Hacim gerekmez.",
+    "varyantlar": [],
+    "anahtar_kelimeler": ["fisher", "fisher-plus", "renk-donusu", "ok-sinyali", "momentum", "scalp"]
+  },
+  {
+    "kart_id": "scalp__triple-rsi-heikin-ashi__carson",
+    "ad": "Ağırlıklı Heikin Ashi Üçlü RSI Sinyali (Hangi RSI?)",
+    "stil": "scalp",
+    "kaynak": {"pdf": "Yüksek_Başarı_Olasılığına_Sahip_Scalping_Stratejileri_El_Kitabı_-_Zackary_Carson_99_sayfa.pdf", "sayfalar": [52, 53]},
+    "ozet": "Üç farklı uzunluklu RSI'nın yumuşatılıp ağırlıklandığı göstergede, düzleştirilmiş RSI'nın hareketli ortalamayı yukarı geçmesi ve düzeltilmiş RSI'nın 30'un üstüne çıkması alım; düzleştirilmiş RSI'nın ortalamanın altına geçmesi ve düzeltilmiş RSI'nın 70'in altına inmesi satım sinyali sayılır.",
+    "kategori": "momentum",
+    "piyasa_rejimi": "herhangi",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {"islem": "belirtilmemiş", "ust_filtre": null},
+    "gostergeler": [
+      {"ad": "What RSI? Weighted Heiken Ashi Triple RSI", "parametreler": {"pürüzsüzleştirme": 5, "MA_uzunluk": 14, "RSI_uzunluk_1": 10, "RSI_uzunluk_2": 14, "RSI_uzunluk_3": 21}}
+    ],
+    "long_giris": [
+      "Düzleştirilmiş RSI ortalaması hareketli ortalama çizgisinin üzerine çıkar",
+      "Düzeltilmiş RSI ortalaması 30 seviyesinin altından yukarı geçer",
+      "Arka plan yeşil olur ve 'Satın Al' noktası belirir"
+    ],
+    "short_giris": [
+      "Düzleştirilmiş RSI ortalaması hareketli ortalama çizgisinin altına geçer",
+      "Düzeltilmiş RSI ortalaması 70 seviyesinin üzerinden aşağı geçer",
+      "Arka plan kırmızı olur ve 'Sat' noktası belirir"
+    ],
+    "stop_loss": null,
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": "Kitapta sayısal performans iddiası yok; 'gürültüyü azaltır' ifadesi var.",
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Üç RSI uzunluğu, pürüzsüzleştirme ve eşikler (30/70, MA çaprazı) verilmiş; giriş tetiği ölçülebilir. Ağırlıklandırma (Heikin Ashi) formülü açık değil."
+    },
+    "belirsizlikler": [
+      "Üç RSI'nın birleştirme ağırlığı ve Heikin Ashi dönüşümü formülü yok",
+      "Zaman dilimi ve çıkış/stop kuralı yok",
+      "'Satın Al' noktası ile 30 eşiği arasında bar sırası belirtilmemiş"
+    ],
+    "uyumluluk_notu": "1L3A için: TradingView kapalı gösterge; formül ve Heikin Ashi dönüşümü yeniden kurulabilir. Hacim gerekmez.",
+    "varyantlar": [],
+    "anahtar_kelimeler": ["rsi-ucglu", "heikin-ashi", "agirlikli-rsi", "wma-benzeri", "momentum", "scalp"]
+  },
+  {
+    "kart_id": "scalp__tsi-bjorgum__carson",
+    "ad": "Bjorgum TSI Çaprazı ve Renk Sinyali",
+    "stil": "scalp",
+    "kaynak": {"pdf": "Yüksek_Başarı_Olasılığına_Sahip_Scalping_Stratejileri_El_Kitabı_-_Zackary_Carson_99_sayfa.pdf", "sayfalar": [55, 56, 57]},
+    "ozet": "True Strength Index (TSI) göstergesinde hızlı TSI çizgisinin yavaş çizgiyi yukarı geçmesi ve yavaş çizginin maviye dönmesi alım; hızlı çizginin yavaş çizgiyi aşağı geçmesi ve yavaş çizginin kırmızıya dönmesi satım sinyali sayılır.",
+    "kategori": "momentum",
+    "piyasa_rejimi": "herhangi",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {"islem": "belirtilmemiş", "ust_filtre": null},
+    "gostergeler": [{"ad": "Bjorgum TSI (True Strength Index)", "parametreler": {"uzunluklar": null, "not": "kitapta belirtilmemiş; fiyat değişiminin iki kez yumuşatılmış hali"}}],
+    "long_giris": [
+      "Hızlı TSI çizgisi yavaş TSI çizgisinin üstünden geçer",
+      "Yavaş TSI çizgisi maviye döner"
+    ],
+    "short_giris": [
+      "Hızlı TSI çizgisi yavaş TSI çizgisinin altından geçer",
+      "Yavaş TSI çizgisi kırmızıya döner"
+    ],
+    "stop_loss": null,
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": "Kitap TSI'yi RSI ve Stokastik'ten 'daha doğru' sayıyor; sayısal kanıt yok.",
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "TSI standart bir momentum formülü ailesi; çapraz kuralı net. Uzunluklar ve renk değişim tanımı eksik."
+    },
+    "belirsizlikler": [
+      "TSI uzunlukları ve yumuşatma türü verilmemiş",
+      "'Yavaş çizgi maviye/kırmızıya döner' koşulunun eşiği tanımsız",
+      "Zaman dilimi ve stop/çıkış kuralı yok"
+    ],
+    "uyumluluk_notu": "1L3A için: formül açık, 5dk ve 15dk'da test edilebilir. Hacim gerekmez. Forex, kripto, hisse, emtia için genel.",
+    "varyantlar": [],
+    "anahtar_kelimeler": ["tsi", "true-strength", "momentum", "capraz", "renk-donusu", "scalp"]
+  },
+  {
+    "kart_id": "scalp__ml-optimal-rsi__carson",
+    "ad": "Makine Öğrenmesi Optimal RSI Çaprazı [YinYangAlgorithms]",
+    "stil": "scalp",
+    "kaynak": {"pdf": "Yüksek_Başarı_Olasılığına_Sahip_Scalping_Stratejileri_El_Kitabı_-_Zackary_Carson_99_sayfa.pdf", "sayfalar": [58, 59, 60]},
+    "ozet": "Gösterge, geçmiş veriye göre en karlı RSI uzunluğunu seçer ve RSI'nın RSI MA'yı yukarı geçmesinde yeşil nokta (alım), aşağı geçmesinde kırmızı nokta (satış) üretir.",
+    "kategori": "momentum",
+    "piyasa_rejimi": "herhangi",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {"islem": "belirtilmemiş", "ust_filtre": null},
+    "gostergeler": [{"ad": "Makine Öğrenmesi Optimal RSI (YinYangAlgorithms)", "parametreler": {"RSI_uzunluk": "ML ile seçilir", "MA_tipi": "Basit ortalama veya k-En Yakın Komşu (ayar)"}}],
+    "long_giris": ["RSI, RSI MA'nın üzerine çıkar (RSI'da yeşil nokta belirir)"],
+    "short_giris": ["RSI, RSI MA'nın altına geçer (RSI'da kırmızı nokta belirir)"],
+    "stop_loss": null,
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": "Kitap 'daha yüksek doğruluk' ve 'karlılık tabloları' diyor; tablo verisi metinde yok.",
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "RSI/RSI MA çaprazı net, ama RSI uzunluğunu seçen makine öğrenmesi adımı kapalı; geri bakış penceresi ve kriter belirtilmemiş."
+    },
+    "belirsizlikler": [
+      "ML geri bakış penceresi ve optimizasyon kriteri yok",
+      "Seçilen RSI uzunluğu sabit değil (zamanla değişebilir)",
+      "Stop ve çıkış kuralı yok",
+      "Kitap 'karlılık tablosu' diyor, tablo ayrıntısı metinde yok"
+    ],
+    "uyumluluk_notu": "1L3A için: çapraz kuralı kodlanabilir ama optimizasyon bileşeni yeniden kurulmalı (sabit RSI uzunluğu ile test). Hacim gerekmez.",
+    "varyantlar": [
+      "RSI MA türü: Basit ortalama veya k-En Yakın Komşu (kitap ayar olarak veriyor)"
+    ],
+    "anahtar_kelimeler": ["makine-ogrenmesi", "optimal-rsi", "rsi-ma-capraz", "kapali-gosterge", "momentum", "scalp"]
+  },
+  {
+    "kart_id": "scalp__rsi-diverjans-filtreli__carson",
+    "ad": "Filtrelenmiş RSI Ayrışma (Divergence) Sinyali",
+    "stil": "scalp",
+    "kaynak": {"pdf": "Yüksek_Başarı_Olasılığına_Sahip_Scalping_Stratejileri_El_Kitabı_-_Zackary_Carson_99_sayfa.pdf", "sayfalar": [61, 62]},
+    "ozet": "Gösterge fiyat ile RSI arasındaki ayrışmayı otomatik bulur: boğa ayrışmasında mumun altında yeşil R (alım), ayı ayrışmasında mumun üstünde kırmızı R (satış) etiketi çıkar.",
+    "kategori": "ortalamaya_donus",
+    "piyasa_rejimi": "herhangi",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {"islem": "belirtilmemiş", "ust_filtre": null},
+    "gostergeler": [{"ad": "Filtered RSI Divergence Finder (Scarle)", "parametreler": {}}],
+    "long_giris": ["Boğa ayrışması tespit edilir ve mumun altında yeşil R etiketi belirir (alım)"],
+    "short_giris": ["Ayı ayrışması tespit edilir ve mumun üstünde kırmızı R etiketi belirir (satış)"],
+    "stop_loss": null,
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": "Kitapta sayısal performans iddiası yok.",
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Ayrışma tespiti kapalı algoritmaya dayanıyor; filtre ve pivot parametreleri yok."
+    },
+    "belirsizlikler": [
+      "Ayrışma tespit parametreleri ve 'filtre' tanımı yok",
+      "Stop, çıkış ve zaman dilimi yok",
+      "Etiketlerin sonradan değişip değişmediği (yeniden çizim) belirtilmemiş"
+    ],
+    "uyumluluk_notu": "1L3A için: kapalı gösterge; ayrışma mantığı (fiyat tepe/dip ve RSI tepe/dip karşılaştırması) yeniden kurulmalı. Hacim gerekmez.",
+    "varyantlar": [],
+    "anahtar_kelimeler": ["rsi", "diverjans", "ayrisma", "filtre", "boga-ayi", "scalp"]
+  },
+  {
+    "kart_id": "scalp__luxalgo-ters-donus__carson",
+    "ad": "LuxAlgo Ters Dönüş Sinyali (9 ve 13 Mumluk)",
+    "stil": "scalp",
+    "kaynak": {"pdf": "Yüksek_Başarı_Olasılığına_Sahip_Scalping_Stratejileri_El_Kitabı_-_Zackary_Carson_99_sayfa.pdf", "sayfalar": [63, 64, 65]},
+    "ozet": "LuxAlgo Reversal Signals, önce 9 mumluk momentum dizisinde ilk dönüş işaretini, sonra 13 mumluk tükenme aşamasında doğrulamasını arar. Yeşil E/P etiketi (veya Momentum ayarında mavi L) alım, kırmızı E/P (veya sarı S) satım sinyali verir.",
+    "kategori": "formasyon",
+    "piyasa_rejimi": "yatay",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {"islem": "belirtilmemiş", "ust_filtre": null},
+    "gostergeler": [{"ad": "Reversal Signals [LuxAlgo]", "parametreler": {"momentum_mum_sayisi": 9, "tukenme_mum_sayisi": 13}}],
+    "long_giris": [
+      "Yeşil E veya P etiketi/noktası mumun altında belirir (yükseliş dönüşü)",
+      "Momentum ayarı kullanılıyorsa mumun altında mavi L etiketi (alım)"
+    ],
+    "short_giris": [
+      "Kırmızı E veya P etiketi/noktası mumun üstünde belirir (düşüş dönüşü)",
+      "Momentum ayarı kullanılıyorsa mumun üstünde sarı S etiketi (satış)"
+    ],
+    "stop_loss": null,
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": ["Kitap: güçlü trendde yanlış sinyal üretir; yalnızca yatay piyasada kullanılması önerilir (AI/ML #2 bölümünde)"],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": "Kitap 'yüksek doğruluk' diyor; sayısal kanıt yok.",
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "İki aşamalı (9 ve 13 mum) mantık ve etiket koşulları kapalı; tarif yalnızca görsel. Stop ve çıkış yok."
+    },
+    "belirsizlikler": [
+      "9 ve 13 mumluk pencerelerin tam koşulları tanımsız",
+      "E/P etiketleri arasındaki fark ve Momentum ayarının etkisi açık değil",
+      "Stop ve çıkış kuralı yok",
+      "Kitap yanlış sinyalin trend piyasasında arttığını söylüyor; trend filtresi sayısal değil"
+    ],
+    "uyumluluk_notu": "1L3A için: kapalı gösterge; iki aşamalı mantık açık kurallarla yeniden kurulmadan kodlanamaz. Hacim gerekmez.",
+    "varyantlar": [
+      "Momentum ayarı (mavi L / sarı S) ile standart ayar (E/P)"
+    ],
+    "anahtar_kelimeler": ["luxalgo", "ters-donus", "9-mum", "13-mum", "tukenme", "yatay-piyasa", "scalp"]
+  },
+  {
+    "kart_id": "scalp__kumo-dalga-trendi-dinamik__carson",
+    "ad": "Kumo Volatilitesi ile Dinamik Bölgeli Dalga Trendi Sinyali",
+    "stil": "scalp",
+    "kaynak": {"pdf": "Yüksek_Başarı_Olasılığına_Sahip_Scalping_Stratejileri_El_Kitabı_-_Zackary_Carson_99_sayfa.pdf", "sayfalar": [66, 67]},
+    "ozet": "Hızlı çizginin yavaş çizgiyi yukarı geçmesi ve dalga trendinin aşırı satım bölgesine girmesiyle birlikte yeşil nokta (boğa sapması) alım sinyali verir; tersi satım. Dinamik bölgeler oynaklığa göre ayarlanır.",
+    "kategori": "momentum",
+    "piyasa_rejimi": "herhangi",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {"islem": "belirtilmemiş", "ust_filtre": null},
+    "gostergeler": [{"ad": "Dalga Trendi (Kumo'nun zımni volatilitesi ile dinamik bölgeler)", "parametreler": {}}],
+    "long_giris": [
+      "Hızlı çizgi yavaş çizginin üstünden geçer",
+      "Dalga trendi aşırı satım bölgesine girer",
+      "Yeşil nokta belirir (boğa sapması)"
+    ],
+    "short_giris": [
+      "Hızlı çizgi yavaş çizginin altından geçer",
+      "Dalga trendi aşırı alım bölgesine girer",
+      "Kırmızı nokta belirir (ayı sapması)"
+    ],
+    "stop_loss": null,
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": "Kitap 'daha güvenilir geri dönüş sinyalleri' diyor; sayısal kanıt yok.",
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Çapraz ve bölge koşulları tarif edilmiş; ama dinamik bölge hesabı (Kumo volatilitesi) ve sapma noktasının tanımı kapalı."
+    },
+    "belirsizlikler": [
+      "Dinamik bölge hesabı (Kumo volatilitesi) tanımsız",
+      "Sapma noktasının (yeşil/kırmızı nokta) hesap kuralı yok",
+      "Stop, çıkış ve zaman dilimi yok"
+    ],
+    "uyumluluk_notu": "1L3A için: kapalı gösterge; dalga trendi formülü ve dinamik bölge tanımı yeniden kurulmalı. Hacim gerekmez.",
+    "varyantlar": [],
+    "anahtar_kelimeler": ["wavetrend", "dalga-trendi", "kumo", "dinamik-bolge", "sapma", "scalp"]
+  },
+  {
+    "kart_id": "scalp__false-breakout-expo__carson",
+    "ad": "Yanlış Kopuş (Expo) Sinyali [Zeiierman]",
+    "stil": "scalp",
+    "kaynak": {"pdf": "Yüksek_Başarı_Olasılığına_Sahip_Scalping_Stratejileri_El_Kitabı_-_Zackary_Carson_99_sayfa.pdf", "sayfalar": [68, 69, 70]},
+    "ozet": "Fiyatın bir destek veya direnç seviyesini kısa süre kırıp hızla geri dönmesi (yanlış kopuş) göstergede üçgenle işaretlenir. Desteğin yanlış kırılmasında fiyatın altında yeşil üçgen (alım), dirençte kırmızı üçgen (satım). Kitap yatay piyasada en iyi çalıştığını söylüyor.",
+    "kategori": "kirilim",
+    "piyasa_rejimi": "yatay",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {"islem": "belirtilmemiş", "ust_filtre": null},
+    "gostergeler": [{"ad": "False Breakout (Expo) (Zeiierman)", "parametreler": {"ayar": "agresif"}}],
+    "long_giris": ["Desteğin yanlış kırılması olur ve fiyatın altında yeşil üçgen belirir (alım)"],
+    "short_giris": ["Yanlış kırılma olur ve fiyatın üstünde kırmızı üçgen belirir (satış); kitap metninde bu koşul 'destek' diye yazılmış, muhtemelen direnç olmalı"],
+    "stop_loss": null,
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": ["Yatay/aralıklı piyasada en iyi çalışır (kitap)"],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": "Kitapta sayısal performans iddiası yok.",
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Kapalı kaynak gösterge; destek/direnç seviyesinin nasıl belirlendiği tanımsız. Stop ve çıkış yok."
+    },
+    "belirsizlikler": [
+      "Destek/direnç seviyesinin belirlenme kuralı yok",
+      "Satış sinyali metninde 'destek' yazıyor (muhtemelen direnç)",
+      "'Agresif' ayarın etkisi tanımsız",
+      "Stop ve çıkış kuralı yok"
+    ],
+    "uyumluluk_notu": "1L3A için: kapalı gösterge; yanlış kopuş mantığı (seviye, kırılma, geri dönüş) yeniden kurulabilir. Hacim gerekmez.",
+    "varyantlar": [],
+    "anahtar_kelimeler": ["yanlis-kopus", "false-breakout", "destek-direnc", "ucgen", "yatay-piyasa", "scalp"]
+  },
+  {
+    "kart_id": "scalp__net-pozisyon-rsi-kripto__carson",
+    "ad": "Net Pozisyon (Net Kısa) RSI Sinyali [Leviathan] - Yalnız Kripto",
+    "stil": "scalp",
+    "kaynak": {"pdf": "Yüksek_Başarı_Olasılığına_Sahip_Scalping_Stratejileri_El_Kitabı_-_Zackary_Carson_99_sayfa.pdf", "sayfalar": [71, 72]},
+    "ozet": "Kripto vadeli piyasasındaki net kısa pozisyonların RSI'si kullanılır; kitap sinyal yönünü iki satırda çelişkili yazıyor (70 üstü alım, 30 üstü satım). Yalnız kripto için tasarlanmış, forex için kullanılamaz.",
+    "kategori": "diger",
+    "piyasa_rejimi": "herhangi",
+    "orijinal_piyasa": "kripto",
+    "zaman_dilimi": {"islem": "belirtilmemiş", "ust_filtre": null},
+    "gostergeler": [{"ad": "Net Pozisyonlar (Net Uzunlar ve Net Kısalar) - Leviathan", "parametreler": {"tur": "Pozisyon RSI", "gorunum": "Satır", "toplama": "Tam Veri", "secili": "Yalnız Net Shorts"}}],
+    "long_giris": ["Net kısa pozisyon RSI'si 70'in üzerinde (kitap bunu alım sinyali olarak yazıyor)"],
+    "short_giris": ["Kitapta satım koşulu 'net kısa RSI aşırı satılmış (30'un üzerinde)' olarak yazılmış; eşik yönü tutarsız, yazım hatası olabilir"],
+    "stop_loss": null,
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": ["Yalnız kripto para (kitap uyarısı)"],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": "Kitapta sayısal performans iddiası yok.",
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Dış pozisyon verisi gerekiyor; kullanılan veri kaynağı kapalı; eşik yönleri tutarsız."
+    },
+    "belirsizlikler": [
+      "Eşik yönleri metinde tutarsız (70 ve 30'un hangi yöne işaret ettiği)",
+      "Veri kaynağı (borsa net pozisyon verisi) kitapta açık değil",
+      "Stop, çıkış ve zaman dilimi yok"
+    ],
+    "uyumluluk_notu": "1L3A için: kitabın kendi uyarısına göre yalnız kripto; forex'te kullanılamaz. Kripto için dış pozisyon verisi kaynağı gerekir; öncelik düşük.",
+    "varyantlar": [],
+    "anahtar_kelimeler": ["net-pozisyon", "kripto", "net-kisa", "rsi", "veri-kaynagi", "scalp"]
+  },
+  {
+    "kart_id": "scalp__fibonacci-bolge-tersine-donus__carson",
+    "ad": "Fibonacci Bölgesi + Tersine Dönüş Bulucu + Stokastik RSI",
+    "stil": "scalp",
+    "kaynak": {"pdf": "Yüksek_Başarı_Olasılığına_Sahip_Scalping_Stratejileri_El_Kitabı_-_Zackary_Carson_99_sayfa.pdf", "sayfalar": [74, 75, 76]},
+    "ozet": "Fiyat 500 MA'nın üstündeyken, Fibonacci bölgesinin dibine dokunup Stokastik RSI 50'nin altında yukarı çaprazlandığında ve Tersine Dönüş Bulucu alım sinyali verdiğinde uzun açılır; stop giriş mumunun altında. Çıkış, fiyatın Fibonacci bölgesinin tepesine dokunması veya Bulucu'nun satım sinyali. Yatay piyasada en iyi çalışır.",
+    "kategori": "ortalamaya_donus",
+    "piyasa_rejimi": "yatay",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {"islem": "belirtilmemiş", "ust_filtre": null},
+    "gostergeler": [
+      {"ad": "Fibonacci Bölgesi (eykpunter)", "parametreler": {}},
+      {"ad": "Tersine Dönüş Bulucu (NS91)", "parametreler": {}},
+      {"ad": "Stokastik RSI", "parametreler": {"K": 6, "D": 3, "uzunluk": 12}},
+      {"ad": "SMA", "parametreler": {"periyot": 500}}
+    ],
+    "long_giris": [
+      "Fiyat 500 MA'nın üzerinde",
+      "Fiyat Fibonacci bölgesinin dibine dokunur",
+      "Stokastik RSI 50'nin altında ve yukarı yönde çaprazlanmış",
+      "Tersine Dönüş Bulucu alım sinyali (mumun altında sarı veya yeşil nokta) oluşunca uzun giriş"
+    ],
+    "short_giris": [
+      "Fiyat 500 MA'nın altında",
+      "Fiyat Fibonacci bölgesinin tepesine dokunur",
+      "Stokastik RSI 50'nin üzerinde ve aşağı yönde çaprazlanmış",
+      "Tersine Dönüş Bulucu satım sinyali (mumun üstünde sarı veya kırmızı nokta) oluşunca kısa giriş (kitap metninde bu bölüm 'giriş mumunun üzerine stop' diyor; ayrıntı belirsizlikler'de)"
+    ],
+    "stop_loss": "Uzun: giriş mumunun altı. Kısa: giriş mumunun üstü.",
+    "kar_al": "Uzun çıkış: fiyat Fibonacci bölgesinin tepesine dokunur veya Bulucu'da satım sinyali oluşur",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": ["500 MA ile trend yönü", "Yatay piyasada en iyi (kitap)"],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": "Kitapta sayısal performans iddiası yok; 'test edilmiş' ifadesi var.",
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Giriş tetiği kapalı kaynaklı Tersine Dönüş Bulucu ve Fibonacci bölgesine bağlı; bölge hesabı ve bulucu formülü açık değil."
+    },
+    "belirsizlikler": [
+      "Kısa taraf çıkış koşulu metinde yazım hatası içeriyor: 'tepesine dokunduğunda' ve 'satış sinyali ile uzun pozisyondan çıkın' ifadeleri kısa işlem için tutarsız (muhtemelen dibe dokunma ve alım sinyali olmalı)",
+      "Fibonacci bölgesi kanal periyodu ve oranları yok",
+      "Tersine Dönüş Bulucu (NS91) formülü kapalı",
+      "Zaman dilimi belirtilmemiş",
+      "Kısa tarafın stop koşulu iki yerde farklı ifade edilmiş (giriş mumunun üstü)"
+    ],
+    "uyumluluk_notu": "1L3A için: iki kapalı gösterge (Fibonacci bölgesi, Tersine Dönüş Bulucu) içerdiği için doğrudan kodlanamaz; Stokastik RSI ve 500 MA kısmı kodlanabilir. Hacim gerekmez.",
+    "varyantlar": [
+      "Uzun ve kısa ayna (kısa tarafta yazım tutarsızlığı var)"
+    ],
+    "anahtar_kelimeler": ["fibonacci-bolge", "tersine-donus", "stokastik-rsi", "500-ma", "yatay-piyasa", "ortalamaya-donus", "scalp"]
+  },
+  {
+    "kart_id": "scalp__halftrend-fisher-plus__carson",
+    "ad": "HalfTrend + Fisher+ Trend Yönlü Scalp",
+    "stil": "scalp",
+    "kaynak": {"pdf": "Yüksek_Başarı_Olasılığına_Sahip_Scalping_Stratejileri_El_Kitabı_-_Zackary_Carson_99_sayfa.pdf", "sayfalar": [77, 78, 79]},
+    "ozet": "500 SMA'nın üstünde uzun, altında kısa yönünde işlem yapılır. Fisher+ sinyali (MA 50 altındaki mavi ok) ile teyit edilen HalfTrend alım sinyali (mumun altında mavi ok) uzun giriş tetikler; HalfTrend satım sinyali (mumun üstünde kırmızı ok) çıkıştır. Kısa taraf simetriktir.",
+    "kategori": "trend_takip",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {"islem": "belirtilmemiş", "ust_filtre": null},
+    "gostergeler": [
+      {"ad": "Fisher+ [OSC] (s3raphic333)", "parametreler": {"uzunluk": 7, "MA_filtresi": 60}},
+      {"ad": "HalfTrend (everget)", "parametreler": {"genlik": 1, "kanal_sapmasi": 2}},
+      {"ad": "SMA", "parametreler": {"periyot": 500}}
+    ],
+    "long_giris": [
+      "Fiyat 500 SMA'nın üzerinde",
+      "Fisher+ mavi renkte ve MA çizgisi 50'nin altında iken mavi ok (alım) üretir",
+      "HalfTrend mumun altında mavi ok (alım) oluşturduğunda uzun giriş"
+    ],
+    "short_giris": [
+      "Fiyat 500 SMA'nın altında",
+      "Fisher+ kırmızı renkte ve MA çizgisi 50'nin üzerinde iken kırmızı ok (satış) üretir",
+      "HalfTrend mumun üstünde kırmızı ok (satış) oluşturduğunda kısa giriş"
+    ],
+    "stop_loss": "Uzun: giriş mumunun altı. Kısa: giriş mumunun üstü.",
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": ["500 SMA ile trend yönü"],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": "Kitapta sayısal performans iddiası yok.",
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Parametreler (Fisher+ 7/60, HalfTrend 1/2, SMA 500) ve giriş/çıkış tetikleri verilmiş. Fisher+ ve HalfTrend'in birbirine göre zamanlama penceresi belirtilmemiş."
+    },
+    "belirsizlikler": [
+      "Fisher+ sinyali ile HalfTrend sinyali arasındaki zaman penceresi (aynı mum mu, önce mi) belirtilmemiş",
+      "Kısa çıkış: 'HalfTrend mumun altında mavi ok' ile çıkış mı, sadece giriş koşulu mu, tam belirsiz",
+      "Kâr hedefi yok",
+      "Zaman dilimi belirtilmemiş"
+    ],
+    "uyumluluk_notu": "1L3A için: parametreler açık, yeniden kodlanabilir (HalfTrend açık kaynak formülü vardır, Fisher+ için ayrıca kontrol gerekir). Hacim gerekmez.",
+    "varyantlar": [],
+    "anahtar_kelimeler": ["halftrend", "fisher-plus", "500-sma", "trend", "ok-sinyali", "scalp"]
+  },
+  {
+    "kart_id": "scalp__bollinger40-rsi5-adx-kopya__carson",
+    "ad": "Bollinger(40,2) + RSI(5) + ADX Scalp (Kitap Bölüm 4 #3)",
+    "stil": "scalp",
+    "kaynak": {"pdf": "Yüksek_Başarı_Olasılığına_Sahip_Scalping_Stratejileri_El_Kitabı_-_Zackary_Carson_99_sayfa.pdf", "sayfalar": [80, 81, 82]},
+    "ozet": "ADX 25'in altında iken fiyat alt Bollinger(40,2) bandının altına geçip RSI(5) 30'un altına inerse ve RSI 30'un üstüne çıkarken uzun açılır. Stop son salınım dibinin altı; çıkış fiyat üst banda ulaşınca. Kısa taraf simetrik. Kural metni Max Stevenson kitabının V.#3 stratejisiyle birebir aynıdır (kopya/benzerlik, birleştirmede not edilmeli).",
+    "kategori": "ortalamaya_donus",
+    "piyasa_rejimi": "yatay",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {"islem": "belirtilmemiş", "ust_filtre": null},
+    "gostergeler": [
+      {"ad": "Bollinger Bantları", "parametreler": {"periyot": 40, "sapma": 2}},
+      {"ad": "RSI", "parametreler": {"periyot": 5}},
+      {"ad": "ADX", "parametreler": {"periyot": 14}}
+    ],
+    "long_giris": [
+      "ADX 25'in altında (trend olmayan piyasa)",
+      "Fiyat alt Bollinger bandının altına geçer ve RSI(5) 30'un altına girer",
+      "RSI aşırı satım bölgesinden çıkınca (30'un üstüne çıkınca) uzun giriş"
+    ],
+    "short_giris": [
+      "ADX 25'in altında (trend olmayan piyasa)",
+      "Fiyat üst Bollinger bandının üstüne çıkar ve RSI(5) 70'in üstüne girer",
+      "RSI aşırı alım bölgesinden çıkınca (70'in altına inince) kısa giriş"
+    ],
+    "stop_loss": "Uzun: son salınım dibinin altı. Kısa: son salınım zirvesinin üstü.",
+    "kar_al": "Uzun: fiyat üst Bollinger bandının tepesine ulaşınca. Kısa: fiyat alt bandın dibine dokununca.",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": ["ADX 25'in altında (trend olmayan piyasa)"],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": "Kitapta bu strateji için sayısal performans iddiası yok.",
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Bollinger(40,2), RSI(5) eşikleri, ADX<25 ve giriş tetiği tanımlı; 'son salınım' tanımı yok."
+    },
+    "belirsizlikler": [
+      "'Son salınım dibi/zirvesi' tanımı yok",
+      "Mum kapanışı mı tik mi kullanıldığı belirtilmemiş",
+      "Zaman dilimi belirtilmemiş"
+    ],
+    "uyumluluk_notu": "1L3A için: 5dk/15dk'da uyarlanabilir; hacim gerekmez; swing tanımı eklenmeli. Max Stevenson kartı ile birlikte birleştirme aşamasında tek kural olarak ele alınmalı.",
+    "varyantlar": [
+      "Standart Bollinger(20,2) yerine 40 periyot (kitap 40'ı kullanıyor)"
+    ],
+    "anahtar_kelimeler": ["bollinger-40", "rsi-5", "adx", "asiri-satim", "asiri-alim", "swing-stop", "kopya-stevenson", "scalp"]
+  },
+  {
+    "kart_id": "scalp__rsi-wma-hma__carson",
+    "ad": "RSI + WMA(30) + HMA(50) + EMA500 Scalp",
+    "stil": "scalp",
+    "kaynak": {"pdf": "Yüksek_Başarı_Olasılığına_Sahip_Scalping_Stratejileri_El_Kitabı_-_Zackary_Carson_99_sayfa.pdf", "sayfalar": [83, 84, 85]},
+    "ozet": "Fiyat 500 EMA'nın üstündeyken RSI(14) 30 WMA'yı yukarı geçer ve fiyat 50 HMA'yı yukarı geçince uzun açılır; fiyat 50 HMA'nın altına düşünce çıkılır. Kısa taraf aynı mantığın tersidir. Kitap 15 dakikalık zaman diliminde test edildiğini belirtiyor.",
+    "kategori": "trend_takip",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {"islem": "15m (kitap test zaman dilimi)", "ust_filtre": null},
+    "gostergeler": [
+      {"ad": "RSI", "parametreler": {"periyot": 14}},
+      {"ad": "WMA (RSI üzerine)", "parametreler": {"periyot": 30}},
+      {"ad": "HMA (fiyat üzerine)", "parametreler": {"periyot": 50}},
+      {"ad": "EMA", "parametreler": {"periyot": 500}}
+    ],
+    "long_giris": [
+      "Fiyat 500 EMA'nın üzerinde",
+      "RSI, 30 WMA'nın üzerine çıkar",
+      "Fiyat 50 HMA'nın üzerine çıkınca uzun giriş"
+    ],
+    "short_giris": [
+      "Fiyat 500 EMA'nın altında",
+      "RSI, 30 WMA'nın altına geçer",
+      "Fiyat 50 HMA'nın altına düşünce kısa giriş"
+    ],
+    "stop_loss": null,
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": ["500 EMA ile trend yönü", "Kitap: başka bir trend filtresi de kullanılabilir (isteğe bağlı)"],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": "Kitapta sayısal performans iddiası yok; 'test edildi' notu var.",
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "RSI, WMA, HMA ve EMA parametreleri ve çaprazları ölçülebilir. Stop ve çıkış tam yazılmamış; iki giriş koşulunun aynı anda mı ardışık mı olduğu belirsiz."
+    },
+    "belirsizlikler": [
+      "Stop-loss kuralı yok",
+      "RSI-WMA çaprazı ile fiyat-HMA geçişinin aynı anda mı yoksa sıralı mı olduğu belirtilmemiş",
+      "Kitapta 'RSI HMA'ya (50 periyot) eklenen WMA (30 periyot)' ifadesi, WMA'nın RSI'ya, HMA'nın fiyata uygulandığını açıkça belirtmiyor (yazım karışık)",
+      "Çıkış koşulu tek (fiyat HMA altı), kısa çıkış kuralı kısa tarafta tanımlı"
+    ],
+    "uyumluluk_notu": "1L3A için: 15dk'da test edildiği belirtilmiş; 5dk ve 1S için de uyarlanabilir. Hacim gerekmez. Forex, kripto, hisse, emtia için genel.",
+    "varyantlar": [
+      "Ek trend filtresi (kitap isteğe bağlı diyor)"
+    ],
+    "anahtar_kelimeler": ["rsi-wma", "hma-50", "ema-500", "trend", "15m", "scalp"]
+  },
+  {
+    "kart_id": "scalp__mfi-hma65-sma200__carson",
+    "ad": "MFI + HMA(65) Geçişi + 200 SMA Trend Filtresi",
+    "stil": "scalp",
+    "kaynak": {"pdf": "Yüksek_Başarı_Olasılığına_Sahip_Scalping_Stratejileri_El_Kitabı_-_Zackary_Carson_99_sayfa.pdf", "sayfalar": [86, 87, 88]},
+    "ozet": "Fiyat 200 SMA'nın üstündeyken MFI 50'nin altındayken kendi SMA'sını yukarı kesince ve bir mum HMA(65)'i yukarı kesip üstünde kapanınca uzun açılır; mum HMA'nın altında kapanınca çıkılır. Kısa taraf aynı mantığın tersidir. Hızlı scalp işlemleri olarak tarif ediliyor.",
+    "kategori": "trend_takip",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {"islem": "belirtilmemiş", "ust_filtre": null},
+    "gostergeler": [
+      {"ad": "Bjorgum MTF MA (HMA)", "parametreler": {"MA_tipi": "HMA", "uzunluk": 65}},
+      {"ad": "MFI (Para Akış Endeksi)", "parametreler": {"periyot": 21, "SMA_uzunluk": 18}},
+      {"ad": "SMA", "parametreler": {"periyot": 200}}
+    ],
+    "long_giris": [
+      "Fiyat 200 SMA'nın üzerinde",
+      "MFI 50'nin altında iken kendi 18 SMA'sını yukarı keser",
+      "Bir mum HMA(65)'i yukarı keser ve üstünde kapanır (mum rengi maviye döner) → uzun giriş"
+    ],
+    "short_giris": [
+      "Fiyat 200 SMA'nın altında",
+      "MFI 50'nin üzerinde iken kendi SMA'sını aşağı keser",
+      "Bir mum HMA(65)'i aşağı keser ve altında kapanır (mum rengi kırmızıya döner) → kısa giriş"
+    ],
+    "stop_loss": null,
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": "Uzun: bir mum HMA'nın altında kapanınca çıkış. Kısa: bir mum HMA'nın üstünde kapanınca çıkış.",
+    "filtreler": ["200 SMA ile trend yönü", "MFI eşiği 50"],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": "Kitapta sayısal performans iddiası yok; 'hızlı scalp işlemleri' ifadesi var.",
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "HMA(65), MFI(21) ile SMA(18), SMA(200) ve kapanış koşulu ölçülebilir. Stop kuralı yok; MFI hacim verisi gerektirir."
+    },
+    "belirsizlikler": [
+      "Stop-loss kuralı yok",
+      "MFI hesabında hacim verisi kullanılıyor; forex'te hacim kaynağı belirtilmemiş",
+      "Zaman dilimi belirtilmemiş",
+      "'Mum HMA'yı keser' ile 'mum HMA üstünde kapanır' koşulunun aynı mumda olup olmadığı belirtilmemiş"
+    ],
+    "uyumluluk_notu": "1L3A için: MFI hacim gerektirir; forex'te tick hacmi varsayımı gerekir, kripto ve hisse için doğal hacim var. Kodlanabilir; hacim kaynağı netleşince test edilmeli.",
+    "varyantlar": [],
+    "anahtar_kelimeler": ["mfi", "hma-65", "sma-200", "hacim-gerekli", "trend", "scalp"]
+  },
+  {
+    "kart_id": "scalp__optimal-rsi-sma20__carson",
+    "ad": "AI/ML Optimal RSI + 20 SMA Scalp",
+    "stil": "scalp",
+    "kaynak": {"pdf": "Yüksek_Başarı_Olasılığına_Sahip_Scalping_Stratejileri_El_Kitabı_-_Zackary_Carson_99_sayfa.pdf", "sayfalar": [90, 91]},
+    "ozet": "Fiyat 200 SMA'nın üstündeyken Optimal RSI'da yeşil nokta (alım) oluşur ve fiyat 20 SMA'yı yukarı geçerse (sinyalden 2 bar içinde) uzun açılır; RSI'da kırmızı nokta veya fiyatın 20 SMA'nın altına düşmesiyle çıkılır. Kısa taraf tersidir.",
+    "kategori": "momentum",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {"islem": "belirtilmemiş", "ust_filtre": null},
+    "gostergeler": [
+      {"ad": "Makine Öğrenmesi Optimal RSI (YinYangAlgoritmaları)", "parametreler": {"RSI_uzunluk": "ML ile seçilir"}},
+      {"ad": "SMA", "parametreler": {"periyot": 20}},
+      {"ad": "SMA", "parametreler": {"periyot": 200}}
+    ],
+    "long_giris": [
+      "Fiyat 200 SMA'nın üzerinde",
+      "Optimal RSI'da yeşil nokta (alım sinyali) oluşur",
+      "Fiyat 20 SMA'nın üzerine çıkar (RSI sinyalinden 2 bar içinde) → uzun giriş"
+    ],
+    "short_giris": [
+      "Fiyat 200 SMA'nın altında",
+      "Optimal RSI'da kırmızı nokta (satış sinyali) oluşur",
+      "Fiyat 20 SMA'nın altına düşer (RSI sinyalinden 2 bar içinde) → kısa giriş"
+    ],
+    "stop_loss": null,
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": "Uzun çıkış: RSI'da kırmızı nokta veya fiyat 20 SMA'nın altına düşünce. Kısa çıkış: RSI'da yeşil nokta veya fiyat 20 SMA'nın üstüne çıkınca.",
+    "filtreler": ["200 SMA ile trend yönü", "RSI sinyali ile 20 SMA geçişi arasında en fazla 2 bar"],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": "Kitapta sayısal performans iddiası yok; 'son teknoloji' ifadesi var.",
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Ana giriş tetiği (Optimal RSI noktaları) kapalı ML göstergesine dayanıyor; SMA ve 2 bar kuralı ölçülebilir ama tetik kapalı."
+    },
+    "belirsizlikler": [
+      "Optimal RSI'nın uzunluk seçimi ve nokta üretimi kapalı",
+      "Stop-loss kuralı yok",
+      "Kitap 'RSI sinyalinden 2 bar' diyor; 'bar' için zaman dilimi belirtilmemiş",
+      "Çıkış koşulları 'veya' ile yazılmış; önceliği belirtilmemiş"
+    ],
+    "uyumluluk_notu": "1L3A için: ML bileşeni kodlanamaz; yerine sabit RSI uzunluğu kullanılarak test edilebilir. Hacim gerekmez.",
+    "varyantlar": [],
+    "anahtar_kelimeler": ["makine-ogrenmesi", "optimal-rsi", "sma-20", "sma-200", "2-bar", "trend", "scalp"]
+  },
+  {
+    "kart_id": "scalp__luxalgo-ters-sinyal-bollinger__carson",
+    "ad": "LuxAlgo Ters Sinyal + Bollinger Bantları (AI/ML #2)",
+    "stil": "scalp",
+    "kaynak": {"pdf": "Yüksek_Başarı_Olasılığına_Sahip_Scalping_Stratejileri_El_Kitabı_-_Zackary_Carson_99_sayfa.pdf", "sayfalar": [92, 93]},
+    "ozet": "Fiyat 200 SMA'nın üstündeyken fiyat Bollinger alt bandına değer ve LuxAlgo Reversal Signals alım sinyali verirse uzun açılır; stop giriş mumunun altındadır. Uzun, fiyat Bollinger üst bandına dokunursa veya Reversal Signals satış sinyali verirse kapatılır. Kısa taraf 200 SMA altında, fiyat Bollinger üst bandına dokunup Reversal Signals satış sinyali verince açılır; stop giriş mumunun üstündedir. Kitap bu stratejiyi yalnızca yatay piyasada kullanmayı öneriyor.",
+    "kategori": "ortalamaya_donus",
+    "piyasa_rejimi": "yatay",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {"islem": "belirtilmemiş", "ust_filtre": null},
+    "gostergeler": [
+      {"ad": "LuxAlgo Reversal Signals", "parametreler": {"varsayilan_ayar": true}},
+      {"ad": "Bollinger Bantları", "parametreler": {"periyot": null, "sapma": null, "not": "varsayılan ayar kullanılması öneriliyor; değerler belirtilmemiş"}},
+      {"ad": "SMA", "parametreler": {"periyot": 200}}
+    ],
+    "long_giris": [
+      "Fiyat 200 SMA'nın üzerinde",
+      "Fiyat Bollinger alt bandının altında veya bandına dokunur",
+      "LuxAlgo Reversal Signals alım sinyali oluşunca uzun giriş"
+    ],
+    "short_giris": [
+      "Fiyat 200 SMA'nın altında",
+      "Fiyat Bollinger üst bandının üstüne çıkar veya ona dokunur",
+      "LuxAlgo Reversal Signals satış sinyali oluşunca kısa giriş"
+    ],
+    "stop_loss": "Uzun: giriş mumunun altı. Kısa: giriş mumunun üstü.",
+    "kar_al": "Uzun: fiyat Bollinger üst bandının tepesine dokunursa veya Reversal Signals satış sinyali oluşursa. Kısa: fiyat Bollinger alt bandının dibine dokunursa veya Reversal Signals alım sinyali oluşursa.",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": ["200 SMA ile trend yönü", "Kitap: yalnızca yatay piyasa koşullarında kullanın (güçlü trendde yanlış sinyal)"],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": "Kitapta sayısal performans iddiası yok.",
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Giriş, stop ve çıkış kuralları (93. sayfa dahil) tam yazılmış ve ölçülebilir; ancak ana tetik LuxAlgo Reversal Signals kapalı kaynaklı gösterge olduğu için 1 puan."
+    },
+    "belirsizlikler": [
+      "Bollinger parametreleri verilmemiş (varsayılan öneriliyor)",
+      "'Yatay piyasa' tanımı için sayısal filtre yok",
+      "'Bant dokunuşu' için fitil mi kapanış mı kullanıldığı belirtilmemiş",
+      "Çıkış koşulları 'veya' ile iki alternatif verilmiş; öncelik belirtilmemiş"
+    ],
+    "uyumluluk_notu": "1L3A için: kapalı LuxAlgo göstergesi tetik olduğu için doğrudan kodlanamaz; Bollinger ve 200 SMA kısmı kodlanabilir. Kural seti tam; tetik yeniden kurulmalı.",
+    "varyantlar": [],
+    "anahtar_kelimeler": ["luxalgo", "reversal", "bollinger", "sma-200", "yatay-piyasa", "scalp"]
+  },
+  {
+    "kart_id": "scalp__lorentzian-ema500-adx__carson",
+    "ad": "Lorentzian Sınıflandırma + ADX + 500 EMA Trend Filtreli Scalp (AI/ML #3)",
+    "stil": "scalp",
+    "kaynak": {"pdf": "Yüksek_Başarı_Olasılığına_Sahip_Scalping_Stratejileri_El_Kitabı_-_Zackary_Carson_99_sayfa.pdf", "sayfalar": [95, 96]},
+    "ozet": "Fiyat 500 EMA'nın üzerinde ve ADX 20'nin üzerindeyken Lorentzian Sınıflandırma göstergesinde yeşil etiket (alım) belirirse uzun açılır; stop giriş mumunun altındadır. Kırmızı etiket (satış) göründüğünde uzun kapatılır. Kısa taraf 500 EMA altı ve ADX 20 üstündeyken kırmızı etiketle açılır; stop giriş mumunun üstündedir ve yeşil etiketle kapatılır.",
+    "kategori": "trend_takip",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {"islem": "belirtilmemiş", "ust_filtre": null},
+    "gostergeler": [
+      {"ad": "ADX", "parametreler": {"periyot": null, "esik": 20}},
+      {"ad": "EMA", "parametreler": {"periyot": 500}},
+      {"ad": "Lorentzian Sınıflandırma (ML, TradingView)", "parametreler": {"komsu_sayisi": 15, "not": "kitapta diğer ayarlar belirtilmemiş"}}
+    ],
+    "long_giris": [
+      "Fiyat 500 EMA'nın üzerinde",
+      "ADX 20'nin üzerinde",
+      "Lorentzian Sınıflandırma göstergesinde yeşil etiket (alım sinyali) belirir → uzun giriş"
+    ],
+    "short_giris": [
+      "Fiyat 500 EMA'nın altında",
+      "ADX 20'nin üzerinde",
+      "Lorentzian Sınıflandırma göstergesinde kırmızı etiket (satış sinyali) belirir → kısa giriş"
+    ],
+    "stop_loss": "Uzun: giriş mumunun altı. Kısa: giriş mumunun üstü.",
+    "kar_al": "Uzun: Lorentzian kırmızı etiket (satış) göründüğünde çıkış. Kısa: Lorentzian yeşil etiket (alım) göründüğünde çıkış.",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": ["500 EMA ile trend yönü (uzun: üstte, kısa: altta)", "ADX 20 üzeri (güçlü trend teyidi)"],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": "Kitapta bu strateji için sayısal performans iddiası yok.",
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Giriş, stop ve çıkış tetikleri etiket sinyaline dayanıyor; EMA, ADX ve filtre kuralları ölçülebilir. Ancak Lorentzian sınıflandırıcının özellik seti ve geri bakış penceresi kitapta yok, gösterge kapalı kaynaklı."
+    },
+    "belirsizlikler": [
+      "Lorentzian sınıflandırıcının özellik seti, geri bakış penceresi ve diğer ayarları kitapta yok (yalnız Komşu Sayısı = 15 verilmiş)",
+      "ADX periyodu belirtilmemiş",
+      "Stop kuralı yalnızca giriş mumuna bağlı; kâr hedefi ve zaman çıkışı yok",
+      "Mum kapanışı mı tik mi kullanıldığı belirtilmemiş",
+      "Zaman dilimi belirtilmemiş"
+    ],
+    "uyumluluk_notu": "1L3A için: kapalı ML göstergesi tetik olduğu için doğrudan kodlanamaz; 500 EMA ve ADX kısmı kodlanabilir. Sınıflandırıcı sabit ayarlarla yeniden kurulup test edilmeli. Hacim verisi gerekmez. Forex, kripto, hisse, emtia için genel.",
+    "varyantlar": ["Komşu sayısı = 15 (kitabın değiştirdiği tek ayar)"],
+    "anahtar_kelimeler": ["lorentzian", "makine-ogrenmesi", "adx", "ema-500", "trend-filtresi", "etiket-sinyali", "kapali-gosterge", "scalp"]
+  },
+  {
+    "kart_id": "scalp__knn-hma50-adx-ema500__carson",
+    "ad": "kNN Makine Öğrenmesi + HMA(50) + ADX + 500 EMA Trend Scalp (AI/ML #4)",
+    "stil": "scalp",
+    "kaynak": {"pdf": "Yüksek_Başarı_Olasılığına_Sahip_Scalping_Stratejileri_El_Kitabı_-_Zackary_Carson_99_sayfa.pdf", "sayfalar": [97, 98]},
+    "ozet": "Fiyat 500 EMA'nın üzerinde, ADX 25'in üzerinde ve HMA(50)'nin üzerindeyken kNN göstergesinde mavi etiket (alım) belirirse uzun açılır. Bir mum HMA'nın altında kapanırsa veya kNN kırmızı etiket (satış) verirse uzun kapatılır. Kısa taraf 500 EMA altı, ADX 25 üstü ve HMA altında, kırmızı etiketle açılır; bir mum HMA üstünde kapanırsa veya kNN mavi etiket verirse kapatılır.",
+    "kategori": "trend_takip",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {"islem": "belirtilmemiş", "ust_filtre": null},
+    "gostergeler": [
+      {"ad": "kNN tabanlı Makine Öğrenmesi Stratejisi (TradingView)", "parametreler": {"not": "kitapta kNN ayarı verilmemiş"}},
+      {"ad": "HMA (gövde hareketli ortalaması)", "parametreler": {"periyot": 50}},
+      {"ad": "ADX", "parametreler": {"periyot": null, "esik": 25}},
+      {"ad": "EMA", "parametreler": {"periyot": 500}}
+    ],
+    "long_giris": [
+      "Fiyat 500 EMA'nın üzerinde",
+      "ADX 25'in üzerinde",
+      "Fiyat HMA'nın üzerinde",
+      "kNN göstergesinde mavi etiket (alım sinyali) belirir → uzun giriş"
+    ],
+    "short_giris": [
+      "Fiyat 500 EMA'nın altında",
+      "ADX 25'in üzerinde",
+      "Fiyat HMA'nın altında",
+      "kNN göstergesinde kırmızı etiket (satış sinyali) belirir → kısa giriş"
+    ],
+    "stop_loss": null,
+    "kar_al": "Uzun çıkış: bir mum HMA'nın altında kapanır veya kNN kırmızı etiket (satış) belirir. Kısa çıkış: bir mum HMA'nın üstünde kapanır veya kNN mavi etiket (alım) belirir.",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": ["500 EMA ile trend yönü (uzun: üstte, kısa: altta)", "ADX 25 üzeri (kNN'nin yatay piyasadaki yanlış sinyallerinden kaçınmak için)"],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": "Kitapta bu strateji için sayısal performans iddiası yok.",
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "EMA, HMA, ADX ve çıkış kuralları ölçülebilir; ancak kNN sinyali kapalı kaynaklı gösterge ve kNN parametreleri (komşu sayısı, özellikler) kitapta yok."
+    },
+    "belirsizlikler": [
+      "kNN'nin parametreleri (komşu sayısı, özellikler, pencere) kitapta yok",
+      "Stop-loss kuralı yok",
+      "Kâr hedefi ve zaman çıkışı yok",
+      "'Mum HMA altında kapanır' ile kNN satış sinyali arasında öncelik belirtilmemiş",
+      "ADX periyodu belirtilmemiş",
+      "Zaman dilimi belirtilmemiş"
+    ],
+    "uyumluluk_notu": "1L3A için: kapalı kNN göstergesi tetik olduğu için doğrudan kodlanamaz; EMA, HMA ve ADX kısmı kodlanabilir. Stop kuralı eklenmeden test için yeterli değil. Hacim verisi gerekmez. Forex, kripto, hisse, emtia için genel.",
+    "varyantlar": ["HMA uzunluğu 50 (kitabın değiştirdiği ayar; varsayılan uzunluk belirtilmemiş)"],
+    "anahtar_kelimeler": ["knn", "makine-ogrenmesi", "hma-50", "adx", "ema-500", "trend", "kapali-gosterge", "scalp"]
+  }
+]

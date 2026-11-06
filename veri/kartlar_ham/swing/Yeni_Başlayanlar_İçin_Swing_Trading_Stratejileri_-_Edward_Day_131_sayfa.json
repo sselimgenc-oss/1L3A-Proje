@@ -1,0 +1,302 @@
+[
+  {
+    "kart_id": "swing__pin-bar-devam__day",
+    "ad": "Pin Bar Trend Devamı",
+    "stil": "swing",
+    "kaynak": {"pdf": "Yeni_Başlayanlar_İçin_Swing_Trading_Stratejileri_-_Edward_Day_131_sayfa.pdf", "sayfalar": [57, 58, 75, 76]},
+    "ozet": "Trend içinde küçük gövdeli, uzun fitilli pin bar devam sinyali sayılır. Sinyal mumunun kapanışında, fitilin ucunun ötesine stop konarak trend yönünde girilir.",
+    "kategori": "formasyon",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {"islem": "H1, H4 veya D1 (kitap swing için bu zaman dilimlerini önerir)", "ust_filtre": null},
+    "gostergeler": [],
+    "long_giris": ["Yükseliş trendi içinde uzun alt fitilli (boğa) pin barın kapanışında uzun"],
+    "short_giris": ["Düşüş trendi içinde uzun üst fitilli (ayı) pin barın kapanışında kısa"],
+    "stop_loss": "Uzun için pin barın alt fitilinin (kuyruğunun) altı; kısa için üst fitilin üstü",
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Trend yönünde kullanılır; kitap pin barları trend sonunda geri dönüş olarak işlem yapmaya karşı uyarır",
+      "Gövde rengi (boğa veya ayı) sinyali değiştirmez, fitil yönü belirleyicidir"
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Giriş ve stop mumun fitil uçlarına bağlı net. Fitil/gövde oranı eşiği ve trend tespiti yoruma açık."
+    },
+    "belirsizlikler": [
+      "Pin bar için fitil/gövde oranı eşiği kitapta sayısal değil",
+      "Trend tespit yöntemi kitapta yok (görsel yorum)",
+      "Kar hedefi ve zaman çıkışı kitapta bu desen için yazılmamış"
+    ],
+    "uyumluluk_notu": "1L3A için 5m'ye uyarlanabilir (kitap H1, H4, D1 öneriyor). Forex'e özgü değil; fitil ve gövde oranı hesaplanabilir. Hacim verisi gerekmez. Kripto, hisse ve emtia için uygun.",
+    "varyantlar": ["Trend sonunda tersine dönüş olarak kullanım kitapta önerilmiyor; kart yalnız devam varyantını alır"],
+    "anahtar_kelimeler": ["pin-bar", "fitil", "trend-devam", "mum-deseni", "fiyat-hareketi"]
+  },
+  {
+    "kart_id": "swing__ic-bar-devam__day",
+    "ad": "İç Bar (Inside Bar) Trend Devamı",
+    "stil": "swing",
+    "kaynak": {"pdf": "Yeni_Başlayanlar_İçin_Swing_Trading_Stratejileri_-_Edward_Day_131_sayfa.pdf", "sayfalar": [54, 55, 76]},
+    "ozet": "Büyük ilk mumun içinde kalan küçük mumlar (en az iki mum) trend devamı deseni oluşturur. Kümenin sınırının ilk büyük mumun yönünde kırılmasıyla girilir ve stop küçük mumun karşı ucuna konur.",
+    "kategori": "formasyon",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {"islem": "H1, H4 veya D1 (kitap swing için)", "ust_filtre": null},
+    "gostergeler": [],
+    "long_giris": ["Yukarı yönlü büyük ilk mum ve onu aşmayan küçük mumlar (iç barlar) oluşur; küme üst sınırının üzerine kırılınca uzun"],
+    "short_giris": ["Aşağı yönlü büyük ilk mum ve onu aşmayan küçük mumlar oluşur; küme alt sınırının altına kırılınca kısa"],
+    "stop_loss": "Uzun için küçük (iç) mumların altı; kısa için üstü (kitap: küçük barın altına veya üstüne durdurma)",
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Yalnız trendlerde kullanılır; aralıklarda iç mumların gücü azalır (kitap)",
+      "Büyük mum ve iç mum sayısı arttıkça desen güçlenir (kitap)"
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "İç mum tanımı net ve kırılım seviyesi kümenin sınırı. Trend ayrımı ve giriş tarifindeki 'en büyük barın bitişiğinden sonraki duraktan' ifadesi yoruma açık."
+    },
+    "belirsizlikler": [
+      "'En büyük barın bitişiğinden sonraki duraktan girin' ifadesi net değil; kümenin sınır kırılımı olarak yorumlandı",
+      "Desen için minimum mum sayısı: kitapta en az iki mum (ilk büyük + bir iç mum)",
+      "Trend tespit yöntemi kitapta yok",
+      "Kar hedefi ve zaman çıkışı kitapta yok"
+    ],
+    "uyumluluk_notu": "1L3A için 5m'ye uyarlanabilir (kitap H1, H4, D1 öneriyor). Forex'e özgü değil. Hacim verisi gerekmez. Kripto, hisse ve emtia için uygun.",
+    "varyantlar": [],
+    "anahtar_kelimeler": ["inside-bar", "ic-bar", "trend-devam", "kirilim", "mum-deseni"]
+  },
+  {
+    "kart_id": "swing__yutan-mum-trend-sonu__day",
+    "ad": "Yutan Mum (Engulfing) Trend Sonu Dönüşü",
+    "stil": "swing",
+    "kaynak": {"pdf": "Yeni_Başlayanlar_İçin_Swing_Trading_Stratejileri_-_Edward_Day_131_sayfa.pdf", "sayfalar": [60, 61, 76]},
+    "ozet": "Trend sonunda oluşan yutan (engulfing) mum tersine dönüş sinyali verir. Dış mumun kapanışında karşı yönde girilir, stop yutan mumun yarısının ötesine konur.",
+    "kategori": "formasyon",
+    "piyasa_rejimi": "herhangi",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {"islem": "H1, H4 veya D1 (kitap swing için)", "ust_filtre": null},
+    "gostergeler": [],
+    "long_giris": ["Düşüş trendi sonunda boğa yutan mum: yukarı mum önceki aşağı mumu tamamen sarar; dış mumun kapanışında uzun"],
+    "short_giris": ["Yükseliş trendi sonunda ayı yutan mum: aşağı mum önceki yukarı mumu tamamen sarar; dış mumun kapanışında kısa"],
+    "stop_loss": "Yutan (daha büyük) mumun %50 seviyesinin ötesi (kitap: daha büyük barın %50'sinde veya ötesinde durun)",
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Trend sonunda veya aralık sınırında kullanılır; trend içindeki yutan mumlar daha zayıf kabul edilir (kitap)",
+      "Yutma önceki karşı trendin baskısını kaybettiğini göstermeli (kitap örneği)"
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Yutma tanımı ve giriş/stop net. 'Trend sonu' tespiti ve yutmanın gövde mi fitil mi üzerinden ölçüldüğü yoruma açık."
+    },
+    "belirsizlikler": [
+      "'Trend sonu' tespit yöntemi kitapta yok",
+      "Yutma ölçüsü belirsiz: gövde mi tüm mum mu kapsanacak",
+      "Kar hedefi ve zaman çıkışı kitapta yok",
+      "Kitap yutan mumdan sonra fiyatın hemen dönmeyebileceğini ve sabır gerektiğini söylüyor; bekleme süresi sayısal değil"
+    ],
+    "uyumluluk_notu": "1L3A için 5m'ye uyarlanabilir (kitap H1, H4, D1 öneriyor). Forex'e özgü değil. Hacim verisi gerekmez. Kripto, hisse ve emtia için uygun.",
+    "varyantlar": ["Kitapta trend sonu aralığında oluşan yutma en güvenilir olarak tarif edilir"],
+    "anahtar_kelimeler": ["yutan-mum", "engulfing", "trend-sonu", "tersine-donus", "mum-deseni"]
+  },
+  {
+    "kart_id": "swing__iki-bar-tersine-donus__day",
+    "ad": "İki Bar Tersine Dönüş",
+    "stil": "swing",
+    "kaynak": {"pdf": "Yeni_Başlayanlar_İçin_Swing_Trading_Stratejileri_-_Edward_Day_131_sayfa.pdf", "sayfalar": [62, 63, 76]},
+    "ozet": "İkinci mum birinci mumun hareketini tamamen ve ters yönde geri alırsa iki bar tersine dönüşü oluşur. Kitap bunu trend devamı olarak işlem yapılmasını önerir; giriş ikinci mumun kapanışıdır.",
+    "kategori": "formasyon",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {"islem": "H1, H4 veya D1 (kitap swing için)", "ust_filtre": null},
+    "gostergeler": [],
+    "long_giris": ["Düşüş trendinde ikinci boğa mum birinci ayı mumun hareketini tamamen geri alır; ikinci mumun kapanışında uzun"],
+    "short_giris": ["Yükseliş trendinde ikinci ayı mum birinci boğa mumun hareketini tamamen geri alır; ikinci mumun kapanışında kısa"],
+    "stop_loss": "İki mum büyükse iki mumun %50 seviyesinde; küçükse çubukların ötesinde (kitap)",
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Trend içindeki küçük yatay hareketlerde oluşması ideal (kitap)",
+      "Kitap bu desenin nadir olduğunu ve bulmanın zor olduğunu söylüyor"
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Tanım ve giriş tarifi net, ancak 'büyük' ve 'küçük' mum ayrımı ve stop seçimindeki eşik kitapta sayısal değil."
+    },
+    "belirsizlikler": [
+      "'Büyük' ve 'küçük' mum eşiği kitapta yok",
+      "Trend içi mi trend sonu mu ayrımı tanımlanmamış",
+      "Kar hedefi ve zaman çıkışı yok",
+      "Kitap desenin nadir olduğunu söylüyor; örnek sayısı az olabilir"
+    ],
+    "uyumluluk_notu": "1L3A için 5m'ye uyarlanabilir ancak nadir oluşması nedeniyle 5m'de sık sinyal beklenmemeli. Forex'e özgü değil. Hacim verisi gerekmez. Kripto, hisse ve emtia için uygun.",
+    "varyantlar": ["Büyük ve küçük iki mum için farklı stop kuralı (kitap ayrımı)"],
+    "anahtar_kelimeler": ["iki-bar-tersine-donus", "mum-deseni", "trend", "stop-yuzde-elli"]
+  },
+  {
+    "kart_id": "swing__bollinger-bant-ihlal-ters__day",
+    "ad": "Bollinger Bant İhlali Ters İşlem (Aralıkta)",
+    "stil": "swing",
+    "kaynak": {"pdf": "Yeni_Başlayanlar_İçin_Swing_Trading_Stratejileri_-_Edward_Day_131_sayfa.pdf", "sayfalar": [97, 98]},
+    "ozet": "Fiyat üst Bollinger bandını ihlal ederse kısa, alt bandı ihlal ederse uzun düşünülür. Giriş ihlal eden mumun açılış veya kapanışında yapılır; fiyat karşı banda dönünce çıkılır.",
+    "kategori": "ortalamaya_donus",
+    "piyasa_rejimi": "yatay",
+    "orijinal_piyasa": "hisse",
+    "zaman_dilimi": {"islem": "H1 (kitap örneği H1 grafiği kullanır)", "ust_filtre": null},
+    "gostergeler": [
+      {"ad": "Bollinger Bantları", "parametreler": {"periyot": 20, "std_sapma": 3}}
+    ],
+    "long_giris": ["Fiyat alt Bollinger bandını ihlal eder; ihlal eden mumun açılış veya kapanışında uzun"],
+    "short_giris": ["Fiyat üst Bollinger bandını ihlal eder; ihlal eden mumun açılış veya kapanışında kısa"],
+    "stop_loss": "Bandın uç noktasının ötesi (kitap: stop loss bandın uç noktasının ötesine yerleştirilmelidir)",
+    "kar_al": "Fiyat ortalamanın karşı tarafındaki banda dokunursa çıkış; alternatif olarak önceden belirlenmiş risk çarpanı (değer kitapta verilmemiş)",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Bantlar yalnızca aralıkta kullanılır; trend varken bant ihlali ters işlem için uygun değil (kitap)"
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "İhlal tetiği, stop (bant ucunun ötesi) ve karşı banda çıkış tanımlı. Giriş anı (açılış/kapanış) seçimi ve risk çarpanı sayısal değil."
+    },
+    "belirsizlikler": [
+      "Giriş açılış mı kapanış mı, kitap ikisini de sayıyor; hangisinin seçileceği belirsiz",
+      "Risk çarpanı kitapta sayısal değil",
+      "Aralık ve trend ayrımı için yöntem kitapta yok",
+      "Mark Make aynı göstergede 2 standart sapma kullanıyor (bkz. make kartı); bu kart 3 standart sapma alır"
+    ],
+    "uyumluluk_notu": "1L3A için 5m'ye uyarlanabilir (bant hesabı zamandan bağımsız), ancak 5m'de ihlaller çok sık olur. Forex'e özgü değil. Hacim verisi gerekmez. Kripto, hisse ve emtia için uygun.",
+    "varyantlar": [],
+    "anahtar_kelimeler": ["bollinger", "bant-ihlali", "ortalamaya-donus", "aralik", "3-sigma"]
+  },
+  {
+    "kart_id": "swing__demarker-asiri-bolge__day",
+    "ad": "DeMarker Aşırı Alım-Satım Bölgesi",
+    "stil": "swing",
+    "kaynak": {"pdf": "Yeni_Başlayanlar_İçin_Swing_Trading_Stratejileri_-_Edward_Day_131_sayfa.pdf", "sayfalar": [95, 96]},
+    "ozet": "DeMarker osilatörü 0,7 üzerinde (aşırı alım) ise kısa, 0,3 altında (aşırı satım) ise uzun düşünülür. Kitap bunu aralık piyasasında kullanılacak bir osilatör olarak sunar.",
+    "kategori": "ortalamaya_donus",
+    "piyasa_rejimi": "yatay",
+    "orijinal_piyasa": "hisse",
+    "zaman_dilimi": {"islem": "H1 (kitap TSLA H1 grafiğinde gösterir)", "ust_filtre": null},
+    "gostergeler": [
+      {"ad": "DeMarker", "parametreler": {"periyot": null, "asiri_alim": 0.7, "asiri_satim": 0.3}}
+    ],
+    "long_giris": ["DeMarker 0,3 altındayken (aşırı satım bölgesi) uzun düşünülür; kitap aşırı satım bölgesine giren göstergenin fiyatın yükseleceğini gösterdiğini söyler"],
+    "short_giris": ["DeMarker 0,7 üzerindeyken (aşırı alım bölgesi) kısa düşünülür"],
+    "stop_loss": "Aralık sınırının altı (uzun) veya üstü (kısa); kitap destek seviyesinin altına stop konulmasını önerir",
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Aralıkta kullanılır; trend içinde osilatör aşırı bölgede uzun kalır (kitap uyarısı)",
+      "Trend aralığının sonundan önce kullanılırsa trend yönünde işlem için kullanılabilir (kitap)"
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Eşik değerleri ve stop mantığı var. Periyot kitapta yok. Kitap sapma (divergence) stratejilerini çok öznel bulduğu için bu kart yalnız eşik kuralını alır."
+    },
+    "belirsizlikler": [
+      "DeMarker periyodu kitapta belirtilmemiş",
+      "Kitap farklı eşik değerleri de veriyor (0,7-1 ve 0,3-0 ya da 0,07-0,1 ve 0,03-0,1); 0,7 ve 0,3 seçildi",
+      "Kitap sapma (divergence) temelli kullanımı son derece öznel olarak tanımlıyor; kart dışında bırakıldı",
+      "Kar hedefi ve zaman çıkışı yazılı değil",
+      "Aşırı bölgeden çıkışın giriş tetiği olup olmadığı kitapta açık değil"
+    ],
+    "uyumluluk_notu": "1L3A için 5m'ye uyarlanabilir (kitap H1 gösteriyor). Forex'e özgü değil. Hacim verisi gerekmez. Kripto, hisse ve emtia için uygun.",
+    "varyantlar": ["Eşik değerleri 0,07-0,1 ve 0,03-0,1 olarak da verilmiş (kitap)"],
+    "anahtar_kelimeler": ["demarker", "asiri-alim", "asiri-satim", "osilator", "aralik"]
+  },
+  {
+    "kart_id": "swing__adx-25-trend-baslangici__day",
+    "ad": "ADX 25 Üzeri Trend Başlangıcı",
+    "stil": "swing",
+    "kaynak": {"pdf": "Yeni_Başlayanlar_İçin_Swing_Trading_Stratejileri_-_Edward_Day_131_sayfa.pdf", "sayfalar": [99, 100]},
+    "ozet": "ADX 25'in üzerine çıktığında yeni bir trend başladığı kabul edilir. Yön fiyat hareketinden okunur: yükselen dipler varsa uzun, alçalan tepeler varsa kısa düşünülür.",
+    "kategori": "trend_takip",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "hisse",
+    "zaman_dilimi": {"islem": "H1 (kitap TSLA ve Apple H1 grafiklerinde gösterir)", "ust_filtre": null},
+    "gostergeler": [
+      {"ad": "ADX", "parametreler": {"periyot": null, "esik": 25}}
+    ],
+    "long_giris": ["ADX 25'in üzerine çıkar ve fiyat yükselen dipler oluşturur; uzun (kitap: hemen değil, daha yüksek dip kanıtı beklenerek)"],
+    "short_giris": ["ADX 25'in üzerine çıkar ve fiyat alçalan tepeler oluşturur; kısa (yön için DI çizgileri gerekmediği kitapta vurgulanır)"],
+    "stop_loss": null,
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Kitap ADX'in yalnızca trend gücünü gösterdiğini, yönü göstermediğini belirtir",
+      "ADX 25 altına düşmesi trendin bittiği anlamına gelmez (kitap)"
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Eşik 25 sayısal. Yükselen dip ve daha fazla kanıt beklemek yoruma açık; stop ve çıkış yok."
+    },
+    "belirsizlikler": [
+      "Yükselen dip / alçalan tepe tanımı ve kaç bar gerektiği kitapta yok",
+      "ADX periyodu kitapta yok",
+      "Stop ve kar alma kuralı yok",
+      "Çıkış kuralı yok; ADX zayıflamasının çıkış sinyali olup olmadığı net değil"
+    ],
+    "uyumluluk_notu": "1L3A için ≥5m'ye uyarlanabilir (ADX hesabı zamandan bağımsız). Forex'e özgü değil. Hacim verisi gerekmez. Kripto, hisse ve emtia için uygun.",
+    "varyantlar": [],
+    "anahtar_kelimeler": ["adx", "trend-gucu", "esik-25", "yukselen-dip", "trend-baslangici"]
+  },
+  {
+    "kart_id": "swing__aralik-sinirlari-ters__day",
+    "ad": "Geniş Aralık Sınırlarında Ters İşlem",
+    "stil": "swing",
+    "kaynak": {"pdf": "Yeni_Başlayanlar_İçin_Swing_Trading_Stratejileri_-_Edward_Day_131_sayfa.pdf", "sayfalar": [78, 79]},
+    "ozet": "Geniş bir aralıkta alt sınırda (destek) uzun, üst sınırda (direnç) kısa düşünülür. Sınırlardan biri kırılınca bu işlemler terk edilir.",
+    "kategori": "destek_direnc",
+    "piyasa_rejimi": "yatay",
+    "orijinal_piyasa": "hisse",
+    "zaman_dilimi": {"islem": "H1 (kitap TSLA H1 grafiğini kullanır)", "ust_filtre": null},
+    "gostergeler": [],
+    "long_giris": ["Geniş aralığın alt sınırında (destek) uzun"],
+    "short_giris": ["Geniş aralığın üst sınırında (direnç) kısa"],
+    "stop_loss": "Sınırlardan biri kırıldığında o yöndeki işlem bırakılır (kitap: sınır kırılınca güçlü trend başladığı kabul edilir); sayısal stop yok",
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Aralık büyük olmalı (kitap: geniş aralık); küçük aralıklarda trend yönünde işlem önerilir (kitap)"
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Sınır tarifi ve kırılım çıkışı var; ancak sınırın nasıl belirleneceği ve stop/hedef sayısal değil."
+    },
+    "belirsizlikler": [
+      "Aralık sınırlarının nasıl çizileceği (tepe ve dip kümesi, bölge genişliği) tanımlanmamış",
+      "Kırılım teyidi kitapta tanımlı değil",
+      "Stop ve kar alma sayısal değil",
+      "Kitap 'geniş' ve 'küçük' aralık ayrımını ölçü vermeden yapıyor"
+    ],
+    "uyumluluk_notu": "1L3A için 5m'ye uyarlanabilir (kitap H1 kullanıyor). Forex'e özgü değil. Hacim verisi gerekmez. Kripto, hisse ve emtia için uygun.",
+    "varyantlar": [],
+    "anahtar_kelimeler": ["aralik", "sinir", "destek-direnc", "kirilim", "yatay-piyasa"]
+  }
+]

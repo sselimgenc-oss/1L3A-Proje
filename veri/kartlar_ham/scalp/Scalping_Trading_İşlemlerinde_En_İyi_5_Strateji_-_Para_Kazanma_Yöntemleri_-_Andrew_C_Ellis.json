@@ -1,0 +1,272 @@
+[
+  {
+    "kart_id": "scalp__bir-dakika-ema50-100-stoch__ellis",
+    "ad": "Bir Dakikalık EMA50/100 + Stokastik Scalp",
+    "stil": "scalp",
+    "kaynak": {"pdf": "Scalping_Trading_İşlemlerinde_En_İyi_5_Strateji_-_Para_Kazanma_Yöntemleri_-_Andrew_C_Ellis.pdf", "sayfalar": [7, 8, 9, 10]},
+    "ozet": "1 dakikalık grafikte 50 ve 100 EMA trend yönünü, Stokastik (5,3,3) aşırı alım/satım dönüşünü belirler. EMA50 EMA100'ün üstündeyken Stokastik 20'nin üstüne çıkınca alış; EMA100 EMA50'nin üstündeyken Stokastik 80'in altına inince satış yapılır. Giriş fiyatı EMA çizgilerine yakın olmalıdır.",
+    "kategori": "momentum",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "forex",
+    "zaman_dilimi": {"islem": "1m", "ust_filtre": "5m"},
+    "gostergeler": [
+      {"ad": "EMA", "parametreler": {"periyot": 50}},
+      {"ad": "EMA", "parametreler": {"periyot": 100}},
+      {"ad": "Stokastik", "parametreler": {"K": 5, "D": 3, "yavaslatma": 3}}
+    ],
+    "long_giris": [
+      "EMA50, EMA100'ün üstüne çıkmış (EMA50 > EMA100)",
+      "Stokastik aşırı satım bölgesinden (20'nin altı) yukarı yönde 20 seviyesinin üstüne çıkmış",
+      "Giriş fiyatı EMA çizgilerine yakın (kitap 'yakın' diyor, sayısal değil)"
+    ],
+    "short_giris": [
+      "EMA100, EMA50'nin üstüne çıkmış (EMA50 < EMA100)",
+      "Stokastik aşırı alım bölgesinden (80'in üstü) aşağı yönde 80 seviyesinin altına inmiş",
+      "Giriş fiyatı EMA çizgilerine yakın (kitap 'yakın' diyor, sayısal değil)"
+    ],
+    "stop_loss": null,
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Piyasanın en yüksek oynaklık saatleri (New York kapanışı ile Londra açılışı civarı) en etkili",
+      "Ana (major) döviz çiftleri önerilir (düşük spread)",
+      "Daha uzun zaman dilimli (5dk) ikincil grafik trend teyidi için kullanılır",
+      "Yeni başlayanlar majörlerle başlamalı"
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": "Kitapta: günde 100'den fazla işlem 'alışılmadık değil'; işlemler saniyeler içinde tamamlanır; düşük getiri, düşük risk. Sayısal kanıt yok.",
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "EMA sıralaması ve Stokastik seviye geçişleri mekanik. Ancak kâr al ve stop kuralları kitapta yok, 'EMA çizgilerine yakın' tanımsız, Stokastik için 'yukarı yönde' tanımı yorum gerektiriyor."
+    },
+    "belirsizlikler": [
+      "Stop-loss kuralı yok",
+      "Kâr al (pip veya yüzde) kuralı yok; kitap 'tam doğru zamanda kapat' diyor",
+      "Giriş fiyatının EMA'ya 'yakınlığı' sayısal değil",
+      "Stokastik'in 'yukarı yönde 20 seviyesinin üstüne çıkma' için kesişim mi, seviye geçişi mi olduğu tam net değil",
+      "5dk ikincil grafik teyidinin ne olduğu tanımsız"
+    ],
+    "uyumluluk_notu": "1L3A için: 1 dakikalık işlem ve 1dk gürültüsü; 5dk ve üstü için kitapta kural yok. Forex'e özgü: majör pariteler, spread ve seans vurgusu. Hacim verisi gerekmez. Kripto/ABD hisse/emtia: kitapta test yok; 1dk'da kripto ve hisse için ek test gerekir.",
+    "varyantlar": [
+      "EMA çizgilerinin renkleri farklı tutulması (görsel tercih, kural değil)",
+      "Otomatikleştirme önerisi (1 tıklama işlem aracı, kitapta opsiyonel)"
+    ],
+    "anahtar_kelimeler": ["ema50", "ema100", "stokastik", "1dk", "5dk", "forex", "seans", "majör-paritel", "scalp", "asiri-alim-satim"]
+  },
+  {
+    "kart_id": "scalp__bollinger-meta-scalper__ellis",
+    "ad": "Meta Scalper (Bollinger Bandı Geri Dönüş)",
+    "stil": "scalp",
+    "kaynak": {"pdf": "Scalping_Trading_İşlemlerinde_En_İyi_5_Strateji_-_Para_Kazanma_Yöntemleri_-_Andrew_C_Ellis.pdf", "sayfalar": [11, 12, 13, 14, 15]},
+    "ozet": "Fiyat mumu Bollinger alt bandına değdiğinde ve ardından orta çizgiye doğru geri çekilmeye başladığında alış; üst banda değip orta çizgiye doğru geri çekildiğinde satış yapılır. Stop bant genişliğinin yarısını aşmaz, kâr hedefi bant genişliğinin yaklaşık %5'i (genelde 1-6 pip). Dar aralık (range) piyasasında çalışır.",
+    "kategori": "ortalamaya_donus",
+    "piyasa_rejimi": "yatay",
+    "orijinal_piyasa": "forex",
+    "zaman_dilimi": {"islem": "1m veya 5m (kitap 5dk'yı başlangıç için öneriyor)", "ust_filtre": null},
+    "gostergeler": [
+      {"ad": "Bollinger Bantları", "parametreler": {"periyot": null, "sapma": null, "not": "kitapta belirtilmemiş; örnekte 20 periyotlu orta çizgi kavramı anlatılıyor"}}
+    ],
+    "long_giris": [
+      "Fiyat mumu alt Bollinger bandına değmiş veya bandın dışına çıkmış (aşırı satım)",
+      "Bu olaydan sonra fiyat orta çizgiye (ana hatta) doğru geri çekilmeye başlamış",
+      "Gerçek zamanlı bir gösterge veya son mum hareketi, fiyatın hâlâ doğru yönde olduğunu teyit eder",
+      "Emir, bu koşullar sağlandığında açılır"
+    ],
+    "short_giris": [
+      "Fiyat mumu üst Bollinger bandına değmiş veya bandın dışına çıkmış (aşırı alım)",
+      "Bu olaydan sonra fiyat orta çizgiye doğru geri çekilmeye başlamış",
+      "Gerçek zamanlı gösterge veya son mum hareketi teyit eder",
+      "Emir, bu koşullar sağlandığında açılır"
+    ],
+    "stop_loss": "Bollinger bant genişliğinin yarısından büyük olmayacak şekilde (örnek: bant genişliği 20 pip ise stop 10 pip)",
+    "kar_al": "Bant genişliğinin yaklaşık %5'i (genelde 1-6 pip; piyasa oynaklığına göre değişir)",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Dar aralık (range) piyasasında çalışır; trend piyasasında işlem sınırlanmalı veya yapılmamalı (kitap bir 'aralık bulma aracı' önerir)",
+      "Daha büyük zaman dilimli ikincil grafik trendi teyit etmek için kullanılabilir",
+      "Pozisyon boyutu: 10.000$ başına en fazla 1 lot (kitap metni); tabloda işlem boyutu 0,01 ve maksimum açık işlem sayısı 100",
+      "Kaldıraç yüksek kullanılmaz (düşük getirili strateji)"
+    ],
+    "pozisyon_risk": "10.000$ başına en fazla 1 lot; açık işlem sayısı 100'e kadar (kitap tablosu); kaldıraç düşük tutulur.",
+    "iddia_edilen_performans": "Kitapta: günde yaklaşık 10'dan fazla potansiyel işlem; 'küçük ama tutarlı' kâr. Tablo: maksimum pozlama 1.00, işlem/gün 5, pip/işlem 5,18, pip/gün 25,9 (ortalama, kanıt kaynağı belirtilmemiş).",
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Bollinger dokunma, orta çizgiye geri çekilme, stop (bant genişliğinin yarısı) ve kâr (bant genişliğinin %5'i) ölçülebilir. 'Gerçek zamanlı gösterge teyidi' ve 'aralık bulma aracı' tanımsız; varsayım gerekir."
+    },
+    "belirsizlikler": [
+      "Bollinger periyot ve sapma değerleri kitapta açıkça belirtilmemiş",
+      "'Gerçek zamanlı gösterge' hangisi ve teyit eşiği nedir, tanımsız",
+      "'Aralık bulma aracı' kitapta tanımlanmamış (trend filtresi için ne kullanılacağı belirsiz)",
+      "Geri çekilme için minimum mesafe veya süre tanımı yok",
+      "Kâr alma bant genişliğinin %5'i ile 1-6 pip arasında kitapta birbirine bağlı; hangi değerin kullanılacağı yoruma açık"
+    ],
+    "uyumluluk_notu": "1L3A için: 1dk ve 5dk'da kullanılabilir; kitap daha büyük zaman dilimlerinde de uyarlanabilir diyor. Forex'e özgü: pip hedefi ve lot tanımı; kripto/ABD hisse/emtia için pip yerine bant genişliği yüzdesi kullanılabilir (bu yüzden fiyat birimine bağımsız, uyarlanabilir). Hacim verisi gerekmez.",
+    "varyantlar": [
+      "1dk veya 5dk zaman dilimi (kitap 5dk'yı öneriyor)",
+      "Daha büyük zaman dilimine uyarlama (kitap 'isterseniz' diyor)",
+      "Yalnız bant dokunuşu veya dokunuş + geri çekilme (kitap ikisini de koşul sayıyor; ayrı varyant değil)"
+    ],
+    "anahtar_kelimeler": ["bollinger", "ortalamaya-donus", "range", "geri-cekilme", "asiri-alim-satim", "stop-yarim-bant", "kar-bant-yuzde", "forex", "1dk", "5dk", "scalp"]
+  },
+  {
+    "kart_id": "scalp__macd-histogram-stokastik__ellis",
+    "ad": "MACD Histogram + Yavaş Stokastik Scalp",
+    "stil": "scalp",
+    "kaynak": {"pdf": "Scalping_Trading_İşlemlerinde_En_İyi_5_Strateji_-_Para_Kazanma_Yöntemleri_-_Andrew_C_Ellis.pdf", "sayfalar": [16, 17, 18, 19, 20]},
+    "ozet": "MACD histogramı sıfır çizgisinin doğru tarafında iken, histogram geri çekilip tekrar yönlenince ve Yavaş Stokastik 20 (alış) veya 80 (satış) seviyesinde dönüş yapınca, koşulu oluşturan mum kapanınca giriş yapılır. Stop giriş mumunun 1 pip ötesinde; kârın %80'i 1:1 hedefte kapanır, kalan %20 breakeven stop ile 2 katı hedefte kapanır.",
+    "kategori": "momentum",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "forex",
+    "zaman_dilimi": {"islem": "belirtilmemiş (kitap zaman dilimi vermiyor)", "ust_filtre": null},
+    "gostergeler": [
+      {"ad": "MACD", "parametreler": {"hizli": null, "yavas": null, "sinyal": null, "not": "kitapta belirtilmemiş; MetaTrader yerleşik MACD'si"}},
+      {"ad": "Stokastik (Yavaş)", "parametreler": {"seviye_alt": 20, "seviye_ust": 80, "periyot": null, "not": "kitapta periyot belirtilmemiş"}}
+    ],
+    "long_giris": [
+      "MACD histogramı sıfırın üzerinde",
+      "Histogram önce sıfırın belirgin üstüne çıkmış, sonra geri düşüp yeniden yükselmeye başlamış",
+      "Yavaş Stokastik 20 civarında aşırı satımda; iki çizgi kesişip yukarı yönelmiş",
+      "Histogram tekrar yükselmeye başlarken ve Stokastik aşırı satımdayken oluşturan mumun kapanışında alış"
+    ],
+    "short_giris": [
+      "MACD histogramı sıfırın altında",
+      "Histogram önce sıfırın belirgin altına inmiş, sonra geri yükselip yeniden düşmeye başlamış",
+      "Yavaş Stokastik 80 civarında aşırı alımda; iki çizgi kesişip aşağı yönelmiş",
+      "Histogram tekrar düşerken ve Stokastik aşırı alımdayken oluşturan mumun kapanışında satış"
+    ],
+    "stop_loss": "Alış: giriş mumunun en düşük fiyatının 1 pip altı. Satış: giriş mumunun en yüksek fiyatının 1 pip üstü.",
+    "kar_al": "İki parça: pozisyonun %80'i 1:1 (stop mesafesi kadar) hedefte kapanır; kalan %20 için stop giriş fiyatına (breakeven) çekilir ve hedef ilk hedefin 2 katı olur.",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Histogramın sıfırın karşı tarafında kalma süresi: sıfır çizgisi kesişimi sadece 1 bar sürerse güvenilir; 2 veya daha fazla bar sürerse güvenilmez (kitap tip bölümü)",
+      "Yüksek kaldıraç kullanılmaz (düşük getirili strateji)",
+      "Sıfır çizgisine yakın ve histogramın eğimi net değilse işlem yok (kitap ima ediyor)"
+    ],
+    "pozisyon_risk": "Kitapta sabit risk yüzdesi yok; yüksek kaldıraç kullanılmamalı uyarısı var.",
+    "iddia_edilen_performans": "Yazar: MACD stratejisi 'doğru kullanıldığında %80'in üzerinde kazançlı işlem üretme yeteneğine sahip'. Kanıt, örneklem veya test sonucu sunulmuyor.",
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Histogram sıfır kesişimi, yön değişimi, Stokastik seviye ve kesişim, stop (1 pip) ve kâr (1:1 ve 2x) ölçülebilir. 'Histogram belirgin üstü', 'kesişim ve yukarı yönelme' ve 'aşırı satım' için eşik yok; zaman dilimi belirtilmemiş."
+    },
+    "belirsizlikler": [
+      "MACD ve Stokastik parametreleri (periyot) kitapta belirtilmemiş",
+      "Zaman dilimi belirtilmemiş",
+      "'Histogram sıfırın belirgin üstü' ve 'geri çekilme' için sayısal eşik yok",
+      "Sıfır çizgisi kuralında metin çelişkili: bir yerde 'sıfırın altında sadece bir bar' ile 'üstte' kuralları birlikte anlatılıyor; tam giriş koşulu okuyucuya kalıyor",
+      "Stop 1 pip (spread dahil mi) ve 1:1 hedefin hangi fiyat birimine göre olduğu açık değil"
+    ],
+    "uyumluluk_notu": "1L3A için: kitap zaman dilimi vermiyor; 5dk ve 15dk'da test edilebilir. Forex'e özgü: pip stop/hedef; kripto/hisse/emtia için pip yerine ATR veya yüzde kullanılmalı. Hacim verisi gerekmez.",
+    "varyantlar": [
+      "Kısa ve uzun kurulumların ayna versiyonu",
+      "Kâr hedefinin 1:1 yerine kitapta sabit 25 pip örneğiyle gösterilmesi (örnek, kural değil)"
+    ],
+    "anahtar_kelimeler": ["macd", "histogram", "stokastik", "sifir-cizgisi", "asiri-alim-satim", "breakeven", "1-to-1", "2x-hedef", "forex", "parcali-cikis", "scalp"]
+  },
+  {
+    "kart_id": "scalp__kisa-momentum-ema8-34__ellis",
+    "ad": "Kısa Momentum Scalper (H1 EMA8/34 + M5 EMA8)",
+    "stil": "scalp",
+    "kaynak": {"pdf": "Scalping_Trading_İşlemlerinde_En_İyi_5_Strateji_-_Para_Kazanma_Yöntemleri_-_Andrew_C_Ellis.pdf", "sayfalar": [21, 22, 23, 24]},
+    "ozet": "Saatlik grafikte EMA8 ile EMA34'ün sırası ve fiyatın ikisine göre konumu trendi belirler. 5 dakikalık grafikte fiyat EMA8'i yukarı (uzun) veya aşağı (kısa) geçtiğinde işleme girilir. Stop önceki salınım dibi/tepesinin altı/üstü, kâr hedefi 1:2 risk-ödül oranıdır.",
+    "kategori": "trend_takip",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "forex",
+    "zaman_dilimi": {"islem": "5m", "ust_filtre": "1h"},
+    "gostergeler": [
+      {"ad": "EMA", "parametreler": {"periyot": 8}},
+      {"ad": "EMA", "parametreler": {"periyot": 34}}
+    ],
+    "long_giris": [
+      "1S grafikte EMA8, EMA34'ün üstünde ve fiyat her iki EMA'nın da üstünde",
+      "5dk grafikte fiyat EMA8'i yukarı kesmiş (geçmiş)",
+      "Emir açılır; kitap ek olarak fiyat her EMA8 kesişiminde ek emir açılabileceğini söylüyor (isteğe bağlı)"
+    ],
+    "short_giris": [
+      "1S grafikte EMA8, EMA34'ün altında ve fiyat her iki EMA'nın da altında",
+      "5dk grafikte fiyat EMA8'i aşağı kesmiş (geçmiş)",
+      "Emir açılır; ek emir isteğe bağlı"
+    ],
+    "stop_loss": "Alış: giriş öncesi önceki düşük (bir önceki salınım dibi) seviyesinin altı. Satış: önceki salınım zirvesinin üstü.",
+    "kar_al": "Risk-ödül oranı 1:2 (örnek: stop 5 pip ise kâr al 10 pip)",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "1S grafiğinde trend yönü EMA8/EMA34 sıralamasıyla teyit edilir",
+      "Kitap yalnızca güçlü trend dönemlerinde işlem öneriyor (yatay piyasa filtresi açıkça yok)"
+    ],
+    "pozisyon_risk": "Stop ve kâr al her emirde zorunlu. Birden fazla emir, risk arttırmak için isteğe bağlı; sayısal risk yüzdesi yok.",
+    "iddia_edilen_performans": "Kitapta sayısal performans iddiası yok.",
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "EMA sıralaması, fiyat konumu, 5dk EMA8 kesişimi ve 1:2 hedef mekanik. 'Önceki salınım dibi' tanımı ve 'güçlü trend' için kesin filtre yok."
+    },
+    "belirsizlikler": [
+      "'Önceki salınım dibi/tepesi' tanımı (kaç mum geriye, hangi fraktal) kitapta yok",
+      "Yatay piyasa filtresi kitapta açıkça yok",
+      "Çoklu emir sayısı ve aralığı tanımsız",
+      "Kitap stop ve kâr alma için örneklerde 5 pip ve 10 pip kullanıyor; sabit değer mi oransal mı belirsiz"
+    ],
+    "uyumluluk_notu": "1L3A için: 5dk ve 1S (trend filtresi) uyumlu. Forex'e özgü pip örnekleri; kripto/hisse/emtia için oransal stop (ATR) ile uyarlanabilir. Hacim verisi gerekmez. Kitap test sonucu vermiyor.",
+    "varyantlar": [
+      "Her EMA8 kesişiminde ek emir açma (kitap isteğe bağlı diyor)",
+      "Saatlik EMA8/34 yerine daha yüksek trend filtresi (kitap bunu sınırlı anlatıyor)"
+    ],
+    "anahtar_kelimeler": ["ema8", "ema34", "trend", "h1-filtre", "5dk", "salinim-dibi", "1-2-rr", "momentum", "forex", "coklu-emir", "scalp"]
+  },
+  {
+    "kart_id": "scalp__gamma-delta-notr__ellis",
+    "ad": "Gamma Scalping (Delta-Nötr Opsiyon + Hisse Ayarlaması)",
+    "stil": "scalp",
+    "kaynak": {"pdf": "Scalping_Trading_İşlemlerinde_En_İyi_5_Strateji_-_Para_Kazanma_Yöntemleri_-_Andrew_C_Ellis.pdf", "sayfalar": [26, 27, 28, 29, 30]},
+    "ozet": "Uzun opsiyon (örnek: 100 çağrı, delta 0,40) alınır ve delta, karşı yönde hisse işlemiyle nötrlenir. Hisse fiyatı düşünce delta kısalır ve hisse alınır, yükselince delta uzar ve hisse satılır. Amaç bu 'düşük al, yüksek sat' ayarlamalarından gelen kârla theta (zaman) maliyetini karşılamaktır.",
+    "kategori": "diger",
+    "piyasa_rejimi": "volatil",
+    "orijinal_piyasa": "hisse",
+    "zaman_dilimi": {"islem": "belirtilmemiş (sürekli yeniden dengeleme)", "ust_filtre": null},
+    "gostergeler": [
+      {"ad": "Delta", "parametreler": {}},
+      {"ad": "Gama", "parametreler": {}},
+      {"ad": "Teta", "parametreler": {}},
+      {"ad": "Vega", "parametreler": {}}
+    ],
+    "long_giris": [
+      "Uzun opsiyon pozisyonu (örnek: 0,40 deltalı 100 çağrı) alınır",
+      "Pozisyon deltası, karşı yönde hisse satışıyla nötrlenir (örnek: 100 sözleşme x 0,40 delta = 40 delta, 4000 hisse satışı)",
+      "Hisse düşüp delta kısaldığında hisse alınarak delta yeniden nötrlenir",
+      "Hisse yükselip delta uzadığında hisse satılarak delta yeniden nötrlenir"
+    ],
+    "short_giris": [
+      "Kitap kısa tarafı ayrıca tanımlamıyor; 'delta-nötr' mantığı simetrik uygulanır (kısa opsiyon pozisyonu) — kitapta açık kural yok"
+    ],
+    "stop_loss": null,
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Kitap: opsiyonlar sabah açılışına kadar işlem görmez; forex'ten farklı çalışır",
+      "Gamma scalping deneyimli yatırımcılar için önerilir (kitap)"
+    ],
+    "pozisyon_risk": "Sayısal kural yok. Kitap: theta maliyeti karşılanacak kadar scalping yapılmalı.",
+    "iddia_edilen_performans": "Kitapta sayısal performans iddiası yok; 'son derece karlı olma yeteneği' ifadesi var.",
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Delta-nötr başlangıç ve yönlü yeniden dengeleme mantığı tarif ediliyor, ama yeniden dengeleme eşiği (ne kadar delta değişince), sıklığı, hisse büyüklüğü ve kapanış kuralı belirtilmemiş. Kaba yaklaşımla kodlanabilir."
+    },
+    "belirsizlikler": [
+      "Yeniden dengeleme tetikleyicisi yok (hangi delta sapmasında, hangi sıklıkta)",
+      "Kâr hedefi sayısal değil; theta maliyeti ile kıyaslanıyor",
+      "Theta birimi tutarsız: kitap 100 sözleşmede theta 0,04 için 'günlük 400$' diyor, ancak 0,04 x 100 = 4,00 yazıyor; 100 hisse/sözleşme ile 400$ olur",
+      "Kısa opsiyon tarafı açıkça tanımlanmamış",
+      "Opsiyon zinciri, vega ve örtük oynaklık verisi gerektiriyor; kitap bunların kaynağını belirtmiyor",
+      "Kitap 'Opsiyonlar Hakkında' bölümünü (s.25) ayrı bir strateji olarak değil, genel bilgi olarak veriyor; kart çıkarılmadı"
+    ],
+    "uyumluluk_notu": "1L3A için: forex'te doğrudan uygulanamaz (opsiyon zinciri, greeks ve hisse/vadeli açığı gerekir). Kripto ve ABD hisse opsiyonları için veri ve borsa kısıtları olabilir; mevcut 1L3A kapsamıyla uyumsuz, öncelik düşük.",
+    "varyantlar": [
+      "Kısa gama (short opsiyon) tarafı (kitap değinmiyor, sadece gama işaretini anlatıyor)"
+    ],
+    "anahtar_kelimeler": ["gamma-scalping", "delta-notr", "opsiyon", "teta", "vega", "hisse", "yeniden-dengeleme", "theta-maliyet", "greeks"]
+  }
+]

@@ -1,0 +1,74 @@
+[
+  {
+    "kart_id": "scalp__ema200-psar-macd-bb__candle",
+    "ad": "200 EMA Trend Filtreli BB/PSAR/MACD Geri Çekilme Scalping (XAU/USD 1dk)",
+    "stil": "scalp",
+    "kaynak": {"pdf": "1_Dakikalık_Forex_Scalping_Stratejisi_-_Trevor_Candle_96_sayfa.pdf", "sayfalar": [70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 82, 83, 84, 85, 86, 87, 92, 93]},
+    "ozet": "30dk grafikte 200 EMA eğimi ve fiyat konumu ile trend belirlenir. 1dk grafikte Bollinger Bantları genişlerken fiyat geri çekilir (20 EMA altı/üstü), Parabolic SAR tersine döner ve MACD sinyal çizgisini keser; ardından ana trend yönünde bir mum 20 EMA'yı kapanışla geçerse giriş yapılır. Hedef 30-50 pip; zarar durdurma 100-150 pip veya son dip/tepe, kitapta ayrıca ters emirli kapak (hedge) yöntemi anlatılır.",
+    "kategori": "trend_takip",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "emtia",
+    "zaman_dilimi": {"islem": "1m", "ust_filtre": "30m"},
+    "gostergeler": [
+      {"ad": "EMA", "parametreler": {"periyot": 200, "kullanim": "trend filtresi (30dk ve 1dk)"}},
+      {"ad": "EMA", "parametreler": {"periyot": 20, "kullanim": "Bollinger orta bant / giriş onayı"}},
+      {"ad": "EMA", "parametreler": {"periyot": 5, "kullanim": "20 EMA ile kesişim"}},
+      {"ad": "Bollinger Bantları", "parametreler": {"periyot": 20, "sapma": "varsayılan (kitap belirtmez)", "kullanim": "genişleme (volatilite)"}},
+      {"ad": "Parabolik SAR", "parametreler": {"varsayilan": true}},
+      {"ad": "MACD", "parametreler": {"hizli": 12, "yavas": 26, "sinyal": 9}}
+    ],
+    "long_giris": [
+      "30dk grafikte 200 EMA yükseliş eğimli ve fiyat 200 EMA'nın üstünde (ana trend yükseliş).",
+      "1dk grafikte Bollinger Bantları genişliyor veya genişliyor (daralma durumunda işlem yok).",
+      "Fiyat Bollinger orta bandı olan 20 EMA'nın altına düşer veya 5 EMA, 20 EMA'nın altına geçer (geri çekilme).",
+      "Parabolik SAR yeni tersine dönmüş ve fiyatın altında.",
+      "MACD çizgisi sinyal çizgisini aşağıdan yukarı keser.",
+      "Yukarıdaki koşulların hepsi gerçekleştikten sonra yeşil bir mum 20 EMA'nın üstünde kapanınca alım emri verilir."
+    ],
+    "short_giris": [
+      "30dk grafikte 200 EMA düşüş eğimli ve fiyat 200 EMA'nın altında (kitap 'tercihen' der).",
+      "1dk grafikte Bollinger Bantları genişliyor veya genişliyor.",
+      "Fiyat 20 EMA'yı yukarı aşar veya 5 EMA, 20 EMA'yı yukarıdan keser (geri sıçrama).",
+      "Parabolik SAR yeni tersine dönmüş ve fiyatın üstünde.",
+      "MACD çizgisi sinyal çizgisini yukarıdan aşağı keser.",
+      "Tüm koşullar gerçekleştikten sonra kırmızı mum 20 EMA'nın altında kapanınca satış emri verilir."
+    ],
+    "stop_loss": "Giriş fiyatından 100 veya 150 pip uzakta (volatiliteye göre). Alternatif olarak long için son dibin biraz altı, short için son tepenin biraz üstü. Kitap ayrıca stop yerine ilk emrin tersine bekleyen emir (kapak / hedge) yerleştirmeyi anlatır (s.60-67, s.86-87).",
+    "kar_al": "Hedef 50 pip olarak belirlenir (kitap ortalama 33 pip); işlemin gidişatına göre erken kapatma veya uzatma yapılabilir. Kitapta '30/50 pip' ifadesi geçer.",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Oturum: New York (kitap 15:30-22:00 İspanya saati; ön açılış 14:00-15:30 önerilir). Kitapta saat bilgisi biraz çelişkili.",
+      "Önemli haber öncesi, sırasında ve sonrasında işlem yapılmaz (s.80)",
+      "Spread yüksekse işlem yapılmaz (s.80)",
+      "Bollinger Bantları daralıyorsa işlem yapılmaz; sadece genişleme/volatilite döneminde işlem (s.80-82)",
+      "Net giriş sinyali yoksa veya göstergeler çelişiyorsa işlem yapılmaz (s.89)",
+      "Destek/direnç yakınında alım veya satış yapılmaz (s.89)"
+    ],
+    "pozisyon_risk": "Başlangıç sermayesi 3000 EUR; pozisyon 20 ons (0.20 lot) XAU; kaldıraç 1:500; günlük hedef 50 EUR; günlük zarar sınırı 50-60 EUR (sermayenin ~%2'si), sınır aşılınca ertesi güne kadar işlem yok (s.71-76).",
+    "iddia_edilen_performans": "%83 kazanan işlem, kar faktörü 2,01, matematiksel beklenti 2,81; 1 Haziran - 14 Eylül 2021 demo verisi. Kitap örneklemin küçük olduğunu ve en az 2000 işlem gerektiğini belirtir (s.92-93).",
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Giriş koşulları çoğunlukla gösterge tabanlı ve sırayla verilmiş (EMA, BB, PSAR, MACD, kapanış kuralı). Eksikler: 'genişleyen BB' tanımı, 'geri çekilme' ile ilgili 'veya' koşulu, haber filtresi için takvim gerekliliği ve hedge tekniklerinin yorum gerektiren kısımları."
+    },
+    "belirsizlikler": [
+      "Bollinger genişlemesi için nicel kriter yok (örn. bant genişliğinin N mum önceki değere göre artışı); kitap sadece 'genişleyen veya genişleyen' diyor.",
+      "Bollinger standart sapma değeri kitapta belirtilmiyor ('varsayılan').",
+      "Geri çekilme koşulu 'fiyat 20 EMA altına düşer VEYA 5 EMA, 20 EMA altına geçer' şeklinde veya bağlacı içeriyor; hangisinin zorunlu olduğu net değil.",
+      "Stop için '100-150 pip' ile 'son dibin biraz altı' seçenekleri kitapta yan yana; hangisinin öncelikli olduğu net değil.",
+      "Hedge (kapak) tekniklerinin kilit açma adımları (Teknik 1 ve 2) yoruma açık ve deneyim gerektirir (s.63-66); kart kapsamı dışında bırakıldı, varyant olarak not edildi.",
+      "Oturum saatleri kitapta çelişkili (15:30 başlangıç ve 22:00 bitiş; 'Avrupa seansı 15:30' ifadesi).",
+      "Pip tanımı XAU/USD için kitapta yok; 50 pip = 5.00 USD mi 0.50 USD mi, broker'a göre değişir.",
+      "Haber takvimi için kaynak ve filtre kuralı sayısal değil ('önemli haberler').",
+      "Kitap 'sürekli kayıp olur, sistemi değiştirme' diyor; tekrar test sayısı için 2000 işlem önerir (s.93)."
+    ],
+    "uyumluluk_notu": "1dk zaman dilimi (1L3A ≥5m dışında), üst filtre 30dk ile uyumlu. XAU/USD bir emtia (altın) paritesi; forex/kripto/emtia perpetual için trend ve gösterge mantığı uyarlanabilir. Hacim gerekmiyor (kitap forex hacmini güvenilmez buluyor, s.58). Pip tanımı varlığa göre yeniden yapılmalı. Hedge, broker'ın aynı varlıkta çift yönlü pozisyona izin vermesine bağlı (kitap s.44, s.61).",
+    "varyantlar": [
+      "Hedge/kapak yöntemi: stop yerine ters bekleyen emir (kitap s.60-67, s.86-87)",
+      "Teknik 1: ters yönde iki kat lot açma (agresif, s.63)",
+      "Teknik 2: ters emri aktifleştirip zararı kapatma (daha yavaş, s.64)",
+      "Kitap, zamanla gösterge kullanımının azaltılıp fiyat hareketine geçilebileceğini söyler (s.90)"
+    ],
+    "anahtar_kelimeler": ["ema-200", "ema-20", "ema-5", "bollinger", "bollinger-genisleme", "psar", "macd", "geri-cekilme", "trend-filtresi", "30dk", "1dk", "xauusd", "altin", "kapak-hedge", "50-pip", "100-150-pip-stop"]
+  }
+]

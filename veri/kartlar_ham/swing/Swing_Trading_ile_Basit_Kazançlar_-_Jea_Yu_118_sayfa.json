@@ -1,0 +1,127 @@
+[
+  {
+    "kart_id": "swing__mini-pup__yu",
+    "ad": "Mini-Pup (5 SMA Geri Çekilmesi + Stokastik Dönüşü) ve Mini Ters Yavru",
+    "stil": "swing",
+    "kaynak": {"pdf": "Swing_Trading_ile_Basit_Kazançlar_-_Jea_Yu_118_sayfa.pdf", "sayfalar": [55, 56, 67, 68, 69, 70, 71, 72, 84, 85, 87, 93, 94]},
+    "ozet": "Yükselen 5 ve 15 SMA ile yükseliş teyit edilir. Fiyat 5 SMA'ya geri çekilip burada tutunduğunda öncü stokastik duraklar, sonra yeniden yukarı döner ve mum 5 SMA'nın üzerinde kapanırsa uzun açılır. Hedef bir sonraki tampon (15, 20, 50, 200 SMA veya üst Bollinger). Kısa taraf aynı mantığın tersidir (mini ters yavru, düşen 5 ve 15 SMA).",
+    "kategori": "trend_takip",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "hisse",
+    "zaman_dilimi": {"islem": "1m (tetik); 5m (mini-pup)", "ust_filtre": "15m ve 60m (MA yönü ve stokastik)"},
+    "gostergeler": [
+      {"ad": "SMA", "parametreler": {"periyot": 5}},
+      {"ad": "SMA", "parametreler": {"periyot": 15}},
+      {"ad": "SMA", "parametreler": {"periyot": 20}},
+      {"ad": "SMA", "parametreler": {"periyot": 50}},
+      {"ad": "SMA", "parametreler": {"periyot": 200}},
+      {"ad": "Stokastik", "parametreler": {"ayar": "15,3,5 yavaş", "yumusatma": 1}},
+      {"ad": "Bollinger", "parametreler": {"periyot": 20, "sapma": 2}}
+    ],
+    "long_giris": [
+      "60 dk ve/veya 15 dk grafikte MA'lar yükseliyor ve stokastik yukarı; mini-pup ile birlikte (kitap ve/veya kullanıyor)",
+      "5 dk grafikte mini-pup: fiyat 5 SMA'ya geri çekilir, öncü stokastik duraklar, sonra yukarı döner",
+      "1 dk stokastik yukarı kesişir (kitap '20 bantlı stokastik' ve 5 SMA üzerinden geçiş diyor)",
+      "Yukarı kesişimle uzun pozisyon açılır"
+    ],
+    "short_giris": [
+      "60 dk ve/veya 15 dk grafikte MA'lar düşüyor ve stokastik aşağı; mini ters yavru ile birlikte",
+      "5 dk grafikte mini ters yavru: fiyat 5 SMA'ya yükselir, öncü stokastik duraklar, sonra aşağı döner",
+      "1 dk stokastik aşağı kesişir; kitap '80 bantlı' altından geçiş ve 5 SMA'nın aşağı eğimli olmasını yazar",
+      "Aşağı kesişimle kısa pozisyon açılır"
+    ],
+    "stop_loss": "Uzun: 1 dk stokastik aşağı dönerse ve 5 dk mum 5 SMA'nın altında kapanırsa çıkılır. Kısa: 1 dk stokastik yukarı dönerse ve 5 dk mum 5 SMA'nın üzerinde kapanırsa çıkılır.",
+    "kar_al": "Kademeli çıkış. Hedefe yaklaşınca 'Kes' (kısmi kâr); ardından üst Bollinger bantlarında sırayla 1 dk, 5 dk, 15 dk ve 60 dk. Deneyimli yatırımcı pozisyonun %50-75'ini kesip kalanı izleyebilir; yeni başlayan tamamen çıkar ('Kilitleme'). Kısa tarafta alt bantlar kullanılır. Hedef olarak bir sonraki tampon da verilir.",
+    "iz_suren_stop": "Mini-pup oluştuğunda iz durdurma, o zaman dilimi için 5 SMA'nın altındaki mum kapanışına ayarlanır (kitap: 'iz durdurma 5 dönemlik hareketli ortalamanın altındaki bir mum kapanışına ayarlanır')",
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Yakınsama: üst zaman dilimleri (15 dk, 60 dk, günlük) aynı yönde olmalı",
+      "Galvanizli seviye: üç veya daha fazla tampon birbirine 0,20 yakınlıkta ise destek/direnç bölgesi (kitap oran tanımını açık yazmıyor)",
+      "Piyasa öncesi ve sonrası dahil veri (kitap 08:00-20:00 EST önerir)",
+      "Hacimli, likit hisse (kitap gapper/dumper ve lider hisseleri öneriyor)"
+    ],
+    "pozisyon_risk": "Yeni başlayanlar 100 hisse gibi küçük pozisyonla başlar; tahsis tutarlılık kazanıldıkça ölçeklenir. Sayısal risk yüzdesi kitapta yok.",
+    "iddia_edilen_performans": "Kitap: kazanma tutarlılığı %75 eşiğinin aşılması hedeflenir; 'aylık yüzde iki ila beş kazanç, kayıpları yüzde birin altında' ifadesi (sistem geneli). Örnek işlemler: VHC mini-pup uzun 5,52$'dan 7,55$'a (%36, 3 gün); SPY put %80 kazanç (kitap ifadesi).",
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "MA, stokastik ve Bollinger ile hesaplanır; giriş, stop ve hedef ayrıntılı. Ancak mini-pup onayı (duraklama, test, sıçrama) görsel yorum içeriyor, çok zaman dilimi koşullarında 've/veya' var ve stokastik 'bant' ifadesi tam değil."
+    },
+    "belirsizlikler": [
+      "'Duraklama', 'test' ve 'sıçrama' (kırmızı/yeşil mum) tanımları sayısal değil",
+      "Çok zaman dilimi koşullarında 've/veya' bağlacı: hangi kombinasyonun yeterli olduğu belirsiz",
+      "Stokastik 'bant' ifadesi: '20 bantlı' ve '80 bantlı' seviye mi bant mı olduğu kitapta açık değil (seviye olarak okunmadı)",
+      "Stokastik kesişimde %D mi %K mi kullanılacağı açık değil (kitap '%d yavaş' diyor)",
+      "1 dk ve 5 dk stop kontrolleri aynı kuralda iki kez geçiyor; hangi TF'de kapanış aranacağı net değil",
+      "Hisse seçimi, haber ve likidite filtresi kitapta ayrıntısız (ticaret uyarı hizmetine yönlendirme var)",
+      "Kesme (Kes/Pare) yüzdeleri deneyim düzeyine bağlı; sistematik kısmi çıkış kuralı kitapta net değil"
+    ],
+    "uyumluluk_notu": "1L3A için: Kitap 1 dk tetik ve 5/15/60 dk onay kullanıyor. ≥5m uyumlu hale getirmek için tetik TF'i 5 dk, onay TF'leri 15 dk, 60 dk ve günlük seçilebilir (kitap 'ölçeklenebilir' diyor). Forex'e özgü değil (pip yok) ama 'piyasa öncesi' ve seans saatleri ABD hisse ağırlıklı. Hacim verisi önerilir (hacimli hisse) ama formül yok. Kripto ve perpetual'da 7/24 piyasada 'piyasa öncesi' tanımı gerekir.",
+    "varyantlar": [
+      "Yavru (pup) deseni: 5 ve 15 SMA yükselirken 5 SMA'da yatay duruş; stokastik yeniden yukarı geçip mum 5 SMA üstünde kapanınca kopuş. Kitap pup'un stokastik motor gerektirdiğini belirtir.",
+      "Ters yavru (kısa): düşüş trendinde 5 SMA'ya yükselip reddedilen, stokastik onaylı aşağı kopuş",
+      "Mükemmel fırtına (aynı ailede, çok zaman dilimli): ayrı kart olarak kayıtlı, swing__mukemmel-firtina__yu"
+    ],
+    "anahtar_kelimeler": ["mini-pup", "yavru", "ters-yavru", "stokastik", "5-sma", "15-sma", "bollinger", "tampon", "kes-pare", "iz-durdurma", "galvanizli-seviye", "sma5", "sma15"]
+  },
+  {
+    "kart_id": "swing__mukemmel-firtina__yu",
+    "ad": "Mükemmel Fırtına (60 dk, 15 dk, 5 dk Mini-Pup Uyumu + 1 dk Stokastik Tetik)",
+    "stil": "swing",
+    "kaynak": {"pdf": "Swing_Trading_ile_Basit_Kazançlar_-_Jea_Yu_118_sayfa.pdf", "sayfalar": [75, 76, 77, 78, 79, 80, 85, 86, 88]},
+    "ozet": "Üç zaman diliminde (60 dk, 15 dk, 5 dk) aynı yönde mini-pup ve yükselen veya düşen MA'lar varsa, 1 dk stokastik de aynı yönde kesiştiğinde işleme girilir. Yükseliş uyumunda uzun, düşüş uyumunda kısa. Kitap bunu en güçlü desen olarak tanımlar.",
+    "kategori": "trend_takip",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "hisse",
+    "zaman_dilimi": {"islem": "1m (tetik)", "ust_filtre": "5m, 15m, 60m (uyum)"},
+    "gostergeler": [
+      {"ad": "SMA", "parametreler": {"periyot": 5}},
+      {"ad": "SMA", "parametreler": {"periyot": 15}},
+      {"ad": "SMA", "parametreler": {"periyot": 20}},
+      {"ad": "Stokastik", "parametreler": {"ayar": "15,3,5 yavaş", "yumusatma": 1}},
+      {"ad": "Bollinger", "parametreler": {"periyot": 20, "sapma": 2}}
+    ],
+    "long_giris": [
+      "60 dk grafikte mini-pup ve/veya yükselen MA (kitap ve/veya kullanıyor)",
+      "15 dk grafikte mini-pup ve/veya yükselen MA",
+      "5 dk grafikte mini-pup veya yükselen MA yapısı (kitap bu koşulda 'mini ters yavru' yazıyor; uzun tarafta muhtemelen yazım hatası, belirsizlikler'e bakın)",
+      "1 dk stokastik yukarı kesişir (kitap 'mini-pup daha da iyi' ve 'ekstra güçlü tetikleyici' diyor)",
+      "Yukarı kesişimle uzun pozisyon açılır"
+    ],
+    "short_giris": [
+      "60 dk grafikte mini ters yavru ve/veya düşen MA",
+      "15 dk grafikte mini ters yavru ve/veya ters yavru ile düşen MA",
+      "5 dk grafikte mini ters yavru ve/veya ters yavru ile düşen MA",
+      "1 dk stokastik aşağı kesişir (ekstra güçlü kısa tetik)",
+      "Aşağı kesişimle kısa pozisyon açılır"
+    ],
+    "stop_loss": "Uzun: 1 dk stokastik aşağı dönerse ve 5 dk mum 5 SMA'nın altında kapanırsa çıkılır. Kısa: 1 dk stokastik yukarı dönerse ve 5 dk mum 5 SMA'nın üzerinde kapanırsa çıkılır.",
+    "kar_al": "Kademeli çıkış: uzun işlemde 1 dk üst Bollinger bandı, sonra 5 dk üst bant, 15 dk ve 60 dk üst bantlar. Kısa işlemde kitap aynı mantığı alt bantlarda uygular (kitap 'alt Bollinger' ifadesi).",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Yakınsama: en az iki (kitap asgari şart) ve ideal olarak üç zaman diliminde aynı yönde mini-pup/yavru",
+      "Hacimli ve likit hisse (kitap gapper/dumper veya yüksek hacimli lider hisseleri tercih eder)",
+      "Günlük, haftalık ve aylık bağlam (MA ve tampon seviyelerinin yönü) hizalanmış olmalı (kitap bağlam ve yakınsama ayrımını yapar)"
+    ],
+    "pozisyon_risk": "Yeni başlayanlar küçük (100 hisse) pozisyonla başlar; tahsis kitapta sayısal olarak tanımlanmamış",
+    "iddia_edilen_performans": "Kitap örnekleri: GMCR altı şeritli mükemmel fırtına, 62,86'da alım ve 63,30'da satım (+40). İkinci işlem 63,03'ten 63,73'e (+70). Kitap mükemmel fırtınaları 'en güçlü desen' olarak tanımlar (sayısal oran yok).",
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Üç zaman dilimi koşulu ve 1 dk tetik tanımlı; 1 dk stokastik kesişimi ölçülebilir. Ancak 've/veya' bağlaçları, mini-pup görsel onayı ve uzun taraftaki 5 dk koşulunun yazımı belirsiz."
+    },
+    "belirsizlikler": [
+      "Uzun taraftaki 5 dk koşulu 'mini ters yavru ve/veya ters yavru ve MA yükseliş' diyor; bu muhtemelen mini-yavru yazım hatası. Varsayım yapılmadı, metin aynen bırakıldı ve burada işaretlendi",
+      "'Ve/veya' bağlacının hangi TF kombinasyonunda yeterli olduğu belirsiz",
+      "Stokastik kesişim tanımı (%D/%K) ve '20 bantlı' ifadesi net değil (ayrıca bkz. mini-pup kartı)",
+      "Kitap 'başarısız mükemmel fırtına' için karşı yön fırsatı der; bu kural açık ve sayısal değil, kart dışı bırakıldı",
+      "Piyasa öncesi/sonrası veri kullanımı ve seans saatleri (08:00-20:00 EST) kitapta yazılı",
+      "Stop ve kar kuralları kitapta mini-pup kartıyla aynıdır; ayrıntı için oraya bakın"
+    ],
+    "uyumluluk_notu": "1L3A için: 1 dk tetik gerektirdiği için ≥5m'de tetik 5 dk'ya kaydırılabilir; kitabın 'ekstra güçlü' tetik mantığı bu durumda kaybolur. Üç TF uyumu 5m, 15m, 60m veya günlük ile uyarlanabilir. Forex'e özgü değil. Hacim önerilir ama formül yok. Kripto ve perpetual'da piyasa öncesi tanımı gerekir.",
+    "varyantlar": [
+      "Kısa mükemmel fırtına: aynı yapı ters yönde (60/15/5 dk mini ters yavru ve düşen MA + 1 dk aşağı stokastik)",
+      "Dört zaman dilimli örnek (kitap: günlük + 60 dk + 15 dk + 5 dk + 1 dk; şerit sayısı arttıkça güç artar)"
+    ],
+    "anahtar_kelimeler": ["mukemmel-firtina", "mini-pup", "coklu-zaman-dilimi", "yakinsama", "stokastik", "1dk-tetik", "bollinger", "sma5", "sma15"]
+  }
+]

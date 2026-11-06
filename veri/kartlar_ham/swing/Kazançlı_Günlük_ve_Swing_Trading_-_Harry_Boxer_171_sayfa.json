@@ -1,0 +1,618 @@
+[
+  {
+    "kart_id": "daytrade__bosluk-takoz-hacim-kirilim__boxer",
+    "ad": "Açılış Boşluğu + Erken Konsolidasyon (Boxer Takozu) Hacimli Kırılım",
+    "stil": "daytrade",
+    "kaynak": {"pdf": "Kazançlı_Günlük_ve_Swing_Trading_-_Harry_Boxer_171_sayfa.pdf", "sayfalar": [17, 18, 19, 21, 26, 28]},
+    "ozet": "Hisse en az %4-5 yukarı boşlukla açılır ve boşluk seviyesini korur. İlk 20-30 dakikada düşük hacimli bir geri çekilme/konsolidasyon (bobin, bayrak, takoz) oluşur; konsolidasyonun üst sınırı yükselen hacimle kırılınca long açılır.",
+    "kategori": "kirilim",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "hisse",
+    "zaman_dilimi": {"islem": "1m", "ust_filtre": "5m / 15m / 1G (seviye kontrolü)"},
+    "gostergeler": [
+      {"ad": "Açılış boşluğu", "parametreler": {"min_yuzde": 4}},
+      {"ad": "Göreli hacim", "parametreler": {"not": "artış çarpanı kitapta sayısal değil"}},
+      {"ad": "Worden Volume Buzz", "parametreler": {"baz": "100 gün, 100 dönemlik basit hareketli hacim ortalaması (p19'da 90 gün de geçer)"}}
+    ],
+    "long_giris": [
+      "Hisse önceki kapanışa göre en az %4-5 yukarı boşlukla açılır (tercihen daha fazla).",
+      "Boşluk seviyesi ilk konsolidasyon boyunca kırılmadan tutulur.",
+      "Açılıştan sonraki ilk 20-30 dakikada düşük hacimli geri çekilme/konsolidasyon (bobin, bayrak, takoz) oluşur.",
+      "Konsolidasyonun üst sınırı yükselen hacimle kırılır; long bu kırılımda açılır (kırılım teyidi gelmeden fazla pozisyon açılmaz, p28)."
+    ],
+    "short_giris": [],
+    "stop_loss": "Son gün içi geri çekilmenin (konsolidasyon) dip seviyesinin hemen altı (p81); formasyon dip seviyelerinin altında sıkı stop (p28).",
+    "kar_al": "Kitapta sabit değer yok: üç aşamalı yaklaşım (kart: swing__uc-asamali-kar-al__boxer), ölçülen hareket (kart: swing__olculen-hareket-hedef__boxer) veya beşinci dalga (kart: daytrade__bes-dalga-cikis__boxer).",
+    "iz_suren_stop": null,
+    "zaman_cikisi": "Günlük işlemde seans sonunda kapat; kitap 'İstisna yok!' der (p78).",
+    "filtreler": [
+      "Fiyat tercihen 3$ üzerinde; kurumsal ilgi için 5-10$ üzeri tercih (p21).",
+      "İlk 15 dakikada işlem yapmaktan kaçın (p164); erken konsolidasyon genelde 20-30. dakikada görülür (p18).",
+      "Hacim: boşluk ve kırılım yüksek göreli hacimle olmalı (p18, p21).",
+      "Çok ince/likit olmayan hisselerden kaçın (biyoteknoloji, Çin hisseleri uyarısı, p21).",
+      "Açılış öncesi haber kontrolü: trendi değiştirebilecek 'oyun değiştirici' haber varsa dikkat (p13, p21)."
+    ],
+    "pozisyon_risk": "Kırılım teyidinden önce küçük pozisyon mümkün, teyitte ek/tam pozisyon (p28). Genel: kısa vadede 3-5 pozisyon, yarım düzineyi geçme (p155).",
+    "iddia_edilen_performans": "Örnek günlük kazançlar: WUBA ~%10, ZHNE ~%20, FMI ~%20, ATRM ~%40, RGDO ~%50 (p10, p24-28). İstatistiksel kazanma oranı verilmemiş.",
+    "kodlanabilirlik": {"puan": 2, "gerekce": "Boşluk yüzdesi, zaman penceresi ve kırılım mantığı ölçülebilir; ancak 'düşük hacim', 'yükselen hacim' ve 'Boxer takozu' tanımı sayısal değil."},
+    "belirsizlikler": [
+      "Hacim düşüklüğü ve yükselişi için kesin eşik yok.",
+      "Konsolidasyonun minimum süresi ve bobin/bayrak/takoz ayrımı yoruma açık (p8).",
+      "Boşluk eşiği 'en az %4-5' ifadesi; tek bir sayı seçimi kullanıcıya bırakılmış.",
+      "Kitap bu kalıbı short tarafı için tanımlamıyor (kitapta yok).",
+      "Stop ve kâr al kuralları tek bir sayıya bağlanmamış."
+    ],
+    "uyumluluk_notu": "1L3A için: 1 dakikalık gün içi kalıp, 5m'ye uyarlanabilir. Açılış boşluğu hisse seans açılışına bağlı; kripto 7/24 olduğundan seans açılışı yoktur (günlük mum açılışı varsayımı gerekir). Forex'te seans açılışı tanımı zor. Hacim verisi zorunlu; forex/kripto'da hacim proxy ile.",
+    "varyantlar": [
+      "Boşluksuz, sabah erken yüksek hacimli mini boğa bayrağı sonrası kırılım (WUBA, FMI örnekleri p10).",
+      "Boğa takozu, bobin, bayrak, flama ve düşen takoz tiplerinin aynı kırılım mantığı (p8, p28).",
+      "Kırılım sonrası beş dalga yapısında 2. ve 4. dalga konsolidasyonları (p11)."
+    ],
+    "anahtar_kelimeler": ["acilis-bosluk", "gun-ici", "konsolidasyon", "takoz", "bayrak", "bobin", "hacim-kirilim", "volume-buzz", "1dk", "hisse", "boxer"]
+  },
+  {
+    "kart_id": "daytrade__gun-ici-yukselen-kanal__boxer",
+    "ad": "Gün İçi Yükselen Paralel Kanal (Seans Boyu Tutma)",
+    "stil": "daytrade",
+    "kaynak": {"pdf": "Kazançlı_Günlük_ve_Swing_Trading_-_Harry_Boxer_171_sayfa.pdf", "sayfalar": [23, 24, 25, 29]},
+    "ozet": "Açılış boşluğu/hamlesi sonrası erken boğa konsolidasyonu kırılır ve seans boyunca yaklaşık 45 derece açıyla yükselen paralel bir gün içi kanal oluşur. Pozisyon, kanal tabanı ve gün içi destekler kırılmadan seans sonuna kadar tutulur.",
+    "kategori": "trend_takip",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "hisse",
+    "zaman_dilimi": {"islem": "1m", "ust_filtre": "5m / 15m (seviye kontrolü)"},
+    "gostergeler": [
+      {"ad": "Yükselen paralel kanal", "parametreler": {"aci_derece": "yaklaşık 45"}},
+      {"ad": "Gün içi hareketli ortalama", "parametreler": {"periyot": null, "not": "periyot kitapta sayısal değil; 10/21/50 MA'lar p30'da"}}
+    ],
+    "long_giris": [
+      "Seans açılış boşluğu/koşusu sonrası düşük hacimli erken boğa konsolidasyonu oluşur.",
+      "Konsolidasyonun üst sınırı fiyat/hacim artışıyla kırılır ve yükselen kanal başlar.",
+      "Kanal yaklaşık 45 derece açıyla ve gün içi destek kırılmadan yukarı devam eder."
+    ],
+    "short_giris": [],
+    "stop_loss": "Yükselen kanal alt çizgisinin veya gün içi destek / hareketli ortalamaların kesiştiği yerin hemen altı (p29: 'önemli gün içi seviyelerin altındaki stoplar').",
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": "Seans sonunda çıkış (p78: 'İstisna yok').",
+    "filtreler": [
+      "Göreli hacim yüksek (Volume Buzz ile tespit, p23).",
+      "Kanal destek seviyeleri (önceki yüksek/düşük, hareketli ortalama) kırılmamış olmalı (p29).",
+      "Açı çok dikleşirse (beşinci dalga, aşırı ivme) kâr alma düşünülür (p57)."
+    ],
+    "pozisyon_risk": "Kırılma teyidi gelmeden fon tahsis etme; küçük başlangıç pozisyonu, teyitte ek (p28).",
+    "iddia_edilen_performans": "ZHNE yaklaşık %20, XPO yaklaşık %18 günlük kazanç örnekleri (p25). Kazanma oranı yok.",
+    "kodlanabilirlik": {"puan": 1, "gerekce": "Stop ve çıkış seans sonu net; ancak kanal çizimi ve açı ayarı yazara göre 'içgüdüsel his' gerektiriyor (p29)."},
+    "belirsizlikler": [
+      "Kanal nasıl çizilir ve açı nasıl güncellenir: kitap 'yılların deneyimi ve içgüdüsel his' diyor (p29).",
+      "'Düşük hacim' ve 'erken boğa takozu' tanımı yok.",
+      "Kanal kırılımının onayı tanımsız (tek mum, kapanış veya yüzde eşiği belirtilmemiş).",
+      "Kanal 1 dk'da mı 5/15 dk'da mı teyit edilir, net değil."
+    ],
+    "uyumluluk_notu": "1L3A için: 1dk gün içi; 5m'de aynı mantık uygulanabilir. Hisse seansına bağlı; kripto'da seans açılışı yok. Forex'te seans sonu çıkışı 'gün sonu' tanımı gerektirir. Hacim verisi gerekir.",
+    "varyantlar": [
+      "Günlük grafikte 45 derece trend kanalı, uzun süre devam eden hareketler (p24, p44-45).",
+      "Düşen kanal (kısa tarafı, RNF günlük örneği p51)."
+    ],
+    "anahtar_kelimeler": ["yukselen-kanal", "gun-ici", "trend", "45-derece", "hareketli-ortalama", "seans-sonu-cikis", "boxer"]
+  },
+  {
+    "kart_id": "swing__ma-10-21-50-gecis-geri-cekilme__boxer",
+    "ad": "10/21/50 Hareketli Ortalama Geçişi ve İlk Geri Çekilmede Giriş",
+    "stil": "swing",
+    "kaynak": {"pdf": "Kazançlı_Günlük_ve_Swing_Trading_-_Harry_Boxer_171_sayfa.pdf", "sayfalar": [30, 31, 33, 34, 35, 36, 37, 38, 39]},
+    "ozet": "10, 21 ve 50 periyotlu hareketli ortalamaların yukarı yönlü çapraz geçişi trend dönüşü sinyali sayılır. Geçişten sonra fiyatın ilk geri çekilmesinde, hareketli ortalama bölgesine yeniden test gelirse ve bölge tutunursa trend yönünde giriş yapılır.",
+    "kategori": "trend_takip",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "hisse",
+    "zaman_dilimi": {"islem": "1G", "ust_filtre": null},
+    "gostergeler": [
+      {"ad": "Hareketli ortalama", "parametreler": {"periyot": [10, 21, 50], "tip": "belirtilmemiş (SMA/EMA ayrımı yok)"}}
+    ],
+    "long_giris": [
+      "10, 21 ve 50 periyotlu hareketli ortalamalar yukarı yönlü çapraz geçiş yapar (hangi çift ve sıra için net değil).",
+      "Geçişten sonra fiyat geri çekilir ve ilk geri çekilmede hareketli ortalama bölgesini test eder.",
+      "Fiyat hareketli ortalama bölgesinde tutunup yukarı döner; long bu toparlanmada açılır.",
+      "Önerilen (zorunlu değil): geçişte önemli hacim ve trend çizgisi/kanal kırılımı teyidi (p34)."
+    ],
+    "short_giris": [
+      "Hareketli ortalamalar aşağı yönlü çapraz geçer ve fiyat yükselen ilk geri çekilmede MA bölgesinde reddedilir (kitap düşüş örnekleri VTR, RNF p37-38'de bu kalıbı gösterir; kural ayna olarak varsayım)."
+    ],
+    "stop_loss": "Kitap: hareketli ortalamanın veya son geri çekilme dibinin hemen altı, ayrıca %1-2 ek hareket alanı (p86). 50 MA'nın altında stop çok sıkı olmamalı (p30).",
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Geçiş sırasında hacim artışı ve fiyat/hacim hareketi (p34-35).",
+      "50 MA ihlali yoğun hacimle trend dönüşü olabilir (p30).",
+      "Trendin yönüne göre (yükseliş/düşüş) uygulama (p37-38)."
+    ],
+    "pozisyon_risk": "Kırılma teyidi gelmeden fon tahsis etme; küçük başlangıç pozisyonu, teyitte ek (p28).",
+    "iddia_edilen_performans": "ADEP 7 haftada 3,50 -> 10,78; RMTI 7 haftada 5 -> 13; MU, JKS, P örneklerinde 50 MA testinde giriş ve %300-400 kazanç (örnek, sistematik değil). Kazanma oranı yok.",
+    "kodlanabilirlik": {"puan": 2, "gerekce": "Geçiş ve geri çekilme mantığı ölçülebilir; MA türü, geçiş çifti ve 'ilk geri çekilme' / 'tutunma' tanımı kitapta net değil."},
+    "belirsizlikler": [
+      "MA türü (SMA/EMA) belirtilmemiş.",
+      "Hangi MA çifti geçişi tetikler: kitap 'çeşitli hareketli ortalamaların birbiriyle kesişmesi' diyor (p34).",
+      "Geri çekilme derinliği ve 'MA bölgesi' için yüzde bandı yok.",
+      "Geçiş kapanışla mı gün içi mi onaylanır belirsiz.",
+      "Kitap 40 günlükten 50 güne geçtiğini belirtir (p30); 40 günlük seçeneği de olabilir."
+    ],
+    "uyumluluk_notu": "1L3A için: MA ve geçiş mekaniktir, 5m'de de uygulanabilir (kitap 1dk'da da kullanır, p39). Kripto ve forex'te MA kesişimleri test edilerek uyarlanmalı. Hacim filtresi için hacim verisi gerekir.",
+    "varyantlar": [
+      "50 günlük MA'ya geri çekilme 'ideal giriş' (MU, JKS, P örnekleri p31-32).",
+      "Fibonacci uyumlu MA'lar 8/21/55 (p33).",
+      "Gün içi 1 dakikalık MA geçişi ve ilk erken geri çekilme (p39).",
+      "Düşüş trendinde ayna kalıp (VTR, RNF örnekleri p37-38)."
+    ],
+    "anahtar_kelimeler": ["hareketli-ortalama", "10-21-50", "gecis", "geri-cekilme", "yeniden-test", "trend-donusu", "sma-ema", "boxer"]
+  },
+  {
+    "kart_id": "swing__olculen-hareket-hedef__boxer",
+    "ad": "Ölçülen Hareket (Measured Move) Hedefi",
+    "stil": "swing",
+    "kaynak": {"pdf": "Kazançlı_Günlük_ve_Swing_Trading_-_Harry_Boxer_171_sayfa.pdf", "sayfalar": [60, 61, 64, 77, 78]},
+    "ozet": "Bir hareketin ilk ayağının uzunluğu, bir sonraki ayağın başlangıç fiyatına eklenir; ortaya çıkan seviye hedef olarak kullanılır. Hedef, önceki yüksekler, azalan hareketli ortalama veya kanal sınırlarıyla çakışırsa daha güvenilir kabul edilir.",
+    "kategori": "diger",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "hisse",
+    "zaman_dilimi": {"islem": "1G", "ust_filtre": null},
+    "gostergeler": [
+      {"ad": "Ölçülen hareket", "parametreler": {"formul": "hedef = ikinci ayağın başlangıç fiyatı + birinci ayak uzunluğu"}}
+    ],
+    "long_giris": [],
+    "short_giris": [],
+    "stop_loss": null,
+    "kar_al": "Hedef = ikinci ayağın başlangıç fiyatı + birinci ayak uzunluğu. Örnek ANIK: 15,50 ilk hamle + 23,25 başlangıç = 38,76 (p61). Hedefe kısmi veya tam çıkış.",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Hedefin önceki yüksek, azalan hareketli ortalama veya kanal tepe/dibiyle çakışması güvenilirliği artırır (p60).",
+      "Logaritmik/yüzde ölçek kullanılmalı (p64).",
+      "Gün içi uygulama: önceki gün içi hareket ölçülüp son düşük seviyeye eklenir (p78)."
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": "ANIK 38,68'e ulaştı, yaklaşık %65 kazanç (p61). HIMX üç ayaklı örnek (p61-62).",
+    "kodlanabilirlik": {"puan": 2, "gerekce": "Formül açık; ancak hangi ayağın seçileceği ve 'yakınlık' ile çakışma eşiği yoruma açık."},
+    "belirsizlikler": [
+      "Hangi ayağın başlangıç ve bitiş noktası seçileceği yoruma açık (p60).",
+      "Çakışma (yakınlık) için yüzde mesafe tanımlanmamış.",
+      "Çok ayaklı hareketlerde hangi ayağın 'birinci' sayılacağı belirsiz."
+    ],
+    "uyumluluk_notu": "1L3A için: mekanik formül; her zaman diliminde uygulanabilir. Kripto ve forex'te yüzde/log ölçek kullanılmalı. Hacim gerekmez.",
+    "varyantlar": [
+      "Gün içi: önceki gün içi hareket ölçülüp son en düşük seviyeye eklenir (p78-79).",
+      "Uzun ayak referansı: üç ayaklı hareket örneği (HIMX, p61-62)."
+    ],
+    "anahtar_kelimeler": ["olculen-hareket", "hedef", "kar-al", "ayak", "elliott-uzanti", "boxer"]
+  },
+  {
+    "kart_id": "daytrade__bes-dalga-cikis__boxer",
+    "ad": "Beşinci Dalga Tükenme Çıkışı",
+    "stil": "daytrade",
+    "kaynak": {"pdf": "Kazançlı_Günlük_ve_Swing_Trading_-_Harry_Boxer_171_sayfa.pdf", "sayfalar": [11, 57, 62, 63]},
+    "ozet": "Hisse beş dalgalı itki hareketi yapar (üç yukarı, iki karşıt). Beşinci dalga, özellikle güçlü hacim eşlik ediyorsa ve seans ortasından önce oluşmuşsa, gün içi tükenme dalgası kabul edilir ve pozisyonun tamamı veya büyük kısmı kapatılır.",
+    "kategori": "diger",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "hisse",
+    "zaman_dilimi": {"islem": "1m", "ust_filtre": "5m / 15m (dalga sayımı)"},
+    "gostergeler": [
+      {"ad": "Dalga sayımı (5-3, Elliott benzeri)", "parametreler": {"dalga_sayisi": 5}},
+      {"ad": "Hacim", "parametreler": {"not": "eşik yok"}}
+    ],
+    "long_giris": [],
+    "short_giris": [],
+    "stop_loss": null,
+    "kar_al": "Beşinci dalga tamamlandığında pozisyonun tamamı veya büyük kısmı kapatılır; özellikle güçlü hacimli ve seans ortası öncesi 5. dalgada (p62).",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Beşinci dalga güçlü hacimle birlikte (p62).",
+      "Seans ortası öncesi 5. dalga tükenme olasılığı yüksek (p62)."
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": "GTN ve MLNX beş dalga örnekleri; kazanma oranı yok (p62-63).",
+    "kodlanabilirlik": {"puan": 1, "gerekce": "Dalga sayımı öznel; 5. dalganın tamamlanma koşulu ve tespit kuralı yok."},
+    "belirsizlikler": [
+      "Beş dalganın tespit yöntemi (fraktal/zigzag parametresi) yok.",
+      "5. dalganın tamamlanma onayı (tepe mumu, kırılım?) tanımsız.",
+      "Hacim eşiği yok.",
+      "Elliott teorisi kavramsal anlatılmış (p70-75), kodlanabilir tanım yok."
+    ],
+    "uyumluluk_notu": "1L3A için: dalga sayımı tam otomatik kodlanamaz; zigzag/fraktal ile kaba yaklaşım mümkün. Forex/kripto'da hacim güvenilmez.",
+    "varyantlar": [
+      "Ölçülen hareket hedefi ile birlikte 5. dalga seviyesi (p62).",
+      "Düşüş trendinde kısa tarafta aynı yapı."
+    ],
+    "anahtar_kelimeler": ["bes-dalga", "elliott", "tukenme", "kar-al", "hacim", "gun-ici", "boxer"]
+  },
+  {
+    "kart_id": "swing__uc-asamali-kar-al__boxer",
+    "ad": "Üç Aşamalı Hedef ve Kısmi Kâr Alma",
+    "stil": "swing",
+    "kaynak": {"pdf": "Kazançlı_Günlük_ve_Swing_Trading_-_Harry_Boxer_171_sayfa.pdf", "sayfalar": [76, 77, 78]},
+    "ozet": "Pozisyon üç seviyede kısmen kapatılır: Seviye 1'de pozisyonun en az dörtte biri ile yarısı arasında, Seviye 2'de başka bir kısmı, Seviye 3'te kalan için stop sıkılaştırma veya çıkış. Günlük işlemde seans sonunda tamamı kapatılır.",
+    "kategori": "diger",
+    "piyasa_rejimi": "herhangi",
+    "orijinal_piyasa": "hisse",
+    "zaman_dilimi": {"islem": "1m", "ust_filtre": "5m / 15m / 1G (seviye belirleme)"},
+    "gostergeler": [],
+    "long_giris": [],
+    "short_giris": [],
+    "stop_loss": null,
+    "kar_al": "Seviye 1: pozisyonun %25-50'si (en az dörtte bir, en fazla yarısı). Seviye 2: başka bir kısım. Seviye 3: kalan için stop sıkılaştırma veya tam çıkış. Seviyeler: ölçülen hareket, Fibonacci, Elliott uzantısı, önceki destek/direnç (p78).",
+    "iz_suren_stop": null,
+    "zaman_cikisi": "Günlük işlemde seans sonunda tüm pozisyon kapatılır (p78).",
+    "filtreler": [],
+    "pozisyon_risk": "Seviye 1 ve 2'de kısmi çıkış; kalan kısım seviye 3 kararına göre (p78).",
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {"puan": 2, "gerekce": "Kısım oranı aralık olarak verilmiş; seviye fiyatları birkaç yöntemden biriyle bulunuyor ve Seviye 2/3 kararı kullanıcıya bırakılmış."},
+    "belirsizlikler": [
+      "Seviye 2'de satılacak miktar belirtilmemiş.",
+      "Seviye 3 için 'stopu sıkılaştırma veya çıkma kesin seçeneği' (p78) karar kullanıcıya bırakılmış.",
+      "Seviye fiyatı yöntemi kart dışı kurallara bağlı."
+    ],
+    "uyumluluk_notu": "1L3A için: kısmi çıkış kuralları mekanik; oranlar pozisyon yüzdesi olarak tanımlanmalı. Seans sonu kuralı forex/kripto için gün sonu saati ile uyarlanmalı.",
+    "varyantlar": [
+      "Gece tutma: yazar gece nakde geçmeyi 'tüm kalbimle tavsiye ederim' diyor (p77); kart tek seviyeli tam çıkış ile karşılaştırılmadı."
+    ],
+    "anahtar_kelimeler": ["kismi-kar-al", "uc-seviye", "pozisyon-yonetimi", "seans-sonu", "boxer"]
+  },
+  {
+    "kart_id": "swing__takip-eden-stop-sabit-tutar__boxer",
+    "ad": "Takip Eden Stop (Sabit Tutar, Örnek 2 $)",
+    "stil": "swing",
+    "kaynak": {"pdf": "Kazançlı_Günlük_ve_Swing_Trading_-_Harry_Boxer_171_sayfa.pdf", "sayfalar": [159, 160]},
+    "ozet": "Stop, fiyat yükseldikçe sabit bir tutar (örnek 2 $) veya yüzde/puan kadar fiyatın altında yukarı taşınır; fiyat düşerse stop taşınmaz. Stop seviyesine dokunulduğunda piyasa emriyle satış yapılır.",
+    "kategori": "diger",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "hisse",
+    "zaman_dilimi": {"islem": "herhangi", "ust_filtre": null},
+    "gostergeler": [],
+    "long_giris": [],
+    "short_giris": [],
+    "stop_loss": "Sabit tutar (örnek 2 $) veya yüzde/puan: stop = en yüksek fiyat - tutar (p159).",
+    "kar_al": null,
+    "iz_suren_stop": "Stop yalnızca yukarı taşınır, aşağı inmez; tetiklendiğinde piyasa emri (p159-160).",
+    "zaman_cikisi": null,
+    "filtreler": [],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {"puan": 3, "gerekce": "Tamamen mekanik: stop = en yüksek fiyat - sabit tutar. Yazar bu yöntemi normalde önermediğini belirtir."},
+    "belirsizlikler": [
+      "Yazar bu yöntemi normalde önermiyor: mesafe keyfi ve teknik akıl yürütmeden yoksun (p159-160).",
+      "2 $ yalnızca örnek; kitapta önerilen bir değer yok.",
+      "Gün içi ve swing ayrımı yok."
+    ],
+    "uyumluluk_notu": "1L3A için: broker trailing stop ile veya kodla simüle edilebilir. Forex'te pip, kripto'da yüzde veya ATR cinsinden tanımlanmalı. Hacim gerekmez.",
+    "varyantlar": [
+      "Yüzde veya puan cinsinden takip (p159).",
+      "Teknik stop alternatifi (kart: swing__ihlal-stop-tamponu__boxer)."
+    ],
+    "anahtar_kelimeler": ["takip-eden-stop", "trailing-stop", "stop", "sabit-tutar", "cikis", "boxer"]
+  },
+  {
+    "kart_id": "swing__ihlal-stop-tamponu__boxer",
+    "ad": "Teknik Seviye İhlali ile Stop (1-2% Tampon)",
+    "stil": "swing",
+    "kaynak": {"pdf": "Kazançlı_Günlük_ve_Swing_Trading_-_Harry_Boxer_171_sayfa.pdf", "sayfalar": [80, 81, 82, 83, 85, 86, 87, 157, 158]},
+    "ozet": "Stop, önemli destek/dip, trend çizgisi veya temel hareketli ortalamanın ihlal edilmesi halinde ve ihlal seviyesinin altında %1-2 ek tampon ile konur. Fiyat yükseldikçe stop, yeni destek seviyelerinin altına basamaklı olarak taşınır.",
+    "kategori": "destek_direnc",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "hisse",
+    "zaman_dilimi": {"islem": "1G", "ust_filtre": "1m / 5m (gün içi uygulama)"},
+    "gostergeler": [
+      {"ad": "Hareketli ortalama", "parametreler": {"periyot": [10, 21, 50]}},
+      {"ad": "Trend çizgisi / kanal", "parametreler": {}},
+      {"ad": "Yatay destek/direnç", "parametreler": {}}
+    ],
+    "long_giris": [],
+    "short_giris": [],
+    "stop_loss": "Long: önemli destek, son geri çekilme dibi veya kanal tabanı ihlal edilirse, stop ihlal seviyesinin altında en az %1-2 tampon ile (p86). Kişisel tercih: son gün içi geri çekilme dibinin hemen altı (p81). Birden fazla seviye (destek + trend çizgisi + MA) aynı anda ihlal edilirse güçlü sinyal (p82). Short: ters yön.",
+    "kar_al": null,
+    "iz_suren_stop": "Yükselen trendde stop yeni destek seviyelerine göre basamaklı yükseltilir (p80, p158).",
+    "zaman_cikisi": null,
+    "filtreler": [
+      "İhlal hacimle birlikte olmalı; tek günlük anormallik ayıklanmalı (p81).",
+      "Büyük pozisyonlarda birden fazla stop: ilk stop kısmi pozisyonu, ikinci stop kalanı kapatır (p158)."
+    ],
+    "pozisyon_risk": "Swing ve pozisyon yatırımcıları için daha geniş tampon (p86).",
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {"puan": 2, "gerekce": "Stop mantığı (ihlal + %1-2 tampon) ölçülebilir; 'önemli' ihlal, 'olağan hacim' ve seviye tanımı yoruma açık."},
+    "belirsizlikler": [
+      "'Önemli' ihlal için süre veya hacim eşiği yok.",
+      "Tampon %1-2 (p86) ile swing için 'biraz daha geniş' ifadesi sayısal değil.",
+      "Stop tetiklendikten sonra yeniden giriş kuralı yok (kitap yeniden girişi öneriyor, p86).",
+      "Kitap yüzde kayıp esaslı stopu 'yanlış yöntem' sayar (p86)."
+    ],
+    "uyumluluk_notu": "1L3A için: teknik seviyeden stop kodlanabilir. Kitapta ATR tabanlı tampon yok; kripto/forex için ATR alternatifi test edilmeli. Hacim forex/kripto'da zayıf.",
+    "varyantlar": [
+      "Yuvarlak sayı: kırılan seviyenin hemen altındaki yuvarlak sayı (p86).",
+      "Kısmi pozisyonlarda kademeli stop (p158).",
+      "Stop sonrası yeniden giriş: güçlü fiyat/hacimle direncin üzerine dönüş (p86)."
+    ],
+    "anahtar_kelimeler": ["stop", "destek-ihlali", "trend-cizgisi", "hareketli-ortalama", "tampon", "yuvarlak-sayi", "risk", "boxer"]
+  },
+  {
+    "kart_id": "swing__macd-sinyal-sifir-gecis__boxer",
+    "ad": "MACD (12,26,9) Sinyal Çizgisi ve Sıfır Çizgisi Geçişi",
+    "stil": "swing",
+    "kaynak": {"pdf": "Kazançlı_Günlük_ve_Swing_Trading_-_Harry_Boxer_171_sayfa.pdf", "sayfalar": [122, 124, 125, 127, 129, 133, 138]},
+    "ozet": "MACD çizgisi sinyal çizgisini (9 periyot EMA) yukarı keserse long, aşağı keserse short sinyali. Sıfır çizgisi geçişi trend değişiminin ek teyididir. Yanlış sinyali azaltmak için örnek filtre: sinyal geçişinden sonra 3 gün üstte kalma.",
+    "kategori": "momentum",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "hisse",
+    "zaman_dilimi": {"islem": "1G", "ust_filtre": null},
+    "gostergeler": [
+      {"ad": "MACD", "parametreler": {"hizli_EMA": 12, "yavas_EMA": 26, "sinyal": 9}}
+    ],
+    "long_giris": [
+      "MACD çizgisi sinyal çizgisini yukarı keser (yükseliş geçişi).",
+      "Filtre (örnek, zorunlu değil): MACD sinyal çizgisinin üzerinde 3 gün boyunca kalmalı (p133)."
+    ],
+    "short_giris": [
+      "MACD çizgisi sinyal çizgisini aşağı keser (düşüş geçişi).",
+      "Filtre ayna varsayımı: 3 gün altında kalma (kitapta yalnızca long filtresi var)."
+    ],
+    "stop_loss": null,
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Sinyal geçişini 3 gün tutma (örnek, p133).",
+      "Sıfır çizgisi geçişi trend değişimi kanıtı (p129)."
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {"puan": 2, "gerekce": "Giriş (sinyal geçişi) ve parametreler net; stop ve ters sinyal dışındaki çıkış kuralı yok, filtre isteğe bağlı."},
+    "belirsizlikler": [
+      "Çıkış kuralı yok (ters kesişim varsayımı).",
+      "Stop kuralı yok.",
+      "Short tarafında 3 gün filtresi kitapta yok (varsayım).",
+      "Sıfır çizgisi geçişinde giriş/çıkış ayrıntısı yok."
+    ],
+    "uyumluluk_notu": "1L3A için: tamamen mekanik; 5m/1h'da uygulanabilir. Yazar haftalık grafik için MACD (5,35,5) önerir (p138). Forex, kripto ve vadeli işlemlerde çalışır; hacim gerekmez. Kitap MACD'nin aşırı alım-satımda zayıf olduğunu vurgular (p138).",
+    "varyantlar": [
+      "MACD (5,35,5) daha hassas, haftalık grafik için (p138).",
+      "Daha az hassas: uzun EMA'lar (p138).",
+      "Sıfır çizgisi geçişi ile trend onayı (p129)."
+    ],
+    "anahtar_kelimeler": ["macd", "sinyal-cizgisi", "sifir-gecis", "momentum", "filtre", "12-26-9", "boxer"]
+  },
+  {
+    "kart_id": "swing__stokastik-asiri-satim-donus__boxer",
+    "ad": "Stokastik Aşırı Satım Dönüşü (14,3,3)",
+    "stil": "swing",
+    "kaynak": {"pdf": "Kazançlı_Günlük_ve_Swing_Trading_-_Harry_Boxer_171_sayfa.pdf", "sayfalar": [107, 108, 110, 112, 114, 116, 117, 119, 120, 121]},
+    "ozet": "Stokastik osilatör (14,3,3) 20'nin altına inip yeniden yukarı çıktığında (aşırı satımdan dönüş) ve %K sinyal çizgisini yukarı keserse long; 50 üstü teyit gelirse güçlenir. Yükseliş trendinde yalnızca aşırı satım okumaları dikkate alınır, aşırı alım göz ardı edilir.",
+    "kategori": "momentum",
+    "piyasa_rejimi": "yatay",
+    "orijinal_piyasa": "hisse",
+    "zaman_dilimi": {"islem": "1G", "ust_filtre": "büyük trend yönü (günlük)"},
+    "gostergeler": [
+      {"ad": "Stokastik (tam)", "parametreler": {"periyot": 14, "yavaslama": 3, "D_SMA": 3}},
+      {"ad": "Stokastik (alternatif)", "parametreler": {"periyot": 20, "yavaslama": 5, "D_SMA": 5}},
+      {"ad": "Stokastik (duyarlı)", "parametreler": {"periyot": 10, "yavaslama": 3, "D_SMA": 3}}
+    ],
+    "long_giris": [
+      "Yükseliş trendinde stokastik 20'nin altına iner, sonra 20'nin üzerine çıkar (başarılı destek testi sinyali, p116, p121).",
+      "%K, %D'yi yukarı keser (sinyal hattı kesişimi; en erken giriş, p116).",
+      "Teyit: stokastik 50'nin üzerine çıkar ve/veya fiyat direnci kırar (p116, p119)."
+    ],
+    "short_giris": [
+      "Düşüş trendinde stokastik 80'in üstüne çıkar, sonra 80'in altına kırılır (direnç başarısızlığı, p121).",
+      "Teyit: stokastik 50'nin altına iner ve/veya destek kırılır (p116)."
+    ],
+    "stop_loss": "Kitapta sayısal stop yok; çevreleyen destek/direnç ihlali (kart: swing__ihlal-stop-tamponu__boxer) önerilir (p117).",
+    "kar_al": "Kitapta sabit kâr al yok. Karşıt aşırı bölgeye ulaşma (long için 80 üstü) çıkış olarak yorumlanabilir (p112, kesin değil).",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Büyük trend yönünde işlem: yükseliş trendinde yalnızca aşırı satım, düşüş trendinde yalnızca aşırı alım (p112, p114).",
+      "Destek/direnç yakınında daha güvenilir (p121).",
+      "Duyarlılık ayarı: kısa lookback daha duyarlı, uzun lookback daha az sinyal (p114)."
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {"puan": 2, "gerekce": "Eşikler (20/50/80) ve parametreler net; trend yönü tespiti, 'başarılı destek testi' ve 'kurulum' tanımları yoruma açık, çıkış yok."},
+    "belirsizlikler": [
+      "Büyük trend yönünü belirleme yöntemi kitapta yok (MA mı, trend çizgisi mi?).",
+      "'Başarılı destek testi' ve 'kurulum' tanımı görsel örneklere dayanıyor (NTAP, MOT, p119-120).",
+      "Kâr al ve stop kuralı yok.",
+      "Hangi ayarın seçileceği duruma göre (p114, p121)."
+    ],
+    "uyumluluk_notu": "1L3A için: 14,3,3 standart ayarı mekanik; kripto, forex ve hisse için kodlanabilir. Hacim gerekmez.",
+    "varyantlar": [
+      "Alternatif ayar (20,5,5), daha az sinyal (YHOO örneği, p112).",
+      "Duyarlı ayar (10,3,3), aşırı alım sinyali için (AZO, p114).",
+      "Boğa/ayı kurulumu: fiyat-stokastik farklılığı (p119-120)."
+    ],
+    "anahtar_kelimeler": ["stokastik", "asiri-alim", "asiri-satim", "20-80", "50-merkez", "momentum", "farklilik", "boxer"]
+  },
+  {
+    "kart_id": "swing__bollinger-w-m-formasyon__boxer",
+    "ad": "Bollinger Bantları W Dip (Long) ve M Tepe (Short)",
+    "stil": "swing",
+    "kaynak": {"pdf": "Kazançlı_Günlük_ve_Swing_Trading_-_Harry_Boxer_171_sayfa.pdf", "sayfalar": [139, 140, 142, 143, 145, 146, 148, 151, 152, 153]},
+    "ozet": "Bollinger Bantları (20 SMA, ±2 standart sapma). Long W dip: ilk dip alt bandın altında olabilir; orta banda sıçrama; ikinci dip birinciden düşük ama alt bandın üstünde; sonra güçlü hareket ve direncin (sıçramanın tepesi) kapanışla kırılımı. Short M tepe ayna: üst bandın üstünde ilk tepe; ikinci tepe üst banda ulaşamaz; destek kırılımı ile short.",
+    "kategori": "formasyon",
+    "piyasa_rejimi": "herhangi",
+    "orijinal_piyasa": "hisse",
+    "zaman_dilimi": {"islem": "1G", "ust_filtre": null},
+    "gostergeler": [
+      {"ad": "Bollinger Bantları", "parametreler": {"N": 20, "K": 2, "ortalama": "SMA"}}
+    ],
+    "long_giris": [
+      "W dip 1. adım: fiyat alt bandın altına iner (genelde kapanışla).",
+      "W dip 2. adım: orta banda doğru sıçrama.",
+      "W dip 3. adım: yeni dip, ilk dipten düşük ama alt bandın üstünde kalır.",
+      "W dip 4. adım: ikinci diptan güçlü hareket ve sıçramanın tepesinin üzerinde kapanış, yükselen hacimle (p142-143)."
+    ],
+    "short_giris": [
+      "M tepe 1. adım: fiyat üst bandın üstünde tepe yapar.",
+      "M tepe 2. adım: orta banda geri çekilme.",
+      "M tepe 3. adım: fiyat önceki zirveyi aşar ama üst banda ulaşamaz (onaylanmama).",
+      "M tepe 4. adım: destek kırılımı veya düşüş göstergesi sinyali ile short (p145-146)."
+    ],
+    "stop_loss": "Kitapta net değil. Varsayım: W dip için ikinci dibin altı; M tepe için ikinci tepenin üstü. Genel ilke: formasyon dip seviyelerinin altında sıkı stop (p28).",
+    "kar_al": "Kitapta bant hedefi yok; üst bant etiketi tek başına satış sinyali değil (kural 6, p151).",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Üst/alt bant etiketleri tek başına sinyal değil; diğer göstergelerle doğrulama (p151-152).",
+      "Bantlar kapanış fiyatına göre hesaplanır, sinyaller kapanışa dayanmalı (p142-143).",
+      "Bant genişliği sıkışması ve trend değişimi için ek bilgi (p152-153)."
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {"puan": 2, "gerekce": "Dört adım sıralı olarak tanımlanmış ve bant hesabı mekanik; ancak 'alt banda yakın', 'daha az zayıflık' ve 'güçlü hareket' sayısal değil."},
+    "belirsizlikler": [
+      "'Alt banda yakın/üstünde' ve 'güçlü hareket' için eşik yok.",
+      "'Daha az zayıflık' tanımı görsel (p142).",
+      "M tepe için baş-omuz ve baklava varyantları tanımsız (p145).",
+      "Stop ve kâr al kuralı yok (stop varsayımla belirtildi)."
+    ],
+    "uyumluluk_notu": "1L3A için: bant hesabı mekanik; 4 adımlı yapı pivot tabanlı kaba kodlanabilir. Kitap her uzunluktaki çubukta uygulanabilir der (p153, kural 21); 5m'de de denenebilir. Hacim gerekebilir; forex/kripto'da bant çalışır.",
+    "varyantlar": [
+      "Bollinger %b ve bant genişliği (sıkışma) (p152-153).",
+      "Yürüyen bant: üst banda sürekli etiket, trend devamı (p148).",
+      "Ayar: 50 SMA için 2,1; 10 SMA için 1,9 (p140)."
+    ],
+    "anahtar_kelimeler": ["bollinger", "w-dip", "m-tepe", "formasyon", "alt-bant", "ust-bant", "sma20", "kapanis", "boxer"]
+  },
+  {
+    "kart_id": "swing__obv-fiyat-farkliligi__boxer",
+    "ad": "OBV Fiyat Farklılığı ve Trend Onayı",
+    "stil": "swing",
+    "kaynak": {"pdf": "Kazançlı_Günlük_ve_Swing_Trading_-_Harry_Boxer_171_sayfa.pdf", "sayfalar": [96, 97, 98, 99, 100, 101, 103, 104, 105]},
+    "ozet": "OBV (kümülatif hacim): fiyat yeni dip yaparken OBV daha yüksek dip yapıyorsa yükseliş farklılığı (long); fiyat yeni zirve yaparken OBV daha düşük zirve yapıyorsa düşüş farklılığı (short). OBV kendi direncini fiyattan önce kırarsa long öncü sinyal. OBV trendi fiyat trendiyle uyumluysa trend teyidi.",
+    "kategori": "momentum",
+    "piyasa_rejimi": "herhangi",
+    "orijinal_piyasa": "hisse",
+    "zaman_dilimi": {"islem": "1G", "ust_filtre": null},
+    "gostergeler": [
+      {"ad": "OBV (On-Balance Volume)", "parametreler": {}}
+    ],
+    "long_giris": [
+      "Yükseliş farklılığı: fiyat daha düşük dip yapar, OBV daha yüksek dip yapar.",
+      "OBV kendi direncini kırar; fiyat henüz kırmadıysa öncü long (SBUX örneği, p99).",
+      "Fiyat direncini (önceki zirve) kapanışla aşarsa teyit."
+    ],
+    "short_giris": [
+      "Düşüş farklılığı: fiyat daha yüksek zirve yapar, OBV daha düşük zirve yapar.",
+      "OBV destek kırılımı (MDT, VLO örnekleri p100-101) ile short teyidi."
+    ],
+    "stop_loss": null,
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Trend onayı: OBV trendi fiyat trendiyle aynı yönde (BBY, AZO örnekleri, p103-104).",
+      "OBV kapanış fiyatına dayanır, farklılık aranırken kapanışlar esas alınır (p98)."
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {"puan": 2, "gerekce": "OBV hesabı tanımlı, kırılım ve farklılık ölçülebilir; ancak farklılık için pivot/pencere kriteri ve stop/kâr al yok."},
+    "belirsizlikler": [
+      "Farklılık için pivot ve zaman penceresi yok (kaç mum?).",
+      "OBV'nin fiyattan 'öncü' olduğu iddiası (Granville teorisi) istatistiksel olarak doğrulanmamış (p98).",
+      "CMS ve BOP (Worden tescilli) formülleri kitapta verilmemiş; kodlanamaz.",
+      "Stop ve kâr al kuralı yok."
+    ],
+    "uyumluluk_notu": "1L3A için: OBV hesaplanabilir; hacim verisi gerekir. Forex'te merkezi hacim yok (tick hacim proxy), kripto'da hacim var; hisse ve vadeli uygun.",
+    "varyantlar": [
+      "MoneyStream (CMS): kapanış yerine OHLC kullanır, fiyat ve gösterge regresyon eğimi karşılaştırması (p94-95); formül yok.",
+      "BOP: sıfır üstü baskın alım, altı baskın satış; fiyatla çelişebilir (p92-93); formül yok.",
+      "CMS ve BOP birlikte (p94)."
+    ],
+    "anahtar_kelimeler": ["obv", "hacim", "farklilik", "dengede-hacim", "kumulatif", "trend-onayi", "cms", "bop", "boxer"]
+  },
+  {
+    "kart_id": "swing__trend-cizgisi-yeniden-test__boxer",
+    "ad": "Trend Çizgisi Yeniden Testinde Giriş",
+    "stil": "swing",
+    "kaynak": {"pdf": "Kazançlı_Günlük_ve_Swing_Trading_-_Harry_Boxer_171_sayfa.pdf", "sayfalar": [42, 43, 44, 54, 57, 166, 167]},
+    "ozet": "Yükseliş trend çizgisi en az iki dipten çizilir. Fiyat trend çizgisine geri çekilir, çizgi civarında tutunup yeniden yükselmeye başlarsa long açılır. Düşüş trendinde ayna: çizgiye yükselen fiyat çizgide reddedilir ve short açılır.",
+    "kategori": "trend_takip",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "hisse",
+    "zaman_dilimi": {"islem": "1G", "ust_filtre": null},
+    "gostergeler": [
+      {"ad": "Trend çizgisi", "parametreler": {"min_nokta": 2, "not": "çok noktalı çizgi daha geçerli (p42)"}}
+    ],
+    "long_giris": [
+      "Yükseliş trend çizgisi en az iki dip ile çizilir.",
+      "Fiyat trend çizgisine doğru geri çekilir ve çizgi civarında tutunur.",
+      "Fiyat yeniden yükselmeye başlar; long bu toparlanmada, çizginin birkaç sent üstünde açılır (p167)."
+    ],
+    "short_giris": [
+      "Düşüş trend çizgisi çizilir; fiyat çizgiye yükselir ve çizgide reddedilip geri döner; short bu noktada açılır (p167)."
+    ],
+    "stop_loss": "Trend çizgisinin birkaç sent altı (p167). Genel: çizgi ihlali.",
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Piyasa ve endüstri grubu aynı yönde (p163 kriterleri 1-2).",
+      "Trend çizgisi uzun ve çok noktalı olmalı (p42).",
+      "Çizgi kırılımı hacimle olmalı (p42)."
+    ],
+    "pozisyon_risk": "Kitap: trend belirsizken işlem yapma; tüm parayı tek seferde taahhüt etme (p167).",
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {"puan": 2, "gerekce": "Yeniden test yapısı tanımlı; ancak çizgi çizim kuralı yazara göre içgüdüsel ve 'birkaç sent' yüzde/ATR olarak verilmemiş."},
+    "belirsizlikler": [
+      "Trend çizgisi çizim kuralı (hangi dipler, kaç nokta) 'içgüdüsel' denilmiş (p29, p57).",
+      "Yeniden testte 'toparlanma' onayı tanımsız.",
+      "Stop mesafesi 'birkaç sent': yüzde veya ATR yok."
+    ],
+    "uyumluluk_notu": "1L3A için: trend çizgisi pivot tabanlı otomatik çizilebilir. Kripto ve forex'te uygun. Kitap 1dk'da da kullanır (p57, p79).",
+    "varyantlar": [
+      "Yatay kanal sınırlarında destek/direnç yeniden testi (p54-55).",
+      "Gün içi 1dk trend çizgisi yeniden testi (p57).",
+      "Önceki direncin desteğe dönüşmesi (p29)."
+    ],
+    "anahtar_kelimeler": ["trend-cizgisi", "yeniden-test", "geri-cekilme", "destek-direnc", "trend-takibi", "boxer"]
+  },
+  {
+    "kart_id": "swing__fibonacci-geri-cekilme-hedef__boxer",
+    "ad": "Fibonacci Geri Çekilme Seviyeleri (Destek ve Hedef)",
+    "stil": "swing",
+    "kaynak": {"pdf": "Kazançlı_Günlük_ve_Swing_Trading_-_Harry_Boxer_171_sayfa.pdf", "sayfalar": [67, 68, 69, 77, 78]},
+    "ozet": "Büyük bir hareketin iki uç noktası (zirve ve dip) arasındaki dikey mesafenin %38,2, %50 ve %61,8 seviyeleri, geri çekilmede destek ve hedef/çıkış seviyesi olarak kullanılır. Fiyat seviyeye gelip tepki verirse trendin devamı beklenir.",
+    "kategori": "destek_direnc",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "hisse",
+    "zaman_dilimi": {"islem": "1G", "ust_filtre": null},
+    "gostergeler": [
+      {"ad": "Fibonacci geri çekilme", "parametreler": {"seviyeler": [23.6, 38.2, 50, 61.8, 78.6]}}
+    ],
+    "long_giris": [
+      "Yükseliş hareketinin (dip-zirve) geri çekilmesi %38,2, %50 veya %61,8 seviyesine ulaşır ve fiyat bu seviyede tepki verir (p68).",
+      "Teyit: seviye ile diğer teknik seviyelerin (MA, trend çizgisi, önceki zirve/dip) çakışması (p78)."
+    ],
+    "short_giris": [
+      "Düşüş hareketinde ayna uygulama (varsayım; kitapta açık tarif yok)."
+    ],
+    "stop_loss": "Varsayım: seviyenin altı (ör. %61,8 altı) veya hareket dibi; kitapta açık değil.",
+    "kar_al": "Hedef için Fibonacci uzantısı kullanılır (p78); uzantı oranları kitapta verilmemiş.",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Diğer teknik seviyelerle çakışma doğruluğu artırır (p78).",
+      "Kitap Fibonacci'nin rasyonel temeli olmadığını, ancak kalabalık kullanımın kendini gerçekleştirdiğini söyler (p68-69)."
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {"puan": 1, "gerekce": "Oranlar net; ancak zirve/dip çiftinin seçimi yoruma açık ve kitap bu aracı doğrulama aracı olarak konumluyor."},
+    "belirsizlikler": [
+      "Hangi zirve/dip çiftinin seçileceği (kaç mum, hangi zaman dilimi) tanımsız.",
+      "78,6 seviyesinin Fibonacci oranı olmadığını yazar belirtir (p68).",
+      "Uzantı oranları yok.",
+      "Kitap rasyonel temel vermiyor (p68-69)."
+    ],
+    "uyumluluk_notu": "1L3A için: oranlar kodlanabilir; uç nokta seçimi pivot algoritması gerektirir. Kripto ve forex'te yaygın kullanılır; etkisi test edilmeli.",
+    "varyantlar": [
+      "Ölçülen hareket ile birlikte kullanım (kart: swing__olculen-hareket-hedef__boxer).",
+      "Elliott uzantıları (kavramsal, p70-75)."
+    ],
+    "anahtar_kelimeler": ["fibonacci", "geri-cekilme", "38-2", "50", "61-8", "hedef", "uzanti", "boxer"]
+  }
+]

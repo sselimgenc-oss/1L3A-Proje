@@ -1,0 +1,322 @@
+[
+  {
+    "kart_id": "scalp__kopus__uko",
+    "ad": "Kopuş (Breakout) Scalping",
+    "stil": "scalp",
+    "kaynak": {
+      "pdf": "Scalping_Stratejileri_101_-_Usiere_Uko_80_sayfa.pdf",
+      "sayfalar": [36, 37]
+    },
+    "ozet": "Fiyat, belirlenen bir destek/direnç seviyesinin veya işlem aralığının dışına çıktığında, kopuşun güçlü bir mum kapanışıyla teyit edilmesi beklenerek (veya kopuş seviyesine geri çekilmede) işlem açılır.",
+    "kategori": "kirilim",
+    "piyasa_rejimi": "volatil",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {"islem": "belirtilmemiş", "ust_filtre": null},
+    "gostergeler": [
+      {"ad": "Hacim", "parametreler": {}},
+      {"ad": "Bollinger", "parametreler": {}},
+      {"ad": "ATR", "parametreler": {}}
+    ],
+    "long_giris": [
+      "Fiyat önemli bir direnç seviyesinin üzerinde kapanır (kopuş; 'önemli' tanımsız).",
+      "Kopuş, güçlü bir mum kapanışıyla veya kopuş noktasının ötesinde önemli bir fiyat hareketiyle teyit edilir (eşik tanımsız).",
+      "Alternatif giriş: fiyat kopuş seviyesine geri çekilip seviyeden tepki verdiğinde."
+    ],
+    "short_giris": [
+      "Fiyat önemli bir destek seviyesinin altında kapanır (kopuş).",
+      "Kopuş, güçlü bir mum kapanışıyla veya kopuş noktasının ötesinde önemli bir fiyat hareketiyle teyit edilir.",
+      "Alternatif giriş: fiyat kopuş seviyesine geri çekilip seviyeden reddedildiğinde."
+    ],
+    "stop_loss": "Kopuş başarısız olursa, long için desteğin altına, short için direncin üstüne sıkı stop (mesafe sayısal olarak verilmemiş).",
+    "kar_al": "Kopuş hareketinin büyüklüğüne ve risk-ödül oranına göre belirlenir (oran sayısal olarak bu bölümde verilmemiş; kitabın genel 1:2 önerisi s.50'de geçer).",
+    "iz_suren_stop": "Kitapta güçlü trendlerde takip eden stop önerilir (kural sayısal değil).",
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Artan işlem hacmi ve momentum ile kopuşun geçerliliği teyit edilir (eşik yok).",
+      "Volatilite göstergesi (Bollinger veya ATR) ile volatilite artışı aranır (eşik yok)."
+    ],
+    "pozisyon_risk": "Kitapta genel risk kuralları (işlem başına risk, pozisyon boyutu) var ama bu stratejiye özgü sayı yok.",
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Yön ve giriş tipi (kapanış teyidi, geri çekilme) tanımlı. 'Önemli' seviye, 'güçlü' mum ve kopuş büyüklüğü tanımsız; bunlar varsayımla kurala dökülür."
+    },
+    "belirsizlikler": [
+      "Destek/direnç seviyesinin nasıl belirleneceği (pivot, swing, yuvarlak sayı) kitapta tanımlı değil.",
+      "'Güçlü mum kapanışı' ve 'önemli fiyat hareketi' için eşik yok.",
+      "Kâr hedefi ve stop mesafeleri sayısal değil.",
+      "Hacim/volatilite filtreleri için eşik yok."
+    ],
+    "uyumluluk_notu": "Kopuş seviyeleri öznel olduğundan kodlama için seviye tanımı varsayımı gerekir. Hacim onayı için hacim verisi gerekir; forex veya CFD'de hacim verisi broker'a göre değişebilir.",
+    "varyantlar": [
+      "Kopuş + geri çekilme girişi (aynı kartta)",
+      "Kopuş + hacim onayı (hacim kartıyla birleşebilir)"
+    ],
+    "anahtar_kelimeler": ["kopus", "breakout", "direnc", "destek", "mum-kapanisi", "geri-cekilme", "volatilite", "hacim"]
+  },
+  {
+    "kart_id": "scalp__aralik-sinirli__uko",
+    "ad": "Aralık Sınırlı (Range) Scalping",
+    "stil": "scalp",
+    "kaynak": {
+      "pdf": "Scalping_Stratejileri_101_-_Usiere_Uko_80_sayfa.pdf",
+      "sayfalar": [38, 39]
+    },
+    "ozet": "Yatay bir işlem aralığında fiyat destek ve direnç arasında tekrar tekrar sıçradığında, sınırda geri dönüş onayı (mum deseni, fiyat reddi veya aşırı alım/satım) ile işlem açılır; hedef karşı sınır civarında olur.",
+    "kategori": "destek_direnc",
+    "piyasa_rejimi": "yatay",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {"islem": "belirtilmemiş", "ust_filtre": "Kitap çoklu zaman dilimi analizini önerir (seviye doğrulama)"},
+    "gostergeler": [
+      {"ad": "RSI", "parametreler": {}},
+      {"ad": "Stokastik", "parametreler": {}}
+    ],
+    "long_giris": [
+      "Fiyat aralığın destek seviyesine iner ve buradan sıçrar (geri dönüş).",
+      "Onay: bir boğa mum deseni, fiyat reddi veya aşırı satım koşulu (osilatör eşiği tanımsız)."
+    ],
+    "short_giris": [
+      "Fiyat aralığın direnç seviyesine çıkar ve buradan geri döner.",
+      "Onay: bir ayı mum deseni, fiyat reddi veya aşırı alım koşulu (osilatör eşiği tanımsız)."
+    ],
+    "stop_loss": "Fiyat aralığın dışına çıkarsa, destek seviyesinin altına (short için direncin üstüne) sıkı stop.",
+    "kar_al": "Sıçrama büyüklüğüne göre belirlenir; hedef karşı sınır civarıdır (sayısal değil).",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Yatay piyasa koşulu: belirgin trend olmaması (ölçü tanımsız).",
+      "Birden fazla zaman dilimiyle seviyelerin doğrulanması (kitap önerir)."
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Giriş bölgesi (aralık sınırı) ve onay türleri tanımlı; 'yatay piyasa', seviye ve osilatör eşikleri tanımsız. Varsayımla kurala dökülebilir."
+    },
+    "belirsizlikler": [
+      "Yatay piyasa tanımı yok (eğim, ADX, aralık genişliği gibi bir ölçü yok).",
+      "Destek/direnç seviyesinin belirlenme yöntemi yok.",
+      "Osilatör aşırı alım/satım eşikleri yok (RSI 70/30 gibi kitap genel değer verir ama bu stratejiye bağlanmamış).",
+      "Stop ve hedef sayısal değil."
+    ],
+    "uyumluluk_notu": "Yatay piyasa ve seviye tespiti varsayım gerektirir. 1L3A'da pivot/swing seviyeleri ile kodlanabilir. Forex, endeks, hisse, kripto ve emtiada uygulanabilir; forex'e özgü bir unsuru yok.",
+    "varyantlar": [
+      "Kopuş ve geri dönüş girişi (kitapta ayrı bir giriş türü olarak geçer)"
+    ],
+    "anahtar_kelimeler": ["aralik", "range", "destek", "direnc", "geri-donus", "mum-deseni", "rsi", "stokastik", "yatay-piyasa"]
+  },
+  {
+    "kart_id": "scalp__momentum__uko",
+    "ad": "Momentum Scalping (kısa vadeli biniş)",
+    "stil": "scalp",
+    "kaynak": {
+      "pdf": "Scalping_Stratejileri_101_-_Usiere_Uko_80_sayfa.pdf",
+      "sayfalar": [34, 35]
+    },
+    "ozet": "Piyasa momentumunun (haber, hacim, kopuş veya trend dönüşü ile oluşan hızlı fiyat hareketi) yönünde kısa süreli işlem açılır; kâr hedefi momentumun yoğunluğuna göre alınır ve zarar durdurma sıkı tutulur.",
+    "kategori": "momentum",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {"islem": "belirtilmemiş", "ust_filtre": null},
+    "gostergeler": [],
+    "long_giris": [],
+    "short_giris": [],
+    "stop_loss": "Sıkı zarar durdurma (mesafe sayısal olarak verilmemiş); momentum tersine dönerse çıkış.",
+    "kar_al": "Momentumun yoğunluğuna ve zaman dilimine göre belirli kâr hedefi (sayısal değil); hızlı kâr alımı önerilir.",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Teknik analiz, grafik desenleri ve hacim ile momentum teyidi (kural sayısal değil).",
+      "Haber ve katalizör takibi (kural sayısal değil)."
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 0,
+      "gerekce": "Momentum tanımı ve giriş tetikleyicisi kitapta ölçülebilir değildir; 'kısa vadeli fiyat hareketleri için potansiyel fırsatları belirlemek' genel bir ifadedir. Gösterge ve eşik seçmek uydurma olur."
+    },
+    "belirsizlikler": [
+      "Momentumun ölçüsü (gösterge, eşik, zaman penceresi) yok.",
+      "Giriş tetikleyicisi yok (kitap 'kopuş, geri çekilme, fiyat artışı' gibi genel durumlar sayar).",
+      "Kâr ve stop mesafeleri sayısal değil."
+    ],
+    "uyumluluk_notu": "Kodlanabilir hale getirmek için momentum ölçüsü ve eşik seçilmesi gerekir; bu kitabın kuralı değil, eklenen varsayım olur.",
+    "varyantlar": [
+      "Geri çekilme girişi (kitap aynı bölümde sayar)"
+    ],
+    "anahtar_kelimeler": ["momentum", "biniş", "hizli-hareket", "kar-hedefi", "genel-tavsiye"]
+  },
+  {
+    "kart_id": "scalp__coklu-zaman-dilimi__uko",
+    "ad": "Çoklu Zaman Dilimiyle Scalping",
+    "stil": "scalp",
+    "kaynak": {
+      "pdf": "Scalping_Stratejileri_101_-_Usiere_Uko_80_sayfa.pdf",
+      "sayfalar": [41, 42]
+    },
+    "ozet": "Üst zaman dilimlerinde (4 saat, günlük veya 15 dk-1 saat) trend ve önemli seviyeler belirlenir; giriş zamanlaması alt zaman dilimlerinde (1-5 dk) yapılır ve işlem üst zaman dilimindeki trend yönünde tercih edilir.",
+    "kategori": "trend_takip",
+    "piyasa_rejimi": "herhangi",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {"islem": "1 dk, 3 dk veya 5 dk", "ust_filtre": "15 dk, 30 dk veya 1 saat (destekleyici); 4 saat veya günlük (üst)"},
+    "gostergeler": [],
+    "long_giris": [],
+    "short_giris": [],
+    "stop_loss": "Kitapta stop, kısa zaman dilimindeki momentumla ve uzun zaman dilimindeki destek/dirençle ilişkilendirilir (sayısal değil).",
+    "kar_al": "Kısa zaman dilimindeki momentuma göre belirli kâr hedefleri (sayısal değil); üst zaman diliminde takip eden stop.",
+    "iz_suren_stop": "Üst zaman dilimindeki temel destek/dirençlere göre takip eden stop (kural sayısal değil).",
+    "zaman_cikisi": "Kâr hedefine ulaşılamaz ve fiyat hareketi durursa belirli bir süre sonra çıkış (süre belirtilmemiş).",
+    "filtreler": [
+      "Üst zaman dilimindeki trend yönüyle hizalı işlem (trend ölçüsü tanımsız).",
+      "Üst zaman diliminde destek/direnç seviyelerine tepki (eşik yok)."
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 0,
+      "gerekce": "Zaman dilimi kombinasyonları verilmiş ama trend ölçüsü, seviye tanımı ve giriş tetikleyicisi yoktur. Kitap genel bir çerçeve sunar."
+    },
+    "belirsizlikler": [
+      "Trend nasıl ölçülür (eğim, yapı, ortalama) tanımlı değil.",
+      "Giriş tetikleyicisi (alt zaman dilimde hangi mum/gösterge) yok.",
+      "Zaman tabanlı çıkış süresi yok."
+    ],
+    "uyumluluk_notu": "1L3A için üst filtre kullanımı kodlanabilir, ancak trend ve tetikleyici tanımı eklenmeden çalışan bir kural üretilemez. Forex'e özgü değildir.",
+    "varyantlar": [
+      "Kısa zaman dilimi: 1 dk, 3 dk veya 5 dk (kitapta üçü de geçer)"
+    ],
+    "anahtar_kelimeler": ["coklu-zaman-dilimi", "mtf", "trend-hizasi", "ust-filtre", "trailing-stop"]
+  },
+  {
+    "kart_id": "scalp__hacim-onayi__uko",
+    "ad": "Hacim Onayı ile Scalping",
+    "stil": "scalp",
+    "kaynak": {
+      "pdf": "Scalping_Stratejileri_101_-_Usiere_Uko_80_sayfa.pdf",
+      "sayfalar": [43, 44]
+    },
+    "ozet": "Fiyat hareketi (kopuş, mum deseni, trend dönüşü) ortalama işlem hacmine göre ani hacim artışıyla teyit edildiğinde işlem açılır; fiyat ile hacmin uyumsuzluğu (fiyat yükselirken hacim düşmesi gibi) uyarı olarak kullanılır.",
+    "kategori": "diger",
+    "piyasa_rejimi": "herhangi",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {"islem": "belirtilmemiş", "ust_filtre": null},
+    "gostergeler": [
+      {"ad": "Hacim", "parametreler": {}},
+      {"ad": "VWAP", "parametreler": {}},
+      {"ad": "OBV", "parametreler": {}}
+    ],
+    "long_giris": [
+      "Fiyat yükselirken ortalama hacme göre ani ve önemli bir hacim artışı görülür (eşik yok).",
+      "Hacim artışı önemli bir direnç kopuşuna eşlik eder (kopuş tanımı için bkz. kopuş kartı)."
+    ],
+    "short_giris": [
+      "Fiyat düşerken ortalama hacme göre ani ve önemli bir hacim artışı görülür (eşik yok).",
+      "Hacim artışı önemli bir destek kırılımına eşlik eder."
+    ],
+    "stop_loss": "Yüksek hacimli birikim alanının altına (long için) stop (sayısal değil).",
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Hacim sapması: fiyat ve hacim zıt yönde hareket ederse uyarı (eşik yok).",
+      "VWAP, OBV, Chaikin Para Akışı veya A/D hattı ile teyit (kural sayısal değil)."
+    ],
+    "pozisyon_risk": "Pozisyon büyüklüğü işlem hacmi ve likiditeye göre ayarlanır (sayısal değil).",
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Hacim karşılaştırma mantığı (ortalamaya göre artış) ve yön tanımlı; 'ani ve önemli' eşiği ve referans ortalama süresi tanımsız. Varsayımla kurala dökülebilir."
+    },
+    "belirsizlikler": [
+      "'Ani ve önemli' artış için eşik yok (ör. ortalamanın kaç katı).",
+      "Hacim ortalamasının penceresi (kaç mum) yok.",
+      "Hacim verisinin kaynağı belirtilmemiş; forex/CFD'de hacim verisi broker'a göre değişebilir.",
+      "Hacim tek başına giriş tetikleyicisi değil; fiyat kuralı kopuş kartından alınmalı."
+    ],
+    "uyumluluk_notu": "Hacim verisi gerektirir; forex/CFD'de hacim verisinin kalitesi kontrol edilmeli. Kripto ve hisse için daha doğrudan uygulanabilir. 1L3A'da hacim filtresi olarak kullanılabilir.",
+    "varyantlar": [
+      "Hacim-fiyat uyumsuzluğu (zayıflama uyarısı)",
+      "Hacim kümeleri ve hacim profili (kitapta destek/direnç tespiti için)"
+    ],
+    "anahtar_kelimeler": ["hacim", "volume", "vwap", "obv", "cmf", "hacim-sapmasi", "hacim-kumesi", "kopus-onay"]
+  },
+  {
+    "kart_id": "scalp__haber-tabanli__uko",
+    "ad": "Haber Tabanlı Scalping",
+    "stil": "scalp",
+    "kaynak": {
+      "pdf": "Scalping_Stratejileri_101_-_Usiere_Uko_80_sayfa.pdf",
+      "sayfalar": [45, 46]
+    },
+    "ozet": "Ekonomik takvimdeki önemli haber (faiz kararı, istihdam, GSYİH, merkez bankası duyurusu, şirket haberi) öncesinde hazırlık yapılır; haber sonrası ilk fiyat tepkisi ve oluşan kopuş veya geri çekilme izlenerek kısa vadeli işlem aranır.",
+    "kategori": "diger",
+    "piyasa_rejimi": "volatil",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {"islem": "belirtilmemiş", "ust_filtre": null},
+    "gostergeler": [],
+    "long_giris": [],
+    "short_giris": [],
+    "stop_loss": "Volatiliteye göre geniş stop; takip eden stop (sayısal değil).",
+    "kar_al": "Beklenen oynaklığa uyumlu sıkı kâr hedefleri; kademeli çıkış (sayısal değil).",
+    "iz_suren_stop": "Fiyat lehine ilerledikçe takip eden stop (kural sayısal değil).",
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Ekonomik takvim: yüksek etkili haber saatleri (zamanlama kuralı tanımsız).",
+      "Haber sonrası ilk tepkiye uyum (kopuş, geri çekilme veya trend devamı; eşik yok).",
+      "Kayma riski: yüksek etkili haberlerde limit emir veya gelişmiş emir türü kullanımı."
+    ],
+    "pozisyon_risk": "Beklenen oynaklık ve belirli haber riskine göre pozisyon küçültülür (sayısal değil).",
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 0,
+      "gerekce": "Haber türleri ve genel tepki yaklaşımı verilmiş, ancak giriş zamanı, tepki ölçüsü, stop ve hedef sayısal değildir. Kitabın anlatımı genel tavsiye düzeyinde kalır."
+    },
+    "belirsizlikler": [
+      "Haber önce mi sonra mı işlem açılacağı (zamanlama) tanımlı değil.",
+      "'İlk fiyat tepkisi' için ölçü yok.",
+      "Haber etki büyüklüğü için eşik yok.",
+      "Stop, hedef ve pozisyon boyutu sayısal değil."
+    ],
+    "uyumluluk_notu": "Ekonomik takvim verisi gerektirir (dış kaynak). Haber zamanlaması ve tepki kuralı eklenmeden kodlanamaz. 1L3A için haber filtresi (işlem yapılmayacak zaman aralığı) olarak daha uygun olabilir.",
+    "varyantlar": [
+      "Haber öncesi kırılım (volatilite kırılımı) ve haber sonrası geri çekilme (kitapta iki yaklaşım)"
+    ],
+    "anahtar_kelimeler": ["haber", "ekonomik-takvim", "volatilite", "kayma", "limit-emir", "genel-tavsiye"]
+  },
+  {
+    "kart_id": "scalp__solma-fading__uko",
+    "ad": "Solma (Fading) Scalping",
+    "stil": "scalp",
+    "kaynak": {
+      "pdf": "Scalping_Stratejileri_101_-_Usiere_Uko_80_sayfa.pdf",
+      "sayfalar": [24, 25]
+    },
+    "ozet": "Hakim trendin tersine, uzun süreli fiyat hareketinden sonra oluşan kısa vadeli düzeltmeden kâr elde etmek için işlem açılır.",
+    "kategori": "ortalamaya_donus",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {"islem": "belirtilmemiş", "ust_filtre": null},
+    "gostergeler": [],
+    "long_giris": [],
+    "short_giris": [],
+    "stop_loss": null,
+    "kar_al": "Kısa vadeli düzeltmenin kârı (sayısal değil).",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 0,
+      "gerekce": "'Uzun süreli hareket' ve 'kısa vadeli düzeltme' tanımsız; giriş tetikleyicisi ve çıkış kuralları yok. Kitap stratejiyi yalnızca adıyla ve tanımıyla anlatır."
+    },
+    "belirsizlikler": [
+      "Uzun süreli hareketin ve düzeltmenin ölçüsü yok.",
+      "Giriş tetikleyicisi, stop ve hedef yok.",
+      "Kitap bu yaklaşımı ayrıca örneklemez veya test etmez."
+    ],
+    "uyumluluk_notu": "Trend ve düzeltme tanımı eklenmeden kodlanamaz; varsayımla yeni bir kural üretmek kitaptan sapma olur. Karşı-trend nitelikte olduğu için trend filtresi gerekir.",
+    "varyantlar": [],
+    "anahtar_kelimeler": ["solma", "fading", "karsi-trend", "duzeltme", "genel-tavsiye"]
+  }
+]

@@ -1,0 +1,356 @@
+[
+  {
+    "kart_id": "swing__sahte-kopus-ters-yon__heikinashi",
+    "ad": "Sahte Kırılım (Fakeout) Sonrası Ters Yönde İşlem",
+    "stil": "swing",
+    "kaynak": {"pdf": "4_Saatlik_Grafik_Kullanarak_Swing_Trading_-_Heikin_Ashi_Trader_108_sayfa.pdf", "sayfalar": [39, 45, 46, 47, 48, 49]},
+    "ozet": "Konsolidasyon aralığının bir sınırı kısa süre kırılıp hızla aralığın içine geri dönerse, kırılımın ters yönünde işlem açılır; hedef aralığın karşı sınırıdır, stop sahte mumun ötesindedir.",
+    "kategori": "kirilim",
+    "piyasa_rejimi": "yatay",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {"islem": "4h", "ust_filtre": null},
+    "gostergeler": [{"ad": "Heikin Ashi", "parametreler": {}}, {"ad": "Destek/Direnç (aralık sınırları)", "parametreler": {"min_dokunus": 2}}],
+    "long_giris": [
+      "Yatay aralık tanımlı: alt sınır (destek) en az iki dokunuşla doğrulanmış",
+      "Fiyat aralık altına kısa süre kırılır (sahte çıkış); kapanış aralık dışındaysa bir sonraki mum beklenir",
+      "Fiyat 3-5 adet 4 saatlik mum içinde aralığa geri döner ve mum kapanışı aralık içinde olur",
+      "Ters yönde (yukarı) bir sonraki mumda uzun pozisyon açılır"
+    ],
+    "short_giris": [
+      "Yatay aralık tanımlı: üst sınır (direnç) en az iki dokunuşla doğrulanmış",
+      "Fiyat aralık üstüne kısa süre kırılır (sahte çıkış); kapanış aralık dışındaysa bir sonraki mum beklenir",
+      "Fiyat 3-5 adet 4 saatlik mum içinde aralığa geri döner ve mum kapanışı aralık içinde olur",
+      "Ters yönde (aşağı) bir sonraki mumda kısa pozisyon açılır"
+    ],
+    "stop_loss": "Uzun için sahte mumun en düşük seviyesinin biraz altı; kısa için sahte mumun en yüksek seviyesinin biraz üstü",
+    "kar_al": "Kısa vadeli hedef: aralığın karşı sınırı. Kitap ayrıca en az 1:2 risk/ödül oranı ister (örnek: 50 pip stop için hedef en az 100 pip)",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Ana trend yönünde gerçekleşen sahte kırılım tercih edilir (kitap: en iyi fırsat)",
+      "Haber/katalizör yoksa kırılımlara şüpheyle yaklaşılır; haber varsa kırılım gerçek olabilir",
+      "Kırılım mumundan hemen sonra doji veya dönen tepe (tereddüt) tercih edilir",
+      "Heikin Ashi renkleri trend yönünde (yükselişte beyaz, düşüşte siyah) teyit olarak kullanılabilir",
+      "Forex: hafta sonu öncesi (Cuma gecesi) açık pozisyonlar kapatılır (s.17)"
+    ],
+    "pozisyon_risk": "İşlem başına sermayenin en fazla %1'i (s.29, s.73)",
+    "iddia_edilen_performans": "Kitap örnekleri: 1:14 RRR (s.49), 1:5 RRR (s.51); 'sadece %50 isabet oranına ihtiyaç var' (s.52). Örnekler anekdot niteliğinde.",
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Kırılım, geri dönüş, kapanış teyidi ve hedef/stop kuralları büyük ölçüde sayısal; ancak aralık tanımı (2 dokunuş ötesi), stop tamponunun 'biraz' belirsizliği ve katalizör yokluğu yorum gerektiriyor."
+    },
+    "belirsizlikler": [
+      "Aralık ve sınır çizimi için dokunuş toleransı yok (metin 'en az iki dokunuş' diyor).",
+      "Stop tamponu 'biraz üstü/altı' ifadesiyle verilmiş; sayısal değer yok.",
+      "Katalizör/haber yokluğu niteliksel.",
+      "Kitap kuralların 'kesin olmadığını' ve varyasyonlar olduğunu belirtiyor (s.47).",
+      "Hedef tanımı metinde karışık: s.48 'kısa vadeli hedef aralık desteği, uzun vadeli hedef aralık direnci' diyor; kart kısa vadeli karşı sınır hedefini esas aldı.",
+      "Kırılımın 'aralığın dışında kapanış' tanımı tam bar kapanışı mı yoksa fitil mi belirsiz."
+    ],
+    "uyumluluk_notu": "Kitap 4 saatlik zaman dilimine göre; 1L3A için 5m/15m'ye uyarlanırsa 3-5 mum süresi de ölçeklenmeli. Forex, endeks, emtia ve döviz çiftlerinde test edilebilir; hisse açılış boşluklarında kırılım yanıltıcı olabilir. Hacim gerekmiyor.",
+    "varyantlar": [
+      "Üçgen sahte kırılımı: simetrik üçgende üst çizgiye tekrarlanan başarısız kırılımlarda kısa, hedef alt çizgi; son gerçek kırılım sonrası ters yönde (s.56-57).",
+      "Trend kanalı sahte kırılımı: ayrı kart (swing__trend-kanali-sahte-kirilim__heikinashi).",
+      "Ana trend karşıtı sahte kırılım: kitap bunu da bir fırsat olarak anıyor (s.45)."
+    ],
+    "anahtar_kelimeler": ["fakeout", "sahte-kopus", "aralik", "destek-direnc", "heikin-ashi", "doji", "ters-yon", "rrr-1-2"]
+  },
+  {
+    "kart_id": "swing__trend-kanali-sahte-kirilim__heikinashi",
+    "ad": "Trend Kanalı Sahte Kırılımı",
+    "stil": "swing",
+    "kaynak": {"pdf": "4_Saatlik_Grafik_Kullanarak_Swing_Trading_-_Heikin_Ashi_Trader_108_sayfa.pdf", "sayfalar": [58, 59, 60]},
+    "ozet": "Paralel trend kanalının bir kenarı kısa süre aşılır ama mum kapanışı tekrar kanal içine dönerse, kanalın karşı kenarına doğru ters yönde işlem açılır.",
+    "kategori": "kirilim",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {"islem": "4h", "ust_filtre": null},
+    "gostergeler": [{"ad": "Trend kanalı (paralel trend çizgileri)", "parametreler": {}}, {"ad": "Heikin Ashi", "parametreler": {}}],
+    "long_giris": [
+      "Fiyat paralel bir trend kanalı içinde hareket eder; alt kanal çizgisine temas vardır",
+      "Fiyat alt kanal çizgisinin altına kısa süre iner (sahte kırılım)",
+      "Oluşan 4 saatlik Heikin Ashi mumu (doji vb.) kapanışı tekrar kanal içine döner",
+      "Mum tamamlandıktan sonra bir sonraki mumun açılışında uzun pozisyon açılır"
+    ],
+    "short_giris": [
+      "Fiyat paralel bir trend kanalı içinde hareket eder; üst kanal çizgisine temas vardır",
+      "Fiyat üst kanal çizgisinin üstüne kısa süre çıkar (sahte kırılım)",
+      "Oluşan 4 saatlik mum (doji vb.) kapanışı tekrar kanal içine döner",
+      "Mum tamamlandıktan sonra bir sonraki mumun açılışında kısa pozisyon açılır"
+    ],
+    "stop_loss": "Kısa için sahte kırılım mumunun en yüksek seviyesinin üstü; uzun için sahte kırılım mumunun en düşük seviyesinin altı (kitap örneği: 0,6790 stop, 0,6733 giriş, 57 pip)",
+    "kar_al": "Kanalın karşı kenarı (uzun için üst çizgi, kısa için alt çizgi); örnekte yakın yuvarlak sayı (0,6600) bölgesi. Örnekte 1:2,33 RRR",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Kanalın en az birkaç temas noktasıyla doğrulanmış olması (kitap: trend kanalları)",
+      "Kırılımın kanal dışında değil, mumun kapanışı kanal içinde (başarısız kırılım teyidi)",
+      "Heikin Ashi renk ve doji teyidi"
+    ],
+    "pozisyon_risk": "İşlem başına sermayenin en fazla %1'i (s.73)",
+    "iddia_edilen_performans": "Kitap örneği: 1:2,33 RRR (s.60); 'yüksek kazanma olasılığı' iddiası (s.60)",
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Kanal çizgilerinin çizimi öznel (kitap: trend çizgisini 'inceleyebilir' diyor); giriş için doji kapanışı kuralı net ancak tanım sınırlı."
+    },
+    "belirsizlikler": [
+      "Kanal çizgisinin nasıl çizileceği ve kaç temas gerektiği sayısal değil.",
+      "s.59 'kapanış fiyatı tam olarak destek çizgisinin altındaydı' ifadesi üst kanal kırılımında da kullanılmış; tutarsız, kısa işlemde kapanış hangi kenara göre yorumlanacağı belirsiz.",
+      "Kırılım derinliği için eşik yok.",
+      "Hedef: karşı kanal çizgisi; örnekte yuvarlak sayı ile çakışıyor."
+    ],
+    "uyumluluk_notu": "Kanal ve Heikin Ashi tabanlı; 1L3A için 5m'ye uyarlanabilir ancak kanal çizimi otomatikleştirilmeli. Hacim gerekmiyor. Forex/endeks/emtia için uygundur.",
+    "varyantlar": ["Kitap, kanal çizgisine klasik dokunuşta değil, sahte kırılımı beklemeyi önerir (s.59)."],
+    "anahtar_kelimeler": ["trend-kanali", "sahte-kirilim", "doji", "heikin-ashi", "ters-yon", "kanal-sinir"]
+  },
+  {
+    "kart_id": "swing__bayrak-kirilim__heikinashi",
+    "ad": "Boğa/Ayı Bayrağı Trend Devam Kırılımı",
+    "stil": "swing",
+    "kaynak": {"pdf": "4_Saatlik_Grafik_Kullanarak_Swing_Trading_-_Heikin_Ashi_Trader_108_sayfa.pdf", "sayfalar": [27, 28, 54]},
+    "ozet": "Güçlü trendden sonra ana trend yönünün tersine kısa bir konsolidasyon (bayrak) dar bir kanalda oluşur; kanalın trend yönündeki kenarı kırılırsa trend yönünde işlem açılır.",
+    "kategori": "formasyon",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {"islem": "4h", "ust_filtre": null},
+    "gostergeler": [{"ad": "Heikin Ashi", "parametreler": {}}, {"ad": "Trend kanalı", "parametreler": {}}],
+    "long_giris": [
+      "Belirgin yükseliş trendi (Heikin Ashi'de çoğunlukla beyaz mumlar)",
+      "Kısa, karşıt konsolidasyon (çoğunlukla siyah mumlar) oluşur; birkaç mum sürer",
+      "Konsolidasyon dar bir trend kanalında ilerler; üst kanal çizgisi tanımlıdır",
+      "Fiyat kanalın üst çizgisini yukarı kırar; bu kırılımda uzun pozisyon açılır"
+    ],
+    "short_giris": [
+      "Belirgin düşüş trendi (Heikin Ashi'de çoğunlukla siyah mumlar)",
+      "Kısa, karşıt konsolidasyon (çoğunlukla beyaz mumlar) oluşur",
+      "Konsolidasyon dar bir trend kanalında ilerler; alt kanal çizgisi tanımlıdır",
+      "Fiyat kanalın alt çizgisini aşağı kırar; bu kırılımda kısa pozisyon açılır"
+    ],
+    "stop_loss": "Bayrağın trend kanalının biraz altı (uzun için) veya üstü (kısa için)",
+    "kar_al": null,
+    "iz_suren_stop": "Kitap örneğinde çıkış, trend kırılımı sırasında ilk karşı renkli mumdan sonra yapıldı (1500 puan kazanç); trend bitene kadar tutulur",
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Konsolidasyon kısa sürmeli (örnek: birkaç saat / birkaç mum)",
+      "Kırılım trend yönünde, kısa karşıt konsolidasyon sonrası"
+    ],
+    "pozisyon_risk": "İşlem başına sermayenin en fazla %1'i (s.29)",
+    "iddia_edilen_performans": "Kitap örneği: 10.900 girişte 100 puan stop ile 1500 puan kazanç, 1:15 RRR (s.28); 'bu tür fırsatlar 4 saatlik grafikte tekrar tekrar' (s.29)",
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Trend ve bayrak kanalı görsel tanımlı; kanal çizgisi ve 'kısa' konsolidasyon süresi öznel. Giriş ve stop kuralı net."
+    },
+    "belirsizlikler": [
+      "Trendin 'güçlü' sayılması için eşik yok.",
+      "Konsolidasyonun 'kısa' sayılması için mum sayısı yok (kitap 'birkaç saat' diyor).",
+      "Kanal çizgilerinin nasıl çizileceği belirtilmemiş.",
+      "Hedef sayısal değil; kitap örnekte trend bitene kadar tutmuş (ilk karşı mumda çıkış)."
+    ],
+    "uyumluluk_notu": "4 saatlik trend ve kanal tabanlı; 1L3A için mum sayıları ölçeklenmeli. Hacim gerekmiyor. Endeks/emtia/döviz için uygundur.",
+    "varyantlar": ["Boğa bayrağı (yükseliş trendinde) ve ayı bayrağı (düşüş trendinde) (s.27-28).", "Flama: kanal yerine bir uçta yakınsayan konsolidasyon (s.27)."],
+    "anahtar_kelimeler": ["bayrak", "flama", "trend-devam", "kanal", "heikin-ashi", "kirilim"]
+  },
+  {
+    "kart_id": "swing__cift-dip-tepe__heikinashi",
+    "ad": "Çift Dip / Çift Tepe Ters Dönüş",
+    "stil": "swing",
+    "kaynak": {"pdf": "4_Saatlik_Grafik_Kullanarak_Swing_Trading_-_Heikin_Ashi_Trader_108_sayfa.pdf", "sayfalar": [21, 22, 23, 24]},
+    "ozet": "Fiyat bir seviyeyi ikinci kez test edip aşamayınca (çift tepe) kısa, ikinci dipte ters dönüş mumu ve ardından beyaz mum oluşursa (çift dip) uzun işlem açılır.",
+    "kategori": "formasyon",
+    "piyasa_rejimi": "herhangi",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {"islem": "1d", "ust_filtre": null},
+    "gostergeler": [{"ad": "Heikin Ashi", "parametreler": {}}, {"ad": "Destek/Direnç", "parametreler": {}}],
+    "long_giris": [
+      "Fiyat bir dip seviyesine iner ve geri döner (ilk dip)",
+      "Fiyat aynı seviyeye ikinci kez iner; bu sefer satıcılar seviyeyi aşağı kıramaz",
+      "İkinci dipte ters dönüş mumu oluşur (uzun gölge, küçük gövde veya dönen tepe)",
+      "Ters dönüş mumundan sonraki ilk beyaz (yükseliş) mumdan sonra uzun pozisyon açılır (kitap örneği: alım sinyali)"
+    ],
+    "short_giris": [
+      "Fiyat bir seviyeye çıkar ve geri düşer (ilk tepe)",
+      "Fiyat aynı seviyeye ikinci kez çıkar ama bu sefer kırılamaz",
+      "İkinci tepede ters dönüş mumu oluşur",
+      "Ters dönüş mumundan sonra aşağı yönlü ilk mumdan sonra kısa pozisyon açılır (yorum: kitap bu kuralı açık yazmıyor, simetrik varsayım)"
+    ],
+    "stop_loss": "Kısa için çift tepe seviyesinin üstü (kitap örneği: 1,40 üzerinde koruyucu stop); uzun için tanım yok (varsayım: çift dibin altı)",
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": ["Ters dönüş mumu teyidi (uzun gölge, doji vb.)", "Önceki trend yönü: düşüşte çift dip, yükselişte çift tepe"],
+    "pozisyon_risk": "İşlem başına sermayenin en fazla %1'i (s.29, s.73)",
+    "iddia_edilen_performans": "Kitap örneği: EUR/USD çift tepe, toplam 3500 pip (s.22); S&P500 çift dip örneği (s.23)",
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Tepe/dip eşitliği ve tetikleyici mumun tanımı öznel; hedef ve stop kuralları eksik."
+    },
+    "belirsizlikler": [
+      "İki tepe/dip arasında eşitlik toleransı yok.",
+      "Ters dönüş mumu tanımı (gölge oranı) sayısal değil.",
+      "Uzun ve kısa için tam stop ve hedef kuralı yok; örnekte 1,40 üzeri stop ve 3500 pip sonuç anekdot niteliğinde.",
+      "Kısa işlem tetikleyicisi kitapta açıkça yazılı değil (simetrik varsayım)."
+    ],
+    "uyumluluk_notu": "Günlük ve 4 saatlik grafiklerde uygun. 1L3A için tepe/dip tespiti otomatikleştirilebilir. Hacim gerekmiyor.",
+    "varyantlar": ["Üçlü tepe/dip: aynı seviyede üç test; ikinci dipin derin olması ters dönüşü güçlendirir (s.23-24)."],
+    "anahtar_kelimeler": ["cift-dip", "cift-tepe", "ters-donus", "heikin-ashi", "dis-donus-mumu", "destek-direnc"]
+  },
+  {
+    "kart_id": "swing__destek-direnc-limit__heikinashi",
+    "ad": "Destek/Direnç Seviyesinde Limit Emri ile Giriş",
+    "stil": "swing",
+    "kaynak": {"pdf": "4_Saatlik_Grafik_Kullanarak_Swing_Trading_-_Heikin_Ashi_Trader_108_sayfa.pdf", "sayfalar": [10, 11, 19, 20]},
+    "ozet": "Yatay aralığın destek seviyesinden alış, direnç seviyesinden satış limit emri konur; giriş, stop ve kâr al emirleri OCO ile birbirine bağlanır.",
+    "kategori": "destek_direnc",
+    "piyasa_rejimi": "yatay",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {"islem": "4h", "ust_filtre": null},
+    "gostergeler": [{"ad": "Destek/Direnç", "parametreler": {}}],
+    "long_giris": [
+      "Yatay aralık ve destek seviyesi belirlenir",
+      "Alış limit emri desteğe yakın bir fiyata (kitap: limit emri piyasadan 50 puan aşağıya) konur",
+      "Emir dolduğunda, stop ve kâr al emirleri OCO olarak devreye girer"
+    ],
+    "short_giris": [
+      "Yatay aralık ve direnç seviyesi belirlenir",
+      "Satış limit emri dirence yakın bir fiyata (örnek: 50,20 USD) konur",
+      "Emir dolduğunda, stop (örnek: 50,60) ve kâr al (örnek: 48,80) emirleri OCO olarak devreye girer"
+    ],
+    "stop_loss": "Örnekte giriş fiyatından 0,40 USD uzakta (50,20 giriş, 50,60 stop); genel kural yok",
+    "kar_al": "Örnekte giriş fiyatından 1,40 USD aşağıda (48,80); kitap 1:3 RRR'yi iyi olarak tanımlıyor",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": ["Yatay piyasa (aralık) tanımlı", "Kitap: 'Ayarla ve unut' yöntemi, bilgisayar başında olmak gerekmez (s.10-11)"],
+    "pozisyon_risk": "İşlem başına sermayenin en fazla %1'i (s.29)",
+    "iddia_edilen_performans": "Kitap örneği: 1:3 RRR (s.11); 'yüksek RRR ile işlem yapan tüccar er ya da geç kazanır' (s.12)",
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Emir türleri ve OCO mantığı net; ancak destek/direnç seviyesinin belirlenmesi ve limit ofseti (50 puan 'değer') öznel."
+    },
+    "belirsizlikler": [
+      "Destek/direnç seviyesinin belirlenmesi için sayısal kural yok.",
+      "Limit ofseti (kitap: 50 puan) piyasaya göre değişir; genel kural yok.",
+      "Stop ve kâr al mesafesi örneğe özgü; genel oran yok.",
+      "Kitap yöntemin tamamen garantili olmadığını ve kurulumun seçimini bir sonraki kitaba bıraktığını belirtiyor (s.12)."
+    ],
+    "uyumluluk_notu": "Emir tipi ve OCO 1L3A için kullanılabilir ancak kart kuralı destek/direnç tespitine bağlı. Forex ve vadeli işlemde pip/puan ölçeklenmeli. Hacim gerekmiyor.",
+    "varyantlar": ["Kısa işlemde direnç seviyesine satış limit emri; uzun işlemde destek seviyesine alış limit emri (simetrik)."],
+    "anahtar_kelimeler": ["limit-emri", "oco", "destek", "direnc", "aralik", "rrr-1-3"]
+  },
+  {
+    "kart_id": "swing__aralik-hedef-stop__heikinashi",
+    "ad": "Aralık (Range) İşlemi: Karşı Sınır Hedef, Yarı Aralık Stop",
+    "stil": "swing",
+    "kaynak": {"pdf": "4_Saatlik_Grafik_Kullanarak_Swing_Trading_-_Heikin_Ashi_Trader_108_sayfa.pdf", "sayfalar": [94, 95]},
+    "ozet": "İki yatay sınır en az iki önemli dokunuşla doğrulandığında alt sınırdan uzun, üst sınırdan kısa işlem açılır; hedef karşı sınırdır, stop aralığın yarısıdır.",
+    "kategori": "destek_direnc",
+    "piyasa_rejimi": "yatay",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {"islem": "1h", "ust_filtre": null},
+    "gostergeler": [{"ad": "Destek/Direnç (aralık sınırları)", "parametreler": {"min_dokunus": 2}}],
+    "long_giris": [
+      "İki yatay çizgi (aralık) en az iki önemli dokunuşla tanımlanmış",
+      "Fiyat alt sınıra (destek) yaklaşır",
+      "Uzun pozisyon açılır (kitap örneği: alt sınırdan alım)"
+    ],
+    "short_giris": [
+      "İki yatay çizgi (aralık) en az iki önemli dokunuşla tanımlanmış",
+      "Fiyat üst sınıra (direnç) yaklaşır",
+      "Kısa pozisyon açılır (kitap örneği: 3 kısa işlemin ikisi bu kuralla kazandı)"
+    ],
+    "stop_loss": "Aralığın yarısı kadar (kitap: 180 pip aralıkta 90 pip stop)",
+    "kar_al": "Karşı aralık sınırı (alımda üst sınır, satımda alt sınır)",
+    "iz_suren_stop": "Pozisyon 90 pip kârdayken ilk stop kısaltılır (kitap: 45 pip). Metinde 45 pip'in giriş fiyatına göre mi yoksa başka bir referansa göre mi olduğu net değil",
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Aralık piyasası (trend yok); kitap: trend takip stopu aralık işlemlerinde kullanılmaz",
+      "Aralığın en az iki önemli dokunuşla geçerli olması"
+    ],
+    "pozisyon_risk": "İşlem başına sermayenin en fazla %1'i (s.73)",
+    "iddia_edilen_performans": "Kitap örneği: 3 kazanan x 180 pip = 540 pip; 2 kaybeden x 90 pip = 180 pip; net 360 pip (s.95)",
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Sınır tanımı (en az iki dokunuş), hedef (karşı sınır) ve stop (yarı aralık) sayısal; eksik olanlar dokunuş toleransı ve 45 pip referansı."
+    },
+    "belirsizlikler": [
+      "'Önemli dokunuş' için tolerans ve minimum mesafe yok.",
+      "Aralık genişliğinin minimum/maksimum sınırı yok.",
+      "45 pip'e çekme kuralının referans noktası belirsiz.",
+      "Kırılım durumunda ne yapılacağı (aralık bozulursa) kitapta ayrıca tanımlanmamış; kitap aralık dışına çıkan sahte kırılımlar için ayrı kart (sahte kırılım) kullanır."
+    ],
+    "uyumluluk_notu": "Yatay piyasa tespiti 1L3A için ADX gibi bir filtreyle ölçülebilir (kitap göstergesi değil, varsayım). Hacim gerekmiyor. Forex, endeks, emtia için uygundur.",
+    "varyantlar": ["Kitap örneği EUR/USD 1 saatlik grafiğinde; aynı kural 4 saatlik ve günlük için de geçerli değil (kitap belirtmiyor)."],
+    "anahtar_kelimeler": ["aralik", "range", "destek-direnc", "stop-yarim-aralik", "hedef-karsi-sinir", "yatay-piyasa"]
+  },
+  {
+    "kart_id": "swing__trend-iz-suren-stop-200__heikinashi",
+    "ad": "Trend Pozisyonunda Sabit 200 Puan İz Süren Stop (Yalnız Çıkış)",
+    "stil": "swing",
+    "kaynak": {"pdf": "4_Saatlik_Grafik_Kullanarak_Swing_Trading_-_Heikin_Ashi_Trader_108_sayfa.pdf", "sayfalar": [86, 87, 88, 89, 90, 91, 92, 93]},
+    "ozet": "Trend işleminde stop, fiyatın 200 puan gerisinde sabit mesafeyle yukarı taşınır (uzun); trend son aşamasına girdiğinde mesafe 30, 20, 10 puana daraltılır.",
+    "kategori": "diger",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {"islem": "4h", "ust_filtre": null},
+    "gostergeler": [{"ad": "Takip eden stop (sabit mesafe)", "parametreler": {"mesafe_puan": 200}}],
+    "long_giris": [],
+    "short_giris": [],
+    "stop_loss": "Başlangıç stopu: giriş fiyatının 200 puan altı (kitap örneği: 17.000 -> 16.800)",
+    "kar_al": null,
+    "iz_suren_stop": "Stop, fiyatın 200 puan gerisinde yukarı taşınır (örnek: 17.100 -> stop 16.900; 17.200 -> stop 17.000 = giriş). Trend son aşamasında (kitap: beşinci alım dalgası, beyaz mumlardan sonra siyahlar) mesafe 30 -> 20 -> 10 puana daraltılır (s.92-93)",
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Açık fiyat hedefi olmayan trend işlemlerinde kullanılır; hedefli işlemlerde (aralık vb.) takip eden stop kullanılmaz (s.94-95)",
+      "Son swing dibinin altına stop koyma yöntemi kitapta eleştiriliyor (s.88-89); kitap sondan bir önceki swing dibini alternatif olarak öneriyor (s.91)"
+    ],
+    "pozisyon_risk": "İşlem başına sermayenin en fazla %1'i (s.73)",
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Mesafe (200 puan) ve taşıma yönü (sadece yukarı) sayısal; ancak 200 puanın piyasa/zaman dilimine göre ölçeklenmesi, daraltma eşiği ('son aşama') ve 'cömertçe' seçim yorum gerektiriyor."
+    },
+    "belirsizlikler": [
+      "200 puan değeri örneğe özgü (Dow Jones); pip/puan ölçeklemesi kitapta yok.",
+      "Daraltma için 'son aşama' tanımı görsel (kırmızı/siyah mum sayısı) ve sayısal değil.",
+      "Takip stopu fiyat ile mi yoksa kapanış ile mi karşılaştırılacağı belirtilmemiş.",
+      "Kitap 'cömert seçin' diyor; mesafe tek bir değer olarak verilmemiş.",
+      "Giriş kuralı bu kartta yok; kart yalnızca çıkış kuralıdır."
+    ],
+    "uyumluluk_notu": "Sabit mesafe takip stopu 1L3A için tamamen hesaplanabilir; mesafe ATR ile ölçeklenebilir (kitap ATR kullanmıyor, varsayım). Hacim gerekmiyor. Her zaman diliminde uygulanabilir.",
+    "varyantlar": ["Son aşamada mesafe 30 -> 20 -> 10 puan (s.93).", "Sondan bir önceki swing dibine stop (s.91)."],
+    "anahtar_kelimeler": ["takip-eden-stop", "trailing-stop", "200-puan", "trend", "cikis", "stop-yonetimi"]
+  },
+  {
+    "kart_id": "swing__zaman-stopu-kismi-kapatma__heikinashi",
+    "ad": "Zaman Stopu (6 Mum) ve Kısmi Kapatma (Yalnız Çıkış)",
+    "stil": "swing",
+    "kaynak": {"pdf": "4_Saatlik_Grafik_Kullanarak_Swing_Trading_-_Heikin_Ashi_Trader_108_sayfa.pdf", "sayfalar": [84, 85]},
+    "ozet": "Pozisyon, zaman birimine göre 6 mum sonra hâlâ başa baş noktasının üstüne geçmemişse riski azaltılır: stop mevcut fiyata yaklaştırılır veya pozisyonun bir kısmı kapatılır.",
+    "kategori": "diger",
+    "piyasa_rejimi": "herhangi",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {"islem": "4h", "ust_filtre": null},
+    "gostergeler": [{"ad": "Zaman sayacı (mum sayısı)", "parametreler": {"mum_sayisi": 6}}],
+    "long_giris": [],
+    "short_giris": [],
+    "stop_loss": "Kayıp pozisyonda ilk stop mevcut fiyata daha yakın bir seviyeye çekilir (kitap: 'aktif stop yönetimi'); mesafe belirtilmemiş",
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": "4 saatlik grafikte pozisyon 6 mum (24 saat) sonra hâlâ başa baş (kârda) değilse risk azaltılmalı veya pozisyon kapatılmalı. 5 dakikalık grafikte 6 mum (30 dakika) için aynı yaklaşım (s.84)",
+    "filtreler": ["Kitap: süre birimi işlem yapılan zaman dilimine bağlıdır (s.84)"],
+    "pozisyon_risk": "Kısmi kapatma: birden fazla kontrat/hisse/lot varsa pozisyonun yarısı (forex) veya üçte biri (hisse) kapatılabilir; tek kontrat bölünemez (s.85)",
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "6 mum süre kuralı ve kısmi kapatma oranı sayısal; ancak kitap 'düşünmelisiniz' ve 'satabilirsiniz' gibi yumuşak ifadeler kullanıyor, zorunlu kural değil."
+    },
+    "belirsizlikler": [
+      "Kitap 'riski azaltmayı ciddi olarak düşünmelisiniz' ve 'bunlardan birini satabilirsiniz' diyor; zorunluluk mu tavsiye mi belirsiz (kart tavsiye olarak yorumlandı).",
+      "'Breakeven' ile 'başa baş' ifadesi aynı anlamda kullanılmış (kârda olma eşiği).",
+      "Aktif stop yönetiminde yeni stop mesafesi belirtilmemiş.",
+      "Mum sayısı 4 saatlik ve 5 dakikalık için örnek; diğer zaman dilimleri için kitap bir şey söylemiyor."
+    ],
+    "uyumluluk_notu": "Mum sayacı 1L3A'da her zaman diliminde mekanik olarak uygulanabilir. Hacim gerekmiyor. Kısmi kapatma hisse/vadeli işlemde lot yapısına bağlı; kripto perpetual'da küçük parçalar mümkün.",
+    "varyantlar": ["Kitap 5 dakikalık grafik için 6 mum (30 dk) örneği veriyor (s.84)."],
+    "anahtar_kelimeler": ["zaman-stopu", "6-mum", "kismi-kapatma", "breakeven", "aktif-stop", "risk-azaltma"]
+  }
+]

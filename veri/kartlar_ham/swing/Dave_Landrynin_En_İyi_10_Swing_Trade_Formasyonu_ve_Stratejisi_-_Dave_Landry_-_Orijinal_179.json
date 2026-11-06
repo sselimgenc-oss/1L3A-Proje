@@ -1,0 +1,462 @@
+[
+  {
+    "kart_id": "swing__persistent-pullbacks__landry",
+    "ad": "Persistent Pullbacks (Kalici Geri Cekilmeler)",
+    "stil": "swing",
+    "kaynak": {"pdf": "Dave_Landrynin_En_İyi_10_Swing_Trade_Formasyonu_ve_Stratejisi_-_Dave_Landry_-_Orijinal_179.pdf", "sayfalar": [28, 29, 30, 31, 32, 33, 34, 35, 36, 37]},
+    "ozet": "Yaklasik 20 bar (1 ay) tek yonde, trend cizgisine yakin seyreden hisse, duzenli bir geri cekilme yapip trend yeniden basladiginda trend yonunde girilir.",
+    "kategori": "trend_takip",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "hisse",
+    "zaman_dilimi": {"islem": "1d", "ust_filtre": null},
+    "gostergeler": [{"ad": "Trend cizgisi (elle veya lineer regresyon)", "parametreler": {"bar_sayisi": 20, "min_hareket_puan": 10}}],
+    "long_giris": [
+      "Son yaklasik 20 barda fiyat tek yonde hareket etmis; trend cizgisi cogu barlari kesiyor (ideal: hepsi, az sayida bar disarida; trend yonundeki disari barlar tolere edilir)",
+      "Bu sure icinde hisse trend yonunde en az yaklasik 10 puan hareket etmis (volatilite ve fiyata gore degisir)",
+      "Geri cekilme 2-7 bar genisliginde ve trend yonune ters",
+      "Trendin yeniden basladigi sinyalde, bir onceki gunun yuksek fiyatinin yaklasik 10 sent ustunde alim emri"
+    ],
+    "short_giris": ["Long kurallarin tersi (kitap: 'Short sales are reversed'); asagi trendli persistent hisse, asagi trend cizgisi"],
+    "stop_loss": "Geri cekilmenin (setup) dusuk noktasinin altı; cok yakinsa fiyata gore Primer tablosu: $10-15 -> $1; $15-20 -> $1-1.50; $20-30 -> $1.50-2; $30-50 -> $2; $50-70 -> $2.50; $70-100 -> $3; >$100 -> $3-4",
+    "kar_al": "Pozisyon kari baslangic riskine (giris-stop) esit olunca yarisini kapat; kalan hisse icin stop giris fiyatina (basabas) cekilir",
+    "iz_suren_stop": "Hisse yeni bir taban/duzeltme olusturunca stop bu tabanin/duzeltmenin altina cekilir; kisa vadede 2-3 barlik dusuk seviyenin altı da kullanilabilir",
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Endeks ve sektor trendi ayni yonde olmali (kitapta ideal, zorunlu degil)",
+      "Hisse trendi 'bariz' olmali; tahmin gerektirmemeli",
+      "Yatay (choppy) piyasada islem azaltilir"
+    ],
+    "pozisyon_risk": "Sabit yuzde risk kurali kitapta yok. Yarisini kar + basabas stop (2-for-1 money management) kullanilir",
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Giris (onceki gun yuksek +0.10) ve stop tablosu olculebilir. Ancak 'kalici' tanimi (trend cizgisi cogu barlari kesmeli) ve 'pullback related pattern' ifadesi yoruma aciktir."
+    },
+    "belirsizlikler": [
+      "Trend cizgisinin kac bari disarida birakabilecegi kesin degil (kitap: 'case by case')",
+      "Geri cekilme derinligi kitapta 'keyfi' (kitap: 'depth can be arbitrary')",
+      "'Pullback related pattern' tanimsiz",
+      "Volatilite olcumu kitapta kesin degil ('gozle bakin')"
+    ],
+    "uyumluluk_notu": "Gunluk icin tasarlanmis. 5 dk'ya uyarlamak icin 20 bar/10 puan olcegi yeniden tanimlanmali. Puan yerine pip/ATR gerekir (forex). Hacim gerekmez. Hisse/endeks odakli.",
+    "varyantlar": [
+      "Kisa taraf: kurallar tersine (kitap: kisa taraf da esit iyi)",
+      "Endeks ve endeks urunleri (ornek: iShares) uzerinde de uygulanir (kitap ornekleri)"
+    ],
+    "anahtar_kelimeler": ["trend-takibi", "geri-cekilme", "kalici-trend", "trend-cizgisi", "regresyon", "landry"]
+  },
+  {
+    "kart_id": "swing__trend-knockout__landry",
+    "ad": "Trend Knockout (TKO)",
+    "stil": "swing",
+    "kaynak": {"pdf": "Dave_Landrynin_En_İyi_10_Swing_Trade_Formasyonu_ve_Stratejisi_-_Dave_Landry_-_Orijinal_179.pdf", "sayfalar": [38, 39, 40, 41, 42, 43, 44, 129, 130, 131]},
+    "ozet": "Guclu yukari trendde fiyat son iki (veya daha fazla) dibin altina inerek zayif elleri silkeler; trend devam ederken knockout barinin ustune alim emri verilir.",
+    "kategori": "trend_takip",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "hisse",
+    "zaman_dilimi": {"islem": "1d", "ust_filtre": null},
+    "gostergeler": [],
+    "long_giris": [
+      "Hisse guclu yukselis trendinde (ideal: persistent)",
+      "Fiyat en az son iki dusuk seviyenin (onceki iki dip) altina iner (knockout)",
+      "Giris, knockout barindan sonraki tetikleyici barin yuksek seviyesinin ustunde (kitap: 'Go long above the high of (2)'; Primer: yaklasik 10 sent ustu)"
+    ],
+    "short_giris": ["Long kurallarin tersi: guclu dusus trendinde son iki tepenin ustune cikis, short (kitap: Novellus ornegi, s.42)"],
+    "stop_loss": "Tetikleyici barin dusugunun altı (kitap: 'below the low of (3)', Primer'deki stop kurallari dikkate alinarak)",
+    "kar_al": "Yarisini riskin (giris-stop) kadar kar gelince al; kalan icin stop basabasa cekilir (Primer)",
+    "iz_suren_stop": "Kitapta ozel kural yok; Primer'deki 2-3 barlik dusuk seviye yontemi ima edilir",
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Trend kalici (persistent) olmali; en iyi islemler guclu kalici trendde",
+      "Endeks ve sektor de ayni yonde ise daha iyi (ideal)",
+      "Knockout hareketi 'anlamli' olmali (kitap: o barda stop olacak kadar sert dusus)"
+    ],
+    "pozisyon_risk": "Primer ile ayni: yarisini kar + basabas stop",
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Iki onceki dibin kirilimi ve kirilim barinin ustunde giris olculebilir. 'Anlamli' knockout ve 'guclu trend' esikleri yoruma aciktir."
+    },
+    "belirsizlikler": [
+      "'Anlamli' knockout tanimsiz (kitap: 'if you can honestly say you would have been stopped out')",
+      "'Guclu trend' icin sayisal esik yok",
+      "Daha fazla dip kirilmasi (3+) daha iyi kabul ediliyor ama minimum esik sadece 2"
+    ],
+    "uyumluluk_notu": "Gunluk ve ustu icin tasarlanmis. 5 dk icin 'son iki dip' ve trend tanimi yeniden yapilmali. Forex'te puan yerine pip/ATR. Hacim gerekmez.",
+    "varyantlar": [
+      "Double Top Knockout (Bolum 12, s.128): kisa vadeli cift tepe yapilip en az iki onceki dip kirilinca long (Pulte Homes ornegi)",
+      "Kirilan dip sayisi arttikca (3+, 6, 8) setup daha guclu kabul edilir (kitap)",
+      "Kisa taraf: tersine (Novellus ornegi)"
+    ],
+    "anahtar_kelimeler": ["trend-knockout", "tko", "dip-kirilimi", "trend-takibi", "landry"]
+  },
+  {
+    "kart_id": "swing__witch-hats__landry",
+    "ad": "Witch Hat (Cadi Sapkasi) - Kisa Taraf",
+    "stil": "swing",
+    "kaynak": {"pdf": "Dave_Landrynin_En_İyi_10_Swing_Trade_Formasyonu_ve_Stratejisi_-_Dave_Landry_-_Orijinal_179.pdf", "sayfalar": [45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 141, 142, 143, 144]},
+    "ozet": "Guclu dusus trendinde bir pivot yuksek olusur, dusus devam eder, sonra fiyat sert bicimde pivot yuksekligine (sapkanin 'brim' kismi) geri doner; dunku dusugun 0.10 altinda short.",
+    "kategori": "formasyon",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "hisse",
+    "zaman_dilimi": {"islem": "1d", "ust_filtre": null},
+    "gostergeler": [],
+    "long_giris": ["Kisa kurallarin tersi (kitap: 'buys are reversed'); kitap uzun tarafta 'mikro' versiyonlari tercih eder"],
+    "short_giris": [
+      "Hisse guclu dusus trendinde (ideal: hizlanan dusus)",
+      "Pivot yuksek olusur: iki yanindaki yuksekler daha dusuk (pivot tanimi 1 bar sol, 1 bar sag)",
+      "Dusus pivotun ardindan devam eder (sert devam daha iyi)",
+      "Fiyat sert bicimde pivot yuksekligine yakin bir seviyeye geri doner ('brim')",
+      "Giris: dunku dusugun (4. bar) 0.10 altinda short"
+    ],
+    "stop_loss": "Pivot yuksekligin (brim) 0.10 ustu veya 4. barin yuksek seviyesi, hangisi biraz yuksekse; Primer kurallari da gecerli",
+    "kar_al": "Sapkanin 'ucu' (eski dipler) kismi kar almak icin iyi yer; yarisini 1x risk ile al (Primer)",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Piyasa ve sektor de derin geri cekilme/direnc formasyonu yapiyor olmali (ideal)",
+      "Gap ile acilista kar varsa kar al (kitap)"
+    ],
+    "pozisyon_risk": "Primer: yarisini kar, basabas stop",
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Pivot tanimi ve giris (dunku dusuk -0.10) olculebilir; ancak 'guclu/hizlanan trend', 'sert' toparlanma ve 'pivot yuksekligine yakin' ifadeleri yoruma aciktir."
+    },
+    "belirsizlikler": [
+      "'Sert' toparlanma ve 'yakin' tolerans tanimsiz",
+      "Hizlanan trend icin sayisal esik yok",
+      "Kitap 'V' seklinin keskin olmasini ister ama olcu vermez",
+      "Pivot icin 'equal highs' (esit yuksekler) istisnasi kitapta var, esik degil"
+    ],
+    "uyumluluk_notu": "Pivot tanimi mum bazli, 5 dk'ya uyarlanabilir. Gap kullanimi forex'te farkli (7/24). Hacim gerekmez. Kitap short squeeze riskine dikkat cekiyor.",
+    "varyantlar": [
+      "Uzun taraf 'mikro' versiyon (Ivax ornegi, s.48): yukselen trendde daha kucuk derinlik ve sure",
+      "Mikro Witch Hat (SLB s.47; NVLS s.42): buyuk Witch Hat icinde kucuk Witch Hat",
+      "Witch Hat basarisiz olursa Gatekeeper satisina donebilir (s.54, s.149)"
+    ],
+    "anahtar_kelimeler": ["witch-hat", "pivot-yuksek", "v-dip", "brim", "short", "formasyon", "landry"]
+  },
+  {
+    "kart_id": "swing__trend-pivot-pullback__landry",
+    "ad": "Trend Pivot Pullback ve Second Entry (Yanlis Yukselis Sonrasi Giris)",
+    "stil": "swing",
+    "kaynak": {"pdf": "Dave_Landrynin_En_İyi_10_Swing_Trade_Formasyonu_ve_Stratejisi_-_Dave_Landry_-_Orijinal_179.pdf", "sayfalar": [55, 56, 57, 58, 59, 60, 61, 62, 63, 64]},
+    "ozet": "Trend icindeki geri cekilmede yanlis bir yukselis (false rally) olusur ve fiyat onceki yuksegin altinda kapanir; bu yanlis hareketin ardindan olusan pivotun (dusuk yuksek) ustu kirilinca giris yapilir (second entry).",
+    "kategori": "trend_takip",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "hisse",
+    "zaman_dilimi": {"islem": "1d", "ust_filtre": null},
+    "gostergeler": [],
+    "long_giris": [
+      "Hisse yeni yuksek yapar ve 2-5 bar geri ceker",
+      "Fiyat geri cekilmenin en dusuk yuksegini (1'in en dusuk yuksek) asar: ilk normal pullback tetiklenir",
+      "Ayni veya sonraki bar onceki yuksegin altinda kapanir (yanlis yukselis / false rally): alicilar zarara gecer",
+      "Sonraki gunlerde fiyat false rally'nin altinda daha dusuk bir yuksek (pivot) yapar",
+      "Giris: false rally yuksek seviyesinin ustunde (second entry)"
+    ],
+    "short_giris": ["Long kurallarin tersi (kitap: Nationwide Financial ornegi, s.61: asagi false entry sonrasi dusuk altinda short)"],
+    "stop_loss": "Kitapta ozel kural yok; Primer tablosu (fiyata gore) uygulanir",
+    "kar_al": "Primer: yarisini kar, basabas stop",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Endeks ve sektor trendi uyumlu olmali (ideal)",
+      "Kalici (persistent) trendlerde daha iyi calisir",
+      "Kitap: ilk girisi almak mi yoksa sadece second entry'yi beklemek mi tercihe baglidir"
+    ],
+    "pozisyon_risk": "Primer: yarisini kar, basabas stop",
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Pivot, false rally ve second entry seviyeleri mekanik. Stop kurali kitapta yok ve ilk giris / ikinci giris secimi kisisel."
+    },
+    "belirsizlikler": [
+      "Ilk giris alinsin mi (kitap: 'depends on your trading style')",
+      "Stop kurali bu kalip icin kitapta verilmemis (Primer tablosu varsayildi)",
+      "Pivot tanimi: 1 bar sol/sag (kitap Sekil 1-2); esit yukseklerin dahil edilip edilmeyecegi kitapta acik degil"
+    ],
+    "uyumluluk_notu": "Gunluk icin tasarlanmis; 5 dk'ya uyarlanabilir (2-5 bar). Hacim gerekmez. Forex'te false move cok sik olabilir; ayri filtre gerekir.",
+    "varyantlar": [
+      "Second Entry Pullbacks: sadece ikinci girisi bekleyen varyant (ilk giris atlanir); kitapta ayri bolumde ele alinmis",
+      "Kisa taraf: Nationwide Financial (s.61)",
+      "Bausch & Lomb (s.62): pivot olusur ama tetiklenmez, islem yok"
+    ],
+    "anahtar_kelimeler": ["trend-pivot", "second-entry", "yanlis-yukselis", "false-rally", "pivot", "landry"]
+  },
+  {
+    "kart_id": "swing__accelerating-momentum__landry",
+    "ad": "Accelerating Momentum Strategy (Ivmelenen Momentum)",
+    "stil": "swing",
+    "kaynak": {"pdf": "Dave_Landrynin_En_İyi_10_Swing_Trade_Formasyonu_ve_Stratejisi_-_Dave_Landry_-_Orijinal_179.pdf", "sayfalar": [65, 66, 67, 68, 69, 70, 71, 72, 73, 160]},
+    "ozet": "Uzun vadede kademeli yukselen bir hisse ivmelenerek yukari cikinca, ilk duzeltmede veya TKO'da trend yeniden basladiginda trend yonunde girilir.",
+    "kategori": "momentum",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "hisse",
+    "zaman_dilimi": {"islem": "1d", "ust_filtre": null},
+    "gostergeler": [],
+    "long_giris": [
+      "Hisse en az 2-3 aylik kademeli yukselis trendinde (ideal)",
+      "Hisse kademeli yukselisinden ivmelenerek yukari cikar",
+      "Bir sonraki geri cekilme veya TKO'da, trend yeniden basladiginda giris (geri cekilme/TKO barinin ustu)"
+    ],
+    "short_giris": ["Kitap kisa tarafi ivmelenmeden de yapilabilecegini soyler (Diagnostic Products, s.71): kademeli dusus ivmelenir, TKO'da kisa. Kisa tarafta asiri hizli dusus nedeniyle gecis formasyonlari (Bolum 4) tercih edilir"],
+    "stop_loss": "Kitapta ozel kural yok; Primer tablosu veya son duzeltmenin dusugu",
+    "kar_al": "Yarisini kar al; kalan hisse icin trailing stop",
+    "iz_suren_stop": "Her yeni taban/duzeltmenin altina cekilir (kitap CME ornegi, s.160)",
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Endeks duzeltmeden yukari toparlaniyor olmali (ideal)",
+      "Sektor 'liderlik' yapmiyorsa bile bagimsiz hisse liderligi kabul edilir (kitap)"
+    ],
+    "pozisyon_risk": "Kitap: 'money management is crucial'; sabit yuzde kurali yok",
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Kademeli yukselis ve 'ivmelenme' sayisal tanimlanmamis; giris ise TKO ve geri cekilme kurallarina baglanmis."
+    },
+    "belirsizlikler": [
+      "'Gradual' ve 'accelerate' icin sayisal esik yok",
+      "Kitap asiri alim riskini kabul eder ('overvalued' ama devam eder)",
+      "Kisa taraf icin ayrica kural verilmemis"
+    ],
+    "uyumluluk_notu": "Gunluk icin. 5 dk icin 'ivmelenme' olcutu yeniden tanimlanmali. Hacim gerekmez.",
+    "varyantlar": [
+      "Kisa taraf: Diagnostic Products (s.71), TKO ile kisa",
+      "Endeks/sektor 'ikinci bacak' teyidi (kitap: ideal)"
+    ],
+    "anahtar_kelimeler": ["ivmelenme", "momentum", "tko", "trend-hizlanmasi", "landry"]
+  },
+  {
+    "kart_id": "swing__explosion-gap-pivots__landry",
+    "ad": "Explosion Gap Pivots (Patlama Gap Pivotlari)",
+    "stil": "swing",
+    "kaynak": {"pdf": "Dave_Landrynin_En_İyi_10_Swing_Trade_Formasyonu_ve_Stratejisi_-_Dave_Landry_-_Orijinal_179.pdf", "sayfalar": [74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 145, 146]},
+    "ozet": "Hisse 20 gunluk yeni zirveye gap ile acilir; gap alanina yapilan testte gap kapanmadan dip olusur ve daha yuksek bir dip (pivot) teyit edilince pivotun sag yuksegi ustunde long.",
+    "kategori": "kirilim",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "hisse",
+    "zaman_dilimi": {"islem": "1d", "ust_filtre": null},
+    "gostergeler": [],
+    "long_giris": [
+      "Gap yukari: hisse en az 20 gunluk yeni yuksek seviyesine gap ile acilir",
+      "Test: sonraki barlarda gap alanina dogru dusuk yapilir (test barinin dusugu kirilim barinin dusugunun altinda) ama gap kapatilmaz",
+      "Pivot dip: test sonrasi daha yuksek bir dip olusur (sol ve sag taraflarda daha yuksek dusukler)",
+      "Giris: pivotun sag tarafindaki yuksek barin ustunde (Home Depot ornegi: barin yuksegi +0.10)"
+    ],
+    "short_giris": ["Long kurallarin tersi: gap asagi, 20 gunluk yeni dusuk, test gap alaninda yuksek olusur, dusuk altinda short (kitap: 'Short sales are reversed'; ATK ornegi s.81)"],
+    "stop_loss": "Pivot dibinin 0.25 ile 1.00 puan altı (kitap aralik verir; fiyat, volatilite ve risk istegine gore secilir)",
+    "kar_al": "Kitapta sabit hedef yok; buyuk hareketlerde kismi kar (scale-out) onerilir. Yarisini kar al, kalan icin basabas (Primer)",
+    "iz_suren_stop": "Her yeni taban/base olusunca stop o tabanin altina cekilir (kitap, s.84)",
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Asiri buyuk gap'ler hariç (kitap: 'I don't like the pattern on extreme gaps')",
+      "Yabanci sirketlerin ABD'de isleyen hisseleri hariç (yapay gap, kitap s.84)",
+      "Endeks/sektor trendi uyumlu tercih edilir (ideal)"
+    ],
+    "pozisyon_risk": "Kitapta sabit yuzde kurali yok; stop mesafesi arttikca pozisyon kucultulur (kitap s.84)",
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Gap, test, pivot ve giris kurallari mekanik. Stop araligi (0.25-1.00), 'asiri gap' esigi ve gap'in doldurulma tanimi yoruma aciktir."
+    },
+    "belirsizlikler": [
+      "Gap 'onceki zirve' mi 'onceki kapanis' mi kiyaslanarak olculecek? Kitapta 'gap' tanimi acik degil",
+      "Asiri gap esigi tanimsiz",
+      "Stop araligi icinde secim kisisel (kitap: 'depends on your trading style')",
+      "Testin 'gap alanina dusuk' sayilmasi icin tolerans yok"
+    ],
+    "uyumluluk_notu": "Gap kavrami 7/24 forex ve kriptoda gecersiz; 1L3A icin uyarlama gerekir. Hisse/vadeli/endeks gap'leri icin uygun. 5 dk'ya uyarlanabilir ama gap icin seans acilisi gerekir. Hacim gerekmez.",
+    "varyantlar": [
+      "Art arda Explosion Gap Pivot (PDLI, s.145-146): ilk girisin ardindan yeni gap ve ikinci pivot",
+      "Gap 2-3 kez test edilebilir (ATK s.78, PDLI s.145); her testte pivot ayri degerlendirilir",
+      "Kisa taraf: ters (ATK s.81 kisa ornegi)"
+    ],
+    "anahtar_kelimeler": ["gap", "pivot", "kirilim", "test", "yeni-zirve", "landry"]
+  },
+  {
+    "kart_id": "swing__first-thrust__landry",
+    "ad": "First Thrust (Ilk Itki)",
+    "stil": "swing",
+    "kaynak": {"pdf": "Dave_Landrynin_En_İyi_10_Swing_Trade_Formasyonu_ve_Stratejisi_-_Dave_Landry_-_Orijinal_179.pdf", "sayfalar": [88, 89, 90, 91, 92, 93, 94, 95, 138, 139, 140, 141]},
+    "ozet": "Buyuk yeni bir dipten sonra sert yukselis; yukselisten sonra ilk tek barlik duzeltmede (daha dusuk dip ve daha dusuk yuksek) bu barin ustunde long. Trend gecisini erken yakalama.",
+    "kategori": "formasyon",
+    "piyasa_rejimi": "herhangi",
+    "orijinal_piyasa": "hisse",
+    "zaman_dilimi": {"islem": "1d", "ust_filtre": null},
+    "gostergeler": [],
+    "long_giris": [
+      "Hisse buyuk yeni bir dip yapar (ornek: tarihsel dip, 52 haftalik dip)",
+      "Hisse sert yukselir (kitapta 'sharp' vaka bazinda tanimlanir)",
+      "Tek bar duzeltme: daha dusuk dip VE daha dusuk yuksek",
+      "Giris: duzeltme barinin yuksek seviyesinin ustunde (kitap: 'Go long above the high of (3)')"
+    ],
+    "short_giris": ["Tersi: buyuk yeni zirve, sert dusus, tek bar tepki (daha yuksek yuksek ve daha yuksek dip) ve tepki barinin dusugunun altinda short (NFS s.92; First Energy s.93)"],
+    "stop_loss": "Kitapta bu kalip icin ozel stop kurali yok; Primer tablosu uygulanir",
+    "kar_al": "Primer: yarisini kar, basabas stop",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Endeks ve sektor de gecis yapiyor olmali (ideal; erken lider de cikabilir)",
+      "Gap ile baslayan sert hareket guclu onay (Biovail s.154-155 ornegi, Reversal Gap ile ortusur)"
+    ],
+    "pozisyon_risk": "Primer: yarisini kar, basabas stop",
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Tek bar duzeltme ve giris mekanik. Ancak 'buyuk yeni dip' ve 'sert yukselis' kitapta 'obvious'/vaka bazli; sayisal esik yok."
+    },
+    "belirsizlikler": [
+      "'Major' yeni dip ve 'sharp' yukselis icin sayisal esik yok (kitap: 'it should be obvious')",
+      "Stop kurali bu kalip icin verilmemis",
+      "Giris ertesi gun ya da duzeltme barinin ustunde olabilir (Biovail ornegi)"
+    ],
+    "uyumluluk_notu": "Gecis formasyonu; gunluk/haftalik icin uygun. 5 dk'da daha gurultulu. Hacim gerekmez. Endeks ornegi (Nasdaq Ekim 2002) kitapta yer alir.",
+    "varyantlar": [
+      "Kisa taraf: tersi (NFS s.92; First Energy s.93)",
+      "Endeks uzerinde ilk itki (Nasdaq s.138-139, VSEA s.139-140)"
+    ],
+    "anahtar_kelimeler": ["first-thrust", "tek-bar-duzeltme", "trend-gecisi", "dip", "landry"]
+  },
+  {
+    "kart_id": "swing__bow-ties__landry",
+    "ad": "Bow Tie (Papyon) - 10 SMA / 20 EMA / 30 EMA",
+    "stil": "swing",
+    "kaynak": {"pdf": "Dave_Landrynin_En_İyi_10_Swing_Trade_Formasyonu_ve_Stratejisi_-_Dave_Landry_-_Orijinal_179.pdf", "sayfalar": [96, 97, 98, 99, 100, 101, 102, 103, 104, 105]},
+    "ozet": "10 SMA, 20 EMA ve 30 EMA yakinsayip ters siraya gecer (Bow Tie); ardindan tek barlik duzeltme (daha dusuk dip ve daha dusuk yuksek) sonrasi duzeltme barinin ustunde long.",
+    "kategori": "trend_takip",
+    "piyasa_rejimi": "herhangi",
+    "orijinal_piyasa": "hisse",
+    "zaman_dilimi": {"islem": "1d", "ust_filtre": null},
+    "gostergeler": [
+      {"ad": "SMA", "parametreler": {"periyot": 10}},
+      {"ad": "EMA", "parametreler": {"periyot": 20}},
+      {"ad": "EMA", "parametreler": {"periyot": 30}}
+    ],
+    "long_giris": [
+      "Ortalamalar dusus duzeninde: 10 SMA < 20 EMA < 30 EMA",
+      "Ortalamalar 3-4 gun icinde yakinsar ve tersine acilir: yukselis duzeni 10 SMA > 20 EMA > 30 EMA (Bow Tie)",
+      "Sonraki duzeltme: en az bir bar; daha dusuk dip ve daha dusuk yuksek",
+      "Giris: duzeltme barinin yuksek seviyesinin ustunde; emir ertesi gun icin gecerli, fiyat 20 veya 30 EMA altina inerse yeniden degerlendirilir"
+    ],
+    "short_giris": ["Tersi: yukselis duzeninden dusus duzenine gecis; sonra daha yuksek dip ve daha yuksek yuksek (tek bar duzeltme); duzeltme barinin dusugunun altinda short (Progressive ornegi, s.98)"],
+    "stop_loss": "Primer tablosu (fiyata gore) uygulanir",
+    "kar_al": "Yarisini 1x risk ile kar al; kalan icin basabas stop (Primer)",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Endeks ve sektor de gecis yapiyor olmali (ideal)",
+      "Yuvarlanan (rollover/roll-up) tipi gecis daha tanimli Bow Tie verir (kitap: 'I prefer the rollover pattern')",
+      "20 veya 30 EMA'ya geri donus sonrasi giris yeniden degerlendirilir (kitap s.101)"
+    ],
+    "pozisyon_risk": "Primer: yarisini kar, basabas stop",
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Ortalama tipi, periyotlar ve duzen (siralama) mekanik. 'Yakinsama' ve 'acilma' icin mesafe esigi yok; 3-4 gun ifadesi yaklasik."
+    },
+    "belirsizlikler": [
+      "Ortalamalarin 'yakinsamasi' icin tolerans tanimsiz",
+      "'En az bir bar' duzeltme ile 'lower low and lower high' ayni sey mi (kitap bunu 'at least one-bar pullback' olarak tanimlar)",
+      "Kitap ortalama kesisim (crossover) stratejisini reddeder; kural sadece duzen ve Bow Tie'dir"
+    ],
+    "uyumluluk_notu": "Gunluk ve haftalik icin tanimli. 5 dk'da ortalama periyotlarinin olceklenmesi gerekir. Hacim gerekmez. Forex'te ayni ortalama duzeni test edilebilir.",
+    "varyantlar": [
+      "Yarim Bow Tie: bazlardan/konsolidasyondan cikista (kitap: calisir ama rollover tercih)",
+      "Kisa taraf tersi (Progressive PGR s.98; eBay s.99 ve s.102: tetiklenmeyen ornek)"
+    ],
+    "anahtar_kelimeler": ["bow-tie", "sma", "ema", "trend-donusu", "ortalama-duzeni", "landry"]
+  },
+  {
+    "kart_id": "swing__reversal-gap__landry",
+    "ad": "Reversal Gap Strategy (Ters Gap)",
+    "stil": "swing",
+    "kaynak": {"pdf": "Dave_Landrynin_En_İyi_10_Swing_Trade_Formasyonu_ve_Stratejisi_-_Dave_Landry_-_Orijinal_179.pdf", "sayfalar": [106, 107, 108, 109, 110, 111, 112, 113, 156, 157]},
+    "ozet": "En az iki aylik yeni zirveden hemen sonra asagi gap yapan hisse; gap doldurulmazsa ve bir sonraki bar daha yuksek yuksek ve daha yuksek dip (tek bar duzeltme) yaparsa, duzeltme barinin dusugunun altinda short.",
+    "kategori": "diger",
+    "piyasa_rejimi": "volatil",
+    "orijinal_piyasa": "hisse",
+    "zaman_dilimi": {"islem": "1d", "ust_filtre": null},
+    "gostergeler": [],
+    "long_giris": ["Kisa kurallarin tersi (kitap: 'buys are reversed'): en az iki aylik yeni dip, yukari gap, tek bar duzeltmenin ustunde long (AMHC ornegi, s.111)"],
+    "short_giris": [
+      "Hisse en az iki aylik yeni zirve yapar (uzun vadeli zirve daha iyi)",
+      "Bir gun icinde (ideal ilk gun; varyant 10 gun) asagi gap; gap kitapta yaklasik 1-2 puan (fiyata gore) minimum",
+      "Gap doldurulmazsa: bir sonraki bar daha yuksek yuksek ve daha yuksek dip (tek bar duzeltme); gap doldurulursa setup yoksayilir",
+      "Giris: duzeltme barinin (3) dusugunun altinda short"
+    ],
+    "stop_loss": "Duzeltme barinin (3) yuksek seviyesinin ustunde (Primer rehberi)",
+    "kar_al": "Yarisini 1x risk ile kar al; kalan icin basabas stop (Primer). Kitapta kalan icin sabit hedef yok",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Yabanci hisseler (ABD'de isleyen, yapay gap) hariç (kitap s.113)",
+      "Kataklizmik haber gap'leri hariç (whiplash riski, kitap s.113)",
+      "Piyasa ve sektor sert trend donusu yapiyor olmali (ideal)"
+    ],
+    "pozisyon_risk": "Primer: yarisini kar, basabas stop",
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Zirve, gap, tek bar duzeltme ve giris mekanik. 'Iki ay' ve 'gap buyuklugu 1-2 puan' yaklasik ifadeler."
+    },
+    "belirsizlikler": [
+      "'Iki aylik' zirve icin bar sayisi kitapta sayisal degil (yaklasik 40 is gunu varsayilabilir)",
+      "Gap alt esigi '1-2 puan, fiyata gore (more or less)' belirsiz",
+      "Gap doldurma tanimi (tam mi kismi mi) acik degil"
+    ],
+    "uyumluluk_notu": "Gap gunluk/hisse icin tanimli; 7/24 forex ve kriptoda gap yoktur, uyarlama gerekir. 1L3A icin 5 dk uygun degil (gap seans acilisina bagli). Hacim gerekmez.",
+    "varyantlar": [
+      "Gap, yeni zirveden sonra 10 gun icinde olabilir (kitap: 'a variation ... can often work well')",
+      "Uzun taraf: yeni dipten yukari gap (AMHC s.111)"
+    ],
+    "anahtar_kelimeler": ["reversal-gap", "gap", "tek-bar-duzeltme", "zirve", "short", "landry"]
+  },
+  {
+    "kart_id": "swing__gatekeeper__landry",
+    "ad": "The Gatekeeper (Fibonacci 78.6% Kapi Bekcisi)",
+    "stil": "swing",
+    "kaynak": {"pdf": "Dave_Landrynin_En_İyi_10_Swing_Trade_Formasyonu_ve_Stratejisi_-_Dave_Landry_-_Orijinal_179.pdf", "sayfalar": [114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 147, 148, 149, 150]},
+    "ozet": "En az iki aylik yeni takvim zirvesi, sert dusus, sonra 10-11 gun icinde %61.8-%78.6 geri alim ve ters donus; geri alim barinin dusugunun altinda short. Son gasp tipi tepe formasyonu.",
+    "kategori": "formasyon",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "hisse",
+    "zaman_dilimi": {"islem": "1d", "ust_filtre": null},
+    "gostergeler": [{"ad": "Fibonacci geri cekilme", "parametreler": {"seviyeler": [0.618, 0.786], "tercih": 0.786, "sure_gun_min": 10, "sure_gun_max": 11}}],
+    "long_giris": ["Tersi: en az iki aylik yeni dip, sert yukselis, %61.8-%78.6 geri cekilme ve geri cekilme barinin ustunde long (Centurytel ornegi, s.122)"],
+    "short_giris": [
+      "Fiyat en az iki aylik takvim zirvesini yapar (a)",
+      "Sert dusus (b): kitapta en az 2-3 puan (fiyata gore)",
+      "Geri alim (c): %61.8 (ideal %78.6) seviyesine, a-b hareketinin %61.8-%78.6'si, toplam 10-11 islem gununde (V gorunumu)",
+      "Giris: geri alim seviyesine ulasan barin altinda short (kitap Kural 4)"
+    ],
+    "stop_loss": "%78.6 seviyesinin 0.25-1.00 puan ustu (kitap aralik verir); uzun vadeli varyantta eski zirvenin (%100) ustu",
+    "kar_al": "Kitapta kesin hedef yok; Primer yarisini kar + basabas. Hobbs, kirilan Gatekeeper'de 1.27 uzantisini hedef olarak onerir (arastirma asamasinda, kesin kural degil)",
+    "iz_suren_stop": null,
+    "zaman_cikisi": "Dusus ile geri alim toplam 10-11 islem gunu icinde tamamlanmali",
+    "filtreler": [
+      "Piyasa ve sektor de Gatekeeper veya gecis formasyonu yapiyor olmali (ideal)",
+      "Yeni ya da daha iyi uyum icin gap ile baslayan dusus (First Gap Gatekeeper, s.146) tercih edilebilir"
+    ],
+    "pozisyon_risk": "Primer: yarisini kar, basabas stop. Uzun vadeli isleme daha az pay (kitap s.116)",
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Fibonacci oranlari, zirve ve zaman siniri olculebilir. %61.8 ile %78.6 arasindaki giris secimi, 'sert' esigi (yaklasik 2-3 puan) ve stop araligi (0.25-1.00) yoruma aciktir."
+    },
+    "belirsizlikler": [
+      "%61.8 mi %78.6 mi (kitap %78.6 ideal, %61.8 'daha yaygin ama riskli' diyor)",
+      "Fibonacci a/b noktalarinin secimi (swing dip/zirve) kitapta acik degil; 'sharp' esigi yaklasik",
+      "Stop araligi 0.25-1.00 (kisisel secim)"
+    ],
+    "uyumluluk_notu": "Gunluk ve haftalik icin tanimli. 5 dk'da 10-11 gun suresi yeniden tanimlanmali. Forex'te fib uygulanabilir. Hacim gerekmez.",
+    "varyantlar": [
+      "Two-Step Gatekeeper (Marvel s.147-148): a-b-c duzeltmesi; %61.8 'false move' sonrasi %78.6'da tepe",
+      "First Gap Gatekeeper (Yahoo s.146): dusus gap ile baslar, %78.6'yi asmadan kisa",
+      "Gatekeeper + Head and Shoulders (Devon Energy s.148): omuz-bas-omuz tepesi icinde",
+      "Witch Hat'in Gatekeeper'e donusmesi (Ecana s.149): ters yonde basarisiz setup'in kisa Gatekeeper'a donusmesi",
+      "Uzun taraf (Centurytel s.122)"
+    ],
+    "anahtar_kelimeler": ["gatekeeper", "fibonacci", "786", "618", "tepe", "short", "landry"]
+  }
+]

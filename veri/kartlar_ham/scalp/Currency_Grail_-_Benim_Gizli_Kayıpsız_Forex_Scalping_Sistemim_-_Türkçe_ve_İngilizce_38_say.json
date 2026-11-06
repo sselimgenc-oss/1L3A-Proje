@@ -1,0 +1,63 @@
+[
+  {
+    "kart_id": "scalp__iki-mum-kurulumu__grail",
+    "ad": "Kayıpsız İki Mum Kurulumu Scalp (Currency Grail)",
+    "stil": "scalp",
+    "kaynak": {"pdf": "Currency_Grail_-_Benim_Gizli_Kayıpsız_Forex_Scalping_Sistemim_-_Türkçe_ve_İngilizce_38_say.pdf", "sayfalar": [4, 5, 6, 7, 8, 9, 10, 11, 12, 16]},
+    "ozet": "Sadece çubuk (bar) grafiği kullanılır. İki ardışık mumun yapısı kurulum sayılır: satış için iki mum yukarı trendli, 2. mum 1. mumdan büyük ve 2. mumun yüksek-kapanış mesafesi 1. mumdakinden belirgin büyükse, 3. mumun açılışında satılır. Alış için ayna kurulum geçerlidir. Çıkış zaman dilimine göre sabit pip hedefidir.",
+    "kategori": "formasyon",
+    "piyasa_rejimi": "herhangi",
+    "orijinal_piyasa": "forex",
+    "zaman_dilimi": {"islem": "15m-1h (kitap 15dk, 30dk, 1S, 4S, günlük ve haftalık örnekleri veriyor)", "ust_filtre": null},
+    "gostergeler": [],
+    "long_giris": [
+      "İki ardışık mum aşağı trendli: düşük tepe (lower high) ve düşük dip (lower low)",
+      "2. mum, 1. mumdan büyük",
+      "1. mumun düşük ile kapanışı arasındaki mesafe, 2. mumun düşük ile (yaklaşan) kapanışı arasındaki mesafeden belirgin şekilde küçük; yani 2. mumdaki mesafe 1. mumdakinden önemli ölçüde büyük",
+      "3. mumun açılışında hemen alış (market) emri"
+    ],
+    "short_giris": [
+      "İki ardışık mum yukarı trendli: yüksek tepe (higher high) ve yüksek dip (higher low) (kitap kısa kurulum için bunu açıkça böyle yazıyor)",
+      "2. mum, 1. mumdan büyük",
+      "1. mumun yüksek ile kapanışı arasındaki mesafe, 2. mumun yüksek ile (yaklaşan) kapanışı arasındaki mesafeden belirgin şekilde küçük; yani 2. mumdaki mesafe 1. mumdakinden önemli ölçüde büyük",
+      "3. mumun açılışında hemen satış (market) emri"
+    ],
+    "stop_loss": "Yazar stop-loss kullanmaz. Kullananlar için kitap: kısa kurulumda 2. mumun en yüksek fiyatının üstü; daha geniş stop önerilir. Uzun kurulum için kitapta açık tanım yok (simetrik varsayım: 2. mumun en düşük fiyatının altı).",
+    "kar_al": "Zaman dilimine göre sabit pip hedefi (kitap tablosu): 15dk 1 pip, 30dk 2 pip, 1S 5 pip, 4S 20 pip, Günlük 50 pip, Haftalık 200 pip. Hedef giriş hemen sonrası ayarlanır. Metinde 1S için 10 pip ve 4S için 50 pip de geçiyor (tabloyla çelişiyor, belirsizlikler'e bak).",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Sadece çubuk grafiği, gösterge yok",
+      "Kaçınma (uzun ve kısa): 1. veya 2. mumun açılış/kapanışı, mumun yüksek veya düşük ucuna çok yakınsa kurulum geçersiz (kitap 'çok yakın' diyor, sayısal değil)",
+      "Kurulumdaki iki mumun trend yönü tutarlı olmalı; uyuşmuyorsa işlem yok",
+      "Kurulum 2. mumun kapanışına birkaç saniye kala (yaklaşan kapanış) değerlendirilir; 3. mum açılınca girilir",
+      "Girişle aynı anda kâr hedefi girilmez; giriş sonrası hemen değiştirilir",
+      "Forex için: bir mumun kapanışı ile sonraki açılış genelde aynı fiyattır; kitap hisse senedi ve Bitcoin'i uygun bulmadı",
+      "Haber takibi gerekmez (yazar kendi yönteminde haberle ilgilenmediğini söylüyor)"
+    ],
+    "pozisyon_risk": "Sayısal kural yok. Yazar kâr çekme (haftalık veya sık) ve ilk sermaye ile devam etmeyi, kârla lot büyütmeyi önerir.",
+    "iddia_edilen_performans": "Yazar: 'kayıpsız' sistem, 'hiçbir kayıplı işlem yaşamayacaksınız'; sermayeyi bırakırsanız 'bir ay içinde hesabı ikiye katlayabilir' (kitapta yazıyor). Kanıt veya istatistik sunulmuyor. Kitap ayrıca stop kullanılmadığını söylüyor.",
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Mum sayısı, trend yönü (yüksek tepe/dip), boyut karşılaştırması, mesafe karşılaştırması, 3. mum açılışında giriş ve sabit pip çıkışı ölçülebilir. 'Önemli ölçüde büyük', 'çok yakın' ve 'yaklaşan kapanış' için eşik ve tanım yok; varsayım gerekir."
+    },
+    "belirsizlikler": [
+      "'Önemli ölçüde büyük' (mesafe farkı) için sayısal eşik yok",
+      "'Kapanış/açılış mumun ucuna çok yakın' kaçınma kuralı için eşik yok",
+      "Kısa kurulumda iki mumun yukarı trendli olması gerektiği yazılı; metin 'evet, yukarı' diye vurguluyor. Ters görünüyor; çeviri ve tutarlılık doğrulanmalı",
+      "Uzun kurulum için stop tanımı açık değil",
+      "Pip tablosunun zaman dilimi eşlemesi PDF çıkarımında karışık; metinde 1S için 10 pip ve 4S için 50 pip geçiyor (çelişki)",
+      "Lot büyüklüğü, kaldıraç ve risk yüzdesi kuralı yok",
+      "Spread eşiği yok (kitap spread göstergesini 'görsel' kullanmayı öneriyor)",
+      "Kâr hedefinin 'hemen' ayarlanma gecikme toleransı tanımlı değil"
+    ],
+    "uyumluluk_notu": "1L3A için: 15dk-1S'de uygulanabilir. 5dk için kitapta örnek yok. Forex'e özgü: pip tablosu ve spread vurgusu (ECN broker önerisi). Hacim verisi gerekmez. Kripto/ABD hisse/emtia: yazar hisseyi uygun bulmadı; açılış=önceki kapanış varsayımı bozulabilir; kripto ve emtia için test gerekir; pip hedefleri yüzdeye veya ATR'ye çevrilmeli.",
+    "varyantlar": [
+      "Ayna versiyon: uzun ve kısa kurulumlar simetrik",
+      "Zaman dilimine göre farklı pip hedefi (kitap tablosu)",
+      "Stop-loss kullanan varyant: kısa için 2. mumun en yüksek fiyatının üstü, uzun için en düşük fiyatının altı",
+      "Yazar, 1S'de 5 pip hedefinin 2. mumun ardından 'gerçekleşmese bile' bekleme önerisi: bir sonraki kurulumu beklemek (hatalı girişte iki mum bekleme)"
+    ],
+    "anahtar_kelimeler": ["iki-mum", "bar-kurulumu", "kayipsiz", "pip-hedefi", "yaklasan-kapanis", "mum-zamani", "spread", "forex", "ecn-broker", "trend-yonu", "kisa-vade"]
+  }
+]

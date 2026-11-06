@@ -1,0 +1,276 @@
+[
+ {
+  "kart_id": "daytrade__sektorel-goreceli-guc-hisse__singhal",
+  "neden": "Sektor verisi gerektirir (sektorel goreceli guc); verimizde sektor verisi yok"
+ },
+ {
+  "kart_id": "daytrade__martingale-ema5-14-scalp__singhal",
+  "neden": "MARTINGALE (kayiptan sonra pozisyon katlama) - risk politikasi geregi kesin ret"
+ },
+ {
+  "kart_id": "daytrade__haftalik-takvim-spread-vix__singhal",
+  "neden": "Opsiyon stratejisi (opsiyon verisi/primi yok) ve Nifty/BankNifty'ye ozgu"
+ },
+ {
+  "kart_id": "daytrade__coklu-zaman-atm-satis__singhal",
+  "neden": "Opsiyon stratejisi (opsiyon verisi/primi yok) ve Nifty/BankNifty'ye ozgu"
+ },
+ {
+  "kart_id": "daytrade__oi-opsiyon-alim-kopus__singhal",
+  "neden": "Opsiyon stratejisi (opsiyon verisi/primi yok) ve Nifty/BankNifty'ye ozgu"
+ },
+ {
+  "kart_id": "daytrade__supertrend-opsiyon-satis-bank__singhal",
+  "neden": "Opsiyon stratejisi (opsiyon verisi/primi yok) ve Nifty/BankNifty'ye ozgu"
+ },
+ {
+  "kart_id": "daytrade__straddle-vwap-prim-satis__singhal",
+  "neden": "Opsiyon stratejisi (opsiyon verisi/primi yok) ve Nifty/BankNifty'ye ozgu"
+ },
+ {
+  "kart_id": "daytrade__momentum-opsiyon-alim-bank__singhal",
+  "neden": "Opsiyon stratejisi (opsiyon verisi/primi yok) ve Nifty/BankNifty'ye ozgu"
+ },
+ {
+  "kart_id": "daytrade__expiry-decay-otm-strangle__singhal",
+  "neden": "Opsiyon stratejisi (opsiyon verisi/primi yok) ve Nifty/BankNifty'ye ozgu"
+ },
+ {
+  "kart_id": "daytrade__kombine-stoploss-otm-satis__singhal",
+  "neden": "Opsiyon stratejisi (opsiyon verisi/primi yok) ve Nifty/BankNifty'ye ozgu"
+ },
+ {
+  "kart_id": "daytrade__theta-atm-satis-25sl__singhal",
+  "neden": "Opsiyon stratejisi (opsiyon verisi/primi yok) ve Nifty/BankNifty'ye ozgu"
+ },
+ {
+  "kart_id": "daytrade__btst-itm-ce-alim__singhal",
+  "neden": "Opsiyon stratejisi (opsiyon verisi/primi yok) ve Nifty/BankNifty'ye ozgu"
+ },
+ {
+  "kart_id": "daytrade__15-00-gun-ici-kisa-opsiyon__singhal",
+  "neden": "Opsiyon stratejisi (opsiyon verisi/primi yok) ve Nifty/BankNifty'ye ozgu"
+ },
+ {
+  "kart_id": "daytrade__momentum-tukenme-10pct-satis__singhal",
+  "neden": "Opsiyon stratejisi (opsiyon verisi/primi yok) ve Nifty/BankNifty'ye ozgu"
+ },
+ {
+  "kart_id": "daytrade__swing-atm-straddle-satin-alma__singhal",
+  "neden": "Opsiyon stratejisi (opsiyon verisi/primi yok) ve Nifty/BankNifty'ye ozgu"
+ },
+ {
+  "kart_id": "daytrade__repo-orani-nifty-olay__singhal",
+  "neden": "Makro olay verisi (RBI repo orani) ve Nifty'ye ozgu"
+ },
+ {
+  "kart_id": "daytrade__ters-trend-karsit-takas__derr",
+  "neden": "Kodlanabilirlik puani 0 (karsit takas; tamamen sezgisel)"
+ },
+ {
+  "kart_id": "daytrade__ucuz-hisse-dip-alim-tepe-satim__derr",
+  "neden": "5 dolar alti hisse (penny stock) gun ici dip/tepe; perpetual evrenine genellenemez"
+ },
+ {
+  "kart_id": "daytrade__ters-olu-kedi-satis__bulkowski",
+  "neden": "Olay (haber/kazanc) sonrasi ters olu kedi sicramasi; olay verisi yok"
+ },
+ {
+  "kart_id": "daytrade__ortak-hisse-arzi-al-tut__bulkowski",
+  "neden": "Halka arz / ortak hisse arzi olayi"
+ },
+ {
+  "kart_id": "daytrade__olu-kedi-sicrama-satis__bulkowski",
+  "neden": "Olay dususu sonrasi olu kedi sicramasi; olay verisi yok"
+ },
+ {
+  "kart_id": "daytrade__hollanda-acik-artirma-ihale__bulkowski",
+  "neden": "Hollanda acik artirma ihale teklifi (olay verisi)"
+ },
+ {
+  "kart_id": "daytrade__kazanc-surprizi-yukselis__bulkowski",
+  "neden": "Kazanc surprizi (temel/olay verisi)"
+ },
+ {
+  "kart_id": "daytrade__kotu-kazanc-asagi-kirilim__bulkowski",
+  "neden": "Kotu kazanc (temel/olay verisi)"
+ },
+ {
+  "kart_id": "daytrade__kazanc-bayragi__bulkowski",
+  "neden": "Kazanc bayragi (kazanc verisi gerekir)"
+ },
+ {
+  "kart_id": "daytrade__not-degisikligi-kirilim__bulkowski",
+  "neden": "Analist not degisikligi (analist verisi)"
+ },
+ {
+  "kart_id": "daytrade__ters-bolunme-trend-filtreli-al__bulkowski",
+  "neden": "Ters hisse bolunmesi olayi (kurumsal olay verisi)"
+ },
+ {
+  "kart_id": "scalp__superscalp-vsa__holmes",
+  "neden": "Kapali/tescilli VSA (TradeGuider/SMART Center); ultra hacim karti kodlanabilirlik 0 - acik formullu muadili yok",
+  "satir_sayisi": 2
+ },
+ {
+  "kart_id": "scalp__ultra-hacim-seviye__holmes",
+  "neden": "Kapali/tescilli VSA (TradeGuider/SMART Center); ultra hacim karti kodlanabilirlik 0 - acik formullu muadili yok",
+  "satir_sayisi": 2
+ },
+ {
+  "kart_id": "scalp__kisa-sikisma-kisa-faiz__schroder",
+  "neden": "Short interest (kisa faiz orani) verisi gerektirir; verimizde yok"
+ },
+ {
+  "kart_id": "scalp__nyse-tick-karsit-trend__schroder",
+  "neden": "NYSE TICK verisi gerektirir; verimizde yok"
+ },
+ {
+  "kart_id": "scalp__bant-okuma-seviye2__schroder",
+  "neden": "Level-2 / zaman-satis (bant okuma) verisi gerektirir; kodlanabilirlik 0"
+ },
+ {
+  "kart_id": "scalp__piyasa-acilis-haber-hareketi__schroder",
+  "neden": "Haber/piyasa oncesi (pre-market) verisi tabanli"
+ },
+ {
+  "kart_id": "scalp__spread-genislik-sinyali__schroder",
+  "neden": "Alis-satis farki (spread genisligi) tik verisi gerektirir; verimizde yok"
+ },
+ {
+  "kart_id": "scalp__otokorelasyon-mum-deseni__connell",
+  "neden": "Kodlanabilirlik puani 0 (otokorelasyon mum deseni; kural belirsiz)"
+ },
+ {
+  "kart_id": "scalp__momentum__uko",
+  "neden": "Kodlanabilirlik puani 0 (kural tanimi yok)"
+ },
+ {
+  "kart_id": "scalp__coklu-zaman-dilimi__uko",
+  "neden": "Kodlanabilirlik puani 0 (kural tanimi yok)"
+ },
+ {
+  "kart_id": "scalp__haber-tabanli__uko",
+  "neden": "Haber tabanli scalping; haber verisi yok (kodlanabilirlik 0)"
+ },
+ {
+  "kart_id": "scalp__solma-fading__uko",
+  "neden": "Kodlanabilirlik puani 0 (kural tanimi yok)"
+ },
+ {
+  "kart_id": "scalp__gamma-delta-notr__ellis",
+  "neden": "Opsiyon (gamma scalping / delta-notr); opsiyon verisi yok"
+ },
+ {
+  "kart_id": "scalp__amazing-oscillator-rsi__carson",
+  "neden": "AlgoAlpha kapali gosterge (Amazing Oscillator + RSI); not: rsi-asiri-donus / macd-sinyal ailesine bagli"
+ },
+ {
+  "kart_id": "scalp__ml-optimal-rsi__carson",
+  "neden": "YinYangAlgorithms makine ogrenmesi RSI (kapali/tescilli); not: rsi-asiri-donus ailesine bagli"
+ },
+ {
+  "kart_id": "scalp__luxalgo-ters-donus__carson",
+  "neden": "LuxAlgo kapali gosterge; not: mum-yutan-donus / bant-donus ailelerine bagli"
+ },
+ {
+  "kart_id": "scalp__kumo-dalga-trendi-dinamik__carson",
+  "neden": "Ozel/kapali Dalga Trendi (WaveTrend) turevi gosterge; not: stokastik-donus ailesine bagli"
+ },
+ {
+  "kart_id": "scalp__false-breakout-expo__carson",
+  "neden": "Zeiierman Expo kapali gosterge (Yanlis Kopus); not: sahte-kirilim ailesine bagli"
+ },
+ {
+  "kart_id": "scalp__net-pozisyon-rsi-kripto__carson",
+  "neden": "Net pozisyon (long/short pozisyon) verisi gerektirir; verimizde yok"
+ },
+ {
+  "kart_id": "scalp__fibonacci-bolge-tersine-donus__carson",
+  "neden": "Kapali/ozel gosterge (Fibonacci Bolgesi eykpunter + Tersine Donus Bulucu); not: fib-geri-cekilme ailesine bagli"
+ },
+ {
+  "kart_id": "scalp__optimal-rsi-sma20__carson",
+  "neden": "Makine ogrenmesi Optimal RSI (YinYang, kapali); not: rsi-asiri-donus ailesine bagli"
+ },
+ {
+  "kart_id": "scalp__luxalgo-ters-sinyal-bollinger__carson",
+  "neden": "LuxAlgo kapali gosterge; not: bant-donus ailesine bagli"
+ },
+ {
+  "kart_id": "scalp__lorentzian-ema500-adx__carson",
+  "neden": "Lorentzian siniflandirma (ML, kapali); not: ma-geri-cekilme / adx ailesine bagli"
+ },
+ {
+  "kart_id": "scalp__knn-hma50-adx-ema500__carson",
+  "neden": "kNN makine ogrenmesi (kapali); not: ma-geri-cekilme ailesine bagli"
+ },
+ {
+  "kart_id": "scalp__wavetrend-bollinger__stevenson",
+  "neden": "WaveTrend pivot kapali/ozel surum; not: bant-donus ailesine (ADX<25 + Bollinger alt bant kismi) bagli"
+ },
+ {
+  "kart_id": "scalp__vwhbb-wavetrend__stevenson",
+  "neden": "VWHBB (hacim agirlikli govde HA Bollinger) kapali surum + WaveTrend; not: bant-donus ailesine bagli"
+ },
+ {
+  "kart_id": "scalp__fibonacci-bolge-donus__stevenson",
+  "neden": "Kapali/ozel Fibonacci Bolgesi kanal gostergesi; not: fib-geri-cekilme ailesine bagli"
+ },
+ {
+  "kart_id": "scalp__adil-deger-bantlari__stevenson",
+  "neden": "Adil Deger Bantlari (quantifytools) ozel/kapali gosterge; not: bant-donus ailesine bagli"
+ },
+ {
+  "kart_id": "swing__halka-arz-kirilimi__ladha",
+  "neden": "Halka arz (IPO) olayi verisi gerektirir"
+ },
+ {
+  "kart_id": "swing__kazanc-sonrasi-kayma__ladha",
+  "neden": "Kazanc surprizi sonrasi kayma (PEAD); kazanc/temel veri yok"
+ },
+ {
+  "kart_id": "swing__kisa-sikisma__ladha",
+  "neden": "Short squeeze / short interest verisi gerektirir"
+ },
+ {
+  "kart_id": "swing__toplu-islem-ofs__ladha",
+  "neden": "Toplu islem / OFS olayi; temel/olay verisi yok"
+ },
+ {
+  "kart_id": "swing__sektor-rotasyonu__ladha",
+  "neden": "Sektor rotasyonu; sektor verisi yok"
+ },
+ {
+  "kart_id": "swing__haber-oncesi-kismi-pozisyon__scheier",
+  "neden": "Haber oncesi/sonrasi pozisyon yonetimi; haber verisi yok"
+ },
+ {
+  "kart_id": "swing__liderlik-seri-ayrisma__scheier",
+  "neden": "Sozlesmeler arasi (endeks vadeli) liderlik/seri ayrisma; verimizde yok"
+ },
+ {
+  "kart_id": "swing__kapali-cagri-aylik__razaq",
+  "neden": "Opsiyon (aylik kapali cagri / covered call)"
+ },
+ {
+  "kart_id": "swing__kazanc-oncesi-tutma__hogan",
+  "neden": "Kazanc takvimi (kazanc oncesi gece tutma); kazanc verisi yok"
+ },
+ {
+  "kart_id": "swing__piyasa-genisligi-sektor__graham",
+  "neden": "Piyasa genisligi ve sektor hizasi; sektor/genislik verisi yok"
+ },
+ {
+  "kart_id": "swing__forex-gunluk-50-pip__graham",
+  "neden": "Forex pip hedefli (gunluk 50 pip) kural; perpetual evrenine genellenemez, kodlanabilirlik 1"
+ },
+ {
+  "kart_id": "swing__sektor-rotasyonu__johnson",
+  "neden": "Ekonomik dongu / sektor rotasyonu; kodlanabilirlik 0"
+ },
+ {
+  "kart_id": "swing__kazanc-sonrasi-kirilim__johnson",
+  "neden": "Kazanc raporu surprizi; kazanc verisi yok (kodlanabilirlik 0)"
+ }
+]

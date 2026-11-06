@@ -1,0 +1,88 @@
+[
+  {
+    "kart_id": "swing__stop-iz-suren-kombinasyon__mcarthur",
+    "ad": "Sabit Zarar Durdurma + İz Süren Stop Kombinasyonu (Kâr Koruma)",
+    "stil": "swing",
+    "kaynak": {"pdf": "Swing_Trading_Stratejileri_-_Benjamin_McArthur_-_Orijinal_74_sayfa.pdf", "sayfalar": [32, 33, 49, 50, 51]},
+    "ozet": "Giriş sonrası sabit bir zarar durdurma konur (kitap örneği: giriş fiyatının %5 altı). Fiyat yükseldikçe iz süren stop (kitap örneği: %6 altı) yalnızca yukarı taşınır ve geçici düşüşlerde sıfırlanmaz. Kitap ayrıca önceden belirlenen bir kâr seviyesinde çıkacak kâr koruma stopu önerir. Bu kart giriş kuralı içermez; çıkış ve risk yönetimi kartıdır.",
+    "kategori": "diger",
+    "piyasa_rejimi": "herhangi",
+    "orijinal_piyasa": "hisse",
+    "zaman_dilimi": {"islem": null, "ust_filtre": null},
+    "gostergeler": [],
+    "long_giris": [],
+    "short_giris": [],
+    "stop_loss": "Sabit zarar durdurma: giriş fiyatının %5 altı (kitap örneği). Kitap riski mantıklı bir kayıp tutarı olarak belirler.",
+    "kar_al": "Kâr koruma stopu: önceden belirlenen kâr seviyesinde pozisyondan çıkılır (sayısal seviye kitapta verilmemiş). Kitap kâr hedefini ve stopunu işleme girmeden önce planlamayı önerir.",
+    "iz_suren_stop": "Giriş fiyatının %6 altı (kitap örneği). Yalnızca yukarı taşınır; yeni zirvelerde yeniden hesaplanır. Geçici düşüşlerde iz süren stop sıfırlanmaz. Gün içi ayarı için kitap 12:00-16:00 arasını ve hareketli ortalamanın 16:00 altına inmesini referans verir.",
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Hisse birkaç gün izlenerek oynaklığına göre iz süren stop mesafesi ayarlanır (kitap: hisseyi birkaç gün izleyip sonra işlem yapın)",
+      "Gün içi: iz süren stop ayarı saat aralığına bağlanır (kitap)"
+    ],
+    "pozisyon_risk": "Tek işleme sermayenin %5'inden fazlası ayrılmaz; işlem sayısına göre her işlem için %3-5 ayrılır (kitap genel öneri)",
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Sabit ve iz süren yüzde mesafeleri ile 'yalnızca yukarı taşınır' kuralı ölçülebilir. Ancak kitap örneğindeki yüzdeler çelişkili görünüyor; sıfırlama ve kâr seviyesi tanımsız."
+    },
+    "belirsizlikler": [
+      "Örnekte sabit stop %5 altında, iz süren stop %6 altında; iz süren stop sabit stopa göre daha uzakta. Hangi durumda hangisinin aktif olduğu kitapta açık değil",
+      "'Geçici düşüş' tanımı yok; iz süren stopun sıfırlanmama koşulu nicel değil",
+      "Gün içi ayar (12:00-16:00 ve 'hareketli ortalama 16:00 altına inerse') hangi MA periyodu ile belirtilmemiş",
+      "Kâr koruma stopu için sayısal seviye yok",
+      "Kitap giriş kuralı içermez; kart yalnızca çıkış/risk yönetimi içindir",
+      "Kitap pozisyon kapatmak için piyasa emri verilebileceğini de yazar (genel)",
+      "OCR/yeniden yazım nedeniyle kitabın bu bölümündeki bazı cümleler bozuk; anlam olarak yukarıdaki okuma esas alındı"
+    ],
+    "uyumluluk_notu": "1L3A için: yüzde tabanlı stop her TF'de (≥5m dahil) uygulanabilir. Hacim gerekmez. Forex'te yüzde yerine pip cinsinden çevrilebilir. Kripto ve perpetual'da yüzde stop doğrudan kullanılabilir. Kitap yüzde kullandığı için bu kartta yüzde esas alındı.",
+    "varyantlar": [
+      "Sabit stop ve iz süren stop tek başına da kullanılabilir (kitap: iki yöntem birlikte önerilir)",
+      "Kitap piyasa emriyle manuel çıkışı da 'kapatma seçeneği' olarak tanımlar (kart dışı genel öneri)"
+    ],
+    "anahtar_kelimeler": ["stop-loss", "iz-suren-stop", "zarar-durdurma", "kar-koruma", "risk-yonetimi", "yuzde-stop"]
+  },
+  {
+    "kart_id": "swing__mum-kapanis-konumu__mcarthur",
+    "ad": "Mum Kapanış Konumu ile Boğa/Ayı Dengesi (Doji ve Çıkış Sinyali)",
+    "stil": "swing",
+    "kaynak": {"pdf": "Swing_Trading_Stratejileri_-_Benjamin_McArthur_-_Orijinal_74_sayfa.pdf", "sayfalar": [38, 39, 40]},
+    "ozet": "Mumun kapanış fiyatının mumun aralığındaki konumuna bakılır. Kapanış üst 1/3'te ise boğalar baskın, alt 1/3'te ise ayılar baskın, ortada (yaklaşık 1/2) ise denge sayılır. Kitap bu kuralı 'işlemi ne zaman kapatacağınızı gösteren' kurallar olarak sunar. Doji tipleri (long-legged, dragonfly, gravestone, four price) trend sonlarında yorumlanır. Kitap bu kuralın işlem eylemini (hangi yönde, hangi pozisyonda) açıkça yazmaz.",
+    "kategori": "diger",
+    "piyasa_rejimi": "herhangi",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {"islem": null, "ust_filtre": null},
+    "gostergeler": [],
+    "long_giris": [],
+    "short_giris": [],
+    "stop_loss": null,
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Dragonfly doji: düşüş trendinin sonunda ise satıcıların güç kaybettiği yorumu",
+      "Gravestone doji: yükseliş trendinin sonunda ise boğaların güç kaybettiği yorumu",
+      "Long-legged doji: güçlü oynaklık ve dengeli alıcı/satıcı (kitap: panik yapılmamalı)",
+      "Four price doji: neredeyse sıfır oynaklık ve denge"
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Kapanış konumu oranları (1/3, 1/2) ölçülebilir. Ancak kuralın işlem eylemi (açma veya kapatma, hangi yön) kitapta tanımlanmamış ve doji tipleri yorumla belirleniyor."
+    },
+    "belirsizlikler": [
+      "1/3 eşiğinin mumun toplam aralığına (yüksek-düşük) mı yoksa gövdeye mi göre hesaplanacağı belirtilmemiş (kitap 'bar' diyor)",
+      "Kural hangi pozisyon için çıkış sinyali: uzun, kısa veya her ikisi? Kitapta açık değil",
+      "'Kapanış 1/3 üst' ile 'boğa baskın' eşleşmesi kitapta yazılı; ancak bunun bir kapatma eyleminin tetikleyicisi olup olmadığı ayrıca belirtilmemiş",
+      "Doji tiplerinin tanımı görsellere dayanıyor; görseller metinde yok",
+      "Kitap 'bu kurallar çok basit ama önemli' der; hangi bağlamda (trend sonu) uygulanacağı kısmen nitel"
+    ],
+    "uyumluluk_notu": "1L3A için: OHLC ile hesaplanır, ≥5m'de uyumlu. Hacim gerekmez. Forex, kripto, hisse ve emtia için genel. Kart yalnızca bir mum konumu kuralıdır; giriş için başka bir koşulla birleştirilmesi gerekir.",
+    "varyantlar": [
+      "Boşluk (gap) çıkışı: trend tersi yönde açılan boşlukta, yükseliş trendinde çok düşük kapanış veya düşüş trendinde çok yüksek kapanış çıkış sinyali sayılır (kitap 'çok düşük' ve 'çok yüksek' tanımlamaz; SAYFA 40)",
+      "123 düşük kırılımı (2. nokta): kısa pozisyonda 123 formasyonunun ikinci noktası kırılırsa pozisyondan çıkılır (kitap ifadesi; SAYFA 37)"
+    ],
+    "anahtar_kelimeler": ["mum-kapanis-konumu", "doji", "dragonfly", "gravestone", "boga-ayi-denge", "boşluk-gap", "123-kirilim", "cikis-sinyali"]
+  }
+]

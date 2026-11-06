@@ -1,0 +1,358 @@
+[
+  {
+    "kart_id": "swing__gann-cift-tepe-kirilim__razaq",
+    "ad": "Gann Swing: Düzeltme Tepesi Kırılımı (5 Sent Üstü) ve İz Süren Stop",
+    "stil": "swing",
+    "kaynak": {"pdf": "Swing_Trading_Stratejileri_-_Razaq_Adekunle_113_sayfa.pdf", "sayfalar": [5, 6, 7, 8, 9, 10]},
+    "ozet": "Yükseliş trendinde (30 günlük MA yukarı) 5 günlük düzeltmenin ardından fiyat önceki tepe (çift tepe) bölgesine yükselir. Fiyat, düzeltmedeki 1 günlük düşük tepki gününün en yüksek seviyesinin 5 sent üstünü geçtiğinde long açılır; stop düzeltme swing dibinin birkaç sent altına konur. Yeni yüksek swing dibi oluştuğunda stop bu dibin altına çekilir.",
+    "kategori": "kirilim",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "hisse",
+    "zaman_dilimi": {"islem": "günlük (D1)", "ust_filtre": null},
+    "gostergeler": [
+      {"ad": "Hareketli ortalama", "parametreler": {"periyot": 30, "not": "yön filtresi; tip belirtilmemiş (kitapta mavi çizgi)"}},
+      {"ad": "Hareketli ortalama (kısa)", "parametreler": {"periyot": 7, "not": "güçlü trend tanımındaki kısa ortalama"}}
+    ],
+    "long_giris": [
+      "30 günlük MA yukarı yönlü; yalnızca bu yöndeki işlemler (s.7)",
+      "Güçlü trend: fiyat çubuklarının çoğu 7 günlük ortalamanın üstünde, yükselen gün sayısı düşen gün sayısından fazla, ana trend tepkileri en fazla 3 gün (s.7-8)",
+      "Önceki tepe bölgesinde 5 günlük düzeltme sonrası fiyat yeniden yükselir ve çift tepe bölgesine gelir (s.8)",
+      "Giriş: fiyat, düzeltmenin 1 günlük düşük tepki gününün en yüksek seviyesinden 5 sent yukarı geçer (s.8)"
+    ],
+    "short_giris": [],
+    "stop_loss": "Düzeltmenin swing dibinin birkaç sent altı (s.9). Kitapta ek kural: hisse düzenli olarak 40 sent hareket ediyorsa stop son değişimin en az 50 sent altına konur (s.10).",
+    "kar_al": null,
+    "iz_suren_stop": "Yeni yüksek swing dibi oluştuğunda (ve fiyat önceki yüksek mumun üstüne çıktığında) stop bu dibin birkaç sent altına çekilir (s.9)",
+    "zaman_cikisi": null,
+    "filtreler": [
+      "30 günlük MA yönü",
+      "Güçlü trend tanımı (7 gün ortalama üstü, yükselen gün çoğunluğu, tepkiler en fazla 3 gün)",
+      "Eski tepe birkaç günden uzun sürdüyse yukarı hareketin başarısız olma olasılığı yüksek (s.9)"
+    ],
+    "pozisyon_risk": "Kitap genel önerisi: normal %7-8 stop yerine kayıp %3-4 ile alınır; 3:1 kâr/zarar oranı (s.14). Yeni swing dibinde pozisyona ekleme (s.9).",
+    "iddia_edilen_performans": "Kitapta tek bir UNH grafik örneği; istatistik (kazanma oranı) yok. Kitap 3:1 kâr/zarar oranından söz ediyor (s.14).",
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Giriş seviyesi (5 sent üstü) ve stop (dip altı) ölçülebilir; trend tanımının büyük kısmı sayısal. 'Çift tepe', 'eski tepe', 'birkaç sent' ve ekleme kuralları yoruma açık, bu nedenle 3 verilmedi."
+    },
+    "belirsizlikler": [
+      "'Birkaç sent' stop tamponu ve 5 sent eşiği hisse fiyatına göre sabit değil; yüzde ya da ATR karşılığı belirtilmemiş",
+      "Çift tepe ve 'eski zirve' tanımı yok",
+      "30 günlük MA tipi (basit/üstel) belirtilmemiş",
+      "Kitapta '5 günlük düzeltme' ve '4 gün çift tepe' zamanlamaları örnek, kural değil",
+      "Sabit kâr alma kuralı yok; çıkış yalnızca iz süren stop ile",
+      "Yeni dipte pozisyon ekleme miktarı tanımsız"
+    ],
+    "uyumluluk_notu": "Günlük grafik için yazılmış, hisse senedi örnekli. Forex, kripto ve endekste aynı yapı uygulanabilir ancak '5 sent' mutlak eşiğinin yüzde ya da ATR'ye çevrilmesi gerekir. ≥5m'ye uyarlanabilir ama kitap günlük. Hacim, kopuş onayı olarak anılıyor (s.16) ama zorunlu değil.",
+    "varyantlar": [
+      "Yeni yüksek swing dibinde pozisyon ekleme ve stop çekme (s.9)",
+      "Hacim onayı: kopuş hacmi son aktiviteyi aşarsa güç onayı (s.16)"
+    ],
+    "anahtar_kelimeler": ["gann", "swing-grafik", "cift-tepe", "kirilim", "30-gun-ma", "iz-suren-stop", "hisse", "5-sent"]
+  },
+  {
+    "kart_id": "swing__gann-dis-gun-trend__razaq",
+    "ad": "Gann Dış Gün (Outside Day) Trend Takip Sinyali",
+    "stil": "swing",
+    "kaynak": {"pdf": "Swing_Trading_Stratejileri_-_Razaq_Adekunle_113_sayfa.pdf", "sayfalar": [5, 6]},
+    "ozet": "Gann swing grafiğinde, önceki günün hem yükseğini hem de düşüğünü aşan 'dış gün', mevcut trend yönünde oluşursa trend takip sinyali kabul edilir. Kitap bunu 'trendle birlikte gerçekleşen dış gün' olarak tanımlar.",
+    "kategori": "trend_takip",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "hisse",
+    "zaman_dilimi": {"islem": "günlük (D1)", "ust_filtre": null},
+    "gostergeler": [],
+    "long_giris": [
+      "Yukarı trend (Gann swing yönü yukarı) içinde bir dış gün oluşur: gün, önceki günün hem yüksek hem düşük seviyesini aşar",
+      "Giriş seviyesi ve yönü kitapta açıkça belirtilmemiş (varsayım gerekir)"
+    ],
+    "short_giris": [],
+    "stop_loss": null,
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": ["Trend yönü ile dış günün uyumu"],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Dış gün tanımı ölçülebilir (yüksek/düşük karşılaştırması). Giriş seviyesi, stop, çıkış ve Gann swing yön güncellemesi yeterince tanımlı değil."
+    },
+    "belirsizlikler": [
+      "Giriş fiyatı (dış günün yüksek/düşük seviyesi mi, kapanış mı) belirtilmemiş",
+      "Stop ve çıkış kuralı yok",
+      "Trend yönünün Gann swing çizgisiyle belirlenmesi kitapta tam tanımlanmamış",
+      "Kısa (aşağı trend) versiyonu açıkça yazılmamış; ayna varsayımı gerekir"
+    ],
+    "uyumluluk_notu": "Günlük OHLC tabanlı, hacim gerekmiyor. ≥5m'de dış gün tanımı uygulanabilir. Forex, kripto ve endekste kullanılabilir.",
+    "varyantlar": [],
+    "anahtar_kelimeler": ["gann", "dis-gun", "outside-day", "trend-takibi", "swing-grafik"]
+  },
+  {
+    "kart_id": "swing__destek-direnc-sicrama__razaq",
+    "ad": "Destek Sıçraması (Long) ve Direnç Sıçraması (Short), Rol Değişimi",
+    "stil": "swing",
+    "kaynak": {"pdf": "Swing_Trading_Stratejileri_-_Razaq_Adekunle_113_sayfa.pdf", "sayfalar": [31]},
+    "ozet": "Fiyat destek hattına gelip sıçradığında alım yapılır, stop destek hattının altına konur. Fiyat direnç hattından sıçradığında satış yapılır, stop direncin üstüne konur. Kırılan destek dirence, kırılan direnç desteğe dönüşür.",
+    "kategori": "destek_direnc",
+    "piyasa_rejimi": "herhangi",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {"islem": "belirtilmemiş", "ust_filtre": null},
+    "gostergeler": [],
+    "long_giris": [
+      "Fiyat destek hattına gelir ve sıçrar (kitap: alıcıların üstünlüğü olan seviye)",
+      "Sıçramada alım yapılır"
+    ],
+    "short_giris": [
+      "Fiyat direnç hattından sıçrar ve aşağı döner; kitapta bu seviyede satış pozisyonu açılması anlatılır"
+    ],
+    "stop_loss": "Long: destek hattının altı; short: direnç hattının üstü (s.31)",
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": ["Seviyenin destek/direnç olarak doğrulanması (kitap örneği: pivot dipleri ve konsolidasyon dipleri, s.112)"],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Destek/direnç seviyesinin seçimi ve 'sıçrama' yorumu öznel. Stop konumu kabaca tarif edilmiş; hedef yok."
+    },
+    "belirsizlikler": [
+      "Destek/direnç seviyesinin nasıl belirleneceği tek bir kuralla tanımlanmamış",
+      "'Sıçrama' tanımı (mum deseni, yüzde, süre) yok",
+      "Stop tamponu belirtilmemiş",
+      "Kâr hedefi yok"
+    ],
+    "uyumluluk_notu": "Fiyat tabanlı, hacim gerekmiyor. ≥5m'ye uyarlanabilir; yatay seviye tespiti zaman dilimine bağlı. Genel.",
+    "varyantlar": ["Rol değişimi: kırılan destek direnç, kırılan direnç destek olur (s.31)"],
+    "anahtar_kelimeler": ["destek", "direnc", "sicrama", "rol-degisimi", "stop-loss"]
+  },
+  {
+    "kart_id": "swing__kanal-sicrama__razaq",
+    "ad": "Kanal Sıçraması: Düşüş Kanalının Üst Çizgisinden Satış",
+    "stil": "swing",
+    "kaynak": {"pdf": "Swing_Trading_Stratejileri_-_Razaq_Adekunle_113_sayfa.pdf", "sayfalar": [32]},
+    "ozet": "Güçlü bir trend kanalında fiyat kanalın üst çizgisinden aşağı sıçradığında satış yapılır; düşüş trendindeki kanallarda satış aranır. Fiyat kanaldan çıkıp geri dönüş ve yükseliş trendinin başlangıcını gösterirse alım aranır.",
+    "kategori": "destek_direnc",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {"islem": "belirtilmemiş", "ust_filtre": null},
+    "gostergeler": [],
+    "long_giris": [
+      "Fiyat kanaldan çıkar, geri döner ve yükseliş trendinin başladığını gösterir (kitap: 'alım pozisyonları arayın'; kesin koşul tanımsız)"
+    ],
+    "short_giris": [
+      "Düşüş trendindeki kanalda fiyat üst kanal çizgisinden aşağı sıçrar; satış"
+    ],
+    "stop_loss": null,
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": ["Güçlü trend kanalı (kanal çizgilerinin çizimi kitapta tarif edilmemiş)"],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Kanal çizgisine sıçrama ölçülebilir ama kanal çizimi öznel; kanaldan çıkış ve geri dönüş koşulları tanımsız; stop ve kâr yok."
+    },
+    "belirsizlikler": [
+      "Kanal çizgilerinin çizim kuralı yok",
+      "'Kanaldan çıkma' ve 'geri dönüş' tanımı yok",
+      "Stop ve kâr alma kuralı yok",
+      "Sıçrama tanımı yok"
+    ],
+    "uyumluluk_notu": "Fiyat tabanlı, hacim gerekmiyor. ≥5m'ye uyarlanabilir. Forex/endeks/kripto örnekleri olmadan genel.",
+    "varyantlar": [],
+    "anahtar_kelimeler": ["kanal", "sicrama", "trend-cizgisi", "direnc", "destek"]
+  },
+  {
+    "kart_id": "swing__sma10-20-kesisim__razaq",
+    "ad": "SMA 10/20 Kesişimi (Kısa SMA Uzun SMA'yı Keser)",
+    "stil": "swing",
+    "kaynak": {"pdf": "Swing_Trading_Stratejileri_-_Razaq_Adekunle_113_sayfa.pdf", "sayfalar": [32]},
+    "ozet": "Kısa SMA (10), uzun SMA (20)'yi yukarı kestiğinde alım sinyali; aşağı kestiğinde satış ya da düşüş trendi sinyali kabul edilir. Kitap SMA kesişimini swing tekniği olarak sunar.",
+    "kategori": "trend_takip",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {"islem": "belirtilmemiş (kitap: dakikadan haftalığa kadar herhangi bir zaman dilimi)", "ust_filtre": null},
+    "gostergeler": [
+      {"ad": "SMA", "parametreler": {"kisa": 10, "uzun": 20}}
+    ],
+    "long_giris": ["SMA(10), SMA(20)'yi aşağıdan yukarıya keser"],
+    "short_giris": ["SMA(10), SMA(20)'yi yukarıdan aşağıya keser"],
+    "stop_loss": null,
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": "Ters yönde kesişim (kitap: kısa SMA uzun SMA'nın altına inerse düşüş trendi sinyali, s.32)",
+    "filtreler": [],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Kesişim koşulu tamamen ölçülebilir. Stop yok; çıkış ters kesişim olarak yorumlanabilir (küçük varsayım)."
+    },
+    "belirsizlikler": [
+      "Stop-loss kuralı yok",
+      "Kitap başlıkta '4 ila 10 ve 20 günlük' ortalamalardan söz ediyor, ama kesişim örneği yalnızca 10/20",
+      "Kesişim onayı (mum kapanışı mı, anlık geçiş mi) belirtilmemiş"
+    ],
+    "uyumluluk_notu": "Fiyat tabanlı, hacim gerekmiyor. Kitap her zaman diliminde uygulanabileceğini söylüyor (s.32). ≥5m uygun. Forex, kripto ve endekste uyarlanabilir.",
+    "varyantlar": ["4 ve 10 günlük SMA kombinasyonu (başlık, s.32); kitapta ayrıntılı kural yok"],
+    "anahtar_kelimeler": ["sma", "kesisim", "sma10", "sma20", "trend-takibi"]
+  },
+  {
+    "kart_id": "swing__macd-sinyal-caprazi__razaq",
+    "ad": "MACD Çizgisi / Sinyal Çizgisi Kesişimi ve Sıfır Geçişi",
+    "stil": "swing",
+    "kaynak": {"pdf": "Swing_Trading_Stratejileri_-_Razaq_Adekunle_113_sayfa.pdf", "sayfalar": [33]},
+    "ozet": "MACD çizgisi sinyal çizgisini yukarı keserse yükseliş eğilimi (alım), aşağı keserse düşüş eğilimi (satış) sinyali kabul edilir. Kitap ayrıca MACD'nin sıfır çizgisini yukarı geçişini alım, aşağı geçişini satış sinyali olarak anar.",
+    "kategori": "momentum",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {"islem": "belirtilmemiş", "ust_filtre": null},
+    "gostergeler": [
+      {"ad": "MACD", "parametreler": {"not": "hızlı, yavaş ve sinyal periyotları kitapta belirtilmemiş"}}
+    ],
+    "long_giris": [
+      "MACD çizgisi sinyal çizgisinin üstüne çıkar (yükseliş eğilimi)",
+      "Alternatif sinyal: MACD sıfır çizgisini yukarı geçer (alım)"
+    ],
+    "short_giris": [
+      "MACD çizgisi sinyal çizgisinin altına geçer (düşüş eğilimi)",
+      "Alternatif sinyal: MACD sıfır çizgisini aşağı geçer (satış)"
+    ],
+    "stop_loss": null,
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": "Ters yönde çizgi kesişimi (kitap: 'iki çizginin bir kez daha kesişmesini bekler', s.33)",
+    "filtreler": [],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Kesişim ve sıfır geçişi ölçülebilir. Periyotlar, stop ve sinyal seçimi (kesişim mi, sıfır mı) netleşmemiş; kitap çizgi adlarını karıştırıyor."
+    },
+    "belirsizlikler": [
+      "MACD periyotları (hızlı/yavaş/sinyal) belirtilmemiş",
+      "Kitapta MACD ile sinyal çizgisinin adları yer değiştiriyor (s.33: 'MACD çizgisi (sinyal çizgisi olarak bilinir)')",
+      "Stop-loss yok",
+      "Sıfır çizgisi sinyali ile kesişim sinyalinin hangisinin esas alınacağı belirsiz"
+    ],
+    "uyumluluk_notu": "Fiyat tabanlı, hacim gerekmiyor. ≥5m'ye uyarlanabilir. Forex, kripto, endeks ve hisse için genel.",
+    "varyantlar": ["Sıfır çizgisi geçişi ayrı bir sinyal olarak (s.33)"],
+    "anahtar_kelimeler": ["macd", "sinyal-cizgisi", "kesisim", "sifir-cizgisi", "momentum"]
+  },
+  {
+    "kart_id": "swing__kapali-cagri-aylik__razaq",
+    "ad": "Aylık Kapalı Çağrı Satışı (Covered Call, Swing Hisse)",
+    "stil": "swing",
+    "kaynak": {"pdf": "Swing_Trading_Stratejileri_-_Razaq_Adekunle_113_sayfa.pdf", "sayfalar": [39, 41]},
+    "ozet": "En az 100 hisseye sahip yatırımcı, yönsüz seyreden hissede her opsiyon döngüsünde kapalı çağrı satar ve hisse başına ödediği maliyeti düşürür. Kitap, bu yöntemle maliyetin her ay %5-12 oranında düşürülebileceğini iddia eder. Kitap vade olarak iki-üç ay kalan opsiyonları tercih eder.",
+    "kategori": "diger",
+    "piyasa_rejimi": "yatay",
+    "orijinal_piyasa": "hisse",
+    "zaman_dilimi": {"islem": "aylık opsiyon döngüsü", "ust_filtre": null},
+    "gostergeler": [],
+    "long_giris": [
+      "Hisse (en az 100 adet) zaten elde tutulur; her opsiyon döngüsünde kapalı çağrı satılır"
+    ],
+    "short_giris": [],
+    "stop_loss": null,
+    "kar_al": "Kitap iddiası: her ay %5-12 oranında maliyet düşürme (s.41)",
+    "iz_suren_stop": null,
+    "zaman_cikisi": "Opsiyon vadesi (kitap: swing için iki-üç ay kalan vade tercih edilir, s.36)",
+    "filtreler": ["Hissenin belirgin bir yönde eğilim göstermemesi (s.41)"],
+    "pozisyon_risk": "En az 100 hisse; kredi spread ya da çıplak put için en az 1.000$ hesap bakiyesi (s.41)",
+    "iddia_edilen_performans": "Kitap: her ay %5-12 maliyet düşürme (s.41). Doğrulama verisi yok.",
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Ana kural 'her ay kapalı çağrı' açık, ancak strike seçimi, delta ya da yüzde kuralı yok; 'yönsüz hisse' tanımı öznel."
+    },
+    "belirsizlikler": [
+      "Strike fiyatı ve vade seçimi ayrıntılı değil",
+      "'Yönsüz hisse' tanımı yok",
+      "Atama (assignment) ve hisse satışı kuralı yok",
+      "Opsiyon kurulumu 1L3A akışında (forex, vadeli, kripto) doğrudan kullanılamaz; sadece opsiyonlu hisse için geçerli"
+    ],
+    "uyumluluk_notu": "Opsiyon ve hisse senedi bazlı; forex, kripto ya da vadeli işlem akışında doğrudan uygulanamaz. Hacim ve 5m uyarlaması bu kurulum için anlamlı değil.",
+    "varyantlar": ["Kitapta kredi spread ve çıplak put satışı da anlatılır (s.40-41); strike ve kurulum tanımsız olduğu için kart yapılmadı"],
+    "anahtar_kelimeler": ["kapali-cagri", "covered-call", "opsiyon", "maliyet-dusurme", "hisse", "aylik"]
+  },
+  {
+    "kart_id": "swing__pozisyon-olcekleme__razaq",
+    "ad": "Pozisyon Ölçekleme: Kâr Hedefine Göre Kademeli Lot Ekleme",
+    "stil": "swing",
+    "kaynak": {"pdf": "Swing_Trading_Stratejileri_-_Razaq_Adekunle_113_sayfa.pdf", "sayfalar": [51, 52]},
+    "ozet": "Standart bir lotla girilir; lotun yarısı ilk hedefe ulaşınca kâr alınır ve yeni bir kurulumda bir tam lot daha eklenir. Kitap bu yöntemi pozisyon ticareti olarak anlatır. Stoplar pivot dipleri ya da konsolidasyon dipleri gibi önemli destek seviyelerinin altına konur.",
+    "kategori": "diger",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {"islem": "saatlik ve haftalık (en iyi), günlük de olabilir", "ust_filtre": null},
+    "gostergeler": [],
+    "long_giris": [
+      "Standart lot ile giriş; yeni bir ticaret kurulumu (tanımı kitapta yok) göründüğünde bir tam lot daha eklenir (kitap: 1 1/2 lot)",
+      "Geri çekilme ya da kopuş tekrar oluştuğunda bir tam lot daha eklenir (kitap: 1 3/4 lot)"
+    ],
+    "short_giris": [],
+    "stop_loss": "Pivot dipleri veya konsolidasyon dipleri gibi önemli destek seviyelerinin altı (s.52)",
+    "kar_al": "İlk hedefe ulaşınca lotun yarısı kapatılır; kitap sonraki hedefte 3/4 lot kâr getirmesini örnekler (s.52)",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": ["Yükselen trend (kitap: yükselen piyasalarda karlı, dengesiz piyasada iyi çalışmaz, s.51)"],
+    "pozisyon_risk": "Her yeni ekleme ek risk oluşturur; kitap bu yöntemi nispeten muhafazakâr olarak nitelendiriyor (s.52)",
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Lot oranları ve ekleme mantığı tarif edilmiş, ancak giriş kurulumu tanımsız, ilk hedef mesafesi yok, stop seviyesi öznel."
+    },
+    "belirsizlikler": [
+      "Yeni ticaret kurulumu tanımı yok",
+      "İlk hedefin mesafesi (pip, yüzde ya da ATR) belirtilmemiş",
+      "Lot-kâr ilişkisi tek bir sayısal örnekle anlatılmış (s.52)",
+      "'Önemli destek' seviyesi öznel"
+    ],
+    "uyumluluk_notu": "Lot tabanlı kurgu forex için doğal; kripto ve hisse için birim karşılığı gerekir. ≥5m'ye uyarlanabilir; kitap saatlik ve haftalık zaman dilimini öneriyor.",
+    "varyantlar": [],
+    "anahtar_kelimeler": ["pozisyon-olcekleme", "lot", "kademeli-giris", "kar-al", "pivot-dibi"]
+  },
+  {
+    "kart_id": "swing__kripto-kutu-destek-ustu-kapanis__razaq",
+    "ad": "Kripto Kutu Stratejisi: Destek Üstü Mum Kapanışından Sonra Alım",
+    "stil": "swing",
+    "kaynak": {"pdf": "Swing_Trading_Stratejileri_-_Razaq_Adekunle_113_sayfa.pdf", "sayfalar": [70, 71]},
+    "ozet": "Fiyat yatay bir kutu içinde destek seviyesine gelir; bir mum destek seviyesinin üzerinde kapanırsa (güçlü fiyat reddi) bir sonraki mumda long açılır. Hedef, satış baskısı dirence ulaşmadan çıkmaktır. 50 dönemlik MA trendi tanımlar.",
+    "kategori": "destek_direnc",
+    "piyasa_rejimi": "yatay",
+    "orijinal_piyasa": "kripto",
+    "zaman_dilimi": {"islem": "günlük mum", "ust_filtre": null},
+    "gostergeler": [
+      {"ad": "MA", "parametreler": {"periyot": 50, "not": "trend tanımı; tip belirtilmemiş"}}
+    ],
+    "long_giris": [
+      "Fiyat kutunun destek seviyesine gelir",
+      "Bir mum destek seviyesinin üzerinde kapanır (güçlü fiyat reddi, s.70)",
+      "Trend yönü 50 MA ile uyumlu (kitap: piyasa aynı yönde eğilim gösterirse, s.71)",
+      "Açılan bir sonraki mumda long"
+    ],
+    "short_giris": [],
+    "stop_loss": "Kitap: stop, mumun düşük ucuna yakın (s.71)",
+    "kar_al": "Kitap: kâr alma emri, mumun yüksek ucuna yakın (s.71); ayrıca satış baskısı dirence ulaşmadan çıkış hedefi (s.70)",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": ["50 MA ile trend uyumu (s.71)"],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Kapanış koşulu ve sonraki mum girişi ölçülebilir. Destek seviyesi ve 'yakın' ifadeleri için tampon yok; trend koşulu metinde karışık."
+    },
+    "belirsizlikler": [
+      "Destek seviyesinin tanımı yok",
+      "Stop ve kâr için 'yakın' ifadesinin tampon değeri belirtilmemiş",
+      "50 MA koşulu metinde açık değil ('piyasanın aynı yönde eğilim göstermesi koşuluyla')",
+      "Kitap kripto için yazılmış; ≥5m için kanıt yok"
+    ],
+    "uyumluluk_notu": "Kripto için yazılmış; 1L3A'daki kripto perpetual'lara fiyat tabanlı olarak uyarlanabilir. Hacim gerekmiyor. Kitap günlük mum kullanıyor; ≥5m uyarlaması varsayım gerektirir.",
+    "varyantlar": [],
+    "anahtar_kelimeler": ["kripto", "kutu", "destek", "mum-kapanisi", "50ma", "kripto-swing"]
+  }
+]

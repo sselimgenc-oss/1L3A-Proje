@@ -1,0 +1,213 @@
+[
+  {
+    "kart_id": "scalp__cci-30-kirilim__busiere",
+    "ad": "CCI 30 Sınır Kırılması (1 dk / 5 dk)",
+    "stil": "scalp",
+    "kaynak": {
+      "pdf": "Scalping_ve_Day_Trading_-_İşlemlerinizin_Başarısını_Arttırın_-_Anthony_Busiere_239_sayfa.pdf",
+      "sayfalar": [71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 89, 90, 91, 92, 93, 96, 97, 98, 102, 113, 118, 226, 227, 228, 229]
+    },
+    "ozet": "CCI(9), +100 / -100 aşırı bölgesinden geri dönüp +30 / -30 çizgisini kestiğinde ve bu kesişme mum kapanışında teyit edildiğinde, trend yönünde işlem açılır. CCI, +30 (veya -30) çizgisine ulaşmadan ters yöne dönerse sinyal geçersizdir.",
+    "kategori": "momentum",
+    "piyasa_rejimi": "herhangi",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {"islem": "1m veya 5m", "ust_filtre": "4s ve 1s pivot seviyeleri (görsel); trend için günlük gün içi % değişim"},
+    "gostergeler": [
+      {"ad": "CCI", "parametreler": {"periyot": 9, "asiri_bolge_siniri": 100, "esik": 30}}
+    ],
+    "long_giris": [
+      "CCI önce -100 altındaki aşırı satım bölgesinde olmuş olmalı.",
+      "CCI, -100 çizgisini yukarı kestikten sonra -30 çizgisine kadar yükselmeli ve bu sırada geri dönmemeli (kitap: -30'a ulaşmadan dönerse sinyal geçersiz).",
+      "Sinyal mumu tamamen kapandığında CCI değeri -30 veya üzerinde olmalı.",
+      "Giriş, sinyal mumunun kapanışından sonraki mumun açılışında yapılır."
+    ],
+    "short_giris": [
+      "CCI önce +100 üzerindeki aşırı alım bölgesinde olmuş olmalı.",
+      "CCI, +100 çizgisini aşağı kestikten sonra +30 çizgisine kadar düşmeli ve bu sırada geri dönmemeli (+30'a ulaşmadan yukarı dönerse sinyal geçersiz).",
+      "Sinyal mumu tamamen kapandığında CCI değeri +30 veya altında olmalı.",
+      "Giriş, sinyal mumunun kapanışından sonraki mumun açılışında yapılır."
+    ],
+    "stop_loss": "Kitapta sabit fiyat stopu tanımlı değildir. Kayıp kuralı: sinyal yönünün tersine CCI dönüşü onaylandığında (dönüşü yapan mumun kapanışında) pozisyon kapatılır. Ek olarak günlük maksimum kayıp limiti vardır (pozisyon_risk).",
+    "kar_al": "Kitabın seçenekleri: (a) serçe modu: küçük kâr oluştuğunda CCI dönmeden kapat; (b) günlük hedefe ulaşınca kapat; (c) CCI 0 çizgisine yaklaşınca; (d) CCI karşı ±30 çizgisini geçince; (e) CCI karşı ±100 çizgisini geçince; (f) CCI ters döndüğünde. (c)-(f) kapanmış mumda tanımlanır.",
+    "iz_suren_stop": null,
+    "zaman_cikisi": "Günlük işlem modunda gün sonundan önce tüm pozisyonlar kapatılır (gece açık pozisyon tutulmaz). Kitap 5 dakikalık işlemlerde tipik tutma süresini 10-40 dakika olarak verir (bilgi amaçlı, kural değil).",
+    "filtreler": [
+      "Trend: referans değişim +%0,4'ten büyükse yalnızca long; -%0,4'ten küçükse yalnızca short; arada ise iki yön de serbest (bkz. belirsizlikler).",
+      "Pivot: direncin hemen altında long açılmaz, desteğin hemen üstünde short açılmaz.",
+      "Ekonomik takvim: makro veri saatinde ve hemen öncesinde emir açılmaz; açılıştan sonraki ilk 15 dakikada işlem önerilmez.",
+      "VIX: 22 üzerinde 1 dk scalping tercih edilir; 18-22 arasında iki mod da uygundur; 18 altında günlük (5 dk) mod önerilir."
+    ],
+    "pozisyon_risk": "Varsayılan kaldıraç 0 (hesap değeri kadar CFD). Scalping modunda kaldıraç 0,5-2, günlük modda 0,5-1 (kitap s.60). Günlük hedef: scalping modunda varlık fiyatının %0,05-%0,1'i (oynaklığa göre), günlük modda %0,1. Maksimum günlük kayıp: günlük hedefin 1,5 katı; limit dolunca o gün işlem bitirilir.",
+    "iddia_edilen_performans": "30 gerçek işlem (FXCM, CFD, 3.000 € hesap, 9 işlem günü): 23 kazanç, 7 kayıp (%76,7). Hesap 3.043,43 € (%1,34). Yazar bir yıla yaymanın yaklaşık %30 getiri vereceğini hesaplar ama bunu tavsiye etmez; s.101'de yıllık %7-15 aralığı beklenmesini önerir. İşlemlerin yaklaşık %46'sı serçe modunda kapanmıştır.",
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Giriş koşulları (±100 ve ±30 kesişimleri, kapanmış mum, geri dönüş kontrolü) ölçülebilir ve sıralıdır. Eksikler: pivot seviyeleri görsel/öznel; serçe modu kararı öznel; fiyat stopu tanımlı değil; trend ölçüsünün referans dönemi net değil. Küçük varsayımlarla kurala dökülebilir."
+    },
+    "belirsizlikler": [
+      "Fiyat bazlı sabit stop-loss yok; kayıp çıkışı CCI dönüşüne bağlıdır. Kitap bu nedenle günlük maksimum kayıp limiti koyar.",
+      "Trend eşiği (%0,4) bazı yerlerde önceki güne göre (s.72-73), bazılarında gün içi değişim (s.53 ve işlem örnekleri) olarak kullanılmış. Referans dönem net değil.",
+      "Kâr çıkış seçeneklerinden hangisinin seçileceği öznel (s.82: 'hızın büyüklüğüne bağlı').",
+      "Pivot seviyeleri grafik gözlemiyle (öznel) belirleniyor; sayısal tanım yok.",
+      "'Net eğilim yok' durumunda iki yönlü sinyal serbest (s.74); ancak trend yokluk bandı olarak ±%0,4 kesin sayıdır.",
+      "Yazar 0 çizgisi etrafında bir strateji denediğini, geri testten sonra bunun caydırıcı olduğunu yazar; kart olarak çıkarılmadı.",
+      "Kitap kendi yönteminin de yanlış sinyal ürettiğini ve kendi kurallarını her zaman uygulamadığını (ihlal örnekleri, s.225) kabul eder."
+    ],
+    "uyumluluk_notu": "Kitap zaten 1 dk ve 5 dk kullanır; 5 dk üzerinde CCI(9) ile test edilebilir. CFD boyutlandırması (fiyat/10 vb.) broker'a özgüdür; pip ve mikro lot forex'e özgüdür. Hacim verisi gerekmez. Kripto ve emtia perpetual'larda CCI aynen hesaplanabilir; ancak günlük hedef yüzdeleri ve spread maliyeti (kitapta 1 puan spread örneği, s.122) 1 dk'da belirleyici olur.",
+    "varyantlar": [
+      "5 dakikalık günlük işlem modu (sakin piyasalarda; daha az ve daha güvenilir sinyal iddiası)",
+      "1 dakikalık scalping modu (yüksek volatilitede)",
+      "Serçe (erken çıkış) ve açgözlü (CCI dönüşünü bekleme) kâr alma seçenekleri",
+      "CCI periyodu 9 (günlük/1-5 dk için önerilen) yerine 14 (platform varsayılanı)"
+    ],
+    "anahtar_kelimeler": ["cci", "30-kirilim", "100-asiri-bolge", "scalping", "1dk", "5dk", "serce-mod", "pivot", "trend-filtresi", "cfd", "gunluk-hedef"]
+  },
+  {
+    "kart_id": "scalp__cci-100-kirilim__busiere",
+    "ad": "CCI ±100 Kırılması (Lambert orijinal sinyali, kitapta aktarılır)",
+    "stil": "scalp",
+    "kaynak": {
+      "pdf": "Scalping_ve_Day_Trading_-_İşlemlerinizin_Başarısını_Arttırın_-_Anthony_Busiere_239_sayfa.pdf",
+      "sayfalar": [24, 25, 28, 29, 30, 31, 32]
+    },
+    "ozet": "CCI, +100 çizgisini aşağıdan yukarı kestiğinde long, -100 çizgisini yukarıdan aşağı kestiğinde short açılır. Pozisyon, CCI'nin ilgili sınırı ters yönde kesmesiyle kapatılır. Kitap bunu Donald Lambert'in orijinal sinyali olarak anlatır.",
+    "kategori": "kirilim",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {"islem": "belirtilmemiş (kitap 1 saatlik GBP/USD örneği verir)", "ust_filtre": null},
+    "gostergeler": [
+      {"ad": "CCI", "parametreler": {"periyot": 14, "sinir": 100}}
+    ],
+    "long_giris": [
+      "CCI, +100 çizgisini aşağıdan yukarıya keser.",
+      "Sinyal, Japon mumunun kapanışında kesinleşir (kitap: parametreler mum kapanışında sabitlenir); giriş kapanıştan sonraki mumda yapılır."
+    ],
+    "short_giris": [
+      "CCI, -100 çizgisini yukarıdan aşağıya keser.",
+      "Sinyal, mum kapanışında kesinleşir; giriş kapanıştan sonraki mumda yapılır."
+    ],
+    "stop_loss": null,
+    "kar_al": "Long pozisyon: CCI, +100 çizgisini yukarıdan aşağıya keserse kapatılır. Short pozisyon: CCI, -100 çizgisini aşağıdan yukarıya keserse kapatılır.",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": "Kitapta sayısal performans iddiası yoktur. Yazar bu sinyalin çok sayıda yanlış sinyal ürettiğini söyler (s.37) ve GBP/USD 16 Nisan 2021 1 saatlik grafiğinde kârlı bir örnek gösterir.",
+    "kodlanabilirlik": {
+      "puan": 3,
+      "gerekce": "Giriş ve çıkış kuralları yalnızca CCI(14) değeri ve kesişimlerle tanımlanır, kapanış teyidi açıktır. Stop kuralı yoktur ama mevcut kurallar eksiksiz mekanik."
+    },
+    "belirsizlikler": [
+      "Stop-loss tanımı yok.",
+      "Kapanışta CCI'nin +100 üzerinde (veya -100 altında) kalması şartı açıkça yazılmamış; kitap yalnızca kesişmeyi tanımlar.",
+      "Kitap bu sinyali 'belirsiz' sayar ve 'sihirli sinyal yoktur' der; hangi zaman diliminde kullanılacağı belirtilmemiştir.",
+      "Lambert'in orijinal periyodu kitapta açıkça yazılmamış; platform varsayılanı 14 kabul edilmiştir (s.28)."
+    ],
+    "uyumluluk_notu": "CCI ile herhangi bir zaman diliminde hesaplanabilir; forex'e özgü bir unsuru yoktur, hacim gerekmez. Kitapta 1 saatlik örnek var; 1L3A'da >=5 dk için sinyal sıklığı ve çıkış kuralının sonuçları test edilmelidir. Endeks, hisse, kripto ve emtiada da uygulanabilir.",
+    "varyantlar": [
+      "Simetrik uzun/kısa (kitap iki yönü de verir)",
+      "Busiere'nin ±30 yöntemi (ayrı kart: cci-30-kirilim) bu sinyalin sıkılaştırılmış hali olarak sunulur"
+    ],
+    "anahtar_kelimeler": ["cci", "100-kirilim", "asiri-alim", "asiri-satim", "lambert", "sinyal-kesisme", "1s"]
+  },
+  {
+    "kart_id": "scalp__cci-ayrisma__busiere",
+    "ad": "CCI Ayrışması (Achelis; fiyat-CCI uyumsuzluğu)",
+    "stil": "scalp",
+    "kaynak": {
+      "pdf": "Scalping_ve_Day_Trading_-_İşlemlerinizin_Başarısını_Arttırın_-_Anthony_Busiere_239_sayfa.pdf",
+      "sayfalar": [33, 34, 35]
+    },
+    "ozet": "Fiyat trend oluşturmazken (işlem aralığı veya düşüş) CCI aşırı satım bölgesinde (-100 altı) giderek yükselen dipler yapıyorsa yükseliş dönüşü beklenir. Aşırı alım bölgesinde (+100 üstü) giderek alçalan tepeler ve fiyatın trend oluşturmaması durumunda ise düşüş beklenir.",
+    "kategori": "ortalamaya_donus",
+    "piyasa_rejimi": "yatay",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {"islem": "belirtilmemiş (kitap haftalık EUR/USD ve 4s Brent örnekleri verir)", "ust_filtre": null},
+    "gostergeler": [
+      {"ad": "CCI", "parametreler": {"periyot": 14, "sinir": 100}}
+    ],
+    "long_giris": [
+      "CCI, -100 altında en az 2-3 giderek yükselen dip (çukur) oluşturur.",
+      "Aynı dönemde fiyat yükseliş trendine girmez (işlem aralığı veya düşüş yönlü hareket)."
+    ],
+    "short_giris": [
+      "CCI, +100 üstünde en az 2-3 giderek alçalan tepe (zirve) oluşturur.",
+      "Aynı dönemde fiyat düşüş trendine girmez (işlem aralığı veya yükseliş yönlü hareket)."
+    ],
+    "stop_loss": null,
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Fiyatın trend durumu kontrolü (ayrışmanın anlamı trend yokluğuna bağlıdır)."
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": "Sayısal iddia yoktur. Kitap bir EUR/USD haftalık ve bir Brent 4 saatlik grafiğiyle ayrışmanın sonrasında gelen hareketi gösterir (görsel örnek).",
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Dip/tepe tanımı (kaç adet, ne kadar giderek) ve 'fiyat trend oluşturmuyor' koşulu yoruma açık. Giriş onayı, çıkış ve stop tanımsız. Kaba bir yaklaşımla kodlanabilir."
+    },
+    "belirsizlikler": [
+      "Kaç dip/tepe gerektiği (2 mi 3 mü) ve 'giderek yükselen' farkının ölçüsü tanımlanmamış.",
+      "'Fiyat trend oluşturmuyor' ölçütü (eğim, aralık, yapı) yok.",
+      "Giriş onayı (ikinci/üçüncü dip sonrası dönüş mumu gibi) tanımlanmamış.",
+      "Stop, kar alma ve zaman çıkışı yok.",
+      "Periyot belirtilmemiş (14 varsayılan olarak alınmıştır).",
+      "Yöntem kitapta Achelis'in tekniği olarak aktarılır; yazar bu yöntemi kendi 1 dk/5 dk yönteminin parçası olarak kullanmaz."
+    ],
+    "uyumluluk_notu": "Ayrışma tespiti öznel olduğundan 1 dk ve 5 dk'da gürültülü olabilir; 1L3A için en az 1 saatlik zaman diliminde kodlanması daha uygun görünür. Forex'e özgü değildir; hacim gerekmez.",
+    "varyantlar": [
+      "Yükseliş ayrışması (dipler) ve düşüş ayrışması (tepeler), simetrik",
+      "Tepe/dip sayısı 2 veya 3 (kitapta ikisi de geçer)"
+    ],
+    "anahtar_kelimeler": ["cci", "ayrisma", "divergence", "achelis", "dip", "tepe", "asiri-satim", "asiri-alim", "yatay-piyasa"]
+  },
+  {
+    "kart_id": "scalp__cci-zirve__busiere",
+    "ad": "CCI Aşırı Bölge Zirveleri (Dahlquist-Bauer, karşı-trend)",
+    "stil": "scalp",
+    "kaynak": {
+      "pdf": "Scalping_ve_Day_Trading_-_İşlemlerinizin_Başarısını_Arttırın_-_Anthony_Busiere_239_sayfa.pdf",
+      "sayfalar": [35, 36, 37]
+    },
+    "ozet": "Yalnızca aşırı bölgede (+100 üstü veya -100 altı) oluşan CCI zirve ve dipleri dikkate alınır. +100 üzerinde bir zirve, alıcıların zayıfladığının işareti sayılır ve karşı yönde (short) pozisyon düşünülür; -100 altında bir dip için tersi (long) geçerlidir. Limitler arasındaki zirveler yok sayılır.",
+    "kategori": "ortalamaya_donus",
+    "piyasa_rejimi": "herhangi",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {"islem": "belirtilmemiş (kitap CAC 40 zirve örneği verir)", "ust_filtre": null},
+    "gostergeler": [
+      {"ad": "CCI", "parametreler": {"periyot": 14, "sinir": 100}}
+    ],
+    "long_giris": [
+      "CCI, -100 altında bir dip oluşturur.",
+      "Dipten sonra CCI yukarı döner (dönüşün teyit kuralı kitapta tanımlanmamıştır)."
+    ],
+    "short_giris": [
+      "CCI, +100 üzerinde bir zirve oluşturur.",
+      "Zirveden sonra CCI aşağı döner (dönüşün teyit kuralı kitapta tanımlanmamıştır)."
+    ],
+    "stop_loss": null,
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Yalnızca limit ötesindeki (+100 üstü / -100 altı) zirve ve dipler kullanılır; limitler arasındaki tepeler dikkate alınmaz."
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": "Sayısal iddia yoktur. Yazar bu yaklaşımın 'çok sayıda yanlış sinyal ürettiğini' ve dikkatli kullanılması gerektiğini söyler (s.37).",
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Zirve/dip tanımı ve karşı-yön fikri açık. Zirvenin nasıl tanımlanacağı, teyit, giriş zamanlaması, stop ve çıkış kuralı kitapta yoktur; kaba bir kurala dökülebilir."
+    },
+    "belirsizlikler": [
+      "Zirve/dip tanımı (kaç mum, hangi eşik) yok.",
+      "Girişin zamanı ve teyidi (zirveden hemen mi, ters dönüş mumu mu) yok.",
+      "Stop ve çıkış kuralları yok.",
+      "Yazar yöntemi karşı-trend olarak nitelendirir; güçlü trendde kayıp üretebileceğini kabul eder."
+    ],
+    "uyumluluk_notu": "Karşı-trend bir yaklaşım olduğundan 1L3A'da trend filtresi (ör. üst zaman dilimi) ile birlikte değerlendirilmesi gerekir. Forex'e özgü değildir; hacim gerekmez. 1 dk'da sinyal sayısı yüksek olabilir.",
+    "varyantlar": [
+      "Achelis ayrışması ile birleştirilebilir (ayrı kart: cci-ayrisma)"
+    ],
+    "anahtar_kelimeler": ["cci", "zirve", "tepe", "dip", "asiri-alim", "asiri-satim", "karsi-trend", "dahlquist", "bauer"]
+  }
+]

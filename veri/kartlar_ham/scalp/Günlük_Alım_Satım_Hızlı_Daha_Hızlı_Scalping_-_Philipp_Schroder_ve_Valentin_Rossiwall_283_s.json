@@ -1,0 +1,866 @@
+[
+  {
+    "kart_id": "scalp__linreg-5-34-cizgileri-hizala__schroder",
+    "ad": "LinReg 5/34 Çizgileri Hizala Çapraz Stratejisi",
+    "stil": "scalp",
+    "kaynak": {"pdf": "Günlük_Alım_Satım_Hızlı_Daha_Hızlı_Scalping_-_Philipp_Schroder_ve_Valentin_Rossiwall_283_s.pdf", "sayfalar": [205, 206, 207, 208]},
+    "ozet": "Fiyat doğrusal regresyon (LinReg) çizgisini yukarı kırıp üzerinde kaldığında, LinReg yukarı döndüğünde ve daha düşük dip oluşmadığında uzun; fiyat LinReg'in altına kırılıp LinReg aşağı döndüğünde ve daha yüksek zirve oluşmadığında kısa pozisyon açılır. Hareketli ortalamalar kesiştiğinde ilk kâr hedefine ulaşılır ve pozisyonun yarısı trendle devam ettirilir.",
+    "kategori": "trend_takip",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {"islem": "belirtilmemiş (dakika, tik veya günlük grafik)", "ust_filtre": null},
+    "gostergeler": [
+      {"ad": "EMA", "parametreler": {"periyot": 5}},
+      {"ad": "EMA", "parametreler": {"periyot": 24}},
+      {"ad": "Doğrusal regresyon (LinReg)", "parametreler": {"periyot": "20 veya 200"}}
+    ],
+    "long_giris": [
+      "Fiyat LinReg çizgisini yukarı yönde kırar ve LinReg'in üzerinde işlem görür",
+      "LinReg yukarı yöne döner",
+      "Daha düşük dip oluşmaz"
+    ],
+    "short_giris": [
+      "Yükselişin ardından fiyat LinReg'i aşağı yönde kırar ve LinReg'in altında işlem görür",
+      "LinReg aşağı yöne döner",
+      "Daha yüksek zirve oluşmaz"
+    ],
+    "stop_loss": null,
+    "kar_al": "Hareketli ortalamalar kesiştiğinde ilk kâr hedefine ulaşılır; pozisyon büyüklüğünün yarısı ile trend devam ettirilebilir.",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Kitap: yeni başlayan trendi erken yakalamak için trend veya yatay fazın sona erdiği anda işlem",
+      "Önemli bir yükseliş veya satış dalgasının fark edilmesi (kitap: takdire dayalı)"
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": "Kitap günlük işlemde 3-5 sinyal beklendiğini yazıyor; geriye dönük test ekran görüntüleri var (AAPL, GOOG, CERN), sayısal özet metinde yok.",
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "EMA ve LinReg gösterge kuralları sayısal; ancak kırılma ve dönüş tanımı tam verilmemiş, kitap takdir yetkisinin yüksek olduğunu söylüyor, stop ve kâr kuralı açık değil."
+    },
+    "belirsizlikler": [
+      "LinReg periyodu 20 mi 200 mü belirtilmemiş (kitap ikisini de veriyor)",
+      "Kesişen hareketli ortalama çifti açıkça yazılmamış (5 ile 24 EMA varsayıldı)",
+      "Stop-loss kuralı kitapta yok",
+      "'Önemli yükseliş/satış dalgası' tanımı takdire bağlı",
+      "'Daha düşük dip / daha yüksek zirve' için mum veya swing tanımı yok",
+      "Geriye dönük test sonuçları görsel ağırlıklı (s.209-218)",
+      "Yazar: Philipp Schröder ve Valentin Rossiwall"
+    ],
+    "uyumluluk_notu": "≥5m uyumlu (dakika, tik veya günlük). Forex'te EMA ve LinReg aynen kullanılabilir; hacim verisi gerekmiyor. Kripto ve emtia için aynı yapı denenebilir, ama stop ve kâr kuralı eklenmeli.",
+    "varyantlar": [
+      "LinReg 20 periyot veya 200 periyot",
+      "Kâr alma sonrası pozisyonun yarısı ile trend takibi"
+    ],
+    "anahtar_kelimeler": ["linreg", "dogrusal-regresyon", "ema5", "ema24", "capraz", "trend-kirilim", "kismi-kar-al"]
+  },
+  {
+    "kart_id": "scalp__rsi2-90-10-her-zaman-icerde__schroder",
+    "ad": "RSI(2) 90/10 Her Zaman İçeride (Deliğe Kısa Pozisyon Açmayın)",
+    "stil": "scalp",
+    "kaynak": {"pdf": "Günlük_Alım_Satım_Hızlı_Daha_Hızlı_Scalping_-_Philipp_Schroder_ve_Valentin_Rossiwall_283_s.pdf", "sayfalar": [219, 220, 221, 224]},
+    "ozet": "RSI(2) 90'ın üzerine çıktığında kısa, 10'un altına indiğinde uzun sinyal üretilir ve sistem her zaman piyasada kalır: karşı sinyal geldiğinde pozisyon ters çevrilir. Kitap, bu bir ortalamaya dönüş stratejisidir ve kâr al, stop veya takip eden stop kullanılmadığını belirtir.",
+    "kategori": "ortalamaya_donus",
+    "piyasa_rejimi": "yatay",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {"islem": "günlük veya 233-512 tik", "ust_filtre": null},
+    "gostergeler": [
+      {"ad": "RSI", "parametreler": {"periyot": 2, "ust_limit": 90, "alt_limit": 10}}
+    ],
+    "long_giris": [
+      "RSI(2) 10'un altına iner (aşırı satım)",
+      "Kitapta 'modifiye edilmiş RSI'da al sinyali' ile tetiklenir; grafik teyidi takdire bağlı"
+    ],
+    "short_giris": [
+      "RSI(2) 90'ın üzerine çıkar (aşırı alım)",
+      "Kitapta 'modifiye edilmiş RSI'da sat sinyali' ile tetiklenir; grafik teyidi takdire bağlı"
+    ],
+    "stop_loss": null,
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": "Karşı sinyal geldiğinde pozisyon kapatılır ve ters yönde açılır (kitap: pozisyonu döndürerek sürekli piyasada kalan sistem)",
+    "filtreler": [
+      "Grafik ayarı: 233-512 tik veya günlük; zaman bazlı ve tik bazlı kullanılabilir",
+      "Ekstrem hareketlerin 'önemli' sınıflandırılması (kitap: büyük takdir yetkisi bileşeni)"
+    ],
+    "pozisyon_risk": "Kitap: sistem ilgili hesap büyüklüğüne ve kişisel para/risk yönetimine göre uyarlanmalı; sayısal pozisyon kuralı yok.",
+    "iddia_edilen_performans": "Kitap: sistemin Sharpe oranı zayıf ve nispeten büyük bir düşüş var (s.224).",
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "RSI periyodu ve 90/10 eşikleri sayısal; ancak 'modifiye edilmiş RSI' ifadesi ve grafik teyidi tanımlanmamış."
+    },
+    "belirsizlikler": [
+      "'Modifiye edilmiş RSI' ifadesinin standart RSI'dan farkı tanımlı değil",
+      "Grafik teyidi (ekstrem hareketin önemli sayılması) öznel",
+      "Stop ve kâr al yok; pozisyon büyüklüğü belirtilmemiş",
+      "Kitap RSI sisteminin zayıf olduğunu ve büyük düşüş yaşadığını kabul ediyor (s.224)"
+    ],
+    "uyumluluk_notu": "≥5m uyumlu (günlük ve dakika grafikleri). Forex'te RSI aynen kullanılabilir; hacim gerekmiyor. Sistem her zaman piyasada olduğu için forex'te spread ve swap maliyeti ciddi olabilir.",
+    "varyantlar": [
+      "Günlük grafik veya daha geniş zaman dilimleri (kitap)",
+      "233-512 tik grafik"
+    ],
+    "anahtar_kelimeler": ["rsi", "rsi-2", "ortalamaya-donus", "asiri-alim", "asiri-satim", "her-zaman-icerde", "ters-cevirme"]
+  },
+  {
+    "kart_id": "scalp__rsi-aralik-ticareti-1dk__schroder",
+    "ad": "Yukarı ve Aşağı: RSI ile Aralık (Range) Ticareti (1dk)",
+    "stil": "scalp",
+    "kaynak": {"pdf": "Günlük_Alım_Satım_Hızlı_Daha_Hızlı_Scalping_-_Philipp_Schroder_ve_Valentin_Rossiwall_283_s.pdf", "sayfalar": [225, 226]},
+    "ozet": "1 dakikalık grafikte bir işlem aralığı (range) oluştuğunda, RSI aralığın alt ucuna ve aşırı satım bölgesine indiğinde uzun, RSI yükseliş üzerinde olup aralığın üst ucuna ulaştığında kısa pozisyon açılır.",
+    "kategori": "ortalamaya_donus",
+    "piyasa_rejimi": "yatay",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {"islem": "1m", "ust_filtre": null},
+    "gostergeler": [
+      {"ad": "RSI", "parametreler": {"periyot": "belirtilmemiş", "esik": "belirtilmemiş"}},
+      {"ad": "Trend çizgileri (aralık sınırları)", "parametreler": {}}
+    ],
+    "long_giris": [
+      "Bir işlem aralığı oluşmuştur",
+      "RSI aşırı satılmış bölgeye ve aralığın alt ucuna ulaşır"
+    ],
+    "short_giris": [
+      "Bir işlem aralığı oluşmuştur",
+      "RSI aşırı alım bölgesine ve aralığın üst ucuna ulaşır"
+    ],
+    "stop_loss": null,
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Kitap: basit teknik analizle (ör. işlem aralıkları) birleştirilebilir; hangi analiz olduğu belirtilmemiş"
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": "Kitap değiştirilmiş RSI sistemine ait geri test sonuçları ve istatistik gösterdiğini belirtiyor; metinde sayısal değer yok (s.225).",
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Aralığın nasıl tanımlanacağı ve RSI ayarları belirtilmemiş; kitapta 'Göstergeler' kısmı boş bırakılmış. Yorum payı yüksek."
+    },
+    "belirsizlikler": [
+      "RSI periyodu ve aşırı bölge eşikleri belirtilmemiş",
+      "Aralığın tanımı (kaç temas, hangi süre, hangi yükseklik) yok",
+      "Stop ve kâr al kuralı yok",
+      "Kitapta 'Değiştirilmiş RTSI' ifadesi geçiyor (s.225); hangi göstergenin kastedildiği belirsiz",
+      "Geri test sonuçları ekran görüntüsünde (s.225-226)"
+    ],
+    "uyumluluk_notu": "1 dakikalık grafik 1L3A hedefi olan ≥5m'nin altında; 5m'ye uyarlanabilir. Forex'te RSI ve aralık aynen kullanılabilir; hacim gerekmiyor.",
+    "varyantlar": [],
+    "anahtar_kelimeler": ["rsi", "aralik-ticareti", "range", "trend-cizgisi", "1dk", "ortalamaya-donus", "yatay-piyasa"]
+  },
+  {
+    "kart_id": "scalp__trendi-yakala-1-2-3-vwap__schroder",
+    "ad": "Trendi Yakala: Daha Yüksek Dip / Daha Düşük Tepe (1-2-3) ve VWAP",
+    "stil": "scalp",
+    "kaynak": {"pdf": "Günlük_Alım_Satım_Hızlı_Daha_Hızlı_Scalping_-_Philipp_Schroder_ve_Valentin_Rossiwall_283_s.pdf", "sayfalar": [201, 202, 226, 227, 228]},
+    "ozet": "Günlük grafikte Dow teorisine göre yükseliş yapısında (daha yüksek dip ve zirve), son düşük henüz kırılmamışken ve fiyat daha önce VWAP'a girmişken uzun girilir. Düşüş yapısında, son yüksek aşılmamışken ve fiyat VWAP'a en iyi ihtimalle geri dönmüşken kısa girilir. Kitap, kırılım yerine dip alımı ve tepe kısaltmayı tercih eder.",
+    "kategori": "trend_takip",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {"islem": "1d", "ust_filtre": null},
+    "gostergeler": [
+      {"ad": "Trend çizgileri (Dow teorisi)", "parametreler": {}},
+      {"ad": "RSI", "parametreler": {"periyot": 2, "ust_limit": 90, "alt_limit": 10}},
+      {"ad": "VWAP", "parametreler": {"oturum": "gün içi (kümülatif)"}}
+    ],
+    "long_giris": [
+      "Son düşük seviye henüz kırılmamış (daha yüksek dip yapısı)",
+      "Fiyat daha önce VWAP'a girmiş",
+      "Dip satın alınır; yeni zirve kırılımı beklenmez"
+    ],
+    "short_giris": [
+      "Son yüksek seviye aşılmamış ve daha düşük bir dip yapılmış (düşüş yapısı)",
+      "Fiyat en iyi ihtimalle VWAP'a geri döner",
+      "Tepe kısaltılır; kırılım alınmaz"
+    ],
+    "stop_loss": null,
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Yalnızca günlük grafikte uygulanır (kitap: 'sadece günlük')",
+      "RSI(2; 90; 10) ile sinyal iyileştirme (kitap: RSI ve VWAP ile sinyalleri iyileştirmeye çalışıyoruz)"
+    ],
+    "pozisyon_risk": "Kitap: yukarı çıkış pozisyonu tutulup daha yüksek dip oluşursa pozisyon büyüklüğünün yarısı kadar işlem (s.228; ifade belirsiz)",
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Yapı (daha yüksek dip, daha düşük tepe) ve VWAP tanımlanabilir; ancak stop, kâr al ve çıkış kuralı yok ve bazı cümleler belirsiz."
+    },
+    "belirsizlikler": [
+      "Çıkış (kâr al veya stop) kuralı yok; BIDU planında (s.201-202) 'son dip kırılınca sat' ifadesi bu stratejiye ait değil ama benzer bir çıkış mantığı içeriyor",
+      "'Son düşük/yüksek' ve 'daha yüksek dip' tanımı mum veya swing bazında verilmemiş",
+      "VWAP'ın gün içi kümülatif mi yoksa oturum bazlı mı hesaplandığı belirtilmemiş",
+      "CFD ve forex verilerinde hacim eksik olabilir (s.67); VWAP hacim gerektirir",
+      "Kitap 'sistem ters trend ile işlem görüyor' diyor, fakat kurallar trend yönü ile uyumlu; kısmi pozisyon kuralı açık değil"
+    ],
+    "uyumluluk_notu": "Günlük zaman dilimi (≥5m ile uyumlu). Forex'te VWAP için hacim verisi gerekir; tick volume kullanılabilir (varsayım). Kripto ve hisse için yapısal kurallar aynen geçerli.",
+    "varyantlar": [
+      "BIDU planı (s.201-202): fiyat VWAP'a düşüp daha yüksek dipler oluşunca al, son dip kırılınca sat",
+      "Kısa taraf: daha düşük tepe ve VWAP'a geri dönüş"
+    ],
+    "anahtar_kelimeler": ["dow-teorisi", "daha-yuksek-dip", "daha-dusuk-tepe", "vwap", "rsi-2", "gunluk", "trend-takip", "1-2-3"]
+  },
+  {
+    "kart_id": "scalp__petrol-ema5-34-rsi-10dk__schroder",
+    "ad": "Petrol Vadeli İşlem: EMA 5/34 Kesişimi + RSI(2; 90; 10) (10dk, 30dk Onay)",
+    "stil": "scalp",
+    "kaynak": {"pdf": "Günlük_Alım_Satım_Hızlı_Daha_Hızlı_Scalping_-_Philipp_Schroder_ve_Valentin_Rossiwall_283_s.pdf", "sayfalar": [230, 231, 232, 233, 234, 235]},
+    "ozet": "Ham petrol vadeli işleminde (/CL) 10 dakikalık grafikte 5 ve 34 üssel hareketli ortalamanın kesişimi giriş ve çıkış sinyali olarak kullanılır; RSI(2; 90; 10) aşırı bölgeyi ve dönüş ihtimalini gösterir; 30 dakikalık grafikte RSI aşırı bölgede ve 5/34 kesişimi olduğunda sinyal onaylanır. Kitap stop olarak 5 dakikalık grafikte yaklaşık 15-20 tik önerir.",
+    "kategori": "trend_takip",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "vadeli",
+    "zaman_dilimi": {"islem": "10m", "ust_filtre": "30m"},
+    "gostergeler": [
+      {"ad": "EMA", "parametreler": {"periyot": 5}},
+      {"ad": "EMA", "parametreler": {"periyot": 34}},
+      {"ad": "RSI", "parametreler": {"periyot": 2, "ust_limit": 90, "alt_limit": 10}}
+    ],
+    "long_giris": [
+      "EMA 5, EMA 34'ü yukarı yönde keser",
+      "RSI aşırı satım ve dönüş bağlamında (girişin geç olup olmadığını RSI gösterir)",
+      "30 dakikalık grafikte RSI aşırı bölgede ve 5/34 kesişimi sinyal onayı verir"
+    ],
+    "short_giris": [
+      "EMA 5, EMA 34'ü aşağı yönde keser",
+      "RSI aşırı alım ve dönüş bağlamında",
+      "30 dakikalık grafikte RSI aşırı bölgede ve 5/34 kesişimi sinyal onayı verir"
+    ],
+    "stop_loss": "5 dakikalık grafikte yaklaşık 15-20 tik (kitap hesabı); ATR stop alternatif olarak önerilir (periyot belirtilmemiş)",
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": "EMA 5 ile EMA 34'ün ters yönde kesişimi çıkış sinyali (kitap: kaba kılavuz, tek zamanlama sistemi olarak kullanılmamalı)",
+    "filtreler": [
+      "Haber olaylarından kaçınılır (kitap: stop çekilirse yüksek kayma)",
+      "Fiyat hareketinde yön veya tanınabilir desen oluşana kadar beklenir",
+      "ABD 14:30 haberinden önce pozisyon açılmaz (kitap günlük planı, s.251)"
+    ],
+    "pozisyon_risk": "Kitap: çok sayıda kötü işlemde 1.500-2.000 $ açık zarar beklenebilir; 15-20 tiklik stop ile sözleşme başına yaklaşık 200 $ kabul edilebilir (s.234).",
+    "iddia_edilen_performans": "Kitap tek bir örnek işlemde 150 $ kâr gösteriyor (s.234); istatistik verilmemiş.",
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "EMA kesişimi ve RSI eşikleri sayısal; ancak kitap sistemi 'kaba kılavuz' olarak tanımlıyor, RSI teyidi ile 30 dakikalık onayın nasıl birleştirileceği belirsiz, kâr al kuralı yok."
+    },
+    "belirsizlikler": [
+      "RSI aşırı eşikleri iki farklı verilmiş: 90/10 (s.231) ve 70/30 (s.232); kart 2:90:10 ayarını kaydetti",
+      "10 dakika giriş ve 30 dakika onayın birlikte nasıl kullanılacağı net değil",
+      "Stop 15-20 tik 'yaklaşık' ifadesiyle verilmiş; ATR periyodu yok",
+      "Kâr alma kuralı yok",
+      "Farklı zaman dilimlerinde piramitleme ve 233 tik grafik kuralı tanımlı değil (s.233)"
+    ],
+    "uyumluluk_notu": "≥5m uyumlu (10 ve 30 dakika). Emtia (petrol vadeli işlem) için yazılmış; forex'te aynı EMA ve RSI mantığı test edilebilir. Hacim gerekmiyor. Kripto ve hisse için tik değeri yerine ATR ile stop önerilir.",
+    "varyantlar": [
+      "Sadece 10 dakikalık grafikte 5/34 kesişimi ve RSI (onaysız)",
+      "ATR tabanlı stop alternatifi"
+    ],
+    "anahtar_kelimeler": ["petrol", "emtia", "ema5", "ema34", "rsi-2", "10dk", "30dk-onay", "trend-takip", "atr-stop"]
+  },
+  {
+    "kart_id": "scalp__petrol-yuvarlak-seviye-araligi__schroder",
+    "ad": "Petrol Vadeli İşlem: Yuvarlak Fiyat Seviyesi Aralık Ticareti (233 Tik)",
+    "stil": "scalp",
+    "kaynak": {"pdf": "Günlük_Alım_Satım_Hızlı_Daha_Hızlı_Scalping_-_Philipp_Schroder_ve_Valentin_Rossiwall_283_s.pdf", "sayfalar": [204, 205]},
+    "ozet": "Petrol vadeli işleminde 70 $ veya 75 $ gibi yuvarlak fiyat seviyeleri etrafında fiyat birkaç kez durup küçük bir aralık oluşturduğunda, 233 tik grafikte bu aralık görülerek işlem yapılır. Kitap, desenin bir saat sonra bozulabileceğini ve bu sürede birkaç kez 10-20 tik kazanılabileceğini belirtir.",
+    "kategori": "destek_direnc",
+    "piyasa_rejimi": "yatay",
+    "orijinal_piyasa": "vadeli",
+    "zaman_dilimi": {"islem": "233 tik", "ust_filtre": null},
+    "gostergeler": [
+      {"ad": "Yuvarlak fiyat seviyeleri", "parametreler": {"ornek": "70 $ ve 75 $"}}
+    ],
+    "long_giris": [
+      "Fiyat yuvarlak bir seviye yakınında birkaç kez durur ve küçük bir aralık oluşur",
+      "Aralık içinde alt sınırdan alım (kitapta yön açıkça yazılmamış; varsayım)"
+    ],
+    "short_giris": [
+      "Aralık oluşmuş ve fiyat üst sınıra ulaşmıştır",
+      "Üst sınırdan satım (varsayım)"
+    ],
+    "stop_loss": null,
+    "kar_al": "Kitap: birkaç kez 10-20 tik hareket hedeflenir (net çıkış kuralı değil)",
+    "iz_suren_stop": null,
+    "zaman_cikisi": "Desen bir saat içinde bozulabilir (kitap)",
+    "filtreler": [
+      "Haber olaylarından kaçınılır (kitap genel petrol notu)"
+    ],
+    "pozisyon_risk": "Kitap: yalnızca aynı kurulum tekrar tekrar güvenle çalıştığında pozisyon büyüklüğü artırılır",
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Yuvarlak seviyeler nicel, ancak 'birkaç kez durma' ve aralık tanımı yoruma açık; yön ve çıkış kuralı yazılmamış."
+    },
+    "belirsizlikler": [
+      "Aralığın tanımı (kaç temas, kaç tik genişlik) yok",
+      "Alış ve satış yönü açıkça belirtilmemiş (varsayım)",
+      "Stop kuralı yok",
+      "Kâr hedefi 10-20 tik ifadesi kural değil",
+      "Yuvarlak seviye seçimi (70, 75 gibi) için kriter yok"
+    ],
+    "uyumluluk_notu": "Emtia için yazılmış. Forex'te aynı mantık tam sayı seviyeleri (ör. 1.1000) ile denenebilir (varsayım). 233 tik grafiği ≥5m hedefinin altında kalır.",
+    "varyantlar": [],
+    "anahtar_kelimeler": ["petrol", "yuvarlak-seviye", "aralik", "233-tik", "destek-direnc", "vadeli"]
+  },
+  {
+    "kart_id": "scalp__dusuk-hacimli-geri-cekilme__schroder",
+    "ad": "Düşük Hacimli Geri Çekilmede Trend Yönünde Giriş",
+    "stil": "scalp",
+    "kaynak": {"pdf": "Günlük_Alım_Satım_Hızlı_Daha_Hızlı_Scalping_-_Philipp_Schroder_ve_Valentin_Rossiwall_283_s.pdf", "sayfalar": [71, 72, 73]},
+    "ozet": "Yükseliş trendinde, bir geri çekilme önceki hareketin hacminden düşük hacimle gerçekleşiyorsa ve destek ile birleşen bir seviyeye geliyorsa, geri çekilmenin bittiği yerde trend yönünde uzun girilir. Düşüş trendinde simetrik olarak kısa girilir.",
+    "kategori": "trend_takip",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {"islem": "belirtilmemiş (kısa ve günlük grafikler)", "ust_filtre": null},
+    "gostergeler": [
+      {"ad": "Hacim", "parametreler": {"karsilastirma": "önceki hareketin hacmi"}},
+      {"ad": "Destek ve direnç", "parametreler": {}}
+    ],
+    "long_giris": [
+      "Yükseliş trendi (daha yüksek zirve ve dip)",
+      "Geri çekilme, önceki yükselişin hacmine göre düşük hacimle gerçekleşir",
+      "Geri çekilme destek ile birleşen bir seviyede biter; trend yönünde AL"
+    ],
+    "short_giris": [
+      "Düşüş trendi (daha düşük zirve ve dip)",
+      "Düzeltme, önceki düşüşün hacmine göre düşük hacimle gerçekleşir",
+      "Düzeltme direnç ile birleşen bir seviyede biter; trend yönünde SAT"
+    ],
+    "stop_loss": null,
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Destek ve direnç ile birlikte kullanılır (kitap: yanlış girişleri önlemek için basit filtre)",
+      "Hacim tek mumda değil, bağlamında değerlendirilir (s.72)"
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Hacim karşılaştırması (önceki hareketin hacmi) ölçülebilir; ancak 'düşük hacim' eşiği, geri çekilmenin bittiği anın tanımı ve çıkış kuralı yok."
+    },
+    "belirsizlikler": [
+      "'Düşük hacim' için sayısal eşik tanımlı değil",
+      "Geri çekilmenin bittiğini gösteren onay mumu belirtilmemiş",
+      "CFD'lerde hacim verisi genellikle eksik (s.67); forex için tick volume kullanılabilir (varsayım)",
+      "Stop ve kâr al yok",
+      "Çelişki: s.73'te hacim onayı beklemeden kırılmaların alınabileceği yazıyor; bu, hacim onayı şartıyla çelişiyor"
+    ],
+    "uyumluluk_notu": "≥5m uyumlu (kısa ve günlük grafikler). Forex'te hacim verisi tick volume ile sınırlıdır. Hisse, vadeli işlem ve kripto için hacim doğrudan kullanılabilir.",
+    "varyantlar": [
+      "Yükseliş: düşük hacimli düzeltmede AL",
+      "Düşüş: düşük hacimli düzeltmede SAT"
+    ],
+    "anahtar_kelimeler": ["hacim", "dusuk-hacim-duzeltme", "geri-cekilme", "destek-direnc", "trend-yonu", "hacim-fiyat-ayrismasi"]
+  },
+  {
+    "kart_id": "scalp__vwap-geri-cekilme-plani__schroder",
+    "ad": "VWAP Geri Çekilmesinde Dip Alımı ve Son Dip Kırılımında Çıkış (BIDU Planı)",
+    "stil": "scalp",
+    "kaynak": {"pdf": "Günlük_Alım_Satım_Hızlı_Daha_Hızlı_Scalping_-_Philipp_Schroder_ve_Valentin_Rossiwall_283_s.pdf", "sayfalar": [77, 78, 79, 201, 202]},
+    "ozet": "Satıcıların fiyatı daha fazla düşüremediği anda ve fiyat VWAP'a inip daha yüksek dipler oluşturduğunda al; son dip kırıldığı anda sat. Kitap, VWAP'ı hem destek seviyesi hem de kurumsal emir akışının referansı olarak tanımlar.",
+    "kategori": "destek_direnc",
+    "piyasa_rejimi": "herhangi",
+    "orijinal_piyasa": "hisse",
+    "zaman_dilimi": {"islem": "gün içi (dakika)", "ust_filtre": "günlük"},
+    "gostergeler": [
+      {"ad": "VWAP", "parametreler": {"oturum": "gün içi"}}
+    ],
+    "long_giris": [
+      "Satıcılar fiyatı daha fazla aşağı çekemez",
+      "Fiyat VWAP'a iner ve daha yüksek dipler oluşur",
+      "AL (kitap: VWAP altında alım genellikle iyi olarak değerlendirilir)"
+    ],
+    "short_giris": [],
+    "stop_loss": null,
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": "Son dip kırılır kırılmaz SAT (BIDU örneği, s.201-202)",
+    "filtreler": [
+      "Açılış ve kapanış saatlerindeki yüksek hacim ve oynaklık dikkate alınır (kitap: U şeklinde hacim dağılımı, s.79)"
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "VWAP hesabı tanımlı, ancak 'VWAP'a inme' ve 'daha yüksek dip' yoruma açık; kısa taraf kuralı yok."
+    },
+    "belirsizlikler": [
+      "Kısa taraf için açık kural yok",
+      "'Daha yüksek dip' ve 'son dip' tanımı mum veya swing bazlı değil",
+      "VWAP hacim ağırlıklı olduğu için forex/CFD'de hacim verisi sorunlu",
+      "BIDU örneği bir plan açıklaması; istatistik ve stop yok"
+    ],
+    "uyumluluk_notu": "Hisse ve endeks vadeli işlemler için uygun. Forex'te VWAP için hacim gerekir; tick volume ile yaklaşık hesaplanabilir (varsayım). ≥5m ile uyumlu.",
+    "varyantlar": [],
+    "anahtar_kelimeler": ["vwap", "dip-alimi", "daha-yuksek-dip", "bidu", "destek", "gun-ici", "hacim-agirlikli"]
+  },
+  {
+    "kart_id": "scalp__altin-hac-olum-hac-rejim__schroder",
+    "ad": "Altın Haç / Ölüm Haçı: 50 EMA ile 200 EMA Rejim Filtresi",
+    "stil": "scalp",
+    "kaynak": {"pdf": "Günlük_Alım_Satım_Hızlı_Daha_Hızlı_Scalping_-_Philipp_Schroder_ve_Valentin_Rossiwall_283_s.pdf", "sayfalar": [128, 129, 130, 131]},
+    "ozet": "50 üssel hareketli ortalama 200 üssel hareketli ortalamanın üzerindeyse (Altın Haç) piyasa yükseliş rejimindedir ve uzun yönde işlem tercih edilir; altındaysa (Ölüm Haçı) ayı rejimindedir ve kısa yönde işlem tercih edilir. Kitap bu kesişimin sinyal olarak kullanılmasını ve trendle mücadele edilmemesini önerir.",
+    "kategori": "trend_takip",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {"islem": "1d (rejim)", "ust_filtre": null},
+    "gostergeler": [
+      {"ad": "EMA", "parametreler": {"periyot": 50}},
+      {"ad": "EMA", "parametreler": {"periyot": 200}}
+    ],
+    "long_giris": [
+      "50 EMA, 200 EMA'nın üzerindedir (Altın Haç rejimi)",
+      "Boğa piyasasında piyasa liderlerinde ve yükselen sektörlerde uzun işlem"
+    ],
+    "short_giris": [
+      "50 EMA, 200 EMA'nın altındadır (Ölüm Haçı rejimi)",
+      "Ayı piyasasında en zayıf hisselerde kısa işlem"
+    ],
+    "stop_loss": null,
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": "Rejim tersine döndüğünde (Ölüm Haçı veya Altın Haç) yön değiştirilir; geçiş birkaç gün ila birkaç hafta sürebilir (kitap)",
+    "filtreler": [
+      "Kitap S&P 500 üzerinde uygulanmış; rejim tespiti haftada bir kontrol edilebilir (s.128)"
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": "Kitap: 1930-2010 arasında Altın Haç stratejisinin S&P 500 al-tut'tan daha iyi performans gösterdiğini belirtiyor (grafik; istatistik tablosu görsel, s.130-131).",
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Rejim kuralı (50 EMA / 200 EMA konumu) tamamen sayısal; ancak giriş tetikleyicisi (hangi mum kapanışı) ve işlem seçimi (hangi enstrüman) tanımlanmamış."
+    },
+    "belirsizlikler": [
+      "Giriş tetikleyicisi (mum kapanışı, gün içi) belirtilmemiş",
+      "Kitap rejim tespitini web sitesindeki bir gösterge ile yapıyor; hesap ayrıntısı metinde yok",
+      "Geçiş teyit süresi tanımlı değil ('birkaç gün ila birkaç hafta')",
+      "İstatistik tablosu metinde yok (s.130 görsel)",
+      "Kart 'scalp' kapsamında değil, günlük rejim filtresi"
+    ],
+    "uyumluluk_notu": "Günlük rejim filtresi olarak ≥5m scalp sistemlerine üst filtre olarak uygulanabilir. Forex, kripto ve endekslerde 50/200 EMA aynen hesaplanabilir; hacim gerekmez.",
+    "varyantlar": [],
+    "anahtar_kelimeler": ["altin-hac", "olum-hac", "ema50", "ema200", "rejim-filtresi", "endeks", "uzun-vadeli"]
+  },
+  {
+    "kart_id": "scalp__piyasa-lideri-tarama-geri-cekilme__schroder",
+    "ad": "Piyasa Lideri Tarama ve Geri Çekilmede Giriş (Hisse)",
+    "stil": "scalp",
+    "kaynak": {"pdf": "Günlük_Alım_Satım_Hızlı_Daha_Hızlı_Scalping_-_Philipp_Schroder_ve_Valentin_Rossiwall_283_s.pdf", "sayfalar": [120, 121, 127, 132, 133, 247, 248, 249, 250]},
+    "ozet": "Yeni 52 haftalık zirveye ulaşmış, hacmi ortalamanın üzerinde ve fiyatı 20, 50, 100, 200 günlük ortalamaların üzerinde olan hisseler piyasa lideri kabul edilir. Yükseliş trendinde bu liderlerde geri çekilme gördüğünde uzun, düşüş trendinde zayıf hisselerde geri çekilmede kısa girilir.",
+    "kategori": "diger",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "hisse",
+    "zaman_dilimi": {"islem": "1d (tarama) ve gün içi (giriş)", "ust_filtre": "1w"},
+    "gostergeler": [
+      {"ad": "SMA", "parametreler": {"periyot": [20, 50, 100, 200]}},
+      {"ad": "52 haftalık zirve/dip", "parametreler": {}},
+      {"ad": "Hacim", "parametreler": {"min_gunluk_hacim": "1 milyon (kitapta 1-7 milyon arası da geçiyor)"}}
+    ],
+    "long_giris": [
+      "Hisse 52 haftalık zirvede veya yakınında",
+      "Fiyat 20, 50, 100 ve 200 günlük SMA'nın üzerinde",
+      "Günlük hacim ortalamanın üzerinde ve en az 1 milyon",
+      "Fiyat en az 10 $",
+      "Yükseliş trendinde geri çekilme sonrası uzun giriş"
+    ],
+    "short_giris": [
+      "Fiyat 20, 50, 100 ve 200 günlük SMA'nın altında (düşüş trendi)",
+      "Zayıf hisselerde geri çekilme sonrası kısa giriş"
+    ],
+    "stop_loss": null,
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "ATR en az 1,5 (kitap; birim belirtilmemiş)",
+      "Önemli şirket haberi ve kazanç açıklaması günlerinde gün içi pozisyon tutulmaz (s.134)",
+      "Kitap yüksek likiditeli ABD hisselerini tercih eder"
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Tarama kriterleri sayısal; ancak 'geri çekilme' tanımı ve çıkış kuralı yok, piyasa liderliği 'göreceli güç' olarak yorumlanıyor."
+    },
+    "belirsizlikler": [
+      "'Geri çekilme' tanımı yok (yüzde, mum sayısı veya seviye)",
+      "Hacim eşiği farklı verilmiş (günde 1 milyon / 1-7 milyon)",
+      "ATR 1,5 birimi belirtilmemiş (yüzde mi dolar mı)",
+      "Giriş tetikleyicisi, stop ve kâr al yok",
+      "Forex için doğrudan uygulanamaz; para birimi sepetinde benzer liderlik tanımı varsayım olur"
+    ],
+    "uyumluluk_notu": "Hisse tarama kartı; ≥5m giriş için gün içi veri gerekir. Forex ve kriptoda hacim ve sektör kavramı yerine güçlü para birimi veya coin sıralaması kullanılabilir (varsayım).",
+    "varyantlar": [
+      "Yükseliş tarafı: 20/50/100/200 SMA üstünde geri çekilme",
+      "Düşüş tarafı: 20/50/100/200 SMA altında geri çekilme"
+    ],
+    "anahtar_kelimeler": ["piyasa-lideri", "52-hafta-zirvesi", "sma", "hacim", "tarama", "geri-cekilme", "hisse", "finviz"]
+  },
+  {
+    "kart_id": "scalp__kisa-sikisma-kisa-faiz__schroder",
+    "ad": "Kısa Sıkışma: Yüksek Kısa Faiz Oranında Yükseliş Beklentisi",
+    "stil": "scalp",
+    "kaynak": {"pdf": "Günlük_Alım_Satım_Hızlı_Daha_Hızlı_Scalping_-_Philipp_Schroder_ve_Valentin_Rossiwall_283_s.pdf", "sayfalar": [33, 87, 88]},
+    "ozet": "Hissenin kısa faiz oranı yüksekse (kitap: %10 üzeri tercih edilir) ve fiyat yükselmeye başlarsa, kısa satıcılar pozisyonlarını kapatmak için alım yapmak zorunda kalır (kısa sıkışma). Bu nedenle yükseliş beklentisiyle uzun işlem açılır.",
+    "kategori": "momentum",
+    "piyasa_rejimi": "herhangi",
+    "orijinal_piyasa": "hisse",
+    "zaman_dilimi": {"islem": "gün içi", "ust_filtre": "1d"},
+    "gostergeler": [
+      {"ad": "Kısa faiz oranı (short interest, %)", "parametreler": {"esik_yuzde": 10}}
+    ],
+    "long_giris": [
+      "Hissenin kısa faiz oranı yüksek (kitap: oran ne kadar yüksekse o kadar iyi, %10 üzeri tercih)",
+      "Fiyat yükselmeye başlar",
+      "Uzun pozisyon"
+    ],
+    "short_giris": [],
+    "stop_loss": null,
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Kısa faiz oranı ile ortalama günlük hacim birlikte değerlendirilir (s.88)"
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Eşik (%10) ve yön mantığı var; ancak veri gecikmeli ve sıkışmanın başlangıç zamanlaması tanımsız."
+    },
+    "belirsizlikler": [
+      "Kısa faiz verisi kitapta aylık ölçümdür; gün içi işlemle uyumsuz",
+      "Sıkışma başlangıcı ve giriş zamanlaması tanımlı değil",
+      "Stop ve kâr al yok",
+      "Kitap 'çok düşük kısa faiz oranı' ile fiyat düşüşünü ilişkilendiriyor ama kısa işlem kuralı yazmıyor"
+    ],
+    "uyumluluk_notu": "Forex ve kripto için kısa faiz verisi yok; hisse için uygulanabilir ama ≥5m scalp için veri gecikmeli. 1L3A kapsamında zayıf.",
+    "varyantlar": [],
+    "anahtar_kelimeler": ["kisa-faiz", "kisa-sikisma", "short-interest", "hisse", "yukselis-beklentisi"]
+  },
+  {
+    "kart_id": "scalp__nyse-tick-karsit-trend__schroder",
+    "ad": "NYSE TICK Uç Değerinde Karşıt Trend (E-Mini S&P)",
+    "stil": "scalp",
+    "kaynak": {"pdf": "Günlük_Alım_Satım_Hızlı_Daha_Hızlı_Scalping_-_Philipp_Schroder_ve_Valentin_Rossiwall_283_s.pdf", "sayfalar": [89, 90, 91, 92]},
+    "ozet": "NYSE TICK +1000 veya -1000 gibi uç değerlere ulaştığında ve yeni bir TICK uç seviyesi oluştuğunda karşıt trend pozisyonu açılır: yeni dip uç değeri uzun, yeni tepe uç değeri kısa sinyal üretir. Amaç birkaç tik kazanmaktır.",
+    "kategori": "ortalamaya_donus",
+    "piyasa_rejimi": "herhangi",
+    "orijinal_piyasa": "vadeli",
+    "zaman_dilimi": {"islem": "tik veya dakika (belirtilmemiş)", "ust_filtre": "1h"},
+    "gostergeler": [
+      {"ad": "NYSE TICK", "parametreler": {"uc_deger_ust": 1000, "uc_deger_alt": -1000}},
+      {"ad": "BANK endeksi", "parametreler": {}}
+    ],
+    "long_giris": [
+      "NYSE TICK yeni bir dip uç değerine iner",
+      "Karşıt trend: uzun pozisyon"
+    ],
+    "short_giris": [
+      "NYSE TICK yeni bir tepe uç değerine çıkar",
+      "Karşıt trend: kısa pozisyon"
+    ],
+    "stop_loss": null,
+    "kar_al": "Birkaç tik kâr (kitap: amaç sadece birkaç tik toplamak; sayısal değil)",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "TICK tek başına değil, dayanak fiyat ve BANK endeksi ile birlikte değerlendirilir (s.90)",
+      "Gün içinde genellikle bir veya iki sinyal (s.91)",
+      "Kitap saatlik veya günlük trend ile birleştirilebileceğini söylüyor (s.91)"
+    ],
+    "pozisyon_risk": "Kitap: strateji büyük pozisyon büyüklüğü ile işlem görür (s.91); risk limiti yazılmamış",
+    "iddia_edilen_performans": "Kitap: karşıt trend yaklaşımı isabet oranını önemli ölçüde artırır (genel ifade, sayısal değil).",
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Eşik değerleri (±1000) ve yön kuralı sayısal; ancak veri kaynağı NYSE TICK ve 'yeni uç değer' için pencere tanımı yok."
+    },
+    "belirsizlikler": [
+      "TICK verisi forex'te yok; kart E-Mini S&P gibi endeks vadelileri için yazılmış",
+      "'Yeni TICK uç değeri' için zaman penceresi tanımlı değil",
+      "Stop ve kâr al belirtilmemiş",
+      "Kitap TRIN ve VIX'in tamamlayıcı kullanılabileceğini söylüyor, fakat kural vermiyor (s.93-95)"
+    ],
+    "uyumluluk_notu": "Forex ve kripto için uygun değil (TICK borsa verisi). Endeks vadeli işlemler için ≥5m'de test edilebilir; veri sağlayıcı gerekir.",
+    "varyantlar": [],
+    "anahtar_kelimeler": ["tick", "piyasa-icsel", "karsit-trend", "uc-deger", "e-mini-s-p", "trin", "bank-endeksi"]
+  },
+  {
+    "kart_id": "scalp__bant-okuma-seviye2__schroder",
+    "ad": "Bant Okuma: Seviye 2 ve Zaman-Satış ile Emir Akışı Takibi",
+    "stil": "scalp",
+    "kaynak": {"pdf": "Günlük_Alım_Satım_Hızlı_Daha_Hızlı_Scalping_-_Philipp_Schroder_ve_Valentin_Rossiwall_283_s.pdf", "sayfalar": [96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110]},
+    "ozet": "Seviye 2 (emir defteri) ve Zaman ve Satışlar listesi izlenerek büyük alıcı ya da satıcıların önemli fiyat seviyelerindeki davranışı yorumlanır. Büyük alıcılar agresif alım yapıyorsa ve fiyat direnç üzerinde tutunuyorsa alım, tersi durumda satım yapılır. Kitap bunun sayısal değil, deneyime dayalı bir yöntem olduğunu belirtir.",
+    "kategori": "diger",
+    "piyasa_rejimi": "herhangi",
+    "orijinal_piyasa": "hisse",
+    "zaman_dilimi": {"islem": "tik / emir akışı", "ust_filtre": null},
+    "gostergeler": [
+      {"ad": "Seviye 2 (emir defteri)", "parametreler": {}},
+      {"ad": "Zaman ve Satışlar", "parametreler": {}}
+    ],
+    "long_giris": [
+      "Büyük alıcılar agresif alım yapar (teklifi yükseltir, emirler gerçekleşir)",
+      "Önemli seviyede fiyat tutunur (sahte teklif değilse)"
+    ],
+    "short_giris": [
+      "Büyük satıcılar agresif satış yapar",
+      "Önemli seviyede fiyat direnç görür"
+    ],
+    "stop_loss": "Kitap: giriş seviyesine yakın sıkı stop (örnekte 2 sent); sayısal kural yok",
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": "Önemli seviyelerde büyük satış emirleri görülürse pozisyon kapatılır (kitap, s.104)",
+    "filtreler": [
+      "Zayıf bant (az sayıda küçük emir) görülürse işlem yapılmaz (s.105)",
+      "Piyasa yalnızca kritik seviyedeyken izlenir (s.105)",
+      "Yüksek hacim ve haber günlerinde bandın okunması kolaylaşır (s.105)"
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": "Kitap tek bir JDSU işlemini örnek veriyor; istatistik yok.",
+    "kodlanabilirlik": {
+      "puan": 0,
+      "gerekce": "Büyük emir, zayıf bant, duvar ve kurumsal ilgi gibi kavramlar sayısal değil; sezgisel yorum gerektiriyor."
+    },
+    "belirsizlikler": [
+      "'Büyük emir', 'zayıf bant', 'duvar' ve 'kurumsal ilgi' için sayısal tanım yok",
+      "Adım 1-11 sıralı yöntemi var, ama her adımın karar çıktısı yok",
+      "DMA erişimli broker gerekir; CFD ile uygulanamaz (s.103)",
+      "Sahte teklif riski kitapta kabul ediliyor (s.101)",
+      "Tek vaka örneği (JDSU) ile yöntem gösteriliyor"
+    ],
+    "uyumluluk_notu": "≥5m için uygun değil (tik ve emir akışı verisi gerekir). Forex için emir defteri verisi genelde sınırlı. Kodlanamaz; kapsam dışı olarak işaretlenmeli.",
+    "varyantlar": [],
+    "anahtar_kelimeler": ["bant-okuma", "seviye-2", "emir-defteri", "zaman-satis", "emir-akisi", "sezgisel", "dma"]
+  },
+  {
+    "kart_id": "scalp__piyasa-acilis-haber-hareketi__schroder",
+    "ad": "Piyasa Öncesi Haber Hareketi (Fiyat %5-10 ve Hacim %10-20 Artışı)",
+    "stil": "scalp",
+    "kaynak": {"pdf": "Günlük_Alım_Satım_Hızlı_Daha_Hızlı_Scalping_-_Philipp_Schroder_ve_Valentin_Rossiwall_283_s.pdf", "sayfalar": [111, 118, 119, 120]},
+    "ozet": "Piyasa öncesinde hisse fiyatı %5-10 artmış ve hacmi %10-20 artmışsa, kitap bunu haber hamlesi işareti sayar. Açılış fiyatının önemli bir teknik seviyeye yakın olduğu durumlarda, haberin mesajı doğru ve yeniyse momentum takip edilerek uzun işlem açılır.",
+    "kategori": "momentum",
+    "piyasa_rejimi": "volatil",
+    "orijinal_piyasa": "hisse",
+    "zaman_dilimi": {"islem": "piyasa öncesi ve açılış (dakika)", "ust_filtre": "1d"},
+    "gostergeler": [
+      {"ad": "Piyasa öncesi fiyat değişimi", "parametreler": {"esik_yuzde": "5-10"}},
+      {"ad": "Piyasa öncesi hacim artışı", "parametreler": {"esik_yuzde": "10-20"}}
+    ],
+    "long_giris": [
+      "Piyasa öncesi fiyat %5-10 yükselmiş ve hacim %10-20 artmış",
+      "Açılış fiyatı önemli bir teknik seviyeye yakın",
+      "Haberin mesajı doğru ve yeni ise momentum takip edilir"
+    ],
+    "short_giris": [],
+    "stop_loss": null,
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Mesaj doğru mu ve yeni mi kontrol edilir (kitap: sahte haber uyarısı, s.118)",
+      "Ne yapılacağı netleşmediğinde işlem yapılmaz (s.118)",
+      "Kazanç ve rapor açıklaması sırasında gün içi pozisyon tutulmaz (s.134)"
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Piyasa öncesi değişim ve hacim eşikleri verilmiş, ancak haberin önemi ve doğruluğu öznel; giriş, stop ve kâr kuralı yok."
+    },
+    "belirsizlikler": [
+      "Eşikler aralık olarak verilmiş (%5-10, %10-20); tek değer yok",
+      "Haberin 'önemli' sayılması öznel",
+      "Kısa taraf için açık kural yok",
+      "Stop ve kâr al yok",
+      "Forex için karşılığı ekonomik haber takvimi ile tanımlanmalı (varsayım)"
+    ],
+    "uyumluluk_notu": "Hisse haber oyunu. Forex'te haber takvimi (ör. forexfactory) kullanılabilir, ancak piyasa öncesi hacim verisi yok. ≥5m için kısmen uyumlu.",
+    "varyantlar": [],
+    "anahtar_kelimeler": ["haber", "piyasa-oncesi", "hacim-artisi", "kazanc", "momentum", "acilis", "hisse"]
+  },
+  {
+    "kart_id": "scalp__zarar-durdurma-yontemleri__schroder",
+    "ad": "Zarar Durdurma Yöntemleri: Sabit Tutar, Yüzde, ATR ve Teknik Seviye",
+    "stil": "scalp",
+    "kaynak": {"pdf": "Günlük_Alım_Satım_Hızlı_Daha_Hızlı_Scalping_-_Philipp_Schroder_ve_Valentin_Rossiwall_283_s.pdf", "sayfalar": [166, 167, 168, 169, 170, 171, 172]},
+    "ozet": "Kitap dört stop yöntemi sunar: sabit para tutarı (ör. 100 $ riske, EUR/USD'de 10 pip), giriş fiyatının yüzdesi (ör. %0,5), volatilite yüzdesi (ATR'nin 1,5 katı ile riskin yüzdesi) ve teknik seviye (son dip veya tepe). Her işlemde sermayenin yaklaşık %3'ü riske atılır ve en az 4:1 risk-ödül aranır.",
+    "kategori": "diger",
+    "piyasa_rejimi": "herhangi",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {"islem": "herhangi", "ust_filtre": null},
+    "gostergeler": [
+      {"ad": "ATR", "parametreler": {"periyot": "belirtilmemiş", "carpan": 1.5}}
+    ],
+    "long_giris": [],
+    "short_giris": [],
+    "stop_loss": "Dört yöntemden biri: (1) sabit tutar: giriş ± riske edilen tutarın pip/puan karşılığı; (2) giriş fiyatının yüzdesi; (3) ATR x 1,5 ile hesaplanan volatilite stop'u; (4) son dip (uzun) veya son tepe (kısa) gibi teknik seviye",
+    "kar_al": null,
+    "iz_suren_stop": "Kitap: stop kârı korumak için hareket ettirilebilir (takip eden stop); kural sayısal değil (s.152)",
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Kaldıraçlı ürünlerde ve küçük zaman dilimlerinde stop zorunlu (s.162)",
+      "Stop unutulmamalı; OCO kullanılmıyorsa emrin sistemde kalması kontrol edilmeli (s.167)",
+      "Stop mesafesi kabul edilemezse pozisyon büyüklüğü düşürülür veya işlem atlanır (s.172)"
+    ],
+    "pozisyon_risk": "Her işlemde yatırılan sermayenin yaklaşık %3'ü riske atılır; en az 4:1 risk-ödül oranı aranır (s.168). Örnek: 1 işlemde en fazla 300 $, düzenli scalpingde 100 $ (s.140)",
+    "iddia_edilen_performans": "Kitap: stop kullanımının gizli maliyetleri var; boğa piyasasında sabit stop getiriyi bozabilir (s.159-160). Sayısal getiri değeri yok.",
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Sabit tutar ve yüzde yöntemleri tamamen sayısal (3); teknik seviye ve ATR örneği yorumlu, ATR örneğinde hesap açık değil."
+    },
+    "belirsizlikler": [
+      "ATR örneği ('ATR 16 $ x %1 = 16 $') açıklaması tutarsız; ATR periyodu verilmemiş",
+      "Teknik stop için 'son dip/tepe' tanımı (kaç mum, swing) yok",
+      "Hangi yöntemin hangi işlem tarzında seçileceği kuralı net değil",
+      "Stop mesafesi ile pozisyon büyüklüğü ilişkisi için formül yok"
+    ],
+    "uyumluluk_notu": "Her piyasaya uygulanabilir; ATR tabanlı yöntem 1L3A'nın ≥5m hedefi ile doğrudan uyumlu. Forex'te pip değeri gerekir; hacim gerekmiyor.",
+    "varyantlar": [
+      "Sabit sermaye tutarı (ör. 100 $ risk)",
+      "Giriş fiyatının yüzdesi (ör. %0,5)",
+      "ATR x yüzde (1,5 x ATR)",
+      "Teknik seviye (son dip veya tepe)"
+    ],
+    "anahtar_kelimeler": ["stop-loss", "atr", "sabit-tutar", "yuzde-stop", "teknik-stop", "risk-yonetimi", "risk-odulu-4-1"]
+  },
+  {
+    "kart_id": "scalp__spread-genislik-sinyali__schroder",
+    "ad": "Alış-Satış Farkı (Spread) Genişliğine Göre Scalp Sinyali",
+    "stil": "scalp",
+    "kaynak": {"pdf": "Günlük_Alım_Satım_Hızlı_Daha_Hızlı_Scalping_-_Philipp_Schroder_ve_Valentin_Rossiwall_283_s.pdf", "sayfalar": [142, 143]},
+    "ozet": "Alış-satış farkı normalden küçükse scalper alım yapar, çünkü satış baskısının kısa sürmesi beklenir. Alış-satış farkı normalden büyükse satış fiyatı olması gerekenden yüksek kabul edilir ve satış sinyali olarak yorumlanır.",
+    "kategori": "diger",
+    "piyasa_rejimi": "herhangi",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {"islem": "tik / dakika (belirtilmemiş)", "ust_filtre": null},
+    "gostergeler": [
+      {"ad": "Alış-satış farkı (spread)", "parametreler": {"normal_seviye": "belirtilmemiş"}}
+    ],
+    "long_giris": [
+      "Alış-satış farkı normalden küçüktür",
+      "Satış baskısının kısa vadeli olduğu varsayılarak alım yapılır"
+    ],
+    "short_giris": [
+      "Alış-satış farkı normalden büyüktür",
+      "Satış sinyali olarak kısa pozisyon"
+    ],
+    "stop_loss": null,
+    "kar_al": "Birkaç kuruş kâr (kitap; sayısal değil)",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Piyasa yavaş olduğu dönemlerde (kitap)",
+      "Çok sayıda işlem nedeniyle komisyon ve spread düşük olmalı (s.143)"
+    ],
+    "pozisyon_risk": "Kitap: ayarlanmış pozisyon büyüklüğü ile önemli kâr elde edilebilir; sayısal kural yok",
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Yön mantığı tanımlı, ancak 'normal' spread'in nasıl hesaplanacağı ve eşik değer yok."
+    },
+    "belirsizlikler": [
+      "'Normal' spread için ortalama ve pencere tanımlı değil",
+      "Stop ve kâr al sayısal değil",
+      "Spread verisi broker'a bağlıdır; forex'te değişkendir",
+      "Kitap bu yöntemin ne zaman kullanılmayacağını belirtmiyor"
+    ],
+    "uyumluluk_notu": "Forex'te bid/ask verisi broker üzerinden erişilebilir; hacim gerekmiyor. Tik düzeyinde bir yöntem olduğu için ≥5m'de tipik değil.",
+    "varyantlar": [],
+    "anahtar_kelimeler": ["spread", "bid-ask", "alis-satis-farki", "tik", "scalp", "likidite"]
+  },
+  {
+    "kart_id": "scalp__kirilim-sonrasi-geri-test__schroder",
+    "ad": "Kırılan Direnç/Desteğe Geri Test ve Geri Çekilmede Giriş",
+    "stil": "scalp",
+    "kaynak": {"pdf": "Günlük_Alım_Satım_Hızlı_Daha_Hızlı_Scalping_-_Philipp_Schroder_ve_Valentin_Rossiwall_283_s.pdf", "sayfalar": [49, 50, 55, 56, 57, 58]},
+    "ozet": "Bir direnç seviyesi kırıldığında eski direnç destek olur; fiyat geri çekilip bu seviyenin üstünde tutunursa geri çekilmede uzun girilir. Destek kırılımında eski destek direnç olur ve geri çekilmede kısa girilir. Kitap, kırılımın kendisini kovalamayı tehlikeli bulur.",
+    "kategori": "destek_direnc",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {"islem": "belirtilmemiş (dakika ve günlük)", "ust_filtre": null},
+    "gostergeler": [
+      {"ad": "Destek ve direnç seviyeleri", "parametreler": {}}
+    ],
+    "long_giris": [
+      "Direnç seviyesi yukarı yönde kırılır",
+      "Fiyat geri çekilir ve kırılan direncin (artık destek) üzerinde tutunur",
+      "Geri çekilmede AL (kırılımı kovalamadan)"
+    ],
+    "short_giris": [
+      "Destek seviyesi aşağı yönde kırılır",
+      "Fiyat geri çekilir ve kırılan desteğin (artık direnç) altında kalır",
+      "Geri çekilmede SAT"
+    ],
+    "stop_loss": "Kitap: kırılımlarda her zaman bracket (stop) emri girilmeli (s.58); sayısal mesafe yok",
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Trend piyasalarda destek ve dirençler kolayca kırılabilir (s.58)",
+      "Yatay fazda işlem yapılmaz (s.60)",
+      "Kitap: gün içi kırılımların çoğu sahte olabilir (s.56)"
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Kırılım, geri test ve tutunma kavramları var; ancak onay ölçütü ve seviye tespiti öznel."
+    },
+    "belirsizlikler": [
+      "Kırılımın onay ölçütü (kapanış, hacim, süre) tanımlı değil",
+      "Geri çekilmenin tamamlandığını gösteren ölçüt yok",
+      "Sahte kırılım ayrımı için kural yok",
+      "Kâr al ve stop mesafesi sayısal değil",
+      "Kitap kırılım alımını genelde tehlikeli görüyor, ama bazı yerlerde kırılım alımı önerilebiliyor (s.59-60)"
+    ],
+    "uyumluluk_notu": "Her piyasada uygulanabilir (seviye ve geri çekilme kavramları genel). ≥5m için uyumlu; hacim ve seviye onayı eklenebilir.",
+    "varyantlar": [
+      "Yukarı kırılım sonrası geri çekilmede alış",
+      "Aşağı kırılım sonrası geri çekilmede satış",
+      "Başarılı kırılım sonrası pozisyon artırma (kitap, s.56)"
+    ],
+    "anahtar_kelimeler": ["kirilim", "geri-test", "destek-direnc", "bracket-emri", "sahte-kirilim", "retest"]
+  },
+  {
+    "kart_id": "scalp__macd-histogram-sifir-donusu__schroder",
+    "ad": "MACD Histogramı: Sıfır Çizgisi Altından Dönüş ve Üstte Aşağı Eğim",
+    "stil": "scalp",
+    "kaynak": {"pdf": "Günlük_Alım_Satım_Hızlı_Daha_Hızlı_Scalping_-_Philipp_Schroder_ve_Valentin_Rossiwall_283_s.pdf", "sayfalar": [85, 86]},
+    "ozet": "MACD histogramı sıfır çizgisinin altına inip yukarı döndüğünde alım sinyali; histogram sıfır çizgisinin üzerinde aşağı eğimliyse satım sinyali olarak yorumlanır. Kitap histogramı boğa ve ayı gücünün göstergesi sayar.",
+    "kategori": "momentum",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {"islem": "belirtilmemiş (kısa grafikler)", "ust_filtre": null},
+    "gostergeler": [
+      {"ad": "MACD histogramı", "parametreler": {"hizli": "belirtilmemiş", "yavas": "belirtilmemiş", "sinyal": "belirtilmemiş"}}
+    ],
+    "long_giris": [
+      "MACD histogramı sıfır çizgisinin altına iner ve yukarı döner"
+    ],
+    "short_giris": [
+      "MACD histogramı sıfır çizgisinin üzerindedir ve aşağı doğru eğimlidir"
+    ],
+    "stop_loss": null,
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Kitap: MACD trend göstergesi olarak da kullanılabilir; değer yükseliş trendindeyken MACD yükseliyorsa güçlü (s.85)"
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Histogram dönüşü ve sıfır çizgisi koşulu sayısal; ancak MACD parametreleri ve dönüş teyidi (mum kapanışı) belirtilmemiş."
+    },
+    "belirsizlikler": [
+      "MACD parametreleri (hızlı, yavaş, sinyal) kitapta yok",
+      "'Sıfır çizgisinin altına inip yukarı dönme' için teyit (mum kapanışı) tanımlı değil",
+      "Uyuşmazlık (divergence) kuralları da anlatılıyor ama sayısal değil (s.86)",
+      "Stop ve kâr al yok"
+    ],
+    "uyumluluk_notu": "≥5m uyumlu; forex'te MACD aynen kullanılabilir. Hacim gerekmiyor. Kripto ve hisste de aynı mantık geçerli.",
+    "varyantlar": [],
+    "anahtar_kelimeler": ["macd", "histogram", "sifir-cizgisi", "momentum", "trend-gucu", "uyusmazlik"]
+  }
+]

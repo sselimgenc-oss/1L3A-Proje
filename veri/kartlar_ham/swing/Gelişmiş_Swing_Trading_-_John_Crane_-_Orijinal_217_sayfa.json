@@ -1,0 +1,680 @@
+[
+  {
+    "kart_id": "swing__reaksiyon-swing-tetik__crane",
+    "ad": "Reaksiyon Swing Merkez Tetik (Swing Trade)",
+    "stil": "swing",
+    "kaynak": {"pdf": "Gelişmiş_Swing_Trading_-_John_Crane_-_Orijinal_217_sayfa.pdf", "sayfalar": [30, 39, 40, 41, 42, 43, 52]},
+    "ozet": "Bir Reaksiyon swingi (B: swing başlangıç kapanışı, C: swing bitiş kapanışı) tamamlanınca, B-C aralığının tam ortasına (tetik fiyat) stop emri konur. Tetiklenirse hedef, karşı uçtan önceki hareket (A-B) kadar ters yönde projekte edilir; zaman sınırı ters sayımla belirlenir. Düşen trend için satış, yükselen trend için alış.",
+    "kategori": "trend_takip",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "vadeli",
+    "zaman_dilimi": {"islem": "1D", "ust_filtre": null},
+    "gostergeler": [
+      {"ad": "Reaksiyon swing (kapanış pivotları)", "parametreler": {"minimum_gun": 3}},
+      {"ad": "Ters ve ileri sayım", "parametreler": {"sayim_birimi": "islem gunu, tatiller dahil, hafta sonu hariç"}}
+    ],
+    "long_giris": [
+      "Yükselen trend: B en yüksek kapanış, ardından C en düşük kapanış olacak şekilde Reaksiyon swingi oluşmuş (swing en az 3 gün, B ve C dahil)",
+      "Tetik fiyat = B - (B - C) / 2 (düzeltme bittikten sonra hesaplanır)",
+      "Düzeltmenin bittiği onayı: C'den sonra iki gün üst üste yukarı kapanış VEYA fiyatın B'nin üstüne çıkması",
+      "Tetik fiyata buy stop; tetiklenince alış"
+    ],
+    "short_giris": [
+      "Düşen trend: B en düşük kapanış, ardından C en yüksek kapanış olacak şekilde Reaksiyon swingi oluşmuş (swing en az 3 gün, B ve C dahil)",
+      "Tetik fiyat = C - (C - B) / 2 (düzeltme bittikten sonra hesaplanır)",
+      "Onay: C'den sonra iki gün üst üste aşağı kapanış VEYA fiyatın B'nin altına inmesi",
+      "Tetik fiyata sell stop; tetiklenince satış"
+    ],
+    "stop_loss": "Uzun: C'nin (swing dibi) altı. Kısa: C'nin (swing tepesi) üstü. Kitap bunu koruyucu stop olarak tarif eder (Sayfa 41-43).",
+    "kar_al": "Hedef: uzun için C + (B - A), kısa için C - (A - B); A, B'den önceki karşı uç (Sayfa 40, 42-43). Hedef veya zaman sınırı hangisi önce gelirse pozisyon kapanır.",
+    "iz_suren_stop": "Fiyat B'yi geçince stop giriş fiyatına çekilir; sonrasında fiyat yönünde kademeli takip (ayrıntı kitapta 'yatırımcının takdiri', Sayfa 41).",
+    "zaman_cikisi": "B ile A arasındaki ters sayım (gün) kadar C'den ileri sayılır; bu gün sonuna kadar hedef gelmediyse pozisyon kapatılır (Sayfa 42-43).",
+    "filtreler": [
+      "Trend yönü: yükselişte yüksek tepe ve yüksek dip, düşüşte düşük tepe ve düşük dip (Sayfa 44)",
+      "Swing en az 3 gün (Sayfa 39)",
+      "Momentum yönünde giriş (Sayfa 43)"
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": "Kitabın S&P 500 örneklerinde 7 swing işleminden 6'sı kârlı, 1'i başa baş (Sayfa 52). Genel kazanma oranı verilmemiş.",
+    "kodlanabilirlik": {
+      "puan": 3,
+      "gerekce": "Tetik (B-C merkezi), hedef (A-B), zaman (ters sayım) ve stop kuralları sayısal. Onay kuralı (iki kapanış ya da B kırılımı) ölçülebilir. Yalnız trailing stop takdire bırakılmış."
+    },
+    "belirsizlikler": [
+      "Trailing stop için kesin kural yok ('kişisel takdir', Sayfa 41)",
+      "Onay için iki alternatif var (iki kapanış / B kırılımı); hangisinin önceliği belirtilmemiş",
+      "Pivotlar kapanışla tanımlanıyor; tetik fiyatın intraday dolumu varsayılıyor",
+      "Tatil günleri sayıma dahil, hafta sonu hariç (Sayfa 27) - bu açıkça yazılı"
+    ],
+    "uyumluluk_notu": "1L3A için: 30 dakikalık ve 5 dakikalık örnekler var (Sayfa 56-57, 192-193); 5 dakika üstüne uyarlanabilir. Pip ya da seans bağımlılığı yok. Hacim gerekmez. Vadeli ve hisse örnekleri var (Sayfa 195-199); kripto ve ABD hisse perpetual'larda aynı fiyat-pivot mantığı işler.",
+    "varyantlar": [
+      "Two-Day kuralı ile erken giriş filtresi (ayrı kart: swing__iki-gun-kurali__crane)",
+      "Aynı swing için Action/Reaction çizgisi ile hedef (ayrı kart: swing__action-reaction-cizgisi__crane)",
+      "Intraday 30 dakika örneği (Sayfa 57)"
+    ],
+    "anahtar_kelimeler": ["reaksiyon-swing", "merkez-tetik", "tetik-fiyat", "ters-sayim", "ileri-sayim", "reversal-date", "swing-trade", "buy-stop", "sell-stop"]
+  },
+  {
+    "kart_id": "swing__iki-gun-kurali__crane",
+    "ad": "Two-Day Rule (Iki Gun Kurali) Swing Filtresi",
+    "stil": "swing",
+    "kaynak": {"pdf": "Gelişmiş_Swing_Trading_-_John_Crane_-_Orijinal_217_sayfa.pdf", "sayfalar": [51, 52, 53, 56]},
+    "ozet": "Yükselen trendde bir pivot tepeden sonra iki işlem günü üst üste kapanış < açılış olursa olası bir swing kabul edilir. Ertesi seans için tetik (H - (H - L2) / 2; H pivot tepe, L2 ikinci düşüş gününün düşüğü) hesaplanır ve buy stop konur. Düşen trend için ayna.",
+    "kategori": "trend_takip",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "vadeli",
+    "zaman_dilimi": {"islem": "1D", "ust_filtre": null},
+    "gostergeler": [
+      {"ad": "Pivot tepe/dip (kapanis)", "parametreler": {}},
+      {"ad": "Acilis-kapanis karsilastirmasi", "parametreler": {"ardisik_gun": 2}}
+    ],
+    "long_giris": [
+      "Yükselen trend; pivot tepe (en yüksek kapanış H) belirlenmiş",
+      "Pivottan sonra iki işlem günü üst üste KAPANIŞ < AÇILIŞ",
+      "Tetik = H - (H - L2) / 2 (L2: ikinci düşüş gününün düşüğü)",
+      "Ertesi seans için buy stop tetik fiyatta; tetik dolmazsa her gün yeniden hesaplanır (Sayfa 52)"
+    ],
+    "short_giris": [
+      "Düşen trend; pivot dip (en düşük kapanış D) belirlenmiş",
+      "Pivottan sonra iki işlem günü üst üste KAPANIŞ > AÇILIŞ",
+      "Tetik = D + (H2 - D) / 2 (H2: ikinci yükseliş gününün yükseği); kitapta yazılı değil, aynalama varsayımı",
+      "Ertesi seans için sell stop tetik fiyatta"
+    ],
+    "stop_loss": "Tetik dolunca koruyucu stop, düzeltmenin (swing) ucunun ötesine: uzunda dip tarafına, kısada tepe tarafına. Örnek: Eurocurrency'de stop C dibinin altında (Sayfa 52).",
+    "kar_al": "Reaksiyon swing kartındaki hedef formülü (A-B ve C'den projeksiyon) uygulanır (Sayfa 52).",
+    "iz_suren_stop": null,
+    "zaman_cikisi": "Ters sayım (B'den A'ya) kadar ileri sayılır; hedef gelmezse o günün kapanışında kapat (Sayfa 53, örnek 8 gün).",
+    "filtreler": [
+      "Yalnızca iki gün kuralını sağlayan swingler: Crane 7 S&P işleminin sadece 4'ünün bu kurala uyduğunu belirtir (Sayfa 52)",
+      "Tetik dolmadan işlem yok; tetik her gün yeniden hesaplanır (Sayfa 52)"
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": "Kitap: 7 S&P işleminin 6'sı kârlı, 1'i başa baş; kuralı sağlayan 4 işlem var; kuralın bazı kârlı işlemleri kaçırdığını kitap kendisi belirtir (Sayfa 52).",
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Açılış-kapanış karşılaştırması ve tetik formülü sayısal. Pivot tanımı (en yüksek kapanış mı, en yüksek yüksek mi) kesin değil; düşen trend tetik hesabı kitapta yazılı değil."
+    },
+    "belirsizlikler": [
+      "Pivot tepe/dip tanımı kitapta açıkça 'en yüksek kapanış' olarak verilmemiş",
+      "Düşen trend tetik hesabı kitapta yok; aynalama varsayıldı",
+      "'Iki islem gunu' ardışık olmak zorunda mı, kitap açıkça söylemiyor (ardışık varsayıldı)"
+    ],
+    "uyumluluk_notu": "1L3A için: Two-Bar Rule ile 30 dakikalık çubuklarda da kullanılmış (Sayfa 56); 5 dakikaya uyarlanabilir. Pip ya da seans bağımlılığı yok. Hacim gerekmez. Tek başına giriş değil, filtre niteliğinde.",
+    "varyantlar": [
+      "Two-Bar Rule: 30 dakikalık çubuklarda iki çubuk (Sayfa 56)",
+      "Yalnızca filtre olarak kullanım (kart A'nın girişine ön koşul)"
+    ],
+    "anahtar_kelimeler": ["iki-gun-kurali", "two-day-rule", "pivot", "swing-filtre", "tetik-fiyat", "buy-stop", "sell-stop"]
+  },
+  {
+    "kart_id": "swing__reversal-date-stop__crane",
+    "ad": "Reversal Date Gununde Yeni Dip/Tepe Sonrasi Stop Emri",
+    "stil": "swing",
+    "kaynak": {"pdf": "Gelişmiş_Swing_Trading_-_John_Crane_-_Orijinal_217_sayfa.pdf", "sayfalar": [26, 27, 28, 65, 114, 115, 116, 117, 127, 128, 130]},
+    "ozet": "Ters-ileri sayımla hesaplanan Reversal date (RD) gününde piyasa önceki günün dibinin altına inerse, RD'nin tepesinin (ya da trail day tepesinin) üstüne buy stop konur ve 3 gün geçerlidir. Tepe için ayna: RD'de önceki günün tepesi aşılır, RD'nin dibinin altına sell stop konur.",
+    "kategori": "diger",
+    "piyasa_rejimi": "herhangi",
+    "orijinal_piyasa": "vadeli",
+    "zaman_dilimi": {"islem": "1D", "ust_filtre": null},
+    "gostergeler": [
+      {"ad": "Reversal date (ters ve ileri sayim)", "parametreler": {"sayim_birimi": "islem gunu, tatiller dahil, hafta sonu hariç"}}
+    ],
+    "long_giris": [
+      "RD hesaplanmış (Sayfa 26-28); RD gününde piyasa önceki günün en düşüğünün altına iner (yeni düşük) ve kitap bunu şart koşar (Sayfa 114)",
+      "RD'nin en yüksek fiyatının üstüne buy stop; giriş emri 3 gün geçerli, dolmazsa iptal (Sayfa 114)",
+      "Kitap bazı örneklerde buy stop'u trail day (RD'den sonraki gün) tepesinin üstüne koyar (Sayfa 117)"
+    ],
+    "short_giris": [
+      "RD gününde piyasa önceki günün en yükseğinin üstüne çıkar (yeni tepe), Sayfa 115",
+      "RD'nin en düşüğünün altına sell stop; 3 gün geçerli (Sayfa 115-116)"
+    ],
+    "stop_loss": "Uzun: RD'nin dibi ile trail day dibinden hangisi daha düşükse onun 3-5 tik altı. Kısa: RD tepesi ile trail day tepesinden hangisi yüksekse onun 3-5 tik üstü (Sayfa 130).",
+    "kar_al": null,
+    "iz_suren_stop": "Pozisyon açıldıktan sonra stop bir sonraki Reversal date'in dibinin/tepesinin hemen ötesine çekilir (Sayfa 65). Kitap sabit kar hedefi vermez.",
+    "zaman_cikisi": "Giriş stop emri 3 gün içinde dolmazsa iptal (Sayfa 114). Pozisyon için bir sonraki RD tarihi çıkış referansı (Sayfa 65).",
+    "filtreler": [
+      "Trail day kapanışı açılışın üstündeyse yükseliş yönü, altındaysa düşüş yönü beklenir; uzun işlemde trail day kapanış<açılış ise stop sıkılaştırılır (Sayfa 127-130)",
+      "RD'de yeni dip/tepe ile birlikte gap-and-go, peg-leg veya gap reversal teyidi varsa güven artar (Sayfa 137-147)",
+      "RD fiyatının buy/sell penceresi içinde olması (Sayfa 88-89)"
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": "Kazanma oranı verilmemiş. Kitap doğruluğun %100 olmadığını belirtir (Sayfa 91).",
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Giriş (önceki gün dibi/tepesi, RD tepe/dip, 3 gün geçerlilik) ve stop kuralları sayısal. RD hesabı sayısal. Ancak çıkış kuralı kısmen tanımlı ('ya çıkış ya stop', Sayfa 65) ve RD sapma toleransı yoruma açık."
+    },
+    "belirsizlikler": [
+      "RD'den 1-2 gün sapma toleransı kitapta hisse için açıkça verilmiş (Sayfa 198); vadeli için kesin kural yok (Sayfa 150 Dow örneği)",
+      "Stop emri RD gününde mi trail day'de mi konuyor: kitabın iki tarif vardır (Sayfa 114 ve Sayfa 115-117)",
+      "'3 tik' / '3-5 tik' değeri piyasaya göre tanımlanmamış",
+      "Trail day yönünün 'çoğunlukla' belirleyici olduğu sözel; istatistik verilmemiş (Sayfa 128)"
+    ],
+    "uyumluluk_notu": "1L3A için: RD günlük sayımla hesaplanır; kitap 3 ve 5 dakikalık grafikte gün içi kullanımı belirtir (Sayfa 201). Tik ve gün sayımı bar sayısına ve sembolün tik değerine çevrilmeli. Kripto ve 7/24 perpetual'da tatil günü olmadığından tatil sayım kuralı uyarlanmalı. Hacim gerekmez.",
+    "varyantlar": [
+      "Yeni tepe günü sonrası sell stop (ayna) (Sayfa 115-116)",
+      "Kapanış merkezi RD (Reaction cycle merkezi, Sayfa 59-63)",
+      "Teyitli RD: gap reversal veya peg-leg ile birlikte (Sayfa 147)"
+    ],
+    "anahtar_kelimeler": ["reversal-date", "ters-sayim", "ileri-sayim", "trail-day", "buy-stop", "sell-stop", "yeni-dip", "yeni-tepe"]
+  },
+  {
+    "kart_id": "swing__peg-leg__crane",
+    "ad": "Peg-Leg (20 Gunluk Yeni Tepe Satis Sinyali)",
+    "stil": "swing",
+    "kaynak": {"pdf": "Gelişmiş_Swing_Trading_-_John_Crane_-_Orijinal_217_sayfa.pdf", "sayfalar": [117, 118, 119, 120, 121]},
+    "ozet": "Piyasa son 20 islem gunu en yuksegini asan yeni bir tepe yapar ve bu tepe bir onceki tepeden en az 3 gun sonra gelir. Yeni tepe gununun dibinin 3-5 tik altina 2 gun gecerli sell stop konur; dolunca koruyucu stop yeni tepe gununun 3-5 tik ustune konur. Alis icin ayna.",
+    "kategori": "formasyon",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "vadeli",
+    "zaman_dilimi": {"islem": "1D", "ust_filtre": null},
+    "gostergeler": [
+      {"ad": "Son 20 islem gunu en yuksek/en dusuk", "parametreler": {"periyot": 20}}
+    ],
+    "long_giris": [
+      "Ayna: piyasa son 20 islem gunu en dusugunun altina yeni bir dip yapar; bu dip bir onceki dipten en az 3 gun sonra gelir",
+      "Yeni dip gununun tepesinin 3-5 tik ustune 2 gun gecerli buy stop konur",
+      "Dolunca alis pozisyonu acilir"
+    ],
+    "short_giris": [
+      "Piyasa son 20 islem gunu en yuksegini asan yeni bir tepe yapar",
+      "Bu yeni tepe, bir onceki tepeden en az 3 gun sonra gelir (Sayfa 118)",
+      "Yeni tepe gununun dibinin 3-5 tik altina sell stop konur; emir 2 gun gecerli (Sayfa 118)",
+      "Dolunca satis pozisyonu acilir"
+    ],
+    "stop_loss": "Koruyucu stop: yeni tepe gununun tepesinin 3-5 tik ustu (Sayfa 118). Alis tarafinda ayna.",
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Onceki tepeden en az 3 gun sonra gelme sarti (Sayfa 118)",
+      "Kapanisin onceki tepenin ustunde olmasi 'en iyi' olarak anilir, zorunlu degil (Sayfa 118)"
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": "Kazanma orani verilmemis. Ornekler: Nisan Domuz, Mart 2000 Dow, Pork Bellies (Sayfa 118-121).",
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Yeni tepe, gun sayisi, stop ve gecerlilik kurallari sayisal. Kar al/cikis kurali yok; kitap para yonetimini trader'a birakir."
+    },
+    "belirsizlikler": [
+      "3-5 tik degeri piyasaya gore tanimlanmamis; aralik secimi serbest",
+      "'Onceki tepe' tanimi: 3 gun kosulu hangi tepe icin gecerli, net degil",
+      "Cikis kurali kitapta yok"
+    ],
+    "uyumluluk_notu": "1L3A icin: 20 islem gunu penceresi bar sayisina cevrilebilir; 5 dakikaya uyarlanabilir. Forex ve kripto icin tik karsiligi tanimlanmali. Hacim gerekmez.",
+    "varyantlar": [
+      "Alis (ayna) versiyonu: son 20 gun dibi",
+      "Stop yerlesimi 2-3 tik veya 3-5 tik"
+    ],
+    "anahtar_kelimeler": ["peg-leg", "yeni-20-gun-tepe", "sell-stop", "tik", "formasyon", "tepe-sinyali"]
+  },
+  {
+    "kart_id": "swing__gap-and-go__crane",
+    "ad": "Gap and Go (Bosluk ve Devam) Donus Sinyali",
+    "stil": "swing",
+    "kaynak": {"pdf": "Gelişmiş_Swing_Trading_-_John_Crane_-_Orijinal_217_sayfa.pdf", "sayfalar": [122, 123, 124, 125]},
+    "ozet": "1. gun yeni dip yapip kapanisi acilisin altinda kapatir; 2. gun acilis 1. gun kapanisinin ustunde, tum 2. gun araligi 1. gun kapanisinin ustunde ve 2. gun kapanisi 1. gun tepesinin ustunde ise 2. gun tepesinin ustune buy stop konur. Satis icin ayna.",
+    "kategori": "formasyon",
+    "piyasa_rejimi": "herhangi",
+    "orijinal_piyasa": "vadeli",
+    "zaman_dilimi": {"islem": "1D", "ust_filtre": null},
+    "gostergeler": [],
+    "long_giris": [
+      "Gun 1: piyasa onceki gunun dibinin altina iner (yeni dip) ve kapanis acilisin altinda; kapanis araligin dibine yakinsa daha iyi (Sayfa 122)",
+      "Gun 2: acilis, gun 1 kapanisinin ustunde; gun 2'nin tum araligi gun 1 kapanisinin ustunde",
+      "Gun 2 kapanisi gun 1 tepesinin ustunde",
+      "Gun 2 tepesinin ustune buy stop; tetiklenince alis"
+    ],
+    "short_giris": [
+      "Ayna: Gun 1 yeni tepe ve kapanis acilisin ustunde; Gun 2 acilis gun 1 kapanisinin altinda, tum araligi gun 1 kapanisinin altinda; Gun 2 kapanisi gun 1 dibinin altinda",
+      "Gun 2 dibinin altina sell stop; tetiklenince satis"
+    ],
+    "stop_loss": null,
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Desen genellikle buyuk tepe/dip noktalarinda gorulur (Sayfa 123)"
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": "Sayisal kazanma orani yok. Kitapta bir hesap sahibinin 8 haftada bakiyesini buyuttugu anekdot var (Sayfa 121-122); dogrulanmamis, kanit degil.",
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Giris kosullari fiyat karsilastirmalari ile tamamen sayisal. 'Araligin dibine yakin' yorumlu. Stop ve cikis kitapta tanimli degil."
+    },
+    "belirsizlikler": [
+      "Stop ve cikis kurali yok",
+      "'En dusuk kapanisa yakin' icin esik yok",
+      "Tek basina mi, Reversal date ile birlikte mi kullanilacagi kitapta net degil (Sayfa 123'te 'major tepe ve dipte' denir)"
+    ],
+    "uyumluluk_notu": "1L3A icin: sadece acilis/yuksek/dusuk/kapanis gerekir, hacim gerekmez, 5 dakikaya uyarlanabilir. Bosluk (gap) tanimi 7/24 piyasada (kripto, forex) acilis tanimi gerektirir.",
+    "varyantlar": [
+      "Gap Reversal (ayri kart: swing__gap-reversal__crane)",
+      "Gun 2'nin tum araligi ilk gun kapanisinin ustunde olma sarti (kitapta 'entire trading range'; sert kural)"
+    ],
+    "anahtar_kelimeler": ["gap-and-go", "bosluk", "gap", "yeni-dip", "buy-stop", "sell-stop", "formasyon"]
+  },
+  {
+    "kart_id": "swing__gap-reversal__crane",
+    "ad": "Gap Reversal (Bosluklu Donus)",
+    "stil": "swing",
+    "kaynak": {"pdf": "Gelişmiş_Swing_Trading_-_John_Crane_-_Orijinal_217_sayfa.pdf", "sayfalar": [125, 126, 127]},
+    "ozet": "1. gun yeni dip yapar. 2. gun acilis onceki gunun dibinin altinda ve acilis gunun dibine cok yakin; sonra yukselip acilisin ustunde kapatir. Kitap kurala gore buy stop 1. gunun tepesinin ustune konur. Satis icin ayna.",
+    "kategori": "formasyon",
+    "piyasa_rejimi": "herhangi",
+    "orijinal_piyasa": "vadeli",
+    "zaman_dilimi": {"islem": "1D", "ust_filtre": null},
+    "gostergeler": [],
+    "long_giris": [
+      "Gun 1: onceki gunun dibinin altinda yeni dip",
+      "Gun 2: acilis onceki gunun dibinin altinda ve acilis gunun dibine 'at or very close' (cok yakin)",
+      "Gun 2 kapanisi acilisin ustunde",
+      "Kural metni: buy stop gun 1 tepesinin ustune (Sayfa 126); ornekte (Sayfa 126-127) gun 2 tepesi asilinca tetik"
+    ],
+    "short_giris": [
+      "Ayna: gun 1 yeni tepe; gun 2 acilis onceki gunun tepesinin ustunde ve acilis gunun tepesine cok yakin; gun 2 kapanisi acilisin altinda",
+      "Sell stop gun 1 dibinin altina (kural); ornekte gun 2 dibi"
+    ],
+    "stop_loss": null,
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Gap reversal ile RD ayni gune denk gelirse (Sayfa 145-147)"
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": "Sayisal kazanma orani yok.",
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Giris kosullari buyuk olcude sayisal, ama 'cok yakin' esigi yok ve kural metni ile ornek arasinda buy stop referansi celiskili. Stop ve cikis tanimli degil."
+    },
+    "belirsizlikler": [
+      "Buy stop referansi: kural metninde gun 1 tepesi (Sayfa 126), Cattle ornegi metninde gun 2 tepesi (Sayfa 126-127)",
+      "'Acilis gunun dibine cok yakin' icin esik yok",
+      "Stop ve cikis kurali yok"
+    ],
+    "uyumluluk_notu": "1L3A icin: OHLC yeterli; 5 dakikaya uyarlanabilir. Forex/kripto icin acilis tanimi gerekir.",
+    "varyantlar": [
+      "Gap and Go (ayri kart: swing__gap-and-go__crane)"
+    ],
+    "anahtar_kelimeler": ["gap-reversal", "bosluk", "yeni-dip", "buy-stop", "sell-stop", "donus-sinyali"]
+  },
+  {
+    "kart_id": "swing__major-reversal__crane",
+    "ad": "Major Reversal (10 Gun Dibi Sonrasi Uc Gun Kapanis Acilis Deseni)",
+    "stil": "swing",
+    "kaynak": {"pdf": "Gelişmiş_Swing_Trading_-_John_Crane_-_Orijinal_217_sayfa.pdf", "sayfalar": [137, 138, 139, 140, 141]},
+    "ozet": "Piyasa yeni 10 gunluk dip yapar ve RD'ye dogru en az uc ardisik gun kapanis < acilis olur. 3. gunun tepesinin ustune 2 gun gecerli buy stop konur; dolmazsa her yeni kapanis<acilis gununde stop yeni gunun tepesinin ustune tasinir. Dolunca koruyucu stop kontrat dibinin altina. Satis icin ayna.",
+    "kategori": "formasyon",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "vadeli",
+    "zaman_dilimi": {"islem": "1D", "ust_filtre": null},
+    "gostergeler": [
+      {"ad": "Son 10 gun en dusuk/en yuksek", "parametreler": {"periyot": 10}}
+    ],
+    "long_giris": [
+      "Piyasa yeni 10 gunluk dip yapar",
+      "RD'ye dogru en az 3 ardisik gun kapanis < acilis",
+      "3. gun kapanisindan sonra (ya da 4. gun acilisindan once) 3. gunun tepesinin ustune buy stop; 2 gun gecerli",
+      "Stop dolmadan 4. gun kapanis < acilis ise stop 4. gunun tepesinin ustune tasinir; kosul surdukce tekrar"
+    ],
+    "short_giris": [
+      "Piyasa yeni 10 gunluk tepe yapar",
+      "RD'ye dogru en az 3 ardisik gun kapanis > acilis",
+      "3. gunun dibinin altina sell stop; 2 gun gecerli; ayni yeniden konma kurali"
+    ],
+    "stop_loss": "Dolunca koruyucu stop kontrat dibinin (uzun icin) altinda; kisa icin kontrat tepesinin ustunde (Sayfa 137)",
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": "Giris stop emri 2 gun gecerli; kosul surerse her gun yeniden konur (Sayfa 137)",
+    "filtreler": [
+      "RD'ye yakinlik 'ideal' ama zorunlu degil (Sayfa 137)"
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": "Sayisal kazanma orani yok. Ornekler: Eylul bugdayi (Sayfa 138-139), Haziran Nasdaq 100 (Sayfa 140).",
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Giris kosullari sayisal ve yeniden konma kurali tanimli. Kar al/cikis kurali yok."
+    },
+    "belirsizlikler": [
+      "Stop referansi: '10 gun dibi' mi 'kontrat dibi' mi (kitap iki ifadeyi kullaniyor)",
+      "'En az uc' ifadesinin ustune cikilip cikilmayacagi (kitap 'at least' diyor)",
+      "Cikis kurali yok"
+    ],
+    "uyumluluk_notu": "1L3A icin: gunluk OHLC yeterli. 'Kontrat dibi' kavrami surekli vadeli kontrat (roll) icin uyarlanmali; 5 dakikaya uyarlanabilir.",
+    "varyantlar": [
+      "Ayna (satis) versiyonu: 10 gun tepesi (Sayfa 137)",
+      "Altı güne kadar uzayan kapanis<acilis serileri (Sayfa 138-139)"
+    ],
+    "anahtar_kelimeler": ["major-reversal", "10-gun-dip", "buy-stop", "sell-stop", "kapanis-acilis", "donus"]
+  },
+  {
+    "kart_id": "swing__strong-advance__crane",
+    "ad": "Strong Advance (Guclu Ilerleme) Devam Deseni",
+    "stil": "swing",
+    "kaynak": {"pdf": "Gelişmiş_Swing_Trading_-_John_Crane_-_Orijinal_217_sayfa.pdf", "sayfalar": [133, 134, 135, 136]},
+    "ozet": "Yükselen piyasada 1. gun kapanis<acilis (trende karsi), 2. gun kapanis>acilis (trend yonunde), 3. gun kapanis<acilis (trende karsi); 4. gun 3. gunun tepesinin ustune buy stop. En iyi sonuc 3. gunun RD'ye denk gelmesi ve destek/direnc yakininda olusmasi. Satis icin ayna.",
+    "kategori": "trend_takip",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "vadeli",
+    "zaman_dilimi": {"islem": "1D", "ust_filtre": null},
+    "gostergeler": [],
+    "long_giris": [
+      "Yukselen piyasa: 1. gun kapanis < acilis",
+      "2. gun kapanis > acilis",
+      "3. gun kapanis < acilis",
+      "4. gun 3. gunun tepesinin ustune buy stop; tetiklenince alis (Sayfa 133)"
+    ],
+    "short_giris": [
+      "Ayna (dusen trend): 1. gun kapanis > acilis; 2. gun kapanis < acilis; 3. gun kapanis > acilis; 4. gun 3. gunun dibinin altina sell stop"
+    ],
+    "stop_loss": null,
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Destek/direnc seviyesine yaklasirken aranir (Sayfa 134)",
+      "3. gunun RD'ye denk gelmesi en iyi sonuc (Sayfa 134)"
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": "Sayisal kazanma orani yok. Ornekler: 18 Nisan 2001 S&P ve Dow (Sayfa 134-136).",
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Mum yonleri ve giris tetigi sayisal. Stop ve cikis eksik; 'destek/direnc yakini' filtresi yorumlu."
+    },
+    "belirsizlikler": [
+      "Stop kurali celiskili: metin 4. gun tetik icin 3. gunun tepe/dibini kullaniyor; Cotton ornegi (Sayfa 136) 2. gunun dibinin altina sell stop koyuyor",
+      "'Destek/direnc' tanimi yok",
+      "Stop ve cikis kurali yok"
+    ],
+    "uyumluluk_notu": "1L3A icin: gunluk ve 5 dakikaya uyarlanabilir. Destek/direnc icin pivot seviyeleri gerekir. Hacim gerekmez.",
+    "varyantlar": [
+      "3. gunun RD ile birlikte (Sayfa 134)"
+    ],
+    "anahtar_kelimeler": ["strong-advance", "trend-devam", "buy-stop", "sell-stop", "destek-direnc"]
+  },
+  {
+    "kart_id": "swing__gapping-pattern__crane",
+    "ad": "Gapping Pattern (Kopus Bosluklu Trend Devami)",
+    "stil": "swing",
+    "kaynak": {"pdf": "Gelişmiş_Swing_Trading_-_John_Crane_-_Orijinal_217_sayfa.pdf", "sayfalar": [131, 132]},
+    "ozet": "Piyasa RD'de veya trail day'de trend yonunde bir bosluk (breakaway gap) ile acilir ve bosluk gun icinde kapanmazsa trendin 2-3 gun devam etmesi beklenir. Satis icin ayna.",
+    "kategori": "trend_takip",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "vadeli",
+    "zaman_dilimi": {"islem": "1D", "ust_filtre": null},
+    "gostergeler": [],
+    "long_giris": [
+      "RD veya trail day'de piyasa onceki gunun tepesinin ustunde acilir (yukari bosluk), direnc seviyesinin ustunde (Sayfa 131)",
+      "Bosluk gun icinde kapanmaz",
+      "Kapanis acilisin ustunde (Sayfa 131)",
+      "Giris emri kitapta acikca tanimli degil; 2-3 gun devam beklenir"
+    ],
+    "short_giris": [
+      "Ayna: asagi bosluk, kapanmaz, kapanis acilisin altinda"
+    ],
+    "stop_loss": null,
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": "Kitap 2-3 gun devam beklentisi verir; sabit zaman cikisi tanimli degil (Sayfa 131)",
+    "filtreler": [
+      "Piyasa daha once direnc/destek seviyesini test etmis olmali (Sayfa 131)"
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": "Sayisal kazanma orani yok. Ornekler: Ham petrol ve Domuz Pirzolasi (Sayfa 131-132).",
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Bosluk ve kapanmama kosulu olculebilir; ancak giris emri, stop ve cikis tanimli degil ve direnc kirilimi yorumsal."
+    },
+    "belirsizlikler": [
+      "Giris emrinin zamani ve fiyati (acilista mi, gun icinde mi) tanimli degil",
+      "'Kapanmadi' olcutu: onceki gun kapanisi mi, acilis fiyati mi (kitap 'left unfilled' diyor, referans belirtilmemis)",
+      "Devam suresi '2-3 gun' sabit degil"
+    ],
+    "uyumluluk_notu": "1L3A icin: bosluk kavrami 7/24 piyasalarda (kripto, forex) tanimli degil; acilis tanimi gerekir.",
+    "varyantlar": [
+      "Satis (ayna) versiyonu (Sayfa 131)"
+    ],
+    "anahtar_kelimeler": ["gapping", "kopus-bosluk", "breakaway-gap", "trend-devam", "reversal-date"]
+  },
+  {
+    "kart_id": "swing__alis-satis-penceresi-60__crane",
+    "ad": "60% Duzeltme Alim/Satim Penceresi",
+    "stil": "swing",
+    "kaynak": {"pdf": "Gelişmiş_Swing_Trading_-_John_Crane_-_Orijinal_217_sayfa.pdf", "sayfalar": [87, 88, 89, 90, 91, 92, 94, 95, 96]},
+    "ozet": "Ana hareketin %60 geri cekilme seviyesi pencere olarak alinir. Dusen trendde satis penceresi = dip + 0.6 x (tepe - dip); yukselen trendde alis penceresi = tepe - 0.6 x (tepe - dip). Fiyat pencereye girip RD ile ayni anda ise donus aranir. Guclu trendlerde %30 penceresi kullanilir.",
+    "kategori": "destek_direnc",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "vadeli",
+    "zaman_dilimi": {"islem": "1D", "ust_filtre": null},
+    "gostergeler": [
+      {"ad": "Geri cekilme penceresi (%60; guclu trendde %30)", "parametreler": {"oran": 0.6}}
+    ],
+    "long_giris": [
+      "Yukselen trend: ana hareketin tepesi (yuksek) ve hemen oncesindeki ara dip (dusuk) belirlenir",
+      "Alis penceresi = yuksek - 0.6 x (yuksek - dusuk) (Sayfa 88)",
+      "Fiyat pencereye girdiginde ve RD ile ayni zamana denk geldiginde donus sinyali aranir (desen teyidi ayri kartlarda)"
+    ],
+    "short_giris": [
+      "Dusen trend: ana hareketin dibi ve hemen oncesindeki ara tepe belirlenir",
+      "Satis penceresi = dusuk + 0.6 x (tepe - dusuk) (Sayfa 88)",
+      "Fiyat pencereye girdiginde ve RD ile ayni zamana denk geldiginde donus aranir"
+    ],
+    "stop_loss": null,
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Guclu trendde (duzeltmeler 3-7 gun) %60 yerine %30 penceresi kullanilir (Sayfa 91)",
+      "RD penceresi icinde olmali (Sayfa 88)"
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": "Yok. Kitap yalnizca ornekler verir; %50 seviyesinin sik kirildigini, %60'in daha guclu sinyal verdigini gozlemler (Sayfa 90-91, 96).",
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Pencere formulu tam sayisal. Ana hareketin baslangic/bitis noktalari ve %30/%60 seciminin hangi trendde yapilacagi yoruma acik. Giris tetigi ve cikis kitapta yok."
+    },
+    "belirsizlikler": [
+      "Ana hareketin baslangic/bitis noktasi secimi kesin degil",
+      "Guclu trend tanimi (%30 mu %60 mi) kitapta net degil",
+      "Pencereye girisin tek basina islem kurali olmadigi; diger kartlarla birlikte kullaniliyor"
+    ],
+    "uyumluluk_notu": "1L3A icin: formul OHLC ile hesaplanir, forex ve kripto icin ayni. Tik degeri sembole ozel (T-Bond 32'lik kesirle); tik tanimi uyarlanmali. Hacim gerekmez.",
+    "varyantlar": [
+      "%30 (guclu trend) penceresi (Sayfa 91-92)",
+      "%50 seviye (Sayfa 96: sik kirilir)"
+    ],
+    "anahtar_kelimeler": ["alis-satis-penceresi", "60-yuzde", "geri-cekilme", "destek-direnc", "rd"]
+  },
+  {
+    "kart_id": "swing__action-reaction-cizgisi__crane",
+    "ad": "Action/Reaction Cizgileri ile Hedef (Reaction Line)",
+    "stil": "swing",
+    "kaynak": {"pdf": "Gelişmiş_Swing_Trading_-_John_Crane_-_Orijinal_217_sayfa.pdf", "sayfalar": [72, 73, 74, 75, 76, 77, 78, 80, 81, 83, 84]},
+    "ozet": "Bir Reaksiyon swingi'nin en yuksek-en dusuk kapanis hatti (Action cizgisi) cizilir; swing merkezi (yuksek - aralik/2) isaretlenir; onceki dipten bu merkezden gecen merkez cizgisi uzatilir. Ters sayim (yalnizca fiyat barlari) kadar bar ileri sayilarak merkez cizgisi uzerinde Action'a paralel Reaction cizgisi cizilir; fiyatin bu cizgiye gelmesi hedef/donus bolgesi kabul edilir.",
+    "kategori": "destek_direnc",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "vadeli",
+    "zaman_dilimi": {"islem": "1D", "ust_filtre": null},
+    "gostergeler": [
+      {"ad": "Action/Reaction cizgileri (pivot tabanli)", "parametreler": {"sayim": "yalnizca fiyat barlari, tatiller dahil degil"}}
+    ],
+    "long_giris": [
+      "Hedef cizgisi: merkez cizgisi uzerinde, ileri sayim noktasindan Action'a paralel Reaction cizgisi (Sayfa 74-75)",
+      "Fiyat bu cizgiye gelip RD ile cakisirsa donus beklenir; donus teyidi ayri desen kartlariyla yapilir",
+      "Fiyat cizgiyi kapanisla kirarsa bir sonraki Reaction cizgisi icin sayim uzatilir (Sayfa 83-84)"
+    ],
+    "short_giris": [
+      "Ayna: asagi yonlu Reaction cizgisi; fiyat cizgiye gelip donerse satis teyidi aranir (kitap 'time and price came together' der, Sayfa 76-78)"
+    ],
+    "stop_loss": null,
+    "kar_al": "Reaction cizgisi hedef fiyattir (Sayfa 75). Heating Oil ornegi: merkez cizgisi ile Reaction cizgisinin kesistigi yatay bant hedef bolgesi (Sayfa 193-194).",
+    "iz_suren_stop": null,
+    "zaman_cikisi": "Ters sayim ile hesaplanan RD tarihi (Sayfa 75-78)",
+    "filtreler": [
+      "Merkez hesabi reaksiyon swing'in tam ortasi (Sayfa 73)",
+      "Fiyat icin tatil sayilmaz, zaman sayimi icin tatil sayilir (Sayfa 74)"
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": "Yok; kitap ornek grafiklerde zaman ve fiyatin birlestigini belirtir (Sayfa 78-81). Sayisal degil.",
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Cizgi tanimlari ve sayim kurali sayisal. Baslangic pivot secimi, cizgi cizim araci farki ve giris tetigi yorumsal. Stop yok."
+    },
+    "belirsizlikler": [
+      "Merkez cizgisinin baslangic pivotu (onceki dip) secimi kitapta net degil",
+      "Grafik yazilimindaki pitchfork cizimi ile manuel cizim arasinda fark olabilir",
+      "Giris tetigi ve stop kurali yok",
+      "Fiyat sayimi (tatil haric) ile zaman sayimi (tatil dahil) ayni kart icinde farkli kullaniliyor (Sayfa 74)"
+    ],
+    "uyumluluk_notu": "1L3A icin: bar bazinda cizgi hesabi kolay; 5 dakikaya uyarlanabilir. Log/lineer olcek secimi belirtilmemis; forex ve kripto icin fiyat olcegi ve 7/24 bar sayimi tanimlanmali. Hacim gerekmez.",
+    "varyantlar": [
+      "Heating Oil hedef bandi: merkez cizgisi ile Reaction cizgisinin kesisimi (Sayfa 193-194)",
+      "Yeni Reaksiyon swingleri ile ardisik cizgiler (Sayfa 175-177)"
+    ],
+    "anahtar_kelimeler": ["action-line", "reaction-line", "merkez-cizgisi", "pitchfork", "andrews", "ters-sayim", "hedef-fiyat"]
+  },
+  {
+    "kart_id": "swing__abc-duzeltme-merkezi__crane",
+    "ad": "A-B-C Duzeltme Merkezi ile Trend Uzunlugu",
+    "stil": "swing",
+    "kaynak": {"pdf": "Gelişmiş_Swing_Trading_-_John_Crane_-_Orijinal_217_sayfa.pdf", "sayfalar": [181, 182, 183, 184, 185, 186, 187]},
+    "ozet": "Buyuk bir Reaksiyon swingi icinde 3 gunluk kucuk bir Reaksiyon swingi (1-2) bulunur. 1-2 swingin ters sayimi ile ileri sayimi esitse kucuk swing ana duzeltmenin merkezidir (B dalgasi). Buyuk swing Action cizgisi kabul edilir; merkez cizgisi trendin basindan gecer ve Reaction cizgisi ile sonraki trend uzunlugu hedeflenir.",
+    "kategori": "trend_takip",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "vadeli",
+    "zaman_dilimi": {"islem": "1D", "ust_filtre": null},
+    "gostergeler": [
+      {"ad": "Kucuk Reaksiyon swingi (A-B-C merkezi)", "parametreler": {"minimum_gun": 3}}
+    ],
+    "long_giris": [
+      "Buyuk Reaksiyon swingi (E-F) icinde 3 gunluk kucuk swing (1-2) vardir",
+      "1-2 swingin ters sayimi (1'den E'ye) ile ileri sayimi (2'den F'ye) esittir (Sayfa 182)",
+      "Yeni trend yonu buyuk swingin yonu; giris tetigi kitapta acikca tanimli degil (Kart swing__reaksiyon-swing-tetik__crane yorumla kullanilabilir, kitap bunu baglamaz)"
+    ],
+    "short_giris": [
+      "Ayni mantik ters yon icin: buyuk yukselis swingi icinde kucuk asagi swing (1-2) merkezi, satis trendi"
+    ],
+    "stop_loss": null,
+    "kar_al": "Action/Reaction cizgisiyle hedef: sonraki trend uzunlugu icin ters sayim kadar ileri sayim (Ornek 33 bar, Sayfa 187)",
+    "iz_suren_stop": null,
+    "zaman_cikisi": "Ileri sayim (ornek 33 bar) (Sayfa 187)",
+    "filtreler": [
+      "Duzeltme 60% penceresinde olmali (Sayfa 185)",
+      "Bes dalgali duzeltme de olabilir; kucuk swing yine merkezdir (Sayfa 185-186)"
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": "Yok. Ornekler: Haziran tahvili, Eylul misiri, Agustos ham petrol (Sayfa 182-187).",
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Kucuk swing ve sayim esitligi sayisal. Ancak A-B-C/bes dalga siniflandirmasi yorumsal, giris tetigi tanimsiz, stop yok."
+    },
+    "belirsizlikler": [
+      "A-B-C ile bes dalga ayrimi yorumsal",
+      "Giris tetigi kitapta acik degil",
+      "Ana trendin baslangici (B) secimi",
+      "Sayim esitligi icin tolerans belirtilmemis"
+    ],
+    "uyumluluk_notu": "1L3A icin: 5 dakikaya uyarlanabilir ama tam esitlik gerektirir; tolerans tanimlanmali. Elliott dalgasi terimi kart kuralinda kullanilmamali.",
+    "varyantlar": [
+      "Bes dalgali duzeltme (Sayfa 185-186)"
+    ],
+    "anahtar_kelimeler": ["abc", "a-b-c", "merkez", "reaksiyon-swing", "action-reaction", "trend-uzunlugu"]
+  },
+  {
+    "kart_id": "swing__ssto-uyumsuzluk__crane",
+    "ad": "SSTO Boga/Ayi Uyumsuzlugu (Divergence) ile Zamanlama",
+    "stil": "swing",
+    "kaynak": {"pdf": "Gelişmiş_Swing_Trading_-_John_Crane_-_Orijinal_217_sayfa.pdf", "sayfalar": [159, 160, 161, 162, 163]},
+    "ozet": "Yavas stokastik (SSTO) ile fiyat arasinda uyumsuzluk: fiyat yeni dip yaparken SSTO yeni dip yapmiyorsa boga uyumsuzlugu; fiyat yeni tepe yaparken SSTO daha dusuk tepe yapiyorsa ayi uyumsuzlugu. En guclu sinyal uyumsuzlugun 2-3 kez tekrarlanmasi ve projeksiyon RD ile birlikte gelmesidir.",
+    "kategori": "momentum",
+    "piyasa_rejimi": "herhangi",
+    "orijinal_piyasa": "vadeli",
+    "zaman_dilimi": {"islem": "1D", "ust_filtre": null},
+    "gostergeler": [
+      {"ad": "Yavas Stokastik (SSTO)", "parametreler": {"periyot": 20, "not": "Kitap 20 tercih eder; 9 de yaygin kullanilir"}}
+    ],
+    "long_giris": [
+      "Fiyat yeni dip yapar, SSTO yeni dip yapmaz (boga uyumsuzlugu)",
+      "Bu desen 2-3 kez tekrarlanmis olmali (Sayfa 159)",
+      "Uyumsuzluk projeksiyon RD ile ayni zamana denk gelir",
+      "Giris emri (tetik) kitapta tanimli degil"
+    ],
+    "short_giris": [
+      "Fiyat yeni tepe yapar, SSTO daha dusuk tepe yapar (ayi uyumsuzlugu)",
+      "2-3 tekrar ve RD ile cakisma"
+    ],
+    "stop_loss": null,
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Haftalik ile 5 dakika arasi zaman dilimleri (Sayfa 159)",
+      "RD ile cakisma (Sayfa 159-160)"
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": "Sayisal kazanma orani yok. Ornekler: Cattle, Soya, Dogalgaz, Dow, Nasdaq 100 (Sayfa 160-164).",
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Uyumsuzlugun tespiti sayisal, ancak giris tetigi, stop ve cikis tanimli degil; '2-3 tekrar' en guclu sinyal ifadesi tek basina kural degil."
+    },
+    "belirsizlikler": [
+      "Giris tetigi kurali yok",
+      "Yeni dip/tepe icin karsilastirma penceresi (kac bar) belirtilmemis",
+      "SSTO hesaplama detayi kitapta formul olarak verilmemis (yazilima bagli)"
+    ],
+    "uyumluluk_notu": "1L3A icin: stokastik parametreleri (periyot, %K/%D) belirtilmeli; 5 dakikaya uyarlanabilir; hacim gerekmez.",
+    "varyantlar": [
+      "Hizli stokastik (ham deger + %K) ile kisa vade (Sayfa 159)",
+      "Periyot 9 yerine 20 tercihi (Sayfa 159)"
+    ],
+    "anahtar_kelimeler": ["ssto", "yavas-stokastik", "uyumsuzluk", "divergence", "momentum", "rd"]
+  },
+  {
+    "kart_id": "swing__gann-fan__crane",
+    "ad": "Gann Fan Destek/Direnc Cizgileri ile RD Teyidi",
+    "stil": "swing",
+    "kaynak": {"pdf": "Gelişmiş_Swing_Trading_-_John_Crane_-_Orijinal_217_sayfa.pdf", "sayfalar": [99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112]},
+    "ozet": "Majör tepe/dipten cizilen Gann cizgileri (1x1 merkez, 45 derece civari; diger cizgiler 1x2, 2x1 vb.) destek/direnc olarak kullanilir. Fiyat bu cizgiye RD'de ya da %60 penceresi icinde gelirse donus beklenir; dar aralikli gun (narrow range) teyidi aranir.",
+    "kategori": "destek_direnc",
+    "piyasa_rejimi": "herhangi",
+    "orijinal_piyasa": "vadeli",
+    "zaman_dilimi": {"islem": "1D", "ust_filtre": null},
+    "gostergeler": [
+      {"ad": "Gann fan (1x1, 2x1, 1x2 ...)", "parametreler": {"baslangic": "majör tepe veya dip", "aci_olcegi": "kitapta tanimsiz"}}
+    ],
+    "long_giris": [
+      "Yukselen piyasa: fan baslangici yukselisin basindaki dip (Sayfa 100)",
+      "Fiyat bir Gann destek cizgisine RD'de gelir; cizgiyi kisa sure kirip geri donen dar aralikli gun gorulurse alis teyidi (Sayfa 106)",
+      "Fiyatin 1x4 cizgisini kirip ustune kapanmasi buy sinyali (Sayfa 104)"
+    ],
+    "short_giris": [
+      "Dusen piyasa: fan majör tepeden cizilir; fiyat direnc cizgisine RD'de gelir ve donerse satis (Sayfa 101, 105-106)"
+    ],
+    "stop_loss": null,
+    "kar_al": "Fiyatin bir sonraki Gann cizgisine (hedef) ulasmasi beklenir (Sayfa 101)",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Buy/sell penceresi ile birlikte (Sayfa 107-111)",
+      "Dar aralikli gun (narrow range) teyidi (Sayfa 106)"
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": "Yok; kitap 'kesin kural degil' der (Sayfa 101).",
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Cizgi acilari ve olcegi kitapta sayisal tanimlanmamis; fan baslangici, hangi cizginin kirilacagi ve narrow range tanimi yorumsal; giris, stop ve cikis kurallari eksik."
+    },
+    "belirsizlikler": [
+      "Gann cizgilerinin aci ve olcek tanimi kitapta yok (1x1 'yaklasik 45 derece' ile sinirli)",
+      "Fan baslangic noktasi secimi",
+      "Hangi cizgide donus, hangi cizgide kirilim beklenecegi kesin degil ('hard-and-fast rule degil', Sayfa 101)",
+      "Narrow range gununun olcutu tanimlanmamis"
+    ],
+    "uyumluluk_notu": "1L3A icin: aci olcegi fiyat-zaman olcegine baglidir; forex ve kripto icin sabit olcek tanimi gerekir. Tatil ve hafta sonu sayim kurali uyarlanmali.",
+    "varyantlar": [
+      "Gann cizgisi ile buy/sell penceresi kombinasyonu (Sayfa 107-111)",
+      "Gann cizgisinin %50 geri cekilmede direnc olarak kullanimi (Sayfa 105-106)"
+    ],
+    "anahtar_kelimeler": ["gann-fan", "gann-cizgisi", "1x1", "destek-direnc", "pencere", "reversal-date", "narrow-range"]
+  }
+]

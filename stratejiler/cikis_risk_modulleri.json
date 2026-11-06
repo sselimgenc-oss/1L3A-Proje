@@ -1,0 +1,378 @@
+[
+ {
+  "modul_id": "modul__kademeli-kar-alma",
+  "ad": "Kademeli kar alma (50/30/20, uc asamali, work-done)",
+  "tur": "cikis_risk_modulu",
+  "mekanik_ozet": "Pozisyonu birden fazla hedefte parcali kapatma.",
+  "kanonik_kural_taslagi": {
+   "kural": "%50 ilk hedefte, %30 ikinci, %20 iz suren stopla.",
+   "optimize": "backtest'te optimize edilecek: Dilimler 50/30/20, 33/33/33."
+  },
+  "kaynak_kartlar": [
+   "daytrade__kademeli-kar-alma-50-30-20__derr",
+   "swing__uc-asamali-kar-al__boxer",
+   "swing__kismi-kar-olcekleme__graham",
+   "swing__yapilan-is-cikis__scheier",
+   "swing__hamur-olu-cubuk__scheier"
+  ],
+  "farkli_yazarlar": [
+   "Issac Derr",
+   "Harry Boxer",
+   "Dave R. W. Graham",
+   "M. William Scheier"
+  ],
+  "yazar_sayisi": 4,
+  "max_kodlanabilirlik": 2,
+  "kanit_notu": [],
+  "uygulanabilir_stiller": [
+   "scalp",
+   "daytrade",
+   "swing"
+  ],
+  "not": "Giris kurali yoktur; her stratejiye ayri ayri takilabilen cikis/risk/filtre modulu. Martingale/katlama icermez."
+ },
+ {
+  "modul_id": "modul__olcu-hedef-projeksiyon",
+  "ad": "Olculen hareket / salinim kurali / bayrak olcusu hedefi",
+  "tur": "cikis_risk_modulu",
+  "mekanik_ozet": "Onceki hareket kadar projeksiyonla kar hedefi.",
+  "kanonik_kural_taslagi": {
+   "kural": "Hedef = giris + onceki swing yuksekligi.",
+   "optimize": "backtest'te optimize edilecek: Carpan 0.618-1.0."
+  },
+  "kaynak_kartlar": [
+   "daytrade__bayrak-olcu-hedefi__bulkowski",
+   "daytrade__salinim-kurali-olcu-hedefi__bulkowski",
+   "swing__olculen-hareket-hedef__boxer",
+   "swing__olculen-hareket-hedefi__scheier",
+   "swing__action-reaction-cizgisi__crane",
+   "swing__abc-duzeltme-merkezi__crane",
+   "swing__ters-fib-78-6-hedef__scheier",
+   "daytrade__genel-direnc-limit-cikis__bulkowski"
+  ],
+  "farkli_yazarlar": [
+   "Thomas N. Bulkowski",
+   "Harry Boxer",
+   "M. William Scheier",
+   "John Crane"
+  ],
+  "yazar_sayisi": 4,
+  "max_kodlanabilirlik": 3,
+  "kanit_notu": [
+   "[Thomas N. Bulkowski] Bayrak (boga piyasasi yukselen, 248 bayrak): ortalama olcu hedefine yuzde 56 ulasir; iki hamlenin yuzdeleri 17% ve 16% (kitap metin).",
+   "[Thomas N. Bulkowski] 926 hisse, 32.000+ ornek (Mart 2000 - Nisan 2011): tum salinimlar boga piyasasinda hedef +-%5 penceresinde %80; kucuk (<%10) boga salinimlari %86; buyuk (>%10) %53; ayi buyuk %4…",
+   "[Harry Boxer] ANIK 38,68'e ulaştı, yaklaşık %65 kazanç (p61). HIMX üç ayaklı örnek (p61-62).",
+   "[John Crane] Yok; kitap ornek grafiklerde zaman ve fiyatin birlestigini belirtir (Sayfa 78-81). Sayisal degil."
+  ],
+  "uygulanabilir_stiller": [
+   "scalp",
+   "daytrade",
+   "swing"
+  ],
+  "not": "Giris kurali yoktur; her stratejiye ayri ayri takilabilen cikis/risk/filtre modulu. Martingale/katlama icermez."
+ },
+ {
+  "modul_id": "modul__iz-suren-stop",
+  "ad": "Iz suren stop (ATR, sabit mesafe, sabit tutar)",
+  "tur": "cikis_risk_modulu",
+  "mekanik_ozet": "Fiyat lehe gittikce stopu belirli mesafede (ATR x2, 200 puan, 2$) sureklu takip ettirmek.",
+  "kanonik_kural_taslagi": {
+   "kural": "Stop = en iyi kapanis - ATR(14)*2 (veya sabit puan). Sadece lehe hareket eder.",
+   "optimize": "backtest'te optimize edilecek: ATR periyot 14, carpan 1.5-3."
+  },
+  "kaynak_kartlar": [
+   "swing__atr-iz-suren-stop__penn",
+   "swing__trend-iz-suren-stop-200__heikinashi",
+   "swing__takip-eden-stop-sabit-tutar__boxer"
+  ],
+  "farkli_yazarlar": [
+   "Joe Penn",
+   "Heikin Ashi Trader (3 kitap = 1 yazar)",
+   "Harry Boxer"
+  ],
+  "yazar_sayisi": 3,
+  "max_kodlanabilirlik": 3,
+  "kanit_notu": [],
+  "uygulanabilir_stiller": [
+   "scalp",
+   "daytrade",
+   "swing"
+  ],
+  "not": "Giris kurali yoktur; her stratejiye ayri ayri takilabilen cikis/risk/filtre modulu. Martingale/katlama icermez."
+ },
+ {
+  "modul_id": "modul__stop-yontemleri",
+  "ad": "Stop yontemleri (sabit tutar, yuzde, ATR, teknik seviye, 1-2% tampon)",
+  "tur": "cikis_risk_modulu",
+  "mekanik_ozet": "Giris sonrasi ilk stop seviyesinin secimi.",
+  "kanonik_kural_taslagi": {
+   "kural": "Teknik seviye (swing/MA) ihlali + %1-2 tampon veya ATR.",
+   "optimize": "backtest'te optimize edilecek: ATR carpan 1-3, tampon %1-2."
+  },
+  "kaynak_kartlar": [
+   "scalp__zarar-durdurma-yontemleri__schroder",
+   "swing__ihlal-stop-tamponu__boxer"
+  ],
+  "farkli_yazarlar": [
+   "Philipp Schroder",
+   "Harry Boxer"
+  ],
+  "yazar_sayisi": 2,
+  "max_kodlanabilirlik": 2,
+  "kanit_notu": [
+   "[Philipp Schroder] Kitap: stop kullanımının gizli maliyetleri var; boğa piyasasında sabit stop getiriyi bozabilir (s.159-160). Sayısal getiri değeri yok."
+  ],
+  "uygulanabilir_stiller": [
+   "scalp",
+   "daytrade",
+   "swing"
+  ],
+  "not": "Giris kurali yoktur; her stratejiye ayri ayri takilabilen cikis/risk/filtre modulu. Martingale/katlama icermez."
+ },
+ {
+  "modul_id": "modul__sabit-ve-iz-suren-kombine-stop",
+  "ad": "Sabit stop + iz suren stop kombinasyonu",
+  "tur": "cikis_risk_modulu",
+  "mekanik_ozet": "Baslangicta sabit stop, kar olusunca iz suren stopa gecis.",
+  "kanonik_kural_taslagi": {
+   "kural": "Kar >= 1R olunca stopu basabasa cek, sonra ATR ile iz sur.",
+   "optimize": "backtest'te optimize edilecek: Gecis esigi 1R-2R."
+  },
+  "kaynak_kartlar": [
+   "swing__stop-iz-suren-kombinasyon__mcarthur",
+   "swing__sabit-takip-stop-kombo__graham"
+  ],
+  "farkli_yazarlar": [
+   "Benjamin McArthur",
+   "Dave R. W. Graham"
+  ],
+  "yazar_sayisi": 2,
+  "max_kodlanabilirlik": 2,
+  "kanit_notu": [],
+  "uygulanabilir_stiller": [
+   "scalp",
+   "daytrade",
+   "swing"
+  ],
+  "not": "Giris kurali yoktur; her stratejiye ayri ayri takilabilen cikis/risk/filtre modulu. Martingale/katlama icermez."
+ },
+ {
+  "modul_id": "modul__min-rr-ve-sabit-r-hedef",
+  "ad": "Min R:R filtresi, 1:1/2:1 hedef, ayarla-unut",
+  "tur": "cikis_risk_modulu",
+  "mekanik_ozet": "Girise sadece risk:odul >= 1:2 ise izin ver; hedef 2R OCO.",
+  "kanonik_kural_taslagi": {
+   "kural": "R:R < 2 ise islem acma; hedef = 2R (scalp 1R).",
+   "optimize": "backtest'te optimize edilecek: Min R:R 1.5-3."
+  },
+  "kaynak_kartlar": [
+   "daytrade__min-rr-1-2-filtre__derr",
+   "swing__giris-fiyati-rr-2__graham",
+   "swing__kurulum-tetik-rr-filtresi__graham",
+   "swing__sl-tp-ayarla-unut__graham",
+   "swing__scalp-1r-hedef__graham"
+  ],
+  "farkli_yazarlar": [
+   "Issac Derr",
+   "Dave R. W. Graham"
+  ],
+  "yazar_sayisi": 2,
+  "max_kodlanabilirlik": 3,
+  "kanit_notu": [
+   "[Issac Derr] Kitap 70:30 kazanma oranını hedefler (100 işlemde 70 kazanç, s.62); 'güçlü sistem' için %50-%80 kazanma, 1,25-2,5 kâr faktörü, yıllık kârın %10-20'si kadar düşüş (s.88); 1:1,5 uyum (s.87)"
+  ],
+  "uygulanabilir_stiller": [
+   "scalp",
+   "daytrade",
+   "swing"
+  ],
+  "not": "Giris kurali yoktur; her stratejiye ayri ayri takilabilen cikis/risk/filtre modulu. Martingale/katlama icermez."
+ },
+ {
+  "modul_id": "modul__giris-filtreleri-hacim-zaman-likidite",
+  "ad": "Giris filtreleri: hacim, gun ici zaman, likidite",
+  "tur": "cikis_risk_modulu",
+  "mekanik_ozet": "Giris sinyallerine eklenen filtreler.",
+  "kanonik_kural_taslagi": {
+   "kural": "Goreli hacim > 1.5x; saat penceresi.",
+   "optimize": "backtest'te optimize edilecek: Hacim carpani 1.5-3."
+  },
+  "kaynak_kartlar": [
+   "daytrade__gunluk-hisse-secim-filtreleri__bulkowski",
+   "daytrade__gun-ici-donus-zamanlari__bulkowski",
+   "scalp__hacim-onayi__uko"
+  ],
+  "farkli_yazarlar": [
+   "Thomas N. Bulkowski",
+   "Usiere Uko"
+  ],
+  "yazar_sayisi": 2,
+  "max_kodlanabilirlik": 3,
+  "kanit_notu": [
+   "[Thomas N. Bulkowski] Yazar istatistikleri: 10 doların altı işlemlerin %67'si kârsız (kişisel veri); ortalama 1 dk ölçekte para kaybı, 5 dk ölçekte kâr (kişisel); 'Hisse basina ödeme' komisyon ile 10…",
+   "[Thomas N. Bulkowski] 60.801 gün gün içi veri; tepe/dip olasılıkları: 9:31 %24 (zirve, en yüksek) ve %22 (vadi); 9:46 ~%7; 10:01 %9; 10:31 %8; 11:01 %8; 4:00 kapanış ikinci en sık. Günün en yüksek se…"
+  ],
+  "uygulanabilir_stiller": [
+   "scalp",
+   "daytrade",
+   "swing"
+  ],
+  "not": "Giris kurali yoktur; her stratejiye ayri ayri takilabilen cikis/risk/filtre modulu. Martingale/katlama icermez."
+ },
+ {
+  "modul_id": "modul__cikis-sinyalleri",
+  "ad": "Cikis sinyalleri (mum kapanis konumu, iki katina sat)",
+  "tur": "cikis_risk_modulu",
+  "mekanik_ozet": "Kapanis konumu / hedef bazli cikis.",
+  "kanonik_kural_taslagi": {
+   "kural": "Kapanis alt 1/3 ise long kapat.",
+   "optimize": "backtest'te optimize edilecek: -"
+  },
+  "kaynak_kartlar": [
+   "swing__mum-kapanis-konumu__mcarthur",
+   "daytrade__riskli-iki-katina-sat__bulkowski"
+  ],
+  "farkli_yazarlar": [
+   "Benjamin McArthur",
+   "Thomas N. Bulkowski"
+  ],
+  "yazar_sayisi": 2,
+  "max_kodlanabilirlik": 2,
+  "kanit_notu": [
+   "[Thomas N. Bulkowski] ARWR ornegi: 0,84 alim, 1,85 (2 ay sonra) - kitap sonrasi dusus ile iki katina satis oneri olarak; sayi yok."
+  ],
+  "uygulanabilir_stiller": [
+   "scalp",
+   "daytrade",
+   "swing"
+  ],
+  "not": "Giris kurali yoktur; her stratejiye ayri ayri takilabilen cikis/risk/filtre modulu. Martingale/katlama icermez."
+ },
+ {
+  "modul_id": "modul__zaman-stopu",
+  "ad": "Zaman stopu (6 mum) ve kismi kapatma",
+  "tur": "cikis_risk_modulu",
+  "mekanik_ozet": "Belirli mum sayisinda hedef yoksa cik.",
+  "kanonik_kural_taslagi": {
+   "kural": "N mum sonra kar yoksa kapat.",
+   "optimize": "backtest'te optimize edilecek: N=4-10 mum."
+  },
+  "kaynak_kartlar": [
+   "swing__zaman-stopu-kismi-kapatma__heikinashi"
+  ],
+  "farkli_yazarlar": [
+   "Heikin Ashi Trader (3 kitap = 1 yazar)"
+  ],
+  "yazar_sayisi": 1,
+  "max_kodlanabilirlik": 2,
+  "kanit_notu": [],
+  "uygulanabilir_stiller": [
+   "scalp",
+   "daytrade",
+   "swing"
+  ],
+  "not": "Giris kurali yoktur; her stratejiye ayri ayri takilabilen cikis/risk/filtre modulu. Martingale/katlama icermez."
+ },
+ {
+  "modul_id": "modul__sabit-r-pozisyon-boyutu",
+  "ad": "Sabit R ile pozisyon buyuklugu",
+  "tur": "cikis_risk_modulu",
+  "mekanik_ozet": "Lot = risk tutari / stop mesafesi.",
+  "kanonik_kural_taslagi": {
+   "kural": "Lot = (Hesap*%risk)/(giris-stop).",
+   "optimize": "backtest'te optimize edilecek: Risk %0.25-1."
+  },
+  "kaynak_kartlar": [
+   "swing__r-sl-pozisyon-boyutu__graham"
+  ],
+  "farkli_yazarlar": [
+   "Dave R. W. Graham"
+  ],
+  "yazar_sayisi": 1,
+  "max_kodlanabilirlik": 3,
+  "kanit_notu": [],
+  "uygulanabilir_stiller": [
+   "scalp",
+   "daytrade",
+   "swing"
+  ],
+  "not": "Giris kurali yoktur; her stratejiye ayri ayri takilabilen cikis/risk/filtre modulu. Martingale/katlama icermez."
+ },
+ {
+  "modul_id": "modul__pozisyon-olcekleme-piramit",
+  "ad": "Kar sonrasi kademeli lot ekleme",
+  "tur": "cikis_risk_modulu",
+  "mekanik_ozet": "Lehte hareket sonrasi pozisyon ekleme (martingale degil).",
+  "kanonik_kural_taslagi": {
+   "kural": "Ilk hedefte yarim kapat, yeni kurulumda ekle.",
+   "optimize": "backtest'te optimize edilecek: -"
+  },
+  "kaynak_kartlar": [
+   "swing__pozisyon-olcekleme__razaq"
+  ],
+  "farkli_yazarlar": [
+   "Razaq Adekunle"
+  ],
+  "yazar_sayisi": 1,
+  "max_kodlanabilirlik": 1,
+  "kanit_notu": [],
+  "uygulanabilir_stiller": [
+   "scalp",
+   "daytrade",
+   "swing"
+  ],
+  "not": "Giris kurali yoktur; her stratejiye ayri ayri takilabilen cikis/risk/filtre modulu. Martingale/katlama icermez."
+ },
+ {
+  "modul_id": "modul__islem-limitleri",
+  "ad": "Gunluk islem ve ardisik kayip limitleri",
+  "tur": "cikis_risk_modulu",
+  "mekanik_ozet": "Gunluk max islem ve ardisik kayip sonrasi dur.",
+  "kanonik_kural_taslagi": {
+   "kural": "N kayiptan sonra gun biter.",
+   "optimize": "backtest'te optimize edilecek: N=2-3."
+  },
+  "kaynak_kartlar": [
+   "swing__islem-limitleri__scheier"
+  ],
+  "farkli_yazarlar": [
+   "M. William Scheier"
+  ],
+  "yazar_sayisi": 1,
+  "max_kodlanabilirlik": 3,
+  "kanit_notu": [],
+  "uygulanabilir_stiller": [
+   "scalp",
+   "daytrade",
+   "swing"
+  ],
+  "not": "Giris kurali yoktur; her stratejiye ayri ayri takilabilen cikis/risk/filtre modulu. Martingale/katlama icermez."
+ },
+ {
+  "modul_id": "modul__yeniden-giris",
+  "ad": "Yeniden giris (durdurulmus kuruluma ikinci giris)",
+  "tur": "cikis_risk_modulu",
+  "mekanik_ozet": "Stop sonrasi bir kez yeniden giris, pozisyon boyutu artirilmaz.",
+  "kanonik_kural_taslagi": {
+   "kural": "Orijinal kurulum bozulmadiysa 1 kez yeniden gir.",
+   "optimize": "backtest'te optimize edilecek: -"
+  },
+  "kaynak_kartlar": [
+   "daytrade__yeniden-giris__woods"
+  ],
+  "farkli_yazarlar": [
+   "Galen Woods"
+  ],
+  "yazar_sayisi": 1,
+  "max_kodlanabilirlik": 2,
+  "kanit_notu": [
+   "[Galen Woods] Sayısal veri yok. Kitap yeniden girişlerin 'genellikle orijinal kurulumdan daha güvenilir' olduğunu söylüyor (s.205); istatistik verilmemiş."
+  ],
+  "uygulanabilir_stiller": [
+   "scalp",
+   "daytrade",
+   "swing"
+  ],
+  "not": "Giris kurali yoktur; her stratejiye ayri ayri takilabilen cikis/risk/filtre modulu. Martingale/katlama icermez."
+ }
+]

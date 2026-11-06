@@ -1,0 +1,57 @@
+[
+  {
+    "kart_id": "scalp__ema10-21-orta-nokta-geri-cekilme__eseckal",
+    "ad": "EMA10/EMA21 Orta Noktasina Geri Cekilme Scalp (5dk)",
+    "stil": "scalp",
+    "kaynak": {"pdf": "5_Dakikalık_Scalp_Stratejisi_8_sayfa.pdf", "sayfalar": [1, 2, 3, 4, 5, 6, 7, 8]},
+    "ozet": "EMA50 yonunde trend varken (yukselis: daha yuksek zirveler ve yukari egimli EMA50; dusus: daha dusuk dipler ve asagi egimli EMA50), fiyat EMA10 ile EMA21 arasindaki orta noktaya geri dondugunde o yonde islem acilir. Stop 5 pip, kar al 10 pip (+ spread).",
+    "kategori": "trend_takip",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "forex",
+    "zaman_dilimi": {"islem": "5m", "ust_filtre": null},
+    "gostergeler": [
+      {"ad": "EMA", "parametreler": {"periyot": 10}},
+      {"ad": "EMA", "parametreler": {"periyot": 21}},
+      {"ad": "EMA", "parametreler": {"periyot": 50}}
+    ],
+    "long_giris": [
+      "EMA50 yukari egimli (yukselis trendi)",
+      "Fiyat daha yuksek zirveler yapiyor",
+      "Fiyat EMA10 ile EMA21 arasindaki orta noktaya geri doner: AL"
+    ],
+    "short_giris": [
+      "EMA50 asagi egimli (dusus trendi)",
+      "Fiyat daha dusuk dipler yapiyor",
+      "Fiyat EMA10 ile EMA21 arasindaki orta noktaya geri cikar: SAT"
+    ],
+    "stop_loss": "Giris noktasindan 5 pip (+ spread)",
+    "kar_al": "Giris noktasindan 10 pip (+ spread)",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Yalnizca Londra acilisindan sonra veya New York acilisindan sonra islem; Asya seansinda islem yok",
+      "Daha yuksek zirve / daha dusuk dip yapisi bozulduysa sinyal kabul edilmez",
+      "EMA50 yana donmusse (duzlesmisse) sinyal kabul edilmez",
+      "Ayni trend icinde her sinyal ayri islem olarak alinabilir (ornek: 4 karli islem, her biri 10 pip)"
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": "Yazar gunluk 30-50 pip kazandigini belirtiyor (kisisel iddia, istatistik verilmemis).",
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Giris (EMA orta noktasi), stop ve kar al sayisal; ancak 'daha yuksek zirve' yapisi ve EMA50'nin 'yana donmesi' olcutu tanimli degil."
+    },
+    "belirsizlikler": [
+      "'Yana donme' (EMA50 duzlesme) olcutu sayisal degil",
+      "'Daha yuksek zirve / dip' icin mum veya swing tanimi yok",
+      "Orta noktaya giris: fiyatin dokunmasi mi yoksa kapanisla orta noktanin ustune/altina gecmesi mi gerektigi belirsiz",
+      "'+ spread' ifadesinde spread'in nasil olculecegi tanimli degil",
+      "Ana sistemde cikis: sabit 10 pip kar al ile 'trend durana kadar olceklendirme' ifadesi arasindaki iliski acik degil",
+      "Yazar adi kitapta yok (bolum: Gelismis Ticaret Sistemleri Koleksiyonu)"
+    ],
+    "uyumluluk_notu": "5m icin tasarlanmis, ≥5m uyumlu. Forex'e ozgu: pip olcusu ve Londra/New York seans saatleri. Hacim gerekmiyor. Kripto/hisse/emtia icin pip yerine ATR tabanli stop/kar al gerekir; seans filtresi bu piyasalarda yeniden tanimlanmali.",
+    "varyantlar": [
+      "Karlarin calistirilmasi: ilk sinyal alinir, 10 pip kârda stop basabasa cekilir; cikis EMA50 yana dondugunde (kitap ornegi: ~50 pip) veya EMA50 gercekten dondugunde (kitap ornegi: ~100 pip)"
+    ],
+    "anahtar_kelimeler": ["ema10", "ema21", "ema50", "orta-nokta", "geri-cekilme", "trend-takip", "5dk", "forex", "seans", "londra", "new-york", "pip", "ema-duzlesme"]
+  }
+]

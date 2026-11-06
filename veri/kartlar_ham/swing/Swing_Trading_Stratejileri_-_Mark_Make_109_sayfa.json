@@ -1,0 +1,389 @@
+[
+  {
+    "kart_id": "swing__kesilmis-fiyat-kopusu__make",
+    "ad": "Kesilmiş Fiyat Salınımı - Konsolidasyon Kopuşu ve Yutma",
+    "stil": "swing",
+    "kaynak": {"pdf": "Swing_Trading_Stratejileri_-_Mark_Make_109_sayfa.pdf", "sayfalar": [40, 41, 42, 43, 44, 45, 46, 49, 50]},
+    "ozet": "Trend yönünde daha yüksek dip (yükseliş) veya daha düşük tepe (düşüş) oluşurken fiyat konsolidasyon yapıp bu aralığın sınırını kırarsa, kırılım yönünde işleme girilir. Yutma deseni de alternatif tetikleyicidir.",
+    "kategori": "kirilim",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "forex",
+    "zaman_dilimi": {"islem": "5m veya D1 (kitap 1m örneği verir, 5m veya günlük kullanmayı önerir)", "ust_filtre": null},
+    "gostergeler": [],
+    "long_giris": [
+      "Son swing dibi önceki swing dibinden yüksek (daha yüksek dip) ve fiyat en az üç bar boyunca yanlara hareket edip konsolidasyon yapmış olmalı",
+      "Konsolidasyonun üst sınırı (önceki yüksek seviyenin hemen altı) yukarı kırıldığında kırılım fiyatından uzun girilir; sinyaller gerçek zamanlı alınır",
+      "Alternatif tetikleyici: boğa yutma deseni (yukarı mum önceki aşağı mumu tamamen sarar); giriş önceki aşağı mumun yüksek seviyesinin üstünden"
+    ],
+    "short_giris": [
+      "Son swing tepesi önceki swing tepesinden düşük (daha düşük tepe) ve fiyat konsolidasyon yapmış olmalı",
+      "Konsolidasyonun alt sınırı aşağı kırıldığında kırılım fiyatından kısa girilir",
+      "Alternatif tetikleyici: ayı yutma deseni (aşağı mum önceki yukarı mumu tamamen sarar); kitap, çift eski çubuğun düşük seviyesinin altına inildiğinde kısa açılmasını örnekler"
+    ],
+    "stop_loss": "Swing işleminde kopuş tepesinin (kısa için dibinin) 5 pip + spread ötesi; günlük işlemde 1 pip + spread ötesi. Yutma örneğinde stop son dibin 5 pip altına konur.",
+    "kar_al": "2R (giriş ile stop arası mesafenin 2 katı). Alternatifler: 1.75R (fiyat yavaşsa), 1.5R (trend tersi sinyalde), 3R (çift güçlü trend gösteriyorsa).",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Genel trend yönünde işlem: yükselişte yalnız uzun, düşüşte yalnız kısa",
+      "Yalnız kitapta önerilen günlük işlem saatlerinde (paritenin Londra açılışı gibi)",
+      "Gün içi hareket filtresi: EURUSD gün içinde 130 pip yukarıdaysa uzun açılmaz (kitap örneği, hedefe ulaşma olasılığı düşük)",
+      "Spread geniş olduğunda işlem yapılmaz (kitap: yüksek spread karı yer)"
+    ],
+    "pozisyon_risk": "Kitap genel kuralı: işlem başına hesabın %2'si (10.000$ hesapta 200$; Bölüm 7). Bölüm 12'de %1-3 aralığı, Bölüm 2 örneğinde %0,25 kullanılır. Pozisyon büyüklüğü = R / (giriş - stop mesafesi).",
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Tetikleyici (kırılım, yutma), stop (5 pip / 1 pip) ve hedef (2R) sayısal. Ancak 'konsolidasyon' ve 'yanlara hareket' için bar sayısı dışında ölçü yok, trend yönü (daha yüksek dip) için swing tespiti yorum gerektiriyor."
+    },
+    "belirsizlikler": [
+      "Konsolidasyonun genişliği ve kaç barda oluşacağı için kitapta en az üç bar dışında kriter yok",
+      "Üst zaman dilimi filtresi kitapta tanımlanmamış (trend yönü görsel olarak belirleniyor)",
+      "Günlük işlem saatleri hangi saat dilimi ve hangi parite için verilmiş, tam liste yok",
+      "Pip tanımı forex'e özgü; hisse, kripto veya emtia için stop tanımı yok",
+      "Kitap iki farklı stop tarifi veriyor (kopuş tepesi + 5 pip; yutma son dip + 5 pip); ikisi de karta alındı"
+    ],
+    "uyumluluk_notu": "1L3A için 5m'ye uyarlanabilir (kitap 5m veya günlük öneriyor). Pip tabanlı stop ve gün içi saat filtresi forex'e özgü; kripto, ABD hisse, emtia perpetual için stop ATR veya yüzde ile yeniden tanımlanmalı. Hacim verisi gerekmez.",
+    "varyantlar": [
+      "Kırılım yerine yutma deseni ile giriş",
+      "Hedef varyantları: 1.75R, 1.5R (trend tersi sinyal), 3R (güçlü trend)"
+    ],
+    "anahtar_kelimeler": ["konsolidasyon-kopusu", "yutma", "kesilmis-hareket", "trend-devam", "5-pip-stop", "2r", "fiyat-hareketi"]
+  },
+  {
+    "kart_id": "swing__sma-10-20-kesisim__make",
+    "ad": "10 ve 20 Günlük SMA Kesişimi",
+    "stil": "swing",
+    "kaynak": {"pdf": "Swing_Trading_Stratejileri_-_Mark_Make_109_sayfa.pdf", "sayfalar": [77, 78]},
+    "ozet": "Kısa vadeli 10 günlük SMA, 20 günlük SMA'yı aşağıdan yukarı keserse yükselişin devam ettiği kabul edilip uzun, yukarıdan aşağı keserse kısa işlem düşünülür.",
+    "kategori": "trend_takip",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "hisse",
+    "zaman_dilimi": {"islem": "D1 (kitap swing için günlük veya daha uzun zaman dilimi önerir)", "ust_filtre": null},
+    "gostergeler": [
+      {"ad": "SMA", "parametreler": {"periyot": 10}},
+      {"ad": "SMA", "parametreler": {"periyot": 20}}
+    ],
+    "long_giris": ["10 günlük SMA, 20 günlük SMA'yı aşağıdan yukarı keser"],
+    "short_giris": ["10 günlük SMA, 20 günlük SMA'yı yukarıdan aşağı keser"],
+    "stop_loss": null,
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Giriş kesişimi tamamen sayısal. Stop ve çıkış kuralı kitapta açıkça yazılmamış; ters kesişim yalnızca sinyal olarak anılıyor."
+    },
+    "belirsizlikler": [
+      "Stop-loss kuralı kitapta yok",
+      "Çıkış kuralı açıkça yazılmamış; ters kesişim 'satış işareti' olarak tarif ediliyor",
+      "Kitap bu çerçeveyi 'swing değişim çerçevesi' olarak sunuyor, ek filtre vermiyor"
+    ],
+    "uyumluluk_notu": "1L3A için 5m'ye uyarlanabilir (SMA hesabı herhangi bir zaman diliminde çalışır, ancak kitap günlük kullanıyor; 5m'de gürültü artar). Forex'e özgü değil. Hacim verisi gerekmez. Kripto, ABD hisse ve emtia perpetual'larda çalışır.",
+    "varyantlar": [],
+    "anahtar_kelimeler": ["sma", "ortalama-kesisimi", "10-20", "trend-takip", "al-sat-sinyali"]
+  },
+  {
+    "kart_id": "swing__golden-cross-50-200__make",
+    "ad": "50/200 Günlük SMA Altın ve Ölüm Çaprazı",
+    "stil": "swing",
+    "kaynak": {"pdf": "Swing_Trading_Stratejileri_-_Mark_Make_109_sayfa.pdf", "sayfalar": [32, 33]},
+    "ozet": "50 günlük SMA, 200 günlük SMA'yı aşağıdan yukarı keserse (altın çapraz) uzun yönlü eğilim değişimi sinyali sayılır; yukarıdan aşağı keserse (ölüm çaprazı) tersi.",
+    "kategori": "trend_takip",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "hisse",
+    "zaman_dilimi": {"islem": "D1", "ust_filtre": null},
+    "gostergeler": [
+      {"ad": "SMA", "parametreler": {"periyot": 50}},
+      {"ad": "SMA", "parametreler": {"periyot": 200}}
+    ],
+    "long_giris": ["50 günlük SMA, 200 günlük SMA'yı aşağıdan yukarı keser (altın çapraz)"],
+    "short_giris": ["50 günlük SMA, 200 günlük SMA'yı yukarıdan aşağı keser (ölüm çaprazı)"],
+    "stop_loss": null,
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": "Ters çapraz gelirse (uzun pozisyonda ölüm çaprazı) pozisyon kapatılır; kitap ölüm çaprazını trend değişimi sinyali olarak tarif ediyor",
+    "filtreler": [],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Giriş ve ters çapraz sayısal. Stop kuralı yok, çıkış ters çapraz olarak yorumlandı."
+    },
+    "belirsizlikler": [
+      "Stop-loss kitapta yok",
+      "Çıkış kuralı açık yazılmamış; ölüm çaprazı trend değişimi sinyali olarak anılıyor",
+      "Kitap çaprazı gecikmeli bir gösterge olarak tarif ediyor; ek filtre yok"
+    ],
+    "uyumluluk_notu": "1L3A için ≥5m'ye uyarlanamaz denebilir: 50/200 günlük periyot kitapta D1 için verilmiş, 5m'de 50 ve 200 mum çok kısa bir süreyi kapsar. Forex'e özgü değil; hacim gerekmez. Kripto ve hisse için uygun.",
+    "varyantlar": [],
+    "anahtar_kelimeler": ["altin-capraz", "olum-capraz", "sma-50-200", "trend-degisimi", "gecikmeli-gosterge"]
+  },
+  {
+    "kart_id": "swing__macd-sinyal-kesisimi__make",
+    "ad": "MACD Sinyal Çizgisi Kesişimi",
+    "stil": "swing",
+    "kaynak": {"pdf": "Swing_Trading_Stratejileri_-_Mark_Make_109_sayfa.pdf", "sayfalar": [38, 76, 77]},
+    "ozet": "MACD çizgisi (12 ve 26 dönemlik üstel ortalamaların farkı) sinyal çizgisini aşağıdan yukarı keserse uzun, yukarıdan aşağı keserse kısa düşünülür. Sıfır çizgisi geçişi de ek sinyal olarak anılır.",
+    "kategori": "momentum",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "hisse",
+    "zaman_dilimi": {"islem": "D1 (kitap swing için günlük ve üzeri)", "ust_filtre": null},
+    "gostergeler": [
+      {"ad": "MACD", "parametreler": {"hizli": 12, "yavas": 26, "sinyal": null}}
+    ],
+    "long_giris": [
+      "MACD çizgisi sinyal çizgisini aşağıdan yukarı keser",
+      "Alternatif: MACD çizgisi sıfır çizgisini aşağıdan yukarı geçer (kitap alım sinyali olarak anar)"
+    ],
+    "short_giris": [
+      "MACD çizgisi sinyal çizgisini yukarıdan aşağı keser",
+      "Alternatif: MACD çizgisi sıfır çizgisini yukarıdan aşağı geçer (satış sinyali)"
+    ],
+    "stop_loss": null,
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": "Ters yönde sinyal çizgisi kesişimi (kitap, iki çizginin bir kez daha kesişip diğer yönde sinyal vermesini bekler)",
+    "filtreler": [],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Kesişim ve sıfır geçişi sayısal. Sinyal çizgisi periyodu kitapta verilmiyor; stop yok."
+    },
+    "belirsizlikler": [
+      "Sinyal çizgisi periyodu kitapta yok (klasik değer 9 olarak varsayılmadı)",
+      "Stop-loss kitapta yok",
+      "Kitap MACD'nin geç gösterge olduğunu söylüyor; girişte gecikme kabul ediliyor",
+      "Sıfır çizgisi geçişinin giriş mi onay mı olduğu net değil"
+    ],
+    "uyumluluk_notu": "1L3A için 5m'ye uyarlanabilir (MACD hesabı zaman diliminden bağımsız); kitap günlük kullanıyor. Forex'e özgü değil. Hacim gerekmez. Kripto ve hisse için uygun.",
+    "varyantlar": ["Sıfır çizgisi geçişini onay olarak kullanma"],
+    "anahtar_kelimeler": ["macd", "sinyal-cizgisi", "kesisim", "momentum", "sifir-cizgisi"]
+  },
+  {
+    "kart_id": "swing__bollinger-bant-donus__make",
+    "ad": "Bollinger Bantı Ortalamaya Dönüş (Bounce)",
+    "stil": "swing",
+    "kaynak": {"pdf": "Swing_Trading_Stratejileri_-_Mark_Make_109_sayfa.pdf", "sayfalar": [35, 36, 37, 82, 83]},
+    "ozet": "Fiyat Bollinger bantlarının dışına çıkıp kenardan geri döndüğünde ortalamaya dönüş beklenir. Alt bant yakınında uzun, üst bant yakınında kısa düşünülür; hedef orta veya karşı bant tarafıdır.",
+    "kategori": "ortalamaya_donus",
+    "piyasa_rejimi": "yatay",
+    "orijinal_piyasa": "hisse",
+    "zaman_dilimi": {"islem": "D1 (kitap örneklerinde günlük grafik)", "ust_filtre": null},
+    "gostergeler": [
+      {"ad": "Bollinger Bantları", "parametreler": {"periyot": null, "std_sapma": 2}}
+    ],
+    "long_giris": ["Fiyat alt Bollinger bandına ulaşır veya altına düşer; yükseliş yönünde dönüş teyidi beklenir (teyit tanımı kitapta yok)"],
+    "short_giris": ["Fiyat üst Bollinger bandına ulaşır veya üstüne çıkar; kitap üst banda satış tetikleyicisi olarak anar"],
+    "stop_loss": "Kısa pozisyonda stop üst bandın hemen üzerinde (kitap). Uzun pozisyonda simetrik olarak alt bandın hemen altı (kitapta açık yazılı değil, yorum).",
+    "kar_al": "Fiyat ortalamaya veya taban/karşı banda dönerse çıkış (kitap: maliyet normale ve taban bandına doğru döner)",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Bantlar yatay piyasada kullanılır; eğimli (trend) piyasada bant kenarından ters işlem yerine Bollinger sıkışması (squeeze) yorumu yapılır (kitap)"
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Bant ihlali ve hedef tanımlı. Standart sapma sayısı 2 olarak kitapta verilmiş, ancak periyot verilmemiş, teyit tanımsız ve stop yalnız kısa taraf için açık."
+    },
+    "belirsizlikler": [
+      "Bollinger periyodu kitapta belirtilmemiş (Edward Day 20 çubuk kullanıyor, bu kart için varsayılmadı)",
+      "Mark Make Bölüm 5'te '1 veya 2 standart sapma' diyor, Bölüm 9'da '2 standart sapma' diyor; 2 seçildi",
+      "Uzun taraf stop kuralı yazılı değil (simetrik varsayım)",
+      "Kitap 'hareketli piyasalarda' ifadesini kullanıyor; yatay piyasa olarak yorumlandı",
+      "Dönüş teyidi için kitapta sinyal tanımı yok",
+      "Edward Day aynı göstergede 3 standart sapma kullanıyor (bkz. edward kartı)"
+    ],
+    "uyumluluk_notu": "1L3A için 5m'ye uyarlanabilir (bant hesabı zamandan bağımsız). Forex'e özgü değil, ancak kitabın hedefi günlük; 5m'de bant gürültüsü artar. Hacim verisi gerekmez. Kripto, hisse ve emtia için uygun.",
+    "varyantlar": [
+      "Kısa tarafta üst banda değen mumun kapanışı, uzun tarafta alt bant altına inen mumun kapanışı ile giriş (kitap ayrım yapmıyor; yorum)"
+    ],
+    "anahtar_kelimeler": ["bollinger", "bant-donus", "ortalamaya-donus", "yatay-piyasa", "2-sigma"]
+  },
+  {
+    "kart_id": "swing__parabolik-sar-donus__make",
+    "ad": "Parabolik SAR Yön Değişimi",
+    "stil": "swing",
+    "kaynak": {"pdf": "Swing_Trading_Stratejileri_-_Mark_Make_109_sayfa.pdf", "sayfalar": [83]},
+    "ozet": "Parabolik SAR noktaları fiyatın üstündeyse düşüş, altındaysa yükseliş yönü gösterir. Noktaların taraf değiştirmesi ters yönde giriş sinyali sayılır.",
+    "kategori": "trend_takip",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {"islem": "D1 (kitap günlük ve üzeri)", "ust_filtre": null},
+    "gostergeler": [
+      {"ad": "Parabolik SAR", "parametreler": {"adim": null, "maks": null}}
+    ],
+    "long_giris": ["SAR noktaları fiyatın altına geçer (yükseliş yönü)"],
+    "short_giris": ["SAR noktaları fiyatın üstüne geçer (düşüş yönü)"],
+    "stop_loss": null,
+    "kar_al": null,
+    "iz_suren_stop": "SAR noktası kendisi çıkış aracı olarak kullanılabilir (kitap, ters taraf değişimi sinyali)",
+    "zaman_cikisi": "Noktaların karşı tarafa geçmesi",
+    "filtreler": [
+      "Yatay ve genişleyen piyasada kullanılmaz; noktalar sürekli taraf değiştirir (kitap uyarısı)"
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Yön kuralı net. Adım ve maksimum parametreleri kitapta yok; stop kuralı yok."
+    },
+    "belirsizlikler": [
+      "SAR adım ve maksimum değerleri kitapta yok",
+      "Stop-loss kuralı yok",
+      "Kitap SAR'ı 'desen belirteci' olarak tanımlıyor; giriş anı (kapanış mı, açılış mı) belirtilmemiş"
+    ],
+    "uyumluluk_notu": "1L3A için 5m'ye uyarlanabilir ancak yatay piyasada yanlış sinyal üretir. Forex'e özgü değil. Hacim gerekmez. Kripto ve hisse için uygun.",
+    "varyantlar": [],
+    "anahtar_kelimeler": ["parabolik-sar", "yon-degisimi", "trend", "nokta-gostergesi"]
+  },
+  {
+    "kart_id": "swing__ichimoku-kijun-bulut__make",
+    "ad": "Ichimoku Kijun Sen ve Bulut Yönü",
+    "stil": "swing",
+    "kaynak": {"pdf": "Swing_Trading_Stratejileri_-_Mark_Make_109_sayfa.pdf", "sayfalar": [80, 81]},
+    "ozet": "Fiyat Senkou bulutunun ve Kijun Sen'in üstündeyse yükseliş eğilimi, altındaysa düşüş eğilimi kabul edilerek o yönde işlem düşünülür.",
+    "kategori": "trend_takip",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {"islem": "D1", "ust_filtre": null},
+    "gostergeler": [
+      {"ad": "Ichimoku Kinko Hyo", "parametreler": {"tenkan": 9, "kijun": 26, "senkou_b": 52, "oteleme": 26}}
+    ],
+    "long_giris": ["Fiyat Senkou bulutunun üzerinde ve Kijun Sen'in üzerinde"],
+    "short_giris": ["Fiyat Senkou bulutunun altında ve Kijun Sen'in altında"],
+    "stop_loss": null,
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": "Fiyatın Kijun Sen'in karşı tarafına geçmesi (kitap: değer çizginin altına düşerse daha da düşmesi muhtemel)",
+    "filtreler": [
+      "Tenkan Sen'in eğimi piyasanın yönünü, yatay hareketi onaylar (kitap)"
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Yön kuralları kitapta çoklu ve yoruma açık çizgilerle anlatılıyor; Chikou Span yorumu net değil; stop ve hedef yok."
+    },
+    "belirsizlikler": [
+      "Bulut üstü/altı ile Kijun kuralı arasında öncelik sırası kitapta açık değil",
+      "Chikou Span'ın giriş/çıkıştaki rolü tanımlanmamış",
+      "Stop ve kar alma kuralı yok",
+      "Kitap Ichimoku'yu karmaşık bulduğunu ve kolay yanlış okunabileceğini belirtiyor"
+    ],
+    "uyumluluk_notu": "1L3A için ≥5m'ye uyarlanabilir ancak 52 ve 26 periyotlar D1 için tasarlanmış. Forex'e özgü değil. Hacim verisi gerekmez. Kripto ve hisse için uygun.",
+    "varyantlar": [],
+    "anahtar_kelimeler": ["ichimoku", "kijun-sen", "tenkan-sen", "senkou-bulut", "trend"]
+  },
+  {
+    "kart_id": "swing__kanal-kirilimi__make",
+    "ad": "Düşüş Kanalının Üst Çizgisinden Kırılım (Kısa)",
+    "stil": "swing",
+    "kaynak": {"pdf": "Swing_Trading_Stratejileri_-_Mark_Make_109_sayfa.pdf", "sayfalar": [75, 76]},
+    "ozet": "Düşüş eğilimli bir desenin etrafına çizilen kanalın üst çizgisinden fiyat aşağı çıkarsa kısa pozisyon düşünülür; fiyat kanala geri dönüp yükselirse işlem iptal edilir.",
+    "kategori": "kirilim",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "hisse",
+    "zaman_dilimi": {"islem": "D1 (kitap hisse senedi diyagramında gösterir)", "ust_filtre": null},
+    "gostergeler": [],
+    "long_giris": [],
+    "short_giris": ["Düşüş eğilimli desenin kanalının üst çizgisinden fiyat aşağı kırılır (kitap: değer kanalın üst çizgisinden aşağı atladığında satış düşünülür)"],
+    "stop_loss": null,
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": "Fiyat kanala geri dönüp yukarı bir tersine dönüş gösterirse pozisyondan çıkılır (kitap: değer kanaldan çıkıp daha yükseğe hareket edip tersine dönüş göstermediği sürece satış aranır)",
+    "filtreler": ["Kanal desen ile birlikte çizilir; kitap desenle işlem yapmanın zorunlu olduğunu söyler"],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Kırılım kuralı var ancak kanal çizimi öznel. Uzun taraf kuralı kitapta yok. Stop ve hedef yok."
+    },
+    "belirsizlikler": [
+      "Kanal nasıl çizileceği tanımlanmamış",
+      "Uzun pozisyon (yükseliş kanalı) kuralı kitapta yazılmamış",
+      "Stop ve kar alma kuralı yok"
+    ],
+    "uyumluluk_notu": "1L3A için ≥5m'ye uyarlanabilir ancak kanal çizimi otomatikleştirilmeli. Forex'e özgü değil. Hacim verisi gerekmez. Kripto ve hisse için uygun.",
+    "varyantlar": [],
+    "anahtar_kelimeler": ["kanal", "kirilim", "ust-cizgi", "dusus-trendi", "kisa"]
+  },
+  {
+    "kart_id": "swing__fibonacci-geri-cekilme__make",
+    "ad": "Fibonacci Geri Çekilme ile Kısa Giriş",
+    "stil": "swing",
+    "kaynak": {"pdf": "Swing_Trading_Stratejileri_-_Mark_Make_109_sayfa.pdf", "sayfalar": [76]},
+    "ozet": "Düşüş trendinde fiyat %70 geri çekilme seviyesine yükselip buradan geri dönerse kısa düşünülür; %35 seviyesine inip sıçrarsa kısa pozisyondan çıkılır.",
+    "kategori": "destek_direnc",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "hisse",
+    "zaman_dilimi": {"islem": "D1 (kitap günlük hisse grafiği)", "ust_filtre": null},
+    "gostergeler": [
+      {"ad": "Fibonacci geri çekilme", "parametreler": {"seviyeler": [0.35, 0.46, 0.70]}}
+    ],
+    "long_giris": [],
+    "short_giris": ["Düşüş trendinde fiyat %70 geri çekilme seviyesinden geri döner"],
+    "stop_loss": null,
+    "kar_al": "Fiyat %35 geri çekilme seviyesine düşüp buradan sıçrarsa kısa pozisyondan çıkılır",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": ["Kitap %46 ve yarı seviyeye de bakılabileceğini söyler"],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Seviyeler ve kısa giriş tanımlı; ancak hangi swing'in ölçüleceği, seviyelerin neden 35/46/70 olduğu ve stop kuralı belirsiz."
+    },
+    "belirsizlikler": [
+      "Fibonacci ölçüm noktaları (swing tepe ve dip) tanımlanmamış",
+      "Seviye seçimi kitapta açıklanmamış; kitap örnek oran olarak veriyor",
+      "Stop-loss kuralı yok",
+      "Uzun taraf kuralı yok"
+    ],
+    "uyumluluk_notu": "1L3A için ≥5m'ye uyarlanabilir (Fibonacci zamandan bağımsız). Forex'e özgü değil. Hacim verisi gerekmez. Kripto ve hisse için uygun.",
+    "varyantlar": [],
+    "anahtar_kelimeler": ["fibonacci", "geri-cekilme", "70-yuzde", "35-yuzde", "kisa"]
+  },
+  {
+    "kart_id": "swing__sma200-destek-uzun__make",
+    "ad": "200 Günlük SMA Desteğinden Uzun Giriş",
+    "stil": "swing",
+    "kaynak": {"pdf": "Swing_Trading_Stratejileri_-_Mark_Make_109_sayfa.pdf", "sayfalar": [32]},
+    "ozet": "Düşüş trendindeki hisse fiyatı 200 günlük SMA'ya yaklaşıp destek bulur ve yükselmeye başlarsa uzun pozisyon düşünülür; risk, fiyatın 200 SMA'nın hemen altında durdurulmasıdır.",
+    "kategori": "destek_direnc",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "hisse",
+    "zaman_dilimi": {"islem": "D1", "ust_filtre": null},
+    "gostergeler": [
+      {"ad": "SMA", "parametreler": {"periyot": 200}}
+    ],
+    "long_giris": ["Düşüş trendinde fiyat 200 günlük SMA seviyesine gelir ve destek bulup yukarı dönmeye başlar"],
+    "short_giris": [],
+    "stop_loss": "200 günlük SMA'nın hemen altı (kitap riski böyle tarif eder; sayısal mesafe verilmemiş)",
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Seviye ve stop tarifi var ancak destek 'bulma' onayı ve stop mesafesi yoruma açık."
+    },
+    "belirsizlikler": [
+      "Destek onayı (dönüş mumu, hacim vb.) kitapta tanımlı değil",
+      "Stop mesafesi sayısal değil",
+      "Kar alma kuralı yok",
+      "Kitap bu girişi 'düşüş trendi' içinde tarif ediyor; karşı trend işlem olduğu belirtilmemiş"
+    ],
+    "uyumluluk_notu": "1L3A için 5m'de 200 mum çok uzun bir pencereyi kapsar; kitabın D1 kullanımı korunmalı. Forex'e özgü değil. Hacim verisi gerekmez. Kripto ve hisse için uygun.",
+    "varyantlar": [],
+    "anahtar_kelimeler": ["sma-200", "destek", "dusus-trendi", "uzun", "ortalama-destegi"]
+  }
+]

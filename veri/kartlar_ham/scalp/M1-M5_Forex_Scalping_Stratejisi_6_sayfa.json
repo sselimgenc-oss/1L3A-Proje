@@ -1,0 +1,53 @@
+[
+  {
+    "kart_id": "scalp__macd-stokastik-m1-m5__eseckal",
+    "ad": "MACD Yon Filtresi + Stokastik 20/80 Gecisi (M1/M5 Forex)",
+    "stil": "scalp",
+    "kaynak": {"pdf": "M1-M5_Forex_Scalping_Stratejisi_6_sayfa.pdf", "sayfalar": [2, 3, 4, 5, 6]},
+    "ozet": "MACD sifir cizgisinin ustundeyken Stokastik 20 seviyesini asagidan yukari kestiginde AL; MACD sifirin altindayken Stokastik 80 seviyesini yukaridan asagi kestiginde SAT. Zarar durdurma son destek/direncin 1 pip otesine konur; kar al M1'de en az 15, M5'te en az 25 pip.",
+    "kategori": "momentum",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "forex",
+    "zaman_dilimi": {"islem": "1m veya 5m", "ust_filtre": null},
+    "gostergeler": [
+      {"ad": "MACD", "parametreler": {"hizli": 12, "yavas": 26, "sinyal": 9}},
+      {"ad": "Stokastik", "parametreler": {"K": 8, "D": 3, "yavaslama": 3}}
+    ],
+    "long_giris": [
+      "MACD > 0",
+      "Stokastik, 20'nin altindan 20'nin ustune cikar (AL sinyali)"
+    ],
+    "short_giris": [
+      "MACD < 0",
+      "Stokastik, 80'in ustunden 80'in altina doner (SAT sinyali)"
+    ],
+    "stop_loss": "Alis: en son desteginin 1 pip altı; satis: en son direncin 1 pip ustu",
+    "kar_al": "M1 grafiginde en az 15 pip; M5 grafiginde en az 25 pip",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Kitap, spreadi genis olan ciftlerin bu sistemle kullanimini onermiyor",
+      "Kurulum ornegi EUR/USD ve GBP/USD; diger ciftlerde once manuel test onerisi"
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": "Tek ornek: 15 pip hedef 7 dakikada vuruldu, risk-odul 1:3 (istatistik verilmemis).",
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "MACD ve Stokastik kurallari sayisal; ancak 'en son destek/direnc' tespiti ozneldir ve kar al 'en az' ifadesiyle ust sinir icermez."
+    },
+    "belirsizlikler": [
+      "'En son destek/direnc' seviyesinin nasil tespit edilecegi tanimli degil (swing, fraktal, pivot vb. yok)",
+      "Kar al 'en az 15 / 25 pip' seklinde; cikis icin ust sinir ya da bitis kurali yok",
+      "Stokastik ayari %K8 olarak verilmis; kitap MetaTrader varsayilani %K12'nin degistirilmesi gerekebilecegini belirtiyor",
+      "'Cikiyor' ifadesinin mum kapanisinda mi tik bazinda mi gerceklestigi belirsiz",
+      "Pozisyon boyutu ve risk orani verilmemis",
+      "Yazar adi kitapta yok; yalnizca site adi ve Twitter (@eseckal) geciyor"
+    ],
+    "uyumluluk_notu": "Hedef ≥5m: M5 varyanti dogrudan uygun. M1 varyanti 1L3A hedefinin altinda kalir. Forex'e ozgu: pip ve EUR/USD/GBP/USD; hacim gerekmiyor. Kripto/hisse/emtia icin pip yerine ATR veya yuzde ile yeniden olceklenmeli.",
+    "varyantlar": [
+      "M5 grafigi: en az 25 pip kar al",
+      "M1 grafigi: en az 15 pip kar al"
+    ],
+    "anahtar_kelimeler": ["macd", "stokastik", "m1", "m5", "forex", "asiri-alim-satim", "scalping", "sifir-cizgisi", "pip", "20-80-gecis"]
+  }
+]

@@ -1,0 +1,800 @@
+[
+  {
+    "kart_id": "swing__rsi30-geri-donus__johnson",
+    "ad": "RSI(14) 30 Geri Dönüşü ile Uzun",
+    "stil": "swing",
+    "kaynak": {"pdf": "Swing_Yatırımcıları_için_Trend_Takibi_Stratejileri_-_Aaron_Lee_Johnson_149_sayfa.pdf", "sayfalar": [54]},
+    "ozet": "RSI(14) 30'un altına inip sonra 30'un üzerine geri çıktığında, kısa vadeli toparlanma beklentisiyle uzun pozisyon açılır. Kitap bunu salınım tüccarı için kısa vadeli fiyat sıçraması fırsatı olarak tanımlar.",
+    "kategori": "ortalamaya_donus",
+    "piyasa_rejimi": "yatay",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {"islem": "1D", "ust_filtre": null},
+    "gostergeler": [{"ad": "RSI", "parametreler": {"periyot": 14, "asiri_satim": 30}}],
+    "long_giris": [
+      "RSI(14) önceki barlarda 30'un altına inmiş olmalı.",
+      "RSI 30 seviyesini aşağıdan yukarı kesmeli (geri çıkış).",
+      "Giriş: kesişim gerçekleştiğinde uzun pozisyon (kitap, sayfa 54)."
+    ],
+    "short_giris": [],
+    "stop_loss": null,
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Kitap notu: 'aşırı satım' süresi (kaç bar 30'un altında kalmalı) tanımlanmamış."
+    ],
+    "pozisyon_risk": "Kitabın genel kuralı: işlem başına toplam sermayenin %1-2'sinden fazlası riske edilmez (sayfa 31, 96).",
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "RSI kesişimi giriş için tam mekaniktir. Stop ve çıkış kitapta tanımlı değil; kitap 'kısa vadeli sıçrama' diyor, hedef ve zaman sınırı yok."
+    },
+    "belirsizlikler": [
+      "Stop-loss ve kar hedefi bu bölümde tanımlı değil; genel risk kuralları (%1-2, R:R en az 1:2) bu karta doğrudan bağlanmadı.",
+      "Sinyal kapanış barında mı, barın içinde mi teyit edilir? Belirtilmemiş.",
+      "Kitap sayfa 56'da 'RSI 40 üzerinde kaldığı sürece uzun tutulur, 40 altına düşerse trend zayıflar' diyor; bu bir çıkış kuralı olarak bu karta bağlanmadı.",
+      "RSI periyodunun piyasaya göre ayarlanabileceği belirtiliyor (sayfa 57); 14 standart değer olarak alındı."
+    ],
+    "uyumluluk_notu": "RSI(14) günlük grafikte tanımlı. 5 dakikada sinyal sayısı artar ve gürültü yükselir. Hacim gerekmez. Kitap genel varlık (hisse, forex, emtia) diyor; forex'te pip gerekmez.",
+    "varyantlar": [
+      "Başarısızlık salınımı (boğa) ayrı karttır: swing__rsi-basarisizlik-salinimi__johnson."
+    ],
+    "anahtar_kelimeler": ["rsi", "aşırı-satım", "geri-dönüş", "uzun", "salınım", "30-eşik"]
+  },
+  {
+    "kart_id": "swing__rsi-basarisizlik-salinimi__johnson",
+    "ad": "RSI Başarısızlık Salınımı (Boğa / Ayı)",
+    "stil": "swing",
+    "kaynak": {"pdf": "Swing_Yatırımcıları_için_Trend_Takibi_Stratejileri_-_Aaron_Lee_Johnson_149_sayfa.pdf", "sayfalar": [56, 57]},
+    "ozet": "Boğa tarafında RSI 30'un altına inip yukarı çıkar, geri çekilir ama 30'un üzerinde kalır ve önceki RSI zirvesini aşarsa uzun girilir. Ayı tarafında RSI 70'in üzerine çıkıp geri düşer, tekrar yükselip 70'in altında kalır ve önceki RSI dibini kırarsa kısa girilir. Kitap bunu yaklaşan trend dönüşünün güçlü işareti olarak sunar.",
+    "kategori": "momentum",
+    "piyasa_rejimi": "herhangi",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {"islem": "1D", "ust_filtre": null},
+    "gostergeler": [{"ad": "RSI", "parametreler": {"periyot": 14, "asiri_satim": 30, "asiri_alim": 70}}],
+    "long_giris": [
+      "RSI(14) 30'un altına düşer.",
+      "RSI 30'un üzerine çıkar.",
+      "RSI geri çekilir ama 30'un üzerinde kalır.",
+      "RSI, bu sırada oluşan önceki RSI zirvesini yukarı keser: uzun giriş."
+    ],
+    "short_giris": [
+      "RSI(14) 70'in üzerine çıkar.",
+      "RSI 70'in altına düşer.",
+      "RSI tekrar yükselir ama 70'in altında kalır.",
+      "RSI, bu sırada oluşan önceki RSI dibini aşağı kırar: kısa giriş."
+    ],
+    "stop_loss": null,
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Kitap ek filtre tanımlamıyor; tanım RSI'nın kendi seviyeleri üzerinden yapılıyor."
+    ],
+    "pozisyon_risk": "Kitabın genel kuralı: işlem başına toplam sermayenin %1-2'sinden fazlası riske edilmez (sayfa 31, 96).",
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Dört aşamalı RSI seviye ve tepe/dip kuralı mekaniktir. Stop ve hedef yok; 'önceki zirve/dip' ve 'geri çekilme' için pencere ve derinlik ölçütü yok."
+    },
+    "belirsizlikler": [
+      "Önceki RSI zirvesi / dibi için bar penceresi tanımlanmamış.",
+      "Geri çekilmenin minimum derinliği ve süresi belirtilmemiş.",
+      "Stop, hedef ve çıkış kuralları yok.",
+      "Kitap bu kuralı 'güçlü sinyal' olarak sunuyor; performans verisi yok."
+    ],
+    "uyumluluk_notu": "RSI tabanlı, günlük grafikte tanımlanabilir. 5 dakikada salınım yapısı daha sık tekrarlanır. Hacim gerekmez. Genel varlık.",
+    "varyantlar": [
+      "Kitap RSI periyodunu 7-9 (daha hassas) veya 21 (daha az sinyal) olarak ayarlamayı öneriyor (sayfa 57)."
+    ],
+    "anahtar_kelimeler": ["rsi", "başarısızlık-salınımı", "30-70", "tepe-dip", "dönüş", "boğa", "ayı"]
+  },
+  {
+    "kart_id": "swing__rsi-sapma__johnson",
+    "ad": "RSI Boğa / Ayı Sapması ile Dönüş",
+    "stil": "swing",
+    "kaynak": {"pdf": "Swing_Yatırımcıları_için_Trend_Takibi_Stratejileri_-_Aaron_Lee_Johnson_149_sayfa.pdf", "sayfalar": [55, 135]},
+    "ozet": "Fiyat önceki dibinin altında yeni dip yaparken RSI daha yüksek dip yapıyorsa (boğa sapması) olası yükseliş dönüşü için uzun; fiyat önceki zirvesinin üstünde yeni zirve yaparken RSI daha düşük zirve yapıyorsa (ayı sapması) olası düşüş dönüşü için kısa. Kitap sapmanın önemli fiyat dönüşlerinden önce geldiğini belirtir.",
+    "kategori": "momentum",
+    "piyasa_rejimi": "herhangi",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {"islem": "1D", "ust_filtre": null},
+    "gostergeler": [{"ad": "RSI", "parametreler": {"periyot": 14}}],
+    "long_giris": [
+      "Fiyat önceki dibin altına yeni bir dip yapar.",
+      "Aynı dönemde RSI, önceki RSI dibinin üzerinde bir dip yapar (boğa sapması).",
+      "Giriş: sapma tespit edildikten sonra uzun (kitap teyit tanımlamıyor)."
+    ],
+    "short_giris": [
+      "Fiyat önceki zirvesinin üstüne yeni bir zirve yapar.",
+      "Aynı dönemde RSI, önceki RSI zirvesinin altında kalır (ayı sapması).",
+      "Giriş: sapma tespit edildikten sonra kısa."
+    ],
+    "stop_loss": null,
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Kitap sapmayı tek başına değil, teknik onay (kırılım, trend çizgisi kırılması) ile birlikte önerir (sayfa 72, 135)."
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Sapma kavramı mekaniktir ama dip/zirve tespiti (pivot tanımı, pencere) ve giriş tetiği (teyit) kitapta tanımlı değil."
+    },
+    "belirsizlikler": [
+      "Dip ve zirve tespiti için pivot tanımı ve bar penceresi yok.",
+      "Sapma sonrası giriş zamanlaması (hemen mi, teyit ile mi) belirsiz.",
+      "Stop ve hedef yok.",
+      "Sayfa 135'te karşı trend örneği var ama teyit kuralı tanımlı değil."
+    ],
+    "uyumluluk_notu": "Pivot tabanlı; günlük grafikte makul. 5 dakikada sapma sayısı artar ve gürültü yükselir. Hacim gerekmez.",
+    "varyantlar": [
+      "Aynı sapma mantığı MACD ve Stokastik için de kitapta anlatılıyor (sayfa 65, 68); gösterge değişebilir."
+    ],
+    "anahtar_kelimeler": ["rsi", "sapma", "divergence", "boğa-sapması", "ayı-sapması", "dönüş"]
+  },
+  {
+    "kart_id": "swing__bb-alt-bant-rsi30__johnson",
+    "ad": "Bollinger Alt Bant + RSI<30 Aşırı Satım Alımı",
+    "stil": "swing",
+    "kaynak": {"pdf": "Swing_Yatırımcıları_için_Trend_Takibi_Stratejileri_-_Aaron_Lee_Johnson_149_sayfa.pdf", "sayfalar": [60, 62]},
+    "ozet": "Fiyat Bollinger alt bandına değdiğinde ve RSI(14) 30'un altında olduğunda uzun pozisyon açılır. Stop alt bandın hemen altına konur; kar hedefi orta veya üst banda konur. Kitap bunu RSI onaylı Bollinger stratejisi olarak örnekler.",
+    "kategori": "ortalamaya_donus",
+    "piyasa_rejimi": "yatay",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {"islem": "1D", "ust_filtre": null},
+    "gostergeler": [
+      {"ad": "Bollinger", "parametreler": {"periyot": 20, "sapma": 2}},
+      {"ad": "RSI", "parametreler": {"periyot": 14, "asiri_satim": 30}}
+    ],
+    "long_giris": [
+      "Fiyat alt Bollinger bandına (20 SMA eksi 2 standart sapma) değmeli.",
+      "RSI(14) 30'un altında olmalı.",
+      "Giriş: iki koşul birlikte sağlandığında uzun (kitap, sayfa 62)."
+    ],
+    "short_giris": [],
+    "stop_loss": "Alt bandın hemen altı (kitap, sayfa 62 ve 60). Tampon miktarı belirtilmemiş.",
+    "kar_al": "Orta bant (20 SMA) veya üst bant (kitap, sayfa 62 ve 63 seçenek olarak sunuyor).",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "RSI(14) < 30 ek onay (kitap, sayfa 62)."
+    ],
+    "pozisyon_risk": "Kitabın genel kuralı: işlem başına toplam sermayenin %1-2'sinden fazlası riske edilmez (sayfa 31, 96).",
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Bant ve RSI koşulları ile stop/hedef yönleri mekaniktir. 'Değdi' ve 'hemen altı' ifadeleri yorum gerektirir."
+    },
+    "belirsizlikler": [
+      "'Değdi' tanımı: düşük (low) alt banda değmesi mi, kapanışın alt bandın altında olması mı?",
+      "Stop tamponu (yüzde, ATR veya sabit) belirtilmemiş.",
+      "Hedef seçimi (orta mı üst mü) kural değil, seçenek olarak verilmiş.",
+      "RSI eşiği 30 olarak kitapta net; kısa taraf için RSI eşiği bu kartta tanımlı değil."
+    ],
+    "uyumluluk_notu": "BB(20,2) ve RSI(14) günlük grafikte kodlanabilir. 5 dakikada bant ve RSI daha oynak. Hacim gerekmez. Kitap genel varlık diyor.",
+    "varyantlar": [
+      "Ortalamaya dönüş (kapanış alt bant altında, hedef orta bant): swing__bb-ortalamaya-donus__johnson."
+    ],
+    "anahtar_kelimeler": ["bollinger", "alt-bant", "rsi", "aşırı-satım", "ortalamaya-dönüş", "uzun"]
+  },
+  {
+    "kart_id": "swing__bb-ortalamaya-donus__johnson",
+    "ad": "Bollinger Ortalamaya Dönüş (Alt Bant Alım / Üst Bant Satım)",
+    "stil": "swing",
+    "kaynak": {"pdf": "Swing_Yatırımcıları_için_Trend_Takibi_Stratejileri_-_Aaron_Lee_Johnson_149_sayfa.pdf", "sayfalar": [62, 63, 136]},
+    "ozet": "Kapanış alt Bollinger bandının altına inerse orta banda (20 SMA) dönüş beklentisiyle uzun; kapanış üst bandın üstüne çıkarsa orta banda dönüş beklentisiyle kısa pozisyon açılır. Kitap bunu ortalamaya dönüş stratejisi olarak tanımlar.",
+    "kategori": "ortalamaya_donus",
+    "piyasa_rejimi": "yatay",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {"islem": "1D", "ust_filtre": null},
+    "gostergeler": [{"ad": "Bollinger", "parametreler": {"periyot": 20, "sapma": 2}}],
+    "long_giris": [
+      "Kapanış, alt Bollinger bandının (20 SMA eksi 2 standart sapma) altında olmalı.",
+      "Giriş: koşul sağlandığında uzun (kitap, sayfa 63)."
+    ],
+    "short_giris": [
+      "Kapanış, üst Bollinger bandının (20 SMA artı 2 standart sapma) üstünde olmalı.",
+      "Giriş: koşul sağlandığında kısa (kitap, sayfa 63)."
+    ],
+    "stop_loss": "Long için alt bandın hemen altı; short için üst bandın hemen üstü (kitap, sayfa 60: bantların hemen dışına). Tampon belirtilmemiş.",
+    "kar_al": "Orta bant (20 SMA).",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Kitap uyarısı: güçlü trendde bantlara dokunma uzun süre devam edebilir, tek başına dönüş sinyali değildir (sayfa 63)."
+    ],
+    "pozisyon_risk": "Kitabın genel kuralı: işlem başına toplam sermayenin %1-2'sinden fazlası riske edilmez (sayfa 31, 96).",
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Kapanış-bant karşılaştırması ve orta bant hedefi mekaniktir. Stop tamponu, giriş zamanlaması ve trend filtresi kitapta net değil."
+    },
+    "belirsizlikler": [
+      "Kapanış mı intrabar değme mi? Belirtilmemiş.",
+      "Güçlü trendde (bantlar yürürken) ortalamaya dönüş işlemleri zarar ettirebilir; kitap uyarıyor ama filtre tanımlamıyor.",
+      "Stop tamponu belirtilmemiş.",
+      "Zaman çıkışı yok; orta banda ulaşılmazsa ne olacağı tanımsız."
+    ],
+    "uyumluluk_notu": "BB(20,2) günlük grafikte tanımlı. 5 dakikada ortalamaya dönüş çok sık tetiklenir. Hacim gerekmez. Forex ve kripto kitapta genel varlık olarak anılıyor; kanıt yok.",
+    "varyantlar": [
+      "Aralık ticareti (sayfa 136): fiyat alt banda yaklaşıp RSI aşırı satım gösterdiğinde al, üst banda yaklaşıp zayıflık işareti verdiğinde sat (hedef karşı bant).",
+      "Kar hedefi olarak karşı bant (sayfa 60)."
+    ],
+    "anahtar_kelimeler": ["bollinger", "ortalamaya-dönüş", "orta-bant", "alt-bant", "üst-bant", "aralık-ticareti"]
+  },
+  {
+    "kart_id": "swing__bb-cift-bant-trend__johnson",
+    "ad": "Çift Bollinger Bant Trend Teyidi (1 SD / 2 SD Bölgesi)",
+    "stil": "swing",
+    "kaynak": {"pdf": "Swing_Yatırımcıları_için_Trend_Takibi_Stratejileri_-_Aaron_Lee_Johnson_149_sayfa.pdf", "sayfalar": [62]},
+    "ozet": "İki Bollinger seti (1 ve 2 standart sapma) kullanılır. Fiyat üst iki bant arasında (1 SD ile 2 SD arası) ise güçlü yükseliş teyidi olarak uzun, alt iki bant arasında ise güçlü düşüş teyidi olarak kısa düşünülür. Kitap bunu Çift Bollinger Bantları Stratejisi olarak adlandırır.",
+    "kategori": "trend_takip",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {"islem": "1D", "ust_filtre": null},
+    "gostergeler": [
+      {"ad": "Bollinger", "parametreler": {"periyot": 20, "sapma": 1}},
+      {"ad": "Bollinger", "parametreler": {"periyot": 20, "sapma": 2}}
+    ],
+    "long_giris": [
+      "Fiyat, üst 1 SD bandı ile üst 2 SD bandı arasında olmalı.",
+      "Giriş: uzun (kitap, sayfa 62)."
+    ],
+    "short_giris": [
+      "Fiyat, alt 1 SD bandı ile alt 2 SD bandı arasında olmalı.",
+      "Giriş: kısa düşünülür (kitap, sayfa 63: 'kısa pozisyonlar düşünülmelidir')."
+    ],
+    "stop_loss": null,
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Kitap ek filtre vermiyor."
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Bölge tanımı mekaniktir ancak fiyat her barda bölge içindeyse sürekli sinyal üretir; stop, çıkış ve tetik (bölgeye giriş mi, kapanış mı) tanımlı değil."
+    },
+    "belirsizlikler": [
+      "Giriş bölgeye ilk girişte mi, yoksa bölgede kaldığı sürece mi?",
+      "Çıkış ve stop kuralı yok.",
+      "Kitap bölgeyi 'teyit' olarak sunuyor; işlem kuralı olarak açıkça tanımlamıyor.",
+      "Kısa tarafta 'düşünülmelidir' ifadesi bağlayıcı değil."
+    ],
+    "uyumluluk_notu": "Günlük grafikte iki bant seti hesaplanabilir. 5 dakikada bölge geçişleri çok sık olur. Hacim gerekmez.",
+    "varyantlar": [],
+    "anahtar_kelimeler": ["bollinger", "1-sd", "2-sd", "trend-teyidi", "bant-bölgesi"]
+  },
+  {
+    "kart_id": "swing__bb-sikisma-kirilim__johnson",
+    "ad": "Bollinger Sıkışması Kırılımı",
+    "stil": "swing",
+    "kaynak": {"pdf": "Swing_Yatırımcıları_için_Trend_Takibi_Stratejileri_-_Aaron_Lee_Johnson_149_sayfa.pdf", "sayfalar": [60, 61]},
+    "ozet": "Bollinger bantları daraldığında (sıkışma), fiyatın bu dar aralıktan üst banda doğru yukarı çıkmasıyla uzun, alt banttan aşağı çıkmasıyla kısa girilir. Kitap sıkışmayı yaklaşan büyük hareketin erken uyarısı olarak tanımlar.",
+    "kategori": "kirilim",
+    "piyasa_rejimi": "yatay",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {"islem": "1D", "ust_filtre": null},
+    "gostergeler": [
+      {"ad": "Bollinger", "parametreler": {"periyot": 20, "sapma": 2}},
+      {"ad": "Hacim", "parametreler": {}}
+    ],
+    "long_giris": [
+      "Bantlar daralmış olmalı (sıkışma); daralma ölçüsü tanımlı değil.",
+      "Genellikle düşük işlem hacmi eşlik eder (kitap, sayfa 61).",
+      "Fiyat sıkışma aralığından üst banda doğru çıkar; kitap bu çıkışı yeni trend başlangıcı sayar.",
+      "Teyit: kitap diğer bir gösterge veya fiyat hareketinden onay bekler (sayfa 61)."
+    ],
+    "short_giris": [
+      "Bantlar daralmış olmalı.",
+      "Fiyat sıkışma aralığından alt banda doğru aşağı çıkar; teyit beklenir."
+    ],
+    "stop_loss": null,
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Düşük hacimli sıkışma (kitap, sayfa 61)."
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Sıkışmanın tanımı (eşik, süre), hacim eşiği, teyit göstergesi ve stop/hedef kitapta tanımlı değil. Yalnızca yön kuralı tanımlanmış."
+    },
+    "belirsizlikler": [
+      "Sıkışma eşiği (bant genişliği yüzdesi, dönemsel yüzdelik vb.) yok.",
+      "'Düşük hacim' ve 'yüksek hacim' eşikleri yok.",
+      "Teyit göstergesi kitapta belirsiz.",
+      "Stop ve hedef yok."
+    ],
+    "uyumluluk_notu": "Sıkışma sık görülür, günlük grafikte daha anlamlıdır. Hacim verisine ihtiyaç var; 1L3A'da kripto ve forex hacim verisinin güvenilirliği ayrıca kontrol edilmeli.",
+    "varyantlar": [],
+    "anahtar_kelimeler": ["bollinger", "sıkışma", "squeeze", "kırılım", "düşük-hacim"]
+  },
+  {
+    "kart_id": "swing__macd-sinyal-kesisim__johnson",
+    "ad": "MACD (12-26-9) Sinyal Çizgisi Kesişimi",
+    "stil": "swing",
+    "kaynak": {"pdf": "Swing_Yatırımcıları_için_Trend_Takibi_Stratejileri_-_Aaron_Lee_Johnson_149_sayfa.pdf", "sayfalar": [64, 65, 66, 69, 83, 137, 138]},
+    "ozet": "MACD çizgisi sinyal çizgisini aşağıdan yukarıya keserse uzun, yukarıdan aşağıya keserse kısa pozisyon açılır. Kitap uzun pozisyonu, MACD çizgisi sinyal çizgisinin altına düştüğünde kapatmayı önerir.",
+    "kategori": "momentum",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {"islem": "1D", "ust_filtre": null},
+    "gostergeler": [{"ad": "MACD", "parametreler": {"hizli": 12, "yavas": 26, "sinyal": 9}}],
+    "long_giris": [
+      "MACD çizgisi (12 EMA eksi 26 EMA), 9 periyotlu sinyal çizgisini aşağıdan yukarıya keser.",
+      "Giriş: kesişimin oluştuğu bar kapanışı (kitap, sayfa 65: boğa geçişi uzun pozisyon sinyali)."
+    ],
+    "short_giris": [
+      "MACD çizgisi sinyal çizgisini yukarıdan aşağıya keser.",
+      "Giriş: kesişimin oluştuğu bar kapanışı (kitap, sayfa 65: ayı geçişi kısa pozisyon sinyali)."
+    ],
+    "stop_loss": null,
+    "kar_al": "Çıkış kuralı (uzun için): MACD çizgisi sinyal çizgisinin altına düşerse pozisyondan çık (kitap, sayfa 69 ve 83).",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Kitap, sıfır çizgisi filtresini önerir: boğa geçişi MACD sıfırın üzerindeyken daha güçlü sayılır (sayfa 66)."
+    ],
+    "pozisyon_risk": "Kitabın genel kuralı: işlem başına toplam sermayenin %1-2'sinden fazlası riske edilmez (sayfa 31, 96).",
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 3,
+      "gerekce": "Giriş (kesişim) ve çıkış (ters kesişim) kuralları gösterge değerleriyle tamamen ölçülebilir ve parametreler (12-26-9) kitapta sayısal. Stop kuralı kitapta bu gösterge için tanımlı değil."
+    },
+    "belirsizlikler": [
+      "Stop-loss bu kural için kitapta tanımlı değil.",
+      "Kesişim bar kapanışında mı teyit ediliyor, belirtilmemiş.",
+      "Sıfır çizgisi filtresi zorunlu mu yoksa öneri mi? Kitapta 'güçlendirebilir' ifadesi var.",
+      "Kitap MACD'nin yatay piyasada yanlış sinyal üretebileceğini belirtiyor (sayfa 64, 'özellikle trend piyasalarında etkili')."
+    ],
+    "uyumluluk_notu": "MACD 12-26-9 günlük grafikte standart. 5 dakikada çok gürültülü. Hacim gerekmez. Forex ve kripto için uygulanabilir; kitap genel varlık diyor.",
+    "varyantlar": [
+      "Sıfır çizgisi filtresi ile: sadece MACD > 0 iken boğa geçişi (sayfa 66)."
+    ],
+    "anahtar_kelimeler": ["macd", "sinyal-çizgisi", "kesişim", "12-26-9", "trend", "momentum"]
+  },
+  {
+    "kart_id": "swing__macd-stokastik-onay__johnson",
+    "ad": "MACD Trend Filtresi + Stokastik Aşırı Satım Onayı ile Uzun",
+    "stil": "swing",
+    "kaynak": {"pdf": "Swing_Yatırımcıları_için_Trend_Takibi_Stratejileri_-_Aaron_Lee_Johnson_149_sayfa.pdf", "sayfalar": [68, 69]},
+    "ozet": "MACD boğa trendini gösterirken (MACD sinyal çizgisi ve sıfır çizgisinin üzerinde) Stokastik %K aşırı satım bölgesinden 20'nin üzerine çıkınca uzun girilir. Stop son salınım dibinin altına konur; çıkış MACD'nin sinyal çizgisinin altına düşmesi veya Stokastik'in aşırı alımda dönüş işareti vermesiyle yapılır.",
+    "kategori": "momentum",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {"islem": "1D", "ust_filtre": null},
+    "gostergeler": [
+      {"ad": "MACD", "parametreler": {"hizli": 12, "yavas": 26, "sinyal": 9}},
+      {"ad": "Stokastik", "parametreler": {"k": 14, "d": 3}}
+    ],
+    "long_giris": [
+      "MACD çizgisi sinyal çizgisinin ve sıfır çizgisinin üzerinde (boğa trendi, kitap sayfa 68).",
+      "Stokastik %K, 20'nin altından yukarı çıkarak 20'nin üzerine geçer (aşırı satımdan çıkış, sayfa 68).",
+      "Giriş: iki koşul birlikte sağlandığında uzun."
+    ],
+    "short_giris": [],
+    "stop_loss": "Son salınım dibinin hemen altı (kitap, sayfa 68). Tampon belirtilmemiş.",
+    "kar_al": "Önceki direnç seviyesi veya sabit risk-ödül oranı (kitap oranı belirtmiyor; örneklerde 1:3 kullanılmış, sayfa 76).",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "MACD boğa trendi filtresi (sinyal ve sıfır çizgisinin üzerinde)."
+    ],
+    "pozisyon_risk": "Kitabın genel kuralı: işlem başına toplam sermayenin %1-2'sinden fazlası riske edilmez (sayfa 31, 96).",
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Giriş koşulları sayısal. Stop ve kar hedefi için 'son salınım dibi' ve 'önceki direnç' gibi tanımlar öznel; çıkış 'geri dönüş belirtisi' ile öznel ifade ediliyor."
+    },
+    "belirsizlikler": [
+      "Stokastik için %K 20 geçişi mi, %K-%D kesişimi mi zorunlu? Kitap ikisini de anıyor (sayfa 67-68).",
+      "Çıkıştaki 'geri dönüş belirtisi' öznel.",
+      "Stop tamponu ve 'son salınım dibi' tanımı yok.",
+      "Hedef için sabit R:R oranı kitapta belirtilmemiş.",
+      "Kısa taraf kitapta açık kural olarak tanımlanmamış."
+    ],
+    "uyumluluk_notu": "MACD ve Stokastik günlük grafikte kodlanabilir. 5 dakikada sinyal sıklığı artar ve yanlış sinyal (whipsaw) riski yükselir. Hacim gerekmez.",
+    "varyantlar": [],
+    "anahtar_kelimeler": ["macd", "stokastik", "aşırı-satım", "20-geçiş", "onay", "uzun", "trend"]
+  },
+  {
+    "kart_id": "swing__stokastik-20-gecis__johnson",
+    "ad": "Stokastik %K 20 Yukarı Geçişi (Aşırı Satım Çıkışı)",
+    "stil": "swing",
+    "kaynak": {"pdf": "Swing_Yatırımcıları_için_Trend_Takibi_Stratejileri_-_Aaron_Lee_Johnson_149_sayfa.pdf", "sayfalar": [66, 67, 69]},
+    "ozet": "Stokastik %K aşırı satım bölgesinde (20'nin altında) iken 20 seviyesini yukarı keserse uzun; %K aşırı alım bölgesinde (80'in üzerinde) iken 80'in altına düşerse kısa pozisyon açılır. Kitap bu geçişleri giriş ve onay sinyali olarak kullanır.",
+    "kategori": "ortalamaya_donus",
+    "piyasa_rejimi": "yatay",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {"islem": "1D", "ust_filtre": null},
+    "gostergeler": [{"ad": "Stokastik", "parametreler": {"k": 14, "d": 3, "asiri_satim": 20, "asiri_alim": 80}}],
+    "long_giris": [
+      "%K 20'nin altında (aşırı satım).",
+      "%K 20'yi yukarı keser (kitap, sayfa 67).",
+      "İsteğe bağlı teyit: %K, %D'yi yukarı keser (boğa geçişi, sayfa 67)."
+    ],
+    "short_giris": [
+      "%K 80'in üzerinde (aşırı alım).",
+      "%K 80'in altına düşer (kitap, sayfa 67: kısa pozisyon sinyali)."
+    ],
+    "stop_loss": null,
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Kitap: 'Stokastik, ana trende karşı kullanılırsa kayıp verebilir; trend takip eden bir göstergeyle birlikte kullanılması en iyisidir' (sayfa 69)."
+    ],
+    "pozisyon_risk": "Kitabın genel kuralı: işlem başına toplam sermayenin %1-2'sinden fazlası riske edilmez (sayfa 31, 96).",
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Eşikler (20/80) ve geçişler sayısaldır. Stop ve hedef yok; %D teyidi zorunlu mu belirsiz; çıkış için 'geri dönüş belirtisi' öznel."
+    },
+    "belirsizlikler": [
+      "%K-%D kesişimi zorunlu mu, yoksa sadece 20/80 geçişi yeterli mi?",
+      "Stop ve hedef kuralı yok.",
+      "Çıkış 'geri dönüş belirtisi' öznel.",
+      "Stokastik periyodu (14) ve %D düzleştirme (3) kitapta 'genellikle 14' ve '3 dönemlik ortalama' olarak verilmiş; kesin değil."
+    ],
+    "uyumluluk_notu": "Günlük grafikte kodlanabilir. 5 dakikada 20/80 geçişleri çok sık oluşur. Hacim gerekmez.",
+    "varyantlar": [
+      "MACD trend filtresi ile birlikte kullanım: swing__macd-stokastik-onay__johnson."
+    ],
+    "anahtar_kelimeler": ["stokastik", "20-80", "aşırı-satım", "aşırı-alım", "geçiş", "ortalamaya-dönüş"]
+  },
+  {
+    "kart_id": "swing__sma50-200-hac__johnson",
+    "ad": "50/200 Günlük SMA Altın Haç / Ölüm Haçı Trend Takibi",
+    "stil": "swing",
+    "kaynak": {"pdf": "Swing_Yatırımcıları_için_Trend_Takibi_Stratejileri_-_Aaron_Lee_Johnson_149_sayfa.pdf", "sayfalar": [45, 134, 135, 137]},
+    "ozet": "50 günlük SMA, 200 günlük SMA'yı yukarı keserse (altın haç) uzun pozisyon açılır ve ters kesişmeye (ölüm haçı) kadar tutulur. Ölüm haçında pozisyon kapatılır ya da kısa tarafa geçilir. Kitap bunu trend takibi stratejisi olarak örnekler.",
+    "kategori": "trend_takip",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {"islem": "1D", "ust_filtre": null},
+    "gostergeler": [
+      {"ad": "SMA", "parametreler": {"periyot": 50}},
+      {"ad": "SMA", "parametreler": {"periyot": 200}}
+    ],
+    "long_giris": [
+      "50 günlük SMA, 200 günlük SMA'nın üzerine çıkar (altın haç).",
+      "Giriş: kesişim sonrası uzun pozisyon (kitap, sayfa 135: '50 günlük SMA 200 günlük SMA'nın üzerine çıktığında uzun pozisyonlara girmek')."
+    ],
+    "short_giris": [
+      "50 günlük SMA, 200 günlük SMA'nın altına düşer (ölüm haçı).",
+      "Giriş: kısa pozisyon veya mevcut uzun pozisyondan çıkış (kitap, sayfa 135 ve 137)."
+    ],
+    "stop_loss": null,
+    "kar_al": "Çıkış (uzun için): ters kesişim, yani 50 günlük SMA 200 günlük SMA'nın altına inince (sayfa 135).",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Kitap: 200 günlük SMA uzun vadeli trend belirleyicidir (sayfa 45-46)."
+    ],
+    "pozisyon_risk": "Kitabın genel kuralı: işlem başına toplam sermayenin %1-2'sinden fazlası riske edilmez (sayfa 31, 96).",
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 3,
+      "gerekce": "Giriş ve ters kesişim çıkışı gösterge değerleriyle tamamen ölçülebilir. Stop kuralı kitapta tanımlı değil."
+    },
+    "belirsizlikler": [
+      "SMA mı EMA mı? Kitap örneklerde SMA kullanıyor (sayfa 135, 137); metinde 'hareketli ortalama' genel.",
+      "Stop-loss tanımlı değil.",
+      "Kesişim barın kapanışında mı teyit ediliyor? Belirtilmemiş.",
+      "Kitap, hareketli ortalamaların gecikmeli olduğunu ve yatay piyasada yanlış sinyal üreteceğini belirtiyor (sayfa 47)."
+    ],
+    "uyumluluk_notu": "Günlük kitap. 1L3A'da 5 dakikaya uyarlandığında 50/200 bar çok uzun kalır (yaklaşık 4 saat ve 17 saat); uyarlama yeniden tanım gerektirir. Hacim gerekmez. Hisse, forex, emtia ve kripto için uygulanabilir.",
+    "varyantlar": [
+      "Daha kısa kesişim: 20/50 SMA (sayfa 72), ayrı kart: swing__sma20-50-kesisim__johnson."
+    ],
+    "anahtar_kelimeler": ["sma", "50-200", "altın-haç", "ölüm-haçı", "trend", "kesişim"]
+  },
+  {
+    "kart_id": "swing__sma20-50-kesisim__johnson",
+    "ad": "20/50 Günlük MA Kesişimi ile Trend Girişi",
+    "stil": "swing",
+    "kaynak": {"pdf": "Swing_Yatırımcıları_için_Trend_Takibi_Stratejileri_-_Aaron_Lee_Johnson_149_sayfa.pdf", "sayfalar": [72, 83]},
+    "ozet": "20 günlük hareketli ortalama 50 günlük hareketli ortalamanın üzerine geçtiğinde uzun, altına geçtiğinde kısa giriş için potansiyel sinyal olarak kullanılır. Kitap, uzun pozisyonun 50 günlük hareketli ortalamanın altına inildiğinde kapatılmasını önerir.",
+    "kategori": "trend_takip",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {"islem": "1D", "ust_filtre": null},
+    "gostergeler": [
+      {"ad": "MA", "parametreler": {"periyot": 20, "tip": null}},
+      {"ad": "MA", "parametreler": {"periyot": 50, "tip": null}}
+    ],
+    "long_giris": [
+      "20 günlük MA, 50 günlük MA'yı aşağıdan yukarıya keser.",
+      "Giriş: kesişim sonrası uzun (kitap, sayfa 72: 'potansiyel bir uzun giriş sinyali')."
+    ],
+    "short_giris": [
+      "20 günlük MA, 50 günlük MA'yı yukarıdan aşağıya keser.",
+      "Giriş: kesişim sonrası kısa (kitap, sayfa 72: 'potansiyel bir kısa giriş sinyali')."
+    ],
+    "stop_loss": null,
+    "kar_al": "Uzun pozisyon için çıkış: fiyat 50 günlük MA'nın altına kapanırsa (sayfa 83).",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Kitap, kesişimin hacim veya başka bir göstergeyle onaylanmasını öneriyor (sayfa 72, 47)."
+    ],
+    "pozisyon_risk": "Kitabın genel kuralı: işlem başına toplam sermayenin %1-2'sinden fazlası riske edilmez (sayfa 31, 96).",
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Kesişim ve 50 MA altı çıkışı mekaniktir. MA tipi, stop ve kesişimden sonra teyit kuralı kitapta tanımlı değil."
+    },
+    "belirsizlikler": [
+      "MA tipi (SMA veya EMA) belirtilmemiş.",
+      "Stop-loss yok.",
+      "Kitap kesişimi 'potansiyel' sinyal olarak sunuyor; tek başına yeterli mi yoksa hacim/gösterge teyidi mi gerekli, net değil.",
+      "Sayfa 83'teki 50 MA çıkışı, bu girişle birlikte mi kullanılacağı açıkça belirtilmemiş."
+    ],
+    "uyumluluk_notu": "Günlük grafikte anlamlı. 5 dakikada 20/50 bar yaklaşık 1,7 ve 4 saate karşılık gelir; uyarlama gerekli. Hacim gerekmez.",
+    "varyantlar": [
+      "Kitap orta vadeli MA dönemlerini 50-100 ve kısa vadeli 10-20 olarak sınıflandırıyor (sayfa 45); bu kartta 20/50 kullanıldı."
+    ],
+    "anahtar_kelimeler": ["sma", "ma", "20-50", "kesişim", "trend", "kısa-vade"]
+  },
+  {
+    "kart_id": "swing__kirilim-hacim-onayli__johnson",
+    "ad": "Direnç Kırılımı + Hacim Onayı ile Uzun",
+    "stil": "swing",
+    "kaynak": {"pdf": "Swing_Yatırımcıları_için_Trend_Takibi_Stratejileri_-_Aaron_Lee_Johnson_149_sayfa.pdf", "sayfalar": [48, 70, 71]},
+    "ozet": "Fiyat yatay bir direnç seviyesinin üzerine yüksek hacimle kapanırsa uzun girilir; kırılma seviyesine geri çekilme beklenebilir. Kitap bu kırılımı yeni yükseliş trendinin başlangıcı olarak tanımlar. Destek seviyesinin yüksek hacimle aşağı kırılımı kısa sinyal olarak anılır.",
+    "kategori": "kirilim",
+    "piyasa_rejimi": "yatay",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {"islem": "1D", "ust_filtre": null},
+    "gostergeler": [{"ad": "Hacim", "parametreler": {}}],
+    "long_giris": [
+      "Yatay direnç seviyesi tespit edilmiş olmalı (kitap örneğinde 55 dolar; tanım yok, sayfa 71).",
+      "Fiyat direncin üzerinde kapanır.",
+      "Hacim yüksek veya artan olmalı (eşik tanımlı değil).",
+      "Giriş: kırılım anında veya kırılma seviyesine geri çekilmede (kitap iki seçenek sunuyor, sayfa 71)."
+    ],
+    "short_giris": [
+      "Yatay destek seviyesinin yüksek hacimle altına kapanış (kitap, sayfa 48: 'yüksek hacimde desteğin altına bir kopuş güçlü bir düşüş hareketini gösterir').",
+      "Giriş: kısa (ayrıntı ve hacim eşiği tanımlı değil)."
+    ],
+    "stop_loss": "Kitapta bu kart için açık stop yok; kırılım kartlarında stop 'kırılma seviyesinin hemen altı' olarak geçer (sayfa 128, ilgili örnek).",
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Yüksek hacim teyidi (sayfa 70-71).",
+      "Kitap yanlış kırılım riskini belirtiyor; düşük hacimli kırılımlar başarısız olabilir (sayfa 70)."
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Yön ve hacim fikri var ancak direnç tanımı, hacim eşiği, geri çekilme tetiği ve stop/hedef sayısal değil."
+    },
+    "belirsizlikler": [
+      "Direnç tanımı (pivot, tepe sayısı, bant) yok.",
+      "Hacim eşiği yok ('yüksek', 'artan' kelimeleri).",
+      "Kırılımın kapanışla mı yoksa intrabar ile mi teyit edildiği belirsiz.",
+      "Geri çekilme tetiği (kırılma seviyesine dönüş, onay mumu) belirsiz.",
+      "Stop, hedef ve zaman çıkışı kitapta bu kart için tanımlı değil."
+    ],
+    "uyumluluk_notu": "Hacim verisi gerektirir. 1L3A'da kripto ve forex hacim verisinin güvenilirliği ayrıca kontrol edilmeli. Kitap hacmin bağlama bağlı olduğunu belirtiyor (sayfa 52: ince işlem gören hisse).",
+    "varyantlar": [],
+    "anahtar_kelimeler": ["kırılım", "direnç", "destek", "hacim", "yükseliş", "geri-çekilme"]
+  },
+  {
+    "kart_id": "swing__fib-geri-cekilme-alimi__johnson",
+    "ad": "Yükseliş Trendinde Fibonacci %50 Geri Çekilme Alımı",
+    "stil": "swing",
+    "kaynak": {"pdf": "Swing_Yatırımcıları_için_Trend_Takibi_Stratejileri_-_Aaron_Lee_Johnson_149_sayfa.pdf", "sayfalar": [71, 138]},
+    "ozet": "Yükseliş trendinde fiyat son yükseğinden Fibonacci geri çekilme bölgesine (%38,2 - %61,8, özellikle %50) inerse ve toparlanma işareti (boğa mumu veya destekten sıçrama) görülürse uzun girilir. Kitap örnekte 120 dolardan 110 dolara (%50) düşüşü kullanır.",
+    "kategori": "trend_takip",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {"islem": "1D", "ust_filtre": null},
+    "gostergeler": [{"ad": "Fibonacci geri çekilme", "parametreler": {"seviyeler": [38.2, 50, 61.8]}}],
+    "long_giris": [
+      "Yükseliş trendi vardır (fiyat genel olarak yükseliyordur).",
+      "Fiyat son yükseğinden geri çekilir ve %38,2 - %61,8 bölgesine (özellikle %50) iner.",
+      "Toparlanma işareti: boğa yönlü mum formasyonu veya destekten sıçrama (sayfa 71).",
+      "Giriş: toparlanma mumu sonrası uzun."
+    ],
+    "short_giris": [],
+    "stop_loss": "%78,6 geri çekilme seviyesinin altı (sayfa 138 örneği).",
+    "kar_al": "Önceki yüksek seviyeye yakın hedef (sayfa 138 örneği).",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Yükseliş trendi teyidi (kitap, sayfa 71: 'yerleşik bir trend içindeki geri çekilme')."
+    ],
+    "pozisyon_risk": "Kitabın genel kuralı: işlem başına toplam sermayenin %1-2'sinden fazlası riske edilmez (sayfa 31, 96).",
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Fibonacci seviyeleri sayısaldır; ancak son yüksek ve dip (pivot) tanımı, toparlanma mumunun tanımı (boğa mumu) ve hedefin 'yakını' öznel."
+    },
+    "belirsizlikler": [
+      "Son yüksek ve dip (geri çekilme ölçüsü) için pivot tanımı ve bar penceresi yok.",
+      "Boğa mumu ve 'destekten sıçrama' öznel; mum tanımı yok.",
+      "%50 seviyesinin dokunma mı kapanış mı olduğu belirtilmemiş.",
+      "Hedefin 'önceki yüksek seviyeye yakın' olması ölçülemiyor."
+    ],
+    "uyumluluk_notu": "Fibonacci çizimi swing pivotlarına bağlıdır; otomasyon için pivot tanımı kritik. 5 dakikada uygulanabilir. Hacim gerekmez.",
+    "varyantlar": [
+      "Kitap Fibonacci seviyelerini %23,6, %38,2, %50, %61,8 ve %78,6 olarak listeler (sayfa 138)."
+    ],
+    "anahtar_kelimeler": ["fibonacci", "geri-çekilme", "50-seviye", "61.8", "boğa-mumu", "yükseliş-trendi"]
+  },
+  {
+    "kart_id": "swing__cift-dip-boyun-kirilim__johnson",
+    "ad": "Çift Dip + Boyun Çizgisi Kırılımı (RSI Teyidi)",
+    "stil": "swing",
+    "kaynak": {"pdf": "Swing_Yatırımcıları_için_Trend_Takibi_Stratejileri_-_Aaron_Lee_Johnson_149_sayfa.pdf", "sayfalar": [39, 41, 72, 77]},
+    "ozet": "Düşüş trendinin sonunda hemen hemen aynı seviyede iki dip oluşursa ve fiyat aradaki tepe (boyun çizgisi) üstüne kırılırsa, RSI aşırı satım koşullarını göstermişse uzun girilir. Hedef, desen yüksekliği kadar kırılım üzerine yansıtılır. Çift tepe için aynı mantık tersinden kısa tarafta uygulanır.",
+    "kategori": "formasyon",
+    "piyasa_rejimi": "herhangi",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {"islem": "1D", "ust_filtre": null},
+    "gostergeler": [{"ad": "RSI", "parametreler": {"periyot": 14, "asiri_satim": 30}}],
+    "long_giris": [
+      "İki dip hemen hemen aynı fiyat seviyesinde (tolerans tanımlı değil).",
+      "İki dip arasındaki tepe, boyun çizgisi olarak alınır.",
+      "Fiyat boyun çizgisinin üzerine kırılır.",
+      "RSI aşırı satım koşullarını göstermiş olmalı (kitap örneği, sayfa 72)."
+    ],
+    "short_giris": [
+      "Çift tepe: fiyat boyun çizgisinin (destek) altına düşerse kısa (kitap, sayfa 39: 'onay, fiyat destek seviyesinin altına düştüğünde')."
+    ],
+    "stop_loss": "Desenin sınırlarının hemen dışı (kitap, sayfa 41).",
+    "kar_al": "Desen yüksekliğinin (boyun çizgisi ile dip arası) kırılım noktasının üzerine yansıtılması (sayfa 77 örneği: 5 dolar yükseklik, 5 dolar hedef).",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Kitap, ikinci dipte artan hacmi teyit olarak öneriyor (sayfa 52)."
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Desen tanıma öznel (dip benzerliği ve süre); RSI eşiği 'aşırı satım' olarak verilmiş. Hedef ölçümü mekaniktir."
+    },
+    "belirsizlikler": [
+      "'Hemen hemen aynı seviye' için yüzde tolerans yok.",
+      "Desenin minimum bar süresi ve aralığı yok.",
+      "RSI teyit eşiği (30 mu?) sayısal değil; 'aşırı satım' ifadesi.",
+      "Kırılımın kapanışla mı intrabar ile mi teyit edildiği belirsiz."
+    ],
+    "uyumluluk_notu": "Formasyonlar günlük grafikte anlamlıdır; 5 dakikada yanlış pozitif sayısı yükselir. Hacim teyidi önerilmiş; 1L3A'da hacim verisi gerekebilir.",
+    "varyantlar": [],
+    "anahtar_kelimeler": ["çift-dip", "boyun-çizgisi", "formasyon", "rsi", "kırılım", "ters-dönüş"]
+  },
+  {
+    "kart_id": "swing__vwap-konum__johnson",
+    "ad": "VWAP Konumu ile Giriş (Gün İçi Odaklı)",
+    "stil": "swing",
+    "kaynak": {"pdf": "Swing_Yatırımcıları_için_Trend_Takibi_Stratejileri_-_Aaron_Lee_Johnson_149_sayfa.pdf", "sayfalar": [51, 52]},
+    "ozet": "VWAP (hacim ağırlıklı ortalama fiyat) dinamik destek veya direnç gibi kullanılır. Kitap, fiyat VWAP'ın altındayken (boğa etiketli yorum) ve üstündeyken (ayı etiketli yorum) işlem girişleri yapılabileceğini belirtir. Kitap bu kullanımı günlük ve scalping için anlatır.",
+    "kategori": "ortalamaya_donus",
+    "piyasa_rejimi": "yatay",
+    "orijinal_piyasa": "hisse",
+    "zaman_dilimi": {"islem": "belirsiz (gün içi)", "ust_filtre": null},
+    "gostergeler": [{"ad": "VWAP", "parametreler": {"baslangic": null, "periyot": null}}],
+    "long_giris": [
+      "Fiyat VWAP'ın altında (kitabın 'boğa' etiketli yorumu, sayfa 51).",
+      "Giriş tetiği tanımlı değil."
+    ],
+    "short_giris": [
+      "Fiyat VWAP'ın üstünde (kitabın 'ayı' etiketli yorumu, sayfa 51).",
+      "Giriş tetiği tanımlı değil."
+    ],
+    "stop_loss": null,
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Kitap, VWAP'ı kurumsal alım ve gün içi trend takibi için anıyor (sayfa 51-52)."
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "VWAP hesabı sayısal, ancak başlangıç noktası (seans, ay, pivot) tanımlı değil; yön etiketleri metinde belirsiz; tetik, stop ve hedef yok."
+    },
+    "belirsizlikler": [
+      "VWAP başlangıç noktası ve periyodu belirtilmemiş.",
+      "'(boğa)' ve '(ayı)' parantezlerinin hangi yönü ifade ettiği metinde net değil (sayfa 51).",
+      "Giriş tetiği, stop ve hedef yok.",
+      "Kitap VWAP'ı swing için değil gün içi için anlatıyor."
+    ],
+    "uyumluluk_notu": "VWAP seans içi tanımlıdır, günlük swing için karşılığı yok. 5 dakikada uygulanabilir. Hacim ağırlıklı olduğu için hacim verisi gerekir; forex ve kripto hacim verisi güvenilirliği ayrıca kontrol edilmeli.",
+    "varyantlar": [],
+    "anahtar_kelimeler": ["vwap", "hacim-ağırlıklı", "gün-içi", "ortalamaya-dönüş"]
+  },
+  {
+    "kart_id": "swing__sektor-rotasyonu__johnson",
+    "ad": "Ekonomik Döngüye Göre Sektör Rotasyonu",
+    "stil": "swing",
+    "kaynak": {"pdf": "Swing_Yatırımcıları_için_Trend_Takibi_Stratejileri_-_Aaron_Lee_Johnson_149_sayfa.pdf", "sayfalar": [136]},
+    "ozet": "Piyasa döngüsünün genişleme evresinde döngüsel sektörlere (teknoloji, tüketici tercihleri), daralma evresinde savunmacı sektörlere (sağlık, kamu hizmetleri, temel tüketim) sermaye aktarılır. Kitap bunu piyasa döngüsü stratejisi olarak tanımlar.",
+    "kategori": "diger",
+    "piyasa_rejimi": "herhangi",
+    "orijinal_piyasa": "hisse",
+    "zaman_dilimi": {"islem": "belirsiz (aylık / uzun vade)", "ust_filtre": null},
+    "gostergeler": [],
+    "long_giris": [
+      "Döngü evresi genişleme ise döngüsel sektörlere sermaye tahsis edilir (kitap, sayfa 136).",
+      "Döngü evresi daralma ise savunmacı sektörlere sermaye tahsis edilir (kitap, sayfa 136)."
+    ],
+    "short_giris": [],
+    "stop_loss": null,
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Ekonomik göstergeler (GSYH, istihdam, enflasyon) ile döngü evresi tespiti (sayfa 125, 131-136)."
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 0,
+      "gerekce": "Döngü evresinin tespiti ekonomik göstergelere ve sezgiye dayanır; fiyat veya gösterge ile ölçülebilir kural yoktur. Temel veri gerektirir, 1L3A veri setinde yok."
+    },
+    "belirsizlikler": [
+      "Döngü evresi tanımı için sayısal ölçüt yok.",
+      "Sektör seçimi, rebalans sıklığı ve ağırlık kuralı yok.",
+      "Ekonomik gösterge eşikleri yok.",
+      "Kitap bu bölümde karşılaştırmalı güç (relative strength) önerse de tanım vermiyor."
+    ],
+    "uyumluluk_notu": "Sektör endeks veya ETF'leri ile uygulanabilir, ancak 1L3A'nın kripto, forex ve emtia odağına uymaz. Temel veri gerektirir.",
+    "varyantlar": [],
+    "anahtar_kelimeler": ["sektör-rotasyonu", "döngü", "temel-analiz", "savunmacı-sektör"]
+  },
+  {
+    "kart_id": "swing__kazanc-sonrasi-kirilim__johnson",
+    "ad": "Kazanç Raporu Sürprizi + Teknik Kırılım",
+    "stil": "swing",
+    "kaynak": {"pdf": "Swing_Yatırımcıları_için_Trend_Takibi_Stratejileri_-_Aaron_Lee_Johnson_149_sayfa.pdf", "sayfalar": [73, 128]},
+    "ozet": "Şirket beklentiyi aşan kazanç açıklarsa ve hisse güçlü hacimle önemli bir direnci aşarsa, temel ve teknik onayla uzun girilir. Kitap bunu olay odaklı swing örneği olarak sunar; stop kırılma seviyesinin hemen altına konur.",
+    "kategori": "kirilim",
+    "piyasa_rejimi": "herhangi",
+    "orijinal_piyasa": "hisse",
+    "zaman_dilimi": {"islem": "1D", "ust_filtre": null},
+    "gostergeler": [{"ad": "Hacim", "parametreler": {}}],
+    "long_giris": [
+      "Kazanç açıklaması beklentiyi aşmış olmalı (sürpriz; ölçütü tanımsız).",
+      "Fiyat güçlü hacimle önemli bir direncin üstüne kırılır (sayfa 73).",
+      "Giriş: kırılım sonrası uzun (kitap, sayfa 128)."
+    ],
+    "short_giris": [],
+    "stop_loss": "Kırılma seviyesinin hemen altı (kitap, sayfa 128).",
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Kazanç sürprizi ve olumlu haber (sayfa 73, 128)."
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 0,
+      "gerekce": "Kazanç sürprizi için beklenti (konsensüs) verisi ve açıklama zamanı gerekir. Bu veriler 1L3A veri setinde yok; kural tanımlı değil."
+    },
+    "belirsizlikler": [
+      "Beklenti sürprizi tanımı yok (hangi beklenti, hangi eşik).",
+      "Haber kaynağı ve zamanlaması yok.",
+      "Hacim eşiği yok.",
+      "Kitap temel ve teknik birleştirme stratejileri için net sayısal kural vermiyor (sayfa 124-130)."
+    ],
+    "uyumluluk_notu": "Hisse kazanç verisine bağlı; 1L3A'nın kripto, forex ve emtia odağına uymaz. Teknik kısım (kırılım + stop) ayrı bir karta bağlanabilir, ancak bu kart teknik kırılım kartıyla aynı kural setine sahip değildir.",
+    "varyantlar": [],
+    "anahtar_kelimeler": ["kazanç", "kırılım", "temel-analiz", "hacim", "olay-odaklı", "direnç"]
+  }
+]

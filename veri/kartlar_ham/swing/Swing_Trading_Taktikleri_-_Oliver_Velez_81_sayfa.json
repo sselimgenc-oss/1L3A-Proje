@@ -1,0 +1,235 @@
+[
+  {
+    "kart_id": "swing__pristine-anahtar-alis-pbs__velez",
+    "ad": "Pristine Anahtar Satın Alma Kurulumu (PBS) - Uzun",
+    "stil": "swing",
+    "kaynak": {"pdf": "Swing_Trading_Taktikleri_-_Oliver_Velez_81_sayfa.pdf", "sayfalar": [69, 70, 71, 72, 73, 74, 75]},
+    "ozet": "Üç koşul birlikte sağlandığında (3+ ardışık daha düşük yüksek, 3+ ardışık daha düşük dip, 3+ ardışık kırmızı mum) önceki günün en yüksek seviyesinin üzerine çıkılırsa uzun pozisyon açılır. Kitap bu kurulumun yukarı yönde 1-5 günlük büyük kazançlar için anahtar olduğunu söyler.",
+    "kategori": "formasyon",
+    "piyasa_rejimi": "herhangi",
+    "orijinal_piyasa": "hisse",
+    "zaman_dilimi": {"islem": "1D", "ust_filtre": null},
+    "gostergeler": [],
+    "long_giris": [
+      "Son 3 veya daha fazla ardışık gün daha düşük yüksek (lower high) yapmış olmalı; kitap yüksek noktalara ağırlık verildiğini belirtiyor (sayfa 70).",
+      "Aynı dizide 3 veya daha fazla ardışık daha düşük dip (lower low) olmalı.",
+      "Aynı dizide 3 veya daha fazla ardışık kırmızı mum (kapanış < açılış) olmalı.",
+      "Giriş: kurulumu izleyen günde fiyat önceki günün en yüksek seviyesinin 0,05-0,10 $ üzerine çıkarsa uzun al (kitap Eylem 1, sayfa 71)."
+    ],
+    "short_giris": [],
+    "stop_loss": "Giriş gününün en düşük seviyesinin veya önceki günün en düşük seviyesinin 0,05-0,10 $ altı; hangisi daha düşükse (sayfa 71).",
+    "kar_al": "Kitapta sayısal hedef yok. Pozisyon, fiyat hedefinin karşılanması, bir ters mum (reversal bar) veya aşağı yönlü boşluk (gap) oluştuğunda kapatılır (sayfa 71).",
+    "iz_suren_stop": "Her önceki günün en düşük seviyesinin altına takip eden stop taşınır (iki tam çubuktan sonra başlar, sayfa 71). Çıkış koşulları: (A) fiyat hedefinin karşılanması, (B) ters mum, (C) aşağı yönlü boşluk.",
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Kitap: bu kurulum tek başına alım için yeterli, ek kılavuz gerekmez (sayfa 69).",
+      "İstisna: son gün kapanışın açılışın üzerinde olması bazen kabul edilebilir (sayfa 70).",
+      "İstisna: üçüncü günde veya desen mükemmel olduğunda kurulum kabul edilebilir (sayfa 72-73)."
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Üç sayım koşulu (lower high, lower low, kırmızı mum) ve giriş/stop kuralları sayısal. Ancak 'mükemmel desen' ve iki istisna öznel; kar hedefi sayısal değil; 'Mikro 3' ifadesi açıklanmamış."
+    },
+    "belirsizlikler": [
+      "Çeviri 'düşük yüksekler (yükseklere ağırlık verilir)' ifadesi lower highs olarak yorumlandı; 'daha düşük' ile 'eşit' ayrımı belirtilmemiş.",
+      "'Ardışık' tanımı (aradaki mumların tolere edilip edilmediği) belirtilmemiş.",
+      "İstisna kuralları (son gün kapanışı, üçüncü gün, 'mükemmel desen') öznel.",
+      "Tampon 0,05-0,10 $ sabit dolar olarak verilmiş; yüzde veya ATR karşılığı yok.",
+      "Kar hedefi sayısal değil ('fiyat hedefi' ifadesi).",
+      "Eylem 2 (ilk 30 dakika zirvesi) intraday kuralı; günlük zaman diliminde karşılığı yok.",
+      "Kitap 'Mikro 3' ifadesini (sayfa 74) tanımlamıyor.",
+      "Trailing stop için 'değin' ifadesi çevirisi belirsiz; 'iki tam çubuk' başlangıcı yorum."
+    ],
+    "uyumluluk_notu": "Günlük mum mantığı. 5 dakikaya uyarlanırken 'önceki gün' ve 'ilk 30 dakika' referansları 'önceki seans/mum' ile değiştirilmeli; kurulum sayımı 5 dakikada farklı davranır. Kitap hisse örnekleri (INTC, AMCC, INTU) veriyor; forex/kripto/emtia için kitapta kanıt yok. Hacim verisi gerekmez.",
+    "varyantlar": [
+      "Eylem 2: ilk 30 dakika zirvesinin üzerine çıkma (yalnızca önceki günün zirvesi çok uzaktaysa, sayfa 71).",
+      "Filtreli örnek (sayfa 74-75): yükselen 20 SMA, yükselen 40 SMA, 20 SMA > 40 SMA, 'Mikro 3' ve CCI(5) alış sinyali ile birlikte, önceki yüksek üstünde alım."
+    ],
+    "anahtar_kelimeler": ["pbs", "kurulum", "düşük-yüksek", "düşük-dip", "kırmızı-mum", "önceki-gün-zirve", "kırılım", "stop-önceki-dip", "iz-süren-stop", "swing", "pristine"]
+  },
+  {
+    "kart_id": "swing__pristine-anahtar-satis-pss__velez",
+    "ad": "Pristine Anahtar Kısa Kurulumu (PSS) - Kısa",
+    "stil": "swing",
+    "kaynak": {"pdf": "Swing_Trading_Taktikleri_-_Oliver_Velez_81_sayfa.pdf", "sayfalar": [76, 77, 78, 79, 80, 81]},
+    "ozet": "Üç koşul birlikte sağlandığında (3+ ardışık daha yüksek dip, 3+ ardışık daha yüksek zirve, 3+ ardışık yeşil mum) önceki günün en düşük seviyesinin altına inilirse kısa pozisyon açılır. Kitap bunu 2-5 günlük büyük aşağı yönlü kazançlar için anahtar kurulum olarak tanımlar.",
+    "kategori": "formasyon",
+    "piyasa_rejimi": "herhangi",
+    "orijinal_piyasa": "hisse",
+    "zaman_dilimi": {"islem": "1D", "ust_filtre": null},
+    "gostergeler": [],
+    "long_giris": [],
+    "short_giris": [
+      "Son 3 veya daha fazla ardışık gün daha yüksek dip (higher low) yapmış olmalı; kitap dipler üzerinde durduğunu belirtiyor (sayfa 77).",
+      "Aynı dizide 3 veya daha fazla ardışık daha yüksek zirve (higher high) olmalı.",
+      "Aynı dizide 3 veya daha fazla ardışık yeşil mum (kapanış > açılış) olmalı.",
+      "Giriş: kurulumu izleyen günde fiyat önceki günün en düşük seviyesinin 0,05-0,10 $ altına inerse kısa al (sayfa 78)."
+    ],
+    "stop_loss": "Giriş gününün en yüksek seviyesinin veya önceki günün en yüksek seviyesinin 0,05-0,10 $ üzerine; hangisi daha yüksekse (sayfa 78).",
+    "kar_al": "Kitapta sayısal hedef yok. Pozisyon, fiyat hedefinin karşılanması, bir ters mum veya aşağı yönlü boşluk oluştuğunda kapatılır (sayfa 78).",
+    "iz_suren_stop": "Önceki her günün en yüksek seviyesinin üzerine takip eden stop taşınır. Çıkış koşulları: (A) fiyat hedefinin karşılanması, (B) ters mum, (C) aşağı yönlü boşluk (sayfa 78).",
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Kitap notu: kapanışın son gün açılışın altında olması bazen kabul edilebilir (sayfa 77).",
+      "Kitap notu: üçüncü günde veya desen mükemmel olduğunda istisna yapılabilir (sayfa 77)."
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "PBS'in aynası; sayım koşulları ve giriş/stop kuralları sayısal. İstisnalar ve 'mükemmel desen' öznel; kar hedefi ve zaman çıkışı sayısal değil."
+    },
+    "belirsizlikler": [
+      "Çeviride kriterlerin ağırlığı ('düşüklere büyük vurgu') ile hangi serinin esas alındığı net değil.",
+      "Kısa kurulumda 'kapanış açılışın altında' koşulu yerine 'yeşil mum' (kapanış > açılış) ifadesi kullanılmış; renk tanımı teyit gerektirir.",
+      "Giriş tamponu 0,05-0,10 $ sabit dolar; yüzde veya ATR karşılığı yok.",
+      "Trailing stop 'ta ki ... koşulu gerçekleşene kadar' ifadesiyle verilmiş; PBS'deki 'iki tam çubuk' ifadesinin karşılığı belirsiz.",
+      "Kar hedefi ve zaman çıkışı sayısal değil.",
+      "Fiyat tetiğinin intraday mı kapanış mı olduğu belirtilmemiş."
+    ],
+    "uyumluluk_notu": "Hisse odaklı. Kısa satış gerektirir: 1L3A'da kripto perpetual veya vadeli işlemlerle uygulanabilir; forex'te 'açığa satış' kavramı farklıdır. Hacim verisi gerekmez. 5 dakikaya uyarlama için 'önceki gün' yerine 'önceki seans' tanımı gerekir.",
+    "varyantlar": [
+      "Eylem 2: ilk 30 dakika dibinin altına inme (yalnızca önceki günün dibi çok uzaktaysa, sayfa 78).",
+      "Bozulmamış Satış Kurulumu (sayfa 79-81): daha düşük bir dipten (LL) sonra 3+ ardışık daha yüksek dip arayışı."
+    ],
+    "anahtar_kelimeler": ["pss", "kısa-kurulum", "yüksek-dip", "yüksek-zirve", "yeşil-mum", "önceki-gün-dip-kırılım", "stop-önceki-yüksek", "swing", "pristine"]
+  },
+  {
+    "kart_id": "swing__3-5-mum-tukenme__velez",
+    "ad": "3-5 Mum Serisi Sonrası Ters Yön Düşüncesi",
+    "stil": "swing",
+    "kaynak": {"pdf": "Swing_Trading_Taktikleri_-_Oliver_Velez_81_sayfa.pdf", "sayfalar": [23, 24, 25, 26]},
+    "ozet": "Fiyat arka arkaya 3, 4 veya 5 yukarı mum yaptıysa satışı düşün; 3, 4 veya 5 aşağı mum yaptıysa satın almayı düşün. Kitap bu serilerin boğa-ayı savaşında tarafların genelde 3-5 galibiyetten sonra teslim olduğunu, 5'ten fazla art arda galibiyetin ise felaket kayıplara yol açtığını söyler.",
+    "kategori": "ortalamaya_donus",
+    "piyasa_rejimi": "herhangi",
+    "orijinal_piyasa": "hisse",
+    "zaman_dilimi": {"islem": "1D", "ust_filtre": null},
+    "gostergeler": [],
+    "long_giris": [
+      "3, 4 veya 5 ardışık aşağı (kırmızı) mum oluşmuş olmalı; kitap bu durumda 'satın almayı düşün' diyor (sayfa 26)."
+    ],
+    "short_giris": [
+      "3, 4 veya 5 ardışık yukarı (yeşil) mum oluşmuş olmalı; kitap bu durumda 'satışı düşün' diyor (sayfa 25)."
+    ],
+    "stop_loss": null,
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Kitap: 5'ten fazla art arda galibiyet olağandışıdır ve büyük kayıp riski taşır (sayfa 24). Bu durum için kural tanımlı değil."
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Mum sayımı mekaniktir, ancak 'düşünün' bir emir tetiği değildir. Giriş zamanı, çıkış, stop ve 4-5 mum durumundaki eylem tanımlı değil."
+    },
+    "belirsizlikler": [
+      "Giriş tetiği yok (sonraki mumun açılışı, kırılım veya kapanış teyidi?).",
+      "'Yukarı mum' tanımı (kapanış > önceki kapanış mı, kapanış > açılış mı) belirtilmemiş.",
+      "Aynı kurulumda 3 mum ile 5 mum arasındaki farkın eylemi belirtilmemiş.",
+      "'Düşünün' ifadesi bağlayıcı kural değil; kitap bunu bir düşünce çerçevesi olarak sunuyor.",
+      "Zaman dilimi açıkça belirtilmemiş; grafik günlük gösteriliyor."
+    ],
+    "uyumluluk_notu": "Mum sayımı 5 dakikada da uygulanabilir ancak kitap günlük bağlamda konumlandırılmış; 5 dakikada gürültü artar. Hacim gerekmez. Forex/kripto için aynı mantık denenebilir, kitapta bu örnek yok.",
+    "varyantlar": [
+      "Kitapta dört ve beş mumluk boğa/ayı dizileri de gösterilmiş (sayfa 25-26)."
+    ],
+    "anahtar_kelimeler": ["mum-serisi", "ardışık-mum", "tükenme", "ters-yön", "ortalamaya-dönüş", "3-5-mum"]
+  },
+  {
+    "kart_id": "swing__cci5-pristine-sinyal__velez",
+    "ad": "Pristine CCI(5) Alış / Satış Sinyali",
+    "stil": "swing",
+    "kaynak": {"pdf": "Swing_Trading_Taktikleri_-_Oliver_Velez_81_sayfa.pdf", "sayfalar": [19, 20, 21, 74, 75]},
+    "ozet": "Yükseliş trendinde CCI(5) alış sinyali, düşüş trendinde CCI(5) satış sinyali aranır. Sinyal, +100 ve -100 seviyeleriyle grafikte gösterilmiştir. Kitap bu sinyali tek başına değil, PBS/PSS kurulumlarıyla birlikte kullanır.",
+    "kategori": "momentum",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "hisse",
+    "zaman_dilimi": {"islem": "1D", "ust_filtre": null},
+    "gostergeler": [{"ad": "CCI", "parametreler": {"periyot": 5}}],
+    "long_giris": [
+      "Trend yükseliş yönünde olmalı (kitap: Pristine yükseliş trendlerinde alım sinyali arar, sayfa 20).",
+      "CCI(5) alış sinyali oluşmalı (+100 / -100 bantlarına göre grafikte gösterilmiş; sayısal tetik metinde yok)."
+    ],
+    "short_giris": [
+      "Trend düşüş yönünde olmalı (sayfa 20).",
+      "CCI(5) satış sinyali oluşmalı (aynı grafik temelli belirsizlikle)."
+    ],
+    "stop_loss": null,
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Trend yönü ile sinyal yönünün uyumu (kitap notu, sayfa 20)."
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Sinyal grafikte görsel olarak tanımlanmış; metinde CCI(5) eşiği ve kesişim/dönüş tetiği açıklanmamış. 'Öngörülü' ve 'Pristine' sinyal ayrımı yapılmamış."
+    },
+    "belirsizlikler": [
+      "'Öngörülü CCI(5) Alış Sinyali' ile 'Pristine CCI(5) Alış Sinyali' arasındaki fark kitapta açıklanmamış.",
+      "Tetik koşulu (+100 / -100 seviyesinden geri dönüş mü, sıfır çizgisi kesişimi mi?) metinde yok.",
+      "Trend tanımı için sayısal ölçüt yok.",
+      "Sayfa 74-75'te geçen 'Mikro 3' ifadesi tanımlanmamış."
+    ],
+    "uyumluluk_notu": "CCI(5) kısa periyotlu, 5 dakikada da hesaplanabilir. Kitap günlük grafikte gösteriyor (sayfa 21). Renk kodlu hacim grafikte var ama kural için zorunlu değil. Hisse örneği; diğer varlıklarda kanıt yok.",
+    "varyantlar": [
+      "Sayfa 21: renk kodlu hacim ve CCI(5) birlikte gösteriliyor (hacim bileşeni opsiyonel görünüyor)."
+    ],
+    "anahtar_kelimeler": ["cci", "cci-5", "alış-sinyali", "satış-sinyali", "trend", "momentum", "pristine"]
+  },
+  {
+    "kart_id": "swing__asama2-dusus-alimi__velez",
+    "ad": "Aşama 2 Düşüş Alımı / Aşama 4 Yükseliş Satımı",
+    "stil": "swing",
+    "kaynak": {"pdf": "Swing_Trading_Taktikleri_-_Oliver_Velez_81_sayfa.pdf", "sayfalar": [37, 38, 39, 51, 62, 63, 64, 65, 66, 67]},
+    "ozet": "Hareketli ortalamalar yükseliyorken (Aşama 2) fiyatın düşüşlerinde alım, hareketli ortalamalar sürekli düşerken (Aşama 4) yükselişlerde satım yapılır. Kitap, kârın büyük kısmının Aşama 2 ve 4'te elde edildiğini ve her aşama için ayrı kurulum aranması gerektiğini söyler.",
+    "kategori": "trend_takip",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "hisse",
+    "zaman_dilimi": {"islem": "1D", "ust_filtre": null},
+    "gostergeler": [
+      {"ad": "SMA", "parametreler": {"periyot": 20}},
+      {"ad": "SMA", "parametreler": {"periyot": 40}}
+    ],
+    "long_giris": [
+      "Aşama 2: 20 SMA ve 40 SMA istikrarlı biçimde yükseliyor ve 20 SMA, 40 SMA'nın üzerinde (sayfa 74 filtresi).",
+      "Fiyat yükseliş trendi içinde düşer (pullback); kitap bu düşüşleri alım alanı olarak tanımlar (sayfa 63). Düşüşün ölçüsü ve alım tetiği tanımlı değil."
+    ],
+    "short_giris": [
+      "Aşama 4: 20 SMA ve 40 SMA sürekli düşüyor (sayfa 37-38).",
+      "Fiyat düşüş trendi içinde yükselir (rally); kitap bu yükselişleri kısa alanı olarak tanımlar (sayfa 66-67). Tetik tanımı yok."
+    ],
+    "stop_loss": null,
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Aşama 1 ve 3 geçiş dönemleri 'kırbaçlı ve oynak' olarak tanımlanır; bu dönemler için ayrı yaklaşım gerekir (kitap ayrıntı vermiyor, sayfa 40).",
+      "Kitap, aşama tanımlarını duygu durumu (açgözlülük, korku, belirsizlik) ile ilişkilendiriyor; bunlar kodlanabilir değil (sayfa 37-38)."
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Aşama 2 ve 4, MA eğimi ve sıralamasıyla kabaca kodlanabilir. Ancak düşüş/yükseliş büyüklüğü, alım tetiği ve çıkış kuralı tanımlı değil; Aşama 1 ve 3 tanımı sezgisel."
+    },
+    "belirsizlikler": [
+      "Aşama 1 ve 3 tanımları (dip, zirve, kararsızlık) sezgisel; 'MA yatay' için sayısal ölçüt yok.",
+      "Düşüş alımında giriş tetiği ve stop kuralı yok.",
+      "'Tüm düşüş ve çıkışları satın alabilirler' (sayfa 63) kapsamı çok geniş; filtre tanımsız.",
+      "Sayfa 39: 'Zeki tüccar kârının çoğunu Aşama 2 ve 4'te elde eder' genel bir gözlem, performans iddiası değil."
+    ],
+    "uyumluluk_notu": "MA tabanlı, günlük grafikte kodlanabilir. 5 dakikada 20/40 SMA'nın anlamı değişir. Kısa taraf (Aşama 4) açığa satış gerektirir. Hisse örnekleri (INTC, INTU).",
+    "varyantlar": [
+      "Aşama 2'de 5 dakikalık grafikte düşüş alımı (sayfa 51, INTU örneği).",
+      "Aşama 4'te yükseliş satımı (sayfa 66-67)."
+    ],
+    "anahtar_kelimeler": ["aşama-2", "aşama-4", "sma-20", "sma-40", "düşüş-alımı", "ma-eğimi", "döngü", "trend-takip"]
+  }
+]

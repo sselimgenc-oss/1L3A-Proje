@@ -1,0 +1,289 @@
+[
+  {
+    "kart_id": "swing__ma-gecis-rsi4__sharpe",
+    "ad": "26 EMA / 50 SMA Geçişi + 60 SMA Filtresi + RSI(4) Aşırı Satım Dönüşü",
+    "stil": "swing",
+    "kaynak": {"pdf": "2023te_Etkili_Swing_Trading_Stratejileri_-_Dennis_Sharpe_45_sayfa.pdf", "sayfalar": [13, 14, 15, 44]},
+    "ozet": "Kitap, 26 EMA'nın 50 SMA'yı yukarı kesmesinden sonra, yukarı eğimli 60 SMA'nın üzerinde fiyat varken RSI(4) aşırı satım bölgesine girip bu bölgeden çıktığında uzun pozisyon açar. 60 SMA eğimi yatay piyasayı filtrelemek için kullanılır.",
+    "kategori": "trend_takip",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {"islem": null, "ust_filtre": null},
+    "gostergeler": [
+      {"ad": "SMA", "parametreler": {"periyot": 60}},
+      {"ad": "EMA", "parametreler": {"periyot": 26}},
+      {"ad": "SMA", "parametreler": {"periyot": 50}},
+      {"ad": "RSI", "parametreler": {"periyot": 4}}
+    ],
+    "long_giris": [
+      "26 EMA, 50 SMA'yı yukarı keser (kitap metninde 50 SMA geçer)",
+      "60 SMA yukarı doğru eğimli",
+      "Fiyat 60 SMA'nın üzerinde",
+      "RSI aşırı satım bölgesine girer; RSI bu bölgeden çıktıktan sonra giriş yapılır"
+    ],
+    "short_giris": [],
+    "stop_loss": "Giriş mumunun düşük seviyesinin hemen altı; kitap alternatif olarak son swing low'un hemen altını da verir",
+    "kar_al": "Sabit hedef yok. Çıkış kuralı: fiyat 60 SMA'nın altında kapanırsa VEYA 26 EMA 60 SMA'nın altına geçerse çıkılır. Kitap ayrıca net bir direnç seviyesinden çıkılabileceğini yazar (tanımsız).",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "60 SMA eğimi yukarı (kitap: yatay piyasada bu stratejinin kullanılmaması gerekir)",
+      "Fiyat 60 SMA üzerinde"
+    ],
+    "pozisyon_risk": "Kitap genel kuralı: tek işlemde hesabın %2'sinden fazlası riske atılmaz",
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Kesişim, fiyat-MA konumu ve stop kuralı ölçülebilir. RSI aşırı satım eşiği ve 60 SMA eğim tanımı kitapta yok; giriş kesişimi için kullanılan 50 SMA gösterge listesinde yer almıyor."
+    },
+    "belirsizlikler": [
+      "RSI aşırı satım eşiği kitapta belirtilmemiş (varsayılan değer uydurulmadı)",
+      "Giriş kesişimi 26 EMA / 50 SMA olarak yazılmış; gösterge listesinde ve çıkış kuralında 60 SMA geçiyor, çelişki var",
+      "60 SMA 'yukarı doğru eğimli' ölçütü için eğim hesabı tanımlanmamış",
+      "Kitapta sabit kar hedefi yok; 'net direnç seviyesi' tanımsız",
+      "Zaman dilimi belirtilmemiş",
+      "Stop için iki alternatif verilmiş: giriş mumunun düşüğü ve son swing low; hangisinin esas alınacağı belirsiz",
+      "Yalnızca uzun taraf tanımlı; kısa taraf kuralı kitapta yok",
+      "'Yatay piyasa' tanımı yok"
+    ],
+    "uyumluluk_notu": "1L3A için: SMA, EMA ve RSI hesaplanabildiğinden 5 dakikalık veya daha yüksek TF'de uygulanabilir (kitap zaman dilimi belirtmiyor). Forex'e özgü değil (pip ve seans yok). Hacim verisi gerekmiyor. Kripto, ABD hisse ve emtia perpetual'larında OHLC ile çalışır.",
+    "varyantlar": [],
+    "anahtar_kelimeler": ["ma-kesisim", "sma", "ema", "rsi", "asiri-satim", "egim-filtresi", "swing-dip", "yatay-piyasa-filtresi"]
+  },
+  {
+    "kart_id": "swing__50sma-geri-cekilme__sharpe",
+    "ad": "50 SMA'ya Geri Çekilme ve Sıçrama (Düşüşten Al)",
+    "stil": "swing",
+    "kaynak": {"pdf": "2023te_Etkili_Swing_Trading_Stratejileri_-_Dennis_Sharpe_45_sayfa.pdf", "sayfalar": [9, 10, 11, 12]},
+    "ozet": "Trend yönünde işlem yapılır. Yükseliş trendinde fiyat 50 SMA'ya geri çekilip buradan sıçradığında uzun, düşüş trendinde fiyat 50 SMA'ya yükselip buradan reddedildiğinde kısa açılır. Kitap 'dip alım' ve 'yırtıcı satış' olarak adlandırır.",
+    "kategori": "trend_takip",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {"islem": null, "ust_filtre": null},
+    "gostergeler": [
+      {"ad": "SMA", "parametreler": {"periyot": 50}}
+    ],
+    "long_giris": [
+      "Yükseliş trendi var (kitap trendi zirve/dip yapısıyla nitel tanımlar)",
+      "Fiyat 50 SMA'ya geri çekilir",
+      "Fiyat 50 SMA'dan sıçrar ve yukarı devam eder"
+    ],
+    "short_giris": [
+      "Düşüş trendi var",
+      "Fiyat 50 SMA'ya yükselir",
+      "Fiyat 50 SMA'da reddedilir ve aşağı devam eder"
+    ],
+    "stop_loss": null,
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Trend yönünde işlem (kitap: birincil trend yönünde işlem yapmak genellikle en iyisi)",
+      "Piyasa aralıklı ise işlem yapılmaz (kitap önerisi)"
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Ana kural (50 SMA'ya geri çekilme ve sıçrama) yazılmış, ancak trend tanımı ve sıçrama onayı nitel; stop ve hedef verilmemiş."
+    },
+    "belirsizlikler": [
+      "Yükseliş/düşüş trendinin ölçülebilir tanımı yok",
+      "Sıçrama onayı tanımsız (kaç mum, hangi kapanış)",
+      "'Güçlü trend' ve 'az geri çekilme' ifadeleri nitel",
+      "Stop ve kar hedefi kitapta verilmemiş",
+      "Zaman dilimi belirtilmemiş"
+    ],
+    "uyumluluk_notu": "1L3A için: 50 SMA her TF'de hesaplanabilir, ≥5m uyumlu. Hacim gerekmez. Forex'e özgü değil. Kripto ve perpetual'larda OHLC ile çalışır. Kitabın kendisi kuralı nitel bıraktığı için kodlama varsayımı gerektirir.",
+    "varyantlar": [
+      "10 SMA: çok güçlü trendde, az geri çekilmede kullanılabilir (kitap: 'kısa dönemli hareketli ortalamalar')",
+      "20 SMA: daha fazla fırsat verir ama destek/direnç daha az güvenilir"
+    ],
+    "anahtar_kelimeler": ["sma50", "geri-cekilme", "dinamik-destek-direnc", "trend-takibi", "dip-alim"]
+  },
+  {
+    "kart_id": "swing__rsi-ayrisma__sharpe",
+    "ad": "RSI Ayrışması + Fiyat Onayı (21 EMA ve Diğer Onaylar)",
+    "stil": "swing",
+    "kaynak": {"pdf": "2023te_Etkili_Swing_Trading_Stratejileri_-_Dennis_Sharpe_45_sayfa.pdf", "sayfalar": [29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41]},
+    "ozet": "Fiyat yeni dip yaparken RSI daha yüksek dip yapıyorsa (düzenli boğa ayrışması) ya da fiyat yeni tepe yaparken RSI daha düşük tepe yapıyorsa (düzenli ayı ayrışması) trend dönüşü aranır. Kitap, ayrışmanın fiyat onayıyla (ana varyant: 21 EMA'nın üzerine çıkıp testten sıçrama) doğrulanmasını ister.",
+    "kategori": "momentum",
+    "piyasa_rejimi": "herhangi",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {"islem": null, "ust_filtre": null},
+    "gostergeler": [
+      {"ad": "RSI", "parametreler": {"periyot": null}},
+      {"ad": "EMA", "parametreler": {"periyot": 21}}
+    ],
+    "long_giris": [
+      "Düzenli boğa ayrışması: fiyat daha düşük dip yapar, RSI daha yüksek dip yapar",
+      "Fiyat 21 EMA'nın üzerinde kapanır",
+      "Fiyat 21 EMA'ya geri çekilip onu test eder ve ondan sıçrar; test sonrası uzun pozisyon açılır"
+    ],
+    "short_giris": [
+      "Düzenli ayı ayrışması: fiyat daha yüksek tepe yapar, RSI daha düşük tepe yapar",
+      "Fiyat 21 EMA'nın altında kapanır",
+      "Fiyat 21 EMA'ya yükselip onu test eder ve ondan reddedilir; test sonrası kısa pozisyon açılır"
+    ],
+    "stop_loss": "Uzun: en son düşüğün altı. Kısa: en son tepenin (yüksek) üstü.",
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Ayrışmanın fiyat hareketiyle onaylanması (kitap: çift dip/tepe, trend çizgisi kırılması, hareketli ortalama veya yutan mum)",
+      "Gizli ayrışmalar ve kitabın dört ayrışma türünün tamamı bu kartta kullanılmadı; yalnızca düzenli ayrışma ile onay kuralları yazıldı"
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Ayrışma ve onay kuralları yazılmış, ancak ayrışmanın tespiti (pivot tanımı, geriye bakış uzunluğu) kitapta sayısal değil; kaba bir yaklaşımla kodlanabilir."
+    },
+    "belirsizlikler": [
+      "Ayrışma için tepe/dip (pivot) tanımı ve bakılacak mum sayısı kitapta yok",
+      "RSI periyodu belirtilmemiş. Kitabın bir ipucunda 21 yazıyor ancak bu trend çizgisi görünürlüğü için; RSI periyodu olarak kesin değil",
+      "'Test' ve 'sıçrama' tanımsız",
+      "Kitap ayrışmanın gerçek dönüşlerden çok düzeltmelerde de oluşabileceğini belirtir; filtre kuralı yok",
+      "Kar hedefi verilmemiş",
+      "Strateji #1 (çift dip/tepe), #2 (trend çizgisi) ve #4 (yutan mum) ayrıntıları varyantlarda; kesin tetik kuralları kitapta karma verilmiş"
+    ],
+    "uyumluluk_notu": "1L3A için: RSI ve EMA hesaplanabilir, ≥5m uyumlu. Hacim gerekmez. Forex'e özgü değil. Ayrışma tespiti için pivot tanımı eklenmesi gerekir (kitapta yok).",
+    "varyantlar": [
+      "Strateji #1: RSI ayrışması + çift dip/tepe. Uzun: fiyat önceki tepenin üstüne çıkınca giriş, stop ikinci dibin altında. Kısa: fiyat önceki dibin altına inince giriş, stop ikinci tepenin üstünde.",
+      "Strateji #2: RSI ayrışması + fiyat trend çizgisi kırılması. Uzun: fiyat düşüş trend çizgisinin üstüne çıkar ve RSI'da boğa ayrışması görülür, stop son düşüğün altında. Kısa: fiyat düşüş trend çizgisinin altına düşer, stop son yüksek üstünde.",
+      "Strateji #4: RSI ayrışması + boğa veya ayı yutan mum. Uzun: düzenli boğa ayrışmasıyla boğa yutan mum; stop önceki düşüğün altında. Kısa: düzenli ayı ayrışmasıyla ayı yutan mum."
+    ],
+    "anahtar_kelimeler": ["rsi-ayrisma", "duzenli-sapma", "ema21", "cift-dip-tepe", "trend-cizgisi", "yutan-mum", "donus-sinyali"]
+  },
+  {
+    "kart_id": "swing__rsi-50-gecis__sharpe",
+    "ad": "RSI 50 Seviyesi Geçişi (Momentum Yönü ve Filtre)",
+    "stil": "swing",
+    "kaynak": {"pdf": "2023te_Etkili_Swing_Trading_Stratejileri_-_Dennis_Sharpe_45_sayfa.pdf", "sayfalar": [27, 28]},
+    "ozet": "RSI 50 seviyesini aşağıdan yukarı keserse momentumun yukarı döndüğü kabul edilir ve uzun sinyal olur; yukarıdan aşağı keserse kısa sinyal olur. Kitap ayrıca RSI 50 üstünde yalnızca uzun, altında yalnızca kısa işlem bakmayı filtre olarak önerir.",
+    "kategori": "momentum",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {"islem": null, "ust_filtre": null},
+    "gostergeler": [
+      {"ad": "RSI", "parametreler": {"periyot": null}}
+    ],
+    "long_giris": [
+      "RSI, 50 seviyesini aşağıdan yukarıya keser"
+    ],
+    "short_giris": [
+      "RSI, 50 seviyesini yukarıdan aşağıya keser"
+    ],
+    "stop_loss": null,
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "RSI 50 üzerindeyken yalnızca uzun pozisyonlara bakılır",
+      "RSI 50 altındayken yalnızca kısa pozisyonlara bakılır"
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Geçiş kuralı tam ölçülebilir. Ancak RSI periyodu, geçişin mum kapanışıyla mı yoksa anlık mı onaylanacağı ve stop/çıkış kuralı kitapta yok."
+    },
+    "belirsizlikler": [
+      "RSI periyodu bu bölümde belirtilmemiş",
+      "Geçişin mum kapanışında mı yoksa intrabar mı onaylanacağı belirtilmemiş",
+      "Stop ve çıkış kuralı yok",
+      "Kitap RSI 50 geçişini tek başına işlem sinyali olarak mı yoksa filtre olarak mı kullanılacağını ayrıca netleştirmiyor (iki kullanım da yazılı)"
+    ],
+    "uyumluluk_notu": "1L3A için: RSI her TF'de hesaplanabilir, ≥5m uyumlu. Hacim gerekmez. Forex'e özgü değil. Kripto ve perpetual'larda OHLC ile çalışır.",
+    "varyantlar": [],
+    "anahtar_kelimeler": ["rsi-50", "momentum-gecisi", "filtre", "yon-filtresi"]
+  },
+  {
+    "kart_id": "swing__cift-dip-tepe__sharpe",
+    "ad": "Çift Dip / Çift Tepe Boyun Çizgisi Kırılımı",
+    "stil": "swing",
+    "kaynak": {"pdf": "2023te_Etkili_Swing_Trading_Stratejileri_-_Dennis_Sharpe_45_sayfa.pdf", "sayfalar": [18, 19]},
+    "ozet": "Fiyat aynı seviyeye iki kez gelip geri çekilirse (çift dip veya çift tepe) ve sonra iki tepe/dip arasındaki boyun çizgisini kırarsa, çift dipte uzun (yükseliş), çift tepede kısa (düşüş) işlem açılır. Kitap boyun çizgisi kırılmasını onay olarak ister.",
+    "kategori": "formasyon",
+    "piyasa_rejimi": "herhangi",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {"islem": null, "ust_filtre": null},
+    "gostergeler": [],
+    "long_giris": [
+      "Çift dip oluşur: fiyat bir dibe iner, geri çekilir, aynı seviyeye ikinci kez gelir ve geri döner",
+      "Fiyat boyun çizgisinin (iki dip arasındaki geri çekilme noktası) üzerine kırılır"
+    ],
+    "short_giris": [
+      "Çift tepe oluşur: fiyat bir tepeye çıkar, geri çekilir, aynı seviyeye ikinci kez gelir ve reddedilir",
+      "Fiyat boyun çizgisinin (iki tepe arasındaki geri çekilme noktası) altına kırılır"
+    ],
+    "stop_loss": null,
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Boyun çizgisi kırılması onay olarak kullanılır (kitap: formasyonu doğrulamak için boyun çizgisi kırılmasını bekleyin)",
+      "Kitap: formasyonlar tek başına güvenilir değil, MA veya momentum osilatörleriyle doğrulanmalı"
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Boyun çizgisi kırılma kuralı net, ancak 'aynı seviye' ve ikinci dip/tepenin geçerlilik eşiği yoruma açık; stop ve hedef kitapta yok."
+    },
+    "belirsizlikler": [
+      "'Aynı seviye' için tolerans (yüzde veya ATR) kitapta yok",
+      "Boyun çizgisinin tam tanımı (iki dip arasındaki en yüksek geri çekilme varsayımı) kitapta açıkça sayısal değil",
+      "Stop ve kar hedefi kitapta verilmemiş",
+      "Kitap önerdiği MA veya momentum doğrulamasının hangi değerle yapılacağını belirtmiyor",
+      "Zaman dilimi belirtilmemiş"
+    ],
+    "uyumluluk_notu": "1L3A için: OHLC ile tespit edilebilir, ≥5m uyumlu. Hacim gerekmez. Forex'e özgü değil. Kitap formasyonun yorumla tanındığını belirtir.",
+    "varyantlar": [],
+    "anahtar_kelimeler": ["cift-dip", "cift-tepe", "boyun-cizgisi", "formasyon", "kirilim"]
+  },
+  {
+    "kart_id": "swing__bas-omuz__sharpe",
+    "ad": "Baş ve Omuz / Ters Baş ve Omuz Boyun Çizgisi Kırılımı",
+    "stil": "swing",
+    "kaynak": {"pdf": "2023te_Etkili_Swing_Trading_Stratejileri_-_Dennis_Sharpe_45_sayfa.pdf", "sayfalar": [20, 21]},
+    "ozet": "Fiyat bir tepe (baş) yapıp daha düşük iki tepe (omuz) ile kapanır; son geri çekilme boyun çizgisinin altına inerse düşüş formasyonu oluşur ve kısa işlem açılır. Ters formasyonda aynı mantıkla boyun çizgisi yukarı kırıldığında uzun açılır.",
+    "kategori": "formasyon",
+    "piyasa_rejimi": "herhangi",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {"islem": null, "ust_filtre": null},
+    "gostergeler": [],
+    "long_giris": [
+      "Ters baş ve omuz: fiyat bir dip (baş) yapar, daha yüksek iki dip (omuz) ile dönüş oluşur",
+      "Fiyat boyun çizgisinin üzerine kırılır"
+    ],
+    "short_giris": [
+      "Baş ve omuz: fiyat bir tepe (baş) yapar, daha düşük iki tepe (omuz) ile ilerler",
+      "Son geri çekilme sonrası fiyat boyun çizgisinin altına kırılır"
+    ],
+    "stop_loss": null,
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Boyun çizgisi kırılması onay olarak aranır (kitap önerisi)",
+      "Kitap: formasyonun tamamlanması garanti değildir; diğer tekniklerle birlikte kullanılmalı"
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Boyun çizgisi kırılımı ölçülebilir, ancak baş ve omuzların tespiti (pivot tanımı, simetri, boyutlar) yorumla yapılıyor; stop ve hedef yok."
+    },
+    "belirsizlikler": [
+      "Baş ve omuz pivotlarının tanımı (kaç mum, hangi büyüklük) kitapta yok",
+      "Boyun çizgisinin eğimli mi yatay mı olacağı belirtilmemiş",
+      "Kitap 'son geri çekilme' ifadesini kullanıyor; geri çekilmenin ölçüsü tanımsız",
+      "Stop ve kar hedefi kitapta verilmemiş",
+      "Zaman dilimi belirtilmemiş"
+    ],
+    "uyumluluk_notu": "1L3A için: OHLC ile kaba tespit edilebilir, ≥5m uyumlu. Hacim gerekmez. Forex'e özgü değil. Pivot tanımı eklenmesi gerekir.",
+    "varyantlar": [],
+    "anahtar_kelimeler": ["bas-omuz", "ters-bas-omuz", "boyun-cizgisi", "formasyon", "donus"]
+  }
+]

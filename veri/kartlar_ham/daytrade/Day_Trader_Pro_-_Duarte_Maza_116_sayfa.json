@@ -1,0 +1,113 @@
+[
+  {
+    "kart_id": "daytrade__yanal-momentum-cift-dip-tepe__maza",
+    "ad": "Yanal Momentum: Destek/Direnç Yakınında Çift Dip / Çift Tepe",
+    "stil": "daytrade",
+    "kaynak": {"pdf": "Day_Trader_Pro_-_Duarte_Maza_116_sayfa.pdf", "sayfalar": [14, 24, 26, 27, 61, 62, 63, 64, 65, 74, 76, 77, 78, 80, 81, 82, 86, 87, 88, 90]},
+    "ozet": "E-mini S&P 500 vadelisinde (1 dk mum) önceden belirlenmiş bir destek veya direnç seviyesinin yakınında, iki veya daha fazla mumun aynı fiyatta dip (uzun) ya da tepe (kısa) oluşturması durumunda, günün tipine göre işleme girilir. Yalnızca ana seans içinde çalışılır; pozisyon gece tutulmaz.",
+    "kategori": "destek_direnc",
+    "piyasa_rejimi": "herhangi",
+    "orijinal_piyasa": "vadeli",
+    "zaman_dilimi": {"islem": "1m", "ust_filtre": "1d (ana trend), 5m (destek/direnç çizimi)"},
+    "gostergeler": [],
+    "long_giris": [
+      "Gün tipi uzun işleme izin veriyorsa (s.86-87): itme günü + boğa trend -> kriter 4,5,6; aralık günü + boğa -> 4,5; itme günü + yatay trend -> 1-6; aralık günü + yatay -> 4,5 (uzun tarafı)",
+      "Kriter 4: 1 dk grafikte iki veya daha fazla mumun dipleri aynı fiyatta ve bu dipler, en az çift dipten oluşan önceki desteğin yakınında/üzerinde (s.80)",
+      "Kriter 5: iki veya daha fazla mumun dipleri aynı fiyatta ve önceki destek tek bir mumun alt kısmından oluşmuş (s.81)"
+    ],
+    "short_giris": [
+      "Gün tipi kısa işleme izin veriyorsa (s.86-87): itme günü + ayı trend -> kriter 1,2,3; aralık günü + ayı -> 1,2; itme günü + yatay trend -> 1-6; aralık günü + yatay -> 1,2 (kısa tarafı)",
+      "Kriter 1: 1 dk grafikte iki veya daha fazla mumun tepeleri aynı fiyatta ve bu tepeler, en az çift tepeden oluşan önceki direncin altında/yakınında (s.77)",
+      "Kriter 2: iki veya daha fazla mumun tepeleri aynı fiyatta ve önceki direnç tek bir mumun tepe noktasından oluşmuş (s.78)"
+    ],
+    "stop_loss": "En yakın destek (uzun) veya direnç (kısa) seviyesine göre; giriş fiyatından en fazla 2 puan (ES'te 1 puan = 50$; 2 sözleşmede ~200$). Kitap: 'zarar durdurmamızı 2 puan veya 10.000$'ın %2'si olarak belirledik' (s.61). s.62'deki stop metni bozuk, 'en az 1 puan' sınırı net değil.",
+    "kar_al": "Giriş fiyatından 2 puan (2 sözleşmede ~200$) veya en az bir sonraki destek/direnç seviyesi (s.62). Ayrıca ilk çıkış kriteri olarak giriş fiyatına yakın destek/direnç önerilir (s.88).",
+    "iz_suren_stop": null,
+    "zaman_cikisi": "Kitapta sabit süre kuralı yok. Pozisyon ana seans bitmeden kapatılır; gece açık pozisyon tutulmaz (s.14, s.29).",
+    "filtreler": [
+      "Seans: ana seans 9:30-16:15 ET (s.14, s.29)",
+      "Ana günlük trend: günlük grafikte alt dip + alt tepe = düşüş; üst dip + üst tepe = yükseliş; diğer = yatay (s.83-85)",
+      "Gün tipi: itme günü veya aralık günü ayrımı (s.86-87). Gün tipinin nasıl belirleneceği kitapta öznel; karışık günlerde 'önceki vakalarla aynı kriterler' (s.87)",
+      "Yön net değilse işlem yok: 'dışarıdayken dışarıda kal' (s.86)",
+      "Önemli ekonomik rapor/haber anında işlem yok; yayın sonrası tepki izlenir, ardından karar verilir (s.14, s.90)",
+      "Gün içi seviye seçimi: ilk saatte yüksek seviyeler, dar kanal ve öğle saatinde seviye kullanımı kitapta farklı tarif edilmiş (s.65)",
+      "Operasyon durdurma: düşük konsantrasyon, düşük ruh hali veya düşük fiziksel kondisyonda o gün işlem yapılmaz (s.64)",
+      "Günlük sınır: 2 ardışık kayıp, 3 puan veya 300$; günde en fazla 3 işlem (s.63)"
+    ],
+    "pozisyon_risk": "Çalışma sermayesi 10.000$; ilk ayda en fazla 2 ES sözleşmesi; işlem başı maks. zarar 2 puan (~200$); günlük maks. kayıp 3 puan / 300$; günde en fazla 3 işlem (s.61-63).",
+    "iddia_edilen_performans": "Senaryo A (aylık 40 işlem): 30 kazanan (ort. 1,65 puan) ve 10 kaybeden (ort. 1,35 puan), yani ~%75 kazanma ve aylık ~36 puan (s.24-27). Senaryo B (hedef): ~%62,5 kazanma, kazanan ort. 2 puan, kaybeden ort. 1,5 puan (s.27). Yazar 'aylık %32 ve yıllık %84 net' ifadesini kullanıyor (s.24). Haftada 6 net puan hedefi (s.26).",
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Desen (aynı fiyatta iki veya daha fazla tepe/dip, önceki S/R'ye yakınlık) yazılabilir. Ancak 'aynı fiyat' toleransı, 'yakın' mesafesi ve S/R çizim kuralı sayısal değil; gün tipi ve ana trend öznel. Yazar gösterge kullanmadığını belirtiyor (s.70-72)."
+    },
+    "belirsizlikler": [
+      "'Aynı fiyat' (çift tepe/dip) için tolerans (puan veya tik) tanımlı değil",
+      "'Yakın' (S/R yakınlığı) için mesafe tanımlı değil",
+      "Destek/direnç seviyelerinin nasıl çizileceği kitapta net değil; 5 dk ve 1 dk grafiklerden öznel belirleniyor (s.70-72, s.88, s.92)",
+      "Gün tipi (itme/aralık/karışık) ve ana trend sınıflandırması öznel; karışık günlerde kriter seçimi net değil (s.87)",
+      "Stop metni bozuk (s.62): '1 nokta', '2 nokta' ve 'en az en yakın destek veya direnç' ifadeleri tam okunamıyor",
+      "Kar al: '2 puan' ile 'bir sonraki destek/direnç' arasında hangisinin öncelikli olduğu belirtilmemiş",
+      "Kitap haber filtresi için sayısal eşik vermiyor",
+      "Kitap, zaman sınırı veya trailing stop tanımlamıyor"
+    ],
+    "uyumluluk_notu": "1L3A için: sinyal 1 dk mumlarda tanımlı. 5 dk'ya uyarlama kitapta denenmemiş, doğrudan uyarlanamaz; test gerekir. ES'e özgü: 1 puan = 50$, seans 9:30-16:15 ET, CME/Globex, vade sembolleri. Forex'te pip ve seans kuralları farklı. Hacim kuralı yok (yalnızca gözlem). Kripto, ABD hisse ve emtia perpetual için fikir (S/R yakınında çift dip/tepe) taşınabilir; puan değerleri yüzdeye veya ATR'ye çevrilmeli.",
+    "varyantlar": [
+      "Kriter 1 (önceki direnç çift tepeden) ile kriter 2 (önceki direnç tek mumun tepesinden) arasındaki fark, kısa taraf",
+      "Kriter 4 (önceki destek çift dipten) ile kriter 5 (önceki destek tek mumun dibinden) arasındaki fark, uzun taraf",
+      "Kitap, giriş kriterlerinin ters yönünün çıkış için de kullanılabileceğini söylüyor (s.88)"
+    ],
+    "anahtar_kelimeler": ["çift-dip", "çift-tepe", "destek-direnç", "yanal-momentum", "1dk", "e-mini", "price-action", "mum-grafiği", "gün-tipi", "itme-günü", "yatay-gün", "es-vadeli"]
+  },
+  {
+    "kart_id": "daytrade__geri-cekilme-cift-dip-tepe__maza",
+    "ad": "Ana Trend Yönünde Geri Çekilmede Çift Tepe / Çift Dip",
+    "stil": "daytrade",
+    "kaynak": {"pdf": "Day_Trader_Pro_-_Duarte_Maza_116_sayfa.pdf", "sayfalar": [27, 62, 63, 64, 65, 74, 79, 82, 83, 84, 85, 86, 87, 88]},
+    "ozet": "Günlük grafikteki ana trend yönünde, bu trendin önceki hareketi içinde oluşan bir geri çekilme (düzeltme) sırasında, 1 dk grafikte iki veya daha fazla mumun aynı fiyatta tepe (düşüş trendinde kısa) ya da dip (yükseliş trendinde uzun) yapması durumunda, trend yönünde işleme girilir.",
+    "kategori": "trend_takip",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "vadeli",
+    "zaman_dilimi": {"islem": "1m", "ust_filtre": "1d (ana trend), 5m (destek/direnç çizimi)"},
+    "gostergeler": [],
+    "long_giris": [
+      "Günlük grafik yükseliş trendinde (üst dip + üst tepe) ve gün tipi itme günü + boğa ise kriter 6 kullanılır (s.86-87)",
+      "Kriter 6: 1 dk grafikte iki veya daha fazla mumun dipleri aynı fiyatta ve bu dipler, daha uzun önceki yükseliş hareketi içinde (geri çekilme) oluşmuş (s.82)"
+    ],
+    "short_giris": [
+      "Günlük grafik düşüş trendinde (alt dip + alt tepe) ve gün tipi itme günü + ayı ise kriter 3 kullanılır (s.86-87)",
+      "Kriter 3: 1 dk grafikte iki veya daha fazla mumun tepeleri aynı fiyatta ve bu tepeler, bir önceki düşüş hareketi içinde (geri çekilmede) oluşmuş (s.79). Başlık OCR nedeniyle bozuk; 'geri çekilme' olarak yorumlandı"
+    ],
+    "stop_loss": "En yakın destek (uzun) veya direnç (kısa) seviyesine göre; giriş fiyatından en fazla 2 puan (2 sözleşmede ~200$). Kitap, bu kriter için ayrı stop vermiyor; genel risk kuralı geçerli (s.61-62).",
+    "kar_al": "Giriş fiyatından 2 puan veya en az bir sonraki destek/direnç seviyesi (s.62). Ayrıca ilk çıkış kriteri olarak giriş fiyatına yakın destek/direnç önerilir (s.88).",
+    "iz_suren_stop": null,
+    "zaman_cikisi": "Kitapta sabit süre kuralı yok. Ana seans bitmeden kapatılır; gece açık pozisyon tutulmaz (s.14, s.29).",
+    "filtreler": [
+      "Seans: ana seans 9:30-16:15 ET (s.14, s.29)",
+      "Ana trend 1 günlük grafikte belirlenir; kitap 3 aya kadar günlük grafik kullanır (s.74). Trend tanımı: alt dip + alt tepe = düşüş; üst dip + üst tepe = yükseliş; diğer = yatay (s.83-85)",
+      "Kriter 3 ve 6 yalnızca itme günlerinde kullanılır (s.86-87); aralık (yatay) gününde bu kriterler kullanılmaz",
+      "Yön net değilse işlem yok (s.86)",
+      "Önemli ekonomik rapor/haber anında işlem yok; tepki izlenir, ardından karar (s.90)",
+      "Operasyon durdurma: düşük konsantrasyon, ruh hali veya fiziksel kondisyon (s.64)",
+      "Günlük sınır: 2 ardışık kayıp, 3 puan veya 300$; günde en fazla 3 işlem (s.63)"
+    ],
+    "pozisyon_risk": "Çalışma sermayesi 10.000$; ilk ayda en fazla 2 ES sözleşmesi; işlem başı maks. zarar 2 puan (~200$); günlük maks. kayıp 3 puan / 300$; günde en fazla 3 işlem (s.61-63).",
+    "iddia_edilen_performans": "Bu kritere özgü iddia yok. Genel senaryolar için bkz. yanal-momentum kartı: Senaryo B ~%62,5 kazanma, kazanan ort. 2 puan, kaybeden ort. 1,5 puan (s.27).",
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Çift tepe/dip deseni yazılabilir, ancak geri çekilmenin başlangıcı, derinliği ve 'önceki hareket' tanımı yok; 'aynı fiyat' toleransı da sayısal değil. Kriter 3 başlığı OCR nedeniyle bozuk. Gün tipi öznel."
+    },
+    "belirsizlikler": [
+      "Geri çekilmenin (düzeltmenin) derinliği, süresi ve 'önceki hareket' tanımı kitapta yok",
+      "Kriter 3 başlığı bozuk: 'YÜKSEK BİR PERAKENDE SIRASINDA' ifadesi tam okunamıyor; 'geri çekilme sırasında' olarak yorumlandı, bu yorum kesin değil (s.79)",
+      "'Aynı fiyat' toleransı tanımlı değil",
+      "Gün tipi sınıflandırması öznel (s.86-87)",
+      "Bu kriter için ayrı stop/hedef kuralı yok; kart yanal-momentum ile aynı risk kuralını kullanıyor",
+      "Kitap, bu desenin ayrı performans istatistiğini vermiyor"
+    ],
+    "uyumluluk_notu": "1L3A için: 1 dk tasarım, 5 dk'ya doğrudan uyarlanamaz; test gerekir. ES'e özgü: 1 puan = 50$, seans 9:30-16:15 ET, CME/Globex. Forex'te pip ve seans kuralları farklı. Hacim kuralı yok. Kripto, ABD hisse ve emtia perpetual için trend yönlü geri çekilme fikri taşınabilir; tanımlar (geri çekilme derinliği, puan) yeniden kalibre edilmeli.",
+    "varyantlar": [
+      "Kriter 3 (kısa, düşüş trendinde geri çekilmede çift tepe) ve kriter 6 (uzun, yükseliş trendinde geri çekilmede çift dip) simetrik varyantlar"
+    ],
+    "anahtar_kelimeler": ["geri-çekilme", "çift-tepe", "çift-dip", "trend-takip", "yanal-momentum", "1dk", "e-mini", "price-action", "mum-grafiği", "gün-tipi", "itme-günü"]
+  }
+]

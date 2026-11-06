@@ -1,0 +1,511 @@
+[
+  {
+    "kart_id": "daytrade__tikanikligi-giderme-arizasi__woods",
+    "ad": "Tıkanıklık Giderme Arızası (Uzun ve Kısa)",
+    "stil": "daytrade",
+    "kaynak": {"pdf": "Price_Action_ile_Günlük_Trading_Teknikleri_-_Galen_Woods_-_Volume_3_227_sayfa.pdf", "sayfalar": [10, 11, 12, 13, 14, 15, 16, 17]},
+    "ozet": "En az üç ardışık çubuk, her biri bir önceki çubuğun aralığında kapanarak sıkışma oluşturur. Sıkışıklığı önceki çubuğun dışına kapanarak kıran çıkış çubuğundan sonra gelen ilk çubuk ters yönde olursa (kurulum çubuğu), kırılma başarısız sayılır ve kurulum çubuğunun bir tık ötesine stop-emir konur.",
+    "kategori": "kirilim",
+    "piyasa_rejimi": "yatay",
+    "orijinal_piyasa": "vadeli",
+    "zaman_dilimi": {"islem": "Sabit değil; örneklerde 10-60 dk, MTTF üstü önerilir (s.3)", "ust_filtre": null},
+    "gostergeler": [{"ad": "Fiyat (OHLC mum)", "parametreler": {}}, {"ad": "Trend çizgisi (Cilt II yöntemi)", "parametreler": {}}],
+    "long_giris": [
+      "Üç veya daha fazla ardışık çubuk, her biri bir önceki çubuğun aralığı içinde kapanır (tıkanıklık, s.12).",
+      "Tıkanıklığı bitiren çıkış çubuğu, önceki çubuğun en düşük seviyesinin altında kapanan düşüş çubuğudur (s.14).",
+      "Hemen sonraki çubuk yükseliş (boğa) çubuğudur; bu kurulum çubuğudur (s.16).",
+      "Kurulum çubuğunun en yüksek seviyesinin 1 tik üzerine alım stop emri verilir (s.16).",
+      "Piyasa eğilimi yükseliş yönünde olmalıdır (s.7 genel kural, s.16 örnekleri).",
+      "Bir sonraki çubuk stop emri tetiklemezse emir iptal edilir (s.16)."
+    ],
+    "short_giris": [
+      "Üç veya daha fazla ardışık çubuk, her biri bir önceki çubuğun aralığı içinde kapanır (tıkanıklık, s.12).",
+      "Tıkanıklığı bitiren çıkış çubuğu, önceki çubuğun en yüksek seviyesinin üzerinde kapanan yükseliş çubuğudur (s.14).",
+      "Hemen sonraki çubuk düşüş (ayı) çubuğudur; bu kurulum çubuğudur (s.17).",
+      "Kurulum çubuğunun en düşük seviyesinin 1 tik altına satış stop emri verilir (s.17).",
+      "Piyasa eğilimi düşüş yönünde olmalıdır (s.7 genel kural).",
+      "Bir sonraki çubuk stop emri tetiklemezse emir iptal edilir (s.17)."
+    ],
+    "stop_loss": "Uzun: kurulum çubuğunun en düşük seviyesinin 1 tik altı. Kısa: kurulum çubuğunun en yüksek seviyesinin 1 tik üstü (s.7 genel kural).",
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Piyasa eğilimi kurulumla aynı yönde (s.7, s.178-179).",
+      "Kırılmanın kurulum çubuğu ile hemen başarısız olması beklenir (s.15 'derhal'); kurulum ikinci çubukta değil, ilk sonraki çubukta oluşmalı.",
+      "Planlı önemli haber bülteninden önce açık pozisyon ve yeni giriş yok (s.116)."
+    ],
+    "pozisyon_risk": "Boyut kuralı yok. Risk tanımı (s.7): kurulum çubuğu aralığı + 2 tik. Dolar tutarı sözleşme sayısına bağlıdır (s.7).",
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Tıkanıklık (en az 3 kapanış aralığı), çıkış çubuğu (önceki çubuk dışında kapanış), kurulum çubuğu (ardışık ters yönlü çubuk) ve stop/giriş seviyeleri ölçülebilir. Puanı 3'ten düşüren: piyasa eğilimi filtresi Cilt II'ye ve yoruma bağlı, kâr hedefi bu ciltte tanımsız, kitap 'tanımların hiçbiri mükemmel değil' diyor (s.14)."
+    },
+    "belirsizlikler": [
+      "Sıkışıklık için metin 'en az 3 çubuk' diyor (s.12), şekil 2-5 ve 2-3 uzun örnekler gösteriyor. Minimum 3 alındı.",
+      "Kurulum çubuğu ile çıkış çubuğu arasında başka çubuk olup olamayacağı net değil; metin 'sonraki çubuk' diyor.",
+      "Kâr hedefi ve çıkış kuralı bu ciltte yok; kitap kâr alımını bir sonraki cilde bırakıyor (s.92).",
+      "Piyasa eğilimini belirleme yöntemi bu cilde dahil değil (Cilt II).",
+      "'Derhal başarısızlık' (s.15) için ölçüt verilmemiş; kodlanabilir olan sadece 'ilk sonraki çubuk' kuralı.",
+      "Tıkanıklık içi bar içi kırılmalar kabul ediliyor, belirleyici olan kapanış (s.11)."
+    ],
+    "uyumluluk_notu": "Forex'e özgü değil (tık kavramı piyasaya göre tanımlanır). Hacim verisi gerekmiyor. Kitap 3-60 dk arası kullanıyor, 1L3A için 5m'e uyarlanabilir. Vadeli piyasa örnekleri var (CL, ES, NQ, ZN, 6E, 6A, 6J, FDAX); kripto ve perpetual için de mantık uygulanabilir ama kitap bunu denemiyor.",
+    "varyantlar": [
+      "Momentum destekli varyant (s.22-23): tıkanıklık çıkışı trend çizgisi testiyle birleşir; sayısal kural verilmemiş.",
+      "Iç çubuk başlangıçlı varyant (Hikkake, s.64): kitapta Trend Çubuğu Arızası içinde anılıyor, ayrı kart yapılmadı."
+    ],
+    "anahtar_kelimeler": ["tıkanıklık", "kırılma-başarısızlığı", "kapanış-aralığı", "kurulum-çubuğu", "stop-emri", "iç-çubuk", "price-action"]
+  },
+  {
+    "kart_id": "daytrade__sikisiklik-bolgesi__woods",
+    "ad": "Sıkışıklık Bölgesi Kurulumu (Uzun ve Kısa)",
+    "stil": "daytrade",
+    "kaynak": {"pdf": "Price_Action_ile_Günlük_Trading_Teknikleri_-_Galen_Woods_-_Volume_3_227_sayfa.pdf", "sayfalar": [31, 32, 33, 35, 36, 37, 38, 39]},
+    "ozet": "Üç çubuklu bir tıkanıklığın en yüksek ve en düşük kapanışından yatay bir destek/direnç bölgesi çizilir. Fiyat bölgenin bir tarafını temizleyip bölgeye geri döndükten sonra bölgeyle örtüşen bir kurulum çubuğu oluşursa, bölge yönünde işleme girilir.",
+    "kategori": "destek_direnc",
+    "piyasa_rejimi": "herhangi",
+    "orijinal_piyasa": "vadeli",
+    "zaman_dilimi": {"islem": "Sabit değil; örneklerde 10-60 dk (s.31-48)", "ust_filtre": null},
+    "gostergeler": [{"ad": "Fiyat (OHLC mum)", "parametreler": {}}, {"ad": "Yatay bölge (tıkanıklık kapanışları)", "parametreler": {"kaynak": "3 çubuklu tıkanıklık, en yüksek ve en düşük kapanış"}}],
+    "long_giris": [
+      "Üç çubuklu tıkanıklık oluşur (s.31-32).",
+      "Bölge çizilir: tıkanıklığın en yüksek ve en düşük kapanışı arasındaki yatay alan (s.31, şekil 3-3).",
+      "Bir çubuğun en düşük seviyesi bölgenin üstünde kalır, yani fiyat bölgenin üstünde dengelenir (s.36).",
+      "Fiyat bölgenin alt sınırının altına düşmeden bölge içine geri döner (s.36).",
+      "Bölgeyle kurulan bu geri dönüşten sonra gelen bir sonraki yükseliş çubuğunun en yüksek seviyesinin 1 tik üzerine alım stop emri verilir (s.36, adım 3).",
+      "Fiyat bölgenin üstünde ve ardından altında kalırsa bölge geçersizdir; bu bölgede uzun kurulum yapılmaz (s.36-37)."
+    ],
+    "short_giris": [
+      "Üç çubuklu tıkanıklık oluşur ve bölge çizilir (s.31-32).",
+      "Bir çubuğun en yüksek seviyesi bölgenin altında kalır, yani fiyat bölgenin altında temizlenir (s.38).",
+      "Fiyat bölgenin üstüne çıkmadan bölge içine yeniden yükselir (s.38).",
+      "Bölge içindeki bir sonraki düşüş çubuğunun en düşük seviyesinin 1 tik altına satış stop emri verilir (s.38, adım 3).",
+      "Fiyat bölgenin altından ve ardından üstünden geçerse bölge direnç olarak geçersiz olur (s.38)."
+    ],
+    "stop_loss": "Uzun: tetikleyen (kurulum) çubuğun en düşük seviyesinin 1 tik altı. Kısa: en yüksek seviyesinin 1 tik üstü (s.7 genel kural; bölüm için ayrı stop tanımı yok).",
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Tek başına görünen bölge kurulumu önerilmez (s.39); piyasa eğilimi ile birlikte değerlendirilir (s.39).",
+      "Bölge geçerliliği: önce üstte sonra altta kapanış (uzun) veya tersi (kısa) ile bozulur (s.36, 38).",
+      "Bileşik (birleşik) bölgelerde işlem yapılmaz veya fiyatın netleşmesi beklenir (s.35)."
+    ],
+    "pozisyon_risk": "Boyut kuralı yok. Risk tanımı (s.7): kurulum çubuğu aralığı + 2 tik.",
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Bölge iki yatay çizgiyle tanımlanır, giriş stop emri ölçülebilir ve geçersizlik kuralı net. Puanı 3'ten düşüren: bölge çizim noktası metinde çelişkili (en yüksek çubuğa yakın mı, en yüksek kapanış mı; s.31-32), örtüşen bölgeleri birleştirme takdire bağlı (s.34), eğilim filtresi yoruma açık, kâr hedefi yok."
+    },
+    "belirsizlikler": [
+      "Bölge çizimi: metin 'en yüksek çubuğa yakın yatay çizgi' diyor (s.31), şekil 3-3 ise en yüksek ve en düşük kapanışı işaretliyor. Kapanış tabanlı alındı.",
+      "Uzun kurulum tarifindeki 'bunun altına düşmeden' ifadesi hangi sınıra ait olduğu açık değil; bölgenin alt sınırı olarak yorumlandı.",
+      "Örtüşen veya yakın bölgelerin birleştirilmesi takdire bağlı (s.34-35); kural yok.",
+      "Kâr hedefi bu ciltte tanımsız (s.92 'bir sonraki ciltte').",
+      "Yazar 'Sıkışıklık Bölgesi'nin geniş trend bağlamında daha güvenilir olduğunu' söylüyor; trend tespiti Cilt II'ye bağlı."
+    ],
+    "uyumluluk_notu": "Forex'e özgü değil. Hacim verisi gerekmiyor. Kitap 10-60 dk örnekleri kullanıyor; 1L3A için 5m'e uyarlanabilir. Vadeli piyasa örnekleri ağırlıklı.",
+    "varyantlar": [
+      "Birleştirilmiş bölge (s.33-34): örtüşen üç bölge tek bölgede birleşir.",
+      "Bir sonraki seansa taşınan bölge (s.74): önceki seansın bölgesi yeni seansta destek/direnç olarak kullanılabilir (örnek, kural değil)."
+    ],
+    "anahtar_kelimeler": ["sıkışıklık-bölgesi", "destek-direnç", "yatay-bölge", "kapanış", "bölge-geçersizliği", "stop-emri", "price-action"]
+  },
+  {
+    "kart_id": "daytrade__trend-cubugu-arizasi__woods",
+    "ad": "Trend Çubuğu Arızası (Uzun ve Kısa)",
+    "stil": "daytrade",
+    "kaynak": {"pdf": "Price_Action_ile_Günlük_Trading_Teknikleri_-_Galen_Woods_-_Volume_3_227_sayfa.pdf", "sayfalar": [52, 53, 54, 55, 64, 65]},
+    "ozet": "Gövdesi aralığın yarısından fazlasını kaplayan bir karşı-trend çubuğu (A) oluşur. Ardından gelen çubuk (B) A'nın ters yönde ucunu kırar ama B karşı-trend trend çubuğu olmaz. B'nin tersine kırılması ana trend yönünde stop-emirle girilir; karşı-trend hareketin başarısızlığı trend yönünü teyit eder.",
+    "kategori": "trend_takip",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "vadeli",
+    "zaman_dilimi": {"islem": "Sabit değil; örneklerde 5-30 dk (6J 20dk, CL 5dk, ES 10dk, 6E 30dk)", "ust_filtre": null},
+    "gostergeler": [{"ad": "Fiyat (OHLC mum)", "parametreler": {}}, {"ad": "Trend çizgisi (Cilt II yöntemi)", "parametreler": {}}],
+    "long_giris": [
+      "A: ayı trend çubuğu. Trend çubuğu tanımı: gövde çubuk aralığının %50'sinden fazla (s.53).",
+      "B: A'nın en düşük seviyesinin altına doğru hareket eden çubuk; B ayı trend çubuğu DEĞİLDİR (s.54).",
+      "B'nin en yüksek seviyesinin 1 tik üzerine alım stop emri (s.54, adım 4).",
+      "A, B ve C ardışık çubuklardır; C stop emri tetiklemezse emir iptal edilir (s.54).",
+      "Piyasa eğilimi yükseliş yönünde olmalıdır (s.65)."
+    ],
+    "short_giris": [
+      "A: boğa trend çubuğu (gövde aralığın %50'sinden fazla) (s.55).",
+      "B: A'nın en yüksek seviyesinin üzerine çıkan çubuk; B boğa trend çubuğu DEĞİLDİR (s.55).",
+      "B'nin en düşük seviyesinin 1 tik altına satış stop emri (s.55, adım 4).",
+      "A, B ve C ardışık çubuklardır; C stop emri tetiklemezse emir iptal edilir (s.55).",
+      "Piyasa eğilimi düşüş yönünde olmalıdır (s.65)."
+    ],
+    "stop_loss": "Uzun: kurulum çubuğu B'nin en düşük seviyesinin 1 tik altı. Kısa: B'nin en yüksek seviyesinin 1 tik üstü. Bölüm 4 açık stop tanımı vermiyor, s.7 genel kuralı uygulandı.",
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Tek salınımlı geri çekilmelerde ve güçlü trendlerde daha iyi (s.65).",
+      "B çubuğu tıkanıklık içinde sıkışmışsa güvenilirlik düşük; kitap böyle örnekte kaçınmayı öneriyor (s.64).",
+      "Piyasa yapısı ve momentum ile uyum aranır (s.65).",
+      "Planlı önemli haber öncesi açık pozisyon ve yeni giriş yok (s.116)."
+    ],
+    "pozisyon_risk": "Boyut kuralı yok. Risk tanımı (s.7): kurulum çubuğu aralığı + 2 tik.",
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Trend çubuğu (%50 gövde) ölçülebilir; A/B/C ardışıklığı, B'nin ters çubuk olmama kuralı ve stop-emir seviyesi açık. Puanı 3'ten düşüren: 'B çubuğu A'nın dibinin altına doğru hareket eder' ifadesi kırılmanın fiyatla mı kapanışla mı olacağını söylemiyor; trend yönü Cilt II'ye bağlı; kâr hedefi yok; stop bu bölümde açıkça yazılmamış."
+    },
+    "belirsizlikler": [
+      "'B A'nın en düşük seviyesinin altına doğru hareket eder' (s.54): kırılma için fiyat (intrabar) mı kapanış mı gerektiği belirtilmemiş.",
+      "Stop-loss bu bölüm için açıkça yazılmamış; s.7 genel kuralı kullanıldı.",
+      "Kâr hedefi ve zaman çıkışı bu ciltte yok (s.92).",
+      "Örneklerde 'B'nin dış çubuk olması' durumunda ikinci kurulum beklenir (s.174-175); bu kural bölüm 10'da, kart filtresi olarak alındı."
+    ],
+    "uyumluluk_notu": "Forex'e özgü değil. Hacim verisi gerekmiyor. Kitap 5-30 dk örnekleri kullanıyor; 1L3A için 5m'e uyarlanabilir. Vadeli örneklerinde kullanıldı (CL, ES, NQ, ZN, 6J, 6E, 6A, FDAX). Kripto/perpetual için mantık uygulanabilir, kitap test etmiyor.",
+    "varyantlar": [
+      "Hikkake (iç çubuk başlangıçlı) düzeni (s.64): ilk çubuk iç çubuk olduğunda kitap bunu Hikkake olarak anıyor.",
+      "Uzun A, B, C ardışıklığı yerine dış çubuk varyantı (s.60): ikinci kurulum çubuğu beklenir."
+    ],
+    "anahtar_kelimeler": ["trend-çubuğu", "gövde-oranı", "kırılma-başarısızlığı", "karşı-trend", "stop-emri", "hikkake", "price-action"]
+  },
+  {
+    "kart_id": "daytrade__yavaslama__woods",
+    "ad": "Yavaşlama (Boğa ve Ayı Yavaşlaması)",
+    "stil": "daytrade",
+    "kaynak": {"pdf": "Price_Action_ile_Günlük_Trading_Teknikleri_-_Galen_Woods_-_Volume_3_227_sayfa.pdf", "sayfalar": [68, 69, 70, 71, 72, 73, 80, 224]},
+    "ozet": "Piyasa trend yönünde ilerlerken üç ardışık çubuk, her biri bir öncekinin ucunu aşar ama aşılan mesafe her seferinde azalır. Bu hareketin gücü tükendiğinde, trend yönünde bir kurulum çubuğunun üstünden (ya da altından) stop-emirle girilir.",
+    "kategori": "momentum",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "vadeli",
+    "zaman_dilimi": {"islem": "Sabit değil; örneklerde 5-30 dk (CL 5dk, ES 10dk, FDAX 10dk, 6J 30dk)", "ust_filtre": null},
+    "gostergeler": [{"ad": "Fiyat (OHLC mum)", "parametreler": {}}],
+    "long_giris": [
+      "Boğa Yavaşlaması (s.69): üç ardışık çubuk, her biri bir öncekinin en düşük seviyesinin altına iner ve aşılan mesafe her çubukta azalır.",
+      "Sınır çizgisi: formasyonun son çubuğunun en düşük seviyesi (s.69).",
+      "Son çubuk yükseliş çubuğuysa, onun en yüksek seviyesinin 1 tik üzerine alım stop emri (s.70).",
+      "Son çubuk yükseliş değilse, bir sonraki yükseliş çubuğunun en yüksek seviyesinin 1 tik üzerine alım stop emri (s.70).",
+      "Fiyat sınır çizgisinin altına inerse (herhangi bir çubuk) kurulum geçersizdir (s.70).",
+      "Piyasa eğilimi yükseliş yönünde olmalıdır (s.80)."
+    ],
+    "short_giris": [
+      "Ayı Yavaşlaması (s.68): üç ardışık çubuk, her biri bir öncekinin en yüksek seviyesinin üzerine çıkar ve aşılan mesafe her çubukta azalır.",
+      "Sınır çizgisi: formasyonun son çubuğunun en yüksek seviyesi (s.68).",
+      "Son çubuk düşüş çubuğuysa, en düşük seviyesinin 1 tik altına satış stop emri (s.72).",
+      "Son çubuk düşüş değilse, bir sonraki düşüş çubuğunun 1 tik altına satış stop emri (s.72).",
+      "Fiyat sınır çizgisinin üzerine çıkarsa (herhangi bir çubuk) kurulum geçersizdir (s.72).",
+      "Piyasa eğilimi düşüş yönünde olmalıdır (s.80)."
+    ],
+    "stop_loss": "Uzun: kurulum çubuğunun en düşük seviyesinin 1 tik altı. Kısa: en yüksek seviyesinin 1 tik üstü (s.7 genel kural). Kitap, geniş formasyonda daha geniş durdurma gerekebileceğini söylüyor (s.77).",
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Piyasa önyargısına karşı yavaşlamada işlem yapılmaz (s.80: 'piyasanın önyargısına karşı çıkmanızı asla tavsiye etmiyorum').",
+      "Son çubuk Doji ise kurulum için yükseliş/düşüş çubuğu beklenir (s.76).",
+      "Önyargıya karşı güçlü baskı varsa, net fiyat hareketi oluşana kadar giriş yapılmaz (s.77).",
+      "Sıkışıklık bölgesi veya güvenilir destek/direnç ile birleşmesi tercih edilir (s.74, s.80).",
+      "Planlı önemli haber öncesi açık pozisyon ve yeni giriş yok (s.116)."
+    ],
+    "pozisyon_risk": "Boyut kuralı yok. Risk tanımı (s.7): kurulum çubuğu aralığı + 2 tik.",
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Üç çubuk dizisi, azalan mesafe, sınır çizgisi ve giriş/geçersizlik seviyeleri ölçülebilir. Puanı 3'ten düşüren: 'azalan miktar' için bir ölçü verilmemiş, s.224 kesin tanım ile s.225 esneklik çelişkili, önyargı filtresi yoruma açık, kâr hedefi yok."
+    },
+    "belirsizlikler": [
+      "'Azalan miktar' oranı tanımlanmamış (s.68-69); yalnızca 'her artış öncekinden küçük' ölçütü kodlanabilir.",
+      "s.224: tanım 'her çubuk öncekinin tepesini aşmalı' diyor; s.224-225 son çubuk önceki tepeyi aşmadığında yine de kabul edilebilir dendi. Kodlamada katı tanım seçilmeli, esneklik ayrı varyant olarak test edilmeli.",
+      "Piyasa eğiliminin nasıl belirleneceği (Cilt II) bu cilde dahil değil.",
+      "Kâr hedefi bu ciltte yok (s.92 'bir sonraki ciltte')."
+    ],
+    "uyumluluk_notu": "Forex'e özgü değil. Hacim verisi gerekmiyor. Kitap 5-30 dk kullanıyor; 1L3A için 5m'e uyarlanabilir. Vadeli örnekleri ağırlıklı (CL, ES, NQ, FDAX, 6J, 6E, 6A). Kripto/perpetual'da test edilmeli.",
+    "varyantlar": [
+      "Sıkışıklık bölgesinde yavaşlama (s.73-74, s.79): yavaşlama, bölge ile birlikte destek/direnç teyidi.",
+      "Dördüncü çubuklu yavaşlama (s.79): kitap bunu üç çubuklu modelden daha önemli sayıyor (örnek).",
+      "İkinci kurulum çubuğu (s.73): ilk kurulum tetiklenmezse sonraki yükseliş/düşüş çubuğu ikinci kurulum olabilir."
+    ],
+    "anahtar_kelimeler": ["yavaşlama", "azalan-mesafe", "sınır-çizgisi", "kurulum-çubuğu", "stop-emri", "önyargı", "price-action"]
+  },
+  {
+    "kart_id": "daytrade__doruga-karsi__woods",
+    "ad": "Doruğa Karşı (Anti-Climax) Formasyonu (Uzun ve Kısa)",
+    "stil": "daytrade",
+    "kaynak": {"pdf": "Price_Action_ile_Günlük_Trading_Teknikleri_-_Galen_Woods_-_Volume_3_227_sayfa.pdf", "sayfalar": [82, 83, 84, 85, 87, 88, 92, 93, 97]},
+    "ozet": "Piyasa güçlü bir ivmeyle hareket ederken üç ardışık çubuk, her biri bir öncekinin ucunu artan bir mesafeyle aşar (aşırı hareket). Bu aşırı hareket sürdürülemez kabul edilir; formasyonun ardından gelen kurulum çubuğunun bir tık ötesinden, ters yönde girilir.",
+    "kategori": "momentum",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "vadeli",
+    "zaman_dilimi": {"islem": "Sabit değil; örneklerde 4-10 dk (CL 4dk, ES 10dk, FDAX 10dk, 6A 30dk, NQ 3dk)", "ust_filtre": null},
+    "gostergeler": [{"ad": "Fiyat (OHLC mum)", "parametreler": {}}],
+    "long_giris": [
+      "Boğa Doruk Karşıtı (s.87): üç ardışık düşüş çubuğu, düşüş mesafeleri her çubukta artar. Kitap bu yönü açıkça tanımlamıyor; s.82 tanımının aşağı yönlü aynası olarak alındı.",
+      "Sınır çizgisi: formasyonun son çubuğunun en düşük seviyesi (varsayım, Yavaşlama ile aynı mantık; belirsizlik).",
+      "Son çubuk yükseliş çubuğuysa, onun en yüksek seviyesinin 1 tik üzerine alım stop emri (s.87, adım 2).",
+      "Son çubuk yükseliş değilse, bir sonraki yükseliş çubuğunun 1 tik üzerine alım stop emri (s.87, adım 3).",
+      "Fiyat sınır çizgisinin altına düşerse kurulum geçersizdir (s.87).",
+      "Piyasa eğilimi yükseliş yönünde olmalıdır (s.85, s.97)."
+    ],
+    "short_giris": [
+      "Düşüş Doruk Karşıtı (s.82): üç ardışık yükseliş çubuğu, her biri bir öncekinin tepesini artan bir mesafeyle aşar. Şekil 6-1 ve metin: boğalar çılgınca alım yapıyor.",
+      "Sınır çizgisi: formasyonun son çubuğunun en yüksek seviyesi (varsayım; belirsizlik).",
+      "Son çubuk düşüş çubuğuysa, en düşük seviyesinin 1 tik altına satış stop emri (s.88, adım 2).",
+      "Son çubuk düşüş değilse, bir sonraki düşüş çubuğunun 1 tik altına satış stop emri (s.88, adım 3).",
+      "Fiyat sınır çizgisinin üzerine çıkarsa kurulum geçersizdir (s.88).",
+      "Piyasa eğilimi düşüş yönünde olmalıdır (s.85, s.97)."
+    ],
+    "stop_loss": "Uzun: kurulum çubuğunun en düşük seviyesinin 1 tik altı. Kısa: en yüksek seviyesinin 1 tik üstü (s.7 genel kural).",
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": "Açık trend pozisyonunda ters yönlü Doruk Karşıtı formasyonu çıkış sinyali olarak kullanılabilir (s.92-93, şekil 6-10). Kâr alma kuralı bu ciltte yok.",
+    "filtreler": [
+      "Yapısal filtre (s.97): düşüş formasyonlarında hiçbir çubuk son pivot yükseğin üzerinde KAPANMAMALI; yükseliş formasyonlarında hiçbir çubuk son pivot düşüğün altında KAPANMAMALI.",
+      "Piyasa eğilimi açıksa ve kurulumla uyumluysa daha güvenilir (s.94, s.97).",
+      "Ters yönlü (trend karşıtı) kullanım yeni başlayanlar için önerilmez (s.98).",
+      "Planlı önemli haber öncesi açık pozisyon ve yeni giriş yok (s.116)."
+    ],
+    "pozisyon_risk": "Boyut kuralı yok. Risk tanımı (s.7): kurulum çubuğu aralığı + 2 tik. Kitap, doruk karşıtı formasyonlarda volatilite artışı nedeniyle daha geniş stop gerektiğini söylüyor (s.97).",
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Mesafe artışı ve kurulum çubuğu/giriş kuralı ölçülebilir; yapısal filtre (pivot kapanışı) mekanik. Puanı 3'ten düşüren: sınır çizgisi noktası kitapta açıkça yazılmamış, 'aşırı hareket' için ölçü yok, bağlam olarak osilatör/hacim/volatilite yorumu var (s.84-85), kâr hedefi yok."
+    },
+    "belirsizlikler": [
+      "Sınır çizgisinin hangi fiyat noktası olduğu metinde açık değil (şekil 6-1: 'a<B<C' ve 'sınır çizgisi'). Yavaşlama mantığı varsayıldı.",
+      "Boğa Doruk Karşıtı (uzun) için ayrıntılı tanım yok (s.87 şekil ve adımlar var, tanım cümlesi yok); aşağı yönlü ayna varsayıldı.",
+      "Kitap, ters yönlü işlem stratejisini ayrıntılandırmıyor (s.94).",
+      "Aşırı alım/satım ölçüsü (osilatör, hacim, volatilite) kart için verilmemiş; kitap bunları 'uç nokta' bağlamı olarak anıyor (s.84-85).",
+      "Kâr alma kuralı bu ciltte yok; çıkış örnekleri (s.92-93) sayısal değil."
+    ],
+    "uyumluluk_notu": "Forex'e özgü değil. Osilatör/hacim bağlamı kitapta anılıyor ama kart için zorunlu değil; 1L3A'da osilatör gerekiyorsa ayrıca tanımlanmalı. Kitap 3-30 dk kullanıyor; 5m'e uyarlanabilir. Kripto/perpetual'da test edilmeli.",
+    "varyantlar": [
+      "Sıkışıklık bölgesi ile birleşen doruk karşıtı (s.89, s.95): bölge kurulum çubuğu desteklediğinde güçlü kabul edilir.",
+      "Açık pozisyonda çıkış olarak kullanım (s.92-93): ters yönlü doruk karşıtı kâr almayı tetikleyebilir (sayısal kural yok)."
+    ],
+    "anahtar_kelimeler": ["doruk-karşıtı", "anti-climax", "artan-mesafe", "sınır-çizgisi", "aşırı-hareket", "kurulum-çubuğu", "stop-emri", "price-action"]
+  },
+  {
+    "kart_id": "daytrade__basinc-bolgesi__woods",
+    "ad": "Basınç Bölgesi (Yükseliş ve Düşüş Kurulumu)",
+    "stil": "daytrade",
+    "kaynak": {"pdf": "Price_Action_ile_Günlük_Trading_Teknikleri_-_Galen_Woods_-_Volume_3_227_sayfa.pdf", "sayfalar": [105, 106, 107, 108, 109, 110, 111, 116]},
+    "ozet": "Üst üste binen alt gölgeli üç ardışık çubuk satın alma baskısı bölgesi oluşturur (düşüş için üst gölgeler). Bu bölgeyle örtüşen ve bölgenin üstünde kapanan bir sonraki yükseliş çubuğunun üstünden, bölge yönünde stop-emirle girilir.",
+    "kategori": "destek_direnc",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "vadeli",
+    "zaman_dilimi": {"islem": "Sabit değil; örneklerde 3-10 dk, 4 saat (6A) örneği var; 1 saat ve üstünde eşik artırılır (s.107)", "ust_filtre": null},
+    "gostergeler": [{"ad": "Fiyat (OHLC mum)", "parametreler": {}}],
+    "long_giris": [
+      "Yükseliş Basınç Bölgesi: üç ardışık çubuğun alt gölgeleri en az 2 tik üst üste biner (s.105, s.107).",
+      "Bölge çizimi (s.106): alt sınır = üç çubuk arasındaki en alttaki çubuğun en düşük seviyesi; üst sınır = üç gövdenin en alt noktası (gölgeler hariç).",
+      "Bölgeyle örtüşen ve onun üzerinde kapanan bir sonraki yükseliş çubuğu (kurulum çubuğu) belirlenir. Basınç Bölgesinin üçüncü çubuğu yükseliş ise kabul edilir (s.109).",
+      "Kurulum çubuğunun en yüksek seviyesinin 1 tik üzerine alım stop emri (s.109, adım 2).",
+      "Fiyat Basınç Bölgesinin altına düşerse kurulum geçersizdir (s.109).",
+      "Piyasa eğilimi yükseliş yönünde olmalıdır (s.111-112 örnekleri)."
+    ],
+    "short_giris": [
+      "Düşüş Basınç Bölgesi: üç ardışık çubuğun üst gölgeleri en az 2 tik üst üste biner (s.107).",
+      "Bölge çizimi (s.107): üst sınır = üç çubuk arasındaki en yüksek çubuğun en yüksek seviyesi; alt sınır = üç gövdenin en yüksek noktası (gölgeler hariç). Metin bu şekilde ayna kurar (s.107).",
+      "Bölgeyle örtüşen ve onun altında kapanan bir sonraki düşüş çubuğunun 1 tik altına satış stop emri. Üçüncü çubuk düşüş ise kabul edilir (s.109).",
+      "Fiyat Basınç Bölgesinin üzerine çıkarsa kurulum geçersizdir (s.109).",
+      "Piyasa eğilimi düşüş yönünde olmalıdır (s.113 örneği)."
+    ],
+    "stop_loss": "Uzun: kurulum çubuğunun en düşük seviyesinin 1 tik altı. Kısa: en yüksek seviyesinin 1 tik üstü (s.7 genel kural). Bölüm için ayrı stop tanımı yok.",
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": "Planlı önemli haber öncesi pozisyon kapatılır ve haber sonrası dalgalanma bitene kadar işlem yapılmaz (s.116-117).",
+    "filtreler": [
+      "Bölge tıkanıklık modeli içinde oluşuyorsa güvenilirlik düşük; yalnızca piyasa eğilimi çok açıksa veya başka güçlü neden varsa işlem yapılır (s.110).",
+      "Gölge örtüşmesi 2 tik altındaysa bölge yok sayılır (s.107).",
+      "Piyasa eğilimi ile aynı yönde işlem (s.110-112).",
+      "Planlı önemli haber öncesi açık pozisyon ve yeni giriş yok (s.116)."
+    ],
+    "pozisyon_risk": "Boyut kuralı yok. Risk tanımı (s.7): kurulum çubuğu aralığı + 2 tik.",
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Gölge örtüşmesi (2 tik), bölge uç noktaları ve giriş/geçersizlik kuralları ölçülebilir. Puanı 3'ten düşüren: 'kabul edilebilir üçüncü çubuk' ve bölge alt/üst uç yorumu takdire bağlı, tıkanıklık içinde olup olmama kararı nitel, kâr hedefi yok."
+    },
+    "belirsizlikler": [
+      "Yükseliş bölgede alt sınır 'en alttaki çubuk' ile mi 'en düşük gövde' ile mi çizilecek; metin adım 2 ve adım 3'ü ayrı veriyor, yorum yapıldı (s.106).",
+      "Düşüş bölgesi için 'en yüksek çubuk' ve 'üç gövdenin en yüksek noktası' adımları açıkça ayna olarak yazılmamış; ayna varsayıldı (s.107).",
+      "Haber filtresi (s.116-117) yazarın kişisel gözlemi; 'haber bülteni öncesi pozisyon yok' kuralı kart için alındı.",
+      "Kâr hedefi yok (s.92 'bir sonraki ciltte')."
+    ],
+    "uyumluluk_notu": "Forex'e özgü değil. Hacim verisi gerekmiyor. Gölge örtüşme eşiği (2 tik) yazarın kendi tercihi; 1L3A'da tik büyüklüğüne göre test edilmeli. Yüksek zaman dilimlerinde eşik artırılmalı (s.107). 5m'e uyarlanabilir.",
+    "varyantlar": [
+      "Tıkanıklık bölgesinde güvensiz Basınç Bölgesi (s.110): kitap tercih etmiyor.",
+      "Dört çubuklu yükseliş Basınç Bölgesi ve yavaşlama birleşimi (s.113, s.171): kombinasyon kalitesi artırıyor (örnek).",
+      "Başarısızlık kartına benzer 'kurulum çubuğu dış çubuk' durumu (s.175): ikinci giriş çubuğu beklenir."
+    ],
+    "anahtar_kelimeler": ["basınç-bölgesi", "gölge-örtüşmesi", "alım-baskısı", "satış-baskısı", "destek-direnç", "kurulum-çubuğu", "stop-emri", "price-action"]
+  },
+  {
+    "kart_id": "daytrade__kaygi-bolgesi__woods",
+    "ad": "Kaygı Bölgesi (Karşı-Trend Tuzağı, Uzun ve Kısa)",
+    "stil": "daytrade",
+    "kaynak": {"pdf": "Price_Action_ile_Günlük_Trading_Teknikleri_-_Galen_Woods_-_Volume_3_227_sayfa.pdf", "sayfalar": [121, 122, 125, 126, 128, 129, 130, 131, 133, 134, 141]},
+    "ozet": "Güçlü trendin zirvesinde veya dibinde karşı-trend bir kurulum çubuğu tetiklenince (trend yönünde kırılınca), o çubuğun aralığı bir Kaygı Bölgesi olur. Karşı-trend tüccarları bu bölgede tuzağa düşmüştür; fiyat bölgeye geri dönüp trend yönünde bir çubukla bölgeyle örtüşürse, o çubuğun üstünden trend yönünde girilir.",
+    "kategori": "ortalamaya_donus",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "vadeli",
+    "zaman_dilimi": {"islem": "Sabit değil; örneklerde 4-60 dk (CL 4dk, NQ 10dk, 6E 60dk, NG 6dk)", "ust_filtre": null},
+    "gostergeler": [{"ad": "Fiyat (OHLC mum)", "parametreler": {}}],
+    "long_giris": [
+      "Boğa trendinin zirvesine yakın bir karşı-trend (ayı) kurulum çubuğu oluşur (s.125).",
+      "Bir sonraki çubuk bu kurulum çubuğunun en yüksek seviyesinin üzerine çıkarsa uzun kurulum tetiklenmiş sayılır; Kaygı Bölgesi = bu kurulum çubuğunun en yüksek ve en düşük seviyesi arası (s.125-126).",
+      "Fiyat bölgeye geri döner ve bölgeyle örtüşen bir yükseliş çubuğu oluşur (s.130, s.133).",
+      "Bölge hâlâ geçerliyse bu yükseliş çubuğunun en yüksek seviyesinin 1 tik üzerine alım stop emri (s.130-131).",
+      "Bir sonraki çubuk stop emri tetiklemezse emir iptal edilir (s.131).",
+      "Piyasa eğilimi yükseliş yönünde olmalıdır (s.135, s.141)."
+    ],
+    "short_giris": [
+      "Düşüş trendinin dibine yakın bir karşı-trend (boğa) kurulum çubuğu oluşur (s.125).",
+      "Bir sonraki çubuk bu kurulum çubuğunun en düşük seviyesinin altına inerse kısa kurulum tetiklenmiş sayılır; Kaygı Bölgesi = kurulum çubuğunun en yüksek ve en düşük seviyesi arası (s.125-126).",
+      "Fiyat bölgeye geri döner ve bölgeyle örtüşen bir düşüş çubuğu oluşur (s.131).",
+      "Bölge hâlâ geçerliyse bu düşüş çubuğunun en düşük seviyesinin 1 tik altına satış stop emri (s.131).",
+      "Bir sonraki çubuk stop emri tetiklemezse emir iptal edilir (s.131).",
+      "Piyasa eğilimi düşüş yönünde olmalıdır."
+    ],
+    "stop_loss": "Uzun: kurulum (örtüşen) çubuğun en düşük seviyesinin 1 tik altı. Kısa: en yüksek seviyesinin 1 tik üstü (s.7 genel kural; bölüm için ayrı stop tanımı yok).",
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Karşı-trend kurulum çubuğu trendin zirvesine/dibine yakın olmalı (s.125, s.141).",
+      "Bölgenin karşı tarafında bir çubuk temizlenirse veya fiyat bölgenin ilgili sınırına ulaşırsa bölge geçersizdir (s.128-129; ifade metinde belirsiz).",
+      "Dış çubuklar güvenilir Kaygı Bölgesi oluşturmaz; ikinci saldırı beklenir (s.131).",
+      "Planlı önemli haber öncesi açık pozisyon ve yeni giriş yok (s.116)."
+    ],
+    "pozisyon_risk": "Boyut kuralı yok. Risk tanımı (s.7): kurulum çubuğu aralığı + 2 tik.",
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Tetikleme, bölge, bölgeyle örtüşme ve stop emir seviyeleri kodlanabilir. Ancak karşı-trend kurulum çubuğunun 'cazip' ve 'trend zirvesine yakın' seçimi öznel; kitap bunu 'kesin bir kurulumdan ziyade bir konsept' diye tanımlıyor (s.141). Bu nedenle kaba yaklaşımla kodlanır."
+    },
+    "belirsizlikler": [
+      "Kitap iki farklı giriş tarif ediyor: (a) bölgeyle örtüşen trend yönü çubuğun üstü (s.130-131) ve (b) bölgenin tepe/dip kırılması ile kısa girişi (s.133, 8.3.1 örneği). Bu kartta (a) alındı.",
+      "Geçersizlik ifadesi (s.128-129): 'Fiyat Bölgenin en yüksek/en düşük seviyesine ulaşır' bölgenin hangi tarafı için geçerli olduğu açık değil; yorum belirsiz.",
+      "Karşı-trend kurulum çubuğunun seçimi öznel (s.125, s.141).",
+      "Kâr hedefi ve ölçülen hareket yöntemi bu ciltte değil (s.139 'bir sonraki ciltte')."
+    ],
+    "uyumluluk_notu": "Forex'e özgü değil. Hacim verisi gerekmiyor. Karşı-trend tuzağı olduğu için kripto/perpetual'da fazla volatil piyasalarda dış çubuk sıklığı artabilir; test edilmeli. 1L3A'da 5m+ için uygun.",
+    "varyantlar": [
+      "Trend çubuğu arızası ile birleşik Kaygı Bölgesi (s.141): karşı-trend kurulum çubuğu aynı zamanda bir trend çubuğu arızası olabilir.",
+      "Yavaşlama veya basınç bölgesine dayalı Kaygı Bölgesi (s.132, s.136-137): kitap herhangi bir karşı-trend kurguyla oluşturulabileceğini söylüyor (s.141)."
+    ],
+    "anahtar_kelimeler": ["kaygı-bölgesi", "karşı-trend", "tuzak", "kurulum-çubuğu", "ikinci-saldırı", "stop-emri", "price-action"]
+  },
+  {
+    "kart_id": "daytrade__zayif-geri-cekme__woods",
+    "ad": "Zayıf Geri Çekme (Uzun ve Kısa)",
+    "stil": "daytrade",
+    "kaynak": {"pdf": "Price_Action_ile_Günlük_Trading_Teknikleri_-_Galen_Woods_-_Volume_3_227_sayfa.pdf", "sayfalar": [147, 148, 149, 150, 152, 153, 154, 155, 156, 157]},
+    "ozet": "Güçlü trendde gelen geri çekilme, düşüş ardışıklığı (3+ düşüş çubuğu) veya çift ayı trend çubuğu içermiyorsa 'zayıf' kabul edilir. Geri çekilmenin ikinci aşağı hareketinde oluşan ilk ters çubuğun üstünden, trend yönünde stop-emirle girilir.",
+    "kategori": "trend_takip",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "vadeli",
+    "zaman_dilimi": {"islem": "Sabit değil; örneklerde 3-10 dk (NQ 3dk, ES 10dk, CL 3dk, 6J 30dk, 6A 30dk)", "ust_filtre": null},
+    "gostergeler": [{"ad": "Fiyat (OHLC mum)", "parametreler": {}}],
+    "long_giris": [
+      "Boğa trendinde bir geri çekilme başlar. Geri çekilme zayıftır: 3 veya daha fazla ardışık düşüş çubuğu (kapanış açıktan düşük) yoktur ve 2 veya daha fazla ardışık ayı trend çubuğu yoktur (s.148).",
+      "Geri çekilmede en az ikinci karşı-trend salınımı beklenir; tek salınımlı geri çekilme yeterli değildir (s.152).",
+      "İkinci aşağı hareket başlayana kadar kurulum çubuğu aranmaz (s.153, adım 2).",
+      "İkinci aşağı harekette bir düşüş çubuğunu izleyen ilk yükseliş çubuğunun en yüksek seviyesinin 1 tik üzerine alım stop emri (s.153, adım 3).",
+      "Bir sonraki çubuk stop emri tetiklemezse emir iptal edilir; sonraki iki çubukta yeni emir verilebilir (s.153, adım 4).",
+      "Zayıf geri çekme öncülünü bozan güçlü düşüş (ör. üç ardışık düşüş çubuğu) gelirse yeni kurulum aranmaz (s.154)."
+    ],
+    "short_giris": [
+      "Ayı trendinde bir geri çekilme başlar. Geri çekilme zayıftır: 3 veya daha fazla ardışık yükseliş çubuğu (kapanış açıktan yüksek) yoktur ve 2 veya daha fazla ardışık boğa trend çubuğu yoktur (s.149-150).",
+      "En az ikinci karşı-trend salınımı beklenir (s.152).",
+      "İkinci yukarı hareket başlayana kadar kurulum çubuğu aranmaz (s.155, adım 2).",
+      "İkinci yukarı harekette bir yükseliş çubuğunu izleyen ilk düşüş çubuğunun en düşük seviyesinin 1 tik altına satış stop emri (s.155, adım 3).",
+      "Bir sonraki çubuk stop emri tetiklemezse emir iptal edilir (s.155, adım 4).",
+      "Güçlü yükseliş zayıf geri çekme öncülünü bozarsa yeni kurulum aranmaz (s.155)."
+    ],
+    "stop_loss": "Uzun: kurulum çubuğunun en düşük seviyesinin 1 tik altı. Kısa: en yüksek seviyesinin 1 tik üstü (s.7 genel kural; bölüm için ayrı stop tanımı yok).",
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Karşı-momentum, test edilen pivotlarda belirgin ise kaçınılır (s.156).",
+      "Geri çekilme uzun ve düzensiz bir tıkanıklık içinde ise kaçınılır (s.156).",
+      "Yeni trendlerde yaygın, olgun trendlerde daha güçlü geri çekilir; olgun trendde kurulum seyrek (s.163).",
+      "Planlı önemli haber öncesi açık pozisyon ve yeni giriş yok (s.116)."
+    ],
+    "pozisyon_risk": "Boyut kuralı yok. Risk tanımı (s.7): kurulum çubuğu aralığı + 2 tik.",
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Ardışık çubuk sayısı (3+ düşüş, 2+ ayı trend çubuğu), ikinci salınım ve kurulum çubuğu (ilk yükseliş çubuğu) ölçülebilir; stop emir seviyeleri açık. Puanı 3'ten düşüren: 'zayıf/güçlü' sınıfı ve 'karşı-momentum' ile 'uzun düzensiz tıkanıklık' yoruma açık; trend tespiti Cilt II; kâr hedefi yok."
+    },
+    "belirsizlikler": [
+      "Metin 'ikinci aşağı hareket başlamasını bekleyin' diyor; ikinci salınımın başlangıcı için nokta tanımı yok.",
+      "'Uzun düzensiz tıkanıklık' ve 'belirgin karşı-momentum' ölçüsü verilmemiş (s.156).",
+      "Stop bölüm için yazılmamış; genel kural kullanıldı.",
+      "Kâr hedefi ve zaman çıkışı bu ciltte yok.",
+      "Kitap zayıf geri çekmeyi tanımlarken 'herhangi garantili sonuç yok' diyor (s.151); tekrar ve güvenilirlik istatistiği verilmemiş."
+    ],
+    "uyumluluk_notu": "Forex'e özgü değil. Hacim verisi gerekmiyor. Kitap 3-30 dk kullanıyor; 5m'e uyarlanabilir. Vadeli ağırlıklı, kripto/perpetual'da test edilmeli.",
+    "varyantlar": [
+      "Tıkanıklık içinde zayıf geri çekme (s.156): tıkanıklık yoksa daha güvenilir, varsa uzun düzensiz olmasın.",
+      "Kaygı Bölgesi ile örtüşen zayıf geri çekme (s.163): iki kurulum birlikte olabilir, ayrım önemli değil (yazar)."
+    ],
+    "anahtar_kelimeler": ["zayıf-geri-çekme", "trend-çubuğu", "ardışık-çubuk", "ikinci-salınım", "kurulum-çubuğu", "stop-emri", "price-action"]
+  },
+  {
+    "kart_id": "daytrade__yeniden-giris__woods",
+    "ad": "Yeniden Giriş (Durdurulan Kuruluma İkinci Giriş ve Yeniden Giriş Eşdeğeri)",
+    "stil": "daytrade",
+    "kaynak": {"pdf": "Price_Action_ile_Günlük_Trading_Teknikleri_-_Galen_Woods_-_Volume_3_227_sayfa.pdf", "sayfalar": [195, 196, 197, 198, 199, 201, 202, 203, 204, 205, 206, 208]},
+    "ozet": "Stop olan bir kurulumdan sonra, piyasa eğilimi bozulmamışsa ve orijinal kurulum fiyat yönüyle ne başarılı ne başarısız olmuşsa, yeni bir kurulum çubuğu (trend yönünde) oluştuğunda bir kez yeniden girilir. Yeniden giriş eşdeğerinde ise orijinal kurulum atlanır ve yalnızca başarısızlık sonrası yeniden giriş beklenir.",
+    "kategori": "diger",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "vadeli",
+    "zaman_dilimi": {"islem": "Sabit değil; örneklerde 3-30 dk (CL 3dk, ES 10dk, 6A 30dk, 6J 30dk)", "ust_filtre": null},
+    "gostergeler": [{"ad": "Fiyat (OHLC mum)", "parametreler": {}}],
+    "long_giris": [
+      "Önceki uzun kurulum tetiklendi ve zararı durdur ile kapandı (s.201).",
+      "Piyasa eğilimi bozulmamış boğa (s.201, koşul 1).",
+      "Orijinal kurulum yüksek kaliteli (s.201, koşul 2; öznel).",
+      "Fiyat orijinal kurulum çubuğunun en yüksek seviyesini aşmamış (başarı yok) ve en düşük seviyesinin altına inmemiş (başarısızlık yok) (s.201, koşul 3-4).",
+      "Yeniden giriş kurulum çubuğu yükseliş çubuğudur (s.201, koşul 5).",
+      "Yeniden giriş kurulum çubuğunun en yüksek seviyesinin 1 tik üzerine alım stop emri verilir ve stop-loss bu çubuğun altına konur (s.201-202, adım 6).",
+      "Yeniden giriş yalnızca bir kez yapılır (s.204).",
+      "Yeniden giriş eşdeğeri (s.204-208): orijinal kurulum atlanır; orijinal kurulumun başarısızlığa gitmesi ve yeniden giriş koşullarının oluşması beklenir."
+    ],
+    "short_giris": [
+      "Önceki kısa kurulum tetiklendi ve zararı durdur ile kapandı (s.202).",
+      "Piyasa eğilimi bozulmamış ayı (s.202, koşul 1).",
+      "Orijinal kurulum yüksek kaliteli (s.202, koşul 2; öznel).",
+      "Fiyat orijinal kurulum çubuğunun en düşük seviyesinin altına inmemiş ve en yüksek seviyesinin üzerine çıkmamış olmalı (s.202, koşul 3-4).",
+      "Yeniden giriş kurulum çubuğu düşüş çubuğudur (s.202, koşul 5).",
+      "Yeniden giriş kurulum çubuğunun en düşük seviyesinin 1 tik altına satış stop emri; stop-loss bu çubuğun üstüne konur (s.203, adım 6).",
+      "Yeniden giriş yalnızca bir kez yapılır (s.204)."
+    ],
+    "stop_loss": "Yeniden giriş kurulum çubuğunun karşı ucunun 1 tik ötesi (s.201-203, adım 6). Orijinal kurulum çubuğunun dibinin/tepesinin kırılması yeniden girişi iptal eder (s.201 adım 4).",
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Yeniden giriş yalnızca piyasa eğilimi sağlamsa yapılır; eğilimden şüphe varsa yapılmaz (s.207-208).",
+      "Bir kurulum en fazla bir kez yeniden girilir; yeniden giriş de durdurulursa piyasa yeniden değerlendirilir (s.204).",
+      "Hızlı reddedilen stop seviyesi (kısa süre içinde toparlanma) yeniden giriş için olumlu işaret (s.204).",
+      "Planlı önemli haber öncesi açık pozisyon ve yeni giriş yok (s.116)."
+    ],
+    "pozisyon_risk": "Boyut kuralı yok. Risk tanımı (s.7): kurulum çubuğu aralığı + 2 tik. Kitap yeniden girişlerin daha büyük çubuk aralığı nedeniyle daha büyük risk getirebileceğini belirtiyor (s.206).",
+    "iddia_edilen_performans": "Sayısal veri yok. Kitap yeniden girişlerin 'genellikle orijinal kurulumdan daha güvenilir' olduğunu söylüyor (s.205); istatistik verilmemiş.",
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Başarı/başarısızlık tanımı ve yeniden giriş tetikleme/stop seviyeleri ölçülebilir; bir kez kuralı açık. Puanı 3'ten düşüren: 'orijinal kurulum yüksek kaliteli' ve 'piyasa eğilimi bozulmamış' öznel; stop seviyesi (kurulum çubuğu mu yeniden giriş çubuğu mu) bir ifadede belirsiz; kâr hedefi yok."
+    },
+    "belirsizlikler": [
+      "Koşul 6 'altına bir onay işareti' ifadesi stopun yeniden giriş çubuğunun altına mı, orijinal kurulum çubuğunun altına mı konacağını açıkça söylemiyor; yeniden giriş çubuğunun altı alındı (s.201-202).",
+      "Yeniden giriş eşdeğeri için kesin tetikleyici (hangi çubuk başarısızlık sayılır) metinde 'yeniden girişe eşdeğer kurulum' olarak anılıyor; mekanik tanım yok (s.204-208).",
+      "'Yüksek kalite' ve 'eğilim bozulmadı' öznel (Cilt II, Bölüm 11).",
+      "Kâr hedefi yok (s.209 'bir sonraki ciltte' yönü)."
+    ],
+    "uyumluluk_notu": "Forex'e özgü değil. Hacim verisi gerekmiyor. Kurallar diğer kartlarla birlikte uygulanır; ayrıca yeniden giriş sayısı sınırı 1 olduğu için aşırı işlem riski düşük. 5m'e uyarlanabilir.",
+    "varyantlar": [
+      "Yeniden giriş eşdeğeri (s.204-208): ilk kurulumu atlayıp başarısızlık sonrası ikinci kurulumu beklemek. Kitap bunu daha güvenilir sayıyor.",
+      "Hızlı toparlanan stop (s.204): stop seviyesinden hızlı dönüş yeniden girişi güçlendirir (sezgisel gözlem)."
+    ],
+    "anahtar_kelimeler": ["yeniden-giriş", "yeniden-giriş-eşdeğeri", "durdurulan-kurulum", "kurulum-çubuğu", "piyasa-eğilimi", "tek-seferlik", "stop-emri", "price-action"]
+  }
+]

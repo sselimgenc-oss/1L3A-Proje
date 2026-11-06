@@ -1,0 +1,24 @@
+# Kaynak PDF'ler ve metin dökümleri repoya girmez (boyut + telif)
+/scalp/
+/swing/
+/day trade/
+*.pdf
+veri/pdf_metin/
+veri/kartlar_ham/_notlar/
+desktop.ini
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+
+# Gizli bilgiler
+.env
+*.env
+
+# Veri / backtest çıktıları (büyük)
+veri/mumlar/
+*.parquet
+*.sqlite
+*.db

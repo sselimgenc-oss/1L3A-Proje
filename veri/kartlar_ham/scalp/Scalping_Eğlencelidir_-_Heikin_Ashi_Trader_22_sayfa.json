@@ -1,0 +1,47 @@
+[
+  {
+    "kart_id": "scalp__ha-renk-donusu__heikinashi",
+    "ad": "Heikin Ashi renk dönüşü karşı-trend scalp (1 dk)",
+    "stil": "scalp",
+    "kaynak": {"pdf": "Scalping_Eğlencelidir_-_Heikin_Ashi_Trader_22_sayfa.pdf", "sayfalar": [10, 11, 12, 13, 14, 15, 17]},
+    "ozet": "Trendde bir değişiklik olduğunda, Heikin Ashi mumlarının renk değişiminin görüldüğü anda piyasaya girilir. Mumun rengi tekrar değiştiğinde pozisyon kapatılır. Kitabın temel modeli bu karşı-trend renk dönüşü kurulumudur.",
+    "kategori": "ortalamaya_donus",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "forex",
+    "zaman_dilimi": {"islem": "1m", "ust_filtre": null},
+    "gostergeler": [{"ad": "Heikin Ashi", "parametreler": {}}],
+    "long_giris": [
+      "Düşüş trendinde HA mumları küçülür ve renk yeşile döner; renk değişimi görüldüğü anda uzun girilir (s.11-12)"
+    ],
+    "short_giris": [
+      "Yükseliş trendinde HA mumları küçülür ve renk kırmızıya döner; renk değişimi görüldüğü anda kısa girilir (s.11-13, EUR/USD örneği)"
+    ],
+    "stop_loss": "Çok dar stop: 5-10 pip arası (s.12)",
+    "kar_al": "Mumun rengi tekrar değiştiğinde pozisyon kapatılır (s.12-14: 'ilk yeşil mum belirir ve pozisyonu kapat')",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Ekonomik verilerin açıklanması sırasında işlem yapılmaz; bu 'tamamen kumar' olarak tanımlanıyor (s.15)",
+      "Belirsiz trend (belirsiz HA grafiği) durumunda işlem yapılmaz (s.15)",
+      "Küçük aralıklar ve Merkez Bankası faiz kararları çevresinde işlem yapılmaz (s.15)",
+      "Çalışma zaman dilimi genellikle 1 dakika; yüksek oynaklıkta 30 sn veya 10 sn (s.15)"
+    ],
+    "pozisyon_risk": "Zarar durdurma ve pozisyon boyutu kontrolü. Kaybederken pozisyon boyutu orijinal boyutun %10'una kadar azaltılabilir; kazanırken pozisyon kontrollü artırılabilir (s.17).",
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Giriş ve çıkış kuralı (renk değişimi) mekanik; stop 5-10 pip. Ancak 'belirsiz trend' ve 'küçülen mumlar' yoruma açık; kitapta kesin gövde/gölge eşiği yok."
+    },
+    "belirsizlikler": [
+      "Trend ve küçülen mum için sayısal eşik yok",
+      "'Belirsiz HA' filtresi görsel",
+      "Stop 5-10 pip sabit; ATR karşılığı yok",
+      "Kitap sayısal kazanma oranı ya da kâr hedefi vermiyor"
+    ],
+    "uyumluluk_notu": "HA hesabı standart; hacim gerekmez. 1 dk scalp 1L3A'nın ≥5m şartına uymuyor; uyarlanması test edilmeli. Pip bazlı stop forex'e özgü.",
+    "varyantlar": [
+      "Fiyat hedefleri ile birlikte çıkış (teknik seviye ile HA teyidi) (s.14-15)"
+    ],
+    "anahtar_kelimeler": ["heikin-ashi", "renk-dönüşü", "karşı-trend", "1dk-scalp", "stop-5-10-pip", "para-yönetimi"]
+  }
+]

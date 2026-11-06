@@ -1,0 +1,53 @@
+[
+  {
+    "kart_id": "scalp__fiyat-eylemi-4-zaman-dilimi__eseckal",
+    "ad": "Fiyat Eylemi Scalper (H1/M30/M15/M5 Hizalanma ve Kapanis Ustu 3 Pip)",
+    "stil": "scalp",
+    "kaynak": {"pdf": "Price_Action_Scalper_10_sayfa.pdf", "sayfalar": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]},
+    "ozet": "Saat basinda, son H1, M30, M15 ve M5 mumlarinin dordu de yesil kapandiysa ve fiyat onceki kapanisin 3 pip ustuneciktiysa AL emri verilir; dort mum da kirmizi ve fiyat 3 pip alttaysa SAT. Saatin ilk 5 dakikasinda fiyat giris seviyesinin 3 pip otesine gecmezse islem yapilmaz.",
+    "kategori": "trend_takip",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "forex",
+    "zaman_dilimi": {"islem": "5m", "ust_filtre": "1h"},
+    "gostergeler": [{"ad": "Mum rengi", "parametreler": {"zaman_dilimleri": ["M5", "M15", "M30", "H1"]}}],
+    "long_giris": [
+      "Saat mumunun kapanisini bekle (saat basi)",
+      "H1 (son saat mumu), M30, M15 ve M5 son mumlarinin dordu de yesil (kapanis > acilis) kapanmis olmali",
+      "Fiyat, son kapanisin 3 pip uzerine ciktiginda piyasadan AL"
+    ],
+    "short_giris": [
+      "Saat mumunun kapanisini bekle (saat basi)",
+      "H1 (son saat mumu), M30, M15 ve M5 son mumlarinin dordu de kirmizi (kapanis < acilis) kapanmis olmali",
+      "Fiyat, son kapanisin 3 pip altina indiginde piyasadan SAT"
+    ],
+    "stop_loss": "Varsayilan (kitabin 1. secenegi, kisa vadeli scalping icin 'en iyi'): alis icin onceki 1 saatlik mumun en dusuk seviyesinin 2 pip altı; satis icin onceki 1 saatlik mumun en yuksek seviyesinin 2 pip ustu. Alternatifler: giris noktasindan sabit 20 pip (15 pip'te basabasa cekilir) veya ana yuksek/dusuk seviyelerin yakini.",
+    "kar_al": "Giris noktasindan sabit 30-40 pip (kitap: kar al her zaman zarar durdurmanin 2-3 kati olmali).",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Saatin ilk 5 dakikasinda fiyat giris seviyesinin 3 pip otesine gecmezse islem yok",
+      "Onemli haberlerin hemen oncesinde, sirasinda ve sonrasinda islem yok",
+      "Onerilen kurulum: ayni anda 2-4 ana cift, her cift icin M5, M15, M30 ve H1 grafigi"
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": "Kitap: islemlerin %75-80+'inin karli olmasi beklenebilir (genel beklenti, istatistik verilmemis).",
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Giris ve kar al kurallari sayisal; ancak stop seceneklerinden hangisinin kullanilacagi, kar al araliginin tek degeri ve 'yesil/kirmizi mum' tanimi tam verilmemis."
+    },
+    "belirsizlikler": [
+      "Stop icin 3 secenek var; yalnizca 1. secenek (onceki 1H mum uc noktasi ±2 pip) 'en iyi' olarak nitelendiriliyor. 3. secenekte 'ana yuksek/dusuk' tanimi yok",
+      "Kar al 30-40 pip araligi; hangi degerin secilecegi belirtilmemis",
+      "'Takip eden stop' tercihe bagli deniyor, kural verilmemis",
+      "Acik islem varken yeni saat sinyalinin nasil ele alinacagi tanimli degil",
+      "Kitap 'gunluk ticaret' icin daha uzun girisleri tartisacagini soyluyor; metinde bu ayrica tanimlanmamis",
+      "Yazar adi kitapta yok; yalnizca site adi ve Twitter (@eseckal) geciyor"
+    ],
+    "uyumluluk_notu": "5m ve ustu icin uyarlanabilir (M5/M15/M30/H1 filtreleri zaten var). Forex'e ozgu: pip olcusu ve saatin ilk 5 dakikasi zamanlamasi; haber takvimi gerekir. Hacim verisi gerekmiyor. Kripto/ABD hisse/emtia perpetual'larda pip yerine yuzde veya ATR ile yeniden tanimlanmali.",
+    "varyantlar": [
+      "Stop secenekleri: (1) onceki 1H mum uc noktasi ±2 pip (oneri); (2) giristen sabit 20 pip, 15 pipte basabas; (3) ana yuksek/dusuk seviyelerin yakini",
+      "Kar al: sabit 30-40 pip"
+    ],
+    "anahtar_kelimeler": ["mum-rengi", "coklu-zaman-dilimi", "h1", "m5", "m15", "m30", "forex", "pip", "saat-basi", "fiyat-eylemi", "kapanis-ustu-3-pip"]
+  }
+]

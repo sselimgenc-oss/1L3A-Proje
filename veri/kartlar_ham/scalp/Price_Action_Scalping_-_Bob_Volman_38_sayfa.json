@@ -1,0 +1,187 @@
+[
+  {
+    "kart_id": "scalp__blok-kirma__volman",
+    "ad": "Blok Kırma (BB) - sinyal hattı kırılımı",
+    "stil": "scalp",
+    "kaynak": {"pdf": "Price_Action_Scalping_-_Bob_Volman_38_sayfa.pdf", "sayfalar": [5, 6, 7, 8, 9, 10, 11, 12, 13, 14]},
+    "ozet": "Fiyatların dar bir dikey aralıkta sıkıştığı, üst ve/veya alt sınırı birden fazla kez test edilmiş bir çubuk bloğu (BB) oluşur. Bloğun sınırından çizilen yatay sinyal hattı kırıldığında kırılma yönünde işleme girilir. Kitapta blok, 20 EMA çevresinde ve trend geri çekilmesinin sonunda, güçlü trendin yatay duraklamasında ya da trendsiz piyasada görülür.",
+    "kategori": "kirilim",
+    "piyasa_rejimi": "herhangi",
+    "orijinal_piyasa": "forex",
+    "zaman_dilimi": {"islem": null, "ust_filtre": null},
+    "gostergeler": [{"ad": "EMA", "parametreler": {"periyot": 20}}],
+    "long_giris": [
+      "Son çubuk bloğunun üst sınırı yatay sinyal hattı olarak çizilir; blok bu seviyeye birden fazla kez dokunmuştur (kitapta 'en az altı eşit yükseklik' ve '7 eşit test' örnekleri var, s.10 ve s.13)",
+      "Fiyat sinyal hattını yukarı kırar; giriş kırılma yönündedir (kitap s.6: blok kırılmasının da görülmesi gerekir, kırılma olmadan giriş yok)"
+    ],
+    "short_giris": [
+      "Blok alt sınırı (sinyal hattı) aşağı kırılır; giriş kırılma yönündedir (kitap: blokların 'ters karşılıkları' da aynı mantıkta, s.10)"
+    ],
+    "stop_loss": null,
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Kırılmadan önce 'kopma öncesi gerginlik': bloğun içinde küçülen çubuklar ve dojiler (s.5-6, s.10)",
+      "Bloğun 20 EMA ile birlikte değerlendirilmesi: 20 EMA çubukları bloğun dışına iter (s.10)"
+    ],
+    "pozisyon_risk": "Kitabın genel kuralı (s.14): sürekli kârlıyken herhangi bir işlemde sermayenin %2'sinden fazlası riske atılmaz; işlem başına birim kurulumun öngörülebilirliğine göre ayarlanabilir. BB'ye özgü değildir.",
+    "iddia_edilen_performans": "Kitapta sayısal kazanma oranı ya da R:R yok. Örnek: Şekil 10.4 için 'on piplik kolay kâr' (s.14).",
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Sinyal hattı ve kırılma yönü yatay seviye olarak tanımlanabilir. Ancak 'dar aralık' ve 'sıkı gruplanma' için sayısal eşik yok; stop ve kâr al kuralı bu metinde yok; 'kopma öncesi gerginlik' yoruma açık."
+    },
+    "belirsizlikler": [
+      "Blok için 'dar dikey aralık' ve 'birkaç parça' ölçütü sayısal değil",
+      "Stop ve kâr al kuralı bu metin dökümünde yok; kitap 'başarısız bir ticaretin nerede kurtarılacağını' Bölüm 14'e bırakıyor (s.13)",
+      "Kırılma onayının görülme ölçütü tanımsız (s.6 'blok kırılması da görülmelidir')",
+      "Grafik zaman dilimi açıkça yazılmamış (örnekler 'yirmi dakika' ve 'bir buçuk saatlik' pencereler)"
+    ],
+    "uyumluluk_notu": "Fiyat eylemi tabanlı; hacim verisi gerekmez. Pip referansları forex'e özgü, 1L3A'da ATR ile ölçeklenmeli. ≥5m'de uygulanabilirlik kitapta test edilmemiş; yapının diğer piyasalarda da tanımlanabileceği kitapta genel olarak belirtiliyor.",
+    "varyantlar": [
+      "Trend geri çekilmesinin sonunda, 20 EMA yakınında oluşan blok (s.7)",
+      "Güçlü trendde yatay geri çekilme olarak blok (s.7)",
+      "Trendsiz piyasada tepe, dip veya ortada blok (s.7)",
+      "Ters BB: alt sınır kırılımı (s.10)"
+    ],
+    "anahtar_kelimeler": ["blok-kırma", "sinyal-hattı", "kırılım", "20ema", "price-action", "sıkışma", "yatay-bariyer"]
+  },
+  {
+    "kart_id": "scalp__yuvarlak-sayi-aralik-kirilimi__volman",
+    "ad": "Yuvarlak Sayı Aralık Kırılımı (RB)",
+    "stil": "scalp",
+    "kaynak": {"pdf": "Price_Action_Scalping_-_Bob_Volman_38_sayfa.pdf", "sayfalar": [19, 20, 21, 22, 23, 24, 25, 26, 27]},
+    "ozet": "Yuvarlak sayı (ör. 1.3120, 1.3150) etrafında yatay bir aralık oluşur; fiyat 20 EMA çevresinde sıkışarak bariyeri test eder. Sıkışmadan sonra bariyer kırılırsa kırılma yönünde işleme girilir. Kırılımın geri dönüp aralığa girmesi (alay/tease) geçerli sayılmaz; kırılımın takip edilip tutması beklenir.",
+    "kategori": "kirilim",
+    "piyasa_rejimi": "yatay",
+    "orijinal_piyasa": "forex",
+    "zaman_dilimi": {"islem": null, "ust_filtre": null},
+    "gostergeler": [{"ad": "EMA", "parametreler": {"periyot": 20}}, {"ad": "Yuvarlak sayı (00/50 seviyeleri)", "parametreler": {}}],
+    "long_giris": [
+      "Yuvarlak sayı yakınında yatay aralığın üst bariyeri birden fazla dokunuşla tanımlanır",
+      "Bariyerden önce fiyat 20 EMA ile bariyer arasında en az birkaç kez sekmeli ve sıkışır (s.22)",
+      "Bariyer yukarı kırılır; kırılma aralığın ortasından ya da 20 EMA bölgesinden başlamış olmalıdır (s.22); giriş kırılmayla birlikte piyasa emriyle yapılır (s.27)"
+    ],
+    "short_giris": [
+      "Aynı yapı aşağı yönde: alt bariyer aşağı kırılır ve tutarsa giriş kırılma anında (s.19 'ayna görüntüsü' örneği)"
+    ],
+    "stop_loss": "Kesin sayısal kural yok. Kitap, sıkışma seviyelerinin stop yerleşimi için 'mükemmel seviyeler' sağladığını belirtir (s.27).",
+    "kar_al": "Kesin kural yok. Örnek: 1.3120 yukarı kırılıp test sağlam çıkarsa bir sonraki durak çoğu zaman 1.3140 (20 piplik kademe, s.24).",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Kırılım yönünde sıkışma sonrası geçerli kırılım; ilk kırılım aralığa geri dönerse alay (tease) sayılır ve geçerli kabul edilmez (s.22-23, s.27)",
+      "Ekonomik haber bültenleri: sert tepki ve geniş spread riski, takvim kontrolü (s.28-29)"
+    ],
+    "pozisyon_risk": "Genel kural (s.14): sürekli kârlıyken işlem başına sermayenin %2'sinden fazlası riske atılmaz. RB'ye özgü değildir.",
+    "iddia_edilen_performans": "Sayısal kazanma oranı yok. Gözlem: yuvarlak sayı kırılımlarında 20 piplik kademeli hareketler (s.24).",
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Yuvarlak sayı ve aralık sınırları sayısal olarak tanımlanabilir; ancak 'yeterli sıkışma', geçerli kırılım ile alay kırılım ayrımı ve stop kuralı yoruma açık."
+    },
+    "belirsizlikler": [
+      "Yeterli sıkışma için sayısal ölçüt yok ('birkaç kez', 'tek pip' gibi ifadeler)",
+      "Alay (tease) ile geçerli kırılım ayrımı yalnızca örneklerle anlatılıyor",
+      "Stop ve kâr al sayısal değil",
+      "Kitap, başarısız yuvarlak sayı kırılımlarının istismar edilip edilemeyeceğini soruyor (s.19-20) ama bunun kuralını vermiyor",
+      "Grafik zaman dilimi belirtilmemiş"
+    ],
+    "uyumluluk_notu": "Yuvarlak sayılar forex'te belirgin; diğer piyasalarda seviye seçimi yeniden tanımlanmalı. Hacim gerekmez. Pip stop ve pip hedefleri forex'e özgü; ≥5m'de sinyal sıklığı test edilmeli.",
+    "varyantlar": [
+      "Alay (tease) kırılımı: bazen geçerli kırılım gibi takas edilebilir (s.27)",
+      "Aşağı yönlü kırılım (ayna, s.19)"
+    ],
+    "anahtar_kelimeler": ["yuvarlak-sayı", "aralık-kırılımı", "rb", "20ema", "alay-kırılım", "sıkışma", "stop-sıkışma"]
+  },
+  {
+    "kart_id": "scalp__ic-aralik-kirilimi__volman",
+    "ad": "İç Aralık Kırılımı (IRB)",
+    "stil": "scalp",
+    "kaynak": {"pdf": "Price_Action_Scalping_-_Bob_Volman_38_sayfa.pdf", "sayfalar": [30, 31, 32, 33, 34, 35]},
+    "ozet": "Daha büyük bir aralığın içinde, kitapta yaklaşık bir saatlik ölçekte, kapsüllenmiş küçük bir aralık (IRB) oluşur. İç aralığın üst veya alt sınırı en az beş eşit dokunuşla belirlenir; bu sınır kırıldığında kırılma yönünde işleme girilir. Kitapta buna 'IRB çıkışı' denir.",
+    "kategori": "kirilim",
+    "piyasa_rejimi": "yatay",
+    "orijinal_piyasa": "forex",
+    "zaman_dilimi": {"islem": null, "ust_filtre": null},
+    "gostergeler": [{"ad": "EMA", "parametreler": {"periyot": 20}}],
+    "long_giris": [
+      "İç aralığın üst sınırı en az beş eşit dokunuşla yatay sinyal hattı olarak tanımlanır (s.35)",
+      "Fiyat bu sınırı yukarı kırar; giriş kırılma anında yapılır, bu nedenle emir önceden konulabilir (s.32)"
+    ],
+    "short_giris": [
+      "İç aralığın alt sınırı en az beş eşit dokunuşla tanımlanır ve aşağı kırılır; giriş kırılma anında (IRB çıkışı, s.34)"
+    ],
+    "stop_loss": null,
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Yuvarlak sayı desteği veya direnciyle örtüşme (s.34-35)",
+      "Kırılımdan önce 20 EMA çevresinde dojilerin gerilim oluşturması (s.35)",
+      "Alay (tease) kırılım: iç sınırın ilk kırılması geri dönebilir, ayrım yapılmalı (s.31, s.34)"
+    ],
+    "pozisyon_risk": "Genel kural (s.14): sürekli kârlıyken işlem başına sermayenin %2'sinden fazlası riske atılmaz.",
+    "iddia_edilen_performans": "Sayısal kazanma oranı yok.",
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Dokunuş sayısı (5) ve kırılım sınırı tanımlanabilir. Ancak iç aralığın zaman penceresi, alay ayrımı ve stop/kâr al kuralı eksik."
+    },
+    "belirsizlikler": [
+      "İç ve dış aralığın sınırlandırma yöntemi (zaman penceresi, 'yaklaşık bir saat') sayısal değil",
+      "Stop kuralı yok; kitap sıkı stop yerine 'biraz saldırganlık' gerektiğini belirtiyor (s.35)",
+      "Kâr al yok",
+      "Alay ile geçerli kırılım ayrımı yoruma açık (s.31, s.34)"
+    ],
+    "uyumluluk_notu": "Fiyat eylemi; hacim gerekmez. 'Yaklaşık bir saat' penceresi ≥5m'de yaklaşık 12 mum eder; uyarlama test edilmeli. Kitap forex odaklı.",
+    "varyantlar": [
+      "Üst bariyer sıçraması ile ters yönde giriş (s.32)",
+      "Yuvarlak sayı desteğinde (ya da tersine çevrilmiş direnç) IRB (s.35)"
+    ],
+    "anahtar_kelimeler": ["iç-aralık", "irb", "kırılım", "eşit-dokunuş", "20ema", "yuvarlak-sayı", "alay-kırılım"]
+  },
+  {
+    "kart_id": "scalp__devrilme-noktasi-arb__volman",
+    "ad": "Devrilme Noktası / ARB - üç denemeden sonra bariyer kırılımı",
+    "stil": "scalp",
+    "kaynak": {"pdf": "Price_Action_Scalping_-_Bob_Volman_38_sayfa.pdf", "sayfalar": [36, 37]},
+    "ozet": "Bir bariyer üç kez denenip aşılamadığında (kitapta ARB) yapı zayıflar. Bariyerin kırılımına 'geriye bakmadan' girilir; stop, geri çekilmenin devrilme noktası (ilk noktalı çizgi) bölgesine konur.",
+    "kategori": "kirilim",
+    "piyasa_rejimi": "yatay",
+    "orijinal_piyasa": "forex",
+    "zaman_dilimi": {"islem": null, "ust_filtre": null},
+    "gostergeler": [{"ad": "Yatay bariyer (fiyat seviyesi)", "parametreler": {}}],
+    "long_giris": [
+      "Üst bariyer üç kez denenir ve aşılamaz (ARB, s.36)",
+      "Fiyat bariyeri yukarı kırar; giriş kırılma anında, geriye bakmadan (s.36)"
+    ],
+    "short_giris": [
+      "Alt bariyer üç kez denenir ve aşağı kırılır; giriş kırılma anında (ayna, s.36)"
+    ],
+    "stop_loss": "Devrilme noktasının (kitapta (1) çubuğunun) biraz altı veya üstü; kitap, daha yakın 'ekonomik' stop ile teknik olarak anlamlı seviye arasında seçim yapmayı önerir (s.36-37). Kesin pip veya ATR kuralı yok.",
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Bariyerin üç deneme ile test edilmiş olması (s.36)",
+      "20 EMA mutlak filtre değil; çoğu zaman yol gösterir ama daha güçlü teknik seviye öncelik alabilir (s.37)"
+    ],
+    "pozisyon_risk": "Genel kural (s.14): sürekli kârlıyken işlem başına sermayenin %2'sinden fazlası riske atılmaz.",
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Üç deneme sayılabilir ve giriş kırılım anı tanımlı; stop devrilme noktası (geri çekilmenin son dibi/tepesi) ile makul varsayımla kurala dökülebilir. Ancak kitapta tek örnek var ve kesin stop mesafesi yok."
+    },
+    "belirsizlikler": [
+      "Devrilme noktasının genel tanımı yok; yalnızca Şekil 14.9 ve DD örneğinde görülüyor",
+      "'Ekonomik' stop ile teknik seviye stop arasında seçim kuralı yok",
+      "'Üç deneme' sayımı belirsiz (ayrı dokunuşlar mı, kapanışlar mı)",
+      "Bölüm 1-9 ve DD/FB/SB tanımları bu metin dökümünde yok"
+    ],
+    "uyumluluk_notu": "Fiyat eylemi; hacim gerekmez. Stop mesafesi ATR ile ölçeklenmeli. ≥5m'de test edilmeli.",
+    "varyantlar": [
+      "Kısa yön (ayna): alt bariyer üç deneme sonrası kırılım (s.36)",
+      "DD kurulumunda devrilme noktası ve '20 EMA üzerinde uzun çizmeme' kuralı (s.37): DD tanımı bu metinde yok, ayrı kart çıkarılmadı"
+    ],
+    "anahtar_kelimeler": ["devrilme-noktası", "arb", "bariyer", "üç-deneme", "stop-yerleşimi", "kırılım"]
+  }
+]

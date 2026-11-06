@@ -1,0 +1,153 @@
+[
+  {
+    "kart_id": "scalp__basit-trend-ma-egim__connell",
+    "ad": "Basit Trend Scalper (Hareketli Ortalama Eğimi)",
+    "stil": "scalp",
+    "kaynak": {"pdf": "Scalping_Stratejileri_-_S_Connell_33_sayfa.pdf", "sayfalar": [7, 8, 9, 10, 11, 12]},
+    "ozet": "Hareketli ortalamanın (MA) eğimi trendin yönünü verir. Eğim yukarıysa ve Ask fiyatı hızlı MA'nın altındaysa alış, eğim aşağıysa ve Bid fiyatı hızlı MA'nın üstündeyse satış yapılır. Pozisyon birimlere bölünerek kademeli girilir. Kâr, her barda 8 pip ve üzeri olan pozisyonlar kapatılarak alınır.",
+    "kategori": "trend_takip",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "forex",
+    "zaman_dilimi": {"islem": "5m", "ust_filtre": null},
+    "gostergeler": [
+      {"ad": "SMA/EMA (hareketli ortalama, hızlı)", "parametreler": {"periyot": null, "not": "kitapta periyot verilmemiş; 'hızlı hareket eden ortalama'"}},
+      {"ad": "Hareketli ortalama eğimi (yavaş)", "parametreler": {"periyot": null, "not": "ΔMA = (MA_t2 - MA_t1)/(t2 - t1)"}}
+    ],
+    "long_giris": [
+      "Hareketli ortalama eğimi pozitif: ΔMA_T > 0 (trend yükseliş yönünde)",
+      "Alış (Ask) fiyatı, hızlı hareketli ortalamanın altında (Ask < MA_T)"
+    ],
+    "short_giris": [
+      "Hareketli ortalama eğimi negatif: ΔMA_T < 0 (trend düşüş yönünde)",
+      "Satış (Bid) fiyatı, hızlı hareketli ortalamanın üstünde (Bid > MA_T)"
+    ],
+    "stop_loss": null,
+    "kar_al": "Her barda (bar kapanışı/tik kontrolü) kâr seviyesi 8 pip veya üzerinde olan pozisyonlar o an kapatılır; sabit TP yerine eşik kontrolü.",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Trend yönü yalnızca ΔMA işaretiyle belirlenir",
+      "Kitap takip eden stop'u (trailing stop) bu stratejide olumsuz buluyor ve kullanmıyor"
+    ],
+    "pozisyon_risk": "Standart 1 lot yerine 0,1 lotluk 10 birim halinde kademeli giriş (ortalama); kitap tek blok işlemi önermiyor.",
+    "iddia_edilen_performans": "Geri testler (MetaTrader, M5): EURUSD 11 yıl: 26.574 işlem, net kâr 18.118,16 $, ort. kâr işlemi 11,3 pip, ort. zarar işlemi -7,6 pip, 4,5 pip/gün. GBPJPY 2 yıl: 8.875 işlem, 6.803,00 $, 10,5 / -7,3 pip. GBPUSD 2 yıl: 9.412 işlem, 6.777,64 $, 10,7 / -7,6 pip. USDJPY 2 yıl: 9.184 işlem, 4.987,78 $, 10,4 / -7,4 pip. (Kitap: 8 pip kâr alma ile ort. kâr işlemi 10,4 pip; sabit 8 pip stop ile ort. zarar 7,3 pip.)",
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "ΔMA işareti ve fiyatın MA'ya göre konumu mekanik. Hızlı ve yavaş MA periyotları, kademe büyüklüğü ve bar bazlı kontrol zamanlaması kitapta açıkça verilmemiş; varsayım gerekir."
+    },
+    "belirsizlikler": [
+      "Hızlı ve yavaş hareketli ortalama periyotları ve türü (SMA/EMA) kitapta verilmemiş",
+      "Eğim için kullanılan t1 ve t2 aralığı belirtilmemiş",
+      "Kademeli girişte her 0,1 lotun hangi koşulda açılacağı (her bar mı, her sinyal mi) net değil",
+      "Kâr kontrolünün 'her bar' mı 'her tik' mi olduğu net değil",
+      "Test spread ve komisyon varsayımı bu bölümde belirtilmemiş (diğer bölümde 2,1 pip kullanılmış)",
+      "Sabit 8 pip stop yalnızca karşılaştırma için test edilmiş; stratejinin stop kuralı yok"
+    ],
+    "uyumluluk_notu": "1L3A için: M5'te test edilmiş ve forex (majör paritelerde) uygulanmış; 5m için uygun. Pip cinsindeki 8 pip kâr eşiği ATR veya yüzde ile uyarlanmalı. Hacim verisi gerekmez. Kripto/ABD hisse/emtia kitapta test edilmemiş; ayrı test gerekir. Kitabın takip eden stop eleştirisi kendi testine dayanıyor, doğrulanmamış.",
+    "varyantlar": [
+      "Kâr eşiğinin 8 pip dışında (kitap 'örneğin 8 pip veya üzeri' diyor)",
+      "Sabit 8 pip stop karşılaştırması (kitapta sadece test, uygulama değil)"
+    ],
+    "anahtar_kelimeler": ["hareketli-ortalama", "egim", "trend", "kademeli-giris", "ortalama-giris", "8-pip", "m5", "forex", "ask-bid", "scalp"]
+  },
+  {
+    "kart_id": "scalp__geri-cekilme-bollinger__connell",
+    "ad": "Geri Çekilme Scalping (Bollinger Aşırı Alım/Satım)",
+    "stil": "scalp",
+    "kaynak": {"pdf": "Scalping_Stratejileri_-_S_Connell_33_sayfa.pdf", "sayfalar": [13, 14, 15, 16, 17, 18, 19]},
+    "ozet": "Fiyat dış Bollinger bandına (aşırı alım veya satım) değdikten ve ardından orta çizgiye doğru geri çekilmeye başladıktan sonra, geri çekilme yönünde işlem açılır. Stop bant genişliğinin yarısını aşmaz, kâr hedefi bant genişliğinin yaklaşık %5'i (genelde 1-6 pip). Düşük getirili, yatay piyasa stratejisi.",
+    "kategori": "ortalamaya_donus",
+    "piyasa_rejimi": "yatay",
+    "orijinal_piyasa": "forex",
+    "zaman_dilimi": {"islem": "1m veya 5m", "ust_filtre": null},
+    "gostergeler": [
+      {"ad": "Bollinger Bantları", "parametreler": {"periyot": null, "sapma": null, "not": "kitapta belirtilmemiş"}}
+    ],
+    "long_giris": [
+      "Fiyat alt Bollinger bandının eşiği içinde veya altında (aşırı satım); kitap 'alt bandın eşiğinin içinde' diyor",
+      "Bu çubuktan sonra fiyat orta çizgiye doğru geri çekilmeye başlamış",
+      "Koşullar tekrar oluşursa ek alım emri açılabilir (kitapta art arda 4 alış örneği var)"
+    ],
+    "short_giris": [
+      "Fiyat üst Bollinger bandının eşiği içinde veya üstünde (aşırı alım)",
+      "Bu çubuktan sonra fiyat orta çizgiye doğru geri çekilmeye başlamış",
+      "Koşullar tekrar oluşursa ek satım emri açılabilir"
+    ],
+    "stop_loss": "Bollinger bant genişliğinin yarısını aşmayacak şekilde (kitap örneği: bant genişliği 20 pip ise stop için 10 pip'in yarısı; metin tutarsız, belirsizlikler'e bak)",
+    "kar_al": "Bant genişliğinin yaklaşık %5'i (genelde 1-6 pip; piyasa oynaklığına göre). Örnekte 6 pip hedef kullanılmış.",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Yatay (aralıklı) piyasada en iyi; trend piyasasında işlem sınırlanır (kitap bir 'aralık bulma aracı' öneriyor)",
+      "Yüksek kaldıraç kullanılmaz (düşük getirili strateji)",
+      "Düşük spread'li paritelerde (EURUSD, GBPUSD, EURGBP) işlem önerilir"
+    ],
+    "pozisyon_risk": "10.000$ bakiye başına birden fazla standart lot yok; birim 0,01 lot; açık işlem sayısı üst sınırı 100; ortalama 5 işlem/gün.",
+    "iddia_edilen_performans": "Testler (spread 2,1 pip): GBP/USD M5 285 işlem, 1.689 pip; EUR/USD M1 394 işlem, 2.043 pip; EUR/GBP M5 270 işlem, 1.568 pip; ortalama 5 işlem/gün ve 25,9 pip/gün (kitap tablosu). Test süresi ve kanıt yöntemi ayrıntılı değil.",
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Bant dokunma, orta çizgiye geri çekilme, stop (bant genişliğinin yarısı) ve hedef (bant genişliğinin %5'i) ölçülebilir. 'Gerçek zamanlı gösterge', 'aralık bulma aracı' ve bant parametreleri eksik; varsayım gerekir."
+    },
+    "belirsizlikler": [
+      "Bollinger periyot ve sapma değerleri kitapta belirtilmemiş",
+      "Stop kuralı metni tutarsız: '20 pip bant genişliği için durdurma 10 pip'in yarısına' ifadesi 5 pip mi 10 pip mi demek belirsiz",
+      "Kâr hedefi için '%5' ve '1-6 pip' birlikte veriliyor; hangisinin öncelikli olduğu yoruma açık",
+      "'Gerçek zamanlı' girdi ve 'aralık bulma aracı' tanımsız",
+      "Geri çekilmenin minimum mesafesi veya süresi tanımsız",
+      "Test süreleri ve veri kaynağı (tikler, spread) ayrıntılı değil"
+    ],
+    "uyumluluk_notu": "1L3A için: M1 ve M5'te uygulanabilir; kitap daha yüksek zaman dilimine uyarlanabilir diyor. Forex'e özgü: pip hedefi ve spread (2,1 pip) bağımlılığı; düşük spread'li broker gerekir. Kripto/hisse/emtia için bant genişliği yüzdesi kullanılabilir; ayrı test gerekir. Hacim verisi gerekmez.",
+    "varyantlar": [
+      "M1 veya M5 zaman dilimi (kitap ikisini de test etmiş)",
+      "Ek emir: koşullar tekrar oluşunca yeni pozisyon açma (birden fazla giriş)",
+      "Satış ve alış tarafı simetrik (ayna)"
+    ],
+    "anahtar_kelimeler": ["bollinger", "geri-cekilme", "ortalamaya-donus", "yatay-piyasa", "asiri-alim-satim", "stop-yarim-bant", "kar-bant-yuzde", "m1", "m5", "forex", "scalp"]
+  },
+  {
+    "kart_id": "scalp__otokorelasyon-mum-deseni__connell",
+    "ad": "Otokorelasyon ile Mum Deseni Benzerliği (Desen Tabanlı Scalp)",
+    "stil": "scalp",
+    "kaynak": {"pdf": "Scalping_Stratejileri_-_S_Connell_33_sayfa.pdf", "sayfalar": [19, 20, 21, 22, 23]},
+    "ozet": "Ardışık çubukların orta fiyat farklarının (delta) dizisi, bir çubuk kaydırılmış kendisiyle karşılaştırılarak otokorelasyon hesaplanır. Yüksek pozitif değer desen devamlılığı, negatif değer desenin kendini tersine çevirmesi anlamına gelir. Kitap bu bilgiyle yön seçmeyi tarif ediyor ancak eşik ve giriş/çıkış kuralı vermiyor.",
+    "kategori": "formasyon",
+    "piyasa_rejimi": "herhangi",
+    "orijinal_piyasa": "forex",
+    "zaman_dilimi": {"islem": "belirtilmemiş (herhangi zaman ölçeği; kitap M1 ve M5 örnekleri kullanıyor)", "ust_filtre": null},
+    "gostergeler": [
+      {"ad": "Otokorelasyon", "parametreler": {"gecikme_N": 1, "pencere": null, "not": "N=1 örnek; N ve pencere uzunluğu okuyucuya bırakılmış"}}
+    ],
+    "long_giris": [
+      "Kitap yön eşleşmesini tarif ediyor: benzerlik (pozitif otokorelasyon) devam beklentisi, farklılık (muhalif yaklaşım) ters yön beklentisi. Kesin eşik ve sinyal kuralı verilmemiş",
+      "Alış için kesin giriş koşulu kitapta yok"
+    ],
+    "short_giris": [
+      "Satış için kesin giriş koşulu kitapta yok; benzerlik/farklılık yorumu yukarıdaki gibi"
+    ],
+    "stop_loss": null,
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Kitap, örnek olarak yalnızca 'en az bir veya iki devamlılık mumunun doğru yönde olma olasılığı yüksek' işlemleri aramayı öneriyor (sayısal değil)"
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": "Kitapta bu yöntem için sayısal performans yok; yalnızca 'son derece yararlı' ifadesi.",
+    "kodlanabilirlik": {
+      "puan": 0,
+      "gerekce": "Otokorelasyon hesabı tarif ediliyor, ancak sinyal eşiği, pencere uzunluğu, N seçimi ve giriş/çıkış kuralları yok; kitap sezgisel yorum bırakıyor."
+    },
+    "belirsizlikler": [
+      "Otokorelasyon eşiği (hangi değerde 'yüksek' veya 'düşük' sayılır) yok",
+      "Hesaplama penceresi uzunluğu ve N seçimi okuyucuya bırakılmış",
+      "Alış/satış giriş koşulu ve çıkış kuralları yok",
+      "Kitap 'benzerlik' ve 'farklılık' yorumunu, sinyal yönüne nasıl çevrileceğini açıkça vermiyor",
+      "Örnek grafikler yorumlanmış ama koşul olarak tanımlanmamış"
+    ],
+    "uyumluluk_notu": "1L3A için: hesaplama kodlanabilir (delta ve otokorelasyon) ancak kitap kuralı tamamlamıyor. Kodlanabilirlik 0; önce bağımsız eşik araştırması gerekir. Forex'e özgü değil; kripto/hisse/emtia için de aynı veri formatı kullanılabilir.",
+    "varyantlar": [
+      "Muhalif (farklılığa göre ters) ve muhalif olmayan (benzerliğe göre) yaklaşımlar; kitap ikisini de anlatıyor"
+    ],
+    "anahtar_kelimeler": ["otokorelasyon", "desen-benzerligi", "entropi", "mum-deseni", "delta", "muhalif", "scalp", "eşik-yok", "kodlanamaz"]
+  }
+]

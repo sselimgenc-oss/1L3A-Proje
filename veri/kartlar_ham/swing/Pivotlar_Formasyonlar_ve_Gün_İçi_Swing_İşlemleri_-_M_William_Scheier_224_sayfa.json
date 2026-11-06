@@ -1,0 +1,947 @@
+[
+  {
+    "kart_id": "swing__orb-3-bar__scheier",
+    "ad": "3-Bar ORB Kurulumu (Açılış Aralığı, ilk üç 1 dk çubuk)",
+    "stil": "swing",
+    "kaynak": {"pdf": "Pivotlar_Formasyonlar_ve_Gün_İçi_Swing_İşlemleri_-_M_William_Scheier_224_sayfa.pdf", "sayfalar": [22, 23, 24, 25, 26]},
+    "ozet": "Açılıştan sonraki ilk üç 1 dakikalık çubuk ardışık olarak mini bir trend oluşturur (aşağı trendde daha düşük yüksek ve daha düşük düşük). Dördüncü çubuk üçüncü çubuğun düşüğünü kırarsa kurulum geçersiz sayılır; geçerliyse fiyatın ters yönde kırılması beklenir ve kırılım için tik ötesi stop-giriş konur.",
+    "kategori": "kirilim",
+    "piyasa_rejimi": "herhangi",
+    "orijinal_piyasa": "vadeli",
+    "zaman_dilimi": {"islem": "1m", "ust_filtre": null},
+    "gostergeler": [{"ad": "ORB", "parametreler": {"bar_sayisi": 3, "zaman_dilimi_dk": 1}}],
+    "long_giris": [
+      "Seans açılışından itibaren ilk üç 1 dk çubuk aşağı yönlü mini trend yapar: her çubuk bir öncekinden daha düşük yüksek ve daha düşük düşük üretir",
+      "Dördüncü 1 dk çubuk üçüncü çubuğun düşüğünü kırmamalıdır (kırarsa kurulum ihlal edilir ve işlem yapılmaz)",
+      "Kurulum geçerliyse üç çubuk yapısının orta noktasının 1 tik üstüne alım-dur emri konur (referans noktası metinde net değil; belirsizliklere bakınız)"
+    ],
+    "short_giris": [
+      "Ayna kurulum: üç çubuk ardışık daha yüksek yüksek ve daha yüksek düşük üretir",
+      "Dördüncü 1 dk çubuk üçüncü çubuğun yükseğini aşmamalıdır (aşarsa kurulum ihlal edilir)",
+      "Kurulum geçerliyse üç çubuk yapısının orta noktasının 1 tik altına satım-dur emri konur"
+    ],
+    "stop_loss": null,
+    "kar_al": "Birinci birim kitabın verdiği küçük sabit kârla çıkar (kitap sözleşmeye özgü rakam verir: mini Russell 0,4 puan, mini Dow 7 puan, E-mini NASDAQ 1,75 puan). İkinci birimin stopu, birinci birimin kârına eşdeğer bir risk miktarına taşınır (s.25). Yüzde veya ATR karşılığı yoktur.",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Yalnızca açılıştan sonraki ilk üç 1 dk çubuk (kitapta NYSE nakit açılışı 09:30 ET)",
+      "Kitap TF (mini Russell) tercih eder; ES ile kullanılmaz; YM ve NQ 'tatmin edici' bulunur (s.25-26)"
+    ],
+    "pozisyon_risk": "Bir birim = sabit sayıda sözleşme (acemi için 1 sözleşme). İki birimli çıkış yönetimi önerilir (s.25-26). Sayısal risk yüzdesi yok.",
+    "iddia_edilen_performans": "Kitap 'çok yüksek bir tutarlılık' iddia eder ancak sayısal oran vermez; bu kurulum ayda bir veya iki kereden fazla oluşmaz (s.24).",
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Üç çubuk karşılaştırması, dördüncü çubuk ihlal kuralı ve tik ötesi emir açıkça tanımlı. Giriş referans noktası ('üç çubuğun ortası') ve başlangıç stop seviyesi metinde net değil; birim kâr hedefleri sözleşmeye özgü puan değerleridir."
+    },
+    "belirsizlikler": [
+      "Giriş referansı 'üç aşağı yönlü çubuğun ortası' ifadesinin tam anlamı kitapta net değil (çubuk aralığının orta noktası mı, gövde ortası mı)",
+      "Başlangıç stop seviyesi kitapta belirtilmemiş",
+      "Ters yön simetrisi kitapta 'desen her iki yönde de çalışır' ile belirtilir; referans noktasının aynasının alınması varsayımdır",
+      "Birinci birim kâr hedefleri sözleşme başına puan cinsindendir; yüzde ya da ATR karşılığı kitapta yoktur"
+    ],
+    "uyumluluk_notu": "Desen 1 dk çubuk ve açılış anı gerektirir; 5 dk ve üzerinde üç çubuk yapısı anlamını kaybeder. Forex ve kripto 7/24 işlem gördüğü için NYSE açılışı tanımsızdır; bir seans anchor'u (ör. ABD nakit açılışı) açıkça seçilmek zorundadır. Hacim verisi gerekmez. Kripto ve perpetual piyasalarda yalnızca seans çapası uyarlanarak test edilebilir; kitap endeks vadeli işlemler için kalibre edilmiştir.",
+    "varyantlar": [
+      "Ayı kurulumunun aynası (üç yüksek yüksek ve daha yüksek düşük), kitapta 'bu deseni tersine çevirin' olarak verilir (s.25)",
+      "Aynı mantık ORB Flaması (kart orb-flama) ve Eşleşen Yüksek/Düşük (kart orb-eslesen) ile ayrı kartlarda ele alınır"
+    ],
+    "anahtar_kelimeler": ["orb", "acilis-araligi", "3-bar", "mini-trend", "1-dk", "kirilim", "kurulum-ihlali", "tik-emir"]
+  },
+  {
+    "kart_id": "swing__orb-flama__scheier",
+    "ad": "ORB Flaması (KÜRE Flaması) Çift Taraflı Kırılım",
+    "stil": "swing",
+    "kaynak": {"pdf": "Pivotlar_Formasyonlar_ve_Gün_İçi_Swing_İşlemleri_-_M_William_Scheier_224_sayfa.pdf", "sayfalar": [27, 28, 29]},
+    "ozet": "Açılış aralığına (ORB) yakın küçük bir 1 dk flama oluşur. Flamanın en yüksek ve en düşük seviyeleri paranteze alınır ve her iki yöne stop-giriş emri konur; hangi taraf kırılırsa o yönde işlem açılır. Kitap bu kırılımı günün trendi için erken ve güçlü bir sinyal sayar.",
+    "kategori": "kirilim",
+    "piyasa_rejimi": "herhangi",
+    "orijinal_piyasa": "vadeli",
+    "zaman_dilimi": {"islem": "1m", "ust_filtre": null},
+    "gostergeler": [{"ad": "ORB", "parametreler": {"zaman_dilimi_dk": 1}}],
+    "long_giris": [
+      "Flama: ilk yüksek dip tekrar yukarı döner ancak daha yüksek bir tepe oluşturamaz, daha düşük bir tepe yapıp yeniden içeri döner (kitap: her dönüşte mum renginin ters trend yönüne dönmesi ya da doji)",
+      "Flamanın en yüksek seviyesinin 1 veya 2 tik üstüne alım-dur emri konur",
+      "Aynı anda flamanın en düşük seviyesinin 1 veya 2 tik altına satım-dur emri konur (çift tetik; biri dolduğunda diğeri iptal edilir)"
+    ],
+    "short_giris": [
+      "Yukarıdaki çift tetik emirlerin aynısı; hangi taraf dolarsa o yönde pozisyon açılır",
+      "Kitapta ikinci yön için ayrı kural yoktur; çift tetik simetriktir"
+    ],
+    "stop_loss": null,
+    "kar_al": "Kitapta sayısal hedef yok. Kitap sözleşme yönetimini 3-Bar ORB ile aynı mantıkta anlatır: ilk birim erken küçük kârla çıkar, kalan birim takip eder (s.27-28, 31).",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Flama açılış aralığına (ORB) yakın oluşmalı",
+      "Büyük flama ORB'nin üstünde veya altında tamamlanırsa giriş, günün en yüksek veya en düşük seviyesinin ötesinden de yapılabilir (kitap alternatifi, s.28)"
+    ],
+    "pozisyon_risk": "Birim yönetimi var; sayısal risk yüzdesi yok (s.27-28).",
+    "iddia_edilen_performans": "Kitap bu modeli 'ikinci en başarılı ORB kopuş modeli' olarak niteler; sayısal oran verilmemiştir (s.27).",
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Çift taraflı stop-giriş mekaniği açık. Flama tanımı (en az iki başarısız tepe/dip, renk değişimi veya doji) kısmen nicel; 'daha yüksek tepe yapamaz' ve flama büyüklüğü yoruma açık."
+    },
+    "belirsizlikler": [
+      "Flamanın minimum mum sayısı, maksimum genişliği ve ORB'ye uzaklık sınırı tanımsız",
+      "Tik ötesi mesafenin (1 veya 2 tik) seçimi kitapta değişken",
+      "Kitap flamayı paranteze almak için trend çizgisi alternatifi de sunar; hangisinin kullanılacağı net değildir",
+      "Stop ve kâr hedefi kuralı kitapta yoktur"
+    ],
+    "uyumluluk_notu": "Kitap 1 dk çerçeveyi zorunlu sayar; 1L3A için 1 dk veri gerekir. ORB çapası forex ve kripto için tanımsızdır (seans çapası gerekir). Hacim gerekmez. Çift stop-giriş emri, düzensiz kırılımlarda (whipsaw) kayıp üretebilir; kripto ve perpetual için spread/kayma testi gerekir.",
+    "varyantlar": [
+      "Trend çizgisi ile paranteze alma (kitap alternatifi, s.28)",
+      "Büyük flama ORB'nin ötesinde tamamlanırsa günün uç seviyesinin ötesinden giriş (s.28)"
+    ],
+    "anahtar_kelimeler": ["orb", "flama", "cift-stop-giris", "kirilim", "1-dk", "sikisma", "doji"]
+  },
+  {
+    "kart_id": "swing__orb-eslesen-yuksek-dusuk__scheier",
+    "ad": "ORB Eşleşen Yüksek/Düşük Ters Yön Kırılımı",
+    "stil": "swing",
+    "kaynak": {"pdf": "Pivotlar_Formasyonlar_ve_Gün_İçi_Swing_İşlemleri_-_M_William_Scheier_224_sayfa.pdf", "sayfalar": [29, 30, 31]},
+    "ozet": "Fiyat ORB'nin bir ucunu kırmaya çalışır ancak en az iki ayrı 1 dk çubuk, ilk aşırılığa tam olarak uyan bir yüksek veya düşükte başarısız olursa (eşleşen uç), ters yönde kırılım olasılığı yüksek kabul edilir ve ters uçtan stop-giriş ile işleme girilir.",
+    "kategori": "kirilim",
+    "piyasa_rejimi": "herhangi",
+    "orijinal_piyasa": "vadeli",
+    "zaman_dilimi": {"islem": "1m", "ust_filtre": null},
+    "gostergeler": [{"ad": "ORB", "parametreler": {"zaman_dilimi_dk": 1}}],
+    "long_giris": [
+      "Fiyat ORB'nin alt sınırını (ilk aşağı aşırılığı) kırmaya çalışır; en az iki ayrı 1 dk çubuk bu alt uca tam olarak uyan düşük yapar ve kırılım başarısız olur",
+      "Ters yöndeki kırılım için, yukarı yönde ORB üst sınırının veya eşleşen yükseğin 1 tik üstüne alım-dur emri konur",
+      "Giriş, eşleşen çubukların oluşmasından hemen sonra yapılır (kitap: bu 1 dk içinde hızla kurulmalı)"
+    ],
+    "short_giris": [
+      "Ayna: fiyat ORB üst sınırını yukarı kırmaya çalışır, en az iki ayrı 1 dk çubuk tam olarak eşleşen yüksek yapar ve kırılım başarısız olur",
+      "Ters yönde satım-dur emri eşleşen düşüğün veya ORB alt sınırının 1 tik altına konur"
+    ],
+    "stop_loss": null,
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Eşleşme: en az iki ayrı 1 dk çubuk, ilk aşırılığa 'tam olarak' uyan fiyatta",
+      "Kitap, eşleşen uçların ilk iki 1 dk çubuk olmak zorunda olmadığını ve her zaman tam ORB sınırında olmadığını belirtir; ancak ORB'ye yakın ve açılıştan birkaç dakika sonra oluşmalıdır (s.30)"
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": "Kitap 'başarılı olma olasılığı yüksektir' der; sayısal oran verilmemiştir (s.29).",
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Eşleşme sayısı (en az iki) ve ters uç stop-giriş mekaniği açık. 'Tam olarak uyan' tolerans değeri tanımsız; eşleşen uç seçimi görsel."
+    },
+    "belirsizlikler": [
+      "'Tam olarak uyan' fiyat toleransı (tik veya yüzde) kitapta yok",
+      "Ters yön emrinin hangi seviyeye (eşleşen uç mu, ORB sınırı mı) bağlanacağı metinde iki farklı şekilde geçer",
+      "Stop ve hedef kuralı yoktur"
+    ],
+    "uyumluluk_notu": "1 dk çubuk ve açılış çapası gerektirir (ORB kartı ile aynı uyarlama sorunu). Forex ve kripto için seans tanımı gerekir. Hacim verisi gerekmez. Bu kurulum sık tetiklenirse whipsaw riski yüksektir; test edilmelidir.",
+    "varyantlar": [
+      "ORB ile ilk aşırılık yerine günün önceki yüksek ya da düşük seviyesi baz alınabilir (kitap bu uygulamayı açıkça önermez; uyarlama varsayımıdır)"
+    ],
+    "anahtar_kelimeler": ["orb", "eslesen-yuksek-dusuk", "ters-kirilim", "1-dk", "stop-giris", "basarisiz-kirilim"]
+  },
+  {
+    "kart_id": "swing__kopma-pivot-ledge__scheier",
+    "ad": "Kopma Pivotu (Pivot Ledge) Yeniden Test Girişi",
+    "stil": "swing",
+    "kaynak": {"pdf": "Pivotlar_Formasyonlar_ve_Gün_İçi_Swing_İşlemleri_-_M_William_Scheier_224_sayfa.pdf", "sayfalar": [37, 38, 39, 40, 41]},
+    "ozet": "Fiyatın dik ve hızlı hareketinin omzunda oluşan seviye (Pivot Ledge) gelecekteki destek veya direnç olarak işaretlenir. Fiyat bu seviyeye geri döndüğünde ve reddettiğinde, reddetme yönünde işlem açılır.",
+    "kategori": "destek_direnc",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "vadeli",
+    "zaman_dilimi": {"islem": "1m", "ust_filtre": null},
+    "gostergeler": [],
+    "long_giris": [
+      "Aşağı yönlü dik hareketin omzunda Pivot Ledge seviyesi belirlenir; fiyat bu seviyeye aşağıdan geri döner ve destek olarak reddeder",
+      "Reddetme yönünde (yukarı) alım-dur veya limit girişi, Ledge seviyesinin hemen üstünde",
+      "Kitap yalnızca bu tür kopuşun ilk yeniden testinin güvenilir olduğunu belirtir (ilk dokunuş)"
+    ],
+    "short_giris": [
+      "Yukarı yönlü dik hareketin omzunda Pivot Ledge oluşur; fiyat yukarıdan geri gelir ve direnç olarak reddeder",
+      "Reddetme yönünde (aşağı) satım-dur emri Ledge seviyesinin altında"
+    ],
+    "stop_loss": null,
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Kopuşun dikliği (sert hızlanma) gerekli; kitap sert ve dik hareketi vurgular",
+      "Kopma Turu (Break-away Lap, tik boşluğu) ile birlikte görülürse yeniden test gücü artar (s.39-41)"
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Omuz noktası ve 'sert hızlanma' görsel değerlendirmedir. Ledge fiyatının hangi mumdan alınacağı, giriş onayı ve stop kuralı kitapta tanımlı değildir."
+    },
+    "belirsizlikler": [
+      "Ledge fiyatı: omuzdaki son mumun uç noktası mı, aralığın orta noktası mı kitapta net değil",
+      "'Sert hızlanma' ve 'dik' ölçüsü (ATR katı vb.) yok",
+      "Yeniden test için kaç tik ya da hangi tolerans kabul edilir, tanımsız",
+      "Stop ve hedef kuralı yoktur"
+    ],
+    "uyumluluk_notu": "Görsel pivot yaklaşımı 1L3A'da ATR veya hacim tabanlı 'sert hareket' tanımıyla kodlanabilir. Forex ve kripto'da uygulanabilir; ancak tarihsel fiyatlarda omuz tespiti yorumludur. Hacim gerekmez (kitap hacim kullanmaz).",
+    "varyantlar": [
+      "Kopuş Turu (Break-away Lap) ile birlikte aynı mantık; eksik tik yeniden test edilirse giriş (s.39-41)"
+    ],
+    "anahtar_kelimeler": ["pivot-ledge", "kopma-pivotu", "yeniden-test", "destek-direnc", "kopus-turu"]
+  },
+  {
+    "kart_id": "swing__bosluk-kapanisi-y-kapanis__scheier",
+    "ad": "Boşluk Kapanışı (Gap-Close) / Y-Kapanış Seviyesinden Boşluk Yönünde Giriş",
+    "stil": "swing",
+    "kaynak": {"pdf": "Pivotlar_Formasyonlar_ve_Gün_İçi_Swing_İşlemleri_-_M_William_Scheier_224_sayfa.pdf", "sayfalar": [45, 46]},
+    "ozet": "Açılış boşluğu varsa fiyat boşluğu kapatmaya gider. Kitap, boşluk kapanışını başlı başına ters yön işlemi yerine, Y-Kapanış seviyesinin orijinal boşluk yönünde bir giriş noktası olarak kullanmayı önerir: fiyat boşluk kapanış seviyesine ulaşıp orada reddederse, boşluk yönünde işlem açılır.",
+    "kategori": "destek_direnc",
+    "piyasa_rejimi": "herhangi",
+    "orijinal_piyasa": "vadeli",
+    "zaman_dilimi": {"islem": "1m", "ust_filtre": null},
+    "gostergeler": [{"ad": "Y-Kapanis", "parametreler": {}}],
+    "long_giris": [
+      "Açılış yukarı boşluklu (açılış > Y-Kapanış) ise: fiyat boşluğu kapatmak için Y-Kapanış seviyesine iner ve orada reddederse (yukarı döner) uzun pozisyon açılır (boşluk yönü)",
+      "Giriş yönü kitapta orijinal boşluk yönüne ilişkin tarif edilir; bu bölüm metninde iki kullanım (boşluk yönünde giriş ve Gap-n-Go) birlikte geçer",
+      "Diğer ticaret modeli giriş filtresi ile birlikte kullanılır (kitap bu filtreleri belirtmez)"
+    ],
+    "short_giris": [
+      "Açılış aşağı boşluklu (açılış < Y-Kapanış) ise: fiyat boşluğu kapatmak için Y-Kapanış seviyesine çıkar ve orada reddederse (aşağı döner) kısa pozisyon açılır (boşluk yönü)",
+      "Kitapta 'tersine çevirme' pozisyonunun kısmi çıkışı ile kalan pozisyonun net başabaş stopa taşınması önerilir (s.46)"
+    ],
+    "stop_loss": "Kitapta sabit stop tarifi yoktur. Kısmi çıkış sonrası kalan pozisyonun stopu net başabaşa çekilir (s.46).",
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Boşluk büyüklüğü: kitap istatistiğinde en az 2 puan (TF, 90 gün)",
+      "Y-Kapanış seviyesine temas, boşluk kapanışının ardından (kitap: temas noktasından bir veya daha fazla puan içinde tersine dönüş)"
+    ],
+    "pozisyon_risk": "Çoklu sözleşmeli pozisyonda kısmi çıkış önerilir (s.46). Sayısal risk yok.",
+    "iddia_edilen_performans": "TF, Haziran 2013 (90 gün) örneği: 39 boşluk (en az 2 puan); bunların 21'i Y-Kapanış temasından itibaren 1 puan ya da daha fazla tersine döndü; 8'i tersine dönemedi (s.45-46). Kitap bu yaklaşımın Gap-Close'a göre daha tutarlı olduğunu söyler; sayısal getiri verilmemiştir.",
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Boşluk ve Y-Kapanış seviyesi nicel. Ancak 'diğer ticaret modeli giriş filtreleri' kitapta tanımsız, giriş yönü metinde iki kez farklı tarif edilir ve istatistik tutarsızdır."
+    },
+    "belirsizlikler": [
+      "'Diğer giriş filtreleri' kitapta tanımsız (kitap, ayrı bölümlerdeki kalıpları kastediyor olabilir)",
+      "Temas toleransı ('bir veya daha fazla nokta içinde') zaman dilimi ve tik cinsinden değil",
+      "İstatistik tutarsızlığı: kapanış dağılımı 6 + 9 + 11 + 13 + 5 = 44 ediyor, metin 39 boşluk diyor (s.45)",
+      "Boşluk-kapanış girişinin yönü (Gap-n-Go mu, kapanış reddi mi) metinde iki farklı biçimde verilmiştir"
+    ],
+    "uyumluluk_notu": "Kripto 7/24 işlem gördüğünden açılış boşluğu tipik olarak oluşmaz; forex'te yalnızca hafta açılışında boşluk görülür; ABD hisse ve emtia perpetual'larında 'gün' tanımı ve kapanış (Y-Kapanış) seansa bağlıdır. 1L3A'da gün kapanışı için bir çapa tanımlanmalıdır. Hacim gerekmez.",
+    "varyantlar": [
+      "Gap-n-Go: boşluk yönünde devam (kitap s.45)",
+      "Kopuş Turu (tik boşluğu) için aynı kapanış mantığı (s.39-41)"
+    ],
+    "anahtar_kelimeler": ["gap-close", "y-kapanis", "bosluk", "gap-n-go", "destek-direnc", "temas-tolerans"]
+  },
+  {
+    "kart_id": "swing__test-reddet-2-trend__scheier",
+    "ad": "Test-ve-Reddetme Günü: 2. Trend Yönünde Giriş",
+    "stil": "swing",
+    "kaynak": {"pdf": "Pivotlar_Formasyonlar_ve_Gün_İçi_Swing_İşlemleri_-_M_William_Scheier_224_sayfa.pdf", "sayfalar": [103, 104, 105, 106, 109]},
+    "ozet": "Fiyat ORB'den bir yönde ilk trend (1. Trend) yapar, sonra ORB'ye geri döner ve ORB'nin öbür tarafına geçerek 2. Trend'i başlatır. 1. Trend Yapılan İş koşullarıyla tamamlandığında, 2. Trend yönünde kırılım veya geri çekilme girişi yapılır.",
+    "kategori": "kirilim",
+    "piyasa_rejimi": "herhangi",
+    "orijinal_piyasa": "vadeli",
+    "zaman_dilimi": {"islem": "1m", "ust_filtre": null},
+    "gostergeler": [{"ad": "ORB", "parametreler": {"zaman_dilimi_dk": 1}}],
+    "long_giris": [
+      "1. Trend aşağı yönlüdür (ORB altı) ve Yapılan İş koşulları (kart yapilan-is-cikis) sağlanmıştır",
+      "Fiyat ORB'nin altına inip geri döner ve ORB'nin üst sınırını yukarı kırar",
+      "Giriş: ORB üst sınırının 1 tik üstüne alım-dur emri veya ORB üstüne kırılımdan sonra gelen geri çekilmede yukarı dönüş"
+    ],
+    "short_giris": [
+      "1. Trend yukarı yönlüdür (ORB üstü) ve Yapılan İş koşulları sağlanmıştır",
+      "Fiyat ORB'ye geri döner ve ORB'nin alt sınırını aşağı kırar",
+      "Giriş: ORB alt sınırının 1 tik altına satım-dur emri veya kırılım sonrası geri çekilmede aşağı dönüş"
+    ],
+    "stop_loss": null,
+    "kar_al": "Kitapta sayısal hedef yok; 2. Trend hedefleri ölçülen hareket (kart olculen-hareket-hedefi) ve Ters %78,6 hedefi (kart ters-fib-78-6-hedef) ile belirlenir.",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "1. Trend'in Yapılan İş ile tamamlanmış olması (kitap: 'bu olmadan 2. Trend riskli')",
+      "Liderlik uyumu (TF) önerilir; kitap senkronizasyonu öne çıkarır (s.105-106)"
+    ],
+    "pozisyon_risk": "Kitap, 1-3 sözleşmede son sözleşmeyi riske atmanın zor olduğunu, 5-10 sözleşmede ise daha esnek olduğunu belirtir (s.104). Tier 2 için 2 birim: hızlı 1. birim çıkışı, 2. birim net başabaş stop (s.191).",
+    "iddia_edilen_performans": "Kitap Test-ve-Reddetme'yi en yaygın gün modeli olarak tanımlar; diğer iki modelden yaklaşık iki kat sık görüldüğünü belirtir; sayısal kazanç oranı yoktur (s.90, 103).",
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "1. Trend tamamlanması ve ORB'ye geri dönüş/reddetme yoruma açık. 'Yapılan İş' koşulları için hangi kombinasyonun yeterli olduğu tanımsız."
+    },
+    "belirsizlikler": [
+      "Yapılan İş koşullarının (kart yapilan-is-cikis) hangi kombinasyonu yeterli sayılacak",
+      "ORB'ye 'geri dönüş' ile 'reddetme' ayrımı için tolerans (tik veya zaman) yok",
+      "1. Trend tamamlanmasının hangi saatte teyit edileceği tanımsız; kitap 10:30 ve öğle saatlerini kullanır ama kural koymaz",
+      "Kırılım tetiği için kitapta yalnızca ORB referansı verilmiştir; Y-Yüksek gibi diğer seviyelerin tetik olarak kullanılması açık değildir"
+    ],
+    "uyumluluk_notu": "ORB ve gün içi seans çapası gerektirir; forex ve kripto için seans tanımı yapılmalı. Hacim gerekmez. 1L3A'da ORB yerine sabit süreli açılış aralığı (örn. ilk X dk) alınabilir, ancak bu bir uyarlamadır ve test edilmelidir.",
+    "varyantlar": [
+      "Pre-Breakout Pause (kart kirilim-oncesi-duraklama) ile 2. Trend'e tetik",
+      "Klasik formasyon (M-Tepe, W-Dip, baş-omuz) ile birleşik model (kart bas-omuz-sag-omuz-filtre)"
+    ],
+    "anahtar_kelimeler": ["test-reddet", "2-trend", "orb", "yapilan-is", "kirilim", "geri-donus"]
+  },
+  {
+    "kart_id": "swing__kalici-trend-orb-geri-cekilme__scheier",
+    "ad": "Kalıcı Trend Günü: ORB'ye veya Geri Çekilmeye Trend Yönünde Giriş",
+    "stil": "swing",
+    "kaynak": {"pdf": "Pivotlar_Formasyonlar_ve_Gün_İçi_Swing_İşlemleri_-_M_William_Scheier_224_sayfa.pdf", "sayfalar": [90, 91, 93, 94, 95]},
+    "ozet": "ORB'nin tek tarafında ilerleyen Kalıcı Trend Gününde, geri çekilmeler sığ kaldığı sürece, trend yönünde geri çekilme dibinden giriş yapılır. Kitap bu gün için karşı trend işlemlerinden kaçınılmasını ve birden fazla birimle takip eden gevşek bir stop kullanılmasını önerir.",
+    "kategori": "trend_takip",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "vadeli",
+    "zaman_dilimi": {"islem": "1m", "ust_filtre": null},
+    "gostergeler": [{"ad": "ORB", "parametreler": {"zaman_dilimi_dk": 1}}],
+    "long_giris": [
+      "Gün, ORB üstünde kalıcı yükseliş gösterir (ORB'nin altına geri dönülmez veya çok sığ kalır)",
+      "Geri çekilme, ORB'ye veya 10:30 Trend Kontrolü / Öğle Saati yüksek-düşük seviyelerine yaklaşır",
+      "Geri çekilme dibinde yukarı dönüş onayı ile alım; kitap 'fırsat verildiğinde geri çekilmelerde satın alma' der, dönüş onayı tanımlanmamıştır"
+    ],
+    "short_giris": [
+      "Ayna: ORB altında kalıcı düşüş; geri çekilme ORB altına veya Zaman İşaretçilerine yaklaşır",
+      "Geri çekilme zirvesinde aşağı dönüş onayı ile satım"
+    ],
+    "stop_loss": null,
+    "kar_al": null,
+    "iz_suren_stop": "Gevşek takip stop: ORB korumasının çok ötesinde; yalnızca bir Zaman İşaretçisi (10:30, 11:15, 12:00 veya 14:30) geçildikten sonra takip edilmeye başlanır (s.94)",
+    "zaman_cikisi": "Pozisyonun son birimi gün kapanışında çıkılır (s.94)",
+    "filtreler": [
+      "Kalıcı Trend Günü ORB'nin tek tarafında kalır; karşı yönde sığ geri çekilme",
+      "Liderlik: TF öncülüğü ve 'Liderlik Değişimi' onayı (kart liderlik-seri-ayrisma)",
+      "Önceki gün aynı yönde iki kalıcı trend gününün ardından ters dönüş olasılığı yüksektir; giriş yaparken bu filtre dikkate alınmalıdır (s.116, 122)"
+    ],
+    "pozisyon_risk": "Çoklu sözleşme yönetimi: ilk birimler kâr alır, son birim gevşek stop ve gün sonu kapanış ile tutulur (s.94). Sayısal risk yok.",
+    "iddia_edilen_performans": "Sayısal oran yok. Kitap naif bir yaklaşımın (her günü Kalıcı Trend Günü saymak) günlük kâr hedefini 10 günün 7'sinde bozabileceğini belirtir (s.94).",
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Gün sınıflandırması (Kalıcı Trend mi Test-ve-Reddetme mi) yoruma açık; 'sığ geri çekilme' ve 'dönüş onayı' nicel değildir."
+    },
+    "belirsizlikler": [
+      "Kalıcı Trend Günü ile Test-ve-Reddetme ayrımı için nicel eşik yok",
+      "'Sığ geri çekilme' ölçüsü (yüzde, ATR, ORB yüzdesi) tanımsız",
+      "Zaman İşaretçisi geçiş tanımı (tik, mum kapanışı) belirsiz",
+      "Dönüş onayı için kullanılacak mum kuralı tanımlı değil"
+    ],
+    "uyumluluk_notu": "Gün içi seans, ET saatleri ve açılış çapası gerektirir. Forex ve kripto'da 'Kalıcı Trend Günü' tanımı için seans başlangıcı uyarlanmalıdır. ABD hisse ve emtia perpetual'larında saatlere bağlı uygulanabilir. Hacim gerekmez.",
+    "varyantlar": [
+      "ORB Flaması ile giriş (kart orb-flama)",
+      "Maymun Barları / Flubber sayımı (kart maymun-barlari-orb-geri-donus)",
+      "Son Şans Texaco: 200EMA girişi (kart son-sans-texaco-ema200)"
+    ],
+    "anahtar_kelimeler": ["kalici-trend", "geri-cekilme", "orb", "zaman-isaretcisi", "trend-takip", "kosucu"]
+  },
+  {
+    "kart_id": "swing__stochsplit__scheier",
+    "ad": "StochSplit: 10 dk ve 1 dk Stokastik Ayrışma Sinyali",
+    "stil": "swing",
+    "kaynak": {"pdf": "Pivotlar_Formasyonlar_ve_Gün_İçi_Swing_İşlemleri_-_M_William_Scheier_224_sayfa.pdf", "sayfalar": [124, 125, 126, 127, 128]},
+    "ozet": "Günün yeni bir uç seviyesini (yüksek veya düşük) yeniden test ederken, 10 dakikalık stokastik aşırı bölgeden karşı aşırı bölgeye geçip yukarı kesişir (ayrılma açılır); 1 dakikalık stokastik bu ayrılma aralığına geri dönerse momentum dönüşü onaylanır ve trend ORB yönüne dönmesi beklenir.",
+    "kategori": "momentum",
+    "piyasa_rejimi": "yatay",
+    "orijinal_piyasa": "vadeli",
+    "zaman_dilimi": {"islem": "1m", "ust_filtre": "10m"},
+    "gostergeler": [
+      {"ad": "Stokastik 10 dk", "parametreler": {"D_periyot": 7, "K_periyot": 14, "yumusatma": 3}},
+      {"ad": "Stokastik 1 dk", "parametreler": {"D_periyot": 3, "K_periyot": 14, "yumusatma": 3}}
+    ],
+    "long_giris": [
+      "10 dk stokastikte hızlı D çizgisi aşırı alım (yaklaşık 90) bölgesinden aşırı satım (yaklaşık 10) bölgesine iner ve yukarı kanca (hooking) yapar",
+      "10 dk yavaş D çizgisi de aşırı alımdan aşırı satıma geçer (bu iki çizginin de yolculuğu tamamlanmalıdır)",
+      "10 dk hızlı D çizgisi, yavaş D'yi yukarı keser ve ayrılma (split) açılır",
+      "1 dk stokastik, aşırı satım tarafından yukarı hareketle 10 dk ayrılma aralığına geri döner; giriş bu ilk oluşumda alınır (sonraki tekrarlar geç kabul edilir)"
+    ],
+    "short_giris": [
+      "Kitap yalnızca bir yönü örnekler; ayna varsayılır: 10 dk hızlı D aşırı satımdan aşırı alıma yükselip aşağı keser, 1 dk stokastik ayrılma aralığına aşağıdan geri döner",
+      "Sinyal ancak günün yeni uç seviyesi yeniden testinde (örn. günün dibi) anlamlıdır"
+    ],
+    "stop_loss": null,
+    "kar_al": "Kitapta sayısal hedef yok. Birincil hedef ORB seviyesine dönüş (s.125-127). Kalan pozisyon için Yapılan İş koşulları (kart yapilan-is-cikis).",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Test-ve-Reddetme ve Bölünmüş Açılış gün modellerinde kullanılır; Kalıcı Trend Gününde momentum göstergesi çalışmaz (s.128)",
+      "İlk oluşumda alınır; sonraki tekrarlar geç kabul edilir (s.128)"
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Stokastik parametreleri ve dört aşama açıkça verilmiş. Aşırı bölge eşikleri (yaklaşık 90 ve 10), 'kanca' ve 'ayrılma' tanımları görseldir ve yorumlanabilir."
+    },
+    "belirsizlikler": [
+      "Aşırı bölge eşiği kesin değer değil: kitap '90 civarı' ve '10 civarı' der",
+      "Yön simetrisi açık değil; kitap yalnızca bir yönde örnek verir",
+      "Giriş, stop ve çıkış kuralı kitapta yoktur",
+      "Kitap stokastik çizgilerin gizli (yalnızca hesap) çizildiğini belirtir; yazılım bağımlılığı"
+    ],
+    "uyumluluk_notu": "1L3A için iki zaman dilimi gerekir (10 dk ve 1 dk). 1 dk alt zaman dilimi, 5 dk ve üstü hedefle çelişir; üst/alt çift olarak 5 dk ve 1 saat gibi bir eşleşme uyarlanabilir ama test edilmelidir. Hacim gerekmez. Stokastik standart bir göstergedir; kripto, forex ve perpetual'da uygulanabilir.",
+    "varyantlar": [
+      "Zaman dilimi çifti kitapta 10 dk / 1 dk; alternatif çiftler kitapta yoktur",
+      "Yavaş çizgi yerine hızlı çizgiye göre kesişim (kitap yalnızca yavaş çizgiyi zorunlu kılar)"
+    ],
+    "anahtar_kelimeler": ["stokastik", "stochsplit", "zaman-dilimi-cifti", "momentum", "ayrilma", "yeniden-test", "kanca"]
+  },
+  {
+    "kart_id": "swing__son-sans-texaco-ema200__scheier",
+    "ad": "Son Şans Texaco: 1 dk 200 EMA Geri Dönüş Girişi",
+    "stil": "swing",
+    "kaynak": {"pdf": "Pivotlar_Formasyonlar_ve_Gün_İçi_Swing_İşlemleri_-_M_William_Scheier_224_sayfa.pdf", "sayfalar": [99, 100, 101, 102, 152, 153, 154, 155]},
+    "ozet": "Trend yönlü ilerleyen fiyat geride kalan (geç) bir düzeltmede 1 dk 200 EMA'yı keskin biçimde delip hızla geri sıçrarsa (trampolin etkisi), sıçramanın ardından trend yönünde giriş yapılır. Ardışık ikinci kalıcı trend gününde bu sıçramanın gerçekleşmesi beklenmez (filtre).",
+    "kategori": "trend_takip",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "vadeli",
+    "zaman_dilimi": {"islem": "1m", "ust_filtre": null},
+    "gostergeler": [{"ad": "EMA", "parametreler": {"periyot": 200}}, {"ad": "EMA", "parametreler": {"periyot": 89}}],
+    "long_giris": [
+      "Yukarı trend: fiyat düzeltme sırasında 1 dk 200 EMA'nın altına hızla iner (spike)",
+      "Fiyat 200 EMA'nın üstüne sıçrayıp geri döner (trampolen)",
+      "Sıçramanın ardından trend yönünde alım (tetik çubuğu ve emir türü kitapta tanımlanmamıştır)"
+    ],
+    "short_giris": [
+      "Aşağı trend: fiyat düzeltme sırasında 200 EMA'nın üstüne hızla çıkar (spike)",
+      "Fiyat 200 EMA'nın altına sıçrayıp geri döner",
+      "Sıçramanın ardından trend yönünde satım"
+    ],
+    "stop_loss": null,
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Kalıcı Trend Günü veya trend düzeltmesi bağlamı; öğle veya son saatte geç düzeltme (s.152)",
+      "Ardışık ikinci kalıcı trend gününde 200 EMA sıçraması beklenmez, tam düzeltme beklenir (s.101); kitabın aynı paragrafındaki ikinci cümle bunun tersini söyler (belirsizlik)",
+      "89 EMA ile 200 EMA arası davranış (kart ema-cup) onayı olabilir (s.155-156)"
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "EMA periyotları (200, 89) ve geri dönüş kalıbı açık. 'Keskin sıçrama' ve tetik çubuğu yoruma açık."
+    },
+    "belirsizlikler": [
+      "Sıçrama (trampolin) için minimum genlik veya zaman tanımı yok",
+      "Tetik çubuğu ve emir türü tanımlı değil",
+      "Ardışık ikinci gün filtresinin iki farklı yorumu var (s.101)",
+      "Stop ve hedef kuralı yok; kitap sıçramanın derinliğinin önceden tahmin edilemeyeceğini söyler"
+    ],
+    "uyumluluk_notu": "1 dk EMA 200 ve 89 kitabın çerçevesidir; 1L3A için 5 dk veya 1 saat EMA 200 ile uyarlanabilir, bu bir varsayımdır ve test edilmelidir. Kalıcı Trend Günü tanımı için seans başlangıcı gerekir. Hacim gerekmez. Kripto ve perpetual'da 7/24 fiyat akışı olduğundan öğle/son saat ayrımı anlamsızdır.",
+    "varyantlar": [
+      "EMA Çanağı (kart ema-cup) ile ikinci 200 EMA kırılımı",
+      "89 EMA üzerinden sıçrama (kitap 89 EMA'yı da tetik için referans alır, s.101)"
+    ],
+    "anahtar_kelimeler": ["ema200", "ema89", "trampolen", "son-sans-texaco", "trend-devam", "geri-donus"]
+  },
+  {
+    "kart_id": "swing__ema-cup__scheier",
+    "ad": "EMA Çanağı (Cup): 89-200 EMA Arasında Tutunma ve İkinci 200 EMA Kırılımı",
+    "stil": "swing",
+    "kaynak": {"pdf": "Pivotlar_Formasyonlar_ve_Gün_İçi_Swing_İşlemleri_-_M_William_Scheier_224_sayfa.pdf", "sayfalar": [154, 155, 156, 157]},
+    "ozet": "Düzeltme 200 EMA'ya dokunup geri döndüğünde fiyat 89 ve 200 EMA arasındaki çanakta (Cup) tutunursa ve sonra 200 EMA'yı ikinci kez kırarsa, düzeltmenin yeni trend olduğu kabul edilir; kırılım yönünde giriş yapılır.",
+    "kategori": "trend_takip",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "vadeli",
+    "zaman_dilimi": {"islem": "1m", "ust_filtre": null},
+    "gostergeler": [{"ad": "EMA", "parametreler": {"periyot": 89}}, {"ad": "EMA", "parametreler": {"periyot": 200}}],
+    "long_giris": [
+      "Aşağı trend düzeltmesinin ardından (aşağı trend bağlamı) fiyat 200 EMA'nın üstüne sıçrar ve 89-200 arasındaki çanakta tutunur",
+      "Fiyat 200 EMA'yı ikinci kez yukarı kırar; kitap bunu yeni trend olarak yorumlar",
+      "Giriş: ikinci kırılım sonrası yukarı yönde (kitabın açık tetik kuralı yoktur)"
+    ],
+    "short_giris": [
+      "Yukarı trend düzeltmesinde fiyat 200 EMA'nın altına sıçrar ve çanakta tutunur",
+      "Fiyat 200 EMA'yı ikinci kez aşağı kırarsa satım"
+    ],
+    "stop_loss": null,
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "89 ve 200 EMA'nın kesişimi çoğunlukla giriş tetikleyici değildir (s.156); kesişme ancak uzun yatay konsolidasyon sonrası kırılımla birlikteyse işlenir",
+      "EMA'lar sıkışmış 'raylar' gibi ise kırılım olasılığı artar (s.152-153, EMA Sıkışması)"
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "EMA periyotları nicel; 'çanak' ve 'ikinci kırılım' tanımları kısmen görseldir, tetik tanımı yoktur."
+    },
+    "belirsizlikler": [
+      "Çanağın alt ve üst sınırı için tolerans tanımsız",
+      "İkinci kırılımın hangi kapanışla teyit edildiği belirtilmemiş",
+      "Kitap EMA kesişimini çoğunlukla tetik saymadığını söyler; istisnanın ne zaman geçerli olduğu netleşmemiştir"
+    ],
+    "uyumluluk_notu": "1 dk EMA çerçevesi; 1L3A'da 5 dk veya 1 saat EMA ile uyarlanabilir (test edilmeli). Hacim gerekmez. Forex ve kripto'da uygulanabilir.",
+    "varyantlar": [
+      "EMA Sıkışması (Pinch): iki EMA raylar gibi daralırsa trend değişimi olasılığı (s.152-153)",
+      "Çanak kırılımı tetik olarak (Pre-Breakout Pause ile birlikte, s.156-157)"
+    ],
+    "anahtar_kelimeler": ["ema-cup", "ema89", "ema200", "trend-degisimi", "kirilim", "sikisma"]
+  },
+  {
+    "kart_id": "swing__ogle-kanali-kirilim__scheier",
+    "ad": "Öğle Kanalı (Midday Channel) Kırılımı ve Merkez Çizgi Yeniden Testi",
+    "stil": "swing",
+    "kaynak": {"pdf": "Pivotlar_Formasyonlar_ve_Gün_İçi_Swing_İşlemleri_-_M_William_Scheier_224_sayfa.pdf", "sayfalar": [146, 147, 148, 149]},
+    "ozet": "Kalıcı Trend Gününün ortasında veya Test-ve-Reddetme günün 2. Trend'inde, öğle saatlerinde yatay bir kanal oluşur. Kanalın bir kenarından kırılım ön-kırılım duraklamasıyla teyit edilirse trend yönünde giriş yapılır; hedef kanal merkez çizgisinden ölçülen harekettir.",
+    "kategori": "kirilim",
+    "piyasa_rejimi": "yatay",
+    "orijinal_piyasa": "vadeli",
+    "zaman_dilimi": {"islem": "1m", "ust_filtre": null},
+    "gostergeler": [],
+    "long_giris": [
+      "Öğle saatlerinde yatay kanal: fiyat tekrarlayan karşıt denemelerle aynı fiyat seviyesinde değil, yaklaşık aynı seviyede durur",
+      "Kanalın üst sınırında küçük bir duraklama (pre-breakout pause) oluşur",
+      "Yukarı kırılım için duraklamanın 1 çubuk ötesine alım-dur emri"
+    ],
+    "short_giris": [
+      "Ayna: kanalın alt sınırında duraklama ve aşağı kırılımda duraklamanın 1 çubuk altına satım-dur emri"
+    ],
+    "stop_loss": "Kitapta ilk giriş stopu açıkça verilmez; yeniden girişte (merkez çizgiye geri test) stop, kanalın uzak kenarının birkaç tik ötesidir (s.149)",
+    "kar_al": "Ölçülen hareket: kitabın tanımında merkez çizgiden ölçülen hareket, günün başlangıç fiyatından beklenen hedefe giden hareketin yarısı olarak tarif edilir (s.148). Formül açık değildir.",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Kalıcı Trend Gününün ortasında veya Test-ve-Reddetme 2. Trend'inde (s.146-147)",
+      "Kanal genellikle günün aralığının ortasında kurulur (s.147)"
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Kanal sınırı yatay çizilen bir yaklaşıktır; tolerans, minimum dokunuş sayısı ve merkez çizgi formülü tanımlı değildir."
+    },
+    "belirsizlikler": [
+      "Kanal sınırı için dokunuş sayısı ve tolerans (tik veya yüzde) yok",
+      "Merkez çizginin ölçülen hareket formülü (s.148) tam verilmemiş",
+      "Yeniden test toleransı ve kanal kırılımının teyit mumu tanımsız"
+    ],
+    "uyumluluk_notu": "Kanal ve merkez çizgi zaman dilimine bağlıdır; 1L3A'da 1 saatlik kanal ve 1 dk veya 5 dk tetik ile uyarlanabilir. Kalıcı Trend Günü bağlamı için seans tanımı gerekir. Hacim gerekmez.",
+    "varyantlar": [
+      "Merkez çizgiye geri testte yeniden giriş (s.149)"
+    ],
+    "anahtar_kelimeler": ["ogle-kanali", "merkez-cizgi", "olculen-hareket", "kirilim", "pre-breakout", "kanal"]
+  },
+  {
+    "kart_id": "swing__kirilim-oncesi-duraklama__scheier",
+    "ad": "Kırılım Öncesi ve Sonrası Duraklama (Pre/Post-Breakout Pause) Stop-Giriş",
+    "stil": "swing",
+    "kaynak": {"pdf": "Pivotlar_Formasyonlar_ve_Gün_İçi_Swing_İşlemleri_-_M_William_Scheier_224_sayfa.pdf", "sayfalar": [130, 131, 132, 133, 147, 148]},
+    "ozet": "Büyük bir konsolidasyonun içinde veya kırılım hemen sonrasında, küçük bir mini kanal veya bayrak (duraklama) oluşur. Duraklamanın kırılım yönünde kopması, trend yönünde stop-giriş için tetik sayılır. Kitap bu duraklamanın yanlış kırılımları azalttığını belirtir.",
+    "kategori": "kirilim",
+    "piyasa_rejimi": "herhangi",
+    "orijinal_piyasa": "vadeli",
+    "zaman_dilimi": {"islem": "1m", "ust_filtre": null},
+    "gostergeler": [],
+    "long_giris": [
+      "Büyük konsolidasyon veya Test-ve-Reddetme 1. Çerçevesinde küçük duraklama (mini kanal, bayrak) oluşur",
+      "Duraklamanın üst sınırı yukarı kırılırsa, duraklamanın 1 tik üstüne alım-dur emri",
+      "Post-Breakout Pause: kırılımdan sonra tek ters renkli 1 dk çubuk oluşursa, o çubuğun üstüne alım-dur emri yeni trend tetiği olarak kullanılabilir (s.132)"
+    ],
+    "short_giris": [
+      "Ayna: aşağı kırılımda duraklamanın altına satım-dur emri"
+    ],
+    "stop_loss": "Kitapta sabit stop yoktur. Kırılım başarısız olursa kitap, bir birimi kısmi çıkış yapıp kalan pozisyonu net başabaş riske taşımayı önerir (s.133).",
+    "kar_al": "Kitapta sayısal hedef yoktur; kalan pozisyon için ölçülen hareket (kart olculen-hareket-hedefi) veya Yapılan İş koşulları (kart yapilan-is-cikis) kullanılır.",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Kitap bu tetiği Test-ve-Reddetme günü modeliyle birlikte kullanır (s.133)",
+      "Duraklama küçük ve sıkışık olmalıdır (kitap: 'çok küçük ve ince bir sinyal', s.130)"
+    ],
+    "pozisyon_risk": "En az 1 birimin kısmi çıkışı ve kalanın net başabaş riske taşınması (s.133).",
+    "iddia_edilen_performans": "Kitap kırılım sayısının çoğunun başarısız olduğunu, bu tetiğin başarı şansını artırdığını söyler; sayısal oran yoktur (s.133).",
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Duraklama (küçük kanal, bayrak) görsel tanımlı; boyut, süre ve sıkışma kriteri yoktur."
+    },
+    "belirsizlikler": [
+      "Duraklamanın minimum uzunluğu (çubuk sayısı) ve sıkışma oranı yok",
+      "'Küçük' ve 'büyük konsolidasyon' ayrımı nicel değil",
+      "Tetik ofseti kitapta 'bir tik' ile '1 çubuk' arasında değişiyor"
+    ],
+    "uyumluluk_notu": "Mikroyapı kalıbıdır; 1L3A'da 1 dk veri gerekir veya 5 dk üzeri ile yeniden tanımlanmalıdır. Kitapta açık faiz (open interest) bahsi geçer; 1L3A'da veri yoksa kullanılmaz. Kripto ve forex'te uygulanabilir.",
+    "varyantlar": [
+      "Post-Breakout Pause (tek ters renkli çubuk, s.132)",
+      "Üçgen içinde duraklama (s.137-138)"
+    ],
+    "anahtar_kelimeler": ["pre-breakout-pause", "bayrak", "mini-kanal", "kirilim", "duraklama", "stop-giris"]
+  },
+  {
+    "kart_id": "swing__olculen-hareket-hedefi__scheier",
+    "ad": "Ölçülen Hareket (Measured Move) Hedefi",
+    "stil": "swing",
+    "kaynak": {"pdf": "Pivotlar_Formasyonlar_ve_Gün_İçi_Swing_İşlemleri_-_M_William_Scheier_224_sayfa.pdf", "sayfalar": [54, 55, 77, 141, 182]},
+    "ozet": "Tamamlanmış bir formasyonun kırılımından sonra kâr hedefi, formasyonun yüksekliğinin (veya ilgili mesafenin) kırılım noktasından aynı mesafede uzatılmasıyla bulunur. Kitap bu hedefi yalnızca çıkış hedefi olarak kullanır; giriş tetiği olarak değil.",
+    "kategori": "formasyon",
+    "piyasa_rejimi": "herhangi",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {"islem": "1m", "ust_filtre": null},
+    "gostergeler": [],
+    "long_giris": [],
+    "short_giris": [],
+    "stop_loss": null,
+    "kar_al": "Formasyona göre: simetrik üçgen için açık çenenin (üçgenin taban genişliği) eşit mesafesi; baş-omuzda baş ile boyun çizgisi arası mesafenin kırılım noktasından uzatılması; öğle kanalında kanalın zıt uç noktasından merkez çizgiye eşit mesafe; kamada desenin taban kökeni (s.55, 141). Kitap bu hedefin 'en azından' ulaşıldığını belirtir (s.141).",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Formasyon tamamlanmış ve kırılım onaylanmış olmalıdır",
+      "Ters baş-omuzda sağ omuz kuralı geçerli ise hedef güvenilirliği artar (kart bas-omuz-sag-omuz-filtre)"
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Mesafe tanımı formasyona göre açık ve hesaplanabilir. Hangi noktaların referans alınacağı (üçgenin en geniş tabanı mı, ilk tabanı mı; kamanın taban kökeni) kısmen görseldir."
+    },
+    "belirsizlikler": [
+      "Üçgen yüksekliği için en geniş taban mı ilk taban mı kullanılacağı belirtilmemiş",
+      "Kama için 'taban kökeni' tanımı yok",
+      "Kitap 'en azından' der; üst sınır (ikinci hedef) yoktur"
+    ],
+    "uyumluluk_notu": "Formasyon geometrisi zaman dilimine bağımsızdır; 1L3A'da (forex, kripto, perpetual, emtia) uygulanabilir. Pivot tespiti için zigzag gibi bir parametre gerekir. Hacim gerekmez.",
+    "varyantlar": [
+      "Ters %78,6 projeksiyon hedefi ile birlikte kullanım (kart ters-fib-78-6-hedef)"
+    ],
+    "anahtar_kelimeler": ["olculen-hareket", "measured-move", "ucgen", "bas-omuz", "kanal", "kama", "hedef"]
+  },
+  {
+    "kart_id": "swing__bas-omuz-sag-omuz-filtre__scheier",
+    "ad": "Baş-Omuz / Ters Baş-Omuz: Sağ Omuz Filtresi ve Boyun Kırılımı",
+    "stil": "swing",
+    "kaynak": {"pdf": "Pivotlar_Formasyonlar_ve_Gün_İçi_Swing_İşlemleri_-_M_William_Scheier_224_sayfa.pdf", "sayfalar": [140, 141, 142, 143]},
+    "ozet": "Baş-omuz (veya ters) formasyonunda sağ omuzun baş ucuna uzaklığı, sol omuzun uzaklığından az olmamalıdır (sağ omuz kuralı). Kural sağlanırsa boyun çizgisi kırılımı tersine dönüş sayılır ve hedef ölçülen harekettir. Kural ihlal edilirse formasyon büyük olasılıkla başarısız olur ve trend devamı yönünde işlem düşünülür.",
+    "kategori": "formasyon",
+    "piyasa_rejimi": "herhangi",
+    "orijinal_piyasa": "vadeli",
+    "zaman_dilimi": {"islem": "1m", "ust_filtre": null},
+    "gostergeler": [],
+    "long_giris": [
+      "Düşüş sonrası ters baş-omuz: baş en dip, iki omuz başın üstünde; sağ omuzun dibi baş dibine sol omuz dibinden daha yakın DEĞİLDİR (sağ omuz kuralı geçerli)",
+      "Boyun çizgisinin yukarı kırılımında boyun çizgisinin 1 tik üstüne alım-dur emri",
+      "Hedef: ölçülen hareket (kart olculen-hareket-hedefi)"
+    ],
+    "short_giris": [
+      "Yükseliş sonrası baş-omuz tepe: baş en tepe, sağ omuz tepesi baş tepesine sol omuz tepesinden daha yakın DEĞİLDİR",
+      "Boyun çizgisinin aşağı kırılımında boyun çizgisinin 1 tik altına satım-dur emri",
+      "Sağ omuz kuralı ihlal edilirse (sağ omuz baş tepesine daha yakınsa) bu formasyon tersine dönüş olarak işlem görmez; kitap bu durumda ters yönde (trend devamı) işlem önerir (s.141)"
+    ],
+    "stop_loss": null,
+    "kar_al": "Ölçülen hareket: baş ile boyun çizgisi arasındaki mesafenin kırılım noktasından uzatılması (s.55, 141).",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Sağ omuz kuralı: sağ omuzun baş ucuna uzaklığı sol omuzun uzaklığından az olmamalı (s.140)",
+      "Kitap, boyun çizgisinin içe veya dışa doğru eğimli olmasının ölçülen hareket hedefini değiştirmediğini belirtir (s.141)"
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": "Kitap sağ omuz kuralına uyan formasyonun ters kırılımının en az ölçülen harekete ulaştığını belirtir; sayısal oran yoktur (s.141).",
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Sağ omuz kuralı nicel bir mesafe karşılaştırmasıdır. Omuz ve baş pivotlarının seçimi ile boyun çizgisi tanımı kısmen görsel; kırılım tetiği tanımlıdır."
+    },
+    "belirsizlikler": [
+      "Omuz ve baş pivotlarının tespit yöntemi (zigzag parametresi) tanımsız",
+      "Boyun çizgisi eğimli olabilir; eğimin giriş ve hedefe etkisi kitapta çelişkisiz açıklanmamış",
+      "Sağ omuz kuralı ihlal edildiğinde ters yön girişinin tetik kuralı tanımsız"
+    ],
+    "uyumluluk_notu": "Pivot tabanlı formasyon; 1L3A'da zigzag parametresi gerekir. Forex, kripto ve perpetual'da uygulanabilir. Hacim gerekmez.",
+    "varyantlar": [
+      "Sağ omuz geçersizse trend devamı yönünde giriş (s.141)",
+      "M-Tepe ve W-Dip (s.135) aynı filtre mantığı ile kullanılabilir"
+    ],
+    "anahtar_kelimeler": ["bas-omuz", "ters-bas-omuz", "sag-omuz-filtresi", "boyun-cizgisi", "formasyon", "geri-donus"]
+  },
+  {
+    "kart_id": "swing__haber-oncesi-kismi-pozisyon__scheier",
+    "ad": "Haber Öncesi Kısmi Pozisyon ve Haber Sonrası Yönetim",
+    "stil": "swing",
+    "kaynak": {"pdf": "Pivotlar_Formasyonlar_ve_Gün_İçi_Swing_İşlemleri_-_M_William_Scheier_224_sayfa.pdf", "sayfalar": [79, 80, 81, 82, 83, 84, 86, 87]},
+    "ozet": "Planlanmış ekonomik haberden önce, normal planın teknik giriş koşulu sağlanırsa pozisyon açılır. Haber öncesi kâr koruması yoksa pozisyondan çıkılır; kâr varsa bir kısmı alınır ve kalan kısım haberin tepkisine göre yönetilir. Haber tepkisi pozisyon yönündeyse kalan stoplar sıkılaştırılır.",
+    "kategori": "diger",
+    "piyasa_rejimi": "volatil",
+    "orijinal_piyasa": "vadeli",
+    "zaman_dilimi": {"islem": "1m", "ust_filtre": null},
+    "gostergeler": [],
+    "long_giris": [
+      "Haber (ör. 10:00 ET) öncesi, normal planın teknik giriş koşulu (ör. ORB veya Pivot Ledge yakınında dönüş) sağlanmışsa yukarı yönde pozisyon açılır",
+      "Haber öncesi küçük bir kâr koruması (kitap örneğinde yaklaşık 1 puan) varsa pozisyonun bir kısmı kalır",
+      "Haber öncesi son 15-20 saniyede kâr yoksa pozisyondan tamamen çıkılır"
+    ],
+    "short_giris": [
+      "Ayna: aşağı yönde teknik koşul ve haber öncesi kâr koruması ile satış (kitap örneği haber öncesi kısa pozisyon, s.82)"
+    ],
+    "stop_loss": "Haber öncesi son 15-20 saniyede kâr koruması yoksa pozisyondan çıkılır; kâr varsa kalan pozisyon haberden önce cömert bir limit hedefiyle tutulur (s.80). Kitapta ayrı bir sabit stop tarifi yoktur.",
+    "kar_al": "Başlangıç kâr hedefine ulaşıldığında (kitap örneğinde 1. Çerçeve için yaklaşık 5 puan) pozisyonun bir kısmı alınır. Son pozisyonun hedefi günün en yüksek veya en düşük seviyesine yakın bir limit olabilir (s.80).",
+    "iz_suren_stop": "Haber sonrası tepki pozisyon yönünde ise kalan pozisyonun stopları sıkılaştırılır (s.80)",
+    "zaman_cikisi": "Haberden önce 15-20 saniye kala kârda değilse tamamen çıkış (s.80)",
+    "filtreler": [
+      "Planlı ekonomik haber saati önceden bilinmelidir",
+      "Kitap haber yönünün tahmin edilemeyeceğini vurgular; yalnızca teknik uyum aranır (s.81)",
+      "Saat senkronizasyonu (NTP) ve düşük gecikmeli veri bağlantısı zorunludur; DSL veya kablosuz bağlantı ile haber ticareti önerilmez (s.87)"
+    ],
+    "pozisyon_risk": "Kısmi çıkış ile başlangıç riskinin kapatılması; kalan pozisyon çoklu sözleşmede son sözleşme için yüksek hedefli tutulur (s.80).",
+    "iddia_edilen_performans": "Sayısal oran yok. Kitap haber stop-limit emirlerinin kayma nedeniyle genellikle yıkıcı olduğunu belirtir (s.79-80).",
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Haber saati ve planlama nicel, ancak haber sonrası tepki yönü tahmin edilemez; 'kâr yoksa' ve '15-20 saniye' kuralları nicel, giriş tetiği teknik ve yorumludur."
+    },
+    "belirsizlikler": [
+      "'Haber sonrası tepki' için zaman penceresi (ilk dakika mı, ilk 5 dakika mı) tanımlı değil",
+      "Kalan pozisyonun 'cömert limit' seviyesi belirsiz",
+      "Haber takvimi kaynağı kitapta belirtilmemiş; 1L3A'da ekonomik takvim ayrıca gerekir",
+      "Kitap haber sonrası ters yön işlemini de anlatır; bu kart yalnızca haber öncesi ve haber sonrası kısmi yönetimi kapsar"
+    ],
+    "uyumluluk_notu": "Haber takvimine bağlı risk yönetimidir; forex ve endeks için uygundur, kripto için de haber etkisi vardır. 1L3A'da gecikme ve kayma nedeniyle haber ticareti önerilmez; kitabın kendisi bile bu riski vurgular. Hacim gerekmez.",
+    "varyantlar": [
+      "Haber sonrası aşırı tepkiden sonra ters yön girişi (s.84-85); bu kart kapsamında değildir"
+    ],
+    "anahtar_kelimeler": ["haber", "haber-oncesi", "kismi-cikis", "kayma", "risk", "takvim"]
+  },
+  {
+    "kart_id": "swing__yapilan-is-cikis__scheier",
+    "ad": "Yapılan İş (Work-Done) Kısmi Kâr Alma Koşulları",
+    "stil": "swing",
+    "kaynak": {"pdf": "Pivotlar_Formasyonlar_ve_Gün_İçi_Swing_İşlemleri_-_M_William_Scheier_224_sayfa.pdf", "sayfalar": [74, 75, 76, 77, 78]},
+    "ozet": "Trendin doğal hedefine yaklaştığını gösteren bir teknik olay kümesi (ör. günlük pivot seviyesi, Y-Yüksek veya Y-Düşük, boşluk veya tik turunun kapanması, ORB'ye dönüş, üçgen tepesi, kanal merkezi, ölçülen hareket hedefi, Zaman İşaretçisi dönüşü) görüldüğünde, pozisyonun bir kısmı kâr alınarak çıkılır. Kitap bu koşulların eksik olsa bile çıkış için yeterli sayıldığını belirtir.",
+    "kategori": "diger",
+    "piyasa_rejimi": "herhangi",
+    "orijinal_piyasa": "vadeli",
+    "zaman_dilimi": {"islem": "1m", "ust_filtre": null},
+    "gostergeler": [{"ad": "Gunluk Pivot", "parametreler": {"formul": "(Y-Yuksek + Y-Dusuk + Y-Kapanis) / 3"}}],
+    "long_giris": [],
+    "short_giris": [],
+    "stop_loss": null,
+    "kar_al": "Yukarı trendde: kitapta sıralanan koşullardan birkaçı birlikte oluştuğunda kısmi çıkış. Koşullar: günlük pivot seviyelerine ulaşma (DP = (Y-Yüksek + Y-Düşük + Y-Kapanış)/3), Y-Yüksek veya Y-Düşük, gecelik yüksek veya düşük, boşluk veya tik turunun kapanması, ORB'ye dönüş, ORB'den tepki, üçgen tepe noktasına dönüş, kanal merkez çizgisine dönüş, tamamlanmış formasyonun ölçülen hareket hedefi, ters %78,6 projeksiyon hedefi, 10:30 Trend Kontrolü, 11:15 Geçiş, öğle saati yüksek veya düşük, 10:00 haber barı, diğer sözleşmelerin doğrulamadığı tek başına yeni yüksek veya düşük, 200 EMA veya 1300 EMA artışı, sözleşmeler arası sapma (s.76-77). Aşağı trend için aynası geçerlidir.",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Giriş için kitap en az üç kolay tanımlanabilir koşul ister (s.77); çıkış için bu eşik daha düşüktür ('ipucu kümesi', s.75)",
+      "Zaman İşaretçileri ET saatlerine bağlıdır (10:30, 11:15, 12:00, 14:30)"
+    ],
+    "pozisyon_risk": "Kısmi çıkış, kalan pozisyon için takip stop veya sonraki Yapılan İş koşulu (kitap, koşucu tutmayı pozisyonun son parçası için önerir; s.196-197).",
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Koşul listesi uzun ve birbirinden bağımsız değil; kitap kesin bir tanımın mümkün olmadığını açıkça kabul eder (s.75-76, 'Yapılan İş' tanımı esnek)."
+    },
+    "belirsizlikler": [
+      "Giriş için 'en az üç' ve çıkış için 'ipucu kümesi' eşiklerinin sayısal karşılığı yok",
+      "Koşulların ağırlığı ve kombinasyon kuralı tanımsız",
+      "Bazı seviyelerin türetilme yöntemi kısmen verilmiş (DP formülü açık); diğerleri (ör. 'gecelik yüksek', '200 EMA artışı') ayrıntılı tanımsız",
+      "Kitap pivot formülü için hangi veri satıcısının kullanılacağını da tartışır (s.51-53); tutarlılık sorunu vardır"
+    ],
+    "uyumluluk_notu": "Zaman işaretçileri ET saatlerine bağlıdır; 1L3A için seans başlangıcı tanımlanmalıdır. Kripto'da seans yoktur; kullanılacak sabit saatler varsayılmalıdır. Pivot ve Y-Kapanış için günlük kapanış çapası gerekir. Hacim gerekmez.",
+    "varyantlar": [
+      "Günlük pivot DP formülü: (Y-Yüksek + Y-Düşük + Y-Kapanış) / 3 (kitap s.51). Kitap S1-R3 seviyelerinin tam formülünü vermez."
+    ],
+    "anahtar_kelimeler": ["yapilan-is", "kismi-cikis", "pivot", "zaman-isaretcisi", "cikis", "trend-sonu"]
+  },
+  {
+    "kart_id": "swing__liderlik-seri-ayrisma__scheier",
+    "ad": "Liderlik Değişimi ve Seri Ayrışma (Sözleşmeler Arası)",
+    "stil": "swing",
+    "kaynak": {"pdf": "Pivotlar_Formasyonlar_ve_Gün_İçi_Swing_İşlemleri_-_M_William_Scheier_224_sayfa.pdf", "sayfalar": [66, 67, 68, 69, 70, 71, 72, 73]},
+    "ozet": "Birden fazla endeks sözleşmesi izlendiğinde, bir sözleşme yeni zirve veya dip yaparken diğerleri bunu doğrulamazsa (Seri Ayrışma), ya da geride kalan bir sözleşme aniden liderliği devralırsa (Liderlik Değişimi), bu trend yönü için sinyal sayılır ve sinyal yönünde giriş yapılır.",
+    "kategori": "trend_takip",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "vadeli",
+    "zaman_dilimi": {"islem": "1m", "ust_filtre": null},
+    "gostergeler": [],
+    "long_giris": [
+      "Liderlik Değişimi (yukarı): önceki dönemde geride kalan sözleşme, lider sözleşme ile senkronize olarak yukarı kırılım yapar",
+      "Seri Ayrışma (yukarı): lider sözleşme yeni dip yaparken diğer sözleşme daha yüksek dip yapar (kitap TF örneği, s.69)",
+      "Giriş: sinyal yönünde stop-giriş; tetik çubuğu tanımlı değil"
+    ],
+    "short_giris": [
+      "Seri Ayrışma (aşağı): lider sözleşme yeni zirve yaparken diğeri daha düşük zirve yapar (s.67-68)",
+      "Liderlik Değişimi (aşağı): geride kalan sözleşme aşağı yönde liderliği devralır"
+    ],
+    "stop_loss": null,
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "En az iki sözleşme (kitap ES, YM, NQ, TF) birlikte izlenmelidir",
+      "Kitap liderliği tek sözleşmeyle tanımlamanın yetersiz olduğunu belirtir (s.73)"
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Liderlik ve sapma kavramları görsel karşılaştırmaya dayanır; 'seri' kaç ardışık zirve/dip olduğu belirtilmemiştir."
+    },
+    "belirsizlikler": [
+      "Seri Ayrışma için minimum ardışık yüksek/düşük sayısı yok",
+      "Liderlik tanımı piyasa bağlamına göre değişir; eşik yok",
+      "Tek enstrümanlı 1L3A için karşılaştırma sembolü seçimi kitapta yok",
+      "Giriş tetiği ve stop kuralı yok"
+    ],
+    "uyumluluk_notu": "1L3A tek sembol bazlıysa doğrudan uygulanamaz. Birden fazla sembol (ör. kripto çiftleri veya ilişkili emtialar) ile korelasyon ve ayrışma analogu test edilebilir; ancak kitap endeks sepetini varsayar. Hacim gerekmez.",
+    "varyantlar": [
+      "Solo yeni yüksek veya düşük (diğer sözleşmeler doğrulamıyor) tetik olarak (s.173-174)"
+    ],
+    "anahtar_kelimeler": ["liderlik", "seri-ayrisma", "sapma", "endeks-cifti", "trend-sinyali", "solo-yuksek"]
+  },
+  {
+    "kart_id": "swing__hamur-olu-cubuk__scheier",
+    "ad": "Hamur Çubuğu (Dough Bar) ve Ölü Çubuk (Die Bar) ile Kısmi Çıkış",
+    "stil": "swing",
+    "kaynak": {"pdf": "Pivotlar_Formasyonlar_ve_Gün_İçi_Swing_İşlemleri_-_M_William_Scheier_224_sayfa.pdf", "sayfalar": [60, 61, 62, 63, 64, 65]},
+    "ozet": "Trendin başında gelen geniş aralıklı yönlü çubuk (Hamur Çubuğu) trendi teyit eder ve geri çekilme riskine karşı tampon sağlar. Trend sonunda, aynı yönde gelen geniş aralıklı çubuk (Ölü Çubuk) trendin bittiğine dair ipucudur ve kısmi çıkış için kullanılır.",
+    "kategori": "trend_takip",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "vadeli",
+    "zaman_dilimi": {"islem": "1m", "ust_filtre": null},
+    "gostergeler": [],
+    "long_giris": [
+      "Yukarı trend başında (ör. ORB kırılımı sırasında) geniş aralıklı yukarı çubuk (Hamur Çubuğu) oluşur ve trend yönünde giriş bu teyit ile değerlendirilir (kitap: erken girişin şans olabileceğini, geç girişin ise daha zor olduğunu belirtir)",
+      "Kitap Hamur Çubuğu'nu tek başına giriş modeli olarak değil, giriş modeline katkı olarak görür (s.65)"
+    ],
+    "short_giris": [
+      "Ayna: aşağı trend başında geniş aralıklı aşağı çubuk (Hamur) teyidi"
+    ],
+    "stop_loss": null,
+    "kar_al": "Trend sonunda aynı yönde geniş aralıklı çubuk (Ölü Çubuk) belirirse pozisyonun bir kısmı çıkarılır; kalan kısım takip eden stop ile yönetilir (s.60-61).",
+    "iz_suren_stop": "Kalan kısım için takip eden stop (kitap tek çıkış olarak takip stopu yerine kısmi çıkışı önerir, s.60)",
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Geniş aralık kriteri kitapta nicel değildir; mini Russell için yaklaşık iki puan referansı verilir (s.62)"
+    ],
+    "pozisyon_risk": "Ölü Çubukta kısmi çıkış; kalan pozisyon için takip stop (s.60-61).",
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "'Geniş aralık' ve 'trend rengi' görsel; eşik ya da ATR katsayısı belirtilmemiştir."
+    },
+    "belirsizlikler": [
+      "Geniş aralık için ATR katı, yüzde veya mutlak puan eşiği yok (kitap yalnızca mini Russell'da yaklaşık iki puan örneği verir)",
+      "Hamur Çubuğunun teyit mi giriş mi olduğu kitapta iki farklı biçimde geçer",
+      "Ölü Çubuk tanımı ('trend rengi' aynı, geniş aralık) görsel ölçüte dayanır"
+    ],
+    "uyumluluk_notu": "Geniş aralık eşiği ATR tabanlı olarak 1L3A'da uyarlanabilir; 5 dk ve üzerinde de anlamlı olup olmadığı test edilmelidir. Hacim gerekmez.",
+    "varyantlar": [
+      "Ölü Çubuk ile iki birimli kısmi çıkış (s.60-61)"
+    ],
+    "anahtar_kelimeler": ["hamur-cubuk", "olu-cubuk", "genis-aralik", "kismi-cikis", "trend-baslangic"]
+  },
+  {
+    "kart_id": "swing__maymun-barlari-orb-geri-donus__scheier",
+    "ad": "Maymun Barları ve Flubber: ORB'ye Tekrarlı Geri Dönüş Sayımı",
+    "stil": "swing",
+    "kaynak": {"pdf": "Pivotlar_Formasyonlar_ve_Gün_İçi_Swing_İşlemleri_-_M_William_Scheier_224_sayfa.pdf", "sayfalar": [97, 98, 99]},
+    "ozet": "Kalıcı trend gününde, ORB'den uzaklaşan fiyat birkaç kez ORB'ye geri dönüp sıçrar. Her dönüşte ORB'nin çekimi azalır. Üçüncü belirgin geri dönüşten sonra ORB'den uzaklaşma kalıcı kabul edilir ve trend yönünde giriş yapılır.",
+    "kategori": "trend_takip",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "vadeli",
+    "zaman_dilimi": {"islem": "1m", "ust_filtre": null},
+    "gostergeler": [{"ad": "ORB", "parametreler": {"zaman_dilimi_dk": 1}}],
+    "long_giris": [
+      "Yukarı kalıcı trend: fiyat ORB üst sınırının üstünde yukarı gider, ORB'nin üst sınırına doğru geri çekilir (Flubber) ve yukarı sıçrar",
+      "Bu geri çekilme ve sıçrama üç kez oluşur; üçüncü sıçramadan sonra önceki yerel zirvenin kırılması alım tetiğidir",
+      "Kitap: üçüncü dönüşten sonra ORB'den uzaklaşma kalıcı olur (s.98)"
+    ],
+    "short_giris": [
+      "Aşağı kalıcı trend: fiyat ORB alt sınırının altında aşağı gider, ORB'ye geri çekilip aşağı döner",
+      "Üçüncü dönüşten sonra önceki yerel dibin kırılması satım tetiğidir"
+    ],
+    "stop_loss": null,
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Kalıcı Trend Günü bağlamı (kitap bu kalıbı bu gün modelinde tanımlar)"
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Sayım mantığı nicel ama 'ORB'ye geri dönüş' ve 'sıçrama' eşikleri görseldir; kitap sayım sıfırlama kuralı vermez."
+    },
+    "belirsizlikler": [
+      "ORB'ye 'dokunma' tanımı: kitap bir çubuğun herhangi bir kısmının ORB'ye değmesini esas alır (s.36), ancak geri dönüş tolerans değeri yoktur",
+      "Sayımın sıfırlanma kuralı yok",
+      "Stop ve hedef kuralı yok"
+    ],
+    "uyumluluk_notu": "ORB çapası seans başlangıcına bağlıdır (kart orb-3-bar ile aynı uyarlama sorunu). Forex, kripto ve perpetual'da seans tanımı gerekir. Hacim gerekmez.",
+    "varyantlar": [
+      "Boğa için Flubber, ayı için Maymun Barları (s.97-99)"
+    ],
+    "anahtar_kelimeler": ["maymun-barlari", "flubber", "orb", "geri-donus-sayimi", "kalici-trend"]
+  },
+  {
+    "kart_id": "swing__ters-fib-78-6-hedef__scheier",
+    "ad": "Ters %78,6 Projeksiyon Hedefi (Pivot Ledge'den)",
+    "stil": "swing",
+    "kaynak": {"pdf": "Pivotlar_Formasyonlar_ve_Gün_İçi_Swing_İşlemleri_-_M_William_Scheier_224_sayfa.pdf", "sayfalar": [53, 54, 181, 182]},
+    "ozet": "Keskin bir kopuş Pivot Ledge'inden ölçülen ek %78,6'lık mesafe, trend hareketinin çıkış hedefi olarak kullanılır. Kitap bu kuralı giriş tetiği değil, hedef (çıkış) aracı olarak önerir.",
+    "kategori": "diger",
+    "piyasa_rejimi": "herhangi",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {"islem": "1m", "ust_filtre": null},
+    "gostergeler": [{"ad": "Fibonacci", "parametreler": {"oran": 0.786}}],
+    "long_giris": [],
+    "short_giris": [],
+    "stop_loss": null,
+    "kar_al": "Kitap tanımı (s.53): yakın yüksek veya düşük seviyenin, yakın ters uç noktasından %21,4 uzakta oluştuğu varsayıldığında, keskin kopuş pivotunun çıkıntısından ölçülen ek %78,6'lık mesafe hedeftir. Hesaplamanın referans uçları metinde tam olarak belirtilmemiştir.",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Oran (0,786) ve ölçüm mantığı nicel; ancak referans uçların (yakın yüksek/düşük ve ters uç) hangi çubuklardan alınacağı tam tanımlı değildir."
+    },
+    "belirsizlikler": [
+      "'Yakın yüksek veya düşük' ve 'ters uç nokta' hangi çubuklar olduğu tanımsız",
+      "Oran tabanı: ana hareket uzunluğu mu, Ledge'e olan mesafe mi kitapta net değil",
+      "Kitap %21,4 ve %78,6 rakamlarını aynı cümlede verir (1 - 0,786 = 0,214); bu ilişki kuralın nasıl kurulduğunu açıklamaz",
+      "Kitap Fibonacci'yi giriş için güvenilir bulmadığını, hedef için kullandığını söyler (s.53, 167)"
+    ],
+    "uyumluluk_notu": "Oran tabanlı hedef hesabı 1L3A'da uygulanabilir (matematiksel). Hacim gerekmez. Kitabın Fibonacci kullanım önerisi yalnızca hedef içindir; giriş için kullanılmamalıdır.",
+    "varyantlar": [
+      "Kitapta Fibonacci ile Pivot/Tükenme ızgarası karşılaştırması (Ek G, s.215-217; metnin kesik olduğu yer)"
+    ],
+    "anahtar_kelimeler": ["fibonacci", "78-6", "hedef", "pivot-ledge", "cikis", "projeksiyon"]
+  },
+  {
+    "kart_id": "swing__islem-limitleri__scheier",
+    "ad": "Mekanik Davranış Sınırları: Günlük İşlem ve Ardışık Kayıp Kuralları",
+    "stil": "swing",
+    "kaynak": {"pdf": "Pivotlar_Formasyonlar_ve_Gün_İçi_Swing_İşlemleri_-_M_William_Scheier_224_sayfa.pdf", "sayfalar": [191, 193, 194, 195]},
+    "ozet": "Yazarın planındaki sayısal sınırlar: günde en fazla 10 işlem (ideal beş veya daha az), üst üste üç kayıplı işlemde simülatöre geçiş, iki kayıplı günden sonra ertesi gün simülatörde başlama, iki net kaybeden haftadan sonra sistemin incelenmesi. Günlük kâr hedefine ulaşılınca o gün işlem durdurulur.",
+    "kategori": "diger",
+    "piyasa_rejimi": "herhangi",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {"islem": "gun", "ust_filtre": null},
+    "gostergeler": [],
+    "long_giris": [],
+    "short_giris": [],
+    "stop_loss": "Kayıp limitleri kitapta sembolik olarak verilir ('$$ kayıp limitleri'): tek pozisyonun toplam riski, frame (dilim) kayıp limiti, günlük, haftalık kayıp limiti. Sayısal değerler kitapta boştur (s.191).",
+    "kar_al": "Günlük kâr hedefine ulaşılınca o gün işlem durdurulur (s.194). Haftalık hedefe 5. işlem gününden önce ulaşılırsa ek kısıt yoktur; aylık hedefe son işlem gününden önce ulaşılırsa bir gün ara verilir (s.194-195). Sayısal kâr hedefleri kitapta boştur.",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Günde en fazla 10 işlem; kitap ideal olarak 5 veya daha az işlemi önerir (s.193)",
+      "Üst üste 3 tam kayıplı işlem: simülatöre geçiş, gerçek parayla işlem için 2 kâr / 3 işlem veya 3 kâr / 5 işlem koşulu (s.193-194)",
+      "İki gün üst üste kayıp: ertesi gün simülatörde başlanır (s.194)",
+      "Net kaybeden hafta: ertesi hafta simülatörde başlanır; iki net kaybeden hafta: operasyonun tamamen gözden geçirilmesi (s.194)",
+      "Net başabaş işlem, kayıp sayısına dâhil edilmez (s.193)"
+    ],
+    "pozisyon_risk": "Tier 1 ve Tier 4 için 3 birim; Tier 2, 3 ve 5 için 2 birim (s.191). Birim = sabit sözleşme sayısı; birim başına risk kitapta sayısal değildir.",
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 3,
+      "gerekce": "Sayısal işlem sayısı, ardışık kayıp ve gün/hafta sınırları ölçülebilir. Ancak kitap bunları yazarın kişisel tercihleri olarak sunar; kayıp limitleri ve kâr hedefleri sayısal değildir."
+    },
+    "belirsizlikler": [
+      "Kayıp limitlerinin dolar veya yüzde değerleri kitapta boştur",
+      "Günlük, haftalık ve aylık kâr hedeflerinin sayısal değerleri yoktur",
+      "Kitap bu sınırların genel tavsiye değil, yazarın kişisel planı olduğunu belirtir",
+      "'Net başabaş' tanımı (kısmi kâr ile kalan zarar eşitliği) kitapta tarif edilmiştir ancak sayısal eşik yoktur"
+    ],
+    "uyumluluk_notu": "Hesap ve risk yönetimi kuralıdır; 1L3A'da strateji seviyesinden bağımsız olarak uygulanabilir (işlem sayısı ve ardışık kayıp sayacı). Hacim gerekmez. Kriptoda 7/24 işlem nedeniyle gün sınırı tanımlanmalıdır.",
+    "varyantlar": [
+      "Tier sınıflandırması (Tier 1-6) ve pozisyon birimi kuralları (s.189-191)"
+    ],
+    "anahtar_kelimeler": ["risk-limiti", "islem-sayisi", "ardisik-kayip", "simulator", "pozisyon-birimi", "gunluk-limit"]
+  }
+]

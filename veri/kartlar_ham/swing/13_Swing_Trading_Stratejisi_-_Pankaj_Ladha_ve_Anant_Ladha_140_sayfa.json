@@ -1,0 +1,619 @@
+[
+  {
+    "kart_id": "swing__hacim-patlamasi__ladha",
+    "ad": "Hacim Patlaması (Büyük Patlama) Alımı",
+    "stil": "swing",
+    "kaynak": {"pdf": "13_Swing_Trading_Stratejisi_-_Pankaj_Ladha_ve_Anant_Ladha_140_sayfa.pdf", "sayfalar": [36, 37, 38, 39, 40, 41, 44, 45]},
+    "ozet": "Günlük fiyat artışı %5'in üzerinde ve hacim son dönem ortalamasının en az 10 katı ve önceki günden fazla olan, fiyatı 300 Rs üzerindeki hisse alınır. Endeks yükseliş trendinde olmalıdır. Stop alım seviyesinin %7-8 altındadır.",
+    "kategori": "kirilim",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "hisse",
+    "zaman_dilimi": {"islem": "1G", "ust_filtre": "60dk veya 1G mum (kitap ikisini de söyler)"},
+    "gostergeler": [
+      {"ad": "Hacim", "parametreler": {"gunluk_ortalama_kati": 10, "onceki_gune_gore": "daha fazla"}},
+      {"ad": "Günlük fiyat artışı", "parametreler": {"min_yuzde": 5}},
+      {"ad": "Endeks trendi (NIFTY, SENSEX)", "parametreler": {"kosul": "yükseliş trendi"}}
+    ],
+    "long_giris": [
+      "Günlük fiyat artışı %5'in üzerinde.",
+      "Hacim, günlük ortalamanın en az 10 katı ve önceki günün hacminden fazla.",
+      "Hisse fiyatı en az 300 Rs.",
+      "Hisse son konsolidasyondan çıkıyor (kitapta 'kesin satın alma') ve NIFTY/SENSEX yükseliş trendinde.",
+      "Giriş: patlama sonrası 2,5-21 günlük yatay konsolidasyon veya 10/20/50 günlük EMA'ya geri çekilmede (p39)."
+    ],
+    "short_giris": [],
+    "stop_loss": "Alım fiyatının %7-8 altı; yeni başlayan için %4-5 (p45).",
+    "kar_al": "Minimum 3:1 risk/ödül hedefi (p40). Pozisyonun yarısı yaklaşık 2,5 gün sonra satılır; kalan, hisse 10/20/50 günlük EMA altında kapandığında satılır (p40).",
+    "iz_suren_stop": null,
+    "zaman_cikisi": "Yaklaşık 2,5 gün sonra yarı çıkış (p40).",
+    "filtreler": [
+      "Endeks (NIFTY, SENSEX) yükseliş trendinde (p37-38).",
+      "Fiyat en az 300 Rs (p37-38).",
+      "Yanlış alarm: bölünme, hisse bölünmesi gibi hacim patlamaları ayıklanmalı (p44).",
+      "Hacim tek başına yeterli değil; arka plan haber teyidi aranmalı (p38, p44)."
+    ],
+    "pozisyon_risk": "İşlem riski sermayenin %0,5-1'i; yeni başlayan için %4-5 stop (p39-41, p45).",
+    "iddia_edilen_performans": "Patlama sonrası çoğu zaman önümüzdeki günlerde %25-75 hareket gözlemi (p38). Sayısal kazanma oranı yok.",
+    "kodlanabilirlik": {"puan": 2, "gerekce": "Hacim çarpanı, fiyat artışı, fiyat eşiği ve stop sayısal; 'konsolidasyondan çıkış', 'kesin alım' ve 'arka plan hikayesi' yoruma açık."},
+    "belirsizlikler": [
+      "'Son konsolidasyondan çıkış' tanımı yok.",
+      "Günlük ortalamanın kaç gün üzerinden hesaplandığı belirtilmemiş.",
+      "'Kazanç yeniden derecelendirme' gibi arka plan hikayesi yoruma açık.",
+      "2,5 gün yarı çıkış ile 3:1 hedefin birlikte nasıl uygulanacağı net değil."
+    ],
+    "uyumluluk_notu": "1L3A için: 10x hacim ve %5 artış mekanik. Hindistan hisse piyasasına özgü endeks ve fiyat eşiği (300 Rs). Forex'te merkezi hacim yok; kripto'da hacim var ama test edilmeli. Endeks filtresi yerine referans varlık (ör. BTC) kullanılabilir (varsayım).",
+    "varyantlar": [
+      "Hacim patlaması sonrası konsolidasyon kırılımı (kart: swing__aralik-kirilimi__ladha ile ilişkili).",
+      "Yeni başlayanlar için %4-5 stop (p39, p45)."
+    ],
+    "anahtar_kelimeler": ["hacim-patlamasi", "hacim-teorisi", "gunluk-artis", "10x-hacim", "konsolidasyon", "stop-7-8", "ladha"]
+  },
+  {
+    "kart_id": "swing__aralik-kirilimi__ladha",
+    "ad": "10/20 Günlük Zirve Kırılımı (Breakout)",
+    "stil": "swing",
+    "kaynak": {"pdf": "13_Swing_Trading_Stratejisi_-_Pankaj_Ladha_ve_Anant_Ladha_140_sayfa.pdf", "sayfalar": [43, 44, 45, 46, 47, 48]},
+    "ozet": "Fiyatı en az 300 Rs olan ve 10 veya 20 günlük en yüksek seviyeyi %3-5 kırarak kapanan hisse, ortalama günlük ciro 1 crore üzerindeyse ve NIFTY/Bank NIFTY teyit edilmiş yükseliş trendindeyse kırılma gününde alınır. Stop kırılma gününün en düşük seviyesinin yaklaşık %1 altındadır.",
+    "kategori": "kirilim",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "hisse",
+    "zaman_dilimi": {"islem": "1G", "ust_filtre": null},
+    "gostergeler": [
+      {"ad": "En yüksek seviye (N gün)", "parametreler": {"N": [10, 20]}},
+      {"ad": "Kırılma yüzdesi", "parametreler": {"min_yuzde": 3, "max_yuzde": 5}},
+      {"ad": "Ortalama günlük ciro", "parametreler": {"min_crore": 1}},
+      {"ad": "Endeks trendi (NIFTY, Bank NIFTY)", "parametreler": {"kosul": "teyit edilmiş yükseliş"}}
+    ],
+    "long_giris": [
+      "Fiyat en az 300 Rs.",
+      "Fiyat 10 veya 20 günlük en yüksek seviyeyi %3-5 aşar (kırılım).",
+      "Ortalama günlük işlem cirosu en az 1 crore Rs.",
+      "NIFTY ve Bank NIFTY teyit edilmiş yükseliş trendinde.",
+      "Alım, kırılma gününde yapılır (p46)."
+    ],
+    "short_giris": [],
+    "stop_loss": "Kırılma gününün en düşük seviyesinin yaklaşık %1 altı; alternatif: 10/20 günlük EMA'nın altı (p46).",
+    "kar_al": "Giriş sonrası 2,5-5 işlem günü sonra pozisyonun yarısı satılır; kalan, kapanışta 10/20 günlük EMA altına inene kadar takip edilir (p47).",
+    "iz_suren_stop": null,
+    "zaman_cikisi": "2,5-5 işlem günü sonra yarı çıkış (p47).",
+    "filtreler": [
+      "NIFTY, Mid-cap ve Small-cap endeksleri 50 günlük hareketli ortalamanın üzerinde (p45).",
+      "Küçük sermaye endeksi 10/20 günlük EMA üzerinde ise yardımcı (p45).",
+      "Düzeltici (aralıklı) piyasada strateji çalışmaz (p45)."
+    ],
+    "pozisyon_risk": "Riske edilen sermaye %0,5-1. Örnek: 1 crore sermayede %0,5 = 50.000 Rs; hisse başı risk 35 Rs ise 1.428 hisse (p46-47). Tek hisseye en fazla sermayenin %15'i (p48).",
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {"puan": 2, "gerekce": "Eşikler (300 Rs, %3-5, 1 crore, 10/20 gün) net; 'teyit edilmiş yükseliş' ve kırılımdan sonra dört senaryo (p44-45) kural olarak tanımlanmamış."},
+    "belirsizlikler": [
+      "'Teyit edilmiş yükseliş' tanımı yok (MA mı, endeks seviyesi mi?).",
+      "Kırılım kapanışla mı gün içi mi onaylanır belirtilmemiş.",
+      "Kırılım sonrası dört senaryo (p44-45) kural değil gözlem.",
+      "Yanlış kırılım için ek çıkış kuralı yok (kitap stop uygulanmasını söyler)."
+    ],
+    "uyumluluk_notu": "1L3A için: 10/20 günlük zirve ve EMA mekanik. Ciro ve fiyat eşikleri hisse piyasası içindir; kripto/forex için hacim eşiği yeniden tanımlanmalı. Endeks filtresi için referans varlık seçilmeli (varsayım).",
+    "varyantlar": [
+      "50 günlük yeni zirve kırılımı (kart: swing__goreceli-guc__ladha ile ilişkili).",
+      "Dar aralık konsolidasyon sonrası ikinci giriş (p45)."
+    ],
+    "anahtar_kelimeler": ["aralik-kirilimi", "10-20-gun-zirve", "breakout", "ema", "ciro", "endeks-teyit", "ladha"]
+  },
+  {
+    "kart_id": "swing__dip-alim-geri-cekilme__ladha",
+    "ad": "Güçlü Hissede Geri Çekilme (Dip) Alımı - 10/20/50 EMA",
+    "stil": "swing",
+    "kaynak": {"pdf": "13_Swing_Trading_Stratejisi_-_Pankaj_Ladha_ve_Anant_Ladha_140_sayfa.pdf", "sayfalar": [50, 51, 52, 53, 54, 55, 56]},
+    "ozet": "Son 30 günde %20, 90 günde %30 veya 180 günde %50 yükselmiş güçlü hisse, düşük hacimle 10/20 veya 50 günlük EMA'ya geri çekilir ve oradan en az %3-5 sıçrarsa alınır. Stop giriş gününün en düşük seviyesinin yaklaşık %0,5 altıdır.",
+    "kategori": "trend_takip",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "hisse",
+    "zaman_dilimi": {"islem": "1G", "ust_filtre": null},
+    "gostergeler": [
+      {"ad": "Üstel hareketli ortalama (EMA)", "parametreler": {"periyot": [10, 20, 50]}},
+      {"ad": "Fiyat artışı (momentum)", "parametreler": {"30_gun_yuzde": 20, "90_gun_yuzde": 30, "180_gun_yuzde": 50}},
+      {"ad": "Sıçrama", "parametreler": {"min_yuzde": 3, "max_yuzde": 5}}
+    ],
+    "long_giris": [
+      "Son 30 günde en az %20, son 90 günde en az %30 veya son 180 günde en az %50 yükseliş (p51).",
+      "Fiyat en az 300 Rs ve ortalama günlük ciro en az 1 crore Rs (p52).",
+      "Fiyat düşük hacimle 10, 20 veya 50 günlük EMA'ya geri çekilir (p52).",
+      "EMA bölgesinden en az %3-5 sıçrama (teyit) (p52-53, p56).",
+      "50 günlük EMA dip alımı: fiyat 50 EMA yakınında sıçrar ve üzerinde kapanır; ya da gün içi altına düşüp üstünde kapanır (p53)."
+    ],
+    "short_giris": [],
+    "stop_loss": "Giriş gününün en düşük seviyesinin yaklaşık %0,5 altı veya ilgili EMA'nın yarım yüzde altı (p55).",
+    "kar_al": "Giriş sonrası 2,5-5 gün sonra pozisyonun yaklaşık yarısı satılır; kalan, 10/20/50 günlük EMA altında kapanışta satılır (p56). 50 EMA dip alımında hedef %6-10 (p53).",
+    "iz_suren_stop": null,
+    "zaman_cikisi": "2,5-5 işlem günü sonra yarı çıkış (p56).",
+    "filtreler": [
+      "Ana endeksler yükseliş trendinde; ölü kedi sıçraması ayıklanır (p66).",
+      "Momentumu teyit edilmiş, sektör favorisi hisseler (p66).",
+      "Geri çekilme düşük hacimli olmalı (p66).",
+      "50 DMA üstünde ve 50 DMA 200 DMA üstünde (p54)."
+    ],
+    "pozisyon_risk": "Riske edilen sermaye %0,5-1 (p55). Tek hisseye sermayenin %15'inden fazlası konmaz (genel kural, p48).",
+    "iddia_edilen_performans": "Deepak Nitrite 2020-21 örneğinde 50 EMA'dan defalarca dönüş (p53). Kazanma oranı yok.",
+    "kodlanabilirlik": {"puan": 2, "gerekce": "Momentum eşikleri, EMA mesafesi ve sıçrama yüzdesi sayısal; 'düşük hacim', 'bıçak yakalama' ve 'sektör favorisi' yoruma açık."},
+    "belirsizlikler": [
+      "'Düşük hacim' için eşik yok.",
+      "10/20/50 EMA'dan hangisi seçileceği kullanıcıya bırakılmış.",
+      "50 EMA dip alımında 'gün içi altına düşüp üstünde kapanış' tanımı kısmen belirsiz.",
+      "'Aşırı satılmış' ve 'bıçak' tanımı yok (p50-51)."
+    ],
+    "uyumluluk_notu": "1L3A için: momentum yüzdesi ve EMA mesafesi mekanik. Forex/kripto'da 'Rs 300' ve ciro eşikleri yeniden tanımlanmalı; hacim proxy gerekir.",
+    "varyantlar": [
+      "50 EMA dip alımı ayrı parametre seti (p53).",
+      "Sektör liderinde konsolidasyon sonrası 10/20 EMA dibi (p55)."
+    ],
+    "anahtar_kelimeler": ["dip-alim", "geri-cekilme", "50-ema", "momentum", "sicrama-3-5", "ladha"]
+  },
+  {
+    "kart_id": "swing__halka-arz-kirilimi__ladha",
+    "ad": "Halka Arz (IPO) Sonrası Konsolidasyon Kırılımı",
+    "stil": "swing",
+    "kaynak": {"pdf": "13_Swing_Trading_Stratejisi_-_Pankaj_Ladha_ve_Anant_Ladha_140_sayfa.pdf", "sayfalar": [61, 62, 63, 64, 65, 66, 67, 68, 69]},
+    "ozet": "Yakın zamanda (öncelikle 1 yıl içinde) listelenmiş, fiyatı en az 300 Rs ve günlük ortalama cirosu en az 1 crore olan hisse; konsolidasyon sonrası %3-5 kırılımda alınır. Stop kırılma gününün en düşük seviyesidir (erken işaret alımında aralık en düşüğünün yaklaşık %1 altı).",
+    "kategori": "kirilim",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "hisse",
+    "zaman_dilimi": {"islem": "1G", "ust_filtre": null},
+    "gostergeler": [
+      {"ad": "Listelemeden bu yana süre", "parametreler": {"max_yil": 1, "not": "öncelik ifadesi"}},
+      {"ad": "Kırılma yüzdesi", "parametreler": {"min_yuzde": 3, "max_yuzde": 5}},
+      {"ad": "Konsolidasyon derinliği", "parametreler": {"min_yuzde": 10, "max_yuzde": 20}},
+      {"ad": "Endeks piyasa rejimi (NIFTY, Bank NIFTY 20/50/200 DMA)", "parametreler": {"kosul": "üstünde"}}
+    ],
+    "long_giris": [
+      "Hisse listelemeden sonra en fazla 1 yıl (öncelik) (p61-62).",
+      "Fiyat en az 300 Rs; ortalama günlük ciro en az 1 crore Rs (p62).",
+      "Konsolidasyon (%10-20 aralıkta daralma) sonrası %3-5 kırılım (p66).",
+      "Erken işaret alımı: yükseliş günlerinin sayısı ve hacminin artması (p66); bu durumda aralık en düşüğünün yaklaşık %1 altı stop.",
+      "Piyasa boğa rejiminde: NIFTY ve Bank NIFTY 20/50/200 günlük üstünde (p64-65)."
+    ],
+    "short_giris": [],
+    "stop_loss": "Kırılma gününde alımda kırılma gününün en düşük seviyesi; erken işaret alımında aralık en düşüğünün yaklaşık %1 altı (p67).",
+    "kar_al": "Swing: 2,5-8 işlem günü; pozisyon: 2,5-8 hafta (p68). Kademeli çıkış oranı verilmemiş.",
+    "iz_suren_stop": null,
+    "zaman_cikisi": "Swing 2,5-8 işlem günü; pozisyon 2,5-8 hafta (p68).",
+    "filtreler": [
+      "Piyasa düzeltmesinde halka arz alımı yapılmaz (p65); piyasa koşulu boğa olmalı.",
+      "Sektör piyasa trendiyle uyumlu olmalı (p63).",
+      "Kurumsal (büyük fon) katılımı ve çapa yatırımı teyidi (p63-64)."
+    ],
+    "pozisyon_risk": "Halka arzlarda riske edilen sermaye en fazla %1 (p67). Örnek: 20 lakh sermaye, hisse 2400 ve stop 2200 ise 100 hisse, sermayenin %12'si (p67).",
+    "iddia_edilen_performans": "ICRA (330 Rs'den 4998 Rs'ye), Angel Broking, UTI AMC örnekleri (p65-66). Kazanma oranı yok.",
+    "kodlanabilirlik": {"puan": 2, "gerekce": "Eşikler (1 yıl, 300 Rs, 1 crore, %3-5 kırılım, %10-20 konsolidasyon) ve stop sayısal; 'konsolidasyon' tanımı, 'erken işaret' ve 'kurumsal aktivite' yoruma açık."},
+    "belirsizlikler": [
+      "'Öncelik' ifadesiyle 1 yıl eşiğinin sert sınır mı tercih mi olduğu net değil.",
+      "Konsolidasyonun minimum süresi yok (p66).",
+      "Erken işaret tanımı ('ani yüksek hacim veya daha uzun süren yükselişler', p66) yoruma açık.",
+      "Kademeli çıkış oranı yok."
+    ],
+    "uyumluluk_notu": "1L3A için: halka arz eşiği hisse piyasasına özgü. Kripto'da karşılığı yeni listelenen token (varsayım, kitapta yok). Forex'te uygulanamaz. Hacim verisi gerekir.",
+    "varyantlar": [
+      "Piyasa düzeltmesinden hemen önce listelenen halka arz (ICRA, Angel, SBI örnekleri, p65).",
+      "Erken işaret alımı (p66-67)."
+    ],
+    "anahtar_kelimeler": ["halka-arz", "ipo", "yeni-listeleme", "konsolidasyon", "kirilim", "ladha"]
+  },
+  {
+    "kart_id": "swing__2-5-gun-geri-donus__ladha",
+    "ad": "2,5 Gün Kâr Realizasyonu Sonrası Geri Dönüş (Kitapta 'Funda')",
+    "stil": "swing",
+    "kaynak": {"pdf": "13_Swing_Trading_Stratejisi_-_Pankaj_Ladha_ve_Anant_Ladha_140_sayfa.pdf", "sayfalar": [71, 72, 73, 74, 75]},
+    "ozet": "Uzun süredir yükselen hisse, kâr realizasyonu ile ilk gün hacimli düşer, ikinci gün daha az hacimle düşmeye devam eder. Üçüncü günün ilk yarısında, satış baskısı ve hacim azalmışsa, alım yapılır; hedef %5-8, stop %2-3 veya üç günün en düşük seviyesinin %1 altı.",
+    "kategori": "ortalamaya_donus",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "hisse",
+    "zaman_dilimi": {"islem": "1G", "ust_filtre": "gün içi (üçüncü günün ilk yarısı için 1 saatlik ölçek varsayımı)"},
+    "gostergeler": [
+      {"ad": "Hacim karşılaştırması", "parametreler": {"kosul": "3. günün ilk yarısındaki hacim önceki iki güne göre daha düşük"}},
+      {"ad": "Yükseliş trendi", "parametreler": {"kosul": "hisse ve piyasa yükseliş trendinde"}}
+    ],
+    "long_giris": [
+      "Hisse ve piyasa yükseliş trendinde (p72, p75); düşüş veya nötr piyasada kullanılmaz.",
+      "1. gün hacimli düşüş; 2. gün daha az hacimle düşüş (p72-73).",
+      "3. günün ilk yarısında hacim önceki iki güne göre daha düşük ve satış baskısı azalmış (p74).",
+      "Giriş üçüncü günün ilk yarısında; ilk ve ikinci günde giriş yapılmaz (p74)."
+    ],
+    "short_giris": [],
+    "stop_loss": "Zarar durdurma %2-3 veya üç günün en düşük seviyesinin %1 altı (p74).",
+    "kar_al": "Hedef yaklaşık %5-8 (p74).",
+    "iz_suren_stop": null,
+    "zaman_cikisi": "Yaklaşık 2,5 işlem günü hedefi (p72, p75).",
+    "filtreler": [
+      "Hisse ve piyasa yükseliş trendinde (p72, p75).",
+      "Büyük temel ve güçlü teknik kurulum tercih edilir (p75).",
+      "Düşük hacimli kırılım yanlış alarm olabilir; hacim kontrolü (p73)."
+    ],
+    "pozisyon_risk": "Riske edilen sermaye %0,5-1 (p74).",
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {"puan": 2, "gerekce": "Hacim karşılaştırması (önceki iki güne göre düşük), stop ve hedef sayısal; 'hacimli düşüş', 'büyük temel' yoruma açık; çeviri bozuk."},
+    "belirsizlikler": [
+      "Çeviri bozuk: strateji adı 'Funda' belirsiz; kavram metinden çıkarıldı.",
+      "'Hacimli' ve 'düşük hacim' için sayısal eşik yok.",
+      "'İlk yarı' tanımı için zaman dilimi belirtilmemiş.",
+      "Hacim karşılaştırma dönemi (kaç günlük ortalama) belirsiz."
+    ],
+    "uyumluluk_notu": "1L3A için: 3 günlük hacim ve fiyat mekanik; 'ilk yarı' gün içi zaman dilimi 1 saatlik ile uyarlanabilir. Forex/kripto'da 'yükseliş trendi' tanımı ve hacim proxy gerekir.",
+    "varyantlar": [
+      "Yükseliş trendinde kâr realizasyonu düşüşlerinde giriş (kitap düşüş ve nötr piyasada denenmemeli der, p75)."
+    ],
+    "anahtar_kelimeler": ["2-5-gun", "kar-realizasyonu", "hacim-dususu", "yukselis-trendi", "tersine-donus", "ladha"]
+  },
+  {
+    "kart_id": "swing__hareketli-ortalama-kesisim__ladha",
+    "ad": "Üstel Hareketli Ortalama Kesişimi (10/20, 20/50, 50/200)",
+    "stil": "swing",
+    "kaynak": {"pdf": "13_Swing_Trading_Stratejisi_-_Pankaj_Ladha_ve_Anant_Ladha_140_sayfa.pdf", "sayfalar": [77, 78, 79, 80, 81]},
+    "ozet": "Kısa vadeli üstel hareketli ortalama uzun vadeliyi kapanışta yukarı keserse (10/20, 20/50 veya 50/200 EMA) gün sonunda alım yapılır. Kısa EMA uzun EMA'nın altına inerse stop tetiklenir. Giriş fiyatının yaklaşık %10 üzerinde kâr rezervasyonu yapılır.",
+    "kategori": "trend_takip",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "hisse",
+    "zaman_dilimi": {"islem": "1G", "ust_filtre": null},
+    "gostergeler": [
+      {"ad": "Üstel hareketli ortalama (EMA)", "parametreler": {"kombinasyonlar": [[10, 20], [20, 50], [50, 200]]}}
+    ],
+    "long_giris": [
+      "Gün sonu kapanışında kısa EMA uzun EMA'yı yukarı keser (10/20, 20/50 veya 50/200 kombinasyonlarından biri) (p78, p105-106).",
+      "Fiyat kesişim sonrasında aşırı alımda değil; risk/getiri uygun (p79)."
+    ],
+    "short_giris": [
+      "Kısa EMA uzun EMA'nın altına geçer (düşüş kesişimi, p78). Short kuralı kitapta net tarif edilmemiş (ayna varsayımı)."
+    ],
+    "stop_loss": "Kısa EMA uzun EMA'nın altına geçince (p80); sıkı alternatif: giriş gününün en düşük seviyesinin altında kapanış (p80).",
+    "kar_al": "Giriş fiyatının yaklaşık %10 üzerinde kâr rezervasyonu (p80). Geriye dönük test ortalama karlı işlemin yaklaşık %12 olduğunu gösteriyorsa bu seviye kullanılabilir (p80).",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Aşırı alım değil: risk/getiri oranı uygun (p79).",
+      "Geriye dönük test ile kanıt aranır (p79-80)."
+    ],
+    "pozisyon_risk": "Çapraz işlemlerde sermayenin %1'inden fazlası riske atılmaz (p81).",
+    "iddia_edilen_performans": "Geriye dönük testte ortalama karlı işlem yaklaşık %12 (p80). Kazanma oranı verilmemiş.",
+    "kodlanabilirlik": {"puan": 3, "gerekce": "Kesişim tanımı, EMA periyotları, stop ve %10 kâr al net ve mekanik. Kısa taraf kuralı ve 'aşırı alım' filtresi tam tanımlı değil."},
+    "belirsizlikler": [
+      "Kısa taraf (düşüş kesişimi) giriş kuralı açıkça yazılmamış (ayna varsayımı).",
+      "'Aşırı alım' için tanım yok.",
+      "Stop seçimi (kesişim mi, önceki gün dibi mi) kullanıcıya bırakılmış (p80).",
+      "Kâr al için %10 ve %12 farklı değerler veriyor; hangisinin kural olduğu net değil."
+    ],
+    "uyumluluk_notu": "1L3A için: en uyumlu kart. EMA kesişimleri 5m ve 1h'de de mekanik; forex, kripto ve hisse için test edilebilir. Hacim gerekmez.",
+    "varyantlar": [
+      "Golden crossover (50/200) ve death crossover (kitap bu terimleri kullanır, p81).",
+      "10/20 EMA kısa vadeli swing için (p78)."
+    ],
+    "anahtar_kelimeler": ["ema-kesisim", "golden-cross", "death-cross", "10-20-ema", "50-200-ema", "kar-al-10", "ladha"]
+  },
+  {
+    "kart_id": "swing__kazanc-sonrasi-kayma__ladha",
+    "ad": "Kazanç Sonrası Fiyat Kayması (PEAD) Alımı",
+    "stil": "swing",
+    "kaynak": {"pdf": "13_Swing_Trading_Stratejisi_-_Pankaj_Ladha_ve_Anant_Ladha_140_sayfa.pdf", "sayfalar": [83, 84, 85, 86, 87, 88]},
+    "ozet": "Çeyrek kazanç açıklaması sonrası hisse %3-5 değer kazanır, hacmi önceki güne göre en az %50 artar, 50 günlük ortalama hacmin 3 katını aşar ve 50 günlük basit MA üstünde kapanır. Giriş kazanç gününden sonra ve stop giriş gününün en düşük seviyesinin %0,5 altıdır.",
+    "kategori": "trend_takip",
+    "piyasa_rejimi": "herhangi",
+    "orijinal_piyasa": "hisse",
+    "zaman_dilimi": {"islem": "1G", "ust_filtre": null},
+    "gostergeler": [
+      {"ad": "Hacim", "parametreler": {"ortalama_kati_50g": 3, "onceki_gune_gore_min_yuzde": 50}},
+      {"ad": "Fiyat değişimi", "parametreler": {"min_yuzde": 3, "max_yuzde": 5}},
+      {"ad": "Basit hareketli ortalama", "parametreler": {"periyot": 50}},
+      {"ad": "Ortalama günlük ciro", "parametreler": {"min_crore": 1}}
+    ],
+    "long_giris": [
+      "Kazanç açıklamasından sonra hisse %3-5 değer kazanır (p84).",
+      "Hacim önceki güne göre en az %50 daha yüksek ve 50 günlük ortalama hacmin üç katından fazla (p84).",
+      "Fiyat 50 günlük basit hareketli ortalamanın üzerinde (p84).",
+      "Fiyat en az 300 Rs ve ortalama günlük ciro en az 1 crore Rs (p84).",
+      "Giriş: hacim ağırlıklı ortalama fiyatın üstünde küçük taban, önceki günün en yüksek seviyesinin kırılması veya 10/20 günlük yükselen EMA üstünde yatay konsolidasyonun kırılması (p86-87)."
+    ],
+    "short_giris": [],
+    "stop_loss": "Giriş gününün en düşük seviyesinin yaklaşık %0,5 altı veya 10/20 günlük EMA'nın hemen altı (p87, p108).",
+    "kar_al": "Swing: giriş sonrası 2,5-8 işlem günü; yarısı 2,5-5 gün sonra, kalanı 10/20 günlük EMA altı kapanışta (p87). Pozisyon: üst üste 2,5 hafta artış sonrası yarısı, kalanı 50 günlük basit MA altı kapanışta (p87).",
+    "iz_suren_stop": null,
+    "zaman_cikisi": "Swing için 2,5-8 işlem günü (p87).",
+    "filtreler": [
+      "Kazanç sonrası piyasa tepkisi izlenir; iyi haber değil piyasa tepkisi önemli (p88).",
+      "Küçük sermayeli, favori olmayan hisselerde sürpriz daha büyük tepki verir (p88-89).",
+      "Piyasa düşüş trendinde ise kazanç sürprizinin etkisi sınırlı (genel gözlem)."
+    ],
+    "pozisyon_risk": "Riske edilen sermaye %1'i geçmemeli; yeni yatırımcı için %0,5 (p87).",
+    "iddia_edilen_performans": "Gün içi, swing ve pozisyon zaman dilimlerinde etki gözlemi (p84). Sayısal kazanma oranı yok.",
+    "kodlanabilirlik": {"puan": 2, "gerekce": "Hacim, fiyat, MA ve ciro eşikleri sayısal; 'piyasa tepkisi' ve 'güçlü sürpriz' yoruma açık, kazanç beklentisi (consensus) verisi gerekiyor."},
+    "belirsizlikler": [
+      "Kazanç 'sürprizi' için beklenti verisi (consensus) kitapta tanımlı değil.",
+      "'Piyasa tepkisi' ölçüsü (yüzde, hacim) belirtilmemiş.",
+      "Giriş için üç seçenek sunuluyor; öncelik sırası yok (p86-87).",
+      "Kazanç takvimi ve açıklama saati (piyasa içi/dışı) veri kaynağı gerektirir."
+    ],
+    "uyumluluk_notu": "1L3A için: kazanç takvimi hisse piyasasına özgü; kripto/forex'te karşılığı yok. Hacim verisi gerekir. Kazanç takvimi olmadan 'hacim patlaması + MA üstü' versiyonu uyarlanabilir (varsayım).",
+    "varyantlar": [
+      "Gün içi kazanç tepkisi (1 gün).",
+      "Pozisyon: 2,5 hafta artış ve 50 günlük SMA çıkışı (p87)."
+    ],
+    "anahtar_kelimeler": ["kazanc-sonrasi", "pead", "kazanc-duyurusu", "hacim", "vwap", "10-20-ema", "50-sma", "ladha"]
+  },
+  {
+    "kart_id": "swing__goreceli-guc__ladha",
+    "ad": "Göreceli Güç (Relative Strength) Alımı",
+    "stil": "swing",
+    "kaynak": {"pdf": "13_Swing_Trading_Stratejisi_-_Pankaj_Ladha_ve_Anant_Ladha_140_sayfa.pdf", "sayfalar": [96, 97, 98, 99, 100, 101]},
+    "ozet": "Son 3-6 ayda %10-50 aralığında güçlü artmış ve endeksten daha güçlü seyreden hisse, 50 günlük yeni zirveye yakınken veya 10/20 günlük EMA'dan %3-5 sıçradıktan sonra hacimle alınır. Stop giriş gününün en düşük seviyesinin yaklaşık %0,5 altıdır; çıkış 2,5-5 gün sonra veya EMA altı kapanışta.",
+    "kategori": "momentum",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "hisse",
+    "zaman_dilimi": {"islem": "1G", "ust_filtre": null},
+    "gostergeler": [
+      {"ad": "Fiyat artışı (3-6 ay)", "parametreler": {"min_yuzde": 10, "max_yuzde": 50}},
+      {"ad": "Üstel hareketli ortalama", "parametreler": {"periyot": [10, 20]}},
+      {"ad": "Yeni zirve", "parametreler": {"periyot": 50}},
+      {"ad": "Ortalama günlük ciro", "parametreler": {"min_crore": 1}}
+    ],
+    "long_giris": [
+      "Son 3-6 ayda %10-50 aralığında önemli fiyat artışı (p98).",
+      "Fiyat en az 300 Rs ve ortalama günlük ciro en az 1 crore Rs (p98).",
+      "Fiyat 50 günlük yeni zirvelere doğru çıkarken veya 10/20 günlük EMA'dan %3-5 yükselişten sonra hacimle alım (p98).",
+      "Piyasa yükseliş trendinde veya konsolidasyon sonrası toparlanmada (p99-100)."
+    ],
+    "short_giris": [],
+    "stop_loss": "Giriş gününün en düşük seviyesinin %0,5 altı veya 10/20/50 günlük EMA (p99).",
+    "kar_al": "2,5-5 günlük yükseliş hareketi sonrası satış, veya EMA altı kapanışta çıkış (p100).",
+    "iz_suren_stop": null,
+    "zaman_cikisi": "2,5-5 işlem günü (p100).",
+    "filtreler": [
+      "Ana endeks 50 günlük ortalamanın üzerinde (p100).",
+      "Endüstri/sektör lideri olma (p97-98).",
+      "Endeksten belirgin daha güçlü performans (p98-99)."
+    ],
+    "pozisyon_risk": "Salınımlı işlemde toplam risk sermayesinin %1'inden fazlası riske atılmaz; yeni başlayan için %0,5-1 (p99-100).",
+    "iddia_edilen_performans": "GNFC: 2022 Nisan'da yaklaşık 900 (dip 505, Şubat); Nifty dibinden %20 üstündeyken güçlü (p97). Kazanma oranı yok.",
+    "kodlanabilirlik": {"puan": 2, "gerekce": "Yüzde aralığı, EMA ve zirve eşikleri sayısal; 'göreceli güç' ölçüsü (endekse göre) kitapta tanımlanmamış ve 'büyük oyuncu' tespiti yoruma açık."},
+    "belirsizlikler": [
+      "Göreceli güç ölçüsü (endekse göre fark, RS skoru) kitapta tanımlanmamış; RS 70 eşiği yalnızca p10'da anılıyor ve bu kartta kullanılmadı.",
+      "'3-6 ay' ile yüzde aralığı tek bir değer değil.",
+      "'Büyük oyuncu' tespiti için veri kaynağı (FII/DII) yok.",
+      "Çıkış '2,5-5 gün' aralığı; tek kural değil."
+    ],
+    "uyumluluk_notu": "1L3A için: 3-6 aylık yüzde, endeks karşılaştırması ve EMA mekanik. Forex'te karşılaştırma için referans para birimi/endeks (varsayım); kripto'da BTC'ye göre göreceli güç tanımlanabilir (varsayım).",
+    "varyantlar": [
+      "Ayı/düzeltme sonrası toparlanmada göreceli güç (p99-100).",
+      "Sektör lideri seçimi (kart: swing__sektor-rotasyonu__ladha)."
+    ],
+    "anahtar_kelimeler": ["goreceli-guc", "rs", "50-gunluk-zirve", "ema-geri-cekilme", "endeks-karsilastirma", "ladha"]
+  },
+  {
+    "kart_id": "swing__kisa-sikisma__ladha",
+    "ad": "Kısa Satıcı Sıkışması (Short Squeeze)",
+    "stil": "swing",
+    "kaynak": {"pdf": "13_Swing_Trading_Stratejisi_-_Pankaj_Ladha_ve_Anant_Ladha_140_sayfa.pdf", "sayfalar": [104, 105, 106, 107, 108, 109]},
+    "ozet": "Serbest hisse (float) düşük, açık kısa pozisyon oranı yüksek, fiyatı 300 Rs üzerinde ve cirosu 1 crore üzerinde olan hisse; piyasa yükseliş trendindeyken keskin yükselir ve kapanışa yakın momentum gösterirse alınır. Stop giriş gününün en düşük seviyesinin yaklaşık %0,5 altındadır.",
+    "kategori": "momentum",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "hisse",
+    "zaman_dilimi": {"islem": "1G", "ust_filtre": null},
+    "gostergeler": [
+      {"ad": "Serbest hisse (float) oranı", "parametreler": {"not": "düşük float tercih, eşik yok"}},
+      {"ad": "Açık kısa pozisyon", "parametreler": {"not": "yüksek, eşik yok"}},
+      {"ad": "Günlük yükseliş", "parametreler": {"referans_yuzde": 12}},
+      {"ad": "Ortalama günlük ciro", "parametreler": {"min_crore": 1}}
+    ],
+    "long_giris": [
+      "Piyasa onaylı yükseliş trendinde: büyük endeksler ve hisseler 50 günlük ortalamanın üzerinde (p107).",
+      "Fiyat en az 300 Rs ve ortalama günlük hacim en az 1 crore Rs (p105).",
+      "Serbest hisse düşük, açık kısa pozisyon yüksek (p106).",
+      "Gün içi yükseliş (kitap örneğinde %12 üzeri) ve kapanışa yakın momentum gözlemi (p107)."
+    ],
+    "short_giris": [],
+    "stop_loss": "Giriş gününün en düşük seviyesinin yaklaşık %0,5 altı veya 10/20 günlük EMA'nın hemen altı (p108).",
+    "kar_al": "Pozisyonun ilk yarısı 2,5-8 işlem günü içinde satılır; kalan yarı 10/20 günlük EMA altı kapanışta (p109).",
+    "iz_suren_stop": null,
+    "zaman_cikisi": "2,5-8 işlem günü (p109).",
+    "filtreler": [
+      "Piyasa yükseliş trendinde, 50 günlük ortalamanın üzerinde (p107).",
+      "Vadeli işlem son işlem gününde sıkışma riski (p106-107).",
+      "Yeterli likidite (ciro 1 crore, p105)."
+    ],
+    "pozisyon_risk": "Toplam sermayenin %1'inden fazlası riske atılmaz; yeni yatırımcı için %0,5 (p109).",
+    "iddia_edilen_performans": "IndiaMart Şubat 2022 örneği (metinde fiyat rakamları tutarsız, 4400 -> 400); Mart vadeli 4800'e (p105). Kazanma oranı yok.",
+    "kodlanabilirlik": {"puan": 1, "gerekce": "Float ve açık pozisyon verisi gerekir; tetik ('%12' ve '15:15 sonrası') kitapta kural değil gözlem olarak anlatılır. Stop ve çıkış sayısal."},
+    "belirsizlikler": [
+      "Kitap '%12 yükseliş' ve '15:15 sonrası' ifadelerini kural olarak değil gözlem olarak anlatıyor (p107).",
+      "Kısa açık oranı ve serbest hisse için veri kaynağı ve eşik yok (p106).",
+      "IndiaMart fiyat örneği metinde tutarsız (4400 -> 400).",
+      "Mekanizma Hindistan vadeli işlem son gün etkisi ile anlatılıyor."
+    ],
+    "uyumluluk_notu": "1L3A için: kısa açık ve float verisi çoğu kripto ve forex'te yok; hisse ve vadeli işlemlerde kullanılabilir. Kripto'da fonlama oranı veya long/short oranı proxy olabilir (varsayım, doğrulanmadı).",
+    "varyantlar": [
+      "Vadeli işlem ay sonu sıkışması (p107).",
+      "Günlük kapanışta kısa satıcı sıkışması (p108)."
+    ],
+    "anahtar_kelimeler": ["kisa-sikisma", "short-squeeze", "float", "acik-pozisyon", "vadeli-son-gun", "ladha"]
+  },
+  {
+    "kart_id": "swing__ortalamaya-donus__ladha",
+    "ad": "Ortalamaya Dönüş (Dövülmüş Hisse, Yeşil Kapanış)",
+    "stil": "swing",
+    "kaynak": {"pdf": "13_Swing_Trading_Stratejisi_-_Pankaj_Ladha_ve_Anant_Ladha_140_sayfa.pdf", "sayfalar": [110, 111, 112, 113, 114]},
+    "ozet": "Aylardır en düşük seviyede gezinen, dövülmüş hisse; gün kapanışında hem yeşil hem günün en yüksek seviyesine yakın kapanırsa alınır. Hedef 50 günlük basit MA veya alım fiyatının %10-20 üstü; stop günün en düşük seviyesi. Güçlü boğa trendinde kullanılmaz.",
+    "kategori": "ortalamaya_donus",
+    "piyasa_rejimi": "yatay",
+    "orijinal_piyasa": "hisse",
+    "zaman_dilimi": {"islem": "1G", "ust_filtre": null},
+    "gostergeler": [
+      {"ad": "Fiyat (aylık dip)", "parametreler": {"not": "aylardır en düşük, süre yok"}},
+      {"ad": "Gün kapanış deseni", "parametreler": {"kosul": "yeşil kapanış ve günün en yüksek seviyesine yakın"}},
+      {"ad": "Basit hareketli ortalama", "parametreler": {"periyot": 50}},
+      {"ad": "Göreceli güç", "parametreler": {"not": "momentum farklılığı için (p111)"}}
+    ],
+    "long_giris": [
+      "Hisse aylardır en düşük seviyede gezinmekte (p110).",
+      "Günün kapanışında hisse hem yeşil kapanır hem de günün en yüksek seviyesine yakın kapanır (p110).",
+      "Geniş piyasa 50 günlük ortalamanın üzerinde trendliyse bu strateji uygulanmaz (p112).",
+      "Momentum farklılığı (göreceli güç) ile teyit edilebilir (p111)."
+    ],
+    "short_giris": [],
+    "stop_loss": "Alış gününün en düşük seviyesi (p110, p113).",
+    "kar_al": "Alış fiyatının %10-20 üstü (p114); alternatif hedef 50 günlük basit MA (p110).",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Geniş piyasa 50 günlük ortalamanın altında veya yatay (p112).",
+      "Son bir yılda %75-100 üzeri artış sonrası düzeltmede (yüksek momentumlu) hisseler öncelikli (p112).",
+      "Kapanış bazlı teyit (p113)."
+    ],
+    "pozisyon_risk": "Riske edilen sermaye %0,5-1 (p113).",
+    "iddia_edilen_performans": "Lemon Tree 2020: Mayıs-Aralık arasında %100 üzeri artış (p113). Kazanma oranı yok.",
+    "kodlanabilirlik": {"puan": 2, "gerekce": "Giriş kapanış deseni ve stop ölçülebilir; 'aylardır en düşük' süresi ve piyasa rejimi tanımı yoruma açık."},
+    "belirsizlikler": [
+      "'Aylardır en düşük' için süre tanımı yok.",
+      "'Yeşil' ve 'günün en yüksek seviyesine yakın' eşiği yok.",
+      "Piyasa rejimi (boğa/yatay/ayı) tanımı görsel ve yorumlu.",
+      "Hedef seçimi (50 SMA veya %10-20) çakışınca hangisinin geçerli olduğu net değil."
+    ],
+    "uyumluluk_notu": "1L3A için: kapanış mum deseni mekanik; forex/kripto'da 'ayı rejimi' filtresi (ör. 50 günlük MA altı) uygulanabilir. Hacim gerekmez.",
+    "varyantlar": [
+      "Zirveye yakın hisse ile momentum (ters mantık); kitap ayrı tutar (p114).",
+      "Düşen bıçak riski: kitap yüksek risk uyarısı yapar (p113)."
+    ],
+    "anahtar_kelimeler": ["ortalamaya-donus", "dip-av", "mean-reversion", "kapanis-deseni", "50-sma", "yuzde-10-20-kar", "ladha"]
+  },
+  {
+    "kart_id": "swing__destek-direnc-aralik__ladha",
+    "ad": "Destek/Direnç Aralığı (Range) Alımı",
+    "stil": "swing",
+    "kaynak": {"pdf": "13_Swing_Trading_Stratejisi_-_Pankaj_Ladha_ve_Anant_Ladha_140_sayfa.pdf", "sayfalar": [116, 117, 118, 119, 120]},
+    "ozet": "Yatay (aralıklı) piyasada hisse, tekrar tekrar test edilen destek bölgesinden alınır. Stop destek bölgesindeki en düşük fiyatın altındadır; kâr, stop mesafesinin 2-3 katında veya üst direnç bölgesinde alınır. Aralık iki gün üst üste kırılırsa yeni aralık aranır.",
+    "kategori": "destek_direnc",
+    "piyasa_rejimi": "yatay",
+    "orijinal_piyasa": "hisse",
+    "zaman_dilimi": {"islem": "1G", "ust_filtre": null},
+    "gostergeler": [
+      {"ad": "Destek ve direnç bölgeleri", "parametreler": {"not": "yöntem tanımsız (tekrarlı test)"}},
+      {"ad": "Aralık kırılımı teyidi", "parametreler": {"gun_sayisi": 2}}
+    ],
+    "long_giris": [
+      "Hisse yatay aralıkta işlem görür (p116, p118).",
+      "Destek bölgesi tekrar tekrar test edilir ve tutunur (parametre 1, p119).",
+      "Önceki destek bölgesinin üstüne dönen veya destek kırılıp yeniden aralığa giren hisse alım bölgesidir (parametre 2-3, p119-120).",
+      "Destek 2-3 testten sonra güç kaybedebilir; 4. testten itibaren zayıflama (p118)."
+    ],
+    "short_giris": [
+      "Direnç bölgesinden kısa (ayna); kitapta açık tarif yok (varsayım)."
+    ],
+    "stop_loss": "Destek bölgesindeki en düşük fiyatın altı (p119).",
+    "kar_al": "Fiyat stop mesafesinin 2-3 katına ulaşınca kâr alınır; maksimum hedef üst direnç bölgesidir (p120).",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Piyasa aralık (range) rejiminde (p116, p119).",
+      "Aralık kırılımı iki gün üst üste kapanışla teyit edilir (p120).",
+      "Piyasa emri kullanılır; limit emir çok büyük miktarda (p118)."
+    ],
+    "pozisyon_risk": "Her işlemde riske edilen sermaye toplam sermayenin %1'i (p119).",
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {"puan": 2, "gerekce": "Stop, hedef oranı (2-3R) ve risk yüzdesi sayısal; destek/direnç seviyesinin belirlenmesi ve 'aralık' tanımı yoruma açık."},
+    "belirsizlikler": [
+      "Destek ve direnç bölgesinin belirlenme yöntemi (pivot, tepe/dip kümeleri) tanımsız.",
+      "'Aralık' için genişlik ve süre tanımı yok.",
+      "'2-3 testten sonra zayıflar' sayısal bir kural olarak uygulanabilir ama kitap bunu kesin kural olarak koymuyor."
+    ],
+    "uyumluluk_notu": "1L3A için: destek/direnç pivotlarından kodlanabilir; 5m-1G. Kripto ve forex'te yatay piyasa tespiti (ör. ADX) ile birleştirilebilir (varsayım, kitapta ADX yok). Hacim gerekmez.",
+    "varyantlar": [
+      "Aralık kırılımı sonrası yeni aralık tanımı (p119).",
+      "Büyük miktar için birden fazla limit emir (p118)."
+    ],
+    "anahtar_kelimeler": ["destek", "direnc", "aralik", "range", "yatay-piyasa", "2-3r", "ladha"]
+  },
+  {
+    "kart_id": "swing__toplu-islem-ofs__ladha",
+    "ad": "Toplu İşlem (Blok Deal) / OFS Sonrası İndirimli Alım",
+    "stil": "swing",
+    "kaynak": {"pdf": "13_Swing_Trading_Stratejisi_-_Pankaj_Ladha_ve_Anant_Ladha_140_sayfa.pdf", "sayfalar": [123, 124, 125, 126, 127, 128]},
+    "ozet": "Toplu işlem (blok deal) veya OFS duyurusu sonrası, genelde piyasa fiyatının %4-6 altında gerçekleşen toplu işlem fiyatına yakın alım yapılır. Hedef 2,5-5 gün içinde yaklaşık %6, gün içi %3; stop toplu işlem fiyatının %2 altı (gün içinde %1 altı).",
+    "kategori": "diger",
+    "piyasa_rejimi": "herhangi",
+    "orijinal_piyasa": "hisse",
+    "zaman_dilimi": {"islem": "1G", "ust_filtre": "gün içi (kısa vadeli hedef için)"},
+    "gostergeler": [
+      {"ad": "Toplu işlem fiyatı", "parametreler": {"indirim_min_yuzde": 4, "indirim_max_yuzde": 6}},
+      {"ad": "Ağırlıklı ortalama işlem fiyatı (WATP)", "parametreler": {"not": "korunuyorsa daha uzun tutulabilir"}}
+    ],
+    "long_giris": [
+      "Toplu işlem (blok deal) veya OFS işlem gününden önce borsaya bildirilmiş olmalı (p123-124).",
+      "Toplu işlem fiyatı, piyasa fiyatına göre genelde %4-6 indirimli; hisse fiyatı toplu işlem fiyatı aralığının alt kısmına yakın (p125).",
+      "Toplu işlem günü veya ertesi gün, fiyat toplu işlem fiyatına yakınken alım (p126)."
+    ],
+    "short_giris": [],
+    "stop_loss": "Toplu işlem fiyatının %2 altı; gün içi işlemde %1 altı (p126).",
+    "kar_al": "Swing: 2,5-5 işlem günü içinde yaklaşık %6; gün içi: yaklaşık %3 (p126).",
+    "iz_suren_stop": null,
+    "zaman_cikisi": "2,5-5 işlem günü (p126).",
+    "filtreler": [
+      "Hisse temelde sağlam olmalı; WATP korunuyorsa daha uzun tutulabilir (p126).",
+      "Toplu işlem haberinden sonra fiyat yukarı hareket göstermeli (p124-126)."
+    ],
+    "pozisyon_risk": "Toplu işlem stratejisinde riske edilen sermaye %0,5-1 (p126).",
+    "iddia_edilen_performans": "Bector Foods (13 Nisan 2022): toplu işlem fiyatı 303; ertesi gün ortalama işlem 307, öğleden sonra 325 (p125-126). Kazanma oranı yok.",
+    "kodlanabilirlik": {"puan": 2, "gerekce": "Stop, hedef ve indirim aralığı sayısal; ancak toplu işlem verisinin kaynağı ve 'güçlü eller' ve haber etkisi yoruma açık."},
+    "belirsizlikler": [
+      "Toplu işlem duyuru verisi borsa kaynağına bağlı; forex/kripto'da yok.",
+      "'%4-6 indirim' ifadesinde alt sınır mı ortalama mı belirsiz.",
+      "WATP hesabı (hacim ağırlıklı ortalama işlem fiyatı) tanımı kısa.",
+      "Duyuru öncesi söylenti alımı (p124) ile giriş kuralı çakışıyor."
+    ],
+    "uyumluluk_notu": "1L3A için: hisse piyasasında (blok işlem, ikincil satış) uygulanabilir; kripto'da 'OFS' yoktur, token kilit açma olayı benzer (varsayım). Hacim gerekir.",
+    "varyantlar": [
+      "Gün içi toplu işlem fırsatı (%3 hedef, p126).",
+      "Hükümet OFS indirimi (PSU hisseleri, p123)."
+    ],
+    "anahtar_kelimeler": ["toplu-islem", "ofs", "blok-islem", "indirim", "watp", "haber", "ladha"]
+  },
+  {
+    "kart_id": "swing__sektor-rotasyonu__ladha",
+    "ad": "Sektör Rotasyonu - Sektör Lideri Hisse",
+    "stil": "swing",
+    "kaynak": {"pdf": "13_Swing_Trading_Stratejisi_-_Pankaj_Ladha_ve_Anant_Ladha_140_sayfa.pdf", "sayfalar": [128, 129, 130, 131, 132]},
+    "ozet": "En güçlü performans gösteren sektör belirlenir; o sektörün lider hissesi 10/20/50 günlük EMA'ya geri çekilmede veya 50 günlük yeni zirve kırılımında alınır. Stop satın alma fiyatının %3-4 altındadır.",
+    "kategori": "diger",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "hisse",
+    "zaman_dilimi": {"islem": "1G", "ust_filtre": "haftalık sektör performansı"},
+    "gostergeler": [
+      {"ad": "Sektör performansı", "parametreler": {"gecen_hafta_min_yuzde": 3, "gecen_hafta_max_yuzde": 5}},
+      {"ad": "Üstel hareketli ortalama", "parametreler": {"periyot": [10, 20, 50]}},
+      {"ad": "Yeni zirve", "parametreler": {"periyot": 50}}
+    ],
+    "long_giris": [
+      "En iyi performans gösteren sektör belirlenir; geçen hafta %3-5 üzeri artış aranır (p129).",
+      "Sektördeki lider hisse (kazanç ve fiyat hacmi açısından) seçilir (p129).",
+      "Hisse 10/20/50 günlük EMA'ya geri çekilir veya 50 günlük yeni zirveye kırılım yapar (p131)."
+    ],
+    "short_giris": [
+      "Düşen sektörde ters mantık (kitap çıkış yapan hisseleri ararken sektör durumunu kontrol etmeyi söyler, p129); açık kural yok."
+    ],
+    "stop_loss": "Satın alma fiyatının %3-4 altı (p131).",
+    "kar_al": "İyi teknik kurulumla %50'ye kadar; daha az tercih edilen sektörde %8-10 (p132).",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Sektör trendi ile uyum (p130).",
+      "HNI ve FII alım verileri ile teyit (p130).",
+      "Sektör rotasyonu uzun süre (haftalar, aylar) sürer (p132-133)."
+    ],
+    "pozisyon_risk": "Riske edilen sermaye toplam sermayenin %1'inden fazla değil (p132).",
+    "iddia_edilen_performans": "Tata Steel ve JSW Steel 2022 Nisan'dan bu yana iki katına; Tata Power ve JSW Energy Eylül 2021'den bu yana %50 (p129-130). Kazanma oranı yok.",
+    "kodlanabilirlik": {"puan": 1, "gerekce": "Sektörün en iyi olduğunu belirleme yöntemi ve 'sıcak sektör' tanımı yoruma açık; hisse giriş ve stop kuralları ise ölçülebilir."},
+    "belirsizlikler": [
+      "'En iyi sektör' belirleme yöntemi (hangi endeks, kaç gün) kitapta net değil; ekonomik senaryo analizi gerektiriyor (p129).",
+      "Sektör endeksi ve sektör tanımı verisi gerekir.",
+      "Kitap sektör göstergelerinin bazen yanıltıcı olabileceğini belirtir (p130).",
+      "Kâr hedefi (%50 ve %8-10) iki farklı senaryo için verilmiş; kural seçimi kullanıcıya bırakılmış."
+    ],
+    "uyumluluk_notu": "1L3A için: hisse sektör endeksleri ile uygulanabilir. Forex ve kripto'da sektör karşılığı yok (kripto'da kategori endeksi varsayım olarak denenebilir).",
+    "varyantlar": [
+      "Düşen sektörde ortalamaya dönüş (p132-133).",
+      "Ayı evresinde son lider (p136-137)."
+    ],
+    "anahtar_kelimeler": ["sektor-rotasyonu", "endustri", "sektor-lideri", "rs", "ema-geri-cekilme", "ladha"]
+  }
+]

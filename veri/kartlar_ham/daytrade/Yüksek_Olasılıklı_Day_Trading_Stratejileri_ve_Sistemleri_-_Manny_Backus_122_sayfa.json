@@ -1,0 +1,217 @@
+[
+  {
+    "kart_id": "daytrade__stokastik-rsi-ema20-2dk__backus",
+    "ad": "Stokastik + RSI(9) + EMA20 Kesişim (2 dk), Kural #1 ve #2",
+    "stil": "daytrade",
+    "kaynak": {"pdf": "Yüksek_Olasılıklı_Day_Trading_Stratejileri_ve_Sistemleri_-_Manny_Backus_122_sayfa.pdf", "sayfalar": [20, 28, 29, 33, 34, 37, 38, 39, 40, 41, 42, 43, 61, 62, 80, 86, 87, 100]},
+    "ozet": "2 dakikalık grafikte fiyat 20 EMA'nın üzerindeyken, Stokastik %K'nın %D'yi yukarı kesmesi ve RSI(9)'un 4 periyotluk hareketli ortalamasını yukarı kesmesi durumunda uzun pozisyon açılır. Çıkış, kitaptaki üç koşuldan herhangi ikisinin gerçekleşmesiyle yapılır.",
+    "kategori": "momentum",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "hisse",
+    "zaman_dilimi": {"islem": "2m", "ust_filtre": null},
+    "gostergeler": [
+      {"ad": "EMA", "parametreler": {"periyot": 20}},
+      {"ad": "Stokastik", "parametreler": {"K_periyot": 12, "K_yumusatma": 3, "D_periyot": 5, "asiri_alim": 80, "asiri_satim": 20}},
+      {"ad": "RSI", "parametreler": {"periyot": 9, "MA_periyot": 4}},
+      {"ad": "Bollinger Bantları", "parametreler": {"periyot": "standart (kitapta sayı yok)"}}
+    ],
+    "long_giris": [
+      "Fiyat 2 dk grafikte 20 EMA'nın üzerinde",
+      "Stokastik %K (12,3) çizgisi %D (5) çizgisini yukarı keser",
+      "RSI(9), kendi 4 periyotluk hareketli ortalamasını yukarı keser",
+      "Üç koşulun tümü aynı anda sağlanmalı (Kural #1, s.41)"
+    ],
+    "short_giris": [],
+    "stop_loss": "Kural #1/#2'de stop yok. Kitap örneği: son düşüğün altına fiyat bazlı stop (IBM örneği, s.61-62). Alternatif yüzde stop %1 (s.63). Zihinsel stop önerilmiyor (s.57-58).",
+    "kar_al": "Çıkış Kural #2 ile: (a) fiyat Bollinger üst bandının içine yeniden girer, (b) Stoch %K, %D'nin altına döner, (c) RSI, 4 MA'nın altına döner; bu üç koşuldan herhangi ikisi gerçekleşirse çıkılır (s.41-42). Sabit kâr hedefi kuralı yok.",
+    "iz_suren_stop": "Kitapta bu kural için yok. Genel yöntem olarak 0,5% veya 25 sentlik takip eden stop anlatılır (s.64-65).",
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Hisse likidite filtresi: günlük hacmi yüksek olanlar tercih edilir (ör. günde 2 milyon hisse ile 200 bin hisse örneği, s.43)",
+      "Hisse fiyat filtresi: 10$ altı hisselerde kitabın gözleminde strateji iyi çalışmıyor (s.43)",
+      "Piyasa yönü: genel piyasa yükselişteyken uygulama önerisi (s.20-21, sayısal eşik yok)",
+      "Zaman: sabah ilk iki saat (9:30-11:30 ET) en yoğun dönem (s.80)",
+      "Kazanç ve ekonomik rapor günlerinde tahmin yapmadan grafik takibi (s.80-84)"
+    ],
+    "pozisyon_risk": "Kitapta sabit pozisyon büyüklüğü kuralı yok. Her işlemde aynı dolar tutarı kullanma önerisi var (s.100).",
+    "iddia_edilen_performans": "Sayısal iddia yok. JOY örneğinde 15 dakikadan kısa sürede %2'den fazla ROI gösteriliyor (s.37); bu tek işlem örneğidir. Yazar stratejinin test edilmediğini ve geriye dönük ve canlı test gerektiğini belirtiyor (s.42).",
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Giriş ve çıkış koşulları gösterge değerleriyle ölçülebilir. Ancak stop kuralı yok, 'yüksek olasılıklı' olduğuna dair test sonucu kitapta yok (tek hisse, tek gün örneği), Kural #2'nin 'herhangi ikisi' ifadesi ve kesişmenin mum kapanışında mı yoksa anlık mı aranacağı belirtilmemiş."
+    },
+    "belirsizlikler": [
+      "Stop-loss kuralı Kural #1/#2 içinde yok",
+      "Stokastik parametreleri '%12 K 3' ve '%D 5' olarak okundu (K=12, yumuşatma=3, D=5); bozuk metin nedeniyle kesin değil (s.41)",
+      "Bollinger parametreleri 'standart' deniyor, sayıları verilmemiş (s.34)",
+      "Kural #2 'herhangi ikisi' ifadesi: a, b, c koşullarının üç ikili kombinasyonu olarak yorumlandı; kitap bunu daha açık yazmıyor (s.41-42)",
+      "Kesişmelerin mum kapanışında mı yoksa mum içinde mi aranacağı belirtilmemiş",
+      "Kısa taraf için açık kural yok; kitap 'kriterler tersine çevrilebilir' diyor (s.53)",
+      "Pozisyon büyüklüğü ve hedef kâr oranı belirtilmemiş",
+      "Kitap bu sistemi tek hisse/tek gün örneğiyle gösteriyor, test sonucu yok"
+    ],
+    "uyumluluk_notu": "1L3A için: 2 dk tanımlı; kitap 5 dk ve 14 RSI/5 MA alternatifini de anlatıyor (s.38) ama sonuçlarını karşılaştırmalı vermiyor. Ardından ≥5m'ye uyarlanabilir ama test gerekir. Gösterge hesapları kripto, emtia ve perpetual için de geçerli. Hacim filtresi hisseye özgü ölçekte tanımlı; kripto ve ES için yeniden kalibre edilmeli. Forex'e özgü pip veya seans kuralı yok.",
+    "varyantlar": [
+      "Kitap aynı kurulumu 5 dk, RSI 14 ve 5 MA ayarlarıyla da gösteriyor (s.38)",
+      "Basit varyant (s.86): Stoch %K 20'nin üzerine çıkınca ve fiyat 20 EMA üstündeyken uzun giriş; çıkış: fiyat 20 EMA altına düşer VE Stoch 80 altına düşer (kitapta 'çift nitelikli' çıkış, AND)",
+      "RSI 14 (30/70) örneği (s.39): RSI 30 üstünde uzun, 70 altına düşünce çıkış; kitap bunu bir tüccarın stratejisi olarak anlatıyor (5 dk örneği)"
+    ],
+    "anahtar_kelimeler": ["ema-20", "stokastik", "rsi-9", "bollinger", "keltner", "2dk", "hisse", "momentum", "kesişim", "aşırı-alım-satım"]
+  },
+  {
+    "kart_id": "daytrade__stokastik-20-donus-yuzde-1__backus",
+    "ad": "Stokastik 20 Dönüşü + EMA20 Üstü + %1 Kâr/Zarar (2 dk, S&P-500 Filtreli)",
+    "stil": "daytrade",
+    "kaynak": {"pdf": "Yüksek_Olasılıklı_Day_Trading_Stratejileri_ve_Sistemleri_-_Manny_Backus_122_sayfa.pdf", "sayfalar": [46, 47, 48, 49, 50, 51, 52, 53, 54, 57, 63, 64, 65, 80, 100]},
+    "ozet": "S&P-500 gün boyunca pozitif seyrediyorsa ve 2 dakikalık grafikte fiyat 20 EMA'nın üzerindeyse, Stokastik %K (kırmızı) 20 çizgisine dokunup sonra %D'nin (mavi) üzerinden yukarı geçtiğinde uzun pozisyon açılır. Giriş fiyatından %1 kâr, %1 zarar, EMA altına düşme veya Stoch ters kesişimi ile çıkılır.",
+    "kategori": "trend_takip",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "hisse",
+    "zaman_dilimi": {"islem": "2m", "ust_filtre": "S&P-500 gün içi yön (zaman dilimi belirtilmemiş)"},
+    "gostergeler": [
+      {"ad": "EMA", "parametreler": {"periyot": 20}},
+      {"ad": "Stokastik", "parametreler": {"K_periyot": 12, "K_yumusatma": 3, "D_periyot": 5, "asiri_alim": 80, "asiri_satim": 20}},
+      {"ad": "S&P-500 yön filtresi", "parametreler": {"olcu": "tanımsız (kitapta 'pozitif' deniyor)"}}
+    ],
+    "long_giris": [
+      "S&P-500 gün boyunca pozitif seyrediyor (s.46; 'pozitif' ölçütü tanımsız)",
+      "Hisse fiyatı 2 dk grafikte 20 EMA'nın üzerinde",
+      "Stoch %K (kırmızı) 20 çizgisine dokunmuş ve ardından %D'nin (mavi) üzerinden tekrar geçmiş"
+    ],
+    "short_giris": [
+      "S&P-500 negatif seyrediyor (s.54, JCP örneğinde 30.08.2013)",
+      "Hisse fiyatı 20 EMA'nın altında",
+      "Stoch %K 80 çizgisine dokunmuş ve ardından %D'nin altından geçmiş (kitap: 'tüm kriterlerin tersi', s.54; kısa tarafın sayısal tanımı yorumdur)"
+    ],
+    "stop_loss": "Giriş fiyatından %1 zarar (s.46, 'işlem %1 kayıp yaratırsa'). Kitap alternatif olarak fiyat bazlı stop önerir (son düşük/yüksek, s.61-62).",
+    "kar_al": "Giriş fiyatından %1 kâr (s.46). Varyant: pozisyonun yarısı %1'de kapatılır, kalan için takip eden stop (s.65).",
+    "iz_suren_stop": "Varyant (s.64-65): %1 veya 25 sent takip eden stop; kitap bunu kazananların koşmasına izin vermek için öneriyor.",
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Çıkış koşulları (s.46): fiyat 20 EMA'nın altına düşerse; Stoch %K %D'nin altına inerse",
+      "Hisse seçimi: yüksek günlük hacim ve 10$ üstü fiyat tercih önerisi (s.43)",
+      "Zaman: sabah ilk iki saat en yoğun dönem (s.80); kural olarak değil öneri",
+      "Ekonomik rapor ve kazanç duyuruları: sonucu tahmin etmeden tepki izlenir (s.80-84)"
+    ],
+    "pozisyon_risk": "İşlem başına sabit dolar tutarı önerisi (s.100, sayısal değer yok). Zarar sınırı %1 (girişe göre).",
+    "iddia_edilen_performans": "Bu strateji için sayısal iddia yok. JCP ve JOY örnekleri tek işlem gösterimidir; JCP kısa örneğinde %1 kısa hedefe ulaşıldığı anlatılıyor (s.54). Kitapta '%70 doğru, %1 stop' Jim örneği var (s.47-48), ancak bu yazarın bu stratejisine ait değil.",
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "EMA ve Stoch koşulları ölçülebilir; kâr, zarar ve çıkış koşulları tanımlı. Ancak 'S&P pozitif' ölçütü, 'dokunma' için zaman penceresi ve kısa taraf koşulları sayısal değil; test sonucu yok."
+    },
+    "belirsizlikler": [
+      "'S&P-500 pozitif seyrediyor' ölçütü tanımsız (gün açılışına göre mi, yüzde mi, anlık mı?)",
+      "'Dokunma' ve 'tekrar kesişme' için zaman penceresi veya tolerans yok",
+      "Kısa tarafın koşulları 'tersi' olarak yorumlandı; kitap sayısal kural vermiyor",
+      "Kitap bu stratejinin test sonucunu vermiyor; tek örnek gösteriyor",
+      "Stop ve kâr hedefi için kesin uygulama sırası belirtilmemiş (kısmi çıkış varyantı ayrıca tarif edilmiş)"
+    ],
+    "uyumluluk_notu": "1L3A için: 2 dk tanımlı; ≥5m'ye uyarlama kitapta denenmemiş. S&P filtresi endeks verisi gerektirir; ES için doğrudan ölçülebilir, kripto ve emtia için endeks karşılığı seçilmeli. Hisse hacmi ve fiyat filtreleri hisseye özgü; forex'te pip veya seans kuralı yok; kural mantığı taşınabilir ancak eşikler yeniden kalibre edilmeli.",
+    "varyantlar": [
+      "Kısmi çıkış ve takip eden stop (s.65): pozisyonun yarısı %1 kârda, kalanı %2 kârdan sonra %1 takip eden stop ile",
+      "Kısa taraf: kitabın JCP örneği (s.53-54), kriterlerin tersi",
+      "Stop türleri (s.57-65): fiyat bazlı, yüzde bazlı, takip eden; kitap zihinsel stop kullanmamayı öneriyor (s.57-58)"
+    ],
+    "anahtar_kelimeler": ["stokastik", "ema-20", "yuzde-1-stop", "sp500-filtre", "2dk", "hisse", "kısmi-çıkış", "takip-eden-stop", "trend-takip"]
+  },
+  {
+    "kart_id": "daytrade__pivot-fibonacci-cift-destek-direnc__backus",
+    "ad": "Pivot S1 ve %23,6 Fibonacci Çift Destek, Stokastik 20 Üstü Giriş",
+    "stil": "daytrade",
+    "kaynak": {"pdf": "Yüksek_Olasılıklı_Day_Trading_Stratejileri_ve_Sistemleri_-_Manny_Backus_122_sayfa.pdf", "sayfalar": [70, 71, 72, 73, 74, 75, 76, 77, 78]},
+    "ozet": "Pivot S1 çizgisi ile %23,6 Fibonacci geri çekilme çizgisinin çok yakın olduğu 'çift destek' bölgesinde, Stokastik 20 çizgisinin üzerine çıktığında uzun pozisyon açılır. Pivot, %61,8 Fibonacci ve önceki gün kapanışının oluşturduğu çift direnç bölgesine yaklaşıldığında ve Stokastik aşırı alım okuması verdiğinde kısmi çıkış yapılır.",
+    "kategori": "destek_direnc",
+    "piyasa_rejimi": "herhangi",
+    "orijinal_piyasa": "hisse",
+    "zaman_dilimi": {"islem": "2m", "ust_filtre": null},
+    "gostergeler": [
+      {"ad": "Pivot (P, R1-R3, S1-S3)", "parametreler": {"formul": "kitapta verilmemiş ('matematiğe girmeyeceğim', s.71)"}},
+      {"ad": "Fibonacci geri çekilme", "parametreler": {"seviyeler": [23.6, 61.8], "referans": "gün içi en yüksek ve en düşük (s.76)"}},
+      {"ad": "Önceki gün kapanışı", "parametreler": {}},
+      {"ad": "Stokastik", "parametreler": {"asiri_alim": 80, "asiri_satim": 20}},
+      {"ad": "EMA", "parametreler": {"periyot": 20}}
+    ],
+    "long_giris": [
+      "Fiyat, S1 pivot çizgisi ile %23,6 Fibonacci çizgisinin 'çok yakın' olduğu çift destek bölgesinde (s.77)",
+      "Stokastik %K 20 çizgisinin üzerine çıkar (s.77)"
+    ],
+    "short_giris": [],
+    "stop_loss": "Kitap, kısmi çıkıştan sonra kalan pozisyonda 20 EMA'yı stop için 'makul yer' olarak gösteriyor (s.75). Kesin stop formülü yok.",
+    "kar_al": "Çift direnç bölgesi (Pivot, %61,8 Fibonacci, önceki gün kapanışına yakınlık) ve Stokastik 80 üzerinde aşırı alım (s.77); kitap bir kısmını kâr alıp kalanı için stop taşımayı öneriyor (s.75).",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Pivot ve Fibonacci çizgilerinin 'çok yakın' olması gerekiyor (s.77); tolerans yok",
+      "Stokastik 80 üstü aşırı alım, 20 altı aşırı satım olarak okunur (s.40, s.74)",
+      "Fiyatın pivot çizgisini kısa geçmesi tek başına kırılma sayılmaz; 30 dk ve daha fazla yatay hareket beklenebilir (s.74)",
+      "Ekonomik rapor ve kazanç anlarında grafik takibi (s.80-84)"
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Pivot formülü kitapta yok, 'çok yakın' ve 'çift destek' tanımsız, Fibonacci'nin hangi swing'den çizileceği tek örnekle gösterilmiş. Çıkış koşulu (en az iki direnç + aşırı alım) kısmen ölçülebilir. Kitap bunu bir 'yeni strateji' olarak öneriyor, test sonucu yok."
+    },
+    "belirsizlikler": [
+      "Pivot formülü ve S1/R1 hesabı kitapta yok ('matematiğe girmeyeceğim', s.71)",
+      "'Çok yakın' toleransı yok",
+      "Fibonacci'nin başlangıç ve bitiş noktası (sabah yüksek-düşük örneği) genel kural olarak verilmemiş (s.76)",
+      "Stop ve kısmi çıkış oranı net değil",
+      "Kısa taraf için açık kural yok",
+      "Kitap bu stratejiyi test etmemiş, 'alternatif fikir' olarak sunuyor (s.77-78)"
+    ],
+    "uyumluluk_notu": "1L3A için: pivot ve Fibonacci gün içi referanslar; ≥5m uyumlu olabilir ancak pivot günlük veri ister. ES için S&P pivotu kullanılabilir (kitap S&P'ye değinir). Forex'te pivot ve Fibonacci yaygındır, pip sınırları ayrıca tanımlanmalı. Kripto 7/24 işlediğinden 'önceki gün' tanımı değişir. Hacim verisi gerekmiyor.",
+    "varyantlar": [
+      "Yalnızca %61,8 Fibonacci direnci ile 'en az iki üst direnç' koşulu",
+      "Kitap, pivot yerine 20 EMA'yı destek/direnç olarak kullanmayı da öneriyor (s.74-75)"
+    ],
+    "anahtar_kelimeler": ["pivot", "fibonacci", "destek-direnç", "çift-destek", "stokastik", "ema-20", "2dk", "hisse", "kısmi-çıkış"]
+  },
+  {
+    "kart_id": "daytrade__keltner-dis-stokastik-asiri-satim__backus",
+    "ad": "Keltner Alt Bandı Dışı + Stokastik Aşırı Satım (Hipotetik Taslak)",
+    "stil": "daytrade",
+    "kaynak": {"pdf": "Yüksek_Olasılıklı_Day_Trading_Stratejileri_ve_Sistemleri_-_Manny_Backus_122_sayfa.pdf", "sayfalar": [33, 34, 35, 90, 91, 92, 93, 94]},
+    "ozet": "Yazarın strateji geliştirme örneğinde ortaya attığı taslak: Stoch 20 üzerine çıktıktan sonra fiyat Keltner Kanalı'nın alt bandının altına düşerse uzun pozisyon açılır; koruma stopu günün en düşük fiyatına konur. Kitap bu fikri test edilecek bir hipotez olarak sunuyor; test sonucu vermiyor.",
+    "kategori": "ortalamaya_donus",
+    "piyasa_rejimi": "herhangi",
+    "orijinal_piyasa": "hisse",
+    "zaman_dilimi": {"islem": "belirtilmemiş", "ust_filtre": null},
+    "gostergeler": [
+      {"ad": "Keltner Kanalı", "parametreler": {"merkez": "20 EMA", "genislik": "standart (kitapta sayı yok)"}},
+      {"ad": "Stokastik", "parametreler": {"asiri_alim": 80, "asiri_satim": 20}},
+      {"ad": "EMA", "parametreler": {"periyot": 20}}
+    ],
+    "long_giris": [
+      "Stoch 20 çizgisinin üzerine çıkmış bir kesişme oluşmuş (s.93)",
+      "Bu koşuldan sonra fiyat Keltner Kanalı'nın alt bandının altına düşer (s.93)"
+    ],
+    "short_giris": [],
+    "stop_loss": "Günün en düşük fiyatı (s.93-94).",
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Kitap istisnayı belirtiyor: fiyat Keltner dışında kalır ve Stoch yukarı geçerek eğilimi doğrularsa pozisyon tersine çevrilir, kısa yerine uzun (s.94)",
+      "Kitap, bu kuralın yalnızca bir gözlem olduğunu ve daha fazla grafikte test gerektiğini söylüyor (s.91-93)"
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Giriş koşulu ölçülebilir ama 'bu grafikte gördüğüm desenler' ağırlıklı yorumla oluşturulmuş. Kitap bunu hipotez olarak sunuyor, test sonucu ve kesin çıkış kuralı yok."
+    },
+    "belirsizlikler": [
+      "Koşulların sırası belirsiz: 'Stoch 20 üstüne çıktıktan sonra' ve 'fiyat Keltner alt bandının altına düşerse' ile ilişkisi açıkça tanımlanmamış (s.93)",
+      "Keltner genişliği (çarpan) ve Stoch parametreleri sayısal olarak verilmemiş",
+      "Çıkış ve kâr hedefi kuralı yok",
+      "Zaman dilimi belirtilmemiş",
+      "Kitap, bu kuralın istisnalarını ve tersine çevirme koşulunu da veriyor (s.94); kart bu istisnaları içermiyor, yalnızca filtre olarak not edildi",
+      "Yazarın kendi ifadesiyle test edilmemiş bir fikir (s.92-93)"
+    ],
+    "uyumluluk_notu": "1L3A için: Keltner ve Stoch hesapları her piyasaya uygulanabilir, ancak kitabın kendi ifadesiyle bu kural test edilmeden kullanılamaz. ES, kripto ve emtia için bant çarpanı ve zaman dilimi ayrıca kalibre edilmeli. Hacim gerekmiyor.",
+    "varyantlar": [
+      "Ters yön (kısa): fiyat Keltner üst bandının üzerine çıkar ve Stoch aşırı alım sonrası aşağı döner (kitapta görsel olarak tarif edilir, s.91)"
+    ],
+    "anahtar_kelimeler": ["keltner", "stokastik", "ema-20", "aşırı-satım", "ortalamaya-dönüş", "hipotez", "hisse"]
+  }
+]

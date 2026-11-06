@@ -1,0 +1,99 @@
+[
+  {
+    "kart_id": "scalp__superscalp-vsa__holmes",
+    "ad": "Superscalp - çok zaman dilimi hizalı VSA güç/zayıflık onayı",
+    "stil": "scalp",
+    "kaynak": {"pdf": "Super_Scalper_-_Gavin_Holmes_27_sayfa.pdf", "sayfalar": [6, 7, 8, 9, 10, 11, 12, 13, 14, 18, 19, 26]},
+    "ozet": "1-5 dakikalık zaman dilimlerinde trend hizalaması oluştuğunda ve tescilli yazılımın (SMART Center) güç (alış) ya da zayıflık (satış) VSA işareti çıktığında, işaret çubuğundan sonra gelen çubuğun işaret çubuğunu aşan yönde kapanması beklenir. Onay gelirse, onay sinyalinin göründüğü grafikte (1-3 dk) kırılma yönünde işleme girilir.",
+    "kategori": "trend_takip",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {"islem": "1m", "ust_filtre": "5m"},
+    "gostergeler": [
+      {"ad": "VSA (SMART Center, tescilli yazılım)", "parametreler": {"zaman_dilimleri": "1,2,3,4,5 dk"}},
+      {"ad": "Hacim", "parametreler": {}}
+    ],
+    "long_giris": [
+      "Yazılım yukarı yönde trend hizalaması uyarısı verir ve Güç (alış) VSA işaretini gösterir; işaret, piyasanın aşağı işaretlendiği sırada büyük hacimle ortaya çıkar (Kural 2, s.6; uyarı s.10)",
+      "Güç işareti gelince Superscalp kutusu pembe yanıp söner (s.12)",
+      "Onay (Kural 5): güç işaretinin çubuğundan sonra gelen çubuk, işaret çubuğunun üstünde kapanır (s.13)",
+      "Onay grafiğinde (ör. 3 dk) uzun pozisyon açılır (s.14)"
+    ],
+    "short_giris": [
+      "Zayıflık (satış) VSA işareti, piyasanın yukarı işaretlendiği sırada büyük hacimle gelir (Kural 1, s.6)",
+      "Zayıflık işareti gelince Superscalp kutusu pembe yanıp söner (s.12)",
+      "Onay: sonraki çubuk işaret çubuğunun altında kapanır (s.13)",
+      "Onay grafiğinde (ör. 1 dk) kısa pozisyon açılır (s.12)"
+    ],
+    "stop_loss": "Kitapta sabit stop mesafesi yok ('kesin stop yerleşimi önermez', s.19). Başlangıç stop noktası belirtilmiyor.",
+    "kar_al": null,
+    "iz_suren_stop": "Uzun için: yüksek hacmin ilk yükselişinde stop fiyat çubuğunun altına taşınır ve durdurulana kadar tekrarlanır; kısa için aynı mantıkla stop çubuğun üstüne taşınır (s.19, Kural 9 ve 'Ticaretten çık').",
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Önemli haber olaylarında veya yakınında işlem yapılmaz (Kural 2, s.9)",
+      "Tıkanıklık (gri kutu veya karışık renkli kutular): işlem yok (Kural 4, s.11)",
+      "Yön, trend hizalama kutusunun rengiyle uyumlu olmalı (kısa için kırmızı kutu; s.10, Kural 3 s.11)",
+      "Tüm zaman dilimlerinin hizalanması zorunlu değil; 3-5 dk hizalıysa 1-2 dk gri olsa da kurulum geçerli olabilir (s.12)"
+    ],
+    "pozisyon_risk": "Ek 3 (s.26): herhangi bir işlemde sermayenin %2,5'inden fazlası riske atılmaz; aynı hesapta birden fazla işlemde toplam %6'dan fazlası riske atılmaz; art arda üç kayıptan sonra işlem durdurulup plan yeniden incelenir; minimum 2:1 risk/ödül oranı kullanılır (s.26). Kural 8 (s.18): yazılı ticaret planı.",
+    "iddia_edilen_performans": "Sayısal kazanma oranı ya da getiri iddiası yok. Hedef belirtilen: minimum 2:1 risk/ödül oranı (s.26).",
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Onay kuralı (işaret çubuğunun kapanış üstü/altı) mekanik, ancak güç/zayıflık VSA işaretleri ve trend hizalaması tescilli yazılımın çıktısı; hacim eşiği ve 'büyük hacim' tanımı sayısal değil; kâr al yok, stop sabit değil."
+    },
+    "belirsizlikler": [
+      "Trend hizalaması ve VSA işaretleri tescilli yazılımın (TradeGuider SMART Center) çıktısı; formülleri kitapta yok",
+      "'Büyük hacim' ve 'ultra yüksek hacim' için eşik yok; forex'te gerçek hacim olmadığından hangi hacim verisinin kullanıldığı belirsiz",
+      "Tüm zaman dilimlerinin hizalanıp hizalanmaması konusunda kitap esnek ifadeler kullanıyor (s.12)",
+      "Başlangıç stopu yok; çıkış yalnızca izleyen stop ile",
+      "Kâr al hedefi yok",
+      "Yazılım dışında manuel uygulama için yöntem tarif edilmemiş"
+    ],
+    "uyumluluk_notu": "1L3A için: kitap 1-5 dk zaman dilimleri kullanıyor; 5m ana filtre olarak mümkün, 1m giriş. Pip değil, fiyat ve hacim kullanıyor; kitap genel olarak forex, vadeli, hisse ve emtia için yazılmış. Hacim verisi gerekli: forex'te tick hacmi, kripto, ABD hisse ve emtia perpetual'larda gerçek hacim olabilir. Tescilli yazılım olmadan kodlanabilirlik düşük; VSA kuralları kendi tanımınızla yeniden yazılmalı.",
+    "varyantlar": [
+      "Kısa ticaret (zayıflık işareti) ayna versiyonu (s.12-13)",
+      "Trend hizalaması olmadan yalnızca 5 dakikalık güç işaretiyle onay (s.12, 'bu stratejide izlenen en büyük zaman dilimi 5 dk')"
+    ],
+    "anahtar_kelimeler": ["vsa", "wyckoff", "hacim-yayılımı", "trend-hizalama", "superscalp", "onay-çubuğu", "avize-stop", "akıllı-para"]
+  },
+  {
+    "kart_id": "scalp__ultra-hacim-seviye__holmes",
+    "ad": "Ultra yüksek hacimli bar seviyeleri ve düşük hacim tetikleyicisi",
+    "stil": "scalp",
+    "kaynak": {"pdf": "Super_Scalper_-_Gavin_Holmes_27_sayfa.pdf", "sayfalar": [15, 16, 17]},
+    "ozet": "1 dakikalık grafikte son 200 çubuk içindeki ultra yüksek hacimli barların tepe, dip ve kapanış seviyeleri işaretlenir; fiyat bu seviyelere gelince tepki izlenir. Aynı fiyat seviyesinde düşük veya çok düşük hacimli barlar, fiyat yönünün değişmesine neden olabilecek tetikleyici olarak yorumlanır.",
+    "kategori": "destek_direnc",
+    "piyasa_rejimi": "herhangi",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {"islem": "1m", "ust_filtre": null},
+    "gostergeler": [{"ad": "Hacim (VSA)", "parametreler": {"pencere_bar": 200}}],
+    "long_giris": [],
+    "short_giris": [],
+    "stop_loss": null,
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Ultra yüksek hacim barı seviyesine yakın düşük veya çok düşük hacimli bar, yön değişimi için uyarı sayılır (s.16)"
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 0,
+      "gerekce": "Giriş yönü ve tetikleyici tanımsız; kitap 'piyasanın nasıl tepki vereceğini izleyin' diyor. Hacim eşiği ve 'ultra yüksek' tanımı yok; forex'te gerçek hacim verisi de yok."
+    },
+    "belirsizlikler": [
+      "'Ultra yüksek hacim' için sayısal eşik yok",
+      "Seviye tepkisinin yönü ve tetikleyici tanımsız; giriş kuralı yok",
+      "200 çubuk pencere yalnızca 1 dk için verilmiş",
+      "Hacim verisinin kaynağı (tescilli yazılım) belirsiz",
+      "Stop ve çıkış kuralı yok"
+    ],
+    "uyumluluk_notu": "1 dk ve 200 çubuk pencere 1L3A'nın ≥5m tercihiyle uyuşmuyor (5m'de yaklaşık 16 saat). Hacim verisi zorunlu; forex'te tick hacmi ile test gerekir.",
+    "varyantlar": [
+      "Yüksek hacimli bar tepe, dip ve kapanış seviyelerinin destek/direnç olarak kullanımı (s.15)",
+      "Düşük hacimli bar seviyesinin tetikleyici olarak kullanımı (s.16)"
+    ],
+    "anahtar_kelimeler": ["ultra-hacim", "hacim-seviyesi", "vsa", "destek-direnç", "akıllı-para", "1dk"]
+  }
+]

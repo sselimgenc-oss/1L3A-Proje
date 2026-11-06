@@ -1,0 +1,405 @@
+[
+  {
+    "kart_id": "swing__sma-kesisim-10-50__hogan",
+    "ad": "SMA 10/50 Kesisimi (varyant: 10/20)",
+    "stil": "swing",
+    "kaynak": {"pdf": "Swing_Trading_ve_Vadeli_İşlemlerle_Yatırım_-_Timothy_T_Hogan_445_sayfa.pdf", "sayfalar": [53, 54, 214, 215]},
+    "ozet": "Kisa vadeli basit hareketli ortalama (10) uzun vadeliyi (50) yukari keserse alim, asagi keserse satim sinyali. Kitap bunu trend yonu ve destek/direnc icin kullanilabilir gosterge olarak sunar.",
+    "kategori": "trend_takip",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {"islem": "1D", "ust_filtre": null},
+    "gostergeler": [{"ad": "SMA", "parametreler": {"periyot": 10}}, {"ad": "SMA", "parametreler": {"periyot": 50}}],
+    "long_giris": ["10 gunluk SMA, 50 gunluk SMA'yi asagidan yukari keser (kitap: satin alma sinyali, s.54)"],
+    "short_giris": ["10 gunluk SMA, 50 gunluk SMA'yi yukaridan asagi keser (kitap: satis sinyali, s.54)"],
+    "stop_loss": null,
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": "Sinyal cikisi: ters yonde kesisim olusunca pozisyon kapatilir (s.54)",
+    "filtreler": ["Fiyat 50 gunluk MA ustundeyken yukselis trendi kabul edilir (s.53)"],
+    "pozisyon_risk": "Kitabin bu sistem icin ozel kurali yok. Genel kural: islem basina sermayenin %1-3'u riske atilir (s.29), stop once belirlenir (s.30).",
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 3,
+      "gerekce": "Giris ve ters kesisimle cikis tamamen fiyat/gosterge ile olculebilir. Stop ve kar hedefi kitapta bu sistem icin tanimli degil."
+    },
+    "belirsizlikler": [
+      "Stop-loss ve kar hedefi kitapta bu sistem icin tanimli degil (null birakildi)",
+      "s.214-215 metni makine cevirisinde kesisim yonunu karistiriyor; 10/20 varyantinda yon mantigi 10/50 ile ayni varsayildi",
+      "Kitap 10/50 kesisiminin 'kazandirdigini' genel bir iddia olarak degil, ornek grafikle gosterir"
+    ],
+    "varyantlar": ["10/20 SMA kesisimi (s.214-215): kisa SMA 10 uzun SMA 20'yi yukari/asagi keser"],
+    "uyumluluk_notu": "5m'ye uyarlanabilir (periyotlar mum sayisina gore olceklenir; kitap gunluk kullanir). Hacim verisi gerekmez. Forex'e ozgu unsur yok; kripto, ABD hisse ve emtia perpetual'larda calisir. Kapanis fiyati kullanilir.",
+    "anahtar_kelimeler": ["sma", "ma-kesisim", "trend-takip", "10-50", "10-20", "gunluk"]
+  },
+  {
+    "kart_id": "swing__macd-12-26-9__hogan",
+    "ad": "MACD (12,26,9) Sinyal Cizgisi ve Sifir Gecisi",
+    "stil": "swing",
+    "kaynak": {"pdf": "Swing_Trading_ve_Vadeli_İşlemlerle_Yatırım_-_Timothy_T_Hogan_445_sayfa.pdf", "sayfalar": [64, 65, 181, 216, 217]},
+    "ozet": "MACD cizgisi sinyal cizgisini yukari keserse alim, asagi keserse satim. Kitap ayrica sifir cizgisi gecisini sinyal olarak kullanir. Kitap, sinyallerin bir kismunun yanlis oldugunu ve filtre gerektigini belirtir.",
+    "kategori": "momentum",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {"islem": "1D", "ust_filtre": null},
+    "gostergeler": [{"ad": "MACD", "parametreler": {"hizli": 12, "yavas": 26, "sinyal": 9}}],
+    "long_giris": ["MACD cizgisi sinyal cizgisini asagidan yukari keser (s.216)"],
+    "short_giris": ["MACD cizgisi sinyal cizgisini yukaridan asagi keser (s.216)"],
+    "stop_loss": null,
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": "Sinyal cikisi: ters yonde kesisim olusunca islemden cikilir (s.216)",
+    "filtreler": ["Kitap yanlis sinyalleri ayiklamak icin bir filtre onerir ama filtreyi tanimlamaz (s.64-65)"],
+    "pozisyon_risk": "Kitabin bu sistem icin ozel kurali yok. Genel kural: islem basina sermayenin %1-3'u (s.29).",
+    "iddia_edilen_performans": "EUR/USD gunluk grafik, yaklasik 5 ay: 10 islemden 5'i basabas, 2'si zarar, yaklasik 3'u kar (s.217). Kitap bu sistemin tersine cevrilmesinin naif oldugunu belirtir.",
+    "kodlanabilirlik": {
+      "puan": 3,
+      "gerekce": "Giris ve cikis kesisim kurallari gosterge degerleriyle tam olarak olculebilir."
+    },
+    "belirsizlikler": [
+      "Stop-loss ve kar hedefi kitapta tanimli degil (null birakildi)",
+      "Filtre kurali tanimli degil",
+      "s.64-65'te 'kalip' ve 'filtre' ifadeleri genel; somut esik yok"
+    ],
+    "varyantlar": ["Sifir cizgisi gecisi (s.217): MACD sifirin ustune gecerse alim, altina gecerse satim"],
+    "uyumluluk_notu": "5m'ye uyarlanabilir (parametreler ayni kalir, sinyal sikligi artar). Hacim verisi gerekmez. Kripto, emtia ve hisse icin calisir (kitap genel). Forex'e ozgu bir unsur yok.",
+    "anahtar_kelimeler": ["macd", "sinyal-cizgisi", "sifir-gecisi", "momentum", "12-26-9", "gunluk"]
+  },
+  {
+    "kart_id": "swing__ema-9-13-50__hogan",
+    "ad": "EMA 9/13/50 Uclu Ortalama Sistemi",
+    "stil": "swing",
+    "kaynak": {"pdf": "Swing_Trading_ve_Vadeli_İşlemlerle_Yatırım_-_Timothy_T_Hogan_445_sayfa.pdf", "sayfalar": [167]},
+    "ozet": "9 EMA, 13 EMA'yi yukari keser ve 13 EMA 50 EMA'nin ustunde ise uzun pozisyon. 9 EMA 13 EMA'nin altina duserse uzun pozisyondan cikis. Kitap metni makine cevirisinde bozuk, kisa giris kurali acik degil.",
+    "kategori": "trend_takip",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {"islem": "belirtilmedi", "ust_filtre": null},
+    "gostergeler": [
+      {"ad": "EMA", "parametreler": {"periyot": 9}},
+      {"ad": "EMA", "parametreler": {"periyot": 13}},
+      {"ad": "EMA", "parametreler": {"periyot": 50}}
+    ],
+    "long_giris": ["EMA9, EMA13'u asagidan yukari keser ve EMA13, EMA50'nin ustunde (veya yukari gecmis) olmalidir (s.167)"],
+    "short_giris": [],
+    "stop_loss": null,
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": "Sinyal cikisi: EMA9, EMA13'un altina gecerse uzun pozisyon kapatilir (s.167)",
+    "filtreler": [],
+    "pozisyon_risk": "Kitabin bu sistem icin ozel kurali yok. Genel kural: islem basina sermayenin %1-3'u (s.29).",
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Uzun giris ve cikis kurali olculebilir. Metin bozuk oldugundan esik ve yon varsayimlari gerekir; kisa kural kitapta acik degil."
+    },
+    "belirsizlikler": [
+      "Kisa giris kurali kitapta acik degil (s.167-169'da 'ayi capraz' ifadesi var, fiyatin EMA'larin altina dusmesi bagami)",
+      "13 EMA ile 50 EMA arasindaki kosul 'ustunde veya yukari gecmis' olarak yorumlandi",
+      "Zaman dilimi belirtilmemis; stop ve kar hedefi yok"
+    ],
+    "varyantlar": [],
+    "uyumluluk_notu": "5m'ye uyarlanabilir (periyotlar mum sayisina gore olceklenir). Hacim gerekmez. Forex'e ozgu unsur yok; kripto, hisse ve emtia icin calisir.",
+    "anahtar_kelimeler": ["ema", "uclu-ortalama", "9-13-50", "trend-takip"]
+  },
+  {
+    "kart_id": "swing__heikin-ashi-destek-direnc__hogan",
+    "ad": "Heikin-Ashi Destek/Direnc Swing (Gunluk)",
+    "stil": "swing",
+    "kaynak": {"pdf": "Swing_Trading_ve_Vadeli_İşlemlerle_Yatırım_-_Timothy_T_Hogan_445_sayfa.pdf", "sayfalar": [140, 141]},
+    "ozet": "Gunluk grafikte Heikin-Ashi mumlari kullanilir. Fiyat onemli destek veya dirence geldiginde islem acilir, stop desteğin/direncin karsi tarafina konur. Heikin-Ashi mum rengi degisir ve fiyat bir sonraki destek/dirence ulasirsa cikilir. Kitapta islem ortalama 80-200 pip, birkac gun surer.",
+    "kategori": "destek_direnc",
+    "piyasa_rejimi": "herhangi",
+    "orijinal_piyasa": "forex",
+    "zaman_dilimi": {"islem": "1D", "ust_filtre": null},
+    "gostergeler": [
+      {"ad": "Heikin Ashi", "parametreler": {}},
+      {"ad": "Destek/Direnc", "parametreler": {"belirleme": "kitapta tanimlanmamis"}}
+    ],
+    "long_giris": ["Fiyat onemli destek seviyesine ulasir (destek nasil belirlenir kitapta yok; s.141)"],
+    "short_giris": ["Fiyat onemli direnc seviyesine ulasir (yon varsayimi, s.141)"],
+    "stop_loss": "Destegin (long) veya direncin (short) karsi tarafina; kitap 'karsi tarafina' diyor (s.141)",
+    "kar_al": "Heikin-Ashi mum rengi degisir VE fiyat bir sonraki onemli destek/direnc seviyesine ulasirsa islemden cikilir (s.141)",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": ["Kitap gun sonunda gunluk grafige bakilmasini onerir (s.141)"],
+    "pozisyon_risk": "Genel kural: islem basina %1-3 (s.29); risk/odul en az 1:3 onerisi (s.32).",
+    "iddia_edilen_performans": "Forex'te islem basina ortalama 80-200 pip; islemler birkac gun surer (s.141).",
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Giris, stop ve cikis kosullari sayisal ama destek/direnc tespiti ve yonun belirlenmesi yorumludur."
+    },
+    "belirsizlikler": [
+      "Destek/direnc seviyelerinin nasil belirlenecegi kitapta tanimli degil",
+      "Long/short yonu ve stop konumu 'karsi tarafina' ifadesinden yorumlandi",
+      "Heikin-Ashi 'gölgelendirme degisimi' mum rengi degisimi olarak yorumlandi",
+      "Kitap yalnizca gunluk kullanimi tarif eder; forex pip degeri ornegi var"
+    ],
+    "varyantlar": [],
+    "uyumluluk_notu": "5m'ye uyarlanabilir ama destek/direnc tanimi zaman dilimine gore degisir. Forex'e ozgu: pip ortalamasi. Hacim gerekmez. Kripto, hisse ve emtiada kural genel olarak uygulanabilir.",
+    "anahtar_kelimeler": ["heikin-ashi", "destek", "direnc", "gunluk", "swing", "forex"]
+  },
+  {
+    "kart_id": "swing__elder-uclu-ortalama__hogan",
+    "ad": "Elder Uclu Ortalama Yonu",
+    "stil": "swing",
+    "kaynak": {"pdf": "Swing_Trading_ve_Vadeli_İşlemlerle_Yatırım_-_Timothy_T_Hogan_445_sayfa.pdf", "sayfalar": [139]},
+    "ozet": "Uc ortalamanin ucu de yukselirse uzun, ucu de duserse kisa islem. Degerlendirme gun sonu kapanisinda yapilir.",
+    "kategori": "trend_takip",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {"islem": "1D (gun sonu kapanisi)", "ust_filtre": null},
+    "gostergeler": [{"ad": "Hareketli ortalama", "parametreler": {"adet": 3, "periyotlar": "kitapta belirtilmemis"}}],
+    "long_giris": ["Uc ortalamanin ucu de yukseliyorsa alim (gun sonu kapanisi)"],
+    "short_giris": ["Uc ortalamanin ucu de dusuyorsa satim (gun sonu kapanisi)"],
+    "stop_loss": null,
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [],
+    "pozisyon_risk": "Kitabin bu sistem icin ozel kurali yok. Genel kural: islem basina %1-3 (s.29).",
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Yon kurali olculebilir. Ortalama tipi ve periyotlari kitapta olmadigi icin varsayim gerekir."
+    },
+    "belirsizlikler": [
+      "Ortalama tipi (SMA/EMA) ve periyotlari belirtilmemis",
+      "Cikis kurali ve stop yok",
+      "Makine cevirisinde 'uc ortalama' 'uc farkli islem fiyati' olarak gecer; ortalama olarak yorumlandi"
+    ],
+    "varyantlar": [],
+    "uyumluluk_notu": "5m'ye uyarlanabilir; periyot secimi gerekir. Hacim gerekmez. Forex'e ozgu unsur yok.",
+    "anahtar_kelimeler": ["elder", "uclu-ortalama", "trend", "gun-sonu"]
+  },
+  {
+    "kart_id": "swing__kopus-hacim-onayi__hogan",
+    "ad": "Konsolidasyon Kopusu + Hacim ve Mum Onayi",
+    "stil": "swing",
+    "kaynak": {"pdf": "Swing_Trading_ve_Vadeli_İşlemlerle_Yatırım_-_Timothy_T_Hogan_445_sayfa.pdf", "sayfalar": [33, 89, 96, 97, 151, 152, 171, 172]},
+    "ozet": "Fiyat yatay bolgede direnci kirar (long) veya destegi kirar (short). Hacim ortalamanin ustunde ve onay mumu (long icin boga mumu, dusuş mumlarindan sonra) gelirse islem acilir. Stop kirilan seviyeye yakin; hedef %5-10 veya yaklasik son ortalama dalgalanma kadar; 5-10 gun tutulur.",
+    "kategori": "kirilim",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "hisse",
+    "zaman_dilimi": {"islem": "1D", "ust_filtre": null},
+    "gostergeler": [
+      {"ad": "Hacim", "parametreler": {"ortalama": "periyot belirtilmemis; 'daha kisa birlik donemi hacmi' (s.172)"}},
+      {"ad": "Direnc/Destek", "parametreler": {"belirleme": "yatay konsolidasyon siniri"}}
+    ],
+    "long_giris": [
+      "Fiyat direnc seviyesinin uzerinde kapanir (kopus)",
+      "Kopus mumunun hacmi ortalama hacmin ustunde (s.151)",
+      "Onay: dusus mumlarindan sonra boga mumu olusur (s.151)"
+    ],
+    "short_giris": [
+      "Fiyat destek seviyesinin altinda kapanir (breakdown, s.89 ve s.151)",
+      "Hacim onayi ve ayi mumu onayi, long kuralinin aynasi olarak varsayildi"
+    ],
+    "stop_loss": "Kirilan eski direncin (yeni destek) altina; kitap ayrica %2-3 stop onerir (s.152, s.171)",
+    "kar_al": "Yaklasik %5-10 (s.171) veya onceki ortalama dalgalanma kadar, ornegin 4 puan (s.152). Kismi kar alinir.",
+    "iz_suren_stop": "Kar kilitlemek icin stop yukseltilir (s.152); esik tanimli degil",
+    "zaman_cikisi": "5-10 islem gunu (s.91, s.171)",
+    "filtreler": [
+      "Hisse likiditesi: gunluk ortalama hacim 300.000 uzerinde (s.33)",
+      "Fiyat 5$ uzerinde (s.33)",
+      "Onceki yukselis zorunlu (s.171)",
+      "Yuksek goreceli guc derecelendirmesi tercih (s.171; olcum tanimsiz)",
+      "Kopus yalnizca yogun ilgi varsa guvenilir (s.96-97)"
+    ],
+    "pozisyon_risk": "Islem basina sermayenin %1-3'u (s.29); %1'den fazlasini riske atmama onerisi (s.209).",
+    "iddia_edilen_performans": "Kitap genel olarak swing kar marjlarini %5-10 olarak verir (s.91). Ayrica bir IBD tarzi ornekte (Fibria) 15 gunde %15 kazanc gosterilir (s.213); tek ornek.",
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Kirilim, kapanis, hacim esigi ve hedef/stop sayisal; ancak ortalama hacim periyodu, RS derecelendirmesi ve onceki yukselis tanimi yorumludur."
+    },
+    "belirsizlikler": [
+      "Hacim ortalamasinin periyodu belirtilmemis ('daha kisa birlik donemi hacmi' s.172)",
+      "RS (goreceli guc) derecelendirmesinin olcumu yok",
+      "Onceki yukselis tanimi yok",
+      "Kisa (breakdown) icin onay kurali kitapta acikca tanimlanmamis; simetrik varsayildi",
+      "Konsolidasyon siniri tanimi yok"
+    ],
+    "varyantlar": [
+      "Kisa (breakdown) versiyon: destek kirilimi (s.89, s.151)",
+      "Kisa hacim penceresi: daha kisa birlik donemi hacmi (s.172)"
+    ],
+    "uyumluluk_notu": "5m'ye uyarlanabilir ama hacim ve konsolidasyon tanimi zaman dilimine gore degisir. Hacim verisi gerekir: hisse ve vadeli icin uygun; forex'te tick hacmi kullanilir. Kitabin 300.000 hacim ve 5$ filtresi dogrudan ABD hisse icin tanimli, forex/kripto'ya uygulanamaz. Emtia ve kripto icin hacim verisi varsa calisir.",
+    "anahtar_kelimeler": ["kopus", "breakout", "breakdown", "hacim", "direnc", "destek", "konsolidasyon"]
+  },
+  {
+    "kart_id": "swing__fibonacci-61-8-geri-cekilme__hogan",
+    "ad": "Fibonacci %61,8 Geri Cekilme Donusu (Kisa)",
+    "stil": "swing",
+    "kaynak": {"pdf": "Swing_Trading_ve_Vadeli_İşlemlerle_Yatırım_-_Timothy_T_Hogan_445_sayfa.pdf", "sayfalar": [211, 212, 215]},
+    "ozet": "Dusus trendinde fiyat son dususun %61,8 Fibonacci geri cekilme seviyesine yukselir ve buradan donerse (direnc) kisa pozisyon acilir. Hedef %23,6 seviyesi, stop direncin ustune konur.",
+    "kategori": "destek_direnc",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {"islem": "belirtilmedi", "ust_filtre": null},
+    "gostergeler": [{"ad": "Fibonacci geri cekilme", "parametreler": {"seviyeler": [61.8, 50, 38.2, 23.6]}}],
+    "long_giris": [],
+    "short_giris": ["Dusus trendi icinde fiyat son dususun %61,8 geri cekilme seviyesine yukselir ve buradan geri doner; kisa acilir (s.212)"],
+    "stop_loss": "Direncin ustune (s.215)",
+    "kar_al": "Fiyatin %23,6 geri cekilme seviyesine (destek) dusmesi (s.212)",
+    "iz_suren_stop": null,
+    "zaman_cikisi": "Kitap ornekte yaklasik bir hafta bekler (s.212)",
+    "filtreler": ["Dusus trendi baglami (s.212); trend tanimi kitapta yok"],
+    "pozisyon_risk": "Genel kural: islem basina %1-3 (s.29).",
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Seviyeler sayisal; ancak trend yonu, donus teyidi ve tepe/dip secimi yorumludur."
+    },
+    "belirsizlikler": [
+      "Trend tanimi (dusus) belirtilmemis",
+      "Sicrama (donus) teyidi icin mum/hacim kosulu yok",
+      "Yukselis tarafindaki (long) versiyon kitapta acikca yok; simetrik varsayilamaz",
+      "Fibonacci icin baslangic tepe/dip secimi yorumlu; kitabin Fibonacci uygulama bolumu bos (s.222)"
+    ],
+    "varyantlar": ["%50 seviyesi de bazi tuccarlarca kullanilir (s.212); kitap bunu acik kural yapmaz"],
+    "uyumluluk_notu": "5m'ye uyarlanabilir (Fibonacci olcekten bagimsiz). Hacim gerekmez. Kitap Fibonacci'nin forex ve emtiada yaygin oldugunu belirtir (s.56); hisse, kripto ve emtia icin calisir.",
+    "anahtar_kelimeler": ["fibonacci", "61-8", "geri-cekilme", "direnc", "kisa", "dusus-trendi"]
+  },
+  {
+    "kart_id": "swing__yutma-formasyonu__hogan",
+    "ad": "Boga / Ayi Yutma Donus Formasyonu",
+    "stil": "swing",
+    "kaynak": {"pdf": "Swing_Trading_ve_Vadeli_İşlemlerle_Yatırım_-_Timothy_T_Hogan_445_sayfa.pdf", "sayfalar": [271]},
+    "ozet": "Dusus trendinde, gövdesi onceki ayi mumunun gövdesinden buyuk ve onu tamamen saran bir boga mumu yukselis donusu sinyali olarak yorumlanir. Yukselis trendinde ayi yutma ters yonde sinyal verir.",
+    "kategori": "formasyon",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {"islem": "belirtilmedi", "ust_filtre": null},
+    "gostergeler": [{"ad": "Mum formasyonu", "parametreler": {"tip": "2 mumlu yutma"}}],
+    "long_giris": ["Dusus trendinde: ayi mumundan sonra govdesi ayi mumun govdesini tamamen kapsayan boga mumu (s.271)"],
+    "short_giris": ["Yukselis trendinde: boga mumundan sonra govdesi boga mumunu tamamen kapsayan ayi mumu (sekil s.271; metin acik degil)"],
+    "stop_loss": null,
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": ["Trend baglami zorunlu: kitap boga yutmanin yalnizca dusus trendinde gecerli oldugunu belirtir (s.271)"],
+    "pozisyon_risk": "Genel kural: islem basina %1-3 (s.29).",
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Govde buyuklugu ve tam sarma olculebilir; ancak trend tanimi ve giris mumu kurali yok."
+    },
+    "belirsizlikler": [
+      "Dusus/yukselis trendi tanimi yok",
+      "Giris fiyati (sonraki mumun acilisi mi kapanisi mi) belirtilmemis",
+      "Stop ve hedef yok",
+      "Ayi yutma icin metin aciklamasi yok; sekilden cikarildi"
+    ],
+    "varyantlar": ["Ayi yutma (yukselis trendinde, sekil s.271)"],
+    "uyumluluk_notu": "5m'ye uyarlanabilir (mum yapisi olcekten bagimsiz). Hacim gerekmez. Forex, hisse, kripto ve emtia icin calisir (kitap genel).",
+    "anahtar_kelimeler": ["yutma", "engulfing", "mum-formasyonu", "donus", "boga", "ayi"]
+  },
+  {
+    "kart_id": "swing__cekic-asili-adam__hogan",
+    "ad": "Cekic / Ters Cekic / Asili Adam / Kayan Yildiz (Tek Mum Donus)",
+    "stil": "swing",
+    "kaynak": {"pdf": "Swing_Trading_ve_Vadeli_İşlemlerle_Yatırım_-_Timothy_T_Hogan_445_sayfa.pdf", "sayfalar": [269, 270]},
+    "ozet": "Kucuk govdeli, uzun fitilli tek mum. Dusus trendinde cekic veya ters cekic yukselis donusu; yukselis trendinde asili adam veya kayan yildiz dusus donusu sinyali olarak yorumlanir.",
+    "kategori": "formasyon",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {"islem": "belirtilmedi", "ust_filtre": null},
+    "gostergeler": [{"ad": "Mum formasyonu", "parametreler": {"govde": "kucuk", "fitil": "uzun (oran belirtilmemis)"}}],
+    "long_giris": [
+      "Dusus trendinde cekic: kucuk govde, ust tarafta cok az fitil, uzun alt fitil (s.269)",
+      "Dusus trendinde ters cekic: kucuk govde, uzun ust fitil, alt tarafta cok az fitil (s.270)"
+    ],
+    "short_giris": [
+      "Yukselis trendinde asili adam: kucuk ayi govdesi, uzun alt fitil (s.269)",
+      "Yukselis trendinde kayan yildiz: kucuk govde, uzun ust fitil (s.269-270)"
+    ],
+    "stop_loss": null,
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": ["Trend baglami zorunlu (s.269-270)"],
+    "pozisyon_risk": "Genel kural: islem basina %1-3 (s.29).",
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Sekil tarifi var ama 'kucuk govde' ve 'uzun fitil' oranlari sayisal degil; onay ve giris kurali yok."
+    },
+    "belirsizlikler": [
+      "Govde/fitil oranlari yok",
+      "Onay mumu ve giris fiyati yok",
+      "Stop ve hedef yok",
+      "Trend tanimi yok"
+    ],
+    "varyantlar": ["Ters cekic (s.270)", "Kayan yildiz (s.269-270)", "Asili adam (s.269)"],
+    "uyumluluk_notu": "5m'ye uyarlanabilir; fitil orani sayisal olarak tanimlanmalidir. Hacim gerekmez. Forex, hisse, kripto ve emtia icin calisir (kitap genel).",
+    "anahtar_kelimeler": ["cekic", "hammer", "asili-adam", "kayan-yildiz", "mum-formasyonu", "donus"]
+  },
+  {
+    "kart_id": "swing__cimbiz-dip-tepe__hogan",
+    "ad": "Cimbiz Tepe / Cimbiz Dip (Iki Mumlu Donus)",
+    "stil": "swing",
+    "kaynak": {"pdf": "Swing_Trading_ve_Vadeli_İşlemlerle_Yatırım_-_Timothy_T_Hogan_445_sayfa.pdf", "sayfalar": [271, 272]},
+    "ozet": "Iki mumun ayni seviyede tepe veya dip yapmasi donus sinyali verir. Dusus trendinde cimbiz dip yukselis, yukselis trendinde cimbiz tepe dusus donusu olarak yorumlanir.",
+    "kategori": "formasyon",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {"islem": "belirtilmedi", "ust_filtre": null},
+    "gostergeler": [{"ad": "Mum formasyonu", "parametreler": {"tip": "2 mumlu cimbiz"}}],
+    "long_giris": ["Dusus trendinde ayni alt seviyeyi test eden iki mum (biri ayi, biri boga), alt fitilleri belirgin (s.272)"],
+    "short_giris": ["Yukselis trendinde ayni ust seviyeyi test eden iki mum (biri boga, biri ayi), ust fitilleri belirgin (s.271)"],
+    "stop_loss": null,
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": ["Trend baglami zorunlu (s.271-272)"],
+    "pozisyon_risk": "Genel kural: islem basina %1-3 (s.29).",
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Iki mumun 'benzer' olmasi sayisal degil; onay ve giris kurali yok."
+    },
+    "belirsizlikler": [
+      "'Benzer seviye' tanimi sayisal degil",
+      "Onay ve giris fiyati yok",
+      "Stop ve hedef yok",
+      "Metin cevirisi cimbiz dip ile cimbiz tepe tariflerini karistiriyor olabilir (s.271-272)"
+    ],
+    "varyantlar": [],
+    "uyumluluk_notu": "5m'ye uyarlanabilir; seviye toleransi tanimlanmalidir. Hacim gerekmez. Forex, hisse, kripto ve emtia icin calisir (kitap genel).",
+    "anahtar_kelimeler": ["cimbiz", "tweezer", "mum-formasyonu", "donus", "tepe", "dip"]
+  },
+  {
+    "kart_id": "swing__kazanc-oncesi-tutma__hogan",
+    "ad": "Kazanc Oncesi Gece Tutma (Tek Hisse Ornegi)",
+    "stil": "swing",
+    "kaynak": {"pdf": "Swing_Trading_ve_Vadeli_İşlemlerle_Yatırım_-_Timothy_T_Hogan_445_sayfa.pdf", "sayfalar": [398]},
+    "ozet": "Hisse kazanc aciklamasindan bir onceki gunun kapanisinda alinir, kazanctan sonraki gun kapanisinda satilir. Kitap AAPL'de son 10 kazancin 8'inde bu aralikta yukselis gorulmesini ornek verir ve mantikli bulur.",
+    "kategori": "diger",
+    "piyasa_rejimi": "herhangi",
+    "orijinal_piyasa": "hisse",
+    "zaman_dilimi": {"islem": "1D", "ust_filtre": null},
+    "gostergeler": [{"ad": "Kazanc takvimi", "parametreler": {}}],
+    "long_giris": ["Kazanc aciklamasindan bir onceki islem gununun kapanisinda alim (s.398)"],
+    "short_giris": [],
+    "stop_loss": null,
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": "Kazanc aciklamasini izleyen gun kapanisinda satis (s.398)",
+    "filtreler": [],
+    "pozisyon_risk": "Kitabin ozel kurali yok. Genel kural: islem basina %1-3 (s.29).",
+    "iddia_edilen_performans": "AAPL ornegi: son 10 kazancin 8'inde, kazanc onceki gunun kapanisindan ertesi gune kadar yukselis (s.398). Kitap genel gecmis performansin gelecegi garanti etmedigini belirtir (s.399).",
+    "kodlanabilirlik": {
+      "puan": 3,
+      "gerekce": "Giris ve cikis zamani takvimle tamamen olculebilir."
+    },
+    "belirsizlikler": [
+      "Stop kitapta yok; gece riski acik",
+      "Tek hisse (AAPL) ve 10 ornek; istatistiksel guven yok",
+      "'Ertesi gune' ifadesi kazanc aciklamasini izleyen gun kapanisi olarak yorumlandi",
+      "Kazanc tarihinin onceden bilinmesi gerekir"
+    ],
+    "varyantlar": [],
+    "uyumluluk_notu": "5m icin uygun degil (gece tutma, kazanc olayina bagli). 1L3A icin ABD hisse kazanc takvimi gerekir. Forex, kripto ve perpetual'lar icin kazanc olayi olmadigindan uygulanamaz. Hacim gerekmez.",
+    "anahtar_kelimeler": ["kazanc", "earnings", "gece-tutma", "hisse", "takvim"]
+  }
+]

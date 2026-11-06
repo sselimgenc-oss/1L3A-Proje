@@ -1,0 +1,230 @@
+[
+  {
+    "kart_id": "scalp__ha-renk-donusu__heikinashi",
+    "ad": "Heikin Ashi renk dönüşü karşı-trend scalp (1 dk)",
+    "stil": "scalp",
+    "kaynak": {"pdf": "Eğlenceli_Scalping_2_-_Heikin_Ashi_Trader_44_sayfa.pdf", "sayfalar": [7, 8, 9, 10, 11, 12, 13, 14, 16, 22]},
+    "ozet": "Trend yavaşlayıp bir dönüm noktasında (doji veya topaç, küçülen mumlar) durduktan sonra, Heikin Ashi mumunun rengi değişip karşı renkte ilk mum oluştuğunda o yönde işleme girilir. Pozisyon, mumun rengi tekrar trend yönüne döndüğünde kapatılır.",
+    "kategori": "ortalamaya_donus",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "forex",
+    "zaman_dilimi": {"islem": "1m", "ust_filtre": null},
+    "gostergeler": [{"ad": "Heikin Ashi", "parametreler": {}}],
+    "long_giris": [
+      "Düşüş trendinde kırmızı HA mumları küçülür; doji veya topaç (küçük gövde, küçük gölgeler) dönüm noktası olarak görülür (s.10-11)",
+      "Dönüm mumundan sonra ilk yeşil HA mum oluşur ve kapanır; giriş bu mumun rengi değiştiği anda (s.11-13)"
+    ],
+    "short_giris": [
+      "Yükseliş trendinde yeşil HA mumları küçülür; doji veya topaç oluşur (s.10-11, s.13)",
+      "Dönüm mumundan sonra ilk kırmızı HA mum oluşur ve kapanır; kısa giriş (s.11-13, 'Kısa Satış' örneği)"
+    ],
+    "stop_loss": "5-10 pip (kitap: 'çok dar stoplarla (5-10 pip arası)' ve 'scalper'lar her zaman stop koyar', s.12)",
+    "kar_al": "Mumun rengi tekrar trend yönüne döndüğünde pozisyon kapatılır (kısa için ilk yeşil mum; s.13-14). Kitap ayrıca teknik seviyelere ya da sabit fiyat hedefine bağlı çıkışı opsiyon olarak anıyor (s.14-15).",
+    "iz_suren_stop": "Kâr oluştuğunda stop giriş seviyesine (breakeven) çekilebilir; kitap bunu çok hızlı yapmamayı önerir çünkü volatilite stopu hemen tetikleyebilir (s.22).",
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Trend zayıflama işaretleri: küçülen mumlar, uzun gölgeler, azalan dipler veya artan tepeler (konsolidasyon/dönüş) (s.14)",
+      "Hızlı piyasada daha kısa grafik (30 sn) tercih edilebilir (s.16)"
+    ],
+    "pozisyon_risk": "Kitapta sabit oran yok. Örnek: ilk işlem küçük pozisyonla ($100.000 standart lot, s.17), sonraki işlemde 5 lot (s.19).",
+    "iddia_edilen_performans": "Tek saatlik örnek seans: 4 işlem, 26 pip, 782,00 EUR (s.23-24). Kitap, 'elbette her zaman böyle olmuyor' diye belirtiyor.",
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Giriş ve çıkış kuralı (renk değişimi) mekanik; stop 5-10 pip sabit. Ancak doji/topaç için gövde-gölge eşiği yok ve 'belirsiz trend' görsel değerlendirme gerektiriyor."
+    },
+    "belirsizlikler": [
+      "Doji/topaç için sayısal gövde ve gölge oranı yok",
+      "Trend ve dönüm tanımı görsel; 'belirsiz HA' filtresi ölçülmemiş",
+      "Kâr al için iki yöntem (renk dönüşü veya fiyat hedefi) veriliyor; varsayılan hangisi net değil",
+      "Zaman dilimi: 1 dk tercih ediliyor, hızlı piyasada 30 sn"
+    ],
+    "uyumluluk_notu": "HA hesabı standart; hacim gerekmez. 1 dakikalık scalp 1L3A'nın ≥5m şartına uymuyor; 5m'e uyarlama test edilmeli. Pip bazlı stop forex'e özgü; spread ve komisyon etkisi yüksek. Kripto, ABD hisse ve emtia perpetual için uygulanabilirlik kitapta test edilmemiş.",
+    "varyantlar": [
+      "Fiyat hedefi ile çıkış: HA teyidi ile teknik seviye hedefi birlikte (s.14-15)",
+      "Kâr alındıktan sonra aynı mumda ters yöne yeniden giriş (doji sonrası kısa, s.20-21)"
+    ],
+    "anahtar_kelimeler": ["heikin-ashi", "renk-dönüşü", "doji", "topaç", "karşı-trend", "1dk-scalp", "stop-5-10-pip"]
+  },
+  {
+    "kart_id": "scalp__destek-direnc-ha-donus__heikinashi",
+    "ad": "Destek/direnç retest ve Heikin Ashi renk dönüşü",
+    "stil": "scalp",
+    "kaynak": {"pdf": "Eğlenceli_Scalping_2_-_Heikin_Ashi_Trader_44_sayfa.pdf", "sayfalar": [25, 26, 27]},
+    "ozet": "Yatay bir destek (veya direnç) seviyesi kırıldıktan sonra fiyat seviyeye geri döner (retest). Test mumları küçülür, doji oluşur ve HA rengi kırmızıdan yeşile dönünce alım yapılır. Direnç tarafında (kırılan destek, direnç olarak test edilir) ilk kırmızı mumda kısa yapılır.",
+    "kategori": "destek_direnc",
+    "piyasa_rejimi": "herhangi",
+    "orijinal_piyasa": "forex",
+    "zaman_dilimi": {"islem": "1m", "ust_filtre": null},
+    "gostergeler": [{"ad": "Heikin Ashi", "parametreler": {}}, {"ad": "Yatay destek/direnç", "parametreler": {}}],
+    "long_giris": [
+      "Yatay destek seviyesi belirlenir (kitap örneği: 1.1200 yuvarlak sayısı; önceki kırılan destek, s.25-26)",
+      "Fiyat seviyeye geri testle yaklaşır; seviyenin altına geçmeden küçük mumlar ve doji oluşur (s.26)",
+      "İlk yeşil HA mum (kırmızıdan yeşile dönüş) kapandığında alım (s.26)"
+    ],
+    "short_giris": [
+      "Kırılan destek direnç olarak test edilir; iki başarısız girişimden sonra ilk kırmızı HA mum gelir ve kısa girilir (s.27)"
+    ],
+    "stop_loss": "3-5 pip (kitap: 'bu durumda 3-5 pip derdim', s.26)",
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Seviyenin yatay ve net olması (kitap: desteğin dirence dönüşmesi klasik durum, s.27)",
+      "Test mumlarında momentum kaybı (küçülen mumlar, doji) (s.26)",
+      "Stop çok dar tutulursa rastgele piyasa hareketinde çıkış riski (s.26)"
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": "Örnek: 1.1200 testinden sonra kısa sürede yaklaşık 40 pip (s.27); iddia niteliğinde sayısal oran yok.",
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Seviye seçimi (yatay, yuvarlak sayı, önceki destek) görsel; 'test' ve 'seviyenin altına geçmeme' için sayısal eşik yok. HA renk dönüşü mekanik."
+    },
+    "belirsizlikler": [
+      "Destek/direnç seviyesinin nasıl seçileceği kurala bağlanmamış",
+      "Test derinliği için sayısal eşik yok",
+      "Kâr al kuralı yok",
+      "Kısa tarafta giriş mumu ('ilk kırmızı mum') ile 'iki başarısız girişim' sayımı belirsiz"
+    ],
+    "uyumluluk_notu": "Yuvarlak sayılar ve yatay seviyeler hisse, endeks ve kriptoda da kullanılabilir, ancak seviye tanımı yeniden kurulmalı. 1 dk zaman dilimi 1L3A ≥5m şartını karşılamıyor. Pip stopu ATR ile değiştirilmeli.",
+    "varyantlar": [
+      "Kısa yön: kırılan desteğin direnç olarak test edilmesi (s.27)",
+      "Yuvarlak sayı desteği yerine önceki gün swing seviyesi (bkz. önceki gün swing kartı)"
+    ],
+    "anahtar_kelimeler": ["destek-direnç", "retest", "heikin-ashi", "yuvarlak-sayı", "renk-dönüşü", "3-5-pip-stop"]
+  },
+  {
+    "kart_id": "scalp__onceki-gun-swing-ha__heikinashi",
+    "ad": "Önceki gün yüksek/düşük swing seviyesi ve Heikin Ashi dönüşü",
+    "stil": "scalp",
+    "kaynak": {"pdf": "Eğlenceli_Scalping_2_-_Heikin_Ashi_Trader_44_sayfa.pdf", "sayfalar": [28, 29]},
+    "ozet": "Fiyat önceki günün en düşük (yüksek) swing seviyesine ulaştığında ve HA mumlarında dönüş belirdiğinde (doji sonrası renk değişimi) o yönde işlem yapılır. Kitap, bu seviyelerin piyasa katılımcıları tarafından hatırlandığını belirtir.",
+    "kategori": "destek_direnc",
+    "piyasa_rejimi": "herhangi",
+    "orijinal_piyasa": "forex",
+    "zaman_dilimi": {"islem": "1m", "ust_filtre": null},
+    "gostergeler": [{"ad": "Önceki gün yüksek/düşük", "parametreler": {}}, {"ad": "Heikin Ashi", "parametreler": {}}],
+    "long_giris": [
+      "Fiyat önceki günün en düşük seviyesine (swing dip) iner (USD/CHF örneği, s.28)",
+      "Seviyede doji veya küçük mum oluşur; ilk yeşil HA mumda alım (s.28)"
+    ],
+    "short_giris": [
+      "Fiyat önceki günün en yüksek seviyesine (swing high) değer; momentum azalır ve bir sonraki mum kırmızıya döner, kısa sinyal (DAX örneği, s.29)"
+    ],
+    "stop_loss": "5 pip (kitap: USD/CHF örneğinde 'nispeten küçük 5 piplik stop loss', s.28)",
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Önemli ekonomik veri varsa seviyeler kolayca silinebilir; bu durumda kaçınılır (s.29)"
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": "Sayısal iddia yok; DAX örneğinde '10-20 puanlık artış mümkün' ifadesi (s.29).",
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Önceki gün yüksek/düşük objektif olarak hesaplanır. Giriş mumu (doji ile renkli mum karışımı) ve 'momentum azalması' yoruma açık."
+    },
+    "belirsizlikler": [
+      "Giriş mumu tanımı: kitapta doji ile yeşil/kırmızı mum karışık kullanılıyor (s.28)",
+      "Kâr al yok",
+      "Örneklerde zaman dilimi farklı (USD/CHF 1 dk, EUR/GBP 5 dk, DAX 1 dk)",
+      "DAX örneğinde seviye 2 gün önceki swing; 'önceki gün' tanımının kaç gün geriye baktığı net değil"
+    ],
+    "uyumluluk_notu": "Önceki gün yüksek ve düşük seviyeleri 1L3A'da günlük veriden hesaplanabilir; ≥5m'de de kullanılabilir. Forex, endeks ve diğer piyasalarda genel olarak uygulanabilir ama test edilmemiş.",
+    "varyantlar": [
+      "EUR/GBP: önceki günün swing dibinin yeniden testi (s.28)",
+      "DAX: 2 gün önceki swing zirvesine dokunma ve kısa (s.29)"
+    ],
+    "anahtar_kelimeler": ["önceki-gün", "swing", "destek-direnç", "heikin-ashi", "renk-dönüşü", "5-pip-stop"]
+  },
+  {
+    "kart_id": "scalp__yuvarlak-sayi-dip-ha__heikinashi",
+    "ad": "Yuvarlak sayıda çoklu dip ve Heikin Ashi alım (GBP/JPY 187, USD/JPY 119)",
+    "stil": "scalp",
+    "kaynak": {"pdf": "Eğlenceli_Scalping_2_-_Heikin_Ashi_Trader_44_sayfa.pdf", "sayfalar": [29, 30, 31, 32, 33]},
+    "ozet": "Yuvarlak sayı (ör. GBP/JPY 187.00, USD/JPY 119.00) desteğinde fiyat birkaç kez dip yapar (çift veya üçlü dip). Dip mumları küçülür, HA rengi yeşile döner ve alım yapılır. Kitapta sonraki yuvarlak sayıya (ör. 188.00) üç dalgalı yükseliş örneği verilir.",
+    "kategori": "destek_direnc",
+    "piyasa_rejimi": "herhangi",
+    "orijinal_piyasa": "forex",
+    "zaman_dilimi": {"islem": "1m", "ust_filtre": null},
+    "gostergeler": [{"ad": "Yuvarlak sayı", "parametreler": {}}, {"ad": "Heikin Ashi", "parametreler": {}}],
+    "long_giris": [
+      "Yuvarlak sayı seviyesinde en az iki, örnekte üç eşit dip oluşur (USD/JPY 119 örneği, s.32)",
+      "Son dip mumlarında küçülme ve doji görülür; ilk yeşil HA mumda alım (s.32)"
+    ],
+    "short_giris": [
+      "Kitapta açık kısa kuralı yok; aynı mantığın ayna uygulaması varsayım gerektirir (belirsizlik olarak işaretlendi)"
+    ],
+    "stop_loss": "GBP/JPY için 5-10 pip (s.31); USD/JPY için düşük volatilite nedeniyle 2-3 pip (s.32)",
+    "kar_al": "Sabit kural yok. Örnek hedefler: GBP/JPY'de bir sonraki yuvarlak sayı (187'den 188'e, s.31), USD/JPY'de yaklaşık 20 pip (s.33).",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Frankfurt açılışı (09:00) ve sabah seans dalgalanmaları (s.33)",
+      "GBP/JPY'de spread genişliği: risk yönetimi buna göre ayarlanmalı (s.30)"
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": "GBP/JPY örneğinde bir saatte yaklaşık 100 pip hareket (s.31); sayısal kazanma oranı yok.",
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Yuvarlak sayı ve dip sayısı sayılabilir; ancak 'eşit dip' toleransı, 'dalga' tanımı ve tetikleyici mum yoruma açık. Kısa taraf kuralı yok."
+    },
+    "belirsizlikler": [
+      "Kısa tarafta açık kural yok",
+      "Üçlü dip ve 'eşit' dip için tolerans yok",
+      "Tetikleyici mum tanımı (doji sonrası yeşil) net değil",
+      "Hedef ve kâr al sayısal değil"
+    ],
+    "uyumluluk_notu": "Yuvarlak sayılar forex dışı piyasalarda da kullanılır (kitapta DAX örneği); stop pip cinsinden verildiği için forex'e özgü, ATR ile değiştirilmeli. ≥5m'de test edilmeli.",
+    "varyantlar": [
+      "GBP/JPY üç dalgalı yükseliş 187'den 188'e (s.31)",
+      "USD/JPY 119 üçlü dip ve sıkı stop (s.32)"
+    ],
+    "anahtar_kelimeler": ["yuvarlak-sayı", "çift-dip", "üçlü-dip", "heikin-ashi", "gbpjpy", "usdjpy", "sıkı-stop"]
+  },
+  {
+    "kart_id": "scalp__trend-gunu-toparlanma__heikinashi",
+    "ad": "Trend gününde kısa süreli toparlanmada trend yönünde giriş",
+    "stil": "scalp",
+    "kaynak": {"pdf": "Eğlenceli_Scalping_2_-_Heikin_Ashi_Trader_44_sayfa.pdf", "sayfalar": [35, 36, 37, 38, 39]},
+    "ozet": "Trend günü tespit edildiğinde (önceki günler yatay, sabah erken saatlerde piyasa önce ters yöne gider, güçlü tek yönlü hareket) piyasa kısa süre toparlandığında trend yönünde kısa pozisyon açılır. Pozisyon normalden küçük, stop geniş (20 pipten fazla) tutulur.",
+    "kategori": "trend_takip",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "forex",
+    "zaman_dilimi": {"islem": "1m", "ust_filtre": "günlük trend (önceki günlerin aralığı)"},
+    "gostergeler": [],
+    "long_giris": [],
+    "short_giris": [
+      "Düşüş trend gününde (EUR/USD örneği) piyasa kısa süre (saniyeler veya 1 dakika) toparlandığında kısa giriş (s.39)",
+      "Pozisyon normalden küçük boyutta (s.39)"
+    ],
+    "stop_loss": "20 pipten geniş (kitap: 'diyelim ki 20 pipten fazla', s.39)",
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Trend günü belirleme: önceki iki-üç gün tipik aralık (yatay), sabah erken saatlerde ters yönde ilk hareket (s.35)",
+      "Ekonomik veri veya merkez bankası basın toplantısı beklenen saatlerde trend günleri görülür (s.36)",
+      "Haftada yaklaşık bir veya iki trend günü (s.35)",
+      "Trend günlerinde karşı-trend scalp tehlikeli kabul edilir (s.35)"
+    ],
+    "pozisyon_risk": "Normalden küçük pozisyon ve geniş stop (s.39).",
+    "iddia_edilen_performans": "Piyasa hareketi örnekleri: trend günlerinde 100-150 pip (s.36); EUR/USD'de 50 pip ve sonrasında 120 pip düşüş (s.38). Kitap başarı oranı vermiyor.",
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Trend günü tespiti sezgisel (V formasyonu, 'önce ters yöne gitme'). 'Kısa süreli toparlanma' süresi saniye veya 1 dakika olarak tarif edilmiş, sayısal değil. Stop 20+ pip rakamı var."
+    },
+    "belirsizlikler": [
+      "Trend günü tanımı sezgisel; sayısal kriter yok",
+      "Toparlanma süresi ve derinliği tanımsız",
+      "Giriş tetikleyici mum tanımı yok",
+      "Kâr al ve çıkış yok",
+      "Yükseliş trend gününde ayna uygulama kitapta açık değil"
+    ],
+    "uyumluluk_notu": "Trend günü filtresi 1L3A'da günlük ATR veya önceki gün aralığı ile kurallaştırılabilir. 1 dk scalp ≥5m şartını karşılamıyor. Hacim gerekmez. Pip stop forex'e özgü.",
+    "varyantlar": [
+      "Yükseliş trend gününde ayna (kitapta açık değil)",
+      "Sert V formasyonu sonrası toparlanma (s.36)"
+    ],
+    "anahtar_kelimeler": ["trend-günü", "toparlanma", "v-formasyon", "karşı-trend", "20-pip-stop", "heikin-ashi", "eurusd"]
+  }
+]

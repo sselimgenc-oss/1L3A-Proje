@@ -1,0 +1,60 @@
+[
+  {
+    "kart_id": "scalp__ema14-50-kesisim__waqar",
+    "ad": "EMA14/EMA50 Kesişim Scalp (15dk)",
+    "stil": "scalp",
+    "kaynak": {"pdf": "EMA14_ve_EMA50_Scalping_Stratejisi_-_Waqar_-_Türkçe_ve_İngilizce_28_sayfa.pdf", "sayfalar": [1, 2, 3, 4, 5, 6, 9, 10, 11, 12, 13]},
+    "ozet": "14 EMA ile 50 EMA arasındaki boşluk temiz ve geniş iken EMA'lar birbirini kesmek üzereyse, kesişim yönünde stop emri kesişim seviyesinin hemen ötesine konur. Kesişimden sonra 10-20 pip hedeflenir. EMA'lar iç içe geçip konsolidasyon yaparken işlem yapılmaz.",
+    "kategori": "trend_takip",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "forex",
+    "zaman_dilimi": {"islem": "15m", "ust_filtre": "1h"},
+    "gostergeler": [{"ad": "EMA", "parametreler": {"periyot": 14}}, {"ad": "EMA", "parametreler": {"periyot": 50}}],
+    "long_giris": [
+      "EMA14, EMA50'nin altında",
+      "EMA14 ile EMA50 arasındaki boşluk kapanıyor ve EMA14 yukarı dönerek EMA50'yi yukarı kesmek üzere (kesişim oluşuyor)",
+      "EMA'lar birbirine sürtünmüyor; kesişimin net bir yönü var",
+      "Alım stop emri, EMA kesişim seviyesinin biraz üstüne (kitaptaki pembe çizgi) konur"
+    ],
+    "short_giris": [
+      "EMA14, EMA50'nin üstünde",
+      "EMA14 ile EMA50 arasındaki boşluk kapanıyor ve EMA14 aşağı dönerek EMA50'yi aşağı kesmek üzere",
+      "EMA'lar birbirine sürtünmüyor; kesişimin net bir yönü var",
+      "Satım stop emri, kesişimin hemen altına konur"
+    ],
+    "stop_loss": "Yazar stop-loss kullanmaz. Kullanılacaksa 10-20 pip sabit stop (kitap önerisi). Kesin bir stop kuralı verilmemiş.",
+    "kar_al": "Öğrenme aşamasında sabit 10 pip; stop/limit ile işlemde en fazla 20 pip",
+    "iz_suren_stop": "Manuel izlemede takip eden stop. Yazar 1 saatlik grafikte 14 EMA kırılana kadar pozisyonu sürdürebildiğini anlatıyor (sayısal kural olarak net değil).",
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Kesişim öncesi EMA boşluğu temiz ve geniş olmalı",
+      "Konsolidasyonda (EMA'lar iç içe, yön belirsiz) işlem yapılmaz",
+      "Yazar UJ, AJ ve ara sıra GJ ile yoğun kullandı; AUD çiftleri de iyi çalıştığını söylüyor; altın (EMA'lar yetişemediği için) kullanılmaz",
+      "Yeni çiftlerde önce analiz ve test önerilir"
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": "Yazar: 'Şahsen pratiğimi geliştirdiğimden beri henüz bir işlem kaybetmedim'; her girişte 10-20 pip; en iyi kaydı bir swing'e dönüşüp 150 pip. İstatistik veya kanıt sunulmuyor.",
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "EMA14/EMA50 kesişimi ve yön kuralı mekanik. 'Temiz ve geniş aralık', 'kesişim çarpışma gibi görünmeli', 'konsolidasyon' ve 'EMA'ya yakın giriş' ölçülebilir tanıma sahip değil; varsayım gerektirir."
+    },
+    "belirsizlikler": [
+      "'Temiz ve geniş' EMA aralığının sayısal eşiği kitapta yok",
+      "Konsolidasyonun ölçüm yöntemi yok (kaç mum, hangi genişlik)",
+      "Stop-loss kuralı kesin değil; yazar stop kullanmıyor",
+      "Stop emrinin tam fiyatı ('biraz üstü') sayısal değil",
+      "Kitapta 5dk zaman dilimi için kural yok; yazar 5dk'yı 'çok hızlı' buluyor",
+      "Pip hedefi 10-20 aralığında; seçim okuyucuya bırakılmış",
+      "Kırmızı EMA200 'TP bölgesi' olarak anılıyor, 'daha sonra açıklayacağım' diyor; açıklama kitapta yok"
+    ],
+    "uyumluluk_notu": "1L3A için: 15dk'da uygulanabilir ve kitap bunu öneriyor; 5dk için kitapta kural yok. Forex'e özgü: pip hedefleri (10-20 pip) ve pariteler; ATR veya yüzde hedefine çevrilmeli. Hacim verisi gerekmez. Kripto/ABD hisse/emtia: yazar altını uygun bulmadı; diğer enstrümanlarda test gerekir.",
+    "varyantlar": [
+      "1 saatlik (1h) grafikte aynı kesişim; 10-20 pip, bazen 14 EMA kırılana kadar sürdürme (kitap örneğinde 130 pip)",
+      "Kesişimden bir mum önce, fitilin EMA/destek seviyesine değdiği mumun dibinden giriş (kitap ek 10 pip bonus olarak anıyor, ama erken girmeyi de uyarıyor)",
+      "Ayna versiyon: 14 EMA üstte, aşağı kesişimde satış",
+      "Ardışık kesişimlerde pozisyonu ekleyerek sürdürme (örnekte 5 pozisyon 650 pip)",
+      "EMA200'ün TP bölgesi olarak kullanılması (kitapta ayrıntısız, opsiyonel)"
+    ],
+    "anahtar_kelimeler": ["ema-kesisim", "ema14", "ema50", "15m", "forex", "buy-stop", "sell-stop", "konsolidasyon-kacinma", "trailing-stop", "kisa-vade", "pip-hedefi"]
+  }
+]

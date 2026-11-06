@@ -1,0 +1,520 @@
+[
+  {
+    "kart_id": "swing__ema9-13-50-hibrit__jordan",
+    "ad": "EMA 9/13/50 Hibrit Çaprazlığı",
+    "stil": "swing",
+    "kaynak": {"pdf": "Swing_Trade_Stratejileri_-_Simon_Jordan_208_sayfa.pdf", "sayfalar": [3, 4]},
+    "ozet": "9 EMA, 13 EMA'yı aşağıdan yukarı kestiğinde ve 13 EMA 50 EMA'nın üzerindeyken uzun; 9 EMA 13 EMA'nın altına geçtiğinde uzun pozisyondan çıkış; 13 EMA 50 EMA'nın altındayken aynı aşağı kesişim kısa sinyali sayılır.",
+    "kategori": "trend_takip",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "hisse",
+    "zaman_dilimi": {"islem": "1D (varsayım; kitap zaman dilimi belirtmiyor)", "ust_filtre": null},
+    "gostergeler": [
+      {"ad": "EMA", "parametreler": {"periyot": 9}},
+      {"ad": "EMA", "parametreler": {"periyot": 13}},
+      {"ad": "EMA", "parametreler": {"periyot": 50}}
+    ],
+    "long_giris": [
+      "9 EMA, 13 EMA'yı aşağıdan yukarı keser",
+      "Kesişim anında 13 EMA, 50 EMA'nın üzerindedir (veya 50 EMA'yı yukarı keserek geçmektedir)"
+    ],
+    "short_giris": [
+      "9 EMA, 13 EMA'yı yukarıdan aşağı keser",
+      "13 EMA, 50 EMA'nın altındadır (veya altına geçmektedir)"
+    ],
+    "stop_loss": "Kitapta sayısal stop yok. Çıkış kuralı: 9 EMA 13 EMA'nın altına geçtiğinde uzun pozisyondan çık (s.4)",
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "13 EMA ile 50 EMA arasındaki konum trend filtresi olarak kullanılır (s.4)",
+      "Likit hisse senetleri tercih edilir (s.4)"
+    ],
+    "pozisyon_risk": "Sermayenin yaklaşık %2'sinden fazlasını bir borsada riske atma (s.39, genel kural)",
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Kesişim ve 50 EMA trend filtresi ölçülebilir. Ancak çıkış kuralı 'güvenlik maliyeti bu EMA'ların altına düştüğünde' ifadesiyle verilmiş, hangi EMA'nın kastedildiği net değil; stop sayısal değil."
+    },
+    "belirsizlikler": [
+      "Zaman dilimi belirtilmemiş; 'günlük grafik' ifadesi swing bağlamında geçiyor (1D varsayıldı)",
+      "s.4 'güvenlik maliyeti bu EMA'ların altına düştüğünde' ifadesi: hangi EMA'nın altı kastedildiği belirsiz (9 EMA-13 EMA çaprazlığı çıkış olarak yorumlandı)",
+      "Sayısal stop yok",
+      "Kitap s.4 'çok iyi bir şekilde' ifadesiyle EMA çıkışını tanımlar; tek cümlede yapılan genel bir anlatım"
+    ],
+    "uyumluluk_notu": "EMA kesişimi mekanik; 5m'e uyarlanabilir ancak kitap günlük varsayıyor. Hacim verisi gerekmez. Forex, hisse, kripto ve emtia'da aynı formül çalışır; pip/seans bilgisi gerekmez.",
+    "varyantlar": [
+      "50/100 günlük EMA çifti (s.50): hızlı EMA, orta EMA'yı aşağıdan geçerse uzun işaret; ayrıntılı kural verilmemiş"
+    ],
+    "anahtar_kelimeler": ["ema", "ema-kesisim", "hibrit", "trend", "9-13-50", "hisse"]
+  },
+  {
+    "kart_id": "swing__sma4-9-18-kesisim__jordan",
+    "ad": "SMA 4/9/18 Hareketli Ortalama Geçiş Sistemi",
+    "stil": "swing",
+    "kaynak": {"pdf": "Swing_Trade_Stratejileri_-_Simon_Jordan_208_sayfa.pdf", "sayfalar": [51, 52, 53, 54]},
+    "ozet": "4 SMA, 9 SMA'yı aşağıdan yukarı kestiğinde ve bu noktada ikisi de 18 SMA'nın üzerindeyse uzun; 4 SMA 9 SMA'yı yukarıdan aşağı kestiğinde ve ikisi de 18 SMA'nın altındaysa kısa sinyal. Kitap ayrıca 18 SMA kesişiminin tamamlanmasını beklemeyi daha güçlü bulur.",
+    "kategori": "trend_takip",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "forex",
+    "zaman_dilimi": {"islem": "belirtilmemiş (kitap örnekleri 10dk ve 15dk, s.53-54)", "ust_filtre": null},
+    "gostergeler": [
+      {"ad": "SMA", "parametreler": {"periyot": 4}},
+      {"ad": "SMA", "parametreler": {"periyot": 9}},
+      {"ad": "SMA", "parametreler": {"periyot": 18}}
+    ],
+    "long_giris": [
+      "4 SMA, 9 SMA'yı aşağıdan yukarı keser",
+      "Kesişim anında 4 ve 9 SMA, 18 SMA'nın üzerindedir (güçlü giriş için 18 SMA ile iki kesişim tamamlanmış olmalı, s.52)"
+    ],
+    "short_giris": [
+      "4 SMA, 9 SMA'yı yukarıdan aşağı keser",
+      "Kesişim anında 4 ve 9 SMA, 18 SMA'nın altındadır (s.53 satış örneği)"
+    ],
+    "stop_loss": "Kitap kuralı: 4 ve 9 SMA, 18 SMA yapısını ters yönde geçtiğinde talihsizlik durdurma etkinleşir (s.52-53). Sayısal fiyat stopu yok.",
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Kıvrılan/yatay piyasada 4 ve 8-9 SMA 18 SMA etrafında dalgalanıyorsa sinyal güçsüz kabul edilir (s.51-52)",
+      "Hareket çok keskin ise (ardışık tek yön yoksa) sinyal topraklanır (s.51)",
+      "Kitap, çoklu zaman dilimi kontrolü önerir (10 ve 15 dk birlikte, s.53)"
+    ],
+    "pozisyon_risk": "Sermayenin yaklaşık %2'sinden fazlasını bir borsada riske atma (s.39, genel kural)",
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Kesişim ve 18 SMA konumu ölçülebilir. 'Enerji erken azalırsa', 'genel yapı' ve 'kıvrılan piyasa' filtreleri yoruma açık; kâr alma kuralı yok."
+    },
+    "belirsizlikler": [
+      "s.52: 'Dört ve sekiz dönemlik SMA' (stop) ile 'dört ve dokuz' karışık; 9 varsayıldı",
+      "Zaman dilimi belirtilmemiş; örnekler forex intraday (USD/JPY 10dk s.53, NZD/USD 15dk s.54)",
+      "Kâr alma kuralı kitapta net değil ('isteğe bağlı durak', s.54)",
+      "'Enerji' (momentum) azalması ölçülebilir değil",
+      "s.53 'kısa ve farklı dönemler' ifadesi hangisinin üst zaman dilimi olduğunu belirtmiyor"
+    ],
+    "uyumluluk_notu": "Forex örnekli ama formül tüm piyasalarda çalışır; 5m'e uyarlanabilir. Hacim gerekmez. Forex'e özgü pip/seans bilgisi kuralda yok; kripto ve hisse için de uygulanabilir.",
+    "varyantlar": [
+      "Satış (kısa) tarafı kitapta tanımlı (s.52-53)",
+      "Güçlü giriş: 18 SMA kesişiminin tamamlanmasını bekleme (s.52)"
+    ],
+    "anahtar_kelimeler": ["sma", "hareketli-ortalama", "kesisim", "4-9-18", "forex", "trend", "intraday"]
+  },
+  {
+    "kart_id": "swing__rsi-30-70-ortalama-donus__jordan",
+    "ad": "RSI 30/70 Aşırı Satım-Alım Dönüşü",
+    "stil": "swing",
+    "kaynak": {"pdf": "Swing_Trade_Stratejileri_-_Simon_Jordan_208_sayfa.pdf", "sayfalar": [54, 55, 56, 69]},
+    "ozet": "RSI 30'un altına inip tekrar 30'un üzerine çıktığında (aşırı satım bölgesinden çıkış) uzun; RSI 70'in üzerinden 70'in altına döndüğünde (aşırı alım bölgesinden çıkış) kısa sinyali. Kâr alma için RSI 50 eşiği; yükselen ve düşen piyasada eşikler farklılaştırılabilir.",
+    "kategori": "ortalamaya_donus",
+    "piyasa_rejimi": "yatay",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {"islem": "1D (varsayım; kitap belirtmiyor)", "ust_filtre": null},
+    "gostergeler": [{"ad": "RSI", "parametreler": {"periyot": "belirtilmemiş (kitap RSI periyodu vermiyor)"}}],
+    "long_giris": [
+      "RSI 30'un altına düşer (aşırı satım), sonra yukarı keserek 30'un üzerine çıkar (s.69, aşırı satış bölgesinden çıkış)",
+      "Alternatif geleneksel kural (s.56): RSI 30'un altındayken alım"
+    ],
+    "short_giris": [
+      "RSI 70'in üzerine çıkar (aşırı alım), sonra 70'in altına düşer (s.69 aşırı alım bölgesinden çıkış; kitap bunu düşüş trendinde kısa girişi sayar)"
+    ],
+    "stop_loss": null,
+    "kar_al": "Uzun pozisyonda RSI 50'nin üzerine çıkınca çık (s.56; metinde 'fiyat 50'nin üzerine çıktığında' ifadesi var)",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Yükselen piyasada eşikler 80 ve 40, düşen piyasada 60 ve 20 olarak değiştirilebilir (s.56)",
+      "Kitap, aşırı alım/satım tersine dönüşünün her piyasada işe yaramadığını belirtir; RSI'yi formasyon kalitesi için de kullanır (s.55)"
+    ],
+    "pozisyon_risk": "Sermayenin yaklaşık %2'sinden fazlasını bir borsada riske atma (s.39, genel kural)",
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Eşikler sayısal ve giriş tetikleyicisi tanımlı. Çıkış eşiği 50 olarak verilmiş ama 'fiyat' ifadesi belirsiz; trend tanımı ve stop kuralı yok."
+    },
+    "belirsizlikler": [
+      "RSI periyodu kitapta yok (klasik 14 varsayılmadı)",
+      "s.56 'fiyat 50'nin üzerine çıktığında': RSI 50 mi, fiyat mı kastedildiği belirsiz (RSI 50 olarak yorumlandı)",
+      "Yükselen/düşen piyasa tanımı yok (80/40 ve 60/20 hangi trendde uygulanacağı belirsiz)",
+      "s.56'daki (RSI 30 altı alım) ve s.69'daki (30 üstü çıkış alım) kurallar farklı tetikleyici veriyor; ikisi de kart içinde gösterildi",
+      "Stop kuralı yok"
+    ],
+    "uyumluluk_notu": "RSI tüm piyasalarda hesaplanır; 5m'de eşikler daha sık tetiklenir, kitap günlük grafik bağlamı. Hacim gerekmez. Ortalamaya dönüş kuralı trend güçlüyken zarar riski taşır; 1L3A'de trend filtresi eklenmesi önerilir.",
+    "varyantlar": [
+      "Yükselen piyasa: aşırı alım 80, aşırı satım 40; düşen piyasa: aşırı alım 60, aşırı satım 20 (s.56)"
+    ],
+    "anahtar_kelimeler": ["rsi", "asiri-alim", "asiri-satim", "ortalama-donus", "30-70", "50-cikis"]
+  },
+  {
+    "kart_id": "swing__rsi-farklilik__jordan",
+    "ad": "RSI Farklılığı (Divergence)",
+    "stil": "swing",
+    "kaynak": {"pdf": "Swing_Trade_Stratejileri_-_Simon_Jordan_208_sayfa.pdf", "sayfalar": [56]},
+    "ozet": "Fiyat yeni dip yaparken RSI daha yüksek dip yapıyorsa yükseliş farklılığı (uzun eğilimi); fiyat yeni zirve yaparken RSI daha düşük zirve yapıyorsa düşüş farklılığı (kısa eğilimi). Farklılık ne kadar uzun sürerse dönüş olasılığı artar.",
+    "kategori": "momentum",
+    "piyasa_rejimi": "herhangi",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {"islem": "1D (varsayım; kitap belirtmiyor)", "ust_filtre": null},
+    "gostergeler": [{"ad": "RSI", "parametreler": {"periyot": "belirtilmemiş"}}],
+    "long_giris": [
+      "Fiyat önceki dibin altında yeni dip yapar, RSI ise önceki RSI dibinin üzerinde dip yapar (yükseliş farklılığı, s.56)"
+    ],
+    "short_giris": [
+      "Fiyat önceki zirvenin üstünde yeni zirve yapar, RSI ise önceki RSI zirvesinin altında kalır (düşüş farklılığı, s.56)"
+    ],
+    "stop_loss": null,
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Kitap, farklılığın aşırı alım/satım koşullarında daha temelli bir işaret olduğunu belirtir (s.56)"
+    ],
+    "pozisyon_risk": "Sermayenin yaklaşık %2'sinden fazlasını bir borsada riske atma (s.39, genel kural)",
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Farklılık tanımı (fiyat ve RSI zirve/dip karşılaştırması) yazılı. Yerel zirve/dip (pivot) tanımı ve farklılık sonrası giriş tetikleyicisi kitapta yok."
+    },
+    "belirsizlikler": [
+      "Yerel zirve/dip (pivot) tanımı yok; kaç mumluk pencere kullanılacağı belirtilmemiş",
+      "Farklılık sonrası giriş tetikleyicisi yok (kitap s.59-60 fiyat eyleminin daha belirleyici olduğunu söyler, kural yazılmadı)",
+      "Farklılığın dönüş garantisi olmadığını kitap da kabul eder (s.59-60, MACD bağlamında)",
+      "Çıkış ve stop kuralı yok"
+    ],
+    "uyumluluk_notu": "Pivot tespiti 5m'de gürültülü olabilir; kitap çıkış/giriş teyidi vermiyor. Hacim gerekmez. Forex, hisse, kripto için aynı mantık.",
+    "varyantlar": [],
+    "anahtar_kelimeler": ["rsi", "farklilik", "divergence", "momentum", "donus"]
+  },
+  {
+    "kart_id": "swing__stokastik-kesisim-80-20__jordan",
+    "ad": "Stokastik Kesişimi (80/20 Filtreli)",
+    "stil": "swing",
+    "kaynak": {"pdf": "Swing_Trade_Stratejileri_-_Simon_Jordan_208_sayfa.pdf", "sayfalar": [68, 69]},
+    "ozet": "Stokastik işaret (%K) çizgisi sinyal (%D) çizgisini aşağıdan yukarı keserse ve değer 80'in üzerinde değilse uzun; %K, %D'yi yukarıdan aşağı keserse ve değer 20'nin altında değilse kısa.",
+    "kategori": "momentum",
+    "piyasa_rejimi": "herhangi",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {"islem": "1D (varsayım; kitap belirtmiyor)", "ust_filtre": null},
+    "gostergeler": [{"ad": "Stokastik", "parametreler": {"periyot": 14, "not": "kitap 'genellikle 14' diyor"}}],
+    "long_giris": [
+      "Stokastik işaret çizgisi (%K) sinyal çizgisini (%D) aşağıdan yukarı keser",
+      "Kesişim anında stokastik değeri 80'in üzerinde değildir (s.69)"
+    ],
+    "short_giris": [
+      "%K, %D'yi yukarıdan aşağı keser",
+      "Kesişim anında stokastik değeri 20'nin altında değildir (s.69)"
+    ],
+    "stop_loss": null,
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "80 üstünde uzun girilmez (s.69)",
+      "20 altında kısa girilmez (s.69)"
+    ],
+    "pozisyon_risk": "Sermayenin yaklaşık %2'sinden fazlasını bir borsada riske atma (s.39, genel kural)",
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Kesişim ve 80/20 filtreleri mekanik. Çıkış ve stop kuralı yok; 'işaret çizgisi' çevirisi karışık (sinyal çizgisi olarak yorumlandı)."
+    },
+    "belirsizlikler": [
+      "Çevirideki 'işaret/imza çizgisi' terimi %K ve %D olarak yorumlandı; sinyal çizgisi periyodu (genellikle 3) belirtilmemiş",
+      "Çıkış kuralı yok (ters kesişim ima edilir ama açıkça yazılmamış)",
+      "Stop kuralı yok"
+    ],
+    "uyumluluk_notu": "Stokastik her piyasada hesaplanır; 5m'de sinyal sıklığı yüksektir. Hacim gerekmez. Aşırı alım/satım filtresi trend piyasasında yanıltıcı olabilir; trend filtresi eklenmesi kitapta yok.",
+    "varyantlar": [],
+    "anahtar_kelimeler": ["stokastik", "kesisim", "80-20", "momentum"]
+  },
+  {
+    "kart_id": "swing__fincan-sap-kirilim__jordan",
+    "ad": "Fincan-Sap Kırılımı (Apple örneği)",
+    "stil": "swing",
+    "kaynak": {"pdf": "Swing_Trade_Stratejileri_-_Simon_Jordan_208_sayfa.pdf", "sayfalar": [7, 8]},
+    "ozet": "Fincan ve sap formasyonunda sapın yüksek noktasının üzerinde kırılımla uzun; stop sapın dibinin altında; hedef giriş+2x risk. Alternatif çıkış: fiyat önceki geri çekilme dibinin altına düşerse.",
+    "kategori": "formasyon",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "hisse",
+    "zaman_dilimi": {"islem": "1D (kitap 'çok günlük grafik', s.7)", "ust_filtre": null},
+    "gostergeler": [{"ad": "Fincan-sap formasyonu", "parametreler": {"not": "tanımsız"}}],
+    "long_giris": [
+      "Fiyat, fincan-sap formasyonunda sapın yüksek seviyesinin üzerine çıkar (örnekte 192,70 $ civarı, s.7)"
+    ],
+    "short_giris": [],
+    "stop_loss": "Sapın alt seviyesi (örnekte 187,50 $, s.7); risk = giriş - stop (örnekte 5,20 $)",
+    "kar_al": "Giriş + 2 x risk (örnekte 203,10 $ üzeri, s.7: en az riski iki katına çıkarma)",
+    "iz_suren_stop": "Alternatif çıkış: fiyat önceki geri çekilme dibinin altına düşerse çık (s.8, örnek kâr 23,76 $)",
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Kitap s.8: hareketli ortalamanın altına inme veya stokastik sinyal çizgisi geçişi 'diğer ayrılma prosedürleri' olarak sayılır"
+    ],
+    "pozisyon_risk": "Sermayenin yaklaşık %2'sinden fazlasını bir borsada riske atma (s.39, genel kural)",
+    "iddia_edilen_performans": "Tek örnek (s.8): '%3'ün altında tehlike karşılığında %12'lik fayda'; kitap 'bu teknik hisse başına 23,76 $ fayda sağlayabilirdi' diyor (istatistik değil)",
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Giriş, stop ve hedef örnekte sayısal. Fincan ve sap formasyonunun tanımı (derinlik, süre, sap geri çekilmesi) tanımsız ve yoruma açık."
+    },
+    "belirsizlikler": [
+      "Fincan ve sap tanımı yok (derinlik, süre, sap geri çekilme oranı)",
+      "Alternatif çıkışta 'önceki geri çekilme dibi' hangi mumda ölçüleceği belirsiz",
+      "Stop 'sapın altı' olarak yazılmış; tampon (pay) belirtilmemiş",
+      "Kısa taraf için kitap formasyon kuralı vermiyor"
+    ],
+    "uyumluluk_notu": "Formasyon yoruma açık; kodlanabilirlik için tanım varsayımı gerekir. 5m'e uyarlanabilir ama kitap günlük örnek. Hacim verisi kitapta kırılım teyidi olarak önerilmiyor; 1L3A için belirsiz.",
+    "varyantlar": [
+      "%3 risk / %12 kazanç örneği (s.8)",
+      "Alternatif çıkış: önceki geri çekilme dibinin altı (s.8)"
+    ],
+    "anahtar_kelimeler": ["fincan-sap", "formasyon", "kirilim", "2r", "hisse"]
+  },
+  {
+    "kart_id": "swing__destek-direnc-tepki-uzun__jordan",
+    "ad": "Yatay Destekten Tepki (Uzun)",
+    "stil": "swing",
+    "kaynak": {"pdf": "Swing_Trade_Stratejileri_-_Simon_Jordan_208_sayfa.pdf", "sayfalar": [47, 48, 49]},
+    "ozet": "En az iki dip ile oluşmuş yatay destek bölgesine geri gelen fiyat tutunursa, desteğin hemen üstünden uzun; stop desteğin altında; hedef bir sonraki direnç seviyesi; ödül riskin birkaç katı olmalı.",
+    "kategori": "destek_direnc",
+    "piyasa_rejimi": "herhangi",
+    "orijinal_piyasa": "hisse",
+    "zaman_dilimi": {"islem": "belirtilmemiş (kitap 1 saatlik, günlük ve haftalık grafikleri birlikte söyler, s.44)", "ust_filtre": null},
+    "gostergeler": [{"ad": "Yatay destek/direnç", "parametreler": {"min_dokunus": 2}}],
+    "long_giris": [
+      "Fiyat, en az iki dip ile oluşmuş yatay destek seviyesine geri gelir (s.47)",
+      "Desteğin hemen üstünde giriş; kitap 'yardım seviyesinden geçiş maliyetine kadar' riski tanımlar (s.49)"
+    ],
+    "short_giris": [],
+    "stop_loss": "Destek seviyesinin altı (kitap riski destek seviyesi ile giriş arasında tanımlar, s.49; tampon belirtilmemiş)",
+    "kar_al": "Bir sonraki direnç seviyesi; ödül riskin birkaç katı olmalı (s.49). Kitapta sayısal minimum 2:1 (s.71)",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Yuvarlak sayılar (0,50 ve tam dolar) daha güçlü seviye sayılır, özellikle 10 $ altı hisselerde (s.48)",
+      "Düzenli denenen seviye bir kez denenenden daha sağlamdır (s.47)",
+      "Doji veya yoğun mum, destek noktasında tersine dönüşü doğrular (s.48)"
+    ],
+    "pozisyon_risk": "Sermayenin yaklaşık %2'sinden fazlasını bir borsada riske atma (s.39, genel kural)",
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Seviye tespiti (en az 2 dokunuş, bölge genişliği) yoruma açık; giriş, stop ve hedef makul varsayımla tanımlanabilir."
+    },
+    "belirsizlikler": [
+      "Bölge genişliği/tolerans sayısal değil; kitap ATR'yi bir faktör olarak anar (s.48) ama ölçü vermez",
+      "Dokunuş penceresi (kaç mumluk aralıkta) belirtilmemiş",
+      "Kısa taraf için kitap simetrik kural vermez (muhalefet tanımı, s.47, ters yönde uygulanabilir ama yazılmadı)",
+      "Stop tamponu yok"
+    ],
+    "uyumluluk_notu": "Yatay seviye her piyasada kullanılabilir; hacim gerekmez. 5m'de bölge genişliği ATR ile ölçeklenmeli (kitap ATR'ye atıf yapar). Forex'te yuvarlak sayılar (örn. 1,2000) benzer rol oynar ama kitap forex için yazmamış.",
+    "varyantlar": [
+      "Yuvarlak sayı (ör. 21,00 / 50,00) seviyesinde tepki (s.48)"
+    ],
+    "anahtar_kelimeler": ["destek", "direnc", "yatay", "tepki", "risk-odul", "yuvarlak-sayi"]
+  },
+  {
+    "kart_id": "swing__direnc-destek-rol-degisimi__jordan",
+    "ad": "Kırılan Direncin Desteğe Dönüşmesi (Rol Değişimi)",
+    "stil": "swing",
+    "kaynak": {"pdf": "Swing_Trade_Stratejileri_-_Simon_Jordan_208_sayfa.pdf", "sayfalar": [48]},
+    "ozet": "Aşılan direnç seviyesi kırılımdan sonra destek olur; fiyat bu seviyeye geri dönüp tutunursa uzun. Kırılan destek ise direnç olur; fiyat geri yükselip reddedilirse kısa.",
+    "kategori": "destek_direnc",
+    "piyasa_rejimi": "herhangi",
+    "orijinal_piyasa": "hisse",
+    "zaman_dilimi": {"islem": "belirtilmemiş", "ust_filtre": null},
+    "gostergeler": [{"ad": "Yatay destek/direnç", "parametreler": {"not": "kırılım seviyesi"}}],
+    "long_giris": [
+      "Direnç seviyesi yukarı yönde aşılır (s.48 viii: aşılan muhalefet bir miktar yardıma dönüşür)",
+      "Fiyat bu seviyeye geri döner ve tutunur"
+    ],
+    "short_giris": [
+      "Destek seviyesi aşağı yönde kırılır (s.48 viii: kırılan destek engele dönüşür)",
+      "Fiyat bu seviyeye geri yükselir ve reddedilir"
+    ],
+    "stop_loss": "Seviyenin ters tarafına yeniden geçiş; kitapta sayısal stop yok",
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [],
+    "pozisyon_risk": "Sermayenin yaklaşık %2'sinden fazlasını bir borsada riske atma (s.39, genel kural)",
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Rol değişimi kuralı açık ve ölçülebilir; kırılım tanımı, geri test şartı ve stop/hedef sayısal değil."
+    },
+    "belirsizlikler": [
+      "Kırılım tanımı yok (kapanış mı, fitil mi, kaç tick/pip aşım)",
+      "Geri test zorunlu mu, opsiyonel mi belirsiz",
+      "Stop ve hedef sayısal değil"
+    ],
+    "uyumluluk_notu": "Seviye kırılımı tüm piyasalarda aynı mantıkla çalışır; kitap hacim eşiği vermez. 5m'de kırılım gürültüsü yüksek olabilir.",
+    "varyantlar": [],
+    "anahtar_kelimeler": ["rol-degisimi", "destek", "direnc", "kirilim", "geri-test"]
+  },
+  {
+    "kart_id": "swing__yukselis-trend-cizgisi-tepki__jordan",
+    "ad": "Yükseliş Trend Çizgisinden Tepki (Uzun)",
+    "stil": "swing",
+    "kaynak": {"pdf": "Swing_Trade_Stratejileri_-_Simon_Jordan_208_sayfa.pdf", "sayfalar": [122, 123]},
+    "ozet": "İki yükselen dip ve üçüncü dokunuşla doğrulanan yükseliş trend çizgisine geri çekilen fiyat, çizgi üstünde kaldıkça uzun; fiyat çizginin altına kapanırsa yükseliş bozulur ve çıkış yapılır.",
+    "kategori": "trend_takip",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {"islem": "belirtilmemiş", "ust_filtre": null},
+    "gostergeler": [{"ad": "Yükseliş trend çizgisi", "parametreler": {"min_dip": 2, "dogrulama_dokunusu": 3}}],
+    "long_giris": [
+      "Fiyat yükseliş trend çizgisine geri çekilir ve çizgi üstünde kalır (s.122)",
+      "Çizgi en az iki dip ve bir üçüncü dokunuşla doğrulanmıştır (s.122: 'üçüncü bir nokta çizginin meşruiyetini teyit eder')"
+    ],
+    "short_giris": [],
+    "stop_loss": "Trend çizgisinin altına kapanış; kitapta sayısal tampon yok",
+    "kar_al": null,
+    "iz_suren_stop": "Kitap: maliyet trend çizgisinin üstünde kaldığı sürece yükseliş geçerlidir (s.122); altına inerse çıkış",
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Kitap: tüm dokunuş noktalarının tam olarak çizgi üzerinde olması gerekmez (s.122)"
+    ],
+    "pozisyon_risk": "Sermayenin yaklaşık %2'sinden fazlasını bir borsada riske atma (s.39, genel kural)",
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Çizginin nasıl çizileceği (iki dip + üçüncü dokunuş) ve bozulma (çizgi altı) tanımlı. Dokunuş toleransı ve zaman dilimi sayısal değil."
+    },
+    "belirsizlikler": [
+      "Dokunuş toleransı (yüzde veya tick) yok",
+      "Çizginin 'altında kapanış' ile 'altında fitil' ayrımı yok",
+      "Kısa tarafta (alçalan trend çizgisi) kitap tepki kuralı vermiyor; s.122 'düşüş eğilimi' yalnızca tanım veriyor",
+      "Zaman dilimi belirtilmemiş"
+    ],
+    "uyumluluk_notu": "Trend çizgisi çizimi öznel; 5m'de çizgi sayısı artabilir. Hacim gerekmez. Otomasyon için dip/tepe tespiti (pivot) gerekir.",
+    "varyantlar": [],
+    "anahtar_kelimeler": ["trend-cizgisi", "yukselis", "destek", "dinamik-destek", "dokunus"]
+  },
+  {
+    "kart_id": "swing__bosluk-devam-zirve-yakin__jordan",
+    "ad": "Yukarı Boşluk Sonrası Zirve Yakın Kapanış (Devam)",
+    "stil": "swing",
+    "kaynak": {"pdf": "Swing_Trade_Stratejileri_-_Simon_Jordan_208_sayfa.pdf", "sayfalar": [64, 65, 117]},
+    "ozet": "Önceki kapanışın üzerinde açılan (yukarı boşluk) hisse, boşluk gününde yükselmeye devam edip gün zirvesine yakın işlem görüyorsa uzun; kitap bu durumda ertesi gün yeniden yükseliş ihtimalinin yüksek olduğunu söyler. Aşağı boşluk için tersi.",
+    "kategori": "momentum",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "hisse",
+    "zaman_dilimi": {"islem": "1D (boşluk günü ve ertesi gün, s.65)", "ust_filtre": null},
+    "gostergeler": [{"ad": "Boşluk (gap)", "parametreler": {"yon": "yukarı/aşağı"}}],
+    "long_giris": [
+      "Fiyat önceki kapanışın üzerinde açılır (yukarı boşluk)",
+      "Boşluk gününde fiyat yükselmeye devam eder ve gün zirvesine yakın (günün en uzak limitine yakın) konumda işlem görür (s.65)"
+    ],
+    "short_giris": [
+      "Fiyat önceki kapanışın altında açılır (aşağı boşluk)",
+      "Düşüş devam eder ve gün dibine yakın işlem görür (s.117 'düşük açılan hisseler azalmaya devam eder', opsiyon bağlamında)"
+    ],
+    "stop_loss": null,
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Kitap s.65: piyasa istikrarlı ve hisse senedi değer hareketi aktifse yeniden artma ihtimali yüksek",
+      "Boşluğun boyutu (küçük boşluk ile büyük boşluk) ayrımı kitapta yapılmıyor (s.64-65)"
+    ],
+    "pozisyon_risk": "Sermayenin yaklaşık %2'sinden fazlasını bir borsada riske atma (s.39, genel kural)",
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Boşluk tanımı (önceki kapanış ile açılış farkı) ve yön ölçülebilir. 'Zirveye yakın' ve 'istikrarlı piyasa' yoruma açık; stop ve çıkış kuralı yok."
+    },
+    "belirsizlikler": [
+      "'Zirveye yakın' tanımı yok (gün aralığının yüzde kaçı)",
+      "Stop ve çıkış kuralı yok; 'ertesi gün' bir zaman çıkışı olarak yazılmadı",
+      "Boşluk doldurma (gap fill) ayrı bir yaklaşım; kitapta kuralı yok (s.64-65)",
+      "s.117 ifadesi opsiyon işlemlerine bağlı; burada yalnızca yön devamı mantığı alındı"
+    ],
+    "uyumluluk_notu": "Boşluk yalnızca gün açılışı olan piyasalarda (hisse, vadeli) oluşur; forex ve kriptoda belirgin boşluk olmayabilir. 1L3A'de veri kaynağının seans açılışını içerip içermediği kontrol edilmeli.",
+    "varyantlar": [
+      "Boşluk doldurma (gap fill) yaklaşımı: boşluk tükenirse ters yönde tepki (s.64-65, kural tanımsız)",
+      "Aşağı boşlukta devam (s.117)"
+    ],
+    "anahtar_kelimeler": ["bosluk", "gap", "momentum", "zirve", "gun-acilisi", "hisse"]
+  },
+  {
+    "kart_id": "swing__yutan-mum-doji-donus__jordan",
+    "ad": "Yutan Mum ve Doji ile Dönüş Onayı",
+    "stil": "swing",
+    "kaynak": {"pdf": "Swing_Trade_Stratejileri_-_Simon_Jordan_208_sayfa.pdf", "sayfalar": [48, 62, 63]},
+    "ozet": "Önceki mumun gövdesini tamamen kapsayan ters yönlü büyük gövdeli mum (yutan mum) veya açılışa yakın kapanan doji, destek/direnç ya da trend sonunda dönüşü işaret eder. Kitap bunları tek başına değil, RSI/MACD gibi onaylayıcılarla kullanmayı önerir.",
+    "kategori": "formasyon",
+    "piyasa_rejimi": "herhangi",
+    "orijinal_piyasa": "hisse",
+    "zaman_dilimi": {"islem": "1D (varsayım; kitap örnekleri hisse grafikleri)", "ust_filtre": null},
+    "gostergeler": [{"ad": "Mum formasyonu", "parametreler": {"tip": "yutan mum, mezar taşı doji, yusufçuk doji"}}],
+    "long_giris": [
+      "Yukarı dönüş: büyük yükseliş mumu önceki düşüş mumunu tamamen kapsar (s.62 'daldırma alevi')",
+      "Yusufçuk doji: açılışa yakın kapanış, uzun alt gölge; olası yükseliş (s.63)"
+    ],
+    "short_giris": [
+      "Aşağı dönüş: büyük düşüş mumu önceki yükseliş mumunu tamamen kapsar (s.62)",
+      "Mezar taşı doji: açılışa yakın kapanış, uzun üst gölge; olası düşüş (s.63)"
+    ],
+    "stop_loss": null,
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Destek/direnç noktasında doji veya yoğun mum tersine dönüşü doğrular (s.48)",
+      "Kitap s.63: RSI ve MACD gibi onaylayıcı göstergelerle birlikte kullanılmalı"
+    ],
+    "pozisyon_risk": "Sermayenin yaklaşık %2'sinden fazlasını bir borsada riske atma (s.39, genel kural)",
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Mum tanımları yoruma açık ('uzun gölge', 'açılışa yakın', 'tamamen kapsar'). Onay göstergesi ve stop/hedef kuralı yok."
+    },
+    "belirsizlikler": [
+      "'Açılışa yakın' ve 'uzun gölge' için oran eşiği yok",
+      "Yutan mumda kapsama tanımı (gövde mi, fitil mi) belirsiz",
+      "Onay göstergesi olarak hangi değer eşiği kullanılacağı yok",
+      "Giriş, stop ve hedef kuralı yok"
+    ],
+    "uyumluluk_notu": "Mum formasyonları tüm piyasalarda aynı tanımla hesaplanır; 5m'de daha sık ve gürültülü. Hacim gerekmez. Puan düşük: 1L3A'de tek başına kullanılmamalı.",
+    "varyantlar": [],
+    "anahtar_kelimeler": ["doji", "yutan-mum", "mum-formasyonu", "ters-donus", "onay"]
+  },
+  {
+    "kart_id": "swing__fiyat-hareketli-ortalama-konumu__jordan",
+    "ad": "Fiyat-Hareketli Ortalama Konumu (Trend Yönü)",
+    "stil": "swing",
+    "kaynak": {"pdf": "Swing_Trade_Stratejileri_-_Simon_Jordan_208_sayfa.pdf", "sayfalar": [50, 112]},
+    "ozet": "Fiyat hareketli ortalamanın üzerinde sabit kaldığında formasyon yükseliş, altında kaldığında düşüş olarak yorumlanır; fiyat hareketli ortalamanın altına düştüğünde uzun pozisyondan çıkış yapılır.",
+    "kategori": "trend_takip",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {"islem": "belirtilmemiş", "ust_filtre": null},
+    "gostergeler": [{"ad": "SMA/EMA", "parametreler": {"periyot": "belirtilmemiş (kitap 20/50/100/200 örnekler veriyor, s.114)"}}],
+    "long_giris": [
+      "Fiyat hareketli ortalamanın üzerinde sabit işlem görür (s.50, s.112)"
+    ],
+    "short_giris": [
+      "Fiyat hareketli ortalamanın altında sabit işlem görür (s.50, s.112)"
+    ],
+    "stop_loss": "Uzun pozisyonda fiyat hareketli ortalamanın altına düşerse çık (s.112: maliyet hareketli ortalamanın altına düşerse 'desen aşağı'). Kısa tarafta tersi.",
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Kitap s.114: kısa periyotlu ortalama fiyata daha hızlı tepki verir; 20 ve 100 örnekleri verilir"
+    ],
+    "pozisyon_risk": "Sermayenin yaklaşık %2'sinden fazlasını bir borsada riske atma (s.39, genel kural)",
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Konum (üstünde/altında) ölçülebilir. 'Sabit' kelimesi ve periyot kitapta net değil."
+    },
+    "belirsizlikler": [
+      "Periyot kitapta belirtilmemiş (20, 50, 100, 200 örnekleri var)",
+      "'Sabit işlem' tanımı yok (kaç mum üstünde kalmalı)",
+      "Giriş ve stop tetikleyici yüzeysel; kitap MA'nın tek başına kullanılmasını önermez (s.50 'MA'nın gerisinde kalır' uyarısı)"
+    ],
+    "uyumluluk_notu": "Basit ve tüm piyasalarda uygulanabilir; gecikmeli bir gösterge olduğu için 5m'de sinyal gecikir. Hacim gerekmez. Tek başına değil, filtre olarak kullanılması uygun.",
+    "varyantlar": [],
+    "anahtar_kelimeler": ["hareketli-ortalama", "konum", "trend", "filtre", "sma"]
+  }
+]

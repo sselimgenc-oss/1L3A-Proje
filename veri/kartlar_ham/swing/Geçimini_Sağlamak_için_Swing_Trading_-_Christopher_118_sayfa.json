@@ -1,0 +1,199 @@
+[
+  {
+    "kart_id": "swing__talep-bolgesi-dbr-rbr__christopher",
+    "ad": "Talep Bolgesi: DBR ve RBR Desenleri (Long)",
+    "stil": "swing",
+    "kaynak": {"pdf": "Geçimini_Sağlamak_için_Swing_Trading_-_Christopher_118_sayfa.pdf", "sayfalar": [19, 20, 21, 22, 23, 24, 25, 26, 27, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 55, 56, 57, 58, 59, 60, 61, 67, 68, 69, 70, 71, 72]},
+    "ozet": "Gunluk veya haftalik grafikte, bir baz mumu iceren DBR (kirmizi heyecan verici - baz - yesil heyecan verici) veya RBR (yesil - baz - yesil) deseninden talep bolgesi cizilir. Fiyat bolgeye geri dondugunde proksimal cizginin biraz ustunden long, stop distal cizginin altinda.",
+    "kategori": "destek_direnc",
+    "piyasa_rejimi": "herhangi",
+    "orijinal_piyasa": "hisse",
+    "zaman_dilimi": {"islem": "1d", "ust_filtre": "1w"},
+    "gostergeler": [
+      {"ad": "Mum govde/fitil orani", "parametreler": {"heyecan_verici_govde_min": 0.75, "heyecan_verici_fitil_max": 0.25, "baz_mum_govde_max": 0.40}}
+    ],
+    "long_giris": [
+      "DBR deseni: kirmizi heyecan verici mum (leg-in, asagi) + en az bir baz mum + yesil heyecan verici mum (leg-out, yukari)",
+      "RBR deseni: yesil heyecan verici mum (leg-in) + en az bir baz mum + yesil heyecan verici mum (leg-out); RBR de DBR ile ayni kurallarla islenir (kitap)",
+      "Proksimal cizgi: baz mumun govdesinin tepesine (birden fazla baz varsa en yuksek govde tepesi)",
+      "Distal cizgi: baz mumun dusugu (birden fazla baz varsa en dusuk dusuk)",
+      "Giris: fiyat proksimal cizgiye yakin ya da bolge icine geri dondugunde, proksimal cizginin biraz ustunde (veya bolge icinde)"
+    ],
+    "short_giris": ["Kitapta bu kart icin short yok; short kurulumu icin Arz Bolgesi karti (swing__arz-bolgesi-rbd-dbd__christopher) kullanilir"],
+    "stop_loss": "Distal cizginin biraz altı (kitap: 'hemen altı' / 'biraz altı')",
+    "kar_al": "Risk:odul 1:3; fiyat riskin 3 katina ulasinca kar alinir (kitap: 'Risk:Odul oraninizin 1:3'unu takip edin')",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Tek baz mum tercih edilir; birden fazla baz mum zayif bolge yaratir (kitap s.43)",
+      "Mum oranlari: heyecan verici govde toplam mumun en az %75'i, fitiller %25'ten az; baz mum govdesi %40'tan az",
+      "Hacim onayi (kart C) ile iki katmanli giris: kitap 'cift dogrulama' der"
+    ],
+    "pozisyon_risk": "Kitapta bu strateji icin sabit yuzde risk yok; genel risk bolumu (hesap x %1-2 / (giris - stop)) genel tavsiye olarak verilmis",
+    "iddia_edilen_performans": "Kitapta sayisal kazanma orani yok; 'kazanma olasiligi yuksek' ifadesi kullanilir",
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Mum oranlari (%75/%25/%40), desen yapisi ve cizgi yerlesimi mekanik. Ancak yuzde toleransi (%5-10) ve 'yakin', 'biraz ustu' gibi ifadeler yoruma aciktir; istisna (Tip-1/2/3) ek kural gerektirir."
+    },
+    "belirsizlikler": [
+      "Mum oranlarinda %5-10 tolerans (kitap s.22: 'mukemmel ornek aramayin')",
+      "'Yakin' (proksimal'e ne kadar yakin) ve 'biraz ustu' tanimsiz",
+      "Baz mumsuz istisna (Tip-1/2/3, s.55-61): iki heyecan verici mum arasindaki bolge tanimi kitapta ornekle anlatilir, sayisal kural daha az net",
+      "Bolgenin ne kadar sure gecerli kalacagi kitapta yok",
+      "Kitap hisse/endeks baglaminda yazilmis; forex ve kripto icin 'dogrudan' uygunluk kitapta dogrulanmamis"
+    ],
+    "uyumluluk_notu": "Mum oranlari 5 dk'da da tanimlanabilir; bolge icin gunluk/haftalik tercih edilir. 1L3A icin 1h/4h bolge ust filtre olarak kullanilabilir. Forex'te gap yoktur ama mum oranlari ayni. Hacim verisi kart C'de; forex ve kriptoda hacim tanimi zayif olabilir.",
+    "varyantlar": [
+      "Cift zaman dilimi: haftalik bolge icinde gunluk baz mum bulunur, gunluk proksimal haftalik proksimal ile distal arasinda, stop haftalik distalin altinda (LICI s.68-69; Titan s.73-74; JSW s.76-77 kisa taraf)",
+      "RBR (devam) versiyonu ayni kurallarla (kitap s.42-47)",
+      "Baz mumsuz istisna Tip-1/2/3 (s.55-61): Tip-3'te proksimal, gövde tepesi daha yuksek olan heyecan verici mumun govdesinde alinir"
+    ],
+    "anahtar_kelimeler": ["talep-bolgesi", "arz-talep", "dbr", "rbr", "mum-oranlari", "proksimal-distal", "christopher"]
+  },
+  {
+    "kart_id": "swing__arz-bolgesi-rbd-dbd__christopher",
+    "ad": "Arz Bolgesi: RBD ve DBD Desenleri (Short)",
+    "stil": "swing",
+    "kaynak": {"pdf": "Geçimini_Sağlamak_için_Swing_Trading_-_Christopher_118_sayfa.pdf", "sayfalar": [28, 29, 30, 31, 32, 47, 48, 49, 50, 51, 52, 53, 54, 62, 63, 64, 65, 66, 73, 74, 75, 76, 77]},
+    "ozet": "Gunluk veya haftalik grafikte, RBD (yesil heyecan verici - baz - kirmizi heyecan verici) veya DBD (kirmizi - baz - kirmizi) deseninden arz bolgesi cizilir. Fiyat bolgeye geri dondugunde proksimal cizginin biraz altindan short, stop distal cizginin ustunde.",
+    "kategori": "destek_direnc",
+    "piyasa_rejimi": "herhangi",
+    "orijinal_piyasa": "hisse",
+    "zaman_dilimi": {"islem": "1d", "ust_filtre": "1w"},
+    "gostergeler": [
+      {"ad": "Mum govde/fitil orani", "parametreler": {"heyecan_verici_govde_min": 0.75, "heyecan_verici_fitil_max": 0.25, "baz_mum_govde_max": 0.40}}
+    ],
+    "long_giris": ["Kitapta bu kart icin long yok; long kurulumu icin Talep Bolgesi karti (swing__talep-bolgesi-dbr-rbr__christopher) kullanilir"],
+    "short_giris": [
+      "RBD deseni (ters donus): yesil heyecan verici mum (leg-in, yukari) + en az bir baz mum + kirmizi heyecan verici mum (leg-out, asagi)",
+      "DBD deseni (devam): kirmizi heyecan verici mum (leg-in) + en az bir baz mum + kirmizi heyecan verici mum (leg-out)",
+      "Proksimal cizgi: baz mumun govdesinin ALT kismina (birden fazla baz varsa en dusuk govde alti)",
+      "Distal cizgi: baz mumun ustune (birden fazla baz varsa en yuksek tepe)",
+      "Giris: fiyat proksimal cizgiye yakin ya da bolge icine geri dondugunde, proksimal cizginin biraz altinda (veya bolge icinde)"
+    ],
+    "stop_loss": "Distal cizginin biraz ustu (kitap: 'hemen ustu')",
+    "kar_al": "Risk:odul 1:3 (kitap); fiyat riskin 3 katina ulasinca kar alinir",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "RBD tersine donus desenidir; kitap ters donus desenlerini devam desenlerinden daha guvenilir sayar (kanit sunmaz)",
+      "Tek baz mum tercih edilir (s.43 benzeri ilke)",
+      "Hacim onayi (kart D) ile iki katmanli giris"
+    ],
+    "pozisyon_risk": "Kitapta bu strateji icin sabit yuzde risk yok",
+    "iddia_edilen_performans": "Kitapta sayisal kazanma orani yok; 'haftalik zaman diliminde mumkun olan en yuksek dogrulukla' ifadesi kullanilir",
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Desen yapisi ve cizgi yerlesimi mekanik (arz bolgesi, talep bolgesinin tersi). Yuzde toleransi ve 'yakin/biraz altinda' ifadeleri yoruma aciktir; istisnalar (Tip-1/2/3) ek kural gerektirir."
+    },
+    "belirsizlikler": [
+      "Mum oranlarinda %5-10 tolerans (kitap s.22 benzeri)",
+      "'Yakin' ve 'biraz altinda' tanimsiz",
+      "Baz mumsuz arz bolgesi (Tip-1/2/3, s.62-66) icin proksimal ve distal secimi kitapta ornekle anlatilir",
+      "RBD/DBD'de ters donus daha guvenilir iddiasi kanitsiz",
+      "Kitap hisse/endeks baglaminda; forex ve kriptoda uygunluk dogrulanmamis"
+    ],
+    "uyumluluk_notu": "Talep kartiyla ayni: 5 dk'da tanimlanabilir; 1L3A icin 1h/4h ust filtre olarak. Forex'te gap yok. Hacim verisi kart D'de.",
+    "varyantlar": [
+      "Baz mumsuz istisna Tip-1/2/3 arz bolgeleri (s.62-66): proksimal, heyecan verici mumun govde tepesi/altinda; distal, daha yuksek olan mumun tepesinde",
+      "Cift zaman dilimi: haftalik arz bolgesi, gunluk baz mum, gunluk proksimal haftalik proksimal icinde (Titan s.73-74; JSW s.76-77)"
+    ],
+    "anahtar_kelimeler": ["arz-bolgesi", "rbd", "dbd", "short", "mum-oranlari", "proksimal-distal", "christopher"]
+  },
+  {
+    "kart_id": "swing__talep-bolgesi-hacim-onay__christopher",
+    "ad": "Talep Bolgesi + Hacim Onayi (Long, Dusen Piyasa)",
+    "stil": "swing",
+    "kaynak": {"pdf": "Geçimini_Sağlamak_için_Swing_Trading_-_Christopher_118_sayfa.pdf", "sayfalar": [100, 101, 102, 103, 104, 105, 106, 108, 109, 110, 111]},
+    "ozet": "Talep bolgesine (kart A) fiyat dusus icinde girer. Son kirmizi mumun hacmi, onceki mumlarla karsilastirilir; hacim teyidi (alicilarin tukenmesi ya da agresiflik) ile bolge teyidi birlikte long icin kullanilir.",
+    "kategori": "destek_direnc",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "hisse",
+    "zaman_dilimi": {"islem": "1d", "ust_filtre": "1w"},
+    "gostergeler": [
+      {"ad": "Hacim", "parametreler": {"karsilastirma": "son kirmizi mum hacmi vs onceki mum hacmi (veya sondan ikinci mum)"}},
+      {"ad": "Talep bolgesi (kart A)", "parametreler": {}}
+    ],
+    "long_giris": [
+      "Piyasa veya hisse dusus trendinde",
+      "Fiyat talep bolgesine (proksimal veya bolge icine) girer; bolgeye giren son kirmizi mumun hacmi, onceki mumun hacminden yuksek (kitap 'Vaka-1')",
+      "Alternatif kitap 'Vaka-2': son kirmizi mumun hacmi onceki mumdan dusuk (kitap bunu da long olarak yazar; belirsizlikler bolumune bakin)",
+      "Son kirmizi mumdan sonra yesil mum (kitap: zorunlu degil ama genelde gorulur); giris, bolge ve hacim onayi birlikte saglandiginda"
+    ],
+    "short_giris": ["Kitapta bu kart icin short yok; tersi icin kart D"],
+    "stop_loss": "Son kirmizi mumun hemen altı (kitap: 'stop loss'u son kirmizi mumun hemen altinda tutarak')",
+    "kar_al": "Risk:odul 1:3 (kart A ile ayni)",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Dusen piyasa kosulu (dusus trendi icinde son kirmizi mum)",
+      "Hacim karsilastirmasi icin son 2-3 mum kullanilir",
+      "Bolge (kart A) ile birlikte: kitap 'cift dogrulama' der"
+    ],
+    "pozisyon_risk": "Kitapta bu strateji icin sabit yuzde risk yok",
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Hacim karsilastirmasi (son mum > onceki mum) mekanik. Ancak Vaka-1 ve Vaka-2 kosullari birbirinin tersi gorunur ve giris zamani (kirmizi mum kapanisi mi, sonraki yesil mum mu) acik degildir."
+    },
+    "belirsizlikler": [
+      "Vaka-1 ve Vaka-2 kosullari birbiriyle tutarsiz gorunuyor; kitap ikisinde de long oneriyor. Bolum 6'daki Durum-1 aciklamasi (sondan ikinci kirmizi mumun hacmi son mumdan yuksek) ile Durum-2 madde listesi (son kirmizi mumun hacmi onceki mumdan yuksek) celisiyor. Kodlamadan once kitabin ilgili sekilleri ile teyit edilmeli",
+      "Giris zamani net degil (kirmizi mum kapanisi mi, yesil mum ustu mu)",
+      "Kitap ayrica coklu mum (Ornek 1-4, s.88-99) ve 'alarm zili' yorumlari verir; bunlar yoruma dayalidir ve kodlanmamistir"
+    ],
+    "uyumluluk_notu": "Hacim verisi zorunludur. Forex'te hacim (tick volume) platforma gore degisir; kripto hacmi borsaya gore farklilik gosterir. 1L3A'da hacim verisi kalitesi sorunlu olabilir. >=5 dk icin ortalama hacim/caba-sonuc yorumu yeniden tanimlanmali. Hisse ve endeks hacmi kitaba uygundur.",
+    "varyantlar": [
+      "Yukselen piyasada tersi (kart D)",
+      "Coklu mum/hacim yorumu (Bolum 6, Ornek 1-4): kodlanmamis; yoruma dayali"
+    ],
+    "anahtar_kelimeler": ["hacim", "hacim-onay", "talep-bolgesi", "cift-dogrulama", "son-kirmizi-mum", "christopher"]
+  },
+  {
+    "kart_id": "swing__arz-bolgesi-hacim-onay__christopher",
+    "ad": "Arz Bolgesi + Hacim Onayi (Short, Yukselen Piyasa)",
+    "stil": "swing",
+    "kaynak": {"pdf": "Geçimini_Sağlamak_için_Swing_Trading_-_Christopher_118_sayfa.pdf", "sayfalar": [103, 104, 105, 106, 107, 111, 112, 113, 114, 115]},
+    "ozet": "Arz bolgesine (kart B) fiyat yukselis icinde girer. Son yesil mumun hacmi, onceki yesil mumla karsilastirilir; hacim teyidi (alicilarin tukenmesi) ile bolge teyidi birlikte short icin kullanilir.",
+    "kategori": "destek_direnc",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "hisse",
+    "zaman_dilimi": {"islem": "1d", "ust_filtre": "1w"},
+    "gostergeler": [
+      {"ad": "Hacim", "parametreler": {"karsilastirma": "son yesil mum hacmi vs onceki yesil mum (veya sondan ikinci mum)"}},
+      {"ad": "Arz bolgesi (kart B)", "parametreler": {}}
+    ],
+    "long_giris": ["Kitapta bu kart icin long yok; tersi icin kart C"],
+    "short_giris": [
+      "Piyasa yukselis trendinde; fiyat arz bolgesine (proksimal veya bolge icine) girer",
+      "Bolgeye giren son yesil mumun hacmi, onceki mumdan yuksek (kitap 'Vaka-1' short; kitap bunu 'durum no-1' olarak da anar)",
+      "Ayni sekilde son yesil mumun hacmi onceki mumdan dusuk ise, sonraki kirmizi mum ile short (kitap 'Durum-2' yukselen piyasa; ornek s.106-107)",
+      "Giris: kirmizi mum (veya bolge teyidi) sonrasi; proksimal cizginin biraz altı, bolge icinde de olabilir"
+    ],
+    "stop_loss": "Son yesil mumun hemen ustu (kitap: 'stop loss'u trendin son yesil mumunun biraz ustunde')",
+    "kar_al": "Risk:odul 1:3 (kart B ile ayni)",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Yukselen piyasa kosulu (yukselis trendi icinde son yesil mum)",
+      "Hacim karsilastirmasi icin son 2-3 mum kullanilir",
+      "Arz bolgesi (kart B) ile birlikte: kitap 'cift dogrulama' der"
+    ],
+    "pozisyon_risk": "Kitapta bu strateji icin sabit yuzde risk yok",
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Hacim karsilastirmasi mekanik. Ancak Vaka-1 ve Vaka-2 tanimlari (yuksek ve dusuk hacim) ve giris zamani (kirmizi mum kapanisi) yoruma aciktir; kitap ayrica bazi 'durum' ornekleri icin kendi kurallarini degistirir."
+    },
+    "belirsizlikler": [
+      "Vaka-1 ve Vaka-2 kosullarinin birbirine gore celiskisi; kart C'deki ayni sorun burada da gecerli",
+      "Kitap 'durum no-2' icin 'ikinci son yesil mum' ifadesini kullanir; bu, kart C'deki 'sondan ikinci mum' tanimiyla ayni mi kitapta acik degil",
+      "Giris zamani: kirmizi mum kapanisi mi, bir sonraki bar mi"
+    ],
+    "uyumluluk_notu": "Hacim verisi zorunlu; forex ve kriptoda hacim sorunlu olabilir. >=5 dk'da uyarlanabilir ama hacim yorumu yeniden tanimlanmali. Hisse ve endeks uygun.",
+    "varyantlar": [
+      "Dusen piyasada tersi (kart C)",
+      "Bolge olmadan hacim yalniz (Durum-1/2): kart C ile ayni kurallar, sadece bolge kosulu olmaz; kitap bunu ayri bir setup olarak sunmaz"
+    ],
+    "anahtar_kelimeler": ["hacim", "hacim-onay", "arz-bolgesi", "cift-dogrulama", "son-yesil-mum", "christopher"]
+  }
+]

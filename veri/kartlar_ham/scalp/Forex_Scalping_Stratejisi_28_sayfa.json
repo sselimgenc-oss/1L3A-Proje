@@ -1,0 +1,76 @@
+[
+  {
+    "kart_id": "scalp__ma3-ma7-bollinger-trend-kirilim__simvour",
+    "ad": "MA3/MA7 Kesisimi + Bollinger Sapma Kapanisi (200/50 MA Trend Filtresi, 5dk)",
+    "stil": "scalp",
+    "kaynak": {"pdf": "Forex_Scalping_Stratejisi_28_sayfa.pdf", "sayfalar": [5, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 25, 26, 27]},
+    "ozet": "Ana trend yonunde (50 MA yonu ve 200 MA'nin konumu), 3 MA ile 7 MA'nin kesistigi, momentumun asiri bolgede oldugu ve mumun Bollinger bandinin ilgili sapma cizgisinin disinda kapandigi anda 5 dakikalik grafikte islem acilir. Cikis icin 3 MA-7 MA ters kesisimi veya Fibonacci %61.8 seviyesi kullanilir.",
+    "kategori": "trend_takip",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "forex",
+    "zaman_dilimi": {"islem": "5m", "ust_filtre": "4h"},
+    "gostergeler": [
+      {"ad": "Hareketli ortalama (tip belirtilmemis)", "parametreler": {"periyot": 3}},
+      {"ad": "Hareketli ortalama (tip belirtilmemis)", "parametreler": {"periyot": 7}},
+      {"ad": "Hareketli ortalama (tip belirtilmemis)", "parametreler": {"periyot": 50}},
+      {"ad": "Hareketli ortalama (tip belirtilmemis)", "parametreler": {"periyot": 200}},
+      {"ad": "Bollinger", "parametreler": {"periyot": "belirtilmemis", "sapma": "1-3 (ayar belirtilmemis)"}},
+      {"ad": "Momentum", "parametreler": {"periyot": "belirtilmemis", "esik": "kirmizi cizgi (deger belirtilmemis)"}},
+      {"ad": "ZigZag", "parametreler": {"esik": "belirtilmemis"}},
+      {"ad": "Fibonacci", "parametreler": {"duzeltme_seviyesi": 61.8, "uzatma_seviyesi": 127}}
+    ],
+    "long_giris": [
+      "50 MA yukari egimli",
+      "200 MA fiyatin altinda",
+      "3 MA, 7 MA'yi asagidan yukari keser",
+      "Momentum asiri satim bolgesinde (kirmizi cizginin altinda)",
+      "Boga mumu, Bollinger bandinin 1., 2. veya 3. sapma cizgisinin ustunde kapanir",
+      "Bes kosulun tumu gerceklesmeli"
+    ],
+    "short_giris": [
+      "50 MA asagi egimli",
+      "200 MA fiyatin ustunde",
+      "3 MA, 7 MA'yi ustten asagi keser",
+      "Momentum asiri alim bolgesinde (kirmizi cizginin ustunde)",
+      "Ayi mumu, Bollinger bandinin 1., 2. veya 3. sapma cizgisinin altinda kapanir",
+      "Bes kosulun tumu gerceklesmeli"
+    ],
+    "stop_loss": null,
+    "kar_al": "Fibonacci: pozisyon yonundeki zigzag dalgasinda fiyat %61.8 duzeltme seviyesine yaklasinca kapat. Fiyat %61.8'i ihlal ederse yeni pozisyon acilir ve %127 uzatma seviyesi hedeflenir (kitap ornegi: yaklasik 80 pip ek kazanc).",
+    "iz_suren_stop": null,
+    "zaman_cikisi": "Alis: 3 MA, 7 MA'yi yukaridan asagi keserse kapat. Satis: 3 MA, 7 MA'yi asagidan yukari keserse kapat. Momentum ile teyit edilmeli. Kitap ayrica pozisyon 3 gunden uzun sure zarardaysa kapatmayi onerir.",
+    "filtreler": [
+      "Ana trend yonunde islem (50 MA ve 200 MA)",
+      "4 saatlik zaman diliminde trend cizgisi (kitap elle cizer; kart icin 200/50 MA vekil olarak varsayilabilir)",
+      "Forex Factory takvimi kontrol edilir; beklenmedik haber varsa pozisyon kapatilabilir",
+      "1 dakikalik grafik kullanilmaz (oynak, analiz icin yetersiz)",
+      "Onerilen seanslar: iki piyasanin ortustugu saatler (kitap ornegi: AUD/JPY, Sidney-Tokyo)"
+    ],
+    "pozisyon_risk": "Hesap degerinin %1-2'sinden fazlasi riske atilmaz; buyuk lot kullanilmaz; gunde 1-3 pozisyon yeterlidir.",
+    "iddia_edilen_performans": "Yazar: ana trend cizgisine karsi girilmezse 'kararlarinizin %80'inin garanti altina alinmasi' (kisisel iddia, istatistik verilmemis).",
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Giris kosullari buyuk olcude sayisal (MA kesisimi, MA konumu, bant kapanisi). Ancak momentum esigi ve periyodu, Bollinger ayari, MA tipi ve zigzag esigi kitapta belirtilmemis; 4 saatlik trend cizgisi elle cizildigi icin yorumludur."
+    },
+    "belirsizlikler": [
+      "Momentum gostergesinin periyodu ve 'kirmizi cizgi' esik degeri belirtilmemis (ekran goruntusu bagimli, s.12-13)",
+      "Bollinger periyot ve sapma ayari belirtilmemis",
+      "'Birinci, ikinci veya ucuncu sapma' ifadesinin hangi bant cizgisi (ust/alt) ve hangi kapanis kosulu oldugu tam net degil; kart kitabin ifadesiyle kaydedildi",
+      "Hareketli ortalamanin tipi (SMA/EMA) belirtilmemis",
+      "Zigzag esik parametresi belirtilmemis; Fibonacci cizimi zigzag swing'ine dayaniyor",
+      "4 saatlik trend cizgisi elle cizilir (s.16); olculebilir kural degil, 200/50 MA ile vekillik varsayimi kart icin yapildi",
+      "Sayisal stop loss mesafesi yok; 'stop loss seviyenizi sikilastirin' 2. adim olarak yaziliyor, 1. adim metinde eksik (s.23-24 arasi)",
+      "Kar hedefi tutarsiz: sonuc bolumunde 'hedef kar 5-30 pip', Fibonacci ornegi ~80 pip, giris bolumunde gunluk yatirimci 20-100 pip",
+      "Haber takvimi icin cikis kosulu tanimli degil ('kotu haber geliyorsa' ifadesi)",
+      "Kitap ekran goruntulerine cok bagimli (s.12, 13, 18, 19, 22-24); gorsel icerik metinde yok",
+      "Yazar adi metinde yok; makale kaynagi investoune.com, Twitter @simvour olarak geciyor; metin Ingilizceden cevrilmis"
+    ],
+    "uyumluluk_notu": "≥5m uyumlu (5dk islem, 4s filtre). Forex'e ozgu: seanslarin cakismasi ve haber takvimi (Forex Factory); pip ve broker spread'i. Hacim verisi gerekmiyor. Kripto/hisse/emtia'da MA, Bollinger, Fibonacci ve zigzag aynen kullanilabilir; seans ve spread kurallari o piyasada yeniden tanimlanmali.",
+    "varyantlar": [
+      "Cikis A: 3 MA / 7 MA ters kesisimi (momentum ile teyit)",
+      "Cikis B: Fibonacci %61.8'e yaklasinca kapat; ihlal edilirse %127 uzatma hedefiyle yeniden giris",
+      "Satis ve alis icin simetrik kurallar"
+    ],
+    "anahtar_kelimeler": ["hareketli-ortalama", "ma3-ma7-kesisim", "ma50", "ma200", "bollinger", "momentum", "zigzag", "fibonacci-61-8", "fibonacci-127", "forex", "5dk", "4h-trend", "haber-takvimi", "trend-kirilim"]
+  }
+]

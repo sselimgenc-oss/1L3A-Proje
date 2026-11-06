@@ -1,0 +1,389 @@
+[
+  {
+    "kart_id": "scalp__sahte-kopus-vwap__stevenson",
+    "ad": "Sahte Kopuş + VWAP Sapma Bantları Scalp",
+    "stil": "scalp",
+    "kaynak": {"pdf": "Yüksek_Kazanma_Oranı_ile_Ortalama_Dönüş_Scalping_Stratejileri_-_Max_Stevenson_64_sayfa.pdf", "sayfalar": [48, 49, 50]},
+    "ozet": "ADX 25'in altında (yatay piyasa) iken fiyat VWAP'ın ilk sapma bandının (1 standart sapma) dışına çıkar, Stokastik aşırı satım/alım bölgesinden döner ve Sahte Kopuş göstergesi ters yönde sinyal verirse, o yönde işlem açılır. Stop giriş mumunun karşı ucuna konur; çıkış VWAP'ın karşı 1 standart sapma bandında veya ters Sahte Kopuş sinyalinde.",
+    "kategori": "ortalamaya_donus",
+    "piyasa_rejimi": "yatay",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {"islem": "belirtilmemiş", "ust_filtre": null},
+    "gostergeler": [
+      {"ad": "ADX", "parametreler": {"periyot": null}},
+      {"ad": "VWAP + standart sapma bantları", "parametreler": {"bantlar": "tümü etkin (1 SD ilk bant kullanılıyor)"}},
+      {"ad": "Sahte Kopuş (Expo) TradingView göstergesi", "parametreler": {"ayar": "agresif"}},
+      {"ad": "Stokastik", "parametreler": {"K_uzunluk": 14, "K_duzeltme": 6, "D_duzeltme": 3}}
+    ],
+    "long_giris": [
+      "ADX 25'in altında",
+      "Fiyat VWAP'ın 1 standart sapma altında (ilk alt bandın altında)",
+      "Stokastik aşırı satım bölgesinde ve yukarı yönde çaprazlanmış",
+      "Sahte Kopuş göstergesinde alım sinyali oluşunca uzun giriş"
+    ],
+    "short_giris": [
+      "ADX 25'in altında",
+      "Fiyat VWAP'ın 1 standart sapma üstünde (ilk üst bandın üstünde)",
+      "Stokastik aşırı alım bölgesinde ve aşağı yönde çaprazlanmış",
+      "Sahte Kopuş göstergesinde satış sinyali oluşunca kısa giriş"
+    ],
+    "stop_loss": "Uzun: giriş mumunun altı. Kısa: giriş mumunun üstü.",
+    "kar_al": "Uzun: fiyat VWAP'ın 1 standart sapma üstüne çıkınca veya Sahte Kopuş satış sinyali oluşunca. Kısa: fiyat VWAP'ın 1 standart sapma altına inince veya Sahte Kopuş alım sinyali oluşunca.",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": ["ADX 25'in altında (yalnızca yatay piyasa)"],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": "Kitapta bu strateji için sayısal performans iddiası yok.",
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "ADX, VWAP sapma eşiği, Stokastik değerleri ve stop kuralı tanımlı. Ancak Sahte Kopuş (Expo) kapalı kaynaklı bir TradingView göstergesi; VWAP başlangıç noktası tanımsız."
+    },
+    "belirsizlikler": [
+      "Sahte Kopuş (Expo) göstergesinin algoritması kitapta yok; 'agresif' ayarın etkisi belirsiz",
+      "VWAP'ın oturum/başlangıç noktası belirtilmemiş",
+      "ADX periyodu belirtilmemiş",
+      "Zaman dilimi belirtilmemiş",
+      "Giriş, stop ve çıkış için mum kapanışı mı tik mi kullanıldığı belirtilmemiş"
+    ],
+    "uyumluluk_notu": "1L3A için: VWAP için hacim verisi GEREKLİ. Forex'te tick hacmi varsayımı gerekir; kripto ve hisse için doğal hacim var. Kitap zaman dilimi vermiyor, 5dk/15dk test edilebilir. Stop ve hedef ATR veya yüzde ile uyarlanabilir.",
+    "varyantlar": [
+      "Uzun ve kısa ayna versiyon (kitapta ayrı tarif edilmiş)",
+      "Hedef olarak VWAP'ın kendisi yerine 1 SD karşı bant (kitap bu varyantı tarif ediyor)"
+    ],
+    "anahtar_kelimeler": ["vwap", "sapma-bandi", "sahte-kopus", "false-breakout", "stokastik", "adx", "yatay-piyasa", "ortalamaya-donus", "hacim-gerekli", "scalp"]
+  },
+  {
+    "kart_id": "scalp__wavetrend-bollinger__stevenson",
+    "ad": "WaveTrend Pivot + Bollinger Bandı Ortalamaya Dönüş",
+    "stil": "scalp",
+    "kaynak": {"pdf": "Yüksek_Kazanma_Oranı_ile_Ortalama_Dönüş_Scalping_Stratejileri_-_Max_Stevenson_64_sayfa.pdf", "sayfalar": [51, 52, 53]},
+    "ozet": "ADX 25'in altındayken fiyat Bollinger alt bandına dokunur veya altına inerse ve WaveTrend (WT) aşırı satım bölgesinde yukarı pivot sinyali verirse alış yapılır. Satış tersi. Stop giriş mumunun karşı ucunda. Çıkış karşı WT pivot sinyalinde veya fiyat bandın dışına çıkıp geri girdiğinde.",
+    "kategori": "ortalamaya_donus",
+    "piyasa_rejimi": "yatay",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {"islem": "belirtilmemiş", "ust_filtre": null},
+    "gostergeler": [
+      {"ad": "ADX", "parametreler": {"periyot": null}},
+      {"ad": "Bollinger Bantları", "parametreler": {"periyot": null, "sapma": null}},
+      {"ad": "WaveTrend (TradingView, Kumo dinamik bölgeli)", "parametreler": {"not": "parametre belirtilmemiş"}}
+    ],
+    "long_giris": [
+      "ADX 25'in altında",
+      "Fiyat Bollinger alt bandına dokunmuş veya altında",
+      "WT pivot düşük sinyali oluşur (WT aşırı satım durumundayken yukarı geçer) → uzun giriş"
+    ],
+    "short_giris": [
+      "ADX 25'in altında",
+      "Fiyat Bollinger bandına dokunur (kitap 'alt kısmına dokunuyor veya üstünde' diyor; metin tutarsız, belirsizlikler'e bak)",
+      "WT pivot yüksek sinyali oluşur (WT aşırı alım durumundayken aşağı geçer) → kısa giriş"
+    ],
+    "stop_loss": "Uzun: giriş mumunun altı. Kısa: giriş mumunun üstü.",
+    "kar_al": "Uzun: WT pivot yüksek sinyali (WT aşırı alımda aşağı geçer) veya fiyat üst bandın dışına çıkıp tekrar altına inince. Kısa: WT pivot düşük sinyali veya fiyat alt bandın dışına çıkıp tekrar üstüne çıkınca.",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": ["ADX 25'in altında (yalnızca yatay piyasa)"],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": "Kitapta bu strateji için sayısal performans iddiası yok.",
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "WT pivot sinyali kapalı kaynaklı TradingView göstergesine dayanıyor; pivot ve 'dinamik bölge' tanımı yok. Bollinger parametreleri eksik. Kısa giriş koşulunda tutarsızlık var."
+    },
+    "belirsizlikler": [
+      "WaveTrend ve Kumo dinamik bölge hesabı belirtilmemiş; pivot sinyali tanımsız",
+      "Bollinger periyot ve sapma değerleri belirtilmemiş",
+      "Kısa giriş koşulunda 'alt bandına dokunuyor veya üstünde' ifadesi muhtemelen üst bant olmalı (yazım tutarsızlığı)",
+      "Çıkış koşulları 'veya' ile iki alternatif olarak yazılmış; hangisinin öncelikli olduğu belirsiz",
+      "Zaman dilimi belirtilmemiş"
+    ],
+    "uyumluluk_notu": "1L3A için: WT ve Bollinger hesaplanabilir ama kapalı göstergenin tam formülü açık değil; yeniden yazım gerekir. Hacim verisi gerekmez. Forex, kripto, hisse, emtia için genel; test gerekir.",
+    "varyantlar": [
+      "Çıkış için bant dışı çıkıp geri girme alternatifi (kitapta 'veya' ile verilmiş)",
+      "IV bölümündeki 'Pivotlarla dalga trendi sapması' sinyaline benzer mantık (ayrı kart çıkarılmadı)"
+    ],
+    "anahtar_kelimeler": ["wavetrend", "bollinger", "pivot", "adx", "kumo", "ortalamaya-donus", "yatay-piyasa", "kapali-gosterge", "scalp"]
+  },
+  {
+    "kart_id": "scalp__bollinger40-rsi5-adx__stevenson",
+    "ad": "Bollinger(40,2) + RSI(5) Aşırı Satım/Alım Çıkışı",
+    "stil": "scalp",
+    "kaynak": {"pdf": "Yüksek_Kazanma_Oranı_ile_Ortalama_Dönüş_Scalping_Stratejileri_-_Max_Stevenson_64_sayfa.pdf", "sayfalar": [54, 55, 56]},
+    "ozet": "ADX 25'in altında iken fiyat alt Bollinger(40,2) bandının altına geçip RSI(5) 30'un altına inerse ve RSI 30'un üzerine çıkarken uzun açılır. Stop son salınım dibinin altında; çıkış fiyat üst banda ulaşınca. Kısa taraf simetrik: üst bant, RSI 70 ve alt bant çıkışı.",
+    "kategori": "ortalamaya_donus",
+    "piyasa_rejimi": "yatay",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {"islem": "belirtilmemiş", "ust_filtre": null},
+    "gostergeler": [
+      {"ad": "Bollinger Bantları", "parametreler": {"periyot": 40, "sapma": 2}},
+      {"ad": "RSI", "parametreler": {"periyot": 5}},
+      {"ad": "ADX", "parametreler": {"periyot": 14}}
+    ],
+    "long_giris": [
+      "ADX 25'in altında (trend olmayan piyasa)",
+      "Fiyat alt Bollinger bandının altına geçer",
+      "RSI(5) aşırı satım bölgesine (30'un altı) girer",
+      "RSI aşırı satım bölgesinden çıkınca (30'un üstüne çıkınca) uzun giriş"
+    ],
+    "short_giris": [
+      "ADX 25'in altında (trend olmayan piyasa)",
+      "Fiyat üst Bollinger bandının üstüne çıkar",
+      "RSI(5) aşırı alım bölgesine (70'in üstü) girer",
+      "RSI aşırı alım bölgesinden çıkınca (70'in altına inince) kısa giriş"
+    ],
+    "stop_loss": "Uzun: son salınım dibinin altı. Kısa: son salınım zirvesinin üstü.",
+    "kar_al": "Uzun: fiyat üst Bollinger bandının tepesine ulaşınca. Kısa: fiyat alt Bollinger bandının dibine dokununca.",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": ["ADX 25'in altında (trend olmayan piyasa)"],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": "Kitapta bu strateji için sayısal performans iddiası yok.",
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Bollinger(40,2), RSI(5) eşikleri (30/70), ADX<25 filtresi, giriş tetiği (bölgeden çıkış) ve çıkış (karşı bant) açıkça tanımlı. Eksik: 'son salınım dibi/zirvesi' tanımı."
+    },
+    "belirsizlikler": [
+      "'Son salınım dibi/zirvesi' tanımı yok (kaç mum, fraktal mı)",
+      "Mum kapanışı mı tik mi kullanılacağı belirtilmemiş",
+      "Zaman dilimi belirtilmemiş"
+    ],
+    "uyumluluk_notu": "1L3A için: 5dk ve 15dk'da uyarlanabilir; hacim verisi gerekmez; swing tanımı eklenmeli. Forex'te pip stop yerine swing/ATR kullanılabilir. Kripto, hisse ve emtia için test gerekir.",
+    "varyantlar": [
+      "Standart Bollinger(20,2) yerine 40 periyot (kitap 40'ı tercih ediyor)",
+      "Uzun ve kısa ayna versiyon"
+    ],
+    "anahtar_kelimeler": ["bollinger-40", "rsi-5", "adx", "asiri-satim", "asiri-alim", "swing-stop", "ortalamaya-donus", "yatay-piyasa", "scalp"]
+  },
+  {
+    "kart_id": "scalp__rsi5-keltner-ema200__stevenson",
+    "ad": "RSI(5) + Keltner Kanalı + 200 EMA Ortalamaya Dönüş",
+    "stil": "scalp",
+    "kaynak": {"pdf": "Yüksek_Kazanma_Oranı_ile_Ortalama_Dönüş_Scalping_Stratejileri_-_Max_Stevenson_64_sayfa.pdf", "sayfalar": [57, 58]},
+    "ozet": "ADX 25'in altında olmak ve fiyatın 200 EMA'ya göre yönü (üstte uzun, altta kısa) koşulu ile RSI(5) aşırı bölgeye girip Keltner Kanalı (KC, çarpan 1,5) bandına değdikten sonra RSI bölgeden çıkarken giriş yapılır. Çıkış karşı KC bandına ulaşınca. Stop yalnızca uzun için giriş mumunun altı.",
+    "kategori": "ortalamaya_donus",
+    "piyasa_rejimi": "yatay",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {"islem": "belirtilmemiş", "ust_filtre": null},
+    "gostergeler": [
+      {"ad": "RSI", "parametreler": {"periyot": 5}},
+      {"ad": "Keltner Kanalı", "parametreler": {"carpan": 1.5, "ATR_periyot": null}},
+      {"ad": "ADX", "parametreler": {"periyot": 14}},
+      {"ad": "EMA", "parametreler": {"periyot": 200}}
+    ],
+    "long_giris": [
+      "ADX 25'in altında ve fiyat 200 EMA'nın üzerinde",
+      "RSI(5) 30'un altında (aşırı satım)",
+      "Fiyat alt Keltner Kanalı'na dokunur veya altına iner",
+      "RSI aşırı satım bölgesini geçince (30'un üstüne çıkınca) uzun giriş"
+    ],
+    "short_giris": [
+      "ADX 25'in altında ve fiyat 200 EMA'nın altında",
+      "RSI(5) 70'in üstünde (aşırı alım)",
+      "Fiyat üst Keltner Kanalı'na dokunur",
+      "RSI aşırı alım bölgesini geçince (70'in altına inince) kısa giriş"
+    ],
+    "stop_loss": "Uzun: giriş mumunun altı. Kısa: kitapta stop kuralı yok.",
+    "kar_al": "Uzun: fiyat üst Keltner bandının zirvesine ulaşınca. Kısa: fiyat alt Keltner bandının altına ulaşınca.",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "ADX 25'in altında",
+      "200 EMA ile yön filtresi (uzun: üstte, kısa: altta)"
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": "Kitapta bu strateji için sayısal performans iddiası yok.",
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "RSI(5) eşikleri, KC (1,5 çarpan), 200 EMA ve ADX filtreleri ile giriş/çıkış ölçülebilir. Kısa taraf stopu yok ve ATR periyodu belirtilmemiş."
+    },
+    "belirsizlikler": [
+      "Kısa giriş için stop-loss kuralı yok",
+      "ADX<25 (yatay piyasa) ile 200 EMA üstü/altı (trend yönü) filtreleri birlikte kullanılıyor; birbiriyle çelişkili görünüyor, uygulama sırası belirtilmemiş",
+      "Keltner Kanalı ATR periyodu ve orta çizgi tipi belirtilmemiş",
+      "Zaman dilimi belirtilmemiş"
+    ],
+    "uyumluluk_notu": "1L3A için: 5dk/15dk uyarlanabilir; ATR tabanlı KC kripto, hisse ve emtiada da aynı mantıkla kullanılabilir; forex'te pip ölçeğine çevirmeye gerek yok. Hacim verisi gerekmez.",
+    "varyantlar": [
+      "Uzun ve kısa ayna versiyon (kısa stop eksik)"
+    ],
+    "anahtar_kelimeler": ["rsi-5", "keltner", "kc", "ema200", "adx", "asiri-satim", "asiri-alim", "atr", "ortalamaya-donus", "scalp"]
+  },
+  {
+    "kart_id": "scalp__rsi7-aralik__stevenson",
+    "ad": "RSI(7) Aralık (Range) Scalp",
+    "stil": "scalp",
+    "kaynak": {"pdf": "Yüksek_Kazanma_Oranı_ile_Ortalama_Dönüş_Scalping_Stratejileri_-_Max_Stevenson_64_sayfa.pdf", "sayfalar": [59, 60]},
+    "ozet": "ADX(14) 25'in altındayken, yatay destek ve direnç seviyeleri belirlenir. Fiyat desteğe yakınken RSI(7) 30'un üstüne çıkınca uzun, direnç yakınında RSI(7) 70'in altına inince kısa açılır. Stop seviyenin öte tarafına konur, çıkış RSI'ın karşı uca ulaşmasında veya fiyatın karşı seviyeye yaklaşmasında.",
+    "kategori": "ortalamaya_donus",
+    "piyasa_rejimi": "yatay",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {"islem": "belirtilmemiş", "ust_filtre": null},
+    "gostergeler": [
+      {"ad": "RSI", "parametreler": {"periyot": 7}},
+      {"ad": "ADX", "parametreler": {"periyot": 14}},
+      {"ad": "Yatay destek ve direnç", "parametreler": {}}
+    ],
+    "long_giris": [
+      "ADX 25'in altında (trend olmayan piyasa)",
+      "Fiyat yatay destek seviyesine yakın",
+      "RSI(7) 30'un üstüne çıkar (aşırı satımdan çıkış) → uzun giriş"
+    ],
+    "short_giris": [
+      "ADX 25'in altında (trend olmayan piyasa)",
+      "Fiyat yatay direnç seviyesine yakın",
+      "RSI(7) 70'in altına düşer (aşırı alımdan çıkış) → kısa giriş"
+    ],
+    "stop_loss": "Uzun: destek seviyesinin altı. Kısa: direnç seviyesinin üstü.",
+    "kar_al": "Uzun: RSI(7) 70'e ulaşınca veya fiyat direnç seviyesine yaklaşınca. Kısa: RSI(7) 30'a ulaşınca veya fiyat destek seviyesine yaklaşınca.",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "ADX 25'in altında (yatay piyasa teyidi)",
+      "Yatay destek ve direnç seviyesinin belirlenmiş olması (aralık teyidi)"
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": "Kitapta bu strateji için sayısal performans iddiası yok.",
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "RSI(7) eşikleri, ADX<25 ve stop/hedef kuralları ölçülebilir. Yatay destek/direnç seçimi (pivot, fraktal, çizgi) ve 'yakın' tanımı yok."
+    },
+    "belirsizlikler": [
+      "Yatay destek ve direnç nasıl seçilecek (pivot, fraktal, çizgi) belirtilmemiş",
+      "'Yakın' için sayısal eşik yok",
+      "Zaman dilimi belirtilmemiş"
+    ],
+    "uyumluluk_notu": "1L3A için: 5dk/15dk'da uygulanabilir; destek/direnç seçimi otomatikleştirilmeli. Hacim verisi gerekmez. Forex, kripto, hisse ve emtia için genel; test gerekir.",
+    "varyantlar": [
+      "Uzun ve kısa ayna versiyon"
+    ],
+    "anahtar_kelimeler": ["rsi-7", "adx", "yatay-destek-direnc", "aralik", "range", "asiri-satim", "asiri-alim", "ortalamaya-donus", "scalp"]
+  },
+  {
+    "kart_id": "scalp__vwhbb-wavetrend__stevenson",
+    "ad": "VWHBB + WaveTrend Ortalamaya Dönüş (500 EMA Trend Filtreli)",
+    "stil": "scalp",
+    "kaynak": {"pdf": "Yüksek_Kazanma_Oranı_ile_Ortalama_Dönüş_Scalping_Stratejileri_-_Max_Stevenson_64_sayfa.pdf", "sayfalar": [61, 62, 63]},
+    "ozet": "Fiyat 500 EMA'nın üzerindeyken VWHBB'nin kırmızı aşırı satım bölgesinde ve WaveTrend aşırı satımdan yukarı geçtiğinde uzun açılır; stop giriş mumunun altındadır. Fiyat VWHBB tepesine dokunursa veya WaveTrend aşağı geçerse uzun kapatılır. Kısa taraf 500 EMA altında, yeşil aşırı alım bölgesinde ve WaveTrend aşırı alımdan aşağı geçince açılır; stop giriş mumunun üstündedir.",
+    "kategori": "ortalamaya_donus",
+    "piyasa_rejimi": "yatay",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {"islem": "belirtilmemiş", "ust_filtre": null},
+    "gostergeler": [
+      {"ad": "500 EMA", "parametreler": {"periyot": 500}},
+      {"ad": "VWHBB (hacim ağırlıklı gövde Hull Bollinger)", "parametreler": {"sapma": 1.5, "not": "kitap ipucu: daha az yanlış sinyal için 1,5"}},
+      {"ad": "WaveTrend (TradingView, dalga trendi)", "parametreler": {"kanal_uzunlugu": 14, "ortalama_uzunlugu": 14}}
+    ],
+    "long_giris": [
+      "Fiyat 500 EMA'nın üzerinde",
+      "Fiyat VWHBB'de kırmızı aşırı satım bölgesinde",
+      "WaveTrend aşırı satım bölgesindeyken yukarı geçer → uzun giriş"
+    ],
+    "short_giris": [
+      "Fiyat 500 EMA'nın altında",
+      "Fiyat VWHBB'de yeşil aşırı alım bölgesinde",
+      "WaveTrend aşırı alım bölgesindeyken aşağı geçer → kısa giriş"
+    ],
+    "stop_loss": "Uzun: giriş mumunun altı. Kısa: giriş mumunun üstü.",
+    "kar_al": "Uzun: fiyat VWHBB tepesine dokunursa veya WaveTrend aşağı geçerse. Kısa: fiyat VWHBB dibine dokunursa veya WaveTrend yukarı geçerse.",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": ["500 EMA ile trend yönü (uzun: üstte, kısa: altta)"],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": "Kitapta bu strateji için sayısal performans iddiası yok.",
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Giriş, stop ve çıkış kuralları tam yazılmış (62. sayfa). Ancak VWHBB ve WaveTrend kapalı kaynaklı TradingView göstergeleri; bölge sınırları ve WT aşırı alım/satım eşikleri sayısal değil, hacim verisi gerekir."
+    },
+    "belirsizlikler": [
+      "'Aşırı satım/alım bölgesi' (VWHBB kırmızı/yeşil bölge) ve WaveTrend aşırı alım/satım eşikleri sayısal tanımlı değil",
+      "VWHBB ve WaveTrend formülleri kitapta yok; göstergenin yazarı peacefulLizard50262 (TradingView), formül kapalı olabilir",
+      "WT dönüşü ile giriş mumu arasındaki bar penceresi belirtilmemiş",
+      "Kitap bant dokunuşu için fitil mi kapanış mı kullanıldığını belirtmiyor"
+    ],
+    "uyumluluk_notu": "1L3A için: VWHBB hacim ağırlıklı olduğundan hacim verisi GEREKLİ. Forex'te tick hacmi varsayımı gerekir. Kural seti artık tam; ancak kapalı göstergeler (VWHBB, WaveTrend) açık formülle yeniden kurulmadan kodlanamaz.",
+    "varyantlar": [
+      "Sapma 1,5 (kitap ipucu) ile daha az yanlış sinyal"
+    ],
+    "anahtar_kelimeler": ["vwhbb", "hull", "wavetrend", "hacim-agirlikli", "bollinger", "asiri-satim", "500-ema", "ortalamaya-donus", "scalp"]
+  },
+  {
+    "kart_id": "scalp__fibonacci-bolge-donus__stevenson",
+    "ad": "Fibonacci Bölgesi Kanal Geri Dönüş Sinyali",
+    "stil": "scalp",
+    "kaynak": {"pdf": "Yüksek_Kazanma_Oranı_ile_Ortalama_Dönüş_Scalping_Stratejileri_-_Max_Stevenson_64_sayfa.pdf", "sayfalar": [36, 37]},
+    "ozet": "TradingView 'Fibonacci Bölgesi' kanal göstergesinde fiyat en alt Fibonacci bölgesine dokunduğunda alış, en üst bölgeye dokunduğunda satış sinyali verilir. Kitap yatay piyasada en iyi çalıştığını söylüyor.",
+    "kategori": "ortalamaya_donus",
+    "piyasa_rejimi": "yatay",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {"islem": "belirtilmemiş", "ust_filtre": null},
+    "gostergeler": [
+      {"ad": "Fibonacci Bölgesi (kanal)", "parametreler": {"periyot": null, "fib_oranlari": null}}
+    ],
+    "long_giris": [
+      "Fiyat Fibonacci bölgesinin dibine (en alt bölge) dokunur → alış sinyali"
+    ],
+    "short_giris": [
+      "Fiyat en üst Fibonacci bölgesine dokunur → satış sinyali"
+    ],
+    "stop_loss": null,
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": ["Yatay piyasada en iyi çalışır (kitap genel ifadesi; kural olarak sayısal filtre yok)"],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": "Kitapta bu gösterge için sayısal performans iddiası yok.",
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Giriş tetiği (alt/üst bölgeye dokunma) tarif ediliyor; kanal periyodu, Fibonacci oranları ve çıkış/stop kuralı yok. Kapalı kaynak gösterge."
+    },
+    "belirsizlikler": [
+      "Kanal periyodu ve Fibonacci oranları belirtilmemiş",
+      "Stop-loss ve take-profit kuralı yok ('belirlenebilir alanlar' diyor)",
+      "Göstergenin formülü kapalı olabilir (yazar eykpunter)",
+      "Yatay piyasa filtresi için sayısal eşik yok"
+    ],
+    "uyumluluk_notu": "1L3A için: kanal ve Fibonacci hesabı açık formülle yeniden kurulmadan kodlanamaz. Hacim gerekmez.",
+    "varyantlar": [],
+    "anahtar_kelimeler": ["fibonacci", "kanal", "donchian", "bolge", "asiri-satim", "asiri-alim", "yatay-piyasa", "kapali-gosterge", "scalp"]
+  },
+  {
+    "kart_id": "scalp__adil-deger-bantlari__stevenson",
+    "ad": "Adil Değer Bantları (3x Sapma) Ortalamaya Dönüş",
+    "stil": "scalp",
+    "kaynak": {"pdf": "Yüksek_Kazanma_Oranı_ile_Ortalama_Dönüş_Scalping_Stratejileri_-_Max_Stevenson_64_sayfa.pdf", "sayfalar": [42, 43]},
+    "ozet": "Quantifytools 'Adil Değer Bantları' göstergesinde fiyat 3x sapma bandına dokunduğunda ortalamaya dönüş sinyali verilir. Kitap en doğru sinyalin 3x bantta olduğunu söylüyor. Satış sinyali metninde 'alt 3x bandı' yazıyor; üst bant olması gerektiği varsayımı yapıldı.",
+    "kategori": "ortalamaya_donus",
+    "piyasa_rejimi": "herhangi",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {"islem": "belirtilmemiş", "ust_filtre": null},
+    "gostergeler": [
+      {"ad": "Adil Değer Bantları (quantifytools)", "parametreler": {"bant_sayisi": 3, "en_guclu_bant": "3x sapma"}}
+    ],
+    "long_giris": [
+      "Fiyat alt 3x sapma bandının bölgesine dokunur veya girer → alış sinyali"
+    ],
+    "short_giris": [
+      "Fiyat üst 3x sapma bandının bölgesine dokunur veya girer → satış sinyali (kitapta 'alt 3x' yazıyor; yazım hatası olarak düzeltildi, belirsizlikler'e bak)"
+    ],
+    "stop_loss": null,
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": "Kitapta bu gösterge için sayısal performans iddiası yok; 'daha az yanlış sinyal' ifadesi var.",
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Giriş tetiği (3x bant bölgesine değme) tarif ediliyor; bant hesabı kapalı algoritmaya dayanıyor; stop ve çıkış kuralı yok."
+    },
+    "belirsizlikler": [
+      "Satış sinyali için 'alt 3x sapma bandı' yazılmış; üst bant olması gerektiği varsayıldı",
+      "Bant hesabının algoritması kapalı kaynak; sapma hesabı belirtilmemiş",
+      "Stop-loss ve çıkış kuralı yok",
+      "Orta çizgi renk değişimi trend yönü olarak tarif edilmiş ama giriş/çıkışta kullanımı yok"
+    ],
+    "uyumluluk_notu": "1L3A için: bant mantığı standart sapmaya dayandığı için açık formülle yeniden kurulabilir; kapalı algoritma kullanılmamalı. Hacim gerekmez. Forex, kripto, hisse ve emtia için genel.",
+    "varyantlar": [
+      "1x ve 2x sapma bantlarında sinyal (kitap 'hepsi kullanılabilir' diyor, en doğru olan 3x)"
+    ],
+    "anahtar_kelimeler": ["adil-deger", "sapma-bandi", "3x-sapma", "ortalamaya-donus", "kapali-gosterge", "quantifytools", "scalp"]
+  }
+]

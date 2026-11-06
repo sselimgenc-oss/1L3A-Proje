@@ -1,0 +1,213 @@
+[
+  {
+    "kart_id": "scalp__heikin-ashi-renk-donusu__lama",
+    "ad": "Heikin-Ashi Mum Rengi Değişimi (1dk Trend Dönüşü)",
+    "stil": "scalp",
+    "kaynak": {"pdf": "E-mini_Dow_ve_Mini_DAX_için_Hızlı_Al-Sat_Scalping_Yöntemleri_-_Teva_Lama_78_sayfa.pdf", "sayfalar": [7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]},
+    "ozet": "1 dakikalık Heikin-Ashi mumlarında kırmızı mumdan sonra yeşil mum oluşunca (veya tersi) trend dönüşü kabul edilerek alım (veya satış) açılır. Pozisyon, ters renkli HA mumu oluşunca kapatılır. Piyasa düz ve düşük hacimliyse kullanılmaz.",
+    "kategori": "trend_takip",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "vadeli",
+    "zaman_dilimi": {"islem": "1m", "ust_filtre": null},
+    "gostergeler": [
+      {"ad": "Heikin-Ashi", "parametreler": {"formul": "HA_kapanis=(HA_acilis(n-1)+H+L+K)/4; HA_acilis=(HA_acilis(n-1)+HA_kapanis(n-1))/2"}}
+    ],
+    "long_giris": [
+      "1 dakikalık HA mum grafiğinde kırmızı bir HA mumu oluşur ve bunu yeşil bir HA mumu izler (renk değişimi).",
+      "Kırmızı mumun alt gölgesi (kuyruğu) önceki mumun alt gölgesinden daha düşük değildir (kitap: satıcı gücü zayıflıyor).",
+      "Giriş, yeşil HA mumunun oluşmasıyla piyasa fiyatından veya kısa süre sonrası alım emriyle yapılır."
+    ],
+    "short_giris": [
+      "1 dakikalık HA mum grafiğinde yeşil bir HA mumu oluşur ve bunu kırmızı bir HA mumu izler (renk değişimi).",
+      "Kitap, yeni kırmızı mumun satış için giriş noktası olarak da kullanılabileceğini belirtir.",
+      "Giriş, kırmızı HA mumunun oluşmasıyla yapılır."
+    ],
+    "stop_loss": "Dönüm noktasının (sinyal mumlarının) en yüksek fiyatının 3 puan üstü (short) veya en düşük fiyatının 3 puan altı (long). Giriş fiyatından en fazla 7 puan uzakta olmalı; aşıyorsa işleme girilmez.",
+    "kar_al": "Sabit hedef yok; ters renkli HA mumu oluşunca pozisyon kapatılır. Kitap örneklerinde 13 ila 26 puan kazançlar var (sayısal kural değil).",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Piyasa düz / düşük hacim / düşük volatilite ise kullanılmaz (s.16-17)",
+      "Açılıştan sonraki ilk 10-15 dakika kaçınılır (s.17, s.19)",
+      "Haber öncesi ve sonrası işlem yapılmaz (s.63-64)",
+      "Doji ve topaç (küçük gövde, uzun gölge) trend yavaşlaması olarak yorumlanır, tek başına giriş sinyali değildir (s.10-11)",
+      "Stop-loss sonrası tekrar giriş için yeni HA sinyali beklenir; kitap inatçılığa karşı uyarır (s.72)"
+    ],
+    "pozisyon_risk": "Kitap bu kart için lot sayısı vermez; 2 lot örneği pivot ve seviye bölümlerinde geçer (s.25). Her işlemde stop zorunlu.",
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "HA hesabı tamamen formülle tanımlı ve renk değişimi mekaniktir; stop ve max 7 puan kuralı sayısal. 'Doji / uzun gölge / kuyruk' koşulları ve 'düz piyasa' ayrımı yoruma açık."
+    },
+    "belirsizlikler": [
+      "Kitap s.15'te, kırmızı-yeşil değişimde hangi mumun giriş olduğunu tam netleştirmiyor (ilk işaret mi, onay mumu mu).",
+      "'Kırmızı mumun önceki mumdan daha düşük olmayan bir kuyruğu' ifadesi tam olarak ölçülemiyor; kuyruk karşılaştırma kuralı varsayım gerektiriyor.",
+      "Kitap 'düz / düşük hacim' ve 'yeterli aralık' eşiklerini sayısal vermiyor.",
+      "Kitap, HA çıkışı için 'bir sonraki trend tersine dönüşü' diyor; sabit kar hedefi yok (kitapta yok).",
+      "Pozisyon yönü 'trendle uyumlu' tutulacak mı yoksa her renk değişimi mi işlem açacak: s.16 trend yönünde işlem önerir, ancak açık kural yok.",
+      "Hacim verisi kitapta kullanılmıyor (yalnızca 'düşük hacim' gözlemi var)."
+    ],
+    "uyumluluk_notu": "1dk zaman dilimi, 1L3A için ≥5m altında. HA formülü her piyasada aynı; forex/kripto için uygulanabilir. Kitap vadeli endeksler (DAX, E-mini Dow) için yazılmış; pip ve seans bağımlılığı var (ilk 10 dk, 22:00 sonrası, haber takvimi). Hacim gerekmiyor ama düşük hacim filtresi hacim verisi istiyor.",
+    "varyantlar": [
+      "Ters yönde (short) renk değişimi",
+      "Trend yönünde alım: yükseliş trendinde yalnızca alım, düşüşte yalnızca satış (kitap s.16, s.68)",
+      "Açılış öncesi (ön piyasa) HA işlemi (s.66-67)"
+    ],
+    "anahtar_kelimeler": ["heikin-ashi", "ha-renk-degisimi", "1dk", "trend-donusu", "doji", "topac", "stop-3-puan", "max-7-puan", "vadeli", "dax", "e-mini-dow"]
+  },
+  {
+    "kart_id": "scalp__mini-aralik-5puan__lama",
+    "ad": "Mini Aralık Scalping (Yatay Piyasada 5 Puan)",
+    "stil": "scalp",
+    "kaynak": {"pdf": "E-mini_Dow_ve_Mini_DAX_için_Hızlı_Al-Sat_Scalping_Yöntemleri_-_Teva_Lama_78_sayfa.pdf", "sayfalar": [19, 20, 21]},
+    "ozet": "Piyasa trend göstermeyip yatay konsolidasyona girdiğinde, aralığın alt kenarına alım, üst kenarına satış limit emri konur. Her işlemde hedef 5 puandır. Stop, aralık kenarının 5 puan dışındadır.",
+    "kategori": "ortalamaya_donus",
+    "piyasa_rejimi": "yatay",
+    "orijinal_piyasa": "vadeli",
+    "zaman_dilimi": {"islem": "1m", "ust_filtre": null},
+    "gostergeler": [],
+    "long_giris": [
+      "Heikin-Ashi trend işlemi uygun değilken ve piyasa yatay konsolidasyona geçmişse işlem yapılır; kitap 15 dakika sonra trend devam etmiyorsa ve 10 dakika yatay teyidi beklenmesini önerir.",
+      "Aralığın alt kenarına (örnek: 12206) alım limit emri verilir."
+    ],
+    "short_giris": [
+      "Aralığın üst kenarına (örnek: 12221) satış limit emri verilir."
+    ],
+    "stop_loss": "Long: aralığın alt noktasının 5 puan altı. Short: aralığın üst noktasının 5 puan üstü.",
+    "kar_al": "Giriş fiyatından 5 puan. Aralığın karşı kenarına kadar beklenmez.",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Piyasa yatay konsolidasyonda olmalı; trend devam ederse kullanılmaz",
+      "Açılışın ilk 10-15 dakikası bekleme süresi (s.17, s.19)",
+      "Emirler önceden verilir; fiyat limite ulaşmadıysa fiyat kovalanmaz (s.20-21)",
+      "Düşük hacim ve sessiz piyasa aşamaları için uygun (s.19, s.60)"
+    ],
+    "pozisyon_risk": "Kitapta 5 puanlık hedef / 5 puan stop; pozisyon boyutu kitap tarafından sabitlenmemiş (2 lot örnek olarak geçer, s.20).",
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Giriş seviyeleri (aralık kenarları), hedef ve stop (5 puan) sayısal. Ancak aralığın nasıl tanımlanacağı (başlangıç saati, genişlik, '10 dakika yatay teyit') yoruma açık ve bu yüzden kodlaması zayıf."
+    },
+    "belirsizlikler": [
+      "Aralığın başlangıç ve bitiş zamanı kitapta tanımlanmamış ('15 dakika sonra', '10 dakika daha beklerdim').",
+      "Aralığın maksimum/minimum genişliği kitapta verilmemiş; örnek olarak 15 puan (12206-12221) geçiyor.",
+      "Yatay konsolidasyonun teyit kriteri yok (kitap yoruma bırakıyor).",
+      "Short tarafı için stop ve hedefin aynı mantıkla simetrik olduğu varsayıldı (kitap örneği yalnızca bir yönü detaylı verir, s.19-20).",
+      "Kitap, 5 puanlık aralık işlemleri için pozisyon büyüklüğü vermiyor."
+    ],
+    "uyumluluk_notu": "1dk zaman dilimi (1L3A ≥5m dışında). Aralık tanımı için zaman filtresi gerekir. Forex için pip cinsinden 5 puan eşdeğeri belirlenmeli (kitapta yok). Hacim verisi gerekmiyor.",
+    "varyantlar": [
+      "Alım ve satım limitleri aralığın kenarından bir iki puan önce konur (kitap cimri olmayı tercih eder, s.20)",
+      "Kitap bir yönde piyasa test edince aralığın karşı kenarı yerine kenara geri dönüşü hedefler (s.19)"
+    ],
+    "anahtar_kelimeler": ["mini-aralik", "yatay-konsolidasyon", "limit-emir", "5-puan", "1dk", "range-trading", "vadeli", "dax", "e-mini-dow"]
+  },
+  {
+    "kart_id": "scalp__pivot-noktasi__lama",
+    "ad": "Günlük Pivot Noktası Scalping (B Planı Buy/Sell Stop ile)",
+    "stil": "scalp",
+    "kaynak": {"pdf": "E-mini_Dow_ve_Mini_DAX_için_Hızlı_Al-Sat_Scalping_Yöntemleri_-_Teva_Lama_78_sayfa.pdf", "sayfalar": [22, 23, 24, 25, 26, 27]},
+    "ozet": "Önceki günün H, L, C değerlerinden hesaplanan günlük pivot noktası P'ye yakın yerlerde, P'nin 3 puan altına alım (veya üstüne satış) limit emri konur. Fiyat P'yi geçerse stop olur ve aynı seviyeye ters yönde buy/sell stop konularak B planı uygulanır.",
+    "kategori": "destek_direnc",
+    "piyasa_rejimi": "herhangi",
+    "orijinal_piyasa": "vadeli",
+    "zaman_dilimi": {"islem": "1m", "ust_filtre": "1D"},
+    "gostergeler": [
+      {"ad": "Pivot", "parametreler": {"P": "(Y+D+K)/3", "S1": "2P-Y", "S2": "P-(Y-D)", "R1": "2P-D", "R2": "P+(Y-D)", "not": "Y: onceki gun yuksek, D: onceki gun dusuk, K: onceki gun kapanis"}},
+      {"ad": "Heikin-Ashi", "parametreler": {"cikis": "renk degisimi"}}
+    ],
+    "long_giris": [
+      "Önceki gün verileriyle P (ve gerekirse S1, S2) hesaplanır.",
+      "Fiyat P'nin yaklaşık 3 puan altına gelince alım limit emri verilir (kitap: alım emri pivotun 2-3 puan altı; örnek 20911 / P=20913).",
+      "Alternatif (B planı): Fiyat P'yi aşağıdan geçip yukarı kırarsa, kısa stop olduktan sonra aynı seviyeye buy stop ile long açılır (kitap: 12247 buy stop, 12248 CFD spread için)."
+    ],
+    "short_giris": [
+      "Fiyat P'nin yaklaşık 3 puan üstüne gelince satış limit emri verilir.",
+      "Alternatif (B planı): Fiyat P'yi yukarıdan geçip aşağı kırarsa, kısa stop olduktan sonra aynı seviyeye sell stop ile short açılır."
+    ],
+    "stop_loss": "Long: giriş fiyatından 7 puan (pivotun yaklaşık 6-7 puan altı, kitap s.24). Short: kitap örneğinde satış 12243, stop 12247 (giriş fiyatından 4 puan, s.25). Genel kural: giriş fiyatından 7 puanı aşan stop kullanılmaz.",
+    "kar_al": "İlk %50 pozisyon 10 puanda kapatılır; kalan %50 Heikin-Ashi mum renk değişiminde kapatılır. İlk hedef vurulunca stop giriş fiyatına çekilir (break-even).",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Piyasa hacimli ve net trend olmayan dönemlerde pivot çalışmaz (s.23)",
+      "Emirler önceden verilir, alım emri için piyasanın bekle-kovala davranışı yapılmaz (s.23-24)",
+      "Buy stop / sell stop emri desteklenmeyen brokerda kullanılamaz (s.27)",
+      "CFD kullanılıyorsa spread farkı ve gerçek fiyat kaynağı kontrol edilir (s.25, s.55)"
+    ],
+    "pozisyon_risk": "Kitap 2 lot minimum (ilk %50 ve kalan) örneği verir (s.25).",
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Pivot formülleri tamamen açık ve hesaplanabilir; limit ve stop mesafeleri (3 ve 4-7 puan) sayısal; 10 puan hedef ve break-even net. Kırılımda B planı tetiklemesi ve HA renk değişimi çıkışı biraz yorum gerektirir."
+    },
+    "belirsizlikler": [
+      "Kitap 'pivot noktasına yaklaşmak' için bir tolerans değeri veriyor (yaklaşık 3 puan), fakat 'yaklaşık' ifadesi yorum payı bırakıyor.",
+      "B planında buy/sell stop'un tam fiyatı (P'nin üstü/altı kaç puan) kitapta tek örnekle gösteriliyor (12247 / 12248); genel kural yok.",
+      "Kitap S1/S2/R1/R2 seviyelerinin kullanımını 'belirli bir çalışma' olarak tanımlamıyor; yalnızca referans olarak anlatıyor (s.22-23).",
+      "Pivot formülleri 'bir önceki işlem günü' verisine dayanır; hafta sonu/tatil geçişleri kitapta açıklanmıyor.",
+      "Kitapta 'yanılıyorsanız B planı' için kaç puanlık kırılımın tetikleyici olduğu net değil."
+    ],
+    "uyumluluk_notu": "Günlük pivot formülleri forex ve kripto için de hesaplanabilir (kitap: önceki gün verisi). 1dk işlem, 1L3A'nın 5dk altında. Kitap vadeli endeks (DAX/Dow) için yazılmış; forex'te 3-7 puan karşılığı pip cinsinden yeniden tanımlanmalı. Hacim gerekmiyor (kitap hacim için yalnızca yorum yapıyor).",
+    "varyantlar": [
+      "Pivot yerine S1/R1 seviyelerinde aynı mantıkla scalping (kitap seviyeleri referans olarak sayar)",
+      "Pivotta toparlanma (long) ve pivot kırılımı (B planı long) iki ayrı kurulum olarak kullanılabilir"
+    ],
+    "anahtar_kelimeler": ["pivot", "p-noktasi", "s1", "r1", "limit-emir", "buy-stop", "b-plani", "break-even", "10-puan", "vadeli", "dax", "e-mini-dow"]
+  },
+  {
+    "kart_id": "scalp__50-100-seviye__lama",
+    "ad": "50/100 Puan Seviyelerinde Scalping (Destek/Direnç Testi)",
+    "stil": "scalp",
+    "kaynak": {"pdf": "E-mini_Dow_ve_Mini_DAX_için_Hızlı_Al-Sat_Scalping_Yöntemleri_-_Teva_Lama_78_sayfa.pdf", "sayfalar": [35, 36, 37, 38, 39, 40, 41, 42, 43, 44]},
+    "ozet": "Endeksin 50 ve 100 puanlık yuvarlak seviyeleri (ve son iki günde test edilmiş seviyeler) önceden belirlenir. Seviyeye yaklaşılınca seviyenin yaklaşık 5 puan ötesine limit emri ve 7 puan daha uzağa stop konur. İlk %50 10 puanda kapatılır, kalan HA renk değişiminde kapatılır.",
+    "kategori": "destek_direnc",
+    "piyasa_rejimi": "yatay",
+    "orijinal_piyasa": "vadeli",
+    "zaman_dilimi": {"islem": "1m", "ust_filtre": "1h"},
+    "gostergeler": [
+      {"ad": "Yuvarlak seviye", "parametreler": {"adim_puan": [50, 100]}},
+      {"ad": "Heikin-Ashi", "parametreler": {"cikis": "renk degisimi"}}
+    ],
+    "long_giris": [
+      "Saatlik grafikte son iki günde test edilmiş (tepki vermiş) destek veya 50/100 puanlık yuvarlak seviye belirlenir.",
+      "Fiyat seviyeye yaklaşırken, seviyenin yaklaşık 5 puan üstüne (kitap örneği: 21350 seviyesi için 21345 alım emri) limit emri verilir.",
+      "Stop, seviyenin 12 puan altında (kitap: 5 + 7 puan) konur; alım emri önceden verilebilir."
+    ],
+    "short_giris": [
+      "Direnç seviyesinin yaklaşık 5 puan altına satış limit emri verilir (kitap bu yönü açık yazmaz, simetrik varsayım).",
+      "Stop, seviyenin 12 puan üstünde konur."
+    ],
+    "stop_loss": "Seviyenin 5 puan ötesinden giriş yapılır ve stop 7 puan daha ötede konur (seviyeden toplam 12 puan). Giriş fiyatından 7 puan kuralı da geçerlidir.",
+    "kar_al": "İlk %50 pozisyonda 10 puanda kapatılır. Kalan %50 Heikin-Ashi renk değişiminde kapatılır (örnek: 21345'ten alım, 21358'de satış).",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Sert düzeltme ve yüksek volatilitede kullanılmaz (s.43-44)",
+      "Seviye önceki günlerde test edilmemişse, fiyatın seviyeye gelmesi ve alanı test etmesi beklenebilir (s.44)",
+      "Piyasa seviyeyi hızla geçerse stop'a güvenilir, seviye kırılınca sabit fiyat beklenmez (s.37, s.41)",
+      "Boşluk (gap) örneği (s.38-40): piyasa açılışta boşlukla açılıyorsa, boşluk kapanışı hedefiyle 2 lot ve 10 puan ilk hedef kullanılabilir (kitap bunu bu kartın varyantı olarak gösterir)"
+    ],
+    "pozisyon_risk": "Kitap 2 lot (ilk %50 + kalan %50) örneği verir (s.39, s.41).",
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Yuvarlak seviyeler, giriş mesafesi (5 puan), stop (7 puan), hedef (10 puan) sayısal. Seviye seçimi 'son iki gün test edilmiş' ve 'saatlik grafik' gibi yoruma açık kısımlar içeriyor."
+    },
+    "belirsizlikler": [
+      "Kitap, satış tarafı (direnç) için 5/7 puan kuralını açık yazmıyor; simetrik varsayım yapıldı.",
+      "'Son iki günde meydan okunan seviye' tanımı için sayısal ölçüt yok; kitap 'hafızası iyi piyasa' diyor.",
+      "Piyasanın seviyeyi 'geçmesi' ile 'tepki vermesi' ayrımı için kriter yok (kitap yoruma bırakıyor, s.36-37).",
+      "Boşluk kapanış varyantında 'boşluk' için minimum büyüklük verilmiyor; vadeli-CFD fiyat farkı uyarısı var (s.38).",
+      "Kitap 50/100 dışında yuvarlak seviye (ör. 25, 200) kullanılacak mı konusunda açıklama yapmıyor."
+    ],
+    "uyumluluk_notu": "50/100 puanlık seviyeler endeks puanına özgüdür. 1L3A için forex'te karşılığı yuvarlak fiyat (ör. 0,0050 veya 50 pip) olarak tanımlanmalı (kitapta yok). 1dk ve 1sa kullanıyor; 1L3A ≥5m için 5dk üstü uyarlanabilir. Hacim gerekmiyor.",
+    "varyantlar": [
+      "Boşluk kapanış varyantı (s.38-40, 21400 örneği)",
+      "Ön piyasa açılışta seviye testi (s.66-67, kitapta HA ile birleşik)",
+      "Seviye stop'u 7 puanlık kural ile birlikte; 'hızlı geçiş' durumunda stop'a güven"
+    ],
+    "anahtar_kelimeler": ["50-100-seviye", "yuvarlak-seviye", "destek-direnc", "limit-emir", "5-puan", "7-puan-stop", "10-puan", "heikin-ashi", "gap", "vadeli", "dax", "e-mini-dow"]
+  }
+]

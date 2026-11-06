@@ -1,0 +1,109 @@
+[
+  {
+    "kart_id": "scalp__ak47-seviye-testi__vezi",
+    "ad": "AK 0.47 Seviye Testi (15dk ve 1sa, 3 Vektör Sonrası Dip/Tepe Sıçraması)",
+    "stil": "scalp",
+    "kaynak": {"pdf": "AK47_Scalping_Stratejisi_-_Türkçe_ve_İngilizce_-_Siya_Vezi_26_sayfa.pdf", "sayfalar": [7, 8, 9, 10, 11]},
+    "ozet": "Fiyat 3 vektörlük (itki ve geri çekilme) bir düşüş hareketi yaptıktan sonra bir dip seviyesini test edip sıçradığında AL; simetrik olarak 3 vektörlük yükseliş sonrası bir tepe seviyesini test edip reddettiğinde SAT. Kitapta en güvenilir dip, önceki günün dip seviyesinin altındaki dip; en güvenilir tepe, önceki günün tepesinin üstündeki tepe olarak tanımlanır.",
+    "kategori": "destek_direnc",
+    "piyasa_rejimi": "herhangi",
+    "orijinal_piyasa": "forex",
+    "zaman_dilimi": {"islem": "15m", "ust_filtre": "1h"},
+    "gostergeler": [
+      {"ad": "Önceki gün yüksek/düşük", "parametreler": {}},
+      {"ad": "Destek/direnç (arz-talep yapısı)", "parametreler": {}}
+    ],
+    "long_giris": [
+      "Fiyat, once 3 vektorlu (itki + geri cekilme) asagi hareket yapar",
+      "Fiyat belirli bir dip seviyesini test eder ve bu seviyeden sicrar (dip onceki gun dibinin altindaysa daha guvenilir)",
+      "Sicramada hemen AL"
+    ],
+    "short_giris": [
+      "Fiyat, once 3 vektorlu (itki + geri cekilme) yukari hareket yapar",
+      "Fiyat belirli bir tepe seviyesini test eder ve bu seviyeden geri doner (tepe onceki gun tepesinin ustundeyse daha guvenilir)",
+      "Geri donusle hemen SAT"
+    ],
+    "stop_loss": "Kitap ornegine gore: giristen 30 pipten fazla ters yonde hareket olursa islemi kapat ve zarari kabul et (sabit ust sinir; yapisal stop tanimlanmamis)",
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Asya seansinda piyasa yatay (aralikli) iken kitap, gun ici onceki gun tepe/dip kirilimi olasiligini dusuk verir (%80 iddiasi, kaynaksiz)",
+      "1 saatlik grafikte hem guncel hem onceki gun tepe/dip seviyeleri birlikte kullanilir",
+      "15 dakikalik grafikte yalnizca guncel tepe/dip dikkate alinir"
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": "Yazar: seviyede net bir reddetme tek pozisyonda yaklasik 80-100 pip kazandirabilir (s.11; istatistik verilmemis).",
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Dip/tepe testi ve '3 vektör' itki-geri çekilme tanımı yoruma açık; test ve sıçrama onayının ne olduğu belirtilmemiş. Önceki gün seviyeleri nicel olduğu için kaba bir yaklaşımla kodlanabilir."
+    },
+    "belirsizlikler": [
+      "'3 vektör (itki ve geri çekilme)' hareketinin nasıl sayılacağı ve asgari büyüklüğü tanımlı değil",
+      "'Test' ve 'sıçrama' için onay mumu/yapısı belirtilmemiş",
+      "Giriş fiyatı (market veya limit) belirtilmemiş; 'hemen' ifadesi kullanılmış",
+      "Kâr al hedefi yok; 80-100 pip ifadesi örnek/iddia, kural değil",
+      "Stop: sabit 30 pip üst sınır; yapısal stop yok",
+      "Asya seansı ve %80 kırılamama istatistiği kaynaksız",
+      "Kitabın kuralları görsel örneklere (s.8-10, 22-24) dayanıyor; grafikler metinde yok",
+      "Yazar adı: Siya Vezi"
+    ],
+    "uyumluluk_notu": "15dk ve 1sa hedefi ≥5m ile uyumlu. Forex'e özgü: pip ölçüsü ve Asya seansı. Önceki gün tepe/dip tanımı tüm piyasalarda uygulanabilir ancak gün sınırı (kripto 7/24 için UTC gün sonu vb.) belirlenmeli. Hacim gerekmiyor.",
+    "varyantlar": [
+      "15dk: yalnızca güncel tepe/dip; en güvenilir seviye önceki günün dibinin altı / tepesinin üstü",
+      "1sa: güncel veya önceki gün tepe/dipinde test (kitap fark etmez diyor)"
+    ],
+    "anahtar_kelimeler": ["seviye-testi", "3-vektor", "itki-geri-cekilme", "onceki-gun-yuksek-dusuk", "15dk", "1sa", "destek-direnc", "arz-talep", "forex", "asya-seansi", "vezi"]
+  },
+  {
+    "kart_id": "scalp__fitil-reddi-seviye__vezi",
+    "ad": "Seviyede Fitil Reddi (Rejeksiyon Mumu)",
+    "stil": "scalp",
+    "kaynak": {"pdf": "AK47_Scalping_Stratejisi_-_Türkçe_ve_İngilizce_-_Siya_Vezi_26_sayfa.pdf", "sayfalar": [11]},
+    "ozet": "Fiyat tepe veya dip seviyesine ulaştığında, mum üst fitilli ve alt fitilsiz ise ayı, alt fitilli ve üst fitilsiz ise boğa sinyali kabul edilir ve seviyeden ters yönde işlem açılır. Kitap, net bir reddetmenin tek pozisyonda yaklaşık 80-100 pip kazandırabileceğini belirtir.",
+    "kategori": "destek_direnc",
+    "piyasa_rejimi": "yatay",
+    "orijinal_piyasa": "forex",
+    "zaman_dilimi": {"islem": "belirtilmemiş (kitap 15dk/1sa seviyelerinde)", "ust_filtre": null},
+    "gostergeler": [
+      {"ad": "Mum fitili (iğne) yapısı", "parametreler": {}},
+      {"ad": "Önceki gün yüksek/düşük", "parametreler": {}}
+    ],
+    "long_giris": [
+      "Fiyat bir dip seviyesine (önceki gün dibi veya güncel dip) gelir",
+      "Mumun alt fitili var, üst fitili yok (boğa sinyali)",
+      "Sinyal mumundan sonra AL"
+    ],
+    "short_giris": [
+      "Fiyat bir tepe seviyesine (önceki gün tepesi veya güncel tepe) gelir",
+      "Mumun üst fitili var, alt fitili yok (ayı sinyali)",
+      "Sinyal mumundan sonra SAT"
+    ],
+    "stop_loss": "Kitap: giriş fiyatından 30 pipten fazla geri çekilme olursa işlemi kapat (sabit üst sınır)",
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Asya seansında piyasa aralıklı (ranging) iken daha geçerli (kitap: gün içi önceki gün tepe/dip kırılımı %80 başarısız, kaynaksız)"
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": "Yazar: net bir seviye reddi tek pozisyonda yaklaşık 80-100 pip kazandırabilir (s.11; istatistik yok).",
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "'Belirgin fitil' ve 'fitilsiz' ifadeleri nicel değil; seviye tanımı ile birlikte kaba bir eşikle kodlanabilir."
+    },
+    "belirsizlikler": [
+      "Fitil uzunluğu için minimum oran (gövde/fitil) tanımlı değil",
+      "Onay mumunun kapanışı mı yoksa tik bazlı mı olduğu belirtilmemiş",
+      "Stop 30 pip üst sınır; yapısal stop yok; kâr hedefi yok",
+      "Asya seansı filtresi ve %80 istatistiği kaynaksız",
+      "Kitapta seviye reddi tek bir örnek grafikle gösteriliyor"
+    ],
+    "uyumluluk_notu": "Mum yapısı her zaman diliminde geçerli, ≥5m ile uyumlu. Forex'e özgü: Asya seansı filtresi. Hacim gerekmiyor. Kripto/hisse/emtia'da seviye ve seans tanımı yeniden yapılmalı.",
+    "varyantlar": [
+      "Asya seansında yatay piyasada tepe/dip reddi",
+      "Önceki gün tepe/dip seviyesinde reddetme"
+    ],
+    "anahtar_kelimeler": ["fitil", "rejeksiyon", "mum-formasyonu", "seviye-reddi", "onceki-gun-yuksek-dusuk", "asya-seansi", "forex", "vezi"]
+  }
+]

@@ -1,0 +1,484 @@
+[
+  {
+    "kart_id": "swing__sloth-psar-ema-roc__kratter",
+    "ad": "Sloth 2.0 Trend Geri Çekilme (PSAR, EMA, Stokastik, ROC)",
+    "stil": "swing",
+    "kaynak": {"pdf": "Yeni_Başlayanlar_için_Swing_Trading_Stratejileri_-_Andrew_David_Kratter_103_sayfa.pdf", "sayfalar": [61, 62, 63, 64, 65, 66, 70, 71]},
+    "ozet": "Trend yönünde EMA144 bölgesine geri çekilen fiyatta, Parabolik SAR'ın yön değiştirmesi, stokastik çaprazı ve ROC(13)'ün EMA(8)'i kesip sıfırın doğru tarafında olmasıyla işlem açılır. Kitap bu kurulumu her piyasa ve zaman diliminde kullanılabilen 'bukalemun' strateji olarak sunar.",
+    "kategori": "trend_takip",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "forex",
+    "zaman_dilimi": {"islem": "M30 (kitap örneği; D1 analizi de anlatılıyor)", "ust_filtre": "H4 ve H1 (kitap: işlem zaman diliminden daha yüksek zaman diliminin trendi takip edilmeli)"},
+    "gostergeler": [
+      {"ad": "Parabolik SAR", "parametreler": {"ayar": "0.13 - 0.13 (kitapta adım ve maksimum ayrımı belirsiz)"}},
+      {"ad": "EMA", "parametreler": {"periyot": 21}},
+      {"ad": "EMA", "parametreler": {"periyot": 55}},
+      {"ad": "EMA", "parametreler": {"periyot": 144}},
+      {"ad": "Stokastik", "parametreler": {"ayar": "13-8-5 (sıra ve anlamı kitapta açık değil)"}},
+      {"ad": "ROC", "parametreler": {"periyot": 13}},
+      {"ad": "EMA (ROC üzerinde)", "parametreler": {"periyot": 8}}
+    ],
+    "long_giris": [
+      "EMA21 > EMA55 (yükseliş trendi; kitap 'EMA21 ve EMA55 mevcut eğilimi takip eder' diyor, yön koşulu varsayımdır)",
+      "Fiyat EMA55 ile EMA21 arasındaki geri çekilme bölgesine girer ve EMA144'e dokunur",
+      "Parabolik SAR fiyatın altındadır (uzun konum)",
+      "Stokastik yukarı yönde çaprazlanır",
+      "ROC(13), EMA(8)'i yukarı keser ve 0'ın üzerindedir"
+    ],
+    "short_giris": [
+      "EMA21 < EMA55 (düşüş trendi; varsayım)",
+      "Fiyat EMA55 ile EMA21 arasındaki geri çekilme bölgesine girer ve EMA144'e dokunur",
+      "Parabolik SAR fiyatın üstündedir (kısa konum)",
+      "Stokastik aşağı yönde çaprazlanır",
+      "ROC(13), EMA(8)'i aşağı keser ve 0'ın altındadır (kitapta s.64 örneği)"
+    ],
+    "stop_loss": "Parabolik SAR seviyesi. Kitapta stop, işlemden sonra her mumda SAR değerine manuel olarak çekilir (s.66-67).",
+    "kar_al": "Kesin kural yok. Kitap, ROC'nin ters yönde çaprazını 'olası çıkış' olarak gösterir (s.70-71). Sabit hedef verilmemiş.",
+    "iz_suren_stop": "Parabolik SAR (stop_loss ile aynı)",
+    "zaman_cikisi": null,
+    "filtreler": ["Üst zaman dilimi (H4/H1) trendi ile uyum", "Fiyat hareketi sinyali (kitapta tanımsız)", "Sıkışıklık ve ters yönde baskı olmaması (kitapta ölçülmüyor)"],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": "Kitap seçilmiş örnek işlemler verir: SP500 M30 2 emir +251,8 pip; SP500 M5 1 emir +68,9 pip; GER30 M15 +81,7 pip; SP500 M5 2 emir +191,8 pip. İstatistik (kazanma oranı) verilmemiş.",
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "EMA, SAR, stokastik ve ROC koşulları ölçülebilir. Ancak 'fiyat hareketi sinyali', 'sıkışıklık yok' ve geri çekilme toleransı tanımsız; çıkış kuralı kesin değil. Küçük varsayımlarla kurala dökülebilir."
+    },
+    "belirsizlikler": [
+      "Parabolik SAR parametreleri '0.13 - 0.13' olarak yazılmış; adım ve maksimum ayrımı açık değil",
+      "Stokastik '13.8.5' ayarında parametrelerin sırası belirsiz (varsayım: K=13, D=8, yavaşlama=5)",
+      "EMA21/EMA55 yön koşulu kitapta açıkça yazılı değil; geri çekilme tanımından çıkarıldı",
+      "Geri çekilmenin EMA144'e 'dokunma' toleransı tanımsız",
+      "Kitap 'fiyat hareketi sinyali bekliyoruz' diyor ama hangi mum/desenin sinyal sayılacağı yok",
+      "Kesin çıkış kuralı yok: ROC çaprazı olası çıkış, SAR stop; kitap bunları kesin kural olarak vermiyor",
+      "Sloth 3.0 'yüksek döngü/düşük döngü' ve 9 göstergeden 6'sını kullanır deniyor ama ayrıntı verilmemiş; kart olarak alınmadı"
+    ],
+    "uyumluluk_notu": "Evet, ≥5m'ye uyarlanabilir: kitapta M5, M15 ve M30 örnekleri var. Hacim verisi gerekmiyor (SAR, EMA, stokastik, ROC fiyat tabanlı). Kitap FXCM ayarlarıyla ve pip cinsinden forex örnekleriyle yazılmış; ancak endeks CFD örnekleri de (SP500, GER30) var. Kripto, ABD hisse ve emtiaya fiyat tabanlı olarak uyarlanabilir.",
+    "varyantlar": [
+      "Sloth 3.0: daha yüksek döngü/düşük döngü kavramı ve 9 göstergeden 6'sı (ayrıntı verilmemiş)",
+      "Stokastik ayrışma ile giriş (s.65): çift tepede fiyat-stokastik ayrışması; fiyat EMA21 altına inebilir, SAR fiyatın üstünde, ROC EMA8'i keser"
+    ],
+    "anahtar_kelimeler": ["parabolik-sar", "ema21", "ema55", "ema144", "stokastik", "roc", "geri-cekilme", "trend-takibi", "sloth", "m30", "forex"]
+  },
+  {
+    "kart_id": "swing__ema50-geri-cekilme-red__kratter",
+    "ad": "50 EMA Geri Çekilme ve Reddetme Mumu (Dalgayı Yakalama)",
+    "stil": "swing",
+    "kaynak": {"pdf": "Yeni_Başlayanlar_için_Swing_Trading_Stratejileri_-_Andrew_David_Kratter_103_sayfa.pdf", "sayfalar": [19, 20, 35, 36, 83, 84]},
+    "ozet": "Yükseliş trendinde fiyat 50 periyotluk EMA bölgesine geri çekilip çekiç veya boğa yutma gibi bir reddetme mumu oluşturduğunda long açılır. Çıkış, bir sonraki swing high'a yaklaşırken, zirvenin hemen öncesinde yapılır.",
+    "kategori": "trend_takip",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {"islem": "D1", "ust_filtre": "W1 (haftalık trend aynı yönde olmalı; kitap haftalık ve aylık uyumu öneriyor)"},
+    "gostergeler": [
+      {"ad": "EMA", "parametreler": {"periyot": 50}},
+      {"ad": "MA", "parametreler": {"periyot": 200, "not": "uzun dönem trend filtresi; tip kitapta belirtilmemiş"}}
+    ],
+    "long_giris": [
+      "Trend yukarı: fiyat 200 periyotluk MA'nın üzerinde",
+      "Haftalık zaman dilimi yukarı yönlü (kitap p.16: haftalık ve günlük aynı yönde ise sadece uzun işlem)",
+      "Fiyat 50 EMA bölgesine geri çekilir ('değer alanı')",
+      "Reddetme mumu oluşur: çekiç veya boğa yutma (s.35)"
+    ],
+    "short_giris": [],
+    "stop_loss": "Son swing low'un altında, kitapta miktarı belirtilmeyen bir tampon ile (s.84: swing low'dan 'sadece bir mesafede bir tampon')",
+    "kar_al": "Sabit hedef yok. Kitap, çıkışı bir sonraki swing high'ın hemen öncesi olarak tarif eder (s.36).",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": ["Fiyat 200 MA üstünde", "Haftalık trend uyumu", "Reddetme mumu şartı"],
+    "pozisyon_risk": "Kitap genel önerisi: her işlemde hesap bakiyesinin %2'sinden az, hatta %1 veya daha azı (s.60)",
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Trend filtresi (MA200), 50 EMA temas ve reddetme mumu (çekiç, boğa yutma) ölçülebilir. Tampon miktarı, temas toleransı ve çıkış noktası ('swing high öncesi') yoruma açık."
+    },
+    "belirsizlikler": [
+      "50 ve 200 MA'nın tipi (basit mi üstel mi) kitapta açık değil; s.36'da EMA50, s.78 ve s.83'te MA kullanılıyor",
+      "'Değer alanı' ve 50 EMA'ya dokunma toleransı tanımsız",
+      "Stop tamponunun miktarı belirtilmemiş",
+      "Çıkış 'swing high öncesi' ölçülebilir değil",
+      "Kısa işlem kuralı yazılı değil (kitap sadece uzun versiyonu veriyor)",
+      "Kitap 'çekiç' ve 'boğa yutma' mum tanımlarını vermiyor; standart tanım varsayıldı",
+      "Çıkış için 'piyasa tersine dönme belirtisi' (s.84) ölçülebilir bir kurala dönüştürülmedi"
+    ],
+    "uyumluluk_notu": "Kitap D1 ve W1 için yazılmış; ≥5m'ye aynı mantık uyarlanabilir ama kitap bunu anlatmıyor. Forex'e özgü değil (kitap forex ve hisse senedi). Hacim gerekmiyor. Kripto, ABD hisse, emtia ve endeksler için fiyat tabanlı olarak uygulanabilir.",
+    "varyantlar": [
+      "Karşıt eğilim stratejisi (s.83-84): aynı kurulum, 50MA 'alan' olarak tanımlanır, trend 200MA ile belirlenir",
+      "Alt zaman dilimi yapı kırılımı ile giriş (s.83): geri çekilmenin bittiği, en az bir saatlik zaman diliminde yüksek dip/yüksek tepe oluşumu"
+    ],
+    "anahtar_kelimeler": ["ema50", "ma200", "geri-cekilme", "reddetme-mumu", "cekic", "boga-yutma", "swing-low", "swing-high", "trend-takibi", "dalgayi-yakala"]
+  },
+  {
+    "kart_id": "swing__kutu-destekten-alim__kratter",
+    "ad": "Kutu (Aralık) Stratejisi: Destekten Alım, Direnç Hedefi",
+    "stil": "swing",
+    "kaynak": {"pdf": "Yeni_Başlayanlar_için_Swing_Trading_Stratejileri_-_Andrew_David_Kratter_103_sayfa.pdf", "sayfalar": [19, 35]},
+    "ozet": "Fiyat yatay bir aralıkta (kutu) iken destek bölgesine gelir, önceki dipleri hafifçe geçip reddedilirse long açılır. Stop önceki dibin biraz altına konur. Kar, karşı baskı noktasında (direnç ya da swing high yakını) alınır.",
+    "kategori": "destek_direnc",
+    "piyasa_rejimi": "yatay",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {"islem": "belirtilmemiş (kitap günlük seviyeleri ve haftalık odağı anlatıyor)", "ust_filtre": null},
+    "gostergeler": [],
+    "long_giris": [
+      "Piyasa yatay bir aralıkta (kutu) hareket ediyor; üst ve alt sınır belirlenmiş",
+      "Fiyat destek / değer alanına gelir ve önceki düşükleri biraz geçer",
+      "Fiyat bu düşüklerin altında kalmadan reddedilir; reddin ardından long"
+    ],
+    "short_giris": [],
+    "stop_loss": "Önceki düşüklerin biraz altında (tampon; boyut tanımsız)",
+    "kar_al": "Karşı baskı noktasında: direnç veya swing high yakını (s.35: 'alıcı karşıt baskı noktasında karını alır')",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": ["Yatay piyasa tespiti", "Destek bölgesinin haftalık seviyelerle teyidi (s.16)"],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Kutu sınırı, destek bölgesi, 'biraz' tampon ve 'reddetme' yorumu öznel. Kaba bir yaklaşımla kodlanabilir."
+    },
+    "belirsizlikler": [
+      "Kutunun tespit kuralı (minimum süre, dokunma sayısı) yok",
+      "Destek alanı ve 'dokunma' tanımı yok",
+      "Stop tamponunun büyüklüğü belirtilmemiş",
+      "Kar hedefi tam fiyat değil, 'karşı baskı noktası'",
+      "Kitap kısa işlem versiyonu vermiyor"
+    ],
+    "uyumluluk_notu": "Yatay piyasa için tasarlanmış. Fiyat tabanlı, hacim gerekmiyor. Herhangi bir zaman diliminde ve varlıkta uygulanabilir; kitap günlük ve haftalık seviyeleri kullanır.",
+    "varyantlar": [],
+    "anahtar_kelimeler": ["kutu", "aralik", "destek", "direnc", "yatay-piyasa", "tampon"]
+  },
+  {
+    "kart_id": "swing__trend-kanali-kanallama__kratter",
+    "ad": "Trend Kanalı Kanallama: Alt Çizgide Alım, Üst Çizgide Satım",
+    "stil": "swing",
+    "kaynak": {"pdf": "Yeni_Başlayanlar_için_Swing_Trading_Stratejileri_-_Andrew_David_Kratter_103_sayfa.pdf", "sayfalar": [77]},
+    "ozet": "Paralel iki trend çizgisinden oluşan kanalda, fiyat üst kenara geldiğinde satış, alt trend çizgisine geldiğinde alış yapılır. Kitap bunu 'düşüş kanalı' örneğiyle anlatır.",
+    "kategori": "destek_direnc",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {"islem": "belirtilmemiş", "ust_filtre": null},
+    "gostergeler": [],
+    "long_giris": ["Fiyat kanalın alt trend çizgisine (destek) gelir; kitap: 'alt trend çizgisinde satın alma'"],
+    "short_giris": ["Fiyat kanalın üst kenarına (direnç) gelir; kitap: 'çizginin en üst kenarında satış'"],
+    "stop_loss": null,
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": ["Kanalın en az iki tepe ve iki dip ile çizilmiş olması (s.91)"],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": "Kitap: 'en iyi stratejilerden biri olduğu kanıtlanmış' diyor; kanıt ya da istatistik verilmemiş.",
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Kanal çizgileri öznel çizilir. Giriş noktaları (üst/alt çizgiye dokunma) ölçülebilir, ancak stop, kar alma ve kanal yönüne göre işlem yönü tanımlı değil."
+    },
+    "belirsizlikler": [
+      "Kanal çizgilerinin çizimi (en az iki tepe ve iki dip) öznel",
+      "Kitap düşüş kanalı için yazıyor; yükseliş kanalında alış-satış yönünün nasıl olacağı belirtilmemiş",
+      "Stop-loss ve kar alma kuralı yok",
+      "Kitap, kanalın mükemmel olmadığını ve dinamik destek/direncin kırılabileceğini de belirtiyor; kırılma durumunda ne yapılacağı yazılmamış"
+    ],
+    "uyumluluk_notu": "Fiyat tabanlı, hacim gerekmiyor. ≥5m'ye uyarlanabilir. Forex'e özgü değil.",
+    "varyantlar": ["Kanal yerine Bollinger bantları ile aynı mantık (s.80): bantlar direnç/destek olarak kullanılır (kural tanımlanmamış)"],
+    "anahtar_kelimeler": ["kanal", "trend-cizgisi", "destek", "direnc", "alt-cizgi", "ust-cizgi", "kanallama"]
+  },
+  {
+    "kart_id": "swing__gimmee-bar-bollinger__kratter",
+    "ad": "Gimmee Bar: Bollinger Alt Bant Dokunuşu ve ADX Yan Piyasa Filtresi",
+    "stil": "swing",
+    "kaynak": {"pdf": "Yeni_Başlayanlar_için_Swing_Trading_Stratejileri_-_Andrew_David_Kratter_103_sayfa.pdf", "sayfalar": [99, 100]},
+    "ozet": "ADX yan piyasa hareketini gösterirken fiyat alt Bollinger bandına dokunur ve önceki başlangıç seviyesinden daha yüksekte kapanan bir mum (Gimmee çubuğu) oluşur. Bu mumun hemen üzerinden long açılır. Kitap bunun ters versiyonunu (üst bant, aşağı Gimmee çubuğu, satış) da anlatır.",
+    "kategori": "ortalamaya_donus",
+    "piyasa_rejimi": "yatay",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {"islem": "belirtilmemiş", "ust_filtre": null},
+    "gostergeler": [
+      {"ad": "Bollinger Bantları", "parametreler": {"standart_sapma": 2, "periyot": "belirtilmemiş"}},
+      {"ad": "ADX", "parametreler": {"periyot": "belirtilmemiş"}}
+    ],
+    "long_giris": [
+      "ADX yan (yatay) hareketi gösteriyor; eşik ve yön kitapta sayısal değil",
+      "Fiyat alt Bollinger bandına dokunur",
+      "Bu dokunuştan sonra, başlangıç pozisyonundan daha yüksekte kapanan bir mum oluşur (Gimmee çubuğu)",
+      "Gimmee çubuğunun hemen üstünden (kitap: 'biraz yukarıdan') long"
+    ],
+    "short_giris": [],
+    "stop_loss": null,
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Gimmee çubuğu hareketli ortalamayı kesip örtüşürse işlem yapılmaz (s.100)",
+      "Gimmee çubuğu çok geniş aralıklıysa işlem yapılmaz (s.100)"
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Alt bant dokunuşu ölçülebilir; ancak Gimmee mumunun tanımı ('başlangıç pozisyonundan yüksek'), 'biraz yukarıdan' giriş, ADX eşiği ve stop/hedef kuralları sayısal değil. Metin de dağınık."
+    },
+    "belirsizlikler": [
+      "Bollinger periyodu belirtilmemiş (standart sapma 2 olarak yazılıyor)",
+      "ADX periyodu ve 'yan piyasa' eşiği belirtilmemiş",
+      "Gimmee çubuğunun tanımı net değil ('başlangıç pozisyonundan daha yüksek' neyi ifade ediyor)",
+      "Giriş fiyatı 'biraz yukarıdan' tanımsız",
+      "Stop-loss ve kar hedefi yok; kitap sadece geçersizlik koşulları veriyor"
+    ],
+    "uyumluluk_notu": "Bollinger ve ADX fiyat tabanlı; hacim gerekmiyor. ≥5m'ye uyarlanabilir. Forex'e özgü değil.",
+    "varyantlar": ["Kısa vade versiyonu (s.99-100): üst Bollinger bandına dokunuş, ardından başlangıç pozisyonunun altında kapanan Gimmee çubuğunun hemen altından satış"],
+    "anahtar_kelimeler": ["bollinger", "gimmee-bar", "adx", "alt-bant", "yatay-piyasa", "ortalamaya-donus"]
+  },
+  {
+    "kart_id": "swing__adx30-sma20-geri-cekilme__kratter",
+    "ad": "ADX Trend Geri Çekilmesi (Kutsal Kase, 20 SMA Temas)",
+    "stil": "swing",
+    "kaynak": {"pdf": "Yeni_Başlayanlar_için_Swing_Trading_Stratejileri_-_Andrew_David_Kratter_103_sayfa.pdf", "sayfalar": [99]},
+    "ozet": "ADX(30) 30'un üzerinde ve yükseliyorsa, fiyat trend içinde 20 SMA'ya geri çekilip temas ettiğinde temas eden mumun en yüksek noktasından alım emri verilir. Kitap bu kurulumu 'Kutsal Kase' olarak adlandırır.",
+    "kategori": "trend_takip",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {"islem": "belirtilmemiş (uzun vade için ADX 30, kısa vade için ADX 14)", "ust_filtre": null},
+    "gostergeler": [
+      {"ad": "ADX", "parametreler": {"periyot": 30, "esik": 30, "kosul": "30 üstünde ve yükseliyor"}},
+      {"ad": "SMA", "parametreler": {"periyot": 20}}
+    ],
+    "long_giris": [
+      "ADX(30) > 30 ve yükseliyor",
+      "Fiyat 20 SMA'ya geri çekilir",
+      "SMA ile temas eden mum oluşur (mumun fiyat aralığı SMA'yı kapsıyor)",
+      "Temas eden mumun en yüksek noktasının üstünde alım emri"
+    ],
+    "short_giris": [],
+    "stop_loss": null,
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": ["ADX yükseliyor olmalı (eşik ve yön koşulu)"],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Giriş (ADX eşiği, SMA20 temas, temas mumunun en yüksek noktası) tamamen ölçülebilir. Stop ve çıkış kuralı kitapta yok, bu nedenle 3 verilmedi."
+    },
+    "belirsizlikler": [
+      "Stop-loss ve kar alma kuralı yok",
+      "Emir iptal süresi ve geçerlilik kuralı yok",
+      "'Temas' tanımı varsayıma dayanıyor: mumun aralığı SMA20'yi kapsıyor",
+      "Kısa vade versiyonunda (ADX 14) işlem yönü belirsiz; kitap düşüş trendi filtresi vermeden 'en düşük noktada satış' diyor; bu nedenle short kuralı karta alınmadı"
+    ],
+    "uyumluluk_notu": "Fiyat tabanlı, hacim gerekmiyor. ADX ve SMA zaman dilimi bağımsız olduğu için ≥5m'ye uyarlanabilir. Forex'e özgü değil. Kitap zaman dilimi belirtmiyor.",
+    "varyantlar": ["Kısa vade versiyonu (s.99): ADX(14) 30 üstünde ve yükseliyor; SMA20 geri çekilmesi; temas eden mumun en düşük noktasından satış (yön koşulu belirsiz)"],
+    "anahtar_kelimeler": ["adx", "sma20", "geri-cekilme", "kutsal-kase", "trend-takibi", "temas-mumu"]
+  },
+  {
+    "kart_id": "swing__impuls-sistemi-ema13-macd__kratter",
+    "ad": "Dürtü (Impulse) Sistemi: EMA13 ve MACD Histogramı Renk Filtresi",
+    "stil": "swing",
+    "kaynak": {"pdf": "Yeni_Başlayanlar_için_Swing_Trading_Stratejileri_-_Andrew_David_Kratter_103_sayfa.pdf", "sayfalar": [101]},
+    "ozet": "EMA(13) ve MACD(12,26,9) histogramı birlikte yükseliyorsa (yeşil, pozitif dürtü) sadece long; ikisi birlikte düşüyorsa (kırmızı, negatif dürtü) sadece short aranır. Karışık durum (mavi) uyumsuzluk olarak işaretlenir. Kitap bunu tarama (filtre) olarak sunar.",
+    "kategori": "momentum",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {"islem": "belirtilmemiş (kitap: uzun vade ve kısa vade için farklı zaman dilimleri)", "ust_filtre": "Kitap: kullanılan zaman dilimi ne kadar yüksekse kurulum o kadar iyi (üst zaman dilimi öncelikli)"},
+    "gostergeler": [
+      {"ad": "EMA", "parametreler": {"periyot": 13}},
+      {"ad": "MACD", "parametreler": {"hizli": 12, "yavas": 26, "sinyal": 9}}
+    ],
+    "long_giris": [
+      "EMA(13) yükseliyor (önceki değerinden yüksek)",
+      "MACD histogramı artıyor",
+      "İkisi birlikte pozitif (yeşil): long"
+    ],
+    "short_giris": [
+      "EMA(13) düşüyor",
+      "MACD histogramı azalıyor",
+      "İkisi birlikte negatif (kırmızı): short"
+    ],
+    "stop_loss": null,
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": ["Mavi (uyumsuz) durumda işlem yok (varsayım)", "Üst zaman dilimi ile uyum"],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "EMA eğimi, histogram yönü ve renk koşulları ölçülebilir. Stop ve çıkış kuralı yok; 'yükseliyor' eşiği ve zaman dilimi seçimi yoruma açık."
+    },
+    "belirsizlikler": [
+      "Stop-loss, kar alma ve çıkış kuralları yok",
+      "'Yükseliyor' / 'düşüyor' eğim tanımı belirtilmemiş (kaç mum, hangi eşik)",
+      "Mavi durumda ne yapılacağı açıkça yazılmamış; işlem yapılmaması varsayıldı",
+      "Kısa vade versiyonunda 'daha düşük zaman dilimi' kullanılıyor, belirli zaman dilimi yok",
+      "Kitapta renk şemasının nasıl üretildiği (grafik paketi) açıklanmamış"
+    ],
+    "uyumluluk_notu": "Fiyat tabanlı, hacim gerekmiyor. ≥5m'ye uyarlanabilir (zaman dilimi bağımsız). Kripto, endeks, hisse ve emtiaya uygulanabilir.",
+    "varyantlar": ["Kısa vadeli yatırımcı için aynı göstergeler, daha düşük zaman dilimi ve daha küçük pozisyon (kitap; ayrıntı verilmemiş)"],
+    "anahtar_kelimeler": ["impuls", "ema13", "macd", "histogram", "durtu-sistemi", "momentum", "filtre"]
+  },
+  {
+    "kart_id": "swing__macd-sifir-caprazi__kratter",
+    "ad": "MACD (12,26) Sıfır Çizgisi Çaprazı",
+    "stil": "swing",
+    "kaynak": {"pdf": "Yeni_Başlayanlar_için_Swing_Trading_Stratejileri_-_Andrew_David_Kratter_103_sayfa.pdf", "sayfalar": [30, 31]},
+    "ozet": "MACD, 12 periyotluk EMA eksi 26 periyotluk EMA olarak hesaplanır. MACD çizgisi sıfırın üstüne çıktığında long, altına indiğinde short sinyali kabul edilir. Kitap sıfır çizgisi çaprazını 'satın alma' ve 'satış' sinyali olarak tanımlar.",
+    "kategori": "momentum",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {"islem": "belirtilmemiş", "ust_filtre": null},
+    "gostergeler": [
+      {"ad": "MACD", "parametreler": {"hizli_ema": 12, "yavas_ema": 26}}
+    ],
+    "long_giris": ["MACD çizgisi sıfır çizgisini aşağıdan yukarı keser"],
+    "short_giris": ["MACD çizgisi sıfır çizgisini yukarıdan aşağı keser"],
+    "stop_loss": null,
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Giriş koşulu tamamen ölçülebilir ve formülü açık. Stop ve çıkış kuralı yok; ters çapraz çıkış olarak varsayılabilir."
+    },
+    "belirsizlikler": [
+      "Stop-loss yok",
+      "Çıkış kuralı yok; ters yönde sıfır çaprazının çıkış sayılması varsayım",
+      "Sinyal çizgisi (9 periyot) çaprazı ile sıfır çaprazı arasında hangisinin kullanılacağı net değil; kitap ikisini de sinyal olarak anıyor",
+      "Kitap 'sıfırın üzerindeki bir adım' ifadesini kullanıyor; 'adım' ile çapraz kastedildiği varsayıldı"
+    ],
+    "uyumluluk_notu": "Fiyat tabanlı, hacim gerekmiyor. ≥5m'ye uyarlanabilir. Forex'e özgü değil.",
+    "varyantlar": ["MACD sinyal çizgisi çaprazı: gösterge değeri sinyal çizgisini geçtiğinde satın alma sinyali (s.31)"],
+    "anahtar_kelimeler": ["macd", "sifir-cizgisi", "caprazlama", "momentum", "ema12", "ema26"]
+  },
+  {
+    "kart_id": "swing__bayrak-kirilim-retest__kratter",
+    "ad": "Bayrak Deseni Kırılımı ve Yeniden Test (Retest)",
+    "stil": "swing",
+    "kaynak": {"pdf": "Yeni_Başlayanlar_için_Swing_Trading_Stratejileri_-_Andrew_David_Kratter_103_sayfa.pdf", "sayfalar": [93, 94, 96]},
+    "ozet": "Son dürtüsel hareket yönünde bayrak (devam formasyonu) oluşur. Fiyat bayrağın trend çizgisini dışarıya kapatan M30 mumuyla kırar, sonra kırılan çizgiyi yeniden test eder. Retest'te trend yönünde stop emriyle giriş yapılır. Retest gelmezse, mum gövdesi formasyonun tamamen dışında kapandığında giriş yapılır. Kitap örneği kısa yöndedir.",
+    "kategori": "formasyon",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {"islem": "M30", "ust_filtre": "H4 (son dürtüsel hareket yönü kitap örneğinde 4 saatlik grafikten alınıyor)"},
+    "gostergeler": [],
+    "long_giris": [
+      "Kitap yalnızca düşüş örneği veriyor; yükseliş için ayna varsayımı: H4 son dürtü yukarı, M30'da bayrak, üst trend çizgisinin üstünde M30 mum kapanışı, ardından retest"
+    ],
+    "short_giris": [
+      "H4 son dürtüsel hareket aşağı yönlü",
+      "M30'da bayrak (flag) deseni oluşur",
+      "Fiyat bayrağın alt trend çizgisini aşağı kırar ve bayrağın dışında bir M30 mumu kapanır",
+      "Fiyat kırılan trend çizgisini yeniden test etmek için yukarı döner; trend çizgisinin yeniden test edildiği seviyede satış stop emri (s.94)",
+      "Retest yoksa: bir M30 mumunun gövdesi formasyonun tamamen dışında kapandığında giriş (s.94)"
+    ],
+    "stop_loss": "Kısa pozisyonda, yeniden test edilen trend çizgisinin üstü (s.94). Fiyat uzaklaşınca küçük alt zirvelerin hemen üstüne manuel çekilir.",
+    "kar_al": null,
+    "iz_suren_stop": "Kısa pozisyonda, oluşan küçük alt zirvelerin hemen üstü (manuel takip; s.94)",
+    "zaman_cikisi": null,
+    "filtreler": ["H4 son dürtü yönü ile uyum"],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Bayrak ve dürtü tanımı öznel ('formasyon görme'). Kırılım mumu kapanışı, retest ve stop trend çizgisi üzerinden tarif edildiği için kaba bir yaklaşımla kodlanabilir."
+    },
+    "belirsizlikler": [
+      "Bayrak ve dürtü tanımı yok (minimum boy, süre, eğim)",
+      "Alt trend çizgisinin nasıl çizileceği belirtilmemiş (hangi noktalar)",
+      "Retest toleransı ve süresi tanımsız",
+      "Yükseliş yönü için kural yok (ayna varsayımı)",
+      "Stop ve iz süren stop manuel takip olarak tarif edilmiş; ölçülebilir kural verilmemiş",
+      "Retest gerçekleşmezse kullanılacak giriş için 'gövde tamamen dışında' tanımı yorum gerektiriyor"
+    ],
+    "uyumluluk_notu": "Fiyat tabanlı, hacim gerekmiyor. M30 örnekleri ≥5m için uygun. Formasyon ölçeğe bağlı olduğu için ≥5m'de aynı mantık uygulanabilir. Forex örnekli ama varlıktan bağımsız.",
+    "varyantlar": [
+      "Dikdörtgen desen retesti (s.96): kırılım mumunun kapanışından sonra direnç çizgisinin yeniden test edilmesi, retest biterken fiyatların uzaklaşmaya başladığı yerde stop"
+    ],
+    "anahtar_kelimeler": ["bayrak", "formasyon", "kirilim", "retest", "trend-cizgisi", "m30", "h4"]
+  },
+  {
+    "kart_id": "swing__ucgen-kirilim__kratter",
+    "ad": "Üçgen Formasyonu Kırılımı (Simetrik, Yükselen, Alçalan)",
+    "stil": "swing",
+    "kaynak": {"pdf": "Yeni_Başlayanlar_için_Swing_Trading_Stratejileri_-_Andrew_David_Kratter_103_sayfa.pdf", "sayfalar": [88, 89, 90, 91, 94, 95]},
+    "ozet": "En az iki tepe ve iki dipten oluşan daralan üçgen formasyonunda, fiyat formasyon sınırını dışarı kapatan kırılımdan sonra ikinci M30 mumunun kapanışında kırılım yönünde işlem açılır. Stop, formasyon içindeki son küçük dip veya tepenin ötesine konur. Kitap yükselen üçgeni yükseliş devamı, alçalan üçgeni düşüş devamı olarak sunar.",
+    "kategori": "formasyon",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {"islem": "M30", "ust_filtre": "H4 (son dürtü yönü)"},
+    "gostergeler": [],
+    "long_giris": [
+      "H4 son dürtü yukarı yönlü (kitap yükselen üçgen örneği)",
+      "Fiyat yükselen üçgenin üst yatay çizgisini yukarı kırar",
+      "Formasyonun tamamen dışında kapanan ikinci M30 mumunun kapanışında long (retest beklenmez, s.95)"
+    ],
+    "short_giris": [
+      "H4 son dürtü aşağı yönlü",
+      "Fiyat alçalan üçgenin alt yatay çizgisini aşağı kırar",
+      "Formasyonun tamamen dışında kapanan ikinci M30 mumunun kapanışında short (s.94: ilk mumdan sonra retest yoksa)"
+    ],
+    "stop_loss": "Short: formasyon içindeki son küçük alt zirvenin üstü (s.94). Long (ayna): son küçük dibin altı (kitapta yazılı değil, varsayım).",
+    "kar_al": null,
+    "iz_suren_stop": "Son küçük dip (long) veya tepe (short) üzerine manuel çekilir (s.94)",
+    "zaman_cikisi": null,
+    "filtreler": ["Kırılım mumu formasyon dışında tamamen kapanmalı", "Üst zaman dilimi dürtüsü ile yön uyumu"],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Üçgenin tespiti (iki tepe, iki dip, çizgi eğimleri) öznel. Kırılım kapanışı ve 'ikinci mum' kuralı ölçülebilir; stop ise formasyon içindeki 'son küçük zirve' ile tarif edildiği için yoruma açık."
+    },
+    "belirsizlikler": [
+      "Üçgen tespit kuralı yok (minimum temas ve süre, eğim)",
+      "Simetrik üçgen için kitap giriş kuralı vermiyor; sadece kırılım yönünde stop emri ve diğer yön için stop emri anlatılıyor (s.89)",
+      "'Desenin tamamen dışında' kapanış tanımı (gövde, kapanış eşiği) belirtilmemiş",
+      "Yükseliş (ayna) versiyonu için stop ve giriş kuralları varsayım",
+      "Kar hedefi (formasyon boyu ya da benzeri) kitapta yok"
+    ],
+    "uyumluluk_notu": "Fiyat tabanlı, hacim gerekmiyor (kitap hacimden bahsetmiyor). M30 örneği ≥5m için uygun. Formasyon tanımı ölçeğe bağlı. Forex örnekli, varlıktan bağımsız.",
+    "varyantlar": [
+      "Simetrik üçgen (s.89): kırılım yönünde stop emri; iki yönde bekleme",
+      "Yükselen üçgen (s.90): üst çizgi yatay, alt çizgi yükselen",
+      "Alçalan üçgen (s.91): alt çizgi yatay, üst çizgi alçalan"
+    ],
+    "anahtar_kelimeler": ["ucgen", "simetrik-ucgen", "yukselen-ucgen", "alcalan-ucgen", "kirilim", "formasyon", "m30", "h4"]
+  },
+  {
+    "kart_id": "swing__bas-omuz-boyun-cizgisi__kratter",
+    "ad": "Baş ve Omuzlar: Boyun Çizgisi Kırılımı, Ölçülü Hedef",
+    "stil": "swing",
+    "kaynak": {"pdf": "Yeni_Başlayanlar_için_Swing_Trading_Stratejileri_-_Andrew_David_Kratter_103_sayfa.pdf", "sayfalar": [97]},
+    "ozet": "Ortadaki tepenin (baş) iki yandaki tepelerden (omuzlar) yüksek olduğu tepe formasyonunda, iki çukurun diplerini birleştiren boyun çizgisinin altına kırılımda short açılır. Hedef, boyun çizgisi ile baş tepesi arasındaki mesafenin kırılım noktasından aşağıya uygulanmasıyla hesaplanır.",
+    "kategori": "formasyon",
+    "piyasa_rejimi": "herhangi",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {"islem": "belirtilmemiş", "ust_filtre": null},
+    "gostergeler": [],
+    "long_giris": [],
+    "short_giris": [
+      "Üç tepe: orta tepe (baş) iki yanındaki tepelerden (omuzlar) yüksek",
+      "İki çukurun dipleri boyun çizgisi ile birleştirilir",
+      "Fiyat boyun çizgisinin altına kırılır"
+    ],
+    "stop_loss": null,
+    "kar_al": "Ölçülü hedef: boyun çizgisi ile baş tepesi arasındaki mesafe, kırılım noktasından aşağıya uygulanır (s.97)",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": ["Boyun çizgisinin aşağı eğimli olması tercih edilir (kitap: daha güvenilir sinyal)"],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Hedef hesabı ve boyun çizgisi kırılımı ölçülebilir. Ancak formasyonu 'görmek' öznel, omuzların simetrisi ve minimum boyut tanımsız, stop yok."
+    },
+    "belirsizlikler": [
+      "Baş ve omuz tanımı (simetri, zaman, minimum yükseklik) yok",
+      "Boyun çizgisi kırılım onayı (kapanış mı, fitil mi, hangi zaman dilimi) belirtilmemiş",
+      "Stop-loss yok",
+      "Kitap yalnızca tepe (ayı) formasyonunu anlatıyor; ters baş-omuz kural olarak yazılmamış"
+    ],
+    "uyumluluk_notu": "Formasyon ve fiyat tabanlı; hacim gerekmiyor. ≥5m'ye uyarlanabilir, ancak formasyon ölçeğe bağlı.",
+    "varyantlar": [],
+    "anahtar_kelimeler": ["bas-omuz", "boyun-cizgisi", "formasyon", "olculu-hedef", "tepe-donusu"]
+  }
+]

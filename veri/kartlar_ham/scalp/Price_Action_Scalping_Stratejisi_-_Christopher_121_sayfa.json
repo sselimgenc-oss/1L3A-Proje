@@ -1,0 +1,117 @@
+[
+  {
+    "kart_id": "scalp__talep-arz-tuzak-mum__christopher",
+    "ad": "Saatlik Talep/Arz Bölgesi + 5dk Tuzak Mum Kırılımı",
+    "stil": "scalp",
+    "kaynak": {"pdf": "Price_Action_Scalping_Stratejisi_-_Christopher_121_sayfa.pdf", "sayfalar": [96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108]},
+    "ozet": "Saatlik grafikte DBR/RBR ile talep bölgesi (veya DBD/RBD ile arz bölgesi) işaretlenir. Fiyat bu bölgenin içinde 5 dakikalık bölge ile hacmi önceki mumdan büyük bir Satıcı Tuzak mumu (kırmızı) oluşursa, bu mumun yüksek kırılımında long açılır. Arz tarafında Alıcı Tuzak mumunun düşük kırılımında short açılır.",
+    "kategori": "destek_direnc",
+    "piyasa_rejimi": "herhangi",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {"islem": "5m", "ust_filtre": "1h"},
+    "gostergeler": [
+      {"ad": "Hacim", "parametreler": {}},
+      {"ad": "Talep/Arz Bölgesi (DBR/RBR/RBD/DBD)", "parametreler": {"ust_zaman_dilimi": "1h", "islem_zaman_dilimi": "5m"}}
+    ],
+    "long_giris": [
+      "1 saatlik grafikte DBR (çekme-taban-rali) veya RBR (rali-taban-rali) deseni ile talep bölgesi işaretlenir: proksimal çizgi taban mumunun gövde tepesinde, distal çizgi taban mumunun (veya çıkış mumunun, hangisi daha düşükse) en düşük noktasında.",
+      "5 dakikalık grafikte, saatlik talep bölgesinin içinde (en az bir kez saatlik talep bölgesinin yakın çizgisine dokunarak) 5 dakikalık talep bölgesi işaretlenir.",
+      "Fiyat 5 dakikalık talep bölgesine geldiğinde, hacmi bir önceki mumun hacminden büyük olan kırmızı mum (Satıcı Tuzak mumu) aranır. Önceki mumun rengi serbesttir.",
+      "Giriş, Satıcı Tuzak mumunun yüksek seviyesinin kırılımında yapılır."
+    ],
+    "short_giris": [
+      "1 saatlik grafikte RBD (rali-taban-çekme) veya DBD (çekme-taban-çekme) deseni ile arz bölgesi işaretlenir: proksimal çizgi taban mumunun gövde dibinde, distal çizgi taban mumunun tepesinde (veya çıkış mumu daha yüksekse onun tepesinde).",
+      "5 dakikalık grafikte, saatlik arz bölgesinin içinde 5 dakikalık arz bölgesi işaretlenir.",
+      "Fiyat 5 dakikalık arz bölgesine geldiğinde, hacmi bir önceki mumun hacminden büyük olan yeşil mum (Alıcı Tuzak mumu) aranır.",
+      "Giriş, Alıcı Tuzak mumunun düşük seviyesinin kırılımında yapılır."
+    ],
+    "stop_loss": "Long: 5dk distal çizginin biraz altı veya Satıcı Tuzak mumunun düşük seviyesinin altı. Short: 5dk distal çizginin biraz üstü veya Alıcı Tuzak mumunun tepesi (kitap, trader'ın rahatına göre değişebileceğini söyler).",
+    "kar_al": "En az 1:2 risk/ödül. Kitap 1:3 veya en az 1:2 önerir; 1:2'nin altına inilmez.",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Saatlik talep/arz bölgesi zorunlu, 5dk bölge saatlik bölge içinde (dokunma kuralı ile)",
+      "Tuzak mum hacmi bir önceki mumun hacminden büyük olmalı",
+      "Kitap, zor durumlarda sadece 5dk'da tuzak mum aranmasını, saatlik grafikte aranmamasını vurgular",
+      "Kitap, Nifty50, BankNifty ve hisse senetlerini örnek gösterir; likidite önerisi var"
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": "bu yöntemlerin kazanma oranı çok yüksek (kitap ifadesi, sayısal değer yok)",
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Tuzak mum (hacim > önceki mum, renk kuralı), giriş (kırılım) ve stop/kar oranı açık. Talep/arz bölgesinin işaretlenmesi kitapta görsel ve yorumla anlatılıyor (taban mumu gövde oranı %25-30, heyecan verici mum gövde oranı %70 gibi eşikler var ama bölgeyi seçme kuralı tam değil)."
+    },
+    "belirsizlikler": [
+      "Hangi DBR/RBR deseninin geçerli bölge sayılacağı net değil; yorum gerektiriyor.",
+      "Taban mumu gerekliliği her zaman yok; kitap taban mumu olmadan bölge işaretlemeyi de anlatır (istisna senaryosu, s.54-68).",
+      "Taban mumu gövde/fitil oranı kitapta %25-30 (taban) ve gövde > %70 (heyecan verici) olarak verilir; bunlar kitapta yer alır.",
+      "Saatlik bölge ile 5dk bölge arasında 'en az bir kez yakın çizgiye dokunma' kuralı var; bölge içinde tamamen olma şartı yok (s.103).",
+      "Kitap stop loss'u 'biraz altı' / 'biraz üstü' diyor; tampon miktarı tanımlı değil (kitapta yok).",
+      "Hacim verisi gerekiyor. Forex için tick hacmi kullanılıp kullanılmayacağı kitapta yok.",
+      "Kitap, Türk ya da Hint piyasasında hisse/endeks için yazılmış; 1L3A için forex/kripto uyarlaması kitapta yok."
+    ],
+    "uyumluluk_notu": "5dk ve 1sa kullanıyor, 1L3A için ≥5m uygun. Hacim verisi kritik: kripto ve ABD hisse/emtia perpetual'larda hacim mevcut ama forex'te tick hacmi olabilir. Pip/seans bağımlılığı yok. Talep/arz bölgesi kodlaması ek iş gerektirir.",
+    "varyantlar": [
+      "DBR ve RBR (talep) ile RBD ve DBD (arz) bölge tipleri",
+      "Taban mumu olmadan bölge işaretleme istisnası (s.54-68)",
+      "Kitap yalnızca 1sa+5dk kombinasyonunu örnekler; başka ust-alt zaman dilimleri kitapta yok"
+    ],
+    "anahtar_kelimeler": ["talep-bolgesi", "arz-bolgesi", "dbr", "rbr", "rbd", "dbd", "tuzak-mum", "satici-tuzak", "alici-tuzak", "hacim", "coklu-zaman-dilimi", "1sa-5dk", "kirilim", "1-2-rr"]
+  },
+  {
+    "kart_id": "scalp__5sma-bosluk-hacim-tuzak__christopher",
+    "ad": "1dk 5 SMA Boşluğu + Hacim Tuzak Mumu Kırılımı (Endeks Opsiyonu)",
+    "stil": "scalp",
+    "kaynak": {"pdf": "Price_Action_Scalping_Stratejisi_-_Christopher_121_sayfa.pdf", "sayfalar": [109, 110, 111, 112, 113, 114, 115]},
+    "ozet": "1 dakikalık grafikte 5 SMA çizilir. Hacmi bir önceki mumdan büyük, 5 SMA ile arasında boşluk oluşturan mum bulunursa, bu mumun yüksek (long) veya düşük (short) kırılımında girilir. Stop tuzak mumun karşı ucunda, hedef stop mesafesinin en az 2 katıdır.",
+    "kategori": "momentum",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "vadeli",
+    "zaman_dilimi": {"islem": "1m", "ust_filtre": null},
+    "gostergeler": [
+      {"ad": "SMA", "parametreler": {"periyot": 5}},
+      {"ad": "Hacim", "parametreler": {}}
+    ],
+    "long_giris": [
+      "1 dakikalık grafikte 5 SMA çizilir.",
+      "Hacmi bir önceki mumun hacminden büyük olan yeşil mum bulunur (Alıcı Tuzak / boşluk yapan yeşil mum).",
+      "Bu yeşil mum, 5 SMA çizgisi ile arasında boşluk oluşturur (mum tamamen 5 SMA'nın altında kalır).",
+      "Giriş, bu yeşil mumun yüksek seviyesinin kırılımında yapılır."
+    ],
+    "short_giris": [
+      "1 dakikalık grafikte 5 SMA çizilir.",
+      "Hacmi bir önceki mumun hacminden büyük olan kırmızı mum (Satıcı Tuzak / boşluk yapan kırmızı mum) bulunur.",
+      "Bu kırmızı mum, 5 SMA ile arasında boşluk oluşturur (mum 5 SMA'nın altında olur, üstünde olmaz).",
+      "Giriş, bu kırmızı mumun düşük seviyesinin kırılımında yapılır."
+    ],
+    "stop_loss": "Long: giriş mumunun (veya tuzak mumun) düşük seviyesi. Short: tuzak/boşluk mumun tepesi.",
+    "kar_al": "En az stop mesafesinin 2 katı (1:2). Zor durumlarda 1:1.5, scalping'te 1:1 (kitap, s.109 ve s.112).",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Sadece Nifty50 ve BankNifty opsiyonlarında (kitap, hisse opsiyonlarında likidite düşük diyor)",
+      "Hacim, bir önceki mumun hacminden büyük olmalı",
+      "Boşluk yapan mum her iki yönde de 5 SMA çizgisinin altında olmalı, üstünde olmamalı (kitap s.110 kuralı)"
+    ],
+    "pozisyon_risk": "İşlem büyüklüğü kitapta BankNifty için 900-1800 arası olarak anlatılır (kişisel uygulama, genel kural değil). Kayıp kesme için 'hızlı çık' vurgusu var; yüzde yoktur.",
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "SMA(5), hacim karşılaştırması ve kırılım girişi/stop/hedef mekanik. 'Boşluk' tanımı kesin sayısal eşik vermiyor ve stop/hedef 1:1 ile 1:2 arası değişebiliyor; bu yüzden tam mekanik değil."
+    },
+    "belirsizlikler": [
+      "'Boşluk' (gap) için minimum mesafe eşiği kitapta yok; mumun tamamen SMA'nın altında olması yeterli varsayıldı.",
+      "Hedef için 1:2 mi, 1:1.5 mi, 1:1 mi; kitap farklı yerlerde farklı yazıyor (s.109, s.112, s.115).",
+      "Long kurulumunda stop 'giriş mumunun düşük seviyesi' (s.111) ile 'Alıcı Tuzak mumunun tepesi' ifadeleri çelişiyor gibi; kitap açık değil (s.114-115 short tarafında tepe diyor).",
+      "Kitap 'Giriş mumu' ile 'Satıcı tuzak mumu' ifadelerini aynı anlamda kullanıyor; netlik yok.",
+      "Hacim verisi (endeks opsiyonu tick/işlem hacmi) kitapta NSE verisi olarak anlatılıyor; forex/kripto için karşılığı yok."
+    ],
+    "uyumluluk_notu": "1dk zaman dilimi, 1L3A'nın 5dk altında. ≥5m kuralına uymuyor. Opsiyona özgü (Nifty/BankNifty). Forex/kripto için hacim verisinin kalitesi sorunlu olabilir. 5 SMA ile uyarlanabilir ama 5dk'ya taşınması kitapta yok.",
+    "varyantlar": [
+      "Long versiyonu: yeşil alıcı tuzak mum (hacim yüksek) ya da boşluk yapan yeşil mum",
+      "Short versiyonu: kırmızı satıcı tuzak mum ya da boşluk yapan kırmızı mum",
+      "Kitap, hisse senedi opsiyonunda kullanılmamasını önerir"
+    ],
+    "anahtar_kelimeler": ["sma-5", "hacim", "bosluk", "tuzak-mum", "kirilim", "1dk", "opsiyon", "banknifty", "nifty", "1-2-rr", "scalping"]
+  }
+]
