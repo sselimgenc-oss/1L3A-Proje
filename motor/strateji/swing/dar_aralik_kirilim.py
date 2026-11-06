@@ -30,14 +30,14 @@ class DarAralikKirilim(Strateji):
         "kirilim_tampon_atr": 0.0,
         "trend_ma": 0,             # 0: kapalı; SMA
         "atr_periyot": 14, "stop_tampon_atr": 0.0,
-        "hedef_r": 0.0,
+        "hedef_r": 2.0,
         "short": True,
     }
     parametre_izgarasi = {
         "mod": ["nr", "ic_bar"],
         "nr_pencere": [5, 7, 10],
         "kirilim_tampon_atr": [0.0, 0.25],
-        "hedef_r": [0.0, 2.0],
+        "hedef_r": [2.0, 3.0],
     }
 
     def sinyaller(self, mumlar: pd.DataFrame) -> pd.DataFrame:

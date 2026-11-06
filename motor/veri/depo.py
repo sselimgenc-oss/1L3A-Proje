@@ -5,6 +5,8 @@ from pathlib import Path
 
 import pandas as pd
 
+from motor.veri import kilit
+
 KOK = Path(__file__).resolve().parents[2]
 MUM_DIZINI = KOK / "veri" / "mumlar"
 
@@ -50,19 +52,22 @@ def _kes(df: pd.DataFrame, baslangic, bitis) -> pd.DataFrame:
 
 
 def mum_oku(sembol: str, aralik: str, baslangic=None, bitis=None,
-            dizin: Path | None = None) -> pd.DataFrame:
-    """Mum verisi; indeks UTC açılış zamanı. Aralık [baslangic, bitis)."""
+            dizin: Path | None = None, kilit_ac: bool = False, gerekce: str | None = None) -> pd.DataFrame:
+    """Mum verisi; indeks UTC açılış zamanı. Aralık [baslangic, bitis).
+    Varsayılan olarak kilitli dönem (kilit.KILIT_BASLANGIC ve sonrası) DÖNMEZ; kilit_ac=True + gerekce ile açılır, kayda geçer."""
     yol = mum_yolu(sembol, aralik, dizin)
     if not yol.exists():
         raise FileNotFoundError(f"Veri yok: {yol} (önce: python -m motor.veri.indir {sembol} --aralik {aralik})")
+    bitis = kilit.kilit_siniri(bitis, kilit_ac, gerekce, sembol, f"mum {aralik}")
     return _kes(pd.read_parquet(yol), baslangic, bitis)
 
 
 def funding_oku(sembol: str, baslangic=None, bitis=None,
-                dizin: Path | None = None) -> pd.DataFrame:
+                dizin: Path | None = None, kilit_ac: bool = False, gerekce: str | None = None) -> pd.DataFrame:
     yol = funding_yolu(sembol, dizin)
     if not yol.exists():
         raise FileNotFoundError(f"Funding verisi yok: {yol} (önce: python -m motor.veri.indir {sembol} --funding)")
+    bitis = kilit.kilit_siniri(bitis, kilit_ac, gerekce, sembol, "funding")
     return _kes(pd.read_parquet(yol), baslangic, bitis)
 
 

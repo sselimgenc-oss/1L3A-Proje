@@ -369,7 +369,7 @@ def test_izgara_ve_parametreler():
         assert n <= 27
         S(**{k: v[0] for k, v in S.parametre_izgarasi.items()})
     assert Kirilim4S.ad == "onceki__4s-kirilim" and Kirilim4S.stil == "swing"
-    assert Kgt.ad == "onceki__kgt" and Kgt.stil == "daytrade"
+    assert Kgt.ad == "onceki__kgt" and Kgt.stil == "swing"
     assert S1GeriCekilme.ad == "onceki__s1-geri-cekilme" and S1GeriCekilme.stil == "swing"
     assert Kapitulasyon.ad == "onceki__kapitulasyon" and Kapitulasyon.stil == "swing"
     with pytest.raises(ValueError):
