@@ -1,0 +1,317 @@
+"""Olay güdümlü backtest motoru: tek sembol, aynı anda en fazla 1 pozisyon.
+
+Zamanlama
+  - Sinyal mum i KAPANIŞINDA üretilir; giriş/çıkış mum i+1 AÇILIŞINDA yapılır.
+  - Stop/hedef mum içi yüksek/düşükle kontrol edilir. Aynı mumda ikisi de değerse STOP sayılır.
+  - Fiyat stopun ötesinde açılırsa (gap) dolum açılış fiyatındandır.
+  - Stop, gap ve piyasa çıkışlarına kayma uygulanır; hedef (limit) dolumuna uygulanmaz.
+Funding
+  - Pozisyon açıkken her funding zamanı f için `nominal * oran * yön` ödenir (pozitif oran long öder).
+  - f, giriş zamanından SONRA ve çıkış zamanına (dahil) kadar olanlar için uygulanır.
+  - İşlem tablosundaki `funding` sütunu ÖDENEN tutardır (negatif = tahsil edilen).
+Risk
+  - SERT_LIMITLER her zaman uygulanır; MotorAyarlari bunları aşarsa tavana kırpılır.
+Muhasebe Decimal ile yapılır; çıktı tablosu float'tır.
+"""
+from dataclasses import dataclass, field
+from decimal import Decimal, ROUND_DOWN, ROUND_HALF_UP
+from typing import Optional
+
+import numpy as np
+import pandas as pd
+
+from motor.risk.limitler import SERT_LIMITLER
+from motor.strateji import cikislar as cks
+from motor.strateji import gostergeler as gst
+from motor.strateji.temel import SINYAL_SUTUNLARI, Strateji
+
+
+def D(x) -> Decimal:
+    if isinstance(x, Decimal):
+        return x
+    return Decimal(repr(float(x)))
+
+
+@dataclass
+class SembolKurallari:
+    tick_size: float = 0.01
+    step_size: float = 0.001
+    min_qty: float = 0.001
+    min_notional: float = 5.0
+
+
+@dataclass
+class MotorAyarlari:
+    baslangic_sermaye: float = 10000.0
+    risk_yuzde: float = 1.0                  # işlem başı risk (%); sert limitle kırpılır
+    kaldirac: float = 3.0                    # üst sınır; sert limitle kırpılır
+    komisyon_taker_yuzde: float = 0.05
+    komisyon_maker_yuzde: float = 0.02
+    hedef_limit_emri: bool = False           # True: hedef dolumlarında maker komisyonu
+    kayma_bps: float = 2.0
+    kurallar: SembolKurallari = field(default_factory=SembolKurallari)
+
+
+@dataclass
+class SonucBacktest:
+    islemler: pd.DataFrame
+    ozsermaye: pd.Series
+    reddedilenler: list
+    uyarilar: list
+    baslangic_sermaye: float
+
+
+@dataclass
+class _Poz:
+    yon: int
+    miktar: Decimal
+    giris: Decimal
+    zaman: pd.Timestamp
+    stop: Decimal
+    ilk_stop: Decimal
+    hedef: Optional[Decimal]
+    giris_komisyon: Decimal
+    son_f: pd.Timestamp
+    ekstrem: float
+    zaman_limit: Optional[int]
+    funding: Decimal = Decimal(0)
+    tutulan: int = 0
+
+
+KOLONLAR = ["yon", "giris_zamani", "giris_fiyati", "cikis_zamani", "cikis_fiyati", "miktar",
+            "brut_pnl", "komisyon", "funding", "net_pnl", "r", "cikis_nedeni"]
+
+
+def _tick(fiyat: Decimal, tick: Decimal) -> Decimal:
+    return (fiyat / tick).quantize(Decimal(1), rounding=ROUND_HALF_UP) * tick
+
+
+def _step_asagi(miktar: Decimal, step: Decimal) -> Decimal:
+    return (miktar / step).to_integral_value(rounding=ROUND_DOWN) * step
+
+
+def backtest(mumlar: pd.DataFrame, strateji: Strateji, ayarlar: MotorAyarlari = None,
+             funding: Optional[pd.DataFrame] = None,
+             islem_baslangic: Optional[pd.Timestamp] = None) -> SonucBacktest:
+    """islem_baslangic: bu zamandan önceki mumlarda yeni giriş yapılmaz (ısınma payı için)."""
+    ayarlar = ayarlar or MotorAyarlari()
+    L = SERT_LIMITLER
+    uyarilar = []
+    risk_yuzde = min(ayarlar.risk_yuzde, L.islem_basi_max_risk_yuzde)
+    kaldirac = min(ayarlar.kaldirac, L.max_kaldirac)
+    if risk_yuzde < ayarlar.risk_yuzde:
+        uyarilar.append(f"risk_yuzde {ayarlar.risk_yuzde} -> {risk_yuzde} (sert limit)")
+    if kaldirac < ayarlar.kaldirac:
+        uyarilar.append(f"kaldirac {ayarlar.kaldirac} -> {kaldirac} (sert limit)")
+    risk_oran = D(risk_yuzde) / 100
+    kural = ayarlar.kurallar
+    tick, step = D(kural.tick_size), D(kural.step_size)
+    taker, maker = D(ayarlar.komisyon_taker_yuzde) / 100, D(ayarlar.komisyon_maker_yuzde) / 100
+    kayma = D(ayarlar.kayma_bps) / 10000
+
+    # --- sinyaller ---
+    sig = strateji.sinyaller(mumlar)
+    if not sig.index.equals(mumlar.index):
+        raise ValueError("sinyaller() mumlarla aynı indeksi dönmeli")
+    eksik = [c for c in SINYAL_SUTUNLARI if c not in sig.columns]
+    if eksik:
+        raise ValueError(f"Sinyal sütunları eksik: {eksik}")
+    s_yon = sig["yon"].to_numpy(dtype=int)
+    s_stop = sig["stop"].to_numpy(dtype=float)
+    s_hedef = sig["hedef"].to_numpy(dtype=float)
+    s_cikis = sig["cikis"].to_numpy(dtype=bool)
+    s_zc = (sig["zaman_cikisi_mum"].to_numpy(dtype=float) if "zaman_cikisi_mum" in sig.columns
+            else np.full(len(sig), np.nan))
+    if np.any((s_yon != 0) & np.isnan(s_stop)):
+        raise ValueError("Giriş sinyali olan her satırda stop zorunlu")
+
+    cks_ayar = strateji.cikis_ayarlari
+    idx = mumlar.index
+    zaman = list(idx)
+    acilis = mumlar["acilis"].to_numpy(dtype=float)
+    yuksek = mumlar["yuksek"].to_numpy(dtype=float)
+    dusuk = mumlar["dusuk"].to_numpy(dtype=float)
+    kapanis = mumlar["kapanis"].to_numpy(dtype=float)
+    n = len(mumlar)
+    atr = (gst.atr(mumlar["yuksek"], mumlar["dusuk"], mumlar["kapanis"], cks_ayar.atr_periyot).to_numpy()
+           if cks_ayar.atr_iz_suren_k else np.full(n, np.nan))
+    aralik = pd.Series(idx).diff().median() if n > 1 else pd.Timedelta(0)
+
+    if funding is not None and len(funding):
+        f_zaman = funding.index
+        f_oran = funding["oran"].to_numpy(dtype=float)
+    else:
+        f_zaman, f_oran = None, None
+
+    # --- durum ---
+    nakit = D(ayarlar.baslangic_sermaye)
+    poz: Optional[_Poz] = None
+    islemler, reddedilenler = [], []
+    ozs = []
+    onceki_ozs = nakit
+    zirve = nakit
+    kill = False
+    gun, gun_basi, gunluk_blok = None, nakit, False
+    bekleyen_giris = None     # (yon, stop, hedef, zc)
+    bekleyen_cikis = None     # neden
+
+    def funding_ode(p: _Poz, bitis, dahil: bool) -> Decimal:
+        if f_zaman is None:
+            return Decimal(0)
+        a = f_zaman.searchsorted(p.son_f, side="right")
+        b = f_zaman.searchsorted(bitis, side="right" if dahil else "left")
+        toplam = Decimal(0)
+        for k in range(a, b):
+            j = max(idx.searchsorted(f_zaman[k], side="right") - 1, 0)
+            toplam += p.miktar * D(acilis[j]) * D(f_oran[k]) * p.yon
+        p.funding += toplam
+        if dahil:
+            p.son_f = bitis
+        return toplam
+
+    def kapat(p: _Poz, fiyat: Decimal, t, neden: str, komisyon_orani: Decimal) -> Decimal:
+        brut = (fiyat - p.giris) * p.miktar * p.yon
+        cikis_kom = fiyat * p.miktar * komisyon_orani
+        net = brut - p.giris_komisyon - cikis_kom - p.funding
+        risk_tutar = p.miktar * abs(p.giris - p.ilk_stop)
+        islemler.append({
+            "yon": p.yon, "giris_zamani": p.zaman, "giris_fiyati": float(p.giris),
+            "cikis_zamani": t, "cikis_fiyati": float(fiyat), "miktar": float(p.miktar),
+            "brut_pnl": float(brut), "komisyon": float(p.giris_komisyon + cikis_kom),
+            "funding": float(p.funding), "net_pnl": float(net),
+            "r": float(net / risk_tutar) if risk_tutar else np.nan, "cikis_nedeni": neden,
+        })
+        return brut - cikis_kom
+
+    def piyasa_fiyati(p: _Poz, ham: float) -> Decimal:
+        """Çıkış tarafına kayma uygula (long satar -> düşük, short alır -> yüksek)."""
+        return _tick(D(ham) * (1 - p.yon * kayma), tick)
+
+    for i in range(n):
+        t = zaman[i]
+        o, h, l, c = acilis[i], yuksek[i], dusuk[i], kapanis[i]
+
+        if t.date() != gun:
+            gun, gun_basi, gunluk_blok = t.date(), onceki_ozs, False
+
+        # 1) açılışta: funding + bekleyen çıkış
+        if poz is not None:
+            nakit -= funding_ode(poz, t, dahil=True)
+            if bekleyen_cikis:
+                nakit += kapat(poz, piyasa_fiyati(poz, o), t, bekleyen_cikis, taker)
+                poz = None
+        bekleyen_cikis = None
+
+        # 2) açılışta: bekleyen giriş
+        if poz is None and bekleyen_giris is not None:
+            yon, stop_ham, hedef_ham, zc = bekleyen_giris
+            red = None
+            if kill:
+                red = "kill_switch"
+            elif gunluk_blok:
+                red = "gunluk_kayip_limiti"
+            elif islem_baslangic is not None and t < islem_baslangic:
+                red = "isinma"
+            if red is None:
+                fiyat = _tick(D(o) * (1 + yon * kayma), tick)
+                stop = _tick(D(stop_ham), tick)
+                risk_birim = abs(fiyat - stop)
+                if risk_birim == 0 or (yon == 1 and stop >= fiyat) or (yon == -1 and stop <= fiyat):
+                    red = "gecersiz_stop"
+            if red is None:
+                if not np.isnan(hedef_ham):
+                    hedef = _tick(D(hedef_ham), tick)
+                elif cks_ayar.sabit_r_hedefi:
+                    hedef = _tick(D(cks.r_hedef_fiyati(yon, float(fiyat), float(risk_birim),
+                                                        cks_ayar.sabit_r_hedefi)), tick)
+                else:
+                    hedef = None
+                if hedef is not None and (hedef - fiyat) * yon <= 0:
+                    red = "gecersiz_hedef"
+            if red is None:
+                miktar = nakit * risk_oran / risk_birim
+                miktar = min(miktar, nakit * D(kaldirac) / fiyat)
+                miktar = _step_asagi(miktar, step)
+                if miktar < D(kural.min_qty) or miktar <= 0:
+                    red = "min_qty"
+                elif miktar * fiyat < D(kural.min_notional):
+                    red = "min_notional"
+            if red is not None:
+                reddedilenler.append({"zaman": t, "yon": yon, "neden": red})
+            else:
+                kom = miktar * fiyat * taker
+                nakit -= kom
+                zc_n = int(zc) if not np.isnan(zc) else cks_ayar.zaman_cikisi_mum
+                poz = _Poz(yon, miktar, fiyat, t, stop, stop, hedef, kom, t, float(fiyat), zc_n)
+        bekleyen_giris = None
+
+        # 3) mum içi stop / hedef
+        if poz is not None:
+            p = poz
+            if p.yon == 1:
+                stop_gap, stop_vur = o <= p.stop, l <= p.stop
+                hedef_gap = p.hedef is not None and o >= p.hedef
+                hedef_vur = p.hedef is not None and h >= p.hedef
+            else:
+                stop_gap, stop_vur = o >= p.stop, h >= p.stop
+                hedef_gap = p.hedef is not None and o <= p.hedef
+                hedef_vur = p.hedef is not None and l <= p.hedef
+            cikis = None
+            if stop_gap:
+                cikis = (piyasa_fiyati(p, o), "stop_gap", t, taker)
+            elif hedef_gap:
+                cikis = (_tick(D(o), tick), "hedef", t, maker if ayarlar.hedef_limit_emri else taker)
+            elif stop_vur:
+                cikis = (piyasa_fiyati(p, float(p.stop)), "stop", t + aralik, taker)
+            elif hedef_vur:
+                cikis = (p.hedef, "hedef", t + aralik, maker if ayarlar.hedef_limit_emri else taker)
+            if cikis is not None:
+                fiyat_c, neden, t_c, kom_o = cikis
+                if t_c != t:
+                    nakit -= funding_ode(p, t_c, dahil=False)
+                nakit += kapat(p, fiyat_c, t_c, neden, kom_o)
+                poz = None
+
+        # 4) veri sonu
+        if poz is not None and i == n - 1:
+            nakit -= funding_ode(poz, t + aralik, dahil=False)
+            nakit += kapat(poz, _tick(D(c), tick), t + aralik, "veri_sonu", taker)
+            poz = None
+
+        # 5) mum kapanışı: özsermaye, limitler
+        ozs_i = nakit + (D(c) - poz.giris) * poz.miktar * poz.yon if poz is not None else nakit
+        ozs.append(ozs_i)
+        onceki_ozs = ozs_i
+        zirve = max(zirve, ozs_i)
+        if not kill and (zirve - ozs_i) / zirve * 100 >= D(L.kill_switch_dusus_yuzde):
+            kill = True
+        if (ozs_i - gun_basi) / gun_basi * 100 <= -D(L.gunluk_max_kayip_yuzde):
+            gunluk_blok = True
+
+        # 6) mum kapanışı: sonraki açılış için kararlar
+        if poz is not None:
+            p = poz
+            p.tutulan += 1
+            p.ekstrem = max(p.ekstrem, h) if p.yon == 1 else min(p.ekstrem, l)
+            risk_birim_f = float(abs(p.giris - p.ilk_stop))
+            yeni = float(p.stop)
+            if cks_ayar.basabas_r_esigi:
+                yeni = cks.basabasa_cek(p.yon, yeni, float(p.giris), p.ekstrem,
+                                        risk_birim_f, cks_ayar.basabas_r_esigi)
+            if cks_ayar.atr_iz_suren_k:
+                yeni = cks.iz_suren_stop(p.yon, yeni, p.ekstrem, atr[i], cks_ayar.atr_iz_suren_k)
+            yeni_d = _tick(D(yeni), tick)
+            if (yeni_d - p.stop) * p.yon > 0:
+                p.stop = yeni_d
+            if kill:
+                bekleyen_cikis = "kill_switch"
+            elif s_cikis[i]:
+                bekleyen_cikis = "sinyal"
+            elif cks.zaman_doldu(p.tutulan, p.zaman_limit):
+                bekleyen_cikis = "zaman"
+        if s_yon[i] != 0:
+            bekleyen_giris = (int(s_yon[i]), s_stop[i], s_hedef[i], s_zc[i])
+
+    ozsermaye = pd.Series([float(x) for x in ozs], index=idx, name="ozsermaye")
+    df = pd.DataFrame(islemler, columns=KOLONLAR)
+    return SonucBacktest(df, ozsermaye, reddedilenler, uyarilar, float(ayarlar.baslangic_sermaye))
