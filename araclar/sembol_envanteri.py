@@ -44,14 +44,59 @@ CIKTI_YOLU = os.path.join(
     "sembol_envanteri.csv",
 )
 
-# Taban (USDT oncesi) isimlere gore sinif. Liste, sadece bilinen isimleri
-# icerir; geri kalan aktif semboller kripto sayilir, bilinmeyenler belirsiz.
+# Siniflandirma: taban isim (kotu quote ekleri ve _TARIH son eklerinden arindirilmis)
+# TRADFI_EMTIA ve TRADFI_HISSE'de yoksa ve BELIRSIZ'de de yoksa -> kripto (varsayilan).
+# BELIRSIZ: emin olunamayan isimler (tahmin yerine isaretlendi).
 TRADFI_EMTIA = {"XAU", "XAG", "XPT", "XPD", "CL", "BZ", "NATGAS", "COPPER", "WTI", "BRENT"}
+
 TRADFI_HISSE = {
-    "TSLA", "NVDA", "AAPL", "MSTR", "COIN", "SPY", "QQQ", "AMZN", "GOOGL",
-    "META", "MSFT", "HOOD", "PLTR", "CRCL",
+    # ABD hisseleri
+    "AAOI", "AAPL", "ABBV", "ACN", "ADBE", "AKAM", "ALAB", "AMAT", "AMC", "AMD",
+    "AMGN", "AMZN", "APLD", "APP", "ARM", "ASTS", "AVGO", "AXTI", "BAC", "BB",
+    "BBX", "BILL", "BMNR", "BRKB", "BX", "C", "CAT", "CEG", "CFG", "CIEN",
+    "COHR", "COIN", "COST", "CRCL", "CRDO", "CRM", "CRML", "CRWD", "CRWV", "CSCO",
+    "CVNA", "CVX", "DASH", "DDOG", "DELL", "DIS", "DJT", "DKNG", "EBAY", "EQT",
+    "F", "FIS", "FLNC", "GEV", "GLW", "GME", "GOOGL", "GPS", "GPRO", "GS",
+    "GTLB", "HD", "HEI", "HIMS", "HOOD", "HPE", "HUT", "IBKR", "IBM", "INTC",
+    "IONQ", "IR", "IREN", "JPM", "KLAC", "KO", "LLY", "LRCX", "MARA", "MCD",
+    "MDB", "MDT", "MELI", "MET", "META", "MP", "MRK", "MRNA", "MRVL", "MSFT",
+    "MSTR", "MU", "NBIS", "NET", "NFLX", "NKE", "NOK", "NOW", "NVDA", "NVO",
+    "OKLO", "ON", "ONDS", "ORCL", "OXY", "O", "PANW", "PATH", "PDD", "PFE",
+    "PLTR", "PYPL", "QCOM", "RDDT", "RDW", "RIVN", "RKLB", "SHOP", "SMCI", "SMR",
+    "SNDK", "SNOW", "SNPS", "SOFI", "STRC", "T", "TEAM", "TEM", "TER", "TSLA",
+    "TSM", "TTWO", "TWST", "TXN", "UB", "UBER", "UNFI", "UNH", "USAR", "V",
+    "VKTX", "VRT", "VST", "WDC", "WMT", "XOM", "ZM", "ZS",
+    # Yabanci hisseler (ABD disi, tradfi)
+    "ASML", "BABA", "BYD", "HANMI", "HK0625", "HK0700", "HK0992", "HK1810",
+    "HYUNDAI", "KUAISHOU", "LGELECTRONICS", "MEITUAN", "NAVER", "POPMART",
+    "SAMSUNG", "SHELL", "SKHYNIX", "SONY", "TENCENT",
+    # ETF ve kaldirac ETF'leri
+    "EIDO", "EWJ", "EWT", "EWY", "EWZ", "EWZS", "GDX", "IWM", "KODEX200", "KORU",
+    "MSTU", "MUU", "NVDL", "QQQ", "SLX", "SMH", "SOXL", "SOXS", "SPY", "SQQQ",
+    "TBT", "TMF", "TQQQ", "TSLL", "TZA", "URNM", "UVXY", "XBI", "XLE",
+    "CSOPSAMSUNG2L", "CSOPSKHYNIX2L",
 }
-BELIRSIZ = set()
+
+# Emin olunamayan isimler (tahmin yerine belirsiz isaretlendi)
+BELIRSIZ = {
+    "ACT", "ACU", "AGT", "AI", "AIA", "AIN", "AIO", "AIOT", "AKE", "ANTHROPIC",
+    "ARC", "ARIA", "ARX", "ASR", "ATA", "AVAAI", "AWE", "AZTEC", "B", "B2", "B3",
+    "BAN", "BANK", "BARD", "BEL", "BID", "BR", "BSP", "BTCU", "BTW", "BWET",
+    "CBRS", "CC", "CHIP", "CLO", "COLLECT", "COMMON", "CT", "CXMT", "CYPH", "CYS",
+    "D", "DAM", "DF", "DMC", "DOLO", "DOOD", "DRAM", "EDEN", "EPIC", "EPT",
+    "ESP", "ESPORTS", "ETHU", "FF", "FLEX", "FLM", "FLUID", "FOGO", "FOLKS",
+    "FORM", "FWDI", "G", "GIGADEV", "GRAM", "GUA", "H", "HANA", "HIGH", "HIPPO",
+    "HOME", "IDOL", "IN", "INTW", "JCT", "KSM", "KSTR", "LA", "LITE", "M",
+    "MINIMAX", "MON", "MVLL", "NAORIS", "NFP", "NXPC", "OL", "OPENAI", "OPG",
+    "OPN", "OURA", "PAXG", "PAYP", "PREDICT", "Q", "QNTX", "RAM", "RAYSOL", "RE",
+    "S", "SAMSUNGEM", "SECZ", "SHAZ", "SKDD", "SKHY", "SKUU", "SNXX", "SPACE",
+    "SPCX", "SPCXUSD1", "STM", "STXX", "TANSSI", "TRADOOR", "TREE", "TST", "UAI",
+    "UNITREE", "US", "USDBRL", "USDEX", "VIC", "XAUT", "XNY", "XPIN", "ZEST",
+    "ZHIPU", "ZHONGJI", "A", "AT",
+}
+
+# Vadeli (tarihli) kontratlar: BTCUSDT_260925 gibi; taban isim BTC/ETH olarak sinifa girer.
+# Bunlar sureklilik (perpetual) degil, raporda ayrica belirtilir.
 
 
 def istek_yap(oturum, parametreler):
@@ -122,16 +167,39 @@ def ay_listesi(oturum, sembol):
     return sorted(aylar)
 
 
-def tur_belirle(sembol, son_ay):
+KOTU_EKLER = ("SETTLED", "USDT", "USDC", "BUSD", "USD1", "USD")
+
+
+def taban_isim(sembol):
+    """BTCUSDT -> BTC, BTCUSDT_260925 -> BTC, MDTUSDTSETTLED -> MDT, BTCUSD1 -> BTC."""
+    ad = sembol.split("_")[0]
+    degisti = True
+    while degisti:
+        degisti = False
+        for ek in KOTU_EKLER:
+            if ad.endswith(ek) and len(ad) > len(ek):
+                ad = ad[: -len(ek)]
+                degisti = True
+                break
+    return ad
+
+
+TRADFI_ILK_AY = "2025-12"  # Binance TradFi perpetual'lari bu aydan once yok
+
+
+def tur_belirle(sembol, son_ay, ilk_ay=""):
     """Sadece aktif (son ay 2026-09 veya 2026-10) semboller siniflandirilir."""
     if son_ay not in AKTIF_AYLAR:
         return "pasif"
-    taban = sembol[:-4] if sembol.endswith("USDT") else sembol
+    if "_" in sembol or not sembol.endswith("USDT"):
+        return "vadeli_veya_usdt_disi"
+    taban = taban_isim(sembol)
     if taban in TRADFI_EMTIA:
         return "tradfi_emtia"
     if taban in TRADFI_HISSE:
-        return "tradfi_hisse"
-    if taban in BELIRSIZ:
+        # TradFi oncesi listelenen ayni adli semboller kripto (DASH, CVX, T, MDT...)
+        return "tradfi_hisse" if ilk_ay >= TRADFI_ILK_AY else "kripto"
+    if taban in BELIRSIZ or sembol in BELIRSIZ:
         return "belirsiz"
     return "kripto"
 
@@ -146,7 +214,7 @@ def main():
         aylar = ay_listesi(oturum, sembol)
         ilk_ay = aylar[0] if aylar else ""
         son_ay = aylar[-1] if aylar else ""
-        tur = tur_belirle(sembol, son_ay) if aylar else "pasif"
+        tur = tur_belirle(sembol, son_ay, ilk_ay) if aylar else "pasif"
         satirlar.append(
             {
                 "sembol": sembol,
