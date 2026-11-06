@@ -1,0 +1,84 @@
+{
+ "son_mum": "2026-10-15 23:00:00+00:00",
+ "baslangic": "2026-10-10 00:00:00+00:00",
+ "bitis": "2026-12-09 00:00:00+00:00",
+ "bitti": false,
+ "toplam": {
+  "baslangic": 10000,
+  "sermaye": 9587.86,
+  "getiri_yuzde": -4.12,
+  "maks_dusus_yuzde": -4.23
+ },
+ "kollar": {
+  "A": {
+   "baslangic": 5000.0,
+   "sermaye": 4573.16,
+   "gerceklesen_usd": -357.46,
+   "acik_kz_usd": -69.38,
+   "acik_pozisyon": 7,
+   "kapali_islem": 19,
+   "kapali_kazanma": 15.8,
+   "kapali_pf": 0.05,
+   "kapali_ort_R": -0.772,
+   "kapali_kar_usd": -357.46
+  },
+  "B": {
+   "baslangic": 5000.0,
+   "sermaye": 5014.69,
+   "gerceklesen_usd": 0.0,
+   "acik_kz_usd": 14.69,
+   "acik_pozisyon": 2,
+   "kapali_islem": 0,
+   "kapali_kazanma": null,
+   "kapali_pf": null,
+   "kapali_ort_R": null,
+   "kapali_kar_usd": 0.0
+  }
+ },
+ "beklenen_backtest": {
+  "A": {
+   "kazanma": 50.08,
+   "pf": 1.606,
+   "ayda_islem": 38.9
+  },
+  "B": {
+   "kazanma": 63.96,
+   "pf": 1.78,
+   "ayda_islem": 12.3
+  }
+ },
+ "eski_veri": [],
+ "acik_idler": [
+  "A2-TRXUSDT-2026101100",
+  "A1-XLMUSDT-2026101300",
+  "A2-UNIUSDT-2026101300",
+  "A1-LTCUSDT-2026101416",
+  "A1-DOGEUSDT-2026101504",
+  "A1-BTCUSDT-2026101504",
+  "A1-XRPUSDT-2026101504",
+  "B-NEARUSDT-2026101301",
+  "B-OPUSDT-2026101503"
+ ],
+ "kapali_idler": [
+  "A1-DOTUSDT-2026101004",
+  "A1-OPUSDT-2026101004",
+  "A1-FILUSDT-2026101004",
+  "A1-APTUSDT-2026101020",
+  "A1-ARBUSDT-2026101112",
+  "A1-NEARUSDT-2026101116",
+  "A1-FILUSDT-2026101200",
+  "A1-LTCUSDT-2026101208",
+  "A1-AAVEUSDT-2026101216",
+  "A1-XRPUSDT-2026101220",
+  "A1-ETHUSDT-2026101300",
+  "A1-BNBUSDT-2026101300",
+  "A1-LINKUSDT-2026101300",
+  "A1-BCHUSDT-2026101300",
+  "A1-DOGEUSDT-2026101300",
+  "A1-OPUSDT-2026101320",
+  "A1-NEARUSDT-2026101416",
+  "A1-ETHUSDT-2026101504",
+  "A1-ETCUSDT-2026101504"
+ ],
+ "son_rapor_gunu": "2026-10-15"
+}
