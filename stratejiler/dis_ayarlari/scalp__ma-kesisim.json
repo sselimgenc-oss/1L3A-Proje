@@ -1,0 +1,42 @@
+[
+ {
+  "dis_id": "tv:oq1Ju4Ha",
+  "kaynak_dosya": "arsiv/strateji-sg/tv/pine/oq1Ju4Ha.pine",
+  "parametreler": {
+   "adx_esik": 0.0,
+   "hedef_r": 0.0,
+   "hizli": 9,
+   "ma_tipi": "ema",
+   "yavas": 21
+  },
+  "cikis_ayarlari": null,
+  "not": "YAKLAŞIK: EMA9/21 kesişimi, EMA ile çıkış (ters kesişim); VWAP, MACD, RSI onayları yok."
+ },
+ {
+  "dis_id": "freqtrade:AdxSmas",
+  "kaynak_dosya": "arsiv/algo-sg/dis_kaynak/ft/strategies/AdxSmas.py",
+  "parametreler": {
+   "adx_esik": 25.0,
+   "hedef_r": 0.0,
+   "hizli": 3,
+   "ma_tipi": "sma",
+   "short": false,
+   "yavas": 6
+  },
+  "cikis_ayarlari": null,
+  "not": "YAKLAŞIK: SMA3/SMA6 kesişimi ADX>25 iken long (scalp ailesinde ADX filtresi var); ADX<25 çıkışı yok, ters kesişimde çıkış."
+ },
+ {
+  "dis_id": "freqtrade:FAdxSmaStrategy",
+  "kaynak_dosya": "arsiv/algo-sg/dis_kaynak/ft/strategies/FAdxSmaStrategy.py",
+  "parametreler": {
+   "adx_esik": 30.0,
+   "hizli": 12,
+   "ma_tipi": "sma",
+   "short": true,
+   "yavas": 48
+  },
+  "cikis_ayarlari": null,
+  "not": "YAKLAŞIK: SMA12/48 + ADX 30 eşiği (varsayılan değerler); kaynaktaki ADX çıkış koşulu yok."
+ }
+]

@@ -1,0 +1,42 @@
+[
+ {
+  "dis_id": "tv:uCV8I4xA",
+  "kaynak_dosya": "arsiv/strateji-sg/tv/pine/uCV8I4xA.pine",
+  "parametreler": {
+   "adx_esik": 0.0,
+   "bb_periyot": 200,
+   "bb_sapma": 2.0,
+   "hedef_tipi": "karsi",
+   "rsi_esik": 0.0,
+   "rsi_periyot": 6
+  },
+  "cikis_ayarlari": null,
+  "not": "YAKLAŞIK: BB(200,2): fiyat alt bandı yukarı keserse long, üst bandı aşağı keserse short; RSI(6)50 kesişim teyidi yok (RSI filtresi kapalı)."
+ },
+ {
+  "dis_id": "tv:zopumZ8a",
+  "kaynak_dosya": "arsiv/strateji-sg/tv/pine/zopumZ8a.pine",
+  "parametreler": {
+   "adx_esik": 0.0,
+   "bb_periyot": 20,
+   "bb_sapma": 2.0,
+   "hedef_tipi": "orta",
+   "rsi_esik": 0.0,
+   "rsi_periyot": 16
+  },
+  "cikis_ayarlari": null,
+  "not": "YAKLAŞIK: BB(20,2) bant içine geri dönüş; RSI(16)45/55 kesişim teyidi yok."
+ },
+ {
+  "dis_id": "kural:kurallar:Bollinger momentum (ortalamaya dönüş, 4h)",
+  "kaynak_dosya": "arsiv/algo-sg/dis_kaynak/kurallar.py",
+  "parametreler": {
+   "adx_esik": 0.0,
+   "bb_periyot": 20,
+   "bb_sapma": 2.0,
+   "hedef_tipi": "orta"
+  },
+  "cikis_ayarlari": null,
+  "not": "YAKLAŞIK: Bollinger bant dışı -> orta banda dönüş (4h); sapma/periyot kaynakta belirsiz, ADX filtresi kapalı."
+ }
+]

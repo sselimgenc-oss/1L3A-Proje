@@ -1,0 +1,15 @@
+[
+ {
+  "dis_id": "tv:Qg1Jra51",
+  "kaynak_dosya": "arsiv/strateji-sg/tv/pine/Qg1Jra51.pine",
+  "parametreler": {
+   "hedef_r": 2.0,
+   "hedef_tipi": "r",
+   "osilator": "rsi",
+   "rsi_periyot": 14,
+   "short": false
+  },
+  "cikis_ayarlari": null,
+  "not": "YAKLAŞIK: RSI boğa uyumsuzluğu long; hedef iki dip arası zirve yerine 2R; RSI zirvesi kırılım teyidi ailenin EMA teyidi ile yaklaşıldı."
+ }
+]

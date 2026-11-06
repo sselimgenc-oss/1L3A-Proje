@@ -1,0 +1,22 @@
+[
+ {
+  "dis_id": "tv:hezSShJr",
+  "kaynak_dosya": "arsiv/strateji-sg/tv/pine/hezSShJr.pine",
+  "parametreler": {
+   "hacim_k": 1.5,
+   "hedef_olcu": 1.0,
+   "short": false,
+   "trend_ema": 150,
+   "uzunluk": 15
+  },
+  "cikis_ayarlari": {
+   "kismi": [
+    [
+     1.0,
+     0.5
+    ]
+   ]
+  },
+  "not": "YAKLAŞIK: SMA50>150>200 trendinde sıkışma sonrası hacimli kırılım, yalnız long; trend_ema=150 yaklaşığı; %8 stop yerine kutu karşı ucu stopu; kademeli kâr alma 1R'de yarım."
+ }
+]

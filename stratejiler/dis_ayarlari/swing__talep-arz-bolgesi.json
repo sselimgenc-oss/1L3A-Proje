@@ -1,0 +1,14 @@
+[
+ {
+  "dis_id": "tv:ouvmvItR",
+  "kaynak_dosya": "arsiv/strateji-sg/tv/pine/ouvmvItR.pine",
+  "parametreler": {
+   "giris_modu": "tepki",
+   "hacim_onay": true,
+   "hedef_r": 2.0,
+   "itki_atr": 2.0
+  },
+  "cikis_ayarlari": null,
+  "not": "YAKLAŞIK: itki mumu öncesi order block ilk retest girişi (hacim teyitli); bölge tanımı ailenin baz/itki kuralı."
+ }
+]

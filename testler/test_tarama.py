@@ -158,3 +158,28 @@ def test_umutsuz_mu_ve_ozet():
     assert bool(o.loc["a", "umutsuz"]) and not bool(o.loc["b", "umutsuz"])
     assert o.loc["d", "hata_sayisi"] == 1
     assert len(df) == 9                                                              # hiçbir şey silinmedi
+
+
+def test_dis_ayarlari_gorev_ve_kurulum(tmp_path, monkeypatch):
+    """dis:<dis_id> ayar kaynağı: görev listesinde gelir, doğru parametre/çıkışla kurulur; mevcut kaynaklar bozulmaz."""
+    import json
+    ad = "swing__ma-kesisim"
+    kayit_dizini = tmp_path / "dis"
+    kayit_dizini.mkdir()
+    (kayit_dizini / f"{ad}.json").write_text(json.dumps([{
+        "dis_id": "tv:ORNEK", "kaynak_dosya": "x.pine", "parametreler": {"hizli": 14, "yavas": 28, "ma_tipi": "sma"},
+        "cikis_ayarlari": {"kismi": [[1.0, 0.5]], "sabit_r_hedefi": 1.0}, "not": "t"}]), encoding="utf-8")
+    monkeypatch.setattr(tarama, "DIS_AYAR_DIZINI", kayit_dizini)
+    liste = tarama._ayar_listesi(ad, izgara=False)
+    assert ("varsayilan", None) in liste and ("dis", "tv:ORNEK") in liste
+    assert [x for x in liste if x[0] == "kart"] == [("kart", k["kart_id"]) for k in kayit.kart_ayarlari(ad)]
+    s = tarama._strateji_kur(ad, "dis", "tv:ORNEK")
+    assert s.parametreler["hizli"] == 14 and s.parametreler["ma_tipi"] == "sma"
+    assert s.cikis_ayarlari.kismi == ((1.0, 0.5),) and s.cikis_ayarlari.sabit_r_hedefi == 1.0
+    assert tarama._etiket_ayar("dis", "tv:ORNEK") == "dis:tv:ORNEK" and tarama._etiket_ayar("kart", "k") == "kart:k"
+    g = [x for x in tarama.gorevler_uret([ad], ["BTCUSDT"], {"swing": ("4h",)}) if x["tur"] == "dis"]
+    assert len(g) == 1 and g[0]["ayar_kaynagi"] == "dis:tv:ORNEK" and g[0]["kurma_hatasi"] == ""
+    with pytest.raises(KeyError):
+        tarama._strateji_kur(ad, "dis", "tv:YOK")
+    # dosya yoksa dış ayar yok, davranış değişmez
+    assert tarama.dis_ayarlari("swing__macd-sinyal", kayit_dizini) == []

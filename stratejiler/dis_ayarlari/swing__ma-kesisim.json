@@ -1,0 +1,384 @@
+[
+ {
+  "dis_id": "freqtrade:AverageStrategy",
+  "kaynak_dosya": "arsiv/algo-sg/dis_kaynak/ft/strategies/AverageStrategy.py",
+  "parametreler": {
+   "hizli": 8,
+   "ma_tipi": "ema",
+   "short": false,
+   "yavas": 21
+  },
+  "cikis_ayarlari": null,
+  "not": "YAKLAŞIK: EMA8/21 kesişimi (hyperopt varsayılanı); hacim filtresi yok; yalnız long (kaynakta sat sinyali çıkış)."
+ },
+ {
+  "dis_id": "freqtrade:Freqtrade_backtest_validation_freqtrade1",
+  "kaynak_dosya": "arsiv/algo-sg/dis_kaynak/ft/strategies/Freqtrade_backtest_validation_freqtrade1.py",
+  "parametreler": {
+   "hizli": 14,
+   "ma_tipi": "sma",
+   "short": true,
+   "yavas": 28
+  },
+  "cikis_ayarlari": null,
+  "not": "Birleşik ayar, dis_id'ler: freqtrade:Freqtrade_backtest_validation_freqtrade1, tv:IHVPG6TS, tv:xAEG4ZJG. [freqtrade:Freqtrade_backtest_validation_freqtrade1] SMA14/SMA28 kesişimi long/short. #184 ve #97 aynı SMA14/28 TradingView örnek stratejisi. | [tv:IHVPG6TS] SMA14/SMA28 kesişiminde yön değiştirir (emir mekaniği örneği). | [tv:xAEG4ZJG] SMA14/SMA28 kesişimi; tarih/saat penceresi filtresi yok."
+ },
+ {
+  "dis_id": "tv:jjhUHcje",
+  "kaynak_dosya": "arsiv/strateji-sg/tv/pine/jjhUHcje.pine",
+  "parametreler": {
+   "hizli": 14,
+   "ma_tipi": "sma",
+   "short": false,
+   "yavas": 28
+  },
+  "cikis_ayarlari": null,
+  "not": "SMA14/SMA28 kesişimi yalnız long; kademeli izleyen stop yerine ters kesişim çıkışı."
+ },
+ {
+  "dis_id": "freqtrade:ReinforcedAverageStrategy",
+  "kaynak_dosya": "arsiv/algo-sg/dis_kaynak/ft/strategies/ReinforcedAverageStrategy.py",
+  "parametreler": {
+   "hizli": 8,
+   "ma_tipi": "ema",
+   "short": false,
+   "trend_ma": 50,
+   "yavas": 21
+  },
+  "cikis_ayarlari": null,
+  "not": "YAKLAŞIK: EMA8/21 kesişimi + üst TF SMA50 üstü; trend_ma=50 aynı TF EMA'dır."
+ },
+ {
+  "dis_id": "freqtrade:Strategy001",
+  "kaynak_dosya": "arsiv/algo-sg/dis_kaynak/ft/strategies/Strategy001.py",
+  "parametreler": {
+   "hizli": 20,
+   "ma_tipi": "ema",
+   "short": false,
+   "yavas": 50
+  },
+  "cikis_ayarlari": null,
+  "not": "Birleşik ayar, dis_id'ler: freqtrade:Strategy001, freqtrade:Strategy001_custom_exit, kural:kurallar:EMA20/50 long. [freqtrade:Strategy001] YAKLAŞIK: EMA20/50 yukarı kesişimi long; Heikin Ashi teyidi ve HA çıkışı yok. #299 aynı giriş. | [freqtrade:Strategy001_custom_exit] YAKLAŞIK: Strategy001 ile aynı giriş; özel çıkış fonksiyonu yok. | [kural:kurallar:EMA20/50 long] YAKLAŞIK: Durum kuralı (fiyat/MA üstündeyken long) kesişim tetiğine çevrildi (kesişimde gir, ters kesişimde çık). EMA20>EMA50 long."
+ },
+ {
+  "dis_id": "tv:MvlwAzSg",
+  "kaynak_dosya": "arsiv/strateji-sg/tv/pine/MvlwAzSg.pine",
+  "parametreler": {
+   "hizli": 21,
+   "ma_tipi": "ema",
+   "short": true,
+   "yavas": 50
+  },
+  "cikis_ayarlari": {
+   "sabit_r_hedefi": 1.0
+  },
+  "not": "YAKLAŞIK: EMA21/50 kesişimi long/short; 5 mum dip/tepe stop yerine 2 ATR stop, 1R hedef CikisAyarlari ile."
+ },
+ {
+  "dis_id": "tv:iILE5e3m",
+  "kaynak_dosya": "arsiv/strateji-sg/tv/pine/iILE5e3m.pine",
+  "parametreler": {
+   "hizli": 9,
+   "ma_tipi": "ema",
+   "short": true,
+   "yavas": 21
+  },
+  "cikis_ayarlari": null,
+  "not": "Birleşik ayar, dis_id'ler: tv:iILE5e3m, kural:kurallar:EMA9/21 kesişim (4h; doküman 5m). [tv:iILE5e3m] EMA9/21 kesişimi al/sat; TP/SL araç seti yok (aile stopu kullanılır). | [kural:kurallar:EMA9/21 kesişim (4h; doküman 5m)] EMA9/21 kesişiminde yön değiştir (4h)."
+ },
+ {
+  "dis_id": "tv:mVkDf8qh",
+  "kaynak_dosya": "arsiv/strateji-sg/tv/pine/mVkDf8qh.pine",
+  "parametreler": {
+   "hizli": 9,
+   "ma_tipi": "sma",
+   "short": true,
+   "yavas": 21
+  },
+  "cikis_ayarlari": null,
+  "not": "YAKLAŞIK: SMA9/21 kesişimi long/short, ters sinyalde kapanış; MACD/RSI/DMI filtreleri ve TP/SL yok."
+ },
+ {
+  "dis_id": "kural:kurallar:EMA10/20 kesişim + %2 stop",
+  "kaynak_dosya": "arsiv/algo-sg/dis_kaynak/kurallar.py",
+  "parametreler": {
+   "hizli": 10,
+   "ma_tipi": "ema",
+   "short": true,
+   "yavas": 20
+  },
+  "cikis_ayarlari": null,
+  "not": "YAKLAŞIK: EMA10/20 kesişimi; %2 sabit stop yerine ATR stop (atr_k)."
+ },
+ {
+  "dis_id": "kural:kurallar:Kapanış SMA10 long",
+  "kaynak_dosya": "arsiv/algo-sg/dis_kaynak/kurallar.py",
+  "parametreler": {
+   "hizli": 1,
+   "ma_tipi": "sma",
+   "short": false,
+   "yavas": 10
+  },
+  "cikis_ayarlari": null,
+  "not": "YAKLAŞIK: Kapanış SMA10 üstünde long: hizli=1 (kapanış) x SMA10 kesişimi olarak ifade edildi. Durum kuralı (fiyat/MA üstündeyken long) kesişim tetiğine çevrildi (kesişimde gir, ters kesişimde çık)."
+ },
+ {
+  "dis_id": "kural:kurallar:Kapanış SMA15 long",
+  "kaynak_dosya": "arsiv/algo-sg/dis_kaynak/kurallar.py",
+  "parametreler": {
+   "hizli": 1,
+   "ma_tipi": "sma",
+   "short": false,
+   "yavas": 15
+  },
+  "cikis_ayarlari": null,
+  "not": "YAKLAŞIK: Kapanış SMA15 üstünde long: hizli=1 (kapanış) x SMA15 kesişimi olarak ifade edildi. Durum kuralı (fiyat/MA üstündeyken long) kesişim tetiğine çevrildi (kesişimde gir, ters kesişimde çık)."
+ },
+ {
+  "dis_id": "kural:kurallar:Kapanış SMA20 long",
+  "kaynak_dosya": "arsiv/algo-sg/dis_kaynak/kurallar.py",
+  "parametreler": {
+   "hizli": 1,
+   "ma_tipi": "sma",
+   "short": false,
+   "yavas": 20
+  },
+  "cikis_ayarlari": null,
+  "not": "YAKLAŞIK: Kapanış SMA20 üstünde long: hizli=1 (kapanış) x SMA20 kesişimi olarak ifade edildi. Durum kuralı (fiyat/MA üstündeyken long) kesişim tetiğine çevrildi (kesişimde gir, ters kesişimde çık)."
+ },
+ {
+  "dis_id": "kural:kurallar:Kapanış SMA30 long",
+  "kaynak_dosya": "arsiv/algo-sg/dis_kaynak/kurallar.py",
+  "parametreler": {
+   "hizli": 1,
+   "ma_tipi": "sma",
+   "short": false,
+   "yavas": 30
+  },
+  "cikis_ayarlari": null,
+  "not": "YAKLAŞIK: Kapanış SMA30 üstünde long: hizli=1 (kapanış) x SMA30 kesişimi olarak ifade edildi. Durum kuralı (fiyat/MA üstündeyken long) kesişim tetiğine çevrildi (kesişimde gir, ters kesişimde çık)."
+ },
+ {
+  "dis_id": "kural:kurallar:Tek SMA50 long",
+  "kaynak_dosya": "arsiv/algo-sg/dis_kaynak/kurallar.py",
+  "parametreler": {
+   "hizli": 1,
+   "ma_tipi": "sma",
+   "short": false,
+   "yavas": 50
+  },
+  "cikis_ayarlari": null,
+  "not": "YAKLAŞIK: Kapanış SMA50 üstünde long: hizli=1 (kapanış) x SMA50 kesişimi olarak ifade edildi. Durum kuralı (fiyat/MA üstündeyken long) kesişim tetiğine çevrildi (kesişimde gir, ters kesişimde çık)."
+ },
+ {
+  "dis_id": "kural:kurallar:Kapanış SMA15 long-short",
+  "kaynak_dosya": "arsiv/algo-sg/dis_kaynak/kurallar.py",
+  "parametreler": {
+   "hizli": 1,
+   "ma_tipi": "sma",
+   "short": true,
+   "yavas": 15
+  },
+  "cikis_ayarlari": null,
+  "not": "YAKLAŞIK: Kapanış SMA15 üstünde long, altında short: hizli=1 x MA15 kesişimi."
+ },
+ {
+  "dis_id": "kural:kurallar:Kapanış SMA30 long-short",
+  "kaynak_dosya": "arsiv/algo-sg/dis_kaynak/kurallar.py",
+  "parametreler": {
+   "hizli": 1,
+   "ma_tipi": "sma",
+   "short": true,
+   "yavas": 30
+  },
+  "cikis_ayarlari": null,
+  "not": "YAKLAŞIK: Kapanış SMA30 üstünde long, altında short: hizli=1 x MA30 kesişimi."
+ },
+ {
+  "dis_id": "kural:kurallar:TechIndicator SMA20 L/S",
+  "kaynak_dosya": "arsiv/algo-sg/dis_kaynak/kurallar.py",
+  "parametreler": {
+   "hizli": 1,
+   "ma_tipi": "sma",
+   "short": true,
+   "yavas": 20
+  },
+  "cikis_ayarlari": null,
+  "not": "YAKLAŞIK: Kapanış SMA20 üstünde long, altında short: hizli=1 x MA20 kesişimi."
+ },
+ {
+  "dis_id": "kural:kurallar:TechIndicator EMA20 L/S",
+  "kaynak_dosya": "arsiv/algo-sg/dis_kaynak/kurallar.py",
+  "parametreler": {
+   "hizli": 1,
+   "ma_tipi": "ema",
+   "short": true,
+   "yavas": 20
+  },
+  "cikis_ayarlari": null,
+  "not": "YAKLAŞIK: Kapanış EMA20 üstünde long, altında short: hizli=1 x MA20 kesişimi."
+ },
+ {
+  "dis_id": "kural:kurallar:MA10/20 long",
+  "kaynak_dosya": "arsiv/algo-sg/dis_kaynak/kurallar.py",
+  "parametreler": {
+   "hizli": 10,
+   "ma_tipi": "sma",
+   "short": false,
+   "yavas": 20
+  },
+  "cikis_ayarlari": null,
+  "not": "Birleşik ayar, dis_id'ler: kural:kurallar:MA10/20 long, kural:kurallar:SMA 10/20 kesişim long. [kural:kurallar:MA10/20 long] YAKLAŞIK: Durum kuralı (fiyat/MA üstündeyken long) kesişim tetiğine çevrildi (kesişimde gir, ters kesişimde çık). SMA10>SMA20 long. #359 aynı. | [kural:kurallar:SMA 10/20 kesişim long] SMA10/20 yukarı kesişimde long, ters kesişimde çıkış."
+ },
+ {
+  "dis_id": "kural:kurallar:SMA 10/20 dur-ve-dön",
+  "kaynak_dosya": "arsiv/algo-sg/dis_kaynak/kurallar.py",
+  "parametreler": {
+   "hizli": 10,
+   "ma_tipi": "sma",
+   "short": true,
+   "yavas": 20
+  },
+  "cikis_ayarlari": null,
+  "not": "SMA10/20 dur-ve-dön, hep piyasada."
+ },
+ {
+  "dis_id": "kural:kurallar:MA5/20 long",
+  "kaynak_dosya": "arsiv/algo-sg/dis_kaynak/kurallar.py",
+  "parametreler": {
+   "hizli": 5,
+   "ma_tipi": "sma",
+   "short": false,
+   "yavas": 20
+  },
+  "cikis_ayarlari": null,
+  "not": "YAKLAŞIK: Durum kuralı (fiyat/MA üstündeyken long) kesişim tetiğine çevrildi (kesişimde gir, ters kesişimde çık). SMA5>SMA20 long."
+ },
+ {
+  "dis_id": "kural:kurallar:Momentum EMA9/21 + SMA200 + %5 iz (1h)",
+  "kaynak_dosya": "arsiv/algo-sg/dis_kaynak/kurallar.py",
+  "parametreler": {
+   "hizli": 9,
+   "ma_tipi": "ema",
+   "short": false,
+   "trend_ma": 200,
+   "yavas": 21
+  },
+  "cikis_ayarlari": null,
+  "not": "YAKLAŞIK: EMA9/21 + SMA200 üstünde (trend_ma=200 EMA olarak); %5 iz süren stop yok (ATR stop)."
+ },
+ {
+  "dis_id": "kural:kurallar:SMA 10/25 + 2xATR(100) iz süren stop",
+  "kaynak_dosya": "arsiv/algo-sg/dis_kaynak/kurallar.py",
+  "parametreler": {
+   "atr_periyot": 100,
+   "hizli": 10,
+   "ma_tipi": "sma",
+   "short": true,
+   "yavas": 25
+  },
+  "cikis_ayarlari": {
+   "atr_iz_suren_k": 2.0,
+   "atr_periyot": 100
+  },
+  "not": "YAKLAŞIK: SMA10/25 kesişimi; 2 ATR(100) iz süren stop CikisAyarlari ile."
+ },
+ {
+  "dis_id": "kural:kurallar:SMA 10/30 kesişim long",
+  "kaynak_dosya": "arsiv/algo-sg/dis_kaynak/kurallar.py",
+  "parametreler": {
+   "hizli": 10,
+   "ma_tipi": "sma",
+   "short": false,
+   "yavas": 30
+  },
+  "cikis_ayarlari": null,
+  "not": "SMA10/30 yukarı kesişimde long, ters kesişimde çıkış."
+ },
+ {
+  "dis_id": "kural:kurallar:SMA 10/30 long-short (dön)",
+  "kaynak_dosya": "arsiv/algo-sg/dis_kaynak/kurallar.py",
+  "parametreler": {
+   "hizli": 10,
+   "ma_tipi": "sma",
+   "short": true,
+   "yavas": 30
+  },
+  "cikis_ayarlari": null,
+  "not": "SMA10/30 long-short, hep piyasada."
+ },
+ {
+  "dis_id": "kural:kurallar:SMA 13/50 kesişim long",
+  "kaynak_dosya": "arsiv/algo-sg/dis_kaynak/kurallar.py",
+  "parametreler": {
+   "hizli": 13,
+   "ma_tipi": "sma",
+   "short": false,
+   "yavas": 50
+  },
+  "cikis_ayarlari": null,
+  "not": "SMA13/50 yukarı kesişimde long, ters kesişimde çıkış."
+ },
+ {
+  "dis_id": "kural:kurallar:SMA 15/50 kesişim long",
+  "kaynak_dosya": "arsiv/algo-sg/dis_kaynak/kurallar.py",
+  "parametreler": {
+   "hizli": 15,
+   "ma_tipi": "sma",
+   "short": false,
+   "yavas": 50
+  },
+  "cikis_ayarlari": null,
+  "not": "SMA15/50 yukarı kesişimde long, ters kesişimde çıkış."
+ },
+ {
+  "dis_id": "kural:kurallar:SMA20/50 long",
+  "kaynak_dosya": "arsiv/algo-sg/dis_kaynak/kurallar.py",
+  "parametreler": {
+   "hizli": 20,
+   "ma_tipi": "sma",
+   "short": false,
+   "yavas": 50
+  },
+  "cikis_ayarlari": null,
+  "not": "YAKLAŞIK: Durum kuralı (fiyat/MA üstündeyken long) kesişim tetiğine çevrildi (kesişimde gir, ters kesişimde çık). SMA20>SMA50 long."
+ },
+ {
+  "dis_id": "kural:kurallar:TechIndicator SMA2 (20/50) L/S",
+  "kaynak_dosya": "arsiv/algo-sg/dis_kaynak/kurallar.py",
+  "parametreler": {
+   "hizli": 20,
+   "ma_tipi": "sma",
+   "short": true,
+   "yavas": 50
+  },
+  "cikis_ayarlari": null,
+  "not": "SMA20/50 kesişiminde long-short."
+ },
+ {
+  "dis_id": "kural:kurallar:SMA50/200 altın kesişim",
+  "kaynak_dosya": "arsiv/algo-sg/dis_kaynak/kurallar.py",
+  "parametreler": {
+   "hizli": 50,
+   "ma_tipi": "sma",
+   "short": false,
+   "yavas": 200
+  },
+  "cikis_ayarlari": null,
+  "not": "SMA50/200 altın kesişim long (ters kesişimde çıkış)."
+ },
+ {
+  "dis_id": "kural:kurallar:SMA5/15 kesişim + %2 stop/%2 hedef",
+  "kaynak_dosya": "arsiv/algo-sg/dis_kaynak/kurallar.py",
+  "parametreler": {
+   "hizli": 5,
+   "ma_tipi": "sma",
+   "short": true,
+   "yavas": 15
+  },
+  "cikis_ayarlari": {
+   "sabit_r_hedefi": 1.0
+  },
+  "not": "YAKLAŞIK: SMA5/15 kesişimi; %2 stop/%2 hedef = 1R hedef (stop ATR tabanlı); limit giriş yok."
+ }
+]

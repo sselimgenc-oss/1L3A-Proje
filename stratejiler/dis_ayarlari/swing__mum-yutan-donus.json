@@ -1,0 +1,21 @@
+[
+ {
+  "dis_id": "tv:OqjKbuRp",
+  "kaynak_dosya": "arsiv/strateji-sg/tv/pine/OqjKbuRp.pine",
+  "parametreler": {
+   "hacim_k": 0.0,
+   "hedef_r": 2.0,
+   "stop_modu": "uc",
+   "trend_mum": 6
+  },
+  "cikis_ayarlari": {
+   "kismi": [
+    [
+     1.0,
+     0.5
+    ]
+   ]
+  },
+  "not": "YAKLAŞIK: yutan mum girişi; sabah/akşam yıldızı ve EMA yok; TP1 kısmi 1R'de yarım."
+ }
+]

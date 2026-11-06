@@ -1,0 +1,14 @@
+[
+ {
+  "dis_id": "tv:ghocsiv7",
+  "kaynak_dosya": "arsiv/strateji-sg/tv/pine/ghocsiv7.pine",
+  "parametreler": {
+   "gap_olcum": "acilis",
+   "hedef_oran": 1.0,
+   "min_gap_atr": 1.0,
+   "sma_gun": 0
+  },
+  "cikis_ayarlari": null,
+  "not": "YAKLAŞIK: boşluğu dolum yönünde işlem, hedef tam dolum, gün sonu çıkışı; kaynakta stop yok, ailede seans dibi/zirvesi stopu var; SMA filtresi kapalı."
+ }
+]
