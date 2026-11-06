@@ -19,10 +19,11 @@ Ayrıntı ve bitiş ölçütleri: [DURUM.md](DURUM.md) → "Yol haritası".
 |---|---|---|
 | 0 | PDF'lerden strateji kartı, ailelere birleştirme | ✅ |
 | 1 | Altyapı + aday stratejilerin kodu (1A motor, 1B veri, 1C adaylar) | ⏳ |
-| 2 | Test ve seçim: BTC/ETH walk-forward → eleme → TradFi doğrulama | |
-| 3 | Paper trading (Frankfurt sunucu, canlı veri, ≥ 8 hafta) | |
-| 4 | Lider ajan + öğrenme döngüsü (öneri → test → onay) | |
-| 5 | Küçük bütçeyle canlı | |
+| 2 | Test ve seçim: BTC/ETH walk-forward → eleme → ajan başına ~3 strateji | |
+| 3 | Pano (sg-arge örneği; motorun yazdığını gösterir) | |
+| 4 | Paper trading (Frankfurt sunucu, canlı veri, ≥ 8 hafta) | |
+| 5 | Lider ajan + öğrenme döngüsü (öneri → test → onay) | |
+| 6 | Küçük bütçeyle canlı | |
 
 ## Klasörler
 ```
