@@ -1,0 +1,50 @@
+{
+ "ad": "st_rejim",
+ "pine_id": "TbK1rB5B",
+ "tf": "1h",
+ "evren": [
+  "kripto",
+  "abd",
+  "bist",
+  "emtia"
+ ],
+ "neden": "Zaman dilimi belirtilmemiş; 1 saatlik. Trailing/TP varsayılanı kapalı (yalnız dönüşle çıkış).",
+ "olcut": {
+  "n": 26388,
+  "kar": -21649.70415550453,
+  "pf": 0.8536008195557965,
+  "sharpe": 0.44388794809443377,
+  "beklenti_R": -0.0883454808774251,
+  "kazanma": 0.396543883583447,
+  "maxdd": 2.2081922774617055,
+  "dd_gun": 2840,
+  "cagr": null,
+  "calmar": null,
+  "psr": 0.9121495714870765,
+  "tutma_gun": 1.125,
+  "ort_islem_getiri": -0.0030356186666426694,
+  "netR_toplam": -2331.2605493934934,
+  "sharpe_egitim": 0.4716397295788377,
+  "sharpe_oos": 1.1993519638285146,
+  "oos_kar": -4743.192095295435,
+  "tur": "swing",
+  "pf_maliyet2x": 0.7808316672032338,
+  "komsu_n": 16,
+  "komsu_karda": 0.0,
+  "enstr_n": 37,
+  "enstr_karda": 0.13513513513513514,
+  "maks_kor": 0.020026263809476905
+ },
+ "kurallar": {
+  "1_islem_sayisi": true,
+  "2_maks_dusus<=20": false,
+  "3_beklenti>=0.15R": false,
+  "4a_kf>=1.3": false,
+  "4b_sharpe>=1": false,
+  "5_oos": false,
+  "6_maliyet2x_kf>=1.1": false,
+  "7_komsu>=70": false,
+  "8_enstr>=60": false
+ },
+ "gecti": false
+}

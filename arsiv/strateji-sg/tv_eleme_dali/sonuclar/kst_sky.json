@@ -1,0 +1,47 @@
+{
+ "ad": "kst_sky",
+ "pine_id": "Pv1GvUVs",
+ "tf": "1h",
+ "evren": [
+  "kripto"
+ ],
+ "neden": "PDF: BTCUSDT 1 saat.",
+ "olcut": {
+  "n": 5140,
+  "kar": -7630.162324569408,
+  "pf": 0.9628416239009931,
+  "sharpe": 0.4204199458384202,
+  "beklenti_R": -0.038615973791936806,
+  "kazanma": 0.42840466926070037,
+  "maxdd": 0.9891556831546625,
+  "dd_gun": 2669,
+  "cagr": -0.16892603143434504,
+  "calmar": -0.17077800220042014,
+  "psr": 0.9090841384089476,
+  "tutma_gun": 0.5416666666666666,
+  "ort_islem_getiri": -0.0006217058354697081,
+  "netR_toplam": -198.48610529055517,
+  "sharpe_egitim": 0.55666645119058,
+  "sharpe_oos": -0.1536010605595225,
+  "oos_kar": -3602.363426216295,
+  "tur": "gun",
+  "pf_maliyet2x": 0.8665983290890839,
+  "komsu_n": 18,
+  "komsu_karda": 0.3333333333333333,
+  "enstr_n": 14,
+  "enstr_karda": 0.42857142857142855,
+  "maks_kor": 0.2327100661997512
+ },
+ "kurallar": {
+  "1_islem_sayisi": true,
+  "2_maks_dusus<=20": false,
+  "3_beklenti>=0.15R": false,
+  "4a_kf>=1.3": false,
+  "4b_sharpe>=1": false,
+  "5_oos": false,
+  "6_maliyet2x_kf>=1.1": false,
+  "7_komsu>=70": false,
+  "8_enstr>=60": false
+ },
+ "gecti": false
+}

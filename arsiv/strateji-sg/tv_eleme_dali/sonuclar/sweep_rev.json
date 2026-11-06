@@ -1,0 +1,48 @@
+{
+ "ad": "sweep_rev",
+ "pine_id": "GoeqO1ev",
+ "tf": "1h",
+ "evren": [
+  "kripto",
+  "emtia"
+ ],
+ "neden": "Seans penceresi 12:00–16:00 → saatlik; borsa saati UTC alındı (kripto/emtia).",
+ "olcut": {
+  "n": 3947,
+  "kar": -27203.76664886152,
+  "pf": 0.7834996341007037,
+  "sharpe": -0.18483412236310656,
+  "beklenti_R": -0.11690881522015384,
+  "kazanma": 0.2873068153027616,
+  "maxdd": 2.8273807031535654,
+  "dd_gun": 2841,
+  "cagr": null,
+  "calmar": null,
+  "psr": 0.3008016853770403,
+  "tutma_gun": 0.5416666666666666,
+  "ort_islem_getiri": -0.003091455045419841,
+  "netR_toplam": -461.4390936739472,
+  "sharpe_egitim": -0.24442747234024614,
+  "sharpe_oos": 2.558913571499063,
+  "oos_kar": -12939.206210403772,
+  "tur": "gun",
+  "pf_maliyet2x": 0.6847226459145109,
+  "komsu_n": 24,
+  "komsu_karda": 0.0,
+  "enstr_n": 17,
+  "enstr_karda": 0.11764705882352941,
+  "maks_kor": 0.03902619715138562
+ },
+ "kurallar": {
+  "1_islem_sayisi": true,
+  "2_maks_dusus<=20": false,
+  "3_beklenti>=0.15R": false,
+  "4a_kf>=1.3": false,
+  "4b_sharpe>=1": false,
+  "5_oos": false,
+  "6_maliyet2x_kf>=1.1": false,
+  "7_komsu>=70": false,
+  "8_enstr>=60": false
+ },
+ "gecti": false
+}

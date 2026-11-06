@@ -1,0 +1,50 @@
+{
+ "ad": "bb_rsi_b",
+ "pine_id": "zopumZ8a",
+ "tf": "1d",
+ "evren": [
+  "kripto",
+  "abd",
+  "bist",
+  "emtia"
+ ],
+ "neden": "Klasik ChartArt betiği; günlük, tüm pazarlar.",
+ "olcut": {
+  "n": 355,
+  "kar": -3941.0340153125217,
+  "pf": 0.9208612643108232,
+  "sharpe": 0.282746782017461,
+  "beklenti_R": -0.04213301702888576,
+  "kazanma": 0.4676056338028169,
+  "maxdd": 5.527307860538014,
+  "dd_gun": 2960,
+  "cagr": -0.04162891330166052,
+  "calmar": -0.007531498941621911,
+  "psr": 0.8584685078573713,
+  "tutma_gun": 257.0416666666667,
+  "ort_islem_getiri": -0.04107556579339809,
+  "netR_toplam": -14.957221045254443,
+  "sharpe_egitim": 0.0096952743988867,
+  "sharpe_oos": 0.6230613610864427,
+  "oos_kar": 37.12327041505068,
+  "tur": "swing",
+  "pf_maliyet2x": 0.9164953634544885,
+  "komsu_n": 16,
+  "komsu_karda": 0.3125,
+  "enstr_n": 37,
+  "enstr_karda": 0.6216216216216216,
+  "maks_kor": 0.07762969896234079
+ },
+ "kurallar": {
+  "1_islem_sayisi": true,
+  "2_maks_dusus<=20": false,
+  "3_beklenti>=0.15R": false,
+  "4a_kf>=1.3": false,
+  "4b_sharpe>=1": false,
+  "5_oos": true,
+  "6_maliyet2x_kf>=1.1": false,
+  "7_komsu>=70": false,
+  "8_enstr>=60": true
+ },
+ "gecti": false
+}

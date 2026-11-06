@@ -1,0 +1,50 @@
+{
+ "ad": "ribbon_fan",
+ "pine_id": "X0F9OE4L",
+ "tf": "4h",
+ "evren": [
+  "kripto",
+  "abd",
+  "bist",
+  "emtia"
+ ],
+ "neden": "Yazar zaman dilimi belirtmemiş; 4 saatlik.",
+ "olcut": {
+  "n": 10883,
+  "kar": 259.25523338950916,
+  "pf": 1.0008824695725758,
+  "sharpe": 0.2125950830452918,
+  "beklenti_R": -0.0035553636662241667,
+  "kazanma": 0.3731507856289626,
+  "maxdd": 0.6960042752434391,
+  "dd_gun": 1905,
+  "cagr": 0.003294870901865643,
+  "calmar": 0.0047339808375648365,
+  "psr": 0.7292612320531316,
+  "tutma_gun": 0.8333333333333334,
+  "ort_islem_getiri": -0.0002238408615880169,
+  "netR_toplam": -38.693022779517605,
+  "sharpe_egitim": 0.00048759792428937625,
+  "sharpe_oos": 0.6197800448329736,
+  "oos_kar": 3564.2546532764045,
+  "tur": "gun",
+  "pf_maliyet2x": 0.8826256985099395,
+  "komsu_n": 24,
+  "komsu_karda": 0.5833333333333334,
+  "enstr_n": 37,
+  "enstr_karda": 0.40540540540540543,
+  "maks_kor": 0.1163435371905773
+ },
+ "kurallar": {
+  "1_islem_sayisi": true,
+  "2_maks_dusus<=20": false,
+  "3_beklenti>=0.15R": false,
+  "4a_kf>=1.3": false,
+  "4b_sharpe>=1": false,
+  "5_oos": true,
+  "6_maliyet2x_kf>=1.1": false,
+  "7_komsu>=70": false,
+  "8_enstr>=60": false
+ },
+ "gecti": false
+}

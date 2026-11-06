@@ -1,0 +1,50 @@
+{
+ "ad": "hma_st",
+ "pine_id": "3SHJZytF",
+ "tf": "4h",
+ "evren": [
+  "kripto",
+  "abd",
+  "bist",
+  "emtia"
+ ],
+ "neden": "Zaman dilimi belirtilmemiş; 4 saatlik (Yahoo 1s 2 yıl, kripto 2019+).",
+ "olcut": {
+  "n": 10083,
+  "kar": 12074.962619989605,
+  "pf": 1.1731098769230843,
+  "sharpe": 0.8983612702184676,
+  "beklenti_R": 0.11080542950129789,
+  "kazanma": 0.35991272438758304,
+  "maxdd": 0.09670324158532864,
+  "dd_gun": 409,
+  "cagr": 0.1071273011452325,
+  "calmar": 1.1077943137067015,
+  "psr": 0.9963604376904207,
+  "tutma_gun": 3.5,
+  "ort_islem_getiri": 0.004430959207970002,
+  "netR_toplam": 1117.2511456615866,
+  "sharpe_egitim": 1.0862088115399675,
+  "sharpe_oos": 0.3043273512277786,
+  "oos_kar": 1229.343840215006,
+  "tur": "swing",
+  "pf_maliyet2x": 1.1000294673932522,
+  "komsu_n": 14,
+  "komsu_karda": 1.0,
+  "enstr_n": 37,
+  "enstr_karda": 0.7027027027027027,
+  "maks_kor": 0.28714410775069527
+ },
+ "kurallar": {
+  "1_islem_sayisi": true,
+  "2_maks_dusus<=20": true,
+  "3_beklenti>=0.15R": false,
+  "4a_kf>=1.3": false,
+  "4b_sharpe>=1": false,
+  "5_oos": false,
+  "6_maliyet2x_kf>=1.1": true,
+  "7_komsu>=70": true,
+  "8_enstr>=60": true
+ },
+ "gecti": false
+}

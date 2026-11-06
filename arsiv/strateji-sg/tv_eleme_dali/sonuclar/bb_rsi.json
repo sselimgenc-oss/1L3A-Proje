@@ -1,0 +1,50 @@
+{
+ "ad": "bb_rsi",
+ "pine_id": "uCV8I4xA",
+ "tf": "1d",
+ "evren": [
+  "kripto",
+  "abd",
+  "bist",
+  "emtia"
+ ],
+ "neden": "Zaman dilimi belirtilmemiş; günlük (klasik 2016 betiği).",
+ "olcut": {
+  "n": 144,
+  "kar": -113936.14465556429,
+  "pf": 0.09245087767009152,
+  "sharpe": 0.21545819961416085,
+  "beklenti_R": -0.3844478920980862,
+  "kazanma": 0.5763888888888888,
+  "maxdd": 11.706483783533765,
+  "dd_gun": 3812,
+  "cagr": null,
+  "calmar": null,
+  "psr": 0.7690453488290793,
+  "tutma_gun": 485.5,
+  "ort_islem_getiri": -2.927525939066582,
+  "netR_toplam": -55.360496462124416,
+  "sharpe_egitim": 0.2190301801361799,
+  "sharpe_oos": 1.406062889424973,
+  "oos_kar": -68409.72429042101,
+  "tur": "swing",
+  "pf_maliyet2x": 0.09207054428883876,
+  "komsu_n": 14,
+  "komsu_karda": 0.0,
+  "enstr_n": 37,
+  "enstr_karda": 0.1891891891891892,
+  "maks_kor": 0.06689918200652728
+ },
+ "kurallar": {
+  "1_islem_sayisi": true,
+  "2_maks_dusus<=20": false,
+  "3_beklenti>=0.15R": false,
+  "4a_kf>=1.3": false,
+  "4b_sharpe>=1": false,
+  "5_oos": false,
+  "6_maliyet2x_kf>=1.1": false,
+  "7_komsu>=70": false,
+  "8_enstr>=60": false
+ },
+ "gecti": false
+}
