@@ -1,0 +1,39 @@
+name: dis-dakika
+# Tek seferlik toplu test: freqtrade-strategies deposundaki dakikalık (1m/5m/15m/30m) stratejiler, kendi zaman dilimlerinde.
+# Tetikleyici: geliştirme dalında dis_kaynak/ft/BASLAT dosyasına push. Veri commit edilmez; yalnız özet tablolar commit edilir.
+# 5 paralel parça (her biri ayrı runner, stratejiler sırayla: bellek taşmasın).
+on:
+  push:
+    branches-ignore: [main, kagit-durum]
+    paths: ["dis_kaynak/ft/BASLAT"]
+permissions:
+  contents: write
+concurrency: { group: dis-dakika, cancel-in-progress: false }
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 58  # 5 parça x 58 dk <= 290 dk toplam sınır
+    strategy:
+      fail-fast: false
+      matrix: { parca: [0, 1, 2, 3, 4] }
+    steps:
+      - uses: actions/checkout@v4
+        with: { ref: "${{ github.ref_name }}" }
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - run: pip install -q freqtrade ta-lib technical ta scikit-learn
+      - name: Veri (data.binance.vision, 10 coin)
+        run: python dis_kaynak/ft/indir.py "$RUNNER_TEMP/ud"
+      - name: Stratejileri koştur
+        timeout-minutes: 53
+        continue-on-error: true
+        env: { PARCA: "${{ matrix.parca }}", PARCA_SAYI: "5", PER_RUN_TIMEOUT: "900" }
+        run: python dis_kaynak/ft/dakika.py "$RUNNER_TEMP/ud" "dis_kaynak/dakika_parca_${{ matrix.parca }}.csv"
+      - name: Parça sonucunu commit et
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add dis_kaynak/dakika_parca_*.csv || true
+          git commit -m "Dakikalık freqtrade testi parça ${{ matrix.parca }}" || exit 0
+          for i in 1 2 3 4 5; do git pull --rebase origin "${{ github.ref_name }}" && git push origin "HEAD:${{ github.ref_name }}" && break; sleep $((i*7)); done

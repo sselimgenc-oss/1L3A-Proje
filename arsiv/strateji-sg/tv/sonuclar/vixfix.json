@@ -1,0 +1,50 @@
+{
+ "ad": "vixfix",
+ "pine_id": "TDxSLJRA",
+ "tf": "1d",
+ "evren": [
+  "kripto",
+  "abd",
+  "bist",
+  "emtia"
+ ],
+ "neden": "Zaman dilimi belirtilmemiş; günlük, yalnız long (dip alma).",
+ "olcut": {
+  "n": 742,
+  "kar": 26798.33144314635,
+  "pf": 3.407894839291098,
+  "sharpe": 0.4921893950168169,
+  "beklenti_R": 0.756117921232919,
+  "kazanma": 0.6859838274932615,
+  "maxdd": 0.6684252488310946,
+  "dd_gun": 1982,
+  "cagr": 0.11690909148056394,
+  "calmar": 0.17490226720939725,
+  "psr": 0.9662174015367428,
+  "tutma_gun": 63.0,
+  "ort_islem_getiri": 0.13363049371919342,
+  "netR_toplam": 561.0394975548259,
+  "sharpe_egitim": 0.5477423179772535,
+  "sharpe_oos": 0.9423096337446192,
+  "oos_kar": 4410.072731391047,
+  "tur": "swing",
+  "pf_maliyet2x": 3.3570618716655165,
+  "komsu_n": 24,
+  "komsu_karda": 1.0,
+  "enstr_n": 37,
+  "enstr_karda": 0.918918918918919,
+  "maks_kor": 0.15710032768241863
+ },
+ "kurallar": {
+  "1_islem_sayisi": true,
+  "2_maks_dusus<=20": false,
+  "3_beklenti>=0.15R": true,
+  "4a_kf>=1.3": true,
+  "4b_sharpe>=1": false,
+  "5_oos": true,
+  "6_maliyet2x_kf>=1.1": true,
+  "7_komsu>=70": true,
+  "8_enstr>=60": true
+ },
+ "gecti": false
+}

@@ -1,0 +1,21 @@
+# Deneme: dal üzerinde canlı veriyle botu 12 saat geriden başlatıp çalıştırır (durum kaydedilmez, rapor gönderilmez).
+name: kagit-deneme
+on:
+  push:
+    branches: [claude/dreamy-cannon-lsimjy]
+    paths: ["canli/**", ".github/workflows/kagit_deneme.yml"]
+jobs:
+  deneme:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: pip
+          cache-dependency-path: canli/gereksinimler.txt
+      - run: pip install -q -r canli/gereksinimler.txt
+      - run: python -m canli.kagit --durum /tmp/kd --geri 30
+      - run: python -m canli.kagit --durum /tmp/kd
+      - run: cat /tmp/kd/ozet.md; echo; cat /tmp/kd/gunluk_rapor.md 2>/dev/null; echo; tail -3 /tmp/kd/ozsermaye.csv; cat /tmp/kd/kmn_dengeleme.csv 2>/dev/null | cut -c1-300; python -c "import json;d=json.load(open('/tmp/kd/durum.json'));print(d['evren'])"

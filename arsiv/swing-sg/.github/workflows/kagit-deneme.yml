@@ -1,0 +1,21 @@
+# Kağıt botunun uçtan uca denemesi (yalnızca geliştirme dallarında; durum kaydetmez, rapor yazmaz).
+name: kagit-deneme
+on:
+  push:
+    branches-ignore: [main, kagit-durum]
+    paths: ["kagit/**", "swing/**", ".github/workflows/kagit-deneme.yml"]
+jobs:
+  deneme:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12", cache: pip, cache-dependency-path: kagit/gereksinimler.txt }
+      - run: pip install -q -r kagit/gereksinimler.txt
+      - run: python scripts/fetch_data.py
+      - name: Motor (gerçek ayarla + 2026-09-15 başlangıçlı deneme)
+        run: |
+          python -m kagit.motor --durum /tmp/gercek | head -20
+          KAGIT_BASLANGIC=2026-09-15 python -m kagit.motor --durum /tmp/deneme
+          ls -la /tmp/deneme
