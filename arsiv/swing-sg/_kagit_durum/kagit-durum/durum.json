@@ -1,0 +1,46 @@
+{
+  "baslangic": "2026-10-11",
+  "bitis": "2026-12-09",
+  "sermaye": 10000.0,
+  "guncelleme": "2026-10-15 17:10 UTC",
+  "son_veri": "2026-10-15",
+  "deger": 9563.28,
+  "getiri": -0.04367,
+  "gerceklesen": 9898.01,
+  "max_dusus": -0.0502,
+  "kapanan_islem": 1,
+  "kazanma_orani": 0.0,
+  "ort_R": -1.0199256163112782,
+  "acik_pozisyon": 9,
+  "strateji": {
+    "S1": {
+      "kapanan": 0,
+      "kazanma": null,
+      "ort_R": null,
+      "acik": 9
+    },
+    "S2": {
+      "kapanan": 0,
+      "kazanma": null,
+      "ort_R": null,
+      "acik": 0
+    },
+    "S3": {
+      "kapanan": 1,
+      "kazanma": 0.0,
+      "ort_R": -1.0199256163112782,
+      "acik": 0
+    }
+  },
+  "beklenti": {
+    "kaynak": "SONUCLAR.md, örneklem-dışı 2023-2026",
+    "kazanma_orani": 0.55,
+    "yillik_getiri": 0.25,
+    "max_dusus": -0.13,
+    "ort_R": 0.26,
+    "60_gunde_islem": "25-45",
+    "60_gunde_getiri": "yaklaşık +%3-4 (geniş aralık: -%8 ile +%15 arası normal)"
+  },
+  "bitti": false,
+  "son_rapor_gunu": "2026-10-15"
+}

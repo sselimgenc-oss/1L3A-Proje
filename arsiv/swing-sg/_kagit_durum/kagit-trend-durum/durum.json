@@ -1,0 +1,36 @@
+{
+  "baslangic": "2026-10-12",
+  "bitis": "2026-12-10",
+  "sermaye": 10000.0,
+  "guncelleme": "2026-10-15 06:32 UTC",
+  "deger": 9868.1,
+  "getiri": -0.01319,
+  "max_dusus": -0.01088,
+  "kollar": {
+    "btc_trend": {
+      "ad": "BTC trend",
+      "baslangic": 3333.0,
+      "deger": 3219.7
+    },
+    "abd_trend": {
+      "ad": "ABD trend portföyü",
+      "baslangic": 3333.0,
+      "deger": 3340.36
+    },
+    "emtia_dusukvol": {
+      "ad": "Emtia ETF düşük vol.",
+      "baslangic": 3334.0,
+      "deger": 3308.04
+    }
+  },
+  "islem_sayisi": 1,
+  "beklenti": {
+    "kaynak": "trend/BIRLESIM.md, örneklem-dışı 2023-2026",
+    "yillik_getiri": 0.23,
+    "max_dusus": -0.07,
+    "sharpe": 1.79,
+    "60_gunde_getiri": "yaklaşık +%3-4 (geniş aralık: -%6 ile +%12 arası normal)"
+  },
+  "bitti": false,
+  "son_rapor_gunu": "2026-10-15"
+}
