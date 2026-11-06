@@ -1,0 +1,40 @@
+[
+  {
+    "kart_id": "daytrade__rsi-diverjans-bollinger-1dk__singhal",
+    "parametreler": {
+      "osilator": "rsi",
+      "rsi_periyot": 14,
+      "bb_sart": true,
+      "teyit": "mum",
+      "hedef_tipi": "orta_bant"
+    },
+    "cikis_ayarlari": null,
+    "not": "Dip alt Bollinger altında + yeşil mum teyidi; kart hedefi karşı bant, orta bant ile yaklaşıldı."
+  },
+  {
+    "kart_id": "scalp__cci-ayrisma__busiere",
+    "parametreler": {
+      "osilator": "cci",
+      "rsi_periyot": 14,
+      "bolge_cci": 100.0,
+      "bb_sart": false,
+      "teyit": "yok",
+      "hedef_tipi": "r",
+      "hedef_r": 2.0
+    },
+    "cikis_ayarlari": null,
+    "not": "CCI(14) -100 altı yükselen dipler; 'fiyat trend oluşturmuyor' şartı yok; teyit/stop/hedef kartta yok."
+  },
+  {
+    "kart_id": "scalp__rsi-diverjans-filtreli__carson",
+    "parametreler": {
+      "osilator": "rsi",
+      "bb_sart": false,
+      "teyit": "yok",
+      "hedef_tipi": "r",
+      "hedef_r": 2.0
+    },
+    "cikis_ayarlari": null,
+    "not": "Tescilli gösterge etiketi (R) fraktal diverjansla yaklaşıldı; stop/hedef kartta yok."
+  }
+]

@@ -1,0 +1,26 @@
+[
+  {
+    "kart_id": "scalp__heikin-ashi-renk-donusu__lama",
+    "parametreler": {
+      "onceki_n": 1,
+      "golgesiz": false,
+      "trend_ma": 0,
+      "stop_n": 2,
+      "stop_tampon_atr": 0.25
+    },
+    "cikis_ayarlari": null,
+    "not": "Kırmızı->yeşil HA renk değişimi; stop sinyal mumlarının ucu +/- tampon; ters renkte çıkış. Gölge ve doji şartları kodlanmadı."
+  },
+  {
+    "kart_id": "scalp__ha-renk-donusu__heikinashi",
+    "parametreler": {
+      "onceki_n": 3,
+      "golgesiz": false,
+      "trend_ma": 0,
+      "stop_n": 3,
+      "stop_tampon_atr": 0.25
+    },
+    "cikis_ayarlari": null,
+    "not": "Trend yavaşlaması (küçülen mumlar) en az 3 ters renk mum ile yaklaşıldı; doji/topaç dönüm mumu kodlanmadı."
+  }
+]

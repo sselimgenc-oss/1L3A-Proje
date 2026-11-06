@@ -1,0 +1,40 @@
+[
+  {
+    "kart_id": "scalp__rsi2-90-10-her-zaman-icerde__schroder",
+    "parametreler": {
+      "rsi_periyot": 2,
+      "alt": 10.0,
+      "mod": "bolgede",
+      "trend_ma": 0,
+      "cikis_rsi": 0.0,
+      "stop_max_atr": 4.0
+    },
+    "cikis_ayarlari": null,
+    "not": "RSI(2) 10/90, ters sinyalde pozisyon çevirme (stop yok; zorunlu geniş ATR stop eklendi)."
+  },
+  {
+    "kart_id": "swing__rsi-30-70-ortalama-donus__jordan",
+    "parametreler": {
+      "rsi_periyot": 14,
+      "alt": 30.0,
+      "mod": "geri_cikis",
+      "trend_ma": 0,
+      "cikis_rsi": 50.0
+    },
+    "cikis_ayarlari": null,
+    "not": "RSI periyodu kartta yok (14); çıkış RSI 50; 80/40-60/20 asimetrik eşikler kodlanmadı."
+  },
+  {
+    "kart_id": "swing__rsi30-geri-donus__johnson",
+    "parametreler": {
+      "rsi_periyot": 14,
+      "alt": 30.0,
+      "mod": "geri_cikis",
+      "trend_ma": 0,
+      "short": false,
+      "cikis_rsi": 50.0
+    },
+    "cikis_ayarlari": null,
+    "not": "Yalnız long (kartta short yok); stop/çıkış kartta yok -> ATR/swing stop, RSI 50 çıkış."
+  }
+]

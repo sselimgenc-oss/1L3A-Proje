@@ -1,0 +1,15 @@
+[
+  {
+    "kart_id": "swing__demarker-asiri-bolge__day",
+    "parametreler": {
+      "gosterge": "demarker",
+      "rsi_periyot": 14,
+      "alt": 30.0,
+      "mod": "bolgede",
+      "trend_ma": 0,
+      "adx_max": 25.0
+    },
+    "cikis_ayarlari": null,
+    "not": "DeMarker 0.3 altı long / 0.7 üstü short (bölgeye giriş); aralık piyasası için ADX<25 filtresi; periyot kartta yok (14); stop destek altı yerine son 6 mum dibi."
+  }
+]

@@ -1,0 +1,13 @@
+[
+  {
+    "kart_id": "swing__rsi-50-gecis__sharpe",
+    "parametreler": {
+      "rsi_periyot": 14,
+      "esik": 50.0,
+      "ust_tf": "",
+      "cikis_esik": 50.0
+    },
+    "cikis_ayarlari": null,
+    "not": "RSI 50 yukarı/aşağı kesişimi; RSI periyodu kartta yok (14); çıkış RSI 50 ters kesişimi (kartta çıkış yok)."
+  }
+]

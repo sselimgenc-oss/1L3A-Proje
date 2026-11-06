@@ -1,0 +1,13 @@
+[
+  {
+    "kart_id": "swing__adx-25-trend-baslangici__day",
+    "parametreler": {
+      "adx_periyot": 14,
+      "adx_esik": 25.0,
+      "yapi": true,
+      "pivot_k": 2
+    },
+    "cikis_ayarlari": null,
+    "not": "ADX 25 yukarı kesişimi + yükselen dip kanıtı (fraktal); stop/çıkış kitapta yok -> ATR stop, DI ters kesişimi."
+  }
+]

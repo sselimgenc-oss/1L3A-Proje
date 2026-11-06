@@ -1,0 +1,14 @@
+[
+  {
+    "kart_id": "daytrade__dow-piyasa-yapisi-kirilim__singhal",
+    "parametreler": {
+      "mod": "yapi",
+      "yapi_sart": true,
+      "pivot_k": 3,
+      "ust_tf": "",
+      "hedef_r": 0.0
+    },
+    "cikis_ayarlari": null,
+    "not": "HH/HL yapısı + salınım tepesi kırılımı; stop son salınım dibi; kâr al kartta 'sonraki salınım/takip eden stop' -> karşı kırılım çıkışı + gün sonu."
+  }
+]
