@@ -230,10 +230,10 @@ def test_deneme_kaydi(tmp_path):
     satirlar = deneme_kaydi.oku(yol)
     assert len(satirlar) == 2
     k = satirlar[0]
-    assert k["strateji"] == "ma_kesisim" and k["sembol"] == "BTCUSDT" and k["aralik"] == "1h"
+    assert k["strateji"] == "swing__ma-kesisim" and k["sembol"] == "BTCUSDT" and k["aralik"] == "1h"
     assert k["kombinasyon_sayisi"] == 2 and k["pencere_sayisi"] == len(r["pencereler"])
     secilen = sum(1 for p in r["pencereler"] if p["secilen"])
     assert k["toplam_kosu"] == k["pencere_sayisi"] * 2 + secilen == r["toplam_kosu"]
     assert deneme_kaydi.toplam_deneme(yol=yol) == 2 * k["toplam_kosu"]
-    assert deneme_kaydi.toplam_deneme("ma_kesisim", yol) == 2 * k["toplam_kosu"]
+    assert deneme_kaydi.toplam_deneme("swing__ma-kesisim", yol) == 2 * k["toplam_kosu"]
     assert deneme_kaydi.toplam_deneme("yok", yol) == 0

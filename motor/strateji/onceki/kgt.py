@@ -59,7 +59,7 @@ from motor.strateji.temel import Strateji
 
 class Kgt(Strateji):
     ad = "onceki__kgt"
-    stil = "daytrade"
+    stil = "swing"
     varsayilan_parametreler = {
         "cpr_esik": 0.25,          # |TC-BC| <= esik x günlük ATR14 (önceki gün)
         "gunluk_hizli": 10, "gunluk_yavas": 20,    # günlük trend: hızlı > yavaş ve kapanış > yavaş
@@ -143,3 +143,10 @@ class Kgt(Strateji):
     def cikis_var_mi(self) -> bool:
         """4S trend dönüşü her zaman `cikis` üretir."""
         return True
+
+
+class KgtGun(Kgt):
+    """KGT day trade varyantı (karar 21): aynı kural, gün sonu flat (gun_sonu_kapat=True)."""
+    ad = "onceki__kgt-gun"
+    stil = "daytrade"
+    varsayilan_parametreler = {**Kgt.varsayilan_parametreler, "gun_sonu_kapat": True}

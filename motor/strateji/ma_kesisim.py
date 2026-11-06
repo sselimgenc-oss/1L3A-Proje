@@ -11,7 +11,7 @@ from motor.strateji.temel import Strateji
 
 
 class MaKesisim(Strateji):
-    ad = "ma_kesisim"
+    ad = "swing__ma-kesisim"
     stil = "swing"
     varsayilan_parametreler = {
         "hizli": 9, "yavas": 21,
