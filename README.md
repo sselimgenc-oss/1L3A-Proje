@@ -7,18 +7,20 @@ işlemleri ve stratejileri sorgular, sonuçlardan ders çıkarır ve değişikli
 > Durum ve alınan kararlar: [DURUM.md](DURUM.md)
 
 ## Piyasa ve kapsam
-- **Borsa:** Binance — kripto (≤10), ABD hisse perpetual'ları / TradFi (≤10), emtia perpetual'ları (≤5)
+- **Borsa:** Binance perpetual — **az enstrüman, derin uzmanlık:** başlangıçta 3–5 (BTC, ETH, XAU + en fazla 1–2)
 - **Zaman dilimi:** en az 5 dakika (1 dk yok)
 - **Mod:** önce paper trading (canlı fiyat + kendi simülasyon motorumuz), başarılı olursa küçük bütçeyle canlı
 - **Çalışma ortamı:** DigitalOcean droplet; dashboard + Telegram bildirimi
 
 ## Yol haritası
+Ayrıntı ve bitiş ölçütleri: [DURUM.md](DURUM.md) → "Yol haritası".
+
 | Aşama | İş | Durum |
 |---|---|---|
-| 0 | PDF'lerden strateji kartı çıkarımı, ailelere birleştirme | ✅ bitti |
-| 1 | Strateji arayüzü + backtest motoru (komisyon, kayma, funding) | ⏳ sürüyor |
-| 2 | 15 aday/stil backtest → her stil için final 10 | |
-| 3 | Paper trading (canlı veri) | |
+| 0 | PDF'lerden strateji kartı, ailelere birleştirme | ✅ |
+| 1 | Altyapı + aday stratejilerin kodu (1A motor, 1B veri, 1C adaylar) | ⏳ |
+| 2 | Test ve seçim: BTC/ETH walk-forward → eleme → TradFi doğrulama | |
+| 3 | Paper trading (Frankfurt sunucu, canlı veri, ≥ 8 hafta) | |
 | 4 | Lider ajan + öğrenme döngüsü (öneri → test → onay) | |
 | 5 | Küçük bütçeyle canlı | |
 
