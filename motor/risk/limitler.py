@@ -1,6 +1,6 @@
 """Sert risk limitleri.
 
-TASLAK değerler — kullanıcı onayı bekliyor.
+Değerler kullanıcı onaylı (2026-11-06). Değiştirmek kullanıcı kararıdır.
 
 Bu limitler motor tarafından HER ZAMAN uygulanır. Strateji parametreleri
 veya LLM ajanları bunları aşamaz; aşan değer tavana kırpılır.

@@ -61,16 +61,45 @@ Yapılanlar:
 (kitap/PDF alınmadı — kullanıcı kararı). Dersler ve aday/elenen listesi: [arsiv/OZET.md](arsiv/OZET.md).
 Ana ders: önceki sonuçlar OOS'a bakılarak seçilmiş ve kâr birkaç işlemde yoğun → üst sınır kabul edilir.
 
-### Kullanıcı kararı bekleyenler
-1. Scalp: 1m kaynaklı kartlar 5m'ye taşınsın mı, yoksa havuz ≥5m kartlarla mı sınırlansın?
-2. Day trade havuzu: swing ailelerinin 15m–1h versiyonları eklensin mi / aday sayısı azaltılsın mı?
-3. Aşama 2 eleme eşikleri (min işlem, OOS profit factor, maliyet sonrası beklenti vb.).
-4. Sert limit değerleri (TASLAK: %1 risk, %3 günlük, 3x, %20 kill switch). Günlük limitte açık pozisyon kapatılsın mı?
-5. Sunucu bölgesi: Binance ABD'yi engelliyor → öneri Frankfurt/Singapur.
-6. TradFi kısa veri: öneri — seçim kriptoda (2020–), TradFi'de yalnızca doğrulama.
-7. ~~Önceki projelerin adayları~~ → karar 10 ile çözüldü.
-8. arsiv/OZET.md §1'deki test disiplini kuralları (OOS seçimde görülmez, deneme sayısı kaydı vb.) onaylansın mı?
-9. Her stratejide ilk stop dışında zorunlu çıkış (hedef / iz süren / zaman) kuralı.
+### Kararlar (2026-11-06, kullanıcı onaylı)
+11. **Scalp:** yalnız ≥15m, en güçlü 4–5 aday; hiçbiri geçmezse scalp ajanı kapanır.
+12. **Day trade:** 10'a tamamlanmaz; en güçlü 5–6 aday (KGT dahil).
+13. **Eleme ölçütü:** maliyet+funding sonrası kârlı, OOS PF ≥ 1.2, ≥ 50 işlem, en iyi %5 işlem çıkarılınca çökmez,
+    OOS parametre seçiminde asla görülmez (seçim yalnız walk-forward eğitim pencerelerinde).
+14. **Sert limitler kesin:** işlem başı %1, günlük %3 (dolunca açık pozisyon da kapanır), 3x, %20 kill switch.
+15. **Sunucu:** DigitalOcean Frankfurt.
+16. **Veri/seçim:** stratejiler BTC+ETH 2020– verisinde seçilir; altın + 1–2 TradFi yalnız doğrulama.
+17. **Enstrüman:** başlangıçta 3–5 (BTC, ETH, XAU + en fazla 1–2). README'deki ~25 enstrüman planı iptal.
+18. Önceki projelerden alınanlar: 4S kırılım (algo-sg A + swing-sg S2 birleşik), KGT, S1; yedek B. KMN ve S3 alınmadı.
+
+## Yol haritası (2026-11-06)
+**Aşama 1 — Altyapı ve adaylar**
+- 1A Motor: zorunlu çıkış kuralı; günlük limitte açık pozisyon kapatma; kısmi kâr alma; üst zaman dilimi hizalama
+  (haftalık/günlük filtre, lookahead'siz); deneme sayısı kaydı; kâr yoğunlaşması ve günlük MTM düşüş metrikleri.
+- 1B Veri: XAU + 1–2 aday enstrüman indirme; enstrüman listesinin kesinleşmesi (3–5).
+- 1C Adaylar: swing 10 (✅ 9 + MA kesişim) + önceki projelerden 4S kırılım, KGT, S1 (+ yedek B);
+  day trade 5–6; scalp (≥15m) 4–5.
+- Bitiş: tüm adaylar kodlu, lookahead testli, 1A özellikleri testli.
+
+**Aşama 2 — Test ve seçim**
+- BTC+ETH 2020–: her aday için walk-forward (OOS seçimde görülmez), karar 13 ölçütleri.
+- Geçenler: rejim analizi (boğa/ayı/yatay), parametre duyarlılığı, rastgele giriş karşılaştırması, maliyet ×2 stresi.
+- Stil başına final (sayı Aşama 2 sonunda kullanıcıyla), aralarında korelasyon kontrolü.
+- TradFi doğrulama: XAU + 1–2 hisse (kısa veri; yalnız "bozulmuyor mu").
+- Bitiş: her stil için onaylı final listesi + beklenti aralıkları (paper'da karşılaştırmak için).
+
+**Aşama 3 — Paper trading**
+- DigitalOcean Frankfurt; Binance WS canlı veri; sanal dolum + hesap/risk/Telegram (sg-arge'den uyarlanır, Decimal).
+- Kağıt motoru = backtest motoru doğrulaması (aynı dönem aynı işlemler); dashboard.
+- Süre ≥ 8 hafta; sonuç backtest beklenti aralığıyla karşılaştırılır.
+- Bitiş: kesintisiz çalışma + sonuçların beklenti aralığında olması.
+
+**Aşama 4 — Lider ajan ve öğrenme** (Aşama 3 sırasında başlar)
+- ≥15 dk aralıkla: rejim tespiti, stiller arası sermaye dağılımı, işlem sonrası analiz, haftalık rapor.
+- Değişiklik önerisi → walk-forward test → kullanıcı onayı. Canlıda kendini değiştiren kod yok.
+
+**Aşama 5 — Küçük bütçeyle canlı**
+- Gerçek emir yürütücü, borsa filtreleri (exchangeInfo), mutabakat; küçük bütçe; sert limitler aynı.
 
 ## Yeniden kullanılacak eski kod
 Kullanıcının kendi `sselimgenc-oss/sg-arge` reposu (Hyperliquid copy trade, GPLv3):
