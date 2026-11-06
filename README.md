@@ -16,7 +16,7 @@ işlemleri ve stratejileri sorgular, sonuçlardan ders çıkarır ve değişikli
 | Aşama | İş | Durum |
 |---|---|---|
 | 0 | PDF'lerden strateji kartı çıkarımı, ailelere birleştirme | ✅ bitti |
-| 1 | Strateji arayüzü + backtest motoru (komisyon, kayma, funding) | ⏳ sırada |
+| 1 | Strateji arayüzü + backtest motoru (komisyon, kayma, funding) | ⏳ sürüyor |
 | 2 | 15 aday/stil backtest → her stil için final 10 | |
 | 3 | Paper trading (canlı veri) | |
 | 4 | Lider ajan + öğrenme döngüsü (öneri → test → onay) | |

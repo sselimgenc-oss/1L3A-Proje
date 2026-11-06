@@ -1,6 +1,6 @@
 # 1L3A — Durum ve Kararlar
 
-_Son güncelleme: 2026-11-06_
+_Son güncelleme: 2026-11-06 (Aşama 1 ara durum)_
 
 ## Takım düzeni
 - **Lider (Claude Opus):** planlama, görev/ajan dağıtımı, denetim, kalite.
@@ -31,12 +31,36 @@ _Son güncelleme: 2026-11-06_
 - Elenenler: opsiyon, temel/olay verisi, tescilli göstergeler (LuxAlgo, VSA, ML), Level-2/TICK, martingale.
 - Kitaplardaki kazanma oranı iddiaları çoğunlukla kanıtsız (raporda "şüpheli" işaretli).
 
-## Sıradaki — Aşama 1
-1. Binance'te TradFi perpetual'larının geçmiş veri uzunluğunu kontrol et (yeni listelendikleri için kısa olabilir → gerekirse dayanak varlık verisiyle backtest, seans farkına dikkat).
-2. Geçmiş mum verisi indirme ve saklama (`veri/mumlar/`, parquet; repoya girmez).
-3. Strateji arayüzü (tek tip: sinyal üret → giriş/stop/hedef) + çıkış/risk modülleri.
-4. Backtest motoru: komisyon, kayma, funding, `Decimal` + borsa filtreleri, walk-forward.
-5. Aday aileleri koda dök (Sonnet), denetle (lider).
+## Aşama 1 — devam ediyor
+Yapılanlar:
+- **Veri:** Binance API bu bulut makinesinden konum nedeniyle engelli; geçmiş veri `data.binance.vision` arşivinden
+  (`motor/veri/`: indirme + sha256 + parquet + 5m→üst TF). Arşivde 2026-10-28 günü tüm sembollerde eksik.
+  Funding aralığı sembole göre değişir (BTC 8s, XAU 4s).
+- **Sembol envanteri:** `veri/sembol_envanteri.csv` — 1080 sembol. TradFi geçmişi kısa: en eski XAU 2025-12,
+  hisseler 2026-01..10 (≈1–10 ay). Sınıflandırma tahmini; kesin liste exchangeInfo ile (API erişimli sunucudan).
+- **Backtest çekirdeği:** strateji arayüzü, göstergeler, Decimal motor (komisyon/kayma/funding, step aşağı yuvarlama),
+  sert limitler (TASLAK), walk-forward, metrikler. İlk deneme (BTC 5m, EMA 9/21, 2 ay): −%17, komisyon sermayenin ~%9'u
+  → 5m'de %1 risk kaldıraç tavanına dayanıyor, maliyet baskın.
+- **Sürüyor:** swing ailelerinin kodu (9 aile), stop kayması ayrı + limit "ölç" modu, yazar sayısı denetimi,
+  BTC/ETH 2020– 5m veri indirme.
+
+### Aşama 0 denetim bulguları (lider)
+- Kartların piyasası: hisse 185, genel 154, vadeli 64, forex 32, **kripto 2**, emtia 1 → kitap iddiaları bizim enstrümanlarda denenmemiş.
+- 51 kart 1m kaynaklı (çoğu scalp) → 5m'ye taşınınca "esinlenen" stratejiye dönüşür.
+- Day trade önerilenlerin 6/10'u ≤2 yazar; bb-sıkışma ve stokastik tek kart.
+- Çok stilli 33 ailenin kanonik kuralı stiller arasında birebir kopya (ör. daytrade__stokastik-donus'un tek kartı Williams %R).
+  → Koda dökerken kaynak kartlar esas alınır.
+- Yazar sayısı yakın-ama-farklı kurallarla şişmiş olabilir (denetim sürüyor: `stratejiler/yazar_denetimi.csv`).
+- 166 kartta stop, 192 kartta kâr al yok → çıkış modülü seçimi sonucu belirleyecek.
+- Çoklu test riski (45 aday × ızgara × sembol) → Aşama 2'de eleme eşikleri gerekli.
+
+### Kullanıcı kararı bekleyenler
+1. Scalp: 1m kaynaklı kartlar 5m'ye taşınsın mı, yoksa havuz ≥5m kartlarla mı sınırlansın?
+2. Day trade havuzu: swing ailelerinin 15m–1h versiyonları eklensin mi / aday sayısı azaltılsın mı?
+3. Aşama 2 eleme eşikleri (min işlem, OOS profit factor, maliyet sonrası beklenti vb.).
+4. Sert limit değerleri (TASLAK: %1 risk, %3 günlük, 3x, %20 kill switch). Günlük limitte açık pozisyon kapatılsın mı?
+5. Sunucu bölgesi: Binance ABD'yi engelliyor → öneri Frankfurt/Singapur.
+6. TradFi kısa veri: öneri — seçim kriptoda (2020–), TradFi'de yalnızca doğrulama.
 
 ## Yeniden kullanılacak eski kod
 Kullanıcının kendi `sselimgenc-oss/sg-arge` reposu (Hyperliquid copy trade, GPLv3):
