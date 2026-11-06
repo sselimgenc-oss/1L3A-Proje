@@ -1,0 +1,13 @@
+[
+  {
+    "kart_id": "swing__ichimoku-kijun-bulut__make",
+    "parametreler": {
+      "mod": "kijun_bulut",
+      "tenkan": 9,
+      "kijun": 26,
+      "stop_tipi": "kijun"
+    },
+    "cikis_ayarlari": null,
+    "not": "Bulut ve Kijun üstü/altı durumuna ilk giriş; stop/çıkış kartta yok -> Kijun stop ve Kijun ters kesişimi; Tenkan eğimi kodlanmadı."
+  }
+]
