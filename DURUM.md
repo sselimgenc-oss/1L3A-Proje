@@ -54,6 +54,11 @@ Yapılanlar:
 - 166 kartta stop, 192 kartta kâr al yok → çıkış modülü seçimi sonucu belirleyecek.
 - Çoklu test riski (45 aday × ızgara × sembol) → Aşama 2'de eleme eşikleri gerekli.
 
+### Önceki projeler (kapatıldı, arşivlendi)
+`algo-sg`, `strateji-sg`, `swing-sg` kapatıldı; kod, stratejiler, sonuçlar, kağıt bot durumları `arsiv/` altında
+(kitap/PDF alınmadı — kullanıcı kararı). Dersler ve aday/elenen listesi: [arsiv/OZET.md](arsiv/OZET.md).
+Ana ders: önceki sonuçlar OOS'a bakılarak seçilmiş ve kâr birkaç işlemde yoğun → üst sınır kabul edilir.
+
 ### Kullanıcı kararı bekleyenler
 1. Scalp: 1m kaynaklı kartlar 5m'ye taşınsın mı, yoksa havuz ≥5m kartlarla mı sınırlansın?
 2. Day trade havuzu: swing ailelerinin 15m–1h versiyonları eklensin mi / aday sayısı azaltılsın mı?
@@ -61,6 +66,9 @@ Yapılanlar:
 4. Sert limit değerleri (TASLAK: %1 risk, %3 günlük, 3x, %20 kill switch). Günlük limitte açık pozisyon kapatılsın mı?
 5. Sunucu bölgesi: Binance ABD'yi engelliyor → öneri Frankfurt/Singapur.
 6. TradFi kısa veri: öneri — seçim kriptoda (2020–), TradFi'de yalnızca doğrulama.
+7. Önceki projelerin adayları (A, B, KGT, KMN, S1–S3) 1L3A aday havuzuna eklensin mi? KMN portföy stratejisi.
+8. arsiv/OZET.md §1'deki test disiplini kuralları (OOS seçimde görülmez, deneme sayısı kaydı vb.) onaylansın mı?
+9. Her stratejide ilk stop dışında zorunlu çıkış (hedef / iz süren / zaman) kuralı.
 
 ## Yeniden kullanılacak eski kod
 Kullanıcının kendi `sselimgenc-oss/sg-arge` reposu (Hyperliquid copy trade, GPLv3):
