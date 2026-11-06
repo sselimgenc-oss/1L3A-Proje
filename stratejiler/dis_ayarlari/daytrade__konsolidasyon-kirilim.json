@@ -1,0 +1,22 @@
+[
+ {
+  "dis_id": "tv:DkDNMQsn",
+  "kaynak_dosya": "arsiv/strateji-sg/tv/pine/DkDNMQsn.pine",
+  "parametreler": {
+   "hacim_k": 1.5,
+   "hedef_olcu": 1.5,
+   "trend_ema": 0,
+   "uzunluk": 10
+  },
+  "cikis_ayarlari": {
+   "basabas_r_esigi": 1.0,
+   "kismi": [
+    [
+     1.0,
+     0.5
+    ]
+   ]
+  },
+  "not": "YAKLAŞIK: 10 mumluk dar aralık kırılımı + hacim, gün sonu çıkışı; %0.5 sabit stop yerine kutunun karşı ucu (aile stopu); kısmi kâr + başabaş (1R'de yarım) eklendi."
+ }
+]

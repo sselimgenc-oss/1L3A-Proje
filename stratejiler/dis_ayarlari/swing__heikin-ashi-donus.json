@@ -1,0 +1,14 @@
+[
+ {
+  "dis_id": "tv:CtFpKECD",
+  "kaynak_dosya": "arsiv/strateji-sg/tv/pine/CtFpKECD.pine",
+  "parametreler": {
+   "golgesiz": false,
+   "hedef_r": 1.0,
+   "onceki_n": 2,
+   "trend_ma": 0
+  },
+  "cikis_ayarlari": null,
+  "not": "YAKLAŞIK: HA renk dönüşü, 1R hedef; SuperTrend yönü, ADX>=22 ve seans filtresi yok."
+ }
+]

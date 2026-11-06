@@ -1,0 +1,42 @@
+[
+ {
+  "dis_id": "tv:71yKm18B",
+  "kaynak_dosya": "arsiv/strateji-sg/tv/pine/71yKm18B.pine",
+  "parametreler": {
+   "kijun": 60,
+   "mod": "tk_bulut",
+   "stop_tipi": "kijun",
+   "tenkan": 20,
+   "tk_kesisim": true
+  },
+  "cikis_ayarlari": null,
+  "not": "YAKLAŞIK: Ichimoku 20/60/120 Tenkan-Kijun yukarı kesişimi + bulut üstü; MFI>50 filtresi yok; çıkış TK ters kesişimi (kaynakta Kijun altı)."
+ },
+ {
+  "dis_id": "tv:boHD0HzE",
+  "kaynak_dosya": "arsiv/strateji-sg/tv/pine/boHD0HzE.pine",
+  "parametreler": {
+   "kijun": 26,
+   "mod": "tk_bulut",
+   "stop_tipi": "kijun",
+   "tenkan": 9,
+   "tk_kesisim": true
+  },
+  "cikis_ayarlari": null,
+  "not": "Birleşik ayar, dis_id'ler: tv:boHD0HzE, tv:uycyVpIq. [tv:boHD0HzE] Tenkan/Kijun kesişimi + fiyat bulut üstü, ters kesişimde çıkış (long/short). #21 aynı mantık. | [tv:uycyVpIq] Tenkan/Kijun kesişimi; Tenkan-bulut ilişkili çıkış yerine TK ters kesişimi."
+ },
+ {
+  "dis_id": "tv:xx3enmiW",
+  "kaynak_dosya": "arsiv/strateji-sg/tv/pine/xx3enmiW.pine",
+  "parametreler": {
+   "hedef_r": 2.0,
+   "kijun": 26,
+   "mod": "tk_bulut",
+   "stop_tipi": "kijun",
+   "tenkan": 9,
+   "tk_kesisim": true
+  },
+  "cikis_ayarlari": null,
+  "not": "YAKLAŞIK: TK kesişimi; günlük HTF teyidi yok; 1.5 ATR stop/3 ATR hedef = 2R olarak yaklaşıldı (stop Kijun)."
+ }
+]

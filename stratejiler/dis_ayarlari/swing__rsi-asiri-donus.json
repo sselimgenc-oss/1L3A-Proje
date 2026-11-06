@@ -1,0 +1,65 @@
+[
+ {
+  "dis_id": "freqtrade:BbandRsi",
+  "kaynak_dosya": "arsiv/algo-sg/dis_kaynak/ft/strategies/BbandRsi.py",
+  "parametreler": {
+   "alt": 30.0,
+   "cikis_rsi": 70.0,
+   "mod": "bolgede",
+   "rsi_periyot": 14,
+   "short": false
+  },
+  "cikis_ayarlari": null,
+  "not": "YAKLAŞIK: RSI<30 bölgesine giriş long, RSI 70'te çıkış; alt Bollinger altı şartı yok."
+ },
+ {
+  "dis_id": "tv:95JBkzXV",
+  "kaynak_dosya": "arsiv/strateji-sg/tv_eleme_dali/pine/95JBkzXV.pine",
+  "parametreler": {
+   "alt": 30.0,
+   "cikis_rsi": 50.0,
+   "mod": "bolgede",
+   "rsi_periyot": 14,
+   "short": true
+  },
+  "cikis_ayarlari": null,
+  "not": "YAKLAŞIK: RSI<30 / >70 aşırı bölge girişi, RSI 50'de çıkış; Bollinger bant teması şartı yok."
+ },
+ {
+  "dis_id": "kural:kurallar:RSI 35/65 kesişim, 50'de çık (L/S)",
+  "kaynak_dosya": "arsiv/algo-sg/dis_kaynak/kurallar.py",
+  "parametreler": {
+   "alt": 35.0,
+   "cikis_rsi": 50.0,
+   "mod": "geri_cikis",
+   "rsi_periyot": 14,
+   "short": true
+  },
+  "cikis_ayarlari": null,
+  "not": "RSI 35/65 eşik kesişimi L/S, RSI 50'de çıkış."
+ },
+ {
+  "dis_id": "kural:kurallar:RSI(10)<28 al, %15 stop %25 hedef",
+  "kaynak_dosya": "arsiv/algo-sg/dis_kaynak/kurallar.py",
+  "parametreler": {
+   "alt": 28.0,
+   "mod": "bolgede",
+   "rsi_periyot": 10,
+   "short": false
+  },
+  "cikis_ayarlari": null,
+  "not": "YAKLAŞIK: RSI(10)<28 long; %15 stop/%25 hedef yerine aile stopu (son 10 mum dibi) ve RSI 50 çıkışı."
+ },
+ {
+  "dis_id": "jesuistm:jesuistm:JT_RSI_30_70",
+  "kaynak_dosya": "arsiv/algo-sg/dis_kaynak/jesuistm.py",
+  "parametreler": {
+   "alt": 30.0,
+   "mod": "geri_cikis",
+   "rsi_periyot": 14,
+   "short": true
+  },
+  "cikis_ayarlari": null,
+  "not": "RSI 30 altından yukarı dönüşte long, 70 üstünden aşağı dönüşte short."
+ }
+]

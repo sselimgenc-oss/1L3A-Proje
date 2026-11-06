@@ -1,0 +1,28 @@
+[
+ {
+  "dis_id": "tv:25Ffpyo0",
+  "kaynak_dosya": "arsiv/strateji-sg/tv/pine/25Ffpyo0.pine",
+  "parametreler": {
+   "geri_don_mum": 1,
+   "hedef_modu": "karsi",
+   "min_dokunus": 2,
+   "pencere": 40
+  },
+  "cikis_ayarlari": null,
+  "not": "YAKLAŞIK: onaylı tepe/dip seviyesi süpürülüp geri kapanınca ters yön; hacim ve SMA20 filtresi yok."
+ },
+ {
+  "dis_id": "tv:GoeqO1ev",
+  "kaynak_dosya": "arsiv/strateji-sg/tv/pine/GoeqO1ev.pine",
+  "parametreler": {
+   "geri_don_mum": 3,
+   "hedef_modu": "r",
+   "hedef_r": 1.5,
+   "onay_mumu": true,
+   "pencere": 40,
+   "tampon_atr": 1.2
+  },
+  "cikis_ayarlari": null,
+  "not": "YAKLAŞIK: likidite süpürmesi + onay mumu; stop iğne ±1.2 ATR, 1.5R hedef; hacim şartı yok."
+ }
+]

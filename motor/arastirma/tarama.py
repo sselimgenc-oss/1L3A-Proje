@@ -6,7 +6,7 @@ Karar 20: veri `depo.mum_oku` / `depo.funding_oku` ile OKUNUR, `kilit_ac` ASLA k
 
 Akış
   - Veri: 5m parquet -> `yeniden_ornekle(eksikleri_at=True)` ile hedef TF; funding dahil.
-  - Her görev = (strateji, sembol, tf, ayar). Ayar kaynakları: "varsayilan", "kart" (her kart ayarı), "izgara"
+  - Her görev = (strateji, sembol, tf, ayar). Ayar kaynakları: "varsayilan", "kart" (her kart ayarı), "dis" (dış ayarlar: stratejiler/dis_ayarlari), "izgara"
     (parametre_izgarasi tam çarpımı; yalnız izgara=True ile).
   - Stil -> TF: scalp 15m/30m, daytrade 30m/1h, swing 4h/1d (`STIL_TF`; parametreyle değişir).
   - Motor: MotorAyarlari(limit_modu="olc") (araştırma modu: günlük limit ve kill switch durdurmaz, kaydedilir).
@@ -38,11 +38,13 @@ from motor.backtest import deneme_kaydi
 from motor.backtest import metrikler as mtr
 from motor.backtest.motor import MotorAyarlari, SembolKurallari, backtest
 from motor.strateji import kayit
+from motor.strateji.cikislar import CikisAyarlari
 from motor.veri import depo
 from motor.veri.yeniden_ornekle import yeniden_ornekle
 
 KOK = Path(__file__).resolve().parents[2]
 CIKTI_DIZINI = KOK / "sonuclar" / "tarama"
+DIS_AYAR_DIZINI = KOK / "stratejiler" / "dis_ayarlari"
 
 VARSAYILAN_SEMBOLLER = ("BTCUSDT", "ETHUSDT", "SOLUSDT")
 STIL_TF = {"scalp": ("15m", "30m"), "daytrade": ("30m", "1h"), "swing": ("4h", "1d")}
@@ -72,11 +74,39 @@ def _json(x) -> str:
 
 
 # ---------------------------------------------------------------------------- görev üretimi
+def dis_ayarlari(ad: str, dizin: Optional[Path] = None) -> list:
+    """stratejiler/dis_ayarlari/<aile>.json içeriği (dış kaynaklı ayarlar); dosya yoksa boş liste."""
+    yol = Path(dizin if dizin is not None else DIS_AYAR_DIZINI) / f"{ad}.json"
+    if not yol.exists():
+        return []
+    return json.loads(yol.read_text(encoding="utf-8"))
+
+
+def dis_ayarli_strateji(ad: str, dis_id: str, dizin: Optional[Path] = None):
+    """Dış ayarı (dis_id) ile kurulmuş strateji. Bilinmeyen parametre ValueError, bilinmeyen dis_id KeyError verir."""
+    sinif = kayit.al(ad)
+    for k in dis_ayarlari(ad, dizin):
+        if k["dis_id"] == dis_id:
+            par = dict(k.get("parametreler") or {})
+            bilinmeyen = set(par) - set(sinif.varsayilan_parametreler)
+            if bilinmeyen:
+                raise ValueError(f"{ad}/{dis_id}: sınıfta olmayan parametre: {sorted(bilinmeyen)}")
+            cikis = k.get("cikis_ayarlari")
+            if cikis is not None:
+                cikis = dict(cikis)
+                if "kismi" in cikis:
+                    cikis["kismi"] = tuple(tuple(x) for x in cikis["kismi"])
+                cikis = CikisAyarlari(**cikis)
+            return sinif(cikis_ayarlari=cikis, **par)
+    raise KeyError(f"{ad}: dış ayar yok: {dis_id!r}")
+
+
 def _ayar_listesi(ad: str, izgara: bool) -> list[tuple]:
-    """[(ayar_kaynagi, arguman)]: varsayilan -> None; kart -> kart_id; izgara -> parametre sözlüğü."""
+    """[(ayar_kaynagi, arguman)]: varsayilan -> None; kart -> kart_id; dis -> dis_id; izgara -> parametre sözlüğü."""
     sinif = kayit.al(ad)
     liste = [("varsayilan", None)]
     liste += [("kart", k["kart_id"]) for k in kayit.kart_ayarlari(ad)]
+    liste += [("dis", k["dis_id"]) for k in dis_ayarlari(ad)]
     if izgara and sinif.parametre_izgarasi:
         adlar = list(sinif.parametre_izgarasi)
         for deger in itertools.product(*sinif.parametre_izgarasi.values()):
@@ -90,11 +120,13 @@ def _strateji_kur(ad: str, tur: str, arg):
         return sinif()
     if tur == "kart":
         return kayit.kart_ayarli_strateji(ad, arg)
+    if tur == "dis":
+        return dis_ayarli_strateji(ad, arg)
     return sinif(**arg)
 
 
 def _etiket_ayar(tur: str, arg) -> str:
-    return f"kart:{arg}" if tur == "kart" else tur
+    return f"{tur}:{arg}" if tur in ("kart", "dis") else tur
 
 
 def anahtar(strateji, sembol, tf, ayar_kaynagi, parametreler_json) -> tuple:

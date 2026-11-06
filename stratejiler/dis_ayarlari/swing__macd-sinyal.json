@@ -1,0 +1,100 @@
+[
+ {
+  "dis_id": "freqtrade:ASDTSRockwellTrading",
+  "kaynak_dosya": "arsiv/algo-sg/dis_kaynak/ft/strategies/ASDTSRockwellTrading.py",
+  "parametreler": {
+   "hizli": 12,
+   "mod": "sinyal",
+   "short": false,
+   "sifir_filtre": true,
+   "sinyal": 9,
+   "yavas": 26
+  },
+  "cikis_ayarlari": null,
+  "not": "Birleşik ayar, dis_id'ler: freqtrade:ASDTSRockwellTrading, tv:yMCa3XZD. [freqtrade:ASDTSRockwellTrading] YAKLAŞIK: MACD>0 iken sinyal çizgisi yukarı kesişimi long, sinyal altına inince çıkış. #118 aynı mantık (SMA200 filtresi yok). | [tv:yMCa3XZD] YAKLAŞIK: MACD histogram sıfır kesişimi + MACD>0, long; SMA200 filtresi yok."
+ },
+ {
+  "dis_id": "tv:UVosPbFA",
+  "kaynak_dosya": "arsiv/strateji-sg/tv/pine/UVosPbFA.pine",
+  "parametreler": {
+   "atr_k": 2.5,
+   "hizli": 14,
+   "mod": "sinyal",
+   "short": true,
+   "sinyal": 9,
+   "yavas": 39
+  },
+  "cikis_ayarlari": null,
+  "not": "YAKLAŞIK: MACD(14,39,9) kesişimi; EMA99, ADX>20, hacim filtresi yok; 2.5 ATR acil stop = atr_k."
+ },
+ {
+  "dis_id": "tv:V87nRt9v",
+  "kaynak_dosya": "arsiv/strateji-sg/tv/pine/V87nRt9v.pine",
+  "parametreler": {
+   "atr_k": 2.0,
+   "hizli": 12,
+   "mod": "sinyal",
+   "short": false,
+   "sinyal": 9,
+   "yavas": 26
+  },
+  "cikis_ayarlari": {
+   "sabit_r_hedefi": 2.0
+  },
+  "not": "YAKLAŞIK: MACD sinyal kesişimi long, 2 ATR stop + 2R hedef; EMA200, ADX>20 ve 'MACD<0' koşulu yok."
+ },
+ {
+  "dis_id": "tv:VO6DY8s1",
+  "kaynak_dosya": "arsiv/strateji-sg/tv/pine/VO6DY8s1.pine",
+  "parametreler": {
+   "hizli": 12,
+   "mod": "sinyal",
+   "short": true,
+   "sinyal": 9,
+   "yavas": 26
+  },
+  "cikis_ayarlari": null,
+  "not": "Birleşik ayar, dis_id'ler: tv:VO6DY8s1, jesuistm:jesuistm:JT_MACD_osilator. [tv:VO6DY8s1] YAKLAŞIK: MACD histogramı sıfırı keserse yön değiştirir = MACD sinyal kesişimi; VAR MA yerine EMA. | [jesuistm:jesuistm:JT_MACD_osilator] MACD sinyal kesişimiyle long/short (günlük)."
+ },
+ {
+  "dis_id": "tv:YfPnKE22",
+  "kaynak_dosya": "arsiv/strateji-sg/tv/pine/YfPnKE22.pine",
+  "parametreler": {
+   "hizli": 12,
+   "mod": "sifir",
+   "short": true,
+   "sinyal": 9,
+   "yavas": 25
+  },
+  "cikis_ayarlari": null,
+  "not": "YAKLAŞIK: MACD sıfır kesişimi (12/25); Heikin Ashi ve DEMA yok; %10 hedef/%3 stop yerine ATR stop."
+ },
+ {
+  "dis_id": "tv:BtDUET5k",
+  "kaynak_dosya": "arsiv/strateji-sg/tv_eleme_dali/pine/BtDUET5k.pine",
+  "parametreler": {
+   "atr_k": 1.75,
+   "hizli": 12,
+   "mod": "sinyal",
+   "short": false,
+   "sinyal": 9,
+   "yavas": 26
+  },
+  "cikis_ayarlari": null,
+  "not": "YAKLAŞIK: MACD sinyal kesişimi long, 1.75 ATR stop; günlük Stoch ve EMA20 çıkışı yok (ters kesişimde çıkış)."
+ },
+ {
+  "dis_id": "kural:kurallar:MACD kesişim + düşen SMA30, 3xATR stop (Tharp)",
+  "kaynak_dosya": "arsiv/algo-sg/dis_kaynak/kurallar.py",
+  "parametreler": {
+   "atr_k": 3.0,
+   "hizli": 12,
+   "mod": "sinyal",
+   "short": true,
+   "sinyal": 9,
+   "yavas": 26
+  },
+  "cikis_ayarlari": null,
+  "not": "YAKLAŞIK: MACD kesişimi, 3 ATR stop (Tharp); düşen SMA30 teyidi yok."
+ }
+]

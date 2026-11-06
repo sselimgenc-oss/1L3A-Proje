@@ -1,0 +1,13 @@
+[
+ {
+  "dis_id": "tv:LA06Kpl1",
+  "kaynak_dosya": "arsiv/strateji-sg/tv/pine/LA06Kpl1.pine",
+  "parametreler": {
+   "giris_alt": 0.45,
+   "giris_ust": 0.55,
+   "hedef_uzatma": 1.0
+  },
+  "cikis_ayarlari": null,
+  "not": "YAKLAŞIK: %50 Fib düzeltme bölgesi (0.45-0.55 band) girişi; stop bacak başı, hedef önceki tepe."
+ }
+]
