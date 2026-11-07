@@ -168,6 +168,11 @@ Ana ders: önceki sonuçlar OOS'a bakılarak seçilmiş ve kâr birkaç işlemde
 - 2026-11-07: Paper sunucusu açıldı (DigitalOcean Frankfurt, Ubuntu 24.04, 2 GB); fapi.binance.com erişimi var ({}),
   repo salt-okur deploy key ile çekildi, veri indiriliyor.
 
+- 2026-11-07 16:12 UTC: **Aşama 4 paper trading BAŞLADI** (DigitalOcean FRA1, servis 1l3a-paper, sanal 10.000 USD, 7 strateji,
+  güncel ayarlar). Binance TradFi sözleşmeleri exchangeInfo'da "TRADIFI_PERPETUAL" türünde → kod düzeltildi (cab5d2e), durum sıfırlanıp
+  yeniden başlatıldı. Sağlık: tüm semboller bayat değil. Süre ≥ 8 hafta (en erken değerlendirme 2027-01-02). Telegram henüz kapalı;
+  pano yalnız sunucuda (telefona yayın yolu açık iş).
+
 ## Kullanıcıyı bekleyen kararlar
 - ~~Final seçim ve kilitli dönemin bir kez açılması (karar 20)~~ — kullanıcı "aç" dedi (2026-11-07), yapıldı: `sonuclar/kilit/RAPOR.md`.
 - Karar 13 eşikleri çoklu test düzeltmesi içermiyor; sağlamlık paketi öneri kapısı ekliyor (son karar kullanıcıda).
