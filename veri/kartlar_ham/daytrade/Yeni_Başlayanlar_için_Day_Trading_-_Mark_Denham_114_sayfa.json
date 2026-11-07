@@ -1,0 +1,168 @@
+[
+  {
+    "kart_id": "daytrade__kirmizidan-yesile-onceki-kapanis__denham",
+    "ad": "Kırmızıdan Yeşile: Önceki Gün Kapanışı Üstüne Geçiş",
+    "stil": "daytrade",
+    "kaynak": {
+      "pdf": "Yeni_Başlayanlar_için_Day_Trading_-_Mark_Denham_114_sayfa.pdf",
+      "sayfalar": [
+        83,
+        84,
+        85
+      ]
+    },
+    "ozet": "Önceki günün kapanışının altında (kırmızı) işlem gören hisse bu seviyeyi yukarı keserse üstünde tutunursa long; yeşilden kırmızıya düşüp altında tutunamazsa short. Stop önceki kapanışın diğer tarafına konur.",
+    "kategori": "destek_direnc",
+    "piyasa_rejimi": "herhangi",
+    "orijinal_piyasa": "hisse",
+    "zaman_dilimi": {
+      "islem": "5m",
+      "ust_filtre": null
+    },
+    "gostergeler": [],
+    "long_giris": [
+      "Hisse önceki günün kapanışının altındadır (kırmızı), fiyat önceki kapanışı yukarı keser (yeşile döner) ve üzerinde tutunur"
+    ],
+    "short_giris": [
+      "Hisse önceki kapanışın üstündedir (yeşil), kapanışın altına düşer ve altında kalır"
+    ],
+    "stop_loss": "Long: önceki kapanışın altı (önceki mum); short: önceki kapanışın üstü",
+    "kar_al": "Kitapta yok (destek/direnç seviyeleri)",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Hisse tarayıcısı ile seçilen güçlü adaylar",
+      "Kırmızı->yeşil geçişte kırılımı beklemek için kısa süre tutunma beklemek (bazı tüccarlar)"
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Önceki kapanış seviyesi nesnel; 'tutunma' süresi ve hedef yok."
+    },
+    "belirsizlikler": [
+      "Tutunma süresi/mum sayısı",
+      "Hedef ve pozisyon boyutu yok",
+      "Tarayıcı kriteri yok"
+    ],
+    "uyumluluk_notu": "ABD hisse odaklı (önceki kapanış, açılış aralığı); 24 saatlik piyasalarda 'gün' UTC günü olarak tanımlanmalı. ≥5m uygun, hacim gerekmez.",
+    "varyantlar": [],
+    "anahtar_kelimeler": [
+      "onceki-kapanis",
+      "kirmizi-yesil",
+      "gun-ici-seviye",
+      "gap"
+    ]
+  },
+  {
+    "kart_id": "daytrade__acilis-araligi-cikis-veya-donus__denham",
+    "ad": "Açılış Aralığı Çıkışı veya Ortalamaya Dönüş",
+    "stil": "daytrade",
+    "kaynak": {
+      "pdf": "Yeni_Başlayanlar_için_Day_Trading_-_Mark_Denham_114_sayfa.pdf",
+      "sayfalar": [
+        85,
+        86
+      ]
+    },
+    "ozet": "Açılışın ilk dakikalarında (birkaç dakika - 1 saat) oluşan yüksek-düşük aralığı belirlenir; fiyat aralıktan çıkınca kırılım yönünde ya da bölge dışına taşarsa ortalamaya dönüş yönünde işlem düşünülür (Bollinger ±2 sapma ile birlikte).",
+    "kategori": "kirilim",
+    "piyasa_rejimi": "herhangi",
+    "orijinal_piyasa": "hisse",
+    "zaman_dilimi": {
+      "islem": "5m",
+      "ust_filtre": null
+    },
+    "gostergeler": [
+      {
+        "ad": "Bollinger",
+        "parametreler": {
+          "sapma": 2
+        }
+      }
+    ],
+    "long_giris": [
+      "Açılış aralığı (ilk 5 dk - 1 saat) üst sınırı yukarı kırılır -> kırılım long (veya aralık dışı aşırı uç -> short dönüş)"
+    ],
+    "short_giris": [
+      "Açılış aralığı alt sınırı aşağı kırılır -> short (veya aşırı uç -> long dönüş)"
+    ],
+    "stop_loss": "Kitapta yok",
+    "kar_al": "Kitapta yok",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Aralık süresi kullanıcıya bırakılmış, giriş/çıkış/stop kuralı yok; kırılım mı dönüş mü belirsiz."
+    },
+    "belirsizlikler": [
+      "Aralık süresi",
+      "Kırılım/dönüş ayrımı kriteri",
+      "Stop ve hedef yok"
+    ],
+    "uyumluluk_notu": "ABD hisse odaklı (önceki kapanış, açılış aralığı); 24 saatlik piyasalarda 'gün' UTC günü olarak tanımlanmalı. ≥5m uygun, hacim gerekmez.",
+    "varyantlar": [],
+    "anahtar_kelimeler": [
+      "acilis-araligi",
+      "orb",
+      "bollinger",
+      "kirilim"
+    ]
+  },
+  {
+    "kart_id": "daytrade__boga-bayragi-direk-olcusu__denham",
+    "ad": "Boğa Bayrağı (direk mesafesi kadar hedef)",
+    "stil": "daytrade",
+    "kaynak": {
+      "pdf": "Yeni_Başlayanlar_için_Day_Trading_-_Mark_Denham_114_sayfa.pdf",
+      "sayfalar": [
+        79
+      ]
+    },
+    "ozet": "Güçlü dikey yükselişten (direk) sonra yatay/aşağı eğimli bayrak oluşur; bayrağın kırılımında long girilir ve hedef direk mesafesi kadar yukarıdır. Ayı bayrağı tersidir.",
+    "kategori": "formasyon",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "hisse",
+    "zaman_dilimi": {
+      "islem": "5m",
+      "ust_filtre": null
+    },
+    "gostergeler": [],
+    "long_giris": [
+      "Dikey yükseliş (direk) sonrası kısa konsolidasyon (bayrak)",
+      "Bayrağın üst sınırı yukarı kırılır"
+    ],
+    "short_giris": [
+      "Ayı bayrağı: dikey düşüş sonrası konsolidasyon alt sınırı aşağı kırılır"
+    ],
+    "stop_loss": "Kitapta yok (bayrağın altı varsayılabilir)",
+    "kar_al": "Direk mesafesi kadar kırılımdan yukarı (ölçülü hedef)",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Direk/bayrak tanımları ve stop kuralı yok."
+    },
+    "belirsizlikler": [
+      "Direk minimum büyüklüğü",
+      "Bayrak uzunluğu/derinliği",
+      "Stop yok"
+    ],
+    "uyumluluk_notu": "Tüm piyasalarda uygulanır; 5m uygun.",
+    "varyantlar": [
+      "Flama (üçgen simetri) varyantı"
+    ],
+    "anahtar_kelimeler": [
+      "boga-bayragi",
+      "olculu-hedef",
+      "formasyon",
+      "direk"
+    ]
+  }
+]
