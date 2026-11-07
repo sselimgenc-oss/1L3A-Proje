@@ -1,0 +1,16 @@
+bolge,ad,tur,kaynak_url,olusturma,son_guncelleme,enstruman_tf,sonuc_var_mi,sonuc_ozeti,lisans,durum,not
+Rusya,empenoso/backtrader-quickstart-template (SMA kesisimi),swing,https://github.com/empenoso/backtrader-quickstart-template,bilinmiyor,bilinmiyor,MOEX hisseler gunluk,evet (2018-2025-08),yillik %5.44 DD %13.4 128 islem al-tutla kiyas,belirtilmemis,izle,tek kural; OOS yok
+Rusya,DKorolski/mean_rev_strategy (IMOEXF 10dk ortalamaya donus),daytrade,https://github.com/DKorolski/mean_rev_strategy,2025-02-27,2026-03-04,IMOEXF 10dk,evet (2020-11..2025-10),yillik %19.3 DD %3.1 Sharpe 4.44 kayma yok,belirtilmemis,supheli,Sharpe asiri yuksek; OOS yok
+Rusya,WISEPLAT/backtrader_moexalgo,arac,https://github.com/WISEPLAT/backtrader_moexalgo,2023-12-09,2024-01-31,MOEX,hayir,-,MIT,bilgi,arac
+Brezilya,amenescal/b3-systematic-strategy-backtest (PETR4 MA kesisimi WF),swing,https://github.com/amenescal/b3-systematic-strategy-backtest,bilinmiyor,bilinmiyor,PETR4 gunluk,evet (OOS 2019-2026),OOS yillik %9.06 Sharpe 0.12 DD -40%; al-tut %25.6 Sharpe 0.55,belirtilmemis,elendi,negatif ama dürüst WF
+Brezilya,JoaoPauloZangrandi/overnight-intraday-br,swing (overnight),https://github.com/JoaoPauloZangrandi/overnight-intraday-br,bilinmiyor,bilinmiyor,B3 hisseler gunluk,evet,maliyet sonrasi CDI'yi gecmiyor,belirtilmemis,elendi,maliyet
+Brezilya,altino127/trading (SIGMA WIN ortalamaya donus),scalp/daytrade,https://github.com/altino127/trading,2026-04-27,2026-04-29,WIN mini endeks dk,hayir (aciklama: 826 gun),sayi yok,yok,izle,kural gorunmuyor
+Brezilya,wesleyzilva/RepoRobos (WIN gun ici robotlar),daytrade,https://github.com/wesleyzilva/RepoRobos,2026-01-10,2026-04-04,WIN mini endeks,hayir,-,yok,izle,dosyalar okunmadi
+Hindistan,ryaneditraj/indiquant,arastirma,https://github.com/ryaneditraj/indiquant,2026-07-25,2026-10-30,NSE/BSE,hayir,-,PolyForm NC,elendi,sonuc yok
+Endonezya,dylan-jaya/idx-quant-research-system (BBCA momentum),swing,https://github.com/dylan-jaya/idx-quant-research-system,2026-07-10,2026-11-06,BBCA/IDX gunluk,negatif itiraf,al-tutu gecemedi (yazarin kendi beyani),yok,elendi,dürüst negatif
+Hindistan,palaemon-codes/vix-strategy-backtest,opsiyon,https://github.com/palaemon-codes/vix-strategy-backtest,2026-04-06,2026-04-06,NIFTY opsiyon,hayir,-,-,elendi,opsiyon elenen kategori
+Afrika,-,-,-,-,-,-,yok,proje bulunamadi,-,bilgi,JSE/NGX/NSE Kenya/EGX taramasi yapilamadi
+Avrupa,-,-,-,-,-,-,yok,DAX/CAC/IBEX icin sonuc yok,-,bilgi,yalniz genel araclar
+Asya (VN/TH/SG),-,-,-,-,-,-,yok,sonuc yok,-,bilgi,
+Guney Amerika (BR harici),-,-,-,-,-,-,yok,yalniz genel araclar,-,bilgi,
+Rusya (Habr RL Binance),Habr RL-agent Binance Futures,swing/RL,https://habr.com/ru/articles/934258/,2025-03,2025-06,BTC Futures,belirtilmis (yazida),acilmadi,-,okunmadi,ag erisimi yok
