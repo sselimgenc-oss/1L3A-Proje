@@ -1,0 +1,28 @@
+[
+ {
+  "cikis_ayarlari": null,
+  "dis_id": "ek77:36",
+  "kaynak_dosya": "stratejiler/ek_kaynaklar/ek_77_strateji.md#36 (letianzj/QuantResearch dual_thrust.py)",
+  "not": "YAKLAŞIK: n=4 gün, k1=k2=0.5 (kaynak değerleri); look-ahead düzeltilmiş (aralık yalnız önceki 4 seanstan); kaynak günlük always-in-the-market, burada gün içi çevirme + seans sonu çıkışı + ATR stop.",
+  "parametreler": {
+   "k1": 0.5,
+   "k2": 0.5,
+   "n": 4,
+   "seans": "abd_hisse",
+   "short": true
+  }
+ },
+ {
+  "cikis_ayarlari": null,
+  "dis_id": "ek77:62",
+  "kaynak_dosya": "stratejiler/ek_kaynaklar/ek_77_strateji.md#62 (QuantConnect/Lean VIXDualThrustAlpha.py) ve #67 (TqSdk Dual Thrust)",
+  "not": "YAKLAŞIK: kaynak son 20 adet 30m barın HH/LL/HC/LC değerini kullanır (~1.5 seans) ve k=0.63; burada n=2 SEANS. Insight 5 gün yerine seans sonu çıkışı; %3 zarar kesme yerine ATR stop. 30m veri önerilir.",
+  "parametreler": {
+   "k1": 0.63,
+   "k2": 0.63,
+   "n": 2,
+   "seans": "abd_hisse",
+   "short": true
+  }
+ }
+]

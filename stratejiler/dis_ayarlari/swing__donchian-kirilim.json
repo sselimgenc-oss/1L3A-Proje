@@ -84,5 +84,18 @@
    "atr_periyot": 10
   },
   "not": "YAKLAŞIK: 'Tüm zamanların zirvesi' = 365 mumluk zirve kırılımı; 1 ATR(10) iz süren stop CikisAyarlari ile."
+ },
+ {
+  "cikis_ayarlari": null,
+  "dis_id": "ek77:19",
+  "kaynak_dosya": "stratejiler/ek_kaynaklar/ek_77_strateji.md#19 (gabrielweich/jesse-strategies Donchian/__init__.py)",
+  "not": "YAKLAŞIK: kapanış önceki 20 mumun zirvesini aşınca long, SMA200 üstünde; çıkış = alt kanal (20) kırılımı, stop = alt kanal (kaynakta ayrı stop yok, alt bant fiilen iz süren stop). Donchian periyodu belgede verilmemiş (Jesse varsayılanı 20 varsayımı). Orijinal 6h; ailenin TF'leri 4h/1d. Trend filtresi ailede EMA/SMA yaklaşığı.",
+  "parametreler": {
+   "cikis_n": 20,
+   "giris_n": 20,
+   "short": false,
+   "stop_modu": "kanal",
+   "trend_ma": 200
+  }
  }
 ]
