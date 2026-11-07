@@ -12,6 +12,6 @@ sira,ad,tur,kaynak_url,olusturma,son_guncelleme,enstruman_tf,sonuc_var_mi,sonuc_
 -,helloword8888889/freqtrade-strategies-showcase,karisik,https://github.com/helloword8888889/freqtrade-strategies-showcase,2026-10-09,2026-10-21,Binance perp 4h,evet (kapali kaynak),"+1951%, +5569%, DD 2-4%, 30k islem",kapali,elendi,"dogrulanamaz, uc degerler, hayatta kalma yanliligi"
 -,huhcat2/neutralmean7-freqtrade,swing/ML,https://github.com/huhcat2/neutralmean7-freqtrade,2026-10-21,2026-10-21,BTC spot 1h/5m,harici rapor,sayfada yok,belirtilmemis,elendi,ML (Ridge) elenen kategori
 -,balbin570/freqtrade-strategy-research,karisik,https://github.com/balbin570/freqtrade-strategy-research,2026-10-26,2026-10-26,BTC/ETH/SOL 5m/15m,hayir,yok,belirtilmemis,elendi,kural yok
--,Ciniz kisisel yazi (易方达 159915),swing/ETF,zhihu/joinquant (kisisel),2026-10,2026-10,ETF 2011-2026,evet (tek yazi),DD 55.5%,-,izle,kisisel; sermaye varsayimi belirsiz
+-,Kisisel Cince yazi (易方达 159915),swing/ETF,kisisel yazi (Cince, URL belirtilmedi),2026-10,2026-10,ETF 2011-2026,evet (tek yazi),DD 55.5%,-,izle,kisisel; sermaye varsayimi belirsiz
 -,Freqtrade 2026.10 surumu,arac,https://github.com/freqtrade/freqtrade/releases/tag/2026.10,2026-10-30,2026-10-30,-,-,-,GPL,bilgi,strateji degil
 -,"Okunmayan depolar: Alihuseyn ai_trader, danny123 regime-trading-bot, Akasam8 crypto-bot, dalmaguergarces Trade, jcosta92 trading-agents, acerbashutosh quant-alpha-desktop",karisik,-,2026-10,2026-11,-,bilinmiyor,-,-,okunmadi,izin verilirse okunabilir
