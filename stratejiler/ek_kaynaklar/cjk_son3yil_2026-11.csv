@@ -1,0 +1,12 @@
+sira,ad,ulke,tur,kaynak_url,son_guncelleme,enstruman_tf,sonuc_var_mi,sonuc_ozeti,maliyet_oos,lisans,durum,not
+1,S15 kripto trend (quant-bot),Cin,daytrade,https://github.com/ha56412003-lab/quant-bot,2026-11,"Binance perp 15m, 20 coin",evet (60 gun),"+35.2R, 408 islem, kazanma %41.8, DD -19.6R; taker ile negatif",maliyet duyarli; OOS yok,MIT,aday (kisa ornek),paper 6 Kasim'da basladi
+2,Asym-DTS-H (510500 ETF),Cin,swing,https://github.com/Deadmorning/asym-dts-h,2026-04,"510500 ETF, haftalik+gunluk",evet (in-sample),"+64.8% 2023-04..2026-04, 97 islem",parametre ayni donemde secildi,MIT,aday (in-sample),"tek enstruman, uzun-only"
+3,Temettu 10 hisse (kabu-app),Japonya,portfoy (aylik),https://github.com/littlematuijp-star/kabu-app,2026-11,"TSE hisse, aylik",evet (10 yil),"CAGR 17.1% DD -32% vs TOPIX 14.3, Nikkei 16.6, esit agirlik 17.6",OOS yok; vergi yok,yok,izle,piyasa ortalamasi ustu degil
+4,CryptoOption-Research,Cin,opsiyon/funding (karisik),https://github.com/3099404236/CryptoOption-Research,2026,Deribit/Binance,evet (OOS 2024-26),satis vol +8.9%; funding carry +5.2/yil; trend OOS -; momentum OOS -15%,"OOS bir kez, secim yanliligi",yok,izle (opsiyon elenen),trend OOS'ta cokuyor
+5,PE faktor 10 hisse,Cin,portfoy (aylik?),https://github.com/Chinakeyboardman/pe-ratio-stock-selection,2025-12,"A-hisse, bigquant",hayir (dogrulanamaz),yillik %22 iddiasi; donem/DD/maliyet yok,OOS yok; temettu faktoru ornekte secildi,MIT,elendi,sonuc dogrulanamadi
+6,Upbit volatilite kirilim,Kore,daytrade,https://github.com/yoojinsu/Upbit-Backtest,2026-05,BTC/ETH/XRP 1dk-1sn,hayir,yok,tens of thousands parametre optimizasyonu,MIT,elendi,kural eksik
+7,USDJPY 25 yil coklu strateji (first-ea),Japonya,daytrade/swing (FX),https://github.com/aran-nakayama/first-ea,2026-04,USDJPY,metrik gorunmuyor,yok (HTML raporlar okunmadi),yok,yok,izle,sonraki adim: rapor dosyalari
+8,"Japonya FX EA yazilari (OANDA lab, note)",Japonya,FX EA,https://www.oanda.jp/lab-education/blog_mt5/auto_trading/mt5-ai-auto-trading-ea/,2025-03+,USDJPY,ticari,"PF 0.99->1.77, DD 16k->4k",ticari,yok,elendi,nanpin/martingale kontrolu gerekli
+-,"Kore araclari (buylow, upbit-official toolkit, Vibe-Trading-KR, kis-trader)",Kore,arac,-,2026,KOSPI/Upbit,hayir,yok,-,MIT/yok,bilgi,strateji degil
+-,"ML tabanli (0xooank jq-lgbm, NeutralMean7)",Cin/Kore,ML,-,2025-10/2026,-,sayfaya gore,-,-,-,elendi,ML elenen kategori
+-,"Okunmayanlar: robertquant/python_jointquant, buylow (ayrintili), first-ea HTML",Cin/Kore/Japonya,-,-,-,-,bilinmiyor,-,-,-,okunmadi,izin verilirse okunabilir
