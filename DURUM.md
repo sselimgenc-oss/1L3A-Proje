@@ -16,7 +16,7 @@ _Son güncelleme: 2026-11-06 (Aşama 1 ara durum)_
 6. Binance: kripto + TradFi (ABD hisse, emtia) perpetual'ları. BIST yok.
 7. Önce paper trading (Binance testnet değil, canlı veri + kendi simülasyon motoru).
 8. DigitalOcean'da çalışır; dashboard + Telegram.
-9. (2026-11-06) **Az enstrüman, derin uzmanlık:** ajan yüzlerce enstrümanda işlem kovalamaz; az sayıda enstrümanda iyi işlem yapar.
+9. ~~(2026-11-06) Az enstrüman, derin uzmanlık.~~ (2026-11-07 kullanıcı kararıyla değişti → karar 23)
 10. (2026-11-06) Önceki projelerden aday stratejileri lider seçer (enstrüman sayısına bakmadan, işe yarayacağını düşündükleri); hepsi 1L3A'da yeniden test edilir. Delist/hayatta kalma yanlılığı ile uğraşılmaz.
 
 ## Aşama 0 — tamamlandı
@@ -81,7 +81,12 @@ Ana ders: önceki sonuçlar OOS'a bakılarak seçilmiş ve kâr birkaç işlemde
     TradFi geçmişi Binance'ta kısa olduğundan veri **Dukascopy**'den çekilir (`DK_` önekli semboller); canlı işlem
     Binance TradFi perp'lerinde. Maliyet modeli Binance'ınki; Dukascopy verisinde funding yok. Kilit tarihi aynı.
     Canlıda yine az enstrüman (karar 9): enstrüman seçimi testlerin sonucuna göre yapılır.
-18. Önceki projelerden alınanlar: 4S kırılım (algo-sg A + swing-sg S2 birleşik), KGT, S1; yedek B. KMN ve S3 alınmadı.
+23. (2026-11-07) **Canlıda enstrüman sayısı artacak (kullanıcı kararı); portföy katmanı zorunlu.** (a) Çok enstrümanlı
+    portföy motoru: aynı anda birden çok grafik, portföy düzeyinde sert limitler (günlük %3, %20 kill switch, toplam 3x;
+    işlem başı %1 risk her pozisyonda korunur). (b) Tek-grafik stratejilerinin birleşik çalıştırılması (risk üst üste
+    binmesi, korelasyon). (c) "Tek enstrüman mimarisi" yüzünden elenen tüm stratejiler (rotasyon, kesitsel momentum,
+    çift işlemi, KMN vb.) kodlanıp test edilir — strateji kaçırılmaz. ML ve opsiyon gibi başka nedenle elenenler hariç.
+18. Önceki projelerden alınanlar: 4S kırılım (algo-sg A + swing-sg S2 birleşik), KGT, S1; yedek B. S3 alınmadı. KMN portföy katmanında test edilecek (karar 23).
 
 ## Aşama 2 — devam ediyor (2026-11-07)
 - Katman 1 ✅: 192 strateji kodlu (105 kitap + 87 dış), 226 kart ayarı, 110 dış ayar. 1501+ test.
