@@ -159,6 +159,12 @@ class Pairs(PfTemel):
     ÇİFT SEÇİMİ (belgelenmiş, OOS görülmeden, iktisadi yakınlıkla): `DEFAULT_CIFTLER` (kripto 3 çift, büyük teknoloji
     hisseleri 4 çift, XAU/COPPER ve WTI/COPPER). `ciftler="otomatik"` evrendeki tüm kombinasyonları dener (kointegrasyon
     testi seçer; mesafe yönteminde SSD sırası ve max_cift). Yalnız iki bacağı da evrende olan çiftler kullanılır.
+
+    d11j EK YÖNTEM (varsayılan "eg" değişmez; ızgarada yok, ayar kaydıyla denenir): yontem="dunku_getiri" -> long-only: her çiftte günün kapanışında iki
+    bacağın GÜNLÜK getirisi (bugün/dün) karşılaştırılır, getirisi DÜŞÜK olan bacak ertesi gün tutulur (brut_cift payı; her gün yeniden seçilir;
+    kısa bacak yok); koşul: iki bacağın son `kor_gun` (19) günlük getiri korelasyonu < `kor_esik` (0.9) ise işlem (kaynakta korelasyon < 0.9 giriş
+    kapısıdır), değilse o çift o gün düz. Kaynağın "9 pencere boyunca" ifadesi
+    tek pencereye indirildi (yaklaşık). KO/PEP evrende yok: kripto/hisse çiftleriyle denenir; sonuçlar kaynağın iddiasını doğrulamaz.
     """
 
     ad = "pf__pairs"
@@ -167,7 +173,7 @@ class Pairs(PfTemel):
         **ORTAK_PARAMETRELER, "semboller": HEPSI, "ciftler": DEFAULT_CIFTLER, "yontem": "eg", "pencere": 250,
         "giris_z": 2.0, "cikis_z": 0.5, "stop_z": 4.0, "test_aralik": 5, "max_tutma": 90, "brut_cift": 0.5,
         "max_cift": 5, "beta_min": 0.2, "beta_max": 5.0, "adf_lag": 1, "kalman_delta": 1e-4, "kalman_ve": 1e-3,
-        "yon_modu": "donus", "atr_k": 4.0}
+        "yon_modu": "donus", "atr_k": 4.0, "kor_gun": 19, "kor_esik": 0.9}
     parametre_izgarasi = {"yontem": ["eg", "johansen", "kalman"], "giris_z": [1.0, 1.5, 2.0], "pencere": [120, 250, 365]}
 
     def cift_listesi(self, kolon) -> list:
@@ -278,12 +284,26 @@ class Pairs(PfTemel):
         # giriş anındaki beta pozisyon boyunca sabit: bgir zaten b0
         return pos, bgir
 
+    def _dunku_getiri(self, kolon, ciftler, tk):
+        p = self.parametreler
+        r = tk.getiri()
+        toplam = pd.DataFrame(0.0, index=tk.gun, columns=kolon)
+        for a, b in ciftler:
+            kor = r[a].rolling(int(p["kor_gun"]), min_periods=int(p["kor_gun"])).corr(r[b])
+            ok = (kor < p["kor_esik"]) & r[a].notna() & r[b].notna()
+            zayif_a = r[a] < r[b]
+            toplam[a] += np.where(ok & zayif_a, p["brut_cift"], 0.0)
+            toplam[b] += np.where(ok & ~zayif_a, p["brut_cift"], 0.0)
+        return degisim_satirlari(tk.eksene(toplam.clip(0.0, 1.0)))
+
     def _hedef(self, ev, tk):
         p = self.parametreler
         kolon = list(ev)
         ciftler = self.cift_listesi(kolon)
         if not ciftler:
             raise ValueError("pf__pairs: evrende iki bacağı da bulunan çift yok")
+        if p["yontem"] == "dunku_getiri":
+            return self._dunku_getiri(kolon, ciftler, tk)
         logk = np.log(tk.kap[kolon])
         var = tk.panel("kapanis", False)[kolon].notna()
         gun_epoch = ((tk.gun - pd.Timestamp("1970-01-01", tz="UTC")).days).to_numpy().astype(np.int64)

@@ -9,6 +9,7 @@ from __future__ import annotations
 import numpy as np
 import pandas as pd
 
+from motor.strateji import _gosterge_d11j as j
 from motor.portfoy.stratejiler.ortak import (EMTIA, HEPSI, HISSE, KRIPTO, ORTAK_PARAMETRELER, PfTemel, Takvim,
                                              dongusel_hedef, en_iyi_k, sma_gun, tetik_satirlari)
 
@@ -49,6 +50,12 @@ class Rotasyon(PfTemel):
     skor: "getiri" (kapanış[t-atla]/kapanış[t-lookback]-1), "agirlikli" ((w1*mom(l1)+w2*mom(l2))/(w1+w2), QC MOMP
     düzeltmesi: yüzde, fiyat farkı DEĞİL), "w13612" (12*1ay+4*3ay+2*6ay+1*12ay), "regresyon" (Clenow eğim x R²),
     "risk_ayarli" (günlük getiri ort/std), "dusuk_vol" (-std), "kompozit" (0.5*m20+0.3*m60+0.2*m120-0.5*std20).
+    d11j EK skorlar (varsayılan değişmez; yeni modlar ızgarada yok, ayar kaydıyla denenir): "bb_uzaklik" = kapanış / Bollinger üst bandı(lookback_gun,
+    bb_sapma) - 1 (>0: üst bandın üstünde kapatanlar aday = mutlak filtre; en uzak olan seçilir; ai-trader çoklu Bollinger rotasyonu; alt bandın
+    altındakiler zaten skor<0 olarak seçilmez; %99 ağırlık ayrıntısı kodlanmadı), "hacim" = lookback_gun günlük ortalama dolar hacmi (hacim*kapanış;
+    sıralama ölçütü; mutlak filtre bu skor için devre dışıdır). ek_filtre="triple_rsi": yalnız Triple RSI (20/60/120; _gosterge_d11j.triple_rsi_ok)
+    süzgecinden geçen semboller aday (ai-trader Triple RSI rotasyonu: süzgeçten geçenler içinden hacme göre ilk k). Kaynaktaki "çift aylarda ayın 5'i"
+    takvimi yerine mevcut `takvim` (örn. "M") kullanılır = yaklaşık.
 
     Uyarlama: ETF'ler -> evrendeki semboller (GEM: SPY/ACWX -> hisse sepeti+XAU, AGG -> XAU kolu, BIL -> nakit;
     Faber 5-sınıf -> BTC, MSFT, XAU, WTI, COPPER temsilcileri). 15m/1s/4s yeniden dengeleme günlüğe indirilmiştir.
@@ -59,7 +66,8 @@ class Rotasyon(PfTemel):
     varsayilan_parametreler = {
         **ORTAK_PARAMETRELER, "semboller": HEPSI, "skor": "getiri", "lookback_gun": 90, "atla_gun": 0, "lookback2_gun": 90,
         "agirlik1": 100.0, "agirlik2": 75.0, "k": 2, "takvim": "M", "mutlak": True, "trend_sma": 0, "rejim_sembol": "",
-        "rejim_sma": 100, "gap_filtre": 0.0, "agirlik": "esit", "cikis_rank": 0, "vol_gun": 60}
+        "rejim_sma": 100, "gap_filtre": 0.0, "agirlik": "esit", "cikis_rank": 0, "vol_gun": 60,
+        "bb_sapma": 2.0, "ek_filtre": ""}
     parametre_izgarasi = {"lookback_gun": [30, 90, 180], "k": [1, 2, 3], "takvim": ["W", "M", "Q"]}
 
     def ek_semboller(self):
@@ -84,6 +92,12 @@ class Rotasyon(PfTemel):
             return -tk.vol(L)
         if s == "kompozit":
             return 0.5 * tk.mom(20) + 0.3 * tk.mom(60) + 0.2 * tk.mom(120) - 0.5 * tk.vol(20)
+        if s == "bb_uzaklik":
+            ort = tk.kap.rolling(L, min_periods=L).mean()
+            sd = tk.kap.rolling(L, min_periods=L).std(ddof=0)
+            return tk.kap / (ort + p["bb_sapma"] * sd) - 1.0
+        if s == "hacim":
+            return (tk.panel("hacim", False) * tk.kap).rolling(L, min_periods=max(5, L // 2)).mean()
         raise ValueError(f"bilinmeyen skor: {s}")
 
     def _hedef(self, ev, tk):
@@ -103,6 +117,11 @@ class Rotasyon(PfTemel):
             gap = (ac / tk.kap[kolon].shift(1) - 1.0).abs()
             gmax = gap.rolling(90, min_periods=1).max()
             gap_ok = tk.eksene(gmax <= p["gap_filtre"]).fillna(False).to_numpy(dtype=bool)
+        if p["ek_filtre"] == "triple_rsi":
+            trs = tk.eksene(j.triple_rsi_ok(tk.kap[kolon])).fillna(False).to_numpy(dtype=bool)
+            gap_ok = gap_ok & trs
+        elif p["ek_filtre"]:
+            raise ValueError(f"bilinmeyen ek_filtre: {p['ek_filtre']}")
         rejim_ok = np.ones(len(ax), dtype=bool)
         rejim_hazir = np.ones(len(ax), dtype=bool)
         if p["rejim_sembol"]:
@@ -112,7 +131,7 @@ class Rotasyon(PfTemel):
             rejim_hazir = tk.eksene(rs.notna()).fillna(False).to_numpy(dtype=bool)
         gecerli = np.isfinite(S).any(axis=1) & rejim_hazir
         tetik = tetik_satirlari(ax, p["takvim"], gecerli)
-        mutlak = p["mutlak"] and p["skor"] != "dusuk_vol"
+        mutlak = p["mutlak"] and p["skor"] not in ("dusuk_vol", "hacim")
         k = int(p["k"])
         onceki: list = []
 
@@ -157,13 +176,41 @@ class SabitSepet(PfTemel):
     Uyarlama: 4 saatlik dengeleme günlüğe indirilmiştir (portföy koşusu 1d). "Yeniden dengeleme primi" ölçümü bir
     strateji değil karşılaştırmadır: burada günlük dengelenen bacak (takvim="D") sağlanır; prim, aynı sepetin
     takvim="M"/"yok" sürümüyle karşılaştırılarak okunur.
+
+    d11j EK ağırlık şemaları (varsayılan değişmez; ızgarada yok, ayar kaydıyla denenir): agirlik="hrp" (Hiyerarşik Risk Paritesi: korelasyon
+    mesafesi, tek bağlantılı kümeleme, özyinelemeli ters-varyans bölme), "min_var" (long-only global minimum varyans, aktif küme yöntemi),
+    "mvo" (long-only teğet/maks. Sharpe: w ~ inv(Kov) x ortalama getiri; ortalama getirisi <= 0 olanlar elenir, hepsi <= 0 ise nakit).
+    Kovaryans/ortalama son `kov_gun` takvim gününün günlük getirisinden (t'de biter, nedensel); pencerede yeterli verisi (>= %70) olmayan
+    semboller o dengelemede ağırlıksız kalır; 2'den az uygun sembol varsa eşit ağırlık. scipy yok: Chan etkin sınır, Kelly (F=C^-1 M) ve
+    kısıtlı/kısıtsız genel optimizasyon KODLANMADI; MVO girdisi (beklenen getiri) gürültülüdür. Korelasyon kümeleme ile temsilci seçimi kodlanmadı.
     """
 
     ad = "pf__sabit_sepet"
     min_sembol = 2
     varsayilan_parametreler = {**ORTAK_PARAMETRELER, "semboller": KRIPTO, "agirlik": "esit", "agirliklar": (),
-                               "takvim": "M", "sapma": 0.0, "vol_gun": 60, "brut": 1.0}
+                               "takvim": "M", "sapma": 0.0, "vol_gun": 60, "brut": 1.0, "kov_gun": 120}
     parametre_izgarasi = {"agirlik": ["esit", "ters_vol"], "takvim": ["D", "W", "M"], "sapma": [0.0, 0.05, 0.10]}
+
+    def _opt_agirlik(self, RET, poz, maske):
+        p = self.parametreler
+        L = int(p["kov_gun"])
+        pencere = RET[max(0, poz - L + 1):poz + 1]
+        yeterli = maske & (np.isfinite(pencere).sum(axis=0) >= max(20, int(0.7 * L)))
+        if yeterli.sum() < 2:
+            return maske.astype(float)
+        alt = pd.DataFrame(pencere[:, yeterli])
+        cov = alt.cov().to_numpy()
+        if not np.isfinite(cov).all():
+            return maske.astype(float)
+        if p["agirlik"] == "hrp":
+            w = j.hrp_agirlik(cov)
+        elif p["agirlik"] == "min_var":
+            w = j.min_varyans_agirlik(cov)
+        else:
+            w = j.maks_sharpe_agirlik(cov, alt.mean().to_numpy())
+        raw = np.zeros(len(maske))
+        raw[yeterli] = w
+        return raw
 
     def _hedef(self, ev, tk):
         p = self.parametreler
@@ -179,6 +226,10 @@ class SabitSepet(PfTemel):
             sabit = dict(zip(p["semboller"], p["agirliklar"]))
         if p["agirlik"] == "ters_vol":
             gecerli_m = gecerli_m & np.isfinite(V)
+        opt = p["agirlik"] in ("hrp", "min_var", "mvo")
+        if opt:
+            RET = tk.getiri()[kolon].to_numpy(dtype=float)
+            gun_poz = tk.gun.get_indexer(ax)
         gecerli = gecerli_m.any(axis=1)
         takvim_tetik = np.zeros(len(ax), dtype=bool) if str(p["takvim"]) == "yok" else tetik_satirlari(ax, p["takvim"], gecerli)
         h = np.full((len(ax), len(kolon)), np.nan)
@@ -206,6 +257,8 @@ class SabitSepet(PfTemel):
                     raw = np.array([sabit.get(c, 0.0) for c in kolon]) * maske
                 elif p["agirlik"] == "ters_vol":
                     raw = np.where(maske, 1.0 / np.clip(np.nan_to_num(V[i], nan=1.0), 0.003, None), 0.0)
+                elif opt:
+                    raw = self._opt_agirlik(RET, gun_poz[i], maske)
                 else:
                     raw = maske.astype(float)
                 tp = raw.sum()

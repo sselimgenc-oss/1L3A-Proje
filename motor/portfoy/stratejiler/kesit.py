@@ -39,6 +39,10 @@ class KesitLS(PfTemel):
       beta         -beta (referansa göre lookback günlük; BAB; beta ölçekleme yok)
       donus        long: -(lookback günlük getiri) (en kötü), short: lookback2 günlük getiri (en iyi)
       tutarli      lookback (atla) ve lookback2 getirisinin İKİSİNDE de üst/alt üçte bir (kesit sırası) -> long/short
+      kombine      (d11j EK; varsayılan skor değişmez) ağırlıklı kesit z-skor: kombine_ag * z(risk_ayarli) + (1-kombine_ag) * z(-getiri(kombine_donus_gun));
+                   banbot örneği 0.7 risk_ayarli + 0.3 reversal (3 gün). risk_ayarli bileşeni yukarıdaki ort/std oranıdır (kaynak: getiri24/std24);
+                   z = aynı gün evren içi (mevcut semboller) standartlaştırma, nedensel. 'carry' (fonlama z-skoru) KODLANMADI: portföy
+                   stratejisi arayüzü (`_hedef(ev, takvim)`) fonlama verisi taşımaz.
     vol_filtre="yuksek": yalnız volatilitesi kesit medyanının üstündeki yarıda sırala (momentum + yüksek volatilite).
     Uyarlama / sapmalar: "3 dilim"/"6 dilim" (örtüşen alt portföyler) kodlanmadı, tek portföy kullanılır; beta ölçekleme
     yok; evren 3-13 enstrüman (kaynaklar 25-30 coin) -> sonuçlar çok daha gürültülüdür. Kaynakta KMN'nin N=15 / N=7 sonuçları
@@ -50,7 +54,8 @@ class KesitLS(PfTemel):
     varsayilan_parametreler = {
         **ORTAK_PARAMETRELER, "semboller": HEPSI, "skor": "risk_ayarli", "lookback_gun": 14, "atla_gun": 0,
         "lookback2_gun": 30, "k": 2, "takvim": "14", "mod": "notr", "agirlik": "ters_vol", "vol_filtre": "yok",
-        "vol_gun": 30, "brut": 1.0, "ref_sembol": "BTCUSDT"}
+        "vol_gun": 30, "brut": 1.0, "ref_sembol": "BTCUSDT",
+        "kombine_ag": 0.7, "kombine_donus_gun": 3}
     parametre_izgarasi = {"lookback_gun": [14, 30, 90], "k": [1, 2, 3], "takvim": ["7", "14", "30"]}
 
     def ek_semboller(self):
@@ -85,6 +90,16 @@ class KesitLS(PfTemel):
                 res = r - beta.shift(1).mul(m, axis=0)
                 x = res.shift(A)
                 sk = x.rolling(L, min_periods=max(5, L // 2)).mean() / x.rolling(L, min_periods=max(5, L // 2)).std()
+        elif s == "kombine":
+            x = r.shift(A)
+            ra = x.rolling(L, min_periods=max(5, L // 2)).mean() / x.rolling(L, min_periods=max(5, L // 2)).std()
+            rev = -tk.mom(int(p["kombine_donus_gun"]))
+
+            def z(t):
+                t = t[kolon]
+                return t.sub(t.mean(axis=1), axis=0).div(t.std(axis=1).where(lambda v: v > 0), axis=0)
+
+            sk = p["kombine_ag"] * z(ra) + (1.0 - p["kombine_ag"]) * z(rev)
         elif s == "zirve":
             sk = tk.kap / tk.kap.rolling(L, min_periods=int(L * 0.8)).max()
         elif s == "carpiklik":

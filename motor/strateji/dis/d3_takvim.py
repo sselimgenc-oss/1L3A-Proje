@@ -87,15 +87,25 @@ class Min10Dip(D3Taban):
     """dis__min10-dip — kapanış 10 günün en düşüğüyse ertesi gün long (1D).
     Kaynak: awesome.py btc_min10 (Padysak & Vojtko 2022 "MIN"). Kural: kapanış <= son `pencere` kapanışın (bugün dahil) en düşüğü
     -> 1 mum (zaman_cikisi) long. Short ayna: kapanış 10 günün en yükseği (MAX) -> short. Stop orijinalde yok -> ATR stop.
-    Eski sonuç: PF IS 1.51 / OOS 1.00; Sh IS 0.74 / OOS 0.01; stres PF 1.04 -> kaldı."""
+    Eski sonuç: PF IS 1.51 / OOS 1.00; Sh IS 0.74 / OOS 0.01; stres PF 1.04 -> kaldı.
+    d11j EK (varsayılan aynı; ızgaraya girmez): cikis_modu="pencere_zirve" -> long, kapanış son `cikis_pencere` (0: pencere) kapanışın
+    en yükseğine eşit/üstünde olunca çıkar (short: en düşüğe eşit/altında); HL/HL_Scalp kapanış-kanalı dip alımı (pencere 15/24-25).
+    Bu modda zaman_cikisi=0 verilirse yalnız pencere çıkışı + stop kalır. Kaynak aile: kapanis-kanali-min-dip-alim."""
     ad = "dis__min10-dip"
     stil = "swing"
-    varsayilan_parametreler = {**ORTAK, "zaman_cikisi": 1, "pencere": 10}
+    varsayilan_parametreler = {**ORTAK, "zaman_cikisi": 1, "pencere": 10, "cikis_modu": "zaman", "cikis_pencere": 0}
     parametre_izgarasi = {"pencere": [5, 10, 20], "zaman_cikisi": [1, 2, 3], "stop_atr_k": [2.0, 3.0, 4.0]}
 
     def kosullar(self, m):
         n, c = int(self.parametreler["pencere"]), m["kapanis"]
-        return {"long": c <= c.rolling(n, min_periods=n).min(), "short": c >= c.rolling(n, min_periods=n).max()}
+        sonuc = {"long": c <= c.rolling(n, min_periods=n).min(), "short": c >= c.rolling(n, min_periods=n).max()}
+        if self.parametreler["cikis_modu"] == "pencere_zirve":
+            n2 = int(self.parametreler["cikis_pencere"]) or n
+            sonuc["cikis_long"] = c >= c.rolling(n2, min_periods=n2).max()
+            sonuc["cikis_short"] = c <= c.rolling(n2, min_periods=n2).min()
+        elif self.parametreler["cikis_modu"] != "zaman":
+            raise ValueError(f"Bilinmeyen cikis_modu: {self.parametreler['cikis_modu']}")
+        return sonuc
 
 
 class OcakBarometresi(D3Taban):

@@ -1,0 +1,16 @@
+[
+ {
+  "dis_id": "d11j:sqz-momentum-dip-donusu-ewo:nfi_ewo_wr",
+  "kaynak_dosya": "stratejiler/ek_kaynaklar/github_g1_freqtrade.csv (BBMod sqzmom, NFI X v11 squeeze dönüşü)",
+  "parametreler": {
+   "ema_oran": 0.973,
+   "ewo_esik": 3.92,
+   "wr_esik": 48.0,
+   "sqz_sart": true,
+   "short": false,
+   "guc": 0.0
+  },
+  "cikis_ayarlari": null,
+  "not": "Squeeze momentum dip dönüşü + kapanış < EMA13*0.973 + EWO(5,35)/kapanış < -%3.92 (kaynak mutlak -3.92 yüzdeye çevrildi: varsayım) + Williams %R(14) < -48 + BB Keltner içinde. Yalnız long."
+ }
+]

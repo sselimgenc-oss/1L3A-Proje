@@ -145,10 +145,15 @@ class PivotTersStop(Strateji):
     Orijinalde stop yok (ters emir tek çıkış) -> long için stop son pivot dibi (short için son pivot tepesi); geçersizse
     (fiyatın yanlış tarafında) ATR stop (stop_atr). Ters pivot kırılımı `cikis`tir.
     Eski sonuç: kaldı: PF 2.24, Sharpe 2.45 (arsiv/strateji-sg/tv_eleme_dali/sonuclar/pivot_rev.json).
+    d11j EK (varsayılan "kirilim" = eski davranış; ızgaraya girmez; kaynak aile pivot-onayli-ters-stop, customPivotJbk): giris="olusum" ->
+    giriş pivotun ONAYLANDIĞI mumda (tepe onayında long, dip onayında short; onay `sag` mum gecikmeli, nedensel), kırılım beklenmez;
+    ters onay `cikis`. stop_yuzde>0 ise stop girişten %stop_yuzde (kaynak 5), hedef_yuzde>0 ise hedef girişten %hedef_yuzde (kaynak 4)
+    (0: eski stop/hedef kuralı). Kaynak pivotu sol 4, sağ 2 mumla tanımlar.
     """
     ad = "dis__pivot-ters-stop"
     stil = "swing"
-    varsayilan_parametreler = {"sol": 2, "sag": 1, "atr_periyot": 14, "stop_atr": 2.5, "short": True}
+    varsayilan_parametreler = {"sol": 2, "sag": 1, "atr_periyot": 14, "stop_atr": 2.5, "short": True,
+                               "giris": "kirilim", "stop_yuzde": 0.0, "hedef_yuzde": 0.0}
     parametre_izgarasi = {"sol": [2, 3, 4], "sag": [1, 2], "stop_atr": [2.0, 3.0]}
 
     def cikis_var_mi(self) -> bool:
@@ -188,7 +193,17 @@ class PivotTersStop(Strateji):
         atr = g.atr(y, d, k, int(p["atr_periyot"]))
         stop_l = lfiyat.where(lfiyat < k, k - p["stop_atr"] * atr)
         stop_s = hfiyat.where(hfiyat > k, k + p["stop_atr"] * atr)
-        return kur(mumlar, tl, ts & bool(p["short"]), stop_l, stop_s, cikis_l=ts, cikis_s=tl)
+        hedef_l = hedef_s = None
+        if p["giris"] == "olusum":
+            tl = pd.Series(tepe.fillna(False).to_numpy(dtype=bool), index=k.index)
+            ts = pd.Series(dip.fillna(False).to_numpy(dtype=bool), index=k.index) & ~tl
+        elif p["giris"] != "kirilim":
+            raise ValueError(f"Bilinmeyen giris: {p['giris']}")
+        if p["stop_yuzde"] > 0:
+            stop_l, stop_s = k * (1 - p["stop_yuzde"] / 100.0), k * (1 + p["stop_yuzde"] / 100.0)
+        if p["hedef_yuzde"] > 0:
+            hedef_l, hedef_s = k * (1 + p["hedef_yuzde"] / 100.0), k * (1 - p["hedef_yuzde"] / 100.0)
+        return kur(mumlar, tl, ts & bool(p["short"]), stop_l, stop_s, hedef_l, hedef_s, cikis_l=ts, cikis_s=tl)
 
 
 class GoldenTrident(Strateji):

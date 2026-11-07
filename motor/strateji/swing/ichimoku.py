@@ -13,11 +13,18 @@ bulut ALT kenarı, short için bulut ÜST kenarı); -/+ stop_tampon_atr*ATR; ris
 Stop giriş kapanışının yanlış tarafındaysa sinyal düşer. Hedef: hedef_r>0 ise (daytrade kartı 1:3).
 Kaynak kartlar: swing__ichimoku-kijun-bulut__make (D1, tek koşul: bulut+Kijun üstü; Tenkan eğimi onayı kodlanmadı),
 daytrade__ichimoku-tenkan-kijun-bulut__singhal (1h, stop Span A, 1:3 önerisi, 1d üst filtre önerisi kodlanmadı).
+d11j EK MOD (varsayılan eskisiyle aynı; ızgaraya girmez, ayar kaydıyla denenir): mod="skor" -> yedi Ichimoku sinyalinin (TK, fiyat-Kijun,
+bulut kırılımı, Senkou kesişimi, Chikou kesişimi/yerleşimi, fiyat-bulut yerleşimi) bulut konumuna göre zayıf 0.5/nötr 1/güçlü 2 puan
+toplamı, -100..100 normalize (motor/strateji/_gosterge_d11j.ichimoku_skor; tüm ağırlıklar 1, nedensel, kesişim noktası
+kesişim mumundaki değerle yaklaşıklanır). Giriş: skor `skor_esik` (50) üstüne çıkınca long, -`skor_esik` altına inince short
+(short aynası = varsayım; kaynak yalnız al/sat); çıkış: skor `skor_cikis` (49) altına inince long'dan, -49 üstüne çıkınca short'tan.
+Kaynak: zenbot ichimoku_score (TradingView "Ichimoku Cloud Signal Score"); ağırlıklar kaynakta hep 1.
 Varsayımlar: kitaplarda stop/çıkış net değil (Make'te hiç yok) -> yukarıdaki stoplar ve ters kesişim çıkışı; kripto 7/24 olduğundan
 9/26/52 standardı kullanıldı. Negatif kanıt: aile kaydında yok; arşivde MA/bulut trend denemesi yok, tek kural trend (altın/endeks) başarısız.
 """
 import pandas as pd
 
+from motor.strateji import _gosterge_d11j as j
 from motor.strateji import gostergeler as g
 from motor.strateji import gostergeler_b2 as b
 from motor.strateji.daytrade._ortak import cerceve
@@ -32,6 +39,7 @@ class Ichimoku(Strateji):
         "mod": "kijun_bulut", "tenkan": 9, "kijun": 26, "tk_kesisim": False,
         "stop_tipi": "kijun", "stop_tampon_atr": 0.1, "stop_max_atr": 4.0, "hedef_r": 0.0,
         "atr_periyot": 14, "seans_saat": 0.0, "short": True,
+        "skor_esik": 50.0, "skor_cikis": 49.0,
     }
     parametre_izgarasi = {
         "mod": ["kijun_bulut", "tk_bulut"],
@@ -63,6 +71,12 @@ class Ichimoku(Strateji):
                 long_d &= b.yukari_kesis(t, kij) | b.yukari_kesis(t, kij).shift(1, fill_value=False)
                 short_d &= b.asagi_kesis(t, kij) | b.asagi_kesis(t, kij).shift(1, fill_value=False)
             cikis = b.asagi_kesis(t, kij) | b.yukari_kesis(t, kij)
+        elif p["mod"] == "skor":
+            skor = j.ichimoku_skor(y, d, k, int(p["tenkan"]), kj, 2 * kj, kj)
+            gecerli = gecerli & skor.notna()
+            long_d = skor > p["skor_esik"]
+            short_d = skor < -p["skor_esik"]
+            cikis = b.asagi_kesis(skor, p["skor_cikis"]) | b.yukari_kesis(skor, -p["skor_cikis"])
         else:
             raise ValueError(f"Bilinmeyen mod: {p['mod']}")
         long_ok = b.gecis(long_d & gecerli)

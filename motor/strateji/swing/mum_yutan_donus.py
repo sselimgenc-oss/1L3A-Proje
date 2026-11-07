@@ -16,6 +16,12 @@ Kanıt: ailede pozitif/negatif sayısal kanıt YOK (Bulkowski yüzdeleri Graham'
 Varsayımlar: "trend" tanımı kartlarda yok; N-mum kapanış karşılaştırması + ATR büyüklük eşiği
   tarafımızdan seçildi. Gövde yutması (fitil değil) esas alındı (Hogan); Derr'in dış-bar (high/low
   yutma) varyantı kodlanmadı. Destek/direnç yakınlığı filtresi yok.
+
+d11j EK MOD (varsayılan "donus" = eski davranış; ızgaraya girmez; kaynak aile marubozu-yutan-mum-devam, NFI yutan mum devamı/marubozu):
+  mod="devam" -> trend DEVAMI: desen "yutan" (boğa yutan, eski tanım), "marubozu" (yeşil mum, gövde/aralık >= maru_oran=0.9 ve gövde >=
+  %maru_govde=0.5 açılışın) ya da "ikisi" (biri yeterli); ek olarak long için kapanış > EMA(devam_ma=200) ve RSI(14) > devam_rsi (50);
+  short aynası. Önceki-trend (trend_mum) koşulu bu modda aranmaz. Stop/hedef/hacim filtresi eskisiyle aynı. NFI'nin 1sa RSI3/CMF ve
+  4sa EMA12>EMA200 üst-zaman-dilimi filtreleri KODLANMADI (tek zaman dilimi).
 """
 import numpy as np
 import pandas as pd
@@ -32,6 +38,7 @@ class MumYutanDonus(Strateji):
         "trend_mum": 6, "trend_min_atr": 1.0, "hacim_k": 0.0, "hacim_ort_mum": 20,
         "stop_modu": "uc", "tampon_atr": 0.1, "maks_risk_atr": 3.0,
         "hedef_r": 2.0, "atr_periyot": 14, "short": True,
+        "mod": "donus", "desen": "yutan", "maru_oran": 0.9, "maru_govde": 0.5, "devam_ma": 200, "devam_rsi": 50.0,
     }
     parametre_izgarasi = {
         "trend_mum": [5, 7, 10],
@@ -51,7 +58,27 @@ class MumYutanDonus(Strateji):
                 & ((kap - ac) > (ac1 - kap1)))
         ayi = ((kap1 > ac1) & (kap < ac) & (ac >= kap1) & (kap <= ac1)
                & ((ac - kap) > (kap1 - ac1)))
-        long_ok, short_ok = boga & dusus, ayi & yukselis & bool(p["short"])
+        if p["mod"] == "devam":
+            aralik = (yu - du).where(lambda x: x > 0)
+            govde = (kap - ac).abs()
+            maru_ok = (govde / aralik >= p["maru_oran"]) & (govde / ac >= p["maru_govde"] / 100.0)
+            maru_boga, maru_ayi = maru_ok & (kap > ac), maru_ok & (kap < ac)
+            if p["desen"] == "yutan":
+                d_l, d_s = boga, ayi
+            elif p["desen"] == "marubozu":
+                d_l, d_s = maru_boga, maru_ayi
+            elif p["desen"] == "ikisi":
+                d_l, d_s = boga | maru_boga, ayi | maru_ayi
+            else:
+                raise ValueError(f"Bilinmeyen desen: {p['desen']}")
+            ema = g.ema(kap, int(p["devam_ma"]))
+            rsi = g.rsi(kap, 14)
+            long_ok = d_l & (kap > ema) & (rsi > p["devam_rsi"])
+            short_ok = d_s & (kap < ema) & (rsi < 100.0 - p["devam_rsi"]) & bool(p["short"])
+        elif p["mod"] == "donus":
+            long_ok, short_ok = boga & dusus, ayi & yukselis & bool(p["short"])
+        else:
+            raise ValueError(f"Bilinmeyen mod: {p['mod']}")
         if p["hacim_k"] > 0:
             ort = mumlar["hacim"].shift(1).rolling(int(p["hacim_ort_mum"]), min_periods=int(p["hacim_ort_mum"])).mean()
             hok = mumlar["hacim"] > p["hacim_k"] * ort

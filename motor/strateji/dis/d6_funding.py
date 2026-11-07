@@ -93,6 +93,10 @@ class FundingCarry(Strateji):
     varsayilan_parametreler = {
         "z_pencere": 90, "fund_saat": 8, "giris_z": -1.5, "max_tut_saat": 16.0, "rejim": True, "sma_saat": 500,
         "short": False, "gun_mum": 0, "atr_k": 3.0, "atr_periyot": 14,
+        # d11j EK (varsayılan eski davranış; ızgaraya girmez): giris_modu="esik" -> z-skor yerine DÜZ funding seviyesi:
+        # funding > fon_esik ise short (short=True gerekir), funding < -fon_esik ise long (long=True). Kaynak aile funding-pozitif-short
+        # (özel seri API örneği: son fonlama > 0 -> short; çıkış yok -> max_tut_saat zaman çıkışı + ATR stop varsayım).
+        "giris_modu": "zskor", "fon_esik": 0.0, "long": True,
     }
     parametre_izgarasi = {
         "giris_z": [-1.0, -1.5, -2.0],
@@ -118,8 +122,15 @@ class FundingCarry(Strateji):
         kap = mumlar["kapanis"]
         z = self.zskor(mumlar)
         gm = mum_gun_tahmin(idx, int(p["gun_mum"]))
-        long_ok = z < p["giris_z"]
-        short_ok = (z > -p["giris_z"]) if p["short"] else pd.Series(False, index=idx)
+        if p["giris_modu"] == "esik":
+            fon = _funding_serisi(mumlar, self.ad)
+            long_ok = (fon < -p["fon_esik"]) if p["long"] else pd.Series(False, index=idx)
+            short_ok = (fon > p["fon_esik"]) if p["short"] else pd.Series(False, index=idx)
+        elif p["giris_modu"] == "zskor":
+            long_ok = (z < p["giris_z"]) if p["long"] else pd.Series(False, index=idx)
+            short_ok = (z > -p["giris_z"]) if p["short"] else pd.Series(False, index=idx)
+        else:
+            raise ValueError(f"Bilinmeyen giris_modu: {p['giris_modu']}")
         if p["rejim"]:
             n_sma = max(2, int(round(int(p["sma_saat"]) * gm / 24.0)))
             sma = kap.rolling(n_sma, min_periods=n_sma).mean()

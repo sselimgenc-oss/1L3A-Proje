@@ -16,6 +16,8 @@ Kaynak kartlar: swing__3-5-mum-tukenme__velez, swing__pristine-anahtar-alis-pbs_
   (iki mum kurulumu, sabit pip hedef: KODLANMADI).
 Kodlanmayan: hacim azalması (Ladha/Pristine), 5'ten fazla seri uyarısı (Velez), Woods'un yapısal pivot filtresi, trend yanında kullanım.
 Varsayımlar: Velez/Pristine tick tamponları ATR tamponuna çevrildi; Woods'un 1 tik stop-emri girişi kapanış bazlı kırılıma çevrildi.
+d11j EK (varsayılan aynı; ızgaraya girmez): seri_n_short>0 ise short kurulumu (yükseliş serisi) için seri uzunluğu ayrıdır
+(long seri_n, short seri_n_short; bryanbeck: 3 düşüş mumundan sonra AL, 2 yükseliş mumundan sonra SAT = asimetri). 0: seri_n.
 Negatif kanıt: yok; ancak Velez: 5'ten fazla art arda mum "felaket kayıp" riski (bıçak yakalama). Arşivde ortalamaya dönüş başarısız (arsiv/OZET.md §3).
 """
 import numpy as np
@@ -54,7 +56,7 @@ class ArdisikBarTukenme(Strateji):
     varsayilan_parametreler = {
         "desen": "renk", "seri_n": 3, "zincir": False, "tetik": "kirilim", "trend_ma": 0,
         "stop_tampon_atr": 0.25, "max_risk_atr": 6.0, "hedef_r": 2.0, "zaman_cikisi_mum": 0,
-        "atr_periyot": 14, "short": True,
+        "atr_periyot": 14, "short": True, "seri_n_short": 0,
     }
     parametre_izgarasi = {
         "seri_n": [3, 4, 5],
@@ -73,14 +75,15 @@ class ArdisikBarTukenme(Strateji):
         atr = g.atr(y, d, k, p["atr_periyot"])
         tetik = "kirilim" if p["desen"] != "renk" else p["tetik"]
         dus = _seri_ok(a, y, d, k, n, p["desen"], bool(p["zincir"]), True)      # düşüş serisi -> long kurulumu
-        yuk = _seri_ok(a, y, d, k, n, p["desen"], bool(p["zincir"]), False)     # yükseliş serisi -> short kurulumu
+        n_s = int(p["seri_n_short"]) or n
+        yuk = _seri_ok(a, y, d, k, n_s, p["desen"], bool(p["zincir"]), False)   # yükseliş serisi -> short kurulumu
         if tetik == "seri_sonu":
             long_ok, short_ok = dus, yuk
-            pencere = n
+            pencere, pencere_s = n, n_s
         else:
             long_ok = dus.shift(1, fill_value=False) & (k > y.shift(1))
             short_ok = yuk.shift(1, fill_value=False) & (k < d.shift(1))
-            pencere = n + 1
+            pencere, pencere_s = n + 1, n_s + 1
         short_ok = short_ok & bool(p["short"])
         if p["trend_ma"]:
             tr = g.sma(k, int(p["trend_ma"]))
@@ -91,7 +94,7 @@ class ArdisikBarTukenme(Strateji):
         short_ok &= gecerli
         tampon = p["stop_tampon_atr"] * atr
         stop_l = d.rolling(pencere, min_periods=pencere).min() - tampon
-        stop_s = y.rolling(pencere, min_periods=pencere).max() + tampon
+        stop_s = y.rolling(pencere_s, min_periods=pencere_s).max() + tampon
         long_ok &= (k - stop_l) <= p["max_risk_atr"] * atr
         short_ok &= (stop_s - k) <= p["max_risk_atr"] * atr
         if p["hedef_r"]:

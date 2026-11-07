@@ -492,11 +492,17 @@ class HacimPatlamaKirilimi(D10Taban):
     `gecerlilik` mum içinde kapanış patlama mumunun yükseğinin üstüne çıkarsa long, düşüğünün altına inerse short (patlama
     başına ilk kırılım; seans içinde). Stop = patlama mumunun karşı ucu -/+ tampon (kart). Hedef = hedef_r x risk (VARSAYIM 2R;
     kart: seans sonunda iz süren; burada gün sonu çıkışı + R hedefi). Repo'nun "%10 kârda kapat, bar yönünde giriş, 6x/3x
-    eşik" tarifi kapsanmadı (mutlak hacim + haftalık referans)."""
+    eşik" tarifi kapsanmadı (mutlak hacim + haftalık referans).
+    d11j EK (varsayılan "spike_mum" = eski davranış; ızgaraya girmez): kirilim_ref="n_mum_zirve" -> NFI pump/dump ateşleme mumu: PATLAMA MUMUNUN
+    KENDİSİNDE kapanış önceki `zirve_n` (48) mumun en yüksek yükseğini İLK kez yukarı keser (önceki kapanış seviyenin altında/eşit),
+    mum yeşil ve gövde >= govde_yuzde % (0.2) ve kapanış mum aralığının üst yarısında -> long; ayna (önceki zirve_n mumun dibini aşağı
+    kırma, kırmızı gövde, alt yarıda kapanış) -> short. Stop = patlama mumunun karşı ucu -/+ tampon. NFI'nin 24s getiri tavanı (<%8/%-10),
+    günlük ROC ve bağıl hacim eşiğinin 4/3 farkı kodlanmadı (hacim_k tek eşik). Kaynak aile: hacim-patlamali-48-mum-zirve-kirilimi."""
     ad = "dis__hacim-patlama-kirilimi"
     stil = "daytrade"
     varsayilan_parametreler = {**ORTAK, "hacim_k": 3.0, "ref_tip": "ortalama", "ref_n": 20, "gecerlilik": 6,
-                               "tampon_atr": 0.1, "hedef_r": 2.0}
+                               "tampon_atr": 0.1, "hedef_r": 2.0,
+                               "kirilim_ref": "spike_mum", "zirve_n": 48, "govde_yuzde": 0.2}
     parametre_izgarasi = {"hacim_k": [2.0, 3.0, 4.0], "gecerlilik": [3, 6, 12], "hedef_r": [1.5, 2.0, 3.0]}
 
     def kosullar(self, m):
@@ -508,6 +514,18 @@ class HacimPatlamaKirilimi(D10Taban):
         else:
             ref = v.rolling(int(p["ref_n"]), min_periods=int(p["ref_n"])).mean().shift(1)
         spike = (ref > 0) & (v >= p["hacim_k"] * ref)
+        if p["kirilim_ref"] == "n_mum_zirve":
+            a_, n_ = m["acilis"], int(p["zirve_n"])
+            zirve = y.rolling(n_, min_periods=n_).max().shift(1)
+            dip = d.rolling(n_, min_periods=n_).min().shift(1)
+            govde = (k - a_).abs() / a_ * 100.0 >= p["govde_yuzde"]
+            orta = (y + d) / 2.0
+            lg = spike & (k > zirve) & (k.shift(1) <= zirve) & (k > a_) & govde & (k >= orta)
+            sh = spike & (k < dip) & (k.shift(1) >= dip) & (k < a_) & govde & (k <= orta) & ~lg
+            tam = p["tampon_atr"] * g.atr(y, d, k, int(p["atr_periyot"]))
+            return {"long": lg.fillna(False), "short": sh.fillna(False), "stop_l": d - tam, "stop_s": y + tam}
+        if p["kirilim_ref"] != "spike_mum":
+            raise ValueError(f"Bilinmeyen kirilim_ref: {p['kirilim_ref']}")
         lim = max(int(p["gecerlilik"]) - 1, 0)
 
         def seviye(x):

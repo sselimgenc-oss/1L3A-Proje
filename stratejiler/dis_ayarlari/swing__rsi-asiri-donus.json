@@ -61,5 +61,130 @@
   },
   "cikis_ayarlari": null,
   "not": "RSI 30 altından yukarı dönüşte long, 70 üstünden aşağı dönüşte short."
+ },
+ {
+  "dis_id": "d11j:osilator-esik-donusu-gosterge-modlari:uo_30_70",
+  "kaynak_dosya": "stratejiler/ek_kaynaklar/github_g2_kripto_bot.csv (STC, TSI, UO); github_g5_mt_pine.csv (EA31337 MFI, WPR)",
+  "parametreler": {
+   "short": true,
+   "gosterge": "uo",
+   "rsi_periyot": 7,
+   "alt": 30.0,
+   "mod": "bolgede",
+   "cikis_rsi": 50.0
+  },
+  "cikis_ayarlari": null,
+  "not": "UO(7,14,28) <30 long / >70 short (bölgeye giriş); 0-100 ölçeği, çıkış 50 kesişimi."
+ },
+ {
+  "dis_id": "d11j:osilator-esik-donusu-gosterge-modlari:tsi13_25",
+  "kaynak_dosya": "stratejiler/ek_kaynaklar/github_g2_kripto_bot.csv (STC, TSI, UO); github_g5_mt_pine.csv (EA31337 MFI, WPR)",
+  "parametreler": {
+   "short": true,
+   "gosterge": "tsi",
+   "rsi_periyot": 25,
+   "osc_kisa": 13,
+   "alt": 37.5,
+   "mod": "bolgede",
+   "cikis_rsi": 50.0
+  },
+  "cikis_ayarlari": null,
+  "not": "TSI(13,25) <-25 long / >25 short: TSI (x+100)/2 ölçeğine çevrilir (alt=37.5); çıkış TSI=0 (50)."
+ },
+ {
+  "dis_id": "d11j:osilator-esik-donusu-gosterge-modlari:stc_25_75",
+  "kaynak_dosya": "stratejiler/ek_kaynaklar/github_g2_kripto_bot.csv (STC, TSI, UO); github_g5_mt_pine.csv (EA31337 MFI, WPR)",
+  "parametreler": {
+   "short": true,
+   "gosterge": "stc",
+   "rsi_periyot": 10,
+   "osc_kisa": 23,
+   "osc_uzun": 50,
+   "alt": 25.0,
+   "mod": "geri_cikis",
+   "cikis_rsi": 50.0
+  },
+  "cikis_ayarlari": null,
+  "not": "STC(23,50,10) 25'i yukarı keserse al / 75'i aşağı keserse sat; 80/20 + %5 stop varyantı ayrıca kodlanmadı."
+ },
+ {
+  "dis_id": "d11j:osilator-esik-donusu-gosterge-modlari:mfi22_30",
+  "kaynak_dosya": "stratejiler/ek_kaynaklar/github_g2_kripto_bot.csv (STC, TSI, UO); github_g5_mt_pine.csv (EA31337 MFI, WPR)",
+  "parametreler": {
+   "short": true,
+   "gosterge": "mfi",
+   "rsi_periyot": 22,
+   "alt": 30.0,
+   "mod": "geri_cikis",
+   "cikis_rsi": 50.0
+  },
+  "cikis_ayarlari": null,
+  "not": "MFI(22) 30'u yukarı kesti (short 70'i aşağı); 'yükseliyor' koşulu kesişimle örtüşür."
+ },
+ {
+  "dis_id": "d11j:osilator-esik-donusu-gosterge-modlari:wpr18_90",
+  "kaynak_dosya": "stratejiler/ek_kaynaklar/github_g2_kripto_bot.csv (STC, TSI, UO); github_g5_mt_pine.csv (EA31337 MFI, WPR)",
+  "parametreler": {
+   "short": true,
+   "gosterge": "wpr",
+   "rsi_periyot": 18,
+   "alt": 10.0,
+   "mod": "geri_cikis",
+   "cikis_rsi": 50.0
+  },
+  "cikis_ayarlari": null,
+  "not": "Williams %R(18) -90 altından çıkış (0-100 ölçeğinde 10'u yukarı kesiş), short -10 aynası; çıkış %R=-50."
+ },
+ {
+  "dis_id": "d11j:rsi-uyarlanir-esik-ve-periyot:uyarlanir_std",
+  "kaynak_dosya": "stratejiler/ek_kaynaklar/github_g5_mt_pine.csv (Self-Adjusting RSI); github_g7_kutuphane.csv (Adaptif RSI, AlphaRSI); github_g2_kripto_bot.csv (rsidyn, RSI_Autotune)",
+  "parametreler": {
+   "short": true,
+   "esik_modu": "uyarlanir",
+   "esik_k": 2.0,
+   "esik_pencere": 50,
+   "rsi_periyot": 14,
+   "mod": "geri_cikis"
+  },
+  "cikis_ayarlari": null,
+  "not": "Eşikler 50 +/- 2*std(RSI,50) (Self-Adjusting RSI, std yöntemi); SMA yöntemi kodlanmadı."
+ },
+ {
+  "dis_id": "d11j:rsi-uyarlanir-esik-ve-periyot:arsi_8_28",
+  "kaynak_dosya": "stratejiler/ek_kaynaklar/github_g5_mt_pine.csv (Self-Adjusting RSI); github_g7_kutuphane.csv (Adaptif RSI, AlphaRSI); github_g2_kripto_bot.csv (rsidyn, RSI_Autotune)",
+  "parametreler": {
+   "short": true,
+   "gosterge": "arsi",
+   "alt": 30.0,
+   "mod": "geri_cikis"
+  },
+  "cikis_ayarlari": null,
+  "not": "YAKLAŞIK: periyodu volatilite oranına göre 8-28 arası kayan RSI (3 bar EMA ile düzeltilmiş); kaynak formülü (döngü faktörü) belirsiz, kendi tanımımız."
+ },
+ {
+  "dis_id": "d11j:rsi-uyarlanir-esik-ve-periyot:alpharsi_atr",
+  "kaynak_dosya": "stratejiler/ek_kaynaklar/github_g5_mt_pine.csv (Self-Adjusting RSI); github_g7_kutuphane.csv (Adaptif RSI, AlphaRSI); github_g2_kripto_bot.csv (rsidyn, RSI_Autotune)",
+  "parametreler": {
+   "short": true,
+   "esik_modu": "atr_oran",
+   "esik_pencere": 50,
+   "rsi_periyot": 14,
+   "mod": "geri_cikis"
+  },
+  "cikis_ayarlari": null,
+  "not": "YAKLAŞIK: AlphaRSI seviyeleri 65-85/15-35 arası ATR/SMA(ATR,50) oranına göre kayar; SMA(50) eğim süzgeci kodlanmadı."
+ },
+ {
+  "dis_id": "d11j:rsi-dinamik-esik-tepe-dip-medyani:rsidyn",
+  "kaynak_dosya": "stratejiler/ek_kaynaklar/github_g5_mt_pine.csv (Self-Adjusting RSI); github_g7_kutuphane.csv (Adaptif RSI, AlphaRSI); github_g2_kripto_bot.csv (rsidyn, RSI_Autotune)",
+  "parametreler": {
+   "short": true,
+   "esik_modu": "dinamik_medyan",
+   "dm_carpan": 1.5,
+   "rsi_periyot": 14,
+   "mod": "geri_cikis"
+  },
+  "cikis_ayarlari": null,
+  "not": "YAKLAŞIK: RSI>60 tepelerinin / <30 diplerinin son 10 medyanı; alt = dip medyanı*1.5, ust = 100-(100-tepe medyanı)*1.5 (kaynak çarpan yorumu belirsiz); %96 izleyen stop ve stop sonrası bekleme kodlanmadı. RSI_Autotune (boğa rejimi SMA39>SMA1150) kodlanmadı."
  }
 ]

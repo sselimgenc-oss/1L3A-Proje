@@ -1,0 +1,38 @@
+[
+ {
+  "dis_id": "d11j:bant-ust-alt-kirilim-stop-giris:trend_bollinger_100_0_5",
+  "kaynak_dosya": "stratejiler/ek_kaynaklar/github_g2_kripto_bot.csv (BollChannelStrategy, KingKeltnerStrategy)",
+  "parametreler": {
+   "mod": "bollinger",
+   "n": 100,
+   "k": 0.5
+  },
+  "cikis_ayarlari": null,
+  "not": "YAKLAŞIK: Trend Bollinger n=100, k=0.5; kaynak 'arada önceki sinyal' tutar, sınıf kırılımda girer + orta banda dönüşte çıkar."
+ },
+ {
+  "dis_id": "d11j:bant-ust-alt-kirilim-stop-giris:boll18_3_4_cci",
+  "kaynak_dosya": "stratejiler/ek_kaynaklar/github_g2_kripto_bot.csv (BollChannelStrategy, KingKeltnerStrategy)",
+  "parametreler": {
+   "mod": "bollinger",
+   "n": 18,
+   "k": 3.4,
+   "cci_n": 10
+  },
+  "cikis_ayarlari": {
+   "atr_iz_suren_k": 5.2
+  },
+  "not": "YAKLAŞIK: Bollinger(18, 3.4sd) üst/alt bant kırılımı + CCI(10) işaret süzgeci; stop-giriş emri kapanış sinyaline çevrildi."
+ },
+ {
+  "dis_id": "d11j:bant-ust-alt-kirilim-stop-giris:keltner11_1_6",
+  "kaynak_dosya": "stratejiler/ek_kaynaklar/github_g2_kripto_bot.csv (BollChannelStrategy, KingKeltnerStrategy)",
+  "parametreler": {
+   "mod": "keltner",
+   "n": 11,
+   "k": 1.6
+  },
+  "cikis_ayarlari": null,
+  "not": "YAKLAŞIK: Keltner(11, 1.6) kanalı kırılımı (OCO stop-giriş yerine kapanış sinyali); Martingale V1 katlamaları alınmadı."
+ }
+]

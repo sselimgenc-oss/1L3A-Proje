@@ -38,5 +38,18 @@
   },
   "cikis_ayarlari": null,
   "not": "YAKLAŞIK: TK kesişimi; günlük HTF teyidi yok; 1.5 ATR stop/3 ATR hedef = 2R olarak yaklaşıldı (stop Kijun)."
+ },
+ {
+  "dis_id": "d11j:ichimoku-puan-skoru:skor50_49",
+  "kaynak_dosya": "stratejiler/ek_kaynaklar/github_g2_kripto_bot.csv (ichimoku_score)",
+  "parametreler": {
+   "mod": "skor",
+   "skor_esik": 50.0,
+   "skor_cikis": 49.0,
+   "stop_tipi": "bulut",
+   "hedef_r": 0.0
+  },
+  "cikis_ayarlari": null,
+  "not": "Yedi Ichimoku sinyali bulut konumuna göre 0.5/1/2 puan, -100..100; skor 50'yi yukarı geçince al, 49 altına inince çık; short aynası varsayım. Kesişim noktası yerine kesişim mumundaki değer."
  }
 ]

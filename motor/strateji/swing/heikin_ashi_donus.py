@@ -10,6 +10,9 @@ VERMEZ -> yalnız bu HA hesabı alındı, mhHigh/mhLow SMA'ları kodlanmadı), s
 scalp__ha-renk-donusu__heikinashi (1m; "kırmızı mumun gölgesi önceki gölgeden düşük değil", "doji/topaç dönüm mumu"
 kodlanmadı; yerine onceki_n ve golgesiz).
 Varsayımlar: pip/puan stopları ATR'ye çevrildi; HA özyinelemeli olduğundan ilk mumlara bağlı (etki ~10 mumda söner).
+d11j EK (varsayılan kapalı; ızgaraya girmez; kaynak aile heiken-ashi-ea31337): aralik_yuzde>0 -> sinyal HA mumunun aralığı (hYüksek-hDüşük)
+kapanışın en az %aralik_yuzde'si olmalı (EA31337 "aralık yüzde eşiği"; mutlak pip yerine yüzde = varsayım). EA'nın HA desen bitleri
+(2 mumluk yükseliş / 3-4 mumluk desen) tanımsız olduğundan KODLANMADI; onceki_n ile renk serisi uzunluğu bunun yerine geçer.
 Negatif kanıt: aile kaydında yok; arşivde kısa TF dönüş denemeleri (5 dk) başarısız (arsiv/OZET.md §3); kitap iddiaları kanıtsız.
 """
 import pandas as pd
@@ -26,6 +29,7 @@ class HeikinAshiDonus(Strateji):
     varsayilan_parametreler = {
         "varyant": "standart", "onceki_n": 2, "golgesiz": False, "golge_tol": 0.05, "trend_ma": 0,
         "stop_n": 3, "stop_tampon_atr": 0.25, "stop_max_atr": 3.0, "hedef_r": 0.0, "atr_periyot": 14, "short": True,
+        "aralik_yuzde": 0.0,
     }
     parametre_izgarasi = {
         "golgesiz": [True, False],
@@ -53,6 +57,9 @@ class HeikinAshiDonus(Strateji):
         if p["golgesiz"]:
             long_ok &= (ha["ha_acilis"] - ha["ha_dusuk"]) <= tol
             short_ok &= (ha["ha_yuksek"] - ha["ha_acilis"]) <= tol
+        if p["aralik_yuzde"]:
+            genis = (ha["ha_yuksek"] - ha["ha_dusuk"]) >= p["aralik_yuzde"] / 100.0 * k
+            long_ok, short_ok = long_ok & genis, short_ok & genis
         if p["trend_ma"]:
             ema = g.ema(k, int(p["trend_ma"]))
             long_ok, short_ok = long_ok & (k > ema), short_ok & (k < ema)

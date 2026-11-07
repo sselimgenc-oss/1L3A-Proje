@@ -38,5 +38,90 @@
   },
   "cikis_ayarlari": null,
   "not": "YAKLAŞIK: Bollinger bant dışı -> orta banda dönüş (4h); sapma/periyot kaynakta belirsiz, ADX filtresi kapalı."
+ },
+ {
+  "dis_id": "d11j:bant-dokunusu-stokastik-onayi:stokastik",
+  "kaynak_dosya": "stratejiler/ek_kaynaklar/github_g2_kripto_bot.csv (ta_srsi_bollinger, ta_stoch_bollinger); github_g3_cerceve.csv (BBMomentumEvaluator)",
+  "parametreler": {
+   "bb_periyot": 20,
+   "bb_sapma": 2.0,
+   "adx_esik": 0.0,
+   "onay_osc": "stokastik",
+   "onay_esik": 25.0,
+   "onay_k": 14,
+   "onay_d": 3
+  },
+  "cikis_ayarlari": null,
+  "not": "YAKLAŞIK: BB(20,2) dışına çıkış + Stokastik K<25 (short K>75) ve K>D dönüşü; kaynak short eşiği 60-75 asimetrik, burada simetrik. Bant içine dönüş teyidi sınıfın tetiğidir."
+ },
+ {
+  "dis_id": "d11j:bant-dokunusu-stokastik-onayi:stochrsi",
+  "kaynak_dosya": "stratejiler/ek_kaynaklar/github_g2_kripto_bot.csv (ta_srsi_bollinger, ta_stoch_bollinger); github_g3_cerceve.csv (BBMomentumEvaluator)",
+  "parametreler": {
+   "bb_periyot": 20,
+   "bb_sapma": 2.0,
+   "adx_esik": 0.0,
+   "onay_osc": "stochrsi",
+   "rsi_periyot": 14,
+   "onay_esik": 25.0,
+   "onay_k": 14,
+   "onay_d": 3
+  },
+  "cikis_ayarlari": null,
+  "not": "YAKLAŞIK: BB(20,2) dışına çıkış + StochRSI(14,14,3,3) K<25 ve K>D dönüşü (srsi+bollinger)."
+ },
+ {
+  "dis_id": "d11j:bant-dokunusu-orta-cizgi-egimi:bb24",
+  "kaynak_dosya": "stratejiler/ek_kaynaklar/github_g5_mt_pine.csv (EA31337 Bands, Envelopes, TMA True)",
+  "parametreler": {
+   "bb_periyot": 24,
+   "bb_sapma": 1.0,
+   "adx_esik": 0.0,
+   "orta_egim_n": 1,
+   "orta_egim_yuzde": 0.0
+  },
+  "cikis_ayarlari": null,
+  "not": "YAKLAŞIK: BB(24, 1.0 sapma) kapanış bazlı (kaynak açılış fiyatı + son 3 barın düşüğü); orta çizgi 1 bar önceye göre yükseliyor/düşüyor (yüzde eşiği 0 = yalnız yön)."
+ },
+ {
+  "dis_id": "d11j:bant-dokunusu-orta-cizgi-egimi:envelope",
+  "kaynak_dosya": "stratejiler/ek_kaynaklar/github_g5_mt_pine.csv (EA31337 Bands, Envelopes, TMA True)",
+  "parametreler": {
+   "bant_tipi": "envelope",
+   "bb_periyot": 20,
+   "env_yuzde": 0.1,
+   "adx_esik": 0.0,
+   "orta_egim_n": 1,
+   "orta_egim_yuzde": 0.0
+  },
+  "cikis_ayarlari": null,
+  "not": "YAKLAŞIK: MA Envelopes(20, %0.1) alt/üst zarf dışına çıkış sonrası zarf içine dönüş + orta çizgi eğimi."
+ },
+ {
+  "dis_id": "d11j:bant-dokunusu-orta-cizgi-egimi:tma",
+  "kaynak_dosya": "stratejiler/ek_kaynaklar/github_g5_mt_pine.csv (EA31337 Bands, Envelopes, TMA True)",
+  "parametreler": {
+   "bant_tipi": "tma",
+   "bb_periyot": 20,
+   "bb_sapma": 2.0,
+   "adx_esik": 0.0,
+   "orta_egim_n": 1,
+   "orta_egim_yuzde": 0.0
+  },
+  "cikis_ayarlari": null,
+  "not": "YAKLAŞIK: NEDENSEL üçgen MA (SMA(SMA)) +/- 2*std; kaynağın merkezli TMA'sı geleceğe bakar (repaint) -> kodlanmadı; SVE özel bandı kodlanmadı."
+ },
+ {
+  "dis_id": "d11j:rsi-zskor-ma-sapma-giris-kapisi:z2_rsi30",
+  "kaynak_dosya": "stratejiler/ek_kaynaklar/github_g2_kripto_bot.csv (trailing-trade giriş kapıları)",
+  "parametreler": {
+   "bb_periyot": 20,
+   "bb_sapma": 2.0,
+   "rsi_periyot": 14,
+   "rsi_esik": 30.0,
+   "adx_esik": 0.0
+  },
+  "cikis_ayarlari": null,
+  "not": "z-skor <= -2 (SMA20) = BB(20,2) alt bandı; RSI(14)<=30 kapısı da açık. Kaynak kapılar anlık durumdur; burada sınıfın dışarıdan dönüş teyidi eklenir (fark)."
  }
 ]

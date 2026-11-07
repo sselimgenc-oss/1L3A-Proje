@@ -11,10 +11,19 @@ Kartlar short'u sadece johnson/make'te veriyor; ayna olarak uygulandı.
 Varsayımlar: tetik = önceki kapanış bant dışında, şimdiki kapanış içinde (teyit); stop = dışarı çıkış mumu ve
 tetik mumunun karşı ucu -/+ stop_tampon_atr*ATR (kartlar stop vermiyor); hedef = tetik anındaki orta bant
 (hedef_tipi="orta") veya karşı bant ("karsi"); "yok" -> NaN. Çıkış sinyali yok (hedef/stop yeterli).
+
+d11j EK SEÇENEKLER (varsayılanlar eskisiyle aynı; ızgaraya girmez, ayar kaydıyla denenir):
+  bant_tipi: "bollinger" (varsayılan) | "envelope" (SMA(bb_periyot) +/- env_yuzde %; bb_sapma kullanılmaz) | "tma" (üçgen MA =
+  SMA(SMA) +/- bb_sapma*std; NEDENSEL, merkezli/geleceğe bakan TMA kodlanmadı). SVE Bollinger özel tanımı kısmi olduğundan KODLANMADI.
+  orta_egim_n>0: long için orta çizgi, orta_egim_n bar öncesinden en az orta_egim_yuzde % yüksek (short: düşük) olmalı.
+  onay_osc: "" (kapalı) | "stokastik" (Stokastik K,D = onay_k/onay_d) | "stochrsi" (StochRSI, RSI=rsi_periyot): dışarı çıkış
+  mumunda K < onay_esik (short: K > 100-onay_esik) ve şimdi K > D (short: K < D) = yukarı dönüş. OctoBot/zenbot bant+stokastik
+  kombinasyonu; BB %B skoru zaten saf bant-dönüşüne (bb_sapma) eşittir.
 """
 import numpy as np
 import pandas as pd
 
+from motor.strateji import _gosterge_d11j as j
 from motor.strateji import gostergeler as g
 from motor.strateji.swing._ortak import sinyal_cercevesi
 from motor.strateji.temel import Strateji
@@ -31,6 +40,8 @@ class BantDonus(Strateji):
         "atr_periyot": 14, "stop_tampon_atr": 0.25,
         "hedef_tipi": "orta",                    # "orta" | "karsi" | "yok"
         "short": True,
+        "bant_tipi": "bollinger", "env_yuzde": 0.1, "orta_egim_n": 0, "orta_egim_yuzde": 0.0,
+        "onay_osc": "", "onay_esik": 25.0, "onay_k": 14, "onay_d": 3,
     }
     parametre_izgarasi = {
         "bb_periyot": [20, 30, 40],
@@ -41,7 +52,18 @@ class BantDonus(Strateji):
     def sinyaller(self, mumlar: pd.DataFrame) -> pd.DataFrame:
         p = self.parametreler
         y, d, k = mumlar["yuksek"], mumlar["dusuk"], mumlar["kapanis"]
-        bb = g.bollinger(k, p["bb_periyot"], p["bb_sapma"])
+        if p["bant_tipi"] == "bollinger":
+            bb = g.bollinger(k, p["bb_periyot"], p["bb_sapma"])
+        elif p["bant_tipi"] == "envelope":
+            orta = g.sma(k, p["bb_periyot"])
+            bb = pd.DataFrame({"orta": orta, "ust": orta * (1 + p["env_yuzde"] / 100.0),
+                               "alt": orta * (1 - p["env_yuzde"] / 100.0)})
+        elif p["bant_tipi"] == "tma":
+            orta = g.sma(g.sma(k, p["bb_periyot"]), p["bb_periyot"])
+            sd = k.rolling(p["bb_periyot"], min_periods=p["bb_periyot"]).std(ddof=0)
+            bb = pd.DataFrame({"orta": orta, "ust": orta + p["bb_sapma"] * sd, "alt": orta - p["bb_sapma"] * sd})
+        else:
+            raise ValueError(f"Bilinmeyen bant_tipi: {p['bant_tipi']}")
         atr = g.atr(y, d, k, p["atr_periyot"])
         disarda_alt = k < bb["alt"]
         disarda_ust = k > bb["ust"]
@@ -51,6 +73,19 @@ class BantDonus(Strateji):
             r = g.rsi(k, p["rsi_periyot"]).shift(1)     # dışarı çıkış mumundaki RSI
             long_ok &= r < p["rsi_esik"]
             short_ok &= r > 100 - p["rsi_esik"]
+        if p["onay_osc"]:
+            if p["onay_osc"] == "stokastik":
+                st = g.stokastik(y, d, k, int(p["onay_k"]), int(p["onay_d"]))
+            elif p["onay_osc"] == "stochrsi":
+                st = j.stoch_rsi(k, int(p["rsi_periyot"]), int(p["onay_k"]), 3, int(p["onay_d"]))
+            else:
+                raise ValueError(f"Bilinmeyen onay_osc: {p['onay_osc']}")
+            long_ok &= (st["k"].shift(1) < p["onay_esik"]) & (st["k"] > st["d"])
+            short_ok &= (st["k"].shift(1) > 100 - p["onay_esik"]) & (st["k"] < st["d"])
+        if p["orta_egim_n"]:
+            degisim = 100.0 * (bb["orta"] / bb["orta"].shift(int(p["orta_egim_n"])) - 1.0)
+            long_ok &= degisim >= p["orta_egim_yuzde"]
+            short_ok &= degisim <= -p["orta_egim_yuzde"]
         if p["adx_esik"]:
             long_ok &= g.adx(y, d, k, p["adx_periyot"])["adx"] < p["adx_esik"]
             short_ok &= g.adx(y, d, k, p["adx_periyot"])["adx"] < p["adx_esik"]

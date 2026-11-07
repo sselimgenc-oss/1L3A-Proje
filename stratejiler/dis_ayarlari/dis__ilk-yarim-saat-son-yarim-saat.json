@@ -1,0 +1,28 @@
+[
+ {
+  "dis_id": "d11j:ilk-30dk-son-30dk-r12:r1_gece",
+  "kaynak_dosya": "stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv (Gao 2018 ETF gün içi momentumu)",
+  "parametreler": {
+   "r1_ref": "onceki_kapanis",
+   "sinyal": "r1",
+   "seans": "abd_hisse",
+   "ilk_dk": 30,
+   "son_dk": 30
+  },
+  "cikis_ayarlari": null,
+  "not": "r1 = önceki seans kapanışına göre ilk 30 dk getirisi (gece dahil); 30m mumlar."
+ },
+ {
+  "dis_id": "d11j:ilk-30dk-son-30dk-r12:r1_r12",
+  "kaynak_dosya": "stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv (Gao 2018 ETF gün içi momentumu)",
+  "parametreler": {
+   "r1_ref": "onceki_kapanis",
+   "sinyal": "r1_r12",
+   "seans": "abd_hisse",
+   "ilk_dk": 30,
+   "son_dk": 30
+  },
+  "cikis_ayarlari": null,
+  "not": "r1 ve r12 (kapanıştan 60-30 dk önce) aynı yönde ve eşik üstünde; 30m mumlar; r12 asof ile yaklaşık."
+ }
+]

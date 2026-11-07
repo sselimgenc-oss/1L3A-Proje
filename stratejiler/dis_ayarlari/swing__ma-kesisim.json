@@ -380,5 +380,65 @@
    "sabit_r_hedefi": 1.0
   },
   "not": "YAKLAŞIK: SMA5/15 kesişimi; %2 stop/%2 hedef = 1R hedef (stop ATR tabanlı); limit giriş yok."
+ },
+ {
+  "dis_id": "d11j:mama-fama-itrend-cma-ma-turleri:mama_fama",
+  "kaynak_dosya": "stratejiler/ek_kaynaklar/github_g2_kripto_bot.csv (ehlers_mama, ehlers_trend); github_g5_mt_pine.csv (CMA)",
+  "parametreler": {
+   "ma_tipi": "mama",
+   "mama_hizli": 0.5,
+   "mama_yavas": 0.05,
+   "kaynak": "ha_ohlc4",
+   "short": true
+  },
+  "cikis_ayarlari": null,
+  "not": "Ehlers MAMA x FAMA (hızlı limit 0.5, yavaş 0.05), Heikin-Ashi OHLC/4 kaynağı. hizli/yavas periyotları kullanılmaz."
+ },
+ {
+  "dis_id": "d11j:mama-fama-itrend-cma-ma-turleri:itrend",
+  "kaynak_dosya": "stratejiler/ek_kaynaklar/github_g2_kripto_bot.csv (ehlers_mama, ehlers_trend); github_g5_mt_pine.csv (CMA)",
+  "parametreler": {
+   "ma_tipi": "itrend",
+   "itrend_alfa": 0.07,
+   "short": true
+  },
+  "cikis_ayarlari": null,
+  "not": "Ehlers anlık trend x tetik (2*trend - trend[2]); kaynak 'tetik altına inerse al' ile aynı kesişim, yönü sınıfa göre 'trend > tetik' = long."
+ },
+ {
+  "dis_id": "d11j:mama-fama-itrend-cma-ma-turleri:cma_35",
+  "kaynak_dosya": "stratejiler/ek_kaynaklar/github_g2_kripto_bot.csv (ehlers_mama, ehlers_trend); github_g5_mt_pine.csv (CMA)",
+  "parametreler": {
+   "ma_tipi": "cma",
+   "hizli": 10,
+   "yavas": 35,
+   "short": true
+  },
+  "cikis_ayarlari": null,
+  "not": "YAKLAŞIK: kaynak SMA(35) x CMA(35) kesişimi; sınıf iki MA'yı aynı türde kurar -> CMA(10) x CMA(35)."
+ },
+ {
+  "dis_id": "d11j:sma2-sapma-skoru:didi_sma3_sma20",
+  "kaynak_dosya": "stratejiler/ek_kaynaklar/github_g3_cerceve.csv (DoubleMovingAverageTrendEvaluator); github_g5_mt_pine.csv (Didi Index)",
+  "parametreler": {
+   "ma_tipi": "sma",
+   "hizli": 3,
+   "yavas": 20,
+   "short": true
+  },
+  "cikis_ayarlari": null,
+  "not": "Didi Index: curta=SMA3/SMA8, longa=SMA20/SMA8 -> curta>longa <=> SMA3>SMA20 (SMA8'e bölme sadelik)."
+ },
+ {
+  "dis_id": "d11j:sma2-sapma-skoru:sma2_sma5",
+  "kaynak_dosya": "stratejiler/ek_kaynaklar/github_g3_cerceve.csv (DoubleMovingAverageTrendEvaluator); github_g5_mt_pine.csv (Didi Index)",
+  "parametreler": {
+   "ma_tipi": "sma",
+   "hizli": 2,
+   "yavas": 5,
+   "short": true
+  },
+  "cikis_ayarlari": null,
+  "not": "YAKLAŞIK: SMA2'nin SMA5/SMA10'dan normalize sapma skoru sıfır geçişi yerine SMA2 x SMA5 kesişimi; normalize ve 'tepe olasılığı' kısmı atıldı."
  }
 ]
