@@ -109,6 +109,33 @@ def test_oos_metrikleri_elle():
     assert m["net_2022"] == pytest.approx(m["net_getiri"])
 
 
+def test_karar24_metrikleri_ve_portfoy_degerlendir():
+    from motor.backtest import eleme
+    g = pd.Series([0.10, 0.01, -0.01, 0.02] + [0.001] * 16, index=pd.date_range("2022-01-01", periods=20, freq="D", tz="UTC"))
+    m = wp.oos_metrikleri(g, pd.DataFrame(), yeniden_dengeleme=25)
+    assert m["oos_gun"] == 20 and m["yeniden_dengeleme"] == 25
+    kalan = np.sort(g.to_numpy())[::-1][1:]                      # 5% x 20 = 1 gün çıkar
+    assert m["net_en_iyi5_gun_haric"] == pytest.approx(np.prod(1 + kalan) - 1)
+    iyi = {"oos_gun": 1200, "yeniden_dengeleme": 30, "net_getiri": 0.4, "sharpe": 0.8, "max_dusus": 0.15,
+           "net_en_iyi5_gun_haric": 0.1}
+    assert eleme.portfoy_degerlendir({"metrikler": iyi}) == {"gecti": True, "nedenler": []}
+    for anahtar, kotu, parca in [("oos_gun", 1000, "süresi"), ("yeniden_dengeleme", 19, "dengeleme"),
+                                 ("net_getiri", 0.0, "net getiri"), ("sharpe", 0.49, "Sharpe"),
+                                 ("max_dusus", 0.21, "düşüş"), ("net_en_iyi5_gun_haric", -0.01, "%5 gün")]:
+        k = eleme.portfoy_degerlendir({"metrikler": {**iyi, anahtar: kotu}})
+        assert not k["gecti"] and len(k["nedenler"]) == 1 and parca in k["nedenler"][0]
+    sinir = {**iyi, "oos_gun": 1095, "yeniden_dengeleme": 20, "sharpe": 0.5, "max_dusus": 0.20}
+    assert eleme.portfoy_degerlendir({"metrikler": sinir})["gecti"]          # sınır değerler geçer
+    assert not eleme.portfoy_degerlendir({})["gecti"]
+    assert not eleme.portfoy_degerlendir({"metrikler": {**iyi, "sharpe": float("nan")}})["gecti"]
+
+
+def test_dengeleme_gunleri_secilen_pencerede_sayilir():
+    gun = pd.date_range("2022-01-01", periods=10, freq="D", tz="UTC")
+    a = wp.AdayHesap(pd.Series(0.01, index=gun), pd.DataFrame(), dengeleme_gunleri=[gun[1], gun[1] + pd.Timedelta(hours=5), gun[6]])
+    assert a.dengeleme_sayisi(gun[0], gun[5]) == 1 and a.dengeleme_sayisi(gun[0], gun[9]) == 2
+
+
 def test_al_tut_esit_agirlik_kaymali_elle():
     gun = pd.date_range("2022-01-01", periods=6, freq="D", tz="UTC", name="zaman")
     a = pd.DataFrame({"kapanis": [100, 100, 110, 121, 121, 121.0]}, index=gun)
@@ -155,7 +182,8 @@ def test_uctan_uca_ciktilar_ve_deneme_kaydi(tmp_path, veri_dizini):
     s = df.iloc[0]
     assert s.n_pencere >= 3 and s.n_aday >= s.n_kosu >= 1
     for kol in ("gecti", "nedenler", "profit_factor", "sharpe", "net_getiri", "max_dusus", "bh_getiri", "bh_sharpe",
-                "net_2022", "bh_net_2022", "n_farkli_ayar", "en_sik_pay", "ort_brut", "sharpe_ustu", "limit_olay_oos"):
+                "net_2022", "bh_net_2022", "gecti_k13", "nedenler_k13", "oos_gun", "yeniden_dengeleme",
+                "net_en_iyi5_gun_haric", "n_farkli_ayar", "en_sik_pay", "ort_brut", "sharpe_ustu", "limit_olay_oos"):
         assert kol in df.columns
     assert (tmp_path / "wfp" / "p1.parquet").exists() and (tmp_path / "wfp" / "p1.csv").exists()
     gun = pd.read_parquet(wp.islem_yolu(tmp_path / "wfp", "p1", "pf__rotasyon", "kripto", "1d", "gunluk"))

@@ -148,23 +148,91 @@ def test_farkli_mum_suresi_hata():
 
 
 # ------------------------------------------------------------------ sert limitler
-def test_islem_basi_risk_kirpmasi():
+def _riskler(r):
+    return r.islemler.set_index("sembol").apply(lambda t: t.miktar * (t.giris_fiyati - 90.0), axis=1)
+
+
+def test_agirlik_kolu_tek_pozisyon_1_yuzdeyi_asar_5_yuzdeyi_asamaz():
+    # karar 25: ağırlık kolunda tek pozisyon %1'e değil %5'e (toplam tavana) kırpılır
     A = duz(6, 100.0)
     h, s = tablo(A.index, ["A"]), tablo(A.index, ["A"])
-    h.iloc[0, 0], s.iloc[0, 0] = 1.0, 95.0           # ağırlık 1.0 ama stop %5 -> risk 1R=%1 için nominal %20
+    h.iloc[0, 0], s.iloc[0, 0] = 1.0, 90.0           # ağırlık 1.0, stop %10 -> %5 risk için nominal %50
     h.iloc[3, 0] = 0.0
     r = portfoy_backtest({"A": A}, Elle(h, s), ayar(**SIFIR))
     t = r.islemler.iloc[0]
-    assert t.miktar * (t.giris_fiyati - 95.0) <= 100.0 + 1e-9          # <= %1 * 10000
-    assert t.miktar * (t.giris_fiyati - 95.0) > 99.9                   # step payı kadar altında
+    risk = t.miktar * (t.giris_fiyati - 90.0)
+    assert risk > 100.0 + 1.0                         # %1'i aşabildi
+    assert risk <= 500.0 + 1e-9                       # %5'i aşamadı
+    assert risk > 499.0
     assert any(k["tur"] == "risk" for k in r.kirpmalar)
-    # sert limit ayarı aşılamaz
-    r2 = portfoy_backtest({"A": A}, Elle(h, s), ayar(risk_yuzde=5.0, **SIFIR))
-    assert any("risk_yuzde" in u for u in r2.uyarilar)
-    assert r2.islemler.iloc[0].miktar == pytest.approx(t.miktar)
     # olc modunda da uygulanır
     r3 = portfoy_backtest({"A": A}, Elle(h, s), ayar(limit_modu="olc", **SIFIR))
     assert r3.islemler.iloc[0].miktar == pytest.approx(t.miktar)
+    # risk_yuzde ayarı ağırlık kolunu etkilemez (yalnız sinyal kolları)
+    r4 = portfoy_backtest({"A": A}, Elle(h, s), ayar(risk_yuzde=1.0, **SIFIR))
+    assert r4.islemler.iloc[0].miktar == pytest.approx(t.miktar)
+
+
+def test_agirlik_toplam_stop_riski_5_yuzdeyi_asmaz_orantili():
+    semb = list("ABCD")
+    v = {x: duz(8, 100.0) for x in semb}
+    h, s = tablo(v["A"].index, semb), tablo(v["A"].index, semb)
+    h.iloc[0], s.iloc[0] = 0.5, 90.0                  # tek tek 0.5 ağırlık = %5 risk; 4 tanesi = %20 -> orantılı %5
+    h.iloc[5] = 0.0
+    r = portfoy_backtest(v, Elle(h, s), ayar(**SIFIR))
+    risk = _riskler(r)
+    assert risk.sum() <= 500.0 + 1e-6 and risk.sum() > 480.0
+    assert risk.max() / risk.min() == pytest.approx(1.0, rel=1e-2)    # orantılı: hepsi aynı oranda
+    assert any(k["tur"] == "portfoy_risk" for k in r.kirpmalar)
+    # tek başına bir pozisyon %1'in üstünde olabilir (toplam %5 içinde)
+    assert risk.iloc[0] > 100.0
+
+
+def test_sert_toplam_risk_ayarla_asilamaz():
+    semb = list("ABCD")
+    v = {x: duz(8, 100.0) for x in semb}
+    h, s = tablo(v["A"].index, semb), tablo(v["A"].index, semb)
+    h.iloc[0], s.iloc[0] = 0.5, 90.0
+    h.iloc[5] = 0.0
+    r = portfoy_backtest(v, Elle(h, s), ayar(**SIFIR))
+    r2 = portfoy_backtest(v, Elle(h, s), ayar(toplam_risk_tavani_yuzde=20.0, **SIFIR))
+    assert any("toplam_risk_tavani_yuzde" in u for u in r2.uyarilar)
+    assert _riskler(r2).sum() <= 500.0 + 1e-6
+    np.testing.assert_allclose(r2.islemler.miktar, r.islemler.miktar)
+    # ayar sert değerin altına inebilir
+    r3 = portfoy_backtest(v, Elle(h, s), ayar(toplam_risk_tavani_yuzde=2.0, **SIFIR))
+    assert _riskler(r3).sum() <= 200.0 + 1e-6
+
+
+def test_sinyal_kolunda_islem_basi_1_yuzde_korunur_ve_ayarla_asilamaz():
+    class Bir(MaKesisim):
+        ad = "bir-giris"
+
+        def cikis_var_mi(self):
+            return True
+
+        def sinyaller(self, mumlar):
+            s = pd.DataFrame({"yon": 0, "stop": np.nan, "hedef": np.nan, "cikis": False}, index=mumlar.index)
+            s.iloc[0, s.columns.get_loc("yon")] = 1
+            s.iloc[0, s.columns.get_loc("stop")] = 90.0
+            s.iloc[8, s.columns.get_loc("cikis")] = True
+            return s
+
+    v = {"A": duz(12, 100.0)}
+    r = birlesik_backtest(v, [(Bir(), "A")], ayar(**SIFIR), toplam_risk_tavani_yuzde=5.0)
+    t = r.islemler.iloc[0]
+    risk = t.miktar * (t.giris_fiyati - 90.0)
+    assert risk <= 100.0 + 1e-9 and risk > 99.0              # %1 (5'e değil)
+    r2 = birlesik_backtest(v, [(Bir(), "A")], ayar(risk_yuzde=5.0, **SIFIR), toplam_risk_tavani_yuzde=5.0)
+    assert any("risk_yuzde" in u for u in r2.uyarilar)
+    assert r2.islemler.iloc[0].miktar == pytest.approx(t.miktar)
+
+
+def test_sert_limit_degeri_karar_25():
+    from motor.risk.limitler import SERT_LIMITLER
+    assert SERT_LIMITLER.portfoy_toplam_risk_yuzde == 5.0
+    assert SERT_LIMITLER.islem_basi_max_risk_yuzde == 1.0 and SERT_LIMITLER.gunluk_max_kayip_yuzde == 3.0
+    assert SERT_LIMITLER.kill_switch_dusus_yuzde == 20.0 and SERT_LIMITLER.max_kaldirac == 3.0
 
 
 def test_brut_maruziyet_3x_orantili_kucultme():

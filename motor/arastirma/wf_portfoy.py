@@ -21,8 +21,10 @@ DEĞİŞTİRİLMEZ)
      bileşik etkisini içerir, gelecek bilgi içermez); eğitim bitişinde açık pozisyonlar MTM olarak skora girer.
   4. OOS metrikleri: OOS aralığındaki TÜM günler (seçim olmayan pencereler getiri 0). net_getiri (bileşik), günlük
      Sharpe, max düşüş, işlem sayısı, PF(R) (işlem R'lerinden), en iyi %5 hariç PF, long/short PF, yıl bazında net/PF/işlem
-     (giriş yılı), 2022 ayrıca sütun (net_2022, bh_net_2022). Karar 13 eşikleri `eleme.degerlendir` ile (net > 0, PF >= 1.2,
-     >= 50 işlem, en iyi %5 hariç PF >= 0.9).
+     (giriş yılı), 2022 ayrıca sütun (net_2022, bh_net_2022). `gecti` = KARAR 24 (`eleme.portfoy_degerlendir`: OOS >= 1095 gün,
+     >= 20 yeniden dengeleme [pozisyon vektörünün değiştiği gün], net > 0, Sharpe >= 0.5, max düşüş <= %20, en iyi %5 GÜN
+     hariç net > 0); karar 13 sonucu `gecti_k13`/`nedenler_k13` sütunlarında kalır. Risk bütçesi karar 25: ağırlık kolu
+     toplam stop riski <= %5 (pozisyon başına %1 değil).
   5. AL-TUT KIYASI: koşu evreninin (EVRENLER) eşit ağırlıklı al-tut sepeti (OOS başlangıcından önceki günün kapanışında
      eşit değerli alım, hiç dengeleme yok, o gün fiyatı olanlar). Sharpe aynı gün-takvimiyle hesaplanır. UYARI: motor %1
      işlem riski ve ATR felaket stopu yüzünden brüt maruziyet çoğu zaman 1x'in çok altındadır (ort_brut sütunu); bu
@@ -98,7 +100,8 @@ def max_dusus(getiri: np.ndarray) -> float:
 class AdayHesap:
     """Bir adayın tam-veri sonucu: günlük getiri (UTC günü, indeks gün başlangıcı) + işlemler + brüt maruziyet + limit olayları."""
 
-    def __init__(self, gunluk: pd.Series, islemler: pd.DataFrame, ort_brut: float = math.nan, limit_olay=()):
+    def __init__(self, gunluk: pd.Series, islemler: pd.DataFrame, ort_brut: float = math.nan, limit_olay=(),
+                 dengeleme_gunleri=()):
         g = gunluk.copy()
         g.index = pd.DatetimeIndex(g.index).floor("D")
         self.gunluk = g.groupby(level=0).last().astype(float)
@@ -109,6 +112,9 @@ class AdayHesap:
         self.giris = pd.DatetimeIndex(d["giris_zamani"]) if len(d) else pd.DatetimeIndex([], tz="UTC")
         self.ort_brut = ort_brut
         self.limit_olay = [pd.Timestamp(t) for t in limit_olay]
+        # yeniden dengeleme günü = pozisyon vektörünün (sembol başına net miktar) değiştiği UTC günü
+        self.dengeleme = pd.DatetimeIndex(sorted(set(pd.DatetimeIndex(dengeleme_gunleri).floor("D")))) \
+            if len(dengeleme_gunleri) else pd.DatetimeIndex([], tz="UTC")
 
     def egitim_skoru(self, bas, bit) -> tuple:
         """(gun, işlem, Sharpe): YALNIZ [bas, bit) içi günlük getiriler ve bu aralıkta girilen işlemler."""
@@ -123,6 +129,9 @@ class AdayHesap:
         if not len(self.islemler):
             return self.islemler
         return self.islemler[(self.giris >= bas) & (self.giris < bit)]
+
+    def dengeleme_sayisi(self, bas, bit) -> int:
+        return int(((self.dengeleme >= bas) & (self.dengeleme < bit)).sum())
 
     def limit_olay_sayisi(self, bas, bit) -> int:
         return sum(1 for t in self.limit_olay if bas <= t < bit)
@@ -158,12 +167,22 @@ def secim_ve_oos(adaylar: dict, pencereler: list, min_islem: int = MIN_ISLEM_EGI
                 islem_parcalari.append(d)
             kayit["brut"] = a.ort_brut
             kayit["limit_olay"] = a.limit_olay_sayisi(t0, t1)
+            kayit["dengeleme"] = a.dengeleme_sayisi(t0, t1)
         secimler.append(kayit)
     oos = pd.concat(islem_parcalari, ignore_index=True) if islem_parcalari else pd.DataFrame()
     return getiri, oos, secimler
 
 
-def oos_metrikleri(getiri: pd.Series, oos: pd.DataFrame) -> dict:
+def net_en_iyi5_gun_haric(r) -> float:
+    """En iyi %5 GÜN (en az 1) çıkarılınca kalan günlerin bileşik net getirisi."""
+    r = np.sort(np.asarray(r, dtype=float))[::-1]
+    if len(r) == 0:
+        return math.nan
+    kes = max(1, math.ceil(0.05 * len(r)))
+    return float(np.prod(1.0 + r[kes:]) - 1.0)
+
+
+def oos_metrikleri(getiri: pd.Series, oos: pd.DataFrame, yeniden_dengeleme: Optional[int] = None) -> dict:
     """OOS günlük getirisi + OOS işlemlerinden metrikler. eleme.degerlendir anahtarlarını içerir."""
     r = getiri.to_numpy(dtype=float)
     m: dict = {"islem_sayisi": int(len(oos))}
@@ -171,6 +190,9 @@ def oos_metrikleri(getiri: pd.Series, oos: pd.DataFrame) -> dict:
     m["sharpe"] = sharpe_gunluk(r)
     m["max_dusus"] = max_dusus(r)
     m["aktif_gun_orani"] = float((r != 0).mean())
+    m["oos_gun"] = int(len(r))                                  # karar 24: OOS süresi (gün)
+    m["yeniden_dengeleme"] = None if yeniden_dengeleme is None else int(yeniden_dengeleme)
+    m["net_en_iyi5_gun_haric"] = net_en_iyi5_gun_haric(r)
     if len(oos):
         rr = np.nan_to_num(oos["r"].to_numpy(dtype=float), nan=0.0)
         m["n_nan_r"] = int(oos["r"].isna().sum())
@@ -346,8 +368,10 @@ def _gorev_icerik(g: dict, satir: dict):
             hatalar.append((etiket, f"{type(e).__name__}: {e}"))
             continue
         gunluk = r.gunluk_ozsermaye.pct_change().fillna(0.0)
+        q = r.pozisyon_gecmisi
+        degisti = (q.diff().abs().fillna(0.0).sum(axis=1) > 0) if len(q) else pd.Series(dtype=bool)
         hesaplar[etiket] = AdayHesap(gunluk, r.islemler, float(r.maruziyet["brut"].mean()),
-                                     [o["zaman"] for o in r.limit_olaylari])
+                                     [o["zaman"] for o in r.limit_olaylari], q.index[degisti.to_numpy()])
     satir.update({"atlandi": False, "n_kosu": len(hesaplar), "n_aday_hatali": len(hatalar),
                   "aday_hata_ornegi": hatalar[0][1][:160] if hatalar else ""})
     if not hesaplar:
@@ -368,12 +392,16 @@ def _gorev_icerik(g: dict, satir: dict):
     brutlar = [s["brut"] for s in secimler if s.get("brut") is not None and np.isfinite(s.get("brut", np.nan))]
     satir["ort_brut"] = float(np.mean(brutlar)) if brutlar else math.nan
     satir["limit_olay_oos"] = int(sum(s.get("limit_olay", 0) for s in secimler))
-    m = oos_metrikleri(getiri, oos)
+    m = oos_metrikleri(getiri, oos, int(sum(s.get("dengeleme", 0) for s in secimler)))
     satir.update(m)
     bh = al_tut_getirisi(veriler, evren, oos_bas, oos_bit)
     satir.update(al_tut_metrikleri(bh))
     satir["sharpe_ustu"] = bool(np.isfinite(m["sharpe"]) and np.isfinite(satir["bh_sharpe"]) and m["sharpe"] > satir["bh_sharpe"])
-    k = eleme.degerlendir({"metrikler": m} if m["islem_sayisi"] else {})
+    # karar 13 sütunu (karşılaştırma için kalır) ve karar 24 (portföy ölçütü: `gecti` budur)
+    k13 = eleme.degerlendir({"metrikler": m} if m["islem_sayisi"] else {})
+    satir["gecti_k13"] = bool(k13["gecti"])
+    satir["nedenler_k13"] = "; ".join(k13["nedenler"])
+    k = eleme.portfoy_degerlendir({"metrikler": m})
     satir["gecti"] = bool(k["gecti"])
     satir["nedenler"] = "; ".join(k["nedenler"])
     gun_yolu = islem_yolu(_AYAR["cikti_dizini"], _AYAR["etiket"], ad, evren_ad, tf, "gunluk")

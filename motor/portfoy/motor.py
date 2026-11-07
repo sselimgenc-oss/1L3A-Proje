@@ -37,7 +37,11 @@ SERT LİMİTLER (motor.risk.limitler.SERT_LIMITLER; ayarlar aşarsa tavana kırp
   4. Kill switch: özsermaye zirveden %20 düşerse tüm pozisyonlar kapanır ("kill_switch"), bir daha işlem açılmaz.
   limit_modu="olc": 3 ve 4 işlemi durdurmaz, yalnız `limit_olaylari`na yazar (SADECE araştırma). 1 ve 2 her iki
   modda uygulanır.
-  Ek (sert değil, ayarla): toplam_risk_tavani_yuzde (açık pozisyonların stopa kadar toplam riski) ve max_pozisyon.
+  5. Portföy toplam riski (karar 25, kullanıcı onaylı 2026-11-07): AĞIRLIK kollarında pozisyon başına %1 yerine açık +
+     yeni pozisyonların stopa kadar TOPLAM riski <= portfoy_toplam_risk_yuzde (%5) x MTM özsermaye; tek pozisyon da en
+     fazla %5 taşıyabilir. Aşılırsa yeni/artan hedefler ORANTILI küçültülür ("portfoy_risk"). SİNYAL kollarında işlem
+     başı %1 (1. madde) aynen geçerlidir. Ayar (toplam_risk_tavani_yuzde) bu değeri aşamaz (kırpılır, uyarı yazılır).
+  Ek (ayarla): toplam_risk_tavani_yuzde (sert değerin altına inebilir) ve max_pozisyon.
 ZARARDAKİ POZİSYON BÜYÜTÜLEMEZ (ortalama düşürme yasağı): ağırlık kolunda, mevcut pozisyon dolum anında zarardaysa
   (açılış fiyatı < ortalama giriş, long için) hedef büyüklük mevcudu AŞAMAZ; yalnız küçültme/kapatma yapılır
   ("zarar_buyutme" kirpmalar'a yazılır). Kârdaki pozisyona ekleme ve yeniden dengelemede küçültme serbesttir.
@@ -67,7 +71,7 @@ ISLEM_KOLONLARI = ["sembol", "kol", "yon", "giris_zamani", "giris_fiyati", "ciki
 @dataclass
 class PortfoyAyarlari:
     baslangic_sermaye: float = 10000.0
-    risk_yuzde: float = 1.0                  # pozisyon başına stopa kadar risk (%); sert limitle kırpılır
+    risk_yuzde: float = 1.0                  # SİNYAL kollarında işlem başına stopa kadar risk (%); sert limitle kırpılır
     kaldirac: float = 3.0                    # toplam brüt maruziyet tavanı (özsermaye katı); sert limitle kırpılır
     komisyon_taker_yuzde: float = 0.05
     komisyon_maker_yuzde: float = 0.02
@@ -75,7 +79,7 @@ class PortfoyAyarlari:
     kayma_bps: float = 2.0
     stop_kayma_bps: float = 5.0
     limit_modu: str = "uygula"               # "uygula" | "olc" (yalnız araştırma)
-    toplam_risk_tavani_yuzde: Optional[float] = None   # açık pozisyonların stopa kadar toplam riski; None: yok
+    toplam_risk_tavani_yuzde: Optional[float] = None   # açık pozisyonların stopa kadar toplam riski; None: sert değer (%5); sert değeri aşamaz
     max_pozisyon: Optional[int] = None                 # aynı anda açık kol sayısı; None: yok
     kurallar: Optional[dict] = None                    # {sembol: SembolKurallari}; yoksa tarama.SEMBOL_KURALLARI
 
@@ -211,8 +215,11 @@ class _Motor:
         self.taker, self.maker = D(ayarlar.komisyon_taker_yuzde) / 100, D(ayarlar.komisyon_maker_yuzde) / 100
         self.kayma = D(ayarlar.kayma_bps) / 10000
         self.stop_kayma = D(ayarlar.stop_kayma_bps) / 10000
-        self.top_risk = (D(ayarlar.toplam_risk_tavani_yuzde) / 100
-                         if ayarlar.toplam_risk_tavani_yuzde is not None else None)
+        top_sert = L.portfoy_toplam_risk_yuzde
+        top = top_sert if ayarlar.toplam_risk_tavani_yuzde is None else min(ayarlar.toplam_risk_tavani_yuzde, top_sert)
+        if ayarlar.toplam_risk_tavani_yuzde is not None and ayarlar.toplam_risk_tavani_yuzde > top_sert:
+            self.uyarilar.append(f"toplam_risk_tavani_yuzde {ayarlar.toplam_risk_tavani_yuzde} -> {top_sert} (sert limit)")
+        self.top_risk = D(top) / 100          # her zaman var: portföy toplam stop riski tavanı (karar 25)
         self.max_poz = ayarlar.max_pozisyon
         self.islem_baslangic = islem_baslangic
         self.kollar = kollar
@@ -369,7 +376,8 @@ class _Motor:
         rb = abs(px - stop)
         if rb == 0:
             return Decimal(0)
-        qty_r = E * self.risk_oran / rb
+        # sinyal kolu: işlem başı %1; ağırlık kolu: tek pozisyon en fazla toplam tavan kadar (karar 25)
+        qty_r = E * (self.risk_oran if kol.mod == "sinyal" else self.top_risk) / rb
         return min(qty_w, qty_r)
 
     def _hedef_emirleri_topla(self, i, t, E):
@@ -415,6 +423,42 @@ class _Motor:
                                      zc=zc, sinyal=True, px=px))
         return emirler, bekleyen_tahmin
 
+    def _risk_orantili(self, emirler, E, i, t) -> None:
+        """Toplam stop riski <= top_risk * E. Sabit kalan pozisyonların (emri olmayanlar, azalan/aynı kalan hedefler,
+        artan hedeflerin mevcut kısmı) riski düşüldükten sonra kalan bütçe, ağırlık kollarının ARTIŞLARINA aynı oranda
+        paylaştırılır. Sinyal emirleri sıralı kontrole (Faz B) bırakılır; riskleri sabit sayılır."""
+        butce = self.top_risk * E
+        sabit = Decimal(0)
+        artanlar = []                                  # (emir, mevcut_qty, artis_riski)
+        hedefli = {e.kol.kimlik for e in emirler}
+        for k, p in self.acik.items():
+            if k not in hedefli:
+                sabit += max((D(self._fiyat_ham(p.sembol, i, True)) - p.stop) * p.miktar * p.yon, Decimal(0))
+        for e in emirler:
+            if e.yon == 0:
+                continue
+            p = self.acik.get(e.kol.kimlik)
+            cur = p.miktar if (p is not None and p.yon == e.yon) else Decimal(0)
+            mtm_risk = (max((D(self._fiyat_ham(p.sembol, i, True)) - p.stop) * p.yon, Decimal(0)) if cur > 0
+                        else Decimal(0))
+            if e.kol.mod != "agirlik":
+                sabit += e.qty * abs(e.px - e.stop)
+                continue
+            if e.qty <= cur:
+                sabit += e.qty * mtm_risk
+                continue
+            sabit += cur * mtm_risk
+            artanlar.append((e, cur, (e.qty - cur) * abs(e.px - e.stop)))
+        istek = sum((a[2] for a in artanlar), Decimal(0))
+        if istek <= 0 or sabit + istek <= butce:
+            return
+        f = max(Decimal(0), (butce - sabit) / istek)
+        for e, cur, _ in artanlar:
+            ist = e.qty
+            yeni = cur + (e.qty - cur) * f
+            e.qty = max(_step_asagi(yeni, self.step[e.kol.sembol]), cur)
+            self._kirp(t, e.kol, "portfoy_risk", ist * e.px / E, e.qty * e.px / E)
+
     def _emirleri_yurut(self, i, t) -> None:
         E = self._ozs(i, True)
         emirler, bekleyen_tahmin = self._hedef_emirleri_topla(i, t, E)
@@ -458,6 +502,8 @@ class _Motor:
             e.qty = _step_asagi(q, self.step[e.kol.sembol]) if e.yon != 0 else Decimal(0)
             if f < 1 and e.yon != 0:
                 self._kirp(t, e.kol, "kaldirac_orantili", e.w_abs, e.qty * e.px / E)
+        # --- 5) portföy toplam stop riski (karar 25): ağırlık kollarının ARTAN hedefleri orantılı küçültülür
+        self._risk_orantili(emirler, E, i, t)
         # --- engeller (kill / günlük limit / ısınma): artış ve yeni giriş yasak
         for e in emirler:
             kol = e.kol
