@@ -117,3 +117,9 @@
 - **Tistory (`www.tistory.com`):** izin eklendi ve açılıyor. Ancak Tistory'nin arama sayfası "sayfa bulunamadı" veriyor; blog içi arama bu yolla çalışmıyor. Korece web aramasında 2025 için sonuç ve MDD paylaşan Tistory yazısı çıkmadı; yalnız genel rehber sayfaları (algolab, sqlwise, eclipse.trading) geldi. Bunlar strateji kaynağı değil.
 - **聚宽 (`www.joinquant.com`):** izin açık ama sayfa Çin dışı IP'den "bölgede desteklenmiyor" diyor. Bu bir ağ izni değil, sunucu tarafı coğrafi engel.
 - **Sonuç:** Kore için bu taramada sonuçlu strateji bulunamadı. Kore'den bir kaynak için Tistory'de belirli blog adları (ör. kullanıcı tarafından verilecek blog adresleri) gerekli.
+
+## Kapanış notu (2026-11-07): Kore taraması
+- Kore için ek arama yapıldı (Tistory ve genel Korece aramalar). Bulunan içerikler rehber ve eğitim yazıları (algolab, intelliquant, eclipse.trading, steadydawn, Jaeng-il Kyeong-il haber sitesi). Kendi strateji kuralını ve gerçek backtest/canlı sonucunu paylaşan bir Kore trader bulunamadı.
+- Naver açılmadığı için Naver kaynakları da taranamadı.
+- **Kore için sonuç:** bu taramada sonuçlu strateji yok. Kore kaynakları ancak belirli blog adresleri veya Naver erişimi ile bulunabilir.
+- Çin'de 聚宽 coğrafi engeli nedeniyle tam tarama yapılamadı; BigQuant'taki sonuçlu yazılar yukarıda.
