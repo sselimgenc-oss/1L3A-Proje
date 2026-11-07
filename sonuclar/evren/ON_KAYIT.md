@@ -37,6 +37,12 @@ Evren aşağıdaki gibi değişti; "Evren U (13)" tanımının yerine geçer:
   → BIST + ABD hisse + kripto + emtia evreni. Stratejiler artık tek tek "kendi enstrümanlarında" seçilmez.
 - Kilit açılışı: veri okumaları kilit_ac=True, gerekce="karar 27 evren testi 2020→bugün (kullanıcı kararı)" ile günlüğe yazılır.
 
+## GÜNCELLEME 4 (2026-11-07, kullanıcı)
+- Amaç strateji odaklıdır: strateji evrenin tamamında tek ayarla değerlendirilir; enstrüman bazında seçim/sıralama YAPILMAZ
+  (enstrüman dağılımı yalnız genişlik kontrolü ve bilgi olarak raporlanır).
+- "İyi" = tüm ölçütleri geçen; "iyiye yakın" = en çok bir ölçütü kıl payı kaçıran (PF ≥ 1.1, Sharpe ≥ 0.4, düşüş ≤ %25,
+  sağlamlıkta en çok bir kontrol kalan). İkisi de stil bazında sıralı listelenir; iyiye yakınlar geliştirme adayıdır.
+
 ## Tanım
 **Evren stratejisi** = bir strateji + bir zaman dilimi + TEK ortak parametre seti, evrenin TÜM enstrümanlarında aynı anda
 çalışır; sinyal hangi enstrümanda çıkarsa orada işleme girer. Evren U (karar 22): BTCUSDT, ETHUSDT, SOLUSDT, DK_AAPL, DK_MSFT,
