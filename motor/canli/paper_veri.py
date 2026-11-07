@@ -181,8 +181,12 @@ def kurallar_cikar(bilgi: dict) -> dict:
     return out
 
 
+# Binance TradFi (hisse/emtia) sürekli sözleşmeleri exchangeInfo'da "TRADIFI_PERPETUAL" türüyle gelir (sunucuda görüldü, 2026-11-07).
+SUREKLI_TURLER = ("PERPETUAL", "TRADIFI_PERPETUAL")
+
+
 def esleme_dogrula(bilgi: dict, sembollar: list) -> dict:
-    """Her strateji sembolü için (binance_sembol, None) ya da (None, neden). PERPETUAL + TRADING aranır."""
+    """Her strateji sembolü için (binance_sembol, None) ya da (None, neden). Sürekli sözleşme (SUREKLI_TURLER) + TRADING aranır."""
     tablo = {s["symbol"]: s for s in bilgi.get("symbols", [])}
     out = {}
     for s in sembollar:
@@ -190,8 +194,8 @@ def esleme_dogrula(bilgi: dict, sembollar: list) -> dict:
         x = tablo.get(b)
         if x is None:
             out[s] = (None, f"{b} Binance USDⓈ-M exchangeInfo'da yok")
-        elif x.get("contractType") != "PERPETUAL":
-            out[s] = (None, f"{b} PERPETUAL değil ({x.get('contractType')})")
+        elif x.get("contractType") not in SUREKLI_TURLER:
+            out[s] = (None, f"{b} sürekli sözleşme değil ({x.get('contractType')})")
         elif x.get("status") != "TRADING":
             out[s] = (None, f"{b} durumu {x.get('status')} (TRADING değil)")
         else:
