@@ -137,10 +137,14 @@ Ana ders: önceki sonuçlar OOS'a bakılarak seçilmiş ve kâr birkaç işlemde
   Spearman −0.09). Kilitli dönem artık kullanılmış sayılır. Karar (ön kayıt gereği): set değiştirilmeden Aşama 3 (Pano)
   ve Aşama 4 (paper trading) başlar; seçim yönteminin öngörü gücü zayıf olduğu için paper trading asıl bağımsız sınavdır,
   canlıya geçiş paper sonucu + kullanıcı onayı olmadan konuşulmaz.
+- 2026-11-07: Kullanıcı: kilitli yılda geçen 14'lük ayrı izleme listesi istenmedi, final 7 ile devam. Lider kararları:
+  (1) paper'da ağırlıklar kilit testindeki set oynatmasıyla aynı (tek-grafik %1/işlem, portföy %5 bütçe, kollar 50/50),
+  pf__rotasyon dahil — sert limitler (günlük %3, kill %20) paper'da da durdurucu; (2) paper ayarları WF kuralının
+  ileriye devamı: son eğitim penceresi verinin sonuna kadar, yenileme swing/portföy 180 gün, daytrade 90 gün;
+  (3) Aşama 2 kapanışı (final_set.json, beklenti aralıkları) ve Aşama 3 Pano v1 başlatıldı.
 
 ## Kullanıcıyı bekleyen kararlar
 - ~~Final seçim ve kilitli dönemin bir kez açılması (karar 20)~~ — kullanıcı "aç" dedi (2026-11-07), yapıldı: `sonuclar/kilit/RAPOR.md`.
-- Portföy kolunun (özellikle pf__rotasyon, kilitli yılda %25 düşüş) paper trading'deki ağırlığı — kullanıcıyla konuşulacak.
 - Karar 13 eşikleri çoklu test düzeltmesi içermiyor; sağlamlık paketi öneri kapısı ekliyor (son karar kullanıcıda).
 
 ## Yol haritası (2026-11-06)

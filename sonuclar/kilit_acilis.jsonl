@@ -503,3 +503,7 @@
 {"zaman": "2026-11-07T13:22:57.368093+00:00", "sembol": "SOLUSDT", "veri": "mum 5m", "gerekce": "Katman 4 kilitli dönem testi, ON_KAYIT.md, kullanıcı onayı 2026-11-07", "yigin": ["kilit_testi.py:243:kilit_kos_tek", "kilit_testi.py:154:_tek_veri", "yeniden_ornekle.py:91:tf_mumlari", "depo.py:61:mum_oku"]}
 {"zaman": "2026-11-07T13:22:57.399249+00:00", "sembol": "SOLUSDT", "veri": "funding", "gerekce": "Katman 4 kilitli dönem testi, ON_KAYIT.md, kullanıcı onayı 2026-11-07", "yigin": ["kilit_testi.py:328:_gorev_kilit", "kilit_testi.py:243:kilit_kos_tek", "kilit_testi.py:156:_tek_veri", "depo.py:70:funding_oku"]}
 {"zaman": "2026-11-07T13:22:57.445358+00:00", "sembol": "SOLUSDT", "veri": "funding", "gerekce": "Katman 4 kilitli dönem testi, ON_KAYIT.md, kullanıcı onayı 2026-11-07", "yigin": ["kilit_testi.py:328:_gorev_kilit", "kilit_testi.py:243:kilit_kos_tek", "kilit_testi.py:156:_tek_veri", "depo.py:70:funding_oku"]}
+{"zaman": "2026-11-07T13:52:12.505226+00:00", "sembol": "SOLUSDT", "veri": "mum 5m", "gerekce": "deneme", "yigin": ["<stdin>:5:<module>", "depo.py:61:mum_oku"]}
+{"zaman": "2026-11-07T13:52:12.665995+00:00", "sembol": "ETHUSDT", "veri": "mum 5m", "gerekce": "deneme", "yigin": ["<stdin>:5:<module>", "depo.py:61:mum_oku"]}
+{"zaman": "2026-11-07T13:52:12.726662+00:00", "sembol": "DK_NVDA", "veri": "mum 5m", "gerekce": "deneme", "yigin": ["<stdin>:5:<module>", "depo.py:61:mum_oku"]}
+{"zaman": "2026-11-07T13:52:12.747224+00:00", "sembol": "BTCUSDT", "veri": "mum 5m", "gerekce": "deneme", "yigin": ["<stdin>:5:<module>", "depo.py:61:mum_oku"]}
