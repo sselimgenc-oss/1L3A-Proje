@@ -31,6 +31,7 @@ from motor.backtest.motor import CikisYokHatasi, MESAJ_CIKIS_YOK
 from motor.portfoy.motor import Kol, PortfoyAyarlari, SonucPortfoy, _Motor
 from motor.portfoy.temel import ortak_eksen
 from motor.strateji import gostergeler as gst
+from motor.strateji import funding
 from motor.strateji.temel import SINYAL_SUTUNLARI, Strateji
 
 
@@ -84,5 +85,9 @@ def birlesik_backtest(veriler: dict, kollar, ayarlar: PortfoyAyarlari = None, fu
     if eksik:
         raise ValueError(f"verisi olmayan semboller: {eksik}")
     eksen = ortak_eksen(veriler)
-    kol_listesi = [_kol_kur(no, k.strateji, k.sembol, veriler[k.sembol], eksen) for no, k in enumerate(tanimlar)]
+    # funding_gerekli stratejiler için mumlara nedensel `funding_orani` eklenir (yoksa açık hata); diğerleri değişmez.
+    kol_listesi = [_kol_kur(no, k.strateji, k.sembol,
+                            funding.stratejiye_hazirla(k.strateji, veriler[k.sembol], (fundingler or {}).get(k.sembol),
+                                                       k.sembol), eksen)
+                   for no, k in enumerate(tanimlar)]
     return _Motor(veriler, kol_listesi, ayarlar, fundingler, eksen, islem_baslangic).calistir()
