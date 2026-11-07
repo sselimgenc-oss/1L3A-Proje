@@ -1,0 +1,44 @@
+satir_indeksi,kaynak,ad,yeni_strateji_adi,durum,gerekce
+0,tv,** Inputs ** //////////,dis__flawless-bbrsi,kodlandi,modül dis/d8_atlanan_a.py; ATR felaket stopu/uyarlamalar sınıf docstring'inde
+17,tv,[Kpt-Ahab] Moving Average Simple AlgoPilot v2.1,,kurala_dokulemez,"907 satırlık kaynak: MA tipi, giriş sinyal kaynağı ve periyotlar kullanıcı seçimli; tek bir kural/varsayılan çıkarılamıyor"
+20,tv,Adaptive Fibonacci Pullback System -FibonacciFlux,dis__fibst-pullback,kodlandi,modül dis/d8_atlanan_a.py; ATR felaket stopu/uyarlamalar sınıf docstring'inde; envanter özeti dosyayla uyuşmuyordu (özet Supertrend kesişimi+Fib stop diyordu); gerçek kural: Fib-çarpanlı Supertrend ortalaması geri çekilmesi + AMA kanalı; MACD/hacim süzgeçleri ve izleyen TP atlandı
+22,tv,Alpha S/R Channel Strategy,,kurala_dokulemez,69 KB'lık kaynakta yatay kanal dönüşü + kırılım + kademeli kâr alma + RSI/EMA karışık modları; tek mekanik kural yok
+28,tv,ATR Trend Strategy with Moving Average | Fixed TP/SL version,,kurala_dokulemez,346 satır: 7 MA tipi x 4 ATR tipi x 2 giriş yöntemi; TP/SL 'otomatik' (geçmiş MFE/MAE dağılımından) hesaplanıyor; tek kural çıkarılamadı
+31,tv,BB Power Oscillator + Squeeze Release,dis__bbpower-sqz,kodlandi,modül dis/d8_atlanan_a.py; ATR felaket stopu/uyarlamalar sınıf docstring'inde
+36,tv,Bjorgum Double Tap,,kurala_dokulemez,"çift dokunma (double tap) tespit parametreleri ve ATR stop/hedef çarpanları 385 satırlık kodda dağınık, tek net kural çıkarılamadı"
+43,tv,BTC Flip Bot V1 — MTF + SL-Flip,,kurala_dokulemez,"SL sonrası ters yön işlem (tam sermaye x kaldıraç boyutlu) + kısmi TP 6R + 24 saat bekleme + MTF EMA/RSI; ters yön ve boyut yönetimi risk katmanına ait, giriş kuralı ayrı kodlanırsa kaynağın özü kaybolur"
+63,tv,Double CCI Confirmed Hull Moving Average Reversal Strategy,dis__cci2-hma,kodlandi,modül dis/d8_atlanan_a.py; ATR felaket stopu/uyarlamalar sınıf docstring'inde
+66,tv,EE Sweep Return — STRATEGY v1,dis__orb-sweep-donus,kodlandi,modül dis/d8_atlanan_a.py; ATR felaket stopu/uyarlamalar sınıf docstring'inde
+70,tv,EMA Trend + MTF Stochastic Strategy,dis__ema-mtfstoch,kodlandi,modül dis/d8_atlanan_a.py; ATR felaket stopu/uyarlamalar sınıf docstring'inde
+74,tv,ETH Momentum Breakout v15.0,,kurala_dokulemez,41 KB: sıkışma + lineer regresyon + hacim + RSI + EMA + kademeli TP çoklu mod; mekanik tek kural çıkmıyor
+77,tv,Fib Confluence Scanner,dis__fib-konfluans,kodlandi,modül dis/d8_atlanan_a.py; ATR felaket stopu/uyarlamalar sınıf docstring'inde
+82,tv,Fractional EMA Cross Backtest,,kurala_dokulemez,54 KB: kesirli periyotlu EMA kesişimleri ardışık onay mantığı (Pine kesirli uzunluk yorumuna bağlı) ve çok sayıda mod
+93,tv,HalfTrend Strategy,dis__halftrend,kodlandi,modül dis/d8_atlanan_a.py; ATR felaket stopu/uyarlamalar sınıf docstring'inde
+98,tv,How to use Leverage and Margin in PineScript,,yasak,her sinyalde pozisyon ekleme (pyramiding=100) ve stop yok: stopsuz ızgara/ekleme benzeri; yalnız sabit tick hedefi var
+99,tv,HTF Level Breakout,dis__oncekigun-kirilim,kodlandi,modül dis/d8_atlanan_a.py; ATR felaket stopu/uyarlamalar sınıf docstring'inde
+103,tv,ICT Daily Liquidity Sweep [PineGen AI],dis__likidite-supurme-gun,kodlandi,modül dis/d8_atlanan_a.py; ATR felaket stopu/uyarlamalar sınıf docstring'inde
+113,tv,Liquidity Sweep + Delta Absorption [PineGen AI],,veri_yok,delta (yukarı/aşağı hacim farkı) 1 dk alt zaman dilimi mumlarından hesaplanıyor; minimum zaman dilimimiz 5 dk (karar 3) ve alt-TF hacim dağılımı yok
+114,tv,Liquidity Sweep Reversal,,kurala_dokulemez,524 satır: likidite süpürme + BOS yapı kırılımı + FVG hedefleri + 7 ağırlıklı güven skoru + kısmi çıkışlar; tek mekanik kural yok
+119,tv,"MACD + Stochastic, Double Strategy (by ChartArt)",dis__stoch-macd-cift,kodlandi,modül dis/d8_atlanan_a.py; ATR felaket stopu/uyarlamalar sınıf docstring'inde
+128,tv,Momentum Sequence Strategy [Herman],dis__mumdizisi-5,kodlandi,modül dis/d8_atlanan_a.py; ATR felaket stopu/uyarlamalar sınıf docstring'inde
+130,tv,Moving Average Crossover,dis__ma-kesisim-dinamik,kodlandi,modül dis/d8_atlanan_a.py; ATR felaket stopu/uyarlamalar sınıf docstring'inde
+144,tv,Optimized Trend Tracker,dis__ott-var,kodlandi,modül dis/d8_atlanan_a.py; ATR felaket stopu/uyarlamalar sınıf docstring'inde
+145,tv,Optimized Trend Tracker - Strategy Version,dis__ott-var-hizli,kodlandi,modül dis/d8_atlanan_a.py; ATR felaket stopu/uyarlamalar sınıf docstring'inde
+152,tv,PMax on Rsi w T3 Strategy,dis__pmax-rsi-t3,kodlandi,modül dis/d8_atlanan_a.py; ATR felaket stopu/uyarlamalar sınıf docstring'inde
+157,tv,RF-HA Trend Scalper,dis__rf-ha-scalper,kodlandi,modül dis/d8_atlanan_a.py; ATR felaket stopu/uyarlamalar sınıf docstring'inde
+164,tv,Scam or Slam - Day Trading Rauf Strategy,,kurala_dokulemez,581 satır: Londra/NY aralığı süpürmesi + CHoCH yapı değişimi teyidi (yapı tespiti çok parametreli); tek mekanik kural çıkarılamadı
+165,tv,Sequence Snap | RSI-Confirmed Reversal Scalper,dis__mumdizisi-rsi,kodlandi,modül dis/d8_atlanan_a.py; ATR felaket stopu/uyarlamalar sınıf docstring'inde
+169,tv,Simple Harmonic Pattern Strategy,,kurala_dokulemez,zigzag pivotlarından XABCD harmonik oran tespiti (Gartley/Bat/Butterfly/Crab) ve oran toleransları; mevcut formasyon altyapısıyla güvenilir birebir kodlanamadı
+170,tv,Simplified 30m Event Strategy - Reverse,dis__pivot30-delta-ters,kodlandi,modül dis/d8_atlanan_a.py; ATR felaket stopu/uyarlamalar sınıf docstring'inde
+179,tv,Squeeze Momentum Indicator Strategy [LazyBear + PineIndicators],dis__sqzmom-lb-pine,kodlandi,modül dis/d8_atlanan_a.py; ATR felaket stopu/uyarlamalar sınıf docstring'inde
+182,tv,"Stochastic + RSI, Double Strategy (by ChartArt)",dis__stoch-rsi-cift,kodlandi,modül dis/d8_atlanan_a.py; ATR felaket stopu/uyarlamalar sınıf docstring'inde
+185,tv,Strategy for Squeeze Momentum Indicator [LazyBear],dis__sqzmom-lb-klasik,kodlandi,modül dis/d8_atlanan_a.py; ATR felaket stopu/uyarlamalar sınıf docstring'inde
+186,tv,Strategy: HMA 50 + Supertrend Sniper,dis__hma-supertrend,kodlandi,modül dis/d8_atlanan_a.py; ATR felaket stopu/uyarlamalar sınıf docstring'inde
+189,tv,Supertrend Donchian Breakout,dis__st-donchian-htf,kodlandi,modül dis/d8_atlanan_a.py; ATR felaket stopu/uyarlamalar sınıf docstring'inde; kaynakta long koşulu alt kanala karşı yazılmış (hata); üst kanal kırılımı kullanıldı
+193,tv,SUPPORT RESISTANCE STRATEGY [5MIN TF],dis__pivot-hacim-ema150,kodlandi,modül dis/d8_atlanan_a.py; ATR felaket stopu/uyarlamalar sınıf docstring'inde
+213,tv,Trendline Breaks with Multi Fibonacci Supertrend Strategy,dis__trendline-fibst,kodlandi,modül dis/d8_atlanan_a.py; ATR felaket stopu/uyarlamalar sınıf docstring'inde
+215,tv,Triple CCI Strategy MFI Confirmed [Skyrexio],dis__cci3-mfi,kodlandi,modül dis/d8_atlanan_a.py; ATR felaket stopu/uyarlamalar sınıf docstring'inde
+216,tv,Twin Optimized Trend Tracker,dis__tott,kodlandi,modül dis/d8_atlanan_a.py; ATR felaket stopu/uyarlamalar sınıf docstring'inde
+219,tv,Ultimate Prop Firm [Artillery],dis__pivot-sd-bolge,kodlandi,modül dis/d8_atlanan_a.py; ATR felaket stopu/uyarlamalar sınıf docstring'inde
+222,tv,UT Bot + STC Conjunction Strategy Tester (v4.6 Lag Window),,kurala_dokulemez,"UT Bot + STC çift teyidi ama 25+ ardışık sürüm filtresi (mum aralığı, fitil, hız, rejim R:R, haftalık devre kesici, gecikme penceresi); çekirdek kural bu filtrelerden ayrıştırılamıyor"
+224,tv,Velocity Breakout Strategy (VBS),,kurala_dokulemez,"4 farklı giriş türü (altın kesişim, yeniden yükleme, sıkışma kırılımı, SMC bölge) + hacim/POC ve dinamik ATR çıkışı; tek kurala indirgenirse kaynak değişir"
