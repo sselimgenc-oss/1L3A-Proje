@@ -1,0 +1,9 @@
+bolum,ad,durum,nerede,not
+4.4,Kesitsel IBS dönüşü,kodlandı,pf__kesit_ls skor=ibs (ibs_gun),Düşük IBS long / yüksek IBS short; ızgarada yok; ayar d12b:kesit-ibs
+3.4,Düşük vol L/S,kodlandı,pf__kesit_ls skor=dusuk_vol,Dolar-nötr; ızgarada yok; ayar d12b:kesit-dusuk-vol-ls
+3.9 / 10.3,Sinyale orantılı ağırlık,kodlandı,pf__kesit_ls agirlik=orantili,w ∝ sinyalin kesit sapması; dolar-nötr; k yok sayılır; skor=tutarli ile ValueError
+4.6,R/σ ağırlıklı rotasyon,kodlandı,pf__rotasyon agirlik=getiri_vol,Long-only (yalnız R>0); kitaptaki negatif R/σ short yok
+4.3,R² seçicilik + alfa,kodlandı (vekil),pf__kesit_ls skor=r2_alfa,Tek faktör (ref_sembol ya da evren ortalaması); skor=z(alfa)+z(1-R²); 5x5 kantil 3-13 sembolde uygulanamaz -> sürekli skor
+8.1,HP filtreli MA kesişimi,kodlandı,dis__hp-filtre-ma (d12b_151.py),Nedensel HP: kayan pencere sonu noktası (sabit ağırlık vektörü); lambda/pencere/MA uzunlukları varsayım
+19.5,FOMC günü long,kodlandı,dis__fomc-gunu-long (d12b_151.py),FOMC_GUNLERI 2020-2026 (56 karar günü; acil 2020-03-03 ve 03-15 yok; 2026 yayımlanmış takvim hafızadan - teyit önerilir); yalnız DK_SPX/ABD hisseleri; gün içi mum şart
+3.9.1,Grup-nötr ortalamaya dönüş,KODLANMADI,-,Evrende grup (sektör) başına 1-3 sembol: Mag7 hepsi tek teknoloji kümesi; kripto 3 / emtia 3 sembol; grup içi sapma ve grup-nötrlük anlamsız; evren genişleyince yeniden değerlendirilir
