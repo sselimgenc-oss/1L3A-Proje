@@ -1,0 +1,346 @@
+[
+  {
+    "kart_id": "daytrade__cpr-camarilla-olusturma__tranquiltrader",
+    "ad": "CPR + Camarilla 'Oluşturma' (Build-up) Kırılım Stratejisi",
+    "stil": "daytrade",
+    "kaynak": {
+      "pdf": "Day_Trading_ve_Pivotlar_-_Tranquil_Trader_233_sayfa.pdf",
+      "sayfalar": [
+        33,
+        34,
+        35,
+        36,
+        37,
+        38
+      ]
+    },
+    "ozet": "Gün CPR'si düne göre daha düşük değerde ve dar; Camarilla H3/H4 ile L3/L4 düne göre daha düşük; 5m'de Camarilla H4 üstünde kapanan sinyal mumunu ve dünkü CPR üstünde kapanan kırılım mumunu takiben kırılım mumu zirvesinin üstünde alım yapılır.",
+    "kategori": "kirilim",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "hisse",
+    "zaman_dilimi": {
+      "islem": "5m",
+      "ust_filtre": "Haftalık CPR (aşağıdaki not)"
+    },
+    "gostergeler": [
+      {
+        "ad": "Merkezi Pivot Aralığı (CPR)",
+        "parametreler": {
+          "TC": "(Pivot-BC)+Pivot",
+          "Pivot": "(H+L+C)/3",
+          "BC": "(H+L)/2",
+          "referans": "önceki gün OHLC"
+        }
+      },
+      {
+        "ad": "Camarilla Pivot",
+        "parametreler": {
+          "H3": "C+0.275*(H-L)",
+          "H4": "C+0.55*(H-L)",
+          "L3": "C-0.275*(H-L)",
+          "L4": "C-0.55*(H-L)",
+          "referans": "önceki gün HLC"
+        }
+      },
+      {
+        "ad": "Hacim",
+        "parametreler": {}
+      }
+    ],
+    "long_giris": [
+      "Bugünkü CPR düşük değer (dünkü CPR'nin tamamen altında) ve dar (dünkü CPR'den daha dar)",
+      "Bugünkü Camarilla H3 ve H4 dünküden düşük; L3 ve L4 dünküden düşük",
+      "Bugünkü H4 dünkü CPR içinde veya üzerinde",
+      "Sinyal Mumu (A): bugünkü H4 üzerinde kapanır",
+      "Kırılım Mumu (B): sinyal mumunun yükseğinin VE dünkü CPR'nin üzerinde kapanır",
+      "Giriş: kırılım mumu yükseğinin üzerinde al"
+    ],
+    "short_giris": [],
+    "stop_loss": "Alım stopu: Sinyal Mumunun (A) dibi VEYA sinyal ile kırılım mumu arasındaki dinlenme mumlarının en düşüğü; hangisi daha yüksekse o",
+    "kar_al": "Pozisyonun %70'i 1:1 hedefte, kalanı 1:2 hedefte kapatılır",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Haftalık CPR günlük CPR'nin üstünde direnç oluşturuyorsa alımdan kaçın (diğer stratejilerde not)"
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Tüm koşullar fiyat tabanlı ve mekanik; 'dar CPR' eşiği ve kısa tarafın kuralları eksik."
+    },
+    "belirsizlikler": [
+      "'Dar CPR' için sayısal eşik yok (bkz. CPR genişliği: dar=trend, geniş=yatay)",
+      "Satış (short) kuralları kitapta anlatılmamış: aynalama varsayımı gerekir",
+      "Camarilla L4/L3 'daha yüksek/daha düşük' koşulu önceki güne göre mukayese",
+      "Haftalık CPR filtresi sadece notla verilmiş"
+    ],
+    "uyumluluk_notu": "Önceki günün OHLC'sine dayalı pivotlar her piyasada hesaplanır; 24 saatlik piyasada 'gün' UTC günü olarak tanımlanmalı. 5m uygun, hacim gerekli (Hint hisseleri örnekleri; seans açılışına bağlı 09:15 sinyal mumları kripto/forex'te yok).",
+    "varyantlar": [],
+    "anahtar_kelimeler": [
+      "cpr",
+      "camarilla",
+      "pivot",
+      "h4-kirilim",
+      "sinyal-mumu",
+      "kirilim-mumu",
+      "70-30-cikis"
+    ]
+  },
+  {
+    "kart_id": "daytrade__cpr-camarilla-vurus__tranquiltrader",
+    "ad": "CPR + Camarilla 'Vuruş' (Hit) Stratejisi",
+    "stil": "daytrade",
+    "kaynak": {
+      "pdf": "Day_Trading_ve_Pivotlar_-_Tranquil_Trader_233_sayfa.pdf",
+      "sayfalar": [
+        89,
+        90,
+        91,
+        92,
+        93
+      ]
+    },
+    "ozet": "Bugünkü CPR düşük/örtüşen düşük/iç değer ve dar; H4 düne göre düşük veya L4 düne göre yüksek (daralan Camarilla); H4 dünkü CPR içinde/üstünde ise sinyal mumu H4 üstünde kapanır, kırılım mumu hacimle sinyal mumunu geçince alım yapılır.",
+    "kategori": "kirilim",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "hisse",
+    "zaman_dilimi": {
+      "islem": "5m",
+      "ust_filtre": "Haftalık CPR"
+    },
+    "gostergeler": [
+      {
+        "ad": "Merkezi Pivot Aralığı (CPR)",
+        "parametreler": {
+          "TC": "(Pivot-BC)+Pivot",
+          "Pivot": "(H+L+C)/3",
+          "BC": "(H+L)/2",
+          "referans": "önceki gün OHLC"
+        }
+      },
+      {
+        "ad": "Camarilla Pivot",
+        "parametreler": {
+          "H3": "C+0.275*(H-L)",
+          "H4": "C+0.55*(H-L)",
+          "L3": "C-0.275*(H-L)",
+          "L4": "C-0.55*(H-L)",
+          "referans": "önceki gün HLC"
+        }
+      },
+      {
+        "ad": "Hacim",
+        "parametreler": {}
+      }
+    ],
+    "long_giris": [
+      "Bugünkü CPR: düşük değer VEYA örtüşen düşük değer VEYA dünkü CPR'nin içinde; ve dar",
+      "Bugünkü H4 < dünkü H4 VEYA bugünkü L4 > dünkü L4",
+      "Bugünkü H4 dünkü CPR içinde veya üstünde",
+      "Sinyal Mumu (A) H4 üzerinde kapanır",
+      "Kırılım Mumu (B): sinyal mumu yükseği VE dünkü CPR üzerinde kapanır, hacmi sinyal mumundan yüksek",
+      "Giriş: kırılım mumu yükseği üstünde al"
+    ],
+    "short_giris": [],
+    "stop_loss": "Alım stopu: Sinyal Mumunun (A) dibi VEYA sinyal ile kırılım mumu arasındaki dinlenme mumlarının en düşüğü; hangisi daha yüksekse o",
+    "kar_al": "Pozisyonun %70'i 1:1 hedefte, kalanı 1:2 hedefte kapatılır",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Haftalık CPR günlük CPR üstünde direnç ise alım yok"
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Fiyat/hacim tabanlı net koşullar; eşikler ve short taraf tanımsız."
+    },
+    "belirsizlikler": [
+      "'Dar CPR' için sayısal eşik yok (bkz. CPR genişliği: dar=trend, geniş=yatay)",
+      "Satış (short) kuralları kitapta anlatılmamış: aynalama varsayımı gerekir",
+      "Camarilla L4/L3 'daha yüksek/daha düşük' koşulu önceki güne göre mukayese",
+      "Haftalık CPR filtresi sadece notla verilmiş"
+    ],
+    "uyumluluk_notu": "Önceki günün OHLC'sine dayalı pivotlar her piyasada hesaplanır; 24 saatlik piyasada 'gün' UTC günü olarak tanımlanmalı. 5m uygun, hacim gerekli (Hint hisseleri örnekleri; seans açılışına bağlı 09:15 sinyal mumları kripto/forex'te yok).",
+    "varyantlar": [],
+    "anahtar_kelimeler": [
+      "cpr",
+      "camarilla",
+      "pivot",
+      "vurus",
+      "kirilim",
+      "hacim-teyidi"
+    ]
+  },
+  {
+    "kart_id": "daytrade__cpr-camarilla-merdiven-kirilimi__tranquiltrader",
+    "ad": "CPR + Camarilla 'Merdiveni Kırma' (Ladder Breakout) Stratejisi",
+    "stil": "daytrade",
+    "kaynak": {
+      "pdf": "Day_Trading_ve_Pivotlar_-_Tranquil_Trader_233_sayfa.pdf",
+      "sayfalar": [
+        138,
+        139,
+        140,
+        141
+      ]
+    },
+    "ozet": "Bugünkü CPR dünkünün tamamen üstünde (yükselen merdiven), dar ve dünkünden daha dar; H3/H4 ve L3/L4 düne göre yüksek; sinyal mumu H4 üstünde kapanır, kırılım mumu hacimle onu aşınca alım yapılır.",
+    "kategori": "trend_takip",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "hisse",
+    "zaman_dilimi": {
+      "islem": "5m",
+      "ust_filtre": "Haftalık CPR"
+    },
+    "gostergeler": [
+      {
+        "ad": "Merkezi Pivot Aralığı (CPR)",
+        "parametreler": {
+          "TC": "(Pivot-BC)+Pivot",
+          "Pivot": "(H+L+C)/3",
+          "BC": "(H+L)/2",
+          "referans": "önceki gün OHLC"
+        }
+      },
+      {
+        "ad": "Camarilla Pivot",
+        "parametreler": {
+          "H3": "C+0.275*(H-L)",
+          "H4": "C+0.55*(H-L)",
+          "L3": "C-0.275*(H-L)",
+          "L4": "C-0.55*(H-L)",
+          "referans": "önceki gün HLC"
+        }
+      },
+      {
+        "ad": "Hacim",
+        "parametreler": {}
+      }
+    ],
+    "long_giris": [
+      "Bugünkü CPR dünkünün tamamen üstünde (yüksek değer), dar ve dünkünden daha dar",
+      "Bugünkü H3 ve H4 dünkünden yüksek; L3 ve L4 dünkünden yüksek",
+      "Sinyal Mumu (A) H4 üzerinde kapanır",
+      "Kırılım Mumu (B) sinyal mumu yükseği üzerinde kapanır",
+      "Kırılım mumu hacmi > sinyal mumu hacmi",
+      "Giriş: kırılım mumu yükseği üstünde al"
+    ],
+    "short_giris": [],
+    "stop_loss": "Alım stopu: Sinyal Mumunun (A) dibi VEYA sinyal ile kırılım mumu arasındaki dinlenme mumlarının en düşüğü; hangisi daha yüksekse o",
+    "kar_al": "Pozisyonun %70'i 1:1 hedefte, kalanı 1:2 hedefte kapatılır",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Haftalık CPR günlük CPR'nin üstünde direnç ise alım yok"
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Mekanik; dar CPR eşiği ve kısa taraf eksik."
+    },
+    "belirsizlikler": [
+      "'Dar CPR' için sayısal eşik yok (bkz. CPR genişliği: dar=trend, geniş=yatay)",
+      "Satış (short) kuralları kitapta anlatılmamış: aynalama varsayımı gerekir",
+      "Camarilla L4/L3 'daha yüksek/daha düşük' koşulu önceki güne göre mukayese",
+      "Haftalık CPR filtresi sadece notla verilmiş"
+    ],
+    "uyumluluk_notu": "Önceki günün OHLC'sine dayalı pivotlar her piyasada hesaplanır; 24 saatlik piyasada 'gün' UTC günü olarak tanımlanmalı. 5m uygun, hacim gerekli (Hint hisseleri örnekleri; seans açılışına bağlı 09:15 sinyal mumları kripto/forex'te yok).",
+    "varyantlar": [],
+    "anahtar_kelimeler": [
+      "cpr",
+      "camarilla",
+      "merdiven",
+      "yuksek-deger",
+      "kirilim",
+      "trend-gunu"
+    ]
+  },
+  {
+    "kart_id": "daytrade__cpr-camarilla-icten-cikis__tranquiltrader",
+    "ad": "CPR + Camarilla 'İçten Çıkış' (Inside-Out) Stratejisi",
+    "stil": "daytrade",
+    "kaynak": {
+      "pdf": "Day_Trading_ve_Pivotlar_-_Tranquil_Trader_233_sayfa.pdf",
+      "sayfalar": [
+        186,
+        187,
+        188,
+        189
+      ]
+    },
+    "ozet": "Camarilla H3/L3 düne göre iç içe (H3 düşük, L3 yüksek), dar CPR; sinyal mumu H4 üstünde kapanır, kırılım mumu hacimle sinyal mumunu aşınca alım.",
+    "kategori": "kirilim",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "hisse",
+    "zaman_dilimi": {
+      "islem": "5m",
+      "ust_filtre": "Haftalık CPR"
+    },
+    "gostergeler": [
+      {
+        "ad": "Merkezi Pivot Aralığı (CPR)",
+        "parametreler": {
+          "TC": "(Pivot-BC)+Pivot",
+          "Pivot": "(H+L+C)/3",
+          "BC": "(H+L)/2",
+          "referans": "önceki gün OHLC"
+        }
+      },
+      {
+        "ad": "Camarilla Pivot",
+        "parametreler": {
+          "H3": "C+0.275*(H-L)",
+          "H4": "C+0.55*(H-L)",
+          "L3": "C-0.275*(H-L)",
+          "L4": "C-0.55*(H-L)",
+          "referans": "önceki gün HLC"
+        }
+      },
+      {
+        "ad": "Hacim",
+        "parametreler": {}
+      }
+    ],
+    "long_giris": [
+      "Bugünkü CPR dar (tercihen dünkünden de dar)",
+      "Bugünkü H3 < dünkü H3 ve bugünkü L3 > dünkü L3",
+      "Bugünkü H4 dünkü CPR içinde veya üstünde",
+      "Sinyal Mumu (A) H4 üzerinde kapanır",
+      "Kırılım Mumu (B) sinyal yükseği VE dünkü CPR üzerinde kapanır",
+      "Kırılım mumu hacmi > sinyal mumu hacmi",
+      "Giriş: kırılım mumu yükseği üstünde al"
+    ],
+    "short_giris": [],
+    "stop_loss": "Alım stopu: Sinyal Mumunun (A) dibi VEYA sinyal ile kırılım mumu arasındaki dinlenme mumlarının en düşüğü; hangisi daha yüksekse o",
+    "kar_al": "Pozisyonun %70'i 1:1 hedefte, kalanı 1:2 hedefte kapatılır",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Haftalık CPR günlük CPR'nin üstünde direnç ise alım yok"
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Mekanik; eşik ve short taraf eksik."
+    },
+    "belirsizlikler": [
+      "'Dar CPR' için sayısal eşik yok (bkz. CPR genişliği: dar=trend, geniş=yatay)",
+      "Satış (short) kuralları kitapta anlatılmamış: aynalama varsayımı gerekir",
+      "Camarilla L4/L3 'daha yüksek/daha düşük' koşulu önceki güne göre mukayese",
+      "Haftalık CPR filtresi sadece notla verilmiş"
+    ],
+    "uyumluluk_notu": "Önceki günün OHLC'sine dayalı pivotlar her piyasada hesaplanır; 24 saatlik piyasada 'gün' UTC günü olarak tanımlanmalı. 5m uygun, hacim gerekli (Hint hisseleri örnekleri; seans açılışına bağlı 09:15 sinyal mumları kripto/forex'te yok).",
+    "varyantlar": [],
+    "anahtar_kelimeler": [
+      "cpr",
+      "camarilla",
+      "ic-kirilim",
+      "h3-l3",
+      "kirilim"
+    ]
+  }
+]
