@@ -32,6 +32,10 @@ DEĞİŞTİRİLMEZ)
   6. Deneme kaydı: (strateji, sembol=evren etiketi, aralik=tf) başına bir satır: kombinasyon = aday sayısı, pencere sayısı,
      toplam_kosu = başarılı backtest sayısı; yalnız bu çağrıda YENİ biten görevler yazılır (devam eden koşuda çift sayma yok).
 
+  7. ANALİZ BAŞLANGICI (2026-11-07): eğitim/OOS pencereleri, evren sembollerinin >= %75'inin (min_kapsama) verisinin
+     başladığı günden başlar (`analiz_baslangici`; `--baslangic` ile elle). Önceki veri yalnız gösterge ısınması içindir.
+     Henüz verisi olmayan sembol o tarihte hedef alamaz. Böylece "hepsi" erken yıllarda tek-emtia stratejisine dönmez.
+
 Kilit (karar 20): veri yalnız `motor.portfoy.veri.veri_yukle` (depo.mum_oku) ile okunur; kilit_ac YOK.
 Paralel: görev başına bir süreç (fork), kaldığı yerden devam (parquet), çıktı `sonuclar/wf_portfoy/<etiket>.csv`.
 
@@ -61,10 +65,12 @@ from motor.portfoy.stratejiler import tum_portfoy_stratejileri
 from motor.portfoy.stratejiler.baglama import BAGLAMA
 from motor.portfoy.stratejiler.ortak import EMTIA, HEPSI, HISSE, KRIPTO
 
+MIN_KAPSAMA = 0.75
+
 KOK = Path(__file__).resolve().parents[2]
 CIKTI_DIZINI = KOK / "sonuclar" / "wf_portfoy"
 
-EVRENLER = {"kripto": KRIPTO, "hisse": HISSE, "emtia": EMTIA, "hepsi": HEPSI}
+EVRENLER = {"kripto": KRIPTO, "hisse": HISSE, "emtia": EMTIA, "hisse_emtia": HISSE + EMTIA, "hepsi": HEPSI}
 EGITIM_GUN, TEST_GUN = 730, 180
 MIN_ISLEM_EGITIM = 10
 MIN_GUN_EGITIM = 60
@@ -288,6 +294,26 @@ def aday_listesi(sinif_ad: str, evren: Iterable[str], izgara: bool = True) -> tu
     return adaylar, atlanan
 
 
+def analiz_baslangici(veriler: dict, evren: Iterable[str], min_kapsama: Optional[float] = MIN_KAPSAMA,
+                      elle=None) -> pd.Timestamp:
+    """Analiz (eğitim/OOS) başlangıcı. `elle` verilirse o gün (UTC, gün başı). Aksi halde evren sembollerinin en az
+    `min_kapsama` oranının verisinin başladığı gün (k = ceil(n*oran). en erken başlangıç sırasında k. sembolün ilk günü).
+    `min_kapsama` None/0 ise eski davranış: en erken sembolün ilk günü. Bu tarihten ÖNCEKİ veri yalnız gösterge ısınması
+    içindir (backtest tam veride koşar); eğitim skoru ve OOS bu tarihten önce başlamaz. Henüz başlamamış sembol o tarihte
+    hedef alamaz (verisi yok): sepet/strateji yalnız o günkü mevcut sembollerle çalışır."""
+    if elle is not None:
+        t = pd.Timestamp(elle)
+        t = t.tz_localize("UTC") if t.tzinfo is None else t.tz_convert("UTC")
+        return t.floor("D")
+    ilk = sorted(veriler[s].index[0] for s in evren if s in veriler)
+    if not ilk:
+        raise ValueError("evrende veri yok")
+    if not min_kapsama:
+        return ilk[0].floor("D")
+    k = min(len(ilk), max(1, math.ceil(len(ilk) * float(min_kapsama) - 1e-9)))
+    return ilk[k - 1].floor("D")
+
+
 def gerekli_semboller(st, evren: Iterable[str]) -> list:
     """Adayın veri olarak kullanacağı semboller (alt evren + ek: rejim/referans), evren sırasıyla."""
     gerek = set(st.etkin_semboller(evren)) | {s for s in st.ek_semboller() if s}
@@ -376,7 +402,9 @@ def _gorev_icerik(g: dict, satir: dict):
                   "aday_hata_ornegi": hatalar[0][1][:160] if hatalar else ""})
     if not hesaplar:
         raise RuntimeError(f"hiç aday koşulamadı: {hatalar[0][1] if hatalar else 'aday yok'}")
-    bas = min(df.index[0] for df in veriler.values()).floor("D")
+    bas = analiz_baslangici(veriler, evren, _AYAR.get("min_kapsama", MIN_KAPSAMA), _AYAR.get("analiz_baslangic"))
+    satir["analiz_bas"] = str(bas)
+    satir["ilk_veri"] = json.dumps({s: str(veriler[s].index[0].date()) for s in evren if s in veriler})
     bit = max(df.index[-1] for df in veriler.values()) + pd.Timedelta(1, "ns")
     pencereler = pencereler_uret(bas, bit, _AYAR["egitim_gun"], _AYAR["test_gun"])
     satir["n_pencere"] = len(pencereler)
@@ -425,7 +453,8 @@ def wf_portfoy(etiket: str, stratejiler: Optional[Iterable[str]] = None, evren: 
                cikti_dizini: Optional[Path] = None, veri_dizini: Optional[Path] = None, baslangic=None, bitis=None,
                egitim_gun: int = EGITIM_GUN, test_gun: int = TEST_GUN, min_islem: int = MIN_ISLEM_EGITIM,
                min_gun: int = MIN_GUN_EGITIM, izgara: bool = True, hatalari_yeniden: bool = False,
-               deneme_kaydi_yolu=None, ilerleme: bool = True, maliyet_carpani: float = 1.0) -> pd.DataFrame:
+               deneme_kaydi_yolu=None, ilerleme: bool = True, maliyet_carpani: float = 1.0,
+               min_kapsama: Optional[float] = MIN_KAPSAMA, analiz_baslangic=None) -> pd.DataFrame:
     stratejiler = list(stratejiler) if stratejiler is not None else sorted(tum_portfoy_stratejileri())
     bilinmeyen = [s for s in stratejiler if s not in tum_portfoy_stratejileri()]
     if bilinmeyen:
@@ -448,7 +477,8 @@ def wf_portfoy(etiket: str, stratejiler: Optional[Iterable[str]] = None, evren: 
         print(f"[wfp] {etiket}: toplam {len(tum)} görev, bitmiş {len(tum) - len(kalan)}, kalan {len(kalan)}", flush=True)
     ayar = {"veri_dizini": veri_dizini, "baslangic": baslangic, "bitis": bitis, "izgara": izgara,
             "egitim_gun": egitim_gun, "test_gun": test_gun, "min_islem": min_islem, "min_gun": min_gun,
-            "cikti_dizini": cikti_dizini, "etiket": etiket, "maliyet_carpani": maliyet_carpani, "evrenler": evrenler}
+            "cikti_dizini": cikti_dizini, "etiket": etiket, "maliyet_carpani": maliyet_carpani, "evrenler": evrenler,
+            "min_kapsama": min_kapsama, "analiz_baslangic": analiz_baslangic}
     yeni, bekleyen = [], []
     t0 = time.perf_counter()
 
@@ -503,9 +533,13 @@ def main(argv=None):
     ap.add_argument("--hatalari-yeniden", action="store_true")
     ap.add_argument("--maliyet-carpani", type=float, default=1.0)
     ap.add_argument("--izgara-yok", action="store_true")
+    ap.add_argument("--min-kapsama", type=float, default=MIN_KAPSAMA,
+                    help="analiz başlangıcı: evrenin bu oranının verisi başlamış olmalı (0 = en erken sembol)")
+    ap.add_argument("--baslangic", default=None, help="analiz başlangıcını elle ver (YYYY-MM-DD); kapsamayı ezer")
     a = ap.parse_args(argv)
     s = wf_portfoy(a.etiket, a.stratejiler, a.evren, a.semboller, a.tf, a.surec, hatalari_yeniden=a.hatalari_yeniden,
-                   maliyet_carpani=a.maliyet_carpani, izgara=not a.izgara_yok)
+                   maliyet_carpani=a.maliyet_carpani, izgara=not a.izgara_yok,
+                   min_kapsama=a.min_kapsama, analiz_baslangic=a.baslangic)
     if len(s):
         print(f"geçen: {int(s['gecti'].sum())}/{len(s)}  hatalı: {int((s['hata'] != '').sum())}  "
               f"atlanan: {int(s['atlandi'].fillna(False).sum()) if 'atlandi' in s else 0}")

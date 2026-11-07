@@ -4,3 +4,13 @@
 {"zaman": "2026-11-07T03:20:10.143853+00:00", "strateji": "pf__wq_alfa", "sembol": "kripto", "aralik": "1d", "kombinasyon_sayisi": 15, "pencere_sayisi": 7, "toplam_kosu": 15}
 {"zaman": "2026-11-07T03:20:21.942164+00:00", "strateji": "pf__ibs_donus", "sembol": "hepsi", "aralik": "1d", "kombinasyon_sayisi": 27, "pencere_sayisi": 32, "toplam_kosu": 27}
 {"zaman": "2026-11-07T03:20:24.499895+00:00", "strateji": "pf__kesit_ls", "sembol": "kripto", "aralik": "1d", "kombinasyon_sayisi": 41, "pencere_sayisi": 7, "toplam_kosu": 41}
+{"zaman": "2026-11-07T04:00:44.939467+00:00", "strateji": "pf__btc_hedge", "sembol": "hepsi", "aralik": "1d", "kombinasyon_sayisi": 18, "pencere_sayisi": 13, "toplam_kosu": 18}
+{"zaman": "2026-11-07T04:01:11.280866+00:00", "strateji": "pf__ibs_donus", "sembol": "hepsi", "aralik": "1d", "kombinasyon_sayisi": 27, "pencere_sayisi": 13, "toplam_kosu": 27}
+{"zaman": "2026-11-07T04:01:27.331646+00:00", "strateji": "pf__ref_filtreli_long", "sembol": "hepsi", "aralik": "1d", "kombinasyon_sayisi": 20, "pencere_sayisi": 13, "toplam_kosu": 20}
+{"zaman": "2026-11-07T04:02:14.816158+00:00", "strateji": "pf__rotasyon", "sembol": "hepsi", "aralik": "1d", "kombinasyon_sayisi": 38, "pencere_sayisi": 13, "toplam_kosu": 38}
+{"zaman": "2026-11-07T04:02:34.637240+00:00", "strateji": "pf__kesit_ls", "sembol": "hepsi", "aralik": "1d", "kombinasyon_sayisi": 41, "pencere_sayisi": 13, "toplam_kosu": 41}
+{"zaman": "2026-11-07T04:02:36.444707+00:00", "strateji": "pf__sabit_sepet", "sembol": "hepsi", "aralik": "1d", "kombinasyon_sayisi": 21, "pencere_sayisi": 13, "toplam_kosu": 21}
+{"zaman": "2026-11-07T04:03:10.607438+00:00", "strateji": "pf__ref_filtreli_long", "sembol": "hisse", "aralik": "1d", "kombinasyon_sayisi": 1, "pencere_sayisi": 13, "toplam_kosu": 1}
+{"zaman": "2026-11-07T04:11:46.653207+00:00", "strateji": "pf__kanarya", "sembol": "hisse_emtia", "aralik": "1d", "kombinasyon_sayisi": 24, "pencere_sayisi": 13, "toplam_kosu": 24}
+{"zaman": "2026-11-07T04:11:47.371381+00:00", "strateji": "pf__ref_filtreli_long", "sembol": "hisse_emtia", "aralik": "1d", "kombinasyon_sayisi": 1, "pencere_sayisi": 13, "toplam_kosu": 1}
+{"zaman": "2026-11-07T04:11:57.056625+00:00", "strateji": "pf__trend_sepet", "sembol": "hisse_emtia", "aralik": "1d", "kombinasyon_sayisi": 18, "pencere_sayisi": 13, "toplam_kosu": 18}

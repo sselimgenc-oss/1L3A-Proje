@@ -120,6 +120,8 @@ Ana ders: önceki sonuçlar OOS'a bakılarak seçilmiş ve kâr birkaç işlemde
 - 2026-11-07: Portföy sonuçları: kripto 5/15 karar 24, sağlamlıkta yalnız pf__kesit_ls (sınırda, p=0.03); hepsi evreni
   1/15 (ibs_donus), sağlamlıkta rastgele kıyastan kaldı. Karar: "hepsi" evreninde OOS 2009'dan başlıyor (yalnız altın
   varken) → portföy koşularında başlangıç, evrendeki sembollerin çoğunun (≥ %75) verisi olduğu tarihe çekilir; v3 ile tekrar.
+  v3 sonucu (OOS 2019-01 → 2025-06; emtia 2014 →): sağlam = hepsi: pf__rotasyon (Sharpe 1.12), pf__btc_hedge (0.92);
+  hisse_emtia: pf__kanarya (1.60, maliyet×2'de 1.55). Al-tut Sharpe ~1.1 (Mag7 boğası); yalnız kanarya belirgin üstün.
 
 ## Kullanıcıyı bekleyen kararlar
 - Scalp: kriptoda walk-forward'ı geçen 0. Karar 11'e göre geçen yoksa scalp ajanı kapanır — TradFi sonuçlarından sonra karar.
