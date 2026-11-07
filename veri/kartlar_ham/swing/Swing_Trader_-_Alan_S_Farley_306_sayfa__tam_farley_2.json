@@ -1,0 +1,674 @@
+[
+  {
+    "kart_id": "swing__ikili-giris-dikdortgen__farley",
+    "ad": "İkili Giriş: Dar Dikdörtgenin İki Ucuna Çift Yönlü Emir",
+    "stil": "swing",
+    "kaynak": {
+      "pdf": "Swing_Trader_-_Alan_S_Farley_306_sayfa.pdf",
+      "sayfalar": [
+        154,
+        155,
+        156,
+        157
+      ]
+    },
+    "ozet": "Dar ve iyi tanımlı destek-direnç içeren dikdörtgen/konsolidasyonda yön tahmin edilmez; aralığın hemen üstüne alım, hemen altına açığa satış tetikleyicisi kurulur, fiyat hangi tarafa kırarsa o yönde girilir. Stop desen genişliğinin %15-20'si hesabıyla kırılma seviyesinin geri tarafına konur.",
+    "kategori": "kirilim",
+    "piyasa_rejimi": "yatay",
+    "orijinal_piyasa": "hisse",
+    "zaman_dilimi": {
+      "islem": "1d",
+      "ust_filtre": null
+    },
+    "gostergeler": [
+      {
+        "ad": "Destek/direnç dikdörtgeni",
+        "parametreler": {
+          "genislik": "üst-alt arası fark"
+        }
+      },
+      {
+        "ad": "EMA",
+        "parametreler": {
+          "periyot": 50,
+          "not": "örnekte bağlam göstergesi, zorunlu değil"
+        }
+      }
+    ],
+    "long_giris": [
+      "Dikdörtgen üst sınırının hemen dışına (örnekte ~37,40, aralık 35-37) alım tetikleyici (limit/stop) emri; fiyat bu seviyeyi aşınca long",
+      "Üç unsur birlikte aranır: iyi tanımlı destek-direnç, iki tarafta da olumlu ödül:risk, iki tarafta da temiz fiyat tetikleyicisi (s.156)"
+    ],
+    "short_giris": [
+      "Dikdörtgen alt sınırının hemen dışına (örnekte ~34,80) açığa satış tetikleyici emri; fiyat bu seviyeyi kırınca short",
+      "Alternatif: emir koymadan gerçek zamanlı izleyip bir taraf yol verdiği anda girmek (s.157)"
+    ],
+    "stop_loss": "Desen genişliğinin %15-20'si hesaplanır; stop kırılma/bozulma seviyesinin bu kadar geri tarafına (desenin içine doğru) konur. Örnekte genişlik ~2 puan, %15-20 = 30-40 sent; long stop ~36,80, short stop ~35,50 (s.157).",
+    "kar_al": "Sonraki destek/direnç veya önceki salınım dibi/zirvesi; örnekte aşağı yönde 31'deki düşük salınım testi anılır (s.157). Genel kural: hedeflenen kazanç, riskin en az 3 katı olmalı (s.153-154, 190).",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Dar aralık, iki ucu da net S/R; yönde önyargı kurulmaz",
+      "İki tarafın ödül:risk oranı birbirine yakın değilse (tek taraf cazip) kurulum uygun sayılmaz (s.155-156)"
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Giriş tetiği (aralık dışı) ve stop hesabı mekanik; 'iyi tanımlı/dar aralık' ve hedef seçimi öznel olduğundan makul varsayımla kodlanır."
+    },
+    "belirsizlikler": [
+      "Aralık 'dar' eşiği kitapta yok (öneri: aralık yüksekliği / ATR veya Bollinger bant genişliği persentili ile ölçmek; kural değil)",
+      "Bir taraf tetiklenince karşı emrin iptal edildiği (OCO) kitapta açık yazmıyor",
+      "Örnek rakamlar (37,40/36,80, 34,80/35,50) %15-20 hesabıyla tam örtüşmüyor; stop referansının 'kırılma seviyesi' mi 'giriş fiyatı' mı olduğu belirsiz",
+      "Aralığın minimum süresi/dokunuş sayısı ve hedef kuralı yok",
+      "Kitapta bu bölüm Master Swing Trader'a gönderme yapar; 'başarısız sinyalin başarısızlığı' ifadesi metinde bozuk çeviriyle geçer"
+    ],
+    "uyumluluk_notu": "Aralık/stop/tetik her piyasada kodlanır; hacim şart değil. 1d'de kripto ve TradFi'ye uyarlanır. Kitap örneği ABD hisse günlük grafiği.",
+    "varyantlar": [
+      "Aynı ikili mantık gün içi ilk saat aralığına uygulanır (bkz. mevcut daytrade ilk-saat kartı ve bosluk-gunu kartı)",
+      "Mosaic örneğinde (s.158-161) iki yönün de teknik yakınsaması (50 EMA'lar, Fibonacci %38-%50) ek güven olarak aranır"
+    ],
+    "anahtar_kelimeler": [
+      "ikili-giris",
+      "dikdortgen",
+      "konsolidasyon",
+      "iki-tarafli",
+      "kirilim",
+      "kaya-ve-sert-yer"
+    ]
+  },
+  {
+    "kart_id": "swing__fibonacci-kademeli-alim__farley",
+    "ad": "Fibonacci Geri Çekilme Izgarasıyla Kademeli Alım (Nordstrom Örneği)",
+    "stil": "swing",
+    "kaynak": {
+      "pdf": "Swing_Trader_-_Alan_S_Farley_306_sayfa.pdf",
+      "sayfalar": [
+        187,
+        188,
+        189,
+        190,
+        191,
+        290,
+        291
+      ]
+    },
+    "ozet": "Güçlü yükseliş dalgasından sonra geri çekilmede tek seferde değil üç limit emirle alınır (örnekte 300 hisse %38, 300 hisse %50, 600 hisse %62); ortalama giriş %50 geri çekilmenin altında kalır. Üçüncü dolumdan sonra stop girilir; hedef salınımın başladığı zirvedir.",
+    "kategori": "ortalamaya_donus",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "hisse",
+    "zaman_dilimi": {
+      "islem": "1d",
+      "ust_filtre": null
+    },
+    "gostergeler": [
+      {
+        "ad": "Fibonacci geri çekilme",
+        "parametreler": {
+          "seviyeler": [
+            0.38,
+            0.5,
+            0.62
+          ],
+          "cikis_siniri": 0.78
+        }
+      }
+    ],
+    "long_giris": [
+      "Önce güçlü bir yükseliş dalgası olmalı; toplam planlanan boyutun örnekte 1200 hissenin: 300'ü %38, 300'ü %50, 600'ü %62 geri çekilme seviyesine limit alım emri olarak yerleştirilir (s.188)",
+      "Dolumlar fiyat gerçekten bu seviyelere inerse gerçekleşir; hepsinin dolması şart değildir (A: üçü de, B: üçü de ama derin, C: yalnız ilk ikisi) (s.188-190)",
+      "Fibonacci seviyeleri tek başına değil, diğer destekle (hareketli ortalama, trend çizgisi, boşluk) çapraz doğrulanarak seçilir (s.296-297'deki çıkış mantığıyla tutarlı)"
+    ],
+    "short_giris": [
+      "Düşüş dalgası sonrası yukarı geri çekilmede ayna: aynı oranlarla kademeli satış"
+    ],
+    "stop_loss": "Üçüncü dolumdan hemen sonra stop girilir; örnekte stop ~%70 geri çekilme civarına konur, fiyat %78 geri çekilmeye inerse işlemden çıkılır (s.188). Kitaptaki ifade belirsiz: stop seviyesi %70 mi %78 mi net değil.",
+    "kar_al": "Salınımın başladığı zirve (örnekte 17,73); ortalama girişten bir sonraki direnç (kâr) mesafesi, stopa (risk) mesafenin en az 3 katı olmalı, değilse ortalama almama (s.190).",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Ortalama giriş fiyatından sonraki direnç / stop mesafesi ≥ 3:1 (s.190)",
+      "Yalnız önceden planlanmış kademeli giriş: kaybeden pozisyona umutla ekleme (dolar maliyet ortalaması kötü ikizi) değildir; plan ve kaçış yolu önceden belirlenir (s.190)",
+      "Sıkı stop şart (s.190)"
+    ],
+    "pozisyon_risk": "Boyut: hedef boyutun %25/%25/%50'si; toplam risk normal işlem riskini aşmaz. Yüksek oynaklıklı hisselerde boyut azaltılır (s.187).",
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Seviyeler, boyut dağılımı ve R:R eşiği mekanik; stop yeri belirsiz ve 'güçlü dalga' tanımı yok, makul varsayımla kodlanır."
+    },
+    "belirsizlikler": [
+      "Stop seviyesi: %70 mi %78 mi (metin 'kırılmaları önlemek için %70 civarına koy ama %78'e düşerse çık' diyor)",
+      "'Güçlü yükseliş dalgası' için minimum büyüklük/ATR eşiği yok",
+      "Dalga başlangıç/bitiş noktalarının (swing) tanımı yok; ZigZag veya fraktal gibi bir kural önerilebilir ama kitapta yok",
+      "Hedef için tek nokta (salınım başı) verilmiş, kısmi kâr kuralı yok"
+    ],
+    "uyumluluk_notu": "Limit emir ızgarası her piyasada kodlanır. Kripto/TradFi'de 1d-4h dalga ölçeğinde denenir. Mevcut kart 'swing__fibonacci-62-78-kamci__farley' (kamçı onayı) ile aynı oranlar kullanılır ama giriş mantığı farklı (limit ızgarası vs sinyal).",
+    "varyantlar": [
+      "Parabolik yükselişlerde %38 geri çekilme gelmeyebilir: parabolik ralli içindeki küçük konsolidasyonda normal riskin yarısı ile giriş, stop son girişin hemen altı; stop vurulursa kalan yarım riskle yeniden kurulum (s.190)",
+      "Apple ölçeklendirme örneği: 500 hisse iki haftalık yüksek kırılımında, 300 hisse %62 geri çekilmede, 200 hisse 60dk trend çizgisi desteğinde (toplam 1000, ort. 148,90); savunma modunda yalnız iki parça (s.290-291)",
+      "Azalan boyutlu 3-4 parça ortalamayı stopa yakın tutar; eşit boyutlu parça ise daha az kontrol sağlar (s.289-290)"
+    ],
+    "anahtar_kelimeler": [
+      "fibonacci",
+      "kademeli-giris",
+      "olceklendirme",
+      "geri-cekilme",
+      "limit-emir",
+      "ortalama-giris"
+    ]
+  },
+  {
+    "kart_id": "swing__haftalik-uzaktan-kademeli-giris__farley",
+    "ad": "Haftalık Grafikte Uzaktan Kademeli Giriş (Destek Kenarına Limit)",
+    "stil": "swing",
+    "kaynak": {
+      "pdf": "Swing_Trader_-_Alan_S_Farley_306_sayfa.pdf",
+      "sayfalar": [
+        197,
+        198,
+        199,
+        200
+      ]
+    },
+    "ozet": "Piyasayı izleyemeyen tüccar için haftalık grafikte kırılma sonrası yatay aralığın alt yarısında, destek yakınında birkaç hafta boyunca küçük parçalarla alım veya destek kenarına tek limit emir; stop yan desenin hemen altına konur.",
+    "kategori": "destek_direnc",
+    "piyasa_rejimi": "yatay",
+    "orijinal_piyasa": "hisse",
+    "zaman_dilimi": {
+      "islem": "1w",
+      "ust_filtre": null
+    },
+    "gostergeler": [
+      {
+        "ad": "Bollinger",
+        "parametreler": {
+          "periyot": 20,
+          "sapma": 2,
+          "zaman_dilimi": "haftalık"
+        }
+      },
+      {
+        "ad": "Stokastik",
+        "parametreler": {
+          "k": 5,
+          "d": 3,
+          "yavaslatma": 3,
+          "zaman_dilimi": "haftalık"
+        }
+      }
+    ],
+    "long_giris": [
+      "Haftalık grafikte çıkış sonrası yan işlem aralığına düşüşte, aralığın alt yarısı ve destek yakınında 3 küçük pozisyon: örnekte 75, 74 ve 73'te birer parça (ort. ~74), birkaç hafta içinde (s.197)",
+      "Alternatif: desteğin kenarına (örnekte 73) tek limit emir; ya da emri ikiye bölüp desteğin iki yanına koymak (s.197-198)",
+      "Girişler büyük ölçekli destek/dirençle hizalanır; haftalık Bollinger ve haftalık 5-3-3 stokastik giriş-çıkış zamanını gösterir (s.199)"
+    ],
+    "short_giris": [
+      "Kitap yalnız alım örneği verir; ayna short için ayrı kural yok"
+    ],
+    "stop_loss": "Yan desenin hemen altı (örnekte 72); stoplar gevşek tutulur, mevcut salınımın dışında (s.197, 199).",
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Yalnız limit emir; momentum kovalamayan, hafta sonu emir verilen düzen (s.200)",
+      "Yavaş hareket eden hisseler ve mümkünse ETF'ler tercih edilir; küçük pozisyon, marj yok (s.199)",
+      "Önemli salınımları görmek için 10-15 yıl geriye bakılır (s.199)"
+    ],
+    "pozisyon_risk": "Küçük pozisyon boyutu; boyut risk eşiğini belirler, giriş fiyatı konusunda aşırı hassas olunmaz (s.200)",
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Giriş (destek kenarı limit) ve stop (desen altı) tanımlı ancak hedef/çıkış kuralı yok; seviye seçimi özneldir."
+    },
+    "belirsizlikler": [
+      "Hedef/çıkış kuralı yok",
+      "'Alt yarı/destek yakını' ölçüsü ve parça sayısı/aralığı örneğe bağlı",
+      "Bollinger ve stokastik değerlerinin giriş koşulu olarak hangi eşikle kullanılacağı belirtilmemiş",
+      "Kısa tarafı yok"
+    ],
+    "uyumluluk_notu": "Haftalık TF 5dk kuralından bağımsız; kripto ve TradFi'de 1w limit emri kodlanır. Bu çıkış kuralsız kurulum tek başına backtest edilebilir olmaz; çıkış modülü ile eşlenmelidir.",
+    "varyantlar": [],
+    "anahtar_kelimeler": [
+      "haftalik",
+      "uzaktan-ticaret",
+      "kademeli-giris",
+      "destek",
+      "limit-emir",
+      "bollinger"
+    ]
+  },
+  {
+    "kart_id": "swing__devam-boslugu-geri-test__farley",
+    "ad": "Devam Boşluğuna Geri Çekilme Limit Girişi",
+    "stil": "swing",
+    "kaynak": {
+      "pdf": "Swing_Trader_-_Alan_S_Farley_306_sayfa.pdf",
+      "sayfalar": [
+        247,
+        248,
+        249
+      ]
+    },
+    "ozet": "Trend içinde üç trend dalgası sayıldıktan sonra, ralli/satışın yaklaşık ortasında (%50 civarı) oluşan devam boşluğu desteği/direnci olarak kullanılır; fiyat boşluğa geri gelince sınırları içine limit emir verilir.",
+    "kategori": "destek_direnc",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "hisse",
+    "zaman_dilimi": {
+      "islem": "1d",
+      "ust_filtre": null
+    },
+    "gostergeler": [
+      {
+        "ad": "Boşluk (gap)",
+        "parametreler": {
+          "tur": "devam"
+        }
+      },
+      {
+        "ad": "Dalga sayımı/ölçüm",
+        "parametreler": {
+          "dalga_sayisi": 3,
+          "boşluk_konumu": "yaklaşık %50"
+        }
+      }
+    ],
+    "long_giris": [
+      "Yukarı veya aşağı en az üç ayrı trend dalgası sayılır; ralli/satış başlangıçtan sona ölçülür ve boşluğun yaklaşık %50 civarında olup olmadığına bakılır (üç dalga uyuyorsa tam yer şart değil) (s.248)",
+      "Fiyat boşluğa geri çekilince boşluğun sınırları içine limit alım emri; geri çekilme boşluğun yakınında 'tuğla duvara' çarpıp sert dönmelidir (s.249)",
+      "Savunmacı sürüm: fiyat boşluğa girene kadar bekle, sonra trend yönünde güçlü hareket görünce gir (s.249)"
+    ],
+    "short_giris": [
+      "Aşağı trendde ayna: boşluğa yükselişte limit satış"
+    ],
+    "stop_loss": null,
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Devam boşluğunda trend dalga sayımı gerekir; boşluk trend dalgasının ~%50'si civarında olmalı (s.248)"
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Boşluk ve dalga sayımı kodlanabilir ama dalga sayımı özneldir; stop ve hedef verilmemiştir."
+    },
+    "belirsizlikler": [
+      "Stop ve hedef kitapta yok (girişten sonra yönetim başka bölümlerde)",
+      "Trend dalgasının tanımı (swing algoritması) yok",
+      "Boşluk doldurulmadan önce kaç mum geçebileceği (kitap: trend dönmeden boşluk birkaç bar dolabilir) sayısal değil"
+    ],
+    "uyumluluk_notu": "Boşluk yalnız seans ayrımı olan piyasalarda (ABD hisse TradFi, WTI/XAU vb.) tanımlı; 7/24 kriptoda uygulanamaz. 1d ölçekli. Bu kart tek başına çıkış kuralı içermez; çıkış modülüne bağlanmalı.",
+    "varyantlar": [],
+    "anahtar_kelimeler": [
+      "devam-boslugu",
+      "bosluk",
+      "geri-cekilme",
+      "limit-emir",
+      "dalga-sayimi"
+    ]
+  },
+  {
+    "kart_id": "swing__kopus-boslugu-bayrak-geri-cekilme__farley",
+    "ad": "Kopuş Boşluğu Sonrası Aralık Kırılımı veya Bayrak Geri Çekilmesi",
+    "stil": "swing",
+    "kaynak": {
+      "pdf": "Swing_Trader_-_Alan_S_Farley_306_sayfa.pdf",
+      "sayfalar": [
+        246,
+        247
+      ]
+    },
+    "ozet": "Yeni trende girişte oluşan kopuş boşluğunda hemen takip edilmez; ya boşluk sonrası aralığın gelişmesi beklenip yeni trend yönünde kırılımda girilir ya da boşluğu içeren dalganın %50'si veya daha azını izleyen düşük hacimli karşı hareket (bayrak) sonunda girilir.",
+    "kategori": "kirilim",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "hisse",
+    "zaman_dilimi": {
+      "islem": "1d",
+      "ust_filtre": null
+    },
+    "gostergeler": [
+      {
+        "ad": "Boşluk (gap)",
+        "parametreler": {
+          "tur": "kopuş"
+        }
+      },
+      {
+        "ad": "Hacim",
+        "parametreler": {
+          "not": "karşı hareket düşük hacimli"
+        }
+      }
+    ],
+    "long_giris": [
+      "Yöntem 1: boşluk sonrası aralığın oluşmasını bekle, kırılımı yeni trend yönünde işlem yap (s.247)",
+      "Yöntem 2: kopuş sonrası düşük hacimli karşı hareket (bayrak) boşluğu içeren trend dalgasının %50'sini veya daha azını geri alır; karşı dalga boşluk doldurma seviyesine kadar giderse oradan gir veya bayrağın kırılımını bekle (s.247)"
+    ],
+    "short_giris": [
+      "Aşağı kopuşta ayna: düşük hacimli sıçramayı sat / bayrak kırılımında short"
+    ],
+    "stop_loss": null,
+    "kar_al": "Ana trend yeniden etkinleştiğinde kırılma zirvesinin çok üstüne / satış dibinin çok altına gitmelidir (hedef için sayısal değil) (s.247)",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Karşı hareketin hacmi düşük olmalı",
+      "Bayrak boşluğu içeren dalganın ≤%50'sini geri almalı"
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Boşluk ve %50 geri çekilme ölçülebilir; stop/hedef verilmemiş, bayrak tespiti özneldir."
+    },
+    "belirsizlikler": [
+      "Stop ve hedef yok",
+      "Düşük hacmin eşiği yok",
+      "'Aralık' süresi/bar sayısı yok"
+    ],
+    "uyumluluk_notu": "Boşluk yalnız seans ayrımı olan piyasalarda tanımlı; 7/24 kriptoda boşluk yok (büyük tek mum kopuşu analojisi için kitapta dayanak yok).",
+    "varyantlar": [],
+    "anahtar_kelimeler": [
+      "kopus-boslugu",
+      "bayrak",
+      "bosluk",
+      "geri-cekilme",
+      "aralik-kirilimi"
+    ]
+  },
+  {
+    "kart_id": "swing__tukenme-boslugu-tersleme__farley",
+    "ad": "Tükenme Boşluğu Sonrası Ters Yönde İşlem",
+    "stil": "swing",
+    "kaynak": {
+      "pdf": "Swing_Trader_-_Alan_S_Farley_306_sayfa.pdf",
+      "sayfalar": [
+        246,
+        249,
+        250
+      ]
+    },
+    "ozet": "Uzun yükseliş/satış ve parabolik hızlanmadan sonra beklenmedik bir tükenme boşluğu çıkarsa, boşluktan önceki trendin tersi yönünde işlem açılır; bu büyük boşluklar dolduğunda genellikle trend sonu işaretidir.",
+    "kategori": "ortalamaya_donus",
+    "piyasa_rejimi": "volatil",
+    "orijinal_piyasa": "hisse",
+    "zaman_dilimi": {
+      "islem": "1d",
+      "ust_filtre": null
+    },
+    "gostergeler": [
+      {
+        "ad": "Boşluk (gap)",
+        "parametreler": {
+          "tur": "tükenme"
+        }
+      }
+    ],
+    "long_giris": [
+      "Uzun bir yükselişin ardından ortaya çıkan tükenme boşluğunu kenardan izle ve boşluktan önceki trendin ters yönünde (short) işleme gir (s.250)"
+    ],
+    "short_giris": [
+      "Uzun bir satışın ardından tükenme boşluğu çıkarsa long (ayna)"
+    ],
+    "stop_loss": null,
+    "kar_al": "Boşluğun dolması / ana trendin sonu; sayısal yok",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Parabolik hareket sonrası",
+      "Kayıtsızlık/korku uçlarında (düşük/yüksek alım-satım oranları) zayıf ellerin sarsıldığı son aşama"
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Parabolik hareket ve boşluk büyüklüğü kodlanabilir ama zamanlama ve çıkış kuralları yok."
+    },
+    "belirsizlikler": [
+      "Giriş zamanlaması: boşluk günü mü, doldurma sonrası mı (metin 'boşluk doldurulduğunda trend sonu' diyor, net değil)",
+      "Stop ve hedef yok",
+      "Tükenme boşluğunun kopuş/devam boşluğundan ayrımı sonradan ancak görülür (geriye dönük kimlik)"
+    ],
+    "uyumluluk_notu": "Seans boşluğu gerektirir; 7/24 kriptoda tanımsız. Boşluğun türü ancak geriye bakınca belli olduğu için canlı kodlama riskli (bakış-ileri yanlılığı).",
+    "varyantlar": [],
+    "anahtar_kelimeler": [
+      "tukenme-boslugu",
+      "parabolik",
+      "trend-sonu",
+      "bosluk",
+      "ters-islem"
+    ]
+  },
+  {
+    "kart_id": "swing__durulama-stop-avi-donusu__farley",
+    "ad": "Çok Günlü Durulama: Ortak Destek Kırılıp Geri Alınınca Giriş (Stop Avı Sonrası)",
+    "stil": "swing",
+    "kaynak": {
+      "pdf": "Swing_Trader_-_Alan_S_Farley_306_sayfa.pdf",
+      "sayfalar": [
+        212,
+        215,
+        253,
+        254
+      ]
+    },
+    "ozet": "Fiyat 50 günlük EMA gibi ortak desteği kısa süre kırıp kötü kapanır, sonra desteğin üstüne geri çıkarak geç satıcıları tuzağa düşürürse (veya bir hafta kadar altında gezinip daha yükseğe fırlarsa) durulama tamamlanmıştır; ters yönde giriş yapılır, stop sıçramanın hemen ötesine konur.",
+    "kategori": "ortalamaya_donus",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "hisse",
+    "zaman_dilimi": {
+      "islem": "1d",
+      "ust_filtre": null
+    },
+    "gostergeler": [
+      {
+        "ad": "EMA",
+        "parametreler": {
+          "periyot": 50
+        }
+      }
+    ],
+    "long_giris": [
+      "Birkaç gün satış sonrası fiyat büyük bir destek seviyesine (örn. 50 günlük EMA) ulaşır, bir sonraki seansta destek kırılır ve kötü kapanır (s.254)",
+      "Fiyat desteğin üzerine geri çıktığında (veya bir haftaya kadar hareketli ortalamanın altında gezinip daha yükseğe fırladığında) long giriş (s.254)",
+      "Stop-avı girişi: yaygın stop seviyeleri (trend çizgisi, yuvarlak sayı, hareketli ortalama) temizlenene kadar kenarda dur, ivme azaldığında hemen gir; stop durulamanın aşırı seviyesinin bir tik ötesine (s.215)"
+    ],
+    "short_giris": [
+      "Yükseliş trendinde direncin kısa süreli aşılması ve geri dönüşle ayna short"
+    ],
+    "stop_loss": "Durulama aşırı seviyesinin bir tik ötesi (long için sıçrama dibinin bir tik altı) (s.215). Yaygın seviyelerde (trend çizgisi, yuvarlak sayı, MA) stop konmaz (s.210, 214).",
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Dengesizlik 3-5 seans sürer, sonra yeni para dengeyi kurar (s.253)",
+      "Durulama günlük grafikte çekiç veya doji mumu bırakabilir; bu yöntem aralığın karşı tarafına doğru sert çıkış için uygun koşul olarak anlatılır (s.252-253)",
+      "Stoplar yaygın yerlerden uzak tutulur"
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Destek kırılıp geri alınması ve çekiç/doji tespiti kodlanabilir; hedef yok, 'kötü kapanış', 'ivme azalması' özneldir."
+    },
+    "belirsizlikler": [
+      "Hedef/çıkış kuralı yok",
+      "'Kötü kapanış' ve 'ivme azalması' ölçüsü yok",
+      "Kırılımın geri alınması için kaç gün tanınacağı (bir hafta) yaklaşık",
+      "Karşı tarafa kırılım iddiası (aralığın diğer ucunda sert çıkış) kanıtsız; test edilmeli",
+      "Chevron örneğinde (s.212) giriş rakamları görsel; metinde sayısal tetik yok"
+    ],
+    "uyumluluk_notu": "Günlük ölçekte kriptoda ve TradFi'de denenebilir. İddia stop-avı davranışına dayanır, kanıtsız; test gerekir. 50 EMA kartı ile (mevcut) birlikte düşünülmeli.",
+    "varyantlar": [
+      "Gün içi sürümü ayrı kartta (daytrade__aralik-durulama-gun-ici-tersine__farley)"
+    ],
+    "anahtar_kelimeler": [
+      "durulama",
+      "stop-avi",
+      "ema-50",
+      "sahte-kirilim",
+      "cekic",
+      "doji"
+    ]
+  },
+  {
+    "kart_id": "swing__stop-sonrasi-yeniden-giris__farley",
+    "ad": "Stop Sonrası Yeniden Giriş (Başarısız Sinyalin Başarısızlığı)",
+    "stil": "swing",
+    "kaynak": {
+      "pdf": "Swing_Trader_-_Alan_S_Farley_306_sayfa.pdf",
+      "sayfalar": [
+        167,
+        209,
+        210,
+        293,
+        294,
+        295
+      ]
+    },
+    "ozet": "Pozisyon stop ile sarsıldıktan sonra tez hâlâ geçerliyse yeniden girilir: örneğin 50 EMA'dan alım stop olduktan sonra fiyat uzun bacaklı çekiçle toparlayıp 50 EMA'yı yeniden aşarsa yeniden alınır; stop yeni dönüş çubuğunun dibinin altına konur. Her giriş kendi başına yeni analiz ve hedef gerektirir.",
+    "kategori": "diger",
+    "piyasa_rejimi": "herhangi",
+    "orijinal_piyasa": "hisse",
+    "zaman_dilimi": {
+      "islem": "1d",
+      "ust_filtre": "60m"
+    },
+    "gostergeler": [
+      {
+        "ad": "EMA",
+        "parametreler": {
+          "periyot": 50
+        }
+      },
+      {
+        "ad": "NR7 (dar aralıklı çubuk)",
+        "parametreler": {
+          "not": "Apple örneğinde kısa vadeli stop referansı"
+        }
+      }
+    ],
+    "long_giris": [
+      "Kayıp işlemin ardından fiyat tersine dönüp önceki giriş sinyalini yeniden verirse (örn. 50 EMA'yı yeniden aşar) yeniden gir; risk gereksinimleri yeniden karşılanmalıdır (s.293)",
+      "Schlumberger: 50 EMA'ya satış sırasında alım, stop ilk geri çekilme dibinin altı; ertesi gün aşağı boşlukla stop; fiyat toparlayıp 50 EMA'yı yeniden geçince yeniden alım, stop kurtarma çubuğunun dibinin altına (s.293-294)",
+      "Apple (15dk): sıkışıktan NR7 çubuğunun hemen altına kısa vadeli stop A ile giriş; fiyat iki günün yükseği 135'i aşınca yeni giriş; testere sonrası daha yüksek dipte küçük çekiç mumunun altına stop B ile yeni giriş; temiz kırılımda boşluk doldurma seviyesinin hemen altına stop C (s.209)",
+      "NR7: dar aralıklı çubuğun karşı tarafına stop; yanıldıysan ve fiyat diğer yöne giderse bir sonraki dar aralık sinyalini bekleyip yeniden gir (s.167)"
+    ],
+    "short_giris": [
+      "Ayna kurulum: düşüş trendinde dirençten short ve stop sonrası yeniden short"
+    ],
+    "stop_loss": "Her giriş için kısa vadeli stop: NR7 çubuğunun karşı ucu, çekiç mumunun dibi veya boşluk doldurma seviyesinin hemen ötesi (s.209, 294).",
+    "kar_al": null,
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Yeniden giriş için her seferinde yeni analiz ve revize hedef; sonraki işlemlerin çoğu başarısız olur çünkü ilk sarsıntı gerçek bir trend değişimi olabilir (s.224)",
+      "Toplam kayıp risk toleransına ulaşana kadar yeniden girilir (s.209)"
+    ],
+    "pozisyon_risk": "Toplam kayıp, tek işlem başına risk limitini aşmayacak şekilde yeniden girişler toplamı sınırlanmalıdır (kitap: toplam kayıp risk toleransına ulaşıncaya kadar). Hesap kuralı kodda sert limitle zorunludur.",
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Yeniden giriş mantığı mekanik kodlanabilir (stop sonrası giriş sinyali tekrarı) ama dönüş tanımı özneldir; hedef ve kaç yeniden giriş yapılacağı sayısal değil."
+    },
+    "belirsizlikler": [
+      "Maksimum yeniden giriş sayısı kitapta yok (yalnız 'toplam kayıp risk toleransına kadar')",
+      "'Uzun bacaklı çekiç' ve 'toparlanma' ölçüsü yok",
+      "NR7 yeniden giriş maddesi kitapta yalnız birkaç cümle; sinyal tanımı Master Swing Trader'da",
+      "Yeniden girişte kısa vadeli stop mesafesi yüzde/ATR olarak verilmemiş"
+    ],
+    "uyumluluk_notu": "Yeniden giriş; backtestte komisyon+kayma çarpanını artırır. 7/24 kriptoda boşluk kaynaklı stoplar yok ama mantık geçerli. Mevcut 'swing__50ema-geri-cekilme__farley' kartının stop sonrası genişletmesi olarak görülmelidir.",
+    "varyantlar": [],
+    "anahtar_kelimeler": [
+      "yeniden-giris",
+      "stop-sonrasi",
+      "nr7",
+      "ema-50",
+      "kisa-vadeli-stop",
+      "cekic"
+    ]
+  },
+  {
+    "kart_id": "swing__uc-asamali-iz-suren-stop-cikis__farley",
+    "ad": "Üç Aşamalı Stop Yönetimi ve Hedef/Zaman Çıkışı (Yönetim Modülü)",
+    "stil": "swing",
+    "kaynak": {
+      "pdf": "Swing_Trader_-_Alan_S_Farley_306_sayfa.pdf",
+      "sayfalar": [
+        211,
+        212,
+        213,
+        215,
+        296,
+        297,
+        298,
+        299
+      ]
+    },
+    "ozet": "Giriş kuralı içermeyen yönetim kartı: ilk stop desenin bozulduğu yerde, sonra bir alt zaman dilimindeki konsolidasyonların arkasında iz süren stop, hedefin ~%75'inden sonra agresif iz; hedef eski boşluk/salınım/Fibonacci gibi çapraz doğrulanmış seviyelerde, zaman penceresi bitince çıkış.",
+    "kategori": "diger",
+    "piyasa_rejimi": "herhangi",
+    "orijinal_piyasa": "hisse",
+    "zaman_dilimi": {
+      "islem": "1d",
+      "ust_filtre": "60m"
+    },
+    "gostergeler": [
+      {
+        "ad": "SMA",
+        "parametreler": {
+          "periyot": 8,
+          "zaman_dilimi": "15m (büyük kırılımlarda 60m)"
+        }
+      },
+      {
+        "ad": "Fibonacci",
+        "parametreler": {
+          "seviye": 0.62,
+          "not": "son bacağın %62'si, çapraz doğrulamalı çıkış"
+        }
+      }
+    ],
+    "long_giris": [
+      "Bu kart giriş stratejisi değildir; yönetim/çıkış modülüdür ve başka bir giriş kartına eklenir"
+    ],
+    "short_giris": [],
+    "stop_loss": "Aşama 1: desenin bozulduğu yer. Yaygın seviyelerde (trend çizgisi, yuvarlak sayı, MA) stop konmaz; yüzde stoplardan kaçınılır. Reaktif momentum girişlerinde sabit tutarlı stop veya kısa vadeli MA stopu: 15dk grafikte 8 barlık SMA'yı ihlal edince çık; stop çok sık vuruluyorsa 60dk'da 8 barlık SMA (s.215).",
+    "kar_al": "Aşama 3 hedefi: ilk sağlam S/R engeli; eski dolmamış boşluk dolunca kör çıkış (özellikle geniş boşluk), son bacağın %62'si (kırık zirve, dolu boşluk, ihlal edilmiş MA ile çapraz doğrulama), hızlı fiyat çubuğu genişlemesinde (aşırı alım/satım) pozisyona ekleme yerine nakde çevirme (s.297-298). Hedef bir sonraki direnç öncesi ara engellerle kısaltılır (s.211).",
+    "iz_suren_stop": "Aşama 2: gün sonu grafikte işlem varsa 60dk deseni, 60dk grafikte işlem varsa 15dk deseni yukarı çek; her yeni seviye ve gün içi yatay desen oluştuğunda stopu desenin hemen arkasına taşı; pozisyon giriş-hedef mesafesinin ~%75'ine gelince agresif izle (s.213). Alternatif: fiyatın 10/15/20 sent gerisine iz süren stop (s.299, hisse için).",
+    "zaman_cikisi": "Zaman bazlı çıkış: elde tutma süresinin penceresi içinde hedefe ulaşmazsa pencere bitince kapat (s.296-297); sayısal süre kitapta yok.",
+    "filtreler": [
+      "Her kurulum, hedef ve bozulma noktası pozisyondan ÖNCE belirlenir (s.211, 279)",
+      "Kâra geçmeden stop sıkılaştırılmaz: yeni pozisyonun ilk evresinde kâr-zarar arası gidip gelmeye tahammül; kâr korumasına doğru zamanı gelene kadar geçilmez (s.212)"
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Aşamalar ve MA stopu mekanik kodlanabilir (alt TF konsolidasyon tespiti dışında); hedef seviyesi seçimi ve zaman penceresi sayısal değil."
+    },
+    "belirsizlikler": [
+      "Alt TF 'yatay desen' tespiti sayısal değil (öneri: son N mumun yüksek-düşük aralığı daralması; kural değil)",
+      "'Hedefin tam üstüne ikinci durak' ifadesi anlaşılmaz: yalnız 'kâr hedefinin üstüne ikinci bir durak girin, fiyat son noktaya ulaşırsa anında dolarsınız' deniyor; emrin türü net değil",
+      "Zaman çıkışı için gün/bar sayısı yok",
+      "Kâr hedefi seviye seçimi öznel",
+      "Sent bazlı iz (10/15/20) hisse fiyatına özgü; ATR çarpanına çevrilmesi kitapta yok"
+    ],
+    "uyumluluk_notu": "Çıkış modülleri havuzuna (13 modül) eklenebilir. 8-SMA 15dk stopu ve alt-TF iz mantığı 5dk-1h ölçeğinde kriptoda ve TradFi'de kodlanır; sent bazlı iz ATR'ye çevrilirse kitaptan sapma olur.",
+    "varyantlar": [
+      "Çıkışta kademe: pozisyonun bir kısmını sabah rallisinde, bir kısmını tepe formasyonunda, son kısmını öğleden sonra yükselişinde satmak (s.187)"
+    ],
+    "anahtar_kelimeler": [
+      "iz-suren-stop",
+      "uc-asamali-stop",
+      "hedef",
+      "bosluk-doldurma",
+      "fibonacci",
+      "alt-zaman-dilimi",
+      "8-sma"
+    ]
+  }
+]
