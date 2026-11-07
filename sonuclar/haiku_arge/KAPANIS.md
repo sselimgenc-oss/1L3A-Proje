@@ -1,6 +1,8 @@
-# Ar-Ge alt projesi (5 enstrüman) — kapanış notu
+# Ar-Ge alt projesi (5 enstrüman) — DURUM: DENETİM BEKLİYOR (kapatılmadı)
 
 Tarih: 2026-11-07. Dal: `claude/haiku-arge-5-enstruman`. Ana proje (`claude/adoring-maxwell-q7t60g`, 198bafd) değiştirilmedi.
+
+Not: Bu dosya önce "kapatıldı" diye yazılmıştı; karar denetçiye/kullanıcıya aittir. Kapanış kararı verilmedi.
 
 ## Ne yapıldı
 - Veri: BTCUSDT (Binance, 2019-12 → 2025-10), XAUUSD (Dukascopy saatlik 2019-12 → 2025-10; TradingView günlük/4s),
@@ -9,26 +11,22 @@ Tarih: 2026-11-07. Dal: `claude/haiku-arge-5-enstruman`. Ana proje (`claude/ador
 - Elenen havuz (120 strateji; karar 13'ü hiç geçmemiş) 5 enstrümanda WF: swing 420, daytrade 380, scalp 80 koşu.
   Geçen: swing 1 (altın günlük), daytrade 2 (XU30 saatlik). Scalp 0.
 - Sağlamlık: WF'de geçen 3 aday — 0 geçti.
-- Aşama 4 (sınırdaki adaylar, ön kayıtlı 12 varyant): WF'de 5 geçti, sağlamlıkta 5'i de kaldı → geliştirilemedi.
+- Aşama 4 (sınırdaki adaylar, ön kayıtlı 12 varyant): WF'de 5 geçti, sağlamlıkta 5'i de kaldı.
 
-## Sonuç
-- Bu 5 enstrümanda ve bu veri ile, elenen stratejilerden **sağlamlıktan geçen tek aday yok**.
-- En yakın adaylar (sağlamlıkta kıl payı): SPX günlük `rsi-ema-vol` (rastgele giriş p = 0.054, eşik 0.05).
-- XU30 saatlik sonuçları 2025-01 → 2025-09 (9 ay, ~50 işlem); daha uzun saatlik XU30 verisi bulunamadı.
-- Deneme kaydı: 787 kayıt (`deneme_kaydi.jsonl`). Çoklu test düzeltmesi için bu sayı kullanılmalı.
+## Denetçiye bırakılan sorular
+1. Bu 5 enstrümanda elenen stratejilerden sağlam aday var mı? (Bugünkü cevap: hayır.)
+2. Alt projeye devam mı, kapatma mı? (Karar denetçide/kullanıcıda.)
+3. XU30 saatlik için daha uzun veri aranacak mı? (Şu an yalnız 2024 →, 9 ay OOS.)
+4. Ana proje kararı (karar 22 evreni, kilit testi sonrası paper trading) bu alt proje sonucundan etkilenir mi? (Ben değiştirmedim.)
 
-## Neden kapatılıyor
-- Alt projenin amacı (elenenleri 5 enstrümanda test edip sağlam olanları bulmak) yerine getirildi; sonuç negatif.
-- Geliştirme yolu (varyant) denendi, ön kayıtlı kurallara göre sonuç vermedi.
-- Kalan tek umut XU30 saatlik veri; ama bu olsa bile, mevcut adaylar sağlamlıktan geçmedi.
+## Kanıt dosyaları
+- Walk-forward: `wf/haiku_elenen_swing.csv`, `wf/haiku_elenen_daytrade.csv`, `wf/haiku_elenen_scalp.csv`, `wf/haiku_varyant.csv`
+- Sağlamlık: `saglamlik/haiku_elenen_swing.parquet`, `saglamlik/haiku_varyant.parquet` ve daytrade çıktıları
+- Özetler: `SONUC_SWING.md`, `SONUC_OZET_2.md`, `SONUC_GELISTIRME.md`
+- Ön kayıt: `GELISTIRME_ON_KAYIT.md`
+- Deneme sayısı: `deneme_kaydi.jsonl` (787 kayıt; çoklu test düzeltmesi için kullanılmalı)
 
-## Ana projeyle ilişki
-- Ana projenin kilit testi (`sonuclar/kilit/RAPOR.md`) farklı bir evrende bir set geçirdi (tek-grafik +%17.8, Sharpe 1.21).
-  Ana proje bunu paper trading ile doğrulamayı planlıyor; bu alt projenin sonucu o kararı değiştirmez.
-- Ana projedeki karar 22 (evren) bu alt projeyle değiştirilmedi.
-
-## Yeniden açma koşulu
-- XU30 için ≥ 3 yıl saatlik veri bulunursa veya kullanıcı yeni bir enstrüman/yöntem isterse.
-
-## Çıktılar
-Tüm dosyalar bu klasörde ve dalda; hiçbiri silinmedi. Dal ve veri (`veri/mumlar/`, gitignore'lu) yerelde/dalda duruyor.
+## Sınırlar
+- XU30 saatlik OOS yalnız 2025-01 → 2025-09 (3 pencere, ~50 işlem); varyantlar aynı işlemleri paylaşıyor.
+- Dukascopy ve Yahoo'ya erişim hız sınırlı; TradingView/borsapy üçüncü taraf ve resmi API değil.
+- Kilit: BTC ve altın daha önce kilit testinde kullanıldı; temiz test dönemi kalmadı.
