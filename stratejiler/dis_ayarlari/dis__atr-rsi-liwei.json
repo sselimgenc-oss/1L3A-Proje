@@ -1,0 +1,19 @@
+[
+ {
+  "dis_id": "d11j:atr-rsi-momentum-yeni-periyot:atr22_rsi5",
+  "kaynak_dosya": "stratejiler/ek_kaynaklar/github_g2_kripto_bot.csv (AtrRsiStrategy / AtrRsi15Min)",
+  "parametreler": {
+   "atr_periyot": 22,
+   "atr_ort": 10,
+   "rsi_periyot": 5,
+   "rsi_esik": 16.0,
+   "norm_min": 0.0,
+   "norm_maks": 100.0,
+   "iz_yuzde": 0.8,
+   "hedef_long": 100.0,
+   "hedef_short": 50.0
+  },
+  "cikis_ayarlari": null,
+  "not": "ATR(22) > SMA(ATR,10), RSI(5)>66 long / <34 short; normalize ATR bandı kapalı (0-100); kaynakta hedef yok -> çok uzak hedef (long +%100, short -%50); %0.8 stop girişten (izleme ATR izleyen stop ile). 15dk sürümü için 15m veri kullanılır."
+ }
+]

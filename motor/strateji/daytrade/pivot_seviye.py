@@ -16,6 +16,11 @@ Kaynak kartlar: daytrade__pivot-geri-cekilme-devam-donus__singhal, daytrade__cpr
   bunun yerine seviye+ATR toleransı kullanıldı; HA renk dönüşü çıkışı kodlanmadı).
 Varsayımlar (kitapta sayısal değil): CPR dar/geniş eşikleri (`cpr_dar_oran`=0.10, `cpr_genis_oran`=0.20 —
   tarafımızdan), temas toleransı, stop tamponu. Seans UTC 00:00 (parametre: seans_saat).
+d11j EK MOD (varsayılanlar eski davranışla aynı; ızgaraya girmez, ayar kaydıyla denenir): mod="camarilla" -> Camarilla seviyeleri (önceki
+seans H/L/C, aralık=H-L): R_i = C + aralik*1.1/{12,6,4,2}, S_i = C - aralik*1.1/{12,6,4,2} (i=1..4). Bölge `cam_bolge` (1: S1-S2, 2: S2-S3, 3: S3-S4;
+short aynası R1-R2 ...): mumun tipik fiyatı ((H+L+C)/3) alt bölgeye YENİ girerse long, üst bölgeye yeni girerse short. Stop = bölgenin dış kenarı
+(ve mum ucu) -/+ stop_tampon_atr*ATR; hedef = sonraki Camarilla seviyesi (hedef_modu="sonraki") ya da hedef_r*R. EA31337 Pivot: "ilgili alt
+seviyenin yarısının altı" ifadesi belirsiz olduğundan KODLANMADI (bölgenin tamamı alınır). Kaynak aile: camarilla-bolgesi-ea31337.
 Çelişki/kanıt: aile kaydında negatif kanıt yok; pozitif örnekler tek tek (Nifty), kriptoda test yok.
 """
 import numpy as np
@@ -23,6 +28,7 @@ import pandas as pd
 
 from motor.strateji import gostergeler as g
 from motor.strateji.daytrade._ortak import cerceve, onceki_seans_hlc, seans_kimligi
+from motor.strateji.gostergeler_b2 import gecis
 from motor.strateji.temel import Strateji
 
 _TEPKI_SEVIYE = {"s1": (["S1"], ["R1"]), "p_s1": (["P", "S1"], ["P", "R1"]),
@@ -46,6 +52,7 @@ class PivotSeviye(Strateji):
         "temas_atr": 0.25, "kirilim_tampon_atr": 0.1, "stop_tampon_atr": 0.5,
         "hedef_modu": "sonraki", "min_r": 1.0, "hedef_r": 2.0,
         "atr_periyot": 14, "seans_saat": 0.0, "short": True,
+        "cam_bolge": 1,
     }
     parametre_izgarasi = {
         "mod": ["tepki", "kirilim"],
@@ -68,7 +75,23 @@ class PivotSeviye(Strateji):
         tol = p["temas_atr"] * atr
         tampon = p["stop_tampon_atr"] * atr
 
-        if p["mod"] == "tepki":
+        tablo = sv[["S3", "S2", "S1", "P", "R1", "R2", "R3"]]
+        if p["mod"] == "camarilla":
+            hh, ll, cc = hlc["h"], hlc["l"], hlc["c"]
+            ar = hh - ll
+            cam = {f"S{i}": cc - ar * 1.1 / b for i, b in zip((1, 2, 3, 4), (12, 6, 4, 2))}
+            cam.update({f"R{i}": cc + ar * 1.1 / b for i, b in zip((1, 2, 3, 4), (12, 6, 4, 2))})
+            kz = int(p["cam_bolge"])
+            tablo = pd.DataFrame({ad: cam[ad] for ad in ("S4", "S3", "S2", "S1", "R1", "R2", "R3", "R4")})
+            tp = (y + d + k) / 3.0
+            l_ust, l_alt = cam[f"S{kz}"], cam[f"S{kz + 1}"]
+            s_alt, s_ust = cam[f"R{kz}"], cam[f"R{kz + 1}"]
+            lg_d = (tp <= l_ust) & (tp >= l_alt)
+            sh_d = (tp >= s_alt) & (tp <= s_ust)
+            long_ok = gecis(lg_d & gecerli)
+            short_ok = gecis(sh_d & gecerli) & bool(p["short"])
+            sv_l, sv_s = l_alt, s_ust
+        elif p["mod"] == "tepki":
             uygun = (sv["cpr_oran"] >= p["cpr_genis_oran"]) if p["cpr_filtre"] == "uygun" else True
             l_adlar, s_adlar = _TEPKI_SEVIYE[p["seviyeler"]]
             lv = pd.concat([sv[ad].where((d <= sv[ad] + tol) & (k > sv[ad]) & (k > a)) for ad in l_adlar], axis=1)
@@ -88,8 +111,7 @@ class PivotSeviye(Strateji):
         stop_s = np.maximum(y, sv_s) + tampon
         risk_l, risk_s = k - stop_l, stop_s - k
         # sonraki pivot seviyesi (>= min_r R uzakta), yoksa hedef_r*R
-        kolon = ["S3", "S2", "S1", "P", "R1", "R2", "R3"]
-        m = sv[kolon].to_numpy()
+        m = tablo.to_numpy()
         kk = k.to_numpy()[:, None]
         with np.errstate(invalid="ignore"):
             ust = np.where(m >= kk + p["min_r"] * risk_l.to_numpy()[:, None], m, np.inf).min(axis=1)

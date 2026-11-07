@@ -22,7 +22,7 @@ from motor.strateji import gostergeler as g
 from motor.strateji.cikislar import CikisAyarlari
 from motor.strateji.dis._gosterge_d1 import kur
 from motor.strateji.dis._gosterge_d3 import cmf
-from motor.strateji.gostergeler_b2 import asagi_kesis, gecis, heikin_ashi, yukari_kesis
+from motor.strateji.gostergeler_b2 import asagi_kesis, cci, gecis, heikin_ashi, yukari_kesis
 from motor.strateji.htf import ust_zaman
 from motor.strateji.pivotlar import fraktal_pivotlar, zigzag_pivotlar
 from motor.strateji.temel import Strateji
@@ -139,11 +139,14 @@ class BantKirilimTrend(_D10):
       keltner_rsi   Keltner üst bandı yukarı kesişimi + RSI(14) > rsi_esik (61) -> long (yalnız long, repo).
     Stop = merkez ortalama (kitap: başlangıç riski bant-ortalama mesafesi) - stop_tampon_atr*ATR; çıkış: kapanış merkezi karşıya keserse
     (long: kapanış < merkez). VARSAYIM: keltner_rsi için n=60 ızgara değeri kullanılır (repo periyot vermedi); tipik fiyat
-    (H+L+C)/3 (kitap kodundaki toplam bölünmemiş)."""
+    (H+L+C)/3 (kitap kodundaki toplam bölünmemiş).
+    d11j EK (varsayılan kapalı; ızgaraya girmez; kaynak aile bant-ust-alt-kirilim-stop-giris, BollChannel/KingKeltner): cci_n>0 ->
+    long kırılımı için CCI(cci_n) > 0, short için CCI < 0 (CCI işaret süzgeci). Stop-giriş emri yerine kapanışta kırılım sinyali;
+    ATR izleyen çıkış CikisAyarlari(atr_iz_suren_k) ile ayar kaydında verilir."""
     ad = "dis__bant-kirilim-trend"
     stil = "swing"
     varsayilan_parametreler = {"mod": "bollinger", "n": 60, "k": 2.0, "rsi_n": 14, "rsi_esik": 61.0, "stop_tampon_atr": 0.0,
-                               "atr_periyot": 14, "short": True}
+                               "atr_periyot": 14, "short": True, "cci_n": 0}
     parametre_izgarasi = {"mod": ["bollinger", "keltner", "keltner_rsi"], "n": [40, 60, 100], "k": [1.5, 2.0, 2.5]}
 
     def sinyaller(self, m):
@@ -164,6 +167,9 @@ class BantKirilimTrend(_D10):
         if p["mod"] == "keltner_rsi":
             L = L & (g.rsi(k, int(p["rsi_n"])) > p["rsi_esik"])
             S = _bos(m.index)
+        if p["cci_n"]:
+            cc = cci(h, d, k, int(p["cci_n"]))
+            L, S = L & (cc > 0), S & (cc < 0)
         L, S = _ymask(p, L, S)
         t = p["stop_tampon_atr"] * a
         return kur(m, L, S, orta - t, orta + t, None, None, k < orta, k > orta)

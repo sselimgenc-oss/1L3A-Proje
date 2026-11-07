@@ -19,7 +19,7 @@ from motor.strateji import gostergeler as g
 from motor.strateji.cikislar import CikisAyarlari
 from motor.strateji.daytrade._ortak import cerceve, seans_kimligi
 from motor.strateji.dis._gosterge_d2 import var_ma
-from motor.strateji.dis._gosterge_d5 import gun_ici_cerceve, ott, seans_bilgi
+from motor.strateji.dis._gosterge_d5 import gun_ici_cerceve, onceki_seans_hlc, ott, seans_bilgi
 from motor.strateji.dis._gosterge_d10d import abcd_c_durumu, diverjans_durumu, kama_durumu, tuzak_durumu
 from motor.strateji.dis._gosterge_d9 import ardisik_say
 from motor.strateji.gostergeler_b2 import asagi_kesis, yukari_kesis
@@ -587,11 +587,15 @@ class IlkYarimSaatSonYarimSaat(Strateji):
     SON mum (dis__trend-gun-ici ile aynı zamanlama; farkı getiri penceresi: oradaki tüm seans açılışından karar anına, burada yalnız ilk bölüm).
     seans: 'utc_gun' (24 saat piyasalar) veya 'abd_hisse' (09:30-16:00 New York). Seans başına tek karar.
     VARSAYIM: stop = stop_atr_k x ATR (kaynakta stop yok); basit sürümün hipotetik getirisi (%6.34) kanıtsız iddiadır.
-    abd_hisse'de karar mumunun seans çıkışı penceresine denk gelmemesi için mum süresi <= son_dk/2 önerilir."""
+    abd_hisse'de karar mumunun seans çıkışı penceresine denk gelmemesi için mum süresi <= son_dk/2 önerilir.
+    d11j EK (varsayılanlar eskisiyle aynı; ızgaraya girmez; kaynak Gao 2018 ETF gün içi momentumu): r1_ref="onceki_kapanis" -> ilk bölüm getirisi
+    seans açılışına değil bir önceki seansın kapanışına göre (gece getirisi dahil; r1). sinyal="r12" -> karar mumundaki kapanış / (son_dk dk
+    önceki kapanış) - 1, yani kapanıştan 2*son_dk ile son_dk dk önce arasındaki getiri (r12; mum zamanı asof ile aranır, yaklaşık);
+    "r1_r12" -> ikisi aynı yönde ve eşik üstünde olmalı. İlk bölüm = r1 (varsayılan)."""
     ad = "dis__ilk-yarim-saat-son-yarim-saat"
     stil = "daytrade"
     varsayilan_parametreler = {"seans": "utc_gun", "ilk_dk": 30, "son_dk": 30, "esik": 0.0, "stop_atr_k": 2.0, "atr_periyot": 14,
-                               "short": True}
+                               "short": True, "r1_ref": "acilis", "sinyal": "r1"}
     parametre_izgarasi = {"ilk_dk": [30, 60], "son_dk": [30, 60], "esik": [0.0, 0.001, 0.002], "stop_atr_k": [2.0, 3.0]}
 
     def cikis_var_mi(self):
@@ -608,7 +612,21 @@ class IlkYarimSaatSonYarimSaat(Strateji):
         gecen_dk = (pd.DatetimeIndex(c["bar_kapanis"]) - pd.DatetimeIndex(bas)).total_seconds() / 60.0   # mum KAPANIŞINA kadar
         ilk_mi = ici & pd.Series(np.asarray(gecen_dk) <= p["ilk_dk"] + 1e-9, index=idx)
         ilk_kap = k.where(ilk_mi).groupby(sid).ffill()           # ilk bölümün son kapanışı (nedensel)
-        r = ilk_kap / bil["acilis"] - 1.0
+        if p["r1_ref"] == "onceki_kapanis":
+            r = ilk_kap / onceki_seans_hlc(m, sid, ici.to_numpy())["c"] - 1.0
+        elif p["r1_ref"] == "acilis":
+            r = ilk_kap / bil["acilis"] - 1.0
+        else:
+            raise ValueError(f"Bilinmeyen r1_ref: {p['r1_ref']}")
+        if p["sinyal"] != "r1":
+            onc = k.asof(idx - pd.Timedelta(minutes=float(p["son_dk"])))
+            r12 = k / pd.Series(onc.to_numpy(), index=idx) - 1.0
+            if p["sinyal"] == "r12":
+                r = r12
+            elif p["sinyal"] == "r1_r12":
+                r = pd.Series(np.where(np.sign(r) == np.sign(r12), np.where(r.abs() < r12.abs(), r, r12), np.nan), index=idx)
+            else:
+                raise ValueError(f"Bilinmeyen sinyal: {p['sinyal']}")
         karar = pd.Series(c["karar"].to_numpy(), index=idx) & bil["acilis_tamam"] & r.notna()
         karar &= ~pd.Series(sid).where(karar.to_numpy()).duplicated().to_numpy()     # seans başına tek karar
         long_ok = karar & (r > p["esik"])

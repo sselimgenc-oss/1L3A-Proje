@@ -23,6 +23,13 @@ ORİJİNAL RAPORLANAN SONUÇLAR (25 coin, 2020-2026, %0.07/taraf)
   996 işlem, WR %64.0, PF 1.78; IS 645 işlem PF 1.41; OOS 351 işlem PF 2.67; MTM yıllık %12.1, DD -%18.5.
   Yıllık PF: 2022 0.95 (n=168), 2023 16.7 (n=35), 2024 2.85, 2025 2.55.
 
+d11j EK FİLTRELER (varsayılan kapalı = eskisiyle birebir aynı; ızgaraya girmez; kaynak aile kapitulasyon-hacimli-dip, NFI capitulation
+bounce ve Edge panic_reversal): hacim_k>0 -> hacim > hacim_k*SMA(hacim, hacim_n); rsi_esik>0 -> RSI(rsi_n=3) < rsi_esik (kaynakta GÜNLÜK
+RSI3 < 15; burada aynı TF mumlarının RSI'ı = yaklaşık); iki filtre birlikte açıksa filtre_modu="veya" (kaynak: RSI3 VEYA hacim) ya da
+"ve"; donus_teyit=True -> mum yeşil (kapanış > açılış) ve kapanış önceki mumun zirvesinin üstünde (ilk yeşil dönüş); dip_n>0 -> kapanış
+son dip_n mumun en düşüğünün %dip_tol'u içinde; sma_n>0 -> kapanış > sma_oran*SMA(sma_n) (panic_reversal: 0.85*SMA200).
+Edge panic_reversal için pencere=1 (günlük TF) ve esik=0.07 verilir; zaman stopu max_mum ile.
+
 KIRMIZI BAYRAKLAR (arsiv/ANALIZ_algo-sg.md)
   - Bağımsız örneklem küçük: 996 işlem ~234 ayrı günde; >=5 işlemli 53 günün R'si toplamın %56'sı -> ~50-60
     bağımsız olay. Tek sembolde (BTC) çok daha az olay beklenir.
@@ -36,6 +43,7 @@ KIRMIZI BAYRAKLAR (arsiv/ANALIZ_algo-sg.md)
 import numpy as np
 import pandas as pd
 
+from motor.strateji import gostergeler as g
 from motor.strateji.cikislar import CikisAyarlari
 from motor.strateji.onceki._ortak import cerceve, ust_atr
 from motor.strateji.temel import Strateji
@@ -50,6 +58,8 @@ class Kapitulasyon(Strateji):
         "stop_atr": 4.0,           # x ATR(4H)
         "atr_periyot": 14,
         "max_mum": 96,             # zaman çıkışı (mum); 0 = kapalı
+        "hacim_k": 0.0, "hacim_n": 20, "rsi_esik": 0.0, "rsi_n": 3, "filtre_modu": "veya",
+        "donus_teyit": False, "dip_n": 0, "dip_tol": 0.02, "sma_n": 0, "sma_oran": 0.85,
     }
     parametre_izgarasi = {
         "esik": [0.10, 0.15, 0.20],
@@ -64,10 +74,42 @@ class Kapitulasyon(Strateji):
         getiri = kap / kap.shift(int(p["pencere"])) - 1.0
         atr4 = ust_atr(mumlar, "4h", int(p["atr_periyot"]))
         long_ok = (getiri < -p["esik"]) & atr4.notna()
+        long_ok = self._filtreler(mumlar, long_ok)
         stop_l = kap - p["stop_atr"] * atr4
         no = pd.Series(False, index=mumlar.index)
         return cerceve(mumlar.index, long_ok, no, stop_l, pd.Series(np.nan, index=mumlar.index),
                        None, p["max_mum"] or None)
+
+    def _filtreler(self, mumlar: pd.DataFrame, long_ok: pd.Series) -> pd.Series:
+        p = self.parametreler
+        kap = mumlar["kapanis"]
+        secenek = []
+        if p["hacim_k"]:
+            n = int(p["hacim_n"])
+            secenek.append(mumlar["hacim"] > p["hacim_k"] * mumlar["hacim"].rolling(n, min_periods=n).mean())
+        if p["rsi_esik"]:
+            secenek.append(g.rsi(kap, int(p["rsi_n"])) < p["rsi_esik"])
+        if secenek:
+            if p["filtre_modu"] == "veya":
+                ok = secenek[0]
+                for s in secenek[1:]:
+                    ok = ok | s
+            elif p["filtre_modu"] == "ve":
+                ok = secenek[0]
+                for s in secenek[1:]:
+                    ok = ok & s
+            else:
+                raise ValueError(f"Bilinmeyen filtre_modu: {p['filtre_modu']}")
+            long_ok = long_ok & ok
+        if p["donus_teyit"]:
+            long_ok = long_ok & (kap > mumlar["acilis"]) & (kap > mumlar["yuksek"].shift(1))
+        if p["dip_n"]:
+            n = int(p["dip_n"])
+            long_ok = long_ok & (kap <= kap.rolling(n, min_periods=n).min() * (1.0 + p["dip_tol"]))
+        if p["sma_n"]:
+            n = int(p["sma_n"])
+            long_ok = long_ok & (kap > p["sma_oran"] * g.sma(kap, n))
+        return long_ok
 
     def cikis_var_mi(self) -> bool:
         """Zaman çıkışı (max_mum > 0) `zaman_cikisi_mum` sütunuyla verilir."""

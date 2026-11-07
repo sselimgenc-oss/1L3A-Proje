@@ -1,0 +1,33 @@
+[
+ {
+  "dis_id": "d11j:kapitulasyon-hacimli-dip:nfi_capitulation",
+  "kaynak_dosya": "stratejiler/ek_kaynaklar/github_g1_freqtrade.csv (NFI capitulation bounce); github_g4_platform.csv (Edge panic_reversal)",
+  "parametreler": {
+   "esik": 0.15,
+   "pencere": 24,
+   "hacim_k": 1.3,
+   "rsi_esik": 15.0,
+   "rsi_n": 3,
+   "filtre_modu": "veya",
+   "donus_teyit": true,
+   "dip_n": 48,
+   "dip_tol": 0.02
+  },
+  "cikis_ayarlari": null,
+  "not": "24s getiri < -%15 (alt sınır -%30 yok), RSI3<15 VEYA hacim>1.3xSMA20, kapanış 48 mum dibine yakın, ilk yeşil kapanış önceki yükseğin üstünde. Kaynak günlük RSI3; burada mum RSI3."
+ },
+ {
+  "dis_id": "d11j:kapitulasyon-hacimli-dip:edge_panic_reversal",
+  "kaynak_dosya": "stratejiler/ek_kaynaklar/github_g1_freqtrade.csv (NFI capitulation bounce); github_g4_platform.csv (Edge panic_reversal)",
+  "parametreler": {
+   "esik": 0.07,
+   "pencere": 1,
+   "sma_n": 200,
+   "sma_oran": 0.85,
+   "max_mum": 5,
+   "stop_atr": 4.0
+  },
+  "cikis_ayarlari": null,
+  "not": "1 günlük getiri <= -%7 ve kapanış > 0.85*SMA200, 5 gün zaman stopu; 1d TF ile kullanılır (stop 4 ATR varsayım; ATR 4h'den hesaplanır: 1d'de kendi ATR'si)."
+ }
+]

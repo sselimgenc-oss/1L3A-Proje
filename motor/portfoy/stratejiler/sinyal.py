@@ -10,6 +10,7 @@ import pandas as pd
 
 from motor.portfoy.stratejiler.ortak import (HEPSI, KRIPTO, ORTAK_PARAMETRELER, PfTemel, degisim_satirlari, ema_gun,
                                              sma_gun)
+from motor.strateji import _gosterge_d11j as j
 from motor.strateji import gostergeler as gst
 
 
@@ -45,17 +46,41 @@ class ReferansFiltreliLong(PfTemel):
       kapanışı < SMA(7). Kaynaktaki ADX>16, SPX ATH/çöküş/BTC yardımcı kolları ve makro ayrıntılar kodlanmadı (belirsiz /
       veri yok); QQQ/SPY yerine hisse sepeti + evren endeksi vekili. Başlangıç %3.5 stopu `iz_stop_yuzde` (iz süren sıkılaşır).
     Ağırlık: aktif her sembol brut/len(semboller). Yeniden dengeleme durum değişince (olay tabanlı).
+
+    d11j EK REJİM MODÜLLERİ (varsayılan rejim_modu="" = eski davranış; ızgarada yok, ayar kaydıyla denenir; kaynak aile
+    piyasa-rejim-filtreleri-genislik-ftd-dagitim): rejim_modu = "genislik" (evren genişliği: `semboller`in SMA(genislik_sma) üstündeki oranı, 5 günlük
+    değişim >= +0.08 ve referansın 5g getirisi > 0 ve hacim trendi (5g/20g ort.) <= 1.05 -> risk-on, <= -0.08 -> risk-off, arası önceki durum) |
+    "ftd" (O'Neil Follow-Through Day: referansta >= %3 düzeltme, >= 3 düşüş günü, rallinin 4-7. günü >= %1.25 yükseliş ve hacim artışı -> risk-on;
+    rally dibi kırılınca risk-off) | "dagitim" (IBD dağıtım günü sayacı: düşüş >= %0.2 ve hacim artışı; son 25 günde >= 5 ise risk-off).
+    Risk-off iken yeni giriş yok ve açık pozisyonlar çıkış alır. "ftd"/"dagitim" referansın (ref_sembol) HACİM sütununu kullanır (endeks hacmi
+    yoksa/0 ise FTD/dağıtım sinyal üretmez). Kaynak aile: Edge dominans/altcoin genişliği bileşeni verisi olmadığından atıldı; SPX hacmi `DK_SPX` ile
+    ref_sembol="DK_SPX" verilerek denenir. Formüller: motor/strateji/_gosterge_d11j.py (rejim_*).
     """
 
     ad = "pf__ref_filtreli_long"
     min_sembol = 1
     varsayilan_parametreler = {**ORTAK_PARAMETRELER, "semboller": KRIPTO, "ref_sembol": "BTCUSDT", "giris": "sikisma",
                                "ema_gun": 50, "ema_hizli": 10, "ref_ema": 50, "ref_gun": 4, "sikisma_gun": 20,
-                               "brut": 1.0}
+                               "brut": 1.0, "rejim_modu": "", "genislik_sma": 50, "dagitim_esik": 5}
     parametre_izgarasi = {"giris": ["sikisma", "ema"], "ema_gun": [21, 50, 100], "ref_ema": [21, 50, 100]}
 
     def ek_semboller(self):
         return (self.parametreler["ref_sembol"],)
+
+    def _rejim(self, tk, kolon, ref) -> pd.Series:
+        """Rejim modülü -> günlük ızgarada bool (True = risk-on); hesap yalnız t'ye kadar bilgiyle."""
+        p = self.parametreler
+        hacim = tk.panel("hacim", True)[p["ref_sembol"]] if p["ref_sembol"] and p["ref_sembol"] in tk.panel("hacim", True) else None
+        modu = p["rejim_modu"]
+        if modu == "genislik":
+            return j.rejim_genislik(tk.kap[kolon], ref.pct_change(5, fill_method=None), hacim, int(p["genislik_sma"]))
+        if hacim is None:
+            raise ValueError(f"{self.ad}: rejim_modu={modu!r} referansın hacim sütununu ister (ref_sembol verilmeli)")
+        if modu == "ftd":
+            return j.rejim_ftd(ref, hacim)
+        if modu == "dagitim":
+            return j.rejim_dagitim(ref, hacim, int(p["dagitim_esik"]))
+        raise ValueError(f"bilinmeyen rejim_modu: {modu}")
 
     def _hedef(self, ev, tk):
         p = self.parametreler
@@ -91,6 +116,11 @@ class ReferansFiltreliLong(PfTemel):
             cikis = (kap < ema) & pd.DataFrame({c: ref_zayif for c in kolon})
         else:
             raise ValueError("giris sikisma ya da ema olmalı")
+        if p["rejim_modu"]:
+            on = self._rejim(tk, kolon, ref)
+            on_tbl = pd.DataFrame({c: on for c in kolon})
+            giris = giris.fillna(False) & on_tbl
+            cikis = cikis.fillna(False) | ~on_tbl
         G = tk.eksene(giris.fillna(False)).to_numpy(dtype=bool)
         C = tk.eksene(cikis.fillna(False)).to_numpy(dtype=bool)
         n_, m = G.shape

@@ -1,0 +1,24 @@
+[
+ {
+  "dis_id": "d11j:camarilla-bolgesi-ea31337:s1_s2",
+  "kaynak_dosya": "stratejiler/ek_kaynaklar/github_g5_mt_pine.csv (EA31337 Pivot)",
+  "parametreler": {
+   "mod": "camarilla",
+   "cam_bolge": 1,
+   "hedef_modu": "sonraki"
+  },
+  "cikis_ayarlari": null,
+  "not": "Camarilla S1-S2 / R1-R2 bölgesine yeni giriş; 'alt seviyenin yarısının altı' yorumu belirsiz, bölgenin tamamı alındı."
+ },
+ {
+  "dis_id": "d11j:camarilla-bolgesi-ea31337:s2_s3",
+  "kaynak_dosya": "stratejiler/ek_kaynaklar/github_g5_mt_pine.csv (EA31337 Pivot)",
+  "parametreler": {
+   "mod": "camarilla",
+   "cam_bolge": 2,
+   "hedef_modu": "sonraki"
+  },
+  "cikis_ayarlari": null,
+  "not": "Camarilla S2-S3 / R2-R3 bölgesi."
+ }
+]

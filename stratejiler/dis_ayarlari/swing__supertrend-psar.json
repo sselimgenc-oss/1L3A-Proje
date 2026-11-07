@@ -130,5 +130,38 @@
   },
   "cikis_ayarlari": null,
   "not": "Supertrend(16,3.11) dönüşü; zaman filtresi yok."
+ },
+ {
+  "dis_id": "d11j:atr-chandelier-nrtr-donus:chandelier22_3",
+  "kaynak_dosya": "stratejiler/ek_kaynaklar/github_g2_kripto_bot.csv (ATR_MA, ATR_ADX); github_g5_mt_pine.csv (CEZLSMA, Chandelier Exit, NRTR, EA31337 ATR MA Trend)",
+  "parametreler": {
+   "gosterge": "chandelier",
+   "ch_periyot": 22,
+   "ch_carpan": 3.0
+  },
+  "cikis_ayarlari": null,
+  "not": "Chandelier Exit: 22 kapanış zirvesi - 3*ATR22, yalnız yükselen çizgi, kapanışla dönüş. ZLSMA(50)/HA süzgeci kodlanmadı."
+ },
+ {
+  "dis_id": "d11j:atr-chandelier-nrtr-donus:nrtr_2yuzde",
+  "kaynak_dosya": "stratejiler/ek_kaynaklar/github_g2_kripto_bot.csv (ATR_MA, ATR_ADX); github_g5_mt_pine.csv (CEZLSMA, Chandelier Exit, NRTR, EA31337 ATR MA Trend)",
+  "parametreler": {
+   "gosterge": "nrtr",
+   "nrtr_yuzde": 0.02
+  },
+  "cikis_ayarlari": null,
+  "not": "NRTR: en yüksek kapanıştan %2 izleyen çizgi, kapanışla dönüş (ilk 20 bar sinyal yok)."
+ },
+ {
+  "dis_id": "d11j:atr-chandelier-nrtr-donus:ha_atr_ma",
+  "kaynak_dosya": "stratejiler/ek_kaynaklar/github_g2_kripto_bot.csv (ATR_MA, ATR_ADX); github_g5_mt_pine.csv (CEZLSMA, Chandelier Exit, NRTR, EA31337 ATR MA Trend)",
+  "parametreler": {
+   "gosterge": "ha_atr",
+   "ch_periyot": 22,
+   "ha_ma": 22,
+   "ha_yarim": 0.5
+  },
+  "cikis_ayarlari": null,
+  "not": "YAKLAŞIK: Heikin-Ashi kapanış SMA22 +/- 0.5*ATR22 bandının dışına kapanışla dönüş (ATR_MA); ATR_ADX çarpan formülü belirsiz -> kodlanmadı."
  }
 ]

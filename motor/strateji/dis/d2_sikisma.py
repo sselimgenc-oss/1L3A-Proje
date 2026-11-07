@@ -21,11 +21,19 @@ class SqzDonus(Strateji):
     FİYAT BİRİMİDİR (forex ölçeği); kripto/hisse fiyatlarında fiilen sıfıra yakın eşiktir, aynen korundu (ızgarada
     0 ve fiyatın %0.1'i yok; yalnız orijinal değer ve 0). Bollinger sapması orijinalde de multKC (1.5) ile çarpılır.
     TF belirtilmemiş -> 1d. Eski proje sonucu: kaldı: PF 0.77, Sharpe 0.38 (sq_reversal, 1d).
+
+    d11j EK FİLTRELER (varsayılan kapalı = eskisiyle birebir aynı; yalnız GİRİŞİ daraltır, zıt-sinyal çıkışı değişmez; ızgaraya girmez;
+    kaynak aile sqz-momentum-dip-donusu-ewo, NFI/BBMod squeeze dönüşü): ema_oran>0 -> long için kapanış < EMA(ema_n)*ema_oran
+    (NFI 0.97-0.976), short için kapanış > EMA*(2-ema_oran); ewo_esik>0 -> long için EWO(5,35)/kapanış*100 < -ewo_esik (kaynak
+    mutlak -3.92 -> yüzde varsayım), short için > +ewo_esik; wr_esik>0 -> long için Williams %R(wr_n) < -wr_esik (NFI -46..-50),
+    short için %R > -(100-wr_esik); sqz_sart=True -> Bollinger bandı Keltner içindeyken (sqz_on) giriş (yalnız o mumda).
     """
     ad = "dis__sqz-donus"
     stil = "swing"
     varsayilan_parametreler = {"uzunluk": 20, "bb_carpan": 1.5, "kc_carpan": 1.5, "guc": 0.0018,
-                               "stop_atr": 3.0, "atr_periyot": 14, "short": True}
+                               "stop_atr": 3.0, "atr_periyot": 14, "short": True,
+                               "ema_n": 13, "ema_oran": 0.0, "ewo_esik": 0.0, "wr_n": 14, "wr_esik": 0.0,
+                               "sqz_sart": False}
     parametre_izgarasi = {"uzunluk": [14, 20, 27], "guc": [0.0, 0.0018], "stop_atr": [2.0, 3.0, 4.0]}
 
     def cikis_var_mi(self) -> bool:
@@ -34,11 +42,26 @@ class SqzDonus(Strateji):
     def sinyaller(self, mumlar: pd.DataFrame) -> pd.DataFrame:
         p = self.parametreler
         y, d, k = mumlar["yuksek"], mumlar["dusuk"], mumlar["kapanis"]
-        v = gd.sikisma_momentum(y, d, k, p["uzunluk"], p["bb_carpan"], p["uzunluk"], p["kc_carpan"])["val"]
+        sq = gd.sikisma_momentum(y, d, k, p["uzunluk"], p["bb_carpan"], p["uzunluk"], p["kc_carpan"])
+        v = sq["val"]
         long_c = (v < -p["guc"]) & (v > v.shift(1))
         short_c = (v > p["guc"]) & (v < v.shift(1))
+        long_g, short_g = long_c, short_c
+        if p["ema_oran"]:
+            e = g.ema(k, int(p["ema_n"]))
+            long_g, short_g = long_g & (k < e * p["ema_oran"]), short_g & (k > e * (2.0 - p["ema_oran"]))
+        if p["ewo_esik"]:
+            ewo = 100.0 * (g.ema(k, 5) - g.ema(k, 35)) / k
+            long_g, short_g = long_g & (ewo < -p["ewo_esik"]), short_g & (ewo > p["ewo_esik"])
+        if p["wr_esik"]:
+            n_w = int(p["wr_n"])
+            hh, ll = y.rolling(n_w, min_periods=n_w).max(), d.rolling(n_w, min_periods=n_w).min()
+            wr = -100.0 * (hh - k) / (hh - ll).where(lambda x: x > 0)
+            long_g, short_g = long_g & (wr < -p["wr_esik"]), short_g & (wr > -(100.0 - p["wr_esik"]))
+        if p["sqz_sart"]:
+            long_g, short_g = long_g & sq["sqz_on"], short_g & sq["sqz_on"]
         a = g.atr(y, d, k, p["atr_periyot"])
-        sig = cerceve(mumlar, long_c, short_c & bool(p["short"]), k - p["stop_atr"] * a, k + p["stop_atr"] * a)
+        sig = cerceve(mumlar, long_g, short_g & bool(p["short"]), k - p["stop_atr"] * a, k + p["stop_atr"] * a)
         return gd.yonlu_cerceve(sig, short_c, long_c)
 
 

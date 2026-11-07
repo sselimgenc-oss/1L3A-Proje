@@ -1,0 +1,15 @@
+[
+ {
+  "dis_id": "d11j:guclu-hisse-dinamik-ma-egimi:stop4_8",
+  "kaynak_dosya": "stratejiler/ek_kaynaklar/github_g4_platform.csv (Güçlü hisse + dinamik MA eğimi)",
+  "parametreler": {
+   "yonler": "long",
+   "kisa": 20,
+   "uzun": 100,
+   "sapma_esik": 0.05,
+   "stop_yuzde": 0.048
+  },
+  "cikis_ayarlari": null,
+  "not": "aqt_trend_judge aynı mantık (kısa=20, uzun=100, sapma eşiği %5); yalnız stop %4.8."
+ }
+]

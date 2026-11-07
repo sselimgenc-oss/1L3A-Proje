@@ -11,5 +11,18 @@
   },
   "cikis_ayarlari": null,
   "not": "YAKLAŞIK: RSI boğa uyumsuzluğu long; hedef iki dip arası zirve yerine 2R; RSI zirvesi kırılım teyidi ailenin EMA teyidi ile yaklaşıldı."
+ },
+ {
+  "dis_id": "d11j:osilator-diverjansi-ea31337:cci_4bar",
+  "kaynak_dosya": "stratejiler/ek_kaynaklar/github_g5_mt_pine.csv (EA31337 Oscillator Divergence)",
+  "parametreler": {
+   "osilator": "cci",
+   "pivot_k": 1,
+   "max_aralik": 4,
+   "teyit": "yok",
+   "bolge_cci": 0.0
+  },
+  "cikis_ayarlari": null,
+  "not": "YAKLAŞIK: CCI diverjansı 4 barlık pencerede basit pivot (k=1); EA31337 'son 4 barın dibine göre osilatör yukarı ama açılış daha düşük' ile aynı aile."
  }
 ]

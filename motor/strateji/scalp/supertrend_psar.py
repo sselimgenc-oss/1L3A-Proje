@@ -12,11 +12,18 @@ Kaynak kartlar: daytrade__supertrend-pivot-r1s1__singhal (Supertrend ATR 7; R1/S
 PİP/PUAN -> ATR: kartlarda sabit pip/puan yok; stop zaten ATR tabanlı (Supertrend çizgisi = hl2 -/+ carpan*ATR).
 Varsayımlar: PSAR 0.02/0.02/0.2 (kart); çarpan 3, ATR 7-10 (kart 7-10 / 2-3); ilk bar(lar)da gösterge yönü
   veriye bağlıdır (seri başlangıcına duyarlı, nedensel).
+d11j EK SEÇENEKLER (varsayılanlar eskisiyle aynı; ızgaraya girmez, ayar kaydıyla denenir): gosterge="chandelier"
+(son ch_periyot kapanışın zirvesi - ch_carpan*ATR(ch_periyot), çizgi yalnız yükselir; kısa çizgi aynası; kapanışla dönüş),
+"nrtr" (en yüksek kapanıştan nrtr_yuzde izleyen çizgi; yüzde, ATR yok), "ha_atr" (Heikin-Ashi kapanışı üzerinde SMA(ha_ma)
++/- ha_yarim*ATR(ch_periyot) bandının dışına kapanışla dönüş; stop = karşı bant). Hepsinde stop = ilgili çizgi, çıkış = ters dönüş.
+Kaynak aile: atr-chandelier-nrtr-donus (Chandelier+ZLSMA, NRTR, ATR_MA/ATR_ADX); ATR_ADX çarpan formülü ve EA31337 ATR-MA
+tampon yorumu belirsiz -> KODLANMADI; ZLSMA süzgeci kodlanmadı.
 Kanıt: tek yazar örnekleri (1:3); yatayda çok sahte sinyal (uyum notu). Kısa TF trend-takip maliyet baskın.
 """
 import numpy as np
 import pandas as pd
 
+from motor.strateji import _gosterge_d11j as j
 from motor.strateji import gostergeler as g
 from motor.strateji.daytrade._ortak import cerceve
 from motor.strateji.temel import Strateji
@@ -29,6 +36,7 @@ class SupertrendPsar(Strateji):
         "gosterge": "supertrend", "atr_periyot": 10, "carpan": 3.0,
         "psar_adim": 0.02, "psar_maks": 0.2, "rsi_periyot": 14, "rsi_esik": 0.0,
         "hedef_r": 0.0, "short": True,
+        "ch_periyot": 22, "ch_carpan": 3.0, "nrtr_yuzde": 0.02, "ha_ma": 22, "ha_yarim": 0.5,
     }
     parametre_izgarasi = {
         "gosterge": ["supertrend", "psar", "ikisi"],
@@ -43,9 +51,20 @@ class SupertrendPsar(Strateji):
     def sinyaller(self, mumlar: pd.DataFrame) -> pd.DataFrame:
         p = self.parametreler
         y, d, k = mumlar["yuksek"], mumlar["dusuk"], mumlar["kapanis"]
-        st = g.supertrend(y, d, k, int(p["atr_periyot"]), p["carpan"])
-        ps = g.psar(y, d, p["psar_adim"], p["psar_maks"])
-        if p["gosterge"] == "supertrend":
+        if p["gosterge"] in ("chandelier", "nrtr", "ha_atr"):
+            if p["gosterge"] == "chandelier":
+                df = j.chandelier(y, d, k, int(p["ch_periyot"]), p["ch_carpan"])
+            elif p["gosterge"] == "nrtr":
+                df = j.nrtr(k, p["nrtr_yuzde"])
+            else:
+                df = j.ha_atr_donus(mumlar["acilis"], y, d, k, int(p["ch_periyot"]), int(p["ha_ma"]), p["ha_yarim"])
+            yon, cizgi_l, cizgi_s = df["yon"], df["cizgi_l"], df["cizgi_s"]
+        else:
+            st = g.supertrend(y, d, k, int(p["atr_periyot"]), p["carpan"])
+            ps = g.psar(y, d, p["psar_adim"], p["psar_maks"])
+        if p["gosterge"] in ("chandelier", "nrtr", "ha_atr"):
+            pass
+        elif p["gosterge"] == "supertrend":
             yon, cizgi_l, cizgi_s = st["yon"], st["cizgi"], st["cizgi"]
         elif p["gosterge"] == "psar":
             yon = ps["yon"].where(st["yon"] != 0, 0)     # ATR hazır olmadan sinyal yok (ortak ısınma)

@@ -1,0 +1,284 @@
+[
+ {
+  "hedef": "dis__funding-carry",
+  "ayar_id": "d11j:funding-pozitif-short:esik0_short",
+  "kaynak_dosya": "stratejiler/ek_kaynaklar/github_g3_cerceve.csv (Fonlama oranı pozitifse short)",
+  "parametreler": {
+   "giris_modu": "esik",
+   "fon_esik": 0.0,
+   "short": true,
+   "long": false,
+   "rejim": false,
+   "max_tut_saat": 16.0,
+   "atr_k": 3.0
+  },
+  "cikis_ayarlari": null,
+  "not": "Son fonlama > 0 ise short; kaynakta çıkış yok -> 16 saat zaman çıkışı + 3 ATR stop (varsayım). Funding verisi gerekir (kripto); generic dis_ayarlari testi funding sütunu eklemediği için bu dosyada."
+ },
+ {
+  "hedef": "pf__kesit_ls",
+  "ayar_id": "d11j:kesit-skor-kombinasyonu-momentum-carry:kombine_07_03",
+  "kaynak_dosya": "stratejiler/ek_kaynaklar/github_g3_cerceve.csv (Risk ayarlı momentum + 3 bar tersine dönüş)",
+  "parametreler": {
+   "semboller": [
+    "BTCUSDT",
+    "ETHUSDT",
+    "SOLUSDT",
+    "DK_AAPL",
+    "DK_MSFT",
+    "DK_GOOGL",
+    "DK_AMZN",
+    "DK_NVDA",
+    "DK_META",
+    "DK_TSLA",
+    "DK_XAU",
+    "DK_WTI",
+    "DK_COPPER"
+   ],
+   "skor": "kombine",
+   "lookback_gun": 24,
+   "kombine_ag": 0.7,
+   "kombine_donus_gun": 3,
+   "k": 2,
+   "takvim": "7",
+   "mod": "notr",
+   "agirlik": "ters_vol"
+  },
+  "cikis_ayarlari": null,
+  "not": "0.7 z(risk_ayarli) + 0.3 z(-getiri 3g); 1h kaynak günlüğe indirildi (24 bar -> 24 gün: varsayım). 'carry' (fonlama) bileşeni KODLANMADI: PfTemel arayüzü fonlama taşımaz (veri_yok)."
+ },
+ {
+  "hedef": "pf__rotasyon",
+  "ayar_id": "d11j:rotasyon-skor-modlari-triplersi-bb:bb_uzaklik_k1",
+  "kaynak_dosya": "stratejiler/ek_kaynaklar/github_g7_kutuphane.csv (Çoklu Bollinger üst bant kırılımı rotasyonu)",
+  "parametreler": {
+   "semboller": [
+    "BTCUSDT",
+    "ETHUSDT",
+    "SOLUSDT",
+    "DK_AAPL",
+    "DK_MSFT",
+    "DK_GOOGL",
+    "DK_AMZN",
+    "DK_NVDA",
+    "DK_META",
+    "DK_TSLA",
+    "DK_XAU",
+    "DK_WTI",
+    "DK_COPPER"
+   ],
+   "skor": "bb_uzaklik",
+   "lookback_gun": 20,
+   "bb_sapma": 2.0,
+   "k": 1,
+   "takvim": "M",
+   "mutlak": true
+  },
+  "cikis_ayarlari": null,
+  "not": "Üst Bollinger(20,2) bandının üstünde kapatanlar aday; üst banttan en uzak (k=1) tutulur; %99 ağırlık ayrıntısı yok (%100)."
+ },
+ {
+  "hedef": "pf__rotasyon",
+  "ayar_id": "d11j:rotasyon-skor-modlari-triplersi-bb:triple_rsi_hacim_top5",
+  "kaynak_dosya": "stratejiler/ek_kaynaklar/github_g7_kutuphane.csv (Triple RSI aylık rotasyon)",
+  "parametreler": {
+   "semboller": [
+    "BTCUSDT",
+    "ETHUSDT",
+    "SOLUSDT",
+    "DK_AAPL",
+    "DK_MSFT",
+    "DK_GOOGL",
+    "DK_AMZN",
+    "DK_NVDA",
+    "DK_META",
+    "DK_TSLA",
+    "DK_XAU",
+    "DK_WTI",
+    "DK_COPPER"
+   ],
+   "skor": "hacim",
+   "lookback_gun": 20,
+   "ek_filtre": "triple_rsi",
+   "k": 5,
+   "takvim": "M",
+   "mutlak": true
+  },
+  "cikis_ayarlari": null,
+  "not": "Triple RSI süzgecinden geçenler içinden dolar hacmi en yüksek ilk 5, eşit ağırlık; 'çift aylarda ayın 5'i' yerine aylık dengeleme (yaklaşık); süzgeç yorumu bize ait."
+ },
+ {
+  "hedef": "pf__sabit_sepet",
+  "ayar_id": "d11j:portfoy-agirlik-semalari-hrp-minvar-mvo:hrp",
+  "kaynak_dosya": "stratejiler/ek_kaynaklar/github_g3_cerceve.csv (Hiyerarşik Risk Paritesi)",
+  "parametreler": {
+   "semboller": [
+    "BTCUSDT",
+    "ETHUSDT",
+    "SOLUSDT",
+    "DK_AAPL",
+    "DK_MSFT",
+    "DK_GOOGL",
+    "DK_AMZN",
+    "DK_NVDA",
+    "DK_META",
+    "DK_TSLA",
+    "DK_XAU",
+    "DK_WTI",
+    "DK_COPPER"
+   ],
+   "agirlik": "hrp",
+   "kov_gun": 120,
+   "takvim": "M"
+  },
+  "cikis_ayarlari": null,
+  "not": "Hiyerarşik Risk Paritesi: son 120 gün getiri kovaryansı, aylık dengeleme. Chan etkin sınır/Kelly/kısıtsız MVO ve korelasyon kümeleme temsilcisi KODLANMADI (scipy/çözücü yok)."
+ },
+ {
+  "hedef": "pf__sabit_sepet",
+  "ayar_id": "d11j:portfoy-agirlik-semalari-hrp-minvar-mvo:min_var",
+  "kaynak_dosya": "stratejiler/ek_kaynaklar/github_g3_cerceve.csv (Long-only minimum varyans)",
+  "parametreler": {
+   "semboller": [
+    "BTCUSDT",
+    "ETHUSDT",
+    "SOLUSDT",
+    "DK_AAPL",
+    "DK_MSFT",
+    "DK_GOOGL",
+    "DK_AMZN",
+    "DK_NVDA",
+    "DK_META",
+    "DK_TSLA",
+    "DK_XAU",
+    "DK_WTI",
+    "DK_COPPER"
+   ],
+   "agirlik": "min_var",
+   "kov_gun": 120,
+   "takvim": "M"
+  },
+  "cikis_ayarlari": null,
+  "not": "Long-only minimum varyans: son 120 gün getiri kovaryansı, aylık dengeleme. Chan etkin sınır/Kelly/kısıtsız MVO ve korelasyon kümeleme temsilcisi KODLANMADI (scipy/çözücü yok)."
+ },
+ {
+  "hedef": "pf__sabit_sepet",
+  "ayar_id": "d11j:portfoy-agirlik-semalari-hrp-minvar-mvo:mvo",
+  "kaynak_dosya": "stratejiler/ek_kaynaklar/github_g3_cerceve.csv (Long-only teğet (maks. Sharpe) portföyü)",
+  "parametreler": {
+   "semboller": [
+    "BTCUSDT",
+    "ETHUSDT",
+    "SOLUSDT",
+    "DK_AAPL",
+    "DK_MSFT",
+    "DK_GOOGL",
+    "DK_AMZN",
+    "DK_NVDA",
+    "DK_META",
+    "DK_TSLA",
+    "DK_XAU",
+    "DK_WTI",
+    "DK_COPPER"
+   ],
+   "agirlik": "mvo",
+   "kov_gun": 120,
+   "takvim": "M"
+  },
+  "cikis_ayarlari": null,
+  "not": "Long-only teğet (maks. Sharpe) portföyü: son 120 gün getiri kovaryansı, aylık dengeleme. Chan etkin sınır/Kelly/kısıtsız MVO ve korelasyon kümeleme temsilcisi KODLANMADI (scipy/çözücü yok)."
+ },
+ {
+  "hedef": "pf__ref_filtreli_long",
+  "ayar_id": "d11j:piyasa-rejim-filtreleri-genislik-ftd-dagitim:genislik_hisse",
+  "kaynak_dosya": "stratejiler/ek_kaynaklar/github_g4_platform.csv (Edge: rejim kayması)",
+  "parametreler": {
+   "semboller": [
+    "DK_AAPL",
+    "DK_MSFT",
+    "DK_GOOGL",
+    "DK_AMZN",
+    "DK_NVDA",
+    "DK_META",
+    "DK_TSLA"
+   ],
+   "ref_sembol": "DK_SPX",
+   "giris": "ema",
+   "rejim_modu": "genislik",
+   "genislik_sma": 50
+  },
+  "cikis_ayarlari": null,
+  "not": "Hisse evreni SMA50 üstü oran deltası >= +0.08 (+ ref 5g getiri>0 + hacim trendi<=1.05) risk-on; ema girişi bu rejimle kapılanır. 18 hisse yerine 7 hisse: genişlik gürültülü."
+ },
+ {
+  "hedef": "pf__ref_filtreli_long",
+  "ayar_id": "d11j:piyasa-rejim-filtreleri-genislik-ftd-dagitim:ftd_spx",
+  "kaynak_dosya": "stratejiler/ek_kaynaklar/github_g4_platform.csv (Follow-Through Day)",
+  "parametreler": {
+   "semboller": [
+    "DK_AAPL",
+    "DK_MSFT",
+    "DK_GOOGL",
+    "DK_AMZN",
+    "DK_NVDA",
+    "DK_META",
+    "DK_TSLA"
+   ],
+   "ref_sembol": "DK_SPX",
+   "giris": "ema",
+   "rejim_modu": "ftd"
+  },
+  "cikis_ayarlari": null,
+  "not": "O'Neil Follow-Through Day rejimi DK_SPX üzerinde (hacim sütunu gerekir; yoksa/0 ise sinyal çıkmaz). Risk-off kuralı (rally dibi kırılımı) bize ait."
+ },
+ {
+  "hedef": "pf__ref_filtreli_long",
+  "ayar_id": "d11j:piyasa-rejim-filtreleri-genislik-ftd-dagitim:dagitim_spx",
+  "kaynak_dosya": "stratejiler/ek_kaynaklar/github_g4_platform.csv (IBD dağıtım günü sayacı)",
+  "parametreler": {
+   "semboller": [
+    "DK_AAPL",
+    "DK_MSFT",
+    "DK_GOOGL",
+    "DK_AMZN",
+    "DK_NVDA",
+    "DK_META",
+    "DK_TSLA"
+   ],
+   "ref_sembol": "DK_SPX",
+   "giris": "ema",
+   "rejim_modu": "dagitim",
+   "dagitim_esik": 5
+  },
+  "cikis_ayarlari": null,
+  "not": "IBD dağıtım günü >= 5 (25 seans) -> risk-off; +%5 yükselişle gün silme kodlanmadı; QQQ/TQQQ maruziyet politikası yok. Kripto rejim analizcisi (dominans/funding/alt genişliği) veri_yok."
+ },
+ {
+  "hedef": "pf__pairs",
+  "ayar_id": "d11j:uzun-yonlu-cift-dunku-getiri:dunku_getiri",
+  "kaynak_dosya": "stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv (Long-only çift işlemi KO/PEP)",
+  "parametreler": {
+   "semboller": [
+    "BTCUSDT",
+    "ETHUSDT",
+    "SOLUSDT",
+    "DK_AAPL",
+    "DK_MSFT",
+    "DK_GOOGL",
+    "DK_AMZN",
+    "DK_NVDA",
+    "DK_META",
+    "DK_TSLA",
+    "DK_XAU",
+    "DK_WTI",
+    "DK_COPPER"
+   ],
+   "yontem": "dunku_getiri",
+   "kor_gun": 19,
+   "kor_esik": 0.9,
+   "brut_cift": 0.5
+  },
+  "cikis_ayarlari": null,
+  "not": "Çiftte dünkü getirisi düşük olan bacak long-only; korelasyon<0.9 kapısı tek pencere. KO/PEP evrende yok: DEFAULT_CIFTLER (kripto/hisse) ile denenir."
+ }
+]

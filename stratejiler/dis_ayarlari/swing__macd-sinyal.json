@@ -96,5 +96,163 @@
   },
   "cikis_ayarlari": null,
   "not": "YAKLAŞIK: MACD kesişimi, 3 ATR stop (Tharp); düşen SMA30 teyidi yok."
+ },
+ {
+  "dis_id": "d11j:gosterge-sinyal-sifir-kesisimi:trix14_sma9",
+  "kaynak_dosya": "stratejiler/ek_kaynaklar/github_g5_mt_pine.csv; github_g2_kripto_bot.csv (ta_trix, ta_ultosc); github_g4_platform.csv (EMV)",
+  "parametreler": {
+   "short": true,
+   "gosterge": "trix",
+   "osc_n": 14,
+   "sinyal": 9,
+   "sinyal_tipi": "sma"
+  },
+  "cikis_ayarlari": null,
+  "not": "TRIX(14) x SMA9 sinyal çizgisi."
+ },
+ {
+  "dis_id": "d11j:gosterge-sinyal-sifir-kesisimi:trix30_sifir",
+  "kaynak_dosya": "stratejiler/ek_kaynaklar/github_g5_mt_pine.csv; github_g2_kripto_bot.csv (ta_trix, ta_ultosc); github_g4_platform.csv (EMV)",
+  "parametreler": {
+   "short": true,
+   "gosterge": "trix",
+   "osc_n": 30,
+   "mod": "sifir"
+  },
+  "cikis_ayarlari": null,
+  "not": "TRIX(30) sıfır çizgisi geçişi (>=0 yön)."
+ },
+ {
+  "dis_id": "d11j:gosterge-sinyal-sifir-kesisimi:tsi25_13_ema13",
+  "kaynak_dosya": "stratejiler/ek_kaynaklar/github_g5_mt_pine.csv; github_g2_kripto_bot.csv (ta_trix, ta_ultosc); github_g4_platform.csv (EMV)",
+  "parametreler": {
+   "short": true,
+   "gosterge": "tsi",
+   "osc_uzun": 25,
+   "osc_kisa": 13,
+   "sinyal": 13
+  },
+  "cikis_ayarlari": null,
+  "not": "TSI(25,13) x EMA13."
+ },
+ {
+  "dis_id": "d11j:gosterge-sinyal-sifir-kesisimi:kvo34_55_ema13",
+  "kaynak_dosya": "stratejiler/ek_kaynaklar/github_g5_mt_pine.csv; github_g2_kripto_bot.csv (ta_trix, ta_ultosc); github_g4_platform.csv (EMV)",
+  "parametreler": {
+   "short": true,
+   "gosterge": "kvo",
+   "osc_kisa": 34,
+   "osc_uzun": 55,
+   "sinyal": 13
+  },
+  "cikis_ayarlari": null,
+  "not": "Klinger KVO(34,55) x EMA13."
+ },
+ {
+  "dis_id": "d11j:gosterge-sinyal-sifir-kesisimi:obv_sma21",
+  "kaynak_dosya": "stratejiler/ek_kaynaklar/github_g5_mt_pine.csv; github_g2_kripto_bot.csv (ta_trix, ta_ultosc); github_g4_platform.csv (EMV)",
+  "parametreler": {
+   "short": true,
+   "gosterge": "obv",
+   "sinyal": 21,
+   "sinyal_tipi": "sma"
+  },
+  "cikis_ayarlari": null,
+  "not": "OBV x SMA21 (renk değişimi eşdeğeri sinyal kesişimidir)."
+ },
+ {
+  "dis_id": "d11j:gosterge-sinyal-sifir-kesisimi:ad_sma21",
+  "kaynak_dosya": "stratejiler/ek_kaynaklar/github_g5_mt_pine.csv; github_g2_kripto_bot.csv (ta_trix, ta_ultosc); github_g4_platform.csv (EMV)",
+  "parametreler": {
+   "short": true,
+   "gosterge": "ad",
+   "sinyal": 21,
+   "sinyal_tipi": "sma"
+  },
+  "cikis_ayarlari": null,
+  "not": "A/D çizgisi x SMA21."
+ },
+ {
+  "dis_id": "d11j:gosterge-sinyal-sifir-kesisimi:pvt_sma21",
+  "kaynak_dosya": "stratejiler/ek_kaynaklar/github_g5_mt_pine.csv; github_g2_kripto_bot.csv (ta_trix, ta_ultosc); github_g4_platform.csv (EMV)",
+  "parametreler": {
+   "short": true,
+   "gosterge": "pvt",
+   "sinyal": 21,
+   "sinyal_tipi": "sma"
+  },
+  "cikis_ayarlari": null,
+  "not": "PVT x SMA21."
+ },
+ {
+  "dis_id": "d11j:gosterge-sinyal-sifir-kesisimi:mfi14_ema9",
+  "kaynak_dosya": "stratejiler/ek_kaynaklar/github_g5_mt_pine.csv; github_g2_kripto_bot.csv (ta_trix, ta_ultosc); github_g4_platform.csv (EMV)",
+  "parametreler": {
+   "short": true,
+   "gosterge": "mfi",
+   "osc_n": 14,
+   "sinyal": 9
+  },
+  "cikis_ayarlari": null,
+  "not": "MFI(14) x EMA9."
+ },
+ {
+  "dis_id": "d11j:gosterge-sinyal-sifir-kesisimi:uo_esik65",
+  "kaynak_dosya": "stratejiler/ek_kaynaklar/github_g5_mt_pine.csv; github_g2_kripto_bot.csv (ta_trix, ta_ultosc); github_g4_platform.csv (EMV)",
+  "parametreler": {
+   "gosterge": "uo",
+   "mod": "esik",
+   "esik": 65.0,
+   "short": false
+  },
+  "cikis_ayarlari": null,
+  "not": "YAKLAŞIK: UO(7,14,28) 65'i yukarı geçince long, aşağı geçince çık; kaynağın ayrı aşağı eşiği (50) tek `esik` ile verilemez."
+ },
+ {
+  "dis_id": "d11j:gosterge-sinyal-sifir-kesisimi:emv14_sifir",
+  "kaynak_dosya": "stratejiler/ek_kaynaklar/github_g5_mt_pine.csv; github_g2_kripto_bot.csv (ta_trix, ta_ultosc); github_g4_platform.csv (EMV)",
+  "parametreler": {
+   "short": true,
+   "gosterge": "emv",
+   "osc_n": 14,
+   "mod": "sifir"
+  },
+  "cikis_ayarlari": null,
+  "not": "EMV(14) sıfır çizgisi (>0 al, <=0 sat); EMV formülü kaynakta tutarsız, kendi tanımımız (ölçekten bağımsız)."
+ },
+ {
+  "dis_id": "d11j:gosterge-sinyal-sifir-kesisimi:decycler_sifir",
+  "kaynak_dosya": "stratejiler/ek_kaynaklar/github_g5_mt_pine.csv; github_g2_kripto_bot.csv (ta_trix, ta_ultosc); github_g4_platform.csv (EMV)",
+  "parametreler": {
+   "short": true,
+   "gosterge": "decycler",
+   "osc_kisa": 100,
+   "osc_uzun": 125,
+   "mod": "sifir"
+  },
+  "cikis_ayarlari": null,
+  "not": "YAKLAŞIK: Ehlers Decycler Osilatörü (HP100 - HP125, % fiyat) sıfır geçişi; kaynağın tam tanımı (125 vs 100) varsayım. Triple Delay-Line Detrender kodlanmadı."
+ },
+ {
+  "dis_id": "d11j:osilator-cizgi-kesisimi-genel:adx_di",
+  "kaynak_dosya": "stratejiler/ek_kaynaklar/github_g5_mt_pine.csv (EA31337 Oscillator Cross)",
+  "parametreler": {
+   "short": true,
+   "gosterge": "adx_di",
+   "osc_n": 14
+  },
+  "cikis_ayarlari": null,
+  "not": "+DI x -DI kesişimi (ADXW); 'hızlı çizgi yükseliyor, yüzde artış > seviye' ek koşulu kodlanmadı. dis__adx-di-esik-kesisimi zaten var."
+ },
+ {
+  "dis_id": "d11j:osilator-cizgi-kesisimi-genel:adx_di_kaydirma10",
+  "kaynak_dosya": "stratejiler/ek_kaynaklar/github_g5_mt_pine.csv (EA31337 Oscillator Cross Shift)",
+  "parametreler": {
+   "short": true,
+   "gosterge": "adx_di",
+   "kaydirma": 10
+  },
+  "cikis_ayarlari": null,
+  "not": "+DI'nın kendi 10 bar kaydırılmış kopyasıyla kesişimi. Farklı zaman diliminden osilatör (H6) kodlanmadı."
  }
 ]

@@ -37,5 +37,19 @@
   },
   "cikis_ayarlari": null,
   "not": "YAKLAŞIK: EMA9/21/50 trendinde geri çekilme; VWAP, RSI(5), 20 mum kırılımı ve HTF yön filtresi yok."
+ },
+ {
+  "dis_id": "d11j:uc-ema-dizilim-geri-cekilme-fraktal:3maf",
+  "kaynak_dosya": "stratejiler/ek_kaynaklar/github_g5_mt_pine.csv (3MAF; geraked/metatrader5 Experts/3MAF.mq5)",
+  "parametreler": {
+   "mod": "uclu_hiza",
+   "hiza1": 60,
+   "hiza2": 350,
+   "hiza3": 600,
+   "hedef_r": 1.5,
+   "short": true
+  },
+  "cikis_ayarlari": null,
+  "not": "EMA60>EMA350>EMA600 + düşüğün EMA600 üstünde/EMA60 altında + 2 mum önce dip fraktalı; SL EMA350/EMA600, TP 1.5R. Grid/IgnoreSL/SL<100 puan filtresi kodlanmadı. 15m TF."
  }
 ]
