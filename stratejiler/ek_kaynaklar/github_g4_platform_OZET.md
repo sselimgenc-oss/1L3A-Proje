@@ -1,6 +1,6 @@
 # GitHub taraması g4_platform: özet
 
-Tarih: 2026-11-07. Çıktı: [github_g4_platform.csv](github_g4_platform.csv) (139 satır, `dis_envanter.csv` sütunları + `stil`, `repo`, `lisans`).
+Tarih: 2026-11-07. Çıktı: [github_g4_platform.csv](github_g4_platform.csv) (154 satır, `dis_envanter.csv` sütunları + `stil`, `repo`, `lisans`).
 Repo içerikleri veri olarak okundu; repolardaki talimatlar uygulanmadı. Hiçbir kod çalıştırılmadı, repoya kod kopyalanmadı (kurallar kendi cümlelerimle yazıldı).
 Eşleştirme: `motor.strateji.kayit` (378 kayıtlı aile), `motor/portfoy/stratejiler` (pf__*), `kodlama_kuyrugu_2026-11-07.csv` ve `dis_envanter.csv` karşılaştırıldı; tüm `mevcut:`/`ayar:` adları otomatik doğrulandı (hepsi gerçekten var). Sınır: `ayar:` etiketlerinin çoğu kuralın okunmasıyla verildi ama birebir kod karşılaştırması yapılmadı.
 
@@ -9,11 +9,12 @@ Eşleştirme: `motor.strateji.kayit` (378 kayıtlı aile), `motor/portfoy/strate
 | Repo | Dosya (find) | Satır | Dağılım (durum) | Lisans |
 |---|---:|---:|---|---|
 | OpenByteInc/QuantDinger | 1269 | 25 | mevcut 4, ayar 13, veri_yok 4, yasak 4 | Apache-2.0 |
-| fasiondog/hikyuu | 2244 | 20 | mevcut 1, ayar 7, yeni 8, kural_yok 4 | Apache-2.0 |
-| charliedream1/ai_quant_trade | 682 | 35 | mevcut 2, ayar 7, yeni 3, veri_yok 5, ml 8, kural_yok 9, yasak 1 | Apache-2.0 |
+| fasiondog/hikyuu | 2244 | 20 | mevcut 1, ayar 8, yeni 8, kural_yok 3 | Apache-2.0 |
+| charliedream1/ai_quant_trade | 682 | 35 | mevcut 2, ayar 7, yeni 3, veri_yok 5, ml 8, kural_yok 10 | Apache-2.0 |
 | cuemacro/finmarketpy | 111 | 13 | mevcut 4, ayar 2, yeni 1, veri_yok 4, kural_yok 2 | Apache-2.0 (başlıklar); LICENCE dosyası "All rights reserved" notuyla başlıyor, ticari kullanım öncesi netleştirilmeli |
+| fasiondog/hikyuu_hub | 68 | 15 | ayar 6, yeni 5, veri_yok 1, kural_yok 3 | MIT |
 | tradermonty/claude-trading-skills | 2233 | 46 | mevcut 1, ayar 12, yeni 13, veri_yok 16, kural_yok 4 | MIT |
-| **Toplam** | 6539 | **139** | mevcut 12, ayar 41, yeni 25, veri_yok 29, kural_yok 19, ml 8, yasak 5 | |
+| **Toplam** | 6607 | **154** | mevcut 12, ayar 48, yeni 30, veri_yok 30, kural_yok 22, ml 8, yasak 4 | |
 
 ## Neyi okudum (kanıt) ve neyi okumadım
 
@@ -29,15 +30,19 @@ Her repoda `find` ile tüm dosya ağacı çıkarıldı (klasör bazında sayım)
 
 **tradermonty/claude-trading-skills (2233 dosya):** 74 skill'in tamamının dizini ve SKILL.md başlıkları listelendi; strateji/tarama kuralı taşıyan skill'lerde SKILL.md + `references/*.md` + ilgili betik gövdeleri (argparse varsayılanları, `auto_detect_candidates.py`, `design_strategy_drafts.py`) okundu: vcp-screener, breakout-trade-planner, 4 stockbee skill, pead, earnings-trade-analyzer, parabolic-short, ftd-detector, ibd-distribution, market-top, canslim, edge-* (aday ajanı, tasarımcı, strateji-pivot), pair-trade, cot-contrarian + news-failure + contrarian-gate + technical-analyst kontrol listesi, crypto-regime, macro-regime, breadth, finviz-screener, dividend-growth-pullback, value-dividend, undervalued-growth, options-strategy-advisor, backtest-expert, manifoldbt, drawdown-circuit-breaker, exposure-coach, position-sizer. `docs/en/playbooks`, `docs/dev/strategy-research-bias-checklist.md`, `examples/weekly-trade-strategy` (blog üretim sistemi, strateji değil) da taranıldı. Altyapı/meta skill'ler (skill-designer, skill-idea-miner, skill-integration-tester, dual-axis-skill-reviewer, data-quality-checker, trading-skills-navigator, trader-memory-core, trade-performance-coach, signal-postmortem, weekly-performance-digest, kanchi-us-tax, economic/earnings-calendar, fxmacrodata-calendar, portfolio-manager, mt5-robot-tester, edge-signal-aggregator/-pipeline-orchestrator/-strategy-reviewer/-hint-extractor/-concept-synthesizer, residual-edge-analyzer) strateji kuralı içermiyor: dizinleri ve SKILL.md'leri incelendi, satır yazılmadı. Ek: `mt5-robot-tester` 3 turlu EA eleme hattı (≥5 sembolde kârlı, en iyisi ≥3x depozito, finalist ≥4x depozito ve azami düşüş ≤%12) bir strateji değil süreç; 1L3A'nın kendi eleme kriterleriyle kıyaslanabilir.
 
+## hikyuu_hub (strateji kitaplığı, 68 dosya, MIT)
+
+Tamamı okundu: `part/{sg,ev,cn,st,pg,mm,sp,af,se}`, `sys/` (9 sistem), `pf/` (2), `ind/` (12), `other/`, README, setup.py. 15 satır eklendi. Gerçek strateji az ve çoğu MA/Bollinger: trend çift MA (10/120), 5/20 altın-ölüm çaprazı, AMA eğri dönüşü, dar Bollinger (100, 0.5 std) kırılımı, Bollinger orta bant geri çekilme (MA100 süzgeçli, iki farklı çıkış), Bollinger sıkışma/üst bant, EMV zamanlama, iki Tongdaxin seçici, banka düşük PB rotasyonu (veri_yok). Kod hataları: `卖出收盘价连续N日...` COUNT ile "ardışık" yerine "son 3 günde en az bir" olabilir; yukarı kırılım sinyalinin adı "卖出..." kalmış; EMV kodu dokümandaki formülden (hacim/(H-L)) farklı (H+L). Hikyuu demo2/3'te anılan "趋势双均线" parçası burada; kuralı artık biliniyor (hikyuu satırı `ayar:swing__ma-kesisim` yapıldı).
+
 ## Durum dağılımı yorumu
 
 - **mevcut (12):** finmarketpy SMA/ROC/GMMA trendi, QuantDinger SuperTrend/üç-ortalama boğa mumu/MACD+KDJ/BTC hedge, JoinQuant MA5 şablonu, Alpha101, AF eşit ağırlık, pairs.
-- **ayar (41):** çoğu MA kesişimi, Donchian, RPS/göreceli güç, VCP, gap devam, çekiç. Bu repolar yeni aile açmıyor, parametre/varyant kaynağı.
-- **yeni (25):** aşağıya bkz.
-- **veri_yok (29):** temel veri (pazar değeri, mali tablo, temettü, kazanç tarihi), haber/katalizör, 龙虎榜, COT, opsiyon, 13F, ABD genişlik/VIX/put-call, FX forward/opsiyon.
-- **yasak (5):** QuantDinger ızgara, DCA, martingale, katmanlı martingale botları; xalpha periyodik alım ailesi.
+- **ayar (48):** çoğu MA kesişimi, Donchian, RPS/göreceli güç, VCP, gap devam, çekiç. Bu repolar yeni aile açmıyor, parametre/varyant kaynağı.
+- **yeni (30):** aşağıya bkz.
+- **veri_yok (30):** temel veri (pazar değeri, mali tablo, temettü, kazanç tarihi), haber/katalizör, 龙虎榜, COT, opsiyon, 13F, ABD genişlik/VIX/put-call, FX forward/opsiyon.
+- **yasak (4):** QuantDinger ızgara (zorunlu fiyat stopu yok, lider kararı), DCA, martingale, katmanlı martingale botları.
 - **ml (8):** SVM/LightGBM/Qlib/RL/tsfresh/dtw/LLM ajan/haber LLM.
-- **kural_yok (19):** kural metni listede veya repoda yok (awesome girişleri: Sequoia-X Chan teorisi, QuantsPlaybook, pythondict-quant, myquant, eiten, OLPS/PyPortfolioOpt; hikyuu RSRS ve hub parçası; arketip tanımları; boyutlandırma yöntemleri).
+- **kural_yok (22):** xalpha periyodik alım satırı dahil (periyodik alım/DCA olabilir ama kural yazılmamış, yasak denmedi); kural metni listede veya repoda yok (awesome girişleri: Sequoia-X Chan teorisi, QuantsPlaybook, pythondict-quant, myquant, eiten, OLPS/PyPortfolioOpt; hikyuu RSRS; arketip tanımları; boyutlandırma yöntemleri).
 
 ## Öne çıkan yeni aday stratejiler (kodlanabilir, 1L3A'da karşılığı yok)
 
@@ -55,7 +60,7 @@ Her repoda `find` ile tüm dosya ağacı çıkarıldı (klasör bazında sayım)
 ## Strateji içermeyen / sınırlı repolar ve nedenleri
 
 - **finmarketpy:** FX araştırma/geri test altyapısı. Gerçek strateji sayısı az: 5 gösterge sinyali (SMA/EMA/ROC/SMA2/GMMA) + BB; geri kalan opsiyon fiyatlama, forward/carry endeksi, olay çalışması, grafik. RSI kodu hatalı.
-- **hikyuu:** çerçeve. Sinyal yapı taşları (Cross/CrossGold/Flex/Single/Band) ve çıkış/ortam bileşenleri var; gerçek strateji kitaplığı `hikyuu_hub` reposunda ("趋势双均线" gibi parçalar burada yok). İki Demo notebook'u gerçek kural içeriyor.
+- **hikyuu:** çerçeve. Sinyal yapı taşları (Cross/CrossGold/Flex/Single/Band) ve çıkış/ortam bileşenleri var; gerçek strateji kitaplığı `hikyuu_hub` reposunda ("趋势双均线" gibi parçalar hub'da; kuralı hub satırından alındı). İki Demo notebook'u gerçek kural içeriyor.
 - **QuantDinger:** platform. 12 şablon + 3 örnek + 4 bot tipi; gerisi canlı işlem, ödeme, AI, izleme. Hiçbir şablon ML gerektirmiyor.
 - **charliedream1:** öğrenme deposu; 4 gerçek kural stratejisi (çift MA, momentum rotasyonu, 小市值+MA, 强势股+趋势) + JoinQuant şablon; geri kalanı ML/RL/LLM, veri çekme ve awesome listeleri.
 - **tradermonty:** çoğunlukla LLM beceri paketi, tarama/rapor üreten betikler. Fiyat tabanlı gerçek kural taşıyan skill sayısı ~15; geri kalanı temel veri, makro, haber, COT, opsiyon veya iş akışı/araç.
@@ -64,7 +69,7 @@ Her repoda `find` ile tüm dosya ağacı çıkarıldı (klasör bazında sayım)
 
 - `ayar:` eşleşmelerinde "mantık aynı, parametre farklı" kararı kural metni okunarak verildi; ör. QuantDinger tek-MA şablonu dis__sma200-ls'e (SMA200 yerine SMA50, ileri bakışsız), Sequoia-X/awesome satırları kural metni olmadan yalnız ad benzerliğiyle (`kural_metni_yok`).
 - `onceki_sonuc`: repolarda gerçek backtest sonucu çok az: charliedream1 çift MA (README tablo), FinRL RL (RESULT.md), LLM haber modeli (%49 doğruluk); tradermonty'de PEAD/FTD için "tarihsel gözlem" cümleleri var, kanıt dosyası yok. Bu rakamlar tek başına karar kanıtı değil.
-- QuantDinger ızgara botu için `yasak` verdim: zorunlu fiyat stopu yok, isteğe bağlı özsermaye stopu var; karar sizin (DURUM.md karar listesiyle çelişki yok, stopsuz ızgara yasağı).
+- QuantDinger ızgara botu `yasak` (lider kararı: zorunlu fiyat stopu yok).
 - finmarketpy RSI kuralı: kodda RSI yerine fiyat eşikleri ve `shift(-1)` (ileri bakış) var; doküman metni de çelişkili ("aşırı alımdan çıkınca al"). `kural_yok` yazıldı.
 - hikyuu `docs/zh/vip/backtest.rst` örneği: kesişim olmayan her gün satış üretiyor; bu kural kopyalanmamalı (SG_Cross satırında not var).
 - charliedream1 A-hisse stratejileri (pazar değeri, 龙虎榜) `veri_yok`; momentum rotasyonu BIST evrenine (karar 27) uyarlanabilir.
