@@ -91,6 +91,8 @@ BILGI = {"symbols": [
         {"filterType": "PRICE_FILTER", "tickSize": "0.01"}, {"filterType": "LOT_SIZE", "stepSize": "0.01", "minQty": "0.01"},
         {"filterType": "MIN_NOTIONAL", "notional": "5"}]},
     {"symbol": "COPPERUSDT", "contractType": "PERPETUAL", "status": "BREAK", "filters": []},
+    {"symbol": "XAUUSDT", "contractType": "TRADIFI_PERPETUAL", "status": "TRADING", "filters": []},
+    {"symbol": "CLUSDT", "contractType": "CURRENT_QUARTER", "status": "TRADING", "filters": []},
 ]}
 
 
@@ -105,6 +107,12 @@ def test_tradfi_esleme_bulunamazsa_veri_yok_uydurma_yok():
     assert e["ETHUSDT"] == ("ETHUSDT", None) and e["DK_NVDA"] == ("NVDAUSDT", None)
     assert e["DK_COPPER"][0] is None and "TRADING" in e["DK_COPPER"][1]
     assert e["DK_AAPL"][0] is None and "yok" in e["DK_AAPL"][1]
+
+
+def test_tradfi_perpetual_turu_kabul_vadeli_red():
+    e = pv.esleme_dogrula(BILGI, ["DK_XAU", "DK_WTI"])
+    assert e["DK_XAU"] == ("XAUUSDT", None)
+    assert e["DK_WTI"][0] is None and "sürekli sözleşme değil" in e["DK_WTI"][1]
 
 
 def test_veri_yok_isaretleme():
