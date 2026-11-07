@@ -88,10 +88,14 @@ Ana ders: önceki sonuçlar OOS'a bakılarak seçilmiş ve kâr birkaç işlemde
     çift işlemi, KMN vb.) kodlanıp test edilir — strateji kaçırılmaz. ML ve opsiyon gibi başka nedenle elenenler hariç.
 24. (2026-11-07) **Portföy stratejileri için eleme ölçütü (kullanıcı onayı):** işlem sayısı yerine OOS ≥ 3 yıl ve
     ≥ 20 yeniden dengeleme; başarı Sharpe ve düşüşle ölçülür (lider eşikleri: OOS net > 0, OOS Sharpe ≥ 0.5,
-    OOS max düşüş ≤ %20, en iyi %5 gün hariç net > 0). Tek-grafik stratejilerinde karar 13 aynen geçerli.
+    OOS max düşüş ≤ %20). (2026-11-07 güncelleme, kullanıcı onayı: "en iyi %5 gün hariç net > 0" kaldırıldı — al-tut dahil
+    hiçbir günlük seri geçemiyordu; yoğunlaşma sağlamlık aşamasında ölçülür.) Tek-grafik stratejilerinde karar 13 aynen geçerli.
 25. (2026-11-07) **Portföy risk bütçesi (kullanıcı onayı):** tek-grafik stratejilerinde işlem başı %1 aynen kalır.
     Portföy (hedef ağırlık) stratejilerinde pozisyon başına %1 yerine **portföyün toplam stop riski ≤ %5**; günlük %3,
     %20 kill switch ve 3x tavanı her iki türde aynen geçerli. Değer koddadır (SERT_LIMITLER), ajan aşamaz.
+26. (2026-11-07) **Yetki devri (kullanıcı):** canlı para dışındaki strateji/araştırma kararlarını lider sorumluluk alarak
+    verir ve sonrasında kullanıcıya bildirir. Canlı para (gerçek emir, sermaye, API anahtarı, sert limitlerin gevşetilmesi)
+    her zaman kullanıcı onayı ister. Lider kararları "Lider kararları günlüğü" bölümüne yazılır.
 18. Önceki projelerden alınanlar: 4S kırılım (algo-sg A + swing-sg S2 birleşik), KGT, S1; yedek B. S3 alınmadı. KMN portföy katmanında test edilecek (karar 23).
 
 ## Aşama 2 — devam ediyor (2026-11-07)
@@ -107,6 +111,10 @@ Ana ders: önceki sonuçlar OOS'a bakılarak seçilmiş ve kâr birkaç işlemde
   Kripto: 0/15 karar 13; 8'i Sharpe'ta al-tutu geçiyor; 2022'de al-tut −%75, çoğu strateji −%14..+%5.
 - Veri ⏳: Dukascopy (karar 22). DK_AAPL 5m tamam (2017–); dakikalık indirme yavaş (9–30 saat). Hızlı yol: aylık
   saatlik dosyalar → swing/daytrade 1h+ testleri önce; 15m/30m dakikalık veri tamamlanınca.
+
+## Lider kararları günlüğü (karar 26)
+- 2026-11-07: Portföy sağlamlık paketi eklenir (rastgele ağırlık/sepet kıyası, blok bootstrap Sharpe alt sınırı,
+  maliyet ×2, parametre komşuluğu); karar 24'ten kaldırılan yoğunlaşma ölçütünün yerini alır.
 
 ## Kullanıcıyı bekleyen kararlar
 - Scalp: kriptoda walk-forward'ı geçen 0. Karar 11'e göre geçen yoksa scalp ajanı kapanır — TradFi sonuçlarından sonra karar.
