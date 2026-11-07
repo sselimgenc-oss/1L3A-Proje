@@ -147,6 +147,16 @@ Ana ders: önceki sonuçlar OOS'a bakılarak seçilmiş ve kâr birkaç işlemde
 - ~~Final seçim ve kilitli dönemin bir kez açılması (karar 20)~~ — kullanıcı "aç" dedi (2026-11-07), yapıldı: `sonuclar/kilit/RAPOR.md`.
 - Karar 13 eşikleri çoklu test düzeltmesi içermiyor; sağlamlık paketi öneri kapısı ekliyor (son karar kullanıcıda).
 
+## Haiku Ar-Ge kolu (2026-11-07, dal `claude/haiku-arge-5-enstruman`)
+- 27. (2026-11-07, kullanıcı talebi) **Elenen stratejiler yalnız 5 enstrümanda** test edilir: XU30, SPX, XAUUSD, UKOIL (Brent),
+  BTCUSDT; stiller scalp/daytrade/swing. Karar 22'nin evrenini bu talep değiştirir (kullanıcı onayı bekleniyor).
+  XU30 yalnız günlük veri bulunursa ve yalnız swing.
+- Durum ve engeller: `sonuclar/haiku_arge/OZET.md`. Özet: BTCUSDT ve XAU için WF sonuçları zaten var (swing 7/218 geçti,
+  daytrade 0; BTC scalp 0). SPX, Brent, XU30 hiç test edilmedi: Dukascopy bu konteynerden erişilemiyor (tünel kapanıyor),
+  Stooq erişilemiyor, Yahoo 429 veriyor. Hız sınırı aşılmadı (istek kimliği taklidi yapılmadı).
+- **Kilit notu:** BTC ve XAU, 2026-11-07 kilit testinde yer aldığı için bu iki enstrümanda kilit artık temiz değil.
+- Veri kaynağı için kullanıcıdan istenen: SPX, Brent, XAUUSD, XU30 CSV (kilit tarihi 2025-11-01 öncesi, yerelde `veri/mumlar/`).
+
 ## Yol haritası (2026-11-06)
 **Aşama 1 — Altyapı ve adaylar**
 - 1A Motor: zorunlu çıkış kuralı; günlük limitte açık pozisyon kapatma; kısmi kâr alma; üst zaman dilimi hizalama
