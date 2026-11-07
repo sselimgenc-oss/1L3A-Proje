@@ -166,7 +166,8 @@ def islem_tanimlari(mumlar: pd.DataFrame, oos: pd.DataFrame, atr: np.ndarray) ->
     aralik = pd.Series(idx).diff().median()
     j = idx.get_indexer(pd.DatetimeIndex(oos["giris_zamani"]))
     if (j < 0).any():
-        raise ValueError("OOS giriş zamanı mum indeksinde yok")
+        raise ValueError(f"OOS giriş zamanı mum indeksinde yok ({int((j < 0).sum())}/{len(j)}): WF işlemleri şimdiki "
+                         "mum verisinden farklı veriyle üretilmiş (veri sonradan değişti); WF'yi yeniden koşun")
     h = np.maximum(1, np.rint((pd.DatetimeIndex(oos["cikis_zamani"]) - pd.DatetimeIndex(oos["giris_zamani"]))
                               / aralik)).astype(int)
     with np.errstate(divide="ignore", invalid="ignore"):
@@ -439,7 +440,10 @@ def _parametre_duyarlilik(ad, en_sik_ayar, mumlar, fund, ayar, oos_bas, oos_bit)
 
     def sabit_pf(s):
         r = backtest(mumlar, s, ayar, fund).islemler
-        r = r[(pd.DatetimeIndex(r["giris_zamani"]) >= oos_bas) & (pd.DatetimeIndex(r["giris_zamani"]) < oos_bit)]
+        if not len(r):                  # işlemsiz ayar: boş sütun naive dtype olur, Timestamp (UTC) ile kıyaslanamaz
+            return math.nan, 0
+        gz = pd.DatetimeIndex(r["giris_zamani"])
+        r = r[(gz >= oos_bas) & (gz < oos_bit)]
         return wf_tarama.pf_hesapla(r["r"].to_numpy(float)) if len(r) else math.nan, len(r)
 
     merkez, merkez_n = sabit_pf(s0)
@@ -496,7 +500,7 @@ def sr_varyansi(wf_tablo: pd.DataFrame) -> float:
 def saglamlik_tara(wf_etiket: str, etiket: Optional[str] = None, surec: int = 4, n_sim: int = N_SIM,
                    wf_dizini: Optional[Path] = None, cikti_dizini: Optional[Path] = None, veri_dizini=None,
                    baslangic=None, bitis=None, tohum: int = 0, ilerleme: bool = True,
-                   deneme_kaydi_yolu=None) -> pd.DataFrame:
+                   deneme_kaydi_yolu=None, hatalari_yeniden: bool = False) -> pd.DataFrame:
     if n_sim < 200:
         raise ValueError("n_sim >= 200 olmalı")
     etiket = etiket or wf_etiket
@@ -508,6 +512,8 @@ def saglamlik_tara(wf_etiket: str, etiket: Optional[str] = None, surec: int = 4,
     n_evren, n_kosu = deneme_sayilari(tablo, deneme_kaydi_yolu)
     yol_pq = cikti_dizini / f"{etiket}.parquet"
     onceki = pd.read_parquet(yol_pq) if yol_pq.exists() else pd.DataFrame()
+    if hatalari_yeniden and len(onceki):      # hatalı satırlar atılır, yeniden koşulur; sağlıklı satırlara dokunulmaz
+        onceki = onceki[onceki["hata"].fillna("") == ""].reset_index(drop=True)
     bitmis = set(zip(onceki["strateji"], onceki["sembol"], onceki["tf"])) if len(onceki) else set()
     gorevler = [r for r in aday.to_dict("records") if (r["strateji"], r["sembol"], r["tf"]) not in bitmis]
     gorevler.sort(key=lambda g: (g["sembol"], g["tf"]))
@@ -553,9 +559,10 @@ def main(argv=None):
     ap.add_argument("--wf-etiket", required=True)
     ap.add_argument("--etiket", default=None, help="çıktı etiketi (varsayılan: wf etiketi)")
     ap.add_argument("--surec", type=int, default=4)
+    ap.add_argument("--hatalari-yeniden", action="store_true", help="hata satırlarını sil ve yeniden koş")
     ap.add_argument("--n-sim", type=int, default=N_SIM)
     a = ap.parse_args(argv)
-    s = saglamlik_tara(a.wf_etiket, a.etiket, a.surec, a.n_sim)
+    s = saglamlik_tara(a.wf_etiket, a.etiket, a.surec, a.n_sim, hatalari_yeniden=a.hatalari_yeniden)
     if len(s):
         print(f"sağlam önerilen: {int(s['saglam_mi'].sum())}/{len(s)}  hatalı: {int((s['hata'] != '').sum())}")
 

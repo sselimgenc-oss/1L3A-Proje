@@ -239,3 +239,58 @@ def test_maliyet_carpani_motorda_gercek_maliyeti_ikiye_katlar():
         net.append(-t.net_pnl / t.miktar)
     assert net[0] > 0
     assert net[1] / net[0] == pytest.approx(2.0, rel=1e-6)
+
+
+# ---------------------------------------------------------------------------- seanslı (DK_ tipi) veri
+def _seansli(n_gun=500):
+    """Hafta içi, 7 saatlik seans (14-20 UTC), hafta sonu ve tatil boşluklu 1s mum; gürültülü yürüyüş."""
+    rng = np.random.default_rng(5)
+    gunler = pd.bdate_range("2021-01-04", periods=n_gun, tz="UTC")
+    gunler = gunler.delete(np.arange(37, n_gun, 60))                      # tatil boşlukları
+    idx = pd.DatetimeIndex([g + pd.Timedelta(hours=h) for g in gunler for h in range(14, 21)], name="zaman")
+    kap = 100 * np.exp(np.cumsum(rng.normal(0, 0.003, len(idx))))
+    ac = np.r_[100.0, kap[:-1]]
+    return pd.DataFrame({"acilis": ac, "yuksek": np.maximum(ac, kap) * 1.001, "dusuk": np.minimum(ac, kap) * 0.999,
+                         "kapanis": kap, "hacim": 1.0}, index=idx)
+
+
+def test_seansli_veride_rastgele_giris_ve_rejim_calisir():
+    from motor.veri.yeniden_ornekle import yeniden_ornekle
+    m = _seansli()
+    m = m.assign(quote_hacim=1.0, islem_sayisi=1)
+    gun = yeniden_ornekle(m, "1d", kaynak="1h", eksikleri_at=True, esik_orani=0.25)
+    for mum in (m, gun):
+        atr = gst.atr(mum["yuksek"], mum["dusuk"], mum["kapanis"], 14).to_numpy(float)
+        j = np.array([40, 90, 140, 190])
+        oos = pd.DataFrame({"yon": [1, -1, 1, -1], "giris_zamani": mum.index[j], "cikis_zamani": mum.index[j + 5],
+                            "miktar": 1.0, "net_pnl": 1.0, "r": 0.1})
+        tanim = sg.islem_tanimlari(mum, oos, atr)
+        uygun = _uygun(mum, atr)
+        rs = sg.rastgele_giris(mum, tanim, uygun, AYAR, n_sim=200, seed=1)
+        assert len(rs["toplam_r"]) == 200 and np.isfinite(rs["toplam_r"]).all()
+        rej = sg.gunluk_rejim(mum)
+        et = sg.rejim_etiketle(rej, oos["giris_zamani"])
+        assert len(et) == 4 and set(et) <= {"boga", "ayi", "yatay", "belirsiz"}
+
+
+def test_islem_tanimlari_indekste_olmayan_giris_acik_hata():
+    mum = _seansli()
+    atr = gst.atr(mum["yuksek"], mum["dusuk"], mum["kapanis"], 14).to_numpy(float)
+    oos = pd.DataFrame({"yon": [1], "giris_zamani": [mum.index[50] + pd.Timedelta(minutes=30)],
+                        "cikis_zamani": [mum.index[55]], "miktar": [1.0], "net_pnl": [1.0], "r": [0.1]})
+    with pytest.raises(ValueError, match="mum indeksinde yok"):
+        sg.islem_tanimlari(mum, oos, atr)
+
+
+def test_parametre_duyarlilik_islemsiz_ayarda_coker_degil(monkeypatch):
+    """İşlemsiz backtest boş/naive giris_zamani üretir; UTC Timestamp ile kıyas TypeError vermemeli."""
+    class _S:
+        parametre_izgarasi = {}
+        parametreler = {}
+    class _R:
+        islemler = pd.DataFrame({"giris_zamani": pd.Series([], dtype="datetime64[s]"), "r": pd.Series([], dtype=float)})
+    monkeypatch.setattr(sg, "ayar_coz", lambda ad, e: _S())
+    monkeypatch.setattr(sg, "backtest", lambda *a, **k: _R())
+    out = sg._parametre_duyarlilik("x", "varsayilan", _seansli(), None, AYAR, pd.Timestamp("2021-06-01", tz="UTC"),
+                                   pd.Timestamp("2022-01-01", tz="UTC"))
+    assert out["par_merkez_islem"] == 0 and math.isnan(out["par_merkez_pf"])

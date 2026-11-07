@@ -115,6 +115,8 @@ Ana ders: önceki sonuçlar OOS'a bakılarak seçilmiş ve kâr birkaç işlemde
 ## Lider kararları günlüğü (karar 26)
 - 2026-11-07: Portföy sağlamlık paketi eklenir (rastgele ağırlık/sepet kıyası, blok bootstrap Sharpe alt sınırı,
   maliyet ×2, parametre komşuluğu); karar 24'ten kaldırılan yoğunlaşma ölçütünün yerini alır.
+- 2026-11-07: Veri kaynağı sabitlendi: DK_ sembollerinde tf ≥ 1h için her zaman 1h dosyası (dakikalık indirme sürerken
+  kaynak kayıyordu; 5m'de eksik günler var). k3_dk ve DK içeren portföy koşuları yeni etiketle (v2) yeniden koşulur.
 
 ## Kullanıcıyı bekleyen kararlar
 - Scalp: kriptoda walk-forward'ı geçen 0. Karar 11'e göre geçen yoksa scalp ajanı kapanır — TradFi sonuçlarından sonra karar.
