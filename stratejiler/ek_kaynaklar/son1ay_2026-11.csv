@@ -1,0 +1,5 @@
+no,ad,tur,kaynak_url,yayin_tarihi,enstruman_tf,backtest_var,lisans,durum,not
+1,ETH 4s kirilim trend botu,swing,https://github.com/EPFRAGHU/delta-paper-bot,2026-10-26,ETHUSD perp 4h,evet (orneklem ici ve disi; ucret dahil),belirtilmemis,aday,orneklem ici parametre secimi; OOS 23 islem; kod kopyalanmaz
+2,Coklu strateji motoru (RSI MR / trend / grid / Bollinger scalper),karisik,https://github.com/KipTecnologia/zenbot-pro,2026-11-06,kripto,hayir,MIT,elendi,sonuc yok; grid kurali belirsiz (martingale kontrolu)
+3,NSE swing + momentum kagit botu,swing,https://github.com/harshajv7981/swing-trading-bot,2026-10-26,NSE hisse gunluk,hayir,belirtilmemis,elendi,sonuc yok; yazar kendi sinyalinin avantaj gostermedigini belirtti
+4,Freqtrade 2026.10 surumu,arac,https://github.com/freqtrade/freqtrade/releases/tag/2026.10,2026-10-30,-,-,GPL,bilgi,strateji degil; backtest arayuz degisiklikleri
