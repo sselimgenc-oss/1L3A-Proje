@@ -10,3 +10,9 @@ sira,ad,ulke,tur,kaynak_url,son_guncelleme,enstruman_tf,sonuc_var_mi,sonuc_ozeti
 -,"Kore araclari (buylow, upbit-official toolkit, Vibe-Trading-KR, kis-trader)",Kore,arac,-,2026,KOSPI/Upbit,hayir,yok,-,MIT/yok,bilgi,strateji degil
 -,"ML tabanli (0xooank jq-lgbm, NeutralMean7)",Cin/Kore,ML,-,2025-10/2026,-,sayfaya gore,-,-,-,elendi,ML elenen kategori
 -,"Okunmayanlar: robertquant/python_jointquant, buylow (ayrintili), first-ea HTML",Cin/Kore/Japonya,-,-,-,-,bilinmiyor,-,-,-,okunmadi,izin verilirse okunabilir
+BigQuant kucuk deger hacim-fiyat (2026-08-10),Cin,portfoy (5 gun),https://bigquant.com/wiki/doc/wz9jTMYbUO,2026-08-10,A-hisse,evet (2025-2026),"toplam %100, yillik %84, Sharpe 1.77, DD -22.8%",maliyet/OOS yok,-,izle (supheli),kisa donem
+BigQuant Gelecek/haftalik yon (2026-10-26),Cin,futures gunluk,https://bigquant.com/wiki/doc/aInE3rVvGv,2026-10-26,Cin futures,evet,"toplam %10.7, tum gunler long",yon yanliligi,-,elendi,sans payi
+BigQuant akilli para faktoru (2026),Cin,faktor,https://bigquant.com/wiki/doc/Ath4Umo467,2026,A-hisse dakika,evet,tum kombinasyonlar Sharpe<0,-,-,elendi (negatif sonuc),yazarin kendi bulgusu
+BigQuant dakika faktor 2018-2025 (2026-10-28),Cin,faktor,https://bigquant.com/wiki/doc/rhWYMMN59h,2026-10-28,A-hisse,evet,grup 0 yillik %20 (aylik %1.6),maliyet/uygulanabilirlik yok,-,izle,"faktor, strateji degil"
+Qiita FX API arastirmasi,Japonya,bilgi,https://qiita.com/samakusa/items/9ee4562e864a50013d49,2025-07-17,FX,hayir,-,-,-,bilgi,strateji degil
+note: Time-Series Momentum -> MT5 EA (MatsukazeAlgo),Japonya,swing/trend (FX),https://note.com/pinescript_pro/n/nc10bfdc698ac,2026-05-02,FX,kismen (ucretli),"bolum gorunur, sonuc ucretli",-,-,izle,yazar: GogoJungle EA'larinin ~%80'i martingale

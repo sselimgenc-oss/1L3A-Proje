@@ -78,3 +78,36 @@
 1. **Kaynakların izni:** `bigquant.com`, `joinquant.com`, `zhihu.com`, `qiita.com`, `zenn.dev`, `note.com`, `blog.naver.com`, `tistory.com`. Bunlar olmadan Çin/Kore/Japonya'nın en önemli kaynakları (聚宽 topluluğu, BigQuant strateji paylaşımları, Naver/Tistory trader blogları) taranamaz. **İzin verirseniz ekleyebilirim.**
 2. Kalan okunmamışlar: `robertquant/python_jointquant` (聚宽 ETF rotasyonu), `aran-nakayama/first-ea` HTML raporları, `JeongSeongMok/buylow`.
 3. S15 ve Asym-DTS-H'yi kilitli-dönem disiplinimizle test etmeye aday (karar 13, 19–20).
+
+## Ek bölüm (ağ izni sonrası, 2026-11-07): BigQuant strateji topluluğu ve Qiita/note
+
+**Erişim durumu:** BigQuant (bigquant.com) ve Qiita, Zenn, note açıldı; BigQuant'taki 24 yazının başlıkları ve sonuç satırları okundu. **聚宽 (joinquant.com) Çin dışı IP'lerini engelliyor** ("şu an bölgenizde desteklenmiyor"), Zhihu içerik vermedi, Tistory açılmadı, `blog.naver.com` ağ izni servisi tarafından reddedildi.
+
+### BigQuant (Çin, 2026 yazıları)
+| Yazı | Tarih | Tür | Sonuç | Değerlendirme |
+|---|---|---|---|---|
+| Küçük değer, hacim-fiyat uyumu + büyük piyasa zamanlaması | 2026-08-10 | portföy (15 hisse, 5 gün) | 2025–2026: toplam %100.2, yıllık %84.3, Sharpe 1.77, DD %22.8, kazanma %67.7 | **Şüpheli:** 1–1.5 yıllık dönem, maliyet ve OOS yok; yüksek getiri/kısa dönem. İzle. |
+| Tek hisse, 5 gün, PE ve RSI filtreli | 2026-08-10 | (aynı yazı) | — | Yukarıdakiyle aynı. |
+| Yüksek-düşük al-sat (puan sıralama, "son 1 yıl canlı") | 2026-08-01 (yakın) | swing | Sayı yok | Sonuç doğrulanamıyor. İzle. |
+| Lider strateji (AI + trend sinyali, CSI 150 artırımı) | 2026-07 | portföy 5 hisse, 5 gün | Rakam yok, "canlı" iddiası | İzle; kural açık, sonuç yok. |
+|股指期货 haftalık yön | 2026-10-26 | futures günlük | Toplam %10.7 — **tüm günler long** (yazar: "şans payı var") | **Elendi**: yön yanlılığı, maliyet/kayma belirsiz. |
+| 聪明钱 (尾盘 hareket) faktörü, 2024–2026 | 2026 | faktör | **Tüm kombinasyonların Sharpe'ı < 0** (yazarın kendi bulgusu) | **Elendi** (negatif sonuç, dürüst). |
+| Dakika bazlı faktör, 2018-06..2025-03, 300 hisse | 2026-10-28 | faktör (en düşük grup) | Ayrılma getirisi %20 yıllık (grup 0, ~300 hisse, aylık %1.6) | Faktör, strateji değil; maliyet ve uygulanabilirlik yok. İzle. |
+| Otomatik aşırı-uyum hikayesi (80% yıllık eğitim, gerçek kötü) | — | — | Yazar: "eğitimde yüksek, canlıda kötü" | Ders kaynağı. |
+
+**Sonuç:** BigQuant'taki sonuç paylaşan yazıların çoğu **kısa dönem, maliyetsiz veya OOS'suz**. En dikkat çekici rakam (%84 yıllık) en az doğrulanabilir olanı.
+
+### Qiita ve note (Japonya)
+- **Qiita — FX API araştırması** (samakusa, 2025-07): sadece API karşılaştırması; strateji ve sonuç yok. **Bilgi**.
+- **note — "Akademik makaleden FX EA"** (MatsukazeAlgo, 2026-05-02, kısmen ücretli): Moskowitz, Ooi & Pedersen (2012) "Time Series Momentum" makalesini MT5 EA'ya çeviriyor, başarısız denemeleri de yayınlıyor. **Önemli uyarı:** yazar, GogoJungle'daki EA'ların "%80'inin ナンピン/マーチンゲale" olduğunu söylüyor → martingale kontrolü zorunlu. Fikir (zaman serisi momentumu) izlenebilir; sayılar ücretli bölümde.
+
+### Ek elemeler
+- Japonya FX EA ticari yazıları, Qiita araştırmaları: elendi (bilgi).
+- Korece Tistory/Naver: erişim yok (Tistory açılmadı, Naver izni reddedildi).
+
+### Güncel adaylar (bu bölüm sonrası)
+- Çin: S15 kripto (15 dk, sonuçlu), Asym-DTS-H (ETF, in-sample), **BigQuant küçük değer (%84 yıllık, doğrulanmamış, izle)**.
+- Japonya: kabu-app (temettü 10 hisse), note Time-Series momentum (ücretli, izle).
+- Kore: hâlâ sonuçlu kaynak yok.
+
+**Eksikler:** 聚宽 (JoinQuant) tamamen kapalı (Çin dışı IP engeli) — bu, Çin'in en büyük strateji topluluğu. Çin'den bir ağ çıkışı veya veri kaynağı olmadan tam tarama yapılamaz; bunu ayrıca kararınıza bırakıyorum. Zhihu içeriği de yalnız başlık düzeyinde geldi.
