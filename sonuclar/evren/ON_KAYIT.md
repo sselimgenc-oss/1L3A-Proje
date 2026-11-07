@@ -19,6 +19,16 @@ Evren aşağıdaki gibi değişti; "Evren U (13)" tanımının yerine geçer:
 - Bir enstrümanın verisi o TF'de yoksa (ör. kısa geçmiş) dışarıda kalır ve raporlanır; analiz başlangıcı evrenin ≥ %75'inin
   verisi olduğu tarih. Genişlik ölçütündeki üç sınıf (kripto/hisse/emtia) scalp için de geçerlidir (SPX hisse sınıfı sayılır).
 
+## GÜNCELLEME 2 (2026-11-07, kullanıcı, sonuç görülmeden)
+- **BIST eklendi** (karar 6'daki "BIST yok" kullanıcı kararıyla kalktı).
+- Daytrade ve swing evrenine BIST hisseleri: AKBNK, ASELS, ASTOR, BIMAS, EKGYO, EREGL, FROTO, KCHOL, SISE, TCELL, THYAO,
+  TRALT, TUPRS (13). Varlık sınıfı olarak "BIST" ayrı sınıf sayılır (genişlik ölçütünde sınıflar: kripto / ABD hisse /
+  emtia / BIST — en az ikisinde net > 0).
+- Scalp evrenine XU030 (BIST 30 endeksi) eklendi → scalp evreni 5: SPX, XAUUSD, petrol, BTCUSDT, XU030.
+- Veri: BIST için ücretsiz kaynakların intraday geçmişi kısadır (ör. 1h ~2 yıl, 5m ~60 gün). Bir sembolün o TF'de WF için
+  yeterli geçmişi yoksa (en az bir eğitim + bir test penceresi) o TF'de dışarıda kalır ve raporlanır; uydurma/uzatma yok.
+- İşlem yeri: BIST Binance'te yok; paper için veri kaynağı, canlı için ayrı aracı kurum gerekir (canlı kararı kullanıcıda).
+
 ## Tanım
 **Evren stratejisi** = bir strateji + bir zaman dilimi + TEK ortak parametre seti, evrenin TÜM enstrümanlarında aynı anda
 çalışır; sinyal hangi enstrümanda çıkarsa orada işleme girer. Evren U (karar 22): BTCUSDT, ETHUSDT, SOLUSDT, DK_AAPL, DK_MSFT,

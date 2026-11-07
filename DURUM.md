@@ -13,7 +13,7 @@ _Son güncelleme: 2026-11-06 (Aşama 1 ara durum)_
 3. Min zaman dilimi 5 dk. Stratejiler deterministik kod; LLM ajanları her mumda değil, ≥15 dk aralıkla üst seviyede karar verir (rejim, sermaye dağılımı, işlem sonrası analiz).
 4. Öğrenme: lider değişiklik önerir → walk-forward test → kullanıcı onayı. Canlıda kendini değiştiren kod yok.
 5. Sert risk limitleri LLM kontrolü dışında. Martingale kesin ret.
-6. Binance: kripto + TradFi (ABD hisse, emtia) perpetual'ları. BIST yok.
+6. Binance: kripto + TradFi (ABD hisse, emtia) perpetual'ları. ~~BIST yok.~~ (2026-11-07 kullanıcı: BIST eklendi, karar 27)
 7. Önce paper trading (Binance testnet değil, canlı veri + kendi simülasyon motoru).
 8. DigitalOcean'da çalışır; dashboard + Telegram.
 9. ~~(2026-11-06) Az enstrüman, derin uzmanlık.~~ (2026-11-07 kullanıcı kararıyla değişti → karar 23)
@@ -189,6 +189,8 @@ Ana ders: önceki sonuçlar OOS'a bakılarak seçilmiş ve kâr birkaç işlemde
   Evren (kullanıcı, aynı gün): daytrade/swing = emtia 5 (altın, gümüş, petrol, bakır, doğalgaz) + S&P 500'de piyasa değeri
   > 500 milyar $ hisseler (bugün 18) + stabil hariç piyasa değeri > 5 milyar $ kriptolar (bugün 15, Binance perp'i olanlar);
   üyelik her gün kontrol. Scalp = yalnız SPX, XAUUSD, petrol, BTCUSDT.
+  BIST eklendi (kullanıcı): daytrade/swing'e AKBNK, ASELS, ASTOR, BIMAS, EKGYO, EREGL, FROTO, KCHOL, SISE, TCELL, THYAO,
+  TRALT, TUPRS; scalp'e XU030 (scalp evreni 5). BIST Binance'te yok → canlı için ayrı aracı kurum gerekir.
 
 ## Kullanıcıyı bekleyen kararlar
 - ~~Final seçim ve kilitli dönemin bir kez açılması (karar 20)~~ — kullanıcı "aç" dedi (2026-11-07), yapıldı: `sonuclar/kilit/RAPOR.md`.
