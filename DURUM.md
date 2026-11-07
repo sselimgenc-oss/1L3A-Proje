@@ -123,6 +123,11 @@ Ana ders: önceki sonuçlar OOS'a bakılarak seçilmiş ve kâr birkaç işlemde
   v3 sonucu (OOS 2019-01 → 2025-06; emtia 2014 →): sağlam = hepsi: pf__rotasyon (Sharpe 1.12), pf__btc_hedge (0.92);
   hisse_emtia: pf__kanarya (1.60, maliyet×2'de 1.55). Al-tut Sharpe ~1.1 (Mag7 boğası); yalnız kanarya belirgin üstün.
 
+- 2026-11-07: TradFi tek-grafik (sabit veri, k3_dk_v2): WF 198/2877 geçti, sağlamlık 36. Kripto 15. Final tek-grafik
+  aday havuzu 51 satır / 34 strateji (`sonuclar/final_aday_havuzu_tek_grafik.csv`); hepsi swing, tek daytrade
+  (dis__dual-thrust ETH 1h/30m), scalp 0 (TradFi dakikalık veri bekleniyor). Çok sembolde sağlam: fraktal-alligator (5 hisse),
+  rsi-gauss-velocity (3 hisse). Emtiada sağlam tek-grafik yok.
+
 ## Kullanıcıyı bekleyen kararlar
 - Scalp: kriptoda walk-forward'ı geçen 0. Karar 11'e göre geçen yoksa scalp ajanı kapanır — TradFi sonuçlarından sonra karar.
 - Final seçim (ajan başına ~3) ve kilitli dönemin açılması (karar 20) — kullanıcı onayıyla.
