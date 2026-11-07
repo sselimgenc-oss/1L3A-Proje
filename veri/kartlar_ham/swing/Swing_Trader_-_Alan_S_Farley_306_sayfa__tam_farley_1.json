@@ -1,0 +1,764 @@
+[
+ {
+  "kart_id": "swing__60dk-stokastik-533-geri-cekilme-alimi__farley",
+  "ad": "60 Dakikalık 5-3-3 Stokastik Alım-Satım Salınımı ile Geri Çekilme Alımı",
+  "stil": "swing",
+  "kaynak": {
+   "pdf": "Swing_Trader_-_Alan_S_Farley_306_sayfa.pdf",
+   "sayfalar": [
+    91,
+    92,
+    93
+   ]
+  },
+  "ozet": "Fiyat kırılma seviyesinde kırbaçlanıp geri çekilince, 60 dakikalık 5-3-3 Stokastik satıcı kontrolünden çıkıp dar bir sıkışma sonrası alım tarafına geçtiğinde ve geri çekilme sığ kaldığında (son yükselişin %38'i üstü, 50 EMA üstü) alım yapılır.",
+  "kategori": "ortalamaya_donus",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+   "islem": "1h",
+   "ust_filtre": "1d"
+  },
+  "gostergeler": [
+   {
+    "ad": "Stokastik",
+    "parametreler": {
+     "K": 5,
+     "yavaşlatma": 3,
+     "D": 3
+    }
+   },
+   {
+    "ad": "EMA",
+    "parametreler": {
+     "periyot": 50
+    }
+   },
+   {
+    "ad": "Fibonacci",
+    "parametreler": {
+     "geri_cekilme": "0.382"
+    }
+   }
+  ],
+  "long_giris": [
+   "60 dk 5-3-3 Stokastik aşağı dönmüş, satış dalgası bir süre sürmüş; ardından dar yatay sıkışma ve Stokastik'in alım tarafına (yukarı) dönmesi (kısa vadeli dip işareti)",
+   "Son düşüşte nispeten yüksek bir pivot dibi oluşmuş ve fiyat, son yükselişin %38 geri çekilmesinin üzerinde kalmış",
+   "Yükseliş 50 barlık EMA gibi orta bir ortalamanın üzerinde veya üzerinde başlıyor",
+   "Agresif giriş: koşullar tamamsa kademeli (ölçekli) al; muhafazakar giriş: fiyat son yükselişin zirvesini aşınca al"
+  ],
+  "short_giris": [],
+  "stop_loss": "Kitapta sayısal stop yok (geri çekilme dibi ve %38 seviyesi altı mantıksal aday)",
+  "kar_al": "Kitapta sayısal hedef yok (satış öncesi son zirve ima edilir)",
+  "iz_suren_stop": null,
+  "zaman_cikisi": "60 dk Stokastik yarım döngüsü yaklaşık 5-10 saat/1-1,5 gün; swing için 2-3 günlük dalgalar. Kitap, Stokastik'in ortasında dönenlere göre 80/20 uçlarından dönenlerin daha uzun ters salınım ürettiğini söyler.",
+  "filtreler": [
+   "Aşırı alım/satım (80 üstü / 20 altı) bölgesinden dönüşler gösterge ortasından dönüşlere tercih edilir (s.93)",
+   "Stokastik bir uçta uzun süre kalabilir; çelişen döngüler geç alım/erken satışa yol açar (s.93)"
+  ],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 1,
+   "gerekce": "Stokastik, %38 ve 50 EMA ölçülebilir; ancak 'dar sıkışma', 'nispeten yüksek pivot', 'döngü yarı' tanımı ve stop/hedef yok."
+  },
+  "belirsizlikler": [
+   "'Dar sıkışma' ve 'nispeten yüksek pivot' ölçüsü yok",
+   "Stop ve hedef kitapta yok; ölçülebilir öneri: stop = geri çekilme dibinin altı veya 1 ATR, hedef = son yükseliş zirvesi (kural değil, test önerisi)",
+   "Stokastik 80/20 eşikleri s.86'da genel olarak geçer; bu kurulum için sayısal eşik verilmemiş",
+   "Short ayna kuralı kitapta açıkça yazılmamış"
+  ],
+  "uyumluluk_notu": "60m'ye doğrudan uygulanır (5m/15m kripto için de zaman dilimi ölçeklenebilir); hacim gerekmez. Hisse mantığı ama gösterge/fiyat bazlı olduğundan kripto/emtia/hisse perpetual'da çalışır.",
+  "varyantlar": [
+   "Gün içi çok kısa Stokastik ayarı yerine 14-7-7 uzun vadeli ayar da anılır (s.88)"
+  ],
+  "anahtar_kelimeler": [
+   "stokastik",
+   "5-3-3",
+   "alim-satim-salinimi",
+   "geri-cekilme",
+   "fibonacci-38",
+   "coklu-zaman-dilimi",
+   "50-ema"
+  ]
+ },
+ {
+  "kart_id": "swing__stokastik-17-17-1-uzun-vade-donus__farley",
+  "ad": "Uzun Vadeli Göreceli Güç (17-17-1 Stokastik / Yumuşak RSI) Dönüş Girişi",
+  "stil": "swing",
+  "kaynak": {
+   "pdf": "Swing_Trader_-_Alan_S_Farley_306_sayfa.pdf",
+   "sayfalar": [
+    89,
+    90,
+    91
+   ]
+  },
+  "ozet": "Uzun döngülü göreceli güç göstergesi aşırı satım çizgisinden yukarı dönerken, fiyat desteğe inmiş ve gevşemişse giriş zamanlanır; gösterge üst çizgide basılıp aşağı dönünce yeni uzun pozisyonlardan kaçınılır.",
+  "kategori": "ortalamaya_donus",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+   "islem": "1d",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "Stokastik",
+    "parametreler": {
+     "K": 17,
+     "yavaşlatma": 17,
+     "D": 1
+    }
+   },
+   {
+    "ad": "RSI",
+    "parametreler": {
+     "periyot": 14,
+     "yumuşatma": 7
+    }
+   }
+  ],
+  "long_giris": [
+   "Hisse desteğe düşmüş ve gevşemiş olmalı",
+   "17-17-1 Stokastik (veya 7 dönemle yumuşatılmış 14 günlük Wilder RSI) aşırı satım çizgisinden yukarı dönünce giriş zamanla"
+  ],
+  "short_giris": [
+   "Aynalı short kuralı açıkça yazılmamış; üst çizgide basılıp dönme en iyi kısa satış bölgesi olarak anılır (s.89: 'en iyi kısa satışlar en üstte')"
+  ],
+  "stop_loss": null,
+  "kar_al": null,
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [
+   "Gösterge üst çizgiden aşağı döndüğünde yeni uzun pozisyondan kaçın: en az 6-8 hafta sürebilecek düşüş sinyali (s.91)"
+  ],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 1,
+   "gerekce": "Gösterge ve yönü tanımlı ama eşik değerleri, stop ve çıkış yok; filtre/zamanlama aracı."
+  },
+  "belirsizlikler": [
+   "Aşırı alım/satım çizgi değerleri bu gösterge için verilmemiş (varsayılan 80/20 olabilir; kitapta yok)",
+   "Stop, hedef ve çıkış yok",
+   "21-28 günlük güç-zayıflık döngüsü iddiası (s.89) kanıtsız; 20-22 günlük bir düşüşün aynı sürede tekrarlanacağı iddiası (s.90)",
+   "Ölçülebilir öneri: günlük bar, Stokastik(17,17,1) <20 iken yukarı dönüş + fiyat 50 EMA üstüne dönüş (test önerisi)"
+  ],
+  "uyumluluk_notu": "Günlük/4s zaman dilimlerinde tüm piyasalarda hesaplanır. Tek başına sinyal değil, zamanlama filtresi; kart öncelikle filtre modülü adayı.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "stokastik",
+   "17-17-1",
+   "rsi",
+   "asiri-satim",
+   "goreli-guc",
+   "zamanlama-filtresi"
+  ]
+ },
+ {
+  "kart_id": "swing__2b-basarisiz-kirilim-donusu__farley",
+  "ad": "2B Tersine Dönüş (Başarısız Kırılım) Girişi",
+  "stil": "swing",
+  "kaynak": {
+   "pdf": "Swing_Trader_-_Alan_S_Farley_306_sayfa.pdf",
+   "sayfalar": [
+    94,
+    95,
+    133
+   ]
+  },
+  "ozet": "Fiyat yeni bir tepe (veya dip) yapıp son salınım zirvesinin altına (üstüne) geri düşerek kırılımı başaramazsa, ilk toparlanma sıçramasının en düşüğü kırılınca ters yönde giriş yapılır.",
+  "kategori": "kirilim",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+   "islem": "1d",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "Fiyat yapısı (salınım zirvesi/dibi)",
+    "parametreler": {
+     "başarısızlık_penceresi_çubuk": "1-3 (daha geç de olabilir)"
+    }
+   }
+  ],
+  "long_giris": [
+   "Aynalı: fiyat yeni bir dibe iner ama son salınım dibinin üstüne geri döner (başarısız kırılış)",
+   "Giriş: dönüş yönündeki ilk sıçramanın en yükseği aşılınca (kitap 'long' tarafı ayrıca yazmaz, ayna varsayımı)"
+  ],
+  "short_giris": [
+   "Fiyat son salınım zirvesinin üstüne çıkar (yeni yüksek) ama kırılım başarısız olur ve fiyat zirvenin altına döner (genelde kırılımdan 1-3 çubuk içinde)",
+   "Satış sinyali: fiyat ilk toparlanma sıçramasının (başarısız yüksek sonrası ilk geri çekilmenin) en düşük seviyesinin altına inince"
+  ],
+  "stop_loss": null,
+  "kar_al": null,
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [
+   "En etkili: günlük grafikte, yüksek hacimli kırılım ve ardından geniş aralıklı satış veya boşluk çubuğu (alıcıları tuzağa düşürür)",
+   "Yeni zirve/dibe ulaşıldığında geri dönüşler diğer zamanlara göre daha sık (s.94)"
+  ],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 1,
+   "gerekce": "Kurulum fiyat yapısına dayalı ve mekanik tanımlanabilir (tepe, 1-3 çubuk, ilk sıçrama dibi); ancak stop/hedef yok ve kitap ayrıntıyı 'Bölüm 7'ye bırakır (aralığın dışında)."
+  },
+  "belirsizlikler": [
+   "Stop ve hedef bu bölümlerde yok (ayrıntılı örnek Bölüm 7'de, 153. sayfadan sonra)",
+   "'İlk toparlanma sıçramasının en düşüğü' tanımı muğlak: kırılım çubuğunun düşüğü mü, ilk geri çekilme dibi mi",
+   "Ölçülebilir öneri: swing zirvesi = N çubuk fraktal; başarısızlık = kapanış zirvenin altında ≤3 çubuk içinde; stop = başarısız yüksek (test önerisi)",
+   "Long (ayna) kuralı açıkça yazılmamış; Sperandeo'nun '2B' kavramı olarak sunulur"
+  ],
+  "uyumluluk_notu": "Her enstrümanda ve zaman diliminde (≥5m) fiyat bazlı kodlanır; hacim şart değil. Kripto dahil çalışır.",
+  "varyantlar": [
+   "Kitap, yüksek hacimli kırılımdan sonra geniş aralıklı bar/boşlukla başarısızlığı günlük grafikte tercih eder"
+  ],
+  "anahtar_kelimeler": [
+   "2b",
+   "basarisiz-kirilim",
+   "tersine-donus",
+   "salinim-zirvesi",
+   "tuzak"
+  ]
+ },
+ {
+  "kart_id": "swing__dar-aralik-sikisma-short__farley",
+  "ad": "Dar Aralık / Sıkışma İçinden Savunmacı Short (Destek veya 50 EMA Altında)",
+  "stil": "swing",
+  "kaynak": {
+   "pdf": "Swing_Trader_-_Alan_S_Farley_306_sayfa.pdf",
+   "sayfalar": [
+    134,
+    141
+   ]
+  },
+  "ozet": "Düşüş trendinde kilit destekte (veya satış sonrası toparlanmanın 50 EMA'da durduğu yerde) fiyat 2-3 günlük dar aralığa sıkışınca aralıktan short emri girilir; stop kısa vadeli zirvenin hemen üstüne konur.",
+  "kategori": "kirilim",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+   "islem": "1d",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "EMA",
+    "parametreler": {
+     "periyot": 50
+    }
+   }
+  ],
+  "long_giris": [],
+  "short_giris": [
+   "Düşüş trendi gelişiyor ve fiyat kilit destek seviyesinde 2-3 günlük sıkı bir aralık oluşturuyor: aralık içinde satış emri gir",
+   "Varyant (50 EMA): güçlü hacimli kırılma sonrası aktif satış, destekte toparlanma 50 EMA'ya kadar, orada sıçrama duruyor ve fiyat çubukları hareketli ortalama boyunca daralıyor: dar barlar içinde short"
+  ],
+  "stop_loss": "Aralık tipinde: kısa vadeli en yüksek seviyenin hemen üstüne alım stopu; 50 EMA varyantında: hareketli ortalamanın üstündeki herhangi bir sıçrama çıkış işareti",
+  "kar_al": "Kitapta yok (aşağı yönlü ivme / destek altı beklenir)",
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [
+   "Fiyatın daha büyük bir toparlanmaya yönelme riski: bu yüzden alım stopu kısa vadeli zirvenin hemen üstünde",
+   "Satış tarafı kalabalık olmasın: 20 günlük SMA / kısmen dolu boşluk gibi ortak seviyeler tercih (s.134)"
+  ],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 2,
+   "gerekce": "Giriş bölgesi ve stop yeri tanımlı; hedef yok, 'dar aralık' sayısal değil."
+  },
+  "belirsizlikler": [
+   "'Dar aralık' ölçüsü yok; ölçülebilir öneri: son 2-3 barın toplam aralığı ATR'nin belirli bir oranının altında (test önerisi)",
+   "Hedef yok; destek altı devam beklenir",
+   "Long aynası yazılmamış",
+   "50 EMA varyantında 'güçlü hacim' sayısal değil"
+  ],
+  "uyumluluk_notu": "Fiyat ve EMA ile kodlanır; kripto/emtia/hisse'de uygulanabilir. 'Gün' yerine bar sayısı ile ölçeklenir.",
+  "varyantlar": [
+   "Ana varyant: kilit destek aralığı; ikinci varyant: 50 EMA direnci altında dar barlar"
+  ],
+  "anahtar_kelimeler": [
+   "dar-aralik",
+   "sikisma",
+   "short",
+   "destek",
+   "50-ema",
+   "savunmaci"
+  ]
+ },
+ {
+  "kart_id": "swing__basarisizligin-basarisizligi-ikinci-sinyal__farley",
+  "ad": "Başarısızlığın Başarısızlığı: Kırılım/Kırılış Sonrası İkinci Sinyalde Giriş",
+  "stil": "swing",
+  "kaynak": {
+   "pdf": "Swing_Trader_-_Alan_S_Farley_306_sayfa.pdf",
+   "sayfalar": [
+    49,
+    135,
+    136,
+    141,
+    147
+   ]
+  },
+  "ozet": "İlk kırılma/kırılış sinyali kırbaçlanıp fiyat tuzak seviyesini aştıktan sonra aynı destek/direncin ters tarafına geri dönerse, ikinci sinyal birincisinden daha güvenilir kabul edilir ve orada giriş yapılır.",
+  "kategori": "kirilim",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+   "islem": "1h",
+   "ust_filtre": "1d"
+  },
+  "gostergeler": [
+   {
+    "ad": "EMA",
+    "parametreler": {
+     "periyot": 50
+    }
+   },
+   {
+    "ad": "Fibonacci",
+    "parametreler": {
+     "geri_cekilme": "0.618"
+    }
+   }
+  ],
+  "long_giris": [
+   "Aynalı: destek altı ilk kırılış başarısız olur, fiyat tersine kırılım seviyesinin üstüne döner; sonra yeniden aynı seviyenin üstüne çıkınca ilk al sinyali ve ardından geri çekilmede ikinci sinyal",
+   "Kitap long örneği olarak AK Steel'i verir: kırılım sonrası destek altına kırbaçlama, 50 EMA'dan dönüş, ikinci kez kırılma seviyesi aşılınca devam (s.140-141)"
+  ],
+  "short_giris": [
+   "İlk kırılış (ör. çift tepe boyun çizgisi / destek) kısa süreli sıkışmayla kırılış seviyesinin üstüne çıkar; yükseliş önceki satışın %62'si civarında biter",
+   "Fiyat dönüp aynı destek/direnç seviyesinin altına inince ikinci satış sinyali: giriş burada",
+   "50 barlık EMA'ya yakın geri dönüşler hem short hem long için güvenilir giriş noktası (fraktal davranış)"
+  ],
+  "stop_loss": "Kitapta sayısal yok (örnekte kırılış seviyesi yeniden kırılınca; kısa tarafta tuzak yüksek mantıksal stop)",
+  "kar_al": "Kitapta yok",
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [
+   "Opsiyon vade haftası ve ay sonu bu tür short girişlerini zayıflatır (s.136)",
+   "Aşırı satım (RSI14,7 alt %20'den dönüş) ve Bollinger %75 alt bant dışı iken short yapma (s.136-137)"
+  ],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 2,
+   "gerekce": "Mantık net (ilk sinyal kırbaçlanır, ikinci sinyalde gir); seviyeler ve %62 ölçülebilir, ancak stop/hedef ve 'kısa süreli' sayısal değil."
+  },
+  "belirsizlikler": [
+   "Stop ve hedef yok; ölçülebilir öneri: stop = squeeze zirvesi, hedef = ilk kırılış hedefi (test önerisi)",
+   "Kırbaçlanma süresi ve %62 toleransı kitapta kesin değil",
+   "Fibonacci kamçı kartıyla (swing__fibonacci-62-78-kamci__farley) ve 50 EMA kartıyla örtüşür; birleştirmede dikkat",
+   "Örnek 60 dk Adem ve Havva çift tepe (Canadian Solar); hisse özgü"
+  ],
+  "uyumluluk_notu": "Fiyat seviyesi ve EMA ile kodlanır; ≥15m'de her piyasada uygulanabilir.",
+  "varyantlar": [
+   "1-2-3 döngüsünde 'çözüm' aşaması: ikinci itme önceki ilk salınımın yüksek/düşüğünü aşar"
+  ],
+  "anahtar_kelimeler": [
+   "basarisizligin-basarisizligi",
+   "1-2-3",
+   "kirpilma",
+   "tuzak",
+   "kirilim-geri-test"
+  ]
+ },
+ {
+  "kart_id": "swing__geri-cekilme-short-direnc__farley",
+  "ad": "Teknik Hasar Sonrası Dirence Zayıf Yükselişte Short (Pullback Short)",
+  "stil": "swing",
+  "kaynak": {
+   "pdf": "Swing_Trader_-_Alan_S_Farley_306_sayfa.pdf",
+   "sayfalar": [
+    133
+   ]
+  },
+  "ozet": "Belirgin teknik hasardan (destek kırılması, boşluk) sonra fiyat bariz bir dirence zayıf yükselip yuvarlanırsa veya direnci aşıp geri satılırsa short girilir.",
+  "kategori": "destek_direnc",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+   "islem": "1d",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "Destek/direnç",
+    "parametreler": {}
+   }
+  ],
+  "long_giris": [],
+  "short_giris": [
+   "Enstrüman belirgin teknik hasar görmüş (genelde yerleşik düşüş trendi; yükseliş trendinde destek kıran boşluk da olabilir)",
+   "Fiyat bariz bir direnç seviyesine yükselip yuvarlanınca short",
+   "Veya bariz direncin üzerine çıkıp ardından geri satılınca short"
+  ],
+  "stop_loss": "Kitapta yok",
+  "kar_al": "Kitapta yok",
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [
+   "Short için en zayıf sektörlerden enstrüman seç; ana endeksler aşırı alımda ve dirence giderken short (s.137)"
+  ],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 1,
+   "gerekce": "Giriş tetiği kaba (direnç seviyesi tanımı, 'yuvarlanma' yok); stop/hedef yok."
+  },
+  "belirsizlikler": [
+   "'Bariz direnç', 'teknik hasar', 'yuvarlanma' ölçüsü yok",
+   "Stop ve hedef yok",
+   "Bu kart 50 EMA geri çekilme kartının short aynası ile örtüşebilir"
+  ],
+  "uyumluluk_notu": "Fiyat bazlı; kripto/emtia/hisse'de çalışır. Kitaptaki bağlam: 2008 finans/konut zayıflığı.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "geri-cekilme",
+   "short",
+   "direnc",
+   "teknik-hasar"
+  ]
+ },
+ {
+  "kart_id": "swing__hacim-3x-genis-bar-kirilim__farley",
+  "ad": "Güç Sıçraması: 60 Günlük Ort. Hacmin 3 Katı + Geniş Bar Kırılım/Kırılış",
+  "stil": "swing",
+  "kaynak": {
+   "pdf": "Swing_Trader_-_Alan_S_Farley_306_sayfa.pdf",
+   "sayfalar": [
+    143,
+    144
+   ]
+  },
+  "ozet": "Hacmin en güvenilir olduğu senaryo: destek/direnci geniş bir çubukla aşan ve 60 günlük hareketli ortalama hacmin en az 3 katı hacimle basılan kırılma veya bozulma.",
+  "kategori": "kirilim",
+  "piyasa_rejimi": "volatil",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+   "islem": "1d",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "Hacim SMA",
+    "parametreler": {
+     "periyot": 60,
+     "çarpan": 3
+    }
+   },
+   {
+    "ad": "OBV",
+    "parametreler": {}
+   }
+  ],
+  "long_giris": [
+   "Günlük hacim >= 3 x (60 günlük ortalama hacim)",
+   "Fiyat bir destek/direnç seviyesinden geniş aralıklı bir çubukta uzaklaşıyor (yukarı kırılım)"
+  ],
+  "short_giris": [
+   "Aynı koşul aşağı yönde (geniş çubukla destek bozulması + 3x hacim)"
+  ],
+  "stop_loss": "Kitapta yok",
+  "kar_al": "Kitapta yok",
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [
+   "En iyi spekülatif, perakende/momentum hisselerinde işler; geniş endeks fonu bileşenlerinde sepet etkisi nedeniyle zayıf (s.143)",
+   "OBV, net sinyal + önemli seviye (yüksek/düşük salınım veya önemli ortalama testi) varken kullanılır; yoksa kaçın (s.144)"
+  ],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 2,
+   "gerekce": "Hacim 3x ve geniş bar kriteri sayısal; giriş anı, stop ve hedef yok; 'geniş çubuk' eşiği yok."
+  },
+  "belirsizlikler": [
+   "Giriş zamanı, stop ve hedef yok (Power Spike taraması Bölüm 12'de, aralık dışı)",
+   "'Geniş çubuk' eşiği yok; öneri: bar aralığı >= 1,5-2 ATR (test önerisi)",
+   "Hacim güvenilirliği hakkında kitap genel şüpheci (s.142)"
+  ],
+  "uyumluluk_notu": "Hacim verisi gerekir; Binance perpetual hacmi (spot'tan farklı) kullanılır. Hisse perpetual'larda ince hacim sorun olabilir.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "hacim",
+   "kirilim",
+   "power-spike",
+   "obv",
+   "genis-bar"
+  ]
+ },
+ {
+  "kart_id": "swing__aralik-destek-direnc-karsi-trend__farley",
+  "ad": "Ticaret Aralığında Destek Alımı / Direnç Satımı (Karşı Trend Menzil Oyunu)",
+  "stil": "swing",
+  "kaynak": {
+   "pdf": "Swing_Trader_-_Alan_S_Farley_306_sayfa.pdf",
+   "sayfalar": [
+    150,
+    151,
+    152,
+    153
+   ]
+  },
+  "ozet": "İyi tanımlanmış yatay aralıkta, aralık oluştuktan sonra desteğe yakın al / dirence yakın sat; stop aralığın hemen dışında, pozisyon karşı sınıra kadar tutulur ve kâr alınıp ters girişe bakılır.",
+  "kategori": "ortalamaya_donus",
+  "piyasa_rejimi": "yatay",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+   "islem": "1d",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "Destek/direnç aralığı",
+    "parametreler": {}
+   }
+  ],
+  "long_giris": [
+   "Aralık oluştuktan sonra (ilk kırbaçlanmalar geçtikten sonra) desteğin yakınında tek bir fiyat seviyesinden al"
+  ],
+  "short_giris": [
+   "Aralığın direncine yakın tek bir fiyat seviyesinden sat"
+  ],
+  "stop_loss": "Desteğin (long) / direncin (short) hemen dışı; amaçlanan çıkış fiyatının hemen arkasında olduğundan risk küçüktür",
+  "kar_al": "Fiyat aralığın diğer sınırına ulaşınca kâr al ve ters yönde giriş ara",
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [
+   "Aralığın oluşması için bir süre bekle: kırbaçlanmaların çoğu gelişimin ilk aşamasında olur",
+   "En iyi girişler fiyat hareketi donuklaşmadan hemen önce, bir sonraki kırılımdan önce",
+   "Pozisyonu kovalama; tek giriş seviyesi, ilk seferde doğru yap (çoklu yeniden giriş kârı eritir)"
+  ],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 2,
+   "gerekce": "Aralık sınırları ve stop yeri tanımlı; aralık tanımı, 'oluşma süresi' ve giriş ayrıntısı sayısal değil."
+  },
+  "belirsizlikler": [
+   "Aralık tanımı (kaç dokunuş, kaç bar) yok; öneri: en az 2 üst + 2 alt dokunuş (test önerisi)",
+   "Kırılım halinde ne olacağı: stop aralık dışında ama sayısal tampon yok",
+   "200 günlük ortalamanın altında long / üstünde short 'karşı trend' sayılır; savunmacı yaklaşım gerekir (s.150), kitapta 50 EMA'nın akışa devam/karşı trend ayrımında daha iyi olduğu söylenir (s.151)"
+  ],
+  "uyumluluk_notu": "Yatay rejimde mean-reversion; ≥15m'de her piyasada kodlanır. Tek yön trend rejiminde zarar eder; rejim filtresi (ADX vb.) kart dışı gereklidir.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "aralik",
+   "yatay-piyasa",
+   "destek-direnc",
+   "karsi-trend",
+   "mean-reversion"
+  ]
+ },
+ {
+  "kart_id": "swing__taban-sonrasi-geri-cekilme-kademeli-limit__farley",
+  "ad": "Derin Taban Çıkışı Sonrası Desteğe Geri Çekilme: Kademeli Limit Alım",
+  "stil": "swing",
+  "kaynak": {
+   "pdf": "Swing_Trader_-_Alan_S_Farley_306_sayfa.pdf",
+   "sayfalar": [
+    150,
+    151,
+    152
+   ]
+  },
+  "ozet": "Uzun düşüşten sonra derin taban formasyonundan çıkıp desteğe geri çekilen enstrümanda, beklenen dönüş seviyesinin etrafına kademeli limit emirler dağıtılır; stop son emrin hemen altındadır.",
+  "kategori": "ortalamaya_donus",
+  "piyasa_rejimi": "volatil",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+   "islem": "1d",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "EMA",
+    "parametreler": {
+     "periyot": 50
+    }
+   },
+   {
+    "ad": "EMA",
+    "parametreler": {
+     "periyot": 200
+    }
+   }
+  ],
+  "long_giris": [
+   "Derin taban formasyonundan çıkış ve desteğe geri çekilme beklenir",
+   "Teknik 1: pozisyonu beklenen dönüş seviyesinin iki yanındaki kademeli limit emirlere böl; stop son emrin hemen altı",
+   "Teknik 2: fiyatın olağanüstü durumda ulaşabileceği seviyenin hemen altına tek emir (dış sınır çoğu zaman tam dönüm noktasıdır)"
+  ],
+  "short_giris": [
+   "Ayna: 50 EMA altında short; kitap bu yönde yalnız genel ilke verir"
+  ],
+  "stop_loss": "Teknik 1: son kademeli emrin hemen altı (fiyat o kadar düşerse tüm pozisyondan çık)",
+  "kar_al": "Önceki direnç / 50 EMA'ya kadar (sayısal yok)",
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [
+   "50 EMA üstünde long, altında short (200 EMA'dan daha iyi akış/karşı trend ayırıcı; s.151)",
+   "200 günlük EMA altında long 'karşı trend' sayılır; savunmacı yaklaşım"
+  ],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 1,
+   "gerekce": "Kademeli emir ve stop mantığı tanımlı; 'derin taban', 'beklenen dönüş seviyesi' ve emir aralıkları sayısal değil."
+  },
+  "belirsizlikler": [
+   "Emir sayısı/aralığı ve pozisyon dağılımı yok",
+   "'Derin taban' ve 'beklenen dönüş' ölçüsü yok",
+   "Kitap uyarısı: kısa zaman dilimlerinde fiyat desteğin birkaç puan altını kırıp uzun gölge bırakabilir, stoplar toplanır (s.151)"
+  ],
+  "uyumluluk_notu": "Limit emir ağı kripto'da kolay; ancak ağır volatilitede stop toplama riski; ≥15m uyarlaması mümkün ama kitap günlük bağlam.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "kademeli-emir",
+   "taban",
+   "geri-cekilme",
+   "karsi-trend",
+   "limit-emir"
+  ]
+ },
+ {
+  "kart_id": "swing__devam-boslugu-geri-cekilme-fib38__farley",
+  "ad": "Devam Boşluğuna Geri Çekilmede Keskin Dönüş (Boşluk Dolmadan, Min. %38 Sıçrama)",
+  "stil": "swing",
+  "kaynak": {
+   "pdf": "Swing_Trader_-_Alan_S_Farley_306_sayfa.pdf",
+   "sayfalar": [
+    29,
+    30,
+    31
+   ]
+  },
+  "ozet": "Trend ortasındaki devam boşluğuna (gap) yaklaşan veya giren ters-trend geri çekilmesi boşluk dolmadan keskin dönerse trend yönünde giriş yapılır; sıçrama karşı trend dalgasının en az %38'ini geri almalıdır.",
+  "kategori": "trend_takip",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+   "islem": "1d",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "Fibonacci",
+    "parametreler": {
+     "geri_cekilme": "0.382"
+    }
+   },
+   {
+    "ad": "Boşluk",
+    "parametreler": {}
+   }
+  ],
+  "long_giris": [
+   "Yükseliş trendi içinde devam boşluğu (trendin yaklaşık yarısında, boşluk öncesi genişlemenin 2 katı hareketle devam eden)",
+   "Geri çekilme boşluğa yaklaşır veya girer ve boşluk dolmadan keskin biçimde tersine döner",
+   "Sıçramanın en az karşı trend dalgasının %38'ini geri alması beklenir (hedef/doğrulama)"
+  ],
+  "short_giris": [
+   "Düşüş trendinde ayna"
+  ],
+  "stop_loss": "Kitapta yok (boşluk dolarsa kurulum geçersiz kabul edilir)",
+  "kar_al": "Karşı trend dalgasının en az %38'i; yanında üçüncü ve son ana dalga beklentisi (Elliott)",
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [
+   "Trend içinde devam boşluğu ayırt edilmeli; kopma ve tükenme boşluğu değil (s.19)"
+  ],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 1,
+   "gerekce": "Boşluk tanımı ve %38 sayısal; devam/tükenme boşluğu ayrımı, giriş anı ve stop yok."
+  },
+  "belirsizlikler": [
+   "Devam boşluğunun otomatik tanımı yok (öneri: trend yönünde yeni yüksek ve boşluk > N ATR + hacim, test önerisi)",
+   "Giriş tetiği 'keskin dönüş' sayısal değil; stop yok",
+   "Gün boşluklarına dayanır: 24/7 kripto'da boşluk az görülür, hisse/ETF perpetual'larda (günlük seans kapanışı) anlamlı"
+  ],
+  "uyumluluk_notu": "Hisse/TradFi perpetual'larda uygulanabilir; 7/24 kriptoda boşluk nadir olduğundan uygulanamaz/zayıf.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "devam-boslugu",
+   "gap",
+   "fibonacci-38",
+   "geri-cekilme",
+   "elliott"
+  ]
+ },
+ {
+  "kart_id": "swing__kirilim-1-2-3-ikinci-sans-girisi__farley",
+  "ad": "Etki-Tepki-Çözüm (1-2-3) Kırılım Döngüsünde Tepki Aşamasında İkinci Şans Girişi",
+  "stil": "swing",
+  "kaynak": {
+   "pdf": "Swing_Trader_-_Alan_S_Farley_306_sayfa.pdf",
+   "sayfalar": [
+    48,
+    49,
+    50,
+    70
+   ]
+  },
+  "ozet": "Hacimli kırılma (etki) sonrası birkaç tik/puanlık geri dönüş (tepki) kırılan seviye yakınında 'ikinci şans' girişi sağlar; ikinci itme ilk salınımın zirvesini aşınca (çözüm) kırılım doğrulanır.",
+  "kategori": "kirilim",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+   "islem": "1h",
+   "ust_filtre": "1d"
+  },
+  "gostergeler": [
+   {
+    "ad": "Hacim",
+    "parametreler": {}
+   },
+   {
+    "ad": "Destek/direnç",
+    "parametreler": {}
+   }
+  ],
+  "long_giris": [
+   "Etki: fiyat artan hacimle direnci aşar",
+   "Tepki: fiyat birkaç tik/puan genişleyip tersine döner, ilk geri çekilme başlar: kırılan direnç civarında 'ikinci şans' alımı",
+   "Çözüm: ikinci itme fiyatı ilk salınımın yükseğinin üstüne taşır (kırılım doğrulanır)"
+  ],
+  "short_giris": [
+   "Aynı döngü aşağı yönde (destek bozulması)"
+  ],
+  "stop_loss": "Kitapta yok (kırbaçlanma ve başarısız model riskine karşı sıkı stop vurgusu)",
+  "kar_al": "Çözüm: ilk salınım zirvesi / sonraki kırılım hedefi",
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [
+   "Sempatik piyasaların (endeks vadeli vb.) aynı yönde hareketi çözüm olasılığını artırır (s.40)",
+   "Kırbaçlanmalar çözüm aşaması kurulamazsa kontrolü ele alır (s.39)"
+  ],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 1,
+   "gerekce": "Üç aşama kavramsal olarak net ama tetik/stop/hedef sayısal değil; kırılım kalitesi ve 'tepki' derinliği tanımsız."
+  },
+  "belirsizlikler": [
+   "Tepki derinliği ve süresi sayısal değil; öneri: tepki en çok kırılma çubuğu aralığının %50'si (test önerisi)",
+   "Stop ve hedef yok",
+   "Fibonacci kamçı ve 50 EMA kartlarıyla örtüşür (geri test mantığı)"
+  ],
+  "uyumluluk_notu": "Fiyat + hacim bazlı; ≥5m'de kodlanabilir ama yazarın kendi 'kırılım ikinci şansı' kuralı kaba.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "1-2-3",
+   "etki-tepki-cozum",
+   "ikinci-sans",
+   "kirilim-geri-test",
+   "tuzak"
+  ]
+ }
+]
