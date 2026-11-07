@@ -194,7 +194,7 @@ def test_telegram_gonderim_ve_hata():
     env = {"TELEGRAM_BOT_TOKEN": "T", "TELEGRAM_CHAT_ID": "C"}
     assert tg.gonder("x" * 5000, env=env, oturum=s, uyku=lambda x: None, saat=lambda: 1e9) is True
     url, data = s.cagrilar[0]
-    assert "botT/sendMessage" in url and len(data["text"]) == 4096 and data["chat_id"] == "C"
+    assert "botT/sendMessage" in url and len(data["text"]) == 4096 and data["chat_id"] == "C" and data["parse_mode"] == "HTML"
     assert tg.gonder("y", env=env, oturum=s, uyku=lambda x: None, saat=lambda: 2e9) is False
 
 

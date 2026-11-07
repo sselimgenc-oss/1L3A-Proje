@@ -175,4 +175,4 @@ def test_ek_dosya_yoksa_none(tmp_path):
 def test_telegram_ozet_metni_durum_sayilariyla(kosu):
     p, o, dizin, simdi = kosu
     metin = tg.ozet_metni(o)
-    assert o["ozet"]["ozsermaye"] in metin and "1L3A paper" in metin
+    assert tg.usd(o["ozet"]["ozsermaye"]) in metin and "1L3A Paper" in metin and "Günlük özet" in metin
