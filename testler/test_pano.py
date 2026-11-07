@@ -146,3 +146,4 @@ def test_pano_hesap_yapmaz_kaynak_denetimi():
     kaynak = open(pano.__file__, encoding="utf-8").read()
     for yasak in ("sum(", "statistics", "numpy", "pandas"):
         assert yasak not in kaynak
+
