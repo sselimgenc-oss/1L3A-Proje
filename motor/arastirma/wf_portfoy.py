@@ -22,8 +22,8 @@ DEĞİŞTİRİLMEZ)
   4. OOS metrikleri: OOS aralığındaki TÜM günler (seçim olmayan pencereler getiri 0). net_getiri (bileşik), günlük
      Sharpe, max düşüş, işlem sayısı, PF(R) (işlem R'lerinden), en iyi %5 hariç PF, long/short PF, yıl bazında net/PF/işlem
      (giriş yılı), 2022 ayrıca sütun (net_2022, bh_net_2022). `gecti` = KARAR 24 (`eleme.portfoy_degerlendir`: OOS >= 1095 gün,
-     >= 20 yeniden dengeleme [pozisyon vektörünün değiştiği gün], net > 0, Sharpe >= 0.5, max düşüş <= %20, en iyi %5 GÜN
-     hariç net > 0); karar 13 sonucu `gecti_k13`/`nedenler_k13` sütunlarında kalır. Risk bütçesi karar 25: ağırlık kolu
+     >= 20 yeniden dengeleme [pozisyon vektörünün değiştiği gün], net > 0, Sharpe >= 0.5, max düşüş <= %20;
+     "en iyi %5 gün hariç net" yalnız RAPORLANIR, kapı değil — 2026-11-07 güncellemesi); karar 13 sonucu `gecti_k13`/`nedenler_k13` sütunlarında kalır. Risk bütçesi karar 25: ağırlık kolu
      toplam stop riski <= %5 (pozisyon başına %1 değil).
   5. AL-TUT KIYASI: koşu evreninin (EVRENLER) eşit ağırlıklı al-tut sepeti (OOS başlangıcından önceki günün kapanışında
      eşit değerli alım, hiç dengeleme yok, o gün fiyatı olanlar). Sharpe aynı gün-takvimiyle hesaplanır. UYARI: motor %1

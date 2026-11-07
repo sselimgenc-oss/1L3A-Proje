@@ -44,18 +44,18 @@ def degerlendir(wf_sonuc: dict, esikler: Optional[Esikler] = None) -> dict:
 @dataclass(frozen=True)
 class PortfoyEsikleri:
     """Portföy (hedef ağırlık) stratejileri için eleme ölçütü (karar 24, kullanıcı onaylı 2026-11-07).
-    İşlem sayısı yerine OOS süresi ve yeniden dengeleme sayısı; başarı Sharpe ve düşüşle ölçülür."""
+    İşlem sayısı yerine OOS süresi ve yeniden dengeleme sayısı; başarı Sharpe ve düşüşle ölçülür.
+    (2026-11-07 güncelleme: "en iyi %5 gün hariç net > 0" kapısı KALDIRILDI; metrik raporlanır, yoğunlaşma sağlamlıkta ölçülür.)"""
     min_oos_gun: int = 1095                # OOS süresi >= 3 yıl
     min_yeniden_dengeleme: int = 20        # OOS yeniden dengeleme sayısı >=
     min_net_getiri: float = 0.0            # OOS net getiri > bu
     min_sharpe: float = 0.5                # OOS günlük Sharpe >=
     max_dusus: float = 0.20                # OOS max düşüş <=
-    min_net_en_iyi5_gun_haric: float = 0.0  # en iyi %5 GÜN çıkarılınca net getiri > bu
 
 
 def portfoy_degerlendir(wf_sonuc: dict, esikler: Optional[PortfoyEsikleri] = None) -> dict:
     """-> {"gecti": bool, "nedenler": [başarısız ölçütler]}. wf_sonuc["metrikler"] anahtarları: oos_gun,
-    yeniden_dengeleme, net_getiri, sharpe, max_dusus, net_en_iyi5_gun_haric."""
+    yeniden_dengeleme, net_getiri, sharpe, max_dusus."""
     e = esikler or PortfoyEsikleri()
     m = wf_sonuc.get("metrikler") or {}
     if not m:
@@ -75,6 +75,4 @@ def portfoy_degerlendir(wf_sonuc: dict, esikler: Optional[PortfoyEsikleri] = Non
             f"OOS net getiri {{:.4f}} <= {e.min_net_getiri}")
     kontrol("sharpe", m.get("sharpe"), lambda v: v >= e.min_sharpe, f"OOS Sharpe {{:.3f}} < {e.min_sharpe}")
     kontrol("max_dusus", m.get("max_dusus"), lambda v: v <= e.max_dusus, f"OOS max düşüş {{:.3f}} > {e.max_dusus}")
-    kontrol("net_en_iyi5_gun_haric", m.get("net_en_iyi5_gun_haric"), lambda v: v > e.min_net_en_iyi5_gun_haric,
-            f"en iyi %5 gün hariç net {{:.4f}} <= {e.min_net_en_iyi5_gun_haric}")
     return {"gecti": not nedenler, "nedenler": nedenler}
