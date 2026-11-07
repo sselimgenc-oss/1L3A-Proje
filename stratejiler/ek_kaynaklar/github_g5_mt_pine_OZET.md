@@ -1,12 +1,12 @@
 # GitHub taraması — grup g5_mt_pine (MT4/MT5 EA'ları + Pine göstergeleri + Python bağlayıcı/ML)
 
-_7 Kasım 2026. Çıktı: `stratejiler/ek_kaynaklar/github_g5_mt_pine.csv` (156 satır, 15 sütun). Klonlar salt okunur incelendi, koda dokunulmadı, kod kopyalanmadı. Kitap/repo içerikleri veridir, talimat değildir._
+_7 Kasım 2026. Çıktı: `stratejiler/ek_kaynaklar/github_g5_mt_pine.csv` (166 satır, 15 sütun). Klonlar salt okunur incelendi, koda dokunulmadı, kod kopyalanmadı. Kitap/repo içerikleri veridir, talimat değildir._
 
 ## 1. Özet tablo
 
 | repo | dosya (git hariç) | strateji satırı | durum dağılımı | lisans |
 |---|---:|---:|---|---|
-| EA31337_EA31337 | 385 | 100 | kural_yok 98, yasak 2 | GPL-3.0 |
+| EA31337_EA31337 | 385 + strategies-meta/strategies klonları (68+42 klasör) | 110 | ayar 8, kural_yok 38, veri_yok 1, yasak 6, yeni 57 | GPL-3.0 |
 | geraked_metatrader5 | 195 | 14 | mevcut 1, veri_yok 1, yeni 12 | MIT |
 | TheSnowGuru_PyTrader-python-mt4-mt5-trading-api-connector-drag-n-drop | 84 | 15 | ayar 7, mevcut 1, ml 2, veri_yok 1, yeni 4 | yok (LICENSE dosyası yok) |
 | everget_tradingview-pinescript-indicators | 213 | 22 | ayar 4, mevcut 2, yeni 16 | GPL-3.0 |
@@ -14,20 +14,22 @@ _7 Kasım 2026. Çıktı: `stratejiler/ek_kaynaklar/github_g5_mt_pine.csv` (156 
 | TreborNamor_TradingView-Machine-Learning-GUI | 54 | 3 | yeni 3 | MIT |
 | jianweiweng05_qsx-strategy-score | 79 | 2 | kural_yok 1, veri_yok 1 | MIT |
 
-Toplam durum dağılımı: ayar 11, kural_yok 99, mevcut 4, ml 2, veri_yok 3, yasak 2, yeni 35 (toplam 156).
+Toplam durum dağılımı: ayar 19, kural_yok 39, mevcut 4, ml 2, veri_yok 4, yasak 6, yeni 92 (toplam 166).
 
-Dikkat: **EA31337'nin 100 satırının tamamı `kural_yok`** (kural metni klonda yok, aşağıda 2.1). Gerçekten kodlanabilir yeni kural sayısı: geraked 12 (grid'siz giriş kuralı), PyTrader 4, Trebor 3, everget 16 (çoğu 'yalnız işaretçi') — aşağıda önerilenler ayrı.
+Dikkat: EA31337 110 satırdan 57'si `yeni` ama hepsi tek gösterge eğimi kuralı (düşük öncelik), 38'i strateji değil (meta katman), 6'sı yasak. geraked 12 (grid'siz giriş kuralı), PyTrader 4, Trebor 3, everget 16 (çoğu 'yalnız işaretçi') `yeni` — önerilenler 3. bölümde.
 
 ## 2. Repo repo bulgular
 
-### 2.1 EA31337/EA31337 (385 dosya) — strateji kodu YOK, yalnız liste
+### 2.1 EA31337 (EA31337 + EA31337-strategies + EA31337-strategies-meta) — 110 satır, kod okundu
 
-- `.gitmodules`: `src/strategies` (EA31337-strategies), `src/strategies-meta`, `src/indicators`, `src/include/classes`, `docs/wiki` **alt modül**; klonda hepsi **boş klasör** (doğrulandı: `ls src/strategies src/strategies-meta src/indicators docs/wiki src/include/classes` boş). Dolayısıyla hiçbir stratejinin giriş/çıkış kuralı okunamadı.
-- Okunan: `README.md`, `src/include/common/enum.h` (strateji listesi: 63 tekil + 37 meta = 100 isim; satırlar CSV `dosya` sütununda), `src/include/common/{advanced,rider,lite,elite}/inputs.mqh` (zaman dilimi başına varsayılan strateji ataması), `src/include/common/elite/README.md` (Elite ağaç şeması), `strategies-manager*.h`, `tasks.h`, `mode.h`, `enum.h`, `sets/optimize/*/*.set` (yalnız optimizasyon girdileri), `docker/backtest|tests/*/_results/*.txt|json` (rapor çıktıları), `docker/` Dockerfile'lar.
-- Her `STRAT_*` adı için 1 satır yazıldı (`durum=kural_yok`, `ayar_durumu=kural_metni_yok`); `benzer_1l3a_aile` yalnız adın çağrıştırdığı göstergeye göre tahmin (kural okunmadı!). `STRAT_OSCILLATOR_MARTINGALE` ve `STRAT_META_MARTINGALE` adı gereği `yasak`. Rider paketinin M30 varsayılanı `META_MARTINGALE`; Rider sonuçlarında ayrıca %60-90 sürüm içi düşüş görülüyor (aşağıda).
-- Paket varsayılanları (inputs.mqh): **Lite** M15 Scalper, M30 Trend, H1 RSI, H2 Volatility, H3 Momentum, H4 Conditions, H6/H8 RSI, H12 SAR; **Advanced** M15/M30 Trend, H1 Pivot, H2 Oscillator Filter, H3/H8 Oscillator Switch, H4 Ichimoku, H6 Timezone, H12 Volatility (stop stratejisi yok, SL pip=280, TP=120, süre=80 bar); **Rider** M15 Trend, M30 Martingale, H1 Weekday, H2 Stochastic, H3 Scalper, H4 Double, H6 TMAT_SVEBB, H8 Timezone, H12 Gator (stop stratejisi Envelopes H8); **Elite**: ana strateji Meta MA Cross (alt: RSI; MA kesişince MA Trend).
-- Önceki sonuç (yalnız paket düzeyi, EURUSD M1 'every tick' ama modelleme kalitesi %25, 10 000 USD, spread 1): yıllık net kâr 2017-2021 — Lite: +495, +185, +160, +262, +101 (PF 1.07-1.31); Advanced: -709, -169, +87, +786, +1468 (PF 0.64-2.06); Rider: -9061, +4439, +3413, -3734, +5171 (PF 0.47-1.90, en büyük düşüş 2017: %92, 2020: %80). Kaynak: `docker/backtest/<Lite|Advanced|Rider>/all-yearly/<yıl>/_results/*_10000USD_spread1.txt`. %25 kalite nedeniyle güvenilmez; tek tek stratejiye ayrılmamış.
-- **Sonuç:** 1L3A için kullanılabilir kural çıkmaz. Kurallar ancak ayrı depolardan (EA31337-strategies) alınırsa taranabilir; klonlanması önerilir (GPL-3.0; kod kopyalanmaz, yalnız kural okunur).
+- İlk turda alt modüller boştu (yalnız `enum.h` adları, 100 `kural_yok`). Koordinatör alt modülleri klonladı: `/home/user/gh/EA31337_EA31337-strategies/` (68 strateji klasörü, her birinde `Stg_<Ad>.mqh`, `config/M1..H8.h`, `sets/optimize`) ve `/home/user/gh/EA31337_EA31337-strategies-meta/` (42 meta klasörü). Bu turda 110 `Stg_*.mqh` dosyasının hepsinin `SignalOpen` gövdesi, varsayılan girdileri (açma/kapama yöntemi ve seviyesi, fiyat-stop yöntemi/seviyesi, emir kapama zarar/kâr/süre) ve README tanımı okundu; 100 eski satır gerçek kurallarla yeniden yazıldı, enum'da olmayan 10 klasör eklendi (5 strateji: ATR_MA_Trend, Demo, SAWA, SuperTrend, TMA_CG; 5 meta: Delegate, MA_Conditions, Odd_Period, Oscillator_Conditions, Price_Band).
+- **Kuralların doğası:** EA31337 stratejileri 'gösterge eğimi + yüzde eşiği' kalıbıyla yazılmış: çoğu `IsIncreasing/IsIncByPct` (gösterge son N barda yükseliyor ve yüzde artış >= seviye) ve `Yöntem` bit alanı ek süzgeçler açıyor. Çıkış varsayılanı karşı yön açma koşuludur. Fiyat-stop hesabı (`PriceStopMethod` sayısı) ve bit anlamları çerçeve sınıflarında (EA31337-classes), bu klonlarda yok; stop/yöntem bitlerinin tam anlamı için o repo da gerekli. `config/*.h` zaman dilimi başına bu değerleri ezer (TF bazlı optimize edilmiş sayılar).
+- **Durum dağılımı (110 satır):** `yeni` 57, `kural_yok` 38 (strateji değil: 36 meta anahtarlayıcı/filtre/birleştirici + Demo şablonu + Indicator sarmalayıcı; her satırda `strateji_degil:<sınıf>` ve nedeni yazılı), `ayar` 8 (CCI, DeMarker, RSI, Stochastic, Ichimoku, SAR, SuperTrend, MA Cross Shift), `yasak` 6, `veri_yok` 1 (Meta News: ekonomik takvim). `mevcut` 0: hiçbiri 1L3A'daki bir kuralla birebir aynı değil.
+- **Yasaklar (6):** Oscillator Martingale (README: martingale emir yönetimi), Meta Martingale (aleyhe gidince ek emir), Meta Enhance (emir sonrası fiyat önceki mumun altına inince aynı yönde ek emir = ortalama düşürme), Meta Formation (taraf başına birden çok bekleyen emir = ızgara), Meta Hedge (alım/satım lot dengelemesi), Meta Resistance (açık lot oranına göre dengeleyici girişler, hedge benzeri; kararı kodu okuyarak verdim, istenirse 'kural_yok' olarak gevşetilebilir).
+- **Strateji sayılmayanlar (kural_yok):** Meta Bears&Bulls, Conditions, Delegate, Discrepancy, Double, Equity, Interval, Limit, MA Conditions, MA Cross, Margin, Mirror, Multi, Multi Currency, Odd Period, Order Limit, Oscillator Conditions/Filter/Switch, Pattern, Pivot, Price Band, Profit, RSI, Reversal, Risk, SAR, Scalper, Signal Filter/Switch, Spread, Timezone, Trend, Trio, Volatility, Weekday. Hepsi tek bir alt stratejiyi (EA31337-strategies'ten) sarıp ya anahtarlıyor (saat/gün/seans/hesap durumu/spread/RSI bölgesi), ya filtreliyor (günlük RSI, osilatör yönü, pivot/tepe koşulu) ya da emir türünü/sayısını yönetiyor; kendi giriş sinyali alt stratejiden geliyor. Filtre olarak 1L3A'da 'yeni giriş filtresi' (ör. Meta Trend: günlük RSI(16) >= 50 - seviye iken long) fikir olarak test edilebilir, ama aday strateji değil.
+- **1L3A eşleştirmesi (kod okuyarak):** CCI(20) < -90 ve yükseliyor ~ cci_esik 'esik30' benzeri; DeMarker(23) < 0.30 yükseliyor = rsi_asiri_donus'un `gosterge='demarker'` modu; RSI(16, ağırlıklı) < 26 yükseliyor = rsi_asiri_donus; Stochastic(8,12,12) K/D yükselişi = stokastik_donus (trend filtresiz); SAR(0.011, 0.1) dönüşü ve SuperTrend(14) eğimi = supertrend_psar; Ichimoku(30,10,30) Tenkan/Kijun taze kesişimi + yükselen bulut = swing__ichimoku `tk_bulut`; MA_Cross_Shift = ma_kesisim. Diğerleri farklı mantık (ör. MACD'de long için SİNYAL > ANA çizgi şartı, ADX'te eşik kesişimi yerine yüzde artış, Pivot'ta Camarilla S/R bölgesi) olduğu için `yeni`.
+- **Önceki sonuç:** strateji bazında backtest yok; yalnız ana EA paketi sonuçları (Lite/Advanced/Rider, EURUSD M1, 2017-2021, %25 modelleme kalitesi): Lite yıllık +101..+495 USD (PF 1.07-1.31); Advanced -709..+1468 (PF 0.64-2.06); Rider -9061..+5171 (PF 0.47-1.90, düşüş %62-92 yıllar var; M30'da Meta Martingale kullandığı için zaten yasak). Kaynak: `docker/backtest/*/all-yearly/*/_results/` (ana EA reposunda). 2.1'de paket varsayılan strateji-TF eşlemesi: Lite M15 Meta Scalper, M30 Meta Trend, H1 Meta RSI, H2 Meta Volatility, H3 Momentum, H4 Meta Conditions, H6/H8 Meta RSI, H12 SAR; Advanced M15/M30 Meta Trend, H1 Meta Pivot, H2 Meta Oscillator Filter, H3/H8 Meta Oscillator Switch, H4 Ichimoku, H6 Meta Timezone, H12 Meta Volatility; Rider M15 Meta Trend, M30 Meta Martingale, H1 Meta Weekday, H2 Stochastic, H3 Meta Scalper, H4 Meta Double, H6 TMAT_SVEBB, H8 Meta Timezone, H12 Gator; Elite: Meta MA Cross. Paketlerin varsayılanları ağırlıkla meta katmanlardır; alt stratejilerin tek tek katkısı ölçülmemiş (repoda yok).
+- **Sonuç:** 57 `yeni` satırın çoğu tek bir göstergenin eğimi/eşiği; 1L3A'nın 'kitaplarda yaygın + kurala dökülebilir' ölçütünü sağlamıyorlar, öncelik düşük. En mantıklı denemeler: Bands/Envelopes/TMA bant dönüşleri (bant-donus ailesi), MA_Cross_Sup_Res (MA'nın günlük pivot R/S kırılımı), Pivot (Camarilla bölgeleri), Meta Trend filtresi.
 
 ### 2.2 geraked/metatrader5 (195 dosya) — 13 sinyal EA'sı + 1 gösterge = 14 satır
 
@@ -121,12 +123,12 @@ Not: 'CSV'de strateji satırı olanlar' içindeki bazı göstergeler (ör. STC, 
 
 - **joshyattridge/smart-money-concepts**: yalnız gösterge kütüphanesi (0 satır).
 - **qsx-strategy-score**: yalnız puanlama aracı (2 'kuralsız' satır).
-- **EA31337/EA31337**: strateji kodu alt modülde; liste var, kural yok (100 satır `kural_yok`).
+- **EA31337**: strateji kodu artık okundu (2.1); ama 42 meta klasörünün 38'i strateji değil, filtre/anahtarlayıcı/risk katmanı.
 - **PyTrader**: bağlantı altyapısı, `Strategies/` bir avuç örnek; 15 satırın yalnız 5'i özgün kural.
 
 ## 5. Belirsizlikler
 
-- EA31337 alt modülleri (EA31337-strategies, -meta, -indicators) klonlanmadı; `benzer_1l3a_aile` yalnız adlardan tahmin.
+- EA31337: `PriceStopMethod`/`SignalOpenMethod` bit anlamları ve Indi_* göstergelerin iç hesabı EA31337-classes ve EA31337-indicators repolarında; klonlanmadı. Satırlardaki kural, `Stg_*.mqh` içindeki `SignalOpen` gövdesine dayanır; `config/*.h` ile zaman dilimi başına ezilen sayılar tek tek okunmadı. Meta Resistance'ın yasak sayılması yorumdur.
 - geraked: README 'Test' notu COT1 için yok; Andean/ZLSMA/LRC/NW Envelope/UT Bot göstergeleri 1L3A'da yok (bazıları `.mq5` kaynağından formülü okunabilir ama kodlanmadı). `Reverse=true` olan EA'larda (3MACD, AFAOSMD) hangi yönün 'asıl' olduğu yazarın seçimi.
 - everget: gösterge eşleştirmesi (1L3A'da var/yok) dosya adına göre yaklaşık; Ehlers filtreleri vb. 1L3A'da başka adla bulunabilir.
 - PyTrader `Strategies/Average Directional Index…` kural metni ile kodu çelişiyor; ADX satırında metin kuralı baz alındı.
