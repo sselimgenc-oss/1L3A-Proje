@@ -1,0 +1,169 @@
+[
+  {
+    "kart_id": "daytrade__bosluk-gunu-ilk-saat-araligi__farley",
+    "ad": "Boşluk Günü İlk Saat Aralığı: Boşluk Doldurma ve Ters Kırılma Çizgileri",
+    "stil": "daytrade",
+    "kaynak": {
+      "pdf": "Swing_Trader_-_Alan_S_Farley_306_sayfa.pdf",
+      "sayfalar": [
+        159,
+        160,
+        161,
+        244,
+        245,
+        258,
+        259,
+        260,
+        261,
+        262
+      ]
+    },
+    "ozet": "Açılış boşluğu olan günde önceki kapanış (boşluk doldurma çizgisi) ve ilk saat aralığı çizilir; aralığın boşluk yönündeki ucu kırılma tetikleyicisi, boşluk doldurma çizgisine yakın ucu ters kırılma çizgisidir. Boşluk yönünde kırılımda girilir; ters kırılma çizgisi bozulursa fiyat boşluk doldurma çizgisine gidebilir.",
+    "kategori": "kirilim",
+    "piyasa_rejimi": "volatil",
+    "orijinal_piyasa": "hisse",
+    "zaman_dilimi": {
+      "islem": "15m",
+      "ust_filtre": "5m"
+    },
+    "gostergeler": [
+      {
+        "ad": "Önceki seans kapanışı (boşluk doldurma çizgisi)",
+        "parametreler": {}
+      },
+      {
+        "ad": "İlk saat aralığı",
+        "parametreler": {
+          "sure": "ilk 60 dk (4 adet 15dk çubuk)",
+          "agresif": "3-4 adet 5dk çubuk",
+          "savunmaci": "boşluktan sonra 2-4 günlük aralık"
+        }
+      },
+      {
+        "ad": "EMA",
+        "parametreler": {
+          "periyot": 50,
+          "zaman_dilimi": "15m ve 60m, bağlam/yakınsama için"
+        }
+      }
+    ],
+    "long_giris": [
+      "Boşluk yukarıysa: ilk saat aralığı yükseğinin (kırılma tetikleyici çizgisi) üstüne çıkınca long; kitap genel kural olarak fiyatın aralık ucunu ilk denemede geri dönmesini, sonraki denemede başarılı olmasını bekler (s.259)",
+      "Başarısız sinyalin başarısızlığı: fiyat ters kırılma çizgisini deldikten sonra geri alıp aralık yükseğini yeniden test ederse boşluk yönündeki giriş güvenilir sayılır (s.261)",
+      "Mosaic örneği: 15dk grafikte 50 bar EMA'nın hemen üstünde, formasyon direncinin (48,50) altında erken giriş, 25-30 sent kârla pozisyonlanıp kırılmayı beklemek (s.160)"
+    ],
+    "short_giris": [
+      "Boşluk aşağıysa: ilk saat aralığı dibinin altına inince short (ayna)",
+      "Ters yön oyunu: yukarı boşlukta ters kırılma çizgisi (aralık dibi) kırılırsa fiyatın boşluk doldurma çizgisine gitmesi beklenir (s.261); aşağı boşlukta aralık yükseği aşılırsa aynı mantık",
+      "Boşluk doldurma çizgisine dokunuş boşluk yönünde sıçrama üretebilir; bu nokta yeni pozisyon için elverişsiz sayılır (s.261)"
+    ],
+    "stop_loss": "Boşluk yönünde girişte stop ters kırılma çizgisinin hemen arkası (örn. yukarı boşlukta aralık dibinin hemen altı) (s.261).",
+    "kar_al": "Boşluk doldurma çizgisi (ters yön oyunu için); boşluk yönünde girişte Swing 1 / Swing 2 pivotları (Mosaic örneğinde yeni gün içi pivotlar, s.160); sayısal hedef kuralı yok.",
+    "iz_suren_stop": "Dar iz süren stop ile 5dk/15dk grafikte yönetim (s.153-154, 160)",
+    "zaman_cikisi": "Gün sonu mantığı kitapta kural olarak verilmez; örnekte gün içi kapatılır (s.161)",
+    "filtreler": [
+      "Boşluğun yeterince büyük olması ve boşluğun uzun vadeli direnç/destekleri aşıp aşmaması: yukarı boşluk direnci aşıp yeni desteğin üstüne oturuyorsa uzun vadeli giriş tercih edilir, aşılmaz bariyere çarpıyorsa en az direnç yolu aşağıdır (s.261)",
+      "Dalgalı/kesme bloğu rejiminde boşlukların çoğu doldurulur ve tersine döner; boşluk yönünde kırılımlar sönümlenir (s.258)",
+      "Trend günü uçları (NYSE TICK ±1000, ilerleme/düşüş ±1500-2000, yukarı/aşağı hacim 4:1, endeks vadeli ±%2) varsa ters yön oyunlarından kaçınılır (s.227-228)",
+      "Fiyat girişten önce zaten ilk saatin sonunda trende girdiyse aralık stratejisi uygulanmaz (s.153-154)"
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Çizgilerin tanımı mekanik (önceki kapanış, ilk saat yüksek/düşük), ancak 'ilk denemede dön, ikincide başarılı' beklentisi, hedef ve yakınsama değerlendirmesi özneldir; kaba yaklaşıkla kodlanır."
+    },
+    "belirsizlikler": [
+      "Hedef ve stop mesafesi için sayısal kural yok; 'hemen altı' bir tik/ATR oranı olarak tanımlanmamış",
+      "Boşluk büyüklüğü eşiği yok (öneri: boşluk / ATR(14) günlük oranı; kural değil)",
+      "'Başarısızlık sinyali' ve 'başarısız sinyalin başarısızlığı' sırası metinde çeviri bozukluğu nedeniyle yer yer anlaşılmaz",
+      "İlk saat süresi piyasaya göre ayarlanır (45 dk - 2 saat) ve 'deneme-yanılma' denir (s.260): kesin parametre yok",
+      "Mosaic örneğindeki 'Swing 1/2 pivot' hedefleri Master Swing Trader'daki salınım tanımına gönderme yapar"
+    ],
+    "uyumluluk_notu": "Boşluk yalnız seans ayrımı olan enstrümanlarda anlamlı (ABD hisse TradFi perpetual'larında seans açılışı, XAU/WTI için de olası); 7/24 kripto'da boşluk yok, uygulanamaz veya UTC gün başı varsayımıyla zayıf bir yaklaşık olur. 5dk/15dk ile uyumlu. Önceki kapanış verisi gerekir, hacim şart değil.",
+    "varyantlar": [
+      "Aynı çizgiler iki dakikalık grafikte daha az çelişkili görünür (s.262)",
+      "Kitaptaki mevcut kart 'daytrade__ilk-saat-araligi-kirilim-ve-basarisizlik__farley' bu kartın boşluksuz günlere uyarlanmış genel hâlidir"
+    ],
+    "anahtar_kelimeler": [
+      "bosluk",
+      "ilk-saat",
+      "bosluk-doldurma",
+      "ters-kirilim",
+      "acilis-araligi",
+      "15m"
+    ]
+  },
+  {
+    "kart_id": "daytrade__aralik-durulama-gun-ici-tersine__farley",
+    "ad": "Gün İçi Durulama (Shakeout): Aralık Dışına Kısa Sıçrama Sonrası Geri Dönüş Girişi",
+    "stil": "daytrade",
+    "kaynak": {
+      "pdf": "Swing_Trader_-_Alan_S_Farley_306_sayfa.pdf",
+      "sayfalar": [
+        250,
+        251,
+        252,
+        253
+      ]
+    },
+    "ozet": "Fiyat açılışta 15dk/60dk aralığın dışına çıkıp kırılma tüccarlarını çeker, sonra sert dönüp aralığa veya boşluğa geri girerse (boğa/ayı tuzağı) ya da saatlerce yan giden aralığın dışına birkaç tik taşıp hızla dönerse, dönüş yönünde girilir; stop sıçramanın hemen dışına konur.",
+    "kategori": "ortalamaya_donus",
+    "piyasa_rejimi": "yatay",
+    "orijinal_piyasa": "hisse",
+    "zaman_dilimi": {
+      "islem": "15m",
+      "ust_filtre": "60m"
+    },
+    "gostergeler": [
+      {
+        "ad": "Gün içi aralık (15dk/60dk)",
+        "parametreler": {}
+      },
+      {
+        "ad": "Destek/direnç seviyesi",
+        "parametreler": {}
+      }
+    ],
+    "long_giris": [
+      "Boğa/ayı tuzağı (açılış): açılışta 15dk veya 60dk aralığı yukarı aşıp sert dönerek boşluğu dolduran sıçrama sonrası, dönüş yönünde (aşağı) short; ayna durumda long",
+      "Stop-avı egzersizi: birkaç saat yatay giden aralığın dışına fiyat birkaç tik taşıp aralığın içine hızla dönerse, aralığa dönüş yönünde giriş",
+      "Gün ortası: sabah trendi ortak S/R seviyesine geri çekilir, geri çekilme alıcıları devreye girer, fiyat bu seviyeden sert düşüp emirleri sarsar, sonra sabah trendi yeniden kurulursa sabah trendi yönünde giriş (s.251)"
+    ],
+    "short_giris": [
+      "Aynı kurulumun ayna hâli (aşağı sıçrama sonrası long vb.)"
+    ],
+    "stop_loss": "Alım/satım sıçramasının hemen dışına (zirvenin/dibin biraz ötesine) stop (s.252).",
+    "kar_al": "Boşluk doldurma / aralığın içindeki karşı uç; sayısal hedef yok.",
+    "iz_suren_stop": null,
+    "zaman_cikisi": "Giriş sonrası fiyat bir sonraki 15dk çubuğun kapanışına kadar destek-direnç üzerinden 'geri çekilmeli'; yeni yüksek/düşük bundan uzun tutulursa başarısız sayılır ve karşı-trend momentum oyuncularını çekip stopu keser (s.252)",
+    "filtreler": [
+      "Durulama genellikle yerleşik eğilimin son aşamalarında, bir tarafın kalabalıklaştığı yerlerde görülür (s.250-251)",
+      "Dengesizlik etkisi zamana duyarlıdır: yeni para gelip dengeleyene kadar ~3-5 seans sürer (s.253)"
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Aralık ve sıçrama tespiti kodlanabilir ama 'sert dönüş', 'kısa sıçrama' ve hedef öznel; kaba yaklaşık gerekir."
+    },
+    "belirsizlikler": [
+      "Sıçramanın kaç tik/ATR'ye kadar 'durulama' sayılacağı kitapta yok",
+      "Hedef ve stop mesafesinin sayısal tanımı yok",
+      "Aralığın 'saatlerce yan' olması için minimum süre yok",
+      "Gün ortası senaryosunda giriş tetikleyicisi net değil (anlatısal)"
+    ],
+    "uyumluluk_notu": "5dk/15dk grafiğe uyarlanabilir; boşluk bileşeni 7/24 kriptoda yok ama aralık-sıçrama-dönüş mantığı kriptoda da denenebilir. Hacim şart değil. Stop-avı/mıknatıs davranışı iddiası test gerektirir.",
+    "varyantlar": [
+      "Çok günlü sürümü ayrı kartta (swing__durulama-stop-avi-donusu__farley)"
+    ],
+    "anahtar_kelimeler": [
+      "durulama",
+      "shakeout",
+      "boga-tuzagi",
+      "ayi-tuzagi",
+      "stop-avi",
+      "gun-ici"
+    ]
+  }
+]
