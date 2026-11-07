@@ -219,6 +219,9 @@ Ana ders: önceki sonuçlar OOS'a bakılarak seçilmiş ve kâr birkaç işlemde
   elder_guvenli_bolge_k, agresif_iz_*, stop_sonrasi_bekleme_mum; hepsi varsayılan kapalı, 100 strateji öncesi/sonrası birebir).
   **AÇIK İŞ (yeni paper setinden önce şart):** motor/canli/paper_motor.py CikisAyarlari'nın gelişmiş alanlarını (atr_iz_suren_k,
   basabas_r_esigi dahil) uygulamıyor; paper'a alınacak stratejide bu alanlar varsa backtest ile paper farklı davranır.
+- 2026-11-08: **STRATEJİLER HAZIR** (kullanıcı "hazır olunca bekle, konuşalım" dedi; evren testi kullanıcıyla konuşmadan başlamaz).
+  460 tek grafik strateji (swing 190, daytrade 168, scalp 102) + 19 portföy sınıfı; ~120 ek ayar/mod kaydı; 7 çıkış modülü.
+  Tüm test paketi geçiyor (3568). Sıradaki: kullanıcıyla konuşma → wf_evren tam koşu (2020→bugün, BIST/XU030 kararlarıyla).
 
 ## Kullanıcıyı bekleyen kararlar
 - ~~Final seçim ve kilitli dönemin bir kez açılması (karar 20)~~ — kullanıcı "aç" dedi (2026-11-07), yapıldı: `sonuclar/kilit/RAPOR.md`.
