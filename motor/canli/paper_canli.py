@@ -137,7 +137,9 @@ def tk_acik(sembol: str) -> bool:
 
 # ---------------------------------------------------------------------------- WebSocket
 def ws_url(akislar: list) -> str:
-    return f"{pv.WS_TABAN}/stream?streams={'/'.join(akislar)}"
+    # Binance USDⓈ-M piyasa akışları (kline vb.) /market yolunda; eski /stream bağlanıyor ama veri göndermiyor
+    # (sunucuda doğrulandı 2026-11-07: /stream 12 sn'de 0 mesaj, /market/stream 32 mesaj).
+    return f"{pv.WS_TABAN}/market/stream?streams={'/'.join(akislar)}"
 
 
 def akislar(kaynak: CanliKaynak) -> list:

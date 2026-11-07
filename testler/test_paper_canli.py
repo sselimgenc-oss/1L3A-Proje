@@ -80,7 +80,7 @@ def test_ws_akis_adlari():
     k = pc.CanliKaynak(SahteIstemci({}), [t, TAN["dis__fraktal-alligator-sky|DK_NVDA|4h"]], {}, None)
     a = pc.akislar(k)
     assert "ethusdt@kline_30m" in a and "nvdausdt@kline_5m" in a        # TradFi: 5m'den seans mumu kurulur
-    assert pc.ws_url(a).startswith("wss://fstream.binance.com/stream?streams=")
+    assert pc.ws_url(a).startswith("wss://fstream.binance.com/market/stream?streams=")
 
 
 class SahteFapi(SahteIstemci):
