@@ -178,3 +178,8 @@ BAGLANAMAYAN = {
     63: ("Günlük ticaret için hisse seçim", "Giriş/çıkış kuralı olmayan sembol FİLTRESİ (hacim/beta/aralık); "
                                            "günlük-içi (>=15m) stratejiler için ön eleme. 1d portföy ağırlık stratejisi değil."),
 }
+
+# ek2 (2026-11-07): pf_sinif'i boş kalan satırlardan kodlanabilenler (satır 3, 9, 22); tanım ek2.py'de
+from motor.portfoy.stratejiler.ek2 import BAGLAMA_EK2  # noqa: E402
+
+BAGLAMA.extend(BAGLAMA_EK2)

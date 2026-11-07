@@ -16,6 +16,7 @@ from motor.portfoy.stratejiler.rotasyon import Gem, Rotasyon, SabitSepet
 from motor.portfoy.stratejiler.sinyal import BtcHedge, IbsDonus, ReferansFiltreliLong, RsiCift, RsiTarama
 from motor.portfoy.stratejiler.kesit import GoreceliGuc, KesitLS, WqAlfa
 from motor.portfoy.stratejiler.cta import Cta
+from motor.portfoy.stratejiler.ek2 import HISSE18
 from motor.portfoy.stratejiler.rotasyon import Kanarya, TrendSepet
 
 KRIPTO3 = ("BTCUSDT", "ETHUSDT", "SOLUSDT")
@@ -113,7 +114,7 @@ def veri():
 # ------------------------------------------------------------------ kayıt / ızgara / csv
 def test_kayit_15_sinif_ve_adlar():
     t = tum_portfoy_stratejileri()
-    assert len(SINIFLAR) == 15 and len(t) == len(SINIFLAR) + len(EK_SINIFLAR) == 17
+    assert len(SINIFLAR) == 15 and len(t) == len(SINIFLAR) + len(EK_SINIFLAR) == 19
     assert all(ad.startswith("pf__") and c.ad == ad for ad, c in t.items())
 
 
@@ -165,7 +166,7 @@ def test_baglama_ayarlari_gecerli_parametre():
     kayitli = tum_portfoy_stratejileri()
     for b in BAGLAMA:
         st = kayitli[b["sinif"]](**b["ayar"])         # bilinmeyen parametre ValueError verir
-        assert set(st.parametreler["semboller"]) <= set(HEPSI)
+        assert set(st.parametreler["semboller"]) <= set(HEPSI) | set(HISSE18) | {"DK_XAG"}   # ek2: karar 27 evreni
 
 
 # ------------------------------------------------------------------ takvim
