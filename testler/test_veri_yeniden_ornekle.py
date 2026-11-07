@@ -127,3 +127,16 @@ def test_kripto_davranisi_ayni_kalir(tmp_path):
     assert len(tf_mumlari("BTCUSDT", "1d", dizin=dizin)) == 1       # eksik gün atılır (eski kural)
     esk = yeniden_ornekle(df, "4h", "5m", eksikleri_at=True)
     assert tf_mumlari("BTCUSDT", "4h", dizin=dizin).equals(esk)
+
+
+def test_dk_kaynak_sabitleme_1h_onceliği(tmp_path):
+    """DK_ sembolünde hem 5m hem 1h varsa tf >= 1h için 1h dosyası, tf < 1h için 5m kullanılır (kaynak sabitleme)."""
+    from motor.veri.yeniden_ornekle import tf_mumlari
+    h5 = _hisse_5m(["2024-07-01", "2024-07-02"])
+    h1 = yeniden_ornekle(h5, "1h", "5m").drop(columns="eksik")
+    h1["kapanis"] = 999.0                                    # 1h dosyasını ayırt etmek için işaret
+    dizin = _sembol_dizini(tmp_path, "DK_NVDA", h5, "5m")
+    h1.to_parquet(dizin / "DK_NVDA" / "1h.parquet")
+    assert (tf_mumlari("DK_NVDA", "1h", dizin=dizin)["kapanis"] == 999.0).all()
+    assert (tf_mumlari("DK_NVDA", "1d", dizin=dizin)["kapanis"] == 999.0).all()
+    assert (tf_mumlari("DK_NVDA", "15m", dizin=dizin)["kapanis"] == 100.5).all()

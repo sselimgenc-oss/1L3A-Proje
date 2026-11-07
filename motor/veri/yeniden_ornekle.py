@@ -77,6 +77,13 @@ def tf_mumlari(sembol: str, tf: str, baslangic=None, bitis=None, dizin=None) -> 
     hisselerinde 4h NY 09:00'a hizalı; 1d = UTC günü = seans günü)."""
     from motor.veri import depo   # döngüsel içe aktarmayı önlemek için yerel
     ek = _seans_ayari(sembol)
+    # Kaynak sabitleme (lider kararı 2026-11-07, karar 26 günlüğü): DK_ sembollerinde tf >= 1h ise HER ZAMAN 1h dosyası
+    # kullanılır. Dakikalık indirme sürerken 5m dosyası sonradan ortaya çıkıp kaynağı değiştirmesin (tekrarlanabilirlik),
+    # ayrıca 1h dosyası tam (5m'de indirilemeyen günler var). 5m yalnız tf < 1h için.
+    if (sembol.startswith("DK_") and depo.aralik_suresi(tf) >= pd.Timedelta(1, "h")
+            and depo.mum_yolu(sembol, "1h", dizin).exists()):
+        return yeniden_ornekle(depo.mum_oku(sembol, "1h", baslangic, bitis, dizin=dizin), tf, kaynak="1h",
+                               eksikleri_at=True, **ek)
     if depo.mum_yolu(sembol, "5m", dizin).exists():
         return yeniden_ornekle(depo.mum_oku(sembol, "5m", baslangic, bitis, dizin=dizin), tf, kaynak="5m",
                                eksikleri_at=True, **ek)
