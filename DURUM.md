@@ -86,6 +86,12 @@ Ana ders: önceki sonuçlar OOS'a bakılarak seçilmiş ve kâr birkaç işlemde
     işlem başı %1 risk her pozisyonda korunur). (b) Tek-grafik stratejilerinin birleşik çalıştırılması (risk üst üste
     binmesi, korelasyon). (c) "Tek enstrüman mimarisi" yüzünden elenen tüm stratejiler (rotasyon, kesitsel momentum,
     çift işlemi, KMN vb.) kodlanıp test edilir — strateji kaçırılmaz. ML ve opsiyon gibi başka nedenle elenenler hariç.
+24. (2026-11-07) **Portföy stratejileri için eleme ölçütü (kullanıcı onayı):** işlem sayısı yerine OOS ≥ 3 yıl ve
+    ≥ 20 yeniden dengeleme; başarı Sharpe ve düşüşle ölçülür (lider eşikleri: OOS net > 0, OOS Sharpe ≥ 0.5,
+    OOS max düşüş ≤ %20, en iyi %5 gün hariç net > 0). Tek-grafik stratejilerinde karar 13 aynen geçerli.
+25. (2026-11-07) **Portföy risk bütçesi (kullanıcı onayı):** tek-grafik stratejilerinde işlem başı %1 aynen kalır.
+    Portföy (hedef ağırlık) stratejilerinde pozisyon başına %1 yerine **portföyün toplam stop riski ≤ %5**; günlük %3,
+    %20 kill switch ve 3x tavanı her iki türde aynen geçerli. Değer koddadır (SERT_LIMITLER), ajan aşamaz.
 18. Önceki projelerden alınanlar: 4S kırılım (algo-sg A + swing-sg S2 birleşik), KGT, S1; yedek B. S3 alınmadı. KMN portföy katmanında test edilecek (karar 23).
 
 ## Aşama 2 — devam ediyor (2026-11-07)
@@ -103,11 +109,6 @@ Ana ders: önceki sonuçlar OOS'a bakılarak seçilmiş ve kâr birkaç işlemde
   saatlik dosyalar → swing/daytrade 1h+ testleri önce; 15m/30m dakikalık veri tamamlanınca.
 
 ## Kullanıcıyı bekleyen kararlar
-- **Portföy stratejileri için eleme eşiği:** karar 13'ün "≥50 işlem" şartı aylık/haftalık rotasyonlara yapısal olarak ağır
-  (kriptoda 0/15 geçti; çoğu 20–36 işlem). Öneri: portföyde işlem sayısı yerine "≥ 3 yıl OOS + ≥ 20 yeniden dengeleme"
-  ve Sharpe/düşüş ölçütü. Kullanıcı kararı.
-- **%1 işlem riski × geniş ATR stopu → portföyde çok düşük maruziyet** (ortalama brüt 0.01–0.15x). Sert limit; değişmez
-  ama portföy stratejilerinde stop tanımı (ör. daha dar stop ya da portföy düzeyi risk bütçesi) kullanıcıyla konuşulmalı.
 - Scalp: kriptoda walk-forward'ı geçen 0. Karar 11'e göre geçen yoksa scalp ajanı kapanır — TradFi sonuçlarından sonra karar.
 - Final seçim (ajan başına ~3) ve kilitli dönemin açılması (karar 20) — kullanıcı onayıyla.
 - Karar 13 eşikleri çoklu test düzeltmesi içermiyor; sağlamlık paketi öneri kapısı ekliyor (son karar kullanıcıda).
