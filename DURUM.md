@@ -204,6 +204,13 @@ Ana ders: önceki sonuçlar OOS'a bakılarak seçilmiş ve kâr birkaç işlemde
   PDF/metinler/veri hariç). Taranmış `pano ekranlar.pdf` sayfaları `arsiv/sg-algo-proje/pano_ekranlar/` (kullanıcının kendi
   ekranları). Panoda olmayan bölümler (pano fazı işi): Karne (radar), Koç/dersler + "ne olurdu" simülatörü, Öğrenme
   kaydı, aylık Rapor sayfası, Dönemsel getiri tablosu, Risk (varlık yoğunlaşması, korelasyon, kaldıraç dışı düşüş).
+- 2026-11-07 (gece) DEVAM NOKTASI: kodlandı d10a-e (89) + d11f/g/i (52) → kayıtta ~430 strateji; htf seanslı piyasa düzeltmesi
+  (e048f90). GitHub 50 repo tarandı (github_g1..g7, 1198 satır) → kodlama_kuyrugu_github.csv. 5 kitap tam okundu (+65 kart, 810).
+  Veri indirildi (ABBV yok; BIST 1h yalnız 2023-12'den, XU030 5m yok → scalp XU030 ve BIST daytrade kısa dönem; kullanıcıya soruldu).
+  AÇIK İŞLER: d11h (daytrade 20 aile) ve d11j (mevcut sınıflara mod; ma_kesisim, supertrend_psar, bant_donus, macd_sinyal,
+  rsi_asiri_donus değişiyor — varsayılan değişmezlik kontrolü şart) ajanları; tam okuma kartlarının eşleştirmesi
+  (kodlama_kuyrugu_tam_okuma.csv); çıkış modülleri listesi (basamaklı stop, cooldown, RSI çıkış, azalan ROI, Elder güvenli bölge,
+  Brooks/Farley yönetim kartları). Sonra: kalan yenileri kodla → wf_evren tam koşu (2020→bugün).
 
 ## Kullanıcıyı bekleyen kararlar
 - ~~Final seçim ve kilitli dönemin bir kez açılması (karar 20)~~ — kullanıcı "aç" dedi (2026-11-07), yapıldı: `sonuclar/kilit/RAPOR.md`.
