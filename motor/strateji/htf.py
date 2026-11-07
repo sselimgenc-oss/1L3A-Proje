@@ -6,6 +6,10 @@ alt TF indeksine, değeri YALNIZCA üst TF mumu KAPANDIKTAN sonra kullanılabili
     Örn. 1d mumu: değeri ertesi gün 00:00 UTC'den itibaren. 1w: Pazartesi 00:00 UTC hizalı, değeri
     sonraki Pazartesi 00:00'dan itibaren.
   - Eksik (kaynak mumu beklenenden az) üst mumlar atılır; veri başında/sonunda kısmi kalan mum da dahil.
+    SEANSLI veri (hisse/BIST/emtia: kapsanan sürede kaynak mumlarının %90'ından azı mevcut) için "eksik" =
+    medyanın %25'inden az kaynak mumu (yeniden_ornekle.SEANS_ESIK_ORANI ile aynı kural). Aksi halde seanslı
+    piyasalarda tüm günlük/haftalık mumlar eksik sayılıp atılıyor ve HTF süzgeci hep NaN kalıyordu (2026-11-07 düzeltmesi).
+    Lookahead açısından fark yok: değer her durumda üst mum süresi dolduktan sonra kullanılır.
   - İlk üst mum kapanmadan önceki alt satırlar NaN olur.
 Alt TF mumlar fonk'a hiç verilmez; fonk yalnız tamamlanmış üst TF mumlarını görür.
 """
@@ -25,6 +29,22 @@ def _aralik_str(td: pd.Timedelta) -> str:
     raise ValueError(f"Alt TF aralığı tespit edilemedi: {td}")
 
 
+_SEANS_ESIK_ORANI = 0.25
+
+
+def _seansli(index: pd.DatetimeIndex, kaynak_s: pd.Timedelta) -> bool:
+    """Verinin kapsadığı sürede beklenen kaynak mumlarının %90'ından azı varsa seanslı piyasa (kripto ~%100;
+    emtia ~%68, BIST ~%24, ABD hisse ~%19)."""
+    beklenen = (index[-1] - index[0]) / kaynak_s + 1
+    return len(index) < 0.9 * beklenen
+
+
+def _eksik(sayi: pd.Series, beklenen: int, seansli: bool) -> pd.Series:
+    if not seansli:                                      # 24/7 (kripto): tam doluluk şartı (eski davranış)
+        return sayi < beklenen
+    return sayi < _SEANS_ESIK_ORANI * sayi.median()     # seanslı piyasa
+
+
 def _haftalik(df: pd.DataFrame, kaynak_s: pd.Timedelta) -> pd.DataFrame:
     gun = df.index.floor("D")
     hafta = gun - pd.to_timedelta(gun.dayofweek, unit="D")      # Pazartesi 00:00 UTC
@@ -35,7 +55,7 @@ def _haftalik(df: pd.DataFrame, kaynak_s: pd.Timedelta) -> pd.DataFrame:
         "hacim": g["hacim"].sum(), "quote_hacim": g["quote_hacim"].sum(),
         "islem_sayisi": g["islem_sayisi"].sum().astype("int64"),
     })
-    c["eksik"] = g["acilis"].count() < int(_HAFTA / kaynak_s)
+    c["eksik"] = _eksik(g["acilis"].count(), int(_HAFTA / kaynak_s), _seansli(df.index, kaynak_s))
     c.index.name = "zaman"
     return c
 
@@ -57,6 +77,8 @@ def ust_zaman(mumlar: pd.DataFrame, aralik: str, fonk):
         ust = _haftalik(df, kaynak_s)
     else:
         ust = yeniden_ornekle(df, aralik, _aralik_str(kaynak_s))
+        sayi = df.groupby(df.index.floor(ust_s))["acilis"].count()
+        ust["eksik"] = _eksik(sayi.reindex(ust.index).fillna(0), int(ust_s / kaynak_s), _seansli(df.index, kaynak_s))
     ust = ust[~ust["eksik"]].drop(columns="eksik")
 
     sonuc = fonk(ust)

@@ -74,3 +74,17 @@ def test_gecersiz_aralik():
         ust_zaman(df, "1h", lambda u: u["kapanis"])
     with pytest.raises(ValueError):
         ust_zaman(df, "5m", lambda u: u["kapanis"])
+
+
+def test_seansli_piyasa_ust_mumlari_atilmaz():
+    """Hisse gibi seanslı veride (günde 7 saat, hafta içi) günlük/haftalık mumlar 'eksik' sayılıp atılmamalı."""
+    idx = pd.date_range("2024-01-01", "2024-03-01", freq="1h", tz="UTC")
+    idx = idx[(idx.dayofweek < 5) & (idx.hour >= 14) & (idx.hour < 21)]
+    x = np.arange(len(idx), dtype=float) + 100
+    df = pd.DataFrame({"acilis": x, "yuksek": x, "dusuk": x, "kapanis": x, "hacim": 1.0}, index=idx)
+    g = ust_zaman(df, "1d", lambda u: u["kapanis"])
+    assert g.notna().mean() > 0.95
+    assert g.loc["2024-01-02 14:00"] == 106.0           # 1 Ocak'ın son (20:00) mumu, ertesi gün kullanılır
+    h = ust_zaman(df, "1w", lambda u: u["kapanis"])
+    assert h.notna().mean() > 0.85
+    assert h.loc["2024-01-08 14:00"] == 100 + 5 * 7 - 1  # 1. haftanın son mumu
