@@ -178,6 +178,11 @@ Ana ders: önceki sonuçlar OOS'a bakılarak seçilmiş ve kâr birkaç işlemde
   Kayıt: dal claude/haiku-arge-5-enstruman, sonuclar/haiku_arge/KAPANIS.md. Deneme sayısı 787 — DSR hesabında toplam
   deneme sayısına eklenmeli.
 
+- 2026-11-07 17:12 UTC: Paper kurulumu tamam. Düzeltmeler: Binance kline akışı `/market/stream` yolunda (eski `/stream` veri
+  göndermiyor; 60a76b3); Telegram yeni bot + kullanıcı dostu HTML mesajlar (b2abb50); pano Cloudflare Workers'ta
+  (`1l3a-pano.sselimgenc-c18.workers.dev`, 15 dk), masaüstü/mobil tasarım (2146654). Sunucu güncelleme: `git pull` (root,
+  deploy key), motor durumu korunur. Açık soru: günlük Telegram özeti saati (şu an 00:10 UTC = 03:10 TSİ).
+
 ## Kullanıcıyı bekleyen kararlar
 - ~~Final seçim ve kilitli dönemin bir kez açılması (karar 20)~~ — kullanıcı "aç" dedi (2026-11-07), yapıldı: `sonuclar/kilit/RAPOR.md`.
 - Karar 13 eşikleri çoklu test düzeltmesi içermiyor; sağlamlık paketi öneri kapısı ekliyor (son karar kullanıcıda).
