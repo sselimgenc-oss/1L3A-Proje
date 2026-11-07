@@ -1,0 +1,16 @@
+bolge,ad,tur,kaynak_url,olusturma,son_guncelleme,enstruman,sonuc_var_mi,sonuc_ozeti,lisans,durum,not
+Vietnam,Phong thu (dusuk volatilite + 52h zirve, 10 hisse, aylik),swing/portfoy,https://github.com/traique/trading_vn/pull/1,bilinmiyor,2026-10-15 (merge),HOSE hisse aylik,evet (TRAIN/VALID/TEST),TRAIN 2013-20 %18.1/DD -25.9; VALID 2021-23 %13.9/-12.0; TEST 2024-10/26 %8.1/-20.8; VNINDEX TEST %15.9,belirtilmemis,aday,TEST'te endekse kaybetti; 2013-26 toplam tutarsiz (15.3 vs 15.6); momentum PIT %4.7/DD -45%
+Vietnam,FINALLL SMA+OBV (OR),swing,https://github.com/phgdungg2305-blip/FINALLL,bilinmiyor,bilinmiyor,HOSE,iddia (dogrulanamaz),B&H 2022 DD -60.5; konfig DD -60/-31/-29,belirtilmemis,elendi,dogrulanamaz
+Tayvan,HaoweiChan/taifex-desk,arac/altyapi,https://github.com/HaoweiChan/taifex-desk,2026-08-07,2026-08-07,TAIFEX TX/MTX,hayir,stratejiler gizli,MIT,bilgi,
+Tayvan,KuroNekoLi/twse-strategy-lab,arastirma,https://github.com/KuroNekoLi/twse-strategy-lab,2026-10-08,2026-10-23,TWSE hisse,hayir,-,yok,elendi,
+Tayvan,usio0108/tw-stock-quant,tarama,https://github.com/usio0108/tw-stock-quant,2026-06-27,2026-10-23,TWSE hisse,hayir,-,MIT,elendi,
+Tayvan,kevin801221/stock-strategies-only,secim bot,https://github.com/kevin801221/stock-strategies-only,bilinmiyor,bilinmiyor,TWSE hisse,hayir,backtest yapilacak,-,elendi,
+Tayvan,markl-a/spectyn-quant,motor,https://github.com/markl-a/spectyn-quant,2026-06-12,2026-08-12,TWSE,bilinmiyor,okunmadi,Apache-2.0,izle,
+Endonezya,nichsedge/idx-bei (foreign_flow / composite_alpha),swing,https://github.com/nichsedge/idx-bei,bilinmiyor,bilinmiyor,IDX hisse,hayir,-,MIT,elendi,egitim amacli; sonuc yok
+Singapur,nashetali837/Algorithm-Trade-in-Singapore-Stock-Exchange-,algoritmik,https://github.com/nashetali837/Algorithm-Trade-in-Singapore-Stock-Exchange-,2024-03-26,2024-03-26,SGX,bilinmiyor,okunmadi,CC0-1.0,izle,
+Kore,dev-minimalism/upbit-bollinger-squeeze,daytrade/swing,https://github.com/dev-minimalism/upbit-bollinger-squeeze,2025-08-05,2026-10-20,Upbit KRW gunluk,bilinmiyor,okunmadi,-,izle,
+Kore,alkyne/grid-backtest,grid,https://github.com/alkyne/grid-backtest,2025-08-18,2025-08-24,Coinone/Upbit,bilinmiyor,-,-,elendi,grid: martingale kontrolu
+Kore,upbit-official/upbit-strategy-toolkit,arac,https://github.com/upbit-official/upbit-strategy-toolkit,2026-06-30,2026-07-13,Upbit,hayir,-,NOASSERTION,bilgi,
+Hong Kong,-,-,-,-,-,-,yok,bolgesel proje bulunamadi,-,bilgi,
+Tayland,-,-,-,-,-,-,yok,SET icin proje bulunamadi,-,bilgi,
+Malezya / Filipinler,-,-,-,-,-,-,yok,proje bulunamadi,-,bilgi,
