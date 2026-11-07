@@ -127,10 +127,12 @@ Ana ders: önceki sonuçlar OOS'a bakılarak seçilmiş ve kâr birkaç işlemde
   aday havuzu 51 satır / 34 strateji (`sonuclar/final_aday_havuzu_tek_grafik.csv`); hepsi swing, tek daytrade
   (dis__dual-thrust ETH 1h/30m), scalp 0 (TradFi dakikalık veri bekleniyor). Çok sembolde sağlam: fraktal-alligator (5 hisse),
   rsi-gauss-velocity (3 hisse). Emtiada sağlam tek-grafik yok.
+- 2026-11-07: Hisse kısa TF (15m/30m scalp + 30m/1h daytrade, k3_hisse_kisa): WF 27/1358 geçti, sağlamlık 0.
+  Karar (karar 11 + 26): **scalp ajanı kapatıldı** (kripto 0, hisse 0 sağlam); emtia dakikalık veri tamamlanınca
+  bir kez daha denenir, sağlam çıkarsa yeniden açılır. Daytrade'de tek aday dis__dual-thrust ETH 30m.
 
 ## Kullanıcıyı bekleyen kararlar
-- Scalp: kriptoda walk-forward'ı geçen 0. Karar 11'e göre geçen yoksa scalp ajanı kapanır — TradFi sonuçlarından sonra karar.
-- Final seçim (ajan başına ~3) ve kilitli dönemin açılması (karar 20) — kullanıcı onayıyla.
+- **Final seçim ve kilitli dönemin bir kez açılması (karar 20)** — öneri hazır: `sonuclar/secim/ozet.md`. Kullanıcı onayı bekleniyor.
 - Karar 13 eşikleri çoklu test düzeltmesi içermiyor; sağlamlık paketi öneri kapısı ekliyor (son karar kullanıcıda).
 
 ## Yol haritası (2026-11-06)
