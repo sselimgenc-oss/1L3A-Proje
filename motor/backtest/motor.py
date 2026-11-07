@@ -134,7 +134,7 @@ def backtest(mumlar: pd.DataFrame, strateji: Strateji, ayarlar: MotorAyarlari = 
     ca = strateji.cikis_ayarlari
     # Kısmi kâr ve başabaş tek başına çıkış sayılmaz: kalan pozisyon yine yalnız stopla kapanır (lider kararı).
     if not (strateji.cikis_var_mi() or ca.atr_iz_suren_k or ca.zaman_cikisi_mum
-            or ca.sabit_r_hedefi):
+            or ca.sabit_r_hedefi or ca.azalan_roi or ca.geri_cekilme_yuzde or ca.kar_rsi_esikleri):
         raise CikisYokHatasi(MESAJ_CIKIS_YOK)
     L = SERT_LIMITLER
     uyarilar = []
@@ -186,7 +186,10 @@ def backtest(mumlar: pd.DataFrame, strateji: Strateji, ayarlar: MotorAyarlari = 
     kapanis = mumlar["kapanis"].to_numpy(dtype=float)
     n = len(mumlar)
     atr = (gst.atr(mumlar["yuksek"], mumlar["dusuk"], mumlar["kapanis"], cks_ayar.atr_periyot).to_numpy()
-           if cks_ayar.atr_iz_suren_k else np.full(n, np.nan))
+           if (cks_ayar.atr_iz_suren_k or cks_ayar.agresif_iz_atr_k) else np.full(n, np.nan))
+    rsi_dizi = (gst.rsi(mumlar["kapanis"], cks_ayar.rsi_periyot).to_numpy()
+                if cks_ayar.kar_rsi_esikleri else np.full(n, np.nan))
+    son_stop_i = None         # son stop/stop_gap çıkışının mum indeksi (stop_sonrasi_bekleme_mum)
     aralik = pd.Series(idx).diff().median() if n > 1 else pd.Timedelta(0)
 
     if funding is not None and len(funding):
@@ -280,6 +283,9 @@ def backtest(mumlar: pd.DataFrame, strateji: Strateji, ayarlar: MotorAyarlari = 
                 red = "gunluk_kayip_limiti"
             elif islem_baslangic is not None and t < islem_baslangic:
                 red = "isinma"
+            elif (cks_ayar.stop_sonrasi_bekleme_mum and son_stop_i is not None
+                  and i - son_stop_i <= cks_ayar.stop_sonrasi_bekleme_mum):
+                red = "bekleme"
             if red is None:
                 fiyat = _tick(D(o) * (1 + yon * kayma), tick)
                 stop = _tick(D(stop_ham), tick)
@@ -369,6 +375,8 @@ def backtest(mumlar: pd.DataFrame, strateji: Strateji, ayarlar: MotorAyarlari = 
                     nakit -= funding_ode(p, t_c, dahil=False)
                 nakit += kapat(p, fiyat_c, t_c, neden, kom_o)
                 poz = None
+                if neden in ("stop", "stop_gap"):
+                    son_stop_i = i
 
         # 4) veri sonu
         if poz is not None and i == n - 1:
@@ -414,6 +422,19 @@ def backtest(mumlar: pd.DataFrame, strateji: Strateji, ayarlar: MotorAyarlari = 
                                         risk_birim_f, cks_ayar.basabas_r_esigi)
             if cks_ayar.atr_iz_suren_k:
                 yeni = cks.iz_suren_stop(p.yon, yeni, p.ekstrem, atr[i], cks_ayar.atr_iz_suren_k)
+            if cks_ayar.stop_basamaklari and risk_birim_f > 0:
+                yeni = cks.stop_basamagi(p.yon, yeni, float(p.giris), p.ekstrem, risk_birim_f,
+                                         cks_ayar.stop_basamaklari)
+            if cks_ayar.elder_guvenli_bolge_k:
+                ref = dusuk if p.yon == 1 else yuksek
+                eld = cks.elder_guvenli_bolge(ref, i, cks_ayar.elder_n1, cks_ayar.elder_n2,
+                                              cks_ayar.elder_guvenli_bolge_k, p.yon)
+                if not np.isnan(eld):
+                    yeni = max(yeni, eld) if p.yon == 1 else min(yeni, eld)
+            if cks_ayar.agresif_iz_esigi and p.hedef is not None:
+                yol = p.yon * float(p.hedef - p.giris)
+                if yol > 0 and p.yon * (p.ekstrem - float(p.giris)) / yol >= cks_ayar.agresif_iz_esigi:
+                    yeni = cks.iz_suren_stop(p.yon, yeni, p.ekstrem, atr[i], cks_ayar.agresif_iz_atr_k)
             yeni_d = _tick(D(yeni), tick)
             if (yeni_d - p.stop) * p.yon > 0:
                 p.stop = yeni_d
@@ -425,6 +446,16 @@ def backtest(mumlar: pd.DataFrame, strateji: Strateji, ayarlar: MotorAyarlari = 
                 bekleyen_cikis = "sinyal"
             elif cks.zaman_doldu(p.tutulan, p.zaman_limit):
                 bekleyen_cikis = "zaman"
+            else:
+                # kâr/zirve yalnız kapanmış mumlardan (kapanış ve p.ekstrem); çıkış sonraki açılışta
+                kar_c = cks.kar_yuzde(p.yon, float(p.giris), c)
+                if cks_ayar.azalan_roi and cks.azalan_roi_doldu(p.tutulan, kar_c, cks_ayar.azalan_roi):
+                    bekleyen_cikis = "roi"
+                elif cks.geri_cekilme_doldu(cks.kar_yuzde(p.yon, float(p.giris), p.ekstrem), kar_c,
+                                            cks_ayar.geri_cekilme_yuzde, cks_ayar.geri_cekilme_min_kar_yuzde):
+                    bekleyen_cikis = "geri_cekilme"
+                elif cks.kar_rsi_doldu(p.yon, kar_c, rsi_dizi[i], cks_ayar.kar_rsi_esikleri):
+                    bekleyen_cikis = "kar_rsi"
         if s_yon[i] != 0:
             bekleyen_giris = (int(s_yon[i]), s_stop[i], s_hedef[i], s_zc[i])
 
