@@ -8741,3 +8741,17 @@
 {"zaman": "2026-11-07T08:43:35.763579+00:00", "strateji": "dis__ifr2-gun", "sembol": "DK_TSLA", "aralik": "30m", "kombinasyon_sayisi": 27, "pencere_sayisi": 31, "toplam_kosu": 27}
 {"zaman": "2026-11-07T08:43:35.763611+00:00", "strateji": "dis__gun-ici-donus", "sembol": "DK_TSLA", "aralik": "30m", "kombinasyon_sayisi": 27, "pencere_sayisi": 31, "toplam_kosu": 27}
 {"zaman": "2026-11-07T08:43:35.763643+00:00", "strateji": "dis__ott-bantlari", "sembol": "DK_TSLA", "aralik": "30m", "kombinasyon_sayisi": 27, "pencere_sayisi": 31, "toplam_kosu": 27}
+{"zaman": "2026-11-07T14:45:19.748273+00:00", "strateji": "dis__son1ay-donchian-adx", "sembol": "BTCUSDT", "aralik": "1d", "kombinasyon_sayisi": 28, "pencere_sayisi": 7, "toplam_kosu": 28}
+{"zaman": "2026-11-07T14:45:19.748901+00:00", "strateji": "dis__son1ay-kanal-20-10", "sembol": "BTCUSDT", "aralik": "1d", "kombinasyon_sayisi": 29, "pencere_sayisi": 7, "toplam_kosu": 29}
+{"zaman": "2026-11-07T14:45:19.748991+00:00", "strateji": "dis__son1ay-donchian-adx", "sembol": "ETHUSDT", "aralik": "1d", "kombinasyon_sayisi": 28, "pencere_sayisi": 7, "toplam_kosu": 28}
+{"zaman": "2026-11-07T14:45:19.749026+00:00", "strateji": "dis__son1ay-donchian-adx", "sembol": "BTCUSDT", "aralik": "4h", "kombinasyon_sayisi": 28, "pencere_sayisi": 7, "toplam_kosu": 28}
+{"zaman": "2026-11-07T14:45:19.749054+00:00", "strateji": "dis__son1ay-kanal-20-10", "sembol": "ETHUSDT", "aralik": "1d", "kombinasyon_sayisi": 29, "pencere_sayisi": 7, "toplam_kosu": 29}
+{"zaman": "2026-11-07T14:45:19.749078+00:00", "strateji": "dis__son1ay-kanal-20-10", "sembol": "BTCUSDT", "aralik": "4h", "kombinasyon_sayisi": 29, "pencere_sayisi": 7, "toplam_kosu": 29}
+{"zaman": "2026-11-07T14:45:19.749099+00:00", "strateji": "dis__son1ay-donchian-adx", "sembol": "ETHUSDT", "aralik": "4h", "kombinasyon_sayisi": 28, "pencere_sayisi": 7, "toplam_kosu": 28}
+{"zaman": "2026-11-07T14:45:19.749121+00:00", "strateji": "dis__son1ay-donchian-adx", "sembol": "SOLUSDT", "aralik": "1d", "kombinasyon_sayisi": 28, "pencere_sayisi": 6, "toplam_kosu": 28}
+{"zaman": "2026-11-07T14:45:19.749141+00:00", "strateji": "dis__son1ay-kanal-20-10", "sembol": "SOLUSDT", "aralik": "1d", "kombinasyon_sayisi": 29, "pencere_sayisi": 6, "toplam_kosu": 29}
+{"zaman": "2026-11-07T14:45:19.749160+00:00", "strateji": "dis__son1ay-kanal-20-10", "sembol": "ETHUSDT", "aralik": "4h", "kombinasyon_sayisi": 29, "pencere_sayisi": 7, "toplam_kosu": 29}
+{"zaman": "2026-11-07T14:45:22.759061+00:00", "strateji": "dis__son1ay-donchian-adx", "sembol": "SOLUSDT", "aralik": "4h", "kombinasyon_sayisi": 28, "pencere_sayisi": 6, "toplam_kosu": 28}
+{"zaman": "2026-11-07T14:45:22.759237+00:00", "strateji": "dis__son1ay-kanal-20-10", "sembol": "SOLUSDT", "aralik": "4h", "kombinasyon_sayisi": 29, "pencere_sayisi": 6, "toplam_kosu": 29}
+{"zaman": "2026-11-07T14:51:06.553616+00:00", "strateji": "pf__son1ay_trendrider", "sembol": "kripto", "aralik": "1d", "kombinasyon_sayisi": 12, "pencere_sayisi": 6, "toplam_kosu": 12}
+{"zaman": "2026-11-07T14:51:13.369120+00:00", "strateji": "pf__son1ay_e014", "sembol": "makro", "aralik": "1d", "kombinasyon_sayisi": 12, "pencere_sayisi": 11, "toplam_kosu": 12}

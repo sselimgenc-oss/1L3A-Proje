@@ -1,0 +1,16 @@
+[
+ {
+  "cikis_ayarlari": null,
+  "dis_id": "son1ay:H1Sensitivity-10-5",
+  "kaynak_dosya": "sebastianspicker/schrodingers-quant research/strategies/H1Sensitivity.py (rapor edilen duyarlılık)",
+  "not": "Kaynağın duyarlılık çifti 10/5 gün (kaynak yalnız raporlar, seçmez).",
+  "parametreler": {"giris_gun": 10, "cikis_gun": 5}
+ },
+ {
+  "cikis_ayarlari": null,
+  "dis_id": "son1ay:H1Sensitivity-55-20",
+  "kaynak_dosya": "sebastianspicker/schrodingers-quant research/strategies/H1Sensitivity.py (rapor edilen duyarlılık)",
+  "not": "Kaynağın duyarlılık çifti 55/20 gün.",
+  "parametreler": {"giris_gun": 55, "cikis_gun": 20}
+ }
+]
