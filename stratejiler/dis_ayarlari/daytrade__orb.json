@@ -148,5 +148,47 @@
   },
   "cikis_ayarlari": null,
   "not": "YAKLAŞIK: Tokyo seansı aralığı (00:00-08:00 UTC varsayımı) Londra açılışında (08:00 UTC) kırılım."
+ },
+ {
+  "cikis_ayarlari": {
+   "zaman_cikisi_mum": 6
+  },
+  "dis_id": "ek77:60",
+  "kaynak_dosya": "stratejiler/ek_kaynaklar/ek_77_strateji.md#60 (omnisis/mt4-ea-obr JamesORB.mq4)",
+  "not": "YAKLAŞIK: Frankfurt/Londra açılış aralığı = 08:00 UTC (EET 10:00) saatlik mumun H/L'i; kırılım = aralık +/- ATR(72) tamponu (kaynakta bekleyen STOP emri, burada kapanış kırılımı); SL 1.65 x ATR(72), TP 1 x ATR(72) (hedef_r = 1/1.65); 17:30 EET kapanışı = giriş penceresi 7.5 saat + 6 mum zaman çıkışı (1h mum varsayımı); kaynaktaki +0.0002 sabiti yok. Veri 1h. Kış saati (EET=UTC+2).",
+  "parametreler": {
+   "aralik_dk": 60,
+   "atr_k": 1.65,
+   "atr_periyot": 72,
+   "giris_penceresi_saat": 7.5,
+   "gunde_tek": true,
+   "hedef_r": 0.606,
+   "seans_saat": 8.0,
+   "short": true,
+   "stop_modu": "atr",
+   "tampon_atr": 1.0,
+   "ust_yari_filtre": false
+  }
+ },
+ {
+  "cikis_ayarlari": {
+   "zaman_cikisi_mum": 6
+  },
+  "dis_id": "ek77:60-yaz",
+  "kaynak_dosya": "stratejiler/ek_kaynaklar/ek_77_strateji.md#60 (omnisis/mt4-ea-obr JamesORB.mq4)",
+  "not": "YAKLAŞIK: ek77:60 ile aynı, yaz saati (EEST=UTC+3 -> açılış 07:00 UTC). Sabit UTC seansı kullanıldığından DST geçişlerinde kayma var; iki ayar ayrı koşturulur.",
+  "parametreler": {
+   "aralik_dk": 60,
+   "atr_k": 1.65,
+   "atr_periyot": 72,
+   "giris_penceresi_saat": 7.5,
+   "gunde_tek": true,
+   "hedef_r": 0.606,
+   "seans_saat": 7.0,
+   "short": true,
+   "stop_modu": "atr",
+   "tampon_atr": 1.0,
+   "ust_yari_filtre": false
+  }
  }
 ]
