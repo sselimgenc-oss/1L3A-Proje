@@ -4,6 +4,21 @@ Tarih: 2026-11-07. Kullanıcı: "ben seçtiğim evrenden stratejiye göre seçim
 sadece SOL'de sadece NVDA'da ne diye işlem kovalayacam". Önceki final set (tek sembol–strateji ikilileri) paper'dan kaldırılır.
 Bu dosya koşulardan ÖNCE yazıldı; ölçütler sonuç görüldükten sonra değiştirilmez (değişirse kullanıcıya bildirilir).
 
+## GÜNCELLEME 1 (2026-11-07, kullanıcı, ham koşular bitmeden — sonuç görülmeden)
+Evren aşağıdaki gibi değişti; "Evren U (13)" tanımının yerine geçer:
+- **Daytrade ve swing evreni:**
+  - Emtia: altın (DK_XAU), gümüş (DK_XAG), petrol (DK_WTI), bakır (DK_COPPER), doğalgaz (DK_NATGAS).
+  - ABD hisse: S&P 500 üyesi ve piyasa değeri > 500 milyar USD (her gün kontrol). 2026-11-07 listesi: AAPL, NVDA, MSFT,
+    GOOGL, AMZN, META, TSLA, AVGO, LLY, WMT, JPM, V, MU, AMD, XOM, JNJ, MA, ABBV.
+  - Kripto: stabil coinler hariç piyasa değeri > 5 milyar USD (her gün kontrol). 2026-11-07 listesi: BTC, ETH, BNB, XRP, SOL,
+    TRX, ZEC, HYPE, XMR, DOGE, LEO, LINK, ADA, XLM, BCH. Binance USDⓈ-M'de perp'i olmayanlar (ör. XMR, LEO) işlem yapılamayacağı
+    için dışarıda kalır ve raporlanır.
+- **Scalp evreni (yalnız 4):** S&P 500 endeksi (DK_SPX), XAUUSD (DK_XAU), petrol (DK_WTI), BTCUSDT.
+- Backtest'te üyelik bugünkü listeyle sabit alınır (geçmiş piyasa değeri verisi yok; karar 10: hayatta kalma yanlılığıyla
+  uğraşılmaz — raporda yanlılık olarak belirtilir). Canlı/paper'da üyelik her gün kurala göre güncellenir (Aşama 4 işi).
+- Bir enstrümanın verisi o TF'de yoksa (ör. kısa geçmiş) dışarıda kalır ve raporlanır; analiz başlangıcı evrenin ≥ %75'inin
+  verisi olduğu tarih. Genişlik ölçütündeki üç sınıf (kripto/hisse/emtia) scalp için de geçerlidir (SPX hisse sınıfı sayılır).
+
 ## Tanım
 **Evren stratejisi** = bir strateji + bir zaman dilimi + TEK ortak parametre seti, evrenin TÜM enstrümanlarında aynı anda
 çalışır; sinyal hangi enstrümanda çıkarsa orada işleme girer. Evren U (karar 22): BTCUSDT, ETHUSDT, SOLUSDT, DK_AAPL, DK_MSFT,
