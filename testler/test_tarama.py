@@ -183,3 +183,22 @@ def test_dis_ayarlari_gorev_ve_kurulum(tmp_path, monkeypatch):
         tarama._strateji_kur(ad, "dis", "tv:YOK")
     # dosya yoksa dış ayar yok, davranış değişmez
     assert tarama.dis_ayarlari("swing__macd-sinyal", kayit_dizini) == []
+
+
+def test_veri_5m_yoksa_1h_den_okur_ve_kucuk_tf_acik_hata(tmp_path):
+    """5m dosyası yok, 1h var: tf >= 1h için 1h'den; tf < 1h için açık ValueError."""
+    idx = pd.date_range("2024-01-01", periods=24 * 20, freq="1h", tz="UTC", name="zaman")
+    df = pd.DataFrame({"acilis": 100.0, "yuksek": 101.0, "dusuk": 99.0, "kapanis": 100.5, "hacim": 10.0,
+                       "quote_hacim": 1000.0, "islem_sayisi": 0}, index=idx)
+    d = tmp_path / "veri" / "DK_TEST"
+    d.mkdir(parents=True)
+    df.to_parquet(d / "1h.parquet")
+    tarama._ONBELLEK.clear()
+    tarama._isci_baslat(tmp_path / "veri", None, None)
+    m1, f1 = tarama._veri("DK_TEST", "1h")
+    m4, _ = tarama._veri("DK_TEST", "4h")
+    assert len(m1) == len(df) and f1 is None
+    assert len(m4) == 24 * 20 // 4
+    with pytest.raises(ValueError, match="1h"):
+        tarama._veri("DK_TEST", "30m")
+    tarama._ONBELLEK.clear()

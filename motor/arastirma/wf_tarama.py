@@ -50,7 +50,7 @@ from motor.backtest.motor import MotorAyarlari, backtest
 from motor.backtest.walk_forward import pencereler_uret
 from motor.strateji import kayit
 from motor.veri import depo
-from motor.veri.yeniden_ornekle import yeniden_ornekle
+from motor.veri.yeniden_ornekle import tf_mumlari, yeniden_ornekle
 
 KOK = Path(__file__).resolve().parents[2]
 CIKTI_DIZINI = KOK / "sonuclar" / "wf"
@@ -265,8 +265,8 @@ def _veri(sembol: str, tf: str):
             _ONBELLEK.clear()
         d = _AYAR["veri_dizini"]
         # kilit_ac YOK: kilitli dönem depo tarafından kesilir (karar 20).
-        m5 = depo.mum_oku(sembol, "5m", _AYAR["baslangic"], _AYAR["bitis"], dizin=d)
-        mumlar = yeniden_ornekle(m5, tf, kaynak="5m", eksikleri_at=True)
+        # 5m varsa 5m'den; yoksa tf >= 1h için 1h'den; olmazsa açık hata (tf_mumlari).
+        mumlar = tf_mumlari(sembol, tf, _AYAR["baslangic"], _AYAR["bitis"], dizin=d)
         try:
             fund = depo.funding_oku(sembol, _AYAR["baslangic"], _AYAR["bitis"], dizin=d)
         except FileNotFoundError:
