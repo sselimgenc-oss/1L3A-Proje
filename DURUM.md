@@ -173,6 +173,11 @@ Ana ders: önceki sonuçlar OOS'a bakılarak seçilmiş ve kâr birkaç işlemde
   yeniden başlatıldı. Sağlık: tüm semboller bayat değil. Süre ≥ 8 hafta (en erken değerlendirme 2027-01-02). Telegram henüz kapalı;
   pano yalnız sunucuda (telefona yayın yolu açık iş).
 
+- 2026-11-07: Haiku Ar-Ge alt projesi (elenen 120 strateji × XU30/SPX/XAUUSD/UKOIL/BTCUSDT) kapandı: WF'de 3 geçen
+  (altın 1d swing, XU30 1h daytrade ×2), hepsi sağlamlıktan kaldı; ön kayıtlı 12 geliştirme varyantı da kaldı → kazanan yok.
+  Kayıt: dal claude/haiku-arge-5-enstruman, sonuclar/haiku_arge/KAPANIS.md. Deneme sayısı 787 — DSR hesabında toplam
+  deneme sayısına eklenmeli.
+
 ## Kullanıcıyı bekleyen kararlar
 - ~~Final seçim ve kilitli dönemin bir kez açılması (karar 20)~~ — kullanıcı "aç" dedi (2026-11-07), yapıldı: `sonuclar/kilit/RAPOR.md`.
 - Karar 13 eşikleri çoklu test düzeltmesi içermiyor; sağlamlık paketi öneri kapısı ekliyor (son karar kullanıcıda).
