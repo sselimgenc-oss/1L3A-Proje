@@ -41,7 +41,7 @@ import pandas as pd
 from motor.backtest import deneme_kaydi
 from motor.backtest import metrikler as mtr
 from motor.backtest.motor import MotorAyarlari, SembolKurallari, backtest
-from motor.strateji import kayit
+from motor.strateji import funding, kayit
 from motor.strateji.cikislar import CikisAyarlari
 from motor.veri import depo
 from motor.veri.yeniden_ornekle import tf_mumlari, yeniden_ornekle
@@ -204,8 +204,9 @@ def _calistir(g: dict) -> dict:
             raise ValueError(hata)
         s = _strateji_kur(g["strateji"], g["tur"], g["arg"])
         mumlar, fund = _veri(g["sembol"], g["tf"])
+        girdi = funding.stratejiye_hazirla(s, mumlar, fund, g["sembol"], g["tf"])
         ay = MotorAyarlari(limit_modu="olc", kurallar=SEMBOL_KURALLARI.get(g["sembol"], VARSAYILAN_KURAL))
-        r = backtest(mumlar, s, ay, fund)
+        r = backtest(girdi, s, ay, fund)
         metrik = mtr.hesapla(r.islemler, r.ozsermaye, r.baslangic_sermaye)
         hata = ""
     except Exception as e:  # noqa: BLE001  (CikisYokHatasi dahil: satıra yazılır, tarama durmaz)

@@ -29,6 +29,9 @@ class Strateji(ABC):
     varsayilan_parametreler: dict = {}
     parametre_izgarasi: dict = {}   # {parametre: [değerler]} — walk-forward için
     cikis_ayarlari: CikisAyarlari = CikisAyarlari()
+    # True ise araştırma katmanı mumlara `funding_orani` sütunu ekler (motor/strateji/funding.py; nedensel, kapanışta
+    # bilinen son oran). Funding dosyası yoksa o sembolde açık hata. False: girdi değişmez.
+    funding_gerekli: bool = False
 
     def __init__(self, cikis_ayarlari: CikisAyarlari = None, **parametreler):
         bilinmeyen = set(parametreler) - set(self.varsayilan_parametreler)

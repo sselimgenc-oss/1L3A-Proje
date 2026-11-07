@@ -48,7 +48,7 @@ from motor.arastirma import tarama
 from motor.backtest import deneme_kaydi, eleme
 from motor.backtest.motor import MotorAyarlari, backtest
 from motor.backtest.walk_forward import pencereler_uret
-from motor.strateji import kayit
+from motor.strateji import funding, kayit
 from motor.veri import depo
 from motor.veri.yeniden_ornekle import tf_mumlari, yeniden_ornekle
 
@@ -303,7 +303,7 @@ def _gorev_icerik(g: dict, satir: dict):
     n_kosu = 0
     for etiket, s in adaylar:
         try:
-            r = backtest(mumlar, s, ay, fund)
+            r = backtest(funding.stratejiye_hazirla(s, mumlar, fund, sembol, tf), s, ay, fund)
         except Exception as e:  # noqa: BLE001  (aday hatası sayılır, raporlanır)
             hatalar.append((etiket, f"{type(e).__name__}: {e}"))
             continue
