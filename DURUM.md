@@ -191,6 +191,8 @@ Ana ders: önceki sonuçlar OOS'a bakılarak seçilmiş ve kâr birkaç işlemde
   üyelik her gün kontrol. Scalp = yalnız SPX, XAUUSD, petrol, BTCUSDT.
   BIST eklendi (kullanıcı): daytrade/swing'e AKBNK, ASELS, ASTOR, BIMAS, EKGYO, EREGL, FROTO, KCHOL, SISE, TCELL, THYAO,
   TRALT, TUPRS; scalp'e XU030 (scalp evreni 5). BIST Binance'te yok → canlı için ayrı aracı kurum gerekir.
+  Test dönemi (kullanıcı): 2020-01-01 → bugün, kilit ayrımı yok (WF örneklem-dışı sürer; bağımsız sınav paper). Tüm stratejiler
+  kodlama bitince evrende test edilir; tüm veri 2020→bugün indirilir.
 
 ## Kullanıcıyı bekleyen kararlar
 - ~~Final seçim ve kilitli dönemin bir kez açılması (karar 20)~~ — kullanıcı "aç" dedi (2026-11-07), yapıldı: `sonuclar/kilit/RAPOR.md`.
