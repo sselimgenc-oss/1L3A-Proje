@@ -121,11 +121,13 @@ def test_karar24_metrikleri_ve_portfoy_degerlendir():
     assert eleme.portfoy_degerlendir({"metrikler": iyi}) == {"gecti": True, "nedenler": []}
     for anahtar, kotu, parca in [("oos_gun", 1000, "süresi"), ("yeniden_dengeleme", 19, "dengeleme"),
                                  ("net_getiri", 0.0, "net getiri"), ("sharpe", 0.49, "Sharpe"),
-                                 ("max_dusus", 0.21, "düşüş"), ("net_en_iyi5_gun_haric", -0.01, "%5 gün")]:
+                                 ("max_dusus", 0.21, "düşüş")]:
         k = eleme.portfoy_degerlendir({"metrikler": {**iyi, anahtar: kotu}})
         assert not k["gecti"] and len(k["nedenler"]) == 1 and parca in k["nedenler"][0]
     sinir = {**iyi, "oos_gun": 1095, "yeniden_dengeleme": 20, "sharpe": 0.5, "max_dusus": 0.20}
     assert eleme.portfoy_degerlendir({"metrikler": sinir})["gecti"]          # sınır değerler geçer
+    # en iyi %5 gün hariç net artık kapı değil (2026-11-07)
+    assert eleme.portfoy_degerlendir({"metrikler": {**iyi, "net_en_iyi5_gun_haric": -0.9}})["gecti"]
     assert not eleme.portfoy_degerlendir({})["gecti"]
     assert not eleme.portfoy_degerlendir({"metrikler": {**iyi, "sharpe": float("nan")}})["gecti"]
 
