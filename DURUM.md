@@ -162,9 +162,14 @@ Ana ders: önceki sonuçlar OOS'a bakılarak seçilmiş ve kâr birkaç işlemde
   konteynerden 451 (konum kısıtı) → canlı WS/exchangeInfo ilk kez sunucuda doğrulanacak; TradFi perp 7/24 vs seanslı
   araştırma verisi (seans süzgeci varsayımı); TradFi funding backtestte yoktu.
 
+- 2026-11-07: GTAA 10 aylık SMA (SPY/EFA/IEF/VNQ/DBC, Haiku araştırma önerisi) paper'a ALINMADI: varlıklar Binance TradFi'de
+  yok, SPY'a üstünlük bootstrap'ta kanıtsız, boru hattımızdan geçmedi. Yeniden değerlendirme şartı: Binance vekilleriyle
+  karar 24 + sağlamlık, sonra ≥6 ay paper (DD ≤ %15, beklenti aralığında).
+- 2026-11-07: Paper sunucusu açıldı (DigitalOcean Frankfurt, Ubuntu 24.04, 2 GB); fapi.binance.com erişimi var ({}),
+  repo salt-okur deploy key ile çekildi, veri indiriliyor.
+
 ## Kullanıcıyı bekleyen kararlar
 - ~~Final seçim ve kilitli dönemin bir kez açılması (karar 20)~~ — kullanıcı "aç" dedi (2026-11-07), yapıldı: `sonuclar/kilit/RAPOR.md`.
-- **Paper sunucusu** (DigitalOcean Frankfurt): hesap/sunucu kullanıcıda; kurulum `deploy/KURULUM.md`.
 - Karar 13 eşikleri çoklu test düzeltmesi içermiyor; sağlamlık paketi öneri kapısı ekliyor (son karar kullanıcıda).
 
 ## Yol haritası (2026-11-06)
