@@ -198,6 +198,12 @@ Ana ders: önceki sonuçlar OOS'a bakılarak seçilmiş ve kâr birkaç işlemde
   "PDF alma" kısıtı kullanıcı kararıyla kalktı; PDF/metinler yine repoya girmez, yalnız kartlar/envanter). 11 repo klonlandı;
   130 tekil PDF (40'ı Aşama 0'da işlenmiş, 90 yeni: daytrade 25, swing 20, algo 17, scalp 9, diğer kitap 6, rapor/liste 13).
   8 ajan: 5 kart çıkarma, rapor PDF envanteri, eski repo kod envanteri, eski panoların incelenip panoya eklenmesi.
+  Sonuç: 308 yeni kart (toplam 745), rapor envanteri 314 strateji (65 yeni, 54 yasak DCA/grid), kod envanteri 398 satır (44 yeni).
+  Repolar silinmeden önce son kontrol: 130 PDF'in tamamı envanterde (eksik görünen 9'u başka repodaki aynı dosya, md5 eşit).
+  Kodu arşivlenmemiş 6 repo `arsiv/`e alındı (day-trade-sg, scalp-sg, codex-algo, sg-arge-, sg-pano, strateji-test-pano;
+  PDF/metinler/veri hariç). Taranmış `pano ekranlar.pdf` sayfaları `arsiv/sg-algo-proje/pano_ekranlar/` (kullanıcının kendi
+  ekranları). Panoda olmayan bölümler (pano fazı işi): Karne (radar), Koç/dersler + "ne olurdu" simülatörü, Öğrenme
+  kaydı, aylık Rapor sayfası, Dönemsel getiri tablosu, Risk (varlık yoğunlaşması, korelasyon, kaldıraç dışı düşüş).
 
 ## Kullanıcıyı bekleyen kararlar
 - ~~Final seçim ve kilitli dönemin bir kez açılması (karar 20)~~ — kullanıcı "aç" dedi (2026-11-07), yapıldı: `sonuclar/kilit/RAPOR.md`.

@@ -1,0 +1,24 @@
+//@version=5
+// S3 — Sıkışma Kırılımı (Volman blok kırılımı + H1 mum uyumu). Grafiği 5 dakikaya açın.
+strategy("S3 Sikisma Kirilimi", overlay=true, default_qty_type=strategy.percent_of_equity, default_qty_value=10, commission_type=strategy.commission.percent, commission_value=0.05)
+hFast = input.int(8, "H1 hızlı EMA"), hSlow = input.int(34, "H1 yavaş EMA"), needGreen = input.bool(true, "H1 mum rengi uyumu")
+box = input.int(6, "Kutu (bar)"), boxAtr = input.float(1.2, "Kutu genişliği (ATR)"), emaN = input.int(20, "EMA"), tol = input.float(0.5, "EMA yakınlık (ATR)")
+rr = input.float(1.5, "R/R"), maxBars = input.int(24, "Zaman stopu (bar)")
+[hf, hs, hc, ho] = request.security(syminfo.tickerid, "60", [ta.ema(close, hFast)[1], ta.ema(close, hSlow)[1], close[1], open[1]], lookahead=barmerge.lookahead_on)
+hDir = hf > hs and hc > hs ? 1 : hf < hs and hc < hs ? -1 : 0
+a = ta.atr(14), e = ta.ema(close, emaN)
+bh = ta.highest(high, box)[1], bl = ta.lowest(low, box)[1]
+tight = bh - bl <= boxAtr * a[1]
+longSig = hDir == 1 and (not needGreen or hc > ho) and tight and bl <= e[1] + tol * a[1] and close > bh and close > e
+shortSig = hDir == -1 and (not needGreen or hc < ho) and tight and bh >= e[1] - tol * a[1] and close < bl and close < e
+var float stp = na, var float tgt = na, var int eb = na
+if longSig and strategy.position_size == 0
+    stp := bl - 0.1 * a, tgt := close + rr * (close - stp), eb := bar_index
+    strategy.entry("L", strategy.long)
+if shortSig and strategy.position_size == 0
+    stp := bh + 0.1 * a, tgt := close - rr * (stp - close), eb := bar_index
+    strategy.entry("S", strategy.short)
+strategy.exit("xL", "L", stop=stp, limit=tgt), strategy.exit("xS", "S", stop=stp, limit=tgt)
+if strategy.position_size != 0 and bar_index - eb >= maxBars
+    strategy.close_all("zaman")
+plot(e, "EMA20", color.orange)

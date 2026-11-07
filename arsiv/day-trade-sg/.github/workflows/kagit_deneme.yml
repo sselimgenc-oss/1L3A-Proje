@@ -1,0 +1,50 @@
+# Kağıt motorunu geçmiş bir başlangıç tarihiyle dener (durum dalına/issue'ya YAZMAZ; çıktı artifact olur).
+# Tetikleme: elle (Run workflow) veya main dışındaki dallarda kagit/DENEME dosyası değişince.
+name: kagit-deneme
+on:
+  workflow_dispatch:
+    inputs:
+      baslangic:
+        description: "Deneme başlangıç tarihi (YYYY-AA-GG)"
+        default: "2026-09-20"
+  push:
+    branches-ignore: [main, kagit-durum]
+    paths: ["kagit/DENEME", "kagit/teshis.py", "kagit/hisse/**"]
+permissions:
+  contents: read
+jobs:
+  dene:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: kagit/gereksinimler.txt
+      - run: pip install -q -r kagit/gereksinimler.txt
+      - uses: actions/cache@v4
+        with:
+          path: data/cache
+          key: veri-${{ github.run_id }}
+          restore-keys: veri-
+      - name: Deneme
+        run: |
+          B="${{ github.event.inputs.baslangic }}"
+          [ -z "$B" ] && B=$(head -1 kagit/DENEME)
+          KAGIT_BASLANGIC="$B" python -m kagit.motor --durum /tmp/deneme
+      - name: Teşhis (0 işlem nedeni)
+        run: |
+          B="${{ github.event.inputs.baslangic }}"
+          [ -z "$B" ] && B=$(head -1 kagit/DENEME)
+          git fetch -q origin kagit-durum && mkdir -p /tmp/teshis && git show origin/kagit-durum:evren.json > /tmp/teshis/evren.json || true
+          KAGIT_BASLANGIC="$B" python -m kagit.teshis /tmp/teshis
+          cp /tmp/teshis/teshis.md /tmp/deneme/ || true
+      - name: Hisse/emtia hesabı denemesi
+        run: |
+          KAGIT_AYAR_DIZIN=kagit/hisse KAGIT_BASLANGIC=2026-09-29 python -m kagit.motor --durum /tmp/deneme/hisse
+      - uses: actions/upload-artifact@v4
+        with:
+          name: kagit-deneme
+          path: /tmp/deneme

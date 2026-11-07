@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: codex-algo-dashboard
+    runtime: docker
+    branch: work
+    numInstances: 1
+    healthCheckPath: /_stcore/health
+    autoDeployTrigger: commit
+    envVars:
+      - key: DASHBOARD_PASSWORD
+        sync: false
+      - key: CODEX_ALGO_RUNTIME_DIR
+        value: /app/runtime
+      - key: MONITOR_INTERVAL_MINUTES
+        value: "30"
+    disk:
+      name: codex-algo-runtime
+      mountPath: /app/runtime
+      sizeGB: 1

@@ -1,0 +1,26 @@
+//@version=5
+// S2 — Trend Yönünde Ortalamaya Dönüş (BB + RSI). Grafiği 5 dakikaya açın.
+strategy("S2 Trend Yonlu Ortalamaya Donus", overlay=true, default_qty_type=strategy.percent_of_equity, default_qty_value=10, commission_type=strategy.commission.percent, commission_value=0.05)
+hE = input.int(50, "H1 EMA"), bbN = input.int(20, "BB uzunluk"), bbK = input.float(2.0, "BB sapma")
+rsiN = input.int(5, "RSI"), rsiLvl = input.int(30, "RSI seviye"), look = input.int(3, "Pencere"), adxMax = input.int(0, "ADX üst sınır (0=kapalı)")
+maxBars = input.int(24, "Zaman stopu (bar)")
+[he, he3, hc] = request.security(syminfo.tickerid, "60", [ta.ema(close, hE)[1], ta.ema(close, hE)[4], close[1]], lookahead=barmerge.lookahead_on)
+hDir = hc > he and he > he3 ? 1 : hc < he and he < he3 ? -1 : 0
+[mid, up, lo] = ta.bb(close, bbN, bbK)
+r = ta.rsi(close, rsiN), a = ta.atr(14)
+[diPlus, diMinus, adxv] = ta.dmi(14, 14)
+adxOk = adxMax == 0 or adxv < adxMax
+below = ta.highest(close < lo ? 1 : 0, look) > 0, above = ta.highest(close > up ? 1 : 0, look) > 0
+longSig = hDir == 1 and below and ta.crossover(r, rsiLvl) and close > lo and close < mid and adxOk
+shortSig = hDir == -1 and above and ta.crossunder(r, 100 - rsiLvl) and close < up and close > mid and adxOk
+var float stp = na, var int eb = na
+if longSig and strategy.position_size == 0
+    stp := math.min(ta.lowest(low, look + 2) - 0.2 * a, close - 0.5 * a), eb := bar_index
+    strategy.entry("L", strategy.long)
+if shortSig and strategy.position_size == 0
+    stp := math.max(ta.highest(high, look + 2) + 0.2 * a, close + 0.5 * a), eb := bar_index
+    strategy.entry("S", strategy.short)
+strategy.exit("xL", "L", stop=stp, limit=mid), strategy.exit("xS", "S", stop=stp, limit=mid)
+if strategy.position_size != 0 and bar_index - eb >= maxBars
+    strategy.close_all("zaman")
+plot(mid, "BB orta", color.gray), plot(up, "BB üst", color.red), plot(lo, "BB alt", color.green)

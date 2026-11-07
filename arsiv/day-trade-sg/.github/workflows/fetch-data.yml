@@ -1,0 +1,35 @@
+# Piyasa verisini GitHub runner'ında çeker ve `market-data` dalına yazar (yalnızca veri; kod yok).
+# Tetikleme: elle (Run workflow) veya main dışındaki bir dalda data/GUNCELLE dosyası değişince.
+# data/GUNCELLE: 1. satır zaman damgası, 2. satır fetch_data.py argümanları, 3. satır hedef dal.
+name: Fetch market data
+on:
+  workflow_dispatch:
+  push:
+    branches-ignore: [main, market-data, market-data-uzun, kagit-durum]
+    paths: ["data/GUNCELLE"]
+permissions:
+  contents: write
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -q pandas numpy requests
+      - name: Veriyi indir
+        run: |
+          ARGS=$(sed -n 2p data/GUNCELLE); ARGS=${ARGS:-"--days 365 --tfs 5m 15m 1h 4h"}
+          python scripts/fetch_data.py $ARGS --workers 6 2>&1 | tee fetch_log.txt
+      - name: market-data dalına yaz
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@users.noreply.github.com"
+          mkdir -p /tmp/md && cp -r data/cache /tmp/md/cache && cp data/universe.json fetch_log.txt /tmp/md/
+          DAL=$(sed -n 3p "$GITHUB_WORKSPACE/data/GUNCELLE"); DAL=${DAL:-market-data}
+          cd /tmp/md && git init -q && git checkout -q -b "$DAL"
+          git add -A && git commit -qm "Piyasa verisi $(date -u +%FT%H:%MZ)"
+          git push -f -q "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}" "$DAL"
+          du -sh /tmp/md/cache

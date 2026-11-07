@@ -1,0 +1,72 @@
+# Kripto day trade kağıt al-sat botu (S10 geç seans momentum + S13 Lien yanlış kırılma + S15 trend günü
+# geri çekilme; yalnız alış, BTC filtresi, ayrı alt hesaplar; 10.000$ sanal, 60 gün: 2026-10-11 → 2026-12-10).
+# Her çalıştırmada kağıt döneminin başından bugüne tüm KAPANMIŞ 15dk mumlar backtest koduyla yeniden
+# oynatılır; çalıştırma kaçsa bile işlem kaçmaz (bot 7/24 açıkmış gibi sonuç verir).
+# Günde 2 kez: 00:41 (kripto UTC günü kapanmış, tüm gün içi işlemler kapanmış) ve 12:41 UTC (yedek).
+# Actions ücretsiz kotası diğer botlarla (strateji-sg, swing-sg, algo-sg) ortak olduğu için sık çalıştırılmaz.
+# Durum/kayıtlar ayrı dalda: kagit-durum (main kirlenmez). Günlük rapor GitHub issue'ya yazılır.
+name: kagit-al-sat
+on:
+  schedule:
+    - cron: "41 0,12 * * *"
+  workflow_dispatch:
+permissions:
+  contents: write
+  issues: write
+concurrency:
+  group: kagit-daytrade
+  cancel-in-progress: false
+jobs:
+  calis:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: Durum dalını hazırla
+        run: |
+          git config --global user.name "kagit-bot"
+          git config --global user.email "kagit-bot@users.noreply.github.com"
+          if git ls-remote --exit-code --heads origin kagit-durum >/dev/null; then
+            git fetch -q origin kagit-durum
+            git worktree add -q -B kagit-durum kagit_durum FETCH_HEAD
+          else
+            git worktree add -q --orphan -b kagit-durum kagit_durum
+          fi
+          if [ -f kagit_durum/BITTI ]; then echo "Kağıt dönemi bitti; çalıştırma atlanıyor."; echo "SKIP=1" >> $GITHUB_ENV; fi
+      - uses: actions/setup-python@v5
+        if: env.SKIP != '1'
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: kagit/gereksinimler.txt
+      - if: env.SKIP != '1'
+        run: pip install -q -r kagit/gereksinimler.txt
+      - name: Veri önbelleği
+        if: env.SKIP != '1'
+        uses: actions/cache@v4
+        with:
+          path: data/cache
+          key: veri-${{ github.run_id }}
+          restore-keys: veri-
+      - name: Kağıt al-sat motoru (veriyi günceller + yeniden oynatır)
+        if: env.SKIP != '1'
+        run: python -m kagit.motor --durum kagit_durum
+      - name: Durumu kaydet
+        if: env.SKIP != '1'
+        run: |
+          cd kagit_durum
+          git add -A
+          git commit -q -m "durum $(date -u +%FT%H:%MZ)" || exit 0
+          git push -q origin kagit-durum
+      - name: Günlük raporu GitHub issue'ya yaz
+        if: env.SKIP != '1' && hashFiles('kagit_durum/gunluk_rapor.md') != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          baslik="Kağıt al-sat raporu (day-trade-sg kripto S10+S13+S15, 10.000 USD)"
+          n=$(gh issue list --state open --limit 50 --json number,title -q ".[] | select(.title==\"$baslik\") | .number" | head -1)
+          if [ -z "$n" ]; then
+            n=$(gh issue create --title "$baslik" --body "day-trade-sg kripto kağıt al-sat botunun (S10 geç seans momentum, S13 Lien yanlış kırılma, S15 trend günü EMA20 geri çekilme; yalnız alış, 4s/1s yön + 15dk giriş, BTC 4s filtresi) günlük raporları bu konuya yazılır. Gerçek para yoktur." | grep -o '[0-9]*$')
+          fi
+          gh issue comment "$n" --body-file kagit_durum/gunluk_rapor.md
+          cd kagit_durum && git rm -q gunluk_rapor.md && git commit -q -m "rapor gönderildi" && git push -q origin kagit-durum

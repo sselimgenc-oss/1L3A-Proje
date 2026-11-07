@@ -1,0 +1,4127 @@
+<!DOCTYPE html>
+<html lang="tr" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kağıt Hesaplar - Paper Trading Panosu</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              dark: '#0b1120',
+              card: '#151f32',
+              cardHover: '#1c2a44',
+              border: '#23324d',
+              accent: '#38bdf8',
+              success: '#10b981',
+              danger: '#ef4444',
+              warning: '#f59e0b',
+              muted: '#94a3b8'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      background-color: #0b1120;
+      color: #e2e8f0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    }
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0b1120;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #23324d;
+      border-radius: 3px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #38bdf8;
+    }
+    .active-nav {
+      background-color: #1e293b;
+      color: #38bdf8;
+      border-left: 3px solid #38bdf8;
+    }
+    .sparkline-svg {
+      width: 100%;
+      height: 38px;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col bg-[#0b1120] text-slate-200">
+
+  <!-- TOP HEADER & KPI BAR -->
+  <header class="border-b border-[#23324d] bg-[#10172a] sticky top-0 z-40">
+    <div class="px-4 py-3 flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+      
+      <!-- Brand & Mobile toggle -->
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <button id="mobileMenuBtn" class="lg:hidden p-2 text-slate-400 hover:text-white rounded bg-slate-800">
+            <i data-lucide="menu" class="w-5 h-5"></i>
+          </button>
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="text-lg font-bold tracking-tight text-white">Kağıt Hesaplar</span>
+              <span class="text-xs px-2 py-0.5 rounded bg-blue-950 text-blue-400 border border-blue-800">Canlı Simülasyon</span>
+            </div>
+            <div class="text-xs text-slate-400">6 hesap - her biri 10.000 $ sanal - gerçek para yok</div>
+          </div>
+        </div>
+
+        <!-- Action buttons (Sync & Add) -->
+        <div class="flex items-center gap-2 lg:hidden">
+          <button onclick="openSyncModal()" class="p-2 text-xs bg-slate-800 hover:bg-slate-700 text-slate-200 rounded border border-slate-700">
+            <i data-lucide="refresh-cw" class="w-4 h-4"></i>
+          </button>
+          <button onclick="openAddTradeModal()" class="p-2 text-xs bg-blue-600 hover:bg-blue-500 text-white rounded">
+            <i data-lucide="plus" class="w-4 h-4"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Top KPI Summary Cards -->
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2 text-xs">
+        <div class="bg-[#151f32] p-2 rounded border border-[#23324d]">
+          <div class="text-slate-400 text-[10px] uppercase font-semibold">Toplam Değer</div>
+          <div class="text-base font-bold text-white tracking-tight" id="kpiTotalVal">69.366 $</div>
+          <div class="text-[10px] text-slate-400 truncate">≈ 3.416.983 ₺ (kur 49,26)</div>
+        </div>
+
+        <div class="bg-[#151f32] p-2 rounded border border-[#23324d]">
+          <div class="text-slate-400 text-[10px] uppercase font-semibold">Toplam Getiri</div>
+          <div class="text-base font-bold text-red-400" id="kpiTotalRet">-%0,91</div>
+          <div class="text-[10px] text-slate-400">60 günlük test</div>
+        </div>
+
+        <div class="bg-[#151f32] p-2 rounded border border-[#23324d]">
+          <div class="text-slate-400 text-[10px] uppercase font-semibold">Son Gün</div>
+          <div class="text-base font-bold text-red-400" id="kpiLastDay">-%0,24</div>
+          <div class="text-[10px] text-slate-400">15 Ekim Perşembe</div>
+        </div>
+
+        <div class="bg-[#151f32] p-2 rounded border border-[#23324d]">
+          <div class="text-slate-400 text-[10px] uppercase font-semibold">Açık Pozisyon</div>
+          <div class="text-base font-bold text-amber-400" id="kpiOpenPos">31</div>
+          <div class="text-[10px] text-slate-400">7 hesap genelinde</div>
+        </div>
+
+        <div class="bg-[#151f32] p-2 rounded border border-[#23324d] col-span-2 sm:col-span-1">
+          <div class="text-slate-400 text-[10px] uppercase font-semibold">Kapanan / Kazanma</div>
+          <div class="text-base font-bold text-slate-200" id="kpiClosedWin">24 • %21</div>
+          <div class="text-[10px] text-slate-400">5 kazanan, 19 kayıp</div>
+        </div>
+      </div>
+
+      <!-- Desktop Action Buttons -->
+      <div class="hidden lg:flex items-center gap-2">
+        <button onclick="openSyncModal()" class="flex items-center gap-1.5 px-3 py-1.5 text-xs bg-slate-800 hover:bg-slate-700 text-slate-200 rounded border border-[#23324d]">
+          <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i>
+          <span>Senkron & JSON</span>
+        </button>
+        <button onclick="openAddTradeModal()" class="flex items-center gap-1.5 px-3 py-1.5 text-xs bg-blue-600 hover:bg-blue-500 text-white rounded font-medium shadow">
+          <i data-lucide="plus" class="w-3.5 h-3.5"></i>
+          <span>İşlem / Strateji Ekle</span>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- CLAUDE'A SOR / PROMPT ÇUBUĞU (PDF'teki AI sorgu alanı) -->
+    <div class="px-4 py-2 bg-[#0d1527] border-t border-[#1f2b42] flex flex-col md:flex-row items-center justify-between gap-3 text-xs">
+      <div class="flex-1 w-full flex items-center gap-2">
+        <div class="relative flex-1">
+          <input id="aiQuestionInput" type="text" placeholder="Claude'a bir şey sor (örneğin: 'Swing neden zararda?')" 
+                 class="w-full bg-[#151f32] text-slate-100 placeholder-slate-400 text-xs px-3 py-1.5 rounded border border-[#23324d] focus:outline-none focus:border-blue-500">
+        </div>
+        <button onclick="askAI()" class="px-3 py-1.5 bg-blue-600 hover:bg-blue-500 text-white font-medium rounded text-xs">
+          Sor
+        </button>
+      </div>
+
+      <!-- Hazır Soru Çipleri (PDF'teki butonlar) -->
+      <div class="flex items-center gap-1.5 overflow-x-auto w-full md:w-auto pb-1 md:pb-0 text-[11px] whitespace-nowrap">
+        <button onclick="quickAsk('Bugün neden kırmızı?')" class="px-2.5 py-1 rounded bg-[#1e293b] hover:bg-slate-700 text-slate-300 border border-slate-700">
+          Bugün neden kırmızı?
+        </button>
+        <button onclick="quickAsk('En çok kaybettirenler')" class="px-2.5 py-1 rounded bg-[#1e293b] hover:bg-slate-700 text-slate-300 border border-slate-700">
+          En çok kaybettirenler
+        </button>
+        <button onclick="quickAsk('Beklentinin altındakiler')" class="px-2.5 py-1 rounded bg-[#1e293b] hover:bg-slate-700 text-slate-300 border border-slate-700">
+          Beklentinin altındakiler
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN BODY LAYOUT -->
+  <div class="flex-1 flex overflow-hidden">
+    
+    <!-- SIDEBAR NAVIGATION (13 Modül) -->
+    <aside id="sidebar" class="w-64 bg-[#10172a] border-r border-[#23324d] flex flex-col justify-between flex-shrink-0 fixed lg:static inset-y-0 left-0 z-30 transform -translate-x-full lg:translate-x-0 transition-transform duration-200 ease-in-out mt-0 lg:mt-0 pt-16 lg:pt-0">
+      
+      <!-- Nav items -->
+      <nav class="py-2 overflow-y-auto space-y-0.5 text-xs">
+        <button onclick="switchTab('ozet')" class="nav-btn w-full flex items-center justify-between px-4 py-2.5 text-slate-300 hover:bg-[#1a2438] active-nav" data-tab="ozet">
+          <div class="flex items-center gap-2.5">
+            <i data-lucide="layout-dashboard" class="w-4 h-4 text-slate-400"></i>
+            <span>Özet</span>
+          </div>
+          <span class="text-[10px] px-1.5 py-0.2 rounded bg-blue-900/60 text-blue-300">1</span>
+        </button>
+
+        <button onclick="switchTab('karne')" class="nav-btn w-full flex items-center justify-between px-4 py-2.5 text-slate-300 hover:bg-[#1a2438]" data-tab="karne">
+          <div class="flex items-center gap-2.5">
+            <i data-lucide="award" class="w-4 h-4 text-slate-400"></i>
+            <span>Karne</span>
+          </div>
+          <span class="text-[10px] text-slate-500">6 not</span>
+        </button>
+
+        <button onclick="switchTab('grafikler')" class="nav-btn w-full flex items-center justify-between px-4 py-2.5 text-slate-300 hover:bg-[#1a2438]" data-tab="grafikler">
+          <div class="flex items-center gap-2.5">
+            <i data-lucide="line-chart" class="w-4 h-4 text-slate-400"></i>
+            <span>Grafikler</span>
+          </div>
+        </button>
+
+        <button onclick="switchTab('takvim')" class="nav-btn w-full flex items-center justify-between px-4 py-2.5 text-slate-300 hover:bg-[#1a2438]" data-tab="takvim">
+          <div class="flex items-center gap-2.5">
+            <i data-lucide="calendar" class="w-4 h-4 text-slate-400"></i>
+            <span>Takvim</span>
+          </div>
+        </button>
+
+        <button onclick="switchTab('acik_pozisyonlar')" class="nav-btn w-full flex items-center justify-between px-4 py-2.5 text-slate-300 hover:bg-[#1a2438]" data-tab="acik_pozisyonlar">
+          <div class="flex items-center gap-2.5">
+            <i data-lucide="pie-chart" class="w-4 h-4 text-slate-400"></i>
+            <span>Açık pozisyonlar</span>
+          </div>
+          <span class="text-[10px] px-1.5 py-0.2 rounded bg-amber-900/60 text-amber-300">31</span>
+        </button>
+
+        <button onclick="switchTab('islem_gecmisi')" class="nav-btn w-full flex items-center justify-between px-4 py-2.5 text-slate-300 hover:bg-[#1a2438]" data-tab="islem_gecmisi">
+          <div class="flex items-center gap-2.5">
+            <i data-lucide="history" class="w-4 h-4 text-slate-400"></i>
+            <span>İşlem geçmişi</span>
+          </div>
+          <span class="text-[10px] px-1.5 py-0.2 rounded bg-slate-800 text-slate-400">24</span>
+        </button>
+
+        <button onclick="switchTab('istatistik')" class="nav-btn w-full flex items-center justify-between px-4 py-2.5 text-slate-300 hover:bg-[#1a2438]" data-tab="istatistik">
+          <div class="flex items-center gap-2.5">
+            <i data-lucide="bar-chart-2" class="w-4 h-4 text-slate-400"></i>
+            <span>İstatistik</span>
+          </div>
+        </button>
+
+        <button onclick="switchTab('stratejiler')" class="nav-btn w-full flex items-center justify-between px-4 py-2.5 text-slate-300 hover:bg-[#1a2438]" data-tab="stratejiler">
+          <div class="flex items-center gap-2.5">
+            <i data-lucide="layers" class="w-4 h-4 text-slate-400"></i>
+            <span>Stratejiler</span>
+          </div>
+        </button>
+
+        <button onclick="switchTab('koc')" class="nav-btn w-full flex items-center justify-between px-4 py-2.5 text-slate-300 hover:bg-[#1a2438]" data-tab="koc">
+          <div class="flex items-center gap-2.5">
+            <i data-lucide="compass" class="w-4 h-4 text-slate-400"></i>
+            <span>Koç</span>
+          </div>
+          <span class="text-[10px] px-1.5 py-0.2 rounded bg-red-900/60 text-red-300">Simülatör</span>
+        </button>
+
+        <button onclick="switchTab('ogrenme')" class="nav-btn w-full flex items-center justify-between px-4 py-2.5 text-slate-300 hover:bg-[#1a2438]" data-tab="ogrenme">
+          <div class="flex items-center gap-2.5">
+            <i data-lucide="cpu" class="w-4 h-4 text-slate-400"></i>
+            <span>Öğrenme</span>
+          </div>
+          <span class="text-[10px] text-emerald-400 font-mono">Gölge Mod</span>
+        </button>
+
+        <button onclick="switchTab('rapor')" class="nav-btn w-full flex items-center justify-between px-4 py-2.5 text-slate-300 hover:bg-[#1a2438]" data-tab="rapor">
+          <div class="flex items-center gap-2.5">
+            <i data-lucide="file-text" class="w-4 h-4 text-slate-400"></i>
+            <span>Rapor</span>
+          </div>
+        </button>
+
+        <button onclick="switchTab('donemsel_getiri')" class="nav-btn w-full flex items-center justify-between px-4 py-2.5 text-slate-300 hover:bg-[#1a2438]" data-tab="donemsel_getiri">
+          <div class="flex items-center gap-2.5">
+            <i data-lucide="trending-up" class="w-4 h-4 text-slate-400"></i>
+            <span>Dönemsel getiri</span>
+          </div>
+        </button>
+
+        <button onclick="switchTab('risk')" class="nav-btn w-full flex items-center justify-between px-4 py-2.5 text-slate-300 hover:bg-[#1a2438]" data-tab="risk">
+          <div class="flex items-center gap-2.5">
+            <i data-lucide="alert-triangle" class="w-4 h-4 text-amber-400"></i>
+            <span>Risk</span>
+          </div>
+          <span class="text-[10px] px-1 py-0.2 rounded bg-amber-950 text-amber-300">!</span>
+        </button>
+      </nav>
+
+      <!-- Sidebar Footer Note -->
+      <div class="p-3 border-t border-[#23324d] text-[11px] text-slate-400 space-y-1 bg-[#0d1424]">
+        <div class="flex items-center justify-between">
+          <span class="text-slate-400">Son güncelleme:</span>
+          <span class="font-mono text-slate-200" id="sbLastUpdate">15/10 03:07</span>
+        </div>
+        <div class="text-[10px] text-slate-400">
+          Test dönemi: gün 8 / 62 <br>9 Ekim - 10 Aralık
+        </div>
+        <div class="pt-2 text-[9px] text-slate-400 leading-tight">
+          Danışman: <span class="text-blue-400 font-semibold">Argon QA Suite</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- CONTENT AREA -->
+    <main class="flex-1 overflow-y-auto p-4 md:p-6 bg-[#0b1120]">
+      
+      <!-- ================= 1. ÖZET SEKMESİ ================= -->
+      <section id="tab-ozet" class="tab-pane space-y-5">
+        
+        <!-- Alarmlar ve Uyarılar Listesi (PDF Sayfa 1) -->
+        <div class="space-y-2">
+          <div class="p-2.5 rounded bg-amber-950/40 border border-amber-700/60 text-amber-200 text-xs flex items-center gap-2">
+            <i data-lucide="clock" class="w-4 h-4 text-amber-400 flex-shrink-0"></i>
+            <span><strong>Dikkat:</strong> Panel verisi 42 saattir güncellenmedi; saatlik aktarım çalışmıyor olabilir. Rakamlar 15/10 03:07 itibarıyla.</span>
+          </div>
+
+          <div class="p-2.5 rounded bg-red-950/40 border border-red-700/60 text-red-200 text-xs flex items-center gap-2">
+            <i data-lucide="alert-octagon" class="w-4 h-4 text-red-400 flex-shrink-0"></i>
+            <span><strong>Alarm:</strong> Algo beklenen aralığın altına indi: getiri %-2.9, maks. düşüş %-3.1.</span>
+          </div>
+
+          <div class="p-2.5 rounded bg-red-950/40 border border-red-700/60 text-red-200 text-xs flex items-center gap-2">
+            <i data-lucide="alert-octagon" class="w-4 h-4 text-red-400 flex-shrink-0"></i>
+            <span><strong>Alarm:</strong> Swing beklenen aralığın altına indi: getiri %-2.5, maks. düşüş %-3.8.</span>
+          </div>
+
+          <div class="p-2.5 rounded bg-amber-950/30 border border-amber-800/50 text-amber-300 text-xs flex items-center gap-2">
+            <i data-lucide="alert-triangle" class="w-4 h-4 text-amber-400 flex-shrink-0"></i>
+            <span><strong>Dikkat:</strong> NEAR: 3 hesapta pozisyon veya emir var, toplam 1.092 $.</span>
+          </div>
+
+          <div class="p-2.5 rounded bg-amber-950/30 border border-amber-800/50 text-amber-300 text-xs flex items-center gap-2">
+            <i data-lucide="alert-triangle" class="w-4 h-4 text-amber-400 flex-shrink-0"></i>
+            <span><strong>Dikkat:</strong> LTC: 3 hesapta pozisyon veya emir var, toplam 871 $.</span>
+          </div>
+        </div>
+
+        <!-- SON 24 SAAT ÖZETİ & CHIP BUTONLARI -->
+        <div class="bg-[#151f32] p-3.5 rounded-lg border border-[#23324d] space-y-2">
+          <div class="text-[11px] font-semibold uppercase tracking-wider text-slate-400">Son 24 Saat</div>
+          <div class="text-xs text-slate-200">
+            Son 24 saatte <strong>2 pozisyon açıldı</strong>, <strong>3 işlem kapandı</strong> (toplam <span class="text-red-400 font-semibold">-43 $</span>). En iyisi Algo XLM (<span class="text-emerald-400">+6 $</span>). En kötüsü Algo DOGE (<span class="text-red-400">-25 $</span>).
+          </div>
+          <div class="flex flex-wrap items-center gap-2 pt-1">
+            <span class="inline-flex items-center gap-1 text-[11px] px-2.5 py-1 rounded bg-[#1e293b] border border-slate-700 text-slate-300">
+              <span class="w-2 h-2 rounded-full bg-blue-400"></span> LTC açılış satış
+            </span>
+            <span class="inline-flex items-center gap-1 text-[11px] px-2.5 py-1 rounded bg-[#1e293b] border border-slate-700 text-slate-300">
+              <span class="w-2 h-2 rounded-full bg-blue-400"></span> NEAR açılış satış
+            </span>
+            <span class="inline-flex items-center gap-1 text-[11px] px-2.5 py-1 rounded bg-red-950/50 border border-red-800 text-red-300">
+              <span class="w-2 h-2 rounded-full bg-red-400"></span> OP kapandı -24 $
+            </span>
+            <span class="inline-flex items-center gap-1 text-[11px] px-2.5 py-1 rounded bg-emerald-950/50 border border-emerald-800 text-emerald-300">
+              <span class="w-2 h-2 rounded-full bg-emerald-400"></span> XLM kapandı +6 $
+            </span>
+            <span class="inline-flex items-center gap-1 text-[11px] px-2.5 py-1 rounded bg-red-950/50 border border-red-800 text-red-300">
+              <span class="w-2 h-2 rounded-full bg-red-400"></span> DOGE kapandı -25 $
+            </span>
+          </div>
+        </div>
+
+        <!-- HESAP KARTLARI GRİDİ (7 Hesap / Sayfa 1 ve 2) -->
+        <div id="accountsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <!-- Dinamik olarak JS ile oluşturulacak -->
+        </div>
+
+        <!-- Dipnot (PDF Sayfa 2 & 17) -->
+        <div class="p-3 bg-[#10172a] rounded border border-[#23324d] text-[11px] text-slate-400 leading-relaxed">
+          Kağıt üzerinde al-sat: botlar canlı piyasa verisiyle çalışır, gerçek emir gönderilmez. Saatler İstanbul saatidir. Panel her saat başı (yaklaşık :11) botların kendi kayıtlarından güncellenir; swing ve trend kolları günde bir, diğerleri saatlik çalışır. Günler İstanbul gününe göre. İşlem listesi her hesap için son 1000 işlemi tutar; kart özetleri tüm işlemlerden hesaplanır.
+        </div>
+      </section>
+
+      <!-- ================= 2. KARNE SEKMESİ ================= -->
+      <section id="tab-karne" class="tab-pane hidden space-y-6">
+        <div class="bg-[#151f32] p-4 rounded-lg border border-[#23324d]">
+          <h2 class="text-base font-bold text-white">Strateji Karnesi</h2>
+          <div class="text-xs text-slate-400 mt-1">
+            6 not (0-10) - genel puan 0-100 - formüller açık. DarwinEX'e yatırılan notların ve TradeZella'nın tek puan fikrinden uyarlandı. Kazanma oranı bilinçli olarak yok: trend strateji az kazanarak çok kazanarak çalışır. Deneyim notu gün sayısı arttıkça puan "veri birikiyor" uyarısı verir.
+          </div>
+        </div>
+
+        <!-- Karne Kartları Grid -->
+        <div id="scorecardGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <!-- JS ile doldurulacak -->
+        </div>
+
+        <!-- Radar Grafiği ve Notlar Açıklama Tablosu -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+          <div class="bg-[#151f32] p-4 rounded-lg border border-[#23324d]">
+            <h3 class="text-xs font-semibold text-slate-300 mb-3">Strateji - Karne Ayrıntısı (Radar)</h3>
+            <div class="relative h-64">
+              <canvas id="radarChart"></canvas>
+            </div>
+          </div>
+
+          <div class="bg-[#151f32] p-4 rounded-lg border border-[#23324d] overflow-x-auto">
+            <h3 class="text-xs font-semibold text-slate-300 mb-2">Notlar Nasıl Hesaplandı?</h3>
+            <table class="w-full text-left text-xs border-collapse">
+              <thead>
+                <tr class="border-b border-[#23324d] text-slate-400 text-[11px]">
+                  <th class="py-2">NOT</th>
+                  <th class="py-2">PUAN</th>
+                  <th class="py-2">NASIL HESAPLANDI</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-[#23324d] text-slate-300 text-xs">
+                <tr>
+                  <td class="py-2 font-medium">Getiri</td>
+                  <td class="py-2 text-emerald-400">4,3</td>
+                  <td class="py-2 text-slate-400">Beklenen yollarının %43 diliminde (Monte Carlo konisi)</td>
+                </tr>
+                <tr>
+                  <td class="py-2 font-medium">Risk</td>
+                  <td class="py-2 text-emerald-400">9,2</td>
+                  <td class="py-2 text-slate-400">En büyük düşüş -%1,6 < -%20 = 0 puan</td>
+                </tr>
+                <tr>
+                  <td class="py-2 font-medium">Beklenti (R)</td>
+                  <td class="py-2 text-emerald-400">9,8</td>
+                  <td class="py-2 text-slate-400">İşlem başına ortalama -0.02R - 0R = 4 puan, +0.5R = 10</td>
+                </tr>
+                <tr>
+                  <td class="py-2 font-medium">Şans değil</td>
+                  <td class="py-2 text-slate-500">-</td>
+                  <td class="py-2 text-slate-400">Veri yok (simülasyon 10 günlük ortak veriden sonra, PSR 10 günden sonra hesaplanır)</td>
+                </tr>
+                <tr>
+                  <td class="py-2 font-medium">Deneyim</td>
+                  <td class="py-2 text-amber-400">2,5</td>
+                  <td class="py-2 text-slate-400">11 Kapanan işlem (30'da tam); 8 gün (60'ta tam) - yarısı ortalama</td>
+                </tr>
+                <tr>
+                  <td class="py-2 font-medium">Çeşitlendirme</td>
+                  <td class="py-2 text-slate-500">-</td>
+                  <td class="py-2 text-slate-400">Veri yok (simülasyon 10 günlük ortak veriden sonra, PSR 10 günden sonra hesaplanır)</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= 3. GRAFİKLER SEKMESİ ================= -->
+      <section id="tab-grafikler" class="tab-pane hidden space-y-6">
+        
+        <!-- Getiri Karşılaştırması (%) -->
+        <div class="bg-[#151f32] p-4 rounded-lg border border-[#23324d]">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-3 gap-2">
+            <div>
+              <h3 class="text-sm font-bold text-white">Getiri Karşılaştırması (%)</h3>
+              <p class="text-xs text-slate-400">Stratejilerin ve kıyaslama endekslerinin kümülatif getirisi</p>
+            </div>
+            <div class="text-[11px] text-slate-400">
+              12 Ekim: Swing +1.2%, Algo -0.5%, Day trade 0.0%
+            </div>
+          </div>
+          <div class="relative h-72">
+            <canvas id="benchmarkChart"></canvas>
+          </div>
+        </div>
+
+        <!-- Strateji Sermaye ve Beklenti (Monte Carlo) & Drawdown -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+          <div class="bg-[#151f32] p-4 rounded-lg border border-[#23324d]">
+            <h3 class="text-xs font-semibold text-slate-300 mb-2">Strateji - Sermaye ve Beklenti (Monte Carlo Bantları)</h3>
+            <p class="text-[11px] text-slate-400 mb-2">Gölge alan: %25-%75 beklenti koridoru. Çizgi: Gerçekleşen eğri.</p>
+            <div class="relative h-60">
+              <canvas id="monteCarloChart"></canvas>
+            </div>
+          </div>
+
+          <div class="bg-[#151f32] p-4 rounded-lg border border-[#23324d]">
+            <h3 class="text-xs font-semibold text-slate-300 mb-2">Strateji - Zirveden Düşüş (Underwater Drawdown)</h3>
+            <p class="text-[11px] text-slate-400 mb-2">En uzun düşüş: 4 gün. Maksimum derinlik: -%3,76</p>
+            <div class="relative h-60">
+              <canvas id="drawdownChart"></canvas>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= 4. TAKVİM SEKMESİ ================= -->
+      <section id="tab-takvim" class="tab-pane hidden space-y-6">
+        <div class="bg-[#151f32] p-4 rounded-lg border border-[#23324d] flex flex-col md:flex-row md:items-center justify-between gap-3">
+          <div>
+            <h2 class="text-sm font-bold text-white">Ekim 2026 Takvim</h2>
+            <div class="text-xs text-slate-400">Toplam -654 $ | 3 yeşil gün | 24 kapanan işlem | En iyi +139 $ (11 Ekim) | En kötü -659 $ (12 Ekim)</div>
+          </div>
+          <select id="calendarFilter" class="bg-[#1e293b] border border-[#23324d] text-xs px-3 py-1.5 rounded text-slate-200">
+            <option value="all">Tümü (Tüm hesaplar)</option>
+            <option value="strateji">Strateji</option>
+            <option value="algo">Algo</option>
+            <option value="swing">Swing</option>
+          </select>
+        </div>
+
+        <!-- Takvim Izgarası -->
+        <div class="bg-[#151f32] p-4 rounded-lg border border-[#23324d] overflow-x-auto">
+          <div class="grid grid-cols-7 gap-2 min-w-[650px] text-center text-xs">
+            <div class="py-1 font-semibold text-slate-400">PZT</div>
+            <div class="py-1 font-semibold text-slate-400">SAL</div>
+            <div class="py-1 font-semibold text-slate-400">ÇAR</div>
+            <div class="py-1 font-semibold text-slate-400">PER</div>
+            <div class="py-1 font-semibold text-slate-400">CUM</div>
+            <div class="py-1 font-semibold text-slate-400">CMT</div>
+            <div class="py-1 font-semibold text-slate-400">PAZ</div>
+
+            <!-- Gün Hücreleri (Dinamik JS ile render edilir) -->
+            <div id="calendarGrid" class="contents"></div>
+          </div>
+        </div>
+
+        <!-- Seçilen Gün Detay Paneli (15 Ekim Perşembe) -->
+        <div class="bg-[#151f32] p-4 rounded-lg border border-[#23324d] space-y-4">
+          <div class="flex items-center justify-between border-b border-[#23324d] pb-2">
+            <div>
+              <span class="text-sm font-bold text-white">15 Ekim Perşembe</span>
+              <span class="text-xs text-slate-400 ml-2">Kapanan: 0 $ | Açık pozisyon değer değişimi: -50 $</span>
+            </div>
+            <div class="text-sm font-bold text-red-400">-50 $</div>
+          </div>
+
+          <!-- Hesap Kırılımı Çipleri -->
+          <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-2 text-xs">
+            <div class="p-2 bg-[#1e293b] rounded border border-slate-700">
+              <div class="text-[10px] text-slate-400">Strateji</div>
+              <div class="font-bold text-emerald-400">+8 $</div>
+            </div>
+            <div class="p-2 bg-[#1e293b] rounded border border-slate-700">
+              <div class="text-[10px] text-slate-400">Algo</div>
+              <div class="font-bold text-red-400">-3 $</div>
+            </div>
+            <div class="p-2 bg-[#1e293b] rounded border border-slate-700">
+              <div class="text-[10px] text-slate-400">Day trade</div>
+              <div class="font-bold text-slate-400">0 $</div>
+            </div>
+            <div class="p-2 bg-[#1e293b] rounded border border-slate-700">
+              <div class="text-[10px] text-slate-400">Day trade hisse</div>
+              <div class="font-bold text-slate-400">0 $</div>
+            </div>
+            <div class="p-2 bg-[#1e293b] rounded border border-slate-700">
+              <div class="text-[10px] text-slate-400">TradingView</div>
+              <div class="font-bold text-emerald-400">+2 $</div>
+            </div>
+            <div class="p-2 bg-[#1e293b] rounded border border-slate-700">
+              <div class="text-[10px] text-slate-400">Trend kolları</div>
+              <div class="font-bold text-red-400">-56 $</div>
+            </div>
+          </div>
+
+          <!-- Gün Sonunda Açık Pozisyonlar Tablosu -->
+          <div class="overflow-x-auto">
+            <div class="text-xs font-semibold text-slate-300 mb-2">Gün Sonunda Açık Pozisyonlar (18) - Günlük Değişim Toplamı: +69 $</div>
+            <table class="w-full text-left text-xs border-collapse">
+              <thead>
+                <tr class="border-b border-[#23324d] text-slate-400 text-[11px]">
+                  <th class="py-2">HESAP</th>
+                  <th class="py-2">STRATEJİ</th>
+                  <th class="py-2">VARLIK</th>
+                  <th class="py-2">YÖN</th>
+                  <th class="py-2">GİRİŞ</th>
+                  <th class="py-2 text-right">BU GÜNKÜ DEĞİŞİM</th>
+                  <th class="py-2 text-right">TOPLAM K/Z</th>
+                  <th class="py-2 text-right">R</th>
+                </tr>
+              </thead>
+              <tbody id="dayEndPositionsTable" class="divide-y divide-[#23324d] text-slate-300">
+                <!-- JS dolduracak -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= 5. AÇIK POZİSYONLAR SEKMESİ ================= -->
+      <section id="tab-acik_pozisyonlar" class="tab-pane hidden space-y-6">
+        <!-- Donut & Dağılım Grafikleri -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div class="bg-[#151f32] p-4 rounded-lg border border-[#23324d]">
+            <h3 class="text-xs font-semibold text-slate-300 mb-2">Para Nerede: Hesaplara Göre</h3>
+            <div class="relative h-48">
+              <canvas id="accountsDonut"></canvas>
+            </div>
+          </div>
+
+          <div class="bg-[#151f32] p-4 rounded-lg border border-[#23324d]">
+            <h3 class="text-xs font-semibold text-slate-300 mb-2">Para Nerede: Varlık Sınıfına Göre</h3>
+            <div class="relative h-48">
+              <canvas id="assetsDonut"></canvas>
+            </div>
+          </div>
+
+          <div class="bg-[#151f32] p-4 rounded-lg border border-[#23324d] md:col-span-2 lg:col-span-1">
+            <h3 class="text-xs font-semibold text-slate-300 mb-2">Açık Pozisyonların Anlık K/Z</h3>
+            <div class="relative h-48">
+              <canvas id="openPositionsPnlBar"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <!-- Açık Pozisyonlar Tablosu -->
+        <div class="bg-[#151f32] p-4 rounded-lg border border-[#23324d]">
+          <div class="flex items-center justify-between pb-3">
+            <h3 class="text-sm font-bold text-white">Açık Pozisyonlar Listesi (31)</h3>
+            <div class="text-xs text-slate-400">Canlı piyasa simülasyonu</div>
+          </div>
+
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs border-collapse">
+              <thead>
+                <tr class="border-b border-[#23324d] text-slate-400 text-[11px]">
+                  <th class="py-2.5">HESAP</th>
+                  <th class="py-2.5">STRATEJİ</th>
+                  <th class="py-2.5">VARLIK</th>
+                  <th class="py-2.5">YÖN</th>
+                  <th class="py-2.5">GİRİŞ</th>
+                  <th class="py-2.5">SÜRE</th>
+                  <th class="py-2.5 text-right">GİRİŞ FİYATI</th>
+                  <th class="py-2.5 text-right">STOP</th>
+                  <th class="py-2.5 text-right">TUTAR</th>
+                  <th class="py-2.5 text-right">K/Z ($)</th>
+                  <th class="py-2.5 text-right">R</th>
+                  <th class="py-2.5 text-center">İŞLEM</th>
+                </tr>
+              </thead>
+              <tbody id="openPositionsTableBody" class="divide-y divide-[#23324d] text-slate-300">
+                <!-- JS dolduracak -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Bekleyen Emirler Tablosu (PDF Sayfa 9) -->
+        <div class="bg-[#151f32] p-4 rounded-lg border border-[#23324d]">
+          <h3 class="text-xs font-semibold text-slate-300 mb-3">Bekleyen Emirler (Bir Sonraki Açılışta)</h3>
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs border-collapse">
+              <thead>
+                <tr class="border-b border-[#23324d] text-slate-400 text-[11px]">
+                  <th class="py-2">HESAP</th>
+                  <th class="py-2">STRATEJİ</th>
+                  <th class="py-2">VARLIK</th>
+                  <th class="py-2">SİNYAL</th>
+                  <th class="py-2">EMİR</th>
+                  <th class="py-2 text-right">STOP</th>
+                  <th class="py-2 text-right">STOP MESAFESİ</th>
+                </tr>
+              </thead>
+              <tbody id="pendingOrdersTableBody" class="divide-y divide-[#23324d] text-slate-300">
+                <!-- JS dolduracak -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= 6. İŞLEM GEÇMİŞİ SEKMESİ ================= -->
+      <section id="tab-islem_gecmisi" class="tab-pane hidden space-y-4">
+        <div class="bg-[#151f32] p-4 rounded-lg border border-[#23324d] flex flex-col md:flex-row items-center justify-between gap-3">
+          <div>
+            <h2 class="text-sm font-bold text-white">İşlem Geçmişi (Kapanan İşlemler)</h2>
+            <div class="text-xs text-slate-400">24 işlem • Kazanma: %21 • Toplam: -328 $</div>
+          </div>
+
+          <!-- Filtreler -->
+          <div class="flex flex-wrap items-center gap-2 w-full md:w-auto text-xs">
+            <select id="historyAccountFilter" onchange="filterTradeHistory()" class="bg-[#1e293b] border border-[#23324d] px-2.5 py-1.5 rounded text-slate-200">
+              <option value="all">Tüm hesaplar</option>
+              <option value="Algo">Algo</option>
+              <option value="Strateji">Strateji</option>
+              <option value="Swing">Swing</option>
+            </select>
+
+            <select id="historyResultFilter" onchange="filterTradeHistory()" class="bg-[#1e293b] border border-[#23324d] px-2.5 py-1.5 rounded text-slate-200">
+              <option value="all">Tüm sonuçlar</option>
+              <option value="win">Kazananlar (+)</option>
+              <option value="loss">Kaybedenler (-)</option>
+              <option value="stop">Stop olanlar</option>
+            </select>
+
+            <input id="historySearchInput" oninput="filterTradeHistory()" type="text" placeholder="Varlık veya strateji ara..." 
+                   class="bg-[#1e293b] border border-[#23324d] px-2.5 py-1.5 rounded text-slate-200 placeholder-slate-400 text-xs">
+          </div>
+        </div>
+
+        <!-- İşlem Geçmişi Tablosu -->
+        <div class="bg-[#151f32] p-4 rounded-lg border border-[#23324d] overflow-x-auto">
+          <table class="w-full text-left text-xs border-collapse">
+            <thead>
+              <tr class="border-b border-[#23324d] text-slate-400 text-[11px]">
+                <th class="py-2.5">HESAP</th>
+                <th class="py-2.5">STRATEJİ</th>
+                <th class="py-2.5">VARLIK</th>
+                <th class="py-2.5">YÖN</th>
+                <th class="py-2.5">GİRİŞ</th>
+                <th class="py-2.5">ÇIKIŞ</th>
+                <th class="py-2.5 text-right">GİRİŞ FİYATI</th>
+                <th class="py-2.5 text-right">ÇIKIŞ FİYATI</th>
+                <th class="py-2.5 text-right">R</th>
+                <th class="py-2.5 text-right">K/Z ($)</th>
+                <th class="py-2.5 text-center">NEDEN</th>
+              </tr>
+            </thead>
+            <tbody id="tradeHistoryTableBody" class="divide-y divide-[#23324d] text-slate-300">
+              <!-- JS ile dinamik listelenecek -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ================= 7. İSTATİSTİK SEKMESİ ================= -->
+      <section id="tab-istatistik" class="tab-pane hidden space-y-6">
+        
+        <!-- Üst Metrik Kartları (PDF Sayfa 11) -->
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
+          <div class="bg-[#151f32] p-3 rounded-lg border border-[#23324d]">
+            <div class="text-[10px] text-slate-400 uppercase font-semibold">Net K/Z</div>
+            <div class="text-base font-bold text-red-400">-328 $</div>
+            <div class="text-[10px] text-slate-400">Açık dahil: -260 $</div>
+          </div>
+
+          <div class="bg-[#151f32] p-3 rounded-lg border border-[#23324d]">
+            <div class="text-[10px] text-slate-400 uppercase font-semibold">İşlem Sayısı</div>
+            <div class="text-base font-bold text-white">24</div>
+            <div class="text-[10px] text-slate-400">5 kazanan • 19 kayıp</div>
+          </div>
+
+          <div class="bg-[#151f32] p-3 rounded-lg border border-[#23324d]">
+            <div class="text-[10px] text-slate-400 uppercase font-semibold">Kazanma Oranı</div>
+            <div class="text-base font-bold text-amber-400">%21</div>
+            <div class="text-[10px] text-slate-400">Trend strateji hedefi</div>
+          </div>
+
+          <div class="bg-[#151f32] p-3 rounded-lg border border-[#23324d]">
+            <div class="text-[10px] text-slate-400 uppercase font-semibold">Kar Faktörü</div>
+            <div class="text-base font-bold text-red-400">0,01</div>
+            <div class="text-[10px] text-slate-400">Kazanç/Kayıp toplamı</div>
+          </div>
+
+          <div class="bg-[#151f32] p-3 rounded-lg border border-[#23324d]">
+            <div class="text-[10px] text-slate-400 uppercase font-semibold">Ort. Kazanç / Kayıp</div>
+            <div class="text-base font-bold text-slate-200">+8 $ / -27 $</div>
+            <div class="text-[10px] text-slate-400">Oran: 0,03</div>
+          </div>
+
+          <div class="bg-[#151f32] p-3 rounded-lg border border-[#23324d]">
+            <div class="text-[10px] text-slate-400 uppercase font-semibold">İşlem Başı Beklenti</div>
+            <div class="text-base font-bold text-red-400">-14 $</div>
+            <div class="text-[10px] text-slate-400">SQN: -7,13</div>
+          </div>
+
+          <div class="bg-[#151f32] p-3 rounded-lg border border-[#23324d]">
+            <div class="text-[10px] text-slate-400 uppercase font-semibold">En Büyük Kazanç</div>
+            <div class="text-base font-bold text-emerald-400">+11 $</div>
+            <div class="text-[10px] text-slate-400">En büyük kayıp: -26 $</div>
+          </div>
+
+          <div class="bg-[#151f32] p-3 rounded-lg border border-[#23324d]">
+            <div class="text-[10px] text-slate-400 uppercase font-semibold">En Uzun Seri</div>
+            <div class="text-base font-bold text-slate-200">3 K - 9 Z</div>
+            <div class="text-[10px] text-slate-400">Ardışık kayıp serisi</div>
+          </div>
+
+          <div class="bg-[#151f32] p-3 rounded-lg border border-[#23324d]">
+            <div class="text-[10px] text-slate-400 uppercase font-semibold">Ort. Tutma Süresi</div>
+            <div class="text-base font-bold text-slate-200">43 saat</div>
+            <div class="text-[10px] text-slate-400">Kazananlar: 20 sa</div>
+          </div>
+
+          <div class="bg-[#151f32] p-3 rounded-lg border border-[#23324d]">
+            <div class="text-[10px] text-slate-400 uppercase font-semibold">Kelly Oranı</div>
+            <div class="text-base font-bold text-red-400">%-2.924</div>
+            <div class="text-[10px] text-slate-400">Pozisyon küçültülmeli</div>
+          </div>
+
+          <div class="bg-[#151f32] p-3 rounded-lg border border-[#23324d]">
+            <div class="text-[10px] text-slate-400 uppercase font-semibold">Yeşil Gün Oranı</div>
+            <div class="text-base font-bold text-slate-200">%43</div>
+            <div class="text-[10px] text-slate-400">3 gün / 7 gün</div>
+          </div>
+
+          <div class="bg-[#151f32] p-3 rounded-lg border border-[#23324d]">
+            <div class="text-[10px] text-slate-400 uppercase font-semibold">En İyi Gün</div>
+            <div class="text-base font-bold text-emerald-400">+139 $</div>
+            <div class="text-[10px] text-slate-400">11 Ekim Pazar</div>
+          </div>
+        </div>
+
+        <!-- İstatistik Grafikleri (R Histogramı & Varlık Dağılımı) -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+          <div class="bg-[#151f32] p-4 rounded-lg border border-[#23324d]">
+            <h3 class="text-xs font-semibold text-slate-300 mb-2">İşlem Sonuçlarının Dağılımı (R Histogramı)</h3>
+            <div class="relative h-60">
+              <canvas id="rHistogramChart"></canvas>
+            </div>
+          </div>
+
+          <div class="bg-[#151f32] p-4 rounded-lg border border-[#23324d]">
+            <h3 class="text-xs font-semibold text-slate-300 mb-2">Varlık Başına K/Z ($)</h3>
+            <div class="relative h-60">
+              <canvas id="assetPnlBarChart"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <!-- Gün ve Saat Kırılım Tabloları (PDF Sayfa 12) -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+          <div class="bg-[#151f32] p-4 rounded-lg border border-[#23324d]">
+            <h3 class="text-xs font-semibold text-slate-300 mb-2">Alış ve Satış Kırılımı</h3>
+            <table class="w-full text-left text-xs border-collapse">
+              <thead>
+                <tr class="border-b border-[#23324d] text-slate-400 text-[11px]">
+                  <th class="py-2">YÖN</th>
+                  <th class="py-2">İŞLEM</th>
+                  <th class="py-2">KAZANMA</th>
+                  <th class="py-2 text-right">K/Z ($)</th>
+                  <th class="py-2 text-right">ORT. R</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-[#23324d] text-slate-300">
+                <tr>
+                  <td class="py-2 text-blue-400 font-medium">Alış</td>
+                  <td class="py-2">19</td>
+                  <td class="py-2">%26</td>
+                  <td class="py-2 text-right text-red-400">-202 $</td>
+                  <td class="py-2 text-right text-red-400">-0,44</td>
+                </tr>
+                <tr>
+                  <td class="py-2 text-purple-400 font-medium">Satış</td>
+                  <td class="py-2">5</td>
+                  <td class="py-2">%0</td>
+                  <td class="py-2 text-right text-red-400">-126 $</td>
+                  <td class="py-2 text-right text-red-400">-1,04</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="bg-[#151f32] p-4 rounded-lg border border-[#23324d]">
+            <h3 class="text-xs font-semibold text-slate-300 mb-2">Gün ve Saat Performansı</h3>
+            <div class="text-xs text-slate-400">
+              En çok kayıp yaşanan zaman dilimi: <strong>00:00 - 04:00</strong> arası (-152 $ kayıp, 6 işlem).
+            </div>
+            <div class="grid grid-cols-2 gap-2 mt-3 text-xs">
+              <div class="p-2 bg-[#1e293b] rounded">
+                <span class="text-slate-400">Pazartesi:</span> <span class="text-red-400 font-bold">-62 $</span> (4 işlem)
+              </div>
+              <div class="p-2 bg-[#1e293b] rounded">
+                <span class="text-slate-400">Salı:</span> <span class="text-red-400 font-bold">-151 $</span> (6 işlem)
+              </div>
+              <div class="p-2 bg-[#1e293b] rounded">
+                <span class="text-slate-400">Cumartesi:</span> <span class="text-emerald-400 font-bold">+76 $</span> (%50 kazanma)
+              </div>
+              <div class="p-2 bg-[#1e293b] rounded">
+                <span class="text-slate-400">Pazar:</span> <span class="text-red-400 font-bold">-61 $</span> (%17 kazanma)
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= 8. STRATEJİLER SEKMESİ ================= -->
+      <section id="tab-stratejiler" class="tab-pane hidden space-y-6">
+        <div class="bg-[#151f32] p-4 rounded-lg border border-[#23324d]">
+          <h2 class="text-sm font-bold text-white mb-3">Strateji Kırılımı</h2>
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs border-collapse">
+              <thead>
+                <tr class="border-b border-[#23324d] text-slate-400 text-[11px]">
+                  <th class="py-2">HESAP</th>
+                  <th class="py-2">STRATEJİ</th>
+                  <th class="py-2">KAPANAN</th>
+                  <th class="py-2">KAZANMA</th>
+                  <th class="py-2 text-right">ORT. R</th>
+                  <th class="py-2 text-right">K/Z ($)</th>
+                  <th class="py-2 text-right">AÇIK</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-[#23324d] text-slate-300">
+                <tr>
+                  <td class="py-2.5 font-medium text-slate-200">Strateji</td>
+                  <td class="py-2.5">Güçlü-Zayıf Sepeti</td>
+                  <td class="py-2.5">0</td>
+                  <td class="py-2.5">-</td>
+                  <td class="py-2.5 text-right">-</td>
+                  <td class="py-2.5 text-right text-slate-400">0,00 $</td>
+                  <td class="py-2.5 text-right text-amber-400">10</td>
+                </tr>
+                <tr>
+                  <td class="py-2.5 font-medium text-slate-200">Strateji</td>
+                  <td class="py-2.5">Seviye Kırılımı</td>
+                  <td class="py-2.5">11</td>
+                  <td class="py-2.5">%45</td>
+                  <td class="py-2.5 text-right text-red-400">-0,42</td>
+                  <td class="py-2.5 text-right text-red-400">-15,22 $</td>
+                  <td class="py-2.5 text-right text-slate-400">0</td>
+                </tr>
+                <tr>
+                  <td class="py-2.5 font-medium text-slate-200">Algo</td>
+                  <td class="py-2.5">Panik Dönüşü</td>
+                  <td class="py-2.5">0</td>
+                  <td class="py-2.5">-</td>
+                  <td class="py-2.5 text-right">-</td>
+                  <td class="py-2.5 text-right text-slate-400">0,00 $</td>
+                  <td class="py-2.5 text-right text-amber-400">1</td>
+                </tr>
+                <tr>
+                  <td class="py-2.5 font-medium text-slate-200">Algo</td>
+                  <td class="py-2.5">Trend Avcısı (4 saatlik)</td>
+                  <td class="py-2.5">13</td>
+                  <td class="py-2.5">%0</td>
+                  <td class="py-2.5 text-right text-red-400">-0,98</td>
+                  <td class="py-2.5 text-right text-red-400">-306,92 $</td>
+                  <td class="py-2.5 text-right text-amber-400">2</td>
+                </tr>
+                <tr>
+                  <td class="py-2.5 font-medium text-slate-200">TradingView</td>
+                  <td class="py-2.5">MACD Yeniden</td>
+                  <td class="py-2.5">0</td>
+                  <td class="py-2.5">-</td>
+                  <td class="py-2.5 text-right">-</td>
+                  <td class="py-2.5 text-right text-slate-400">0,00 $</td>
+                  <td class="py-2.5 text-right text-amber-400">1</td>
+                </tr>
+                <tr>
+                  <td class="py-2.5 font-medium text-slate-200">Swing</td>
+                  <td class="py-2.5">Trend Molası</td>
+                  <td class="py-2.5">0</td>
+                  <td class="py-2.5">-</td>
+                  <td class="py-2.5 text-right">-</td>
+                  <td class="py-2.5 text-right text-slate-400">0,00 $</td>
+                  <td class="py-2.5 text-right text-amber-400">11</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Çıkış Nedenleri Tablosu (PDF Sayfa 13) -->
+        <div class="bg-[#151f32] p-4 rounded-lg border border-[#23324d]">
+          <h3 class="text-xs font-semibold text-slate-300 mb-3">Çıkış Nedenleri</h3>
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs border-collapse">
+              <thead>
+                <tr class="border-b border-[#23324d] text-slate-400 text-[11px]">
+                  <th class="py-2">HESAP</th>
+                  <th class="py-2">NEDEN</th>
+                  <th class="py-2">İŞLEM</th>
+                  <th class="py-2">PAY</th>
+                  <th class="py-2 text-right">K/Z ($)</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-[#23324d] text-slate-300">
+                <tr>
+                  <td class="py-2 font-medium">Strateji</td>
+                  <td class="py-2 text-red-400">Stop</td>
+                  <td class="py-2">9</td>
+                  <td class="py-2">%82</td>
+                  <td class="py-2 text-right text-red-400">-15 $</td>
+                </tr>
+                <tr>
+                  <td class="py-2 font-medium">Strateji</td>
+                  <td class="py-2 text-emerald-400">Çıkış sinyali (Kar Al)</td>
+                  <td class="py-2">2</td>
+                  <td class="py-2">%18</td>
+                  <td class="py-2 text-right text-emerald-400">0 $</td>
+                </tr>
+                <tr>
+                  <td class="py-2 font-medium">Algo</td>
+                  <td class="py-2 text-red-400">Stop</td>
+                  <td class="py-2">11</td>
+                  <td class="py-2">%85</td>
+                  <td class="py-2 text-right text-red-400">-278 $</td>
+                </tr>
+                <tr>
+                  <td class="py-2 font-medium">Algo</td>
+                  <td class="py-2 text-amber-400">Çıkış sinyali / Süre</td>
+                  <td class="py-2">2</td>
+                  <td class="py-2">%15</td>
+                  <td class="py-2 text-right text-red-400">-35 $</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= 9. KOÇ SEKMESİ ================= -->
+      <section id="tab-koc" class="tab-pane hidden space-y-6">
+        <div class="bg-[#151f32] p-4 rounded-lg border border-[#23324d]">
+          <h2 class="text-sm font-bold text-white">Koç: Öncelikli Bulgular</h2>
+          <p class="text-xs text-slate-400 mt-1">Sistem içi kantitatif modellerin tespit ettiği anomaliler ve optimizasyon ipuçları</p>
+        </div>
+
+        <!-- Koç Bulguları Kartları (PDF Sayfa 13 ve 14) -->
+        <div id="coachFindingsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <!-- JS ile doldurulacak -->
+        </div>
+
+        <!-- Dersler: Backtest ile Karşılaştırma -->
+        <div class="bg-[#151f32] p-4 rounded-lg border border-[#23324d] space-y-3">
+          <h3 class="text-xs font-semibold text-slate-300">Dersler: Backtest ile Karşılaştırma</h3>
+          
+          <div class="p-3 bg-blue-950/40 border border-blue-800 rounded text-xs text-blue-200">
+            <strong>Bilgi: Seviye Kırılımı:</strong> İşlemlerin çoğu stopla kapanıyor. 11 işlemden 9 tanesi (%82) stopla kapandı. Stop mesafesi ve giriş zamanlaması incelenecek.
+          </div>
+
+          <div class="p-3 bg-amber-950/40 border border-amber-800 rounded text-xs text-amber-200">
+            <strong>Dikkat: Trend Avcısı (4 saatlik):</strong> Kazanma oranı beklentinin belirgin altında. 13 işlemde kazanma %0; backtest %48. Bu fark şansla açıklanamayacak kadar büyük (olasılık %0.0). Piyasa rejimi değişmiş olabilir.
+          </div>
+
+          <div class="p-3 bg-red-950/40 border border-red-800 rounded text-xs text-red-200">
+            <strong>Alarm: Trend Avcısı (4 saatlik):</strong> Art arda 13 kayıp serisi. Stop mesafesi ve volatilite katsayısı gözden geçirilmeli.
+          </div>
+        </div>
+
+        <!-- "NE OLURDU?" STRATEJİ ÇIKARMA SİMÜLATÖRÜ (PDF Sayfa 14) -->
+        <div class="bg-[#151f32] p-4 rounded-lg border border-[#23324d] space-y-4">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-[#23324d] pb-3">
+            <div>
+              <h3 class="text-sm font-bold text-white">Ne Olurdu? Strateji Çıkarma Simülatörü</h3>
+              <p class="text-xs text-slate-400">Seçilen stratejileri devre dışı bıraktığınızda portföy eğrisinin nasıl değişeceğini simüle edin</p>
+            </div>
+            <div class="text-right">
+              <span class="text-xs text-slate-400">Tümü: -328 $ | </span>
+              <span class="text-xs font-bold text-emerald-400" id="simulatedPnlResult">Seçili: -15 $</span>
+            </div>
+          </div>
+
+          <div class="flex flex-wrap items-center gap-4 text-xs">
+            <label class="flex items-center gap-2 cursor-pointer bg-[#1e293b] px-3 py-1.5 rounded border border-slate-700">
+              <input type="checkbox" id="simSeviye" checked onchange="updateSimulator()" class="rounded text-blue-500">
+              <span>Seviye Kırılımı (-15 $)</span>
+            </label>
+            <label class="flex items-center gap-2 cursor-pointer bg-[#1e293b] px-3 py-1.5 rounded border border-slate-700">
+              <input type="checkbox" id="simTrend" onchange="updateSimulator()" class="rounded text-blue-500">
+              <span>Trend Avcısı (4 saatlik) (-313 $)</span>
+            </label>
+          </div>
+
+          <div class="relative h-60">
+            <canvas id="simulatorChart"></canvas>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= 10. ÖĞRENME (GÖLGE MOD) SEKMESİ ================= -->
+      <section id="tab-ogrenme" class="tab-pane hidden space-y-6">
+        <div class="bg-[#151f32] p-4 rounded-lg border border-[#23324d]">
+          <h2 class="text-sm font-bold text-white">Öğrenme (Gölge Mod)</h2>
+          <p class="text-xs text-slate-400 mt-1">
+            Her işlem kapanmadan önce, aynı strateji ve yöndeki önceki işlemlerden "bu işlemin beklenen sonucu" tahmin edilir (en az 5 önceki işlem). Tahmin -0.2R'nin altındaysa gölge filtre işlemi "pas geç" olarak işaretler. Bu panel gölge filtrenin kararlarını ve potansiyel tasarrufu test eder.
+          </p>
+        </div>
+
+        <!-- Gölge Mod KPI'ları (PDF Sayfa 15) -->
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
+          <div class="bg-[#151f32] p-3 rounded-lg border border-[#23324d]">
+            <div class="text-[10px] text-slate-400 uppercase font-semibold">Kapanan İşlem</div>
+            <div class="text-lg font-bold text-white">24</div>
+            <div class="text-[10px] text-slate-400">Tüm geçmiş</div>
+          </div>
+
+          <div class="bg-[#151f32] p-3 rounded-lg border border-[#23324d]">
+            <div class="text-[10px] text-slate-400 uppercase font-semibold">Gerçek Sonuç</div>
+            <div class="text-lg font-bold text-red-400">-328 $</div>
+            <div class="text-[10px] text-slate-400">Mevcut zarar</div>
+          </div>
+
+          <div class="bg-[#151f32] p-3 rounded-lg border border-[#23324d]">
+            <div class="text-[10px] text-slate-400 uppercase font-semibold">Gölge Filtreyle</div>
+            <div class="text-lg font-bold text-amber-400">-254 $</div>
+            <div class="text-[10px] text-emerald-400">+74 $ tasarruf</div>
+          </div>
+
+          <div class="bg-[#151f32] p-3 rounded-lg border border-[#23324d]">
+            <div class="text-[10px] text-slate-400 uppercase font-semibold">Filtrenin Atlayacağı</div>
+            <div class="text-lg font-bold text-blue-400">7 işlem</div>
+            <div class="text-[10px] text-slate-400">Engellenen sinyal</div>
+          </div>
+
+          <div class="bg-[#151f32] p-3 rounded-lg border border-[#23324d] col-span-2 sm:col-span-1">
+            <div class="text-[10px] text-slate-400 uppercase font-semibold">Atlamalarda İsabet</div>
+            <div class="text-lg font-bold text-emerald-400">%43</div>
+            <div class="text-[10px] text-slate-400">Doğru filtreleme</div>
+          </div>
+        </div>
+
+        <!-- Gölge Mod İşlem Tablosu -->
+        <div class="bg-[#151f32] p-4 rounded-lg border border-[#23324d] overflow-x-auto">
+          <table class="w-full text-left text-xs border-collapse">
+            <thead>
+              <tr class="border-b border-[#23324d] text-slate-400 text-[11px]">
+                <th class="py-2.5">KAPANIŞ</th>
+                <th class="py-2.5">HESAP</th>
+                <th class="py-2.5">STRATEJİ</th>
+                <th class="py-2.5">VARLIK</th>
+                <th class="py-2.5">YÖN</th>
+                <th class="py-2.5 text-center">ÖNCEKİ İŞLEM</th>
+                <th class="py-2.5 text-right">TAHMİN (R)</th>
+                <th class="py-2.5 text-center">GÖLGE KARAR</th>
+                <th class="py-2.5 text-right">GERÇEK (R)</th>
+                <th class="py-2.5 text-center">SONUÇ</th>
+              </tr>
+            </thead>
+            <tbody id="shadowTableBody" class="divide-y divide-[#23324d] text-slate-300">
+              <!-- JS dolduracak -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ================= 11. RAPOR SEKMESİ ================= -->
+      <section id="tab-rapor" class="tab-pane hidden space-y-6">
+        <div class="bg-[#151f32] p-4 rounded-lg border border-[#23324d] flex flex-col sm:flex-row items-center justify-between gap-3">
+          <div>
+            <h2 class="text-sm font-bold text-white">Ekim 2026 Performans Raporu</h2>
+            <div class="text-xs text-slate-400">Aylık resmi denetim ve performans değerlendirme belgesi</div>
+          </div>
+          <div class="flex items-center gap-2">
+            <select class="bg-[#1e293b] border border-[#23324d] text-xs px-3 py-1.5 rounded text-slate-200">
+              <option>Ekim 2026</option>
+            </select>
+            <button onclick="window.print()" class="px-3 py-1.5 bg-blue-600 hover:bg-blue-500 text-white rounded text-xs flex items-center gap-1 font-medium">
+              <i data-lucide="printer" class="w-3.5 h-3.5"></i>
+              <span>Yazdır / PDF</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Rapor Üst Özet Barı -->
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 text-xs">
+          <div class="p-3 bg-[#151f32] rounded border border-[#23324d]">
+            <span class="text-slate-400 block text-[10px]">TOPLAM DEĞER</span>
+            <span class="text-base font-bold text-white">69.366 $</span>
+          </div>
+          <div class="p-3 bg-[#151f32] rounded border border-[#23324d]">
+            <span class="text-slate-400 block text-[10px]">TOPLAM GETİRİ</span>
+            <span class="text-base font-bold text-red-400">-%0,91</span>
+          </div>
+          <div class="p-3 bg-[#151f32] rounded border border-[#23324d]">
+            <span class="text-slate-400 block text-[10px]">BU AY KAPANAN</span>
+            <span class="text-base font-bold text-white">24</span>
+          </div>
+          <div class="p-3 bg-[#151f32] rounded border border-[#23324d]">
+            <span class="text-slate-400 block text-[10px]">KAZANMA</span>
+            <span class="text-base font-bold text-amber-400">%21</span>
+          </div>
+          <div class="p-3 bg-[#151f32] rounded border border-[#23324d] col-span-2 sm:col-span-1">
+            <span class="text-slate-400 block text-[10px]">EN KÖTÜ HESAP DÜŞÜŞÜ</span>
+            <span class="text-base font-bold text-red-400">-%3,76</span>
+          </div>
+        </div>
+
+        <!-- Rapor İçi Grafik -->
+        <div class="bg-[#151f32] p-4 rounded-lg border border-[#23324d]">
+          <h3 class="text-xs font-semibold text-slate-300 mb-2">Ay İçi Kümülatif Getiri Eğrisi (%)</h3>
+          <div class="relative h-60">
+            <canvas id="reportChart"></canvas>
+          </div>
+        </div>
+
+        <!-- Hesaplar ve Kontrol Listesi Tablosu (PDF Sayfa 16) -->
+        <div class="bg-[#151f32] p-4 rounded-lg border border-[#23324d] overflow-x-auto">
+          <h3 class="text-xs font-semibold text-slate-300 mb-3">Hesaplar ve Kontrol Listesi</h3>
+          <table class="w-full text-left text-xs border-collapse">
+            <thead>
+              <tr class="border-b border-[#23324d] text-slate-400 text-[11px]">
+                <th class="py-2">HESAP</th>
+                <th class="py-2 text-right">AY GETİRİSİ</th>
+                <th class="py-2 text-right">TOPLAM GETİRİ</th>
+                <th class="py-2 text-right">MAKS. DÜŞÜŞ</th>
+                <th class="py-2 text-center">KAPANAN</th>
+                <th class="py-2 text-center">KARNE</th>
+                <th class="py-2 text-center">SON İŞLEM</th>
+                <th class="py-2 text-center">DÜŞÜŞ < %20</th>
+                <th class="py-2 text-center">KONİ İÇİNDE</th>
+                <th class="py-2 text-center">PSR > %90</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-[#23324d] text-slate-300">
+              <tr>
+                <td class="py-2 font-medium">Strateji</td>
+                <td class="py-2 text-right text-red-400">-%0,15</td>
+                <td class="py-2 text-right text-red-400">-%0,15</td>
+                <td class="py-2 text-right text-red-400">-%1,63</td>
+                <td class="py-2 text-center">11</td>
+                <td class="py-2 text-center text-amber-400 font-bold">42</td>
+                <td class="py-2 text-center text-slate-400">1 gün önce</td>
+                <td class="py-2 text-center text-emerald-400">✓</td>
+                <td class="py-2 text-center text-emerald-400">✓</td>
+                <td class="py-2 text-center text-slate-500">-</td>
+              </tr>
+              <tr>
+                <td class="py-2 font-medium">Algo</td>
+                <td class="py-2 text-right text-red-400">-%2,89</td>
+                <td class="py-2 text-right text-red-400">-%2,89</td>
+                <td class="py-2 text-right text-red-400">-%3,14</td>
+                <td class="py-2 text-center">13</td>
+                <td class="py-2 text-center text-red-400 font-bold">28</td>
+                <td class="py-2 text-center text-slate-400">1 gün önce</td>
+                <td class="py-2 text-center text-emerald-400">✓</td>
+                <td class="py-2 text-center text-red-400">✗</td>
+                <td class="py-2 text-center text-slate-500">-</td>
+              </tr>
+              <tr>
+                <td class="py-2 font-medium">Day trade</td>
+                <td class="py-2 text-right text-slate-400">%0,00</td>
+                <td class="py-2 text-right text-slate-400">%0,00</td>
+                <td class="py-2 text-right text-slate-400">%0,00</td>
+                <td class="py-2 text-center">0</td>
+                <td class="py-2 text-center text-blue-400 font-bold">52</td>
+                <td class="py-2 text-center text-slate-500">-</td>
+                <td class="py-2 text-center text-emerald-400">✓</td>
+                <td class="py-2 text-center text-emerald-400">✓</td>
+                <td class="py-2 text-center text-slate-500">-</td>
+              </tr>
+              <tr>
+                <td class="py-2 font-medium">Swing</td>
+                <td class="py-2 text-right text-red-400">-%2,51</td>
+                <td class="py-2 text-right text-red-400">-%2,51</td>
+                <td class="py-2 text-right text-red-400">-%3,76</td>
+                <td class="py-2 text-center">0</td>
+                <td class="py-2 text-center text-amber-400 font-bold">30</td>
+                <td class="py-2 text-center text-slate-500">-</td>
+                <td class="py-2 text-center text-emerald-400">✓</td>
+                <td class="py-2 text-center text-red-400">✗</td>
+                <td class="py-2 text-center text-slate-500">-</td>
+              </tr>
+              <tr>
+                <td class="py-2 font-medium">Trend kolları</td>
+                <td class="py-2 text-right text-red-400">-%0,79</td>
+                <td class="py-2 text-right text-red-400">-%0,79</td>
+                <td class="py-2 text-right text-red-400">-%0,79</td>
+                <td class="py-2 text-center">0</td>
+                <td class="py-2 text-center text-amber-400 font-bold">40</td>
+                <td class="py-2 text-center text-slate-500">-</td>
+                <td class="py-2 text-center text-emerald-400">✓</td>
+                <td class="py-2 text-center text-emerald-400">✓</td>
+                <td class="py-2 text-center text-slate-500">-</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ================= 12. DÖNEMSEL GETİRİ SEKMESİ ================= -->
+      <section id="tab-donemsel_getiri" class="tab-pane hidden space-y-6">
+        <div class="bg-[#151f32] p-4 rounded-lg border border-[#23324d] flex items-center justify-between">
+          <div>
+            <h2 class="text-sm font-bold text-white">Dönemsel Getiri Matrisi</h2>
+            <div class="text-xs text-slate-400">Hesap bazında günlük, haftalık ve aylık getiri oranları (%)</div>
+          </div>
+          <div class="flex items-center gap-1 bg-[#1e293b] p-1 rounded border border-[#23324d] text-xs">
+            <button class="px-2.5 py-1 rounded bg-blue-600 text-white font-medium">Günlük</button>
+            <button class="px-2.5 py-1 rounded text-slate-400 hover:text-white">Haftalık</button>
+            <button class="px-2.5 py-1 rounded text-slate-400 hover:text-white">Aylık</button>
+          </div>
+        </div>
+
+        <div class="bg-[#151f32] p-4 rounded-lg border border-[#23324d] overflow-x-auto">
+          <table class="w-full text-left text-xs border-collapse">
+            <thead>
+              <tr class="border-b border-[#23324d] text-slate-400 text-[11px]">
+                <th class="py-2.5">GÜN</th>
+                <th class="py-2.5 text-right">STRATEJİ</th>
+                <th class="py-2.5 text-right">ALGO</th>
+                <th class="py-2.5 text-right">DAY TRADE</th>
+                <th class="py-2.5 text-right">DAY TRADE HISSE</th>
+                <th class="py-2.5 text-right">TRADINGVIEW</th>
+                <th class="py-2.5 text-right">SWING</th>
+                <th class="py-2.5 text-right">TREND KOLLARI</th>
+              </tr>
+            </thead>
+            <tbody id="periodicReturnsTableBody" class="divide-y divide-[#23324d] text-slate-300">
+              <!-- JS dolduracak -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ================= 13. RİSK SEKMESİ ================= -->
+      <section id="tab-risk" class="tab-pane hidden space-y-6">
+        
+        <!-- Aynı Varlıkta Yoğunlaşma Tablosu (PDF Sayfa 17) -->
+        <div class="bg-[#151f32] p-4 rounded-lg border border-[#23324d]">
+          <div class="flex items-center justify-between mb-2">
+            <h2 class="text-sm font-bold text-white">Aynı Varlıkta Yoğunlaşma</h2>
+            <span class="text-xs text-amber-400 bg-amber-950/60 px-2 py-0.5 rounded border border-amber-800">2 Kritik Yoğunlaşma</span>
+          </div>
+          <p class="text-xs text-slate-400 mb-3">Tüm hesaplar açık pozisyonları ve bekleyen emirleri varlık bazında toplar. Üç ya da daha fazla hesapta bulunan veya toplam 1.000 $'ı aşan varlıklar işaretlenir.</p>
+          
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs border-collapse">
+              <thead>
+                <tr class="border-b border-[#23324d] text-slate-400 text-[11px]">
+                  <th class="py-2">VARLIK</th>
+                  <th class="py-2 text-center">HESAP SAYISI</th>
+                  <th class="py-2">POZİSYONU OLAN</th>
+                  <th class="py-2">BEKLEYEN EMİR OLAN</th>
+                  <th class="py-2 text-right">TOPLAM TUTAR</th>
+                  <th class="py-2 text-center">DURUM</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-[#23324d] text-slate-300">
+                <tr class="bg-amber-950/20">
+                  <td class="py-2 font-bold text-amber-300">NEAR</td>
+                  <td class="py-2 text-center font-bold">3</td>
+                  <td class="py-2">Algo, Strateji, Swing</td>
+                  <td class="py-2 text-slate-500">-</td>
+                  <td class="py-2 text-right font-bold text-amber-300">1.092 $</td>
+                  <td class="py-2 text-center"><span class="px-2 py-0.5 rounded bg-amber-900/60 text-amber-300 text-[10px] font-semibold">yoğunlaşma</span></td>
+                </tr>
+                <tr class="bg-amber-950/20">
+                  <td class="py-2 font-bold text-amber-300">LTC</td>
+                  <td class="py-2 text-center font-bold">3</td>
+                  <td class="py-2">Algo, Strateji</td>
+                  <td class="py-2 text-blue-400">Swing</td>
+                  <td class="py-2 text-right font-bold text-amber-300">871 $</td>
+                  <td class="py-2 text-center"><span class="px-2 py-0.5 rounded bg-amber-900/60 text-amber-300 text-[10px] font-semibold">yoğunlaşma</span></td>
+                </tr>
+                <tr>
+                  <td class="py-2 font-medium">AAPL</td>
+                  <td class="py-2 text-center">2</td>
+                  <td class="py-2">Swing, Trend kolları</td>
+                  <td class="py-2 text-slate-500">-</td>
+                  <td class="py-2 text-right font-semibold">1.998 $</td>
+                  <td class="py-2 text-center"><span class="px-2 py-0.5 rounded bg-slate-800 text-slate-400 text-[10px]">normal</span></td>
+                </tr>
+                <tr>
+                  <td class="py-2 font-medium">NVDA</td>
+                  <td class="py-2 text-center">2</td>
+                  <td class="py-2">Swing, Trend kolları</td>
+                  <td class="py-2 text-slate-500">-</td>
+                  <td class="py-2 text-right font-semibold">1.993 $</td>
+                  <td class="py-2 text-center"><span class="px-2 py-0.5 rounded bg-slate-800 text-slate-400 text-[10px]">normal</span></td>
+                </tr>
+                <tr>
+                  <td class="py-2 font-medium">BTC</td>
+                  <td class="py-2 text-center">2</td>
+                  <td class="py-2">Swing, Trend kolları</td>
+                  <td class="py-2 text-slate-500">-</td>
+                  <td class="py-2 text-right font-semibold">1.899 $</td>
+                  <td class="py-2 text-center"><span class="px-2 py-0.5 rounded bg-slate-800 text-slate-400 text-[10px]">normal</span></td>
+                </tr>
+                <tr>
+                  <td class="py-2 font-medium">AVAX</td>
+                  <td class="py-2 text-center">2</td>
+                  <td class="py-2">Swing, TradingView</td>
+                  <td class="py-2 text-slate-500">-</td>
+                  <td class="py-2 text-right font-semibold">795 $</td>
+                  <td class="py-2 text-center"><span class="px-2 py-0.5 rounded bg-slate-800 text-slate-400 text-[10px]">normal</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Kaldıraç / Düşüş Olasılığı (Monte Carlo) (PDF Sayfa 17) -->
+        <div class="bg-[#151f32] p-4 rounded-lg border border-[#23324d] overflow-x-auto">
+          <h3 class="text-xs font-semibold text-slate-300 mb-2">Kaldıraça Düşüş Olasılığı</h3>
+          <p class="text-[11px] text-slate-400 mb-3">Backtest simülasyonu Monte Carlo: 50 gün ve 1 yıl içinde hesaba göre zararlar: -%10 / -%20 düşüş görme olasılığı</p>
+          
+          <table class="w-full text-left text-xs border-collapse">
+            <thead>
+              <tr class="border-b border-[#23324d] text-slate-400 text-[11px]">
+                <th class="py-2">HESAP</th>
+                <th class="py-2 text-right">1X - %30 DÜŞÜŞ</th>
+                <th class="py-2 text-right">2X - %30 DÜŞÜŞ</th>
+                <th class="py-2 text-right">3X - %30 DÜŞÜŞ</th>
+                <th class="py-2 text-right">1X - 1 YIL > %20</th>
+                <th class="py-2 text-right">2X - 1 YIL > %20</th>
+                <th class="py-2 text-right">3X - 1 YIL > %20</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-[#23324d] text-slate-300">
+              <tr>
+                <td class="py-2 font-medium">Strateji</td>
+                <td class="py-2 text-right">%3</td>
+                <td class="py-2 text-right">%12</td>
+                <td class="py-2 text-right text-red-400 font-bold">%75</td>
+                <td class="py-2 text-right">%1</td>
+                <td class="py-2 text-right">%36</td>
+                <td class="py-2 text-right text-red-400 font-bold">%81</td>
+              </tr>
+              <tr>
+                <td class="py-2 font-medium">Algo</td>
+                <td class="py-2 text-right">%8</td>
+                <td class="py-2 text-right">%1</td>
+                <td class="py-2 text-right">%5</td>
+                <td class="py-2 text-right">%0</td>
+                <td class="py-2 text-right">%1</td>
+                <td class="py-2 text-right">%12</td>
+              </tr>
+              <tr>
+                <td class="py-2 font-medium">Day trade</td>
+                <td class="py-2 text-right">%0</td>
+                <td class="py-2 text-right">%0</td>
+                <td class="py-2 text-right">%1</td>
+                <td class="py-2 text-right">%0</td>
+                <td class="py-2 text-right">%0</td>
+                <td class="py-2 text-right">%1</td>
+              </tr>
+              <tr>
+                <td class="py-2 font-medium">Swing</td>
+                <td class="py-2 text-right">%2</td>
+                <td class="py-2 text-right">%23</td>
+                <td class="py-2 text-right text-red-400 font-bold">%41</td>
+                <td class="py-2 text-right">%1</td>
+                <td class="py-2 text-right">%27</td>
+                <td class="py-2 text-right text-red-400 font-bold">%61</td>
+              </tr>
+              <tr>
+                <td class="py-2 font-medium">Trend kolları</td>
+                <td class="py-2 text-right">%1</td>
+                <td class="py-2 text-right">%14</td>
+                <td class="py-2 text-right text-amber-400 font-bold">%44</td>
+                <td class="py-2 text-right">%0</td>
+                <td class="py-2 text-right">%12</td>
+                <td class="py-2 text-right text-amber-400 font-bold">%45</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Hesaplar Birlikte mi Hareket Ediyor? (Korelasyon Notu) -->
+        <div class="bg-[#151f32] p-4 rounded-lg border border-[#23324d]">
+          <h3 class="text-xs font-semibold text-slate-300 mb-2">Hesaplar Birlikte mi Hareket Ediyor? (Korelasyon)</h3>
+          <div class="p-3 bg-slate-900/60 rounded border border-slate-800 text-xs text-slate-400">
+            Bu ölçüm için en az 10 günlük ortak veri gerekiyor (şu an 0 gün). Yaklaşık 22 Ekim'den itibaren burada korelasyon matrisi hesaplanacaktır.
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- MODAL: CLAUDE AI ASİSTANI CEVAP MODALI -->
+  <div id="aiModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+    <div class="bg-[#151f32] border border-[#23324d] rounded-xl max-w-lg w-full p-5 shadow-2xl space-y-4">
+      <div class="flex items-center justify-between border-b border-[#23324d] pb-3">
+        <div class="flex items-center gap-2">
+          <div class="w-7 h-7 rounded-full bg-blue-600 flex items-center justify-center text-white">
+            <i data-lucide="bot" class="w-4 h-4"></i>
+          </div>
+          <div>
+            <h3 class="text-sm font-bold text-white">Claude Danışman Analizi</h3>
+            <span class="text-[10px] text-blue-400">Panodaki gerçek verilere dayalı anlık yanıt</span>
+          </div>
+        </div>
+        <button onclick="closeAIModal()" class="text-slate-400 hover:text-white p-1 rounded">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+      <div class="text-xs font-semibold text-slate-300 bg-[#1e293b] p-2.5 rounded border border-slate-700" id="aiModalQuestion">
+        Soru yükleniyor...
+      </div>
+
+      <div class="text-xs text-slate-300 leading-relaxed max-h-72 overflow-y-auto space-y-2 pr-1" id="aiModalAnswer">
+        Analiz hazırlanıyor...
+      </div>
+
+      <div class="flex justify-end pt-2 border-t border-[#23324d]">
+        <button onclick="closeAIModal()" class="px-4 py-1.5 bg-blue-600 hover:bg-blue-500 text-white rounded text-xs font-medium">
+          Anladım
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: YENİ İŞLEM / STRATEJİ EKLE -->
+  <div id="addTradeModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+    <div class="bg-[#151f32] border border-[#23324d] rounded-xl max-w-md w-full p-5 shadow-2xl space-y-4">
+      <div class="flex items-center justify-between border-b border-[#23324d] pb-2">
+        <h3 class="text-sm font-bold text-white">Yeni Paper Trade / Pozisyon Ekle</h3>
+        <button onclick="closeAddTradeModal()" class="text-slate-400 hover:text-white p-1">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+      <form id="newTradeForm" onsubmit="handleNewTrade(event)" class="space-y-3 text-xs">
+        <div>
+          <label class="block text-slate-400 mb-1">Hesap</label>
+          <select id="mTradeAccount" class="w-full bg-[#1e293b] border border-[#23324d] rounded p-2 text-slate-100">
+            <option value="Strateji">Strateji</option>
+            <option value="Algo">Algo</option>
+            <option value="Day trade">Day trade</option>
+            <option value="Swing">Swing</option>
+            <option value="TradingView">TradingView</option>
+            <option value="Trend kolları">Trend kolları</option>
+          </select>
+        </div>
+
+        <div class="grid grid-cols-2 gap-2">
+          <div>
+            <label class="block text-slate-400 mb-1">Varlık (Sembol)</label>
+            <input type="text" id="mTradeAsset" placeholder="Örn: SOL, ETH, BTC" required class="w-full bg-[#1e293b] border border-[#23324d] rounded p-2 text-slate-100 uppercase">
+          </div>
+          <div>
+            <label class="block text-slate-400 mb-1">Yön</label>
+            <select id="mTradeType" class="w-full bg-[#1e293b] border border-[#23324d] rounded p-2 text-slate-100">
+              <option value="Alış">Alış (Long)</option>
+              <option value="Satış">Satış (Short)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-2">
+          <div>
+            <label class="block text-slate-400 mb-1">Giriş Fiyatı ($)</label>
+            <input type="number" step="any" id="mTradePrice" placeholder="0.00" required class="w-full bg-[#1e293b] border border-[#23324d] rounded p-2 text-slate-100">
+          </div>
+          <div>
+            <label class="block text-slate-400 mb-1">Pozisyon Tutarı ($)</label>
+            <input type="number" step="any" id="mTradeSize" placeholder="1000" required class="w-full bg-[#1e293b] border border-[#23324d] rounded p-2 text-slate-100">
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-slate-400 mb-1">Strateji İsmi</label>
+          <input type="text" id="mTradeStrategy" placeholder="Örn: RSI Momentum, Breakout" required class="w-full bg-[#1e293b] border border-[#23324d] rounded p-2 text-slate-100">
+        </div>
+
+        <div class="flex justify-end gap-2 pt-2 border-t border-[#23324d]">
+          <button type="button" onclick="closeAddTradeModal()" class="px-3 py-1.5 rounded bg-slate-800 text-slate-300">İptal</button>
+          <button type="submit" class="px-4 py-1.5 rounded bg-blue-600 hover:bg-blue-500 text-white font-medium">Pozisyonu Aç</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: SENKRONİZASYON VE JSON İÇE/DIŞA AKTARMA -->
+  <div id="syncModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+    <div class="bg-[#151f32] border border-[#23324d] rounded-xl max-w-lg w-full p-5 shadow-2xl space-y-4">
+      <div class="flex items-center justify-between border-b border-[#23324d] pb-2">
+        <h3 class="text-sm font-bold text-white">PC & Mobil Senkronizasyonu & Veri Yönetimi</h3>
+        <button onclick="closeSyncModal()" class="text-slate-400 hover:text-white p-1">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+      <div class="space-y-3 text-xs text-slate-300 leading-relaxed">
+        <p>
+          Bu panoyu hem PC hem mobilde tamamen ücretsiz senkron tutmak için durum JSON formatında saklanır. Verilerinizi dışa aktarabilir veya başka cihazdan aldığınız JSON dosyasını buraya yapıştırabilirsiniz.
+        </p>
+
+        <div class="grid grid-cols-2 gap-2 pt-1">
+          <button onclick="exportJSON()" class="p-2.5 bg-blue-900/40 hover:bg-blue-800/40 border border-blue-700 text-blue-200 rounded text-center font-medium">
+            <i data-lucide="download" class="w-4 h-4 mx-auto mb-1"></i>
+            JSON Dosyasını İndir
+          </button>
+          <button onclick="copyJSONToClipboard()" class="p-2.5 bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-200 rounded text-center font-medium">
+            <i data-lucide="copy" class="w-4 h-4 mx-auto mb-1"></i>
+            JSON'u Panoya Kopyala
+          </button>
+        </div>
+
+        <div class="pt-2">
+          <label class="block text-slate-400 mb-1">JSON İçe Aktar (Yapıştır ve Yükle):</label>
+          <textarea id="importJsonTextarea" rows="4" placeholder='{"meta": {...}, "kpis": {...}}' 
+                    class="w-full bg-[#10172a] border border-[#23324d] rounded p-2 text-slate-200 font-mono text-[11px]"></textarea>
+          <button onclick="importJSONFromTextarea()" class="mt-2 w-full py-2 bg-emerald-600 hover:bg-emerald-500 text-white rounded font-medium text-xs">
+            Veriyi Yükle ve Panoyu Güncelle
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST BİLDİRİM -->
+  <div id="toast" class="fixed bottom-4 right-4 bg-slate-900 text-white px-4 py-2.5 rounded-lg border border-slate-700 shadow-xl text-xs z-50 transform translate-y-20 opacity-0 transition-all duration-300 flex items-center gap-2">
+    <i data-lucide="info" class="w-4 h-4 text-blue-400"></i>
+    <span id="toastMsg">İşlem başarılı</span>
+  </div>
+
+  <!-- CORE JAVASCRIPT & DATA STORAGE -->
+  <script>
+    // Embedded initial dataset from reference PDF
+    let PANO_DATA = {
+  "meta": {
+    "title": "Kağıt Hesaplar",
+    "subtitle": "6 hesap - her biri 10.000 $ sanal - gerçek para yok",
+    "last_update": "15/10 03:07",
+    "test_period": "gün 8 / 62 - 9 Ekim - 10 Aralık",
+    "exchange_rate": 49.26,
+    "currency": "USD",
+    "fiat_currency": "TRY",
+    "footer_note": "Kağıt üzerinde al-sat: botlar canlı piyasa verisiyle çalışır, gerçek emir gönderilmez. Saatler İstanbul saatidir. Panel her saat başı (yaklaşık :11) botların kendi kayıtlarından güncellenir; swing ve trend kolları günde bir, diğerleri saatlik çalışır. Günler İstanbul gününe göre. İşlem listesi her hesap için son 1000 işlemi tutar; kart özetleri tüm işlemlerden hesaplanır."
+  },
+  "kpis": {
+    "total_value": 69366.0,
+    "total_return_pct": -0.91,
+    "last_day_pct": -0.24,
+    "open_positions_count": 31,
+    "closed_trades_count": 24,
+    "win_rate_pct": 21,
+    "total_try": 3416983.0,
+    "initial_total_capital": 70000.0,
+    "net_pnl": -328.0
+  },
+  "alerts": [
+    {
+      "id": "a1",
+      "type": "warning",
+      "title": "Dikkat: Panel verisi 42 saattir güncellenmedi; saatlik aktarım çalışmıyor olabilir. Rakamlar 15/10 03:07 itibarıyla."
+    },
+    {
+      "id": "a2",
+      "type": "danger",
+      "title": "Alarm: Algo beklenen aralığın altına indi: getiri %-2.9, maks. düşüş %-3.1."
+    },
+    {
+      "id": "a3",
+      "type": "danger",
+      "title": "Alarm: Swing beklenen aralığın altına indi: getiri %-2.5, maks. düşüş %-3.8."
+    },
+    {
+      "id": "a4",
+      "type": "warning",
+      "title": "Dikkat: NEAR: 3 hesapta pozisyon veya emir var, toplam 1.092 $."
+    },
+    {
+      "id": "a5",
+      "type": "warning",
+      "title": "Dikkat: LTC: 3 hesapta pozisyon veya emir var, toplam 871 $."
+    }
+  ],
+  "last_24h": {
+    "summary": "Son 24 saatte 2 pozisyon açıldı, 3 işlem kapandı (toplam -43 $). En iyisi Algo XLM (+6 $). En kötüsü Algo DOGE (-25 $).",
+    "chips": [
+      {
+        "label": "LTC açılış satış",
+        "type": "open",
+        "action": "satış",
+        "asset": "LTC"
+      },
+      {
+        "label": "NEAR açılış satış",
+        "type": "open",
+        "action": "satış",
+        "asset": "NEAR"
+      },
+      {
+        "label": "OP kapandı -24 $",
+        "type": "closed",
+        "pnl": -24,
+        "asset": "OP"
+      },
+      {
+        "label": "XLM kapandı +6 $",
+        "type": "closed",
+        "pnl": 6,
+        "asset": "XLM"
+      },
+      {
+        "label": "DOGE kapandı -25 $",
+        "type": "closed",
+        "pnl": -25,
+        "asset": "DOGE"
+      }
+    ]
+  },
+  "accounts": [
+    {
+      "id": "strateji",
+      "name": "Strateji",
+      "strategies_label": "Seviye Kırılımı + Güçlü-Zayıf Sepeti",
+      "status": "çalışıyor",
+      "current_value": 9984.77,
+      "total_return_pct": -0.15,
+      "last_day_pct": 0.08,
+      "max_drawdown_pct": -1.63,
+      "win_rate_pct": 45,
+      "profit_factor": 0.13,
+      "closed_trades": 11,
+      "open_trades": 10,
+      "avg_holding_time": "4 gün (sürüyor)",
+      "luck_prob": "veri az (7/10 gün)",
+      "last_run": "42 sa önce",
+      "sparkline": [
+        10000,
+        10020,
+        9990,
+        9970,
+        9965,
+        9975,
+        9984.77
+      ],
+      "expectation_desc": "Beklenti %25-75 diliminde; bugün için normal aralık: -%2,4 .. +%2,3",
+      "expectation_60d": "Beklenti 60 günde: %82-4; düşüş %15-25",
+      "score": 42
+    },
+    {
+      "id": "algo",
+      "name": "Algo",
+      "strategies_label": "Trend Avcısı + Panik Dönüşü",
+      "status": "çalışıyor",
+      "current_value": 9710.63,
+      "total_return_pct": -2.89,
+      "last_day_pct": -0.02,
+      "max_drawdown_pct": -3.14,
+      "win_rate_pct": 0,
+      "profit_factor": 0.0,
+      "closed_trades": 13,
+      "open_trades": 1,
+      "avg_holding_time": "4 gün (sürüyor)",
+      "luck_prob": "veri az (4/10 gün)",
+      "last_run": "42 sa önce",
+      "sparkline": [
+        10000,
+        9950,
+        9900,
+        9820,
+        9780,
+        9730,
+        9710.63
+      ],
+      "expectation_desc": "Beklenti %5 alt diliminde (ALARM: bugün için normal aralık: -%2,4 .. +%2,3)",
+      "expectation_60d": "Beklenti 60 günde: %82-4; düşüş %15-25",
+      "score": 28
+    },
+    {
+      "id": "daytrade",
+      "name": "Day trade",
+      "strategies_label": "Akşam Momentumu + Tuzak Kırılımı + Trend Günü",
+      "status": "çalışıyor",
+      "current_value": 10000.0,
+      "total_return_pct": 0.0,
+      "last_day_pct": 0.0,
+      "max_drawdown_pct": 0.0,
+      "win_rate_pct": 0,
+      "profit_factor": 0.0,
+      "closed_trades": 0,
+      "open_trades": 0,
+      "avg_holding_time": "0 gün",
+      "luck_prob": "veri az (5/10 gün)",
+      "last_run": "42 sa önce",
+      "sparkline": [
+        10000,
+        10000,
+        10000,
+        10000,
+        10000,
+        10000,
+        10000
+      ],
+      "expectation_desc": "Beklenti %25-75 diliminde; bugün için normal aralık: -%2,4 .. +%2,3",
+      "expectation_60d": "Beklenti 60 günde: %82-4; düşüş %15-25",
+      "score": 52
+    },
+    {
+      "id": "daytrade_assets",
+      "name": "Day trade hisse/emtia",
+      "strategies_label": "Aynı 3 strateji + MAG7 + altın/petrol (günübirlik DENEY)",
+      "status": "çalışıyor",
+      "current_value": 10000.0,
+      "total_return_pct": 0.0,
+      "last_day_pct": 0.0,
+      "max_drawdown_pct": 0.0,
+      "win_rate_pct": 0,
+      "profit_factor": 0.0,
+      "closed_trades": 0,
+      "open_trades": 0,
+      "avg_holding_time": "0 gün",
+      "luck_prob": "veri az (2/10 gün)",
+      "last_run": "Son çalışma yok",
+      "sparkline": [
+        10000,
+        10000,
+        10000,
+        10000,
+        10000,
+        10000,
+        10000
+      ],
+      "expectation_desc": "Beklenen: günlük test henüz açılmamış deney, 13 Ekim haftası",
+      "expectation_60d": "MAG7 + Altın, Petrol; günlük volatilite",
+      "score": 51
+    },
+    {
+      "id": "tradingview",
+      "name": "TradingView",
+      "strategies_label": "Gösterge Kümesi + Sıkışma Patlaması + MACD Yeniden",
+      "status": "çalışıyor",
+      "current_value": 10001.71,
+      "total_return_pct": 0.02,
+      "last_day_pct": 0.05,
+      "max_drawdown_pct": 0.0,
+      "win_rate_pct": 0,
+      "profit_factor": 0.0,
+      "closed_trades": 0,
+      "open_trades": 1,
+      "avg_holding_time": "1 gün",
+      "luck_prob": "veri az (2/10 gün)",
+      "last_run": "Son çalışma yok",
+      "sparkline": [
+        10000,
+        10000,
+        10000,
+        10000,
+        10001,
+        10001.71
+      ],
+      "expectation_desc": "Beklenti %25-75 diliminde; bugün için normal aralık: -%2,4 .. +%2,3",
+      "expectation_60d": "12-15 % getiri, Mag7+TABX: BIST100 etkileşiminden koruma gücü",
+      "score": 51
+    },
+    {
+      "id": "swing",
+      "name": "Swing",
+      "strategies_label": "Trend Molası + Sıkışma Patlaması + Dipten Sekme",
+      "status": "çalışıyor",
+      "current_value": 9748.51,
+      "total_return_pct": -2.51,
+      "last_day_pct": -0.16,
+      "max_drawdown_pct": -3.76,
+      "win_rate_pct": 0,
+      "profit_factor": 0.0,
+      "closed_trades": 0,
+      "open_trades": 11,
+      "avg_holding_time": "3 gün (sürüyor)",
+      "luck_prob": "veri az (4/10 gün)",
+      "last_run": "42 sa önce",
+      "sparkline": [
+        10000,
+        9980,
+        9920,
+        9850,
+        9790,
+        9760,
+        9748.51
+      ],
+      "expectation_desc": "Beklenti %5 alt diliminde (ALARM: bugün için normal aralık: -%2,4 .. +%2,3)",
+      "expectation_60d": "Beklenti 60 günde: %50-4; düşüş %22",
+      "score": 30
+    },
+    {
+      "id": "trend_kollari",
+      "name": "Trend kolları",
+      "strategies_label": "BTC Potaları + ABD Güçlüler Sepeti + Sakin Emtialar",
+      "status": "çalışıyor",
+      "current_value": 9920.67,
+      "total_return_pct": -0.79,
+      "last_day_pct": -0.56,
+      "max_drawdown_pct": -0.79,
+      "win_rate_pct": 0,
+      "profit_factor": 0.0,
+      "closed_trades": 0,
+      "open_trades": 8,
+      "avg_holding_time": "4 gün (sürüyor)",
+      "luck_prob": "veri az (4/10 gün)",
+      "last_run": "42 sa önce",
+      "sparkline": [
+        10000,
+        10000,
+        9980,
+        9960,
+        9940,
+        9920.67
+      ],
+      "expectation_desc": "Beklenti %5-25 diliminde; bugün için normal aralık: -%1,5 .. +%1,9",
+      "expectation_60d": "BTC 82.000 konumu: 12 ay geniş bant; 15 hisse portföyü için 22 gün; 18 emtia ETF'lerinin en sakini sepeti.",
+      "score": 40
+    }
+  ],
+  "closed_trades_list": [
+    {
+      "id": 1,
+      "account": "Algo",
+      "strategy": "Trend Avcısı (4 saatlik)",
+      "asset": "OP",
+      "type": "Alış",
+      "entry_date": "13/10 23:00",
+      "exit_date": "14/10 17:00",
+      "entry_price": 0.153,
+      "exit_price": 0.148509,
+      "r": -1.02,
+      "pnl": -24.27,
+      "reason": "stop"
+    },
+    {
+      "id": 2,
+      "account": "Algo",
+      "strategy": "Trend Avcısı (4 saatlik)",
+      "asset": "XLM",
+      "type": "Satış",
+      "entry_date": "13/10 03:00",
+      "exit_date": "14/10 17:00",
+      "entry_price": 0.1905,
+      "exit_price": 0.183226,
+      "r": 0.25,
+      "pnl": 6.05,
+      "reason": "partial"
+    },
+    {
+      "id": 3,
+      "account": "Algo",
+      "strategy": "Trend Avcısı (4 saatlik)",
+      "asset": "DOGE",
+      "type": "Satış",
+      "entry_date": "13/10 03:00",
+      "exit_date": "14/10 11:00",
+      "entry_price": 0.08223,
+      "exit_price": 0.0852773,
+      "r": -1.03,
+      "pnl": -24.99,
+      "reason": "stop"
+    },
+    {
+      "id": 4,
+      "account": "Algo",
+      "strategy": "Trend Avcısı (4 saatlik)",
+      "asset": "BCH",
+      "type": "Satış",
+      "entry_date": "13/10 03:00",
+      "exit_date": "14/10 03:00",
+      "entry_price": 265.6,
+      "exit_price": 276.628,
+      "r": -1.03,
+      "pnl": -24.94,
+      "reason": "stop"
+    },
+    {
+      "id": 5,
+      "account": "Algo",
+      "strategy": "Trend Avcısı (4 saatlik)",
+      "asset": "BNB",
+      "type": "Satış",
+      "entry_date": "13/10 03:00",
+      "exit_date": "13/10 08:00",
+      "entry_price": 732.91,
+      "exit_price": 747.049,
+      "r": -1.07,
+      "pnl": -25.68,
+      "reason": "stop"
+    },
+    {
+      "id": 6,
+      "account": "Algo",
+      "strategy": "Trend Avcısı (4 saatlik)",
+      "asset": "LINK",
+      "type": "Satış",
+      "entry_date": "13/10 03:00",
+      "exit_date": "13/10 08:00",
+      "entry_price": 12.625,
+      "exit_price": 13.1377,
+      "r": -1.04,
+      "pnl": -25.18,
+      "reason": "stop"
+    },
+    {
+      "id": 7,
+      "account": "Algo",
+      "strategy": "Trend Avcısı (4 saatlik)",
+      "asset": "ETH",
+      "type": "Satış",
+      "entry_date": "13/10 03:00",
+      "exit_date": "13/10 06:00",
+      "entry_price": 2447.16,
+      "exit_price": 2508.46,
+      "r": -1.04,
+      "pnl": -25.56,
+      "reason": "stop"
+    },
+    {
+      "id": 8,
+      "account": "Algo",
+      "strategy": "Trend Avcısı (4 saatlik)",
+      "asset": "DOT",
+      "type": "Satış",
+      "entry_date": "10/10 07:00",
+      "exit_date": "13/10 02:00",
+      "entry_price": 1.265,
+      "exit_price": 1.18314,
+      "r": -1.03,
+      "pnl": -25.28,
+      "reason": "stop"
+    },
+    {
+      "id": 9,
+      "account": "Algo",
+      "strategy": "Trend Avcısı (4 saatlik)",
+      "asset": "OP",
+      "type": "Satış",
+      "entry_date": "10/10 07:00",
+      "exit_date": "13/10 02:00",
+      "entry_price": 0.1411,
+      "exit_price": 0.136427,
+      "r": -1.02,
+      "pnl": -25.64,
+      "reason": "stop"
+    },
+    {
+      "id": 10,
+      "account": "Strateji",
+      "strategy": "Seviye Kırılımı",
+      "asset": "NEAR",
+      "type": "Satış",
+      "entry_date": "10/10 08:00",
+      "exit_date": "13/10 00:00",
+      "entry_price": 5.133,
+      "exit_price": 5.133,
+      "r": 0.12,
+      "pnl": 0.0,
+      "reason": "tp"
+    },
+    {
+      "id": 11,
+      "account": "Strateji",
+      "strategy": "Seviye Kırılımı",
+      "asset": "NEAR",
+      "type": "Satış",
+      "entry_date": "10/10 08:00",
+      "exit_date": "13/10 00:00",
+      "entry_price": 5.133,
+      "exit_price": 5.133,
+      "r": 0.12,
+      "pnl": 0.0,
+      "reason": "tp"
+    },
+    {
+      "id": 12,
+      "account": "Strateji",
+      "strategy": "Seviye Kırılımı",
+      "asset": "NEAR",
+      "type": "Satış",
+      "entry_date": "10/10 11:00",
+      "exit_date": "13/10 00:00",
+      "entry_price": 5.23,
+      "exit_price": 5.23,
+      "r": 0.12,
+      "pnl": 0.0,
+      "reason": "tp"
+    },
+    {
+      "id": 13,
+      "account": "Strateji",
+      "strategy": "Trend Molası (4 saatlik)",
+      "asset": "NEAR",
+      "type": "Satış",
+      "entry_date": "11/10 19:00",
+      "exit_date": "12/10 00:00",
+      "entry_price": 5.791,
+      "exit_price": 5.32641,
+      "r": -1.02,
+      "pnl": -25.42,
+      "reason": "stop"
+    },
+    {
+      "id": 14,
+      "account": "Algo",
+      "strategy": "Trend Avcısı (4 saatlik)",
+      "asset": "FIL",
+      "type": "Satış",
+      "entry_date": "12/10 03:00",
+      "exit_date": "12/10 22:00",
+      "entry_price": 1.2288,
+      "exit_price": 1.13669,
+      "r": -1.02,
+      "pnl": -25.41,
+      "reason": "stop"
+    },
+    {
+      "id": 15,
+      "account": "Strateji",
+      "strategy": "Seviye Kırılımı",
+      "asset": "NEAR",
+      "type": "Satış",
+      "entry_date": "11/10 16:00",
+      "exit_date": "12/10 19:00",
+      "entry_price": 5.38,
+      "exit_price": 5.38,
+      "r": 0.11,
+      "pnl": 0.0,
+      "reason": "tp"
+    },
+    {
+      "id": 16,
+      "account": "Strateji",
+      "strategy": "Seviye Kırılımı",
+      "asset": "1000PEPE",
+      "type": "Alış",
+      "entry_date": "12/10 04:00",
+      "exit_date": "12/10 17:00",
+      "entry_price": 4.23e-06,
+      "entry_price_fmt": "0,00000423",
+      "exit_price": 4.08271e-06,
+      "r": -1.04,
+      "pnl": -3.47,
+      "reason": "stop"
+    },
+    {
+      "id": 17,
+      "account": "Strateji",
+      "strategy": "Seviye Kırılımı",
+      "asset": "1000PEPE",
+      "type": "Alış",
+      "entry_date": "12/10 08:00",
+      "exit_date": "12/10 15:00",
+      "entry_price": 4.32e-06,
+      "entry_price_fmt": "0,00000432",
+      "exit_price": 4.15172e-06,
+      "r": -1.04,
+      "pnl": -3.48,
+      "reason": "stop"
+    },
+    {
+      "id": 18,
+      "account": "Algo",
+      "strategy": "Trend Avcısı (4 saatlik)",
+      "asset": "ARB",
+      "type": "Satış",
+      "entry_date": "11/10 15:00",
+      "exit_date": "12/10 15:00",
+      "entry_price": 0.201,
+      "exit_price": 0.1935,
+      "r": -0.65,
+      "pnl": -15.58,
+      "reason": "süre_sonu"
+    },
+    {
+      "id": 19,
+      "account": "Algo",
+      "strategy": "Trend Avcısı (4 saatlik)",
+      "asset": "LTC",
+      "type": "Satış",
+      "entry_date": "12/10 11:00",
+      "exit_date": "12/10 15:00",
+      "entry_price": 65.82,
+      "exit_price": 64.41,
+      "r": -0.74,
+      "pnl": -19.54,
+      "reason": "süre_sonu"
+    },
+    {
+      "id": 20,
+      "account": "Strateji",
+      "strategy": "Seviye Kırılımı",
+      "asset": "SUI",
+      "type": "Alış",
+      "entry_date": "11/10 19:00",
+      "exit_date": "12/10 14:00",
+      "entry_price": 1.1339,
+      "exit_price": 1.09658,
+      "r": -1.05,
+      "pnl": -3.48,
+      "reason": "stop"
+    },
+    {
+      "id": 21,
+      "account": "Strateji",
+      "strategy": "Seviye Kırılımı",
+      "asset": "SUI",
+      "type": "Alış",
+      "entry_date": "11/10 19:00",
+      "exit_date": "12/10 14:00",
+      "entry_price": 1.1339,
+      "exit_price": 1.09658,
+      "r": -1.05,
+      "pnl": -3.49,
+      "reason": "stop"
+    },
+    {
+      "id": 22,
+      "account": "Strateji",
+      "strategy": "Seviye Kırılımı",
+      "asset": "SUI",
+      "type": "Alış",
+      "entry_date": "11/10 19:00",
+      "exit_date": "12/10 14:00",
+      "entry_price": 1.1339,
+      "exit_price": 1.09658,
+      "r": -1.05,
+      "pnl": -3.49,
+      "reason": "stop"
+    },
+    {
+      "id": 23,
+      "account": "Algo",
+      "strategy": "Trend Avcısı (4 saatlik)",
+      "asset": "FIL",
+      "type": "Satış",
+      "entry_date": "10/10 07:00",
+      "exit_date": "10/10 20:00",
+      "entry_price": 1.199,
+      "exit_price": 1.11064,
+      "r": -1.02,
+      "pnl": -25.48,
+      "reason": "stop"
+    },
+    {
+      "id": 24,
+      "account": "Strateji",
+      "strategy": "Seviye Kırılımı",
+      "asset": "NEAR",
+      "type": "Alış",
+      "entry_date": "10/10 05:00",
+      "exit_date": "10/10 06:00",
+      "entry_price": 5.022,
+      "exit_price": 4.993,
+      "r": -0.11,
+      "pnl": -4.0,
+      "reason": "stop"
+    }
+  ],
+  "open_positions": [
+    {
+      "account": "Swing",
+      "strategy": "Trend Molası",
+      "asset": "META",
+      "type": "Alış",
+      "entry_date": "13.10.2026",
+      "duration": "4 gün",
+      "entry_price": 725.99,
+      "stop_price": 700.221,
+      "size_usd": 2003,
+      "unrealized_pnl": 70.54,
+      "r": 0.72
+    },
+    {
+      "account": "Algo",
+      "strategy": "Trend Avcısı (4 saatlik)",
+      "asset": "XLM",
+      "type": "Satış",
+      "entry_date": "13/10 03:00",
+      "duration": "4 gün",
+      "entry_price": 0.1905,
+      "stop_price": 0.190233,
+      "size_usd": 625,
+      "unrealized_pnl": 26.61,
+      "r": 1.04
+    },
+    {
+      "account": "Swing",
+      "strategy": "Trend Molası",
+      "asset": "MSFT",
+      "type": "Alış",
+      "entry_date": "12.10.2026",
+      "duration": "5 gün",
+      "entry_price": 527.53,
+      "stop_price": 512.071,
+      "size_usd": 2000,
+      "unrealized_pnl": 20.08,
+      "r": 0.23
+    },
+    {
+      "account": "Swing",
+      "strategy": "Dipten Sekme",
+      "asset": "NVDA",
+      "type": "Alış",
+      "entry_date": "12.10.2026",
+      "duration": "5 gün",
+      "entry_price": 226.439,
+      "stop_price": 215.075,
+      "size_usd": 1993,
+      "unrealized_pnl": 15.32,
+      "r": 0.16
+    },
+    {
+      "account": "TradingView",
+      "strategy": "MACD Yeniden",
+      "asset": "AVAX",
+      "type": "Alış",
+      "entry_date": "14/10 03:00",
+      "duration": "3 gün",
+      "entry_price": 10.229,
+      "stop_price": "N/A",
+      "size_usd": 99,
+      "unrealized_pnl": 1.71,
+      "r": "N/A"
+    },
+    {
+      "account": "Strateji",
+      "strategy": "Güçlü-Zayıf Sepeti",
+      "asset": "WLD",
+      "type": "Alış",
+      "entry_date": "14.10.2026",
+      "duration": "2 gün",
+      "entry_price": 1.84,
+      "stop_price": "N/A",
+      "size_usd": 352,
+      "unrealized_pnl": 0.0,
+      "r": "N/A"
+    },
+    {
+      "account": "Strateji",
+      "strategy": "Güçlü-Zayıf Sepeti",
+      "asset": "QNT",
+      "type": "Alış",
+      "entry_date": "14.10.2026",
+      "duration": "2 gün",
+      "entry_price": 86.5,
+      "stop_price": "N/A",
+      "size_usd": 86,
+      "unrealized_pnl": 0.0,
+      "r": "N/A"
+    },
+    {
+      "account": "Strateji",
+      "strategy": "Güçlü-Zayıf Sepeti",
+      "asset": "LSK",
+      "type": "Alış",
+      "entry_date": "14.10.2026",
+      "duration": "2 gün",
+      "entry_price": 1.12,
+      "stop_price": "N/A",
+      "size_usd": 53,
+      "unrealized_pnl": 0.0,
+      "r": "N/A"
+    },
+    {
+      "account": "Strateji",
+      "strategy": "Güçlü-Zayıf Sepeti",
+      "asset": "BCH",
+      "type": "Satış",
+      "entry_date": "14.10.2026",
+      "duration": "2 gün",
+      "entry_price": 268.0,
+      "stop_price": "N/A",
+      "size_usd": 211,
+      "unrealized_pnl": 0.0,
+      "r": "N/A"
+    },
+    {
+      "account": "Strateji",
+      "strategy": "Güçlü-Zayıf Sepeti",
+      "asset": "UNI",
+      "type": "Satış",
+      "entry_date": "14.10.2026",
+      "duration": "2 gün",
+      "entry_price": 7.4,
+      "stop_price": "N/A",
+      "size_usd": 226,
+      "unrealized_pnl": 0.0,
+      "r": "N/A"
+    },
+    {
+      "account": "Strateji",
+      "strategy": "Güçlü-Zayıf Sepeti",
+      "asset": "LTC",
+      "type": "Satış",
+      "entry_date": "14.10.2026",
+      "duration": "2 gün",
+      "entry_price": 65.1,
+      "stop_price": "N/A",
+      "size_usd": 340,
+      "unrealized_pnl": 0.0,
+      "r": "N/A"
+    },
+    {
+      "account": "Strateji",
+      "strategy": "Güçlü-Zayıf Sepeti",
+      "asset": "XRP",
+      "type": "Satış",
+      "entry_date": "14.10.2026",
+      "duration": "2 gün",
+      "entry_price": 0.54,
+      "stop_price": "N/A",
+      "size_usd": 382,
+      "unrealized_pnl": 0.0,
+      "r": "N/A"
+    },
+    {
+      "account": "Trend kolları",
+      "strategy": "BTC Potaları",
+      "asset": "BTC",
+      "type": "Alış",
+      "entry_date": "11.10.2026",
+      "duration": "4 gün",
+      "entry_price": 63200,
+      "stop_price": "N/A",
+      "size_usd": 1899,
+      "unrealized_pnl": 0.0,
+      "r": "N/A"
+    },
+    {
+      "account": "Trend kolları",
+      "strategy": "ABD Güçlüler Sepeti",
+      "asset": "AAPL, NVDA, AMZN +29",
+      "type": "Alış",
+      "entry_date": "11.10.2026",
+      "duration": "4 gün",
+      "entry_price": "Sepet",
+      "stop_price": "N/A",
+      "size_usd": 1990,
+      "unrealized_pnl": 0.0,
+      "r": "N/A"
+    },
+    {
+      "account": "Trend kolları",
+      "strategy": "Sakin Emtialar",
+      "asset": "DBA, CORN, SOYB +1",
+      "type": "Alış",
+      "entry_date": "11.10.2026",
+      "duration": "4 gün",
+      "entry_price": "Sepet",
+      "stop_price": "N/A",
+      "size_usd": 1980,
+      "unrealized_pnl": 0.0,
+      "r": "N/A"
+    },
+    {
+      "account": "Algo",
+      "strategy": "Trend Avcısı (4 saatlik)",
+      "asset": "NEAR",
+      "type": "Satış",
+      "entry_date": "14/10 19:00",
+      "duration": "2 gün",
+      "entry_price": 4.844,
+      "stop_price": 5.31223,
+      "size_usd": 244,
+      "unrealized_pnl": -2.33,
+      "r": -0.1
+    },
+    {
+      "account": "Algo",
+      "strategy": "Trend Avcısı (4 saatlik)",
+      "asset": "LTC",
+      "type": "Satış",
+      "entry_date": "14/10 19:00",
+      "duration": "2 gün",
+      "entry_price": 59.02,
+      "stop_price": 61.6372,
+      "size_usd": 531,
+      "unrealized_pnl": -3.08,
+      "r": -0.13
+    },
+    {
+      "account": "Algo",
+      "strategy": "Panik Dönüşü",
+      "asset": "NEAR",
+      "type": "Satış",
+      "entry_date": "13/10 04:00",
+      "duration": "4 gün",
+      "entry_price": 4.969,
+      "stop_price": 5.74869,
+      "size_usd": 181,
+      "unrealized_pnl": -3.48,
+      "r": -0.09
+    },
+    {
+      "account": "Algo",
+      "strategy": "Trend Avcısı (günlük)",
+      "asset": "TRX",
+      "type": "Satış",
+      "entry_date": "11/10 03:00",
+      "duration": "6 gün",
+      "entry_price": 0.1608,
+      "stop_price": 0.165141,
+      "size_usd": 1090,
+      "unrealized_pnl": -16.41,
+      "r": -0.67
+    },
+    {
+      "account": "Swing",
+      "strategy": "Trend Molası",
+      "asset": "PEPE",
+      "type": "Alış",
+      "entry_date": "12.10.2026",
+      "duration": "5 gün",
+      "entry_price": 1.0412e-05,
+      "stop_price": 8.344601e-06,
+      "size_usd": 578,
+      "unrealized_pnl": -20.34,
+      "r": -0.3
+    },
+    {
+      "account": "Swing",
+      "strategy": "Trend Molası",
+      "asset": "AAPL",
+      "type": "Alış",
+      "entry_date": "13.10.2026",
+      "duration": "4 gün",
+      "entry_price": 344.67,
+      "stop_price": 327.354,
+      "size_usd": 1998,
+      "unrealized_pnl": -21.79,
+      "r": -0.22
+    },
+    {
+      "account": "Swing",
+      "strategy": "Trend Molası",
+      "asset": "APT",
+      "type": "Alış",
+      "entry_date": "11.10.2026",
+      "duration": "6 gün",
+      "entry_price": 8.8688,
+      "stop_price": 8.065553,
+      "size_usd": 487,
+      "unrealized_pnl": -25.25,
+      "r": -0.25
+    },
+    {
+      "account": "Swing",
+      "strategy": "Trend Molası",
+      "asset": "NEAR",
+      "type": "Alış",
+      "entry_date": "11.10.2026",
+      "duration": "6 gün",
+      "entry_price": 5.296,
+      "stop_price": 4.83212,
+      "size_usd": 419,
+      "unrealized_pnl": -33.44,
+      "r": -0.33
+    },
+    {
+      "account": "Swing",
+      "strategy": "Trend Molası",
+      "asset": "DOT",
+      "type": "Alış",
+      "entry_date": "11.10.2026",
+      "duration": "6 gün",
+      "entry_price": 1.259,
+      "stop_price": 0.963427,
+      "size_usd": 426,
+      "unrealized_pnl": -38.74,
+      "r": -0.39
+    },
+    {
+      "account": "Swing",
+      "strategy": "Trend Molası",
+      "asset": "BTC",
+      "type": "Alış",
+      "entry_date": "12.10.2026",
+      "duration": "5 gün",
+      "entry_price": 81.773,
+      "stop_price": 79.365,
+      "size_usd": 1899,
+      "unrealized_pnl": -51.19,
+      "r": -0.51
+    },
+    {
+      "account": "Swing",
+      "strategy": "Trend Molası",
+      "asset": "ICP",
+      "type": "Alış",
+      "entry_date": "12.10.2026",
+      "duration": "5 gün",
+      "entry_price": 3.475,
+      "stop_price": 2.73318,
+      "size_usd": 470,
+      "unrealized_pnl": -58.68,
+      "r": -0.57
+    },
+    {
+      "account": "Swing",
+      "strategy": "Trend Molası",
+      "asset": "ADA",
+      "type": "Alış",
+      "entry_date": "11.10.2026",
+      "duration": "6 gün",
+      "entry_price": 0.2492,
+      "stop_price": 0.215195,
+      "size_usd": 733,
+      "unrealized_pnl": -57.34,
+      "r": -0.57
+    },
+    {
+      "account": "Swing",
+      "strategy": "Trend Molası",
+      "asset": "AVAX",
+      "type": "Alış",
+      "entry_date": "11.10.2026",
+      "duration": "6 gün",
+      "entry_price": 10.976,
+      "stop_price": 9.41815,
+      "size_usd": 705,
+      "unrealized_pnl": -62.97,
+      "r": -0.63
+    }
+  ],
+  "pending_orders": [
+    {
+      "account": "Swing",
+      "strategy": "Dipten Sekme",
+      "asset": "XLM",
+      "signal_date": "2026-10-14",
+      "order": "limit 0.176621",
+      "stop": 0.153193,
+      "stop_distance": "13.3%"
+    },
+    {
+      "account": "Swing",
+      "strategy": "Dipten Sekme",
+      "asset": "HBAR",
+      "signal_date": "2026-10-14",
+      "order": "limit 0.0812759",
+      "stop": 0.0684194,
+      "stop_distance": "15.8%"
+    },
+    {
+      "account": "Swing",
+      "strategy": "Dipten Sekme",
+      "asset": "LTC",
+      "signal_date": "2026-10-14",
+      "order": "limit 57.6866",
+      "stop": 51.313,
+      "stop_distance": "11.0%"
+    }
+  ],
+  "stats": {
+    "net_pnl": -328,
+    "total_trades": 24,
+    "win_rate": 21,
+    "profit_factor": 0.01,
+    "avg_win": 8,
+    "avg_loss": -27,
+    "win_loss_ratio": 0.03,
+    "expectancy_per_trade": -14,
+    "sqn": -7.13,
+    "max_win": 11,
+    "max_loss": -26,
+    "max_consecutive_losses": "3 K - 9 Z",
+    "avg_holding_time_hours": 43,
+    "kelly_criterion": -29.24,
+    "best_day_gain": 139,
+    "green_days_pct": 43,
+    "sharpe_annual": "hesaplanıyor",
+    "sortino": "hesaplanıyor",
+    "long_trades": 19,
+    "short_trades": 5,
+    "long_pnl": -202.4,
+    "short_pnl": -125.6
+  },
+  "scorecards": [
+    {
+      "account": "Strateji",
+      "score": 42,
+      "return_score": 4.3,
+      "risk_score": 9.2,
+      "expectancy_score": 9.8,
+      "luck_score": "-",
+      "exp_score": 2.5,
+      "div_score": "-"
+    },
+    {
+      "account": "Algo",
+      "score": 28,
+      "return_score": 0.0,
+      "risk_score": 8.4,
+      "expectancy_score": 8.8,
+      "luck_score": "-",
+      "exp_score": 2.7,
+      "div_score": "-"
+    },
+    {
+      "account": "Day trade",
+      "score": 52,
+      "return_score": 5.0,
+      "risk_score": 10.0,
+      "expectancy_score": "-",
+      "luck_score": "-",
+      "exp_score": 0.6,
+      "div_score": "-"
+    },
+    {
+      "account": "Day trade hisse/emtia",
+      "score": 51,
+      "return_score": "-",
+      "risk_score": 10.0,
+      "expectancy_score": "-",
+      "luck_score": "-",
+      "exp_score": 0.2,
+      "div_score": "-"
+    },
+    {
+      "account": "TradingView",
+      "score": 51,
+      "return_score": "-",
+      "risk_score": 10.0,
+      "expectancy_score": "-",
+      "luck_score": "-",
+      "exp_score": 0.2,
+      "div_score": "-"
+    },
+    {
+      "account": "Swing",
+      "score": 30,
+      "return_score": 0.3,
+      "risk_score": 8.1,
+      "expectancy_score": "-",
+      "luck_score": "-",
+      "exp_score": 0.6,
+      "div_score": "-"
+    },
+    {
+      "account": "Trend kolları",
+      "score": 40,
+      "return_score": 2.0,
+      "risk_score": 9.6,
+      "expectancy_score": "-",
+      "luck_score": "-",
+      "exp_score": 0.4,
+      "div_score": "-"
+    }
+  ],
+  "shadow_mode": {
+    "closed_count": 24,
+    "actual_pnl": -328,
+    "shadow_filtered_pnl": -254,
+    "filtered_skipped_trades": 7,
+    "accuracy_pct": 43,
+    "trades": [
+      {
+        "date": "14/10 17:00",
+        "account": "Algo",
+        "strategy": "Trend Avcısı (4 saatlik)",
+        "asset": "OP",
+        "type": "Alış",
+        "prev_trades": 7,
+        "prediction_r": -0.34,
+        "shadow_decision": "öğreniyor",
+        "actual_r": -1.02,
+        "result": "Doğru atlama"
+      },
+      {
+        "date": "14/10 11:00",
+        "account": "Algo",
+        "strategy": "Trend Avcısı (4 saatlik)",
+        "asset": "DOGE",
+        "type": "Satış",
+        "prev_trades": 4,
+        "prediction_r": -0.47,
+        "shadow_decision": "öğreniyor",
+        "actual_r": -1.03,
+        "result": "-"
+      },
+      {
+        "date": "14/10 03:00",
+        "account": "Algo",
+        "strategy": "Trend Avcısı (4 saatlik)",
+        "asset": "BCH",
+        "type": "Satış",
+        "prev_trades": 3,
+        "prediction_r": -0.34,
+        "shadow_decision": "öğreniyor",
+        "actual_r": -1.03,
+        "result": "-"
+      },
+      {
+        "date": "13/10 08:00",
+        "account": "Algo",
+        "strategy": "Trend Avcısı (4 saatlik)",
+        "asset": "LINK",
+        "type": "Satış",
+        "prev_trades": 2,
+        "prediction_r": -0.36,
+        "shadow_decision": "öğreniyor",
+        "actual_r": -1.04,
+        "result": "-"
+      },
+      {
+        "date": "13/10 08:00",
+        "account": "Algo",
+        "strategy": "Trend Avcısı (4 saatlik)",
+        "asset": "BNB",
+        "type": "Satış",
+        "prev_trades": 1,
+        "prediction_r": -0.1,
+        "shadow_decision": "öğreniyor",
+        "actual_r": -1.07,
+        "result": "-"
+      },
+      {
+        "date": "13/10 06:00",
+        "account": "Algo",
+        "strategy": "Trend Avcısı (4 saatlik)",
+        "asset": "ETH",
+        "type": "Satış",
+        "prev_trades": 0,
+        "prediction_r": -0.4,
+        "shadow_decision": "öğreniyor",
+        "actual_r": -1.04,
+        "result": "-"
+      },
+      {
+        "date": "13/10 02:00",
+        "account": "Algo",
+        "strategy": "Trend Avcısı (4 saatlik)",
+        "asset": "OP",
+        "type": "Satış",
+        "prev_trades": 6,
+        "prediction_r": -0.58,
+        "shadow_decision": "öğreniyor",
+        "actual_r": -1.02,
+        "result": "Doğru atlama"
+      },
+      {
+        "date": "13/10 02:00",
+        "account": "Algo",
+        "strategy": "Trend Avcısı (4 saatlik)",
+        "asset": "DOT",
+        "type": "Satış",
+        "prev_trades": 4,
+        "prediction_r": -0.38,
+        "shadow_decision": "öğreniyor",
+        "actual_r": -1.03,
+        "result": "Doğru atlama"
+      }
+    ]
+  },
+  "calendar": {
+    "month": "Ekim 2026",
+    "month_summary": "Toplam -654 $ | 3 yeşil gün | 24 kapanan işlem | En iyi +139 $ (11 Ekim) | En kötü -659 $ (12 Ekim)",
+    "selected_day": {
+      "date": "15 Ekim Perşembe",
+      "pnl": -50,
+      "closed_pnl": 0,
+      "open_pnl_change": -50,
+      "account_breakdown": [
+        {
+          "account": "Strateji",
+          "closed": 0,
+          "open": 8,
+          "total": 8
+        },
+        {
+          "account": "Algo",
+          "closed": 0,
+          "open": -3,
+          "total": -3
+        },
+        {
+          "account": "Day trade",
+          "closed": 0,
+          "open": 0,
+          "total": 0
+        },
+        {
+          "account": "Day trade hisse/emtia",
+          "closed": 0,
+          "open": 0,
+          "total": 0
+        },
+        {
+          "account": "TradingView",
+          "closed": 0,
+          "open": 2,
+          "total": 2
+        },
+        {
+          "account": "Trend kolları",
+          "closed": 0,
+          "open": -56,
+          "total": -56
+        }
+      ]
+    },
+    "days": [
+      {
+        "day": 1,
+        "pnl": null,
+        "closed": 0
+      },
+      {
+        "day": 2,
+        "pnl": null,
+        "closed": 0
+      },
+      {
+        "day": 3,
+        "pnl": null,
+        "closed": 0
+      },
+      {
+        "day": 4,
+        "pnl": null,
+        "closed": 0
+      },
+      {
+        "day": 5,
+        "pnl": null,
+        "closed": 0
+      },
+      {
+        "day": 6,
+        "pnl": null,
+        "closed": 0
+      },
+      {
+        "day": 7,
+        "pnl": null,
+        "closed": 0
+      },
+      {
+        "day": 8,
+        "pnl": null,
+        "closed": 0
+      },
+      {
+        "day": 9,
+        "pnl": 0,
+        "closed": 0
+      },
+      {
+        "day": 10,
+        "pnl": 31,
+        "closed": 3
+      },
+      {
+        "day": 11,
+        "pnl": 139,
+        "closed": 4
+      },
+      {
+        "day": 12,
+        "pnl": -659,
+        "closed": 12
+      },
+      {
+        "day": 13,
+        "pnl": -87,
+        "closed": 5
+      },
+      {
+        "day": 14,
+        "pnl": -28,
+        "closed": 0
+      },
+      {
+        "day": 15,
+        "pnl": -50,
+        "closed": 0
+      }
+    ]
+  },
+  "coach": {
+    "findings": [
+      {
+        "title": "Kayıpların kaynağı stoplar",
+        "desc": "19 kaybın 16'sı (%84) stopla kapandı; ortalama kayıp -0,95R. Stoplar planlandığı gibi çalışıyor.",
+        "impact": "Etki: -296 $ • Örneklem: 19",
+        "type": "info"
+      },
+      {
+        "title": "Algo beklenti konisinin altında",
+        "desc": "Getiri -%2,89; backtest yollarının %5 alt diliminde. Test erken aşamada; birkaç hafta sürerse strateji backtest'teki gibi çalışmıyor demektir.",
+        "impact": "Etki: -289 $ • Örneklem: 13",
+        "type": "warning"
+      },
+      {
+        "title": "Swing beklenti konisinin altında",
+        "desc": "Getiri -%2,51; backtest yollarının %5 alt diliminde. Test erken aşamada; birkaç hafta sürerse strateji backtest'teki gibi çalışmıyor demektir.",
+        "impact": "Etki: -251 $ • Örneklem: 0",
+        "type": "warning"
+      },
+      {
+        "title": "Alış yönü daha kötü",
+        "desc": "Alış 10 işlem -186 $, satış 5 işlem -126 $.",
+        "impact": "Etki: -186 $ • Örneklem: 10",
+        "type": "danger"
+      },
+      {
+        "title": "Zayıf saat aralığı: 00:00-04:00",
+        "desc": "Bu aralıkta açılan 6 işlemin kayıp oranı diğer saatlerden belirgin yüksek; toplam -152 $.",
+        "impact": "Etki: -152 $ • Örneklem: 6",
+        "type": "danger"
+      },
+      {
+        "title": "Trend kolları beklenti konisinin alt bölgesinde",
+        "desc": "Getiri -%0,79; backtest yollarının %5-25 diliminde. Test erken aşamada; birkaç hafta sürerse strateji backtest'teki gibi çalışmıyor demektir.",
+        "impact": "Etki: -79 $ • Örneklem: 0",
+        "type": "warning"
+      }
+    ],
+    "simulator_strategies": [
+      {
+        "id": "seviye_kirilimi",
+        "name": "Seviye Kırılımı",
+        "pnl": -15,
+        "trades": 11,
+        "active": true
+      },
+      {
+        "id": "trend_avcisi_4s",
+        "name": "Trend Avcısı (4 saatlik)",
+        "pnl": -313,
+        "trades": 13,
+        "active": true
+      }
+    ]
+  },
+  "risk": {
+    "concentrations": [
+      {
+        "asset": "NEAR",
+        "accounts_count": 3,
+        "accounts": "Algo, Strateji, Swing",
+        "pending_orders": "-",
+        "total_amount": 1092,
+        "status": "yoğunlaşma"
+      },
+      {
+        "asset": "LTC",
+        "accounts_count": 3,
+        "accounts": "Algo, Strateji",
+        "pending_orders": "Swing",
+        "total_amount": 871,
+        "status": "yoğunlaşma"
+      },
+      {
+        "asset": "AAPL",
+        "accounts_count": 2,
+        "accounts": "Swing, Trend kolları",
+        "pending_orders": "-",
+        "total_amount": 1998,
+        "status": "normal"
+      },
+      {
+        "asset": "NVDA",
+        "accounts_count": 2,
+        "accounts": "Swing, Trend kolları",
+        "pending_orders": "-",
+        "total_amount": 1993,
+        "status": "normal"
+      },
+      {
+        "asset": "BTC",
+        "accounts_count": 2,
+        "accounts": "Swing, Trend kolları",
+        "pending_orders": "-",
+        "total_amount": 1899,
+        "status": "normal"
+      },
+      {
+        "asset": "AVAX",
+        "accounts_count": 2,
+        "accounts": "Swing, TradingView",
+        "pending_orders": "-",
+        "total_amount": 795,
+        "status": "normal"
+      },
+      {
+        "asset": "XLM",
+        "accounts_count": 2,
+        "accounts": "Algo",
+        "pending_orders": "Swing",
+        "total_amount": 625,
+        "status": "normal"
+      }
+    ],
+    "leverage_drawdown_montecarlo": [
+      {
+        "account": "Strateji",
+        "lev_1x_dd30": "%3",
+        "lev_2x_dd30": "%12",
+        "lev_3x_dd30": "%75",
+        "lev_1x_1y_pct20": "%1",
+        "lev_2x_1y_pct20": "%36",
+        "lev_3x_1y_pct20": "%81"
+      },
+      {
+        "account": "Algo",
+        "lev_1x_dd30": "%8",
+        "lev_2x_dd30": "%1",
+        "lev_3x_dd30": "%5",
+        "lev_1x_1y_pct20": "%0",
+        "lev_2x_1y_pct20": "%1",
+        "lev_3x_1y_pct20": "%12"
+      },
+      {
+        "account": "Day trade",
+        "lev_1x_dd30": "%0",
+        "lev_2x_dd30": "%0",
+        "lev_3x_dd30": "%1",
+        "lev_1x_1y_pct20": "%0",
+        "lev_2x_1y_pct20": "%0",
+        "lev_3x_1y_pct20": "%1"
+      },
+      {
+        "account": "Swing",
+        "lev_1x_dd30": "%2",
+        "lev_2x_dd30": "%23",
+        "lev_3x_dd30": "%41",
+        "lev_1x_1y_pct20": "%1",
+        "lev_2x_1y_pct20": "%27",
+        "lev_3x_1y_pct20": "%61"
+      },
+      {
+        "account": "Trend kolları",
+        "lev_1x_dd30": "%1",
+        "lev_2x_dd30": "%14",
+        "lev_3x_dd30": "%44",
+        "lev_1x_1y_pct20": "%0",
+        "lev_2x_1y_pct20": "%12",
+        "lev_3x_1y_pct20": "%45"
+      }
+    ],
+    "correlation_note": "Bu ölçüm için en az 10 günlük ortak veri gerekiyor (şu an 0 gün). Yaklaşık 22 Ekim'den itibaren burada görünecek."
+  },
+  "periodic_returns": [
+    {
+      "day": "15.10.2026",
+      "Strateji": 0.08,
+      "Algo": -0.02,
+      "Day trade": 0.0,
+      "Day trade hisse/emtia": 0.0,
+      "TradingView": 0.05,
+      "Swing": -0.16,
+      "Trend kolları": -0.56
+    },
+    {
+      "day": "14.10.2026",
+      "Strateji": -0.1,
+      "Algo": -0.51,
+      "Day trade": 0.0,
+      "Day trade hisse/emtia": 0.0,
+      "TradingView": 0.0,
+      "Swing": -0.22,
+      "Trend kolları": -0.1
+    },
+    {
+      "day": "13.10.2026",
+      "Strateji": -0.14,
+      "Algo": -1.14,
+      "Day trade": 0.0,
+      "Day trade hisse/emtia": 0.0,
+      "TradingView": 0.0,
+      "Swing": 0.74,
+      "Trend kolları": -0.62
+    },
+    {
+      "day": "12.10.2026",
+      "Strateji": -0.34,
+      "Algo": -1.74,
+      "Day trade": 0.0,
+      "Day trade hisse/emtia": 0.0,
+      "TradingView": 0.0,
+      "Swing": -1.33,
+      "Trend kolları": -0.65
+    },
+    {
+      "day": "11.10.2026",
+      "Strateji": 0.0,
+      "Algo": -0.1,
+      "Day trade": 0.0,
+      "Day trade hisse/emtia": 0.0,
+      "TradingView": 0.0,
+      "Swing": 0.29,
+      "Trend kolları": 0.0
+    },
+    {
+      "day": "10.10.2026",
+      "Strateji": 0.35,
+      "Algo": -0.1,
+      "Day trade": 0.0,
+      "Day trade hisse/emtia": 0.0,
+      "TradingView": 0.0,
+      "Swing": 0.0,
+      "Trend kolları": 0.0
+    },
+    {
+      "day": "09.10.2026",
+      "Strateji": 0.0,
+      "Algo": 0.0,
+      "Day trade": 0.0,
+      "Day trade hisse/emtia": 0.0,
+      "TradingView": 0.0,
+      "Swing": 0.0,
+      "Trend kolları": 0.0
+    }
+  ]
+};
+
+    // Load from localStorage if present
+    try {
+      const saved = localStorage.getItem('kagit_hesaplar_data');
+      if (saved) {
+        PANO_DATA = JSON.parse(saved);
+      }
+    } catch(e) {
+      console.warn("localStorage erişilemedi, varsayılan veri kullanılıyor.");
+    }
+
+    // Chart instances registry
+    const charts = {};
+
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      document.getElementById('toastMsg').innerText = msg;
+      t.classList.remove('translate-y-20', 'opacity-0');
+      setTimeout(() => {
+        t.classList.add('translate-y-20', 'opacity-0');
+      }, 3000);
+    }
+
+    // Navigation Tab Switching
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-pane').forEach(el => el.classList.add('hidden'));
+      const target = document.getElementById('tab-' + tabId);
+      if (target) target.classList.remove('hidden');
+
+      document.querySelectorAll('.nav-btn').forEach(btn => {
+        if (btn.getAttribute('data-tab') === tabId) {
+          btn.classList.add('active-nav');
+        } else {
+          btn.classList.remove('active-nav');
+        }
+      });
+
+      // Mobile: close sidebar on tab select
+      if (window.innerWidth < 1024) {
+        document.getElementById('sidebar').classList.add('-translate-x-full');
+      }
+
+      // Trigger chart resize on tab switch
+      setTimeout(() => {
+        Object.values(charts).forEach(c => {
+          if (c) c.resize();
+        });
+      }, 50);
+    }
+
+    // Mobile sidebar toggle
+    document.getElementById('mobileMenuBtn').addEventListener('click', () => {
+      document.getElementById('sidebar').classList.toggle('-translate-x-full');
+    });
+
+    // Helper: Generate SVG sparkline string
+    function generateSparkline(arr) {
+      if (!arr || arr.length < 2) return '';
+      const min = Math.min(...arr);
+      const max = Math.max(...arr);
+      const range = (max - min) || 1;
+      const w = 220;
+      const h = 34;
+      const points = arr.map((val, idx) => {
+        const x = (idx / (arr.length - 1)) * w;
+        const y = h - ((val - min) / range) * (h - 8) - 4;
+        return `${x.toFixed(1)},${y.toFixed(1)}`;
+      }).join(' ');
+      
+      const isNegative = arr[arr.length - 1] < arr[0];
+      const strokeColor = isNegative ? '#ef4444' : '#10b981';
+
+      return `<svg class="sparkline-svg" viewBox="0 0 ${w} ${h}">
+        <polyline fill="none" stroke="${strokeColor}" stroke-width="2" points="${points}" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>`;
+    }
+
+    // RENDER: Account Cards in Özet
+    function renderAccountCards() {
+      const grid = document.getElementById('accountsGrid');
+      grid.innerHTML = '';
+
+      PANO_DATA.accounts.forEach(acc => {
+        const retColor = acc.total_return_pct < 0 ? 'text-red-400' : (acc.total_return_pct > 0 ? 'text-emerald-400' : 'text-slate-400');
+        const retSign = acc.total_return_pct > 0 ? '+' : '';
+        const daySign = acc.last_day_pct > 0 ? '+' : '';
+
+        const card = document.createElement('div');
+        card.className = "bg-[#151f32] p-4 rounded-lg border border-[#23324d] flex flex-col justify-between space-y-3 hover:border-slate-600 transition-colors";
+        card.innerHTML = `
+          <div>
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                <span class="text-sm font-bold text-white">${acc.name}</span>
+              </div>
+              <span class="text-[10px] px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">${acc.status}</span>
+            </div>
+            <div class="text-[11px] text-slate-400 truncate mt-0.5">${acc.strategies_label}</div>
+
+            <div class="flex items-baseline justify-between mt-3">
+              <div class="text-xl font-extrabold text-white tracking-tight">${acc.current_value.toLocaleString('tr-TR', {minimumFractionDigits: 2})} $</div>
+              <div class="text-right">
+                <div class="text-xs font-bold ${retColor}">${retSign}%${Math.abs(acc.total_return_pct)}</div>
+                <div class="text-[10px] text-slate-400">son gün ${daySign}%${acc.last_day_pct}</div>
+              </div>
+            </div>
+
+            <!-- Sparkline -->
+            <div class="my-2 bg-[#0d1424] p-1 rounded border border-[#1e2a44]">
+              ${generateSparkline(acc.sparkline)}
+            </div>
+
+            <div class="grid grid-cols-2 gap-x-2 gap-y-1 text-[11px] pt-1 text-slate-300">
+              <div class="text-slate-400">Maks. düşüş:</div>
+              <div class="text-right text-red-400 font-medium">${acc.max_drawdown_pct ? '%' + acc.max_drawdown_pct : '-'}</div>
+
+              <div class="text-slate-400">Kazanma:</div>
+              <div class="text-right">${acc.win_rate_pct ? '%' + acc.win_rate_pct : '-'}</div>
+
+              <div class="text-slate-400">Kar faktörü:</div>
+              <div class="text-right">${acc.profit_factor ? acc.profit_factor : '-'}</div>
+
+              <div class="text-slate-400">Kapanan / Açık:</div>
+              <div class="text-right font-medium">${acc.closed_trades} / ${acc.open_trades}</div>
+
+              <div class="text-slate-400">Çıkış süresi:</div>
+              <div class="text-right">${acc.avg_holding_time}</div>
+
+              <div class="text-slate-400">Şans değil:</div>
+              <div class="text-right text-amber-300 text-[10px]">${acc.luck_prob}</div>
+
+              <div class="text-slate-400">Son çalışma:</div>
+              <div class="text-right text-slate-400 text-[10px]">${acc.last_run}</div>
+            </div>
+          </div>
+
+          <div class="pt-2 border-t border-[#23324d] text-[10px] text-slate-400 space-y-1 bg-[#10172a] p-2 rounded">
+            <div>${acc.expectation_desc || ''}</div>
+            <div class="text-slate-500">${acc.expectation_60d || ''}</div>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    // RENDER: Scorecards in Karne
+    function renderScorecards() {
+      const grid = document.getElementById('scorecardGrid');
+      grid.innerHTML = '';
+
+      PANO_DATA.scorecards.forEach(sc => {
+        const card = document.createElement('div');
+        card.className = "bg-[#151f32] p-4 rounded-lg border border-[#23324d] space-y-3";
+        card.innerHTML = `
+          <div class="flex items-center justify-between border-b border-[#23324d] pb-2">
+            <span class="font-bold text-white text-sm">${sc.account}</span>
+            <span class="text-sm font-extrabold text-blue-400">${sc.score} <span class="text-[10px] text-slate-400 font-normal">/100</span></span>
+          </div>
+
+          <div class="space-y-1.5 text-xs">
+            <div class="flex items-center justify-between text-slate-300">
+              <span>Getiri:</span>
+              <span class="font-medium text-emerald-400">${sc.return_score}</span>
+            </div>
+            <div class="w-full bg-slate-800 h-1.5 rounded-full overflow-hidden">
+              <div class="bg-emerald-500 h-full" style="width: ${typeof sc.return_score === 'number' ? sc.return_score * 10 : 0}%"></div>
+            </div>
+
+            <div class="flex items-center justify-between text-slate-300 pt-1">
+              <span>Risk:</span>
+              <span class="font-medium text-blue-400">${sc.risk_score}</span>
+            </div>
+            <div class="w-full bg-slate-800 h-1.5 rounded-full overflow-hidden">
+              <div class="bg-blue-500 h-full" style="width: ${typeof sc.risk_score === 'number' ? sc.risk_score * 10 : 0}%"></div>
+            </div>
+
+            <div class="flex items-center justify-between text-slate-300 pt-1">
+              <span>Beklenti (R):</span>
+              <span class="font-medium text-amber-400">${sc.expectancy_score}</span>
+            </div>
+            <div class="w-full bg-slate-800 h-1.5 rounded-full overflow-hidden">
+              <div class="bg-amber-500 h-full" style="width: ${typeof sc.expectancy_score === 'number' ? sc.expectancy_score * 10 : 0}%"></div>
+            </div>
+
+            <div class="flex items-center justify-between text-slate-300 pt-1">
+              <span>Deneyim:</span>
+              <span class="font-medium text-purple-400">${sc.exp_score}</span>
+            </div>
+            <div class="w-full bg-slate-800 h-1.5 rounded-full overflow-hidden">
+              <div class="bg-purple-500 h-full" style="width: ${typeof sc.exp_score === 'number' ? sc.exp_score * 10 : 0}%"></div>
+            </div>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    // RENDER: Takvim Günleri
+    function renderCalendar() {
+      const grid = document.getElementById('calendarGrid');
+      grid.innerHTML = '';
+
+      PANO_DATA.calendar.days.forEach(d => {
+        const cell = document.createElement('div');
+        let bgClass = "bg-[#10172a] border-[#23324d] text-slate-500";
+        let pnlText = "-";
+
+        if (d.pnl !== null) {
+          if (d.pnl > 0) {
+            bgClass = "bg-emerald-950/40 border-emerald-700/60 text-emerald-300";
+            pnlText = `+${d.pnl} $`;
+          } else if (d.pnl < 0) {
+            bgClass = "bg-red-950/40 border-red-700/60 text-red-300";
+            pnlText = `${d.pnl} $`;
+          } else {
+            bgClass = "bg-slate-800/40 border-slate-700 text-slate-300";
+            pnlText = "0 $";
+          }
+        }
+
+        cell.className = `p-2 rounded border flex flex-col justify-between h-16 ${bgClass} cursor-pointer hover:border-blue-400 transition-colors`;
+        cell.onclick = () => showToast(`${d.day} Ekim seçildi.`);
+        cell.innerHTML = `
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-xs text-slate-200">${d.day}</span>
+            ${d.closed ? `<span class="text-[9px] px-1 rounded bg-slate-800 text-slate-300">${d.closed} işl</span>` : ''}
+          </div>
+          <div class="text-[11px] font-bold text-right">${pnlText}</div>
+        `;
+        grid.appendChild(cell);
+      });
+
+      // Day End Positions Table
+      const posTable = document.getElementById('dayEndPositionsTable');
+      posTable.innerHTML = '';
+      PANO_DATA.open_positions.slice(0, 8).forEach(p => {
+        const tr = document.createElement('tr');
+        const pnlColor = p.unrealized_pnl >= 0 ? 'text-emerald-400' : 'text-red-400';
+        tr.innerHTML = `
+          <td class="py-2 font-medium">${p.account}</td>
+          <td class="py-2 text-slate-400 truncate max-w-[120px]">${p.strategy}</td>
+          <td class="py-2 font-bold text-white">${p.asset}</td>
+          <td class="py-2 ${p.type === 'Alış' ? 'text-blue-400' : 'text-purple-400'}">${p.type}</td>
+          <td class="py-2 text-slate-400">${p.entry_date}</td>
+          <td class="py-2 text-right ${pnlColor}">${p.unrealized_pnl >= 0 ? '+' : ''}${p.unrealized_pnl} $</td>
+          <td class="py-2 text-right ${pnlColor}">${p.unrealized_pnl >= 0 ? '+' : ''}${p.unrealized_pnl} $</td>
+          <td class="py-2 text-right">${p.r}</td>
+        `;
+        posTable.appendChild(tr);
+      });
+    }
+
+    // RENDER: Açık Pozisyonlar Tablosu & Bekleyen Emirler
+    function renderOpenPositions() {
+      const tbody = document.getElementById('openPositionsTableBody');
+      tbody.innerHTML = '';
+
+      PANO_DATA.open_positions.forEach((p, idx) => {
+        const tr = document.createElement('tr');
+        const pnlColor = p.unrealized_pnl > 0 ? 'text-emerald-400 font-bold' : (p.unrealized_pnl < 0 ? 'text-red-400 font-bold' : 'text-slate-400');
+        const pnlSign = p.unrealized_pnl > 0 ? '+' : '';
+
+        tr.innerHTML = `
+          <td class="py-2 font-medium text-slate-200">${p.account}</td>
+          <td class="py-2 text-slate-400 truncate max-w-[130px]">${p.strategy}</td>
+          <td class="py-2 font-bold text-white">${p.asset}</td>
+          <td class="py-2 ${p.type === 'Alış' ? 'text-blue-400' : 'text-purple-400'}">${p.type}</td>
+          <td class="py-2 text-slate-400">${p.entry_date}</td>
+          <td class="py-2 text-slate-400">${p.duration}</td>
+          <td class="py-2 text-right">${typeof p.entry_price === 'number' ? p.entry_price.toLocaleString('tr-TR') : p.entry_price}</td>
+          <td class="py-2 text-right text-slate-400">${typeof p.stop_price === 'number' ? p.stop_price.toLocaleString('tr-TR') : p.stop_price}</td>
+          <td class="py-2 text-right font-medium">${p.size_usd} $</td>
+          <td class="py-2 text-right ${pnlColor}">${pnlSign}${p.unrealized_pnl} $</td>
+          <td class="py-2 text-right">${p.r}</td>
+          <td class="py-2 text-center">
+            <button onclick="closePosition(${idx})" class="px-2 py-0.5 rounded bg-red-900/40 hover:bg-red-800 text-red-300 text-[10px] border border-red-800">
+              Kapat
+            </button>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+
+      // Pending Orders
+      const pBody = document.getElementById('pendingOrdersTableBody');
+      pBody.innerHTML = '';
+      PANO_DATA.pending_orders.forEach(po => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td class="py-2 font-medium">${po.account}</td>
+          <td class="py-2 text-slate-400">${po.strategy}</td>
+          <td class="py-2 font-bold text-white">${po.asset}</td>
+          <td class="py-2 text-slate-400">${po.signal_date}</td>
+          <td class="py-2 font-mono text-blue-300">${po.order}</td>
+          <td class="py-2 text-right text-slate-400">${po.stop}</td>
+          <td class="py-2 text-right text-amber-400 font-semibold">${po.stop_distance}</td>
+        `;
+        pBody.appendChild(tr);
+      });
+    }
+
+    // RENDER: İşlem Geçmişi Tablosu
+    function renderTradeHistory(trades = PANO_DATA.closed_trades_list) {
+      const tbody = document.getElementById('tradeHistoryTableBody');
+      tbody.innerHTML = '';
+
+      trades.forEach(t => {
+        const tr = document.createElement('tr');
+        const pnlColor = t.pnl > 0 ? 'text-emerald-400 font-bold' : 'text-red-400 font-bold';
+        const pnlSign = t.pnl > 0 ? '+' : '';
+
+        let reasonBadge = `<span class="px-1.5 py-0.5 rounded text-[10px] bg-slate-800 text-slate-300">${t.reason}</span>`;
+        if (t.reason === 'stop') {
+          reasonBadge = `<span class="px-1.5 py-0.5 rounded text-[10px] bg-red-950 text-red-300 border border-red-800">stop</span>`;
+        } else if (t.reason === 'partial' || t.reason === 'tp') {
+          reasonBadge = `<span class="px-1.5 py-0.5 rounded text-[10px] bg-emerald-950 text-emerald-300 border border-emerald-800">${t.reason}</span>`;
+        }
+
+        tr.innerHTML = `
+          <td class="py-2 font-medium text-slate-200">${t.account}</td>
+          <td class="py-2 text-slate-400 truncate max-w-[140px]">${t.strategy}</td>
+          <td class="py-2 font-bold text-white">${t.asset}</td>
+          <td class="py-2 ${t.type === 'Alış' ? 'text-blue-400' : 'text-purple-400'}">${t.type}</td>
+          <td class="py-2 text-slate-400">${t.entry_date}</td>
+          <td class="py-2 text-slate-400">${t.exit_date}</td>
+          <td class="py-2 text-right font-mono">${t.entry_price_fmt || t.entry_price}</td>
+          <td class="py-2 text-right font-mono">${t.exit_price}</td>
+          <td class="py-2 text-right font-medium ${t.r > 0 ? 'text-emerald-400' : 'text-red-400'}">${t.r}</td>
+          <td class="py-2 text-right ${pnlColor}">${pnlSign}${t.pnl} $</td>
+          <td class="py-2 text-center">${reasonBadge}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function filterTradeHistory() {
+      const acc = document.getElementById('historyAccountFilter').value;
+      const res = document.getElementById('historyResultFilter').value;
+      const q = document.getElementById('historySearchInput').value.toLowerCase();
+
+      let filtered = PANO_DATA.closed_trades_list.filter(t => {
+        if (acc !== 'all' && t.account !== acc) return false;
+        if (res === 'win' && t.pnl <= 0) return false;
+        if (res === 'loss' && t.pnl >= 0) return false;
+        if (res === 'stop' && t.reason !== 'stop') return false;
+        if (q && !t.asset.toLowerCase().includes(q) && !t.strategy.toLowerCase().includes(q)) return false;
+        return true;
+      });
+
+      renderTradeHistory(filtered);
+    }
+
+    // RENDER: Koç Bulguları
+    function renderCoachFindings() {
+      const grid = document.getElementById('coachFindingsGrid');
+      grid.innerHTML = '';
+
+      PANO_DATA.coach.findings.forEach(f => {
+        const card = document.createElement('div');
+        let borderClass = 'border-blue-800/60 bg-blue-950/20';
+        let titleColor = 'text-blue-300';
+
+        if (f.type === 'warning') {
+          borderClass = 'border-amber-800/60 bg-amber-950/20';
+          titleColor = 'text-amber-300';
+        } else if (f.type === 'danger') {
+          borderClass = 'border-red-800/60 bg-red-950/20';
+          titleColor = 'text-red-300';
+        }
+
+        card.className = `p-4 rounded-lg border ${borderClass} space-y-2 flex flex-col justify-between`;
+        card.innerHTML = `
+          <div>
+            <div class="text-xs font-bold ${titleColor}">${f.title}</div>
+            <div class="text-xs text-slate-300 mt-1 leading-relaxed">${f.desc}</div>
+          </div>
+          <div class="pt-2 border-t border-[#23324d] text-[10px] text-slate-400 font-mono">
+            ${f.impact}
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    // RENDER: Gölge Mod Tablosu
+    function renderShadowTable() {
+      const tbody = document.getElementById('shadowTableBody');
+      tbody.innerHTML = '';
+
+      PANO_DATA.shadow_mode.trades.forEach(st => {
+        const tr = document.createElement('tr');
+        const isSkipped = st.prediction_r < -0.2;
+        tr.innerHTML = `
+          <td class="py-2 text-slate-400">${st.date}</td>
+          <td class="py-2 font-medium">${st.account}</td>
+          <td class="py-2 text-slate-400 truncate max-w-[130px]">${st.strategy}</td>
+          <td class="py-2 font-bold text-white">${st.asset}</td>
+          <td class="py-2 ${st.type === 'Alış' ? 'text-blue-400' : 'text-purple-400'}">${st.type}</td>
+          <td class="py-2 text-center text-slate-400">${st.prev_trades}</td>
+          <td class="py-2 text-right font-mono text-red-400">${st.prediction_r}</td>
+          <td class="py-2 text-center"><span class="px-2 py-0.5 rounded text-[10px] ${isSkipped ? 'bg-amber-950 text-amber-300 border border-amber-800' : 'bg-slate-800 text-slate-400'}">${st.shadow_decision}</span></td>
+          <td class="py-2 text-right font-mono text-red-400 font-bold">${st.actual_r}</td>
+          <td class="py-2 text-center"><span class="px-2 py-0.5 rounded text-[10px] bg-emerald-950 text-emerald-300 border border-emerald-800">${st.result}</span></td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    // RENDER: Dönemsel Getiri Tablosu
+    function renderPeriodicReturns() {
+      const tbody = document.getElementById('periodicReturnsTableBody');
+      tbody.innerHTML = '';
+
+      PANO_DATA.periodic_returns.forEach(pr => {
+        const tr = document.createElement('tr');
+        function fmt(val) {
+          if (val === 0) return `<span class="text-slate-500 font-mono">%0,00</span>`;
+          const cls = val > 0 ? 'text-emerald-400' : 'text-red-400';
+          const s = val > 0 ? '+' : '';
+          return `<span class="${cls} font-mono font-medium">${s}%${val.toFixed(2)}</span>`;
+        }
+
+        tr.innerHTML = `
+          <td class="py-2 font-medium text-slate-200">${pr.day}</td>
+          <td class="py-2 text-right">${fmt(pr.Strateji)}</td>
+          <td class="py-2 text-right">${fmt(pr.Algo)}</td>
+          <td class="py-2 text-right">${fmt(pr['Day trade'])}</td>
+          <td class="py-2 text-right">${fmt(pr['Day trade hisse/emtia'])}</td>
+          <td class="py-2 text-right">${fmt(pr.TradingView)}</td>
+          <td class="py-2 text-right">${fmt(pr.Swing)}</td>
+          <td class="py-2 text-right">${fmt(pr['Trend kolları'])}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    // INITIALIZE ALL CHARTS (Chart.js)
+    function initCharts() {
+      // 1. Radar Chart (Karne)
+      const radarCtx = document.getElementById('radarChart').getContext('2d');
+      charts.radar = new Chart(radarCtx, {
+        type: 'radar',
+        data: {
+          labels: ['Getiri', 'Risk', 'Beklenti (R)', 'Şans Değil', 'Deneyim', 'Çeşitlendirme'],
+          datasets: [
+            {
+              label: 'Strateji',
+              data: [4.3, 9.2, 9.8, 5.0, 2.5, 4.0],
+              borderColor: '#38bdf8',
+              backgroundColor: 'rgba(56, 189, 248, 0.2)',
+              borderWidth: 2
+            },
+            {
+              label: 'Algo',
+              data: [0.0, 8.4, 8.8, 2.0, 2.7, 3.0],
+              borderColor: '#ef4444',
+              backgroundColor: 'rgba(239, 68, 68, 0.2)',
+              borderWidth: 2
+            }
+          ]
+        },
+        options: {
+          maintainAspectRatio: false,
+          scales: {
+            r: {
+              angleLines: { color: '#23324d' },
+              grid: { color: '#23324d' },
+              pointLabels: { color: '#94a3b8', font: { size: 10 } },
+              ticks: { display: false, max: 10, min: 0 }
+            }
+          },
+          plugins: {
+            legend: { labels: { color: '#e2e8f0', font: { size: 10 } } }
+          }
+        }
+      });
+
+      // 2. Benchmark Comparison Chart (Grafikler)
+      const bmCtx = document.getElementById('benchmarkChart').getContext('2d');
+      charts.benchmark = new Chart(bmCtx, {
+        type: 'line',
+        data: {
+          labels: ['9 Eki', '10 Eki', '11 Eki', '12 Eki', '13 Eki', '14 Eki', '15 Eki'],
+          datasets: [
+            { label: 'Tümü (Portföy)', data: [0.0, 0.1, 0.3, -0.6, -0.7, -0.85, -0.91], borderColor: '#f59e0b', borderWidth: 2.5, tension: 0.2 },
+            { label: 'Swing', data: [0.0, 0.0, 0.29, 1.2, 0.7, -2.1, -2.51], borderColor: '#10b981', borderWidth: 1.5, tension: 0.2 },
+            { label: 'Algo', data: [0.0, -0.1, -0.2, -0.5, -1.8, -2.7, -2.89], borderColor: '#ef4444', borderWidth: 1.5, tension: 0.2 },
+            { label: 'Bitcoin', data: [0.0, 1.2, 2.1, 0.8, -0.4, 0.2, 0.6], borderColor: '#eab308', borderDash: [4, 4], borderWidth: 1.2 },
+            { label: 'S&P 500', data: [0.0, 0.2, 0.4, 0.1, 0.3, 0.5, 0.4], borderColor: '#38bdf8', borderDash: [2, 2], borderWidth: 1.2 }
+          ]
+        },
+        options: {
+          maintainAspectRatio: false,
+          scales: {
+            x: { grid: { color: '#1e293b' }, ticks: { color: '#94a3b8' } },
+            y: { grid: { color: '#1e293b' }, ticks: { color: '#94a3b8', callback: v => '%' + v } }
+          },
+          plugins: {
+            legend: { labels: { color: '#e2e8f0', font: { size: 11 } } }
+          }
+        }
+      });
+
+      // 3. Monte Carlo Bands (Grafikler)
+      const mcCtx = document.getElementById('monteCarloChart').getContext('2d');
+      charts.monteCarlo = new Chart(mcCtx, {
+        type: 'line',
+        data: {
+          labels: ['7 Eki', '9 Eki', '11 Eki', '13 Eki', '15 Eki', '17 Eki'],
+          datasets: [
+            { label: 'Üst Bant (%75)', data: [10000, 10100, 10250, 10400, 10550, 10700], borderColor: 'transparent', backgroundColor: 'rgba(56, 189, 248, 0.15)', fill: '+1' },
+            { label: 'Alt Bant (%25)', data: [10000, 9900, 9780, 9650, 9500, 9350], borderColor: 'transparent', backgroundColor: 'rgba(56, 189, 248, 0.15)', fill: false },
+            { label: 'Gerçekleşen Sermaye', data: [10000, 10010, 10040, 9980, 9710, null], borderColor: '#ef4444', borderWidth: 2 }
+          ]
+        },
+        options: {
+          maintainAspectRatio: false,
+          scales: {
+            x: { grid: { color: '#1e293b' }, ticks: { color: '#94a3b8' } },
+            y: { grid: { color: '#1e293b' }, ticks: { color: '#94a3b8' } }
+          },
+          plugins: {
+            legend: { labels: { color: '#e2e8f0', font: { size: 10 } } }
+          }
+        }
+      });
+
+      // 4. Underwater Drawdown (Grafikler)
+      const ddCtx = document.getElementById('drawdownChart').getContext('2d');
+      charts.drawdown = new Chart(ddCtx, {
+        type: 'line',
+        data: {
+          labels: ['7 Eki', '9 Eki', '11 Eki', '12 Eki', '13 Eki', '14 Eki', '15 Eki'],
+          datasets: [
+            {
+              label: 'Drawdown (%)',
+              data: [0.0, -0.2, -0.3, -1.8, -2.5, -3.2, -3.76],
+              borderColor: '#ef4444',
+              backgroundColor: 'rgba(239, 68, 68, 0.25)',
+              fill: true,
+              stepped: true
+            }
+          ]
+        },
+        options: {
+          maintainAspectRatio: false,
+          scales: {
+            x: { grid: { color: '#1e293b' }, ticks: { color: '#94a3b8' } },
+            y: { grid: { color: '#1e293b' }, ticks: { color: '#94a3b8', callback: v => '%' + v } }
+          },
+          plugins: {
+            legend: { display: false }
+          }
+        }
+      });
+
+      // 5. Donut Charts (Açık Pozisyonlar)
+      const accDonutCtx = document.getElementById('accountsDonut').getContext('2d');
+      charts.accDonut = new Chart(accDonutCtx, {
+        type: 'doughnut',
+        data: {
+          labels: ['Swing', 'Algo', 'Strateji', 'Trend kolları', 'TradingView'],
+          datasets: [{
+            data: [11, 3, 10, 8, 1],
+            backgroundColor: ['#10b981', '#ef4444', '#38bdf8', '#f59e0b', '#8b5cf6'],
+            borderWidth: 0
+          }]
+        },
+        options: {
+          maintainAspectRatio: false,
+          plugins: { legend: { position: 'right', labels: { color: '#cbd5e1', font: { size: 10 } } } }
+        }
+      });
+
+      const assetDonutCtx = document.getElementById('assetsDonut').getContext('2d');
+      charts.assetDonut = new Chart(assetDonutCtx, {
+        type: 'doughnut',
+        data: {
+          labels: ['Kripto', 'ABD Hisse/ETF', 'Emtia'],
+          datasets: [{
+            data: [65, 25, 10],
+            backgroundColor: ['#38bdf8', '#f59e0b', '#10b981'],
+            borderWidth: 0
+          }]
+        },
+        options: {
+          maintainAspectRatio: false,
+          plugins: { legend: { position: 'right', labels: { color: '#cbd5e1', font: { size: 10 } } } }
+        }
+      });
+
+      // 6. Open Positions PnL Bar (Açık Pozisyonlar)
+      const opPnlCtx = document.getElementById('openPositionsPnlBar').getContext('2d');
+      charts.openPnlBar = new Chart(opPnlCtx, {
+        type: 'bar',
+        data: {
+          labels: ['META', 'XLM', 'MSFT', 'NVDA', 'AVAX', 'NEAR', 'LTC', 'BTC', 'ICP', 'ADA'],
+          datasets: [{
+            label: 'Anlık K/Z ($)',
+            data: [70.5, 26.6, 20.0, 15.3, 1.7, -35.7, -3.0, -51.1, -58.6, -57.3],
+            backgroundColor: ctx => ctx.raw >= 0 ? '#10b981' : '#ef4444',
+            borderRadius: 3
+          }]
+        },
+        options: {
+          indexAxis: 'y',
+          maintainAspectRatio: false,
+          scales: {
+            x: { grid: { color: '#1e293b' }, ticks: { color: '#94a3b8' } },
+            y: { grid: { display: false }, ticks: { color: '#94a3b8', font: { size: 9 } } }
+          },
+          plugins: { legend: { display: false } }
+        }
+      });
+
+      // 7. R Histogram & Asset PnL Bar (İstatistik)
+      const rHistCtx = document.getElementById('rHistogramChart').getContext('2d');
+      charts.rHistogram = new Chart(rHistCtx, {
+        type: 'bar',
+        data: {
+          labels: ['<-2R', '-1R..-2R', '-0.5R..-1R', '0R..-0.5R', '0R..+0.5R', '+0.5R..+1R', '>+1R'],
+          datasets: [{
+            label: 'İşlem Sayısı',
+            data: [0, 16, 2, 1, 4, 1, 0],
+            backgroundColor: ['#ef4444', '#ef4444', '#f87171', '#fb923c', '#34d399', '#10b981', '#059669'],
+            borderRadius: 4
+          }]
+        },
+        options: {
+          maintainAspectRatio: false,
+          scales: {
+            x: { grid: { color: '#1e293b' }, ticks: { color: '#94a3b8', font: { size: 10 } } },
+            y: { grid: { color: '#1e293b' }, ticks: { color: '#94a3b8' } }
+          },
+          plugins: { legend: { display: false } }
+        }
+      });
+
+      const assetBarCtx = document.getElementById('assetPnlBarChart').getContext('2d');
+      charts.assetBar = new Chart(assetBarCtx, {
+        type: 'bar',
+        data: {
+          labels: ['XLM', 'NEAR', 'SUI', 'PEPE', 'ARB', 'LTC', 'FIL', 'DOT', 'OP', 'DOGE', 'BNB'],
+          datasets: [{
+            label: 'Toplam K/Z ($)',
+            data: [6.05, -4.0, -10.46, -6.95, -15.58, -19.54, -50.89, -25.28, -49.91, -24.99, -25.68],
+            backgroundColor: ctx => ctx.raw >= 0 ? '#10b981' : '#ef4444',
+            borderRadius: 3
+          }]
+        },
+        options: {
+          indexAxis: 'y',
+          maintainAspectRatio: false,
+          scales: {
+            x: { grid: { color: '#1e293b' }, ticks: { color: '#94a3b8' } },
+            y: { grid: { display: false }, ticks: { color: '#94a3b8', font: { size: 9 } } }
+          },
+          plugins: { legend: { display: false } }
+        }
+      });
+
+      // 8. Simulator Chart (Koç)
+      const simCtx = document.getElementById('simulatorChart').getContext('2d');
+      charts.simulator = new Chart(simCtx, {
+        type: 'line',
+        data: {
+          labels: ['9 Eki', '10 Eki', '11 Eki', '12 Eki', '13 Eki', '14 Eki'],
+          datasets: [
+            { label: 'Tüm Stratejiler', data: [0, 31, 139, -659, -87, -328], borderColor: '#64748b', borderDash: [4, 4], borderWidth: 1.5 },
+            { label: 'Seçili Stratejilerle Portföy', data: [0, 31, 139, -15, -15, -15], borderColor: '#10b981', borderWidth: 2.5 }
+          ]
+        },
+        options: {
+          maintainAspectRatio: false,
+          scales: {
+            x: { grid: { color: '#1e293b' }, ticks: { color: '#94a3b8' } },
+            y: { grid: { color: '#1e293b' }, ticks: { color: '#94a3b8', callback: v => v + ' $' } }
+          },
+          plugins: { legend: { labels: { color: '#cbd5e1' } } }
+        }
+      });
+
+      // 9. Report Chart (Rapor)
+      const repCtx = document.getElementById('reportChart').getContext('2d');
+      charts.report = new Chart(repCtx, {
+        type: 'line',
+        data: {
+          labels: ['9 Eki', '10 Eki', '11 Eki', '12 Eki', '13 Eki', '14 Eki', '15 Eki'],
+          datasets: [
+            { label: 'Portföy Getirisi (%)', data: [0.0, 0.1, 0.3, -0.6, -0.7, -0.85, -0.91], borderColor: '#38bdf8', backgroundColor: 'rgba(56, 189, 248, 0.1)', fill: true, tension: 0.2 }
+          ]
+        },
+        options: {
+          maintainAspectRatio: false,
+          scales: {
+            x: { grid: { color: '#1e293b' }, ticks: { color: '#94a3b8' } },
+            y: { grid: { color: '#1e293b' }, ticks: { color: '#94a3b8', callback: v => '%' + v } }
+          },
+          plugins: { legend: { display: false } }
+        }
+      });
+    }
+
+    // SIMULATOR UPDATE
+    function updateSimulator() {
+      const seCheck = document.getElementById('simSeviye').checked;
+      const trCheck = document.getElementById('simTrend').checked;
+      
+      let pnl = 0;
+      if (seCheck) pnl += -15;
+      if (trCheck) pnl += -313;
+
+      document.getElementById('simulatedPnlResult').innerText = `Seçili: ${pnl} $`;
+      if (charts.simulator) {
+        charts.simulator.data.datasets[1].data = [0, 15, seCheck ? -5 : 0, pnl, pnl, pnl];
+        charts.simulator.update();
+      }
+    }
+
+    // CLAUDE AI Q&A SYSTEM
+    function quickAsk(q) {
+      document.getElementById('aiQuestionInput').value = q;
+      askAI();
+    }
+
+    function askAI() {
+      const input = document.getElementById('aiQuestionInput');
+      const q = input.value.trim();
+      if (!q) return;
+
+      document.getElementById('aiModalQuestion').innerText = `Soru: "${q}"`;
+      const ansEl = document.getElementById('aiModalAnswer');
+      ansEl.innerHTML = '<div class="text-blue-400 py-4 flex items-center gap-2"><i data-lucide="loader-2" class="w-4 h-4 animate-spin"></i> <span>Panodaki 31 açık pozisyon ve 24 işlem analiz ediliyor...</span></div>';
+      lucide.createIcons();
+
+      document.getElementById('aiModal').classList.remove('hidden');
+
+      setTimeout(() => {
+        let answer = "";
+        const lowerQ = q.toLowerCase();
+
+        if (lowerQ.includes('kırmızı') || lowerQ.includes('zarar')) {
+          answer = `
+            <p><strong>1. Stop Kayıpları Yoğunlaştı:</strong> 24 kapanan işlemin 16'sı (%84) stoplanmış durumda. Özellikle <strong>Algo Trend Avcısı (4 saatlik)</strong> 13 işlemde 0 kazanç ile -306,92 $ zarar üretti.</p>
+            <p><strong>2. Zayıf Zaman Aralığı:</strong> 00:00 - 04:00 saatleri arasında açılan pozisyonlar toplam portföy zararının %46'sını (-152 $) oluşturuyor.</p>
+            <p><strong>3. Varlık Yoğunlaşması:</strong> NEAR ve LTC üzerinde 3 farklı hesap aynı anda satış/alış pozisyonu açtığı için ters piyasa hareketinde portföy korelasyonu riski tetiklendi.</p>
+          `;
+        } else if (lowerQ.includes('kaybettiren') || lowerQ.includes('kötü')) {
+          answer = `
+            <p><strong>En çok kaybettiren strateji:</strong> <em>Algo - Trend Avcısı (4 saatlik)</em> toplam <strong>-306,92 $</strong> kayıp ve %0 kazanma oranı ile şu an en zayıf halkadır.</p>
+            <p><strong>En kötü işlemler:</strong></p>
+            <ul class="list-disc pl-4 space-y-1 text-slate-300">
+              <li>FIL Satış: -25,48 $</li>
+              <li>BNB Satış: -25,68 $</li>
+              <li>OP Satış: -25,64 $</li>
+              <li>ETH Satış: -25,56 $</li>
+            </ul>
+            <p class="text-amber-400 pt-1">Tavsiye: 4 saatlik trend takip filtrelerini Gölge Mod'a alarak -0.2R altı sinyalleri eleyebilirsiniz.</p>
+          `;
+        } else if (lowerQ.includes('beklenti') || lowerQ.includes('koni')) {
+          answer = `
+            <p><strong>Monte Carlo Beklenti Koni Analizi:</strong></p>
+            <p>• <strong>Algo:</strong> Getirisi -%2,89 ile backtest simülasyonunun %5 alt dilimine geriledi (Kritik Alarm).</p>
+            <p>• <strong>Swing:</strong> Getirisi -%2,51 ile yine alt %5 sınırında seyrediyor.</p>
+            <p>• <strong>Strateji:</strong> %25-%75 normal beklenti koridoru içerisinde stabil kalmayı başarıyor.</p>
+          `;
+        } else {
+          answer = `
+            <p><strong>Genel Durum Özeti:</strong></p>
+            <p>Portföyün toplam değeri <strong>69.366 $</strong> (net getiri -%0,91). 31 açık pozisyon içinde META (+70,54 $) ve XLM (+26,61 $) en karlı taşınan varlıklar iken, ADA (-57,34 $) ve ICP (-58,68 $) stop seviyelerine yaklaşmaktadır.</p>
+            <p>İşlem başına beklenti -14 $ seviyesindedir. Riski düşürmek için Koç sekmesindeki 'Ne Olurdu?' simülatörünü test edebilirsiniz.</p>
+          `;
+        }
+
+        ansEl.innerHTML = answer;
+        lucide.createIcons();
+      }, 400);
+    }
+
+    function closeAIModal() {
+      document.getElementById('aiModal').classList.add('hidden');
+    }
+
+    // MODAL: ADD TRADE
+    function openAddTradeModal() {
+      document.getElementById('addTradeModal').classList.remove('hidden');
+    }
+    function closeAddTradeModal() {
+      document.getElementById('addTradeModal').classList.add('hidden');
+    }
+
+    function handleNewTrade(e) {
+      e.preventDefault();
+      const acc = document.getElementById('mTradeAccount').value;
+      const asset = document.getElementById('mTradeAsset').value.toUpperCase();
+      const type = document.getElementById('mTradeType').value;
+      const price = parseFloat(document.getElementById('mTradePrice').value);
+      const size = parseFloat(document.getElementById('mTradeSize').value);
+      const strat = document.getElementById('mTradeStrategy').value;
+
+      const newPos = {
+        account: acc,
+        strategy: strat,
+        asset: asset,
+        type: type,
+        entry_date: new Date().toLocaleDateString('tr-TR'),
+        duration: "1 gün",
+        entry_price: price,
+        stop_price: (type === 'Alış' ? price * 0.95 : price * 1.05).toFixed(4),
+        size_usd: size,
+        unrealized_pnl: 0.00,
+        r: "0.00"
+      };
+
+      PANO_DATA.open_positions.unshift(newPos);
+      PANO_DATA.kpis.open_positions_count = PANO_DATA.open_positions.length;
+      document.getElementById('kpiOpenPos').innerText = PANO_DATA.kpis.open_positions_count;
+
+      saveState();
+      renderOpenPositions();
+      closeAddTradeModal();
+      showToast(`${asset} pozisyonu başarıyla eklendi!`);
+    }
+
+    function closePosition(idx) {
+      const pos = PANO_DATA.open_positions[idx];
+      if (!pos) return;
+
+      const closedTrade = {
+        id: Date.now(),
+        account: pos.account,
+        strategy: pos.strategy,
+        asset: pos.asset,
+        type: pos.type,
+        entry_date: pos.entry_date,
+        exit_date: new Date().toLocaleDateString('tr-TR') + " " + new Date().toLocaleTimeString('tr-TR', {hour: '2-digit', minute:'2-digit'}),
+        entry_price: pos.entry_price,
+        exit_price: pos.entry_price,
+        r: pos.r === "N/A" ? 0 : parseFloat(pos.r) || 0,
+        pnl: pos.unrealized_pnl || 0,
+        reason: "manuel_kapat"
+      };
+
+      PANO_DATA.closed_trades_list.unshift(closedTrade);
+      PANO_DATA.open_positions.splice(idx, 1);
+      PANO_DATA.kpis.open_positions_count = PANO_DATA.open_positions.length;
+      PANO_DATA.kpis.closed_trades_count = PANO_DATA.closed_trades_list.length;
+
+      document.getElementById('kpiOpenPos').innerText = PANO_DATA.kpis.open_positions_count;
+      document.getElementById('kpiClosedWin').innerText = `${PANO_DATA.kpis.closed_trades_count} • %${PANO_DATA.kpis.win_rate_pct}`;
+
+      saveState();
+      renderOpenPositions();
+      renderTradeHistory();
+      showToast(`${pos.asset} pozisyonu kapatıldı ve geçmişe işlendi.`);
+    }
+
+    // MODAL: SYNC & JSON
+    function openSyncModal() {
+      document.getElementById('syncModal').classList.remove('hidden');
+    }
+    function closeSyncModal() {
+      document.getElementById('syncModal').classList.add('hidden');
+    }
+
+    function exportJSON() {
+      const str = JSON.stringify(PANO_DATA, null, 2);
+      const blob = new Blob([str], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `kagit_hesaplar_backup_${Date.now()}.json`;
+      a.click();
+      URL.revokeObjectURL(url);
+      showToast("Veri JSON olarak indirildi.");
+    }
+
+    function copyJSONToClipboard() {
+      const str = JSON.stringify(PANO_DATA, null, 2);
+      navigator.clipboard.writeText(str).then(() => {
+        showToast("JSON panoya kopyalandı!");
+      }).catch(() => {
+        const ta = document.getElementById('importJsonTextarea');
+        ta.value = str;
+        ta.select();
+        document.execCommand('copy');
+        showToast("JSON panoya kopyalandı!");
+      });
+    }
+
+    function importJSONFromTextarea() {
+      const txt = document.getElementById('importJsonTextarea').value.trim();
+      if (!txt) {
+        showToast("Lütfen JSON metni yapıştırın.");
+        return;
+      }
+      try {
+        const parsed = JSON.parse(txt);
+        if (parsed.kpis && parsed.accounts) {
+          PANO_DATA = parsed;
+          saveState();
+          refreshAllUI();
+          closeSyncModal();
+          showToast("Tüm veriler başarıyla güncellendi!");
+        } else {
+          showToast("Geçersiz şema: 'kpis' ve 'accounts' zorunludur.");
+        }
+      } catch(e) {
+        showToast("Geçersiz JSON: " + e.message);
+      }
+    }
+
+    function saveState() {
+      try {
+        localStorage.setItem('kagit_hesaplar_data', JSON.stringify(PANO_DATA));
+      } catch(e) {
+        console.warn("localStorage kaydedilemedi.");
+      }
+    }
+
+    function refreshAllUI() {
+      renderAccountCards();
+      renderScorecards();
+      renderCalendar();
+      renderOpenPositions();
+      renderTradeHistory();
+      renderCoachFindings();
+      renderShadowTable();
+      renderPeriodicReturns();
+      lucide.createIcons();
+    }
+
+    async function loadExternalDataIfAvailable() {
+      try {
+        const res = await fetch('./data.json?t=' + Date.now());
+        if (res.ok) {
+          const json = await res.json();
+          if (json && json.kpis && json.accounts) {
+            PANO_DATA = json;
+            console.log('data.json başarıyla GitHub Pages üzerinden yüklendi.');
+          }
+        }
+      } catch (err) {
+        console.log('Yerel veya statik çalışıyor, dahili PANO_DATA hafızası kullanılıyor.');
+      }
+    }
+
+    // INITIALIZATION ON LOAD
+    window.addEventListener('DOMContentLoaded', async () => {
+      await loadExternalDataIfAvailable();
+      refreshAllUI();
+      initCharts();
+      lucide.createIcons();
+
+      // Bulut Güncelleme Takibi: Her 60 saniyede bir data.json'u kontrol eder
+      setInterval(async () => {
+        try {
+          const res = await fetch('./data.json?t=' + Date.now());
+          if (res.ok) {
+            const json = await res.json();
+            if (json && json.meta && json.meta.last_update !== PANO_DATA.meta.last_update) {
+              PANO_DATA = json;
+              refreshAllUI();
+              showToast('Pano verisi GitHub Actions bulut motorundan güncellendi!');
+            }
+          }
+        } catch(e) {}
+      }, 60000);
+    });
+
+  </script>
+</body>
+</html>
