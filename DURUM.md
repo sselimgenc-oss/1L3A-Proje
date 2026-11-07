@@ -117,6 +117,9 @@ Ana ders: önceki sonuçlar OOS'a bakılarak seçilmiş ve kâr birkaç işlemde
   maliyet ×2, parametre komşuluğu); karar 24'ten kaldırılan yoğunlaşma ölçütünün yerini alır.
 - 2026-11-07: Veri kaynağı sabitlendi: DK_ sembollerinde tf ≥ 1h için her zaman 1h dosyası (dakikalık indirme sürerken
   kaynak kayıyordu; 5m'de eksik günler var). k3_dk ve DK içeren portföy koşuları yeni etiketle (v2) yeniden koşulur.
+- 2026-11-07: Portföy sonuçları: kripto 5/15 karar 24, sağlamlıkta yalnız pf__kesit_ls (sınırda, p=0.03); hepsi evreni
+  1/15 (ibs_donus), sağlamlıkta rastgele kıyastan kaldı. Karar: "hepsi" evreninde OOS 2009'dan başlıyor (yalnız altın
+  varken) → portföy koşularında başlangıç, evrendeki sembollerin çoğunun (≥ %75) verisi olduğu tarihe çekilir; v3 ile tekrar.
 
 ## Kullanıcıyı bekleyen kararlar
 - Scalp: kriptoda walk-forward'ı geçen 0. Karar 11'e göre geçen yoksa scalp ajanı kapanır — TradFi sonuçlarından sonra karar.
