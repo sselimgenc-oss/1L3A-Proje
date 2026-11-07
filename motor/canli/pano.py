@@ -163,68 +163,106 @@ def telegram_metni(veri: dict, sorunlar: list, simdi: datetime) -> str:
 
 # ----------------------------------------------------------------------------------------------- HTML
 CSS = """
-:root{--bg:#f6f7f9;--kart:#fff;--yazi:#16181d;--sessiz:#5d6573;--cizgi:#dfe3ea;--iyi:#12805c;--uyari:#a15c00;--kotu:#c62828;--bilgi:#1f5fbf;--vurgu:#1f5fbf;--bar:#e9edf3}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1115;--kart:#181b21;--yazi:#e8eaef;--sessiz:#9aa3b2;--cizgi:#2a2f3a;--iyi:#3ddc97;--uyari:#f5a524;--kotu:#ff6b6b;--bilgi:#6ea8ff;--vurgu:#6ea8ff;--bar:#262b35}}
-:root[data-theme="dark"]{--bg:#0f1115;--kart:#181b21;--yazi:#e8eaef;--sessiz:#9aa3b2;--cizgi:#2a2f3a;--iyi:#3ddc97;--uyari:#f5a524;--kotu:#ff6b6b;--bilgi:#6ea8ff;--vurgu:#6ea8ff;--bar:#262b35}
+:root{--bg:#0a0a0b;--kart:#111113;--yazi:#e9e9ee;--sessiz:#8a8a94;--cizgi:#25252a;--iyi:#3ddc84;--uyari:#f5d90a;--kotu:#ff5d5d;--bilgi:#5b9dff;--vurgu:#f5a524;--bar:#1c1c21;--yan:#000}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0a0a0b;--kart:#111113;--yazi:#e9e9ee;--sessiz:#8a8a94;--cizgi:#25252a;--iyi:#3ddc84;--uyari:#f5d90a;--kotu:#ff5d5d;--bilgi:#5b9dff;--vurgu:#f5a524;--bar:#1c1c21;--yan:#000}}
+:root[data-theme="dark"]{--bg:#0a0a0b;--kart:#111113;--yazi:#e9e9ee;--sessiz:#8a8a94;--cizgi:#25252a;--iyi:#3ddc84;--uyari:#f5d90a;--kotu:#ff5d5d;--bilgi:#5b9dff;--vurgu:#f5a524;--bar:#1c1c21;--yan:#000}
+:root[data-theme="light"]{--bg:#f1f2f5;--kart:#fff;--yazi:#15171c;--sessiz:#5f6673;--cizgi:#d6d9e0;--iyi:#0d7a4c;--uyari:#8a6a00;--kotu:#c62828;--bilgi:#1f5fbf;--vurgu:#a85f00;--bar:#e6e9ef;--yan:#fff}
 *{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%}
-body{margin:0;background:var(--bg);color:var(--yazi);font:15px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;overflow-wrap:anywhere}
-main{max-width:860px;margin:0 auto;padding:12px 16px 40px}
-h1{font-size:18px;margin:6px 0 2px}h2{font-size:15px;margin:22px 0 8px;color:var(--sessiz);text-transform:uppercase;letter-spacing:.04em}
-.ust{display:flex;justify-content:space-between;align-items:center;gap:8px}
-button{white-space:nowrap;background:var(--kart);color:var(--yazi);border:1px solid var(--cizgi);border-radius:8px;padding:6px 10px;font:inherit}
-.alt{color:var(--sessiz);font-size:13px}
-.uyari{border-radius:10px;padding:10px 12px;margin:8px 0;border:1px solid var(--cizgi);background:var(--kart);border-left-width:6px}
-.uyari.kritik{border-left-color:var(--kotu);background:color-mix(in srgb,var(--kotu) 12%,var(--kart));font-weight:600}
+html{-webkit-text-size-adjust:100%;background:var(--bg)}
+body{margin:0;background:var(--bg);color:var(--yazi);font:13px/1.45 ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;overflow-wrap:anywhere;padding:12px}
+main{max-width:1400px;margin:0 auto;padding-bottom:28px}
+h1{font-size:15px;letter-spacing:.06em;margin:0}
+button{white-space:nowrap;background:var(--kart);color:var(--yazi);border:1px solid var(--cizgi);border-radius:3px;padding:3px 10px;font:inherit;font-size:11px;cursor:pointer}
+button:hover{border-color:var(--vurgu);color:var(--vurgu)}
+.ust{display:flex;justify-content:space-between;align-items:center;gap:8px 14px;flex-wrap:wrap;margin-bottom:10px;padding-bottom:9px;border-bottom:1px solid var(--cizgi)}
+.mk{display:flex;align-items:center;gap:9px}.lg0{background:var(--vurgu);color:#000;font-weight:800;padding:2px 7px;border-radius:3px}
+.un{display:flex;align-items:center;gap:6px 12px;flex-wrap:wrap;font-size:11px}.so{color:var(--sessiz)}
+.rozet{border:1px solid var(--vurgu);border-radius:3px;padding:1px 9px;color:var(--vurgu);font-size:11px;font-weight:700;letter-spacing:.06em}
+.rozet.r-backtest{border-color:var(--bilgi);color:var(--bilgi)}.rozet.r-canli{border-color:var(--kotu);color:var(--kotu)}
+.alt{color:var(--sessiz);font-size:11px}
+.uyari{border-radius:3px;padding:8px 12px;margin:0 0 8px;border:1px solid var(--cizgi);background:var(--kart);border-left-width:4px}
+.uyari.kritik{border-left-color:var(--kotu);background:color-mix(in srgb,var(--kotu) 13%,var(--kart));font-weight:700}
 .uyari.uyari{border-left-color:var(--uyari)}.uyari.bilgi{border-left-color:var(--bilgi)}
-.uyari.bayat-bant{background:var(--kotu);color:#fff;border-color:var(--kotu);font-weight:700;margin:0 0 10px}
-.izgara{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
-@media (min-width:640px){.izgara{grid-template-columns:repeat(4,minmax(0,1fr))}.izgara.u3{grid-template-columns:repeat(3,minmax(0,1fr))}.izgara.serit{grid-template-columns:repeat(3,minmax(0,1fr))}}
-@media (min-width:860px){.izgara.serit{grid-template-columns:repeat(6,minmax(0,1fr))}.serit .d{font-size:16px}}
-.serit{margin-top:10px}.serit .d{font-size:17px}
-.kart{background:var(--kart);border:1px solid var(--cizgi);border-radius:12px;padding:10px 12px;min-width:0}
-.kart .e{font-size:12px;color:var(--sessiz)}.kart .d{font-size:20px;font-weight:650;font-variant-numeric:tabular-nums}
+.uyari.bayat-bant{background:var(--kotu);color:#fff;border-color:var(--kotu);font-weight:800}
 .iyi{color:var(--iyi)}.kotu{color:var(--kotu)}.uyarir{color:var(--uyari)}
-.cubuk{height:8px;background:var(--bar);border-radius:5px;overflow:hidden;margin-top:6px}.cubuk>i{display:block;height:100%;background:var(--vurgu)}
-.cubuk.k>i{background:var(--kotu)}
-.sat{display:flex;justify-content:space-between;gap:10px;padding:6px 0;border-bottom:1px solid var(--cizgi)}
-.sat:last-child{border-bottom:0}.sat b{font-variant-numeric:tabular-nums;text-align:right}.sat b.nw{white-space:nowrap;flex:none;overflow-wrap:normal}
-.kolonlar{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
-.cip{border:1px solid var(--cizgi);border-radius:999px;padding:2px 9px;font-size:12px}
+.izgara{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.izgara.c2{grid-template-columns:repeat(2,minmax(0,1fr))}.izgara.oto{grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}
+@media (min-width:640px){.izgara.c4{grid-template-columns:repeat(4,minmax(0,1fr))}.izgara.oto{grid-template-columns:repeat(auto-fill,minmax(210px,1fr))}}
+.kart{background:var(--kart);border:1px solid var(--cizgi);border-radius:3px;padding:8px 11px;min-width:0}
+.kart .e{font-size:10px;letter-spacing:.09em;color:var(--sessiz);text-transform:uppercase}.kart .d{font-size:18px;font-weight:700;margin:2px 0;font-variant-numeric:tabular-nums}
+.p .kart{background:var(--bg)}
+.serit{gap:1px;background:var(--cizgi);border:1px solid var(--cizgi);margin-bottom:10px}
+.serit .kart{border:0;border-radius:0;background:var(--kart);padding:9px 11px}.serit .d{font-size:17px}
+.cubuk{height:7px;background:var(--bar);border-radius:4px;overflow:hidden;margin:5px 0 4px}.cubuk>i{display:block;height:100%;background:var(--vurgu)}.cubuk.k>i{background:var(--kotu)}
+.sat{display:flex;justify-content:space-between;gap:10px;padding:5px 0;border-bottom:1px solid var(--bar)}
+.sat:last-child{border-bottom:0}.sat>span{color:var(--sessiz)}.sat>span b{color:var(--yazi)}.sat b{font-variant-numeric:tabular-nums;text-align:right}.sat b.nw{white-space:nowrap;flex:none;overflow-wrap:normal}
+.kolonlar{display:flex;flex-wrap:wrap;gap:5px;margin-top:5px}
+.cip{border:1px solid var(--cizgi);border-radius:3px;padding:1px 7px;font-size:11px;white-space:nowrap}
 .cip.iyi{border-color:var(--iyi)}.cip.uyari{border-color:var(--uyari);color:var(--uyari)}.cip.kotu{border-color:var(--kotu);color:var(--kotu);font-weight:700}
-svg{width:100%;height:auto;display:block}
-.cizgi{stroke:var(--vurgu);fill:none;stroke-width:2;vector-effect:non-scaling-stroke}.alan{fill:var(--vurgu);opacity:.12}
-.cizgi.k{stroke:var(--kotu)}.alan.k{fill:var(--kotu);opacity:.16}
-.bi{fill:var(--iyi)}.bk{fill:var(--kotu)}.taban{stroke:var(--sessiz);stroke-width:1;vector-effect:non-scaling-stroke;opacity:.5}
-.is{padding:6px 0;border-bottom:1px solid var(--cizgi);font-size:14px}.is:last-child{border-bottom:0}
-.ic>div{padding:5px 0 5px 14px;border-bottom:1px solid var(--cizgi);position:relative;font-size:14px}.ic>div:last-child{border-bottom:0}.ic>div:before{content:"›";color:var(--vurgu);position:absolute;left:0}
-.tw{overflow-x:auto;-webkit-overflow-scrolling:touch;max-width:100%;border:1px solid var(--cizgi);border-radius:10px;background:var(--kart)}
-table{border-collapse:collapse;width:100%;font-size:13px;font-variant-numeric:tabular-nums}
-th,td{padding:6px 9px;text-align:left;white-space:nowrap;border-bottom:1px solid var(--cizgi)}
-th{font-size:11px;color:var(--sessiz);text-transform:uppercase;letter-spacing:.04em;font-weight:600}
-td.sg,th.sg{text-align:right}tr:last-child td{border-bottom:0}
-.sekme-kok{margin-top:10px;position:relative}
+.ig{display:grid;grid-template-columns:minmax(0,1fr);gap:8px;margin-top:8px}.sag{display:contents}
+.p{background:var(--kart);border:1px solid var(--cizgi);border-radius:3px;min-width:0}
+.pb{font-size:10px;letter-spacing:.09em;color:var(--vurgu);text-transform:uppercase;padding:8px 11px;border-bottom:1px solid var(--cizgi);display:flex;justify-content:space-between;gap:10px}
+.pb span{color:var(--sessiz);text-transform:none;letter-spacing:0;font-size:11px;text-align:right}
+.pi{padding:10px 11px}.pi.duz{padding:0}.pi.duz>.kart{border:0;background:transparent}
+.bol{margin-top:8px}.mr{padding:6px 0;border-bottom:1px solid var(--bar)}.mr:last-child{border-bottom:0}.mr .sat{border:0;padding:0}.mr .cubuk{margin:4px 0 2px}
+svg{display:block;width:100%;height:auto}
+.gk{display:grid;grid-template-columns:auto minmax(0,1fr);column-gap:7px}
+.gk svg{height:130px}.yt{display:flex;flex-direction:column;justify-content:space-between;text-align:right;font-size:10px;color:var(--sessiz);font-variant-numeric:tabular-nums;padding:1px 0}
+.gk .ek{grid-column:2;display:flex;justify-content:space-between;gap:8px;font-size:10px;color:var(--sessiz);margin-top:4px}
+.gk.kz svg{height:110px}
+.izg{stroke:var(--cizgi);stroke-width:1;vector-effect:non-scaling-stroke;opacity:.8}.baz{stroke:var(--sessiz);stroke-width:1;stroke-dasharray:4 3;vector-effect:non-scaling-stroke}
+.cizgi{stroke:var(--vurgu);fill:none;stroke-width:1.8;vector-effect:non-scaling-stroke}.alan{fill:var(--vurgu);opacity:.14}
+.cizgi.k{stroke:var(--kotu)}.alan.k{fill:var(--kotu);opacity:.18}
+.bi{fill:var(--iyi)}.bk{fill:var(--kotu)}.taban{stroke:var(--sessiz);stroke-width:1;vector-effect:non-scaling-stroke;opacity:.6}
+.grlej{margin-top:6px;text-align:center}
+.is{padding:5px 0;border-bottom:1px solid var(--bar)}.is:last-child{border-bottom:0}
+.ic>div{padding:5px 0 5px 14px;border-bottom:1px solid var(--bar);position:relative;font-size:12px}.ic>div:last-child{border-bottom:0}.ic>div:before{content:"›";color:var(--vurgu);position:absolute;left:0}
+.tw{overflow-x:auto;-webkit-overflow-scrolling:touch;max-width:100%;border:1px solid var(--cizgi);border-radius:3px;background:var(--kart)}
+.p .tw{border:0;border-radius:0;background:transparent}.kay{max-height:420px;overflow:auto}.kay>.tw{overflow:visible}.kay th{position:sticky;top:0;z-index:1}
+table{border-collapse:collapse;width:100%;font-size:12px;font-variant-numeric:tabular-nums}
+th,td{padding:6px 10px;text-align:left;white-space:nowrap;border-bottom:1px solid var(--bar)}
+th{font-size:10px;color:var(--sessiz);text-transform:uppercase;letter-spacing:.08em;font-weight:600;background:color-mix(in srgb,var(--bg) 55%,var(--kart))}
+td.sg,th.sg{text-align:right}tbody tr:last-child td{border-bottom:0}tbody tr:hover td{background:color-mix(in srgb,var(--vurgu) 6%,transparent)}
+.sekme-kok{margin-top:2px;position:relative}
 input[name=t]{position:absolute;opacity:0;pointer-events:none}
 .tabs{display:flex;gap:2px;border-bottom:1px solid var(--cizgi);overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:thin}
-.tabs label{flex:0 0 auto;padding:10px 13px;font-size:12px;font-weight:600;letter-spacing:.06em;color:var(--sessiz);cursor:pointer;white-space:nowrap;border-bottom:2px solid transparent}
+.tabs label{flex:0 0 auto;padding:9px 14px 8px;font-size:11px;font-weight:600;letter-spacing:.09em;color:var(--sessiz);cursor:pointer;white-space:nowrap;border-bottom:2px solid transparent}
+.tabs label:hover{color:var(--yazi)}
 .tabs em{font-style:normal;background:var(--bar);border-radius:9px;padding:0 6px;margin-left:4px;color:var(--yazi)}.tabs em.k{background:var(--kotu);color:#fff}
-.sekmeler section{display:none}.sekmeler section>h2:first-child{margin-top:14px}
+.sekmeler section{display:none}
 #t1:checked~.tabs label[for=t1],#t2:checked~.tabs label[for=t2],#t3:checked~.tabs label[for=t3],#t4:checked~.tabs label[for=t4],#t5:checked~.tabs label[for=t5],#t6:checked~.tabs label[for=t6]{color:var(--vurgu);border-bottom-color:var(--vurgu)}
 #t1:focus-visible~.tabs label[for=t1],#t2:focus-visible~.tabs label[for=t2],#t3:focus-visible~.tabs label[for=t3],#t4:focus-visible~.tabs label[for=t4],#t5:focus-visible~.tabs label[for=t5],#t6:focus-visible~.tabs label[for=t6]{outline:2px solid var(--vurgu);outline-offset:-2px}
 #t1:checked~.sekmeler .n1,#t2:checked~.sekmeler .n2,#t3:checked~.sekmeler .n3,#t4:checked~.sekmeler .n4,#t5:checked~.sekmeler .n5,#t6:checked~.sekmeler .n6{display:block}
-details.kd{background:var(--kart);border:1px solid var(--cizgi);border-radius:12px;min-width:0}
-details.kd>summary{cursor:pointer;list-style:none;padding:10px 12px}details.kd>summary::-webkit-details-marker{display:none}
-details.kd>summary:before{content:"▸";float:right;color:var(--sessiz)}details.kd[open]>summary:before{content:"▾"}
-details.kd .govde{padding:0 12px 10px;border-top:1px solid var(--cizgi)}
-details.ince>summary{cursor:pointer;color:var(--vurgu);font-size:13px;padding:6px 0}
-.bol{margin-top:8px}
+details.kd{border-bottom:1px solid var(--bar);min-width:0}details.kd:last-child{border-bottom:0}
+details.kd>summary{cursor:pointer;list-style:none;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px 10px;align-items:start;padding:10px 12px}details.kd>summary::-webkit-details-marker{display:none}
+details.kd>summary:hover{background:color-mix(in srgb,var(--vurgu) 6%,transparent)}
+details.kd>summary [data-e]:before{content:attr(data-e);display:block;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--sessiz)}
+.ad{grid-column:1/-1}.ad:before{content:"▸";color:var(--sessiz);display:inline-block;width:14px}details.kd[open] .ad:before{content:"▾"}
+.sh{display:none}
+details.kd .govde{padding:6px 12px 12px;background:var(--bg);border-top:1px solid var(--cizgi)}.govde .alt{margin-top:4px}.govde .sat>span{flex:0 0 auto;max-width:48%;overflow-wrap:normal}
+details.ince>summary{cursor:pointer;color:var(--vurgu);font-size:11px;padding:6px 0}
+.ayak{margin:14px 0 4px}
+@media (min-width:900px){
+body{padding:16px 20px}
+.serit{grid-template-columns:repeat(6,minmax(0,1fr))}.serit .d{font-size:20px}
+.ig{grid-template-columns:repeat(3,minmax(0,1fr))}.g2{grid-column:span 2}.g3{grid-column:1/-1}
+.sag{display:grid;gap:8px;grid-column:3;grid-row:1 / span 2;align-content:start;min-width:0}.sag.s1{grid-row:auto}
+.p.yuk{display:flex;flex-direction:column}.yuk>.pi{flex:1;display:flex;flex-direction:column}.yuk .gk{flex:1;grid-template-rows:minmax(0,1fr) auto}.yuk .gk svg{height:100%;min-height:210px;max-height:340px}
+.gk svg{height:210px}.gk.kz svg{height:150px}.gk.dus svg{height:150px}
+.stw{min-width:1020px}
+.sh,details.kd>summary{display:grid;grid-template-columns:minmax(270px,2.6fr) minmax(70px,.9fr) minmax(110px,1.2fr) minmax(110px,1.3fr) minmax(48px,.55fr) minmax(64px,.75fr) minmax(48px,.55fr) minmax(190px,2.2fr) minmax(40px,.5fr);gap:10px;align-items:center;padding:9px 12px}
+.sh{font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--sessiz);border-bottom:1px solid var(--cizgi);background:color-mix(in srgb,var(--bg) 55%,var(--kart))}
+details.kd>summary [data-e]:before{display:none}.ad{grid-column:auto}
+.stw .sg{text-align:right}
+.govde{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 32px}.govde .alt{grid-column:1/-1}
+}
 """
 
 JS = """
 var K='1l3a-sekme';try{var s=localStorage.getItem(K),r=s&&/^t[1-6]$/.test(s)&&document.getElementById(s);if(r)r.checked=true}catch(e){}
 Array.prototype.forEach.call(document.querySelectorAll('input[name=t]'),function(i){i.addEventListener('change',function(){try{localStorage.setItem(K,i.id)}catch(e){}})});
 (function(){var k='1l3a-tema',h=document.documentElement;try{var t=localStorage.getItem(k);if(t)h.setAttribute('data-theme',t)}catch(e){}
-document.getElementById('tema').addEventListener('click',function(){var m=h.getAttribute('data-theme');var koyu=m?m==='dark':window.matchMedia('(prefers-color-scheme: dark)').matches;var y=koyu?'light':'dark';h.setAttribute('data-theme',y);try{localStorage.setItem(k,y)}catch(e){}})})();
+document.getElementById('tema').addEventListener('click',function(){var m=h.getAttribute('data-theme');var koyu=m?m==='dark':true;var y=koyu?'light':'dark';h.setAttribute('data-theme',y);try{localStorage.setItem(k,y)}catch(e){}})})();
 (function(){var b=document.getElementById('bayat');if(!b)return;var t=Date.parse(b.getAttribute('data-zaman')),e=Number(b.getAttribute('data-esik-dk'));
 if(!isFinite(t)||!isFinite(e))return;var dk=Math.floor((Date.now()-t)/60000);if(dk>e){var x=document.getElementById('bayat-dk');if(x)x.textContent=String(dk);b.hidden=false}})();
 """
@@ -266,6 +304,17 @@ def _isaret_sinifi(x) -> str:
     return "" if v == 0 else ("iyi" if v > 0 else "kotu")
 
 
+def _guvenli(f):
+    """Ek veri bölümü beklenmedik biçimde gelirse sayfa kırılmaz: o bölüm 'biçim uyumsuz' der, değer uydurulmaz."""
+    def sar(*a, **k):
+        try:
+            return f(*a, **k)
+        except (KeyError, TypeError, ValueError, ArithmeticError, AttributeError, IndexError):
+            return '<div class="kart alt">Bu bölümün verisi beklenen biçimde değil; gösterilemiyor.</div>'
+    return sar
+
+
+
 def _kutu(etiket: str, deger: str, sinif: str = "", alt: str = "") -> str:
     return (f'<div class="kart"><div class="e">{esc(etiket)}</div><div class="d {sinif}">{esc(deger)}</div>'
             + (f'<div class="alt">{esc(alt)}</div>' if alt else "") + "</div>")
@@ -280,11 +329,35 @@ def _kullanim_cubugu(ad: str, deger: Optional[float], limit_metin: str, kullanim
             f'<div class="cubuk {sinif}"><i style="width:{gen:.1f}%"></i></div><div class="alt">{esc(kul)}</div></div>')
 
 
-def _tablo(basliklar: list, satirlar: list, sag: tuple = ()) -> str:
+def _kullanim_satiri(ad: str, limit_metin: str, kullanim: Optional[float], deger_metin: str, alt_metin: Optional[str] = None) -> str:
+    """Panel içi kompakt kullanım satırı (kart değil): ad, değer / limit, çubuk, kullanım yüzdesi."""
+    gen = 0.0 if kullanim is None else max(0.0, min(1.0, kullanim)) * 100
+    sinif = "k" if kullanim is not None and kullanim >= 0.8 else ""
+    kul = alt_metin if alt_metin is not None else ("ölçülmedi" if kullanim is None else f"kullanım {f_yuzde(kullanim, ondalik=1)}")
+    return (f'<div class="mr"><div class="sat"><span>{esc(ad)} <span class="alt">· {esc(kul)}</span></span><b>{esc(deger_metin)} <span class="alt">/ {esc(limit_metin)}</span></b></div>'
+            f'<div class="cubuk {sinif}"><i style="width:{gen:.1f}%"></i></div></div>')
+
+
+def _tablo(basliklar: list, satirlar: list, sag: tuple = (), sinif: str = "") -> str:
     """Kendi kutusunda yatay kayan tablo. Hücreler HAZIR (kaçışlı) HTML'dir; `sag`: sağa hizalı sütun numaraları."""
     b = "".join(f'<th{" class=sg" if i in sag else ""}>{esc(x)}</th>' for i, x in enumerate(basliklar))
     r = "".join("<tr>" + "".join(f'<td{" class=sg" if i in sag else ""}>{c}</td>' for i, c in enumerate(s)) + "</tr>" for s in satirlar)
-    return f'<div class="tw"><table><thead><tr>{b}</tr></thead><tbody>{r}</tbody></table></div>'
+    t = f'<div class="tw"><table><thead><tr>{b}</tr></thead><tbody>{r}</tbody></table></div>'
+    return f'<div class="{sinif}">{t}</div>' if sinif else t
+
+
+def _p(baslik: str, icerik: str, sag: str = "", sinif: str = "", duz: bool = False) -> str:
+    """Panel: başlık şeridi (.pb) + içerik (.pi). `icerik` HAZIR HTML'dir; `sag`: başlığın sağındaki sönük not."""
+    return (f'<div class="p{" " + sinif if sinif else ""}"><div class="pb">{esc(baslik)}' + (f"<span>{esc(sag)}</span>" if sag else "")
+            + f'</div><div class="pi{" duz" if duz else ""}">{icerik}</div></div>')
+
+
+def _ig(icerik: str) -> str:
+    return f'<div class="ig">{icerik}</div>'
+
+
+def _sag(icerik: str, sinif: str = "") -> str:
+    return f'<div class="sag{" " + sinif if sinif else ""}">{icerik}</div>'
 
 
 def _neden(o: dict, alan: str) -> str:
@@ -293,54 +366,74 @@ def _neden(o: dict, alan: str) -> str:
 
 
 # ----------------------------------------------------------------------------------------------- grafikler (inline SVG; ölçekleme dışında hesap yok)
-def _egri(gecmis: dict) -> str:
+def _eksen(ust: str, alt: str, svg: str, x0: str, x1: str, sinif: str = "") -> str:
+    """Grafik kutusu: solda y ekseni uç değerleri (dosyadaki değerler), altta ilk/son tarih."""
+    return (f'<div class="gk {sinif}"><div class="yt"><span>{esc(ust)}</span><span>{esc(alt)}</span></div>{svg}'
+            f'<span></span><div class="ek"><span>{esc(x0)}</span><span>{esc(x1)}</span></div></div>')
+
+
+@_guvenli
+def _egri(gecmis: dict, baz: Optional[str] = None) -> str:
+    """Özsermaye eğrisi: alan grafiği + min/max etiketi + (varsa) başlangıç baz çizgisi. Yalnız çizim ölçeği."""
     n = gecmis["noktalar"]
     if len(n) < 2:
         return '<div class="alt">Özsermaye geçmişi için yeterli nokta yok.</div>'
-    ys = [float(x["ozsermaye"]) for x in n]                                   # yalnız çizim ölçeği
-    lo, hi = min(ys), max(ys)
+    cift = [(float(x["ozsermaye"]), x["ozsermaye"]) for x in n]
+    havuz = cift + ([(float(baz), baz)] if baz is not None else [])
+    (hi, hi_s), (lo, lo_s) = max(havuz, key=lambda c: c[0]), min(havuz, key=lambda c: c[0])
     ar = (hi - lo) or 1.0
-    pts = " ".join(f"{i * 300 / (len(ys) - 1):.1f},{58 - (y - lo) / ar * 52:.1f}" for i, y in enumerate(ys))
-    return (f'<svg viewBox="0 0 300 64" preserveAspectRatio="none" role="img" aria-label="özsermaye eğrisi">'
-            f'<polygon class="alan" points="0,64 {pts} 300,64"/><polyline class="cizgi" points="{pts}"/></svg>'
-            f'<div class="sat"><span class="alt">{esc(n[0]["gun"])}</span><span class="alt">{esc(n[-1]["gun"])}</span></div>'
-            f'<div class="sat"><span class="alt">ilk {esc(f_para(n[0]["ozsermaye"]))}</span><span class="alt">son {esc(f_para(n[-1]["ozsermaye"]))}</span></div>')
+    y = lambda v: 76 - (v - lo) / ar * 72                                       # noqa: E731
+    pts = " ".join(f"{i * 300 / (len(cift) - 1):.1f},{y(v):.1f}" for i, (v, _) in enumerate(cift))
+    izgara = "".join(f'<line class="izg" x1="0" y1="{yy}" x2="300" y2="{yy}"/>' for yy in (4, 40, 76))
+    baz_c = f'<line class="baz" x1="0" y1="{y(float(baz)):.1f}" x2="300" y2="{y(float(baz)):.1f}"/>' if baz is not None else ""
+    svg = (f'<svg viewBox="0 0 300 80" preserveAspectRatio="none" role="img" aria-label="özsermaye eğrisi">{izgara}'
+           f'<polygon class="alan" points="0,80 {pts} 300,80"/>{baz_c}<polyline class="cizgi" points="{pts}"/></svg>')
+    return (_eksen(f_para(hi_s), f_para(lo_s), svg, n[0]["gun"], n[-1]["gun"])
+            + f'<div class="alt grlej">ilk {esc(f_para(n[0]["ozsermaye"]))} · son {esc(f_para(n[-1]["ozsermaye"]))}'
+            + (f' · kesikli çizgi: başlangıç {esc(f_para(baz))}' if baz is not None else "") + "</div>")
 
 
+@_guvenli
 def _dusus_grafigi(seri: list) -> str:
     """dusus_serisi [{gun, dusus}] -> aşağı sarkan alan grafiği (0 üstte; dosyadaki değerler aynen)."""
     if len(seri) < 2:
         return '<div class="alt">Zirveden düşüş serisi için yeterli nokta yok.</div>'
     ys = [float(x["dusus"]) for x in seri]
     tepe = max(ys) or 1.0                                                      # yalnız çizim ölçeği
-    pts = " ".join(f"{i * 300 / (len(ys) - 1):.1f},{3 + y / tepe * 54:.1f}" for i, y in enumerate(ys))
-    return (f'<svg viewBox="0 0 300 64" preserveAspectRatio="none" role="img" aria-label="zirveden düşüş">'
-            f'<polygon class="alan k" points="0,3 {pts} 300,3"/><polyline class="cizgi k" points="{pts}"/>'
-            f'<line class="taban" x1="0" y1="3" x2="300" y2="3"/></svg>'
-            f'<div class="sat"><span class="alt">{esc(seri[0]["gun"])}</span><span class="alt">{esc(seri[-1]["gun"])}</span></div>'
-            f'<div class="sat"><span class="alt">ilk {esc(f_yuzde(seri[0]["dusus"]))}</span><span class="alt">son {esc(f_yuzde(seri[-1]["dusus"]))}</span></div>')
+    pts = " ".join(f"{i * 300 / (len(ys) - 1):.1f},{4 + v / tepe * 72:.1f}" for i, v in enumerate(ys))
+    izgara = "".join(f'<line class="izg" x1="0" y1="{yy}" x2="300" y2="{yy}"/>' for yy in (40, 76))
+    svg = (f'<svg viewBox="0 0 300 80" preserveAspectRatio="none" role="img" aria-label="zirveden düşüş">{izgara}'
+           f'<polygon class="alan k" points="0,4 {pts} 300,4"/><polyline class="cizgi k" points="{pts}"/>'
+           f'<line class="taban" x1="0" y1="4" x2="300" y2="4"/></svg>')
+    return (_eksen(f_yuzde(0.0), f_yuzde(tepe), svg, seri[0]["gun"], seri[-1]["gun"], "dus")
+            + f'<div class="alt grlej">ilk {esc(f_yuzde(seri[0]["dusus"]))} · son {esc(f_yuzde(seri[-1]["dusus"]))}</div>')
 
 
+@_guvenli
 def _kz_grafigi(seri: list) -> str:
     """gunluk_kz [{gun, pnl, getiri}] -> günlük K/Z çubukları (yeşil kâr / kırmızı zarar) + ayrıntı listesi (<details>)."""
     if not seri:
         return '<div class="alt">Günlük K/Z serisi boş.</div>'
     ys = [float(x["pnl"]) for x in seri]
-    tepe = max(abs(y) for y in ys) or 1.0                                      # yalnız çizim ölçeği
-    gen = 300 / len(ys)
+    hi, lo = max(max(ys), 0.0), min(min(ys), 0.0)                              # yalnız çizim ölçeği (sıfır çizgisi dahil)
+    ar = (hi - lo) or 1.0
+    y = lambda v: 4 + (hi - v) / ar * 72                                       # noqa: E731
+    gen = 300 / max(len(ys), 10)                                               # tek çubuk ekranı kaplamasın
     cubuklar = []
-    for i, (x, y) in enumerate(zip(seri, ys)):
-        yuks = abs(y) / tepe * 36
-        yer = 40 - yuks if y >= 0 else 40
-        cubuklar.append(f'<rect class="{"bi" if y >= 0 else "bk"}" x="{i * gen + gen * 0.12:.2f}" y="{yer:.2f}" width="{gen * 0.76:.2f}" '
-                        f'height="{yuks:.2f}"><title>{esc(x["gun"])}: {esc(f_para(x["pnl"], True))}</title></rect>')
+    for i, (x, v) in enumerate(zip(seri, ys)):
+        ust, alt = y(max(v, 0.0)), y(min(v, 0.0))
+        cubuklar.append(f'<rect class="{"bi" if v >= 0 else "bk"}" x="{i * gen + gen * 0.12:.2f}" y="{ust:.2f}" width="{gen * 0.76:.2f}" '
+                        f'height="{max(alt - ust, 0.8):.2f}"><title>{esc(x["gun"])}: {esc(f_para(x["pnl"], True))}</title></rect>')
+    en_ust = f_para(seri[ys.index(hi)]["pnl"], True) if hi > 0 else f_para("0")
+    en_alt = f_para(seri[ys.index(lo)]["pnl"], True) if lo < 0 else f_para("0")
+    svg = (f'<svg viewBox="0 0 300 80" preserveAspectRatio="none" role="img" aria-label="günlük K/Z">'
+           f'<line class="izg" x1="0" y1="4" x2="300" y2="4"/><line class="izg" x1="0" y1="76" x2="300" y2="76"/>'
+           f'<line class="taban" x1="0" y1="{y(0.0):.2f}" x2="300" y2="{y(0.0):.2f}"/>{"".join(cubuklar)}</svg>')
     satir = [[esc(x["gun"]), _h(f_para(x["pnl"], True), _isaret_sinifi(x["pnl"])), _h(f_yuzde(x.get("getiri"), True), _isaret_sinifi(x.get("getiri")))]
              for x in reversed(seri)]
-    return (f'<svg viewBox="0 0 300 80" preserveAspectRatio="none" role="img" aria-label="günlük K/Z">'
-            f'<line class="taban" x1="0" y1="40" x2="300" y2="40"/>{"".join(cubuklar)}</svg>'
-            f'<div class="sat"><span class="alt">{esc(seri[0]["gun"])}</span><span class="alt">{esc(seri[-1]["gun"])}</span></div>'
-            f'<div class="sat"><span class="alt">son gün</span><b class="{_isaret_sinifi(seri[-1]["pnl"])}">{esc(f_para(seri[-1]["pnl"], True))}</b></div>'
-            f'<details class="ince"><summary>Günlük değerler ({len(seri)} gün)</summary>{_tablo(["Gün", "K/Z", "Getiri"], satir, sag=(1, 2))}</details>')
+    return (_eksen(en_ust, en_alt, svg, seri[0]["gun"], seri[-1]["gun"], "kz")
+            + f'<div class="sat"><span class="alt">son gün</span><b class="{_isaret_sinifi(seri[-1]["pnl"])}">{esc(f_para(seri[-1]["pnl"], True))}</b></div>'
+            f'<details class="ince"><summary>Günlük değerler ({len(seri)} gün)</summary>{_tablo(["Gün", "K/Z", "Getiri"], satir, sag=(1, 2), sinif="kay")}</details>')
 
 
 # ----------------------------------------------------------------------------------------------- bölümler
@@ -348,10 +441,6 @@ def _cip(etiket: str, b: dict) -> str:
     n = b["net_getiri"]
     sev = BANT_SEVIYE[n["bant"]]
     return f'<span class="cip {sev}">{esc(etiket)} net {esc(f_yuzde(n["deger"], True))} · {esc(BANT_ADI[n["bant"]])}</span>'
-
-
-def _bolum(h2: str, icerik: str) -> str:
-    return f"<h2>{esc(h2)}</h2>{icerik}"
 
 
 def _veri_yok(dosya: str) -> str:
@@ -364,16 +453,6 @@ def _ek_yok(dosya: str) -> str:
 
 def _sirali(b: dict):
     return sorted(b.items(), key=lambda kv: int(kv[0]))
-
-
-def _guvenli(f):
-    """Ek veri bölümü beklenmedik biçimde gelirse sayfa kırılmaz: o bölüm 'biçim uyumsuz' der, değer uydurulmaz."""
-    def sar(*a, **k):
-        try:
-            return f(*a, **k)
-        except (KeyError, TypeError, ValueError, ArithmeticError, AttributeError, IndexError):
-            return '<div class="kart alt">Bu bölümün verisi beklenen biçimde değil; gösterilemiyor.</div>'
-    return sar
 
 
 def _poz_satiri(p: dict) -> str:
@@ -393,18 +472,21 @@ def _poz_satiri(p: dict) -> str:
 
 @_guvenli
 def _strateji_html(x: dict) -> str:
-    """Strateji kartı: özet satırı + dokununca açılan <details> (JS gerekmez)."""
+    """Strateji satırı: tablo görünümlü özet satırı + tıklayınca açılan <details> (JS gerekmez; mobilde kart gibi yığılır)."""
     b = x["beklenti"]
-    ust = [f'<b>{esc(kisa_kimlik(x["kimlik"]))}</b>',
-           f'<div class="alt">{esc(x["ajan"])} · kol: {esc(x["kol"])}'
-           + (f' · kol payı {esc(f_yuzde(x["kol_payi"], ondalik=0))}' if x.get("kol_payi") is not None else "") + "</div>",
-           _sat("Özsermaye katkısı", f"{f_para(x['ozsermaye_katkisi'], True)} ({f_yuzde(x['katki_getiri'], True)})", _isaret_sinifi(x["katki_getiri"])),
-           _sat("İşlem · kazanma oranı", f"{x['islem_sayisi']} · {f_yuzde(x['kazanma_orani'], ondalik=1)}"),
-           '<div class="kolonlar">' + "".join(_cip(f"{hf} hf", v) for hf, v in _sirali(b)) + "</div>"]
-    if x.get("durum") and x["durum"] != "calisiyor":
-        ust.append(f'<div class="kolonlar"><span class="cip uyari">{esc(x["durum"])}</span></div>')
-    g = []
     perf = x.get("performans")
+    kol = esc(x["kol"]) + (f' · {esc(f_yuzde(x["kol_payi"], ondalik=0))}' if x.get("kol_payi") is not None else "")
+    durum = f' <span class="cip uyari">{esc(x["durum"])}</span>' if x.get("durum") and x["durum"] != "calisiyor" else ""
+    konum = "".join(_cip(f"{hf} hf", v) for hf, v in _sirali(b)) or '<span class="alt">—</span>'
+    ust = (f'<span class="ad"><b>{esc(kisa_kimlik(x["kimlik"]))}</b>{durum}</span>'
+           f'<span class="h" data-e="Stil">{esc(x["ajan"])}</span><span class="h" data-e="Kol">{kol}</span>'
+           f'<span class="h sg {_isaret_sinifi(x["katki_getiri"])}" data-e="Katkı">{esc(f_para(x["ozsermaye_katkisi"], True))} <span class="alt">({esc(f_yuzde(x["katki_getiri"], True))})</span></span>'
+           f'<span class="h sg" data-e="İşlem">{esc(str(x["islem_sayisi"]))}</span>'
+           f'<span class="h sg" data-e="Kazanma">{esc(f_yuzde(x["kazanma_orani"], ondalik=1))}</span>'
+           f'<span class="h sg" data-e="PF">{esc(f_sayi(perf["pf"]) if perf else "—")}</span>'
+           f'<span class="h" data-e="Beklenti konumu"><span class="kolonlar" style="margin:0">{konum}</span></span>'
+           f'<span class="h sg" data-e="Açık">{len(x["acik_pozisyonlar"])}</span>')
+    g = []
     if perf:
         g.append(_sat("Ort. kâr / ort. zarar", f"{f_para(perf['ort_kar'], True)} / {f_para(perf['ort_zarar'], True)}"))
         g.append(_sat("Net · PF", f"{f_para(perf['net'], True)} · {f_sayi(perf['pf'])}", _isaret_sinifi(perf["net"])))
@@ -423,7 +505,7 @@ def _strateji_html(x: dict) -> str:
         n, m = v["net_getiri"], v["max_dusus"]
         g.append(f'<div class="alt">{esc(hf)} hf aralık (net %5/%50/%95): {esc(f_yuzde(n["p05"], True))} / {esc(f_yuzde(n["p50"], True))} / {esc(f_yuzde(n["p95"], True))}'
                  f' · düşüş {esc(f_yuzde(m["deger"]))} (%95: {esc(f_yuzde(m["p95"]))})</div>')
-    return f'<details class="kd"><summary>{"".join(ust)}</summary><div class="govde">{"".join(g)}</div></details>'
+    return f'<details class="kd"><summary>{ust}</summary><div class="govde">{"".join(g)}</div></details>'
 
 
 SEKMELER = (("t1", "ÖZET"), ("t2", "STRATEJİLER"), ("t3", "POZİSYON"), ("t4", "İŞLEMLER"), ("t5", "RİSK"), ("t6", "SAĞLIK"))
@@ -448,47 +530,74 @@ def _serit(oz: dict, mr) -> str:
 
 
 @_guvenli
-def _ozet_grafikler(oz: dict) -> str:
+def _risk_payi(oz: dict) -> str:
+    r = oz["risk"]
+    gk, kl, ks, ar = r["gunluk_kayip"], r["kaldirac"], r["kill_switch"], r["acik_stop_riski"]
+    return (_kullanim_satiri("Günlük kayıp", f_yuzde(gk["limit"], ondalik=0), gk["kullanim"], f_yuzde(gk["deger"]))
+            + _kullanim_satiri("Kaldıraç", f_sayi(kl["limit"], 1) + "x", kl["kullanim"], f_sayi(kl["deger"]) + ("x" if kl["deger"] is not None else ""))
+            + _kullanim_satiri("Açık stop riski", f_yuzde(ar["limit"], ondalik=0), ar["kullanim"], f_yuzde(ar["deger"]))
+            + _kullanim_satiri("Kill switch (zirveden düşüş)", f_yuzde(ks["limit"], ondalik=0), None, f_yuzde(ks["dusus"]),
+                               alt_metin=f"mesafe {f_yuzde(ks['mesafe'])}" + (" — TETİKLENDİ" if ks["tetiklendi"] else "")))
+
+
+@_guvenli
+def _saglik_ozet(sg: dict) -> str:
+    sv = sg["servis"]
+    g = [_sat("Durum", sg["durum"], "iyi" if sg["durum"] == "ok" else "kotu"), _sat("Son çalışma (TSİ)", tsi(sg["son_calisma"])),
+         _sat("Servis", {True: "çalışıyor", False: "ÇALIŞMIYOR", None: "yok (backtest)"}[sv["calisiyor"]], "kotu" if sv["calisiyor"] is False else "")]
+    for v in sg["veri"][:4]:
+        g.append(_sat(f"{v['sembol']} {v['tf']}", f"{v['bayatlik_dk']} dk" + (" · BAYAT" if v["bayat"] else ""), "kotu" if v["bayat"] else ""))
+    if len(sg["veri"]) > 4:
+        g.append(f'<div class="alt">+{len(sg["veri"]) - 4} veri akışı daha: SAĞLIK sekmesi</div>')
+    return "".join(g)
+
+
+@_guvenli
+def _beklenti_tablosu(st: dict) -> str:
+    satir = []
+    for hf, b in _sirali(st["set"]["beklenti"]):
+        n, m = b["net_getiri"], b["max_dusus"]
+        satir.append([esc(f"{hf} hf"), _h(f_yuzde(n["deger"], True), _isaret_sinifi(n["deger"])), f'<span class="cip {BANT_SEVIYE[n["bant"]]}">{esc(BANT_ADI[n["bant"]])}</span>',
+                      esc(f_yuzde(n["p05"], True)), esc(f_yuzde(n["p50"], True)), esc(f_yuzde(n["p95"], True)),
+                      esc(f_yuzde(m["deger"])), esc(f_yuzde(m["p95"]))])
+    if not satir:
+        return '<div class="alt" style="padding:10px 11px">Beklenti aralığı kaydı yok (pencere henüz dolmamış olabilir).</div>'
+    return _tablo(["Pencere", "Net getiri", "Konum", "Net %5", "Net %50", "Net %95", "Düşüş", "Alarm üstü (%95)"], satir, sag=(1, 3, 4, 5, 6, 7))
+
+
+def _sekme_ozet(oz, st, gc, ic, sg) -> str:
+    if not oz:
+        return _veri_yok("ozet.json")
     ds, kz = oz.get("dusus_serisi"), oz.get("gunluk_kz")
     yok = lambda a: f'<div class="alt">Veri yok: {a} ozet.json içinde yok.</div>'          # noqa: E731
-    return (_bolum("Zirveden düşüş", '<div class="kart">' + (_dusus_grafigi(ds) if ds is not None else yok("dusus_serisi")) + "</div>")
-            + _bolum("Günlük K/Z", '<div class="kart">' + (_kz_grafigi(kz) if kz is not None else yok("gunluk_kz")) + "</div>"))
+    hesap = ('<div class="izgara c4">' + _kutu("Max düşüş", f_yuzde(oz["max_dusus"])) + _kutu("Başlangıç", f_para(oz["baslangic_ozsermaye"]))
+             + _kutu("Zirve özsermaye", f_para(oz["zirve_ozsermaye"])) + _kutu("Kapanan işlem", str(oz["sayaclar"]["kapanan_islem"])) + "</div>")
+    egri = _egri(gc, oz["baslangic_ozsermaye"]) if gc else _veri_yok("ozsermaye_gecmisi.json")
+    g = [_p("Özsermaye eğrisi", egri + '<div class="bol">' + hesap + "</div>", f_para(oz["ozsermaye"]), "g2 yuk"),
+         _sag(_p("Risk payı", _risk_payi(oz), "sınıra göre") + _p("Sağlık", _saglik_ozet(sg) if sg else _ek_yok("saglik.json"), sg["durum"] if sg else ""), "s1"),
+         _p("Zirveden düşüş", _dusus_grafigi(ds) if ds is not None else yok("dusus_serisi"), f_yuzde(oz["zirveden_dusus"])),
+         _p("Günlük K/Z", _kz_grafigi(kz) if kz is not None else yok("gunluk_kz"), f_para(kz[-1]["pnl"], True) if kz else ""),
+         _p("İçgörüler", _icgoruler(ic))]
+    g.append(_p("Beklenti aralığına göre konum", _beklenti_tablosu(st) if st else _veri_yok("stratejiler.json"), "SET (tüm stratejiler)", "g3", duz=bool(st)))
+    return _ig("".join(g))
 
 
 @_guvenli
 def _icgoruler(ic) -> str:
     if ic is None:
-        return _bolum("İçgörüler", _ek_yok("icgoruler.json"))
+        return _ek_yok("icgoruler.json")
     c = ic["cumleler"]
-    return _bolum("İçgörüler", '<div class="kart ic">' + ("".join(f"<div>{esc(x)}</div>" for x in c) if c else '<div class="alt">İçgörü yok.</div>') + "</div>")
-
-
-def _sekme_ozet(oz, st, gc, ic) -> str:
-    if not oz:
-        return _veri_yok("ozet.json")
-    g = [_bolum("Hesap", '<div class="izgara">'
-                + _kutu("Max düşüş", f_yuzde(oz["max_dusus"])) + _kutu("Başlangıç", f_para(oz["baslangic_ozsermaye"]))
-                + _kutu("Zirve özsermaye", f_para(oz["zirve_ozsermaye"])) + _kutu("Kapanan işlem", str(oz["sayaclar"]["kapanan_islem"]))
-                + "</div>")]
-    if gc:
-        g.append('<div class="kart" style="margin-top:8px">' + _egri(gc) + "</div>")
-    g.append(_ozet_grafikler(oz))
-    g.append(_icgoruler(ic))
-    if st:
-        g.append(_bolum("Beklenti aralığına göre konum", '<div class="kart"><b>SET (tüm stratejiler)</b><div class="kolonlar">'
-                        + "".join(_cip(f"{hf} hf", b) for hf, b in _sirali(st["set"]["beklenti"])) + "</div>"
-                        + "".join(f'<div class="alt">{esc(hf)} hf: net %5/%50/%95 {esc(f_yuzde(b["net_getiri"]["p05"], True))} / {esc(f_yuzde(b["net_getiri"]["p50"], True))} / {esc(f_yuzde(b["net_getiri"]["p95"], True))}'
-                                  f' · düşüş {esc(f_yuzde(b["max_dusus"]["deger"]))} (alarm üstü {esc(f_yuzde(b["max_dusus"]["p95"]))})</div>'
-                                  for hf, b in _sirali(st["set"]["beklenti"])) + "</div>"))
-    else:
-        g.append(_veri_yok("stratejiler.json"))
-    return "".join(g)
+    return '<div class="ic">' + ("".join(f"<div>{esc(x)}</div>" for x in c) if c else '<div class="alt">İçgörü yok.</div>') + "</div>"
 
 
 def _sekme_stratejiler(st) -> str:
     if not st:
         return _veri_yok("stratejiler.json")
-    return _bolum("Stratejiler (dokun: ayrıntı)", '<div style="display:grid;gap:8px">' + "".join(_strateji_html(x) for x in st["stratejiler"]) + "</div>")
+    bas = ["Strateji", "Stil", "Kol", "Katkı", "İşlem", "Kazanma", "PF", "Beklenti konumu", "Açık"]
+    sag = (3, 4, 5, 6, 8)
+    sh = '<div class="sh">' + "".join(f'<span{" class=sg" if i in sag else ""}>{esc(x)}</span>' for i, x in enumerate(bas)) + "</div>"
+    tablo = f'<div class="tw"><div class="stw">{sh}{"".join(_strateji_html(x) for x in st["stratejiler"])}</div></div>'
+    return _ig(_p(f"Stratejiler ({len(st['stratejiler'])})", tablo, "satıra dokun / tıkla: ayrıntı", "g3", duz=True))
 
 
 @_guvenli
@@ -512,35 +621,43 @@ def _poz_tablosu_stratejiden(st: dict) -> str:
 
 
 @_guvenli
-def _maruziyet_html(mr: dict, oz: dict) -> str:
+def _maruziyet_sag(mr: dict, oz: dict) -> str:
+    """Pozisyon sekmesi sağ kolonu: maruziyet kartları + sembol başına para dağılımı."""
     ar = mr["acik_stop_riski"]
     kul = oz["risk"]["acik_stop_riski"].get("kullanim")
-    g = ['<div class="izgara u3">'
-         + _kutu("Brüt nominal", f_para(mr["toplam_brut_nominal"])) + _kutu("Net nominal", f_para(mr["toplam_net_nominal"], True))
-         + _kutu("Kaldıraç", f_sayi(mr["kaldirac"]) + ("x" if mr["kaldirac"] is not None else ""))
-         + _kutu("Kullanılan teminat", f_para(mr["kullanilan_teminat"]), "", mr.get("teminat_notu") or "")
-         + _kullanim_cubugu("Açık stop riski", ar.get("oran"), f_yuzde(ar.get("limit"), ondalik=0), kul, f"{f_para(ar['deger'])} ({f_yuzde(ar.get('oran'))})")
-         + "</div>"]
+    kartlar = ('<div class="izgara c2">'
+               + _kutu("Brüt nominal", f_para(mr["toplam_brut_nominal"])) + _kutu("Net nominal", f_para(mr["toplam_net_nominal"], True))
+               + _kutu("Kaldıraç", f_sayi(mr["kaldirac"]) + ("x" if mr["kaldirac"] is not None else ""))
+               + _kutu("Kullanılan teminat", f_para(mr["kullanilan_teminat"]), "", mr.get("teminat_notu") or "")
+               + "</div>"
+               + '<div class="bol">' + _kullanim_cubugu("Açık stop riski", ar.get("oran"), f_yuzde(ar.get("limit"), ondalik=0), kul,
+                                                        f"{f_para(ar['deger'])} ({f_yuzde(ar.get('oran'))})") + "</div>")
+    g = [_p("Maruziyet", kartlar)]
     sem = mr["semboller"]
     if sem:
         enb = max([float(s["brut_oran"]) for s in sem if s.get("brut_oran") is not None] or [0.0]) or 1.0     # yalnız çubuk ölçeği
         satir = []
         for s in sem:
             gen = 0.0 if s.get("brut_oran") is None else float(s["brut_oran"]) / enb * 100
-            satir.append(f'<div class="bol"><div class="sat"><span><b>{esc(s["sembol"])}</b></span><b>brüt {esc(f_para(s["brut_nominal"]))} · kasanın {esc(f_yuzde(s.get("brut_oran")))}</b></div>'
+            satir.append(f'<div class="mr"><div class="sat"><span><b>{esc(s["sembol"])}</b></span><b>brüt {esc(f_para(s["brut_nominal"]))} · kasanın {esc(f_yuzde(s.get("brut_oran")))}</b></div>'
                          f'<div class="cubuk"><i style="width:{gen:.1f}%"></i></div>'
                          f'<div class="alt">net {esc(f_para(s["net_nominal"], True))} (kasanın {esc(f_yuzde(s.get("net_oran"), True))})</div></div>')
-        g.append(_bolum("Para dağılımı (sembol başına, kasaya oran)", '<div class="kart">' + "".join(satir) + "</div>"))
-    poz = sorted(mr["pozisyonlar"], key=lambda p: Decimal(p["stop_riski"] or "0"), reverse=True)
-    if poz:
-        enr = max(Decimal(p["stop_riski"] or "0") for p in poz) or Decimal(1)                                  # yalnız çubuk ölçeği
-        satir = []
-        for p in poz:
-            gen = 0.0 if p.get("stop_riski") is None else float(Decimal(p["stop_riski"]) / enr * 100)
-            satir.append(f'<div class="bol"><div class="sat"><span><b>{esc(p["sembol"])}</b> {esc(p["yon"])} <span class="alt">{esc(kisa_kimlik(p["kimlik"]))}</span></span>'
-                         f'<b class="nw">{esc(f_para(p.get("stop_riski")))}</b></div><div class="cubuk k"><i style="width:{gen:.1f}%"></i></div></div>')
-        g.append(_bolum("Açık stop riski (pozisyon başına)", '<div class="kart">' + "".join(satir) + "</div>"))
+        g.append(_p("Para dağılımı", "".join(satir), "sembol başına, kasaya oran"))
     return "".join(g)
+
+
+@_guvenli
+def _stop_riski(mr: dict) -> str:
+    poz = sorted(mr["pozisyonlar"], key=lambda p: Decimal(p["stop_riski"] or "0"), reverse=True)
+    if not poz:
+        return '<div class="alt">Açık pozisyon yok.</div>'
+    enr = max(Decimal(p["stop_riski"] or "0") for p in poz) or Decimal(1)                                  # yalnız çubuk ölçeği
+    satir = []
+    for p in poz:
+        gen = 0.0 if p.get("stop_riski") is None else float(Decimal(p["stop_riski"]) / enr * 100)
+        satir.append(f'<div class="mr"><div class="sat"><span><b>{esc(p["sembol"])}</b> {esc(p["yon"])} <span class="alt">{esc(kisa_kimlik(p["kimlik"]))}</span></span>'
+                     f'<b class="nw">{esc(f_para(p.get("stop_riski")))}</b></div><div class="cubuk k"><i style="width:{gen:.1f}%"></i></div></div>')
+    return "".join(satir)
 
 
 def _sekme_pozisyon(oz, st, mr) -> str:
@@ -548,9 +665,10 @@ def _sekme_pozisyon(oz, st, mr) -> str:
         return _veri_yok("ozet.json")
     n = oz["sayaclar"]["acik_pozisyon"]
     if mr is not None:
-        return _bolum(f"Açık pozisyonlar ({n})", _poz_tablosu(mr)) + _bolum("Maruziyet", _maruziyet_html(mr, oz))
-    return (_bolum(f"Açık pozisyonlar ({n})", _poz_tablosu_stratejiden(st) if st else _veri_yok("stratejiler.json"))
-            + _bolum("Maruziyet", _ek_yok("maruziyet.json")))
+        return _ig(_p(f"Açık pozisyonlar ({n})", _poz_tablosu(mr), "", "g2", duz=True) + _sag(_maruziyet_sag(mr, oz))
+                   + _p("Açık stop riski", _stop_riski(mr), "pozisyon başına", "g2"))
+    return _ig(_p(f"Açık pozisyonlar ({n})", _poz_tablosu_stratejiden(st) if st else _veri_yok("stratejiler.json"), "", "g2", duz=True)
+               + _sag(_p("Maruziyet", _ek_yok("maruziyet.json"))))
 
 
 @_guvenli
@@ -572,19 +690,25 @@ def _performans_tablosu(st: dict) -> str:
 
 
 @_guvenli
-def _maliyet_html(ml: dict) -> str:
+def _maliyet_toplam(ml: dict) -> str:
     def satir(ad, b):
         return [esc(ad), esc(f_para(b["ucret"])), esc(f_para(b["kayma"])), esc(f_para(b["funding"], True)), f"<b>{esc(f_para(b['toplam']))}</b>"]
     t = ml["toplam"]
     g = [_tablo(["", "Ücret", "Kayma", "Funding", "Toplam"], [satir("Son 24 sa", t["son24s"]), satir("Tüm dönem", t["tum"])], sag=(1, 2, 3, 4))]
+    return "".join(g)
+
+
+@_guvenli
+def _maliyet_strateji(ml: dict) -> str:
+    g = []
     if ml.get("stratejiler"):
         sr = [[esc(kisa_kimlik(k)), esc(f_para(v["son24s"]["toplam"])), esc(f_para(v["tum"]["ucret"])), esc(f_para(v["tum"]["kayma"])),
                esc(f_para(v["tum"]["funding"], True)), f"<b>{esc(f_para(v['tum']['toplam']))}</b>"]
               for k, v in sorted(ml["stratejiler"].items(), key=lambda kv: Decimal(kv[1]["tum"]["toplam"]), reverse=True)]
-        g.append('<div class="bol">' + _tablo(["Strateji", "24 sa toplam", "Ücret (tüm)", "Kayma (tüm)", "Funding (tüm)", "Toplam (tüm)"], sr, sag=(1, 2, 3, 4, 5)) + "</div>")
+        g.append(_tablo(["Strateji", "24 sa toplam", "Ücret (tüm)", "Kayma (tüm)", "Funding (tüm)", "Toplam (tüm)"], sr, sag=(1, 2, 3, 4, 5)))
     if ml.get("not"):
-        g.append(f'<div class="alt bol">{esc(ml["not"])}</div>')
-    return "".join(g)
+        g.append(f'<div class="alt" style="padding:8px 11px">{esc(ml["not"])}</div>')
+    return "".join(g) or '<div class="alt" style="padding:8px 11px">Strateji başına maliyet kaydı yok.</div>'
 
 
 def _neden_metni(k: str) -> str:
@@ -593,37 +717,50 @@ def _neden_metni(k: str) -> str:
 
 
 @_guvenli
-def _reddedilen_html(rd: dict) -> str:
+def _reddedilen_neden(rd: dict) -> str:
     s24, tum = rd.get("son24s") or {}, rd.get("tum") or {}
     anahtarlar = sorted(set(s24) | set(tum), key=lambda k: (-int(tum.get(k, 0)), k))
-    g = []
-    if anahtarlar:
-        g.append(_tablo(["Neden", "Son 24 sa", "Tüm dönem"], [[esc(_neden_metni(k)), esc(str(s24.get(k, 0))), esc(str(tum.get(k, 0)))] for k in anahtarlar], sag=(1, 2)))
-    else:
-        g.append('<div class="kart alt">Atlanan ya da küçültülen sinyal kaydı yok.</div>')
+    if not anahtarlar:
+        return '<div class="alt" style="padding:8px 11px">Atlanan ya da küçültülen sinyal kaydı yok.</div>'
+    return _tablo(["Neden", "Son 24 sa", "Tüm dönem"], [[esc(_neden_metni(k)), esc(str(s24.get(k, 0))), esc(str(tum.get(k, 0)))] for k in anahtarlar], sag=(1, 2))
+
+
+@_guvenli
+def _reddedilen_son(rd: dict) -> str:
     son = sorted(rd.get("son") or [], key=lambda r: r["zaman"], reverse=True)
+    g = []
     if son:
-        g.append('<div class="bol">' + _tablo(["Zaman (TSİ)", "Tür", "Neden", "Strateji", "Sembol"],
-                                              [[esc(tsi(r["zaman"])), esc(r["tur"]), esc(r["neden"]), esc(kisa_kimlik(r["kimlik"])), esc(r["sembol"])] for r in son]) + "</div>")
+        g.append(_tablo(["Zaman (TSİ)", "Tür", "Neden", "Strateji", "Sembol"],
+                        [[esc(tsi(r["zaman"])), esc(r["tur"]), esc(r["neden"]), esc(kisa_kimlik(r["kimlik"])), esc(r["sembol"])] for r in son], sinif="kay"))
+    else:
+        g.append('<div class="alt" style="padding:8px 11px">Son reddedilen / küçültülen kayıt yok.</div>')
     if rd.get("not"):
-        g.append(f'<div class="alt bol">{esc(rd["not"])}</div>')
+        g.append(f'<div class="alt" style="padding:8px 11px">{esc(rd["not"])}</div>')
     return "".join(g)
+
+
+@_guvenli
+def _son_islemler(isl: list) -> str:
+    son = sorted(isl, key=lambda s: s["zaman"], reverse=True)[:20]
+    if not son:
+        return '<div class="alt" style="padding:8px 11px">Kapanan işlem yok.</div>'
+    satir = [[f"<b>{esc(tsi(s['zaman']))}</b>", esc(s["sembol"]), _h(s["yon"], "iyi" if s["yon"] == "long" else "kotu"), esc(f_sayi(s["r"])),
+              esc(f_para(s["set_katki_usd"], True) if s["set_katki_usd"] is not None else "katkı: kol düzeyinde"),
+              esc(kisa_kimlik(s["kimlik"])), esc(s["cikis_nedeni"])] for s in son]
+    return _tablo(["Zaman (TSİ)", "Sembol", "Yön", "R", "Set katkısı", "Strateji", "Çıkış nedeni"], satir, sag=(3, 4), sinif="kay")
 
 
 def _sekme_islemler(isl, st, ml, rd) -> str:
-    g = [_bolum("Strateji performansı", _performans_tablosu(st) if st else _veri_yok("stratejiler.json"))]
+    perf = _p("Strateji performansı", _performans_tablosu(st) if st else _veri_yok("stratejiler.json"), "net kâr/zarara göre", "g2", duz=bool(st))
+    sag = _sag(_p("Maliyet dökümü", _maliyet_toplam(ml) if ml is not None else _ek_yok("maliyet.json"), "ücret · kayma · funding", duz=ml is not None)
+               + _p("Atlanan / reddedilen sinyaller", _reddedilen_neden(rd) if rd is not None else _ek_yok("reddedilen.json"), "neden başına", duz=rd is not None), "s1")
     if isl is None:
-        g.append(_bolum("Son kapanan işlemler", _veri_yok("islemler.jsonl")))
+        son = _p("Son kapanan işlemler", _veri_yok("islemler.jsonl"), "", "g3")
     else:
-        son = sorted(isl, key=lambda s: s["zaman"], reverse=True)[:20]
-        g.append(_bolum(f"Son kapanan işlemler ({len(son)} / {len(isl)}) · saat TSİ", '<div class="kart">' + "".join(
-            f'<div class="is"><b>{esc(tsi(s["zaman"]))}</b> {esc(s["sembol"])} {esc(s["yon"])} · R {esc(f_sayi(s["r"]))}'
-            f' · {esc(f_para(s["set_katki_usd"], True) if s["set_katki_usd"] is not None else "katkı: kol düzeyinde")}'
-            f'<div class="alt">{esc(kisa_kimlik(s["kimlik"]))} · {esc(s["cikis_nedeni"])}</div></div>' for s in son)
-            + ("" if son else '<div class="alt">Kapanan işlem yok.</div>') + "</div>"))
-    g.append(_bolum("Maliyet dökümü", _maliyet_html(ml) if ml is not None else _ek_yok("maliyet.json")))
-    g.append(_bolum("Atlanan / reddedilen sinyaller", _reddedilen_html(rd) if rd is not None else _ek_yok("reddedilen.json")))
-    return "".join(g)
+        son = _p("Son kapanan işlemler", _son_islemler(isl), f"{min(len(isl), 20)} / {len(isl)} · saat TSİ", "g3", duz=True)
+    alt = (_p("Maliyet — strateji başına", _maliyet_strateji(ml), "", "g3", duz=True) if ml is not None else "")
+    alt += (_p("Son atlanan / küçültülen sinyaller", _reddedilen_son(rd), "saat TSİ", "g3", duz=True) if rd is not None else "")
+    return _ig(perf + sag + son + alt)
 
 
 @_guvenli
@@ -631,8 +768,8 @@ def _olaylar_html(ol: list) -> str:
     son = sorted(ol, key=lambda o: o["zaman"], reverse=True)[:50]
     if not son:
         return '<div class="kart alt">Kayıtlı risk olayı yok.</div>'
-    return ('<div class="kart">' + "".join(f'<div class="is"><b>{esc(tsi(o["zaman"]))}</b> <span class="cip">{esc(o["tur"])}</span>'
-                                           f'<div class="alt">{esc(o["mesaj"])}</div></div>' for o in son) + "</div>")
+    return _tablo(["Zaman (TSİ)", "Tür", "Mesaj"], [[f"<b>{esc(tsi(o['zaman']))}</b>", f'<span class="cip">{esc(o["tur"])}</span>', f'<span style="white-space:normal">{esc(o["mesaj"])}</span>']
+                                                     for o in son], sinif="kay")
 
 
 def _sekme_risk(oz, ol) -> str:
@@ -640,31 +777,35 @@ def _sekme_risk(oz, ol) -> str:
         return _veri_yok("ozet.json")
     r = oz["risk"]
     gk, kl, ks, ar = r["gunluk_kayip"], r["kaldirac"], r["kill_switch"], r["acik_stop_riski"]
-    g = ['<div class="izgara">'
-         + _kullanim_cubugu("Günlük kayıp", gk["deger"], f_yuzde(gk["limit"], ondalik=0), gk["kullanim"], f_yuzde(gk["deger"]))
-         + _kullanim_cubugu("Kaldıraç", kl["deger"], f_sayi(kl["limit"], 1) + "x", kl["kullanim"], f_sayi(kl["deger"]) + ("x" if kl["deger"] is not None else ""))
-         + _kullanim_cubugu("Açık stop riski", ar["deger"], f_yuzde(ar["limit"], ondalik=0), ar["kullanim"], f_yuzde(ar["deger"]))
-         + _kullanim_cubugu("Kill switch (zirveden düşüş)", ks["dusus"], f_yuzde(ks["limit"], ondalik=0), None, f_yuzde(ks["dusus"]),
-                            alt_metin=f"mesafe {f_yuzde(ks['mesafe'])}")
-         + "</div>",
-         '<div class="kart" style="margin-top:8px">' + _sat("Kill switch mesafesi", f_yuzde(ks["mesafe"]) + (" — TETİKLENDİ" if ks["tetiklendi"] else ""), "kotu" if ks["tetiklendi"] else "") + "</div>"]
+    kartlar = ('<div class="izgara c4">'
+               + _kullanim_cubugu("Günlük kayıp", gk["deger"], f_yuzde(gk["limit"], ondalik=0), gk["kullanim"], f_yuzde(gk["deger"]))
+               + _kullanim_cubugu("Kaldıraç", kl["deger"], f_sayi(kl["limit"], 1) + "x", kl["kullanim"], f_sayi(kl["deger"]) + ("x" if kl["deger"] is not None else ""))
+               + _kullanim_cubugu("Açık stop riski", ar["deger"], f_yuzde(ar["limit"], ondalik=0), ar["kullanim"], f_yuzde(ar["deger"]))
+               + _kullanim_cubugu("Kill switch (zirveden düşüş)", ks["dusus"], f_yuzde(ks["limit"], ondalik=0), None, f_yuzde(ks["dusus"]),
+                                  alt_metin=f"mesafe {f_yuzde(ks['mesafe'])}")
+               + "</div>")
+    notlar = [_sat("Kill switch mesafesi", f_yuzde(ks["mesafe"]) + (" — TETİKLENDİ" if ks["tetiklendi"] else ""), "kotu" if ks["tetiklendi"] else "")]
     if kl.get("not"):
-        g.append(f'<div class="alt">{esc(kl["not"])}</div>')
+        notlar.append(f'<div class="alt" style="margin-top:6px">{esc(kl["not"])}</div>')
     for n in oz["notlar"]:
-        g.append(f'<div class="alt">{esc(n)}</div>')
-    return _bolum("Risk limitleri", "".join(g)) + _bolum("Risk olayları (son 50) · saat TSİ", _olaylar_html(ol) if ol is not None else _ek_yok("olaylar.jsonl"))
+        notlar.append(f'<div class="alt" style="margin-top:6px">{esc(n)}</div>')
+    return _ig(_p("Risk limitleri", kartlar, "limite göre kullanım", "g3")
+               + _p("Risk olayları (son 50)", _olaylar_html(ol) if ol is not None else _ek_yok("olaylar.jsonl"), "saat TSİ", "g2", duz=ol is not None)
+               + _p("Kill switch ve notlar", "".join(notlar)))
 
 
 def _sekme_saglik(sg) -> str:
     if not sg:
         return _veri_yok("saglik.json")
-    g = ['<div class="kart">', _sat("Son çalışma (TSİ)", tsi(sg["son_calisma"])) + _sat("Durum", sg["durum"], "iyi" if sg["durum"] == "ok" else "kotu")]
     sv = sg["servis"]
-    g.append(_sat("Servis", {True: "çalışıyor", False: "ÇALIŞMIYOR", None: "yok (backtest)"}[sv["calisiyor"]] + f" · {sv['surum']}", "kotu" if sv["calisiyor"] is False else ""))
-    for v in sg["veri"]:
-        g.append(_sat(f"{v['sembol']} {v['tf']} son mum (TSİ)", f"{tsi(v['son_mum_zamani'])} · {v['bayatlik_dk']} dk" + (" · BAYAT" if v["bayat"] else ""), "kotu" if v["bayat"] else ""))
-    g.append("</div>")
-    return _bolum("Sağlık", "".join(g))
+    motor = ('<div class="izgara oto">'
+             + _kutu("Durum", sg["durum"], "iyi" if sg["durum"] == "ok" else "kotu") + _kutu("Son çalışma (TSİ)", tsi(sg["son_calisma"]))
+             + _kutu("Servis", {True: "çalışıyor", False: "ÇALIŞMIYOR", None: "yok (backtest)"}[sv["calisiyor"]], "kotu" if sv["calisiyor"] is False else "", f"sürüm {sv['surum']}")
+             + "</div>")
+    veri = ('<div class="izgara oto">' + "".join(
+        _kutu(f"{v['sembol']} {v['tf']} son mum (TSİ)", tsi(v["son_mum_zamani"]), "kotu" if v["bayat"] else "", f"{v['bayatlik_dk']} dk" + (" · BAYAT" if v["bayat"] else ""))
+        for v in sg["veri"]) + "</div>") if sg["veri"] else '<div class="alt">Veri akışı kaydı yok.</div>'
+    return _ig(_p("Motor", motor, "", "g3") + _p("Veri akışları", veri, "son mum zamanı ve gecikme", "g3"))
 
 
 def html_olustur(veri: dict, sorunlar: list, simdi: datetime) -> str:
@@ -676,10 +817,11 @@ def html_olustur(veri: dict, sorunlar: list, simdi: datetime) -> str:
     if canli_mi and oz.get("yazildi_zaman"):           # tarayıcı tarafı bayatlık bandı: JS yoksa gizli kalır (sunucu tarafı uyarılar yine geçerli)
         g.append(f'<div id="bayat" class="uyari bayat-bant" role="alert" hidden data-zaman="{esc(oz["yazildi_zaman"])}" data-esik-dk="{BAYATLIK_ESIK_DK}">'
                  '⚠ VERİ BAYAT: son güncelleme <span id="bayat-dk">?</span> dk önce, sistem durmuş olabilir</div>')
-    g.append(f'<div class="ust"><div><h1>1L3A pano</h1><div class="alt">{esc(tsi(d.zaman_str(simdi)))} TSİ'
-             + (f' · {esc(KAYNAK_ADI[oz["kaynak"]])}' if oz else "") + "</div>"
-             + (f'<div class="alt">durum zamanı {esc(tsi(oz["zaman"]))} TSİ' + (" · ~15 dakikada bir yenilenir" if canli_mi else "") + "</div>" if oz else "")
-             + '</div><button id="tema" type="button">Tema</button></div>')
+    g.append('<header class="ust"><div class="mk"><span class="lg0">1L</span><h1>1L3A PANO</h1></div><div class="un">'
+             + (f'<span class="rozet r-{esc(oz["kaynak"])}">{esc(KAYNAK_ADI[oz["kaynak"]])}</span>' if oz else "")
+             + f'<span class="so">üretildi {esc(tsi(d.zaman_str(simdi)))} TSİ</span>'
+             + (f'<span class="so">durum zamanı {esc(tsi(oz["zaman"]))} TSİ' + (" · ~15 dakikada bir yenilenir" if canli_mi else "") + "</span>" if oz else "")
+             + '<button id="tema" type="button">Tema</button></div></header>')
     for sev, m in u:                                   # uyarılar sekmelerin ÜSTÜNDE: hangi sekmede olursan ol görünür
         g.append(f'<div class="uyari {sev}" role="{"alert" if sev == "kritik" else "note"}">{esc(m)}</div>')
     if not oz:
@@ -695,11 +837,12 @@ def html_olustur(veri: dict, sorunlar: list, simdi: datetime) -> str:
     g.append('<div class="tabs" role="tablist">' + "".join(
         f'<label for="{i}">{esc(ad)}' + (f' <em>{esc(rozet[i])}</em>' if rozet.get(i) is not None else "")
         + (' <em class="k">!</em>' if i == "t6" and sorun_var else "") + "</label>" for i, ad in SEKMELER) + "</div>")
-    icerik = (_sekme_ozet(oz, st, gc, ic), _sekme_stratejiler(st), _sekme_pozisyon(oz, st, mr), _sekme_islemler(isl, st, ml, rd),
+    icerik = (_sekme_ozet(oz, st, gc, ic, sg), _sekme_stratejiler(st), _sekme_pozisyon(oz, st, mr), _sekme_islemler(isl, st, ml, rd),
               _sekme_risk(oz, ol), _sekme_saglik(sg))
     g.append('<div class="sekmeler">' + "".join(f'<section class="n{k}">{c}</section>' for k, c in enumerate(icerik, 1)) + "</div></div>")
+    g.append('<div class="alt ayak">Pano yeni hesap yapmaz: sayılar durum dosyalarından aynen gösterilir. Saatler TSİ (Türkiye saati).</div>')
     return ('<!doctype html><html lang="tr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">'
-            '<meta name="color-scheme" content="light dark"><title>1L3A pano</title><style>' + CSS + "</style></head><body><main>"
+            '<meta name="color-scheme" content="dark light"><title>1L3A pano</title><style>' + CSS + "</style></head><body><main>"
             + "".join(g) + "</main><script>" + JS + "</script></body></html>")
 
 
