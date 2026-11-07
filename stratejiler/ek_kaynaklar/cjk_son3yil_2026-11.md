@@ -111,3 +111,9 @@
 - Kore: hâlâ sonuçlu kaynak yok.
 
 **Eksikler:** 聚宽 (JoinQuant) tamamen kapalı (Çin dışı IP engeli) — bu, Çin'in en büyük strateji topluluğu. Çin'den bir ağ çıkışı veya veri kaynağı olmadan tam tarama yapılamaz; bunu ayrıca kararınıza bırakıyorum. Zhihu içeriği de yalnız başlık düzeyinde geldi.
+
+## Ek güncelleme: ikinci deneme (2026-11-07)
+- **Naver (`blog.naver.com`, `search.naver.com`):** ortam servisi yine reddetti; ağ düzeyinde açılmıyor. Naver taraması yapılamadı.
+- **Tistory (`www.tistory.com`):** izin eklendi ve açılıyor. Ancak Tistory'nin arama sayfası "sayfa bulunamadı" veriyor; blog içi arama bu yolla çalışmıyor. Korece web aramasında 2025 için sonuç ve MDD paylaşan Tistory yazısı çıkmadı; yalnız genel rehber sayfaları (algolab, sqlwise, eclipse.trading) geldi. Bunlar strateji kaynağı değil.
+- **聚宽 (`www.joinquant.com`):** izin açık ama sayfa Çin dışı IP'den "bölgede desteklenmiyor" diyor. Bu bir ağ izni değil, sunucu tarafı coğrafi engel.
+- **Sonuç:** Kore için bu taramada sonuçlu strateji bulunamadı. Kore'den bir kaynak için Tistory'de belirli blog adları (ör. kullanıcı tarafından verilecek blog adresleri) gerekli.
