@@ -24,8 +24,11 @@ Yöntem (koşudan önce sabitlendi; sonuca bakılarak değiştirilmez)
 
 Kilit (karar 20): veri yalnız depo.mum_oku / depo.funding_oku ile okunur, kilit_ac yok.
 
+Maliyet çarpanı (Katman 3b sağlamlık stresi): `maliyet_carpani` (varsayılan 1.0 = değişiklik yok) komisyon
+(taker+maker) ve kaymayı (kayma_bps, stop_kayma_bps) çarpar; funding'e dokunmaz. Aday kümesi, pencere ve skor aynıdır.
+
 CLI: python -m motor.arastirma.wf_tarama --etiket k3_kripto [--semboller ...] [--stratejiler ...] [--surec 4]
-     [--umutsuzlari-atla] [--hatalari-yeniden]
+     [--umutsuzlari-atla] [--hatalari-yeniden] [--maliyet-carpani 1.0]
 """
 from __future__ import annotations
 
@@ -222,6 +225,17 @@ def aday_listesi(ad: str, izgara: bool = True) -> tuple:
     return cikti, hatalar
 
 
+def maliyet_ayarlari(kurallar, maliyet_carpani: float = 1.0) -> MotorAyarlari:
+    """Araştırma modu motor ayarı; komisyon ve kayma `maliyet_carpani` ile çarpılır (1.0 = tarama ile aynı)."""
+    if not maliyet_carpani > 0:
+        raise ValueError("maliyet_carpani > 0 olmalı")
+    v = MotorAyarlari(limit_modu="olc", kurallar=kurallar)
+    return dataclasses.replace(
+        v, komisyon_taker_yuzde=v.komisyon_taker_yuzde * maliyet_carpani,
+        komisyon_maker_yuzde=v.komisyon_maker_yuzde * maliyet_carpani,
+        kayma_bps=v.kayma_bps * maliyet_carpani, stop_kayma_bps=v.stop_kayma_bps * maliyet_carpani)
+
+
 def gorevler_uret(stratejiler: Iterable[str], semboller: Iterable[str]) -> list:
     semboller = list(semboller)
     gorevler = []
@@ -284,7 +298,7 @@ def _gorev_icerik(g: dict, satir: dict):
     mumlar, fund = _veri(sembol, tf)
     adaylar, kurma_hatalari = aday_listesi(ad, _AYAR.get("izgara", True))
     kurallar = tarama.SEMBOL_KURALLARI.get(sembol, tarama.VARSAYILAN_KURAL)
-    ay = MotorAyarlari(limit_modu="olc", kurallar=kurallar)
+    ay = maliyet_ayarlari(kurallar, _AYAR.get("maliyet_carpani", 1.0))
     islemler, hatalar, nan_r = {}, list(kurma_hatalari), 0
     n_kosu = 0
     for etiket, s in adaylar:
@@ -345,7 +359,8 @@ def wf_tara(etiket: str, stratejiler: Optional[Iterable[str]] = None,
             umutsuzlari_atla: bool = False, k2_dosyalari: Iterable[Path] = VARSAYILAN_K2,
             cikti_dizini: Optional[Path] = None, veri_dizini: Optional[Path] = None, baslangic=None, bitis=None,
             pencere_gun: Optional[dict] = None, min_islem: Optional[dict] = None, izgara: bool = True,
-            hatalari_yeniden: bool = False, deneme_kaydi_yolu=None, ilerleme: bool = True) -> pd.DataFrame:
+            hatalari_yeniden: bool = False, deneme_kaydi_yolu=None, ilerleme: bool = True,
+            maliyet_carpani: float = 1.0) -> pd.DataFrame:
     stratejiler = list(stratejiler) if stratejiler is not None else list(kayit.tum_stratejiler())
     if umutsuzlari_atla:
         u = umutsuz_stratejiler(k2_dosyalari)
@@ -366,7 +381,7 @@ def wf_tara(etiket: str, stratejiler: Optional[Iterable[str]] = None,
         print(f"[wf] {etiket}: toplam {len(tum)} görev, bitmiş {len(tum) - len(kalan)}, kalan {len(kalan)}", flush=True)
     ayar = {"veri_dizini": veri_dizini, "baslangic": baslangic, "bitis": bitis, "izgara": izgara,
             "pencere_gun": pencere_gun or PENCERE_GUN, "min_islem": min_islem or MIN_ISLEM,
-            "cikti_dizini": cikti_dizini, "etiket": etiket}
+            "cikti_dizini": cikti_dizini, "etiket": etiket, "maliyet_carpani": maliyet_carpani}
 
     yeni, bekleyen = [], []
     t0 = time.perf_counter()
@@ -420,8 +435,10 @@ def main(argv=None):
     ap.add_argument("--surec", type=int, default=4)
     ap.add_argument("--umutsuzlari-atla", action="store_true")
     ap.add_argument("--hatalari-yeniden", action="store_true")
+    ap.add_argument("--maliyet-carpani", type=float, default=1.0)
     a = ap.parse_args(argv)
-    s = wf_tara(a.etiket, a.stratejiler, a.semboller, a.surec, a.umutsuzlari_atla, hatalari_yeniden=a.hatalari_yeniden)
+    s = wf_tara(a.etiket, a.stratejiler, a.semboller, a.surec, a.umutsuzlari_atla, hatalari_yeniden=a.hatalari_yeniden,
+                maliyet_carpani=a.maliyet_carpani)
     if len(s):
         print(f"geçen: {int(s['gecti'].sum())}/{len(s)}  hatalı: {int((s['hata'] != '').sum())}")
 
