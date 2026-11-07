@@ -1,0 +1,410 @@
+[
+ {
+  "kart_id": "daytrade__bladerunner-ema20__velez",
+  "ad": "Bladerunner (20 EMA Yeniden Test + Onay Mumu)",
+  "stil": "daytrade",
+  "kaynak": {
+   "pdf": "Day Trading Forex - Odin Velez (85 sayfa) - @eseckal.pdf",
+   "sayfalar": [
+    70,
+    71,
+    72,
+    73
+   ]
+  },
+  "ozet": "Fiyat aralıktan çıkıp 20 EMA'yı en az iki kez yeniden test ettikten sonra EMA'dan sıçrar ve onay mumu oluşursa, onay mumunun 2 pip ötesine iki buy/sell stop emri (1R ve 2R hedefli) konur.",
+  "kategori": "trend_takip",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "forex",
+  "zaman_dilimi": {
+   "islem": "5m",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "EMA",
+    "parametreler": {
+     "periyot": 20
+    }
+   },
+   {
+    "ad": "Bollinger Bantları",
+    "parametreler": {
+     "periyot": 20,
+     "std": 2,
+     "not": "orta bant EMA20 yerine kullanılabilir"
+    }
+   }
+  ],
+  "long_giris": [
+   "Fiyat mevcut aralık/konsolidasyondan çıkmış ve 20 EMA üzerinde",
+   "Fiyat 20 EMA'yı en az iki kez yeniden test eder (mum EMA'ya dokunup aynı tarafta kapanır)",
+   "Onay mumu oluşur",
+   "Onay mumunun 2 pip üstüne 2 adet buy stop emri (sonraki mum başında iptal)"
+  ],
+  "short_giris": [
+   "Fiyat 20 EMA altında, aralıktan aşağı çıkmış",
+   "EMA en az iki kez direnç olarak test edilmiş",
+   "Onay mumu sonrası mumun 2 pip altına 2 adet sell stop"
+  ],
+  "stop_loss": "Sinyal mumunun 20 EMA ile buluştuğu noktanın 2 pip ötesi (long: 2 pip altı); gerekirse swing noktasının ötesi.",
+  "kar_al": "İki emir: 1. emir = 1R sabit hedef, 2. emir = 2R sabit hedef. 1. hedefte 2. emrin stopu başa baş çekilir; haber beklentisinde 2. emir daha ileri taşınabilir.",
+  "iz_suren_stop": "1R sonrası ikinci pozisyon stop'u girişe çekilir",
+  "zaman_cikisi": null,
+  "filtreler": [
+   "Asya seansı erken saatleri kırılım+yeniden test için verimli; Avrupa açılışı çok dalgalı",
+   "Polarite göstergesi (EMA20 + Bollinger orta bandı birleşimi) ek onay olarak"
+  ],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 2,
+   "gerekce": "EMA, 2 pip, 1R/2R net; 'onay mumu' ve 'aralık çıkışı' yoruma açık, makul varsayımla kodlanabilir."
+  },
+  "belirsizlikler": [
+   "Onay mumunun tanımı yok",
+   "Polarite göstergesi formülü kitapta yok",
+   "pip değeri varlığa göre uyarlanmalı"
+  ],
+  "uyumluluk_notu": "Forex (pip) odaklı; oran-bazlı kurallar ≥5m ve kripto/perpetual'a uyarlanabilir. Seans bilgisi (Asya/Avrupa) forex'e özgü. Pip yerine ATR/yüzde kullanılmalı.",
+  "varyantlar": [
+   "Yuvarlak sayı, pivot ve Fibonacci ile ek onay",
+   "Tek emirli pozisyon da olabilir"
+  ],
+  "anahtar_kelimeler": [
+   "ema20",
+   "bladerunner",
+   "retest",
+   "forex",
+   "5dk"
+  ]
+ },
+ {
+  "kart_id": "daytrade__bladerunner-ters__velez",
+  "ad": "Bladerunner Ters Çevirme (Polarite Göstergesi + Engulfing)",
+  "stil": "daytrade",
+  "kaynak": {
+   "pdf": "Day Trading Forex - Odin Velez (85 sayfa) - @eseckal.pdf",
+   "sayfalar": [
+    74,
+    75
+   ]
+  },
+  "ozet": "Fiyat polarite göstergesinin (EMA20 ve Bollinger orta bandı) uzak tarafında kapanıp tersine dönmeye hazırsa, boğa engulfing veya sabah yıldızı gibi mum onayıyla dönüş yönünde işlem açılır; Bladerunner ile aynı seansta dönüşümlü kullanılır.",
+  "kategori": "ortalamaya_donus",
+  "piyasa_rejimi": "yatay",
+  "orijinal_piyasa": "forex",
+  "zaman_dilimi": {
+   "islem": "5m",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "EMA",
+    "parametreler": {
+     "periyot": 20
+    }
+   },
+   {
+    "ad": "Bollinger Bantları",
+    "parametreler": {
+     "periyot": 20,
+     "std": 2
+    }
+   }
+  ],
+  "long_giris": [
+   "Fiyat yuvarlak sayı/pivot desteğinden sıçrar",
+   "Kapanış polarite göstergesinin uzak tarafında",
+   "Boğa engulfing veya yarı sabah yıldızı mumu"
+  ],
+  "short_giris": [
+   "Aynı mantık ters yönde"
+  ],
+  "stop_loss": null,
+  "kar_al": null,
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [
+   "Trend olmayan, tek yönde gitmeyen piyasa"
+  ],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 1,
+   "gerekce": "Polarite göstergesi tanımsız; giriş mum formasyonuna dayalı, stop/hedef kuralı yok."
+  },
+  "belirsizlikler": [
+   "Stop/hedef kitapta yok",
+   "Polarite göstergesi hesabı belirsiz"
+  ],
+  "uyumluluk_notu": "Forex (pip) odaklı; oran-bazlı kurallar ≥5m ve kripto/perpetual'a uyarlanabilir. Seans bilgisi (Asya/Avrupa) forex'e özgü.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "bladerunner",
+   "ters-donus",
+   "engulfing",
+   "ema20"
+  ]
+ },
+ {
+  "kart_id": "daytrade__bollinger-cift-bant-5dk__velez",
+  "ad": "Çift Bollinger Bandı (2σ/3σ) + 200 MA Scalping (5 dk)",
+  "stil": "daytrade",
+  "kaynak": {
+   "pdf": "Day Trading Forex - Odin Velez (85 sayfa) - @eseckal.pdf",
+   "sayfalar": [
+    60,
+    61
+   ]
+  },
+  "ozet": "Biri 2, diğeri 3 standart sapmalı iki Bollinger bandı (21 periyot) arasında fiyat dokunuşu aranır; 200 MA yönünde, iki sapma arasında oluşan ve kapanan mum sonrası sonraki mum başında işlem açılır. Hedef orta bant, ikinci hedef dış çizgi.",
+  "kategori": "ortalamaya_donus",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "forex",
+  "zaman_dilimi": {
+   "islem": "5m",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "Bollinger Bantları",
+    "parametreler": {
+     "periyot": 21,
+     "std": 2
+    }
+   },
+   {
+    "ad": "Bollinger Bantları",
+    "parametreler": {
+     "periyot": 21,
+     "std": 3
+    }
+   },
+   {
+    "ad": "MA",
+    "parametreler": {
+     "periyot": 200
+    }
+   }
+  ],
+  "long_giris": [
+   "Fiyat 200 MA üzerinde (trend filtresi)",
+   "Fiyat 2σ ve 3σ bantları arasındaki bölgeye dokunur, mum bu iki sapma arasında kapanır",
+   "Sonraki mum açılışında long"
+  ],
+  "short_giris": [
+   "Fiyat 200 MA altında, aynı koşul alt tarafta"
+  ],
+  "stop_loss": "Sinyal mumunun altı/üstü (long: mum altı)",
+  "kar_al": "1. hedef Bollinger orta bandı, 2. hedef üst/alt çizgi",
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [
+   "200 MA yönü"
+  ],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 2,
+   "gerekce": "Parametreler ve hedefler net; 'sapmalar arası bölgede oluşan ve kapanan mum' ve stop mesafesi biraz belirsiz."
+  },
+  "belirsizlikler": [
+   "Mum tanımı belirsiz",
+   "Stop mesafesi sayısal değil",
+   "Kitap GBP/JPY'yi öneriyor, yüksek risk toleransı ister"
+  ],
+  "uyumluluk_notu": "Forex (pip) odaklı; oran-bazlı kurallar ≥5m ve kripto/perpetual'a uyarlanabilir. Seans bilgisi (Asya/Avrupa) forex'e özgü.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "bollinger",
+   "3-sigma",
+   "200-ma",
+   "scalp"
+  ]
+ },
+ {
+  "kart_id": "daytrade__bollinger-momentum-60dk-opsiyon__velez",
+  "ad": "Bollinger Orta Bant + Momentum(11) - 60 dk Vadeli İkili/Opsiyon Girişi",
+  "stil": "daytrade",
+  "kaynak": {
+   "pdf": "Day Trading Forex - Odin Velez (85 sayfa) - @eseckal.pdf",
+   "sayfalar": [
+    60
+   ]
+  },
+  "ozet": "15 dk grafikte 2σ Bollinger bantları ve EMA20 orta band ile 11 periyotluk momentum göstergesi; fiyat orta bandın üstünde ve momentum >100 ise call, altında ve momentum <100 ise put (60 dk vadeli opsiyon).",
+  "kategori": "momentum",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "forex",
+  "zaman_dilimi": {
+   "islem": "15m",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "Bollinger Bantları",
+    "parametreler": {
+     "periyot": 20,
+     "std": 2
+    }
+   },
+   {
+    "ad": "Momentum",
+    "parametreler": {
+     "periyot": 11,
+     "orta": 100
+    }
+   }
+  ],
+  "long_giris": [
+   "Fiyat orta bandın en az üstünde",
+   "Momentum(11) > 100"
+  ],
+  "short_giris": [
+   "Fiyat orta bandın altında",
+   "Momentum(11) < 100"
+  ],
+  "stop_loss": null,
+  "kar_al": null,
+  "iz_suren_stop": null,
+  "zaman_cikisi": "60 dakikalık (4 mum) opsiyon vadesi",
+  "filtreler": [],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 0,
+   "gerekce": "Opsiyon/ikili işlem vadesi gerektirir; stop/hedef yok. Mantık spot'a çevrilse bile çıkış kuralı kitapta yok. Gerekçe: opsiyon + eksik çıkış."
+  },
+  "belirsizlikler": [
+   "Çıkış/stop yok (opsiyon vadesi)"
+  ],
+  "uyumluluk_notu": "İkili/dijital opsiyon varsayımlı; 1L3A'da spot/perp için çıkış kuralı tanımlanmadığından uygunsuz.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "bollinger",
+   "momentum",
+   "opsiyon",
+   "60dk"
+  ]
+ },
+ {
+  "kart_id": "daytrade__fibonacci-geri-cekilme-cakisma__velez",
+  "ad": "Fibonacci Geri Çekilme Çakışması (Confluence)",
+  "stil": "daytrade",
+  "kaynak": {
+   "pdf": "Day Trading Forex - Odin Velez (85 sayfa) - @eseckal.pdf",
+   "sayfalar": [
+    62,
+    63,
+    64
+   ]
+  },
+  "ozet": "Trendli piyasada son hareketin dip/zirvesi arasına Fibonacci geri çekilmesi çizilir; %38/%50/%62/%79 seviyelerinden iki veya daha fazlasının (veya pivot/destek-direnç ile) çakıştığı bölgede trend yönünde girilir.",
+  "kategori": "destek_direnc",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "forex",
+  "zaman_dilimi": {
+   "islem": null,
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "Fibonacci",
+    "parametreler": {
+     "seviyeler": [
+      0.382,
+      0.5,
+      0.618,
+      0.79
+     ]
+    }
+   }
+  ],
+  "long_giris": [
+   "Belirgin trend ve tamamlanmış hareket",
+   "Geri çekilme iki veya daha fazla Fibonacci seviyesi/pivot ile çakışan bir bölgeye ulaşır",
+   "Trend yönünde long (düşüşte short)"
+  ],
+  "short_giris": [],
+  "stop_loss": null,
+  "kar_al": null,
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [
+   "Trend tamamlanmadan Fibonacci çizilmez",
+   "Uzun vadeli trend yönü kontrol edilir",
+   "Tutarlı referans noktaları (gövde mi fitil mi)"
+  ],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 1,
+   "gerekce": "Giriş bölgesi var ama tetik mumu, stop ve hedef yok."
+  },
+  "belirsizlikler": [
+   "Stop/hedef yok",
+   "Salınım seçimi sübjektif"
+  ],
+  "uyumluluk_notu": "Forex (pip) odaklı; oran-bazlı kurallar ≥5m ve kripto/perpetual'a uyarlanabilir. Seans bilgisi (Asya/Avrupa) forex'e özgü.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "fibonacci",
+   "confluence",
+   "geri-cekilme"
+  ]
+ },
+ {
+  "kart_id": "daytrade__fibonacci-uzanti-aralik-kirilim__velez",
+  "ad": "Aralık Kırılımı + Fibonacci Uzantı / İkinci Dalga Girişi",
+  "stil": "daytrade",
+  "kaynak": {
+   "pdf": "Day Trading Forex - Odin Velez (85 sayfa) - @eseckal.pdf",
+   "sayfalar": [
+    65
+   ]
+  },
+  "ozet": "Destek-direnç arasında aralıkta giden piyasada aralığın uçları belirlenir; kırılım gerçekleşmesi beklenir, kırılım yönünde işlem veya ilk kırılım dalgası sonrası ikinci dalgada giriş; hedef Fibonacci uzantı çakışmaları.",
+  "kategori": "kirilim",
+  "piyasa_rejimi": "yatay",
+  "orijinal_piyasa": "forex",
+  "zaman_dilimi": {
+   "islem": null,
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "Fibonacci",
+    "parametreler": {
+     "not": "uzantı seviyeleri belirtilmemiş"
+    }
+   }
+  ],
+  "long_giris": [
+   "Aralığın en düşük/en yüksek seviyesi belirlenir",
+   "Gerçek kırılım gerçekleşmesi beklenir (sinyal öncesi giriş yok)",
+   "Alternatif: kırılımın ilk dalgası sonrası ikinci dalgada giriş"
+  ],
+  "short_giris": [],
+  "stop_loss": null,
+  "kar_al": null,
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 1,
+   "gerekce": "Çok belirsiz; stop, hedef, tetik net değil."
+  },
+  "belirsizlikler": [
+   "Stop/hedef/uzantı oranları yok"
+  ],
+  "uyumluluk_notu": "Forex (pip) odaklı; oran-bazlı kurallar ≥5m ve kripto/perpetual'a uyarlanabilir. Seans bilgisi (Asya/Avrupa) forex'e özgü.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "fibonacci-uzanti",
+   "aralik-kirilim"
+  ]
+ }
+]

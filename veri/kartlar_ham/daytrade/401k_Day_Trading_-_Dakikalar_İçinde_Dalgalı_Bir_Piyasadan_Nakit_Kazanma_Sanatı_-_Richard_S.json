@@ -1,0 +1,76 @@
+[
+ {
+  "kart_id": "daytrade__401k-gunluk-fon-degisimi__schmitt",
+  "ad": "401(k) Günlük Fon Değişimi (Kalibrasyon Faktörü ile Hisse/Nakit Kontraryen Rebalans)",
+  "stil": "daytrade",
+  "kaynak": {
+   "pdf": "401(k) Day Trading - Dakikalar İçinde Dalgalı Bir Piyasadan Nakit Kazanma Sanatı - Richard Schmitt (435 sayfa) - @eseckal.pdf",
+   "sayfalar": [
+    382,
+    383,
+    384,
+    385,
+    386,
+    387,
+    391,
+    393,
+    394,
+    395
+   ]
+  },
+  "ozet": "Emeklilik hesabında hisse endeksi fonu ile nakit fonu arasında her gün piyasa kapanmadan önce endeksin günlük puan (veya yüzde) değişimiyle orantılı tutarda fon değişimi: endeks düştüyse nakitten hisseye al, yükseldiyse hisseden nakde sat (yatay piyasada kazanç).",
+  "kategori": "ortalamaya_donus",
+  "piyasa_rejimi": "yatay",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+   "islem": "1D",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "S&P 500 endeksi",
+    "parametreler": {
+     "kalibrasyon_faktoru": "endeks puanı başına 100$ (örnek)"
+    }
+   }
+  ],
+  "long_giris": [
+   "Endeks gün içinde düşer: nakit fonundan endeks fonuna (düşüş puanı × kalibrasyon faktörü) kadar aktar"
+  ],
+  "short_giris": [
+   "Endeks yükselir: endeks fonundan nakde (artış puanı × faktör) kadar aktar"
+  ],
+  "stop_loss": null,
+  "kar_al": "Yatay piyasada sürekli küçük kâr realizasyonu; stop yok",
+  "iz_suren_stop": null,
+  "zaman_cikisi": "Her gün kapanıştan hemen önce",
+  "filtreler": [
+   "Yatay/dalgalı piyasa gerekir; sürekli tek yönlü piyasada zayıf",
+   "Sık işlem kısıtlamaları ve geri ödeme ücretleri (90 gün)"
+  ],
+  "pozisyon_risk": "İşlem tutarı = kalibrasyon faktörü × endeks değişimi (veya portföyün yüzdesi); hisse/nakit tükenmesi riski",
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 0,
+   "gerekce": "YASAK/UYGUNSUZ: Düşüşte pozisyon artırma (nakitten hisseye) ortalama düşürme/ızgara niteliğinde ve stop yok; ayrıca emeklilik fon değişimi (mutual fund), kapanış fiyatı ve nakit fon gerektirir. Giriş sinyali yok, sadece rebalans formülü."
+  },
+  "belirsizlikler": [
+   "Stop/maksimum drawdown yok",
+   "Fon tükenmesi halinde davranış belirsiz"
+  ],
+  "uyumluluk_notu": "Mutual fund/401(k) ortamına özgü; 1L3A'da stopsuz ızgara/ortalama düşürme yasağı nedeniyle uygulanmaz.",
+  "varyantlar": [
+   "Yüzde değişim kalibrasyonu",
+   "Günlük yeniden dengeleme (50/50)",
+   "Haftalık/aylık 'lite'",
+   "Ev yapımı çift limit emri (±10 puan bantlı ızgara)"
+  ],
+  "anahtar_kelimeler": [
+   "ızgara",
+   "rebalans",
+   "ortalama-dusurme",
+   "401k",
+   "yasak"
+  ]
+ }
+]

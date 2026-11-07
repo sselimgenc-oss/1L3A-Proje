@@ -1,0 +1,413 @@
+[
+ {
+  "kart_id": "daytrade__acilis-araligi-atr-filtreli__allen",
+  "ad": "Açılış Aralığı Kırılımı (15-60 dk) + ATR Filtresi",
+  "stil": "daytrade",
+  "kaynak": {
+   "pdf": "Day Trading - Douglas Allen (472 sayfa) - @eseckal.pdf",
+   "sayfalar": [
+    56,
+    57,
+    58
+   ]
+  },
+  "ozet": "Açılışta en az 15-30 dk (bazıları 1 saat) beklenip açılış aralığı oluşturulur; aralık hissenin ATR'sinden küçükse aralık kırılımı yönünde (5-10 dk daha bekleyerek) pozisyon açılır.",
+  "kategori": "kirilim",
+  "piyasa_rejimi": "volatil",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+   "islem": "15m",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "ATR",
+    "parametreler": {
+     "not": "günlük ATR; periyot kitapta yok"
+    }
+   },
+   {
+    "ad": "VWMA",
+    "parametreler": {
+     "not": "stop için temel; periyot yok"
+    }
+   },
+   {
+    "ad": "EMA",
+    "parametreler": {}
+   }
+  ],
+  "long_giris": [
+   "Hisse yüksek göreceli hacim ve işlem sayısıyla likit",
+   "Açılış aralığı (15/30/60 dk mumların yüksek-düşüğü) ATR'den küçük (değilse hisse elenir)",
+   "Fiyat üst aralığı kırarsa long"
+  ],
+  "short_giris": [
+   "Fiyat alt aralığı kırarsa short"
+  ],
+  "stop_loss": "Hacim ağırlıklı hareketli ortalama (VWMA) tabanlı stop tetikleyici",
+  "kar_al": "EMA'lar, önceki gün kapanışı veya açılış öncesi belirlenen destek/direnç seviyeleri",
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [
+   "Orta-büyük sermayeli, yüksek göreceli hacimli hisseler",
+   "Aralık < ATR"
+  ],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 2,
+   "gerekce": "Aralık/ATR filtresi net; stop (VWMA) ve hedef seçenekleri parametresiz."
+  },
+  "belirsizlikler": [
+   "VWMA periyodu yok",
+   "Hedef kuralı seçimli",
+   "Kırılım teyidi (kapanış mı dokunuş mu) belirsiz"
+  ],
+  "uyumluluk_notu": "Hisse (SIP = çok hacimli/oynak hisseler) odaklı; 5-15m ≥5m uyumlu. Hacim ve ATR gerekir; açılış mantığı kriptoda seans açılışına çevrilmeli.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "acilis-araligi",
+   "orb",
+   "atr-filtre",
+   "vwma"
+  ]
+ },
+ {
+  "kart_id": "daytrade__destek-direnc-doji-5dk__allen",
+  "ad": "Destek/Direnç Seviyelerinde Doji ile İşlem (5 dk)",
+  "stil": "daytrade",
+  "kaynak": {
+   "pdf": "Day Trading - Douglas Allen (472 sayfa) - @eseckal.pdf",
+   "sayfalar": [
+    59,
+    60,
+    61
+   ]
+  },
+  "ozet": "Piyasa açılmadan günlük grafikte kritik destek/direnç seviyeleri (aşırı fitil uçları, tam/yarım dolar) belirlenir; 5 dk grafikte seviyelerde kararsızlık (doji) mumuyla seviyeye yakın giriş yapılır, hedef bir sonraki seviye.",
+  "kategori": "destek_direnc",
+  "piyasa_rejimi": "yatay",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+   "islem": "5m",
+   "ust_filtre": "1D"
+  },
+  "gostergeler": [],
+  "long_giris": [
+   "Günlük grafikte güçlü destek (çok dokunuşlu, fitil uçlarına çizilmiş)",
+   "5 dk grafikte destekte doji/kararsızlık mumu",
+   "Desteğe mümkün olduğunca yakın al"
+  ],
+  "short_giris": [
+   "Dirence yakın doji, direnç yakınından sat"
+  ],
+  "stop_loss": "Long: destek çizgisinin altına kırılınca; short: direnç çizgisi üzerine çıkınca",
+  "kar_al": "Bir sonraki direnç/destek seviyesinde; pozisyonun yarısı veya fazlası orada kapatılır, kalanı sonraki seviyede",
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [
+   "Net seviye yoksa işlem yok",
+   "Sadece mevcut fiyata yakın seviyeler"
+  ],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 1,
+   "gerekce": "Seviye tespiti ve doji yoruma açık."
+  },
+  "belirsizlikler": [
+   "Seviye toleransı yok",
+   "Doji tanımı yok"
+  ],
+  "uyumluluk_notu": "Hisse (SIP = çok hacimli/oynak hisseler) odaklı; 5-15m ≥5m uyumlu. Hacim ve ATR gerekir; açılış mantığı kriptoda seans açılışına çevrilmeli.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "destek-direnc",
+   "doji",
+   "5dk",
+   "yarim-dolar"
+  ]
+ },
+ {
+  "kart_id": "daytrade__abcd-formasyonu__allen",
+  "ad": "ABCD Formasyonu (Klasik ve Genişletilmiş)",
+  "stil": "daytrade",
+  "kaynak": {
+   "pdf": "Day Trading - Douglas Allen (472 sayfa) - @eseckal.pdf",
+   "sayfalar": [
+    62,
+    63,
+    64
+   ]
+  },
+  "ozet": "AB ve CD itki bacakları, BC düzeltmedir; CD bacağı AB'ye eşit (klasik) veya %127,2-161,8'i (genişletilmiş) olunca D noktasında BC yönünde ters işlem açılır. BC, AB'nin belirli Fibonacci oranında geri çekilir.",
+  "kategori": "formasyon",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+   "islem": null,
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "Fibonacci",
+    "parametreler": {
+     "CD_AB_orani": [
+      1.0,
+      1.272,
+      1.618
+     ]
+    }
+   }
+  ],
+  "long_giris": [
+   "Klasik ABCD: AB ≈ CD (hem boy hem süre); C noktası A'ya, D noktası C'ye yaklaşmamalı",
+   "D noktasında (düşüş formasyonunda) ters yönde işlem"
+  ],
+  "short_giris": [
+   "Yükseliş ABCD tamamlanınca D'de short; tersi long"
+  ],
+  "stop_loss": "D noktasının altı/üstünde bir bölge",
+  "kar_al": "1. hedef C seviyesi, 2. hedef A noktası veya güçlü Fibonacci uzantı bölgesi",
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [
+   "Destek-direnç, Fibonacci veya mum onayıyla çakışma"
+  ],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 1,
+   "gerekce": "Salınım noktalarının tespiti sübjektif; oranlar belirli ama BC geri çekilme oranı metinde bozuk."
+  },
+  "belirsizlikler": [
+   "BC geri çekilme oranı belirsiz",
+   "Salınım tespiti"
+  ],
+  "uyumluluk_notu": "Hisse (SIP = çok hacimli/oynak hisseler) odaklı; 5-15m ≥5m uyumlu. Hacim ve ATR gerekir; açılış mantığı kriptoda seans açılışına çevrilmeli.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "abcd",
+   "harmonik",
+   "fibonacci",
+   "formasyon"
+  ]
+ },
+ {
+  "kart_id": "daytrade__tersine-donus-engulfing-rsi__allen",
+  "ad": "Tersine Dönüş: Yutan Mum + RSI Uç Bölge (5 dk)",
+  "stil": "daytrade",
+  "kaynak": {
+   "pdf": "Day Trading - Douglas Allen (472 sayfa) - @eseckal.pdf",
+   "sayfalar": [
+    66,
+    67
+   ]
+  },
+  "ozet": "5 dk grafikte (en az 5 mum sonrası) düşüş sonrası büyük yeşil yutan mum veya yükseliş sonrası kırmızı yutan mum ters yönde sinyal verir; RSI'ın ≤10 (long) / ≥90 (short) olması teyittir; yutan mum büyüdükçe sinyal güçlenir.",
+  "kategori": "ortalamaya_donus",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+   "islem": "5m",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "RSI",
+    "parametreler": {
+     "periyot": "kitapta yok",
+     "asiri_satim": 10,
+     "asiri_alim": 90
+    }
+   }
+  ],
+  "long_giris": [
+   "Düşüş trendi sonrası önceki kırmızı mumu tamamen yutan yeşil mum",
+   "RSI ≤ 10"
+  ],
+  "short_giris": [
+   "Yükseliş sonrası yeşil mumları yutan kırmızı mum",
+   "RSI ≥ 90"
+  ],
+  "stop_loss": null,
+  "kar_al": null,
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [
+   "Uzun alt fitil long, uzun üst fitil short lehine"
+  ],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 1,
+   "gerekce": "Giriş mantığı mum+RSI; stop/hedef yok."
+  },
+  "belirsizlikler": [
+   "RSI periyodu yok",
+   "Stop ve hedef yok"
+  ],
+  "uyumluluk_notu": "Hisse (SIP = çok hacimli/oynak hisseler) odaklı; 5-15m ≥5m uyumlu. Hacim ve ATR gerekir; açılış mantığı kriptoda seans açılışına çevrilmeli.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "yutan-mum",
+   "engulfing",
+   "rsi",
+   "tersine-donus"
+  ]
+ },
+ {
+  "kart_id": "daytrade__fade-hacmi-geride-birakan-fiyat__allen",
+  "ad": "Fade (Hacmi Geride Bırakan Fiyat Artışında Short)",
+  "stil": "daytrade",
+  "kaynak": {
+   "pdf": "Day Trading - Douglas Allen (472 sayfa) - @eseckal.pdf",
+   "sayfalar": [
+    73,
+    74
+   ]
+  },
+  "ozet": "Fiyat hızla yükselip dirence çarptığında ve fiyat artışı hacmi geride bıraktığında (alıcı tükeniyor) short açılır; hedef zirvenin 1-2 puan altı.",
+  "kategori": "ortalamaya_donus",
+  "piyasa_rejimi": "volatil",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+   "islem": null,
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "Hacim",
+    "parametreler": {}
+   }
+  ],
+  "long_giris": [],
+  "short_giris": [
+   "Hisse hızla yükselmiş ve dirence ulaşmış",
+   "Fiyat artışının hızı hacmi aşar (alım hacmi zayıflıyor)",
+   "Short aç"
+  ],
+  "stop_loss": null,
+  "kar_al": "Alış zirvesinin 1-2 yüzde puan altındaki hedef fiyat",
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [
+   "Kısa kapama (short squeeze) riski nedeniyle zamanlama kritik"
+  ],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 1,
+   "gerekce": "'Fiyat hacmi geride bırakıyor' sayısal değil."
+  },
+  "belirsizlikler": [
+   "Stop yok",
+   "Hız/hacim eşiği yok"
+  ],
+  "uyumluluk_notu": "Hisse (SIP = çok hacimli/oynak hisseler) odaklı; 5-15m ≥5m uyumlu. Hacim ve ATR gerekir; açılış mantığı kriptoda seans açılışına çevrilmeli. Kısa pozisyon: kripto/perp'te uygulanabilir.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "fade",
+   "hacim-sapmasi",
+   "short",
+   "asiri-uzama"
+  ]
+ },
+ {
+  "kart_id": "daytrade__boga-bayragi-momentum__allen",
+  "ad": "Boğa Bayrağı (Direk + Konsolidasyon, Direnç Kırılımı Öncesi/Sonrası Alım)",
+  "stil": "daytrade",
+  "kaynak": {
+   "pdf": "Day Trading - Douglas Allen (472 sayfa) - @eseckal.pdf",
+   "sayfalar": [
+    65
+   ]
+  },
+  "ozet": "Keskin yükselişten (direk) sonra destek-direnç arasında yatay konsolidasyon (bayrak); fiyat direnci aşmadan veya aşınca alınır, istenen kâr belirlenir ve stop-loss eklenir.",
+  "kategori": "formasyon",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+   "islem": null,
+   "ust_filtre": null
+  },
+  "gostergeler": [],
+  "long_giris": [
+   "Dik, kısa süreli yükseliş (bayrak direği)",
+   "Ardından fiyatın yaklaşık aynı kaldığı konsolidasyon",
+   "Direncin aşılması beklentisiyle (öncesi veya kırılımda) al"
+  ],
+  "short_giris": [],
+  "stop_loss": "Bayrak desteğinin altı (kitap sayısal vermiyor)",
+  "kar_al": "Kullanıcının belirlediği kâr hedefi",
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 1,
+   "gerekce": "Formasyon sayısal tanımlı değil, stop/hedef serbest."
+  },
+  "belirsizlikler": [
+   "Bayrak süresi/derinliği yok"
+  ],
+  "uyumluluk_notu": "Hisse (SIP = çok hacimli/oynak hisseler) odaklı; 5-15m ≥5m uyumlu. Hacim ve ATR gerekir; açılış mantığı kriptoda seans açılışına çevrilmeli.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "bayrak",
+   "bull-flag",
+   "konsolidasyon"
+  ]
+ },
+ {
+  "kart_id": "daytrade__ortulu-cagri-yatay-hisse__allen",
+  "ad": "Örtülü Çağrı (Covered Call) - Yatay Hisse",
+  "stil": "daytrade",
+  "kaynak": {
+   "pdf": "Day Trading - Douglas Allen (472 sayfa) - @eseckal.pdf",
+   "sayfalar": [
+    119,
+    120
+   ]
+  },
+  "ozet": "Aylarca dar bir aralıkta (45-50) işlem gören hisse alınır ve hemen bir aylık/3-4 aylık, alış fiyatının hemen üzerindeki kullanım fiyatlı çağrı opsiyonu satılır; prim cebe girer.",
+  "kategori": "diger",
+  "piyasa_rejimi": "yatay",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+   "islem": "1D",
+   "ust_filtre": null
+  },
+  "gostergeler": [],
+  "long_giris": [
+   "Hisse alımı (örn. 47,48'den 100 adet)",
+   "Alış fiyatının hemen üstü kullanım fiyatlı 3-4 ay vadeli çağrı sat (örn. 48,00 / 1,30)"
+  ],
+  "short_giris": [],
+  "stop_loss": null,
+  "kar_al": null,
+  "iz_suren_stop": null,
+  "zaman_cikisi": "Opsiyon vadesi",
+  "filtreler": [
+   "Hisse yatay işlem görmeli; çok yükselecek veya çok düşecekse uygun değil"
+  ],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 0,
+   "gerekce": "Opsiyon gerektirir, gün içi değil, stop yok; 1L3A spot/perp için uygulanamaz."
+  },
+  "belirsizlikler": [
+   "Stop yok"
+  ],
+  "uyumluluk_notu": "Opsiyon stratejisi; uygulanamaz.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "covered-call",
+   "opsiyon",
+   "yatay"
+  ]
+ }
+]

@@ -1,0 +1,90 @@
+[
+ {
+  "kart_id": "daytrade__acilis-geri-cekilme-kirilim__bennett",
+  "ad": "Açılış Seansı Geri Çekilme Sonrası Kırılım (2 dk, Tahıl Vadelisi)",
+  "stil": "daytrade",
+  "kaynak": {
+   "pdf": "Day Trading - David Bennett (148 sayfa) - @eseckal.pdf",
+   "sayfalar": [
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    43,
+    44,
+    45,
+    46,
+    53,
+    54,
+    55,
+    56,
+    57,
+    58,
+    62
+   ]
+  },
+  "ozet": "Seans açılışında ilk 2 dk mumunun rengi yön yanlılığını belirler; en az 2 mumluk geri çekilmeden sonra seans zirvesi (long) veya dibi (short) kırılınca trend yönünde girilir. Stop ve hedef, kırılım seviyesi ile son swing arasındaki aralığın (r) katıdır.",
+  "kategori": "kirilim",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "vadeli",
+  "zaman_dilimi": {
+   "islem": "2m",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "Mum grafiği",
+    "parametreler": {
+     "periyot": "2 dakika"
+    }
+   }
+  ],
+  "long_giris": [
+   "İlk 2 dk mumu mavi/yükseliş = yanlılık yukarı (doji ise ikinci mum belirler)",
+   "Yeni seans zirvesi A oluştuktan sonra en az 2 ardışık mum A'dan düşük zirveli = geçerli geri çekilme",
+   "Fiyat A'yı (seans zirvesi) bir tik geçince al",
+   "Seanstaki ilk kırılım alınır; kırılım yoksa işlem yok",
+   "İstisna: 2. mum iç mum (geri çekilme), 3. mum 1. mum zirvesini kırarsa geçerli kırılım"
+  ],
+  "short_giris": [
+   "İlk mum kırmızı = yanlılık aşağı",
+   "Yeni seans dibi B sonrası en az 2 mum B'den yüksek dipli",
+   "Fiyat B'yi bir tik kırınca sat",
+   "Zirve B'yi aşarsa yanlılık yukarıya döner (ve tersi)"
+  ],
+  "stop_loss": "Stop = 0,5r ile 1r arası (kitap örneklerinde 0,5r). r: kırılım seviyesi ile geri çekilmenin en uç noktası (son düşük dip + önceki mumdan düşük zirve kriteri) arasındaki aralık; uygun mum yoksa r = tüm seans aralığı. Giriş anında stop ve limit emri birlikte (OCA) girilir.",
+  "kar_al": "Hedef 1,5r ile 3r arası (örneklerde 1,5r). Girişten sonra stop/hedef değiştirilmez.",
+  "iz_suren_stop": null,
+  "zaman_cikisi": "Pozisyon seans sonuna kadar açık kalırsa kapatılır (OCA emirleri seans sonu iptal)",
+  "filtreler": [
+   "Sadece seansın ilk kırılımı",
+   "Yüksek momentumlu piyasalarda dar stop; sakin piyasada geniş stop",
+   "Limit-up/limit-down yakınında pozisyon alma"
+  ],
+  "pozisyon_risk": "Giriş anında sabit stop+limit; stop sürekli ayarlanmaz",
+  "iddia_edilen_performans": "Kazanma oranı en az %50 ve ortalama kazanç > ortalama kayıp hedefi (sayısal performans yok)",
+  "kodlanabilirlik": {
+   "puan": 3,
+   "gerekce": "Yanlılık, geri çekilme ve kırılım kuralları sayısal tanımlı (iki mum, bir tik). Küçük boşluk: 'r' mum arama kuralı ve doji yorumu."
+  },
+  "belirsizlikler": [
+   "Seans süresi/saatleri tahıl vadelisi (CBOT açılışı) ve 7/24 piyasada uyarlanmalı",
+   "Tik büyüklüğü varlığa göre",
+   "Hangi 'mum rengi' kuralı Bölüm 8'de (mavi=yukarı)"
+  ],
+  "uyumluluk_notu": "Seans açılışına bağlı; ≥5m'ye uyarlamada geri çekilme sayısı/'2 mum' kuralı yeniden kalibre edilmeli. Açılış kavramı olan hisse/vadelide çalışır, kripto için günlük/seans açılışı tanımlanmalı. Hacim gerekmiyor.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "acilis",
+   "geri-cekilme",
+   "kirilim",
+   "vadeli",
+   "tahil",
+   "r-aralik"
+  ]
+ }
+]

@@ -1,0 +1,279 @@
+[
+ {
+  "kart_id": "daytrade__kirilim-sistemi-52h-zirve__kuepper",
+  "ad": "Breakout Sistemi (Teyitli Direnç Kırılımı, 52 Haftalık Zirve Örneği)",
+  "stil": "daytrade",
+  "kaynak": {
+   "pdf": "Day Trading - Justin Kuepper (196 sayfa) - @eseckal.pdf",
+   "sayfalar": [
+    171,
+    172,
+    173,
+    100,
+    101
+   ]
+  },
+  "ozet": "Yeni 52 haftalık zirveye giden hisselerde, hacim ve momentum teyidiyle direnç kırılınca veya kırılma seviyesine geri çekilince alım; stop kırılan direncin hemen altına, hedef bir sonraki direnç/formasyon yüksekliği.",
+  "kategori": "kirilim",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+   "islem": null,
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "Hacim",
+    "parametreler": {}
+   },
+   {
+    "ad": "Momentum osilatörü",
+    "parametreler": {
+     "not": "tür belirtilmemiş"
+    }
+   }
+  ],
+  "long_giris": [
+   "Hisse güçlü hareket edenler listesinde, direncin (örn. 52 hf zirvesi) kırılması muhtemel",
+   "Kırılım yüksek hacimle gerçekleşir; kırılım yönünde önceki hacim artışları",
+   "Momentum osilatörü kırılım yönünde teyit verir",
+   "Alım: kırılım anında veya fiyat kırılan seviyeye geri çekildiğinde (geri-test girişi)"
+  ],
+  "short_giris": [],
+  "stop_loss": "Kırılan direncin (yeni destek) hemen altı; erken stop olmayacak kadar uzak, tez bozulursa kaybı sınırlayacak kadar yakın.",
+  "kar_al": "Formasyon hedefi: kanal yüksekliği / üçgen yüksekliği kadar; ya da bir sonraki direnç (Fibonacci/trend çizgisi) seviyesinin %10'u içi; hedefin biraz altına emir.",
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [
+   "Sahte kırılmayı elemek için hacim + momentum teyidi",
+   "En az bir (ideali birden çok) onay beklemek"
+  ],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 1,
+   "gerekce": "İlke düzeyinde; hacim/momentum eşikleri ve 'hemen altı' sayısal değil. Kaba yaklaşım: N-gün zirve kırılımı + göreli hacim filtresi."
+  },
+  "belirsizlikler": [
+   "Hacim ve momentum eşikleri yok",
+   "Stop mesafesi sayısal değil",
+   "Hedef '%10 içi' ifadesi belirsiz"
+  ],
+  "uyumluluk_notu": "Hisse odaklı örnekler; tarama/hacim gerektirir. Kural mantığı ≥5m ve kripto/ABD hisse/perpetual'a uyarlanabilir; 52 haftalık zirve gibi ölçütler günlük veri ister.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "kirilim",
+   "direnc",
+   "52-hafta-zirve",
+   "hacim"
+  ]
+ },
+ {
+  "kart_id": "daytrade__trend-takip-sistemi-3gun__kuepper",
+  "ad": "Trend Takip Sistemi (3 Gün Momentum + Açılışta Hacim Artışı)",
+  "stil": "daytrade",
+  "kaynak": {
+   "pdf": "Day Trading - Justin Kuepper (196 sayfa) - @eseckal.pdf",
+   "sayfalar": [
+    174,
+    175,
+    176
+   ]
+  },
+  "ozet": "Son 3 işlem gününde güçlü yukarı momentumu olan hisselerde, açılışta hacim ve momentum artışı sürerse alım; sabit %5 stop, hedef en yakın direnç veya %5-%10.",
+  "kategori": "trend_takip",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+   "islem": "1D/gün içi",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "RSI",
+    "parametreler": {
+     "orta_cizgi": 50
+    }
+   },
+   {
+    "ad": "Hacim",
+    "parametreler": {}
+   }
+  ],
+  "long_giris": [
+   "Son 3 gün güçlü yukarı momentum (veya 3 ardışık yüksek dip trend çizgisi)",
+   "Piyasa açılışında hacim artışı",
+   "Momentum göstergesi artmaya devam eder (RSI orta çizgi üzerinde ve yukarı)"
+  ],
+  "short_giris": [],
+  "stop_loss": "Keyfi %5 kayıp; ya da trend çizgisinin hemen dışı (üst çizgiyi %5'ten fazla aşarsa tetik gibi esnek öneri).",
+  "kar_al": "En yakın direnç veya sabit %5-%10 kazanç; üst direncin %3'ü içine gelince veya RSI orta çizgi altına inince kâr al.",
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [
+   "Ani yükselişlerde (volatilite spike) çok sayıda küçük zarar riski"
+  ],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 2,
+   "gerekce": "Sayısal stop/hedef verilmiş ama 'güçlü momentum' ve 'hacim artışı' tanımsız."
+  },
+  "belirsizlikler": [
+   "Momentum eşiği yok",
+   "Bu bir örnek sistem; kitap kesin kural olarak sunmuyor"
+  ],
+  "uyumluluk_notu": "Hisse odaklı örnekler; tarama/hacim gerektirir. Kural mantığı ≥5m ve kripto/ABD hisse/perpetual'a uyarlanabilir; 52 haftalık zirve gibi ölçütler günlük veri ister.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "trend-takip",
+   "momentum",
+   "rsi",
+   "3-gun"
+  ]
+ },
+ {
+  "kart_id": "daytrade__kanal-sistemi__kuepper",
+  "ad": "Kanal Sistemi (Destek/Direnç Arası Dönüş)",
+  "stil": "daytrade",
+  "kaynak": {
+   "pdf": "Day Trading - Justin Kuepper (196 sayfa) - @eseckal.pdf",
+   "sayfalar": [
+    176,
+    177,
+    178
+   ]
+  },
+  "ozet": "Fiyat en az dört tepkili iki yatay trend çizgisi arasında salınıyorsa, kırılım işareti yokken alt desteğe yaklaşınca alım, üst dirence yaklaşınca satış; ilk dönüş teyidi beklenir.",
+  "kategori": "ortalamaya_donus",
+  "piyasa_rejimi": "yatay",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+   "islem": null,
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "RSI",
+    "parametreler": {
+     "orta_cizgi": 50
+    }
+   },
+   {
+    "ad": "Hacim",
+    "parametreler": {}
+   }
+  ],
+  "long_giris": [
+   "Fiyat en az 4 tepki noktalı yatay kanal içinde",
+   "Fiyat kırılım işareti olmadan alt desteğe yaklaşır",
+   "Alış ilgisi/hacim hızlanır ve ilk tersine dönüş gözlenir"
+  ],
+  "short_giris": [
+   "Fiyat üst dirence yaklaşır, kırılım olası değil",
+   "İlk tersine dönüş görülür"
+  ],
+  "stop_loss": "Üst/alt trend çizgilerinin hemen dışı; sahte kırılımlara karşı yeterince uzak, ya da hacim/gösterge teyitli kırılımda tetik.",
+  "kar_al": "Karşı çizginin hemen içi; fiyat üst direncin %5'i içinde ve RSI orta çizgi altındaysa momentum kaybı sinyali.",
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [
+   "Whipsaw: kanal çizgilerine varmadan düzensiz hareket",
+   "Hacim kırılım uyarısı"
+  ],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 1,
+   "gerekce": "Kanal tespiti ve 'dönüş teyidi' yoruma açık; yatay çizgiler swing seviyeleriyle yaklaşık kodlanır."
+  },
+  "belirsizlikler": [
+   "Mesafe/yüzde eşikleri örnek niteliğinde",
+   "Dönüş teyit mumu tanımsız"
+  ],
+  "uyumluluk_notu": "Hisse odaklı örnekler; tarama/hacim gerektirir. Kural mantığı ≥5m ve kripto/ABD hisse/perpetual'a uyarlanabilir; 52 haftalık zirve gibi ölçütler günlük veri ister.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "kanal",
+   "destek-direnc",
+   "yatay",
+   "dönüş"
+  ]
+ },
+ {
+  "kart_id": "daytrade__ma-cift-gecis-macd__kuepper",
+  "ad": "Çift Hareketli Ortalama Geçişi (+ MACD/RSI Teyidi)",
+  "stil": "daytrade",
+  "kaynak": {
+   "pdf": "Day Trading - Justin Kuepper (196 sayfa) - @eseckal.pdf",
+   "sayfalar": [
+    121,
+    122,
+    128,
+    129,
+    130
+   ]
+  },
+  "ozet": "Kısa vadeli MA uzun vadeli MA'yı yukarı keserse alım, aşağı keserse satış/çıkış; MACD sıfır çizgisi geçişi ve RSI'ın aşırı alım dışında kalması teyit olarak kullanılır, RSI aşırı alıma varınca çıkış.",
+  "kategori": "trend_takip",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+   "islem": null,
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "Hareketli Ortalama",
+    "parametreler": {
+     "kisa": "kitapta sayı yok",
+     "uzun": "kitapta sayı yok"
+    }
+   },
+   {
+    "ad": "MACD",
+    "parametreler": {}
+   },
+   {
+    "ad": "RSI",
+    "parametreler": {
+     "asiri_alim": 70,
+     "asiri_satim": 30
+    }
+   }
+  ],
+  "long_giris": [
+   "Kısa MA uzun MA'yı yukarı keser",
+   "MACD sıfır çizgisinin üstünden geçiş yapar",
+   "RSI aşırı alım bölgesinde değil"
+  ],
+  "short_giris": [
+   "Kısa MA uzun MA'yı aşağı keser"
+  ],
+  "stop_loss": null,
+  "kar_al": "RSI aşırı alım seviyesine (70) ulaşınca çık (örnek).",
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [
+   "Yatay piyasada çok sayıda yanlış sinyal (whipsaw)"
+  ],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 2,
+   "gerekce": "Kural mekanik ama periyotlar ve stop kitapta yok."
+  },
+  "belirsizlikler": [
+   "MA periyotları belirtilmemiş",
+   "Stop yok"
+  ],
+  "uyumluluk_notu": "Hisse odaklı örnekler; tarama/hacim gerektirir. Kural mantığı ≥5m ve kripto/ABD hisse/perpetual'a uyarlanabilir; 52 haftalık zirve gibi ölçütler günlük veri ister.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "ma-kesisim",
+   "macd",
+   "rsi",
+   "whipsaw"
+  ]
+ }
+]

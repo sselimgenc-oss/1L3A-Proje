@@ -1,0 +1,57 @@
+[
+ {
+  "kart_id": "daytrade__uclu-kademeli-giris-cikis__duarte",
+  "ad": "Üçlü Kademeli Giriş/Çıkış (Piramit, Düşüşte Birikim)",
+  "stil": "daytrade",
+  "kaynak": {
+   "pdf": "Day Trading 101 - Joe Duarte (215 sayfa) - @eseckal.pdf",
+   "sayfalar": [
+    156,
+    157,
+    184,
+    185,
+    186
+   ]
+  },
+  "ozet": "Planlanan toplam pozisyon üçe bölünür; ilk üçte bir seçilen fiyattan alınır, kalanlar düşüşlerde (3-5 fiyat kademesi) eklenir, çıkışta üç eşit parça halinde kâr noktalarında satılır. Kitap bunu dolar maliyet ortalamasına benzetiyor.",
+  "kategori": "diger",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "genel",
+  "zaman_dilimi": {
+   "islem": null,
+   "ust_filtre": null
+  },
+  "gostergeler": [],
+  "long_giris": [
+   "Önceden seçilen giriş fiyatında toplam pozisyonun 1/3'ü alınır",
+   "Fiyat düşerse ikinci ve üçüncü 1/3 daha düşük (veya uygun) fiyattan eklenir"
+  ],
+  "short_giris": [],
+  "stop_loss": "Kitap zarar durdurma kullanılmasını söylüyor ama kademeli girişin sayısal stop kuralı yok",
+  "kar_al": "Pozisyon üç eşit parça halinde, kâr arttıkça sırayla satılır (kısmi kâr)",
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [
+   "Önce olası işlem + toplam risk hesabı yapılır"
+  ],
+  "pozisyon_risk": "Toplam pozisyon boyutu risk yönetimi hesabına göre belirlenir, üçe bölünür",
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 0,
+   "gerekce": "YASAK: Düşüşte ek alım = ortalama düşürme/DCA benzeri kademeli yükleme (proje kuralı: martingale/ortalama düşürme yasak); ayrıca giriş sinyali tanımsız (bir kurulum stratejisi değil, pozisyon yönetimi tekniği)."
+  },
+  "belirsizlikler": [
+   "Giriş sinyali yok",
+   "Kademe aralıkları belirtilmemiş",
+   "Sayısal stop yok"
+  ],
+  "uyumluluk_notu": "Pozisyon yönetimi tekniği; strateji değil. Sinyal-bağımsız ve ortalama düşürme içerdiğinden 1L3A'ya alınmaz.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "piramit",
+   "kademeli-giris",
+   "ortalama-dusurme",
+   "yasak"
+  ]
+ }
+]
