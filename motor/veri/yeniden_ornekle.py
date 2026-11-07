@@ -69,27 +69,30 @@ def _seans_ayari(sembol: str) -> dict:
     return ayar
 
 
-def tf_mumlari(sembol: str, tf: str, baslangic=None, bitis=None, dizin=None) -> pd.DataFrame:
+def tf_mumlari(sembol: str, tf: str, baslangic=None, bitis=None, dizin=None, kilit_ac: bool = False,
+               gerekce: str | None = None) -> pd.DataFrame:
     """Araştırma için `tf` mumları (eksikleri atılmış). Kaynak: 5m dosyası varsa 5m; yoksa ve tf >= 1h ise 1h dosyası
     (Dukascopy aylık saatlik mod, bkz. motor/veri/dukascopy.py); 1h dosyası var ama tf < 1h ise AÇIK HATA (ValueError).
-    Hiçbiri yoksa FileNotFoundError. Okuma yalnız depo.mum_oku ile (kilit_ac yok: kilitli dönem kesilir).
+    Hiçbiri yoksa FileNotFoundError. Okuma yalnız depo.mum_oku ile; varsayılan kilit_ac=False (kilitli dönem kesilir). kilit_ac=True + gerekce yalnız
+    onaylı kilitli dönem testi içindir (depo.mum_oku ile aynı kural; açılış kilit günlüğüne yazılır).
     Seanslı semboller (DK_*) için `yeniden_ornekle`nin seans modu kullanılır (kısmi seans mumları tutulur, ABD
     hisselerinde 4h NY 09:00'a hizalı; 1d = UTC günü = seans günü)."""
     from motor.veri import depo   # döngüsel içe aktarmayı önlemek için yerel
+    kl = {"kilit_ac": kilit_ac, "gerekce": gerekce}
     ek = _seans_ayari(sembol)
     # Kaynak sabitleme (lider kararı 2026-11-07, karar 26 günlüğü): DK_ sembollerinde tf >= 1h ise HER ZAMAN 1h dosyası
     # kullanılır. Dakikalık indirme sürerken 5m dosyası sonradan ortaya çıkıp kaynağı değiştirmesin (tekrarlanabilirlik),
     # ayrıca 1h dosyası tam (5m'de indirilemeyen günler var). 5m yalnız tf < 1h için.
     if (sembol.startswith("DK_") and depo.aralik_suresi(tf) >= pd.Timedelta(1, "h")
             and depo.mum_yolu(sembol, "1h", dizin).exists()):
-        return yeniden_ornekle(depo.mum_oku(sembol, "1h", baslangic, bitis, dizin=dizin), tf, kaynak="1h",
+        return yeniden_ornekle(depo.mum_oku(sembol, "1h", baslangic, bitis, dizin=dizin, **kl), tf, kaynak="1h",
                                eksikleri_at=True, **ek)
     if depo.mum_yolu(sembol, "5m", dizin).exists():
-        return yeniden_ornekle(depo.mum_oku(sembol, "5m", baslangic, bitis, dizin=dizin), tf, kaynak="5m",
+        return yeniden_ornekle(depo.mum_oku(sembol, "5m", baslangic, bitis, dizin=dizin, **kl), tf, kaynak="5m",
                                eksikleri_at=True, **ek)
     if depo.mum_yolu(sembol, "1h", dizin).exists():
         if depo.aralik_suresi(tf) < pd.Timedelta(1, "h"):
             raise ValueError(f"{sembol}: 5m verisi yok, yalnız 1h var; {tf} bu kaynaktan üretilemez (tf >= 1h olmalı)")
-        return yeniden_ornekle(depo.mum_oku(sembol, "1h", baslangic, bitis, dizin=dizin), tf, kaynak="1h",
+        return yeniden_ornekle(depo.mum_oku(sembol, "1h", baslangic, bitis, dizin=dizin, **kl), tf, kaynak="1h",
                                eksikleri_at=True, **ek)
-    return depo.mum_oku(sembol, "5m", baslangic, bitis, dizin=dizin)   # FileNotFoundError (açık mesaj)
+    return depo.mum_oku(sembol, "5m", baslangic, bitis, dizin=dizin, **kl)   # FileNotFoundError (açık mesaj)
