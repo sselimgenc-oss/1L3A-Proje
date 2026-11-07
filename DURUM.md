@@ -194,6 +194,11 @@ Ana ders: önceki sonuçlar OOS'a bakılarak seçilmiş ve kâr birkaç işlemde
   Test dönemi (kullanıcı): 2020-01-01 → bugün, kilit ayrımı yok (WF örneklem-dışı sürer; bağımsız sınav paper). Tüm stratejiler
   kodlama bitince evrende test edilir; tüm veri 2020→bugün indirilir.
 
+- 2026-11-07: Kullanıcı eski repoları geri yükledi ve **tüm PDF'lerden ve kodlardan strateji alınmasını** istedi (önceki
+  "PDF alma" kısıtı kullanıcı kararıyla kalktı; PDF/metinler yine repoya girmez, yalnız kartlar/envanter). 11 repo klonlandı;
+  130 tekil PDF (40'ı Aşama 0'da işlenmiş, 90 yeni: daytrade 25, swing 20, algo 17, scalp 9, diğer kitap 6, rapor/liste 13).
+  8 ajan: 5 kart çıkarma, rapor PDF envanteri, eski repo kod envanteri, eski panoların incelenip panoya eklenmesi.
+
 ## Kullanıcıyı bekleyen kararlar
 - ~~Final seçim ve kilitli dönemin bir kez açılması (karar 20)~~ — kullanıcı "aç" dedi (2026-11-07), yapıldı: `sonuclar/kilit/RAPOR.md`.
 - Karar 13 eşikleri çoklu test düzeltmesi içermiyor; sağlamlık paketi öneri kapısı ekliyor (son karar kullanıcıda).
