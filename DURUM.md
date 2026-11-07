@@ -186,6 +186,9 @@ Ana ders: önceki sonuçlar OOS'a bakılarak seçilmiş ve kâr birkaç işlemde
 - 2026-11-07: **Karar 27 (kullanıcı):** tek sembol–strateji ikilileri (SOL'de CCI, NVDA'da Fraktal…) istenmiyor; final set
   paper'dan kaldırılır. Yeni hedef: **evren stratejileri** — tek parametre setiyle 13 enstrümanın hepsinde çalışan, sinyal
   nerede çıkarsa orada işleme giren stratejiler; ajan (stil) başına ≤ 3. Ön kayıt: `sonuclar/evren/ON_KAYIT.md`.
+  Evren (kullanıcı, aynı gün): daytrade/swing = emtia 5 (altın, gümüş, petrol, bakır, doğalgaz) + S&P 500'de piyasa değeri
+  > 500 milyar $ hisseler (bugün 18) + stabil hariç piyasa değeri > 5 milyar $ kriptolar (bugün 15, Binance perp'i olanlar);
+  üyelik her gün kontrol. Scalp = yalnız SPX, XAUUSD, petrol, BTCUSDT.
 
 ## Kullanıcıyı bekleyen kararlar
 - ~~Final seçim ve kilitli dönemin bir kez açılması (karar 20)~~ — kullanıcı "aç" dedi (2026-11-07), yapıldı: `sonuclar/kilit/RAPOR.md`.
