@@ -216,10 +216,7 @@ def _gecerli_ust_tfler(index, tfler, taban_s=None):
     for tf in str(tfler).replace(" ", "").split(","):
         if not tf:
             continue
-        try:
-            s = aralik_suresi(tf)
-        except ValueError:
-            continue
+        s = aralik_suresi(tf)   # geçersiz TF metni hata verir (sessiz atlama yok)
         if s > kaynak_s and s % kaynak_s == pd.Timedelta(0):
             sonuc.append(tf)
     return sonuc
