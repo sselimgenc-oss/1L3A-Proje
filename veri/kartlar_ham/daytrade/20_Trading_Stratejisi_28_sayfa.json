@@ -1,0 +1,58 @@
+[
+  {
+    "kart_id": "daytrade__5dk-sistem-7-saatlik-kutu-kirilimi__carter",
+    "ad": "5 Dakika Sistem #7: 08:00 EST Önceki Saat Kutusu Kırılımı",
+    "stil": "daytrade",
+    "kaynak": {
+      "pdf": "20 Trading Stratejisi (28 sayfa) - @eseckal.pdf",
+      "sayfalar": [
+        11
+      ]
+    },
+    "ozet": "08:00 NY saatinde önceki saatin yüksek-düşük 'kutusu' çizilir; fiyat kutu yüksekliğinin %20'si kadar üstüne çıkarsa AL, altına inerse SAT (sinyal 1 saat geçerli); hedef kutu yüksekliğinin %400'ü; stop kutunun karşı ucu; kutu boyutu kadar iz süren stop.",
+    "kategori": "kirilim",
+    "piyasa_rejimi": "volatil",
+    "orijinal_piyasa": "forex",
+    "zaman_dilimi": {
+      "islem": "5m",
+      "ust_filtre": null
+    },
+    "gostergeler": [
+      {
+        "ad": "Kutu (önceki saat H-L)",
+        "parametreler": {}
+      }
+    ],
+    "long_giris": [
+      "08:00 EST'de önceki saatin H-L kutusunu çiz",
+      "Fiyat kutu üstünün üzerine kutu yüksekliğinin %20'si kadar çıkar -> AL (1 saat içinde)"
+    ],
+    "short_giris": [
+      "Fiyat kutu altının %20 altına iner -> SAT"
+    ],
+    "stop_loss": "Kutunun alt ucu (short: üst ucu)",
+    "kar_al": "Kutu yüksekliğinin %400'üne ulaşınca kapat",
+    "iz_suren_stop": "Kutu boyutu kadar iz süren stop",
+    "zaman_cikisi": "Sinyal 1 saat içinde gerçekleşmezse geçersiz",
+    "filtreler": [
+      "GBPJPY, GBPUSD gibi oynak çiftlerde en iyi"
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 3,
+      "gerekce": "Tamamen sayısal."
+    },
+    "belirsizlikler": [
+      "İz süren stop mesafesi 'kutu boyutu'"
+    ],
+    "uyumluluk_notu": "5m forex sistemi; pip tabanlı sabit stop/hedef ATR ile ölçeklenmeli; hacim gerekmez; kripto/emtia perpetual'larda pip yerine ATR/% kullanılmalı.",
+    "varyantlar": [],
+    "anahtar_kelimeler": [
+      "kutu",
+      "saatlik",
+      "kirilim",
+      "gbpjpy"
+    ]
+  }
+]

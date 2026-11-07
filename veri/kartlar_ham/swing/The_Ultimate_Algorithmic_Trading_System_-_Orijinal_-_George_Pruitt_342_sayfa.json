@@ -1,0 +1,921 @@
+[
+ {
+  "kart_id": "swing__turtle-sistem1-20g-donchian__pruitt",
+  "ad": "Turtle Sistem 1 (20 gün Donchian kırılımı)",
+  "stil": "swing",
+  "kaynak": {
+   "pdf": "The_Ultimate_Algorithmic_Trading_System_-_Orijinal_-_George_Pruitt_342_sayfa.pdf",
+   "sayfalar": [
+    90,
+    92
+   ]
+  },
+  "ozet": "Fiyat 20 günlük en yüksek/en düşük kanalını stop emriyle kırınca yönde işlem; çıkış 10 günlük karşı kanal veya sermayenin %2'si kayıp.",
+  "kategori": "kirilim",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "vadeli",
+  "zaman_dilimi": {
+   "islem": "1d",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "Donchian",
+    "parametreler": {
+     "giris_gun": 20,
+     "cikis_gun": 10
+    }
+   }
+  ],
+  "long_giris": [
+   "Bir tick üstünde 20 günün en yüksek değerine buy stop"
+  ],
+  "short_giris": [
+   "Bir tick altında 20 günün en düşük değerine sell short stop"
+  ],
+  "stop_loss": "Giriş fiyatından başlangıç sermayesinin %2'si kadar (0.02*sermaye/bigPointValue) uzaklık; ikisinden yakın olan (10g kanal veya %2)",
+  "kar_al": null,
+  "iz_suren_stop": "10 günlük karşı Donchian kanalı (long için 10g en düşük, short için 10g en yüksek)",
+  "zaman_cikisi": null,
+  "filtreler": [
+   "Son işlem kazançlıysa sonraki Sistem 1 girişi atlanır, sanal (kağıt) izlenir; sanal kayıp oluşunca gerçek işlem açılır (LTLF)"
+  ],
+  "pozisyon_risk": "Sermayenin %2'si işlem başına maksimum kayıp (çıkış kuralı içinde)",
+  "iddia_edilen_performans": "Kitap: LTLF ile kâr/maks.düşüş oranı artıyor; filtresiz 55g sistem daha iyi çıktı. Tam sayılar tablolarda (35 vadeli, ~15 yıl).",
+  "kodlanabilirlik": {
+   "puan": 3,
+   "gerekce": "Tüm giriş/çıkış kuralları fiyat ile ölçülebilir; LTLF mekanik olarak izlenebilir."
+  },
+  "belirsizlikler": [
+   "Sanal işlem takibi için çıkışın hangi fiyattan hesaplanacağı basit; kitap '$2000 stop' testte kullanıyor, %2 kuralı metinde.",
+   "Tick büyüklüğü piyasaya göre."
+  ],
+  "uyumluluk_notu": "Günlük bar (vadeli) sistemi; saatlik/4s'ye ölçeklenebilir ama kitap günlük test etmiş. Hacim gerekmez. Kripto/hisse/emtia perpetual'larda çalışır; $ stop yerine ATR/yüzde stop uyarlanmalı (bigPointValue vadeliye özgü).",
+  "varyantlar": [
+   "LTLF kapalı (her sinyal alınır)"
+  ],
+  "anahtar_kelimeler": [
+   "turtle",
+   "donchian",
+   "kirilim",
+   "20-gun",
+   "ltlf"
+  ]
+ },
+ {
+  "kart_id": "swing__turtle-sistem2-55g-donchian__pruitt",
+  "ad": "Turtle Sistem 2 (55 gün Donchian kırılımı)",
+  "stil": "swing",
+  "kaynak": {
+   "pdf": "The_Ultimate_Algorithmic_Trading_System_-_Orijinal_-_George_Pruitt_342_sayfa.pdf",
+   "sayfalar": [
+    92
+   ]
+  },
+  "ozet": "55 günlük kanal kırılımında yönde işlem; çıkış 20 günlük karşı kanal veya %2 sermaye kaybı. LTLF uygulanmaz (her sinyal alınır).",
+  "kategori": "kirilim",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "vadeli",
+  "zaman_dilimi": {
+   "islem": "1d",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "Donchian",
+    "parametreler": {
+     "giris_gun": 55,
+     "cikis_gun": 20
+    }
+   }
+  ],
+  "long_giris": [
+   "Bir tick üstünde 55 günün en yüksek değerine buy stop"
+  ],
+  "short_giris": [
+   "Bir tick altında 55 günün en düşük değerine sell short stop"
+  ],
+  "stop_loss": "Giriş fiyatından %2 sermaye kaybı mesafesi veya 20g karşı kanal (yakın olan)",
+  "kar_al": null,
+  "iz_suren_stop": "20 günlük karşı Donchian kanalı",
+  "zaman_cikisi": null,
+  "filtreler": [],
+  "pozisyon_risk": "Sermayenin %2'si",
+  "iddia_edilen_performans": "Kitap: 55g sistem 20g sistemin neredeyse iki katı kâr, %10 az düşüş üretti; 'net kazanan basit 55 günlük kırılım'.",
+  "kodlanabilirlik": {
+   "puan": 3,
+   "gerekce": "Tam mekanik."
+  },
+  "belirsizlikler": [
+   "Kitaptaki metinde short çıkışı 'önceki 10 günün en yükseği' yazıyor (tutarsız; 20 gün olması beklenir)."
+  ],
+  "uyumluluk_notu": "Günlük bar (vadeli) sistemi; saatlik/4s'ye ölçeklenebilir ama kitap günlük test etmiş. Hacim gerekmez. Kripto/hisse/emtia perpetual'larda çalışır; $ stop yerine ATR/yüzde stop uyarlanmalı (bigPointValue vadeliye özgü).",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "turtle",
+   "donchian",
+   "kirilim",
+   "55-gun"
+  ]
+ },
+ {
+  "kart_id": "swing__donchian-n-gun-kirilim__pruitt",
+  "ad": "Donchian N-Gün Kırılım (Battle Royale kısa/orta/uzun)",
+  "stil": "swing",
+  "kaynak": {
+   "pdf": "The_Ultimate_Algorithmic_Trading_System_-_Orijinal_-_George_Pruitt_342_sayfa.pdf",
+   "sayfalar": [
+    102,
+    103,
+    104,
+    105,
+    106,
+    107
+   ]
+  },
+  "ozet": "N günlük en yüksek/en düşük kırılımında yönde pozisyon; çıkış N/2 günlük karşı kanal veya sabit $3000 stop. Üç ayar karşılaştırılmış; uzun vade en iyi.",
+  "kategori": "kirilim",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "vadeli",
+  "zaman_dilimi": {
+   "islem": "1d",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "Donchian",
+    "parametreler": {
+     "N": [
+      20,
+      40,
+      100
+     ],
+     "cikis_N": [
+      10,
+      20,
+      50
+     ]
+    }
+   }
+  ],
+  "long_giris": [
+   "Fiyat son N günün en yükseğini aşarsa al"
+  ],
+  "short_giris": [
+   "Fiyat son N günün en düşüğünün altına inerse açığa sat"
+  ],
+  "stop_loss": "Giriş-3000$/bigPointValue (kapanış bazlı sabit para stopu)",
+  "kar_al": null,
+  "iz_suren_stop": "N/2 günlük karşı kanal kırılımı",
+  "zaman_cikisi": null,
+  "filtreler": [],
+  "pozisyon_risk": "Test: tek kontrat, işlem başına maks. $3000 kayıp",
+  "iddia_edilen_performans": "Kitap: 100 günlük Donchian ~$1.1 milyon, 1366 işlem (35 vadeli piyasa) ile çift hareketli ortalamayı geçti; genetik optimizasyonda kısa-orta parametre ayarları aşırı uydurma riskli, walk-forward'da (2010-2015) sistem düşüş büyük.",
+  "kodlanabilirlik": {
+   "puan": 3,
+   "gerekce": "Tam mekanik."
+  },
+  "belirsizlikler": [
+   "$ stop ve 98/25 gibi optimizasyon sonuçları örneklem içi; örneklem dışı zayıf çıktı (kitap bunu açıkça yazıyor)."
+  ],
+  "uyumluluk_notu": "Günlük bar (vadeli) sistemi; saatlik/4s'ye ölçeklenebilir ama kitap günlük test etmiş. Hacim gerekmez. Kripto/hisse/emtia perpetual'larda çalışır; $ stop yerine ATR/yüzde stop uyarlanmalı (bigPointValue vadeliye özgü).",
+  "varyantlar": [
+   "Optimize ayar: giriş 98, çıkış 25, stop $4000 (örnek-içi)"
+  ],
+  "anahtar_kelimeler": [
+   "donchian",
+   "kirilim",
+   "trend-takip",
+   "walk-forward"
+  ]
+ },
+ {
+  "kart_id": "swing__bollinger-kirilim-60-2__pruitt",
+  "ad": "Bollinger Bandı Trend Takip Kırılımı (60,2)",
+  "stil": "swing",
+  "kaynak": {
+   "pdf": "The_Ultimate_Algorithmic_Trading_System_-_Orijinal_-_George_Pruitt_342_sayfa.pdf",
+   "sayfalar": [
+    76,
+    77,
+    104
+   ]
+  },
+  "ozet": "Kapanış üst Bollinger bandının üstüne çıkarsa al, alt bandın altına inerse açığa sat; kapanış ortalamayı geri keserse çık. Bantlar volatiliteye uyumlu.",
+  "kategori": "kirilim",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "vadeli",
+  "zaman_dilimi": {
+   "islem": "1d",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "Bollinger",
+    "parametreler": {
+     "periyot": 60,
+     "std": 2
+    }
+   },
+   {
+    "ad": "SMA",
+    "parametreler": {
+     "periyot": 60
+    }
+   }
+  ],
+  "long_giris": [
+   "Kapanış üst bandın (SMA60 + 2 std) üstüne çıkar (crosses above)"
+  ],
+  "short_giris": [
+   "Kapanış alt bandın (SMA60 - 2 std) altına iner (crosses below)"
+  ],
+  "stop_loss": "Kapanış SMA60'ı karşıya keserse çık (başlangıç riski = band-ortalama mesafesi)",
+  "kar_al": null,
+  "iz_suren_stop": "Long'da kapanış < SMA60, short'ta kapanış > SMA60",
+  "zaman_cikisi": null,
+  "filtreler": [
+   "Versiyon 2: (üst bant - ortalama) * bigPointValue > $2000 ise işlemi alma"
+  ],
+  "pozisyon_risk": "Versiyon 2'de işlem başına $2000 risk (milyon dolar hesapta %0.2) filtresi",
+  "iddia_edilen_performans": "Kitap: 35 vadelide 30 yıl test; net ~$1.68 milyon, 3580 işlem, kâr faktörü 1.4, maks. düşüş -$345k (60,2). Optimizasyonda 100 bar ve 2.25 std bölgesi plato.",
+  "kodlanabilirlik": {
+   "puan": 3,
+   "gerekce": "Tam mekanik."
+  },
+  "belirsizlikler": [
+   "Optimize ayarlar (örn. 88/1.25) tepe noktası, dayanıksız (kitap uyarıyor)."
+  ],
+  "uyumluluk_notu": "Günlük bar (vadeli) sistemi; saatlik/4s'ye ölçeklenebilir ama kitap günlük test etmiş. Hacim gerekmez. Kripto/hisse/emtia perpetual'larda çalışır; $ stop yerine ATR/yüzde stop uyarlanmalı (bigPointValue vadeliye özgü).",
+  "varyantlar": [
+   "Versiyon 2 risk filtresi",
+   "Optimize uzunluk 100, genişlik 2.25, stop $4000"
+  ],
+  "anahtar_kelimeler": [
+   "bollinger",
+   "kirilim",
+   "trend-takip",
+   "volatilite-bandi"
+  ]
+ },
+ {
+  "kart_id": "swing__keltner-kirilim-60-2atr__pruitt",
+  "ad": "Keltner Kanalı Trend Takip Kırılımı (60,2 ATR)",
+  "stil": "swing",
+  "kaynak": {
+   "pdf": "The_Ultimate_Algorithmic_Trading_System_-_Orijinal_-_George_Pruitt_342_sayfa.pdf",
+   "sayfalar": [
+    82,
+    83,
+    86
+   ]
+  },
+  "ozet": "Kapanış üst Keltner kanalının üstüne çıkarsa al, altına inerse açığa sat; ortalamayı geri kesince çık. Merkez (H+L+C) tipik fiyatın 60 günlük ortalaması, kanal 2 ATR.",
+  "kategori": "kirilim",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "vadeli",
+  "zaman_dilimi": {
+   "islem": "1d",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "Keltner",
+    "parametreler": {
+     "periyot": 60,
+     "ATR_carpan": 2
+    }
+   },
+   {
+    "ad": "ATR",
+    "parametreler": {
+     "periyot": 60
+    }
+   }
+  ],
+  "long_giris": [
+   "Kapanış üst kanalın (Ortalama + 2*ATR60) üstüne çıkar"
+  ],
+  "short_giris": [
+   "Kapanış alt kanalın (Ortalama - 2*ATR60) altına iner"
+  ],
+  "stop_loss": "Kapanış merkez ortalamayı karşıya keserse çık",
+  "kar_al": null,
+  "iz_suren_stop": "Long'da kapanış < ortalama, short'ta kapanış > ortalama",
+  "zaman_cikisi": null,
+  "filtreler": [],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": "Kitap: Bollinger (60,2) ile eşdeğer sayıda işlem için Keltner (60,3) kullanıldı; Bollinger daha iyi çıktı (net ~$1.25-1.5 milyon vs $1.68 milyon).",
+  "kodlanabilirlik": {
+   "puan": 3,
+   "gerekce": "Tam mekanik."
+  },
+  "belirsizlikler": [
+   "Kitap kodunda merkez (H+L+C)'nin 3'e bölünmemiş toplamı yazıyor; tipik fiyat (H+L+C)/3 varsayılır."
+  ],
+  "uyumluluk_notu": "Günlük bar (vadeli) sistemi; saatlik/4s'ye ölçeklenebilir ama kitap günlük test etmiş. Hacim gerekmez. Kripto/hisse/emtia perpetual'larda çalışır; $ stop yerine ATR/yüzde stop uyarlanmalı (bigPointValue vadeliye özgü).",
+  "varyantlar": [
+   "Genişlik 3 ATR eşdeğer sayıda işlem için"
+  ],
+  "anahtar_kelimeler": [
+   "keltner",
+   "kirilim",
+   "atr",
+   "trend-takip"
+  ]
+ },
+ {
+  "kart_id": "swing__cift-hareketli-ortalama-kesisim__pruitt",
+  "ad": "Çift/Üçlü SMA Kesişim (DMA/TMA)",
+  "stil": "swing",
+  "kaynak": {
+   "pdf": "The_Ultimate_Algorithmic_Trading_System_-_Orijinal_-_George_Pruitt_342_sayfa.pdf",
+   "sayfalar": [
+    102,
+    103,
+    104,
+    105,
+    106
+   ]
+  },
+  "ozet": "Kısa SMA uzun SMA'yı yukarı keserse al, aşağı keserse sat (çift); üçlüde kısa>orta>uzun hizalanması gerekir. Uzun vadeli ayarlar (49/99, TMA) en iyi sonucu verdi.",
+  "kategori": "trend_takip",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "vadeli",
+  "zaman_dilimi": {
+   "islem": "1d",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "SMA",
+    "parametreler": {
+     "kisa": [
+      9,
+      19,
+      49
+     ],
+     "uzun": [
+      19,
+      49,
+      99
+     ]
+    }
+   },
+   {
+    "ad": "SMA",
+    "parametreler": {
+     "kisa": 9,
+     "orta": [
+      19,
+      49,
+      199
+     ],
+     "uzun": [
+      49,
+      199,
+      399
+     ]
+    }
+   }
+  ],
+  "long_giris": [
+   "DMA: kısa SMA uzun SMA'yı yukarı keser",
+   "TMA: kısa SMA orta SMA'yı yukarı keser VE ikisi de uzun SMA'nın üstünde"
+  ],
+  "short_giris": [
+   "DMA: kısa SMA uzun SMA'yı aşağı keser",
+   "TMA: kısa SMA orta SMA'yı aşağı keser VE ikisi de uzun SMA'nın altında"
+  ],
+  "stop_loss": "Kapanış < giriş - 3000$/bigPointValue (long); tersi short",
+  "kar_al": null,
+  "iz_suren_stop": "TMA'da kısa SMA orta SMA'yı ters yönde keserse çık",
+  "zaman_cikisi": null,
+  "filtreler": [],
+  "pozisyon_risk": "Test: tek kontrat, $3000 maks kayıp",
+  "iddia_edilen_performans": "Kitap: DMA 49/99 ~ $1 milyona yakın kâr, 2307 işlem; TMA (49/199/399) >$700k 528 işlem, ortalama $1348/işlem. Genetik optimizasyonda TMA en iyi (kâr/düşüş 7.04), kısa:orta:uzun oranı ~1:4:6.",
+  "kodlanabilirlik": {
+   "puan": 3,
+   "gerekce": "Tam mekanik."
+  },
+  "belirsizlikler": [
+   "Optimizasyon sonuçları örneklem içi; sonraki test örneklem dışı kötüleşti."
+  ],
+  "uyumluluk_notu": "Günlük bar (vadeli) sistemi; saatlik/4s'ye ölçeklenebilir ama kitap günlük test etmiş. Hacim gerekmez. Kripto/hisse/emtia perpetual'larda çalışır; $ stop yerine ATR/yüzde stop uyarlanmalı (bigPointValue vadeliye özgü).",
+  "varyantlar": [
+   "Tek SMA kapanış kesişimi (19/39/100): zayıf, tam sistem olarak önerilmiyor"
+  ],
+  "anahtar_kelimeler": [
+   "sma",
+   "kesisim",
+   "cift-ma",
+   "uclu-ma",
+   "trend-takip"
+  ]
+ },
+ {
+  "kart_id": "swing__wilder-dmi-adx35__pruitt",
+  "ad": "Wilder Yönsel Hareket (ADX>35 + DI) Sistemi",
+  "stil": "swing",
+  "kaynak": {
+   "pdf": "The_Ultimate_Algorithmic_Trading_System_-_Orijinal_-_George_Pruitt_342_sayfa.pdf",
+   "sayfalar": [
+    43
+   ]
+  },
+  "ozet": "14 günlük ADX 35 üzerindeyken +DI>-DI ise al, -DI>+DI ise sat; ADX<35 iken 3 günlük kapanış izleyen stopla çıkılır.",
+  "kategori": "trend_takip",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "vadeli",
+  "zaman_dilimi": {
+   "islem": "1d",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "ADX",
+    "parametreler": {
+     "periyot": 14,
+     "esik": 35
+    }
+   },
+   {
+    "ad": "DMI",
+    "parametreler": {
+     "periyot": 14
+    }
+   }
+  ],
+  "long_giris": [
+   "14g ADX > 35",
+   "+DI > -DI ise kapanışta al (MOC)"
+  ],
+  "short_giris": [
+   "14g ADX > 35",
+   "-DI > +DI ise kapanışta açığa sat"
+  ],
+  "stop_loss": "ADX<35 iken: long'da kapanış önceki 3 günün en düşük kapanışının altındaysa çık; short'ta önceki 3 günün en yüksek kapanışının üstündeyse çık",
+  "kar_al": null,
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 3,
+   "gerekce": "Tam mekanik, tek yorum: ADX>35 iken pozisyonu zaten tutuyorsa çıkış kuralı yok."
+  },
+  "belirsizlikler": [
+   "ADX>35 iken ters DI sinyalinde çıkış/dönüş davranışı açıkça yazılmamış (varsayım: stop-and-reverse)."
+  ],
+  "uyumluluk_notu": "Günlük bar (vadeli) sistemi; saatlik/4s'ye ölçeklenebilir ama kitap günlük test etmiş. Hacim gerekmez. Kripto/hisse/emtia perpetual'larda çalışır; $ stop yerine ATR/yüzde stop uyarlanmalı (bigPointValue vadeliye özgü).",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "adx",
+   "dmi",
+   "wilder",
+   "trend-takip"
+  ]
+ },
+ {
+  "kart_id": "swing__rsi-ob-os-14-atr-hedef__pruitt",
+  "ad": "RSI(14) Aşırı Alım/Satım + ATR Hedef/Stop",
+  "stil": "swing",
+  "kaynak": {
+   "pdf": "The_Ultimate_Algorithmic_Trading_System_-_Orijinal_-_George_Pruitt_342_sayfa.pdf",
+   "sayfalar": [
+    47
+   ]
+  },
+  "ozet": "14g RSI<30 ise kapanışta al, >70 ise kapanışta açığa sat; hedef 3 ATR, stop 1 ATR (ATR=10 gün). Kitap bu basit modelden hayal kırıklığı bildiriyor.",
+  "kategori": "ortalamaya_donus",
+  "piyasa_rejimi": "yatay",
+  "orijinal_piyasa": "vadeli",
+  "zaman_dilimi": {
+   "islem": "1d",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "RSI",
+    "parametreler": {
+     "periyot": 14,
+     "alt": 30,
+     "ust": 70
+    }
+   },
+   {
+    "ad": "ATR",
+    "parametreler": {
+     "periyot": 10
+    }
+   }
+  ],
+  "long_giris": [
+   "RSI(14) < 30 -> kapanışta al"
+  ],
+  "short_giris": [
+   "RSI(14) > 70 -> kapanışta açığa sat"
+  ],
+  "stop_loss": "Long: kapanış < giriş - 1*ATR(10); short: kapanış > giriş + 1*ATR(10)",
+  "kar_al": "Long: kapanış > giriş + 3*ATR(10); short: kapanış < giriş - 3*ATR(10)",
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": "Kitap: 'RSI'yi sadece aşırı alım/satım göstergesi olarak kullanırsanız hayal kırıklığına uğrarsınız'; tablolarda piyasa bazlı sonuçlar.",
+  "kodlanabilirlik": {
+   "puan": 3,
+   "gerekce": "Tam mekanik."
+  },
+  "belirsizlikler": [],
+  "uyumluluk_notu": "Günlük bar (vadeli) sistemi; saatlik/4s'ye ölçeklenebilir ama kitap günlük test etmiş. Hacim gerekmez. Kripto/hisse/emtia perpetual'larda çalışır; $ stop yerine ATR/yüzde stop uyarlanmalı (bigPointValue vadeliye özgü).",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "rsi",
+   "ortalamaya-donus",
+   "atr-hedef"
+  ]
+ },
+ {
+  "kart_id": "swing__rsi-failure-swing__pruitt",
+  "ad": "Wilder RSI Failure Swing",
+  "stil": "swing",
+  "kaynak": {
+   "pdf": "The_Ultimate_Algorithmic_Trading_System_-_Orijinal_-_George_Pruitt_342_sayfa.pdf",
+   "sayfalar": [
+    52
+   ]
+  },
+  "ozet": "RSI 70 üstüne çıkıp pivot yapar, geri çekilip pivot dip oluşturur, tekrar yükselir ama önceki zirveyi geçemez; RSI ara dip seviyesine inince açığa sat. Long için ayna.",
+  "kategori": "ortalamaya_donus",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "vadeli",
+  "zaman_dilimi": {
+   "islem": "1d",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "RSI",
+    "parametreler": {
+     "periyot": 14,
+     "alt": 30,
+     "ust": 70
+    }
+   },
+   {
+    "ad": "ATR",
+    "parametreler": {
+     "periyot": 10
+    }
+   }
+  ],
+  "long_giris": [
+   "RSI 30 altında pivot dip, sonra pivot zirve, RSI tekrar düşer ama ilk dibin altına inmez; RSI ara pivot zirve seviyesini aşınca al"
+  ],
+  "short_giris": [
+   "RSI 70 üstünde pivot zirve, ara pivot dip, ikinci zirve ilkini geçemez; RSI ara pivot dip seviyesine inince sat"
+  ],
+  "stop_loss": "Short: kapanış > giriş + 3 ATR",
+  "kar_al": "Short: kapanış < giriş - 1 ATR (kitapta bu hedef/stop oranı, long ayna)",
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 2,
+   "gerekce": "Pivot tanımı (RSI iki yanındaki mumdan yüksek/düşük) yazıda var; sonlu durum makinesiyle kodlanır."
+  },
+  "belirsizlikler": [
+   "Hedef/stop ATR değerleri short için verilmiş, long simetrik varsayılır.",
+   "Pivotun kaç bar gerektirdiği: 1 bar sağ-sol (rsi[1]>rsi ve rsi[1]>rsi[2])."
+  ],
+  "uyumluluk_notu": "Günlük bar (vadeli) sistemi; saatlik/4s'ye ölçeklenebilir ama kitap günlük test etmiş. Hacim gerekmez. Kripto/hisse/emtia perpetual'larda çalışır; $ stop yerine ATR/yüzde stop uyarlanmalı (bigPointValue vadeliye özgü).",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "rsi",
+   "failure-swing",
+   "wilder",
+   "pivot"
+  ]
+ },
+ {
+  "kart_id": "swing__slow-stokastik-lane-80-20__pruitt",
+  "ad": "George Lane Yavaş Stokastik Kesişim (14, 80/20)",
+  "stil": "swing",
+  "kaynak": {
+   "pdf": "The_Ultimate_Algorithmic_Trading_System_-_Orijinal_-_George_Pruitt_342_sayfa.pdf",
+   "sayfalar": [
+    59
+   ]
+  },
+  "ozet": "Yavaş %K, %D'yi 20 altında yukarı keserse al; 80 üstünde aşağı keserse sat. Hedef 3 ATR, stop 1 ATR.",
+  "kategori": "ortalamaya_donus",
+  "piyasa_rejimi": "yatay",
+  "orijinal_piyasa": "vadeli",
+  "zaman_dilimi": {
+   "islem": "1d",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "Stokastik",
+    "parametreler": {
+     "periyot": 14,
+     "yavas": true,
+     "alt": 20,
+     "ust": 80
+    }
+   },
+   {
+    "ad": "ATR",
+    "parametreler": {
+     "periyot": 10
+    }
+   }
+  ],
+  "long_giris": [
+   "Yavaş %K yavaş %D'yi yukarı keser ve %D < 20 -> al"
+  ],
+  "short_giris": [
+   "Yavaş %K yavaş %D'yi aşağı keser ve %D > 80 -> sat"
+  ],
+  "stop_loss": "Kapanış < giriş - 1 ATR(10) (long); tersi short",
+  "kar_al": "Kapanış > giriş + 3 ATR(10) (long); tersi short",
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 3,
+   "gerekce": "Tam mekanik."
+  },
+  "belirsizlikler": [
+   "Yavaşlatma ortalama uzunlukları kitapta kodda, metinde belirtilmemiş (varsayım 3)."
+  ],
+  "uyumluluk_notu": "Günlük bar (vadeli) sistemi; saatlik/4s'ye ölçeklenebilir ama kitap günlük test etmiş. Hacim gerekmez. Kripto/hisse/emtia perpetual'larda çalışır; $ stop yerine ATR/yüzde stop uyarlanmalı (bigPointValue vadeliye özgü).",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "stokastik",
+   "ortalamaya-donus",
+   "lane"
+  ]
+ },
+ {
+  "kart_id": "swing__cci-lambert-ob-os-ve-trend__pruitt",
+  "ad": "Lambert CCI Aşırı Bölge Dönüşü ve Trend Takip",
+  "stil": "swing",
+  "kaynak": {
+   "pdf": "The_Ultimate_Algorithmic_Trading_System_-_Orijinal_-_George_Pruitt_342_sayfa.pdf",
+   "sayfalar": [
+    62,
+    65
+   ]
+  },
+  "ozet": "CCI(20)'nin 9 günlük ortalaması -100'ü yukarı keserse al, +100'ü aşağı keserse sat (OB/OS). Trend varyantı: 9g ortalama CCI 3 gün üst üste >100 ise al.",
+  "kategori": "momentum",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "vadeli",
+  "zaman_dilimi": {
+   "islem": "1d",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "CCI",
+    "parametreler": {
+     "periyot": 20,
+     "yumusatma": 9,
+     "esik": 100
+    }
+   },
+   {
+    "ad": "ATR",
+    "parametreler": {
+     "periyot": 10
+    }
+   }
+  ],
+  "long_giris": [
+   "OB/OS: CCI(20)'nin 9g ortalaması -100'ü yukarı keser",
+   "Trend: son 3 günün en düşük CCI değeri > 100 -> al"
+  ],
+  "short_giris": [
+   "OB/OS: ortalama CCI +100'ü aşağı keser",
+   "Trend: son 3 günün en yüksek CCI değeri < -100 -> sat"
+  ],
+  "stop_loss": "OB/OS: giriş - 1 ATR; Trend: giriş - 3 ATR (short ayna)",
+  "kar_al": "OB/OS: giriş + 3 ATR; Trend: giriş + 5 ATR (short ayna)",
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 3,
+   "gerekce": "Tam mekanik."
+  },
+  "belirsizlikler": [
+   "İki sistem kitapta iki ayrı kutu (2.5 ve 2.6); varyant olarak tek kartta."
+  ],
+  "uyumluluk_notu": "Günlük bar (vadeli) sistemi; saatlik/4s'ye ölçeklenebilir ama kitap günlük test etmiş. Hacim gerekmez. Kripto/hisse/emtia perpetual'larda çalışır; $ stop yerine ATR/yüzde stop uyarlanmalı (bigPointValue vadeliye özgü).",
+  "varyantlar": [
+   "CCI trend takip (Box 2.6): 3 gün >100 persistansı"
+  ],
+  "anahtar_kelimeler": [
+   "cci",
+   "lambert",
+   "ortalamaya-donus",
+   "momentum"
+  ]
+ },
+ {
+  "kart_id": "swing__macd-histogram-pivot-appel__pruitt",
+  "ad": "Appel MACD Histogram Pivot Sistemi",
+  "stil": "swing",
+  "kaynak": {
+   "pdf": "The_Ultimate_Algorithmic_Trading_System_-_Orijinal_-_George_Pruitt_342_sayfa.pdf",
+   "sayfalar": [
+    69
+   ]
+  },
+  "ozet": "MACD(12,26,9) histogramında sıfırın altında iki yanı yüksek 2-bar pivot dip oluşursa al; sıfırın üstünde 2-bar pivot zirvede sat. Hedef 3 ATR, stop 1 ATR.",
+  "kategori": "momentum",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "vadeli",
+  "zaman_dilimi": {
+   "islem": "1d",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "MACD",
+    "parametreler": {
+     "hizli": 12,
+     "yavas": 26,
+     "sinyal": 9
+    }
+   },
+   {
+    "ad": "ATR",
+    "parametreler": {
+     "periyot": 10
+    }
+   }
+  ],
+  "long_giris": [
+   "MACD histogramı dip pivot: orta bar sol/sağ 2 barın hepsinden düşük, sol2 ve sağ2 < 0 -> al"
+  ],
+  "short_giris": [
+   "Histogram zirve pivot: orta bar çevre 2+2 barın hepsinden yüksek, sol2 ve sağ2 > 0 -> sat"
+  ],
+  "stop_loss": "Giriş - 1 ATR(10) (long)",
+  "kar_al": "Giriş + 3 ATR(10) (long)",
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 3,
+   "gerekce": "Tam mekanik; pivot sonrası bar kapanışı beklenir (2 bar gecikme)."
+  },
+  "belirsizlikler": [
+   "Pivot, sağ 2 bar oluştuktan sonra tespit edilir; gerçekçi giriş gecikmesi hesaba katılmalı."
+  ],
+  "uyumluluk_notu": "Günlük bar (vadeli) sistemi; saatlik/4s'ye ölçeklenebilir ama kitap günlük test etmiş. Hacim gerekmez. Kripto/hisse/emtia perpetual'larda çalışır; $ stop yerine ATR/yüzde stop uyarlanmalı (bigPointValue vadeliye özgü).",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "macd",
+   "histogram",
+   "pivot",
+   "appel"
+  ]
+ },
+ {
+  "kart_id": "swing__ortalamaya-donus-bb-yuzde-200ma__pruitt",
+  "ad": "200MA Filtreli Bollinger %B Ortalamaya Dönüş",
+  "stil": "swing",
+  "kaynak": {
+   "pdf": "The_Ultimate_Algorithmic_Trading_System_-_Orijinal_-_George_Pruitt_342_sayfa.pdf",
+   "sayfalar": [
+    122
+   ]
+  },
+  "ozet": "200 günlük ortalamanın üstünde fiyat kısa vadeli geri çekilmeyle Bollinger %B (5g) ortalaması 0.25 altına düşünce al; altında rallide 0.75 üstünde sat.",
+  "kategori": "ortalamaya_donus",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "vadeli",
+  "zaman_dilimi": {
+   "islem": "1d",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "SMA",
+    "parametreler": {
+     "periyot": 200
+    }
+   },
+   {
+    "ad": "Bollinger %B",
+    "parametreler": {
+     "periyot": 5,
+     "std": null,
+     "ortalama": 3
+    }
+   }
+  ],
+  "long_giris": [
+   "Kapanış > SMA200",
+   "3g ortalama(BB%B(5)) < 0.25 -> sonraki barın açılışında al"
+  ],
+  "short_giris": [
+   "Kapanış < SMA200",
+   "3g ortalama(BB%B(5)) > 0.75 -> sonraki barın açılışında sat"
+  ],
+  "stop_loss": "Giriş - 2000$/bigPointValue (kapanış bazlı)",
+  "kar_al": null,
+  "iz_suren_stop": "Long'da BB%B > 0.75 iken kapanışta çık; short'ta BB%B < 0.25",
+  "zaman_cikisi": null,
+  "filtreler": [],
+  "pozisyon_risk": "Kitapta $2000 sabit stop",
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 2,
+   "gerekce": "Mekanik; BB std çarpanı yazılmamış."
+  },
+  "belirsizlikler": [
+   "Bollinger standart sapma çarpanı kitapta belirtilmemiş (2 varsayılır)."
+  ],
+  "uyumluluk_notu": "Günlük bar (vadeli) sistemi; saatlik/4s'ye ölçeklenebilir ama kitap günlük test etmiş. Hacim gerekmez. Kripto/hisse/emtia perpetual'larda çalışır; $ stop yerine ATR/yüzde stop uyarlanmalı (bigPointValue vadeliye özgü). Kitapta hisse endeksi vadelilerinde gösterilmiş.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "bollinger",
+   "pencere-b",
+   "ortalamaya-donus",
+   "200ma"
+  ]
+ },
+ {
+  "kart_id": "swing__ayin-ilk-gunu-deseni-lbm__pruitt",
+  "ad": "Ayın İlk Günü Deseni (LastBarOfMonth)",
+  "stil": "swing",
+  "kaynak": {
+   "pdf": "The_Ultimate_Algorithmic_Trading_System_-_Orijinal_-_George_Pruitt_342_sayfa.pdf",
+   "sayfalar": [
+    123
+   ]
+  },
+  "ozet": "Ayın son günü önceki güne göre %0.2'den fazla düşüp ayın ilk günü açılışın altında kapanırsa kapanışta al; 5. günün açılışında çık. Short ayna.",
+  "kategori": "diger",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "vadeli",
+  "zaman_dilimi": {
+   "islem": "1d",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "Takvim",
+    "parametreler": {
+     "gun": "ayin_ilk_gunu"
+    }
+   }
+  ],
+  "long_giris": [
+   "Ayın ilk işlem günü",
+   "%Chg = (close[1]-close[2])/close[1]*100 < -0.2",
+   "Bugünün kapanışı < bugünün açılışı -> kapanışta al"
+  ],
+  "short_giris": [
+   "Ayın ilk işlem günü",
+   "%Chg > 0.2",
+   "Bugünün kapanışı > açılışı -> kapanışta sat"
+  ],
+  "stop_loss": "Giriş - 2000$/bigPointValue",
+  "kar_al": null,
+  "iz_suren_stop": null,
+  "zaman_cikisi": "Giriş gününden 5. gün açılışında çık",
+  "filtreler": [],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 3,
+   "gerekce": "Tam mekanik."
+  },
+  "belirsizlikler": [
+   "Kitap formülü close(1)/close(2) ile ayın son günü getirisini hesaplıyor, ilk gün 'bugün' olduğu için tutarlı."
+  ],
+  "uyumluluk_notu": "Günlük bar (vadeli) sistemi; saatlik/4s'ye ölçeklenebilir ama kitap günlük test etmiş. Hacim gerekmez. Kripto/hisse/emtia perpetual'larda çalışır; $ stop yerine ATR/yüzde stop uyarlanmalı (bigPointValue vadeliye özgü). Hisse endeksi vadelilerinde gösterildi.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "takvim",
+   "ay-basi",
+   "desen"
+  ]
+ }
+]

@@ -1,0 +1,771 @@
+[
+ {
+  "kart_id": "scalp__rsi-vwma-200sma__ratford",
+  "ad": "RSI + VWMA + 200 SMA Scalp",
+  "stil": "scalp",
+  "kaynak": {
+   "pdf": "Algoritmik_Trading_Stratejileri_-_Scotty_Ratford_83_sayfa.pdf",
+   "sayfalar": [
+    42
+   ]
+  },
+  "ozet": "200 SMA üstünde, RSI(9) kendi 20 dönem VWMA'sını yukarı keserse ve mum 12 SMA üzerinde kapanırsa al; mum 12 SMA altında kapanınca veya RSI VWMA'nın altına inince sat.",
+  "kategori": "momentum",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "kripto",
+  "zaman_dilimi": {
+   "islem": "5m",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "SMA",
+    "parametreler": {
+     "periyot": 200
+    }
+   },
+   {
+    "ad": "RSI",
+    "parametreler": {
+     "periyot": 9
+    }
+   },
+   {
+    "ad": "VWMA",
+    "parametreler": {
+     "periyot": 20,
+     "uygulandigi": "RSI"
+    }
+   },
+   {
+    "ad": "SMA",
+    "parametreler": {
+     "periyot": 12
+    }
+   }
+  ],
+  "long_giris": [
+   "Mumlar 200 SMA üzerinde kapanıyor",
+   "RSI(9) kendi VWMA(20)'sini yukarı kesiyor",
+   "Mum 12 SMA üzerinde kapanır -> al"
+  ],
+  "short_giris": [],
+  "stop_loss": "Kitapta yok (risk-ödül bölümü: %1)",
+  "kar_al": "Kitapta yok; çıkış: mum 12 SMA altında kapanır VEYA RSI VWMA altına düşer",
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [
+   "Hacim verisi (VWMA)"
+  ],
+  "pozisyon_risk": "Risk-ödül bölümü: stop %1, kar al %2 (2:1) limit emriyle önerilir; sinyal çıkışı yerine sabit yüzde çıkış.",
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 2,
+   "gerekce": "Kurallar net, 12 SMA'nın RSI mi fiyat mı üzerine uygulandığı belirsiz."
+  },
+  "belirsizlikler": [
+   "'RSI 12 SMA'ya 20 VWMA ekleyin' ifadesi bozuk çeviri: 12 SMA'nın RSI ya da fiyat üzerinde olduğu belirsiz.",
+   "Kitap zaman dilimi ve ATR/stop mesafesini belirtmiyor."
+  ],
+  "uyumluluk_notu": "Kripto için yazılmış (TradingView); kripto/hisse/emtia perpetual'larda ≥5m çalışır. Kitap zaman dilimi belirtmiyor (genelde 5m ve üstü).",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "rsi",
+   "vwma",
+   "200sma",
+   "scalp"
+  ]
+ },
+ {
+  "kart_id": "scalp__dmi-stoch-macd-nsm__ratford",
+  "ad": "DMI Stokastik + Normalleştirilmiş Yumuşatılmış MACD Scalp",
+  "stil": "scalp",
+  "kaynak": {
+   "pdf": "Algoritmik_Trading_Stratejileri_-_Scotty_Ratford_83_sayfa.pdf",
+   "sayfalar": [
+    44
+   ]
+  },
+  "ozet": "Normalleştirilmiş Yumuşatılmış MACD çizgisi yeşile dönünce (yeşil ok) al; stop giriş mumunun dibinin altında; MACD kırmızıya dönünce sat.",
+  "kategori": "momentum",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "kripto",
+  "zaman_dilimi": {
+   "islem": "5m",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "DMI Stokastik",
+    "parametreler": {}
+   },
+   {
+    "ad": "Normalleştirilmiş Yumuşatılmış MACD",
+    "parametreler": {
+     "kaynak": "Dreadblitz TradingView"
+    }
+   }
+  ],
+  "long_giris": [
+   "MACD çizgisi yeşile döner (mumun altında yeşil ok) -> gir"
+  ],
+  "short_giris": [
+   "Kuralları ters çevir"
+  ],
+  "stop_loss": "Giriş mumunun en düşük seviyesinin altı",
+  "kar_al": null,
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [],
+  "pozisyon_risk": "Risk-ödül bölümü: stop %1, kar al %2 (2:1) limit emriyle önerilir; sinyal çıkışı yerine sabit yüzde çıkış.",
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 1,
+   "gerekce": "Topluluk göstergesi (kapalı kaynak parametreleri yok); DMI stokastik kuralları hiç tanımlı değil."
+  },
+  "belirsizlikler": [
+   "DMI Stokastik'in giriş kuralındaki rolü yok.",
+   "NSM tanımı kitapta yok.",
+   "Kitap zaman dilimi ve ATR/stop mesafesini belirtmiyor."
+  ],
+  "uyumluluk_notu": "Kripto için yazılmış (TradingView); kripto/hisse/emtia perpetual'larda ≥5m çalışır. Kitap zaman dilimi belirtmiyor (genelde 5m ve üstü).",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "macd",
+   "nsm",
+   "dmi-stochastic"
+  ]
+ },
+ {
+  "kart_id": "scalp__bb-macd-trend-magic__ratford",
+  "ad": "MACD'de Bollinger + Trend Magic Scalp",
+  "stil": "scalp",
+  "kaynak": {
+   "pdf": "Algoritmik_Trading_Stratejileri_-_Scotty_Ratford_83_sayfa.pdf",
+   "sayfalar": [
+    46
+   ]
+  },
+  "ozet": "BB+MACD göstergesi yeşil ve mum Trend Magic (mavi) üzerinde kapanınca al; stop giriş mumu dibinin altı; BB+MACD maviye dönünce veya mum TM altında kapanınca çık.",
+  "kategori": "momentum",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "kripto",
+  "zaman_dilimi": {
+   "islem": "5m",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "MACD'de Bollinger",
+    "parametreler": {
+     "kaynak": "Dreadblitz"
+    }
+   },
+   {
+    "ad": "Trend Magic",
+    "parametreler": {
+     "kaynak": "KivancOzbilgic"
+    }
+   }
+  ],
+  "long_giris": [
+   "BB+MACD göstergesi yeşil",
+   "TM mavi olduğunda mum TM üzerinde kapanır -> al"
+  ],
+  "short_giris": [
+   "Kuralları ters çevir"
+  ],
+  "stop_loss": "Giriş mumu düşüğünün altı",
+  "kar_al": "Çıkış: BB+MACD maviye döner VEYA mum TM altında kapanır",
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [],
+  "pozisyon_risk": "Risk-ödül bölümü: stop %1, kar al %2 (2:1) limit emriyle önerilir; sinyal çıkışı yerine sabit yüzde çıkış.",
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 1,
+   "gerekce": "Topluluk göstergeleri; formül ve parametre yok."
+  },
+  "belirsizlikler": [
+   "Trend Magic parametreleri (CCI periyodu, ATR çarpanı) kitapta yok."
+  ],
+  "uyumluluk_notu": "Kripto için yazılmış (TradingView); kripto/hisse/emtia perpetual'larda ≥5m çalışır. Kitap zaman dilimi belirtmiyor (genelde 5m ve üstü).",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "bollinger-macd",
+   "trend-magic"
+  ]
+ },
+ {
+  "kart_id": "scalp__didi-qqe-12sma__ratford",
+  "ad": "DiDi Endeksi + QQE + 12 SMA Scalp",
+  "stil": "scalp",
+  "kaynak": {
+   "pdf": "Algoritmik_Trading_Stratejileri_-_Scotty_Ratford_83_sayfa.pdf",
+   "sayfalar": [
+    48
+   ]
+  },
+  "ozet": "Mumlar 12 SMA üzerinde kapanır, DiDi histogramı (noktalar) yeşil ve QQE yukarı keserek al sinyali verince al; mum 12 SMA altında kapanınca veya QQE aşağı keserse sat.",
+  "kategori": "momentum",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "kripto",
+  "zaman_dilimi": {
+   "islem": "5m",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "SMA",
+    "parametreler": {
+     "periyot": 12
+    }
+   },
+   {
+    "ad": "QQE",
+    "parametreler": {
+     "kaynak": "KivancOzbilgic"
+    }
+   },
+   {
+    "ad": "Didi Endeksi",
+    "parametreler": {
+     "kaynak": "jh QQE ile"
+    }
+   }
+  ],
+  "long_giris": [
+   "Mumlar 12 SMA üzerinde kapanır",
+   "DiDi histogramı yeşil",
+   "QQE yukarı keser ve al sinyali verir"
+  ],
+  "short_giris": [],
+  "stop_loss": null,
+  "kar_al": "Çıkış: mum 12 SMA altında kapanır VEYA QQE aşağı keserek sat sinyali verir",
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [],
+  "pozisyon_risk": "Risk-ödül bölümü: stop %1, kar al %2 (2:1) limit emriyle önerilir; sinyal çıkışı yerine sabit yüzde çıkış.",
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 1,
+   "gerekce": "Topluluk göstergeleri (QQE, DiDi) parametreleri kitapta yok; stop yok."
+  },
+  "belirsizlikler": [
+   "QQE parametreleri (RSI 14, smoothing 5, 4.236?) kitapta verilmiyor.",
+   "Kitap zaman dilimi ve ATR/stop mesafesini belirtmiyor."
+  ],
+  "uyumluluk_notu": "Kripto için yazılmış (TradingView); kripto/hisse/emtia perpetual'larda ≥5m çalışır. Kitap zaman dilimi belirtmiyor (genelde 5m ve üstü).",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "didi",
+   "qqe",
+   "12sma"
+  ]
+ },
+ {
+  "kart_id": "scalp__hull-ma-stokastik__ratford",
+  "ad": "Hull MA(30) + Stokastik Scalp",
+  "stil": "scalp",
+  "kaynak": {
+   "pdf": "Algoritmik_Trading_Stratejileri_-_Scotty_Ratford_83_sayfa.pdf",
+   "sayfalar": [
+    49
+   ]
+  },
+  "ozet": "Stokastik (14,6,3) 50 altında yukarı keserken mum HMA(30) üzerinde kapanırsa al; mum HMA altında kapanınca sat.",
+  "kategori": "momentum",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "kripto",
+  "zaman_dilimi": {
+   "islem": "5m",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "Hull MA",
+    "parametreler": {
+     "periyot": 30
+    }
+   },
+   {
+    "ad": "Stokastik",
+    "parametreler": {
+     "K": 14,
+     "K_yumusatma": 6,
+     "D_yumusatma": 3
+    }
+   }
+  ],
+  "long_giris": [
+   "Stokastik %K, %D'yi 50'nin altında yukarı keser",
+   "Mum HMA(30) üzerinde kapanır -> gir"
+  ],
+  "short_giris": [],
+  "stop_loss": null,
+  "kar_al": "Çıkış: mum HMA(30) altında kapanır",
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [],
+  "pozisyon_risk": "Risk-ödül bölümü: stop %1, kar al %2 (2:1) limit emriyle önerilir; sinyal çıkışı yerine sabit yüzde çıkış.",
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 2,
+   "gerekce": "Net kurallar; stop yok."
+  },
+  "belirsizlikler": [
+   "Kitap zaman dilimi ve ATR/stop mesafesini belirtmiyor."
+  ],
+  "uyumluluk_notu": "Kripto için yazılmış (TradingView); kripto/hisse/emtia perpetual'larda ≥5m çalışır. Kitap zaman dilimi belirtmiyor (genelde 5m ve üstü).",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "hull-ma",
+   "stokastik"
+  ]
+ },
+ {
+  "kart_id": "scalp__rsi4-bb40-ortalamaya-donus__ratford",
+  "ad": "RSI(4) + Bollinger(40,2) Ortalamaya Dönüş (v1)",
+  "stil": "scalp",
+  "kaynak": {
+   "pdf": "Algoritmik_Trading_Stratejileri_-_Scotty_Ratford_83_sayfa.pdf",
+   "sayfalar": [
+    51,
+    52
+   ]
+  },
+  "ozet": "Mum alt Bollinger bandına dokunur/altında, RSI(4) 30 altındayken RSI 30'un üstüne çıkınca al; mum üst banda dokununca veya RSI 80 üstüne çıkınca sat.",
+  "kategori": "ortalamaya_donus",
+  "piyasa_rejimi": "yatay",
+  "orijinal_piyasa": "kripto",
+  "zaman_dilimi": {
+   "islem": "5m",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "RSI",
+    "parametreler": {
+     "periyot": 4
+    }
+   },
+   {
+    "ad": "Bollinger",
+    "parametreler": {
+     "periyot": 40,
+     "std": 2
+    }
+   }
+  ],
+  "long_giris": [
+   "Mum alt Bollinger'e dokunuyor/altında",
+   "RSI(4) aşırı satım (<30)",
+   "RSI 30'u yukarı geçince gir"
+  ],
+  "short_giris": [],
+  "stop_loss": "Giriş mumunun altı",
+  "kar_al": "Çıkış: mum üst banda dokunur VEYA RSI 80 üstüne çıkar",
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [],
+  "pozisyon_risk": "Risk-ödül bölümü: stop %1, kar al %2 (2:1) limit emriyle önerilir; sinyal çıkışı yerine sabit yüzde çıkış.",
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 3,
+   "gerekce": "Net kurallar."
+  },
+  "belirsizlikler": [
+   "Short kuralları verilmemiş."
+  ],
+  "uyumluluk_notu": "Kripto için yazılmış (TradingView); kripto/hisse/emtia perpetual'larda ≥5m çalışır. Kitap zaman dilimi belirtmiyor (genelde 5m ve üstü).",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "rsi",
+   "bollinger",
+   "ortalamaya-donus"
+  ]
+ },
+ {
+  "kart_id": "scalp__rsi7-bb20-200sma__ratford",
+  "ad": "RSI(7) + Bollinger(20,2) + 200 SMA Dip Alımı (v2)",
+  "stil": "scalp",
+  "kaynak": {
+   "pdf": "Algoritmik_Trading_Stratejileri_-_Scotty_Ratford_83_sayfa.pdf",
+   "sayfalar": [
+    53
+   ]
+  },
+  "ozet": "200 SMA üstünde iken mum alt banda dokunduktan ve RSI(7) 30 altına inip tekrar 30 üstüne çıkınca al; üst banda dokunuş veya RSI 70 üstü çıkış.",
+  "kategori": "ortalamaya_donus",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "kripto",
+  "zaman_dilimi": {
+   "islem": "5m",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "RSI",
+    "parametreler": {
+     "periyot": 7
+    }
+   },
+   {
+    "ad": "SMA",
+    "parametreler": {
+     "periyot": 200
+    }
+   },
+   {
+    "ad": "Bollinger",
+    "parametreler": {
+     "periyot": 20,
+     "std": 2
+    }
+   }
+  ],
+  "long_giris": [
+   "Mumlar 200 SMA üzerinde kapanıyor",
+   "Mum alt bandın altına/değdi",
+   "RSI(7) aşırı satımdan (30) üstüne çıkınca al"
+  ],
+  "short_giris": [],
+  "stop_loss": null,
+  "kar_al": "Çıkış: mum üst banda dokunur VEYA RSI 70 üstüne çıkar",
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [],
+  "pozisyon_risk": "Risk-ödül bölümü: stop %1, kar al %2 (2:1) limit emriyle önerilir; sinyal çıkışı yerine sabit yüzde çıkış.",
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 3,
+   "gerekce": "Net."
+  },
+  "belirsizlikler": [
+   "Stop belirtilmemiş; metindeki '70 üzeri (aşırı satım)' ifadesi yanlış etiket."
+  ],
+  "uyumluluk_notu": "Kripto için yazılmış (TradingView); kripto/hisse/emtia perpetual'larda ≥5m çalışır. Kitap zaman dilimi belirtmiyor (genelde 5m ve üstü).",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "rsi",
+   "bollinger",
+   "200sma",
+   "dip-alimi"
+  ]
+ },
+ {
+  "kart_id": "scalp__bb50-cci20-aralik__ratford",
+  "ad": "Bollinger(50,2) Düz + CCI(20) -200 Dönüşü",
+  "stil": "scalp",
+  "kaynak": {
+   "pdf": "Algoritmik_Trading_Stratejileri_-_Scotty_Ratford_83_sayfa.pdf",
+   "sayfalar": [
+    54,
+    55
+   ]
+  },
+  "ozet": "Bollinger bantları yatay (düz) iken fiyat alt banda dokunur ve CCI(20) -200 altına inip tekrar -200 üstüne çıkınca al; fiyat üst banda dokununca veya CCI 100 altına dönünce çık.",
+  "kategori": "ortalamaya_donus",
+  "piyasa_rejimi": "yatay",
+  "orijinal_piyasa": "kripto",
+  "zaman_dilimi": {
+   "islem": "5m",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "Bollinger",
+    "parametreler": {
+     "periyot": 50,
+     "std": 2
+    }
+   },
+   {
+    "ad": "CCI",
+    "parametreler": {
+     "periyot": 20
+    }
+   }
+  ],
+  "long_giris": [
+   "Bollinger bantları düz ve yönsüz",
+   "Fiyat alt banda dokunur/altında kapanır",
+   "CCI -200 altına inmiş",
+   "CCI -200'ün üstüne çıkınca al"
+  ],
+  "short_giris": [],
+  "stop_loss": "Giriş mumunun altı",
+  "kar_al": "Çıkış: fiyat üst banda dokunur/üstünde kapanır VEYA CCI aşırı alımdan sonra 100 altına iner",
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [],
+  "pozisyon_risk": "Risk-ödül bölümü: stop %1, kar al %2 (2:1) limit emriyle önerilir; sinyal çıkışı yerine sabit yüzde çıkış.",
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 2,
+   "gerekce": "'Düz bant' ölçütü kitapta tanımlı değil (eğim eşiği yok)."
+  },
+  "belirsizlikler": [
+   "Bantların düz olması ölçütü sayısal değil."
+  ],
+  "uyumluluk_notu": "Kripto için yazılmış (TradingView); kripto/hisse/emtia perpetual'larda ≥5m çalışır. Kitap zaman dilimi belirtmiyor (genelde 5m ve üstü).",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "cci",
+   "bollinger",
+   "aralik"
+  ]
+ },
+ {
+  "kart_id": "scalp__vwap-band-stoch-rsi__ratford",
+  "ad": "VWAP Bandı (1.5, SMA500) + Stokastik RSI",
+  "stil": "scalp",
+  "kaynak": {
+   "pdf": "Algoritmik_Trading_Stratejileri_-_Scotty_Ratford_83_sayfa.pdf",
+   "sayfalar": [
+    56,
+    57
+   ]
+  },
+  "ozet": "Fiyat 500 SMA üzerinde ve mum alt VWAP bandına dokunur/altında, Stoch RSI aşırı satımdan 30 üstüne çıkınca al; Stoch RSI 70 altına inince veya fiyat üst VWAP bandına dokununca çık.",
+  "kategori": "ortalamaya_donus",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "kripto",
+  "zaman_dilimi": {
+   "islem": "5m",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "VWAP bantları",
+    "parametreler": {
+     "carpan": 1.5,
+     "sma": 500
+    }
+   },
+   {
+    "ad": "Stokastik RSI",
+    "parametreler": {}
+   },
+   {
+    "ad": "SMA",
+    "parametreler": {
+     "periyot": 500
+    }
+   }
+  ],
+  "long_giris": [
+   "Fiyat 500 SMA üstünde",
+   "Mum alt VWAP bandına dokunur/altında",
+   "Stokastik RSI aşırı satımdan 30 üstüne çıkar -> al"
+  ],
+  "short_giris": [],
+  "stop_loss": "Giriş mumunun en düşüğünün altı",
+  "kar_al": "Çıkış: Stoch RSI aşırı alımdan 70 altına iner VEYA fiyat üst VWAP bandına dokunur",
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [
+   "Hacim verisi (VWAP)"
+  ],
+  "pozisyon_risk": "Risk-ödül bölümü: stop %1, kar al %2 (2:1) limit emriyle önerilir; sinyal çıkışı yerine sabit yüzde çıkış.",
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 2,
+   "gerekce": "Net; 'band çarpanı 1.5, 500 SMA olarak ayarlı' ifadesi VWAP bandı hesabı belirsiz."
+  },
+  "belirsizlikler": [
+   "VWAP bandı hesabında 500 SMA'nın rolü belirsiz.",
+   "Stoch RSI parametreleri yok."
+  ],
+  "uyumluluk_notu": "Kripto için yazılmış (TradingView); kripto/hisse/emtia perpetual'larda ≥5m çalışır. Kitap zaman dilimi belirtmiyor (genelde 5m ve üstü).",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "vwap",
+   "stokastik-rsi",
+   "ortalamaya-donus"
+  ]
+ },
+ {
+  "kart_id": "scalp__ma15-45-rsi5-geri-cekilme__ratford",
+  "ad": "SMA 15/45 + RSI(5) Geri Çekilme Alımı",
+  "stil": "scalp",
+  "kaynak": {
+   "pdf": "Algoritmik_Trading_Stratejileri_-_Scotty_Ratford_83_sayfa.pdf",
+   "sayfalar": [
+    58,
+    59
+   ]
+  },
+  "ozet": "15 SMA 45 SMA'nın üstüne çıkınca RSI(5) aşırı satıma (30) inip tekrar 30'un üstüne çıkınca al; stop son salınım dibinin altı; scalp için RSI 70 altı, swing için 15 SMA 45 SMA altı çıkış.",
+  "kategori": "trend_takip",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "kripto",
+  "zaman_dilimi": {
+   "islem": "5m",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "SMA",
+    "parametreler": {
+     "kisa": 15,
+     "uzun": 45
+    }
+   },
+   {
+    "ad": "RSI",
+    "parametreler": {
+     "periyot": 5
+    }
+   }
+  ],
+  "long_giris": [
+   "15 SMA > 45 SMA (yukarı kesmiş)",
+   "RSI(5) 30'un altına inip 30'un üstüne dönünce gir"
+  ],
+  "short_giris": [],
+  "stop_loss": "Son salınım dibinin altı",
+  "kar_al": "Çıkış (scalp): RSI aşırı alımdan sonra 70 altına düşer; çıkış (swing): 15 SMA 45 SMA altına düşer",
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [],
+  "pozisyon_risk": "Risk-ödül bölümü: stop %1, kar al %2 (2:1) limit emriyle önerilir; sinyal çıkışı yerine sabit yüzde çıkış.",
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 3,
+   "gerekce": "Net."
+  },
+  "belirsizlikler": [
+   "Short kuralları verilmemiş."
+  ],
+  "uyumluluk_notu": "Kripto için yazılmış (TradingView); kripto/hisse/emtia perpetual'larda ≥5m çalışır. Kitap zaman dilimi belirtmiyor (genelde 5m ve üstü).",
+  "varyantlar": [
+   "Çıkış seçenekleri: scalp için RSI, swing için SMA kesişimi"
+  ],
+  "anahtar_kelimeler": [
+   "sma",
+   "rsi",
+   "geri-cekilme"
+  ]
+ },
+ {
+  "kart_id": "scalp__hma25-rsi-bb__ratford",
+  "ad": "HMA(25) + RSI Bollinger Bandı Scalp",
+  "stil": "scalp",
+  "kaynak": {
+   "pdf": "Algoritmik_Trading_Stratejileri_-_Scotty_Ratford_83_sayfa.pdf",
+   "sayfalar": [
+    60,
+    61
+   ]
+  },
+  "ozet": "RSI(14) üzerine çizilen Bollinger(40,1) alt bandını yukarı keser ve mum HMA(25) üzerinde kapanırsa al; mum HMA altında kapanınca veya RSI üst bandın altına geçince çık.",
+  "kategori": "momentum",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "kripto",
+  "zaman_dilimi": {
+   "islem": "5m",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "Hull MA",
+    "parametreler": {
+     "periyot": 25
+    }
+   },
+   {
+    "ad": "RSI",
+    "parametreler": {
+     "periyot": 14
+    }
+   },
+   {
+    "ad": "Bollinger (RSI üzerine)",
+    "parametreler": {
+     "periyot": 40,
+     "std": 1
+    }
+   }
+  ],
+  "long_giris": [
+   "RSI, RSI-Bollinger alt bandının üzerine çıkar",
+   "Mumlar HMA(25) üzerinde kapanır"
+  ],
+  "short_giris": [],
+  "stop_loss": null,
+  "kar_al": "Çıkış: mum HMA(25) altında kapanır VEYA RSI üst bandın altına geçer",
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [],
+  "pozisyon_risk": "Risk-ödül bölümü: stop %1, kar al %2 (2:1) limit emriyle önerilir; sinyal çıkışı yerine sabit yüzde çıkış.",
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 3,
+   "gerekce": "Net."
+  },
+  "belirsizlikler": [
+   "Kitap zaman dilimi ve ATR/stop mesafesini belirtmiyor."
+  ],
+  "uyumluluk_notu": "Kripto için yazılmış (TradingView); kripto/hisse/emtia perpetual'larda ≥5m çalışır. Kitap zaman dilimi belirtmiyor (genelde 5m ve üstü).",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "hma",
+   "rsi-bollinger"
+  ]
+ },
+ {
+  "kart_id": "scalp__sma9-18-kolay__ratford",
+  "ad": "SMA 9/18 Kolay Scalp",
+  "stil": "scalp",
+  "kaynak": {
+   "pdf": "Algoritmik_Trading_Stratejileri_-_Scotty_Ratford_83_sayfa.pdf",
+   "sayfalar": [
+    62,
+    63
+   ]
+  },
+  "ozet": "9 SMA 18 SMA üstündeyken mum 18 SMA üstüne çıkıp üstünde kapanırsa al; stop giriş mumu düşüğünün altı; mum 9 SMA altında kapanınca çık.",
+  "kategori": "trend_takip",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "kripto",
+  "zaman_dilimi": {
+   "islem": "5m",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "SMA",
+    "parametreler": {
+     "kisa": 9,
+     "uzun": 18
+    }
+   }
+  ],
+  "long_giris": [
+   "9 SMA > 18 SMA",
+   "Mum 18 SMA'yı yukarı geçip üstünde kapanır -> gir"
+  ],
+  "short_giris": [],
+  "stop_loss": "Giriş mumu düşüğünün altı",
+  "kar_al": "Çıkış: mum 9 SMA altında kapanır",
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [],
+  "pozisyon_risk": "Risk-ödül bölümü: stop %1, kar al %2 (2:1) limit emriyle önerilir; sinyal çıkışı yerine sabit yüzde çıkış.",
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 3,
+   "gerekce": "Net."
+  },
+  "belirsizlikler": [
+   "Kitap zaman dilimi ve ATR/stop mesafesini belirtmiyor."
+  ],
+  "uyumluluk_notu": "Kripto için yazılmış (TradingView); kripto/hisse/emtia perpetual'larda ≥5m çalışır. Kitap zaman dilimi belirtmiyor (genelde 5m ve üstü).",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "sma",
+   "scalp"
+  ]
+ }
+]

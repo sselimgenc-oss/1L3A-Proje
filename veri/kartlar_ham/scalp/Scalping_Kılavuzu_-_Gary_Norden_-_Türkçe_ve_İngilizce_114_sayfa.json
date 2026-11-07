@@ -1,0 +1,195 @@
+[
+  {
+    "kart_id": "scalp__spread-uzerinde-pasif-scalp__norden",
+    "ad": "Piyasa Yapıcı Tarzı Spread Scalp (teklifte al / satışta sat, kâr-veya-sıfır)",
+    "stil": "scalp",
+    "kaynak": {
+      "pdf": "Scalping Kılavuzu - Gary Norden - Türkçe ve İngilizce (114 sayfa) - @eseckal.pdf",
+      "sayfalar": [
+        34,
+        35,
+        36,
+        37
+      ]
+    },
+    "ozet": "Vadeli işlemde DOM'dan değer (en ağır hacim/son işlem) ve ilişkili piyasa korelasyonu ile yön belirlenir; spread'in bid'inde alış (veya offer'da satış) emri kuyrukta beklenir, dolunca 1 tik karla çıkılır ya da başabaşta (scratch) kapatılır; ~%80 kazanma + scratch hedeflenir.",
+    "kategori": "diger",
+    "piyasa_rejimi": "herhangi",
+    "orijinal_piyasa": "vadeli",
+    "zaman_dilimi": {
+      "islem": "tick/DOM",
+      "ust_filtre": null
+    },
+    "gostergeler": [
+      {
+        "ad": "DOM/Emir Defteri",
+        "parametreler": {}
+      },
+      {
+        "ad": "Time&Sales",
+        "parametreler": {}
+      },
+      {
+        "ad": "Korelasyon",
+        "parametreler": {}
+      }
+    ],
+    "long_giris": [
+      "Değeri bid üzerinde gösteren kanıt (korelasyon yukarı, iki yönlü akış, hızlı dolum beklenir)",
+      "Bid'e katıl (iyi kuyruk) -> dolunca 1 tik üstünde teklif ver"
+    ],
+    "short_giris": [
+      "Ayna: offer'a katıl / satış, bir tik aşağıdan al"
+    ],
+    "stop_loss": "Stop yok; işlem dolunca değer bozulursa scratch (başabaş) veya maks 1 tik zarar",
+    "kar_al": "1 tik (spread)",
+    "iz_suren_stop": null,
+    "zaman_cikisi": "Hızlı giriş-çıkış bekleniyor; beklemiş işlem çıkış nedenidir",
+    "filtreler": [
+      "Yalnız iki yönlü akışta işlem yap, tek yönlü piyasadan kaçın",
+      "Çelişen kanıtta işlem yapma",
+      "Haber/veri açıklamalarında işlem yok",
+      "Grafik, hacim profili kullanılmaz"
+    ],
+    "pozisyon_risk": "1 lotla başla; yüksek kazanma oranında ölçeklen",
+    "iddia_edilen_performans": "~%80 kazanma+scratch hedefi, %90 profit+scratch idealdir",
+    "kodlanabilirlik": {
+      "puan": 0,
+      "gerekce": "Emir defteri/kuyruk verisi olmadan yapılamaz."
+    },
+    "belirsizlikler": [
+      "Değer ve korelasyon sayısal tanımlanmamış",
+      "Kuyruk pozisyonu verisi gerekir"
+    ],
+    "uyumluluk_notu": "Emir defteri (DOM), kuyruk pozisyonu, tick/saniye ölçeği ve korelasyonlu enstrüman verisi gerekir; spot forex/CFD'de uygulanamaz (yazar da önermiyor). 1L3A'da yapılamaz (≥5m OHLC).",
+    "varyantlar": [],
+    "anahtar_kelimeler": [
+      "emir-defteri",
+      "dom",
+      "piyasa-yapici",
+      "scratch",
+      "spread"
+    ]
+  },
+  {
+    "kart_id": "scalp__chop-vs-hareket-islemi__norden",
+    "ad": "Hızlı Piyasada Dalgalanma (Chop) ve Hareket (Move) Sonrası Giriş",
+    "stil": "scalp",
+    "kaynak": {
+      "pdf": "Scalping Kılavuzu - Gary Norden - Türkçe ve İngilizce (114 sayfa) - @eseckal.pdf",
+      "sayfalar": [
+        38,
+        39
+      ]
+    },
+    "ozet": "Hızlı/ince piyasalarda (Dax, NQ) fiyat 15-18-16-18-15 gibi dalgalanırken etkin spread 15b/18o'dur; düşük volatilitede dalgalanmanın iki ucunda ~2 tik karla işlem yapılır, yüksek volatilitede dalgalanma işlem yapılmaz, yalnız gerçek bir 'hareket' ve korelasyon teyidinden sonra karşı yönde süpürmeyi kısaltmak için emir verilir.",
+    "kategori": "ortalamaya_donus",
+    "piyasa_rejimi": "herhangi",
+    "orijinal_piyasa": "vadeli",
+    "zaman_dilimi": {
+      "islem": "tick/DOM",
+      "ust_filtre": null
+    },
+    "gostergeler": [
+      {
+        "ad": "DOM",
+        "parametreler": {}
+      },
+      {
+        "ad": "Korelasyon",
+        "parametreler": {}
+      }
+    ],
+    "long_giris": [
+      "Düşük volatilite günü: dalgalanma alt ucuna (15) bid ile gir; hedef ~2 tik",
+      "Yüksek volatilite: hareket ve korelasyon desteği sonrasında geri çekilmede kısa"
+    ],
+    "short_giris": [
+      "Ayna"
+    ],
+    "stop_loss": "Dalgalanma kırılıp hareket başlarsa 5+ tik kayıp riski (kitap uyarır)",
+    "kar_al": "~2 tik",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Volatil günde chop işlemi yapma"
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 0,
+      "gerekce": "Emir defteri ve tick akışı olmadan yapılamaz."
+    },
+    "belirsizlikler": [
+      "Etkin spread ölçüsü sayısal tanımsız"
+    ],
+    "uyumluluk_notu": "Emir defteri (DOM), kuyruk pozisyonu, tick/saniye ölçeği ve korelasyonlu enstrüman verisi gerekir; spot forex/CFD'de uygulanamaz (yazar da önermiyor). 1L3A'da yapılamaz (≥5m OHLC).",
+    "varyantlar": [],
+    "anahtar_kelimeler": [
+      "chop",
+      "dalgalanma",
+      "dax",
+      "nq",
+      "dom"
+    ]
+  },
+  {
+    "kart_id": "scalp__bosluklu-defterde-savunma-emri__norden",
+    "ad": "Volatil Piyasada Defter Boşluklarında Uzak Savunma Emri",
+    "stil": "scalp",
+    "kaynak": {
+      "pdf": "Scalping Kılavuzu - Gary Norden - Türkçe ve İngilizce (114 sayfa) - @eseckal.pdf",
+      "sayfalar": [
+        48,
+        49,
+        50,
+        51
+      ]
+    },
+    "ozet": "Aşırı volatilitede defterde boşluklar (bid/offer olmayan fiyatlar) oluşunca spread civarında işlem yapılmaz; emir, arkasında koruma olan bir fiyatın ötesine (örn. son işlemden 16-30 tik uzağa) konur; büyük emirlerin çekilme riski göz önüne alınır; dolarsa en iyi fiyattan hızla çıkılır.",
+    "kategori": "diger",
+    "piyasa_rejimi": "volatil",
+    "orijinal_piyasa": "vadeli",
+    "zaman_dilimi": {
+      "islem": "tick/DOM",
+      "ust_filtre": null
+    },
+    "gostergeler": [
+      {
+        "ad": "DOM",
+        "parametreler": {}
+      }
+    ],
+    "long_giris": [
+      "Orta büyüklükte market emrinin işlem göreceği yerin arkasında likidite olan seviyeye limit al emri"
+    ],
+    "short_giris": [
+      "Ayna: arkasında likidite olan seviyeye limit satış (örn. 45'te sat, stop 49/50)"
+    ],
+    "stop_loss": "Defter arkasında koruma yokken stop 49/50 civarı (örnek)",
+    "kar_al": "Önceki fiyatlardan 16-20 tik uzakta kâr (örnek)",
+    "iz_suren_stop": null,
+    "zaman_cikisi": "Emirleri uzun süre bırakma",
+    "filtreler": [
+      "Boşluğun bitişiğine emir koyma",
+      "Şüphede emri uzağa koy veya işlem yapma"
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 0,
+      "gerekce": "Defter verisi ve karar öznel; kodlanamaz."
+    },
+    "belirsizlikler": [
+      "Orta büyüklük tanımı enstrümana özel"
+    ],
+    "uyumluluk_notu": "Emir defteri (DOM), kuyruk pozisyonu, tick/saniye ölçeği ve korelasyonlu enstrüman verisi gerekir; spot forex/CFD'de uygulanamaz (yazar da önermiyor). 1L3A'da yapılamaz (≥5m OHLC).",
+    "varyantlar": [],
+    "anahtar_kelimeler": [
+      "bosluk",
+      "defter",
+      "savunma",
+      "volatilite"
+    ]
+  }
+]

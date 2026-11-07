@@ -1,0 +1,267 @@
+[
+ {
+  "kart_id": "swing__degistirilmis-swing-trend-degisimi__rivalland",
+  "ad": "Değiştirilmiş Gann Swing Grafiği - Trend Değişim Sinyali",
+  "stil": "swing",
+  "kaynak": {
+   "pdf": "Swing_Trading_-_Marc_Rivalland_206_sayfa.pdf",
+   "sayfalar": [
+    50,
+    51,
+    52,
+    53,
+    54,
+    55
+   ]
+  },
+  "ozet": "Yükseliş trendinde önceki swing dibi aşağı kırılınca yeni düşüş trendi (satış), düşüş trendinde önceki swing tepesi yukarı kırılınca yeni yükseliş trendi (alış) sinyali oluşur; giriş swing seviyesinin 1-2 tik ötesine stop emirle yapılır, stop eski swing zirvesinin ötesidir.",
+  "kategori": "kirilim",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "vadeli",
+  "zaman_dilimi": {
+   "islem": "1d",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "Swing yüksek/düşük (yükselen/düşen gün, iç gün göz ardı)",
+    "parametreler": {}
+   }
+  ],
+  "long_giris": [
+   "Düşüş trendinde: karşıt trend (yukarı) hareketi önceki swing yüksekini yukarı keser (kapanış önemsiz)",
+   "Karşıt hareket en az 3 gün sürmüşse trend değişikliği; swing yükseğinin altında yalnız 1-2 gün geçirilmişse yanlış başlangıç/karmaşık swing yüksek olasılığı",
+   "Giriş: swing yükseğinin 1-2 tik üstüne buy stop (hisselerde slipaj için ≈%0,5 tampon)"
+  ],
+  "short_giris": [
+   "Yükseliş trendinde önceki swing dibinin 1-2 tik (hisse %0,5) altına sell stop; 3+ günlük karşıt düşüş şartı"
+  ],
+  "stop_loss": "Eski swing zirvesi/dibinin ötesi (trend değişim sinyallerinde çoğu zaman uzak); FTSE'de 150-200 puandan fazla risk alınmaz; bazı sinyaller atlanır",
+  "kar_al": "Doğrusal olmayan fazlarda 100 puanda yarı kâr, 140 puanda kalanın yarısı; doğrusal fazlarda 140 puanda yarı, kalanı 5 günlük RSI <14 veya >86 veya trend değişimine kadar",
+  "iz_suren_stop": "Fiyat lehine 100 puan (FTSE; Dow için 180) gidince, trend değişim sinyallerinde sinyal gününden sonra 3 net gün bekleyip, stop girişe çekilir; stop swing noktalarının ötesinde kademeli",
+  "zaman_cikisi": null,
+  "filtreler": [
+   "Haftalık RSI 18'in altında veya 82'nin üstündeyken yeni pozisyon açılmaz",
+   "Açık swing yoksa 80 puanlık sabit stop",
+   "Her ayın ikinci yarısındaki sinyaller güvenilmez (FTSE gözlemi)",
+   "Yılda 4-9 trend değişim sinyali; yaklaşık 3'te 1'i yanlış"
+  ],
+  "pozisyon_risk": "2 sözleşmeli pozisyonla yarı kâr stratejisi (FTSE)",
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 3,
+   "gerekce": "Yükselen/düşen gün tanımı, swing kırılımı ve sayısal çıkış/stop kuralları net; modifikasyonlar (dış gün, işlem günü sayımı) tanımlı."
+  },
+  "belirsizlikler": [
+   "Dış gün muamelesi sözlükte (okunmadı)",
+   "Puan eşikleri endekse özgü",
+   "Hisse tamponu %0,5, endekste 1-2 tik"
+  ],
+  "uyumluluk_notu": "Günlük endeks (FTSE/Dow/Nasdaq) örnekleri; puan eşikleri (100/140 puan FTSE) endeks seviyesine bağlıdır, yüzde/ATR ile normalize edilmeli. Fiyat tabanlı; her piyasada kodlanır, hacim gerekmez.",
+  "varyantlar": [
+   "Değişiklik 1: Erken giriş; 2: Üçüncü gün dış gün ise düzeltmenin parçası; 3: 3 ardışık gün şartı gevşetildi; 4: yalnız işlem günleri sayılır"
+  ],
+  "anahtar_kelimeler": [
+   "gann-swing",
+   "swing-noktasi",
+   "trend-degisimi",
+   "kirilim",
+   "yari-kar",
+   "rsi-filtre"
+  ]
+ },
+ {
+  "kart_id": "swing__swing-trend-devami__rivalland",
+  "ad": "Değiştirilmiş Swing Grafiği - Trend Devamı Sinyali (karşıt trend düzeltmesi sonrası)",
+  "stil": "swing",
+  "kaynak": {
+   "pdf": "Swing_Trading_-_Marc_Rivalland_206_sayfa.pdf",
+   "sayfalar": [
+    53,
+    85,
+    86,
+    87,
+    128
+   ]
+  },
+  "ozet": "Düşüş trendinde en az 3 günlük karşıt trend yükselişi oluştuktan sonra, yükselişin başarısızlığının ilk işareti olarak piyasanın bir önceki günün dibini kırması satış sinyalidir; stop swing yükseğinin ötesine konur.",
+  "kategori": "trend_takip",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "vadeli",
+  "zaman_dilimi": {
+   "islem": "1d",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "Swing yüksek/düşük",
+    "parametreler": {}
+   },
+   {
+    "ad": "RSI",
+    "parametreler": {
+     "periyot": 14,
+     "kullanim": "momentum filtresi"
+    }
+   }
+  ],
+  "long_giris": [
+   "Yükseliş trendi: 3+ günlük karşıt (aşağı) düzeltme sonrası piyasa bir önceki günün yükseğini aşarsa -> al (stop buy emri her gün bir önceki günün yüksek seviyesinin hemen üstüne ilerletilir)"
+  ],
+  "short_giris": [
+   "Düşüş trendi: 3+ günlük yükseliş sonrası bir önceki günün dibinin altına stop sell; ralli kırılmadığı her gün emir önceki günün dibine taşınır"
+  ],
+  "stop_loss": "Karşıt swing yükseğinin (dipinin) hemen ötesi; yanlış başlangıç = ertesi gün toparlanma",
+  "kar_al": "Doğrusal olmayan fazda 100 puanda yarı kâr; doğrusal fazda 140 puanda yarı kâr, kalanı 5g RSI<14/ >86 veya trend değişimine kadar",
+  "iz_suren_stop": "100 puan lehe gidince stop girişe (doğrusal fazda ikinci pozisyonun stopu taşınmaz)",
+  "zaman_cikisi": null,
+  "filtreler": [
+   "Momentum filtresi için 14 günlük RSI: trend devamı sinyallerinden zayıf olanları dışlamak",
+   "Haftalık RSI uçlarında (≤18, ≥82) yeni pozisyon yok"
+  ],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": "FTSE 1999: 17 trend devamı sinyalinden 4'ü yanlış başlangıç; 2000: 16'dan 2; 2001: 13'ten 1",
+  "kodlanabilirlik": {
+   "puan": 3,
+   "gerekce": "Kurallar tamamen fiyat çubuğu ilişkisi ve sayısal çıkış; 'doğrusal faz' tespiti kısmen takdiri."
+  },
+  "belirsizlikler": [
+   "'Doğrusal faz' tespit kriteri yok (ayrı bölüm)",
+   "Puan eşikleri endekse özgü",
+   "RSI filtre eşiği net değil"
+  ],
+  "uyumluluk_notu": "Günlük endeks (FTSE/Dow/Nasdaq) örnekleri; puan eşikleri (100/140 puan FTSE) endeks seviyesine bağlıdır, yüzde/ATR ile normalize edilmeli. Fiyat tabanlı; her piyasada kodlanır, hacim gerekmez.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "trend-devami",
+   "swing",
+   "duzeltme",
+   "onceki-gun-dibi",
+   "rsi",
+   "yari-kar"
+  ]
+ },
+ {
+  "kart_id": "swing__pf-ucle-tepe-kirilimi__rivalland",
+  "ad": "Nokta & Şekil - Yükselen Dipli Üçlü Tepe Kırılımı (3 kutu dönüşlü)",
+  "stil": "swing",
+  "kaynak": {
+   "pdf": "Swing_Trading_-_Marc_Rivalland_206_sayfa.pdf",
+   "sayfalar": [
+    128,
+    129
+   ]
+  },
+  "ozet": "Nokta&şekil grafiğinde 3 kutu tersine dönüş kuralıyla çizilen formasyonda, yükselen diplerle üçlü tepe kırılması alım sinyalidir; yalnızca derin tabanlarda 3 kutu erken giriş seçeneği vardır.",
+  "kategori": "formasyon",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "vadeli",
+  "zaman_dilimi": {
+   "islem": "1d",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "Nokta & Şekil",
+    "parametreler": {
+     "ters_donus_kutu": 3,
+     "kutu_boyutu": "endekse göre (Dow 50 puan, vs.)"
+    }
+   }
+  ],
+  "long_giris": [
+   "Üçlü tepe oluşumu (aynı seviyede üç X sütunu zirvesi) ve yükselen dipler (O sütunları) mevcut",
+   "Fiyat üçlü tepenin bir kutu üstüne çıkınca al",
+   "Erken giriş (koşullu): taban derin (uzun sütunlar), formasyon başarısız olursa ters çevrilmiş boğa sinyaline benzemeli, ilk 3 kutu yukarı dönüşte al"
+  ],
+  "short_giris": [
+   "Düşen tepelerle üçlü dip kırılması satış sinyali; üçlü dipte erken giriş yapılmaz"
+  ],
+  "stop_loss": "Formasyon altında/üstünde sinyalin altı; sarsıntı kuralında 4 kutu uzaktaki diplerin altı",
+  "kar_al": null,
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 2,
+   "gerekce": "P&F grafiği mekanik; kutu boyutu ve girişten sonraki çıkış kuralları sınırlı."
+  },
+  "belirsizlikler": [
+   "Kutu boyutunun belirlenmesi",
+   "Çıkış/hedef kuralı yok",
+   "Veri P&F dönüştürücü gerektirir"
+  ],
+  "uyumluluk_notu": "Günlük endeks (FTSE/Dow/Nasdaq) örnekleri; puan eşikleri (100/140 puan FTSE) endeks seviyesine bağlıdır, yüzde/ATR ile normalize edilmeli. Fiyat tabanlı; her piyasada kodlanır, hacim gerekmez.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "nokta-sekil",
+   "ucle-tepe",
+   "3-kutu-donusu",
+   "yukselen-dip",
+   "kirilim"
+  ]
+ },
+ {
+  "kart_id": "swing__pf-bogs-sarsinti__rivalland",
+  "ad": "Nokta & Şekil - Boğa Sarsıntısı (Shakeout) Formasyonu",
+  "stil": "swing",
+  "kaynak": {
+   "pdf": "Swing_Trading_-_Marc_Rivalland_206_sayfa.pdf",
+   "sayfalar": [
+    129,
+    130
+   ]
+  },
+  "ozet": "Önceki sinyal yükseliş iken fiyat çift dibi bir/iki kutu aşıp düşer ancak 3 kutuluk ters dönüşle geri yükselirse bu bir tuzaktır; ilk 3 kutuluk dönüşte al, stop ve ters (stop-and-reverse) emri dipin 4 kutu altına koyulur.",
+  "kategori": "formasyon",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "vadeli",
+  "zaman_dilimi": {
+   "islem": "1d",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "Nokta & Şekil",
+    "parametreler": {
+     "ters_donus_kutu": 3
+    }
+   }
+  ],
+  "long_giris": [
+   "Hissenin önceki P&F sinyali yükseliş sinyali",
+   "Düşüşte çift dibin altı 1 kutu (kutu değeri yüksekse 2) aşılır, 3 kutudan fazla aşılmaz",
+   "Piyasa yukarı 3 kutuluk tersine dönüş yapınca AL"
+  ],
+  "short_giris": [
+   "Ayı sarsıntısı: aynı formasyonun tersi (kitap Vodafone 2002 örneğini veriyor)"
+  ],
+  "stop_loss": "Dipin 4 kutu altına stop-and-reverse emri (başarısızsa alçalan üçlü dip satış sinyaline dönüşür)",
+  "kar_al": null,
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 2,
+   "gerekce": "P&F koşulları sayısal ama P&F hesabı gerektirir; çıkış/hedef yok."
+  },
+  "belirsizlikler": [
+   "Kutu boyutu seçimi",
+   "Hedef kuralı yok",
+   "Orijinal Burke kriterlerinden sapma"
+  ],
+  "uyumluluk_notu": "Günlük endeks (FTSE/Dow/Nasdaq) örnekleri; puan eşikleri (100/140 puan FTSE) endeks seviyesine bağlıdır, yüzde/ATR ile normalize edilmeli. Fiyat tabanlı; her piyasada kodlanır, hacim gerekmez.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "nokta-sekil",
+   "shakeout",
+   "tuzak",
+   "cift-dip",
+   "stop-and-reverse"
+  ]
+ }
+]

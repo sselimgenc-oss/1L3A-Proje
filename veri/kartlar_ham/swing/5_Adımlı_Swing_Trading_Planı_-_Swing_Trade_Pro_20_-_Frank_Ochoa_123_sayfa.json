@@ -1,0 +1,358 @@
+[
+ {
+  "kart_id": "swing__reddedilme-gunu-orta-nokta__ochoa",
+  "ad": "Reddedilme Günü (Rejection Day) - Orta Noktadan Swing Girişi",
+  "stil": "swing",
+  "kaynak": {
+   "pdf": "5_Adımlı_Swing_Trading_Planı_-_Swing_Trade_Pro_20_-_Frank_Ochoa_123_sayfa.pdf",
+   "sayfalar": [
+    13,
+    14,
+    15,
+    16,
+    17,
+    28,
+    29
+   ]
+  },
+  "ozet": "Önceki dip/destek bölgesinde ortalama menzilden çok geniş, uzun kuyruklu ve günün üst bölümünde kapanan reddedilme günü oluşur; ideal swing girişi bu günün orta noktasıdır (emilim bölgesi), kapanış orta noktanın altına inmedikçe 1-4 gün savunulur.",
+  "kategori": "formasyon",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "genel",
+  "zaman_dilimi": {
+   "islem": "1d",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "ADR",
+    "parametreler": {
+     "periyot": "kitapta yok"
+    }
+   },
+   {
+    "ad": "Fiyat aksiyonu",
+    "parametreler": {}
+   }
+  ],
+  "long_giris": [
+   "Önceki dip/destek veya düşük hacim düğümü civarında reddedilme günü: gün aralığı > %125 ADR",
+   "Alt kuyruk gövdenin ideal olarak 2,5 katından büyük",
+   "Kapanış günün aralığının üst %35'inde",
+   "Giriş 1: gün sonuna doğru (son saat) kısmi/tam veya reddedilme gününün orta noktası ((H+L)/2) civarı (sonraki günlerde açılış orta noktanın üzerindeyse)",
+   "Giriş 2: sonraki 1-2 günde reddedilme gününün yüksek/kapanış seviyesinin üstten yeniden testinde"
+  ],
+  "short_giris": [
+   "Ayna kural: tepede ters reddedilme (üst kuyruk, kapanış alt %35)"
+  ],
+  "stop_loss": "Doğrudan değil: reddedilme günü orta noktasının altında günlük kapanış formasyonu bozar ve çıkış sinyalidir (orta nokta - reddedilen dip arası emilim bölgesi)",
+  "kar_al": "Öngörülen hedef bölgede kısmi veya tam kâr (ör. 160 destek, hedef 170-173); ilk büyük rallide kısmi kâr",
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [
+   "Fiyat uç noktalarında (önceki zirve/dipler) oluşmalı",
+   "Konum: önceki dipler ve düşük hacim düğümleri ile örtüşürse güçlü"
+  ],
+  "pozisyon_risk": "İşlem başına çekirdek sermayenin sabit %1'i (Sabit Risk Modeli); örnek %1,3 ve %1,5 tahsis; portföy ısısı: hesap >25K$ ise max %10-15, <25K$ ise %20-30; girişler kısmi/ölçekli yapılabilir (s.4-10)",
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 2,
+   "gerekce": "Menzil, kuyruk/gövde ve kapanış konumu sayısal; ADR periyodu, stop mesafesi ve hedef bölge kitapta yok."
+  },
+  "belirsizlikler": [
+   "ADR periyodu yok",
+   "Hedef bölge hesaplama yöntemi yok",
+   "Giriş yöntemi çoklu (son saat/orta nokta); tek kural seçilmeli",
+   "Kapanış-bazlı stop için tampon yok"
+  ],
+  "uyumluluk_notu": "Günlük çubuk fiyat aksiyonu; hisse/ETF/vadeli/forex/kripto'ya genel (kitap evrensel diyor). Hacim profili (LVN/CLVN) opsiyonel konum teyidi; yalnızca OHLC ile de kodlanır. Gün sonu seans tanımı 7/24 piyasada (kripto) UTC kapanışı gerektirir.",
+  "varyantlar": [
+   "Emilim Günü: aralık < %75 ADR, kapanış > reddedilme günü orta noktası, düşük orta nokta yakınında - orta noktadan giriş",
+   "Reddedilme Günü Sırası: 8 adımlı ölçekleme (emilim bölgesi, emilim günü, başarısız yeni düşük, stop run günü, yeniden test ve devam günü)"
+  ],
+  "anahtar_kelimeler": [
+   "reddedilme-gunu",
+   "pin-bar",
+   "adr",
+   "orta-nokta",
+   "emilim-bolgesi",
+   "fiyat-aksiyonu",
+   "pivot-boss"
+  ]
+ },
+ {
+  "kart_id": "swing__basarisiz-yeni-dusuk__ochoa",
+  "ad": "Başarısız Yeni Düşük (Failed New Low) Günü",
+  "stil": "swing",
+  "kaynak": {
+   "pdf": "5_Adımlı_Swing_Trading_Planı_-_Swing_Trade_Pro_20_-_Frank_Ochoa_123_sayfa.pdf",
+   "sayfalar": [
+    18,
+    19,
+    20,
+    21
+   ]
+  },
+  "ozet": "Fiyat önceki günün (veya çok günlük) dibinin altına inip güçlü reddedilmeyle önceki seansın orta noktasının üzerinde kapanırsa, tuzağa düşen satıcıların kapanışı ve yükseliş devamı beklenir; ideal giriş Başarısız Yeni Düşük günü orta noktasının sonraki 1-2 gün savunulmasıdır.",
+  "kategori": "formasyon",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "genel",
+  "zaman_dilimi": {
+   "islem": "1d",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "ADR",
+    "parametreler": {
+     "periyot": "kitapta yok"
+    }
+   },
+   {
+    "ad": "Fiyat aksiyonu",
+    "parametreler": {}
+   }
+  ],
+  "long_giris": [
+   "Günün aralığı ortalama günlük aralığın %75-100'ü",
+   "Gün dibi önceki seansın (bazen çok günlük) dibinin altına iner",
+   "Kapanış önceki seansın orta noktasının üzerinde (ideal)",
+   "Giriş 1: gün sonuna doğru kısmi/tam (1B); Giriş 2: ertesi sabah Başarısız Yeni Düşük günü orta noktasında alım (1-2 gün savunulursa)"
+  ],
+  "short_giris": [
+   "Ayna kural: Başarısız Yeni Yüksek (önceki zirvenin üstüne çıkıp kapanışta geri dönüş)"
+  ],
+  "stop_loss": "Seviye altında günlük kapanış (orta nokta/alt bölge) formasyonu bozar; çıkış sinyali",
+  "kar_al": "Öngörülen hedef bölgede kısmi/tam kâr",
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [
+   "Aralık sıkışmasından sonra gelişirse patlayıcı hareket olasılığı yüksek",
+   "Önceki zirve/dip ve düşük hacim düğümü ile örtüşme"
+  ],
+  "pozisyon_risk": "İşlem başına çekirdek sermayenin sabit %1'i (Sabit Risk Modeli); örnek %1,3 ve %1,5 tahsis; portföy ısısı: hesap >25K$ ise max %10-15, <25K$ ise %20-30; girişler kısmi/ölçekli yapılabilir (s.4-10)",
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 2,
+   "gerekce": "Aralık, dip ve kapanış kuralları sayısal; stop tamponu ve hedef yok."
+  },
+  "belirsizlikler": [
+   "ADR periyodu",
+   "Hedef hesabı",
+   "Stop büyüklüğü"
+  ],
+  "uyumluluk_notu": "Günlük çubuk fiyat aksiyonu; hisse/ETF/vadeli/forex/kripto'ya genel (kitap evrensel diyor). Hacim profili (LVN/CLVN) opsiyonel konum teyidi; yalnızca OHLC ile de kodlanır. Gün sonu seans tanımı 7/24 piyasada (kripto) UTC kapanışı gerektirir.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "basarisiz-yeni-dusuk",
+   "likidite-sup",
+   "tuzak",
+   "adr",
+   "pivot-boss"
+  ]
+ },
+ {
+  "kart_id": "swing__dis-gun-reddedilme__ochoa",
+  "ad": "Dış Gün (Outside Day) Reddedilme Girişi",
+  "stil": "swing",
+  "kaynak": {
+   "pdf": "5_Adımlı_Swing_Trading_Planı_-_Swing_Trade_Pro_20_-_Frank_Ochoa_123_sayfa.pdf",
+   "sayfalar": [
+    22,
+    23,
+    24,
+    25
+   ]
+  },
+  "ozet": "Gün önceki dibin altına inip önceki seansın yükseğinin üzerinde kapanan geniş aralıklı dış gün oluşursa güçlü dönüş beklenir; giriş ideal olarak önceki dip (yLO) ile dış gün orta noktası arasında alınır, orta noktanın altında günlük kapanış formasyonu bozar.",
+  "kategori": "formasyon",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "genel",
+  "zaman_dilimi": {
+   "islem": "1d",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "ADR",
+    "parametreler": {
+     "periyot": "kitapta yok"
+    }
+   },
+   {
+    "ad": "Fiyat aksiyonu",
+    "parametreler": {}
+   }
+  ],
+  "long_giris": [
+   "Gün aralığı > %105 ADR",
+   "Gün dibi önceki seansın dibinin altında (reddedilen seviye)",
+   "Kapanış önceki seansın yükseğinin üzerinde (dış gün)",
+   "Giriş 1: dış gün son saatinde veya yLO ile dış gün orta noktası arasında; Giriş 2: ertesi sabah yüksek/kapanış yeniden testi; Giriş 3: ikincil emilim bölgesinde yLO reddedilirse",
+   "Sonraki günlerde açılış orta noktanın üzerinde olmalı"
+  ],
+  "short_giris": [
+   "Ayna kural (üste çıkıp önceki dibin altında kapanan dış gün)"
+  ],
+  "stop_loss": "Dış gün orta noktasının (veya reddedilen bölgenin) altında günlük kapanış -> çık",
+  "kar_al": "İlk büyük rallide öngörülen hedef bölgede kısmi/tam kâr",
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [],
+  "pozisyon_risk": "İşlem başına çekirdek sermayenin sabit %1'i (Sabit Risk Modeli); örnek %1,3 ve %1,5 tahsis; portföy ısısı: hesap >25K$ ise max %10-15, <25K$ ise %20-30; girişler kısmi/ölçekli yapılabilir (s.4-10)",
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 2,
+   "gerekce": "Dış gün tanımı tamamen sayısal; stop tamponu ve hedef yok."
+  },
+  "belirsizlikler": [
+   "ADR periyodu",
+   "Hedef bölge",
+   "Çoklu giriş birleşimi"
+  ],
+  "uyumluluk_notu": "Günlük çubuk fiyat aksiyonu; hisse/ETF/vadeli/forex/kripto'ya genel (kitap evrensel diyor). Hacim profili (LVN/CLVN) opsiyonel konum teyidi; yalnızca OHLC ile de kodlanır. Gün sonu seans tanımı 7/24 piyasada (kripto) UTC kapanışı gerektirir.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "dis-gun",
+   "outside-day",
+   "reddedilme",
+   "adr",
+   "pivot-boss"
+  ]
+ },
+ {
+  "kart_id": "swing__stop-run-gunu__ochoa",
+  "ad": "Stop Run Günü (Genişleme Günü) - Dip Savunma Girişi",
+  "stil": "swing",
+  "kaynak": {
+   "pdf": "5_Adımlı_Swing_Trading_Planı_-_Swing_Trade_Pro_20_-_Frank_Ochoa_123_sayfa.pdf",
+   "sayfalar": [
+    26,
+    27
+   ]
+  },
+  "ozet": "Aralığı ortalamanın %200-300'ünü aşan, önceki zirvenin üzerinde günün üst %10-15'inde kapanan agresif trend gününde; giriş başarısız aralık genişlemesi dibi (yLO) veya zirve (yHI) yeniden testi savunulduğunda yapılır, hedef gün aralığının yHI üzerine yansıtılmasıdır.",
+  "kategori": "momentum",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "genel",
+  "zaman_dilimi": {
+   "islem": "1d",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "ADR",
+    "parametreler": {
+     "periyot": "kitapta yok"
+    }
+   },
+   {
+    "ad": "Fiyat aksiyonu",
+    "parametreler": {}
+   }
+  ],
+  "long_giris": [
+   "Gün aralığı > %200 ADR (genellikle %200-300)",
+   "Kapanış önceki seansın yükseğinin üzerinde ve günün aralığının üst %10-15'inde; orta nokta son çok günlük zirve/direnç üstünde",
+   "Giriş 1: günün erken saatlerinde çıkış (yHI civarı) onaylandığında kısmi/tam; ya da yLO'da başarısız aralık genişlemesi sonrası yLO'nun yukarıdan savunulması",
+   "Giriş 2: kapanış üst %20'deyse ertesi gün emilim bölgesi yeniden testi / yHI'nin üstten yeniden testi"
+  ],
+  "short_giris": [
+   "Ayna kural (aşağı yönlü stop run günü)"
+  ],
+  "stop_loss": "yLO altında günlük kapanış -> çık; emilim bölgesi altında kapanış",
+  "kar_al": "Hedef: (yHI - L) ~ yHI + (yHI - L), yani gün aralığı yHI üzerine yansıtılır; gün içi işlemse hedefte tam kâr, salınımsa yarısı",
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [],
+  "pozisyon_risk": "İşlem başına çekirdek sermayenin sabit %1'i (Sabit Risk Modeli); örnek %1,3 ve %1,5 tahsis; portföy ısısı: hesap >25K$ ise max %10-15, <25K$ ise %20-30; girişler kısmi/ölçekli yapılabilir (s.4-10)",
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 2,
+   "gerekce": "Aralık/kapanış koşulları ve hedef formülü sayısal."
+  },
+  "belirsizlikler": [
+   "Stop mesafesi",
+   "ADR periyodu",
+   "Tek günlük (gün içi) ve swing yönetimi birbirine karışık"
+  ],
+  "uyumluluk_notu": "Günlük çubuk fiyat aksiyonu; hisse/ETF/vadeli/forex/kripto'ya genel (kitap evrensel diyor). Hacim profili (LVN/CLVN) opsiyonel konum teyidi; yalnızca OHLC ile de kodlanır. Gün sonu seans tanımı 7/24 piyasada (kripto) UTC kapanışı gerektirir.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "stop-run",
+   "genisleme-gunu",
+   "adr",
+   "momentum",
+   "pivot-boss"
+  ]
+ },
+ {
+  "kart_id": "swing__basarisiz-emilim-dizisi__ochoa",
+  "ad": "Başarısız Emilim Dizisi (reddedilme sonrası çökme)",
+  "stil": "swing",
+  "kaynak": {
+   "pdf": "5_Adımlı_Swing_Trading_Planı_-_Swing_Trade_Pro_20_-_Frank_Ochoa_123_sayfa.pdf",
+   "sayfalar": [
+    38,
+    39,
+    40,
+    41
+   ]
+  },
+  "ozet": "Reddedilme gününden sonra 2-5 gün emilim bölgesini savunan boğalar fiyatı yükseltemez, günlük kapanış reddedilme günü orta noktasının altına iner ve ertesi gün başarısız çıkış (yHI reddi) sonrası short açılır; stop-run günü ve yeniden testle eklenir.",
+  "kategori": "formasyon",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "genel",
+  "zaman_dilimi": {
+   "islem": "1d",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "ADR",
+    "parametreler": {
+     "periyot": "kitapta yok"
+    }
+   },
+   {
+    "ad": "Fiyat aksiyonu",
+    "parametreler": {}
+   }
+  ],
+  "long_giris": [],
+  "short_giris": [
+   "Boğa reddedilme günü ve 2-5 gün emilim sonrası günlük kapanış reddedilme günü orta noktasının altında (uzun pozisyonlar zararda)",
+   "Giriş 1: ertesi sabah yHI başarısız çıkış girişimi reddedilince (veya reddedilen fiyat seviyesinde) kısmi/tam short",
+   "Giriş 2: stop-run günü, yLO'nun aşağıdan yeniden testinde tam pozisyon, son saatte kısmi kâr",
+   "Pozisyona ekleme: başarısız emilim bölgesinin aşağıdan yeniden testinde"
+  ],
+  "stop_loss": "Birincil emilim bölgesinin üzerinde günlük kapanış dizi bozar -> çık",
+  "kar_al": "Devam günü / stop-run günü: kısmi kâr; hedef tüm hareketin ilk büyük ayağı",
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [],
+  "pozisyon_risk": "İşlem başına çekirdek sermayenin sabit %1'i (Sabit Risk Modeli); örnek %1,3 ve %1,5 tahsis; portföy ısısı: hesap >25K$ ise max %10-15, <25K$ ise %20-30; girişler kısmi/ölçekli yapılabilir (s.4-10)",
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 1,
+   "gerekce": "Dizi çok adımlı ve yoruma açık; adımlar sayısallaştırılabilir ama kitap aralık sınırlarını bırakmış."
+  },
+  "belirsizlikler": [
+   "Emilim günü sayısı (2-5) sabit kural değil",
+   "Hedef bölge tanımı yok",
+   "Pozisyon ekleme limitleri yok",
+   "Reddedilme günü tanımına bağlı"
+  ],
+  "uyumluluk_notu": "Günlük çubuk fiyat aksiyonu; hisse/ETF/vadeli/forex/kripto'ya genel (kitap evrensel diyor). Hacim profili (LVN/CLVN) opsiyonel konum teyidi; yalnızca OHLC ile de kodlanır. Gün sonu seans tanımı 7/24 piyasada (kripto) UTC kapanışı gerektirir.",
+  "varyantlar": [
+   "Boğa için tersi: başarısız yeni düşük sonrası devam; Birikim Dizisi (s.42+) ve Stop Run Dizisi okunmadı/ayrıntısız"
+  ],
+  "anahtar_kelimeler": [
+   "basarisiz-emilim",
+   "reddedilme-gunu",
+   "stop-run",
+   "short",
+   "pivot-boss"
+  ]
+ }
+]

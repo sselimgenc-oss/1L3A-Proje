@@ -1,0 +1,193 @@
+[
+ {
+  "kart_id": "swing__destek-direnc-aralik-salinimi__walters",
+  "ad": "Aralık Piyasasında Destek Altı Düşüş Sonrası Dönüş Alımı (Strateji 1)",
+  "stil": "swing",
+  "kaynak": {
+   "pdf": "Swing_ve_Günlük_Trading_-_Jeremy_Walters_220_sayfa.pdf",
+   "sayfalar": [
+    48,
+    49
+   ]
+  },
+  "ozet": "Fiyat destek ve direnç arasında sıkışmışken destek altına yakın sağlam bir düşüş (kapanış) oluşursa bir sonraki mumda long açılır; stop düşüş mumunun dibinin 1 ATR altında, hedef dirençten hemen önce.",
+  "kategori": "destek_direnc",
+  "piyasa_rejimi": "yatay",
+  "orijinal_piyasa": "genel",
+  "zaman_dilimi": {
+   "islem": "1d",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "ATR",
+    "parametreler": {
+     "periyot": "kitapta yok"
+    }
+   },
+   {
+    "ad": "Destek/Direnç",
+    "parametreler": {}
+   }
+  ],
+  "long_giris": [
+   "Piyasa destek ve direnç arasında aralıkta (kutu)",
+   "Fiyat desteğin altına/yakınına düşer ve sağlam bir düşüş (dönüş) mumu oluşur",
+   "Bir sonraki mumda long"
+  ],
+  "short_giris": [],
+  "stop_loss": "Düşüş mumunun dibinin 1 ATR altında",
+  "kar_al": "Direncin hemen altı (satış baskısı gelmeden)",
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [
+   "Piyasa yatay (range) olmalı"
+  ],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 1,
+   "gerekce": "Destek/direnç ve 'sağlam düşüş' öznel; ATR periyodu yok."
+  },
+  "belirsizlikler": [
+   "Destek-direnç tanımı",
+   "ATR periyodu",
+   "'Sağlam düşüş' eşiği",
+   "Kısa yönü yok"
+  ],
+  "uyumluluk_notu": "Günlük grafik, saf fiyat aksiyonu; 5m'ye uyarlama güvenilmez. Hacim gerekmez. Forex/hisse/kripto/emtiada uygulanabilir (kitap genel). Not: aynı içerik Joe Penn kitabında da var (kart tekrarı).",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "destek-direnc",
+   "range",
+   "atr",
+   "donus-mumu"
+  ]
+ },
+ {
+  "kart_id": "swing__50ma-geri-cekilme-dalga__walters",
+  "ad": "'Dalgayı Yakala' - 50 MA'ya Geri Çekilme Sonrası Long (Strateji 2)",
+  "stil": "swing",
+  "kaynak": {
+   "pdf": "Swing_ve_Günlük_Trading_-_Jeremy_Walters_220_sayfa.pdf",
+   "sayfalar": [
+    49,
+    50
+   ]
+  },
+  "ozet": "Yükseliş trendinde fiyat en az 50 periyotluk hareketli ortalamaya (veya derinine) geri çekilip yükseliş dönüş mumu oluşturunca long açılır; stop en düşüğün 1 ATR altında, hedef tepeden hemen önce.",
+  "kategori": "trend_takip",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "genel",
+  "zaman_dilimi": {
+   "islem": "1d",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "MA",
+    "parametreler": {
+     "periyot": 50,
+     "tur": "belirtilmemiş"
+    }
+   },
+   {
+    "ad": "ATR",
+    "parametreler": {
+     "periyot": "kitapta yok"
+    }
+   }
+  ],
+  "long_giris": [
+   "Yükseliş trendi/formasyonu; geri çekilme 50 MA'ya veya daha derine",
+   "Yükseliş yönlü sağlam bir dönüş (reddedilme) mumu oluşur -> bir sonraki mumda long"
+  ],
+  "short_giris": [],
+  "stop_loss": "Geri çekilme en düşüğünün 1 ATR altı",
+  "kar_al": "Önceki en yüksek seviyeden hemen önce",
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [
+   "Daha derin geri çekilmeler tercih edilir (daha fazla 'et')"
+  ],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 2,
+   "gerekce": "MA ve ATR stop net; dönüş mumu ve hedef öznel."
+  },
+  "belirsizlikler": [
+   "MA türü",
+   "Dönüş mumu tanımı",
+   "ATR periyodu"
+  ],
+  "uyumluluk_notu": "Günlük grafik, saf fiyat aksiyonu; 5m'ye uyarlama güvenilmez. Hacim gerekmez. Forex/hisse/kripto/emtiada uygulanabilir (kitap genel). Not: aynı içerik Joe Penn kitabında da var (kart tekrarı).",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "ma-50",
+   "geri-cekilme",
+   "atr-stop",
+   "trend-takip"
+  ]
+ },
+ {
+  "kart_id": "swing__direnc-fade-karsi-trend__walters",
+  "ad": "'Hareketi Soldur' - Dirençte Karşı Trend Short (Strateji 3)",
+  "stil": "swing",
+  "kaynak": {
+   "pdf": "Swing_ve_Günlük_Trading_-_Jeremy_Walters_220_sayfa.pdf",
+   "sayfalar": [
+    50
+   ]
+  },
+  "ozet": "Fiyat önceki tepeyi ortadan kaldıran sert bir hareketle dirence gelip sağlam bir düşüş mumu oluşturunca bir sonraki mumda short açılır; stop en yükseğin 1 ATR üstünde, hedef en yakın destekten önce.",
+  "kategori": "ortalamaya_donus",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "genel",
+  "zaman_dilimi": {
+   "islem": "1d",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "ATR",
+    "parametreler": {
+     "periyot": "kitapta yok"
+    }
+   },
+   {
+    "ad": "Destek/Direnç",
+    "parametreler": {}
+   }
+  ],
+  "long_giris": [],
+  "short_giris": [
+   "Fiyat güçlü hareketle önceki yüksek seviyeyi aşıp dirence ulaşır",
+   "Sağlam bir düşüş mumu (reddedilme) oluşur -> bir sonraki mumda short"
+  ],
+  "stop_loss": "Dirençteki yükseğin 1 ATR üstünde",
+  "kar_al": "En yakın desteğin hemen üstünde",
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 1,
+   "gerekce": "Direnç, 'güçlü hareket' ve 'sağlam düşüş' öznel; karşı-trend işlem."
+  },
+  "belirsizlikler": [
+   "Direnç tanımı",
+   "Hareket gücü eşiği",
+   "ATR periyodu"
+  ],
+  "uyumluluk_notu": "Günlük grafik, saf fiyat aksiyonu; 5m'ye uyarlama güvenilmez. Hacim gerekmez. Forex/hisse/kripto/emtiada uygulanabilir (kitap genel). Not: aynı içerik Joe Penn kitabında da var (kart tekrarı).",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "karsi-trend",
+   "direnc",
+   "atr-stop",
+   "fade"
+  ]
+ }
+]

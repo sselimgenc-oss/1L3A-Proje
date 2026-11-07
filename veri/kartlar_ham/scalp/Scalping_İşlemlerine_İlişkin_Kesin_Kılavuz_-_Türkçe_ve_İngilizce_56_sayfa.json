@@ -1,0 +1,210 @@
+[
+  {
+    "kart_id": "scalp__destek-direnc-aralik-islemi__dailyfx-fxcm",
+    "ad": "Destek/Direnç Aralığında Dönüş Scalp (limit + osilatör filtresi)",
+    "stil": "scalp",
+    "kaynak": {
+      "pdf": "Scalping İşlemlerine İlişkin Kesin Kılavuz - Türkçe ve İngilizce (56 sayfa) - @eseckal.pdf",
+      "sayfalar": [
+        17,
+        18,
+        19
+      ]
+    },
+    "ozet": "Fiyat net bir yatay aralıktayken (Camarilla pivot / swing seviyeleri ile belirlenen destek-direnç) dirençte SAT, destekte AL limiti kurulur; hedef aralığın karşı ucu, stop bir sonraki seviyenin ötesi. İsteğe bağlı olarak RSI/CCI/MACD ile aşırı bölgeden dönüş teyidi.",
+    "kategori": "ortalamaya_donus",
+    "piyasa_rejimi": "yatay",
+    "orijinal_piyasa": "forex",
+    "zaman_dilimi": {
+      "islem": "5m-30m",
+      "ust_filtre": null
+    },
+    "gostergeler": [
+      {
+        "ad": "Camarilla Pivot",
+        "parametreler": {}
+      },
+      {
+        "ad": "RSI",
+        "parametreler": {}
+      },
+      {
+        "ad": "CCI",
+        "parametreler": {}
+      },
+      {
+        "ad": "MACD",
+        "parametreler": {}
+      }
+    ],
+    "long_giris": [
+      "Fiyat net aralıkta (destek ve direnç tanımlı)",
+      "Fiyat desteğe yaklaşır, (opsiyonel) osilatör aşırı satım bölgesinden yukarı döner -> AL"
+    ],
+    "short_giris": [
+      "Fiyat dirence yaklaşır, (opsiyonel) osilatör aşırı alımdan aşağı döner -> SAT"
+    ],
+    "stop_loss": "Aralık dışında bir sonraki destek/direnç çizgisinin ötesi (örn. R4)",
+    "kar_al": "Aralığın karşı ucu",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Fiyat aralığı kırılırsa stratejiyi bırak",
+      "Aralık = yatay piyasa teyidi"
+    ],
+    "pozisyon_risk": "Kitap: işlem başına bakiyenin %1'i, günlük toplam %5 zarar olunca işlemi bırak; hedef R:R en az 1:2.",
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Seviye seçimi ve osilatör eşikleri tanımsız; genel çerçeve."
+    },
+    "belirsizlikler": [
+      "Aralık tanımı (kaç dokunuş?)",
+      "Osilatör periyot/eşik yok",
+      "Giriş limit mesafesi yok"
+    ],
+    "uyumluluk_notu": "Forex majörleri; 5m-30m; ≥5m'ye uygun; hacim gerekmez.",
+    "varyantlar": [
+      "Camarilla yerine swing seviyeleri",
+      "Osilatörsüz limit girişi"
+    ],
+    "anahtar_kelimeler": [
+      "destek-direnc",
+      "aralik",
+      "camarilla",
+      "rsi",
+      "limit"
+    ]
+  },
+  {
+    "kart_id": "scalp__trend-geri-cekilme-destek-fib__dailyfx-fxcm",
+    "ad": "Trendde Geri Çekilme Scalp (trend çizgisi / Fib %78.6 + RSI)",
+    "stil": "scalp",
+    "kaynak": {
+      "pdf": "Scalping İşlemlerine İlişkin Kesin Kılavuz - Türkçe ve İngilizce (56 sayfa) - @eseckal.pdf",
+      "sayfalar": [
+        19,
+        20,
+        21
+      ]
+    },
+    "ozet": "Birincil trend yönünde, geri çekilme destek/direnç ve Fibonacci/trend çizgisi çakışmasına gelince giriş emri; osilatör (RSI) aşırı bölgeden trend yönüne dönünce giriş; stop seviyenin ötesinde, hedef önceki dip/zirveler.",
+    "kategori": "trend_takip",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "forex",
+    "zaman_dilimi": {
+      "islem": "30m",
+      "ust_filtre": null
+    },
+    "gostergeler": [
+      {
+        "ad": "RSI",
+        "parametreler": {}
+      },
+      {
+        "ad": "Fibonacci",
+        "parametreler": {
+          "seviye": 78.6
+        }
+      },
+      {
+        "ad": "Trend Çizgisi",
+        "parametreler": {}
+      }
+    ],
+    "long_giris": [
+      "Yükseliş trendi (üst yüksek-yükselen dipler)",
+      "Geri çekilme destek / Fib / trend çizgisine gelir; RSI aşırı satımdan çıkar -> AL"
+    ],
+    "short_giris": [
+      "Düşüş trendi",
+      "Geri çekilme direnç / %78.6 Fib / trend çizgisine gelir; RSI aşırı alımın altına kapanır -> SAT"
+    ],
+    "stop_loss": "Direncin/desteğin ötesi (kırılırsa kapat)",
+    "kar_al": "Önceki salınım dipleri/zirveleri",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Trend yönünde işlem"
+    ],
+    "pozisyon_risk": "Kitap: işlem başına bakiyenin %1'i, günlük toplam %5 zarar olunca işlemi bırak; hedef R:R en az 1:2.",
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Trend ve seviye seçimi yoruma bağlı."
+    },
+    "belirsizlikler": [
+      "RSI periyodu/eşiği yok",
+      "Çakışma toleransı yok"
+    ],
+    "uyumluluk_notu": "Forex; 30m; ≥5m'ye uyar.",
+    "varyantlar": [],
+    "anahtar_kelimeler": [
+      "geri-cekilme",
+      "fibonacci",
+      "rsi",
+      "trend"
+    ]
+  },
+  {
+    "kart_id": "scalp__destek-direnc-kirilimi-1pip__dailyfx-fxcm",
+    "ad": "Destek/Direnç Kırılımı Scalp (1 pip üstü giriş, 30dk kapanış onayı)",
+    "stil": "scalp",
+    "kaynak": {
+      "pdf": "Scalping İşlemlerine İlişkin Kesin Kılavuz - Türkçe ve İngilizce (56 sayfa) - @eseckal.pdf",
+      "sayfalar": [
+        22,
+        23,
+        24
+      ]
+    },
+    "ozet": "Direnç aşılınca (en az 1 pip) AL, destek kırılınca SAT; daha onaylı alternatif 30 dk mum kapanışı beklemek. Stop kırılan seviyenin diğer tarafında, hedef 1:2 R:R.",
+    "kategori": "kirilim",
+    "piyasa_rejimi": "volatil",
+    "orijinal_piyasa": "forex",
+    "zaman_dilimi": {
+      "islem": "30m (giriş stop emri)",
+      "ust_filtre": null
+    },
+    "gostergeler": [
+      {
+        "ad": "Destek/Direnç",
+        "parametreler": {}
+      }
+    ],
+    "long_giris": [
+      "Fiyat direnci en az 1 pip aşar (giriş stop emri)",
+      "veya 30 dk mum direncin üstünde kapanır"
+    ],
+    "short_giris": [
+      "Fiyat desteği en az 1 pip kırar",
+      "veya 30 dk mum desteğin altında kapanır"
+    ],
+    "stop_loss": "Kırılan seviyenin karşı tarafı (yeni destek/direnç)",
+    "kar_al": "Risk:Ödül 1:2",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Sahte kırılma riski: stop şart"
+    ],
+    "pozisyon_risk": "Kitap: işlem başına bakiyenin %1'i, günlük toplam %5 zarar olunca işlemi bırak; hedef R:R en az 1:2.",
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Giriş + hedef net; seviye tespiti öznel."
+    },
+    "belirsizlikler": [
+      "Stop mesafesi seviyeden kaç pip?"
+    ],
+    "uyumluluk_notu": "Forex majörleri; 30m; sahte kırılma uyarıları var.",
+    "varyantlar": [
+      "Anlık stop emri vs mum kapanışı"
+    ],
+    "anahtar_kelimeler": [
+      "kirilim",
+      "destek-direnc",
+      "stop-emri",
+      "1-2-rr"
+    ]
+  }
+]

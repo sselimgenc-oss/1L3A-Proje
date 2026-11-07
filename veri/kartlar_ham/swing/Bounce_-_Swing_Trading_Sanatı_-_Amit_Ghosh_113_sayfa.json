@@ -1,0 +1,148 @@
+[
+ {
+  "kart_id": "swing__bounce-hhhl-onayli-trend__ghosh",
+  "ad": "Bounce Stratejisi - HHHL/LLLH Onaylı Trend Girişi (ZigZag swing grafiği)",
+  "stil": "swing",
+  "kaynak": {
+   "pdf": "Bounce_-_Swing_Trading_Sanatı_-_Amit_Ghosh_113_sayfa.pdf",
+   "sayfalar": [
+    43,
+    44,
+    45,
+    46,
+    48,
+    49,
+    50,
+    51,
+    55,
+    56,
+    59,
+    65
+   ]
+  },
+  "ozet": "Bounce (ZigZag) swing grafiğinde daha yüksek zirve + daha yüksek dip (HHHL) onaylanınca yükseliş trendinde son zirvenin üstüne buy stop ile girilir; stop yeni oluşan daha yüksek dibin altındadır ve her yeni daha yüksek dipte yukarı taşınır. Düşüşte ayna (LLLH).",
+  "kategori": "trend_takip",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+   "islem": "1d",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "ZigZag/Bounce swing",
+    "parametreler": {
+     "tepe_dip_kuralı": "üst/alt/iç/dış çubuk sınıflaması",
+     "mum_karşılaştırma": "n±2 mum (Perfect Swing)"
+    }
+   }
+  ],
+  "long_giris": [
+   "Swing grafiğinde yükseliş trendi onaylı: yeni dip önceki dipten yüksek (HL) ve fiyat bir önceki zirveyi (HH) kırdığı an HHHL kurulumu tamamlanır",
+   "Girişi önceden: son swing zirvesinin üzerine buy stop; tetiklenince long (HL oluştuktan ve HH henüz kırılmadan HL geçerliliği korunur)",
+   "Lower High oluşan yükseliş trendlerinden kaçın"
+  ],
+  "short_giris": [
+   "Düşüş trendi: daha düşük dip + daha düşük zirve (LLLH) onaylı; son swing dibinin altına sell stop"
+  ],
+  "stop_loss": "Girişten önce oluşan daha yüksek dibin (LH için daha düşük zirvenin) altı/üstü; kırılırsa trend bitmiştir",
+  "kar_al": "Hedef yok; erken çıkışın büyük fırsatları kaçıracağı belirtilir",
+  "iz_suren_stop": "Her yeni daha yüksek dip (düşüşte daha düşük zirve) oluştuğunda stop o dibin altına taşınır; kapanış bazlı stop alternatif (deneyimsizlere basit tutun)",
+  "zaman_cikisi": null,
+  "filtreler": [
+   "Yanlış kırılımlar (fakeout) için sonraki mumun da dışarıda kapanması aranır",
+   "ZigZag yanlış pozitif verebilir: mum kayıp olarak tespit edildiğinde ertesi gün açılışta kapat",
+   "Yeni swing dibi önceki dipten aşağı iniyorsa (HL bozuldu) HHHL geçersiz"
+  ],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 3,
+   "gerekce": "Swing tespiti kodlanmış kurallarla (n±2 veya bounce yöntemi) tamamen mekanik; giriş, stop ve iz süren stop net."
+  },
+  "belirsizlikler": [
+   "Hedef yok",
+   "Yanal piyasa için ayrı kural var, okunmadı",
+   "Hacim/volatilite filtresi yok",
+   "Swing penceresi (n=2) bir yöntemde tanımlı, iki sistem karıştırılabilir"
+  ],
+  "uyumluluk_notu": "Günlük hisse (Hindistan); saf fiyat tabanlı olduğundan 5m+ ve kripto/forex/emtiaya doğrudan uyarlanabilir. Swing tespiti gecikmeli (repaint yok ama onay gecikmesi).",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "zigzag",
+   "hhhl",
+   "swing-noktasi",
+   "buy-stop",
+   "iz-suren-stop",
+   "trend-takip",
+   "bounce"
+  ]
+ },
+ {
+  "kart_id": "swing__bounce-bosluk-dip-avi__ghosh",
+  "ad": "Bounce - Aşağı Boşluk Sonrası Dip Alımı (Gap Fill)",
+  "stil": "swing",
+  "kaynak": {
+   "pdf": "Bounce_-_Swing_Trading_Sanatı_-_Amit_Ghosh_113_sayfa.pdf",
+   "sayfalar": [
+    70,
+    71,
+    72,
+    73,
+    74,
+    75,
+    76
+   ]
+  },
+  "ozet": "Endekste sert düşüşle aşağı boşluk açılan hissede açılış boşluğu önce direnç gibi çalışır; bounce kurulumu (daha yüksek zirve kırılımı/iç çubuk) tetiklenirse hedef boşluğun kapanması ve bir önceki günün aralığı üst sınırıdır.",
+  "kategori": "ortalamaya_donus",
+  "piyasa_rejimi": "volatil",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+   "islem": "1d",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "Boşluk (gap)",
+    "parametreler": {}
+   },
+   {
+    "ad": "ZigZag/Bounce swing",
+    "parametreler": {}
+   }
+  ],
+  "long_giris": [
+   "Güçlü düşüşle aşağı boşluk açılışı",
+   "Boşluktan gelen mumun zirvesi 'lower high' kabul edilir; fiyat bu seviye (bounce kurulumu) yukarı kırılınca long (tetiklenmezse işlem yok)"
+  ],
+  "short_giris": [],
+  "stop_loss": "Bounce kuralıyla: son daha düşük dip/oluşan dibin altı",
+  "kar_al": "Hedef 1: boşluğun kapanması; Hedef 2: önceki günün yatay aralığının en yükseği. Alternatif: bounce iz süren stop",
+  "iz_suren_stop": null,
+  "zaman_cikisi": "Aracı kurumun otomatik kapatmasından kaçınmak için gün içi işlemler 15:00 civarında kapatılır (Hindistan seansı)",
+  "filtreler": [
+   "Temel haber olaylarında normalden az maruziyetle işlem yap"
+  ],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 1,
+   "gerekce": "Boşluk ve bounce kırılımı ölçülebilir ancak giriş/stop kuralı örneklerle anlatılmış, net değil."
+  },
+  "belirsizlikler": [
+   "Net giriş fiyatı ve stop yok",
+   "Boşluk büyüklüğü eşiği yok",
+   "Hedefin hangi gün kapandığına dair sınır yok"
+  ],
+  "uyumluluk_notu": "Günlük hisse endeksi boşlukları; 7/24 piyasalarda (kripto) boşluk kavramı yok. Hisse/endeks vadeli için uygulanabilir.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "bosluk",
+   "gap-fill",
+   "dip-alimi",
+   "bounce",
+   "kirilim"
+  ]
+ }
+]

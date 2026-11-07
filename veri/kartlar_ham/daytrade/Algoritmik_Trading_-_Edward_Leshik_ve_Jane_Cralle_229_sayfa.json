@@ -1,0 +1,62 @@
+[
+ {
+  "kart_id": "daytrade__alpha5-ates-safagi-lma-egimi__leshik-cralle",
+  "ad": "ALPHA-5: Ateş Şafağı (LMA Eğimi Trend Yakalama)",
+  "stil": "daytrade",
+  "kaynak": {
+   "pdf": "Algoritmik_Trading_-_Edward_Leshik_ve_Jane_Cralle_229_sayfa.pdf",
+   "sayfalar": [
+    109,
+    110
+   ]
+  },
+  "ozet": "LMA (veya EMA) 50 tiklik iki ardışık dönemde 5 baz puan getiriyi aşıp yükselmeye devam ederse uzun pozisyon; SMA LMA'nın altına inene kadar tutulur. Enerji hisselerinde (OIH, RIG) nadir ama uzun işlemler.",
+  "kategori": "trend_takip",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+   "islem": "tik",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "SMA (kısa)",
+    "parametreler": {}
+   },
+   {
+    "ad": "LMA / EMA (uzun)",
+    "parametreler": {
+     "periyot": "50 tik adımlarla eğim"
+    }
+   }
+  ],
+  "long_giris": [
+   "LMA yükseliyor ve 50T başına getirisi > 5 baz puan",
+   "Bu koşul art arda iki 50T döneminde doğru"
+  ],
+  "short_giris": [],
+  "stop_loss": "LC Uyarlanabilir Sermaye Koruma Stopu",
+  "kar_al": "Satış tetiği: SMA LMA'nın altına geçer (kâr al yok)",
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [
+   "Enerji sektörü hisseleri"
+  ],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 2,
+   "gerekce": "Eşikler verilmiş (5bp, 50T, iki dönem); LMA ve SMA uzunlukları ALPHA-1'den."
+  },
+  "belirsizlikler": [
+   "SMA/LMA uzunlukları ALPHA-1 ayarlarından."
+  ],
+  "uyumluluk_notu": "TİK tabanlı (işlem sayısı) yüksek frekans tasarımı: 200-1600 'tick' pencereleri ≥5m mumlarına doğrudan taşınmaz, yeniden ölçekleme ve yeniden test gerekir. ABD hisselerine (yüksek likidite, 1000 hisse market emri) özgü; kripto perpetual'da tick akışı kullanılabilir. Hacim/tik verisi gerekir.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "lma-egimi",
+   "trend",
+   "tik"
+  ]
+ }
+]

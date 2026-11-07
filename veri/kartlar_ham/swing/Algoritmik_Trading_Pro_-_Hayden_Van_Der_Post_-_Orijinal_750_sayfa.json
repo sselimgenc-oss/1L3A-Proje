@@ -1,0 +1,62 @@
+[
+ {
+  "kart_id": "swing__ivr-kisa-straddle-opsiyon__van-der-post",
+  "ad": "IV Rank > %80: Kısa Straddle (Opsiyon Primi Toplama)",
+  "stil": "swing",
+  "kaynak": {
+   "pdf": "Algoritmik_Trading_Pro_-_Hayden_Van_Der_Post_-_Orijinal_750_sayfa.pdf",
+   "sayfalar": [
+    278,
+    279
+   ]
+  },
+  "ozet": "Zımni volatilite sırası (IVR) 80. yüzdelik üstündeyse opsiyonlar pahalı sayılır ve kısa straddle (prim satışı) açılır; IVR 20. yüzdelik altındaysa alım stratejisi (long straddle).",
+  "kategori": "diger",
+  "piyasa_rejimi": "volatil",
+  "orijinal_piyasa": "genel",
+  "zaman_dilimi": {
+   "islem": "1d",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "Zımni Volatilite Sırası (IVR)",
+    "parametreler": {
+     "ust_esik": 0.8,
+     "alt_esik": 0.2
+    }
+   }
+  ],
+  "long_giris": [
+   "IVR < 0.2 (opsiyonlar ucuz) -> 'buy_strategy' (örn. long straddle/strangle)"
+  ],
+  "short_giris": [
+   "IVR > 0.8 (opsiyonlar pahalı) -> 'sell_strategy' (kısa straddle)"
+  ],
+  "stop_loss": null,
+  "kar_al": null,
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [
+   "Opsiyon zımni volatilite verisi gerekli"
+  ],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 0,
+   "gerekce": "Yalnızca sinyal fonksiyonu; hangi opsiyonlar, vade, strike, çıkış, stop, boyut yok. Opsiyon verisi ve opsiyon yürütmesi gerekli."
+  },
+  "belirsizlikler": [
+   "Strike/vade, çıkış ve risk limiti yok.",
+   "Kısa straddle teorik olarak sınırsız riskli."
+  ],
+  "uyumluluk_notu": "1L3A kripto/hisse/emtia perpetual evreninde opsiyon yok; uyumlu değil.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "opsiyon",
+   "ivr",
+   "straddle",
+   "volatilite"
+  ]
+ }
+]

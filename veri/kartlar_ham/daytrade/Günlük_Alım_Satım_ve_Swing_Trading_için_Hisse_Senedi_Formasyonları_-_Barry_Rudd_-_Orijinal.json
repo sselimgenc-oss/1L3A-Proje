@@ -1,0 +1,279 @@
+[
+ {
+  "kart_id": "daytrade__5m-gun-zirvesi-konsolidasyon-kirilimi__rudd",
+  "ad": "5 Dakikalık Günün Zirve/Dibinde Konsolidasyon Kırılımı (wiggle stop)",
+  "stil": "daytrade",
+  "kaynak": {
+   "pdf": "Günlük_Alım_Satım_ve_Swing_Trading_için_Hisse_Senedi_Formasyonları_-_Barry_Rudd_-_Orijinal.pdf",
+   "sayfalar": [
+    15,
+    16,
+    17,
+    18,
+    19,
+    21,
+    22
+   ]
+  },
+  "ozet": "Gün içi 5 dakikalık grafikte fiyat günün mevcut zirvesine (dibine) yapışarak uzun ve dar konsolide olduktan sonra zirvenin üzerine kırılırsa momentumla long (short için ayna) girilir; çıkış 'wiggle' iz süren stopuyla.",
+  "kategori": "kirilim",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+   "islem": "5m",
+   "ust_filtre": "1d"
+  },
+  "gostergeler": [
+   {
+    "ad": "Gün içi yüksek/düşük",
+    "parametreler": {}
+   },
+   {
+    "ad": "Hacim",
+    "parametreler": {
+     "ort_gunluk_min": 100000
+    }
+   }
+  ],
+  "long_giris": [
+   "5m grafikte günün mevcut zirvesine yapışmış konsolidasyon (ne kadar uzun ve dar ise o kadar iyi; kitaba göre 20-30 dk ve üzeri)",
+   "Zirvenin kırılımında long; ilk kırılım en iyi; sabah ilk 10 dakika girilmez",
+   "Günlük grafikte yukarıda yakın direnç yoksa (en az 1+ puan hareket alanı)",
+   "Piyasa endeksi aynı yönde olmalı; market maker ekranında momentum"
+  ],
+  "short_giris": [
+   "Günün dibine yapışmış konsolidasyonun aşağı kırılımı"
+  ],
+  "stop_loss": "İlk stop dolum fiyatından 1/4 puan (bazen 3/8)",
+  "kar_al": "Sabit hedef yok; hedef fiyatlar: günlük destek/direnç, 3/4 puan üstü hızlı spike sonrası kâr almak",
+  "iz_suren_stop": "Wiggle: açık kâr + ilk stop (1/4) hissenin standart wiggle'ına (ör. 5/8 puan) eşit olunca stop günün zirvesinin 5/8 puan altına yükseltilir; asla geri alınmaz",
+  "zaman_cikisi": null,
+  "filtreler": [
+   "En iyi saatler: 8:30-11:00 ve 13:30-15:00 (CST)",
+   "Kırılım dışı zirvede olmayan konsolidasyon ('gün zirvesinde değil') düşük olasılıklıdır",
+   "Dünün kapanışına doğru konsolidasyon + bugünün açılışı aynı bölge = güçlü",
+   "Yuvarlak sayılar (10, 20, 50, 100) kırılımı daha güçlü devam eder"
+  ],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 2,
+   "gerekce": "Kırılım ve wiggle stop net; konsolidasyon uzunluğu/sıkılığı ve piyasa momentumu (L2) sayısal değil."
+  },
+  "belirsizlikler": [
+   "Konsolidasyon süresi 20-30 dk scalp modülünde; trend modülünde sayısal değil",
+   "Hisse başına standart wiggle ölçülmesi gerekiyor",
+   "Market maker/time&sales ekranı kod dışı"
+  ],
+  "uyumluluk_notu": "1998 ABD hisseleri (kesirli fiyat, SOES, market maker/time&sales ekranı). Hisse likiditesi gerektirir; saf OHLC ile yaklaşıkla kodlanabilir. Kripto/forex'te seans saatleri yerine UTC açılış kullanılmalı; sabit puan değerleri (1/4 puan) ATR ile uyarlanmalı.",
+  "varyantlar": [
+   "Kama (wedge) konsolidasyonu zirveye yapışarak ilk 1-2 saatte",
+   "Dünün zirvesi = bugünün zirvesinde konsolidasyon (en güçlü varyant)",
+   "Düşük olasılıklı: zirvede olmayan konsolidasyon, kırılmış zirveyi kovalamak"
+  ],
+  "anahtar_kelimeler": [
+   "konsolidasyon",
+   "gun-ici-kirilim",
+   "wiggle",
+   "5m",
+   "gun-zirvesi",
+   "momentum"
+  ]
+ },
+ {
+  "kart_id": "daytrade__genis-aralik-extrem-kapanis-gap__rudd",
+  "ad": "Dünün Geniş Aralıklı Aşırı Kapanış (W/R) Çubuğuna Göre Açılış Kurulumları",
+  "stil": "daytrade",
+  "kaynak": {
+   "pdf": "Günlük_Alım_Satım_ve_Swing_Trading_için_Hisse_Senedi_Formasyonları_-_Barry_Rudd_-_Orijinal.pdf",
+   "sayfalar": [
+    50,
+    51,
+    52,
+    53,
+    54,
+    55,
+    56,
+    57
+   ]
+  },
+  "ozet": "Dünkü geniş aralıklı ve yüksek/düşükte kapanan çubuğa göre bugünün açılış yerleşimine bağlı 4 kurulum: açılış W/R çubuğunun yükseği üstündeyse düşüp tekrar yükselirse kırılımda al; büyük gap'te geri çekilince sat; kapanışa yakın açılışlarda koşuya göre 5m konsolidasyon kırılımı.",
+  "kategori": "momentum",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+   "islem": "5m",
+   "ust_filtre": "1d"
+  },
+  "gostergeler": [
+   {
+    "ad": "Geniş aralıklı çubuk",
+    "parametreler": {
+     "kural": "günlük aralık ortalama çubuktan büyük, kapanış yüksek/düşük sınırında"
+    }
+   }
+  ],
+  "long_giris": [
+   "Dün: aralığı ortalamadan geniş ve yüksek seviyeye yakın kapanan çubuk (W/R); en iyisi açılış dipte kapanış zirvede",
+   "Kurulum A: açılış W/R yüksek seviyesinin biraz üstü; fiyat önce W/R yükseğine doğru düşer ve ilk 15 dakikada sabahın yüksek seviyesini yukarı kırarsa al",
+   "Kurulum C/D: açılış dünün kapanışına eşit veya biraz altında; 5m'de zirve/dipte 2-3 çubuk konsolidasyon kırılımı ile (alternatif giriş)",
+   "1-2 günlük yükselişte eğilim long; 3-5 günlük koşu sonrası düzeltme olasılığı (short) yüksek"
+  ],
+  "short_giris": [
+   "Kurulum B: açılışta büyük gap yukarı (hisse fiyatının %3-5+) ve aşağı hareket başlarsa hızla sat; W/R düşüş çubuğunun tersi kurallar"
+  ],
+  "stop_loss": "1/4 puan (bazen 3/8) ilk stop; wiggle iz süren",
+  "kar_al": "Wiggle ile; günlük direnç/destek seviyeleri",
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [
+   "Açılıştan 3/8 puandan fazla uzaklaşmışsa girilmez",
+   "Piyasa endeksi yönü",
+   "Dünün kapanışına doğru gün içi konsolidasyon varsa kurulum güçlenir"
+  ],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 1,
+   "gerekce": "Dört senaryo var, eşikler (geniş aralık, yakın kapanış, gap yüzdesi) yaklaşık; yön tercihi koşula bağlı."
+  },
+  "belirsizlikler": [
+   "'Geniş aralık' ve 'yakın kapanış' sayısal eşikleri yok",
+   "Birden çok kurulum için karar kuralı öznel",
+   "Kurulum B için stop/hedef yok"
+  ],
+  "uyumluluk_notu": "1998 ABD hisseleri (kesirli fiyat, SOES, market maker/time&sales ekranı). Hisse likiditesi gerektirir; saf OHLC ile yaklaşıkla kodlanabilir. Kripto/forex'te seans saatleri yerine UTC açılış kullanılmalı; sabit puan değerleri (1/4 puan) ATR ile uyarlanmalı.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "genis-aralikli-cubuk",
+   "gap",
+   "acilis",
+   "gunluk-5m-birlesim",
+   "momentum"
+  ]
+ },
+ {
+  "kart_id": "daytrade__gunluk-donus-cubugu-uc-gun__rudd",
+  "ad": "Günlük Dönüş Çubuğu (Reversal Bar) Kurulumları - 2 ve 3 Çubuk",
+  "stil": "daytrade",
+  "kaynak": {
+   "pdf": "Günlük_Alım_Satım_ve_Swing_Trading_için_Hisse_Senedi_Formasyonları_-_Barry_Rudd_-_Orijinal.pdf",
+   "sayfalar": [
+    58,
+    59,
+    60,
+    61
+   ]
+  },
+  "ozet": "Dün düşükte kapanan çubuk 1'den sonra çubuk 2 yükseğe yakın kapanan dönüş çubuğu olursa, 3. günde açılış 2. çubuğun kapanışı civarındaysa 5m konsolidasyon kırılımıyla 1. çubuğun yükseğine doğru long alınır. 4 çubuklu varyantta üç çubuğun sat-off ile ardından geri dönüş vardır.",
+  "kategori": "formasyon",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+   "islem": "5m",
+   "ust_filtre": "1d"
+  },
+  "gostergeler": [
+   {
+    "ad": "Günlük çubuk dizisi",
+    "parametreler": {}
+   }
+  ],
+  "long_giris": [
+   "Çubuk 1 aralığının alt kısmında kapanır",
+   "Çubuk 2'nin yükseği çubuk 1'in dibinden çok yukarıda değildir ve çubuk 2 yükseğe yakın kapanır (ideal: açılış dipte)",
+   "Çubuk 1 yükseği çubuk 2 kapanışından en az 1+ puan yukarıda (kar alanı)",
+   "Gün 3 açılışı çubuk 2 kapanışı civarında; 5m konsolidasyon kırılımında al"
+  ],
+  "short_giris": [
+   "Ayna: yükseğe yakın kapanan çubuk 1, çubuk 2 düşükte kapanır; 3. günde kırılımda short"
+  ],
+  "stop_loss": "1/4 puan ilk stop; wiggle iz süren stop",
+  "kar_al": "1. çubuğun yükseği (ilk hedef)",
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [
+   "Çubuk 1 aralığı geniş ise daha iyi",
+   "Dönüş çubuğu yakın destek/direnç seviyesinde ise daha güçlü"
+  ],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 2,
+   "gerekce": "Çubuk ilişkileri neredeyse mekanik; 'yakın' eşikleri yok."
+  },
+  "belirsizlikler": [
+   "'Near' eşikleri yok",
+   "Stop gün içi 5m kurallarına bağlı",
+   "Swing olarak tutulacaksa kurallar belirsiz"
+  ],
+  "uyumluluk_notu": "1998 ABD hisseleri (kesirli fiyat, SOES, market maker/time&sales ekranı). Hisse likiditesi gerektirir; saf OHLC ile yaklaşıkla kodlanabilir. Kripto/forex'te seans saatleri yerine UTC açılış kullanılmalı; sabit puan değerleri (1/4 puan) ATR ile uyarlanmalı.",
+  "varyantlar": [
+   "4 çubuk: 1. ve 2. gün düşükte kapanır, 3. gün açılış civarı 2. günün kapanışı ve 2. günün yüksek seviyesine geri dönüp yükseğe yakın kapanır; 4. gün açılışta alım"
+  ],
+  "anahtar_kelimeler": [
+   "donus-cubugu",
+   "reversal-bar",
+   "gunluk-cubuk",
+   "5m-kirilim"
+  ]
+ },
+ {
+  "kart_id": "daytrade__flashback-sabah-donusu__rudd",
+  "ad": "Flashback - Sabah Hızlı Yön Değişimi Kırılımı",
+  "stil": "daytrade",
+  "kaynak": {
+   "pdf": "Günlük_Alım_Satım_ve_Swing_Trading_için_Hisse_Senedi_Formasyonları_-_Barry_Rudd_-_Orijinal.pdf",
+   "sayfalar": [
+    19,
+    20,
+    129
+   ]
+  },
+  "ozet": "Açılışta hisse bir yöne hızlı sahte hareket yapıp ters yönde günün zirvesini/dibini kırarsa, ilk 10-20 dakikada ve genel piyasa aynı yöndeyse kırılımda al; dipten zirveye mesafe ≤ 1/2 puan olmalıdır.",
+  "kategori": "momentum",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+   "islem": "5m",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "Gün içi yüksek/düşük",
+    "parametreler": {}
+   }
+  ],
+  "long_giris": [
+   "Açılıştan sonra hisse bir yöne sahte hareket yapıp ters yönde günün yüksek seviyesini kırar",
+   "İlk 10-20 dakika içinde ve dipten kırılım noktasına mesafe ≤ 1/2 puan",
+   "Genel piyasa endeksi güçlü şekilde yukarı"
+  ],
+  "short_giris": [
+   "Aşağı yönlü ayna: yukarı sahte hareket ardından günün dibinin kırılımı; piyasa düşüşte"
+  ],
+  "stop_loss": "1/4 puan; wiggle",
+  "kar_al": "Wiggle stop",
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 1,
+   "gerekce": "Net ama endeks yönü teyidi öznel; yazar da dikkatli olun diyor."
+  },
+  "belirsizlikler": [
+   "Sahte hareketin büyüklüğü tanımsız",
+   "Endeks teyit eşiği yok"
+  ],
+  "uyumluluk_notu": "1998 ABD hisseleri (kesirli fiyat, SOES, market maker/time&sales ekranı). Hisse likiditesi gerektirir; saf OHLC ile yaklaşıkla kodlanabilir. Kripto/forex'te seans saatleri yerine UTC açılış kullanılmalı; sabit puan değerleri (1/4 puan) ATR ile uyarlanmalı.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "flashback",
+   "acilis",
+   "sahte-hareket",
+   "gun-ici-kirilim"
+  ]
+ }
+]
