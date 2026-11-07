@@ -29,6 +29,14 @@ Evren aşağıdaki gibi değişti; "Evren U (13)" tanımının yerine geçer:
   yeterli geçmişi yoksa (en az bir eğitim + bir test penceresi) o TF'de dışarıda kalır ve raporlanır; uydurma/uzatma yok.
 - İşlem yeri: BIST Binance'te yok; paper için veri kaynağı, canlı için ayrı aracı kurum gerekir (canlı kararı kullanıcıda).
 
+## GÜNCELLEME 3 (2026-11-07, kullanıcı, sonuç görülmeden)
+- Test dönemi: **2020-01-01 → bugün** (verinin sonu). Kilitli dönem ayrımı bu testte uygulanmaz (kilit Katman 4'te zaten
+  kullanıldı); walk-forward örneklem-dışı mantığı aynen sürer, son bağımsız sınav paper trading'dir. Gerekirse 2020 öncesi
+  ayrıca indirilir (kullanıcı kararı).
+- Tüm kodlu stratejiler (yeni kodlananlar dahil; kodlama bitince) test edilir: scalp → scalp evreni (5); daytrade ve swing
+  → BIST + ABD hisse + kripto + emtia evreni. Stratejiler artık tek tek "kendi enstrümanlarında" seçilmez.
+- Kilit açılışı: veri okumaları kilit_ac=True, gerekce="karar 27 evren testi 2020→bugün (kullanıcı kararı)" ile günlüğe yazılır.
+
 ## Tanım
 **Evren stratejisi** = bir strateji + bir zaman dilimi + TEK ortak parametre seti, evrenin TÜM enstrümanlarında aynı anda
 çalışır; sinyal hangi enstrümanda çıkarsa orada işleme girer. Evren U (karar 22): BTCUSDT, ETHUSDT, SOLUSDT, DK_AAPL, DK_MSFT,
