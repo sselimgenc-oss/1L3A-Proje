@@ -13,10 +13,13 @@ from motor.veri.yeniden_ornekle import yeniden_ornekle
 
 def mum_yukle(sembol: str, tf: str, baslangic=None, bitis=None, dizin: Optional[Path] = None,
               eksikleri_at: Optional[bool] = None) -> pd.DataFrame:
-    """tf mumları. Kaynak: 5m dosyası varsa 5m; yoksa ve tf >= 1h ise 1h. `eksikleri_at=None`: DK_ (seanslı TradFi)
-    sembollerinde False (günlük/saatlik mumlar seans nedeniyle hep "eksik" görünür), diğerlerinde True."""
+    """tf mumları. Kaynak: 5m dosyası varsa 5m; yoksa ve tf >= 1h ise 1h. `eksikleri_at=None` (varsayılan): tf_mumlari
+    ile aynı kural (DK_ seans modu, kripto eski kural). Açık True/False verilirse eski doğrudan yeniden örnekleme."""
     if eksikleri_at is None:
-        eksikleri_at = not sembol.startswith("DK_")
+        # Tek-grafik araştırmasıyla aynı kaynak/seans kuralı (yeniden_ornekle.tf_mumlari): DK_ sembollerinde
+        # seans modu (kısmi seans mumları tutulur, ABD hisselerinde 4h NY hizalı), kriptoda eski kural.
+        from motor.veri.yeniden_ornekle import tf_mumlari
+        return tf_mumlari(sembol, tf, baslangic, bitis, dizin=dizin)
     if depo.mum_yolu(sembol, "5m", dizin).exists():
         return yeniden_ornekle(depo.mum_oku(sembol, "5m", baslangic, bitis, dizin=dizin), tf, "5m", eksikleri_at)
     if depo.mum_yolu(sembol, "1h", dizin).exists():
