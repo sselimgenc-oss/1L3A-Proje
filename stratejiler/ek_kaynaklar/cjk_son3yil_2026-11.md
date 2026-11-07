@@ -90,7 +90,7 @@
 | Tek hisse, 5 gün, PE ve RSI filtreli | 2026-08-10 | (aynı yazı) | — | Yukarıdakiyle aynı. |
 | Yüksek-düşük al-sat (puan sıralama, "son 1 yıl canlı") | 2026-08-01 (yakın) | swing | Sayı yok | Sonuç doğrulanamıyor. İzle. |
 | Lider strateji (AI + trend sinyali, CSI 150 artırımı) | 2026-07 | portföy 5 hisse, 5 gün | Rakam yok, "canlı" iddiası | İzle; kural açık, sonuç yok. |
-|股指期货 haftalık yön | 2026-10-26 | futures günlük | Toplam %10.7 — **tüm günler long** (yazar: "şans payı var") | **Elendi**: yön yanlılığı, maliyet/kayma belirsiz. |
+| 股指期货 haftalık yön | 2026-10-26 | futures günlük | Toplam %10.7 — **tüm günler long** (yazar: "şans payı var") | **Elendi**: yön yanlılığı, maliyet/kayma belirsiz. |
 | 聪明钱 (尾盘 hareket) faktörü, 2024–2026 | 2026 | faktör | **Tüm kombinasyonların Sharpe'ı < 0** (yazarın kendi bulgusu) | **Elendi** (negatif sonuç, dürüst). |
 | Dakika bazlı faktör, 2018-06..2025-03, 300 hisse | 2026-10-28 | faktör (en düşük grup) | Ayrılma getirisi %20 yıllık (grup 0, ~300 hisse, aylık %1.6) | Faktör, strateji değil; maliyet ve uygulanabilirlik yok. İzle. |
 | Otomatik aşırı-uyum hikayesi (80% yıllık eğitim, gerçek kötü) | — | — | Yazar: "eğitimde yüksek, canlıda kötü" | Ders kaynağı. |
@@ -99,7 +99,7 @@
 
 ### Qiita ve note (Japonya)
 - **Qiita — FX API araştırması** (samakusa, 2025-07): sadece API karşılaştırması; strateji ve sonuç yok. **Bilgi**.
-- **note — "Akademik makaleden FX EA"** (MatsukazeAlgo, 2026-05-02, kısmen ücretli): Moskowitz, Ooi & Pedersen (2012) "Time Series Momentum" makalesini MT5 EA'ya çeviriyor, başarısız denemeleri de yayınlıyor. **Önemli uyarı:** yazar, GogoJungle'daki EA'ların "%80'inin ナンピン/マーチンゲale" olduğunu söylüyor → martingale kontrolü zorunlu. Fikir (zaman serisi momentumu) izlenebilir; sayılar ücretli bölümde.
+- **note — "Akademik makaleden FX EA"** (MatsukazeAlgo, 2026-05-02, kısmen ücretli): Moskowitz, Ooi & Pedersen (2012) "Time Series Momentum" makalesini MT5 EA'ya çeviriyor, başarısız denemeleri de yayınlıyor. **Önemli uyarı:** yazar, GogoJungle'daki EA'ların "%80'inin ナンピン/マーチンゲール" olduğunu söylüyor → martingale kontrolü zorunlu. Fikir (zaman serisi momentumu) izlenebilir; sayılar ücretli bölümde.
 
 ### Ek elemeler
 - Japonya FX EA ticari yazıları, Qiita araştırmaları: elendi (bilgi).
