@@ -333,6 +333,7 @@ def yeniden_oyna(tablo: pd.DataFrame, ayar: OynatmaAyari = None, bas=None, bit=N
              "red_gunluk": 0, "red_kill": 0, "gunluk_limit_olayi": 0, "kill_olayi": 0, "zorla_kapanan": 0}
     olaylar, gunluk_ozs = [], {}
     kabul = []
+    islem_pnl = {}     # i -> (gerçekleşme zamanı ns, kâr/zarar; başlangıç özsermayesi = 1.0 birimi); zorla kapanışlar dahil (Aşama 3 pano için)
 
     def mtm(t):
         # MUHAFAZAKÂR değerleme: gerçekleşmiş nakit + açık pozisyonların yalnız ZARARI (doğrusal yol); kâr çıkışta sayılır
@@ -349,6 +350,7 @@ def yeniden_oyna(tablo: pd.DataFrame, ayar: OynatmaAyari = None, bas=None, bit=N
             d = c_ns[i] - g_ns[i]
             f = 1.0 if d <= 0 else min(max((t - g_ns[i]) / d, 0.0), 1.0)
             nakit += rk * r[i] * f
+            islem_pnl[i] = (int(t), rk * r[i] * f)
             sayac["zorla_kapanan"] += 1
         acik.clear()
         olaylar.append({"zaman": str(pd.Timestamp(t, tz="UTC")), "olay": neden})
@@ -374,6 +376,7 @@ def yeniden_oyna(tablo: pd.DataFrame, ayar: OynatmaAyari = None, bas=None, bit=N
             if i in acik:
                 rk, _ = acik.pop(i)
                 nakit += rk * r[i]
+                islem_pnl[i] = (int(t), rk * r[i])
             continue
         # giriş
         if olu:
@@ -401,7 +404,7 @@ def yeniden_oyna(tablo: pd.DataFrame, ayar: OynatmaAyari = None, bas=None, bit=N
     ozs = pd.Series(gunluk_ozs).sort_index()
     getiri = ozs.pct_change().dropna()
     return {"gunluk": ozs, "getiri": getiri, "olaylar": olaylar, "sayac": sayac, "kabul": kabul,
-            "nakit_son": nakit}
+            "nakit_son": nakit, "islem_pnl": islem_pnl}
 
 
 # ============================================================================ aday tablosu
