@@ -291,3 +291,84 @@ def test_mobil_tasma_korumasi_css(tmp_path):
     yaz_genis(tmp_path)
     h, _, _ = _html(tmp_path)
     assert ".tw{overflow-x:auto" in h and "overflow-wrap:anywhere" in h and not re.search(r'(src|href)="https?://', h)
+
+
+# ---------------------------------------------------------------- eski panolardan alınan özellikler (süzgeç, takvim, aralık şeridi, stil/enstrüman görünümleri)
+def _beklentili():
+    p = genis_durum()
+    n = {"deger": 0.02, "p05": -0.03, "p25": 0.0, "p50": 0.015, "p75": 0.03, "p95": 0.06, "bant": "p50_p75", "alarm": None}
+    m = {"deger": 0.01, "p05": 0.0, "p25": 0.01, "p50": 0.02, "p75": 0.03, "p95": 0.05, "bant": "p05_p25", "alarm": None}
+    p["stratejiler"]["stratejiler"][0]["beklenti"] = {"4": {"net_getiri": n, "max_dusus": m}}
+    p["stratejiler"]["set"]["beklenti"] = {"4": {"net_getiri": n, "max_dusus": m}}
+    return p
+
+
+def test_suzgec_ve_ajan_enstruman_oznitelikleri(tmp_path):
+    p = _beklentili()
+    p["islemler"] = [{**p["islemler"][0], "kimlik": "a|BTCUSDT|1h", "sembol": "ETHUSDT", "net_pnl_yerel": "-3.00", "cikis_nedeni": "stop"}] + p["islemler"][1:]
+    d.yaz_hepsi(tmp_path, **p)
+    h, _, _ = _html(tmp_path)
+    ajan = p["stratejiler"]["stratejiler"][0]["ajan"]
+    assert 'class="fbar"' in h and f'data-aj-sec="{ajan}"' in h and 'id="f-sembol"' in h and 'id="f-q"' in h
+    assert f'data-ajan="{ajan}"' in h and 'data-sonuc="z"' in h and 'data-neden="stop"' in h
+    assert '<option value="ETHUSDT">' in h and 'id="f-sonuc"' in h and 'id=islem-g' in h
+    assert "html.js #t2:checked~.fbar" in h                                      # JS yoksa süzgeç gizli: sayfa süzgeçsiz çalışır
+    assert 'class="sirala"' in h or "class=sirala" in h
+
+
+def test_beklenti_aralik_seridi_dosyadaki_degerlerle(tmp_path):
+    d.yaz_hepsi(tmp_path, **_beklentili())
+    h, _, _ = _html(tmp_path)
+    assert 'class="ar"' in h and "%5 -3.00%" in h and "%95 +6.00%" in h and "%50 +1.50%" in h
+    assert h.count('class="ar"') >= 3                                             # strateji (net + düşüş) + set
+
+
+def test_takvim_gunluk_kz_ve_gun_detayi(tmp_path):
+    yaz_genis(tmp_path)
+    h, _, _ = _html(tmp_path)
+    assert "Ocak 2026" in h and 'data-gun="2026-01-03"' in h and 'data-gun="2026-01-04"' in h
+    assert pano.f_para("-16.38", True) in h and pano.f_para("31.69", True) in h
+    assert "(UTC günü)" in h and ".tk{" in h or ".tk,.tkb{" in h
+
+
+def test_yeni_alanlar_yokken_veri_yok_uydurma_yok(tmp_path):
+    yaz_genis(tmp_path)
+    h, _, _ = _html(tmp_path)
+    for alan in ("stratejiler.json → ajanlar[]", "stratejiler.json → enstrumanlar[]", "stratejiler.json → strateji_enstruman[]",
+                 "ozet.json → gunluk_kz_ajan[]", "ozet.json → istatistik{}", "ozet.json → cikis_nedenleri[]", "maruziyet.json → bekleyen_emirler[]"):
+        assert alan in h, alan
+    assert "kendisi hesaplamaz" in h
+
+
+def test_motor_yeni_alanlari_yazarsa_birebir_gosterilir(tmp_path):
+    p = genis_durum()
+    p["stratejiler"].update({
+        "ajanlar": [{"ajan": "swing", "strateji_sayisi": 3, "ozsermaye_katkisi": "12.34", "katki_getiri": 0.0012, "islem_sayisi": 9, "kazanma_orani": 0.5555, "pf": 1.77, "acik_pozisyon": 2}],
+        "enstrumanlar": [{"sembol": "SOLUSDT", "strateji_sayisi": 2, "ozsermaye_katkisi": "-4.56", "katki_getiri": -0.0004, "islem_sayisi": 6, "kazanma_orani": 0.3333, "acik_pozisyon": 1}],
+        "strateji_enstruman": [{"strateji": "swing__x", "sembol": "SOLUSDT", "ozsermaye_katkisi": "7.89", "islem_sayisi": 4, "acik_pozisyon": 0}]})
+    p["ozet"].update({"gunluk_kz_ajan": [{"gun": "2026-01-04", "ajanlar": {"swing": {"pnl": "5.55", "getiri": 0.0005}}}],
+                      "istatistik": {"sqn": 2.5, "sharpe": 1.25, "sortino": None, "kelly_ceyrek": 0.1, "beklenti_islem_basi": "3.21",
+                                     "en_iyi_gun": {"gun": "2026-01-04", "pnl": "31.69"}, "en_kotu_gun": None},
+                      "cikis_nedenleri": [{"neden": "stop", "islem": 5, "pay": 0.5, "net_pnl": "-20.00"}]})
+    p["ekstra"]["maruziyet"]["bekleyen_emirler"] = [{"kimlik": "a|BTCUSDT|1h", "sembol": "BTCUSDT", "yon": "long", "sinyal_zamani": "2026-01-05T00:00:00Z", "emir": "101.5", "stop": "95"}]
+    d.yaz_hepsi(tmp_path, **p)
+    h, _, _ = _html(tmp_path)
+    for b in (pano.f_para("12.34", True), pano.f_sayi(1.77), pano.f_para("-4.56", True), pano.f_para("7.89", True), "+0.05%", pano.f_sayi(2.5), pano.f_sayi(1.25),
+              pano.f_yuzde(0.1, ondalik=1), pano.f_para("3.21", True), pano.f_para("31.69", True), pano.f_para("-20.00", True), "101.5"):
+        assert b in h, b
+    assert "ozet.json → istatistik{}" not in h and "stratejiler.json → ajanlar[]" not in h
+
+
+def test_yogunlasma_ve_anlik_kz_cubuklari(tmp_path):
+    yaz_genis(tmp_path)
+    h, _, _ = _html(tmp_path)
+    assert "Enstrüman yoğunlaşması" in h and "Anlık K/Z" in h and 'class="kzb"' in h and pano.f_para(POZ["kz"], True) in h
+
+
+def test_sozluk_yazdir_yenile_ve_kaynak_denetimi(tmp_path):
+    yaz_genis(tmp_path)
+    h, _, _ = _html(tmp_path)
+    assert 'id="yenile"' in h and 'id="yazdir"' in h and "@media print" in h and "Sözlük" in h and "kill switch".lower() in h.lower()
+    assert not re.search(r'(src|href)="https?://', h)
+    kaynak = open(pano.__file__, encoding="utf-8").read()
+    assert "fetch(" not in kaynak and "XMLHttpRequest" not in kaynak                # tarayıcı ağ isteği yok
