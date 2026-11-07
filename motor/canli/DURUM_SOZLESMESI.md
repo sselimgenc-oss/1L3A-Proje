@@ -39,3 +39,29 @@ Pano kırmızı uyarı: `bayat=true`, dosya yaşı > `dosya_esik_dk` (paper/canl
 
 ## `ozsermaye_gecmisi.json`
 `noktalar[] {gun, ozsermaye (para)}` (günlük, eğri çizimi için).
+
+## Genişletme (Aşama 4, sürüm 1 içinde EKLEMELİ; eski alanlar değişmedi)
+Pano bunları yalnız okur; her sayıyı motor yazar. Dosya yoksa (eski motor) pano eski görünümle çalışır (`durum.ek_oku` → `None`).
+Ölçülemeyen değer `null` + yanında `*_neden` / `olculmedi_neden` metni (backtest kaynağı). Para metin, oran sayı.
+
+- **Her JSON dosyasında `yazildi_zaman`** (UTC ISO): dosyanın diske yazıldığı an (`yaz_hepsi` damgalar, aynı turda hepsinde aynı).
+  Pano tarayıcıda "şimdi − yazildi_zaman" ile dosya bayatlığını gösterir. (`zaman` = durumun "şimdi"si, ayrı kavram.)
+- **`ozet.json`**: `baslangictan_pnl` (= `toplam_pnl`), `hafta_pnl` (7 gün dolmadıysa `null` + `hafta_pnl_neden`), `gun_pnl`, `zirve_ozsermaye`
+  (zaten vardı), `gunluk_kz[] {gun, pnl, getiri}` (son 60 gün), `dusus_serisi[] {gun, dusus}` (zirveden düşüş, aynı günler).
+- **`maruziyet.json`** (`1l3a.durum.maruziyet`): `semboller[] {sembol, net_nominal, brut_nominal, net_oran, brut_oran}` (oran = kasaya),
+  `toplam_brut_nominal`, `toplam_net_nominal`, `kaldirac`, `kullanilan_teminat` (= brüt / 3x sert tavan; borsa teminatı değildir, `teminat_notu`),
+  `acik_stop_riski {deger (para), oran, limit}`, `pozisyonlar[] {kimlik, sembol, yon, miktar, giris_fiyati, mark_fiyat, giris_zamani, stop, kz, kz_oran,
+  nominal, kasaya_orani, stop_riski}` (kz = mark fiyatla anlık K/Z). Aynı pozisyon nesneleri `stratejiler.json` → `acik_pozisyonlar`'da da bulunur.
+- **`maliyet.json`**: `toplam {son24s, tum}` ve `stratejiler{kimlik: {son24s, tum}}`; her blok `{ucret, kayma, funding, toplam}` (para; pozitif = maliyet,
+  funding ödenen). ücret = taker komisyonu; kayma = dolum fiyatı − referans (açılış / stop seviyesi) farkı x miktar.
+- **`reddedilen.json`**: `son24s` ve `tum`: `{"reddedildi:<neden>" | "kirpildi:<neden>": sayı}`, `son[]` (son 20: `zaman, tur, neden, kimlik, sembol`).
+  Nedenler: gunluk_kayip_limiti, kill_switch, toplam_risk_tavani, kaldirac_tavani, min_qty, min_notional, gecersiz_stop, portfoy_risk, risk,
+  kaldirac_orantili, toplam_risk, kaldirac, zarar_buyutme...
+- **`olaylar.jsonl`**: zaman damgalı SON 50 olay `{zaman, tur, mesaj}`; tür: gunluk_limit, kill_switch, veri_bosluk, veri_uyusmazlik, ws_baglandi,
+  ws_koptu, ws_yeniden_baglandi, ws_24sa_yenileme, binance_hata, veri_yok, baslangic, yeniden_baslatma.
+- **`stratejiler.json` → her strateji**: `performans {islem, kazanma_orani, ort_kar, ort_zarar (negatif), net, pf}`, `ayar`, `sonraki_yenileme`,
+  `durum` ("calisiyor" | "veri yok: neden"). `kol_payi` = kolun hesaptaki payı.
+- **`icgoruler.json`**: `cumleler[]` kısa Türkçe cümleler (en iyi/en kötü strateji, açıkların kaçı kârda, beklenti alarmına en yakın strateji,
+  24 sa maliyet, limit durumu). Sayılar diğer dosyalarla aynı değişkenlerden üretilir.
+- **`saglik.json`**: `veri[].bayatlik_dk` = son mum KAPANIŞINDAN beri geçen SEANS dakikası (hisse/emtia için kapalı piyasa sayılmaz,
+  `motor/canli/paper_takvim.py`), asla negatif değil; `veri[].seans` (kripto|hisse|emtia). Beklenti alarmları ve ayar yenileme zamanı `uyarilar[]`'a yazılır.

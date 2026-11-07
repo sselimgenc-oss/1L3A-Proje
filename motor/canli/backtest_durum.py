@@ -99,6 +99,34 @@ def beklenti_konumlari(seri: pd.Series, satirlar: dict) -> dict:
     return out
 
 
+SERI_GUN = 60
+OLCULMEDI = "backtest yeniden oynatması günlük pozisyon/maliyet kaydı tutmaz; paper motoru yazar"
+
+
+def _genisletme(gunler, ozs, bas: Decimal, zaman: str) -> tuple:
+    """Pano genişletme alanları (backtestte ölçülebilenler dolu, ölçülemeyenler null + neden)."""
+    kz, dus, onceki, zirve = [], [], bas, bas
+    for t, e in zip(gunler, ozs):
+        kz.append({"gun": str(t.date()), "pnl": d.para(e - onceki), "getiri": d.sayi((e - onceki) / onceki)})
+        zirve = max(zirve, e)
+        dus.append({"gun": str(t.date()), "dusus": d.sayi((zirve - e) / zirve)})
+        onceki = e
+    hafta = d.para(ozs[-1] - ozs[-8]) if len(ozs) >= 8 else None
+    ekstra_ozet = {"hafta_pnl": hafta, "hafta_pnl_neden": None if hafta is not None else "7 günlük geçmiş dolmadı",
+                   "gunluk_kz": kz[-SERI_GUN:], "dusus_serisi": dus[-SERI_GUN:]}
+    bos = lambda ad, **kw: {**d._zarf(ad, "backtest", zaman), "olculmedi_neden": OLCULMEDI, **kw}      # noqa: E731
+    dosyalar = {
+        "maruziyet": bos("maruziyet", semboller=None, toplam_brut_nominal=None, toplam_net_nominal=None, kaldirac=None,
+                         kullanilan_teminat=None, acik_stop_riski=None, pozisyonlar=[]),
+        "maliyet": bos("maliyet", toplam=None, stratejiler=None),
+        "reddedilen": bos("reddedilen", son24s=None, tum=None, son=[]),
+        "olaylar": [],
+        "icgoruler": {**d._zarf("icgoruler", "backtest", zaman), "cumleler": [
+            f"Backtest dönemi son 7 gün K/Z: {hafta if hafta is not None else '—'} USD.",
+            "Maliyet, maruziyet ve reddedilen sinyal dökümü backtest kaynağında ölçülmez (null)."]}}
+    return ekstra_ozet, dosyalar
+
+
 def olustur(kok: Path = KOK, baslangic=BASLANGIC, yazim_zamani=None, beklenti_csv: Path = BEKLENTI_CSV) -> dict:
     """Durum dosyalarının içeriği (diske yazmaz). -> {'ozet','stratejiler','islemler','saglik','gecmis', 'seriler'}."""
     set_ = final_set.yukle(kok / "stratejiler" / "final_set.json")
@@ -196,6 +224,7 @@ def olustur(kok: Path = KOK, baslangic=BASLANGIC, yazim_zamani=None, beklenti_cs
                         kaldirac_not="backtest: yeniden oynatma günlük kaldıraç/açık risk tutmaz; paper motoru yazar",
                         gunluk_limit_tetiklendi=sayac["gunluk_limit_olayi"] > 0)
     zaman = d.zaman_str(gunler[-1])
+    ekstra_ozet, ekstra_dosyalar = _genisletme(gunler, ozs, bas, zaman)
     ozet = d.ozet_olustur(
         kaynak="backtest", zaman=zaman, yazim_zamani=d.zaman_str(yazim), donem={"bas": d.zaman_str(gunler[0]), "bit": zaman},
         baslangic_ozsermaye=bas, ozsermaye=ozs[-1], gun_pnl=gun_pnl, gun_getiri=float(getiri.iloc[-1]), zirve_ozsermaye=zirve,
@@ -204,7 +233,8 @@ def olustur(kok: Path = KOK, baslangic=BASLANGIC, yazim_zamani=None, beklenti_cs
                   "kirpilan_giris": sayac["kirpilan"], "gunluk_limit_olayi": sayac["gunluk_limit_olayi"], "kill_olayi": sayac["kill_olayi"]},
         notlar=["BACKTEST: kilitli dönem (2025-11-01 sonrası) yeniden oynatması; canlı/paper verisi değildir.",
                 "Set sayıları sonuclar/kilit/set.csv ile aynıdır (tek_grafik oynatma + portföy ortalaması, 50/50 günlük dengeli).",
-                f"Sharpe (yıllık, günlük getiriden): {d.sayi(ozet_ham['sharpe']):.2f}; gün sayısı: {ozet_ham['gun']}."])
+                f"Sharpe (yıllık, günlük getiriden): {d.sayi(ozet_ham['sharpe']):.2f}; gün sayısı: {ozet_ham['gun']}."],
+        ekstra=ekstra_ozet)
     set_bek = beklenti_konumlari(getiri, bekle["set"])
     stratejiler_json = {**d._zarf("stratejiler", "backtest", zaman), "yazim_zamani": d.zaman_str(yazim),
                         "beklenti_penceresi_hafta": list(bek.PENCERE_HAFTA), "stratejiler": stratejiler, "set": {"beklenti": set_bek}}
@@ -212,21 +242,23 @@ def olustur(kok: Path = KOK, baslangic=BASLANGIC, yazim_zamani=None, beklenti_cs
               "dosya_esik_dk": None,
               "veri": [{"sembol": x["sembol"], "tf": x["tf"], "son_mum_zamani": d.zaman_str(pd.Timestamp(
                   sonuc.set_index("kimlik").loc[x["kimlik"], "veri_son"]).tz_convert("UTC")),
-                  "bayatlik_dk": int((gunler[-1] - pd.Timestamp(sonuc.set_index("kimlik").loc[x["kimlik"], "veri_son"]).tz_convert("UTC")
-                                      ).total_seconds() // 60),
+                  "bayatlik_dk": d.veri_yasi_dk(pd.Timestamp(sonuc.set_index("kimlik").loc[x["kimlik"], "veri_son"]).tz_convert("UTC"),
+                                                x["tf"], gunler[-1]),
                   "esik_dk": d.bayat_esigi_dk(x["tf"]), "bayat": False} for x in set_["stratejiler"]],
               "servis": {"calisiyor": None, "surum": "backtest_durum/1", "not": "backtest besleyici; canlı servis yok"},
               "uyarilar": ["Bayatlık denetimi backtest kaynağında kapalı (veri bilerek statik)."]}
     gecmis = {**d._zarf("gecmis", "backtest", zaman),
               "noktalar": [{"gun": str(t.date()), "ozsermaye": d.para(v)} for t, v in zip(gunler, ozs)]}
     return {"ozet": ozet, "stratejiler": stratejiler_json, "islemler": tum_islemler, "saglik": saglik, "gecmis": gecmis,
+            "ekstra": ekstra_dosyalar,
             "seriler": {"set_getiri": getiri, "ozs": ozs, "katki_toplam": sum(sicil[k]["katki"] for k in sicil)}}
 
 
 def yaz(cikti=None, **kw) -> Path:
     p = olustur(**kw)
     dizin = Path(cikti) if cikti else d.DURUM_DIZINI
-    d.yaz_hepsi(dizin, ozet=p["ozet"], stratejiler=p["stratejiler"], islemler=p["islemler"], saglik=p["saglik"], gecmis=p["gecmis"])
+    d.yaz_hepsi(dizin, ozet=p["ozet"], stratejiler=p["stratejiler"], islemler=p["islemler"], saglik=p["saglik"], gecmis=p["gecmis"],
+                ekstra=p["ekstra"])
     return dizin
 
 

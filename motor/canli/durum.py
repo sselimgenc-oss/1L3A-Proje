@@ -8,7 +8,7 @@ from __future__ import annotations
 
 import json
 import os
-from datetime import datetime, timezone
+from datetime import timedelta, datetime, timezone
 from decimal import ROUND_HALF_EVEN, Decimal
 from pathlib import Path
 from typing import Iterable, Optional
@@ -17,6 +17,9 @@ SURUM = 1
 DURUM_DIZINI = Path(__file__).resolve().parents[2] / "durum"       # .gitignore'da
 DOSYALAR = {"ozet": "ozet.json", "stratejiler": "stratejiler.json", "islemler": "islemler.jsonl",
             "saglik": "saglik.json", "gecmis": "ozsermaye_gecmisi.json"}
+# Genişletme (sürüm 1, eklemeli; pano bunlar yoksa eski görünümle çalışır): motor yazar, pano yalnız okur.
+EK_DOSYALAR = {"maruziyet": "maruziyet.json", "maliyet": "maliyet.json", "reddedilen": "reddedilen.json",
+               "olaylar": "olaylar.jsonl", "icgoruler": "icgoruler.json"}
 KAYNAKLAR = ("backtest", "paper", "canli")
 BANTLAR = ("p05_alti", "p05_p25", "p25_p50", "p50_p75", "p75_p95", "p95_ustu")
 
@@ -143,6 +146,8 @@ def _ortak(d, ad, sema):
     if d["kaynak"] not in KAYNAKLAR:
         raise DurumHatasi(f"{ad}: kaynak {d['kaynak']!r} geçersiz")
     _zaman_dogrula(d["zaman"], ad)
+    if "yazildi_zaman" in d:
+        _zaman_dogrula(d["yazildi_zaman"], f"{ad}.yazildi_zaman")
 
 
 OZET_RISK = ("gunluk_kayip", "kaldirac", "kill_switch", "acik_stop_riski")
@@ -216,7 +221,8 @@ def _zarf(sema: str, kaynak: str, zaman: str) -> dict:
 
 
 def ozet_olustur(*, kaynak: str, zaman: str, yazim_zamani: str, donem: Optional[dict], baslangic_ozsermaye, ozsermaye, gun_pnl,
-                 gun_getiri: float, zirve_ozsermaye, max_dusus: float, risk: dict, sayaclar: dict, notlar: Optional[list] = None) -> dict:
+                 gun_getiri: float, zirve_ozsermaye, max_dusus: float, risk: dict, sayaclar: dict, notlar: Optional[list] = None,
+                 ekstra: Optional[dict] = None) -> dict:
     """Bütün değerler MOTOR tarafından hesaplanmış olarak verilir; bu fonksiyon yalnız biçimler/şemaya koyar (zirveden düşüş ve
     toplam PnL de motorun verdiği özsermayelerden Decimal ile türetilir: bunlar tanım gereği fark/oran)."""
     bas, oz, zirve = Decimal(para(baslangic_ozsermaye)), Decimal(para(ozsermaye)), Decimal(para(zirve_ozsermaye))
@@ -226,6 +232,8 @@ def ozet_olustur(*, kaynak: str, zaman: str, yazim_zamani: str, donem: Optional[
               "gun_getiri": sayi(gun_getiri), "zirve_ozsermaye": para(zirve),
               "zirveden_dusus": sayi((zirve - oz) / zirve) if zirve > 0 else 0.0, "max_dusus": sayi(max_dusus),
               "risk": risk, "sayaclar": sayaclar, "notlar": notlar or []})
+    d["baslangictan_pnl"] = d["toplam_pnl"]                       # pano etiketi: başlangıçtan beri K/Z (toplam_pnl ile aynı sayı)
+    d.update(ekstra or {})
     return dogrula_ozet(d)
 
 
@@ -245,19 +253,59 @@ def risk_blogu(*, gunluk_kayip: Optional[float], gunluk_limit: float, kaldirac: 
     }
 
 
-def yaz_hepsi(dizin, *, ozet: dict, stratejiler: dict, islemler: list, saglik: dict, gecmis: dict) -> Path:
-    """Beş dosyayı doğrulayıp ATOMİK yazar (her dosya kendi içinde atomiktir; yazım sırası: islemler, gecmis, stratejiler, saglik,
-    ozet -> ozet.json en son: ozet'i gören okuyucu diğerlerinin aynı turdan olduğunu varsayabilir)."""
+def yaz_hepsi(dizin, *, ozet: dict, stratejiler: dict, islemler: list, saglik: dict, gecmis: dict,
+              ekstra: Optional[dict] = None, yazildi: Optional[datetime] = None) -> Path:
+    """Dosyaları doğrulayıp ATOMİK yazar (her dosya kendi içinde atomiktir; yazım sırası: ek dosyalar, islemler, gecmis,
+    stratejiler, saglik, ozet -> ozet.json en son: ozet'i gören okuyucu diğerlerinin aynı turdan olduğunu varsayabilir).
+    `ekstra`: {'maruziyet'|'maliyet'|'reddedilen'|'icgoruler': dict, 'olaylar': [satır dict]} (EK_DOSYALAR).
+    Her JSON dosyasına `yazildi_zaman` (UTC ISO, dosyanın diske yazıldığı an; hepsinde aynı) eklenir: pano tarayıcıda
+    'şimdi - yazildi_zaman' ile dosya bayatlığını gösterir."""
     dizin = Path(dizin)
+    ekstra = dict(ekstra or {})
+    yz = zaman_str(yazildi or datetime.now(timezone.utc))
     dogrula_stratejiler(stratejiler), dogrula_saglik(saglik), dogrula_gecmis(gecmis), dogrula_ozet(ozet)
     for s in islemler:
         dogrula_islem(s)
+    bilinmeyen = set(ekstra) - set(EK_DOSYALAR)
+    if bilinmeyen:
+        raise DurumHatasi(f"bilinmeyen ek dosya(lar): {sorted(bilinmeyen)}")
+    for ad, v in ekstra.items():
+        if ad == "olaylar":
+            for no, o in enumerate(v):
+                _iste(o, ("zaman", "tur", "mesaj"), f"olaylar[{no}]")
+                _zaman_dogrula(o["zaman"], f"olaylar[{no}]")
+        else:
+            _ortak(v, EK_DOSYALAR[ad], f"1l3a.durum.{ad}")
+    for ad, v in ekstra.items():
+        if ad == "olaylar":
+            atomik_yaz_jsonl(dizin / EK_DOSYALAR[ad], v)
+        else:
+            v["yazildi_zaman"] = yz
+            atomik_yaz_json(dizin / EK_DOSYALAR[ad], v)
     atomik_yaz_jsonl(dizin / DOSYALAR["islemler"], islemler)
-    atomik_yaz_json(dizin / DOSYALAR["gecmis"], gecmis)
-    atomik_yaz_json(dizin / DOSYALAR["stratejiler"], stratejiler)
-    atomik_yaz_json(dizin / DOSYALAR["saglik"], saglik)
-    atomik_yaz_json(dizin / DOSYALAR["ozet"], ozet)
+    for k, v in (("gecmis", gecmis), ("stratejiler", stratejiler), ("saglik", saglik), ("ozet", ozet)):
+        v["yazildi_zaman"] = yz
+        atomik_yaz_json(dizin / DOSYALAR[k], v)
     return dizin
+
+
+def ek_oku(dizin, ad: str):
+    """Ek dosya (EK_DOSYALAR). Yoksa None (eski motor); bozuksa DurumHatasi. 'olaylar' -> liste."""
+    yol = Path(dizin) / EK_DOSYALAR[ad]
+    if not yol.exists():
+        return None
+    if ad == "olaylar":
+        out = []
+        for no, satir in enumerate(yol.read_text(encoding="utf-8").splitlines(), 1):
+            if satir.strip():
+                try:
+                    out.append(json.loads(satir))
+                except json.JSONDecodeError as e:
+                    raise DurumHatasi(f"{yol.name}:{no}: bozuk JSON satırı ({e})") from e
+        return out
+    d = _json_oku(yol)
+    _ortak(d, yol.name, f"1l3a.durum.{ad}")
+    return d
 
 
 def islem_ekle(dizin, islem: dict) -> None:
@@ -348,3 +396,11 @@ def bayat_esigi_dk(tf: str) -> int:
     """Veri bayatlık eşiği (dakika) = 2 x mum süresi + 10 (tf: 'm','h','d' son ekli)."""
     birim = {"m": 1, "h": 60, "d": 1440}[tf[-1]]
     return 2 * int(tf[:-1]) * birim + 10
+
+
+def veri_yasi_dk(son_mum_acilis, tf: str, simdi) -> int:
+    """Veri yaşı (dk) = simdi - son mumun KAPANIŞI (açılış + mum süresi). Mum henüz kapanmamışsa (negatif) 0.
+    Paper motoru yazar; pano hesap yapmaz."""
+    birim = {"m": 1, "h": 60, "d": 1440}[tf[-1]]
+    kapanis = zaman_oku(zaman_str(son_mum_acilis)) + timedelta(minutes=int(tf[:-1]) * birim)
+    return max(0, int((simdi - kapanis).total_seconds() // 60))
