@@ -243,3 +243,33 @@ def test_aday_listesi_evrenle_kesisir_ve_tekrarsiz():
     assert atlanan and all("yok" in n or "Error" in n for _, n in atlanan)
     adaylar2, _ = wp.aday_listesi("pf__rotasyon", KRIPTO, izgara=False)
     assert len(adaylar2) < len(adaylar)
+
+
+def _sentetik(baslar):
+    return {s: pd.DataFrame({"kapanis": 1.0},
+                            index=pd.date_range(b, periods=10, freq="D", tz="UTC")) for s, b in baslar.items()}
+
+
+def test_analiz_baslangici_kapsama_yuzde75():
+    # 4 sembol, %75 -> 3. sembolün başladığı gün; 8 sembol %75 -> 6.
+    v = _sentetik({"A": "2009-01-01", "B": "2010-01-01", "C": "2017-03-05", "D": "2020-09-01"})
+    ev = tuple(v)
+    assert wp.analiz_baslangici(v, ev, 0.75) == pd.Timestamp("2017-03-05", tz="UTC")
+    assert wp.analiz_baslangici(v, ev, 1.0) == pd.Timestamp("2020-09-01", tz="UTC")
+    assert wp.analiz_baslangici(v, ev, 0) == pd.Timestamp("2009-01-01", tz="UTC")       # eski davranış
+    assert wp.analiz_baslangici(v, ev, 0.75, elle="2012-06-15") == pd.Timestamp("2012-06-15", tz="UTC")
+    v8 = _sentetik({f"S{i}": f"2010-01-{i + 1:02d}" for i in range(6)} | {"X": "2021-01-01", "Y": "2022-01-01"})
+    assert wp.analiz_baslangici(v8, tuple(v8), 0.75) == pd.Timestamp("2010-01-06", tz="UTC")
+
+
+def test_oos_baslangici_kapsama_tarihinden_egitim_kadar_sonra():
+    v = _sentetik({"A": "2009-01-01", "B": "2010-01-01", "C": "2017-03-05", "D": "2020-09-01"})
+    bas = wp.analiz_baslangici(v, tuple(v), 0.75)
+    bit = pd.Timestamp("2025-01-01", tz="UTC")
+    pen = pencereler_uret(bas, bit, 730, 180)
+    assert pen[0][0] == bas and pen[0][2] == bas + pd.Timedelta(days=730)
+
+
+def test_evrenler_ve_hisse_emtia():
+    assert wp.EVRENLER["hisse_emtia"] == wp.EVRENLER["hisse"] + wp.EVRENLER["emtia"]
+    assert len(wp.EVRENLER["hisse_emtia"]) == 10 and len(wp.EVRENLER["hepsi"]) == 13
