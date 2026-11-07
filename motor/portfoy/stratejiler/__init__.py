@@ -9,16 +9,19 @@ from motor.portfoy.stratejiler.cta import Cta
 from motor.portfoy.stratejiler.kesit import GoreceliGuc, KesitLS, WqAlfa
 from motor.portfoy.stratejiler.pairs import Pairs
 from motor.portfoy.stratejiler.rotasyon import Gem, Kanarya, Rotasyon, SabitSepet, TrendSepet
+from motor.portfoy.stratejiler.son1ay import SonBirAyE014, SonBirAyTrendRider
 from motor.portfoy.stratejiler.sinyal import BtcHedge, IbsDonus, ReferansFiltreliLong, RsiCift, RsiTarama
 
 SINIFLAR = (Rotasyon, Gem, SabitSepet, TrendSepet, Kanarya, KesitLS, GoreceliGuc, WqAlfa, Cta, Pairs,
             ReferansFiltreliLong, BtcHedge, RsiCift, RsiTarama, IbsDonus)
+# son 1 ay açık kaynak adayları (stratejiler/ek_kaynaklar/son1ay_2026-11.md); csv bağlantısı yok
+EK_SINIFLAR = (SonBirAyTrendRider, SonBirAyE014)
 
 
 def tum_portfoy_stratejileri() -> dict:
     """{ad: sınıf} (ad = 'pf__...')."""
-    s = {c.ad: c for c in SINIFLAR}
-    if len(s) != len(SINIFLAR):
+    s = {c.ad: c for c in SINIFLAR + EK_SINIFLAR}
+    if len(s) != len(SINIFLAR) + len(EK_SINIFLAR):
         raise ValueError("yinelenen portföy strateji adı")
     return s
 

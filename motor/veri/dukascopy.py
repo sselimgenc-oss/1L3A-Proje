@@ -72,6 +72,8 @@ SEMBOLLER = {
     "DK_AAPL": "AAPLUSUSD", "DK_MSFT": "MSFTUSUSD", "DK_GOOGL": "GOOGLUSUSD", "DK_AMZN": "AMZNUSUSD",
     "DK_NVDA": "NVDAUSUSD", "DK_META": "FBUSUSD", "DK_TSLA": "TSLAUSUSD",
     "DK_XAU": "XAUUSD", "DK_WTI": "LIGHTCMDUSD", "DK_COPPER": "COPPERCMDUSD",
+    # son1ay (E014 makro rotasyon vekilleri): SPY -> S&P 500 endeks CFD'si, TLT -> ABD uzun vadeli T-Bond CFD'si
+    "DK_SPX": "USA500IDXUSD", "DK_UST": "USTBONDTRUSD",
 }
 # Eski ad (şirket adı değişimi): ana adın ilk verisinden ÖNCEKİ günler bu adla çekilir. Şu an kullanılmıyor.
 ESKI_AD: dict[str, str] = {}

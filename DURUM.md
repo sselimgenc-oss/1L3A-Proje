@@ -151,6 +151,11 @@ Ana ders: önceki sonuçlar OOS'a bakılarak seçilmiş ve kâr birkaç işlemde
   uygulanır olmalı; (b) iki kolun ortak hesap limit kontrolü yazılmalı; (c) bayatlık eşiğine seans takvimi
   (hisse hafta sonu); (d) portföy kolu ortalamasında hafta sonu paydası tutarsızlığı (set.csv mean vs beklenti 0/3) tekleştirilmeli.
 
+- 2026-11-07: Son 1 ay açık kaynak araştırması (Haiku oturumu, kullanıcı onaylı 4 aday) test edildi: hiçbiri final havuza
+  girmedi. dis__son1ay-donchian-adx BTC 4h WF+karar 13+sağlamlık geçti (PF 1.93) ama kilitli dönemde (bilgi) PF 0.94;
+  kanal 20/10 işlem sayısı yetersiz; TrendRider (OOS 15 gün kısa, al-tut altı) ve E014 makro (düşüş %29.9) karar 24'ten kaldı.
+  Yeni veri: DK_SPX, DK_UST (1h). Donchian-ADX BTC 4h yedek gözlem listesinde, sette değil.
+
 ## Kullanıcıyı bekleyen kararlar
 - ~~Final seçim ve kilitli dönemin bir kez açılması (karar 20)~~ — kullanıcı "aç" dedi (2026-11-07), yapıldı: `sonuclar/kilit/RAPOR.md`.
 - Karar 13 eşikleri çoklu test düzeltmesi içermiyor; sağlamlık paketi öneri kapısı ekliyor (son karar kullanıcıda).

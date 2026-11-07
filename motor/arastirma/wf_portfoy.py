@@ -70,7 +70,9 @@ MIN_KAPSAMA = 0.75
 KOK = Path(__file__).resolve().parents[2]
 CIKTI_DIZINI = KOK / "sonuclar" / "wf_portfoy"
 
-EVRENLER = {"kripto": KRIPTO, "hisse": HISSE, "emtia": EMTIA, "hisse_emtia": HISSE + EMTIA, "hepsi": HEPSI}
+# "makro": son1ay E014 vekilleri (SPY->DK_SPX endeks CFD, TLT->DK_UST T-Bond CFD, GLD->DK_XAU); yalnız o aday için
+EVRENLER = {"kripto": KRIPTO, "hisse": HISSE, "emtia": EMTIA, "hisse_emtia": HISSE + EMTIA, "hepsi": HEPSI,
+            "makro": ("DK_SPX", "DK_UST", "DK_XAU")}
 EGITIM_GUN, TEST_GUN = 730, 180
 MIN_ISLEM_EGITIM = 10
 MIN_GUN_EGITIM = 60
