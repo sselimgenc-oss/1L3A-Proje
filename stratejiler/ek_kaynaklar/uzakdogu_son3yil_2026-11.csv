@@ -14,3 +14,6 @@ Kore,upbit-official/upbit-strategy-toolkit,arac,https://github.com/upbit-officia
 Hong Kong,-,-,-,-,-,-,yok,bolgesel proje bulunamadi,-,bilgi,
 Tayland,-,-,-,-,-,-,yok,SET icin proje bulunamadi,-,bilgi,
 Malezya / Filipinler,-,-,-,-,-,-,yok,proje bulunamadi,-,bilgi,
+Tayvan,PTT: 886 oneri cagrisi analizi (T+30/T+90),bilgi/olcum,https://www.ptt.cc/bbs/Stock/M.1780707817.A.4B0.html,2026-06,2026-06,TW hisse T+30/T+90,evet (yazar),T+90 ort +%6.51 vs 0050 +%2.64; T+30 isabet %63.2,belirtilmemis,izle,oneri hesabi; secim yanliligi
+Tayvan,PTT:台指期 短空回測,daytrade,https://www.ptt.cc/bbs/Stock/M.1757984954.A.30A.html,2025-09,2025-09,TAIFEX,hayir,-,-,elendi,sonuc yok
+Rusya,Habr: RL-agent Binance Futures (YuriyKolesnikov/rl-trading-binance),ML/RL,https://habr.com/ru/articles/934258/,2025-03,2025-06,BTC vadeli,evet (3 ay),+%144.23 komisyon+kayma dahil,belirtilmemis,elendi,ML elenen; 3 ay kisa donem

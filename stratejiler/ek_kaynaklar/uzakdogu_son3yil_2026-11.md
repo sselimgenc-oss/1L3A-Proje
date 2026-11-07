@@ -70,3 +70,28 @@
 ## Kullanıcı kararı gereken konular
 - **Vietnam:** traique PR'ındaki Phòng thủ stratejisinin tüm kodu/verisi için repo erişimi gerekiyor mu? (Şu an yalnız PR açıklaması okundu.)
 - **Tayvan (PTT), Vietnam (F319), Tayland, Endonezya forumları:** ağ izni eklenebilir; hangi domainlere izin verileceğini siz belirleyin.
+
+## Ek bölüm (ağ izni sonrası, 2026-11-07): PTT, Habr, Pantip, Kaskus
+
+**Erişim durumu:** PTT (`www.ptt.cc`), Pantip (`pantip.com`), Kaskus (`www.kaskus.co.id`) ve Habr (`habr.com`) açıldı. **F319 (`f319.com`) ve Smart-lab (`smart-lab.ru`) bağlanamadı** (ağ düzeyinde kapalı; izin verilmiş olsa da erişilemiyor). Pantip ve Kaskus'un arama sayfaları yalnız menü verdi, içerik yüklenmedi.
+
+### PTT Stock (Tayvan)
+- **"寫程式回測股海老牛 4 年 886 次點名"** (2026-06 civarı, Stock panosu): Bir hisse öneri hesabının 4 yıllık 886 "çağrısı" 210 hisse üzerinden FinMind gerçek fiyatlarıyla ölçülmüş. T+30 isabet %63.2, T+90 ortalama getiri +%6.51, aynı dönemde 0050 +%2.64, fazla getiri +3.87 puan. Yazar "推薦組表現最強 5 次" listesini de vermiş. **Değerlendirme:** Bu bir "öneri hesabı" analizi; strateji kuralı değil. Seçim yanlılığı (yalnız kazananlar anılmış olabilir) ve maliyet/kayma belirsiz. **Bilgi/izle** — Tayvan'da sonuçla birlikte paylaşılan ilk veri temelli çalışma; bizim için bir ölçüm yöntemi örneği.
+- **"台指期 短空回測"** (2025-09): Kısa vadeli TAIFEX short tartışması, iki seviyede 50 puan stop; sonuç yok. **Elendi.**
+- **"自己做的台股回測＋人生模擬工具"** ve **"自幹台股免費回測網站"**: araç duyuruları; strateji sonucu yok. **Bilgi.**
+- **"自定義策略的AI回測平台"**: AI ile strateji yazan platform tanıtımı; sonuç yok. **Elendi.**
+
+### Habr (Rusya)
+- **"RL-агент для алгоритмической торговли на Binance Futures"** (habr.com/ru/articles/934258): Pekiştirmeli öğrenme ajanı, BTC vadeli, **2025-03-01 — 2025-06-01** (3 ay), komisyon %0.04 ve kayma dahil, toplam kâr **+%144.23**. Kod: `github.com/YuriyKolesnikov/rl-trading-binance`. **Değerlendirme:** Makine öğrenmesi (projede ML elenen kategori) ve 3 aylık kısa dönem; aşırı uyum riski yüksek. **Elendi (ML + kısa dönem).**
+
+### Pantip (Tayland) ve Kaskus (Endonezya)
+- Sayfalar açıldı ama arama sonuçları içerik göstermedi (JavaScript ile yüklenen sayfalar). Bu iki forum için içerik çekilemedi; sonuç yok.
+
+### Erişilemeyenler (bu tur)
+- **F319 (Vietnam):** izin verildi ama bağlanamadı.
+- **Smart-lab (Rusya):** izin verildi ama bağlanamadı (`smart-lab.ru` ağ düzeyinde kapalı).
+
+## Bu ekten sonra güncel durum
+- **Vietnam:** Phòng thủ (aday, TEST'te endekse kaybetti).
+- **Tayvan:** PTT öneri hesabı analizi (bilgi), sonuçlu strateji yok.
+- **Endonezya / Tayland / Malezya / Filipinler / HK / Singapur:** sonuçlu strateji yok.
