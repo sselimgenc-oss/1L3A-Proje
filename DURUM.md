@@ -89,8 +89,11 @@ Ana ders: önceki sonuçlar OOS'a bakılarak seçilmiş ve kâr birkaç işlemde
   Uyarı: 2020–25 kripto boğa dönemi (BTC 15x) uzun-trend stratejilerini şişiriyor.
 - Katman 3 (kripto) ✅: hızlı walk-forward (`motor/arastirma/wf_tarama.py`; swing 730/180 gün, day/scalp 365/90).
   1140 görevden karar 13'ü geçen 32 (swing 31, daytrade 1, scalp 0). Hiçbiri 3 kripto sembolün üçünde birden geçmedi.
-- Katman 3b ⏳: sağlamlık paketi (maliyet ×2, rastgele giriş, deflated Sharpe, bootstrap, parametre komşuluğu, rejim).
-- Veri ⏳: Dukascopy'den Mag7 + XAU + WTI + bakır (karar 22), sonra aynı Katman 2–3.
+- Katman 3b (kripto) ✅: sağlamlık (`motor/arastirma/saglamlik.py`; kapılar: maliyet×2 PF≥1.05, rastgele giriş p≤0.05,
+  bootstrap PF alt sınırı >1, komşu parametrelerin ≥%60'ında PF>1). 32 adaydan 13'ü geçti (öneri). Uyarılar: Bonferroni'yi
+  hiçbiri geçmiyor; aynı strateji komşu sembol/TF'de çoğunlukla zayıf; DSR ≈ 0.
+- Veri ⏳: Dukascopy (karar 22). DK_AAPL 5m tamam (2017–); dakikalık indirme yavaş (9–30 saat). Hızlı yol: aylık
+  saatlik dosyalar → swing/daytrade 1h+ testleri önce; 15m/30m dakikalık veri tamamlanınca.
 
 ## Kullanıcıyı bekleyen kararlar
 - Scalp: kriptoda walk-forward'ı geçen 0. Karar 11'e göre geçen yoksa scalp ajanı kapanır — TradFi sonuçlarından sonra karar.
