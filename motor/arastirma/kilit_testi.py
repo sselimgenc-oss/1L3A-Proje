@@ -160,12 +160,21 @@ def _tek_veri(sembol, tf, veri_dizini, bitis, kilit_ac=False, gerekce=None):
 
 
 def ayar_sec_tek(strateji: str, sembol: str, tf: str, veri_dizini=None, kilit_baslangic=KILIT,
-                 min_islem: Optional[int] = None, izgara: bool = True) -> dict:
-    """KİLİT KAPALI. Tek-grafik ayar seçimi (modül belgesi). Veri `bitis=kilit_baslangic` ile kesilir (kilit_ac YOK)."""
+                 min_islem: Optional[int] = None, izgara: bool = True, *, guncel: bool = False, gerekce: Optional[str] = None) -> dict:
+    """KİLİT KAPALI (varsayılan). Tek-grafik ayar seçimi (modül belgesi). Veri `bitis=kilit_baslangic` ile kesilir (kilit_ac YOK).
+
+    `guncel=True` (Aşama 4 hazırlık, kilit artık kullanılmış sayılır): veri sonuna kadar okunur (kilit_ac=True, `gerekce`
+    zorunlu, günlüğe yazılır) ve eğitim penceresi VERİ SONUNDA biter (son mumun gününü izleyen gün 00:00, hariç); aday kümesi/skor/asgari işlem aynı."""
     stil = kayit.al(strateji).stil
-    mumlar, fund = _tek_veri(sembol, tf, veri_dizini, kilit_baslangic)
-    if len(mumlar) and mumlar.index[-1] >= kilit_baslangic:
-        raise RuntimeError("kilit sızıntısı: ayar seçiminde kilitli veri görüldü")
+    if guncel:
+        mumlar, fund = _tek_veri(sembol, tf, veri_dizini, None, True, gerekce)
+        if not len(mumlar):
+            raise RuntimeError("güncel ayar seçimi: veri boş")
+        kilit_baslangic = mumlar.index[-1].floor("D") + GUN      # eğitim bitişi (hariç) = son mumun gününün sonu
+    else:
+        mumlar, fund = _tek_veri(sembol, tf, veri_dizini, kilit_baslangic)
+        if len(mumlar) and mumlar.index[-1] >= kilit_baslangic:
+            raise RuntimeError("kilit sızıntısı: ayar seçiminde kilitli veri görüldü")
     adaylar, kurma_hata = wf.aday_listesi(strateji, izgara)
     kurallar = tarama.SEMBOL_KURALLARI.get(sembol, tarama.VARSAYILAN_KURAL)
     ay = wf.maliyet_ayarlari(kurallar)
@@ -193,15 +202,22 @@ def ayar_sec_tek(strateji: str, sembol: str, tf: str, veri_dizini=None, kilit_ba
 
 
 def ayar_sec_portfoy(strateji: str, evren_ad: str, tf: str, veri_dizini=None, kilit_baslangic=KILIT,
-                     evrenler: Optional[dict] = None, izgara: bool = True) -> dict:
-    """KİLİT KAPALI. Portföy ayar seçimi (wf_portfoy ile aynı: 730 gün eğitim, günlük Sharpe, >=10 işlem, >=60 gün)."""
+                     evrenler: Optional[dict] = None, izgara: bool = True, *, guncel: bool = False,
+                     gerekce: Optional[str] = None) -> dict:
+    """KİLİT KAPALI (varsayılan). Portföy ayar seçimi (wf_portfoy ile aynı: 730 gün eğitim, günlük Sharpe, >=10 işlem, >=60 gün).
+    `guncel=True`: veri sonuna kadar (kilit_ac=True, `gerekce` zorunlu); eğitim bitişi = evrenin son verisinin gününden
+    bir sonraki gün 00:00 (son günlük getiri dahil)."""
     evren = tuple((evrenler or wfp.EVRENLER)[evren_ad])
     adaylar, atlanan = wfp.aday_listesi(strateji, evren, izgara)
     if not adaylar:
         raise RuntimeError("bu evrende uygun aday yok")
-    veriler, fundingler = pveri.veri_yukle(evren, tf, None, kilit_baslangic, veri_dizini)     # kilit_ac YOK
-    if any(len(v) and v.index[-1] >= kilit_baslangic for v in veriler.values()):
-        raise RuntimeError("kilit sızıntısı: ayar seçiminde kilitli veri görüldü")
+    if guncel:
+        veriler, fundingler = pveri.veri_yukle(evren, tf, None, None, veri_dizini, kilit_ac=True, gerekce=gerekce)
+        kilit_baslangic = max(v.index[-1] for v in veriler.values()).floor("D") + GUN
+    else:
+        veriler, fundingler = pveri.veri_yukle(evren, tf, None, kilit_baslangic, veri_dizini)     # kilit_ac YOK
+        if any(len(v) and v.index[-1] >= kilit_baslangic for v in veriler.values()):
+            raise RuntimeError("kilit sızıntısı: ayar seçiminde kilitli veri görüldü")
     ay = wfp.maliyet_ayarlari()
     hesaplar, hatalar = {}, []
     for etiket, st in adaylar:

@@ -142,6 +142,14 @@ Ana ders: önceki sonuçlar OOS'a bakılarak seçilmiş ve kâr birkaç işlemde
   pf__rotasyon dahil — sert limitler (günlük %3, kill %20) paper'da da durdurucu; (2) paper ayarları WF kuralının
   ileriye devamı: son eğitim penceresi verinin sonuna kadar, yenileme swing/portföy 180 gün, daytrade 90 gün;
   (3) Aşama 2 kapanışı (final_set.json, beklenti aralıkları) ve Aşama 3 Pano v1 başlatıldı.
+- 2026-11-07: **Aşama 2 kapandı, Aşama 3 Pano v1 hazır.** `stratejiler/final_set.json` (7), `sonuclar/final/`
+  (guncel_ayarlar, beklenti_araliklari, OZET.md, pano_ornek.html), `motor/canli/` (durum sözleşmesi, backtest_durum, pano).
+  Güncel ayar (veri sonuna kadar eğitim) 7'nin 4'ünde kilit testindekinden farklı (dual-thrust, fraktal-alligator,
+  rotasyon, kesit_ls). Set 8 hafta beklenti: net %5/%50/%95 = −2.6/+2.0/+10.4, düşüş %95 = 3.9 → alarm eşiği.
+  Kilit günlüğünde ajanın veri kontrolü sırasında yazdığı 6 "deneme" satırı var (silinmedi: günlük ekle-yalnız).
+  **Aşama 4 için zorunlu notlar:** (a) portföy kolu kilit testinde limit_modu="olc" ile koştu — paper'da limitler
+  uygulanır olmalı; (b) iki kolun ortak hesap limit kontrolü yazılmalı; (c) bayatlık eşiğine seans takvimi
+  (hisse hafta sonu); (d) portföy kolu ortalamasında hafta sonu paydası tutarsızlığı (set.csv mean vs beklenti 0/3) tekleştirilmeli.
 
 ## Kullanıcıyı bekleyen kararlar
 - ~~Final seçim ve kilitli dönemin bir kez açılması (karar 20)~~ — kullanıcı "aç" dedi (2026-11-07), yapıldı: `sonuclar/kilit/RAPOR.md`.
