@@ -211,6 +211,10 @@ Ana ders: önceki sonuçlar OOS'a bakılarak seçilmiş ve kâr birkaç işlemde
   rsi_asiri_donus değişiyor — varsayılan değişmezlik kontrolü şart) ajanları; tam okuma kartlarının eşleştirmesi
   (kodlama_kuyrugu_tam_okuma.csv); çıkış modülleri listesi (basamaklı stop, cooldown, RSI çıkış, azalan ROI, Elder güvenli bölge,
   Brooks/Farley yönetim kartları). Sonra: kalan yenileri kodla → wf_evren tam koşu (2020→bugün).
+- 2026-11-07: **Kullanıcı kararı (BIST verisi):** elinde kaynak yok; "çekebiliyorsan çek yoksa olanla bakalım". Ücretsiz
+  2020+ BIST gün içi kaynağı yok (Yahoo 1h ~2 yıl/5m 60 gün; İş Yatırım yalnız günlük; Stooq/Investing bu ağdan erişilemiyor ve
+  geçmişleri de kısa). Karar: BIST swing 1d ile 2020→bugün; BIST daytrade 1h 2023-12→bugün (kısa dönem, raporda ayrı işaretlenir);
+  XU030 scalp evrenden çıkar (scalp 4 enstrüman: DK_SPX, DK_XAU, DK_WTI, BTCUSDT). ABBV veri yok, ABD listesinden çıkar.
 
 ## Kullanıcıyı bekleyen kararlar
 - ~~Final seçim ve kilitli dönemin bir kez açılması (karar 20)~~ — kullanıcı "aç" dedi (2026-11-07), yapıldı: `sonuclar/kilit/RAPOR.md`.
