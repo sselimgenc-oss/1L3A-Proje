@@ -96,3 +96,14 @@ PAPER_AG_TESTI=1 python -m pytest testler/test_paper_veri.py -k gercek_ag       
 - `418` / `429`: istek sınırı; motor `Retry-After` kadar bekler. 418 (IP yasağı) olursa motor durur ve loga yazar; bekleyin.
 - "kayıtlı durumun ayarları ... farklı": 8. bölüme bakın.
 - Pano kırmızı "VERİ BAYAT": önce `systemctl status 1l3a-paper`; hisse/emtia hafta sonu ve tatilde bayat sayılmaz (seans takvimi).
+
+## 11. Panoyu telefondan görmek (Cloudflare Workers, 15 dakikada bir)
+Sunucu `pano.html`'i her 15 dakikada Cloudflare'e yükler; sayfa `https://1l3a-pano.<hesabınız>.workers.dev` adresinde açılır
+(adresi bilen herkes görebilir; içerik yalnız paper sonuçlarıdır, anahtar/gizli bilgi içermez).
+```bash
+curl -fsSL https://deb.nodesource.com/setup_22.x | bash - && apt install -y nodejs && npm install -g wrangler@4.158.0
+cp deploy/1l3a-pano.env.ornek /etc/1l3a-pano.env && chmod 600 /etc/1l3a-pano.env && nano /etc/1l3a-pano.env
+cp deploy/1l3a-pano-yayin.service deploy/1l3a-pano-yayin.timer /etc/systemd/system/
+systemctl daemon-reload && systemctl enable --now 1l3a-pano-yayin.timer && systemctl start 1l3a-pano-yayin.service
+journalctl -u 1l3a-pano-yayin -n 20 --no-pager        # "pano yayımlandı" ve workers.dev adresi görünmeli
+```
