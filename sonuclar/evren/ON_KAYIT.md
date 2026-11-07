@@ -43,6 +43,28 @@ Evren aşağıdaki gibi değişti; "Evren U (13)" tanımının yerine geçer:
 - "İyi" = tüm ölçütleri geçen; "iyiye yakın" = en çok bir ölçütü kıl payı kaçıran (PF ≥ 1.1, Sharpe ≥ 0.4, düşüş ≤ %25,
   sağlamlıkta en çok bir kontrol kalan). İkisi de stil bazında sıralı listelenir; iyiye yakınlar geliştirme adayıdır.
 
+## GÜNCELLEME 5 (2026-11-08, kullanıcı: "1 2 3 4'ü ekleyelim, 5'i de indir" — koşulardan ve sonuç görülmeden önce)
+1. **Son 12 ay ayrılır (holdout):** 2025-11-08 → verinin sonu hiçbir seçimde, ayar seçiminde ve eşik kontrolünde KULLANILMAZ.
+   Geliştirme dönemi: başlangıç → 2025-11-07. Tüm WF, sağlamlık, iyi/iyiye yakın listeleri geliştirme döneminden çıkar.
+   Listeler dondurulduktan sonra (dosya + commit) her listede kalan strateji, WF'nin geliştirme sonundaki son seçilen
+   ayarıyla holdout'ta BİR KEZ koşulur. Holdout kapısı: evren net > 0 ve PF ≥ 1.1. Geçenler "doğrulanmış", geçmeyenler
+   "holdout'ta kaldı" diye raporlanır; holdout sonucuna göre ayar/eşik değiştirilmez, ikinci holdout denemesi yapılmaz.
+2. **Çoklu test düzeltmesi (kapı oldu, yalnız rapor değil):**
+   - DSR (Deflated Sharpe): toplam deneme sayısı = tüm (strateji × tf × ayar) koşuları + önceki denemeler. "İyi" için
+     DSR olasılığı ≥ 0.90; "iyiye yakın" için ≥ 0.50.
+   - PBO (CSCV, 16 blok): stil × tf başına tüm aday ayarlar üzerinden hesaplanır ve raporlanır; PBO > 0.5 olan stil×tf
+     grubundan çıkan "iyi" strateji "iyiye yakın"a düşer.
+3. **Rastgele girişle kıyas (K2) kapıdır:** aynı enstrüman/zaman/yön/tutma süresi ve AYNI çıkış kurallarıyla rastgele giriş
+   (500 tekrar); p ≤ 0.05 şart (iyiye yakın için p ≤ 0.10).
+4. **Gerçekçi maliyet + stres:** enstrüman bazlı maliyet tablosu (komisyon, spread/kayma, kriptoda funding, BIST'te BSMV dahil)
+   koşulardan önce sonuclar/evren/maliyet_tablosu.csv olarak yazılır ve sabitlenir. K1 genişler: maliyet ×2 PF ≥ 1.05,
+   maliyet ×3 PF ≥ 1.0 ve sinyal 1 mum gecikmeli PF ≥ 1.0 — üçü de şart.
+5. **2020 öncesi veri:** mümkün olan en eski tarihten (hedef 2017-01-01) indirilir. Kripto perp'ler Binance'te 2019-09'da
+   başladığı için 2017-01 → perp başlangıcı arası SPOT verisiyle (funding yok, maliyet perp ile aynı varsayım) doldurulur ve
+   raporda "spot vekil" diye işaretlenir. Dönem: başlangıç (enstrüman bazında en eski) → 2025-11-07 geliştirme; analiz
+   başlangıcı kuralı (evrenin ≥ %75'i) aynen geçerli.
+Bu güncelleme önceki "kilit ayrımı uygulanmaz" (Güncelleme 3) hükmünün yerine geçer: holdout yeni kilittir.
+
 ## Tanım
 **Evren stratejisi** = bir strateji + bir zaman dilimi + TEK ortak parametre seti, evrenin TÜM enstrümanlarında aynı anda
 çalışır; sinyal hangi enstrümanda çıkarsa orada işleme girer. Evren U (karar 22): BTCUSDT, ETHUSDT, SOLUSDT, DK_AAPL, DK_MSFT,
