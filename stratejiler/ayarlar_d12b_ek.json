@@ -1,0 +1,210 @@
+[
+ {
+  "hedef": "pf__kesit_ls",
+  "ayar_id": "d12b:kesit-ibs:ibs_k3_gunluk",
+  "kaynak_dosya": "stratejiler/ek_kaynaklar/kakushadze_151.csv (4.4 IBS dönüşü)",
+  "parametreler": {
+   "semboller": [
+    "BTCUSDT",
+    "ETHUSDT",
+    "SOLUSDT",
+    "DK_AAPL",
+    "DK_MSFT",
+    "DK_GOOGL",
+    "DK_AMZN",
+    "DK_NVDA",
+    "DK_META",
+    "DK_TSLA",
+    "DK_XAU",
+    "DK_WTI",
+    "DK_COPPER"
+   ],
+   "skor": "ibs",
+   "ibs_gun": 1,
+   "k": 3,
+   "takvim": "D",
+   "mod": "notr",
+   "agirlik": "esit"
+  },
+  "cikis_ayarlari": null,
+  "not": "IBS=(C-L)/(H-L) önceki gün; düşük long / yüksek short, dolar-nötr, günlük dengeleme. 13 sembolde k=3 (kitap decil)."
+ },
+ {
+  "hedef": "pf__kesit_ls",
+  "ayar_id": "d12b:kesit-dusuk-vol-ls:dusuk_vol_90",
+  "kaynak_dosya": "stratejiler/ek_kaynaklar/kakushadze_151.csv (3.4 düşük vol L/S)",
+  "parametreler": {
+   "semboller": [
+    "BTCUSDT",
+    "ETHUSDT",
+    "SOLUSDT",
+    "DK_AAPL",
+    "DK_MSFT",
+    "DK_GOOGL",
+    "DK_AMZN",
+    "DK_NVDA",
+    "DK_META",
+    "DK_TSLA",
+    "DK_XAU",
+    "DK_WTI",
+    "DK_COPPER"
+   ],
+   "skor": "dusuk_vol",
+   "lookback_gun": 90,
+   "k": 3,
+   "takvim": "30",
+   "mod": "notr",
+   "agirlik": "esit"
+  },
+  "cikis_ayarlari": null,
+  "not": "Düşük 90g vol long, yüksek short, dolar-nötr."
+ },
+ {
+  "hedef": "pf__kesit_ls",
+  "ayar_id": "d12b:kesit-orantili-agirlik:donus_orantili",
+  "kaynak_dosya": "stratejiler/ek_kaynaklar/kakushadze_151.csv (3.9/10.3 orantılı ağırlık)",
+  "parametreler": {
+   "semboller": [
+    "BTCUSDT",
+    "ETHUSDT",
+    "SOLUSDT",
+    "DK_AAPL",
+    "DK_MSFT",
+    "DK_GOOGL",
+    "DK_AMZN",
+    "DK_NVDA",
+    "DK_META",
+    "DK_TSLA",
+    "DK_XAU",
+    "DK_WTI",
+    "DK_COPPER"
+   ],
+   "skor": "donus",
+   "lookback_gun": 5,
+   "lookback2_gun": 5,
+   "takvim": "7",
+   "mod": "notr",
+   "agirlik": "orantili"
+  },
+  "cikis_ayarlari": null,
+  "not": "Ağırlık = sinyalin kesit ortalamasından sapması (5g dönüş), dolar-nötr; k yok sayılır."
+ },
+ {
+  "hedef": "pf__kesit_ls",
+  "ayar_id": "d12b:kesit-orantili-agirlik:getiri_orantili",
+  "kaynak_dosya": "stratejiler/ek_kaynaklar/kakushadze_151.csv (3.9/10.3 orantılı ağırlık)",
+  "parametreler": {
+   "semboller": [
+    "BTCUSDT",
+    "ETHUSDT",
+    "SOLUSDT",
+    "DK_AAPL",
+    "DK_MSFT",
+    "DK_GOOGL",
+    "DK_AMZN",
+    "DK_NVDA",
+    "DK_META",
+    "DK_TSLA",
+    "DK_XAU",
+    "DK_WTI",
+    "DK_COPPER"
+   ],
+   "skor": "getiri",
+   "lookback_gun": 90,
+   "takvim": "14",
+   "mod": "notr",
+   "agirlik": "orantili"
+  },
+  "cikis_ayarlari": null,
+  "not": "Aynı, 90g momentum sapmasıyla orantılı."
+ },
+ {
+  "hedef": "pf__kesit_ls",
+  "ayar_id": "d12b:r2-secicilik-alfa:btc_faktor_90",
+  "kaynak_dosya": "stratejiler/ek_kaynaklar/kakushadze_151.csv (4.3 R² seçicilik + alfa)",
+  "parametreler": {
+   "semboller": [
+    "BTCUSDT",
+    "ETHUSDT",
+    "SOLUSDT",
+    "DK_AAPL",
+    "DK_MSFT",
+    "DK_GOOGL",
+    "DK_AMZN",
+    "DK_NVDA",
+    "DK_META",
+    "DK_TSLA",
+    "DK_XAU",
+    "DK_WTI",
+    "DK_COPPER"
+   ],
+   "skor": "r2_alfa",
+   "lookback_gun": 90,
+   "ref_sembol": "BTCUSDT",
+   "k": 3,
+   "takvim": "14",
+   "mod": "notr"
+  },
+  "cikis_ayarlari": null,
+  "not": "Tek faktör = BTC; BTC sıralanmaz. Skor z(alfa)+z(1-R²)."
+ },
+ {
+  "hedef": "pf__kesit_ls",
+  "ayar_id": "d12b:r2-secicilik-alfa:evren_faktor_90",
+  "kaynak_dosya": "stratejiler/ek_kaynaklar/kakushadze_151.csv (4.3 R² seçicilik + alfa)",
+  "parametreler": {
+   "semboller": [
+    "BTCUSDT",
+    "ETHUSDT",
+    "SOLUSDT",
+    "DK_AAPL",
+    "DK_MSFT",
+    "DK_GOOGL",
+    "DK_AMZN",
+    "DK_NVDA",
+    "DK_META",
+    "DK_TSLA",
+    "DK_XAU",
+    "DK_WTI",
+    "DK_COPPER"
+   ],
+   "skor": "r2_alfa",
+   "lookback_gun": 90,
+   "ref_sembol": "",
+   "k": 3,
+   "takvim": "14",
+   "mod": "notr"
+  },
+  "cikis_ayarlari": null,
+  "not": "Tek faktör = evren eşit ağırlıklı getirisi."
+ },
+ {
+  "hedef": "pf__rotasyon",
+  "ayar_id": "d12b:rotasyon-getiri-vol-agirlik:getiri_vol_k3",
+  "kaynak_dosya": "stratejiler/ek_kaynaklar/kakushadze_151.csv (4.6 R/σ ağırlık)",
+  "parametreler": {
+   "semboller": [
+    "BTCUSDT",
+    "ETHUSDT",
+    "SOLUSDT",
+    "DK_AAPL",
+    "DK_MSFT",
+    "DK_GOOGL",
+    "DK_AMZN",
+    "DK_NVDA",
+    "DK_META",
+    "DK_TSLA",
+    "DK_XAU",
+    "DK_WTI",
+    "DK_COPPER"
+   ],
+   "skor": "getiri",
+   "lookback_gun": 90,
+   "k": 3,
+   "takvim": "M",
+   "agirlik": "getiri_vol"
+  },
+  "cikis_ayarlari": null,
+  "not": "Seçilen k=3 içinde ağırlık ∝ R/σ (yalnız R>0)."
+ }
+]

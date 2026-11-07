@@ -57,6 +57,10 @@ class Rotasyon(PfTemel):
     süzgecinden geçen semboller aday (ai-trader Triple RSI rotasyonu: süzgeçten geçenler içinden hacme göre ilk k). Kaynaktaki "çift aylarda ayın 5'i"
     takvimi yerine mevcut `takvim` (örn. "M") kullanılır = yaklaşık.
 
+    d12b EK (151 §4.6; varsayılan değişmez, ızgarada yok): agirlik="getiri_vol" -> seçilenlerde ağırlık ∝ R/σ, R = kapanış[t-atla]/
+    kapanış[t-lookback]-1 (skor ne olursa olsun), σ = vol_gun günlük getiri std (en az 0.003); yalnız R>0 olanlar ağırlık alır
+    (long-only: kitaptaki negatif R/σ short kodlanmadı), toplam ters_vol ile aynı (seçilen/k); hiçbiri R>0 değilse nakit.
+
     Uyarlama: ETF'ler -> evrendeki semboller (GEM: SPY/ACWX -> hisse sepeti+XAU, AGG -> XAU kolu, BIL -> nakit;
     Faber 5-sınıf -> BTC, MSFT, XAU, WTI, COPPER temsilcileri). 15m/1s/4s yeniden dengeleme günlüğe indirilmiştir.
     """
@@ -106,6 +110,8 @@ class Rotasyon(PfTemel):
         ax = tk.eksen
         S = tk.eksene(self._skor(tk)[kolon]).to_numpy(dtype=float)
         V = tk.eksene(tk.vol(p["vol_gun"])[kolon]).to_numpy(dtype=float)
+        R = (tk.eksene(tk.mom(p["lookback_gun"], p["atla_gun"])[kolon]).to_numpy(dtype=float)
+             if p["agirlik"] == "getiri_vol" else None)
         trend = np.ones(S.shape, dtype=bool)
         if p["trend_sma"] > 0:
             sm = sma_gun(tk.kap[kolon], p["trend_sma"])
@@ -152,6 +158,14 @@ class Rotasyon(PfTemel):
             onceki = list(sec)
             if not sec:
                 return {}
+            if p["agirlik"] == "getiri_vol":
+                v = pd.Series(V[i], index=kolon)[sec].clip(lower=0.003)
+                rr = pd.Series(R[i], index=kolon)[sec]
+                oran = (rr / v).where(rr > 0)
+                if oran.notna().sum() == 0:
+                    return {}
+                oran = oran.fillna(0.0)
+                return (oran / oran.sum() * len(sec) / k).to_dict()
             if p["agirlik"] == "ters_vol":
                 v = pd.Series(V[i], index=kolon)[sec].clip(lower=0.003)
                 if v.isna().any():

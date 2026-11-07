@@ -43,6 +43,16 @@ class KesitLS(PfTemel):
                    banbot örneği 0.7 risk_ayarli + 0.3 reversal (3 gün). risk_ayarli bileşeni yukarıdaki ort/std oranıdır (kaynak: getiri24/std24);
                    z = aynı gün evren içi (mevcut semboller) standartlaştırma, nedensel. 'carry' (fonlama z-skoru) KODLANMADI: portföy
                    stratejisi arayüzü (`_hedef(ev, takvim)`) fonlama verisi taşımaz.
+      ibs          (d12b EK, 151 §4.4) -IBS; IBS = (C-L)/(H-L), `ibs_gun` günlük ortalaması (1 = yalnız önceki gün; H=L ise NaN).
+                   Düşük IBS long, yüksek IBS short (kesitsel dönüş). OHLC günlük takvim ızgarasından (nedensel).
+      dusuk_vol    (d12b EK, 151 §3.4) -std(lookback_gun günlük getiri): düşük oynaklık long, yüksek short (dolar-nötr L/S).
+      r2_alfa      (d12b EK, 151 §4.3) tek faktörlü regresyon (faktör = ref_sembol; boşsa evren eşit ağırlıklı getirisi, sembolün
+                   kendisi dahil) lookback_gun penceresinde: alfa = ort(r) - beta*ort(m), R² = cov²/(var_m*var_r). Skor =
+                   z(alfa) + z(1-R²) (kesit z, aynı gün): düşük R² (seçicilik) + yüksek alfa long, yüksek R² + düşük alfa short.
+                   Kitaptaki 5x5 kantil ızgarası 3-13 sembolde uygulanamaz -> sürekli bileşik skor (sapma). Faktör verisi yok (SPX/BTC vekili).
+    agirlik="orantili" (d12b EK, 151 §3.9, §10.3): k yok sayılır; ağırlık sinyalin kesit ortalamasından sapmasıyla orantılı,
+      w_i = brut * z_i / sum|z_j| (dolar-nötr: toplam 0, brüt = brut). mod="notr": z = U - ort(U); mod="ters": z = K - ort(K);
+      mod="long": z>0 olanlar, toplam = brut. skor="tutarli" ile kullanılamaz (ValueError).
     vol_filtre="yuksek": yalnız volatilitesi kesit medyanının üstündeki yarıda sırala (momentum + yüksek volatilite).
     Uyarlama / sapmalar: "3 dilim"/"6 dilim" (örtüşen alt portföyler) kodlanmadı, tek portföy kullanılır; beta ölçekleme
     yok; evren 3-13 enstrüman (kaynaklar 25-30 coin) -> sonuçlar çok daha gürültülüdür. Kaynakta KMN'nin N=15 / N=7 sonuçları
@@ -55,11 +65,11 @@ class KesitLS(PfTemel):
         **ORTAK_PARAMETRELER, "semboller": HEPSI, "skor": "risk_ayarli", "lookback_gun": 14, "atla_gun": 0,
         "lookback2_gun": 30, "k": 2, "takvim": "14", "mod": "notr", "agirlik": "ters_vol", "vol_filtre": "yok",
         "vol_gun": 30, "brut": 1.0, "ref_sembol": "BTCUSDT",
-        "kombine_ag": 0.7, "kombine_donus_gun": 3}
+        "kombine_ag": 0.7, "kombine_donus_gun": 3, "ibs_gun": 1}
     parametre_izgarasi = {"lookback_gun": [14, 30, 90], "k": [1, 2, 3], "takvim": ["7", "14", "30"]}
 
     def ek_semboller(self):
-        return (self.parametreler["ref_sembol"],) if self.parametreler["skor"] in ("artik", "beta") else ()
+        return (self.parametreler["ref_sembol"],) if self.parametreler["skor"] in ("artik", "beta", "r2_alfa") else ()
 
     def _piyasa(self, tk, ev):
         ref = self.parametreler["ref_sembol"]
@@ -100,6 +110,29 @@ class KesitLS(PfTemel):
                 return t.sub(t.mean(axis=1), axis=0).div(t.std(axis=1).where(lambda v: v > 0), axis=0)
 
             sk = p["kombine_ag"] * z(ra) + (1.0 - p["kombine_ag"]) * z(rev)
+        elif s == "ibs":
+            h, d, c = (tk.panel(x, False)[kolon] for x in ("yuksek", "dusuk", "kapanis"))
+            aralik = (h - d).where(lambda v: v > 0)
+            ibs = (c - d) / aralik
+            n = int(p["ibs_gun"])
+            sk = -(ibs if n <= 1 else ibs.rolling(n, min_periods=n).mean())
+        elif s == "dusuk_vol":
+            sk = -tk.vol(L)
+        elif s == "r2_alfa":
+            m = self._piyasa(tk, ev)
+            mp = max(20, int(L * 0.7))
+            mr, mm = r.rolling(L, min_periods=mp).mean(), m.rolling(L, min_periods=mp).mean()
+            cov = r.rolling(L, min_periods=mp).cov(m)
+            vm, vr = m.rolling(L, min_periods=mp).var(), r.rolling(L, min_periods=mp).var()
+            alfa = mr - cov.div(vm, axis=0).mul(mm, axis=0)
+            r2 = (cov ** 2).div(vm, axis=0) / vr
+            r2 = r2.where(vr > 0).clip(0.0, 1.0)
+
+            def z(t):
+                t = t[kolon]
+                return t.sub(t.mean(axis=1), axis=0).div(t.std(axis=1).where(lambda v: v > 0), axis=0)
+
+            sk = z(alfa) + z(1.0 - r2)
         elif s == "zirve":
             sk = tk.kap / tk.kap.rolling(L, min_periods=int(L * 0.8)).max()
         elif s == "carpiklik":
@@ -121,7 +154,7 @@ class KesitLS(PfTemel):
         p = self.parametreler
         kolon = list(ev)
         ax = tk.eksen
-        ref = p["ref_sembol"] if p["skor"] in ("artik", "beta") else ""
+        ref = p["ref_sembol"] if p["skor"] in ("artik", "beta", "r2_alfa") else ""
         u, kk = self._skorlar(ev, tk)
         U = tk.eksene(u[kolon]).to_numpy(dtype=float)
         K = tk.eksene(kk[kolon]).to_numpy(dtype=float)
@@ -142,6 +175,21 @@ class KesitLS(PfTemel):
                     return {c: yon * pay * float(w) for c, w in (iv / iv.sum()).items()}
             return {c: yon * pay / len(sec) for c in sec}
 
+        def orantili(i, idx, n):
+            if p["skor"] == "tutarli":
+                raise ValueError("agirlik='orantili' skor='tutarli' ile kullanılamaz")
+            if n < 2:
+                return {}
+            kaynak = K[i] if mod == "ters" else U[i]
+            z = pd.Series(kaynak, index=kolon)[idx]
+            z = z - z.mean()
+            if mod == "long":
+                z = z.clip(lower=0.0)
+            toplam = float(z.abs().sum())
+            if toplam <= 0:
+                return {}
+            return {c: brut * float(v) / toplam for c, v in z.items() if v != 0}
+
         def agirlik(i):
             nonlocal V_i
             V_i = V[i]
@@ -151,6 +199,8 @@ class KesitLS(PfTemel):
                 ok = ok & (V[i] >= med)
             idx = [c for c, o in zip(kolon, ok) if o]
             n = len(idx)
+            if p["agirlik"] == "orantili":
+                return orantili(i, idx, n)
             if p["skor"] == "tutarli":
                 if n < 3:
                     return {}
