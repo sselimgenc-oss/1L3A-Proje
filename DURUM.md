@@ -83,6 +83,20 @@ Ana ders: önceki sonuçlar OOS'a bakılarak seçilmiş ve kâr birkaç işlemde
     Canlıda yine az enstrüman (karar 9): enstrüman seçimi testlerin sonucuna göre yapılır.
 18. Önceki projelerden alınanlar: 4S kırılım (algo-sg A + swing-sg S2 birleşik), KGT, S1; yedek B. KMN ve S3 alınmadı.
 
+## Aşama 2 — devam ediyor (2026-11-07)
+- Katman 1 ✅: 192 strateji kodlu (105 kitap + 87 dış), 226 kart ayarı, 110 dış ayar. 1501+ test.
+- Katman 2 ✅ (kripto): geniş tarama 3168 + ızgara ~27k koşu (`sonuclar/tarama/`). Swing %66 PF>1; daytrade %8, scalp %3.
+  Uyarı: 2020–25 kripto boğa dönemi (BTC 15x) uzun-trend stratejilerini şişiriyor.
+- Katman 3 (kripto) ✅: hızlı walk-forward (`motor/arastirma/wf_tarama.py`; swing 730/180 gün, day/scalp 365/90).
+  1140 görevden karar 13'ü geçen 32 (swing 31, daytrade 1, scalp 0). Hiçbiri 3 kripto sembolün üçünde birden geçmedi.
+- Katman 3b ⏳: sağlamlık paketi (maliyet ×2, rastgele giriş, deflated Sharpe, bootstrap, parametre komşuluğu, rejim).
+- Veri ⏳: Dukascopy'den Mag7 + XAU + WTI + bakır (karar 22), sonra aynı Katman 2–3.
+
+## Kullanıcıyı bekleyen kararlar
+- Scalp: kriptoda walk-forward'ı geçen 0. Karar 11'e göre geçen yoksa scalp ajanı kapanır — TradFi sonuçlarından sonra karar.
+- Final seçim (ajan başına ~3) ve kilitli dönemin açılması (karar 20) — kullanıcı onayıyla.
+- Karar 13 eşikleri çoklu test düzeltmesi içermiyor; sağlamlık paketi öneri kapısı ekliyor (son karar kullanıcıda).
+
 ## Yol haritası (2026-11-06)
 **Aşama 1 — Altyapı ve adaylar**
 - 1A Motor: zorunlu çıkış kuralı; günlük limitte açık pozisyon kapatma; kısmi kâr alma; üst zaman dilimi hizalama
