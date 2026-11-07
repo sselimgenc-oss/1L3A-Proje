@@ -215,6 +215,10 @@ Ana ders: önceki sonuçlar OOS'a bakılarak seçilmiş ve kâr birkaç işlemde
   2020+ BIST gün içi kaynağı yok (Yahoo 1h ~2 yıl/5m 60 gün; İş Yatırım yalnız günlük; Stooq/Investing bu ağdan erişilemiyor ve
   geçmişleri de kısa). Karar: BIST swing 1d ile 2020→bugün; BIST daytrade 1h 2023-12→bugün (kısa dönem, raporda ayrı işaretlenir);
   XU030 scalp evrenden çıkar (scalp 4 enstrüman: DK_SPX, DK_XAU, DK_WTI, BTCUSDT). ABBV veri yok, ABD listesinden çıkar.
+- 2026-11-07: Çıkış modülleri eklendi (CikisAyarlari: stop_basamaklari, azalan_roi, geri_cekilme_yuzde, kar_rsi_esikleri,
+  elder_guvenli_bolge_k, agresif_iz_*, stop_sonrasi_bekleme_mum; hepsi varsayılan kapalı, 100 strateji öncesi/sonrası birebir).
+  **AÇIK İŞ (yeni paper setinden önce şart):** motor/canli/paper_motor.py CikisAyarlari'nın gelişmiş alanlarını (atr_iz_suren_k,
+  basabas_r_esigi dahil) uygulamıyor; paper'a alınacak stratejide bu alanlar varsa backtest ile paper farklı davranır.
 
 ## Kullanıcıyı bekleyen kararlar
 - ~~Final seçim ve kilitli dönemin bir kez açılması (karar 20)~~ — kullanıcı "aç" dedi (2026-11-07), yapıldı: `sonuclar/kilit/RAPOR.md`.

@@ -21,7 +21,10 @@ AILELER_YOLU = KOK / "stratejiler" / "aileler.json"
 PAKETLER = ("swing", "daytrade", "scalp", "onceki", "dis")
 STILLER = {"scalp", "daytrade", "swing"}
 MAKS_IZGARA = 27
-_CIKIS_ALANLARI = {"atr_iz_suren_k", "atr_periyot", "zaman_cikisi_mum", "sabit_r_hedefi", "basabas_r_esigi", "kismi"}
+_CIKIS_ALANLARI = {"atr_iz_suren_k", "atr_periyot", "zaman_cikisi_mum", "sabit_r_hedefi", "basabas_r_esigi", "kismi",
+                   "stop_basamaklari", "azalan_roi", "geri_cekilme_yuzde", "geri_cekilme_min_kar_yuzde",
+                   "kar_rsi_esikleri", "rsi_periyot", "elder_guvenli_bolge_k", "elder_n1", "elder_n2",
+                   "agresif_iz_esigi", "agresif_iz_atr_k", "stop_sonrasi_bekleme_mum"}
 
 
 def _modul_adlari() -> list[str]:
@@ -88,8 +91,9 @@ def kart_ayarli_strateji(ad: str, kart_id: str) -> Strateji:
             cikis = kayit.get("cikis_ayarlari")
             if cikis is not None:
                 cikis = dict(cikis)
-                if "kismi" in cikis:
-                    cikis["kismi"] = tuple(tuple(x) for x in cikis["kismi"])
+                for alan in ("kismi", "stop_basamaklari", "azalan_roi", "kar_rsi_esikleri"):
+                    if alan in cikis:
+                        cikis[alan] = tuple(tuple(x) for x in cikis[alan])
                 cikis = CikisAyarlari(**cikis)
             return sinif(cikis_ayarlari=cikis, **par)
     raise KeyError(f"{ad}: kart ayarı yok: {kart_id!r}")
@@ -129,7 +133,8 @@ def dogrula() -> list[str]:
             sorunlar.append(f"{ad}: ızgara anahtarı varsayilan_parametreler'de yok: {sorted(dis)}")
         ca = ornek.cikis_ayarlari
         ayarda_cikis = any(getattr(ca, a) not in (None, ()) for a in
-                           ("atr_iz_suren_k", "zaman_cikisi_mum", "sabit_r_hedefi"))
+                           ("atr_iz_suren_k", "zaman_cikisi_mum", "sabit_r_hedefi", "azalan_roi",
+                            "geri_cekilme_yuzde", "kar_rsi_esikleri"))
         if not ornek.cikis_var_mi() and not ayarda_cikis:
             sorunlar.append(f"{ad}: çıkış yok (cikis_var_mi False ve CikisAyarlari'nda çıkış yok)")
     sorunlar += _kart_ayar_sorunlari(kayit)
