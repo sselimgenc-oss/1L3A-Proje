@@ -1,0 +1,20 @@
+# Panoyu YALNIZ sunucunun kendi adresinde (127.0.0.1) sunar; dışarıya açık değildir. Telefondan/bilgisayardan SSH tüneli ile bakılır:
+#   ssh -L 8080:127.0.0.1:8080 l3a@SUNUCU_IP   ->   tarayıcıda http://localhost:8080/pano.html
+[Unit]
+Description=1L3A pano (yalnız localhost)
+After=network.target
+
+[Service]
+User=l3a
+Group=l3a
+StateDirectory=1l3a-paper
+WorkingDirectory=/var/lib/1l3a-paper/durum
+ExecStart=/opt/1l3a/.venv/bin/python -m http.server 8080 --bind 127.0.0.1 --directory /var/lib/1l3a-paper/durum
+Restart=on-failure
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=full
+ProtectHome=true
+
+[Install]
+WantedBy=multi-user.target

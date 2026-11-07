@@ -208,3 +208,18 @@ def test_backtest_durum_set_csv_ile_tutarli(tmp_path):
     d.yaz_hepsi(tmp_path, ozet=p["ozet"], stratejiler=p["stratejiler"], islemler=p["islemler"], saglik=p["saglik"], gecmis=p["gecmis"])
     assert d.oku_hepsi(tmp_path)[1] == []
     assert o["kaynak"] == "backtest" and o["sayaclar"]["kapanan_islem"] == len(p["islemler"])
+
+
+def test_veri_yasi_negatif_olmaz():
+    from datetime import datetime, timezone
+    simdi = datetime(2026, 1, 5, 12, 20, tzinfo=timezone.utc)
+    assert d.veri_yasi_dk("2026-01-05T11:00:00Z", "1h", simdi) == 20          # yaş = şimdi - son mum KAPANIŞI
+    assert d.veri_yasi_dk("2026-01-05T12:00:00Z", "1h", simdi) == 0           # kapanmamış mum / şimdiden ileri veri: negatif değil
+    assert d.veri_yasi_dk("2026-02-01T00:00:00Z", "4h", simdi) == 0
+
+
+def test_backtest_durum_bayatlik_negatif_degil(tmp_path):
+    import json
+    from motor.canli import backtest_durum as bd
+    out = bd.olustur()
+    assert all(v["bayatlik_dk"] >= 0 for v in out["saglik"]["veri"])

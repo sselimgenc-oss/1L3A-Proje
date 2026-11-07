@@ -1,0 +1,29 @@
+# 1L3A paper trading motoru (gerçek emir YOK). Ubuntu 24.04. Kurulum: deploy/KURULUM.md
+# Telegram anahtarları YALNIZ /etc/1l3a-paper.env içinde (izin 600); repoya ASLA girmez. Binance için anahtar GEREKMEZ.
+[Unit]
+Description=1L3A paper trading motoru
+After=network-online.target
+Wants=network-online.target
+StartLimitIntervalSec=600
+StartLimitBurst=8
+
+[Service]
+Type=simple
+User=l3a
+Group=l3a
+WorkingDirectory=/opt/1l3a
+EnvironmentFile=-/etc/1l3a-paper.env
+StateDirectory=1l3a-paper
+Environment=PYTHONUNBUFFERED=1
+ExecStart=/opt/1l3a/.venv/bin/python -m motor.canli.paper --canli --durum ${STATE_DIRECTORY}/durum --tohum ${STATE_DIRECTORY}/veri/mumlar
+Restart=always
+RestartSec=15
+TimeoutStopSec=60
+KillSignal=SIGTERM
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=full
+ProtectHome=true
+
+[Install]
+WantedBy=multi-user.target

@@ -156,8 +156,15 @@ Ana ders: önceki sonuçlar OOS'a bakılarak seçilmiş ve kâr birkaç işlemde
   kanal 20/10 işlem sayısı yetersiz; TrendRider (OOS 15 gün kısa, al-tut altı) ve E014 makro (düşüş %29.9) karar 24'ten kaldı.
   Yeni veri: DK_SPX, DK_UST (1h). Donchian-ADX BTC 4h yedek gözlem listesinde, sette değil.
 
+- 2026-11-07: **Aşama 4 paper motoru kodu hazır** (`motor/canli/paper*.py`, `deploy/KURULUM.md`). Tekrar modu ↔ backtest
+  kilitli dönemde 7/7 stratejide işlem/fiyat/miktar/PnL birebir (NVDA'da 5 çıkışın yalnız zaman etiketi farklı: backtest
+  seanslı 4h'ta medyan aralık kullanıyor). Limitler UYGULANIR (tek hesap, iki kol ortak). Açık: fapi.binance.com bu
+  konteynerden 451 (konum kısıtı) → canlı WS/exchangeInfo ilk kez sunucuda doğrulanacak; TradFi perp 7/24 vs seanslı
+  araştırma verisi (seans süzgeci varsayımı); TradFi funding backtestte yoktu.
+
 ## Kullanıcıyı bekleyen kararlar
 - ~~Final seçim ve kilitli dönemin bir kez açılması (karar 20)~~ — kullanıcı "aç" dedi (2026-11-07), yapıldı: `sonuclar/kilit/RAPOR.md`.
+- **Paper sunucusu** (DigitalOcean Frankfurt): hesap/sunucu kullanıcıda; kurulum `deploy/KURULUM.md`.
 - Karar 13 eşikleri çoklu test düzeltmesi içermiyor; sağlamlık paketi öneri kapısı ekliyor (son karar kullanıcıda).
 
 ## Yol haritası (2026-11-06)
