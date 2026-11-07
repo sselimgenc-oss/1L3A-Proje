@@ -1,8 +1,8 @@
-# Ar-Ge alt projesi (5 enstrüman) — DURUM: DENETİM BEKLİYOR (kapatılmadı)
+# Ar-Ge alt projesi (5 enstrüman) — DURUM: KAPANDI (kullanıcı kararı, 2026-11-07)
 
 Tarih: 2026-11-07. Dal: `claude/haiku-arge-5-enstruman`. Ana proje (`claude/adoring-maxwell-q7t60g`, 198bafd) değiştirilmedi.
 
-Not: Bu dosya önce "kapatıldı" diye yazılmıştı; karar denetçiye/kullanıcıya aittir. Kapanış kararı verilmedi.
+Kapanış kararı kullanıcı tarafından verildi; ana projeye bildirildi. Yeniden açma koşulu aşağıda.
 
 ## Ne yapıldı
 - Veri: BTCUSDT (Binance, 2019-12 → 2025-10), XAUUSD (Dukascopy saatlik 2019-12 → 2025-10; TradingView günlük/4s),
