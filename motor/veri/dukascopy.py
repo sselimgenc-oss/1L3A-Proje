@@ -18,6 +18,14 @@ işaretiyle kaydedilir ve bir daha istenmez. Geçici hatalar (503, bağlantı ko
 yine de başarısız günler önbelleğe YAZILMAZ ve `basarisiz_gunler.json` dosyasına listelenir (sessizce atlanmaz);
 aynı komutla yeniden çalıştırınca yalnız eksik günler istenir (kaldığı yerden devam).
 
+SAATLİK MOD (`--aralik 1h`): dakikalık indirme çok yavaş olduğundan swing (4h/1d) ve daytrade 1h için AYLIK saatlik dosya
+kullanılır: datafeed/<SYM>/<YYYY>/<MM 0-indeksli>/BID_candles_hour_1.bi5 (24 bayt kayıt, aynı sıra; ofset AY BAŞINDAN
+saniye). Yıllık saatlik dosya yoktur (404). Aynı önbellek kökü/İstemci/geri çekilme, hacim<=0 düz mumlar atılır, aynı
+NOKTA ve bölünme düzeltmesi; çıktı `veri/mumlar/DK_<X>/1h.parquet`. Bitiş (`--bitis`, hariç) ayını kapsayan son ay dosyası
+yenilenir (devam eden ay kısmi olabilir); dosyası henüz yoksa (404) o ay ATLANIR (dakikalıktan türetme yapılmaz). 1h mumu
+XX:00'da başlar; hisse seansı 13:30/14:30 UTC açıldığı için seansın ilk 1h mumu yalnız yarım saatlik işlem içerir.
+Başarısız aylar `basarisiz_aylar_<SEMBOL>.json` dosyasına yazılır.
+
 Bölünme (split): bkz. `bolunme_duzelt` ve `BOLUNME_DOSYASI`.
 CLI: python -m motor.veri.dukascopy --semboller DK_AAPL DK_XAU [--baslangic YYYY-MM] [--bitis YYYY-MM-DD]
 """
@@ -351,6 +359,79 @@ def sembol_indir(sembol: str, baslangic: str | None = None, bitis: str = BITIS_V
             "mum_sayisi": len(m5), "basarisiz": bas_yaz}
 
 
+# ------------------------------------------------------------------ saatlik mod
+def _ay_parcalari(yil: int, ay: int) -> tuple[str, ...]:
+    return (f"{yil:04d}", f"{ay - 1:02d}", "BID_candles_hour_1.bi5")
+
+
+def _aylar(bas_yil: int, bitis: date) -> list[tuple[int, int]]:
+    """[(yıl, ay)] bas_yil Ocak .. bitis'in (hariç) son gününü içeren ay."""
+    son = bitis - timedelta(days=1)
+    return [(y, m) for y in range(bas_yil, son.year + 1) for m in range(1, 13) if (y, m) <= (son.year, son.month)]
+
+
+def saatlik_indir(sembol: str, baslangic: str | None = None, bitis: str = BITIS_VARSAYILAN,
+                  dizin: Path | None = None, istemci=None, es_zamanli: int = 3, log=print,
+                  bolunme_dosyasi: Path | None = None, bugun: date | None = None) -> dict:
+    """Aylık saatlik dosyalardan 1h parquet yazar. Dönen: sembol, ilk, son, mum_sayisi, basarisiz (ay listesi 'YYYY-MM').
+    İçinde bulunulan ay (bugun) ve bitis'i kapsayan ay önbelleği yok sayılıp yenilenir; 404 olan ay atlanır."""
+    if sembol not in SEMBOLLER:
+        raise KeyError(f"Bilinmeyen sembol: {sembol} (bilinenler: {sorted(SEMBOLLER)})")
+    dizin = dizin or MUM_DIZINI
+    ham = dizin / "_ham" / "dukascopy"
+    istemci = istemci or Istemci()
+    nokta, dk_ad = NOKTA[sembol], SEMBOLLER[sembol]
+    bitis_g = date.fromisoformat(bitis)
+    bugun = bugun or date.today()
+    bas_yil = int(baslangic[:4]) if baslangic else ARAMA_BASLANGIC_YILI
+    aylar = _aylar(bas_yil, bitis_g)
+    if baslangic:
+        aylar = [a for a in aylar if a >= (int(baslangic[:4]), int(baslangic[5:7]))]
+    son_ay = _aylar(bas_yil, bitis_g)[-1] if aylar else None
+
+    def is_(ya):
+        y, a = ya
+        yenile = ya == son_ay or ya >= (bugun.year, bugun.month)
+        try:
+            return ya, onbellekli_getir(istemci, ham, dk_ad, _ay_parcalari(y, a), yenile=yenile), None
+        except AgHatasi as e:
+            onb = _ham_yol(ham, dk_ad, *_ay_parcalari(y, a))
+            if yenile and onb.exists():     # eski önbellek varsa onunla devam
+                return ya, onb.read_bytes(), None
+            return ya, None, str(e)
+
+    parcalar, basarisiz = [], []
+    with ThreadPoolExecutor(max_workers=es_zamanli) as havuz:
+        for i, (ya, bayt, hata) in enumerate(havuz.map(is_, aylar), 1):
+            if hata:
+                basarisiz.append(f"{ya[0]:04d}-{ya[1]:02d}")
+                log(f"  BAŞARISIZ {dk_ad} {ya[0]}-{ya[1]:02d}: {hata}")
+            elif bayt:
+                parcalar.append(bi5_coz(bayt, pd.Timestamp(ya[0], ya[1], 1, tz="UTC"), nokta))
+            if i % 40 == 0:
+                log(f"  {dk_ad}: {i}/{len(aylar)} ay")
+    parcalar = [p for p in parcalar if len(p)]
+    h1 = pd.concat(parcalar) if parcalar else _bos_ham()
+    h1 = h1[~h1.index.duplicated(keep="last")].sort_index()
+    h1 = h1[h1.index < pd.Timestamp(bitis_g, tz="UTC")]
+    h1["quote_hacim"] = h1["hacim"] * h1["kapanis"]
+    h1["islem_sayisi"] = np.int64(0)
+    h1 = h1[MUM_SUTUNLARI].astype({"islem_sayisi": "int64"})
+    h1.index.name = "zaman"
+    bol = bolunmeler_oku(sembol, bolunme_dosyasi)
+    if bol and len(h1):
+        h1 = bolunme_duzelt(h1, bol)
+    if len(h1):
+        _yaz(h1, mum_yolu(sembol, "1h", dizin))
+    kayit = ham / f"basarisiz_aylar_{sembol}.json"
+    kayit.parent.mkdir(parents=True, exist_ok=True)
+    kayit.write_text(json.dumps(sorted(basarisiz)), encoding="utf-8")
+    if basarisiz:
+        log(f"{sembol}: UYARI {len(basarisiz)} ay indirilemedi (yeniden çalıştırınca denenir): {kayit}")
+    return {"sembol": sembol, "ilk": h1.index[0] if len(h1) else None, "son": h1.index[-1] if len(h1) else None,
+            "mum_sayisi": len(h1), "basarisiz": sorted(basarisiz)}
+
+
 def seans_raporu(m5: pd.DataFrame) -> pd.Series:
     """UTC saat -> mum sayısı (hangi saatlerde veri var?)."""
     return m5.groupby(m5.index.hour).size()
@@ -363,20 +444,23 @@ def main(argv=None):
     p.add_argument("--baslangic", help="YYYY-MM (verilmezse mevcut en eski veriden)")
     p.add_argument("--bitis", default=BITIS_VARSAYILAN, help="YYYY-MM-DD (hariç), varsayılan 2026-11-01")
     p.add_argument("--es-zamanli", type=int, default=3)
+    p.add_argument("--aralik", choices=["5m", "1h"], default="5m",
+                   help="5m: günlük dakika dosyaları (yavaş); 1h: aylık saatlik dosyalar (hızlı, swing/daytrade için)")
     a = p.parse_args(argv)
     istemci = Istemci()
     for s in a.semboller:
         for tur in range(1, 101):   # sunucu uzun süre kapalı kalabilir: yüksek sesle bekle, önbellekten devam et
             try:
-                r = sembol_indir(s, a.baslangic, a.bitis, istemci=istemci, es_zamanli=a.es_zamanli,
-                                 log=lambda m: print(m, flush=True))
+                f = saatlik_indir if a.aralik == "1h" else sembol_indir
+                r = f(s, a.baslangic, a.bitis, istemci=istemci, es_zamanli=a.es_zamanli,
+                      log=lambda m: print(m, flush=True))
                 break
             except AgHatasi as e:
                 print(f"{s}: AĞ HATASI (tur {tur}/100): {e}; 60 sn sonra yeniden", flush=True)
                 time.sleep(60)
         else:
             raise AgHatasi(f"{s}: 100 tur sonunda vazgeçildi")
-        print(f"{s}: {r['ilk']} -> {r['son']}, {r['mum_sayisi']} 5m mum, başarısız gün: {len(r['basarisiz'])}", flush=True)
+        print(f"{s}: {r['ilk']} -> {r['son']}, {r['mum_sayisi']} {a.aralik} mum, başarısız: {len(r['basarisiz'])}", flush=True)
 
 
 if __name__ == "__main__":

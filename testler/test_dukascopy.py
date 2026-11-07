@@ -149,3 +149,36 @@ def test_sembol_indir_uctan_uca(tmp_path, monkeypatch):
 def test_varsayilan_bolunme_tablosu():
     assert ("2024-06-10", 10.0) in dk.bolunmeler_oku("DK_NVDA")
     assert dk.bolunmeler_oku("DK_XAU") == []
+
+
+# ----------------------------------------------------------------------------- saatlik mod
+def test_saatlik_cozme_ofset_saniye_ve_duz_mum_atilir():
+    # ay başından saniye ofseti: 0 (düz, hacim 0), 3600, 7200
+    b = _bi5([(0, 1000, 1000, 1000, 1000, 0.0), (3600, 1200000, 1210000, 1190000, 1220000, 4.0),
+              (7200, 1210000, 1230000, 1205000, 1240000, 2.0)])
+    ay = pd.Timestamp("2024-03-01", tz="UTC")
+    df = dk.bi5_coz(b, ay, 1000)
+    assert list(df.index) == [ay + pd.Timedelta(hours=1), ay + pd.Timedelta(hours=2)]
+    assert df["acilis"].iloc[0] == pytest.approx(1200.0) and df["kapanis"].iloc[0] == pytest.approx(1210.0)
+    assert df["dusuk"].iloc[0] == pytest.approx(1190.0) and df["yuksek"].iloc[0] == pytest.approx(1220.0)
+
+
+def test_saatlik_indir_uctan_uca(tmp_path):
+    """Aylık dosyalar -> 1h parquet; 0-indeksli ay yolu, 404 ay atlanır, bölünme, bitis kesimi, başarısız ay listelenir."""
+    mart = _bi5([(0, 1000, 1000, 1000, 1000, 0.0), (3600, 1200000, 1210000, 1190000, 1220000, 4.0)])
+    nis = _bi5([(0, 1300000, 1300000, 1300000, 1300000, 3.0), (86400 * 20, 1400000, 1400000, 1400000, 1400000, 1.0)])
+    ist = SahteIstemci({"AAPLUSUSD/2024/02/BID_candles_hour_1.bi5": mart,
+                        "AAPLUSUSD/2024/03/BID_candles_hour_1.bi5": nis,
+                        "AAPLUSUSD/2024/04/BID_candles_hour_1.bi5": "hata"})
+    bf = tmp_path / "bol.json"
+    bf.write_text(json.dumps({"DK_AAPL": [["2024-04-01", 10.0]]}))
+    r = dk.saatlik_indir("DK_AAPL", "2024-01", "2024-05-10", dizin=tmp_path, istemci=ist, es_zamanli=1,
+                         log=lambda m: None, bolunme_dosyasi=bf, bugun=date(2026, 11, 7))
+    assert r["basarisiz"] == ["2024-05"]        # yol .../04/ = Mayıs, AgHatasi
+    df = mum_oku("DK_AAPL", "1h", dizin=tmp_path)
+    assert list(df.columns) == MUM_SUTUNLARI
+    assert df.index[0] == pd.Timestamp("2024-03-01 01:00", tz="UTC")
+    assert df["kapanis"].iloc[0] == pytest.approx(121.0)          # 1210 / 10 (bölünme öncesi)
+    assert df["hacim"].iloc[0] == pytest.approx(40.0)
+    assert df.index[-1] == pd.Timestamp("2024-04-21", tz="UTC") and df["kapanis"].iloc[-1] == pytest.approx(1400.0)
+    assert len(df) == 3

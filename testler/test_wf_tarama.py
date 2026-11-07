@@ -183,3 +183,19 @@ def test_hata_satira_yazilir(tmp_path, veri_dizini, monkeypatch):
                     ilerleme=False, **KISA)
     assert "FileNotFoundError" in df.hata.iloc[0] and not df.gecti.iloc[0]
     assert deneme_kaydi.oku() == []                                  # hatalı görev deneme sayılmaz
+
+
+def test_wf_veri_5m_yoksa_1h_den_okur_kucuk_tf_acik_hata(tmp_path):
+    idx = pd.date_range("2024-01-01", periods=24 * 20, freq="1h", tz="UTC", name="zaman")
+    df = pd.DataFrame({"acilis": 100.0, "yuksek": 101.0, "dusuk": 99.0, "kapanis": 100.5, "hacim": 10.0,
+                       "quote_hacim": 1000.0, "islem_sayisi": 0}, index=idx)
+    d = tmp_path / "veri" / "DK_TEST"
+    d.mkdir(parents=True)
+    df.to_parquet(d / "1h.parquet")
+    wf._ONBELLEK.clear()
+    wf._isci_baslat({"veri_dizini": tmp_path / "veri", "baslangic": None, "bitis": None})
+    mumlar, fund = wf._veri("DK_TEST", "4h")
+    assert len(mumlar) == 24 * 20 // 4 and fund is None
+    with pytest.raises(ValueError, match="1h"):
+        wf._veri("DK_TEST", "15m")
+    wf._ONBELLEK.clear()
