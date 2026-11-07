@@ -8755,3 +8755,7 @@
 {"zaman": "2026-11-07T14:45:22.759237+00:00", "strateji": "dis__son1ay-kanal-20-10", "sembol": "SOLUSDT", "aralik": "4h", "kombinasyon_sayisi": 29, "pencere_sayisi": 6, "toplam_kosu": 29}
 {"zaman": "2026-11-07T14:51:06.553616+00:00", "strateji": "pf__son1ay_trendrider", "sembol": "kripto", "aralik": "1d", "kombinasyon_sayisi": 12, "pencere_sayisi": 6, "toplam_kosu": 12}
 {"zaman": "2026-11-07T14:51:13.369120+00:00", "strateji": "pf__son1ay_e014", "sembol": "makro", "aralik": "1d", "kombinasyon_sayisi": 12, "pencere_sayisi": 11, "toplam_kosu": 12}
+{"zaman": "2026-11-07T18:07:47.933744+00:00", "strateji": "swing__donchian-kirilim", "sembol": "evren", "aralik": "4h", "kombinasyon_sayisi": 26, "pencere_sayisi": 9, "toplam_kosu": 338}
+{"zaman": "2026-11-07T18:07:47.933975+00:00", "strateji": "swing__aralik-ticareti", "sembol": "evren", "aralik": "4h", "kombinasyon_sayisi": 32, "pencere_sayisi": 9, "toplam_kosu": 416}
+{"zaman": "2026-11-07T18:07:47.934041+00:00", "strateji": "swing__ma-kesisim", "sembol": "evren", "aralik": "4h", "kombinasyon_sayisi": 65, "pencere_sayisi": 9, "toplam_kosu": 845}
+{"zaman": "2026-11-07T18:10:37.591993+00:00", "strateji": "pf__btc_hedge", "sembol": "evren", "aralik": "1d", "kombinasyon_sayisi": 18, "pencere_sayisi": 9, "toplam_kosu": 18}
