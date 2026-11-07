@@ -1,6 +1,6 @@
 # GitHub taraması — grup g2_kripto_bot (2026-11-07)
 
-CSV: `stratejiler/ek_kaynaklar/github_g2_kripto_bot.csv` (203 satır). Klonlar `/home/user/gh/` altında, salt okunur. Hiçbir kod kopyalanmadı;
+CSV: `stratejiler/ek_kaynaklar/github_g2_kripto_bot.csv` (207 satır). Klonlar `/home/user/gh/` altında, salt okunur. Hiçbir kod kopyalanmadı;
 `mekanik_ozet` sütunları kendi cümlelerimizle yazıldı. Karar 27 (evren stratejisi, tek sembol–strateji ikilisi yok) göz önünde tutuldu:
 buradaki satırların hepsi "tek parametre seti, çok enstrüman" mantığına uyan kural ailesi olarak kaydedildi.
 
@@ -8,7 +8,7 @@ buradaki satırların hepsi "tek parametre seti, çok enstrüman" mantığına u
 
 | Repo | Dosya (git hariç) | Okunan / taranan | Strateji satırı | Lisans |
 |---|---|---|---|---|
-| xFFFFF/Gekko-Strategies | 1095 (615 js, 386 toml, 56 log, 10 ods) | 615 js dosyası içerik-özetiyle gruplandı (351 tekil içerik, 204 isim ailesi; `!WORKSOP` 566 js, 48 üst-klasör js); strateji ailelerinin `check()` gövdeleri, tüm toml ayarları, `backtest_database.csv` (2118 satır), `source.txt`, README'ler okundu | 112 | LICENSE yok |
+| xFFFFF/Gekko-Strategies | 1095 (615 js, 386 toml, 56 log, 10 ods) | 615 js dosyası içerik-özetiyle gruplandı (351 tekil içerik, 204 isim ailesi; `!WORKSOP` 566 js, 48 üst-klasör js); strateji ailelerinin `check()` gövdeleri, tüm toml ayarları, `backtest_database.csv` (2118 satır), `source.txt`, README'ler okundu | 116 | ana repoda LICENSE yok; alt modüller: BuyAtSellAt/NeuralNet/NNv2/neuralnet_zschro MIT, SuperTrend izin metni (MIT benzeri) |
 | DeviaVir/zenbot | 308 | `extensions/strategies/*` 42 klasörün tamamı (strategy.js + README), `docs/strategies/*`, `conf-sample.js`, `crossover_vwap/example_sims` (8 sim HTML sonucu çıkarıldı) | 33 | MIT |
 | bitcoinvsalts/node-binance-trader | 72 | `src/server/backtest.js`, `server.js`, `trader.ts`, README/docs | 1 | MIT |
 | saniales/golang-crypto-trading-bot | 39 | `strategies/*.go`, `examples/*.go`, README | 1 (strateji kuralı yok) | GPL-3.0 |
@@ -18,10 +18,10 @@ buradaki satırların hepsi "tek parametre seti, çok enstrüman" mantığına u
 | Superior-Trade/trading-terminal | 231 | `README.md`, `docs/strategy-pipeline.md`, `lib/tier-rubric.ts`, `app/api/{detect,compile,chat}/route.ts` prompt'ları, `evals/*.json`; geri kalan UI/altyapı | 5 | Apache-2.0 |
 | ccxt/ccxt (yalnız `examples/`, bu oturumda seyrek klonlandı: `/home/user/gh/ccxt_ccxt`) | 900 (py 290, ts 185, js 192, php 85, cs 39, rust 29, go 16) | py örneklerinin tamamı listelendi; indikatör/arbitraj/bot/prediction/order-router/rust-watch_and_buy/notebook dosyaları açıldı; js/ts/php/cs/go sürümleri aynı örneklerin çevirisi | 12 | MIT |
 
-## Durum dağılımı (toplam 203)
+## Durum dağılımı (toplam 207)
 
-yeni 84 · ayar 60 · kural_yok 31 · veri_yok 9 · mevcut 7 · yasak 7 · ml 5.
-Repo kırılımı: Gekko — yeni 52, ayar 37, kural_yok 15, mevcut 4, ml 4; zenbot — ayar 15, yeni 14, kural_yok 2, veri_yok 1, ml 1; chrisleekr — yeni 10, mevcut 3, ayar 2, yasak 1; howtrader — yeni 8, ayar 5, yasak 3, kural_yok 3, veri_yok 1; 51bitquant grid — yasak 3.
+yeni 87 · ayar 63 · kural_yok 27 · veri_yok 10 · mevcut 7 · yasak 7 · ml 6.
+Repo kırılımı: Gekko-Strategies — yeni 55, ayar 40, kural_yok 11, ml 5, mevcut 4, veri_yok 1; zenbot — ayar 15, yeni 14, kural_yok 2, veri_yok 1, ml 1; node-binance-trader — veri_yok 1; golang-crypto-trading-bot — kural_yok 1; binance-trading-bot — yeni 10, mevcut 3, ayar 2, yasak 1; binance_grid_trader — yasak 3; howtrader — yeni 8, ayar 5, kural_yok 3, yasak 3, veri_yok 1; trading-terminal — kural_yok 3, ayar 1, veri_yok 1; ccxt — kural_yok 7, veri_yok 5
 
 ## Öne çıkan yeni / ilginç stratejiler (kodlama adayı)
 
@@ -41,15 +41,20 @@ Repo kırılımı: Gekko — yeni 52, ayar 37, kural_yok 15, mevcut 4, ml 4; zen
 - **51bitquant/binance_grid_trader**: yalniz stopsuz izgara (3 satir, hepsi yasak).
 - **chrisleekr**: `trailing-trade` izgara/ortalama dusurme (yasak satiri), ama tek-giris/ATR-izleyen preset ve RSI/z-skor kapilari ayri `yeni` satir.
 
+## Güncelleme (ikinci tur): alt modüller ve eksik okumalar
+
+- **Alt modüller:** 18 Gekko submodule klasörü çalışma ağacında hâlâ boştu (yalnız `.git` işaretçisi); `git reset --hard` izni reddedildiği için klonu değiştirmeden `git archive HEAD` ile `.git/modules/*` nesnelerinden scratchpad'e açıp okudum. 16 modül dolu (toplam ~140 dosya): AdoptedStrategies/Gab0 (Gab0'nun GA uyarlamaları: NEO, RSI_BULL_BEAR, _ADX, _ADXold, Supertrend, DUAL_RSI_BULL_BEAR), BuyAtSellAt, CloggyStrats (n8, mounirs-ga v1/v2, helper.js izleyen stop), GekkoStrategies/ManuNet, Kane2 (Kane2.js + gannswing), NNv2 = neuralnet_zschro, NeuralNet, RSI-WR = gekko, SuperTrend, TommieHansenStrategies (orijinal RSI_BULL_BEAR, _ADX, TEMA; geri kalanı shell/php araçları), gekko-strat-hl (HL.js), tether (tether, tether-simple). `Luke_NN` ve `Neapticator` modül nesnesi de yok → tek `ml`/kod_yok satırı.
+- **Yeni gerçek kurallar:** RSI_WR (RSI 30/70 + Williams %R; R eşiği -10 pratikte hep doğru), tether (SMA100 ±%0.35, `dis__ema50-sapma` ailesi), tether-simple (mutlak 0.995/1.005 → kural_yok), HL (25 mumluk en düşük kapanış altında al, en yüksek kapanışta çık), Kane2 (RSI 9, 36/69; ADX toml'da var kodda yok), DUAL_RSI_BULL_BEAR (SMA14>700 mutlak seçici → kural_yok), NNv2 (ml). Diğer dosyaların hepsi ana klondaki mevcut aile satırlarıyla içerik olarak aynı çıktı (dosya sütununa eklendi).
+- **Tamamlanan "okunmadı" satırları (baştan sona okundu):** jake, jazzbre (efektif kural yalnız EMA 8/13 kesişimi), Combination-1/2/3 + Entry_Plus (RSI bull/bear sinyali EMA onayıyla geçitlenir; Entry_Plus ATR hedef/stop), tulip-multi-custom (açık filtrelerin hepsi aynı anda), stopTrailing (1/5/15/60 dk stokastik %K<3 hepsinde; stop %5, başa baş +%1.2, %20 izleyen), trend-based (yalnız Telegram bildirimi → kural_yok), loosai/oosai (hacim patlaması, kademeli kâr geri verme), bryanbeck (3 ardışık düşen mum al, 2 ardışık yükselen sat; mutlak eşik), chang (MACD + zaman aşımı çıkışı), signals (yalnız pump bildirimi → kural_yok), STI-DEMA, RSI_BB_ADX_Peak/BB_Adx/ReEntry, PINGPONG/_T/Stop varyantları, ZERO/nikiehihsa (geometrik OHLC EMA MACD), FIBO (gösterge dosyası), HL_Scalp, zenbot `trendline` (yalnız alım, satış yorumda).
+- **Obfüske dosyalar çözüldü (statik base64 + dizi dönüşü, kod çalıştırmadan):** `2xTheMarket-min.js` ve `bear-market.js`: BB(19,2)+Stoch(14,1,3)+EMA20+MACD+60/12 mumluk düşüş/yükseliş toplam oranı ile long-only dip alımı, kademeli hedef ve çok parçalı stoplar; mutlak EMA-fiyat mesafesi (-25/-16) sembole özgü. `BitBankStrategy*.js` (370 KB bundle): kural okundu = BitBank emir defteri özellik seti (power_imbalance, tahmini gelecek ortalama) → `veri_yok`. `NEO-1525230452.js` GitHub HTML sayfası → kural_yok.
+
 ## Belirsizlikler ve dikkat
 
-- **Gekko `onceki_sonuc`**: `backtest_database.csv` testleri 10 dk mum, ~61 gun, Subat 2018 altcoin dususu (medyan piyasa %-22.3), Binance/Bitfinex/Poloniex/Kraken; kar yuzdeleri motor 1L3A'nin walk-forward standardiyla karsilastirilamaz, yalniz "piyasayi gecti" bilgisi kaba ipucudur. Zaman dilimi satirlarinda "mum boyutu kullanici ayari" yazdim; 10 dk daytrade sayildi.
-- **Gekko bos alt modulleri** (18 klasor: Gab0, AdoptedStrategies, CloggyStrats, Kane2, TommieHansenStrategies, SuperTrend, BuyAtSellAt, NeuralNet, Neapticator, gekko-strat-hl, gekko, GekkoStrategies, ManuNet, tether, Luke_NN, NNv2, neuralnet_zschro, RSI-WR) git submodule ve klonda bos; icerigi okunamadi. Bunlardan DB'de sonucu olan RSI_WR, tether, HL, neataptic, Luke_NN_Sample, neuralnet_zschro `kural_yok`/`ml` olarak kod_yok notuyla yazildi.
-- **Gekko obfuske / paketli dosyalar**: `2xTheMarket-min.js`, `bear-market.js` (base64 diziler; yalniz kullanilan gostergeler okunabildi), `BitBankStrategy*.js` (370 KB bundle), `NEO-1525230452.js` (GitHub HTML sayfasi) → `kural_yok`.
-- **Gekko `jake`, `jazzbre`, `RSI_BB_ADX_Peak` BB teyidi, `Combination-*`, `tulip-multi-custom`, `stopTrailing`, `trend-based`, `loosai/oosai`, `bryanbeck`, `chang`, `signals`, `STI-DEMA`**: `check()` parcali okundu, tum esikler cikarilamadi; satirlarda "okunmadi" notu var. Kodlamadan once tam okunmali.
-- **Gekko zaman damgali kopyalar** (`-1525...`): ayni mantik ya da eski/yeni arayuz farki; yalnizca icerik-farki buyuk olanlar (ATR_ADX_v2, RSI_BULL_BEAR varyantlari) ayri anildi. Tam 351 tekil icerik grubu aile bazinda birlestirildi; `exponential-moving-averages-*`, `*-candle-fetcher`, `talib.js`, `functions.js`, `indicators/*`, `debug-advice`, `noop`, `CSV_Export`, `forex.*` altyapi sayildi, satir yazilmadi.
-- **Eslestirme**: `mevcut:` yalniz `dis__ema50-sapma` (EMADIV), `yeni__ma-tipli-kesisim` (DEMA/TEMA/Crossover aileleri; kuyruk adi), `pf__goreceli_guc`, `pf__sabit_sepet`, `pf__rotasyon` icin soyledim. `ayar:` olanlarin kurali mevcut ailenin ana fikrine uyuyor ama parametre/ek filtre farki var; `ayar:dis__dual-thrust` (howtrader) gunluk aralik tanimi 1L3A'dakinden farkli olabilir, kodlayan kontrol etmeli. `DI` icin `ayar:yeni__adx-di-esik-kesisimi` yalnizca DI (ADX yok) oldugu icin yakin bir tahmin.
-- **Martingale giris satirlari** (`yeni`): giris kurali ekleme olmadan baska bir cikis (izleyen/+%1-2) ile calisir; ancak bu orijinal stratejinin riski/getirisi katlamaya bagli olabilir. Kullanici karari gerekebilir.
-- **chrisleekr**: belge-odakli okuma; `.ts` kaynak dosyalari yalniz iki kapi (indicator/mean-reversion) acildi, digerleri belge ve config sablonlariyla dogrulandi. Sayisal sonuclar yalnizca belgedeki "research" notlari (sayi tablosu yok).
-- **zenbot `trendline`** satiri kismi (satis kosulu yorum satirinda), `ta_srsi_bollinger`/`ta_stoch_bollinger` varsayilan zaman dilimi belirtilmemis.
-- ccxt klonu `git sparse-checkout` ile `examples/` icin alindi (kok dosyalari da geldi); repo icinde baska yerde strateji aranmadi (talimat gereği yalniz examples/).
+- **Gekko `onceki_sonuc`**: `backtest_database.csv` testleri 10 dk mum, ~61 gün, Şubat 2018 altcoin düşüşü (medyan piyasa %-22.3), Binance/Bitfinex/Poloniex/Kraken; kar yüzdeleri 1L3A'nın walk-forward standardıyla karşılaştırılamaz, yalnız "piyasayı geçti" bilgisi kaba ipucudur. Zaman dilimi "mum boyutu kullanıcı ayarı"; 10 dk daytrade sayıldı.
+- **Mutlak eşikli kurallar** (bryanbeck 0.00001, 2xTheMarket EMA-fiyat -25, tether-simple 0.995/1.005, DUAL_RSI 700): sembole özgü, evren stratejisine (karar 27) yüzdeye çevrilmeden uygun değil; satırlarda belirtildi.
+- **Gekko zaman damgalı kopyalar** (`-1525...`): aynı mantık veya eski/yeni arayüz farkı; aile bazında birleştirildi (351 tekil içerik). `exponential-moving-averages-*`, `*-candle-fetcher`, `talib.js`, `functions.js`, `indicators/*`, `debug-advice`, `noop`, `CSV_Export`, `forex.*` altyapı sayıldı.
+- **Eşleştirme:** `mevcut:` yalnız `dis__ema50-sapma` (EMADIV), `yeni__ma-tipli-kesisim` (DEMA/TEMA/Crossover), `pf__goreceli_guc`, `pf__sabit_sepet`, `pf__rotasyon`. `ayar:dis__dual-thrust` (howtrader günlük aralık tanımı farklı olabilir) ve `ayar:yeni__adx-di-esik-kesisimi` (yalnız DI) yakın tahmin; kodlayan kontrol etmeli.
+- **Martingale giriş satırları** (`yeni`): koordinatör ayrıştırmayı kabul etti; yalnız ekleme/katlama dışarıda, giriş + stoplu çıkış kuralı alınır. Orijinalin getirisi katlamaya bağlıydı.
+- **chrisleekr**: belge-odaklı okuma; `.ts` kaynağından yalnız iki kapı dosyası açıldı. Sayısal sonuç yok, yalnız belgedeki "research" notları.
+- **zenbot** `ta_srsi_bollinger`/`ta_stoch_bollinger` varsayılan zaman dilimi belirtilmemiş.
+- ccxt klonu `git sparse-checkout` ile yalnız `examples/` için alındı.
