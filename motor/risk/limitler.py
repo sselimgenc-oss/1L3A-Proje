@@ -15,6 +15,10 @@ class SertLimitler:
     gunluk_max_kayip_yuzde: float = 3.0      # UTC günü içinde -%3'e inilirse o gün yeni işlem yok
     max_kaldirac: float = 3.0                # nominal / özsermaye üst sınırı
     kill_switch_dusus_yuzde: float = 20.0    # zirveden -%20 düşüşte tüm işlemler durur
+    # Kullanıcı onaylı 2026-11-07, karar 25: hedef-ağırlık (portföy) stratejilerinde pozisyon başına %1 yerine
+    # tüm açık pozisyonların stopa kadar TOPLAM riski <= %5 (tek pozisyon da en fazla %5). Tek-grafik (sinyal)
+    # stratejilerinde işlem başı %1 aynen kalır.
+    portfoy_toplam_risk_yuzde: float = 5.0
 
 
 SERT_LIMITLER = SertLimitler()
