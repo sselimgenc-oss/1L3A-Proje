@@ -25,3 +25,4 @@ veri/mumlar/
 
 # Büyük tarama dökümleri (sıkıştırılmış .csv.gz sürümü repoda)
 sonuclar/tarama/k2_izgara.csv
+sonuclar/**/*.log
