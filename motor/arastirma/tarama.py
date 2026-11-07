@@ -17,6 +17,10 @@ Akış
   - Deneme kaydı: tarama sonunda strateji başına bu çağrıda YAPILAN koşu sayısı deneme_kaydi'na yazılır.
 
 SEMBOL_KURALLARI Binance USDT-M için bilinen/yaklaşık değerlerdir; exchangeInfo ile doğrulanacak (Aşama 6).
+DK_* (Dukascopy kaynaklı, motor/veri/dukascopy.py) sembollerinin tick/step değerleri VARSAYIMDIR: Binance TradFi
+perp kurallarına yakın olduğu varsayıldı (hisse tick 0.01 / step 0.01; XAU 0.01 / 0.001; WTI 0.01 / 0.01;
+bakır 0.0001 / 0.1); gerçek değerler exchangeInfo ile doğrulanacak. Bu sembollerin funding dosyası yoktur
+(funding=None ile çalışır).
 
 CLI: python -m motor.arastirma.tarama --etiket katman2_v1 [--stratejiler a b] [--semboller BTCUSDT] [--izgara]
 """
@@ -59,6 +63,12 @@ SEMBOL_KURALLARI = {
     "ETHUSDT": SembolKurallari(tick_size=0.01, step_size=0.001, min_qty=0.001, min_notional=5.0),
     "SOLUSDT": SembolKurallari(tick_size=0.01, step_size=0.1, min_qty=0.1, min_notional=5.0),
 }
+# VARSAYIM (bkz. modül docstring'i): Dukascopy kaynaklı TradFi sembolleri.
+for _s in ("DK_AAPL", "DK_MSFT", "DK_GOOGL", "DK_AMZN", "DK_NVDA", "DK_META", "DK_TSLA"):
+    SEMBOL_KURALLARI[_s] = SembolKurallari(tick_size=0.01, step_size=0.01, min_qty=0.01, min_notional=5.0)
+SEMBOL_KURALLARI["DK_XAU"] = SembolKurallari(tick_size=0.01, step_size=0.001, min_qty=0.001, min_notional=5.0)
+SEMBOL_KURALLARI["DK_WTI"] = SembolKurallari(tick_size=0.01, step_size=0.01, min_qty=0.01, min_notional=5.0)
+SEMBOL_KURALLARI["DK_COPPER"] = SembolKurallari(tick_size=0.0001, step_size=0.1, min_qty=0.1, min_notional=5.0)
 VARSAYILAN_KURAL = SembolKurallari(tick_size=0.01, step_size=0.001, min_qty=0.001, min_notional=5.0)
 
 METRIK_ALANLARI = ["net_getiri", "cagr", "max_dusus", "sharpe", "sortino", "gunluk_mtm_max_dusus", "islem_sayisi",
