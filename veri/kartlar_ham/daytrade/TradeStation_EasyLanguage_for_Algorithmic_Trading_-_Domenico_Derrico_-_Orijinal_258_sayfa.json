@@ -1,0 +1,142 @@
+[
+ {
+  "kart_id": "daytrade__zaman-kirilimi-destek-direnc__derrico",
+  "ad": "Zaman Kırılımı (belli saatte son N barın zirvesi/dibi kırılımı) - 60dk",
+  "stil": "daytrade",
+  "kaynak": {
+   "pdf": "TradeStation_EasyLanguage_for_Algorithmic_Trading_-_Domenico_Derrico_-_Orijinal_258_sayfa.pdf",
+   "sayfalar": [
+    177,
+    178,
+    179,
+    180,
+    200,
+    201
+   ]
+  },
+  "ozet": "Belirlenen saatte (SR_Time) son SR_BarsBack barın en yükseği=direnç, en düşüğü=destek alınır; sonraki WaitBars bar içinde direnç üstü buy stop, destek altı sell stop emriyle kırılımda girilir. Altın vadelide gece 00-06 ve 21-23 kırılımları kârlı, 07-20 zayıf.",
+  "kategori": "kirilim",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "vadeli",
+  "zaman_dilimi": {
+   "islem": "1h",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "Zaman",
+    "parametreler": {
+     "SR_Time": "örn. 800 (tarama)"
+    }
+   },
+   {
+    "ad": "En yüksek/en düşük",
+    "parametreler": {
+     "SR_BarsBack": "12 (altın 500-800 bölgesi)"
+    }
+   }
+  ],
+  "long_giris": [
+   "time = SR_Time bar: Resistance=Highest(H,SR_BarsBack), Support=Lowest(L,SR_BarsBack)",
+   "SR_count < WaitBars iken buy stop = Resistance"
+  ],
+  "short_giris": [
+   "Aynı pencerede sell short stop = Support"
+  ],
+  "stop_loss": null,
+  "kar_al": null,
+  "iz_suren_stop": null,
+  "zaman_cikisi": "Pozisyon BarsIN (24) bar sonra kapatılır (portföy versiyonu); ilk versiyonda çıkış yok, sürekli ters çevirme",
+  "filtreler": [
+   "Saat seçimi piyasaya özgü (heat map ile bulunur)"
+  ],
+  "pozisyon_risk": "Portföy: Size girdisi ile kontrat sayısı",
+  "iddia_edilen_performans": "Kitap (@GC 60dk, Nis 2020-May 2024, 1000 gün): erken saat kırılımları (gece-sabah 6) ve 21-23 kârlı; 07-20 kârsız; ortalama işlem >$100 olan parametreler tabloda.",
+  "kodlanabilirlik": {
+   "puan": 2,
+   "gerekce": "Kural net; SR_Time ve SR_BarsBack ayarı optimizasyon ve piyasa saatlerine bağlı; çıkış kuralı iki versiyonda farklı."
+  },
+  "belirsizlikler": [
+   "Stop yok, çıkış 24 bar sonra zaman çıkışı.",
+   "Saat dilimi seans saatleri vadeliye özgü; kripto 7/24'te seans tanımı gerekir."
+  ],
+  "uyumluluk_notu": "60dk; seans saatine bağlı (vadeli); kripto için 'seans saati' yeniden tanımlanmalı.",
+  "varyantlar": [
+   "Forex USDJPY 60dk versiyonu (aşağıdaki kart)"
+  ],
+  "anahtar_kelimeler": [
+   "zaman-kirilimi",
+   "destek-direnc",
+   "kirilim",
+   "seans"
+  ]
+ },
+ {
+  "kart_id": "daytrade__usdjpy-kirilim-atr-stop-hedef__derrico",
+  "ad": "USDJPY 60dk Kırılım + ATR Stop ve 3R Hedef",
+  "stil": "daytrade",
+  "kaynak": {
+   "pdf": "TradeStation_EasyLanguage_for_Algorithmic_Trading_-_Domenico_Derrico_-_Orijinal_258_sayfa.pdf",
+   "sayfalar": [
+    186,
+    187,
+    188,
+    189,
+    190
+   ]
+  },
+  "ozet": "Aynı zaman kırılımı algoritması USDJPY 60dk'ta; kırılma yönünde gir (sahte kırılım tersi test edilince zarar etti); stop 2 ATR(120), hedef 3R = 6 ATR.",
+  "kategori": "kirilim",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "forex",
+  "zaman_dilimi": {
+   "islem": "1h",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "ATR",
+    "parametreler": {
+     "periyot": 120
+    }
+   },
+   {
+    "ad": "En yüksek/en düşük",
+    "parametreler": {
+     "SR_BarsBack": null
+    }
+   }
+  ],
+  "long_giris": [
+   "Zaman kırılımı: SR_Time anında önceki SR_BarsBack barın zirvesi üstüne buy stop"
+  ],
+  "short_giris": [
+   "SR_Time anında önceki SR_BarsBack barın dibi altına sell stop"
+  ],
+  "stop_loss": "Giriş fiyatından 2*ATR(120) uzakta stop",
+  "kar_al": "Hedef: StopAtrs*RewRiskRatio = 2*3 = 6 ATR limit",
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [
+   "Forex seans volatilite tepeleri (NY açılış saat 8)"
+  ],
+  "pozisyon_risk": "Forex rollover (swap) takip edilmeli",
+  "iddia_edilen_performans": "Kitap: USDJPY 60dk, Haz 2019 - sonrası test edilmiş; kırılım parametre kombinasyonlarının çoğunda pozitif, sahte kırılım tersi negatif.",
+  "kodlanabilirlik": {
+   "puan": 2,
+   "gerekce": "Stop/hedef net; SR_Time ve SR_BarsBack değerleri kitapta heat map ile seçiliyor, tam değerler şekilde."
+  },
+  "belirsizlikler": [
+   "SR_Time ve SR_BarsBack seçilen değerleri metinde yok."
+  ],
+  "uyumluluk_notu": "Forex seansına bağlı; kripto için seans tanımı yok.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "usdjpy",
+   "kirilim",
+   "atr-stop",
+   "3r-hedef",
+   "forex"
+  ]
+ }
+]

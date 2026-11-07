@@ -1,0 +1,63 @@
+[
+ {
+  "kart_id": "daytrade__ilk-saat-araligi-kirilim-ve-basarisizlik__farley",
+  "ad": "İlk Saat Aralığı Kırılma ve Başarısızlık (Breakout/Breakdown + Failure)",
+  "stil": "daytrade",
+  "kaynak": {
+   "pdf": "Swing_Trader_-_Alan_S_Farley_306_sayfa.pdf",
+   "sayfalar": [
+    153,
+    154
+   ]
+  },
+  "ozet": "Seansın ilk saati bir aralık oluşturur; fiyat bu aralığın en yükseğinin üzerine çıkınca long, en düşüğünün altına inince short; stop aralık yüksekliğinin %15-20'si kadar içeride, hedef son iki günün 15 dakikalık swing seviyelerinden alınır; başarısız kırılım da ters yönde sinyaldir.",
+  "kategori": "kirilim",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+   "islem": "5m",
+   "ust_filtre": "15m"
+  },
+  "gostergeler": [
+   {
+    "ad": "Açılış aralığı",
+    "parametreler": {
+     "süre": "ilk 60 dk"
+    }
+   }
+  ],
+  "long_giris": [
+   "İlk 30 dakika bekle, 5m grafikte yatay çizgiler çiz, sonraki 30 dakikada ayarla -> ilk saat aralığı (swing seviyeleri 5m karşı salınımla belirlenir)",
+   "Fiyat ilk saat aralığı yükseğinin üzerine çıkınca (birkaç sent tampon ekle) long; giriş seansın daha geç saatlerinde de gelebilir"
+  ],
+  "short_giris": [
+   "Fiyat ilk saat aralığı dibinin altına inince short (tampon ile)",
+   "Başarısız kırılım (aralık dışına çıkıp tekrar aralığa dönme): ters yönde giriş (aynı stop tekniği)"
+  ],
+  "stop_loss": "Aralık yüksekliğini hesapla; kırılımda yükseğin %15-20'si altı, kırılmada dibin %15-20'si üstü (örn. 23,60-23,70)",
+  "kar_al": "Son iki günün 15 dakikalık swing seviyelerine bakarak hedef; çalışılacak swing yoksa dar iz süren stop",
+  "iz_suren_stop": "Dar arka stop (5 dk grafikle yönetim)",
+  "zaman_cikisi": null,
+  "filtreler": [],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 2,
+   "gerekce": "Aralık, tetik ve stop mekanik; hedef swing seçimi öznel."
+  },
+  "belirsizlikler": [
+   "Hedef için swing tanımı",
+   "Başarısız kırılım için zaman penceresi",
+   "Aralığın hesaplandığı seans başlangıcı (ABD 09:30 varsayılır)"
+  ],
+  "uyumluluk_notu": "ABD hisse/ETF swing mantığı; 50 EMA ve 60m/15m teyidi her piyasada kodlanır, hacim şart değil. Yazar birçok kuralı takdirî bırakır.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "ilk-saat",
+   "acilis-araligi",
+   "kirilim",
+   "basarisizlik",
+   "5m"
+  ]
+ }
+]

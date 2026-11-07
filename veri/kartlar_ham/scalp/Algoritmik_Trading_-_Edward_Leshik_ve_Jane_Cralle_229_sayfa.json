@@ -1,0 +1,265 @@
+[
+ {
+  "kart_id": "scalp__alpha1-sma-lma-fark-vadi__leshik-cralle",
+  "ad": "ALPHA-1: SMA-LMA Fark Tetik Çizgisi Vadi Alımı",
+  "stil": "scalp",
+  "kaynak": {
+   "pdf": "Algoritmik_Trading_-_Edward_Leshik_ve_Jane_Cralle_229_sayfa.pdf",
+   "sayfalar": [
+    103,
+    104,
+    105,
+    106,
+    111,
+    112
+   ]
+  },
+  "ozet": "Kısa hareketli ortalama (SMA, ~400 tick) eksi uzun hareketli ortalama (LMA, SMA'nın ~4-6 katı, örn. 1600 tick) = tetik çizgisi; tetik çizgisi belirlenen negatif seviyeyi aşağı geçip vadi yaptığında piyasa emriyle al; 30-35 baz puan kârda sat veya LC uyarlanabilir stop.",
+  "kategori": "ortalamaya_donus",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+   "islem": "tik",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "SMA",
+    "parametreler": {
+     "geri_bakis": "~400 tik (günlük 5 gün TXN ortalaması / 4-7)"
+    }
+   },
+   {
+    "ad": "SMA (uzun, LMA)",
+    "parametreler": {
+     "geri_bakis": "SMA x ~6 (örn. 1600 tik)"
+    }
+   }
+  ],
+  "long_giris": [
+   "Tetik = SMA - LMA",
+   "Tetik çizgisinde vadi: 5 seanslık geriye bakışta en az 3 kez dokunduğu yatay seviyeye (Alış seviyesi) girilir",
+   "Vadi oluşunca piyasa emriyle al (örn. 1000 hisse)"
+  ],
+  "short_giris": [],
+  "stop_loss": "LC Uyarlanabilir Sermaye Koruma Stopu: son ~100 tikin standart medyan sapması tabanlı mesafe (Versiyon 1); fill olur olmaz stop emri",
+  "kar_al": "Hedef 30-35 baz puan (kâr stopu): ulaşılınca stopu iptal edip market sat; alternatif: yeşil çizgi sıfır çizgisini aştıktan sonra tepeden satış",
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [
+   "Hisse kohortu: yüksek %Aralık, uygun hisse yoksa sembolü bırak",
+   "Parametreler günlük yeniden ayarlanmalı"
+  ],
+  "pozisyon_risk": "Kitap: 1000 hisse market emri; getiri hedefi ortalama 25 baz puan net",
+  "iddia_edilen_performans": "Kitap: kazanma/kaybetme oranı bazı seanslarda 10 üzerinden 8; hedef ortalama +25 bp; nadir +300 bp",
+  "kodlanabilirlik": {
+   "puan": 2,
+   "gerekce": "Formüller açık (SMA-LMA) ama alım seviyesi hisse bazında deneme-yanılmayla ayarlanır; vadi tanımı Excel formülüne bağlı; stop formülü Versiyon 1 ayrıntıları kısmi."
+  },
+  "belirsizlikler": [
+   "Alım seviyesi hisse ve gün başına ampirik; sabit değer yok.",
+   "Tik tabanlı homojen olmayan zaman serisi.",
+   "Stop mesafesi (SMD çarpanı) tam kitapta ama burada verilmedi."
+  ],
+  "uyumluluk_notu": "TİK tabanlı (işlem sayısı) yüksek frekans tasarımı: 200-1600 'tick' pencereleri ≥5m mumlarına doğrudan taşınmaz, yeniden ölçekleme ve yeniden test gerekir. ABD hisselerine (yüksek likidite, 1000 hisse market emri) özgü; kripto perpetual'da tick akışı kullanılabilir. Hacim/tik verisi gerekir.",
+  "varyantlar": [
+   "EMA tabanlı versiyon ALPHA-2"
+  ],
+  "anahtar_kelimeler": [
+   "tik",
+   "sma-lma",
+   "vadi",
+   "tetik-cizgisi",
+   "alpha"
+  ]
+ },
+ {
+  "kart_id": "scalp__alpha2-ema-plus-vadi__leshik-cralle",
+  "ad": "ALPHA-2: EMA PLUS (Yığılmış EMA Farkı Vadi Tetikleyicisi)",
+  "stil": "scalp",
+  "kaynak": {
+   "pdf": "Algoritmik_Trading_-_Edward_Leshik_ve_Jane_Cralle_229_sayfa.pdf",
+   "sayfalar": [
+    106,
+    107
+   ]
+  },
+  "ozet": "Birden fazla EMA (200T, 300T, 500T) arasındaki fark çizgisi; fark çizgisi -0.04 altında 3 tik gecikmeli vadi yapınca (M27 < min önceki 3 ve < min sonraki 3 ve < -0.04) alış sinyali.",
+  "kategori": "ortalamaya_donus",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+   "islem": "tik",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "EMA",
+    "parametreler": {
+     "geri_bakis": [
+      200,
+      300,
+      500
+     ],
+     "birim": "tik"
+    }
+   }
+  ],
+  "long_giris": [
+   "Sinyal hattı = EMA300T - EMA500T farkı; tetik = bu serinin EMA200T'si",
+   "Tetik çizgisi M[t] < min(M[t-3..t-1]) VE M[t] < min(M[t+1..t+3]) VE M[t] < -0.04 -> AL (3 tik gecikmeli vadi)"
+  ],
+  "short_giris": [],
+  "stop_loss": "ALPHA-1'deki LC stopu",
+  "kar_al": "V1: gösterge çizgisi kırmızı sıfır çizgisini yukarıya geçip tepe yapınca sat (kitap satış tarafını güvenilmez bulup $-stop öneriyor)",
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 2,
+   "gerekce": "Vadi koşulu formüle dökülmüş; -0.04 eşiği fiyat ölçeğine bağlı, mutlak değerdir."
+  },
+  "belirsizlikler": [
+   "-0.04 eşiği hisse fiyatına göre ölçeklenmeli.",
+   "V1/V2 farkları kısmen belirsiz."
+  ],
+  "uyumluluk_notu": "TİK tabanlı (işlem sayısı) yüksek frekans tasarımı: 200-1600 'tick' pencereleri ≥5m mumlarına doğrudan taşınmaz, yeniden ölçekleme ve yeniden test gerekir. ABD hisselerine (yüksek likidite, 1000 hisse market emri) özgü; kripto perpetual'da tick akışı kullanılabilir. Hacim/tik verisi gerekir.",
+  "varyantlar": [
+   "V1: tek EMA (300T) vadi alım; V2: üç EMA"
+  ],
+  "anahtar_kelimeler": [
+   "ema",
+   "vadi",
+   "tik",
+   "alpha"
+  ]
+ },
+ {
+  "kart_id": "scalp__alpha3-leshik-cralle-osilator__leshik-cralle",
+  "ad": "ALPHA-3: Leshik-Cralle Osilatörü (Medyan ±1.65 SD Zarfı)",
+  "stil": "scalp",
+  "kaynak": {
+   "pdf": "Algoritmik_Trading_-_Edward_Leshik_ve_Jane_Cralle_229_sayfa.pdf",
+   "sayfalar": [
+    108
+   ]
+  },
+  "ozet": "Uyarlanabilir (300-600 tik) medyan merkezli, ±1.65 standart sapma (%90) zarfının dışına çıkan fiyat alım/satım tetikleyicisi; osilatör çizgisinin dikliği sinyal kalitesidir.",
+  "kategori": "ortalamaya_donus",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+   "islem": "tik",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "Medyan",
+    "parametreler": {
+     "geri_bakis": "300-600 tik, %Range ile uyarlanır"
+    }
+   },
+   {
+    "ad": "Standart sapma zarfı",
+    "parametreler": {
+     "carpan": 1.65
+    }
+   }
+  ],
+  "long_giris": [
+   "Fiyat alt zarfın (medyan - 1.65*SD) dışına çıkar -> al"
+  ],
+  "short_giris": [
+   "Fiyat üst zarfın (medyan + 1.65*SD) dışına çıkar -> sat/short"
+  ],
+  "stop_loss": "LC Uyarlanabilir Sermaye Koruma Stopu",
+  "kar_al": null,
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 1,
+   "gerekce": "Uyarlanabilir geri bakışın %Range tabanlı kuralı ve osilatör hesabı metinde yok; CD dosyası gerekli."
+  },
+  "belirsizlikler": [
+   "Osilatör formülü ve uyarlama kuralı kitapta açık değil.",
+   "Alım/satım tetikleyicisi eşiği (diklik) sayısal değil."
+  ],
+  "uyumluluk_notu": "TİK tabanlı (işlem sayısı) yüksek frekans tasarımı: 200-1600 'tick' pencereleri ≥5m mumlarına doğrudan taşınmaz, yeniden ölçekleme ve yeniden test gerekir. ABD hisselerine (yüksek likidite, 1000 hisse market emri) özgü; kripto perpetual'da tick akışı kullanılabilir. Hacim/tik verisi gerekir.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "medyan",
+   "sd-zarfi",
+   "osilator",
+   "tik"
+  ]
+ },
+ {
+  "kart_id": "scalp__alpha6-general-piyon-oncu-gecikme__leshik-cralle",
+  "ad": "ALPHA-6: General-Piyon (Sektör İçi Öncü-Gecikme)",
+  "stil": "scalp",
+  "kaynak": {
+   "pdf": "Algoritmik_Trading_-_Edward_Leshik_ve_Jane_Cralle_229_sayfa.pdf",
+   "sayfalar": [
+    110
+   ]
+  },
+  "ozet": "Bir sektörde en büyük piyasa değerli ve son üç seansta %Aralığı >0.0075 olan hisse (General) hareket edince, aynı sektördeki 4 yüksek %Aralıklı hisse (Piyonlar) kısa süre içinde onu takip eder; General 50T'de 25-35 baz puan tetik verirse Piyonlara piyasa emri.",
+  "kategori": "momentum",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+   "islem": "tik",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "%Aralık",
+    "parametreler": {
+     "esik": 0.0075,
+     "seans": 3
+    }
+   },
+   {
+    "ad": "Baz puan hareketi",
+    "parametreler": {
+     "pencere": "50 tik",
+     "tetik_bp": "25-35"
+    }
+   }
+  ],
+  "long_giris": [
+   "General'in 50 tiklik getirisi 25-35 baz puan tetik eşiğini aşar -> 4 Piyon için piyasa emri (aynı yön)"
+  ],
+  "short_giris": [],
+  "stop_loss": "LC Uyarlanabilir Sermaye Koruma Stopu",
+  "kar_al": "Takip eden satış emirleri veya 30 baz puan kâr stopu",
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [
+   "Aynı sektörden 5 hisse; yüksek korelasyon"
+  ],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 1,
+   "gerekce": "Hisse seçimi topolojik harita/ korelasyon gerektirir; eşikler var ama kohort seçimi belirsiz."
+  },
+  "belirsizlikler": [
+   "Topolojik harita (Vandewalle) kitap dışı.",
+   "Piyon gecikme süresi tanımsız."
+  ],
+  "uyumluluk_notu": "Çoklu varlık eşzamanlı tik verisi gerekir; kripto altcoin-BTC lead-lag için uyarlanabilir.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "lead-lag",
+   "sektor",
+   "tik",
+   "korelasyon"
+  ]
+ }
+]

@@ -1,0 +1,250 @@
+[
+ {
+  "kart_id": "swing__kanal-kirilimi-guclu-mum__brown",
+  "ad": "Kanal Kırılımı (Güçlü Mum veya Stop Emir) + Giriş İstifleme",
+  "stil": "swing",
+  "kaynak": {
+   "pdf": "Forex_Swing_Trading_Rehberi_-_Danq_Brown_85_sayfa.pdf",
+   "sayfalar": [
+    26,
+    30,
+    31,
+    33,
+    40,
+    44,
+    46,
+    50,
+    51,
+    52,
+    53,
+    54,
+    76,
+    77,
+    78,
+    79,
+    80
+   ]
+  },
+  "ozet": "Yatay/yükselen/alçalan kanal belirlenir (ör. 6 dokunuş); güçlü bir mum kanal sınırını kırıp güçlü kapanırsa sonraki mumda manuel veya kanalın uç noktasının ötesine stop emirle trend/kırılım yönünde girilir; yeni girişler eklenir, stoplar 50 pipte başabaşa çekilir.",
+  "kategori": "kirilim",
+  "piyasa_rejimi": "yatay",
+  "orijinal_piyasa": "forex",
+  "zaman_dilimi": {
+   "islem": "4h",
+   "ust_filtre": "1d"
+  },
+  "gostergeler": [
+   {
+    "ad": "Trend çizgisi/Kanal",
+    "parametreler": {}
+   },
+   {
+    "ad": "Mum gücü",
+    "parametreler": {
+     "kural": "gövde her iki fitilden büyük"
+    }
+   }
+  ],
+  "long_giris": [
+   "Kanal belirli (yatay kanalda ≥ birkaç sınır dokunuşu)",
+   "Manuel: güçlü bir yükseliş mumu üst kanal çizgisini kırıp güçlü kapanır (gövde her iki fitilden büyük; trend çizgisi kırılımında mumun yarısından fazlası çizginin dışında) -> sonraki mumda al",
+   "Stop emirle: kanalın en yüksek noktasının üzerine buy stop; kırılım gelirse 'daha yüksek tepe' onaylanır",
+   "Alçalan/yükselen kanalda önceki tepenin aşılması şart değil; destek/dirençte güçlü mumla kırılım yeterli"
+  ],
+  "short_giris": [
+   "Aynı kurallar ters yönde: güçlü düşüş mumu alt çizgiyi/kanalın en düşük noktasını kırar -> sell stop veya manuel"
+  ],
+  "stop_loss": "Önceki yüksek/düşük seviyenin hemen ötesi; kanal kırılımında kanal yüksekliğinin yarısı (ör. 400 pip kanal -> 200 pip stop)",
+  "kar_al": "Sabit take-profit yok. Haftalık hedef kuralı: hesapta %20 haftalık kâr hedefi; hesap %60'a ulaşırsa zarardaki işlemler kapatılır, stoplar %20 kilitleyecek şekilde taşınır",
+  "iz_suren_stop": "Faz 1: herhangi bir giriş 50 pip kâra ulaşınca tüm stoplar o girişin başabaşına çekilir (art arda girişler için kademeli). Faz 2: trend çizgisi çizilir; her yeni daha düşük tepe/daha yüksek dip veya kırılan destek/direnç seviyesinin ötesine stop taşınır; işlem manuel kapatılmaz, durdurulana kadar tutulur",
+  "zaman_cikisi": null,
+  "filtreler": [
+   "Fitil/gövde: doji ve zayıf mumlar kırılım sayılmaz",
+   "Kırılım önemli destek/dirençle çelişiyorsa (aynalar) girilmez",
+   "Sahte kırılım tamamen engellenemez, %1 risk ile kabul edilir"
+  ],
+  "pozisyon_risk": "Tüm işlem(ler) için toplam risk hesabın %1'i; birden fazla giriş varsa her girişe pay edilir (ör. 0,10 lot yerine girişlerde 0,02)",
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 2,
+   "gerekce": "Kanal ve güçlü mum kuralları ölçülebilir; kanal çizimi öznel, kırılım çok esnek."
+  },
+  "belirsizlikler": [
+   "Kanal tespit algoritması yok",
+   "Stop istifleme sayısı sınırı yok",
+   "Haftalık %20/%60 kuralı başka bir risk yönetimi kuralı, strateji dışı"
+  ],
+  "uyumluluk_notu": "H4/Günlük kırılım ve trend çizgisi tabanlı; forex dili (pip) ama mantık ATR/yüzde ile genel piyasalara taşınır. 50 pip başabaş eşiği volatiliteye göre uyarlanmalı. 5m'ye uygun değil. Hacim gerekmez.",
+  "varyantlar": [
+   "Manuel giriş (güçlü mum kapanışı) ve stop emir girişi; sonradan istifleme: aynı yönde ek girişler (T1/T2 trend çizgileri)"
+  ],
+  "anahtar_kelimeler": [
+   "kanal-kirilimi",
+   "guclu-mum",
+   "buy-stop",
+   "istifleme",
+   "trend-cizgisi",
+   "breakeven-50pip"
+  ]
+ },
+ {
+  "kart_id": "swing__ucgen-kirilimi-cift-yonlu-stop__brown",
+  "ad": "Üçgen/Kama/Flama Kırılımı - Çift Yönlü Stop Emirler",
+  "stil": "swing",
+  "kaynak": {
+   "pdf": "Forex_Swing_Trading_Rehberi_-_Danq_Brown_85_sayfa.pdf",
+   "sayfalar": [
+    56,
+    57,
+    58,
+    59,
+    60,
+    61,
+    62,
+    63
+   ]
+  },
+  "ozet": "Fiyat bir noktaya yakınsayan üçgen (flama, kama dahil) oluşturunca yön tahmin edilmez; üçgenin son tepelerinin üstüne buy stop ve son diplerinin altına sell stop konur, hangisi tetiklenirse o yönde işlem açılır, diğer yön iptal edilir.",
+  "kategori": "kirilim",
+  "piyasa_rejimi": "yatay",
+  "orijinal_piyasa": "forex",
+  "zaman_dilimi": {
+   "islem": "4h",
+   "ust_filtre": "1d"
+  },
+  "gostergeler": [
+   {
+    "ad": "Trend çizgisi/Kanal",
+    "parametreler": {}
+   },
+   {
+    "ad": "Mum gücü",
+    "parametreler": {
+     "kural": "gövde her iki fitilden büyük"
+    }
+   }
+  ],
+  "long_giris": [
+   "Fiyat yakınsayan üçgende; trend çizgilerinden en az biri geçerli trend çizgisi",
+   "Buy stop: üçgenin son tepelerinin (E1,E2,E3) üzerine; veya üçgen dışında güçlü yükseliş mumu kapanışı",
+   "Önemli destek/dirence yaklaşan kırılımlar beklenir (mumun hemen girilmez), yaklaşılan seviye aşılınca girilir"
+  ],
+  "short_giris": [
+   "Sell stop: üçgenin son diplerinin altına; veya güçlü düşüş mumu kırılımı"
+  ],
+  "stop_loss": "Önceki yüksek/düşük seviyenin hemen ötesi; tetiklenen emir için karşı yöndeki stop emri iptal veya stoplar kâra taşınır",
+  "kar_al": "Sabit take-profit yok; Faz 1/Faz 2 stop yönetimi",
+  "iz_suren_stop": "Faz 1: herhangi bir giriş 50 pip kâra ulaşınca tüm stoplar o girişin başabaşına çekilir (art arda girişler için kademeli). Faz 2: trend çizgisi çizilir; her yeni daha düşük tepe/daha yüksek dip veya kırılan destek/direnç seviyesinin ötesine stop taşınır; işlem manuel kapatılmaz, durdurulana kadar tutulur",
+  "zaman_cikisi": null,
+  "filtreler": [],
+  "pozisyon_risk": "Tüm işlem(ler) için toplam risk hesabın %1'i; birden fazla giriş varsa her girişe pay edilir (ör. 0,10 lot yerine girişlerde 0,02)",
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 2,
+   "gerekce": "Stop emir yerleşimi mekanik; üçgen tespiti yoruma bağlı."
+  },
+  "belirsizlikler": [
+   "Üçgen algoritmik tanımı yok",
+   "Buy stop mesafesi (tampon) yok",
+   "Çift yönlü tetiklenme (fakeout) yönetimi belirsiz"
+  ],
+  "uyumluluk_notu": "H4/Günlük kırılım ve trend çizgisi tabanlı; forex dili (pip) ama mantık ATR/yüzde ile genel piyasalara taşınır. 50 pip başabaş eşiği volatiliteye göre uyarlanmalı. 5m'ye uygun değil. Hacim gerekmez.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "ucgen",
+   "kama",
+   "flama",
+   "kirilim",
+   "buy-stop",
+   "sell-stop"
+  ]
+ },
+ {
+  "kart_id": "swing__trend-cizgisi-kirilimi-yeniden-test__brown",
+  "ad": "Trend Çizgisi Kırılımı + Yeniden Test + Yutan Mum (geçerli dalga kuralı)",
+  "stil": "swing",
+  "kaynak": {
+   "pdf": "Forex_Swing_Trading_Rehberi_-_Danq_Brown_85_sayfa.pdf",
+   "sayfalar": [
+    26,
+    27,
+    28,
+    29,
+    30,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    43,
+    44
+   ]
+  },
+  "ozet": "Geçerli dalgalardan (A-B-C kuralı) çizilen aktif trend çizgisi güçlü mumla kırılınca ve kırılım sonrası yeniden testte yutan mum/baş-omuz gibi onay oluşunca kırılım yönünde işlem açılır; stop yeniden testteki yutan mumun ötesindedir.",
+  "kategori": "formasyon",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "forex",
+  "zaman_dilimi": {
+   "islem": "4h",
+   "ust_filtre": "1d"
+  },
+  "gostergeler": [
+   {
+    "ad": "Trend çizgisi/Kanal",
+    "parametreler": {}
+   },
+   {
+    "ad": "Mum gücü",
+    "parametreler": {
+     "kural": "gövde her iki fitilden büyük"
+    }
+   },
+   {
+    "ad": "Yutan mum",
+    "parametreler": {}
+   }
+  ],
+  "long_giris": [
+   "Aktif düşüş trend çizgisi (geçerli ayı dalgalarına dayalı, mumları kesmeyen çizgi) yukarı kırılır",
+   "Kırılım güçlü mumla ve önceki düşük tepe aşılarak (daha yüksek tepe) gerçekleşir",
+   "Yeniden testte boğa yutan mum kapandığında, yutan mumun açıldığı yerde bir sonraki mumda al"
+  ],
+  "short_giris": [
+   "Aktif yükseliş trend çizgisi aşağı kırılır (güçlü mum, önceki dip altı); yeniden testte ayı yutan mum -> yutan mumun açılışında short"
+  ],
+  "stop_loss": "Yeniden testteki yutan mumun (veya önceki tepe/dibin) ötesi",
+  "kar_al": "Sabit take-profit yok; trend çizgisi izleyen stop",
+  "iz_suren_stop": "Faz 1: herhangi bir giriş 50 pip kâra ulaşınca tüm stoplar o girişin başabaşına çekilir (art arda girişler için kademeli). Faz 2: trend çizgisi çizilir; her yeni daha düşük tepe/daha yüksek dip veya kırılan destek/direnç seviyesinin ötesine stop taşınır; işlem manuel kapatılmaz, durdurulana kadar tutulur",
+  "zaman_cikisi": null,
+  "filtreler": [
+   "Geçerli boğa dalgası: B noktası A'dan düşük (ayı: yüksek), C noktası A'yı aşmalı; geçerli B noktaları trend çizgisi temas noktası",
+   "Trend çizgisi mumları kesmemeli; ilk B noktası fiyattan çok uzaksa bırakılır",
+   "Yatay kanal fiyat hareketi ile çakışan başka bir sebeple desteklenmeli (3 sebep kuralı)"
+  ],
+  "pozisyon_risk": "Tüm işlem(ler) için toplam risk hesabın %1'i; birden fazla giriş varsa her girişe pay edilir (ör. 0,10 lot yerine girişlerde 0,02)",
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 1,
+   "gerekce": "Dalga geçerlilik kuralı mekanik ama trend çizgisi seçimi ve 'güçlü mum' öznel."
+  },
+  "belirsizlikler": [
+   "Trend çizgisi otomatik çizimi kitapta algoritmik değil",
+   "'Aktif trend çizgisi' geçişi kuralları karmaşık",
+   "Yutan mum için gövde oranı tanımı yok"
+  ],
+  "uyumluluk_notu": "H4/Günlük kırılım ve trend çizgisi tabanlı; forex dili (pip) ama mantık ATR/yüzde ile genel piyasalara taşınır. 50 pip başabaş eşiği volatiliteye göre uyarlanmalı. 5m'ye uygun değil. Hacim gerekmez.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "trend-cizgisi",
+   "gecerli-dalga",
+   "yeniden-test",
+   "yutan-mum",
+   "kirilim"
+  ]
+ }
+]

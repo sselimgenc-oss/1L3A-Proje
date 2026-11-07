@@ -1,0 +1,278 @@
+[
+ {
+  "kart_id": "swing__swing-noktasi-donus-girisi__anderson",
+  "ad": "3 Mumluk Swing Noktası Dönüş Girişi (standart ve agresif)",
+  "stil": "swing",
+  "kaynak": {
+   "pdf": "Swing_Trading_-_Andrew_Anderson_127_sayfa.pdf",
+   "sayfalar": [
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    42,
+    43,
+    44,
+    45,
+    46
+   ]
+  },
+  "ozet": "Geri çekilme sonrası 3 mumluk swing dip (düşük, daha düşük, daha yüksek dip) üçüncü mumda long girişi verir (swing tepe için short). Agresif sürümde ikinci mumdaki dönüş mumunda (boğa yutan, çekiç) önceden girilir.",
+  "kategori": "formasyon",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+   "islem": "1d",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "Swing noktası",
+    "parametreler": {
+     "mum_sayisi": 3
+    }
+   },
+   {
+    "ad": "EMA",
+    "parametreler": {
+     "periyot": 30,
+     "kullanim": "stop"
+    }
+   },
+   {
+    "ad": "SMA",
+    "parametreler": {
+     "periyot": 10,
+     "kullanim": "kar alma"
+    }
+   }
+  ],
+  "long_giris": [
+   "Hisse geri çekilmiştir; tercihen swing dibinden önce ardışık düşüş günleri vardır",
+   "Swing dip: 1. mum dip, 2. mum daha düşük dip, 3. mum daha yüksek dip (önceki günün yükseğinin üzerinde işlem görür) -> 3. mumda long",
+   "Grafiğin solunda destek/direnç bölgesine denk gelmesi güvenilirliği artırır",
+   "Agresif giriş: swing dip oluşmadan 2. mumda boğa yutan/çekiç gibi dönüş mumu varsa o mumda al (stop daha yakın, risk/ödül daha iyi)"
+  ],
+  "short_giris": [
+   "Swing tepe: yüksek, daha yüksek, daha düşük tepe -> 3. mumda short (öncesinde ardışık yükseliş günleri tercih)"
+  ],
+  "stop_loss": "Swing noktası dibinin ve destek bölgesinin altı (short için tepenin üstü); stop mesafesi hissenin normal günlük aralığından küçük olmamalı; doğal alternatif: 30 periyotluk EMA altı",
+  "kar_al": "Geri çekilme alındıysa önceki swing tepesi (ilk direnç) civarında en azından kısmi kâr; hisse 10 periyot hareketli ortalamanın üzerine fazla uzayınca kâr alınır",
+  "iz_suren_stop": "2-5 günlük tipik işlemde stop: önceki günün veya cari günün dibinin 10-15 sent altı (hangisi düşükse); büyük trend için stop her yeni swing dibinin altına taşınır",
+  "zaman_cikisi": "Hisse birkaç gün içinde lehe hareket etmiyorsa (zaman stopu) çıkılır; gün sayısı belirtilmemiş",
+  "filtreler": [
+   "Giriş yönünde geri çekilme/yükseliş sonrası kullanılmalı",
+   "Destek/direnç bölgesi konumu"
+  ],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 3,
+   "gerekce": "Swing noktası 3 mum kuralı kesin; stop ve trailing mekanik. Zaman stopu ve hedef kısmen belirsiz."
+  },
+  "belirsizlikler": [
+   "Zaman stopu gün sayısı yok",
+   "Stop '10-15 sent' hisse fiyatına özgü (ATR ile uyarlanmalı)",
+   "'Normal aralık' tanımı sayısal değil",
+   "Agresif girişteki dönüş mumu kriteri öznel"
+  ],
+  "uyumluluk_notu": "Günlük hisse grafikleri; mantık fiyat tabanlı olduğu için forex/kripto/emtiaya uyarlanabilir. 5m'ye doğrudan değil (kitap 15dk/1s'te agresif girişi anar). Hacim gerekmez.",
+  "varyantlar": [
+   "Agresif giriş (2. mumda), standart giriş (3. mumda)",
+   "İlk geri çekilme sonrası kırılım girişi (s.50)"
+  ],
+  "anahtar_kelimeler": [
+   "swing-noktasi",
+   "3-mum",
+   "geri-cekilme",
+   "yutan-mum",
+   "iz-suren-stop",
+   "pivot"
+  ]
+ },
+ {
+  "kart_id": "swing__sma-10-20-kesisim__anderson",
+  "ad": "10/20 SMA Kesişimi Swing Sistemi",
+  "stil": "swing",
+  "kaynak": {
+   "pdf": "Swing_Trading_-_Andrew_Anderson_127_sayfa.pdf",
+   "sayfalar": [
+    93
+   ]
+  },
+  "ozet": "10 günlük SMA 20 günlük SMA'yı yukarı keserse alım, aşağı keserse satış sinyali; ters kesişim çıkış sinyalidir.",
+  "kategori": "trend_takip",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+   "islem": "1d",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "SMA",
+    "parametreler": {
+     "periyot": 10
+    }
+   },
+   {
+    "ad": "SMA",
+    "parametreler": {
+     "periyot": 20
+    }
+   }
+  ],
+  "long_giris": [
+   "SMA10, SMA20'yi yukarı keser"
+  ],
+  "short_giris": [
+   "SMA10, SMA20'yi aşağı keser"
+  ],
+  "stop_loss": null,
+  "kar_al": "Ters kesişimde pozisyon kapatılır",
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 3,
+   "gerekce": "Tamamen mekanik; stop kuralı yok."
+  },
+  "belirsizlikler": [
+   "Stop yok",
+   "Yatay piyasa filtresi yok (whipsaw riski)"
+  ],
+  "uyumluluk_notu": "Günlük hisse grafikleri; mantık fiyat tabanlı olduğu için forex/kripto/emtiaya uyarlanabilir. 5m'ye doğrudan değil (kitap 15dk/1s'te agresif girişi anar). Hacim gerekmez.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "sma-kesisim",
+   "sma-10",
+   "sma-20",
+   "trend-takip"
+  ]
+ },
+ {
+  "kart_id": "swing__macd-sinyal-kesisim__anderson",
+  "ad": "MACD Sinyal Çizgisi Kesişimi Swing Sistemi",
+  "stil": "swing",
+  "kaynak": {
+   "pdf": "Swing_Trading_-_Andrew_Anderson_127_sayfa.pdf",
+   "sayfalar": [
+    93,
+    94
+   ]
+  },
+  "ozet": "MACD çizgisi sinyal çizgisini yukarı keserse alım, aşağı keserse satış; ters kesişim çıkış. Sıfır çizgisi kesişimleri de ek sinyal verir.",
+  "kategori": "momentum",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+   "islem": "1d",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "MACD",
+    "parametreler": {
+     "parametre": "kitapta yok (standart 12,26,9 varsayılabilir)"
+    }
+   }
+  ],
+  "long_giris": [
+   "MACD çizgisi sinyal çizgisini yukarı keser (ek: MACD sıfırın üstüne geçer)"
+  ],
+  "short_giris": [
+   "MACD çizgisi sinyal çizgisini aşağı keser (ek: MACD sıfırın altına iner)"
+  ],
+  "stop_loss": null,
+  "kar_al": "Ters yönde kesişim olunca çıkış",
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 3,
+   "gerekce": "Mekanik kesişim; parametre ve stop kitapta yok."
+  },
+  "belirsizlikler": [
+   "MACD periyotları belirtilmemiş",
+   "Stop yok"
+  ],
+  "uyumluluk_notu": "Günlük hisse grafikleri; mantık fiyat tabanlı olduğu için forex/kripto/emtiaya uyarlanabilir. 5m'ye doğrudan değil (kitap 15dk/1s'te agresif girişi anar). Hacim gerekmez.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "macd",
+   "sinyal-kesisimi",
+   "trend-takip"
+  ]
+ },
+ {
+  "kart_id": "swing__fib-geri-cekilme-sicrama__anderson",
+  "ad": "Fibonacci Geri Çekilme Seviyesinden Sıçrama",
+  "stil": "swing",
+  "kaynak": {
+   "pdf": "Swing_Trading_-_Andrew_Anderson_127_sayfa.pdf",
+   "sayfalar": [
+    33,
+    92
+   ]
+  },
+  "ozet": "Büyük bir hareketten sonra fiyat %23,6, %38,2, %50 veya %61,8 Fibonacci seviyelerinde (destek/direnç ile birlikte) tutunup sıçradığında hareket yönünde giriş yapılır; hedef bir sonraki Fibonacci seviyesidir.",
+  "kategori": "destek_direnc",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+   "islem": "1d",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "Fibonacci",
+    "parametreler": {
+     "seviyeler": [
+      0.236,
+      0.382,
+      0.5,
+      0.618
+     ]
+    }
+   }
+  ],
+  "long_giris": [
+   "Yükseliş hareketinden geri çekilme Fibonacci seviyesinde (destek ile çakışan) tutunup yukarı sıçrar -> long"
+  ],
+  "short_giris": [
+   "Düşüş hareketinden sonra %61,8 geri çekilmeye (direnç) yükselir ve sıçrar (aşağı döner) -> short; hedef %23,6"
+  ],
+  "stop_loss": null,
+  "kar_al": "Sonraki Fibonacci seviyesi (kısa örnekte %23,6)",
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [
+   "Fibonacci tek başına değil, destek/direnç seviyeleriyle teyit edilmeli"
+  ],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 1,
+   "gerekce": "Seviye hesabı mekanik ancak 'sıçrama' tanımı, stop ve swing seçimi eksik."
+  },
+  "belirsizlikler": [
+   "Hangi swing'in ölçüleceği",
+   "Sıçrama onayı",
+   "Stop yok"
+  ],
+  "uyumluluk_notu": "Günlük hisse grafikleri; mantık fiyat tabanlı olduğu için forex/kripto/emtiaya uyarlanabilir. 5m'ye doğrudan değil (kitap 15dk/1s'te agresif girişi anar). Hacim gerekmez.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "fibonacci",
+   "geri-cekilme",
+   "destek-direnc"
+  ]
+ }
+]

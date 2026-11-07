@@ -1,0 +1,58 @@
+[
+ {
+  "kart_id": "swing__50-250-hareketli-ortalama-kesisimi__selley",
+  "ad": "50/250 Günlük Hareketli Ortalama Kesişimi (örnek algoritma)",
+  "stil": "swing",
+  "kaynak": {
+   "pdf": "Yeni_Başlayanlar_için_Algoritmik_Trading_-_Travis_Selley_117_sayfa.pdf",
+   "sayfalar": [
+    2
+   ]
+  },
+  "ozet": "50 günlük hareketli ortalama 250 günlük ortalamanın üstüne çıkarsa 100 hisse al; 50 günlük ortalama 200 günlük ortalamanın altına inerse sat. Kitabın tek somut örnek kuralı.",
+  "kategori": "trend_takip",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+   "islem": "1d",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "SMA",
+    "parametreler": {
+     "kisa": 50,
+     "uzun": 250
+    }
+   }
+  ],
+  "long_giris": [
+   "50 günlük ortalama > 250 günlük ortalama (yukarı kesişim) -> 100 hisse al"
+  ],
+  "short_giris": [],
+  "stop_loss": null,
+  "kar_al": null,
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [],
+  "pozisyon_risk": "100 hisse sabit",
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 1,
+   "gerekce": "Yalnızca kavramsal örnek; ortalama türü yok, çıkış için 200 günlük (250 değil) ortalama yazılmış (tutarsız), stop yok."
+  },
+  "belirsizlikler": [
+   "Çıkışta 200 mü 250 mi olduğu belirsiz.",
+   "Ortalama türü, zaman dilimi, stop yok."
+  ],
+  "uyumluluk_notu": "Günlük hisse örneği; kripto/hisse/emtia perpetual'a uyarlanabilir; hacim gerekmez.",
+  "varyantlar": [
+   "50/200 altın kesişim (Koru kitabında aynı)"
+  ],
+  "anahtar_kelimeler": [
+   "sma",
+   "kesisim",
+   "50-250"
+  ]
+ }
+]

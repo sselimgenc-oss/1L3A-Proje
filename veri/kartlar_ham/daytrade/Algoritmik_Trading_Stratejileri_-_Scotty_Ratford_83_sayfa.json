@@ -1,0 +1,378 @@
+[
+ {
+  "kart_id": "daytrade__vwma-8-30-sott__ratford",
+  "ad": "VWMA 8/30 Kesişim + SOTT",
+  "stil": "daytrade",
+  "kaynak": {
+   "pdf": "Algoritmik_Trading_Stratejileri_-_Scotty_Ratford_83_sayfa.pdf",
+   "sayfalar": [
+    65
+   ]
+  },
+  "ozet": "SOTT 50'nin altına iner ve al sinyali verirken mum 30 VWMA üstünde kapanır ve 8 VWMA 30 VWMA'yı yukarı keserse al; stop son salınım dibinin altı; mum 30 VWMA altında kapanınca veya SOTT sat sinyali verince çık.",
+  "kategori": "trend_takip",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "kripto",
+  "zaman_dilimi": {
+   "islem": "5m",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "VWMA",
+    "parametreler": {
+     "kisa": 8,
+     "uzun": 30
+    }
+   },
+   {
+    "ad": "Stokastik OTT",
+    "parametreler": {
+     "K": 100,
+     "K_yumusatma": 10,
+     "OTT_periyot": 2,
+     "OTT_yuzde": 0.5
+    }
+   }
+  ],
+  "long_giris": [
+   "SOTT 50'nin altına iner ve al sinyali üretir",
+   "Mumlar 30 VWMA üstünde kapanır",
+   "8 VWMA 30 VWMA'yı yukarı keser"
+  ],
+  "short_giris": [],
+  "stop_loss": "Son salınım dibinin altı",
+  "kar_al": "Çıkış: mum 30 VWMA altında kapanır VEYA SOTT aşağı geçip sat sinyali üretir",
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [
+   "Hacim verisi (VWMA)"
+  ],
+  "pozisyon_risk": "Risk-ödül bölümü: stop %1, kar al %2 (2:1) limit emriyle önerilir; sinyal çıkışı yerine sabit yüzde çıkış.",
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 1,
+   "gerekce": "SOTT (Stochastic OTT) topluluk göstergesi; formülü kitapta yok."
+  },
+  "belirsizlikler": [
+   "OTT hareketli ortalama türü ve formül yok."
+  ],
+  "uyumluluk_notu": "Kripto için yazılmış (TradingView); kripto/hisse/emtia perpetual'larda ≥5m çalışır. Kitap zaman dilimi belirtmiyor (genelde 5m ve üstü).",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "vwma",
+   "sott",
+   "trend-takip"
+  ]
+ },
+ {
+  "kart_id": "daytrade__pmax-nsm__ratford",
+  "ad": "PMax + Normalleştirilmiş Yumuşatılmış MACD",
+  "stil": "daytrade",
+  "kaynak": {
+   "pdf": "Algoritmik_Trading_Stratejileri_-_Scotty_Ratford_83_sayfa.pdf",
+   "sayfalar": [
+    67
+   ]
+  },
+  "ozet": "PMax yeşil (al sinyali) ve mum alt PMax çizgisi üstünde kapanır, NSM -0.70 altındayken MACD sinyal çizgisini yukarı keserse al; PMax sat sinyali verince veya mum PMax altında kapanınca çık.",
+  "kategori": "trend_takip",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "kripto",
+  "zaman_dilimi": {
+   "islem": "5m",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "PMax",
+    "parametreler": {
+     "ATR_uzunlugu": 8,
+     "ATR_carpani": 3.6,
+     "MA_turu": "VAR",
+     "MA_uzunlugu": 10
+    }
+   },
+   {
+    "ad": "Normalleştirilmiş Yumuşatılmış MACD",
+    "parametreler": {}
+   }
+  ],
+  "long_giris": [
+   "PMax yeşil (al sinyali), mumlar alt PMax çizgisi üzerinde kapanır",
+   "NSM < -0.70 ve MACD çizgisi sinyal çizgisini yukarı keser"
+  ],
+  "short_giris": [],
+  "stop_loss": null,
+  "kar_al": "Çıkış: PMax sat sinyali VEYA mum alt PMax çizgisi altında kapanır",
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [],
+  "pozisyon_risk": "Risk-ödül bölümü: stop %1, kar al %2 (2:1) limit emriyle önerilir; sinyal çıkışı yerine sabit yüzde çıkış.",
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 2,
+   "gerekce": "PMax parametreleri verilmiş (ATR 8, çarpan 3.6, VAR MA 10); NSM formülü belirsiz."
+  },
+  "belirsizlikler": [
+   "VAR MA tanımı kitapta yok.",
+   "NSM parametreleri yok."
+  ],
+  "uyumluluk_notu": "Kripto için yazılmış (TradingView); kripto/hisse/emtia perpetual'larda ≥5m çalışır. Kitap zaman dilimi belirtmiyor (genelde 5m ve üstü).",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "pmax",
+   "supertrend",
+   "nsm",
+   "macd"
+  ]
+ },
+ {
+  "kart_id": "daytrade__aroon-rsi14-sma10__ratford",
+  "ad": "Aroon + RSI(14) + SMA(10) Trend",
+  "stil": "daytrade",
+  "kaynak": {
+   "pdf": "Algoritmik_Trading_Stratejileri_-_Scotty_Ratford_83_sayfa.pdf",
+   "sayfalar": [
+    69
+   ]
+  },
+  "ozet": "RSI(14) 50 üstüne çıkar, fiyat 10 SMA üstünde ve Aroon Up Aroon Down'u yukarı keserse al; fiyat 10 SMA altında kapanınca veya Aroon Up 80'in altına inince çık.",
+  "kategori": "trend_takip",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "kripto",
+  "zaman_dilimi": {
+   "islem": "5m",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "Aroon",
+    "parametreler": {}
+   },
+   {
+    "ad": "RSI",
+    "parametreler": {
+     "periyot": 14
+    }
+   },
+   {
+    "ad": "SMA",
+    "parametreler": {
+     "periyot": 10
+    }
+   }
+  ],
+  "long_giris": [
+   "RSI(14) 50'nin üzerine çıkıyor",
+   "Fiyat 10 SMA üstünde",
+   "Aroon Up, Aroon Down'u yukarı keser -> al"
+  ],
+  "short_giris": [],
+  "stop_loss": null,
+  "kar_al": "Çıkış: fiyat 10 SMA altında kapanır VEYA Aroon Up 80'in altına geçer",
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [],
+  "pozisyon_risk": "Risk-ödül bölümü: stop %1, kar al %2 (2:1) limit emriyle önerilir; sinyal çıkışı yerine sabit yüzde çıkış.",
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 3,
+   "gerekce": "Net; Aroon periyodu belirtilmemiş (varsayılan 14)."
+  },
+  "belirsizlikler": [
+   "Aroon periyodu yok."
+  ],
+  "uyumluluk_notu": "Kripto için yazılmış (TradingView); kripto/hisse/emtia perpetual'larda ≥5m çalışır. Kitap zaman dilimi belirtmiyor (genelde 5m ve üstü).",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "aroon",
+   "rsi",
+   "sma"
+  ]
+ },
+ {
+  "kart_id": "daytrade__qqe-bb40-trend__ratford",
+  "ad": "QQE + Bollinger(40,1) Trend",
+  "stil": "daytrade",
+  "kaynak": {
+   "pdf": "Algoritmik_Trading_Stratejileri_-_Scotty_Ratford_83_sayfa.pdf",
+   "sayfalar": [
+    70
+   ]
+  },
+  "ozet": "Mum üst Bollinger(40,1) bandı üstünde kapanır ve QQE hızlı çizgi yavaşı yukarı keserek al sinyali verirse al; mum üst bandın altında kapanınca veya QQE sat sinyali verince çık.",
+  "kategori": "trend_takip",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "kripto",
+  "zaman_dilimi": {
+   "islem": "5m",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "QQE",
+    "parametreler": {}
+   },
+   {
+    "ad": "Bollinger",
+    "parametreler": {
+     "periyot": 40,
+     "std": 1
+    }
+   }
+  ],
+  "long_giris": [
+   "Mum üst Bollinger bandı üzerinde kapanır",
+   "QQE hızlı çizgi yavaş çizgiyi yukarı keser (al sinyali)"
+  ],
+  "short_giris": [
+   "Kuralları ters çevir"
+  ],
+  "stop_loss": null,
+  "kar_al": "Çıkış: mum üst bandın altında kapanır VEYA QQE sat sinyali verir (scalp için daha iyi, daha çok yanlış sinyal)",
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [],
+  "pozisyon_risk": "Risk-ödül bölümü: stop %1, kar al %2 (2:1) limit emriyle önerilir; sinyal çıkışı yerine sabit yüzde çıkış.",
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 2,
+   "gerekce": "QQE parametreleri yok."
+  },
+  "belirsizlikler": [
+   "QQE parametreleri belirsiz."
+  ],
+  "uyumluluk_notu": "Kripto için yazılmış (TradingView); kripto/hisse/emtia perpetual'larda ≥5m çalışır. Kitap zaman dilimi belirtmiyor (genelde 5m ve üstü).",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "qqe",
+   "bollinger",
+   "trend-takip"
+  ]
+ },
+ {
+  "kart_id": "daytrade__smma4-9-sma15__ratford",
+  "ad": "SMMA 4/9 Kesişim + SMA 15 Filtre",
+  "stil": "daytrade",
+  "kaynak": {
+   "pdf": "Algoritmik_Trading_Stratejileri_-_Scotty_Ratford_83_sayfa.pdf",
+   "sayfalar": [
+    71,
+    72
+   ]
+  },
+  "ozet": "4 SMMA 9 SMMA'yı yukarı keserse ve mum 4 SMMA'ya dokunup üstünde kapanırsa al; stop giriş mumu düşüğünün altı; 4 SMMA 9 SMMA altına inince veya mum 15 SMA altında kapanınca çık.",
+  "kategori": "trend_takip",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "kripto",
+  "zaman_dilimi": {
+   "islem": "5m",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "SMMA",
+    "parametreler": {
+     "kisa": 4,
+     "uzun": 9
+    }
+   },
+   {
+    "ad": "SMA",
+    "parametreler": {
+     "periyot": 15
+    }
+   }
+  ],
+  "long_giris": [
+   "4 SMMA 9 SMMA'yı yukarı keser",
+   "Mum 4 SMMA'ya dokunur ve üstünde kapanır -> gir"
+  ],
+  "short_giris": [],
+  "stop_loss": "Giriş mumunun en düşüğünün altı",
+  "kar_al": "Çıkış: 4 SMMA 9 SMMA'nın altına geçer VEYA mum 15 SMA altında kapanır",
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [],
+  "pozisyon_risk": "Risk-ödül bölümü: stop %1, kar al %2 (2:1) limit emriyle önerilir; sinyal çıkışı yerine sabit yüzde çıkış.",
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 3,
+   "gerekce": "Net."
+  },
+  "belirsizlikler": [
+   "Kitap zaman dilimi ve ATR/stop mesafesini belirtmiyor."
+  ],
+  "uyumluluk_notu": "Kripto için yazılmış (TradingView); kripto/hisse/emtia perpetual'larda ≥5m çalışır. Kitap zaman dilimi belirtmiyor (genelde 5m ve üstü).",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "smma",
+   "kesisim",
+   "trend-takip"
+  ]
+ },
+ {
+  "kart_id": "daytrade__rsi5-pmax__ratford",
+  "ad": "RSI(5) + PMax Dip Alımı",
+  "stil": "daytrade",
+  "kaynak": {
+   "pdf": "Algoritmik_Trading_Stratejileri_-_Scotty_Ratford_83_sayfa.pdf",
+   "sayfalar": [
+    73
+   ]
+  },
+  "ozet": "PMax yeşil ve mum alt PMax üstünde kapanırken RSI(5) 30 altına inip tekrar 30 üstüne çıkınca al; PMax sat sinyali veya mum PMax altında kapanış çıkış.",
+  "kategori": "trend_takip",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "kripto",
+  "zaman_dilimi": {
+   "islem": "5m",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "RSI",
+    "parametreler": {
+     "periyot": 5
+    }
+   },
+   {
+    "ad": "PMax",
+    "parametreler": {
+     "ATR_uzunlugu": 8,
+     "ATR_carpani": 3.6,
+     "MA_turu": "VAR",
+     "MA_uzunlugu": 10
+    }
+   }
+  ],
+  "long_giris": [
+   "RSI(5) < 30 (aşırı satım)",
+   "PMax yeşil, mumlar alt PMax çizgisi üstünde kapanır",
+   "RSI 30'un üstüne çıkınca al"
+  ],
+  "short_giris": [],
+  "stop_loss": null,
+  "kar_al": "Çıkış: PMax sat sinyali VEYA mum alt PMax altında kapanır",
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [],
+  "pozisyon_risk": "Risk-ödül bölümü: stop %1, kar al %2 (2:1) limit emriyle önerilir; sinyal çıkışı yerine sabit yüzde çıkış.",
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 2,
+   "gerekce": "PMax parametreleri verilmiş; VAR MA belirsiz."
+  },
+  "belirsizlikler": [
+   "VAR MA tanımı yok."
+  ],
+  "uyumluluk_notu": "Kripto için yazılmış (TradingView); kripto/hisse/emtia perpetual'larda ≥5m çalışır. Kitap zaman dilimi belirtmiyor (genelde 5m ve üstü).",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "pmax",
+   "rsi",
+   "geri-cekilme"
+  ]
+ }
+]

@@ -1,0 +1,614 @@
+[
+ {
+  "kart_id": "swing__kapanis-kirilimi-trend-davey",
+  "ad": "Kapanış Kırılımı (en yüksek/en düşük kapanış) Trend Çalışması",
+  "stil": "swing",
+  "kaynak": {
+   "pdf": "Algoritmik_Trading_Kısayol_Kodları_-_Kevin_J_Davey_-_Orijinal_193_sayfa.pdf",
+   "sayfalar": [
+    32,
+    33
+   ]
+  },
+  "ozet": "Kapanış son N barın en yüksek kapanışı ise sonraki bar piyasadan al; en düşük kapanış ise açığa sat (N=10/25/40). Büyük barlarda (120dk-günlük) küçük barlardan çok daha iyi.",
+  "kategori": "kirilim",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "vadeli",
+  "zaman_dilimi": {
+   "islem": "1d",
+   "ust_filtre": "yok"
+  },
+  "gostergeler": [
+   {
+    "ad": "En yüksek/en düşük kapanış",
+    "parametreler": {
+     "N": [
+      10,
+      25,
+      40
+     ]
+    }
+   }
+  ],
+  "long_giris": [
+   "Kapanış = son N barın en yüksek kapanışı -> sonraki barda piyasadan al"
+  ],
+  "short_giris": [
+   "Kapanış = son N barın en düşük kapanışı -> sonraki barda piyasadan sat (stop-and-reverse)"
+  ],
+  "stop_loss": null,
+  "kar_al": null,
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [
+   "Bar boyutu >=120 dk tercih"
+  ],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": "Kitap: küçük barlardaki kırılımlar çoğunlukla sahte; kâr 120dk barlarda tepe yapıyor; kayma dahil küçük barlarda büyük zarar.",
+  "kodlanabilirlik": {
+   "puan": 3,
+   "gerekce": "Tam mekanik; sadece N açık, stop yok (stop-and-reverse)."
+  },
+  "belirsizlikler": [
+   "Stop/kar-al yok",
+   "Optimal N yok; 3 değer test edilmiş"
+  ],
+  "uyumluluk_notu": "Çalışma 40 vadeli piyasa, 60dk-günlük barlarda yapılmış; kriptoya/hisseye uygulanabilir ama parametreler yeniden test edilmeli. Hacim gerekmez. Küçük barlarda (<60dk) kitap kaymadan dolayı zarar bildiriyor.",
+  "varyantlar": [
+   "Ters (anti-breakout) versiyonu: ortalamada kârsız"
+  ],
+  "anahtar_kelimeler": [
+   "kirilim",
+   "kapanis",
+   "donchian",
+   "bar-boyutu"
+  ]
+ },
+ {
+  "kart_id": "swing__ma-gerilmesi-ortalamaya-donus-davey",
+  "ad": "Hareketli Ortalama Gerilmesi (MA Stretch) Ortalamaya Dönüş",
+  "stil": "swing",
+  "kaynak": {
+   "pdf": "Algoritmik_Trading_Kısayol_Kodları_-_Kevin_J_Davey_-_Orijinal_193_sayfa.pdf",
+   "sayfalar": [
+    47,
+    48,
+    56,
+    57
+   ]
+  },
+  "ozet": "Kapanış N periyotluk ortalamanın belli bir yüzdeden fazla altına inerse al, üstüne çıkarsa sat; fiyat ortalamaya dönünce çık. Davey'nin mean reversion çalışmasında açık ara en iyi tek strateji.",
+  "kategori": "ortalamaya_donus",
+  "piyasa_rejimi": "yatay",
+  "orijinal_piyasa": "vadeli",
+  "zaman_dilimi": {
+   "islem": "1d",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "SMA",
+    "parametreler": {
+     "periyot": "5-20 (InputVar2)",
+     "gerilme_esigi": "InputVar33=.5*(.004667*InputVar3-.08667)"
+    }
+   }
+  ],
+  "long_giris": [
+   "(SMA(close,N) - close) > esik * SMA(close,N) -> sonraki barda al"
+  ],
+  "short_giris": [
+   "(close - SMA(close,N)) > esik * SMA(close,N) -> sonraki barda sat"
+  ],
+  "stop_loss": null,
+  "kar_al": "Kapanış N periyotluk ortalamayı geçince (long için yukarı, short için aşağı) çık",
+  "iz_suren_stop": null,
+  "zaman_cikisi": "Kitap 7 bar zaman çıkışını test etti ve zararlı buldu; kullanılmaması önerilir",
+  "filtreler": [],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 2,
+   "gerekce": "Giriş/çıkış kuralları net; eşik formülü kodda ham haliyle var, N ve eşik aralıkları parametre."
+  },
+  "belirsizlikler": [
+   "Eşik formülü ve InputVar2/3 aralıkları (5-20 ve 25-40) deneysel; en iyi ayar belirtilmemiş.",
+   "Ortalamaya dönüşte çıkış (kapanış > MA) kuralı: bu kart çıkış kuralı olarak onu önerir, stop yok."
+  ],
+  "uyumluluk_notu": "Çalışma 40 vadeli piyasa, 60dk-günlük barlarda yapılmış; kriptoya/hisseye uygulanabilir ama parametreler yeniden test edilmeli. Hacim gerekmez. Küçük barlarda (<60dk) kitap kaymadan dolayı zarar bildiriyor.",
+  "varyantlar": [
+   "Sabit 7 bar çıkış ve 'hızlı çıkış' seçenekleri zarar verici bulundu (kullanma)"
+  ],
+  "anahtar_kelimeler": [
+   "ortalamaya-donus",
+   "ma-stretch",
+   "sma",
+   "davey"
+  ]
+ },
+ {
+  "kart_id": "swing__bollinger-stretch-ortalamaya-donus-davey",
+  "ad": "Bollinger Bandı Gerilmesi (%B < 0.1 ikinci bar) Ortalamaya Dönüş",
+  "stil": "swing",
+  "kaynak": {
+   "pdf": "Algoritmik_Trading_Kısayol_Kodları_-_Kevin_J_Davey_-_Orijinal_193_sayfa.pdf",
+   "sayfalar": [
+    45,
+    46,
+    56,
+    57
+   ]
+  },
+  "ozet": "Kapanış Bollinger band aralığının %10'unun altında iki bar kalırsa al; %90 üstünde iki bar kalırsa sat; %B 0.4'ü (short için 0.6'yı) geçince çık.",
+  "kategori": "ortalamaya_donus",
+  "piyasa_rejimi": "yatay",
+  "orijinal_piyasa": "vadeli",
+  "zaman_dilimi": {
+   "islem": "1d",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "Bollinger %B",
+    "parametreler": {
+     "periyot": null,
+     "std": null,
+     "alt_esik": 0.1,
+     "ust_esik": 0.9
+    }
+   }
+  ],
+  "long_giris": [
+   "Kapanış %B < 0.1 iki bar üst üste -> sonraki barda al"
+  ],
+  "short_giris": [
+   "Kapanış %B > 0.9 iki bar üst üste -> sonraki barda sat"
+  ],
+  "stop_loss": null,
+  "kar_al": "%B 0.4 üstüne çıkınca long kapat; short'ta %B 0.6 altına inince kapat",
+  "iz_suren_stop": null,
+  "zaman_cikisi": "7 bar çıkış (isteğe bağlı, kullanma)",
+  "filtreler": [],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 2,
+   "gerekce": "Eşikler net; Bollinger periyodu/std kitapta ham koda bırakılmış."
+  },
+  "belirsizlikler": [
+   "Bollinger periyodu ve standart sapma çarpanı yazılmamış (kodda InputVar)."
+  ],
+  "uyumluluk_notu": "Çalışma 40 vadeli piyasa, 60dk-günlük barlarda yapılmış; kriptoya/hisseye uygulanabilir ama parametreler yeniden test edilmeli. Hacim gerekmez. Küçük barlarda (<60dk) kitap kaymadan dolayı zarar bildiriyor.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "bollinger",
+   "ortalamaya-donus",
+   "yuzde-b",
+   "davey"
+  ]
+ },
+ {
+  "kart_id": "swing__rsi2-kisa-vade-ortalamaya-donus-davey",
+  "ad": "2 Periyot RSI Aşırı Satım/Alım Ortalamaya Dönüş",
+  "stil": "swing",
+  "kaynak": {
+   "pdf": "Algoritmik_Trading_Kısayol_Kodları_-_Kevin_J_Davey_-_Orijinal_193_sayfa.pdf",
+   "sayfalar": [
+    43,
+    44,
+    56,
+    57
+   ]
+  },
+  "ozet": "2 periyotluk RSI belirli bir eşiğin (InputVar2, 5-20) altına inerse al; 100-eşik üstüne çıkarsa sat; RSI InputVar3 (25-40) üstüne çıkınca çık.",
+  "kategori": "ortalamaya_donus",
+  "piyasa_rejimi": "yatay",
+  "orijinal_piyasa": "vadeli",
+  "zaman_dilimi": {
+   "islem": "1d",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "RSI",
+    "parametreler": {
+     "periyot": 2,
+     "giris_esik": "5-20",
+     "cikis_esik": "25-40"
+    }
+   }
+  ],
+  "long_giris": [
+   "RSI(2) giriş eşiğinin (5/10/15/20) altına kesişir -> sonraki barda al"
+  ],
+  "short_giris": [
+   "RSI(2) 100-eşiğin üstüne çıkar -> sonraki barda sat"
+  ],
+  "stop_loss": null,
+  "kar_al": "RSI(2) çıkış eşiğini (25-40) yukarı geçince long çık; short için 100-eşik",
+  "iz_suren_stop": null,
+  "zaman_cikisi": "7 bar çıkış (isteğe bağlı, kullanma)",
+  "filtreler": [],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 3,
+   "gerekce": "Tam mekanik, parametre aralıkları verilmiş."
+  },
+  "belirsizlikler": [
+   "Optimal eşik belirtilmemiş; 4x4 ızgara test edilmiş."
+  ],
+  "uyumluluk_notu": "Çalışma 40 vadeli piyasa, 60dk-günlük barlarda yapılmış; kriptoya/hisseye uygulanabilir ama parametreler yeniden test edilmeli. Hacim gerekmez. Küçük barlarda (<60dk) kitap kaymadan dolayı zarar bildiriyor.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "rsi",
+   "rsi-2",
+   "ortalamaya-donus",
+   "davey"
+  ]
+ },
+ {
+  "kart_id": "swing__connors-rsi-ortalamaya-donus-davey",
+  "ad": "Kısa Vadeli Connors RSI Ortalamaya Dönüş",
+  "stil": "swing",
+  "kaynak": {
+   "pdf": "Algoritmik_Trading_Kısayol_Kodları_-_Kevin_J_Davey_-_Orijinal_193_sayfa.pdf",
+   "sayfalar": [
+    44,
+    45,
+    56,
+    57
+   ]
+  },
+  "ozet": "ConnorsRSI(3,2,100) belirlenen eşiğin altına inerse al, 100-eşiğin üstüne çıkarsa sat; çıkış ConnorsRSI belirli üst seviyeye gelince.",
+  "kategori": "ortalamaya_donus",
+  "piyasa_rejimi": "yatay",
+  "orijinal_piyasa": "vadeli",
+  "zaman_dilimi": {
+   "islem": "1d",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "ConnorsRSI",
+    "parametreler": {
+     "parametreler": "3,2,100",
+     "giris_esik": "5-20",
+     "cikis_esik": "25-40"
+    }
+   }
+  ],
+  "long_giris": [
+   "ConnorsRSI(3,2,100) giriş eşiğinin altına kesişir -> sonraki barda al"
+  ],
+  "short_giris": [
+   "ConnorsRSI(3,2,100) 100-eşiğin üstüne kesişir -> sonraki barda sat"
+  ],
+  "stop_loss": null,
+  "kar_al": "ConnorsRSI çıkış eşiğinin üstüne (short için 100-çıkış eşiğinin altına) geçince çık",
+  "iz_suren_stop": null,
+  "zaman_cikisi": "7 bar çıkış (isteğe bağlı, kullanma)",
+  "filtreler": [],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 3,
+   "gerekce": "Mekanik; ConnorsRSI bileşenleri tanımlı standart gösterge."
+  },
+  "belirsizlikler": [
+   "ConnorsRSI tanımı kitapta ayrıca verilmemiş (standart varsayılır)."
+  ],
+  "uyumluluk_notu": "Çalışma 40 vadeli piyasa, 60dk-günlük barlarda yapılmış; kriptoya/hisseye uygulanabilir ama parametreler yeniden test edilmeli. Hacim gerekmez. Küçük barlarda (<60dk) kitap kaymadan dolayı zarar bildiriyor.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "connors-rsi",
+   "ortalamaya-donus",
+   "davey"
+  ]
+ },
+ {
+  "kart_id": "swing__ard-arda-bar-ortalamaya-donus-davey",
+  "ad": "Ardışık Düşüş/Yükseliş Barı Ortalamaya Dönüş",
+  "stil": "swing",
+  "kaynak": {
+   "pdf": "Algoritmik_Trading_Kısayol_Kodları_-_Kevin_J_Davey_-_Orijinal_193_sayfa.pdf",
+   "sayfalar": [
+    49,
+    50,
+    56,
+    57
+   ]
+  },
+  "ozet": "Fiyat 3, 4, 5 veya 6 bar üst üste düşerek kapanırsa al; ardışık yükselişlerde sat; seri bozulunca çık.",
+  "kategori": "ortalamaya_donus",
+  "piyasa_rejimi": "yatay",
+  "orijinal_piyasa": "vadeli",
+  "zaman_dilimi": {
+   "islem": "1d",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "Ardışık bar sayısı",
+    "parametreler": {
+     "N": [
+      3,
+      4,
+      5,
+      6
+     ]
+    }
+   }
+  ],
+  "long_giris": [
+   "N ardışık düşen kapanış -> sonraki barda al"
+  ],
+  "short_giris": [
+   "N ardışık yükselen kapanış -> sonraki barda sat"
+  ],
+  "stop_loss": null,
+  "kar_al": "Ardışık seri bittiğinde (ilk ters bar) çık",
+  "iz_suren_stop": null,
+  "zaman_cikisi": "7 bar çıkış (isteğe bağlı, kullanma)",
+  "filtreler": [],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 3,
+   "gerekce": "Tam mekanik."
+  },
+  "belirsizlikler": [
+   "Ardışık barın tanımı (kapanış<önceki kapanış) kodda; varsayılır."
+  ],
+  "uyumluluk_notu": "Çalışma 40 vadeli piyasa, 60dk-günlük barlarda yapılmış; kriptoya/hisseye uygulanabilir ama parametreler yeniden test edilmeli. Hacim gerekmez. Küçük barlarda (<60dk) kitap kaymadan dolayı zarar bildiriyor.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "ardisik-bar",
+   "ortalamaya-donus",
+   "davey"
+  ]
+ },
+ {
+  "kart_id": "swing__ters-kirilim-ortalamaya-donus-davey",
+  "ad": "Ters Kırılım (Anti-Breakout) Ortalamaya Dönüş",
+  "stil": "swing",
+  "kaynak": {
+   "pdf": "Algoritmik_Trading_Kısayol_Kodları_-_Kevin_J_Davey_-_Orijinal_193_sayfa.pdf",
+   "sayfalar": [
+    50,
+    51,
+    56,
+    57
+   ]
+  },
+  "ozet": "Kapanış son N barın en düşük kapanışıysa al, en yüksek kapanışıysa sat; kapanış son M barın en yüksek (long için) kapanışı olunca çık.",
+  "kategori": "ortalamaya_donus",
+  "piyasa_rejimi": "yatay",
+  "orijinal_piyasa": "vadeli",
+  "zaman_dilimi": {
+   "islem": "1d",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "En yüksek/en düşük kapanış",
+    "parametreler": {
+     "giris_N": "5-20",
+     "cikis_N": "25-40"
+    }
+   }
+  ],
+  "long_giris": [
+   "Kapanış son N barın en düşük kapanışı -> sonraki barda al"
+  ],
+  "short_giris": [
+   "Kapanış son N barın en yüksek kapanışı -> sonraki barda sat"
+  ],
+  "stop_loss": null,
+  "kar_al": "Long: kapanış son M barın en yüksek kapanışı olunca çık; short: en düşük kapanışta",
+  "iz_suren_stop": null,
+  "zaman_cikisi": "7 bar çıkış (isteğe bağlı, kullanma)",
+  "filtreler": [],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": "Kitap: kârlı vaka sayısında MA stretch ve Bollinger ile en iyi üçlüden biri.",
+  "kodlanabilirlik": {
+   "puan": 3,
+   "gerekce": "Tam mekanik."
+  },
+  "belirsizlikler": [],
+  "uyumluluk_notu": "Çalışma 40 vadeli piyasa, 60dk-günlük barlarda yapılmış; kriptoya/hisseye uygulanabilir ama parametreler yeniden test edilmeli. Hacim gerekmez. Küçük barlarda (<60dk) kitap kaymadan dolayı zarar bildiriyor.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "ters-kirilim",
+   "ortalamaya-donus",
+   "davey"
+  ]
+ },
+ {
+  "kart_id": "swing__kapanis-araligi-ortalamaya-donus-davey",
+  "ad": "Kapanış Aralığı (Closing Range) Ortalamaya Dönüş",
+  "stil": "swing",
+  "kaynak": {
+   "pdf": "Algoritmik_Trading_Kısayol_Kodları_-_Kevin_J_Davey_-_Orijinal_193_sayfa.pdf",
+   "sayfalar": [
+    51,
+    52,
+    56,
+    57
+   ]
+  },
+  "ozet": "Kapanış son N barlık aralığın alt kısmındaysa (crange < eşik) al, üst kısmındaysa (>1-eşik) sat; aralıkta orta/ters bölgeye gelince çık.",
+  "kategori": "ortalamaya_donus",
+  "piyasa_rejimi": "yatay",
+  "orijinal_piyasa": "vadeli",
+  "zaman_dilimi": {
+   "islem": "1d",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "Kapanış aralığı",
+    "parametreler": {
+     "N": "InputVar2",
+     "esik": "0.01*InputVar3-0.15"
+    }
+   }
+  ],
+  "long_giris": [
+   "crange=(close-LL(N))/(HH(N)-LL(N)) < eşik -> sonraki barda al"
+  ],
+  "short_giris": [
+   "crange > 1-eşik -> sonraki barda sat"
+  ],
+  "stop_loss": null,
+  "kar_al": "Long: crange > eşik olunca çık; short: crange < 1-eşik",
+  "iz_suren_stop": null,
+  "zaman_cikisi": "7 bar çıkış (isteğe bağlı, kullanma)",
+  "filtreler": [],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 3,
+   "gerekce": "Mekanik."
+  },
+  "belirsizlikler": [
+   "N ve eşik parametre aralıkları koda gömülü."
+  ],
+  "uyumluluk_notu": "Çalışma 40 vadeli piyasa, 60dk-günlük barlarda yapılmış; kriptoya/hisseye uygulanabilir ama parametreler yeniden test edilmeli. Hacim gerekmez. Küçük barlarda (<60dk) kitap kaymadan dolayı zarar bildiriyor.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "closing-range",
+   "ortalamaya-donus",
+   "davey"
+  ]
+ },
+ {
+  "kart_id": "swing__and-yigma-mean-reversion-davey",
+  "ad": "Ortalamaya Dönüş Sinyallerini AND ile Yığma (2+3+4)",
+  "stil": "swing",
+  "kaynak": {
+   "pdf": "Algoritmik_Trading_Kısayol_Kodları_-_Kevin_J_Davey_-_Orijinal_193_sayfa.pdf",
+   "sayfalar": [
+    60,
+    61,
+    62
+   ]
+  },
+  "ozet": "Connors RSI, Bollinger gerilmesi ve MA gerilmesi sinyallerinin hepsi aynı anda doğruysa işlem açılır (AND). Tek sinyalden çok daha iyi; OR kombinasyonu işe yaramadı.",
+  "kategori": "ortalamaya_donus",
+  "piyasa_rejimi": "yatay",
+  "orijinal_piyasa": "vadeli",
+  "zaman_dilimi": {
+   "islem": "1d",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "ConnorsRSI",
+    "parametreler": {}
+   },
+   {
+    "ad": "Bollinger %B",
+    "parametreler": {}
+   },
+   {
+    "ad": "SMA",
+    "parametreler": {}
+   }
+  ],
+  "long_giris": [
+   "Strateji 2 (ConnorsRSI) VE Strateji 3 (Bollinger stretch) VE Strateji 4 (MA stretch) aynı anda long sinyali veriyor"
+  ],
+  "short_giris": [
+   "Aynı üç stratejinin hepsi short sinyali veriyor"
+  ],
+  "stop_loss": null,
+  "kar_al": null,
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [
+   "Çok az işlem riski: işlem sayısı yeterli mi kontrol et"
+  ],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": "Kitap: AND kombinasyonu MA stretch'ten daha başarılı; OR kombinasyonu geliştirmiyor.",
+  "kodlanabilirlik": {
+   "puan": 2,
+   "gerekce": "Üç kart ve parametreleri gerekli; kombinasyon kuralı net."
+  },
+  "belirsizlikler": [
+   "Bileşen parametreleri belirsiz."
+  ],
+  "uyumluluk_notu": "Çalışma 40 vadeli piyasa, 60dk-günlük barlarda yapılmış; kriptoya/hisseye uygulanabilir ama parametreler yeniden test edilmeli. Hacim gerekmez. Küçük barlarda (<60dk) kitap kaymadan dolayı zarar bildiriyor.",
+  "varyantlar": [
+   "2+3+4+7; 2+4+7; 2+4; 2+3+4+6+7 diğer iyi kombinasyonlar"
+  ],
+  "anahtar_kelimeler": [
+   "and-kombinasyon",
+   "ortalamaya-donus",
+   "davey"
+  ]
+ },
+ {
+  "kart_id": "swing__rejim-filtresi-uzun-ma-davey",
+  "ad": "Boğa/Ayı Rejim Filtresi (uzun MA veya momentum) ile Tek Yön İşlem",
+  "stil": "swing",
+  "kaynak": {
+   "pdf": "Algoritmik_Trading_Kısayol_Kodları_-_Kevin_J_Davey_-_Orijinal_193_sayfa.pdf",
+   "sayfalar": [
+    87,
+    88,
+    91
+   ]
+  },
+  "ozet": "Kısa vadeli sinyaller yalnız büyük trend yönünde alınır: kapanış 100-200 bar MA üstündeyse sadece long, altındaysa sadece short (ya da 100-200 bar momentum işareti).",
+  "kategori": "diger",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "vadeli",
+  "zaman_dilimi": {
+   "islem": "1d",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "SMA",
+    "parametreler": {
+     "periyot": [
+      100,
+      150,
+      200
+     ]
+    }
+   }
+  ],
+  "long_giris": [
+   "Filtre: kapanış > SMA(100/150/200) iken yalnız long sinyallerini al"
+  ],
+  "short_giris": [
+   "Filtre: kapanış < SMA iken yalnız short sinyallerini al"
+  ],
+  "stop_loss": null,
+  "kar_al": null,
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [
+   "Alternatifler: N bar momentum işareti; N bar en yüksek zirvenin en düşük dipten yeni olması; ADX(N)>15; RSI(N)<70/ >30"
+  ],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": "Kitap: filtreler tek başına zararlı stratejileri kâra çevirmedi, ortalamada hepsi zarar; bazı durumlarda iyileştirme var.",
+  "kodlanabilirlik": {
+   "puan": 2,
+   "gerekce": "Kendi başına bir giriş sistemi değil, filtre; temel strateji gerekir."
+  },
+  "belirsizlikler": [
+   "Filtresiz sistemden anlamlı fark bulunamadı."
+  ],
+  "uyumluluk_notu": "Çalışma 40 vadeli piyasa, 60dk-günlük barlarda yapılmış; kriptoya/hisseye uygulanabilir ama parametreler yeniden test edilmeli. Hacim gerekmez. Küçük barlarda (<60dk) kitap kaymadan dolayı zarar bildiriyor.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "rejim-filtresi",
+   "trend-filtre",
+   "sma",
+   "davey"
+  ]
+ }
+]

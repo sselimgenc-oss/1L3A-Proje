@@ -1,0 +1,65 @@
+[
+ {
+  "kart_id": "scalp__compression-price-spike-scalp__rudd",
+  "ad": "Compression / Price Spike Scalp (gün zirvesindeki 20-30 dk konsolidasyon)",
+  "stil": "scalp",
+  "kaynak": {
+   "pdf": "Günlük_Alım_Satım_ve_Swing_Trading_için_Hisse_Senedi_Formasyonları_-_Barry_Rudd_-_Orijinal.pdf",
+   "sayfalar": [
+    137,
+    138,
+    139,
+    145
+   ]
+  },
+  "ozet": "Gün içi 5m'de günün zirvesi/dibine yapışan 20-30 dakika+ sıkışma kırılınca momentum 'spike' yaratır; 1000 hisse ile 1/8-1/4 puan kâr için bid/offer atılır, maksimum kayıp 1/8 puan.",
+  "kategori": "kirilim",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+   "islem": "5m",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "Gün içi yüksek/düşük",
+    "parametreler": {}
+   },
+   {
+    "ad": "Level 2",
+    "parametreler": {}
+   }
+  ],
+  "long_giris": [
+   "5m: konsolidasyon günün zirvesine yapışık, en az 20-30 dk (ne kadar uzun o kadar iyi)",
+   "Kırılım öncesi fiyatta (veya kırılım fiyatında) market maker / time&sales momentumunu izleyerek al"
+  ],
+  "short_giris": [
+   "Aynalı: günün dibine yapışık sıkışma, aşağı kırılım"
+  ],
+  "stop_loss": "Maks. kayıp 1/8 puan (spread 1/8 olan hisseler); başabaşta çık",
+  "kar_al": "Dolumdan hemen sonra 1/8-1/4 (bazen 3/8) puan kâr limit emri; momentum yavaşlarsa çık",
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [],
+  "pozisyon_risk": "İşlem başına en fazla $125 risk (1000 hisse x 1/8)",
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 0,
+   "gerekce": "Level 2 / saniyelik momentum ve 1/8 spread gerektirir; 5m verisiyle kodlanamaz."
+  },
+  "belirsizlikler": [
+   "Tick/emir defteri verisi gerekir",
+   "Kesirli fiyat adımı"
+  ],
+  "uyumluluk_notu": "Emir defteri (market maker, time&sales) ve çok küçük spread (1/8) ister; ≥5m kodlamada anlamlı değil. Kesirli fiyat dönemi.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "scalp",
+   "level-2",
+   "konsolidasyon",
+   "spike",
+   "gun-ici"
+  ]
+ }
+]

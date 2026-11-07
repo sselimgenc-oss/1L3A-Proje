@@ -1,0 +1,193 @@
+[
+ {
+  "kart_id": "daytrade__olculu-hareket-yuzde50-geleneksel__halsey",
+  "ad": "Geleneksel %50 Ölçülü Hareket (Fibonacci %50 Geri Çekilme, %123 Hedef)",
+  "stil": "daytrade",
+  "kaynak": {
+   "pdf": "Ölçülü_Hareketle_Trading_-_Algoritmalar_ve_Yüksek_Frekanslı_Ticaret_Dünyasında_Başarılı_Bi.pdf",
+   "sayfalar": [
+    77,
+    78,
+    79,
+    100,
+    101,
+    102,
+    103,
+    104
+   ]
+  },
+  "ozet": "Fiyat ilk ralli (veya düşüşün) mesafesinin %50'sine geri çekildiğinde, o seviyeye (iki tik önünden) limit emirle trend yönünde girilir; hedef ilk hareketin %123 uzantısı. İlk testte (ilk dokunuş) en yüksek olasılık, ikinci testte daha küçük boyut/stop.",
+  "kategori": "destek_direnc",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "vadeli",
+  "zaman_dilimi": {
+   "islem": "15m",
+   "ust_filtre": "1h"
+  },
+  "gostergeler": [
+   {
+    "ad": "Fibonacci",
+    "parametreler": {
+     "geri_cekilme": 0.5,
+     "hedef_uzantisi": 1.23
+    }
+   }
+  ],
+  "long_giris": [
+   "Ralli (dipten zirveye) tamamlanmış; fiyat bu mesafenin %50'sine geri çekilir -> limit al, 2 tik önünden (ES) / emir sırası öncelikli"
+  ],
+  "short_giris": [
+   "Düşüşün %50 geri çekilmesi -> limit sat (ayna)"
+  ],
+  "stop_loss": "ES: giriş-6 tik (ikinci testte 4 tik: katılım seviyesinin 2 tik altı); 6E: -8 pip; hedefe ulaşınca stop breakeven",
+  "kar_al": "Hedef: ilk hareketin %123'ü (Fibonacci -23 seviyesi); ES için ilk hedef +2, sonra stop -6'dan -4'e",
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [
+   "İlk test dolmazsa limit emri çek, kovalama; breakeven çıkış sonrası dur, ikinci testi veya sonraki ölçülü hareketi bekle",
+   "Daha büyük zaman diliminin %123 hedefi çakışıyorsa güvenme"
+  ],
+  "pozisyon_risk": "%1 kuralı: işlem başına hesabın en fazla %1'i; tek kontratta all-in/all-out (stop 6 tick ES, 8 pip 6E).",
+  "iddia_edilen_performans": "Kitap: örnek EURUSD (513 pip, 14 gün) ve ES; sayısal doğruluk oranı veya başarı yüzdesi verilmiyor.",
+  "kodlanabilirlik": {
+   "puan": 2,
+   "gerekce": "Kurallar ayrıntılı ama swing başlangıç/bitiş (ilk ralli) tanımı görsel; limit önüne geçme tick sayısı vadeliye özgü."
+  },
+  "belirsizlikler": [
+   "İlk ralli swing noktalarının otomatik tespiti tanımsız.",
+   "Zaman dilimi aşağı-yukarı zinciri (günlük->15dk->mikro) kitapta kavramsal.",
+   "Tik/pip stop değerleri enstrümana özgü."
+  ],
+  "uyumluluk_notu": "ES/6E vadelilerinde 15dk-günlük; Fibonacci %50 geri çekilme tespiti için swing noktaları kod gerektirir. Hacim gerekmez. Kripto perpetual'da ≥5m çalışır; 'tick önünden limit' mantığı likiditeye bağlı.",
+  "varyantlar": [
+   "İkinci testin ön koşusu (4 tik stop)",
+   "Trend kırılması sonrası sonraki ölçülü hareket"
+  ],
+  "anahtar_kelimeler": [
+   "fibonacci",
+   "olculu-hareket",
+   "yuzde-50",
+   "limit-giris"
+  ]
+ },
+ {
+  "kart_id": "daytrade__olculu-hareket-uzatma-yuzde50__halsey",
+  "ad": "Uzatma (Extension) %50 Ölçülü Hareket",
+  "stil": "daytrade",
+  "kaynak": {
+   "pdf": "Ölçülü_Hareketle_Trading_-_Algoritmalar_ve_Yüksek_Frekanslı_Ticaret_Dünyasında_Başarılı_Bi.pdf",
+   "sayfalar": [
+    80,
+    81,
+    82
+   ]
+  },
+  "ozet": "Geleneksel ölçülü hareketin %123 hedefi geçilip geri çekilme olmazsa, yeni zirveden başlayan yeni bir %50 uzatma kurulumu oluşur; fiyat bu yeni %50'ye geri çekilince trend yönünde girilir. İlk uzatmaya güvenilmez, yalnız gözlenir.",
+  "kategori": "destek_direnc",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "vadeli",
+  "zaman_dilimi": {
+   "islem": "15m",
+   "ust_filtre": "1h"
+  },
+  "gostergeler": [
+   {
+    "ad": "Fibonacci",
+    "parametreler": {
+     "geri_cekilme": 0.5,
+     "hedef_uzantisi": 1.23
+    }
+   }
+  ],
+  "long_giris": [
+   "Geleneksel %50 MM'nin %123 hedefi ulaşıldı ve geri çekilmeden yeni yüksekler yapıldı",
+   "Yeni uzatma %50 seviyesine geri çekilme -> trend yönünde limit al (ilk uzatma yalnız gözlem)"
+  ],
+  "short_giris": [
+   "Aynı mantık ters: düşüşte uzatma %50 geri çekilme -> sat"
+  ],
+  "stop_loss": "Geleneksel kuralla aynı (ES 6 tik)",
+  "kar_al": "Yeni %123 hedefi (aynı çapadan)",
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [
+   "İlk uzatma güvenilmez, gözle; sonraki uzatmalarda işlem"
+  ],
+  "pozisyon_risk": "%1 kuralı: işlem başına hesabın en fazla %1'i; tek kontratta all-in/all-out (stop 6 tick ES, 8 pip 6E).",
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 2,
+   "gerekce": "Çapa (anchor) ve uzatma %50 seviyeleri swing tanımına bağlı."
+  },
+  "belirsizlikler": [
+   "Çapa seçimi görsel."
+  ],
+  "uyumluluk_notu": "ES/6E vadelilerinde 15dk-günlük; Fibonacci %50 geri çekilme tespiti için swing noktaları kod gerektirir. Hacim gerekmez. Kripto perpetual'da ≥5m çalışır; 'tick önünden limit' mantığı likiditeye bağlı.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "fibonacci",
+   "uzatma",
+   "olculu-hareket"
+  ]
+ },
+ {
+  "kart_id": "daytrade__yuzde618-basarisizlik-trend-kirilimi__halsey",
+  "ad": "%61.8 Başarısızlık ve Trend Kırılımı Sonrası İlk Geri Çekilme",
+  "stil": "daytrade",
+  "kaynak": {
+   "pdf": "Ölçülü_Hareketle_Trading_-_Algoritmalar_ve_Yüksek_Frekanslı_Ticaret_Dünyasında_Başarılı_Bi.pdf",
+   "sayfalar": [
+    83,
+    84,
+    85
+   ]
+  },
+  "ozet": "Geleneksel %50 ölçülü hareket girişinden sonra fiyat ikinci testte tutunamayıp %61.8 seviyesini kırarsa seri biter ve trend döner; karşıt ölçülü hareketin kırılmasından sonraki ilk geri çekilme yeni trend yönünde alınır.",
+  "kategori": "destek_direnc",
+  "piyasa_rejimi": "volatil",
+  "orijinal_piyasa": "vadeli",
+  "zaman_dilimi": {
+   "islem": "15m",
+   "ust_filtre": "1h"
+  },
+  "gostergeler": [
+   {
+    "ad": "Fibonacci",
+    "parametreler": {
+     "seviye": 0.618
+    }
+   }
+  ],
+  "long_giris": [
+   "Karşıt (ters yön) geleneksel %50 MM kırılır (trend kırılması)",
+   "İlk geri çekilmede yeni trend yönünde giriş (örn. önceki short MM kırıldığında long)"
+  ],
+  "short_giris": [
+   "Aynı mantık ayna"
+  ],
+  "stop_loss": "Kitap açık stop vermiyor (ES: ilk test kuralları 6 tik)",
+  "kar_al": "Yeni %123 hedefi",
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [
+   "Önceki zirve/dip retesti sonrası geri çekilme tehlikeli (çift tepe riski), girme"
+  ],
+  "pozisyon_risk": "%1 kuralı: işlem başına hesabın en fazla %1'i; tek kontratta all-in/all-out (stop 6 tick ES, 8 pip 6E).",
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 1,
+   "gerekce": "Giriş zamanı ve stop belirsiz; ağırlıklı yorum."
+  },
+  "belirsizlikler": [
+   "%61.8 kırılışı için kapanış mı dokunuş mu kitapta yok.",
+   "Stop ve kar al açık değil."
+  ],
+  "uyumluluk_notu": "ES/6E vadelilerinde 15dk-günlük; Fibonacci %50 geri çekilme tespiti için swing noktaları kod gerektirir. Hacim gerekmez. Kripto perpetual'da ≥5m çalışır; 'tick önünden limit' mantığı likiditeye bağlı.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "fibonacci",
+   "yuzde-618",
+   "trend-donusu"
+  ]
+ }
+]
