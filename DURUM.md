@@ -97,10 +97,17 @@ Ana ders: önceki sonuçlar OOS'a bakılarak seçilmiş ve kâr birkaç işlemde
 - Katman 3b (kripto) ✅: sağlamlık (`motor/arastirma/saglamlik.py`; kapılar: maliyet×2 PF≥1.05, rastgele giriş p≤0.05,
   bootstrap PF alt sınırı >1, komşu parametrelerin ≥%60'ında PF>1). 32 adaydan 13'ü geçti (öneri). Uyarılar: Bonferroni'yi
   hiçbiri geçmiyor; aynı strateji komşu sembol/TF'de çoğunlukla zayıf; DSR ≈ 0.
+- Portföy katmanı (karar 23) ✅ motor + 15 strateji sınıfı (71 adaydan 54 bağlandı) + portföy walk-forward.
+  Kripto: 0/15 karar 13; 8'i Sharpe'ta al-tutu geçiyor; 2022'de al-tut −%75, çoğu strateji −%14..+%5.
 - Veri ⏳: Dukascopy (karar 22). DK_AAPL 5m tamam (2017–); dakikalık indirme yavaş (9–30 saat). Hızlı yol: aylık
   saatlik dosyalar → swing/daytrade 1h+ testleri önce; 15m/30m dakikalık veri tamamlanınca.
 
 ## Kullanıcıyı bekleyen kararlar
+- **Portföy stratejileri için eleme eşiği:** karar 13'ün "≥50 işlem" şartı aylık/haftalık rotasyonlara yapısal olarak ağır
+  (kriptoda 0/15 geçti; çoğu 20–36 işlem). Öneri: portföyde işlem sayısı yerine "≥ 3 yıl OOS + ≥ 20 yeniden dengeleme"
+  ve Sharpe/düşüş ölçütü. Kullanıcı kararı.
+- **%1 işlem riski × geniş ATR stopu → portföyde çok düşük maruziyet** (ortalama brüt 0.01–0.15x). Sert limit; değişmez
+  ama portföy stratejilerinde stop tanımı (ör. daha dar stop ya da portföy düzeyi risk bütçesi) kullanıcıyla konuşulmalı.
 - Scalp: kriptoda walk-forward'ı geçen 0. Karar 11'e göre geçen yoksa scalp ajanı kapanır — TradFi sonuçlarından sonra karar.
 - Final seçim (ajan başına ~3) ve kilitli dönemin açılması (karar 20) — kullanıcı onayıyla.
 - Karar 13 eşikleri çoklu test düzeltmesi içermiyor; sağlamlık paketi öneri kapısı ekliyor (son karar kullanıcıda).
