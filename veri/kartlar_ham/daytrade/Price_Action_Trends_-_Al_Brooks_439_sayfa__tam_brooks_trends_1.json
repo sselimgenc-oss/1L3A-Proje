@@ -1,0 +1,684 @@
+[
+ {
+  "kart_id": "daytrade__ters-cubuk-sinyali__brooks_t1",
+  "ad": "Ters Cubuk (Reversal Bar) Sinyal Cubugu Girisi",
+  "stil": "daytrade",
+  "kaynak": {
+   "pdf": "Price Action Trends - Al Brooks (439 sayfa) - @eseckal.pdf",
+   "sayfalar": [
+    106,
+    107,
+    108,
+    109,
+    110,
+    111,
+    117
+   ]
+  },
+  "ozet": "Yonu tersine ceviren cubuk (boga: alttan uzun kuyruk, acilis ustu kapanis) sinyal cubugu olur; cubugun 1 tik otesindeki stop emriyle girilir. Karsi trendde yalniz trend cizgisi kirilimi ve ekstrem testi sonrasi guclu ters cubukta; onceki cubuklarla asiri ortusme varsa aralik sayilip alinmaz.",
+  "kategori": "formasyon",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "vadeli",
+  "zaman_dilimi": {
+   "islem": "5m",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "EMA",
+    "parametreler": {
+     "periyot": 20
+    }
+   }
+  ],
+  "long_giris": [
+   "Boga ters cubuk: kapanis acilisin ustunde (minimum) veya cubugun orta noktasinin ustunde",
+   "Giris: sinyal cubugu high'inin 1 tik ustune buy-stop (hisse icin birkac tik ustu daha guvenli); cubuk kapanmadan girilmez",
+   "Kaliteli: acilis onceki kapanisa yakin/alti, kapanis acilis ve onceki kapanis ustu; alt kuyruk cubuk yuksekliginin ~1/3-1/2'si, ust kuyruk kucuk/yok; onceki cubuklarla az ortusme; kapanis birden cok onceki cubugun kapanis ve high'ini tersliyor"
+  ],
+  "short_giris": [
+   "Ayi ters cubuk: kapanis acilisin altinda veya orta noktanin altinda; ayna kosullar; giris low'un 1 tik altina sell-stop"
+  ],
+  "stop_loss": "Sinyal cubugunun karsi ucunun 1 tik otesi (ornek: 8 tik cubuk + 1 tik giris + 1 tik stop = 10 tik risk)",
+  "kar_al": "Kitapta sabit hedef yok; kitap ornegi: 20+ tik hedef planlanabilir; kismi kar al, stopu basabasa tasi, kalani birak",
+  "iz_suren_stop": "Giris cubugu kapaninca stopu sinyal cubugu ucundan giris cubugu ucunun otesine cek; basabas stop",
+  "zaman_cikisi": "Giris cubugu doji/ic cubuksa ve sinyal zayifsa basabas veya 1-2 tik zararla cikmaya calis",
+  "filtreler": [
+   "Ortusme kurali: boga ters cubugun orta noktasi onceki cubugun low'unun USTUNDEYSE asiri ortusme -> aralik, sinyal sayma (ayi icin tersi)",
+   "Buyuk doji (govde yok, cubuk buyuk) ters cubuk degildir; kuyrugu karsi uca buyukse (boga cubugunun ust kuyrugu buyuk) alma",
+   "Sinyal cubugu son cubuklara gore cok kucuk veya kucuk govdeliyse zayif",
+   "Guclu trende karsi trend: once trend cizgisi guclu momentumla kirilmali, sonra ekstrem testinde guclu ters cubuk",
+   "MA hemen uzerinde 3+ buyuk ortusen cubuklu boga bayragindaki guclu boga cubugu yaklasik %60 tuzak (kitap)",
+   "1 dakikalik ters cubukta girme; guclu trende donuste ilk girisi atla, ikinci girisi bekle"
+  ],
+  "pozisyon_risk": "Kitap: yeni baslayan sinyal cubugu islem yonunde trend cubugu olmali; karsi trend girisleri trendli girislerden guclu sinyal cubugu ister",
+  "iddia_edilen_performans": "Cogu trend girisi ters cubuk olmadan olur; ters cubuk tek basina islem nedeni degildir",
+  "kodlanabilirlik": {
+   "puan": 2,
+   "gerekce": "Ters cubuk kosullari OHLC ile olculur; 'asiri ortusme' icin kitapta orta nokta kurali var; ama bagimli oldugu trend cizgisi/ekstrem testi ve 'tuzak' ayrimi yoruma acik."
+  },
+  "belirsizlikler": [
+   "Kuyruk orani ve 'kucuk' ust kuyruk icin sayisal sinir yok (1/3-1/2 yalniz alt kuyruk icin)",
+   "Hedef kitapta sayi olarak verilmemis (olcullu hareket vb.); R:R belirtilmemis",
+   "Hisse icin 'birkac tik' giris payi sayisal degil; kripto/hisseye ATR orani uygulanmali (oneri, kural degil)",
+   "Karsi trend filtresi (trend cizgisi kirilimi) otomatik tanimi yok"
+  ],
+  "uyumluluk_notu": "Orijinal: E-mini S&P 5dk (PST seans, ABD hisse). OHLC ile her piyasada hesaplanir, hacim gerekmez; seans saatleri (PST) kripto 7/24'te UTC gun acilisina yaklasik uyarlanir. Kitap yorumlu okuma agirlikli; 5m'de komisyon etkisi ayri test edilmeli.",
+  "varyantlar": [
+   "Karsi trend ve trendli kullanim ayni kural; trend ne kadar guclu o kadar az onemli (kitap, s91)"
+  ],
+  "anahtar_kelimeler": [
+   "ters-cubuk",
+   "sinyal-cubugu",
+   "reversal-bar",
+   "brooks",
+   "ortusme",
+   "stop-girisi"
+  ]
+ },
+ {
+  "kart_id": "daytrade__iki-uc-cubuk-ters-donus__brooks_t1",
+  "ad": "Iki ve Uc Cubuklu Ters Donus (Two/Three-Bar Reversal)",
+  "stil": "daytrade",
+  "kaynak": {
+   "pdf": "Price Action Trends - Al Brooks (439 sayfa) - @eseckal.pdf",
+   "sayfalar": [
+    119,
+    120,
+    121,
+    130,
+    131,
+    133,
+    134,
+    135,
+    136,
+    137
+   ]
+  },
+  "ozet": "Zit yonde, yaklasik ayni govdeli iki ardisik trend cubugu iki cubuklu ters donustur; giris iki cubugun de ucunun 1 tik otesindedir. Ucuncu cubuk kucuk/doji ise uc cubuklu ters donus (15m cubuguyla ayni anda kapaniyorsa daha guvenilir). Guclu tukenme sonrasi (climax) ve hareketli ortalama geri cekilmesinin sonunda guvenilir.",
+  "kategori": "formasyon",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "vadeli",
+  "zaman_dilimi": {
+   "islem": "5m",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "EMA",
+    "parametreler": {
+     "periyot": 20
+    }
+   }
+  ],
+  "long_giris": [
+   "Ayi cubugunu hemen takip eden boga trend cubugu (ayi trend dibi/duzeltme sonu) iki cubuklu boga donusudur",
+   "Giris: iki cubugun yuksek olani high'inin 1 tik ustune buy-stop (ikinci cubuk onceki cubugun ~%75'inden fazlasini ortusuyorsa iki cubukluk aralik: giris ikisinin de ucunun otesinde)",
+   "Uc cubuk varyanti: 1. ve 3. cubuk zit trend cubuklari, ortadaki kucuk/doji; 15m cubugu ile ayni anda tamamlanirsa tercih edilir"
+  ],
+  "short_giris": [
+   "Boga trend cubugu + hemen ardindan ayi trend cubugu (iki cubuklu ters tepe), giris ikisinin low'unun 1 tik altina sell-stop"
+  ],
+  "stop_loss": "Kitapta acik formul yok; iki cubugun karsi ucunun otesi (ii icin verilen mantik ve sinyal cubugu stopuna benzer)",
+  "kar_al": null,
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [
+   "Iki cubuk onceki cubuklarla cok ortusuyorsa (ozellikle hareketli ortalamaya yakin, 3+ buyuk ortusen cubuk) kirilim sik basarisiz: islem aralik sayilir",
+   "Guclu trende ilk ters donus denemesini alma; ikinci denemeyi bekle (ya da tukenme/climax sonrasi guclu iki cubuk)",
+   "Trend gucluyse (9 cubuk yukari gibi) ters yone iki cubuklu donus kisa girme; geri cekilme sonunda trend yonunde kullan",
+   "Ayi cubugu onceki boga trend cubugunun altina iniyorsa dis cubuk gibi davran (s121)"
+  ],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": "Kitap: iki cubuklu donus en yaygin donus kurulumlarindan; %'lik basari verilmemis",
+  "kodlanabilirlik": {
+   "puan": 1,
+   "gerekce": "Kurulum geometrisi olculur ama kitapta stop, hedef ve ortusme esigi sayisal degil; 'guclu trend' ve 'climax' baglami yoruma acik."
+  },
+  "belirsizlikler": [
+   "Stop mesafesi ve hedef kitapta net degil",
+   "'Yaklasik ayni govde' ve %75 ortusme disinda sayisal esik yok",
+   "Ters kullanim: 'yeterince ortusuyorsa kirilim basarisiz' ifadesi aralik/trend ayrimina bagli"
+  ],
+  "uyumluluk_notu": "Orijinal: E-mini S&P 5dk (PST seans, ABD hisse). OHLC ile her piyasada hesaplanir, hacim gerekmez; seans saatleri (PST) kripto 7/24'te UTC gun acilisina yaklasik uyarlanir. Kitap yorumlu okuma agirlikli; 5m'de komisyon etkisi ayri test edilmeli.",
+  "varyantlar": [
+   "Tek cubuk ters cubuk ve iki cubuk ayni olgunun degisik zaman dilimi gorunumu (kitap)"
+  ],
+  "anahtar_kelimeler": [
+   "iki-cubuk-ters-donus",
+   "uc-cubuk-ters-donus",
+   "2-bar-reversal",
+   "brooks"
+  ]
+ },
+ {
+  "kart_id": "daytrade__ic-cubuk-ii-ioi-kirilim-modu__brooks_t1",
+  "ad": "Ic Cubuk, ii / iii ve ioi Kirilim Modu Kurulumu",
+  "stil": "daytrade",
+  "kaynak": {
+   "pdf": "Price Action Trends - Al Brooks (439 sayfa) - @eseckal.pdf",
+   "sayfalar": [
+    122,
+    125,
+    126,
+    127,
+    128,
+    131,
+    143,
+    171,
+    172,
+    177
+   ]
+  },
+  "ozet": "Ic cubuk (high<=onceki high, low>=onceki low), iki ardisik ic cubuk (ii), ii'nin uzantisi iii ve ic-dis-ic (ioi) kirilim modu kurulumlaridir: son ic cubugun ustune buy-stop, altina sell-stop konur, dolan emir yon olur, dolmayan emir koruyucu stop olur. Uzun harekete sonra trend yonlu ii kirilimi genelde sadece scalp (son bayrak); karsi trend ii kirilimi buyuk donus uretebilir.",
+  "kategori": "kirilim",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "vadeli",
+  "zaman_dilimi": {
+   "islem": "5m",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "EMA",
+    "parametreler": {
+     "periyot": 20
+    }
+   }
+  ],
+  "long_giris": [
+   "Kurulum: ii (ikinci ic cubuk birincinin icinde ve ayni/daha kucuk) veya iii veya ioi (ic-dis-ic)",
+   "Giris: son ic cubugun high'inin 1 tik ustune buy-stop",
+   "Ic cubuk govdesi giris yonunde ise (boga govdeli) daha guvenilir; kapanis giris yonunde tercih"
+  ],
+  "short_giris": [
+   "Giris: son ic cubugun low'unun 1 tik altina sell-stop (iki emir birlikte kirilim modu); ic cubuk ayi govdeli ise daha guvenilir"
+  ],
+  "stop_loss": "Iki cubugun karsi ucunun otesi (cubuklar buyukse yalniz ikinci cubugun karsi ucu); dolmayan emir stop olur",
+  "kar_al": "Kitapta yok (uzun hareketten sonra trend yonlu ii sadece scalp)",
+  "iz_suren_stop": "Giris cubugu kapaninca stopu giris cubugunun otesine cek",
+  "zaman_cikisi": null,
+  "filtreler": [
+   "Buyuk ic cubuk veya dikenli tel (cok ortusen buyuk cubuklar) icinde kirilima girme; ii gun araligi ortasinda ise kirilim hemen basarisiz olabilir",
+   "Ic cubuk bir aralik/trend cubugu kirilimindan sonra geliyorsa ve trend cubugunun ters yonundeyse donus ihtimali artar",
+   "Dolan ilk emir basarisiz olursa (kirilim basarisizligi) ters yone donmek kitapta onerilir (basarisiz kirilimda buy-stop miktarini ikiye katlama dusunulebilir, kitap oneri olarak verir)",
+   "10:00-11:00 PST arasi MA'ya yakin kucuk doji ic cubuk sinyali yuksek basarisizlik",
+   "Cok karisik/duygusal geliyorsa emir verme"
+  ],
+  "pozisyon_risk": "Dar bir aralikta durak icin yer birak; risk sabit tutulacaksa pozisyon kucult",
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 2,
+   "gerekce": "Ic cubuk, ii, iii, ioi tam tanimlanir ve kirilim emri mekaniktir; ancak hangi kurulumun alinacagi (buyuk/kucuk, aralik ici/disi) yoruma bagli."
+  },
+  "belirsizlikler": [
+   "Stop tek hesapla verilmemis (iki cubuk veya yalniz ikinci)",
+   "Hedef ve zaman cikisi kitapta yok",
+   "'Ic cubuk buyuk' sayisal esik yok",
+   "Karar kurali olarak 'basarisiz kirilimda ters donme' iki yonlu otomatik kodlamada ayri ele alinmali"
+  ],
+  "uyumluluk_notu": "Orijinal: E-mini S&P 5dk (PST seans, ABD hisse). OHLC ile her piyasada hesaplanir, hacim gerekmez; seans saatleri (PST) kripto 7/24'te UTC gun acilisina yaklasik uyarlanir. Kitap yorumlu okuma agirlikli; 5m'de komisyon etkisi ayri test edilmeli.",
+  "varyantlar": [
+   "ioi, oo (dis cubuk ardindan daha buyuk dis cubuk) ve ii farkli kirilim modu varyantlari",
+   "Yalniz govdeler ii (kuyruklar yoksayilir, daha az guvenilir)"
+  ],
+  "anahtar_kelimeler": [
+   "ic-cubuk",
+   "ii",
+   "iii",
+   "ioi",
+   "kirilim-modu",
+   "inside-bar",
+   "brooks"
+  ]
+ },
+ {
+  "kart_id": "daytrade__dis-cubuk-giris-ve-ioi__brooks_t1",
+  "ad": "Dis Cubuk (Outside Bar) Giris ve Tuzagi",
+  "stil": "daytrade",
+  "kaynak": {
+   "pdf": "Price Action Trends - Al Brooks (439 sayfa) - @eseckal.pdf",
+   "sayfalar": [
+    171,
+    172,
+    173,
+    174,
+    175,
+    177,
+    179,
+    180,
+    182,
+    183
+   ]
+  },
+  "ozet": "Dis cubuk (high onceki high ustunde, low onceki low altinda) tek cubuklu aralik sayilir; kirilimi ters emirle almak onerilmez. Iyi bir sinyal cubugunun ardindan o sinyali ters yone ceviren dis cubuk (tuzaga dusurulen karsi taraf) guvenilir giristir; aralik ortasinda anlamsizdir.",
+  "kategori": "formasyon",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "vadeli",
+  "zaman_dilimi": {
+   "islem": "5m",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "EMA",
+    "parametreler": {
+     "periyot": 20
+    }
+   }
+  ],
+  "long_giris": [
+   "Onceki cubuk iyi boga sinyal cubugu iken piyasa onun altina inip geri doner ve onceki cubuk high'ini asar: bekleyen buy-stop doldugunda dis cubuk giris cubugu olur",
+   "Trend cizgisi/trend kanal cizgisi asimi sonrasi ikinci ters giriste dis cubuk de kabul edilir",
+   "Tercihen kapanisi bekle: dis cubuk high'ina yakin kapaniyorsa dis cubugun high'inin ustunde gir (kapanisi onaylamak icin daha guvenli)",
+   "Dis cubuk trend donusunun ilk bacaginda guclu trend cubugu gibi davranir: yon donus tarafinda islem"
+  ],
+  "short_giris": [
+   "Ayi dis cubuk kapanisi dusukte (onceki cubuklarin boga govdelerini kilitleyerek) ise low'un altina kisa girilebilir (agresif); ayna kurallar"
+  ],
+  "stop_loss": "Buyuk dis cubukta risk yuksek: para stopu (kitap: Emini'de iki puan) veya daha az sozlesme",
+  "kar_al": null,
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [
+   "Dis cubuk aralik ortasinda ise anlamsiz; yalniz ucuna yakin kucuk cubuk sonrasi kullan",
+   "Dis cubuk + sonraki ic cubuk (ioi): yalniz hedefe yer varsa; buyuk ic cubuk/dikenli tel ici beklenir",
+   "Buyuk dis cubuk 5m'de iki yonlu stop-ve-ters (geleneksel) yontemi onerilmez",
+   "Onceki cubuk duzgun sinyal cubugu degilse dis cubukta ters islem yapma"
+  ],
+  "pozisyon_risk": "Kitap: kararsizsan fiyat hareketi gelismesini bekle",
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 1,
+   "gerekce": "Dis cubuk OHLC ile tanimli, ama 'onceki cubuk iyi sinyal cubugu' ve baglam (trend cizgisi, ikinci giris) yorum gerektirir; hedef/stop sayisal degil."
+  },
+  "belirsizlikler": [
+   "Hedef/stop formulu yok",
+   "Hangi dis cubugun 'guclu trend cubugu' gibi sayildigi baglama bagli",
+   "Dikenli tel icin sayisal tanim yok (kitapta 'cok ortusen cubuklar')"
+  ],
+  "uyumluluk_notu": "Orijinal: E-mini S&P 5dk (PST seans, ABD hisse). OHLC ile her piyasada hesaplanir, hacim gerekmez; seans saatleri (PST) kripto 7/24'te UTC gun acilisina yaklasik uyarlanir. Kitap yorumlu okuma agirlikli; 5m'de komisyon etkisi ayri test edilmeli.",
+  "varyantlar": [
+   "oo: dis cubuk ardindan daha buyuk dis cubuk (daha genis aralik); oio"
+  ],
+  "anahtar_kelimeler": [
+   "dis-cubuk",
+   "outside-bar",
+   "ioi",
+   "oo",
+   "brooks",
+   "tuzak"
+  ]
+ },
+ {
+  "kart_id": "daytrade__mikro-cift-dip-tepe-tek-cubuk-bayrak__brooks_t1",
+  "ad": "Mikro Cift Dip / Tepe ve Tek Cubuklu Bayrak",
+  "stil": "daytrade",
+  "kaynak": {
+   "pdf": "Price Action Trends - Al Brooks (439 sayfa) - @eseckal.pdf",
+   "sayfalar": [
+    123,
+    124,
+    127,
+    143,
+    144,
+    145
+   ]
+  },
+  "ozet": "Ayni (veya cok yakin) low/high'a sahip ardisik veya neredeyse ardisik cubuklar mikro cift dip/tepe olusturur; kucuk donuslerin cogu bunlardan gelir. Ayi yukselisinde ayi cubugu ardindan ayni low'da acilan boga cubugu tek cubuklu ayi bayragidir (low'un 1 tik altina sat); boga yukselisinde ayna.",
+  "kategori": "formasyon",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "vadeli",
+  "zaman_dilimi": {
+   "islem": "5m",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "EMA",
+    "parametreler": {
+     "periyot": 20
+    }
+   }
+  ],
+  "long_giris": [
+   "Boga yukselisinde ayi trend cubugu hemen ardindan ayni high'a yakin acilan ayi cubugu = tek cubuklu boga bayragi (H1): yuksek high'in 1 tik ustune buy-stop",
+   "Mikro cift dip sonrasi kucuk boga donusu: ikinci dibin ustunde alim (kucuk donusler mikro cift dipten)",
+   "Daha erken giris: tek cubuk geri cekilmesinin high'inin ustu (4 tik daha kotu ama daha az guvenli)"
+  ],
+  "short_giris": [
+   "Ayi yukselisinde boga cubugu hemen ardindan ayni low'a yakin: mikro cift dip tek cubuklu ayi bayragi: low'un 1 tik altina sell-stop"
+  ],
+  "stop_loss": "Kitapta yok",
+  "kar_al": null,
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [
+   "Ust uste gelen 3 cubugun kirilmasindan sonra buyuk cubuk ustunden almak riskli (aralik baslangici)",
+   "Ayni fiyat gerekmez ('yakin yeterince yakin')",
+   "Aralik gunu ortasinda bir ust kirilim basarisiz olabilir"
+  ],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 1,
+   "gerekce": "Cok kisa vadeli, tanimi 'ayni veya hemen hemen ayni' olan, kitapta stop/hedef/sayisal esik olmayan kurulum."
+  },
+  "belirsizlikler": [
+   "'Hemen hemen ayni' tolerans yok",
+   "Stop, hedef yok",
+   "5m'de komisyon sonrasi anlamliligi belirsiz"
+  ],
+  "uyumluluk_notu": "Orijinal: E-mini S&P 5dk (PST seans, ABD hisse). OHLC ile her piyasada hesaplanir, hacim gerekmez; seans saatleri (PST) kripto 7/24'te UTC gun acilisina yaklasik uyarlanir. Kitap yorumlu okuma agirlikli; 5m'de komisyon etkisi ayri test edilmeli.",
+  "varyantlar": [
+   "Mikro cift tepe: ayni high'li ardisik cubuklar"
+  ],
+  "anahtar_kelimeler": [
+   "mikro-cift-dip",
+   "mikro-cift-tepe",
+   "tek-cubuk-bayrak",
+   "brooks"
+  ]
+ },
+ {
+  "kart_id": "daytrade__trend-cizgisi-kirilimi-ekstrem-testi__brooks_t1",
+  "ad": "Trend Cizgisi Kirilimi ve Ekstrem Testi (Karsi Trend)",
+  "stil": "daytrade",
+  "kaynak": {
+   "pdf": "Price Action Trends - Al Brooks (439 sayfa) - @eseckal.pdf",
+   "sayfalar": [
+    29,
+    30,
+    102,
+    106,
+    108,
+    206,
+    207,
+    208,
+    209
+   ]
+  },
+  "ozet": "Guclu trende karsi islem icin once trend cizgisinin guclu momentumla kirilmasi, sonra eski ekstremin (zirve/dip) testinde guclu ters cubuk beklenir. Kirilim tek basina donus degildir; cogu zaman ilk geri donus denemesi basarisiz olur. Test daha yuksek/dusuk ekstrem veya cift tepe/dip verebilir.",
+  "kategori": "formasyon",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "vadeli",
+  "zaman_dilimi": {
+   "islem": "5m",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "EMA",
+    "parametreler": {
+     "periyot": 20
+    }
+   }
+  ],
+  "long_giris": [
+   "Boga trend cizgisinin guclu ayi momentumuyla kirilmasi (kitap: salinim noktalari / en iyi uyum cizgisi)",
+   "Sonrasinda piyasa eski zirveyi (daha yuksek yuksek veya daha dusuk yuksek) test eder",
+   "Testte guclu ayi ters cubuk / iki cubuklu donus olusursa o sinyal cubugunun altina sat (ayi donusu)"
+  ],
+  "short_giris": [
+   "Ayi trend cizgisi kirilimi, sonra eski dibin testi (daha dusuk dip veya daha yuksek dip), guclu boga ters cubugu: sinyal cubugu high'i ustunde al"
+  ],
+  "stop_loss": "Sinyal cubugunun karsi ucunun otesi",
+  "kar_al": "En az bir scalp hedefi; kitapta sabit hedef yok",
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [
+   "Trend cizgisi kirilimi momentumlu olmali; momentumsuz kirilim sonrasi sapma (divergence) ile islem yapmak kaybettiren strateji (kitap)",
+   "Trend cizgisi kirilmadan once karsi trend yok: ilk geri donus denemesine girme",
+   "Her kirilimdan sonra yeni cizgi daha duz egimli olur; sonunda ters yondeki cizgiler onem kazanir"
+  ],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": "Kitap: cogu cikis basarisiz olur; basarili donusler once trend cizgisini guclu momentumla kirar ve ekstremi test eder",
+  "kodlanabilirlik": {
+   "puan": 1,
+   "gerekce": "Trend cizgisi cizimi, 'guclu momentum' ve 'ekstrem testi' otomatik olarak olculebilir ama kitapta sayisal tanimlari yok; yoruma cok acik."
+  },
+  "belirsizlikler": [
+   "Trend cizgisi uyum yontemi (salinim noktalari/regresyon/goz) sabit degil",
+   "'Guclu momentum' icin sayisal esik yok",
+   "Test mesafesi tanimi yok",
+   "Olculebilir oneri (kural degil): kirilim cubugu >= son 10 cubuk ortalama govde x2 ve en az 3 ardisik trend cubugu"
+  ],
+  "uyumluluk_notu": "Orijinal: E-mini S&P 5dk (PST seans, ABD hisse). OHLC ile her piyasada hesaplanir, hacim gerekmez; seans saatleri (PST) kripto 7/24'te UTC gun acilisina yaklasik uyarlanir. Kitap yorumlu okuma agirlikli; 5m'de komisyon etkisi ayri test edilmeli.",
+  "varyantlar": [
+   "Trend cizgisini kanal cizgisinin paraleli olarak olusturma (s211-212): cogu zaman yeni bilgi vermez"
+  ],
+  "anahtar_kelimeler": [
+   "trend-cizgisi",
+   "trend-cizgisi-kirilimi",
+   "ekstrem-testi",
+   "karsi-trend",
+   "brooks"
+  ]
+ },
+ {
+  "kart_id": "daytrade__trend-cizgisi-testi-trend-girisi__brooks_t1",
+  "ad": "Trend Cizgisi Testinde Trend Yonlu Giris",
+  "stil": "daytrade",
+  "kaynak": {
+   "pdf": "Price Action Trends - Al Brooks (439 sayfa) - @eseckal.pdf",
+   "sayfalar": [
+    206,
+    207,
+    208,
+    209,
+    215,
+    217
+   ]
+  },
+  "ozet": "Trend cizgisi kirilmadigi surece en karli islemler trend yonundedir: piyasa trend cizgisi cevresine her geri cekildiginde (cizgiyi asarak bile) trend yonune giris aranir. Cizgiyi tekrar tekrar test edip uzaklasamayan piyasa ya cizgiyi kirar ya da hizlanir (iki yon da mumkun).",
+  "kategori": "trend_takip",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "vadeli",
+  "zaman_dilimi": {
+   "islem": "5m",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "EMA",
+    "parametreler": {
+     "periyot": 20
+    }
+   }
+  ],
+  "long_giris": [
+   "Aktif boga trend cizgisi (dip salinimlari altinda) var ve kirilmamis",
+   "Fiyat cizgi cevresine (altina bile inse) geri cekilir; trend yonlu bir sinyal cubugu (ters cubuk vb.) olusur",
+   "Sinyal cubugu high'inin 1 tik ustune buy-stop"
+  ],
+  "short_giris": [
+   "Ayi trend cizgisi (tepe salinimlari ustunde) icin ayna"
+  ],
+  "stop_loss": "Kitapta yok; mantik: cizgi/ekstrem otesi",
+  "kar_al": null,
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [
+   "Cizgi bir kez momentumla kirildiktan sonra trend yonlu islemler zayiflar",
+   "Cok sayida cizgi cizmek dikkat dagitir; cizgiyi test sonrasi silmek onerilir (yoruma bagli)"
+  ],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 1,
+   "gerekce": "Cizgi kurma ve 'cevresine geri cekilme' kodlanabilir ama kitapta sayisal tolerans, stop ve hedef yok."
+  },
+  "belirsizlikler": [
+   "Hangi trend cizgisinin gecerli oldugu (kac dokunus) tanimsiz",
+   "Stop/hedef yok",
+   "Tolerans (cizgiye yakinlik) yok"
+  ],
+  "uyumluluk_notu": "Orijinal: E-mini S&P 5dk (PST seans, ABD hisse). OHLC ile her piyasada hesaplanir, hacim gerekmez; seans saatleri (PST) kripto 7/24'te UTC gun acilisina yaklasik uyarlanir. Kitap yorumlu okuma agirlikli; 5m'de komisyon etkisi ayri test edilmeli.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "trend-cizgisi",
+   "geri-cekilme",
+   "brooks",
+   "trend-yonlu-giris"
+  ]
+ },
+ {
+  "kart_id": "daytrade__trend-kanal-cizgisi-asimi-donus__brooks_t1",
+  "ad": "Trend Kanal Cizgisi Asimi ve Donusu (Overshoot Fade)",
+  "stil": "daytrade",
+  "kaynak": {
+   "pdf": "Price Action Trends - Al Brooks (439 sayfa) - @eseckal.pdf",
+   "sayfalar": [
+    29,
+    30,
+    32,
+    33,
+    104,
+    111,
+    114,
+    162,
+    215,
+    219,
+    220
+   ]
+  },
+  "ozet": "Trend kanal cizgisi (trend cizgisinin karsi tarafinda paralel) cok ileri/hizli giden trendi solduran araca donusur: kanal cizgisi asimi 5 cubuk civarinda basarisiz olursa donus gelir. Ozellikle donusun ikinci asimi ve takoz (3 itme) yapisi guvenilirdir; sag egimli bir kanal ters yone bayrak sayilir ve alt/ust cizgi kirilimi beklenir.",
+  "kategori": "ortalamaya_donus",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "vadeli",
+  "zaman_dilimi": {
+   "islem": "5m",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "EMA",
+    "parametreler": {
+     "periyot": 20
+    }
+   }
+  ],
+  "long_giris": [
+   "Boga kanalinda fiyat trend kanal cizgisinin ustune asar; asim kisa sure (kitap: yaklasik 5 cubuk icinde) basarisiz olur",
+   "Ayi ters cubuk / iki cubuklu donus sinyali; ikinci asim (ikinci ters denemesi) daha guvenilir",
+   "Takoz (3 itme) ve kanal asimi birlikte: ayi donusu"
+  ],
+  "short_giris": [
+   "Ayi kanalinda kanal cizgisi (diplerin altindaki) asimi basarisiz olunca boga donusu; ayna",
+   "Ayi kanali dibinde donus: ilk hedef kanal tepesi ve kanal baslangici"
+  ],
+  "stop_loss": "Sinyal cubugunun karsi ucunun otesi",
+  "kar_al": "Ilk hedef: kama/kanal baslangicinin testi; kitapta sabit sayi yok",
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [
+   "Kanal cizgisi asimi trendi hizlandirma olabilir (nadir); kirilimin devami olursa donus beklenmez",
+   "Dar kanalin ilk kirilimi genellikle 1-2 cubukta tersine doner",
+   "Cok dik trend cizgisi/kanal test edilir ama kirilmaz: baska cizim yolu denenir"
+  ],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": "Kitap: trend kanal cizgisi asimi ile takoz neredeyse ayni olgu",
+  "kodlanabilirlik": {
+   "puan": 1,
+   "gerekce": "Kanal cizgisi cizimi, asim suresi (~5 cubuk) ve ikinci asim sayisal ama kitapta stop/hedef yok; guclu baglam (trend gucu) yorum."
+  },
+  "belirsizlikler": [
+   "Kanal cizim yontemi sabit degil",
+   "Hedef/stop yok",
+   "'Cok ileri ve cok hizli' tanimsiz"
+  ],
+  "uyumluluk_notu": "Orijinal: E-mini S&P 5dk (PST seans, ABD hisse). OHLC ile her piyasada hesaplanir, hacim gerekmez; seans saatleri (PST) kripto 7/24'te UTC gun acilisina yaklasik uyarlanir. Kitap yorumlu okuma agirlikli; 5m'de komisyon etkisi ayri test edilmeli.",
+  "varyantlar": [
+   "Trend kanal cizgisini regresyon/uyum cizgisi ile cizme"
+  ],
+  "anahtar_kelimeler": [
+   "trend-kanal-cizgisi",
+   "kanal-asimi",
+   "takoz",
+   "ortalamaya-donus",
+   "brooks"
+  ]
+ },
+ {
+  "kart_id": "daytrade__climax-tukenme-sonrasi-duzeltme__brooks_t1",
+  "ad": "Climax / Tukenme Cubugu Sonrasi Iki Bacakli Duzeltme",
+  "stil": "daytrade",
+  "kaynak": {
+   "pdf": "Price Action Trends - Al Brooks (439 sayfa) - @eseckal.pdf",
+   "sayfalar": [
+    77,
+    80,
+    81,
+    84,
+    90,
+    91,
+    92,
+    127,
+    132,
+    133,
+    156,
+    157,
+    159,
+    160,
+    164,
+    165
+   ]
+  },
+  "ozet": "10-30+ cubuk suren bir trendin sonunda olagandisi buyuk trend cubugu (veya art arda ikinci/ucuncu satis/alis doruga cikisi) tukenme isaretidir; ardindan en az iki bacakli, yaklasik en az 10 cubuk suren yan duzeltme (ve MA'ya donus) beklenir. Duzeltmeye tersine donus sinyaliyle (boga ters cubuk, iki cubuklu donus) girilir.",
+  "kategori": "ortalamaya_donus",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "vadeli",
+  "zaman_dilimi": {
+   "islem": "5m",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "EMA",
+    "parametreler": {
+     "periyot": 20
+    }
+   }
+  ],
+  "long_giris": [
+   "Uzun ayi trendi (30+ cubuk) destege geldi ve olagandisi buyuk bir ayi trend cubugu olustu",
+   "Sonrasinda guclu boga ters cubuk / iki cubuklu donus (veya boga iç cubugun ustu) sinyali: sinyal cubugu high'inin 1 tik ustune buy-stop",
+   "Beklenti: en az 2 bacak yukari, yaklasik 10+ cubuk, hareketli ortalamanin ustune"
+  ],
+  "short_giris": [
+   "Uzun boga trendi + olagandisi buyuk boga trend cubugu (ozellikle ard arda ikinci climax), sonrasi guclu ayi donus sinyalinde low'un 1 tik altina sat"
+  ],
+  "stop_loss": "Sinyal cubugunun karsi ucunun otesi",
+  "kar_al": "Hareketli ortalama / kanal baslangici; kitapta sabit sayi yok",
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [
+   "Climax cubugu kendisi sinyal degil; guclu trendde ilk geri donus girisi atlanir, sinyal gecmeden ikinci giris beklenir",
+   "Climax destek/ekstrem bolgesinde olmali; bayrak seviyesinde buyuk cubuk tuzak olabilir",
+   "Parabolik hizlanma (trend cizgisi egimi surekli dikleşir) climax isareti",
+   "Dort+ ardisik buyuk cubuk geri donus icin cok momentum: ikinci giris"
+  ],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": "Kitap: climax sonrasi cogu zaman iki bacakli duzeltme; trend donusu daha nadir",
+  "kodlanabilirlik": {
+   "puan": 1,
+   "gerekce": "Climax tanimi ('olagandisi buyuk') ve baglam yorum; sayisal esik yok, sadece 'son 10-30 cubuk' gibi kabaca bilgi."
+  },
+  "belirsizlikler": [
+   "'Olagandisi buyuk' esigi yok",
+   "Stop/hedef yok",
+   "Olculebilir oneri (kural degil): cubuk gövdesi son 20 cubuk ortalama govdenin >=2-3 kati ve trend >=10 cubuk"
+  ],
+  "uyumluluk_notu": "Orijinal: E-mini S&P 5dk (PST seans, ABD hisse). OHLC ile her piyasada hesaplanir, hacim gerekmez; seans saatleri (PST) kripto 7/24'te UTC gun acilisina yaklasik uyarlanir. Kitap yorumlu okuma agirlikli; 5m'de komisyon etkisi ayri test edilmeli.",
+  "varyantlar": [
+   "Surekli iki/uc satis doruga ulasmasi (art arda climax)"
+  ],
+  "anahtar_kelimeler": [
+   "climax",
+   "tukenme",
+   "olagandisi-buyuk-cubuk",
+   "duzeltme",
+   "brooks"
+  ]
+ }
+]
