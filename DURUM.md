@@ -183,6 +183,10 @@ Ana ders: önceki sonuçlar OOS'a bakılarak seçilmiş ve kâr birkaç işlemde
   (`1l3a-pano.sselimgenc-c18.workers.dev`, 15 dk), masaüstü/mobil tasarım (2146654). Sunucu güncelleme: `git pull` (root,
   deploy key), motor durumu korunur. Açık soru: günlük Telegram özeti saati (şu an 00:10 UTC = 03:10 TSİ).
 
+- 2026-11-07: **Karar 27 (kullanıcı):** tek sembol–strateji ikilileri (SOL'de CCI, NVDA'da Fraktal…) istenmiyor; final set
+  paper'dan kaldırılır. Yeni hedef: **evren stratejileri** — tek parametre setiyle 13 enstrümanın hepsinde çalışan, sinyal
+  nerede çıkarsa orada işleme giren stratejiler; ajan (stil) başına ≤ 3. Ön kayıt: `sonuclar/evren/ON_KAYIT.md`.
+
 ## Kullanıcıyı bekleyen kararlar
 - ~~Final seçim ve kilitli dönemin bir kez açılması (karar 20)~~ — kullanıcı "aç" dedi (2026-11-07), yapıldı: `sonuclar/kilit/RAPOR.md`.
 - Karar 13 eşikleri çoklu test düzeltmesi içermiyor; sağlamlık paketi öneri kapısı ekliyor (son karar kullanıcıda).
