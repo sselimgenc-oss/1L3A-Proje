@@ -61,6 +61,8 @@ BOLUNMELER = {
     "DK_TSLA": [("2020-08-31", 5.0), ("2022-08-25", 3.0)],
     "DK_AMZN": [("2022-06-06", 20.0)],
     "DK_GOOGL": [("2022-07-18", 20.0)],
+    "DK_AVGO": [("2024-07-15", 10.0)],
+    "DK_WMT": [("2024-02-26", 3.0)],
 }
 KAYIT_BAYT = 24
 BITIS_VARSAYILAN = "2026-11-01"   # hariç: son gün 2026-10-31
@@ -74,6 +76,11 @@ SEMBOLLER = {
     "DK_XAU": "XAUUSD", "DK_WTI": "LIGHTCMDUSD", "DK_COPPER": "COPPERCMDUSD",
     # son1ay (E014 makro rotasyon vekilleri): SPY -> S&P 500 endeks CFD'si, TLT -> ABD uzun vadeli T-Bond CFD'si
     "DK_SPX": "USA500IDXUSD", "DK_UST": "USTBONDTRUSD",
+    # karar 27 evreni (GÜNCELLEME 1): yeni hisseler ve emtia
+    "DK_AVGO": "AVGOUSUSD", "DK_LLY": "LLYUSUSD", "DK_WMT": "WMTUSUSD", "DK_JPM": "JPMUSUSD", "DK_V": "VUSUSD",
+    "DK_MU": "MUUSUSD", "DK_AMD": "AMDUSUSD", "DK_XOM": "XOMUSUSD", "DK_JNJ": "JNJUSUSD", "DK_MA": "MAUSUSD",
+    "DK_ABBV": "ABBVUSUSD",
+    "DK_XAG": "XAGUSD", "DK_NATGAS": "GASCMDUSD",
 }
 # Eski ad (şirket adı değişimi): ana adın ilk verisinden ÖNCEKİ günler bu adla çekilir. Şu an kullanılmıyor.
 ESKI_AD: dict[str, str] = {}
@@ -81,6 +88,7 @@ ESKI_AD: dict[str, str] = {}
 # Bakır (COPPERCMDUSD, $/lb) 10000 ölçekli (1000 ile Yahoo HG=F'nin 10 katı çıktı).
 NOKTA = {s: 1000 for s in SEMBOLLER}
 NOKTA["DK_COPPER"] = 10000
+NOKTA["DK_NATGAS"] = 10000   # doğalgaz (GASCMDUSD, $/MMBtu): 1000 ile 15-99 çıktı (10 kat), 10000 ile 1.5-9.9 = Henry Hub aralığı
 
 
 # ------------------------------------------------------------------ çözme / birleştirme

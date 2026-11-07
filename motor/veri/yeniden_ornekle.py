@@ -61,6 +61,10 @@ SEANS_ESIK_ORANI = 0.25
 
 
 def _seans_ayari(sembol: str) -> dict:
+    if sembol.startswith("BIST_"):
+        # Borsa İstanbul 10:00-18:00 TSİ (UTC+3, DST yok). Yahoo saatlik mumları :30'da başlar (09:30, 10:30 ...); 4h kovaları
+        # 09:30 TSİ'ye hizalanır (09:30-13:30, 13:30-17:30; 17:30-18:00 kapanış mumu kısmi kova olarak kalır).
+        return {"esik_orani": SEANS_ESIK_ORANI, "yerel": ("Europe/Istanbul", 9.5)}
     if not sembol.startswith("DK_"):
         return {}          # kripto (24/7): eski davranış, tam dolu periyot şartı
     ayar: dict = {"esik_orani": SEANS_ESIK_ORANI}
@@ -80,6 +84,17 @@ def tf_mumlari(sembol: str, tf: str, baslangic=None, bitis=None, dizin=None, kil
     from motor.veri import depo   # döngüsel içe aktarmayı önlemek için yerel
     kl = {"kilit_ac": kilit_ac, "gerekce": gerekce}
     ek = _seans_ayari(sembol)
+    if sembol.startswith("BIST_"):
+        # BIST (Yahoo): 1d dosyası tüm geçmiş, 1h ~3 yıl, 5m/15m/30m ~60 gün. tf >= 1d -> 1d dosyası; 1h <= tf < 1d -> 1h
+        # dosyası; tf < 1h -> 5m dosyası. Kaynak yoksa açık hata.
+        sure = depo.aralik_suresi(tf)
+        kaynak = "1d" if sure >= pd.Timedelta(1, "D") else "1h" if sure >= pd.Timedelta(1, "h") else "5m"
+        if not depo.mum_yolu(sembol, kaynak, dizin).exists():
+            raise FileNotFoundError(f"{sembol}: {tf} için {kaynak} verisi yok ({depo.mum_yolu(sembol, kaynak, dizin)})")
+        ham = depo.mum_oku(sembol, kaynak, baslangic, bitis, dizin=dizin, **kl)
+        if tf == kaynak:      # 1h Yahoo mumları :30'da başlar; UTC saatine yeniden kovalamak etiketi 30 dk kaydırırdı
+            return ham
+        return yeniden_ornekle(ham, tf, kaynak=kaynak, eksikleri_at=True, **ek)
     # Kaynak sabitleme (lider kararı 2026-11-07, karar 26 günlüğü): DK_ sembollerinde tf >= 1h ise HER ZAMAN 1h dosyası
     # kullanılır. Dakikalık indirme sürerken 5m dosyası sonradan ortaya çıkıp kaynağı değiştirmesin (tekrarlanabilirlik),
     # ayrıca 1h dosyası tam (5m'de indirilemeyen günler var). 5m yalnız tf < 1h için.

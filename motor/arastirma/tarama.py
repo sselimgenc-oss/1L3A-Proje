@@ -69,6 +69,23 @@ for _s in ("DK_AAPL", "DK_MSFT", "DK_GOOGL", "DK_AMZN", "DK_NVDA", "DK_META", "D
 SEMBOL_KURALLARI["DK_XAU"] = SembolKurallari(tick_size=0.01, step_size=0.001, min_qty=0.001, min_notional=5.0)
 SEMBOL_KURALLARI["DK_WTI"] = SembolKurallari(tick_size=0.01, step_size=0.01, min_qty=0.01, min_notional=5.0)
 SEMBOL_KURALLARI["DK_COPPER"] = SembolKurallari(tick_size=0.0001, step_size=0.1, min_qty=0.1, min_notional=5.0)
+# Karar 27 evreni (GÜNCELLEME 1-2). VARSAYIM: yaklaşık Binance filtreleri / mevcut benzer sembolün kuralı (wf_evren.kurallari_tamamla ile
+# AYNI değerler; yalnız adet yuvarlaması, sonuca etkisi küçük). Mevcut girdilere dokunulmaz.
+_KRIPTO_ADIM = {"BNBUSDT": (0.01, 0.01), "XRPUSDT": (0.0001, 0.1), "TRXUSDT": (0.00001, 1.0), "ZECUSDT": (0.01, 0.001),
+                "HYPEUSDT": (0.0001, 0.01), "DOGEUSDT": (0.00001, 1.0), "LINKUSDT": (0.001, 0.01),
+                "ADAUSDT": (0.0001, 1.0), "XLMUSDT": (0.00001, 1.0), "BCHUSDT": (0.01, 0.001)}
+for _s, (_tick, _step) in _KRIPTO_ADIM.items():
+    SEMBOL_KURALLARI.setdefault(_s, SembolKurallari(tick_size=_tick, step_size=_step, min_qty=_step, min_notional=5.0))
+for _s in ("DK_AVGO", "DK_LLY", "DK_WMT", "DK_JPM", "DK_V", "DK_MU", "DK_AMD", "DK_XOM", "DK_JNJ", "DK_MA", "DK_ABBV",
+           "DK_SPX"):
+    SEMBOL_KURALLARI.setdefault(_s, SembolKurallari(tick_size=0.01, step_size=0.01, min_qty=0.01, min_notional=5.0))
+SEMBOL_KURALLARI.setdefault("DK_XAG", SembolKurallari(tick_size=0.001, step_size=0.01, min_qty=0.01, min_notional=5.0))
+SEMBOL_KURALLARI.setdefault("DK_NATGAS", SembolKurallari(tick_size=0.001, step_size=1.0, min_qty=1.0, min_notional=5.0))
+# BIST (TL): hisse 1 lot = 1 adet, fiyat adımı ~0.01 TL (gerçek BIST adımı fiyata göre 0.01-0.5; VARSAYIM). Maliyet: motorun
+# genel taker %0.05 + kayma kullanılır (sembol başına maliyet yok); BSMV dahil değil.
+for _s in ("BIST_AKBNK", "BIST_ASELS", "BIST_ASTOR", "BIST_BIMAS", "BIST_EKGYO", "BIST_EREGL", "BIST_FROTO", "BIST_KCHOL",
+           "BIST_SISE", "BIST_TCELL", "BIST_THYAO", "BIST_TRALT", "BIST_TUPRS", "BIST_XU030"):
+    SEMBOL_KURALLARI.setdefault(_s, SembolKurallari(tick_size=0.01, step_size=1.0, min_qty=1.0, min_notional=5.0))
 VARSAYILAN_KURAL = SembolKurallari(tick_size=0.01, step_size=0.001, min_qty=0.001, min_notional=5.0)
 
 METRIK_ALANLARI = ["net_getiri", "cagr", "max_dusus", "sharpe", "sortino", "gunluk_mtm_max_dusus", "islem_sayisi",
