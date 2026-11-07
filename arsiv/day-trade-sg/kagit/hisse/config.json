@@ -1,0 +1,26 @@
+{
+  "baslangic": "2026-10-14T00:00:00Z",
+  "gun": 57,
+  "sermaye": 10000,
+  "giris_tf": "15m",
+  "siniflar": [
+    "us_stock",
+    "commodity"
+  ],
+  "risk": 0.005,
+  "max_pozisyon": 9,
+  "max_agirlik": 0.3,
+  "max_toplam_agirlik": 1.0,
+  "gunluk_zarar_limiti": -0.03,
+  "ayri_hesap": true,
+  "aciklama": "Hisse/emtia day trade kağıt al-sat (AYRI DENEY HESABI, 13 Ekim kullanıcı kararı): kripto hesabıyla aynı S10+S13+S15 kuralları Mag7 ve altın/petrol/gümüş vadelilerinde; yalnız alış, BTC filtresi yok, seans sonunda çıkış. Bu enstrümanlarda backtest YOK (15dk veri yalnız 60 gün); test edilmemiş deneydir.",
+  "beklenti": {
+    "kaynak": "Backtest yok — ilk ileri test",
+    "kazanma_orani": null,
+    "pf": null,
+    "ort_R": null,
+    "60_gunde_islem": "bilinmiyor",
+    "60_gunde_getiri": "bilinmiyor",
+    "max_dusus": null
+  }
+}

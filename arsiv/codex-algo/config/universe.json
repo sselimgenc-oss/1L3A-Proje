@@ -1,0 +1,73 @@
+{
+  "initial_capital": 10000.0,
+  "paper_days": 60,
+  "history_start": "2020-01-01",
+  "instruments": [
+    {"symbol": "BTCUSDT", "name": "Bitcoin", "market": "Kripto", "source": "binance", "interval": "1d", "periods_per_year": 365, "cost_bps": 12.0},
+    {"symbol": "ETHUSDT", "name": "Ethereum", "market": "Kripto", "source": "binance", "interval": "1d", "periods_per_year": 365, "cost_bps": 12.0},
+    {"symbol": "SOLUSDT", "name": "Solana", "market": "Kripto", "source": "binance", "interval": "1d", "periods_per_year": 365, "cost_bps": 14.0},
+
+    {"symbol": "SPY", "name": "S&P 500 ETF", "market": "ABD", "source": "yahoo", "interval": "1d", "periods_per_year": 252, "cost_bps": 4.0},
+    {"symbol": "QQQ", "name": "Nasdaq-100 ETF", "market": "ABD", "source": "yahoo", "interval": "1d", "periods_per_year": 252, "cost_bps": 4.0},
+    {"symbol": "AAPL", "name": "Apple", "market": "ABD", "source": "yahoo", "interval": "1d", "periods_per_year": 252, "cost_bps": 5.0},
+    {"symbol": "MSFT", "name": "Microsoft", "market": "ABD", "source": "yahoo", "interval": "1d", "periods_per_year": 252, "cost_bps": 5.0},
+    {"symbol": "NVDA", "name": "Nvidia", "market": "ABD", "source": "yahoo", "interval": "1d", "periods_per_year": 252, "cost_bps": 6.0},
+
+    {"symbol": "XU100.IS", "name": "BIST 100", "market": "BIST", "source": "yahoo", "interval": "1d", "periods_per_year": 252, "cost_bps": 18.0},
+    {"symbol": "THYAO.IS", "name": "Türk Hava Yolları", "market": "BIST", "source": "yahoo", "interval": "1d", "periods_per_year": 252, "cost_bps": 20.0},
+    {"symbol": "ASELS.IS", "name": "Aselsan", "market": "BIST", "source": "yahoo", "interval": "1d", "periods_per_year": 252, "cost_bps": 20.0},
+    {"symbol": "TUPRS.IS", "name": "Tüpraş", "market": "BIST", "source": "yahoo", "interval": "1d", "periods_per_year": 252, "cost_bps": 20.0},
+    {"symbol": "BIMAS.IS", "name": "BİM", "market": "BIST", "source": "yahoo", "interval": "1d", "periods_per_year": 252, "cost_bps": 20.0},
+
+    {"symbol": "GLD", "name": "Altın ETF", "market": "Emtia", "source": "yahoo", "interval": "1d", "periods_per_year": 252, "cost_bps": 6.0},
+    {"symbol": "SLV", "name": "Gümüş ETF", "market": "Emtia", "source": "yahoo", "interval": "1d", "periods_per_year": 252, "cost_bps": 7.0},
+    {"symbol": "USO", "name": "Petrol ETF", "market": "Emtia", "source": "yahoo", "interval": "1d", "periods_per_year": 252, "cost_bps": 8.0}
+  ],
+  "paper_slots": [
+    {"strategy": "compression_breakout", "symbol": "AAPL"},
+    {"strategy": "compression_breakout", "symbol": "THYAO.IS"},
+    {"strategy": "compression_breakout", "symbol": "GLD"},
+    {"strategy": "compression_breakout", "symbol": "BTCUSDT"},
+
+    {"strategy": "channel_reversion", "symbol": "QQQ"},
+    {"strategy": "channel_reversion", "symbol": "XU100.IS"},
+    {"strategy": "channel_reversion", "symbol": "SLV"},
+    {"strategy": "channel_reversion", "symbol": "ETHUSDT"},
+
+    {"strategy": "supertrend_regime", "symbol": "SPY"},
+    {"strategy": "supertrend_regime", "symbol": "ASELS.IS"},
+    {"strategy": "supertrend_regime", "symbol": "USO"},
+    {"strategy": "supertrend_regime", "symbol": "BTCUSDT"},
+
+    {"strategy": "fractal_breakout", "symbol": "NVDA"},
+    {"strategy": "fractal_breakout", "symbol": "BIMAS.IS"},
+    {"strategy": "fractal_breakout", "symbol": "GLD"},
+    {"strategy": "fractal_breakout", "symbol": "SOLUSDT"},
+
+    {"strategy": "macd_sma200", "symbol": "MSFT"},
+    {"strategy": "macd_sma200", "symbol": "TUPRS.IS"},
+    {"strategy": "macd_sma200", "symbol": "SLV"},
+    {"strategy": "macd_sma200", "symbol": "ETHUSDT"},
+
+    {"strategy": "ao_ac_zones", "symbol": "QQQ"},
+    {"strategy": "ao_ac_zones", "symbol": "THYAO.IS"},
+    {"strategy": "ao_ac_zones", "symbol": "USO"},
+    {"strategy": "ao_ac_zones", "symbol": "BTCUSDT"},
+
+    {"strategy": "kst_momentum", "symbol": "SPY"},
+    {"strategy": "kst_momentum", "symbol": "THYAO.IS"},
+    {"strategy": "kst_momentum", "symbol": "GLD"},
+    {"strategy": "kst_momentum", "symbol": "BTCUSDT"},
+
+    {"strategy": "triple_cci_mfi", "symbol": "QQQ"},
+    {"strategy": "triple_cci_mfi", "symbol": "ASELS.IS"},
+    {"strategy": "triple_cci_mfi", "symbol": "SLV"},
+    {"strategy": "triple_cci_mfi", "symbol": "ETHUSDT"},
+
+    {"strategy": "double_cci_hma", "symbol": "NVDA"},
+    {"strategy": "double_cci_hma", "symbol": "BIMAS.IS"},
+    {"strategy": "double_cci_hma", "symbol": "USO"},
+    {"strategy": "double_cci_hma", "symbol": "SOLUSDT"}
+  ]
+}
+

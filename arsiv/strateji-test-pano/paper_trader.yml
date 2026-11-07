@@ -1,0 +1,30 @@
+name: Autonomous Paper Trader Engine
+on:
+  schedule:
+    - cron: '11 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  run-trader:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Execute SPS-03 Bot Engine
+        run: python bot_engine.py
+
+      - name: Commit and Push Updates
+        run: |
+          git config --global user.name "SPS-03 Autonomous Bot"
+          git config --global user.email "bot@algobot.local"
+          git add data.json
+          git diff --quiet && git diff --staged --quiet || (git commit -m "auto: update market data and open positions [skip ci]" && git push)
