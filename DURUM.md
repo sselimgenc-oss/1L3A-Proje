@@ -130,9 +130,17 @@ Ana ders: önceki sonuçlar OOS'a bakılarak seçilmiş ve kâr birkaç işlemde
 - 2026-11-07: Hisse kısa TF (15m/30m scalp + 30m/1h daytrade, k3_hisse_kisa): WF 27/1358 geçti, sağlamlık 0.
   Karar (karar 11 + 26): **scalp ajanı kapatıldı** (kripto 0, hisse 0 sağlam); emtia dakikalık veri tamamlanınca
   bir kez daha denenir, sağlam çıkarsa yeniden açılır. Daytrade'de tek aday dis__dual-thrust ETH 30m.
+- 2026-11-07: **Katman 4 kilitli dönem testi** (ön kayıt `sonuclar/kilit/ON_KAYIT.md`, kilit bir kez açıldı, günlük
+  `sonuclar/kilit_acilis.jsonl`; ayarlar kilit açılmadan seçildi). Set ölçütü GEÇTİ: tek-grafik kolu +%17.8 / Sharpe 1.21 /
+  düşüş %8.0; portföy kolu −%2.8; 50/50 harman +%7.2 / Sharpe 0.85 / düşüş %4.2. A'da 7'nin 3'ü geçti (cci-esik SOL,
+  dual-thrust ETH, kesit_ls). Ayırt edicilik tek-grafikte YOK (C medyan R −0.107 < D −0.054; WF PF ile kilitli PF
+  Spearman −0.09). Kilitli dönem artık kullanılmış sayılır. Karar (ön kayıt gereği): set değiştirilmeden Aşama 3 (Pano)
+  ve Aşama 4 (paper trading) başlar; seçim yönteminin öngörü gücü zayıf olduğu için paper trading asıl bağımsız sınavdır,
+  canlıya geçiş paper sonucu + kullanıcı onayı olmadan konuşulmaz.
 
 ## Kullanıcıyı bekleyen kararlar
-- **Final seçim ve kilitli dönemin bir kez açılması (karar 20)** — öneri hazır: `sonuclar/secim/ozet.md`. Kullanıcı onayı bekleniyor.
+- ~~Final seçim ve kilitli dönemin bir kez açılması (karar 20)~~ — kullanıcı "aç" dedi (2026-11-07), yapıldı: `sonuclar/kilit/RAPOR.md`.
+- Portföy kolunun (özellikle pf__rotasyon, kilitli yılda %25 düşüş) paper trading'deki ağırlığı — kullanıcıyla konuşulacak.
 - Karar 13 eşikleri çoklu test düzeltmesi içermiyor; sağlamlık paketi öneri kapısı ekliyor (son karar kullanıcıda).
 
 ## Yol haritası (2026-11-06)
