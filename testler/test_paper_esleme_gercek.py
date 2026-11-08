@@ -11,7 +11,7 @@ from motor.canli import paper_sinyal as psg
 from motor.veri import depo
 
 VAR = (depo.MUM_DIZINI / "SOLUSDT" / "5m.parquet").exists() and (depo.MUM_DIZINI / "DK_AAPL" / "1h.parquet").exists()
-pytestmark = pytest.mark.skipif(not VAR, reason="yerel mum verisi yok (veri/mumlar repoda değildir)")
+pytestmark = pytest.mark.gercek_veri(VAR, reason="yerel mum verisi yok (veri/mumlar repoda değildir)")
 
 
 @pytest.mark.parametrize("kimlik", ["swing__cci-esik|SOLUSDT|1d", "swing__konsolidasyon-kirilim|SOLUSDT|4h", "pf__kesit_ls|kripto|1d",
@@ -21,10 +21,10 @@ def test_kilit_donemi_ilk_90_gun_bit_bit_ayni(kimlik):
     assert r["tam_esit"], r["farklar"][:2]
 
 
-def test_kayitli_tam_donem_sonucu_tutarli():
+def test_kayitli_tam_donem_sonucu_tutarli(gercek_veri_yok):
     yol = Path(es.__file__).resolve().parents[2] / "sonuclar" / "final" / "paper_esleme.json"
     if not yol.exists():
-        pytest.skip("paper_esleme.json yok")
+        gercek_veri_yok("paper_esleme.json yok")
     d = json.loads(yol.read_text(encoding="utf-8"))["sonuclar"]
     assert len(d) == 7 and all(x["tam_esit_zaman_haric"] and x["max_mutlak_fark"] <= 1e-9 for x in d)
 

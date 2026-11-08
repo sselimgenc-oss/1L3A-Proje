@@ -612,7 +612,7 @@ def rapor_yaz(df: pd.DataFrame, st: pd.DataFrame, ay: dict, cikti: Path = CIKTI)
     L.append("# Kilitli dönem testi — sonuç raporu\n")
     L.append(f"Kilitli dönem: {KILIT.date()} -> veri sonu. Yöntem ve ölçütler `ON_KAYIT.md`'de koşudan önce sabitlendi; "
              "sonuçlara bakılarak hiçbir şey değiştirilmedi.\n")
-    L.append(f"Kilit açılış kaydı: `sonuclar/kilit_acilis.jsonl` ({n_ac} satır; her veri okuması + başlangıç kaydı). "
+    L.append(f"Kilit açılış kaydı: `sonuclar/kilit_acilis.jsonl` ({n_ac} satır; başlangıç kaydı + süreç başına ilk açılış ve özet satırları). "
              f"Gerekçe: \"{GEREKCE}\".\n")
     sa = st[st.kol == "set_harman_50_50"]
     A_ = df[df.A]

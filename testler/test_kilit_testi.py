@@ -100,3 +100,77 @@ def test_kilit_log_ortam_degiskeniyle_baska_dosyaya(tmp_path, monkeypatch):
     monkeypatch.setenv(kilit.KILIT_LOG_ORTAM, str(hedef))
     kilit.kilit_siniri(None, True, "test gerekçesi", "BTCUSDT", "mum 1h")
     assert hedef.exists() and not kilit.KILIT_LOG.exists()
+
+
+# ------------------------------------------------------------- açılış kaydı: ilk satır + özet (denetim Ö10)
+def _oku(yol):
+    return [json.loads(x) for x in yol.read_text(encoding="utf-8").splitlines()]
+
+
+def _ac(sembol, ne="mum 1h", gerekce="g"):
+    kilit.kilit_siniri(None, True, gerekce, sembol, ne)          # aynı satırdan çağrı = aynı yığın/aşama
+
+
+def test_kilit_acilisi_ilk_satir_sonra_tek_ozet():
+    for i in range(200):
+        _ac(f"S{i % 7}")
+    s = _oku(kilit.KILIT_LOG)
+    assert len(s) == 1 and s[0]["tur"] == "ilk" and s[0]["sembol"] == "S0" and s[0]["gerekce"] == "g"
+    assert kilit.kilit_ozet_yaz() == 1
+    s = _oku(kilit.KILIT_LOG)
+    assert len(s) == 2
+    oz = s[1]
+    assert oz["tur"] == "ozet" and oz["n_okuma"] == 200 and oz["semboller"] == [f"S{i}" for i in range(7)]
+    assert oz["veri"] == "mum 1h" and oz["gerekce"] == "g" and isinstance(oz["yigin"], list)
+    assert oz["zaman_ilk"] <= oz["zaman_son"]
+    assert kilit.kilit_ozet_yaz() == 0                          # bekleyen yok: boş satır yazılmaz
+
+
+def test_kilit_acilisi_farkli_gerekce_ve_veri_ayri_anahtar():
+    for sembol, ne, g in [("A", "mum 1h", "g1"), ("A", "mum 1h", "g2"), ("A", "funding", "g1"), ("B", "mum 1h", "g1")]:
+        _ac(sembol, ne, g)                                      # aynı çağrı yeri: anahtar yalnız gerekçe/veri ile ayrışır
+    assert [x["tur"] for x in _oku(kilit.KILIT_LOG)] == ["ilk"] * 3
+    assert kilit.kilit_ozet_yaz() == 3
+    oz = {(x["gerekce"], x["veri"]): x for x in _oku(kilit.KILIT_LOG) if x["tur"] == "ozet"}
+    assert oz[("g1", "mum 1h")]["semboller"] == ["A", "B"] and oz[("g1", "mum 1h")]["n_okuma"] == 2
+
+
+def test_kilit_ozet_aralikla_yazilir(monkeypatch):
+    monkeypatch.setattr(kilit, "OZET_ARALIK_SN", 0.0)
+    for sembol in ("A", "B"):
+        _ac(sembol)
+    s = _oku(kilit.KILIT_LOG)
+    assert [x["tur"] for x in s] == ["ilk", "ozet", "ozet"]
+    assert sum(x["n_okuma"] for x in s if x["tur"] == "ozet") == 2   # okuma kaybolmaz, iki kez sayılmaz
+
+
+def test_kilit_log_ortam_degiskeni_ozet_de_oraya(tmp_path, monkeypatch):
+    hedef = tmp_path / "sunucu" / "kilit.jsonl"
+    monkeypatch.setenv(kilit.KILIT_LOG_ORTAM, str(hedef))
+    for sembol in ("A", "B"):
+        _ac(sembol)
+    kilit.kilit_ozet_yaz()
+    assert [x["tur"] for x in _oku(hedef)] == ["ilk", "ozet"] and not kilit.KILIT_LOG.exists()
+
+
+def _isci_oku(sembol):
+    _ac(sembol)
+    return sembol
+
+
+def test_kilit_fork_havuzu_isci_basina_ozet():
+    import multiprocessing as mp
+    _ac("EBEVEYN")                                              # ebeveynin bekleyeni çocuklarda tekrar yazılmamalı
+    semboller = [f"S{i}" for i in range(60)]
+    havuz = mp.get_context("fork").Pool(3)
+    try:
+        assert sorted(havuz.map(_isci_oku, semboller, chunksize=5)) == sorted(semboller)
+    finally:
+        havuz.close()
+        havuz.join()                                            # temiz çıkış: işçi Finalize ile özetini yazar
+    kilit.kilit_ozet_yaz()
+    s = _oku(kilit.KILIT_LOG)
+    oz = [x for x in s if x["tur"] == "ozet"]
+    assert len(s) <= 1 + 2 * 3 + 1                               # ebeveyn ilk + işçi başına ilk/özet + ebeveyn özeti
+    assert sum(x["n_okuma"] for x in oz) == 61
+    assert sorted(y for x in oz for y in x["semboller"]) == sorted(semboller + ["EBEVEYN"])
