@@ -113,6 +113,9 @@ Ana ders: önceki sonuçlar OOS'a bakılarak seçilmiş ve kâr birkaç işlemde
   saatlik dosyalar → swing/daytrade 1h+ testleri önce; 15m/30m dakikalık veri tamamlanınca.
 
 ## Lider kararları günlüğü (karar 26)
+- 2026-11-09 (KULLANICI onayı, lider önerisi): (1) işlem başı %1 risk MALİYET DAHİL (stop kayması + 2 komisyon) — backtest, evren oynatma,
+  portföy ve paper motorunda tutarlı; ham tarama etkilenmez (r tanımı aynı), WF bu kuralla koşar (ON_KAYIT Güncelleme 8).
+  (2) Paper TradFi funding ödenir ama ayrı alanda tutulur; backtest beklentisine uyum karşılaştırmaları TradFi funding hariç yapılır.
 - 2026-11-09 (KULLANICI): sunucudaki paper eski 7'li setle yalnız 'deneme sürüşü' (altyapı izleme) olarak çalışır; sonuçlarına bakılmaz.
   Evren testi + seçim bitince yeni setle sıfırdan başlatılır. Öncelik: Fable denetim düzeltmeleri ve strateji testleri.
 - 2026-11-08 (KULLANICI kararı): BIST projeden TAMAMEN çıkarıldı (karar 27 evreni değişti: 48 -> 35 = 13 kripto + 17 ABD hissesi + 5 emtia;
