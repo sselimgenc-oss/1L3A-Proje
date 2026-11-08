@@ -1379,8 +1379,12 @@ def _kabul_html(k: dict) -> str:
            + _kutu("Geçti", str(sy["gecti"]), "iyi") + _kutu("Kaldı", str(sy["kaldi"]), "kotu" if sy["kaldi"] else "") + _kutu("Bekliyor", str(sy["bekliyor"]))
            + _kutu("Tanımsız", str(sy["tanimsiz"]), "kotu" if sy["tanimsiz"] else "") + "</div>")
     soru = "".join(f'<div class="alt">Kullanıcıya sorulacak ({esc(t["ad"])}): {esc(t["soru"])}</div>' for t in k.get("tanimsiz", []))
+    sl = [[f"<b>{esc(kisa_kimlik(x['kimlik']))}</b>", _h("EVET" if x["canliya_uygun"] else "HAYIR", "iyi" if x["canliya_uygun"] else "kotu"), esc(x["neden"])]
+          for x in k.get("stratejiler", [])]
     return (ust + _tablo(["Kalem", "Durum", "Değer", "Ölçüt", "Kaynak", "Not"], satir, sinif="kay")
-            + (f'<div class="alt ip">{esc(k["genel_not"])}</div>' if k.get("genel_not") else "") + soru)
+            + (_tablo(["Strateji", "Canlıya uygun", "Neden"], sl, sinif="kay") if sl else "")
+            + (f'<div class="alt ip">{esc(k["genel_not"])}</div>' if k.get("genel_not") else "")
+            + (f'<div class="alt ip">En erken değerlendirme: {esc(k["en_erken_degerlendirme"])}</div>' if k.get("en_erken_degerlendirme") else "") + soru)
 
 
 @_guvenli

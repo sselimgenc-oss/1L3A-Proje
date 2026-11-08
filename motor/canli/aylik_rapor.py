@@ -4,40 +4,112 @@ Ay = TSİ takvim ayı (Europe/Istanbul, gün kesimi `durum_ek`); işlem ayı ç�
 işlemler ve günlük özsermaye serisinden gelir (lookahead yok). Dönem getirisi/K-Z `ozet.aylik_kz_ajan` ile AYNI sayıdır (aynı kaynak).
 
 KABUL KONTROL LİSTESİ ölçütleri (eski panonunkiler — %10 DD, PSR>%95, 30 işlem, 60 gün — KULLANILMAZ). Her kalemin `kaynak` alanı dayanağı gösterir:
-  sure         DURUM.md Aşama 4 "Süre ≥ 8 hafta" + lider günlüğü 2026-11-07 "en erken değerlendirme 2027-01-02" (başlangıç + 56 gün).
+  sure         DURUM.md Aşama 4 "Süre ≥ 8 hafta" + lider günlüğü 2026-11-07 (başlangıç + 56 gün). KULLANICI KARARI 2026-11-08: toplam kesinti 24 saati
+               aşarsa kabul reddedilmez, en erken değerlendirme aşan kesinti kadar ileri kayar (`en_erken_degerlendirme`).
   set_beklenti DURUM.md Aşama 4 "Bitiş: ... sonuçların beklenti aralığında olması"; set 8 hafta net getiri/düşüş alarm eşiği
                (sonuclar/final/OZET.md "Alarm eşiği (set, 8 hafta)"; stratejiler.json set.beklenti alarm).
-  sert_limit   DURUM.md karar 14 + 25 (sert limitler kesin) ve kullanıcının 2026-11-08 görevi "sert limit ihlali olmaması": kill switch
-               tetiklenmedi; anlık kaldıraç / açık stop riski / günlük kayıp limiti aşılmadı.
-  Bilgi kalemleri (geçti/kaldı vermez): strateji bazlı beklenti alarmı, dersler durum sayımı, günlük limit olayı sayısı.
-  Tanımsız kalemler (DURUM.md'de karşılığı yok; eşik UYDURULMAZ, durum "tanimsiz" + kullanıcıya soru): kesintisiz çalışma ölçütü, asgari işlem.
-`genel_durum`: "kaldi" (bir kalem kaldı) | "bekliyor" (kaldı yok, bir kalem bekliyor) | "tamam" (tanımlı kalemlerin hepsi geçti;
-tanımsız kalemler kullanıcı kararını bekler — bu bir kabul KARARI değildir).
+  sert_limit   DURUM.md karar 14 + 25. KULLANICI KARARI 2026-11-08: kill switch, anlık kaldıraç ve açık stop riski aşımı ihlaldir; günlük %3 kayıp
+               limitinin TETİKLENMESİ ihlal sayılmaz (bilgi kalemi `gunluk_limit_olayi` sayıyı gösterir).
+  asgari_islem KULLANICI KARARI 2026-11-08: set toplamında ≥ 30 kapanan işlem. Geçti/kaldı verir; birikimli olduğu için süre dolmadan "bekliyor", süre dolunca
+               30'un altı "kaldı".
+  kesinti      Bilgi kalemi (geçti/kaldı vermez): ölçüm `kesinti_olc` ile olay kayıtlarından; ölçülemezse null + neden (uydurma yok). Etkisi yalnız `sure`'dedir.
+  Bilgi kalemleri (geçti/kaldı vermez): kesinti, günlük limit olayı sayısı, strateji bazlı beklenti alarmı, dersler durum sayımı.
+`stratejiler` (kabul listesi): strateji başına `canliya_uygun` + `neden`. KULLANICI KARARI 2026-11-08: Dersler'de "altında" kabulü bozmaz ama strateji canlıya
+geçmez; "örnek az" da canlıya uygun sayılmaz (ayrı neden). Yalnız "içinde" ve "üstünde" uygundur.
+`genel_durum`: "kaldi" (bir kalem kaldı) | "bekliyor" (kaldı yok, bir kalem bekliyor) | "tamam" (tanımlı kalemlerin hepsi geçti). "tamam" kabul KARARI değildir:
+son söz kullanıcınındır; açık kalan tek soru `tanimsiz` listesindedir.
 """
 from __future__ import annotations
 
+import re
 from collections import defaultdict
 from datetime import timedelta
 from decimal import Decimal
 from typing import Optional
+
+import pandas as pd
 
 from motor.canli import dersler as ders
 from motor.canli import durum as d
 from motor.canli import durum_ek as ek
 
 PAPER_MIN_GUN = 56                      # 8 hafta (DURUM.md Aşama 4)
-EN_ERKEN_DEGERLENDIRME = "2027-01-02"   # DURUM.md lider günlüğü 2026-11-07
-KESINTI_OLAYLARI = ("veri_bosluk", "ws_koptu", "yeniden_baslatma", "binance_hata", "veri_yok")
+EN_ERKEN_DEGERLENDIRME = "2027-01-02"   # DURUM.md lider günlüğü 2026-11-07 (kesinti yokken; gerçeği kabul listesindeki `en_erken_degerlendirme`)
+ASGARI_ISLEM = 30                       # kullanıcı kararı 2026-11-08: set toplamında kapanan işlem
+KESINTI_LIMIT_SAAT = 24.0               # kullanıcı kararı 2026-11-08: aşan kısım değerlendirme süresini uzatır
+OLAY_KAPASITE = 200                     # Paper.olay_ekle en çok 200 olay tutar; dolduysa eski olaylar silinmiş olabilir
+# veri_yok burada YOK: strateji verisinin baştan olmaması çalışma kesintisi değildir.
+KESINTI_OLAYLARI = ("veri_bosluk", "ws_koptu", "yeniden_baslatma", "binance_hata")
 TANIMSIZ = [
-    {"ad": "kesintisiz_calisma", "soru": "'Kesintisiz çalışma' için kabul edilen en uzun kesinti ve sayı nedir (ör. veri boşluğu/yeniden başlatma kaç kez, kaç dk)? "
-                                        "DURUM.md Aşama 4 yalnız 'kesintisiz çalışma' der; sayısal tanım yok."},
-    {"ad": "asgari_islem", "soru": "Kabul için set/strateji bazında en az kaç kapanan işlem gerekir? (DURUM.md'de yok; Dersler'deki 'örnek az' sınırı "
-                                    f"{ders.MIN_ISLEM_DERS} yalnız geçici)"},
     {"ad": "strateji_alarmi_kabulu", "soru": "'Sonuçların beklenti aralığında olması' yalnız set için mi, her strateji için mi aranır? (şimdi: set kabul kalemi, "
-                                              "strateji bazı bilgi)"},
-    {"ad": "gunluk_limit_olayi", "soru": "Günlük kayıp limitinin (%3) tetiklenmesi sert limit ihlali sayılır mı? (şimdi: sayılmaz, bilgi olarak sayılır; kill switch ve aşım kaldı)"},
-    {"ad": "dersler_durumu", "soru": "Bir stratejinin Dersler durumunun 'altında' çıkması kabulü bozar mı? (şimdi: bilgi; eşikler de tanımsız: dersler.json tanimsiz_esikler)"},
+                                              "strateji bazı bilgi; 'altında' ders durumu kabulü bozmaz ama stratejiyi canlıdan eler: kullanıcı kararı 2026-11-08)"},
 ]
+_BOSLUK_RE = re.compile(r"\(([^()]+?) -> ([^()]+?)\)")
+_WS_SN_RE = re.compile(r"WS (\d+(?:\.\d+)?) sn mesaj vermedi")
+
+
+def kesinti_olc(olaylar: list, olay_kapasite: int = OLAY_KAPASITE) -> dict:
+    """Motorun mevcut olay kayıtlarından (paper_state.json olaylar: {zaman, tur, mesaj}) toplam kesinti süresi.
+
+    Süresi kayıttan okunabilenler: `veri_bosluk` mesajındaki "(A -> B)" aralığı; `ws_koptu` mesajındaki "WS N sn mesaj vermedi" ([zaman-N sn, zaman]).
+    Çakışan aralıklar birleştirilir (aynı süre iki kez sayılmaz). Süresi kayıtta olmayan kesinti olayları (yeniden_baslatma, binance_hata, aralıksız veri_bosluk,
+    'WS koptu') veya dolu olay kaydı (eski olaylar silinmiş olabilir) varsa toplam ÖLÇÜLEMEZ: `saat` None, `neden` yazılı, `alt_sinir_saat` yalnız ölçülen kısımdır.
+    -> {saat, alt_sinir_saat, olculen_olay, olculemeyen_olay, neden}."""
+    araliklar, olculemeyen = [], 0
+    for o in olaylar or []:
+        tur_, msg = o.get("tur"), o.get("mesaj") or ""
+        if tur_ not in KESINTI_OLAYLARI:
+            continue
+        aralik = None
+        try:
+            if tur_ == "veri_bosluk" and (mm := _BOSLUK_RE.search(msg)):
+                a_, b_ = (pd.Timestamp(mm.group(i)) for i in (1, 2))
+                aralik = (ek._utc(a_), ek._utc(b_))
+            elif tur_ == "ws_koptu" and (mm := _WS_SN_RE.search(msg)):
+                bit = ek._utc(pd.Timestamp(o["zaman"]))
+                aralik = (bit - timedelta(seconds=float(mm.group(1))), bit)
+        except (ValueError, TypeError, KeyError):
+            aralik = None
+        if aralik is None or aralik[1] < aralik[0]:
+            olculemeyen += 1
+        else:
+            araliklar.append(aralik)
+    araliklar.sort()
+    toplam, cur_a, cur_b = timedelta(0), None, None
+    for a_, b_ in araliklar:
+        if cur_b is None or a_ > cur_b:
+            if cur_b is not None:
+                toplam += cur_b - cur_a
+            cur_a, cur_b = a_, b_
+        else:
+            cur_b = max(cur_b, b_)
+    if cur_b is not None:
+        toplam += cur_b - cur_a
+    alt = toplam.total_seconds() / 3600.0
+    nedenler = []
+    if olculemeyen:
+        nedenler.append(f"{olculemeyen} kesinti olayının süresi kayıtta yok (yeniden başlatma / Binance hatası / aralıksız boşluk / bağlantı kopması)")
+    if len(olaylar or []) >= olay_kapasite:
+        nedenler.append(f"olay kaydı dolu ({olay_kapasite}): eski olaylar silinmiş olabilir")
+    return {"saat": None if nedenler else alt, "alt_sinir_saat": alt, "olculen_olay": len(araliklar), "olculemeyen_olay": olculemeyen,
+            "neden": "; ".join(nedenler) if nedenler else None}
+
+
+def canliya_uygunluk(dersler: Optional[dict]) -> list:
+    """Dersler durumundan strateji başına canlıya uygunluk (kullanıcı kararı 2026-11-08). İçinde/üstünde: uygun; altında: değil; örnek az: değil (ayrı neden)."""
+    out = []
+    for x in (dersler or {}).get("stratejiler", []):
+        dur = x.get("durum")
+        if dur in ("icinde", "ustunde"):
+            uygun, neden = True, f"Dersler: {ders.DURUM_ETIKET[dur]}"
+        elif dur == "altinda":
+            uygun, neden = False, "Dersler: beklentinin altında"
+        elif dur == "ornek_az":
+            uygun, neden = False, f"örnek az ({x.get('islem')} işlem < {ders.MIN_ISLEM_DERS})"
+        else:
+            uygun, neden = False, "ölçülmedi: " + (x.get("durum_neden") or "Dersler durumu yok")
+        out.append({"kimlik": x["kimlik"], "dersler_durumu": dur, "canliya_uygun": uygun, "neden": neden})
+    return out
 
 
 def _kalem(id_: str, ad: str, olcut: str, kaynak: str, durum: str, deger: Optional[str], neden: Optional[str] = None) -> dict:
@@ -48,16 +120,25 @@ def kabul_listesi(*, simdi, donem_bas, risk: dict, sayaclar: dict, set_konum: di
                   saglik_durum: Optional[str], olaylar: list, limit_olaylari: list) -> dict:
     """Paper kabul kontrol listesi (anlık durum, birikimli). -> {'kalemler': [...], 'genel_durum', 'sayim', 'tanimsiz'}."""
     k = []
+    # --- kesinti (kullanıcı kararı 2026-11-08: > 24 saat reddetmez, değerlendirme süresini uzatır)
+    kes = kesinti_olc(olaylar)
+    bilinen = kes["saat"] if kes["saat"] is not None else kes["alt_sinir_saat"]      # ölçülen kısım kesin; ölçülemeyen kısım için tahmin YOK
+    uzama = max(0.0, bilinen - KESINTI_LIMIT_SAAT)
     # --- süre
+    en_erken = None
     if donem_bas is None:
         k.append(_kalem("sure", "Paper süresi ≥ 8 hafta", f"≥ {PAPER_MIN_GUN} gün", "DURUM.md Aşama 4 + lider günlüğü 2026-11-07", "bekliyor", None, "başlangıç günü yok"))
     else:
         bas, su = ek._utc(donem_bas), ek._utc(simdi)
         gun = (su - bas).days
-        erken = str((bas + timedelta(days=PAPER_MIN_GUN)).date())
-        k.append(_kalem("sure", "Paper süresi ≥ 8 hafta", f"≥ {PAPER_MIN_GUN} gün (en erken değerlendirme {EN_ERKEN_DEGERLENDIRME})",
-                        "DURUM.md Aşama 4 (Süre ≥ 8 hafta) + lider günlüğü 2026-11-07 (en erken 2027-01-02)",
-                        "gecti" if gun >= PAPER_MIN_GUN else "bekliyor", f"{gun} / {PAPER_MIN_GUN} gün", f"başlangıç + {PAPER_MIN_GUN} gün = {erken}"))
+        hedef = bas + timedelta(days=PAPER_MIN_GUN) + timedelta(hours=uzama)
+        en_erken = str(hedef.date())
+        neden = f"başlangıç + {PAPER_MIN_GUN} gün = {str((bas + timedelta(days=PAPER_MIN_GUN)).date())}"
+        if uzama > 0:
+            neden += (f" + 24 saati aşan kesinti {uzama:.1f} sa" + (" (ölçülen alt sınır)" if kes["saat"] is None else "") + f" = {en_erken}")
+        k.append(_kalem("sure", "Paper süresi ≥ 8 hafta", f"≥ {PAPER_MIN_GUN} gün + 24 saati aşan kesinti (en erken değerlendirme {en_erken})",
+                        "DURUM.md Aşama 4 (Süre ≥ 8 hafta) + lider günlüğü 2026-11-07 + kullanıcı kararı 2026-11-08 (kesinti uzatır)",
+                        "gecti" if su >= hedef else "bekliyor", f"{gun} / {PAPER_MIN_GUN} gün", neden))
     # --- set beklenti aralığı (8 hafta)
     s8 = (set_konum or {}).get("8")
     if s8 is None:
@@ -73,19 +154,19 @@ def kabul_listesi(*, simdi, donem_bas, risk: dict, sayaclar: dict, set_konum: di
     # --- sert limit
     kill_ev = sum(1 for o in limit_olaylari if o["tur"] == "kill_switch")
     asimlar = []
-    for ad, anahtar in (("kaldıraç", "kaldirac"), ("açık stop riski", "acik_stop_riski"), ("günlük kayıp", "gunluk_kayip")):
+    for ad, anahtar in (("kaldıraç", "kaldirac"), ("açık stop riski", "acik_stop_riski")):
         b = risk[anahtar]
         if b["deger"] is not None and b["deger"] > b["limit"]:
             asimlar.append(f"{ad} {b['deger']:.3f} > {b['limit']:.3f}")
     kill = bool(risk["kill_switch"]["tetiklendi"]) or kill_ev > 0 or sayaclar.get("kill_olayi", 0) > 0
     sorun = (["kill switch tetiklendi"] if kill else []) + asimlar
-    k.append(_kalem("sert_limit", "Sert limit ihlali yok", "kill switch tetiklenmedi; anlık kaldıraç/açık stop riski/günlük kayıp limiti aşılmadı",
-                    "DURUM.md karar 14, 25 + kullanıcı görevi 2026-11-08", "kaldi" if sorun else "gecti",
+    k.append(_kalem("sert_limit", "Sert limit ihlali yok", "kill switch tetiklenmedi; anlık kaldıraç/açık stop riski limiti aşılmadı (günlük %3 kayıp limitinin tetiklenmesi ihlal değil)",
+                    "DURUM.md karar 14, 25 + kullanıcı kararı 2026-11-08", "kaldi" if sorun else "gecti",
                     "; ".join(sorun) if sorun else "ihlal yok",
-                    "yalnız anlık değerler ve motorun limit olayları denetlenir; geçmiş an-an aşım kaydı tutulmaz (limitler kodda uygulanır)"))
+                    "yalnız anlık değerler ve motorun kill switch olayları denetlenir; geçmiş an-an aşım kaydı tutulmaz (limitler kodda uygulanır)"))
     # --- bilgi kalemleri
     gl = sum(1 for o in limit_olaylari if o["tur"] == "gunluk_kayip")
-    k.append(_kalem("gunluk_limit_olayi", "Günlük kayıp limiti olayı sayısı", "bilgi (kabul kalemi değil)", "tanımsız: kullanıcıya sorulacak",
+    k.append(_kalem("gunluk_limit_olayi", "Günlük kayıp limiti olayı sayısı", "bilgi (ihlal sayılmaz)", "kullanıcı kararı 2026-11-08: günlük limit tetiklenmesi ihlal değil",
                     "bilgi", str(max(gl, sayaclar.get("gunluk_limit_olayi", 0)))))
     alarmli = sorted(k_ for k_, kon in (strat_konum or {}).items() if "8" in kon and (kon["8"]["net_getiri"]["alarm"] or kon["8"]["max_dusus"]["alarm"]))
     olcen = [k_ for k_, kon in (strat_konum or {}).items() if "8" in kon]
@@ -93,23 +174,30 @@ def kabul_listesi(*, simdi, donem_bas, risk: dict, sayaclar: dict, set_konum: di
                     f"{len(alarmli)} / {len(olcen)} strateji alarmda" + (": " + ", ".join(alarmli) if alarmli else "") if olcen else None,
                     None if olcen else "8 haftalık pencere henüz dolmadı"))
     sy = (dersler or {}).get("sayim")
-    k.append(_kalem("dersler_ozeti", "Dersler: strateji durumları", "bilgi (kabul kalemi değil)", "tanımsız: kullanıcıya sorulacak", "bilgi",
+    k.append(_kalem("dersler_ozeti", "Dersler: strateji durumları", "bilgi (kabul kalemi değil)", "kullanıcı kararı 2026-11-08: altında = kabulü bozmaz, strateji canlıya geçmez", "bilgi",
                     (f"içinde {sy['icinde']}, altında {sy['altinda']}, üstünde {sy['ustunde']}, örnek az {sy['ornek_az']}" + (f", ölçülmedi {sy['olculmedi']}" if sy.get("olculmedi") else "")) if sy else None,
                     None if sy else "dersler hesaplanmadı"))
-    # --- tanımsız kalemler (eşik uydurulmaz)
-    kes = [o for o in olaylar if o.get("tur") in KESINTI_OLAYLARI]
-    k.append(_kalem("kesintisiz_calisma", "Kesintisiz çalışma", "TANIMSIZ: kabul edilen kesinti sınırı DURUM.md'de yok", "DURUM.md Aşama 4 (yalnız 'kesintisiz çalışma')",
-                    "tanimsiz", f"servis durumu {saglik_durum or '—'}; son 50 olayda {len(kes)} kesinti/veri olayı",
-                    "kullanıcıya sorulacak: kesinti sınırı"))
-    k.append(_kalem("asgari_islem", "Asgari kapanan işlem sayısı", "TANIMSIZ: DURUM.md'de yok", "—", "tanimsiz", f"{sayaclar.get('kapanan_islem', 0)} kapanan işlem",
-                    "kullanıcıya sorulacak: asgari işlem"))
+    # --- kesinti (bilgi) ve asgari işlem (geçti/kaldı)
+    if kes["saat"] is not None:
+        kdeger, kneden = f"toplam {kes['saat']:.1f} saat ({kes['olculen_olay']} aralık; sınır {KESINTI_LIMIT_SAAT:.0f} saat)", None
+    else:
+        kdeger, kneden = None, "ölçülemedi: " + kes["neden"] + f"; ölçülebilen kısım {kes['alt_sinir_saat']:.1f} saat (alt sınır). Servis durumu {saglik_durum or '—'}."
+    k.append(_kalem("kesinti_suresi", "Toplam kesinti süresi", f"bilgi: {KESINTI_LIMIT_SAAT:.0f} saati aşan kısım değerlendirme süresini uzatır (reddetmez)",
+                    "kullanıcı kararı 2026-11-08; ölçüm: paper_state olay kayıtları (veri_bosluk aralığı, ws_koptu süresi)", "bilgi", kdeger, kneden))
+    kapanan = sayaclar.get("kapanan_islem", 0)
+    sure_gecti = k[0]["durum"] == "gecti"
+    ai_durum = "gecti" if kapanan >= ASGARI_ISLEM else ("kaldi" if sure_gecti else "bekliyor")
+    k.append(_kalem("asgari_islem", "Asgari kapanan işlem (set toplamı)", f"≥ {ASGARI_ISLEM} kapanan işlem", "kullanıcı kararı 2026-11-08", ai_durum,
+                    f"{kapanan} / {ASGARI_ISLEM} kapanan işlem",
+                    None if ai_durum == "gecti" else ("süre dolunca hâlâ eksikse kaldı" if ai_durum == "bekliyor" else "süre doldu, işlem sayısı yetersiz")))
     say = defaultdict(int)
     for x in k:
         say[x["durum"]] += 1
     genel = "kaldi" if say["kaldi"] else ("bekliyor" if say["bekliyor"] else "tamam")
     return {"kalemler": k, "genel_durum": genel, "sayim": {a: say.get(a, 0) for a in ("gecti", "kaldi", "bekliyor", "tanimsiz", "bilgi")},
-            "genel_not": "'tamam' kabul kararı değildir: tanımsız kalemler (tanimsiz) kullanıcı kararını bekler." if genel == "tamam" else None,
-            "tanimsiz": TANIMSIZ}
+            "genel_not": "'tamam' tanımlı kalemlerin hepsinin geçtiği demektir; kabul kararı kullanıcınındır (açık soru: tanimsiz listesi)." if genel == "tamam" else None,
+            "en_erken_degerlendirme": en_erken, "kesinti": {**kes, "limit_saat": KESINTI_LIMIT_SAAT, "uzama_saat": uzama},
+            "stratejiler": canliya_uygunluk(dersler), "tanimsiz": TANIMSIZ}
 
 
 def _ay_dusus(gunluk_tam: list, bas: str, bit: str) -> Optional[float]:

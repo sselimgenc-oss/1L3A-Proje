@@ -12,8 +12,8 @@ YÖNTEM (kurallı; LLM yok, lookahead yok: yalnız kapanmış işlemler)
   - durum: "ornek_az" (n < MIN_ISLEM_DERS; testler null + neden) | "ustunde" | "altinda" | "icinde". Ortalama R testi anlamlıysa (p < ALFA) yönü
     belirler; değilse isabet testi; ikisi de anlamlı değilse "icinde". Ortalama R ile isabet ters yönde anlamlıysa R kararı verir ve açıklamaya yazılır.
     8 haftalık beklenti penceresinde alarm varsa (stratejiler.json beklenti) ve n yeterliyse durum "altinda"dır.
-TANIMSIZ EŞİKLER (DURUM.md'de karşılığı yok; geçici varsayılan, `TANIMSIZ_ESIKLER` ve dersler.json `tanimsiz_esikler` kullanıcıya sorulacak olarak işaretler):
-  MIN_ISLEM_DERS (= durum_ek.MIN_ISLEM, yalnız 'yeterli örnek' sınırı), ALFA (0.05; çoklu test düzeltmesi YOK).
+EŞİKLER (KULLANICI ONAYLI, 2026-11-08; DURUM.md lider günlüğü): MIN_ISLEM_DERS = 30 (yeterli örnek sınırı), ALFA = 0.05 (çoklu test düzeltmesi YOK).
+  Karar sonucu: "altinda" kabulü bozmaz ama strateji canlıya geçmez; "ornek_az" da canlıya uygun sayılmaz (bkz. aylik_rapor.canliya_uygunluk).
 """
 from __future__ import annotations
 
@@ -28,15 +28,14 @@ from motor.canli import durum_ek as ek
 
 KOK = Path(__file__).resolve().parents[2]
 REFERANS_CSV = KOK / "sonuclar" / "final" / "beklenti_islem_referansi.csv"
-MIN_ISLEM_DERS = ek.MIN_ISLEM
+MIN_ISLEM_DERS = 30                      # kullanıcı onaylı 2026-11-08 (durum_ek.MIN_ISLEM'den bağımsız)
 ALFA = 0.05
 DURUM_ETIKET = {"icinde": "beklenti içinde", "altinda": "beklentinin altında", "ustunde": "beklentinin üstünde", "ornek_az": "örnek az"}
-TANIMSIZ_ESIKLER = [
-    {"ad": "dersler_asgari_islem", "deger_gecici": MIN_ISLEM_DERS,
-     "soru": f"Bir stratejinin 'beklenti içinde/altında/üstünde' diye sınıflanması için en az kaç kapanan işlem gerekir? (geçici: {MIN_ISLEM_DERS}, "
-             "durum_ek.MIN_ISLEM; DURUM.md'de tanımlı değil)"},
-    {"ad": "dersler_alfa", "deger_gecici": ALFA,
-     "soru": f"İstatistiksel testlerde anlamlılık düzeyi ve çoklu test düzeltmesi? (geçici: p < {ALFA}, düzeltme yok; 7 strateji x 2 test)"},
+ONAYLI_ESIKLER = [
+    {"ad": "dersler_asgari_islem", "deger": MIN_ISLEM_DERS, "onay": "kullanıcı onaylı 2026-11-08",
+     "aciklama": f"Bir stratejinin 'beklenti içinde/altında/üstünde' diye sınıflanması için en az {MIN_ISLEM_DERS} kapanan işlem; altı 'örnek az'."},
+    {"ad": "dersler_alfa", "deger": ALFA, "onay": "kullanıcı onaylı 2026-11-08",
+     "aciklama": f"İstatistiksel testlerde anlamlılık düzeyi p < {ALFA}; çoklu test düzeltmesi yok."},
 ]
 
 
@@ -254,4 +253,4 @@ def olustur(kaynak: str, zaman: str, kimlikler: list, satirlar: list, konumlar: 
                        "backtest referansının kendi belirsizliği yalnız Welch testinde hesaba katılır."),
             "kaynak_not": ("backtest kaynağı: referans kilitli dönem işlemlerini de içerir; bu karşılaştırma bağımsız bir sınav değildir (bağımsız sınav paper'dır)."
                            if kaynak == "backtest" else None),
-            "tanimsiz_esikler": TANIMSIZ_ESIKLER, "sayim": sayim, "stratejiler": kayitlar}
+            "onayli_esikler": ONAYLI_ESIKLER, "tanimsiz_esikler": [], "sayim": sayim, "stratejiler": kayitlar}

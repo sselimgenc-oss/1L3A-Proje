@@ -98,7 +98,9 @@ def test_referans_csv_gercek_dosya():
     for v in ref.values():
         assert abs(sum(v["cikis_paylari"].values()) - 1.0) < 1e-9 and 0 < v["isabet"] < 1
     o = ds.olustur("paper", "2026-11-10T00:00:00Z", list(ref), [])
-    assert o["sayim"]["ornek_az"] == 7 and {t["ad"] for t in o["tanimsiz_esikler"]} == {"dersler_asgari_islem", "dersler_alfa"}
+    assert o["sayim"]["ornek_az"] == 7 and o["tanimsiz_esikler"] == []
+    assert {t["ad"]: t["deger"] for t in o["onayli_esikler"]} == {"dersler_asgari_islem": 30, "dersler_alfa": 0.05}
+    assert all("onaylı" in t["onay"] for t in o["onayli_esikler"]) and o["min_islem"] == 30 and o["alfa"] == 0.05
 
 
 # ---------------------------------------------------------------------------- aylık rapor
@@ -138,9 +140,10 @@ def _kon(alarm=False):
     return {"8": {"net_getiri": {"deger": 0.01, "bant": "p25_p50", "alarm": alarm}, "max_dusus": {"deger": 0.01, "bant": "p25_p50", "alarm": False}}}
 
 
-def _kabul(simdi="2026-11-20T00:00:00Z", bas="2026-11-07T00:00:00Z", risk=None, set_konum=None, strat_konum=None, limit=None, olaylar=None):
-    return ar.kabul_listesi(simdi=pd.Timestamp(simdi), donem_bas=pd.Timestamp(bas), risk=risk or _risk(), sayaclar={"kill_olayi": 0, "gunluk_limit_olayi": 0, "kapanan_islem": 5},
-                            set_konum=set_konum if set_konum is not None else {}, strat_konum=strat_konum or {}, dersler={"sayim": {"icinde": 0, "altinda": 1, "ustunde": 0, "ornek_az": 6}},
+def _kabul(simdi="2026-11-20T00:00:00Z", bas="2026-11-07T00:00:00Z", risk=None, set_konum=None, strat_konum=None, limit=None, olaylar=None, islem=5, dersler=None):
+    return ar.kabul_listesi(simdi=pd.Timestamp(simdi), donem_bas=pd.Timestamp(bas), risk=risk or _risk(), sayaclar={"kill_olayi": 0, "gunluk_limit_olayi": 0, "kapanan_islem": islem},
+                            set_konum=set_konum if set_konum is not None else {}, strat_konum=strat_konum or {},
+                            dersler=dersler or {"sayim": {"icinde": 0, "altinda": 1, "ustunde": 0, "ornek_az": 6}},
                             saglik_durum="ok", olaylar=olaylar or [], limit_olaylari=limit or [])
 
 
@@ -168,15 +171,77 @@ def test_kabul_set_beklenti_ve_limit_ve_genel():
     assert _kalem(ok, "sert_limit")["durum"] == "gecti" and _kalem(ok, "gunluk_limit_olayi")["deger"] == "1"      # günlük limit: bilgi
 
 
-def test_kabul_tamam_ama_tanimsizlar_isaretli():
-    k = _kabul(simdi="2027-01-03T00:00:00Z", set_konum=_kon(False))
-    assert k["genel_durum"] == "tamam" and "kabul kararı değildir" in k["genel_not"]
-    for i in ("kesintisiz_calisma", "asgari_islem"):
-        x = _kalem(k, i)
-        assert x["durum"] == "tanimsiz" and "kullanıcıya sorulacak" in x["neden"]
-    assert {t["ad"] for t in k["tanimsiz"]} >= {"kesintisiz_calisma", "asgari_islem", "strateji_alarmi_kabulu", "gunluk_limit_olayi", "dersler_durumu"}
+def test_kabul_tamam_ve_acik_soru_listesi():
+    k = _kabul(simdi="2027-01-03T00:00:00Z", set_konum=_kon(False), islem=30)
+    assert k["genel_durum"] == "tamam" and "kullanıcınındır" in k["genel_not"]
+    assert k["sayim"]["tanimsiz"] == 0 and all(x["durum"] != "tanimsiz" for x in k["kalemler"])
+    assert [t["ad"] for t in k["tanimsiz"]] == ["strateji_alarmi_kabulu"]                  # karara bağlananlar listeden çıktı
     # eski pano eşikleri kullanılmıyor
     assert all("PSR" not in x["olcut"] and "%10" not in x["olcut"] for x in k["kalemler"])
+
+
+def test_kabul_asgari_islem_30():
+    assert _kalem(_kabul(islem=30), "asgari_islem")["durum"] == "gecti"
+    assert _kalem(_kabul(islem=29), "asgari_islem")["durum"] == "bekliyor"                  # süre dolmadı: birikiyor
+    ge = _kalem(_kabul(simdi="2027-01-03T00:00:00Z", islem=29), "asgari_islem")
+    assert ge["durum"] == "kaldi" and ge["deger"] == "29 / 30 kapanan işlem"                # süre doldu, 30'un altı
+    assert _kabul(simdi="2027-01-03T00:00:00Z", set_konum=_kon(False), islem=29)["genel_durum"] == "kaldi"
+
+
+def test_kabul_gunluk_limit_tetiklenmesi_ihlal_degil_kill_ve_kaldirac_ihlal():
+    gl = [{"tur": "gunluk_kayip", "zaman": "2026-11-12T00:00:00Z"}, {"tur": "gunluk_kayip", "zaman": "2026-11-13T00:00:00Z"}]
+    k = _kabul(limit=gl, risk=_risk(gk=0.05))                                               # anlık günlük kayıp limit üstünde olsa da ihlal değil
+    assert _kalem(k, "sert_limit")["durum"] == "gecti" and _kalem(k, "gunluk_limit_olayi")["deger"] == "2"
+    assert _kalem(_kabul(risk=_risk(stop=0.09)), "sert_limit")["durum"] == "kaldi"
+    assert _kalem(_kabul(risk=_risk(kal=3.5)), "sert_limit")["durum"] == "kaldi"
+
+
+def _bosluk(a, b, zaman="2026-11-12T00:00:00Z"):
+    return {"zaman": zaman, "tur": "veri_bosluk", "mesaj": f"BTCUSDT 1h: 9 mum eksik ({a} -> {b}); borsa bu mumları vermedi"}
+
+
+def test_kesinti_olc_birlestirir_ve_ws_suresini_okur():
+    ol = [_bosluk("2026-11-10 00:00:00+00:00", "2026-11-10 10:00:00+00:00"), _bosluk("2026-11-10 08:00:00+00:00", "2026-11-10 12:00:00+00:00"),   # çakışan: 12 sa
+          {"zaman": "2026-11-11T06:00:00Z", "tur": "ws_koptu", "mesaj": "WS 7200 sn mesaj vermedi; yeniden bağlanılıyor"},                       # 2 sa
+          {"zaman": "2026-11-11T00:00:00Z", "tur": "veri_yok", "mesaj": "x"}, {"zaman": "2026-11-11T00:00:00Z", "tur": "baslangic", "mesaj": "x"}]
+    c = ar.kesinti_olc(ol)
+    assert c["saat"] == pytest.approx(14.0) and c["neden"] is None and c["olculen_olay"] == 3 and c["olculemeyen_olay"] == 0
+    assert ar.kesinti_olc([])["saat"] == 0.0
+
+
+def test_kesinti_olculemiyorsa_null_ve_neden_uydurma_yok():
+    ol = [_bosluk("2026-11-10 00:00:00+00:00", "2026-11-10 05:00:00+00:00"), {"zaman": "2026-11-11T00:00:00Z", "tur": "yeniden_baslatma", "mesaj": "x"},
+          {"zaman": "2026-11-11T00:00:00Z", "tur": "ws_koptu", "mesaj": "WS koptu: ConnectionError()"}]
+    c = ar.kesinti_olc(ol)
+    assert c["saat"] is None and c["alt_sinir_saat"] == pytest.approx(5.0) and c["olculemeyen_olay"] == 2 and "süresi kayıtta yok" in c["neden"]
+    x = _kalem(_kabul(olaylar=ol), "kesinti_suresi")
+    assert x["durum"] == "bilgi" and x["deger"] is None and "ölçülemedi" in x["neden"] and "alt sınır" in x["neden"]
+    dolu = [{"zaman": "2026-11-11T00:00:00Z", "tur": "baslangic", "mesaj": "x"}] * ar.OLAY_KAPASITE
+    assert ar.kesinti_olc(dolu)["saat"] is None and "dolu" in ar.kesinti_olc(dolu)["neden"]
+
+
+def test_kesinti_24_saati_asarsa_degerlendirme_uzar_reddetmez():
+    k0 = _kabul(olaylar=[_bosluk("2026-11-10 00:00:00+00:00", "2026-11-10 20:00:00+00:00")])          # 20 sa <= 24: kayma yok
+    assert k0["en_erken_degerlendirme"] == "2027-01-02" and k0["kesinti"]["uzama_saat"] == 0.0
+    ol = [_bosluk("2026-11-10 00:00:00+00:00", "2026-11-12 00:00:00+00:00")]                           # 48 sa -> 24 sa uzama -> 2027-01-03
+    k = _kabul(simdi="2027-01-02T12:00:00Z", olaylar=ol, set_konum=_kon(False), islem=30)
+    s = _kalem(k, "sure")
+    assert k["en_erken_degerlendirme"] == "2027-01-03" and k["kesinti"]["uzama_saat"] == pytest.approx(24.0)
+    assert s["durum"] == "bekliyor" and "2027-01-03" in s["neden"] and k["genel_durum"] == "bekliyor"   # reddedilmedi, bekliyor
+    assert _kalem(_kabul(simdi="2027-01-03T00:00:00Z", olaylar=ol), "sure")["durum"] == "gecti"
+    assert _kalem(k, "kesinti_suresi")["durum"] == "bilgi" and "48.0" in _kalem(k, "kesinti_suresi")["deger"]
+
+
+def test_canliya_uygunluk_ders_durumundan():
+    dr = {"sayim": {}, "stratejiler": [
+        {"kimlik": "a", "durum": "icinde", "islem": 40}, {"kimlik": "b", "durum": "ustunde", "islem": 40}, {"kimlik": "c", "durum": "altinda", "islem": 40},
+        {"kimlik": "d", "durum": "ornek_az", "islem": 12}, {"kimlik": "e", "durum": None, "islem": 0, "durum_neden": "backtest referansı yok"}]}
+    k = _kabul(dersler=dr, simdi="2027-01-03T00:00:00Z", set_konum=_kon(False), islem=30)
+    m = {x["kimlik"]: x for x in k["stratejiler"]}
+    assert [m[i]["canliya_uygun"] for i in "abcde"] == [True, True, False, False, False]
+    assert "altında" in m["c"]["neden"] and "örnek az" in m["d"]["neden"] and "12" in m["d"]["neden"] and "ölçülmedi" in m["e"]["neden"]
+    assert m["c"]["neden"] != m["d"]["neden"]                                                   # ayrı nedenler
+    assert k["genel_durum"] == "tamam"                                                          # altında kabulü bozmaz
 
 
 def test_kabul_strateji_alarmi_bilgi_kalemi():
@@ -247,7 +312,7 @@ def test_pano_dersler_ve_rapor_sekmeleri_dosyadaki_sayilari_gosterir(paper):
         assert pano.kisa_kimlik(x["kimlik"]) in html
     for kal in veri["aylik_rapor"]["kabul_listesi"]["kalemler"]:
         assert pano.esc(kal["ad"]) in html
-    assert "TANIMSIZ" in html and "Kullanıcıya sorulacak" in html
+    assert "Canlıya uygun" in html and "Kullanıcıya sorulacak" in html
     # eski motor (ek dosya yok): bölümler 'veri yok' der, sayfa kırılmaz
     veri2 = dict(veri, dersler=None, aylik_rapor=None)
     h2 = pano.html_olustur(veri2, sorun, pd.Timestamp("2027-01-05", tz="UTC").to_pydatetime())

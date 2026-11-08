@@ -363,7 +363,7 @@ def olustur(p, simdi, kaynak_saglik: Optional[list] = None, olaylar: Optional[li
     limit_ev = [{"tur": o["tur"], "zaman": o["zaman"]} for o in m.limit_olaylari]
     rapor = ar.olustur(kaynak=kaynak, zaman=_z(simdi), simdi=simdi, donem_bas=S["ilk_gun"], aylik_kz_ajan=donem["aylik"], gunluk_tam=S["gunluk_tam"],
                        satirlar=islemler, risk=risk, sayaclar=sayac, set_konum=set_kon, strat_konum=strat_kon, dersler=ds,
-                       saglik_durum=saglik["durum"], olaylar=olay_liste, limit_olaylari=limit_ev, kazanma_olcutu="net")
+                       saglik_durum=saglik["durum"], olaylar=list(olaylar or []), limit_olaylari=limit_ev, kazanma_olcutu="net")
     ekstra = {"dersler": ds, "aylik_rapor": rapor, "maruziyet": maruziyet, "maliyet": maliyet, "reddedilen": reddedilen, "olaylar": olay_liste,
               "icgoruler": {**d._zarf("icgoruler", kaynak, _z(simdi)), "cumleler": ic}}
     return {"ozet": ozet, "stratejiler": strat, "islemler": islemler, "saglik": saglik, "gecmis": gecmis, "ekstra": ekstra,
