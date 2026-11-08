@@ -113,6 +113,10 @@ Ana ders: önceki sonuçlar OOS'a bakılarak seçilmiş ve kâr birkaç işlemde
   saatlik dosyalar → swing/daytrade 1h+ testleri önce; 15m/30m dakikalık veri tamamlanınca.
 
 ## Lider kararları günlüğü (karar 26)
+- 2026-11-08 (kullanıcı): Pano karne/rapor eşikleri eski panonunkiler (%10 DD, PSR>%95) değil, projenin kendi kurallarıyla
+  (ON_KAYIT geçme ölçütleri, beklenti aralıkları). Günlük K/Z ve dönemsel getiri gün kesimi Türkiye saati (00:00 TSİ).
+  Pano öncelik 1 (motor yazıcı paketi) onaylandı, başladı. ML panoya filtre olarak eklenmez; ayrı ön kayıtlı deney
+  (meta-etiket, gölge mod) olarak evren testi sonrası konuşulacak.
 - 2026-11-08: Evren testi kullanıcı onayıyla ("1 tamam") parça parça koşulur: swing ham+wf → ön sonuç → daytrade
   ham+wf → scalp ham+wf → portföy → sağlamlık/pbo/seçim/holdout HEPSİ BİRLİKTE en sonda. Sebep: DSR deneme sayısı
   tüm stillerin toplamıyla hesaplanmalı; swing'e erken sağlamlık koşmak sayıyı küçültüp kapıyı gevşetirdi.
