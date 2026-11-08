@@ -91,3 +91,12 @@ def test_gruplar_on_kayita_uygun():
     assert g["kimlik"].is_unique
     g2 = kt.gruplari_kur()
     assert list(g["kimlik"]) == list(g2["kimlik"])           # tohum 42: tekrarlanabilir
+
+
+def test_kilit_log_ortam_degiskeniyle_baska_dosyaya(tmp_path, monkeypatch):
+    """Sunucu: L3A_KILIT_LOG verilirse açılış kaydı depodaki izlenen dosyaya değil o yola yazılır (git pull çakışmasın)."""
+    from motor.veri import kilit
+    hedef = tmp_path / "sunucu" / "kilit.jsonl"
+    monkeypatch.setenv(kilit.KILIT_LOG_ORTAM, str(hedef))
+    kilit.kilit_siniri(None, True, "test gerekçesi", "BTCUSDT", "mum 1h")
+    assert hedef.exists() and not kilit.KILIT_LOG.exists()
