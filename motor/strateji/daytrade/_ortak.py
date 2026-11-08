@@ -2,9 +2,13 @@
 
 Mum indeksi = mumun AÇILIŞ zamanı (UTC). Seans = `seans_saat` (UTC saat, ondalık olabilir: 13.5 = 13:30)
 anında başlayan 24 saatlik dilim; varsayılan 0.0 = UTC gün başı (kripto 7/24).
+Gün sonu (seans_son_mumu): kripto için gün sınırı kuralı; seanslı veride ek olarak bilinen seans kapanışı
+(motor/strateji/seans_takvimi.py).
 """
 import numpy as np
 import pandas as pd
+
+from motor.strateji.seans_takvimi import KRIPTO, seans_kapanis_ani, seans_turu
 
 
 def _gun_no(zaman: pd.DatetimeIndex, seans_saat: float) -> np.ndarray:
@@ -20,11 +24,15 @@ def seans_kimligi(index: pd.DatetimeIndex, seans_saat: float = 0.0) -> np.ndarra
     return _gun_no(index, seans_saat)
 
 
-def seans_son_mumu(index: pd.DatetimeIndex, seans_saat: float = 0.0) -> np.ndarray:
-    """Mumun KAPANIŞ anı bir sonraki seansa denk geliyorsa True (= seansın son mumu).
+def seans_son_mumu(index: pd.DatetimeIndex, seans_saat: float = 0.0, tur: str | None = None) -> np.ndarray:
+    """Günün (seansın) son mumu ise True.
 
-    Mum süresi yalnız geçmişten kestirilir (şimdiye kadarki en küçük mum aralığı); ilk mum için False.
-    Böylece sonuç, serinin geleceğine bağlı değildir (lookahead yok).
+    İki koşuldan biri: (1) mumun KAPANIŞ anı bir sonraki seans gününe (`seans_saat` kaydırmalı) denk geliyor (7/24 kripto
+    kuralı; kripto için tek koşul, davranış eskisiyle birebir); (2) seanslı piyasada mumun kapanış anı o günün bilinen seans
+    kapanışına ulaşıyor/geçiyor (motor/strateji/seans_takvimi.py; ABD hisse, BIST, 24/5 vadeli/CFD hafta ve tatil kapanışı).
+    Mum süresi yalnız geçmişten kestirilir (şimdiye kadarki en küçük mum aralığı); ilk mum için False. Karar mumun kendi
+    zamanı + sabit takvimden çıkar, sonraki mumun varlığına bakılmaz (lookahead yok). `tur` verilmezse indeksin zaman ayak
+    izinden çıkarılır (seans_takvimi.seans_turu).
     """
     n = len(index)
     if n < 2:
@@ -33,7 +41,14 @@ def seans_son_mumu(index: pd.DatetimeIndex, seans_saat: float = 0.0) -> np.ndarr
     sure = np.r_[np.nan, np.minimum.accumulate(fark)]
     gecerli = ~np.isnan(sure)
     kapanis_zamani = index + pd.to_timedelta(np.where(gecerli, sure, 0.0), unit="s")
-    return (_gun_no(kapanis_zamani, seans_saat) != _gun_no(index, seans_saat)) & gecerli
+    son = (_gun_no(kapanis_zamani, seans_saat) != _gun_no(index, seans_saat)) & gecerli
+    tur = seans_turu(index) if tur is None else tur
+    if tur == KRIPTO:
+        return son
+    kapanis_ani = seans_kapanis_ani(index, tur)
+    kz = kapanis_zamani.tz_localize("UTC") if kapanis_zamani.tz is None else kapanis_zamani.tz_convert("UTC")
+    seansli = np.asarray(~kapanis_ani.isna()) & np.asarray(kz >= kapanis_ani)
+    return son | (seansli & gecerli)
 
 
 def onceki_seans_hlc(mumlar: pd.DataFrame, seans: np.ndarray) -> pd.DataFrame:

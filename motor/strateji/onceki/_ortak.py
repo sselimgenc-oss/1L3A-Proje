@@ -3,6 +3,7 @@ import numpy as np
 import pandas as pd
 
 from motor.strateji import gostergeler as g
+from motor.strateji.daytrade._ortak import seans_son_mumu
 from motor.strateji.htf import ust_zaman
 
 
@@ -44,16 +45,10 @@ def olay(kosul: pd.Series) -> pd.Series:
 
 
 def gun_sonu_maskesi(index: pd.DatetimeIndex) -> np.ndarray:
-    """Mumun KAPANIŞ anı bir sonraki UTC gününe denk geliyorsa True (= UTC gününün son mumu).
+    """UTC gününün son mumu ise True: kapanış anı bir sonraki UTC gününe taşıyor ya da (seanslı veride) o günün bilinen
+    seans kapanışına ulaşıyor. Tanım daytrade/_ortak.seans_son_mumu (seans_saat=0) ile ortaktır; kripto davranışı aynı.
     Mum süresi yalnız geçmişten kestirilir (o ana kadarki en küçük aralık): lookahead yok."""
-    n = len(index)
-    if n < 2:
-        return np.zeros(n, dtype=bool)
-    fark = ((index[1:] - index[:-1]) / pd.Timedelta(seconds=1)).to_numpy()
-    sure = np.r_[np.nan, np.minimum.accumulate(fark)]
-    gecerli = ~np.isnan(sure)
-    kapanis = index + pd.to_timedelta(np.where(gecerli, sure, 0.0), unit="s")
-    return (kapanis.floor("D") != index.floor("D")) & gecerli
+    return seans_son_mumu(index, 0.0)
 
 
 def cerceve(index, long_ok, short_ok, stop_long, stop_short, cikis=None, zaman_cikisi_mum=None,
