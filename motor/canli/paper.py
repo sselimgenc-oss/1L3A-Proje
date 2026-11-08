@@ -24,6 +24,7 @@ import pandas as pd
 
 from motor.backtest.motor import SembolKurallari
 from motor.canli import paper_sinyal as psg
+from motor.canli.durum_ek import kapanis_gunu as tsi_kapanis_gunu
 from motor.canli.paper_kaynak import TekrarKaynagi
 from motor.canli.paper_motor import Birim, PaperMotor, _dec, _enc
 from motor.portfoy.motor import PortfoyAyarlari
@@ -63,7 +64,8 @@ class Paper:
         self.satir_sayisi = 0
         self.uyarilar: list = []                 # veri/motor uyarıları (saglik.json'a gider)
         self.olaylar: list = []                  # {zaman, tur, mesaj}; son 50'si olaylar.jsonl'e yazılır
-        self.strateji_gun: dict = {}             # {kimlik: {"YYYY-MM-DD": gün sonu kümülatif net K/Z (Decimal)}}
+        self.strateji_gun: dict = {}             # {kimlik: {"YYYY-MM-DD" (UTC günü): gün sonu kümülatif net K/Z (Decimal)}} (beklenti tabanı)
+        self.strateji_gun_tsi: dict = {}         # aynısı TSİ günü kesimiyle (pano dönemsel getiri)
         self.bildirim = None                     # callback(tur, mesaj) (Telegram vb.); None: yok
         self._limit_gorulen = 0
         for s in {x for t in self.tanimlar for x in t.veri_semboller}:
@@ -147,8 +149,11 @@ class Paper:
         from motor.canli.paper_durum import strateji_pnl
         m = self.motor
         gun = str(m.gun)
+        tsi_gun = tsi_kapanis_gunu(t + b.aralik)
         for td in self.tanimlar:
-            self.strateji_gun.setdefault(td.kimlik, {})[gun] = strateji_pnl(self, td.kimlik)["toplam"]
+            toplam = strateji_pnl(self, td.kimlik)["toplam"]
+            self.strateji_gun.setdefault(td.kimlik, {})[gun] = toplam
+            self.strateji_gun_tsi.setdefault(td.kimlik, {})[tsi_gun] = toplam
         for o in m.limit_olaylari[self._limit_gorulen:]:
             if o["tur"] == "kill_switch":
                 self.olay_ekle("kill_switch", f"KILL SWITCH: zirveden düşüş %{o['dusus_yuzde']:.2f}; tüm işlemler durdu", o["zaman"])
@@ -182,7 +187,7 @@ class Paper:
         return {"surum": SURUM, "baslangic_sermaye": self.ayarlar.baslangic_sermaye,
                 "ayarlar": {t.kimlik: t.ayar for t in self.tanimlar}, "pf_sutunlar": self.pf_sutunlar,
                 "satir_sayisi": self.satir_sayisi, "uyarilar": self.uyarilar, "olaylar": self.olaylar,
-                "strateji_gun": self.strateji_gun, "motor": self.motor.durum_al()}
+                "strateji_gun": self.strateji_gun, "strateji_gun_tsi": self.strateji_gun_tsi, "motor": self.motor.durum_al()}
 
     def kaydet(self, yol: Optional[Path] = None):
         from motor.canli.durum import atomik_yaz_json
@@ -209,6 +214,8 @@ class Paper:
         self.uyarilar = list(d.get("uyarilar", []))
         self.olaylar = list(d.get("olaylar", []))
         self.strateji_gun = {k: dict(v) for k, v in d.get("strateji_gun", {}).items()}
+        # eski durum dosyasında TSİ serisi yok: UTC günü serisi devralınır (en çok 3 saat kayma; motor.tsi_aktarildi notu)
+        self.strateji_gun_tsi = {k: dict(v) for k, v in d.get("strateji_gun_tsi", d.get("strateji_gun", {})).items()}
         self.motor.durum_yukle(d["motor"])
         self._limit_gorulen = len(self.motor.limit_olaylari)
         for b in self.birimler:

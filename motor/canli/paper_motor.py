@@ -33,6 +33,7 @@ from typing import Callable, Optional
 import numpy as np
 import pandas as pd
 
+from motor.canli.durum_ek import kapanis_gunu as tsi_kapanis_gunu
 from motor.backtest.motor import D, SembolKurallari, _step_asagi, _tick
 from motor.portfoy.motor import Kol, PortfoyAyarlari, _Emir, _Motor, _P
 from motor.risk.limitler import SERT_LIMITLER
@@ -85,12 +86,14 @@ class PaperMotor(_Motor):
         self.zirve = D(ayarlar.baslangic_sermaye)
         self.gunluk_kaydedildi = False
         self.gunluk_limit_sayisi = 0
-        self.gun_kapanis: dict = {}               # "YYYY-MM-DD" -> o günün son özsermayesi (Decimal)
+        self.gun_kapanis: dict = {}               # "YYYY-MM-DD" (UTC günü) -> o günün son özsermayesi (Decimal): risk limiti + beklenti tabanı
+        self.gun_kapanis_tsi: dict = {}           # "YYYY-MM-DD" (TSİ günü) -> o günün son özsermayesi: pano K/Z, dönemsel getiri
         self.ozs_son = D(ayarlar.baslangic_sermaye)
         self.son_zaman: Optional[pd.Timestamp] = None
         self.kurallar_tablo = dict(kurallar)
         self.maliyet_log: list = []               # {zaman, sk, tur: ucret|kayma|funding, tutar: Decimal} (raporlama; muhasebeyi etkilemez)
         self._acil = False
+        self.tsi_aktarildi = False
 
     # ------------------------------------------------------------------ maliyet kaydı (çekirdek yöntemlerini sarar, davranışı değiştirmez)
     def _maliyet(self, t, kol_veya_p, tur: str, tutar: Decimal) -> None:
@@ -457,6 +460,7 @@ class PaperMotor(_Motor):
         self.zirve = max(self.zirve, E)
         self.son_zaman = t + b.aralik
         self.gun_kapanis[str(self.gun)] = E
+        self.gun_kapanis_tsi[tsi_kapanis_gunu(t + b.aralik)] = E
         dusus = (self.zirve - E) / self.zirve * 100
         kill_yeni = gunluk_yeni = False
         if not self.kill and dusus >= D(L.kill_switch_dusus_yuzde):
@@ -563,7 +567,7 @@ class PaperMotor(_Motor):
             "gun_basi": self.gun_basi, "onceki_ozs": self.onceki_ozs, "zirve": self.zirve, "ozs_son": self.ozs_son,
             "gunluk_kaydedildi": self.gunluk_kaydedildi, "gunluk_limit_sayisi": self.gunluk_limit_sayisi,
             "son_zaman": self.son_zaman, "toplam_notional": self.toplam_notional,
-            "son_kap": self.son_kap, "gun_kapanis": self.gun_kapanis,
+            "son_kap": self.son_kap, "gun_kapanis": self.gun_kapanis, "gun_kapanis_tsi": self.gun_kapanis_tsi, "tsi_aktarildi": self.tsi_aktarildi,
             "acik": {k: {f.name: getattr(p, f.name) for f in dataclasses.fields(p) if f.name != "kol"} | {"kol": p.kol.kimlik}
                      for k, p in self.acik.items()},
             "kol": kol_durum, "islemler": self.islemler, "reddedilenler": self.reddedilenler, "kirpmalar": self.kirpmalar,
@@ -581,6 +585,9 @@ class PaperMotor(_Motor):
             if s in self.son_kap:
                 self.son_kap[s] = v
         self.gun_kapanis = dict(d["gun_kapanis"])
+        # eski durum dosyası (TSİ serisi yok): UTC günü serisi devralınır (en çok 3 saat kayma); ozet.notlar bunu panoya yazar
+        self.gun_kapanis_tsi = dict(d["gun_kapanis_tsi"]) if "gun_kapanis_tsi" in d else dict(d["gun_kapanis"])
+        self.tsi_aktarildi = bool(d.get("tsi_aktarildi", "gun_kapanis_tsi" not in d))
         kollar = {k.kimlik: k for k in self.tum_kollar}
         self.acik = {}
         for k, pd_ in d["acik"].items():

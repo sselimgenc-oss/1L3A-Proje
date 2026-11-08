@@ -6,7 +6,7 @@ Aynı sayı birden çok dosyada geçiyorsa (özsermaye, katkı, maliyet, işlem 
 from __future__ import annotations
 
 from collections import Counter
-from datetime import datetime, timezone
+from datetime import date, datetime, timedelta, timezone
 from decimal import Decimal
 from pathlib import Path
 from typing import Optional
@@ -17,6 +17,7 @@ import pandas as pd
 from motor.arastirma import beklenti as bek
 from motor.backtest.motor import D
 from motor.canli import durum as d
+from motor.canli import durum_ek as ek
 from motor.canli import paper_takvim as tk
 from motor.canli.backtest_durum import beklenti_konumlari
 from motor.risk.limitler import SERT_LIMITLER
@@ -46,17 +47,30 @@ def _usd(x) -> str:
 
 
 # ---------------------------------------------------------------------------- strateji bazında hesaplar
+def _acik_pnl(m, pos) -> Decimal:
+    """Açık pozisyonun anlık net K/Z'si: mark fiyatla K/Z - giriş/çıkış komisyonu - funding + önceki kısmi çıkışların brüt toplamı."""
+    return (D(m.son_kap[pos.sembol]) - pos.giris) * pos.miktar * pos.yon - pos.giris_kom - pos.cikis_kom - pos.funding + pos.brut_toplam
+
+
 def strateji_pnl(p, sk: str) -> dict:
     """Stratejinin net K/Z'si: kapanan işlemler (net_pnl) + açık pozisyonların anlık K/Z'si (mark) - giriş komisyonu - funding."""
     m = p.motor
     kapanan = sum((D(x["net_pnl"]) for x in m.islemler if m_kol_sk(m, x["kol"]) == sk), Decimal(0))
-    acik = Decimal(0)
-    for pos in m.acik.values():
-        if pos.kol.sk != sk:
-            continue
-        acik += (D(m.son_kap[pos.sembol]) - pos.giris) * pos.miktar * pos.yon - pos.giris_kom - pos.cikis_kom - pos.funding \
-            + pos.brut_toplam
+    acik = sum((_acik_pnl(m, pos) for pos in m.acik.values() if pos.kol.sk == sk), Decimal(0))
     return {"kapanan": kapanan, "acik": acik, "toplam": kapanan + acik}
+
+
+def katki_hucreleri(p) -> dict:
+    """{(strateji kimliği, sembol): Decimal} net K/Z katkısı (kapanan + açık). Σ hücre = Σ strateji_pnl()["toplam"] (aynı formül)."""
+    m = p.motor
+    h: dict = {}
+    for x in m.islemler:
+        k = (m_kol_sk(m, x["kol"]), x["sembol"])
+        h[k] = h.get(k, Decimal(0)) + D(x["net_pnl"])
+    for pos in m.acik.values():
+        k = (pos.kol.sk, pos.sembol)
+        h[k] = h.get(k, Decimal(0)) + _acik_pnl(m, pos)
+    return h
 
 
 def m_kol_sk(m, kol_kimlik: str) -> str:
@@ -88,7 +102,7 @@ def _islem_satiri(p, x: dict) -> dict:
             "giris_zamani": _z(x["giris_zamani"]), "giris_fiyati": repr(x["giris_fiyati"]),
             "cikis_zamani": _z(x["cikis_zamani"]), "cikis_fiyati": repr(x["cikis_fiyati"]), "miktar": repr(x["miktar"]),
             "r": d.sayi(x["r"]), "net_pnl_yerel": d.para(x["net_pnl"]), "set_katki_usd": d.para(x["net_pnl"]),
-            "cikis_nedeni": x["cikis_nedeni"]}
+            "cikis_nedeni": x["cikis_nedeni"], "gun": ek.tsi_gun(x["cikis_zamani"])}
 
 
 def acik_pozisyonlar(p, sk: Optional[str] = None) -> list:
@@ -112,12 +126,18 @@ def acik_pozisyonlar(p, sk: Optional[str] = None) -> list:
 
 # ---------------------------------------------------------------------------- günlük seriler
 def gunluk_seriler(p, simdi) -> dict:
-    """gun_kapanis -> noktalar, gunluk_kz, dusus_serisi. Başlangıç noktası (ilk günden bir önceki gün) = başlangıç sermayesi."""
+    """gun_kapanis_tsi -> noktalar, gunluk_kz, dusus_serisi (gün kesimi TSİ; kullanıcı kararı 2026-11-08). Başlangıç noktası (ilk günden
+    bir önceki gün) = başlangıç sermayesi. `kapanislar_utc`/`ilk_gun` UTC günü serisidir: beklenti aralığı tabanı (backtestle aynı
+    UTC ızgarası) ve risk limiti günü için korunur."""
     m = p.motor
     bas = D(p.ayarlar.baslangic_sermaye)
-    gunler = _gun_sirali(m.gun_kapanis)
+    gunler = _gun_sirali(m.gun_kapanis_tsi)
+    utc = _gun_sirali(m.gun_kapanis)
+    ilk_utc = pd.Timestamp(utc[0][0], tz="UTC") if utc else None
+    kap_utc = {g: D(e) for g, e in utc}
     if not gunler:
-        return {"noktalar": [], "gunluk_kz": [], "dusus_serisi": [], "max_dusus": 0.0, "ilk_gun": None, "kapanislar": {}}
+        return {"noktalar": [], "gunluk_kz": [], "dusus_serisi": [], "max_dusus": 0.0, "ilk_gun": ilk_utc, "ilk_gun_tsi": None,
+                "kapanislar": {}, "kapanislar_utc": kap_utc, "gunluk_tam": []}
     ilk = pd.Timestamp(gunler[0][0], tz="UTC")
     noktalar = [{"gun": str((ilk - pd.Timedelta(days=1)).date()), "ozsermaye": d.para(bas)}]
     kz, dus = [], []
@@ -132,7 +152,7 @@ def gunluk_seriler(p, simdi) -> dict:
         dus.append({"gun": g, "dusus": d.sayi(dd)})
         onceki = e
     return {"noktalar": noktalar, "gunluk_kz": kz[-SERI_GUN:], "dusus_serisi": dus[-SERI_GUN:], "max_dusus": maxd,
-            "ilk_gun": ilk, "kapanislar": {g: D(e) for g, e in gunler}}
+            "ilk_gun": ilk_utc, "ilk_gun_tsi": ilk, "kapanislar": {g: D(e) for g, e in gunler}, "kapanislar_utc": kap_utc, "gunluk_tam": kz}
 
 
 def _getiri_serisi(seri: dict, bas: Decimal) -> pd.Series:
@@ -161,17 +181,21 @@ def olustur(p, simdi, kaynak_saglik: Optional[list] = None, olaylar: Optional[li
     E = m.ozsermaye()
     S = gunluk_seriler(p, simdi)
     zirve = max(m.zirve, E)
-    yeni_gun = m.gun is not None and simdi.date() > m.gun
-    gun_pnl = Decimal(0) if yeni_gun else E - m.gun_basi
-    gun_getiri = float(gun_pnl / (E - gun_pnl)) if (E - gun_pnl) > 0 else 0.0
+    yeni_gun = m.gun is not None and simdi.date() > m.gun                     # UTC günü: yalnız risk limiti (motor.gun) için
+    # günlük K/Z: TSİ günü (önceki TSİ gününün son özsermayesine göre)
+    bugun = str(simdi.tz_convert(ek.TSI).date())
+    onceki_gunler = [g for g in m.gun_kapanis_tsi if g < bugun]
+    tsi_gun_basi = D(m.gun_kapanis_tsi[max(onceki_gunler)]) if onceki_gunler else bas
+    gun_pnl = E - tsi_gun_basi
+    gun_getiri = float(gun_pnl / tsi_gun_basi) if tsi_gun_basi > 0 else 0.0
     # hafta K/Z: 7 gün dolmadıysa null
     hafta_pnl, hafta_neden = None, None
-    ilk = S["ilk_gun"]
-    if ilk is None or (simdi.tz_localize(None).normalize() - ilk.tz_localize(None).normalize()).days < 7:
+    ilk = S["ilk_gun_tsi"]
+    if ilk is None or (date.fromisoformat(bugun) - ilk.date()).days < 7:
         hafta_neden = "7 günlük geçmiş dolmadı"
     else:
-        ref = pd.Timestamp(simdi.date()) - pd.Timedelta(days=7)
-        adaylar = [g for g in S["kapanislar"] if pd.Timestamp(g) <= ref]
+        ref = str(date.fromisoformat(bugun) - timedelta(days=7))
+        adaylar = [g for g in S["kapanislar"] if g <= ref]
         e0 = S["kapanislar"][max(adaylar)] if adaylar else bas
         hafta_pnl = E - e0
     dusus = float((zirve - E) / zirve) if zirve > 0 else 0.0
@@ -193,7 +217,7 @@ def olustur(p, simdi, kaynak_saglik: Optional[list] = None, olaylar: Optional[li
 
     # --- stratejiler
     bek_csv = d.beklenti_oku(beklenti_csv)
-    set_getiri = _getiri_serisi(S["kapanislar"], bas)
+    set_getiri = _getiri_serisi(S["kapanislar_utc"], bas)         # beklenti tabanı: UTC günü (backtestle aynı ızgara)
     uyari_listesi = list(uyarilar or [])
     strat_json, katkilar, perf_tum, alarmlar = [], {}, {}, []
     hafta_katki = {}
@@ -300,26 +324,37 @@ def olustur(p, simdi, kaynak_saglik: Optional[list] = None, olaylar: Optional[li
                  "kaldirac": d.sayi(kal), "kullanilan_teminat": d.para(brut_toplam / D(L.max_kaldirac)),
                  "teminat_notu": f"brüt nominal / {L.max_kaldirac:g}x (sert kaldıraç tavanı); borsa teminatı değildir",
                  "acik_stop_riski": {"deger": d.para(stop_risk_para), "oran": d.sayi(stop_riski), "limit": L.portfoy_toplam_risk_yuzde / 100},
-                 "pozisyonlar": ap_hepsi}
+                 "pozisyonlar": ap_hepsi, "bekleyen_emirler": ek.bekleyen_emirler(m)}
 
     # --- iç görüler (sayılar yukarıdaki değişkenlerden)
     ic = icgoruler(p, simdi, E, bas, katkilar, perf_tum, ap_hepsi, mal_24, S, hafta_pnl, alarmlar, bek_csv, kon_tum=None)
 
+    islemler = [_islem_satiri(p, x) for x in m.islemler]
+    islemler.sort(key=lambda s: s["zaman"])
+    # --- motor yazıcı paketi: istatistik, çıkış nedenleri, dönemsel getiri, stil/enstrüman kırılımları (pano yalnız biçimler)
+    ajan_of = {t.kimlik: t.ajan for t in p.tanimlar}
+    gun_tsi = sorted(m.gun_kapanis_tsi)
+    donem = ek.gunluk_kz_ajan(p.strateji_gun_tsi, ajan_of, gun_tsi, bas, {g: D(e) for g, e in m.gun_kapanis_tsi.items()}) if gun_tsi else \
+        {"gunluk": [], "haftalik": [], "aylik": []}
+    cn, cn_not = ek.cikis_nedenleri(islemler)
+    kirilim = ek.kirilimlar(strat_json, islemler, katki_hucreleri(p), bas, ap_hepsi, "net")
     ozet_ekstra = {"hafta_pnl": d.para(hafta_pnl) if hafta_pnl is not None else None, "hafta_pnl_neden": hafta_neden,
-                   "gunluk_kz": S["gunluk_kz"], "dusus_serisi": S["dusus_serisi"]}
+                   "gunluk_kz": S["gunluk_kz"], "dusus_serisi": S["dusus_serisi"], "gun_kesimi": ek.GUN_KESIMI_TSI,
+                   "gunluk_kz_ajan": donem["gunluk"], "haftalik_kz_ajan": donem["haftalik"], "aylik_kz_ajan": donem["aylik"],
+                   "istatistik": ek.istatistik(islemler, S["gunluk_tam"]), "cikis_nedenleri": cn, "cikis_nedenleri_not": cn_not}
+    tsi_notu = ["Gün kesimi TSİ (00:00 Europe/Istanbul). Bu sürümden önceki günler UTC günü serisinden aktarıldı (en çok 3 saat kayma)."] \
+        if m.tsi_aktarildi else []
     ozet = d.ozet_olustur(
         kaynak=kaynak, zaman=_z(simdi), yazim_zamani=_z(datetime.now(timezone.utc)),
         donem={"bas": _z(S["ilk_gun"]) if S["ilk_gun"] is not None else _z(simdi), "bit": _z(simdi)},
         baslangic_ozsermaye=bas, ozsermaye=E, gun_pnl=gun_pnl, gun_getiri=gun_getiri, zirve_ozsermaye=zirve, max_dusus=max_dd,
         risk=risk, sayaclar=sayac,
-        notlar=list(veri_yok_notlari or []) + [f"Paper: gerçek emir yok, canlı herkese açık Binance verisi. Başlangıç {d.para(bas)} USD."],
+        notlar=list(veri_yok_notlari or []) + tsi_notu + [f"Paper: gerçek emir yok, canlı herkese açık Binance verisi. Başlangıç {d.para(bas)} USD."],
         ekstra=ozet_ekstra)
     strat = {**d._zarf("stratejiler", kaynak, _z(simdi)), "yazim_zamani": _z(datetime.now(timezone.utc)),
-             "beklenti_penceresi_hafta": list(bek.PENCERE_HAFTA), "stratejiler": strat_json, "set": {"beklenti": set_kon}}
+             "beklenti_penceresi_hafta": list(bek.PENCERE_HAFTA), "stratejiler": strat_json, "set": {"beklenti": set_kon}, **kirilim}
     gecmis = {**d._zarf("gecmis", kaynak, _z(simdi)), "noktalar": S["noktalar"]}
     saglik = saglik_olustur(p, simdi, kaynak_saglik or [], uyari_listesi, servis, kaynak)
-    islemler = [_islem_satiri(p, x) for x in m.islemler]
-    islemler.sort(key=lambda s: s["zaman"])
     ekstra = {"maruziyet": maruziyet, "maliyet": maliyet, "reddedilen": reddedilen, "olaylar": olay_liste,
               "icgoruler": {**d._zarf("icgoruler", kaynak, _z(simdi)), "cumleler": ic}}
     return {"ozet": ozet, "stratejiler": strat, "islemler": islemler, "saglik": saglik, "gecmis": gecmis, "ekstra": ekstra,
