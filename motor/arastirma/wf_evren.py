@@ -74,6 +74,35 @@ BELİRSİZ NOKTALARDA KOŞUDAN ÖNCE VERİLEN KARARLAR (sonuca bakılarak deği�
        yok. "kilit_oncesi": ilk tasarım (kilit kapalı), çıktılar sonuclar/evren/kilit_oncesi/ (yalnız ara/deneme).
        Portföy (hedef-ağırlık) stratejileri `portfoy` aşamasıyla aynı evren ve dönemde wf_portfoy yolundan, karar 24 ölçütleriyle.
 
+  K-Q  GÜNCELLEME 5 (ON_KAYIT; kodlama kararları, sonuç görülmeden):
+       1. HOLDOUT: dönem "2017_gelistirme" (en eski veri -> 2025-11-07) / "2020_gelistirme". Veri okuması `bit` (2025-11-08, hariç)
+          ile kesilir (_veri); ham meta'ya dönem yazılır, ham_yukle sınırı aşan veriyi reddeder. Aşama `holdout`
+          (wf_evren_holdout.py): iyi + iyiye yakın listelerindeki her strateji WF'nin SON seçilen ayarıyla holdout'ta tek
+          koşu (girişi >= 2025-11-08; ısınma için eski veri okunur); kapı net > 0 ve PF(R) >= 1.1. secim aşaması listeleri
+          mühürler (liste_muhru.json: sha256), holdout mührü doğrular; ikinci koşu açık hata (zorla + gerekçe, günlüğe yazılır).
+       2. DSR kapısı (K5): iyi >= 0.90, iyiye yakın >= 0.50; deneme sayısı = deneme_kaydi toplamı + 787 (K-J; mevcut sayım:
+          koşu başına enstrüman da sayılır, yani yüksek/muhafazakâr). PBO: CSCV 16 blok (pbo.py), stil x tf başına TÜM aday
+          (strateji x ayar) sütunlarının OOS-dönem günlük getirisi (çıkış gününe yazılan R x %1, tek-kasa limitleri uygulanmadan;
+          yaklaşık); PBO > 0.5 (ya da hesaplanamayan) grubun "iyi"si iyiye yakına düşer; zaten iyiye yakın olan atılmaz.
+       3. K2 rastgele giriş STRATEJİNİN ÇIKIŞ KURALLARIYLA (evren_k2.py). ESKİ UYGULAMA ÇIKIŞ KURALLARINI KULLANMIYORDU
+          (yalnız ilk ATR stopu + sabit tutma süresi): hedef/iz süren stop/başabaş/sinyal çıkışları artık uygulanır; gelişmiş
+          modüller (kismi, stop_basamaklari, azalan_roi, geri_cekilme, kar_rsi, elder, agresif_iz, bekleme) desteklenmez ve
+          satırda `rnd_desteklenmeyen`e yazılır. 500 tekrar; iyi p <= 0.05, iyiye yakın p <= 0.10.
+       4. MALİYET: sonuclar/evren/maliyet_tablosu.csv (evren_maliyet.py) motorun genel maliyetinin YERİNE; sha256 her ham
+          meta'ya ve WF satırına yazılır, ham_yukle farklı tabloyla yapılmış koşuyu reddeder. K1 üçlü şart: maliyet x2 PF >= 1.05,
+          x3 PF >= 1.0, 1 mum gecikmeli sinyal (GecikmeliStrateji) PF >= 1.0. Her biri ayrı kapı (kapı sayımında ayrı kaçan).
+       5. Spot vekil işareti: veri/mumlar/<S>/kaynak.json (spot_vekil_baslangic/_bitis, perp_baslangic) okunur; yoksa funding
+          başlangıcından tahmin. WF satırında `spot_vekil`. Analiz başlangıcı %75 kuralı aynen, TEK SAPMA: kısa geçmişli
+          BIST gün içi enstrümanları (veri >= 2021) %75 sayımına katılmaz (analiz_bas_hesapla; BIST_KISA_ANALIZ_DISI=False
+          harfiyen uygular) ve satırda `bist_kisa_donem` olarak işaretlenir.
+       6. Evren: ABBV ve scalp XU030 çıktı (evren 48 / scalp 4).
+       7. (Lider kararı 2026-11-08) DSR kapısı sembol çarpansız: deneme_sayisi_ayar() = WF satırlarındaki n_aday toplamı (portföy
+          dahil) + önceki aşamaların kombinasyon_sayisi + 787; eski sembol çarpanlı sayım `dsr_sembol` sütununda (bilgi).
+          BIST kısa geçmişlilerin %75 sayımı dışında tutulması KABUL edildi (BIST_KISA_ANALIZ_DISI=True kalır).
+       8. (Lider kararı) 19 pf__ stratejisi aynı akışa girer: wf_evren_portfoy.py (stil 'portfoy', tf 1d). CLI `portfoy` aşaması
+          geliştirme dönemlerinde pf WF'sini koşar; `saglamlik`/`pbo`/`secim`/`holdout` pf satırlarını da işler. Portföy motoru
+          PortfoyAyarlari.maliyet_sembol ile sembol başına maliyet alır (None = eski tek değer, davranış değişmez).
+
 Kilit (karar 20): "kilit_oncesi" döneminde ham/wf/saglamlik kilit_ac'sız okur; "2020_bugun" döneminde kilit_ac=True (K-O).
 """
 from __future__ import annotations
@@ -91,7 +120,7 @@ from typing import Optional
 import numpy as np
 import pandas as pd
 
-from motor.arastirma import saglamlik, secim, tarama, wf_portfoy, wf_tarama
+from motor.arastirma import evren_k2, evren_maliyet, pbo, saglamlik, secim, tarama, wf_portfoy, wf_tarama
 from motor.backtest import deneme_kaydi
 from motor.backtest.motor import backtest
 from motor.backtest.walk_forward import pencereler_uret
@@ -103,17 +132,17 @@ from motor.veri.yeniden_ornekle import tf_mumlari
 KOK = Path(__file__).resolve().parents[2]
 CIKTI = KOK / "sonuclar" / "evren"
 
-# GÜNCELLEME 1 (ON_KAYIT, kullanıcı): swing/daytrade evreni 5 emtia + 18 hisse + 13 kripto; scalp evreni 4 enstrüman.
+# GÜNCELLEME 1+2+5: swing/daytrade evreni 5 emtia + 17 hisse (ABBV çıktı) + 13 kripto + 13 BIST = 48; scalp evreni 4 enstrüman.
 # XMR/LEO Binance USDⓈ-M perp'i olmadığı için dışarıda (raporlanır).
 KRIPTO = ("BTCUSDT", "ETHUSDT", "BNBUSDT", "XRPUSDT", "SOLUSDT", "TRXUSDT", "ZECUSDT", "HYPEUSDT", "DOGEUSDT",
           "LINKUSDT", "ADAUSDT", "XLMUSDT", "BCHUSDT")
 HISSE = tuple("DK_" + t for t in ("AAPL", "NVDA", "MSFT", "GOOGL", "AMZN", "META", "TSLA", "AVGO", "LLY", "WMT", "JPM",
-                                   "V", "MU", "AMD", "XOM", "JNJ", "MA", "ABBV"))
+                                   "V", "MU", "AMD", "XOM", "JNJ", "MA"))          # GÜNCELLEME 5 / BIST kararı: ABBV (veri yok) çıktı
 EMTIA = ("DK_XAU", "DK_XAG", "DK_WTI", "DK_COPPER", "DK_NATGAS")
 BIST = tuple("BIST_" + t for t in ("AKBNK", "ASELS", "ASTOR", "BIMAS", "EKGYO", "EREGL", "FROTO", "KCHOL", "SISE",
                                     "TCELL", "THYAO", "TRALT", "TUPRS"))                  # GÜNCELLEME 2
-EVREN_GENEL = KRIPTO + HISSE + EMTIA + BIST                           # swing + daytrade (49)
-EVREN_SCALP = ("DK_SPX", "DK_XAU", "DK_WTI", "BTCUSDT", "BIST_XU030")
+EVREN_GENEL = KRIPTO + HISSE + EMTIA + BIST                           # swing + daytrade (48)
+EVREN_SCALP = ("DK_SPX", "DK_XAU", "DK_WTI", "BTCUSDT")               # XU030 scalp (5m verisi yok) çıktı (DURUM.md BIST kararı)
 EVREN_STIL = {"swing": EVREN_GENEL, "daytrade": EVREN_GENEL, "scalp": EVREN_SCALP}
 EVREN = EVREN_GENEL
 DISARIDA_KRIPTO = ("XMRUSDT", "LEOUSDT")
@@ -156,23 +185,48 @@ HAIKU_DENEME = 787
 # ON_KAYIT geçme ölçütleri
 OLCUT = {"min_pf": 1.2, "min_islem": 100, "min_pf_en_iyi5_haric": 0.9, "min_sharpe": 0.5, "max_dusus": 0.20,
          "min_kar_enstruman_orani": 0.5, "max_tek_enstruman_pay": 0.40, "min_kar_sinif": 2,
-         "k1_pf": 1.05, "k2_p": 0.05, "k3_alt": 1.0, "k4_oran": 0.60}
-YAKIN_OLCUT = {**OLCUT, "min_pf": 1.1, "min_sharpe": 0.4, "max_dusus": 0.25}       # GÜNCELLEME 4: kıl payı eşikleri
+         "k1_pf": 1.05, "k1b_pf": 1.0, "k1c_pf": 1.0, "k2_p": 0.05, "k3_alt": 1.0, "k4_oran": 0.60,
+         "k5_dsr": 0.90, "pbo_max": 0.5, "holdout_pf": 1.1}                         # GÜNCELLEME 5: K1b/K1c, DSR, PBO, holdout
+# GÜNCELLEME 4+5: kıl payı eşikleri (iyiye yakın): PF 1.1, Sharpe 0.4, düşüş %25, K2 p 0.10, DSR 0.50
+YAKIN_OLCUT = {**OLCUT, "min_pf": 1.1, "min_sharpe": 0.4, "max_dusus": 0.25, "k2_p": 0.10, "k5_dsr": 0.50}
 N_SIM = 500
 BOOT_BLOK, N_BOOT = saglamlik.BLOK, saglamlik.N_BOOT
 
 
 # GÜNCELLEME 3 (ON_KAYIT): iki dönem etiketi. "kilit_oncesi": ilk tasarım (< 2025-11-01, kilit kapalı; ara/deneme çıktıları
-# sonuclar/evren/kilit_oncesi/). "2020_bugun": test dönemi 2020-01-01 -> veri sonu, kilit ayrımı YOK (kilit_ac=True,
-# gerekçe günlüğe yazılır); asıl çıktılar sonuclar/evren/. Ham koşu bu dönemde 2020-01-01'den başlar (öncesi kesilir).
-DONEMLER = {"kilit_oncesi": {"bas": None, "kilit_ac": False}, "2020_bugun": {"bas": "2020-01-01", "kilit_ac": True}}
+# sonuclar/evren/kilit_oncesi/). "2020_bugun": 2020-01-01 -> veri sonu, kilit ayrımı YOK (kilit_ac=True + gerekçe); bu iki dönem
+# GÜNCELLEME 5 ile eskidi (holdout yok) ve yalnız geriye dönük/deneme içindir.
+# GÜNCELLEME 5: geliştirme dönemleri "2017_gelistirme" (en eski veri -> 2025-11-07) ve "2020_gelistirme" (2020-01-01 ->
+# 2025-11-07): okuma `bit` (hariç) ile KESİLİR, yani ham/wf/saglamlik/pbo/secim aşamaları holdout verisini HİÇ görmez.
+# "holdout" dönemi yalnız holdout aşaması içindir (veri sonuna kadar; ısınma için eski veri de okunur, yalnız
+# HOLDOUT_BAS ve sonrası girişler sayılır). Geliştirme çıktıları sonuclar/evren/<donem>/ altına yazılır.
+HOLDOUT_BAS = pd.Timestamp("2025-11-08", tz="UTC")           # geliştirme: ... -> 2025-11-07 (dahil); holdout: bu tarih -> veri sonu
+DONEMLER = {"kilit_oncesi": {"bas": None, "bit": None, "kilit_ac": False},
+            "2020_bugun": {"bas": "2020-01-01", "bit": None, "kilit_ac": True},
+            "2017_gelistirme": {"bas": None, "bit": HOLDOUT_BAS, "kilit_ac": True},
+            "2020_gelistirme": {"bas": "2020-01-01", "bit": HOLDOUT_BAS, "kilit_ac": True},
+            "holdout": {"bas": None, "bit": None, "kilit_ac": True}}
+GELISTIRME_DONEMLERI = ("2017_gelistirme", "2020_gelistirme")
 KILIT_GEREKCE_2020 = "karar 27 evren testi 2020→bugün (kullanıcı kararı)"
+KILIT_GEREKCE_GEL = "karar 27 evren testi, geliştirme dönemi (holdout hariç; ON_KAYIT Güncelleme 5)"
+KILIT_GEREKCE_HOLDOUT = "karar 27 evren testi, HOLDOUT (ON_KAYIT Güncelleme 5; bir kerelik)"
 _CFG = {"veri_dizini": None, "donem": "kilit_oncesi"}
 _ONB: dict = {}
 
 
 def donem_kok(donem: str) -> Path:
-    return CIKTI / "kilit_oncesi" if donem == "kilit_oncesi" else CIKTI
+    if donem == "kilit_oncesi":
+        return CIKTI / "kilit_oncesi"
+    if donem in GELISTIRME_DONEMLERI:
+        return CIKTI / donem
+    return CIKTI
+
+
+def donem_gerekce(donem: str) -> Optional[str]:
+    d = DONEMLER[donem]
+    if not d["kilit_ac"]:
+        return None
+    return {"holdout": KILIT_GEREKCE_HOLDOUT, "2020_bugun": KILIT_GEREKCE_2020}.get(donem, KILIT_GEREKCE_GEL)
 
 
 def veri_ayarla(veri_dizini=None, donem: str = "kilit_oncesi"):
@@ -182,19 +236,48 @@ def veri_ayarla(veri_dizini=None, donem: str = "kilit_oncesi"):
     _ONB.clear()
 
 
+def spot_vekil_bilgisi(sembol: str, mumlar: pd.DataFrame, fund, veri_dizini=None) -> dict:
+    """Spot vekil işareti (ON_KAYIT Güncelleme 5.5). Kaynak sırası: (1) veri/mumlar/<S>/kaynak.json
+    (spot_vekil_baslangic / spot_vekil_bitis [/ perp_baslangic]; veri ajanının yazdığı biçim; biçim farklıysa 'spot' içeren
+    anahtarlar ve 'perp_baslangic' esnekçe aranır), (2) yoksa kripto için tahmin: funding serisi mum serisinden geç başlıyorsa
+    aradaki dönem spot vekil sayılır. -> {'var', 'bas', 'bit', 'kaynak'} (bas/bit ISO metin ya da None)."""
+    from motor.veri import depo
+    bos = {"var": False, "bas": None, "bit": None, "kaynak": ""}
+    yol = depo.mum_yolu(sembol, "5m", Path(veri_dizini) if veri_dizini else None).parent / "kaynak.json"
+    if yol.exists():
+        try:
+            j = json.loads(yol.read_text())
+        except (ValueError, OSError):
+            j = {}
+        bas = j.get("spot_vekil_baslangic") or j.get("spot_vekil_bas") or j.get("spot_bas")
+        bit = j.get("spot_vekil_bitis") or j.get("spot_bitis")
+        perp = j.get("perp_baslangic") or j.get("perp_bas")
+        if bit is None and perp is not None and any("spot" in str(k) for k in j):
+            bit = perp
+        if bas is not None or bit is not None or any("spot_vekil" in str(k) for k in j):
+            return {"var": True, "bas": str(bas) if bas else None, "bit": str(bit) if bit else None, "kaynak": "kaynak.json"}
+    if SINIF.get(sembol) == "kripto" and fund is not None and len(fund) and len(mumlar):
+        if fund.index[0] - mumlar.index[0] > pd.Timedelta(days=7):
+            return {"var": True, "bas": str(mumlar.index[0]), "bit": str(fund.index[0]), "kaynak": "tahmin(funding başlangıcı)"}
+    return bos
+
+
 def _veri(sembol: str, tf: str):
-    """(mumlar, funding) — dönem ayarına göre. Kilit yalnız 2020_bugun döneminde ve gerekçeyle açılır."""
+    """(mumlar, funding) — dönem ayarına göre. Dönemin `bit` sınırı (hariç) okumada uygulanır: geliştirme dönemlerinde
+    holdout verisi bu fonksiyondan HİÇ çıkmaz. Kilit yalnız kilit_ac dönemlerinde ve gerekçeyle açılır."""
     k = (sembol, tf, _CFG["donem"], str(_CFG["veri_dizini"]))
     if k not in _ONB:
         if len(_ONB) >= 6:
             _ONB.clear()
         d = DONEMLER[_CFG["donem"]]
-        kl = {"kilit_ac": d["kilit_ac"], "gerekce": KILIT_GEREKCE_2020 if d["kilit_ac"] else None}
-        mumlar = tf_mumlari(sembol, tf, d["bas"], None, dizin=_CFG["veri_dizini"], **kl)
+        kl = {"kilit_ac": d["kilit_ac"], "gerekce": donem_gerekce(_CFG["donem"])}
+        mumlar = tf_mumlari(sembol, tf, d["bas"], d["bit"], dizin=_CFG["veri_dizini"], **kl)
         try:
-            fund = depo.funding_oku(sembol, d["bas"], None, dizin=_CFG["veri_dizini"], **kl)
+            fund = depo.funding_oku(sembol, d["bas"], d["bit"], dizin=_CFG["veri_dizini"], **kl)
         except FileNotFoundError:
             fund = None
+        if d["bit"] is not None and len(mumlar) and mumlar.index.max() >= d["bit"]:
+            raise RuntimeError(f"{sembol} {tf}: dönem sınırı ({d['bit']}) aşıldı")             # asla olmamalı
         _ONB[k] = (mumlar, fund)
     return _ONB[k]
 
@@ -241,8 +324,29 @@ def _yaz_atomik(df: pd.DataFrame, yol: Path):
     gecici.replace(yol)
 
 
+class GecikmeliStrateji:
+    """K1c: sinyalleri 1 mum geciktirilmiş strateji sarmalayıcısı (giriş + çıkış sinyalleri, stop/hedef seviyeleri dahil
+    1 mum sonra görünür). Diğer her şey (çıkış ayarları, ad, parametreler) sarılan stratejiden gelir. Veri hazırlığı
+    (funding sütunu) sarmalamadan ÖNCE yapılmalıdır."""
+
+    def __init__(self, ic, mum: int = 1):
+        self._ic, self._mum = ic, int(mum)
+
+    def __getattr__(self, ad):
+        return getattr(self._ic, ad)
+
+    def sinyaller(self, mumlar: pd.DataFrame) -> pd.DataFrame:
+        sig = self._ic.sinyaller(mumlar)
+        out = sig.shift(self._mum)
+        out["yon"] = out["yon"].fillna(0).astype(int)
+        for c in ("cikis", "cikis_long", "cikis_short"):
+            if c in out:
+                out[c] = out[c].fillna(False).astype(bool)
+        return out
+
+
 def ham_gorev(ad: str, tf: str, sembol: str, carpan: float = 1.0, dizin: Optional[Path] = None,
-              yeniden: bool = False, kesin: bool = True) -> dict:
+              yeniden: bool = False, kesin: bool = True, gecikme: int = 0) -> dict:
     """Tek (strateji, tf, sembol): tüm adayları koş, işlemleri yaz. Yan dosya (.json) en son yazılır. Biten atlanır.
     veri_ayarla(...) ile dönem/veri dizini kurulu olmalı."""
     dizin = Path(dizin) if dizin is not None else CIKTI / "ham"
@@ -252,7 +356,8 @@ def ham_gorev(ad: str, tf: str, sembol: str, carpan: float = 1.0, dizin: Optiona
     if yan.exists() and not yeniden:
         return {"atlandi": True}
     t0 = time.perf_counter()
-    meta = {"strateji": ad, "tf": tf, "sembol": sembol, "carpan": carpan, "veri_yok": False, "hata": ""}
+    meta = {"strateji": ad, "tf": tf, "sembol": sembol, "carpan": carpan, "gecikme": int(gecikme), "veri_yok": False,
+            "hata": "", "donem": _CFG["donem"], "maliyet_hash": evren_maliyet.tablo_hash()}
     try:
         mumlar, fund = _veri(sembol, tf)
     except (FileNotFoundError, ValueError) as e:          # K-B: bu tf'de verisi olmayan enstrüman dışarıda
@@ -267,13 +372,16 @@ def ham_gorev(ad: str, tf: str, sembol: str, carpan: float = 1.0, dizin: Optiona
         return meta
     if (not DONEMLER[_CFG["donem"]]["kilit_ac"]) and len(mumlar) and mumlar.index.max() >= kilit.KILIT_BASLANGIC:
         raise RuntimeError("ham koşu kilitli döneme girdi")           # asla olmamalı
+    sv = spot_vekil_bilgisi(sembol, mumlar, fund, _CFG["veri_dizini"])
+    meta.update(spot_vekil=sv["var"], spot_vekil_bas=sv["bas"], spot_vekil_bit=sv["bit"], spot_vekil_kaynak=sv["kaynak"])
     adaylar, kurma_hatalari = wf_tarama.aday_listesi(ad, True)
     kurallar = tarama.SEMBOL_KURALLARI.get(sembol, tarama.VARSAYILAN_KURAL)
-    ay = wf_tarama.maliyet_ayarlari(kurallar, carpan)
+    ay = evren_maliyet.maliyet_ayarlari(sembol, kurallar, carpan)
     parcalar, hatalar, n_kosu = [], list(kurma_hatalari), 0
     for no, (etiket, s) in enumerate(adaylar):
         try:
-            r = backtest(funding.stratejiye_hazirla(s, mumlar, fund, sembol, tf), s, ay, fund)
+            hazir = funding.stratejiye_hazirla(s, mumlar, fund, sembol, tf)
+            r = backtest(hazir, GecikmeliStrateji(s, gecikme) if gecikme else s, ay, fund)
         except Exception as e:  # noqa: BLE001  (K-L)
             hatalar.append((etiket, f"{type(e).__name__}: {e}"))
             continue
@@ -586,20 +694,41 @@ def kapi_sayisi(kapi_basarisiz) -> int:
     return len([x for x in str(kapi_basarisiz or "").split(";") if x])
 
 
-def listeler(wf: pd.DataFrame, sag: pd.DataFrame) -> tuple:
-    """GÜNCELLEME 4. -> (iyi, iyiye_yakin) DataFrame'leri: stil bazında skora (Sharpe x (1 - K2 p)) göre sıralı.
-    iyi = tüm WF ölçütleri + K1-K4. iyiye yakın = iyi değil ve (WF'de başarısız ölçüt sayısı + başarısız sağlamlık kapısı)
-    <= 1, WF'deki kaçış kıl payı eşikleri içinde (K-P). Strateji düzeyi; enstrüman sıralaması yok."""
+def pbo_haritasi(pbo_df) -> dict:
+    """pbo.csv -> {(stil, tf): pbo}. None/boş: hesaplanmamış -> ValueError (PBO kapısı atlanamaz)."""
+    if pbo_df is None or not len(pbo_df):
+        raise ValueError("PBO hesaplanmamış (önce `pbo` aşaması): PBO kapısı atlanamaz")
+    return {(r["stil"], r["tf"]): r["pbo"] for r in pbo_df.to_dict("records")}
+
+
+def listeler(wf: pd.DataFrame, sag: pd.DataFrame, pbo_df: Optional[pd.DataFrame] = None) -> tuple:
+    """GÜNCELLEME 4+5. -> (iyi, iyiye_yakin) DataFrame'leri: stil bazında skora (Sharpe x (1 - K2 p)) göre sıralı.
+    iyi = tüm WF ölçütleri + K1 (x2, x3, gecikme) + K2 (p <= 0.05) + K3 + K4 + K5 (DSR >= 0.90) VE stil x tf grubunun PBO'su
+    <= 0.5. İyiye yakın = iyi değil ve toplam kaçan (WF ölçütü + sağlamlık kapısı) <= 1 ve kaçış kıl payı eşikleri içinde
+    (WF: PF 1.1 / Sharpe 0.4 / düşüş %25; K2 p <= 0.10; DSR >= 0.50; diğer kapılar eşiksiz). PBO > 0.5 (ya da hesaplanamayan)
+    gruptaki "iyi" strateji iyiye yakına DÜŞER (satırda pbo_dusurdu=True); PBO, zaten iyiye yakın olanı listeden atmaz.
+    Strateji düzeyi; enstrüman sıralaması yok."""
+    pbo_h = pbo_haritasi(pbo_df)
     if not len(sag):
         return pd.DataFrame(), pd.DataFrame()
-    d = wf.merge(sag[["strateji", "tf", "saglam_mi", "kapi_basarisiz", "rnd_p", "m2_pf", "pf_boot_alt", "par_oran",
-                      "hata"]].rename(columns={"hata": "sag_hata"}), on=["strateji", "tf"], how="inner")
+    d = wf.merge(sag[["strateji", "tf", "saglam_mi", "kapi_basarisiz", "rnd_p", "m2_pf", "m3_pf", "g1_pf", "pf_boot_alt",
+                      "par_oran", "dsr_deneme", "hata"]].rename(columns={"hata": "sag_hata"}), on=["strateji", "tf"], how="inner")
     d = d[d["sag_hata"].fillna("") == ""].copy()
+    if not len(d):
+        return pd.DataFrame(), pd.DataFrame()
     d["kapi_sayisi"] = d["kapi_basarisiz"].map(kapi_sayisi)
     d["toplam_kacan"] = d["basarisiz_sayi"].fillna(99) + d["kapi_sayisi"]
     d["skor"] = d["sharpe"] * (1 - d["rnd_p"])
-    iyi = d[(d["gecti"] == True) & (d["saglam_mi"] == True)]                          # noqa: E712
-    yakin = d[(d["yakin_wf"] == True) & (d["toplam_kacan"] <= 1) & ~d.index.isin(iyi.index)]   # noqa: E712
+    d["pbo"] = [pbo_h.get((a, b), math.nan) for a, b in zip(d["stil"], d["tf"])]
+    pbo_ok = d["pbo"].map(lambda v: (not _yok(v)) and v <= OLCUT["pbo_max"])
+    yakin_kapi = d.apply(lambda r: saglamlik_oneri(r.to_dict(), YAKIN_OLCUT)[0], axis=1)        # kıl payı eşikleriyle kapılar
+    tam = (d["gecti"] == True) & (d["saglam_mi"] == True)                                          # noqa: E712
+    iyi = d[tam & pbo_ok]
+    dusen = d[tam & ~pbo_ok].copy()
+    dusen["pbo_dusurdu"] = True
+    yakin = d[(d["yakin_wf"] == True) & yakin_kapi & (d["toplam_kacan"] <= 1) & ~tam].copy()       # noqa: E712
+    yakin["pbo_dusurdu"] = False
+    yakin = pd.concat([dusen, yakin], ignore_index=False)
     srt = lambda x: x.sort_values(["stil", "skor"], ascending=[True, False]).reset_index(drop=True)    # noqa: E731
     return srt(iyi), srt(yakin)
 
@@ -607,13 +736,20 @@ def listeler(wf: pd.DataFrame, sag: pd.DataFrame) -> tuple:
 def ham_yukle(dizin: Path, ad: str, tf: str, evren=EVREN_GENEL) -> tuple:
     """-> (ham {sembol: df}, adaylar [etiket], bilgi). Bitmemiş (yan dosyası olmayan) görev varsa RuntimeError."""
     ham, bilgi = {}, {"disarida": [], "hatali_sembol": [], "n_kosu": 0, "n_aday": 0, "n_hata": 0, "adaylar": None,
-                      "veri_bas": {}, "veri_bit": {}, "hata_ornegi": ""}
+                      "veri_bas": {}, "veri_bit": {}, "hata_ornegi": "", "spot_vekil": {}, "maliyet_hash": ""}
+    guncel_hash = evren_maliyet.tablo_hash()
     for s in evren:
         yol = ham_yolu(dizin, ad, tf, s)
         yan = yol.with_suffix(".json")
         if not yan.exists():
             raise RuntimeError(f"ham koşu bitmemiş: {yan.name}")
         meta = json.loads(yan.read_text())
+        if meta.get("maliyet_hash") != guncel_hash:
+            raise RuntimeError(f"ham koşu başka bir maliyet tablosuyla yapılmış ({yan.name}); tablo sabit olmalı")
+        bilgi["maliyet_hash"] = guncel_hash
+        sinir = DONEMLER.get(meta.get("donem"), {}).get("bit")
+        if sinir is not None and not meta.get("veri_yok") and meta.get("veri_bit") and pd.Timestamp(meta["veri_bit"]) >= sinir:
+            raise RuntimeError(f"{yan.name}: geliştirme dönemi sınırını ({sinir}) aşan veri (holdout sızıntısı)")
         if meta.get("veri_yok"):
             bilgi["disarida"].append(s)
             continue
@@ -624,6 +760,8 @@ def ham_yukle(dizin: Path, ad: str, tf: str, evren=EVREN_GENEL) -> tuple:
         bilgi["n_kosu"] += meta["n_kosu"]
         bilgi["n_aday"] = max(bilgi["n_aday"], meta["n_aday"])
         bilgi["n_hata"] += meta["n_hata"]
+        if meta.get("spot_vekil"):
+            bilgi["spot_vekil"][s] = [meta.get("spot_vekil_bas"), meta.get("spot_vekil_bit")]
         bilgi["veri_bas"][s] = pd.Timestamp(meta["veri_bas"])
         bilgi["veri_bit"][s] = pd.Timestamp(meta["veri_bit"])
         if meta["hata_ornegi"] and not bilgi["hata_ornegi"]:
@@ -633,10 +771,29 @@ def ham_yukle(dizin: Path, ad: str, tf: str, evren=EVREN_GENEL) -> tuple:
     return ham, bilgi["adaylar"], bilgi
 
 
+BIST_KISA_ESIK = pd.Timestamp("2021-01-01", tz="UTC")
+BIST_KISA_ANALIZ_DISI = True
+
+
+def kisa_bist(veri_bas: dict) -> list:
+    """BIST'in kısa geçmişli (gün içi) enstrümanları: verisi 2021'den sonra başlayanlar (Yahoo 1h ~2023-12). Raporda ayrı işaretlenir."""
+    return sorted(s for s, t in veri_bas.items() if SINIF.get(s) == "bist" and t >= BIST_KISA_ESIK)
+
+
+def analiz_bas_hesapla(veri_bas: dict, min_kapsama: float = wf_portfoy.MIN_KAPSAMA) -> pd.Timestamp:
+    """K-C: evrenin >= %75'inin verisinin başladığı gün. SAPMA (DURUM.md BIST kararı ile uyum; raporlanır):
+    kısa geçmişli BIST gün içi enstrümanları (kisa_bist) bu %75 sayımına KATILMAZ — aksi halde 13 BIST sembolü yüzünden
+    daytrade analizi tüm evren için 2023-12'ye çekilirdi. Onlar kendi verileri başlayınca işlem yapar (WF eğitim/test
+    pencereleri evren toplamıyla çalıştığı için ek bir şey gerekmez). BIST_KISA_ANALIZ_DISI=False: kural harfiyen uygulanır."""
+    kisa = set(kisa_bist(veri_bas)) if BIST_KISA_ANALIZ_DISI else set()
+    kul = {s: t for s, t in veri_bas.items() if s not in kisa} or dict(veri_bas)
+    veriler = {s: pd.DataFrame(index=pd.DatetimeIndex([t])) for s, t in kul.items()}
+    return wf_portfoy.analiz_baslangici(veriler, list(veriler), min_kapsama)
+
+
 def analiz_araligi(bilgi: dict, stil: str, min_kapsama: float = wf_portfoy.MIN_KAPSAMA) -> tuple:
     """K-C. -> (analiz_bas, bitis, pencereler)."""
-    veriler = {s: pd.DataFrame(index=pd.DatetimeIndex([t])) for s, t in bilgi["veri_bas"].items()}
-    bas = wf_portfoy.analiz_baslangici(veriler, list(veriler), min_kapsama)
+    bas = analiz_bas_hesapla(bilgi["veri_bas"], min_kapsama)
     bit = max(bilgi["veri_bit"].values()) + pd.Timedelta(1, "ns")
     egitim, test = PENCERE_GUN[stil]
     return bas, bit, pencereler_uret(bas, bit, egitim, test)
@@ -662,13 +819,15 @@ def evren_wf_kos(ad: str, tf: str, stil: str, dizin: Path, evren=None, pencere_g
         return satir, pd.DataFrame()
     if pencere_gun:
         egitim, test = pencere_gun[stil]
-        bas = wf_portfoy.analiz_baslangici({s: pd.DataFrame(index=pd.DatetimeIndex([t])) for s, t in bilgi["veri_bas"].items()},
-                                           list(ham), wf_portfoy.MIN_KAPSAMA)
+        bas = analiz_bas_hesapla(bilgi["veri_bas"])
         bit = max(bilgi["veri_bit"].values()) + pd.Timedelta(1, "ns")
         pencereler = pencereler_uret(bas, bit, egitim, test)
     else:
         bas, bit, pencereler = analiz_araligi(bilgi, stil)
     satir["analiz_bas"] = str(bas)
+    satir["bist_kisa_donem"] = ",".join(kisa_bist(bilgi["veri_bas"]))
+    satir["spot_vekil"] = json.dumps({k: v for k, v in bilgi["spot_vekil"].items() if k in ham}, ensure_ascii=False)
+    satir["maliyet_hash"] = bilgi["maliyet_hash"]
     satir["n_pencere"] = len(pencereler)
     if not pencereler:
         satir.update(gecti=False, nedenler="veri pencereye yetmiyor")
@@ -743,7 +902,7 @@ def _csv_yaz(df: pd.DataFrame, yol: Path):
 
 def wf_asamasi(stiller=("swing", "daytrade", "scalp"), surec: int = 4, butce_sn: Optional[float] = None,
                cikti: Path = CIKTI, ilerleme: bool = True, hatalari_yeniden: bool = False,
-               donem: str = "2020_bugun", stratejiler=None) -> dict:
+               donem: str = "2017_gelistirme", stratejiler=None) -> dict:
     cikti = Path(cikti)
     (cikti / "oos").mkdir(parents=True, exist_ok=True)
     yol = cikti / "wf_evren.parquet"
@@ -773,8 +932,9 @@ def wf_asamasi(stiller=("swing", "daytrade", "scalp"), surec: int = 4, butce_sn:
 
 # ============================================================================ 4. sağlamlık
 def rastgele_evren(oos: pd.DataFrame, pencere_sinirlari: list, n_sim: int, seed: int, tf: str, veri_al,
-                   atr_periyot: int = saglamlik.ATR_PERIYOT) -> dict:
-    """K-H. oos: giris_zamani, cikis_zamani, yon, sembol, stop_mesafe (+ pencere). Her işlem için aynı enstrüman, yön, tutma
+                   atr_periyot: int = saglamlik.ATR_PERIYOT, cikis_al=None) -> dict:
+    """K-H (+ GÜNCELLEME 5.3: stratejinin çıkış kuralları, bkz. evren_k2). cikis_al(sembol, pencere) -> evren_k2.cikis_bilgisi
+    sözlüğü | None (None: yalnız ilk stop + tutma süresi, eski davranış). oos: giris_zamani, cikis_zamani, yon, sembol, stop_mesafe (+ pencere). Her işlem için aynı enstrüman, yön, tutma
     süresi (mum), stop/ATR katı; giriş zamanı aynı test penceresinde rastgele. veri_al(sembol) -> (mumlar, MotorAyarlari).
     -> {'toplam_r': dizi(n_sim), 'n_gecersiz', 'n_islem'}"""
     rng = np.random.default_rng(seed)
@@ -796,6 +956,13 @@ def rastgele_evren(oos: pd.DataFrame, pencere_sinirlari: list, n_sim: int, seed:
                         ).astype(int)
         mesafe = d["stop_mesafe"].to_numpy(float)
         mesafe = np.where(np.isfinite(mesafe) & (mesafe > 0), mesafe, stop_med)
+        ciks = [cikis_al(sembol, int(wk)) if cikis_al else None for wk in d["pencere"].to_numpy(int)]
+        iz_atr_onb: dict = {}
+
+        def iz_atr_al(per):
+            if per not in iz_atr_onb:
+                iz_atr_onb[per] = gst.atr(mumlar["yuksek"], mumlar["dusuk"], mumlar["kapanis"], per).to_numpy(float)
+            return iz_atr_onb[per]
         a_ = atr[np.maximum(gj - 1, 0)]
         with np.errstate(divide="ignore", invalid="ignore"):
             mult = mesafe / a_
@@ -824,7 +991,14 @@ def rastgele_evren(oos: pd.DataFrame, pencere_sinirlari: list, n_sim: int, seed:
                     hk = min(int(hm[k]), n - 1 - j)
                     if not np.isfinite(atr[j - 1]):
                         continue
-                    r = saglamlik._tek_islem_r(o, h, l, c, atr, j, int(yon[k]), hk, float(mult[k]), kayma, skayma, taker)
+                    ci = ciks[k]
+                    if ci is None:
+                        r = saglamlik._tek_islem_r(o, h, l, c, atr, j, int(yon[k]), hk, float(mult[k]), kayma, skayma, taker)
+                    else:
+                        r = evren_k2.tek_islem_r(
+                            o, h, l, c, atr, j, int(yon[k]), hk, float(mult[k]), kayma, skayma, taker,
+                            ex=ci["ex_long"] if yon[k] == 1 else ci["ex_short"], hedef_r=ci["hedef_r"], iz_k=ci["iz_k"],
+                            iz_atr=iz_atr_al(ci["iz_periyot"]) if ci["iz_k"] else None, be_r=ci["be_r"])
                     if r is not None:
                         top += r
                         break
@@ -847,7 +1021,7 @@ def komsu_evren_pf(ad: str, etiket: str, tf: str, evren, oos_bas, oos_bit, carpa
                 mumlar, fund = _veri(sembol, tf)
             except (FileNotFoundError, ValueError):
                 continue
-            ay = wf_tarama.maliyet_ayarlari(tarama.SEMBOL_KURALLARI.get(sembol, tarama.VARSAYILAN_KURAL), carpan)
+            ay = evren_maliyet.maliyet_ayarlari(sembol, tarama.SEMBOL_KURALLARI.get(sembol, tarama.VARSAYILAN_KURAL), carpan)
             try:
                 t = backtest(funding.stratejiye_hazirla(st, mumlar, fund, sembol, tf), st, ay, fund).islemler
             except Exception:  # noqa: BLE001  (K-L: o sembolde işlemsiz)
@@ -879,12 +1053,19 @@ def komsu_evren_pf(ad: str, etiket: str, tf: str, evren, oos_bas, oos_bit, carpa
 
 
 def saglamlik_oneri(satir: dict, olcut: dict = OLCUT) -> tuple:
+    """Sağlamlık kapıları (GÜNCELLEME 5): K1 maliyet x2 / x3 / 1 mum gecikme (üçü ayrı şart), K2 rastgele giriş, K3 bootstrap,
+    K4 komşu ayarlar, K5 DSR (toplam deneme sayısıyla). NaN = geçmez. -> (hepsi geçti, 'K1_..;K2_..')."""
     def gec(v, ok):
         return not _yok(v) and ok(v)
     k = {"K1_maliyet2_pf": gec(satir.get("m2_pf"), lambda v: v >= olcut["k1_pf"]),
+         "K1b_maliyet3_pf": gec(satir.get("m3_pf"), lambda v: v >= olcut["k1b_pf"]),
+         "K1c_gecikme_pf": gec(satir.get("g1_pf"), lambda v: v >= olcut["k1c_pf"]),
          "K2_rastgele_p": gec(satir.get("rnd_p"), lambda v: v <= olcut["k2_p"]),
-         "K3_boot_alt": gec(satir.get("pf_boot_alt"), lambda v: v > olcut["k3_alt"]),
-         "K4_komsu_param": gec(satir.get("par_oran"), lambda v: v >= olcut["k4_oran"])}
+         # K3: tek-grafikte bootstrap PF alt sınırı > 1; portföy stratejilerinde (boot_sharpe_alt dolu) bootstrap Sharpe alt ucu > 0
+         "K3_boot_alt": (gec(satir.get("boot_sharpe_alt"), lambda v: v > 0) if not _yok(satir.get("boot_sharpe_alt"))
+                         else gec(satir.get("pf_boot_alt"), lambda v: v > olcut["k3_alt"])),
+         "K4_komsu_param": gec(satir.get("par_oran"), lambda v: v >= olcut["k4_oran"]),
+         "K5_dsr": gec(satir.get("dsr_deneme"), lambda v: v >= olcut["k5_dsr"])}
     kaybeden = [a for a, ok in k.items() if not ok]
     return (not kaybeden), ";".join(kaybeden)
 
@@ -895,7 +1076,11 @@ def _sag_isci(g: dict):
     t0 = time.perf_counter()
     satir = {"strateji": g["strateji"], "stil": g["stil"], "tf": g["tf"], "hata": ""}
     try:
-        _sag_icerik(g, satir)
+        if g["stil"] == "portfoy":
+            from motor.arastirma import wf_evren_portfoy
+            wf_evren_portfoy.pf_sag_icerik(g, satir)
+        else:
+            _sag_icerik(g, satir)
         satir["saglam_mi"], satir["kapi_basarisiz"] = saglamlik_oneri(satir)
     except Exception as e:  # noqa: BLE001
         satir["hata"] = f"{type(e).__name__}: {e}"[:300]
@@ -914,35 +1099,51 @@ def _sag_icerik(g: dict, satir: dict):
     rng_tohum = zlib.crc32(f"{ad}|{tf}|evren".encode()) ^ g["tohum"]
     satir.update({"wf_islem": int(w["islem_sayisi"]), "wf_pf": float(w["profit_factor"]), "wf_sharpe": float(w["sharpe"]),
                   "en_sik_ayar": w["en_sik_ayar"]})
-    # K1: maliyet x2 — ham koşu x2 (ayrı dizin) + aynı evren WF + aynı yeniden oynatma
-    m2_dizin = cikti / "ham_m2"
-    for s in evren_stil(stil):
-        ham_gorev(ad, tf, s, 2.0, m2_dizin, kesin=True)
-    s2, oos2 = evren_wf_kos(ad, tf, stil, m2_dizin)
-    satir.update({"m2_kill_olayi": s2.get("kill_olayi", 0), "m2_islem_ham": int(len(oos2)),
-                  "m2_pf_limitsiz": _pf(oos2["r"]) if len(oos2) else math.nan})        # bilgi: sert limit/kill öncesi PF
-    satir.update({"m2_islem": s2.get("islem_sayisi", 0), "m2_pf": s2.get("profit_factor", math.nan),
-                  "m2_net": s2.get("net_getiri", math.nan), "m2_sharpe": s2.get("sharpe", math.nan)})
-    # K2: rastgele giriş
+    # K1 (GÜNCELLEME 5.4): maliyet x2, maliyet x3, 1 mum gecikmeli sinyal — her biri ham koşu (ayrı dizin) + aynı evren WF +
+    # aynı yeniden oynatma. Üçü de şart.
+    for onek, carpan, gecikme, dizin_ad in (("m2", 2.0, 0, "ham_m2"), ("m3", 3.0, 0, "ham_m3"), ("g1", 1.0, 1, "ham_g1")):
+        k_dizin = cikti / dizin_ad
+        for s in evren_stil(stil):
+            ham_gorev(ad, tf, s, carpan, k_dizin, kesin=True, gecikme=gecikme)
+        sk, oosk = evren_wf_kos(ad, tf, stil, k_dizin)
+        satir.update({f"{onek}_kill_olayi": sk.get("kill_olayi", 0), f"{onek}_islem_ham": int(len(oosk)),
+                      f"{onek}_pf_limitsiz": _pf(oosk["r"]) if len(oosk) else math.nan})   # bilgi: sert limit/kill öncesi PF
+        satir.update({f"{onek}_islem": sk.get("islem_sayisi", 0), f"{onek}_pf": sk.get("profit_factor", math.nan),
+                      f"{onek}_net": sk.get("net_getiri", math.nan), f"{onek}_sharpe": sk.get("sharpe", math.nan)})
+    # K2: rastgele giriş — stratejinin çıkış kurallarıyla (evren_k2)
     ham_oos = oos.rename(columns={"giris": "giris_zamani", "cikis": "cikis_zamani"}).copy()
-    pencere_sinirlari = [(pd.Timestamp(s["test_bas"]), pd.Timestamp(s["test_bit"])) for s in json.loads(w["secimler"])]
+    secimler = json.loads(w["secimler"])
+    pencere_sinirlari = [(pd.Timestamp(s["test_bas"]), pd.Timestamp(s["test_bit"])) for s in secimler]
     ham_oos["pencere"] = _pencere_ata(ham_oos["giris_zamani"], pencere_sinirlari)
-    cache = {}
+    cache, cikis_onb, desteklenmeyen = {}, {}, set()
 
     def veri_al(sembol):
         if sembol not in cache:
             mumlar, _ = _veri(sembol, tf)
-            ay = wf_tarama.maliyet_ayarlari(tarama.SEMBOL_KURALLARI.get(sembol, tarama.VARSAYILAN_KURAL), 1.0)
+            ay = evren_maliyet.maliyet_ayarlari(sembol, tarama.SEMBOL_KURALLARI.get(sembol, tarama.VARSAYILAN_KURAL), 1.0)
             cache[sembol] = (mumlar, ay)
         return cache[sembol]
 
-    rs = rastgele_evren(ham_oos, pencere_sinirlari, g["n_sim"], rng_tohum, tf, veri_al)
+    def cikis_al(sembol, pencere):
+        etiket = secimler[pencere].get("ayar")
+        if not etiket:
+            return None
+        anahtar = (sembol, etiket)
+        if anahtar not in cikis_onb:
+            st = saglamlik.ayar_coz(ad, etiket)
+            mumlar, fund = _veri(sembol, tf)
+            cikis_onb[anahtar] = evren_k2.cikis_bilgisi(st, funding.stratejiye_hazirla(st, mumlar, fund, sembol, tf))
+            desteklenmeyen.update(cikis_onb[anahtar]["desteklenmeyen"])
+        return cikis_onb[anahtar]
+
+    rs = rastgele_evren(ham_oos, pencere_sinirlari, g["n_sim"], rng_tohum, tf, veri_al, cikis_al=cikis_al)
     gercek = float(oos["r"].sum())
     p = float((1 + (rs["toplam_r"] >= gercek).sum()) / (len(rs["toplam_r"]) + 1))
     satir.update({"rnd_n_sim": g["n_sim"], "rnd_p": p, "rnd_gercek_r": gercek,
                   "rnd_ort_r": float(rs["toplam_r"].mean()), "rnd_std_r": float(rs["toplam_r"].std(ddof=1)),
                   "rnd_yuzdelik": float((rs["toplam_r"] < gercek).mean()),
-                  "rnd_gecersiz": rs["n_gecersiz"] / max(1, rs["n_islem"])})
+                  "rnd_gecersiz": rs["n_gecersiz"] / max(1, rs["n_islem"]),
+                  "rnd_cikis_kurallari": "strateji", "rnd_desteklenmeyen": ",".join(sorted(desteklenmeyen))})
     # K3
     lo, hi, med = saglamlik.pf_boot(kabul["r"].to_numpy(float), BOOT_BLOK, N_BOOT, np.random.default_rng(rng_tohum + 1))
     satir.update({"pf_boot_alt": lo, "pf_boot_ust": hi, "pf_boot_medyan": med})
@@ -950,7 +1151,7 @@ def _sag_icerik(g: dict, satir: dict):
     satir.update(komsu_evren_pf(ad, w["en_sik_ayar"], tf, evren_stil(stil), oos_bas, oos_bit))
     # DSR (rapor)
     gs = g["getiri"]
-    for nm, n in (("deneme", g["n_deneme"]), ("kombinasyon", g["n_komb"])):
+    for nm, n in (("deneme", g["n_deneme"]), ("kombinasyon", g["n_komb"]), ("sembol", g["n_deneme_sembol"])):
         d = saglamlik.deflated_sharpe(gs, n, g["sr_varyans"])
         satir[f"dsr_{nm}"] = d["dsr"]
         satir[f"sr0_{nm}_yillik"] = d["sr0"] * math.sqrt(365)
@@ -965,11 +1166,21 @@ def _pencere_ata(giris: pd.Series, sinirlar: list) -> np.ndarray:
 
 
 def toplam_deneme(yol=None) -> int:
+    """ESKİ sayım (bilgi sütunu `dsr_sembol`): deneme kaydındaki tüm koşular (koşu başına enstrüman da sayılır) + 787."""
     return sum(k["toplam_kosu"] for k in deneme_kaydi.oku(yol)) + HAIKU_DENEME
 
 
+def deneme_sayisi_ayar(wf: pd.DataFrame, yol=None) -> int:
+    """DSR KAPISI için deneme sayısı (lider kararı 2026-11-08; ON_KAYIT Güncelleme 5: strateji x tf x ayar + önceki denemeler),
+    sembol çarpanı OLMADAN: bu evren testinin her (strateji, tf) satırındaki aday ayar sayısı (n_aday, hatasız satırlar)
+    + önceki aşamaların deneme kaydı (evren aşaması satırları hariç) kombinasyon_sayisi toplamı + Haiku Ar-Ge 787."""
+    bu = int(pd.to_numeric(wf.loc[wf["hata"].fillna("") == "", "n_aday"], errors="coerce").fillna(0).sum())
+    onceki = sum(k.get("kombinasyon_sayisi", 0) for k in deneme_kaydi.oku(yol) if k.get("sembol") != "evren")
+    return bu + onceki + HAIKU_DENEME
+
+
 def saglamlik_asamasi(surec: int = 4, butce_sn: Optional[float] = None, cikti: Path = CIKTI, n_sim: int = N_SIM,
-                      tohum: int = 0, ilerleme: bool = True, donem: str = "2020_bugun", stratejiler=None) -> dict:
+                      tohum: int = 0, ilerleme: bool = True, donem: str = "2017_gelistirme", stratejiler=None) -> dict:
     cikti = Path(cikti)
     wf = pd.read_parquet(cikti / "wf_evren.parquet")
     aday = wf[((wf["gecti"] == True) | (wf["yakin_wf"] == True)) & (wf["hata"].fillna("") == "")]   # noqa: E712
@@ -977,19 +1188,23 @@ def saglamlik_asamasi(surec: int = 4, butce_sn: Optional[float] = None, cikti: P
     onceki = pd.read_parquet(yol) if yol.exists() else pd.DataFrame()
     bitmis = set(zip(onceki["strateji"], onceki["tf"])) if len(onceki) else set()
     sr_h = saglamlik.sr_varyansi(wf)
-    n_deneme = toplam_deneme()
+    n_deneme = deneme_sayisi_ayar(wf)                 # kapı: strateji x tf x ayar (+ önceki), sembol çarpanı yok
+    n_deneme_sembol = toplam_deneme()                 # bilgi: eski sembol çarpanlı sayım
     n_komb = int(len(wf))
     # ham işlemlerden stop mesafesi + yan bilgi yüklemesi görev içinde
     gorevler = []
     for rec in aday.to_dict("records"):
         if (rec["strateji"], rec["tf"]) in bitmis or (stratejiler and rec["strateji"] not in stratejiler):
             continue
-        oos = pd.read_parquet(cikti / "oos" / f"{rec['strateji']}--{rec['tf']}.parquet")
+        if rec["stil"] == "portfoy":
+            gt = pd.read_parquet(cikti / "pf" / f"{rec['strateji']}--gunluk.parquet")["oos_getiri"].to_numpy(dtype=float)
+        else:
+            gt = _gunluk_dizi(pd.read_parquet(cikti / "oos" / f"{rec['strateji']}--{rec['tf']}.parquet"), rec)
         gorevler.append({"strateji": rec["strateji"], "stil": rec["stil"], "tf": rec["tf"], "wf": rec, "cikti": cikti,
-                         "n_sim": n_sim, "tohum": tohum, "n_deneme": n_deneme, "n_komb": n_komb, "sr_varyans": sr_h,
-                         "getiri": _gunluk_dizi(oos, rec)})
+                         "n_sim": n_sim, "tohum": tohum, "n_deneme": n_deneme, "n_deneme_sembol": n_deneme_sembol,
+                         "n_komb": n_komb, "sr_varyans": sr_h, "getiri": gt})
     if ilerleme:
-        print(f"[sag] geçen {len(aday)}, kalan {len(gorevler)}; N_deneme={n_deneme} N_komb={n_komb}", flush=True)
+        print(f"[sag] geçen {len(aday)}, kalan {len(gorevler)}; N_deneme(kapı)={n_deneme} N_sembol={n_deneme_sembol} N_komb={n_komb}", flush=True)
     sonuc = havuz_calistir(_sag_isci, gorevler, surec, _isci_ham, {"veri_dizini": None, "donem": donem}, butce_sn, ilerleme, "sag")
     yeni = [s for s in sonuc if not s.get("ertelendi")]
     if yeni:
@@ -1002,6 +1217,69 @@ def _gunluk_dizi(oos: pd.DataFrame, w) -> np.ndarray:
     tablo = oos[["kol", "sembol", "yon", "giris", "cikis", "r", "sf", "stop_mesafe"]].reset_index(drop=True)
     m = kasa_metrikleri(tablo, pd.Timestamp(w["oos_bas"]), pd.Timestamp(w["oos_bit"]))
     return m["getiri_serisi"].to_numpy(dtype=float)
+
+
+# ============================================================================ 4b. PBO (CSCV, GÜNCELLEME 5.2)
+PBO_BLOK = 16
+
+
+def pbo_matrisi(ham_dizin: Path, wf_grup: pd.DataFrame, stil: str, tf: str, bas, bit, risk: float = wf_tarama.RISK) -> tuple:
+    """Bir stil x tf grubunun TÜM aday (strateji x ayar) sütunlarının OOS-dönem günlük getiri matrisi: işlem R x %1, çıkış
+    gününe yazılır, evrenin tüm (WF'de dışarıda kalmayan) enstrümanları toplanır. Tek-kasa sert limitleri UYGULANMAZ (PBO için
+    göreli sıralama yeter; yaklaşık). -> (M float32 (T, N), etiketler [(strateji, ayar_no)]). Girişi [bas, bit) olanlar sayılır."""
+    bas, bit = pd.Timestamp(bas).floor("D"), pd.Timestamp(bit)
+    T = max(1, int((bit.floor("D") - bas).days) + 1)
+    sutunlar, etiket = [], []
+    for rec in wf_grup.to_dict("records"):
+        kisa = {x for x in str(rec.get("kisa_gecmis") or "").split(",") if x}
+        ham, _, _ = ham_yukle(ham_dizin, rec["strateji"], tf, tuple(s_ for s_ in evren_stil(stil) if s_ not in kisa))
+        parca = [d for d in ham.values() if d is not None and len(d)]
+        if not parca:
+            continue
+        d = pd.concat(parca, ignore_index=True)
+        g = pd.DatetimeIndex(d["giris_zamani"])
+        d = d[(g >= bas) & (g < bit)]
+        if not len(d):
+            continue
+        gun = (pd.DatetimeIndex(d["cikis_zamani"]).floor("D") - bas).days.to_numpy()
+        gun = np.clip(gun, 0, T - 1)
+        for no, ix in d.groupby("ayar_no").indices.items():
+            col = np.zeros(T, dtype=np.float32)
+            np.add.at(col, gun[ix], (d["r"].to_numpy(float)[ix] * risk).astype(np.float32))
+            sutunlar.append(col)
+            etiket.append((rec["strateji"], int(no)))
+    M = np.stack(sutunlar, axis=1) if sutunlar else np.zeros((T, 0), dtype=np.float32)
+    return M, etiket
+
+
+def pbo_asamasi(cikti: Path = CIKTI, n_blok: int = PBO_BLOK, ilerleme: bool = True) -> pd.DataFrame:
+    """Her (stil, tf) için CSCV PBO -> pbo.csv. Ham koşular bitmiş olmalı (wf aşamasından sonra)."""
+    cikti = Path(cikti)
+    wf = pd.read_parquet(cikti / "wf_evren.parquet")
+    wf = wf[(wf["hata"].fillna("") == "") & wf["oos_bas"].notna()]
+    satirlar = []
+    for (stil, tf), g in wf.groupby(["stil", "tf"]):
+        bas = max(pd.Timestamp(x) for x in g["oos_bas"])           # ortak OOS aralığı
+        bit = min(pd.Timestamp(x) for x in g["oos_bit"])
+        satir = {"stil": stil, "tf": tf, "n_strateji": int(len(g)), "oos_bas": str(bas), "oos_bit": str(bit),
+                 "pbo": math.nan, "n_aday": 0, "n_kombinasyon": 0, "T": 0, "hata": ""}
+        try:
+            if stil == "portfoy":
+                from motor.arastirma import wf_evren_portfoy
+                M, _ = wf_evren_portfoy.pbo_matrisi_pf(cikti, g, bas, bit)
+            else:
+                M, _ = pbo_matrisi(cikti / "ham", g, stil, tf, bas, bit)
+            r = pbo.pbo_cscv(M, n_blok)
+            satir.update(pbo=r["pbo"], n_aday=r["n_aday"], n_kombinasyon=r["n_kombinasyon"], T=r["T"],
+                         lambda_medyan=r["lambda_medyan"], oos_ort_secilen=r["oos_ort_secilen"])
+        except Exception as e:  # noqa: BLE001
+            satir["hata"] = f"{type(e).__name__}: {e}"[:300]
+        satirlar.append(satir)
+        if ilerleme:
+            print(f"[pbo] {stil} {tf}: PBO={satir['pbo']} aday={satir['n_aday']}", flush=True)
+    df = pd.DataFrame(satirlar)
+    df.to_csv(cikti / "pbo.csv", index=False)
+    return df
 
 
 # ============================================================================ 5. seçim
@@ -1026,14 +1304,13 @@ def kor_matrisi(seriler: dict, min_ortak: int = secim.MIN_ORTAK_GUN) -> pd.DataF
     return m
 
 
-def secim_yap(wf: pd.DataFrame, sag: pd.DataFrame, seriler: dict, n_secim: int = secim.N_SECIM) -> pd.DataFrame:
-    """Stil başına skor = Sharpe x (1 - K2 p); korelasyon <= 0.5 (K-I). -> seçilenler DataFrame (ajan, sira, ...)."""
-    d = wf.merge(sag[["strateji", "tf", "saglam_mi", "rnd_p", "m2_pf", "pf_boot_alt", "par_oran", "kapi_basarisiz"]],
-                 on=["strateji", "tf"], how="inner")
-    d = d[(d["gecti"] == True) & (d["saglam_mi"] == True)].copy()                # noqa: E712
-    d["skor"] = d["sharpe"] * (1 - d["rnd_p"])
+def secim_yap(iyi: pd.DataFrame, seriler: dict, n_secim: int = secim.N_SECIM) -> pd.DataFrame:
+    """Stil başına skor = Sharpe x (1 - K2 p); korelasyon <= 0.5 (K-I). `iyi`: listeler() çıktısı (tüm kapıları, DSR ve PBO
+    dahil, geçenler). -> seçilenler DataFrame (ajan, sira, ...)."""
     cikti = []
-    for stil, g in d.groupby("stil"):
+    if not len(iyi):
+        return pd.DataFrame(cikti)
+    for stil, g in iyi.groupby("stil"):
         g = g.sort_values("skor", ascending=False)
         kimlikler = [f"{a}|{t}" for a, t in zip(g["strateji"], g["tf"])]
         kor = kor_matrisi({k: seriler[k] for k in kimlikler})
@@ -1073,7 +1350,7 @@ def kilit_bilgi_kos(ad: str, tf: str, stil: str, dizin: Path, veri_dizini=None, 
             fund = depo.funding_oku(sembol, None, None, dizin=veri_dizini, kilit_ac=True, gerekce=KILIT_GEREKCE)
         except FileNotFoundError:
             fund = None
-        ay_s = wf_tarama.maliyet_ayarlari(tarama.SEMBOL_KURALLARI.get(sembol, tarama.VARSAYILAN_KURAL), 1.0)
+        ay_s = evren_maliyet.maliyet_ayarlari(sembol, tarama.SEMBOL_KURALLARI.get(sembol, tarama.VARSAYILAN_KURAL), 1.0)
         try:
             t = backtest(funding.stratejiye_hazirla(st, mumlar, fund, sembol, tf), st, ay_s, fund).islemler
         except Exception:  # noqa: BLE001
@@ -1111,6 +1388,9 @@ def portfoy_asamasi(donem: str = "2020_bugun", surec: int = 4, stratejiler=None,
     from motor.arastirma import wf_portfoy as wp
     from motor.portfoy import veri as pveri
     d = DONEMLER[donem]
+    if d["bit"] is not None:
+        raise NotImplementedError("eski portföy akışı geliştirme dönemlerinde çalışmaz; `portfoy` CLI aşaması "
+                                  "wf_evren_portfoy.pf_wf_asamasi'ni kullanır")
     kok = Path(cikti) if cikti else donem_kok(donem)
 
     def _veri_kilitli(evren, tf_):
@@ -1144,9 +1424,9 @@ def _kilit_asamasi(cikti: Path, ayar=None):
 
 
 def main(argv=None):
-    ap = argparse.ArgumentParser(description="Evren stratejileri taraması (karar 27)")
-    ap.add_argument("asama", choices=["ham", "wf", "saglamlik", "secim", "kilit", "portfoy"])
-    ap.add_argument("--donem", choices=sorted(DONEMLER), default="2020_bugun")
+    ap = argparse.ArgumentParser(description="Evren stratejileri taraması (karar 27; ON_KAYIT Güncelleme 5)")
+    ap.add_argument("asama", choices=["ham", "wf", "saglamlik", "pbo", "secim", "holdout", "kilit", "portfoy"])
+    ap.add_argument("--donem", choices=sorted(DONEMLER), default="2017_gelistirme")
     ap.add_argument("--stil", nargs="*", default=["swing", "daytrade", "scalp"])
     ap.add_argument("--tf", nargs="*", default=None)
     ap.add_argument("--stratejiler", nargs="*", default=None)
@@ -1155,24 +1435,41 @@ def main(argv=None):
     ap.add_argument("--hatalari-yeniden", action="store_true")
     ap.add_argument("--semboller", nargs="*", default=None)
     ap.add_argument("--kesin", action="store_true", help="verisi hâlâ olmayan (sembol, tf) için 'dışarıda' kaydı yaz")
+    ap.add_argument("--zorla", action="store_true", help="holdout: ikinci koşu (yalnız --gerekce ile; günlüğe yazılır)")
+    ap.add_argument("--gerekce", default="", help="holdout --zorla gerekçesi")
     a = ap.parse_args(argv)
+    if a.asama == "holdout" and a.donem not in GELISTIRME_DONEMLERI:
+        ap.error("holdout aşaması için --donem bir geliştirme dönemi olmalı (çıktı dizinini belirler)")
+    if a.asama in ("ham", "wf", "saglamlik", "pbo", "secim") and a.donem == "holdout":
+        ap.error("holdout dönemi yalnız holdout aşamasında kullanılır")
     kok = donem_kok(a.donem)
     if a.asama == "ham":
         print(ham_tara(tuple(a.stil), a.stratejiler, a.tf, a.surec, a.butce, donem=a.donem,
                        hatalari_yeniden=a.hatalari_yeniden,
                        evren=a.semboller, kesin=a.kesin))
     elif a.asama == "wf":
-        print(wf_asamasi(tuple(a.stil), a.surec, a.butce, kok, hatalari_yeniden=a.hatalari_yeniden, donem=a.donem))
+        print(wf_asamasi(tuple(a.stil), a.surec, a.butce, kok, hatalari_yeniden=a.hatalari_yeniden, donem=a.donem,
+                         stratejiler=a.stratejiler))
     elif a.asama == "saglamlik":
-        print(saglamlik_asamasi(a.surec, a.butce, kok, donem=a.donem))
+        print(saglamlik_asamasi(a.surec, a.butce, kok, donem=a.donem, stratejiler=a.stratejiler))
+    elif a.asama == "pbo":
+        print(pbo_asamasi(kok).to_string())
     elif a.asama == "secim":
         from motor.arastirma import wf_evren_rapor
         wf_evren_rapor.secim_ve_ozet(kok)
+    elif a.asama == "holdout":
+        from motor.arastirma import wf_evren_holdout, wf_evren_rapor
+        print(wf_evren_holdout.holdout_asamasi(kok, a.donem, zorla=a.zorla, gerekce=a.gerekce).to_string())
+        wf_evren_rapor.ozet_yaz(kok, a.donem)
     elif a.asama == "kilit":
         from motor.arastirma import wf_evren_rapor
         wf_evren_rapor.kilit_ve_ozet(kok, a.donem)
     elif a.asama == "portfoy":
-        print(portfoy_asamasi(a.donem, a.surec).shape)
+        if a.donem in GELISTIRME_DONEMLERI:
+            from motor.arastirma import wf_evren_portfoy
+            print(wf_evren_portfoy.pf_wf_asamasi(kok, a.donem, a.stratejiler, a.surec, a.butce))
+        else:
+            print(portfoy_asamasi(a.donem, a.surec).shape)
 
 
 if __name__ == "__main__":
