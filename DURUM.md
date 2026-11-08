@@ -113,6 +113,8 @@ Ana ders: önceki sonuçlar OOS'a bakılarak seçilmiş ve kâr birkaç işlemde
   saatlik dosyalar → swing/daytrade 1h+ testleri önce; 15m/30m dakikalık veri tamamlanınca.
 
 ## Lider kararları günlüğü (karar 26)
+- 2026-11-09 (KULLANICI): sunucudaki paper eski 7'li setle yalnız 'deneme sürüşü' (altyapı izleme) olarak çalışır; sonuçlarına bakılmaz.
+  Evren testi + seçim bitince yeni setle sıfırdan başlatılır. Öncelik: Fable denetim düzeltmeleri ve strateji testleri.
 - 2026-11-08 (KULLANICI kararı): BIST projeden TAMAMEN çıkarıldı (karar 27 evreni değişti: 48 -> 35 = 13 kripto + 17 ABD hissesi + 5 emtia;
   scalp da bu 35'te). Gerekçe: canlı işlem yolu yok, açığa satış/ödünç maliyeti ve TRY enflasyonu gerçekçi modellenemiyor. ON_KAYIT Güncelleme 7.
   İleride BIST istenirse ayrı test (yalnız long, USD bazlı, gerçek maliyet) kurulur. Tüm stillerin WF'si 35 evrenle yeniden hesaplanır.
