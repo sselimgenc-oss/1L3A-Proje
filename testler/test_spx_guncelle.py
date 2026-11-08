@@ -39,7 +39,7 @@ def test_artimli_birlestirme_eski_gecmis_korunur_ortusmede_yeni_kazanir(tmp_path
     _yaz(eski, depo.mum_yolu("DK_SPX", "1h", tmp_path))
     yeni = _df("2026-10-01", 24 * 40, 500.0)                     # 10-01 .. 11-10 (örtüşme)
     indir, c = _sahte(yeni)
-    r = sg.guncelle(tmp_path, date(2026, 11, 9), indir=indir, log=lambda m: None)
+    r = sg.guncelle(tmp_path, date(2026, 11, 9), indir=indir, log=lambda m: None, gun_getir=lambda g: None)
     assert c["bas"] == "2026-09" and c["bit"] == "2026-11-10" and c["sembol"] == "DK_SPX"
     out = pd.read_parquet(depo.mum_yolu("DK_SPX", "1h", tmp_path))
     assert out.index.is_monotonic_increasing and not out.index.duplicated().any()
@@ -55,7 +55,7 @@ def test_404_ile_atlanan_ay_mevcut_mumlari_silmez(tmp_path):
     _yaz(eski, depo.mum_yolu("DK_SPX", "1h", tmp_path))
     yeni = _df("2026-10-01", 24 * 31, 500.0)                     # yalnız Ekim indi (Kasım 404 -> atlandı)
     indir, _ = _sahte(yeni)
-    sg.guncelle(tmp_path, date(2026, 11, 5), indir=indir, log=lambda m: None)
+    sg.guncelle(tmp_path, date(2026, 11, 5), indir=indir, log=lambda m: None, gun_getir=lambda g: None)
     out = pd.read_parquet(depo.mum_yolu("DK_SPX", "1h", tmp_path))
     kasim = eski[eski.index >= "2026-11-01"]
     assert len(kasim) and kasim.index.isin(out.index).all()      # Kasım mumları korundu
@@ -69,9 +69,9 @@ def test_404_ile_atlanan_ay_mevcut_mumlari_silmez(tmp_path):
 
 def test_ilk_kurulum_baslangic_ister_arsiv_yoksa(tmp_path):
     with pytest.raises(sg.GuncellemeHatasi, match="baslangic"):
-        sg.guncelle(tmp_path, date(2026, 11, 9), indir=_sahte(_df("2026-11-01", 5))[0], log=lambda m: None)
+        sg.guncelle(tmp_path, date(2026, 11, 9), indir=_sahte(_df("2026-11-01", 5))[0], log=lambda m: None, gun_getir=lambda g: None)
     indir, c = _sahte(_df("2026-11-01", 24 * 8))
-    sg.guncelle(tmp_path, date(2026, 11, 9), baslangic="2026-10", indir=indir, log=lambda m: None)
+    sg.guncelle(tmp_path, date(2026, 11, 9), baslangic="2026-10", indir=indir, log=lambda m: None, gun_getir=lambda g: None)
     assert c["bas"] == "2026-10" and depo.mum_yolu("DK_SPX", "1h", tmp_path).exists()
 
 
@@ -80,9 +80,9 @@ def test_basarisiz_ay_ve_bayat_sonuc_yuksek_sesle_hata_dosya_degismez(tmp_path):
     yol = depo.mum_yolu("DK_SPX", "1h", tmp_path)
     _yaz(eski, yol)
     with pytest.raises(sg.GuncellemeHatasi, match="indirilemeyen"):
-        sg.guncelle(tmp_path, date(2026, 11, 9), indir=_sahte(_df("2026-10-01", 100), basarisiz=["2026-11"])[0], log=lambda m: None)
+        sg.guncelle(tmp_path, date(2026, 11, 9), indir=_sahte(_df("2026-10-01", 100), basarisiz=["2026-11"])[0], log=lambda m: None, gun_getir=lambda g: None)
     with pytest.raises(sg.GuncellemeHatasi, match="bayat"):
-        sg.guncelle(tmp_path, date(2026, 11, 9), indir=_sahte(_df("2026-10-01", 60))[0], log=lambda m: None)
+        sg.guncelle(tmp_path, date(2026, 11, 9), indir=_sahte(_df("2026-10-01", 60))[0], log=lambda m: None, gun_getir=lambda g: None)
     pd.testing.assert_frame_equal(pd.read_parquet(yol), eski, check_freq=False)
     with pytest.raises(sg.GuncellemeHatasi, match="boş"):
         sg.birlestir(eski, eski.iloc[0:0])
@@ -90,6 +90,32 @@ def test_basarisiz_ay_ve_bayat_sonuc_yuksek_sesle_hata_dosya_degismez(tmp_path):
 
 def test_arastirma_dizini_reddedilir_ve_cli_kodu(tmp_path, capsys):
     with pytest.raises(sg.GuncellemeHatasi, match="kilit"):
-        sg.guncelle(depo.MUM_DIZINI, date(2026, 11, 9), indir=_sahte(_df("2026-11-01", 5))[0], log=lambda m: None)
+        sg.guncelle(depo.MUM_DIZINI, date(2026, 11, 9), indir=_sahte(_df("2026-11-01", 5))[0], log=lambda m: None, gun_getir=lambda g: None)
     assert sg.main(["--veri", str(tmp_path)]) == 1                 # arşiv yok + --baslangic yok: ağa çıkmadan hata
     assert "HATA" in capsys.readouterr().err
+
+
+def test_ay_ici_gunluk_dakika_dosyalarindan_tamamlanir(tmp_path):
+    """Dukascopy aylık saatlik dosyayı ay bitmeden yayımlamaz: bu ayın tamamlanmış günleri günlük 1m dosyalarından 1h'ye birleşir."""
+    import lzma
+    import struct
+
+    def bi5(gun_ofsetleri):
+        kayit = b"".join(struct.pack(">5If", o, 500000, 500100, 499900, 500200, 1.0) for o in gun_ofsetleri)
+        return lzma.compress(kayit)
+
+    istenen = []
+
+    def gun_getir(g):
+        istenen.append(g)
+        return bi5([60 * m for m in range(0, 120)]) if g.weekday() < 5 else None   # 2 saatlik 1m veri, hafta sonu yok
+
+    indir, _ = _sahte(_df("2026-10-01", 24 * 30))
+    r = sg.guncelle(tmp_path, date(2026, 11, 6), baslangic="2026-10", indir=indir, log=lambda m: None, gun_getir=gun_getir)
+    df = pd.read_parquet(depo.mum_yolu("DK_SPX", "1h", tmp_path))
+    assert date(2026, 11, 6) not in istenen                               # bugün (tamamlanmamış) istenmez
+    son = df.index.max()
+    son = son.tz_localize("UTC") if son.tzinfo is None else son
+    assert son.date() == date(2026, 11, 5) and son.hour == 1             # dün 01:00 mumu (2 saatlik veri: 00, 01)
+    assert df.index.is_unique and df.index.is_monotonic_increasing
+    assert r["son"].startswith("2026-11-05")

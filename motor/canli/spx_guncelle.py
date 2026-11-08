@@ -68,8 +68,44 @@ def birlestir(mevcut: Optional[pd.DataFrame], yeni: pd.DataFrame) -> pd.DataFram
     return sonuc
 
 
+def gunluk_tamamla(son: Optional[pd.Timestamp], bugun: date, getir: Callable, log: Callable = print) -> Optional[pd.DataFrame]:
+    """Dukascopy aylık saatlik dosyayı (BID_candles_hour_1) ay BİTMEDEN yayımlamaz: içinde bulunulan ayın günleri günlük 1m dosyalarından
+    (BID_candles_min_1, yalnız TAMAMLANMIŞ günler: bugünden önce) 1h'ye birleştirilir. `son`: eldeki son 1h mum (None: bu ayın başından).
+    getir(gun) -> bayt | None (404/hafta sonu). Dönen: sözleşme sütunlu 1h tablo ya da hiç gün yoksa None."""
+    ilk = (son.tz_convert("UTC").date() if son is not None and son.tzinfo else (son.date() if son is not None else bugun.replace(day=1)))
+    parcalar = []
+    g = ilk
+    while g < bugun:
+        bayt = getir(g)
+        if bayt:
+            parcalar.append(dk.bi5_coz(bayt, pd.Timestamp(g, tz="UTC"), dk.NOKTA[SEMBOL]))
+        g += timedelta(days=1)
+    parcalar = [x for x in parcalar if len(x)]
+    if not parcalar:
+        return None
+    m1 = pd.concat(parcalar).sort_index()
+    gr = m1.groupby(m1.index.floor("1h"))
+    h1 = pd.DataFrame({"acilis": gr["acilis"].first(), "yuksek": gr["yuksek"].max(), "dusuk": gr["dusuk"].min(),
+                       "kapanis": gr["kapanis"].last(), "hacim": gr["hacim"].sum()})
+    h1["quote_hacim"] = h1["hacim"] * h1["kapanis"]
+    h1["islem_sayisi"] = 0
+    h1 = h1[dk.MUM_SUTUNLARI].astype({"islem_sayisi": "int64"})
+    h1.index.name = "zaman"
+    log(f"{SEMBOL}: günlük 1m dosyalarından {len(h1)} saatlik mum ({ilk} -> {bugun - timedelta(days=1)})")
+    return h1
+
+
+def _dk_gun_getir(ham: Path) -> Callable:
+    istemci = dk.Istemci()
+    ad = dk.SEMBOLLER[SEMBOL]
+
+    def getir(g: date):
+        return dk.onbellekli_getir(istemci, ham, ad, dk._gun_parcalari(g))   # AgHatasi sessiz yutulmaz: yukarı çıkar
+    return getir
+
+
 def guncelle(veri: Path, bugun: date, baslangic: Optional[str] = None, bitis: Optional[str] = None,
-             indir: Callable = dk.saatlik_indir, log: Callable = print) -> dict:
+             indir: Callable = dk.saatlik_indir, log: Callable = print, gun_getir: Optional[Callable] = None) -> dict:
     veri = Path(veri)
     if veri.resolve() == depo.MUM_DIZINI.resolve():
         raise GuncellemeHatasi(f"{veri}: depo içi araştırma dizini reddedildi (kilit kuralı); sunucu paper veri dizinini verin")
@@ -85,6 +121,19 @@ def guncelle(veri: Path, bugun: date, baslangic: Optional[str] = None, bitis: Op
         if r.get("basarisiz"):
             raise GuncellemeHatasi(f"indirilemeyen aylar: {r['basarisiz']} (yol yazılmadı)")
         yeni = pd.read_parquet(depo.mum_yolu(SEMBOL, "1h", Path(gecici))) if depo.mum_yolu(SEMBOL, "1h", Path(gecici)).exists() else None
+        aylik_son = yeni.index.max() if yeni is not None and len(yeni) else mevcut_son
+        if aylik_son is not None:
+            aylik_son = aylik_son.tz_localize("UTC") if aylik_son.tzinfo is None else aylik_son
+            gunluk_bas = aylik_son + pd.Timedelta(hours=1)
+        else:
+            gunluk_bas = None
+        ek = gunluk_tamamla(gunluk_bas, bugun, gun_getir or _dk_gun_getir(Path(gecici) / "_ham"), log)
+        if ek is not None:
+            if yeni is not None and len(yeni):
+                ek = ek[ek.index > yeni.index.max()]
+                yeni = pd.concat([yeni, ek]).sort_index()
+            else:
+                yeni = ek
     sonuc = birlestir(mevcut, yeni)
     son = sonuc.index.max()
     son_utc = son.tz_localize("UTC") if son.tzinfo is None else son.tz_convert("UTC")
