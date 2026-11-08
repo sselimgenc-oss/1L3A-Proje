@@ -255,10 +255,40 @@ def test_stop_sikligi_beklenenden_cok_stop_beklenti_disi():
 
 
 def test_cikis_nedeni_backtestte_gorulmeyen_neden():
+    """O16 (denetim 2026-11-08): backtest payı 0 olan neden test EDİLMEZ (H0 pay=0 iken p=0 olurdu); seviye en fazla 'izle', p null + neden."""
     sat = [_isl(i, 1.0, neden="zaman") for i in range(15)] + [_isl(i, -1.0) for i in range(15, 40)]
-    k, _ = _koc(sat, _ref(cikis={"sinyal": 1.0}))
+    k, dr = _koc(sat, _ref(cikis={"sinyal": 1.0}))
     b = [x for x in _bul(k, "cikis_nedeni") if x["dayanak"]["kova"] == "zaman"][0]
-    assert b["seviye"] == "beklenti_disi" and "hiç görülmemişti" in b["metin"] and b["istatistik"]["test_sayisi"] == 2   # 'sinyal' ve 'zaman' iki neden
+    assert b["seviye"] == "izle" and "gözlenmedi" in b["metin"] and "3/n" in b["metin"]
+    assert b["istatistik"]["p_ham"] is None and b["istatistik"]["p_duzeltilmis"] is None and "gözlenmedi" in b["istatistik"]["test"]
+    assert b["dayanak"]["ust_sinir"] == pytest.approx(3 / 200)
+    assert not [x for x in _bul(k, "cikis_nedeni") if x["seviye"] == "beklenti_disi"]      # pay 1 olan 'sinyal' da test edilmez
+    sap = {x["neden"]: x for x in dr["stratejiler"][0]["cikis_nedeni_sapmalari"]}
+    assert sap["zaman"]["p_deger"] is None and sap["zaman"]["gozlenmedi"] and "gözlenmedi" in sap["zaman"]["test_neden"]
+    assert sap["sinyal"]["p_deger"] is None and sap["sinyal"]["test_neden"]
+
+
+def test_o16_tek_gunluk_limit_cikisi_beklenti_disi_degil():
+    """Senaryo: 30 işlemin 1'i 'gunluk_limit' ile kapanır; backtestte bu neden yok -> 'beklenti dışı' DEĞİL, 'izle' + üst sınır bilgisi."""
+    sat = [_isl(0, -1.0, neden="gunluk_limit")] + [_isl(i, 1.0 if i % 2 else -1.0) for i in range(1, 30)]
+    k, dr = _koc(sat, _ref(cikis={"sinyal": 0.97, "stop": 0.03}))
+    b = [x for x in _bul(k, "cikis_nedeni") if x["dayanak"]["kova"] == "gunluk_limit"]
+    assert len(b) == 1 and b[0]["seviye"] == "izle" and b[0]["istatistik"]["p_ham"] is None
+    assert not [x for x in _bul(k, "cikis_nedeni") + _bul(k, "stop_sikligi") if x["seviye"] == "beklenti_disi"]
+    ac = " ".join(dr["stratejiler"][0]["aciklamalar"])
+    assert "gözlenmedi" in ac and "p<0.001" not in ac
+    assert ds.binom_p(1, 30, 0.009) > 0.05                     # ayrıntı: küçük pozitif payla test anlamlı değildi
+    # pano 'p —' ile biçimler, hata vermez
+    from motor.canli import pano as pn
+    h = pn._koc_html(k)
+    assert "gözlenmedi" in h and "p —" in h
+
+
+def test_o16_stop_ailesi_backtestte_yoksa_izle():
+    sat = [_isl(i, -1.0, neden="stop") for i in range(5)] + [_isl(i, 1.0) for i in range(5, 40)]
+    k, _ = _koc(sat, _ref(cikis={"sinyal": 1.0}))
+    b = _bul(k, "stop_sikligi")
+    assert len(b) == 1 and b[0]["seviye"] == "izle" and b[0]["istatistik"]["p_ham"] is None
 
 
 def test_kayip_serisi_beklenti_disi_ve_dagnik_kayip_bulgu_vermez():
@@ -347,7 +377,10 @@ def test_koc_metinleri_risk_buyutme_onermez_ve_yalniz_uc_seviye():
     json.dumps(k, allow_nan=False)
     for b in k["bulgular"]:
         i = b["istatistik"]
-        assert i["test"] and i["p_ham"] is not None and i["p_duzeltilmis"] >= i["p_ham"] - 1e-12 and i["test_sayisi"] >= 1 and b["dayanak"]
+        if i["p_ham"] is None:                                                          # O16: test yapılmayan (backtestte gözlenmedi) -> yalnız 'izle' + neden
+            assert b["seviye"] == "izle" and i["p_duzeltilmis"] is None and i["neden"] and b["dayanak"]
+            continue
+        assert i["test"] and i["p_duzeltilmis"] >= i["p_ham"] - 1e-12 and i["test_sayisi"] >= 1 and b["dayanak"]
     sirala = [(kc.SEVIYE_SIRA[b["seviye"]]) for b in k["bulgular"]]
     assert sirala == sorted(sirala)                                                      # önce beklenti dışı, sonra incele, sonra izle
     assert "ÖNERMEZ" in k["uyari"] and "martingale" in k["uyari"]

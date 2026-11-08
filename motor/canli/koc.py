@@ -16,7 +16,9 @@ SEVİYE (referans = backtestte karşılaştırma tabanı var mı?)
 KURALLAR
   stop_sikligi        referans: beklenti_islem_referansi.csv çıkış payları (Dersler çıkış nedeni sapmaları). "stop" içeren nedenlerin toplam payı, backtest payından anlamlı yüksekse
                       (kesin iki yönlü binom). Strateji başına.
-  cikis_nedeni        Stop dışı çıkış nedenlerinden payı backtestten anlamlı sapanlar (her iki yön; backtestte hiç görülmeyen neden dahil). m = o stratejide test edilen neden sayısı.
+  cikis_nedeni        Stop dışı çıkış nedenlerinden payı backtestten anlamlı sapanlar (her iki yön). m = o stratejide test edilen neden sayısı. Backtestte HİÇ gözlenmeyen
+                      neden (pay 0) test edilmez (H0 pay=0 iken tek gözlem p=0 verirdi): "backtestte gözlenmedi (üst sınır ~3/n)" bilgisi, seviye en fazla "izle",
+                      istatistik.p_ham/p_duzeltilmis null + neden. stop_sikligi'nde de stop ailesinin backtest payı 0 ise aynı kural.
   kayip_serisi        En uzun ardışık "kazanmayan" (R <= 0) işlem serisi, backtest isabetiyle (q = 1 - isabet) n işlemde şansla görülme olasılığı
                       P(en uzun seri >= L) (kesin dinamik program). Strateji ve set (set: işlem karışımına göre havuzlanmış q). Çıkış sırası zamanla sıralanır.
   tutma_suresi        Kaybeden (R <= 0) işlemler kazananlardan (R > 0) anlamlı UZUN tutulmuş mu (Mann-Whitney U, normal yaklaşım, bağ düzeltmeli, iki yönlü). Yalnız strateji
@@ -166,35 +168,68 @@ def _kisa(kimlik: str) -> str:
 
 
 # ---------------------------------------------------------------------------- kurallar
+def _bulgu_gozlenmedi(kural: str, kapsam: str, baslik: str, metin: str, dayanak: dict, neden: str) -> dict:
+    """Backtestte hiç gözlenmeyen (pay 0) olay: binom testi anlamsız (H0 pay=0 -> p=0), test yapılmaz; seviye en fazla 'izle'."""
+    return {"id": f"{kural}:{kapsam}:{dayanak.get('kova', '')}".rstrip(":"), "kural": kural, "kapsam": kapsam, "seviye": "izle", "seviye_etiket": SEVIYE_ETIKET["izle"],
+            "baslik": baslik, "metin": metin, "dayanak": dayanak,
+            "istatistik": {"test": "yapılmadı (backtestte gözlenmedi)", "p_ham": None, "test_sayisi": 0, "p_duzeltilmis": None, "duzeltme": "yok (test yapılmadı)",
+                           "anlamli_ham": False, "anlamli_duzeltilmis": False, "alfa": ALFA, "neden": neden},
+            "referans": "backtest", "oneri": ONERI["izle"]}
+
+
+def _ust_metni(ust) -> str:
+    return f"~3/n = {ust * 100:.1f}%" if ust is not None else "~3/n (referans işlem sayısı bilinmiyor)"
+
+
 def kural_stop_ve_cikis(x: dict, kapsam: str) -> list:
-    """x: dersler.json strateji kaydı (cikis_nedeni_sapmalari dolu olmalı)."""
+    """x: dersler.json strateji kaydı (cikis_nedeni_sapmalari dolu olmalı). Backtest payı 0 olan neden test edilmez (p null), en fazla 'izle'."""
     sap = x.get("cikis_nedeni_sapmalari") or []
     n = x["islem"]
+    ref_n = (x.get("beklenti") or {}).get("n")
     out = []
     stop = [s for s in sap if "stop" in s["neden"]]
     if stop:
         k = sum(s["islem"] for s in stop)
         q = sum(s["beklenen_pay"] for s in stop)
-        p = ders.binom_p(k, n, min(1.0, q))
-        if k / n > q:
-            sev = _seviye(p, p, True)
-            if sev:
-                out.append(_bulgu("stop_sikligi", kapsam, sev, "Stoplar beklenenden sık",
-                                  f"{_kisa(kapsam)}: {n} işlemin {k} tanesi ({k / n * 100:.0f}%) stop ailesiyle kapandı; backtestte bu pay {q * 100:.0f}%. "
-                                  f"Kesin binom {_p_metni(p)}. Neden: kayma/boşluk, veri ya da piyasa koşulu farkı olabilir; kök neden bu testle bilinmez.",
-                                  {"islem": n, "stop_islem": k, "pay": k / n, "beklenen_pay": q, "nedenler": sorted(s["neden"] for s in stop)},
-                                  "kesin iki yönlü binom", p, 1, True))
+        if q <= 0.0 or q >= 1.0:
+            if k > 0 and q <= 0.0:
+                ust = ders.gozlenmeyen_ust_sinir(ref_n)
+                out.append(_bulgu_gozlenmedi("stop_sikligi", kapsam, "Stop çıkışı backtestte gözlenmedi",
+                                             f"{_kisa(kapsam)}: {n} işlemin {k} tanesi stop ailesiyle kapandı; backtestte bu aile hiç gözlenmedi (üst sınır {_ust_metni(ust)}). "
+                                             "Test yapılmadı: tek başına beklenti dışı sayılmaz.",
+                                             {"islem": n, "stop_islem": k, "pay": k / n, "beklenen_pay": q, "ust_sinir": ust, "nedenler": sorted(s["neden"] for s in stop)},
+                                             "backtest payı 0: binom testi anlamsız (p=0)"))
+        else:
+            p = ders.binom_p(k, n, min(1.0, q))
+            if k / n > q:
+                sev = _seviye(p, p, True)
+                if sev:
+                    out.append(_bulgu("stop_sikligi", kapsam, sev, "Stoplar beklenenden sık",
+                                      f"{_kisa(kapsam)}: {n} işlemin {k} tanesi ({k / n * 100:.0f}%) stop ailesiyle kapandı; backtestte bu pay {q * 100:.0f}%. "
+                                      f"Kesin binom {_p_metni(p)}. Neden: kayma/boşluk, veri ya da piyasa koşulu farkı olabilir; kök neden bu testle bilinmez.",
+                                      {"islem": n, "stop_islem": k, "pay": k / n, "beklenen_pay": q, "nedenler": sorted(s["neden"] for s in stop)},
+                                      "kesin iki yönlü binom", p, 1, True))
     digerleri = [s for s in sap if "stop" not in s["neden"]]
-    m = len(digerleri)
+    testli = [s for s in digerleri if s.get("p_deger") is not None and 0.0 < s["beklenen_pay"] < 1.0]
+    m = len(testli)
     for s in digerleri:
+        if s.get("p_deger") is None or not 0.0 < s["beklenen_pay"] < 1.0:
+            # pay 1 olan neden (backtestte tek neden): sapmayı zaten pay 0 olan diğer nedenler 'izle' olarak gösterir; ayrı bulgu yok
+            if s["islem"] > 0 and s["beklenen_pay"] <= 0.0:
+                ust = s.get("ust_sinir", ders.gozlenmeyen_ust_sinir(ref_n))
+                out.append(_bulgu_gozlenmedi("cikis_nedeni", kapsam, f"'{s['neden']}' çıkışı backtestte gözlenmedi",
+                                             f"{_kisa(kapsam)}: '{s['neden']}' çıkışı {n} işlemin {s['islem']} tanesinde ({s['pay'] * 100:.0f}%); backtestte gözlenmedi "
+                                             f"(üst sınır {_ust_metni(ust)}). Test yapılmadı: tek başına beklenti dışı sayılmaz.",
+                                             {"islem": n, "neden_islem": s["islem"], "pay": s["pay"], "beklenen_pay": s["beklenen_pay"], "ust_sinir": ust, "kova": s["neden"]},
+                                             s.get("test_neden") or "backtest payı 0: binom testi anlamsız (p=0)"))
+            continue
         p = s["p_deger"]
         sev = _seviye(p, _bonf(p, m), True)
         if sev:
             yon = "sık" if s["pay"] > s["beklenen_pay"] else "seyrek"
-            gorulmemis = s["beklenen_pay"] == 0.0
             out.append(_bulgu("cikis_nedeni", kapsam, sev, f"'{s['neden']}' çıkışı beklenenden {yon}",
                               f"{_kisa(kapsam)}: '{s['neden']}' çıkışı {n} işlemin {s['islem']} tanesinde ({s['pay'] * 100:.0f}%); backtestte "
-                              + ("hiç görülmemişti" if gorulmemis else f"{s['beklenen_pay'] * 100:.0f}%") + f". Kesin binom {_p_metni(p)}, {m} nedenden biri.",
+                              f"{s['beklenen_pay'] * 100:.0f}%. Kesin binom {_p_metni(p)}, {m} nedenden biri.",
                               {"islem": n, "neden_islem": s["islem"], "pay": s["pay"], "beklenen_pay": s["beklenen_pay"], "kova": s["neden"]},
                               "kesin iki yönlü binom", p, m, True))
     return out

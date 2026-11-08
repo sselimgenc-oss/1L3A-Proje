@@ -49,6 +49,24 @@ def test_artimli_birlestirme_eski_gecmis_korunur_ortusmede_yeni_kazanir(tmp_path
     assert r["eklenen"] == len(out) - len(eski) > 0
 
 
+def test_404_ile_atlanan_ay_mevcut_mumlari_silmez(tmp_path):
+    """Denetim: bitiş ayı 404 verirse yeni parça yalnız önceki ayı içerir; arşivdeki içinde bulunulan ayın mumları SİLİNMEMELİ."""
+    eski = _df("2026-10-01", 24 * 35, 100.0)                     # 10-01 .. 11-04 (11. ay mumları arşivde)
+    _yaz(eski, depo.mum_yolu("DK_SPX", "1h", tmp_path))
+    yeni = _df("2026-10-01", 24 * 31, 500.0)                     # yalnız Ekim indi (Kasım 404 -> atlandı)
+    indir, _ = _sahte(yeni)
+    sg.guncelle(tmp_path, date(2026, 11, 5), indir=indir, log=lambda m: None)
+    out = pd.read_parquet(depo.mum_yolu("DK_SPX", "1h", tmp_path))
+    kasim = eski[eski.index >= "2026-11-01"]
+    assert len(kasim) and kasim.index.isin(out.index).all()      # Kasım mumları korundu
+    assert (out.loc[kasim.index, "kapanis"] == kasim["kapanis"]).all()
+    assert (out.loc[yeni.index, "kapanis"] == yeni["kapanis"]).all()      # indirilen ay yenisiyle değişti
+    assert out.index.max() == eski.index.max() and not out.index.duplicated().any()
+    # birlestir: indirilen ayda yeni parçada olmayan eski mum (sağlayıcı düzeltmesi) yeni aya göre düşer
+    m = sg.birlestir(eski, yeni.iloc[:-1])
+    assert yeni.index[-1] not in m.index and kasim.index.isin(m.index).all()
+
+
 def test_ilk_kurulum_baslangic_ister_arsiv_yoksa(tmp_path):
     with pytest.raises(sg.GuncellemeHatasi, match="baslangic"):
         sg.guncelle(tmp_path, date(2026, 11, 9), indir=_sahte(_df("2026-11-01", 5))[0], log=lambda m: None)

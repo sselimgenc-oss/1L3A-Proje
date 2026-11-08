@@ -458,7 +458,7 @@ SOZLUK = (("R", "Bir işlemin kazancı, ilk risk (giriş-stop mesafesi) kaç kat
           ("Beklenti alarmı", "8 haftalık net getiri alarm eşiğinin altına ya da düşüş eşiğinin üstüne düştü: strateji backtest gibi çalışmıyor olabilir."),
           ("Kill switch", "Zirveden düşüş sert limite ulaşırsa tüm işlemler durur. Mesafe: limite kalan pay."),
           ("Günlük kayıp limiti", "Bir günde kaybedilebilecek en çok pay. Dolarsa yeni işlem açılmaz."),
-          ("Kaldıraç", "Brüt pozisyon tutarı / özsermaye. Sert tavan 3x."),
+          ("Kaldıraç", "Brüt pozisyon tutarı / özsermaye. Sert tavan {kaldirac}."),
           ("Açık stop riski", "Tüm açık pozisyonlar stop'ta kapanırsa kaybedilecek toplam pay."),
           ("Brüt / net nominal", "Brüt: long ve short tutarlarının mutlak toplamı. Net: long eksi short."),
           ("Kayma", "Gerçekleşen dolum fiyatı ile beklenen fiyat arasındaki fark x miktar."),
@@ -840,8 +840,9 @@ def _beklenti_tablosu(st: dict) -> str:
 
 @_guvenli
 def _takvim(kz: list, isl: Optional[list], amap: Optional[dict] = None, gun_kesimi: Optional[str] = None) -> str:
-    """Aylık takvim ısı haritası: her gün ozet.json -> gunluk_kz[].pnl (renk yoğunluğu yalnız ölçek). Güne dokununca o gün (UTC) kapanan işlemler
-    (islemler.jsonl'den süzme) açılır; hafta/ay toplamı pano tarafından hesaplanmaz."""
+    """Aylık takvim ısı haritası: her gün ozet.json -> gunluk_kz[].pnl (renk yoğunluğu yalnız ölçek). Güne dokununca o gün kapanan işlemler
+    (islemler.jsonl'den, motorun yazdığı `gun` alanıyla süzme) açılır; hafta/ay toplamı pano tarafından hesaplanmaz. `gun` alanı olmayan satır
+    hiçbir güne YERLEŞTİRİLMEZ (UTC tarihine düşürmek TSİ günüyle çelişirdi); sayısı açıkça yazılır."""
     if not kz:
         return '<div class="alt">Günlük K/Z serisi boş.</div>'
     amap = amap or {}
@@ -866,14 +867,15 @@ def _takvim(kz: list, isl: Optional[list], amap: Optional[dict] = None, gun_kesi
                 v = float(x["pnl"])
                 yog = 14 + abs(v) / enb * 56                                           # yalnız renk yoğunluğu
                 ren = "var(--iyi)" if v > 0 else ("var(--kotu)" if v < 0 else "var(--sessiz)")
-                hucre += (f'<button type="button" class="tk" data-gun="{g}" style="background:color-mix(in srgb,{ren} {yog:.0f}%,var(--bg))" '
+                hucre += (f'<button type="button" class="tk" data-gun="{esc(g)}" style="background:color-mix(in srgb,{ren} {yog:.0f}%,var(--bg))" '
                           f'title="{esc(g)}: {esc(f_para(x["pnl"], True))} ({esc(f_yuzde(x.get("getiri"), True))})">'
                           f'<span class="gn">{dn}</span><span class="pn">{esc(f_para(x["pnl"], True))}</span></button>')
         cikti.append(f'<div class="tkay"><h4>{AY_ADI[m]} {y}</h4><div class="tkg">{hucre}</div></div>')
     detay = []
+    gunsuz = len([i for i in (isl or []) if not i.get("gun")])                       # takvime yerleştirilemeyen satırlar (yalnız gösterim)
     for x in kz:
         g = x["gun"]
-        liste = [i for i in (isl or []) if (i.get("gun") or i["zaman"][:10]) == g]       # i["gun"]: motorun yazdığı gün (TSİ)
+        liste = [i for i in (isl or []) if i.get("gun") == g]                         # i["gun"]: motorun yazdığı gün (yoksa yerleştirilmez)
         if isl is None:
             ic = '<div class="alt ip">islemler.jsonl okunamadı.</div>'
         elif not liste:
@@ -885,6 +887,8 @@ def _takvim(kz: list, isl: Optional[list], amap: Optional[dict] = None, gun_kesi
                           esc(i["cikis_nedeni"])] for i in sorted(liste, key=lambda i: i["zaman"])], sag=(3, 4))
         detay.append(f'<div class="gd" data-gun="{esc(g)}"><h4>{esc(g)} ({gun_adi}) · K/Z {esc(f_para(x["pnl"], True))} ({esc(f_yuzde(x.get("getiri"), True))})</h4>{ic}</div>')
     return ('<div class="tkv">' + "".join(cikti) + '</div><div class="alt">Renk yoğunluğu o günün K/Z büyüklüğüne göre; bir güne dokun/tıkla: o gün kapanan işlemler.</div>'
+            + (f'<div class="uyari takvim-gunsuz">{gunsuz} işlemde \'gun\' alanı yok: takvim gününe yerleştirilmedi (gün bilinmiyor; motor bu alanı yazmalı).</div>'
+               if gunsuz else "")
             + "".join(detay))
 
 
@@ -1449,7 +1453,7 @@ def _cikis_nedenleri(oz: dict) -> str:
         + (f'<div class="alt ip">{esc(oz["cikis_nedenleri_not"])}</div>' if oz.get("cikis_nedenleri_not") else "")
 
 
-def _sekme_islemler(isl, st, ml, rd, oz=None) -> str:
+def _sekme_islemler(isl, st, ml, rd, oz=None, lim=None) -> str:
     perf = _p("Strateji performansı", _performans_tablosu(st) if st else _veri_yok("stratejiler.json"), "net kâr/zarara göre", "g2", duz=bool(st))
     sag = _sag(_p("Maliyet dökümü", _maliyet_toplam(ml) if ml is not None else _ek_yok("maliyet.json"), "ücret · kayma · funding", duz=ml is not None)
                + _p("Atlanan / reddedilen sinyaller", _reddedilen_neden(rd) if rd is not None else _ek_yok("reddedilen.json"), "neden başına", duz=rd is not None), "s1")
@@ -1457,7 +1461,7 @@ def _sekme_islemler(isl, st, ml, rd, oz=None) -> str:
         son = _p("Son kapanan işlemler", _veri_yok("islemler.jsonl"), "", "g3")
     else:
         son = _p("Kapanan işlemler", _islem_suzgec(isl) + _son_islemler(isl, _ajan_haritasi(st))
-                 + '<button type="button" class="daha" id="daha">Daha fazla göster</button>' + _cekmece(isl),
+                 + '<button type="button" class="daha" id="daha">Daha fazla göster</button>' + _cekmece(isl, lim),
                  f"en yeni {min(len(isl), ISLEM_GOSTER)} / {len(isl)} · başlığa tıkla: sırala · satıra tıkla: açıklama · saat TSİ", "g3", duz=True)
     alt = (_p("Maliyet — strateji başına", _maliyet_strateji(ml), "", "g3", duz=True) if ml is not None else "")
     if oz is not None:
@@ -1585,7 +1589,7 @@ def _kalp_atisi_kutulari(sg: dict) -> str:
             + _kutu("Son yeniden başlatma kesintisi", "—" if kes is None else f"{kes:.0f} sn", "", "" if kes is not None else (k.get("son_kesinti_neden") or "")))
 
 
-def _sekme_saglik(sg, vg=None, bt=None) -> str:
+def _sekme_saglik(sg, vg=None, bt=None, lim=None) -> str:
     if not sg:
         return _veri_yok("saglik.json")
     sv = sg["servis"]
@@ -1596,7 +1600,7 @@ def _sekme_saglik(sg, vg=None, bt=None) -> str:
     veri = ('<div class="izgara oto">' + "".join(
         _kutu(f"{v['sembol']} {v['tf']} son mum (TSİ)", tsi(v["son_mum_zamani"]), "kotu" if v["bayat"] else "", f"{v['bayatlik_dk']} dk" + (" · BAYAT" if v["bayat"] else ""))
         for v in sg["veri"]) + "</div>") if sg["veri"] else '<div class="alt">Veri akışı kaydı yok.</div>'
-    soz = '<dl class="soz">' + "".join(f"<dt>{esc(k)}</dt><dd>{esc(v)}</dd>" for k, v in SOZLUK) + "</dl>"
+    soz = '<dl class="soz">' + "".join(f"<dt>{esc(k)}</dt><dd>{esc(v)}</dd>" for k, v in sozluk(lim)) + "</dl>"
     guven = _p("Veri güveni", _veri_guveni_html(vg) if vg is not None else _bekleyen("veri_guveni.json", "son mum, bayatlık, eksik mum, kaynak"),
                "eksik mum ve kaynak · motor hesaplar", "g3", duz=True)
     butun = _p("Backtest bütünlüğü", _butunluk_html(bt) if bt is not None else _bekleyen("butunluk.json", "dosya sha256 özetleri ve kod sürümü"),
@@ -1667,7 +1671,7 @@ def _radar_svg(eksenler: list) -> str:
 
 
 @_guvenli
-def _karne_kart(k: dict) -> str:
+def _karne_kart(k: dict, set_strateji: Optional[int] = None) -> str:
     sat = ""
     for e in k["eksenler"]:
         et, sn = ESIK_ETIKET[e["esik_durumu"]]
@@ -1677,14 +1681,17 @@ def _karne_kart(k: dict) -> str:
         if e.get("kontroller"):
             sat += '<div class="alt kz2k">' + " · ".join(
                 f'{esc(c["ad"])}: ' + ("geçti" if c["gecti"] else ("KALDI" if c["gecti"] is False else f'ölçülemedi ({esc(c.get("neden") or "—")})')) for c in e["kontroller"]) + "</div>"
-    baslik = "SET (7 strateji birlikte)" if k["tur"] == "set" else kisa_kimlik(k["kimlik"])
+    if k["tur"] == "set":                               # strateji sayısı karne.json'daki strateji kayıtlarından (sabit sayı yok)
+        baslik = f"SET ({set_strateji} strateji birlikte)" if set_strateji is not None else "SET (strateji sayısı bilinmiyor)"
+    else:
+        baslik = kisa_kimlik(k["kimlik"])
     return (f'<div class="kart karne"><div class="e">{esc(baslik)}</div><div class="alt">{k["islem"]} kapanan işlem · {k["olculen_eksen"]}/6 eksen ölçüldü</div>'
             f'{_radar_svg(k["eksenler"])}{sat}</div>')
 
 
 @_guvenli
 def _karne_html(kr: dict) -> str:
-    kartlar = _karne_kart(kr["set"]) + "".join(_karne_kart(x) for x in kr["stratejiler"])
+    kartlar = _karne_kart(kr["set"], len(kr["stratejiler"]) if isinstance(kr.get("stratejiler"), list) else None) + "".join(_karne_kart(x) for x in kr["stratejiler"])
     tan = _tablo(["Eksen", "Formül", "Eşik", "Eşik kaynağı", "Asgari örnek"],
                  [[f"<b>{esc(e['ad'])}</b>", f'<span style="white-space:normal">{esc(e["formul"])}</span>', f'<span style="white-space:normal">{esc(e["esik"])}</span>',
                    f'<span style="white-space:normal">{esc(e["esik_kaynagi"])}</span>', f'<span style="white-space:normal">{esc(e["min_ornek"])}</span>'] for e in kr["eksen_tanimlari"]], sinif="kay")
@@ -1714,8 +1721,10 @@ def _koc_html(kc: dict) -> str:
         b += (f'<div class="koc {SEVIYE_SINIF[x["seviye"]]}"><div class="sat"><span><b>{esc(x["baslik"])}</b> <span class="alt">{esc(kisa_kimlik(x["kapsam"]))}</span></span>'
               f'<b class="{SEVIYE_SINIF[x["seviye"]]}">{esc(x["seviye_etiket"])}</b></div><div>{esc(x["metin"])}</div>'
               f'<div class="alt">Dayanak: {esc(_dayanak_metni(x["dayanak"]))}</div>'
-              f'<div class="alt">İstatistik: {esc(i["test"])} · p {i["p_ham"]:.4f} · {i["test_sayisi"]} test · düzeltilmiş p {i["p_duzeltilmis"]:.4f} ({esc(i["duzeltme"])}) · referans: {esc(x["referans"])}</div>'
-              f'<div class="alt">{esc(x["oneri"])}</div></div>')
+              + (f'<div class="alt">İstatistik: {esc(i["test"])} · p {i["p_ham"]:.4f} · {i["test_sayisi"]} test · düzeltilmiş p {i["p_duzeltilmis"]:.4f} ({esc(i["duzeltme"])}) · referans: {esc(x["referans"])}</div>'
+                 if i.get("p_ham") is not None and i.get("p_duzeltilmis") is not None else
+                 f'<div class="alt">İstatistik: {esc(i["test"])} · p — ({esc(i.get("neden") or "test yapılmadı")}) · referans: {esc(x["referans"])}</div>')
+              + f'<div class="alt">{esc(x["oneri"])}</div></div>')
     if not kc["bulgular"]:
         b = '<div class="kart alt">Şu an kural eşiğini geçen bulgu yok (ya da örnek henüz yetersiz: aşağıdaki atlanan listesine bak).</div>'
     atl = ("".join(f'<div class="alt">Atlandı — {esc(kisa_kimlik(a["kapsam"]))}: {esc(a["neden"])}</div>' for a in kc["atlanan"])) if kc["atlanan"] else ""
@@ -1738,10 +1747,43 @@ CIKIS_ACIKLAMA = {
     "yon_degisim": "Portföy stratejisi yön değiştirdi; eski yön kapandı.",
     "kucultme": "Hedef ağırlık küçüldü; kalan miktar kapandı.",
     "kaldirac_azalt": "Brüt kaldıraç sert tavana yaklaştığı için pozisyon orantılı küçültüldü.",
-    "kill_switch": "Kill switch (zirveden %20 düşüş) tetiklendi; tüm pozisyonlar kapandı.",
-    "gunluk_limit": "Günlük kayıp limiti (%3) tetiklendi; pozisyonlar kapandı.",
+    "kill_switch": "Kill switch (zirveden {kill} düşüş) tetiklendi; tüm pozisyonlar kapandı.",
+    "gunluk_limit": "Günlük kayıp limiti ({gunluk}) tetiklendi; pozisyonlar kapandı.",
     "veri_sonu": "Tekrar/backtest verisinin sonunda açık pozisyon kapatıldı.",
 }
+
+
+LIMIT_BILINMIYOR = {"kill": "bilinmiyor", "gunluk": "bilinmiyor", "kaldirac": "bilinmiyor"}
+
+
+def _yuzde_metni(oran) -> str:
+    return f"%{float(oran) * 100:g}"
+
+
+def limit_metinleri(veri: dict) -> dict:
+    """Limit METİNLERİ (hesap değil): motorun yazdığı değerlerden. Öncelik ozet.json risk.*.limit (oran; motorun uyguladığı), yoksa
+    butunluk.json sanal 'sert_limitler' ayrıntısı (yüzde birimi; motor/risk/limitler.py). Hiçbiri yoksa 'bilinmiyor' (sabit sayı yazılmaz)."""
+    out = dict(LIMIT_BILINMIYOR)
+    sanal = (veri.get("butunluk") or {}).get("sanal") if isinstance(veri.get("butunluk"), dict) else None
+    sl = next(((x.get("ayrinti") or {}) for x in (sanal or []) if isinstance(x, dict) and x.get("id") == "sert_limitler"), {})
+    r = (veri.get("ozet") or {}).get("risk") if isinstance(veri.get("ozet"), dict) else None
+    r = r if isinstance(r, dict) else {}
+    for ad, blok, sl_ad, yuzde in (("kill", "kill_switch", "kill_switch_dusus_yuzde", True), ("gunluk", "gunluk_kayip", "gunluk_max_kayip_yuzde", True),
+                                   ("kaldirac", "kaldirac", "max_kaldirac", False)):
+        v = r[blok].get("limit") if isinstance(r.get(blok), dict) else None
+        if v is None and isinstance(sl.get(sl_ad), (int, float)):
+            v = sl[sl_ad] / 100.0 if yuzde else sl[sl_ad]
+        if isinstance(v, (int, float)) and not isinstance(v, bool):
+            out[ad] = _yuzde_metni(v) if yuzde else f"{float(v):g}x"
+    return out
+
+
+def cikis_aciklama(neden: str, lim: Optional[dict] = None) -> str:
+    return CIKIS_ACIKLAMA.get(neden, "Bu çıkış nedeni için açıklama sözlüğünde kayıt yok.").format(**(lim or LIMIT_BILINMIYOR))
+
+
+def sozluk(lim: Optional[dict] = None) -> list:
+    return [(k, v.format(**(lim or LIMIT_BILINMIYOR))) for k, v in SOZLUK]
 
 
 def _gosterilen_islemler(isl: list) -> list:
@@ -1753,7 +1795,7 @@ def _cek_satir(ad: str, deger: str, sinif: str = "") -> str:
 
 
 @_guvenli
-def _cekmece_icerik(s: dict) -> str:
+def _cekmece_icerik(s: dict, lim: Optional[dict] = None) -> str:
     """Tek işlemin açıklaması: giriş gerekçesi (sinyal anı), ayar sürümü, giriş/çıkış, R, çıkış nedeni, MFE/MAE. Yalnız biçim: değerler işlem kaydındandır."""
     g, av = s.get("giris_gerekcesi"), s.get("ayar_surumu")
     if g:
@@ -1777,15 +1819,15 @@ def _cekmece_icerik(s: dict) -> str:
             + _cek_satir("Miktar", s["miktar"])
             + '<h5>Sonuç</h5>' + _cek_satir("R", f_sayi(s["r"]), _isaret_sinifi(s["r"])) + _cek_satir("Net K/Z", f_para(s["net_pnl_yerel"], True), _isaret_sinifi(s["net_pnl_yerel"]))
             + _cek_satir("Set katkısı", f_para(s["set_katki_usd"], True) if s["set_katki_usd"] is not None else "kol düzeyinde")
-            + _cek_satir("Çıkış nedeni", neden) + f'<div class="alt">{esc(CIKIS_ACIKLAMA.get(neden, "Bu çıkış nedeni için açıklama sözlüğünde kayıt yok."))}</div>'
+            + _cek_satir("Çıkış nedeni", neden) + f'<div class="alt">{esc(cikis_aciklama(neden, lim))}</div>'
             + "<h5>İşlem içi uçlar</h5>" + uc)
 
 
 @_guvenli
-def _cekmece(isl: list) -> str:
+def _cekmece(isl: list, lim: Optional[dict] = None) -> str:
     """Satıra tıklayınca açılan panel (JS); JS yoksa aynı içerik açılır-kapanır liste olarak görünür. Satır sırası _son_islemler ile aynıdır."""
     gos = _gosterilen_islemler(isl)
-    bloklar = "".join(f'<div class="cek" data-ix="{i}">{_cekmece_icerik(x)}</div>' for i, x in enumerate(gos))
+    bloklar = "".join(f'<div class="cek" data-ix="{i}">{_cekmece_icerik(x, lim)}</div>' for i, x in enumerate(gos))
     return ('<aside id="cekmece" class="cekmece" hidden aria-label="İşlem ayrıntısı"><button type="button" id="cekmece-kapat">Kapat ✕</button><div id="cekmece-ic"></div></aside>'
             f'<details class="ince ip cek-liste"><summary>İşlem ayrıntıları ({len(gos)}) — satıra tıklayınca da açılır</summary><div id="cek-veri">{bloklar}</div></details>')
 
@@ -1851,6 +1893,7 @@ def html_olustur(veri: dict, sorunlar: list, simdi: datetime) -> str:
     vg, bt = veri.get("veri_guveni"), veri.get("butunluk")
     kn, ky, kor, yog = (veri.get(k) for k in ("koni", "kiyas", "korelasyon", "yogunlasma"))
     u = uyarilar(veri, sorunlar, simdi)
+    lim = limit_metinleri(veri)
     canli_mi = bool(oz and oz["kaynak"] != "backtest")
     g = []
     if canli_mi and oz.get("yazildi_zaman"):           # tarayıcı tarafı bayatlık bandı: JS yoksa gizli kalır (sunucu tarafı uyarılar yine geçerli)
@@ -1877,8 +1920,8 @@ def html_olustur(veri: dict, sorunlar: list, simdi: datetime) -> str:
     g.append('<div class="tabs" role="tablist">' + "".join(
         f'<label for="{i}">{esc(ad)}' + (f' <em>{esc(rozet[i])}</em>' if rozet.get(i) is not None else "")
         + (' <em class="k">!</em>' if i == "t6" and sorun_var else "") + "</label>" for i, ad in SEKMELER) + "</div>")
-    icerik = (_sekme_ozet(oz, st, gc, ic, sg, isl, kn, ky), _sekme_stratejiler(st, isl, mr), _sekme_pozisyon(oz, st, mr), _sekme_islemler(isl, st, ml, rd, oz),
-              _sekme_risk(oz, ol, kor, yog), _sekme_saglik(sg, vg, bt), _sekme_dersler(dr, veri.get("karne"), veri.get("koc")), _sekme_rapor(ar))
+    icerik = (_sekme_ozet(oz, st, gc, ic, sg, isl, kn, ky), _sekme_stratejiler(st, isl, mr), _sekme_pozisyon(oz, st, mr), _sekme_islemler(isl, st, ml, rd, oz, lim),
+              _sekme_risk(oz, ol, kor, yog), _sekme_saglik(sg, vg, bt, lim), _sekme_dersler(dr, veri.get("karne"), veri.get("koc")), _sekme_rapor(ar))
     g.append(_suzgec_cubugu(veri))
     g.append('<div class="sekmeler">' + "".join(f'<section class="n{k}">{c}</section>' for k, c in enumerate(icerik, 1)) + "</div></div>")
     g.append('<div class="alt ayak">Pano yeni hesap yapmaz: sayılar durum dosyalarından aynen gösterilir. Saatler TSİ (Türkiye saati).</div>')
