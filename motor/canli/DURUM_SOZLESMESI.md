@@ -5,6 +5,13 @@ Motor (backtest besleyici bugün, paper motoru Aşama 4'te) bu dosyaları yazar;
 Varsayılan dizin: `durum/` (repoda yok, `.gitignore`). Sürüm: `surum = 1`.
 
 ## Genel kurallar
+- **Gün kesimi (kullanıcı kararı 2026-11-08):** günlük kâr/zarar ve dönemsel (hafta/ay) gruplama **Türkiye saatine göre** (`Europe/Istanbul`,
+  gün 00:00 TSİ'de biter). Zaman damgaları dosyada UTC kalır; yalnız `gun` alanları, `gunluk_kz`, `dusus_serisi`, `ozsermaye_gecmisi.noktalar`,
+  `gunluk_kz_ajan`, hafta (ISO, pazartesi başlar) ve ay gruplaması TSİ gününe göredir. Bir mumun kapanışı tam 00:00 TSİ ise o günün özsermayesine yazılır.
+  `ozet.gun_kesimi` kesimi söyler: paper `"Europe/Istanbul"`; backtest `"UTC (araştırma ızgarası)"` (yeniden oynatmanın günlük serisi
+  `sonuclar/kilit/set.csv` ile birebir olmak zorunda ve gün içi özsermaye tutulmaz; bu yüzden TSİ'ye çevrilemez). Pano gün etiketini bu alandan yazar.
+  Değişmeyenler (bilerek UTC): sert günlük kayıp limiti günü (`motor.gun`, risk kodu), beklenti aralığı pencereleri (28/56 gün; backtestle aynı UTC tabanı).
+  `ozet.gun_pnl/gun_getiri` TSİ günüdür; `risk.gunluk_kayip` limit günü UTC'dir.
 - Zaman: UTC, `YYYY-MM-DDTHH:MM:SSZ`. Para: **metin**, 2 hane (`"10721.40"`, Decimal). Oran: JSON sayısı (`0.072` = %7.2); kayıp/düşüş **pozitif** oran.
 - Ölçülmeyen değer `null` (pano `—` gösterir). `NaN`/`Infinity` yasak.
 - Atomik yazma: aynı dizinde geçici dosya + `fsync` + `os.replace`. Yazım sırası: `islemler`, `ozsermaye_gecmisi`, `stratejiler`, `saglik`, **`ozet` en son**.
@@ -65,3 +72,25 @@ Pano bunları yalnız okur; her sayıyı motor yazar. Dosya yoksa (eski motor) p
   24 sa maliyet, limit durumu). Sayılar diğer dosyalarla aynı değişkenlerden üretilir.
 - **`saglik.json`**: `veri[].bayatlik_dk` = son mum KAPANIŞINDAN beri geçen SEANS dakikası (hisse/emtia için kapalı piyasa sayılmaz,
   `motor/canli/paper_takvim.py`), asla negatif değil; `veri[].seans` (kripto|hisse|emtia). Beklenti alarmları ve ayar yenileme zamanı `uyarilar[]`'a yazılır.
+
+## Genişletme (motor yazıcı paketi, 2026-11-08; sürüm 1 içinde EKLEMELİ)
+Hesap `motor/canli/durum_ek.py` içindedir; paper (`paper_durum.py`) ve backtest (`backtest_durum.py`) aynı fonksiyonları çağırır. Pano yalnız biçimler.
+Ölçülemeyen değer `null` + neden. Eşik/alarm yoktur: `MIN_ISLEM=30` ve `MIN_GUN=30` yalnız "yeterli örnekle hesaplandı mı" sınırıdır (geçme ölçütü değil;
+geçme ölçütleri `sonuclar/evren/ON_KAYIT.md`'dedir).
+- **`ozet.json`**
+  - `gun_kesimi` (yukarı bakın).
+  - `istatistik {islem_sayisi, gun_sayisi, beklenti_islem_basi (para; yalnız set_katki_usd olan işlemlerden), kazanc_kayip_orani (ort. kazanç R / ort. kayıp R),
+    sqn (R'den), sharpe, sortino (günlük getiriden, yıllık √365), kelly_ceyrek (0.25 x max(0, W - (1-W)/B); yalnız bilgi), yesil_gun_orani,
+    en_uzun_kazanc_serisi, en_uzun_kayip_serisi (çıkış sırasına göre, net K/Z işareti), ort_tutma_saat, en_iyi_gun/en_kotu_gun {gun,pnl}|null, istatistik_neden}`.
+    İşlem < 30: `sqn`, `kelly_ceyrek` null; gün < 30: `sharpe`, `sortino` null; nedenleri `istatistik_neden`'de.
+  - `cikis_nedenleri[] {neden, islem, pay, net_pnl}` (+ `cikis_nedenleri_not`): net_pnl = set katkısı toplamı; grubun bir işleminde set katkısı yoksa (backtest portföy kolu) null.
+  - `gunluk_kz_ajan[] {gun, ajanlar{ajan:{pnl,getiri}}, toplam{pnl,getiri}}` (son 60 gün): ajan getirisi = pnl / başlangıç özsermaye (toplamsal); toplam.getiri = özsermaye getirisi.
+  - `haftalik_kz_ajan[]`, `aylik_kz_ajan[] {donem, bas_gun, bit_gun, gun_sayisi, tamamlandi, ajanlar, toplam}` (son 12 dönem; `tamamlandi=false`: dönem bitmedi).
+- **`stratejiler.json`** (üst düzey listeler): `ajanlar[] {ajan, strateji_sayisi, ozsermaye_katkisi, katki_getiri, islem_sayisi, kazanma_orani, pf, acik_pozisyon}`,
+  `enstrumanlar[] {sembol, strateji_sayisi, ozsermaye_katkisi, katki_getiri, islem_sayisi, kazanma_orani, acik_pozisyon, [katki_neden]}`,
+  `strateji_enstruman[] {strateji (ad), sembol, ozsermaye_katkisi, islem_sayisi, acik_pozisyon, [katki_neden]}`. Paper'da Σ katkı = `toplam_pnl`.
+  Backtestte portföy kolunun sembol dağılımı ölçülmez: o hücreler (ve onlara dokunan enstrümanlar) `ozsermaye_katkisi: null` + `katki_neden`; `pf` set katkısı olmayan ajanlarda null.
+- **`maruziyet.json`**: `bekleyen_emirler[] {kimlik, sembol, tur (giris|hedef_agirlik|cikis|kucultme), yon, sinyal_zamani (karar mumunun kapanışı), emir, stop, hedef}`;
+  backtestte `null` (yeniden oynatma emir kuyruğu tutmaz).
+- **`islemler.jsonl`**: paper satırlarında `gun` (çıkışın TSİ günü; takvim detayı bunu kullanır).
+- Eski durum dosyası (TSİ serisi yok) yüklenirse UTC günü serisi devralınır (en çok 3 saat kayma) ve `ozet.notlar`'a yazılır.

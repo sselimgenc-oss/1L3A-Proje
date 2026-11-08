@@ -815,12 +815,13 @@ def _beklenti_tablosu(st: dict) -> str:
 
 
 @_guvenli
-def _takvim(kz: list, isl: Optional[list], amap: Optional[dict] = None) -> str:
+def _takvim(kz: list, isl: Optional[list], amap: Optional[dict] = None, gun_kesimi: Optional[str] = None) -> str:
     """Aylık takvim ısı haritası: her gün ozet.json -> gunluk_kz[].pnl (renk yoğunluğu yalnız ölçek). Güne dokununca o gün (UTC) kapanan işlemler
     (islemler.jsonl'den süzme) açılır; hafta/ay toplamı pano tarafından hesaplanmaz."""
     if not kz:
         return '<div class="alt">Günlük K/Z serisi boş.</div>'
     amap = amap or {}
+    gun_adi = "TSİ günü" if gun_kesimi == "Europe/Istanbul" else "UTC günü"          # motorun yazdığı gün kesimi (ozet.gun_kesimi)
     gun = {x["gun"]: x for x in kz}
     enb = max(abs(float(x["pnl"])) for x in kz) or 1.0
     aylar = sorted({x["gun"][:7] for x in kz})
@@ -848,7 +849,7 @@ def _takvim(kz: list, isl: Optional[list], amap: Optional[dict] = None) -> str:
     detay = []
     for x in kz:
         g = x["gun"]
-        liste = [i for i in (isl or []) if i["zaman"][:10] == g]
+        liste = [i for i in (isl or []) if (i.get("gun") or i["zaman"][:10]) == g]       # i["gun"]: motorun yazdığı gün (TSİ)
         if isl is None:
             ic = '<div class="alt ip">islemler.jsonl okunamadı.</div>'
         elif not liste:
@@ -858,7 +859,7 @@ def _takvim(kz: list, isl: Optional[list], amap: Optional[dict] = None) -> str:
                         [[esc(tsi(i["zaman"])), esc(i["sembol"]), _h(i["yon"], "iyi" if i["yon"] == "long" else "kotu"), esc(f_sayi(i["r"])),
                           _h(f_para(i["net_pnl_yerel"], True), _isaret_sinifi(i["net_pnl_yerel"])), f'{_nokta(amap.get(i["kimlik"]))}{esc(kisa_kimlik(i["kimlik"]))}',
                           esc(i["cikis_nedeni"])] for i in sorted(liste, key=lambda i: i["zaman"])], sag=(3, 4))
-        detay.append(f'<div class="gd" data-gun="{esc(g)}"><h4>{esc(g)} (UTC günü) · K/Z {esc(f_para(x["pnl"], True))} ({esc(f_yuzde(x.get("getiri"), True))})</h4>{ic}</div>')
+        detay.append(f'<div class="gd" data-gun="{esc(g)}"><h4>{esc(g)} ({gun_adi}) · K/Z {esc(f_para(x["pnl"], True))} ({esc(f_yuzde(x.get("getiri"), True))})</h4>{ic}</div>')
     return ('<div class="tkv">' + "".join(cikti) + '</div><div class="alt">Renk yoğunluğu o günün K/Z büyüklüğüne göre; bir güne dokun/tıkla: o gün kapanan işlemler.</div>'
             + "".join(detay))
 
@@ -903,7 +904,7 @@ def _sekme_ozet(oz, st, gc, ic, sg, isl=None) -> str:
          _p("Zirveden düşüş", _dusus_grafigi(ds) if ds is not None else yok("dusus_serisi"), f_yuzde(oz["zirveden_dusus"])),
          _p("Günlük K/Z", _kz_grafigi(kz) if kz is not None else yok("gunluk_kz"), f_para(kz[-1]["pnl"], True) if kz else ""),
          _p("İçgörüler", _icgoruler(ic))]
-    g.append(_p("Takvim (günlük K/Z ısı haritası)", _takvim(kz, isl, _ajan_haritasi(st)) if kz is not None else yok("gunluk_kz"), "gün seç: işlemler", "g3"))
+    g.append(_p("Takvim (günlük K/Z ısı haritası)", _takvim(kz, isl, _ajan_haritasi(st), oz.get("gun_kesimi")) if kz is not None else yok("gunluk_kz"), "gün seç: işlemler", "g3"))
     g.append(_p("Dönemsel getiri (gün × stil)", _donemsel(oz), "motor yazar", "g3", duz=oz.get("gunluk_kz_ajan") is not None))
     g.append(_p("Beklenti aralığına göre konum", _beklenti_tablosu(st) if st else _veri_yok("stratejiler.json"), "SET (tüm stratejiler)", "g3", duz=bool(st)))
     return _ig("".join(g))
@@ -952,7 +953,7 @@ def _matris(st: dict) -> str:
     satirlar = list(dict.fromkeys(x["strateji"] for x in a))
     sutunlar = sorted({x["sembol"] for x in a})
     hucre = {(x["strateji"], x["sembol"]): x for x in a}
-    enb = max(abs(float(x["ozsermaye_katkisi"])) for x in a) or 1.0
+    enb = max([abs(float(x["ozsermaye_katkisi"])) for x in a if x["ozsermaye_katkisi"] is not None] or [0.0]) or 1.0
     amap = {x["kimlik"]: x["ajan"] for x in st["stratejiler"]}
     ajan_of = {}
     for kim, aj in amap.items():
@@ -964,6 +965,9 @@ def _matris(st: dict) -> str:
             x = hucre.get((sr, sm))
             if not x:
                 h.append('<span class="alt">·</span>')
+                continue
+            if x["ozsermaye_katkisi"] is None:                                         # motor ölçmedi (katki_neden)
+                h.append(f'<span class="alt" title="{esc(x.get("katki_neden") or "ölçülmedi")}">—</span>')
                 continue
             v = float(x["ozsermaye_katkisi"])
             yog = 12 + abs(v) / enb * 55                                              # yalnız renk yoğunluğu
@@ -1253,7 +1257,8 @@ def _cikis_nedenleri(oz: dict) -> str:
     if c is None:
         return _bekleyen("ozet.json → cikis_nedenleri[]", "çıkış nedeni başına işlem sayısı, pay ve net K/Z")
     return _tablo(["Neden", "İşlem", "Pay", "Net"], [[esc(x["neden"]), esc(str(x["islem"])), esc(f_yuzde(x.get("pay"), ondalik=1)),
-                                                   _h(f_para(x.get("net_pnl"), True), _isaret_sinifi(x.get("net_pnl")))] for x in c], sag=(1, 2, 3))
+                                                   _h(f_para(x.get("net_pnl"), True), _isaret_sinifi(x.get("net_pnl")))] for x in c], sag=(1, 2, 3)) \
+        + (f'<div class="alt ip">{esc(oz["cikis_nedenleri_not"])}</div>' if oz.get("cikis_nedenleri_not") else "")
 
 
 def _sekme_islemler(isl, st, ml, rd, oz=None) -> str:
