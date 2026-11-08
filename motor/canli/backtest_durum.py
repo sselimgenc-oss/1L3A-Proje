@@ -30,6 +30,10 @@ from motor.canli import durum as d
 from motor.canli import durum_ek as ek
 from motor.canli import giris_izi as gi
 from motor.canli import guven as gv
+from motor.canli import koni as kn
+from motor.canli import kiyas as ky
+from motor.canli import korelasyon as kr
+from motor.canli import yogunlasma as yg
 from motor.risk.limitler import SERT_LIMITLER
 
 KOK = Path(__file__).resolve().parents[2]
@@ -278,6 +282,14 @@ def olustur(kok: Path = KOK, baslangic=BASLANGIC, yazim_zamani=None, beklenti_cs
               "uyarilar": ["Bayatlık denetimi backtest kaynağında kapalı (veri bilerek statik)."]}
     ds = ders.olustur("backtest", zaman, [x["kimlik"] for x in set_["stratejiler"]], tum_islemler, {s["kimlik"]: s["beklenti"] for s in stratejiler})
     ekstra_dosyalar["dersler"] = ds
+    # --- koni / kıyas / korelasyon / yoğunlaşma. Koni havuzu backtest döneminin İÇİNDEKİ günleri dışlar (baz gün = dönemden önceki gün); gün kesimi UTC ızgarası.
+    baz_gun = str((gunler[0] - GUN).date())
+    gercek = [{"gun": str(t.date()), "getiri": float(e / bas - 1)} for t, e in zip(gunler, ozs)]
+    ekstra_dosyalar["koni"] = kn.olustur("backtest", zaman, baz_gun, gercek)
+    ekstra_dosyalar["kiyas"] = ky.olustur("backtest", zaman, gunler[-1] + GUN, baz_gun, [x["gun"] for x in gercek], {x["gun"]: x["getiri"] for x in gercek},
+                                          "UTC", ek.GUN_KESIMI_UTC_IZGARA)
+    ekstra_dosyalar["korelasyon"] = kr.hesapla({k: pd.Series(v / S_once, index=gun_s) for k, v in gun_katki.items()}, "backtest", zaman, ek.GUN_KESIMI_UTC_IZGARA)
+    ekstra_dosyalar["yogunlasma"] = yg.olustur("backtest", zaman, None, bas, OLCULMEDI)
     ekstra_dosyalar["veri_guveni"] = gv.veri_guveni(saglik["veri"], None, gunler[-1], "backtest", zaman)
     ekstra_dosyalar["butunluk"] = gv.butunluk("backtest", zaman, None, kok=kok, kayit_yolu=kok / "sonuclar" / "final" / "butunluk_kayit.json")
     ekstra_dosyalar["aylik_rapor"] = ar.olustur(

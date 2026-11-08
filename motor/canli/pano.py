@@ -219,7 +219,7 @@ svg{display:block;width:100%;height:auto}
 .cizgi{stroke:var(--vurgu);fill:none;stroke-width:1.8;vector-effect:non-scaling-stroke}.alan{fill:var(--vurgu);opacity:.14}
 .cizgi.k{stroke:var(--kotu)}.alan.k{fill:var(--kotu);opacity:.18}
 .bi{fill:var(--iyi)}.bk{fill:var(--kotu)}.taban{stroke:var(--sessiz);stroke-width:1;vector-effect:non-scaling-stroke;opacity:.6}
-.grlej{margin-top:6px;text-align:center}
+.grlej{margin-top:6px;text-align:center}.kb95{fill:var(--bilgi);opacity:.13}.kb75{fill:var(--bilgi);opacity:.25}.kn-med{fill:none;stroke:var(--bilgi);stroke-width:1.2;stroke-dasharray:3 2;vector-effect:non-scaling-stroke}.kn-nk{fill:var(--vurgu)}.cizgi.kc1{stroke:var(--uyari)}.cizgi.kc2{stroke:var(--bilgi)}.cizgi.kc3{stroke:var(--iyi);stroke-dasharray:4 3}.lg-i{display:inline-block;width:14px;height:4px;vertical-align:middle;margin-right:4px;border-radius:2px;background:var(--vurgu)}.lg-i.kb95{background:var(--bilgi);opacity:.35}.lg-i.kb75{background:var(--bilgi);opacity:.6}.lg-i.kn-medl{background:var(--bilgi)}.lg-i.gercl,.lg-paper{background:var(--vurgu)}.lg-btc{background:var(--uyari)}.lg-spx{background:var(--bilgi)}.lg-mevduat{background:var(--iyi)}.kor{display:block;text-align:center;padding:2px 4px;border-radius:2px;font-variant-numeric:tabular-nums}
 .is{padding:5px 0;border-bottom:1px solid var(--bar)}.is:last-child{border-bottom:0}
 .ic>div{padding:5px 0 5px 14px;border-bottom:1px solid var(--bar);position:relative;font-size:12px}.ic>div:last-child{border-bottom:0}.ic>div:before{content:"›";color:var(--vurgu);position:absolute;left:0}
 .tw{overflow-x:auto;-webkit-overflow-scrolling:touch;max-width:100%;border:1px solid var(--cizgi);border-radius:3px;background:var(--kart)}
@@ -895,7 +895,167 @@ def _donemsel(oz: dict) -> str:
     return _tablo(["Gün"] + ajanlar, satir, sag=tuple(range(1, len(ajanlar) + 1)), sinif="kay") + '<div class="alt ip">Hücre: günlük getiri (set başlangıcına oran); K/Z tutarı için hücreye bekle.</div>'
 
 
-def _sekme_ozet(oz, st, gc, ic, sg, isl=None) -> str:
+# ----------------------------------------------------------------------------------------------- koni / kıyas / korelasyon / yoğunlaşma (motor yazar; pano yalnız çizer)
+def _noktalar(ciftler: list) -> str:
+    return " ".join(f"{x:.1f},{y:.1f}" for x, y in ciftler)
+
+
+def _parcalar(noktalar: list) -> list:
+    """[(x, y|None)] -> kesintisiz parçalar (None noktada çizgi bölünür)."""
+    out, cur = [], []
+    for x, y in noktalar:
+        if y is None:
+            if cur:
+                out.append(cur)
+            cur = []
+        else:
+            cur.append((x, y))
+    if cur:
+        out.append(cur)
+    return out
+
+
+@_guvenli
+def _koni_html(kn: dict) -> str:
+    """koni.json (motor yazar): %5-%95 ve %25-%75 bantları + medyan; gerçekleşen eğri üstüne çizilir. Yalnız çizim ölçeği."""
+    if kn.get("koni") is None:
+        return f'<div class="kart alt">Koni üretilmedi: {esc(kn.get("koni_neden") or "neden yazılmamış")}</div>'
+    ufuk, sat = kn["ufuk_gun"], kn["koni"]
+    gz = [x for x in (kn.get("gerceklesen") or []) if x["gun_no"] <= ufuk and x["getiri"] is not None]
+    hepsi = [r["p05"] for r in sat] + [r["p95"] for r in sat] + [x["getiri"] for x in gz]
+    hi, lo = max(hepsi), min(hepsi)
+    ar = (hi - lo) or 1.0
+    X = lambda no: no * 300 / ufuk                                              # noqa: E731
+    Y = lambda v: 76 - (v - lo) / ar * 72                                       # noqa: E731
+
+    def bant(alt: str, ust: str) -> str:
+        return _noktalar([(X(r["gun_no"]), Y(r[ust])) for r in sat] + [(X(r["gun_no"]), Y(r[alt])) for r in reversed(sat)])
+    izg = "".join(f'<line class="izg" x1="0" y1="{yy}" x2="300" y2="{yy}"/>' for yy in (4, 40, 76))
+    isr = "".join(f'<line class="baz" x1="{X(i["gun_no"]):.1f}" y1="4" x2="{X(i["gun_no"]):.1f}" y2="76"><title>{esc(i["etiket"])}</title></line>' for i in kn.get("isaretler", []))
+    gerc = ""
+    if len(gz) >= 2:
+        gerc = f'<polyline class="cizgi" points="{_noktalar([(X(x["gun_no"]), Y(x["getiri"])) for x in gz])}"/>'
+    elif gz:
+        gerc = f'<circle class="kn-nk" cx="{X(gz[0]["gun_no"]):.1f}" cy="{Y(gz[0]["getiri"]):.1f}" r="2.5"/>'
+    svg = (f'<svg viewBox="0 0 300 80" preserveAspectRatio="none" role="img" aria-label="beklenti konisi ve gerçekleşen özsermaye getirisi">{izg}'
+           f'<line class="taban" x1="0" y1="{Y(0.0):.1f}" x2="300" y2="{Y(0.0):.1f}"/>'
+           f'<polygon class="kb95" points="{bant("p05", "p95")}"/><polygon class="kb75" points="{bant("p25", "p75")}"/>{isr}'
+           f'<polyline class="kn-med" points="{_noktalar([(X(r["gun_no"]), Y(r["p50"])) for r in sat])}"/>{gerc}</svg>')
+    leg = ('<div class="alt grlej"><i class="lg-i kb95"></i>%5–%95 &nbsp; <i class="lg-i kb75"></i>%25–%75 &nbsp; <i class="lg-i kn-medl"></i>medyan &nbsp; '
+           '<i class="lg-i gercl"></i>gerçekleşen &nbsp; (kesikli dikey çizgi: 8 hafta)</div>')
+    govde = _eksen(f_yuzde(hi, True), f_yuzde(lo, True), svg, f"gün 0 · {kn['baz_gun']}", f"gün {ufuk} · {sat[-1]['gun']}") + leg
+    k = kn.get("konum")
+    if k:
+        govde += ('<div class="bol">' + _sat(f"Gün {k['gun_no']} gerçekleşen", f_yuzde(k["getiri"], True), _isaret_sinifi(k["getiri"]))
+                  + _sat("Beklenen aralık (%5 / %50 / %95)", f"{f_yuzde(k['p05'], True)} / {f_yuzde(k['p50'], True)} / {f_yuzde(k['p95'], True)}")
+                  + _sat("Konum", f"{BANT_ADI[k['bant']]} · simüle yolların %{k['yuzdelik_sira'] * 100:.0f}'inden iyi", "")
+                  + (f'<div class="alt">{esc(k["not"])}</div>' if k.get("not") else "") + "</div>")
+    else:
+        govde += f'<div class="alt grlej">Konum yok: {esc(kn.get("konum_neden") or "—")}</div>'
+    h = kn.get("havuz") or {}
+    govde += (f'<details class="ince"><summary>Yöntem ve uyarılar</summary><div class="alt">{esc(kn["yontem"])} Havuz: {esc(str(h.get("gun_sayisi")))} gün '
+              f'({esc(str(h.get("bas")))} → {esc(str(h.get("bit")))}); sha256 doğrulaması: {esc(str(h.get("dogrulama")))}. {esc(kn["sabitleme"])}</div>'
+              + "".join(f'<div class="alt" style="margin-top:6px">{esc(n)}</div>' for n in kn.get("notlar", [])) + "</details>")
+    return govde
+
+
+KIYAS_SINIF = {"paper": "cizgi", "btc": "cizgi kc1", "spx": "cizgi kc2", "mevduat": "cizgi kc3"}
+
+
+@_guvenli
+def _kiyas_html(ky: dict) -> str:
+    """kiyas.json (motor yazar): paper getirisi ↔ BTC / S&P 500 al-tut / mevduat (aynı tabana normalize birikimli getiri)."""
+    gunler, seriler = ky["gunler"], ky["seriler"]
+    if len(gunler) < 2:
+        return '<div class="kart alt">Kıyas için yeterli gün yok.</div>'
+    cizilen = [s for s in seriler if s["noktalar"] and any(x["getiri"] is not None for x in s["noktalar"])]
+    degerler = [x["getiri"] for s in cizilen for x in s["noktalar"] if x["getiri"] is not None]
+    hi, lo = max(degerler + [0.0]), min(degerler + [0.0])
+    ar = (hi - lo) or 1.0
+    Y = lambda v: 76 - (v - lo) / ar * 72                                       # noqa: E731
+    cizgiler = []
+    for s in cizilen:
+        pts = [(i * 300 / (len(gunler) - 1), None if x["getiri"] is None else Y(x["getiri"])) for i, x in enumerate(s["noktalar"])]
+        for pr in _parcalar(pts):
+            cizgiler.append(f'<polyline class="{KIYAS_SINIF.get(s["kimlik"], "cizgi")}" points="{_noktalar(pr)}"/>' if len(pr) > 1
+                            else f'<circle class="kn-nk {KIYAS_SINIF.get(s["kimlik"], "")}" cx="{pr[0][0]:.1f}" cy="{pr[0][1]:.1f}" r="2"/>')
+    izg = "".join(f'<line class="izg" x1="0" y1="{yy}" x2="300" y2="{yy}"/>' for yy in (4, 40, 76))
+    svg = (f'<svg viewBox="0 0 300 80" preserveAspectRatio="none" role="img" aria-label="paper ve kıyas serileri">{izg}'
+           f'<line class="taban" x1="0" y1="{Y(0.0):.1f}" x2="300" y2="{Y(0.0):.1f}"/>{"".join(cizgiler)}</svg>')
+    leg = '<div class="alt grlej">' + " &nbsp; ".join(f'<i class="lg-i lg-{esc(s["kimlik"])}"></i>{esc(s["etiket"])}' for s in cizilen) + "</div>"
+    satir = []
+    for s in seriler:
+        durum = ('<span class="cip uyari">kullanıcı oranı girmeli</span> ' if s.get("kullanici_girmeli") else "")
+        satir.append([f'<i class="lg-i lg-{esc(s["kimlik"])}"></i>{esc(s["etiket"])}', (esc(f_yuzde(s["son_getiri"], True)), _sk(s["son_getiri"])),
+                      durum + esc(s["neden"] or s.get("kaynak") or "")])
+    return (_eksen(f_yuzde(hi, True), f_yuzde(lo, True), svg, ky["gunler"][0], ky["gunler"][-1]) + leg
+            + _tablo(["Seri", "Son getiri", "Not"], satir, sag=(1,))
+            + f'<div class="alt">{esc(ky["taban_notu"])}</div>')
+
+
+@_guvenli
+def _korelasyon_html(kr: dict) -> str:
+    """korelasyon.json (motor yazar): stratejiler arası günlük getiri korelasyon matrisi. Renk yoğunluğu |r| ölçeğidir; eşik/alarm yok."""
+    if kr.get("matris") is None:
+        return f'<div class="kart alt">Korelasyon yok: {esc(kr.get("neden") or "neden yazılmamış")}</div>'
+    ks, m, ortak, ga = kr["kimlikler"], kr["matris"], kr["ortak_gun"], kr["guven_araligi"]
+    bas = [""] + [f"{i + 1}" for i in range(len(ks))]
+    satir = []
+    for i, a in enumerate(ks):
+        hucre = [f"<b>{i + 1}</b> {esc(_strateji_adi(a))} <span class=\"alt\">{esc(_kimlik_sembol(a))}</span>"]
+        for j in range(len(ks)):
+            r = m[i][j]
+            if r is None:
+                hucre.append('<span class="alt" title="hesaplanamadı (hucre_neden)">—</span>')
+            else:
+                ai = ga[i][j]
+                ipucu = f"{ortak[i][j]} ortak gün" + (f"; %95 aralık {ai[0]:.2f} … {ai[1]:.2f}" if ai else "")
+                ton = "--bilgi" if r < 0 else "--vurgu"
+                hucre.append((f'<span class="kor" style="background:color-mix(in srgb,var({ton}) {min(abs(r), 1.0) * 70:.0f}%,var(--kart))" title="{esc(ipucu)}">{r:.2f}</span>', r))
+        satir.append(hucre)
+    t = _tablo(bas, satir, sag=tuple(range(1, len(ks) + 1)), sinif="kormat")
+    oz = kr.get("ozet") or {}
+    ek = ""
+    if oz:
+        eu, ed = oz["en_yuksek"], oz["en_dusuk"]
+        ek = (_sat("Ortalama |korelasyon|", f_sayi(oz["ort_mutlak"])) + _sat("En yüksek çift", f"{_strateji_adi(eu['a'])} / {_strateji_adi(eu['b'])}: {f_sayi(eu['korelasyon'])}")
+              + _sat("En düşük çift", f"{_strateji_adi(ed['a'])} / {_strateji_adi(ed['b'])}: {f_sayi(ed['korelasyon'])}"))
+    nedenler = "".join(f'<div class="alt">{esc(_strateji_adi(x["a"]))} × {esc(_strateji_adi(x["b"]))}: {esc(x["neden"])}</div>' for x in kr.get("hucre_neden", []) if x["a"] != x["b"])
+    return (t + '<div class="bol">' + ek + "</div>" + nedenler
+            + f'<div class="alt">{esc(kr["yontem"])}; en az {esc(str(kr["min_ortak_gun"]))} ortak gün. {esc(kr["esik_notu"])}</div>')
+
+
+@_guvenli
+def _yogunlasma_html(yg: dict) -> str:
+    """yogunlasma.json (motor yazar): varlık sınıfı / sembol bazında brüt maruziyet ve açık stop riski payı. Eşik tanımlı değilse yalnız bilgi."""
+    if yg.get("semboller") is None:
+        return f'<div class="kart alt">Yoğunlaşma ölçülmedi: {esc(yg.get("olculmedi_neden") or "neden yazılmamış")}</div>'
+    if not yg["semboller"]:
+        return f'<div class="kart alt">{esc(yg.get("olculmedi_neden") or "Açık pozisyon yok.")}</div>'
+
+    def pay(x) -> str:
+        if x is None:
+            return "—"
+        return f'{esc(f_yuzde(x, ondalik=1))}<div class="cubuk"><i style="width:{min(max(x, 0.0), 1.0) * 100:.1f}%"></i></div>'
+
+    def tablo(satirlar: list, ad: str, anahtar) -> str:
+        return _tablo([ad, "Brüt", "Kasaya", "Brüt payı", "Açık risk", "Risk payı", "Strateji"],
+                      [[f"<b>{esc(anahtar(x))}</b>", esc(f_para(x["brut_nominal"])), esc(f_yuzde(x["brut_oran"])), pay(x["brut_pay"]),
+                        esc(f_para(x["stop_riski"])), pay(x["stop_riski_pay"]), esc(str(x["strateji_sayisi"]))] for x in satirlar], sag=(1, 2, 3, 4, 5, 6))
+    ust = ""
+    eb, es = yg.get("en_buyuk_sembol"), yg.get("en_buyuk_sinif")
+    if eb and es:
+        ust = (_sat("En büyük sembol (brüt payı)", f"{eb['sembol']} · {f_yuzde(eb['brut_pay'], ondalik=1)}") + _sat("En büyük sınıf (brüt payı)", f"{SINIF_ETIKET.get(es['sinif'], es['sinif'])} · {f_yuzde(es['brut_pay'], ondalik=1)}")
+               + _sat("Etkin sembol sayısı (1 / Herfindahl)", f_sayi(yg.get("etkin_sembol_sayisi"))))
+    uyar = "".join(f'<div class="uyari uyari">{esc(u)}</div>' for u in yg.get("uyarilar", []))
+    return (uyar + '<div class="bol">' + ust + "</div>" + tablo(yg["siniflar"], "Varlık sınıfı", lambda x: x["ad"]) + tablo(yg["semboller"], "Sembol", lambda x: x["sembol"])
+            + f'<div class="alt">{esc(yg["esikler"]["neden"])} {esc(yg["tanim"])}.</div>')
+
+
+SINIF_ETIKET = {"kripto": "Kripto", "hisse": "ABD hissesi", "emtia": "Emtia"}
+
+
+def _sekme_ozet(oz, st, gc, ic, sg, isl=None, kn=None, ky=None) -> str:
     if not oz:
         return _veri_yok("ozet.json")
     ds, kz = oz.get("dusus_serisi"), oz.get("gunluk_kz")
@@ -908,6 +1068,9 @@ def _sekme_ozet(oz, st, gc, ic, sg, isl=None) -> str:
          _p("Zirveden düşüş", _dusus_grafigi(ds) if ds is not None else yok("dusus_serisi"), f_yuzde(oz["zirveden_dusus"])),
          _p("Günlük K/Z", _kz_grafigi(kz) if kz is not None else yok("gunluk_kz"), f_para(kz[-1]["pnl"], True) if kz else ""),
          _p("İçgörüler", _icgoruler(ic))]
+    g.append(_p("Beklenti konisi (Monte Carlo)", _koni_html(kn) if kn is not None else _bekleyen("koni.json", "paper başlangıcında sabitlenen gün gün beklenti bandı"),
+                "motor hesaplar · paper başlangıcında sabit", "g3"))
+    g.append(_p("Kıyas (aynı dönem)", _kiyas_html(ky) if ky is not None else _bekleyen("kiyas.json", "BTC, S&P 500 al-tut ve mevduat serileri"), "motor hesaplar", "g3"))
     g.append(_p("Takvim (günlük K/Z ısı haritası)", _takvim(kz, isl, _ajan_haritasi(st), oz.get("gun_kesimi")) if kz is not None else yok("gunluk_kz"), "gün seç: işlemler", "g3"))
     g.append(_p("Dönemsel getiri (gün × stil)", _donemsel(oz), "motor yazar", "g3", duz=oz.get("gunluk_kz_ajan") is not None))
     g.append(_p("Beklenti aralığına göre konum", _beklenti_tablosu(st) if st else _veri_yok("stratejiler.json"), "SET (tüm stratejiler)", "g3", duz=bool(st)))
@@ -1310,7 +1473,7 @@ def _olaylar_html(ol: list) -> str:
                                                      for o in son], sinif="kay")
 
 
-def _sekme_risk(oz, ol) -> str:
+def _sekme_risk(oz, ol, kr=None, yg=None) -> str:
     if not oz:
         return _veri_yok("ozet.json")
     r = oz["risk"]
@@ -1329,7 +1492,11 @@ def _sekme_risk(oz, ol) -> str:
         notlar.append(f'<div class="alt" style="margin-top:6px">{esc(n)}</div>')
     return _ig(_p("Risk limitleri", kartlar, "limite göre kullanım", "g3")
                + _p("Risk olayları (son 50)", _olaylar_html(ol) if ol is not None else _ek_yok("olaylar.jsonl"), "saat TSİ", "g2", duz=ol is not None)
-               + _p("Kill switch ve notlar", "".join(notlar)))
+               + _p("Kill switch ve notlar", "".join(notlar))
+               + _p("Strateji korelasyonu", _korelasyon_html(kr) if kr is not None else _bekleyen("korelasyon.json", "stratejiler arası günlük getiri korelasyonu"),
+                    "günlük getiri · motor hesaplar", "g3", duz=kr is not None)
+               + _p("Yoğunlaşma (sınıf / sembol)", _yogunlasma_html(yg) if yg is not None else _bekleyen("yogunlasma.json", "sınıf/sembol bazında brüt ve açık risk payı"),
+                    "bilgi · eşik tanımlı değil", "g3", duz=yg is not None))
 
 
 GUVEN_KAYNAK_ADI = {"binance_perp": "Binance perp", "dukascopy": "Dukascopy", "yahoo": "Yahoo", "spot_vekil": "Binance spot (vekil)"}
@@ -1508,6 +1675,7 @@ def html_olustur(veri: dict, sorunlar: list, simdi: datetime) -> str:
     mr, ml, rd, ol, ic = (veri.get(k) for k in ("maruziyet", "maliyet", "reddedilen", "olaylar", "icgoruler"))
     dr, ar = veri.get("dersler"), veri.get("aylik_rapor")
     vg, bt = veri.get("veri_guveni"), veri.get("butunluk")
+    kn, ky, kor, yog = (veri.get(k) for k in ("koni", "kiyas", "korelasyon", "yogunlasma"))
     u = uyarilar(veri, sorunlar, simdi)
     canli_mi = bool(oz and oz["kaynak"] != "backtest")
     g = []
@@ -1535,8 +1703,8 @@ def html_olustur(veri: dict, sorunlar: list, simdi: datetime) -> str:
     g.append('<div class="tabs" role="tablist">' + "".join(
         f'<label for="{i}">{esc(ad)}' + (f' <em>{esc(rozet[i])}</em>' if rozet.get(i) is not None else "")
         + (' <em class="k">!</em>' if i == "t6" and sorun_var else "") + "</label>" for i, ad in SEKMELER) + "</div>")
-    icerik = (_sekme_ozet(oz, st, gc, ic, sg, isl), _sekme_stratejiler(st, isl, mr), _sekme_pozisyon(oz, st, mr), _sekme_islemler(isl, st, ml, rd, oz),
-              _sekme_risk(oz, ol), _sekme_saglik(sg, vg, bt), _sekme_dersler(dr), _sekme_rapor(ar))
+    icerik = (_sekme_ozet(oz, st, gc, ic, sg, isl, kn, ky), _sekme_stratejiler(st, isl, mr), _sekme_pozisyon(oz, st, mr), _sekme_islemler(isl, st, ml, rd, oz),
+              _sekme_risk(oz, ol, kor, yog), _sekme_saglik(sg, vg, bt), _sekme_dersler(dr), _sekme_rapor(ar))
     g.append(_suzgec_cubugu(veri))
     g.append('<div class="sekmeler">' + "".join(f'<section class="n{k}">{c}</section>' for k, c in enumerate(icerik, 1)) + "</div></div>")
     g.append('<div class="alt ayak">Pano yeni hesap yapmaz: sayılar durum dosyalarından aynen gösterilir. Saatler TSİ (Türkiye saati).</div>')

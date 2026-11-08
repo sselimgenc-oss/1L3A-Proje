@@ -244,6 +244,9 @@ Ana ders: önceki sonuçlar OOS'a bakılarak seçilmiş ve kâr birkaç işlemde
   `sonuclar/final/butunluk_kayit.json`, kod sürümü git commit), `islemler.jsonl`'e `ayar_surumu` (parametre seti hash'i + set dosyası) ve `giris_gerekcesi` (sinyal anındaki genel şablon; stratejiler koşul metni üretmiyor),
   kalp atışı (`durum/kalp_atisi.json` + `paper_state.json`; yeniden başlatma kesintisi süresiyle olaya yazılır, `kesinti_olc` okur). Panoda SAĞLIK ve İŞLEMLER sekmelerinde kartlar. Kayıt dosyası ayar yenilemesinde
   (guncel_ayarlar.csv değişince) "uyuşmuyor" gösterir; yeni özeti kaydetmek kullanıcı onayıyladır (`python -m motor.canli.guven --kaydet`). Ayrıntı: `motor/canli/DURUM_SOZLESMESI.md`.
+- 2026-11-08: Pano öncelik 5 (motor tarafı) yazıldı: `koni.json` (paper başlangıcında sabit Monte Carlo konisi: set OOS günlük getirisi `sonuclar/final/beklenti_koni_havuzu.csv`, beklenti_araliklari ile aynı blok bootstrap, 112 gün, tohum 42, havuz sha256'ya bağlı, lookahead yok), `kiyas.json` (paper ↔ BTC / DK_SPX al-tut / mevduat),
+  `korelasyon.json` (≥30 ortak gün yoksa null + neden), `yogunlasma.json` (sınıf/sembol brüt ve açık risk payı). Panoda ÖZET (koni, kıyas) ve RİSK (korelasyon, yoğunlaşma) kartları. **Kullanıcıya sorulacak:** (1) mevduat yıllık oranı (`stratejiler/kiyas_ayar.json`, şimdi null → çizgi yok);
+  (2) sembol/sınıf bazında yoğunlaşma eşiği isteniyor mu (şimdi tanımlı eşik yok, yalnız bilgi); (3) DK_SPX arşivi sunucuda güncellenmiyorsa S&P kıyası bayat kalır: güncel S&P kaynağı gerekir. Ayrıntı: `motor/canli/DURUM_SOZLESMESI.md`.
 
 ## Kullanıcıyı bekleyen kararlar
 - ~~Final seçim ve kilitli dönemin bir kez açılması (karar 20)~~ — kullanıcı "aç" dedi (2026-11-07), yapıldı: `sonuclar/kilit/RAPOR.md`.
