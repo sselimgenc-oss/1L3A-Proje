@@ -36,3 +36,6 @@ sonuclar/evren/ham/
 veri/pdf_metin_2/
 sonuclar/evren/*/ham/
 sonuclar/evren/*/oos/
+sonuclar/evren/*/arsiv_*/oos/
+sonuclar/evren/*/arsiv_*/pf/
+sonuclar/evren/*/arsiv_*/*.parquet
