@@ -73,6 +73,18 @@ sudo -u l3a /opt/1l3a/.venv/bin/python -m motor.canli.spx_guncelle --veri /var/l
 Kontrol: `systemctl list-timers | grep 1l3a-spx`, `journalctl -u 1l3a-spx -n 20 --no-pager` ("DK_SPX: ... -> <bugün>" satırı). Bu araç yalnız sunucu paper/kıyas dizinine yazar; depo içi araştırma `veri/mumlar` dizinini reddeder (kilit kuralı).
 Not: kıyasın sunucuda doğru dizini okuması için `motor/canli/paper.py` güncel olmalı (önceden kıyas `/opt/1l3a/veri/mumlar`'a bakıyordu).
 
+## 4c. Hata bildirimi (servis durursa Telegram)
+Paper motoru beklenmeyen hatayı loga ve Telegram'a yazar; aynı hata art arda 5 kez olursa kontrollü durur. systemd artan aralıklarla
+yeniden başlatır; denemeler tükenirse `1l3a-bildirim@` birimi Telegram'a "Servis durdu" gönderir (token yalnız /etc/1l3a-paper.env'den).
+```bash
+cp /opt/1l3a/deploy/1l3a-paper.service /opt/1l3a/deploy/1l3a-bildirim@.service /etc/systemd/system/
+systemctl daemon-reload
+systemctl start 1l3a-bildirim@deneme.service      # Telegram'a deneme mesajı gelmeli
+systemctl restart 1l3a-paper
+# servis 'failed' kalırsa sorunu düzeltip:
+systemctl reset-failed 1l3a-paper && systemctl restart 1l3a-paper
+```
+
 ## 5. Ağ kontrolü (kurulumdan sonra bir kez)
 ```bash
 curl -s https://fapi.binance.com/fapi/v1/ping        # {} dönmeli (451 dönerse bu sunucu konumu Binance vadeliye kapalı)
@@ -97,7 +109,7 @@ Pano hesap yapmaz; motorun yazdığı dosyaları gösterir. Dosya `yazildi_zaman
 
 ## 7. Telegram
 `/etc/1l3a-paper.env` içine `TELEGRAM_BOT_TOKEN` ve `TELEGRAM_CHAT_ID` yazın, `systemctl restart 1l3a-paper`. Gelenler: işlem kapanışı,
-günlük limit / kill switch, bağlantı olayları, her gün 00:10 UTC özeti. Anahtar yoksa hiçbir şey gönderilmez ve logda
+günlük limit / kill switch, bağlantı olayları, her gün 00:10 TSİ'de dünün (TSİ) tam gün özeti (yeniden başlatmada tekrar gitmez), motor hatası ve servis durması. Anahtar yoksa hiçbir şey gönderilmez ve logda
 "Telegram devre dışı" yazar. Anahtarı **asla** depoya koymayın.
 
 ## 8. Ayar yenileme (otomatik DEĞİL)

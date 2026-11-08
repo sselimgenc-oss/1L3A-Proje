@@ -170,8 +170,9 @@ def test_gunluk_limit_ortak_hesap_diger_birimi_hemen_kapatir_ve_giris_durdurur()
     # diğer birimin (B) pozisyonu beklemeden kapandı
     assert all(q.kol.birim != b_b.ad for q in m.acik.values())
     assert any(x["cikis_nedeni"] == "gunluk_limit" and x["sembol"] == "BUSDT" for x in m.islemler)
-    # A'nın kendi pozisyonu için çekirdek kuralı: sonraki açılışta kapanış emri
-    assert b_a.kollar[0].cikis_emri == "gunluk_limit"
+    # A'nın (tetikleyen birim) kendi pozisyonu da AYNI ADIMDA kapandı (bir bar beklenmez)
+    assert not m.acik
+    assert any(x["cikis_nedeni"] == "gunluk_limit" and x["sembol"] == "AUSDT" for x in m.islemler)
     # yeni giriş yok: ertesi gün açılışında (aynı UTC günü değil) ama bugün içinde B satırı giriş yapamaz
     t2 = t
     m.acilis_fazi(b_b, t2, {"BUSDT": bar})
@@ -187,8 +188,8 @@ def test_kill_switch_kalici_ve_hepsini_durdurur():
     m.acilis_fazi(b_a, t, {"AUSDT": bar})
     m.nakit -= Decimal("2100")                   # zirveden ~ -%21
     m.kapanis_fazi(b_a, t, None)
-    assert m.kill and not any(q.kol.birim == b_b.ad for q in m.acik.values())
-    assert b_a.kollar[0].cikis_emri == "kill_switch"
+    assert m.kill and not m.acik                     # tetikleyen birim (A) dahil hepsi aynı adımda kapandı
+    assert {x["sembol"] for x in m.islemler if x["cikis_nedeni"] == "kill_switch"} == {"AUSDT", "BUSDT"}
     # kalıcılık: kill durumu diske yazılıp geri yüklenince korunur
     import json
     from motor.canli.paper_motor import _dec, _enc

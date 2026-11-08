@@ -6,9 +6,21 @@ import pandas as pd
 from motor.veri.depo import aralik_suresi
 
 
+def kova_anahtari(index: pd.DatetimeIndex, hedef_s: pd.Timedelta, yerel: tuple[str, int] | None = None) -> pd.DatetimeIndex:
+    """Her kaynak mumun ait olduğu hedef periyodun açılışı (UTC). `yeniden_ornekle` ile AYNI kural (yerel hizalı 2h..<1d
+    kovalar; DST'de var olmayan/iki kez yaşanan an NaT olabilir: o mum hiçbir kovaya girmez)."""
+    if yerel is not None and pd.Timedelta(2, "h") <= hedef_s < pd.Timedelta(1, "D"):
+        zon, saat = yerel
+        kayma = pd.Timedelta(saat, "h")
+        yer = index.tz_convert(zon).tz_localize(None)
+        anahtar = ((yer - kayma).floor(hedef_s) + kayma).tz_localize(zon, ambiguous="NaT", nonexistent="shift_forward")
+        return anahtar.tz_convert("UTC")
+    return index.floor(hedef_s)
+
+
 def yeniden_ornekle(df: pd.DataFrame, hedef: str, kaynak: str = "5m",
                     eksikleri_at: bool = False, esik_orani: float | None = None,
-                    yerel: tuple[str, int] | None = None) -> pd.DataFrame:
+                    yerel: tuple[str, int] | None = None, beklenen_sayi: float | None = None) -> pd.DataFrame:
     """OHLCV'yi `kaynak` aralığından `hedef` aralığına birleştirir.
 
     Çıktı sözleşmedeki sütunlara ek olarak `eksik` (bool) sütunu taşır: periyottaki
@@ -20,21 +32,20 @@ def yeniden_ornekle(df: pd.DataFrame, hedef: str, kaynak: str = "5m",
     mum sayısı, tüm periyotların MEDYAN sayısının `esik_orani` katından azsa eksiktir (kısmi seans periyotları -
     yarım saatlik ilk mum, yarım gün, hisse 1d'si - tutulur). `yerel=(saat_dilimi, saat)` verilirse 2h..<1d hedefler
     periyot sınırlarını o saat diliminde `saat`'e hizalar (DST doğru; ör. ("America/New_York", 9): 4h kovaları
-    09-13, 13-17 NY). Çıktı indeksi yine UTC. Varsayılanlarda (None) davranış değişmez (kripto)."""
+    09-13, 13-17 NY). Çıktı indeksi yine UTC. Varsayılanlarda (None) davranış değişmez (kripto).
+    `beklenen_sayi` (yalnız `esik_orani` ile): medyan yerine bu SABİT sayı kullanılır (eşik = esik_orani x beklenen_sayi). Canlı/paper
+    yolu kısa pencerelerle çağırır; küçük pencerenin medyanı uzun geçmişin medyanını temsil etmez (bkz. paper_veri.beklenen_mum_sayisi).
+    Araştırma yolu bunu vermez: davranışı değişmez."""
     kaynak_s, hedef_s = aralik_suresi(kaynak), aralik_suresi(hedef)
     if hedef_s < kaynak_s or hedef_s % kaynak_s != pd.Timedelta(0):
         raise ValueError(f"{kaynak} -> {hedef} birleştirilemez")
     beklenen = int(hedef_s / kaynak_s)
     if yerel is not None and pd.Timedelta(2, "h") <= hedef_s < pd.Timedelta(1, "D"):
-        zon, saat = yerel
-        kayma = pd.Timedelta(saat, "h")
-        yer = df.index.tz_convert(zon).tz_localize(None)
-        anahtar = ((yer - kayma).floor(hedef_s) + kayma).tz_localize(zon, ambiguous="NaT", nonexistent="shift_forward")
-        anahtar = anahtar.tz_convert("UTC")
+        anahtar = kova_anahtari(df.index, hedef_s, yerel)
         df = df[~anahtar.isna()]
         g = df.groupby(anahtar[~anahtar.isna()])
     else:
-        g = df.groupby(df.index.floor(hedef_s))
+        g = df.groupby(kova_anahtari(df.index, hedef_s))
     cikti = pd.DataFrame({
         "acilis": g["acilis"].first(),
         "yuksek": g["yuksek"].max(),
@@ -48,7 +59,8 @@ def yeniden_ornekle(df: pd.DataFrame, hedef: str, kaynak: str = "5m",
     if esik_orani is None:
         cikti["eksik"] = sayi < beklenen
     else:
-        cikti["eksik"] = sayi < esik_orani * sayi.median()
+        taban = sayi.median() if beklenen_sayi is None else beklenen_sayi
+        cikti["eksik"] = sayi < esik_orani * taban
     cikti.index.name = "zaman"
     if eksikleri_at:
         cikti = cikti[~cikti["eksik"]].drop(columns="eksik")

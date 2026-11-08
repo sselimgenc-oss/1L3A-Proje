@@ -1,11 +1,16 @@
 # 1L3A paper trading motoru (gerçek emir YOK). Ubuntu 24.04. Kurulum: deploy/KURULUM.md
 # Telegram anahtarları YALNIZ /etc/1l3a-paper.env içinde (izin 600); repoya ASLA girmez. Binance için anahtar GEREKMEZ.
+# Yeniden başlatma: yalnız HATAYLA çıkışta (motor aynı hatayı art arda 5 kez görünce çıkış kodu 1 ile kontrollü durur; açılışta
+# Binance'e ulaşılamazsa da düşer). Gecikme 30 sn'den başlayıp 10 dk'ya kadar artar (RestartSteps, systemd >= 254). 1 saatte 8
+# başarısız başlatmadan sonra birim 'failed' olur -> OnFailure: 1l3a-bildirim@ Telegram'a "Servis durdu" gönderir.
+# Elle düzeltip yeniden başlatma: sudo systemctl reset-failed 1l3a-paper && sudo systemctl restart 1l3a-paper
 [Unit]
 Description=1L3A paper trading motoru
 After=network-online.target
 Wants=network-online.target
-StartLimitIntervalSec=600
+StartLimitIntervalSec=3600
 StartLimitBurst=8
+OnFailure=1l3a-bildirim@%n.service
 
 [Service]
 Type=simple
@@ -16,9 +21,12 @@ EnvironmentFile=-/etc/1l3a-paper.env
 StateDirectory=1l3a-paper
 Environment=PYTHONUNBUFFERED=1
 ExecStart=/opt/1l3a/.venv/bin/python -m motor.canli.paper --canli --durum ${STATE_DIRECTORY}/durum --tohum ${STATE_DIRECTORY}/veri/mumlar
-Restart=always
-RestartSec=15
-TimeoutStopSec=60
+Restart=on-failure
+RestartSec=30
+RestartSteps=5
+RestartMaxDelaySec=600
+# SIGTERM: süren tur bitirilir, kalp atışı + durum yazılır (yavaş REST turu + kayıt için 120 sn)
+TimeoutStopSec=120
 KillSignal=SIGTERM
 NoNewPrivileges=true
 PrivateTmp=true
