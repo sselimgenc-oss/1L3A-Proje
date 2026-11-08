@@ -113,6 +113,10 @@ Ana ders: önceki sonuçlar OOS'a bakılarak seçilmiş ve kâr birkaç işlemde
   saatlik dosyalar → swing/daytrade 1h+ testleri önce; 15m/30m dakikalık veri tamamlanınca.
 
 ## Lider kararları günlüğü (karar 26)
+- 2026-11-08: Evren testi kullanıcı onayıyla ("1 tamam") parça parça koşulur: swing ham+wf → ön sonuç → daytrade
+  ham+wf → scalp ham+wf → portföy → sağlamlık/pbo/seçim/holdout HEPSİ BİRLİKTE en sonda. Sebep: DSR deneme sayısı
+  tüm stillerin toplamıyla hesaplanmalı; swing'e erken sağlamlık koşmak sayıyı küçültüp kapıyı gevşetirdi.
+  DK_WTI 5m 2017-2019 indirilemedi → scalp'te WTI 2020'den başlar.
 - 2026-11-07: Portföy sağlamlık paketi eklenir (rastgele ağırlık/sepet kıyası, blok bootstrap Sharpe alt sınırı,
   maliyet ×2, parametre komşuluğu); karar 24'ten kaldırılan yoğunlaşma ölçütünün yerini alır.
 - 2026-11-07: Veri kaynağı sabitlendi: DK_ sembollerinde tf ≥ 1h için her zaman 1h dosyası (dakikalık indirme sürerken
