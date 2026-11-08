@@ -23,6 +23,7 @@ import numpy as np
 import pandas as pd
 
 from motor.backtest.motor import SembolKurallari
+from motor.canli import kalp_atisi as kh
 from motor.canli import paper_sinyal as psg
 from motor.canli.durum_ek import kapanis_gunu as tsi_kapanis_gunu
 from motor.canli.paper_kaynak import TekrarKaynagi
@@ -68,6 +69,12 @@ class Paper:
         self.strateji_gun_tsi: dict = {}         # aynısı TSİ günü kesimiyle (pano dönemsel getiri)
         self.bildirim = None                     # callback(tur, mesaj) (Telegram vb.); None: yok
         self._limit_gorulen = 0
+        # kalp atışı (kalp_atisi.py): düzenli zaman damgası; yeniden başlatmadaki kesinti süresi bundan ölçülür
+        self.kalp_atisi: Optional[str] = None     # son kalp atışı (UTC ISO); paper_state.json'a da yazılır
+        self.baslangic_zamani: Optional[str] = None
+        self.onceki_kalp: Optional[str] = None    # bu süreç başlarken bulunan önceki kalp atışı
+        self.son_kesinti: Optional[dict] = None   # bu süreç başlarken ölçülen kesinti (kalp_atisi.kesinti)
+        self._kalp_yazilan = None
         for s in {x for t in self.tanimlar for x in t.veri_semboller}:
             if s not in kurallar:
                 raise KeyError(f"{s}: sembol kuralı (tick/step/minNotional) yok")
@@ -137,6 +144,40 @@ class Paper:
         if self.her_satir_kaydet and self.durum_yolu:
             self.kaydet()
 
+    # ------------------------------------------------------------------ kalp atışı
+    def kalp_at(self, simdi, dizin: Optional[Path] = None, zorla: bool = False, durdu: bool = False) -> None:
+        """Kalp atışını günceller (bellek + paper_state) ve en çok `kh.KALP_SN`'de bir `kalp_atisi.json`'a yazar. `simdi`: sunucu zamanı (UTC)."""
+        simdi = pd.Timestamp(simdi)
+        self.kalp_atisi = d_zaman(simdi)
+        if dizin is not None and (zorla or durdu or self._kalp_yazilan is None
+                                  or (simdi - self._kalp_yazilan).total_seconds() >= kh.KALP_SN):
+            kh.yaz(dizin, simdi, self.baslangic_zamani or self.kalp_atisi, self.onceki_kalp, durdu)
+            self._kalp_yazilan = simdi
+
+    def surec_basla(self, simdi, dizin: Path, yuklendi: bool) -> None:
+        """Servis başlangıcı: ÖNCEKİ kalp atışını (dosya ve paper_state'in yenisi) okur; yeniden başlatmaysa "son kalp atışı -> başlangıç"
+        kesintisini süresiyle `yeniden_baslatma` olayına yazar; sonra yeni kalp atışını yazar. İlk çalışmada kesinti yoktur."""
+        from motor.canli import durum as dr
+        self.baslangic_zamani = d_zaman(simdi)
+        if yuklendi:
+            try:
+                kd, hata = kh.oku(dizin), None
+            except dr.DurumHatasi as e:
+                kd, hata = None, str(e).replace("(", "[").replace(")", "]")
+            k = kh.kesinti(kh.en_yeni(self.kalp_atisi, kd["zaman"] if kd else None), simdi)
+            self.son_kesinti, self.onceki_kalp = k, k["onceki"]
+            self.olay_ekle("yeniden_baslatma", kh.olay_mesaji(k) + (f"; kalp atışı dosyası okunamadı: {hata}" if hata else ""), simdi)
+        self.kalp_at(simdi, dizin, zorla=True)
+
+    def kalp_bilgisi(self) -> Optional[dict]:
+        """saglik.json `kalp_atisi` bloğu (pano yalnız biçimler). Kalp atışı hiç atılmadıysa (tekrar modu) None."""
+        if self.kalp_atisi is None:
+            return None
+        k = self.son_kesinti
+        return {"son": self.kalp_atisi, "baslangic": self.baslangic_zamani, "aralik_sn": kh.KALP_SN,
+                "onceki_kalp_atisi": self.onceki_kalp, "son_kesinti_sn": (k or {}).get("sn"),
+                "son_kesinti_neden": (k or {}).get("neden") if k else "bu süreç ilk çalışmada başladı (yeniden başlatma yok)"}
+
     def olay_ekle(self, tur: str, mesaj: str, zaman=None, bildir: bool = True):
         z = d_zaman(zaman if zaman is not None else self.motor.son_zaman or pd.Timestamp.now(tz="UTC"))
         self.olaylar.append({"zaman": z, "tur": tur, "mesaj": mesaj})
@@ -186,7 +227,7 @@ class Paper:
     def durum_sozlugu(self) -> dict:
         return {"surum": SURUM, "baslangic_sermaye": self.ayarlar.baslangic_sermaye,
                 "ayarlar": {t.kimlik: t.ayar for t in self.tanimlar}, "pf_sutunlar": self.pf_sutunlar,
-                "satir_sayisi": self.satir_sayisi, "uyarilar": self.uyarilar, "olaylar": self.olaylar,
+                "satir_sayisi": self.satir_sayisi, "uyarilar": self.uyarilar, "olaylar": self.olaylar, "kalp_atisi": self.kalp_atisi,
                 "strateji_gun": self.strateji_gun, "strateji_gun_tsi": self.strateji_gun_tsi, "motor": self.motor.durum_al()}
 
     def kaydet(self, yol: Optional[Path] = None):
@@ -213,6 +254,7 @@ class Paper:
         self.satir_sayisi = d["satir_sayisi"]
         self.uyarilar = list(d.get("uyarilar", []))
         self.olaylar = list(d.get("olaylar", []))
+        self.kalp_atisi = d.get("kalp_atisi")                       # eski durum dosyasında yok (None)
         self.strateji_gun = {k: dict(v) for k, v in d.get("strateji_gun", {}).items()}
         # eski durum dosyasında TSİ serisi yok: UTC günü serisi devralınır (en çok 3 saat kayma; motor.tsi_aktarildi notu)
         self.strateji_gun_tsi = {k: dict(v) for k, v in d.get("strateji_gun_tsi", d.get("strateji_gun", {})).items()}
@@ -273,7 +315,7 @@ def _durum_yaz(p: "Paper", kaynak, dizin: Path, simdi, servis=None, kaynak_adi="
     from motor.canli import paper_durum as pdr
     p.uyarilar = p.uyarilar[-50:]
     sag = kaynak.saglik_veri() if hasattr(kaynak, "saglik_veri") else [
-        {"sembol": s, "tf": tf, "son_mum_acilis": df.index[-1]} for (s, tf), df in kaynak.mumlar.items()]
+        {"sembol": s, "tf": tf, "son_mum_acilis": df.index[-1], "mum_indeksi": df.index} for (s, tf), df in kaynak.mumlar.items()]
     o = pdr.olustur(p, simdi, kaynak_saglik=sag, olaylar=p.olaylar, uyarilar=p.uyarilar, servis=servis, kaynak=kaynak_adi,
                     veri_yok_notlari=[f"VERİ YOK: {t.kimlik} — {t.veri_yok}" for t in p.veri_yok])
     from motor.canli import durum as d
@@ -309,11 +351,11 @@ def canli_calistir(durum_dizini: Path, tohum_dizin: Optional[Path] = None, ayar_
     p = Paper(tanimlar, kaynak, kurallar, durum_yolu=durum_dizini / "paper_state.json", her_satir_kaydet=True)
     bld = tg.Bildirimci()
     p.bildirim = bld.olay                      # teknik olaylar gönderilmez; sorun sürerse tek uyarı; sel koruması
-    if not p.yukle(ayar_guncelle=ayar_guncelle):
+    yuklendi = p.yukle(ayar_guncelle=ayar_guncelle)
+    p.surec_basla(simdi, durum_dizini, yuklendi)         # kalp atışı + yeniden başlatma kesintisi (süresiyle `yeniden_baslatma` olayı)
+    if not yuklendi:
         p.baslat(simdi)
         p.olay_ekle("baslangic", f"Paper başlatıldı, başlangıç sermayesi {p.ayarlar.baslangic_sermaye}", simdi)
-    else:
-        p.olay_ekle("yeniden_baslatma", f"Durum diskten yüklendi; kaçan mumlar REST'ten tamamlanacak", simdi)
     for t in p.veri_yok:
         p.olay_ekle("veri_yok", f"{t.kimlik}: {t.veri_yok}", simdi)
     from motor.canli import paper_durum as pdr
@@ -330,6 +372,7 @@ def canli_calistir(durum_dizini: Path, tohum_dizin: Optional[Path] = None, ayar_
         kaynak.guncelle(simdi)
         n = p.adim(simdi)
         bld.kontrol()                          # WS 10 dk'dır kopuksa tek uyarı
+        p.kalp_at(simdi, durum_dizini)         # tur başarıyla tamamlandı: kalp atışı (en çok 60 sn'de bir diske)
         for a in pdr.acik_pozisyonlar(p):
             if (a["kimlik"], a["sembol"], a["giris_zamani"]) not in gorulen_acik:
                 gorulen_acik.add((a["kimlik"], a["sembol"], a["giris_zamani"]))
@@ -376,6 +419,7 @@ def canli_calistir(durum_dizini: Path, tohum_dizin: Optional[Path] = None, ayar_
             tetik.clear()
             await asyncio.sleep(pc.GRACE_SN)
         ws.cancel()
+        p.kalp_at(pd.Timestamp.now(tz="UTC"), durum_dizini, durdu=True)      # düzgün kapanış: kapanış ile açılış arası ölçülür
         p.kaydet()
     asyncio.run(ana())
     return 0

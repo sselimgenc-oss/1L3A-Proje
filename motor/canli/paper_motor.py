@@ -94,6 +94,10 @@ class PaperMotor(_Motor):
         self.maliyet_log: list = []               # {zaman, sk, tur: ucret|kayma|funding, tutar: Decimal} (raporlama; muhasebeyi etkilemez)
         self._acil = False
         self.tsi_aktarildi = False
+        # sürüm izi + giriş gerekçesi (giris_izi.py): karar anında üretilir (karar_meta), pozisyon açılınca pozisyona bağlanır (giris_meta),
+        # işlem kapanınca işlem satırına yazılır. {kol kimliği: {"ayar_surumu": dict, "giris_gerekcesi": dict}}. Muhasebeyi etkilemez.
+        self.karar_meta: dict = {}
+        self.giris_meta: dict = {}
 
     # ------------------------------------------------------------------ maliyet kaydı (çekirdek yöntemlerini sarar, davranışı değiştirmez)
     def _maliyet(self, t, kol_veya_p, tur: str, tutar: Decimal) -> None:
@@ -105,7 +109,10 @@ class PaperMotor(_Motor):
         ham = D(self.A[kol.sembol][i])
         self._maliyet(t, kol, "ucret", qty * px * self.taker)
         self._maliyet(t, kol, "kayma", qty * abs(px - ham))
+        yeni = kol.kimlik not in self.acik
         super()._giris(kol, yon, qty, px, stop, t, i, hedef=hedef, zc=zc)
+        if yeni and kol.kimlik in self.acik:                 # ilk giriş: o pozisyonu doğuran kararın sürüm izi/gerekçesi bağlanır (eklemeler değiştirmez)
+            self.giris_meta[kol.kimlik] = dict(self.karar_meta.get(kol.kimlik) or {})
 
     def _azalt(self, p, fiyat, qty, t, kom_orani, neden, kismi) -> None:
         q = min(qty, p.miktar)
@@ -119,7 +126,12 @@ class PaperMotor(_Motor):
         else:
             ref = D(self.A[p.sembol][0])
         self._maliyet(t, p, "kayma", q * abs(fiyat - ref))
+        n0, kid = len(self.islemler), p.kol.kimlik
         super()._azalt(p, fiyat, qty, t, kom_orani, neden, kismi)
+        if len(self.islemler) > n0:                           # pozisyon tamamen kapandı: işlem satırına sürüm izi + gerekçe
+            meta = self.giris_meta.pop(kid, None) or {}
+            self.islemler[-1]["ayar_surumu"] = meta.get("ayar_surumu")
+            self.islemler[-1]["giris_gerekcesi"] = meta.get("giris_gerekcesi")
 
     def _funding_ode(self, p, bitis, dahil: bool) -> Decimal:
         x = super()._funding_ode(p, bitis, dahil)
@@ -504,6 +516,8 @@ class PaperMotor(_Motor):
     def _kararlari_uygula(self, b: Birim, t, kararlar: dict) -> None:
         for kol in b.kollar:
             d = kararlar.get(kol.kimlik, {})
+            if d.get("gerekce") is not None or d.get("ayar_surumu") is not None:       # yalnız giriş yönlü karar taşır; son geçerli karar saklanır
+                self.karar_meta[kol.kimlik] = {"ayar_surumu": d.get("ayar_surumu"), "giris_gerekcesi": d.get("gerekce")}
             if kol.mod == "agirlik":
                 kol.w.v, kol.stop.v = d.get("w", NAN), d.get("stop", NAN)
                 self._karar_agirlik(kol, 0, t)
@@ -572,6 +586,7 @@ class PaperMotor(_Motor):
                      for k, p in self.acik.items()},
             "kol": kol_durum, "islemler": self.islemler, "reddedilenler": self.reddedilenler, "kirpmalar": self.kirpmalar,
             "limit_olaylari": self.limit_olaylari, "maliyet_log": self.maliyet_log,
+            "karar_meta": self.karar_meta, "giris_meta": self.giris_meta,
             "birimler": {a: b.son_t for a, b in self.birimler.items()}})
 
     def durum_yukle(self, d: dict) -> None:
@@ -607,6 +622,7 @@ class PaperMotor(_Motor):
         self.islemler, self.reddedilenler = list(d["islemler"]), list(d["reddedilenler"])
         self.kirpmalar, self.limit_olaylari = list(d["kirpmalar"]), list(d["limit_olaylari"])
         self.maliyet_log = list(d.get("maliyet_log", []))
+        self.karar_meta, self.giris_meta = dict(d.get("karar_meta", {})), dict(d.get("giris_meta", {}))      # eski durum dosyasında yok
         for a, t in d["birimler"].items():
             if a in self.birimler:
                 self.birimler[a].son_t = t

@@ -65,7 +65,8 @@ Pano bunları yalnız okur; her sayıyı motor yazar. Dosya yoksa (eski motor) p
   Nedenler: gunluk_kayip_limiti, kill_switch, toplam_risk_tavani, kaldirac_tavani, min_qty, min_notional, gecersiz_stop, portfoy_risk, risk,
   kaldirac_orantili, toplam_risk, kaldirac, zarar_buyutme...
 - **`olaylar.jsonl`**: zaman damgalı SON 50 olay `{zaman, tur, mesaj}`; tür: gunluk_limit, kill_switch, veri_bosluk, veri_uyusmazlik, ws_baglandi,
-  ws_koptu, ws_yeniden_baglandi, ws_24sa_yenileme, binance_hata, veri_yok, baslangic, yeniden_baslatma.
+  ws_koptu, ws_yeniden_baglandi, ws_24sa_yenileme, binance_hata, veri_yok, baslangic, yeniden_baslatma
+  (kalp atışı sonrası: mesajda "(son kalp atışı -> başlangıç)" aralığı ve süre; aşağıdaki "Pano öncelik 4" bölümü).
 - **`stratejiler.json` → her strateji**: `performans {islem, kazanma_orani, ort_kar, ort_zarar (negatif), net, pf}`, `ayar`, `sonraki_yenileme`,
   `durum` ("calisiyor" | "veri yok: neden"). `kol_payi` = kolun hesaptaki payı.
 - **`icgoruler.json`**: `cumleler[]` kısa Türkçe cümleler (en iyi/en kötü strateji, açıkların kaçı kârda, beklenti alarmına en yakın strateji,
@@ -118,7 +119,34 @@ Hesap `motor/canli/dersler.py` ve `motor/canli/aylik_rapor.py` içindedir; paper
   `sert_limit` (kill switch yok, anlık kaldıraç/açık stop riski limit aşımı yok; günlük %3 kayıp limitinin TETİKLENMESİ ihlal değil); `asgari_islem` (set toplamında ≥ 30 kapanan işlem; geçti/kaldı,
   birikimli olduğundan süre dolmadan "bekliyor"); bilgi kalemleri `kesinti_suresi`, `gunluk_limit_olayi`, `strateji_alarmlari`, `dersler_ozeti`.
   `stratejiler[].canliya_uygun`: Dersler "icinde"/"ustunde" true; "altinda" false (neden: beklentinin altında; kabulü bozmaz); "ornek_az" false (ayrı neden: örnek az); ölçülmedi false.
-  KESİNTİ ÖLÇÜMÜ (`aylik_rapor.kesinti_olc`): `paper_state.json` olay kayıtlarından (en çok 200 olay): `veri_bosluk` mesajındaki "(A -> B)" aralığı ve `ws_koptu` "WS N sn mesaj vermedi" süresi;
-  çakışanlar birleştirilir. Süresi kayıtta olmayan kesinti olayı (`yeniden_baslatma`, `binance_hata`, aralıksız `veri_bosluk`, "WS koptu") ya da dolu olay kaydı varsa toplam ÖLÇÜLEMEZ:
+  KESİNTİ ÖLÇÜMÜ (`aylik_rapor.kesinti_olc`): `paper_state.json` olay kayıtlarından (en çok 200 olay): `veri_bosluk` ve `yeniden_baslatma` mesajındaki "(A -> B)" aralığı
+  (yeniden başlatmada A = son kalp atışı, B = başlangıç; kalp atışından önceki eski olaylarda aralık yoktur) ve `ws_koptu` "WS N sn mesaj vermedi" süresi;
+  çakışanlar birleştirilir. Süresi kayıtta olmayan kesinti olayı (aralıksız `yeniden_baslatma`, `binance_hata`, aralıksız `veri_bosluk`, "WS koptu") ya da dolu olay kaydı varsa toplam ÖLÇÜLEMEZ:
   `saat` null + `neden`, `alt_sinir_saat` yalnız ölçülen kısım (uzama yalnız bu kesin kısımdan hesaplanır). `veri_yok` kesinti sayılmaz. Açık kalan tek soru: `tanimsiz` = `strateji_alarmi_kabulu`.
   Eski pano eşikleri (%10 DD, PSR>%95, 30 işlem/60 gün) KULLANILMAZ. "tamam" tanımlı kalemlerin hepsi geçti demektir; kabul kararı kullanıcınındır.
+
+## Genişletme (Pano öncelik 4: veri güveni, bütünlük, sürüm izi, kalp atışı; 2026-11-08; sürüm 1 içinde EKLEMELİ)
+Hesap `motor/canli/guven.py`, `giris_izi.py`, `kalp_atisi.py` içindedir; paper ve backtest aynı fonksiyonları çağırır. Pano yalnız biçimler (SAĞLIK sekmesi: "Veri güveni",
+"Backtest bütünlüğü", kalp atışı kutuları; İŞLEMLER sekmesi: "İşlem izi"). Dosya yoksa (eski motor) pano "veri yok" der. Ölçülemeyen değer `null` + neden.
+- **`veri_guveni.json`** (`1l3a.durum.veri_guveni`): `pencere_gun` (30), `semboller[] {sembol, tf, seans, son_mum_acilis, son_mum_kapanis, bayatlik_dk, esik_dk, bayat (saglik.json ile AYNI sayı; seans takvimi),
+  pencere_mum, eksik_mum, bosluk_sayisi, en_uzun_bosluk_mum, eksik_neden, kaynak (binance_perp|dukascopy|yahoo), kaynak_ayrinti, spot_vekil {bas,bit,perp_baslangic}|null, spot_vekil_neden}`,
+  `ozet {seri_sayisi, bayat_sayisi, eksik_mum_toplam, bosluk_toplam, olculmeyen_seri, kaynaklar}`, `not`. Eksik mum = son 30 günde KAPANMIŞ mumlar arasında piyasa AÇIKKEN gelmeyen mum yuvası
+  (kripto duvar saati; hisse/emtia yalnız seans içi; son mumdan şimdiye süre eksik değil bayatlıktır). Backtest (mum indeksi yok) ve indeksi verilmeyen seri: `eksik_mum: null` + `eksik_neden`.
+  Kaynak: canlı paper'da hepsi `binance_perp` (TradFi: Binance TradFi perpetual, geçmiş tohum Dukascopy `kaynak_ayrinti`'nda); tekrar/backtest'te yerel arşiv (DK_ Dukascopy, BIST_ Yahoo).
+  `spot_vekil`: `veri/mumlar/<sembol>/kaynak.json` varsa perp öncesi spot vekil aralığı (dosya o makinede yoksa `spot_vekil_neden`).
+- **`butunluk.json`** (`1l3a.durum.butunluk`): `kod_surumu {commit|null, kisa, kirli (bool|null), kirli_dosyalar[], kaynak (git|ortam|null), neden}` (git yoksa `commit: null` + neden; `L3A_GIT_COMMIT` ortam değişkeni yedek;
+  kirli = motor/stratejiler/araclar/sonuclar/{final,kilit,evren} altında commit edilmemiş değişiklik), `dosyalar[] {id, ad, yol, sha256, kayitli_sha256, kayit_kaynagi, eslesti (bool|null), durum (eslesti|uyusmuyor|kayit_yok|dosya_yok), neden}`
+  (final_set.json, beklenti_araliklari.csv, beklenti_islem_referansi.csv, guncel_ayarlar.csv, maliyet_tablosu.csv [kendi `.sha256` mührüyle], kilit set.csv, kilit sonuc.csv), `sanal[]` aynı biçim
+  (kod sabitleri: `maliyet_modeli` = paper PortfoyAyarlari maliyet/risk alanları [backtestte `olculmedi` + neden], `sert_limitler` = SERT_LIMITLER değerleri), `genel_durum` (eslesti|uyusmuyor|eksik),
+  `sayim`, `kayit_dosyasi`, `kayit_zamani`, `not`. Kayıtlı değer `sonuclar/final/butunluk_kayit.json` (`python -m motor.canli.guven --kaydet`, KULLANICI ONAYIYLA; motor otomatik yazmaz).
+  Ayar yenilemesi `guncel_ayarlar.csv`'yi bilerek değiştirir: "uyusmuyor" görünür, yeni özet onayla kaydedilir. Pano uyarısı: `uyusmuyor`.
+- **`islemler.jsonl`** (paper; backtestte yalnız `ayar_surumu`): her satırda isteğe bağlı `ayar_surumu {hash (sha256("strateji_adı|ayar_etiketi")[:12]), set_dosyasi, ayar, strateji}` ve
+  `giris_gerekcesi {sablon "genel/1", kaynak "genel_sablon", strateji, kimlik, sembol, tf, yon, sinyal_mumu_acilis, sinyal_mumu_kapanis, sinyal_kapanis_fiyati, stop, stop_mesafe_oran, hedef,
+  hedef_mesafe_oran, hedef_agirlik, gostergeler {sinyal tablosundaki ek sayısal sütunlar}, cikis_kurallari, metin}`. Gerekçe SİNYAL ANINDA (karar mumunun kapanışı, mumlar <= t) üretilir, pozisyon
+  açılırken pozisyona bağlanır (`paper_state.json` motor `karar_meta`/`giris_meta`; yeniden başlatmada korunur), kapanışta işlem satırına yazılır. Stratejiler koşul metni üretmez: genel şablon
+  (strateji + yön + sinyal mumu + kapanış + stop/hedef mesafesi + varsa göstergeler). Eski kayıtlarda ve backtestte `giris_gerekcesi` `null`; alanlar `dogrula_islem` zorunlu listesinde DEĞİLDİR.
+- **`saglik.json` → `kalp_atisi`** (paper/canlı; tekrar modunda yok): `{son, baslangic, aralik_sn (60), onceki_kalp_atisi, son_kesinti_sn (null: ilk çalışma veya ölçülemedi), son_kesinti_neden}`.
+  Kalp atışı `durum/kalp_atisi.json` (`{sema, surum, zaman, baslangic, onceki_kalp_atisi, durdu, aralik_sn}`; en çok 60 sn'de bir, her başarılı turda güncellenir, düzgün kapanışta `durdu: true`) ve
+  `paper_state.json` içinde `kalp_atisi` alanı olarak tutulur. Yeniden başlatmada önceki kalp atışı (iki kaynağın yenisi) → başlangıç aralığı `yeniden_baslatma` olayına
+  "(A -> B) = N sn" biçiminde yazılır; `kesinti_olc` bunu okur. Kalp atışı yoksa (eski durum dosyası) olay "ölçülemedi" der. Çökmede ölçü en çok 60 sn + tur süresi eksik kalır (alt sınır).
+  Uyumluluk: eski `paper_state.json` (kalp_atisi/karar_meta/giris_meta yok) olduğu gibi yüklenir.

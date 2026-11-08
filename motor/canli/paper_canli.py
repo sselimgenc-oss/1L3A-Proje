@@ -127,7 +127,7 @@ class CanliKaynak(TekrarKaynagi):
             self.olay("veri_uyusmazlik", f"{s} {tf} {t}: WS kapanış {k['c']} != REST {df.loc[t, 'kapanis']} (REST kullanılır)")
 
     def saglik_veri(self) -> list:
-        return [{"sembol": s, "tf": tf, "son_mum_acilis": df.index[-1]} for (s, tf), df in sorted(self.mumlar.items())]
+        return [{"sembol": s, "tf": tf, "son_mum_acilis": df.index[-1], "mum_indeksi": df.index} for (s, tf), df in sorted(self.mumlar.items())]
 
 
 def tk_acik(sembol: str) -> bool:

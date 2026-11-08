@@ -20,6 +20,7 @@ from motor.arastirma import final_set
 from motor.arastirma import wf_portfoy as wfp
 from motor.arastirma import wf_tarama as wf
 from motor.backtest.motor import CikisYokHatasi, MESAJ_CIKIS_YOK
+from motor.canli import giris_izi as gi
 from motor.canli.paper_motor import Birim, PKol
 from motor.strateji import funding as fnd
 from motor.strateji import gostergeler as gst
@@ -45,6 +46,7 @@ class StratejiTanim:
     evren: tuple = ()              # portföy: veri sembolleri (gerekli_semboller)
     sonraki_yenileme: Optional[str] = None
     veri_yok: str = ""             # doluysa: neden (strateji çalıştırılmaz)
+    ayar_dosyasi: str = ""         # ayarın geldiği dosya (işlem kaydında `ayar_surumu.set_dosyasi`)
 
     @property
     def veri_semboller(self) -> list:
@@ -87,7 +89,7 @@ def tanimlari_yukle(set_: Optional[dict] = None, ayar_kaynagi: str = "guncel", c
             grup = s["kimlik"]
             gp = Decimal(repr(kol_payi["portfoy"])) / Decimal(sum(1 for x in set_["stratejiler"] if x["kol"] == "portfoy"))
         out.append(StratejiTanim(s["kimlik"], s["ajan"], s["kol"], s["strateji"], s["sembol"], s["tf"], ayar, nesne,
-                                 grup, gp, evren, yen))
+                                 grup, gp, evren, yen, ayar_dosyasi=("guncel_ayarlar.csv" if ayar_kaynagi == "guncel" else "final_set.json (kilit_testi_ayari)")))
     return out
 
 
@@ -132,8 +134,11 @@ def tek_karar(t: StratejiTanim, mumlar: pd.DataFrame, fund: Optional[pd.DataFram
     ca = st.cikis_ayarlari
     atr = (float(gst.atr(mumlar["yuksek"], mumlar["dusuk"], mumlar["kapanis"], ca.atr_periyot).iloc[-1])
            if ca.atr_iz_suren_k else float("nan"))
-    return {t.kimlik: {"yon": yon, "stop": float(r["stop"]), "hedef": float(r["hedef"]), "cikis_l": cl, "cikis_s": cs,
-                       "zc": zc, "atr": atr}}
+    karar = {"yon": yon, "stop": float(r["stop"]), "hedef": float(r["hedef"]), "cikis_l": cl, "cikis_s": cs, "zc": zc, "atr": atr}
+    if yon != 0:       # sürüm izi + giriş gerekçesi: yalnız karar anındaki (mumlar <= t) değerlerden; motor bunları pozisyona bağlar
+        karar["ayar_surumu"] = gi.ayar_surumu(t.strateji_ad, t.ayar, t.ayar_dosyasi)
+        karar["gerekce"] = gi.gerekce_tek(t, mumlar, sig, yon, r["stop"], r["hedef"])
+    return {t.kimlik: karar}
 
 
 def pf_karar(t: StratejiTanim, veriler: dict) -> tuple:
@@ -145,4 +150,7 @@ def pf_karar(t: StratejiTanim, veriler: dict) -> tuple:
         w = float(h[sembol].iloc[-1])
         sp = float(s[sembol].iloc[-1]) if sembol in s.columns else float("nan")
         k[f"{t.kimlik}#{sembol}"] = {"w": w, "stop": sp}
+        if w != 0 and w == w:
+            k[f"{t.kimlik}#{sembol}"]["ayar_surumu"] = gi.ayar_surumu(t.strateji_ad, t.ayar, t.ayar_dosyasi)
+            k[f"{t.kimlik}#{sembol}"]["gerekce"] = gi.gerekce_agirlik(t, sembol, son, veriler[sembol]["kapanis"].iloc[-1], w, sp)
     return k, list(h.columns), son

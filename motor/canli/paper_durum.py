@@ -20,6 +20,7 @@ from motor.canli import durum as d
 from motor.canli import aylik_rapor as ar
 from motor.canli import dersler as ders
 from motor.canli import durum_ek as ek
+from motor.canli import guven as gv
 from motor.canli import paper_takvim as tk
 from motor.canli.backtest_durum import beklenti_konumlari
 from motor.risk.limitler import SERT_LIMITLER
@@ -104,7 +105,9 @@ def _islem_satiri(p, x: dict) -> dict:
             "giris_zamani": _z(x["giris_zamani"]), "giris_fiyati": repr(x["giris_fiyati"]),
             "cikis_zamani": _z(x["cikis_zamani"]), "cikis_fiyati": repr(x["cikis_fiyati"]), "miktar": repr(x["miktar"]),
             "r": d.sayi(x["r"]), "net_pnl_yerel": d.para(x["net_pnl"]), "set_katki_usd": d.para(x["net_pnl"]),
-            "cikis_nedeni": x["cikis_nedeni"], "gun": ek.tsi_gun(x["cikis_zamani"])}
+            "cikis_nedeni": x["cikis_nedeni"], "gun": ek.tsi_gun(x["cikis_zamani"]),
+            # sürüm izi + giriş gerekçesi (giris_izi.py); bu özellikten önceki kayıtlarda null
+            "ayar_surumu": x.get("ayar_surumu"), "giris_gerekcesi": x.get("giris_gerekcesi")}
 
 
 def acik_pozisyonlar(p, sk: Optional[str] = None) -> list:
@@ -173,8 +176,9 @@ def _getiri_serisi(seri: dict, bas: Decimal) -> pd.Series:
 # ---------------------------------------------------------------------------- ana oluşturucu
 def olustur(p, simdi, kaynak_saglik: Optional[list] = None, olaylar: Optional[list] = None, uyarilar: Optional[list] = None,
             servis: Optional[dict] = None, beklenti_csv: Path = BEKLENTI_CSV, kaynak: str = "paper",
-            veri_yok_notlari: Optional[list] = None) -> dict:
-    """-> {'ozet','stratejiler','islemler','saglik','gecmis','ekstra'} (yaz_hepsi'ye verilir). simdi: UTC Timestamp."""
+            veri_yok_notlari: Optional[list] = None, veri_dizini: Optional[Path] = None) -> dict:
+    """-> {'ozet','stratejiler','islemler','saglik','gecmis','ekstra'} (yaz_hepsi'ye verilir). simdi: UTC Timestamp.
+    kaynak_saglik satırları isteğe bağlı `mum_indeksi` (DatetimeIndex) taşıyabilir: veri_guveni.json eksik mum ölçümü için (yoksa null + neden)."""
     simdi = pd.Timestamp(simdi)
     simdi = simdi.tz_localize("UTC") if simdi.tzinfo is None else simdi.tz_convert("UTC")
     m = p.motor
@@ -364,8 +368,12 @@ def olustur(p, simdi, kaynak_saglik: Optional[list] = None, olaylar: Optional[li
     rapor = ar.olustur(kaynak=kaynak, zaman=_z(simdi), simdi=simdi, donem_bas=S["ilk_gun"], aylik_kz_ajan=donem["aylik"], gunluk_tam=S["gunluk_tam"],
                        satirlar=islemler, risk=risk, sayaclar=sayac, set_konum=set_kon, strat_konum=strat_kon, dersler=ds,
                        saglik_durum=saglik["durum"], olaylar=list(olaylar or []), limit_olaylari=limit_ev, kazanma_olcutu="net")
+    # --- veri güveni (sembol başına son mum, bayatlık, eksik mum, kaynak) + backtest bütünlüğü (sha256 ↔ kayıt, kod sürümü)
+    indeksler = {(x["sembol"], x["tf"]): x["mum_indeksi"] for x in (kaynak_saglik or []) if x.get("mum_indeksi") is not None}
+    guven = gv.veri_guveni(saglik["veri"], indeksler or None, simdi, kaynak, _z(simdi), veri_dizini=veri_dizini or gv.VERI_DIZINI)
+    butun = gv.butunluk(kaynak, _z(simdi), p.ayarlar)
     ekstra = {"dersler": ds, "aylik_rapor": rapor, "maruziyet": maruziyet, "maliyet": maliyet, "reddedilen": reddedilen, "olaylar": olay_liste,
-              "icgoruler": {**d._zarf("icgoruler", kaynak, _z(simdi)), "cumleler": ic}}
+              "icgoruler": {**d._zarf("icgoruler", kaynak, _z(simdi)), "cumleler": ic}, "veri_guveni": guven, "butunluk": butun}
     return {"ozet": ozet, "stratejiler": strat, "islemler": islemler, "saglik": saglik, "gecmis": gecmis, "ekstra": ekstra,
             "alarmlar": alarmlar}
 
@@ -409,6 +417,7 @@ def saglik_olustur(p, simdi, kaynak_saglik: list, uyarilar: list, servis: Option
             "bayat_denetimi": canli, "dosya_esik_dk": DOSYA_ESIK_DK if canli else None, "veri": veri,
             "servis": servis or ({"calisiyor": True, "surum": SURUM_ADI, "not": ""} if canli else
                                  {"calisiyor": None, "surum": SURUM_ADI, "not": "tekrar modu; canlı servis yok"}),
+            "kalp_atisi": p.kalp_bilgisi() if canli else None,
             "uyarilar": list(uyarilar)}
 
 
