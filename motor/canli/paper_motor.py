@@ -98,6 +98,10 @@ class PaperMotor(_Motor):
         # işlem kapanınca işlem satırına yazılır. {kol kimliği: {"ayar_surumu": dict, "giris_gerekcesi": dict}}. Muhasebeyi etkilemez.
         self.karar_meta: dict = {}
         self.giris_meta: dict = {}
+        # MFE/MAE izi (pano öncelik 6c): {kol kimliği: {"ust": en yüksek, "alt": en düşük fiyat, "tam": izleme girişten beri mi}}. Yalnız TAMAMEN ELAPSE olmuş mumların
+        # uçları (kapanış fazında, pozisyon hâlâ açıkken) + pozisyonun gerçekleşen dolum fiyatları girer; çıkış mumunun içindeki sıra bilinmediği için o mumun uçları
+        # SAYILMAZ (lookahead yok). Sonuç gerçek MFE/MAE'nin ALT SINIRIDIR. Muhasebeyi etkilemez.
+        self.uc: dict = {}
 
     # ------------------------------------------------------------------ maliyet kaydı (çekirdek yöntemlerini sarar, davranışı değiştirmez)
     def _maliyet(self, t, kol_veya_p, tur: str, tutar: Decimal) -> None:
@@ -113,6 +117,7 @@ class PaperMotor(_Motor):
         super()._giris(kol, yon, qty, px, stop, t, i, hedef=hedef, zc=zc)
         if yeni and kol.kimlik in self.acik:                 # ilk giriş: o pozisyonu doğuran kararın sürüm izi/gerekçesi bağlanır (eklemeler değiştirmez)
             self.giris_meta[kol.kimlik] = dict(self.karar_meta.get(kol.kimlik) or {})
+            self.uc[kol.kimlik] = {"ust": float(px), "alt": float(px), "tam": True}
 
     def _azalt(self, p, fiyat, qty, t, kom_orani, neden, kismi) -> None:
         q = min(qty, p.miktar)
@@ -127,11 +132,37 @@ class PaperMotor(_Motor):
             ref = D(self.A[p.sembol][0])
         self._maliyet(t, p, "kayma", q * abs(fiyat - ref))
         n0, kid = len(self.islemler), p.kol.kimlik
+        u = self.uc.get(kid)
+        if u is not None:                                     # gerçekleşen dolum fiyatı yaşanmış bir fiyattır: uçlara girer
+            u["ust"], u["alt"] = max(u["ust"], float(fiyat)), min(u["alt"], float(fiyat))
         super()._azalt(p, fiyat, qty, t, kom_orani, neden, kismi)
-        if len(self.islemler) > n0:                           # pozisyon tamamen kapandı: işlem satırına sürüm izi + gerekçe
+        if len(self.islemler) > n0:                           # pozisyon tamamen kapandı: işlem satırına sürüm izi + gerekçe + MFE/MAE
             meta = self.giris_meta.pop(kid, None) or {}
             self.islemler[-1]["ayar_surumu"] = meta.get("ayar_surumu")
             self.islemler[-1]["giris_gerekcesi"] = meta.get("giris_gerekcesi")
+            self.islemler[-1].update(self._mfe_mae(p, self.uc.pop(kid, None)))
+
+    def _uc_mum(self, p, kid: str) -> None:
+        """Pozisyon bu mumu AÇIK atlattıysa (çıkış bu mumda olmadı) mumun yüksek/düşük ucu izlenen uçlara girer."""
+        s = p.sembol
+        u = self.uc.get(kid)
+        if u is None:                                         # izleme öncesi açılmış pozisyon (eski durum dosyası): bu mumdan itibaren, "tam" değil
+            u = self.uc[kid] = {"ust": float(p.giris), "alt": float(p.giris), "tam": False}
+        u["ust"], u["alt"] = max(u["ust"], float(self.Hh[s][0])), min(u["alt"], float(self.Ll[s][0]))
+
+    @staticmethod
+    def _mfe_mae(p, u: Optional[dict]) -> dict:
+        """İşlem satırına eklenecek alanlar. mfe_r >= 0 (lehe en geniş sapma), mae_r <= 0 (aleyhe), R birimi = ortalama giriş - ilk stop mesafesi (risk_tutar / tepe_miktar)."""
+        bos = {"mfe_fiyat": None, "mae_fiyat": None, "mfe_r": None, "mae_r": None}
+        if u is None or not u["tam"]:
+            return {**bos, "mfe_mae_neden": "izleme pozisyon açıldıktan sonra başladı (eski durum dosyası); eksik uçlarla hesaplanmadı"}
+        giris = float(p.giris)
+        ust, alt = max(u["ust"], giris), min(u["alt"], giris)
+        iyi, kotu = (ust, alt) if p.yon == 1 else (alt, ust)
+        rb = float(p.risk_tutar / p.tepe_miktar) if p.risk_tutar and p.tepe_miktar else 0.0
+        if rb <= 0:
+            return {**bos, "mfe_fiyat": iyi, "mae_fiyat": kotu, "mfe_mae_neden": "birim risk sıfır: R cinsinden hesaplanamadı"}
+        return {"mfe_fiyat": iyi, "mae_fiyat": kotu, "mfe_r": max(0.0, (iyi - giris) * p.yon / rb), "mae_r": min(0.0, (kotu - giris) * p.yon / rb), "mfe_mae_neden": None}
 
     def _funding_ode(self, p, bitis, dahil: bool) -> Decimal:
         x = super()._funding_ode(p, bitis, dahil)
@@ -461,6 +492,8 @@ class PaperMotor(_Motor):
             if p is None or not self.VAR[kol.sembol][0]:
                 continue
             self._mum_ici(p, kol, 0, t)
+            if kol.kimlik in self.acik:                      # pozisyon bu mumu açık atlattı: mumun uçları MFE/MAE izine girer (çıkış mumu girmez)
+                self._uc_mum(self.acik[kol.kimlik], kol.kimlik)
         if son_satir:
             self.veri_sonu(b, t)
         for s in self.semboller:
@@ -586,7 +619,7 @@ class PaperMotor(_Motor):
                      for k, p in self.acik.items()},
             "kol": kol_durum, "islemler": self.islemler, "reddedilenler": self.reddedilenler, "kirpmalar": self.kirpmalar,
             "limit_olaylari": self.limit_olaylari, "maliyet_log": self.maliyet_log,
-            "karar_meta": self.karar_meta, "giris_meta": self.giris_meta,
+            "karar_meta": self.karar_meta, "giris_meta": self.giris_meta, "uc": self.uc,
             "birimler": {a: b.son_t for a, b in self.birimler.items()}})
 
     def durum_yukle(self, d: dict) -> None:
@@ -623,6 +656,7 @@ class PaperMotor(_Motor):
         self.kirpmalar, self.limit_olaylari = list(d["kirpmalar"]), list(d["limit_olaylari"])
         self.maliyet_log = list(d.get("maliyet_log", []))
         self.karar_meta, self.giris_meta = dict(d.get("karar_meta", {})), dict(d.get("giris_meta", {}))      # eski durum dosyasında yok
+        self.uc = dict(d.get("uc", {}))                                                                      # eski durum dosyasında yok
         for a, t in d["birimler"].items():
             if a in self.birimler:
                 self.birimler[a].son_t = t

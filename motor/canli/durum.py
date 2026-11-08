@@ -22,7 +22,8 @@ EK_DOSYALAR = {"maruziyet": "maruziyet.json", "maliyet": "maliyet.json", "redded
                "olaylar": "olaylar.jsonl", "icgoruler": "icgoruler.json",
                "dersler": "dersler.json", "aylik_rapor": "aylik_rapor.json",
                "veri_guveni": "veri_guveni.json", "butunluk": "butunluk.json",
-               "koni": "koni.json", "kiyas": "kiyas.json", "korelasyon": "korelasyon.json", "yogunlasma": "yogunlasma.json"}
+               "koni": "koni.json", "kiyas": "kiyas.json", "korelasyon": "korelasyon.json", "yogunlasma": "yogunlasma.json",
+               "karne": "karne.json", "koc": "koc.json"}
 KAYNAKLAR = ("backtest", "paper", "canli")
 BANTLAR = ("p05_alti", "p05_p25", "p25_p50", "p50_p75", "p75_p95", "p95_ustu")
 
