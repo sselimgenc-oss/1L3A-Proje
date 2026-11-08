@@ -65,6 +65,33 @@ Evren aşağıdaki gibi değişti; "Evren U (13)" tanımının yerine geçer:
    başlangıcı kuralı (evrenin ≥ %75'i) aynen geçerli.
 Bu güncelleme önceki "kilit ayrımı uygulanmaz" (Güncelleme 3) hükmünün yerine geçer: holdout yeni kilittir.
 
+## GÜNCELLEME 6 (2026-11-08, kullanıcı kararı; WF sonuçları GÖRÜLDÜKTEN sonra, sağlamlık koşulmadan önce)
+Açık kayıt: bu karar WF sonuçları (swing 44, daytrade 5 geçen; scalp 4 enstrümanda 0/204) ve bağımsız denetim
+(sonuclar/denetim/fable_sentez_2026-11-08.md, Y1) görüldükten SONRA, sağlamlık/PBO/DSR sonuçları hiç görülmeden alındı.
+Geçme eşikleri DEĞİŞMEDİ.
+1. **DSR (K5) N ve V aynı popülasyondan.** Gerekçe: eski tanımda N ≈ 223.000 (bu testin aday sayısı + önceki deneme
+   kaydının sembol çarpanlı/çarpansız karışık toplamı + 787) ve V (WF'yi geçen/koşan satırların OOS Sharpe varyansı) farklı
+   popülasyonlardan geliyordu; şansla beklenen en yüksek Sharpe SR0 ≈ 3.2 (yıllık) çıkıyordu, WF'yi geçenlerin en iyisi 1.90
+   → kapı tanım gereği geçilemezdi. Yeni tanım: her stil × zaman dilimi grubunun TÜM aday ayar (strateji × ayar) sütunlarının
+   OOS-dönem günlük getirileri (PBO ile aynı matris) → her sütunun günlük Sharpe'ı; **N = Sharpe'ı tanımlı sütun sayısı,
+   V = bu Sharpe'ların varyansı**. Eşik aynı: "iyi" DSR ≥ 0.90, "iyiye yakın" ≥ 0.50. Önceki/eski denemeler (deneme kaydı
+   toplamı + 787) aynı V ile ayrı bir **bilgi DSR'si** (`dsr_bilgi`; eski sembol çarpanlı sayım `dsr_sembol`) olarak raporlanır,
+   kapı değildir. Sıra: WF → PBO → sağlamlık → seçim → holdout. Her satıra hesaplandığı N ve V yazılır; N/V değişirse DSR
+   yeniden hesaplanır.
+2. **Kill switch / günlük limit olayları kapı değil, bilgi.** `kill_olayi`, `gunluk_limit_olayi` ve reddedilen giriş
+   sayıları (`red_*`) iyi/iyiye yakın listelerinde ve özette ayrı sütun olarak gösterilir.
+3. **BIST yalnız bilgi.** BIST evrende kalır ve koşulur (tek kasada işlem yapar), fakat genişlik kapılarında sayılmaz:
+   kârlı enstrüman oranı, tek enstrüman payı ve "en az iki sınıfta net > 0" yalnız kripto/hisse/emtia üzerinden hesaplanır.
+   BIST sonuçları bilgi sütunlarında: `net_bist`, `bist_islem`, `bist_short_payi`. Gerekçe: BIST'te açığa satış/ödünç
+   maliyeti modellenmiyor, fiyatlar TRY nominal (enflasyon trendi), canlı BIST yolu yok. Mevcut WF satırlarının geçme kararı
+   saklanan enstrüman netlerinden yeniden değerlendirilir (eski karar `gecti_g5` sütununda kalır); net/PF/Sharpe/düşüş
+   değişmez.
+4. Ertelendi: işlem başı %1 riske maliyetin katılması (evren seçimi bittikten sonra ayrıca karar).
+Denetim düzeltmeleri (yöntem değişikliği değil, ön kayıtlı kuralın doğru uygulanması): K2 tutma süresi mum sayısı olarak
+sembolün mum indeksindeki konum farkından (seanslı veride takvim süresi değil); K4 komşu ayarlar WF'nin kullandığı
+enstrümanlarla; holdout/K4 sembol hataları sayılır ve satır "hata" olur; holdout mührü WF/sağlamlık/PBO dosyalarını,
+ölçütleri, strateji kodunu ve kartlarını kapsar, holdout ayarı mühürlü kayıttan okunur.
+
 ## Tanım
 **Evren stratejisi** = bir strateji + bir zaman dilimi + TEK ortak parametre seti, evrenin TÜM enstrümanlarında aynı anda
 çalışır; sinyal hangi enstrümanda çıkarsa orada işleme girer. Evren U (karar 22): BTCUSDT, ETHUSDT, SOLUSDT, DK_AAPL, DK_MSFT,

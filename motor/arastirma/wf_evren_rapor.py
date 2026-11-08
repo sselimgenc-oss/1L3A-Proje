@@ -73,6 +73,18 @@ def _p(x, d=1):
     return "-" if x is None or (isinstance(x, float) and math.isnan(x)) else f"{100 * x:.{d}f}%"
 
 
+def _i(x) -> str:
+    try:
+        return "-" if x is None or x != x else str(int(x))
+    except (TypeError, ValueError):
+        return "-"
+
+
+def _red(r) -> str:
+    """Ö3: tek kasada reddedilen giriş sayıları (bilgi): toplam stop riski / kaldıraç / günlük limit / kill."""
+    return "/".join(_i(r.get(k)) for k in ("red_toplam_risk", "red_kaldirac", "red_gunluk", "red_kill"))
+
+
 def _enstruman_tablosu(r) -> str:
     adet = json.loads(r["enstruman_adet"])
     net = json.loads(r["enstruman_net"])
@@ -105,9 +117,14 @@ def ozet_yaz(cikti: Path, donem: str = "2020_bugun") -> None:
           f"- Sağlamlığı (K1 x2/x3/gecikme, K2, K3, K4, K5 DSR) geçen: {int((sag['saglam_mi'] == True).sum()) if len(sag) else 0}",    # noqa: E712
           f"- Seçilen: {len(sec)}",
           f"- Maliyet tablosu sha256: `{we.evren_maliyet.tablo_hash()[:16]}…` (sonuclar/evren/maliyet_tablosu.csv; koşulardan önce sabitlendi)",
-          f"- DSR deneme sayısı: {int(sag['dsr_n_deneme'].iloc[0]) if len(sag) and 'dsr_n_deneme' in sag else '-'} "
-          "(kapı: bu testin strateji × tf × ayar sayısı + önceki aşamaların kombinasyon sayısı + Haiku Ar-Ge 787; sembol çarpanı yok. "
-          "Eski sembol çarpanlı sayım `dsr_sembol` bilgi sütununda)", ""]
+          "- DSR (K5, GÜNCELLEME 6): N ve V her stil × tf grubunun TÜM aday ayarlarından (pbo.csv `dsr_n`, `dsr_v`); grup N: "
+          + (", ".join(f"{a}/{b}={_i(n)}" for a, b, n in sorted({(x, y, z) for x, y, z in zip(sag['stil'], sag['tf'], sag['dsr_n_deneme'])}))
+             if len(sag) and "dsr_n_deneme" in sag else "-")
+          + ". Önceki denemelerle bilgi DSR'si `dsr_bilgi` (N="
+          + (_i(sag['dsr_n_bilgi'].dropna().iloc[0]) if len(sag) and "dsr_n_bilgi" in sag and sag['dsr_n_bilgi'].notna().any() else "-")
+          + "), eski sembol çarpanlı `dsr_sembol` — ikisi de kapı değil.",
+          "- BIST (GÜNCELLEME 6): evrende koşulur ama genişlik kapılarında sayılmaz; `net_bist`, `bist_islem`, `bist_short_payi` bilgi.",
+          "- Kill / günlük limit / red sayıları kapı değil, bilgi (listelerde ayrı sütun).", ""]
     for st in ("swing", "daytrade", "scalp", "portfoy"):
         g = wf[wf["stil"] == st]
         L.append(f"  - {st}: {len(g)} kombinasyon, WF geçen {int((g['gecti'] == True).sum())}")   # noqa: E712
@@ -135,7 +152,8 @@ def ozet_yaz(cikti: Path, donem: str = "2020_bugun") -> None:
             g = df[df["stil"] == st] if len(df) else pd.DataFrame()
             L += [f"### {baslik} — {st} ({len(g)})", ""]
             if len(g):
-                L += ["| # | Strateji | TF | İşlem | PF | Sharpe | Düşüş | K2 p | DSR | PBO | Kaçan |", "|---|---|---|---|---|---|---|---|---|---|---|"]
+                L += ["| # | Strateji | TF | İşlem | PF | Sharpe | Düşüş | K2 p | DSR | PBO | Kill | Günlük lim. | Red (risk/kaldıraç/günlük/kill) | Kaçan |",
+                      "|---|---|---|---|---|---|---|---|---|---|---|---|---|---|"]
                 for i, r in enumerate(g.to_dict("records"), 1):
                     kacan = r["nedenler"] if isinstance(r.get("nedenler"), str) and r["nedenler"] else ""
                     if isinstance(r.get("kapi_basarisiz"), str) and r["kapi_basarisiz"]:
@@ -145,7 +163,8 @@ def ozet_yaz(cikti: Path, donem: str = "2020_bugun") -> None:
                         kacan = (kacan + "; " if kacan else "") + "PBO > 0.5 (iyiden düştü)"
                     L.append(f"| {i} | {r['strateji']} | {r['tf']} | {int(r['islem_sayisi'])} | {_f(r['profit_factor'])} | "
                              f"{_f(r['sharpe'])} | {_p(r['max_dusus'])} | {_f(r.get('rnd_p'), 3)} | {_f(r.get('dsr_deneme'), 2)} | "
-                             f"{_f(r.get('pbo'), 2)} | {kacan} |")
+                             f"{_f(r.get('pbo'), 2)} | {_i(r.get('kill_olayi'))} | {_i(r.get('gunluk_limit_olayi'))} | "
+                             f"{_red(r)} | {kacan} |")
                 L.append("")
     pb = cikti / "pbo.csv"
     if pb.exists():
@@ -167,7 +186,7 @@ def ozet_yaz(cikti: Path, donem: str = "2020_bugun") -> None:
               "| Liste | Strateji | TF | İşlem | Net | PF | Sharpe | Düşüş | Geliştirme PF | Durum |",
               "|---|---|---|---|---|---|---|---|---|---|"]
         for r in h.to_dict("records"):
-            durum = "doğrulanmış" if r["durum"] == "dogrulanmis" else "holdout'ta kaldı"
+            durum = {"dogrulanmis": "doğrulanmış", "hata": "HATA"}.get(r["durum"], "holdout'ta kaldı")
             L.append(f"| {r['liste']} | {r['strateji']} | {r['tf']} | {int(r.get('islem_sayisi') or 0)} | {_p(r.get('net_getiri'))} | "
                      f"{_f(r.get('profit_factor'))} | {_f(r.get('sharpe'))} | {_p(r.get('max_dusus'))} | "
                      f"{_f(r.get('gelistirme_pf'))} | {durum} |")
@@ -195,6 +214,10 @@ def ozet_yaz(cikti: Path, donem: str = "2020_bugun") -> None:
                   f"- Sağlamlık: maliyet x2 PF {_f(r['m2_pf'])}, x3 PF {_f(r.get('m3_pf'))}, 1 mum gecikme PF {_f(r.get('g1_pf'))}, "
                   f"DSR {_f(r.get('dsr_deneme'))}, PBO {_f(r.get('pbo'))}, rastgele giriş p {_f(r['rnd_p'], 3)}, "
                   f"bootstrap alt {_f(r['pf_boot_alt'])}, komşu ayar oranı {_p(r['par_oran'], 0)}",
+                  f"- Limit olayları (BİLGİ, kapı değil): kill {_i(r.get('kill_olayi'))}, günlük limit {_i(r.get('gunluk_limit_olayi'))}, "
+                  f"reddedilen giriş (risk/kaldıraç/günlük/kill) {_red(r)}, kırpılan {_i(r.get('kirpilan'))}",
+                  f"- BIST (BİLGİ, genişlik kapısında sayılmaz): net {_p(r.get('net_bist'))}, işlem {_i(r.get('bist_islem'))}, "
+                  f"short payı {_p(r.get('bist_short_payi'), 0)}; bilgi DSR (önceki denemelerle) {_f(r.get('dsr_bilgi'))}",
                   f"- Kârlı enstrüman oranı {_p(r['enstruman_kar_orani'], 0)}, en büyük enstrümanın kâr payı "
                   f"{_p(r['tek_enstruman_pay'], 0)} ({r['en_buyuk_enstruman']})", "", _enstruman_tablosu(r), ""]
             if len(kb):

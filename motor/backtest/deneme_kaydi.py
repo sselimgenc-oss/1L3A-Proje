@@ -12,11 +12,17 @@ VARSAYILAN_YOL = Path(__file__).resolve().parents[2] / "sonuclar" / "deneme_kayd
 
 
 def kaydet(strateji: str, sembol: Optional[str], aralik: Optional[str], kombinasyon_sayisi: int,
-           pencere_sayisi: int, toplam_kosu: int, yol: Optional[Path] = None) -> dict:
+           pencere_sayisi: int, toplam_kosu: int, yol: Optional[Path] = None, ek: Optional[dict] = None) -> dict:
+    """ek: isteğe bağlı ek alanlar (ör. evren aşamasında donem / evren_imza); temel alanların üzerine yazamaz."""
     yol = Path(yol) if yol is not None else VARSAYILAN_YOL
     satir = {"zaman": datetime.now(timezone.utc).isoformat(), "strateji": strateji, "sembol": sembol,
              "aralik": aralik, "kombinasyon_sayisi": int(kombinasyon_sayisi),
              "pencere_sayisi": int(pencere_sayisi), "toplam_kosu": int(toplam_kosu)}
+    if ek:
+        cakisan = set(ek) & set(satir)
+        if cakisan:
+            raise ValueError(f"ek alanlar temel alanlarla çakışıyor: {sorted(cakisan)}")
+        satir.update(ek)
     yol.parent.mkdir(parents=True, exist_ok=True)
     with open(yol, "a", encoding="utf-8") as f:
         f.write(json.dumps(satir, ensure_ascii=False) + "\n")

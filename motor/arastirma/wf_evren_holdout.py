@@ -1,8 +1,10 @@
 """Evren holdout aşaması (ON_KAYIT Güncelleme 5.1): son 12 ay (2025-11-08 -> veri sonu), BİR KEZ.
 
-Akış: secim aşaması iyi/iyiye yakın listelerini yazar ve mühürler (`liste_muhru.json`: dosya sha256'ları + maliyet tablosu
-hash'i). Holdout aşaması önce mührü doğrular (liste değişmişse HoldoutHatasi), sonra listedeki her stratejiyi WF'nin
-geliştirme dönemindeki SON seçilen ayarıyla holdout'ta tek koşuda sınar. Kapı: evren net > 0 ve PF(R) >= 1.1 ->
+Akış: secim aşaması iyi/iyiye yakın listelerini yazar ve mühürler (`liste_muhru.json`, sürüm 2: listeler + wf_evren.parquet +
+saglamlik.parquet + pbo.csv sha256'ları, maliyet tablosu hash'i, ölçüt/eşik hash'i, koşulacak ayar ve dışlanan semboller,
+stratejilerin kaynak + kart dosyası hash'leri). Holdout aşaması önce mührü doğrular (herhangi bir uyuşmazlık HoldoutHatasi:
+DUR), sonra listedeki her stratejiyi MÜHÜRLÜ kayıttaki ayarla (WF'nin geliştirme dönemindeki SON seçilen ayarı) holdout'ta
+tek koşuda sınar. Sembol hatası sayılır; varsa satır durum='hata'. Kapı: evren net > 0 ve PF(R) >= 1.1 ->
 "dogrulanmis", aksi "holdout_ta_kaldi". Holdout sonucuna göre ayar/eşik/liste DEĞİŞTİRİLMEZ.
 
 Bir kerelik: `holdout/holdout_gunlugu.jsonl` (yalnız ekler). Herhangi bir "basladi" kaydı varsa yeniden koşu HoldoutTekrarHatasi
@@ -21,12 +23,13 @@ import pandas as pd
 
 from motor.arastirma import evren_maliyet, saglamlik, tarama
 from motor.arastirma import wf_evren as we
-from motor.backtest.motor import backtest
-from motor.strateji import funding
 
 MUHUR = "liste_muhru.json"
 GUNLUK = "holdout/holdout_gunlugu.jsonl"
-MUHUR_DOSYALARI = ("iyi_liste.csv", "iyiye_yakin_liste.csv", "secim.csv")
+LISTE_DOSYALARI = ("iyi_liste.csv", "iyiye_yakin_liste.csv", "secim.csv")
+# Denetim O3/Ö4: listeleri üreten girdiler de mühürlü (WF ayar seçimleri + dışlamalar, sağlamlık, PBO).
+MUHUR_DOSYALARI = LISTE_DOSYALARI + ("wf_evren.parquet", "saglamlik.parquet", "pbo.csv")
+MUHUR_SURUM = 2
 
 
 class HoldoutHatasi(RuntimeError):
@@ -52,28 +55,118 @@ def holdout_baslamis_mi(cikti: Path) -> bool:
     return any(k.get("olay") == "basladi" for k in gunluk_oku(cikti))
 
 
+def olcut_hash() -> str:
+    """Geçme ölçütleri + kıl payı eşikleri (OLCUT, YAKIN_OLCUT) JSON'unun sha256'sı."""
+    j = json.dumps({"OLCUT": we.OLCUT, "YAKIN_OLCUT": we.YAKIN_OLCUT}, sort_keys=True, ensure_ascii=False)
+    return hashlib.sha256(j.encode()).hexdigest()
+
+
+def strateji_dosyalari(ad: str, stil: str) -> list:
+    """Stratejinin kaynak dosyaları (sınıf + proje içindeki tüm ata sınıfların modülleri) ve ayar/kart dosyaları
+    (stratejiler/kart_ayarlari/<ad>.json, stratejiler/dis_ayarlari/<ad>.json; varsa). -> KOK'a göre göreli yollar (sıralı)."""
+    import inspect
+    from motor.strateji import kayit
+    if stil == "portfoy":
+        from motor.portfoy.stratejiler import tum_portfoy_stratejileri
+        sinif = tum_portfoy_stratejileri()[ad]
+    else:
+        sinif = kayit.al(ad)
+    yollar = set()
+    for c in sinif.__mro__:
+        if c is object:
+            continue
+        try:
+            f = inspect.getsourcefile(c)
+        except TypeError:                                  # yerleşik sınıf: proje dosyası değil
+            continue
+        if f and Path(f).resolve().is_relative_to(we.KOK):
+            yollar.add(Path(f).resolve())
+    for d in (kayit.KART_AYAR_DIZINI, tarama.DIS_AYAR_DIZINI):
+        if (Path(d) / f"{ad}.json").exists():
+            yollar.add((Path(d) / f"{ad}.json").resolve())
+    return sorted(str(y.relative_to(we.KOK)) for y in yollar)
+
+
+def strateji_hashleri(kosular: list) -> dict:
+    """{strateji: {göreli yol: sha256}} — listedeki her stratejinin kaynak + kart/ayar dosyaları."""
+    out = {}
+    for k in kosular:
+        if k["strateji"] not in out:
+            out[k["strateji"]] = {y: _sha(we.KOK / y) for y in strateji_dosyalari(k["strateji"], k["stil"])}
+    return out
+
+
+def holdout_kosulari(cikti: Path) -> list:
+    """iyi + iyiye yakın listelerindeki her strateji için holdout'ta koşulacak SABİT girdiler (mühre yazılır):
+    WF'nin son seçilen ayarı ve dışlanan semboller (kisa_gecmis/disarida/hatali_sembol) wf_evren.parquet'ten."""
+    cikti = Path(cikti)
+    wf = pd.read_parquet(cikti / "wf_evren.parquet")
+    kosular = []
+    for liste, dosya in (("iyi", "iyi_liste.csv"), ("iyiye_yakin", "iyiye_yakin_liste.csv")):
+        f = cikti / dosya
+        if not (f.exists() and f.stat().st_size > 5):
+            continue
+        for r in pd.read_csv(f).to_dict("records"):
+            w = wf[(wf["strateji"] == r["strateji"]) & (wf["tf"] == r["tf"])]
+            if len(w) != 1:
+                raise HoldoutHatasi(f"{r['strateji']} {r['tf']}: wf_evren.parquet'te {len(w)} satır (tam 1 olmalı)")
+            w = w.iloc[0]
+            dis = sorted({x for col in ("kisa_gecmis", "disarida", "hatali_sembol") for x in str(w.get(col) or "").split(",") if x})
+            kosular.append({"liste": liste, "strateji": r["strateji"], "tf": r["tf"], "stil": r["stil"],
+                            "ayar": son_secilen_ayar(w["secimler"]), "dislanan": dis,
+                            "gelistirme_pf": _sayi(w.get("profit_factor")), "gelistirme_sharpe": _sayi(w.get("sharpe"))})
+    return kosular
+
+
+def _sayi(v):
+    return None if v is None or (isinstance(v, float) and math.isnan(v)) else float(v)
+
+
 def muhur_yaz(cikti: Path) -> dict:
-    """secim aşaması çıktıları yazıldıktan sonra çağrılır. Holdout başlamışsa listeler artık değiştirilemez."""
+    """secim aşaması çıktıları yazıldıktan sonra çağrılır. Holdout başlamışsa listeler artık değiştirilemez.
+    Mühür (sürüm 2): MUHUR_DOSYALARI sha256 (listeler + wf_evren.parquet + saglamlik.parquet + pbo.csv; hepsi VAR olmalı),
+    maliyet tablosu hash'i, ölçüt/eşik JSON hash'i, holdout koşuları (strateji, tf, stil, ayar, dışlanan) ve listedeki
+    stratejilerin kaynak + kart/ayar dosyası hash'leri."""
     cikti = Path(cikti)
     if holdout_baslamis_mi(cikti):
         raise HoldoutHatasi("holdout daha önce başlatıldı: iyi/iyiye yakın listeleri ve mühür değiştirilemez")
-    m = {"zaman": datetime.now(timezone.utc).isoformat(), "dosyalar": {f: _sha(cikti / f) for f in MUHUR_DOSYALARI},
-         "maliyet_hash": evren_maliyet.tablo_hash()}
+    eksik = [f for f in MUHUR_DOSYALARI if not (cikti / f).exists()]
+    if eksik:
+        raise HoldoutHatasi(f"mühürlenecek dosya yok: {eksik}")
+    kosular = holdout_kosulari(cikti)
+    m = {"surum": MUHUR_SURUM, "zaman": datetime.now(timezone.utc).isoformat(),
+         "dosyalar": {f: _sha(cikti / f) for f in MUHUR_DOSYALARI},
+         "maliyet_hash": evren_maliyet.tablo_hash(), "olcut_hash": olcut_hash(),
+         "kosular": kosular, "strateji_hash": strateji_hashleri(kosular)}
     (cikti / MUHUR).write_text(json.dumps(m, ensure_ascii=False, indent=1))
     return m
 
 
 def muhur_kontrol(cikti: Path) -> dict:
+    """Mührü doğrular; herhangi bir uyuşmazlıkta HoldoutHatasi (holdout DURUR, günlüğe 'basladi' yazılmaz)."""
     cikti = Path(cikti)
     yol = cikti / MUHUR
     if not yol.exists():
         raise HoldoutHatasi(f"{MUHUR} yok: önce secim aşaması listeleri yazıp mühürlemeli")
     m = json.loads(yol.read_text())
+    if m.get("surum") != MUHUR_SURUM or set(m.get("dosyalar", {})) != set(MUHUR_DOSYALARI):
+        raise HoldoutHatasi(f"{MUHUR} eski/eksik biçimde (sürüm {m.get('surum')}); secim aşamasını yeniden koşup mühürleyin")
     for f, h in m["dosyalar"].items():
         if _sha(cikti / f) != h:
             raise HoldoutHatasi(f"liste değişmiş: {f} (mühürlü hash ile uyuşmuyor); holdout reddedildi")
     if m.get("maliyet_hash") != evren_maliyet.tablo_hash():
         raise HoldoutHatasi("maliyet tablosu mühürden sonra değişmiş; holdout reddedildi")
+    if m.get("olcut_hash") != olcut_hash():
+        raise HoldoutHatasi("geçme ölçütleri/eşikler (OLCUT/YAKIN_OLCUT) mühürden sonra değişmiş; holdout reddedildi")
+    if holdout_kosulari(cikti) != m["kosular"]:              # mühür dosyası elle düzenlenmişse (hash'li girdilerle çelişki)
+        raise HoldoutHatasi("mühürdeki holdout koşuları (ayar/dışlanan) mühürlü listeler + wf_evren.parquet ile uyuşmuyor; "
+                            "holdout reddedildi")
+    simdi = strateji_hashleri(m["kosular"])
+    for ad, dosyalar in m["strateji_hash"].items():
+        if simdi.get(ad) != dosyalar:
+            fark = sorted(set(dosyalar.items()) ^ set(simdi.get(ad, {}).items()))
+            raise HoldoutHatasi(f"strateji kodu/kartı mühürden sonra değişmiş: {ad} ({fark[0][0] if fark else '?'}); "
+                                "holdout reddedildi")
     return m
 
 
@@ -89,7 +182,7 @@ def holdout_kos(ad: str, tf: str, stil: str, etiket: str, dislanan=(), ayar=None
     """Tek strateji, tek ayar, evrende holdout (girişi >= HOLDOUT_BAS). veri_ayarla(..., 'holdout') kurulu olmalı."""
     evren = [s for s in we.evren_stil(stil) if s not in set(dislanan)]
     st = saglamlik.ayar_coz(ad, etiket)
-    parcalar, n_veri = [], 0
+    parcalar, n_veri, sem_hata = [], 0, {}
     for sembol in evren:
         try:
             mumlar, fund = we._veri(sembol, tf)
@@ -99,12 +192,8 @@ def holdout_kos(ad: str, tf: str, stil: str, etiket: str, dislanan=(), ayar=None
             continue
         n_veri += 1
         kural = tarama.SEMBOL_KURALLARI.get(sembol, tarama.VARSAYILAN_KURAL)
-        try:
-            t = backtest(funding.stratejiye_hazirla(st, mumlar, fund, sembol, tf), st,
-                         evren_maliyet.maliyet_ayarlari(sembol, kural, 1.0), fund).islemler
-        except Exception:  # noqa: BLE001  (K-L)
-            continue
-        if not len(t):
+        t = we.sembol_islemleri(st, sembol, tf, mumlar, fund, evren_maliyet.maliyet_ayarlari(sembol, kural, 1.0), sem_hata)
+        if t is None or not len(t):                   # hata sayılır (O4); FundingYokHatasi 'beklenen' (K-L)
             continue
         o = we.islem_ozet(t, 0)
         o = o[pd.DatetimeIndex(o["giris_zamani"]) >= we.HOLDOUT_BAS].copy()
@@ -112,7 +201,7 @@ def holdout_kos(ad: str, tf: str, stil: str, etiket: str, dislanan=(), ayar=None
             o["sembol"] = sembol
             o["son_mum"] = mumlar.index[-1]
             parcalar.append(o)
-    satir = {"n_enstruman_veri": n_veri}
+    satir = {"n_enstruman_veri": n_veri, **we.hata_ozeti(sem_hata)}
     if not parcalar:
         satir.update(islem_sayisi=0, net_getiri=0.0, profit_factor=math.nan, nedenler="holdout'ta işlem yok")
         return satir
@@ -151,35 +240,32 @@ def holdout_asamasi(cikti: Path, donem: str = "2017_gelistirme", veri_dizini=Non
         with open(cikti / GUNLUK, "a", encoding="utf-8") as f:
             f.write(json.dumps({"zaman": datetime.now(timezone.utc).isoformat(), **k}, ensure_ascii=False) + "\n")
     yaz({"olay": "basladi", "zorla": bool(zorla), "gerekce": gerekce, "muhur": muhur["dosyalar"], "donem": donem})
-    wf = pd.read_parquet(cikti / "wf_evren.parquet")
-    kayitlar = []
-    for liste, dosya in (("iyi", "iyi_liste.csv"), ("iyiye_yakin", "iyiye_yakin_liste.csv")):
-        f = cikti / dosya
-        if f.exists() and f.stat().st_size > 5:
-            for r in pd.read_csv(f).to_dict("records"):
-                kayitlar.append((liste, r["strateji"], r["tf"], r["stil"]))
     we.veri_ayarla(veri_dizini, "holdout")
     satirlar = []
-    for liste, ad, tf, stil in kayitlar:
-        w = wf[(wf["strateji"] == ad) & (wf["tf"] == tf)].iloc[0]
-        etiket = son_secilen_ayar(w["secimler"])
-        satir = {"liste": liste, "strateji": ad, "tf": tf, "stil": stil, "ayar": etiket or "", "hata": "",
-                 "gelistirme_pf": w.get("profit_factor"), "gelistirme_sharpe": w.get("sharpe")}
+    for k in muhur["kosular"]:                                       # ayar + dışlamalar MÜHÜRLÜ kayıttan (O3)
+        ad, tf, stil, etiket = k["strateji"], k["tf"], k["stil"], k["ayar"]
+        satir = {"liste": k["liste"], "strateji": ad, "tf": tf, "stil": stil, "ayar": etiket or "", "hata": "",
+                 "gelistirme_pf": k.get("gelistirme_pf"), "gelistirme_sharpe": k.get("gelistirme_sharpe")}
         if etiket is None:
             satir.update(durum="holdout_ta_kaldi", nedenler="WF'de seçilen ayar yok")
         else:
-            dis = set(x for col in ("kisa_gecmis", "disarida", "hatali_sembol") for x in str(w.get(col) or "").split(",") if x)
+            dis = set(k["dislanan"])
             try:
                 if stil == "portfoy":
                     from motor.arastirma import wf_evren_portfoy
                     satir.update(wf_evren_portfoy.holdout_kos(ad, etiket, tf, dis, ayar))
                 else:
                     satir.update(holdout_kos(ad, tf, stil, etiket, dis, ayar))
-                satir["durum"] = "dogrulanmis" if kapi(satir) else "holdout_ta_kaldi"
-            except Exception as e:  # noqa: BLE001
-                satir.update(hata=f"{type(e).__name__}: {e}"[:300], durum="holdout_ta_kaldi", nedenler="hata")
+                if satir.get("n_hata_sembol"):                         # O4: sembol hatası -> satır 'hata' (doğrulanmış sayılmaz)
+                    satir.update(hata=f"{satir['n_hata_sembol']} sembol hatası; ilk: {satir['hata_ornegi']}"[:300],
+                                 durum="hata", nedenler="sembol hatası")
+                else:
+                    satir["durum"] = "dogrulanmis" if kapi(satir) else "holdout_ta_kaldi"
+            except Exception as e:  # noqa: BLE001  (satıra yazılır, durum 'hata')
+                satir.update(hata=f"{type(e).__name__}: {e}"[:300], durum="hata", nedenler="hata")
         satirlar.append(satir)
     df = pd.DataFrame(satirlar)
     df.to_csv(cikti / "holdout" / "holdout.csv", index=False)
-    yaz({"olay": "bitti", "n": len(df), "dogrulanmis": int((df["durum"] == "dogrulanmis").sum()) if len(df) else 0})
+    yaz({"olay": "bitti", "n": len(df), "dogrulanmis": int((df["durum"] == "dogrulanmis").sum()) if len(df) else 0,
+         "hata": int((df["durum"] == "hata").sum()) if len(df) else 0})
     return df

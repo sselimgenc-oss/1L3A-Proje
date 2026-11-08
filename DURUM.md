@@ -113,6 +113,8 @@ Ana ders: önceki sonuçlar OOS'a bakılarak seçilmiş ve kâr birkaç işlemde
   saatlik dosyalar → swing/daytrade 1h+ testleri önce; 15m/30m dakikalık veri tamamlanınca.
 
 ## Lider kararları günlüğü (karar 26)
+- 2026-11-08: ON_KAYIT Güncelleme 6 uygulandı. Aşama sırası artık: ham → wf → (olcut: BIST'siz genişlik yeniden değerlendirme) → pbo → sağlamlık → seçim → holdout.
+  Holdout mührü sürüm 2 (wf/sağlamlık/pbo + strateji kodu/kart hash'leri; holdout başlayınca önceki aşamalar yazamaz). K2 tutma süresi mum konumundan.
 - 2026-11-08 (KULLANICI kararları, Fable denetimi sonrası; WF sonuçları GÖRÜLDÜKTEN sonra, sağlamlık koşulmadan önce):
   1) DSR/K5: seçenek (a) — N ve V aynı popülasyondan (stil×tf grubunun aday-ayar OOS Sharpe'ları); eski denemeler ayrı 'bilgi DSR'si'; eşik 0.90 aynı.
   2) Kill switch olayı: kapı değil, bilgi sütunu.  3) BIST: yalnız bilgi — geçme kapılarında (kârlı sınıf/enstrüman oranı) sayılmaz, evrende koşar.

@@ -5,7 +5,7 @@ kasada birleşir. Mevcut parçalar yeniden kullanılır: wf_tarama (aday listesi
 secim.yeniden_oyna (tek kasa, sert limitler), saglamlik (bootstrap, DSR, komşu parametre, rastgele işlem), wf_portfoy
 (analiz başlangıcı).
 
-AŞAMALAR (CLI alt komutları): ham -> wf -> saglamlik -> secim -> kilit -> ozet
+AŞAMALAR (CLI alt komutları): ham -> wf -> [olcut] -> pbo -> saglamlik -> secim -> holdout (GÜNCELLEME 6 sırası; bkz. K-R)
   1. ham: her (strateji, tf, sembol) için TÜM adaylar kilit ÖNCESİ tüm veride bir kez koşulur (kilit_ac YOK);
      işlemler sonuclar/evren/ham/<strateji>--<tf>--<sembol>.parquet (+ .json yan dosya: aday etiketleri, koşu/hata sayısı,
      veri aralığı). Yan dosya en son yazılır = "bitti" işareti; biten atlanır (devam ettirilebilir). Hatalar yan dosyada.
@@ -102,6 +102,20 @@ BELİRSİZ NOKTALARDA KOŞUDAN ÖNCE VERİLEN KARARLAR (sonuca bakılarak deği�
        8. (Lider kararı) 19 pf__ stratejisi aynı akışa girer: wf_evren_portfoy.py (stil 'portfoy', tf 1d). CLI `portfoy` aşaması
           geliştirme dönemlerinde pf WF'sini koşar; `saglamlik`/`pbo`/`secim`/`holdout` pf satırlarını da işler. Portföy motoru
           PortfoyAyarlari.maliyet_sembol ile sembol başına maliyet alır (None = eski tek değer, davranış değişmez).
+
+  K-R  GÜNCELLEME 6 (ON_KAYIT, 2026-11-08, kullanıcı kararı; WF sonuçları GÖRÜLDÜKTEN sonra, sağlamlık koşulmadan önce):
+       (A) K5 DSR: N ve V AYNI popülasyondan — stil x tf grubunun TÜM aday-ayar sütunlarının (pbo_matrisi) günlük Sharpe'ları;
+           N = Sharpe'ı tanımlı sütun sayısı, V = varyansları (grup_dsr_parametreleri; pbo.csv dsr_n/dsr_v). Eşik AYNI (0.90 /
+           yakın 0.50). Önceki denemeler (deneme_kaydi) `dsr_bilgi` / `dsr_sembol` bilgi sütunlarında, kapı değil.
+           SIRA DEĞİŞTİ: wf -> pbo -> saglamlik -> secim. Satıra hesaplandığı N/V yazılır; bayatlar yeniden hesaplanır (O2).
+       (B) kill_olayi / gunluk_limit_olayi / red_*: kapı DEĞİL, listelerde ve raporda bilgi.
+       (C) BIST yalnız BİLGİ: genişlik kapılarına (kârlı enstrüman oranı, tek enstrüman payı, kârlı sınıf >= 2) BIST sembolleri/
+           sınıfı katılmaz (KAPI_DISI_SINIF); BIST evrende koşulur, tek kasada kalır; net_bist, bist_islem, bist_short_payi
+           bilgi sütunları. Mevcut WF satırları `olcut` aşamasıyla (genislik_yeniden_degerlendir) yeniden değerlendirilir.
+       Denetim düzeltmeleri (yöntem değil uygulama): K2 tutma süresi mum indeksi konumundan (O1); K4 WF'nin enstrüman
+       listesiyle (wf_enstrumanlari); holdout/K4/kilit sembol hataları sayılır, varsa satır 'hata' (O4); holdout mührü
+       wf/sağlamlık/pbo + ölçüt + strateji kodu/kart hash'lerini kapsar, holdout ayarı mühürden okur, holdout başladıysa
+       geliştirme aşamaları yazmaz (O3); deneme_kaydi 'evren' satırı (strateji, tf, dönem, evren imzası) başına bir kez.
 
 Kilit (karar 20): "kilit_oncesi" döneminde ham/wf/saglamlik kilit_ac'sız okur; "2020_bugun" döneminde kilit_ac=True (K-O).
 """
@@ -603,26 +617,47 @@ def en_iyi5_haric_pf(r) -> float:
     return _pf(np.sort(r)[::-1][kes:])
 
 
+KAPI_DISI_SINIF = ("bist",)          # GÜNCELLEME 6 (C): BIST yalnız BİLGİ; genişlik kapılarında sayılmaz (evrende koşulur)
+
+
+def genislik_net(net: dict, adet: dict) -> dict:
+    """Genişlik kapı metrikleri (K-F) enstrüman netlerinden. GÜNCELLEME 6 (C): KAPI_DISI_SINIF (BIST) sembolleri kârlı enstrüman
+    oranına, tek enstrüman payına ve kârlı sınıf sayısına KATILMAZ; BIST yalnız bilgi sütunlarında (net_bist, bist_*) raporlanır.
+    sinif_net / enstruman_net / enstruman_adet tüm enstrümanları (BIST dahil) bilgi olarak taşır."""
+    kapi_net = {s: v for s, v in net.items() if SINIF.get(s, "diger") not in KAPI_DISI_SINIF}
+    kar = [s for s in kapi_net if kapi_net[s] > 0]
+    toplam = sum(kapi_net.values())
+    en_buyuk = max(kapi_net, key=lambda s: kapi_net[s]) if kapi_net else ""
+    sinif_net: dict = {}
+    for s, v in net.items():
+        sinif_net[SINIF.get(s, "diger")] = sinif_net.get(SINIF.get(s, "diger"), 0.0) + v
+    bist = [s for s in net if SINIF.get(s, "diger") in KAPI_DISI_SINIF]
+    return {"n_enstruman_islemli": len(kapi_net), "n_enstruman_kar": len(kar),
+            "enstruman_kar_orani": len(kar) / len(kapi_net) if kapi_net else math.nan,
+            "tek_enstruman_pay": (kapi_net[en_buyuk] / toplam) if (kapi_net and toplam > 0) else math.nan,
+            "en_buyuk_enstruman": en_buyuk, "sinif_net": sinif_net,
+            "n_sinif_kar": sum(1 for k, v in sinif_net.items() if v > 0 and k not in KAPI_DISI_SINIF),
+            "enstruman_net": {s: round(v, 6) for s, v in net.items()}, "enstruman_adet": adet,
+            "bist_islem": int(sum(adet.get(s, 0) for s in bist)), "bist_n_enstruman": len(bist),
+            "bist_n_enstruman_kar": sum(1 for s in bist if net[s] > 0)}
+
+
 def genislik(tablo: pd.DataFrame, kabul: list, islem_pnl: dict) -> dict:
-    """Enstrüman/sınıf bazında kabul edilen işlem sayısı ve net (K-F)."""
+    """Enstrüman/sınıf bazında kabul edilen işlem sayısı ve net (K-F; BIST kapı dışı, bkz. genislik_net) + BIST short payı (bilgi)."""
     net, adet = {}, {}
+    bist_n = bist_short = 0
+    yon = tablo["yon"].to_numpy() if "yon" in tablo else None
     for i in kabul:
         s = tablo["sembol"].iat[i]
         p = islem_pnl.get(i)
         adet[s] = adet.get(s, 0) + 1
         net[s] = net.get(s, 0.0) + (p[1] if p else 0.0)
-    kar = [s for s in net if net[s] > 0]
-    toplam = sum(net.values())
-    en_buyuk = max(net, key=lambda s: net[s]) if net else ""
-    sinif_net: dict = {}
-    for s, v in net.items():
-        sinif_net[SINIF.get(s, "diger")] = sinif_net.get(SINIF.get(s, "diger"), 0.0) + v
-    return {"n_enstruman_islemli": len(net), "n_enstruman_kar": len(kar),
-            "enstruman_kar_orani": len(kar) / len(net) if net else math.nan,
-            "tek_enstruman_pay": (net[en_buyuk] / toplam) if (net and toplam > 0) else math.nan,
-            "en_buyuk_enstruman": en_buyuk, "sinif_net": sinif_net,
-            "n_sinif_kar": sum(1 for v in sinif_net.values() if v > 0),
-            "enstruman_net": {s: round(v, 6) for s, v in net.items()}, "enstruman_adet": adet}
+        if SINIF.get(s, "diger") in KAPI_DISI_SINIF and yon is not None:
+            bist_n += 1
+            bist_short += int(yon[i] < 0)
+    m = genislik_net(net, adet)
+    m["bist_short_payi"] = (bist_short / bist_n) if bist_n else math.nan
+    return m
 
 
 def kasa_metrikleri(tablo: pd.DataFrame, oos_bas, oos_bit, ayar=None) -> dict:
@@ -698,6 +733,47 @@ def yakin_wf_mi(m: dict, ol: Optional[dict] = None) -> bool:
     return ol["basarisiz_sayi"] <= 1 and olcutleri_degerlendir(m, YAKIN_OLCUT)["gecti"]
 
 
+def genislik_yeniden_degerlendir(wf: pd.DataFrame, cikti: Optional[Path] = None) -> pd.DataFrame:
+    """GÜNCELLEME 6 (C): mevcut WF satırlarının genişlik metriklerini ve geçme kararını, saklanan enstruman_net/enstruman_adet
+    JSON'undan BIST kapı dışı kuralla yeniden hesaplar (ham/WF yeniden koşulmaz; kasa, net, PF, Sharpe, düşüş AYNI kalır).
+    Eski karar `gecti_g5`, `yakin_wf_g5`, `nedenler_g5` sütunlarında saklanır. cikti verilirse oos/<ad>--<tf>.parquet'ten
+    bist_short_payi (bilgi) de doldurulur. Portföy (stil 'portfoy') ve hatalı/işlemsiz satırlara dokunulmaz."""
+    d = wf.copy()
+    for k in ("gecti", "yakin_wf", "nedenler"):
+        if f"{k}_g5" not in d:
+            d[f"{k}_g5"] = d[k] if k in d else None
+    guncel: dict = {}
+    for i, r in d.iterrows():
+        if r.get("stil") == "portfoy" or str(r.get("hata") or "") != "" or not isinstance(r.get("enstruman_net"), str):
+            continue
+        net, adet = json.loads(r["enstruman_net"]), json.loads(r.get("enstruman_adet") or "{}")
+        if not net and not (r.get("islem_sayisi") or 0):
+            continue
+        g = genislik_net(net, adet)
+        m = {k: r.get(k) for k in ("net_getiri", "profit_factor", "islem_sayisi", "pf_en_iyi5_haric", "sharpe", "max_dusus")}
+        m.update({k: g[k] for k in ("enstruman_kar_orani", "tek_enstruman_pay", "n_sinif_kar")})
+        ol = olcutleri_degerlendir(m)
+        yeni = {k: g[k] for k in ("n_enstruman_islemli", "n_enstruman_kar", "enstruman_kar_orani", "tek_enstruman_pay",
+                                  "en_buyuk_enstruman", "n_sinif_kar", "bist_islem", "bist_n_enstruman", "bist_n_enstruman_kar")}
+        yeni.update(g1=ol["g1"], g2=ol["g2"], gecti=ol["gecti"], nedenler="; ".join(ol["nedenler"]),
+                    basarisiz_sayi=ol["basarisiz_sayi"], yakin_wf=bool(yakin_wf_mi(m, ol)))
+        if cikti is not None:
+            oy = Path(cikti) / "oos" / f"{r['strateji']}--{r['tf']}.parquet"
+            if oy.exists():
+                o = pd.read_parquet(oy, columns=["sembol", "yon", "kabul"])
+                b = o[o["kabul"] & o["sembol"].map(lambda x: SINIF.get(x, "diger") in KAPI_DISI_SINIF)]
+                yeni["bist_short_payi"] = float((b["yon"] < 0).mean()) if len(b) else math.nan
+        guncel[i] = yeni
+    anahtarlar = sorted({k for y in guncel.values() for k in y})
+    for k in anahtarlar:
+        col = (d[k] if k in d else pd.Series([None] * len(d), index=d.index)).astype(object)
+        for i, y in guncel.items():
+            if k in y:
+                col.at[i] = y[k]
+        d[k] = col.infer_objects()
+    return d
+
+
 def kapi_sayisi(kapi_basarisiz) -> int:
     return len([x for x in str(kapi_basarisiz or "").split(";") if x])
 
@@ -719,8 +795,9 @@ def listeler(wf: pd.DataFrame, sag: pd.DataFrame, pbo_df: Optional[pd.DataFrame]
     pbo_h = pbo_haritasi(pbo_df)
     if not len(sag):
         return pd.DataFrame(), pd.DataFrame()
-    d = wf.merge(sag[["strateji", "tf", "saglam_mi", "kapi_basarisiz", "rnd_p", "m2_pf", "m3_pf", "g1_pf", "pf_boot_alt",
-                      "par_oran", "dsr_deneme", "hata"]].rename(columns={"hata": "sag_hata"}), on=["strateji", "tf"], how="inner")
+    sag_s = ["strateji", "tf", "saglam_mi", "kapi_basarisiz", "rnd_p", "m2_pf", "m3_pf", "g1_pf", "pf_boot_alt", "par_oran",
+             "dsr_deneme", "hata"] + [c for c in ("dsr_bilgi", "dsr_sembol", "dsr_n_deneme", "sr_varyans") if c in sag]
+    d = wf.merge(sag[sag_s].rename(columns={"hata": "sag_hata"}), on=["strateji", "tf"], how="inner")
     d = d[d["sag_hata"].fillna("") == ""].copy()
     if not len(d):
         return pd.DataFrame(), pd.DataFrame()
@@ -737,8 +814,18 @@ def listeler(wf: pd.DataFrame, sag: pd.DataFrame, pbo_df: Optional[pd.DataFrame]
     yakin = d[(d["yakin_wf"] == True) & yakin_kapi & (d["toplam_kacan"] <= 1) & ~tam].copy()       # noqa: E712
     yakin["pbo_dusurdu"] = False
     yakin = pd.concat([dusen, yakin], ignore_index=False)
-    srt = lambda x: x.sort_values(["stil", "skor"], ascending=[True, False]).reset_index(drop=True)    # noqa: E731
+    def srt(x):
+        x = x.sort_values(["stil", "skor"], ascending=[True, False]).reset_index(drop=True)
+        on = [c for c in LISTE_ON_SUTUNLAR + BILGI_SUTUNLARI if c in x]           # Ö3: bilgi sütunları önde, görünür
+        return x[on + [c for c in x.columns if c not in on]]
     return srt(iyi), srt(yakin)
+
+
+LISTE_ON_SUTUNLAR = ["stil", "strateji", "tf", "skor", "islem_sayisi", "profit_factor", "sharpe", "max_dusus", "rnd_p",
+                     "dsr_deneme", "pbo", "pbo_dusurdu", "toplam_kacan", "nedenler", "kapi_basarisiz"]
+# Ö3 / GÜNCELLEME 6 (B): tek kasa limit olayları ve BIST — KAPI DEĞİL, yalnız bilgi.
+BILGI_SUTUNLARI = ["kill_olayi", "gunluk_limit_olayi", "red_toplam_risk", "red_kaldirac", "red_gunluk", "red_kill",
+                   "kirpilan", "zorla_kapanan", "net_bist", "bist_islem", "bist_short_payi", "dsr_bilgi", "dsr_sembol"]
 
 
 def ham_yukle(dizin: Path, ad: str, tf: str, evren=EVREN_GENEL) -> tuple:
@@ -908,10 +995,48 @@ def _csv_yaz(df: pd.DataFrame, yol: Path):
     df.to_csv(yol.with_suffix(".csv"), index=False)
 
 
+def holdout_kilidi(cikti: Path, asama: str) -> None:
+    """Denetim O3/Ö4: holdout bir kez başladıysa geliştirme aşamaları (wf, portföy, sağlamlık, pbo, seçim) çıktı yazamaz."""
+    from motor.arastirma import wf_evren_holdout as wh
+    if wh.holdout_baslamis_mi(cikti):
+        raise wh.HoldoutHatasi(f"holdout başlatıldı: '{asama}' aşaması {cikti} altına yazamaz (sonuçlar dondu)")
+
+
+def evren_imza(evren) -> str:
+    """Evren kimliği (deneme kaydı anahtarı): '<adet>:<sha256(sıralı semboller)[:10]>'. Scalp 4'lü ve 48'li evren farklı imzadır."""
+    import hashlib
+    ev = sorted(evren)
+    return f"{len(ev)}:{hashlib.sha256(','.join(ev).encode()).hexdigest()[:10]}"
+
+
+def _eski_kayit_imzasi(k: dict) -> str:
+    """Evren imzası olmayan ESKİ (2026-11-08 öncesi) 'evren' kayıtları: scalp tf'leri (5m/15m) 4'lü scalp evreninde, diğerleri
+    48'li genel evrende koşuldu (bkz. EVREN_SCALP notu). Dönem bilgisi yok: eski kayıt her dönemle eşleşir (joker)."""
+    return evren_imza(EVREN_SCALP if k.get("aralik") in STIL_TF["scalp"] else EVREN_GENEL)
+
+
+def evren_deneme_kaydet(satir: dict, donem: str, evren, yol=None) -> bool:
+    """deneme_kaydi'na 'evren' satırı yazar; aynı (strateji, tf, dönem, evren imzası) daha önce yazılmışsa YAZMAZ (çift kayıt
+    önlenir, denetim). Evren bilgisi anahtardadır: scalp 4 sembol (eski) ve 48 sembol (yeni) ayrı denemedir. Mevcut kayıtlar
+    silinmez. -> yazıldı mı."""
+    imza = evren_imza(evren)
+    for k in deneme_kaydi.oku(yol):
+        if k.get("sembol") != "evren" or k.get("strateji") != satir["strateji"] or k.get("aralik") != satir["tf"]:
+            continue
+        k_imza = k.get("evren_imza") or _eski_kayit_imzasi(k)
+        k_donem = k.get("donem")
+        if k_imza == imza and (k_donem is None or k_donem == donem):
+            return False
+    deneme_kaydi.kaydet(satir["strateji"], "evren", satir["tf"], satir.get("n_aday", 0), satir.get("n_pencere", 0),
+                        satir["n_kosu"], yol, ek={"donem": donem, "evren_imza": imza})
+    return True
+
+
 def wf_asamasi(stiller=("swing", "daytrade", "scalp"), surec: int = 4, butce_sn: Optional[float] = None,
                cikti: Path = CIKTI, ilerleme: bool = True, hatalari_yeniden: bool = False,
                donem: str = "2017_gelistirme", stratejiler=None) -> dict:
     cikti = Path(cikti)
+    holdout_kilidi(cikti, "wf")
     (cikti / "oos").mkdir(parents=True, exist_ok=True)
     yol = cikti / "wf_evren.parquet"
     onceki = pd.read_parquet(yol) if yol.exists() else pd.DataFrame()
@@ -934,12 +1059,25 @@ def wf_asamasi(stiller=("swing", "daytrade", "scalp"), surec: int = 4, butce_sn:
         yeni.append(s)
         _csv_yaz(pd.concat([onceki, pd.DataFrame(yeni)], ignore_index=True), cikti / "wf_evren")
         if s.get("hata", "") == "" and s.get("n_kosu"):   # deneme kaydı: yalnız YENİ biten, hatasız kombinasyon (çift sayma yok)
-            deneme_kaydi.kaydet(s["strateji"], "evren", s["tf"], s.get("n_aday", 0), s.get("n_pencere", 0), s["n_kosu"])
+            evren_deneme_kaydet(s, donem, evren_stil(s["stil"]))
 
     sonuc = havuz_calistir(_wf_isci, kalan, surec, _isci_ham, {"veri_dizini": None, "donem": donem}, butce_sn, ilerleme, "wf",
                            her_sonuc=kaydet)
     ert = len(sonuc) - len(yeni)
     return {"yeni": len(yeni), "ertelenen": ert, "gecen": int(sum(bool(s.get("gecti")) for s in yeni))}
+
+
+def olcut_asamasi(cikti: Path = CIKTI) -> dict:
+    """GÜNCELLEME 6 (C): wf_evren.parquet'teki geçme kararlarını BIST kapı dışı genişlik kuralıyla yeniden değerlendirir
+    (eski karar *_g5 sütunlarında kalır). Holdout başladıysa reddedilir."""
+    cikti = Path(cikti)
+    holdout_kilidi(cikti, "olcut")
+    wf = pd.read_parquet(cikti / "wf_evren.parquet")
+    yeni = genislik_yeniden_degerlendir(wf, cikti)
+    _csv_yaz(yeni, cikti / "wf_evren")
+    g5, g6 = yeni["gecti_g5"].fillna(False).astype(bool), yeni["gecti"].fillna(False).astype(bool)
+    return {"satir": len(yeni), "gecen_g5": int(g5.sum()), "gecen_g6": int(g6.sum()),
+            "kazanan": int((g6 & ~g5).sum()), "kaybeden": int((g5 & ~g6).sum())}
 
 
 # ============================================================================ 4. sağlamlık
@@ -960,12 +1098,10 @@ def rastgele_evren(oos: pd.DataFrame, pencere_sinirlari: list, n_sim: int, seed:
         l, c = mumlar["dusuk"].to_numpy(float), mumlar["kapanis"].to_numpy(float)
         atr = gst.atr(mumlar["yuksek"], mumlar["dusuk"], mumlar["kapanis"], atr_periyot).to_numpy(float)
         n = len(mumlar)
-        aralik = pd.Series(idx).diff().median()
         gj = idx.get_indexer(pd.DatetimeIndex(d["giris_zamani"]))
         if (gj < 0).any():
             raise ValueError(f"{sembol}: OOS girişi mum indeksinde yok ({int((gj < 0).sum())}/{len(gj)})")
-        hm = np.maximum(1, np.rint((pd.DatetimeIndex(d["cikis_zamani"]) - pd.DatetimeIndex(d["giris_zamani"])) / aralik)
-                        ).astype(int)
+        hm = saglamlik.tutma_mum(idx, d["giris_zamani"], d["cikis_zamani"])     # O1: indeks konumu farkı (seanslı veri)
         mesafe = d["stop_mesafe"].to_numpy(float)
         mesafe = np.where(np.isfinite(mesafe) & (mesafe > 0), mesafe, stop_med)
         ciks = [cikis_al(sembol, int(wk)) if cikis_al else None for wk in d["pencere"].to_numpy(int)]
@@ -1020,30 +1156,60 @@ def rastgele_evren(oos: pd.DataFrame, pencere_sinirlari: list, n_sim: int, seed:
     return {"toplam_r": toplam, "n_gecersiz": gecersiz, "n_islem": n_islem}
 
 
+def sembol_islemleri(st, sembol: str, tf: str, mumlar, fund, ay, hatalar: dict):
+    """Tek sembolde backtest -> işlem tablosu | None. İstisna YUTULMAZ, `hatalar`a yazılır (denetim O4):
+    FundingYokHatasi (K-L: funding'li strateji fundingsiz sembolde; WF'de de işlemsizdir) -> hatalar['beklenen'];
+    diğer her istisna -> hatalar['hata'] ("<sembol>: <tür>: <mesaj>"). Çağıran n_hata_sembol > 0 ise satırı 'hata' işaretler."""
+    try:
+        return backtest(funding.stratejiye_hazirla(st, mumlar, fund, sembol, tf), st, ay, fund).islemler
+    except funding.FundingYokHatasi as e:
+        hatalar.setdefault("beklenen", []).append(f"{sembol}: {type(e).__name__}: {e}"[:200])
+    except Exception as e:  # noqa: BLE001  (sayılır ve raporlanır; sessiz değil)
+        hatalar.setdefault("hata", []).append(f"{sembol}: {type(e).__name__}: {e}"[:200])
+    return None
+
+
+def hata_ozeti(hatalar: dict) -> dict:
+    h, b = hatalar.get("hata", []), hatalar.get("beklenen", [])
+    return {"n_hata_sembol": len(h), "hata_ornegi": h[0] if h else "", "n_beklenen_hata": len(b)}
+
+
+def wf_enstrumanlari(w, stil: str) -> tuple:
+    """WF satırının fiilen kullandığı enstrümanlar: stil evreni - kisa_gecmis - disarida - hatali_sembol (sıra korunur)."""
+    dis = {x for col in ("kisa_gecmis", "disarida", "hatali_sembol") for x in str(w.get(col) or "").split(",") if x}
+    return tuple(s_ for s_ in evren_stil(stil) if s_ not in dis)
+
+
 def komsu_evren_pf(ad: str, etiket: str, tf: str, evren, oos_bas, oos_bit, carpan: float = 1.0) -> dict:
-    """K4: en sık ayarın komşuları; her biri tüm enstrümanlarda kilit öncesi tüm veride koşulur, evren toplamı PF(R)
-    (girişi [oos_bas, oos_bit) olan işlemler). veri_ayarla ile dönem kurulu olmalı."""
+    """K4: en sık ayarın komşuları; her biri `evren`deki (WF satırının kullandığı enstrümanlar, bkz. wf_enstrumanlari) tüm
+    enstrümanlarda geliştirme verisinde koşulur, evren toplamı PF(R) (girişi [oos_bas, oos_bit) olan işlemler). veri_ayarla ile
+    dönem kurulu olmalı. Sembol hataları sayılır (par_n_hata_sembol, par_hata_ornegi); bir komşu verisi olan TÜM sembollerde
+    hata verirse komşu geçersizdir (par_hata; ör. üst TF kullanılamaz), merkez ayar için bu ValueError'dır."""
     s0 = saglamlik.ayar_coz(ad, etiket)
     komsular = saglamlik.komsu_parametreler(s0.parametreler, s0.parametre_izgarasi or {})
+    sembol_hata: dict = {}
 
     def evren_pf(st):
-        rs = []
+        rs, yerel, n_veri = [], {}, 0
         for sembol in evren:
             try:
                 mumlar, fund = _veri(sembol, tf)
-            except (FileNotFoundError, ValueError):
+            except (FileNotFoundError, ValueError):       # K-B: bu tf'de verisi olmayan enstrüman (WF'de de dışarıda)
                 continue
+            n_veri += 1
             ay = evren_maliyet.maliyet_ayarlari(sembol, tarama.SEMBOL_KURALLARI.get(sembol, tarama.VARSAYILAN_KURAL), carpan)
-            try:
-                t = backtest(funding.stratejiye_hazirla(st, mumlar, fund, sembol, tf), st, ay, fund).islemler
-            except Exception:  # noqa: BLE001  (K-L: o sembolde işlemsiz)
-                continue
-            if not len(t):
+            t = sembol_islemleri(st, sembol, tf, mumlar, fund, ay, yerel)
+            if t is None or not len(t):
                 continue
             g = pd.DatetimeIndex(t["giris_zamani"])
             t = t[(g >= oos_bas) & (g < oos_bit)]
             if len(t):
                 rs.append(t["r"].to_numpy(float))
+        h = yerel.get("hata", [])
+        if h and len(h) == n_veri:
+            raise ValueError(f"tüm sembollerde hata: {h[0]}")
+        for k, v in yerel.items():
+            sembol_hata.setdefault(k, []).extend(v)
         return _pf(np.concatenate(rs)) if rs else math.nan
 
     merkez = evren_pf(s0)
@@ -1058,10 +1224,13 @@ def komsu_evren_pf(ad: str, etiket: str, tf: str, evren, oos_bas, oos_bit, carpa
         detay.append(f"{p}{'+' if yon > 0 else '-'}={v}:{pf:.2f}")
     a = np.array(pfler, dtype=float)
     iyi = int((a > 1).sum()) if len(a) else 0
+    ho = hata_ozeti(sembol_hata)
     return {"par_merkez_pf": merkez, "par_n_komsu": len(komsular), "par_n_gecerli": len(pfler), "par_n_pf_gt1": iyi,
             "par_oran": iyi / len(pfler) if pfler else math.nan,
             "par_min_pf": float(np.nanmin(a)) if len(a) and not np.all(np.isnan(a)) else math.nan,
-            "par_hata": len(hatalar), "par_detay": " | ".join(detay)}
+            "par_hata": len(hatalar), "par_detay": " | ".join(detay), "par_n_enstruman": len(evren),
+            "par_n_hata_sembol": ho["n_hata_sembol"], "par_hata_ornegi": ho["hata_ornegi"],
+            "par_n_beklenen_hata": ho["n_beklenen_hata"]}
 
 
 def saglamlik_oneri(satir: dict, olcut: dict = OLCUT) -> tuple:
@@ -1094,6 +1263,8 @@ def _sag_isci(g: dict):
         else:
             _sag_icerik(g, satir)
         satir["saglam_mi"], satir["kapi_basarisiz"] = saglamlik_oneri(satir)
+        if satir.get("hata"):
+            satir["saglam_mi"], satir["kapi_basarisiz"] = False, "hata"
     except Exception as e:  # noqa: BLE001
         satir["hata"] = f"{type(e).__name__}: {e}"[:300]
         satir["saglam_mi"], satir["kapi_basarisiz"] = False, "hata"
@@ -1160,14 +1331,11 @@ def _sag_icerik(g: dict, satir: dict):
     lo, hi, med = saglamlik.pf_boot(kabul["r"].to_numpy(float), BOOT_BLOK, N_BOOT, np.random.default_rng(rng_tohum + 1))
     satir.update({"pf_boot_alt": lo, "pf_boot_ust": hi, "pf_boot_medyan": med})
     # K4
-    satir.update(komsu_evren_pf(ad, w["en_sik_ayar"], tf, evren_stil(stil), oos_bas, oos_bit))
-    # DSR (rapor)
-    gs = g["getiri"]
-    for nm, n in (("deneme", g["n_deneme"]), ("kombinasyon", g["n_komb"]), ("sembol", g["n_deneme_sembol"])):
-        d = saglamlik.deflated_sharpe(gs, n, g["sr_varyans"])
-        satir[f"dsr_{nm}"] = d["dsr"]
-        satir[f"sr0_{nm}_yillik"] = d["sr0"] * math.sqrt(365)
-    satir.update({"dsr_n_deneme": g["n_deneme"], "dsr_n_kombinasyon": g["n_komb"], "sr_varyans": g["sr_varyans"]})
+    satir.update(komsu_evren_pf(ad, w["en_sik_ayar"], tf, wf_enstrumanlari(w, stil), oos_bas, oos_bit))
+    if satir["par_n_hata_sembol"]:                     # O4: sembol hatası sessizce yutulmaz -> satır 'hata'
+        satir["hata"] = f"K4 komşu ayar: {satir['par_n_hata_sembol']} sembol hatası; ilk: {satir['par_hata_ornegi']}"[:300]
+    # K5 DSR (GÜNCELLEME 6: N ve V stil x tf grubunun aday-ayar popülasyonundan; bilgi DSR'leri ayrı)
+    satir.update(dsr_sutunlari(g["getiri"], g["dsr"]))
 
 
 def _pencere_ata(giris: pd.Series, sinirlar: list) -> np.ndarray:
@@ -1191,37 +1359,142 @@ def deneme_sayisi_ayar(wf: pd.DataFrame, yol=None) -> int:
     return bu + onceki + HAIKU_DENEME
 
 
+DSR_TANIM = "G6_grup"        # GÜNCELLEME 6 (A): kapı N/V = stil x tf grubunun aday-ayar sütunları (pbo.csv dsr_n/dsr_v)
+
+
+def grup_dsr_parametreleri(M: np.ndarray) -> tuple:
+    """GÜNCELLEME 6 (A): stil x tf grubunun TÜM aday-ayar sütunlarının (pbo_matrisi; günlük getiri, T x N) günlük Sharpe'ları.
+    -> (N = Sharpe'ı tanımlı (sabit olmayan) sütun sayısı, V = bu Sharpe'ların varyansı (ddof=1)). PBO ile aynı popülasyon;
+    deflated_sharpe günlük SR kullandığı için V de günlük SR birimindedir. N < 2 ise V = NaN."""
+    x = np.nan_to_num(np.asarray(M, dtype=float), nan=0.0)
+    if x.ndim != 2 or x.shape[0] < 3 or x.shape[1] == 0:
+        return 0, math.nan
+    sd = x.std(axis=0, ddof=1)
+    ok = sd > 1e-12
+    sr = x[:, ok].mean(axis=0) / sd[ok]
+    n = int(ok.sum())
+    return n, (float(np.var(sr, ddof=1)) if n >= 2 else math.nan)
+
+
+def dsr_parametreleri(cikti: Path, wf: pd.DataFrame) -> dict:
+    """K5 için {(stil, tf): {'n', 'v'}} pbo.csv'den + bilgi sayıları. pbo.csv yoksa / dsr sütunu yoksa RuntimeError
+    (sıra: wf -> pbo -> saglamlik)."""
+    yol = Path(cikti) / "pbo.csv"
+    if not yol.exists():
+        raise RuntimeError("pbo.csv yok: GÜNCELLEME 6 ile K5 DSR'nin N ve V'si PBO matrisinden gelir; önce `pbo` aşaması")
+    p = pd.read_csv(yol)
+    if "dsr_n" not in p or "dsr_v" not in p:
+        raise RuntimeError("pbo.csv eski biçimde (dsr_n/dsr_v yok): `pbo` aşamasını yeniden koşun")
+    grup = {(r["stil"], r["tf"]): {"n": int(r["dsr_n"]) if pd.notna(r["dsr_n"]) else 0,
+                                   "v": float(r["dsr_v"]) if pd.notna(r["dsr_v"]) else math.nan}
+            for r in p.to_dict("records")}
+    return {"grup": grup, "n_bilgi": deneme_sayisi_ayar(wf), "n_sembol": toplam_deneme(), "sr_varyans_wf": saglamlik.sr_varyansi(wf)}
+
+
+def dsr_g(dp: dict, stil: str, tf: str) -> dict:
+    gr = dp["grup"].get((stil, tf))
+    if gr is None:
+        raise RuntimeError(f"pbo.csv'de {stil} {tf} grubu yok: `pbo` aşamasını yeniden koşun")
+    return {"n": gr["n"], "v": gr["v"], "n_bilgi": dp["n_bilgi"], "n_sembol": dp["n_sembol"]}
+
+
+def dsr_sutunlari(getiri, d: dict) -> dict:
+    """K5 kapı DSR'si (dsr_deneme: grup N, grup V) + bilgi DSR'leri (aynı V; dsr_bilgi: N = bu testin strateji x tf x ayar
+    toplamı + önceki deneme_kaydi kombinasyonları + 787; dsr_sembol: eski sembol çarpanlı toplam koşu). Eşik DEĞİŞMEDİ (0.90/0.50).
+    Satıra hesaplandığı N'ler ve V yazılır (denetim O2: bayatlık kontrolü)."""
+    out = {}
+    for nm, n in (("deneme", d["n"]), ("bilgi", d["n_bilgi"]), ("sembol", d["n_sembol"])):
+        if n and n >= 2 and d["v"] == d["v"]:
+            r = saglamlik.deflated_sharpe(getiri, n, d["v"])
+            out[f"dsr_{nm}"], out[f"sr0_{nm}_yillik"] = r["dsr"], r["sr0"] * math.sqrt(365)
+        else:                                              # grup Sharpe dağılımı yok: DSR hesaplanamaz -> K5 geçmez (NaN)
+            out[f"dsr_{nm}"], out[f"sr0_{nm}_yillik"] = math.nan, math.nan
+    out.update(dsr_n_deneme=d["n"], sr_varyans=d["v"], dsr_n_bilgi=d["n_bilgi"], dsr_n_sembol=d["n_sembol"], dsr_tanim=DSR_TANIM)
+    return out
+
+
+def dsr_bayat_mi(satir: dict, d: dict) -> bool:
+    """Satırın DSR'si şimdiki N/V ile mi hesaplandı? (tanım, grup N, V, bilgi N'leri)"""
+    def esit(a, b):
+        try:
+            a, b = float(a), float(b)
+        except (TypeError, ValueError):
+            return False
+        return (a != a and b != b) or math.isclose(a, b, rel_tol=1e-12, abs_tol=0.0)
+    return not (satir.get("dsr_tanim") == DSR_TANIM and esit(satir.get("dsr_n_deneme"), d["n"])
+                and esit(satir.get("sr_varyans"), d["v"]) and esit(satir.get("dsr_n_bilgi"), d["n_bilgi"])
+                and esit(satir.get("dsr_n_sembol"), d["n_sembol"]))
+
+
+def dsr_getirisi(cikti: Path, rec) -> np.ndarray:
+    """DSR'ye giren günlük getiri: tek-grafik -> yeniden oynatma serisi (_gunluk_dizi); portföy -> pf OOS günlük getirisi."""
+    if rec["stil"] == "portfoy":
+        return pd.read_parquet(Path(cikti) / "pf" / f"{rec['strateji']}--gunluk.parquet")["oos_getiri"].to_numpy(dtype=float)
+    return _gunluk_dizi(pd.read_parquet(Path(cikti) / "oos" / f"{rec['strateji']}--{rec['tf']}.parquet"), rec)
+
+
+def dsr_tazele(onceki: pd.DataFrame, wf: pd.DataFrame, dp: dict, cikti: Path) -> tuple:
+    """Denetim O2: önceki sağlamlık satırlarından DSR'si bayat olanların (farklı N/V/tanım ile hesaplanmış) DSR sütunlarını
+    ŞİMDİKİ N/V ile yeniden hesaplar ve kapıları (saglam_mi, kapi_basarisiz) yeniler. Hatalı satırlara dokunmaz.
+    WF satırı bulunamazsa RuntimeError (açık hata). -> (yeni DataFrame, yeniden hesaplanan satır sayısı)."""
+    if not len(onceki):
+        return onceki, 0
+    d_ = onceki.copy().astype(object)
+    n = 0
+    for i, r in d_.iterrows():
+        if str(r.get("hata") or "") != "":
+            continue
+        dg = dsr_g(dp, r["stil"], r["tf"])
+        if not dsr_bayat_mi(r.to_dict(), dg):
+            continue
+        w = wf[(wf["strateji"] == r["strateji"]) & (wf["tf"] == r["tf"])]
+        if len(w) != 1:
+            raise RuntimeError(f"DSR tazeleme: {r['strateji']} {r['tf']} wf_evren.parquet'te {len(w)} satır (tam 1 olmalı)")
+        yeni = dsr_sutunlari(dsr_getirisi(cikti, w.iloc[0].to_dict()), dg)
+        for k, v in yeni.items():
+            if k not in d_:
+                d_[k] = None
+            d_.at[i, k] = v
+        ok, kap = saglamlik_oneri(d_.loc[i].to_dict())
+        d_.at[i, "saglam_mi"], d_.at[i, "kapi_basarisiz"] = ok, kap
+        n += 1
+    return d_.infer_objects(), n
+
+
 def saglamlik_asamasi(surec: int = 4, butce_sn: Optional[float] = None, cikti: Path = CIKTI, n_sim: int = N_SIM,
                       tohum: int = 0, ilerleme: bool = True, donem: str = "2017_gelistirme", stratejiler=None) -> dict:
     cikti = Path(cikti)
+    holdout_kilidi(cikti, "saglamlik")
     wf = pd.read_parquet(cikti / "wf_evren.parquet")
     aday = wf[((wf["gecti"] == True) | (wf["yakin_wf"] == True)) & (wf["hata"].fillna("") == "")]   # noqa: E712
     yol = cikti / "saglamlik.parquet"
     onceki = pd.read_parquet(yol) if yol.exists() else pd.DataFrame()
     bitmis = set(zip(onceki["strateji"], onceki["tf"])) if len(onceki) else set()
-    sr_h = saglamlik.sr_varyansi(wf)
-    n_deneme = deneme_sayisi_ayar(wf)                 # kapı: strateji x tf x ayar (+ önceki), sembol çarpanı yok
-    n_deneme_sembol = toplam_deneme()                 # bilgi: eski sembol çarpanlı sayım
-    n_komb = int(len(wf))
-    # ham işlemlerden stop mesafesi + yan bilgi yüklemesi görev içinde
+    dp = dsr_parametreleri(cikti, wf)                 # GÜNCELLEME 6: kapı N/V stil x tf grubundan (pbo.csv)
+    wf_sha = _dosya_sha(cikti / "wf_evren.parquet")
+    onceki, n_tazelenen = dsr_tazele(onceki, wf, dp, cikti)      # O2: bayat DSR'ler şimdiki N/V ile yeniden hesaplanır
     gorevler = []
     for rec in aday.to_dict("records"):
         if (rec["strateji"], rec["tf"]) in bitmis or (stratejiler and rec["strateji"] not in stratejiler):
             continue
-        if rec["stil"] == "portfoy":
-            gt = pd.read_parquet(cikti / "pf" / f"{rec['strateji']}--gunluk.parquet")["oos_getiri"].to_numpy(dtype=float)
-        else:
-            gt = _gunluk_dizi(pd.read_parquet(cikti / "oos" / f"{rec['strateji']}--{rec['tf']}.parquet"), rec)
         gorevler.append({"strateji": rec["strateji"], "stil": rec["stil"], "tf": rec["tf"], "wf": rec, "cikti": cikti,
-                         "n_sim": n_sim, "tohum": tohum, "n_deneme": n_deneme, "n_deneme_sembol": n_deneme_sembol,
-                         "n_komb": n_komb, "sr_varyans": sr_h, "getiri": gt})
+                         "n_sim": n_sim, "tohum": tohum, "dsr": dsr_g(dp, rec["stil"], rec["tf"]),
+                         "getiri": dsr_getirisi(cikti, rec)})
     if ilerleme:
-        print(f"[sag] geçen {len(aday)}, kalan {len(gorevler)}; N_deneme(kapı)={n_deneme} N_sembol={n_deneme_sembol} N_komb={n_komb}", flush=True)
+        print(f"[sag] geçen {len(aday)}, kalan {len(gorevler)}; DSR tazelenen {n_tazelenen}; N_bilgi={dp['n_bilgi']} "
+              f"N_sembol={dp['n_sembol']}; grup N/V: " + ", ".join(f"{a}/{b}={v['n']}/{v['v']:.2e}" for (a, b), v in dp["grup"].items()),
+              flush=True)
     sonuc = havuz_calistir(_sag_isci, gorevler, surec, _isci_ham, {"veri_dizini": None, "donem": donem}, butce_sn, ilerleme, "sag")
-    yeni = [s for s in sonuc if not s.get("ertelendi")]
-    if yeni:
+    yeni = [{**s, "wf_sha": wf_sha} for s in sonuc if not s.get("ertelendi")]
+    if yeni or n_tazelenen:
         _csv_yaz(pd.concat([onceki, pd.DataFrame(yeni)], ignore_index=True), cikti / "saglamlik")
-    return {"yeni": len(yeni), "ertelenen": len(sonuc) - len(yeni), "saglam": int(sum(bool(s.get("saglam_mi")) for s in yeni))}
+    return {"yeni": len(yeni), "ertelenen": len(sonuc) - len(yeni), "dsr_tazelenen": n_tazelenen,
+            "saglam": int(sum(bool(s.get("saglam_mi")) for s in yeni))}
+
+
+def _dosya_sha(yol: Path) -> str:
+    import hashlib
+    return hashlib.sha256(Path(yol).read_bytes()).hexdigest() if Path(yol).exists() else ""
 
 
 def _gunluk_dizi(oos: pd.DataFrame, w) -> np.ndarray:
@@ -1267,6 +1540,7 @@ def pbo_matrisi(ham_dizin: Path, wf_grup: pd.DataFrame, stil: str, tf: str, bas,
 def pbo_asamasi(cikti: Path = CIKTI, n_blok: int = PBO_BLOK, ilerleme: bool = True) -> pd.DataFrame:
     """Her (stil, tf) için CSCV PBO -> pbo.csv. Ham koşular bitmiş olmalı (wf aşamasından sonra)."""
     cikti = Path(cikti)
+    holdout_kilidi(cikti, "pbo")
     wf = pd.read_parquet(cikti / "wf_evren.parquet")
     wf = wf[(wf["hata"].fillna("") == "") & wf["oos_bas"].notna()]
     satirlar = []
@@ -1274,13 +1548,14 @@ def pbo_asamasi(cikti: Path = CIKTI, n_blok: int = PBO_BLOK, ilerleme: bool = Tr
         bas = max(pd.Timestamp(x) for x in g["oos_bas"])           # ortak OOS aralığı
         bit = min(pd.Timestamp(x) for x in g["oos_bit"])
         satir = {"stil": stil, "tf": tf, "n_strateji": int(len(g)), "oos_bas": str(bas), "oos_bit": str(bit),
-                 "pbo": math.nan, "n_aday": 0, "n_kombinasyon": 0, "T": 0, "hata": ""}
+                 "pbo": math.nan, "n_aday": 0, "n_kombinasyon": 0, "T": 0, "dsr_n": 0, "dsr_v": math.nan, "hata": ""}
         try:
             if stil == "portfoy":
                 from motor.arastirma import wf_evren_portfoy
                 M, _ = wf_evren_portfoy.pbo_matrisi_pf(cikti, g, bas, bit)
             else:
                 M, _ = pbo_matrisi(cikti / "ham", g, stil, tf, bas, bit)
+            satir["dsr_n"], satir["dsr_v"] = grup_dsr_parametreleri(M)          # GÜNCELLEME 6 (A): K5 N ve V
             r = pbo.pbo_cscv(M, n_blok)
             satir.update(pbo=r["pbo"], n_aday=r["n_aday"], n_kombinasyon=r["n_kombinasyon"], T=r["T"],
                          lambda_medyan=r["lambda_medyan"], oos_ort_secilen=r["oos_ort_secilen"])
@@ -1355,7 +1630,7 @@ def kilit_bilgi_kos(ad: str, tf: str, stil: str, dizin: Path, veri_dizini=None, 
     satir.update(ayar=etiket, egitim_pf=sec[1], egitim_islem=sec[2])
     st = saglamlik.ayar_coz(ad, etiket)
     ay_s = None
-    parcalar = []
+    parcalar, sem_hata = [], {}
     for sembol in ham:
         mumlar = tf_mumlari(sembol, tf, None, None, dizin=veri_dizini, kilit_ac=True, gerekce=KILIT_GEREKCE)
         try:
@@ -1363,17 +1638,17 @@ def kilit_bilgi_kos(ad: str, tf: str, stil: str, dizin: Path, veri_dizini=None, 
         except FileNotFoundError:
             fund = None
         ay_s = evren_maliyet.maliyet_ayarlari(sembol, tarama.SEMBOL_KURALLARI.get(sembol, tarama.VARSAYILAN_KURAL), 1.0)
-        try:
-            t = backtest(funding.stratejiye_hazirla(st, mumlar, fund, sembol, tf), st, ay_s, fund).islemler
-        except Exception:  # noqa: BLE001
-            continue
-        if not len(t):
+        t = sembol_islemleri(st, sembol, tf, mumlar, fund, ay_s, sem_hata)
+        if t is None or not len(t):
             continue
         o = islem_ozet(t, no)
         o = o[pd.DatetimeIndex(o["giris_zamani"]) >= L].copy()
         o["sembol"] = sembol
         o["son_mum"] = mumlar.index[-1]
         parcalar.append(o)
+    satir.update(hata_ozeti(sem_hata))
+    if satir["n_hata_sembol"]:                            # O4: sembol hatası sayılır, satır 'hata'
+        satir["hata"] = f"{satir['n_hata_sembol']} sembol hatası; ilk: {satir['hata_ornegi']}"[:300]
     if not parcalar:
         satir.update(islem_sayisi=0, nedenler="kilitli dönemde işlem yok")
         return satir
@@ -1437,7 +1712,7 @@ def _kilit_asamasi(cikti: Path, ayar=None):
 
 def main(argv=None):
     ap = argparse.ArgumentParser(description="Evren stratejileri taraması (karar 27; ON_KAYIT Güncelleme 5)")
-    ap.add_argument("asama", choices=["ham", "wf", "saglamlik", "pbo", "secim", "holdout", "kilit", "portfoy"])
+    ap.add_argument("asama", choices=["ham", "wf", "olcut", "saglamlik", "pbo", "secim", "holdout", "kilit", "portfoy"])
     ap.add_argument("--donem", choices=sorted(DONEMLER), default="2017_gelistirme")
     ap.add_argument("--stil", nargs="*", default=["swing", "daytrade", "scalp"])
     ap.add_argument("--tf", nargs="*", default=None)
@@ -1452,7 +1727,7 @@ def main(argv=None):
     a = ap.parse_args(argv)
     if a.asama == "holdout" and a.donem not in GELISTIRME_DONEMLERI:
         ap.error("holdout aşaması için --donem bir geliştirme dönemi olmalı (çıktı dizinini belirler)")
-    if a.asama in ("ham", "wf", "saglamlik", "pbo", "secim") and a.donem == "holdout":
+    if a.asama in ("ham", "wf", "olcut", "saglamlik", "pbo", "secim") and a.donem == "holdout":
         ap.error("holdout dönemi yalnız holdout aşamasında kullanılır")
     kok = donem_kok(a.donem)
     if a.asama == "ham":
@@ -1462,6 +1737,8 @@ def main(argv=None):
     elif a.asama == "wf":
         print(wf_asamasi(tuple(a.stil), a.surec, a.butce, kok, hatalari_yeniden=a.hatalari_yeniden, donem=a.donem,
                          stratejiler=a.stratejiler))
+    elif a.asama == "olcut":
+        print(olcut_asamasi(kok))
     elif a.asama == "saglamlik":
         print(saglamlik_asamasi(a.surec, a.butce, kok, donem=a.donem, stratejiler=a.stratejiler))
     elif a.asama == "pbo":
