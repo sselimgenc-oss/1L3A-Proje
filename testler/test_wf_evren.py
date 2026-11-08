@@ -216,7 +216,8 @@ def test_ham_yukle_bitmemis_hata(tmp_path):
 
 
 def test_evren_tanimlari():
-    assert len(we.EVREN_GENEL) == 48 and len(set(we.EVREN_GENEL)) == 48
+    assert len(we.EVREN_GENEL) == 35 and len(set(we.EVREN_GENEL)) == 35             # GÜNCELLEME 7: BIST çıktı
+    assert not any(s.startswith("BIST_") for s in we.EVREN_GENEL)
     assert "DK_ABBV" not in we.EVREN_GENEL                                     # BIST kararı: ABBV çıktı
     assert we.EVREN_SCALP == ("DK_SPX", "DK_XAU", "DK_WTI", "BTCUSDT")         # XU030 scalp'ten çıktı
     assert we.SINIF["BIST_THYAO"] == "bist"

@@ -119,3 +119,10 @@ DK_GOOGL, DK_AMZN, DK_NVDA, DK_META, DK_TSLA, DK_XAU, DK_WTI, DK_COPPER (13). En
 Stil (ajan) başına en çok 3 strateji; skor = OOS Sharpe × (1 − K2 p); seçilenler arası günlük getiri korelasyonu ≤ 0.5.
 Geçen yoksa o ajan boş kalır (zorlama yok). Kilitli yıl yalnız BİLGİ amaçlı raporlanır, seçimde kullanılmaz.
 Sonuç kullanıcıya sunulur; paper'a geçiş kullanıcı onayıyla.
+
+
+## GÜNCELLEME 7 (2026-11-08, kullanıcı kararı; WF sonuçları GÖRÜLDÜKTEN sonra, sağlamlık koşulmadan önce)
+BIST (13 hisse) evrenden tamamen çıkarıldı. Evren 35 (13 kripto + 17 ABD hissesi + 5 emtia); swing, daytrade ve scalp bu evrende koşar.
+Gerekçe: projenin canlı işlem yolu (Binance) BIST içermez; BIST açığa satış kısıtı/ödünç maliyeti ve TRY nominal fiyatlardaki enflasyon trendi
+modellenmediği için BIST sonuçları yanıltıcıydı (Güncelleme 6 (C) ile zaten kapı dışıydı). Güncelleme 6 (C) kuralları BIST olmadan etkisizdir.
+Tüm WF aşamaları 35 evrenle yeniden hesaplanır; eski (BIST'li) sonuçlar arşivlenir. deneme_kaydi yeni evren imzasıyla ayrı deneme sayar.

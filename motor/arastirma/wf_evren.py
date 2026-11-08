@@ -155,7 +155,9 @@ HISSE = tuple("DK_" + t for t in ("AAPL", "NVDA", "MSFT", "GOOGL", "AMZN", "META
 EMTIA = ("DK_XAU", "DK_XAG", "DK_WTI", "DK_COPPER", "DK_NATGAS")
 BIST = tuple("BIST_" + t for t in ("AKBNK", "ASELS", "ASTOR", "BIMAS", "EKGYO", "EREGL", "FROTO", "KCHOL", "SISE",
                                     "TCELL", "THYAO", "TRALT", "TUPRS"))                  # GÜNCELLEME 2
-EVREN_GENEL = KRIPTO + HISSE + EMTIA + BIST                           # swing + daytrade (48)
+# GÜNCELLEME 7 (kullanıcı kararı 2026-11-08): BIST projeden TAMAMEN çıkarıldı (canlı yol yok, açığa satış/ödünç maliyeti ve TRY
+# enflasyonu gerçekçi modellenemiyor). Evren 35 = 13 kripto + 17 ABD hissesi + 5 emtia. BIST tanımları yalnız arşiv/veri kodu için durur.
+EVREN_GENEL = KRIPTO + HISSE + EMTIA                                  # swing + daytrade + scalp (35)
 EVREN_SCALP = ("DK_SPX", "DK_XAU", "DK_WTI", "BTCUSDT")               # XU030 scalp (5m verisi yok) çıktı (DURUM.md BIST kararı)
 # Kullanıcı kararı 2026-11-08 (scalp 4 enstrümanda 0/204 geçtikten SONRA): scalp da genel 48 evrende test edilir.
 # Eski 4 enstrümanlı sonuç arşivde: sonuclar/evren/2017_gelistirme/arsiv_scalp4/. DSR deneme sayısı her iki koşuyu da içerir (deneme_kaydi).

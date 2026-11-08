@@ -280,7 +280,7 @@ def test_evren_deneme_kaydi_cift_kayit_yok_evren_ayri(tmp_path):
     k = deneme_kaydi.oku(yol)
     assert len(k) == 4 and k[0] == {**k[0]} and "evren_imza" not in k[0]                # eski kayıtlar silinmedi/değişmedi
     assert k[2]["evren_imza"] == we.evren_imza(we.EVREN_GENEL) and k[2]["donem"] == "2017_gelistirme"
-    assert we.evren_imza(we.EVREN_SCALP) != we.evren_imza(we.EVREN_GENEL) and we.evren_imza(we.EVREN_GENEL).startswith("48:")
+    assert we.evren_imza(we.EVREN_SCALP) != we.evren_imza(we.EVREN_GENEL) and we.evren_imza(we.EVREN_GENEL).startswith(f"{len(we.EVREN_GENEL)}:")
     with pytest.raises(ValueError, match="çakışıyor"):
         deneme_kaydi.kaydet("a", "b", "c", 1, 1, 1, yol, ek={"strateji": "x"})
 
