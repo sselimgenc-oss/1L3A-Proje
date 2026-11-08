@@ -91,7 +91,8 @@ def cerceve(mumlar: pd.DataFrame, long_ok, short_ok, stop_l, stop_s,
     if hedef_s is not None:
         hedef[short_ok] = seri(hedef_s)[short_ok]
     c = pd.Series(False, index=idx) if cikis is None else seri(cikis).fillna(False).astype(bool)
-    return pd.DataFrame({"yon": yon, "stop": stop, "hedef": hedef, "cikis": (c | son).astype(bool)})
+    out = pd.DataFrame({"yon": yon, "stop": stop, "hedef": hedef, "cikis": (c | son).astype(bool)})
+    return gun_sonu_kapanis_ekle(out, son.to_numpy()) if gun_sonu else out
 
 
 def gun_sonu_uygula(sig: pd.DataFrame, seans_saat: float = 0.0) -> pd.DataFrame:
@@ -102,4 +103,17 @@ def gun_sonu_uygula(sig: pd.DataFrame, seans_saat: float = 0.0) -> pd.DataFrame:
     s.loc[son, ["stop", "hedef"]] = np.nan
     s["cikis"] = (s["cikis"].astype(bool) | son).astype(bool)
     s["yon"] = s["yon"].astype("int64")
+    return gun_sonu_kapanis_ekle(s, son)
+
+
+def gun_sonu_kapanis_ekle(sig: pd.DataFrame, son: np.ndarray) -> pd.DataFrame:
+    """Seanslı veride (seans_takvimi.seans_turu != kripto) `gun_sonu_kapanis` sütunu ekler: gün sonu mumunda açık
+    pozisyon motor tarafından O MUMUN KAPANIŞ fiyatından kapatılır (bilinen seans kapanışında piyasa/MOC emri; kapanış
+    anı takvimden önceden bilinir, fiyat mumun kendi kapanışıdır -> lookahead yok). Sütun yoksa motor gün sonu
+    `cikis`ini diğer çıkışlar gibi sonraki açılışta doldurur. Kripto (7/24): sütun EKLENMEZ (davranış birebir aynı;
+    gece yarısı mumunun kapanışı ile sonraki açılış aynı andır)."""
+    if seans_turu(sig.index) == KRIPTO:
+        return sig
+    s = sig.copy()
+    s["gun_sonu_kapanis"] = np.asarray(son, dtype=bool)
     return s

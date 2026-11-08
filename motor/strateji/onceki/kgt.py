@@ -52,6 +52,7 @@ import pandas as pd
 
 from motor.strateji import gostergeler as g
 from motor.strateji.cikislar import CikisAyarlari
+from motor.strateji.daytrade._ortak import gun_sonu_kapanis_ekle
 from motor.strateji.htf import ust_zaman
 from motor.strateji.onceki._ortak import cerceve, gun_sonu_maskesi
 from motor.strateji.temel import Strateji
@@ -130,8 +131,9 @@ class Kgt(Strateji):
             long_ok &= ~son
             short_ok &= ~son
             cikis = son
-        return cerceve(idx, long_ok, short_ok, stop_l, stop_s, cikis,
-                       cikis_long=(h4 < 0), cikis_short=(h4 > 0))
+        out = cerceve(idx, long_ok, short_ok, stop_l, stop_s, cikis,
+                      cikis_long=(h4 < 0), cikis_short=(h4 > 0))
+        return gun_sonu_kapanis_ekle(out, son.to_numpy()) if p["gun_sonu_kapat"] else out
 
     @staticmethod
     def _h4_yon(u: pd.DataFrame, hizli: int, yavas: int) -> pd.Series:

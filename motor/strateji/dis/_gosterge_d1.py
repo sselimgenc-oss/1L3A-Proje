@@ -20,6 +20,7 @@ from numpy.lib.stride_tricks import sliding_window_view
 
 from motor.strateji import gostergeler as g
 from motor.strateji.daytrade._ortak import cerceve, gun_sonu_uygula
+from motor.strateji.seans_takvimi import mum_suresi
 
 
 def kur(mumlar, long_ok, short_ok, stop_l, stop_s, hedef_l=None, hedef_s=None,
@@ -251,7 +252,7 @@ def gunluk_kapanis(mumlar: pd.DataFrame) -> pd.DataFrame:
     """(dun, onceki_gun): o ana kadar TAMAMLANMIŞ son iki günün (UTC) kapanışı. Gün kapanmadan değişmez.
     Alt TF verisinde htf.ust_zaman, günlük veride doğrudan kaydırma kullanılır."""
     from motor.strateji.htf import ust_zaman
-    kaynak_s = pd.Series(mumlar.index).diff().median()
+    kaynak_s = mum_suresi(mumlar.index)
     if kaynak_s >= pd.Timedelta(days=1):
         k = mumlar["kapanis"]
         return pd.DataFrame({"dun": k, "onceki": k.shift(1)})

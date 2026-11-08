@@ -14,6 +14,7 @@ import pandas as pd
 from motor.backtest import metrikler as mtr
 from motor.backtest import deneme_kaydi
 from motor.backtest.motor import CikisYokHatasi, MotorAyarlari, backtest
+from motor.strateji.seans_takvimi import mum_suresi
 from motor.strateji.temel import Strateji
 
 
@@ -108,7 +109,7 @@ def walk_forward(strateji: Strateji, mumlar: pd.DataFrame, ayarlar: MotorAyarlar
     sonuc["metrikler"] = (mtr.hesapla(islem_df, egri, ayarlar.baslangic_sermaye)
                           if len(egri) > 1 else {})
     if deneme_kaydi_yaz:
-        aralik = pd.Series(mumlar.index).diff().median() if len(mumlar) > 1 else None
+        aralik = mum_suresi(mumlar.index) if len(mumlar) > 1 else None
         deneme_kaydi.kaydet(strateji.ad or type(strateji).__name__, sembol,
                             _aralik_etiketi(aralik), len(kombinasyonlar), len(pencereler), kosu_sayisi,
                             deneme_kaydi_yolu)

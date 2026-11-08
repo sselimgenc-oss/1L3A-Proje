@@ -195,19 +195,35 @@ def test_gap_stratejileri_hissede_sinyal_uretir(ad):
     assert (sig["yon"] != 0).sum() > 0
 
 
-def test_daytrade_hisse_pozisyon_gun_sonunda_kapanir():
-    """Gün sonu çıkışı her seansın son mumunda: hiçbir işlem ertesi seansın ilk mumundan sonra açık kalmaz."""
-    from motor.backtest.motor import backtest
+def test_daytrade_hisse_pozisyon_gun_sonunda_kapanis_fiyatindan_kapanir():
+    """Gün sonu çıkışı seansın son mumunun KAPANIŞINDAN dolar (kayma + taker aynen): işlem aynı seans günü kapanır,
+    çıkış zamanı = son mumun kapanış anı, gece boşluğu çıkış fiyatına girmez."""
+    from motor.backtest.motor import MotorAyarlari, backtest
     idx = _hisse_index("2022-01-03", "2023-12-29", "1h")
     m = _mumlar(idx, 11, gece_boslugu=0.02)
     s = al("daytrade__gap-devam")()
-    isl = backtest(m, s).islemler
-    assert len(isl) > 0
-    ilk = pd.Series(idx, index=idx).groupby(pd.Index(idx.tz_convert(NY).date)).min()
-    for g, c in zip(pd.DatetimeIndex(isl["giris_zamani"]), pd.DatetimeIndex(isl["cikis_zamani"])):
-        sonraki = ilk[ilk.index > g.tz_convert(NY).date()]
-        if len(sonraki):
-            assert c <= sonraki.iloc[0]
+    sig = s.sinyaller(m)
+    assert "gun_sonu_kapanis" in sig.columns
+    assert (sig["gun_sonu_kapanis"] == seans_son_mumu(idx)).all()
+    ay = MotorAyarlari(limit_modu="olc")      # rastgele veride kill switch işlemi durdurmasın
+    isl = backtest(m, s, ay).islemler
+    gs = isl[isl["cikis_nedeni"] == "gun_sonu"]
+    assert len(gs) > 0 and set(isl["cikis_nedeni"]) <= {"gun_sonu", "stop", "hedef"}
+    g = pd.DatetimeIndex(isl["giris_zamani"]).tz_convert(NY).date
+    c = (pd.DatetimeIndex(isl["cikis_zamani"]) - pd.Timedelta(seconds=1)).tz_convert(NY).date
+    assert (g == c).all()                                            # hiçbir işlem geceye taşınmaz
+    kayma = ay.kayma_bps / 10000
+    for _, r in gs.iterrows():
+        mum = r["cikis_zamani"] - pd.Timedelta("1h")
+        assert seans_son_mumu(idx)[idx.get_loc(mum)]
+        beklenen = m.loc[mum, "kapanis"] * (1 - r["yon"] * kayma)
+        assert r["cikis_fiyati"] == pytest.approx(beklenen, abs=0.011)  # tick 0.01
+
+
+def test_kripto_sinyalinde_gun_sonu_kapanis_sutunu_yok():
+    idx = pd.date_range("2024-01-01", periods=24 * 30, freq="1h", tz="UTC")
+    for ad in ("daytrade__gap-devam", "daytrade__pin-bar", "onceki__kgt"):
+        assert "gun_sonu_kapanis" not in al(ad)().sinyaller(_mumlar(idx, 5)).columns
 
 
 # ------------------------------------------------------------------ gerçek veri (varsa)

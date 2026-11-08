@@ -62,6 +62,7 @@ from motor.backtest.motor import D, SembolKurallari, _step_asagi, _tick
 from motor.risk.limitler import SERT_LIMITLER
 from motor.strateji import cikislar as cks
 from motor.strateji.cikislar import CikisAyarlari
+from motor.strateji.seans_takvimi import mum_suresi
 from motor.portfoy.temel import PortfoyStratejisi, ortak_eksen
 
 ISLEM_KOLONLARI = ["sembol", "kol", "yon", "giris_zamani", "giris_fiyati", "cikis_zamani", "cikis_fiyati", "miktar",
@@ -254,7 +255,7 @@ class _Motor:
             f = (fundingler or {}).get(s)
             self.fund[s] = ((f.index, f["oran"].to_numpy(dtype=float)) if f is not None and len(f) else None)
             if len(df) > 1:
-                araliklar[s] = pd.Series(df.index).diff().median()
+                araliklar[s] = mum_suresi(df.index)   # mod: seans/gece boşluklarından etkilenmez
         if len(set(araliklar.values())) > 1:
             raise ValueError(f"Semboller farklı mum süresinde: {araliklar}")
         self.aralik = next(iter(araliklar.values())) if araliklar else pd.Timedelta(0)
