@@ -1047,7 +1047,7 @@ def _korelasyon_html(kr: dict) -> str:
 
 @_guvenli
 def _yogunlasma_html(yg: dict) -> str:
-    """yogunlasma.json (motor yazar): varlık sınıfı / sembol bazında brüt maruziyet ve açık stop riski payı. Eşik tanımlı değilse yalnız bilgi."""
+    """yogunlasma.json (motor yazar): varlık sınıfı / sembol bazında brüt maruziyet ve açık stop riski payı. Uyarılar (tek sembol risk payı > %40) tablonun üstünde sarı çizgili kutu olarak gösterilir."""
     if yg.get("semboller") is None:
         return f'<div class="kart alt">Yoğunlaşma ölçülmedi: {esc(yg.get("olculmedi_neden") or "neden yazılmamış")}</div>'
     if not yg["semboller"]:
@@ -1067,7 +1067,7 @@ def _yogunlasma_html(yg: dict) -> str:
     if eb and es:
         ust = (_sat("En büyük sembol (brüt payı)", f"{eb['sembol']} · {f_yuzde(eb['brut_pay'], ondalik=1)}") + _sat("En büyük sınıf (brüt payı)", f"{SINIF_ETIKET.get(es['sinif'], es['sinif'])} · {f_yuzde(es['brut_pay'], ondalik=1)}")
                + _sat("Etkin sembol sayısı (1 / Herfindahl)", f_sayi(yg.get("etkin_sembol_sayisi"))))
-    uyar = "".join(f'<div class="uyari uyari">{esc(u)}</div>' for u in yg.get("uyarilar", []))
+    uyar = "".join(f'<div class="uyari uyari">{esc(u["mesaj"] if isinstance(u, dict) else u)}</div>' for u in yg.get("uyarilar", []))
     return (uyar + '<div class="bol">' + ust + "</div>" + tablo(yg["siniflar"], "Varlık sınıfı", lambda x: x["ad"]) + tablo(yg["semboller"], "Sembol", lambda x: x["sembol"])
             + f'<div class="alt">{esc(yg["esikler"]["neden"])} {esc(yg["tanim"])}.</div>')
 

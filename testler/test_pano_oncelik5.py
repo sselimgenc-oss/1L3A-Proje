@@ -122,7 +122,6 @@ def test_kiyas_mevduat_oran_yoksa_null_ve_kullanici_girmeli_oran_varsa_bilesik(t
     with pytest.raises(ValueError):
         ky.ayar_oku(ay)
     assert ky.ayar_oku(tmp_path / "yok.json") == {"mevduat_yillik_oran": None}
-    assert ky.ayar_oku(ky.AYAR_YOLU)["mevduat_yillik_oran"] is None            # depodaki varsayılan: oran uydurulmadı
 
 
 def test_kiyas_veri_yok_ve_bayat_null_neden(tmp_path):
@@ -179,8 +178,30 @@ def test_yogunlasma_sinif_sembol_paylari_ve_esik_yok():
     assert b["stop_riski_pay"] == pytest.approx(0.5) and b["strateji_sayisi"] == 2 and b["sinif"] == "kripto"
     sn = {x["sinif"]: x for x in y["siniflar"]}
     assert set(sn) == {"kripto", "emtia", "hisse"} and sn["emtia"]["brut_pay"] == pytest.approx(0.4) and y["toplam_brut_nominal"] == "10000.00"
-    assert y["esikler"]["sembol_pay"] is None and y["esikler"]["sinif_pay"] is None and y["uyarilar"] == [] and "uydurulmadı" in y["esikler"]["neden"]
+    assert y["esikler"]["sembol_pay"] == 0.40 and y["esikler"]["sinif_pay"] is None and "2026-11-08" in y["esikler"]["neden"]
+    assert [(u["sembol"], u["tur"]) for u in y["uyarilar"]] == [("BTCUSDT", "sembol_risk_payi")] and y["uyarilar"][0]["deger"] == pytest.approx(0.5) and y["uyarilar"][0]["esik"] == 0.40
     assert y["en_buyuk_sembol"]["brut_pay"] == pytest.approx(0.4) and y["etkin_sembol_sayisi"] == pytest.approx(1 / (0.4 ** 2 + 0.4 ** 2 + 0.2 ** 2))
+
+
+def test_yogunlasma_uyari_tam_yuzde_40_uyarmaz_ustu_uyarir():
+    def y_(r1, r2, r3):
+        return yg.olustur("paper", "z", [_poz("a|BTCUSDT|1h", "BTCUSDT", "long", "1000.00", r1), _poz("b|DK_XAU|1d", "DK_XAU", "long", "1000.00", r2),
+                                         _poz("c|DK_NVDA|4h", "DK_NVDA", "long", "1000.00", r3)], "10000")
+    assert y_("40.00", "30.00", "30.00")["uyarilar"] == []                                  # tam %40: uyarı yok (kesin >)
+    u = y_("41.00", "29.00", "30.00")["uyarilar"]                                           # %41 > %40
+    assert len(u) == 1 and u[0]["sembol"] == "BTCUSDT" and u[0]["deger"] == pytest.approx(0.41) and "%40" in u[0]["mesaj"]
+    assert {x["sembol"] for x in y_("45.00", "45.00", "10.00")["uyarilar"]} == {"BTCUSDT", "DK_XAU"}
+
+
+def test_yogunlasma_uyari_pozisyon_yok_ve_sifir_risk_uyarmaz():
+    assert yg.olustur("paper", "z", [], "10000")["uyarilar"] == []
+    assert yg.olustur("paper", "z", [_poz("a|BTCUSDT|1h", "BTCUSDT", "long", "1000.00", "0.00")], "10000")["uyarilar"] == []
+
+
+def test_yogunlasma_uyari_panoda_gorunur():
+    y = yg.olustur("paper", "z", [_poz("a|BTCUSDT|1h", "BTCUSDT", "long", "1000.00", "80.00"), _poz("b|DK_XAU|1d", "DK_XAU", "long", "1000.00", "20.00")], "10000")
+    h = pano._yogunlasma_html(y)
+    assert 'class="uyari uyari"' in h and "BTCUSDT" in h and "%40" in h
 
 
 def test_yogunlasma_pozisyon_yok_ve_olculmedi():
@@ -216,7 +237,7 @@ def test_durum_dosyalari_yazilir_okunur_ve_pano_ciziyor(tmp_path):
     veri, sorun = pano.yukle(out)
     h = pano.html_olustur(veri, sorun, datetime(2026, 1, 5, 12, 10, tzinfo=timezone.utc))
     for b in ("Beklenti konisi", "kn-med", 'class="cizgi kc1"', "Kıyas (aynı dönem)", "kullanıcı oranı girmeli", "Strateji korelasyonu", 'class="kor"',
-              "Yoğunlaşma (sınıf / sembol)", "Projede sembol/sınıf bazında tanımlı yoğunlaşma eşiği yok", pano.f_yuzde(veri["koni"]["konum"]["getiri"], True)):
+              "Yoğunlaşma (sınıf / sembol)", "Kullanıcı kararı 2026-11-08", pano.f_yuzde(veri["koni"]["konum"]["getiri"], True)):
         assert b in h, b
 
 

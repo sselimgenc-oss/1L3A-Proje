@@ -4,9 +4,10 @@ Girdi: motorun açık pozisyon listesi (`maruziyet.pozisyonlar`: nominal, stop_r
   brut_oran      = sembol (sınıf) brüt nominali ÷ özsermaye        brut_pay       = brüt nominal ÷ toplam brüt nominal
   stop_riski_oran = stopa kadar açık risk ÷ özsermaye               stop_riski_pay = açık risk ÷ toplam açık risk
   hhi_brut       = Σ brut_pay² (Herfindahl; 1/hhi = "etkin sembol sayısı"), yalnız bilgi.
-EŞİK: projede sembol/sınıf bazında tanımlı BİR YOĞUNLAŞMA EŞİĞİ YOKTUR. Tanımlı olanlar yalnız TOPLAM düzeydedir (SERT_LIMITLER: toplam açık stop riski ≤ %5,
-kaldıraç ≤ 3x; bunlar risk bloğunda zaten izlenir). Bu yüzden `esikler` null, `uyarilar` boştur: eşik uydurulmaz; eşik kullanıcı kararıyla tanımlanırsa
-buraya eklenir (DURUM.md'ye karar yazılarak). Eski panonun ≥3 hesap / >1.000 $ kuralı 10 bin dolarlık eski hesaba göreydi, alınmadı.
+EŞİK (kullanıcı kararı 2026-11-08): tek sembol açık stop riskinin %40'ından fazlası (stop_riski_pay > SEMBOL_RISK_PAY_ESIK, kesin >) → `uyarilar` kaydı.
+Yalnız UYARI: işlem engellemez, SERT_LIMITLER'e (toplam açık stop riski ≤ %5, kaldıraç ≤ 3x) dokunmaz. Sınıf bazlı eşik (`sinif_pay`) KARARLAŞMADI: null.
+Uyarı yalnız toplam açık stop riski > 0 iken üretilir. Uyarı: {"tur":"sembol_risk_payi","sembol","deger","esik","mesaj"}.
+Eski panonun ≥3 hesap / >1.000 $ kuralı 10 bin dolarlık eski hesaba göreydi, alınmadı.
 """
 from __future__ import annotations
 
@@ -17,8 +18,9 @@ from motor.canli import durum as d
 from motor.canli import paper_takvim as tk
 
 SINIF_ADI = {"kripto": "Kripto", "hisse": "ABD hissesi", "emtia": "Emtia"}
-ESIK_NEDENI = ("Projede sembol/sınıf bazında tanımlı yoğunlaşma eşiği yok (yalnız toplam düzeyde SERT_LIMITLER: açık stop riski ≤ %5, kaldıraç ≤ 3x). "
-               "Eşik uydurulmadı: yalnız bilgi.")
+SEMBOL_RISK_PAY_ESIK = Decimal("0.40")
+ESIK_NEDENI = ("Kullanıcı kararı 2026-11-08: tek sembol açık stop riskinin %40'ından fazlası → uyarı; yalnız uyarı, işlem engellemez, SERT_LIMITLER'e dokunmaz. "
+               "Sınıf bazlı eşik kararlaştırılmadı (yok).")
 
 
 def _oran(x: Decimal, payda: Decimal) -> Optional[float]:
@@ -28,7 +30,7 @@ def _oran(x: Decimal, payda: Decimal) -> Optional[float]:
 def olustur(kaynak: str, zaman: str, pozisyonlar: Optional[list], ozsermaye, olculmedi_neden: Optional[str] = None) -> dict:
     govde = {**d._zarf("yogunlasma", kaynak, zaman), "olculmedi_neden": olculmedi_neden, "ozsermaye": None, "toplam_brut_nominal": None,
              "toplam_stop_riski": None, "semboller": None, "siniflar": None, "en_buyuk_sembol": None, "en_buyuk_sinif": None, "hhi_brut": None,
-             "etkin_sembol_sayisi": None, "esikler": {"sembol_pay": None, "sinif_pay": None, "neden": ESIK_NEDENI}, "uyarilar": [],
+             "etkin_sembol_sayisi": None, "esikler": {"sembol_pay": float(SEMBOL_RISK_PAY_ESIK), "sinif_pay": None, "neden": ESIK_NEDENI}, "uyarilar": [],
              "tanim": "brut_pay = brüt nominal ÷ toplam brüt; stop_riski_pay = stopa kadar açık risk ÷ toplam açık risk; oran = kasaya (özsermayeye) oran"}
     if pozisyonlar is None:
         govde["olculmedi_neden"] = olculmedi_neden or "açık pozisyon verisi yok"
@@ -63,6 +65,12 @@ def olustur(kaynak: str, zaman: str, pozisyonlar: Optional[list], ozsermaye, olc
         c["semboller"].add(k)
     siniflar = [{**kayit(k, c, "sinif"), "ad": SINIF_ADI.get(k, k), "sembol_sayisi": len(c["semboller"])} for k, c in sorted(sinif.items(), key=lambda kv: (-kv[1]["brut"], kv[0]))]
     govde["semboller"], govde["siniflar"] = satirlar, siniflar
+    if risk_t > 0:
+        for k, s in sorted(sem.items()):
+            pay = s["risk"] / risk_t
+            if pay > SEMBOL_RISK_PAY_ESIK:
+                govde["uyarilar"].append({"tur": "sembol_risk_payi", "sembol": k, "deger": d.sayi(pay), "esik": float(SEMBOL_RISK_PAY_ESIK),
+                                          "mesaj": f"{k}: açık stop riskinin %{float(pay) * 100:.1f}'i tek sembolde (uyarı eşiği %{float(SEMBOL_RISK_PAY_ESIK) * 100:.0f}; yalnız uyarı)"})
     if satirlar and brut_t > 0:
         govde["en_buyuk_sembol"] = {"sembol": satirlar[0]["sembol"], "brut_pay": satirlar[0]["brut_pay"]}
         govde["en_buyuk_sinif"] = {"sinif": siniflar[0]["sinif"], "brut_pay": siniflar[0]["brut_pay"]}

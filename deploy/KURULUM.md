@@ -33,6 +33,7 @@ rsync -av veri/mumlar/{BTCUSDT,ETHUSDT,SOLUSDT,DK_AAPL,DK_MSFT,DK_GOOGL,DK_AMZN,
 ssh root@SUNUCU "chown -R l3a:l3a /var/lib/1l3a-paper"
 ```
 Tohum eksik sembolün geçmişi yalnız REST'ten alınır (kısa); uzun geçmişli stratejiler için bu bir **uyarıdır** (loga yazılır).
+S&P 500 (kıyas çizgisi) için `DK_SPX` de kopyalayın (yukarıdaki rsync listesine `DK_SPX` ekleyin); günlük güncellemeyi 4b yapar.
 Not: tohum Dukascopy (DK_) verisidir, canlı devamı Binance TradFi perp mumlarıdır (seans süzgeciyle); fiyat farkı küçük ama sıfır değildir.
 
 ## 4. Servisler
@@ -46,6 +47,22 @@ systemctl enable --now 1l3a-paper.service 1l3a-pano.timer 1l3a-pano-sunucu.servi
 ```
 İlk açılışta motor: exchangeInfo'yu okur (tick/step/minNotional), TradFi sembol eşlemesini doğrular (bulamadığı sembolü kullanan
 stratejiyi "VERİ YOK" işaretler, uydurmaz), tohum + REST ile geçmişi kurar ve her stratejinin son kapanmış mumundan başlar.
+
+## 4b. Günlük S&P 500 (DK_SPX) güncellemesi
+Pano kıyası S&P 500 serisini `/var/lib/1l3a-paper/veri/mumlar/DK_SPX/1h.parquet`'ten okur (paper motoru bu dizini `--tohum` ile alır ve kıyasa da aynısını verir);
+son mum 5 günden eskiyse çizgi boş kalır. `1l3a-spx.timer` her gün 22:30 UTC'de (ABD kapanışından sonra) Dukascopy'den eksik günleri indirir
+(`python -m motor.canli.spx_guncelle`: son mumun ayından 1 ay öncesinden yarına kadar aylık saatlik dosya, eski geçmiş yeniden indirilmez/yazılmaz; hata olursa servis BAŞARISIZ olur).
+```bash
+cp deploy/1l3a-spx.service deploy/1l3a-spx.timer /etc/systemd/system/
+systemctl daemon-reload && systemctl enable --now 1l3a-spx.timer
+```
+Tek seferlik tohum — iki yol: (a) adım 3'teki rsync ile `DK_SPX` kopyalayın (önerilen; geçmiş tam gelir); (b) kopyalamazsanız ilk çalıştırmayı elle, başlangıç ayıyla yapın
+(arşiv yokken `--baslangic` zorunludur, kendiliğinden tüm geçmişi indirmez):
+```bash
+sudo -u l3a /opt/1l3a/.venv/bin/python -m motor.canli.spx_guncelle --veri /var/lib/1l3a-paper/veri/mumlar --baslangic 2026-01
+```
+Kontrol: `systemctl list-timers | grep 1l3a-spx`, `journalctl -u 1l3a-spx -n 20 --no-pager` ("DK_SPX: ... -> <bugün>" satırı). Bu araç yalnız sunucu paper/kıyas dizinine yazar; depo içi araştırma `veri/mumlar` dizinini reddeder (kilit kuralı).
+Not: kıyasın sunucuda doğru dizini okuması için `motor/canli/paper.py` güncel olmalı (önceden kıyas `/opt/1l3a/veri/mumlar`'a bakıyordu).
 
 ## 5. Ağ kontrolü (kurulumdan sonra bir kez)
 ```bash

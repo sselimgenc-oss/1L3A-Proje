@@ -311,13 +311,13 @@ def _tanimlara_veri_yok_isle(tanimlar: list, esl: dict) -> None:
             t.veri_yok = "; ".join(eksik)
 
 
-def _durum_yaz(p: "Paper", kaynak, dizin: Path, simdi, servis=None, kaynak_adi="paper"):
+def _durum_yaz(p: "Paper", kaynak, dizin: Path, simdi, servis=None, kaynak_adi="paper", veri_dizini: Optional[Path] = None):
     from motor.canli import paper_durum as pdr
     p.uyarilar = p.uyarilar[-50:]
     sag = kaynak.saglik_veri() if hasattr(kaynak, "saglik_veri") else [
         {"sembol": s, "tf": tf, "son_mum_acilis": df.index[-1], "mum_indeksi": df.index} for (s, tf), df in kaynak.mumlar.items()]
     o = pdr.olustur(p, simdi, kaynak_saglik=sag, olaylar=p.olaylar, uyarilar=p.uyarilar, servis=servis, kaynak=kaynak_adi,
-                    veri_yok_notlari=[f"VERİ YOK: {t.kimlik} — {t.veri_yok}" for t in p.veri_yok])
+                    veri_yok_notlari=[f"VERİ YOK: {t.kimlik} — {t.veri_yok}" for t in p.veri_yok], veri_dizini=veri_dizini)
     from motor.canli import durum as d
     d.yaz_hepsi(dizin, ozet=o["ozet"], stratejiler=o["stratejiler"], islemler=o["islemler"], saglik=o["saglik"],
                 gecmis=o["gecmis"], ekstra=o["ekstra"])
@@ -380,7 +380,7 @@ def canli_calistir(durum_dizini: Path, tohum_dizin: Optional[Path] = None, ayar_
         for x in p.motor.islemler[bildirilen[0]:]:
             tg.gonder(tg.islem_kapandi_metni(pdr._islem_satiri(p, x)))
         bildirilen[0] = len(p.motor.islemler)
-        o = _durum_yaz(p, kaynak, durum_dizini, simdi)
+        o = _durum_yaz(p, kaynak, durum_dizini, simdi, veri_dizini=tohum_dizin)   # kıyas/güven okuması = tohum dizini (sunucuda StateDirectory)
         if n:
             p.kaydet()
         gun = str(simdi.date())

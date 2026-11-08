@@ -113,6 +113,9 @@ Ana ders: önceki sonuçlar OOS'a bakılarak seçilmiş ve kâr birkaç işlemde
   saatlik dosyalar → swing/daytrade 1h+ testleri önce; 15m/30m dakikalık veri tamamlanınca.
 
 ## Lider kararları günlüğü (karar 26)
+- 2026-11-08 (KULLANICI kararı): mevduat kıyası yıllık %30 bileşik (stratejiler/kiyas_ayar.json); yoğunlaşma uyarısı: tek sembol açık stop
+  riskinin %40'ından fazlası → panoda uyarı (yalnız uyarı, SERT_LIMITLER'e dokunmaz); sunucuya günlük DK_SPX güncellemesi (1l3a-spx.timer, 22:30 UTC).
+  Lider: paper canlı yolu kıyas/güven okumasına artık tohum dizinini veriyor (önce /opt/1l3a/veri/mumlar'a bakıyordu, sunucuda yanlıştı).
 - 2026-11-08: Pano öncelik 6 (karne/koç/çekmece) onaylandı: karne 'kalite' ekseninde PF ≥ 1.2 (ON_KAYIT) eşiği kalır;
   koç örnek sınırları (kova ≥ 5, tutma süresi grup başı ≥ 10) ve aile içi Bonferroni yeterli; tek genel puan yok.
   Pano backtest görünümü tarayıcıda (Chromium) tüm sekmelerle açıldı, JS hatası yok.
