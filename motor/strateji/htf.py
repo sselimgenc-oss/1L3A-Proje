@@ -15,6 +15,7 @@ Alt TF mumlar fonk'a hiç verilmez; fonk yalnız tamamlanmış üst TF mumların
 """
 import pandas as pd
 
+from motor.strateji.seans_takvimi import mum_suresi
 from motor.veri.depo import aralik_suresi
 from motor.veri.yeniden_ornekle import yeniden_ornekle
 
@@ -64,7 +65,7 @@ def ust_zaman(mumlar: pd.DataFrame, aralik: str, fonk):
     """-> mumlarla aynı indeksli Series/DataFrame (fonk'un döndürdüğü türde)."""
     if len(mumlar) < 2:
         raise ValueError("En az 2 mum gerekli")
-    kaynak_s = pd.Series(mumlar.index).diff().median()
+    kaynak_s = mum_suresi(mumlar.index)
     ust_s = _HAFTA if aralik == "1w" else aralik_suresi(aralik)
     if ust_s <= kaynak_s or ust_s % kaynak_s != pd.Timedelta(0):
         raise ValueError(f"{aralik} üst TF olarak kullanılamaz (alt TF {kaynak_s})")

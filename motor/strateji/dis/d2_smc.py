@@ -12,13 +12,14 @@ from motor.strateji.cikislar import CikisAyarlari
 from motor.strateji.dis import _gosterge_d2 as gd
 from motor.strateji.daytrade._ortak import cerceve, gun_sonu_uygula
 from motor.strateji.htf import ust_zaman
+from motor.strateji.seans_takvimi import mum_suresi
 from motor.strateji.temel import Strateji
 from motor.veri.depo import aralik_suresi
 
 
 def _ust_yapi(mumlar: pd.DataFrame, aralik: str, n: int) -> np.ndarray:
     """Yapı trendini (+1/-1/0) `aralik` TF'sinde hesaplayıp grafik TF'sine kapanış sonrası hizalar (lookahead yok)."""
-    kaynak = pd.Series(mumlar.index).diff().median()
+    kaynak = mum_suresi(mumlar.index)
     if kaynak == aralik_suresi(aralik):
         return gd.yapi_trendi(mumlar["yuksek"], mumlar["dusuk"], mumlar["kapanis"], n).to_numpy()
     s = ust_zaman(mumlar, aralik, lambda u: pd.DataFrame(

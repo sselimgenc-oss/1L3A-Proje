@@ -1,7 +1,7 @@
 """Olay güdümlü backtest motoru: tek sembol, aynı anda en fazla 1 pozisyon.
 
 Zamanlama
-  - Sinyal mum i KAPANIŞINDA üretilir; giriş/çıkış mum i+1 AÇILIŞINDA yapılır.
+  - Sinyal mum i KAPANIŞINDA üretilir; giriş/çıkış mum i+1 AÇILIŞINDA yapılır (istisna: gün sonu kapanışı, aşağıda).
   - Stop/hedef mum içi yüksek/düşükle kontrol edilir. Aynı mumda ikisi de değerse STOP sayılır.
   - Fiyat stopun ötesinde açılırsa (gap) dolum açılış fiyatındandır.
   - Kısmi kâr (CikisAyarlari.kismi): seviye mum içinde görülürse o fiyattan (limit, hedefle aynı komisyon
@@ -23,6 +23,10 @@ Risk
     İşlem başı risk ve kaldıraç tavanı her iki modda da uygulanır.
   - limit_modu="uygula": günlük kayıp limiti mum kapanışında aşılırsa açık pozisyon sonraki açılışta
     `stop_kayma_bps` ile kapanır (neden "gunluk_limit"); o UTC günü yeni giriş yok.
+Gün sonu kapanışı: sinyal tablosunda opsiyonel `gun_sonu_kapanis` (bool) sütunu True olan mumda açık pozisyon (o
+  mumda stop/hedef değmediyse) mumun KAPANIŞ fiyatından `kayma_bps` + taker ile kapanır (neden "gun_sonu"; zaman = mum
+  kapanışı). Seanslı veride (hisse/BIST/vadeli) gün sonu çıkışı böylece ertesi seansın açılışına (gece boşluğuna)
+  kaymaz; sütunu yalnız daytrade/_ortak.gun_sonu_kapanis_ekle koyar, kripto verisinde sütun yoktur.
 Yönlü çıkış: sinyal tablosunda opsiyonel `cikis_long` / `cikis_short` sütunları varsa long pozisyon yalnız
   `cikis_long` (veya genel `cikis`) ile, short yalnız `cikis_short` (veya `cikis`) ile kapanır. Sütunlar yoksa
   `cikis` her iki yönü kapatır (eski davranış).
@@ -39,6 +43,7 @@ import pandas as pd
 from motor.risk.limitler import SERT_LIMITLER
 from motor.strateji import cikislar as cks
 from motor.strateji import gostergeler as gst
+from motor.strateji.seans_takvimi import mum_suresi
 from motor.strateji.temel import SINYAL_SUTUNLARI, Strateji
 
 
@@ -172,6 +177,9 @@ def backtest(mumlar: pd.DataFrame, strateji: Strateji, ayarlar: MotorAyarlari = 
                            if "cikis_long" in sig.columns else False)
     s_cikis_s = s_cikis | (sig["cikis_short"].fillna(False).to_numpy(dtype=bool)
                            if "cikis_short" in sig.columns else False)
+    # Gün sonu kapanış dolumu (seanslı veri): bayraklı mumda açık pozisyon o mumun KAPANIŞINDAN kapanır.
+    s_gsk = (sig["gun_sonu_kapanis"].fillna(False).to_numpy(dtype=bool) if "gun_sonu_kapanis" in sig.columns
+             else np.zeros(len(sig), dtype=bool))
     s_zc = (sig["zaman_cikisi_mum"].to_numpy(dtype=float) if "zaman_cikisi_mum" in sig.columns
             else np.full(len(sig), np.nan))
     if np.any((s_yon != 0) & np.isnan(s_stop)):
@@ -190,7 +198,7 @@ def backtest(mumlar: pd.DataFrame, strateji: Strateji, ayarlar: MotorAyarlari = 
     rsi_dizi = (gst.rsi(mumlar["kapanis"], cks_ayar.rsi_periyot).to_numpy()
                 if cks_ayar.kar_rsi_esikleri else np.full(n, np.nan))
     son_stop_i = None         # son stop/stop_gap çıkışının mum indeksi (stop_sonrasi_bekleme_mum)
-    aralik = pd.Series(idx).diff().median() if n > 1 else pd.Timedelta(0)
+    aralik = mum_suresi(idx) if n > 1 else pd.Timedelta(0)   # mod: seans/gece boşluklarından etkilenmez
 
     if funding is not None and len(funding):
         f_zaman = funding.index
@@ -377,6 +385,14 @@ def backtest(mumlar: pd.DataFrame, strateji: Strateji, ayarlar: MotorAyarlari = 
                 poz = None
                 if neden in ("stop", "stop_gap"):
                     son_stop_i = i
+
+        # 3b) gün sonu kapanış dolumu (yalnız `gun_sonu_kapanis` bayraklı mumda; seanslı veri): stop/hedef bu mumda
+        #     değmediyse pozisyon mumun KAPANIŞ fiyatından, sinyal çıkışıyla aynı kayma ve taker komisyonuyla kapanır.
+        if poz is not None and s_gsk[i]:
+            t_c = t + aralik
+            nakit -= funding_ode(poz, t_c, dahil=False)
+            nakit += kapat(poz, piyasa_fiyati(poz, c, kayma), t_c, "gun_sonu", taker)
+            poz = None
 
         # 4) veri sonu
         if poz is not None and i == n - 1:

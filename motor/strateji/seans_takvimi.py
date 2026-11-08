@@ -175,3 +175,16 @@ def seans_kapanis_ani(index: pd.DatetimeIndex, tur: str) -> pd.DatetimeIndex:
         degerler.append(pd.NaT if dk is None else (g + pd.Timedelta(minutes=dk)).tz_localize(zon).tz_convert("UTC"))
     tablo = pd.Series(pd.DatetimeIndex(degerler, tz="UTC"), index=tekil)
     return pd.DatetimeIndex(tablo.reindex(gunler).to_numpy(dtype="datetime64[ns]")).tz_localize("UTC")
+
+
+def mum_suresi(index: pd.DatetimeIndex) -> pd.Timedelta:
+    """Mum süresi: ardışık açılış farklarının MODU (en sık fark; eşitlikte küçük olan). En az 2 mum yoksa NaT.
+
+    Medyan seanslı veride yanılır: ör. NY 09:00'a hizalı ABD hisse 4h'de farklar 4s, 20s (gece), 68s (hafta sonu)
+    olduğundan medyan 20 saat çıkar. Mod seans/gece/hafta sonu boşluklarından etkilenmez; düzenli 7/24 veride
+    (kripto, delikli olsa bile) medyanla aynıdır."""
+    if len(index) < 2:
+        return pd.NaT
+    farklar = pd.TimedeltaIndex(index[1:] - index[:-1])
+    sayim = farklar.value_counts()
+    return pd.Timedelta(sayim.index[sayim.to_numpy() == sayim.max()].min())

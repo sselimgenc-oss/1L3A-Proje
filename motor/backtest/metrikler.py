@@ -8,10 +8,14 @@ YIL_SANIYE = 365.25 * 24 * 3600
 
 
 def yillik_periyot(indeks: pd.DatetimeIndex) -> float:
+    """Yılda gözlenen mum sayısı = (mum sayısı - 1) / kapsanan süre (yıl). Seanslı veride (hisse 1h ~1760/yıl, BIST
+    ~2140, emtia ~6000) gerçek mum sıklığını verir; eski "yıl / medyan aralık" 7/24 varsayıyordu ve Sharpe/Sortino'yu
+    hissede ~2.2 kat şişiriyordu. Delikli kripto verisinde eskisinden delik oranı kadar küçüktür (ör. %0.1 eksik mum
+    -> Sharpe ~%0.05 küçük)."""
     if len(indeks) < 2:
         return np.nan
-    saniye = pd.Series(indeks).diff().median().total_seconds()
-    return YIL_SANIYE / saniye
+    saniye = (indeks[-1] - indeks[0]).total_seconds()
+    return (len(indeks) - 1) * YIL_SANIYE / saniye if saniye > 0 else np.nan
 
 
 def hesapla(islemler: pd.DataFrame, ozsermaye: pd.Series, baslangic_sermaye: float = None) -> dict:

@@ -24,6 +24,7 @@ from motor.strateji.dis._gosterge_d10d import abcd_c_durumu, diverjans_durumu, k
 from motor.strateji.dis._gosterge_d9 import ardisik_say
 from motor.strateji.gostergeler_b2 import asagi_kesis, yukari_kesis
 from motor.strateji.htf import ust_zaman
+from motor.strateji.seans_takvimi import mum_suresi
 from motor.strateji.temel import Strateji
 
 
@@ -459,7 +460,7 @@ class AcikAlanSeviyeArasi(Strateji):
         seans = pd.Series(seans_kimligi(idx, p["seans_saat"]), index=idx)
         dt = pd.Series(idx, index=idx)
         gecen = (dt - dt.groupby(seans).transform("first")).dt.total_seconds() / 60.0     # seans başından geçen dk (mum açılışı)
-        sure = float(pd.Series(idx).diff().median() / pd.Timedelta(minutes=1)) if len(idx) > 1 else 5.0
+        sure = float(mum_suresi(idx) / pd.Timedelta(minutes=1)) if len(idx) > 1 else 5.0
         ilk_bolge = gecen < p["ilk_dk"]
         ilk_h = y.where(ilk_bolge).groupby(seans).cummax()      # seans içi kümülatif (nedensel)
         ilk_l = d.where(ilk_bolge).groupby(seans).cummin()

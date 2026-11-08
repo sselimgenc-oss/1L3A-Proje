@@ -109,6 +109,7 @@ from motor.strateji.dis._gosterge_d4 import mum_gun_tahmin
 from motor.strateji.dis._gosterge_d5 import (
     cti, gun_ici_cerceve, kama, onceki_seans_hlc, onceki_seanslar_ozeti, ott, seans_bilgi, yerel_saat_kapanis)
 from motor.strateji.htf import ust_zaman
+from motor.strateji.seans_takvimi import mum_suresi
 from motor.strateji.temel import Strateji
 from motor.veri.depo import aralik_suresi
 
@@ -211,7 +212,7 @@ class OttBantlari(Strateji):
 
 # =============================================================================== Sparta WHB
 def _gecerli_ust_tfler(index, tfler, taban_s=None):
-    kaynak_s = taban_s if taban_s is not None else pd.Series(index).diff().median()
+    kaynak_s = taban_s if taban_s is not None else mum_suresi(index)
     sonuc = []
     for tf in str(tfler).replace(" ", "").split(","):
         if not tf:

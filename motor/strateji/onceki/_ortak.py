@@ -5,6 +5,7 @@ import pandas as pd
 from motor.strateji import gostergeler as g
 from motor.strateji.daytrade._ortak import seans_son_mumu
 from motor.strateji.htf import ust_zaman
+from motor.strateji.seans_takvimi import mum_suresi
 
 
 def hacim_serisi(mumlar: pd.DataFrame) -> pd.Series:
@@ -13,7 +14,7 @@ def hacim_serisi(mumlar: pd.DataFrame) -> pd.Series:
 
 
 def kaynak_suresi(index: pd.DatetimeIndex) -> pd.Timedelta:
-    return pd.Series(index).diff().median()
+    return mum_suresi(index)
 
 
 def ust_atr(mumlar: pd.DataFrame, aralik: str, periyot: int = 14) -> pd.Series:
