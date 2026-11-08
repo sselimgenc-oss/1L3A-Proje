@@ -21,6 +21,8 @@ from motor.canli import aylik_rapor as ar
 from motor.canli import dersler as ders
 from motor.canli import durum_ek as ek
 from motor.canli import guven as gv
+from motor.canli import karne as kr_
+from motor.canli import koc as kc
 from motor.canli import koni as kn
 from motor.canli import kiyas as ky
 from motor.canli import korelasyon as kr
@@ -111,7 +113,11 @@ def _islem_satiri(p, x: dict) -> dict:
             "r": d.sayi(x["r"]), "net_pnl_yerel": d.para(x["net_pnl"]), "set_katki_usd": d.para(x["net_pnl"]),
             "cikis_nedeni": x["cikis_nedeni"], "gun": ek.tsi_gun(x["cikis_zamani"]),
             # sürüm izi + giriş gerekçesi (giris_izi.py); bu özellikten önceki kayıtlarda null
-            "ayar_surumu": x.get("ayar_surumu"), "giris_gerekcesi": x.get("giris_gerekcesi")}
+            "ayar_surumu": x.get("ayar_surumu"), "giris_gerekcesi": x.get("giris_gerekcesi"),
+            # işlem boyunca en iyi/en kötü fiyat (paper_motor._mfe_mae; gerçek MFE/MAE'nin alt sınırı); izleme öncesi kayıtlarda null + neden
+            "mfe_fiyat": None if x.get("mfe_fiyat") is None else format(x["mfe_fiyat"], ".10g"), "mae_fiyat": None if x.get("mae_fiyat") is None else format(x["mae_fiyat"], ".10g"),
+            "mfe_r": d.sayi(x.get("mfe_r")), "mae_r": d.sayi(x.get("mae_r")),
+            "mfe_mae_neden": x.get("mfe_mae_neden") if "mfe_r" in x else "bu kayıt MFE/MAE izlemesinden önce kapandı"}
 
 
 def acik_pozisyonlar(p, sk: Optional[str] = None) -> list:
@@ -376,6 +382,13 @@ def olustur(p, simdi, kaynak_saglik: Optional[list] = None, olaylar: Optional[li
     indeksler = {(x["sembol"], x["tf"]): x["mum_indeksi"] for x in (kaynak_saglik or []) if x.get("mum_indeksi") is not None}
     guven = gv.veri_guveni(saglik["veri"], indeksler or None, simdi, kaynak, _z(simdi), veri_dizini=veri_dizini or gv.VERI_DIZINI)
     butun = gv.butunluk(kaynak, _z(simdi), p.ayarlar)
+    # --- karne (radar) + koç (pano öncelik 6; motor hesaplar, pano yalnız biçimler)
+    sag_set = kr_.saglik_set_kontrolleri(saglik, butun, rapor["kabul_listesi"])
+    sag_str = {t.kimlik: kr_.saglik_strateji_kontrolleri(
+        f"veri yok: {t.veri_yok}" if t.veri_yok else "calisiyor",
+        [v for v in saglik["veri"] if v["sembol"] in set(t.veri_semboller) and v["tf"] == t.tf]) for t in list(p.tanimlar) + list(p.veri_yok)}
+    karne_d = kr_.olustur(kaynak, _z(simdi), [{"kimlik": s["kimlik"], "ajan": s["ajan"], "beklenti": s["beklenti"]} for s in strat_json], set_kon, islemler, ds, sag_str, sag_set)
+    koc_d = kc.olustur(kaynak, _z(simdi), [s["kimlik"] for s in strat_json], islemler, ds, set_kon)
     # --- koni / kıyas / korelasyon / yoğunlaşma (pano öncelik 5; motor hesaplar, pano yalnız biçimler)
     nk = S["noktalar"]
     baz_gun = nk[0]["gun"] if nk else str(date.fromisoformat(bugun) - timedelta(days=1))
@@ -386,7 +399,7 @@ def olustur(p, simdi, kaynak_saglik: Optional[list] = None, olaylar: Optional[li
     kum = {t.kimlik: p.strateji_gun_tsi[t.kimlik] for t in p.tanimlar if p.strateji_gun_tsi.get(t.kimlik)}
     kor_d = kr.hesapla(kr.katki_serileri(kum, m.gun_kapanis_tsi, float(bas)), kaynak, _z(simdi), ek.GUN_KESIMI_TSI)
     yog_d = yg.olustur(kaynak, _z(simdi), ap_hepsi, E)
-    ekstra = {"koni": koni_d, "kiyas": kiyas_d, "korelasyon": kor_d, "yogunlasma": yog_d,
+    ekstra = {"karne": karne_d, "koc": koc_d, "koni": koni_d, "kiyas": kiyas_d, "korelasyon": kor_d, "yogunlasma": yog_d,
               "dersler": ds, "aylik_rapor": rapor, "maruziyet": maruziyet, "maliyet": maliyet, "reddedilen": reddedilen, "olaylar": olay_liste,
               "icgoruler": {**d._zarf("icgoruler", kaynak, _z(simdi)), "cumleler": ic}, "veri_guveni": guven, "butunluk": butun}
     return {"ozet": ozet, "stratejiler": strat, "islemler": islemler, "saglik": saglik, "gecmis": gecmis, "ekstra": ekstra,

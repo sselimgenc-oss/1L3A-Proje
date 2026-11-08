@@ -56,7 +56,7 @@ Gösterim: **Mevcut** = var / kısmen / yok. **Hesap** = nerede yapılmalı.
 **F04 — Karne (radar), 6 not + genel puan** (s03-s04; `karneHesap`)
 - Ne yapıyor: Her hesap için 0-10 notlar: **Getiri** = canlı getirinin backtest Monte Carlo konisindeki yüzdelik dilimi/10; **Risk** = 10 + maksDD·100/2 (−%20 = 0); **Beklenti** = 5 + ortR·10 (0R=5, +0,5R=10); **Şans dışılık** = PSR·10; **Deneyim** = 5·min(1,kapanan/30) + 5·min(1,gün/60); **Çeşitlendirme** = 10 − (ort|korelasyon| − 0,3)·20. Genel = mevcut notların ortalaması ×10; deneyim <5 ise "veri birikiyor". Kazanma oranı bilinçli olarak yok.
 - Veri: koni (backtest), özsermaye, işlem R'leri, hesaplar arası korelasyon.
-- Mevcut: **yok**.
+- Mevcut: **var (öncelik 6, 2026-11-08)**: `karne.json` (6 eksen; eşikler projenin kendi kuralları, eski eşikler kullanılmaz); pano radar çizer, yalnız bilgi.
 - Hesap: motor (`karne.json`); pano radar çizer.
 - Risk/not: (1) eksik notlar ortalamadan düşüyor → hesaplar arası puanlar karşılaştırılamaz (veri azken puan şişer); (2) ağırlıklar keyfi, tek sayı Goodhart riski; karne **seçim/eleme ölçütü olarak kullanılmamalı** (karar 13/24 kapıları var); (3) bizde "hesap" yerine 7 strateji (evren geçişinde ≤3/ajan); (4) Codex sürümü farklı formül kullanıyor (backtest özetinden), yani "karne" tek bir tanım değil. strateji-test-pano'daki 100/100 puanlar elle yazılmış.
 
@@ -105,7 +105,7 @@ Gösterim: **Mevcut** = var / kısmen / yok. **Hesap** = nerede yapılmalı.
 
 **F14 — Koç: öncelikli bulgular** (s13-s14; `kocBulgular()`)
 - Ne yapıyor: Sabit kontroller + iki-oran z-testi, dolar etkisine göre sıralı, "düşük/orta/yüksek istatistiksel güven" etiketli: kayıpların stoplardan gelmesi; stoptan kötü çıkış (R < −1,25: kayma/boşluk); tek varlıkta kayıp yoğunlaşması (≥%30 pay); zayıf 4 saatlik açılış bloğu (z-test); alış/satış yönü farkı; kaybedenler kazananlardan >1,5x uzun tutuluyor; beklenti konisi altı; bot gecikmesi; iki hesabın korelasyonu >0,7; en güçlü strateji. Her olumsuz bulgu: "test süresince kural değişmez, değerlendirilir."
-- Mevcut: **yok** (`icgoruler.json` basit cümleler var).
+- Mevcut: **var (öncelik 6, 2026-11-08)**: `koc.json` (kurallı tespitler, Bonferroni, risk büyütme önermez). `icgoruler.json` basit cümleler ayrıca var.
 - Hesap: motor (`koc.json`), pano kart basar.
 - Risk/not: Çok sayıda kontrol × strateji × saat bloğu → **çoklu test**; "en kötü saat bloğu" max-z ile seçiliyor (seçim yanlılığı); güven etiketi Bonferroni'siz. Bulgular **bilgi**, karar değil (karar 4: değişiklik → walk-forward → kullanıcı onayı). Eşikler (1,25R, %30, 1,5x) elle seçilmiş.
 
@@ -156,7 +156,7 @@ Gösterim: **Mevcut** = var / kısmen / yok. **Hesap** = nerede yapılmalı.
 
 **F23 — İşlem açıklaması çekmecesi** (`aciklama()`, `STR`, `CIK`)
 - Ne yapıyor: İşlem satırına tıklayınca "Neden açtı? Neden kapattı? Değerlendirme": her strateji için sabit kural metni, çıkış nedeni sözlüğü, R'ye göre yorum ("planlanan zarar, tek başına hata değil"). Kodda itiraf: "botlar işlem anındaki gösterge değerlerini kaydetmediği için kuralın genel hâli anlatılıyor."
-- Mevcut: **yok** (strateji satırında ayar var; işlem düzeyinde açıklama yok).
+- Mevcut: **var (öncelik 6, 2026-11-08)**: İŞLEMLER satırına tıklayınca çekmece (giriş gerekçesi, ayar sürümü, giriş/çıkış, R, çıkış nedeni, MFE/MAE).
 - Hesap: motor kaydı (giriş anında sinyal değerleri/gerekçe + çıkış gerekçesi `islemler.jsonl`'a eklenir); kural metni kart/aileler.json'dan. Pano yalnız biçim.
 - Not: Gösterge değerlerini girişte kaydetmek, ileride "paper ↔ backtest işlem eşlemesi"ni de kolaylaştırır.
 
