@@ -143,7 +143,9 @@ BIST = tuple("BIST_" + t for t in ("AKBNK", "ASELS", "ASTOR", "BIMAS", "EKGYO", 
                                     "TCELL", "THYAO", "TRALT", "TUPRS"))                  # GÜNCELLEME 2
 EVREN_GENEL = KRIPTO + HISSE + EMTIA + BIST                           # swing + daytrade (48)
 EVREN_SCALP = ("DK_SPX", "DK_XAU", "DK_WTI", "BTCUSDT")               # XU030 scalp (5m verisi yok) çıktı (DURUM.md BIST kararı)
-EVREN_STIL = {"swing": EVREN_GENEL, "daytrade": EVREN_GENEL, "scalp": EVREN_SCALP}
+# Kullanıcı kararı 2026-11-08 (scalp 4 enstrümanda 0/204 geçtikten SONRA): scalp da genel 48 evrende test edilir.
+# Eski 4 enstrümanlı sonuç arşivde: sonuclar/evren/2017_gelistirme/arsiv_scalp4/. DSR deneme sayısı her iki koşuyu da içerir (deneme_kaydi).
+EVREN_STIL = {"swing": EVREN_GENEL, "daytrade": EVREN_GENEL, "scalp": EVREN_GENEL}
 EVREN = EVREN_GENEL
 DISARIDA_KRIPTO = ("XMRUSDT", "LEOUSDT")
 SINIF = {**{s: "kripto" for s in KRIPTO}, **{s: "hisse" for s in HISSE}, "DK_SPX": "hisse",
