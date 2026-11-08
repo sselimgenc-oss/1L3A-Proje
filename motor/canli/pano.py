@@ -231,9 +231,9 @@ input[name=t]{position:absolute;opacity:0;pointer-events:none}
 .tabs label:hover{color:var(--yazi)}
 .tabs em{font-style:normal;background:var(--bar);border-radius:9px;padding:0 6px;margin-left:4px;color:var(--yazi)}.tabs em.k{background:var(--kotu);color:#fff}
 .sekmeler section{display:none}
-#t1:checked~.tabs label[for=t1],#t2:checked~.tabs label[for=t2],#t3:checked~.tabs label[for=t3],#t4:checked~.tabs label[for=t4],#t5:checked~.tabs label[for=t5],#t6:checked~.tabs label[for=t6]{color:var(--vurgu);border-bottom-color:var(--vurgu)}
-#t1:focus-visible~.tabs label[for=t1],#t2:focus-visible~.tabs label[for=t2],#t3:focus-visible~.tabs label[for=t3],#t4:focus-visible~.tabs label[for=t4],#t5:focus-visible~.tabs label[for=t5],#t6:focus-visible~.tabs label[for=t6]{outline:2px solid var(--vurgu);outline-offset:-2px}
-#t1:checked~.sekmeler .n1,#t2:checked~.sekmeler .n2,#t3:checked~.sekmeler .n3,#t4:checked~.sekmeler .n4,#t5:checked~.sekmeler .n5,#t6:checked~.sekmeler .n6{display:block}
+#t1:checked~.tabs label[for=t1],#t2:checked~.tabs label[for=t2],#t3:checked~.tabs label[for=t3],#t4:checked~.tabs label[for=t4],#t5:checked~.tabs label[for=t5],#t6:checked~.tabs label[for=t6],#t7:checked~.tabs label[for=t7],#t8:checked~.tabs label[for=t8]{color:var(--vurgu);border-bottom-color:var(--vurgu)}
+#t1:focus-visible~.tabs label[for=t1],#t2:focus-visible~.tabs label[for=t2],#t3:focus-visible~.tabs label[for=t3],#t4:focus-visible~.tabs label[for=t4],#t5:focus-visible~.tabs label[for=t5],#t6:focus-visible~.tabs label[for=t6],#t7:focus-visible~.tabs label[for=t7],#t8:focus-visible~.tabs label[for=t8]{outline:2px solid var(--vurgu);outline-offset:-2px}
+#t1:checked~.sekmeler .n1,#t2:checked~.sekmeler .n2,#t3:checked~.sekmeler .n3,#t4:checked~.sekmeler .n4,#t5:checked~.sekmeler .n5,#t6:checked~.sekmeler .n6,#t7:checked~.sekmeler .n7,#t8:checked~.sekmeler .n8{display:block}
 details.kd{border-bottom:1px solid var(--bar);min-width:0}details.kd:last-child{border-bottom:0}
 details.kd>summary{cursor:pointer;list-style:none;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px 10px;align-items:start;padding:10px 12px}details.kd>summary::-webkit-details-marker{display:none}
 details.kd>summary:hover{background:color-mix(in srgb,var(--vurgu) 6%,transparent)}
@@ -304,13 +304,13 @@ html.js .fbar2{display:flex}
 body{padding:0;font-size:11px}.tabs,.fbar,.fbar2,.daha,button,input[name=t],.bayat-bant{display:none!important}
 .sekmeler section{display:block!important;break-inside:avoid-page;margin-top:10px}
 .sekmeler section:before{display:block;font-weight:800;letter-spacing:.1em;border-bottom:2px solid #000;margin-bottom:6px}
-.sekmeler .n1:before{content:"ÖZET"}.sekmeler .n2:before{content:"STRATEJİLER"}.sekmeler .n3:before{content:"POZİSYON"}.sekmeler .n4:before{content:"İŞLEMLER"}.sekmeler .n5:before{content:"RİSK"}.sekmeler .n6:before{content:"SAĞLIK"}
+.sekmeler .n1:before{content:"ÖZET"}.sekmeler .n2:before{content:"STRATEJİLER"}.sekmeler .n3:before{content:"POZİSYON"}.sekmeler .n4:before{content:"İŞLEMLER"}.sekmeler .n5:before{content:"RİSK"}.sekmeler .n6:before{content:"SAĞLIK"}.sekmeler .n7:before{content:"DERSLER"}.sekmeler .n8:before{content:"RAPOR"}
 .kay{max-height:none!important}.gz,.fg{display:revert!important}
 }
 """
 
 JS = """
-var K='1l3a-sekme';try{var s=localStorage.getItem(K),r=s&&/^t[1-6]$/.test(s)&&document.getElementById(s);if(r)r.checked=true}catch(e){}
+var K='1l3a-sekme';try{var s=localStorage.getItem(K),r=s&&/^t[1-8]$/.test(s)&&document.getElementById(s);if(r)r.checked=true}catch(e){}
 Array.prototype.forEach.call(document.querySelectorAll('input[name=t]'),function(i){i.addEventListener('change',function(){try{localStorage.setItem(K,i.id)}catch(e){}})});
 (function(){var k='1l3a-tema',h=document.documentElement;try{var t=localStorage.getItem(k);if(t)h.setAttribute('data-theme',t)}catch(e){}
 document.getElementById('tema').addEventListener('click',function(){var m=h.getAttribute('data-theme');var koyu=m?m==='dark':true;var y=koyu?'light':'dark';h.setAttribute('data-theme',y);try{localStorage.setItem(k,y)}catch(e){}})})();
@@ -754,7 +754,7 @@ def _strateji_html(x: dict, sem: Optional[dict] = None) -> str:
     return f'<details class="kd"{ozn}><summary>{ust}</summary><div class="govde">{"".join(g)}</div></details>'
 
 
-SEKMELER = (("t1", "ÖZET"), ("t2", "STRATEJİLER"), ("t3", "POZİSYON"), ("t4", "İŞLEMLER"), ("t5", "RİSK"), ("t6", "SAĞLIK"))
+SEKMELER = (("t1", "ÖZET"), ("t2", "STRATEJİLER"), ("t3", "POZİSYON"), ("t4", "İŞLEMLER"), ("t5", "RİSK"), ("t6", "SAĞLIK"), ("t7", "DERSLER"), ("t8", "RAPOR"))
 
 
 def _serit(oz: dict, mr) -> str:
@@ -1325,9 +1325,92 @@ def _sekme_saglik(sg) -> str:
                + _p("Sözlük", f'<details class="ince"><summary>Terimler ({len(SOZLUK)}) — dokun/tıkla</summary>{soz}</details>', "R, PF, kill switch...", "g3"))
 
 
+# ----------------------------------------------------------------------------------------------- Dersler ve Rapor (motor yazar: dersler.json, aylik_rapor.json)
+DERS_SINIF = {"icinde": "iyi", "ustunde": "iyi", "altinda": "kotu", "ornek_az": ""}
+KALEM_ETIKET = {"gecti": ("GEÇTİ", "iyi"), "kaldi": ("KALDI", "kotu"), "bekliyor": ("BEKLİYOR", ""), "tanimsiz": ("TANIMSIZ — SORULACAK", "kotu"), "bilgi": ("bilgi", "")}
+
+
+def _oran(x: Optional[float]) -> str:
+    return f_yuzde(x, ondalik=0)
+
+
+def _p_metni(t: Optional[dict]) -> str:
+    return "—" if not t or t.get("p_deger") is None else ("p<0.001" if t["p_deger"] < 0.001 else f"p={t['p_deger']:.3f}")
+
+
+@_guvenli
+def _dersler_html(dr: dict) -> str:
+    """dersler.json (motor yazar): strateji başına gerçekleşen ↔ backtest beklentisi, testler, durum, kurallı açıklamalar."""
+    satir, acik = [], []
+    for x in dr["stratejiler"]:
+        b = x.get("beklenti") or {}
+        durum = x.get("durum_etiket") or "ölçülmedi"
+        satir.append([f"<b>{esc(kisa_kimlik(x['kimlik']))}</b>", _h(durum, DERS_SINIF.get(x.get("durum") or "", "")), esc(str(x["islem"])),
+                      esc(f"{_oran(x.get('isabet'))} ({_oran(b.get('isabet'))})"), esc(f"{f_sayi(x.get('ort_r'))} ({f_sayi(b.get('ort_r'))})"),
+                      esc(f"{f_sayi(x.get('pf_r'))} ({f_sayi(b.get('pf_r'))})"), esc(_p_metni(x.get("isabet_testi"))), esc(_p_metni(x.get("ort_r_testi")))])
+        notlar = ([x["durum_neden"]] if x.get("durum_neden") else []) + list(x.get("aciklamalar") or [])
+        if notlar:
+            acik.append(f'<div><b>{esc(kisa_kimlik(x["kimlik"]))}</b> — ' + " ".join(esc(n) for n in notlar) + "</div>")
+    sy = dr["sayim"]
+    ust = ('<div class="izgara oto">' + _kutu("Beklenti içinde", str(sy["icinde"]), "iyi") + _kutu("Altında", str(sy["altinda"]), "kotu" if sy["altinda"] else "")
+           + _kutu("Üstünde", str(sy["ustunde"])) + _kutu("Örnek az", str(sy["ornek_az"]), "", f"< {dr['min_islem']} işlem") + "</div>")
+    tab = _tablo(["Strateji", "Durum", "İşlem", "İsabet (backtest)", "Ort. R (backtest)", "PF (backtest)", "İsabet testi", "R testi"], satir, sag=(2, 3, 4, 5, 6, 7), sinif="kay")
+    tn = "".join(f'<div class="alt">Tanımsız eşik (kullanıcıya sorulacak): {esc(t["soru"])}</div>' for t in dr.get("tanimsiz_esikler", []))
+    return (ust + tab + '<div class="ic">' + "".join(acik) + "</div>" + f'<div class="alt ip">{esc(dr["yontem"])}</div>' + tn
+            + (f'<div class="alt ip">{esc(dr["referans_neden"])}</div>' if dr.get("referans_neden") else "")
+            + (f'<div class="alt ip">{esc(dr["kaynak_not"])}</div>' if dr.get("kaynak_not") else ""))
+
+
+def _sekme_dersler(dr) -> str:
+    if dr is None:
+        return _ig(_p("Dersler: canlı sonuç ↔ backtest beklentisi", _bekleyen("dersler.json", "strateji başına isabet, ortalama R, PF ve istatistiksel testler"), "", "g3", duz=True))
+    return _ig(_p("Dersler: canlı sonuç ↔ backtest beklentisi", _dersler_html(dr), "parantez: backtest · motor hesaplar", "g3", duz=True))
+
+
+@_guvenli
+def _kabul_html(k: dict) -> str:
+    satir = []
+    for x in k["kalemler"]:
+        et, sn = KALEM_ETIKET[x["durum"]]
+        satir.append([f"<b>{esc(x['ad'])}</b>", _h(et, sn), esc(x["deger"] if x.get("deger") is not None else "—"), esc(x["olcut"]), esc(x["kaynak"]),
+                      esc(x["neden"] or "")])
+    sy = k["sayim"]
+    ust = ('<div class="izgara oto">' + _kutu("Genel", {"kaldi": "KALDI", "bekliyor": "BEKLİYOR", "tamam": "TAMAM*"}[k["genel_durum"]], "kotu" if k["genel_durum"] == "kaldi" else "")
+           + _kutu("Geçti", str(sy["gecti"]), "iyi") + _kutu("Kaldı", str(sy["kaldi"]), "kotu" if sy["kaldi"] else "") + _kutu("Bekliyor", str(sy["bekliyor"]))
+           + _kutu("Tanımsız", str(sy["tanimsiz"]), "kotu" if sy["tanimsiz"] else "") + "</div>")
+    soru = "".join(f'<div class="alt">Kullanıcıya sorulacak ({esc(t["ad"])}): {esc(t["soru"])}</div>' for t in k.get("tanimsiz", []))
+    return (ust + _tablo(["Kalem", "Durum", "Değer", "Ölçüt", "Kaynak", "Not"], satir, sinif="kay")
+            + (f'<div class="alt ip">{esc(k["genel_not"])}</div>' if k.get("genel_not") else "") + soru)
+
+
+@_guvenli
+def _aylar_html(ar: dict) -> str:
+    satir = []
+    for a in sorted(ar["aylar"], key=lambda a: a["ay"], reverse=True):
+        eb, ek_ = a.get("en_iyi_strateji"), a.get("en_kotu_strateji")
+        lo = a.get("limit_olaylari")
+        satir.append([f"<b>{esc(a['ay'])}</b>" + ("" if a["tamamlandi"] else ' <span class="alt">(sürüyor)</span>'), _h(f_yuzde(a.get("getiri"), True), _isaret_sinifi(a.get("getiri"))),
+                      _h(f_para(a.get("pnl"), True), _isaret_sinifi(a.get("pnl"))), esc(f_yuzde(a.get("max_dusus"))), esc(str(a["islem_sayisi"])),
+                      esc(f_yuzde(a.get("kazanma_orani"), ondalik=0)), esc(f_sayi(a.get("ort_r"))),
+                      esc(f"{kisa_kimlik(eb['kimlik'])} {f_para(eb['katki'], True)}" if eb else "—"), esc(f"{kisa_kimlik(ek_['kimlik'])} {f_para(ek_['katki'], True)}" if ek_ else "—"),
+                      esc("—" if lo is None else f"{lo['gunluk_kayip']} / {lo['kill_switch']}")])
+    return (_tablo(["Ay (TSİ)", "Getiri", "K/Z", "Ay içi düşüş", "İşlem", "Kazanma", "Ort. R", "En iyi strateji", "En kötü strateji", "Limit olayı (günlük / kill)"],
+                   satir, sag=(1, 2, 3, 4, 5, 6), sinif="kay") + f'<div class="alt ip">{esc(ar["aylar_not"])}</div>')
+
+
+def _sekme_rapor(ar) -> str:
+    if ar is None:
+        return _ig(_p("Aylık rapor ve paper kabul listesi", _bekleyen("aylik_rapor.json", "ay bazında özet ve paper kabul kontrol listesi"), "", "g3", duz=True))
+    kabul = (_kabul_html(ar["kabul_listesi"]) if ar.get("kabul_listesi") is not None
+             else f'<div class="kart alt">{esc(ar.get("kabul_listesi_neden") or "kabul listesi yok")}</div>')
+    return _ig(_p("Paper kabul kontrol listesi", kabul, "ölçütler DURUM.md'den · motor hesaplar", "g3", duz=True)
+               + _p("Aylık rapor", _aylar_html(ar), "ay = TSİ takvim ayı", "g3", duz=True))
+
+
 def html_olustur(veri: dict, sorunlar: list, simdi: datetime) -> str:
     oz, st, sg, isl, gc = (veri.get(k) for k in ("ozet", "stratejiler", "saglik", "islemler", "gecmis"))
     mr, ml, rd, ol, ic = (veri.get(k) for k in ("maruziyet", "maliyet", "reddedilen", "olaylar", "icgoruler"))
+    dr, ar = veri.get("dersler"), veri.get("aylik_rapor")
     u = uyarilar(veri, sorunlar, simdi)
     canli_mi = bool(oz and oz["kaynak"] != "backtest")
     g = []
@@ -1356,7 +1439,7 @@ def html_olustur(veri: dict, sorunlar: list, simdi: datetime) -> str:
         f'<label for="{i}">{esc(ad)}' + (f' <em>{esc(rozet[i])}</em>' if rozet.get(i) is not None else "")
         + (' <em class="k">!</em>' if i == "t6" and sorun_var else "") + "</label>" for i, ad in SEKMELER) + "</div>")
     icerik = (_sekme_ozet(oz, st, gc, ic, sg, isl), _sekme_stratejiler(st, isl, mr), _sekme_pozisyon(oz, st, mr), _sekme_islemler(isl, st, ml, rd, oz),
-              _sekme_risk(oz, ol), _sekme_saglik(sg))
+              _sekme_risk(oz, ol), _sekme_saglik(sg), _sekme_dersler(dr), _sekme_rapor(ar))
     g.append(_suzgec_cubugu(veri))
     g.append('<div class="sekmeler">' + "".join(f'<section class="n{k}">{c}</section>' for k, c in enumerate(icerik, 1)) + "</div></div>")
     g.append('<div class="alt ayak">Pano yeni hesap yapmaz: sayılar durum dosyalarından aynen gösterilir. Saatler TSİ (Türkiye saati).</div>')

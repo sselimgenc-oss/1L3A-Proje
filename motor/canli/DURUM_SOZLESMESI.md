@@ -94,3 +94,25 @@ geçme ölçütleri `sonuclar/evren/ON_KAYIT.md`'dedir).
   backtestte `null` (yeniden oynatma emir kuyruğu tutmaz).
 - **`islemler.jsonl`**: paper satırlarında `gun` (çıkışın TSİ günü; takvim detayı bunu kullanır).
 - Eski durum dosyası (TSİ serisi yok) yüklenirse UTC günü serisi devralınır (en çok 3 saat kayma) ve `ozet.notlar`'a yazılır.
+
+## Genişletme (Dersler ve aylık rapor, 2026-11-08; sürüm 1 içinde EKLEMELİ)
+Hesap `motor/canli/dersler.py` ve `motor/canli/aylik_rapor.py` içindedir; paper ve backtest aynı fonksiyonları çağırır. Pano yalnız biçimler
+(`DERSLER` ve `RAPOR` sekmeleri). Dosya yoksa (eski motor) pano "veri yok" der. Ölçülemeyen değer `null` + neden.
+- **`dersler.json`** (`1l3a.durum.dersler`): `min_islem`, `alfa`, `referans_neden` (referans dosyası yoksa metin), `yontem`, `kaynak_not` (backtestte: referans kilitli
+  dönemi de içerir, bağımsız sınav değil), `tanimsiz_esikler[] {ad, deger_gecici, soru}`, `sayim {icinde, altinda, ustunde, ornek_az, olculmedi}`,
+  `stratejiler[] {kimlik, islem, r_olculen, isabet, ort_r, std_r, pf_r (R tabanlı), beklenti {n, isabet, ort_r, std_r, pf_r}|null,
+  isabet_testi {test, p_deger, yon, anlamli}|null, ort_r_testi {test, t, df, p_deger, yon, anlamli}|null, test_neden,
+  durum ("icinde"|"altinda"|"ustunde"|"ornek_az"|null), durum_etiket, durum_neden, beklenti_penceresi {hafta, net_bant, net_getiri, dusus_bant, max_dusus, alarm}|null,
+  aciklamalar[] (kurallı metin şablonları), cikis_nedeni_sapmalari[] {neden, islem, pay, beklenen_pay, p_deger, anlamli}}`.
+  Referans: `sonuclar/final/beklenti_islem_referansi.csv` (üretici `python -m motor.canli.dersler_referans`; `beklenti_araliklari.csv` ile aynı örneklem-dışı işlemler,
+  `veri_sonu` çıkışları hariç; araliklar csv'si ortalama R/PF taşımadığı için ayrı dosya). İsabet: kesin iki yönlü binom; ort. R: Welch t; PF test edilmez;
+  çıkış nedeni payı: neden başına binom. İşlem < `min_islem` (30) ise testler null + `test_neden`, durum `ornek_az`. Karar: ort. R anlamlıysa onun yönü, değilse isabet,
+  değilse "icinde"; 8 hf beklenti alarmı varsa (n yeterliyse) "altinda". **`min_islem` ve `alfa` DURUM.md'de tanımlı değil: geçici, kullanıcıya sorulacak.**
+- **`aylik_rapor.json`** (`1l3a.durum.aylik_rapor`): `gun_kesimi`, `aylar[] {ay (TSİ, YYYY-MM), bas_gun, bit_gun, gun_sayisi, tamamlandi, getiri, pnl (ozet.aylik_kz_ajan ile aynı sayı),
+  max_dusus (ay içi, günlük getirilerden), yesil_gun_orani, en_iyi_gun, en_kotu_gun, islem_sayisi, kazanan, kazanma_orani, ort_r, en_iyi_strateji/en_kotu_strateji {kimlik, katki},
+  ajanlar, limit_olaylari {gunluk_kayip, kill_switch}|null, notlar[]}` (son 12 ay; işlem ayı çıkışın TSİ günündendir), `aylar_not`, `kabul_listesi`, `kabul_listesi_neden`.
+  `kabul_listesi` (yalnız paper/canlı; backtestte null + neden) `{kalemler[] {id, ad, olcut, kaynak, durum ("gecti"|"kaldi"|"bekliyor"|"tanimsiz"|"bilgi"), deger, neden}, genel_durum ("kaldi"|"bekliyor"|"tamam"),
+  sayim, genel_not, tanimsiz[] {ad, soru}}`. Kalemler ve kaynakları: `sure` (≥ 56 gün; DURUM.md Aşama 4 "Süre ≥ 8 hafta" + 2026-11-07 günlüğü "en erken 2027-01-02"),
+  `set_beklenti` (set 8 hf net getiri/düşüş alarmı yok; Aşama 4 "beklenti aralığında olması" + sonuclar/final/OZET.md), `sert_limit` (karar 14/25: kill switch yok, anlık kaldıraç/stop riski/günlük kayıp
+  limit aşımı yok), bilgi kalemleri (`gunluk_limit_olayi`, `strateji_alarmlari`, `dersler_ozeti`), tanımsız kalemler (`kesintisiz_calisma`, `asgari_islem`). Eski pano eşikleri (%10 DD, PSR>%95, 30 işlem/60 gün) KULLANILMAZ.
+  "tamam" kabul kararı değildir; tanımsız kalemler kullanıcı cevabını bekler.

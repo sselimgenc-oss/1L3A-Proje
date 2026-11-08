@@ -24,6 +24,8 @@ import pandas as pd
 from motor.arastirma import beklenti as bek
 from motor.arastirma import final_set
 from motor.arastirma import secim as sec
+from motor.canli import aylik_rapor as ar
+from motor.canli import dersler as ders
 from motor.canli import durum as d
 from motor.canli import durum_ek as ek
 from motor.risk.limitler import SERT_LIMITLER
@@ -269,6 +271,12 @@ def olustur(kok: Path = KOK, baslangic=BASLANGIC, yazim_zamani=None, beklenti_cs
                   "esik_dk": d.bayat_esigi_dk(x["tf"]), "bayat": False} for x in set_["stratejiler"]],
               "servis": {"calisiyor": None, "surum": "backtest_durum/1", "not": "backtest besleyici; canlı servis yok"},
               "uyarilar": ["Bayatlık denetimi backtest kaynağında kapalı (veri bilerek statik)."]}
+    ds = ders.olustur("backtest", zaman, [x["kimlik"] for x in set_["stratejiler"]], tum_islemler, {s["kimlik"]: s["beklenti"] for s in stratejiler})
+    ekstra_dosyalar["dersler"] = ds
+    ekstra_dosyalar["aylik_rapor"] = ar.olustur(
+        kaynak="backtest", zaman=zaman, simdi=gunler[-1], donem_bas=gunler[0], aylik_kz_ajan=donem["aylik"], gunluk_tam=kz_tam, satirlar=tum_islemler,
+        risk=risk, sayaclar=ozet["sayaclar"], set_konum=set_bek, strat_konum={s["kimlik"]: s["beklenti"] for s in stratejiler}, dersler=ds,
+        saglik_durum=saglik["durum"], olaylar=None, limit_olaylari=None, kazanma_olcutu="r", gun_kesimi=ek.GUN_KESIMI_UTC_IZGARA)
     gecmis = {**d._zarf("gecmis", "backtest", zaman),
               "noktalar": [{"gun": str(t.date()), "ozsermaye": d.para(v)} for t, v in zip(gunler, ozs)]}
     return {"ozet": ozet, "stratejiler": stratejiler_json, "islemler": tum_islemler, "saglik": saglik, "gecmis": gecmis,

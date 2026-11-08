@@ -17,6 +17,8 @@ import pandas as pd
 from motor.arastirma import beklenti as bek
 from motor.backtest.motor import D
 from motor.canli import durum as d
+from motor.canli import aylik_rapor as ar
+from motor.canli import dersler as ders
 from motor.canli import durum_ek as ek
 from motor.canli import paper_takvim as tk
 from motor.canli.backtest_durum import beklenti_konumlari
@@ -220,7 +222,7 @@ def olustur(p, simdi, kaynak_saglik: Optional[list] = None, olaylar: Optional[li
     set_getiri = _getiri_serisi(S["kapanislar_utc"], bas)         # beklenti tabanı: UTC günü (backtestle aynı ızgara)
     uyari_listesi = list(uyarilar or [])
     strat_json, katkilar, perf_tum, alarmlar = [], {}, {}, []
-    hafta_katki = {}
+    hafta_katki, strat_kon = {}, {}
     for t in p.tanimlar:
         sk = t.kimlik
         pn = strateji_pnl(p, sk)
@@ -236,6 +238,7 @@ def olustur(p, simdi, kaynak_saglik: Optional[list] = None, olaylar: Optional[li
         else:
             seri = p_strateji_gunluk(p, sk)
         kon = beklenti_konumlari(seri, bek_csv[sk]) if len(seri) else {}
+        strat_kon[sk] = kon
         for hf, b in kon.items():
             for metrik in ("net_getiri", "max_dusus"):
                 if b[metrik]["alarm"]:
@@ -355,7 +358,13 @@ def olustur(p, simdi, kaynak_saglik: Optional[list] = None, olaylar: Optional[li
              "beklenti_penceresi_hafta": list(bek.PENCERE_HAFTA), "stratejiler": strat_json, "set": {"beklenti": set_kon}, **kirilim}
     gecmis = {**d._zarf("gecmis", kaynak, _z(simdi)), "noktalar": S["noktalar"]}
     saglik = saglik_olustur(p, simdi, kaynak_saglik or [], uyari_listesi, servis, kaynak)
-    ekstra = {"maruziyet": maruziyet, "maliyet": maliyet, "reddedilen": reddedilen, "olaylar": olay_liste,
+    # --- Dersler (backtest beklentisiyle karşılaştırma) + aylık rapor / paper kabul listesi (motor hesaplar, pano biçimler)
+    ds = ders.olustur(kaynak, _z(simdi), [t.kimlik for t in p.tanimlar], islemler, strat_kon)
+    limit_ev = [{"tur": o["tur"], "zaman": o["zaman"]} for o in m.limit_olaylari]
+    rapor = ar.olustur(kaynak=kaynak, zaman=_z(simdi), simdi=simdi, donem_bas=S["ilk_gun"], aylik_kz_ajan=donem["aylik"], gunluk_tam=S["gunluk_tam"],
+                       satirlar=islemler, risk=risk, sayaclar=sayac, set_konum=set_kon, strat_konum=strat_kon, dersler=ds,
+                       saglik_durum=saglik["durum"], olaylar=olay_liste, limit_olaylari=limit_ev, kazanma_olcutu="net")
+    ekstra = {"dersler": ds, "aylik_rapor": rapor, "maruziyet": maruziyet, "maliyet": maliyet, "reddedilen": reddedilen, "olaylar": olay_liste,
               "icgoruler": {**d._zarf("icgoruler", kaynak, _z(simdi)), "cumleler": ic}}
     return {"ozet": ozet, "stratejiler": strat, "islemler": islemler, "saglik": saglik, "gecmis": gecmis, "ekstra": ekstra,
             "alarmlar": alarmlar}

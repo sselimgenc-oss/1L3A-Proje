@@ -234,6 +234,9 @@ Ana ders: önceki sonuçlar OOS'a bakılarak seçilmiş ve kâr birkaç işlemde
   maliyet+stres, 2017'den veri). wf_evren uygulandı (b876c1d), 2017 verisi indi (kripto spot vekil 2017-08'den; DK 1h 2017;
   SPX/WTI 5m 2017-2019 indirmesi arka planda). Tam koşu KULLANICI "başla" DEYİNCE: --donem 2017_gelistirme ile
   ham → wf → portfoy → saglamlik → pbo → secim → holdout (tahmin: ham ~35 saat/4 çekirdek, toplam ~2 gün+).
+- 2026-11-08: Pano öncelik 2 ve 3 (motor tarafı) yazıldı: `dersler.json` (canlı ↔ backtest beklentisi; binom + Welch t) ve `aylik_rapor.json` (TSİ ay özeti + paper kabul listesi),
+  panoda DERSLER ve RAPOR sekmeleri. Kabul ölçütleri bu dosyadaki kurallardan: süre ≥ 8 hafta (en erken 2027-01-02), set 8 hf beklenti aralığı, sert limit ihlali yok. **Kullanıcıya sorulacak
+  (tanımsız):** kesintisiz çalışma sınırı; asgari işlem; strateji bazlı alarm kabulü; günlük limit tetiklenmesi ihlal mi; Dersler eşikleri (asgari işlem 30, alfa 0.05 geçici); "altında" ders kabulü bozar mı.
 
 ## Kullanıcıyı bekleyen kararlar
 - ~~Final seçim ve kilitli dönemin bir kez açılması (karar 20)~~ — kullanıcı "aç" dedi (2026-11-07), yapıldı: `sonuclar/kilit/RAPOR.md`.

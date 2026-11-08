@@ -19,7 +19,8 @@ DOSYALAR = {"ozet": "ozet.json", "stratejiler": "stratejiler.json", "islemler": 
             "saglik": "saglik.json", "gecmis": "ozsermaye_gecmisi.json"}
 # Genişletme (sürüm 1, eklemeli; pano bunlar yoksa eski görünümle çalışır): motor yazar, pano yalnız okur.
 EK_DOSYALAR = {"maruziyet": "maruziyet.json", "maliyet": "maliyet.json", "reddedilen": "reddedilen.json",
-               "olaylar": "olaylar.jsonl", "icgoruler": "icgoruler.json"}
+               "olaylar": "olaylar.jsonl", "icgoruler": "icgoruler.json",
+               "dersler": "dersler.json", "aylik_rapor": "aylik_rapor.json"}
 KAYNAKLAR = ("backtest", "paper", "canli")
 BANTLAR = ("p05_alti", "p05_p25", "p25_p50", "p50_p75", "p75_p95", "p95_ustu")
 
