@@ -150,3 +150,22 @@ Hesap `motor/canli/guven.py`, `giris_izi.py`, `kalp_atisi.py` içindedir; paper 
   `paper_state.json` içinde `kalp_atisi` alanı olarak tutulur. Yeniden başlatmada önceki kalp atışı (iki kaynağın yenisi) → başlangıç aralığı `yeniden_baslatma` olayına
   "(A -> B) = N sn" biçiminde yazılır; `kesinti_olc` bunu okur. Kalp atışı yoksa (eski durum dosyası) olay "ölçülemedi" der. Çökmede ölçü en çok 60 sn + tur süresi eksik kalır (alt sınır).
   Uyumluluk: eski `paper_state.json` (kalp_atisi/karar_meta/giris_meta yok) olduğu gibi yüklenir.
+
+## Genişletme (Pano öncelik 5: koni, kıyas, korelasyon, yoğunlaşma; 2026-11-08; sürüm 1 içinde EKLEMELİ)
+Hesap `motor/canli/koni.py`, `kiyas.py`, `korelasyon.py`, `yogunlasma.py` içindedir; paper ve backtest aynı fonksiyonları çağırır. Pano yalnız çizer/biçimler (ÖZET: koni + kıyas grafiği; RİSK: korelasyon matrisi + yoğunlaşma tabloları). Dosya yoksa pano "veri yok" der. Ölçülemeyen değer `null` + neden.
+- **`koni.json`** (`1l3a.durum.koni`): `baz_gun` (gün 0 = ilk günden önceki gün), `ufuk_gun` (112), `blok_gun` 14, `n_ornek` 10000, `tohum` 42, `yuzdelikler`, `isaretler[] {gun_no, etiket}` (56 = 8 hafta),
+  `koni[] {gun_no, gun, p05, p25, p50, p75, p95}` (birikimli net getiri, gün 0 hep 0) | null + `koni_neden`, `gerceklesen[] {gun_no, gun, getiri}` (özsermaye/başlangıç − 1),
+  `konum {gun_no, gun, getiri, p05..p95, bant, yuzdelik_sira (simüle yolların bu getiriden kötü payı, orta sıra), not}` (koni ufkundaki son gerçekleşen gün) | null + `konum_neden`,
+  `havuz {dosya, sha256, kayitli_sha256, dogrulama (eslesti|uyusmuyor|kayit_yok), tum_gun_sayisi, gun_sayisi, bas, bit, baz_gun_sonrasi_cikarilan}`, `yontem`, `sabitleme`, `notlar[]`.
+  KAYNAK/YÖNTEM: final setin örneklem-dışı günlük getirisi (WF OOS + kilitli dönem, kollar 50/50; `beklenti_araliklari.csv` set satırlarıyla AYNI seri) `sonuclar/final/beklenti_koni_havuzu.csv`
+  (üretici `python -m motor.canli.koni --havuz-yaz`; parquet'ler sunucuda yok); `beklenti.py` ile aynı hareketli blok bootstrap (14 gün, 10 000 yol, tohum 42), gün gün birikimli yüzdelikler; ad hoc genişletme yok.
+  SABİTLEME/LOOKAHEAD: yalnız `baz_gun` DAHİL öncesi havuz günleri kullanılır, gerçekleşen günler havuza girmez, koni gerçekleşenle değişmez; havuz dosyası kodda sabit sha256'ya (`HAVUZ_SHA256`) bağlıdır, uyuşmazsa koni null + neden.
+  Backtest: baz gün dönemden önceki gündür, dönemin içindeki günler havuzdan çıkarılır; paper: havuz 2026-10-30'da biter.
+- **`kiyas.json`**: `baz_gun`, `gun_kesimi`, `gunler[]` (baz dahil), `seriler[] {kimlik (paper|btc|spx|mevduat), etiket, sembol, kaynak, noktalar[] {gun, getiri|null}, son_getiri, neden}`, `taban_notu`. Hepsi baz günün sonuna normalize birikimli getiri.
+  btc = BTCUSDT, spx = DK_SPX (yerel mum arşivi, 1h yoksa 5m); gün değeri = gün sonu kesimine (bitmemiş gün için `simdi`) kadar KAPANMIŞ son mum; son mum kesimden > 5 gün eskiyse o gün null + neden (arşiv güncel değilse seri boş kalır).
+  mevduat: `yillik_oran` (null), `kullanici_girmeli`; oran `stratejiler/kiyas_ayar.json` → `mevduat_yillik_oran` (kesir, bileşik); **null iken seri çizilmez (`noktalar: []`)** — projede tanımlı oran yok, uydurulmadı: KULLANICI girmeli.
+- **`korelasyon.json`**: `kimlikler[]`, `matris[][]` (Pearson, günlük katkı getirisi: net K/Z ÷ önceki gün özsermaye; işlemsiz gün 0) | null + `neden`, `ortak_gun[][]`, `guven_araligi[][]` (Fisher z %95), `hucre_neden[] {a,b,neden}`,
+  `min_ortak_gun` (30; çift başına ortak gün < 30 → hücre null; hiçbir çift 30'a ulaşmazsa tüm matris null), sabit seri → null + neden, `ozet {cift_sayisi, olculemeyen_cift, ort_mutlak, en_yuksek, en_dusuk}`, `esik: null` (korelasyon eşiği tanımlı değil, uyarı yok).
+- **`yogunlasma.json`**: `ozsermaye`, `toplam_brut_nominal`, `toplam_stop_riski`, `semboller[]` ve `siniflar[]` (sınıf = `paper_takvim.tur`: kripto|hisse|emtia) her biri `{brut_nominal, net_nominal, brut_oran (kasaya), net_oran, brut_pay (toplam brüt içinde), stop_riski, stop_riski_oran, stop_riski_pay, strateji_sayisi, stratejiler[]}`,
+  `en_buyuk_sembol`, `en_buyuk_sinif`, `hhi_brut`, `etkin_sembol_sayisi`, `esikler {sembol_pay: null, sinif_pay: null, neden}`, `uyarilar[]` (BOŞ). Sembol/sınıf bazında projede tanımlı yoğunlaşma eşiği yoktur (SERT_LIMITLER yalnız toplam: açık stop riski ≤ %5, kaldıraç ≤ 3x); eşik uydurulmadı, yalnız bilgi.
+  Backtest: `semboller: null` + `olculmedi_neden` (yeniden oynatma pozisyon tutmaz).

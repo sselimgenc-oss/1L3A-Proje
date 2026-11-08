@@ -21,6 +21,10 @@ from motor.canli import aylik_rapor as ar
 from motor.canli import dersler as ders
 from motor.canli import durum_ek as ek
 from motor.canli import guven as gv
+from motor.canli import koni as kn
+from motor.canli import kiyas as ky
+from motor.canli import korelasyon as kr
+from motor.canli import yogunlasma as yg
 from motor.canli import paper_takvim as tk
 from motor.canli.backtest_durum import beklenti_konumlari
 from motor.risk.limitler import SERT_LIMITLER
@@ -372,7 +376,18 @@ def olustur(p, simdi, kaynak_saglik: Optional[list] = None, olaylar: Optional[li
     indeksler = {(x["sembol"], x["tf"]): x["mum_indeksi"] for x in (kaynak_saglik or []) if x.get("mum_indeksi") is not None}
     guven = gv.veri_guveni(saglik["veri"], indeksler or None, simdi, kaynak, _z(simdi), veri_dizini=veri_dizini or gv.VERI_DIZINI)
     butun = gv.butunluk(kaynak, _z(simdi), p.ayarlar)
-    ekstra = {"dersler": ds, "aylik_rapor": rapor, "maruziyet": maruziyet, "maliyet": maliyet, "reddedilen": reddedilen, "olaylar": olay_liste,
+    # --- koni / kıyas / korelasyon / yoğunlaşma (pano öncelik 5; motor hesaplar, pano yalnız biçimler)
+    nk = S["noktalar"]
+    baz_gun = nk[0]["gun"] if nk else str(date.fromisoformat(bugun) - timedelta(days=1))
+    gercek = [{"gun": x["gun"], "getiri": float(Decimal(x["ozsermaye"]) / bas - 1)} for x in nk]
+    koni_d = kn.olustur(kaynak, _z(simdi), baz_gun, gercek if nk else None)
+    kiyas_d = ky.olustur(kaynak, _z(simdi), simdi, baz_gun, [x["gun"] for x in nk[1:]], {x["gun"]: x["getiri"] for x in gercek}, ek.GUN_KESIMI_TSI,
+                         ek.GUN_KESIMI_TSI, veri_dizini=veri_dizini or ky.VERI_DIZINI)
+    kum = {t.kimlik: p.strateji_gun_tsi[t.kimlik] for t in p.tanimlar if p.strateji_gun_tsi.get(t.kimlik)}
+    kor_d = kr.hesapla(kr.katki_serileri(kum, m.gun_kapanis_tsi, float(bas)), kaynak, _z(simdi), ek.GUN_KESIMI_TSI)
+    yog_d = yg.olustur(kaynak, _z(simdi), ap_hepsi, E)
+    ekstra = {"koni": koni_d, "kiyas": kiyas_d, "korelasyon": kor_d, "yogunlasma": yog_d,
+              "dersler": ds, "aylik_rapor": rapor, "maruziyet": maruziyet, "maliyet": maliyet, "reddedilen": reddedilen, "olaylar": olay_liste,
               "icgoruler": {**d._zarf("icgoruler", kaynak, _z(simdi)), "cumleler": ic}, "veri_guveni": guven, "butunluk": butun}
     return {"ozet": ozet, "stratejiler": strat, "islemler": islemler, "saglik": saglik, "gecmis": gecmis, "ekstra": ekstra,
             "alarmlar": alarmlar}
