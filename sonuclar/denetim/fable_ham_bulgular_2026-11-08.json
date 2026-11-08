@@ -1,0 +1,516 @@
+[
+ {
+  "etiket": null,
+  "bulgular": [
+   {
+    "baslik": "Seanslı veride (ABD hissesi) 'gün sonu' mumu hiç tespit edilmiyor: day trade pozisyonları gece/hafta sonu taşınıyor, gap-devam hiç sinyal üretmiyor",
+    "dosya": "/home/user/1L3A-Proje/motor/strateji/daytrade/_ortak.py",
+    "satir": 36,
+    "ciddiyet": "yuksek",
+    "aciklama": "`seans_son_mumu` (ve aynı mantıktaki `motor/strateji/onceki/_ortak.py:46-56 gun_sonu_maskesi`) bir mumu, KAPANIŞ anı bir sonraki seans gününe düşüyorsa 'seansın son mumu' sayar. Bu kural yalnız 7/24 veride çalışır. ABD hissesi 1h/4h/30m/15m mumlarında günün son mumu 19:00-20:00 UTC civarında kapanır; `seans_saat=0` (araştırma katmanında hiçbir yerde başka değer verilmiyor: motor/arastirma ve motor/canli'de `seans_saat` geçmiyor) ile 20:00 UTC aynı güne düşer, hiçbir mum işaretlenmez. Doğrulama: sentetik 13:30-19:30 UTC indeksinde 0 işaret; gerçek DK_AAPL 1h (2023-01..06, 868 mum) 0 işaret, 4h (248 mum) 0 işaret. `seans_saat=13.5` verilirse bu kez günün İLK mumu (13:00 UTC) 'son mum' sayılıyor (77 işaret) — yine yanlış. Sonuç: `cerceve(gun_sonu=True)`, `gun_sonu_uygula`, `GunSonu` karışımı kullanan 32 dosya/≈60+ strateji (daytrade/scalp tamamı + swing gap-doldurma/gap-devam + onceki/kgt) hisse verisinde gün sonunda kapanmıyor. Somut etki: daytrade__orb DK_AAPL 1h 2023H1'de 62 işlemin 50'si gece taşındı, çıkışların 45'i 'sinyal' (yani ertesi gün). `swing/gap_devam.py:59` `gecerli = son & ...` olduğundan hisselerde hiç işlem yok (sessizce 'umutsuz'). Canlıda Binance TradFi perp 7/24 işlem gördüğü için gün sonu çıkışı UTC gece yarısı tetiklenir; araştırma ile paper davranışı ayrışır.",
+    "senaryo": "Şu an koşan scalp/daytrade evren testinde DK_AAPL/NVDA/... 15m-1h stratejileri 'gün içi' sayılırken aslında gece boşluğu riski taşıyor; PF/düşüş/stop_gap oranları ve 'ortalama tutma süresi' yanlış ölçülüyor; hisse kısa TF sonuçları (k3_hisse_kisa) ve evren karşılaştırmaları tanım dışı bir strateji ölçüyor. Gap-devam/gap-doldurma hisselerde test edilmemiş sayılmalı.",
+    "guven": "yuksek",
+    "oneri_duzeltme": "Son mum tespitini indeks aralığından değil seans takviminden yap: `motor/canli/paper_takvim.seans_maskesi(sembol, ...)` ile mumun kapanış anı (t+sure) seans dışına düşüyorsa veya sonraki mum farklı seans gününe aitse 'son mum' say. Sembol/sınıf bilgisini stratejiye vermek yerine `tf_mumlari` çıktısına `seans_son` sütunu eklenebilir (DK_/BIST_ için takvimden, kripto için eski kural). Kripto 7/24 testleri için eski kuralla birebir aynı sonucu veren regresyon testi ekle; hisse için 'her seans gününde tam 1 son mum' testi ekle."
+   },
+   {
+    "baslik": "Sert limit 'işlem başı %1' yalnız fiyat riskini kapsıyor; stop kayması ve komisyon eklenince gerçek kayıp %1'i aşıyor (kaldıraç tavanında ~%1.45)",
+    "dosya": "/home/user/1L3A-Proje/motor/backtest/motor.py",
+    "satir": 306,
+    "ciddiyet": "orta",
+    "aciklama": "`miktar = nakit * risk_oran / risk_birim`; `risk_birim = |giriş fiyatı - stop|`. Stop dolumu `piyasa_fiyati(p, stop, stop_kayma)` ile stopun ötesinde (satır 342) ve giriş+çıkış komisyonu ayrıca düşülüyor. Dar stoplu (scalp/daytrade) stratejilerde miktar kaldıraç tavanına (3x) dayanır; o durumda ek kayıp = nominal × (stop_kayma + 2×taker) = 3 × (5 bps + 10 bps) ≈ özsermayenin %0.45'i → stopla kapanan işlemde kayıp ≈ %1.45. Altcoin/ince hisse tablosunda (stop 12 bps, kayma 4-5 bps) daha da yüksek. SERT_LIMITLER yorumu 'özsermayenin en fazla %1'i riske edilir' iken motor bunu garanti etmiyor; `r` sütunu da net/(fiyat riski) olduğundan stop işlemlerinde R < -1 çıkıyor.",
+    "senaryo": "Scalp 15m BTC/ETH veya DK hisse testlerinde (DURUM: 5m'de %1 risk kaldıraç tavanına dayanıyor) ardışık 3 stop günlük %3 limitini aşar (3×1.45=%4.35), günlük limit beklenenden sık devreye girer; paper'da aynı boyutlama kullanılıyorsa gerçek kayıp kullanıcı onaylı %1'i geçer.",
+    "guven": "yuksek",
+    "oneri_duzeltme": "Boyutlamada toplam beklenen kaybı kullan: `miktar = nakit*risk_oran / (risk_birim + fiyat*(stop_kayma + 2*taker))` (DK/BIST için ayrıca bsmv dahil efektif komisyon). Alternatif: SERT_LIMITLER yorumunu 'fiyat riski' olarak açıkça yazıp kullanıcıya onaylatmak; ama karar 14 metni 'işlem başı %1' olduğu için birincisi tercih."
+   },
+   {
+    "baslik": "Sharpe/Sortino yıllıklandırması medyan mum aralığına göre: seanslı veride (hisse 1h) ~2.25 kat şişiyor",
+    "dosya": "/home/user/1L3A-Proje/motor/backtest/metrikler.py",
+    "satir": 32,
+    "ciddiyet": "orta",
+    "aciklama": "`yillik_periyot` = YIL_SANIYE / medyan(mum aralığı). ABD hissesi 1h'de medyan 1h → 8766 periyot/yıl varsayılıyor; gerçek mum sayısı ≈ 1736/yıl (DK_AAPL 2023H1: 868 mum). Sharpe sqrt(8766/1736) ≈ 2.25 kat, 4h'de (2 mum/gün, ~500/yıl vs 2191) ≈ 2.1 kat şişer. Bu metrik `motor/arastirma/tarama.py:227` (Katman 2 geniş tarama/umutsuz eleme) ve `motor/portfoy/motor.py:147` tarafından kullanılıyor. Evren kapıları (`wf_evren.kasa_metrikleri`) günlük getiri × sqrt(365) kullanıyor; orada hisse için işlem günü sayısı ~252 ise ~%20 (sqrt(365/252)) şişme var (getiri serisinin takvim/işlem günü olduğunu doğrulamadım).",
+    "senaryo": "Geniş tarama/ızgara çıktılarında ve raporlarda hisse/BIST sembollerinin Sharpe'ı kripto ile yan yana konulduğunda hisse yapay olarak üstün görünür; Sharpe'a dayalı sıralama/eleme (OLCUT min_sharpe 0.5, skor = sharpe×(1−p)) kripto aleyhine yanlı olur.",
+    "guven": "yuksek",
+    "oneri_duzeltme": "`yillik_periyot`'u gözlenen mum sayısına dayandır: `len(indeks) / ((indeks[-1]-indeks[0]) / 1 yıl)`; ya da özsermayeyi günlüğe indirip işlem günü sayısı (len(gunluk)/yıl) ile yıllıklandır. Kripto için sonuç değişmez (regresyon testi ile doğrula)."
+   },
+   {
+    "baslik": "Walk-forward'da her test penceresi bağımsız backtest: kill-switch zirvesi/durumu sıfırlanıyor, pencere sonunda pozisyon zorla kapanıyor, son mumun sinyali kayboluyor",
+    "dosya": "/home/user/1L3A-Proje/motor/backtest/walk_forward.py",
+    "satir": 69,
+    "ciddiyet": "dusuk",
+    "aciklama": "`kos()` her pencere için `backtest()`'i sıfırdan çağırır: (a) `zirve`, `kill`, `kill_asildi` motor içinde yerel olduğundan %20 kill-switch (uygula modunda durdurma, olc modunda limit_olaylari sayımı) pencere başındaki sermayeye göre ölçülür; pencereler arasına yayılan düşüş (ör. 3 pencerede toplam −%30) hiç kill sayılmaz. (b) Test penceresi sonunda açık pozisyon 'veri_sonu' ile kapanışta kapanır (taker komisyon), sonraki pencere düz başlar ve yalnız yeni sinyalle girer; swing'de haftalar süren pozisyonlar 90/180 günde bir kesilir. (c) Pencerenin son mumunda üretilen giriş sinyali (`bekleyen_giris`) hiç işlenmez. Not: `walk_forward()` fonksiyonunun motor/arastirma içinde çağıranı kalmamış (yalnız `pencereler_uret` kullanılıyor; wf_evren kendi yeniden oynatmasını yapıyor), bu yüzden güncel evren sonuçlarına etkisi dolaylı; ancak modül hâlâ 'çekirdek WF' olarak duruyor ve araçlar/pano tarafından kullanılabilir.",
+    "senaryo": "Trend takip swing stratejisinde (donchian 55, ma-kesisim 50) 180 günlük pencere sınırında pozisyon kesilip yeniden girilmediği için OOS PF sistematik olarak canlıdan sapar; kill-switch istatistiği (limit_olaylari) gerçekte daha sık tetiklenecek bir durumu az gösterir.",
+    "guven": "orta",
+    "oneri_duzeltme": "Pozisyon/zirve/kill durumunu pencereler arasında taşıyan bir 'devam' modu (backtest'e `baslangic_durumu` parametresi: açık pozisyon + zirve) ekle veya en azından 'veri_sonu' ile kapanan işlemleri OOS raporunda ayrı say ve kill-switch'i birleşik özsermaye eğrisi üzerinde sonradan hesapla."
+   }
+  ],
+  "oneriler": [
+   "Otomatik lookahead denetimi: kayıt defterindeki (motor/strateji/kayit.py) her strateji için genel bir özellik testi — rastgele n kesim noktasında `sinyaller(mumlar.iloc[:n]).iloc[-1]` ile `sinyaller(mumlar).iloc[n-1]` birebir eşit olmalı; ayrıca 'geleceği boz' testi (n sonrası mumlar rastgele değiştirilince ilk n satır değişmemeli). pivotlar.py bunu belgede vaat ediyor ama 192 strateji için tek bir ortak test yok; özyinelemeli göstergelerde (EMA adjust=False, supertrend, psar, heikin-ashi) ısınma farkı için tolerans/ısınma payı tanımlanmalı.",
+   "Aynı mumda stop ve hedef ikisi de değince 'önce stop' varsayımı tutucu ve doğru; ancak bu belirsiz mumların payını işlem tablosuna yaz (`belirsiz_mum` bayrağı). Belirsiz payı yüksek (>%10) stratejilerde sonucun varsayıma bağlı olduğu raporlansın; isteğe bağlı 'önce hedef' modu ile duyarlılık ölçülsün.",
+   "Seanslı veri için motor ve yardımcılar 'mum süresi = medyan aralık' kestirimine dayanıyor (motor.py:193, htf.py:67, metrikler.py:13, onceki/_ortak.py:15). Hisse 4h'de (2 mum/gün) medyan tesadüfen 4h çıkıyor; yarım günlerin dağılımına göre 12h/20h de çıkabilir ve htf `ust_s % kaynak_s` ValueError verip stratejiyi 'işlemsiz' bırakır. tf etiketini çağırandan açıkça geçir (`backtest(..., aralik='4h')`, `ust_zaman(..., kaynak='4h')`), kestirimi yalnız yedek olarak kullan.",
+   "yeniden_ornekle.py:51 ve htf.py:45 'eksik' eşiği tüm örneklemin medyanını (gelecek mumlar dahil) kullanıyor; etkisi küçük ama kesin nedensellik için medyanı yalnız ısınma/eğitim dönemiyle ya da sembol başına sabit bir tabloyla (hisse 1d için 78 5m mum vb.) belirle.",
+   "ABD hisse 4h kovaları `tf_mumlari`'nde NY 09:00'a hizalı iken `htf.ust_zaman` içindeki ara yeniden örnekleme UTC'ye hizalı (yerel/esik parametresi geçmiyor). Üst TF süzgeci (1d/1w) için fark yok ama 4h HTF kullanan stratejilerde iki farklı 4h tanımı oluşur; `_seans_ayari(sembol)` çıktısını ust_zaman'a da taşı.",
+   "TradFi perp canlıda funding öder, araştırmada 'funding yok' (maliyet tablosu). K1 stres koşusuna (m2/m3) DK sembolleri için sentetik funding (ör. yıllık %5-10 taşıma maliyeti, pozisyon yönünden bağımsız negatif) ekleyip sonuçların buna duyarlılığını raporla; sunucudan Binance TradFi funding geçmişi çekilebiliyorsa gerçek seriyle değiştir.",
+   "Günlük kayıp limiti ve kill-switch 'uygula' modunda kapanış mumunda tespit edilip SONRAKİ açılışta kapatılıyor; seanslı veride 'sonraki açılış' ertesi gün olabilir (gece boşluğu). Paper/canlı motorda limit aşımında anında piyasa emri veriliyorsa backtest ile ayrışır; backtest'e 'aynı mum kapanışında kapat' seçeneği ekleyip paper motoruyla aynı kuralı seç.",
+   "Funding muhasebesinde nominal, funding zamanını içeren mumun AÇILIŞ fiyatıyla (`acilis[j]`) hesaplanıyor; Binance mark fiyatı kullanır. 5m/15m mumlarda fark ihmal edilebilir, 4h/1d mumlarda funding anı mum ortasına düşerse (XAU 4s funding, 1d mum) fiyat sapması olur; varsa 5m/1h kapanışını ya da en yakın alt TF fiyatını kullan.",
+   "`_skor` profit_factor=inf (hiç zararlı işlem yok) durumunu en iyi seçiyor; eğitim penceresinde ≥min_islem ile olasılığı düşük ama sıfır değil. PF'yi zarar toplamına küçük bir taban ekleyerek (ya da min 1 zararlı işlem şartıyla) sınırlamak daha sağlam.",
+   "tests/ dizini bu çalışma kopyasında boş görünüyor (DURUM 1501+ test diyor). Testlerin repoda nerede olduğu ve CI'da koşup koşmadığı netleştirilmeli; özellikle motor için 'gap üstü stop', 'aynı mum stop+hedef', 'kısmi + stop aynı mum', 'funding sınırı' gibi altın-dosya testleri bulunduğundan emin olun."
+  ],
+  "ozet": "Backtest çekirdeği (motor/backtest/motor.py) zamanlama açısından sağlam: sinyal mum kapanışında, dolum sonraki açılışta; stop/hedef aynı mumda değerse tutucu olarak stop; gap üstü stop açılış fiyatından kayma ile; komisyon/funding/step yuvarlama Decimal ile tutarlı; göstergeler (gostergeler*, pivotlar, htf, funding sütunu) incelenen örneklerde nedensel, strateji dosyalarında shift(-k)/center/global agregasyon türü lookahead bulunmadı. Önemli bulgu: seanslı (ABD hissesi) veride 'gün sonu mumu' tespiti (daytrade/_ortak.seans_son_mumu ve onceki/_ortak.gun_sonu_maskesi) hiç çalışmıyor — gerçek DK_AAPL verisiyle doğrulandı (0 işaret; ORB'de 62 işlemin 50'si gece taşındı; gap-devam hisselerde hiç sinyal üretmiyor). Bu, şu an koşan daytrade/scalp evren testinin hisse ayağını ve paper (7/24 perp) ile araştırma tutarlılığını doğrudan etkiler. İkinci olarak işlem başı %1 risk boyutlaması stop kayması ve komisyonu dışarıda bırakıyor (kaldıraç tavanında gerçek kayıp ≈ %1.45). Metriklerde Sharpe yıllıklandırması seanslı veride ~2.2 kat şişiyor (tarama ve portföy motoru kullanıyor; evren kapıları ayrı günlük hesap kullandığından etkilenmiyor). Walk-forward modülünde pencere bağımsızlığı (kill zirvesi sıfırlanması, zorla kapanış) düşük öncelikli metodoloji sapması. Hiçbir dosya değiştirilmedi; arka plan koşusuna dokunulmadı; yalnız DK_AAPL 1h/4h 6 aylık küçük bir kontrol koşusu yapıldı."
+ },
+ {
+  "etiket": null,
+  "ozet": "Evren testi boru hattı (ham→wf→portföy→sağlamlık→pbo→seçim→holdout) genel olarak ön kayda sadık ve sızıntıya karşı iyi korunmuş: eğitim skoru yalnız pencere içinde kapanan işlemleri sayıyor (wf_evren.py:496-532), geliştirme dönemi verisi `bit` ile okumada kesiliyor ve ham_yukle holdout sızıntısını reddediyor (265-282, 756-758), maliyet tablosu hash ile sabitlenmiş, holdout bir kerelik günlükle korunuyor. Sorulan \"wf_asamasi anında kayıt → çift sayım\" riski DSR KAPISI için YOK (kapı sayımı wf parquet'teki tekil (strateji,tf) satırlarından; deneme_kaydi 'evren' satırları dışlanıyor); yalnız bilgi sütunu `dsr_sembol`/toplam_deneme'de şimdiden 3 çift kayıt var. En önemli bulgu: K5 DSR kapısı mevcut V (WF Sharpe'larının varyansı, yıllık std 0.70) ve N (222.807) ile SR0 ≈ yıllık 3.19 üretiyor; WF'yi geçen 49 stratejinin en yüksek Sharpe'ı 1.90 → DSR < 0.5 kesin → \"iyi\" ve \"iyiye yakın\" listeleri matematiksel olarak boş çıkacak, holdout anlamsızlaşacak (N=716 alınsa bile SR0=2.21). Bu ön kayıtlı bir kural; değiştirmek WF sonuçları görüldükten sonra yapılan bir yöntem değişikliği olur → kullanıcıyla konuşulup kayda geçmeden sağlamlık koşulmamalı. İkinci önemli bulgu: K2 rastgele girişte tutma süresi mum sayısı medyan aralıkla hesaplanıyor; seanslı verilerde (DK_, BIST) bu 1h'de ~5 kat şişiyor (\"aynı tutma süresi\" ilkesi bozuluyor). Diğerleri: kısmi/devam koşuda DSR N'inin bayatlaması, BIST short/TRY enflasyonu ve spot vekil dönemi short'larının gerçekçiliği, düşüş/limitlerin gerçekleşmiş özsermaye + doğrusal yol ile iyimser ölçülmesi, mührün wf parquet/kod/kartları kapsamaması, wf_evren.py'nin swing sonuçları sonrası değiştirilmiş görünmesi (mtime kanıtı).",
+  "bulgular": [
+   {
+    "baslik": "K5 DSR kapısı mevcut V ve N ile geçilemez: iyi/iyiye yakın listeleri boş çıkacak",
+    "dosya": "motor/arastirma/wf_evren.py",
+    "satir": 1183,
+    "ciddiyet": "yuksek",
+    "guven": "yuksek",
+    "aciklama": "deneme_sayisi_ayar (1183-1189) N = wf n_aday toplamı 17.262 + önceki deneme_kaydi kombinasyonları 204.758 + 787 = 222.807. saglamlik.sr_varyansi (saglamlik.py:494-497) V'yi 698 WF satırının OOS Sharpe'ından alıyor: günlük V=0.00134 (yıllık std 0.70). beklenen_maks_sr ile SR0 = yıllık 3.19 (N=18.049 alınsa 2.80, N=716 alınsa 2.21). WF'yi geçen 49 stratejinin Sharpe'ı 0.51–1.90, yakınların en yükseği 1.90 → her satırda SR < SR0 → DSR < 0.5. saglamlik_oneri (1070-1078) K5'i hem OLCUT (≥0.90) hem YAKIN_OLCUT (≥0.50) ile zorunlu kılıyor; listeler() (729-737) 'iyi' için saglam_mi, 'yakın' için yakin_kapi istiyor → iki liste de kesin boş, holdout koşacak şey bulamaz. Ayrıca tutarsızlık: önceki deneme_kaydi satırları (strateji, SEMBOL, tf) başına yani sembol çarpanlı sayılıyor, bu testin satırları ise lider kararı 7 gereği çarpansız; aynı N içinde iki farklı tanım karışıyor. V de 'tüm denemelerin SR dağılımı' değil, farklı bir popülasyonun (WF kazananlarının OOS Sharpe'ı) varyansı.",
+    "senaryo": "Sağlamlık aşaması koşulur, her satır K5'ten kalır, iyi_liste.csv ve iyiye_yakin_liste.csv boş, secim.csv boş, holdout 0 strateji. Yaklaşık 2 günlük hesaplama sonunda 'hiçbir strateji iyiye yakın bile değil' çıkar; bu, stratejilerin kötülüğünden değil kapının tanımından kaynaklanır ve kullanıcı bunu sonradan fark ederse eşik değiştirmek 'sonuç görüldükten sonra yöntem değiştirme' olur.",
+    "oneri_duzeltme": "Sağlamlık koşulmadan ÖNCE (DSR sonucu henüz görülmedi) kullanıcıya SR0 hesabını gösterip karar aldırın ve ON_KAYIT'a 'Güncelleme 6' olarak, WF sonuçlarının görüldüğünü açıkça yazarak kaydedin. Tutarlı seçenekler: (a) N ve V'yi aynı popülasyondan alın: stil×tf grubunun TÜM aday-ayar sütunlarının OOS Sharpe'ları (pbo_matrisi zaten üretiyor) → V ve N oradan; önceki denemeler ayrı bilgi; (b) K5'i ON_KAYIT'ın ilk hali (K-J) gibi yalnız rapor yapın ve PBO'yu kapı olarak bırakın; (c) kuralı aynen koruyup sonucun boş çıkacağını baştan DURUM'a yazın. Her durumda OZET'e SR0 (yıllık) değerini yazın."
+   },
+   {
+    "baslik": "K2 rastgele giriş: tutma süresi mum sayısı seanslı verilerde ~5 kat şişiyor",
+    "dosya": "motor/arastirma/wf_evren.py",
+    "satir": 965,
+    "ciddiyet": "orta",
+    "guven": "yuksek",
+    "aciklama": "rastgele_evren'de aralik = medyan(idx.diff()) (961) ve hm = rint((cikis-giris)/aralik) (965-966). DK_ ve BIST verisi seanslı: DK_AAPL 1h'de medyan aralık 1 saat ama günde ortalama 4.8 mum var (ölçüldü). 1 gün tutulan gerçek işlem için hm=24 mum çıkar, simülasyon 24 mum (~5 seans günü) tutar; 4h'ta benzer, 1d'de hafta sonu yüzünden 7/5. hi = n - hm (988) ve hk = min(hm, ...) (1001) da aynı şişkin değeri kullanır. ON_KAYIT K2 'aynı tutma süresi' der. Aynı hata eski saglamlik.islem_tanimlari'nda da var (saglamlik.py ~170).",
+    "senaryo": "Seanslı enstrümanlarda rastgele giriş kıyası, gerçek işlemden çok daha uzun tutulan pozisyonlarla yapılır (stop/hedef/sinyal çıkışı daha önce vurmazsa). Yükselen ABD hisselerinde uzun rastgele long'lar daha çok sürüklenme kazanır → long stratejiler haksız yere K2'den kalır; short stratejiler haksız yere geçer. Scalp evreninde (SPX, XAU, WTI 5m/15m) gece/hafta sonu boşlukları aynı etkiyi yapar.",
+    "oneri_duzeltme": "hm'yi zaman farkından değil indeks konumundan hesaplayın: gj = idx.get_indexer(giris), cj = idx.get_indexer(cikis); hm = max(1, cj - gj) (çıkış mumu indekste yoksa searchsorted ile). Sağlamlık henüz koşulmadığı için şimdi düzeltmek yöntem değişikliği değil, ön kayıtlı kuralın doğru uygulanmasıdır; yine de DURUM'a not düşün."
+   },
+   {
+    "baslik": "Sağlamlık aşaması kısmi/devam koşuda DSR deneme sayısını bayat bırakır",
+    "dosya": "motor/arastirma/wf_evren.py",
+    "satir": 1199,
+    "ciddiyet": "orta",
+    "guven": "yuksek",
+    "aciklama": "saglamlik_asamasi `bitmis` satırları (1199) atlar; n_deneme = deneme_sayisi_ayar(wf) (1201) o anki wf parquet'ten hesaplanır. Daha sonra wf'ye yeni satır eklenirse (scalp, portföy, --hatalari-yeniden) eski saglamlik satırlarının dsr_deneme'si küçük N ile kalır; dsr_n_deneme == güncel N kontrolü yok. ozet_yaz (wf_evren_rapor.py ~101) yalnız ilk satırın dsr_n_deneme'sini basar, farkı gizler. Ayrıca n_komb = len(wf) (1203) hatalı satırları da sayar (bilgi). Lider kararı 'hepsi en sonda birlikte' bunu süreçle önlüyor ama kod zorlamıyor; 2 saatlik kesinti/devam senaryosunda da tetiklenebilir.",
+    "senaryo": "Swing+daytrade için saglamlik koşulur (N=222.807), sonra scalp ve portföy wf eklenir (N artar), saglamlik yeniden koşulunca eski satırlar atlanır → aynı listede farklı N'lerle hesaplanmış DSR'ler karışır; kapı tutarsız uygulanır.",
+    "oneri_duzeltme": "saglamlik_asamasi'nda onceki satırların dsr_n_deneme'si güncel N'den farklıysa o satırları (en azından dsr_* sütunlarını) yeniden hesaplayın ya da açık hata verin; wf parquet'inin sha256'sını saglamlik.parquet'e yazın."
+   },
+   {
+    "baslik": "BIST hisselerinde açığa satış serbest ve ödünç/finansman maliyeti sıfır; fiyatlar TRY nominal",
+    "dosya": "motor/arastirma/evren_maliyet.py",
+    "satir": 101,
+    "ciddiyet": "orta",
+    "guven": "orta",
+    "aciklama": "Maliyet tablosu BIST için yalnız komisyon %0.04 + BSMV + kayma tanımlıyor (101-107); motor ve wf_evren BIST'te yön kısıtı uygulamıyor (kodda BIST'e özel long/short kısıtı yok; yalnız bazı kitap stratejileri kendi içinde _sadece_long). Gerçekte BIST'te açığa satış sınırlı (ödünç bulma, yukarı tik kuralı, kapanışa kadar kapatma zorunlulukları) ve TRY faizi (%40+) nedeniyle ödünç/taşıma maliyeti yüksektir. Ayrıca BIST fiyatları TRY cinsinden: 2021-2024 enflasyon kaynaklı nominal yükseliş long trend stratejilerinin R'sini şişirir; tek kasada BIST'in 'net'i diğer sınıflarla aynı birimde toplanıyor (genislik, 604-623).",
+    "senaryo": "Short ağırlıklı bir evren stratejisi BIST'te uygulanamayacak işlemlerden kâr yazar ya da TRY enflasyonuyla yükselen BIST long'ları genişlik ölçütündeki 'bist' sınıfını kârlı gösterip stratejiyi geçirir; canlıda (ayrı aracı kurum) aynı sonuç alınamaz.",
+    "oneri_duzeltme": "Raporda BIST işlemlerinin short payını ve BIST netinin toplam içindeki payını ayrıca verin; duyarlılık olarak 'BIST yalnız long' ve 'BIST USD bazlı (TRY/USD ile düzeltilmiş)' koşuları bilgi amaçlı ekleyin. Canlı BIST yolu netleşmeden BIST neti seçim/genişlik kararında ağırlık taşımamalı (kullanıcı kararı gerekir)."
+   },
+   {
+    "baslik": "Spot vekil döneminde (2017-2019) short işlemler gerçekçi değil; ON_KAYIT yalnız maliyet varsayımını kaydetti",
+    "dosya": "motor/arastirma/wf_evren.py",
+    "satir": 239,
+    "ciddiyet": "dusuk",
+    "guven": "yuksek",
+    "aciklama": "spot_vekil_bilgisi (239-262) yalnız işaret koyar; ham_gorev spot vekil döneminde yön kısıtlamaz. veri_kapsami_2017.md: ADAUSDT spot vekil 2018-04 → 2020-01-31 (187.690 mum), BNB 2017-11 → 2020-02. Bu dönemde Binance'te perp/short yoktu; ON_KAYIT Güncelleme 5.5 'maliyet perp ile aynı, funding yok' der ama short'un var sayılmasını belirtmez.",
+    "senaryo": "2018 kripto ayı piyasasında short sinyali üreten bir strateji, gerçekte açılamayacak işlemlerden OOS kârı yazar; WF'nin ilk pencereleri (swing 1d OOS 2019-11'den başlar, eğitim 2017-11'den) bu işlemlerle eğitilir.",
+    "oneri_duzeltme": "Spot vekil dönemindeki short işlem sayısını/R toplamını wf satırına yazın; isteğe bağlı 'spot dönemde short yok' duyarlılık koşusu bilgi amaçlı raporlansın."
+   },
+   {
+    "baslik": "Düşüş ve günlük/kill limitleri gerçekleşmiş özsermaye + doğrusal yol ile iyimser ölçülüyor",
+    "dosya": "motor/arastirma/secim.py",
+    "satir": 338,
+    "ciddiyet": "dusuk",
+    "guven": "yuksek",
+    "aciklama": "yeniden_oyna.mtm (338-345) açık pozisyonu işlemin NİHAİ R'si üzerinden doğrusal yolla değerler: kazanan işlem hiç zararda görünmez, kaybeden baştan itibaren zararda. Bu, işlem sonucunun ara MTM'ye sızmasıdır (yol içi lookahead) → günlük %3 ve kill %20 tetikleri gerçekten daha az. Gün sonu serisi gunluk_ozs = nakit (361) yalnız gerçekleşmiş; kasa_metrikleri max_dusus (wf_evren.py:637-647) bu seriden → haftalarca açık kalan swing işlemlerinin açık zararı düşüşe girmez. K-E bunu 'gerçekleşmiş özsermaye' olarak ön kayda almış, yani kural ihlali değil; ama ölçüt 'max düşüş ≤ %20' gerçek düşüşün alt sınırını ölçer.",
+    "senaryo": "Uzun süre açık kalan ve ara dönemde -%30 MTM'ye düşüp sonunda +1R kapanan işlemleri olan strateji, düşüş kapısını geçer ve kill switch'i hiç tetiklemez; paper'da aynı strateji kill switch ile durdurulur.",
+    "oneri_duzeltme": "Bilgi sütunu olarak mum tabanlı gerçek MTM düşüşü (ham işlemlerde giriş/çıkış arası en kötü fiyat zaten motorda hesaplanabilir; MFE/MAE paper'da var) ekleyin; seçim kuralına dokunmadan raporlayın, beklenti aralıklarında (paper alarm eşiği) MTM tabanlı düşüşü kullanın."
+   },
+   {
+    "baslik": "Holdout mührü wf_evren.parquet, saglamlik.parquet, strateji kodu ve kart dosyalarını kapsamıyor",
+    "dosya": "motor/arastirma/wf_evren_holdout.py",
+    "satir": 60,
+    "ciddiyet": "dusuk",
+    "guven": "yuksek",
+    "aciklama": "muhur_yaz (60-62) yalnız iyi_liste.csv, iyiye_yakin_liste.csv, secim.csv ve maliyet hash'ini mühürler. holdout_asamasi (154-165) koşulacak ayarı mühürsüz wf_evren.parquet'teki `secimler`den okur; ayar_coz (saglamlik.py:289-296) kart/dış ayar dosyalarını ve strateji sınıfını koşu anında çözer. pf_wf_asamasi._satirlari_yaz (wf_evren_portfoy.py:197-203) holdout başlamış olsa da wf satırlarını ezebilir (secim_ve_ozet'teki gibi bir holdout_baslamis_mi koruması yok). holdout_gunlugu.jsonl dosya silinirse 'bir kerelik' kontrolü kalkar.",
+    "senaryo": "Mühürden sonra bir stratejinin kart JSON'u/varsayılanı ya da wf satırı değişir; holdout aynı etiketle farklı bir ayarı koşar, mühür kontrolü geçer ve sonuç 'doğrulanmış' raporlanır.",
+    "oneri_duzeltme": "Mühre wf_evren.parquet, saglamlik.parquet, pbo.csv sha256'ları, kod sürümü (git commit) ve ham meta/ayar etiketlerinin hash'ini ekleyin; holdout `secimler`i mühürlü CSV'den okusun; wf/portfoy/saglamlik aşamaları holdout başladıysa yazmayı reddetsin."
+   },
+   {
+    "baslik": "deneme_kaydi 'evren' satırlarında çift kayıt var (yalnız bilgi sayımı etkilenir); kapı sayımında çift sayım yok",
+    "dosya": "motor/arastirma/wf_evren.py",
+    "satir": 934,
+    "ciddiyet": "dusuk",
+    "guven": "yuksek",
+    "aciklama": "wf_asamasi.kaydet (929-935) her biten kombinasyonu deneme_kaydi'na sembol='evren' ile yazar. Şu an 711 evren satırı var, 3 (strateji,tf) çifti tekrarlı (yeniden koşu/kesinti). deneme_sayisi_ayar (1183-1189) evren satırlarını dışlayıp N'i wf parquet'in tekil satırlarından aldığı için DSR KAPISI çift sayılmaz; toplam_deneme (1178-1180, bilgi sütunu dsr_sembol) ise tekrarları sayar. wf parquet silinip yeniden koşulsa evren satırları ikinci kez yazılır; yine yalnız bilgi sütunu şişer.",
+    "senaryo": "dsr_sembol bilgi sütunu ve OZET'teki 'eski sembol çarpanlı sayım' gerçek deneme sayısından büyük raporlanır; kapı etkilenmez.",
+    "oneri_duzeltme": "toplam_deneme'de evren satırlarını (strateji, aralik) bazında tekilleştirin ya da evren koşuları için deneme_kaydi yerine wf parquet'i tek kaynak yapın."
+   },
+   {
+    "baslik": "wf_evren.py swing WF sonuçları görüldükten sonra değiştirilmiş görünüyor (K-Q.7 DSR sayım değişikliği)",
+    "dosya": "motor/arastirma/wf_evren.py",
+    "satir": 99,
+    "ciddiyet": "dusuk",
+    "guven": "orta",
+    "aciklama": "Dosya zamanları: swing.log bitti 2026-11-08 04:31 (191 kombinasyon, 6 geçen görüldü), wf_evren.py son değişiklik 12:43, daytrade wf 12:49'da bitti. K-Q.7 '(Lider kararı 2026-11-08) DSR kapısı sembol çarpansız' kaydı kapının N'ini küçülten (gevşeten) bir yöntem değişikliği ve DURUM.md'de 'sonuç görülmeden' notu yok. Pratik etkisi yok (SR0 her iki sayımla da aşılamaz, bkz. ilk bulgu) ama ön kayıt disiplini açısından kayda değer. Git olmadığı için kanıt yalnız mtime; değişikliğin içeriği doğrulanamadı.",
+    "senaryo": "Dış denetimde 'WF sonucu görüldükten sonra kapı tanımı değişti' itirazı; değişikliğin ne zaman ve neyle kararlaştırıldığı belgelenmemişse yöntemin güvenilirliği sorgulanır.",
+    "oneri_duzeltme": "DURUM.md lider günlüğüne K-Q.7'nin saatini ve o anda hangi sonuçların görülmüş olduğunu açıkça yazın; sonraki tüm kod değişikliklerini commit + saat ile kayda alın (repo şu an git değil)."
+   },
+   {
+    "baslik": "K4 komşu ayar testi WF'den farklı evrende koşuyor (kısa geçmişli/dışarıda enstrümanlar dahil)",
+    "dosya": "motor/arastirma/wf_evren.py",
+    "satir": 1161,
+    "ciddiyet": "dusuk",
+    "guven": "yuksek",
+    "aciklama": "komsu_evren_pf(ad, ..., evren_stil(stil), ...) (1161) tam evreni alır; evren_pf (1027-1045) verisi olan her enstrümanı koşar. WF'de kisa_gecmis (ör. HYPEUSDT) ve disarida olanlar çıkarılmıştı (814-818). K4 PF'si bu enstrümanların işlemlerini de içerir; ayrıca evren_pf içindeki `except Exception: continue` (1037) hatayı saymaz (par_hata yalnız ValueError'ları sayar).",
+    "senaryo": "Komşu ayarların PF'si, WF'nin hiç görmediği HYPEUSDT 2025 işlemleriyle 1'in üstüne/altına kayar; kapı WF ile farklı bir evren için karar verir.",
+    "oneri_duzeltme": "komsu_evren_pf'e WF satırının kullandığı enstrüman listesini (ham anahtarları) geçirin; backtest hatasını par_hata'ya sayın."
+   }
+  ],
+  "oneriler": [
+   "DSR için N ve V'yi tek ve aynı popülasyondan alın: stil×tf grubunun tüm aday-ayar sütunlarının OOS Sharpe'ı (pbo_matrisi zaten üretiyor) → V = bu SR'ların varyansı, N = sütun sayısı; önceki aşamaların denemeleri ayrı bir 'bilgi' DSR'si olarak raporlansın. Böylece 'sembol çarpanı var/yok' ikilemi de kalkar.",
+   "Sağlamlık aşamasından önce ucuz bir 'ön kontrol' adımı: güncel V ve N ile SR0'ı (yıllık) hesaplayıp WF'yi geçenlerin Sharpe dağılımıyla birlikte OZET'e yazın; kapı baştan geçilemezse kullanıcı 2 günlük koşudan önce bilsin.",
+   "Holdout kapısına asgari işlem sayısı (ör. ≥ 20) ve 'holdout'a giren strateji sayısı k → şansla geçmesi beklenen sayı' satırı ekleyin; holdout'ta PF ≥ 1.1 için işlem bazlı bootstrap alt sınırı bilgi olarak verilsin.",
+   "Mum tabanlı gerçek MTM düşüşü (işlem içi en kötü fiyat, paper'daki MFE/MAE ile aynı tanım) ve 'kill sonrası yeniden başlatmalı' varyantı bilgi sütunları olarak ekleyin; paper beklenti/alarm eşikleri MTM tabanlı düşüşten türetilsin.",
+   "Seanslı verilerde 'mum sayısı' gereken tüm yerleri (K2 hm, zaman çıkışı, pencere sınırları, sharpe paydası 365) indeks konumu / seans takvimiyle hesaplayın; motor ve araştırma kodunda `pd.Series(idx).diff().median()` kullanan yerleri topluca tarayın.",
+   "Mühür kapsamını genişletin: wf_evren.parquet, saglamlik.parquet, pbo.csv sha256'ları + kod sürümü (git commit) + ham meta/ayar etiketleri; wf/portfoy/saglamlik aşamaları holdout başladıysa yazmayı reddetsin. Proje dizini şu an git değil — commit disiplini için git şart.",
+   "kilit_acilis.jsonl'a evren koşusu binlerce satır ekliyor (şu an 2142); denetim izi okunabilir kalsın diye dönem+aşama bazında tek 'açılış' kaydı + okuma sayacı yazın, satır satır kaydı ayrı dosyaya alın.",
+   "BIST için paralel bilgi koşuları: (a) yalnız long, (b) USD bazlı fiyat (TRY/USD ile düzeltilmiş). Short işlem payını ve BIST netinin toplam kâr payını wf satırına yazın; canlı BIST yolu netleşmeden BIST neti seçim kararında ağırlık taşımasın.",
+   "Spot vekil döneminde short işlem sayısı/R'si ve 'spot dönemde short yok' duyarlılık koşusu bilgi olarak raporlansın.",
+   "Hayatta kalma yanlılığı için duyarlılık: 2020 başında da büyük olan (ör. o tarihteki ilk 10 kripto / Mag7) alt evrenle WF sonuçlarının değişimini raporlayın.",
+   "WF eğitim penceresinde asgari evren toplamı işlem (swing 30) 47 enstrümanlı evrende çok düşük; seçim istikrarını (n_farkli_ayar, en_sik_pay) iyi/iyiye yakın listelerine sütun olarak ekleyin ve çok oynak seçimi uyarı olarak işaretleyin.",
+   "saglamlik_asamasi'na 'N değişti → dsr sütunlarını yeniden hesapla' ve 'wf parquet sha256 eşleşmiyor → dur' kontrolleri; pbo/secim aşamaları da kullandıkları girdilerin hash'ini çıktıya yazsın.",
+   "Evren koşuları için deneme sayısını tek kaynaktan alın (wf parquet n_aday); deneme_kaydi'na evren satırı yazmak yerine wf parquet hash'i + toplam kaydedin, böylece kesinti/yeniden koşu çift kayıt üretmez.",
+   "K2 sonucuna 'rnd_desteklenmeyen' dolu olan stratejiler için ayrı uyarı ve bu stratejilerin iyi listesine girmesi halinde K2'nin yaklaşık olduğunu OZET'te açıkça yazın.",
+   "Geliştirme döneminde 2025-11-01..07 kilitli verisi kullanılıyor (kullanıcı kararı); OZET'e bu 7 günün kullanıldığını ve holdout'un 2025-11-08'den başladığını tek cümleyle yazın."
+  ]
+ },
+ {
+  "etiket": null,
+  "ozet": "RİSK VE GÜVENLİK boyutu denetimi (yalnız okuma; arka plandaki wf_evren koşusuna dokunulmadı, yalnız testler/test_paper_motor.py çalıştırıldı: 16/16 geçti). Genel tablo iyi: SERT_LIMITLER (motor/risk/limitler.py) frozen dataclass; işlem başı %1, günlük %3, 3x, %20 kill, portföy toplam stop riski %5 değerleri hem tek-grafik motorunda (motor/backtest/motor.py:141-147) hem portföy çekirdeğinde (motor/portfoy/motor.py:208-229) ayarlar aşarsa tavana kırpılıyor; testler/test_portfoy_motor.py:233-235 değerleri sabitliyor. Paper motoru limit_modu='olc'yi reddediyor (paper_motor.py:77), kill switch kalıcı ve durum dosyasında saklanıyor, günlük limit dolunca diğer birimlerin pozisyonları hemen kapatılıyor. Stop zorunlu (tek-grafik: motor.py:177; portföy: motor.py:429/851) ve stop yalnız sıkılaşıyor; zarardaki pozisyon büyütülemiyor (motor.py:580); tek-grafik kolunda açık pozisyon varken giriş yok (motor.py:437) → motor düzeyinde martingale/DCA/stopsuz ızgara yapısal olarak imkânsız; strateji kodunda da böyle bir yol bulunmadı (d11i_github.py ekleme/DCA kısımlarını açıkça almamış). Gizli anahtar: git grep ile token/api_key/secret/BEGIN PRIVATE/telegram ve somut desenler (ghp_, sk-, AKIA, Telegram bot token biçimi) tarandı; repoda anahtar yok, yalnız .env.ornek şablonları boş alanla var; Binance için anahtar kullanılmıyor. .gitignore *.pdf, veri/pdf_metin/, veri/pdf_metin_2/, /scalp/, /swing/, /day trade/ dışlıyor; git ls-files ile doğrulandı: hiç PDF ya da pdf_metin dosyası izlenmiyor; durum/ da izlenmiyor. Bulunan somut sorunlar: (1) Telegram bot token'ı ağ hatasında log'a sızıyor (doğrulandı); (2) paper kabul listesi 'sert limit ihlali'ni motorun uyguladığı tanımdan farklı (anlık MTM) ölçüyor, ihlal olmadan 'kaldı' diyebilir; (3) kill switch/günlük limitte tetikleyen birimin kendi pozisyonu bir bar sonra kapanıyor (1d/seanslı için saatler-günler). Araştırma katmanında limit_modu='olc' kullanımı belgelenmiş ve paper'da kapalı; bir ayar/argümanla limitleri aşma yolu bulunmadı.",
+  "bulgular": [
+   {
+    "baslik": "Telegram bot token'ı ağ hatasında log'a (journald) sızıyor",
+    "dosya": "motor/canli/telegram.py",
+    "satir": 67,
+    "ciddiyet": "orta",
+    "guven": "yuksek",
+    "aciklama": "`gonder()` içinde `requests.post(f\"https://api.telegram.org/bot{token}/sendMessage\", ...)` çağrısı bir ağ hatasıyla düşerse `log.error(\"Telegram gönderim ağ hatası: %r\", e)` yazılıyor. requests/urllib3 istisnalarının repr'i tam URL'yi içerir, URL'de de bot token var. Bu oturumda doğrulandı: `requests.post('https://api.telegram.invalid/bot123456:SECRETTOKENXYZ/sendMessage')` → repr içinde `.../bot123456:SECRETTOKENXYZ/sendMessage` geçiyor. Proje kuralı 'gizli anahtar repoya girmez' karşılanıyor ama anahtar sunucu loguna (systemd journal, kalıcı) düşüyor. testler/test_paper_veri.py:204'teki kontrol kaynak kodda URL aramakla sınırlı, log çıktısını denetlemiyor.",
+    "senaryo": "Sunucuda DNS/ağ kesintisi ya da Telegram erişim sorunu olduğu her turda token düz metin olarak journald'a yazılır; `journalctl -u 1l3a-paper` okuyan herkes (ya da log dışa aktarımı) botu ele geçirir, kullanıcıya sahte 'işlem/kill switch' mesajları gönderebilir.",
+    "oneri_duzeltme": "Hata mesajından token'ı maskeleyin: `log.error(\"Telegram gönderim ağ hatası: %s\", type(e).__name__)` ya da `repr(e).replace(token, \"***\")`. Ek olarak testler/test_telegram.py'ye caplog ile 'token log çıktısında geçmez' testi ekleyin."
+   },
+   {
+    "baslik": "Paper kabul listesi 'sert limit ihlali'ni motorun uyguladığı tanımdan farklı (anlık MTM) ölçüyor; ihlal olmadan 'kaldı' verebilir",
+    "dosya": "motor/canli/aylik_rapor.py",
+    "satir": 158,
+    "ciddiyet": "orta",
+    "guven": "orta",
+    "aciklama": "Kabul kalemi `sert_limit`, paper_durum.py:219-225'teki anlık `brut_kaldirac()` ve `acik_stop_riski()` değerlerini 3.0 ve 0.05 ile karşılaştırıp aşımı 'kaldı' sayıyor. Oysa motor bu iki limiti yalnız DOLUM anında uygular: (a) portföy çekirdeği belgesinde (motor/portfoy/motor.py:33-34) 'kapanış maruziyeti bir bar boyunca geçici olarak tavanı aşabilir' deniyor ve ertesi açılışta `kaldirac_azalt` ile düzeltiliyor; (b) `acik_stop_riski` = Σ(mark − stop)·miktar·yön / özsermaye, yani kârdaki bir pozisyonda stop izlenmiyorsa 'stopa kadar risk' açık kârı da kapsar ve giriş yapılmadan %5'i aşar. Motor hiçbir kural kırmadan rapor 'sert limit ihlali: kaldı' gösterebilir; kullanıcı kararına (2026-11-08) göre bu ihlal kabulü düşürür.",
+    "senaryo": "Long giriş 100, stop 95, bütçe tam %5 (miktar = 0.01·E). Fiyat 130'a çıkar, stop sabit kalır: MTM stop riski = 35·0.01E = 0.35E, özsermaye 1.30E → oran %27 > %5. Aynı anda hiçbir giriş yapılmamış, motor tavanı aşmamış; aylık rapor ve karne 'sert limit ihlali' ile kabulü 'kaldı' yazar. Benzer şekilde kapanışta brüt 3.01x (fiyat kayması) → 'kaldıraç 3.010 > 3.000' ihlali.",
+    "oneri_duzeltme": "Kabul tanımını motorun zorladığı tanımla eşleyin: ihlal = motor olayları (kill_switch) + DOLUM anındaki aşım (motor dolumda zaten engelliyor; istenirse `kirpmalar`/`reddedilenler` ile 'tavan dayandı' bilgi kalemi). Anlık MTM aşımı için ayrı bir 'bilgi/uyarı' kalemi tutun ya da tolerans (ör. kaldıraç ≤ 3.05, stop riski için yalnız giriş anındaki değer) tanımlayın. Hangisi istenirse kullanıcıya sorulmalı; mevcut hali kabul kararını yanlış yöne çevirebilir."
+   },
+   {
+    "baslik": "Kill switch / günlük limit tetiklenince tetikleyen birimin kendi pozisyonları hemen değil, bir bar sonra kapanıyor",
+    "dosya": "motor/canli/paper_motor.py",
+    "satir": 526,
+    "ciddiyet": "dusuk",
+    "guven": "yuksek",
+    "aciklama": "`kapanis_fazi` içinde kill/günlük limit tetiklenince `_acil_kapat(..., haric_birim=b.ad)` yalnız DİĞER birimlerin pozisyonlarını son fiyattan kapatıyor; tetikleyen birim `b`nin pozisyonları satır 536/540'ta `cikis_emri` alıp o birimin bir SONRAKİ mum açılışında kapanıyor (backtest çekirdeğiyle aynı kural, belgelenmiş). Birim 1d ya da seanslı (DK_*) ise bu, kill switch'ten sonra 24 saat, hafta sonu/seans dışında ise günler boyunca açık pozisyon demek. Karar 14/23 metni 'dolunca açık pozisyon da kapanır / tüm işlemler durur' diyor.",
+    "senaryo": "Cuma 1d kapanışında DK_NVDA kolu düşüşü %20'ye taşır: kill switch tetiklenir, diğer birimler kapatılır; NVDA pozisyonu Pazartesi açılışına kadar açık kalır. Hafta sonu haberiyle açılış boşluğu olursa kayıp %20'nin belirgin üstüne çıkar (paper'da sanal, canlıda gerçek zarar).",
+    "oneri_duzeltme": "Paper/canlı yolunda (`limit_modu='uygula'`) kill switch ve günlük limitte tetikleyen birimin pozisyonlarını da aynı anda `son_kap` fiyatından `stop_kayma` ile kapatın (`_acil_kapat`'ı haric_birim=None ile çağırmak yeterli; `cikis_emri` dalı yalnız backtest/olc için kalsın). Backtest ile paper birebirliği (tekrar modu testi) bu durumda bilerek ayrışır; farkı belgeleyip test ekleyin."
+   }
+  ],
+  "oneriler": [
+   "Çökme bildirimi: `canli_calistir.tur()` yalnız `pv.BinanceHata`yı yakalıyor (paper.py:412); başka bir istisna (strateji/pandas hatası, `_acil_kapat` RuntimeError) süreci düşürür, systemd `Restart=always` + `StartLimitBurst=8/600s` sonrası servis kalıcı durur ve Telegram'a hiçbir şey gitmez (Telegram süreç içi). 'Sessiz try/except yok' kuralını bozmadan: deploy/1l3a-paper.service'e `OnFailure=1l3a-alarm.service` ekleyip bu birimden Telegram'a 'servis düştü' mesajı atın; ayrıca kalp atışı bayatlığını pano yayın timer'ında denetleyip uyarı üretin.",
+   "Kill switch'in kalıcılığı yalnız paper_state.json'a bağlı; dosya silinir/sıfırlanırsa kill kalkar. Ayrı, küçük bir `KILL` bayrak dosyası (StateDirectory altında, yalnız kullanıcı eliyle silinir) tutun ve `PaperMotor.__init__`/`yukle` bu bayrağı da okusun. Aynı mekanizma kullanıcı tetikli elle kill switch (Telegram komutu / dosya) için de kullanılabilir (repo_raporlari_OZET.md madde 6 ile uyumlu).",
+   "İşlem başı %1 riski maliyeti içermiyor: stopta gerçekleşen kayıp = %1 + nominal × (taker×2 + giriş kayması + stop kayması). Kaldıraç tavanına dayanan dar stoplu pozisyonda nominal 3×E olduğundan ek kayıp ≈ %0.5 özsermaye, yani fiili risk ~%1.5. İsterseniz boyutlandırmada payda `|px−stop| + px×(2·taker + kayma + stop_kayma)` olsun (karar 14 değeri değişmez, yalnız tanım sıkılaşır); kullanıcı onayı gerekir çünkü işlem büyüklüğünü ~%10-30 küçültür.",
+   "Araştırma katmanı (wf_tarama, wf_evren_portfoy, evren_maliyet, wf_portfoy) `limit_modu='olc'` ile koşuyor: günlük %3 ve %20 kill switch sonuçları durdurmuyor, yalnız kaydediliyor. Bu belgelenmiş ve seçimde max düşüş ≤ %20 ölçütü var; ama paper/canlıda kill switch gerçekten durduracağı için beklenti aralıkları (koni, beklenti_araliklari) iyimser kalabilir. Öneri: final/evren seçiminden sonra seçilen setin OOS getirisini bir kez `limit_modu='uygula'` ile yeniden oynatıp (secim.yeniden_oyna benzeri) 'kill switch kaç kez tetiklenirdi' bilgisini ON_KAYIT raporuna ve beklenti konisine ekleyin.",
+   "Portföy toplam stop riski bütçesi (`_acik_risk`) MTM 'mark − stop' ile hesaplandığından kârdaki, stopu izlemeyen pozisyonlar bütçeyi şişirip yeni girişleri gereksiz kırpıyor/reddediyor (muhafazakâr ama strateji davranışını değiştirir). Ya portföy stratejilerinde iz süren stop zorunlu olsun ya da bütçe tanımı 'giriş fiyatına göre stop riski' ile 'MTM riski'nden hangisi isteniyorsa kullanıcıyla netleştirilip hem motor hem rapor aynı tanımı kullansın.",
+   "Pano Cloudflare Workers'ta kimlik doğrulamasız yayımlanıyor (1l3a-pano.*.workers.dev); içerik gizli anahtar içermiyor ama hesap durumu/işlem geçmişi herkese açık. Cloudflare Access (e-posta OTP) ya da tahmin edilemeyen yol öneki ile sınırlayın; canlı aşamaya geçilirse zorunlu.",
+   "Ajanların SERT_LIMITLER'i değiştiremediğini kod seviyesinde pekiştirin: testler/test_portfoy_motor.py:233-235 değerleri sabitliyor (iyi); ek olarak `araclar/` altına git pre-commit/CI kontrolü koyup `motor/risk/limitler.py` değişikliğini DURUM.md'de 'kullanıcı kararı' satırı olmadan reddedin; ayrıca `PaperMotor` ve `backtest()` içinde `ayarlar.limit_modu == 'olc'` kullanımının çağıran modül adını (motor.arastirma.* dışı ise) ValueError ile reddetmesi düşünülebilir.",
+   "Telegram gönderiminde `r.text[:200]` ve `%r` dışında, `paper_veri.py` istemci hatalarının da URL/istek ayrıntısı loglamadığını (Binance'te anahtar yok, ama ileride canlı aşamada imzalı istek eklenecek) bir ortak `maskele()` yardımcıyla garanti altına alın; canlı aşama öncesi 'log'da anahtar yok' testi kabul listesine girsin.",
+   "Günlük limit sayacı ve kill switch olayları Telegram'a gidiyor; fakat `kaldirac_azalt`, `toplam_risk_tavani`, `kaldirac_tavani` red/kırpmaları yalnız durum dosyasında. Haftalık özetle 'kaç giriş hangi limitten kırpıldı/reddedildi' satırı eklenirse limitlerin fiilen çalıştığı kullanıcı tarafından da görülür (paper kabulünde 'limitler gerçekten zorlandı' kanıtı)."
+  ]
+ },
+ {
+  "etiket": null,
+  "bulgular": [
+   {
+    "baslik": "Canlı TradFi yeniden örneklemede 'eksik' eşiği küçük pencerenin medyanıyla hesaplanıyor: araştırmada atılan Pazar 1d emtia mumu paper'da yayımlanıyor",
+    "dosya": "motor/canli/paper_veri.py",
+    "satir": 222,
+    "ciddiyet": "orta",
+    "guven": "yuksek",
+    "aciklama": "`mumlar()` TradFi için Binance 5m mumlarını seans süzgecinden geçirip `yeniden_ornekle(..., eksikleri_at=True, esik_orani=0.25)` ile birleştiriyor. Eşik, o çağrıdaki kovaların MEDYANININ %25'idir; `CanliKaynak.guncelle` (paper_canli.py:102) başlangıcı `(son_mum + a).floor('D')` olan 1-2 günlük pencere verir, araştırma (`tf_mumlari`, 1h -> 1d) ise yıllarca verinin medyanını kullanır. Emtia maskesi Pazar 18:00 NY sonrasını seans sayar; Pazar'ın UTC günü 12-24 adet 5m mum içerir. Pazartesi 00:00:03 UTC turunda pencerede yalnız Pazar kovası var -> medyan = kendisi -> eksik değil -> `kapanis <= simdi` -> Pazar 1d barı yayımlanır. Yerel veriyle doğruladım: DK_XAU ve DK_WTI 2024-03-10 (Pazar) barı canlı yolda ÜRETİLİYOR, araştırma yolunda (1h->1d) YOK. Aynı mekanizma tek kovalı pencerelerde (hafta içi her gün) borsa kesintisi olan günü de 1-2 mumla 'tam gün' sayar; araştırma atardı.",
+    "senaryo": "pf__kanarya|hisse_emtia|1d ve pf__rotasyon|hepsi|1d her Pazartesi 00:00 UTC'de bir ek satır işler: strateji geri bakış pencerelerinde (lookback_gun, kanal/ortalama) fazladan 1 bar, emtiada 1 saatlik verinin 'günlük' OHLC'siyle stop/hedef kontrolü, hedef ağırlık kararının bir gün öne kayması, günlük limit/beklenti gün sayımında ek gün. Backtest ile aynı sinyal aynı sonucu vermez; Dersler/beklenti karşılaştırması bunu strateji sapması gibi okur.",
+    "oneri_duzeltme": "Eşiği pencere medyanından değil sabit/geçmişten türetilen beklenen mum sayısından hesapla (örn. tohum verisinden sembol+tf başına medyan kova sayısını bir kez al ve `yeniden_ornekle`'ye mutlak eşik ver), ya da canlı yolda da araştırmayla aynı uzun pencereyi (en az son N tam gün) yeniden örnekle. Test: aynı 5m veriden `tf_mumlari` ile `pv.mumlar` çıktısının indeks eşitliğini (hafta sonu dahil) doğrulayan birim testi ekle."
+   },
+   {
+    "baslik": "Çok sembollü birimde satır, semboller tamamlanmadan yayımlanıyor; TradFi 300 sn kısıtlayıcı hafta sonundan sonra sembolleri birbirinden ayırıyor",
+    "dosya": "motor/canli/paper_kaynak.py",
+    "satir": 35,
+    "ciddiyet": "orta",
+    "guven": "orta",
+    "aciklama": "`_eksen` birimin sembollerinin indeks BİRLEŞİMİNİ alıp kapanışı <= simdi olan her t için satır üretir; `satirlar` o anda mumu olmayan sembole None verir ve `b.son_t = t` ilerler. Bir sembolün t barı sonra gelirse `k > son_t` süzgeci yüzünden motor o barı asla işlemez (yalnız strateji geçmişine girer). Canlı kaynakta bu gecikme yapısal: `guncelle` (paper_canli.py:99-101) TradFi serilerini en çok 300 sn'de bir REST'e sorar ve `son_kontrol` her seri için ayrı tur zamanına ayarlanır. Hafta içi `sonraki_kapanis` kapısı serileri kapanış anına senkron tutar; ama Cuma barından sonra `sonraki_kapanis` Pazar 00:00 olur ve Pazar-Pazartesi boyunca her 300+ sn'de bir sorgu yapılır; tur zamanlarındaki kayma (REST gecikmesi, _durum_yaz süresi) `son_kontrol` fazını 5 dk ızgarasından kaydırır. Salı 00:00:03 turunda hisse serileri `simdi - son_kontrol < 300` ile atlanabilirken emtia (Pazar barı yayımlandığı için kapanış kapısıyla senkron) Pazartesi barını getirir -> Pazartesi satırı hisse=None ile işlenir. Aynı risk, `guncelle` döngüsünün bir sembolde BinanceHata ile yarıda kesilmesinden sonra da oluşur (önceki semboller güncellenmiş, sonrakiler değil; sonraki tur `adim` çalışır).",
+    "senaryo": "pf__kanarya: Pazartesi satırında hisse pozisyonlarının mum içi stop kontrolü yapılmaz (o barın düşüğü stopu geçmiş olsa bile pozisyon açık kalır), hisse için verilen hedef ağırlık emri bir gün gecikir, strateji kararı hisseler için Cuma kapanışıyla verilir. Backtest aynı günde tüm sembolleri görür.",
+    "oneri_duzeltme": "Satırı yalnız birimin TÜM sembollerinde t barı varken (ya da kapanıştan sonra bir zaman aşımı, örn. 10 dk, geçince) yayımla; eksik sembol varsa `veri_bosluk` olayı yaz. `guncelle`'de 300 sn kısıtlayıcıyı kapanış anında (simdi >= sonraki_kapanis sonrası ilk turda) devre dışı bırak ya da tüm TradFi serilerini aynı turda sorgula. `guncelle` bir sembolde hata alırsa o tur `adim` çağrılmasın (zaten öyle) AMA kısmen güncellenen seriler için de aynı kural uygulanmalı."
+   },
+   {
+    "baslik": "tur() içinde BinanceHata dışındaki her istisna süreci düşürüyor; systemd 8 denemeden sonra servisi kalıcı durduruyor, uyarı yok",
+    "dosya": "motor/canli/paper.py",
+    "satir": 412,
+    "ciddiyet": "orta",
+    "guven": "yuksek",
+    "aciklama": "`ana()` döngüsü yalnız `pv.BinanceHata` yakalar. `tur()` içinden çıkabilecek diğer hatalar (strateji `sinyaller` ValueError, `_karar` RuntimeError 'portföy ekseni son satırı ... != işlenen satır', durum doğrulama `DurumHatasi`, Telegram/pandas KeyError vb.) `asyncio.run`'dan dışa çıkar, süreç biter; `kalp_at(durdu=True)` ve `kaydet()` (satır 422-423) finally içinde olmadığından çalışmaz. deploy/1l3a-paper.service: Restart=always, RestartSec=15, StartLimitIntervalSec=600, StartLimitBurst=8 -> hata deterministikse (aynı satır tekrar işlenir) ~2 dakikada 8 çökme, systemd birimi 'failed' durumuna alır ve bir daha başlatmaz. Her başlatmada `tg.gonder(baslangic_metni)` gider (8 'Paper motoru çalışıyor' mesajı), sonra sessizlik; durma için Telegram uyarısı yok, kalp atışı dosyası eskir ama onu izleyen yok.",
+    "senaryo": "Tek bir stratejide tek bir mumda istisna (örn. yeni listelenen/ayrışan veri, NaN'lı satır) 7 stratejinin tamamını paper'dan düşürür; açık pozisyonlar stop kontrolü olmadan 'donar', kullanıcı pano/Telegram'dan fark etmeden günler geçebilir (günlük özet de gelmez).",
+    "oneri_duzeltme": "tur() çağrısını genel `except Exception` ile sar: olay yaz + Telegram 'motor hatası' uyarısı gönder + aynı hata N kez tekrarlarsa çık (ya da hatalı birimi 'durdu' işaretleyip diğerlerine devam et). `finally` içinde kalp atışı/kaydet. systemd tarafında WatchdogSec + sd_notify ya da kalp_atisi.json yaşını izleyen bir timer ile Telegram uyarısı."
+   },
+   {
+    "baslik": "Yeniden başlatmada bir strateji 'veri yok' olursa kayıtlı durum yüklenemez: tüm paper açılamaz",
+    "dosya": "motor/canli/paper_motor.py",
+    "satir": 649,
+    "ciddiyet": "orta",
+    "guven": "orta",
+    "aciklama": "`canli_calistir` exchangeInfo'da PERPETUAL/TRADIFI_PERPETUAL + TRADING olmayan sembolü olan stratejiyi `veri_yok` işaretler ve `Paper.__init__` (paper.py:54) bu tanımları birimlerden çıkarır; kolları `tum_kollar`a girmez. Sonra `yukle()` -> `durum_yukle`: `d['kol']` içinde o stratejinin kol kimliği vardır -> satır 649-650 `ValueError('durum dosyasında bilinmeyen kol')`; o stratejide açık pozisyon varsa daha önce satır 642 `kollar[pd_['kol']]` KeyError. Hata yakalanmaz (bkz. önceki bulgu) -> çökme döngüsü -> servis kalıcı durur. Binance vadeli sembol durumları TRADING dışına geçebilir (SETTLING/PENDING_TRADING/CLOSE; TradFi perp'lerde bölünme/kurumsal olay ya da geçici askıya alma).",
+    "senaryo": "Örn. NVDAUSDT geçici olarak TRADING dışına düşer ve servis o sırada yeniden başlar (git pull/deploy): yalnız fraktal-alligator değil 7 strateji birden durur; durum dosyası da elle düzeltilmeden yüklenemez.",
+    "oneri_duzeltme": "`durum_yukle`de bilinmeyen/veri-yok kolun durumunu hata yerine 'askıda' olarak taşı (pozisyonu son bilinen fiyatla işaretle, yeni emir verme, olay + Telegram uyarısı); ya da veri_yok tanımları yine birime ekle ama karar üretme. En azından bu durumda açık hata mesajını olaya/Telegram'a yaz."
+   },
+   {
+    "baslik": "--ayar-guncelle ile portföy sütunları (pf_sutunlar) eski kayıttan alınıyor; yeni ayarın sembol kümesi farklıysa yeni semboller sessizce yok sayılır",
+    "dosya": "motor/canli/paper.py",
+    "satir": 251,
+    "ciddiyet": "orta",
+    "guven": "orta",
+    "aciklama": "`yukle()` portföy stratejisi için `self.pf_sutunlar[t.kimlik] = d['pf_sutunlar'][t.kimlik]` atar ve bu sütunlarla kollar kurar (karşılaştırma yok). Yeni ayar `ayar_nesnesi` -> `gerekli_semboller` ile farklı alt evren verebilir (aday listesinde alt evren koşu evreniyle kesiştirilir; csv:N satırlarının alt evreni farklı olabilir). `pf_karar` (paper_sinyal.py:149-152) kararları `h.columns` (yeni nesnenin sütunları) ile anahtarlar; `_kararlari_uygula` (paper_motor.py:550-551) yalnız `b.kollar` (eski sütunlar) üzerinde döner: yeni sütunların kararları hiç uygulanmaz, eski sütunlardan yeni nesnede olmayanlar `{}` alır -> w=NaN -> hedef emri üretilmez, pozisyon varsa süresiz açık kalır (yalnız stop çalışır). Hata/uyarı yok.",
+    "senaryo": "Yenileme tarihinde `guncel_ayar` kesit_ls için farklı alt evrenli bir aday seçer, kullanıcı onaylar ve `--ayar-guncelle` ile başlatır: paper 'yeni ayarla' çalışıyor görünür ama eski sembol kümesinde, yeni semboller hiç işlem görmez; backtest/beklenti ile paper tamamen ayrışır.",
+    "oneri_duzeltme": "`--ayar-guncelle` yolunda `pf_sutunlar`ı yeni nesneden yeniden türet (`baslat`taki keşif), eski kümeyle farkını hesapla; çıkarılan sembollerdeki açık pozisyonları 'ayar_degisti' nedeniyle kapat ya da açık uyarıyla kullanıcıya bırak; `_kararlari_uygula` kararlarda olup kolda olmayan anahtar görürse hata ver."
+   },
+   {
+    "baslik": "Günlük Telegram özeti 00:10 UTC'de (03:10 TSİ) gidiyor ve her yeniden başlatmada bir kez daha gidiyor; TSİ gün kesimiyle 'Bugün' yalnız 3 saati gösteriyor",
+    "dosya": "motor/canli/paper.py",
+    "satir": 387,
+    "ciddiyet": "dusuk",
+    "guven": "yuksek",
+    "aciklama": "Koşul `simdi.hour >= 0 and simdi.minute >= 10 and son_ozet[0] != gun`: `hour >= 0` her zaman doğru, `gun` UTC günü -> ilk tur dakika >= 10 olduğunda (00:10 UTC) gönderilir. `son_ozet` bellekte (None ile başlar) -> servis ne zaman yeniden başlasa (dakika >= 10 ise) hemen bir 'günlük özet' daha gider. Özet metni `gun_pnl`'i TSİ gününe göre verir (paper_durum.py:202-205); 03:10 TSİ'de 'Bugün' = gece 00:00 TSİ'den beri 3 saat, önceki tam günün K/Z'si hiçbir mesajda yer almaz. DURUM.md'de açık soru olarak duruyor; kod bugünkü haliyle yanıltıcı sayı üretir.",
+    "senaryo": "Kullanıcı her sabah 'Bugün: +0,00 $' görür; gerçek günlük sonuç (önceki TSİ günü) özette yok. Deploy sonrası gün içinde fazladan özet mesajı.",
+    "oneri_duzeltme": "Özet zamanını TSİ ile tanımla (örn. 00:10 TSİ ya da kullanıcının seçeceği saat), metne 'dün (TSİ)' tam gün K/Z'yi ekle (`gunluk_kz` serisinin son kapanmış günü); `son_ozet` gününü paper_state'e yaz ki yeniden başlatma tekrarlamasın."
+   },
+   {
+    "baslik": "TradFi perp'lerde paper funding tahsil ediyor, araştırma/backtest verisinde funding yok: sistematik paper≠backtest farkı",
+    "dosya": "motor/canli/paper_canli.py",
+    "satir": 76,
+    "ciddiyet": "dusuk",
+    "guven": "orta",
+    "aciklama": "`baslat` ve `guncelle` tüm `self.semboller` için `funding_guncelle` çağırır (DK_ dahil, Binance sembolüne eşlenerek) ve motor `_funding_ode` ile açık pozisyonlara uygular. Dukascopy tabanlı araştırmada DK_ funding dosyası yok (DURUM karar 22: 'Dukascopy verisinde funding yok'), kilit testi/beklenti aralıkları fundingsiz hesaplandı. Binance TradFi perp'leri funding uygularsa paper'daki TradFi işlemlerinin net K/Z'si backtestten sistematik sapar ve `dersler.json`/beklenti karşılaştırması bunu strateji sapması olarak raporlar.",
+    "senaryo": "pf__kanarya/pf__rotasyon günlerce tutulan hisse/emtia pozisyonlarında 8 saatte bir funding öder; 8 haftalık değerlendirmede 'beklenti altı' alarmı stratejiden değil maliyet modelinden gelir.",
+    "oneri_duzeltme": "Karar verilmeli: (a) TradFi funding'i backtestle uyum için kapat (ya da `maliyet_log`'da ayrı tut ve dersler karşılaştırmasında funding'siz net kullan), ya da (b) araştırma maliyet modeline TradFi funding tahmini ekle. Hangisi seçilirse DURUM/ON_KAYIT'a yazılsın."
+   },
+   {
+    "baslik": "TradFi serilerinde veri boşluğu hiç olay olmuyor (`tk_acik` 'kripto mu' döndürüyor); `ws_dogrula` hiç çağrılmıyor",
+    "dosya": "motor/canli/paper_canli.py",
+    "satir": 133,
+    "ciddiyet": "dusuk",
+    "guven": "yuksek",
+    "aciklama": "`tk_acik(s)` adı 'piyasa açık mı' derken `tk.tur(s) == 'kripto'` döndürür; `baslat` satır 68'deki tohum+REST boşluk uyarısı DK_ serilerinde asla yazılmaz (tohum Dukascopy sonu ile Binance TradFi geçmişi arasındaki aylık boşluk sessiz kalır). `guncelle` satır 105'te boşluk tespiti de yalnız kripto için. Dolayısıyla `veri_bosluk` olayı TradFi'de hiç üretilmez; `aylik_rapor.kesinti_olc` (kesinti <= 24 saat kuralı) bu kesintileri görmez. Ayrıca modül açıklaması 'WS barı REST ile uyuşmuyorsa olay yazılır' der ama `ws_dogrula` (satır 119) hiçbir yerden çağrılmıyor (paper.py `mesaj()` yalnız tetik kurar).",
+    "senaryo": "NVDAUSDT 5m akışında Binance birkaç saat mum vermezse 4h kovası eksik mumlarla üretilir, pano/olaylar boşluk göstermez; aylık raporun kesinti ölçüsü eksik kalır.",
+    "oneri_duzeltme": "Boşluk tespitini `tk.seans_maskesi` ile seans dakikası sayarak TradFi'ye de uygula (guven.bosluk_olc zaten bunu yapıyor; aynı yardımcıyı kullan). `ws_dogrula`yı mesaj işleyicisinden çağır ya da açıklamadan kaldır."
+   },
+   {
+    "baslik": "PaperMotor'un kopyaladığı emir yürütme kodu sembol bazlı maliyetleri (maliyet_sembol) yok sayıyor; çekirdek `_tk/_ky/taker_en_yuksek` kullanıyor",
+    "dosya": "motor/canli/paper_motor.py",
+    "satir": 366,
+    "ciddiyet": "dusuk",
+    "guven": "orta",
+    "aciklama": "`_emirleri_yurut` kopyası satır 366-367 ve 395-396'da `self.kayma`, `self.taker`'ı; `_kap_orani` satır 239'da `self.taker`'ı kullanır. Çekirdek `motor/portfoy/motor.py` 509, 565-566'da `taker_en_yuksek`, `_ky(s)`, `_tk(s)` ile sembol bazlı maliyet destekler. Bugünkü `paper_ayarlari()` sembol bazlı maliyet vermediği için sonuç aynı; ama `motor/arastirma/evren_maliyet.py` ile enstrüman bazlı maliyet araştırmaya girdi. Evren stratejileri paper'a alınır ve ayarlara `maliyet_sembol` eklenirse paper sessizce tek maliyetle çalışır, tekrar-modu eşleşme testi (aynı ayar nesnesi) farkı yakalamaz çünkü iki tarafa aynı PortfoyAyarlari verilir.",
+    "senaryo": "Yeni paper setinde XAUUSDT için farklı kayma/komisyon tanımlanır; backtest uygular, paper uygulamaz; 'aynı sinyal aynı sonuç' bozulur.",
+    "oneri_duzeltme": "Kopyadaki sabitleri çekirdekle aynı yardımcılara (`_tk`, `_ky`, `_sk`, `taker_en_yuksek`) çevir; `PaperMotor.__init__`te `ayarlar.maliyet_sembol` doluysa açık hata ver (desteklenene kadar)."
+   }
+  ],
+  "oneriler": [
+   "Satır yayımı için 'tamlık' kuralı: bir birimin satırı yalnız tüm sembollerinde t barı geldiğinde ya da kapanıştan sonra sabit bir zaman aşımı (örn. 10 dk) geçtiğinde işlensin; eksik sembol varsa olay yazılsın. Bu, hem REST gecikmesi hem 300 sn kısıtlayıcı kaynaklı 'None sembol' satırlarını kapatır.",
+   "Canlı TradFi mum üretimini araştırma yoluyla birebir sınayan test: aynı 5m parquet'ten `tf_mumlari` ile `pv.mumlar` (gün gün ilerleyen simdi ile) çıktılarını indeks ve OHLC düzeyinde karşılaştır (hafta sonu, erken kapanış, tatil, DST geçişi dahil). Pazar emtia barı bu testle hemen görülürdü.",
+   "Tekrar-modu ↔ backtest eşleşme testini (paper_esleme) canlıdaki PENCERE değerleriyle (4h 3000, 1d 1500) ve `guncel` ayarlarla da koştur; sonucu sonuclar/final/paper_esleme.json'a ayrı etiketle yaz. Şu an yalnız dual-thrust pencereli, diğerleri tüm geçmişle test edilmiş.",
+   "Dayanıklılık: tur() için genel istisna yakalama + Telegram 'motor hatası' + aynı hatada N denemeden sonra kontrollü durma; systemd WatchdogSec (sd_notify) ya da kalp_atisi.json yaşını izleyen ayrı bir timer ile 'motor sessiz' uyarısı. SIGTERM'de `asyncio.wait` ile durdur olayını da bekle (şu an 33 sn gecikme) ve kalp/kaydet'i finally'ye al.",
+   "Performans: `_durum_yaz` her 30-33 sn'de ~20 JSON dosyası + koni/kıyas/güven (parquet okuma, git çağrısı) üretiyor; yeni satır yoksa (n == 0) ağır blokları 5-15 dk'da bir hesapla, hafif olanları (saglik/kalp) her tur yaz. paper_state.json'daki `maliyet_log`, `kirpmalar`, `reddedilenler` sınırsız büyüyor ve her satırda tamamı yazılıyor; eski kayıtları ayrı jsonl arşivine taşı.",
+   "Ayar yenilemesi: `--ayar-guncelle` akışında eski/yeni sembol kümesi ve çıkış ayarları farkını yazdır, çıkarılan sembollerdeki pozisyonlar için açık karar iste; yenileme işlemini `olaylar`a 'ayar_degisti' olarak eski/yeni etiketle kaydet (giris_izi zaten ayar hash'i taşıyor, olay kaydı yok).",
+   "Sembol kuralları: canlı exchangeInfo tick/step/minNotional ile araştırmadaki `tarama.SEMBOL_KURALLARI` farklarını başlangıçta logla ve saglik.json'a yaz (örn. SOLUSDT step 0.1 vs canlı); farklıysa miktar yuvarlaması backtestten sapar.",
+   "CikisAyarlari ek modülleri (stop_basamaklari, azalan_roi, geri_cekilme, kar_rsi, elder, agresif_iz, stop_sonrasi_bekleme) PaperMotor/_Motor'da uygulanmıyor (DURUM 'AÇIK İŞ'). `tek_kol` yalnız temel alanları kontrol ediyor; ek modülü dolu bir strateji paper'a girerse sessizce farklı davranır. Geçici koruma: `birim_kur`'da ek modül alanı dolu ise açık hata ver.",
+   "Günlük özet için TSİ tabanlı zamanlama ve 'dün tam gün' K/Z satırı; özet gönderim gününü paper_state'e yaz. Ayrıca kill switch / günlük limit olaylarında Telegram mesajına açık pozisyon listesi ve son özsermaye eklenebilir.",
+   "Veri güveni: `veri_guveni.json` zaten seans-bilinçli boşluk ölçüyor; `kesinti_olc` da aynı ölçümü (indeks tabanlı) kullanırsa olay kaydına bağımlılık (ve 200 olay sınırı) kalkar.",
+   "Tekrar modunda da kalp atışı/olay akışını sahte saatle sınayan bir test: yeniden başlatma + kaçan mumlar + o sırada gunluk_blok/kill durumunun korunduğunu doğrulayan senaryo (test_yeniden_baslatma_ayni_sonuc yalnız normal akışı kapsıyor)."
+  ],
+  "ozet": "Paper/canlı motor (motor/canli/paper*.py, telegram, Binance REST/WS) salt-okunur denetlendi; arka plandaki backtest'e dokunulmadı, yalnız yerel parquet'ten kısa doğrulama koşuldu. Genel tasarım sağlam: çekirdek muhasebe backtest ile ortak, kapanmamış mum kullanılmıyor, strateji girdisi t'ye kadar kesiliyor, durum satır başına atomik yazılıyor ve yeniden başlatmada çift işlem üretmiyor (testlerle de kapalı). Bulunan gerçek sorunlar: (1) canlı TradFi yeniden örneklemede 'eksik' eşiği küçük pencerenin medyanıyla hesaplandığı için araştırmada atılan Pazar 1d emtia barı paper'da üretiliyor (DK_XAU/DK_WTI ile doğrulandı) -> kanarya/rotasyon backtestten sapar; (2) çok sembollü birimde satır, semboller tamamlanmadan yayımlanıyor ve TradFi 300 sn kısıtlayıcı hafta sonundan sonra sembolleri ayrıştırabiliyor -> geç gelen barın stop kontrolü/hedef emri kaçıyor; (3) BinanceHata dışındaki istisnalar süreci düşürüyor, systemd 8 denemede servisi kalıcı durduruyor ve uyarı gitmiyor; (4) yeniden başlatmada bir sembol TRADING dışına düşerse kayıtlı durum hiç yüklenemiyor; (5) --ayar-guncelle portföy sütunlarını eski kayıttan alıyor, yeni sembol kümesi sessizce yok sayılıyor. Daha düşük: günlük Telegram özeti 03:10 TSİ'de ve her restartta gidiyor ('Bugün' 3 saat), TradFi'de funding paper'da var backtestte yok, TradFi veri boşluğu hiç olay olmuyor (`tk_acik` yanlış), `ws_dogrula` çağrılmıyor, paper'ın emir yürütme kopyası sembol bazlı maliyetleri desteklemiyor. Öneriler ayrı alanda."
+ },
+ {
+  "etiket": null,
+  "ozet": "deploy/ (systemd birimleri, zamanlayıcılar, KURULUM.md, pano_yayinla.sh, env örnekleri) ve bunların çağırdığı motor/canli kodu salt-okunur denetlendi; hiçbir dosya değiştirilmedi, ağır komut çalıştırılmadı (yalnız tek satırlık bir requests repr kontrolü). Genel tablo iyi: sırlar yalnız /etc/*.env (600) + systemd EnvironmentFile ile taşınıyor, *.env .gitignore'da, yayın betiği set -x kullanmıyor ve token basmıyor, durum dosyaları ve pano.html aynı dizinde tmp+fsync+os.replace ile atomik yazılıyor (pano ile paper çakışması yok), DK_SPX parquet'i de atomik yazılıyor, loglar journald'a gidiyor (dosya logu yok), olaylar 200 ile sınırlı, bayatlık eşiği (60 dk) 15 dk'lık yayın gecikmesini tolere ediyor. Gerçek sorunlar: (1) Telegram ağ hatasında bot token'ı journal'a sızıyor (%r ile istisna URL'si basılıyor) — yüksek; (2) paper.service'in başlangıçtaki Binance hatasında 8×15 sn sonra kalıcı 'failed' durumuna düşmesi ve bunun belgede/alarmda karşılığının olmaması — orta; (3) günlük Telegram özetinin UTC gün dönümünde (03:10 TSİ) gönderilmesine karşın K/Z'nin TSİ günüyle hesaplanması → özet 'bugün' için yalnız 3 saati gösteriyor, önceki günün tamamı hiç özetlenmiyor — orta/düşük; (4) ilk kurulumda pano-sunucu servisinin durum dizini yokken başlayıp start-limit'e takılması — düşük (orta güven); (5) KURULUM'da l3a kullanıcısıyla SSH/mkdir adımlarının yazıldığı gibi çalışmaması — düşük; (6) 1l3a-pano.service'te çıkış kodu 1'in de başarı sayılması (yorum yalnız 2 diyor) — düşük.",
+  "bulgular": [
+   {
+    "baslik": "Telegram bot token'ı ağ hatasında journal'a sızıyor",
+    "dosya": "motor/canli/telegram.py",
+    "satir": 67,
+    "ciddiyet": "yuksek",
+    "guven": "yuksek",
+    "aciklama": "`log.error(\"Telegram gönderim ağ hatası: %r\", e)` istisnanın repr'ini basıyor. requests'in ConnectionError/ProxyError/MaxRetryError repr'i istek URL'sini içerir ve bu URL `https://api.telegram.org/bot<TOKEN>/sendMessage` biçimindedir. Doğrulandı: sahte bir hostla çalıştırılan `requests.post(.../botSECRET_TOKEN_123/sendMessage)` repr'i `Max retries exceeded with url: /botSECRET_TOKEN_123/sendMessage` metnini içerdi. Böylece /etc/1l3a-paper.env'de 600 izinle korunan sır, systemd journal'ına (adm grubu okuyabilir, journal yedekleri, `journalctl -n 200` çıktısının destek için paylaşılması — KURULUM §6 bunu öneriyor) düz metin olarak düşer. Proje kuralı 'gizli anahtar repoda olmaz' ruhuyla çelişir.",
+    "senaryo": "Sunucuda DNS/ağ kesintisi ya da api.telegram.org'a bağlantı reddi olur; motor Telegram göndermeyi dener, ConnectionError yakalanır ve ERROR seviyesinde repr loglanır. Kullanıcı sorun gidermek için `journalctl -u 1l3a-paper -n 200` çıktısını kopyalayıp paylaşır → bot token'ı sızar; token'ı ele geçiren kişi botun adına mesaj gönderebilir/sohbeti okuyabilir.",
+    "oneri_duzeltme": "Repr yerine tür adı + token'ı maskelenmiş mesaj logla: `log.error(\"Telegram gönderim ağ hatası: %s: %s\", type(e).__name__, str(e).replace(token, \"***\"))`. Alternatif: URL'yi oluşturmadan önce token'ı bir sabitle değiştirip hata metninde arama yap; ayrıca `r.text` kısmı için de aynı maskelemeyi uygula."
+   },
+   {
+    "baslik": "paper.service: başlangıçtaki Binance hatasında 2 dakikada kalıcı 'failed' durumu, alarm ve belge yok",
+    "dosya": "deploy/1l3a-paper.service",
+    "satir": 6,
+    "ciddiyet": "orta",
+    "guven": "yuksek",
+    "aciklama": "`StartLimitIntervalSec=600`, `StartLimitBurst=8`, `Restart=always`, `RestartSec=15`. `canli_calistir` (motor/canli/paper.py:333-335) `ist.sunucu_zamani()` ve `ist.exchange_info()` çağrılarını try içine almaz; BinanceHata (429 tekrarları tükenince, 418 IP yasağı, 451, ağ hatası) doğrudan süreci düşürür. 15 sn aralıkla 8 deneme ≈ 2 dakika; Binance REST'in ya da ağın bundan uzun süre erişilemez olması servisi systemd'nin bir daha başlatmayacağı 'failed' durumuna sokar. Süreç ölü olduğu için Telegram uyarısı gidemez; tek işaret pano'daki 'VERİ BAYAT' bandıdır (o da 60 dk sonra ve yalnız pano açılırsa). KURULUM.md'de `systemctl reset-failed`/yeniden başlatma adımı ve bu durumun açıklaması yok (§10 yalnız 418/429 için 'bekleyin' der). 418 yasağında ayrıca her yeniden başlatma yasak süresince yeni istek atar; Binance bu davranışı yasak süresini uzatma gerekçesi olarak belgeler.",
+    "senaryo": "Gece Binance vadeli API'sinde 10 dakikalık bakım/kesinti olur ya da sunucu ağı kısa süre kopar. Motor exchangeInfo alamayıp çıkar; 8. denemeden sonra birim 'failed' kalır. Sabah kullanıcı bakmazsa paper günlerce çalışmaz: kayıt/istatistik boşluğu, açık paper pozisyonları yönetilmez (stop/çıkış simüle edilmez), haftalık/aylık rapor ve beklenti alarmları yanlış çıkar.",
+    "oneri_duzeltme": "`StartLimitIntervalSec=0` (ya da Burst'ü saatlik pencereye göre büyüt) + `RestartSec=15` `RestartSteps=6` `RestartMaxDelaySec=10min` (Ubuntu 24.04 systemd 255 destekler) ile üstel geri çekilme; `OnFailure=1l3a-bildir@%n.service` benzeri bir birimle Telegram'a 'servis düştü' mesajı; KURULUM §10'a `systemctl reset-failed 1l3a-paper && systemctl start 1l3a-paper` adımını ekle. Kodda: başlangıç REST çağrılarını BinanceHata için bekleyip yeniden deneyen bir sarmala al (418'de Retry-After kadar uyuyup çık)."
+   },
+   {
+    "baslik": "Günlük Telegram özeti UTC gün dönümünde gidiyor ama K/Z TSİ günüyle hesaplanıyor: 'Bugün' yalnız 3 saati gösteriyor",
+    "dosya": "motor/canli/paper.py",
+    "satir": 387,
+    "ciddiyet": "orta",
+    "guven": "yuksek",
+    "aciklama": "`if simdi.hour >= 0 and simdi.minute >= 10 and son_ozet[0] != gun` (gun = UTC tarihi) → özet, UTC tarih değiştikten sonraki ilk `minute >= 10` turunda, yani ~00:10 UTC = 03:10 TSİ'de gönderilir (KURULUM §7 de '00:10 UTC' der). Oysa gönderilen `ozet.gun_pnl`/`gun_getiri` paper_durum.py:201-205'te TSİ günü kesimiyle (`gun_kapanis_tsi`, önceki TSİ gününün son özsermayesine göre) hesaplanır ve başlık `tsi_gun(oz['zaman'])` ile TSİ gününü yazar. Sonuç: 'Günlük özet — <yeni TSİ günü>' mesajındaki 'Bugün' değeri yeni günün ilk ~3 saatinin K/Z'sidir; tamamlanan günün K/Z'si hiçbir zaman özetlenmez. Ayrıca `simdi.hour >= 0` koşulu her zaman doğrudur (işlevsiz) ve `son_ozet` bellekte tutulduğu için servis gün içinde yeniden başlarsa aynı gün ikinci bir özet gider.",
+    "senaryo": "Kullanıcı 03:10 TSİ'de 'Bugün: +12 USD' özetini alır; dün gün boyunca gerçekleşen -250 USD (günlük limitin %2,5'i) hiçbir özette görünmez, yalnız panoda 'dün' satırında kalır. Kullanıcı Telegram'a güvenerek günlük performansı yanlış okur; bir de servis 14:00'te yeniden başlarsa 14:10'da ikinci 'günlük özet' gelir.",
+    "oneri_duzeltme": "Özeti TSİ gün dönümünden sonra (ör. 00:10 TSİ = 21:10 UTC) ve BİTEN TSİ günü için gönder: `tsi_gun(simdi)` değişimini izle ve `gun_kapanis_tsi[önceki gün] - gun_kapanis_tsi[ondan önceki]` farkını raporla; `son_ozet`'i paper_state.json'a yaz ki yeniden başlatmada tekrar gitmesin; KURULUM §7 metnini düzelt."
+   },
+   {
+    "baslik": "İlk kurulumda 1l3a-pano-sunucu durum dizini yokken başlıyor, start-limit'e takılıp kalıcı 'failed' oluyor",
+    "dosya": "deploy/1l3a-pano-sunucu.service",
+    "satir": 11,
+    "ciddiyet": "dusuk",
+    "guven": "orta",
+    "aciklama": "`WorkingDirectory=/var/lib/1l3a-paper/durum` ve `--directory /var/lib/1l3a-paper/durum`, ama `StateDirectory=1l3a-paper` yalnız üst dizini oluşturur; `durum/` alt dizinini paper motoru `canli_calistir` içinde (`durum_dizini.mkdir`) pandas/numpy importlarından SONRA açar. Birimde `After=1l3a-paper.service` yok, `RestartSec` yok (varsayılan 100 ms) ve StartLimit varsayılan (5 deneme/10 sn). KURULUM §4 üç birimi tek `systemctl enable --now` ile başlatır: pano-sunucu chdir hatasıyla (exit 200/CHDIR) saniyeler içinde 5 kez düşer ve 'failed' kalır; paper birkaç saniye sonra dizini oluşturur ama sunucu bir daha denemez.",
+    "senaryo": "Taze Droplet'ta KURULUM adımları sırayla uygulanır (tohum rsync'i atlanmış ya da yalnız veri/ kopyalanmış). Kullanıcı `ssh -L 8080:...` ile panoya bağlanmaya çalışır, 'connection refused' alır; `systemctl status` 'start request repeated too quickly' der. Yeniden başlatılana (ya da reboot'a) kadar pano görünmez; kullanıcı motorun çalışmadığını sanabilir.",
+    "oneri_duzeltme": "`StateDirectory=1l3a-paper 1l3a-paper/durum` ile alt dizini systemd oluştursun (ya da `ExecStartPre=/usr/bin/mkdir -p ...`), `After=1l3a-paper.service`, `RestartSec=5`, `StartLimitIntervalSec=0`. KURULUM §4'te paper'ı önce başlatıp birkaç saniye sonra pano birimlerini başlatmayı yaz."
+   },
+   {
+    "baslik": "KURULUM §3/§6: l3a kullanıcısıyla SSH ve /var/lib altında mkdir adımları yazıldığı gibi çalışmaz",
+    "dosya": "deploy/KURULUM.md",
+    "satir": 29,
+    "ciddiyet": "dusuk",
+    "guven": "yuksek",
+    "aciklama": "§1 kullanıcıyı `adduser --disabled-password` ile açar ve hiçbir yerde l3a için authorized_keys/ssh-copy-id adımı yok; buna karşın §3 `ssh l3a@SUNUCU \"mkdir -p /var/lib/1l3a-paper/veri/mumlar\"` ve §6 ile 1l3a-pano-sunucu.service başlığı `ssh -L 8080:127.0.0.1:8080 l3a@SUNUCU` der. l3a ile SSH girişi mümkün değildir; ayrıca servis henüz hiç çalışmadıysa /var/lib root'a aittir, l3a `/var/lib/1l3a-paper` oluşturamaz (Permission denied). Rsync satırı root ile dizini root sahipliğinde yaratır; ardından gelen `chown -R` bunu düzeltir, yani sonuç kurtulur ama belgedeki iki komut hata verir, kodlamada zayıf kullanıcı (CLAUDE.md) takılır.",
+    "senaryo": "Kullanıcı §3'ü satır satır uygular: ilk ssh komutu 'Permission denied (publickey)' ile biter; §6'daki pano tüneli de aynı nedenle açılmaz. Kullanıcı panoya hiç ulaşamaz ya da root ile tünel açmaya başlar (gereksiz yetkiyle günlük kullanım).",
+    "oneri_duzeltme": "§1'e `mkdir -p /home/l3a/.ssh && cp /root/.ssh/authorized_keys /home/l3a/.ssh/ && chown -R l3a:l3a /home/l3a/.ssh && chmod 700 .ssh` (ya da ssh-copy-id) adımı ekle; §3'teki mkdir'i root ile yap (`ssh root@SUNUCU \"install -d -o l3a -g l3a /var/lib/1l3a-paper/veri/mumlar\"`); tüneli root yerine l3a ile açmak isteniyorsa anahtar adımına atıf ver."
+   },
+   {
+    "baslik": "1l3a-pano.service çıkış kodu 1'i (durum dosyaları bozuk/eksik) de başarı sayıyor; yorum yalnız 2 diyor",
+    "dosya": "deploy/1l3a-pano.service",
+    "satir": 14,
+    "ciddiyet": "dusuk",
+    "guven": "yuksek",
+    "aciklama": "`SuccessExitStatus=0 1 2`; üstteki yorum 'çıkış kodu 2 = kritik uyarı var ... hatası sayılmasın' der. pano.main (motor/canli/pano.py:1913) `1 if sorunlar else ...` döndürür: 1 = ozet.json/stratejiler.json vb. yok ya da bozuk JSON/şema (DurumHatasi). Bu durum da 'başarılı' sayıldığı için `systemctl status 1l3a-pano`, `systemctl --failed` ve journal önceliği hiçbir şey göstermez; sorun yalnız pano.html içindeki metinde kalır. Motor durum yazmayı bırakıp dosyaları yarım/bozuk bıraktıysa (ör. disk dolu, bozuk satır) işletim tarafında hiçbir kırmızı işaret oluşmaz.",
+    "senaryo": "Disk dolar; paper atomik yazımda tmp dosyası yarım kalır, islemler.jsonl'nin son satırı bozuk olur. Pano 'islemler.jsonl:412: bozuk JSON' sorununu HTML'e yazar ama servis yeşil görünür; kullanıcı `systemctl list-timers`/`status` ile bakarken her şeyi normal sanır.",
+    "oneri_duzeltme": "`SuccessExitStatus=0 2` yap (yorumla uyumlu); istenirse pano.main'de 1 yerine ayrı bir kod (ör. 3) kullan ve OnFailure ile bildir."
+   }
+  ],
+  "oneriler": [
+   "systemd sertleştirme: paper/pano/spx/yayın birimlerine `ProtectSystem=strict` + `ReadWritePaths=/var/lib/1l3a-paper` (ve pano/paper için /opt/1l3a yalnız __pycache__ gerekiyorsa `PYTHONDONTWRITEBYTECODE=1` ile hiç yazmasın), `CapabilityBoundingSet=`, `RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX`, `ProtectKernelTunables/Modules/ControlGroups=true`, `LockPersonality=true`, `RestrictSUIDSGID=true`, `RestrictRealtime=true`, `SystemCallFilter=@system-service`, `UMask=0077`, 2 GB Droplet için `MemoryMax=1200M` + `OOMPolicy=continue`.",
+   "Sırları EnvironmentFile yerine `LoadCredential=telegram_token:/etc/1l3a/telegram_token` ile ver ve kodda `$CREDENTIALS_DIRECTORY`'den oku: token süreç ortamında (/proc/PID/environ) ve `systemctl show-environment` çıktılarında görünmez; wrangler için de `CLOUDFLARE_API_TOKEN`'ı ExecStart'ta `$(cat $CREDENTIALS_DIRECTORY/...)` ile içeri al.",
+   "Alarm yolu: `OnFailure=1l3a-bildir@%n.service` (curl ile Telegram'a 'X servisi düştü') tüm birimlere; paper için `Type=notify` + `WatchdogSec=180` ve kalp_at içinde `sd_notify(WATCHDOG=1)` → motor takılırsa systemd yeniden başlatır (şu an sadece pano bandı var).",
+   "Disk ve log: `/etc/systemd/journald.conf.d/1l3a.conf` ile `SystemMaxUse=500M`, `MaxRetentionSec=1month`; paper_state.json'un günlük yedeği (`cp --reflink`/tar + 14 gün döndürme, ayrı bir timer) — KURULUM 'silerseniz SIFIRDAN başlar' diyor ama yedek adımı yok; saglik.json'a `shutil.disk_usage` ile boş alan ve `durum/` boyutu ekleyip panoda <%10 alanda uyarı; motor başlarken eski `.*.tmp-<pid>` artıklarını temizle.",
+   "Yayın (Cloudflare): PANO_AD'a rastgele son ek ya da Cloudflare Access/Zero Trust ile e-posta doğrulaması — pano strateji kimlikleri, ayar sürümleri, pozisyon boyutları ve giriş gerekçelerini içeriyor, 'adresi bilen herkes' ifadesi hafif kalıyor. pano_yayinla.sh'de pano.html sha256'sı son yayınla aynıysa deploy'u atla (gereksiz deploy/limit tüketimi yok, journal daha temiz). KURULUM §11'deki `curl | bash` (nodesource) yerine Ubuntu paketinden/nodesource deb'inden sabit sürüm; wrangler zaten sabitlenmiş, iyi.",
+   "Zamanlayıcı/sıra: 1l3a-pano-yayin.service'teki `After=1l3a-pano.service` yalnız aynı işlemde başlatıldıklarında anlamlı; `Wants=1l3a-pano.service` ekleyerek her yayından hemen önce taze pano üretilsin (şu an yayın en çok 5 dk eski pano gönderiyor). 1l3a-pano-yayin.timer'daki `Persistent=true` OnUnitActiveSec ile etkisiz, kaldırılabilir. 1l3a-spx.timer için ABD tatil/hafta sonunda boş indirme normal; journal'a 'eklenen 0' bilgisini uyarı değil bilgi olarak bırakmak yeterli.",
+   "Saat: KURULUM'a `timedatectl` kontrolü (NTP aktif, sistem saati UTC) ve `ZoneInfo('Europe/Istanbul')` için `tzdata` paketinin kurulu olduğunun doğrulanması eklensin (pano.py sabit +3 yedeğine düşerse yaz saati geçişi/eski verilerde 1 saat kayma olabilir; Türkiye 2016'dan beri sabit +3, bugün için risk düşük). Günlük risk limiti UTC günü, pano K/Z TSİ günü: bu farkı KURULUM §6 ve pano altbilgisinde tek cümleyle açıkça yazın.",
+   "Belge (KURULUM.md): kod güncelleme prosedürü (git pull → `python -m pytest testler/test_paper_*.py` → `systemctl restart 1l3a-paper` → `journalctl -n 50`) ve geri alma; `systemctl reset-failed`; ufw (`allow OpenSSH`, başka port yok) + `unattended-upgrades`; sunucuda `pymupdf` gereksiz — `requirements-sunucu.txt` ile daha küçük kurulum; §4'te paper'ı önce başlatıp pano birimlerini sonra başlatma sırası.",
+   "Operasyonel sağlamlık: paper.service için `TimeoutStopSec=60` iken `tur()` 429 Retry-After beklemesinde 60 sn'yi aşabilir → SIGKILL ile kalp_atisi 'durdu' yazılmaz ve kesinti ölçümü eksik kalır; `TimeoutStopSec=120` ya da bekleme sırasında `durdur` olayını kontrol eden kesilebilir uyku.",
+   "Pano localhost sunucusu `python -m http.server` tüm `durum/` içeriğini (paper_state.json, geçici dosyalar dahil) dizin listesiyle sunar; yalnız pano.html gerekiyorsa ayrı bir `durum/pano/` dizini ya da `--directory` için yalnız HTML içeren alt dizin kullanın; tek iş parçacıklı http.server yerine `python -m http.server` yeterli ama `Restart=on-failure` ile birlikte `RestartSec` ekleyin."
+  ]
+ },
+ {
+  "etiket": null,
+  "ozet": "Pano/durum katmanı ilkeye büyük ölçüde sadık: pano.py gerçekten hesap yapmıyor (yalnız ölçekleme/süzme), HTML kaçışı neredeyse her yerde var, koni lookahead'siz ve sha256'ya bağlı, okuma hataları açık. Ancak 3 orta bulgu var: (1) Dersler/Koç'ta backtest payı 0 olan çıkış nedeninde kesin binom p=0 veriyor; paper'da ilk 'gunluk_limit'/'kaldirac_azalt' çıkışı tek işlemle Koç'un en sert seviyesi 'beklenti dışı'nı tetikler (kullanıcı günlük limit tetiklenmesini ihlal saymıyor); (2) BTC al-tut kıyas serisi sunucuda bayatlar: paper mumları parquet'e yazmaz, yalnız DK_SPX için güncelleyici var, 5 gün sonra BTC çizgisi null olur; (3) kesinti ölçümü veri_bosluk aralığını mum açılışlarından okuyup bir mum süresi fazla sayar, 1d serilerde tek eksik mum 48 saat 'kesinti' olup en erken değerlendirme tarihini kaydırır. Düşük: spx_guncelle'nin birleştirmesi 404'le atlanan ayın mevcut verisini siler; panoda sabit 'SET (7 strateji)' ve %3/%20 metinleri; takvimde gun alanı olmayan satırlar UTC gününe düşer; bir data-gun özniteliği kaçışsız; istatistikte SQN sessizce null kalabiliyor. Dosyalar değiştirilmedi, arka plan backtest'e dokunulmadı.",
+  "bulgular": [
+   {
+    "baslik": "Backtest payı 0 olan çıkış nedeninde binom p=0: tek işlem Koç'ta 'beklenti dışı' üretir",
+    "dosya": "/home/user/1L3A-Proje/motor/canli/dersler.py",
+    "satir": 230,
+    "ciddiyet": "orta",
+    "guven": "yuksek",
+    "aciklama": "dersler.degerlendir her çıkış nedeni için binom_p(kk, n, q) çağırır; referansta görülmeyen neden için q=0.0 olur ve _log_pmf(k>0, n, 0) = -inf olduğundan p tam 0.0 çıkar (doğruladım: binom_p(1,30,0.0)=0.0; q=0.009 olsaydı p=0.238). koc.kural_stop_ve_cikis (koc.py:189-199) bu p'yi Bonferroni ile çarpsa da 0 kalır ve referanslı kural olduğundan seviye 'beklenti_disi' olur (doğruladım). Referans dosyası (beklenti_islem_referansi.csv) WF OOS'tan üretilmiş, veri_sonu hariç; ör. dis__dual-thrust referansında yalnız 'sinyal' ve 'stop' var. Paper'da ise limitler uygulanır: 'gunluk_limit', 'kill_switch', 'kaldirac_azalt', 'kucultme', 'kismi' gibi nedenler motor tarafından üretilir (paper_motor.py:336,360,466,528). Referans n=334 ile 0 gözlem, üst %95 sınır ~%0.9 demektir; 30 işlemde 1 gözlem istatistiksel olarak anlamlı değildir.",
+    "senaryo": "Paper 30 işlemi geçer; bir gün günlük %3 kayıp limiti tetiklenir ve bir pozisyon 'gunluk_limit' ile kapanır (kullanıcı kararı: bu ihlal değil). Dersler açıklamasına \"'gunluk_limit' çıkışı backtestte hiç görülmemişti... p<0.001\" yazılır, Koç DERSLER sekmesinde kırmızı 'beklenti dışı' bulgusu gösterir; kullanıcı tek işlemden strateji sorunu olduğu izlenimine kapılır.",
+    "oneri_duzeltme": "q=0 iken testi yapmayıp 'backtestte gözlenmedi (referans n=…, üst sınır ~3/n)' bilgisi yazmak ya da beklenen payı 3/n_ref (üçler kuralı) ile tabanlamak; Koç'ta cikis_nedeni kuralı için kova başına en az MIN_KOVA (5) gözlem istemek."
+   },
+   {
+    "baslik": "BTC al-tut kıyas serisi sunucuda bayatlar: paper mumları diske yazmaz, güncelleyici yalnız DK_SPX için var",
+    "dosya": "/home/user/1L3A-Proje/motor/canli/kiyas.py",
+    "satir": 48,
+    "ciddiyet": "orta",
+    "guven": "yuksek",
+    "aciklama": "kiyas.kapanislar BTCUSDT kapanışını yerel parquet arşivinden okur; fiyat_serisi'nde son mum kesimden 5 günden eskiyse gün null + neden. Paper canlı yolu kıyasa tohum dizinini verir (paper.py:383); CanliKaynak mumları yalnız bellekte tutar, hiçbir to_parquet/_yaz çağrısı yok (paper_canli.py). deploy/ altında yalnız 1l3a-spx.timer (DK_SPX) var; KURULUM.md BTCUSDT'yi tek seferlik rsync ile tohumlar. Motor BTC'yi canlı akıştan güncel tutarken kıyas eski arşivi okuyor.",
+    "senaryo": "Tohum arşivi 2026-11-06'da bitiyorsa 2026-11-12'den itibaren kıyasta BTC için her gün null olur; ÖZET sekmesinde 'BTC al-tut' çizgisi kaybolur ve not 'N gün için güncel fiyat yok' der; paper↔BTC karşılaştırması 8 haftalık değerlendirme boyunca yapılamaz.",
+    "oneri_duzeltme": "Kıyas BTC kapanışlarını motorun bellekteki mum çerçevesinden (kaynak.mumlar[('BTCUSDT', tf)]) almalı ya da paper kapanmış mumları tohum parquet'ine eklemeli (DK_SPX için yapıldığı gibi günlük artımlı yazım)."
+   },
+   {
+    "baslik": "veri_bosluk kesinti aralığı mum açılışlarından okunup bir mum süresi fazla sayılır",
+    "dosya": "/home/user/1L3A-Proje/motor/canli/aylik_rapor.py",
+    "satir": 66,
+    "ciddiyet": "orta",
+    "guven": "yuksek",
+    "aciklama": "paper_canli.guncelle (paper_canli.py:110) mesajı '{bos} mum eksik ({ix[k-1]} -> {ix[k]})' yazar; ix değerleri mum AÇILIŞ zamanlarıdır (son bilinen mumun açılışı -> ilk yeni mumun açılışı). kesinti_olc bu iki anı doğrudan aralık alır: 1h serisinde 1 eksik mum için 2 saat (doğruladım: kesinti saat=2.0), 1d serisinde 1 eksik mum için 48 saat sayılır. Gerçek boşluk (A + mum süresi, B) kadardır.",
+    "senaryo": "1d tf'li bir sembolde borsa tek günlük mumu geç verir: kesinti 48 saat ölçülür, 24 saati aşan kısım 24 saat olur ve kabul listesi 'en_erken_degerlendirme'yi bir gün ileri kaydırır (kullanıcı kararı 2026-11-08); karne sağlık ekseninde 'kesinti <= 24 saat' kontrolü KALDI olur. Oysa gerçek boşluk 24 saattir ve uzama olmamalıdır.",
+    "oneri_duzeltme": "Olay mesajını kapanıştan yazmak ('({ix[k-1] + a} -> {ix[k]})') ya da kesinti_olc'de veri_bosluk için başlangıca mum süresini eklemek; birden çok eksik mumda da aynı düzeltme geçerli."
+   },
+   {
+    "baslik": "spx_guncelle.birlestir: 404 ile atlanan ay, arşivdeki mevcut mumları siler",
+    "dosya": "/home/user/1L3A-Proje/motor/canli/spx_guncelle.py",
+    "satir": 57,
+    "ciddiyet": "dusuk",
+    "guven": "orta",
+    "aciklama": "birlestir 'eski = mevcut[mevcut.index < yeni.index.min()]' ile yeni parçanın ilk mumundan sonraki TÜM mevcut veriyi atar, yalnız örtüşmeyi değil. dukascopy.saatlik_indir ise 404 olan ayı 'basarisiz' listesine koymadan atlar (dukascopy.py:25,186-187,206-207: 404 -> None, elif bayt). Geçici dizin kullanıldığı için .yok önbelleği de yok; bitiş ayı 404 verirse yeni parça yalnız önceki ayı içerir ve arşivdeki içinde bulunulan ay silinir. Bayat denetimi (MAKS_BAYAT_GUN=5) yalnız son mum 5 günden eskiyse yakalar.",
+    "senaryo": "Ayın 1-5'inde Dukascopy içinde bulunulan ayın saatlik dosyasını geçici olarak 404 verir: önceki ay yeniden indirilir, arşivdeki bu ayın 1-4. gün mumları silinir, son mum ay sonu olduğu için bayat denetimi geçer ve parquet yazılır; kıyas SPX çizgisi o günler için null olur (bir sonraki başarılı koşuya kadar).",
+    "oneri_duzeltme": "Birleştirmeyi gerçekten 'örtüşmede yeni kazanır' yapmak: concat([mevcut, yeni]) + duplicated(keep='last'), ya da istenen pencere içinde 404 olan ayı GuncellemeHatasi saymak."
+   },
+   {
+    "baslik": "Panoda veri yerine sabit metin: 'SET (7 strateji birlikte)' ve %3/%20 limit metinleri",
+    "dosya": "/home/user/1L3A-Proje/motor/canli/pano.py",
+    "satir": 1680,
+    "ciddiyet": "dusuk",
+    "guven": "yuksek",
+    "aciklama": "_karne_kart set başlığına kodda sabit '7 strateji' yazar; karne.json'da strateji sayısı (len(kr['stratejiler'])) zaten var. CIKIS_ACIKLAMA (pano.py:1741-1742) 'zirveden %20 düşüş' ve 'Günlük kayıp limiti (%3)' sabitlerini içerir; bu değerler SERT_LIMITLER'den gelmeli (butunluk.sanal.sert_limitler.ayrinti zaten dosyada). Karar 27 ile final set paper'dan kaldırılıp evren stratejileri gelecek; set 7 olmayacak.",
+    "senaryo": "Yeni paper seti 3 stratejiyle başladığında karne kartı 'SET (7 strateji birlikte)' yazar; kullanıcı eksik strateji olduğunu düşünür. Limit değeri değiştirilirse çekmece açıklaması eski yüzdeyi söyler.",
+    "oneri_duzeltme": "Başlığı len(kr['stratejiler']) ile kurmak; çıkış açıklamalarında yüzde yazmamak ya da butunluk.json'daki sert_limitler ayrıntısından okumak."
+   },
+   {
+    "baslik": "Takvimde 'gun' alanı olmayan işlem satırları UTC gününe düşer, günler TSİ iken",
+    "dosya": "/home/user/1L3A-Proje/motor/canli/pano.py",
+    "satir": 876,
+    "ciddiyet": "dusuk",
+    "guven": "yuksek",
+    "aciklama": "_takvim işlemleri güne '(i.get(\"gun\") or i[\"zaman\"][:10]) == g' ile süzer. Paper'da gunluk_kz günleri TSİ'dir; 'gun' alanı 2026-11-08'de eklendi (DURUM_SOZLESMESI 'islemler.jsonl paper satırlarında gun'). Alanı olmayan eski satırlarda UTC tarihi kullanılır; 21:00-24:00 UTC arası kapanan işlemler TSİ'de ertesi güne aittir ama önceki günün kutusunda listelenir. Karışım sessizdir (uyarı yok).",
+    "senaryo": "2026-11-07 22:30 UTC'de kapanan eski bir işlem, takvimde 07 Kasım kutusuna düşer; o günün K/Z'si (TSİ) bu işlemi içermez; kullanıcı gün K/Z ile işlem listesini eşleştiremez.",
+    "oneri_duzeltme": "gun yoksa ve ozet.gun_kesimi TSİ ise satırı 'gün bilgisi yok (eski kayıt)' notuyla ayrı göstermek ya da hiç günle eşlemeye çalışmamak; UTC'ye düşme yalnız gun_kesimi UTC iken yapılmalı."
+   },
+   {
+    "baslik": "Takvim hücresinde data-gun özniteliği HTML kaçışsız",
+    "dosya": "/home/user/1L3A-Proje/motor/canli/pano.py",
+    "satir": 869,
+    "ciddiyet": "dusuk",
+    "guven": "yuksek",
+    "aciklama": "f'... class=\"tk\" data-gun=\"{g}\" ...' içinde g = x['gun'][:7] + gün numarası doğrudan dosyadan türetilir ve esc() uygulanmaz; aynı değer 886. satırda esc(g) ile yazılıyor (tutarsız). Diğer tüm dosya alanları kaçışlı; bu tek açık.",
+    "senaryo": "ozet.json gunluk_kz[].gun alanı bozuk/elle düzenlenmiş olup çift tırnak içerirse öznitelik kırılır ve ek öznitelik/olay enjekte edilebilir. Motor yazdığı sürece pratik risk düşük, ama 'her alan kaçışlı' varsayımı tutmaz.",
+    "oneri_duzeltme": "data-gun=\"{esc(g)}\" kullanmak."
+   },
+   {
+    "baslik": "istatistik: SQN, r'si olmayan satır varsa nedensiz null kalır (null+neden kuralı)",
+    "dosya": "/home/user/1L3A-Proje/motor/canli/durum_ek.py",
+    "satir": 159,
+    "ciddiyet": "dusuk",
+    "guven": "orta",
+    "aciklama": "n >= MIN_ISLEM ama len(r) != n ise (bir satırda r None) sqn None kalır ve istatistik_neden'e hiçbir şey yazılmaz; Kelly ise w = len(kazanc)/n ile r'si olmayan satırları paydaya kattığı hâlde hesaplanır. backtest_durum portföy işlemlerinde r = d.sayi(tr['r']) NaN ise None olabilir (backtest_durum.py:211).",
+    "senaryo": "Set 40 işlem, portföy kolundan 1 işlemde r yok: pano İSTATİSTİK kartında SQN '—' görünür, altında neden yok; Kelly ise 39 işlemin kazanma oranını 40'a bölerek biraz düşük çıkar.",
+    "oneri_duzeltme": "len(r) < n iken neden eklemek ('r ölçülmeyen k işlem') ve Kelly/SQN'yi yalnız r ölçülen işlemler üzerinden, n yerine len(r) ile hesaplamak."
+   }
+  ],
+  "oneriler": [
+   "Dersler/Karne isabet ve uyum eksenleri referansın kendi örnekleme belirsizliğini yok sayıyor (binom H0 p = backtest isabeti sabit; set uyum z'si yalnız backtest std'si). Referans n küçük olan stratejilerde (ör. 154 işlem) z/p aşırı kesin çıkar. İki örneklemli oran testi (ya da referans isabeti için Wilson aralığı) ile değiştirilebilir; karne.json eksen_tanimlari'na bu sınırlama açıkça yazılmalı.",
+   "Kesinti ölçümü pratikte neredeyse hep 'ölçülemez' kalacak: 'WS koptu: {e!r}' (paper_canli.py:185) ve binance_hata süresiz yazılıyor, OLAY_KAPASITE 200 dolduğunda da toplam null oluyor. Çözüm: motor kesintileri ayrı, kalıcı bir kesinti defterine (başlangıç/bitiş) yazsın; ws_koptu için yeniden bağlanma anı 'ws_yeniden_baglandi' ile eşlenip süre hesaplansın; kesinti_olc bu defteri okusun.",
+   "Kabul listesi 'sert_limit' kalemi yalnız anlık değere bakar (aylik_rapor.py:159-167): turlar arasında yaşanan kaldıraç/açık stop riski aşımı unutulur, kalem bir sonraki turda 'geçti'ye döner. Motor limit_olaylari'na 'kaldirac_asimi'/'stop_riski_asimi' olaylarını da yazsın, kabul listesi birikimli saysın.",
+   "Koç 'beklenti_alti' bulgusu yalnız 8 hf alarmından geliyorsa istatistik bloğunda anlamli_ham=false görünürken seviye 'beklenti dışı' oluyor (koc.py:297-306); bu durumda testi 'beklenti aralığı alarmı' olarak etiketleyip p alanlarını null + açıklama yapmak tutarlılığı artırır.",
+   "Korelasyon (korelasyon.py:3,37) işlemsiz günleri 0 sayıyor; seyrek işlem yapan swing stratejilerinde seri çoğunlukla sıfır olur ve Pearson birkaç güne dayanır. Pano hücre ipucuna 'sıfır olmayan ortak gün' sayısını eklemek ve ozet'te bunu raporlamak yanıltıcılığı azaltır.",
+   "pano._guvenli (pano.py:417-424) beklenmedik biçimde bölümü 'gösterilemiyor' ile kapatır ama hangi alanın eksik olduğunu söylemez; mesaja istisna türü + alan adı eklemek (ve terminal özetine bir satır düşmek) 'sessiz try/except yok' ilkesine daha yakın olur.",
+   "Pano üretim anındaki bayatlık uyarısı dosya_esik_dk'yı, tarayıcı bandı ise sabit 60 dk'yı kullanıyor (pano.py:380,1857); iki eşik dosyadan tek kaynaktan (saglik.dosya_esik_dk) alınabilir.",
+   "Kıyas BTC/SPX için 'al-tut' tanımı maliyetsiz; en azından taban notuna 'komisyon/funding yok' uyarısı eklemek ve paper'ın maliyetli olduğunu hatırlatmak karşılaştırmayı dürüstleştirir.",
+   "spx_guncelle kilit koruması yalnız tam yol eşitliğine bakıyor (spx_guncelle.py:66); depo içi bir alt dizin ya da sembolik bağ geçer. Path.is_relative_to(depo.MUM_DIZINI) ile reddetmek daha güvenli.",
+   "Koni (koni.py) havuzu UTC araştırma günleri, paper gerçekleşeni TSİ günleri: gün numaraları 3 saat kayık; koni.json 'notlar'a bu eklenebilir.",
+   "test_pano.py'de XSS testi kimlik alanını kapsıyor; gunluk_kz[].gun, cikis_nedeni, olay mesajı ve koç metni gibi serbest metin alanları için de kaçış testi eklemek pano.py:869 türü kaçakları yakalar."
+  ]
+ }
+]

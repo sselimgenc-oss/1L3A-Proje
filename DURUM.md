@@ -113,6 +113,10 @@ Ana ders: önceki sonuçlar OOS'a bakılarak seçilmiş ve kâr birkaç işlemde
   saatlik dosyalar → swing/daytrade 1h+ testleri önce; 15m/30m dakikalık veri tamamlanınca.
 
 ## Lider kararları günlüğü (karar 26)
+- 2026-11-08: Fable 5.1 bağımsız denetimi YARIDA durduruldu (kullanıcı isteği; sonraki oturumda devam). 7 boyuttan 6'sı bitti
+  (araştırma, backtest, risk, paper, ops, pano: 40 HAM bulgu, DOĞRULANMADI) -> sonuclar/denetim/fable_ham_bulgular_2026-11-08.json.
+  Kalan: test-kalite boyutu, her bulguya bağımsız çürütme, sentez+öneriler. Betik: sonuclar/denetim/fable_denetim_betigi.js.
+  Ham bulgular doğrulanmadan kullanıcıya sunulmaz / koda uygulanmaz.
 - 2026-11-08 (KULLANICI kararı): mevduat kıyası yıllık %30 bileşik (stratejiler/kiyas_ayar.json); yoğunlaşma uyarısı: tek sembol açık stop
   riskinin %40'ından fazlası → panoda uyarı (yalnız uyarı, SERT_LIMITLER'e dokunmaz); sunucuya günlük DK_SPX güncellemesi (1l3a-spx.timer, 22:30 UTC).
   Lider: paper canlı yolu kıyas/güven okumasına artık tohum dizinini veriyor (önce /opt/1l3a/veri/mumlar'a bakıyordu, sunucuda yanlıştı).
