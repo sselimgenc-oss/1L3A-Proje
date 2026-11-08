@@ -12,7 +12,12 @@ adımlardır; bu depoda sunucuya bağlanan hiçbir şey yoktur.
 apt update && apt install -y python3-venv python3-pip git rsync
 adduser --disabled-password --gecos "" l3a
 mkdir -p /opt/1l3a && chown l3a:l3a /opt/1l3a
+# l3a ile SSH girişi (pano tüneli için, §6): l3a'nın parolası yok; root'a eklediğiniz SSH anahtarını l3a'ya da kopyalayın
+install -d -m 700 -o l3a -g l3a /home/l3a/.ssh
+install -m 600 -o l3a -g l3a /root/.ssh/authorized_keys /home/l3a/.ssh/authorized_keys
 ```
+Kontrol (kendi bilgisayarınızdan): `ssh l3a@SUNUCU true` hatasız bitmeli. "Permission denied (publickey)" alırsanız yukarıdaki iki
+`install` satırını root olarak tekrar çalıştırın (Droplet'ı anahtarla açtıysanız `/root/.ssh/authorized_keys` vardır).
 
 ## 2. Kod ve sanal ortam
 ```bash
@@ -26,11 +31,11 @@ sudo -u l3a .venv/bin/pip install -r requirements.txt
 Stratejilerin gösterge ısınması için uzun geçmiş gerekir; Binance TradFi geçmişi kısadır (2026'dan). Bu yüzden kendi
 bilgisayarınızdaki `veri/mumlar` klasöründen YALNIZ gerekli sembolleri kopyalayın (yaklaşık 600 MB'ın küçük bir kısmı):
 ```bash
-# kendi bilgisayarınızdan:
-ssh l3a@SUNUCU "mkdir -p /var/lib/1l3a-paper/veri/mumlar"        # servis ilk açılışta oluşturur; elle de açılabilir
+# kendi bilgisayarınızdan (root ile: /var/lib root'a aittir, l3a orada dizin AÇAMAZ):
+ssh root@SUNUCU "install -d -o l3a -g l3a /var/lib/1l3a-paper /var/lib/1l3a-paper/veri /var/lib/1l3a-paper/veri/mumlar"
 rsync -av veri/mumlar/{BTCUSDT,ETHUSDT,SOLUSDT,DK_AAPL,DK_MSFT,DK_GOOGL,DK_AMZN,DK_NVDA,DK_META,DK_TSLA,DK_XAU,DK_WTI,DK_COPPER} \
       root@SUNUCU:/var/lib/1l3a-paper/veri/mumlar/
-ssh root@SUNUCU "chown -R l3a:l3a /var/lib/1l3a-paper"
+ssh root@SUNUCU "chown -R l3a:l3a /var/lib/1l3a-paper"          # rsync root ile kopyaladı: sahipliği l3a'ya ver
 ```
 Tohum eksik sembolün geçmişi yalnız REST'ten alınır (kısa); uzun geçmişli stratejiler için bu bir **uyarıdır** (loga yazılır).
 S&P 500 (kıyas çizgisi) için `DK_SPX` de kopyalayın (yukarıdaki rsync listesine `DK_SPX` ekleyin); günlük güncellemeyi 4b yapar.
@@ -43,8 +48,12 @@ cp deploy/1l3a-paper.service deploy/1l3a-pano.service deploy/1l3a-pano.timer dep
 cp deploy/1l3a-paper.env.ornek /etc/1l3a-paper.env && chmod 600 /etc/1l3a-paper.env
 nano /etc/1l3a-paper.env          # Telegram token/chat_id (isteğe bağlı; boşsa Telegram kapalı kalır, motor çalışır)
 systemctl daemon-reload
-systemctl enable --now 1l3a-paper.service 1l3a-pano.timer 1l3a-pano-sunucu.service
+systemctl enable --now 1l3a-paper.service                  # önce motor: durum dosyalarını o yazar
+sleep 60 && ls /var/lib/1l3a-paper/durum/                 # ozet.json vb. görünmeli (ilk açılış bir-iki dakika sürebilir)
+systemctl enable --now 1l3a-pano.timer 1l3a-pano-sunucu.service
 ```
+`1l3a-pano-sunucu` durum dizinini kendisi de oluşturur (systemd `StateDirectory`), yani sıra karışsa da başlar; motor dosyaları
+yazana kadar sayfada dosya listesi/404 görürsünüz. Takıldıysa: `systemctl reset-failed 1l3a-pano-sunucu && systemctl restart 1l3a-pano-sunucu`.
 İlk açılışta motor: exchangeInfo'yu okur (tick/step/minNotional), TradFi sembol eşlemesini doğrular (bulamadığı sembolü kullanan
 stratejiyi "VERİ YOK" işaretler, uydurmaz), tohum + REST ile geçmişi kurar ve her stratejinin son kapanmış mumundan başlar.
 
@@ -78,7 +87,8 @@ journalctl -u 1l3a-paper -n 50 --no-pager
 | Durum | `systemctl status 1l3a-paper` |
 | Yeniden başlat | `systemctl restart 1l3a-paper` (durum diskte; kaçan mumlar REST'ten tamamlanır) |
 | Durdur | `systemctl stop 1l3a-paper` |
-| Pano | bilgisayarınızda `ssh -L 8080:127.0.0.1:8080 l3a@SUNUCU`, sonra tarayıcıda `http://localhost:8080/pano.html` |
+| Pano | bilgisayarınızda `ssh -L 8080:127.0.0.1:8080 l3a@SUNUCU` (l3a anahtarı §1'de eklendi; eklemediyseniz önce onu yapın), sonra tarayıcıda `http://localhost:8080/pano.html` |
+| Pano üretimi durumu | `systemctl status 1l3a-pano` — "failed" (çıkış kodu 1) = durum dosyaları eksik/bozuk (motor yazmıyor olabilir); kod 2 (kritik uyarı) başarı sayılır, uyarı panoda yazılıdır |
 | Durum dosyaları | `/var/lib/1l3a-paper/durum/` (ozet.json, stratejiler.json, islemler.jsonl, saglik.json, olaylar.jsonl, ...) |
 | Motor hafızası | `/var/lib/1l3a-paper/durum/paper_state.json` (silerseniz paper SIFIRDAN başlar!) |
 

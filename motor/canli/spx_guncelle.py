@@ -4,7 +4,8 @@ Neden: kıyas DK_SPX kapanışlarını yerel mum arşivinden okur (1h öncelikli
 `${STATE_DIRECTORY}/veri/mumlar` (paper `--tohum` ile AYNI dizin; paper bunu kıyas/güven okumasına da verir) ve kimse güncellemezse bayatlar.
 
 Artımlı: mevcut parquet'in son mumunun bulunduğu aydan BİR ay öncesinden `--bitis` (hariç, varsayılan yarın UTC) tarihine kadar aylık saatlik
-dosyalar geçici dizine indirilir; yeni parça mevcut geçmişle birleştirilir (örtüşmede yeni kazanır), eski geçmiş yeniden yazılmaz/indirilmez.
+dosyalar geçici dizine indirilir; yeni parça mevcut geçmişle birleştirilir: yalnız gerçekten indirilen aylar yenisiyle değişir (404 ile atlanan
+ayın mevcut mumları korunur), örtüşmede yeni kazanır; eski geçmiş yeniden yazılmaz/indirilmez.
 Sessiz hata yok: indirilemeyen ay, bayat sonuç ya da bilinmeyen/yasak dizin -> SystemExit (kod != 0) ve stderr'e neden.
 Kilit: araştırma dizini (`veri/mumlar` depo içi) REDDEDİLİR; bu araç yalnız paper/kıyas verisi içindir, 2025-11-01 sonrası araştırma verisi yazmaz.
 CLI: python -m motor.canli.spx_guncelle --veri /var/lib/1l3a-paper/veri/mumlar [--baslangic YYYY-MM] [--bitis YYYY-MM-DD]
@@ -48,13 +49,20 @@ def baslangic_hesapla(mevcut_son: Optional[pd.Timestamp], baslangic_arg: Optiona
     return str(ay)
 
 
+def _aylar(ix: pd.DatetimeIndex) -> pd.Index:
+    ix = ix.tz_convert("UTC").tz_localize(None) if ix.tz is not None else ix
+    return ix.to_period("M")
+
+
 def birlestir(mevcut: Optional[pd.DataFrame], yeni: pd.DataFrame) -> pd.DataFrame:
-    """Yeni parçanın ilk mumundan ÖNCEKİ mevcut geçmiş + yeni parça (örtüşmede yeni kazanır)."""
+    """Mevcut arşiv + yeni parça. Yalnız GERÇEKTEN İNDİRİLEN aylarda (yeni parçada mumu olan UTC ayları) mevcut mumlar yenisiyle değişir;
+    indirilmeyen (ör. 404 ile atlanan) aydaki mevcut mumlar KORUNUR. Örtüşen zaman damgasında yeni kazanır."""
     if yeni is None or not len(yeni):
         raise GuncellemeHatasi("yeni veri boş: indirme hiç mum getirmedi")
     if mevcut is None or not len(mevcut):
         return yeni.sort_index()
-    eski = mevcut[mevcut.index < yeni.index.min()]
+    indirilen = set(_aylar(yeni.index))
+    eski = mevcut[~_aylar(mevcut.index).isin(indirilen)]
     sonuc = pd.concat([eski, yeni])
     sonuc = sonuc[~sonuc.index.duplicated(keep="last")].sort_index()
     return sonuc

@@ -83,7 +83,8 @@ geçme ölçütleri `sonuclar/evren/ON_KAYIT.md`'dedir).
   - `istatistik {islem_sayisi, gun_sayisi, beklenti_islem_basi (para; yalnız set_katki_usd olan işlemlerden), kazanc_kayip_orani (ort. kazanç R / ort. kayıp R),
     sqn (R'den), sharpe, sortino (günlük getiriden, yıllık √365), kelly_ceyrek (0.25 x max(0, W - (1-W)/B); yalnız bilgi), yesil_gun_orani,
     en_uzun_kazanc_serisi, en_uzun_kayip_serisi (çıkış sırasına göre, net K/Z işareti), ort_tutma_saat, en_iyi_gun/en_kotu_gun {gun,pnl}|null, istatistik_neden}`.
-    İşlem < 30: `sqn`, `kelly_ceyrek` null; gün < 30: `sharpe`, `sortino` null; nedenleri `istatistik_neden`'de.
+    İşlem < 30: `sqn`, `kelly_ceyrek` null; gün < 30: `sharpe`, `sortino` null; nedenleri `istatistik_neden`'de. R'si olmayan satır varsa ya da R'nin
+    standart sapması 0 ise `sqn` null + neden (denetim 2026-11-08); Kelly'de W payı R'li işlemler üzerindendir.
   - `cikis_nedenleri[] {neden, islem, pay, net_pnl}` (+ `cikis_nedenleri_not`): net_pnl = set katkısı toplamı; grubun bir işleminde set katkısı yoksa (backtest portföy kolu) null.
   - `gunluk_kz_ajan[] {gun, ajanlar{ajan:{pnl,getiri}}, toplam{pnl,getiri}}` (son 60 gün): ajan getirisi = pnl / başlangıç özsermaye (toplamsal); toplam.getiri = özsermaye getirisi.
   - `haftalik_kz_ajan[]`, `aylik_kz_ajan[] {donem, bas_gun, bit_gun, gun_sayisi, tamamlandi, ajanlar, toplam}` (son 12 dönem; `tamamlandi=false`: dönem bitmedi).
@@ -93,7 +94,8 @@ geçme ölçütleri `sonuclar/evren/ON_KAYIT.md`'dedir).
   Backtestte portföy kolunun sembol dağılımı ölçülmez: o hücreler (ve onlara dokunan enstrümanlar) `ozsermaye_katkisi: null` + `katki_neden`; `pf` set katkısı olmayan ajanlarda null.
 - **`maruziyet.json`**: `bekleyen_emirler[] {kimlik, sembol, tur (giris|hedef_agirlik|cikis|kucultme), yon, sinyal_zamani (karar mumunun kapanışı), emir, stop, hedef}`;
   backtestte `null` (yeniden oynatma emir kuyruğu tutmaz).
-- **`islemler.jsonl`**: paper satırlarında `gun` (çıkışın TSİ günü; takvim detayı bunu kullanır).
+- **`islemler.jsonl`**: paper satırlarında `gun` (çıkışın TSİ günü; takvim detayı bunu kullanır); backtest satırlarında `gun` = çıkışın UTC ızgara günü
+  (`ozet.gun_kesimi` ile aynı kesim). Pano `gun`'u olmayan satırı hiçbir güne yerleştirmez (UTC tarihine düşürmez) ve sayısını açıkça yazar.
 - Eski durum dosyası (TSİ serisi yok) yüklenirse UTC günü serisi devralınır (en çok 3 saat kayma) ve `ozet.notlar`'a yazılır.
 
 ## Genişletme (Dersler ve aylık rapor, 2026-11-08; sürüm 1 içinde EKLEMELİ)
@@ -104,7 +106,9 @@ Hesap `motor/canli/dersler.py` ve `motor/canli/aylik_rapor.py` içindedir; paper
   `stratejiler[] {kimlik, islem, r_olculen, isabet, ort_r, std_r, pf_r (R tabanlı), beklenti {n, isabet, ort_r, std_r, pf_r}|null,
   isabet_testi {test, p_deger, yon, anlamli}|null, ort_r_testi {test, t, df, p_deger, yon, anlamli}|null, test_neden,
   durum ("icinde"|"altinda"|"ustunde"|"ornek_az"|null), durum_etiket, durum_neden, beklenti_penceresi {hafta, net_bant, net_getiri, dusus_bant, max_dusus, alarm}|null,
-  aciklamalar[] (kurallı metin şablonları), cikis_nedeni_sapmalari[] {neden, islem, pay, beklenen_pay, p_deger, anlamli}}`.
+  aciklamalar[] (kurallı metin şablonları), cikis_nedeni_sapmalari[] {neden, islem, pay, beklenen_pay, p_deger|null, anlamli, gozlenmedi, ust_sinir|null, test_neden|null}}`.
+  Backtest payı 0 olan nedende binom testi YAPILMAZ (H0 pay=0 iken tek gözlem p=0 verirdi): `p_deger` null, `gozlenmedi` true, `ust_sinir` ≈ 3/n_ref
+  (üçler kuralı, %95), `test_neden` "backtestte gözlenmedi ..."; payı 1 olan (tek neden) için de test yok (`test_neden` yazılı). Denetim O16, 2026-11-08.
   Referans: `sonuclar/final/beklenti_islem_referansi.csv` (üretici `python -m motor.canli.dersler_referans`; `beklenti_araliklari.csv` ile aynı örneklem-dışı işlemler,
   `veri_sonu` çıkışları hariç; araliklar csv'si ortalama R/PF taşımadığı için ayrı dosya). İsabet: kesin iki yönlü binom; ort. R: Welch t; PF test edilmez;
   çıkış nedeni payı: neden başına binom. İşlem < `min_islem` (30) ise testler null + `test_neden`, durum `ornek_az`. Karar: ort. R anlamlıysa onun yönü, değilse isabet,
@@ -116,10 +120,13 @@ Hesap `motor/canli/dersler.py` ve `motor/canli/aylik_rapor.py` içindedir; paper
   sayim, genel_not, en_erken_degerlendirme (YYYY-MM-DD), kesinti {saat|null, alt_sinir_saat, olculen_olay, olculemeyen_olay, neden|null, limit_saat (24), uzama_saat},
   stratejiler[] {kimlik, dersler_durumu, canliya_uygun (bool), neden}, tanimsiz[] {ad, soru}}`. Kullanıcı kararları 2026-11-08 (DURUM.md lider günlüğü):
   `sure` ≥ 56 gün + 24 saati aşan kesinti kadar (kesinti reddetmez, `en_erken_degerlendirme` kayar; 2027-01-02 kesinti yokken); `set_beklenti` (set 8 hf net getiri/düşüş alarmı yok);
-  `sert_limit` (kill switch yok, anlık kaldıraç/açık stop riski limit aşımı yok; günlük %3 kayıp limitinin TETİKLENMESİ ihlal değil); `asgari_islem` (set toplamında ≥ 30 kapanan işlem; geçti/kaldı,
+  `sert_limit` (ihlal = motorun KAYITLI olayları: kill switch ya da dolum anı tavan aşımı olayı `dolum_kaldirac_asimi` / `dolum_stop_riski_asimi` [limit_olaylari];
+  red/kırpma limitin çalıştığını gösterir, nedende bilgi; günlük kayıp limitinin TETİKLENMESİ ihlal değil — denetim O14 2026-11-08);
+  `sert_limit_anlik` (durum "bilgi", kabulü bozmaz: anlık/MTM kaldıraç veya açık stop riski limit üstündeyse `deger` "uyarı: ..."; motor limiti dolumda uygular); `asgari_islem` (set toplamında ≥ 30 kapanan işlem; geçti/kaldı,
   birikimli olduğundan süre dolmadan "bekliyor"); bilgi kalemleri `kesinti_suresi`, `gunluk_limit_olayi`, `strateji_alarmlari`, `dersler_ozeti`.
   `stratejiler[].canliya_uygun`: Dersler "icinde"/"ustunde" true; "altinda" false (neden: beklentinin altında; kabulü bozmaz); "ornek_az" false (ayrı neden: örnek az); ölçülmedi false.
   KESİNTİ ÖLÇÜMÜ (`aylik_rapor.kesinti_olc`): `paper_state.json` olay kayıtlarından (en çok 200 olay): `veri_bosluk` ve `yeniden_baslatma` mesajındaki "(A -> B)" aralığı
+  (`veri_bosluk`'ta A/B mum AÇILIŞLARIDIR: "N mum eksik" ile kesinti [A + mum süresi, B) = N mum süresi sayılır; denetim O18)
   (yeniden başlatmada A = son kalp atışı, B = başlangıç; kalp atışından önceki eski olaylarda aralık yoktur) ve `ws_koptu` "WS N sn mesaj vermedi" süresi;
   çakışanlar birleştirilir. Süresi kayıtta olmayan kesinti olayı (aralıksız `yeniden_baslatma`, `binance_hata`, aralıksız `veri_bosluk`, "WS koptu") ya da dolu olay kaydı varsa toplam ÖLÇÜLEMEZ:
   `saat` null + `neden`, `alt_sinir_saat` yalnız ölçülen kısım (uzama yalnız bu kesin kısımdan hesaplanır). `veri_yok` kesinti sayılmaz. Açık kalan tek soru: `tanimsiz` = `strateji_alarmi_kabulu`.
@@ -187,12 +194,13 @@ Dosya yoksa (eski motor) pano "veri yok" der. Ölçülemeyen değer `null` + ned
   | `saglik` | geçen/ölçülen kontrol × 100. Strateji: çalışıyor mu, veri serisi bayat mı. Set: motor durumu ok, bayat veri yok, bütünlük (sha256 ↔ kayıt) eşleşiyor, toplam kesinti ≤ 24 saat, sert limit ihlali yok | tüm ölçülen kontroller geçer: `saglik.json` bayatlık eşiği, `butunluk.json`, paper kabul kararları (kesinti 24 saat, sert limit; 2026-11-08) | ≥ 1 ölçülen kontrol; backtestte ölçülmez (null + neden) |
   Ölçülemeyen kontrol (ör. kayıtsız bütünlük, ölçülemeyen kesinti) ölçülen sayıya girmez ve nedeni `kontroller[].neden`'dedir. Örnek az ise eksen `puan: null` + `neden` (eksik eksen hiçbir ortalamaya girmez). Backtest kaynağında `kaynak_not` (referans kilitli dönemi içerir).
 - **`koc.json`** (`1l3a.durum.koc`): `min_islem` (30), `alfa` (0.05), `min_kova` (5), `min_grup_tutma` (10), `kurallar[] {id, ad, referans ("backtest"|"yok"), kaynak}`, `bulgular[] {id, kural, kapsam ("SET"|strateji), seviye
-  ("beklenti_disi"|"incele"|"izle"), seviye_etiket, baslik, metin (kurallı şablon; LLM yok), dayanak {sayılar}, istatistik {test, p_ham, test_sayisi, p_duzeltilmis, duzeltme, anlamli_ham, anlamli_duzeltilmis, alfa}, referans, oneri (sabit şablon)}`,
+  ("beklenti_disi"|"incele"|"izle"), seviye_etiket, baslik, metin (kurallı şablon; LLM yok), dayanak {sayılar}, istatistik {test, p_ham|null, test_sayisi, p_duzeltilmis|null, duzeltme, anlamli_ham, anlamli_duzeltilmis, alfa, neden?}, referans, oneri (sabit şablon)}`,
+  (`p_ham`/`p_duzeltilmis` null yalnız backtestte HİÇ gözlenmeyen çıkış nedeni/stop ailesi bulgusunda: test yapılmaz, seviye en fazla `izle`, `istatistik.neden` yazılı),
   `atlanan[] {kural, kapsam, neden}` (örnek az: kural ÇALIŞMAZ ve burada nedeniyle yazılır), `sayim`, `yontem`, `uyari`. Sıra: seviye, sonra düzeltilmiş p. Yalnız KAPANMIŞ işlemler (lookahead yok); zaman dilimi TSİ.
   **Koç ASLA** risk artırma, pozisyon büyütme, kayıp sonrası ekleme, Kelly ile büyütme önermez (martingale/DCA yasak); öneri metinleri yalnız `ONERI` şablonlarıdır (incele / izle / beklenti dışı) ve "değişiklik yalnız walk-forward + kullanıcı onayıyla" der.
   Seviye: referans (backtest karşılaştırma tabanı) VAR ise düzeltilmiş p < alfa → `beklenti_disi`, yalnız ham p < alfa → `incele`; referans YOK ise düzeltilmiş p < alfa → `incele`, yalnız ham → `izle` (referanssız kural `beklenti_disi` üretemez).
   Çoklu test: aynı kural ailesi ve kapsam içindeki test sayısı kadar Bonferroni (kapsamlar/kurallar arası düzeltme yok; `test_sayisi` her bulguda). Kurallar (kazanmayan = R ≤ 0):
-  `stop_sikligi` ("stop" içeren çıkış nedenlerinin toplam payı backtest payından anlamlı yüksek; kesin binom; strateji), `cikis_nedeni` (diğer nedenlerin payı backtestten saptı; her iki yön, backtestte hiç görülmeyen dahil; binom + Bonferroni),
+  `stop_sikligi` ("stop" içeren çıkış nedenlerinin toplam payı backtest payından anlamlı yüksek; kesin binom; strateji), `cikis_nedeni` (diğer nedenlerin payı backtestten saptı; her iki yön; binom + Bonferroni; backtestte hiç görülmeyen neden test edilmez, en fazla izle),
   `kayip_serisi` (en uzun ardışık kazanmayan seri, backtest isabetiyle şansla görülme olasılığı; kesin dinamik program; strateji ve set), `tutma_suresi` (kaybedenler kazananlardan anlamlı uzun tutulmuş; Mann-Whitney; strateji; referans yok),
   `kayip_yogunlugu` (giriş saati TSİ 4 saatlik blok / giriş günü TSİ / sembol kovasında kazanmayan payı kalandan anlamlı yüksek ve kovanın toplam R'si negatif; Fisher; set ve ≥ 30 işlemli strateji; referans yok),
   `beklenti_alti` (Dersler "altında" strateji; set 8 hf beklenti alarmı; Dersler'in onaylı kuralı, ek düzeltme yok). `min_kova`/`min_grup_tutma` koça özgü örnek sınırlarıdır (kullanıcıya sorulur).

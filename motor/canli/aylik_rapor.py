@@ -8,8 +8,10 @@ KABUL KONTROL LİSTESİ ölçütleri (eski panonunkiler — %10 DD, PSR>%95, 30 
                aşarsa kabul reddedilmez, en erken değerlendirme aşan kesinti kadar ileri kayar (`en_erken_degerlendirme`).
   set_beklenti DURUM.md Aşama 4 "Bitiş: ... sonuçların beklenti aralığında olması"; set 8 hafta net getiri/düşüş alarm eşiği
                (sonuclar/final/OZET.md "Alarm eşiği (set, 8 hafta)"; stratejiler.json set.beklenti alarm).
-  sert_limit   DURUM.md karar 14 + 25. KULLANICI KARARI 2026-11-08: kill switch, anlık kaldıraç ve açık stop riski aşımı ihlaldir; günlük %3 kayıp
-               limitinin TETİKLENMESİ ihlal sayılmaz (bilgi kalemi `gunluk_limit_olayi` sayıyı gösterir).
+  sert_limit   DURUM.md karar 14 + 25. KULLANICI KARARI 2026-11-08: kill switch ve kaldıraç / açık stop riski tavanı aşımı ihlaldir; günlük %3 kayıp
+               limitinin TETİKLENMESİ ihlal sayılmaz (bilgi kalemi `gunluk_limit_olayi` sayıyı gösterir). Denetim O14 (2026-11-08): ihlal MOTORUN uyguladığı
+               tanımla ölçülür = motorun kayıtlı olayları (kill_switch; dolum anı aşım olayları DOLUM_ASIM_OLAYLARI). Red/kırpma limitin çalıştığını gösterir
+               (bilgi). Anlık (MTM) kaldıraç / stop riski aşımı ayrı UYARI kalemidir (`sert_limit_anlik`, durum "bilgi", kabulü bozmaz).
   asgari_islem KULLANICI KARARI 2026-11-08: set toplamında ≥ 30 kapanan işlem. Geçti/kaldı verir; birikimli olduğu için süre dolmadan "bekliyor", süre dolunca
                30'un altı "kaldı".
   kesinti      Bilgi kalemi (geçti/kaldı vermez): ölçüm `kesinti_olc` ile olay kayıtlarından; ölçülemezse null + neden (uydurma yok). Etkisi yalnız `sure`'dedir.
@@ -39,19 +41,24 @@ ASGARI_ISLEM = 30                       # kullanıcı kararı 2026-11-08: set to
 KESINTI_LIMIT_SAAT = 24.0               # kullanıcı kararı 2026-11-08: aşan kısım değerlendirme süresini uzatır
 OLAY_KAPASITE = 200                     # Paper.olay_ekle en çok 200 olay tutar; dolduysa eski olaylar silinmiş olabilir
 # veri_yok burada YOK: strateji verisinin baştan olmaması çalışma kesintisi değildir.
+# Dolum anında sert tavan aşımı (motor bunu engeller; olay yazarsa ihlaldir). Şu an paper motoru bu türleri ÜRETMİYOR (dolumda engelliyor);
+# kayıtlı olmadıkça ihlal 'kill_switch'ten ibarettir. Tür adları sözleşmede (DURUM_SOZLESMESI.md, aylik_rapor) belgelidir.
+DOLUM_ASIM_OLAYLARI = {"dolum_kaldirac_asimi": "dolum anında kaldıraç tavanı aşıldı", "dolum_stop_riski_asimi": "dolum anında toplam stop riski tavanı aşıldı"}
 KESINTI_OLAYLARI = ("veri_bosluk", "ws_koptu", "yeniden_baslatma", "binance_hata")
 TANIMSIZ = [
     {"ad": "strateji_alarmi_kabulu", "soru": "'Sonuçların beklenti aralığında olması' yalnız set için mi, her strateji için mi aranır? (şimdi: set kabul kalemi, "
                                               "strateji bazı bilgi; 'altında' ders durumu kabulü bozmaz ama stratejiyi canlıdan eler: kullanıcı kararı 2026-11-08)"},
 ]
 _BOSLUK_RE = re.compile(r"\(([^()]+?) -> ([^()]+?)\)")
+_EKSIK_RE = re.compile(r"(\d+) mum eksik")
 _WS_SN_RE = re.compile(r"WS (\d+(?:\.\d+)?) sn mesaj vermedi")
 
 
 def kesinti_olc(olaylar: list, olay_kapasite: int = OLAY_KAPASITE) -> dict:
     """Motorun mevcut olay kayıtlarından (paper_state.json olaylar: {zaman, tur, mesaj}) toplam kesinti süresi.
 
-    Süresi kayıttan okunabilenler: `veri_bosluk` ve `yeniden_baslatma` mesajındaki "(A -> B)" aralığı (yeniden başlatmada A = motorun SON KALP ATIŞI,
+    Süresi kayıttan okunabilenler: `veri_bosluk` ve `yeniden_baslatma` mesajındaki "(A -> B)" aralığı (veri_bosluk'ta A ve B mum AÇILIŞLARIDIR:
+    "N mum eksik" ile mum süresi (B-A)/(N+1) bulunur ve kesinti [A + mum süresi, B) = N mum süresi sayılır) (yeniden başlatmada A = motorun SON KALP ATIŞI,
     B = başlangıç; kalp_atisi.py — kalp atışından önceki eski olaylarda aralık yoktur, ölçülemeyen sayılır); `ws_koptu` mesajındaki "WS N sn mesaj vermedi" ([zaman-N sn, zaman]).
     Çakışan aralıklar birleştirilir (aynı süre iki kez sayılmaz). Süresi kayıtta olmayan kesinti olayları (aralıksız yeniden_baslatma, binance_hata, aralıksız veri_bosluk,
     'WS koptu') veya dolu olay kaydı (eski olaylar silinmiş olabilir) varsa toplam ÖLÇÜLEMEZ: `saat` None, `neden` yazılı, `alt_sinir_saat` yalnız ölçülen kısımdır.
@@ -64,8 +71,12 @@ def kesinti_olc(olaylar: list, olay_kapasite: int = OLAY_KAPASITE) -> dict:
         aralik = None
         try:
             if tur_ in ("veri_bosluk", "yeniden_baslatma") and (mm := _BOSLUK_RE.search(msg)):
-                a_, b_ = (pd.Timestamp(mm.group(i)) for i in (1, 2))
-                aralik = (ek._utc(a_), ek._utc(b_))
+                a_, b_ = (ek._utc(pd.Timestamp(mm.group(i))) for i in (1, 2))
+                if tur_ == "veri_bosluk" and (me := _EKSIK_RE.search(msg)):
+                    # "(A -> B)" mum AÇILIŞLARIDIR (son bilinen mum -> ilk yeni mum); A mumu kendi süresi boyunca veri taşır.
+                    # Gerçek boşluk [A + mum süresi, B) = eksik x mum süresi; mum süresi = (B - A) / (eksik + 1).
+                    a_ = a_ + (b_ - a_) / (int(me.group(1)) + 1)
+                aralik = (a_, b_)
             elif tur_ == "ws_koptu" and (mm := _WS_SN_RE.search(msg)):
                 bit = ek._utc(pd.Timestamp(o["zaman"]))
                 aralik = (bit - timedelta(seconds=float(mm.group(1))), bit)
@@ -152,19 +163,34 @@ def kabul_listesi(*, simdi, donem_bas, risk: dict, sayaclar: dict, set_konum: di
                         "DURUM.md Aşama 4 (beklenti aralığında) + sonuclar/final/OZET.md alarm eşiği", "kaldi" if bozuk else "gecti",
                         f"net {nb['deger'] * 100:+.2f}% ({nb['bant']}), düşüş {dd['deger'] * 100:.2f}% ({dd['bant']})",
                         ("alarm: " + ", ".join(bozuk)) if bozuk else None))
-    # --- sert limit
+    # --- sert limit (O14): ihlal MOTORUN UYGULADIĞI tanımla, motorun kayıtlı olaylarından ölçülür (anlık MTM değil)
     kill_ev = sum(1 for o in limit_olaylari if o["tur"] == "kill_switch")
+    dolum_ev = defaultdict(int)
+    for o in limit_olaylari:
+        if o["tur"] in DOLUM_ASIM_OLAYLARI:
+            dolum_ev[o["tur"]] += 1
+    kill = bool(risk["kill_switch"]["tetiklendi"]) or kill_ev > 0 or sayaclar.get("kill_olayi", 0) > 0
+    sorun = (["kill switch tetiklendi"] if kill else []) + [f"{DOLUM_ASIM_OLAYLARI[t]} ({n} olay)" for t, n in sorted(dolum_ev.items())]
+    red, kirp = sayaclar.get("reddedilen_giris"), sayaclar.get("kirpilan_giris")
+    uygulama = ("motor tavanı uyguladı: " + ", ".join(x for x in ((f"{red} giriş reddedildi" if red else ""), (f"{kirp} giriş kırpıldı" if kirp else "")) if x)
+                + " (red/kırpma limitin ÇALIŞTIĞINI gösterir, ihlal değildir)") if (red or kirp) else None
+    k.append(_kalem("sert_limit", "Sert limit ihlali yok",
+                    "kill switch tetiklenmedi; dolum anında kaldıraç/toplam stop riski tavanı aşılmadı (motor olay kaydı). Günlük %3 kayıp limitinin tetiklenmesi ihlal değil",
+                    "DURUM.md karar 14, 25 + kullanıcı kararı 2026-11-08; tanım: motorun dolum anında uyguladığı limit (portfoy/motor.py, paper_motor.py)",
+                    "kaldi" if sorun else "gecti", "; ".join(sorun) if sorun else "ihlal yok",
+                    "; ".join(x for x in (uygulama, "ölçüm: motorun kill switch ve dolum anı aşım olayları (limit_olaylari); anlık (MTM) değerler ayrı uyarı kalemindedir") if x)))
+    # --- anlık (MTM) aşım: UYARI, kabulü bozmaz (motor limitleri dolum anında uygular; kapanışta kaldıraç bir bar tavanı aşabilir, açık kârdaki pozisyonun
+    #     stopa kadar riski %5'i geçebilir — bunlar kural ihlali değildir)
     asimlar = []
     for ad, anahtar in (("kaldıraç", "kaldirac"), ("açık stop riski", "acik_stop_riski")):
         b = risk[anahtar]
         if b["deger"] is not None and b["deger"] > b["limit"]:
             asimlar.append(f"{ad} {b['deger']:.3f} > {b['limit']:.3f}")
-    kill = bool(risk["kill_switch"]["tetiklendi"]) or kill_ev > 0 or sayaclar.get("kill_olayi", 0) > 0
-    sorun = (["kill switch tetiklendi"] if kill else []) + asimlar
-    k.append(_kalem("sert_limit", "Sert limit ihlali yok", "kill switch tetiklenmedi; anlık kaldıraç/açık stop riski limiti aşılmadı (günlük %3 kayıp limitinin tetiklenmesi ihlal değil)",
-                    "DURUM.md karar 14, 25 + kullanıcı kararı 2026-11-08", "kaldi" if sorun else "gecti",
-                    "; ".join(sorun) if sorun else "ihlal yok",
-                    "yalnız anlık değerler ve motorun kill switch olayları denetlenir; geçmiş an-an aşım kaydı tutulmaz (limitler kodda uygulanır)"))
+    k.append(_kalem("sert_limit_anlik", "Uyarı: anlık (MTM) kaldıraç / açık stop riski limit üstünde", "bilgi (kabulü bozmaz): son fiyatlarla anlık değer ≤ limit",
+                    "denetim O14 (2026-11-08): motor limiti dolum anında uygular; anlık aşım fiyat hareketinden doğabilir", "bilgi",
+                    "uyarı: " + "; ".join(asimlar) if asimlar else "limit altında",
+                    "anlık değer: kapanışta kaldıraç bir bar tavanı aşabilir (ertesi açılışta kaldirac_azalt), kârdaki pozisyonun stopa kadar riski açık kârı da kapsar"
+                    if asimlar else None))
     # --- bilgi kalemleri
     gl = sum(1 for o in limit_olaylari if o["tur"] == "gunluk_kayip")
     k.append(_kalem("gunluk_limit_olayi", "Günlük kayıp limiti olayı sayısı", "bilgi (ihlal sayılmaz)", "kullanıcı kararı 2026-11-08: günlük limit tetiklenmesi ihlal değil",

@@ -155,10 +155,14 @@ def istatistik(satirlar: list, gunluk: list) -> dict:
     if n < MIN_ISLEM:
         nedenler.append(f"SQN ve Kelly ölçülmedi: kapanan işlem {n} < {MIN_ISLEM}")
     else:
-        sd = _std(r)
-        if sd and sd > 0 and len(r) == n:
+        sd = _std(r) if len(r) > 1 else None
+        if len(r) < n:
+            nedenler.append(f"SQN ölçülmedi: {n - len(r)}/{n} işlemde R yok (R'siz satır varken SQN tüm işlemleri temsil etmez)")
+        elif not sd or sd <= 0:
+            nedenler.append("SQN ölçülemedi: R çarpanlarının standart sapması sıfır")
+        else:
             sqn = d.sayi(math.sqrt(n) * _ort(r) / sd)
-        w = len(kazanc) / n
+        w = len(kazanc) / len(r) if r else 0.0
         if kk is not None and kk > 0:
             kelly = d.sayi(KELLY_CARPAN * max(0.0, w - (1 - w) / kk))
         else:

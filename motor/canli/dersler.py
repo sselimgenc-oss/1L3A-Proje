@@ -8,7 +8,8 @@ strateji başına isabet, ortalama R, PF (R tabanlı), R sapması ve çıkış n
 YÖNTEM (kurallı; LLM yok, lookahead yok: yalnız kapanmış işlemler)
   - isabet = r > 0 olan işlem payı (r'si olan işlemler üzerinden). Binom testi: kesin, iki yönlü, H0: p = backtest isabeti.
   - ortalama R: Welch t testi (paper n, ort, std ↔ referans n, ort, std), iki yönlü. PF (R tabanlı) = Σ(r>0) / -Σ(r<0): betimleyici, test yok.
-  - çıkış nedeni payı: neden başına kesin binom testi (H0: pay = backtest payı), n >= MIN_ISLEM_DERS iken.
+  - çıkış nedeni payı: neden başına kesin binom testi (H0: pay = backtest payı), n >= MIN_ISLEM_DERS iken. Backtest payı 0 (ya da 1) olan nedende test
+    YAPILMAZ (H0 pay=0 iken tek gözlem p=0 verirdi): p_deger null + test_neden "backtestte gözlenmedi (üst sınır ~3/n)"; Koç bunu en fazla "izle" sayar.
   - durum: "ornek_az" (n < MIN_ISLEM_DERS; testler null + neden) | "ustunde" | "altinda" | "icinde". Ortalama R testi anlamlıysa (p < ALFA) yönü
     belirler; değilse isabet testi; ikisi de anlamlı değilse "icinde". Ortalama R ile isabet ters yönde anlamlıysa R kararı verir ve açıklamaya yazılır.
     8 haftalık beklenti penceresinde alarm varsa (stratejiler.json beklenti) ve n yeterliyse durum "altinda"dır.
@@ -227,15 +228,42 @@ def degerlendir(kimlik: str, satirlar: list, ref: Optional[dict], konum: Optiona
         cnt[s.get("cikis_nedeni") or "bilinmiyor"] = cnt.get(s.get("cikis_nedeni") or "bilinmiyor", 0) + 1
     for neden_ in sorted(set(cnt) | set(ref["cikis_paylari"])):
         kk, q = cnt.get(neden_, 0), ref["cikis_paylari"].get(neden_, 0.0)
+        if q <= 0.0:
+            # Backtestte 0 gözlem: H0 pay=0 altında k>0'ın olasılığı tam 0 olur (binom p=0) -> anlamsız "beklenti dışı". Test YAPILMAZ;
+            # yalnız bilgi: referans n işlemde 0 gözlemin %95 üst güven sınırı ~3/n ("üçler kuralı").
+            ust = gozlenmeyen_ust_sinir(ref.get("n"))
+            neden_t = ("backtestte gözlenmedi (referans " + (f"{ref['n']} işlemde 0; %95 üst sınır ~3/n = {_pct(ust)}" if ust is not None else "işlem sayısı bilinmiyor")
+                       + "); binom testi yapılmadı")
+            out["cikis_nedeni_sapmalari"].append({"neden": neden_, "islem": kk, "pay": kk / n, "beklenen_pay": q, "p_deger": None, "anlamli": False,
+                                                  "gozlenmedi": True, "ust_sinir": ust, "test_neden": neden_t})
+            if kk > 0:
+                A.append(f"'{neden_}' çıkışı backtestte gözlenmedi (üst sınır ~3/n" + (f" = {_pct(ust)}" if ust is not None else "")
+                         + f"); paperda {kk}/{n} işlemde var. Test yapılmadı: tek başına beklenti dışı sayılmaz.")
+            continue
+        if q >= 1.0:
+            # Backtestte TÜM çıkışlar bu nedenle: diğer nedenlerin payı 0 (yukarıdaki kural) -> aynı nedenle test yapılmaz (p=0 olurdu).
+            ust = gozlenmeyen_ust_sinir(ref.get("n"))
+            out["cikis_nedeni_sapmalari"].append({"neden": neden_, "islem": kk, "pay": kk / n, "beklenen_pay": q, "p_deger": None, "anlamli": False,
+                                                  "gozlenmedi": False, "ust_sinir": None,
+                                                  "test_neden": "backtestte tüm çıkışlar bu nedenle (diğer nedenler gözlenmedi"
+                                                                + (f"; alt sınır ~1-3/n = {_pct(1 - ust)}" if ust is not None else "") + "); binom testi yapılmadı"})
+            continue
         p_ = binom_p(kk, n, q)
-        sapma = {"neden": neden_, "islem": kk, "pay": kk / n, "beklenen_pay": q, "p_deger": p_, "anlamli": p_ < ALFA}
+        sapma = {"neden": neden_, "islem": kk, "pay": kk / n, "beklenen_pay": q, "p_deger": p_, "anlamli": p_ < ALFA,
+                 "gozlenmedi": False, "ust_sinir": None, "test_neden": None}
         out["cikis_nedeni_sapmalari"].append(sapma)
         if p_ < ALFA:
-            if q == 0.0:
-                A.append(f"'{neden_}' çıkışı backtestte hiç görülmemişti; paperda {kk}/{n} işlemde var ({_p(p_)}).")
-            else:
-                A.append(f"'{neden_}' çıkışları {_pct(kk / n)} (backtest {_pct(q)}): beklenenden {'çok' if kk / n > q else 'az'} ({_p(p_)}).")
+            A.append(f"'{neden_}' çıkışları {_pct(kk / n)} (backtest {_pct(q)}): beklenenden {'çok' if kk / n > q else 'az'} ({_p(p_)}).")
     return out
+
+
+def gozlenmeyen_ust_sinir(n_ref) -> Optional[float]:
+    """Backtestte n_ref işlemde 0 gözlenen olayın payı için yaklaşık %95 üst güven sınırı (üçler kuralı, 3/n). n bilinmiyorsa None."""
+    try:
+        n_ref = int(n_ref)
+    except (TypeError, ValueError):
+        return None
+    return min(1.0, 3.0 / n_ref) if n_ref > 0 else None
 
 
 # ---------------------------------------------------------------------------- dosya

@@ -63,6 +63,18 @@ def test_istatistik_az_islemde_sqn_kelly_null_ve_neden():
     assert s["beklenti_islem_basi"] == "2.50"
 
 
+def test_istatistik_r_siz_satir_varsa_sqn_null_ve_neden():
+    """Denetim: R'si olmayan satır varsa SQN nedensiz null kalmamalı (null + neden kuralı)."""
+    sat = [_satir(1.0 if i % 2 else -0.5, "1.00") for i in range(ek.MIN_ISLEM + 5)] + [_satir(None, "0.00")]
+    s = ek.istatistik(sat, _gunluk(40))
+    assert s["sqn"] is None and "SQN ölçülmedi" in s["istatistik_neden"] and "1/" in s["istatistik_neden"]
+    assert s["kelly_ceyrek"] is not None                                      # Kelly R'li işlemlerden (pay R listesi üzerinden)
+    sabit = ek.istatistik([_satir(1.0, "1.00") for _ in range(ek.MIN_ISLEM)], _gunluk(40))
+    assert sabit["sqn"] is None and "standart sapması sıfır" in sabit["istatistik_neden"]
+    tam = ek.istatistik([_satir(1.0 if i % 2 else -0.5, "1.00") for i in range(ek.MIN_ISLEM)], _gunluk(40))
+    assert tam["sqn"] is not None and "SQN" not in (tam["istatistik_neden"] or "")
+
+
 def test_istatistik_az_gunde_sharpe_sortino_null():
     s = ek.istatistik([_satir(1.0, "10.00")], _gunluk(5))
     assert s["sharpe"] is None and s["sortino"] is None and "Sharpe" in s["istatistik_neden"]

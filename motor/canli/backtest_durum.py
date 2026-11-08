@@ -231,6 +231,8 @@ def olustur(kok: Path = KOK, baslangic=BASLANGIC, yazim_zamani=None, beklenti_cs
             "kazanma_orani": d.sayi(kazanan / len(satirlar)) if satirlar else None,
             "beklenti": beklenti_konumlari(seri, bekle[k])})
     tum_islemler.sort(key=lambda s: s["zaman"])
+    for s_ in tum_islemler:                     # takvim günü (motor yazar): backtest ızgarası UTC günüdür (ozet.gun_kesimi ile aynı kesim)
+        s_["gun"] = str(d.zaman_oku(s_["zaman"]).astimezone(timezone.utc).date())
     # --- özet
     ozet_ham = h["ozet"]                                                # sec.seri_ozeti: getiri, sharpe, max_dusus, gun
     zirve = max([bas] + ozs)

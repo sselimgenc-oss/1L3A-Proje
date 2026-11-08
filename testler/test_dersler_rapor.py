@@ -74,7 +74,9 @@ def test_altinda_ve_ustunde_ve_cikis_sapmasi_metni():
 
 def test_gorulmemis_cikis_nedeni_ve_pf_none():
     x = ds.degerlendir(KIM, [_s(1.0, "kill_switch") for _ in range(40)], REF)
-    assert x["pf_r"] is None and any("hiç görülmemişti" in a for a in x["aciklamalar"]) and any("PF (R) hesaplanamadı" in a for a in x["aciklamalar"])
+    assert x["pf_r"] is None and any("gözlenmedi" in a and "3/n" in a for a in x["aciklamalar"]) and any("PF (R) hesaplanamadı" in a for a in x["aciklamalar"])
+    ks = next(c for c in x["cikis_nedeni_sapmalari"] if c["neden"] == "kill_switch")
+    assert ks["p_deger"] is None and not ks["anlamli"] and ks["gozlenmedi"] and "binom testi yapılmadı" in ks["test_neden"]      # O16
 
 
 def test_alarm_durumu_altina_ceker():
@@ -165,7 +167,7 @@ def test_kabul_set_beklenti_ve_limit_ve_genel():
     k = _kabul(set_konum=_kon(True))
     assert _kalem(k, "set_beklenti")["durum"] == "kaldi" and k["genel_durum"] == "kaldi"
     assert _kalem(_kabul(risk=_risk(kill=True)), "sert_limit")["durum"] == "kaldi"
-    assert _kalem(_kabul(risk=_risk(kal=3.4)), "sert_limit")["durum"] == "kaldi"
+    assert _kalem(_kabul(limit=[{"tur": "dolum_kaldirac_asimi", "zaman": "2026-11-12T00:00:00Z"}]), "sert_limit")["durum"] == "kaldi"
     assert _kalem(_kabul(limit=[{"tur": "kill_switch", "zaman": "2026-11-12T00:00:00Z"}]), "sert_limit")["durum"] == "kaldi"
     ok = _kabul(limit=[{"tur": "gunluk_kayip", "zaman": "2026-11-12T00:00:00Z"}])
     assert _kalem(ok, "sert_limit")["durum"] == "gecti" and _kalem(ok, "gunluk_limit_olayi")["deger"] == "1"      # günlük limit: bilgi
@@ -192,16 +194,47 @@ def test_kabul_gunluk_limit_tetiklenmesi_ihlal_degil_kill_ve_kaldirac_ihlal():
     gl = [{"tur": "gunluk_kayip", "zaman": "2026-11-12T00:00:00Z"}, {"tur": "gunluk_kayip", "zaman": "2026-11-13T00:00:00Z"}]
     k = _kabul(limit=gl, risk=_risk(gk=0.05))                                               # anlık günlük kayıp limit üstünde olsa da ihlal değil
     assert _kalem(k, "sert_limit")["durum"] == "gecti" and _kalem(k, "gunluk_limit_olayi")["deger"] == "2"
-    assert _kalem(_kabul(risk=_risk(stop=0.09)), "sert_limit")["durum"] == "kaldi"
-    assert _kalem(_kabul(risk=_risk(kal=3.5)), "sert_limit")["durum"] == "kaldi"
+    assert _kalem(_kabul(limit=[{"tur": "dolum_stop_riski_asimi", "zaman": "2026-11-12T00:00:00Z"}]), "sert_limit")["durum"] == "kaldi"
 
 
-def _bosluk(a, b, zaman="2026-11-12T00:00:00Z"):
-    return {"zaman": zaman, "tur": "veri_bosluk", "mesaj": f"BTCUSDT 1h: 9 mum eksik ({a} -> {b}); borsa bu mumları vermedi"}
+def test_o14_anlik_mtm_asimi_uyari_kabulu_bozmaz():
+    """Denetim O14: motor limiti DOLUM anında uygular; anlık (MTM) kaldıraç/stop riski aşımı ihlal değil, ayrı uyarı kalemi."""
+    for r in (_risk(stop=0.27), _risk(kal=3.01), _risk(kal=3.5, stop=0.09)):
+        k = _kabul(risk=r, simdi="2027-01-03T00:00:00Z", set_konum=_kon(False), islem=30)
+        assert _kalem(k, "sert_limit")["durum"] == "gecti"
+        u = _kalem(k, "sert_limit_anlik")
+        assert u["durum"] == "bilgi" and u["deger"].startswith("uyarı:") and u["neden"]
+        assert k["genel_durum"] == "tamam"                                                      # uyarı kabulü bozmaz
+    assert _kalem(_kabul(), "sert_limit_anlik")["deger"] == "limit altında"
+    # red / kırpma: limitin çalıştığını gösterir, ihlal değil (bilgi olarak nedende)
+    k = ar.kabul_listesi(simdi=pd.Timestamp("2026-11-20T00:00:00Z"), donem_bas=pd.Timestamp("2026-11-07T00:00:00Z"), risk=_risk(),
+                         sayaclar={"kill_olayi": 0, "gunluk_limit_olayi": 0, "kapanan_islem": 5, "reddedilen_giris": 3, "kirpilan_giris": 2},
+                         set_konum={}, strat_konum={}, dersler={"sayim": {"icinde": 0, "altinda": 0, "ustunde": 0, "ornek_az": 0}},
+                         saglik_durum="ok", olaylar=[], limit_olaylari=[])
+    sl = _kalem(k, "sert_limit")
+    assert sl["durum"] == "gecti" and "3 giriş reddedildi" in sl["neden"] and "2 giriş kırpıldı" in sl["neden"]
+
+
+def _bosluk(a, b, zaman="2026-11-12T00:00:00Z", tf="1h"):
+    """paper_canli mesajı: A = son bilinen mumun AÇILIŞI, B = ilk yeni mumun AÇILIŞI; eksik = (B-A)/mum - 1. Gerçek boşluk [A+mum, B)."""
+    eksik = int((pd.Timestamp(b) - pd.Timestamp(a)) / pd.Timedelta(tf)) - 1
+    return {"zaman": zaman, "tur": "veri_bosluk", "mesaj": f"BTCUSDT {tf}: {eksik} mum eksik ({a} -> {b}); borsa bu mumları vermedi"}
+
+
+def test_o18_kesinti_bir_mum_fazla_sayilmaz():
+    """Denetim O18: (A -> B) mum açılışlarıdır; 1 eksik mum = 1 mum süresi (2 değil)."""
+    assert ar.kesinti_olc([_bosluk("2026-11-10 00:00:00+00:00", "2026-11-10 02:00:00+00:00")])["saat"] == pytest.approx(1.0)
+    gun = ar.kesinti_olc([_bosluk("2026-11-10 00:00:00+00:00", "2026-11-12 00:00:00+00:00", tf="1d")])
+    assert gun["saat"] == pytest.approx(24.0)                                                    # 1d'de 1 eksik mum = 24 sa (48 değil)
+    k = _kabul(olaylar=[_bosluk("2026-11-10 00:00:00+00:00", "2026-11-12 00:00:00+00:00", tf="1d")])
+    assert k["kesinti"]["uzama_saat"] == 0.0 and k["en_erken_degerlendirme"] == "2027-01-02"     # 24 sa sınırı aşılmadı -> uzama yok
+    # aralığı okunamayan mesaj (eksik sayısı yok) eski davranışla aralığın tamamını sayar
+    eski = {"zaman": "2026-11-12T00:00:00Z", "tur": "veri_bosluk", "mesaj": "X 1h: (2026-11-10 00:00:00+00:00 -> 2026-11-10 03:00:00+00:00)"}
+    assert ar.kesinti_olc([eski])["saat"] == pytest.approx(3.0)
 
 
 def test_kesinti_olc_birlestirir_ve_ws_suresini_okur():
-    ol = [_bosluk("2026-11-10 00:00:00+00:00", "2026-11-10 10:00:00+00:00"), _bosluk("2026-11-10 08:00:00+00:00", "2026-11-10 12:00:00+00:00"),   # çakışan: 12 sa
+    ol = [_bosluk("2026-11-09 23:00:00+00:00", "2026-11-10 10:00:00+00:00"), _bosluk("2026-11-10 07:00:00+00:00", "2026-11-10 12:00:00+00:00"),   # çakışan: 12 sa
           {"zaman": "2026-11-11T06:00:00Z", "tur": "ws_koptu", "mesaj": "WS 7200 sn mesaj vermedi; yeniden bağlanılıyor"},                       # 2 sa
           {"zaman": "2026-11-11T00:00:00Z", "tur": "veri_yok", "mesaj": "x"}, {"zaman": "2026-11-11T00:00:00Z", "tur": "baslangic", "mesaj": "x"}]
     c = ar.kesinti_olc(ol)
@@ -210,7 +243,7 @@ def test_kesinti_olc_birlestirir_ve_ws_suresini_okur():
 
 
 def test_kesinti_olculemiyorsa_null_ve_neden_uydurma_yok():
-    ol = [_bosluk("2026-11-10 00:00:00+00:00", "2026-11-10 05:00:00+00:00"), {"zaman": "2026-11-11T00:00:00Z", "tur": "yeniden_baslatma", "mesaj": "x"},
+    ol = [_bosluk("2026-11-09 23:00:00+00:00", "2026-11-10 05:00:00+00:00"), {"zaman": "2026-11-11T00:00:00Z", "tur": "yeniden_baslatma", "mesaj": "x"},
           {"zaman": "2026-11-11T00:00:00Z", "tur": "ws_koptu", "mesaj": "WS koptu: ConnectionError()"}]
     c = ar.kesinti_olc(ol)
     assert c["saat"] is None and c["alt_sinir_saat"] == pytest.approx(5.0) and c["olculemeyen_olay"] == 2 and "süresi kayıtta yok" in c["neden"]
@@ -221,9 +254,9 @@ def test_kesinti_olculemiyorsa_null_ve_neden_uydurma_yok():
 
 
 def test_kesinti_24_saati_asarsa_degerlendirme_uzar_reddetmez():
-    k0 = _kabul(olaylar=[_bosluk("2026-11-10 00:00:00+00:00", "2026-11-10 20:00:00+00:00")])          # 20 sa <= 24: kayma yok
+    k0 = _kabul(olaylar=[_bosluk("2026-11-09 23:00:00+00:00", "2026-11-10 20:00:00+00:00")])          # 20 sa <= 24: kayma yok
     assert k0["en_erken_degerlendirme"] == "2027-01-02" and k0["kesinti"]["uzama_saat"] == 0.0
-    ol = [_bosluk("2026-11-10 00:00:00+00:00", "2026-11-12 00:00:00+00:00")]                           # 48 sa -> 24 sa uzama -> 2027-01-03
+    ol = [_bosluk("2026-11-09 23:00:00+00:00", "2026-11-12 00:00:00+00:00")]                           # 48 sa -> 24 sa uzama -> 2027-01-03
     k = _kabul(simdi="2027-01-02T12:00:00Z", olaylar=ol, set_konum=_kon(False), islem=30)
     s = _kalem(k, "sure")
     assert k["en_erken_degerlendirme"] == "2027-01-03" and k["kesinti"]["uzama_saat"] == pytest.approx(24.0)
