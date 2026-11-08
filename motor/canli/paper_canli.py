@@ -30,6 +30,7 @@ WS_SESSIZ_SN = 180                  # bu kadar süre hiç mesaj gelmezse bağlan
 YOKLAMA_SN = 30
 SEANS_KONTROL_SN = 300              # seanslı serilerde yeni bar yoksa en çok bu sıklıkta REST'e bak
 GRACE_SN = 3                        # kapanıştan sonra REST'in mumu yayımlaması için
+BIRIM_BEKLEME_SN = 900              # çok sembollü birim: beklenen sembol mumu gelmeden satır en çok bu kadar bekletilir (TradFi 300 sn yoklaması x 3)
 
 
 class CanliKaynak(TekrarKaynagi):
@@ -42,6 +43,34 @@ class CanliKaynak(TekrarKaynagi):
         self.semboller = sorted({s for s, _ in self.seriler})
         self.son_kontrol: dict = {}
         self.funding_son: dict = {}
+        self._bosluk_yazilan: set = set()
+
+    # ------------------------------------------------------------------ satırlar (çok sembollü birim: tüm semboller gelene kadar beklet)
+    def satirlar(self, birim, son_t, simdi) -> list:
+        """Tekrar kaynağıyla aynı satırlar; ÇOK SEMBOLLÜ birimde bir satır, o kovada mumu BEKLENEN (paper_veri.kova_bekleniyor) her
+        sembolün mumu gelene kadar yayımlanmaz (sonraki satırlar da beklenir; sıra korunur). Sembolün serisi t'yi geçmişse (t mumu hiç
+        gelmeyecek) ya da kapanıştan BIRIM_BEKLEME_SN geçmişse satır eksik sembolle (None) yayımlanır ve `veri_bosluk` olayı yazılır.
+        Neden: semboller REST'ten farklı anlarda gelir (TradFi 300 sn yoklaması); erken yayımlanan satırda eksik sembol o barda hiç
+        işlenmez (stop kontrolü yok, karar bir bar gecikir). Tekrar modu (TekrarKaynagi) değişmez: orada tüm veri baştan vardır."""
+        rows = super().satirlar(birim, son_t, simdi)
+        if len(birim.semboller) < 2:
+            return rows
+        out = []
+        for t, mumlar in rows:
+            kap = t + birim.aralik
+            eksik = [s for s, m in mumlar.items() if m is None and pv.kova_bekleniyor(s, birim.tf, t)]
+            gelecek = [s for s in eksik if self.mumlar[(s, birim.tf)].index[-1] < t]      # serisi t'ye ulaşmamış: mum hâlâ gelebilir
+            if gelecek and simdi < kap + pd.Timedelta(seconds=BIRIM_BEKLEME_SN):
+                break
+            for s in eksik:
+                anahtar = (birim.ad, t, s)
+                if anahtar not in self._bosluk_yazilan:
+                    self._bosluk_yazilan.add(anahtar)
+                    self.olay("veri_bosluk", f"{birim.ad} {t}: {s} {birim.tf} mumu gelmedi"
+                                             + (f" ({BIRIM_BEKLEME_SN} sn beklendi)" if s in gelecek else " (borsa bu mumu vermedi)")
+                                             + "; satır bu sembol olmadan işlendi")
+            out.append((t, mumlar))
+        return out
 
     # ------------------------------------------------------------------ başlangıç
     def _tohum(self, sembol: str, tf: str) -> Optional[pd.DataFrame]:

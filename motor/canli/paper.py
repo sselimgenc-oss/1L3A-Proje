@@ -15,6 +15,7 @@ from __future__ import annotations
 
 import json
 import logging
+import traceback
 from decimal import Decimal
 from pathlib import Path
 from typing import Optional
@@ -50,12 +51,12 @@ def paper_ayarlari(baslangic_sermaye: float = BASLANGIC_SERMAYE) -> PortfoyAyarl
 class Paper:
     def __init__(self, tanimlar: list, kaynak: TekrarKaynagi, kurallar: dict, ayarlar: Optional[PortfoyAyarlari] = None,
                  durum_yolu: Optional[Path] = None, her_satir_kaydet: bool = False, islem_baslangic=None,
-                 pf_sutunlar: Optional[dict] = None):
+                 pf_sutunlar: Optional[dict] = None, tetikleyen_hemen_kapat: bool = True):
         self.tanimlar = [t for t in tanimlar if not t.veri_yok]
         self.veri_yok = [t for t in tanimlar if t.veri_yok]
         self.kaynak = kaynak
         self.ayarlar = ayarlar or paper_ayarlari()
-        self.motor = PaperMotor(self.ayarlar, kurallar)
+        self.motor = PaperMotor(self.ayarlar, kurallar, tetikleyen_hemen_kapat)
         self.durum_yolu = Path(durum_yolu) if durum_yolu else None
         self.her_satir_kaydet = her_satir_kaydet
         self.pf_sutunlar = dict(pf_sutunlar or {})
@@ -75,6 +76,8 @@ class Paper:
         self.onceki_kalp: Optional[str] = None    # bu süreç başlarken bulunan önceki kalp atışı
         self.son_kesinti: Optional[dict] = None   # bu süreç başlarken ölçülen kesinti (kalp_atisi.kesinti)
         self._kalp_yazilan = None
+        self._askida_kayit: dict = {"ayarlar": {}, "pf_sutunlar": {}}   # kayıtta olup şimdi çalışmayan stratejilerin ayar/sütunları (geri yazılır)
+        self.son_ozet: Optional[str] = None       # günlük Telegram özeti gönderilen son TSİ günü ("YYYY-MM-DD"; paper_state'e yazılır)
         for s in {x for t in self.tanimlar for x in t.veri_semboller}:
             if s not in kurallar:
                 raise KeyError(f"{s}: sembol kuralı (tick/step/minNotional) yok")
@@ -226,17 +229,42 @@ class Paper:
     # ------------------------------------------------------------------ kalıcılık
     def durum_sozlugu(self) -> dict:
         return {"surum": SURUM, "baslangic_sermaye": self.ayarlar.baslangic_sermaye,
-                "ayarlar": {t.kimlik: t.ayar for t in self.tanimlar}, "pf_sutunlar": self.pf_sutunlar,
+                "ayarlar": {**self._askida_kayit["ayarlar"], **{t.kimlik: t.ayar for t in self.tanimlar}},
+                "pf_sutunlar": {**self._askida_kayit["pf_sutunlar"], **self.pf_sutunlar},
                 "satir_sayisi": self.satir_sayisi, "uyarilar": self.uyarilar, "olaylar": self.olaylar, "kalp_atisi": self.kalp_atisi,
-                "strateji_gun": self.strateji_gun, "strateji_gun_tsi": self.strateji_gun_tsi, "motor": self.motor.durum_al()}
+                "strateji_gun": self.strateji_gun, "strateji_gun_tsi": self.strateji_gun_tsi, "son_ozet": self.son_ozet,
+                "motor": self.motor.durum_al()}
 
     def kaydet(self, yol: Optional[Path] = None):
         from motor.canli.durum import atomik_yaz_json
         yol = Path(yol or self.durum_yolu)
         atomik_yaz_json(yol, _enc(self.durum_sozlugu()))
 
-    def yukle(self, yol: Optional[Path] = None, ayar_guncelle: bool = False) -> bool:
-        """Kayıtlı durumu yükler (varsa). Ayar etiketleri kayıtla uyuşmuyorsa AÇIK HATA (sessizce yeni ayara geçilmez)."""
+    def _pf_sutun_guncelle(self, t, eski: list, d: dict) -> tuple:
+        """--ayar-guncelle: portföy sütunları YENİ ayar nesnesinden (baslat'taki keşifle aynı yol; kayıtlı son satıra kadarki veriyle)
+        yeniden türetilir. -> (sütunlar, atılan kol kimlikleri, uyarı metni | None). Çıkan sembolde AÇIK POZİSYON varsa AÇIK HATA
+        (sessizce eski kümeyle devam edilmez, pozisyon da sahipsiz bırakılmaz)."""
+        son_t = d["motor"]["birimler"].get(t.kimlik)
+        if son_t is None:
+            raise RuntimeError(f"{t.kimlik}: kayıtlı durumda son işlenen satır yok; portföy sütunları yeni ayardan türetilemez")
+        _, yeni, _ = psg.pf_karar(t, self._mumlar_t(Birim(t.kimlik, t.tf, pd.Timedelta(0), [], list(t.evren)), son_t))
+        if list(yeni) == list(eski):
+            return list(eski), set(), None
+        cikan, eklenen = [x for x in eski if x not in yeni], [x for x in yeni if x not in eski]
+        acik_kollar = {q["kol"] for q in d["motor"]["acik"].values()}
+        acik_cikan = [x for x in cikan if f"{t.kimlik}#{x}" in acik_kollar]
+        if acik_cikan:
+            raise RuntimeError(f"{t.kimlik}: yeni ayar şu sembolleri evrenden çıkarıyor ama bu sembollerde AÇIK POZİSYON var: {acik_cikan}. "
+                               f"Yeni ayara bu pozisyonlar kapandıktan sonra geçin (ya da kullanıcı kararıyla elle karar verin).")
+        msg = (f"{t.kimlik}: --ayar-guncelle ile portföy sembol kümesi değişti; eklenen {eklenen or '-'}, çıkan {cikan or '-'} "
+               f"(çıkanlarda açık pozisyon yoktu)")
+        log.warning(msg)
+        return list(yeni), {f"{t.kimlik}#{x}" for x in cikan}, msg
+
+    def yukle(self, yol: Optional[Path] = None, ayar_guncelle: bool = False, olay_yaz: bool = True) -> bool:
+        """Kayıtlı durumu yükler (varsa). Ayar etiketleri kayıtla uyuşmuyorsa AÇIK HATA (sessizce yeni ayara geçilmez).
+        Kayıtta olup şimdi 'veri yok' olan strateji yüklemeyi düşürmez: 'askıda' taşınır, uyarı + `askida` olayı yazılır.
+        olay_yaz=False: hata sonrası geri yükleme (aynı uyarılar tekrar yazılmaz)."""
         yol = Path(yol or self.durum_yolu)
         if not yol.exists():
             return False
@@ -247,9 +275,17 @@ class Paper:
         if fark and not ayar_guncelle:
             raise RuntimeError(f"kayıtlı durumun ayarları guncel_ayarlar.csv ile farklı: {fark}. Açık pozisyonlar eski ayarla "
                                f"yönetilir; yeni ayara geçmek için kullanıcı onayıyla --ayar-guncelle verin.")
+        atilan, notlar = set(), []
+        self._askida_kayit = {"ayarlar": {k: v for k, v in d["ayarlar"].items() if k not in self.tanim_ad},
+                              "pf_sutunlar": {k: v for k, v in d["pf_sutunlar"].items() if k not in self.tanim_ad}}
         for t in self.tanimlar:
             if t.kol == "portfoy" and t.kimlik not in self.pf_sutunlar:
-                self.pf_sutunlar[t.kimlik] = d["pf_sutunlar"][t.kimlik]
+                sutun = list(d["pf_sutunlar"][t.kimlik])
+                if ayar_guncelle and t.kimlik in fark:
+                    sutun, at, msg = self._pf_sutun_guncelle(t, sutun, d)
+                    atilan |= at
+                    notlar += [msg] if msg else []
+                self.pf_sutunlar[t.kimlik] = sutun
                 self._birim_ekle(t)
         self.satir_sayisi = d["satir_sayisi"]
         self.uyarilar = list(d.get("uyarilar", []))
@@ -258,8 +294,20 @@ class Paper:
         self.strateji_gun = {k: dict(v) for k, v in d.get("strateji_gun", {}).items()}
         # eski durum dosyasında TSİ serisi yok: UTC günü serisi devralınır (en çok 3 saat kayma; motor.tsi_aktarildi notu)
         self.strateji_gun_tsi = {k: dict(v) for k, v in d.get("strateji_gun_tsi", d.get("strateji_gun", {})).items()}
-        self.motor.durum_yukle(d["motor"])
+        self.son_ozet = d.get("son_ozet")                           # eski durum dosyasında yok (None)
+        self.motor.durum_yukle(d["motor"], atilan_kollar=frozenset(atilan))
         self._limit_gorulen = len(self.motor.limit_olaylari)
+        if olay_yaz:
+            for msg in notlar:
+                self.uyarilar.append(msg)
+                self.olay_ekle("ayar_guncelle", msg, self.motor.son_zaman, bildir=False)
+            for a in self.motor.askida_ozeti():
+                acik = "; ".join(f"{k} {s} {'long' if y == 1 else 'short'} {m}" for k, s, y, m in a["acik"])
+                msg = (f"{a['birim']} ASKIDA: kayıtlı durumda var ama şu an çalıştırılamıyor (veri yok); durumu korunuyor, emir verilmiyor"
+                       + (f"; açık pozisyon son bilinen fiyatla donduruldu: {acik}" if acik else "; açık pozisyon yok"))
+                log.warning(msg)
+                self.uyarilar.append(msg)
+                self.olay_ekle("askida", msg, self.motor.son_zaman)
         for b in self.birimler:
             if b.son_t is None:
                 raise RuntimeError(f"{b.ad}: kayıtlı durumda son işlenen satır yok")
@@ -286,14 +334,14 @@ def tekrar_veri_yukle(tanimlar: list, bas, bit=None, veri_dizini=None, kilit_ac:
 
 def tekrar_calistir(tanimlar: list, mumlar: dict, fundingler: dict, kurallar: dict, bas, bit=None,
                     ayarlar: Optional[PortfoyAyarlari] = None, pencere: Optional[dict] = None,
-                    kapat: bool = True) -> Paper:
+                    kapat: bool = True, tetikleyen_hemen_kapat: bool = True) -> Paper:
     """Geçmiş mumları SIRAYLA 'canlıymış gibi' besler: önce `bas` anına kadar olan kapanmış mumlarla başlangıç kararı,
     sonra bas..bit arasındaki mumlar kapanış sırasıyla işlenir. kapat=True: sonda açık pozisyonlar 'veri_sonu' ile kapanır
     (backtest ile aynı). Canlı yolla AYNI kod (Paper.baslat / Paper.adim)."""
     bas = pd.Timestamp(bas)
     bas = bas.tz_localize("UTC") if bas.tzinfo is None else bas.tz_convert("UTC")
     kaynak = TekrarKaynagi(mumlar, fundingler, pencere)
-    p = Paper(tanimlar, kaynak, kurallar, ayarlar)
+    p = Paper(tanimlar, kaynak, kurallar, ayarlar, tetikleyen_hemen_kapat=tetikleyen_hemen_kapat)
     p.baslat(bas)
     if bit is None:
         from motor.veri.depo import aralik_suresi
@@ -362,7 +410,10 @@ def canli_calistir(durum_dizini: Path, tohum_dizin: Optional[Path] = None, ayar_
     tg.gonder(tg.baslangic_metni(len(aktif), p.motor.ozsermaye()))
     bildirilen = [len(p.motor.islemler)]
     gorulen_acik = {(a["kimlik"], a["sembol"], a["giris_zamani"]) for a in pdr.acik_pozisyonlar(p)}
-    son_ozet = [None]
+    if not yuklendi:
+        p.son_ozet = dun_tsi(simdi)            # ilk çalışma: paper'dan önceki gün özetlenmez
+        p.kaydet()                             # hata sonrası geri yükleme için her zaman tutarlı bir kayıt bulunsun
+    kiyas_son = [None]
 
     def tur() -> None:
         simdi = ist.sunucu_zamani()
@@ -380,20 +431,38 @@ def canli_calistir(durum_dizini: Path, tohum_dizin: Optional[Path] = None, ayar_
         for x in p.motor.islemler[bildirilen[0]:]:
             tg.gonder(tg.islem_kapandi_metni(pdr._islem_satiri(p, x)))
         bildirilen[0] = len(p.motor.islemler)
+        if tohum_dizin is not None and (kiyas_son[0] is None or simdi - kiyas_son[0] >= pd.Timedelta(hours=1)):
+            kiyas_son[0] = simdi
+            kiyas_btc_guncelle(ist, tohum_dizin, simdi, p)
         o = _durum_yaz(p, kaynak, durum_dizini, simdi, veri_dizini=tohum_dizin)   # kıyas/güven okuması = tohum dizini (sunucuda StateDirectory)
         if n:
             p.kaydet()
-        gun = str(simdi.date())
-        if simdi.hour >= 0 and simdi.minute >= 10 and son_ozet[0] != gun:
-            tg.gonder(tg.ozet_metni(o))
-            son_ozet[0] = gun
+        if ozet_zamani(p, simdi):
+            dun = dun_tsi(simdi)
+            tg.gonder(tg.ozet_metni(o, dun=dun_ozeti(p, dun)))
+            p.son_ozet = dun                   # gönderim başarısız olsa da işaretlenir (her turda yeniden deneme seli olmasın; log'da görünür)
+            p.kaydet()                         # yeniden başlatmada aynı gün tekrar gitmesin
 
     if tek_sefer:
         tur()
         p.kaydet()
         return 0
 
-    async def ana():
+    def geri_yukle():
+        """Hata sonrası: bellekteki (yarım işlenmiş olabilecek) durum atılır, son tutarlı kayıt yüklenir; olay/uyarı listesi korunur."""
+        olaylar, uyarilar = list(p.olaylar), list(p.uyarilar)
+        p.motor._acil = False
+        if not p.yukle(ayar_guncelle=True, olay_yaz=False):
+            raise RuntimeError("geri yüklenecek kayıtlı durum yok")
+        p.olaylar, p.uyarilar = olaylar, uyarilar
+
+    def kalici_yaz():
+        p.kaydet()
+        _durum_yaz(p, kaynak, durum_dizini, pd.Timestamp.now(tz="UTC"), veri_dizini=tohum_dizin)
+
+    koruyucu = TurKoruyucu(p, geri_yukle, kalici_yaz, binance_hata=pv.BinanceHata)
+
+    async def ana() -> int:
         durdur = asyncio.Event()
         loop = asyncio.get_running_loop()
         for sig in (signal.SIGTERM, signal.SIGINT):
@@ -406,23 +475,152 @@ def canli_calistir(durum_dizini: Path, tohum_dizin: Optional[Path] = None, ayar_
                 tetik.set()
         ws = asyncio.create_task(pc.ws_dongu(pc.ws_url(pc.akislar(kaynak)), mesaj,
                                              lambda t_, m_: olaylar_onbellek.append((t_, m_)), durdur))
-        while not durdur.is_set():
+        try:
+            while not durdur.is_set():
+                if not await loop.run_in_executor(None, koruyucu.calistir, tur):
+                    break                                                   # aynı hata art arda HATA_TEKRAR_SINIRI kez: kontrollü dur
+                try:
+                    await asyncio.wait_for(tetik.wait(), timeout=pc.YOKLAMA_SN)
+                except asyncio.TimeoutError:
+                    pass
+                tetik.clear()
+                await asyncio.sleep(pc.GRACE_SN)
+        finally:
+            ws.cancel()
+            p.kalp_at(pd.Timestamp.now(tz="UTC"), durum_dizini, durdu=True)      # kapanış: kapanış ile açılış arası ölçülür
+            if koruyucu.tutarli:
+                p.kaydet()
+            else:
+                log.error("bellekteki durum tutarsız (geri yükleme başarısız): kayıt YAZILMADI, son tutarlı kayıt diskte duruyor")
+        return koruyucu.cikis_kodu
+    return asyncio.run(ana())
+
+
+# ---------------------------------------------------------------------------- servis yardımcıları (hata koruması, günlük özet, kıyas)
+HATA_TEKRAR_SINIRI = 5
+
+
+class TurKoruyucu:
+    """Servis turunu sarar. Sessiz yutma YOK: her hata loga (traceback ile) ve olaylar'a yazılır, Telegram'a 'motor hatası' gider.
+    BinanceHata: geçici sayılır (olay + log, tur tekrar denenir; eski davranış). Diğer her istisna: bellekteki durum son tutarlı
+    kayda geri döner (yarım işlenmiş satır iki kez uygulanmasın), olay + bildirim; AYNI hata art arda `sinir` kez olursa kontrollü
+    durulur (calistir False döner, cikis_kodu=1 -> systemd yeniden başlatır / OnFailure bildirir). Geri yükleme de başarısızsa hemen durulur."""
+
+    def __init__(self, p: "Paper", geri_yukle, kalici_yaz=None, sinir: int = HATA_TEKRAR_SINIRI, binance_hata=None):
+        self.p, self.geri_yukle, self.kalici_yaz, self.sinir = p, geri_yukle, kalici_yaz, sinir
+        self.binance_hata = binance_hata or ()
+        self.imza: Optional[str] = None
+        self.sayi = 0
+        self.cikis_kodu = 0
+        self.tutarli = True
+
+    def calistir(self, tur_fn) -> bool:
+        from motor.canli.telegram import maskele
+        try:
+            tur_fn()
+        except self.binance_hata as e:
+            self.p.olay_ekle("binance_hata", maskele(str(e))[:300])
+            log.error("tur başarısız: %s", maskele(str(e)))
+            return True
+        except Exception as e:  # noqa: BLE001  (sessiz değil: log + olay + Telegram; tekrarda kontrollü dur)
+            imza = maskele(f"{type(e).__name__}: {e}")[:300]
+            self.sayi = self.sayi + 1 if imza == self.imza else 1
+            self.imza = imza
+            iz = traceback.extract_tb(e.__traceback__)
+            yer = f" @ {Path(iz[-1].filename).name}:{iz[-1].lineno} ({iz[-1].name})" if iz else ""
+            log.error("tur başarısız (motor hatası, art arda %d/%d): %s\n%s", self.sayi, self.sinir, imza,
+                      maskele("".join(traceback.format_exception(e))))
             try:
-                await loop.run_in_executor(None, tur)
-            except pv.BinanceHata as e:
-                p.olay_ekle("binance_hata", str(e)[:300])
-                log.error("tur başarısız: %s", e)
-            try:
-                await asyncio.wait_for(tetik.wait(), timeout=pc.YOKLAMA_SN)
-            except asyncio.TimeoutError:
-                pass
-            tetik.clear()
-            await asyncio.sleep(pc.GRACE_SN)
-        ws.cancel()
-        p.kalp_at(pd.Timestamp.now(tz="UTC"), durum_dizini, durdu=True)      # düzgün kapanış: kapanış ile açılış arası ölçülür
-        p.kaydet()
-    asyncio.run(ana())
-    return 0
+                self.geri_yukle()
+                geri = "bellek son tutarlı kayda döndürüldü"
+            except Exception as e2:  # noqa: BLE001
+                self.tutarli = False
+                log.error("geri yükleme başarısız: %s", maskele("".join(traceback.format_exception(e2))))
+                geri = f"GERİ YÜKLEME BAŞARISIZ ({maskele(type(e2).__name__ + ': ' + str(e2))[:150]})"
+            simdi = pd.Timestamp.now(tz="UTC")
+            self.p.olay_ekle("motor_hatasi", f"{imza}{yer}; art arda {self.sayi}/{self.sinir}; {geri}", simdi)
+            dur = (not self.tutarli) or self.sayi >= self.sinir
+            if dur:
+                self.cikis_kodu = 1
+                self.p.olay_ekle("motor_durdu", (f"aynı hata art arda {self.sayi} kez" if self.tutarli else "durum geri yüklenemedi")
+                                 + f": {imza[:200]}. Motor durdu (çıkış kodu 1); systemd yeniden başlatır.", simdi)
+            if self.tutarli and self.kalici_yaz is not None:
+                try:
+                    self.kalici_yaz()
+                except Exception as e3:  # noqa: BLE001
+                    log.error("hata sonrası durum yazılamadı: %s", maskele(f"{type(e3).__name__}: {e3}"))
+            return not dur
+        self.imza, self.sayi = None, 0
+        return True
+
+
+def dun_tsi(simdi) -> str:
+    """Sunucu zamanına (UTC) göre bir önceki TSİ günü 'YYYY-MM-DD'."""
+    from motor.canli import durum_ek as ek
+    return str((pd.Timestamp(simdi).tz_convert(ek.TSI) - pd.Timedelta(days=1)).date())
+
+
+OZET_SAAT_TSI = (0, 10)                       # günlük özet: TSİ 00:10'dan sonra, biten TSİ günü için (günde bir kez)
+
+
+def ozet_zamani(p: "Paper", simdi) -> bool:
+    """Günlük özet gönderilmeli mi: TSİ saati >= 00:10 ve biten TSİ günü (dün) için henüz gönderilmedi (p.son_ozet, state'te)."""
+    from motor.canli import durum_ek as ek
+    yer = pd.Timestamp(simdi).tz_convert(ek.TSI)
+    return (yer.hour, yer.minute) >= OZET_SAAT_TSI and p.son_ozet != dun_tsi(simdi)
+
+
+def dun_ozeti(p: "Paper", gun: str) -> dict:
+    """Biten TSİ günü `gun` için tam gün K/Z: o günün son özsermayesi - önceki TSİ gününün son özsermayesi (pano ile aynı tanım,
+    motor.gun_kapanis_tsi). -> {gun, pnl, getiri, not}."""
+    gk = p.motor.gun_kapanis_tsi
+    bas = Decimal(str(p.ayarlar.baslangic_sermaye))
+    onceki = [g for g in gk if g < gun]
+    e0 = Decimal(gk[max(onceki)]) if onceki else bas
+    son = [g for g in gk if g <= gun]
+    e1 = Decimal(gk[max(son)]) if son else e0
+    pnl = e1 - e0
+    notu = None if gun in gk else "o gün işlenen mum yok (değişim 0)"
+    return {"gun": gun, "pnl": pnl, "getiri": float(pnl / e0) if e0 > 0 else 0.0, "not": notu}
+
+
+KIYAS_SEMBOL, KIYAS_TF = "BTCUSDT", "1h"
+
+
+def kiyas_btc_guncelle(ist, tohum_dizin: Path, simdi, p: Optional["Paper"] = None) -> Optional[int]:
+    """BTC al-tut kıyası (kiyas.py, tohum dizinindeki BTCUSDT 1h dosyasını okur) bayatlamasın: Binance'ten kapanmış 1h mumları alınır,
+    mevcut dosyaya eklenip ATOMİK yazılır (geçici dosya + replace). kiyas.py değişmez. Araştırma veri dizini (depo içi veri/mumlar)
+    REDDEDİLİR (araştırma verisine yazılmaz). Hata (Binance/disk): log + uyarı, tur düşmez (sonraki saatte yeniden denenir).
+    -> eklenen mum sayısı | None (yazılmadı)."""
+    from motor.veri import depo
+    try:
+        if Path(tohum_dizin).resolve() == (KOK / "veri" / "mumlar").resolve():
+            log.info("kıyas BTC güncellemesi atlandı: tohum dizini araştırma veri dizini (yazılmaz)")
+            return None
+        yol = depo.mum_yolu(KIYAS_SEMBOL, KIYAS_TF, Path(tohum_dizin))
+        eski = pd.read_parquet(yol) if yol.exists() else None
+        if eski is not None and len(eski):
+            bas = eski.index[-1] + pd.Timedelta(hours=1)
+        else:
+            ilk = min(p.motor.gun_kapanis_tsi) if (p is not None and p.motor.gun_kapanis_tsi) else None
+            bas = (pd.Timestamp(ilk, tz="UTC") if ilk else pd.Timestamp(simdi)) - pd.Timedelta(days=30)
+        if pd.Timestamp(simdi) < bas + pd.Timedelta(hours=1):
+            return 0
+        yeni = ist.klines(KIYAS_SEMBOL, KIYAS_TF, bas, None, pd.Timestamp(simdi))
+        if not len(yeni):
+            return 0
+        df = yeni if eski is None else pd.concat([eski, yeni[~yeni.index.isin(eski.index)]]).sort_index()
+        yol.parent.mkdir(parents=True, exist_ok=True)
+        gecici = yol.with_name(yol.name + ".tmp")
+        df.to_parquet(gecici)
+        gecici.replace(yol)
+        return len(df) - (0 if eski is None else len(eski))
+    except Exception as e:  # noqa: BLE001  (sessiz değil: log + uyarı; kıyas yalnız gösterge, motoru durdurmaz)
+        msg = f"kıyas BTC 1h güncellenemedi: {type(e).__name__}: {str(e)[:200]}"
+        log.error(msg)
+        if p is not None:
+            p.uyarilar.append(msg)
+        return None
 
 
 def tekrar_cli(bas, bit, ayar: str, durum_dizini: Path, veri_dizini=None) -> int:
@@ -460,7 +658,7 @@ def main(argv=None) -> int:
     logging.basicConfig(level=a.log, format="%(asctime)s %(levelname)s %(name)s: %(message)s")
     if a.tekrar:
         return tekrar_cli(a.tekrar[0], a.tekrar[1] if len(a.tekrar) > 1 else None, a.ayar or "guncel", Path(a.durum))
-    return canli_calistir(Path(a.durum), Path(a.tohum) if a.tohum else None, a.ayar_guncelle, a.tek_sefer)
+    return canli_calistir(Path(a.durum), Path(a.tohum) if a.tohum else None, a.ayar_guncelle, a.tek_sefer)   # != 0: kontrollü hata durması
 
 
 if __name__ == "__main__":

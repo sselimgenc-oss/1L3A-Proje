@@ -12,6 +12,7 @@ PERPETUAL + TRADING arar; bulamazsa neden döner (strateji 'veri yok' işaretlen
 """
 from __future__ import annotations
 
+import functools
 import logging
 import time
 from typing import Callable, Optional
@@ -219,7 +220,42 @@ def mumlar(ist: FapiIstemci, sembol: str, tf: str, bas, simdi) -> pd.DataFrame:
         return ham
     if tf == "5m":
         return ham
-    df = yeniden_ornekle(ham, tf, kaynak="5m", eksikleri_at=True, **_seans_ayari(sembol))
+    # 'eksik' eşiği SABİT beklenen mum sayısından (takvimden) türetilir: canlı pencere 1-2 gündür, medyanı araştırmadaki uzun
+    # geçmişin medyanını temsil etmez (ör. yalnız Pazar kovası içeren pencerede Pazar emtia barı 'tam' sayılırdı; araştırmada atılır).
+    df = yeniden_ornekle(ham, tf, kaynak="5m", eksikleri_at=True, beklenen_sayi=beklenen_mum_sayisi(sembol, tf), **_seans_ayari(sembol))
     # kova sonu: yerel hizalı 4h kovalarında kapanış = açılış + tf; kapanmamış kovayı at
     kapanis = df.index + aralik_suresi(tf)
     return df[kapanis <= pd.Timestamp(simdi)]
+
+
+# ---------------------------------------------------------------------------- seanslı kovalarda beklenen mum sayısı
+BEKLENEN_REFERANS = ("2024-01-01", "2025-01-01")      # takvim referans dönemi (1 yıl: DST'nin iki yarısı + tatiller; medyan sağlam)
+
+
+@functools.lru_cache(maxsize=None)
+def beklenen_mum_sayisi(sembol: str, tf: str) -> float:
+    """Seanslı sembolün `tf` kovasındaki TAM seans 5m mum sayısı: referans yılın 5m ızgarası seans süzgecinden (paper_takvim) geçirilir,
+    `yeniden_ornekle` ile AYNI kova kuralıyla sayılır ve MEDYAN alınır. Araştırma yolu aynı kuralı uzun geçmişin gerçek medyanıyla
+    uygular; tam veride ikisi aynı sayıdır. Böylece canlı (kısa pencere) ve araştırma aynı 'eksik' kararını verir."""
+    from motor.veri.depo import aralik_suresi
+    from motor.veri.yeniden_ornekle import _seans_ayari, kova_anahtari
+    izgara = pd.date_range(*BEKLENEN_REFERANS, freq="5min", tz="UTC", inclusive="left")
+    izgara = izgara[tk.seans_maskesi(sembol, izgara)]
+    anahtar = kova_anahtari(izgara, aralik_suresi(tf), _seans_ayari(sembol).get("yerel"))
+    anahtar = anahtar[~anahtar.isna()]
+    return float(pd.Series(1, index=anahtar).groupby(level=0).count().median())
+
+
+def kova_bekleniyor(sembol: str, tf: str, t) -> bool:
+    """`t` açılışlı `tf` kovasında bu sembolün (eksik sayılmayacak) bir mumu beklenir mi? Kripto: her zaman. Seanslı: kovadaki seans
+    5m mumu sayısı >= SEANS_ESIK_ORANI x beklenen (yeniden_ornekle 'eksik' kuralının tersi; hafta sonu/tatil/Pazar emtia kovası: hayır)."""
+    if tk.tur(sembol) == "kripto":
+        return True
+    from motor.veri.depo import aralik_suresi
+    from motor.veri.yeniden_ornekle import SEANS_ESIK_ORANI, _seans_ayari, kova_anahtari
+    t = pd.Timestamp(t)
+    a = aralik_suresi(tf)
+    izgara = pd.date_range(t - pd.Timedelta(hours=12), t + a + pd.Timedelta(hours=12), freq="5min", inclusive="left")
+    izgara = izgara[tk.seans_maskesi(sembol, izgara)]
+    n = int((kova_anahtari(izgara, a, _seans_ayari(sembol).get("yerel")) == t).sum())
+    return n >= SEANS_ESIK_ORANI * beklenen_mum_sayisi(sembol, tf)

@@ -36,6 +36,20 @@ def yapilandirma(env=None) -> Optional[tuple]:
     return token, chat
 
 
+_TOKEN_KALIBI = re.compile(r"(bot)?\d{5,}:[A-Za-z0-9_-]{20,}")
+
+
+def maskele(metin: str, token: Optional[str] = None) -> str:
+    """Metindeki Telegram bot token'ını (verilen token ve 'bot<id>:<gizli>' kalıbı) '***' ile değiştirir. Log/olay metinleri için."""
+    metin = str(metin)
+    if token:
+        metin = metin.replace(token, "***")
+    y = yapilandirma()
+    if y and y[0]:
+        metin = metin.replace(y[0], "***")
+    return _TOKEN_KALIBI.sub(lambda m: (m.group(1) or "") + "***", metin)
+
+
 def kirp(metin: str) -> str:
     """4096 sınırı: aşarsa son tam satırda keser (etiketler satır içinde kapalı olduğundan HTML bozulmaz)."""
     if len(metin) <= MAKS:
@@ -64,7 +78,8 @@ def gonder(metin: str, env=None, oturum=None, uyku=time.sleep, saat=time.monoton
                                       data={"chat_id": chat, "text": kirp(metin), "parse_mode": "HTML",
                                             "disable_web_page_preview": "true"}, timeout=15)
     except Exception as e:  # noqa: BLE001  (ağ hatası loglanır; motor durmaz)
-        log.error("Telegram gönderim ağ hatası: %r", e)
+        # repr/str istek URL'sini (içinde bot token'ı) taşır: yalnız tür adı + MASKELİ metin loglanır (journal'a token düşmesin)
+        log.error("Telegram gönderim ağ hatası: %s: %s", type(e).__name__, maskele(str(e), token))
         return False
     _son_gonderim[0] = saat()
     if r.status_code != 200:
@@ -217,14 +232,23 @@ def islem_kapandi_metni(satir: dict) -> str:
 islem_metni = islem_kapandi_metni
 
 
-def ozet_metni(o: dict) -> str:
-    """paper_durum.olustur çıktısından günlük özet (pano ile aynı dosyalar/sayılar)."""
+def ozet_metni(o: dict, dun: Optional[dict] = None) -> str:
+    """paper_durum.olustur çıktısından günlük özet (pano ile aynı dosyalar/sayılar).
+    dun: {gun: 'YYYY-MM-DD' (TSİ), pnl, getiri, not} verilirse özet BİTEN TSİ gününü anlatır (başlık o gün; 'Bugün' yerine 'Dün (TSİ tam gün)')."""
     oz, st, sg = o["ozet"], o["stratejiler"]["stratejiler"], o["saglik"]
     r = oz["risk"]
-    s = [ETIKET_SATIRI, f"📊 <b>Günlük özet — {tsi_gun(oz['zaman'])}</b>", "",
+    hafta = " · hafta: " + (usd(oz.get('hafta_pnl'), True) if oz.get("hafta_pnl") is not None else "— (7 gün dolmadı)")
+    if dun is not None:
+        g = datetime.strptime(dun["gun"], "%Y-%m-%d")
+        baslik = f"{g.day} {AYLAR[g.month - 1]} {g.year}"
+        gun_satiri = (f"📅 Dün (TSİ tam gün): {usd(dun['pnl'], True)} ({yuzde(dun.get('getiri'))})" + hafta
+                      + (f" · {e(dun['not'])}" if dun.get("not") else ""))
+    else:
+        baslik = tsi_gun(oz['zaman'])
+        gun_satiri = f"📅 Bugün: {usd(oz['gun_pnl'], True)} ({yuzde(oz.get('gun_getiri'))})" + hafta
+    s = [ETIKET_SATIRI, f"📊 <b>Günlük özet — {e(baslik)}</b>", "",
          f"💰 Kasa: <b>{usd(oz['ozsermaye'])}</b>",
-         f"📅 Bugün: {usd(oz['gun_pnl'], True)} ({yuzde(oz.get('gun_getiri'))}) · hafta: "
-         + (usd(oz.get('hafta_pnl'), True) if oz.get("hafta_pnl") is not None else "— (7 gün dolmadı)"),
+         gun_satiri,
          f"📈 Başlangıçtan beri: {usd(oz['toplam_pnl'], True)} ({yuzde(oz['toplam_getiri'])})",
          f"📉 Zirveden düşüş: {yuzde(oz['zirveden_dusus'], False)}",
          f"🛡 Risk: günlük kayıp {yuzde(r['gunluk_kayip']['deger'], False, 1)}/{yuzde(r['gunluk_kayip']['limit'], False, 0)} · "
@@ -265,7 +289,11 @@ UYARI = {"kill_switch": ("🚨", "Kill switch devrede", "Tüm işlemler durdu; p
          "binance_hata": ("⚠️", "Binance hatası", "Motor kendisi yeniden dener; 30 dk sürerse sunucuyu kontrol et."),
          "ayar_yenileme": ("⚠️", "Ayar yenileme zamanı", "Önerilen ayarı incele; onayın olmadan uygulanmaz."),
          "beklenti_alarmi": ("🚨", "Beklenti alarmı", "Strateji beklentinin altında; panoda ilgili stratejiye bak."),
-         "ws_sorunu": ("⚠️", "Canlı veri bağlantısı sorunlu", "Motor yeniden bağlanmayı dener; sürerse sunucuyu kontrol et.")}
+         "ws_sorunu": ("⚠️", "Canlı veri bağlantısı sorunlu", "Motor yeniden bağlanmayı dener; sürerse sunucuyu kontrol et."),
+         "motor_hatasi": ("🚨", "Motor hatası", "Motor son kayıttan devam etmeyi dener; aynı hata 5 kez olursa durur. Log: journalctl -u 1l3a-paper -n 200"),
+         "motor_durdu": ("🚨", "Motor durdu", "systemd yeniden başlatır; düzelmezse sunucuda: sudo systemctl status 1l3a-paper"),
+         "askida": ("⚠️", "Strateji askıda", "Sembol verisi yok; durumu korunuyor, emir verilmiyor. Panoda veri durumuna bak."),
+         "servis_hatasi": ("🚨", "Servis durdu", "Sunucuda: sudo systemctl status 1l3a-paper ; journalctl -u 1l3a-paper -n 200")}
 
 
 def uyari_metni(tur: str, mesaj: str = "") -> str:
@@ -337,3 +365,24 @@ class Bildirimci:
     def mesaj(self, anahtar: str, metin: str, aralik: float = ARALIK_SN) -> bool:
         """Genel (özet/işlem dışı) gönderim için sel korumalı yol."""
         return self._yolla(anahtar, metin, aralik)
+
+
+# ---------------------------------------------------------------------------- systemd OnFailure bildirimi (deploy/1l3a-bildirim@.service)
+def servis_hatasi_metni(birim: str, env=None) -> str:
+    """OnFailure birimi için uyarı. systemd (>= 251) izlenen birimin sonucunu MONITOR_* ortam değişkenleriyle verir (yoksa yazılmaz)."""
+    env = os.environ if env is None else env
+    ek = ", ".join(f"{k.lower()}={env[k]}" for k in ("MONITOR_SERVICE_RESULT", "MONITOR_EXIT_CODE", "MONITOR_EXIT_STATUS") if env.get(k))
+    return uyari_metni("servis_hatasi", f"{birim} 'failed' durumuna geçti (yeniden başlatmalar tükendi)" + (f": {ek}" if ek else ""))
+
+
+def main(argv=None) -> int:
+    import argparse
+    ap = argparse.ArgumentParser(description="1L3A Telegram bildirimi (token yalnız ortamdan: /etc/1l3a-paper.env)")
+    ap.add_argument("--servis-hatasi", metavar="BIRIM", required=True, help="systemd birimi 'failed' oldu (OnFailure)")
+    a = ap.parse_args(argv)
+    logging.basicConfig(level="INFO", format="%(levelname)s %(name)s: %(message)s")
+    return 0 if gonder(servis_hatasi_metni(a.servis_hatasi)) else 1
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

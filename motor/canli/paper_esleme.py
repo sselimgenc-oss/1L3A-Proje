@@ -94,7 +94,7 @@ def tek_esle(t, mumlar: pd.DataFrame, fund, kurallar: dict, bas, bit=None, pence
     r = backtest(fnd.stratejiye_hazirla(t.nesne, mumlar, fund, t.sembol, t.tf), t.nesne, ay, fund, islem_baslangic=bas)
     bt = r.islemler[pd.DatetimeIndex(r.islemler["giris_zamani"]) >= bas] if len(r.islemler) else r.islemler
     p = pp.tekrar_calistir([izole(t)], {(t.sembol, t.tf): mumlar}, {t.sembol: fund} if fund is not None else {},
-                           {t.sembol: kural}, bas, None, ayarlar, pencere)
+                           {t.sembol: kural}, bas, None, ayarlar, pencere, tetikleyen_hemen_kapat=False)   # çekirdek limit kuralı (eşleşme)
     out = karsilastir(bt, pd.DataFrame(p.motor.islemler, columns=ISLEM_KOLONLARI))
     out["kimlik"] = t.kimlik
     out["motor"] = "backtest.motor.backtest"
@@ -117,7 +117,7 @@ def pf_esle(t, veriler: dict, fundingler: dict, kurallar: dict, bas, bit=None, p
                          islem_baslangic=bas)
     bt = r.islemler[pd.DatetimeIndex(r.islemler["giris_zamani"]) >= bas] if len(r.islemler) else r.islemler
     p = pp.tekrar_calistir([izole(t)], {(s, t.tf): veriler[s] for s in sem}, {s: fundingler[s] for s in sem if s in fundingler},
-                           kurallar, bas, None, ayarlar, pencere)
+                           kurallar, bas, None, ayarlar, pencere, tetikleyen_hemen_kapat=False)
     out = karsilastir(bt, pd.DataFrame(p.motor.islemler, columns=ISLEM_KOLONLARI))
     out["kimlik"] = t.kimlik
     out["motor"] = "portfoy.motor.portfoy_backtest"

@@ -1,0 +1,19 @@
+# 1L3A: izlenen bir systemd birimi 'failed' olunca Telegram uyarısı (OnFailure=1l3a-bildirim@%n.service ile çağrılır).
+# Token YALNIZ /etc/1l3a-paper.env'den (EnvironmentFile; repoya girmez). Token komut satırına/URL'ye argüman olarak verilmez,
+# loga maskeli yazılır (motor/canli/telegram.py). Elle deneme: sudo systemctl start 1l3a-bildirim@deneme.service
+[Unit]
+Description=1L3A: %i hata verdi -> Telegram bildirimi
+After=network-online.target
+
+[Service]
+Type=oneshot
+User=l3a
+Group=l3a
+WorkingDirectory=/opt/1l3a
+EnvironmentFile=-/etc/1l3a-paper.env
+ExecStart=/opt/1l3a/.venv/bin/python -m motor.canli.telegram --servis-hatasi %i
+TimeoutStartSec=60
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=full
+ProtectHome=true

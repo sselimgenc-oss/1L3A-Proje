@@ -16,11 +16,14 @@ Bu sınıfın EKLEDİKLERİ (backtest çekirdeğinde olmayanlar)
      toplam stop riski bütçesi (%5) GRUP özsermayesi (= hesap özsermayesi x grup payı) üzerindendir. Üstüne HESAP düzeyinde
      (pay 1) sert limitler ayrıca uygulanır: toplam stop riski <= %5, brüt <= 3x. Tek grup ve pay 1 ise (izole) bu, çekirdekle
      birebir aynıdır (iki kapsam aynı sayıları verir).
-  4. ORTAK LİMİT KONTROLÜ: günlük kayıp (-%3) ve kill switch (%20) HESAP özsermayesi üzerindendir. Tetiklenince tetikleyen
-     birimin pozisyonları çekirdek kuralıyla (sonraki açılışta, stop kayması) kapanır; DİĞER birimlerin pozisyonları
-     BEKLEMEDEN son bilinen fiyattan (stop kayması) kapatılır (neden: kill_switch / gunluk_limit); yeni giriş/büyütme hiçbir
-     birimde yapılmaz. Kill switch kalıcıdır (yeniden başlatma kaldırmaz).
-  5. DURUM: `durum_al()` / `durum_yukle()` JSON-uyumlu anlık görüntü (Decimal metin, Timestamp ISO).
+  4. ORTAK LİMİT KONTROLÜ: günlük kayıp (-%3) ve kill switch (%20) HESAP özsermayesi üzerindendir. Tetiklenince TÜM birimlerin
+     (tetikleyen dahil) pozisyonları BEKLEMEDEN, aynı adımda son bilinen fiyattan (stop kayması) kapatılır (neden: kill_switch /
+     gunluk_limit); yeni giriş/büyütme hiçbir birimde yapılmaz. Kill switch kalıcıdır (yeniden başlatma kaldırmaz).
+     BİLEREK backtest çekirdeğinden ayrışır: çekirdekte tetikleyen birim sonraki açılışta kapanır (1d/seanslı birimde 24 saat - hafta
+     sonu boyunca açık pozisyon demekti; karar 14/23 "dolunca açıklar kapanır"). Limit tetiklenmeyen koşularda sonuç aynıdır.
+  5. DURUM: `durum_al()` / `durum_yukle()` JSON-uyumlu anlık görüntü (Decimal metin, Timestamp ISO). Kayıtta olup şu an kurulmamış
+     kol (strateji 'veri yok' oldu: sembol TRADING dışı) yüklemeyi DÜŞÜRMEZ: 'askıda' taşınır (`askida`): emri verilmez, durumu aynen
+     geri yazılır; açık pozisyonu son bilinen fiyatla DONDURULMUŞ değerlenir ve hesap düzeyi kaldıraç/stop riskine dahil edilir.
 Paper'da limit_modu yalnız "uygula"dır ("olc" reddedilir).
 """
 from __future__ import annotations
@@ -73,12 +76,15 @@ class Birim:
 
 
 class PaperMotor(_Motor):
-    def __init__(self, ayarlar: PortfoyAyarlari, kurallar: dict):
+    def __init__(self, ayarlar: PortfoyAyarlari, kurallar: dict, tetikleyen_hemen_kapat: bool = True):
         if ayarlar.limit_modu != "uygula":
             raise ValueError("paper motoru yalnız limit_modu='uygula' ile çalışır (limitler ölçülmez, uygulanır)")
         ayarlar = dataclasses.replace(ayarlar, kurallar=dict(kurallar))
         super().__init__({}, [], ayarlar, {}, pd.DatetimeIndex([], tz="UTC"), None)
         self.tum_kollar: list = []
+        # True (paper/canlı): kill/günlük limitte tetikleyen birim de aynı adımda kapanır. False: çekirdek kuralı (sonraki açılış);
+        # YALNIZ backtest eşleşme aracı (paper_esleme) kullanır.
+        self.tetikleyen_hemen_kapat = tetikleyen_hemen_kapat
         self.birimler: dict = {}
         self.gun = None
         self.gun_basi = D(ayarlar.baslangic_sermaye)
@@ -102,6 +108,8 @@ class PaperMotor(_Motor):
         # uçları (kapanış fazında, pozisyon hâlâ açıkken) + pozisyonun gerçekleşen dolum fiyatları girer; çıkış mumunun içindeki sıra bilinmediği için o mumun uçları
         # SAYILMAZ (lookahead yok). Sonuç gerçek MFE/MAE'nin ALT SINIRIDIR. Muhasebeyi etkilemez.
         self.uc: dict = {}
+        # askıda kollar (bkz. 5): {"acik": {kimlik: ham pozisyon}, "kol": {kimlik: ham emirler}, "birimler": {ad: son_t}, "son_kap": {sembol: fiyat}}
+        self.askida: dict = {"acik": {}, "kol": {}, "birimler": {}, "son_kap": {}}
 
     # ------------------------------------------------------------------ maliyet kaydı (çekirdek yöntemlerini sarar, davranışı değiştirmez)
     def _maliyet(self, t, kol_veya_p, tur: str, tutar: Decimal) -> None:
@@ -209,15 +217,30 @@ class PaperMotor(_Motor):
     def _kapsam(self, p, grup) -> bool:
         return grup is None or p.kol.grup == grup
 
+    def _askida_katki(self) -> tuple:
+        """Askıda açık pozisyonların (son bilinen fiyatla dondurulmuş) -> (gerçekleşmemiş K/Z, brüt nominal, stop riski)."""
+        kz = brut = risk = Decimal(0)
+        for q in self.askida["acik"].values():
+            f = self.son_kap.get(q["sembol"], NAN)                  # sembol başka bir birimde canlıysa güncel fiyat, değilse donmuş fiyat
+            f = self.askida["son_kap"].get(q["sembol"], NAN) if f != f else f
+            f = q["giris"] if f != f else D(f)
+            kz += (f - q["giris"]) * q["miktar"] * q["yon"]
+            brut += abs(f * q["miktar"])
+            risk += max((f - q["stop"]) * q["miktar"] * q["yon"], Decimal(0))
+        return kz, brut, risk
+
+    def _ozs(self, i, acilista: bool) -> Decimal:
+        return super()._ozs(i, acilista) + (self._askida_katki()[0] if self.askida["acik"] else Decimal(0))
+
     def _brut_k(self, i, haric=None, grup=None) -> Decimal:
-        top = Decimal(0)
+        top = self._askida_katki()[1] if (grup is None and self.askida["acik"]) else Decimal(0)
         for k, p in self.acik.items():
             if k != haric and self._kapsam(p, grup):
                 top += abs(D(self._fiyat_ham(p.sembol, i, True)) * p.miktar)
         return top
 
     def _acik_risk_k(self, i, haric=None, grup=None) -> Decimal:
-        top = Decimal(0)
+        top = self._askida_katki()[2] if (grup is None and self.askida["acik"]) else Decimal(0)
         for k, p in self.acik.items():
             if k != haric and self._kapsam(p, grup):
                 r = (D(self._fiyat_ham(p.sembol, i, True)) - p.stop) * p.miktar * p.yon
@@ -238,7 +261,7 @@ class PaperMotor(_Motor):
     def _kap_orani(self, E, i, emirler, bekleyen_tahmin, grup, pay) -> Decimal:
         kap = Decimal(self.kal) * E * pay / (1 + Decimal(self.kal) * self.taker)
         hedefli = {e.kol.kimlik for e in emirler}
-        sabit = Decimal(0)
+        sabit = self._askida_katki()[1] if (grup is None and self.askida["acik"]) else Decimal(0)
         for k, p in self.acik.items():
             if k not in hedefli and self._kapsam(p, grup):
                 sabit += abs(D(self._fiyat_ham(p.sembol, i, True)) * p.miktar)
@@ -251,7 +274,7 @@ class PaperMotor(_Motor):
     def _risk_orantili_k(self, emirler, E, i, t, grup, pay) -> None:
         """Çekirdekteki `_risk_orantili` ile aynı; yalnız bütçe/sabit risk `grup` kapsamında (grup None: hesap)."""
         butce = self.top_risk * E * pay
-        sabit = Decimal(0)
+        sabit = self._askida_katki()[2] if (grup is None and self.askida["acik"]) else Decimal(0)
         artanlar = []
         hedefli = {e.kol.kimlik for e in emirler}
         for k, p in self.acik.items():
@@ -470,8 +493,8 @@ class PaperMotor(_Motor):
             kol.kucult_emri = None
         self._emirleri_yurut(0, t)
 
-    def _acil_kapat(self, t, neden: str, haric_birim: str) -> None:
-        """Diğer birimlerin pozisyonlarını beklemeden son bilinen fiyattan kapatır (stop kayması)."""
+    def _acil_kapat(self, t, neden: str, haric_birim: Optional[str] = None) -> None:
+        """Pozisyonları (haric_birim verilirse o birim hariç) beklemeden son bilinen fiyattan kapatır (stop kayması)."""
         self._acil = True
         for p in list(self.acik.values()):
             if p.kol.birim == haric_birim:
@@ -522,12 +545,15 @@ class PaperMotor(_Motor):
                 self.limit_olaylari.append({"tur": "gunluk_kayip", "zaman": t, "ozsermaye": float(E),
                                             "dusus_yuzde": float(-gunluk_pct), "mod": "uygula"})
             self.gunluk_blok = True
+        haric = None if self.tetikleyen_hemen_kapat else b.ad    # None: tetikleyen birim DAHİL hepsi aynı adımda (bkz. modül notu 4)
         if kill_yeni:
-            self._acil_kapat(t + b.aralik, "kill_switch", b.ad)
+            self._acil_kapat(t + b.aralik, "kill_switch", haric)
         elif gunluk_yeni:
-            self._acil_kapat(t + b.aralik, "gunluk_limit", b.ad)
+            self._acil_kapat(t + b.aralik, "gunluk_limit", haric)
         # 7) sonraki açılış için kararlar
         brut = sum((abs(D(self._fiyat_ham(p.sembol, 0, False)) * p.miktar) for p in self.acik.values()), Decimal(0))
+        if self.askida["acik"]:
+            brut += self._askida_katki()[1]
         if self.kill:
             for kol in self.tum_kollar:
                 kol.hedef_emri = None
@@ -581,7 +607,7 @@ class PaperMotor(_Motor):
 
     # ------------------------------------------------------------------ raporlama yardımcıları
     def ozsermaye(self, fiyatlar: Optional[dict] = None) -> Decimal:
-        top = self.nakit
+        top = self.nakit + (self._askida_katki()[0] if self.askida["acik"] else Decimal(0))
         for p in self.acik.values():
             fp = (fiyatlar or {}).get(p.sembol)
             fp = self.son_kap[p.sembol] if fp is None else fp
@@ -593,11 +619,13 @@ class PaperMotor(_Motor):
         if E <= 0:
             return None
         b = sum((abs(D(self.son_kap[p.sembol]) * p.miktar) for p in self.acik.values()), Decimal(0))
+        if self.askida["acik"]:
+            b += self._askida_katki()[1]
         return float(b / E)
 
     def acik_stop_riski(self) -> float:
         E = self.ozsermaye()
-        r = Decimal(0)
+        r = self._askida_katki()[2] if self.askida["acik"] else Decimal(0)
         for p in self.acik.values():
             x = (D(self.son_kap[p.sembol]) - p.stop) * p.miktar * p.yon
             r += max(x, Decimal(0))
@@ -614,24 +642,29 @@ class PaperMotor(_Motor):
             "gun_basi": self.gun_basi, "onceki_ozs": self.onceki_ozs, "zirve": self.zirve, "ozs_son": self.ozs_son,
             "gunluk_kaydedildi": self.gunluk_kaydedildi, "gunluk_limit_sayisi": self.gunluk_limit_sayisi,
             "son_zaman": self.son_zaman, "toplam_notional": self.toplam_notional,
-            "son_kap": self.son_kap, "gun_kapanis": self.gun_kapanis, "gun_kapanis_tsi": self.gun_kapanis_tsi, "tsi_aktarildi": self.tsi_aktarildi,
+            "son_kap": {**self.askida["son_kap"], **self.son_kap}, "gun_kapanis": self.gun_kapanis, "gun_kapanis_tsi": self.gun_kapanis_tsi, "tsi_aktarildi": self.tsi_aktarildi,
             "acik": {k: {f.name: getattr(p, f.name) for f in dataclasses.fields(p) if f.name != "kol"} | {"kol": p.kol.kimlik}
-                     for k, p in self.acik.items()},
-            "kol": kol_durum, "islemler": self.islemler, "reddedilenler": self.reddedilenler, "kirpmalar": self.kirpmalar,
+                     for k, p in self.acik.items()} | self.askida["acik"],
+            "kol": kol_durum | self.askida["kol"], "islemler": self.islemler, "reddedilenler": self.reddedilenler, "kirpmalar": self.kirpmalar,
             "limit_olaylari": self.limit_olaylari, "maliyet_log": self.maliyet_log,
             "karar_meta": self.karar_meta, "giris_meta": self.giris_meta, "uc": self.uc,
-            "birimler": {a: b.son_t for a, b in self.birimler.items()}})
+            "birimler": {**self.askida["birimler"], **{a: b.son_t for a, b in self.birimler.items()}}})
 
-    def durum_yukle(self, d: dict) -> None:
+    def durum_yukle(self, d: dict, atilan_kollar: frozenset = frozenset()) -> None:
+        """Kayıtlı durumu yükler. Kurulu olmayan kol/birim HATA DEĞİL: 'askıda' taşınır (bkz. modül notu 5; `askida_ozeti()`).
+        atilan_kollar: kullanıcı onaylı ayar değişikliğiyle (--ayar-guncelle) BİLEREK çıkarılan, açık pozisyonu olmayan kollar (atılır)."""
         d = _dec(d)
         self.nakit, self.kill, self.gunluk_blok = d["nakit"], d["kill"], d["gunluk_blok"]
         self.gun = pd.Timestamp(d["gun"]).date() if d["gun"] else None
         self.gun_basi, self.onceki_ozs, self.zirve, self.ozs_son = d["gun_basi"], d["onceki_ozs"], d["zirve"], d["ozs_son"]
         self.gunluk_kaydedildi, self.gunluk_limit_sayisi = d["gunluk_kaydedildi"], d["gunluk_limit_sayisi"]
         self.son_zaman, self.toplam_notional = d["son_zaman"], d["toplam_notional"]
+        self.askida = {"acik": {}, "kol": {}, "birimler": {}, "son_kap": {}}
         for s, v in d["son_kap"].items():
             if s in self.son_kap:
                 self.son_kap[s] = v
+            else:
+                self.askida["son_kap"][s] = v
         self.gun_kapanis = dict(d["gun_kapanis"])
         # eski durum dosyası (TSİ serisi yok): UTC günü serisi devralınır (en çok 3 saat kayma); ozet.notlar bunu panoya yazar
         self.gun_kapanis_tsi = dict(d["gun_kapanis_tsi"]) if "gun_kapanis_tsi" in d else dict(d["gun_kapanis"])
@@ -639,6 +672,11 @@ class PaperMotor(_Motor):
         kollar = {k.kimlik: k for k in self.tum_kollar}
         self.acik = {}
         for k, pd_ in d["acik"].items():
+            if pd_["kol"] not in kollar:
+                if pd_["kol"] in atilan_kollar:
+                    raise ValueError(f"{pd_['kol']}: açık pozisyonu olan kol atılamaz (ayar değişikliği)")
+                self.askida["acik"][k] = pd_
+                continue
             kol = kollar[pd_["kol"]]
             alan = {f.name for f in dataclasses.fields(_P)}
             kw = {a: pd_[a] for a in alan if a != "kol"}
@@ -647,7 +685,9 @@ class PaperMotor(_Motor):
             self.acik[k] = _P(**kw)
         for kid, kd in d["kol"].items():
             if kid not in kollar:
-                raise ValueError(f"durum dosyasında bilinmeyen kol: {kid} (final set değişmiş olabilir)")
+                if kid not in atilan_kollar:
+                    self.askida["kol"][kid] = kd
+                continue
             k = kollar[kid]
             k.hedef_emri = tuple(kd["hedef_emri"]) if kd["hedef_emri"] is not None else None
             k.giris_emri = tuple(kd["giris_emri"]) if kd["giris_emri"] is not None else None
@@ -660,6 +700,20 @@ class PaperMotor(_Motor):
         for a, t in d["birimler"].items():
             if a in self.birimler:
                 self.birimler[a].son_t = t
+            else:
+                self.askida["birimler"][a] = t
+        kullanilan = {s for q in self.askida["acik"].values() for s in [q["sembol"]]}
+        self.askida["son_kap"] = {s: v for s, v in self.askida["son_kap"].items() if s in kullanilan}
+
+    def askida_ozeti(self) -> list:
+        """Askıdaki birimler: [{birim, kollar, acik: [(kol, sembol, yön, miktar)]}] (uyarı/olay metni için)."""
+        out = []
+        for a in sorted(self.askida["birimler"]):
+            kollar = sorted(k for k in self.askida["kol"] if k == a or k.startswith(a + "#"))
+            acik = [(q["kol"], q["sembol"], q["yon"], q["miktar"]) for q in self.askida["acik"].values()
+                    if q["kol"] == a or q["kol"].startswith(a + "#")]
+            out.append({"birim": a, "kollar": kollar, "acik": acik})
+        return out
 
 
 # ---------------------------------------------------------------------------- JSON kodlama (Decimal/Timestamp/NaN güvenli)
