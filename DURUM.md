@@ -113,6 +113,9 @@ Ana ders: önceki sonuçlar OOS'a bakılarak seçilmiş ve kâr birkaç işlemde
   saatlik dosyalar → swing/daytrade 1h+ testleri önce; 15m/30m dakikalık veri tamamlanınca.
 
 ## Lider kararları günlüğü (karar 26)
+- 2026-11-08: Evren ön sonuçları (WF): swing 380'de 44, daytrade 336'da 5 (hepsi 30m), scalp 204'te 0 geçen. Portföy aşaması başlatıldı.
+  sağlamlık/pbo/seçim/holdout, Fable denetiminin araştırma bulguları DOĞRULANANA kadar başlatılmaz (holdout tek seferlik; denetimde
+  DSR kapısı ve holdout mühür kapsamı hakkında doğrulanmamış bulgular var).
 - 2026-11-08: Fable 5.1 bağımsız denetimi YARIDA durduruldu (kullanıcı isteği; sonraki oturumda devam). 7 boyuttan 6'sı bitti
   (araştırma, backtest, risk, paper, ops, pano: 40 HAM bulgu, DOĞRULANMADI) -> sonuclar/denetim/fable_ham_bulgular_2026-11-08.json.
   Kalan: test-kalite boyutu, her bulguya bağımsız çürütme, sentez+öneriler. Betik: sonuclar/denetim/fable_denetim_betigi.js.
