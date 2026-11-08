@@ -1,4 +1,4 @@
 {
-  "mevduat_yillik_oran": null,
-  "aciklama": "Pano kıyas serisi: mevduat yıllık bileşik oranı (kesir: 0.40 = yıllık %40). null iken mevduat çizgisi çizilmez. Projede tanımlı bir oran yoktur; KULLANICI girmelidir (oran uydurulmaz)."
+  "mevduat_yillik_oran": 0.3,
+  "aciklama": "Pano kıyas serisi: mevduat yıllık bileşik oranı (kesir: 0.30 = yıllık %30). Oran KULLANICI tarafından 2026-11-08'de %30 olarak belirlendi (bileşik). null yapılırsa mevduat çizgisi çizilmez."
 }

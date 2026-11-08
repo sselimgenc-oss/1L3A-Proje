@@ -1,0 +1,20 @@
+# Günlük S&P 500 (DK_SPX 1h) güncellemesi (tek seferlik; zamanlayıcı 1l3a-spx.timer çağırır). Kıyas serisi için; işlem mantığına dokunmaz.
+# Hata olursa servis başarısız görünür (journalctl -u 1l3a-spx); sessiz geçilmez.
+[Unit]
+Description=1L3A S&P 500 (DK_SPX) günlük veri güncellemesi
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=l3a
+Group=l3a
+WorkingDirectory=/opt/1l3a
+StateDirectory=1l3a-paper
+Environment=PYTHONUNBUFFERED=1
+ExecStart=/opt/1l3a/.venv/bin/python -m motor.canli.spx_guncelle --veri ${STATE_DIRECTORY}/veri/mumlar
+TimeoutStartSec=900
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=full
+ProtectHome=true

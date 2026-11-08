@@ -7,7 +7,7 @@ kapanmamış mum kullanılmaz: lookahead yok). Seans dışı günlerde (hafta so
 o gün için değer null + neden (bayat veriyle sahte düz çizgi çizilmez).
 TABAN NOTU: özsermaye geçmişinin başlangıç noktası ilk günden bir önceki gündür (başlangıç sermayesi); kıyaslar da aynı gün sonuna normalize edilir. Paper'ın gerçek
 başlangıç saati ilk günün içindedir: ilk günün kıyas getirisi başlangıçtan önceki saatlerin hareketini de içerebilir (kaba karşılaştırma).
-MEVDUAT: oran projede tanımlı DEĞİL. `stratejiler/kiyas_ayar.json` -> `mevduat_yillik_oran` (kesir: 0.40 = yıllık %40, bileşik) null ise seri çizilmez
+MEVDUAT: oran `stratejiler/kiyas_ayar.json` -> `mevduat_yillik_oran` (kesir, bileşik; 0.30 = yıllık %30, KULLANICI kararı 2026-11-08). null ise seri çizilmez
 ve `kullanici_girmeli: true` yazılır; oran uydurulmaz.
 """
 from __future__ import annotations
@@ -30,8 +30,8 @@ AYAR_YOLU = KOK / "stratejiler" / "kiyas_ayar.json"
 TF_ONCELIK = ("1h", "5m")
 MAKS_BOSLUK_GUN = 5                          # hafta sonu + tatil payı; fazlası "veri güncel değil"
 SERILER = (("btc", "BTC al-tut", "BTCUSDT"), ("spx", "S&P 500 al-tut", "DK_SPX"))
-MEVDUAT_NEDEN = ("mevduat yıllık oranı projede tanımlı değil: kullanıcı oranı girmeli (stratejiler/kiyas_ayar.json -> mevduat_yillik_oran, "
-                 "kesir: 0.40 = yıllık %40); girilene kadar seri çizilmez")
+MEVDUAT_NEDEN = ("mevduat yıllık oranı tanımlı değil (ayar null): kullanıcı oranı girmeli (stratejiler/kiyas_ayar.json -> mevduat_yillik_oran, "
+                 "kesir: 0.30 = yıllık %30); girilene kadar seri çizilmez")
 
 
 def ayar_oku(yol: Path = AYAR_YOLU) -> dict:
