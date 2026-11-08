@@ -222,6 +222,10 @@ Ana ders: önceki sonuçlar OOS'a bakılarak seçilmiş ve kâr birkaç işlemde
 - 2026-11-08: **STRATEJİLER HAZIR** (kullanıcı "hazır olunca bekle, konuşalım" dedi; evren testi kullanıcıyla konuşmadan başlamaz).
   460 tek grafik strateji (swing 190, daytrade 168, scalp 102) + 19 portföy sınıfı; ~120 ek ayar/mod kaydı; 7 çıkış modülü.
   Tüm test paketi geçiyor (3568). Sıradaki: kullanıcıyla konuşma → wf_evren tam koşu (2020→bugün, BIST/XU030 kararlarıyla).
+- 2026-11-08: Kullanıcı ON_KAYIT Güncelleme 5'i seçti (holdout son 12 ay, DSR/PBO kapı, rastgele giriş kapı, enstrüman bazlı
+  maliyet+stres, 2017'den veri). wf_evren uygulandı (b876c1d), 2017 verisi indi (kripto spot vekil 2017-08'den; DK 1h 2017;
+  SPX/WTI 5m 2017-2019 indirmesi arka planda). Tam koşu KULLANICI "başla" DEYİNCE: --donem 2017_gelistirme ile
+  ham → wf → portfoy → saglamlik → pbo → secim → holdout (tahmin: ham ~35 saat/4 çekirdek, toplam ~2 gün+).
 
 ## Kullanıcıyı bekleyen kararlar
 - ~~Final seçim ve kilitli dönemin bir kez açılması (karar 20)~~ — kullanıcı "aç" dedi (2026-11-07), yapıldı: `sonuclar/kilit/RAPOR.md`.
