@@ -357,6 +357,8 @@ def _holdout_cikti(tmp_path):
     pd.DataFrame([{"strateji": AD, "tf": "4h", "stil": "swing"}]).to_csv(cikti / "iyi_liste.csv", index=False)
     pd.DataFrame(columns=["strateji", "tf", "stil"]).to_csv(cikti / "iyiye_yakin_liste.csv", index=False)
     pd.DataFrame(columns=["ajan"]).to_csv(cikti / "secim.csv", index=False)
+    pd.DataFrame([{"strateji": AD, "tf": "4h", "saglam_mi": True}]).to_parquet(cikti / "saglamlik.parquet")
+    pd.DataFrame([{"stil": "swing", "tf": "4h", "pbo": 0.2}]).to_csv(cikti / "pbo.csv", index=False)
     wh.muhur_yaz(cikti)
     return cikti
 
@@ -712,6 +714,7 @@ def test_portfoy_evren_akisi_wf_holdout_pbo_listeler(tmp_path, pf_veri, monkeypa
     assert M.shape[1] == len(et) > 5
     pb = we.pbo_asamasi(cikti, ilerleme=False)
     assert pb["stil"].iloc[0] == "portfoy" and pb["hata"].iloc[0] == ""
+    assert pb["dsr_n"].iloc[0] == we.grup_dsr_parametreleri(M)[0] >= 2 and pb["dsr_v"].iloc[0] > 0    # GÜNCELLEME 6 (A)
     # listeler: portföy satırı sağlamlık tablosuyla birlikte iyi/iyiye yakına girebilir
     wf2 = wf.assign(gecti=True, yakin_wf=True, basarisiz_sayi=0)
     sag = pd.DataFrame([{"strateji": ad, "tf": "1d", "saglam_mi": True, "kapi_basarisiz": "", "rnd_p": 0.01, "m2_pf": 1.5,

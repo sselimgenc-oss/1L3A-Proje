@@ -29,11 +29,11 @@ from typing import Optional
 import numpy as np
 import pandas as pd
 
-from motor.arastirma import evren_maliyet, saglamlik
+from motor.arastirma import evren_maliyet
 from motor.arastirma import saglamlik_portfoy as sp
 from motor.arastirma import wf_evren as we
 from motor.arastirma import wf_portfoy as wp
-from motor.backtest import deneme_kaydi, eleme
+from motor.backtest import eleme
 from motor.backtest.walk_forward import pencereler_uret
 from motor.portfoy import veri as pveri
 from motor.portfoy.motor import PortfoyAyarlari, portfoy_backtest
@@ -205,6 +205,7 @@ def pf_wf_asamasi(cikti: Path, donem: str = "2017_gelistirme", stratejiler=None,
                   butce_sn: Optional[float] = None, ilerleme: bool = True) -> dict:
     """pf stratejilerinin geliştirme dönemi WF'si -> wf_evren.parquet'e stil='portfoy' satırları (aynı strateji yeniden koşulursa ezilir)."""
     cikti = Path(cikti)
+    we.holdout_kilidi(cikti, "portfoy")
     cikti.mkdir(parents=True, exist_ok=True)
     gorevler = [{"strateji": s, "cikti": cikti} for s in (stratejiler or pf_stratejileri())]
     sonuc = we.havuz_calistir(_wf_isci, gorevler, surec, we._isci_ham, {"veri_dizini": None, "donem": donem}, butce_sn, ilerleme, "pf-wf")
@@ -212,8 +213,8 @@ def pf_wf_asamasi(cikti: Path, donem: str = "2017_gelistirme", stratejiler=None,
     if yeni:
         _satirlari_yaz(cikti, "wf_evren", yeni)
         for s in yeni:
-            if s.get("hata", "") == "" and s.get("n_kosu"):
-                deneme_kaydi.kaydet(s["strateji"], "evren", s["tf"], s.get("n_aday", 0), s.get("n_pencere", 0), s["n_kosu"])
+            if s.get("hata", "") == "" and s.get("n_kosu"):      # çift kayıt önlenir (wf_evren.evren_deneme_kaydet)
+                we.evren_deneme_kaydet(s, donem, we.EVREN_GENEL)
     return {"yeni": len(yeni), "gecen": int(sum(bool(s.get("gecti")) for s in yeni)),
             "hatali": int(sum(bool(s.get("hata")) for s in yeni))}
 
@@ -290,11 +291,7 @@ def pf_sag_icerik(g: dict, satir: dict):
         detay.append(f"{oyna}:{sh:.2f}")
     satir.update(par_n_gecerli=gecerli, par_n_pf_gt1=olumlu, par_hata=hata, par_detay=" | ".join(detay),
                  par_oran=(olumlu / gecerli) if gecerli >= sp.KOMSU_MIN_GECERLI else math.nan)
-    for nm, n in (("deneme", g["n_deneme"]), ("kombinasyon", g["n_komb"]), ("sembol", g["n_deneme_sembol"])):
-        d = saglamlik.deflated_sharpe(r_oos.to_numpy(), n, g["sr_varyans"])
-        satir["dsr_" + nm] = d["dsr"]
-        satir[f"sr0_{nm}_yillik"] = d["sr0"] * math.sqrt(365)
-    satir.update(dsr_n_deneme=g["n_deneme"], dsr_n_kombinasyon=g["n_komb"], sr_varyans=g["sr_varyans"])
+    satir.update(we.dsr_sutunlari(r_oos.to_numpy(), g["dsr"]))         # GÜNCELLEME 6 (A): grup N/V
 
 
 # ============================================================================ PBO, holdout

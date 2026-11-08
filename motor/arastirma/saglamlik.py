@@ -159,17 +159,32 @@ def gunluk_getiri(oos: pd.DataFrame, oos_bas, oos_bit, risk: float = wf_tarama.R
 
 
 # ---------------------------------------------------------------------------- rastgele giriş
+def tutma_mum(idx: pd.DatetimeIndex, giris, cikis) -> np.ndarray:
+    """Tutma süresi (mum sayısı) = o sembolün mum indeksindeki KONUM farkı (çıkış konumu - giriş konumu, en az 1).
+    Takvim süresi / medyan aralık KULLANILMAZ: seanslı veride (hisse/BIST/CFD) gece ve hafta sonu boşlukları mum sayısını
+    ~5 kat şişirirdi (denetim O1). Kesintisiz veride (kripto) ikisi birebir aynıdır. Giriş indekste olmalı (yoksa ValueError);
+    çıkış indekste yoksa ilk >= çıkış mumunun konumu alınır."""
+    idx = pd.DatetimeIndex(idx)
+    gi, ci = pd.DatetimeIndex(giris), pd.DatetimeIndex(cikis)
+    gj = idx.get_indexer(gi)
+    if (gj < 0).any():
+        raise ValueError(f"giriş zamanı mum indeksinde yok ({int((gj < 0).sum())}/{len(gj)})")
+    cj = idx.get_indexer(ci)
+    eksik = cj < 0
+    if eksik.any():
+        cj = np.where(eksik, idx.searchsorted(ci, "left"), cj)
+    return np.maximum(1, cj - gj).astype(int)
+
+
 def islem_tanimlari(mumlar: pd.DataFrame, oos: pd.DataFrame, atr: np.ndarray) -> pd.DataFrame:
     """Gerçek OOS işlemlerinden (yon, H mum, stop_atr) üçlüleri. stop mesafesi = (net_pnl/r)/miktar (motorun R
     paydası), sinyal mumunun (giriş mumundan bir önceki) ATR'sine bölünür. Hesaplanamayanlara medyan yazılır."""
     idx = mumlar.index
-    aralik = pd.Series(idx).diff().median()
     j = idx.get_indexer(pd.DatetimeIndex(oos["giris_zamani"]))
     if (j < 0).any():
         raise ValueError(f"OOS giriş zamanı mum indeksinde yok ({int((j < 0).sum())}/{len(j)}): WF işlemleri şimdiki "
                          "mum verisinden farklı veriyle üretilmiş (veri sonradan değişti); WF'yi yeniden koşun")
-    h = np.maximum(1, np.rint((pd.DatetimeIndex(oos["cikis_zamani"]) - pd.DatetimeIndex(oos["giris_zamani"]))
-                              / aralik)).astype(int)
+    h = tutma_mum(idx, oos["giris_zamani"], oos["cikis_zamani"])
     with np.errstate(divide="ignore", invalid="ignore"):
         mesafe = np.abs(oos["net_pnl"].to_numpy(float) / oos["r"].to_numpy(float) / oos["miktar"].to_numpy(float))
         a = atr[np.maximum(j - 1, 0)]
