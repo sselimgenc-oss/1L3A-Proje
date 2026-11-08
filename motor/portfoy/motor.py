@@ -82,6 +82,9 @@ class PortfoyAyarlari:
     toplam_risk_tavani_yuzde: Optional[float] = None   # açık pozisyonların stopa kadar toplam riski; None: sert değer (%5); sert değeri aşamaz
     max_pozisyon: Optional[int] = None                 # aynı anda açık kol sayısı; None: yok
     kurallar: Optional[dict] = None                    # {sembol: SembolKurallari}; yoksa tarama.SEMBOL_KURALLARI
+    # Sembol başına maliyet (araştırma; evren maliyet tablosu): {sembol: (taker_yuzde, maker_yuzde, kayma_bps, stop_kayma_bps)}.
+    # Listede olmayan sembol yukarıdaki tek değerleri kullanır. None: tek değer (varsayılan, eski davranış).
+    maliyet_sembol: Optional[dict] = None
 
 
 def sembol_kurali(sembol: str, ayarlar: PortfoyAyarlari) -> SembolKurallari:
@@ -215,6 +218,10 @@ class _Motor:
         self.taker, self.maker = D(ayarlar.komisyon_taker_yuzde) / 100, D(ayarlar.komisyon_maker_yuzde) / 100
         self.kayma = D(ayarlar.kayma_bps) / 10000
         self.stop_kayma = D(ayarlar.stop_kayma_bps) / 10000
+        # semboller arası farklı maliyet (opsiyonel): {sembol: (taker_yuzde, maker_yuzde, kayma_bps, stop_kayma_bps)}; yoksa tek değer
+        self.mal = {s: (D(a) / 100, D(b) / 100, D(c) / 10000, D(d) / 10000)
+                    for s, (a, b, c, d) in (ayarlar.maliyet_sembol or {}).items()}
+        self.taker_en_yuksek = max([self.taker] + [v[0] for v in self.mal.values()])
         top_sert = L.portfoy_toplam_risk_yuzde
         top = top_sert if ayarlar.toplam_risk_tavani_yuzde is None else min(ayarlar.toplam_risk_tavani_yuzde, top_sert)
         if ayarlar.toplam_risk_tavani_yuzde is not None and ayarlar.toplam_risk_tavani_yuzde > top_sert:
@@ -288,6 +295,18 @@ class _Motor:
                     top += r
         return top
 
+    def _tk(self, s):
+        return self.mal[s][0] if s in self.mal else self.taker
+
+    def _mk(self, s):
+        return self.mal[s][1] if s in self.mal else self.maker
+
+    def _ky(self, s):
+        return self.mal[s][2] if s in self.mal else self.kayma
+
+    def _sk(self, s):
+        return self.mal[s][3] if s in self.mal else self.stop_kayma
+
     def _piyasa(self, s, yon_pozisyon: int, ham, k: Decimal) -> Decimal:
         """Pozisyon yönünün tersine işlem: long satar -> düşük, short alır -> yüksek."""
         return _tick(D(ham) * (1 - yon_pozisyon * k), self.tick[s])
@@ -347,7 +366,7 @@ class _Motor:
     def _giris(self, kol: Kol, yon: int, qty: Decimal, px: Decimal, stop: Decimal, t, i,
                hedef=None, zc=None) -> None:
         """Yeni pozisyon aç ya da mevcut pozisyona ekle (aynı yön)."""
-        kom = qty * px * self.taker
+        kom = qty * px * self._tk(kol.sembol)
         self.nakit -= kom
         self.toplam_notional += qty * px
         risk = qty * abs(px - stop)
@@ -402,7 +421,7 @@ class _Motor:
                 px = None
                 stop = None
                 if yon != 0:
-                    px = _tick(D(self.A[s][i]) * (1 + yon * self.kayma), self.tick[s])
+                    px = _tick(D(self.A[s][i]) * (1 + yon * self._ky(s)), self.tick[s])
                     stop = _tick(D(stop_ham), self.tick[s]) if not np.isnan(stop_ham) else None
                     if p is not None and p.yon == yon:
                         stop = p.stop if stop is None or (stop - p.stop) * yon <= 0 else stop
@@ -417,7 +436,7 @@ class _Motor:
                 kol.giris_emri = None
                 if kol.kimlik in self.acik:
                     continue                      # tek-grafik kuralı: açık pozisyon varken giriş yok
-                px = _tick(D(self.A[s][i]) * (1 + yon * self.kayma), self.tick[s])
+                px = _tick(D(self.A[s][i]) * (1 + yon * self._ky(s)), self.tick[s])
                 emirler.append(_Emir(kol, yon, D(self.kal), _tick(D(stop_ham), self.tick[s]),
                                      hedef=(D(hedef_ham) if not np.isnan(hedef_ham) else None),
                                      zc=zc, sinyal=True, px=px))
@@ -487,7 +506,7 @@ class _Motor:
         # ham None: emir iptal (pozisyona dokunma)
         emirler = [e for e in emirler if not (e.ham is None)]
         # --- 2(a) orantılı kaldıraç ölçeklemesi
-        kap = Decimal(self.kal) * E / (1 + Decimal(self.kal) * self.taker)
+        kap = Decimal(self.kal) * E / (1 + Decimal(self.kal) * self.taker_en_yuksek)
         hedefli = {e.kol.kimlik for e in emirler}
         sabit = Decimal(0)
         for k, p in self.acik.items():
@@ -543,8 +562,8 @@ class _Motor:
                 if p.miktar - red_q < self.min_qty[s]:
                     red_q = p.miktar
                     neden = "hedef_sifir"
-            fiyat = self._piyasa(s, p.yon, self.A[s][i], self.kayma)
-            self._azalt(p, fiyat, red_q, t, self.taker, neden, True)
+            fiyat = self._piyasa(s, p.yon, self.A[s][i], self._ky(s))
+            self._azalt(p, fiyat, red_q, t, self._tk(s), neden, True)
         # --- Faz B: açma / ekleme
         for e in emirler:
             kol, s = e.kol, e.kol.sembol
@@ -638,8 +657,8 @@ class _Motor:
                     continue
                 if kol.cikis_emri:
                     neden = kol.cikis_emri
-                    k = self.stop_kayma if neden in ("kill_switch", "gunluk_limit") else self.kayma
-                    self._azalt(p, self._piyasa(s, p.yon, self.A[s][i], k), p.miktar, t, self.taker, neden, False)
+                    k = self._sk(s) if neden in ("kill_switch", "gunluk_limit") else self._ky(s)
+                    self._azalt(p, self._piyasa(s, p.yon, self.A[s][i], k), p.miktar, t, self._tk(s), neden, False)
                     kol.hedef_emri = None
                 elif kol.kucult_emri is not None:
                     f = D(kol.kucult_emri)
@@ -649,7 +668,7 @@ class _Motor:
                         red_q = p.miktar
                     if red_q > 0:
                         self._kirp(t, kol, "kaldirac_azalt", 1.0, float(f))
-                        self._azalt(p, self._piyasa(s, p.yon, self.A[s][i], self.kayma), red_q, t, self.taker,
+                        self._azalt(p, self._piyasa(s, p.yon, self.A[s][i], self._ky(s)), red_q, t, self._tk(s),
                                     "kaldirac_azalt", True)
                 kol.cikis_emri = None
                 kol.kucult_emri = None
@@ -673,7 +692,7 @@ class _Motor:
                     s = p.sembol
                     ham = self._fiyat_ham(s, i, False)
                     self.nakit -= self._funding_ode(p, t + self.aralik, False)
-                    self._azalt(p, _tick(D(ham), self.tick[s]), p.miktar, t + self.aralik, self.taker, "veri_sonu", False)
+                    self._azalt(p, _tick(D(ham), self.tick[s]), p.miktar, t + self.aralik, self._tk(s), "veri_sonu", False)
 
             # 6) kapanış: özsermaye, limitler
             for s in self.semboller:
@@ -771,15 +790,15 @@ class _Motor:
         maker_mi = self.ay.hedef_limit_emri
         cikis = None
         if stop_gap:
-            cikis = (self._piyasa(s, p.yon, o, self.stop_kayma), "stop_gap", t, self.taker)
+            cikis = (self._piyasa(s, p.yon, o, self._sk(s)), "stop_gap", t, self._tk(s))
         elif hedef_gap:
-            cikis = (_tick(D(o), tick), "hedef", t, self.maker if maker_mi else self.taker)
+            cikis = (_tick(D(o), tick), "hedef", t, self._mk(s) if maker_mi else self._tk(s))
         elif stop_vur:
-            cikis = (self._piyasa(s, p.yon, float(p.stop), self.stop_kayma), "stop", t + self.aralik, self.taker)
+            cikis = (self._piyasa(s, p.yon, float(p.stop), self._sk(s)), "stop", t + self.aralik, self._tk(s))
         elif hedef_vur:
-            cikis = (p.hedef, "hedef", t + self.aralik, self.maker if maker_mi else self.taker)
+            cikis = (p.hedef, "hedef", t + self.aralik, self._mk(s) if maker_mi else self._tk(s))
         if p.kismi_bekleyen and (cikis is None or (cikis[1] == "hedef" and not hedef_gap)):
-            kom_k = self.maker if maker_mi else self.taker
+            kom_k = self._mk(s) if maker_mi else self._tk(s)
             kalan = []
             step = self.step[s]
             for seviye, oran in p.kismi_bekleyen:
