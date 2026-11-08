@@ -1344,6 +1344,18 @@ def _maliyet_toplam(ml: dict) -> str:
         return [esc(ad), esc(f_para(b["ucret"])), esc(f_para(b["kayma"])), esc(f_para(b["funding"], True)), f"<b>{esc(f_para(b['toplam']))}</b>"]
     t = ml["toplam"]
     g = [_tablo(["", "Ücret", "Kayma", "Funding", "Toplam"], [satir("Son 24 sa", t["son24s"]), satir("Tüm dönem", t["tum"])], sag=(1, 2, 3, 4))]
+    # TradFi funding (kullanıcı kararı 2026-11-09): ayrı satır; tutarlar motor JSON'undan (pano hesap yapmaz)
+    tf = ml.get("funding_tradfi")
+    if tf is None:
+        g.append('<div class="alt" style="padding:8px 11px">TradFi funding ayrımı: motor bu alanı yazmıyor (eski maliyet.json).</div>')
+    else:
+        g.append(_tablo(["TradFi funding", "Son 24 sa", "Açık poz.", "Kapanan", "Tüm dönem"],
+                        [["Binance TradFi perp", esc(f_para(tf["son24s"], True)), esc(f_para(tf["acik"], True)), esc(f_para(tf["kapanan"], True)),
+                          f"<b>{esc(f_para(tf['toplam'], True))}</b>"]], sag=(1, 2, 3, 4)))
+        g.append('<div class="alt" style="padding:8px 11px">TradFi funding yukarıdaki Funding sütununa dahildir; backtest beklentisi '
+                 'kıyaslarında (Dersler, Karne, Koç) hariç tutulur.'
+                 + (f' Sınıflanamayan eski kayıt: {esc(str(tf["belirsiz_adet"]))} adet, {esc(f_para(tf["belirsiz_tutar"], True))}.'
+                    if tf.get("belirsiz_adet") else "") + '</div>')
     return "".join(g)
 
 

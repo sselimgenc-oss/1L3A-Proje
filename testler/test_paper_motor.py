@@ -133,7 +133,11 @@ def test_miktar_asagi_yuvarlanir_ve_step_filtresi_uygulanir():
     p = pp.tekrar_calistir([t], mum, {}, kur, mum[("XUSDT", "1d")].index[2], kapat=False)
     q = next(iter(p.motor.acik.values()))
     assert q.miktar % Decimal("0.1") == 0 and q.miktar > 0
-    ham = Decimal("10000") * Decimal("0.01") / abs(q.giris - q.stop)
+    # maliyet dahil işlem başı risk (2026-11-09): birim risk = |giriş-stop| + max(giriş, stop)·(stop_kayma + 2·taker) (paper varsayılanları)
+    from motor.risk.limitler import maliyetli_risk_birim
+    ay = p.ayarlar
+    ham = Decimal("10000") * Decimal("0.01") / maliyetli_risk_birim(q.giris, q.stop, Decimal(repr(ay.stop_kayma_bps)) / 10000,
+                                                                   Decimal(repr(ay.komisyon_taker_yuzde)) / 100)
     assert q.miktar <= ham                        # aşağı yuvarlama (yukarı değil)
     assert ham - q.miktar < Decimal("0.1")
 

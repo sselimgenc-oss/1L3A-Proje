@@ -208,7 +208,7 @@ def holdout_kos(ad: str, tf: str, stil: str, etiket: str, dislanan=(), ayar=None
     oos = pd.concat(parcalar, ignore_index=True)
     bit = oos["son_mum"].max() + pd.Timedelta(1, "ns")
     oos, atilan = we.sembol_cakismasini_ele(oos.drop(columns="son_mum"))
-    m = we.kasa_metrikleri(we.oynatma_tablosu(oos, tuple(evren)), we.HOLDOUT_BAS, bit, ayar)
+    m = we.kasa_metrikleri(we.oynatma_tablosu(oos, tuple(evren), carpan=1.0), we.HOLDOUT_BAS, bit, ayar)
     for kx in ("kabul", "pnl", "getiri_serisi", "sinif_net", "enstruman_net", "enstruman_adet"):
         m.pop(kx, None)
     satir.update(m)

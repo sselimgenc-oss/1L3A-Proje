@@ -75,7 +75,7 @@ def set_serileri(kok: Path = KOK) -> dict:
     if not parcalar:
         raise RuntimeError("kilit işlem dosyaları yok (sonuclar/kilit/islemler)")
     bit = max(pd.Timestamp(v) for v in tek["veri_son"].dropna())
-    tablo = sec.islem_tablosu_hazirla(parcalar)
+    tablo = sec.islem_tablosu_hazirla(parcalar, sec.VARSAYILAN_MALIYET)
     oy = sec.yeniden_oyna(tablo, sec.OynatmaAyari(), bas=KILIT, bit=bit)
     gunluk = {}
     for r in port.itertuples():

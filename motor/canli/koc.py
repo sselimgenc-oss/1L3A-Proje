@@ -152,7 +152,8 @@ def _bulgu(kural: str, kapsam: str, seviye: str, baslik: str, metin: str, dayana
 # ---------------------------------------------------------------------------- yardımcılar
 def _kazanmadi(s: dict) -> Optional[bool]:
     """Kazanmayan = R <= 0 (isabet R > 0 tanımının tamamlayıcısı; Dersler ile aynı). R yoksa None."""
-    return None if s.get("r") is None else float(s["r"]) <= 0.0
+    r = ek.r_kiyas(s)                     # TradFi funding HARİÇ (2026-11-09; backtest isabetiyle kıyas)
+    return None if r is None else float(r) <= 0.0
 
 
 def _tsi_giris(s: dict):
@@ -314,7 +315,7 @@ def kural_yogunluk(ls: list, kapsam: str) -> list:
             b = len(v) - a
             c = toplam_kaybeden - a
             dd = (n - len(v)) - c
-            r_toplam = sum(float(s["r"]) for s in v)
+            r_toplam = sum(float(ek.r_kiyas(s)) for s in v)
             if a / len(v) <= c / (n - len(v)) or r_toplam >= 0:
                 continue
             p = fisher_p(a, b, c, dd)

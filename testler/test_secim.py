@@ -16,7 +16,8 @@ def _t(satirlar):
         "giris": [T0 + pd.Timedelta(hours=x[0]) for x in satirlar],
         "cikis": [T0 + pd.Timedelta(hours=x[1]) for x in satirlar],
         "r": [float(x[2]) for x in satirlar],
-        "sf": [float(x[3]) for x in satirlar]})
+        "sf": [float(x[3]) for x in satirlar],
+        "maliyet_payi": 0.0})          # 0: yalnız fiyat riski (sınır testleri maliyetten bağımsız); maliyet dahil: test_maliyet_dahil_risk.py
 
 
 def test_tek_islem_getirisi_risk_kadar():

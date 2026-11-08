@@ -168,7 +168,7 @@ def kol_ve_set(set_: dict, varliklar: dict, kesisim: pd.DatetimeIndex) -> dict:
                 parcalar[k] = (sel, varliklar[k]["sembol"])
         t = pd.DataFrame(0.0, index=gn, columns=["ret", "n", "kazanan"])
         if parcalar:
-            tablo = sec.islem_tablosu_hazirla(parcalar)
+            tablo = sec.islem_tablosu_hazirla(parcalar, sec.VARSAYILAN_MALIYET)
             oy = sec.yeniden_oyna(tablo, sec.OynatmaAyari(), bas=bas, bit=bit)
             g = oy["getiri"].copy()
             g.index = pd.DatetimeIndex(g.index).as_unit(gn.unit) - pd.Timedelta(days=1)       # etiket = getirinin kazanıldığı gün

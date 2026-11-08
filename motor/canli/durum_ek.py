@@ -219,6 +219,12 @@ def cikis_nedenleri(satirlar: list) -> tuple:
     return liste, ("net_pnl null olan nedenlerde işlemlerin bir kısmının set katkısı ölçülmedi (portföy kolu)" if eksik else None)
 
 
+def r_kiyas(s: dict):
+    """Backtest beklentisiyle KIYAS R'si (Dersler, Karne, Koç): TradFi funding HARİÇ (kullanıcı kararı 2026-11-09; paper satırında `r_kiyas`).
+    Alanı olmayan satır TradFi funding ayrımı gerektirmeyen kaynaktandır (backtest durumu: araştırmada TradFi funding yok) -> r."""
+    return s["r_kiyas"] if "r_kiyas" in s else s.get("r")
+
+
 # ---------------------------------------------------------------------------- ajanlar[] / enstrumanlar[] / strateji_enstruman[]
 def _kazandi(s: dict, olcut: str) -> bool:
     if olcut == "r":

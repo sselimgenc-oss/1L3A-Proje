@@ -26,6 +26,8 @@ Dolum (tek-grafik motoruyla aynı): sinyal t kapanışında, dolum o sembolün s
 SERT LİMİTLER (motor.risk.limitler.SERT_LIMITLER; ayarlar aşarsa tavana kırpılır, uyarilar'a yazılır)
   1. İşlem başı risk: bir pozisyonun dolum fiyatından stopuna kadar kaybı <= risk_yuzde * özsermaye (özsermaye
      dolum anındaki MTM). Hedef ağırlık bunu aşıyorsa miktar KÜÇÜLTÜLÜR ve `kirpmalar`a "risk" olarak yazılır.
+     SİNYAL kollarında bu kayıp MALİYET DAHİLDİR (2026-11-09): |px − stop| + max(px, stop)·(stop_kayma + 2·taker), sembolün
+     maliyetiyle (limitler.maliyetli_risk_birim). Ağırlık kolları (karar 25) fiyat riskiyle ölçülür.
   2. Toplam brüt maruziyet <= kaldirac(3x) * özsermaye (dolum anında, komisyon payı dahil):
      (a) emirler arası ORANTILI küçültme: sabit kalan pozisyonlar + istenen hedefler tavanı aşıyorsa tüm hedef
          pozisyon büyüklükleri aynı oranda küçültülür ("kaldirac_orantili");
@@ -59,7 +61,7 @@ import pandas as pd
 
 from motor.backtest import metrikler as mtr
 from motor.backtest.motor import D, SembolKurallari, _step_asagi, _tick
-from motor.risk.limitler import SERT_LIMITLER
+from motor.risk.limitler import SERT_LIMITLER, maliyetli_risk_birim
 from motor.strateji import cikislar as cks
 from motor.strateji.cikislar import CikisAyarlari
 from motor.strateji.seans_takvimi import mum_suresi
@@ -396,9 +398,16 @@ class _Motor:
         rb = abs(px - stop)
         if rb == 0:
             return Decimal(0)
-        # sinyal kolu: işlem başı %1; ağırlık kolu: tek pozisyon en fazla toplam tavan kadar (karar 25)
-        qty_r = E * (self.risk_oran if kol.mod == "sinyal" else self.top_risk) / rb
+        # sinyal kolu: işlem başı %1 MALİYET DAHİL (2026-11-09, limitler.maliyetli_risk_birim); ağırlık kolu: tek pozisyon en fazla
+        # toplam tavan kadar (karar 25; fiyat riski)
+        qty_r = E * (self.risk_oran if kol.mod == "sinyal" else self.top_risk) / self._risk_birim(kol, px, stop)
         return min(qty_w, qty_r)
+
+    def _risk_birim(self, kol, px, stop) -> Decimal:
+        """Boyutlandırmadaki birim risk. Sinyal kolu: maliyet dahil (sembolün stop kayması + 2 x taker); ağırlık kolu: |px - stop|."""
+        if kol.mod == "sinyal":
+            return maliyetli_risk_birim(px, stop, self._sk(kol.sembol), self._tk(kol.sembol))
+        return abs(px - stop)
 
     def _hedef_emirleri_topla(self, i, t, E):
         """Bu satırda yürütülecek emirler (+ ölçekleme için bekleyen ağırlık emirlerinin tahmini büyüklüğü)."""

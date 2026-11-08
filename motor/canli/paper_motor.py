@@ -115,7 +115,7 @@ class PaperMotor(_Motor):
     def _maliyet(self, t, kol_veya_p, tur: str, tutar: Decimal) -> None:
         if tutar != 0:
             kol = kol_veya_p.kol if hasattr(kol_veya_p, "kol") else kol_veya_p
-            self.maliyet_log.append({"zaman": t, "sk": kol.sk, "tur": tur, "tutar": tutar})
+            self.maliyet_log.append({"zaman": t, "sk": kol.sk, "tur": tur, "tutar": tutar, "sembol": kol.sembol})
 
     def _giris(self, kol, yon, qty, px, stop, t, i, hedef=None, zc=None) -> None:
         ham = D(self.A[kol.sembol][i])
@@ -149,6 +149,24 @@ class PaperMotor(_Motor):
             self.islemler[-1]["ayar_surumu"] = meta.get("ayar_surumu")
             self.islemler[-1]["giris_gerekcesi"] = meta.get("giris_gerekcesi")
             self.islemler[-1].update(self._mfe_mae(p, self.uc.pop(kid, None)))
+            self.islemler[-1].update(self.tradfi_alanlari(self.islemler[-1], p.risk_tutar))
+
+    @staticmethod
+    def tradfi_alanlari(x: dict, risk_tutar=None) -> dict:
+        """TradFi funding ayrımı (kullanıcı kararı 2026-11-09): paper TradFi funding'i ÖDER (net_pnl/r dahil) ama ayrı alanda tutar.
+        funding_tradfi = TradFi sembolünde ödenen funding (negatif: tahsil); kripto 0. r_kiyas = TradFi funding HARİÇ r (backtest beklentisiyle
+        kıyas tabanı: araştırmada TradFi funding yok; kripto perp funding araştırmada var, dahil kalır). Muhasebeyi etkilemez.
+        risk_tutar: işlemin risk tutarı (r'nin paydası); verilmezse (bu alanlardan önce kapanmış kayıt) net_pnl / r'den türetilir."""
+        from motor.canli.paper_veri import tradfi_mi
+        ft = float(x["funding"]) if tradfi_mi(x["sembol"]) else 0.0
+        r = x["r"]
+        if r is None or r != r or ft == 0.0:
+            return {"funding_tradfi": ft, "r_kiyas": r}
+        if risk_tutar is None:
+            if r == 0:
+                raise ValueError(f"{x['sembol']}: r = 0 ve risk tutarı yok; TradFi funding hariç r hesaplanamaz")
+            risk_tutar = x["net_pnl"] / r
+        return {"funding_tradfi": ft, "r_kiyas": (x["net_pnl"] + ft) / float(risk_tutar)}
 
     def _uc_mum(self, p, kid: str) -> None:
         """Pozisyon bu mumu AÇIK atlattıysa (çıkış bu mumda olmadı) mumun yüksek/düşük ucu izlenen uçlara girer."""
@@ -255,7 +273,7 @@ class PaperMotor(_Motor):
         rb = abs(px - stop)
         if rb == 0:
             return Decimal(0)
-        qty_r = Ek * (self.risk_oran if kol.mod == "sinyal" else self.top_risk) / rb
+        qty_r = Ek * (self.risk_oran if kol.mod == "sinyal" else self.top_risk) / self._risk_birim(kol, px, stop)   # sinyal: maliyet dahil (çekirdek)
         return min(qty_w, qty_r)
 
     def _kap_orani(self, E, i, emirler, bekleyen_tahmin, grup, pay) -> Decimal:

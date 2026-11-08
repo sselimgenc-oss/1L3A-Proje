@@ -559,7 +559,7 @@ def set_testi(df: pd.DataFrame, cikti: Path = CIKTI) -> pd.DataFrame:
     tek_getiri = None
     if parcalar:
         bit = max(pd.Timestamp(v) for v in tek["veri_son"].dropna())
-        oy = sec.yeniden_oyna(sec.islem_tablosu_hazirla(parcalar), sec.OynatmaAyari(), bas=KILIT, bit=bit)
+        oy = sec.yeniden_oyna(sec.islem_tablosu_hazirla(parcalar, sec.VARSAYILAN_MALIYET), sec.OynatmaAyari(), bas=KILIT, bit=bit)
         tek_getiri = oy["getiri"]
         o = sec.seri_ozeti(tek_getiri)
         satirlar.append({"kol": "tek_grafik", "net": o["getiri"], "sharpe": o["sharpe"], "max_dusus": o["max_dusus"], "gun": o["gun"],

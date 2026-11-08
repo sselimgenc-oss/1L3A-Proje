@@ -6,6 +6,7 @@ strateji başına isabet, ortalama R, PF (R tabanlı), R sapması ve çıkış n
 (4/8 hafta) yüzdeliklerini içerir ve ortalama R / PF beklentisi taşımaz.
 
 YÖNTEM (kurallı; LLM yok, lookahead yok: yalnız kapanmış işlemler)
+  - R = `r_kiyas` (TradFi funding HARİÇ r; kullanıcı kararı 2026-11-09: araştırmada TradFi funding yok; kripto funding dahil kalır).
   - isabet = r > 0 olan işlem payı (r'si olan işlemler üzerinden). Binom testi: kesin, iki yönlü, H0: p = backtest isabeti.
   - ortalama R: Welch t testi (paper n, ort, std ↔ referans n, ort, std), iki yönlü. PF (R tabanlı) = Σ(r>0) / -Σ(r<0): betimleyici, test yok.
   - çıkış nedeni payı: neden başına kesin binom testi (H0: pay = backtest payı), n >= MIN_ISLEM_DERS iken. Backtest payı 0 (ya da 1) olan nedende test
@@ -154,7 +155,7 @@ def _p(p: float) -> str:
 def degerlendir(kimlik: str, satirlar: list, ref: Optional[dict], konum: Optional[dict] = None) -> dict:
     """Bir strateji için ders kaydı. satirlar: yalnız bu stratejinin kapanan işlemleri (islemler.jsonl satırı). konum: stratejiler.json `beklenti`."""
     ls = [s for s in satirlar if s["kimlik"] == kimlik]
-    r = [float(s["r"]) for s in ls if s.get("r") is not None]
+    r = [float(ek.r_kiyas(s)) for s in ls if ek.r_kiyas(s) is not None]      # TradFi funding HARİÇ (2026-11-09)
     g = r_ozet(r)
     n = len(ls)
     out = {"kimlik": kimlik, "islem": n, "r_olculen": len(r), "isabet": g["isabet"], "ort_r": g["ort_r"], "std_r": g["std_r"], "pf_r": g["pf_r"],

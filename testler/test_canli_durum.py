@@ -4,6 +4,7 @@ import os
 from decimal import Decimal
 from pathlib import Path
 
+import numpy as np
 import pandas as pd
 import pytest
 
@@ -193,8 +194,12 @@ def test_guncel_ayarlar_csv():
 
 # ---------------------------------------------------------------- backtest besleyici <-> set.csv
 @pytest.mark.gercek_veri(KILIT_VERI, reason="sonuclar/kilit parquet dosyaları (gitignore) yok")
-def test_backtest_durum_set_csv_ile_tutarli(tmp_path):
+def test_backtest_durum_set_csv_ile_tutarli(tmp_path, monkeypatch):
+    # sonuclar/kilit/set.csv DONDURULMUŞ tarihsel kayıttır (eski, fiyat-riski boyutlaması; ON_KAYIT Güncelleme 8 öncesi).
+    # Tutarlılık eski kurala göre doğrulanır: maliyet payı 0 = eski boyut (lider kararı 2026-11-09; set.csv yeniden üretilmez).
+    from motor.arastirma import secim as sec
     from motor.canli import backtest_durum as bd
+    monkeypatch.setattr(sec, "maliyet_payi", lambda sf, yon, sk, tk: np.zeros(len(np.atleast_1d(sf))))
     p = bd.olustur(yazim_zamani=pd.Timestamp("2026-11-07", tz="UTC"))
     set_csv = pd.read_csv(KOK / "sonuclar" / "kilit" / "set.csv").set_index("kol")
     o = p["ozet"]

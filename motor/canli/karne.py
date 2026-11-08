@@ -31,6 +31,7 @@ from typing import Optional
 
 from motor.canli import dersler as ders
 from motor.canli import durum as d
+from motor.canli import durum_ek as ek
 
 MIN_ISLEM = ders.MIN_ISLEM_DERS          # 30, kullanıcı onaylı 2026-11-08
 ALFA = ders.ALFA                         # 0.05
@@ -135,7 +136,7 @@ def getiri_risk(konum: Optional[dict]) -> tuple:
 
 # ---------------------------------------------------------------------------- kalite
 def kalite(satirlar: list) -> dict:
-    r = [float(s["r"]) for s in satirlar if s.get("r") is not None]
+    r = [float(ek.r_kiyas(s)) for s in satirlar if ek.r_kiyas(s) is not None]   # TradFi funding HARİÇ (2026-11-09)
     if len(r) < MIN_ISLEM:
         return _yok("kalite", f"örnek az: R ölçülen işlem {len(r)} < {MIN_ISLEM}")
     kar, zr = sum(x for x in r if x > 0), sum(x for x in r if x < 0)

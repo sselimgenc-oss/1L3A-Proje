@@ -18,6 +18,9 @@ Funding
   - İşlem tablosundaki `funding` sütunu ÖDENEN tutardır (negatif = tahsil edilen).
 Risk
   - SERT_LIMITLER her zaman uygulanır; MotorAyarlari bunları aşarsa tavana kırpılır.
+  - İşlem başı risk MALİYET DAHİL (2026-11-09): miktar = nakit·risk / (|giriş−stop| + max(giriş, stop)·(stop_kayma + 2·taker))
+    (limitler.maliyetli_risk_birim). `r` sütunu FİYAT RİSKİ cinsindendir: net_pnl / (ilk_miktar·|giriş−ilk_stop|) (değişmedi);
+    bu yüzden tam stop kaybında r ≈ −(1 + maliyet payı / fiyat riski), kasa kaybı ≈ −%1.
   - limit_modu="olc": günlük kayıp ve kill switch işlemi DURDURMAZ, yalnızca `limit_olaylari`na
     kaydedilir. YALNIZCA araştırma/backtest içindir; canlı ve paper'da kullanılmaz.
     İşlem başı risk ve kaldıraç tavanı her iki modda da uygulanır.
@@ -40,7 +43,7 @@ from typing import Optional
 import numpy as np
 import pandas as pd
 
-from motor.risk.limitler import SERT_LIMITLER
+from motor.risk.limitler import SERT_LIMITLER, maliyetli_risk_birim
 from motor.strateji import cikislar as cks
 from motor.strateji import gostergeler as gst
 from motor.strateji.seans_takvimi import mum_suresi
@@ -311,7 +314,9 @@ def backtest(mumlar: pd.DataFrame, strateji: Strateji, ayarlar: MotorAyarlari = 
                 if hedef is not None and (hedef - fiyat) * yon <= 0:
                     red = "gecersiz_hedef"
             if red is None:
-                miktar = nakit * risk_oran / risk_birim
+                # işlem başı risk MALİYET DAHİL (kullanıcı kararı 2026-11-09; motor/risk/limitler.py): stop'ta fiyat riski +
+                # stop kayması + giriş/çıkış taker <= nakit·risk_oran. r tanımı değişmez (net / (miktar·|giriş−ilk stop|)).
+                miktar = nakit * risk_oran / maliyetli_risk_birim(fiyat, stop, stop_kayma, taker)
                 miktar = min(miktar, nakit * D(kaldirac) / fiyat)
                 miktar = _step_asagi(miktar, step)
                 if miktar < D(kural.min_qty) or miktar <= 0:

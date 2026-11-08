@@ -84,7 +84,11 @@ def _ozet(sinif, v, seed):
     return hashlib.sha256(x.encode()).hexdigest()[:16], len(r.islemler)
 
 
-def test_varsayilanlar_kapaliyken_eski_sonuclar_birebir_ayni():
+def test_varsayilanlar_kapaliyken_eski_sonuclar_birebir_ayni(monkeypatch):
+    # Çıkış modüllerinin geriye dönük aynılığı: boyut eski (yalnız fiyat riski) formülle sabitlenir; maliyet dahil boyut (2026-11-09)
+    # bilinçli bir boyut değişikliğidir ve test_maliyet_dahil_risk.py'de sınanır.
+    import motor.backtest.motor as bm
+    monkeypatch.setattr(bm, "maliyetli_risk_birim", lambda g, s, k, t: abs(g - s))
     sapan = []
     for si, sinif in enumerate((MaKesisim, DarAralikKirilim)):
         for vi, v in enumerate(VARYANTLAR):
