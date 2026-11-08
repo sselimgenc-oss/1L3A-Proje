@@ -438,7 +438,7 @@ def ham_gorevleri(stiller=("swing", "daytrade", "scalp"), stratejiler=None, tfle
 
 
 def havuz_calistir(isci, gorevler: list, surec: int, baslat, ayar: dict, butce_sn: Optional[float], ilerleme=True,
-                   etiket="") -> list:
+                   etiket="", her_sonuc=None) -> list:
     """Süreç havuzu; bütçe dolunca yeni görev başlatılmaz (işçi 'ertelendi' döner). Sonuçlar sırayla toplanır."""
     ayar = {**ayar, "son": (time.time() + butce_sn) if butce_sn else None}
     sonuc, t0 = [], time.perf_counter()
@@ -452,6 +452,8 @@ def havuz_calistir(isci, gorevler: list, surec: int, baslat, ayar: dict, butce_s
     try:
         for s in it:
             sonuc.append(s)
+            if her_sonuc is not None:          # ara kayıt: süreç kesilirse biten sonuçlar kaybolmaz
+                her_sonuc(s)
             if ilerleme and len(sonuc) % 25 == 0:
                 print(f"[{etiket}] {len(sonuc)}/{len(gorevler)}  {time.perf_counter() - t0:.0f} sn", flush=True)
     finally:
@@ -922,15 +924,19 @@ def wf_asamasi(stiller=("swing", "daytrade", "scalp"), surec: int = 4, butce_sn:
         kalan.append({"strateji": k[0], "stil": g["stil"], "tf": k[1], "ham": cikti / "ham", "oos": cikti / "oos"})
     if ilerleme:
         print(f"[wf] kalan {len(kalan)} kombinasyon", flush=True)
-    sonuc = havuz_calistir(_wf_isci, kalan, surec, _isci_ham, {"veri_dizini": None, "donem": donem}, butce_sn, ilerleme, "wf")
-    yeni = [s for s in sonuc if not s.get("ertelendi")]
+    yeni = []
+
+    def kaydet(s: dict) -> None:              # her biten kombinasyon hemen diske (2 saatlik kesintide ilerleme kaybolmasın)
+        if s.get("ertelendi"):
+            return
+        yeni.append(s)
+        _csv_yaz(pd.concat([onceki, pd.DataFrame(yeni)], ignore_index=True), cikti / "wf_evren")
+        if s.get("hata", "") == "" and s.get("n_kosu"):   # deneme kaydı: yalnız YENİ biten, hatasız kombinasyon (çift sayma yok)
+            deneme_kaydi.kaydet(s["strateji"], "evren", s["tf"], s.get("n_aday", 0), s.get("n_pencere", 0), s["n_kosu"])
+
+    sonuc = havuz_calistir(_wf_isci, kalan, surec, _isci_ham, {"veri_dizini": None, "donem": donem}, butce_sn, ilerleme, "wf",
+                           her_sonuc=kaydet)
     ert = len(sonuc) - len(yeni)
-    if yeni:
-        tum = pd.concat([onceki, pd.DataFrame(yeni)], ignore_index=True)
-        _csv_yaz(tum, cikti / "wf_evren")
-        for s in yeni:                        # deneme kaydı: yalnız YENİ biten, hatasız kombinasyonlar (çift sayma yok)
-            if s.get("hata", "") == "" and s.get("n_kosu"):
-                deneme_kaydi.kaydet(s["strateji"], "evren", s["tf"], s.get("n_aday", 0), s.get("n_pencere", 0), s["n_kosu"])
     return {"yeni": len(yeni), "ertelenen": ert, "gecen": int(sum(bool(s.get("gecti")) for s in yeni))}
 
 
