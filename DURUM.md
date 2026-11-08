@@ -113,6 +113,11 @@ Ana ders: önceki sonuçlar OOS'a bakılarak seçilmiş ve kâr birkaç işlemde
   saatlik dosyalar → swing/daytrade 1h+ testleri önce; 15m/30m dakikalık veri tamamlanınca.
 
 ## Lider kararları günlüğü (karar 26)
+- 2026-11-08 (KULLANICI kararı, scalp 4 enstrümanda 0/204 sonucunu GÖRDÜKTEN SONRA): scalp stratejileri genel 48 evrende test edilir
+  (EVREN_STIL['scalp'] = EVREN_GENEL). Eski sonuç arşivde (sonuclar/evren/2017_gelistirme/arsiv_scalp4/); deneme_kaydi eski 204 denemeyi
+  tutar, DSR deneme sayısı ikisini de içerir. Bu sonuç-sonrası bir değişikliktir; raporda böyle işaretlenir.
+- 2026-11-08 (KULLANICI talimatı): Fable denetimi bitince bulgular Opus tarafından düzeltilir; işler sırayla, durmadan 2026-11-09 13:59 TSİ'ye
+  kadar sürdürülür; kullanım limiti dolarsa yenilenince kendiliğinden devam edilir.
 - 2026-11-08: Evren ön sonuçları (WF): swing 380'de 44, daytrade 336'da 5 (hepsi 30m), scalp 204'te 0 geçen. Portföy aşaması başlatıldı.
   sağlamlık/pbo/seçim/holdout, Fable denetiminin araştırma bulguları DOĞRULANANA kadar başlatılmaz (holdout tek seferlik; denetimde
   DSR kapısı ve holdout mühür kapsamı hakkında doğrulanmamış bulgular var).
