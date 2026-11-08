@@ -730,3 +730,14 @@ def test_portfoy_evren_akisi_wf_holdout_pbo_listeler(tmp_path, pf_veri, monkeypa
     h2 = wep.holdout_kos(ad, etiket)
     assert h1["holdout_gun"] > 300 and h2["holdout_gun"] == 0 and h2["islem_sayisi"] == 0
     assert set(("net_getiri", "profit_factor", "sharpe", "max_dusus")) <= set(h1)
+
+
+def test_ham_gorev_donemde_mum_yoksa_veri_yok(tmp_path, veri_dizini, monkeypatch):
+    """Veri dönem sonundan sonra başlıyorsa (ör. BIST_TRALT 4h) görev çökmez; 'veri yok' olarak mühürlenir."""
+    we.veri_ayarla(veri_dizini, "kilit_oncesi")
+    bos = pd.DataFrame(columns=["open", "high", "low", "close", "volume"],
+                       index=pd.DatetimeIndex([], tz="UTC"))
+    monkeypatch.setattr(we, "_veri", lambda s, tf: (bos, None))
+    m = we.ham_gorev("swing__donchian-kirilim", "4h", "BTCUSDT", 1.0, tmp_path / "ham", kesin=True)
+    assert m["veri_yok"] and m["hata"] == "dönem içinde mum yok"
+    assert (tmp_path / "ham").glob("*.json")

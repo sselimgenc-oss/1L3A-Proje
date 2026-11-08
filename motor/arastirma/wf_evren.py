@@ -370,6 +370,10 @@ def ham_gorev(ad: str, tf: str, sembol: str, carpan: float = 1.0, dizin: Optiona
         meta.update(hata=f"{type(e).__name__}: {e}"[:200])
         yan.write_text(json.dumps(meta, ensure_ascii=False))
         return meta
+    if len(mumlar) == 0:                                  # K-B: dönem içinde hiç mum yok (ör. veri dönem sonundan sonra başlıyor)
+        meta.update(veri_yok=True, hata="dönem içinde mum yok")
+        yan.write_text(json.dumps(meta, ensure_ascii=False))
+        return meta
     if (not DONEMLER[_CFG["donem"]]["kilit_ac"]) and len(mumlar) and mumlar.index.max() >= kilit.KILIT_BASLANGIC:
         raise RuntimeError("ham koşu kilitli döneme girdi")           # asla olmamalı
     sv = spot_vekil_bilgisi(sembol, mumlar, fund, _CFG["veri_dizini"])
