@@ -20,6 +20,8 @@ WorkingDirectory=/opt/1l3a
 EnvironmentFile=-/etc/1l3a-paper.env
 StateDirectory=1l3a-paper
 Environment=PYTHONUNBUFFERED=1
+# kilit açılış kaydı depodaki izlenen dosyaya değil durum dizinine (git pull çakışmasın)
+Environment=L3A_KILIT_LOG=/var/lib/1l3a-paper/kilit_acilis.jsonl
 ExecStart=/opt/1l3a/.venv/bin/python -m motor.canli.paper --canli --durum ${STATE_DIRECTORY}/durum --tohum ${STATE_DIRECTORY}/veri/mumlar
 Restart=on-failure
 RestartSec=30
