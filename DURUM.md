@@ -235,8 +235,11 @@ Ana ders: önceki sonuçlar OOS'a bakılarak seçilmiş ve kâr birkaç işlemde
   SPX/WTI 5m 2017-2019 indirmesi arka planda). Tam koşu KULLANICI "başla" DEYİNCE: --donem 2017_gelistirme ile
   ham → wf → portfoy → saglamlik → pbo → secim → holdout (tahmin: ham ~35 saat/4 çekirdek, toplam ~2 gün+).
 - 2026-11-08: Pano öncelik 2 ve 3 (motor tarafı) yazıldı: `dersler.json` (canlı ↔ backtest beklentisi; binom + Welch t) ve `aylik_rapor.json` (TSİ ay özeti + paper kabul listesi),
-  panoda DERSLER ve RAPOR sekmeleri. Kabul ölçütleri bu dosyadaki kurallardan: süre ≥ 8 hafta (en erken 2027-01-02), set 8 hf beklenti aralığı, sert limit ihlali yok. **Kullanıcıya sorulacak
-  (tanımsız):** kesintisiz çalışma sınırı; asgari işlem; strateji bazlı alarm kabulü; günlük limit tetiklenmesi ihlal mi; Dersler eşikleri (asgari işlem 30, alfa 0.05 geçici); "altında" ders kabulü bozar mı.
+  panoda DERSLER ve RAPOR sekmeleri. Kabul ölçütleri bu dosyadaki kurallardan: süre ≥ 8 hafta (en erken 2027-01-02), set 8 hf beklenti aralığı, sert limit ihlali yok. **Kullanıcı kararı (2026-11-08, tek kayıt):** (1) kabul için set toplamında ≥ 30 kapanan işlem (geçti/kaldı); (2) Dersler'de "altında" çıkan strateji kabulü bozmaz ama canlıya geçmez
+  (`canliya_uygun` false + neden), "örnek az" da canlıya uygun sayılmaz (ayrı neden); (3) günlük %3 kayıp limitinin tetiklenmesi ihlal sayılmaz (sayı bilgi olarak raporda), kill switch / kaldıraç /
+  stop riski aşımı ihlal; (4) toplam kesinti ≤ 24 saat, aşarsa kabul reddedilmez, en erken değerlendirme (başlangıç + 56 gün) aşan kesinti kadar kayar — kesinti `paper_state` olay kayıtlarından
+  ölçülür (veri_bosluk aralığı, ws_koptu süresi), süresi kayıtta olmayan olay varsa null + neden; Dersler eşikleri (asgari 30 işlem, alfa 0.05) onaylandı, "geçici" etiketi kalktı. Açık soru: yalnız
+  strateji bazlı alarmın kabulde aranıp aranmayacağı.
 
 ## Kullanıcıyı bekleyen kararlar
 - ~~Final seçim ve kilitli dönemin bir kez açılması (karar 20)~~ — kullanıcı "aç" dedi (2026-11-07), yapıldı: `sonuclar/kilit/RAPOR.md`.
