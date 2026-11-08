@@ -228,10 +228,10 @@ def test_kripto_sinyalinde_gun_sonu_kapanis_sutunu_yok():
 
 # ------------------------------------------------------------------ gerçek veri (varsa)
 @pytest.mark.parametrize("dosya", ["DK_AAPL/1h.parquet", "DK_AAPL/5m.parquet"])
-def test_gercek_hisse_verisi_gun_sonu(dosya):
+def test_gercek_hisse_verisi_gun_sonu(dosya, gercek_veri_yok):
     yol = MUM_DIZINI / dosya
     if not yol.exists():
-        pytest.skip(f"veri yok: {yol}")
+        gercek_veri_yok(f"veri yok: {yol}")
     idx = pd.read_parquet(yol).index
     son = seans_son_mumu(idx)
     gun = pd.Index(idx.tz_convert(NY).date)

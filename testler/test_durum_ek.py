@@ -18,6 +18,7 @@ from motor.canli import paper as pp
 from motor.canli import paper_durum as pdr
 from motor.canli import paper_motor as pm
 from testler.test_paper_motor import TAN, kural, sentetik
+from testler.conftest import gercek_veri_yok_isle
 
 D = Decimal
 
@@ -330,7 +331,7 @@ def test_paper_durum_kaydet_yukle_tsi_serisi_korunur(tmp_path):
 @pytest.fixture(scope="module")
 def bt():
     if not (Path(bd.KOK) / "sonuclar" / "kilit" / "sonuc.csv").exists():
-        pytest.skip("sonuclar/kilit yok")
+        gercek_veri_yok_isle("sonuclar/kilit yok")
     return bd.olustur()
 
 

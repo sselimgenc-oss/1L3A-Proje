@@ -192,7 +192,7 @@ def test_guncel_ayarlar_csv():
 
 
 # ---------------------------------------------------------------- backtest besleyici <-> set.csv
-@pytest.mark.skipif(not KILIT_VERI, reason="sonuclar/kilit parquet dosyaları (gitignore) yok")
+@pytest.mark.gercek_veri(KILIT_VERI, reason="sonuclar/kilit parquet dosyaları (gitignore) yok")
 def test_backtest_durum_set_csv_ile_tutarli(tmp_path):
     from motor.canli import backtest_durum as bd
     p = bd.olustur(yazim_zamani=pd.Timestamp("2026-11-07", tz="UTC"))
