@@ -240,6 +240,10 @@ Ana ders: önceki sonuçlar OOS'a bakılarak seçilmiş ve kâr birkaç işlemde
   stop riski aşımı ihlal; (4) toplam kesinti ≤ 24 saat, aşarsa kabul reddedilmez, en erken değerlendirme (başlangıç + 56 gün) aşan kesinti kadar kayar — kesinti `paper_state` olay kayıtlarından
   ölçülür (veri_bosluk aralığı, ws_koptu süresi), süresi kayıtta olmayan olay varsa null + neden; Dersler eşikleri (asgari 30 işlem, alfa 0.05) onaylandı, "geçici" etiketi kalktı. Açık soru: yalnız
   strateji bazlı alarmın kabulde aranıp aranmayacağı.
+- 2026-11-08: Pano öncelik 4 (motor tarafı) yazıldı: `veri_guveni.json` (sembol başına son mum, bayatlık, son 30 günde eksik mum/boşluk, kaynak), `butunluk.json` (dayanılan dosyaların sha256 ↔ kayıtlı değer
+  `sonuclar/final/butunluk_kayit.json`, kod sürümü git commit), `islemler.jsonl`'e `ayar_surumu` (parametre seti hash'i + set dosyası) ve `giris_gerekcesi` (sinyal anındaki genel şablon; stratejiler koşul metni üretmiyor),
+  kalp atışı (`durum/kalp_atisi.json` + `paper_state.json`; yeniden başlatma kesintisi süresiyle olaya yazılır, `kesinti_olc` okur). Panoda SAĞLIK ve İŞLEMLER sekmelerinde kartlar. Kayıt dosyası ayar yenilemesinde
+  (guncel_ayarlar.csv değişince) "uyuşmuyor" gösterir; yeni özeti kaydetmek kullanıcı onayıyladır (`python -m motor.canli.guven --kaydet`). Ayrıntı: `motor/canli/DURUM_SOZLESMESI.md`.
 
 ## Kullanıcıyı bekleyen kararlar
 - ~~Final seçim ve kilitli dönemin bir kez açılması (karar 20)~~ — kullanıcı "aç" dedi (2026-11-07), yapıldı: `sonuclar/kilit/RAPOR.md`.

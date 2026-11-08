@@ -28,6 +28,8 @@ from motor.canli import aylik_rapor as ar
 from motor.canli import dersler as ders
 from motor.canli import durum as d
 from motor.canli import durum_ek as ek
+from motor.canli import giris_izi as gi
+from motor.canli import guven as gv
 from motor.risk.limitler import SERT_LIMITLER
 
 KOK = Path(__file__).resolve().parents[2]
@@ -153,6 +155,8 @@ def olustur(kok: Path = KOK, baslangic=BASLANGIC, yazim_zamani=None, beklenti_cs
     # --- katkı: tek-grafik (kabul edilen işlemler; pnl, yeniden oynatma motorundan)
     ozs_kol = oy["gunluk"]                                             # E_kol[t] (gece yarısı, gerçekleşmiş)
     sicil = {x["kimlik"]: {"katki": 0.0, "satirlar": []} for x in set_["stratejiler"]}
+    # sürüm izi: kilit testindeki ayar (paper ile aynı hash fonksiyonu); giriş gerekçesi backtest yeniden oynatmasında tutulmaz -> null
+    ayar_of = {x["kimlik"]: gi.ayar_surumu(x["strateji"], x["kilit_testi_ayari"], "final_set.json (kilit_testi_ayari)") for x in set_["stratejiler"]}
     gun_katki = {x["kimlik"]: np.zeros(len(gunler)) for x in set_["stratejiler"]}       # set başlangıcına oran, gün gün
     ofset, bitis_kol = {}, 0
     for k, (df, _) in S["parcalar"].items():
@@ -177,7 +181,7 @@ def olustur(kok: Path = KOK, baslangic=BASLANGIC, yazim_zamani=None, beklenti_cs
             "giris_fiyati": repr(float(tr["giris_fiyati"])), "cikis_zamani": d.zaman_str(pd.Timestamp(tr["cikis_zamani"])),
             "cikis_fiyati": repr(float(tr["cikis_fiyati"])), "miktar": repr(float(tr["miktar"])), "r": d.sayi(tr["r"]),
             "net_pnl_yerel": d.para(tr["net_pnl"]), "set_katki_usd": d.para(bas * Decimal(repr(float(katki_set)))),
-            "cikis_nedeni": str(tr.get("cikis_nedeni", ""))})
+            "cikis_nedeni": str(tr.get("cikis_nedeni", "")), "ayar_surumu": ayar_of[kol], "giris_gerekcesi": None})
     # --- katkı: portföy stratejileri (günlük getiri / 3 x kol payı x S[t-1]); işlemler kendi hesaplarında
     # kol getirisi = DataFrame.mean(axis=1) (set_testi ile aynı): o gün verisi olan stratejiler arasında eşit pay (hafta sonu
     # DK_ verisi olmayan strateji satırda yoktur -> payda ona göre küçülür); katkı aynı payla dağıtılır ki toplam birebir tutsun
@@ -197,7 +201,8 @@ def olustur(kok: Path = KOK, baslangic=BASLANGIC, yazim_zamani=None, beklenti_cs
                 "yon": _yon(tr["yon"]), "giris_zamani": d.zaman_str(pd.Timestamp(tr["giris_zamani"])),
                 "giris_fiyati": repr(float(tr["giris_fiyati"])), "cikis_zamani": d.zaman_str(pd.Timestamp(tr["cikis_zamani"])),
                 "cikis_fiyati": repr(float(tr["cikis_fiyati"])), "miktar": repr(float(tr["miktar"])), "r": d.sayi(tr["r"]),
-                "net_pnl_yerel": d.para(tr["net_pnl"]), "set_katki_usd": None, "cikis_nedeni": str(tr.get("cikis_nedeni", ""))})
+                "net_pnl_yerel": d.para(tr["net_pnl"]), "set_katki_usd": None, "cikis_nedeni": str(tr.get("cikis_nedeni", "")),
+                "ayar_surumu": ayar_of[x["kimlik"]], "giris_gerekcesi": None})
     # --- strateji kayıtları + beklenti konumu (stratejinin kendi serisi, dönemin son günleri)
     kilit_gunleri = pd.date_range(KILIT, gunler[-1], freq="D", tz="UTC").as_unit(gunler.unit)
     stratejiler, tum_islemler = [], []
@@ -273,6 +278,8 @@ def olustur(kok: Path = KOK, baslangic=BASLANGIC, yazim_zamani=None, beklenti_cs
               "uyarilar": ["Bayatlık denetimi backtest kaynağında kapalı (veri bilerek statik)."]}
     ds = ders.olustur("backtest", zaman, [x["kimlik"] for x in set_["stratejiler"]], tum_islemler, {s["kimlik"]: s["beklenti"] for s in stratejiler})
     ekstra_dosyalar["dersler"] = ds
+    ekstra_dosyalar["veri_guveni"] = gv.veri_guveni(saglik["veri"], None, gunler[-1], "backtest", zaman)
+    ekstra_dosyalar["butunluk"] = gv.butunluk("backtest", zaman, None, kok=kok, kayit_yolu=kok / "sonuclar" / "final" / "butunluk_kayit.json")
     ekstra_dosyalar["aylik_rapor"] = ar.olustur(
         kaynak="backtest", zaman=zaman, simdi=gunler[-1], donem_bas=gunler[0], aylik_kz_ajan=donem["aylik"], gunluk_tam=kz_tam, satirlar=tum_islemler,
         risk=risk, sayaclar=ozet["sayaclar"], set_konum=set_bek, strat_konum={s["kimlik"]: s["beklenti"] for s in stratejiler}, dersler=ds,

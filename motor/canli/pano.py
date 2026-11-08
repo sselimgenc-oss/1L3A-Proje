@@ -77,6 +77,10 @@ def uyarilar(veri: dict, sorunlar: list, simdi: datetime) -> list:
             u.append(("kritik", f"Motor durumu: {sg['durum']}"))
         for m in sg["uyarilar"]:
             u.append(("bilgi" if oz and oz["kaynak"] == "backtest" else "uyari", m))
+    bt = veri.get("butunluk")
+    if bt and bt.get("genel_durum") == "uyusmuyor":
+        u.append(("uyari", "Backtest bütünlüğü: " + ", ".join(x["id"] for x in bt["dosyalar"] + bt["sanal"] if x["durum"] == "uyusmuyor")
+                  + " kayıtlı sha256 ile uyuşmuyor (SAĞLIK sekmesi)."))
     if oz:
         r = oz["risk"]
         if r["kill_switch"]["tetiklendi"]:
@@ -1275,7 +1279,26 @@ def _sekme_islemler(isl, st, ml, rd, oz=None) -> str:
     if oz is not None:
         alt = _p("İstatistik", _istatistik(oz), "motor yazar", "g3", duz=oz.get("istatistik") is not None) + _p("Çıkış nedenleri", _cikis_nedenleri(oz), "motor yazar", "g3", duz=oz.get("cikis_nedenleri") is not None) + alt
     alt += (_p("Son atlanan / küçültülen sinyaller", _reddedilen_son(rd), "saat TSİ", "g3", duz=True) if rd is not None else "")
-    return _ig(perf + sag + son + alt)
+    iz = _p("İşlem izi: ayar sürümü ve giriş gerekçesi", _islem_izi(isl), f"son {ISLEM_IZI_GOSTER} işlem · motor yazar", "g3", duz=True) if isl else ""
+    return _ig(perf + sag + son + iz + alt)
+
+
+ISLEM_IZI_GOSTER = 15
+
+
+@_guvenli
+def _islem_izi(isl: list) -> str:
+    """islemler.jsonl: her işlemin ayar sürümü (parametre seti hash'i + dosya) ve giriş gerekçesi (karar anındaki değerler). Eski kayıtlarda yok."""
+    son = sorted(isl, key=lambda x: x["zaman"], reverse=True)[:ISLEM_IZI_GOSTER]
+    if not any(x.get("ayar_surumu") or x.get("giris_gerekcesi") for x in son):
+        return '<div class="kart alt">Bu kayıtlarda ayar sürümü / giriş gerekçesi yok (eski motor ya da backtest yeniden oynatması).</div>'
+    satir = []
+    for x in son:
+        av, g = x.get("ayar_surumu"), x.get("giris_gerekcesi")
+        satir.append([f"<b>{esc(tsi(x['zaman']))}</b>", esc(kisa_kimlik(x["kimlik"])), esc(x["yon"]),
+                      f"<code>{esc(av['hash'])}</code> <span class='alt'>{esc(av['set_dosyasi'])}</span>" if av else "—",
+                      f'<span style="white-space:normal">{esc(g["metin"])}</span>' if g else "—"])
+    return _tablo(["Çıkış (TSİ)", "Strateji", "Yön", "Ayar sürümü", "Giriş gerekçesi (karar anı)"], satir, sinif="kay")
 
 
 @_guvenli
@@ -1309,19 +1332,88 @@ def _sekme_risk(oz, ol) -> str:
                + _p("Kill switch ve notlar", "".join(notlar)))
 
 
-def _sekme_saglik(sg) -> str:
+GUVEN_KAYNAK_ADI = {"binance_perp": "Binance perp", "dukascopy": "Dukascopy", "yahoo": "Yahoo", "spot_vekil": "Binance spot (vekil)"}
+BUTUNLUK_ETIKET = {"eslesti": ("EŞLEŞTİ", "iyi"), "uyusmuyor": ("UYUŞMUYOR", "kotu"), "kayit_yok": ("KAYIT YOK", ""), "dosya_yok": ("DOSYA YOK", ""),
+                   "olculmedi": ("ÖLÇÜLMEDİ", "")}
+
+
+def _kisa_sha(x: Optional[str]) -> str:
+    return "—" if not x else x[:12]
+
+
+@_guvenli
+def _veri_guveni_html(vg: dict) -> str:
+    """veri_guveni.json (motor yazar): sembol başına son mum, bayatlık, son N günde eksik mum/boşluk, kaynak."""
+    oz = vg["ozet"]
+    ust = ('<div class="izgara oto">' + _kutu("Veri serisi", str(oz["seri_sayisi"])) + _kutu("Bayat", str(oz["bayat_sayisi"]), "kotu" if oz["bayat_sayisi"] else "iyi")
+           + _kutu(f"Eksik mum (son {vg['pencere_gun']} gün)", "—" if oz["eksik_mum_toplam"] is None else str(oz["eksik_mum_toplam"]),
+                   "kotu" if oz["eksik_mum_toplam"] else "", f"{oz['olculmeyen_seri']} seri ölçülemedi" if oz["olculmeyen_seri"] else "")
+           + _kutu("Boşluk sayısı", "—" if oz["bosluk_toplam"] is None else str(oz["bosluk_toplam"]), "kotu" if oz["bosluk_toplam"] else "") + "</div>")
+    satir, notlar = [], []
+    for x in vg["semboller"]:
+        kay = GUVEN_KAYNAK_ADI.get(x["kaynak"], x["kaynak"]) + (" + spot vekil" if x.get("spot_vekil") else "")
+        satir.append([f"<b>{esc(x['sembol'])}</b> <span class='alt'>{esc(x['tf'])}</span>", esc(tsi(x["son_mum_acilis"])), esc(tsi(x["son_mum_kapanis"])),
+                      _h(f"{x['bayatlik_dk']} dk" + (" · BAYAT" if x["bayat"] else ""), "kotu" if x["bayat"] else ""),
+                      _h("—" if x["eksik_mum"] is None else str(x["eksik_mum"]), "kotu" if x["eksik_mum"] else ""),
+                      esc("—" if x["bosluk_sayisi"] is None else f"{x['bosluk_sayisi']} (en uzun {x['en_uzun_bosluk_mum']})"), esc(kay)])
+        if x.get("eksik_neden"):
+            notlar.append(x["eksik_neden"])
+        if x.get("spot_vekil_neden"):
+            notlar.append(f"{x['sembol']}: {x['spot_vekil_neden']}")
+    tab = _tablo(["Sembol", "Son mum açılış (TSİ)", "Son mum kapanış (TSİ)", "Bayatlık", "Eksik mum", "Boşluk", "Kaynak"], satir, sag=(3, 4, 5), sinif="kay")
+    return (ust + tab + "".join(f'<div class="alt ip">{esc(n)}</div>' for n in sorted(set(notlar))) + f'<div class="alt ip">{esc(vg["not"])}</div>')
+
+
+@_guvenli
+def _butunluk_html(b: dict) -> str:
+    """butunluk.json (motor yazar): dayanılan dosyaların sha256 özeti ↔ kayıtlı değer, kod sürümü (git)."""
+    kv, sy = b["kod_surumu"], b["sayim"]
+    et, sn = BUTUNLUK_ETIKET[b["genel_durum"]] if b["genel_durum"] in BUTUNLUK_ETIKET else (b["genel_durum"].upper(), "")
+    kod = kv["kisa"] if kv.get("kisa") else "—"
+    kod_alt = (("çalışma ağacı DEĞİŞMİŞ" if kv.get("kirli") else "temiz") if kv.get("kirli") is not None else "temizlik denetlenemedi") if kv.get("kisa") else (kv.get("neden") or "")
+    ust = ('<div class="izgara oto">' + _kutu("Bütünlük", et if b["genel_durum"] != "eksik" else "EKSİK", sn if b["genel_durum"] != "eksik" else "")
+           + _kutu("Kod sürümü (git)", kod, "kotu" if kv.get("kirli") else "", kod_alt)
+           + _kutu("Eşleşen", str(sy["eslesti"]), "iyi") + _kutu("Uyuşmayan", str(sy["uyusmuyor"]), "kotu" if sy["uyusmuyor"] else "")
+           + _kutu("Kayıt yok / dosya yok", str(sy["kayit_yok"] + sy["dosya_yok"] + sy["olculmedi"])) + "</div>")
+    satir = []
+    for x in b["dosyalar"] + b["sanal"]:
+        e, c = BUTUNLUK_ETIKET[x["durum"]]
+        satir.append([f"<b>{esc(x['id'])}</b>", esc(x["yol"]), f"<code>{esc(_kisa_sha(x['sha256']))}</code>", f"<code>{esc(_kisa_sha(x['kayitli_sha256']))}</code>",
+                      _h(e, c), f'<span style="white-space:normal">{esc(x["neden"] or "")}</span>'])
+    notlar = (f'<div class="alt ip">Kod sürümü notu: {esc(kv["neden"])}</div>' if kv.get("neden") and kv.get("kisa") else "")
+    if kv.get("kirli_dosyalar"):
+        notlar += f'<div class="alt ip">Değişmiş dosyalar (commit edilmemiş): {esc(", ".join(kv["kirli_dosyalar"]))}</div>'
+    return (ust + _tablo(["Kalem", "Yol", "sha256 (şimdi)", "sha256 (kayıtlı)", "Durum", "Not"], satir, sinif="kay") + notlar
+            + f'<div class="alt ip">{esc(b["not"])}</div>')
+
+
+def _kalp_atisi_kutulari(sg: dict) -> str:
+    k = sg.get("kalp_atisi")
+    if not k:
+        return ""
+    kes = k.get("son_kesinti_sn")
+    return (_kutu("Son kalp atışı (TSİ)", tsi(k["son"]), "", f"her ≤ {k['aralik_sn']} sn")
+            + _kutu("Süreç başlangıcı (TSİ)", tsi(k["baslangic"]) if k.get("baslangic") else "—")
+            + _kutu("Son yeniden başlatma kesintisi", "—" if kes is None else f"{kes:.0f} sn", "", "" if kes is not None else (k.get("son_kesinti_neden") or "")))
+
+
+def _sekme_saglik(sg, vg=None, bt=None) -> str:
     if not sg:
         return _veri_yok("saglik.json")
     sv = sg["servis"]
     motor = ('<div class="izgara oto">'
              + _kutu("Durum", sg["durum"], "iyi" if sg["durum"] == "ok" else "kotu") + _kutu("Son çalışma (TSİ)", tsi(sg["son_calisma"]))
              + _kutu("Servis", {True: "çalışıyor", False: "ÇALIŞMIYOR", None: "yok (backtest)"}[sv["calisiyor"]], "kotu" if sv["calisiyor"] is False else "", f"sürüm {sv['surum']}")
-             + "</div>")
+             + _kalp_atisi_kutulari(sg) + "</div>")
     veri = ('<div class="izgara oto">' + "".join(
         _kutu(f"{v['sembol']} {v['tf']} son mum (TSİ)", tsi(v["son_mum_zamani"]), "kotu" if v["bayat"] else "", f"{v['bayatlik_dk']} dk" + (" · BAYAT" if v["bayat"] else ""))
         for v in sg["veri"]) + "</div>") if sg["veri"] else '<div class="alt">Veri akışı kaydı yok.</div>'
     soz = '<dl class="soz">' + "".join(f"<dt>{esc(k)}</dt><dd>{esc(v)}</dd>" for k, v in SOZLUK) + "</dl>"
-    return _ig(_p("Motor", motor, "", "g3") + _p("Veri akışları", veri, "son mum zamanı ve gecikme", "g3")
+    guven = _p("Veri güveni", _veri_guveni_html(vg) if vg is not None else _bekleyen("veri_guveni.json", "son mum, bayatlık, eksik mum, kaynak"),
+               "eksik mum ve kaynak · motor hesaplar", "g3", duz=True)
+    butun = _p("Backtest bütünlüğü", _butunluk_html(bt) if bt is not None else _bekleyen("butunluk.json", "dosya sha256 özetleri ve kod sürümü"),
+               "sha256 ↔ kayıtlı değer · motor hesaplar", "g3", duz=True)
+    return _ig(_p("Motor", motor, "", "g3") + _p("Veri akışları", veri, "son mum zamanı ve gecikme", "g3") + guven + butun
                + _p("Sözlük", f'<details class="ince"><summary>Terimler ({len(SOZLUK)}) — dokun/tıkla</summary>{soz}</details>', "R, PF, kill switch...", "g3"))
 
 
@@ -1415,6 +1507,7 @@ def html_olustur(veri: dict, sorunlar: list, simdi: datetime) -> str:
     oz, st, sg, isl, gc = (veri.get(k) for k in ("ozet", "stratejiler", "saglik", "islemler", "gecmis"))
     mr, ml, rd, ol, ic = (veri.get(k) for k in ("maruziyet", "maliyet", "reddedilen", "olaylar", "icgoruler"))
     dr, ar = veri.get("dersler"), veri.get("aylik_rapor")
+    vg, bt = veri.get("veri_guveni"), veri.get("butunluk")
     u = uyarilar(veri, sorunlar, simdi)
     canli_mi = bool(oz and oz["kaynak"] != "backtest")
     g = []
@@ -1443,7 +1536,7 @@ def html_olustur(veri: dict, sorunlar: list, simdi: datetime) -> str:
         f'<label for="{i}">{esc(ad)}' + (f' <em>{esc(rozet[i])}</em>' if rozet.get(i) is not None else "")
         + (' <em class="k">!</em>' if i == "t6" and sorun_var else "") + "</label>" for i, ad in SEKMELER) + "</div>")
     icerik = (_sekme_ozet(oz, st, gc, ic, sg, isl), _sekme_stratejiler(st, isl, mr), _sekme_pozisyon(oz, st, mr), _sekme_islemler(isl, st, ml, rd, oz),
-              _sekme_risk(oz, ol), _sekme_saglik(sg), _sekme_dersler(dr), _sekme_rapor(ar))
+              _sekme_risk(oz, ol), _sekme_saglik(sg, vg, bt), _sekme_dersler(dr), _sekme_rapor(ar))
     g.append(_suzgec_cubugu(veri))
     g.append('<div class="sekmeler">' + "".join(f'<section class="n{k}">{c}</section>' for k, c in enumerate(icerik, 1)) + "</div></div>")
     g.append('<div class="alt ayak">Pano yeni hesap yapmaz: sayılar durum dosyalarından aynen gösterilir. Saatler TSİ (Türkiye saati).</div>')

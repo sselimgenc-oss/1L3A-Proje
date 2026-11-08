@@ -51,8 +51,9 @@ _WS_SN_RE = re.compile(r"WS (\d+(?:\.\d+)?) sn mesaj vermedi")
 def kesinti_olc(olaylar: list, olay_kapasite: int = OLAY_KAPASITE) -> dict:
     """Motorun mevcut olay kayıtlarından (paper_state.json olaylar: {zaman, tur, mesaj}) toplam kesinti süresi.
 
-    Süresi kayıttan okunabilenler: `veri_bosluk` mesajındaki "(A -> B)" aralığı; `ws_koptu` mesajındaki "WS N sn mesaj vermedi" ([zaman-N sn, zaman]).
-    Çakışan aralıklar birleştirilir (aynı süre iki kez sayılmaz). Süresi kayıtta olmayan kesinti olayları (yeniden_baslatma, binance_hata, aralıksız veri_bosluk,
+    Süresi kayıttan okunabilenler: `veri_bosluk` ve `yeniden_baslatma` mesajındaki "(A -> B)" aralığı (yeniden başlatmada A = motorun SON KALP ATIŞI,
+    B = başlangıç; kalp_atisi.py — kalp atışından önceki eski olaylarda aralık yoktur, ölçülemeyen sayılır); `ws_koptu` mesajındaki "WS N sn mesaj vermedi" ([zaman-N sn, zaman]).
+    Çakışan aralıklar birleştirilir (aynı süre iki kez sayılmaz). Süresi kayıtta olmayan kesinti olayları (aralıksız yeniden_baslatma, binance_hata, aralıksız veri_bosluk,
     'WS koptu') veya dolu olay kaydı (eski olaylar silinmiş olabilir) varsa toplam ÖLÇÜLEMEZ: `saat` None, `neden` yazılı, `alt_sinir_saat` yalnız ölçülen kısımdır.
     -> {saat, alt_sinir_saat, olculen_olay, olculemeyen_olay, neden}."""
     araliklar, olculemeyen = [], 0
@@ -62,7 +63,7 @@ def kesinti_olc(olaylar: list, olay_kapasite: int = OLAY_KAPASITE) -> dict:
             continue
         aralik = None
         try:
-            if tur_ == "veri_bosluk" and (mm := _BOSLUK_RE.search(msg)):
+            if tur_ in ("veri_bosluk", "yeniden_baslatma") and (mm := _BOSLUK_RE.search(msg)):
                 a_, b_ = (pd.Timestamp(mm.group(i)) for i in (1, 2))
                 aralik = (ek._utc(a_), ek._utc(b_))
             elif tur_ == "ws_koptu" and (mm := _WS_SN_RE.search(msg)):
