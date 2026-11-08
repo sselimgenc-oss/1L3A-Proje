@@ -126,3 +126,16 @@ BIST (13 hisse) evrenden tamamen çıkarıldı. Evren 35 (13 kripto + 17 ABD his
 Gerekçe: projenin canlı işlem yolu (Binance) BIST içermez; BIST açığa satış kısıtı/ödünç maliyeti ve TRY nominal fiyatlardaki enflasyon trendi
 modellenmediği için BIST sonuçları yanıltıcıydı (Güncelleme 6 (C) ile zaten kapı dışıydı). Güncelleme 6 (C) kuralları BIST olmadan etkisizdir.
 Tüm WF aşamaları 35 evrenle yeniden hesaplanır; eski (BIST'li) sonuçlar arşivlenir. deneme_kaydi yeni evren imzasıyla ayrı deneme sayar.
+
+## GÜNCELLEME 8 (2026-11-09, kullanıcı kararı; ham tarama sırasında, WF öncesi)
+İşlem başı %1 risk MALİYET DAHİL tanımlanır (denetim O7/Ö8): stop'ta toplam kayıp = fiyat riski + stop kayması + giriş ve çıkış komisyonu
+≤ özsermayenin %1'i. Motorlarda miktar = nakit·%1 / (|giriş−stop| + max(giriş, stop)·(stop_kayma + 2·taker)) (`motor/risk/limitler.py`,
+`maliyetli_risk_birim`; short'ta çıkış tarafı maliyeti stop fiyatından işlediği için max(giriş, stop), tutucu). SERT_LIMITLER sabitleri DEĞİŞMEDİ.
+- Ham çıktı (r, sf, stop_mesafe) boyutlamadan bağımsızdır; `r` tanımı aynı kaldı (net / (miktar·|giriş−ilk stop|), fiyat riski cinsinden).
+  Bu yüzden ham tarama yeniden koşulmaz.
+- Tek kasa oynatma (`secim.yeniden_oyna`, wf_evren `kasa_metrikleri`): her işlemin fiyat riski$ = %1·MTM·sf/(sf + maliyet_payi), K/Z = fiyat riski$ × r.
+  maliyet_payi (giriş fiyatına oran) = (short: 1+sf, long: 1) × (stop_kayma + 2·taker), SEMBOL bazlı evren maliyet tablosundan × ham koşunun maliyet
+  çarpanı (K1 x2/x3 koşularında 2/3; `wf_evren.oynatma_tablosu`). Toplam açık stop riski (%5) ve brüt (3x) ölçümü değişmedi (fiyat riski / nominal).
+- Etki (ölçüm, kilit_oncesi swing ham dosyaları, sf/(sf+maliyet_payi) ortalaması): işlem boyutu BTC %4.5, SOL %2, DK_AAPL %8, DK_XAU %11
+  küçülür; dar stoplu stratejide daha çok (ör. swing__ardisik-bar-tukenme 4h BTC %13). Kaldıraç tavanına takılan işlemde değişmez.
+  OOS net getiri/düşüş ve limit olayları buna göre küçülür; r tabanlı ölçütler (PF, en iyi %5 hariç PF, K2, K3, K4) değişmez. Kapı eşikleri değişmedi.

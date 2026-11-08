@@ -97,7 +97,7 @@ def test_sert_limitler_birlestirmede_uygulanir():
     """13 enstrümanda aynı anda sinyal: toplam stop riski %5 -> en çok 5 işlem aynı anda açık."""
     semboller = we.EVREN_GENEL[:13]
     oos = pd.DataFrame({"sembol": semboller, "yon": 1, "giris_zamani": _g(1), "cikis_zamani": _g(3), "r": 1.0,
-                        "sf": 0.05, "stop_mesafe": 1.0})
+                        "sf": 0.05, "stop_mesafe": 1.0, "maliyet_payi": 0.0})
     tablo = we.oynatma_tablosu(oos, we.EVREN_GENEL)
     m = we.kasa_metrikleri(tablo, _g(0), _g(10))
     assert m["islem_sayisi"] == 5 and m["red_toplam_risk"] + m["red_kaldirac"] == 8
@@ -107,7 +107,7 @@ def test_sert_limitler_birlestirmede_uygulanir():
 def test_kaldirac_siniri():
     """Stop mesafesi çok dar (sf=0.001): %1 risk için nominal 10x özsermaye -> 3x tavanı ölçekler/reddeder."""
     oos = pd.DataFrame({"sembol": ["A", "B"], "yon": 1, "giris_zamani": _g(1), "cikis_zamani": _g(3), "r": 1.0,
-                        "sf": 0.001, "stop_mesafe": 1.0})
+                        "sf": 0.001, "stop_mesafe": 1.0, "maliyet_payi": 0.0})
     m = we.kasa_metrikleri(we.oynatma_tablosu(oos, ("A", "B")), _g(0), _g(10))
     assert m["net_getiri"] < 0.01 * 0.5                                  # 3x tavanı kârı keser (10x gerekirdi)
 

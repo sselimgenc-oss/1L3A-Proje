@@ -20,7 +20,8 @@ YÖNTEM VE YAKLAŞIKLIKLAR (hepsi bilinçli, raporda da yazılı)
      ve yönlü örtüşmesi <= ESIK_ORTUSME ise eklenir; ilk 3 SEÇİM, sonraki 5 YEDEK (aynı kurallar). Aynı strateji farklı
      sembol = ayrı kol sayılır (kural yasaklamaz; raporda işaretlenir).
   6. Yeniden oynatıcı (yeniden_oyna): seçilen setin OOS işlemlerini OLAY SIRASIYLA tek hesapta oynatır:
-       - işlem başı risk %1 (giriş anındaki MTM özsermayenin), bileşik; risk_i = ölçek x %1 x MTM.
+       - işlem başı risk %1 (giriş anındaki MTM özsermayenin), bileşik, MALİYET DAHİL (2026-11-09): fiyat riski_i =
+         ölçek x %1 x MTM x sf/(sf+maliyet_payi); K/Z = fiyat riski_i x r (r fiyat riski cinsinden net, backtest motoruyla aynı).
        - toplam açık risk <= %5 MTM: aşan giriş kalan bütçeye KIRPILIR (ölçek < MIN_OLCEK ise reddedilir).
        - brüt maruziyet <= 3x: her işlemin 1x-risk kaldıracı kayıtlı işlemden türetilir (nominal / (risk$ x 100));
          tavan aşılacaksa ölçek kırpılır (yine MIN_OLCEK altı reddedilir).
@@ -285,12 +286,34 @@ class OynatmaAyari:
     min_olcek: float = MIN_OLCEK
 
 
-def islem_tablosu_hazirla(parcalar: dict) -> pd.DataFrame:
+def _varsayilan_maliyet() -> tuple:
+    from motor.backtest.motor import MotorAyarlari
+    v = MotorAyarlari()
+    return (v.stop_kayma_bps / 1e4, v.komisyon_taker_yuzde / 100.0)
+
+
+# Eski (k3 / kilit / beklenti) işlem dosyalarının üretildiği maliyet: MotorAyarlari varsayılanı (wf_tarama.maliyet_ayarlari, çarpan 1):
+# (stop_kayma_oran, taker_oran). Evren testi sembol bazlı tabloyu kullanır (wf_evren.oynatma_tablosu).
+VARSAYILAN_MALIYET = _varsayilan_maliyet()
+
+
+def maliyet_payi(sf, yon, stop_kayma_oran, taker_oran) -> np.ndarray:
+    """Maliyet dahil işlem başı riskin (motor/risk/limitler.py) giriş fiyatına oranla maliyet kısmı:
+    max(giriş, stop)/giriş · (stop_kayma + 2·taker). Long'da stop < giriş (oran 1); short'ta stop = giriş·(1+sf)."""
+    sf = np.asarray(sf, dtype=float)
+    yon = np.asarray(yon)
+    return np.where(yon < 0, 1.0 + sf, 1.0) * (np.asarray(stop_kayma_oran, dtype=float) + 2.0 * np.asarray(taker_oran, dtype=float))
+
+
+def islem_tablosu_hazirla(parcalar: dict, maliyet) -> pd.DataFrame:
     """parcalar: {kol_kimligi: (islemler DataFrame, sembol)} -> birleşik tablo
-    (kol, sembol, yon, giris, cikis, r, sf). sf = stop uzaklığı oranı (risk$/nominal): 1x-risk kaldıracı = RISK/sf.
-    Risk$ = net_pnl/r (r küçükken gürültülü: |r| < 0.05 satırları komşudan doldurulur)."""
+    (kol, sembol, yon, giris, cikis, r, sf, maliyet_payi). sf = stop uzaklığı oranı (risk$/nominal): 1x-risk kaldıracı = RISK/sf.
+    Risk$ = net_pnl/r (r küçükken gürültülü: |r| < 0.05 satırları komşudan doldurulur).
+    maliyet: işlemlerin üretildiği maliyet, (stop_kayma_oran, taker_oran) ya da {sembol: (stop_kayma_oran, taker_oran)}
+    (eski dosyalar için VARSAYILAN_MALIYET). Sembol sözlükte yoksa KeyError (sessiz varsayılan yok)."""
     out = []
     for kol, (d, sembol) in parcalar.items():
+        sk_o, tk_o = maliyet[sembol] if isinstance(maliyet, dict) else maliyet
         d = d.sort_values("giris_zamani", kind="stable").reset_index(drop=True)
         r = d["r"].to_numpy(dtype=float)
         nominal = (d["miktar"] * d["giris_fiyati"]).to_numpy(dtype=float)
@@ -300,23 +323,32 @@ def islem_tablosu_hazirla(parcalar: dict) -> pd.DataFrame:
         sf = pd.Series(sf).ffill().bfill().fillna(0.05).clip(lower=1e-4).to_numpy()
         out.append(pd.DataFrame({"kol": kol, "sembol": sembol, "yon": d["yon"].to_numpy(),
                                  "giris": pd.DatetimeIndex(d["giris_zamani"]), "cikis": pd.DatetimeIndex(d["cikis_zamani"]),
-                                 "r": r, "sf": sf}))
+                                 "r": r, "sf": sf, "maliyet_payi": maliyet_payi(sf, d["yon"].to_numpy(), sk_o, tk_o)}))
     return pd.concat(out, ignore_index=True) if out else pd.DataFrame(
-        columns=["kol", "sembol", "yon", "giris", "cikis", "r", "sf"])
+        columns=["kol", "sembol", "yon", "giris", "cikis", "r", "sf", "maliyet_payi"])
 
 
 def yeniden_oyna(tablo: pd.DataFrame, ayar: OynatmaAyari = None, bas=None, bit=None) -> dict:
-    """tablo: islem_tablosu_hazirla çıktısı (kol, sembol, yon, giris, cikis, r, sf). Tek hesapta olay sırasıyla oynatır
+    """tablo: islem_tablosu_hazirla çıktısı (kol, sembol, yon, giris, cikis, r, sf, maliyet_payi). Tek hesapta olay sırasıyla oynatır
     (modül belgesi madde 6). -> {'gunluk': Series(günlük MTM özsermaye, başlangıç 1.0), 'getiri': günlük getiri,
-    'olaylar': [dict], 'sayac': {...}, 'kabul': kabul edilen satır dizinleri}."""
+    'olaylar': [dict], 'sayac': {...}, 'kabul': kabul edilen satır dizinleri}.
+    İşlem başı risk MALİYET DAHİL (2026-11-09; motor/risk/limitler.py): r FİYAT RİSKİ cinsinden net getiridir (backtest motoru:
+    net / (miktar·|giriş−ilk stop|)); hedef toplam risk = risk·MTM, bunun fiyat riski payı sf/(sf+maliyet_payi). K/Z = fiyat riski$ × r.
+    maliyet_payi = 0 eski (yalnız fiyat riski) davranışı verir."""
     ay = ayar or OynatmaAyari()
     if len(tablo) == 0:
         raise ValueError("boş işlem tablosu")
+    if "maliyet_payi" not in tablo.columns:
+        raise ValueError("maliyet_payi sütunu yok (işlem başı risk maliyet dahil; islem_tablosu_hazirla / wf_evren.oynatma_tablosu üretir)")
     T = tablo.reset_index(drop=True)
     g_ns = pd.DatetimeIndex(T["giris"]).as_unit("ns").asi8
     c_ns = pd.DatetimeIndex(T["cikis"]).as_unit("ns").asi8
     r = T["r"].to_numpy(dtype=float)
     sf = T["sf"].to_numpy(dtype=float)
+    mp = T["maliyet_payi"].to_numpy(dtype=float)
+    if np.isnan(mp).any() or (mp < 0).any():
+        raise ValueError("maliyet_payi NaN ya da negatif")
+    fr = sf / (sf + mp)                # toplam (maliyet dahil) riskin fiyat riski payı
     bas_ts = (pd.DatetimeIndex(T["giris"]).min() if bas is None else pd.Timestamp(bas)).floor("D")
     bit_ts = (pd.DatetimeIndex(T["cikis"]).max() if bit is None else pd.Timestamp(bit)).floor("D") + pd.Timedelta(days=1)
     geceler = pd.date_range(bas_ts, bit_ts, freq="D")
@@ -383,8 +415,8 @@ def yeniden_oyna(tablo: pd.DataFrame, ayar: OynatmaAyari = None, bas=None, bit=N
             sayac["reddedilen"] += 1; sayac["red_kill"] += 1; continue
         if gun_kilit:
             sayac["reddedilen"] += 1; sayac["red_gunluk"] += 1; continue
-        hedef_risk = ay.risk * m
-        oda = ay.toplam_risk * m - sum(rk for rk, _ in acik.values())
+        hedef_risk = ay.risk * m * fr[i]         # fiyat riski$: maliyet dahil toplam risk = ay.risk * m
+        oda = ay.toplam_risk * m - sum(rk for rk, _ in acik.values())     # toplam açık stop riski: fiyat riski (motorlarla aynı)
         olcek = min(1.0, oda / hedef_risk) if hedef_risk > 0 else 0.0
         neden_red = "red_toplam_risk"
         brut = sum(n for _, n in acik.values())
@@ -484,7 +516,7 @@ def korelasyon_matrisleri(veri: dict) -> tuple:
 def set_simule(ids: list, veri: dict, ayar: OynatmaAyari = None) -> dict:
     """Tek-grafik kollar için: yeniden oynatım + tek tek toplam kıyası."""
     parcalar = {c: (veri[c]["islem"], veri[c]["sembol"]) for c in ids}
-    tablo = islem_tablosu_hazirla(parcalar)
+    tablo = islem_tablosu_hazirla(parcalar, VARSAYILAN_MALIYET)
     sonuc = yeniden_oyna(tablo, ayar)
     o = sonuc["getiri"]
     ozet = seri_ozeti(o)

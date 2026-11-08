@@ -78,7 +78,11 @@ def _gunluk_limit_senaryosu():
     return df, girisler
 
 
-def test_gunluk_limit_acik_pozisyonu_kapatir():
+def test_gunluk_limit_acik_pozisyonu_kapatir(monkeypatch):
+    # Mekanizma testi: boyut eski (yalnız fiyat riski) formülle sabitlenir. Maliyet dahil risk (2026-11-09) ile her işlem ≤ %1 olduğundan
+    # 2 stop + açık pozisyon -%3'e ulaşamaz; maliyet dahil boyutun kendisi test_maliyet_dahil_risk.py'de.
+    import motor.backtest.motor as bm
+    monkeypatch.setattr(bm, "maliyetli_risk_birim", lambda g, s, k, t: abs(g - s))
     df, girisler = _gunluk_limit_senaryosu()
     ay = dict(komisyon_taker_yuzde=0.0, kayma_bps=0.0, stop_kayma_bps=60.0)
     r = backtest(df, Hazir(sinyal_yap(df, girisler, cikislar=[7])), MotorAyarlari(**ay))
@@ -116,12 +120,14 @@ def test_kismi_kar_tek_satir_ve_hesap():
     assert t.cikis_nedeni == "hedef" and t.cikis_fiyati == pytest.approx(106.0)
     assert t.r == pytest.approx(250.0 / 100.0)
     assert r.ozsermaye.iloc[-1] == pytest.approx(10250.0)
-    # komisyon: giriş 2.5 + kısmi 0.6375 + hedef 1.9875
+    # taker %0.05: maliyet dahil risk (2026-11-09) -> miktar = 100 / (2 + 100·2·0.0005) = 47.619; kısmi 11.904 @102, kalan 35.715 @106
+    # komisyon: giriş 2.38095 + kısmi 0.607104 + hedef 1.892895 = 4.880949
     r = backtest(df, Hazir(sig, ca), MotorAyarlari(komisyon_taker_yuzde=0.05, kayma_bps=0.0, stop_kayma_bps=0.0))
     t = r.islemler.iloc[0]
-    assert t.komisyon == pytest.approx(5.125)
-    assert t.kismi_pnl == pytest.approx(25.0 - 0.6375)
-    assert t.net_pnl == pytest.approx(250.0 - 5.125)
+    assert t.miktar == pytest.approx(47.619)
+    assert t.komisyon == pytest.approx(4.880949)
+    assert t.kismi_pnl == pytest.approx(11.904 * 2 - 0.607104)
+    assert t.net_pnl == pytest.approx(11.904 * 2 + 35.715 * 6 - 4.880949)
 
 
 def test_kismi_ayni_mumda_stop_degerse_uygulanmaz():

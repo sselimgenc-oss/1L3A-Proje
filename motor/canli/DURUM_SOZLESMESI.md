@@ -209,3 +209,22 @@ Dosya yoksa (eski motor) pano "veri yok" der. Ölçülemeyen değer `null` + ned
   İzleme özellikten önce açılmış pozisyonlarda sonradan başlar (`tam: false`) → null + neden. Muhasebeyi etkilemez; durum dosyasında `uc` alanı (eski dosyada yok: olduğu gibi yüklenir). Alanlar `dogrula_islem` zorunlu listesinde DEĞİLDİR.
 - **Çekmece** (İŞLEMLER): satıra tıklayınca açılır; giriş gerekçesi (`giris_gerekcesi.metin` + göstergeler), ayar sürümü (`ayar_surumu`), giriş/çıkış zaman-fiyat-miktar, R, net K/Z, set katkısı, çıkış nedeni (sabit sözlük açıklaması) ve MFE/MAE; alan yoksa "yok" + neden.
   JS yoksa aynı içerik açılır-kapanır liste olarak görünür. Pano hiçbir sayı hesaplamaz.
+
+## Genişletme (TradFi funding ayrımı ve maliyet dahil risk, kullanıcı kararı 2026-11-09; sürüm 1 içinde EKLEMELİ)
+- **TradFi funding** (Binance `TRADIFI_PERPETUAL`; projede `DK_` önekli semboller, `paper_veri.tradfi_mi`): paper funding'i ÖDEMEYE devam eder (özsermaye, `net_pnl_yerel`, `r`
+  ve `maliyet.funding` DAHİL) ama ayrıca yazılır. Araştırmada (Dukascopy) TradFi funding yoktur; bu yüzden **backtest beklentisiyle kıyaslar TradFi funding HARİÇ** yapılır.
+  Kripto perp funding araştırmada da vardır: kıyasa DAHİL kalır.
+  - `islemler.jsonl` (paper): `funding_tradfi` (para; o işlemde ödenen TradFi funding, negatif = tahsil; kripto `0.00`), `r_kiyas` (TradFi funding HARİÇ R =
+    (net + funding_tradfi) / risk tutarı; kripto işlemde = `r`). Motor işlem kaydında yazılır (`PaperMotor.tradfi_alanlari`); bu alanlardan önce kapanmış kayıtta aynı
+    formülle türetilir. Backtest kaynağında alan yoktur (kıyas R'si = `r`; `durum_ek.r_kiyas`). Alanlar `dogrula_islem` zorunlu listesinde değildir.
+  - `ozet.json` ve `maliyet.json` → `funding_tradfi {toplam, kapanan, acik, son24s, belirsiz_adet, belirsiz_tutar, not}` (para). `toplam` = kapanan işlemlerin
+    `funding_tradfi`'si + açık TradFi pozisyonlarının birikmiş funding'i. `maliyet.toplam/stratejiler.funding` bunu ZATEN içerir (ayrıca toplanmaz).
+    `belirsiz_*`: sembolü yazılmamış eski `maliyet_log` satırı, evreni karışık (TradFi + kripto) bir stratejiye aitse sınıflanamaz ve kıyasa DAHİL kalır (açıkça yazılır).
+  - Kıyas kullanan yerler: `stratejiler.json` `beklenti` (tek-grafik: `r_kiyas` ile günlük R serisi; portföy: kümülatif katkıya o güne kadarki TradFi funding geri eklenir),
+    `set.beklenti` (UTC gün sonu özsermayesine o güne kadarki kümülatif TradFi funding geri eklenir), `dersler.json` (isabet/ort. R), `karne.json` (kalite PF), `koc.json`
+    (kazanmayan = `r_kiyas` ≤ 0), iç görülerdeki "beklenti alarmına en yakın". Betimleyici istatistikler (`ozet.istatistik`, aylık rapor, kazanma oranı) gerçek `r`/net ile kalır.
+  - `maliyet_log` satırlarına `sembol` eklendi (durum dosyasında; eski satırlarda yok). Pano maliyet kartında TradFi funding ayrı satırdır (pano hesap yapmaz).
+  - Paper başlarken exchangeInfo `contractType` ile `tradfi_mi` çelişirse `tradfi_sinif` olayı yazılır.
+- **İşlem başı risk maliyet dahil** (`motor/risk/limitler.py`): sinyal kollarında miktar = özsermaye·%1 / (|giriş−stop| + max(giriş, stop)·(stop_kayma + 2·taker)).
+  `r` tanımı değişmedi (fiyat riski cinsinden net); tam stop kaybında r ≈ −(1 + maliyet payı/fiyat riski), hesap kaybı ≈ −%1. Beklenti aralıkları (`beklenti_araliklari.csv`)
+  eski (yalnız fiyat riski) boyutla üretildiyse set düzeyi beklenti yeniden üretilmelidir (tek-grafik strateji kıyasları R tabanlıdır, etkilenmez).

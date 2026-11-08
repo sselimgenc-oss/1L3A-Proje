@@ -406,6 +406,8 @@ def canli_calistir(durum_dizini: Path, tohum_dizin: Optional[Path] = None, ayar_
         p.olay_ekle("baslangic", f"Paper başlatıldı, başlangıç sermayesi {p.ayarlar.baslangic_sermaye}", simdi)
     for t in p.veri_yok:
         p.olay_ekle("veri_yok", f"{t.kimlik}: {t.veri_yok}", simdi)
+    for u in pv.tradfi_sinif_uyusmazliklari(bilgi, semboller):     # TradFi funding ayrımı (2026-11-09) sınıflamaya dayanır
+        p.olay_ekle("tradfi_sinif", u, simdi)
     from motor.canli import paper_durum as pdr
     tg.gonder(tg.baslangic_metni(len(aktif), p.motor.ozsermaye()))
     bildirilen = [len(p.motor.islemler)]

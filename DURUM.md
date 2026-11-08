@@ -66,7 +66,7 @@ Ana ders: önceki sonuçlar OOS'a bakılarak seçilmiş ve kâr birkaç işlemde
 12. **Day trade:** 10'a tamamlanmaz; en güçlü 5–6 aday (KGT dahil).
 13. **Eleme ölçütü:** maliyet+funding sonrası kârlı, OOS PF ≥ 1.2, ≥ 50 işlem, en iyi %5 işlem çıkarılınca çökmez,
     OOS parametre seçiminde asla görülmez (seçim yalnız walk-forward eğitim pencerelerinde).
-14. **Sert limitler kesin:** işlem başı %1, günlük %3 (dolunca açık pozisyon da kapanır), 3x, %20 kill switch.
+14. **Sert limitler kesin:** işlem başı %1 (2026-11-09'dan itibaren MALİYET DAHİL: fiyat riski + stop kayması + 2 komisyon; ON_KAYIT Güncelleme 8), günlük %3 (dolunca açık pozisyon da kapanır), 3x, %20 kill switch.
 15. **Sunucu:** DigitalOcean Frankfurt.
 16. ~~Veri/seçim: BTC+ETH 2020–; TradFi yalnız doğrulama.~~ (2026-11-06 kullanıcı kararıyla değişti → karar 22)
 17. ~~Enstrüman: başlangıçta 3–5 (BTC, ETH, XAU + 1–2).~~ (2026-11-06 → karar 22). README'deki ~25 enstrüman planı iptal.
@@ -113,6 +113,8 @@ Ana ders: önceki sonuçlar OOS'a bakılarak seçilmiş ve kâr birkaç işlemde
   saatlik dosyalar → swing/daytrade 1h+ testleri önce; 15m/30m dakikalık veri tamamlanınca.
 
 ## Lider kararları günlüğü (karar 26)
+- 2026-11-09: Güncelleme 8 uygulandı. Lider kararları: sonuclar/kilit/set.csv ve final beklenti aralıkları ESKİ boyutla üretilmiş tarihsel
+  kayıt olarak kalır (yeniden üretilmez; testi eski kurala göre doğrular). Portföy toplam %5 stop riski fiyat riski olarak kalır.
 - 2026-11-09 (KULLANICI onayı, lider önerisi): (1) işlem başı %1 risk MALİYET DAHİL (stop kayması + 2 komisyon) — backtest, evren oynatma,
   portföy ve paper motorunda tutarlı; ham tarama etkilenmez (r tanımı aynı), WF bu kuralla koşar (ON_KAYIT Güncelleme 8).
   (2) Paper TradFi funding ödenir ama ayrı alanda tutulur; backtest beklentisine uyum karşılaştırmaları TradFi funding hariç yapılır.

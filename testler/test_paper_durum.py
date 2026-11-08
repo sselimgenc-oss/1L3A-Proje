@@ -77,7 +77,9 @@ def test_strateji_katki_toplami_ozsermayeyi_tutar_ve_performans(kosu):
         assert pf["islem"] == s["islem_sayisi"]
         if s["islem_sayisi"]:
             assert pf["ort_zarar"] is None or Decimal(pf["ort_zarar"]) < 0
-            assert Decimal(pf["net"]) == sum((Decimal(x["net_pnl_yerel"]) for x in o["islemler"] if x["kimlik"] == s["kimlik"]), Decimal(0))
+            satir_net = [Decimal(x["net_pnl_yerel"]) for x in o["islemler"] if x["kimlik"] == s["kimlik"]]
+            # pf["net"] yuvarlanmamış toplamın yuvarlanmışı, satırlar tek tek yuvarlanmış: fark en çok yarım kuruş x satır
+            assert abs(Decimal(pf["net"]) - sum(satir_net, Decimal(0))) <= Decimal("0.005") * len(satir_net) + Decimal("0.005")
 
 
 def test_maliyet_dokumu_tutarli(kosu):

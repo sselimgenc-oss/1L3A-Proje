@@ -595,13 +595,33 @@ def sembol_cakismasini_ele(oos: pd.DataFrame) -> tuple:
     return d[tut].reset_index(drop=True), int((~tut).sum())
 
 
-def oynatma_tablosu(oos: pd.DataFrame, sira: tuple = EVREN_GENEL) -> pd.DataFrame:
-    """Sıra: giriş zamanı, eşitlikte evren sırası (deterministik ret/kabul önceliği)."""
+def oynatma_maliyet_payi(oos: pd.DataFrame, carpan: float) -> np.ndarray:
+    """Maliyet dahil işlem başı risk (GÜNCELLEME 8, motor/risk/limitler.py): ham koşunun SEMBOL maliyetiyle (evren maliyet tablosu x
+    carpan; ham_gorev ile aynı) giriş fiyatına oranla maliyet payı. Tabloda olmayan sembol KeyError."""
+    sk = np.empty(len(oos))
+    tk = np.empty(len(oos))
+    for s in pd.unique(oos["sembol"]):
+        m = (oos["sembol"] == s).to_numpy()
+        taker_y, _, _, stop_bps = evren_maliyet.sembol_maliyeti(s, carpan)
+        sk[m], tk[m] = stop_bps / 1e4, taker_y / 100.0
+    return secim.maliyet_payi(oos["sf"].to_numpy(dtype=float), oos["yon"].to_numpy(), sk, tk)
+
+
+def oynatma_tablosu(oos: pd.DataFrame, sira: tuple = EVREN_GENEL, carpan: Optional[float] = None) -> pd.DataFrame:
+    """Sıra: giriş zamanı, eşitlikte evren sırası (deterministik ret/kabul önceliği). maliyet_payi: oos'ta sütun varsa o, yoksa
+    `carpan` (ham koşunun maliyet çarpanı) ile evren maliyet tablosundan; ikisi de yoksa ValueError (sessiz varsayılan yok)."""
     ordn = {s: i for i, s in enumerate(sira)}
+    if "maliyet_payi" in oos:
+        mp = oos["maliyet_payi"].to_numpy(dtype=float)
+    elif carpan is not None:
+        mp = oynatma_maliyet_payi(oos, carpan)
+    else:
+        raise ValueError("oynatma_tablosu: maliyet_payi sütunu yok ve carpan verilmedi")
     t = pd.DataFrame({"kol": oos["sembol"].to_numpy(), "sembol": oos["sembol"].to_numpy(), "yon": oos["yon"].to_numpy(),
                       "giris": pd.DatetimeIndex(oos["giris_zamani"]), "cikis": pd.DatetimeIndex(oos["cikis_zamani"]),
                       "r": oos["r"].to_numpy(dtype=float), "sf": oos["sf"].to_numpy(dtype=float),
-                      "stop_mesafe": oos["stop_mesafe"].to_numpy(dtype=float) if "stop_mesafe" in oos else np.nan})
+                      "stop_mesafe": oos["stop_mesafe"].to_numpy(dtype=float) if "stop_mesafe" in oos else np.nan,
+                      "maliyet_payi": mp})
     t["_o"] = t["sembol"].map(ordn).fillna(len(ordn)).to_numpy()
     t = t.sort_values(["giris", "_o"], kind="stable").drop(columns="_o").reset_index(drop=True)
     return t
@@ -844,6 +864,9 @@ def ham_yukle(dizin: Path, ad: str, tf: str, evren=EVREN_GENEL) -> tuple:
         if meta.get("maliyet_hash") != guncel_hash:
             raise RuntimeError(f"ham koşu başka bir maliyet tablosuyla yapılmış ({yan.name}); tablo sabit olmalı")
         bilgi["maliyet_hash"] = guncel_hash
+        c_ = float(meta["carpan"])                        # ham_gorev her yan dosyaya yazar (maliyet dahil oynatma için)
+        if bilgi.setdefault("carpan", c_) != c_:
+            raise RuntimeError(f"ham koşu dizininde farklı maliyet çarpanları: {bilgi['carpan']} != {c_} ({yan.name})")
         sinir = DONEMLER.get(meta.get("donem"), {}).get("bit")
         if sinir is not None and not meta.get("veri_yok") and meta.get("veri_bit") and pd.Timestamp(meta["veri_bit"]) >= sinir:
             raise RuntimeError(f"{yan.name}: geliştirme dönemi sınırını ({sinir}) aşan veri (holdout sızıntısı)")
@@ -945,7 +968,7 @@ def evren_wf_kos(ad: str, tf: str, stil: str, dizin: Path, evren=None, pencere_g
         satir.update(gecti=False, nedenler="OOS işlemi yok", islem_sayisi=0)
         return satir, pd.DataFrame()
     oos, atilan = sembol_cakismasini_ele(oos)
-    tablo = oynatma_tablosu(oos, evren)
+    tablo = oynatma_tablosu(oos, evren, carpan=bilgi["carpan"])
     m = kasa_metrikleri(tablo, oos_bas, oos_bit, ayar)
     satir["cakisma_atilan"] = atilan
     kabul, pnl, seri = m.pop("kabul"), m.pop("pnl"), m.pop("getiri_serisi")
@@ -1657,7 +1680,7 @@ def kilit_bilgi_kos(ad: str, tf: str, stil: str, dizin: Path, veri_dizini=None, 
     oos = pd.concat(parcalar, ignore_index=True)
     bit = oos["son_mum"].max() + pd.Timedelta(1, "ns")
     oos, atilan = sembol_cakismasini_ele(oos.drop(columns="son_mum"))
-    tablo = oynatma_tablosu(oos, evren)
+    tablo = oynatma_tablosu(oos, evren, carpan=1.0)          # işlemler yukarıda maliyet_ayarlari(..., 1.0) ile üretildi
     m = kasa_metrikleri(tablo, L, bit, ayar)
     for kx in ("kabul", "pnl", "getiri_serisi"):
         m.pop(kx, None)

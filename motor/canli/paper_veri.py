@@ -184,6 +184,26 @@ def kurallar_cikar(bilgi: dict) -> dict:
 
 # Binance TradFi (hisse/emtia) sürekli sözleşmeleri exchangeInfo'da "TRADIFI_PERPETUAL" türüyle gelir (sunucuda görüldü, 2026-11-07).
 SUREKLI_TURLER = ("PERPETUAL", "TRADIFI_PERPETUAL")
+TRADFI_TURU = "TRADIFI_PERPETUAL"
+
+
+def tradfi_mi(sembol: str) -> bool:
+    """Strateji sembolü Binance TradFi perpetual'ında mı işlem görür? Projede TradFi sembolleri `DK_` önekli (Dukascopy araştırma verisi);
+    canlı karşılıkları ESLEME'de. Funding'i araştırmada YOKTUR (kullanıcı kararı 2026-11-09: paper öder, ayrı tutar, beklenti kıyası hariç)."""
+    return sembol.startswith("DK_")
+
+
+def tradfi_sinif_uyusmazliklari(bilgi: dict, sembollar: list) -> list:
+    """exchangeInfo contractType (TRADIFI_PERPETUAL) ile `tradfi_mi` sınıflaması çelişen semboller için açıklama listesi (boş: tutarlı).
+    exchangeInfo'da olmayan sembol burada sayılmaz (esleme_dogrula 'veri yok' yapar)."""
+    tablo = {s["symbol"]: s for s in bilgi.get("symbols", [])}
+    out = []
+    for s in sembollar:
+        x = tablo.get(binance_sembol(s))
+        if x is not None and (x.get("contractType") == TRADFI_TURU) != tradfi_mi(s):
+            out.append(f"{s} ({binance_sembol(s)}): contractType {x.get('contractType')} ama tradfi_mi={tradfi_mi(s)}; "
+                       "TradFi funding ayrımı bu sembolde yanlış olabilir")
+    return out
 
 
 def esleme_dogrula(bilgi: dict, sembollar: list) -> dict:

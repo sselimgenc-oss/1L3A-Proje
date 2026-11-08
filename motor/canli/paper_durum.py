@@ -89,6 +89,73 @@ def m_kol_sk(m, kol_kimlik: str) -> str:
 _SK_ONBELLEK: dict = {}
 
 
+# ---------------------------------------------------------------------------- TradFi funding ayrımı (kullanıcı kararı 2026-11-09)
+def islem_tradfi(x: dict) -> dict:
+    """Motor işlem satırının TradFi alanları (funding_tradfi, r_kiyas). Alanlar motorda yazılır; yazılmadan önce kapanmış kayıtta
+    aynı formülle türetilir (PaperMotor.tradfi_alanlari)."""
+    if "funding_tradfi" in x and "r_kiyas" in x:
+        return {"funding_tradfi": x["funding_tradfi"], "r_kiyas": x["r_kiyas"]}
+    from motor.canli.paper_motor import PaperMotor
+    return PaperMotor.tradfi_alanlari(x)
+
+
+def tradfi_funding_kayitlari(m) -> tuple:
+    """maliyet_log'daki funding satırlarından TradFi olanlar -> ([(zaman, sk, tutar Decimal)], belirsiz {adet, tutar}).
+    Sembolü yazılmamış (bu özellikten önceki) satır, stratejinin kol sembolleri hepsi TradFi ise TradFi, hiçbiri değilse kripto sayılır;
+    karışık stratejide (ör. hepsi evreni) sınıflanamaz: 'belirsiz' sayılır, funding DAHİL kalır ve durum dosyasında açıkça yazılır."""
+    from motor.canli.paper_veri import tradfi_mi
+    sk_sem: dict = {}
+    for k in m.tum_kollar:
+        sk_sem.setdefault(k.sk, set()).add(k.sembol)
+    out, bel = [], {"adet": 0, "tutar": Decimal(0)}
+    for x in m.maliyet_log:
+        if x["tur"] != "funding":
+            continue
+        if "sembol" in x:
+            tf_ = tradfi_mi(x["sembol"])
+        else:
+            sinif = {tradfi_mi(s_) for s_ in sk_sem.get(x["sk"], set())}
+            if len(sinif) != 1:
+                bel["adet"] += 1
+                bel["tutar"] += D(x["tutar"])
+                continue
+            tf_ = sinif.pop()
+        if tf_:
+            out.append((pd.Timestamp(x["zaman"]), x["sk"], D(x["tutar"])))
+    return out, bel
+
+
+def tradfi_kumulatif(kayitlar: list, gunler, sk: Optional[str] = None) -> dict:
+    """{gun ("YYYY-MM-DD", UTC): o günün sonuna kadar (dahil) ödenen kümülatif TradFi funding (Decimal)}. sk verilirse yalnız o strateji.
+    Gün ataması funding kaydının zamanının UTC günüdür (motor.gun ile aynı: satırın açılış zamanı)."""
+    ls = sorted((str(z.tz_convert("UTC").date() if z.tzinfo else z.date()), t) for z, k, t in kayitlar if sk is None or k == sk)
+    out, top, j = {}, Decimal(0), 0
+    for g in sorted(gunler):
+        while j < len(ls) and ls[j][0] <= g:
+            top += ls[j][1]
+            j += 1
+        out[g] = top
+    return out
+
+
+def tradfi_ozeti(p, simdi) -> dict:
+    """Hesap düzeyi TradFi funding toplamı (ozet.json `funding_tradfi`; pano ayrı satır gösterir, hesap yapmaz).
+    Kaynak: kapanan işlemlerin funding_tradfi'si + açık TradFi pozisyonlarının birikmiş funding'i (hesaptan düşülen tutarın tamamı)."""
+    from motor.canli.paper_veri import tradfi_mi
+    m = p.motor
+    kapanan = sum((D(islem_tradfi(x)["funding_tradfi"]) for x in m.islemler), Decimal(0))
+    acik = sum((pos.funding for pos in m.acik.values() if tradfi_mi(pos.sembol)), Decimal(0))
+    kayit, bel = tradfi_funding_kayitlari(m)
+    esik = simdi - pd.Timedelta(hours=24)
+    son24 = sum((t for z, _, t in kayit if z >= esik), Decimal(0))
+    return {"toplam": d.para(kapanan + acik), "kapanan": d.para(kapanan), "acik": d.para(acik), "son24s": d.para(son24),
+            "belirsiz_adet": bel["adet"], "belirsiz_tutar": d.para(bel["tutar"]),
+            "not": "Binance TradFi (TRADIFI_PERPETUAL) funding'i: ödenen (negatif: tahsil). Özsermaye ve net K/Z'ye DAHİL (paper öder); "
+                   "backtest beklentisiyle kıyaslar (Dersler, Karne, Koç, beklenti konumu) bu tutar HARİÇ yapılır (araştırmada TradFi funding yok). "
+                   "Kripto perp funding araştırmada da var: kıyasa dahil. belirsiz_*: sembolsüz eski kayıtta karışık evrenli strateji funding'i "
+                   "(sınıflanamadı, kıyasa dahil kaldı)."}
+
+
 def performans(islemler: list) -> dict:
     """islemler: motor işlem dict'leri. -> {islem, kazanma_orani, ort_kar, ort_zarar, net, pf}. Para: metin; zarar negatif."""
     n = len(islemler)
@@ -111,6 +178,8 @@ def _islem_satiri(p, x: dict) -> dict:
             "giris_zamani": _z(x["giris_zamani"]), "giris_fiyati": repr(x["giris_fiyati"]),
             "cikis_zamani": _z(x["cikis_zamani"]), "cikis_fiyati": repr(x["cikis_fiyati"]), "miktar": repr(x["miktar"]),
             "r": d.sayi(x["r"]), "net_pnl_yerel": d.para(x["net_pnl"]), "set_katki_usd": d.para(x["net_pnl"]),
+            # TradFi funding ayrımı (2026-11-09): ödenen TradFi funding (kripto 0) ve TradFi funding HARİÇ r (backtest kıyas tabanı)
+            "funding_tradfi": d.para(islem_tradfi(x)["funding_tradfi"]), "r_kiyas": d.sayi(islem_tradfi(x)["r_kiyas"]),
             "cikis_nedeni": x["cikis_nedeni"], "gun": ek.tsi_gun(x["cikis_zamani"]),
             # sürüm izi + giriş gerekçesi (giris_izi.py); bu özellikten önceki kayıtlarda null
             "ayar_surumu": x.get("ayar_surumu"), "giris_gerekcesi": x.get("giris_gerekcesi"),
@@ -233,7 +302,10 @@ def olustur(p, simdi, kaynak_saglik: Optional[list] = None, olaylar: Optional[li
 
     # --- stratejiler
     bek_csv = d.beklenti_oku(beklenti_csv)
-    set_getiri = _getiri_serisi(S["kapanislar_utc"], bas)         # beklenti tabanı: UTC günü (backtestle aynı ızgara)
+    # beklenti tabanı: UTC günü (backtestle aynı ızgara); TradFi funding HARİÇ (gün sonuna kadar ödenen kümülatif TradFi funding geri eklenir)
+    tf_kayit, _ = tradfi_funding_kayitlari(m)
+    tf_kum = tradfi_kumulatif(tf_kayit, list(S["kapanislar_utc"]))
+    set_getiri = _getiri_serisi({g: e + tf_kum[g] for g, e in S["kapanislar_utc"].items()}, bas)
     uyari_listesi = list(uyarilar or [])
     strat_json, katkilar, perf_tum, alarmlar = [], {}, {}, []
     hafta_katki, strat_kon = {}, {}
@@ -246,7 +318,8 @@ def olustur(p, simdi, kaynak_saglik: Optional[list] = None, olaylar: Optional[li
         perf_tum[sk] = perf
         satirlar = [_islem_satiri(p, x) for x in isl]
         if t.kol == "tek_grafik":
-            df = pd.DataFrame({"cikis_zamani": [pd.Timestamp(x["cikis_zamani"]) for x in isl], "r": [x["r"] for x in isl]})
+            # backtest beklentisi kıyası TradFi funding HARİÇ (r_kiyas; 2026-11-09)
+            df = pd.DataFrame({"cikis_zamani": [pd.Timestamp(x["cikis_zamani"]) for x in isl], "r": [islem_tradfi(x)["r_kiyas"] for x in isl]})
             gunler = pd.date_range(S["ilk_gun"], pd.Timestamp(simdi.date(), tz="UTC"), freq="D") if S["ilk_gun"] is not None else pd.DatetimeIndex([], tz="UTC")
             seri = bek.gunluk_tablo_islem(df, gunler)["ret"] if len(gunler) else pd.Series(dtype=float)
         else:
@@ -306,7 +379,10 @@ def olustur(p, simdi, kaynak_saglik: Optional[list] = None, olaylar: Optional[li
                "stratejiler": {t.kimlik: {"son24s": blok(topla(lambda x, k=t.kimlik: x["sk"] == k and pd.Timestamp(x["zaman"]) >= esik24)),
                                           "tum": blok(topla(lambda x, k=t.kimlik: x["sk"] == k))} for t in p.tanimlar},
                "not": "ücret = taker komisyonu; kayma = dolum fiyatı ile referans (açılış/stop seviyesi) farkı x miktar; "
-                      "funding = ödenen (negatif: tahsil edilen). Hepsi pozitif sayı = maliyet."}
+                      "funding = ödenen (negatif: tahsil edilen). Hepsi pozitif sayı = maliyet. funding_tradfi: funding'in TradFi kısmı "
+                      "(funding'e zaten dahil; ayrıca toplanmaz)."}
+    tradfi = tradfi_ozeti(p, simdi)
+    maliyet["funding_tradfi"] = tradfi
 
     # --- reddedilen / kırpılan
     def kayit(x, tur_):
@@ -358,7 +434,8 @@ def olustur(p, simdi, kaynak_saglik: Optional[list] = None, olaylar: Optional[li
     ozet_ekstra = {"hafta_pnl": d.para(hafta_pnl) if hafta_pnl is not None else None, "hafta_pnl_neden": hafta_neden,
                    "gunluk_kz": S["gunluk_kz"], "dusus_serisi": S["dusus_serisi"], "gun_kesimi": ek.GUN_KESIMI_TSI,
                    "gunluk_kz_ajan": donem["gunluk"], "haftalik_kz_ajan": donem["haftalik"], "aylik_kz_ajan": donem["aylik"],
-                   "istatistik": ek.istatistik(islemler, S["gunluk_tam"]), "cikis_nedenleri": cn, "cikis_nedenleri_not": cn_not}
+                   "istatistik": ek.istatistik(islemler, S["gunluk_tam"]), "cikis_nedenleri": cn, "cikis_nedenleri_not": cn_not,
+                   "funding_tradfi": tradfi}
     tsi_notu = ["Gün kesimi TSİ (00:00 Europe/Istanbul). Bu sürümden önceki günler UTC günü serisinden aktarıldı (en çok 3 saat kayma)."] \
         if m.tsi_aktarildi else []
     ozet = d.ozet_olustur(
@@ -414,7 +491,9 @@ def p_strateji_gunluk(p, sk: str) -> pd.Series:
     t = next(x for x in p.tanimlar if x.kimlik == sk)
     ix = pd.DatetimeIndex(sorted(pd.Timestamp(g, tz="UTC") for g in snap))
     tam = pd.date_range(ix[0], ix[-1], freq="D")
-    kum = pd.Series([float(snap[str(x.date())]) for x in ix], index=ix).reindex(tam).ffill()
+    tf_kayit, _ = tradfi_funding_kayitlari(p.motor)                # beklenti kıyası TradFi funding HARİÇ (2026-11-09)
+    tf_kum = tradfi_kumulatif(tf_kayit, list(snap), sk)
+    kum = pd.Series([float(D(snap[str(x.date())]) + tf_kum[str(x.date())]) for x in ix], index=ix).reindex(tam).ffill()
     E = p.motor.gun_kapanis
     out, onc_k, onc_e = [], 0.0, float(p.ayarlar.baslangic_sermaye)
     for g, k in kum.items():
@@ -470,7 +549,7 @@ def icgoruler(p, simdi, E, bas, katkilar, perf, ap_hepsi, mal24, S, hafta_pnl, a
     for t in p.tanimlar:
         seri = (bek.gunluk_tablo_islem(pd.DataFrame({"cikis_zamani": [pd.Timestamp(x["cikis_zamani"]) for x in p.motor.islemler
                                                                      if m_kol_sk(p.motor, x["kol"]) == t.kimlik],
-                                                     "r": [x["r"] for x in p.motor.islemler if m_kol_sk(p.motor, x["kol"]) == t.kimlik]}),
+                                                     "r": [islem_tradfi(x)["r_kiyas"] for x in p.motor.islemler if m_kol_sk(p.motor, x["kol"]) == t.kimlik]}),
                                        pd.date_range(S["ilk_gun"], pd.Timestamp(simdi.date(), tz="UTC"), freq="D"))["ret"]
                 if (t.kol == "tek_grafik" and S["ilk_gun"] is not None) else p_strateji_gunluk(p, t.kimlik))
         if len(seri) < 56:

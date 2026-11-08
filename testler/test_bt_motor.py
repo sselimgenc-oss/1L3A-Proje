@@ -55,19 +55,20 @@ def test_tek_long_pnl_komisyon_kayma():
     r = backtest(df, Hazir(sig), ay)
     assert len(r.islemler) == 1
     t = r.islemler.iloc[0]
-    # giris 100*(1.0002)=100.02 ; stop 98 -> risk/birim 2.02 ; miktar=100/2.02=49.5049 -> 49.504
+    # giris 100*(1.0002)=100.02 ; stop 98 -> fiyat riski/birim 2.02 ; maliyet dahil (2026-11-09) birim risk
+    # 2.02 + 100.02*(0.0005 stop kayma + 2*0.0005 taker) = 2.17003 ; miktar=100/2.17003=46.0823 -> 46.082
     assert t.giris_fiyati == pytest.approx(100.02)
-    assert t.miktar == pytest.approx(49.504)
+    assert t.miktar == pytest.approx(46.082)
     # cikis 110*(1-0.0002)=109.978 -> tick 0.01 -> 109.98
     assert t.cikis_fiyati == pytest.approx(109.98)
-    brut = (Decimal("109.98") - Decimal("100.02")) * Decimal("49.504")
-    kom = Decimal("49.504") * (Decimal("100.02") + Decimal("109.98")) * Decimal("0.0005")
+    brut = (Decimal("109.98") - Decimal("100.02")) * Decimal("46.082")
+    kom = Decimal("46.082") * (Decimal("100.02") + Decimal("109.98")) * Decimal("0.0005")
     assert t.brut_pnl == pytest.approx(float(brut))
     assert t.komisyon == pytest.approx(float(kom))
     assert t.net_pnl == pytest.approx(float(brut - kom))
     assert t.cikis_nedeni == "sinyal"
     assert r.ozsermaye.iloc[-1] == pytest.approx(10000 + float(brut - kom))
-    assert t.r == pytest.approx(float(brut - kom) / (49.504 * 2.02))
+    assert t.r == pytest.approx(float(brut - kom) / (46.082 * 2.02))       # r: fiyat riski cinsinden (tanım değişmedi)
 
 
 def test_ayni_mumda_stop_ve_hedef_stop_sayilir():
@@ -135,7 +136,8 @@ def test_gunluk_kayip_limiti():
     girisler = {2 * k: (1, 99.0, np.nan) for k in range(6)}
     r = backtest(df, Hazir(sinyal_yap(df, girisler)), MotorAyarlari(kayma_bps=0.0))
     gunler = r.islemler["giris_zamani"].dt.date.astype(str).value_counts().to_dict()
-    assert gunler["2024-01-01"] == 3          # 3 kayıptan sonra (≈%3.3) o gün biter
+    # maliyet dahil risk (2026-11-09): her stop kaybı ≈ %1 (eskiden ≈ %1.1) -> 3 kayıp %3'ün altında; 4. kayıptan sonra o gün biter
+    assert gunler["2024-01-01"] == 4
     assert gunler["2024-01-02"] >= 1          # ertesi gün yeniden işlem
     assert any(x["neden"] == "gunluk_kayip_limiti" for x in r.reddedilenler)
 
