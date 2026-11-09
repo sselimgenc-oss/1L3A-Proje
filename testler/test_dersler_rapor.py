@@ -5,6 +5,7 @@ import math
 
 import pandas as pd
 import pytest
+from testler.conftest import KILIT_ISLEM_NEDEN, kilit_islemleri_var
 
 from motor.canli import aylik_rapor as ar
 from motor.canli import backtest_durum as bd
@@ -325,6 +326,7 @@ def test_paper_dersler_ve_rapor_dosyalari(paper):
     assert sure["durum"] == "gecti" and sure["deger"].endswith("/ 56 gün")
 
 
+@pytest.mark.gercek_veri(kilit_islemleri_var(), reason=KILIT_ISLEM_NEDEN)
 def test_backtest_dersler_ve_rapor_yazilir(tmp_path):
     bd.yaz(tmp_path)
     dr, ra = d.ek_oku(tmp_path, "dersler"), d.ek_oku(tmp_path, "aylik_rapor")

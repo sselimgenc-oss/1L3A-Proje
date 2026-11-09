@@ -6,6 +6,7 @@ from datetime import datetime, timezone
 import numpy as np
 import pandas as pd
 import pytest
+from testler.conftest import KILIT_ISLEM_NEDEN, kilit_islemleri_var
 
 from motor.canli import durum as d
 from motor.canli import kiyas as ky
@@ -262,6 +263,7 @@ def test_koni_null_neden_panoda_gorunur(tmp_path):
     assert "koni havuzu dosyası yok" in pano.html_olustur(veri, sorun, datetime(2026, 1, 5, 12, 10, tzinfo=timezone.utc))
 
 
+@pytest.mark.gercek_veri(kilit_islemleri_var(), reason=KILIT_ISLEM_NEDEN)
 def test_backtest_durum_dort_dosyayi_yazar_koni_donem_icini_dislar():
     from motor.canli import backtest_durum as bd
     e = bd.olustur()["ekstra"]

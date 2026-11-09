@@ -30,6 +30,16 @@ def _kilit_gecici(tmp_path, monkeypatch):
 GERCEK_VERI_ORTAM = ("PAPER_GERCEK_VERI", "L3A_GERCEK_VERI")
 
 
+def kilit_islemleri_var() -> bool:
+    """backtest_durum.olustur() için gerçek sonuclar/kilit/islemler/*.parquet (gitignore) var mı."""
+    from pathlib import Path
+    d = Path(__file__).resolve().parents[1] / "sonuclar" / "kilit"
+    return (d / "sonuc.csv").exists() and (d / "islemler").is_dir() and any((d / "islemler").glob("*.parquet"))
+
+
+KILIT_ISLEM_NEDEN = "sonuclar/kilit/islemler parquet dosyaları (gitignore) yok"
+
+
 def gercek_veri_zorunlu() -> bool:
     return any(os.environ.get(a) == "1" for a in GERCEK_VERI_ORTAM)
 

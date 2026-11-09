@@ -221,6 +221,10 @@ def pf_veri():
 
 
 def _pf_ozet(h):
+    # Zaman indeksi çözünürlüğü pandas 2.x (ns) / 3.x (us) arasında değişir; hash'in değerleri etkilenmesin diye
+    # indeks sabit "us" çözünürlüğüne çekilir (değerler ve zaman damgaları aynı, yalnız iç dtype normalize).
+    h = h.copy()
+    h.index = h.index.as_unit("us")
     return hashlib.sha256(pd.util.hash_pandas_object(h.fillna(-999.0), index=True).values.tobytes()).hexdigest()[:16] \
         + f":{int(h.notna().sum().sum())}"
 

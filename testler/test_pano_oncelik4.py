@@ -5,6 +5,7 @@ from datetime import datetime, timezone
 
 import pandas as pd
 import pytest
+from testler.conftest import KILIT_ISLEM_NEDEN, kilit_islemleri_var
 
 from motor.canli import aylik_rapor as ar
 from motor.canli import durum as d
@@ -330,6 +331,7 @@ def test_pano_butunluk_uyusmuyorsa_uyari(kosu):
     assert any("Backtest bütünlüğü" in m and b["dosyalar"][3]["id"] in m for _, m in u)
 
 
+@pytest.mark.gercek_veri(kilit_islemleri_var(), reason=KILIT_ISLEM_NEDEN)
 def test_backtest_besleyici_yeni_alanlar():
     """Backtest durumu: eksik mum ölçülmedi (null + neden), ayar sürümü kilit ayarından; giriş gerekçesi null."""
     from motor.canli import backtest_durum as bd

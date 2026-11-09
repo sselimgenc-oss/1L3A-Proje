@@ -7,6 +7,7 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 import pytest
+from testler.conftest import KILIT_ISLEM_NEDEN, kilit_islemleri_var
 
 from motor.canli import durum as d
 
@@ -223,6 +224,7 @@ def test_veri_yasi_negatif_olmaz():
     assert d.veri_yasi_dk("2026-02-01T00:00:00Z", "4h", simdi) == 0
 
 
+@pytest.mark.gercek_veri(kilit_islemleri_var(), reason=KILIT_ISLEM_NEDEN)
 def test_backtest_durum_bayatlik_negatif_degil(tmp_path):
     import json
     from motor.canli import backtest_durum as bd
