@@ -64,7 +64,8 @@ def _kol_kur(no: int, strateji: Strateji, sembol: str, mumlar: pd.DataFrame, eks
           else np.full(len(eksen), np.nan))
     atr = (gst.atr(mumlar["yuksek"], mumlar["dusuk"], mumlar["kapanis"], ca.atr_periyot).reindex(eksen).to_numpy()
            if ca.atr_iz_suren_k else np.full(len(eksen), np.nan))
-    return Kol(kimlik=f"{no}:{strateji.ad}|{sembol}", sembol=sembol, mod="sinyal", strateji_ad=strateji.ad,
+    gsk = (yeniden(sig["gun_sonu_kapanis"], False, bool) if "gun_sonu_kapanis" in sig.columns else None)
+    return Kol(kimlik=f"{no}:{strateji.ad}|{sembol}", sembol=sembol, mod="sinyal", strateji_ad=strateji.ad, s_gsk=gsk,
                s_yon=yeniden(sig["yon"], 0, int), s_stop=sig["stop"].reindex(eksen).to_numpy(dtype=float),
                s_hedef=sig["hedef"].reindex(eksen).to_numpy(dtype=float),
                s_cikis_l=cl, s_cikis_s=cs, s_zc=zc, atr=atr, cikis_ayarlari=ca)

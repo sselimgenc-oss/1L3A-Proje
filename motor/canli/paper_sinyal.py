@@ -135,6 +135,8 @@ def tek_karar(t: StratejiTanim, mumlar: pd.DataFrame, fund: Optional[pd.DataFram
     atr = (float(gst.atr(mumlar["yuksek"], mumlar["dusuk"], mumlar["kapanis"], ca.atr_periyot).iloc[-1])
            if ca.atr_iz_suren_k else float("nan"))
     karar = {"yon": yon, "stop": float(r["stop"]), "hedef": float(r["hedef"]), "cikis_l": cl, "cikis_s": cs, "zc": zc, "atr": atr}
+    if "gun_sonu_kapanis" in sig.columns:      # seanslı veri: bu mumun kapanışında açık pozisyon kapanır (backtest ile aynı; sütun kriptoda yok)
+        karar["gsk"] = bool(r["gun_sonu_kapanis"]) if not pd.isna(r["gun_sonu_kapanis"]) else False
     if yon != 0:       # sürüm izi + giriş gerekçesi: yalnız karar anındaki (mumlar <= t) değerlerden; motor bunları pozisyona bağlar
         karar["ayar_surumu"] = gi.ayar_surumu(t.strateji_ad, t.ayar, t.ayar_dosyasi)
         karar["gerekce"] = gi.gerekce_tek(t, mumlar, sig, yon, r["stop"], r["hedef"])
