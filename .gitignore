@@ -39,3 +39,10 @@ sonuclar/evren/*/oos/
 sonuclar/evren/*/arsiv_*/oos/
 sonuclar/evren/*/arsiv_*/pf/
 sonuclar/evren/*/arsiv_*/*.parquet
+
+# Üçüncü taraf kod ve kaynak metinler (public repo; yerelde kalır)
+arsiv/algo-sg/dis_kaynak/
+arsiv/strateji-sg/tv/kaynak/
+arsiv/strateji-sg/tv/pine/
+arsiv/strateji-sg/tv_eleme_dali/kaynak/
+arsiv/strateji-sg/tv_eleme_dali/pine/
