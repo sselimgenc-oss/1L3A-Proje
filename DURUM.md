@@ -113,6 +113,17 @@ Ana ders: önceki sonuçlar OOS'a bakılarak seçilmiş ve kâr birkaç işlemde
   saatlik dosyalar → swing/daytrade 1h+ testleri önce; 15m/30m dakikalık veri tamamlanınca.
 
 ## Lider kararları günlüğü (karar 26)
+- 2026-11-09: v2 HOLDOUT ÖNCESİ BEYAN (Fable denetimi GO: 0 engel, 5 belge şartı, 14 not; sonuclar/denetim/fable_holdout_oncesi_2026-11-09.md).
+  Holdout koşusundan ÖNCE yazıldı, sonra değiştirilmez:
+  (1) Hata kuralı: holdout raporunda herhangi bir set stratejisinin `hatalar` alanı boş değilse koşu 'hatalı' sayılır, kapı GEÇTİ kabul edilmez.
+  (2) Açıklama: dis__gauss-stoch-eth havuzda kilit_gorulmus=hayir görünse de Katman 4'te (2026-11-07) 4h + ızgara ayarıyla
+      ETH/SOL/META/NVDA'da 2025-11-01→2026-11-05 koşuldu (sonuclar/kilit/sonuc.csv, 4 satır; lider doğruladı). Seçim mekanikti.
+  (3) Dondurma: koşu temiz çalışma kopyasında; veri yenilenmez; motor/arastirma/v2/ içine .py eklenmez; veri dosyası sha256
+      listesi koşudan önce kaydedilir; holdout günlüğü hemen commit edilir.
+  (4) Veri sonu: kripto 15m/1d 2026-11-06; hisse/emtia 2026-10-30; kripto funding 2026-10-31.
+  (5) Yorum: p_set 15m bacakta yapısal olarak kolay (rastgele giriş maliyetten eksi) → belirleyici şart fiilen set net > 0.
+      Evren 2026-11-07'de seçildi (ileriyi görme; ör. ZEC). GEÇTİ = 'gerekli, yeterli değil'; asıl sınav paper.
+      Bilgi: ewo-ema-ofset geliştirmenin son yılında hafif ekside (net −%0.6) — holdout'ta budanması beklenen bir sonuçtur.
 - 2026-11-09 (KULLANICI kararı): holdout'tan ÖNCE Fable bağımsız denetimi (v2 kodu + çıktıları); holdout denetimden sonra.
 - 2026-11-09 (gece, v2 SONUÇ — geliştirme dönemi, kanıt değil): ham 13.628 görev; eleme 222 → 18; resmi test (K2, BH q=0.10,
   m=939) → 7 keşif (swing 4, gün içi kripto 3), SPA p=0.02; sağlamlık → 5 sağlam keşif; SET (mühürlü) = 2 strateji:
