@@ -276,7 +276,7 @@ def test_csv_deterministik_ve_muhur_icerigi(tmp_path):
 # ---------------------------------------------------------------- etiket dosyası ve gerçek çıktı tutarlılığı
 def test_etiket_dosyasi_gecerli():
     et = H.etiketleri_oku()
-    assert len(et) == 216 and all(v["etiket"] in H.ETIKETLER and v["alt_etiket"] for v in et.values())
+    assert len(et) == 223 and all(v["etiket"] in H.ETIKETLER and v["alt_etiket"] for v in et.values())
 
 
 def test_etiketler_gecersizse_acik_hata(tmp_path):
@@ -301,12 +301,18 @@ def test_gercek_havuz_kurallari_ve_muhur_uyumu():
     assert not h["strateji"].str.startswith(("daytrade__", "scalp__")).any()
     # 2.4
     sw = h[h["stil_v2"] == "swing"]
-    assert set(sw["tf"]) <= {"1d", "4h"} and set(sw["evren"]) == {"genel"}
+    assert set(sw["tf"]) <= {"1d", "4h"}
+    # funding_gerekli stratejiler (funding yalnız kripto perp'te var) evren=kripto; diğer swing satırları genel
+    from motor.strateji import kayit
+    reg = kayit.tum_stratejiler()
+    for _, r in sw.iterrows():
+        assert r["evren"] == ("kripto" if reg[r["strateji"]].funding_gerekli else "genel"), r["strateji"]
+    assert {"v2__funding-asiri-kontra", "v2__funding-esik-karsit", "v2__trend-funding-suzgec"} <= set(sw["strateji"][sw["evren"] == "kripto"])
     # 2.5: tam 7 satır, 15m, kripto
     gk = h[h["stil_v2"] == "gunici_kripto"]
     assert sorted(gk["strateji"]) == sorted(H.GUNICI_KRIPTO) and set(gk["tf"]) == {"15m"} and set(gk["evren"]) == {"kripto"}
-    # portföy: 19 pf__ sınıfı, 1d
+    # portföy: 21 pf__ sınıfı (19 eski + 2 v2 yeni aday), 1d
     pf = h[h["stil_v2"] == "portfoy"]
-    assert len(pf) == 19 and pf["strateji"].str.startswith("pf__").all() and set(pf["tf"]) == {"1d"}
+    assert len(pf) == 21 and pf["strateji"].str.startswith("pf__").all() and set(pf["tf"]) == {"1d"}
     assert set(h["kilit_gorulmus"]) <= {"evet", "hayir"}
     assert set(h["etiket"]) <= H.ETIKETLER

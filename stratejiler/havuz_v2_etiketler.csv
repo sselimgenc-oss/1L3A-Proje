@@ -215,3 +215,10 @@ pf__son1ay_trendrider,trend,fiyat_ma,coin SMA50 trend filtresi
 pf__son1ay_e014,kesitsel,momentum_siralama,SPY/TLT/GLD 25 hafta momentum seçimi
 pf__pca_statarb,kesitsel,pca_statarb,PCA istatistiksel arbitraj
 pf__gumus_makro,trend,fiyat_ma,gümüş long + EMA150 makro çıkış
+pf__sinif_kesit_mom,kesitsel,sinif_ici_momentum_ls,varlık sınıfı içinde 12-1 ay getiri sıralaması: en iyi long en kötü short (aylık)
+pf__sinif_kesit_donus,kesitsel,sinif_ici_kisa_donus_ls,varlık sınıfı içinde 7 günlük getiri sıralaması: kaybeden long kazanan short (haftalık)
+v2__tsmom-12-1,trend,tsmom_12_1,12-1 ay getiri işaretine göre long/short (zaman serisi momentumu)
+v2__tsmom-oy,trend,tsmom_coklu_vade,1/3/12 ay getiri işaretlerinin oylaması ile long/short
+v2__funding-asiri-kontra,funding,asiri_funding_z,funding oranı 90g z-skoru ±2 aşınca karşı yön
+v2__funding-esik-karsit,funding,funding_esik,7g ortalama yıllık funding eşiğini aşınca karşı yön
+v2__trend-funding-suzgec,karma,trend_funding_suzgec,SMA100 trend yönü + funding z-skoru kalabalık süzgeci (iki koşul eşit ağırlık)

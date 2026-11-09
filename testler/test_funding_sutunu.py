@@ -66,7 +66,9 @@ def test_funding_gerekmeyen_strateji_girdisi_ayni_nesne():
     assert stratejiye_hazirla(s, m, fund_serisi(5), "BTCUSDT", "1h") is m
     assert stratejiye_hazirla(s, m, None, "DK_XAU", "1h") is m
     for ad, sinif in kayit.tum_stratejiler().items():
-        assert sinif.funding_gerekli == (ad in ("dis__ewmac-carry", "dis__funding-carry")), ad
+        assert sinif.funding_gerekli == (ad in (
+            "dis__ewmac-carry", "dis__funding-carry",
+            "v2__funding-asiri-kontra", "v2__funding-esik-karsit", "v2__trend-funding-suzgec")), ad
 
 
 def test_once_sonra_esitlik_sentetik():

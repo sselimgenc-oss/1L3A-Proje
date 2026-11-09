@@ -304,7 +304,8 @@ def aday_satirlari() -> tuple[list[dict], dict]:
                 continue
             doc = reg[ad].__dict__.get("__doc__") or ""
             tf = birincil_tf(kaynak.metinler(ad, doc))
-            stil_v2, evren = "swing", "genel"
+            # funding_gerekli: funding dosyası yalnız kripto perp'te var (DK_ sembollerde yok -> açık hata) -> evren kripto
+            stil_v2, evren = "swing", ("kripto" if getattr(s, "funding_gerekli", False) else "genel")
         else:
             continue
         ayar = varsayilan_ayar(s, kayit.kart_ayarlari(ad))
