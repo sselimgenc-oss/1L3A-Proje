@@ -231,7 +231,7 @@ Ana ders: önceki sonuçlar OOS'a bakılarak seçilmiş ve kâr birkaç işlemde
 
 - 2026-11-07 17:12 UTC: Paper kurulumu tamam. Düzeltmeler: Binance kline akışı `/market/stream` yolunda (eski `/stream` veri
   göndermiyor; 60a76b3); Telegram yeni bot + kullanıcı dostu HTML mesajlar (b2abb50); pano Cloudflare Workers'ta
-  (`1l3a-pano.sselimgenc-c18.workers.dev`, 15 dk), masaüstü/mobil tasarım (2146654). Sunucu güncelleme: `git pull` (root,
+  (adres repoda tutulmaz; 15 dk), masaüstü/mobil tasarım (2146654). Sunucu güncelleme: `git pull` (root,
   deploy key), motor durumu korunur. Açık soru: günlük Telegram özeti saati (şu an 00:10 UTC = 03:10 TSİ).
 
 - 2026-11-07: **Karar 27 (kullanıcı):** tek sembol–strateji ikilileri (SOL'de CCI, NVDA'da Fraktal…) istenmiyor; final set
