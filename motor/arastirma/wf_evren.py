@@ -1532,7 +1532,7 @@ def _dosya_sha(yol: Path) -> str:
 
 def _gunluk_dizi(oos: pd.DataFrame, w) -> np.ndarray:
     """DSR için: yeniden oynatmanın günlük getirisi (aynı tablo, aynı sert limitler -> WF ile aynı seri)."""
-    tablo = oos[["kol", "sembol", "yon", "giris", "cikis", "r", "sf", "stop_mesafe"]].reset_index(drop=True)
+    tablo = oos[["kol", "sembol", "yon", "giris", "cikis", "r", "sf", "stop_mesafe", "maliyet_payi"]].reset_index(drop=True)
     m = kasa_metrikleri(tablo, pd.Timestamp(w["oos_bas"]), pd.Timestamp(w["oos_bit"]))
     return m["getiri_serisi"].to_numpy(dtype=float)
 
