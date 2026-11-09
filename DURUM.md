@@ -113,6 +113,13 @@ Ana ders: önceki sonuçlar OOS'a bakılarak seçilmiş ve kâr birkaç işlemde
   saatlik dosyalar → swing/daytrade 1h+ testleri önce; 15m/30m dakikalık veri tamamlanınca.
 
 ## Lider kararları günlüğü (karar 26)
+- 2026-11-09 (gece, dış denetim turları 2-3 sonrası; canlı para/risk limiti değişmedi):
+  (1) Test taşınabilirliği: pandas 2/3 hash farkı giderildi, pf WF veri_dizini, gerçek veri testleri işaretli; requirements pandas<4.
+  (2) Y-1: gün sonu kapanışı portföy + paper motorlarına taşındı (30m seanslı veride backtest=portföy=paper birebir). Yeni set paper'a
+  bu düzeltme olmadan alınamazdı. (3) Y-2: paper desteklemediği çıkış alanında başlamaz (fail-closed). (4) Y-3: K1c gecikme stresi
+  takvim bayrağını kaydırmaz. (5) Y-4: holdout mührü v3 (evren, git commit, 14 ortak modül). (6) Y-5 (tek-grafik kaldıraç tavanı
+  komisyonsuz, ~%0.15 fazla) ham tarama BİTİNCE düzeltilecek — tarama ortasında motor davranışı değiştirilmez.
+  Kullanıcıya sorulacak: main'e birleştirme + dal koruması, CI kurulumu, pano erişim kontrolü.
 - 2026-11-09: Güncelleme 8 uygulandı. Lider kararları: sonuclar/kilit/set.csv ve final beklenti aralıkları ESKİ boyutla üretilmiş tarihsel
   kayıt olarak kalır (yeniden üretilmez; testi eski kurala göre doğrular). Portföy toplam %5 stop riski fiyat riski olarak kalır.
 - 2026-11-09 (KULLANICI onayı, lider önerisi): (1) işlem başı %1 risk MALİYET DAHİL (stop kayması + 2 komisyon) — backtest, evren oynatma,
