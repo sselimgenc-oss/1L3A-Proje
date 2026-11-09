@@ -43,11 +43,17 @@ MUM = _veri(1, 1500, "1h")
 MUM15 = _veri(2, 1500, "15min")
 
 
+def _yuvarla(x):
+    """İşlemciye bağlı son-bit kayan nokta farkları (SIMD/BLAS) hash'i bozmasın: 9 anlamlı ondalığa göreli yuvarlama.
+    (CI'da aynı commit bir koşuda geçip diğerinde düştü — davranış değişikliği değil, makine farkı.)"""
+    return x.map(lambda v: float(f"{v:.9g}") if pd.notna(v) else v)
+
+
 def _ozet(sig):
     h = hashlib.sha256()
     for c in sorted(sig.columns):
         h.update(c.encode())
-        h.update(pd.util.hash_pandas_object(sig[c].astype(float) if sig[c].dtype != object else sig[c].astype(str),
+        h.update(pd.util.hash_pandas_object(_yuvarla(sig[c].astype(float)) if sig[c].dtype != object else sig[c].astype(str),
                                             index=False).values.tobytes())
     return h.hexdigest()[:16] + f":{int((sig['yon'] != 0).sum())}"
 
@@ -225,6 +231,7 @@ def _pf_ozet(h):
     # indeks sabit "us" çözünürlüğüne çekilir (değerler ve zaman damgaları aynı, yalnız iç dtype normalize).
     h = h.copy()
     h.index = h.index.as_unit("us")
+    h = h.apply(_yuvarla)
     return hashlib.sha256(pd.util.hash_pandas_object(h.fillna(-999.0), index=True).values.tobytes()).hexdigest()[:16] \
         + f":{int(h.notna().sum().sum())}"
 
