@@ -113,6 +113,9 @@ Ana ders: önceki sonuçlar OOS'a bakılarak seçilmiş ve kâr birkaç işlemde
   saatlik dosyalar → swing/daytrade 1h+ testleri önce; 15m/30m dakikalık veri tamamlanınca.
 
 ## Lider kararları günlüğü (karar 26)
+- 2026-11-09: v2 havuz SON MÜHÜR: 222 satır (+7 short açabilen aday: kesitsel L/S 2, yavaş TSMOM 2, funding/kripto 3),
+  m=939, havuz_v2.csv sha256 e06c994e…. Eklemeler sonuç görülmeden yapıldı. Bundan sonra havuza ekleme yok.
+  P1-1/P1-2/P0-4 kodlandı (motor/arastirma/v2), tam test 4043 geçti. Sıradaki: v2 ham + eleme koşusu; paralelde P1-3..P1-6.
 - 2026-11-09: P0-5 dolum denetimi bitti (sonuclar/evren/v2/dolum_denetimi.md; lider motor.py:300-305, 338-360'ı doğruladı):
   motor hatası YOK (giriş sonraki mum açılışı, mum içinde stop önce, lookahead yok). Gecikmede PF artışı = `gecersiz_stop`
   ile çöküş devamı sinyallerinin atlanması (gerçek etki, fiyat iyileşmesi değil); yalnız 5m'de. Maliyet ×2 + mum aralığının

@@ -1,13 +1,13 @@
 {
-  "etiket_dosyasi_sha256": "c452e2aeff8366cc3599e0ce471109a9e2c00f5de22b368e8ccb5786181d481a",
-  "git_commit": "c653bb9d9e8bee06079632ee8cb1e0f8d8b0aa51",
+  "etiket_dosyasi_sha256": "3ff144a26a5e2f3d6ea471bda71231ce28a13107dd15fbe65384f6e17c90e77b",
+  "git_commit": "eeb1b5e686fc699f39f35804ab36fe1682684987",
   "git_kod_degismis": false,
   "havuz_csv": "stratejiler/havuz_v2.csv",
-  "havuz_csv_sha256": "a9b5854ce968aa15fbcd77a9378511e796b20e76eaebb291beeb42b4f74ec389",
+  "havuz_csv_sha256": "e06c994ed1204bfc9847c6348ee6cb74602b117fa787c0618631323e5bfeb19a",
   "m": 939,
   "m_kurali": "max(havuz satır sayısı, 939) (ON_KAYIT_V2 2.10)",
-  "satir_sayisi": 215,
-  "script_sha256": "0dbc45fa72308bcfcf360aaaf41d9fd5bbebb533493df7a31cb09f40cf2bb8a7",
+  "satir_sayisi": 222,
+  "script_sha256": "d0f76addc3a3c0c7dd02b1cc5c338065b0a43b1e2fbd92e4836960231e555dc5",
   "surum": 1,
-  "zaman_damgasi_utc": "2026-11-09T21:23:02Z"
+  "zaman_damgasi_utc": "2026-11-09T21:53:56Z"
 }
