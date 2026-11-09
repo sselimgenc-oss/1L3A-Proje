@@ -113,6 +113,9 @@ Ana ders: önceki sonuçlar OOS'a bakılarak seçilmiş ve kâr birkaç işlemde
   saatlik dosyalar → swing/daytrade 1h+ testleri önce; 15m/30m dakikalık veri tamamlanınca.
 
 ## Lider kararları günlüğü (karar 26)
+- 2026-11-09 (KULLANICI kararı): K5 için Fable'ın D önerisi (resmi sonuç 0 kalır, DSR yalnız rapor, holdout öncesi
+  stil başına ≤3 + korelasyon süzgeci, holdout tek sefer) CEPTE bekler, uygulanmadı. Önce strateji havuzu ve seçim mantığı
+  baştan değerlendirilip teoride en iyiye yakın hale getirilecek (Fable incelemesi, yalnız öneri; kod değişikliği kararla).
 - 2026-11-09 (gece, evren zinciri SONUÇ — ön kayıtlı yöntemle): sağlamlık 58 aday, 0 hata; seçim: iyi 0, iyiye yakın 0.
   Tek sebep K5 (DSR): 58'in 58'i kaldı. K5 hariç tüm WF + K1–K4 + PBO'yu geçen 24 (swing 20, scalp 4) — BİLGİ, liste değil.
   Teşhis: K5 eşiği SR0 her grupta o grubun EN İYİ denemesinden bile yüksek (scalp 15m SR0 yıllık 16.8 / 2483 denemenin en
