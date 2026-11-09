@@ -113,6 +113,7 @@ Ana ders: önceki sonuçlar OOS'a bakılarak seçilmiş ve kâr birkaç işlemde
   saatlik dosyalar → swing/daytrade 1h+ testleri önce; 15m/30m dakikalık veri tamamlanınca.
 
 ## Lider kararları günlüğü (karar 26)
+- 2026-11-09 (KULLANICI kararı): holdout'tan ÖNCE Fable bağımsız denetimi (v2 kodu + çıktıları); holdout denetimden sonra.
 - 2026-11-09 (gece, v2 SONUÇ — geliştirme dönemi, kanıt değil): ham 13.628 görev; eleme 222 → 18; resmi test (K2, BH q=0.10,
   m=939) → 7 keşif (swing 4, gün içi kripto 3), SPA p=0.02; sağlamlık → 5 sağlam keşif; SET (mühürlü) = 2 strateji:
   dis__gauss-stoch-eth 1d (swing, genel evren) + dis__ewo-ema-ofset 15m (gün içi kripto), eşit risk s=0.5 (işlem başı %0.5;
