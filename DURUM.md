@@ -113,6 +113,11 @@ Ana ders: önceki sonuçlar OOS'a bakılarak seçilmiş ve kâr birkaç işlemde
   saatlik dosyalar → swing/daytrade 1h+ testleri önce; 15m/30m dakikalık veri tamamlanınca.
 
 ## Lider kararları günlüğü (karar 26)
+- 2026-11-09 (KULLANICI kararı, SONUÇ SONRASI, ON_KAYIT_V2 0.3/0.4'ten SAPMA): resmi holdout bittikten sonra kıl payı kalan
+  55 strateji (set dışı kalan 3 sağlam keşif, 2 izleme, 2 BH altı, eleme'de tek kapıdan kalan 48) holdout döneminde KEŞİF amaçlı
+  koşulur. Etiket: 'sonuç sonrası keşif — kanıt değil'. Resmi v2 sonucu (set 2, GEÇTİ) değişmez; bu sonuçlarla hiçbir strateji
+  resmi sete/paper'a doğrudan alınmaz — ancak yeni ön kayıt + ileri (paper) veriyle. Aynı s=0.5, maliyet ×1, K2 B=2000 (hk2 tohumu).
+  Çıktı ayrı: sonuclar/evren/v2/holdout_kesif/. Resmi holdout dosyalarına dokunulmaz.
 - 2026-11-09 23:11 UTC: v2 HOLDOUT (kullanıcı onayıyla, tek sefer; 2025-11-08 → 2026-11-06): SET KAPISI GEÇTİ.
   Set net +%13.4 (tek kasa, maliyet ×1, TradFi funding dahil, işlem başı %0.5), p_set 0.0002; hatalar boş (beyan 1 sağlandı).
   gauss-stoch-eth 1d: 159 işlem, net +%10.4, PF(R) 1.53, K2 p 0.015. ewo-ema-ofset 15m: 46 işlem, net +%3.7, PF(R) 1.64,
