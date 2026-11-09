@@ -113,6 +113,11 @@ Ana ders: önceki sonuçlar OOS'a bakılarak seçilmiş ve kâr birkaç işlemde
   saatlik dosyalar → swing/daytrade 1h+ testleri önce; 15m/30m dakikalık veri tamamlanınca.
 
 ## Lider kararları günlüğü (karar 26)
+- 2026-11-09 (gece, v2 SONUÇ — geliştirme dönemi, kanıt değil): ham 13.628 görev; eleme 222 → 18; resmi test (K2, BH q=0.10,
+  m=939) → 7 keşif (swing 4, gün içi kripto 3), SPA p=0.02; sağlamlık → 5 sağlam keşif; SET (mühürlü) = 2 strateji:
+  dis__gauss-stoch-eth 1d (swing, genel evren) + dis__ewo-ema-ofset 15m (gün içi kripto), eşit risk s=0.5 (işlem başı %0.5;
+  bootstrap %95 düşüş %14.4). Atlananlar: ama-egri-donus (aynı etiket), aroon-stochrsi (aynı etiket), gauss-stoch-btc
+  (aynı küme). İzleme: haftalik-macd-gunluk-ma (S3), e0v1en (S2). HOLDOUT kullanıcı onayı bekliyor.
 - 2026-11-09: v2 havuz SON MÜHÜR: 222 satır (+7 short açabilen aday: kesitsel L/S 2, yavaş TSMOM 2, funding/kripto 3),
   m=939, havuz_v2.csv sha256 e06c994e…. Eklemeler sonuç görülmeden yapıldı. Bundan sonra havuza ekleme yok.
   P1-1/P1-2/P0-4 kodlandı (motor/arastirma/v2), tam test 4043 geçti. Sıradaki: v2 ham + eleme koşusu; paralelde P1-3..P1-6.
