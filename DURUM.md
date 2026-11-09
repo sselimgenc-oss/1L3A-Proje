@@ -113,6 +113,12 @@ Ana ders: önceki sonuçlar OOS'a bakılarak seçilmiş ve kâr birkaç işlemde
   saatlik dosyalar → swing/daytrade 1h+ testleri önce; 15m/30m dakikalık veri tamamlanınca.
 
 ## Lider kararları günlüğü (karar 26)
+- 2026-11-09 (gece, evren zinciri SONUÇ — ön kayıtlı yöntemle): sağlamlık 58 aday, 0 hata; seçim: iyi 0, iyiye yakın 0.
+  Tek sebep K5 (DSR): 58'in 58'i kaldı. K5 hariç tüm WF + K1–K4 + PBO'yu geçen 24 (swing 20, scalp 4) — BİLGİ, liste değil.
+  Teşhis: K5 eşiği SR0 her grupta o grubun EN İYİ denemesinden bile yüksek (scalp 15m SR0 yıllık 16.8 / 2483 denemenin en
+  iyisi 1.58; swing 1d 3.71 / 3.68). Neden: V, maliyetle batan ayarların geniş Sharpe yayılımından şişiyor (scalp 15m medyan
+  −5.9) ve DSR formülü denemeleri sıfır çevresinde gürültü varsayar; ayrıca V limitsiz toplam matrisinden, test edilen seri
+  tek-kasa limitli. Yöntem DEĞİŞTİRİLMEDİ; değişiklik sonuç sonrası olur → KULLANICI kararı bekleniyor. Holdout yok.
 - 2026-11-09 (KULLANICI kararı): repo PUBLIC kalır (private'ta CI çalışmıyor ve ücretsiz planda ruleset uygulanmıyor).
 - 2026-11-09 (akşam, evren zinciri): ham 32.200 görev 0 hata; WF 920 kombinasyon → 38 geçen (swing 32, scalp 5, daytrade 1);
   portföy 19 → 1 geçen (pf__ibs_donus); PBO tüm stil×tf ≤ 0.5 (portföy 0.31, diğerleri ≤ 0.03) → düşürme yok.
