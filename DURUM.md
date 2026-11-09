@@ -113,6 +113,9 @@ Ana ders: önceki sonuçlar OOS'a bakılarak seçilmiş ve kâr birkaç işlemde
   saatlik dosyalar → swing/daytrade 1h+ testleri önce; 15m/30m dakikalık veri tamamlanınca.
 
 ## Lider kararları günlüğü (karar 26)
+- 2026-11-09 (KULLANICI kararı): Fable'ın v2 önerisi AYNEN uygulanacak (sonuclar/denetim/fable_havuz_secim_2026-11-09.md).
+  Holdout v2 setine saklanır; D seçeneği uygulanmaz. Sıra: P0 (ön kayıt v2 → havuz dondurma → kill switch eleme → gün içi
+  dolum denetimi) → P1. v2 ön kaydı dondurulmadan v2 koşusu yok; v1 sonucu (0 strateji) resmi kayıt olarak kalır.
 - 2026-11-09 (KULLANICI kararı): K5 için Fable'ın D önerisi (resmi sonuç 0 kalır, DSR yalnız rapor, holdout öncesi
   stil başına ≤3 + korelasyon süzgeci, holdout tek sefer) CEPTE bekler, uygulanmadı. Önce strateji havuzu ve seçim mantığı
   baştan değerlendirilip teoride en iyiye yakın hale getirilecek (Fable incelemesi, yalnız öneri; kod değişikliği kararla).
