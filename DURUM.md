@@ -113,6 +113,10 @@ Ana ders: önceki sonuçlar OOS'a bakılarak seçilmiş ve kâr birkaç işlemde
   saatlik dosyalar → swing/daytrade 1h+ testleri önce; 15m/30m dakikalık veri tamamlanınca.
 
 ## Lider kararları günlüğü (karar 26)
+- 2026-11-09: v2 havuz TASLAK mührü: 215 satır (swing 189 = 1d 182 + 4h 7; gunici_kripto 7; portfoy 19), 1 birleşme, m=939,
+  havuz_v2.csv sha256 a9b5854c…; etiketler sonuç görülmeden kural metninden. Lider kararı: ON_KAYIT_V2 2.8 eklemeleri (Fable
+  P2-1: kesitsel L/S, kısa açabilen yavaş TSMOM, funding) havuz SON mühründen ÖNCE kodlanır; Fable'ın ana eleştirisi short/koruma
+  eksikliği olduğundan eklemeden mühürlemek tasarımın amacını boşa çıkarır. Rejim bindirmesi v2'de yok (2.8).
 - 2026-11-09: v2 ÖN KAYIT donduruldu: sonuclar/evren/ON_KAYIT_V2.md sha256 13f17f53fe79c8c9c0063cc090f1cc57ee573355c500091ab91133802a567bf3 (Fable yazdı, lider denetledi:
   SERT_LIMITLER/martingale/holdout kuralları korunmuş). Bundan sonra eşik/kural değişikliği yok (0.3 tek tur).
 - 2026-11-09 (KULLANICI kararı): Fable'ın v2 önerisi AYNEN uygulanacak (sonuclar/denetim/fable_havuz_secim_2026-11-09.md).
