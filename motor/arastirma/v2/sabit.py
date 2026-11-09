@@ -75,3 +75,48 @@ def evren_listesi(ad: str) -> tuple:
 def sinif_of(sembol: str) -> str:
     from motor.arastirma import wf_evren as we
     return we.SINIF.get(sembol, "diger")
+
+
+# ---------------------------------------------------------------- 5. resmi test (ON_KAYIT_V2 bölüm 5)
+PF_KAYIT_BLOK = 25               # portföy K2: kısmi sonuç bu kadar simülasyonda bir diske yazılır
+K2_YENIDEN_CEKIM = 10            # v1 saglamlik.YENIDEN_CEKIM ile aynı: geçersiz stopta en çok 10 yeniden çekim
+BOOT_PARCA = 250                 # bootstrap indeks matrisi parça boyutu (bellek; sonucu etkilemez)
+SPA_RAPOR_ESIK_P = 0.10
+SPA_RAPOR_METNI = "havuzun bütününde sıfırdan farklılık kanıtı yok"
+
+# ---------------------------------------------------------------- 6.1 sağlamlık
+S1_PF_MIN = 1.0
+S2_MEDYAN_MIN = 1.1
+S2_EN_DUSUK_MIN = 0.9
+S2_MIN_KOMSU = 2
+S3_PF_MIN = 1.0
+S3_DIGER_TF = {"1d": "4h", "4h": "1d"}
+S4_KAYIP_ORANI = 0.20            # ayı günlerinde ΣR >= -0.20 × tüm dönem ΣR
+S4_MIN_ISLEM = 20
+S4_SMA_GUN = 200
+S4_DOLDURMA_GUN = 5
+S1_GECIKME_MUM = 1
+STIL_TF_YOK = ("gunici_kripto", "portfoy")        # S3 uygulanmaz
+
+# ---------------------------------------------------------------- 6.2 set
+KUME_UZAKLIK_KESIM = 0.5
+KUME_MIN_ORTAK_HAFTA = 100
+STIL_BASINA_MAKS = 3
+S_IZGARA = (1.0, 0.9, 0.8, 0.7, 0.6, 0.5, 0.4, 0.3, 0.2, 0.1)
+DD_MAKS = 0.15
+DD_YUZDELIK = 95
+ISLEM_RISK = 0.01                # 1.0 ölçekte işlem başı risk (SERT_LIMITLER)
+TOPLAM_RISK = 0.05
+HAFTA_FREKANS = "W-SUN"
+MUHUR_SURUM = 1
+SET_MUHRU = "set_muhru.json"
+ON_KAYIT_V2 = KOK / "sonuclar" / "evren" / "ON_KAYIT_V2.md"
+
+# ---------------------------------------------------------------- 7. holdout
+HOLDOUT_P_SET = 0.05
+HOLDOUT_BUDAMA_P = 0.25
+HOLDOUT_GUNLUK = "holdout/holdout_gunlugu.jsonl"
+
+# ---------------------------------------------------------------- teknik
+YILLIK_GUN = 365
+EPS = 1e-12
