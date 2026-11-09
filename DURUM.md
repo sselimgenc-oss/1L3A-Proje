@@ -113,6 +113,8 @@ Ana ders: önceki sonuçlar OOS'a bakılarak seçilmiş ve kâr birkaç işlemde
   saatlik dosyalar → swing/daytrade 1h+ testleri önce; 15m/30m dakikalık veri tamamlanınca.
 
 ## Lider kararları günlüğü (karar 26)
+- 2026-11-09: v2 ÖN KAYIT donduruldu: sonuclar/evren/ON_KAYIT_V2.md sha256 13f17f53fe79c8c9c0063cc090f1cc57ee573355c500091ab91133802a567bf3 (Fable yazdı, lider denetledi:
+  SERT_LIMITLER/martingale/holdout kuralları korunmuş). Bundan sonra eşik/kural değişikliği yok (0.3 tek tur).
 - 2026-11-09 (KULLANICI kararı): Fable'ın v2 önerisi AYNEN uygulanacak (sonuclar/denetim/fable_havuz_secim_2026-11-09.md).
   Holdout v2 setine saklanır; D seçeneği uygulanmaz. Sıra: P0 (ön kayıt v2 → havuz dondurma → kill switch eleme → gün içi
   dolum denetimi) → P1. v2 ön kaydı dondurulmadan v2 koşusu yok; v1 sonucu (0 strateji) resmi kayıt olarak kalır.
