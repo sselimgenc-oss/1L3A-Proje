@@ -29,7 +29,14 @@ GUNLUK = "holdout/holdout_gunlugu.jsonl"
 LISTE_DOSYALARI = ("iyi_liste.csv", "iyiye_yakin_liste.csv", "secim.csv")
 # Denetim O3/Ö4: listeleri üreten girdiler de mühürlü (WF ayar seçimleri + dışlamalar, sağlamlık, PBO).
 MUHUR_DOSYALARI = LISTE_DOSYALARI + ("wf_evren.parquet", "saglamlik.parquet", "pbo.csv")
-MUHUR_SURUM = 2
+MUHUR_SURUM = 3                    # 3: + evren üyeliği, git commit, ortak motor modülleri hash'i (denetim Y-4). 2 hâlâ okunur.
+OKUNUR_SURUMLER = (2, 3)
+# Tüm stratejileri etkileyen ortak motor/takvim modülleri (strateji kaynağı hash'i bunları kapsamaz).
+ORTAK_MODULLER = ("motor/backtest/motor.py", "motor/backtest/metrikler.py", "motor/backtest/walk_forward.py",
+                  "motor/backtest/eleme.py", "motor/backtest/deneme_kaydi.py", "motor/risk/limitler.py",
+                  "motor/strateji/seans_takvimi.py", "motor/strateji/daytrade/_ortak.py", "motor/strateji/kayit.py",
+                  "motor/arastirma/evren_maliyet.py", "motor/arastirma/wf_evren.py", "motor/arastirma/saglamlik.py",
+                  "motor/arastirma/tarama.py", "motor/arastirma/wf_evren_holdout.py")
 
 
 class HoldoutHatasi(RuntimeError):
@@ -59,6 +66,44 @@ def olcut_hash() -> str:
     """Geçme ölçütleri + kıl payı eşikleri (OLCUT, YAKIN_OLCUT) JSON'unun sha256'sı."""
     j = json.dumps({"OLCUT": we.OLCUT, "YAKIN_OLCUT": we.YAKIN_OLCUT}, sort_keys=True, ensure_ascii=False)
     return hashlib.sha256(j.encode()).hexdigest()
+
+
+def evren_imzasi() -> dict:
+    """{stil: {"imza": we.evren_imza(...), "semboller": [sıralı]}} — etkin evren üyeliği (EVREN_STIL / deneme geçersiz kılması)."""
+    out = {}
+    for stil in sorted(we.EVREN_STIL):
+        ev = sorted(we.evren_stil(stil))
+        out[stil] = {"imza": we.evren_imza(ev), "semboller": ev}
+    return out
+
+
+def git_commit() -> str:
+    """Çalışma kopyasının HEAD commit hash'i; git yok/depo değilse 'yok'."""
+    import subprocess
+    try:
+        r = subprocess.run(["git", "rev-parse", "HEAD"], cwd=we.KOK, capture_output=True, text=True, timeout=20)
+    except (OSError, subprocess.SubprocessError):
+        return "yok"
+    h = r.stdout.strip()
+    return h if r.returncode == 0 and len(h) >= 7 else "yok"
+
+
+def _commit_ata_mi(muhurlu: str, simdi: str) -> bool:
+    """Mühürdeki commit şimdiki HEAD'in atası (ya da aynısı) mı? Biri 'yok' ise karşılaştırılamaz -> True (ortak modül hash'leri
+    kod değişimini zaten yakalar); git komutu çalışmazsa da karşılaştırılamaz sayılır."""
+    import subprocess
+    if "yok" in (muhurlu, simdi) or muhurlu == simdi:
+        return True
+    try:
+        r = subprocess.run(["git", "merge-base", "--is-ancestor", muhurlu, simdi], cwd=we.KOK, capture_output=True, timeout=20)
+    except (OSError, subprocess.SubprocessError):
+        return True
+    return r.returncode == 0
+
+
+def ortak_modul_hashleri() -> dict:
+    """{göreli yol: sha256} — paylaşılan motor/takvim modülleri (dosya yoksa ''; mühürden sonra eklenir/silinirse fark çıkar)."""
+    return {y: _sha(we.KOK / y) for y in ORTAK_MODULLER}
 
 
 def strateji_dosyalari(ad: str, stil: str) -> list:
@@ -124,7 +169,7 @@ def _sayi(v):
 
 def muhur_yaz(cikti: Path) -> dict:
     """secim aşaması çıktıları yazıldıktan sonra çağrılır. Holdout başlamışsa listeler artık değiştirilemez.
-    Mühür (sürüm 2): MUHUR_DOSYALARI sha256 (listeler + wf_evren.parquet + saglamlik.parquet + pbo.csv; hepsi VAR olmalı),
+    Mühür (sürüm 3; 2 de okunur; v3 = v2 + evren üyeliği, git commit, ortak modül hash'leri): MUHUR_DOSYALARI sha256 (listeler + wf_evren.parquet + saglamlik.parquet + pbo.csv; hepsi VAR olmalı),
     maliyet tablosu hash'i, ölçüt/eşik JSON hash'i, holdout koşuları (strateji, tf, stil, ayar, dışlanan) ve listedeki
     stratejilerin kaynak + kart/ayar dosyası hash'leri."""
     cikti = Path(cikti)
@@ -137,7 +182,8 @@ def muhur_yaz(cikti: Path) -> dict:
     m = {"surum": MUHUR_SURUM, "zaman": datetime.now(timezone.utc).isoformat(),
          "dosyalar": {f: _sha(cikti / f) for f in MUHUR_DOSYALARI},
          "maliyet_hash": evren_maliyet.tablo_hash(), "olcut_hash": olcut_hash(),
-         "kosular": kosular, "strateji_hash": strateji_hashleri(kosular)}
+         "kosular": kosular, "strateji_hash": strateji_hashleri(kosular),
+         "evren": evren_imzasi(), "git_commit": git_commit(), "ortak_modul_hash": ortak_modul_hashleri()}
     (cikti / MUHUR).write_text(json.dumps(m, ensure_ascii=False, indent=1))
     return m
 
@@ -149,7 +195,7 @@ def muhur_kontrol(cikti: Path) -> dict:
     if not yol.exists():
         raise HoldoutHatasi(f"{MUHUR} yok: önce secim aşaması listeleri yazıp mühürlemeli")
     m = json.loads(yol.read_text())
-    if m.get("surum") != MUHUR_SURUM or set(m.get("dosyalar", {})) != set(MUHUR_DOSYALARI):
+    if m.get("surum") not in OKUNUR_SURUMLER or set(m.get("dosyalar", {})) != set(MUHUR_DOSYALARI):
         raise HoldoutHatasi(f"{MUHUR} eski/eksik biçimde (sürüm {m.get('surum')}); secim aşamasını yeniden koşup mühürleyin")
     for f, h in m["dosyalar"].items():
         if _sha(cikti / f) != h:
@@ -167,6 +213,15 @@ def muhur_kontrol(cikti: Path) -> dict:
             fark = sorted(set(dosyalar.items()) ^ set(simdi.get(ad, {}).items()))
             raise HoldoutHatasi(f"strateji kodu/kartı mühürden sonra değişmiş: {ad} ({fark[0][0] if fark else '?'}); "
                                 "holdout reddedildi")
+    if m["surum"] >= 3:                                         # v2 mühürlerde bu alanlar yok: yalnız eski kontroller
+        if m.get("evren") != evren_imzasi():
+            raise HoldoutHatasi("evren üyeliği (EVREN_STIL sembol listeleri) mühürden sonra değişmiş; holdout reddedildi")
+        simdi_ortak, muh_ortak = ortak_modul_hashleri(), m.get("ortak_modul_hash")
+        if muh_ortak != simdi_ortak:
+            fark = sorted(y for y in set(simdi_ortak) | set(muh_ortak or {}) if (muh_ortak or {}).get(y) != simdi_ortak.get(y))
+            raise HoldoutHatasi(f"ortak motor modülü mühürden sonra değişmiş: {fark[0] if fark else '?'}; holdout reddedildi")
+        if not _commit_ata_mi(str(m.get("git_commit", "")), git_commit()):
+            raise HoldoutHatasi("mühürdeki git commit şimdiki HEAD'in atası değil (geçmiş yeniden yazılmış); holdout reddedildi")
     return m
 
 
