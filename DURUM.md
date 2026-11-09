@@ -113,6 +113,10 @@ Ana ders: önceki sonuçlar OOS'a bakılarak seçilmiş ve kâr birkaç işlemde
   saatlik dosyalar → swing/daytrade 1h+ testleri önce; 15m/30m dakikalık veri tamamlanınca.
 
 ## Lider kararları günlüğü (karar 26)
+- 2026-11-09 (akşam, evren zinciri): ham 32.200 görev 0 hata; WF 920 kombinasyon → 38 geçen (swing 32, scalp 5, daytrade 1);
+  portföy 19 → 1 geçen (pf__ibs_donus); PBO tüm stil×tf ≤ 0.5 (portföy 0.31, diğerleri ≤ 0.03) → düşürme yok.
+  Sağlamlık ilk denemede açık hatayla durdu: `_gunluk_dizi` maliyet_payi sütununu düşürüyordu. Yalnız sütun korundu
+  (yöntem/eşik değişmedi; DSR serisi WF net_getiri ile birebir), regresyon testi eklendi, sağlamlık yeniden başlatıldı.
 - 2026-11-09: Y-5 (tek-grafik kaldıraç tavanında komisyon payı, ~%0.15) evren zinciri (ham→…→seçim/holdout) BİTENE KADAR
   uygulanmaz: WF ham işlemlerini kullanır, motor zincir ortasında değişirse ham ile sağlamlık koşuları tutarsız olur. Paper etkilenmez
   (portföy motoru zaten komisyon payını içerir).
