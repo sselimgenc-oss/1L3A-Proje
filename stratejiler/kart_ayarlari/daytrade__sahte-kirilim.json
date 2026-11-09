@@ -1,0 +1,14 @@
+[
+ {
+  "kart_id": "daytrade__tikanikligi-giderme-arizasi__woods",
+  "parametreler": {
+   "pencere": 10,
+   "geri_don_mum": 2,
+   "kapanis_disi": true,
+   "hedef_modu": "r",
+   "hedef_r": 2.0
+  },
+  "cikis_ayarlari": null,
+  "not": "Woods: tıkanıklık kırılımı hemen başarısız olur; Donchian 10 mumluk aralık + 1-2 mumda içeri kapanış. Hedef kitapta yok: 2R."
+ }
+]

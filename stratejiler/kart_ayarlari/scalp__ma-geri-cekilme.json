@@ -1,0 +1,33 @@
+[
+ {
+  "kart_id": "scalp__ema200-psar-macd-bb__candle",
+  "parametreler": {
+   "ma_periyot": 20,
+   "ma_tipi": "ema",
+   "trend_ma": 200
+  },
+  "cikis_ayarlari": null,
+  "not": "YAKLAŞIK: 20 EMA geri çekilmesi + 200 trend filtresi; PSAR/MACD/BB ve 100-150 pip stop, 50 pip hedef ATR'ye çevrilmedi."
+ },
+ {
+  "kart_id": "scalp__ema10-21-orta-nokta-geri-cekilme__eseckal",
+  "parametreler": {
+   "ma_periyot": 16,
+   "ma_tipi": "ema",
+   "trend_ma": 50,
+   "hedef_r": 2.0
+  },
+  "cikis_ayarlari": null,
+  "not": "YAKLAŞIK: EMA10-EMA21 orta noktası ~ 16 periyot; 5 pip stop/10 pip kâr = 2R; trend_ma sınıfta SMA."
+ },
+ {
+  "kart_id": "swing__mini-pup__yu",
+  "parametreler": {
+   "ma_periyot": 5,
+   "ma_tipi": "sma",
+   "trend_ma": 50
+  },
+  "cikis_ayarlari": null,
+  "not": "YAKLAŞIK: 5 SMA'ya geri çekilme; çoklu zaman dilimi, stokastik ve kademeli Bollinger çıkışı yok."
+ }
+]

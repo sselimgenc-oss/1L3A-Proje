@@ -1,0 +1,29 @@
+[
+ {
+  "kart_id": "swing__cekic-asili-adam__hogan",
+  "parametreler": {
+   "fitil_oran": 2.0,
+   "teyit_n": 0
+  },
+  "cikis_ayarlari": null,
+  "not": "Çekiç/ters çekiç (long) ve asılı adam/kayan yıldız (short) tek pin bar ailesinde; trend bağlamı yerine aralık dibi/tepesi seviyesi (varsayım). Stop/hedef kartta yok."
+ },
+ {
+  "kart_id": "swing__yusufcuk-doji__graham",
+  "parametreler": {
+   "fitil_oran": 3.0,
+   "hedef_r": 2.0
+  },
+  "cikis_ayarlari": null,
+  "not": "Yusufçuk doji = çok küçük gövde, uzun alt fitil; kart stop'u fitilin %50'si, burada fitil ucu. Hedef 2R (kart). Hacim >= önceki filtresi yok."
+ },
+ {
+  "kart_id": "swing__pin-bar-devam__day",
+  "parametreler": {
+   "trend_ema": 50,
+   "fitil_oran": 2.0
+  },
+  "cikis_ayarlari": null,
+  "not": "Trend yönünde pin bar (kapanış > EMA50) ve aralık dibine geri çekilme seviyesi; kapanışta giriş. Fitil oranı kartta sayısal değil (2)."
+ }
+]

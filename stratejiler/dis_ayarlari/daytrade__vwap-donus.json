@@ -1,0 +1,34 @@
+[
+ {
+  "dis_id": "tv:EA1AXZui",
+  "kaynak_dosya": "arsiv/strateji-sg/tv/pine/EA1AXZui.pine",
+  "parametreler": {
+   "bant_k": 2.0,
+   "hedef_tipi": "vwap",
+   "seans_saat": 13.5
+  },
+  "cikis_ayarlari": null,
+  "not": "YAKLAŞIK: seans VWAP'ından ters dönüş, 13:30-20:00 UTC; VWAP seansı 13:30 UTC'den başlar; sapma çarpanı kaynakta belirsiz (2.0 varsayım)."
+ },
+ {
+  "dis_id": "tv:L7P3quUz",
+  "kaynak_dosya": "arsiv/strateji-sg/tv/pine/L7P3quUz.pine",
+  "parametreler": {
+   "bant_k": 2.0,
+   "hedef_tipi": "vwap",
+   "rsi_esik": 30.0
+  },
+  "cikis_ayarlari": null,
+  "not": "YAKLAŞIK: VWAP bantlarında ortalamaya dönüş modu + RSI aşırı bölge teyidi; trend modu ve DMI/EMA ayrımı yok."
+ },
+ {
+  "dis_id": "tv:rkHHEvJ1",
+  "kaynak_dosya": "arsiv/strateji-sg/tv/pine/rkHHEvJ1.pine",
+  "parametreler": {
+   "bant_k": 3.0,
+   "hedef_tipi": "vwap"
+  },
+  "cikis_ayarlari": null,
+  "not": "VWAP 3. standart sapma bandından VWAP'a dönüş."
+ }
+]

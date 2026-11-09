@@ -1,0 +1,35 @@
+{
+ "baslangic": "2026-10-14 00:00:00",
+ "bitis": "2026-12-10 00:00:00",
+ "son_guncelleme": "2026-10-15 00:04:07.321743",
+ "bitti": false,
+ "sermaye": 10000.0,
+ "strateji_sayisi": 3,
+ "strateji_basi_sermaye": 3333.3333333333335,
+ "toplam": 10001.706670400972,
+ "islem_sayisi": 0,
+ "stratejiler": {
+  "hybrid_brk": {
+   "ozsermaye": 3333.3333333333335,
+   "acik_pozisyon": []
+  },
+  "macd_reloaded": {
+   "ozsermaye": 3335.0400037343043,
+   "acik_pozisyon": [
+    {
+     "sembol": "AVAX",
+     "yon": -1,
+     "giris_zaman": "2026-10-14 00:00:00",
+     "giris": 10.229,
+     "son_fiyat": 10.017,
+     "miktar": 8.807321350091906,
+     "anlik_kar": 1.706670400970917
+    }
+   ]
+  },
+  "sqzmom": {
+   "ozsermaye": 3333.3333333333335,
+   "acik_pozisyon": []
+  }
+ }
+}

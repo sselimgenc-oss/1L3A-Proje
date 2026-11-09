@@ -1,0 +1,208 @@
+[
+  {
+    "kart_id": "daytrade__asya-araligi-likidite-avi__algo-konsepti",
+    "ad": "Günlük Döngü: Asya Aralığı Likidite Avı ve Londra Tersine Dönüşü",
+    "stil": "daytrade",
+    "kaynak": {
+      "pdf": "Price Action Algo Konsepti (232 sayfa) - @eseckal.pdf",
+      "sayfalar": [
+        13,
+        14,
+        16,
+        17,
+        18,
+        20,
+        21
+      ]
+    },
+    "ozet": "Asya seansı aralık/likidite oluşturur; Londra açılışında Asya aralığının dışına (yanlış hareket/tuzak) süpürme yapılıp günün yüksek/düşüğü belirlenir, ardından gerçek trend hareketi gelir. Süpürme sonrası zıt yönde giriş.",
+    "kategori": "formasyon",
+    "piyasa_rejimi": "yatay",
+    "orijinal_piyasa": "forex",
+    "zaman_dilimi": {
+      "islem": "15m-1m",
+      "ust_filtre": "1h-4h yapı"
+    },
+    "gostergeler": [
+      {
+        "ad": "Seans aralığı (Asya)",
+        "parametreler": {}
+      },
+      {
+        "ad": "Önceki gün H/L (PDH/PDL)",
+        "parametreler": {}
+      }
+    ],
+    "long_giris": [
+      "Londra'da fiyat Asya aralığı dibini (veya PDL'yi) süpürüp geri döner",
+      "Yapı kırılımı (karşı yönde momentum değişimi) -> AL"
+    ],
+    "short_giris": [
+      "Londra'da Asya aralığı zirvesi/PDH süpürülür, geri döner",
+      "Düşüş yönünde yapı kırılımı -> SAT"
+    ],
+    "stop_loss": "Kitapta metin yok (süpürme ucunun ötesi varsayımı)",
+    "kar_al": "Karşı likidite (karşı aralık ucu / PDH-PDL)",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Londra ve New York seansları; Asya'da işlem yok",
+      "Günlük döngü tüm zaman dilimlerinde tekrarlanır"
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Seans aralığı ve süpürme ölçülebilir; yapı kırılımı tanımı (BOS/MSS) kitapta görsel."
+    },
+    "belirsizlikler": [
+      "Giriş/stop/hedef kuralı metinde yok (grafik)",
+      "Yapı kırılımı tanımı eksik"
+    ],
+    "uyumluluk_notu": "SMC/ICT tarzı: likidite (önceki gün/hafta/ay H-L), seans yüksek/düşükleri, FVG, order block. OHLC ile yaklaşık kodlanır; seans saatleri (Asya/Londra/NY) kripto/hisse için UTC seansına uyarlanır; kitabın büyük bölümü grafik görselleri, kural metni sınırlı.",
+    "varyantlar": [],
+    "anahtar_kelimeler": [
+      "asya-araligi",
+      "likidite",
+      "london-sweep",
+      "gunluk-dongu",
+      "judas"
+    ]
+  },
+  {
+    "kart_id": "daytrade__likidite-suprmesi-yapi-kirilimi__algo-konsepti",
+    "ad": "Likidite Süpürme + Sahte BOS/Momentum Kayması (Tuzak)",
+    "stil": "daytrade",
+    "kaynak": {
+      "pdf": "Price Action Algo Konsepti (232 sayfa) - @eseckal.pdf",
+      "sayfalar": [
+        4,
+        13,
+        14,
+        30,
+        61,
+        62
+      ]
+    },
+    "ozet": "Önemli likidite (önceki ay/hafta/gün H/L, HTF swing H/L) alındıktan sonra fiyat tersine döner ('tuzak'): perakendenin direnç/destek gördüğü kırılım algo için sahte kırılımdır. Süpürme sonrası momentum kayması (karşı yönde yapı kırılımı) teyit olarak beklenir. HTF likidite > LTF likidite.",
+    "kategori": "formasyon",
+    "piyasa_rejimi": "herhangi",
+    "orijinal_piyasa": "forex",
+    "zaman_dilimi": {
+      "islem": "15m-1m",
+      "ust_filtre": "günlük/haftalık yapı"
+    },
+    "gostergeler": [
+      {
+        "ad": "PDH/PDL/PWH/PWL/PMH/PML",
+        "parametreler": {}
+      },
+      {
+        "ad": "Swing H/L",
+        "parametreler": {}
+      }
+    ],
+    "long_giris": [
+      "Fiyat önemli bir dibi (SSL) süpürür",
+      "Momentum kayması: yukarı yönde yapı kırılımı -> AL"
+    ],
+    "short_giris": [
+      "Fiyat önemli zirveyi (BSL) süpürür",
+      "Aşağı yönde yapı kırılımı -> SAT"
+    ],
+    "stop_loss": "Kitapta metin yok",
+    "kar_al": "Karşı taraf likidite (BSL/SSL) hedefi",
+    "iz_suren_stop": null,
+    "zaman_cikisi": "Tuzaktan ~20 gün sonra dönüş eğilimi (gevşek kural)",
+    "filtreler": [
+      "HTF likidite öncelikli",
+      "Teyit olmadan işlem yok ('HER ZAMAN ONAYI ONAYLA')"
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Swing H/L süpürme ve yapı kırılımı algoritmik kodlanır; eşikler yok."
+    },
+    "belirsizlikler": [
+      "Stop ve giriş kuralı görsel",
+      "'Önemli' likidite ölçütü zaman dilimi hiyerarşisine bağlı"
+    ],
+    "uyumluluk_notu": "SMC/ICT tarzı: likidite (önceki gün/hafta/ay H-L), seans yüksek/düşükleri, FVG, order block. OHLC ile yaklaşık kodlanır; seans saatleri (Asya/Londra/NY) kripto/hisse için UTC seansına uyarlanır; kitabın büyük bölümü grafik görselleri, kural metni sınırlı.",
+    "varyantlar": [],
+    "anahtar_kelimeler": [
+      "likidite",
+      "sweep",
+      "bos",
+      "tuzak",
+      "smc",
+      "pdh-pdl"
+    ]
+  },
+  {
+    "kart_id": "daytrade__fvg-order-block-red-blogu__algo-konsepti",
+    "ad": "Verimsizlik (FVG) Dolumu + Reddetme Bloğu / Order Block Girişi",
+    "stil": "daytrade",
+    "kaynak": {
+      "pdf": "Price Action Algo Konsepti (232 sayfa) - @eseckal.pdf",
+      "sayfalar": [
+        94,
+        98,
+        107,
+        110,
+        112,
+        126
+      ]
+    },
+    "ozet": "Hızlı tek yönlü hareketle oluşan adil değer boşluğu (FVG) fiyatı yeniden verimli yapmak için doldurulur; likidite alındığında oluşan ve hemen ardından FVG yaratan mum (order block / reddetme bloğu) geri dönüşte giriş bölgesidir. HTF FVG > LTF FVG.",
+    "kategori": "formasyon",
+    "piyasa_rejimi": "herhangi",
+    "orijinal_piyasa": "forex",
+    "zaman_dilimi": {
+      "islem": "15m-1m",
+      "ust_filtre": "1h-4h"
+    },
+    "gostergeler": [
+      {
+        "ad": "FVG (3 mum)",
+        "parametreler": {}
+      },
+      {
+        "ad": "Order Block",
+        "parametreler": {}
+      }
+    ],
+    "long_giris": [
+      "Likidite süpürmesi sonrası yukarı yönlü FVG oluştu",
+      "Fiyat FVG / order block bölgesine geri dönünce AL"
+    ],
+    "short_giris": [
+      "Aşağı FVG + order block'a geri dönüşte SAT"
+    ],
+    "stop_loss": "Kitapta metin yok",
+    "kar_al": "Karşı likidite",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Günlük döngü ve HTF yapı ile uyumlu"
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "FVG 3-mum tanımı net kodlanır; order block seçimi öznel; kitaptaki kurallar görsel."
+    },
+    "belirsizlikler": [
+      "Giriş seviyesi (FVG içinde %?), stop ve hedef yok",
+      "TDI ve 'Ping Pong' bölümleri yalnız görsel"
+    ],
+    "uyumluluk_notu": "SMC/ICT tarzı: likidite (önceki gün/hafta/ay H-L), seans yüksek/düşükleri, FVG, order block. OHLC ile yaklaşık kodlanır; seans saatleri (Asya/Londra/NY) kripto/hisse için UTC seansına uyarlanır; kitabın büyük bölümü grafik görselleri, kural metni sınırlı.",
+    "varyantlar": [],
+    "anahtar_kelimeler": [
+      "fvg",
+      "order-block",
+      "verimsizlik",
+      "reddetme-blogu"
+    ]
+  }
+]

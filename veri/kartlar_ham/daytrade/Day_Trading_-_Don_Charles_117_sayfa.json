@@ -1,0 +1,298 @@
+[
+  {
+    "kart_id": "daytrade__kisa-ma-kesisim__charles",
+    "ad": "Kısa Vadeli Hareketli Ortalama Kesişimi (5/10 ve 10/15 dk)",
+    "stil": "daytrade",
+    "kaynak": {
+      "pdf": "Day_Trading_-_Don_Charles_117_sayfa.pdf",
+      "sayfalar": [
+        79,
+        80,
+        81,
+        82,
+        83
+      ]
+    },
+    "ozet": "Kısa hareketli ortalama uzun hareketli ortalamayı yukarı keserse long, aşağı keserse short; gün içi için 5-dk/10-dk ve 10-dk/15-dk ortalamalar önerilir. Yanlış sinyalleri azaltmak için kesişim sonrası ortalamalar arası mesafe filtresi kullanılabilir.",
+    "kategori": "trend_takip",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {
+      "islem": "5m",
+      "ust_filtre": null
+    },
+    "gostergeler": [
+      {
+        "ad": "SMA",
+        "parametreler": {
+          "kisa": 5,
+          "uzun": 10
+        }
+      },
+      {
+        "ad": "EMA",
+        "parametreler": {
+          "not": "SMA yerine EMA kullanılabilir"
+        }
+      }
+    ],
+    "long_giris": [
+      "Kısa MA (örn. 5 periyot) uzun MA'yı (örn. 10 periyot) aşağıdan yukarı keser (boğa kesişimi)",
+      "Opsiyonel filtre: kısa MA, uzun MA'nın belirli bir yüzde (örn. %10, gün içi için sayı yok) üzerinde"
+    ],
+    "short_giris": [
+      "Kısa MA uzun MA'yı yukarıdan aşağı keser (ayı kesişimi)"
+    ],
+    "stop_loss": "Kitapta yok",
+    "kar_al": "Karşı yönde kesişim = çıkış (açıkça yazılmamış, ima edilmiş)",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Fiyat kesişimi (fiyat-MA) daha sık ama daha çok yanlış sinyal üretir; MA-MA kesişimi tercih"
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Kesişim kuralı net ve mekanik; periyot, filtre eşiği, stop ve çıkış kitapta kesin tanımlı değil."
+    },
+    "belirsizlikler": [
+      "Periyotlar örnek niteliğinde ('mükemmel uzunluk yok')",
+      "Stop/kar al yok",
+      "Filtre yüzdesi gün içi için tanımsız"
+    ],
+    "uyumluluk_notu": "Her piyasada çalışır; 5m ve üstü uygun. Tek başına zayıf: yatay piyasada çok yanlış sinyal.",
+    "varyantlar": [
+      "Fiyat-MA kesişimi",
+      "EMA ile kesişim",
+      "10 dk/5 dk ve 15 dk/10 dk çiftleri"
+    ],
+    "anahtar_kelimeler": [
+      "ma-kesisim",
+      "sma",
+      "ema",
+      "kesisim",
+      "trend"
+    ]
+  },
+  {
+    "kart_id": "daytrade__momentum-volatilite-kirilimi__charles",
+    "ad": "Momentum / Volatilite Kırılımı (N-mum yeni yüksek + göreli hacim)",
+    "stil": "daytrade",
+    "kaynak": {
+      "pdf": "Day_Trading_-_Don_Charles_117_sayfa.pdf",
+      "sayfalar": [
+        83,
+        84,
+        85
+      ]
+    },
+    "ozet": "Son mum, önceki N mumun en yükseğini kırar ve hacim göreli olarak yüksekse (veya Bollinger dışına çıkıyorsa) kırılım yönünde girilir. Volatilite kırılımı örneği: direnci aşan en az 3 adet 5 dk mum ve göreli hacim > 2.",
+    "kategori": "kirilim",
+    "piyasa_rejimi": "volatil",
+    "orijinal_piyasa": "hisse",
+    "zaman_dilimi": {
+      "islem": "5m",
+      "ust_filtre": null
+    },
+    "gostergeler": [
+      {
+        "ad": "Hacim",
+        "parametreler": {
+          "goreli_hacim_esigi": 2
+        }
+      },
+      {
+        "ad": "Bollinger",
+        "parametreler": {
+          "not": "opsiyonel"
+        }
+      }
+    ],
+    "long_giris": [
+      "Son kapanan mumun yüksek değeri, önceki N (örn. 5) mumun en yükseğinin üzerinde",
+      "Göreli hacim (bağıl hacim) > 2 (veya hacim en az X% artmış)",
+      "Alternatif: mum Bollinger bandının dışında kapanır; veya son mum önceki N mumdan en az %X (örn. %0,5) yükselmiş ve zirvesi önceki 2N barın zirvesinin üzerinde",
+      "Volatilite kırılımı varyantı: direnci kıran en az 3 adet 5dk mum + göreli hacim > 2"
+    ],
+    "short_giris": [
+      "Aynı yapı aşağı yönde: N mumun en düşüğü kırılır, hacim yüksek"
+    ],
+    "stop_loss": "Kitapta yok (kırılım başarısız olursa çıkış)",
+    "kar_al": "Örnek: %15 kazanç sonrası, ilk 1 dk mumundan sonra geri çekilmede çıkış; pozisyon büyüklüğü özsermayenin %5'i (örnek kural)",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [],
+    "pozisyon_risk": "Örnek: toplam özsermayenin %5'i",
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Kırılım ve hacim kuralları ölçülebilir; N, X, stop kitapta 'denenmeli' diye bırakılmış."
+    },
+    "belirsizlikler": [
+      "N ve X parametreleri tüccara bırakılmış",
+      "Stop kuralı yok",
+      "Göreli hacim periyodu yok",
+      "Yanlış sinyal filtresi (gecikmeli gösterge) örnek düzeyinde"
+    ],
+    "uyumluluk_notu": "Hacim verisi gerekir (kripto/hisse/vadeli uygun, spot forex'te tick hacmi). ≥5m uygun.",
+    "varyantlar": [
+      "Hareketli ortalama zarfı (örn. 25 periyot MA ± %10) dışına çıkış kırılım sinyali",
+      "Bollinger 1 sapma dışı kırılım"
+    ],
+    "anahtar_kelimeler": [
+      "momentum",
+      "kirilim",
+      "goreli-hacim",
+      "bollinger",
+      "n-mum-yuksek"
+    ]
+  },
+  {
+    "kart_id": "daytrade__rsi-asiri-bolge-donus__charles",
+    "ad": "RSI Aşırı Bölge Tersine Dönüşü (80/20, sıkı 90/10)",
+    "stil": "daytrade",
+    "kaynak": {
+      "pdf": "Day_Trading_-_Don_Charles_117_sayfa.pdf",
+      "sayfalar": [
+        85,
+        86
+      ]
+    },
+    "ozet": "RSI 20'nin altındayken long (aşırı satım), 80'in üstündeyken short (aşırı alım) alınır; temkinli versiyonda eşikler 10/90 ve destek-direnç yakınında 3 aynı renk 5dk mum sonrası ters mum aranır.",
+    "kategori": "ortalamaya_donus",
+    "piyasa_rejimi": "yatay",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {
+      "islem": "5m",
+      "ust_filtre": null
+    },
+    "gostergeler": [
+      {
+        "ad": "RSI",
+        "parametreler": {
+          "periyot": "belirtilmemis",
+          "asiri_alim": 80,
+          "asiri_satim": 20
+        }
+      }
+    ],
+    "long_giris": [
+      "RSI < 20 (sıkı: < 10)",
+      "Fiyat destek yakınında; son 3 ardışık aynı renk (düşüş) 5dk mumdan sonra en az 1 ters mum"
+    ],
+    "short_giris": [
+      "RSI > 80 (sıkı: > 90)",
+      "Fiyat direnç yakınında; 3 ardışık yükseliş mumu sonrası en az 1 ters mum"
+    ],
+    "stop_loss": "Kitapta yok",
+    "kar_al": "Kitapta yok",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Eşikler net; RSI periyodu, stop, hedef ve destek/direnç tanımı yok."
+    },
+    "belirsizlikler": [
+      "RSI periyodu yok",
+      "Stop ve hedef yok",
+      "Destek/direnç tespit yöntemi yok"
+    ],
+    "uyumluluk_notu": "Her piyasaya uyarlanabilir, ≥5m; trend piyasasında tehlikeli (ortalamaya dönüş).",
+    "varyantlar": [],
+    "anahtar_kelimeler": [
+      "rsi",
+      "asiri-alim",
+      "asiri-satim",
+      "tersine-donus",
+      "ters-mum"
+    ]
+  },
+  {
+    "kart_id": "daytrade__bollinger-kuvvet-indeksi-forex__charles",
+    "ad": "Bollinger + Kuvvet Endeksi Çoklu Zaman Dilimli Mekanik Sistem (Forex)",
+    "stil": "daytrade",
+    "kaynak": {
+      "pdf": "Day_Trading_-_Don_Charles_117_sayfa.pdf",
+      "sayfalar": [
+        114,
+        115
+      ]
+    },
+    "ozet": "Kuvvet Endeksi pozitif/yükseliyor ve Bollinger bantları yukarı eğimliyse (hem 1dk hem 30dk grafikte) long; negatif/düşüyor ve bantlar aşağı eğimliyse short. Bantlar geniş (volatilite yüksek) olmalı; Kuvvet Endeksi 0'a yakınsa işlem yok.",
+    "kategori": "trend_takip",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "forex",
+    "zaman_dilimi": {
+      "islem": "1m",
+      "ust_filtre": "30m (aynı formasyon her iki grafikte)"
+    },
+    "gostergeler": [
+      {
+        "ad": "Bollinger",
+        "parametreler": {
+          "periyot": "belirtilmemis"
+        }
+      },
+      {
+        "ad": "Kuvvet Endeksi",
+        "parametreler": {
+          "periyot": "belirtilmemis"
+        }
+      },
+      {
+        "ad": "RSI",
+        "parametreler": {
+          "asiri_alim": 80,
+          "asiri_satim": 20
+        }
+      }
+    ],
+    "long_giris": [
+      "Kuvvet Endeksi > 0 ve yükseliyor",
+      "Bollinger bantları yukarı eğimli",
+      "Aynı formasyon hem 1dk hem 30dk grafikte",
+      "Bantlar geniş (yeterli volatilite)"
+    ],
+    "short_giris": [
+      "Kuvvet Endeksi < 0 ve düşüyor",
+      "Bollinger bantları aşağı eğimli",
+      "Aynı formasyon hem 1dk hem 30dk grafikte"
+    ],
+    "stop_loss": "Sabit 5 dolar zarar",
+    "kar_al": "Sabit 10 dolar kâr (2R); pozisyon 0,10 lot",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Kuvvet Endeksi 0'a yakın ve mum doji benzeri ise işlem yok",
+      "Zayıf volatilite (dar Bollinger bantları) iken işlem yok",
+      "1dk ve 30dk farklı formasyon veya Bollinger/Kuvvet Endeksi zıt ise riskli: lot ≤ 0,01"
+    ],
+    "pozisyon_risk": "Long 0,10 lot, short 0,05 lot, belirsiz durumda 0,01 lot (örnek)",
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Kurallar nesnel; Bollinger/Kuvvet Endeksi periyotları ve 'yukarı yönlü trend' eşiği tanımsız."
+    },
+    "belirsizlikler": [
+      "Periyotlar yok",
+      "Bantların yükselme tanımı yok",
+      "$5/$10 sabit stop-hedef lot ve enstrümana bağlı",
+      "Kuvvet Endeksi uyuşmazlığı + RSI < 20 yan kuralı karmaşık"
+    ],
+    "uyumluluk_notu": "Forex'e yönelik; 1m kısmı 1L3A için küçük, ≥5m ve ≥30m kombinasyonuna uyarlanabilir. Hacim (Kuvvet Endeksi) gerekir. Dolar bazlı stop/hedef yüzde veya ATR'ye çevrilmeli.",
+    "varyantlar": [
+      "Kuvvet Endeksi yükseliş uyumsuzluğu + RSI < 20 -> dipten dönüş; ayı uyumsuzluğu + RSI > 80 -> tepeden dönüş"
+    ],
+    "anahtar_kelimeler": [
+      "bollinger",
+      "kuvvet-indeksi",
+      "force-index",
+      "cok-zaman-dilimi",
+      "forex"
+    ]
+  }
+]

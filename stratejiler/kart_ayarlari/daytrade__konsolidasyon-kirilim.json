@@ -1,0 +1,28 @@
+[
+ {
+  "kart_id": "swing__kirilim-oncesi-duraklama__scheier",
+  "parametreler": {
+   "uzunluk": 6,
+   "maks_genislik_atr": 2.0,
+   "hacim_k": 0.0
+  },
+  "cikis_ayarlari": {
+   "kismi": [
+    [
+     1.0,
+     0.5
+    ]
+   ],
+   "basabas_r_esigi": 1.0
+  },
+  "not": "YAKLAŞIK: küçük sıkışık duraklama (6 mum, dar kutu) kırılımı; birim 1R'de kısmi, kalan başabaş."
+ },
+ {
+  "kart_id": "swing__kopus-kirilim__graham",
+  "parametreler": {
+   "hacim_k": 2.0
+  },
+  "cikis_ayarlari": null,
+  "not": "Önemli seviye kırılımı yüksek hacimle (2x); fiyat/zaman pencereleri yok."
+ }
+]

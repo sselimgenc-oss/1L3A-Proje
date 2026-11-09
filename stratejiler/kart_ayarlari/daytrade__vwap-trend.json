@@ -1,0 +1,12 @@
+[
+ {
+  "kart_id": "swing__vwap-kesisim__graham",
+  "parametreler": {
+   "tampon_atr": 0.0,
+   "stop_atr": 0.5,
+   "hedef_r": 0.0
+  },
+  "cikis_ayarlari": null,
+  "not": "Kartta stop yeri/hedef sayısal yok: VWAP -/+ 0.5 ATR stop, ters kesişim ve gün sonu çıkış."
+ }
+]

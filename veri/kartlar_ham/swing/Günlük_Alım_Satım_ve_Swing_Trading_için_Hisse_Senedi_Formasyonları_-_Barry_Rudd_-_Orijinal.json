@@ -1,0 +1,193 @@
+[
+ {
+  "kart_id": "swing__trend-kanali-dip-alimi__rudd",
+  "ad": "Trend Kanalının Altından Dip Alımı (50 SMA/destek/dönüş çubuğu onayı)",
+  "stil": "swing",
+  "kaynak": {
+   "pdf": "Günlük_Alım_Satım_ve_Swing_Trading_için_Hisse_Senedi_Formasyonları_-_Barry_Rudd_-_Orijinal.pdf",
+   "sayfalar": [
+    97
+   ]
+  },
+  "ozet": "Günlükte 2+ swing dibine çizilen eğim çizgisi ve en az 2 swing tepeden paralel çizgi trend kanalı oluşturur; yükseliş kanalında kanal tabanına inen dipte, 50 SMA/destek/dönüş çubuğu teyidi ile alım yapılır, hedef kanalın karşı çizgisidir.",
+  "kategori": "destek_direnc",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+   "islem": "1d",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "Trend kanalı",
+    "parametreler": {
+     "min_dip": 2,
+     "min_tepe": 2
+    }
+   },
+   {
+    "ad": "SMA",
+    "parametreler": {
+     "periyot": 50
+    }
+   }
+  ],
+  "long_giris": [
+   "Yükselen trend kanalı: 2+ swing dibinden trend çizgisi, 2+ swing tepesinden paralel çizgi",
+   "Fiyat kanal tabanına dip yapar; olasılığı artıran teyitler: 50 günlük SMA'dan sıçrama, destek seviyesi, günlük 'reversal bar' alım kurulumu"
+  ],
+  "short_giris": [
+   "Düşen kanalda üst çizgiye yükselişte satış (ayna), aynı teyitler"
+  ],
+  "stop_loss": "Swing tutarlarında geniş stop: tipik 1 - 1,25 puan (daha az hisse ile); ilgili kanal çizgisinin ötesi",
+  "kar_al": "Kanalın karşı çizgisine yakın; destek/direnç seviyesi; ters yönde günlük reversal bar oluşursa çıkış. Risk/ödül 1:3 veya daha iyi hedeflenir",
+  "iz_suren_stop": "Fiyat lehine ilerledikçe stop 1 - 1,5 puan arkadan izlenir",
+  "zaman_cikisi": "Swing: tipik 2-5 gün",
+  "filtreler": [],
+  "pozisyon_risk": "Overnight gap riski nedeniyle gün içi lot büyüklüğünün 1/5-1/2'si ile (ör. 1000 yerine 200-500 hisse); kar hedefi 3-5+ puan",
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 1,
+   "gerekce": "Kanal çizimi, teyitler ve stop 'puan' cinsinden esnek; algoritmik tanım zayıf."
+  },
+  "belirsizlikler": [
+   "Kanalın geçerlilik kriterleri sayısal değil",
+   "Teyit faktörlerinin kaç tanesinin gerektiği belirsiz",
+   "Stop puan cinsinden (hisse fiyatından bağımsız) tanımlı"
+  ],
+  "uyumluluk_notu": "1998 ABD hisseleri (kesirli fiyat, SOES, market maker/time&sales ekranı). Hisse likiditesi gerektirir; saf OHLC ile yaklaşıkla kodlanabilir. Kripto/forex'te seans saatleri yerine UTC açılış kullanılmalı; sabit puan değerleri (1/4 puan) ATR ile uyarlanmalı.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "trend-kanali",
+   "sma-50",
+   "destek",
+   "reversal-bar",
+   "swing"
+  ]
+ },
+ {
+  "kart_id": "swing__1-2-aylik-aralik-kirilimi__rudd",
+  "ad": "1-2 Aylık Sıkı Aralık Kırılımı (hacimli, çok günlük devam)",
+  "stil": "swing",
+  "kaynak": {
+   "pdf": "Günlük_Alım_Satım_ve_Swing_Trading_için_Hisse_Senedi_Formasyonları_-_Barry_Rudd_-_Orijinal.pdf",
+   "sayfalar": [
+    98,
+    129
+   ]
+  },
+  "ozet": "Hisse 1-2 ay dar bir aralıkta kalıp, önceki trend yukarıysa ve boğa piyasasında, aralığın en yüksek seviyesinin üzerinde ortalamanın üzerinde hacimle kapanış yaparsa, birkaç günlük devam beklenerek long açılır; son çubuğun yükseğinin 1/8 üzerinden stop-limit ile alınır.",
+  "kategori": "kirilim",
+  "piyasa_rejimi": "yatay",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+   "islem": "1d",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "Hacim",
+    "parametreler": {}
+   },
+   {
+    "ad": "SMA",
+    "parametreler": {
+     "periyot": 50
+    }
+   }
+  ],
+  "long_giris": [
+   "Önceki trend yukarı, boğa piyasası",
+   "Hisse 1-2 ay sıkı yatay aralıkta",
+   "Kırılım günü aralığın en yüksek seviyesinin üzerinde kapanır ve hacim ortalamanın üzerindedir",
+   "Alım: kırılım çubuğunun yüksek seviyesinin 1/8 üzerinde veya mevcut fiyattan; 50 SMA'dan yakın sıçrama ve belirgin direnç gücü artırır"
+  ],
+  "short_giris": [
+   "Kitap ayrıca anlatmıyor (ayna olarak aşağı kırılım varsayılabilir)"
+  ],
+  "stop_loss": "Swing stopu 1 - 1,25 puan (geniş); kırılım aralığının içi",
+  "kar_al": "Destek/direnç seviyeleri; karşı yönlü reversal bar",
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [
+   "Kırılım yüksek hacimli olmalı",
+   "Üst direnç net tanımlıysa kırılım daha güçlü"
+  ],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 2,
+   "gerekce": "Aralık ve hacim koşulları ölçülebilir; 'sıkı aralık' eşiği ve stop sayısal değil."
+  },
+  "belirsizlikler": [
+   "Aralık genişliği yüzdesi yok",
+   "Hacim eşiği yok",
+   "Stop tutarı puan cinsinden"
+  ],
+  "uyumluluk_notu": "1998 ABD hisseleri (kesirli fiyat, SOES, market maker/time&sales ekranı). Hisse likiditesi gerektirir; saf OHLC ile yaklaşıkla kodlanabilir. Kripto/forex'te seans saatleri yerine UTC açılış kullanılmalı; sabit puan değerleri (1/4 puan) ATR ile uyarlanmalı.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "aralik-kirilimi",
+   "hacim",
+   "50-gunluk-sma",
+   "swing"
+  ]
+ },
+ {
+  "kart_id": "swing__fincan-kulp-kirilimi__rudd",
+  "ad": "Fincan ve Kulp (Cup and Handle) Kırılımı",
+  "stil": "swing",
+  "kaynak": {
+   "pdf": "Günlük_Alım_Satım_ve_Swing_Trading_için_Hisse_Senedi_Formasyonları_-_Barry_Rudd_-_Orijinal.pdf",
+   "sayfalar": [
+    99
+   ]
+  },
+  "ozet": "Aylar süren fincan oluşumu ve küçük kulp sonrası üst yatay direncin hacimli kırılması long sinyalidir; satış sırasında hacim azalıp yükselişte artması setupu güçlendirir.",
+  "kategori": "formasyon",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+   "islem": "1d",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "Hacim",
+    "parametreler": {}
+   }
+  ],
+  "long_giris": [
+   "Orta vadeli bir tepe, düşüş, ardından aynı tepeye dönen fincanın sağ kenarı",
+   "Hafif geri çekilme ile kulp (yan/aşağı), kulp sağ kenarı tamamlayana kadar",
+   "Fincan+kulp üstü yatay direncin kırılım günü long"
+  ],
+  "short_giris": [],
+  "stop_loss": null,
+  "kar_al": null,
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [
+   "Hacim: düşüşlerde azalan, yükselişlerde artan"
+  ],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 1,
+   "gerekce": "Formasyon görsel; süre, derinlik, stop ve hedef sayısal değil."
+  },
+  "belirsizlikler": [
+   "Fincan derinliği/süresi yok",
+   "Kulp derinliği yok",
+   "Stop ve hedef yok"
+  ],
+  "uyumluluk_notu": "1998 ABD hisseleri (kesirli fiyat, SOES, market maker/time&sales ekranı). Hisse likiditesi gerektirir; saf OHLC ile yaklaşıkla kodlanabilir. Kripto/forex'te seans saatleri yerine UTC açılış kullanılmalı; sabit puan değerleri (1/4 puan) ATR ile uyarlanmalı.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "fincan-kulp",
+   "kirilim",
+   "formasyon",
+   "hacim"
+  ]
+ }
+]

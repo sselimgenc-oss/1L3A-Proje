@@ -1,0 +1,10 @@
+data/
+__pycache__/
+*.pyc
+sonuclar/kripto/*.pkl
+sonuclar/pa/*.pkl
+sonuclar/brooks/*.pkl
+sonuclar/epa/*.pkl
+sonuclar/s2/*.pkl
+/*.pkl
+tv/veri/

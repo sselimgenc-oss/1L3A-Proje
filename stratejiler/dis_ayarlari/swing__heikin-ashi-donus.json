@@ -1,0 +1,25 @@
+[
+ {
+  "dis_id": "tv:CtFpKECD",
+  "kaynak_dosya": "arsiv/strateji-sg/tv/pine/CtFpKECD.pine",
+  "parametreler": {
+   "golgesiz": false,
+   "hedef_r": 1.0,
+   "onceki_n": 2,
+   "trend_ma": 0
+  },
+  "cikis_ayarlari": null,
+  "not": "YAKLAŞIK: HA renk dönüşü, 1R hedef; SuperTrend yönü, ADX>=22 ve seans filtresi yok."
+ },
+ {
+  "dis_id": "d11j:heiken-ashi-ea31337:aralik_yuzde",
+  "kaynak_dosya": "stratejiler/ek_kaynaklar/github_g5_mt_pine.csv (EA31337 HeikenAshi)",
+  "parametreler": {
+   "aralik_yuzde": 0.5,
+   "onceki_n": 1,
+   "golgesiz": false
+  },
+  "cikis_ayarlari": null,
+  "not": "HA renk dönüşü + HA mum aralığı >= kapanışın %0.5'i (kaynak 'aralık değişimi yüzde eşiği'; mutlak -> yüzde varsayım). EA desen bitleri tanımsız, kodlanmadı."
+ }
+]

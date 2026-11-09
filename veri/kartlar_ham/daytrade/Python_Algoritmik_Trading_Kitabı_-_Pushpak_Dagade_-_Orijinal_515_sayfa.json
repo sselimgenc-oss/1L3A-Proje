@@ -1,0 +1,125 @@
+[
+ {
+  "kart_id": "daytrade__ema-5-12-kesisim-gun-ici__dagade",
+  "ad": "EMA(5,12) Kesişim Gün İçi (15dk)",
+  "stil": "daytrade",
+  "kaynak": {
+   "pdf": "Python_Algoritmik_Trading_Kitabı_-_Pushpak_Dagade_-_Orijinal_515_sayfa.pdf",
+   "sayfalar": [
+    322,
+    323,
+    324,
+    333,
+    334,
+    367
+   ]
+  },
+  "ozet": "EMA(5) EMA(12)'yi yukarı keserse al; aşağı keserse (gün içi modda) sat/short; ters yönde her kesişimde pozisyon kapanır ve ters yön açılır. Backtest örnek parametreleri: periyotlar 5 ve 12, 15 dakikalık mum.",
+  "kategori": "trend_takip",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+   "islem": "15m",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "EMA",
+    "parametreler": {
+     "hizli": 5,
+     "yavas": 12
+    }
+   }
+  ],
+  "long_giris": [
+   "EMA(5) EMA(12)'yi yukarı keser -> al (regular order)"
+  ],
+  "short_giris": [
+   "EMA(5) EMA(12)'yi aşağı keser -> sat (yalnız INTRADAY modda)"
+  ],
+  "stop_loss": "Yok (kitap stop içermiyor); çıkış karşı kesişimde",
+  "kar_al": "Yok",
+  "iz_suren_stop": null,
+  "zaman_cikisi": "Gün içi modda gün sonu kapanış (broker kuralı)",
+  "filtreler": [],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": "Kitap performans iddia etmiyor; backtest örnek amaçlı.",
+  "kodlanabilirlik": {
+   "puan": 3,
+   "gerekce": "Tam mekanik; kitap kodu kesişim ve çıkış kuralları net, stop yok."
+  },
+  "belirsizlikler": [
+   "Stop ve kar al yok.",
+   "Gün sonu kapanışı broker/platforma bağlı."
+  ],
+  "uyumluluk_notu": "Hint hisse (AlgoBulls/pyalgotrading) demo stratejileri; 15dk mumlarda EMA kesişimi ve MACD kesişimi klasik; ≥5m'ye uygun, kripto/hisse/emtia perpetual'da çalışır; hacim gerekmez.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "ema",
+   "kesisim",
+   "15m",
+   "gun-ici"
+  ]
+ },
+ {
+  "kart_id": "daytrade__macd-braket-emir-yuzde1__dagade",
+  "ad": "MACD Kesişim + Braket Emir (%1 stop/%1 hedef)",
+  "stil": "daytrade",
+  "kaynak": {
+   "pdf": "Python_Algoritmik_Trading_Kitabı_-_Pushpak_Dagade_-_Orijinal_515_sayfa.pdf",
+   "sayfalar": [
+    346,
+    347,
+    354,
+    388
+   ]
+  },
+  "ozet": "MACD çizgisi sinyal çizgisini yukarı keserse al, aşağı keserse (gün içi) sat; braket emir ile stop ve hedef giriş fiyatının %1'i, izleyen stop giriş fiyatının 1 katı (trailing_stoploss_trigger=1 örnek).",
+  "kategori": "momentum",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+   "islem": "15m",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "MACD",
+    "parametreler": {
+     "hizli": 26,
+     "yavas": 6,
+     "sinyal": 9
+    }
+   }
+  ],
+  "long_giris": [
+   "MACD çizgisi MACD sinyal çizgisini yukarı keser -> limit fiyatından al"
+  ],
+  "short_giris": [
+   "MACD çizgisi sinyal çizgisini aşağı keser -> sat (INTRADAY)"
+  ],
+  "stop_loss": "Giriş fiyatı ± %1 (stoploss_trigger=0.01)",
+  "kar_al": "Giriş fiyatı ± %1 (target_trigger=0.01)",
+  "iz_suren_stop": "trailing_stoploss_trigger = 1 (giriş fiyatı * çarpan; tanımı kitapta belirsiz)",
+  "zaman_cikisi": "Gün sonu kapanış (gün içi emir)",
+  "filtreler": [],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": "Kitap performans iddia etmiyor; örnek.",
+  "kodlanabilirlik": {
+   "puan": 2,
+   "gerekce": "Kesişim ve %1 stop/hedef net; parametre yazımı (fastma=26, slowma=6) tipik değil (hata gibi), izleyen stop tanımı belirsiz."
+  },
+  "belirsizlikler": [
+   "fastma=26, slowma=6 muhtemel yazım hatası (12/26 bekleniyor).",
+   "trailing_stoploss_trigger=1 anlamı net değil."
+  ],
+  "uyumluluk_notu": "Hint hisse (AlgoBulls/pyalgotrading) demo stratejileri; 15dk mumlarda EMA kesişimi ve MACD kesişimi klasik; ≥5m'ye uygun, kripto/hisse/emtia perpetual'da çalışır; hacim gerekmez.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "macd",
+   "braket",
+   "yuzde-stop",
+   "15m"
+  ]
+ }
+]

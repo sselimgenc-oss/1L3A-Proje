@@ -1,0 +1,613 @@
+[
+  {
+    "kart_id": "daytrade__ikinci-giris-ters-trend__brooks",
+    "ad": "İkinci Giriş (Ters Trend İşleminde İkinci Sinyali Bekle)",
+    "stil": "daytrade",
+    "kaynak": {
+      "pdf": "Price Action Trends - Al Brooks (439 sayfa) - @eseckal.pdf",
+      "sayfalar": [
+        191,
+        192,
+        193
+      ]
+    },
+    "ozet": "Trende karşı veya dönüş işleminde ikinci giriş (ikinci ters çevirme girişimi) birincisinden neredeyse her zaman daha olasıdır; güçlü momentumda (≈4 ardışık trend çubuğu veya 2-3 büyük trend çubuğu) ilk dönüş girişimi atlanır, ikinci girişim beklenir. Piyasa sizi daha iyi bir fiyattan içeri alıyorsa tuzaktan şüphelen ('iyi dolum, kötü işlem').",
+    "kategori": "formasyon",
+    "piyasa_rejimi": "herhangi",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {
+      "islem": "5m",
+      "ust_filtre": null
+    },
+    "gostergeler": [
+      {
+        "ad": "Çubuk sayımı",
+        "parametreler": {}
+      }
+    ],
+    "long_giris": [
+      "Güçlü yükseliş sonrası ilk ters (short) girişi alma; ikinci düşüş girişimini bekle",
+      "Dipte ilk long girişi yerine ikinci (başarısız ayı devamı sonrası) giriş"
+    ],
+    "short_giris": [
+      "Ayna"
+    ],
+    "stop_loss": "Koruyucu stop: sinyal çubuğunun/en son salınımın karşı ucunun 1 tik ötesi (swing stop; kitapta sayısal değer yok).",
+    "kar_al": "Kitapta yok",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Ters trendli işlemden önce önceki çubuklarda boğaların hareket ettiğine dair kanıt ara"
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": "İkinci giriş 'neredeyse her zaman' birinciden daha olası (sayı yok)",
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Giriş mantığı çubuk sayımıyla kodlanır; momentum eşiği (4 çubuk) belli ama yoruma açık."
+    },
+    "belirsizlikler": [
+      "Hedef/çıkış yok",
+      "Önceki giriş-sinyal tanımı serbest"
+    ],
+    "uyumluluk_notu": "Orijinal: ABD vadeli/hisse (E-mini 5dk) seans grafikleri; çubuk sayımı/sinyal çubuğu mantığı ≥5m'ye ve her piyasaya OHLC ile uygulanabilir; hacim gerekmez; 'ilk saat/seans açılışı/gün tipi' kuralları seans-bağımlı (kripto 7/24'te UTC günü ile yaklaşık). Kitap öznel okuma ağırlıklı.",
+    "varyantlar": [],
+    "anahtar_kelimeler": [
+      "ikinci-giris",
+      "second-entry",
+      "iyi-dolum-kotu-trade",
+      "brooks"
+    ]
+  },
+  {
+    "kart_id": "daytrade__mikro-kanal-gec-giris__brooks",
+    "ad": "Güçlü Trendde Geç Giriş / Mikro Kanal (≥4 Ardışık Trend Çubuğu)",
+    "stil": "daytrade",
+    "kaynak": {
+      "pdf": "Price Action Trends - Al Brooks (439 sayfa) - @eseckal.pdf",
+      "sayfalar": [
+        195,
+        196,
+        197,
+        259
+      ]
+    },
+    "ozet": "Çok büyük olmayan ≥4 ardışık trend çubuğu (mikro kanal) güçlü trendi gösterir; geri çekilme beklemek yerine en az küçük bir pozisyonla trend yönünde girilir. Pozisyon, orijinal girişte tutulacak swing büyüklüğü kadar ve aynı iz süren stopla alınır (dolar riski sabit tutulur, hisse sayısı azaltılır). 10 bara ulaşan geri çekilmesiz seri sürdürülemez (doruk).",
+    "kategori": "momentum",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {
+      "islem": "5m",
+      "ust_filtre": null
+    },
+    "gostergeler": [
+      {
+        "ad": "Çubuk analizi",
+        "parametreler": {}
+      }
+    ],
+    "long_giris": [
+      "≥4 ardışık boğa trend çubuğu (büyük olmayan) -> piyasadan küçük AL",
+      "Sonraki duraklama/geri çekilmelerde ekle"
+    ],
+    "short_giris": [
+      "≥4 ardışık ayı trend çubuğu -> küçük SAT"
+    ],
+    "stop_loss": "Orijinal girişle aynı iz süren stop; stop kadar riske göre küçültülmüş pozisyon (örnek: 300 hisse yerine 100 hisse, 1,50$ stop)",
+    "kar_al": "Kitapta yok",
+    "iz_suren_stop": "Önceki çubuk yükseğinin/son salınımın izlenmesi; ilave sonrası tüm pozisyon için stop sinyal çubuğunun 1 tik altı",
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Geri çekilmeyi beklemek mantıksız olabilir (kaçırma)"
+    ],
+    "pozisyon_risk": "Dolar riski sabit; geç girişte hisse sayısı swing kısmına göre azaltılır",
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "4-çubuk koşulu net; 'büyük olmayan' ve stop mesafesi öznel."
+    },
+    "belirsizlikler": [
+      "Stop mesafesi sayısal değil",
+      "'Çok büyük olmayan' çubuk eşiği yok"
+    ],
+    "uyumluluk_notu": "Orijinal: ABD vadeli/hisse (E-mini 5dk) seans grafikleri; çubuk sayımı/sinyal çubuğu mantığı ≥5m'ye ve her piyasaya OHLC ile uygulanabilir; hacim gerekmez; 'ilk saat/seans açılışı/gün tipi' kuralları seans-bağımlı (kripto 7/24'te UTC günü ile yaklaşık). Kitap öznel okuma ağırlıklı.",
+    "varyantlar": [
+      "10 çubuk geri çekilmesiz = doruk (climax), ardından yan aralık beklenir"
+    ],
+    "anahtar_kelimeler": [
+      "mikro-kanal",
+      "micro-channel",
+      "gec-giris",
+      "trend-devam"
+    ]
+  },
+  {
+    "kart_id": "daytrade__basarisiz-kurulum-ters-donusu__brooks",
+    "ad": "Desen Evrimi: Başarısız Kurulum Ters Sinyal Olur (%40 başarısızlık)",
+    "stil": "daytrade",
+    "kaynak": {
+      "pdf": "Price Action Trends - Al Brooks (439 sayfa) - @eseckal.pdf",
+      "sayfalar": [
+        198,
+        199,
+        200,
+        201
+      ]
+    },
+    "ozet": "Güvenilir kalıplar ~%40 başarısız olur ve genellikle her iki yönde giriş üreten daha büyük kalıba dönüşür: tetiklenen ama kâr hedefine ulaşamayan kurulum tuzağa düşürdüğü tarafın çıkışıyla ters yönde scalp üretir (örnek: başarısız Düşük 2 -> kama tepesi/yükseliş; başarısız Yüksek 2 -> bear). Başarısızlık birkaç çubuk yatay giderse yeni kalıp bağımsız ele alınır.",
+    "kategori": "formasyon",
+    "piyasa_rejimi": "herhangi",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {
+      "islem": "5m",
+      "ust_filtre": null
+    },
+    "gostergeler": [
+      {
+        "ad": "Çubuk sayımı",
+        "parametreler": {}
+      }
+    ],
+    "long_giris": [
+      "Düşük 2 (veya ayı kurulumu) tetiklenip başarısız olur ve fiyat sinyal çubuğunun üstüne çıkar -> ters yönde AL (tuzaktaki ayılar çıkış yakıtı)"
+    ],
+    "short_giris": [
+      "Yüksek 2 başarısız -> sinyal çubuğunun altında SAT"
+    ],
+    "stop_loss": "Koruyucu stop: sinyal çubuğunun/en son salınımın karşı ucunun 1 tik ötesi (swing stop; kitapta sayısal değer yok).",
+    "kar_al": "En azından scalp (ters yönde)",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Başarısızlık sonrası yatay seyir olduysa ilk formasyonu yok say"
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": "Güvenilir kalıplar ~%40 başarısız (kitap)",
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Başarısızlık tespiti kodlanır (tetik sonrası ters stop), ama yorum içerir."
+    },
+    "belirsizlikler": [
+      "Hedef sayısal yok"
+    ],
+    "uyumluluk_notu": "Orijinal: ABD vadeli/hisse (E-mini 5dk) seans grafikleri; çubuk sayımı/sinyal çubuğu mantığı ≥5m'ye ve her piyasaya OHLC ile uygulanabilir; hacim gerekmez; 'ilk saat/seans açılışı/gün tipi' kuralları seans-bağımlı (kripto 7/24'te UTC günü ile yaklaşık). Kitap öznel okuma ağırlıklı.",
+    "varyantlar": [],
+    "anahtar_kelimeler": [
+      "basarisiz-kurulum",
+      "failed-setup",
+      "desen-evrimi",
+      "tuzak"
+    ]
+  },
+  {
+    "kart_id": "daytrade__iki-bacak-trend__brooks",
+    "ad": "İki Bacak (ABC) Düzeltme / Trend Devamı",
+    "stil": "daytrade",
+    "kaynak": {
+      "pdf": "Price Action Trends - Al Brooks (439 sayfa) - @eseckal.pdf",
+      "sayfalar": [
+        325,
+        326,
+        327
+      ]
+    },
+    "ozet": "Her hareket iki küçük bacağa bölünür; geri çekilme ABC (karşı trend A, trend yönünde küçük B, daha derin C). İki denemede başarısız olursa piyasa genellikle tam tersini dener; başarılı olursa trendi uzatır. Trend çizgisi kırılışı ters yönde yeni bacağın başlangıcıdır. Çift tepe/dip ikinci itişin önceki ekstrem testidir.",
+    "kategori": "trend_takip",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {
+      "islem": "5m",
+      "ust_filtre": null
+    },
+    "gostergeler": [
+      {
+        "ad": "Salınım noktaları",
+        "parametreler": {}
+      }
+    ],
+    "long_giris": [
+      "Boğa trendinde iki ayaklı geri çekilme tamamlanıp trend yönünde dönüş (ikinci bacak sonu) -> AL"
+    ],
+    "short_giris": [
+      "Ayı trendinde iki ayaklı rally sonu -> SAT"
+    ],
+    "stop_loss": "Koruyucu stop: sinyal çubuğunun/en son salınımın karşı ucunun 1 tik ötesi (swing stop; kitapta sayısal değer yok).",
+    "kar_al": "Trend ekstremini test (ölçülü hareket)",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "İki bacağı sayma (zigzag) kodlanır; giriş tetikleyicisi diğer kitaplarda (H2/L2)."
+    },
+    "belirsizlikler": [
+      "Giriş detayı yok",
+      "Üç itme örtüşmesi (kama)"
+    ],
+    "uyumluluk_notu": "Orijinal: ABD vadeli/hisse (E-mini 5dk) seans grafikleri; çubuk sayımı/sinyal çubuğu mantığı ≥5m'ye ve her piyasaya OHLC ile uygulanabilir; hacim gerekmez; 'ilk saat/seans açılışı/gün tipi' kuralları seans-bağımlı (kripto 7/24'te UTC günü ile yaklaşık). Kitap öznel okuma ağırlıklı.",
+    "varyantlar": [],
+    "anahtar_kelimeler": [
+      "iki-bacak",
+      "abc",
+      "two-legs",
+      "trend"
+    ]
+  },
+  {
+    "kart_id": "daytrade__spike-ve-kanal-trendi__brooks",
+    "ad": "Spike (Ani Yükseliş) ve Kanal Trendi",
+    "stil": "daytrade",
+    "kaynak": {
+      "pdf": "Price Action Trends - Al Brooks (439 sayfa) - @eseckal.pdf",
+      "sayfalar": [
+        330,
+        331,
+        345,
+        346,
+        347
+      ]
+    },
+    "ozet": "Trend, bir veya daha fazla büyük trend çubuğundan oluşan ani yükselişle (genellikle ilk saatte) başlar, bir geri çekilme (1 çubuktan düzinelerce çubuğa) ve ardından trend yönünde bir kanal gelir. Kanal sırasında trend aralığı gibi işlem yapılır (boğa kanalında önceki çubuk dibinin altından al, salınımın bir kısmını tut; short'lar scalp). Kanal nadiren trend yönünde kırılır; kırılırsa 5 çubuk içinde çoğunlukla başarısız olur. Kanal ölçülü hareket hedefinde ve sıklıkla 3. itişte biter, ardından spike'ın başlangıcı test edilir ve trend yönünde en az %25 geri çekilme/aralık gelir.",
+    "kategori": "trend_takip",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {
+      "islem": "5m",
+      "ust_filtre": null
+    },
+    "gostergeler": [
+      {
+        "ad": "Trend kanal çizgisi",
+        "parametreler": {}
+      },
+      {
+        "ad": "EMA",
+        "parametreler": {
+          "periyot": 20
+        }
+      },
+      {
+        "ad": "Ölçülü hareket",
+        "parametreler": {}
+      }
+    ],
+    "long_giris": [
+      "Boğa spike sonrası geri çekilme ve kanal: kanal içinde önceki çubuk dibinin altına limit al (swing bir kısmı tutulur)",
+      "Kanal çift dipli boğa bayrağı oluşturursa AL"
+    ],
+    "short_giris": [
+      "Ayı spike ve kanalında rally'lerde (önceki çubuk zirvesi) scalp SAT; trend sonunda kanal alt kırılımı başarısızsa ters yön"
+    ],
+    "stop_loss": "Koruyucu stop: sinyal çubuğunun/en son salınımın karşı ucunun 1 tik ötesi (swing stop; kitapta sayısal değer yok).",
+    "kar_al": "Ölçülü hareket hedefi (spike yüksekliği) / kanalın 3. itişi",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Kırılım güçlü olursa kanal uzar",
+      "Kanal trend yönünde kırılırsa girme, geri çekilmeyi bekle (kırılım ters yöndeyse)"
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": "Trendin en yaygın türü; hemen her gün bir biçimde var (kitap)",
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Spike/kanal ayrımı, 'çubuk çok büyük' eşikleri ve kanal çizgileri öznel."
+    },
+    "belirsizlikler": [
+      "Spike büyüklük eşiği yok",
+      "Kanal çizgi çizimi öznel"
+    ],
+    "uyumluluk_notu": "Orijinal: ABD vadeli/hisse (E-mini 5dk) seans grafikleri; çubuk sayımı/sinyal çubuğu mantığı ≥5m'ye ve her piyasaya OHLC ile uygulanabilir; hacim gerekmez; 'ilk saat/seans açılışı/gün tipi' kuralları seans-bağımlı (kripto 7/24'te UTC günü ile yaklaşık). Kitap öznel okuma ağırlıklı.",
+    "varyantlar": [
+      "Zayıf spike -> trend olan aralık günü",
+      "Merdiven (geniş kanal)"
+    ],
+    "anahtar_kelimeler": [
+      "spike-ve-kanal",
+      "spike-and-channel",
+      "trend-kanali",
+      "olculu-hareket"
+    ]
+  },
+  {
+    "kart_id": "daytrade__trend-eden-ticaret-araligi-gunu__brooks",
+    "ad": "Trend Eden Ticaret Aralığı Günü",
+    "stil": "daytrade",
+    "kaynak": {
+      "pdf": "Price Action Trends - Al Brooks (439 sayfa) - @eseckal.pdf",
+      "sayfalar": [
+        364,
+        365,
+        366
+      ]
+    },
+    "ozet": "Açılış aralığı son günlerin ortalama aralığının ~1/3-1/2'si; 1-2 saat sonra kırılım ve yeni bir ticaret aralığı; ikinci aralığa geçerken önceki aralığın testine geri çekilme. Kırılım çok güçlüyse gün spike-ve-kanal'a dönüşür. Birden fazla kırılımda yalnız trend yönünde işlem yapılır. Kimi gün geri dönüş gününe döner.",
+    "kategori": "kirilim",
+    "piyasa_rejimi": "volatil",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {
+      "islem": "5m",
+      "ust_filtre": null
+    },
+    "gostergeler": [
+      {
+        "ad": "Açılış aralığı",
+        "parametreler": {}
+      },
+      {
+        "ad": "Ortalama günlük aralık",
+        "parametreler": {}
+      }
+    ],
+    "long_giris": [
+      "Açılış aralığı yüksekliği < ortalama günlük aralık/2",
+      "Aralığın üstünde kırılım, geri çekilme testinde (önceki aralığın üst ucu) trend yönünde AL"
+    ],
+    "short_giris": [
+      "Aralık altında kırılım, geri çekilmede SAT"
+    ],
+    "stop_loss": "Koruyucu stop: sinyal çubuğunun/en son salınımın karşı ucunun 1 tik ötesi (swing stop; kitapta sayısal değer yok).",
+    "kar_al": "Ölçülü hareket (aralık yüksekliği kadar)",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Gün tipi: trend aralığı; birden çok kırılımda sadece trend yönünde işlem"
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Gün tipi sınıflaması öznel; kırılım/geri çekilme girişi çubuk okumasına bağlı."
+    },
+    "belirsizlikler": [
+      "Test hangi seviyede girilir tanımsız"
+    ],
+    "uyumluluk_notu": "Orijinal: ABD vadeli/hisse (E-mini 5dk) seans grafikleri; çubuk sayımı/sinyal çubuğu mantığı ≥5m'ye ve her piyasaya OHLC ile uygulanabilir; hacim gerekmez; 'ilk saat/seans açılışı/gün tipi' kuralları seans-bağımlı (kripto 7/24'te UTC günü ile yaklaşık). Kitap öznel okuma ağırlıklı.",
+    "varyantlar": [],
+    "anahtar_kelimeler": [
+      "trend-eden-aralik-gunu",
+      "trending-trading-range",
+      "acilis-araligi",
+      "kirilim-geri-cekilmesi"
+    ]
+  },
+  {
+    "kart_id": "daytrade__acik-trend-kucuk-geri-cekilme__brooks",
+    "ad": "Açıktan Trend ve Küçük Geri Çekilme Trendi",
+    "stil": "daytrade",
+    "kaynak": {
+      "pdf": "Price Action Trends - Al Brooks (439 sayfa) - @eseckal.pdf",
+      "sayfalar": [
+        387,
+        388
+      ]
+    },
+    "ozet": "Boğa trend gününün dibi (veya ayı gününün zirvesi) ilk birkaç barda oluşur; açılış aralığı <%25 ortalama günlük aralık ise çift dip (boğa)/çift tepe (ayı) olabilir. İlk yükseliş ≥3 çubuk sürmüşse ilk geri çekilmeye girmek en azından scalp için iyidir; açılışta çok çubuklu güçlü spike varsa gün genellikle yükseliş ve trend günü olur. Büyük boşluk açılışı genellikle trend gününe yol açar (yaklaşık %60 boğa/%40 ayı).",
+    "kategori": "trend_takip",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {
+      "islem": "5m",
+      "ust_filtre": null
+    },
+    "gostergeler": [
+      {
+        "ad": "Açılış aralığı",
+        "parametreler": {}
+      },
+      {
+        "ad": "Çubuk sayımı",
+        "parametreler": {}
+      }
+    ],
+    "long_giris": [
+      "İlk yükseliş ≥3 çubuk",
+      "İlk geri çekilmede (örn. H1/H2) AL; küçük geri çekilmelerde trend yönünde ekle"
+    ],
+    "short_giris": [
+      "İlk düşüş ≥3 çubuk, ilk rallide SAT"
+    ],
+    "stop_loss": "Koruyucu stop: sinyal çubuğunun/en son salınımın karşı ucunun 1 tik ötesi (swing stop; kitapta sayısal değer yok).",
+    "kar_al": "Gün sonuna kadar swing / iz süren",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Gün başı trend işaretleri (boşluk, spike)"
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": "Büyük açılış boşluğunda yaklaşık %60 boğa trend günü, %40 ayı",
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Eşikler (%25 aralık, 3 çubuk) net; geri kalan öznel."
+    },
+    "belirsizlikler": [
+      "Çıkış kuralı yok",
+      "Boşluk büyüklüğü eşiği yok"
+    ],
+    "uyumluluk_notu": "Orijinal: ABD vadeli/hisse (E-mini 5dk) seans grafikleri; çubuk sayımı/sinyal çubuğu mantığı ≥5m'ye ve her piyasaya OHLC ile uygulanabilir; hacim gerekmez; 'ilk saat/seans açılışı/gün tipi' kuralları seans-bağımlı (kripto 7/24'te UTC günü ile yaklaşık). Kitap öznel okuma ağırlıklı. Boşluk/seans açılışı gerektirir.",
+    "varyantlar": [],
+    "anahtar_kelimeler": [
+      "acik-trend",
+      "small-pullback-trend",
+      "trend-gunu",
+      "h1",
+      "h2"
+    ]
+  },
+  {
+    "kart_id": "daytrade__geri-donus-gunu__brooks",
+    "ad": "Geri Dönüş Günü (Trend Aralığından Güne Zıt Kapanış)",
+    "stil": "daytrade",
+    "kaynak": {
+      "pdf": "Price Action Trends - Al Brooks (439 sayfa) - @eseckal.pdf",
+      "sayfalar": [
+        418,
+        419
+      ]
+    },
+    "ozet": "Gün bir yönde hareket edip kapanışa doğru zıt yönde gider; çoğu trend eden ticaret aralığı günü olarak başlar. Son birkaç saatte güçlü başlayan geri dönüş ertesi gün ve sonraki günlerde devam eder. Güçlü karşı ani yükselişlerinde küçük de olsa pozisyon alınır; geri çekilme ters yönde trend kanalına dönüşebilir.",
+    "kategori": "formasyon",
+    "piyasa_rejimi": "herhangi",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {
+      "islem": "5m",
+      "ust_filtre": null
+    },
+    "gostergeler": [
+      {
+        "ad": "Trend çizgisi",
+        "parametreler": {}
+      },
+      {
+        "ad": "EMA",
+        "parametreler": {
+          "periyot": 20
+        }
+      }
+    ],
+    "long_giris": [
+      "Trend eden aralık gününde karşı yönde güçlü spike (trend çizgisi kırılımı) -> yeni yönde AL, pozisyonun çoğunu çevir"
+    ],
+    "short_giris": [
+      "Zıt senaryo SAT"
+    ],
+    "stop_loss": "Koruyucu stop: sinyal çubuğunun/en son salınımın karşı ucunun 1 tik ötesi (swing stop; kitapta sayısal değer yok).",
+    "kar_al": "Gün sonu/ertesi gün devam",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Son 1-2 saatte başlayan dönüşler daha güçlü"
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Gün tipi retrospektif belli; canlı sinyal öznel."
+    },
+    "belirsizlikler": [
+      "Giriş tetik ve eşik yok"
+    ],
+    "uyumluluk_notu": "Orijinal: ABD vadeli/hisse (E-mini 5dk) seans grafikleri; çubuk sayımı/sinyal çubuğu mantığı ≥5m'ye ve her piyasaya OHLC ile uygulanabilir; hacim gerekmez; 'ilk saat/seans açılışı/gün tipi' kuralları seans-bağımlı (kripto 7/24'te UTC günü ile yaklaşık). Kitap öznel okuma ağırlıklı.",
+    "varyantlar": [],
+    "anahtar_kelimeler": [
+      "geri-donus-gunu",
+      "reversal-day",
+      "gun-tipi"
+    ]
+  },
+  {
+    "kart_id": "daytrade__trend-yeniden-baslama-gunu__brooks",
+    "ad": "Trend Yeniden Başlama Günü",
+    "stil": "daytrade",
+    "kaynak": {
+      "pdf": "Price Action Trends - Al Brooks (439 sayfa) - @eseckal.pdf",
+      "sayfalar": [
+        425,
+        426
+      ]
+    },
+    "ozet": "İlk saatlerde güçlü trend, ardından saatlerce süren (çoğu zaman çok dar) ticaret aralığı; trend son 1-2 saatte devam eder, ikinci bacak genellikle birinciyle aynı boyda. Aralıktan trende ters kırılım genellikle tuzaktır ve kapanışa doğru zıt yönde çıkış gelir (aralık ne kadar darsa tuzak olasılığı o kadar yüksek). Trend yönündeki kırılım geri çekilme girişi bulunur.",
+    "kategori": "trend_takip",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {
+      "islem": "5m",
+      "ust_filtre": null
+    },
+    "gostergeler": [
+      {
+        "ad": "Aralık",
+        "parametreler": {}
+      },
+      {
+        "ad": "Ölçülü hareket",
+        "parametreler": {}
+      }
+    ],
+    "long_giris": [
+      "İlk saat güçlü boğa trendi + öğle dar aralık",
+      "Aralığın üstünde kırılım geri çekilmesinde AL; hedef ikinci bacak = birinci bacak"
+    ],
+    "short_giris": [
+      "İlk saat güçlü ayı trendi + dar aralık; alt kırılım geri çekilmesinde SAT"
+    ],
+    "stop_loss": "Koruyucu stop: sinyal çubuğunun/en son salınımın karşı ucunun 1 tik ötesi (swing stop; kitapta sayısal değer yok).",
+    "kar_al": "İkinci bacak = ilk bacak uzunluğu",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Aralıktan trende ters kırılım tuzağına dikkat"
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Gün tipi ve 'dar aralık' öznel."
+    },
+    "belirsizlikler": [
+      "Aralık darlığı eşiği yok"
+    ],
+    "uyumluluk_notu": "Orijinal: ABD vadeli/hisse (E-mini 5dk) seans grafikleri; çubuk sayımı/sinyal çubuğu mantığı ≥5m'ye ve her piyasaya OHLC ile uygulanabilir; hacim gerekmez; 'ilk saat/seans açılışı/gün tipi' kuralları seans-bağımlı (kripto 7/24'te UTC günü ile yaklaşık). Kitap öznel okuma ağırlıklı.",
+    "varyantlar": [],
+    "anahtar_kelimeler": [
+      "trend-yeniden-baslama",
+      "trend-resumption",
+      "dar-aralik",
+      "tuzak"
+    ]
+  },
+  {
+    "kart_id": "daytrade__merdiven-genis-kanal-gunu__brooks",
+    "ad": "Merdivenler: Geniş Kanal Trend Günü",
+    "stil": "daytrade",
+    "kaynak": {
+      "pdf": "Price Action Trends - Al Brooks (439 sayfa) - @eseckal.pdf",
+      "sayfalar": [
+        433,
+        434
+      ]
+    },
+    "ozet": "En az üç ticaret aralığı olan trend eden aralık günü türü; geniş salınımlar, her kırılımı kırılım noktasının ötesine bir geri çekilme (kırılım testi) izler ve ardışık salınımlar örtüşür (ör. geniş ayı kanalında yeni dibe kırılımdan sonra ralli kırılım noktasının üstüne çıkar ama son salınım zirvesinin altında kalır). Her iki yönde işlem yapılabilir; trend yönündeki işlemler swing olarak tutulur.",
+    "kategori": "trend_takip",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {
+      "islem": "5m",
+      "ust_filtre": null
+    },
+    "gostergeler": [
+      {
+        "ad": "Salınım noktaları",
+        "parametreler": {}
+      }
+    ],
+    "long_giris": [
+      "Geniş boğa kanalında her yeni yükseğin kırılım testinde AL (swing bir kısmı tutulur)"
+    ],
+    "short_giris": [
+      "Geniş ayı kanalında kırılım testi rallisinde SAT"
+    ],
+    "stop_loss": "Koruyucu stop: sinyal çubuğunun/en son salınımın karşı ucunun 1 tik ötesi (swing stop; kitapta sayısal değer yok).",
+    "kar_al": "Kitapta yok",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Merdiven tespiti için kurallar öznel."
+    },
+    "belirsizlikler": [
+      "Çıkış/hedef yok"
+    ],
+    "uyumluluk_notu": "Orijinal: ABD vadeli/hisse (E-mini 5dk) seans grafikleri; çubuk sayımı/sinyal çubuğu mantığı ≥5m'ye ve her piyasaya OHLC ile uygulanabilir; hacim gerekmez; 'ilk saat/seans açılışı/gün tipi' kuralları seans-bağımlı (kripto 7/24'te UTC günü ile yaklaşık). Kitap öznel okuma ağırlıklı.",
+    "varyantlar": [],
+    "anahtar_kelimeler": [
+      "merdiven",
+      "stairs",
+      "genis-kanal",
+      "kirilim-testi"
+    ]
+  }
+]

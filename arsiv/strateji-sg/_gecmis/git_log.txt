@@ -1,0 +1,174 @@
+366d758 2026-10-13 23:32:39 +0300 sselimgenc-oss
+    TradingView eleme: 164 aday → 3 strateji kağıt teste (tv/)
+73be582 2026-10-13 20:31:39 +0000 Claude
+    tv kağıt: özsermaye mum kapanışında, pozisyonlar.csv (panel için)
+2fb32f1 2026-10-13 20:05:34 +0000 Claude
+    TV eleme: Aşama 4 — kağıt bot denendi, durum güncellendi
+7ab0948 2026-10-13 20:02:51 +0000 Claude
+    TV eleme: Aşama 2-3 — 36 strateji backtest, 3 geçti; kağıt bot taslağı
+dbfe84d 2026-10-13 15:37:29 +0000 Claude
+    TV eleme: Aşama 2 (kısmi) — motor, göstergeler, ilk strateji çevirileri
+7a5799b 2026-10-13 15:21:02 +0000 Claude
+    TV eleme: Aşama 1 — 164 betik çekildi, 41 aday seçildi
+1eb614e 2026-10-13 15:15:43 +0000 Claude
+    tv: TradingView eleme görevi ve 164 aday link
+ffebf1b 2026-10-12 20:49:46 +0300 sselimgenc-oss
+    Merge pull request #4 from sselimgenc-oss/claude/dreamy-cannon-lsimjy
+01ad5aa 2026-10-12 17:47:08 +0000 Claude
+    Kağıt bot kayıtları: KGT 1R kısmi satışları islemler.csv'ye ayrı satır (tur=kismi), yön/miktar/pnl_islem sütunları, alt portföy etiketi tutarlı (KGT-Gxx)
+b39cf44 2026-10-12 15:53:06 +0000 Claude
+    backtest_gunluk_getiri.csv: KGT2x_KMN1x sütunu (yalnız KGT 2x büyütme, izole teminat tasfiyesi + gerçek fonlama dahil)
+99b4c1d 2026-10-12 15:47:11 +0000 Claude
+    ortak/backtest_gunluk_getiri.csv: KGT, KMN ve %50/%50 birleşimin günlük backtest getirileri (koni için)
+7b322f3 2026-10-12 15:39:13 +0000 Claude
+    Panel için standart backtest işlem listesi: ortak/backtest_islemleri.csv (KGT 7.349 işlem + KMN 2.330 dönem)
+ffe26bb 2026-10-12 01:46:31 +0000 Claude
+    Kaldıraç testi raporu (KALDIRAC.md): KGT kaldıraca dayanıklı, KMN değil; öneri yalnız KGT'de en fazla 2x
+2cbfae4 2026-10-11 22:55:20 +0000 Claude
+    Kaldıraç testi: motora izole teminat tasfiyesi (varsayılan kapalı), KGT/KMN/birleşim kaldıraç betiği
+cd94dd7 2026-10-10 14:16:43 +0300 sselimgenc-oss
+    Merge pull request #3 from sselimgenc-oss/claude/dreamy-cannon-lsimjy
+9871676 2026-10-10 08:05:31 +0000 Claude
+    Kağıt bot: saatte ikinci zamanlanmış çalışma (:37), GitHub tetikleme kayıplarına karşı
+1327ebe 2026-10-10 03:25:57 +0000 Claude
+    HGT (haftalık yön / günlük işlem) testi: OOS'ta başarısız, kağıt bota eklenmedi
+c92a2b9 2026-10-09 22:10:53 +0000 Claude
+    Durum: hisse/emtia testi durduruldu
+af014c5 2026-10-09 22:07:43 +0000 Claude
+    Hisse/emtia testi raporu: KGT Mag7'de umut verici, BIST zayıf, emtia düşük getirili; KMN hisse/emtiada çalışmıyor
+1d36854 2026-10-09 22:05:56 +0000 Claude
+    Hisse/emtia testi: KGT ve KMN uyarlaması (Mag7, BIST, altın, Brent)
+5496b70 2026-10-09 22:05:42 +0000 veri-bot
+    Hisse/emtia verisi (Yahoo Finance, 2026-10-09)
+ca1856a 2026-10-09 22:04:04 +0000 Claude
+    Hisse/emtia verisi indirme iş akışı (Yahoo Finance; GitHub sunucusunda)
+8d6f8f4 2026-10-09 22:06:03 +0300 sselimgenc-oss
+    Merge pull request #1 from sselimgenc-oss/claude/dreamy-cannon-lsimjy
+b19f6d9 2026-10-09 18:57:39 +0000 Claude
+    Durum: kağıt bot PR'ı ve haftalık rutin
+1dbbbd5 2026-10-09 18:56:16 +0000 Claude
+    Kağıt bot kılavuzu (canli/README.md)
+20f1bf9 2026-10-09 18:44:11 +0000 Claude
+    Kağıt bot: her saat kendi ayının evrenini kullanır (ay geçişinde backtest ile aynı; telafi çalıştırmalarında hata düzeltildi)
+27e4861 2026-10-09 18:32:11 +0000 Claude
+    Kağıt al-sat botu: canli/ (artımlı KGT motoru backtest ile birebir, KMN defterleri, Binance spot + S3 evren + OKX fonlama, 1 dk mum içi çözüm), saatlik GitHub iş akışı (durum kagit-durum dalında, günlük issue raporu), dal deneme iş akışı
+e7afd9e 2026-10-09 18:24:47 +0000 Claude
+    Faz 10 planı: kağıt al-sat botu
+aa0829a 2026-10-09 18:19:12 +0000 Claude
+    GitHub Actions: Binance/borsa API erişim testi (kağıt al-sat botu için)
+e56042b 2026-10-09 18:07:34 +0000 Claude
+    1 dakikalık başabaş çözüm dosyası (yeniden üretilebilirlik için)
+37628a6 2026-10-09 18:07:25 +0000 Claude
+    Faz 9: derin denetim raporu (DENETIM.md), düzeltilmiş nihai sonuçlar, rapor notları
+df8faa4 2026-10-09 17:58:54 +0000 Claude
+    KGT topluluk: aynı mum başabaş belirsizliği 1 dakikalık veriyle çözülmüş haliyle (be_1dk.pkl)
+5f6e460 2026-10-09 17:55:20 +0000 Claude
+    Motor: ici_sira=3 — aynı mum başabaş belirsizliği 1 dakikalık veriyle çözülmüş BEZ dizisinden
+b873fe5 2026-10-09 17:42:45 +0000 Claude
+    Faz 9 düzeltmeleri (KMN): dengelemeler arası ağırlık kayması simülasyonu (kayma=True, canlı ile aynı), ters oynaklıkta %1 oynaklık tabanı, canlı evren backtest ile aynı (önceki ay sonu 30 günlük hacim), belge düzeltmeleri
+1677a05 2026-10-09 17:38:30 +0000 Claude
+    Faz 9 düzeltmeleri (KGT): motor aynı mum başabaş stopu (ici_sira), geçici veri boşluğunda pozisyon korunur, dönem sonu açık işlemler kaydedilir, tampon kontrolü; HTF hizalaması 1 mum erken (canlı ile aynı); veri boşluğu sonrası yapay sinyaller bastırıldı; yalnız long sinyal; rastgele kıyas v3 filtresiyle; belgeler düzeltildi
+2648f42 2026-10-09 17:28:02 +0000 Claude
+    gitignore: kök dizindeki geçici pkl dosyaları
+84c45e7 2026-10-09 17:24:26 +0000 Claude
+    Faz 9 planı: derin denetim
+b5c45c0 2026-10-09 16:45:27 +0000 Claude
+    Faz 8: Strateji 2 = KMN (piyasa nötr kesitsel momentum); ortalamaya dönüş başarısız; KGT+KMN birleşim raporu
+ad30c1f 2026-10-09 16:41:33 +0000 Claude
+    KMN canlı hedef portföy betiği (Binance açık API)
+647351d 2026-10-09 16:10:04 +0000 Claude
+    Momentum: geçmiş günü şartı, gecikmeli işlem ve bacak ayrıştırma seçenekleri
+f05259b 2026-10-09 16:03:56 +0000 Claude
+    Strateji 2 adayları: kesitsel momentum (piyasa nötr/long/kısa vadeli dönüş, risk/artık/IBS skorları) ve ortalamaya dönüş (4S/1G) test kodu
+69e641d 2026-10-09 15:58:43 +0000 Claude
+    Faz 8 planı: KGT'yi tamamlayan ikinci strateji (ortalamaya dönüş, kesitsel momentum)
+d78b179 2026-10-09 14:25:08 +0000 Claude
+    Faz 7: EPA (kullanıcı stratejisi) test raporu; breakout kısmı sağlam, pullback+mum kısmı başarısız
+42b12ca 2026-10-09 14:13:42 +0000 Claude
+    EPA: kurulum B ön hesap ızgarası parametrik (BO_N/BO_K/BO_IC/BO_V)
+b3c5d13 2026-10-09 14:10:15 +0000 Claude
+    EPA: yıllık getiriler yıl etiketiyle (kaydırılmış 4S mumlarda 2019 kaydı atlanır)
+6170412 2026-10-09 14:01:17 +0000 Claude
+    gitignore: epa pkl
+f3fc849 2026-10-09 14:01:13 +0000 Claude
+    EPA: kullanıcı stratejisinin (EMA 8/21/55, hacim, mum, S/D, trend çizgisi, pullback/breakout) test kodu
+78ce71e 2026-10-09 13:58:19 +0000 Claude
+    Faz 7 planı: EPA testi
+e6a1b11 2026-10-09 13:47:44 +0000 Claude
+    Kullanıcı stratejisi (EMA 8/21/55, hacim, mum, S/D, trend çizgisi, pullback/breakout) kitaplara göre analiz
+d16d764 2026-10-09 13:22:13 +0000 Claude
+    Faz 6 tamamlandı: KGT v3 raporu, kısa özet, Monte Carlo (topluluk)
+17503fe 2026-10-09 13:18:08 +0000 Claude
+    KGT v3 topluluk sonuçları; Monte Carlo topluluk getirilerini kullanıyor
+5b08aaf 2026-10-09 13:09:08 +0000 Claude
+    KGT v3: girişte günlük kapanış > EMA20 şartı (Brooks), risk %0.4; Faz 6 test özetleri
+f957cf1 2026-10-09 12:56:51 +0000 Claude
+    Motor: kârdaki pozisyona ekleme (piramit) için slotlu motor (_portfoy_s), S=1 eşdeğerliği doğrulandı
+7800473 2026-10-09 12:54:12 +0000 Claude
+    Motor: iz süren stop seviyesi dizisi (IZSEV); gunluk_kirilim ikinci giriş parametresi; risk/pozisyon testi sonucu
+bc6394b 2026-10-09 12:45:18 +0000 Claude
+    KGT v2 topluluk (6 gün başı): rapor, grafik, sinyal betiği; Brooks sonuçları; SONUC.md özet
+4d7605a 2026-10-09 12:38:13 +0000 Claude
+    KGT v2: ilk 15 coin, 1R'de %15 kısmi kâr, %0.5 risk; sinyal betiği güncellendi
+8c13b4b 2026-10-09 12:29:28 +0000 Claude
+    Brooks 4S ızgarası sonucu ve KGT evren-15 bulgusu (durum)
+57a0595 2026-10-09 12:25:57 +0000 Claude
+    durum
+a4a3364 2026-10-09 12:25:55 +0000 Claude
+    Brooks: H1/H2 dedektörü, Brooks trend gücü/çıkış modülü (brooks.py), 4S EMA20 iki kapanış çıkışı özelliği
+a905e5d 2026-10-09 12:22:47 +0000 Claude
+    Al Brooks PDF'leri (main birleştirildi) metinler/ altına çıkarıldı; faz 5 planı
+2354ed1 2026-10-09 12:22:19 +0000 Claude
+    Merge remote-tracking branch 'origin/main' into claude/dreamy-cannon-lsimjy
+722401c 2026-10-09 15:04:02 +0300 sselimgenc-oss
+    Add files via upload
+29b2ed4 2026-10-09 15:03:28 +0300 sselimgenc-oss
+    Add files via upload
+7c2d99f 2026-10-09 12:03:08 +0000 Claude
+    Yürüyen pencere testi: KGT geçti (Sharpe 0.99, BTC 0.60), SKA geçemedi; faz 4 tamamlandı
+8bbc7d5 2026-10-09 15:02:52 +0300 sselimgenc-oss
+    Add files via upload
+3296280 2026-10-09 11:55:28 +0000 Claude
+    Faz 4: koşullu short testi sonucu (long-only kalıyor), yürüyen pencere testi başlatıldı
+fa9fc46 2026-10-09 11:52:39 +0000 Claude
+    Mum hizalama testi: SKA hizalamaya duyarlı (şans payı), KGT dayanıklı; hizalama ortalamalı portföy sonuçları
+5bac4b4 2026-10-09 11:12:07 +0000 Claude
+    Price action stratejisi SKA (Galen Sıkışma Kırılım Arızası, 4S): rapor, sağlamlık testleri, 4S sinyal betiği
+912fc9f 2026-10-09 10:54:39 +0000 Claude
+    Durum güncellemesi: PA ızgarası çalışıyor
+2541a6a 2026-10-09 10:54:08 +0000 Claude
+    Price action: Galen Woods kurulum dedektörleri (pa.py), bekleyen emirle giriş, PA araştırma betiği
+80dc536 2026-10-09 10:48:10 +0000 Claude
+    Faz 3 (price action) planı
+0ae3745 2026-10-09 13:24:13 +0300 sselimgenc-oss
+    Delete 151 Trading Stratejisi - Zura Kakushadze ve Juan Andres Serur (800 sayfa) - @eseckal.pdf
+01abc34 2026-10-09 10:17:19 +0000 Claude
+    Kripto raporu (RAPOR_KRIPTO.md), rastgele giriş kıyası ve faz 2 tamamlandı
+1b95b8a 2026-10-09 10:13:01 +0000 Claude
+    Durum güncellemesi ve grafik etiket çakışması düzeltmesi
+a364bb6 2026-10-09 10:12:16 +0000 Claude
+    KGT nihai kripto stratejisi: rapor çıktıları, Monte Carlo, canlı sinyal betiği (backtest ile 25/25 eşleşme)
+439b393 2026-10-09 02:18:56 +0000 Claude
+    Kripto: GPK + 4S trend çıkışı adayı ve sağlamlık bulguları (durum kaydı)
+ddfa22f 2026-10-09 01:55:50 +0000 Claude
+    Ara ızgara pickle dosyalarını git dışında tut
+33acde1 2026-10-09 01:55:42 +0000 Claude
+    Kripto: göreli güç ve evren büyüklüğü filtreleri, ikinci ızgara, uç işlem sağlamlık metriği
+901aa30 2026-10-09 01:33:55 +0000 Claude
+    Kripto: BTC rejim filtresi, paralel ızgara, motor kayıt alanları
+10fbf64 2026-10-09 00:44:25 +0000 Claude
+    Kripto: indirici yeniden deneme düzeltmesi, kripto dışı tokenlerin hariç tutulması, araştırma betiği
+3872a1e 2026-10-09 00:01:08 +0000 Claude
+    Kripto faz: Binance veri indirici, zaman noktası evreni, portföy motoru ve strateji modülü
+06047f8 2026-10-08 23:41:55 +0000 Claude
+    Faz 2 (kripto) durum planı
+b07c2cc 2026-10-08 23:30:42 +0000 Claude
+    SAKK (5dk) ve GPK (1s) stratejileri, backtest sonuçları ve rapor
+6dfff5a 2026-10-08 23:25:46 +0000 Claude
+    Backtest motoru, göstergeler ve PDF tabanlı strateji modülleri
+60770da 2026-10-08 23:06:19 +0000 Claude
+    Durum takip dosyası ekle
+59938fe 2026-10-08 23:01:12 +0000 Claude
+    PDF metinlerini metinler/ klasörüne Markdown olarak çıkar
+dbe7e3a 2026-10-09 01:54:28 +0300 sselimgenc-oss
+    Add files via upload

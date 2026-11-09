@@ -1,0 +1,50 @@
+{
+ "ad": "halftrend",
+ "pine_id": "0vvrOpg1",
+ "tf": "1h",
+ "evren": [
+  "kripto",
+  "abd",
+  "bist",
+  "emtia"
+ ],
+ "neden": "Yazar Hint gün içi (NSE) için yazmış; seans/gün sonu kuralı atılıp 1 saatlik, tüm pazarlarda test.",
+ "olcut": {
+  "n": 48628,
+  "kar": -13191.915111810118,
+  "pf": 0.9305931944705443,
+  "sharpe": -0.16480074308418383,
+  "beklenti_R": -0.045303969201086744,
+  "kazanma": 0.3472690630912232,
+  "maxdd": 1.3451015695233284,
+  "dd_gun": 2832,
+  "cagr": null,
+  "calmar": null,
+  "psr": 0.3255404497670708,
+  "tutma_gun": 0.8333333333333334,
+  "ort_islem_getiri": -0.0010037444664328665,
+  "netR_toplam": -2203.0414143104463,
+  "sharpe_egitim": -0.8790977672900139,
+  "sharpe_oos": -0.20115823925125212,
+  "oos_kar": -4724.309548215657,
+  "tur": "gun",
+  "pf_maliyet2x": 0.8237971096167743,
+  "komsu_n": 8,
+  "komsu_karda": 0.0,
+  "enstr_n": 37,
+  "enstr_karda": 0.32432432432432434,
+  "maks_kor": 0.03644485460506615
+ },
+ "kurallar": {
+  "1_islem_sayisi": true,
+  "2_maks_dusus<=20": false,
+  "3_beklenti>=0.15R": false,
+  "4a_kf>=1.3": false,
+  "4b_sharpe>=1": false,
+  "5_oos": false,
+  "6_maliyet2x_kf>=1.1": false,
+  "7_komsu>=70": false,
+  "8_enstr>=60": false
+ },
+ "gecti": false
+}

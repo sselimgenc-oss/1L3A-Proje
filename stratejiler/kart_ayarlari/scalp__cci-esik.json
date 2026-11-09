@@ -1,0 +1,26 @@
+[
+  {
+    "kart_id": "scalp__cci-30-kirilim__busiere",
+    "parametreler": {
+      "mod": "esik30",
+      "cci_periyot": 9,
+      "esik": 100.0,
+      "ic_esik": 30.0,
+      "bolge_n": 3,
+      "trend_ma": 0
+    },
+    "cikis_ayarlari": null,
+    "not": "CCI(9) -100 altından -30'u yukarı kesme; pivot/%0.4 trend filtresi kodlanmadı; çıkış CCI 0 kesişimi (kart seçeneği)."
+  },
+  {
+    "kart_id": "scalp__cci-100-kirilim__busiere",
+    "parametreler": {
+      "mod": "lambert",
+      "cci_periyot": 14,
+      "esik": 100.0,
+      "trend_ma": 0
+    },
+    "cikis_ayarlari": null,
+    "not": "Lambert: +100 yukarı kesişimi long, -100 aşağı short; ters kesişimde çıkış."
+  }
+]

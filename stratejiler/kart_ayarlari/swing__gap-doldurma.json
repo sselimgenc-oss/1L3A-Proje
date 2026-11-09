@@ -1,0 +1,14 @@
+[
+ {
+  "kart_id": "swing__gap-reversal__crane",
+  "parametreler": {
+   "gap_olcum": "ilk_bar",
+   "min_gap_atr": 0.5,
+   "referans": "aralik",
+   "kapanis_yuzde": 0.5,
+   "hedef_oran": 1.0
+  },
+  "cikis_ayarlari": null,
+  "not": "Gün 2 önceki dibin altında açılır ve açılışın üstünde kapanır -> long; kart buy-stop gün 1 tepesi üstü der, burada seans sonu kapanışı + önceki kapanışa dolum hedefi (varsayım). 4h TF önerilir."
+ }
+]

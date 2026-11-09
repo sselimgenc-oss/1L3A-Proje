@@ -1,0 +1,392 @@
+[
+  {
+    "kart_id": "daytrade__cift-tepe-olculu-hedef__noonan",
+    "ad": "Çift Tepe / Çift Dip Tersine Dönüş (ölçülü hedef ailesi)",
+    "stil": "daytrade",
+    "kaynak": {
+      "pdf": "Day_Trading_-_Hızlı_Başlangıç_Kılavuzu_-_Troy_Noonan_518_sayfa.pdf",
+      "sayfalar": [
+        267,
+        268,
+        269
+      ]
+    },
+    "ozet": "Fiyat çift tepe (M) oluşturup destek (boyun) çizgisini kırınca short girilir; tepe ile destek çizgisi arası mesafe X olarak ölçülüp 1X, 1.5X ve 2X aşağı yansıtılarak hedefler belirlenir. Çift dip ayna görüntüsüdür.",
+    "kategori": "formasyon",
+    "piyasa_rejimi": "herhangi",
+    "orijinal_piyasa": "vadeli",
+    "zaman_dilimi": {
+      "islem": "12-tik momentum çubuğu / 5m",
+      "ust_filtre": null
+    },
+    "gostergeler": [],
+    "long_giris": [
+      "Çift dip formasyonu tamamlanır ve boyun (direnç) çizgisi yukarı kırılır; giriş kırılımda veya kırılım sonrası geri testte"
+    ],
+    "short_giris": [
+      "Çift tepe formasyonu: iki eşit tepe arasında destek çizgisi aşağı kırılır; giriş kırılımda (A) veya yeniden testte (C)"
+    ],
+    "stop_loss": "Çift tepenin üstü (yaklaşık 3. noktanın birkaç tik üzeri); anahtar seviye ayarı uygulanır",
+    "kar_al": "X = tepe ile destek çizgisi mesafesi. Hedef 1 = 1X, Hedef 2 = 1.5X (birincil), Hedef 3 = 2X; destek çizgisinin altına yansıtılır",
+    "iz_suren_stop": "Fiyat 1.5X'i geçince stop 1X'e",
+    "zaman_cikisi": null,
+    "filtreler": [],
+    "pozisyon_risk": "Hesabın yaklaşık %2'si tek işlemde riskte",
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Formasyon tespiti ve ölçülü hedef mekanik; 'iki eşit tepe' toleransı yorum gerektirir. Kitap bu kuralları 'örnek, öneri değil' olarak sunar; backtest şart der."
+    },
+    "belirsizlikler": [
+      "Tepe eşitliği toleransı yok",
+      "Giriş A mı C mi seçimi belirsiz"
+    ],
+    "uyumluluk_notu": "Vadeli (YM/ES/CL/GC) ve forex örnekleri; tick bazlı stop/hedef ATR veya yüzdeye çevrilmeli; momentum/tick grafiği yerine ≥5m mum kullanılmalı. Kripto/hisse/emtiada çalışır. 'Anahtar seviye ayarı' (10'un katı) fiyat ölçeğine göre uyarlanmalı.",
+    "varyantlar": [],
+    "anahtar_kelimeler": [
+      "cift-tepe",
+      "cift-dip",
+      "olculu-hedef",
+      "formasyon",
+      "destek-kirilimi"
+    ]
+  },
+  {
+    "kart_id": "daytrade__bas-omuz-olculu-hedef__noonan",
+    "ad": "Baş ve Omuzlar (boyun çizgisi kırılımı, ölçülü hedefler)",
+    "stil": "daytrade",
+    "kaynak": {
+      "pdf": "Day_Trading_-_Hızlı_Başlangıç_Kılavuzu_-_Troy_Noonan_518_sayfa.pdf",
+      "sayfalar": [
+        270,
+        271,
+        272,
+        273,
+        274,
+        275,
+        276,
+        277,
+        278,
+        279,
+        280,
+        281,
+        282
+      ]
+    },
+    "ozet": "5m grafikte baş-omuz (veya ters baş-omuz) formasyonunda boyun çizgisi kırılınca kırılım yönünde girilir; boyun çizgisi ile başın en uç noktası arası X mesafesi 1X/1.5X/2X yansıtılır. Daha iyi giriş: boyun çizgisinin geri testi.",
+    "kategori": "formasyon",
+    "piyasa_rejimi": "herhangi",
+    "orijinal_piyasa": "vadeli",
+    "zaman_dilimi": {
+      "islem": "5m",
+      "ust_filtre": null
+    },
+    "gostergeler": [],
+    "long_giris": [
+      "Ters baş-omuz: fiyat boyun çizgisini yukarı kırar; sağ omuzdan boyun çizgisinin 2 tik üstünde giriş (stop: sağ omuz dibinin 2 tik altı)"
+    ],
+    "short_giris": [
+      "Baş-omuz: fiyat yükselen/yatay boyun çizgisini aşağı kırar; giriş boyun çizgisinin 2 tik altında; veya kırılım sonrası boyun çizgisinin altından geri test"
+    ],
+    "stop_loss": "Başın (3. nokta) birkaç tik ötesi; anahtar seviye (…5 / …0) ayarı uygulanır",
+    "kar_al": "X = boyun çizgisi ile baş arası mesafe; hedefler 1X, 1.5X (birincil), 2X; Hedef 1 (1x X) ve en az 10 tik kâr sonrası stop girişin 1 tik ötesine (risksiz); Hedef 2 (1.5x X) birincil hedef, çıkış; Hedef 3 (2x X) isteğe bağlı, %95'e gelince stop Hedef 2'ye",
+    "iz_suren_stop": "MM seviyesi sonrası stop girişin 1 tik ötesine; Hedef 3'e %95 yaklaşınca stop Hedef 2'ye",
+    "zaman_cikisi": null,
+    "filtreler": [],
+    "pozisyon_risk": "Hesabın ~%2'si; örnek: YM'de 195$ risk için 10.000$ hesap",
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Formasyon tespiti swing mantığıyla kodlanabilir; kurallar net ve ölçülü hedef mekanik. Kitap bu kuralları 'örnek, öneri değil' olarak sunar; backtest şart der."
+    },
+    "belirsizlikler": [
+      "Formasyon simetri/oran toleransı yok",
+      "Giriş: kırılım mı geri test mi (iki seçenek)"
+    ],
+    "uyumluluk_notu": "Vadeli (YM/ES/CL/GC) ve forex örnekleri; tick bazlı stop/hedef ATR veya yüzdeye çevrilmeli; momentum/tick grafiği yerine ≥5m mum kullanılmalı. Kripto/hisse/emtiada çalışır. 'Anahtar seviye ayarı' (10'un katı) fiyat ölçeğine göre uyarlanmalı.",
+    "varyantlar": [],
+    "anahtar_kelimeler": [
+      "bas-omuz",
+      "ters-bas-omuz",
+      "boyun-cizgisi",
+      "olculu-hedef",
+      "formasyon"
+    ]
+  },
+  {
+    "kart_id": "daytrade__bayrak-ucgen-devam__noonan",
+    "ad": "Bayrak / Üçgen Devam Formasyonu (trend çizgisi kırılımı, kurulum çubuğu)",
+    "stil": "daytrade",
+    "kaynak": {
+      "pdf": "Day_Trading_-_Hızlı_Başlangıç_Kılavuzu_-_Troy_Noonan_518_sayfa.pdf",
+      "sayfalar": [
+        283,
+        284,
+        285,
+        286,
+        287,
+        288,
+        289,
+        290,
+        298
+      ]
+    },
+    "ozet": "Güçlü hareket (eylem) sonrası fiyat önceki hareketin yaklaşık 1/3-2/3'ü kadar geri çekilince (bayrak veya üçgen), reaksiyonun dibini izleyen trend çizgisini kıran, işlem yönündeki kurulum çubuğunun ucunun 2 tik ötesinde trend yönünde girilir.",
+    "kategori": "formasyon",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "vadeli",
+    "zaman_dilimi": {
+      "islem": "5m",
+      "ust_filtre": null
+    },
+    "gostergeler": [],
+    "long_giris": [
+      "Güçlü yukarı eylem hareketi sonrası alçalan bayrak/üçgen (tepkinin tepelerinden alçalan trend çizgisi)",
+      "Fiyat trend çizgisini yukarı kırar; kurulum çubuğu yukarı çubuk (daha yüksekte kapanış)",
+      "Giriş: kurulum çubuğunun yükseğinin 2 tik üstü (anahtar seviyeye denk gelirse 1 tik öte)",
+      "Geri çekilme önceki hareketin 1/3 ila 2/3'ü kadar olmalı"
+    ],
+    "short_giris": [
+      "Güçlü aşağı eylem hareketi sonrası yükselen bayrak; reaksiyonun diplerini izleyen trend çizgisi aşağı kırılır",
+      "Kurulum çubuğu aşağı çubuk (daha düşükte kapanış)",
+      "Giriş: kurulum çubuğunun dibinin 2 tik altı (anahtar seviye ayarı)"
+    ],
+    "stop_loss": "Bayrağın (kurulum çubuğunun) ucunun 2 tik ötesi; anahtar seviye varsa bir tik daha öte",
+    "kar_al": "X = kurulum çubuğunun ucu ile formasyon diğer ucu arası; Hedef 1 = 1X, 2 = 1.5X, 3 = 2X; Hedef 1 (1x X) ve en az 10 tik kâr sonrası stop girişin 1 tik ötesine (risksiz); Hedef 2 (1.5x X) birincil hedef, çıkış; Hedef 3 (2x X) isteğe bağlı, %95'e gelince stop Hedef 2'ye",
+    "iz_suren_stop": "Hedef 1 sonrası stop giriş+1 tik; sonra her çubuk dibini izleyen stop",
+    "zaman_cikisi": null,
+    "filtreler": [],
+    "pozisyon_risk": "Hesabın ~%2'si",
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Kurallar sayısal (2 tik, 1/3-2/3 geri çekilme, 10 tik) ama trend çizgisi çizimi ve eylem hareketi tanımı kod gerektirir. Kitap bu kuralları 'örnek, öneri değil' olarak sunar; backtest şart der."
+    },
+    "belirsizlikler": [
+      "Trend çizgisi hangi noktalardan çizilecek (en az kaç dokunuş) belirsiz",
+      "Eylem hareketinin minimum büyüklüğü yok"
+    ],
+    "uyumluluk_notu": "Vadeli (YM/ES/CL/GC) ve forex örnekleri; tick bazlı stop/hedef ATR veya yüzdeye çevrilmeli; momentum/tick grafiği yerine ≥5m mum kullanılmalı. Kripto/hisse/emtiada çalışır. 'Anahtar seviye ayarı' (10'un katı) fiyat ölçeğine göre uyarlanmalı.",
+    "varyantlar": [
+      "Üçgen: kırılımda kurulum çubuğunun 2 tik altında giriş, stop üçgenin üstünün 1.5 puan yukarısı (ES örneği)",
+      "Forex GBP/AUD: kurulum çubuğunun 3 pip üstü giriş, stop kurulum çubuğunun dibi - 2 pip"
+    ],
+    "anahtar_kelimeler": [
+      "bayrak",
+      "ucgen",
+      "trend-cizgisi-kirilimi",
+      "kurulum-cubugu",
+      "geri-cekilme",
+      "olculu-hedef"
+    ]
+  },
+  {
+    "kart_id": "daytrade__klasik-geri-cekilme-sma20__noonan",
+    "ad": "Klasik Geri Çekilme: 20 SMA'da Biten Tepki Hareketi",
+    "stil": "daytrade",
+    "kaynak": {
+      "pdf": "Day_Trading_-_Hızlı_Başlangıç_Kılavuzu_-_Troy_Noonan_518_sayfa.pdf",
+      "sayfalar": [
+        309,
+        310,
+        311,
+        312,
+        313,
+        314,
+        315,
+        316
+      ]
+    },
+    "ozet": "Güçlü bir eylem hareketinden sonra fiyat tepki olarak 20 SMA'ya geri döner; tepki hareketi 20 SMA'da biter varsayımıyla, 20 SMA'ya dokunan çubuktan sonraki işlem yönündeki kurulum çubuğunun 1-2 tik ötesinden trend yönünde girilir. 20 SMA yönü ve 200 SMA trend göstergesidir.",
+    "kategori": "trend_takip",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "vadeli",
+    "zaman_dilimi": {
+      "islem": "1 puanlık momentum çubuğu / uyarlanabilir: 5m",
+      "ust_filtre": null
+    },
+    "gostergeler": [
+      {
+        "ad": "SMA",
+        "parametreler": {
+          "periyot": 20
+        }
+      },
+      {
+        "ad": "SMA",
+        "parametreler": {
+          "periyot": 200
+        }
+      }
+    ],
+    "long_giris": [
+      "20 SMA yukarı eğimli, ilk eylem hareketi 20/200 SMA'dan kopmuş yukarı",
+      "Tepki hareketi 20 SMA'ya geri gelir, ilk dokunan çubuktan sonra yukarı yönlü kurulum çubuğu",
+      "Giriş: kurulum çubuğu yükseğinin 1-2 tik üstü"
+    ],
+    "short_giris": [
+      "20 SMA aşağı eğimli, aşağı eylem hareketi sonrası tepki yukarı 20 SMA'ya ulaşır",
+      "Sonraki aşağı yönlü kurulum çubuğu",
+      "Giriş: kurulum çubuğu dibinin 1-2 tik altı"
+    ],
+    "stop_loss": "Tepki hareketinin (geri çekilme çubuğu veya kurulum çubuğunun) ucunun 1-2 tik ötesi",
+    "kar_al": "Sonraki eylem hareketi ilk eylem hareketinin uzunluğuna benzer varsayılır; stop %50 hareketi geçince girişe, hedef ilk hareketin ~%75'i (agresif)",
+    "iz_suren_stop": "Stop breakeven'a taşındıktan sonra her çubukta önceki kapanan çubuğun 1 tik ötesine",
+    "zaman_cikisi": null,
+    "filtreler": [],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "SMA ve kurulum çubuğu kuralları mekanik; 'güçlü eylem hareketi' tanımı eşiksiz. Kitap bu kuralları 'örnek, öneri değil' olarak sunar; backtest şart der."
+    },
+    "belirsizlikler": [
+      "Eylem hareketi minimum büyüklüğü yok",
+      "20 SMA 'eğimi' tanımı yok"
+    ],
+    "uyumluluk_notu": "Vadeli (YM/ES/CL/GC) ve forex örnekleri; tick bazlı stop/hedef ATR veya yüzdeye çevrilmeli; momentum/tick grafiği yerine ≥5m mum kullanılmalı. Kripto/hisse/emtiada çalışır. 'Anahtar seviye ayarı' (10'un katı) fiyat ölçeğine göre uyarlanmalı.",
+    "varyantlar": [
+      "Çift tepe kurulumu ile birleşim (20 SMA aşağı dönerken)"
+    ],
+    "anahtar_kelimeler": [
+      "geri-cekilme",
+      "sma-20",
+      "sma-200",
+      "eylem-tepki",
+      "kurulum-cubugu"
+    ]
+  },
+  {
+    "kart_id": "daytrade__kirilim-basarisiz-kirilim__noonan",
+    "ad": "Kırılım ve Başarısız Kırılım (Failed Breakout) Ters İşlemi",
+    "stil": "daytrade",
+    "kaynak": {
+      "pdf": "Day_Trading_-_Hızlı_Başlangıç_Kılavuzu_-_Troy_Noonan_518_sayfa.pdf",
+      "sayfalar": [
+        243,
+        244,
+        245,
+        246
+      ]
+    },
+    "ozet": "Konsolidasyon veya aralıktan çıkışta kırılım yönünde (direnç üstü long, destek altı short) girilir; kırılım devam etmeyip aralığa geri dönerse, ters yönde (genellikle çift tepe/dip yapısıyla) girilir ve büyük bir hareket beklenir.",
+    "kategori": "kirilim",
+    "piyasa_rejimi": "herhangi",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {
+      "islem": "5m",
+      "ust_filtre": null
+    },
+    "gostergeler": [],
+    "long_giris": [
+      "Fiyat önceki direnci veya aralığın zirvesini yukarı kırar; giriş kırılımda",
+      "Başarısız kırılım varyantı: kırılım aşağı döner, fiyat kırılan direncin altına inip geri test edilemez (omuz oluşturur, M deseni) -> short"
+    ],
+    "short_giris": [
+      "Fiyat desteği aşağı kırar; giriş kırılımda",
+      "Başarısız aşağı kırılım -> long"
+    ],
+    "stop_loss": "Long için son tepki dibinin hemen altı (veya desteğin altı, daha geniş); short için direncin üstü",
+    "kar_al": "Kitapta belirli yok (ölçülü hedefler önerilebilir)",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Kırılım ve başarısız kırılım tanımı net sayısal kuralla verilmemiş; sezgisel."
+    },
+    "belirsizlikler": [
+      "Başarısız kırılımın hangi mumda onaylandığı belirsiz",
+      "Hedef yok"
+    ],
+    "uyumluluk_notu": "Her piyasaya uyarlanır; destek/direnç algoritması gerekir.",
+    "varyantlar": [],
+    "anahtar_kelimeler": [
+      "kirilim",
+      "basarisiz-kirilim",
+      "destek-direnc",
+      "konsolidasyon"
+    ]
+  },
+  {
+    "kart_id": "daytrade__acik-alanlar-5-tik__noonan",
+    "ad": "Açık Alanlar (Open Spaces) — E-mini 5 Tik Scalp",
+    "stil": "daytrade",
+    "kaynak": {
+      "pdf": "Day_Trading_-_Hızlı_Başlangıç_Kılavuzu_-_Troy_Noonan_518_sayfa.pdf",
+      "sayfalar": [
+        330,
+        331,
+        332,
+        333,
+        334,
+        335,
+        336,
+        337,
+        338,
+        339,
+        340,
+        349,
+        350,
+        351,
+        352,
+        353
+      ]
+    },
+    "ozet": "ABD hisse seansı verisiyle, dünün OHLC'si ve bugünün ilk 2 saatindeki swing seviyeleri çizilir; 10:30 ET sonrası (09:30 açılış) iki seviye arasında geniş boşluğa (açık alan) fiyat 3 tik girince o yönde girilip 5 tik kârla çıkılır.",
+    "kategori": "destek_direnc",
+    "piyasa_rejimi": "herhangi",
+    "orijinal_piyasa": "vadeli",
+    "zaman_dilimi": {
+      "islem": "5m",
+      "ust_filtre": null
+    },
+    "gostergeler": [
+      {
+        "ad": "SMA",
+        "parametreler": {
+          "periyot": 5,
+          "not": "stop yardımcısı"
+        }
+      }
+    ],
+    "long_giris": [
+      "Seans verisi (pre/post-market yok), 5m grafik; dünün açılış/yüksek/düşük/kapanış çizgileri + bugünün ilk 2 saatindeki swing zirve/dipleri (iki mum sol/iki sağ) çizilir",
+      "10:30 sonrası: fiyat yakın seviyeler arasındaki 'geniş açık alana' (örn. 60 tik gibi) girer",
+      "Fiyat açık alana 3 tik girince açık alan yönünde al"
+    ],
+    "short_giris": [
+      "Aynı mantık aşağı yönde: açık alan aşağıdaysa fiyat 3 tik girince short"
+    ],
+    "stop_loss": "10 tik (kitapta test edilmeli); alternatif: giriş çubuğunun dibi/önceki çubuğun dibi altı veya yatay çizginin 3 tik altı",
+    "kar_al": "5 tik kâr (açık alana 8 tik girince)",
+    "iz_suren_stop": null,
+    "zaman_cikisi": "Kitapta belirli yok",
+    "filtreler": [
+      "Sadece RTY, YM, ES, NQ",
+      "İlk 2 saatte işlem yok (seviye çıkarmak için)"
+    ],
+    "pozisyon_risk": "Hesapta her 1000$ kâr için bir sözleşme eklenir (alıntılanan tüccar, azami 20)",
+    "iddia_edilen_performans": "Alıntılanan tüccar: %93 kazanma oranı iddiası (doğrulanamamış)",
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Seviyeler algoritmik, ancak 'geniş açık alan' ölçütü ve stop kitapta tanımlı değil; kazanma oranı iddiası kanıtsız."
+    },
+    "belirsizlikler": [
+      "'Geniş' açık alanın eşiği yok",
+      "Stop kuralı 10 tik dışında test edilmemiş",
+      "Kazanma oranı yüksek iddia, düşük R:R (5 tik kâr / 10 tik risk)"
+    ],
+    "uyumluluk_notu": "Dünün OHLC'si ve swing seviyeleriyle her sürekli piyasaya uyarlanabilir; 5m uygun; seans tanımı (UTC günü) gerekir. Tick yerine ATR/yüzde kullanılmalı.",
+    "varyantlar": [],
+    "anahtar_kelimeler": [
+      "acik-alanlar",
+      "destek-direnc",
+      "gunluk-ohlc",
+      "swing-seviyesi",
+      "5-tik"
+    ]
+  }
+]

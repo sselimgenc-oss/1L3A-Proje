@@ -1,0 +1,89 @@
+kaynak_dosya,satir_indeksi_veya_madde_no,ad,yeni_strateji_adi,durum,gerekce
+dis_envanter,229,Volume-Confirmed Support/Resistance Breakout Strategy,dis__pivot-kirilim-hacim,kodlandi,pivot direnç/destek kırılımı + hacim + EMA200; çıkış kaynakta yok -> ATR stop + 2R hedef
+dis_envanter,235,Williams R Zone Scalper v1.0[BullByte],dis__williams-r-supertrend,kodlandi,"%R -80/-20 kesişimi + Supertrend süzgeci, ters sinyalde çevirme"
+dis_envanter,244,Yuri Garcia Narrow State Strategy,dis__dar-durum-ema-sma,kodlandi,"EMA20-SMA200 dar durum (1 ATR varsayım) + gövdeli/yutan mum; 2 ATR stop, 2R hedef"
+dis_envanter,245,Zone Flow S/R Strategy,dis__bolge-akis-sr,kodlandi,pivot S/R bölgesi (ATR genişlik) + yutan/pin bar + RSI; kısmi kâr kademeleri atlandı
+dis_envanter,252,AwesomeMacd,dis__ft-awesome-macd,kodlandi,MACD>0 + AO yukarı dönüş + ADX; ADX eşiği varsayım
+dis_envanter,253,Bandtastic,dis__ft-bandtastic,kodlandi,RSI/MFI düşük + EMA hızlı>yavaş + alt bant altı; eşikler varsayım
+dis_envanter,258,CCIStrategy,dis__ft-cci-cmf-mfi,kodlandi,iki periyot CCI + CMF + MFI; periyot/eşik varsayım
+dis_envanter,259,ClucMay72018,dis__ft-cluc-may2018,kodlandi,EMA100 altı + alt banttan %1.5 aşağı + hacim süzgeci; orta banda çıkış
+dis_envanter,260,CMCWinner,dis__ft-cmc-winner,kodlandi,CCI + MFI + CMO aşırı satım; CCI>100 ve MFI>80 çıkış
+dis_envanter,261,CofiBitStrategy,dis__ft-cofibit,kodlandi,EMA low altı + hızlı stokastik kesişimi + ADX; EMA high/stokastik>70 çıkış
+dis_envanter,262,CombinedBinHAndCluc,dis__ft-binh-cluc,kodlandi,BinH ve Cluc koşullarının birleşimi (alt kuralların eşikleri varsayım)
+dis_envanter,270,FOttStrategy,dis__ft-fott,kodlandi,VAR/OTT kesişimi (d2 var_ma + d5 ott yeniden kullanıldı); ADX isteğe bağlı
+dis_envanter,271,FReinforcedStrategy,,kurala_dokulemez,belge: 'ADX/SMA/EMA koşullu çoklu giriş; çıkış koşulları' — hiçbir eşik/periyot/koşul verilmemiş; tahmin edilen kural kaynağı temsil etmezdi
+dis_envanter,274,FSupertrendStrategy,dis__ft-fsupertrend,kodlandi,üç Supertrend alım teyidi / üç satım Supertrend çıkışı; periyot-çarpan varsayım
+dis_envanter,281,Low_BB,dis__ft-low-bb,kodlandi,kapanış alt bandın %2 altı; hedef %1 + zaman çıkışı + ATR stop
+dis_envanter,282,mabStra,,kurala_dokulemez,belge: 'üç SMA (mojo/hızlı/yavaş) oranı koşulu' — periyotlar ve oran eşikleri belgede yok; uydurma gerekirdi
+dis_envanter,283,MACDStrategy,dis__ft-macd-cci,kodlandi,MACD>sinyal + CCI eşiği; çıkış ters
+dis_envanter,284,MACDStrategy_crossed,dis__ft-macd-cci-kesisim,kodlandi,MACD kesişimi + CCI<=-50; çıkış kesişim + CCI>=100
+dis_envanter,287,MultiRSI,dis__ft-multi-rsi,kodlandi,SMA5>=SMA200 + RSI + üst TF RSI (htf.ust_zaman); tek üst TF varsayımı
+dis_envanter,288,PatternRecognition,dis__ft-highwave,kodlandi,CDLHIGHWAVE mumu (aralık oranlarıyla tanımlandı); renk yönü
+dis_envanter,292,ReinforcedQuickie,dis__ft-reinforced-quickie,kodlandi,EMA'ların altı + alt bant + dip
+dis_envanter,293,ReinforcedSmoothScalp,dis__ft-reinforced-smoothscalp,kodlandi,MFI + stokastik düşük; EMA high çıkış
+dis_envanter,294,Scalp,dis__ft-scalp-ema-adx,kodlandi,EMA low altı + ADX>30 + stokastik<30; EMA high/stokastik çıkış
+dis_envanter,295,Simple,dis__ft-simple-macd-rsi,kodlandi,MACD>0 ve sinyal üstü + BB üst bant eğimi + RSI>70; RSI>80 çıkış
+dis_envanter,297,SmoothScalp,dis__ft-smoothscalp,kodlandi,EMA low + ADX + MFI + stokastik
+dis_envanter,300,Strategy002,dis__ft-strategy002,kodlandi,RSI+Stoch+BB+çekiç; SAR+Fisher RSI çıkış
+dis_envanter,301,Strategy003,dis__ft-strategy003,kodlandi,RSI+Fisher RSI+SMA+MFI; SAR/Fisher çıkış
+dis_envanter,302,Strategy004,dis__ft-strategy004,kodlandi,ADX + CCI + stokastik dönüşü; ADX<25 çıkış
+dis_envanter,304,Supertrend,dis__ft-supertrend3,kodlandi,üç Supertrend (farklı varsayılan seviyeler)
+dis_envanter,305,SwingHighToSky,dis__ft-swinghightosky,kodlandi,zaman kaydırmalı CCI+RSI aşırı satım (kayma geriye doğru)
+dis_envanter,311,UniversalMACD,,kurala_dokulemez,belge: 'özel UMACD değeri belirli aralıkta' — umacd formülü ve aralık sayıları belgede yok
+dis_envanter,318,"BTFD: low/high-1 <= -%1, 2 gün tut",dis__btfd-gunluk-dip,kodlandi,"günlük aralık düşüşü >= %1 al, 2 mum tut; ek alım yok"
+dis_envanter,329,"Gösterge rezonansı MACD>0, 50<RSI<75, ADX>20",dis__gosterge-rezonansi,kodlandi,MACD>0 + 50<RSI<75 + ADX>20 durumu
+dis_envanter,340,MA5>10>30 dizilimi,dis__ma-dizilim-5-10-30,kodlandi,"SMA5>10>30 dizilimi başlayınca long, bozulunca çık"
+dis_envanter,342,"MACD+KDJ (4h), %2 stop, +%5 sonra %1 iz",dis__macd-kdj-4h,kodlandi,"MACD+KDJ onayı, %2 stop; %5 sonrası %1 iz stopu yaklaşık (başabaş 2.5R)"
+dis_envanter,343,MACD+SMA çift sinyal (SMA10/30 & MACD 12/26/9),dis__macd-sma-cift,kodlandi,SMA10/30 ve MACD kesişimi aynı pencerede
+dis_envanter,355,RSI-MA normal seviyeler 48.62/53.63,dis__rsi-ma-normal,kodlandi,RSI-MA seviyeleri 48.62/53.63; yön belirsiz -> mod parametresi (trend/donus)
+dis_envanter,356,RSI-MA uç seviyeler 39.57/67.45,dis__rsi-ma-uc,kodlandi,RSI-MA seviyeleri 39.57/67.45; mod parametresi
+dis_envanter,372,StochRSI uçları (4h),dis__stochrsi-uc-4h,kodlandi,"StochRSI uçlarında ters yönde giriş (20/80), 50'de çıkış"
+dis_envanter,376,TechIndicator GMMA L/S,dis__gmma-ls,kodlandi,GMMA kısa grup uzun grubun dışına çıkınca long/short
+dis_envanter,421,JT_Bollinger_W,dis__bollinger-w-dibi,kodlandi,Bollinger(75) W dibi + orta bant kırılımı; bant daralınca çıkış
+dis_envanter,422,JT_Dual_Thrust,,kapsam_disi,"MEVCUT KODLA KAPSANIYOR: dis__dual-thrust (d5_ek.py) aynı kuralı (önceki n seans aralığı, açılış +/- k, seans sonu kapanış) uygular; ayrıca yazılmadı (kopya olurdu)"
+dis_envanter,429,JT_RSI_omuz_bas_omuz,dis__bas-omuz-rsi-short,kodlandi,3 pivot tepe baş-omuz + RSI uyumsuzluğu teyidi + boyun kırılımı; RSI+4 / 5 mum çıkış
+dis_envanter,430,JT_Shooting_Star,dis__shooting-star-onay,kodlandi,ters çekiç + ertesi mum onayı + 7 mum tut
+ek77,14,CryptoFrog,dis__cryptofrog-dip,kodlandi,"belge kuralı eksik (SQZMI/VFI/HA tanımsız); makul varsayımlarla kodlandı (docstring); ROI tablosu/özel stop atlandı; overfit işaretli, aday olarak test edilir"
+ek77,15,Solipsis v5,dis__solipsis-rmi,kodlandi,RMI/pinball/ADR giriş kuralı; BTC bilgilendirici filtresi (çok sembollü) ve custom_sell atlandı -> ATR iz stop + zaman çıkışı
+ek77,29,Ay dönümü etkisi (turn-of-the-month),,kapsam_disi,MEVCUT KODLA KAPSANIYOR: dis__ay-donumu (d3_takvim.py) ay sonu girişi / 3. gün çıkışı kuralını zaten uygular
+ek77,38,Heikin-Ashi mum momentum ve dönüş,dis__ha-guclu-dusus-al,kodlandi,kaynak kodun gerçek davranışı (güçlenen düşüşte al); pozisyon ekleme (3 lot) atlandı: ortalama düşürme yasak
+ek77,57,Carver EWMAC ve Carry,,kapsam_disi,MEVCUT: dis__ewmac-carver (d4) ve dis__ewmac-carry (d6) bu işi zaten kodluyor
+ek77,58,EA31337 (çok stratejili Forex EA),,kurala_dokulemez,"belge yalnız EA parametrelerini (Strategy_M5=15 vb. indeksler) veriyor; hangi sinyal mantığına karşılık geldiği belgede yok, çerçeve kodudur. Ayrıca raporlanan sonuçlar zararlı"
+ek77,59,Geraked BBRSI,dis__bbrsi-donus,kodlandi,"YALNIZ saf giriş kuralı (Grid=false, SL/TP açık). Commit edilmiş ayar (Grid, GridVolMult 1.1, 20 kademe, IgnoreSL) martingale benzeri + stopsuz: KODLANMADI"
+ek77,63,Lean Futures Momentum (EMA20/60 x1.001),dis__ema-esik-trend,kodlandi,"EMA20 > EMA60 x 1.001 durumu; short/stop orijinalde yok -> ATR stop, short isteğe bağlı"
+ek77,68,TqSdk Turtle,,kapsam_disi,MEVCUT: swing__donchian-kirilim (Turtle tarzı 20/10 kanal giriş/çıkış) kapsar; belgedeki kanal penceresi hatası zaten orada yok (mevcut mum hariç)
+ek77,70,Acrypto Weighted Strategy,dis__acrypto-agirlikli,kodlandi,5 alt durum ağırlıklı skor; kademeli TP ve tepe/dip kısmi kapanışı atlandı (kural belgede yok); eğri uydurma işaretli
+ek77,72,backtesting.py çok TF RSI,dis__mtf-rsi-trend,kodlandi,günlük+haftalık RSI(30)>70 + SMA dizilimi; %8 stop; SmaCross kolu mevcut ayarlarla aynı (ek77:72 SmaCross)
+ek77,73,vectorbt BTC çift MA çaprazı,dis__ma-cift-cross,kodlandi,hızlı/yavaş MA kesişimi long+short; walk-forward şablonu kodlanmadı (motorun işi); ATR felaket stopu
+ek77,74,NautilusTrader EMA cross AUD/USD,dis__ma-cift-cross,kodlandi,ma_tipi='ema' ayarıyla aynı sınıf (EMA10/20); 100 tick barlar verimizde yok -> mum verisi
+ek77,75,Alpaca Scalping SMA20,dis__sma20-scalp,kodlandi,SMA20 yukarı kesişimi; orijinalde stop yok (zarar gün sonuna taşınır) -> ATR stop + gün sonu çıkışı; limit/iptal mantığı yok
+ek77,76,Alpaca Momentum day trading,dis__alpaca-momentum,kodlandi,"açılış sonrası 15-60 dk penceresi, %4 yükseliş, ilk 15 dk tepesi, MACD teyidi; evren filtresi atlandı (tek grafik)"
+ek77,3,GLFT market making (hftbacktest),,veri_yok,tick seviyesinde L2 emir defteri gerektirir
+ek77,4,Order book imbalance market making,,veri_yok,L2 emir defteri verisi yok
+ek77,5,Passivbot trailing_martingale,,yasak,martingale / pozisyon büyütme (zarardaki pozisyona ekleme)
+ek77,6,Passivbot ema_anchor,,yasak,kademeli ızgara + martingale benzeri entry/close grid (passivbot ailesi)
+ek77,7,OctoBot Grid Trading Mode,,yasak,ızgara; stop yok (stopsuz ızgara)
+ek77,8,OctoBot DCA Trading Mode,,yasak,DCA: ortalama düşürme yasak
+ek77,9,Uniswap v3 Bollinger bandı LP,,veri_yok,DEX havuz verisi / likidite sağlama (zincir verisi)
+ek77,10,Delta-hedge'li Uniswap v3 LP + Aave,,veri_yok,DEX/zincir verisi
+ek77,11,DEX-DEX fonlama arbitrajı,,veri_yok,çok borsalı DEX fonlama verisi; çok varlıklı/arbitraj
+ek77,12,Fonlama oranı farkı tarayıcısı,,veri_yok,çok borsalı fonlama verisi (tek grafik değil)
+ek77,13,Avellaneda-Stoikov simülasyonu,,kapsam_disi,"market making simülasyonu, L2 gerektirir; sentetik veri"
+ek77,30,Volatilite risk primi: korumalı kısa straddle,,kapsam_disi,opsiyon gerektirir
+ek77,31,Kısa put ve 16 delta iron condor,,kapsam_disi,opsiyon gerektirir
+ek77,32,SteadyOptions Anchor Trade,,kapsam_disi,opsiyon gerektirir
+ek77,77,Alpaca Options Wheel,,kapsam_disi,opsiyon gerektirir
+ek77,41,Qlib LightGBM + Alpha158,,kapsam_disi,makine öğrenmesi modeli
+ek77,42,Qlib DoubleEnsemble,,kapsam_disi,makine öğrenmesi modeli
+ek77,43,Qlib TRA,,kapsam_disi,makine öğrenmesi (LSTM)
+ek77,44,Momentum Transformer,,kapsam_disi,makine öğrenmesi (derin öğrenme)
+ek77,45,Slow Momentum with Fast Reversion,,kapsam_disi,makine öğrenmesi (LSTM)
+ek77,46,FinRL Ensemble,,kapsam_disi,pekiştirmeli öğrenme
+ek77,47,FinRL EIIE,,kapsam_disi,pekiştirmeli öğrenme; portföy
+ek77,48,FinRL-Trading ML hisse seçimi,,kapsam_disi,makine öğrenmesi; portföy
+ek77,49,FreqAI LightGBM regresyonu,,kapsam_disi,makine öğrenmesi modeli
+ek77,50,Litmus MLDP meta-labeling,,kapsam_disi,makine öğrenmesi (meta-labeling)
+ek77,51,NautilusTrader Hurst/VPIN,,veri_yok,dolar barları + tick/quote (mikroyapı) verisi yok
+ek77,52,PyBroker walk-forward ML (CMMA + doğrusal regresyon),,kapsam_disi,makine öğrenmesi modeli (regresyon)
+ek77,40,Deep Learning Statistical Arbitrage,,kapsam_disi,makine öğrenmesi; çok varlıklı
+ek77,53,ML4T ETF vaka çalışması,,kapsam_disi,makine öğrenmesi; çok varlıklı

@@ -1,0 +1,15 @@
+services:
+  dashboard:
+    build: .
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:8501:8501"
+    environment:
+      DASHBOARD_PASSWORD: "${DASHBOARD_PASSWORD:?DASHBOARD_PASSWORD gerekli}"
+      MONITOR_INTERVAL_MINUTES: "30"
+      CODEX_ALGO_RUNTIME_DIR: /app/runtime
+    volumes:
+      - codex-algo-runtime:/app/runtime
+
+volumes:
+  codex-algo-runtime:

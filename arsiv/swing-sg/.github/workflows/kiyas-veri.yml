@@ -1,0 +1,40 @@
+# Panel için karşılaştırma endeksleri (BTC, S&P 500, Nasdaq 100, BIST 100). Botlardan bağımsız; kiyas-durum dalına yazar.
+name: kiyas-veri
+on:
+  schedule:
+    - cron: "41 1 * * *"  # günlük mumlar kapanmış olur
+  workflow_dispatch:
+  push:
+    branches-ignore: [main, kagit-durum, kagit-trend-durum, kiyas-durum]
+    paths: ["scripts/kiyas_veri.py", ".github/workflows/kiyas-veri.yml"]
+permissions:
+  contents: write
+concurrency:
+  group: kiyas-veri
+  cancel-in-progress: false
+jobs:
+  indir:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Durum dalını hazırla
+        run: |
+          git config --global user.name "kagit-bot"
+          git config --global user.email "kagit-bot@users.noreply.github.com"
+          if git ls-remote --exit-code --heads origin kiyas-durum >/dev/null; then
+            git fetch -q origin kiyas-durum
+            git worktree add -q -B kiyas-durum kiyas_durum FETCH_HEAD
+          else
+            git worktree add -q --orphan -b kiyas-durum kiyas_durum
+          fi
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - run: pip install -q pandas yfinance
+      - run: python scripts/kiyas_veri.py kiyas_durum
+      - name: Kaydet
+        run: |
+          cd kiyas_durum
+          git add -A
+          git commit -q -m "kıyas $(date -u +%FT%H:%MZ)" || exit 0
+          git push -q origin kiyas-durum

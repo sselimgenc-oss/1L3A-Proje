@@ -1,0 +1,50 @@
+{
+ "ad": "ott",
+ "pine_id": "ycDUERPO",
+ "tf": "1d",
+ "evren": [
+  "kripto",
+  "abd",
+  "bist",
+  "emtia"
+ ],
+ "neden": "Zaman dilimi belirtilmemiş; günlük, tüm pazarlar.",
+ "olcut": {
+  "n": 15572,
+  "kar": 9727.673224126314,
+  "pf": 1.090458696595394,
+  "sharpe": 0.47698607935965015,
+  "beklenti_R": 0.06034452480304087,
+  "kazanma": 0.33290521448754173,
+  "maxdd": 0.32340684731567637,
+  "dd_gun": 1808,
+  "cagr": 0.05935372745670109,
+  "calmar": 0.18352650214225708,
+  "psr": 0.9557697594196342,
+  "tutma_gun": 6.0,
+  "ort_islem_getiri": 0.002311353129287655,
+  "netR_toplam": 939.6849402329525,
+  "sharpe_egitim": 0.6232401653240809,
+  "sharpe_oos": -0.041090927195582695,
+  "oos_kar": -634.8644585647417,
+  "tur": "swing",
+  "pf_maliyet2x": 1.0262153421396663,
+  "komsu_n": 10,
+  "komsu_karda": 1.0,
+  "enstr_n": 37,
+  "enstr_karda": 0.6216216216216216,
+  "maks_kor": 0.37855632245302884
+ },
+ "kurallar": {
+  "1_islem_sayisi": true,
+  "2_maks_dusus<=20": false,
+  "3_beklenti>=0.15R": false,
+  "4a_kf>=1.3": false,
+  "4b_sharpe>=1": false,
+  "5_oos": false,
+  "6_maliyet2x_kf>=1.1": false,
+  "7_komsu>=70": true,
+  "8_enstr>=60": true
+ },
+ "gecti": false
+}

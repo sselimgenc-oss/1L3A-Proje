@@ -1,0 +1,50 @@
+{
+ "ad": "utbot",
+ "pine_id": "lDGmh7ou",
+ "tf": "4h",
+ "evren": [
+  "kripto",
+  "abd",
+  "bist",
+  "emtia"
+ ],
+ "neden": "UT Bot genelde saatlik/4 saatlikte kullanılır; 4 saatlik.",
+ "olcut": {
+  "n": 29888,
+  "kar": -5187.3423587738625,
+  "pf": 0.965410724702251,
+  "sharpe": -0.15593079555196848,
+  "beklenti_R": -0.022077743738462042,
+  "kazanma": 0.36171707708779444,
+  "maxdd": 0.6098138980840819,
+  "dd_gun": 2003,
+  "cagr": -0.08970837880173876,
+  "calmar": -0.14710779646640598,
+  "psr": 0.329929902720412,
+  "tutma_gun": 1.3333333333333333,
+  "ort_islem_getiri": -0.0006421696576372889,
+  "netR_toplam": -659.8596048551535,
+  "sharpe_egitim": -0.3244052864039996,
+  "sharpe_oos": 0.14593847433362542,
+  "oos_kar": -229.23604753031123,
+  "tur": "swing",
+  "pf_maliyet2x": 0.8784239381612805,
+  "komsu_n": 12,
+  "komsu_karda": 0.0,
+  "enstr_n": 37,
+  "enstr_karda": 0.4864864864864865,
+  "maks_kor": 0.09267233429585253
+ },
+ "kurallar": {
+  "1_islem_sayisi": true,
+  "2_maks_dusus<=20": false,
+  "3_beklenti>=0.15R": false,
+  "4a_kf>=1.3": false,
+  "4b_sharpe>=1": false,
+  "5_oos": false,
+  "6_maliyet2x_kf>=1.1": false,
+  "7_komsu>=70": false,
+  "8_enstr>=60": false
+ },
+ "gecti": false
+}

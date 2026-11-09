@@ -1,0 +1,10 @@
+[
+ {
+  "kart_id": "swing__abcd-deseni__graham",
+  "parametreler": {
+   "ab_oran": 1.0
+  },
+  "cikis_ayarlari": null,
+  "not": "Klasik AB=CD, D noktasında onaylı dönüş. Stop/hedef kartta yok: D ötesi stop + AD'nin 0.618 düzeltmesi hedefi (varsayım)."
+ }
+]

@@ -1,0 +1,26 @@
+# Hisse / emtia verisi indirme (Yahoo Finance, yfinance). Bu ortam Yahoo'ya erişemediği için GitHub sunucusunda çalışır;
+# CSV'leri bu dala yazar. Yalnız bu dalda, dosya değişince çalışır.
+name: veri-hisse
+on:
+  push:
+    branches: [claude/dreamy-cannon-lsimjy]
+    paths: [".github/workflows/veri_hisse.yml", "araclar/veri_hisse.py"]
+permissions:
+  contents: write
+jobs:
+  indir:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q yfinance pandas
+      - run: python araclar/veri_hisse.py
+      - name: Veriyi dala yaz
+        run: |
+          git config user.name "veri-bot"; git config user.email "veri-bot@users.noreply.github.com"
+          git add veri_dis/
+          git commit -q -m "Hisse/emtia verisi (Yahoo Finance, $(date -u +%F))" || exit 0
+          git push -q origin HEAD:claude/dreamy-cannon-lsimjy

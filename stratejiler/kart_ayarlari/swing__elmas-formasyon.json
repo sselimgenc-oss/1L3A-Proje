@@ -1,0 +1,20 @@
+[
+ {
+  "kart_id": "daytrade__elmas-ust-asagi-kirilim__bulkowski",
+  "parametreler": {
+   "long": false,
+   "hedef_olcu": 0.69
+  },
+  "cikis_ayarlari": null,
+  "not": "Elmas tepe, yalnız aşağı kırılım (short); hedef = elmas yüksekliği x %69; stop formasyon tepesi üstü (stop_modu=son yerine uc istenirse stop_modu='uc')."
+ },
+ {
+  "kart_id": "daytrade__elmas-alt-yukari-kirilim__bulkowski",
+  "parametreler": {
+   "short": false,
+   "hedef_olcu": 0.63
+  },
+  "cikis_ayarlari": null,
+  "not": "Elmas dip, yalnız yukarı kırılım (long); hedef = yükseklik x %63; stop formasyon dibi altı."
+ }
+]

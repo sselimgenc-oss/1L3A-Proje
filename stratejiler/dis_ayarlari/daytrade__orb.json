@@ -1,0 +1,194 @@
+[
+ {
+  "dis_id": "tv:HnelYN0A",
+  "kaynak_dosya": "arsiv/strateji-sg/tv/pine/HnelYN0A.pine",
+  "parametreler": {
+   "aralik_dk": 420,
+   "gunde_tek": true,
+   "hedef_r": 0.0,
+   "seans_saat": 0.0,
+   "short": true,
+   "stop_modu": "karsi",
+   "ust_yari_filtre": false
+  },
+  "cikis_ayarlari": null,
+  "not": "YAKLAŞIK: gece aralığı 00:00-07:00 UTC high/low kırılımı; kaynak %1 sabit stop veya aralık stopu ve 20:00 kapanış; ailede aralık karşı ucu stopu ve UTC gün sonu çıkışı."
+ },
+ {
+  "dis_id": "tv:KX7AgFeB",
+  "kaynak_dosya": "arsiv/strateji-sg/tv/pine/KX7AgFeB.pine",
+  "parametreler": {
+   "aralik_dk": 15,
+   "atr_k": 1.5,
+   "giris_penceresi_saat": 6.5,
+   "seans_saat": 13.5,
+   "short": true,
+   "stop_modu": "atr",
+   "ust_yari_filtre": false
+  },
+  "cikis_ayarlari": null,
+  "not": "YAKLAŞIK: 08:30 Chicago (~13:30 UTC) 15 dk açılış aralığı kırılımı, 08:30-15:00 giriş penceresi; Fibonacci seviyeleri yok; ATR stop çarpanı varsayım (1.5)."
+ },
+ {
+  "dis_id": "tv:sf4Hf10r",
+  "kaynak_dosya": "arsiv/strateji-sg/tv/pine/sf4Hf10r.pine",
+  "parametreler": {
+   "aralik_dk": 5,
+   "hedef_r": 2.25,
+   "seans_saat": 0.0,
+   "short": true,
+   "stop_modu": "karsi",
+   "ust_yari_filtre": false
+  },
+  "cikis_ayarlari": null,
+  "not": "YAKLAŞIK: 20:00 NY (~00:00 UTC) 5 dk aralık mumu kırılımı; $445 risk/$1000 ödül = hedef 2.25R olarak çevrildi (sabit dolar stop yerine aralık karşı ucu)."
+ },
+ {
+  "dis_id": "tv:t7Tp4qnu",
+  "kaynak_dosya": "arsiv/strateji-sg/tv/pine/t7Tp4qnu.pine",
+  "parametreler": {
+   "aralik_dk": 5,
+   "seans_saat": 13.5,
+   "short": true,
+   "stop_modu": "karsi",
+   "ust_yari_filtre": false
+  },
+  "cikis_ayarlari": null,
+  "not": "YAKLAŞIK: 5 dk açılış aralığı kırılımı (NY açılışı ~13:30 UTC); gün sonu çıkışı."
+ },
+ {
+  "dis_id": "tv:zpIyp7KB",
+  "kaynak_dosya": "arsiv/strateji-sg/tv/pine/zpIyp7KB.pine",
+  "parametreler": {
+   "aralik_dk": 60,
+   "seans_saat": 13.5,
+   "short": true,
+   "stop_modu": "karsi",
+   "ust_yari_filtre": false
+  },
+  "cikis_ayarlari": null,
+  "not": "Initial Balance = açılıştan ilk saat (NY 13:30 UTC varsayımı); aralığın üst/alt kırılımı. YAKLAŞIK: seans saati varsayım."
+ },
+ {
+  "dis_id": "tv:6HYQYnFl",
+  "kaynak_dosya": "arsiv/strateji-sg/tv_eleme_dali/pine/6HYQYnFl.pine",
+  "parametreler": {
+   "aralik_dk": 30,
+   "seans_saat": 13.5,
+   "short": true,
+   "stop_modu": "karsi",
+   "ust_yari_filtre": false
+  },
+  "cikis_ayarlari": {
+   "kismi": [
+    [
+     1.0,
+     0.5
+    ]
+   ]
+  },
+  "not": "YAKLAŞIK: ilk 30 dk aralık kırılımı, gün sonu kapanış; hacim patlaması filtresi yok; iki kademeli kâr alma 1R'de yarım çıkış olarak yaklaşıldı."
+ },
+ {
+  "dis_id": "tv:7SSRGEbI",
+  "kaynak_dosya": "arsiv/strateji-sg/tv_eleme_dali/pine/7SSRGEbI.pine",
+  "parametreler": {
+   "aralik_dk": 15,
+   "giris_penceresi_saat": 1.75,
+   "hedef_r": 1.0,
+   "seans_saat": 13.5,
+   "short": true,
+   "stop_modu": "orta",
+   "ust_yari_filtre": false
+  },
+  "cikis_ayarlari": null,
+  "not": "09:30-09:45 NY (13:30 UTC) aralığı; 09:45-11:30 giriş penceresi; stop aralık orta noktası, R:R 1:1. Günlük EMA200 hizalama ve pullback limit emri yok; 11:30 kesim yerine gün sonu çıkışı."
+ },
+ {
+  "dis_id": "tv:AeYVHi9k",
+  "kaynak_dosya": "arsiv/strateji-sg/tv_eleme_dali/pine/AeYVHi9k.pine",
+  "parametreler": {
+   "aralik_dk": 15,
+   "atr_k": 3.0,
+   "atr_periyot": 15,
+   "giris_penceresi_saat": 2.5,
+   "hedef_r": 2.0,
+   "seans_saat": 13.5,
+   "short": true,
+   "stop_modu": "atr",
+   "ust_yari_filtre": false
+  },
+  "cikis_ayarlari": null,
+  "not": "YAKLAŞIK: 09:30-09:45 NY ORB, giriş 12:00'ye kadar, ATR(15)x3 stop, 2R hedef; CHoCH ve FVG teyidi yok."
+ },
+ {
+  "dis_id": "tv:FJZvYKaB",
+  "kaynak_dosya": "arsiv/strateji-sg/tv_eleme_dali/pine/FJZvYKaB.pine",
+  "parametreler": {
+   "aralik_dk": 60,
+   "giris_penceresi_saat": 3.5,
+   "hedef_r": 2.5,
+   "seans_saat": 13.0,
+   "short": false,
+   "stop_modu": "karsi",
+   "ust_yari_filtre": false
+  },
+  "cikis_ayarlari": null,
+  "not": "YAKLAŞIK: 13:00 UTC saatlik aralık, yalnız long, giriş 14:00-16:30; kaynakta stop = aralık yüksekliği, hedef 2.5x aralık (ailede aralık karşı ucu stopu ve hedef 2.5R ~ benzer); hacim ve rejim filtresi yok."
+ },
+ {
+  "dis_id": "jesuistm:jesuistm:JT_London_Breakout",
+  "kaynak_dosya": "arsiv/algo-sg/dis_kaynak/jesuistm.py",
+  "parametreler": {
+   "aralik_dk": 480,
+   "seans_saat": 0.0,
+   "short": true,
+   "stop_modu": "karsi",
+   "ust_yari_filtre": false
+  },
+  "cikis_ayarlari": null,
+  "not": "YAKLAŞIK: Tokyo seansı aralığı (00:00-08:00 UTC varsayımı) Londra açılışında (08:00 UTC) kırılım."
+ },
+ {
+  "cikis_ayarlari": {
+   "zaman_cikisi_mum": 6
+  },
+  "dis_id": "ek77:60",
+  "kaynak_dosya": "stratejiler/ek_kaynaklar/ek_77_strateji.md#60 (omnisis/mt4-ea-obr JamesORB.mq4)",
+  "not": "YAKLAŞIK: Frankfurt/Londra açılış aralığı = 08:00 UTC (EET 10:00) saatlik mumun H/L'i; kırılım = aralık +/- ATR(72) tamponu (kaynakta bekleyen STOP emri, burada kapanış kırılımı); SL 1.65 x ATR(72), TP 1 x ATR(72) (hedef_r = 1/1.65); 17:30 EET kapanışı = giriş penceresi 7.5 saat + 6 mum zaman çıkışı (1h mum varsayımı); kaynaktaki +0.0002 sabiti yok. Veri 1h. Kış saati (EET=UTC+2).",
+  "parametreler": {
+   "aralik_dk": 60,
+   "atr_k": 1.65,
+   "atr_periyot": 72,
+   "giris_penceresi_saat": 7.5,
+   "gunde_tek": true,
+   "hedef_r": 0.606,
+   "seans_saat": 8.0,
+   "short": true,
+   "stop_modu": "atr",
+   "tampon_atr": 1.0,
+   "ust_yari_filtre": false
+  }
+ },
+ {
+  "cikis_ayarlari": {
+   "zaman_cikisi_mum": 6
+  },
+  "dis_id": "ek77:60-yaz",
+  "kaynak_dosya": "stratejiler/ek_kaynaklar/ek_77_strateji.md#60 (omnisis/mt4-ea-obr JamesORB.mq4)",
+  "not": "YAKLAŞIK: ek77:60 ile aynı, yaz saati (EEST=UTC+3 -> açılış 07:00 UTC). Sabit UTC seansı kullanıldığından DST geçişlerinde kayma var; iki ayar ayrı koşturulur.",
+  "parametreler": {
+   "aralik_dk": 60,
+   "atr_k": 1.65,
+   "atr_periyot": 72,
+   "giris_penceresi_saat": 7.5,
+   "gunde_tek": true,
+   "hedef_r": 0.606,
+   "seans_saat": 7.0,
+   "short": true,
+   "stop_modu": "atr",
+   "tampon_atr": 1.0,
+   "ust_yari_filtre": false
+  }
+ }
+]

@@ -1,0 +1,13 @@
+[
+ {
+  "kart_id": "scalp__kirilim-sonrasi-geri-test__schroder",
+  "parametreler": {
+   "uzunluk": 20,
+   "pencere": 8,
+   "temas_atr": 0.3,
+   "hedef_r": 2.0
+  },
+  "cikis_ayarlari": null,
+  "not": "Kartta stop/hedef sayısal değil: stop seviyenin ötesi (tamponlu), hedef 2R (aile kaydı: önceki hareket/2R)."
+ }
+]

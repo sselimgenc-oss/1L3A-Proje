@@ -1,0 +1,47 @@
+{
+ "ad": "st_ema_btc",
+ "pine_id": "NgSIfKQx",
+ "tf": "1h",
+ "evren": [
+  "kripto"
+ ],
+ "neden": "Yazar BTCUSD 1 saatlik için yazmış; kripto 1 saatlik (14 coin).",
+ "olcut": {
+  "n": 21534,
+  "kar": -530.5561548419546,
+  "pf": 0.9976733824968355,
+  "sharpe": 0.11210221177405398,
+  "beklenti_R": -0.0015235271390416647,
+  "kazanma": 0.34517507197919567,
+  "maxdd": 0.6107023589000085,
+  "dd_gun": 1582,
+  "cagr": -0.006981697209393567,
+  "calmar": -0.011432242085930267,
+  "psr": 0.6236657391920193,
+  "tutma_gun": 0.6666666666666666,
+  "ort_islem_getiri": -3.4493295104427396e-05,
+  "netR_toplam": -32.80763341212321,
+  "sharpe_egitim": 0.3883116905925505,
+  "sharpe_oos": -0.5661485994575505,
+  "oos_kar": -5391.694763261283,
+  "tur": "gun",
+  "pf_maliyet2x": 0.8854097381138136,
+  "komsu_n": 14,
+  "komsu_karda": 0.2857142857142857,
+  "enstr_n": 14,
+  "enstr_karda": 0.5,
+  "maks_kor": 0.29684372626688094
+ },
+ "kurallar": {
+  "1_islem_sayisi": true,
+  "2_maks_dusus<=20": false,
+  "3_beklenti>=0.15R": false,
+  "4a_kf>=1.3": false,
+  "4b_sharpe>=1": false,
+  "5_oos": false,
+  "6_maliyet2x_kf>=1.1": false,
+  "7_komsu>=70": false,
+  "8_enstr>=60": false
+ },
+ "gecti": false
+}

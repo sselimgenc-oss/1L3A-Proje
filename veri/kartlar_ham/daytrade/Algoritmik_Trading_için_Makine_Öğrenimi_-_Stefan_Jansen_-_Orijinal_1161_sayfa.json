@@ -1,0 +1,81 @@
+[
+ {
+  "kart_id": "daytrade__kointegrasyon-pairs-z-skor-2__jansen",
+  "ad": "Kointegrasyon Pairs Trading (Z-skor ±2, Kalman Hedge Oranı)",
+  "stil": "daytrade",
+  "kaynak": {
+   "pdf": "Algoritmik_Trading_için_Makine_Öğrenimi_-_Stefan_Jansen_-_Orijinal_1161_sayfa.pdf",
+   "sayfalar": [
+    420,
+    421,
+    422,
+    423,
+    424,
+    425,
+    426,
+    427
+   ]
+  },
+  "ozet": "Johansen/Engle-Granger testiyle kointegre çiftler seçilir; spread'in 2 yarı ömürlük hareketli ortalama ve std ile z-skoru ±2'yi aşınca spread'in aşırı olan bacağı satılır, ucuzu alınır; spread hareketli ortalamayı geri kesince çıkılır. Hedge oranı Kalman filtresiyle.",
+  "kategori": "ortalamaya_donus",
+  "piyasa_rejimi": "yatay",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+   "islem": "1d",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "Kointegrasyon (Johansen)",
+    "parametreler": {}
+   },
+   {
+    "ad": "Kalman Filtresi (hedge oranı)",
+    "parametreler": {}
+   },
+   {
+    "ad": "Z-skor",
+    "parametreler": {
+     "pencere": "2 x yarı ömür",
+     "esik": 2
+    }
+   }
+  ],
+  "long_giris": [
+   "Spread z-skoru < -2 (spread, hareketli ortalamasının 2 std altında) -> long spread (kaybedeni al, kazananı short)"
+  ],
+  "short_giris": [
+   "Spread z-skoru > +2 -> short spread"
+  ],
+  "stop_loss": "Kitap açık stop vermiyor: 'alternatif olarak stop-loss kullanılabilir'; çıkış yoksa pozisyon kointegrasyon testi geçmeyince kapanır",
+  "kar_al": "Spread hareketli ortalamayı ters yönde keserse çık",
+  "iz_suren_stop": null,
+  "zaman_cikisi": "Kointegrasyon testlerinin yenilendiği lookback sonunda çıkış",
+  "filtreler": [
+   "Formasyon dönemi: kointegrasyon testi (aile bazlı hata düzeltmesi)",
+   "Spread yüksek varyanslı olmalı"
+  ],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": "Kitap: pairs trading stratejisi backtest edilmiş (Jansen), performans rakamı bu çıkarımda alınmadı.",
+  "kodlanabilirlik": {
+   "puan": 1,
+   "gerekce": "Mantık net ama kointegrasyon seçimi, Kalman filtresi ve yarı ömür tahmini istatistiksel altyapı gerektirir; kural olarak kodlanması sade değil."
+  },
+  "belirsizlikler": [
+   "Stop-loss kitapta kural olarak verilmemiş.",
+   "Yarı ömür tahmini yöntemi (OU regresyonu) kodda.",
+   "Çift seçimi bazlı ML değil ama istatistik altyapı gerekir."
+  ],
+  "uyumluluk_notu": "İki enstrüman ve eş zamanlı veri gerekir; ≥5m'ye uyarlanabilir; kripto perpetual'da BTC/ETH gibi çiftlerde olur; hacim gerekmez.",
+  "varyantlar": [
+   "Mesafe (distance) yaklaşımı: Bollinger bantlarıyla giriş-çıkış"
+  ],
+  "anahtar_kelimeler": [
+   "pairs",
+   "kointegrasyon",
+   "z-skor",
+   "kalman",
+   "stat-arb"
+  ]
+ }
+]

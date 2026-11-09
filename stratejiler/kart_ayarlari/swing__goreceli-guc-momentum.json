@@ -1,0 +1,17 @@
+[
+  {
+    "kart_id": "swing__goreceli-guc__ladha",
+    "parametreler": {
+      "mom_mod": "esik",
+      "mom_n": 90,
+      "mom_esik": 0.1,
+      "zirve_n": 50,
+      "yakinlik": 0.95,
+      "ema_periyot": 20,
+      "zaman_mum": 5,
+      "short": false
+    },
+    "cikis_ayarlari": null,
+    "not": "Endekse göre RS yerine sembolün kendi 90g momentumu (>=%10); 50g zirveye yakın + 10/20 EMA geri çekilme; çıkış EMA altı kapanış veya 5 mum."
+  }
+]

@@ -1,0 +1,29 @@
+[
+ {
+  "kart_id": "daytrade__gun-ici-bas-omuz-ust-kisa__bulkowski",
+  "parametreler": {
+   "long": false,
+   "hedef_olcu": 1.0
+  },
+  "cikis_ayarlari": null,
+  "not": "Yalnız short; hedef = baş-boyun yüksekliği; stop sağ omuz zirvesi üstü. 5m kart 15m'ye taşındı."
+ },
+ {
+  "kart_id": "daytrade__gun-ici-bas-omuz-dip-uzun__bulkowski",
+  "parametreler": {
+   "short": false,
+   "hedef_olcu": 1.0
+  },
+  "cikis_ayarlari": null,
+  "not": "Yalnız long; hedef = baş dibi-yaka yüksekliği; stop sağ omuz altı. 5m kart 15m'ye taşındı."
+ },
+ {
+  "kart_id": "swing__bas-omuz-sag-omuz-filtre__scheier",
+  "parametreler": {
+   "sag_omuz_filtre": 1,
+   "hedef_olcu": 1.0
+  },
+  "cikis_ayarlari": null,
+  "not": "Sağ omuz kuralı (sağ omuz başa sol omuzdan yakın değil). Giriş boyun +1 tik stop emri -> kapanış kırılımı. 1m kart 15m'ye taşındı."
+ }
+]

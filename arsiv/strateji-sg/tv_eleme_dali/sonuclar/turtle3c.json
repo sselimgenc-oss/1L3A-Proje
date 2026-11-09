@@ -1,0 +1,47 @@
+{
+ "ad": "turtle3c",
+ "pine_id": "9qFCuXqF",
+ "tf": "4h",
+ "evren": [
+  "kripto"
+ ],
+ "neden": "PDF: ETHUSDT 4 saat.",
+ "olcut": {
+  "n": 3942,
+  "kar": 21769.50223676251,
+  "pf": 1.2531720655456344,
+  "sharpe": 0.7978274211560911,
+  "beklenti_R": 0.15856971837447284,
+  "kazanma": 0.3736681887366819,
+  "maxdd": 0.20427714246515977,
+  "dd_gun": 1171,
+  "cagr": 0.16015949741146018,
+  "calmar": 0.7840304376627747,
+  "psr": 0.9915124558928543,
+  "tutma_gun": 3.3333333333333335,
+  "ort_islem_getiri": 0.007731431540199776,
+  "netR_toplam": 625.0818298321719,
+  "sharpe_egitim": 0.9263790601902343,
+  "sharpe_oos": 0.354167426619823,
+  "oos_kar": 2273.916301335663,
+  "tur": "swing",
+  "pf_maliyet2x": 1.1869062697258634,
+  "komsu_n": 14,
+  "komsu_karda": 1.0,
+  "enstr_n": 14,
+  "enstr_karda": 0.8571428571428571,
+  "maks_kor": 0.40880485379398396
+ },
+ "kurallar": {
+  "1_islem_sayisi": true,
+  "2_maks_dusus<=20": false,
+  "3_beklenti>=0.15R": true,
+  "4a_kf>=1.3": false,
+  "4b_sharpe>=1": false,
+  "5_oos": false,
+  "6_maliyet2x_kf>=1.1": true,
+  "7_komsu>=70": true,
+  "8_enstr>=60": true
+ },
+ "gecti": false
+}

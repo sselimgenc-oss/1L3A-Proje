@@ -1,0 +1,146 @@
+[
+ {
+  "kart_id": "scalp__altin-hac-olum-hac-rejim__schroder",
+  "parametreler": {
+   "hizli": 50,
+   "yavas": 200,
+   "ma_tipi": "ema"
+  },
+  "cikis_ayarlari": null,
+  "not": "EMA 50/200 altın haç/ölüm haçı; rejim değişince yön çevirme = ters kesişimde çıkış + ters giriş."
+ },
+ {
+  "kart_id": "swing__hareketli-ortalama-kesisim__ladha",
+  "parametreler": {
+   "hizli": 10,
+   "yavas": 20,
+   "ma_tipi": "ema"
+  },
+  "cikis_ayarlari": null,
+  "not": "YAKLAŞIK: kitapta 10/20, 20/50, 50/200 kombinasyonları; 10/20 seçildi. %10 kâr alma ve 'aşırı alım değil' filtresi yok; stop ATR tabanlı."
+ },
+ {
+  "kart_id": "swing__ma-gecis-rsi4__sharpe",
+  "parametreler": {
+   "hizli": 26,
+   "yavas": 50,
+   "ma_tipi": "ema",
+   "trend_ma": 60,
+   "short": false
+  },
+  "cikis_ayarlari": null,
+  "not": "YAKLAŞIK: 26 EMA x 50 SMA yerine ikisi de EMA; fiyat>60 MA trend filtresi; RSI(4) aşırı satım şartı ve MA eğimi yok. Yalnız long."
+ },
+ {
+  "kart_id": "swing__bow-ties__landry",
+  "parametreler": {
+   "hizli": 10,
+   "yavas": 30,
+   "ma_tipi": "ema"
+  },
+  "cikis_ayarlari": {
+   "kismi": [
+    [
+     1.0,
+     0.5
+    ]
+   ],
+   "basabas_r_esigi": 1.0
+  },
+  "not": "YAKLAŞIK: 10/20/30 üçlü hizalama yerine 10/30 kesişimi; düzeltme barı girişi yok. Yarısı 1R'de kapanır, kalan başabaş."
+ },
+ {
+  "kart_id": "swing__ema9-13-50-hibrit__jordan",
+  "parametreler": {
+   "hizli": 9,
+   "yavas": 13,
+   "ma_tipi": "ema",
+   "trend_ma": 50
+  },
+  "cikis_ayarlari": null,
+  "not": "9/13 EMA kesişimi, 50 MA trend filtresi (13>50 yerine fiyat>50 MA: YAKLAŞIK). Çıkış: ters kesişim."
+ },
+ {
+  "kart_id": "swing__sma4-9-18-kesisim__jordan",
+  "parametreler": {
+   "hizli": 4,
+   "yavas": 9,
+   "ma_tipi": "sma",
+   "trend_ma": 18
+  },
+  "cikis_ayarlari": null,
+  "not": "4/9 SMA kesişimi, 18 MA trend filtresi (4 ve 9 SMA'nın 18 üstünde olması yerine fiyat>18 MA: YAKLAŞIK)."
+ },
+ {
+  "kart_id": "swing__sma-10-20-kesisim__make",
+  "parametreler": {
+   "hizli": 10,
+   "yavas": 20,
+   "ma_tipi": "sma"
+  },
+  "cikis_ayarlari": null,
+  "not": "10/20 SMA kesişimi, ters kesişimde çıkış."
+ },
+ {
+  "kart_id": "swing__golden-cross-50-200__make",
+  "parametreler": {
+   "hizli": 50,
+   "yavas": 200,
+   "ma_tipi": "sma"
+  },
+  "cikis_ayarlari": null,
+  "not": "50/200 SMA altın/ölüm çaprazı; ters çaprazda pozisyon kapanır."
+ },
+ {
+  "kart_id": "swing__sma10-20-kesisim__razaq",
+  "parametreler": {
+   "hizli": 10,
+   "yavas": 20,
+   "ma_tipi": "sma"
+  },
+  "cikis_ayarlari": null,
+  "not": "10/20 SMA kesişimi; ters kesişimde çıkış."
+ },
+ {
+  "kart_id": "swing__sma-kesisim-10-50__hogan",
+  "parametreler": {
+   "hizli": 10,
+   "yavas": 50,
+   "ma_tipi": "sma"
+  },
+  "cikis_ayarlari": null,
+  "not": "10/50 SMA kesişimi; ters kesişimde çıkış (fiyat>50 MA filtresi kesişimle örtüşür)."
+ },
+ {
+  "kart_id": "swing__ema-9-13-50__hogan",
+  "parametreler": {
+   "hizli": 9,
+   "yavas": 13,
+   "ma_tipi": "ema",
+   "trend_ma": 50,
+   "short": false
+  },
+  "cikis_ayarlari": null,
+  "not": "9/13 EMA, 13 EMA>50 yerine fiyat>50 MA (YAKLAŞIK); kartta yalnız long."
+ },
+ {
+  "kart_id": "swing__sma50-200-hac__johnson",
+  "parametreler": {
+   "hizli": 50,
+   "yavas": 200,
+   "ma_tipi": "sma"
+  },
+  "cikis_ayarlari": null,
+  "not": "50/200 SMA altın/ölüm haçı; ters kesişimde çıkış."
+ },
+ {
+  "kart_id": "swing__sma20-50-kesisim__johnson",
+  "parametreler": {
+   "hizli": 20,
+   "yavas": 50,
+   "ma_tipi": "sma"
+  },
+  "cikis_ayarlari": null,
+  "not": "20/50 MA kesişimi (tip belirtilmemiş, SMA varsayıldı); hacim onayı yok."
+ }
+]

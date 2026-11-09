@@ -1,0 +1,16 @@
+[
+ {
+  "kart_id": "daytrade__bosluk-takoz-hacim-kirilim__boxer",
+  "parametreler": {
+   "gap_olcum": "ilk_bar",
+   "min_gap_atr": 2.5,
+   "konsol_n": 2,
+   "pencere": 8,
+   "hacim_k": 1.5,
+   "hedef_r": 2.0,
+   "stop_tampon_atr": 0.25
+  },
+  "cikis_ayarlari": null,
+  "not": "YAKLAŞIK: %4-5 boşluk -> 2.5 ATR(1h) ilk mum hareketi; 1m takoz -> 2 mumluk kutu; düşük hacimli geri çekilme şartı yok; kart yalnız long (short ayna)."
+ }
+]

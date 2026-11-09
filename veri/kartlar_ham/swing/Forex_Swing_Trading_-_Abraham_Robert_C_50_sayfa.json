@@ -1,0 +1,194 @@
+[
+ {
+  "kart_id": "swing__destek-direnc-sicrama__abraham",
+  "ad": "Destek/Direnç Sıçraması (swing noktalarından yatay seviye)",
+  "stil": "swing",
+  "kaynak": {
+   "pdf": "Forex_Swing_Trading_-_Abraham_Robert_C_50_sayfa.pdf",
+   "sayfalar": [
+    12,
+    13,
+    14
+   ]
+  },
+  "ozet": "Önceki swing tepe/diplerinden çizilen yatay destek/direnç seviyesinden geri dönüşte seviye yönünde işlem açılır; stop seviyenin ötesinde, hedef karşı seviye yakınındadır.",
+  "kategori": "destek_direnc",
+  "piyasa_rejimi": "yatay",
+  "orijinal_piyasa": "forex",
+  "zaman_dilimi": {
+   "islem": "4h",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "Destek/Direnç",
+    "parametreler": {}
+   }
+  ],
+  "long_giris": [
+   "Önceki swing dipleri/tepeleri yatay destek ve direnç olarak çizilir",
+   "Fiyat destek bölgesinden geri sıçrar -> long"
+  ],
+  "short_giris": [
+   "Fiyat direnç seviyesinden geri sıçrar -> short"
+  ],
+  "stop_loss": "Long için destek bölgesinin hemen altı; short için direnç bölgesinin hemen üstü",
+  "kar_al": "Direnç (short için destek) bölgesine yakın",
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [
+   "Seviye kırılırsa rol değiştirir (kırılan destek direnç olur): sıçrama yerine kırılım/geri test mantığı"
+  ],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 1,
+   "gerekce": "Seviye seçimi ve 'sıçrama' onayı öznel; sayısal eşik yok."
+  },
+  "belirsizlikler": [
+   "Swing noktası tanımı yok",
+   "Sıçrama onayı (mum, kapanış) yok",
+   "Stop tamponu yok"
+  ],
+  "uyumluluk_notu": "Günlük/4s tabanlı genel kural; pip dili var ama mantık her piyasada uygulanır. Hacim gerekmez. 5m'ye uyarlama güvenilmez.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "destek-direnc",
+   "sicrama",
+   "swing-noktasi"
+  ]
+ },
+ {
+  "kart_id": "swing__trend-kanali-konsolidasyon__abraham",
+  "ad": "Trend Kanalı Altında Konsolidasyon Kırılımı Alımı",
+  "stil": "swing",
+  "kaynak": {
+   "pdf": "Forex_Swing_Trading_-_Abraham_Robert_C_50_sayfa.pdf",
+   "sayfalar": [
+    22,
+    23,
+    24,
+    25,
+    26
+   ]
+  },
+  "ozet": "Güçlü bir trend kanalında yalnızca trend yönünde işlem yapılır; kanalın dibine yakın (yükseliş trendi) konsolidasyon oluşup fiyat konsolidasyonun tepesini geçince long alınır.",
+  "kategori": "trend_takip",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "forex",
+  "zaman_dilimi": {
+   "islem": "1d",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "Trend kanalı",
+    "parametreler": {
+     "dokunus": 3
+    }
+   }
+  ],
+  "long_giris": [
+   "Yükseliş kanalı: 3 swing dibi trend çizgisine bağlanır, paralel çizgi swing tepelerinden geçer",
+   "Fiyat kanalın dibine yakın birkaç gün yatay konsolide olur (trend çizgisi konsolidasyona yakın/hafif altında)",
+   "Fiyat konsolidasyonun en yüksek noktasını geçince long"
+  ],
+  "short_giris": [
+   "Düşüş kanalında kanalın üst çizgisine yakın konsolidasyon, konsolidasyonun dibi kırılınca short (kitap örnekle belirtir; tam kural yazılmamış)"
+  ],
+  "stop_loss": null,
+  "kar_al": "Karşı kanal çizgisi (üst çizgi) hedef olabilir",
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [
+   "Yalnız birincil trend yönünde işlem",
+   "Fiyat kanaldan çıkarsa kanal geçersiz; yeni çizgiler çizilmeli"
+  ],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 1,
+   "gerekce": "Kanal çizimi ve 'konsolidasyon' tanımı öznel; stop kuralı yok."
+  },
+  "belirsizlikler": [
+   "Stop yeri yok",
+   "Konsolidasyon için min. bar/aralık yok",
+   "Kanal çizimi için algoritmik tanım yok"
+  ],
+  "uyumluluk_notu": "Günlük/4s tabanlı genel kural; pip dili var ama mantık her piyasada uygulanır. Hacim gerekmez. 5m'ye uyarlama güvenilmez.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "trend-kanali",
+   "konsolidasyon",
+   "kirilim",
+   "trend-cizgisi"
+  ]
+ },
+ {
+  "kart_id": "swing__ma-5-13-geri-cekilme-mum-onay__abraham",
+  "ad": "Hareketli Ortalama (5/13) Geri Çekilme + Mum Onayı",
+  "stil": "swing",
+  "kaynak": {
+   "pdf": "Forex_Swing_Trading_-_Abraham_Robert_C_50_sayfa.pdf",
+   "sayfalar": [
+    35,
+    37,
+    38
+   ]
+  },
+  "ozet": "Genel trend hareketli ortalamalarla belirlenir; trend içi geri çekilmede fiyat MA'ya inip trend devamını gösteren mum formasyonu (yutan, çekiç vb.) oluşunca trend yönünde girilir; MA kırılınca çıkılır.",
+  "kategori": "trend_takip",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "forex",
+  "zaman_dilimi": {
+   "islem": "1d",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "MA",
+    "parametreler": {
+     "periyotlar": [
+      5,
+      13
+     ],
+     "tur": "belirtilmemiş"
+    }
+   }
+  ],
+  "long_giris": [
+   "MA'lar ve tepe/dip yapısı ile yükseliş trendi doğrulanır",
+   "Fiyat MA'ya doğru geri çekilir ve MA destek olarak çalışır",
+   "Trend devamını gösteren mum desenleri (boğa yutan, çekiç) görülünce long (MA'ya dokunmak tek başına yeterli değil)"
+  ],
+  "short_giris": [
+   "Düşüş trendinde MA'ya yükseliş, kayan yıldız/ayı yutan mumu ile short; 5 MA'nın 13 MA'yı aşağı kesmesi aşağı salınım sinyali"
+  ],
+  "stop_loss": null,
+  "kar_al": "Yükseliş trendinde fiyat MA'nın altına inerse çıkış (trend dönüşü); RSI aşırı alım/satım ile teyit isteğe bağlı",
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 1,
+   "gerekce": "MA konumu ölçülebilir ama mum formasyonu seçimi ve stop/hedef eksik; kaba yaklaşıkla kodlanır."
+  },
+  "belirsizlikler": [
+   "MA türü (SMA/EMA) yok",
+   "Stop yok",
+   "Mum formasyonu tanımları yalnızca sözel",
+   "Sinyal 5/13 kesişimi mi geri çekilme mi tam net değil"
+  ],
+  "uyumluluk_notu": "Günlük/4s tabanlı genel kural; pip dili var ama mantık her piyasada uygulanır. Hacim gerekmez. 5m'ye uyarlama güvenilmez.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "hareketli-ortalama",
+   "geri-cekilme",
+   "yutan-mum",
+   "cekic",
+   "ma-kesisim"
+  ]
+ }
+]

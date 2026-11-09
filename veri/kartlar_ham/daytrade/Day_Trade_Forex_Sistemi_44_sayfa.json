@@ -1,0 +1,466 @@
+[
+  {
+    "kart_id": "daytrade__bollinger-sikisma-kirilim__bortucene",
+    "ad": "Bollinger Sıkışma Kırılımı (çoklu gösterge onaylı)",
+    "stil": "daytrade",
+    "kaynak": {
+      "pdf": "Day_Trade_Forex_Sistemi_44_sayfa.pdf",
+      "sayfalar": [
+        19,
+        20,
+        21,
+        22,
+        23,
+        24
+      ]
+    },
+    "ozet": "Bollinger bantları daralıp sıkıştıktan sonra fiyat dış banttan çıkınca kırılım yönünde işleme girilir; EMA10/EMA50/orta bant, Parabolik SAR, MACD histogramı, RSI ve yavaş stokastik aynı yönü onaylamalıdır.",
+    "kategori": "kirilim",
+    "piyasa_rejimi": "volatil",
+    "orijinal_piyasa": "forex",
+    "zaman_dilimi": {
+      "islem": "5m",
+      "ust_filtre": "15m (isteğe bağlı; 5/10/15m grafikler kullanılabilir)"
+    },
+    "gostergeler": [
+      {
+        "ad": "EMA",
+        "parametreler": {
+          "periyot": 10
+        }
+      },
+      {
+        "ad": "EMA",
+        "parametreler": {
+          "periyot": 50
+        }
+      },
+      {
+        "ad": "Bollinger",
+        "parametreler": {
+          "periyot": 20,
+          "sapma": 2,
+          "tip": "EMA tabanli orta bant"
+        }
+      },
+      {
+        "ad": "Parabolik SAR",
+        "parametreler": {
+          "ayar": "varsayilan"
+        }
+      },
+      {
+        "ad": "MACD",
+        "parametreler": {
+          "hizli": 12,
+          "yavas": 26,
+          "sinyal": 9,
+          "gosterim": "histogram"
+        }
+      },
+      {
+        "ad": "RSI",
+        "parametreler": {
+          "periyot": 14
+        }
+      },
+      {
+        "ad": "Stokastik",
+        "parametreler": {
+          "k": 5,
+          "d": 3,
+          "yavaslatma": 3,
+          "tip": "yavas"
+        }
+      }
+    ],
+    "long_giris": [
+      "Bollinger bantları belirgin biçimde daralmış (sıkışma)",
+      "Fiyat üst Bollinger bandının dışına çıkar",
+      "Fiyat EMA10, orta bant ve EMA50 üzerinde",
+      "Parabolik SAR noktaları fiyatın altında",
+      "MACD histogramı > 0",
+      "RSI > 50",
+      "Yavaş stokastik %K, %D üzerinde"
+    ],
+    "short_giris": [
+      "Bantlar daralmış",
+      "Fiyat alt Bollinger bandının dışına çıkar",
+      "Fiyat EMA10, orta bant ve EMA50 altında",
+      "SAR noktaları fiyatın üstünde",
+      "MACD histogramı < 0",
+      "RSI < 50",
+      "Yavaş stokastik %K, %D altında"
+    ],
+    "stop_loss": "Sabit 15-20 pip (rahat edilen seviye); hesabın %5-7'sinden fazla risk alınmaz",
+    "kar_al": "Hedef işlem başına 5-20 pip; limit emri ile sabit kar (örnekler 25-50 pip, bir örnekte 100 pip)",
+    "iz_suren_stop": "Kazanan işlemde stop girişe çekilir, sonra fiyatı izleyen stop",
+    "zaman_cikisi": null,
+    "filtreler": [
+      "En iyi saatler: seans açılışından 3-5 saat sonrası (Londra 03-08, New York 08-16 EST)"
+    ],
+    "pozisyon_risk": "Stop hesabın %5-7'sini aşmayacak şekilde; 1 lot EUR/USD pip başına 10$",
+    "iddia_edilen_performans": "İşlem başına 50-500 dolar hedefi; 5-20 pip hedef (kitap iddiası, kanıt yok)",
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Tüm onay koşulları göstergelere dayalı ölçülebilir; 'sıkışma' eşiği ve çıkış kuralı yorum gerektirir."
+    },
+    "belirsizlikler": [
+      "'Daralmış bant' için sayısal eşik kitapta yok",
+      "Kar al hedefi ve iz süren stop mesafesi net değil",
+      "Tüm onayların aynı mumda mı yoksa birkaç mum içinde mi gerçekleşeceği belirsiz"
+    ],
+    "uyumluluk_notu": "Forex'e özgü pip hedefleri ATR/yüzde ile uyarlanmalı; hacim gerekmez. 5m ve üstü uygun, kripto/hisse/emtiada çalışır (pip yerine yüzde).",
+    "varyantlar": [
+      "5, 10 veya 15 dakikalık grafik"
+    ],
+    "anahtar_kelimeler": [
+      "bollinger",
+      "sikisma",
+      "kirilim",
+      "ema",
+      "parabolik-sar",
+      "macd",
+      "rsi",
+      "stokastik"
+    ]
+  },
+  {
+    "kart_id": "daytrade__ema50-trend-geri-cekilme__bortucene",
+    "ad": "EMA50 Trend Yönlü Geri Çekilme İşlemi (EMA10/BB orta bant sıçraması)",
+    "stil": "daytrade",
+    "kaynak": {
+      "pdf": "Day_Trade_Forex_Sistemi_44_sayfa.pdf",
+      "sayfalar": [
+        25,
+        26,
+        27,
+        28
+      ]
+    },
+    "ozet": "15 dakikalık grafikte fiyat, EMA10 ve Bollinger orta bandı EMA50'nin üstündeyse sadece alım, altındaysa sadece satım aranır; fiyat EMA10, orta bant veya EMA50'den sıçradığında göstergeler onayla birlikte girilir.",
+    "kategori": "trend_takip",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "forex",
+    "zaman_dilimi": {
+      "islem": "5m",
+      "ust_filtre": "15m (trend yönü: fiyat ve EMA10/BB20 EMA50'ye göre)"
+    },
+    "gostergeler": [
+      {
+        "ad": "EMA",
+        "parametreler": {
+          "periyot": 10
+        }
+      },
+      {
+        "ad": "EMA",
+        "parametreler": {
+          "periyot": 50
+        }
+      },
+      {
+        "ad": "Bollinger",
+        "parametreler": {
+          "periyot": 20,
+          "sapma": 2,
+          "tip": "EMA tabanli orta bant"
+        }
+      },
+      {
+        "ad": "Parabolik SAR",
+        "parametreler": {
+          "ayar": "varsayilan"
+        }
+      },
+      {
+        "ad": "MACD",
+        "parametreler": {
+          "hizli": 12,
+          "yavas": 26,
+          "sinyal": 9,
+          "gosterim": "histogram"
+        }
+      },
+      {
+        "ad": "RSI",
+        "parametreler": {
+          "periyot": 14
+        }
+      },
+      {
+        "ad": "Stokastik",
+        "parametreler": {
+          "k": 5,
+          "d": 3,
+          "yavaslatma": 3,
+          "tip": "yavas"
+        }
+      }
+    ],
+    "long_giris": [
+      "15m: fiyat, EMA10 ve BB orta bant EMA50 üzerinde",
+      "Fiyat EMA10, orta bant veya EMA50'ye değip yukarı sıçrar",
+      "Parabolik SAR, MACD histogramı (>0), RSI (>50), yavaş stokastik (%K>%D) birlikte alım verir"
+    ],
+    "short_giris": [
+      "15m: fiyat, EMA10 ve BB orta bant EMA50 altında",
+      "Fiyat EMA10, orta bant veya EMA50'ye değip aşağı sıçrar",
+      "SAR, MACD histogramı (<0), RSI (<50), yavaş stokastik (%K<%D) birlikte satım verir"
+    ],
+    "stop_loss": "Sabit 15-20 pip",
+    "kar_al": "Hedef en az 20-30 pip (örneklerde)",
+    "iz_suren_stop": "Kazanan işlemde stop girişe, sonra izleyen stop",
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Fiyat EMA50'nin yanlış tarafında ise o yönde işlem yok"
+    ],
+    "pozisyon_risk": "Hesabın %5-7'si",
+    "iddia_edilen_performans": "Örneklerde 20-30 pip kâr",
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Trend filtresi ve onaylar mekanik; 'sıçrama' tanımı (değme toleransı) yorum gerektirir."
+    },
+    "belirsizlikler": [
+      "Sıçrama/değme için sayısal tolerans yok",
+      "Kar al hedefi kesin değil"
+    ],
+    "uyumluluk_notu": "Forex pip hedefleri uyarlanmalı; hacim gerekmez; ≥5m uyumlu; kripto/hisse/emtiada çalışır.",
+    "varyantlar": [
+      "Trendi önceden tahmin: MACD histogramı sıfırı geçip RSI 50'yi geçince EMA dizilimi dönmeden girmek (s.28)"
+    ],
+    "anahtar_kelimeler": [
+      "ema",
+      "trend",
+      "geri-cekilme",
+      "bollinger",
+      "macd",
+      "rsi",
+      "stokastik"
+    ]
+  },
+  {
+    "kart_id": "daytrade__zirve-dip-donus__bortucene",
+    "ad": "Zirve/Dip Aşırı Alım-Satım Dönüş İşlemi",
+    "stil": "daytrade",
+    "kaynak": {
+      "pdf": "Day_Trade_Forex_Sistemi_44_sayfa.pdf",
+      "sayfalar": [
+        29,
+        30,
+        31,
+        32
+      ]
+    },
+    "ozet": "Yatay/dalgalı piyasada RSI ve yavaş stokastik aşırı satım (veya alım) bölgesinden dönerken, MACD histogramı da yön değiştirince trende karşı dönüş işlemi açılır.",
+    "kategori": "ortalamaya_donus",
+    "piyasa_rejimi": "yatay",
+    "orijinal_piyasa": "forex",
+    "zaman_dilimi": {
+      "islem": "10m",
+      "ust_filtre": "15m (10 ve 15m en iyisi; 5m daha riskli)"
+    },
+    "gostergeler": [
+      {
+        "ad": "MACD",
+        "parametreler": {
+          "gosterim": "histogram"
+        }
+      },
+      {
+        "ad": "RSI",
+        "parametreler": {
+          "periyot": 14
+        }
+      },
+      {
+        "ad": "Stokastik",
+        "parametreler": {
+          "k": 5,
+          "d": 3,
+          "tip": "yavas"
+        }
+      }
+    ],
+    "long_giris": [
+      "RSI aşırı satımdan yukarı döner",
+      "Yavaş stokastik %K, %D'yi yukarı keser (aşırı satımdan)",
+      "MACD histogramı yükselmeye başlar"
+    ],
+    "short_giris": [
+      "RSI aşırı alımdan aşağı döner",
+      "Yavaş stokastik %K, %D'yi aşağı keser (aşırı alımdan)",
+      "MACD histogramı düşmeye başlar"
+    ],
+    "stop_loss": "Sabit 15-20 pip",
+    "kar_al": "5-20 pip hedef",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Dalgalı (yatay) piyasada en iyi; trende karşı olduğu için riskli"
+    ],
+    "pozisyon_risk": "Hesabın %5-7'si",
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Gösterge dönüşleri ölçülebilir, aşırı bölge eşikleri verilmemiş."
+    },
+    "belirsizlikler": [
+      "Aşırı alım/satım eşikleri belirtilmemiş (varsayılan 70/30, 80/20 varsayılabilir)",
+      "Kar al ve stop net değil"
+    ],
+    "uyumluluk_notu": "Pip bazlı hedefler uyarlanmalı; hacim gerekmez; ≥5m uygun; yatay rejim filtresi gerekir.",
+    "varyantlar": [],
+    "anahtar_kelimeler": [
+      "rsi",
+      "stokastik",
+      "macd",
+      "asiri-alim-satim",
+      "donus"
+    ]
+  },
+  {
+    "kart_id": "daytrade__mikro-ticaret-ema3-bb18__bortucene",
+    "ad": "Mikro Ticaret: EMA3 / Bollinger(18) Orta Bant Kesişimi (1 dk)",
+    "stil": "daytrade",
+    "kaynak": {
+      "pdf": "Day_Trade_Forex_Sistemi_44_sayfa.pdf",
+      "sayfalar": [
+        38,
+        39,
+        40,
+        41,
+        42,
+        44
+      ]
+    },
+    "ozet": "1 dakikalık mum grafikte 3 EMA, Bollinger(18, EMA) orta bandını keserken MACD histogramı ve RSI aynı yönde (0 / 50) hizalanırsa küçük kâr için girilir.",
+    "kategori": "momentum",
+    "piyasa_rejimi": "herhangi",
+    "orijinal_piyasa": "forex",
+    "zaman_dilimi": {
+      "islem": "1m",
+      "ust_filtre": null
+    },
+    "gostergeler": [
+      {
+        "ad": "EMA",
+        "parametreler": {
+          "periyot": 3
+        }
+      },
+      {
+        "ad": "Bollinger",
+        "parametreler": {
+          "periyot": 18,
+          "sapma": "belirtilmemis",
+          "tip": "EMA tabanli orta bant"
+        }
+      },
+      {
+        "ad": "MACD",
+        "parametreler": {
+          "ayar": "varsayilan",
+          "gosterim": "histogram"
+        }
+      },
+      {
+        "ad": "RSI",
+        "parametreler": {
+          "periyot": 14
+        }
+      }
+    ],
+    "long_giris": [
+      "EMA3 orta bandı (BB18) yukarı keser",
+      "MACD histogramı > 0",
+      "RSI > 50"
+    ],
+    "short_giris": [
+      "EMA3 orta bandı aşağı keser",
+      "MACD histogramı < 0",
+      "RSI < 50"
+    ],
+    "stop_loss": "Kitapta sayısal yok (sıkı stop, kazanırken stop kaydırma)",
+    "kar_al": "Küçük kârlar al (sabit hedef yok)",
+    "iz_suren_stop": "Kazanan işlemde stop kaydırılır",
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Daha yavaş alternatif ortalamalar: EMA7/BB18, EMA5/BB20, EMA10/BB20"
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Giriş koşulları net; çıkış/stop sayısal verilmemiş."
+    },
+    "belirsizlikler": [
+      "Stop ve kar al mesafesi kitapta yok",
+      "Bollinger sapma çarpanı belirtilmemiş"
+    ],
+    "uyumluluk_notu": "1m kullanıyor: 1L3A'da ≥5m'ye uyarlama gerekir (alternatif yavaş kombinasyonlar yardımcı). Forex'e özgü değil; hacim gerekmez.",
+    "varyantlar": [
+      "EMA7/BB18, EMA5/BB20, EMA10/BB20"
+    ],
+    "anahtar_kelimeler": [
+      "ema-kesisim",
+      "bollinger-orta-bant",
+      "macd",
+      "rsi",
+      "1-dakika"
+    ]
+  },
+  {
+    "kart_id": "daytrade__haber-sonrasi-1dk__bortucene",
+    "ad": "Haber Sonrası 1 Dakikalık Momentum",
+    "stil": "daytrade",
+    "kaynak": {
+      "pdf": "Day_Trade_Forex_Sistemi_44_sayfa.pdf",
+      "sayfalar": [
+        43,
+        44
+      ]
+    },
+    "ozet": "Planlı ekonomik haberden bir iki dakika sonra, 1m grafikte başlayan sert hareketin yönünde işleme girilir.",
+    "kategori": "momentum",
+    "piyasa_rejimi": "volatil",
+    "orijinal_piyasa": "forex",
+    "zaman_dilimi": {
+      "islem": "1m",
+      "ust_filtre": null
+    },
+    "gostergeler": [],
+    "long_giris": [
+      "Haber açıklandıktan 1-2 dk sonra fiyat yukarı sert hareket eder; yönde giriş"
+    ],
+    "short_giris": [
+      "Haber sonrası fiyat aşağı sert hareket eder; yönde giriş"
+    ],
+    "stop_loss": null,
+    "kar_al": "Örneklerde 20-30 pip",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Duyurudan önce pozisyon açılmaz",
+      "En çok Avrupa/Londra seansında gece EST saatlerinde"
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": "Örneklerde 20-30 pip hareket",
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Haber takvimi gerektirir, giriş tetikleyicisi ve stop tanımlı değil."
+    },
+    "belirsizlikler": [
+      "Giriş tetikleyicisi ve stop yok",
+      "Haber verisi gerekir"
+    ],
+    "uyumluluk_notu": "Haber takvimi verisi gerekli; 1m; 1L3A için uygun değil (≥5m, haber verisi yok).",
+    "varyantlar": [],
+    "anahtar_kelimeler": [
+      "haber",
+      "ekonomik-takvim",
+      "1-dakika",
+      "momentum"
+    ]
+  }
+]

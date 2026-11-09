@@ -118,6 +118,14 @@
   "satir_sayisi": 2
  },
  {
+  "kart_id": "scalp__superscalp-vsa__holmes__scalp-stratejisi",
+  "neden": "Ayni kitabin ikinci kopyasi (Gavin Holmes Scalp Stratejisi PDF); kart_id tekrari giderildi. Kapali/tescilli VSA"
+ },
+ {
+  "kart_id": "scalp__ultra-hacim-seviye__holmes__scalp-stratejisi",
+  "neden": "Ayni kitabin ikinci kopyasi (Gavin Holmes Scalp Stratejisi PDF); kart_id tekrari giderildi. Kodlanabilirlik 0"
+ },
+ {
   "kart_id": "scalp__kisa-sikisma-kisa-faiz__schroder",
   "neden": "Short interest (kisa faiz orani) verisi gerektirir; verimizde yok"
  },

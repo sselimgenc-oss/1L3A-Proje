@@ -1,0 +1,47 @@
+{
+ "ad": "mr_2bar",
+ "pine_id": "8I2576zL",
+ "tf": "1d",
+ "evren": [
+  "kripto"
+ ],
+ "neden": "Zaman dilimi belirtilmemiş; yazar tek kripto (ONE) için yazdığından günlük + kripto evreni.",
+ "olcut": {
+  "n": 828,
+  "kar": 1391.4602577058877,
+  "pf": 1.4984584389493796,
+  "sharpe": 0.6862998900534262,
+  "beklenti_R": 0.020226468742155352,
+  "kazanma": 0.6582125603864735,
+  "maxdd": 0.03277816827703299,
+  "dd_gun": 1126,
+  "cagr": 0.0168842198746455,
+  "calmar": 0.5151056560557088,
+  "psr": 0.9741759827532199,
+  "tutma_gun": 4.0,
+  "ort_islem_getiri": 0.016270983568937414,
+  "netR_toplam": 16.74751611850463,
+  "sharpe_egitim": 0.7055137526974805,
+  "sharpe_oos": 0.6437553930127898,
+  "oos_kar": 428.03892723808895,
+  "tur": "swing",
+  "pf_maliyet2x": 1.4199459128258594,
+  "komsu_n": 12,
+  "komsu_karda": 1.0,
+  "enstr_n": 14,
+  "enstr_karda": 1.0,
+  "maks_kor": 0.2067154461969465
+ },
+ "kurallar": {
+  "1_islem_sayisi": true,
+  "2_maks_dusus<=20": true,
+  "3_beklenti>=0.15R": false,
+  "4a_kf>=1.3": true,
+  "4b_sharpe>=1": false,
+  "5_oos": true,
+  "6_maliyet2x_kf>=1.1": true,
+  "7_komsu>=70": true,
+  "8_enstr>=60": true
+ },
+ "gecti": false
+}

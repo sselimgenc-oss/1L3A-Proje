@@ -1,0 +1,298 @@
+[
+ {
+  "kart_id": "daytrade__guclu-kirilim-yonunde-giris__brooks",
+  "ad": "Güçlü Kırılımda Kırılım Yönünde Giriş (güç işaretleri, spike dibi stop, küçük pozisyon)",
+  "stil": "daytrade",
+  "kaynak": {
+   "pdf": "Price Action Trading Ranges - Al Brooks (572 sayfa) - @eseckal.pdf",
+   "sayfalar": [
+    46,
+    47,
+    48,
+    49,
+    50,
+    51,
+    52,
+    53,
+    59,
+    60,
+    72,
+    73,
+    74,
+    75,
+    76,
+    80,
+    81,
+    82,
+    83,
+    84,
+    85,
+    86,
+    87,
+    88,
+    89,
+    99,
+    100,
+    101,
+    102,
+    109,
+    110,
+    111,
+    112,
+    120
+   ]
+  },
+  "ozet": "Çoğu kırılım başarısız olur; ama güç işaretlerinin çoğunu taşıyan kırılımda (büyük trend gövdesi, küçük kuyruk, ardışık trend çubukları, mikro boşluk) devam ihtimali yaklaşık %60-70'tir. Bu durumda kırılım çubuğu kapanışında veya 1-2 tiklik geri çekilmede (ya da 1-2 dk grafikte H1/H2) küçük pozisyonla girilir; stop spike dibinin altındadır, hedef spike yüksekliği kadar ölçülü harekettir.",
+  "kategori": "kirilim",
+  "piyasa_rejimi": "volatil",
+  "orijinal_piyasa": "vadeli",
+  "zaman_dilimi": {
+   "islem": "5m",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "EMA",
+    "parametreler": {
+     "periyot": 20
+    }
+   },
+   {
+    "ad": "Çubuk sayımı",
+    "parametreler": {}
+   },
+   {
+    "ad": "Hacim",
+    "parametreler": {
+     "not": "yardımcı; kırılım çubuğunda son çubukların ortalamasının 10-20 katı güç işareti"
+    }
+   }
+  ],
+  "long_giris": [
+   "Bağlam: kırılım çubuğu, ekranın solundaki yakın zirvelerin (yaklaşık 20-30 çubuk geriye bak) üzerine çıkıyor; yalnızca işlem aralığının tepesindeki küçük bir aralığı kırmıyor (p60)",
+   "Kırılım çubuğu büyük boğa trend gövdeli, küçük/yok kuyruklu; çubuk oluşurken zamanının çoğunu tepeye yakın geçirir, geri çekilmeler çubuk yüksekliğinin 1/4'ünden küçük (p80)",
+   "Sonraki 2-3 çubuk da boğa gövdeli ve gövde boyu en az son boğa/ayı gövdelerinin ortalaması; ilk geri çekilme ancak 3+ çubuk sonra, 1-2 çubuk sürer, güçlü ayı dönüş çubuğundan sonra gelmez, kırılım noktasına/giriş fiyatına ulaşmaz (p81)",
+   "Ek güç işaretleri (ne kadar çok o iyi): çubuk düşüğü önceki kapanışa eşit veya 1 tik altı; açılış önceki kapanışın üstünde; kapanış tepede veya 1 tik altında; trend çubuğunun öncesindeki çubuğun yükseği ≤ sonrasındaki çubuğun düşüğü (mikro ölçüm boşluğu); kırılım 5+ çubuğun yüksek/kapanışlarını geçer, 5-10 çubuk geri çekilmesiz uzar (p81)",
+   "Giriş seçenekleri (hepsi küçük pozisyon): (a) kırılım çubuğu kapanışında piyasa/limit emri, (b) 1-2 tiklik küçük geri çekilmede limit, (c) 1-2 dk grafikte H1/H2 buy-stop, (d) önceki salınım yükseğinin 1 tik üstüne buy-stop (kırılım testi, en az tercih edilen)",
+   "İlk geri çekilmeyi kaçırdıysan: spike tepesinin 1 tik üstüne buy-stop koy; H1 oluşursa stop emrini iptal et (p77, p91)"
+  ],
+  "short_giris": [
+   "Ayna: büyük ayı trend gövdeli, küçük/yok kuyruklu kırılım; kırılım çubuğu kapanışında, 1-2 tik geri çekilmede veya spike dibinin 1 tik altına sell-stop (p83-84)"
+  ],
+  "stop_loss": "İlk koruyucu stop spike'ın dibinin (yükselişteki en düşük çubuğun düşüğünün) 1 tik altında; short için spike tepesinin 1 tik üstü. Spike büyük olduğundan stop geniştir, pozisyon küçültülür (p73, p75).",
+  "kar_al": "Ölçülü hareket: spike'ın ilk çubuğunun açılışından (veya düşüğünden) son çubuğunun kapanışına (veya yüksek) kadar olan mesafe, spike'ın son çubuğunun kapanışından yukarı projekte edilir; ilk projeksiyonda daha küçük olan mesafe kullanılır, aşılırsa diğerlerine bakılır (p170, p103). Boşluk varsa (kırılım noktası ile kırılma testi dibi arası) bacak dibinden boşluk ortasına mesafe ortanın üstüne yansıtılır (p140). Trendin zayıfladığı yerde (yeni ekstrem, ölçülü hareket) pozisyonun çoğu/tamamı ölçeklenerek kapatılır (p92).",
+  "iz_suren_stop": "Spike büyüdükçe stop sıkılaştırılır: kırılım çubuğu kapanınca stop mikro ölçüm boşluğunun altına taşınabilir (örnek: iki çubuk gerideki yüksekliğin üstünde kalan çubuğun dibinin altı) (p74).",
+  "zaman_cikisi": null,
+  "filtreler": [
+   "Trend yönü: kırılım yönü piyasanın 'her zaman içeride' yönüyle uyumlu olmalı",
+   "Zayıflık işaretleri varsa girme/fade et: küçük-orta gövde + büyük üst kuyruk; sonraki çubuk ayı dönüş/iç çubuk; çubuğun yüksekliğinin 2/3'ünden fazlası geri alınır; birkaç gündür aralık; kırılım noktasının altına geri çekilme; başabaşa ulaşan geri çekilme; kırılım yalnız bir tik ötesine geçer (p81-82)",
+   "Gün içinde erken saatte güçlü hareket olduysa trend yönlü kırılım başarı şansı yüksek; gün trendsiz geçtiyse başarısızlık ters dönüşe yol açar (p120)",
+   "Kırılım çubuğunun ardından derin geri çekilme (kırılım noktasının ötesine, yaklaşık 10 çubuk sürebilir) olursa H1 yerine H2 beklenir (p89)",
+   "İşlem aralığının tepesine yakın güçlü boğa çubuğunun kapanışını almak riskli; geri çekilme almak tercih edilir (p60)"
+  ],
+  "pozisyon_risk": "Dolar risk normal işlemle aynı tutulur; stop normalin 3 katı genişse pozisyon normalin 1/3'ü, bazı yerlerde 1/3-1/4'ü kadar alınır; ilk girişte normal risk aşılmaz, stop sıkılaştıkça eklenebilir (p58, p75).",
+  "iddia_edilen_performans": "Güçlü kırılımda devam ihtimali %60-70; ölçülü hareket ihtimali en az %60, çok güçlü kırılımda %70'ten yüksek; en güçlü kırılımlar bile ~%30 başarısız (p73, p85, p87, p102). Kanıtsız.",
+  "kodlanabilirlik": {
+   "puan": 1,
+   "gerekce": "Güç işaretleri ölçülebilir parçalara ayrılabilir (gövde/kuyruk oranı, çubuk sayısı, boşluk) ama kitap eşik vermiyor; 'önemli seviye' ve 'çubuk büyüklüğü' yoruma açık."
+  },
+  "belirsizlikler": [
+   "'Büyük' trend gövdesi için sayısal eşik yok; öneri: gövde ≥ son 20 çubuk ortalama gövdesinin 1.5-2 katı, kuyruk ≤ gövdenin %25 (kitap dışı öneri, kural değil)",
+   "Güç işareti sayısı için minimum eşik yok; öneri: yukarıdaki listeden ≥5 işaret (kitap dışı öneri)",
+   "Hacim eşiği (10-20 kat) yalnız bilgi; hacimsiz piyasada kullanılamaz",
+   "Çıkış zamanlaması ve ölçeklendirme oranları yok",
+   "Stop için 'spike dibi' tanımı: kırılımdan önceki hangi çubuk sayılır, kitapta örnekle veriliyor, kural yok",
+   "5dk E-mini puan örnekleri (2 puan stop, 2-6 puan hedef) başka enstrümana çevrilemez; ATR ile ölçeklenmeli"
+  ],
+  "uyumluluk_notu": "Orijinal: ABD vadeli (E-mini S&P 5dk) ve hisse seans grafikleri; OHLC ile ≥5m'ye uygulanır, hacim zorunlu değil (hacim yalnız yardımcı işaret). Gün içi kuralları (açılış aralığı, günün ilk saati, ortalama günlük aralık) seansa bağlı; kripto 7/24'te UTC günü ile yaklaşık. Kitap öznel okuma ağırlıklı.",
+  "varyantlar": [
+   "Kırılım çubuğu kapanışında vs geri çekilmede giriş",
+   "Küçük bir kırılım çubuğu da uzun harekete dönüşebilir (p98) ama güç işaretleri arayın",
+   "Günlük/haftalık grafikte aynı mantık"
+  ],
+  "anahtar_kelimeler": [
+   "kirilim",
+   "spike",
+   "olculu-hareket",
+   "trend-cubugu",
+   "guc-isaretleri",
+   "kirilim-gucu"
+  ]
+ },
+ {
+  "kart_id": "daytrade__zayif-kirilimi-fade-et__brooks",
+  "ad": "Zayıf Kırılımı Fade Et (aralık tepesi/dibi, başabaşa dönüş)",
+  "stil": "daytrade",
+  "kaynak": {
+   "pdf": "Price Action Trading Ranges - Al Brooks (572 sayfa) - @eseckal.pdf",
+   "sayfalar": [
+    56,
+    57,
+    58,
+    61,
+    62,
+    81,
+    82,
+    83,
+    84,
+    85,
+    86,
+    90,
+    100,
+    110,
+    111,
+    112,
+    138
+   ]
+  },
+  "ozet": "Bir işlem aralığı veya zayıf trend içinde yeni ekstreme kırılım zayıf işaretler taşıyorsa (küçük gövde, büyük kuyruk, ardından ters çubuk) kırılım yönünün tersine işlem yapılır: yeni yükseğin üstünde short, düşüğün altında long. Hedef kırılma noktasının veya aralık ortasının testidir; kırılım güçlü çıkarsa fade edilmez.",
+  "kategori": "ortalamaya_donus",
+  "piyasa_rejimi": "yatay",
+  "orijinal_piyasa": "vadeli",
+  "zaman_dilimi": {
+   "islem": "5m",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "EMA",
+    "parametreler": {
+     "periyot": 20
+    }
+   },
+   {
+    "ad": "Çubuk sayımı",
+    "parametreler": {}
+   }
+  ],
+  "long_giris": [
+   "Fade (long): yeni düşüğe ayı kırılımı zayıfsa: kırılım çubuğu küçük/orta ayı gövdesi ve altta büyük kuyruk; sonraki çubuk boğa dönüş çubuğu veya boğa iç çubuğu (gövdesi kırılım öncesi çubukların ortalama gövdesi boyunda) (p84)",
+   "Bağlam zayıflık gösteriyor: satış bir işlem aralığının dibini test eden bir hareket, satışta boğa çubukları/üst üste binen çubuklar/belirgin kuyruklar var, piyasa birkaç gündür aralıkta (p84)",
+   "Düşüğün yalnız 1 tik altına kırılıp geri dönüyor veya tek bir destek seviyesinin altına zar zor geçip diğer seviyelerin altına inmeden geri çekiliyor (p84)",
+   "Giriş: dönüş çubuğunun/iç çubuğun yükseğinin 1 tik üstüne buy-stop, veya aralığın dibinde/önceki düşük salınımda limit alış"
+  ],
+  "short_giris": [
+   "Fade (short): yeni yükseğe boğa kırılımı zayıfsa: kırılım çubuğu küçük/orta boğa gövdesi ve üstte büyük kuyruk; sonraki çubuk ayı dönüş çubuğu veya ayı iç çubuğu (gövde kırılım öncesi ortalama gövde boyunda) (p81)",
+   "Bağlam: yükseliş işlem aralığı gününün zirvesini test eden bir ralli; rallide ayı çubukları, üst üste binen çubuklar, belirgin kuyruklar, birkaç küçük geri çekilme; piyasa birkaç gündür aralıkta (p82)",
+   "Yükseliş tek bir direncin (yüksek salınım, ayı trend çizgisi, boğa kanalı çizgisi) 1 tik üstüne geçip geri döner (p82)",
+   "Giriş seçenekleri: önceki yüksek salınım seviyesinde veya birkaç tik üstünde limit short; kırılım çubuğu kapanışında/üstünde; sonraki 1-2 çubuğun kapanışında; sonraki çubuğun dibinin altına sell-stop (p85-86)",
+   "Daha yüksekte eklenebilir: piyasa yükselmeye devam ederse limit short artırılır (p112)"
+  ],
+  "stop_loss": null,
+  "kar_al": "Kırılma noktasının geri çekilme/testi: ilk girişin fiyatında (başabaş) çıkış; ikinci (daha yüksek) girişte kâr (p112). Aralık kırılımı başarısızsa hedef aralığın ortasıdır; ortanın yeri önceden bilinmez (p66, p85-86).",
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [
+   "Kırılım güçlüyse (büyük gövde, ardışık trend çubukları, boşluk, hızlı takip) FADE ETME; yalnızca yanlış kırılım olasılığı yüksekken (p81-82)",
+   "Güçlü trend gününde fade edilmez; ters trend girişleri çoğu başarısız (p47)",
+   "Fade sinyali çubuğu sonrası güçlü boğa dönüş çubuğu gelirse (başarısız olan başarısızlık) kırılım geri çekilmesi olabilir, pozisyonu ters çevir (p119)",
+   "Aralık içinde ekranın solundaki 20-30 çubuktaki yüksekten düşük kalan kırılımlar daha çok başarısız olur (p60)"
+  ],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": "Trend olduğunda trendi tersine çevirme girişimlerinin ~%80'i, aralık olduğunda kırılım girişimlerinin ~%80'i başarısız; aralık tepe/dip fade'i matematiksel olarak savunulur (p169-170). Kanıtsız; aynı kitap güçlü kırılımda fade etmenin kaybettirdiğini söyler.",
+  "kodlanabilirlik": {
+   "puan": 1,
+   "gerekce": "Zayıflık listesi ölçülebilir parçalara ayrılabilir ama eşikler yok; stop kuralı verilmiyor; 'aralık' ve 'güç' yoruma bağlı."
+  },
+  "belirsizlikler": [
+   "Stop yeri kitapta bu bölümde verilmiyor (olası: kırılım çubuğunun karşı ucu; kitap dışı)",
+   "Zayıflık işaretlerinden kaçı gerekli, sayısal eşik yok",
+   "Aralığın ortası önceden bilinmez; hedef için öneri: aralık yüksekliğinin ortası veya kırılma noktası (kitap dışı öneri)",
+   "Kitap fade'i çoğu yatırımcı için zor ve çoğu zaman başarısız olarak çerçeveliyor; 'çoğu fade başarısız' ile 'aralıkta %80 başarısız' birlikte okunmalı",
+   "Kripto/perp'te zayıf-kırılım istatistiği test edilmedi"
+  ],
+  "uyumluluk_notu": "Orijinal: ABD vadeli (E-mini S&P 5dk) ve hisse seans grafikleri; OHLC ile ≥5m'ye uygulanır, hacim zorunlu değil (hacim yalnız yardımcı işaret). Gün içi kuralları (açılış aralığı, günün ilk saati, ortalama günlük aralık) seansa bağlı; kripto 7/24'te UTC günü ile yaklaşık. Kitap öznel okuma ağırlıklı.",
+  "varyantlar": [
+   "Limitle önceki yüksekte short + daha yüksekte ekleme + ilk girişte çıkış",
+   "Kırılım çubuğu kapanışında short, sonraki çubuğun dibinin altına stopla",
+   "Günlük grafikte haber kaynaklı ayı kırılımını fade etmek (p121): kitap ayı çubuğunun dibinde/kapanışında alımı anlatır, kurala dökülmemiş"
+  ],
+  "anahtar_kelimeler": [
+   "zayif-kirilim",
+   "fade",
+   "basarisiz-kirilim",
+   "aralik-tepesi",
+   "kirilim-guc-testi"
+  ]
+ },
+ {
+  "kart_id": "daytrade__miknatiste-ikinci-ters-donus__brooks",
+  "ad": "Mıknatıs (Destek/Direnç) Seviyesinde İkinci Deneme Ters Dönüş Girişi",
+  "stil": "daytrade",
+  "kaynak": {
+   "pdf": "Price Action Trading Ranges - Al Brooks (572 sayfa) - @eseckal.pdf",
+   "sayfalar": [
+    154,
+    155,
+    156,
+    157,
+    158,
+    160,
+    162
+   ]
+  },
+  "ozet": "Fiyat bir mıknatıs seviyesine (trend çizgisi, kanal çizgisi, hareketli ortalama, ölçülü hareket hedefi, önceki salınım, giriş/sinyal çubuğu uçları, dünün H/L/O/C, pivot, Fibonacci) zayıf bir hareketle yaklaşırsa seviyeyi küçük bir miktar aşar ve bir-iki çubuk ters döner; trend seviyeyi biraz daha aşıp ikinci kez tersine dönerse, özellikle güçlü dönüş çubuğuyla, ters yönde güvenilir bir giriş oluşur.",
+  "kategori": "destek_direnc",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "genel",
+  "zaman_dilimi": {
+   "islem": "5m",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "EMA",
+    "parametreler": {
+     "periyot": 20
+    }
+   },
+   {
+    "ad": "Destek/Direnç",
+    "parametreler": {
+     "not": "mıknatıs listesi p155-156"
+    }
+   }
+  ],
+  "long_giris": [
+   "Mıknatıs (destek) seviyesine doğru hareket zayıf ve daha büyük trendin yönünün tersindedir (yani aşağı yönlü zayıf hareket yükseliş bağlamında)",
+   "Fiyat seviyeyi küçük bir miktar aşar ve 1-2 çubuk geri döner (ilk deneme); hareket devam edip seviyeyi biraz daha aşar ve ikinci kez döner",
+   "İkinci dönüşte güçlü boğa dönüş çubuğu oluşur; çubuğun yükseğinin 1 tik üstüne buy-stop (kitap bu giriş mekaniğini açıkça vermiyor; standart sinyal çubuğu girişi varsayımı)"
+  ],
+  "short_giris": [
+   "Ayna: direnç mıknatısı, ikinci denemede güçlü ayı dönüş çubuğu"
+  ],
+  "stop_loss": null,
+  "kar_al": "Kitap bu bölümde net hedef vermiyor; mıknatıs 'olası hedef' olarak kullanılır, ters işlemde amaç en azından kafa derisi (p155).",
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [
+   "Güçlü trendde piyasa çoğu mıknatısı aşar; ters işlem yalnızca mıknatısa doğru hareket güçlü trend değilse (p155)",
+   "Mıknatıs yönünde işlem ilk tercihtir; ters işlem mıknatısa ulaşıldıktan sonra ve yalnızca daha erken karşı-trend gücü (trend çizgisini kıran hareket) varken düşünülür (p155, p180)",
+   "Aynı seviye 4-5 kez test edilirse kırılma ihtimali artar (p158)"
+  ],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": "Ters işlemde başarı olasılığı çoğu zaman yalnızca ~%40 ama ödül riskin kat kat büyüğü olduğundan trader denklemi pozitif (p154). Kanıtsız.",
+  "kodlanabilirlik": {
+   "puan": 1,
+   "gerekce": "Seviye listesi kodlanabilir ama 'zayıf hareket', 'küçük aşma', 'güçlü dönüş çubuğu' eşiksiz; stop ve hedef yok."
+  },
+  "belirsizlikler": [
+   "Stop ve hedef kitapta yok",
+   "'Küçük miktar aşma' ve 'güçlü dönüş çubuğu' eşiği yok; öneri: aşma ≤ 0.5 ATR, dönüş çubuğu gövdesi ≥ ortalama gövde ve kapanış orta noktanın ötesinde (kitap dışı öneri, p50-52 dönüş çubuğu tanımıyla uyumlu)",
+   "Hangi mıknatısın geçerli olduğu seçimi öznel; çok sayıda aday seviye var, birleşimi (confluence) güçlendirir ama nicel ağırlık yok",
+   "Kitabın ana mesajı: mıknatıs yönünde işlem, ters işlem seçici"
+  ],
+  "uyumluluk_notu": "Orijinal: ABD vadeli (E-mini S&P 5dk) ve hisse seans grafikleri; OHLC ile ≥5m'ye uygulanır, hacim zorunlu değil (hacim yalnız yardımcı işaret). Gün içi kuralları (açılış aralığı, günün ilk saati, ortalama günlük aralık) seansa bağlı; kripto 7/24'te UTC günü ile yaklaşık. Kitap öznel okuma ağırlıklı.",
+  "varyantlar": [
+   "Mıknatısta ilk deneme yerine kırılma + geri çekilme (4-5. test)",
+   "Daha yüksek zaman dilimi mıknatısı: 5dk dönüş gücü bunu doğrular"
+  ],
+  "anahtar_kelimeler": [
+   "miknatis",
+   "destek-direnc",
+   "ters-donus",
+   "ikinci-giris",
+   "olculu-hareket"
+  ]
+ }
+]

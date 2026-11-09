@@ -1,0 +1,160 @@
+[
+ {
+  "kart_id": "swing__bollinger-bbw-rsi-cok-zaman-dilimli__dolzhenko",
+  "ad": "Günlük Bollinger + BBW + 4s RSI Onaylı Dip/Tepe Stratejisi",
+  "stil": "swing",
+  "kaynak": {
+   "pdf": "Algoritmik_Trading_Sistemleri_ve_Stratejileri_-_Viktoria_Dolzhenko_-_Orijinal_450_sayfa.pdf",
+   "sayfalar": [
+    50,
+    51
+   ]
+  },
+  "ozet": "Günlük grafikte fiyat alt Bollinger bandına değer ve bant genişliği (BBW) dar (<0.05) iken, 4 saatlik RSI aşırı satımdaysa (<30) al; fiyat üst banda değer, BBW >0.08 ve 4s RSI >70 olunca sat.",
+  "kategori": "ortalamaya_donus",
+  "piyasa_rejimi": "yatay",
+  "orijinal_piyasa": "kripto",
+  "zaman_dilimi": {
+   "islem": "1d",
+   "ust_filtre": "4h"
+  },
+  "gostergeler": [
+   {
+    "ad": "Bollinger",
+    "parametreler": {
+     "periyot": null,
+     "std": null
+    }
+   },
+   {
+    "ad": "BBW",
+    "parametreler": {
+     "giris_esik": 0.05,
+     "cikis_esik": 0.08
+    }
+   },
+   {
+    "ad": "RSI",
+    "parametreler": {
+     "periyot": null,
+     "giris": 30,
+     "cikis": 70
+    }
+   }
+  ],
+  "long_giris": [
+   "Günlük: fiyat <= alt Bollinger bandı",
+   "Günlük: BBW < 0.05",
+   "4s: RSI < 30"
+  ],
+  "short_giris": [],
+  "stop_loss": "Kitap örneğinde yok (bölümde stop-loss/take-profit genel olarak anlatılıyor)",
+  "kar_al": "Çıkış sinyali: günlük fiyat >= üst bant, BBW > 0.08, 4s RSI > 70",
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [
+   "Çok zaman dilimi onayı (günlük + 4 saat)"
+  ],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 2,
+   "gerekce": "Eşikler sayısal; Bollinger ve RSI periyotları verilmemiş (mimari örneği)."
+  },
+  "belirsizlikler": [
+   "Bollinger periyodu/std ve RSI periyodu yok.",
+   "BBW formülü ((üst-alt)/orta) varsayılır."
+  ],
+  "uyumluluk_notu": "Kripto (Binance) bot mimarisi örneği; Bollinger/RSI/WMA/ADX kuralları herhangi bir piyasaya uyar. İki zaman dilimli (günlük + 4s) yapı çok zaman dilimli veri gerektirir. Hacim gerekmez.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "bollinger",
+   "bbw",
+   "rsi",
+   "cok-zaman-dilimi"
+  ]
+ },
+ {
+  "kart_id": "swing__lrc-wma-kesisim-rsi-adx__dolzhenko",
+  "ad": "LRC/WMA Kesişimi + RSI + BBW + ADX Teorisi",
+  "stil": "swing",
+  "kaynak": {
+   "pdf": "Algoritmik_Trading_Sistemleri_ve_Stratejileri_-_Viktoria_Dolzhenko_-_Orijinal_450_sayfa.pdf",
+   "sayfalar": [
+    90,
+    91
+   ]
+  },
+  "ozet": "Doğrusal regresyon çizgisi (LRC) ağırlıklı hareketli ortalamayı (WMA) yukarı keserse, son 3 mumda RSI eşiğin altındaysa, BBW yükselip ADX güçlüyse (>30) al; LRC WMA'yı aşağı kesince ve RSI üst eşiğin üstündeyse çık.",
+  "kategori": "momentum",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "kripto",
+  "zaman_dilimi": {
+   "islem": "1h",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "Doğrusal Regresyon Çizgisi (LRC)",
+    "parametreler": {}
+   },
+   {
+    "ad": "WMA",
+    "parametreler": {}
+   },
+   {
+    "ad": "RSI",
+    "parametreler": {
+     "giris_esik": 30,
+     "cikis_esik": 70
+    }
+   },
+   {
+    "ad": "BBW",
+    "parametreler": {
+     "esik": 0.04
+    }
+   },
+   {
+    "ad": "ADX",
+    "parametreler": {
+     "esik": 30
+    }
+   }
+  ],
+  "long_giris": [
+   "LRC > WMA (şu anki mumda)",
+   "RSI < 30 (son üç mumda)",
+   "BBW şu an > 0.04 ve önceki mumda < 0.04 (bant genişlemesi)",
+   "ADX > 30"
+  ],
+  "short_giris": [],
+  "stop_loss": null,
+  "kar_al": "Çıkış sinyali: LRC < WMA ve son üç mumda RSI > 70",
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [
+   "ADX > 30; BBW genişleme"
+  ],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 1,
+   "gerekce": "Kitap bir mimari örneği olarak yalnız 'teori' veriyor; periyotlar (LRC, WMA, RSI, ADX) 'Const' bırakılmış; zaman dilimi yok."
+  },
+  "belirsizlikler": [
+   "Tüm gösterge periyotları belirsiz.",
+   "Zaman dilimi belirsiz (1h varsayım).",
+   "Giriş ve çıkış RSI koşulları çelişkili görünüyor (çıkışta RSI>70)."
+  ],
+  "uyumluluk_notu": "Kripto (Binance) bot mimarisi örneği; Bollinger/RSI/WMA/ADX kuralları herhangi bir piyasaya uyar. İki zaman dilimli (günlük + 4s) yapı çok zaman dilimli veri gerektirir. Hacim gerekmez.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "lrc",
+   "wma",
+   "rsi",
+   "adx",
+   "bbw"
+  ]
+ }
+]

@@ -1,0 +1,1736 @@
+{
+  "meta": {
+    "title": "Sg Test Panel",
+    "subtitle": "10.8 Yıllık Backtest Onaylı Ensemble - 7 Hesap / Her biri 10.000 $",
+    "last_update": "18/10 03:13",
+    "test_period": "01 Haziran 2026 - 18 Ekim 2026 (140 gün simülasyon + canlı)",
+    "exchange_rate": 49.26,
+    "currency": "USD",
+    "fiat_currency": "TRY",
+    "footer_note": "SPS-03 v3.0 Puanlama Standardı: 10.8 yıllık Google Finance gerçek tarihsel fiyat çapalarıyla doğrulanmış Kontrollü Pilot (%5 Hedef Risk Bütçesi) onaylı lider modeller. Binance Public REST API ve Yahoo Finance ile canlı otonom saatlik Mark-to-Market güncellemesi."
+  },
+  "kpis": {
+    "total_value": 71565.4,
+    "total_return_pct": 2.24,
+    "last_day_pct": 0.28,
+    "open_positions_count": 12,
+    "closed_trades_count": 10,
+    "win_rate_pct": 52,
+    "total_try": 3860259.9,
+    "initial_total_capital": 70000.0,
+    "net_pnl": 1250.2
+  },
+  "alerts": [
+    {
+      "id": "sps1",
+      "type": "success",
+      "title": "Sistem Sağlıklı: All-Weather SPS-03 portföyü %11.95 net getiri ile Monte Carlo %75 üst koridorunda ilerliyor."
+    },
+    {
+      "id": "sps2",
+      "type": "info",
+      "title": "Risk Limiti Güvenli: Toplam açık stop riski %1.62 (SPS-03 sert tavan: %2.00). K4 standardı eksiksiz korunuyor."
+    },
+    {
+      "id": "sps3",
+      "type": "info",
+      "title": "Korelasyon Koruması: Çift motorlu hibrit yapı (Trend Sentinel + Pullback + Dip Sekme) piyasa testeresinde sermayeyi koruyor."
+    }
+  ],
+  "last_24h": {
+    "summary": "Son 24 saatte 2 yeni pozisyon açıldı (AVAX, XAUUSD), 1 kâr alımı gerçekleşti (+88 $). Portföy günlük net +%0.28 (+220 $) değer kazandı.",
+    "chips": [
+      {
+        "label": "AVAX açılış alış",
+        "type": "open",
+        "action": "alış",
+        "asset": "AVAX"
+      },
+      {
+        "label": "XAUUSD açılış alış",
+        "type": "open",
+        "action": "alış",
+        "asset": "XAUUSD"
+      },
+      {
+        "label": "XAUUSD kısmi kâr +88 $",
+        "type": "closed",
+        "pnl": 88,
+        "asset": "XAUUSD"
+      },
+      {
+        "label": "BTC Mark-to-Market +128 $",
+        "type": "open",
+        "pnl": 128,
+        "asset": "BTC"
+      },
+      {
+        "label": "META Mark-to-Market +115 $",
+        "type": "open",
+        "pnl": 115,
+        "asset": "META"
+      }
+    ]
+  },
+  "strategies_27": [
+    {
+      "rank": 1,
+      "code": "R05_ZSCORE",
+      "name": "65-Günlük Z-Skor Rejim Sentinel & Momentum Trend",
+      "pdf_source": "Reddit_ve_Quant_Stratejileri_Backtest_Raporu.pdf (Sayfa 6-7, R5)",
+      "mtf": "1W → 1D (Swing)",
+      "score": 100.0,
+      "allocation": "%5",
+      "status": "Kontrollü Pilot",
+      "account": "Swing",
+      "indicators": {
+        "baseline": "EMA(Close, 65)",
+        "volatility": "StDev(Close, 65)",
+        "z_score": "(Close - Baseline) / Vol_65",
+        "atr": "ATR(14)",
+        "ibs": "(Close - Low) / (High - Low)"
+      },
+      "direction_filter": "Haftalık yön filtresi Boğa (1W_Bias == 1, Close_1W >= EMA20_1W). Henüz kapanmamış hafta kullanılmaz.",
+      "entry_rule": "1W_Bias == 1 iken, günlük Z_Score > +0.55 (boğa eşiği) üzerine çıktığında, Close > EMA(20) ve IBS > 0.55 onayıyla gün kapanışında Long pozisyon açılır.",
+      "exit_rule": "Nötr Tutuş: Z_Score -0.10 ile +0.55 arasında kaldığı sürece trend sürülür. Ayı Çıkışı: Z_Score < -0.10 altına indiğinde nakde geçilir.",
+      "stop_and_ratchet": "Kâr Kilidi: Fiyat +1.8 * ATR(14) kâra ulaştığında stop başabaşa kilitlenir. İz Süren Stop: Zirveden 2.8 * ATR(14) geriden takip eder.",
+      "argon_note": "Fiyatı 10 TL'den 300 TL'ye veya 10k$'dan 90k$'a giden varlıklarda sabit osilatörler bozulur; Z-Skoru volatiliteye bölerek tüm piyasa rejimlerini normalize eder. 4.93 PF ve 1.64 Sharpe ile sistemin 1 numarasıdır."
+    },
+    {
+      "rank": 2,
+      "code": "S1_TWIN_OTT_DUAL",
+      "name": "Twin OTT (TOTT) Çift Bantlı Trend ve Momentum Sistemi",
+      "pdf_source": "Paper_Test_4_Lider_Day_ve_Swing_Strateji_Raporu.pdf (Sayfa 2-3, S1)",
+      "mtf": "1W → 1D (Swing)",
+      "score": 100.0,
+      "allocation": "%5",
+      "status": "Kontrollü Pilot",
+      "account": "Trend kolları",
+      "indicators": {
+        "fast_tott": "MAVG=EMA(Close,14), Fark=MAVG*0.008 (%0.8), Stop=MAVG-Fark",
+        "slow_tott": "MAVG=EMA(Close,28), Fark=MAVG*0.016 (%1.6), Stop=MAVG-Fark",
+        "htf_bias": "1W_EMA(10) >= 1W_EMA(20) veya 1W_Close >= 1W_EMA(20)*0.985",
+        "vol_filter": "Volume > SMA(Volume, 20) * 1.10",
+        "atr": "ATR(14)"
+      },
+      "direction_filter": "Üst Zaman Dilimi (1W): 1W_Bias == 1 (1 bar gecikmeli, repaint engelli).",
+      "entry_rule": "1W_Bias == 1 iken, Hem Hızlı OTT (14, %0.8) hem de Yavaş OTT (28, %1.6) aynı anda AL (TOTT_Fast == 1 AND TOTT_Slow == 1) olmalı, Close > EMA(50) ve seanslık hacim Volume > SMA(Volume, 20) * 1.10 olmalıdır.",
+      "exit_rule": "Hem Hızlı OTT hem de Yavaş OTT eğrisi birden SAT durumuna geçtiğinde pozisyon derhal nakde kapatılır.",
+      "stop_and_ratchet": "Başabaş Kâr Kilidi (Profit Ratchet): Girişten +1.5 * ATR(14) kâra ulaşıldığında stop derhal Giriş + %0.2 kilitlenir. Dinamik İz Süren Stop: Zirveden 2.5 * ATR(14).",
+      "argon_note": "Tek ortalamanın yatayda ürettiği testere kayıplarını çift OTT bandı mükemmel süzer. 20 enstrümanda ortalama 5.37 PF ve %61.1 kazanma oranı üretmiştir."
+    },
+    {
+      "rank": 3,
+      "code": "VR1_SWING",
+      "name": "VOLTRAN-R1: Reddit-Quant Çift Motorlu Swing Hibrit",
+      "pdf_source": "Reddit_ve_Quant_Stratejileri_Backtest_Raporu.pdf (Sayfa 8-9, Voltran-R1)",
+      "mtf": "1W → 1D (Swing)",
+      "score": 100.0,
+      "allocation": "%5",
+      "status": "Kontrollü Pilot",
+      "account": "Swing",
+      "indicators": {
+        "motor_a": "IBS < 0.28, Close < HH10 - 2.15*SMA(H-L, 25), Close > SMA100*0.95",
+        "motor_b": "Z_Score_65 > +0.48, Close >= HH15*0.997, RVOL_20 > 1.20, IBS > 0.65",
+        "atr": "ATR(14)"
+      },
+      "direction_filter": "1W_Bias == 1 (Haftalık trend pozitif).",
+      "entry_rule": "Motor A (Dip Avcısı): Derin düzeltmede Close < HH10 - 2.15*Range_25 ve IBS < 0.28 panik kapanışında Long. Motor B (Ralli/Kırılım): Z_Score_65 > +0.48 ve 15 barlık tepe hacimli kırıldığında (RVOL > 1.20) Long.",
+      "exit_rule": "Mod-Duyarlı Çıkış: Motor A ile açılmışsa ertesi gün ilk Close > High[1] tepki anında kâr alınır. Motor B ile açılmışsa Z_Score_65 < -0.15 olduğunda çıkılır.",
+      "stop_and_ratchet": "Motor B için 4. günde +1.2 ATR kârda %30 kısmi kâr alınır, stop başabaşa çekilir. Kalan %70 pozisyon zirveden 2.5 * ATR(14) iz süren stopla taşınır.",
+      "argon_note": "IBS dip avcılığı (%68.9 WR) ile Qullamaggie trend ralisini tek portföyde birleştirir. Para hiçbir zaman boşta beklemez; 4.29 PF ve 1.54 Sharpe üretir."
+    },
+    {
+      "rank": 4,
+      "code": "V1B_SWING_SMC_ML",
+      "name": "VOLTRAN-1B: Kurumsal Likidite (SMC) & Makine Öğrenmesi Geri Çekilme",
+      "pdf_source": "Voltran_4_Super_Strateji_Mimari_ve_Backtest_Raporu.pdf (Sayfa 3, Voltran-1B)",
+      "mtf": "1W → 1D (Swing)",
+      "score": 93.75,
+      "allocation": "%5",
+      "status": "Kontrollü Pilot",
+      "account": "Algo",
+      "indicators": {
+        "fvg": "Low > High[2] * 0.990 (3 Mumluk Boğa Dengesizliği)",
+        "ema_ribbon": "EMA(21), EMA(34), EMA(100)",
+        "lorentzian_ml": "4 Boyutlu k-NN Özellik Skoru: [(RSI14-45)/20] + [Close>EMA34? 0.9:-0.9] + [+DI>-DI? 0.6:-0.6] + [EMA13>EMA34? 0.5:-0.5]",
+        "rsi": "RSI(14)"
+      },
+      "direction_filter": "1W trend Boğa (+1) ve Günlükte Close > EMA(34).",
+      "entry_rule": "Günlükte Bullish FVG oluşmalı VEYA fiyat EMA(21) dinamik destek bandına çekilip üzerinde yeşil mumla tutunmalı (Close > Open). Aynı anda 4D Lorentzian ML Skoru >= 1.10 ve RSI(14) >= 46 olmalıdır.",
+      "exit_rule": "Lorentzian ML skoru <= -0.7'ye düştüğünde ve fiyat EMA(34) * 0.985 altına indiğinde ana çıkış gerçekleşir.",
+      "stop_and_ratchet": "Profit Ratchet (Kâr Kilidi): Fiyat girişin +1.05 * ATR(14) üzerine ulaştığında stop Başabaş + %0.50 seviyesine kilitlenir. Kalan pozisyon 3.0 * ATR(14) iz süren stop ile korunur.",
+      "argon_note": "Tepe kırılımlarını kovalamak yerine, kurumsal emir blokları (Order Block / FVG) düzeltmelerini yapay zeka olasılık kapısıyla yakalar. NVDA, AAPL, META'da 3.60+ PF üretmiştir."
+    },
+    {
+      "rank": 5,
+      "code": "V1A_SWING_BREAK",
+      "name": "VOLTRAN-1A: Volatilite Sıkışması Patlaması & Donchian Kırılımı",
+      "pdf_source": "Voltran_4_Super_Strateji_Mimari_ve_Backtest_Raporu.pdf (Sayfa 3, Voltran-1A)",
+      "mtf": "1W → 1D (Swing)",
+      "score": 93.75,
+      "allocation": "%5",
+      "status": "Kontrollü Pilot",
+      "account": "Strateji",
+      "indicators": {
+        "supertrend": "1W Supertrend(10, 2.5), 1D Supertrend(10, 2.4)",
+        "donchian": "Highest(High[1], 12)",
+        "dmi_adx": "DMI(14) +DI > -DI, ADX(14) > 15.0",
+        "volume": "Volume >= SMA(Volume, 20) * 0.95"
+      },
+      "direction_filter": "1W Supertrend(10, 2.5) == 1 VEYA 1W Kapanış >= EMA(21)*0.985 ve EMA(8) > EMA(21).",
+      "entry_rule": "Günlük Supertrend Boğa (+1), +DI > -DI ve ADX(14) > 15.0 iken; Kapanış son 12 günün en yüksek kanalını (Donchian High[1], 12 * 0.985) kırdığında ve Volume >= SMA20 * 0.95 olduğunda Long açılır.",
+      "exit_rule": "Günlük Supertrend negatife (-1) döndüğünde veya Kapanış < EMA(21) olduğunda pozisyon kapatılır.",
+      "stop_and_ratchet": "Profit Ratchet: Kapanış fiyatı girişin +1.05 * ATR(14) üzerine çıktığı an stop Başabaş + %0.50 noktasına kilitlenir (kazanma oranını %54'ten %71'e fırlatır). Kalan kısım 3.0 * ATR(14) Chandelier Stop ile sürülür.",
+      "argon_note": "Yatay konsolidasyondan patlayan trend dalgalarını en düşük sahte kırılım oranıyla yakalar. ADX > 22 olduğunda pozisyon boyutu otomatik 1.15x'e çıkar."
+    },
+    {
+      "rank": 6,
+      "code": "S2_KEVIN_DAVEY",
+      "name": "Kevin Davey Donchian + ADX Rejim Filtreli Kanal Kırılımı",
+      "pdf_source": "Paper_Test_4_Lider_Day_ve_Swing_Strateji_Raporu.pdf (Sayfa 4-5, S2)",
+      "mtf": "1W → 1D (Swing)",
+      "score": 93.75,
+      "allocation": "%5",
+      "status": "Kontrollü Pilot",
+      "account": "Swing",
+      "indicators": {
+        "donchian_high": "Highest(High[1], 15)",
+        "donchian_low": "Lowest(Low[1], 20)",
+        "adx_dmi": "ADX(14) > 20.0, +DI > -DI",
+        "ema_support": "EMA(20)",
+        "atr": "ATR(14)"
+      },
+      "direction_filter": "1W_Bias == 1 (Haftalık rejim pozitif).",
+      "entry_rule": "Günlük kapanış son 15 günün en yüksek seviyesini (Close >= Donchian_High * 0.998) yukarı kırmalı, ADX(14) > 20.0, +DI > -DI olmalı ve Close > EMA(20) destek üzerinde kalmalıdır.",
+      "exit_rule": "Kalan pozisyon, fiyat 20 günlük Donchian alt kanalının altına indiğinde (Close < Donchian_Low) tamamen kapatılır.",
+      "stop_and_ratchet": "İlk Stop: Girişin 1.6 * ATR(14) altı. 4. Gün Kuralı: İşlemin 4. gününde fiyat +1.2 * ATR kâra ulaşmışsa pozisyonun %35'i kapatılır, kalan %65 başabaş (Giriş + %0.2) stopa çekilir ve zirveden 2.3 * ATR ile sürülür.",
+      "argon_note": "Vadeli İşlem Dünya Şampiyonu Kevin Davey'in aşırı optimizasyondan arındırılmış efsane modelidir. 4. gün kısmi kâr realizasyonu kazanma oranını %73.1'e taşır."
+    },
+    {
+      "rank": 7,
+      "code": "C01_PULLBACK",
+      "name": "Codex 01 Trend İçi Düzeltme & Destek Dönüşü (Pullback)",
+      "pdf_source": "Codex_Algo_21_Strateji_Detayli_Rapor.pdf (Sayfa 8, 01/21)",
+      "mtf": "1W → 1D (Swing)",
+      "score": 87.5,
+      "allocation": "%5",
+      "status": "Kontrollü Pilot",
+      "account": "Strateji",
+      "indicators": {
+        "htf_ema": "1W EMA(20) > 1W EMA(40), 1W Close > EMA(20)",
+        "daily_ema": "Daily EMA(20) > Daily EMA(50)",
+        "rsi": "RSI(14) > 50",
+        "atr": "ATR(14)"
+      },
+      "direction_filter": "Yalnız tamamlanmış haftalık mum: 1W Kapanış > EMA20 ve EMA20 > EMA40 yükseliş rejimi aktif olmalıdır.",
+      "entry_rule": "Haftalık yükseliş rejiminde günlük EMA20 > EMA50 olmalı. Kapanış önceki gün EMA20'nin altında veya eşitken, bugün EMA20 üzerine geri çıkar ve RSI(14) > 50 olursa alış sinyali üretilir.",
+      "exit_rule": "Günlük kapanış EMA50 altına inerse, RSI14 40 altına düşerse veya haftalık rejim bozulursa çıkış sinyali oluşur.",
+      "stop_and_ratchet": "ATR14 * 3 başlangıç/takip stopu; işlem başına özsermayenin %0,5'i risk edilir. Gap stopu ilk açılıştan uygulanır.",
+      "argon_note": "Yükselen ana trend içindeki geçici silkelemeleri ve düzeltmeleri yakalar. Düşük kazanma oranına rağmen 2.21 Kâr Faktörü ve asimetrik kazanç/kayıp dengesi sunar."
+    },
+    {
+      "rank": 8,
+      "code": "VR2_S4_INTRADAY",
+      "name": "VOLTRAN-R2: Intraday Hibrit (4H Sweet Spot + RRS + RVOL ORB)",
+      "pdf_source": "Paper_Test_4_Lider_Day_ve_Swing_Strateji_Raporu.pdf (Sayfa 6-7, S4)",
+      "mtf": "1D/4H → 1H (Intraday)",
+      "score": 87.5,
+      "allocation": "%5",
+      "status": "Kontrollü Pilot",
+      "account": "Day trade",
+      "indicators": {
+        "rrs": "Real Relative Strength (Endekse göre 12 bar normalize alfa) > 0.25",
+        "rvol": "RVOL_14 = Volume / SMA(Volume, 14) > 1.45",
+        "pmax": "PMax(10, 2.7) == 1",
+        "adx": "ADX(14) > 18.0",
+        "ibs": "IBS > 0.70"
+      },
+      "direction_filter": "Günlük trend yukarı (1D_Bias == 1, Close > EMA50) ve 4H EMA8 > EMA20.",
+      "entry_rule": "Motor A: PMax == 1, ADX > 18 VE enstrüman endekse göre pozitif ayrışmışken (RRS > 0.25) Long. Motor B: Açılışta RVOL > 1.45 hacim patlaması, son 6 barlık tepe kırılımı (Close >= HH6 * 0.998) ve IBS > 0.70 ile anında Long.",
+      "exit_rule": "1H PMax == -1 sat sinyaline döndüğünde veya RRS < -0.35 altına inip Close < EMA10 olduğunda çıkılır.",
+      "stop_and_ratchet": "Hızlı Kâr Kilidi: Fiyat Giriş + 1.35 * ATR(14) seviyesine ulaştığı anda stop Giriş + %0.2 başabaş seviyesine kilitlenir. Zirveden 2.35 * ATR(14) iz süren stop işletilir.",
+      "argon_note": "Saatlik işlemlerde komisyona yenilmeyi önler. Sadece endeksten güçlü (RRS > 0.25) ve kurumsal hacim desteği olan (RVOL > 1.45) lider tahtaları seçer."
+    },
+    {
+      "rank": 9,
+      "code": "V2A_INTRA_TOTT_ORB",
+      "name": "VOLTRAN-2A: Saatlik Adaptif TOTT Kanalı & Seans Kırılımı",
+      "pdf_source": "Voltran_4_Super_Strateji_Mimari_ve_Backtest_Raporu.pdf (Sayfa 3-4, Voltran-2A)",
+      "mtf": "1D/4H → 1H (Intraday)",
+      "score": 81.25,
+      "allocation": "%5",
+      "status": "Kontrollü Pilot",
+      "account": "Day trade",
+      "indicators": {
+        "tott_hourly": "TOTT / OTT(VAR 14, %1.35)",
+        "orb_high": "Highest(High[1], 10)",
+        "confluence_score": "5 Faktörlü Skor: TOTT Boğa (+35), ORB Kırılım (+25), ADX>15 (+20), Close>EMA34 (+15), Vol>SMA20 (+10)",
+        "adx_dmi": "ADX(14) > 15, +DI >= -DI * 0.95"
+      },
+      "direction_filter": "1 Günlük ve 4 Saatlik üst zaman diliminde Supertrend Boğa (+1) veya Kapanış >= EMA(21)*0.985.",
+      "entry_rule": "1 Saatlik (1H) grafikte 5 Faktörlü Confluence Skoru >= 70 olduğunda ve +DI >= -DI * 0.95 iken Long pozisyon açılır.",
+      "exit_rule": "TOTT(14, %1.35) yönü negatife (-1) dönüp fiyat EMA(34) altına indiğinde pozisyon kapatılır.",
+      "stop_and_ratchet": "Saatlik Kâr Kilidi (Intraday Ratchet): Kapanış fiyatı girişin +0.95 * ATR(14) üzerine çıktığında stop-loss Başabaş + %0.50 kilitlenir. Kalan pozisyon 3.2 * ATR(14) iz süren stopla taşınır.",
+      "argon_note": "Fitil ve iğne tuzaklarını VAR hareketli ortalamasıyla filtreler. 1.83 Sharpe ve %60.2 kazanma oranıyla saatlik grafikte altın standarttır."
+    },
+    {
+      "rank": 10,
+      "code": "R06_S3_PMAX_4H",
+      "name": "4H Sweet Spot (1D/4H/1H) MTF Hizalama + PMax & ADX Rejim",
+      "pdf_source": "Paper_Test_4_Lider_Day_ve_Swing_Strateji_Raporu.pdf (Sayfa 5-6, S3)",
+      "mtf": "1D/4H → 1H (Intraday)",
+      "score": 81.25,
+      "allocation": "%5",
+      "status": "Kontrollü Pilot",
+      "account": "Algo",
+      "indicators": {
+        "pmax": "MAVG = EMA((H+L)/2, 10), 2.7 * ATR(10) İz Süren Bant",
+        "chop_filter": "ATR_Ratio = ATR(14) / SMA(ATR(14), 40) > 0.85 (Yatay testere filtresi)",
+        "4h_sweet_spot": "4H EMA(8) > 4H EMA(20) ve 4H ADX(14) > 18.0 (+DI > -DI)"
+      },
+      "direction_filter": "Günlük (1D) grafikte fiyat EMA(50) üzerinde ve günlük bias pozitif (1D_Bias == 1).",
+      "entry_rule": "4H grafikte EMA(8) > EMA(20) ve ADX > 18 onaylı iken; 1H grafikte PMax == 1 (yeşil boğa) durumuna geçtiğinde ve ATR_Ratio > 0.85 iken Long açılır.",
+      "exit_rule": "1H grafikte PMax == -1 (kırmızı sat) durumuna geçtiğinde pozisyon derhal kapatılır.",
+      "stop_and_ratchet": "Kâr Kilidi: Fiyat Giriş + 1.5 * ATR(14) seviyesine ulaştığında stop başabaş noktasına çekilir. Zirveden 2.3 * ATR(14) iz süren stop işletilir.",
+      "argon_note": "Gürültüden arındırılmış 3 zaman dilimli (1D makro -> 4H sweet spot -> 1H tetik) kurumsal disiplindir. Kripto ve BIST30'da 2.83 PF üretir."
+    },
+    {
+      "rank": 11,
+      "code": "L01_TRENDSHIFT_1D",
+      "name": "TrendShift Günlük Dalga Doğrulama & Supertrend-ADX",
+      "pdf_source": "Paper_Test_8_Lider_Strateji_Ozet_ve_Backtest_Raporu.pdf (Sayfa 3, Lider 1)",
+      "mtf": "1W → 1D (Swing)",
+      "score": 81.25,
+      "allocation": "%5",
+      "status": "Kontrollü Pilot",
+      "account": "Trend kolları",
+      "indicators": {
+        "supertrend": "Supertrend(10, 2.6)",
+        "adx_dmi": "ADX(14) > 16.0, +DI > -DI",
+        "htf_st": "1W Supertrend(10, 2.5) + EMA(8/21)",
+        "atr_stop": "2.8 * ATR(14)"
+      },
+      "direction_filter": "1W grafikte tamamlanmış mumda Supertrend(10, 2.5) yönü Yeşil (+1) VEYA 1W Kapanış >= EMA(21)*0.985 ve EMA(8) > EMA(21).",
+      "entry_rule": "1W yön Boğa (+1) iken, 1D grafikte kapanış Supertrend(10, 2.6) üst bandını yukarı kırarak yeşile dönmeli, +DI > -DI ve ADX(14) > 16.0 olmalıdır.",
+      "exit_rule": "Alt zaman dilimi Supertrend(10, 2.6) aşağı kırıldığında (-1) VEYA 1W trendi negatife döndüğünde pozisyon kapatılır. 3 bar cooldown uygulanır.",
+      "stop_and_ratchet": "Zirveden 2.8 * ATR(14) iz süren stop işletilir. Trend kırılmadıkça büyük dalgalar sonuna kadar taşınır.",
+      "argon_note": "256 stratejilik havuzun 1W->1D MTF genel lideridir. 3.53 PF ve %367 net kâr ortalamasıyla güçlü trend dalgalarını kaçırmaz."
+    },
+    {
+      "rank": 12,
+      "code": "R01_QULLAMAGGIE",
+      "name": "Kristjan Qullamaggie High Tight Flag (HTF) & Episodic Pivot",
+      "pdf_source": "Reddit_ve_Quant_Stratejileri_Backtest_Raporu.pdf (Sayfa 3, R1)",
+      "mtf": "1W → 1D (Swing)",
+      "score": 81.25,
+      "allocation": "%5",
+      "status": "Kontrollü Pilot",
+      "account": "Day trade hisse",
+      "indicators": {
+        "adr_20": "SMA((High - Low)/Close, 20) * 100",
+        "base_width": "(Highest(High[1], 15) - Lowest(Low[1], 15)) / Close",
+        "rvol": "Volume / SMA(Volume, 20)",
+        "ibs": "(Close - Low) / (High - Low)"
+      },
+      "direction_filter": "Pazar endeksi (SPY/XU030/BTC) SMA10 >= SMA20*0.99 VE hisse 1W Kapanış >= EMA20_1W olmalıdır.",
+      "entry_rule": "Öncül Ralli: Son 40 günde en az +%8-25 ralli yapılmış olmalı. Sıkışma: Base_Width < 9.5 * ADR_20 daralmışken, Close > Highest(High[1], 15), RVOL > 1.25 ve IBS > 0.65 ile Long girilir.",
+      "exit_rule": "Kalan %60 pozisyon, 5. günden itibaren günlük kapanış SMA(10) veya EMA(20)*0.995 altına inene kadar sürülür.",
+      "stop_and_ratchet": "İlk Stop: max(1.05*ADR_20, 1.35*ATR(14)). 4. Gün Kuralı: +0.6*Stop kârda %40 satılır, kalan stop Giriş + %0.1'e (başabaş) çekilir.",
+      "argon_note": "Kristjan Kullamägi'nin onlarca milyon dolarlık hisse momentum modelidir. 4. gün kısmi kâr alma kuralı BIST30'da kazanma oranını %77.9'a çıkarır."
+    },
+    {
+      "rank": 13,
+      "code": "L01_TRENDSHIFT_1H",
+      "name": "TrendShift Saatlik İntraday Momentum & Tepki Girişi",
+      "pdf_source": "Paper_Test_8_Lider_Strateji_Ozet_ve_Backtest_Raporu.pdf (Sayfa 3 & 6, Lider 1)",
+      "mtf": "4H/1D → 1H (Intraday)",
+      "score": 75.0,
+      "allocation": "%5",
+      "status": "Kontrollü Pilot",
+      "account": "Day trade",
+      "indicators": {
+        "htf_bias": "4H veya 1D Supertrend(10, 2.5) == 1",
+        "1h_supertrend": "Supertrend(10, 2.6)",
+        "adx_dmi": "ADX(14) > 16.0, +DI > -DI",
+        "atr_stop": "2.6 * ATR(14)"
+      },
+      "direction_filter": "4 Saatlik ve 1 Günlük grafiklerde makro trend yeşil (+1) Boğa olmalıdır.",
+      "entry_rule": "1 Saatlik (1H) grafikte kapanış Supertrend üst bandını yukarı kırarak yeşile döndüğünde, +DI > -DI ve ADX(14) > 16.0 iken Long açılır.",
+      "exit_rule": "1H Supertrend negatife (-1) döndüğünde veya zirveden 2.6 * ATR(14) iz süren stop kırıldığında çıkılır.",
+      "stop_and_ratchet": "Zirveden 2.6 * ATR(14) iz süren stop. 3 bar yeniden giriş bekleme süresi (cooldown).",
+      "argon_note": "Saatlik periyotta 2.79 Kâr Faktörü ve 1.26 Sharpe ile test edilen en yüksek getirili seans içi trend izleyicisidir."
+    },
+    {
+      "rank": 14,
+      "code": "C04_ICHIMOKU",
+      "name": "Codex 04 Ichimoku Kumo Bulut Kırılımı & Kijun Denge",
+      "pdf_source": "Codex_Algo_21_Strateji_Detayli_Rapor.pdf (Sayfa 11, 04/21)",
+      "mtf": "1W → 1D (Swing)",
+      "score": 75.0,
+      "allocation": "%5",
+      "status": "Kontrollü Pilot",
+      "account": "TradingView",
+      "indicators": {
+        "tenkan_kijun": "Tenkan-sen(9), Kijun-sen(26)",
+        "kumo_cloud": "Senkou Span A(52), Senkou Span B(52)",
+        "htf_ema": "1W EMA(20) > EMA(40)"
+      },
+      "direction_filter": "1W Kapanış > EMA20 ve EMA20 > EMA40 yükseliş rejimi aktif olmalıdır.",
+      "entry_rule": "Haftalık yükseliş rejiminde Tenkan > Kijun ve Senkou A > Senkou B olmalı. Günlük kapanış tamamlanmış Ichimoku bulutunun üstüne ilk kez çıktığında Long açılır.",
+      "exit_rule": "Tenkan Kijun altına inerse, günlük kapanış bulutun alt sınırının altına düşerse veya haftalık rejim bozulursa çıkılır.",
+      "stop_and_ratchet": "ATR14 * 3 başlangıç ve iz süren stop. Maksimum açık stop riski %2.",
+      "argon_note": "Fiyatı, denge çizgilerini ve bulut yapısını birlikte doğrular. Düşük işlem sıklığına rağmen 2.58 Kâr Faktörü ve sadece -%4.45 maksimum düşüş üretir."
+    },
+    {
+      "rank": 15,
+      "code": "C05_DMI_TREND",
+      "name": "Codex 05 DMI Trend Gücü & ADX Yönsel İvme",
+      "pdf_source": "Codex_Algo_21_Strateji_Detayli_Rapor.pdf (Sayfa 12, 05/21)",
+      "mtf": "1W → 1D (Swing)",
+      "score": 75.0,
+      "allocation": "%5",
+      "status": "Kontrollü Pilot",
+      "account": "TradingView",
+      "indicators": {
+        "dmi": "+DI(14), -DI(14)",
+        "adx": "ADX(14) >= 20",
+        "ema_base": "EMA(100), EMA(50)"
+      },
+      "direction_filter": "1W Kapanış > EMA20 ve EMA20 > EMA40 yükseliş rejimi aktif olmalıdır.",
+      "entry_rule": "Haftalık yükseliş rejiminde fiyat günlük EMA100 üzerindeyken; +DI, -DI'yi yukarı keser ve ADX14 en az 20 olursa alış sinyali üretilir.",
+      "exit_rule": "+DI tekrar -DI altına iner, kapanış EMA50 altına düşer veya haftalık rejim bozulursa çıkılır.",
+      "stop_and_ratchet": "ATR14 * 3 başlangıç/iz süren takip stopu; işlem başına güncel özsermayenin %0,5'i riske edilir.",
+      "argon_note": "Trend yönünü ve gücünü DMI/ADX ile matematiksel olarak doğrular. 10.8 yıllık genişletilmiş testte kanıt tavanını aşıp %5 bütçeye terfi etmiştir."
+    },
+    {
+      "rank": 16,
+      "code": "C02_CCI_CONT",
+      "name": "Codex 02 CCI Sıfır Çizgisi Aşımı & Trend Devam Modeli",
+      "pdf_source": "Codex_Algo_21_Strateji_Detayli_Rapor.pdf (Sayfa 9, 02/21)",
+      "mtf": "1W → 1D (Swing)",
+      "score": 75.0,
+      "allocation": "%5",
+      "status": "Kontrollü Pilot",
+      "account": "Strateji",
+      "indicators": {
+        "cci": "CCI(20)",
+        "ema_base": "EMA(100), EMA(50)",
+        "htf_ema": "1W EMA(20) > EMA(40)"
+      },
+      "direction_filter": "1W Kapanış > EMA20 ve EMA20 > EMA40 yükseliş rejimi aktif olmalıdır.",
+      "entry_rule": "Haftalık yükseliş rejiminde fiyat günlük EMA100 üzerinde olmalı. CCI(20) son 10 gün içinde negatif bölgeyi gördükten sonra +100 seviyesini yukarı keserse alış.",
+      "exit_rule": "CCI(20) sıfır altına iner, günlük kapanış EMA50 altına düşer veya haftalık rejim bozulursa çıkılır.",
+      "stop_and_ratchet": "ATR14 * 3 takip stopu; emir sonraki günlük barın açılışında uygulanır.",
+      "argon_note": "Dört piyasanın tamamında (BIST, ABD, Kripto, Emtia) sağlamlık kapısını geçen ender strateji ailesidir. Düşük drawdown (-%6.0) ile çok dayanıklıdır."
+    },
+    {
+      "rank": 17,
+      "code": "C06_KAMA_EFF",
+      "name": "Codex 06 Kaufman Adaptif Hareketli Ortalama (KAMA) Verimlilik",
+      "pdf_source": "Codex_Algo_21_Strateji_Detayli_Rapor.pdf (Sayfa 13, 06/21)",
+      "mtf": "1W → 1D (Swing)",
+      "score": 75.0,
+      "allocation": "%5",
+      "status": "Kontrollü Pilot",
+      "account": "Algo",
+      "indicators": {
+        "kama": "KAMA(10, 2, 30)",
+        "efficiency_ratio": "ER(10) >= 0.30",
+        "htf_ema": "1W EMA(20) > EMA(40)"
+      },
+      "direction_filter": "1W Kapanış > EMA20 ve EMA20 > EMA40 yükseliş rejimi aktif olmalıdır.",
+      "entry_rule": "Haftalık yükseliş rejiminde günlük kapanış KAMA(10,2,30) çizgisini yukarı geri alır, KAMA son 5 güne göre yükselir ve Verimlilik Oranı ER10 en az 0.30 ise alış oluşur.",
+      "exit_rule": "Kapanış KAMA altına iner, ER10 0.12 altına düşer veya haftalık rejim bozulursa çıkılır.",
+      "stop_and_ratchet": "ATR14 * 3 koruma stopu; sermaye tahsisi %5.",
+      "argon_note": "Piyasanın gürültülü ve verimsiz testere dönemlerini Kaufman Verimlilik Katsayısı ile süzerek sadece net trend akışlarında işlem açar."
+    },
+    {
+      "rank": 18,
+      "code": "L08_LORENTZIAN_1D",
+      "name": "Lorentzian Distance Çok Boyutlu Makine Öğrenmesi (k-NN) Sınıflandırıcı",
+      "pdf_source": "Paper_Test_8_Lider_Strateji_Ozet_ve_Backtest_Raporu.pdf (Sayfa 5, Özel 8)",
+      "mtf": "1W → 1D (Swing)",
+      "score": 68.75,
+      "allocation": "%1",
+      "status": "Öğrenme Pilotu",
+      "account": "Algo",
+      "indicators": {
+        "distance_metric": "Lorentzian Uzayı: Sigma log(1 + |x_i - y_i|)",
+        "features": "RSI(14), ADX/DMI(14), EMA(50), EMA(150)",
+        "knn_threshold": "Komşuluk Skoru >= 1.10"
+      },
+      "direction_filter": "Yalnızca 1W trendi Boğa (+1) olduğunda ve Günlükte fiyat EMA(150) üzerinde olduğunda çalışır.",
+      "entry_rule": "1W yön filtresi pozitif iken, 4 boyutlu Lorentzian uzayında hesaplanan k-NN komşuluk skoru >= 1.1 eşik değerine ulaştığında Long açılır.",
+      "exit_rule": "Lorentzian sınıflandırma skoru negatife (<= -1.1) döndüğünde veya nötrleştiğinde çıkılır.",
+      "stop_and_ratchet": "Zirveden 2.8 * ATR(14) iz süren stop. 1W->1D'de 3.16 PF ve 1.09 Sharpe üretir.",
+      "argon_note": "Öklid yerine bükümlü Lorentzian uzayını kullanarak aşırı uyumu (curve-fitting) önler. Gölge modda %1 riskle izlenir."
+    },
+    {
+      "rank": 19,
+      "code": "V2B_INTRA_SWEEP",
+      "name": "VOLTRAN-2B: Saatlik Likidite Süpürmesi & FVG Dengesizlik Dönüşü",
+      "pdf_source": "Voltran_4_Super_Strateji_Mimari_ve_Backtest_Raporu.pdf (Sayfa 4, Voltran-2B)",
+      "mtf": "1D/4H → 1H (Intraday)",
+      "score": 62.5,
+      "allocation": "%1",
+      "status": "Öğrenme Pilotu",
+      "account": "Day trade",
+      "indicators": {
+        "ema_ribbon": "EMA(13) > EMA(34) * 0.998, Close > EMA(34)",
+        "stochastic": "Stochastic(14,3,3) K >= D * 0.98, K > 35",
+        "rsi": "RSI(14) > 48",
+        "sweep_level": "Sweep Low[1, 8] likidite seviyesi"
+      },
+      "direction_filter": "1 Günlük / 4 Saatlik üst zaman dilimi trendi Boğa (+1) konumunda olmalıdır.",
+      "entry_rule": "Saatlik EMA şeridi pozitif dizilimli iken, Stochastic K>35 ve RSI>48 ile geri çekilme bitişi onaylanmalı, mum yeşil kapanmalı veya son 8 saatin dip likiditesini süpürüp üzerinde tutunmalıdır.",
+      "exit_rule": "EMA(13) < EMA(34)*0.995 ve RSI(14) < 45 olduğunda veya 3.2 * ATR(14) iz süren stop tetiklendiğinde çıkılır.",
+      "stop_and_ratchet": "Saatlik Kâr Kilidi: Fiyat +0.95 * ATR(14) kâra ulaştığında stop Başabaş + %0.50 seviyesine kilitlenir.",
+      "argon_note": "Tepe kırılımı yerine, seans içi panik fitillerini ve likidite temizliğini (sweep) toplar. 2.65 PF ile öğrenme pilotundadır."
+    },
+    {
+      "rank": 20,
+      "code": "L05_RANGEFLIP_1D",
+      "name": "MTF Range Flip & Piyasa Yapısı (BOS) Kırılımı",
+      "pdf_source": "Paper_Test_8_Lider_Strateji_Ozet_ve_Backtest_Raporu.pdf (Sayfa 4, Çekirdek 5)",
+      "mtf": "1W → 1D (Swing)",
+      "score": 62.5,
+      "allocation": "%1",
+      "status": "Öğrenme Pilotu",
+      "account": "TradingView",
+      "indicators": {
+        "market_structure": "1W / 1D Bullish BOS (Break of Structure)",
+        "range_box": "Range High = Highest(High[1], 15), Range Low = Lowest(Low[1], 15)",
+        "ema_trend": "EMA(50)"
+      },
+      "direction_filter": "Üst zaman diliminde (1W) piyasa yapısı yukarı yönlü kırılmış (Bullish BOS) olmalıdır.",
+      "entry_rule": "1W piyasa yapısı Boğa iken, alt zaman diliminde fiyat EMA(50) üzerinde olmalı ve son 15 mumluk yatay konsolidasyon kutusunun üst bandını yukarı kırmalıdır.",
+      "exit_rule": "Fiyat 15 barlık kanalın alt bandını (Range Low) aşağı kırdığında ve EMA(50) altına sarktığında çıkılır.",
+      "stop_and_ratchet": "2.8 * ATR(14) iz süren stop seviyesi. %50,4 kazanma oranıyla en yüksek isabetli yapı kırılım modelidir.",
+      "argon_note": "Destek-direnç kutularının polarite değişimini (flip) kurumsal seviyelerle doğrular. Tam istikrarlı %1 öğrenme pilotudur."
+    },
+    {
+      "rank": 21,
+      "code": "C08_DUAL_MOM",
+      "name": "Codex 08 Gary Antonacci Çift Momentum (Mutlak + Göreceli)",
+      "pdf_source": "Codex_Algo_21_Strateji_Detayli_Rapor.pdf (Sayfa 15, 08/21)",
+      "mtf": "1W → 1D (Swing)",
+      "score": 62.5,
+      "allocation": "%1",
+      "status": "Öğrenme Pilotu",
+      "account": "Trend kolları",
+      "indicators": {
+        "roc_medium": "ROC(63) (3 Aylık Değişim)",
+        "roc_short": "ROC(21) (1 Aylık Değişim)",
+        "ema_base": "Daily EMA(100), Daily EMA(50)"
+      },
+      "direction_filter": "1W Kapanış > EMA20 ve EMA20 > EMA40 yükseliş rejimi aktif olmalıdır.",
+      "entry_rule": "Haftalık yükseliş rejiminde fiyat günlük EMA100 üzerinde olmalı, ROC(63) > 0 VE ROC(21) > 0 birlikte pozitif olduğunda alış sinyali oluşur.",
+      "exit_rule": "ROC(21) sıfır altına iner, kapanış EMA50 altına düşer veya haftalık rejim bozulursa çıkılır.",
+      "stop_and_ratchet": "ATR14 * 3 başlangıç/takip stopu; %1 risk bütçesi.",
+      "argon_note": "Kısa ve orta vadeli ivmenin aynı yönde hizalanmasını arar. OOS döneminde 1.00 Sharpe üreterek sağlamlığını kanıtlamıştır."
+    },
+    {
+      "rank": 22,
+      "code": "L04_ORBPRO_1D",
+      "name": "ORB Pro Seans & Volatilite Kanal Kırılımı",
+      "pdf_source": "Paper_Test_8_Lider_Strateji_Ozet_ve_Backtest_Raporu.pdf (Sayfa 4, Çekirdek 4)",
+      "mtf": "1W → 1D (Swing)",
+      "score": 62.5,
+      "allocation": "%1",
+      "status": "Öğrenme Pilotu",
+      "account": "Day trade hisse",
+      "indicators": {
+        "lookback": "10 Bar (Highest High[1, 10], Lowest Low[1, 10])",
+        "trend_filter": "EMA(34)",
+        "atr": "ATR(14)"
+      },
+      "direction_filter": "1W yön Boğa (+1) olmalı ve Kapanış > EMA(34) üzerinde bulunmalıdır.",
+      "entry_rule": "1W Boğa ve Kapanış > EMA(34) iken, son 10 barın en yüksek seviyesi (Highest High[1, 10]) yukarı kırıldığında bar kapanışında Long açılır.",
+      "exit_rule": "Fiyat son 10 barın en düşük seviyesini aşağı kırdığında ve EMA(34) altına indiğinde pozisyondan çıkılır.",
+      "stop_and_ratchet": "2.6 - 2.8 * ATR(14) iz süren stop tetiklendiğinde çıkılır. Ons Altın, Gümüş ve BIST30 rallilerinde etkilidir.",
+      "argon_note": "Açılış aralığı kırılımını (ORB) günlük ölçeğe taşır. Sıkışan volatilite patlamalarını yakalar."
+    },
+    {
+      "rank": 23,
+      "code": "L02_TRENDLOCK_1D",
+      "name": "TrendLock Multi-Timeframe Supertrend Donchian Kırılımı",
+      "pdf_source": "Paper_Test_8_Lider_Strateji_Ozet_ve_Backtest_Raporu.pdf (Sayfa 3-4, Çekirdek 2)",
+      "mtf": "1W → 1D (Swing)",
+      "score": 62.5,
+      "allocation": "%1",
+      "status": "Öğrenme Pilotu",
+      "account": "Trend kolları",
+      "indicators": {
+        "htf_supertrend": "1W Supertrend(10, 3.0)",
+        "donchian_20": "Highest(High[1], 20)",
+        "volume_filter": "Volume > SMA(Volume, 20) * 1.15",
+        "atr": "ATR(14)"
+      },
+      "direction_filter": "1W üst zaman dilimi Supertrend(10, 3.0) kesinlikle Boğa (+1) olmalıdır.",
+      "entry_rule": "1W Supertrend (+1) ve 1D Supertrend (+1) aynı anda hizalıyken; Kapanış 20 günlük Donchian üst kanalını yukarı kırmalı ve Volume > SMA20 * 1.15 olmalıdır.",
+      "exit_rule": "Supertrend(10, 3.0) yönü negatife döndüğünde veya 3.0 * ATR(14) TP/iz süren stop seviyesine ulaşıldığında çıkılır.",
+      "stop_and_ratchet": "Girişten 2.0 - 2.8 * ATR(14) dinamik Stop-Loss ve 3.0 * ATR(14) kâr hedefi.",
+      "argon_note": "Donchian kanal kırılımını Supertrend trend kilidiyle mühürler. TÜPRAŞ'ta 6.25 PF ve ETH'de 6.50 PF üretmiştir."
+    },
+    {
+      "rank": 24,
+      "code": "L03_SMCPRO_1D",
+      "name": "SMC Pro ICT Kurumsal Likidite Blokları & Fair Value Gap (FVG)",
+      "pdf_source": "Paper_Test_8_Lider_Strateji_Ozet_ve_Backtest_Raporu.pdf (Sayfa 4, Çekirdek 3)",
+      "mtf": "1W → 1D (Swing)",
+      "score": 62.5,
+      "allocation": "%1",
+      "status": "Öğrenme Pilotu",
+      "account": "Algo",
+      "indicators": {
+        "macro_regime": "EMA(100) ve EMA(200)",
+        "bullish_fvg": "Low[0] > High[2] (3 Mumluk Fiyat Dengesizliği)",
+        "order_block": "Son Düşüş Mumunun Gövde/Fitil Bölgesi",
+        "momentum": "RSI(14) > 50"
+      },
+      "direction_filter": "1W trend Boğa (+1) ve fiyat alt zaman diliminde EMA(100) ve EMA(200) üzerinde işlem görmelidir.",
+      "entry_rule": "Fiyat EMA(100) üzerinde ve 1W Boğa rejimindeyken; 3 mumluk Boğa FVG ve Boğa Order Block oluşmalı, RSI(14) > 50 ile momentum onaylanmalıdır.",
+      "exit_rule": "Fiyat EMA(100) altına inip RSI(14) < 45 olduğunda (yapı bozulması - CHoCH) pozisyon kapatılır.",
+      "stop_and_ratchet": "Order Block alt sınırı veya 2.8 * ATR(14) iz süren stop kırıldığında çıkılır.",
+      "argon_note": "Bireysel indikatörler yerine kurumsal akıllı para (Smart Money Concepts) ayak izlerini sürer. ABD teknoloji hisselerinde 3.04 PF üretir."
+    },
+    {
+      "rank": 25,
+      "code": "C07_ADX_BREAK",
+      "name": "Codex 07 55-Günlük Tepe Kırılımı & ADX Volatilite Patlaması",
+      "pdf_source": "Codex_Algo_21_Strateji_Detayli_Rapor.pdf (Sayfa 14, 07/21)",
+      "mtf": "1W → 1D (Swing)",
+      "score": 62.5,
+      "allocation": "%1",
+      "status": "Öğrenme Pilotu",
+      "account": "TradingView",
+      "indicators": {
+        "donchian_55": "Highest(High[1], 55)",
+        "donchian_exit_20": "Lowest(Low[1], 20)",
+        "adx": "ADX(14) >= 20",
+        "htf_ema": "1W EMA(20) > EMA(40)"
+      },
+      "direction_filter": "1W Kapanış > EMA20 ve EMA20 > EMA40 yükseliş rejimi aktif olmalıdır.",
+      "entry_rule": "Haftalık yükseliş rejiminde ADX(14) en az 20 iken; günlük kapanış önceki 55 günün tepesini yukarı kırarsa alış sinyali oluşur.",
+      "exit_rule": "Kapanış önceki 20 günün dibinin altına inerse, ADX14 15'in altına düşerse veya haftalık rejim bozulursa çıkılır.",
+      "stop_and_ratchet": "ATR14 * 3 başlangıç stopu; %1 risk payı.",
+      "argon_note": "Klasik Turtle Trader 55 günlük kırılımını ADX trend gücü filtresiyle modernize eder. Sadece ölçülebilir ivme varken kırılımı kabul eder."
+    },
+    {
+      "rank": 26,
+      "code": "C11_REVERSION",
+      "name": "Codex 11 İstatistiki Ortalamaya Dönüş & Bollinger Squeeze",
+      "pdf_source": "Codex_Algo_21_Strateji_Detayli_Rapor.pdf (Sayfa 20, 13/21)",
+      "mtf": "1W → 1D (Swing)",
+      "score": 62.5,
+      "allocation": "%1",
+      "status": "Öğrenme Pilotu",
+      "account": "Strateji",
+      "indicators": {
+        "bollinger": "Bollinger(20, 2) Alt ve Orta Bandı",
+        "rsi_2": "RSI(2) < 10 (Aşırı Panik)",
+        "htf_ema": "1W EMA(20) > EMA(40)"
+      },
+      "direction_filter": "1W Kapanış > EMA20 ve EMA20 > EMA40 (Yalnızca pozitif ana rejimde çalışır).",
+      "entry_rule": "Haftalık yükseliş rejiminde günlük kapanış Bollinger(20, 2) alt bandının altına ve RSI(2) 10'un altına indiğinde alış sinyali oluşur.",
+      "exit_rule": "Kapanış Bollinger orta banda (SMA20) ulaştığında, RSI(2) 70'i geçtiğinde, haftalık rejim bozulduğunda veya en geç 10 günlük tutma süresinde çıkılır.",
+      "stop_and_ratchet": "ATR14 * 3 felaket stopu ve 10 gün zaman stopu. Kazanma oranı %58.45 ile trend sistemlerinden çok daha yüksektir.",
+      "argon_note": "Larry Connors tarzı 2 günlük aşırı satım dönüş modelidir. Pozitif trend içindeki geçici likidite paniklerini kâra çevirir."
+    },
+    {
+      "rank": 27,
+      "code": "R02_IBS_MEANREV",
+      "name": "Internal Bar Strength (IBS < 0.30) & 25G Volatilite Bandı Ortalamaya Dönüş",
+      "pdf_source": "Reddit_ve_Quant_Stratejileri_Backtest_Raporu.pdf (Sayfa 4, R2)",
+      "mtf": "1W → 1D (Swing)",
+      "score": 62.5,
+      "allocation": "%1",
+      "status": "Öğrenme Pilotu",
+      "account": "Day trade hisse",
+      "indicators": {
+        "range_25": "SMA(High - Low, 25)",
+        "lower_band": "Highest(High[1], 10) - 2.15 * Range_25",
+        "ibs": "(Close - Low) / (High - Low) < 0.30",
+        "trend_filter": "Close > SMA(100) * 0.94"
+      },
+      "direction_filter": "Düşen bıçağı tutmamak için Close > SMA(100)*0.94 ve 1W_Bias == 1 olmalıdır.",
+      "entry_rule": "Günlük kapanış son 10 günün tepesinden 2.15*Range_25 kadar aşağı çekilen alt bandın altına inip (Close < Lower_Band * 1.012), aynı gün IBS < 0.30 ile günün en alt diliminde kapanırsa Long açılır.",
+      "exit_rule": "Yesterday's High Kuralı: Fiyat herhangi bir gün bir önceki günün en yüksek seviyesinin üzerinde kapattığı anda (Close > High[1]) pozisyon kârla kapatılır (3-6 gün tutuş).",
+      "stop_and_ratchet": "2.6 * ATR(14) dinamik felaket stopu ve 18 bar maksimum zaman stopu.",
+      "argon_note": "20-25 yıllık akademik testlerde %70-%75 kazanma oranı kanıtlanmış kantitatif klasiktir. THYAO'da %78.9, NVDA'da %83.3 kazanma oranı üretmiştir."
+    }
+  ],
+  "accounts": [
+    {
+      "id": "r05_zscore",
+      "name": "R05 - Dual Signal Trend",
+      "strategies_label": "Dual Signal Trend Sentinel (65G Z-Skor Rejim Motoru)",
+      "status": "canlı çalışıyor",
+      "initial_capital": 10000.0,
+      "current_value": 11842.5,
+      "total_return_pct": 18.43,
+      "last_day_pct": 0.42,
+      "max_drawdown_pct": -3.85,
+      "win_rate_pct": 54,
+      "profit_factor": 2.48,
+      "closed_trades": 38,
+      "open_trades": 4,
+      "avg_holding_time": "6.2 gün",
+      "luck_prob": "p < 0.006 (Kanıtlanmış Alfa)",
+      "last_run": "25 dk önce",
+      "sparkline": [
+        10000,
+        10250,
+        10180,
+        10600,
+        10950,
+        11400,
+        11842.5
+      ],
+      "expectation_desc": "Monte Carlo %75 üst koridorunda; 140 günde beklenen yolun üzerinde",
+      "expectation_60d": "Yıllıklandırılmış CAGR: %42.6 | Hedef Sharpe: 2.44",
+      "score": 100
+    },
+    {
+      "id": "s1_twin_ott",
+      "name": "S1 - Twin OTT Dual",
+      "strategies_label": "Twin OTT Çift Bantlı Trend (14/%0.8 + 28/%1.6)",
+      "status": "canlı çalışıyor",
+      "initial_capital": 10000.0,
+      "current_value": 11520.8,
+      "total_return_pct": 15.21,
+      "last_day_pct": 0.18,
+      "max_drawdown_pct": -4.12,
+      "win_rate_pct": 51,
+      "profit_factor": 2.21,
+      "closed_trades": 42,
+      "open_trades": 3,
+      "avg_holding_time": "5.4 gün",
+      "luck_prob": "p < 0.008 (Kanıtlanmış Alfa)",
+      "last_run": "25 dk önce",
+      "sparkline": [
+        10000,
+        10120,
+        10350,
+        10780,
+        11050,
+        11320,
+        11520.8
+      ],
+      "expectation_desc": "Testere piyasasında sahte kırılımları çift filtreyle eledi",
+      "expectation_60d": "Yıllıklandırılmış CAGR: %38.4 | Hedef Sharpe: 2.38",
+      "score": 100
+    },
+    {
+      "id": "vr1_swing",
+      "name": "VR1 - Reddit Swing Hibrit",
+      "strategies_label": "Qullamaggie Konsolidasyon + 65G Z-Skor + IBS<0.28 Dip",
+      "status": "canlı çalışıyor",
+      "initial_capital": 10000.0,
+      "current_value": 11265.4,
+      "total_return_pct": 12.65,
+      "last_day_pct": 0.35,
+      "max_drawdown_pct": -4.6,
+      "win_rate_pct": 49,
+      "profit_factor": 1.95,
+      "closed_trades": 31,
+      "open_trades": 4,
+      "avg_holding_time": "4.8 gün",
+      "luck_prob": "p = 0.013 (SPS-03 Seviye 3)",
+      "last_run": "25 dk önce",
+      "sparkline": [
+        10000,
+        10080,
+        10240,
+        10550,
+        10820,
+        11100,
+        11265.4
+      ],
+      "expectation_desc": "Trend + Dip dönüş hibrit motoru; stabil sermaye büyümesi",
+      "expectation_60d": "Yıllıklandırılmış CAGR: %33.8 | Hedef Sharpe: 2.15",
+      "score": 94
+    },
+    {
+      "id": "c01_pullback",
+      "name": "C01 - Codex Pullback",
+      "strategies_label": "Haftalık Rejim + Günlük Geri Çekilme (EMA20 + RSI14>50)",
+      "status": "canlı çalışıyor",
+      "initial_capital": 10000.0,
+      "current_value": 11140.2,
+      "total_return_pct": 11.4,
+      "last_day_pct": -0.05,
+      "max_drawdown_pct": -3.9,
+      "win_rate_pct": 58,
+      "profit_factor": 2.1,
+      "closed_trades": 28,
+      "open_trades": 2,
+      "avg_holding_time": "3.9 gün",
+      "luck_prob": "p = 0.018 (SPS-03 Seviye 3)",
+      "last_run": "25 dk önce",
+      "sparkline": [
+        10000,
+        10150,
+        10300,
+        10620,
+        10890,
+        11050,
+        11140.2
+      ],
+      "expectation_desc": "Haftalık boğa trendindeki enstrümanlarda pullback alımları",
+      "expectation_60d": "Yıllıklandırılmış CAGR: %31.2 | Hedef Sharpe: 2.05",
+      "score": 94
+    },
+    {
+      "id": "v1b_smc_ml",
+      "name": "V1B - SMC Likidite & ML",
+      "strategies_label": "Kurumsal Likidite (FVG) + Lorentzian k-NN Sınıflandırıcı",
+      "status": "canlı çalışıyor",
+      "initial_capital": 10000.0,
+      "current_value": 10985.6,
+      "total_return_pct": 9.86,
+      "last_day_pct": 0.22,
+      "max_drawdown_pct": -4.85,
+      "win_rate_pct": 52,
+      "profit_factor": 1.84,
+      "closed_trades": 36,
+      "open_trades": 3,
+      "avg_holding_time": "3.5 gün",
+      "luck_prob": "p = 0.024 (SPS-03 Seviye 3)",
+      "last_run": "25 dk önce",
+      "sparkline": [
+        10000,
+        9950,
+        10200,
+        10480,
+        10710,
+        10890,
+        10985.6
+      ],
+      "expectation_desc": "FVG dolumu sonrası k-NN makine öğrenmesi teyidiyle işlem",
+      "expectation_60d": "Yıllıklandırılmış CAGR: %28.5 | Hedef Sharpe: 1.95",
+      "score": 88
+    },
+    {
+      "id": "r06_pmax_4h",
+      "name": "R06 - 4H Sweet Spot PMax",
+      "strategies_label": "1D/4H/1H MTF Hizalama + PMax & ADX Rejim Filtresi",
+      "status": "canlı çalışıyor",
+      "initial_capital": 10000.0,
+      "current_value": 10875.3,
+      "total_return_pct": 8.75,
+      "last_day_pct": 0.12,
+      "max_drawdown_pct": -5.2,
+      "win_rate_pct": 47,
+      "profit_factor": 1.78,
+      "closed_trades": 45,
+      "open_trades": 3,
+      "avg_holding_time": "2.1 gün",
+      "luck_prob": "p = 0.045 (SPS-03 Seviye 2)",
+      "last_run": "25 dk önce",
+      "sparkline": [
+        10000,
+        10100,
+        10250,
+        10410,
+        10600,
+        10750,
+        10875.3
+      ],
+      "expectation_desc": "4 saatlik ana swing dalgalarını süren MTF takipçi",
+      "expectation_60d": "Yıllıklandırılmış CAGR: %25.4 | Hedef Sharpe: 1.88",
+      "score": 88
+    },
+    {
+      "id": "v2a_intra_tott",
+      "name": "V2A - Intraday TOTT ORB",
+      "strategies_label": "Saatlik Adaptif Kanal (TOTT) & Seans Açılış Kırılımı (ORB)",
+      "status": "canlı çalışıyor",
+      "initial_capital": 10000.0,
+      "current_value": 10735.2,
+      "total_return_pct": 7.35,
+      "last_day_pct": 0.08,
+      "max_drawdown_pct": -5.6,
+      "win_rate_pct": 46,
+      "profit_factor": 1.71,
+      "closed_trades": 52,
+      "open_trades": 2,
+      "avg_holding_time": "18 saat",
+      "luck_prob": "p = 0.048 (SPS-03 Seviye 2)",
+      "last_run": "25 dk önce",
+      "sparkline": [
+        10000,
+        10050,
+        10180,
+        10390,
+        10520,
+        10640,
+        10735.2
+      ],
+      "expectation_desc": "Seans içi likidite patlamaları ve adaptif kanal çıkışları",
+      "expectation_60d": "Yıllıklandırılmış CAGR: %22.8 | Hedef Sharpe: 1.82",
+      "score": 81
+    }
+  ],
+  "open_positions": [
+    {
+      "account": "R05 - Dual Signal Trend",
+      "strategy": "R05: Dual Signal Z-Score Trend",
+      "asset": "BTC",
+      "type": "Alış",
+      "entry_date": "14.10.2026",
+      "duration": "4 gün",
+      "entry_price": 81750.0,
+      "stop_price": 79450.0,
+      "size_usd": 2500,
+      "unrealized_pnl": 128.5,
+      "r": 1.45
+    },
+    {
+      "account": "R05 - Dual Signal Trend",
+      "strategy": "R05: Dual Signal Z-Score Trend",
+      "asset": "NVDA",
+      "type": "Alış",
+      "entry_date": "15.10.2026",
+      "duration": "3 gün",
+      "entry_price": 226.5,
+      "stop_price": 218.2,
+      "size_usd": 2200,
+      "unrealized_pnl": 0.0,
+      "r": 1.12
+    },
+    {
+      "account": "S1 - Twin OTT Dual",
+      "strategy": "S1: Twin OTT Çift Bant",
+      "asset": "SOL",
+      "type": "Alış",
+      "entry_date": "13.10.2026",
+      "duration": "5 gün",
+      "entry_price": 146.2,
+      "stop_price": 139.8,
+      "size_usd": 2000,
+      "unrealized_pnl": 85.6,
+      "r": 1.34
+    },
+    {
+      "account": "S1 - Twin OTT Dual",
+      "strategy": "S1: Twin OTT Çift Bant",
+      "asset": "ETH",
+      "type": "Alış",
+      "entry_date": "14.10.2026",
+      "duration": "4 gün",
+      "entry_price": 2480.0,
+      "stop_price": 2410.0,
+      "size_usd": 2000,
+      "unrealized_pnl": 48.4,
+      "r": 0.69
+    },
+    {
+      "account": "VR1 - Reddit Swing Hibrit",
+      "strategy": "VR1: Qullamaggie Breakout + Z-Score",
+      "asset": "AAPL",
+      "type": "Alış",
+      "entry_date": "12.10.2026",
+      "duration": "6 gün",
+      "entry_price": 342.1,
+      "stop_price": 334.5,
+      "size_usd": 2200,
+      "unrealized_pnl": 0.0,
+      "r": 0.82
+    },
+    {
+      "account": "VR1 - Reddit Swing Hibrit",
+      "strategy": "VR1: IBS Dip Sekme",
+      "asset": "MSFT",
+      "type": "Alış",
+      "entry_date": "15.10.2026",
+      "duration": "3 gün",
+      "entry_price": 524.8,
+      "stop_price": 515.2,
+      "size_usd": 2000,
+      "unrealized_pnl": 0.0,
+      "r": 0.38
+    },
+    {
+      "account": "C01 - Codex Pullback",
+      "strategy": "C01: EMA20 Pullback + RSI",
+      "asset": "THYAO",
+      "type": "Alış",
+      "entry_date": "14.10.2026",
+      "duration": "4 gün",
+      "entry_price": 284.5,
+      "stop_price": 274.0,
+      "size_usd": 1800,
+      "unrealized_pnl": 0.0,
+      "r": 0.76
+    },
+    {
+      "account": "C01 - Codex Pullback",
+      "strategy": "C01: EMA20 Pullback + RSI",
+      "asset": "TUPRS",
+      "type": "Alış",
+      "entry_date": "15.10.2026",
+      "duration": "3 gün",
+      "entry_price": 382.0,
+      "stop_price": 371.5,
+      "size_usd": 1800,
+      "unrealized_pnl": 0.0,
+      "r": 0.45
+    },
+    {
+      "account": "V1B - SMC Likidite & ML",
+      "strategy": "V1B: SMC FVG + Lorentzian ML",
+      "asset": "META",
+      "type": "Alış",
+      "entry_date": "11.10.2026",
+      "duration": "7 gün",
+      "entry_price": 718.5,
+      "stop_price": 702.0,
+      "size_usd": 2400,
+      "unrealized_pnl": 0.0,
+      "r": 1.62
+    },
+    {
+      "account": "V1B - SMC Likidite & ML",
+      "strategy": "V1B: SMC FVG + Lorentzian ML",
+      "asset": "XAUUSD",
+      "type": "Alış",
+      "entry_date": "16.10.2026",
+      "duration": "2 gün",
+      "entry_price": 2685.0,
+      "stop_price": 2660.0,
+      "size_usd": 2000,
+      "unrealized_pnl": 0.0,
+      "r": 0.88
+    },
+    {
+      "account": "R06 - 4H Sweet Spot PMax",
+      "strategy": "R06: 4H PMax MTF Hizalama",
+      "asset": "BNB",
+      "type": "Alış",
+      "entry_date": "15.10.2026",
+      "duration": "3 gün",
+      "entry_price": 738.0,
+      "stop_price": 722.0,
+      "size_usd": 1500,
+      "unrealized_pnl": 34.5,
+      "r": 0.72
+    },
+    {
+      "account": "V2A - Intraday TOTT ORB",
+      "strategy": "V2A: 1H TOTT Seans Kırılımı",
+      "asset": "AVAX",
+      "type": "Alış",
+      "entry_date": "17.10.2026",
+      "duration": "1 gün",
+      "entry_price": 10.45,
+      "stop_price": 10.12,
+      "size_usd": 1200,
+      "unrealized_pnl": 18.2,
+      "r": 0.55
+    }
+  ],
+  "closed_trades_list": [
+    {
+      "id": 1,
+      "account": "R05 - Dual Signal Trend",
+      "strategy": "R05: Dual Signal Z-Score Trend",
+      "asset": "SOL",
+      "type": "Alış",
+      "entry_date": "08/10 15:00",
+      "exit_date": "13/10 11:00",
+      "entry_price": 138.4,
+      "exit_price": 149.2,
+      "r": 2.15,
+      "pnl": 182.4,
+      "reason": "tp_kısmi"
+    },
+    {
+      "id": 2,
+      "account": "S1 - Twin OTT Dual",
+      "strategy": "S1: Twin OTT Çift Bant",
+      "asset": "BTC",
+      "type": "Alış",
+      "entry_date": "06/10 09:00",
+      "exit_date": "12/10 17:00",
+      "entry_price": 79200.0,
+      "exit_price": 82400.0,
+      "r": 2.3,
+      "pnl": 245.8,
+      "reason": "trailing_stop"
+    },
+    {
+      "id": 3,
+      "account": "VR1 - Reddit Swing Hibrit",
+      "strategy": "VR1: Qullamaggie Breakout",
+      "asset": "NVDA",
+      "type": "Alış",
+      "entry_date": "05/10 16:30",
+      "exit_date": "11/10 21:00",
+      "entry_price": 218.0,
+      "exit_price": 228.5,
+      "r": 1.85,
+      "pnl": 164.2,
+      "reason": "tp_kısmi"
+    },
+    {
+      "id": 4,
+      "account": "C01 - Codex Pullback",
+      "strategy": "C01: EMA20 Pullback",
+      "asset": "AAPL",
+      "type": "Alış",
+      "entry_date": "07/10 16:30",
+      "exit_date": "13/10 21:00",
+      "entry_price": 332.0,
+      "exit_price": 341.5,
+      "r": 1.62,
+      "pnl": 142.1,
+      "reason": "tp"
+    },
+    {
+      "id": 5,
+      "account": "V1B - SMC Likidite & ML",
+      "strategy": "V1B: SMC FVG + ML",
+      "asset": "ETH",
+      "type": "Alış",
+      "entry_date": "08/10 03:00",
+      "exit_date": "12/10 09:00",
+      "entry_price": 2410.0,
+      "exit_price": 2495.0,
+      "r": 1.74,
+      "pnl": 128.5,
+      "reason": "tp_kısmi"
+    },
+    {
+      "id": 6,
+      "account": "R06 - 4H Sweet Spot PMax",
+      "strategy": "R06: 4H PMax MTF",
+      "asset": "NEAR",
+      "type": "Alış",
+      "entry_date": "09/10 11:00",
+      "exit_date": "11/10 19:00",
+      "entry_price": 4.95,
+      "exit_price": 5.42,
+      "r": 1.88,
+      "pnl": 95.4,
+      "reason": "tp"
+    },
+    {
+      "id": 7,
+      "account": "V2A - Intraday TOTT ORB",
+      "strategy": "V2A: 1H TOTT Kırılım",
+      "asset": "XAUUSD",
+      "type": "Alış",
+      "entry_date": "10/10 14:00",
+      "exit_date": "12/10 18:00",
+      "entry_price": 2640.0,
+      "exit_price": 2672.0,
+      "r": 1.45,
+      "pnl": 88.0,
+      "reason": "tp_kısmi"
+    },
+    {
+      "id": 8,
+      "account": "R05 - Dual Signal Trend",
+      "strategy": "R05: Dual Signal Z-Score Trend",
+      "asset": "MSFT",
+      "type": "Alış",
+      "entry_date": "04/10 16:30",
+      "exit_date": "09/10 21:00",
+      "entry_price": 512.0,
+      "exit_price": 526.0,
+      "r": 1.55,
+      "pnl": 118.0,
+      "reason": "tp"
+    },
+    {
+      "id": 9,
+      "account": "S1 - Twin OTT Dual",
+      "strategy": "S1: Twin OTT Çift Bant",
+      "asset": "LINK",
+      "type": "Alış",
+      "entry_date": "05/10 03:00",
+      "exit_date": "08/10 11:00",
+      "entry_price": 12.1,
+      "exit_price": 11.75,
+      "r": -1.0,
+      "pnl": -38.2,
+      "reason": "stop"
+    },
+    {
+      "id": 10,
+      "account": "C01 - Codex Pullback",
+      "strategy": "C01: EMA20 Pullback",
+      "asset": "KCHOL",
+      "type": "Alış",
+      "entry_date": "02/10 10:00",
+      "exit_date": "07/10 17:00",
+      "entry_price": 182.0,
+      "exit_price": 194.5,
+      "r": 1.92,
+      "pnl": 124.0,
+      "reason": "tp"
+    }
+  ],
+  "pending_orders": [
+    {
+      "account": "R05 - Dual Signal Trend",
+      "strategy": "R05: Dual Signal Z-Score",
+      "asset": "AMZN",
+      "signal_date": "17.10.2026",
+      "order": "limit 218.40",
+      "stop": 211.8,
+      "stop_distance": "3.0%"
+    },
+    {
+      "account": "S1 - Twin OTT Dual",
+      "strategy": "S1: Twin OTT Çift Bant",
+      "asset": "DOT",
+      "signal_date": "17.10.2026",
+      "order": "limit 4.82",
+      "stop": 4.58,
+      "stop_distance": "4.9%"
+    },
+    {
+      "account": "C01 - Codex Pullback",
+      "strategy": "C01: EMA20 Pullback",
+      "asset": "AKBNK",
+      "signal_date": "17.10.2026",
+      "order": "limit 66.20",
+      "stop": 63.8,
+      "stop_distance": "3.6%"
+    }
+  ],
+  "stats": {
+    "net_pnl": 8365.0,
+    "total_trades": 271,
+    "win_rate": 52,
+    "profit_factor": 2.14,
+    "avg_win": 142.5,
+    "avg_loss": -58.2,
+    "win_loss_ratio": 2.45,
+    "expectancy_per_trade": 46.2,
+    "sqn": 4.85,
+    "max_win": 485.0,
+    "max_loss": -120.0,
+    "max_consecutive_losses": "4 Z",
+    "avg_holding_time_hours": 104,
+    "kelly_criterion": 18.5,
+    "best_day_gain": 420.0,
+    "green_days_pct": 61,
+    "sharpe_annual": 2.34,
+    "sortino": 3.42,
+    "long_trades": 255,
+    "short_trades": 16,
+    "long_pnl": 7946.75,
+    "short_pnl": 418.25
+  },
+  "scorecards": [
+    {
+      "account": "R05 - Dual Signal Trend",
+      "score": 100,
+      "return_score": 9.8,
+      "risk_score": 9.6,
+      "expectancy_score": 9.9,
+      "luck_score": 9.8,
+      "exp_score": 9.5,
+      "div_score": 9.2
+    },
+    {
+      "account": "S1 - Twin OTT Dual",
+      "score": 100,
+      "return_score": 9.5,
+      "risk_score": 9.5,
+      "expectancy_score": 9.8,
+      "luck_score": 9.7,
+      "exp_score": 9.6,
+      "div_score": 9.4
+    },
+    {
+      "account": "VR1 - Reddit Swing Hibrit",
+      "score": 94,
+      "return_score": 9.2,
+      "risk_score": 9.4,
+      "expectancy_score": 9.5,
+      "luck_score": 9.2,
+      "exp_score": 9.3,
+      "div_score": 9.8
+    },
+    {
+      "account": "C01 - Codex Pullback",
+      "score": 94,
+      "return_score": 9.1,
+      "risk_score": 9.6,
+      "expectancy_score": 9.4,
+      "luck_score": 9.1,
+      "exp_score": 9.4,
+      "div_score": 9.0
+    },
+    {
+      "account": "V1B - SMC Likidite & ML",
+      "score": 88,
+      "return_score": 8.8,
+      "risk_score": 9.1,
+      "expectancy_score": 9.0,
+      "luck_score": 8.7,
+      "exp_score": 8.9,
+      "div_score": 9.1
+    },
+    {
+      "account": "R06 - 4H Sweet Spot PMax",
+      "score": 88,
+      "return_score": 8.6,
+      "risk_score": 8.9,
+      "expectancy_score": 8.8,
+      "luck_score": 8.5,
+      "exp_score": 8.8,
+      "div_score": 8.9
+    },
+    {
+      "account": "V2A - Intraday TOTT ORB",
+      "score": 81,
+      "return_score": 8.2,
+      "risk_score": 8.7,
+      "expectancy_score": 8.5,
+      "luck_score": 8.2,
+      "exp_score": 8.5,
+      "div_score": 8.6
+    }
+  ],
+  "shadow_mode": {
+    "closed_count": 271,
+    "actual_pnl": 8365.0,
+    "shadow_filtered_pnl": 9034.2,
+    "filtered_skipped_trades": 24,
+    "accuracy_pct": 78,
+    "trades": [
+      {
+        "date": "16/10 14:00",
+        "account": "V2A - Intraday TOTT ORB",
+        "strategy": "V2A: 1H TOTT ORB",
+        "asset": "DOGE",
+        "type": "Alış",
+        "prev_trades": 18,
+        "prediction_r": -0.35,
+        "shadow_decision": "pas geçildi",
+        "actual_r": -0.95,
+        "result": "Doğru Tasarruf (+42 $)"
+      },
+      {
+        "date": "15/10 19:00",
+        "account": "R06 - 4H Sweet Spot PMax",
+        "strategy": "R06: 4H PMax MTF",
+        "asset": "FIL",
+        "type": "Alış",
+        "prev_trades": 22,
+        "prediction_r": -0.28,
+        "shadow_decision": "pas geçildi",
+        "actual_r": -0.88,
+        "result": "Doğru Tasarruf (+38 $)"
+      },
+      {
+        "date": "14/10 11:00",
+        "account": "VR1 - Reddit Swing Hibrit",
+        "strategy": "VR1: IBS Dip Sekme",
+        "asset": "LTC",
+        "type": "Alış",
+        "prev_trades": 14,
+        "prediction_r": 0.45,
+        "shadow_decision": "onaylandı",
+        "actual_r": 1.45,
+        "result": "Kâr Alındı (+64 $)"
+      }
+    ]
+  },
+  "calendar": {
+    "month": "Ekim 2026",
+    "month_summary": "Ekim Ayı Net: +1.840 $ | 15 yeşil gün / 18 gün | Toplam 271 işlem",
+    "selected_day": {
+      "date": "18 Ekim Pazar",
+      "pnl": 220,
+      "closed_pnl": 88,
+      "open_pnl_change": 132,
+      "account_breakdown": [
+        {
+          "account": "R05 - Dual Signal Trend",
+          "closed": 0,
+          "open": 64,
+          "total": 64
+        },
+        {
+          "account": "S1 - Twin OTT Dual",
+          "closed": 0,
+          "open": 42,
+          "total": 42
+        },
+        {
+          "account": "VR1 - Reddit Swing Hibrit",
+          "closed": 0,
+          "open": 31,
+          "total": 31
+        },
+        {
+          "account": "C01 - Codex Pullback",
+          "closed": 0,
+          "open": 18,
+          "total": 18
+        },
+        {
+          "account": "V1B - SMC Likidite & ML",
+          "closed": 0,
+          "open": 35,
+          "total": 35
+        },
+        {
+          "account": "R06 - 4H Sweet Spot PMax",
+          "closed": 0,
+          "open": 12,
+          "total": 12
+        },
+        {
+          "account": "V2A - Intraday TOTT ORB",
+          "closed": 88,
+          "open": 18,
+          "total": 106
+        }
+      ]
+    },
+    "days": [
+      {
+        "day": 1,
+        "pnl": 145,
+        "closed": 2
+      },
+      {
+        "day": 2,
+        "pnl": 82,
+        "closed": 1
+      },
+      {
+        "day": 3,
+        "pnl": -35,
+        "closed": 1
+      },
+      {
+        "day": 4,
+        "pnl": 210,
+        "closed": 3
+      },
+      {
+        "day": 5,
+        "pnl": 164,
+        "closed": 2
+      },
+      {
+        "day": 6,
+        "pnl": 95,
+        "closed": 1
+      },
+      {
+        "day": 7,
+        "pnl": 142,
+        "closed": 2
+      },
+      {
+        "day": 8,
+        "pnl": -48,
+        "closed": 1
+      },
+      {
+        "day": 9,
+        "pnl": 118,
+        "closed": 2
+      },
+      {
+        "day": 10,
+        "pnl": 185,
+        "closed": 3
+      },
+      {
+        "day": 11,
+        "pnl": 164,
+        "closed": 2
+      },
+      {
+        "day": 12,
+        "pnl": 245,
+        "closed": 3
+      },
+      {
+        "day": 13,
+        "pnl": 182,
+        "closed": 2
+      },
+      {
+        "day": 14,
+        "pnl": 95,
+        "closed": 1
+      },
+      {
+        "day": 15,
+        "pnl": 128,
+        "closed": 2
+      },
+      {
+        "day": 16,
+        "pnl": 110,
+        "closed": 1
+      },
+      {
+        "day": 17,
+        "pnl": 88,
+        "closed": 1
+      },
+      {
+        "day": 18,
+        "pnl": 220,
+        "closed": 1
+      }
+    ]
+  },
+  "coach": {
+    "findings": [
+      {
+        "title": "K4 Güvenlik Standardı Kusursuz Korunuyor",
+        "desc": "Tüm stratejiler işlem başı %0.5 özsermaye riski ve ATR(14)x3 başlangıç stopu ile çalışıyor. Maksimum portföy düşüşü -%4.85 ile %20 sert limitinin çok altında.",
+        "impact": "Stres Testi Güvenli • Örneklem: 271 işlem",
+        "type": "info"
+      },
+      {
+        "title": "R05 ve S1 Çift OTT Liderliği Sürdürüyor",
+        "desc": "100 üzerinden 100 tam puan alan R05 ve S1 stratejileri portföy getirisinin %45'ini tek başına üretti. Trend takip asimetrisi (kazanç/kayıp 2.45) tıkır tıkır işliyor.",
+        "impact": "Sharpe: 2.44 • CAGR: %42.6",
+        "type": "info"
+      },
+      {
+        "title": "Korelasyon Riski Kontrol Altında",
+        "desc": "Kripto (BTC, SOL), ABD Teknoloji (NVDA, AAPL, META) ve Emtia (XAUUSD) arasında ters rejim dengelemesi çalışıyor.",
+        "impact": "ES_99: %0.82 (Limit: %2.50)",
+        "type": "info"
+      }
+    ],
+    "simulator_strategies": [
+      {
+        "id": "r05",
+        "name": "R05 - Dual Signal Trend",
+        "pnl": 1842,
+        "trades": 38,
+        "active": true
+      },
+      {
+        "id": "s1",
+        "name": "S1 - Twin OTT Dual",
+        "pnl": 1520,
+        "trades": 42,
+        "active": true
+      },
+      {
+        "id": "vr1",
+        "name": "VR1 - Reddit Swing Hibrit",
+        "pnl": 1265,
+        "trades": 31,
+        "active": true
+      },
+      {
+        "id": "c01",
+        "name": "C01 - Codex Pullback",
+        "pnl": 1140,
+        "trades": 28,
+        "active": true
+      },
+      {
+        "id": "v1b",
+        "name": "V1B - SMC Likidite & ML",
+        "pnl": 985,
+        "trades": 36,
+        "active": true
+      },
+      {
+        "id": "r06",
+        "name": "R06 - 4H Sweet Spot PMax",
+        "pnl": 875,
+        "trades": 45,
+        "active": true
+      },
+      {
+        "id": "v2a",
+        "name": "V2A - Intraday TOTT ORB",
+        "pnl": 735,
+        "trades": 52,
+        "active": true
+      }
+    ]
+  },
+  "risk": {
+    "concentrations": [
+      {
+        "asset": "BTC",
+        "accounts_count": 2,
+        "accounts": "R05, S1",
+        "pending_orders": "-",
+        "total_amount": 4500,
+        "status": "güvenli (tahsis %6.4)"
+      },
+      {
+        "asset": "NVDA",
+        "accounts_count": 2,
+        "accounts": "R05, VR1",
+        "pending_orders": "-",
+        "total_amount": 4200,
+        "status": "güvenli (tahsis %6.0)"
+      },
+      {
+        "asset": "AAPL",
+        "accounts_count": 1,
+        "accounts": "VR1",
+        "pending_orders": "-",
+        "total_amount": 2200,
+        "status": "normal"
+      },
+      {
+        "asset": "SOL",
+        "accounts_count": 1,
+        "accounts": "S1",
+        "pending_orders": "-",
+        "total_amount": 2000,
+        "status": "normal"
+      },
+      {
+        "asset": "ETH",
+        "accounts_count": 1,
+        "accounts": "S1",
+        "pending_orders": "-",
+        "total_amount": 2000,
+        "status": "normal"
+      },
+      {
+        "asset": "META",
+        "accounts_count": 1,
+        "accounts": "V1B",
+        "pending_orders": "-",
+        "total_amount": 2400,
+        "status": "normal"
+      },
+      {
+        "asset": "XAUUSD",
+        "accounts_count": 1,
+        "accounts": "V1B",
+        "pending_orders": "-",
+        "total_amount": 2000,
+        "status": "normal"
+      }
+    ],
+    "leverage_drawdown_montecarlo": [
+      {
+        "account": "R05 - Dual Signal Trend",
+        "lev_1x_dd30": "%0.1",
+        "lev_2x_dd30": "%1.2",
+        "lev_3x_dd30": "%4.8",
+        "lev_1x_1y_pct20": "%0.0",
+        "lev_2x_1y_pct20": "%0.8",
+        "lev_3x_1y_pct20": "%3.5"
+      },
+      {
+        "account": "S1 - Twin OTT Dual",
+        "lev_1x_dd30": "%0.2",
+        "lev_2x_dd30": "%1.5",
+        "lev_3x_dd30": "%5.2",
+        "lev_1x_1y_pct20": "%0.0",
+        "lev_2x_1y_pct20": "%1.0",
+        "lev_3x_1y_pct20": "%4.1"
+      },
+      {
+        "account": "VR1 - Reddit Swing Hibrit",
+        "lev_1x_dd30": "%0.4",
+        "lev_2x_dd30": "%2.1",
+        "lev_3x_dd30": "%6.8",
+        "lev_1x_1y_pct20": "%0.1",
+        "lev_2x_1y_pct20": "%1.8",
+        "lev_3x_1y_pct20": "%5.9"
+      },
+      {
+        "account": "All-Weather Portföy (Ortak)",
+        "lev_1x_dd30": "%0.0",
+        "lev_2x_dd30": "%0.4",
+        "lev_3x_dd30": "%1.8",
+        "lev_1x_1y_pct20": "%0.0",
+        "lev_2x_1y_pct20": "%0.2",
+        "lev_3x_1y_pct20": "%1.1"
+      }
+    ],
+    "correlation_note": "140 günlük ortak veri matrisi: Kripto-Hisse korelasyonu 0.22, Kripto-Altın korelasyonu -0.08. Portföy All-Weather çeşitlendirme standardına uygundur."
+  },
+  "periodic_returns": [
+    {
+      "day": "18.10.2026",
+      "R05": 0.42,
+      "S1": 0.18,
+      "VR1": 0.35,
+      "C01": -0.05,
+      "V1B": 0.22,
+      "R06": 0.12,
+      "V2A": 0.08
+    },
+    {
+      "day": "17.10.2026",
+      "R05": 0.15,
+      "S1": 0.25,
+      "VR1": 0.1,
+      "C01": 0.12,
+      "V1B": 0.08,
+      "R06": 0.05,
+      "V2A": 0.14
+    },
+    {
+      "day": "16.10.2026",
+      "R05": 0.3,
+      "S1": 0.12,
+      "VR1": 0.28,
+      "C01": 0.08,
+      "V1B": 0.15,
+      "R06": -0.02,
+      "V2A": 0.05
+    },
+    {
+      "day": "15.10.2026",
+      "R05": 0.22,
+      "S1": 0.4,
+      "VR1": 0.15,
+      "C01": 0.2,
+      "V1B": 0.18,
+      "R06": 0.14,
+      "V2A": -0.04
+    },
+    {
+      "day": "14.10.2026",
+      "R05": 0.18,
+      "S1": 0.1,
+      "VR1": 0.05,
+      "C01": 0.14,
+      "V1B": 0.12,
+      "R06": 0.08,
+      "V2A": 0.1
+    },
+    {
+      "day": "13.10.2026",
+      "R05": 0.55,
+      "S1": 0.38,
+      "VR1": 0.42,
+      "C01": 0.25,
+      "V1B": 0.3,
+      "R06": 0.2,
+      "V2A": 0.18
+    },
+    {
+      "day": "12.10.2026",
+      "R05": 0.48,
+      "S1": 0.62,
+      "VR1": 0.35,
+      "C01": 0.18,
+      "V1B": 0.25,
+      "R06": 0.15,
+      "V2A": 0.22
+    }
+  ]
+}

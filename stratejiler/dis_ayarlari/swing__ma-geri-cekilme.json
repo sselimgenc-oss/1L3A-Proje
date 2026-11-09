@@ -1,0 +1,55 @@
+[
+ {
+  "dis_id": "freqtrade:TrendRiderStrategy",
+  "kaynak_dosya": "arsiv/algo-sg/dis_kaynak/ft/strategies/TrendRiderStrategy.py",
+  "parametreler": {
+   "ma_periyot": 50,
+   "ma_tipi": "ema",
+   "short": false,
+   "trend_ma": 200
+  },
+  "cikis_ayarlari": null,
+  "not": "YAKLAŞIK: EMA200 üstünde EMA50'ye geri çekilme, long; kaynakta günlük EMA200 (üst TF), RSI çıkışı ve ATR stop; burada aynı TF."
+ },
+ {
+  "dis_id": "tv:EcEYc8ap",
+  "kaynak_dosya": "arsiv/strateji-sg/tv/pine/EcEYc8ap.pine",
+  "parametreler": {
+   "adx_esik": 20.0,
+   "ma_periyot": 9,
+   "ma_tipi": "ema",
+   "short": true,
+   "trend_ma": 50
+  },
+  "cikis_ayarlari": {
+   "atr_iz_suren_k": 3.0
+  },
+  "not": "YAKLAŞIK: DMI/ADX>=20 trendinde EMA9'a geri çekilme; chandelier stop = 3 ATR izleyen stop olarak çevrildi."
+ },
+ {
+  "dis_id": "tv:njQsSFjo",
+  "kaynak_dosya": "arsiv/strateji-sg/tv/pine/njQsSFjo.pine",
+  "parametreler": {
+   "ma_periyot": 21,
+   "ma_tipi": "ema",
+   "short": true,
+   "trend_ma": 50
+  },
+  "cikis_ayarlari": null,
+  "not": "YAKLAŞIK: EMA9/21/50 trendinde geri çekilme; VWAP, RSI(5), 20 mum kırılımı ve HTF yön filtresi yok."
+ },
+ {
+  "dis_id": "d11j:uc-ema-dizilim-geri-cekilme-fraktal:3maf",
+  "kaynak_dosya": "stratejiler/ek_kaynaklar/github_g5_mt_pine.csv (3MAF; geraked/metatrader5 Experts/3MAF.mq5)",
+  "parametreler": {
+   "mod": "uclu_hiza",
+   "hiza1": 60,
+   "hiza2": 350,
+   "hiza3": 600,
+   "hedef_r": 1.5,
+   "short": true
+  },
+  "cikis_ayarlari": null,
+  "not": "EMA60>EMA350>EMA600 + düşüğün EMA600 üstünde/EMA60 altında + 2 mum önce dip fraktalı; SL EMA350/EMA600, TP 1.5R. Grid/IgnoreSL/SL<100 puan filtresi kodlanmadı. 15m TF."
+ }
+]

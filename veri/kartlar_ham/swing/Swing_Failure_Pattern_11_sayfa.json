@@ -1,0 +1,86 @@
+[
+ {
+  "kart_id": "swing__swing-failure-pattern-sfp__emperorbtc",
+  "ad": "Swing Failure Pattern (SFP) - Likidite Süpürme Dönüşü",
+  "stil": "swing",
+  "kaynak": {
+   "pdf": "Swing_Failure_Pattern_11_sayfa.pdf",
+   "sayfalar": [
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+   ]
+  },
+  "ozet": "Fiyat önemli bir swing yüksek/düşüğünü fitille aşar ancak mum bu seviyenin gerisinde kapanır; stop avı (likidite süpürmesi) sonrası ters yönde işlem açılır.",
+  "kategori": "destek_direnc",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "genel",
+  "zaman_dilimi": {
+   "islem": "1d",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "Swing Yüksek/Düşük",
+    "parametreler": {}
+   },
+   {
+    "ad": "Hacim",
+    "parametreler": {}
+   },
+   {
+    "ad": "RSI",
+    "parametreler": {
+     "kullanim": "uyumsuzluk, isteğe bağlı"
+    }
+   }
+  ],
+  "long_giris": [
+   "Önemli bir swing düşüğü/destek belirlenir (fitil veya gövde düşükleri kullanılabilir)",
+   "Mum bu düşüğün altına iner ancak düşüğün üzerinde kapanır (süpürme mumu)",
+   "Giriş: süpürme mumunun kapanışında; 2. giriş (isteğe bağlı): sonraki mumun da düşüğün üstünde kapanması veya düşüğün yeniden test edilmesinde ekleme"
+  ],
+  "short_giris": [
+   "Önemli bir swing yüksek/direnç belirlenir",
+   "Mum bu yüksekin üstüne çıkar ancak altında kapanır",
+   "Giriş: süpürme mumunun kapanışında (mum onayı beklenir); 2. giriş: sonraki mumun da yüksekin altında kapanması"
+  ],
+  "stop_loss": "Süpürme mumunun fitil ucunun hemen ötesi (long için fitil dibinin altı, short için fitil tepesinin üstü)",
+  "kar_al": "Hedef 1: son swing düşük/yüksek (son vuruş); Hedef 2: aralığın karşı ucu (range high/low)",
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [
+   "Doji mumlardan kaçın",
+   "Seviyenin altında/üstünde gerçekten stop likiditesi olmalı (her tarama SFP değildir)",
+   "İsteğe bağlı birleşim: hacim, RSI uyumsuzluğu, hareketli ortalama"
+  ],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 2,
+   "gerekce": "Swing seviyesi + fitille aşıp kapanışla geri dönme mekanik olarak ölçülebilir; 'önemli' seviye seçimi ve likidite yargısı yoruma açık."
+  },
+  "belirsizlikler": [
+   "Önemli swing seviyesi için pivot kuralı/geriye bakış yok",
+   "Fitil aşım büyüklüğü minimumu yok",
+   "Hedef için 'son vuruş' tanımı belirsiz",
+   "Risk yüzdesi verilmemiş"
+  ],
+  "uyumluluk_notu": "Tüm zaman dilimlerinde ve piyasalarda (kripto kökenli) çalışır; 5m+ uyarlanabilir. Hacim zorunlu değil. Kripto/forex/hisse/emtia uygun.",
+  "varyantlar": [
+   "İkinci giriş: kaçırılan SFP sonrası ikinci mumun da seviyenin içinde kapanması"
+  ],
+  "anahtar_kelimeler": [
+   "sfp",
+   "likidite-sup",
+   "swing-yuksek",
+   "swing-dusuk",
+   "stop-avi",
+   "fitil",
+   "donus"
+  ]
+ }
+]

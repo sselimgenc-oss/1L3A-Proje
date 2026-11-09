@@ -1,0 +1,25 @@
+{
+  "baslangic": "2026-10-11T00:00:00Z",
+  "gun": 60,
+  "sermaye": 10000,
+  "giris_tf": "15m",
+  "siniflar": [
+    "crypto"
+  ],
+  "risk": 0.005,
+  "max_pozisyon": 9,
+  "max_agirlik": 0.3,
+  "max_toplam_agirlik": 1.0,
+  "gunluk_zarar_limiti": -0.03,
+  "ayri_hesap": true,
+  "aciklama": "Kripto day trade kağıt al-sat: S10 geç seans momentum + S13 Lien yanlış kırılma + S15 trend günü EMA20 geri çekilme; yalnız alış, 4s/1s yön + 15dk giriş, BTC 4s filtresi, ayrı alt hesaplar, gün sonu çıkış",
+  "beklenti": {
+    "kaynak": "docs/kripto_sonuc2.md — 3 yıllık backtest (2023-10 → 2026-10), spot maliyet",
+    "kazanma_orani": 0.49,
+    "pf": 1.6,
+    "ort_R": null,
+    "60_gunde_islem": "80-120",
+    "60_gunde_getiri": "yaklaşık +%2-4 (yıllık ~%15-18; geniş aralık: -%4 ile +%10 normal)",
+    "max_dusus": -0.05
+  }
+}

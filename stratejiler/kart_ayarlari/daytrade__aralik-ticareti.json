@@ -1,0 +1,36 @@
+[
+ {
+  "kart_id": "swing__aralik-hedef-stop__heikinashi",
+  "parametreler": {
+   "pencere": 24,
+   "bant": 0.2,
+   "stop_modu": "yarim_aralik",
+   "adx_esik": 0.0
+  },
+  "cikis_ayarlari": null,
+  "not": "Hedef karşı sınır, stop aralığın yarısı (giriş -/+ 0.5*genişlik). '2 önemli dokunuş' ve 90 pip'te stopu kısaltma kodlanmadı; aralık = 24 mum Donchian."
+ },
+ {
+  "kart_id": "daytrade__aralik-ticareti-yatay__derr",
+  "parametreler": {
+   "pencere": 24,
+   "bant": 0.2,
+   "stop_modu": "dip",
+   "adx_esik": 0.0
+  },
+  "cikis_ayarlari": null,
+  "not": "Gün içi H/L aralığı ~ 24 mumluk Donchian; hedef karşı sınır, gün sonu çıkış. Kitap stop vermez: stop aralık dışı tamponlu (varsayım)."
+ },
+ {
+  "kart_id": "swing__aralik-sinirlari-ters__day",
+  "parametreler": {
+   "pencere": 96,
+   "bant": 0.2,
+   "stop_modu": "dip",
+   "adx_esik": 0.0,
+   "min_genislik_atr": 6.0
+  },
+  "cikis_ayarlari": null,
+  "not": "Geniş aralık (min_genislik_atr 6, 96 mum); sınır kırılınca işlem terk = aralık dışı stop. Sayısal değer kartta yok (varsayım)."
+ }
+]

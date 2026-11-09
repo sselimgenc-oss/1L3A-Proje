@@ -1,0 +1,647 @@
+[
+  {
+    "kart_id": "scalp__bb-vwap-stokastik-ortalamaya-donus__ferrazzi",
+    "ad": "Bollinger(1.5) + VWAP + Stokastik(7,4,3) Ortalamaya Dönüş",
+    "stil": "scalp",
+    "kaynak": {
+      "pdf": "Göstergeyle Scalping El Kitabı - Yüksek Kazanma Oranlı Gösterge - Marcello Ferrazzi (79 sayfa) - @eseckal.pdf",
+      "sayfalar": [
+        55,
+        56,
+        57,
+        58
+      ]
+    },
+    "ozet": "5 dk'da fiyat VWAP üstündeyken bir mum alt Bollinger'ın altında kapanıp stokastik 20'nin altındaysa, mum alt banda geri kapandığında AL; çıkış üst banda dokunma veya stokastik >80. Short ayna.",
+    "kategori": "ortalamaya_donus",
+    "piyasa_rejimi": "yatay",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {
+      "islem": "5m",
+      "ust_filtre": null
+    },
+    "gostergeler": [
+      {
+        "ad": "VWAP",
+        "parametreler": {}
+      },
+      {
+        "ad": "Bollinger",
+        "parametreler": {
+          "sapma": 1.5
+        }
+      },
+      {
+        "ad": "Stokastik",
+        "parametreler": {
+          "K": 7,
+          "yumusatma_K": 4,
+          "D": 3
+        }
+      }
+    ],
+    "long_giris": [
+      "Fiyat VWAP'ın üzerinde",
+      "Bir mum Bollinger alt bandının altında kapanır, stokastik <20",
+      "Sonraki bir mum alt bandın üstünde kapanınca gir"
+    ],
+    "short_giris": [
+      "Fiyat VWAP'ın altında",
+      "Bir mum üst bandın üstünde kapanır, stokastik >80",
+      "Mum üst bandın altına kapanınca gir"
+    ],
+    "stop_loss": "Giriş mumunun altı (short: üstü)",
+    "kar_al": "Fiyat karşı banda dokunur VEYA stokastik karşı uç bölgeye (>80 / <20) girer (biri yeter)",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 3,
+      "gerekce": "Tüm kurallar sayısal; Bollinger periyodu (varsayılan 20) belirtilmemiş."
+    },
+    "belirsizlikler": [
+      "Bollinger periyodu kitapta yok (varsayılan 20 varsayıldı)",
+      "VWAP sıfırlama periyodu belirtilmemiş"
+    ],
+    "uyumluluk_notu": "TradingView göstergeleriyle tarif edilmiş; ≥5m uyumlu; hacim (MFI/VWAP) gerektirenlerde kripto/hisse/vadeli; spot forex'te hacim yok. VWAP hacim ister.",
+    "varyantlar": [],
+    "anahtar_kelimeler": [
+      "bollinger",
+      "vwap",
+      "stokastik",
+      "ortalamaya-donus"
+    ]
+  },
+  {
+    "kart_id": "scalp__utbot-kdj-trend__ferrazzi",
+    "ad": "UT Bot + KDJ + 200 SMA Trend Takip",
+    "stil": "scalp",
+    "kaynak": {
+      "pdf": "Göstergeyle Scalping El Kitabı - Yüksek Kazanma Oranlı Gösterge - Marcello Ferrazzi (79 sayfa) - @eseckal.pdf",
+      "sayfalar": [
+        59,
+        60,
+        61
+      ]
+    },
+    "ozet": "Fiyat 200 SMA üstündeyken UT Bot (ATR 30, Key Value 3) yeşil al etiketi verip KDJ'de yeşil 'B' görününce AL; çıkış KDJ kırmızı 'S' veya UT Bot satış etiketi.",
+    "kategori": "trend_takip",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {
+      "islem": "5m",
+      "ust_filtre": null
+    },
+    "gostergeler": [
+      {
+        "ad": "UT Bot",
+        "parametreler": {
+          "anahtar_deger": 3,
+          "ATR_periyot": 30
+        }
+      },
+      {
+        "ad": "KDJ (L2 KDJ)",
+        "parametreler": {}
+      },
+      {
+        "ad": "SMA",
+        "parametreler": {
+          "periyot": 200
+        }
+      }
+    ],
+    "long_giris": [
+      "Fiyat 200 SMA üstünde",
+      "Mum yeşil ve altında al etiketi (UT Bot)",
+      "KDJ'de yeşil 'B' VEYA üç KDJ çizgisi yukarı kesişir"
+    ],
+    "short_giris": [
+      "Fiyat 200 SMA altında",
+      "Mum kırmızı, üstünde sat etiketi",
+      "KDJ'de kırmızı 'S' VEYA üç çizgi aşağı kesişir"
+    ],
+    "stop_loss": "Kitapta yok (çıkış sinyali)",
+    "kar_al": "Biri yeter: KDJ'de karşı sinyal ('S'), üç KDJ çizgisi aşağı kesişim, UT Bot satış etiketi (mum rengi dönüşü)",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "UT Bot formülü kamuya açık (ATR trailing stop); KDJ 'B/S' etiketi özel gösterge, yaklaşık stokastik KDJ ile kodlanır."
+    },
+    "belirsizlikler": [
+      "KDJ blackcat1402 özel göstergesi: B/S etiketi formülü kitapta yok",
+      "Başlangıç stop yok"
+    ],
+    "uyumluluk_notu": "TradingView göstergeleriyle tarif edilmiş; ≥5m uyumlu; hacim (MFI/VWAP) gerektirenlerde kripto/hisse/vadeli; spot forex'te hacim yok.",
+    "varyantlar": [],
+    "anahtar_kelimeler": [
+      "ut-bot",
+      "kdj",
+      "200-sma",
+      "trend"
+    ]
+  },
+  {
+    "kart_id": "scalp__bb-donus-bulucu-filtre__ferrazzi",
+    "ad": "Bollinger + Reversal Finder + Breakout/Konsolidasyon Filtresi",
+    "stil": "scalp",
+    "kaynak": {
+      "pdf": "Göstergeyle Scalping El Kitabı - Yüksek Kazanma Oranlı Gösterge - Marcello Ferrazzi (79 sayfa) - @eseckal.pdf",
+      "sayfalar": [
+        62,
+        63,
+        64,
+        65
+      ]
+    },
+    "ozet": "Kırılma/konsolidasyon filtresi <50 iken fiyat Bollinger alt bandının dışına çıkar ve altında yeşil nokta (reversal finder) çıkarsa AL; üst banda dokununca veya kırmızı/sarı nokta gelince çık.",
+    "kategori": "ortalamaya_donus",
+    "piyasa_rejimi": "yatay",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {
+      "islem": "5m",
+      "ust_filtre": null
+    },
+    "gostergeler": [
+      {
+        "ad": "Bollinger",
+        "parametreler": {
+          "varsayilan": true
+        }
+      },
+      {
+        "ad": "Reversal Finder (NS91)",
+        "parametreler": {}
+      },
+      {
+        "ad": "Breakout/Consolidation Filter (jwammo12)",
+        "parametreler": {}
+      }
+    ],
+    "long_giris": [
+      "Filtre <50",
+      "Fiyat Bollinger alt bandının altında/dışında",
+      "Mumun altında yeşil nokta"
+    ],
+    "short_giris": [
+      "Filtre <50",
+      "Fiyat üst bandın üstünde/dışında",
+      "Mumun üstünde kırmızı nokta"
+    ],
+    "stop_loss": "Kitapta yok",
+    "kar_al": "Fiyat karşı banda dokunur/dışında kalır VEYA karşı renk nokta (kırmızı/sarı)",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Özel TradingView göstergeleri (NS91 Reversal Finder, jwammo12 filter) formülü kitapta yok."
+    },
+    "belirsizlikler": [
+      "Özel göstergelerin hesap mantığı bilinmiyor",
+      "Stop yok"
+    ],
+    "uyumluluk_notu": "TradingView göstergeleriyle tarif edilmiş; ≥5m uyumlu; hacim (MFI/VWAP) gerektirenlerde kripto/hisse/vadeli; spot forex'te hacim yok.",
+    "varyantlar": [],
+    "anahtar_kelimeler": [
+      "bollinger",
+      "reversal-finder",
+      "filtre",
+      "ortalamaya-donus"
+    ]
+  },
+  {
+    "kart_id": "scalp__bb-rsi-diverjans-500ema__ferrazzi",
+    "ad": "Bollinger + RSI Diverjans Bulucu + 500 EMA",
+    "stil": "scalp",
+    "kaynak": {
+      "pdf": "Göstergeyle Scalping El Kitabı - Yüksek Kazanma Oranlı Gösterge - Marcello Ferrazzi (79 sayfa) - @eseckal.pdf",
+      "sayfalar": [
+        66,
+        67,
+        68
+      ]
+    },
+    "ozet": "Fiyat 500 EMA üstündeyken alt Bollinger'a dokunur/altına iner ve RSI diverjans bulucu yeşil 'R' verirse AL; üst banda dokununca çık. Short ayna.",
+    "kategori": "ortalamaya_donus",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {
+      "islem": "5m",
+      "ust_filtre": null
+    },
+    "gostergeler": [
+      {
+        "ad": "Bollinger",
+        "parametreler": {}
+      },
+      {
+        "ad": "EMA",
+        "parametreler": {
+          "periyot": 500
+        }
+      },
+      {
+        "ad": "RSI Diverjans Bulucu",
+        "parametreler": {}
+      }
+    ],
+    "long_giris": [
+      "Fiyat 500 EMA üstünde",
+      "Fiyat alt banda dokunur veya altında",
+      "RSI diverjans bulucudan yeşil 'R' (boğa diverjansı) -> AL"
+    ],
+    "short_giris": [
+      "Fiyat 500 EMA altında",
+      "Fiyat üst banda dokunur veya üstünde",
+      "Kırmızı 'R' (ayı diverjansı) -> SAT"
+    ],
+    "stop_loss": "Kitapta yok",
+    "kar_al": "Fiyat karşı banda (üst/alt) dokununca",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Diverjans yakalama algoritması (pivot) kodlanabilir; kitapta periyot yok."
+    },
+    "belirsizlikler": [
+      "RSI periyodu ve pivot kuralı yok",
+      "Kitapta short giriş metni 'uzun pozisyona gir' diye hatalı yazılmış (çeviri)"
+    ],
+    "uyumluluk_notu": "TradingView göstergeleriyle tarif edilmiş; ≥5m uyumlu; hacim (MFI/VWAP) gerektirenlerde kripto/hisse/vadeli; spot forex'te hacim yok.",
+    "varyantlar": [],
+    "anahtar_kelimeler": [
+      "rsi-diverjans",
+      "bollinger",
+      "500-ema"
+    ]
+  },
+  {
+    "kart_id": "scalp__rsi5-adx-bb__ferrazzi",
+    "ad": "RSI(5) + ADX<25 + Bollinger Ortalamaya Dönüş",
+    "stil": "scalp",
+    "kaynak": {
+      "pdf": "Göstergeyle Scalping El Kitabı - Yüksek Kazanma Oranlı Gösterge - Marcello Ferrazzi (79 sayfa) - @eseckal.pdf",
+      "sayfalar": [
+        69,
+        70,
+        71,
+        72
+      ]
+    },
+    "ozet": "ADX 25'in altında (yatay) iken fiyat alt banda dokunur ve RSI(5) 30'un altından yukarı çıkınca AL; çıkış üst banda dokunma veya RSI >70. Short ayna.",
+    "kategori": "ortalamaya_donus",
+    "piyasa_rejimi": "yatay",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {
+      "islem": "5m",
+      "ust_filtre": null
+    },
+    "gostergeler": [
+      {
+        "ad": "RSI",
+        "parametreler": {
+          "periyot": 5
+        }
+      },
+      {
+        "ad": "ADX",
+        "parametreler": {}
+      },
+      {
+        "ad": "Bollinger",
+        "parametreler": {}
+      }
+    ],
+    "long_giris": [
+      "ADX < 25",
+      "Fiyat alt Bollinger altında veya dokunuyor",
+      "RSI(5) 30'un altına düşüp tekrar 30'u yukarı geçince gir"
+    ],
+    "short_giris": [
+      "ADX < 25",
+      "Fiyat üst banda dokunur/üstünde",
+      "RSI(5) 70'in üstüne çıkıp tekrar 70'in altına inince gir"
+    ],
+    "stop_loss": "Kitapta yok",
+    "kar_al": "Fiyat karşı banda dokunur/aşar VEYA RSI karşı uç bölgeye girer (70/30)",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "ADX<25 filtre"
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 3,
+      "gerekce": "Tüm koşullar sayısal; ADX/Bollinger periyodu varsayılan; stop yok."
+    },
+    "belirsizlikler": [
+      "Stop-loss tanımsız",
+      "ADX/BB periyodu verilmemiş"
+    ],
+    "uyumluluk_notu": "TradingView göstergeleriyle tarif edilmiş; ≥5m uyumlu; hacim (MFI/VWAP) gerektirenlerde kripto/hisse/vadeli; spot forex'te hacim yok.",
+    "varyantlar": [],
+    "anahtar_kelimeler": [
+      "rsi5",
+      "adx",
+      "bollinger",
+      "yatay"
+    ]
+  },
+  {
+    "kart_id": "scalp__wtmo-halftrend__ferrazzi",
+    "ad": "Wave Trend Momentum + HalfTrend",
+    "stil": "scalp",
+    "kaynak": {
+      "pdf": "Göstergeyle Scalping El Kitabı - Yüksek Kazanma Oranlı Gösterge - Marcello Ferrazzi (79 sayfa) - @eseckal.pdf",
+      "sayfalar": [
+        73,
+        74,
+        75,
+        76
+      ]
+    },
+    "ozet": "WTMO (uzunluk 14) aşırı satımda ve yukarı dönerken HalfTrend al oku gelince AL; çıkış WTMO aşırı alımdan aşağı geçince veya HalfTrend sat oku.",
+    "kategori": "trend_takip",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {
+      "islem": "5m",
+      "ust_filtre": null
+    },
+    "gostergeler": [
+      {
+        "ad": "WaveTrend Momentum Osilatörü",
+        "parametreler": {
+          "uzunluk": 14
+        }
+      },
+      {
+        "ad": "HalfTrend",
+        "parametreler": {}
+      }
+    ],
+    "long_giris": [
+      "WTMO yeşil seviyenin (aşırı satım) altında ve yukarı dönüyor",
+      "HalfTrend al oku mumun altında belirir"
+    ],
+    "short_giris": [
+      "WTMO kırmızı seviyenin (aşırı alım) üstünde ve aşağı dönüyor",
+      "HalfTrend sat oku mumun üstünde"
+    ],
+    "stop_loss": "Kitapta yok",
+    "kar_al": "WTMO karşı uca ulaşıp geri döner VEYA HalfTrend ters ok",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "WaveTrend ve HalfTrend (Everget) açık formüllü; eşik seviyeleri kitapta yok."
+    },
+    "belirsizlikler": [
+      "Aşırı alım/satım seviyeleri sayısal verilmemiş",
+      "Stop yok"
+    ],
+    "uyumluluk_notu": "TradingView göstergeleriyle tarif edilmiş; ≥5m uyumlu; hacim (MFI/VWAP) gerektirenlerde kripto/hisse/vadeli; spot forex'te hacim yok.",
+    "varyantlar": [],
+    "anahtar_kelimeler": [
+      "wavetrend",
+      "halftrend",
+      "trend"
+    ]
+  },
+  {
+    "kart_id": "scalp__mfi-hma-200sma__ferrazzi",
+    "ad": "MFI(21)+SMA18 + HMA(65) + 200 SMA",
+    "stil": "scalp",
+    "kaynak": {
+      "pdf": "Göstergeyle Scalping El Kitabı - Yüksek Kazanma Oranlı Gösterge - Marcello Ferrazzi (79 sayfa) - @eseckal.pdf",
+      "sayfalar": [
+        77,
+        78,
+        79
+      ]
+    },
+    "ozet": "Fiyat 200 SMA üstünde, MFI 50'nin altındayken MFI kendi 18 SMA'sını yukarı keser ve mum HMA(65) üstünde kapanıp maviye dönünce AL; çıkış MFI SMA'nın altına geçmesi veya mumun HMA altına kapanması.",
+    "kategori": "trend_takip",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {
+      "islem": "5m",
+      "ust_filtre": null
+    },
+    "gostergeler": [
+      {
+        "ad": "MFI",
+        "parametreler": {
+          "periyot": 21
+        }
+      },
+      {
+        "ad": "SMA (MFI üzerinde)",
+        "parametreler": {
+          "periyot": 18
+        }
+      },
+      {
+        "ad": "HMA",
+        "parametreler": {
+          "periyot": 65
+        }
+      },
+      {
+        "ad": "SMA",
+        "parametreler": {
+          "periyot": 200
+        }
+      }
+    ],
+    "long_giris": [
+      "Fiyat 200 SMA üstünde",
+      "MFI 50'nin altında iken kendi SMA'sını yukarı keser",
+      "Mum HMA'nın üstünde kapanır (HMA mavi)"
+    ],
+    "short_giris": [
+      "Fiyat 200 SMA altında",
+      "MFI 50'nin üstünde iken SMA'sını aşağı keser",
+      "Mum HMA altında kapanır (kırmızı)"
+    ],
+    "stop_loss": "Kitapta yok",
+    "kar_al": "Biri yeter: MFI SMA'nın karşı yöne geçmesi VEYA mum HMA'nın ters tarafında kapanması",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 3,
+      "gerekce": "Sayısal; MFI hacim gerektirir."
+    },
+    "belirsizlikler": [
+      "Stop yok",
+      "MFI 50 koşulu 'altında kesişim' mantığı alışılmadık (momentum geri dönüşü)"
+    ],
+    "uyumluluk_notu": "TradingView göstergeleriyle tarif edilmiş; ≥5m uyumlu; hacim (MFI/VWAP) gerektirenlerde kripto/hisse/vadeli; spot forex'te hacim yok. MFI hacim ister (forex spot'ta tick hacim).",
+    "varyantlar": [],
+    "anahtar_kelimeler": [
+      "mfi",
+      "hma",
+      "200-sma"
+    ]
+  },
+  {
+    "kart_id": "scalp__ma9-30-rsi5-200ema__ferrazzi",
+    "ad": "9/30 MA Kesişimi + RSI(5) Teyidi + 200 EMA (örnek strateji)",
+    "stil": "scalp",
+    "kaynak": {
+      "pdf": "Göstergeyle Scalping El Kitabı - Yüksek Kazanma Oranlı Gösterge - Marcello Ferrazzi (79 sayfa) - @eseckal.pdf",
+      "sayfalar": [
+        19,
+        20,
+        21
+      ]
+    },
+    "ozet": "200 EMA ile trend yönü; 9 ve 30 periyot MA kesişimi giriş, 5 periyot RSI aşırı bölge teyidi; 30 MA stop ve iz süren stop, mum 30 MA'yı ters geçerse çıkış.",
+    "kategori": "trend_takip",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {
+      "islem": "5m",
+      "ust_filtre": null
+    },
+    "gostergeler": [
+      {
+        "ad": "EMA",
+        "parametreler": {
+          "periyot": 200
+        }
+      },
+      {
+        "ad": "MA",
+        "parametreler": {
+          "periyot": 9
+        }
+      },
+      {
+        "ad": "MA",
+        "parametreler": {
+          "periyot": 30
+        }
+      },
+      {
+        "ad": "RSI",
+        "parametreler": {
+          "periyot": 5
+        }
+      }
+    ],
+    "long_giris": [
+      "Fiyat 200 EMA üstünde",
+      "9 MA, 30 MA'yı yukarı keser",
+      "RSI(5) aşırı bölgeye girer (kitapta alım için 'aşırı alım' yazılmış; momentum teyidi)"
+    ],
+    "short_giris": [
+      "Fiyat 200 EMA altında",
+      "9 MA, 30 MA'yı aşağı keser",
+      "RSI(5) aşırı satım bölgesine girer"
+    ],
+    "stop_loss": "30 periyotluk MA (iz süren)",
+    "kar_al": "Hedef yok; mum 30 MA'nın ters tarafına kapanınca çıkış",
+    "iz_suren_stop": "30 MA iz süren stop",
+    "zaman_cikisi": null,
+    "filtreler": [],
+    "pozisyon_risk": "Her işlemde sıkı stop; R:R en az 1:2",
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Kural sayısal; RSI teyit yönü kitapta çelişkili gibi yazılmış."
+    },
+    "belirsizlikler": [
+      "RSI teyidi alım için 'aşırı alım bölgesine giriş' (momentum) mü yoksa çıkış mı belirsiz",
+      "MA tipi (SMA/EMA) belirtilmemiş"
+    ],
+    "uyumluluk_notu": "TradingView göstergeleriyle tarif edilmiş; ≥5m uyumlu; hacim (MFI/VWAP) gerektirenlerde kripto/hisse/vadeli; spot forex'te hacim yok.",
+    "varyantlar": [],
+    "anahtar_kelimeler": [
+      "ma-kesisim",
+      "rsi5",
+      "200-ema"
+    ]
+  },
+  {
+    "kart_id": "scalp__rsi5-bb-onay__ferrazzi",
+    "ad": "RSI(5) Aşırı Bölge + Bollinger Onayı (yanlış sinyal filtresi örneği)",
+    "stil": "scalp",
+    "kaynak": {
+      "pdf": "Göstergeyle Scalping El Kitabı - Yüksek Kazanma Oranlı Gösterge - Marcello Ferrazzi (79 sayfa) - @eseckal.pdf",
+      "sayfalar": [
+        10,
+        11
+      ]
+    },
+    "ozet": "RSI(5) aşırı satım bölgesine geçince ve fiyat alt Bollinger'a dokunur/altında kalırsa AL; üst banda değince RSI aşırı alım ise SAT. Bollinger yanlış sinyalleri filtreler.",
+    "kategori": "ortalamaya_donus",
+    "piyasa_rejimi": "yatay",
+    "orijinal_piyasa": "genel",
+    "zaman_dilimi": {
+      "islem": "5m",
+      "ust_filtre": null
+    },
+    "gostergeler": [
+      {
+        "ad": "RSI",
+        "parametreler": {
+          "periyot": 5
+        }
+      },
+      {
+        "ad": "Bollinger",
+        "parametreler": {}
+      }
+    ],
+    "long_giris": [
+      "RSI(5) aşırı satım bölgesini geçer",
+      "Fiyat alt Bollinger'a dokunur/altında"
+    ],
+    "short_giris": [
+      "RSI(5) aşırı alım bölgesini geçer",
+      "Fiyat üst banda dokunur/üstünde"
+    ],
+    "stop_loss": "Kitapta yok",
+    "kar_al": "Kitapta yok",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Giriş net; çıkış ve stop kitapta tanımsız."
+    },
+    "belirsizlikler": [
+      "Çıkış ve stop yok",
+      "RSI eşikleri (30/70?) açık yazılmamış"
+    ],
+    "uyumluluk_notu": "TradingView göstergeleriyle tarif edilmiş; ≥5m uyumlu; hacim (MFI/VWAP) gerektirenlerde kripto/hisse/vadeli; spot forex'te hacim yok.",
+    "varyantlar": [],
+    "anahtar_kelimeler": [
+      "rsi5",
+      "bollinger",
+      "filtre"
+    ]
+  }
+]

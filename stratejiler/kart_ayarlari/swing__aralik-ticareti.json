@@ -1,0 +1,42 @@
+[
+ {
+  "kart_id": "swing__destek-direnc-aralik__ladha",
+  "parametreler": {
+   "min_rr": 2.0
+  },
+  "cikis_ayarlari": null,
+  "not": "Destek alımı, hedef direnç; stop aralık dibi altı, kâr stop mesafesi 2-3x -> min_rr 2. İki gün kapanış teyidi yok."
+ },
+ {
+  "kart_id": "swing__destek-direnc-aralik__penn",
+  "parametreler": {
+   "stop_tampon_atr": 1.0,
+   "short": false
+  },
+  "cikis_ayarlari": null,
+  "not": "Stop mum dibinin ~1 ATR altı; hedef direnç öncesi. Yalnız long."
+ },
+ {
+  "kart_id": "swing__kripto-kutu-destek-ustu-kapanis__razaq",
+  "parametreler": {
+   "stop_tampon_atr": 0.1,
+   "short": false
+  },
+  "cikis_ayarlari": null,
+  "not": "YAKLAŞIK: destek üstü kapanış mumu, stop mum dibine yakın; 50 MA trend uyumu kodlanmadı. Yalnız long."
+ },
+ {
+  "kart_id": "swing__aralik-sinir-ticareti__graham",
+  "parametreler": {},
+  "cikis_ayarlari": null,
+  "not": "Alt/üst sınırdan karşı sınıra; sınıf varsayılanları (aralık ortasında işlem yok)."
+ },
+ {
+  "kart_id": "swing__kutu-destekten-alim__kratter",
+  "parametreler": {
+   "short": false
+  },
+  "cikis_ayarlari": null,
+  "not": "Kutu desteğinde reddedilme sonrası long; stop önceki düşüklerin altı (tampon). Yalnız long."
+ }
+]

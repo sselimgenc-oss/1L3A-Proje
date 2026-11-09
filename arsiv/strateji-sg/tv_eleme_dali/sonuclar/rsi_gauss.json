@@ -1,0 +1,50 @@
+{
+ "ad": "rsi_gauss",
+ "pine_id": "T5kd1bJ2",
+ "tf": "1d",
+ "evren": [
+  "kripto",
+  "abd",
+  "bist",
+  "emtia"
+ ],
+ "neden": "Yazar 2014'ten başlıyor, sembol belirtmemiş (BTC/ETH hedefi); günlük, tüm pazarlar.",
+ "olcut": {
+  "n": 1927,
+  "kar": 36674.31027669842,
+  "pf": 3.5795957827230214,
+  "sharpe": 1.189079514009089,
+  "beklenti_R": 1.7710457812883023,
+  "kazanma": 0.3134405812143228,
+  "maxdd": 0.11793705339098282,
+  "dd_gun": 908,
+  "cagr": 0.13967206668809218,
+  "calmar": 1.1842933384561833,
+  "psr": 0.9999992742251683,
+  "tutma_gun": 9.0,
+  "ort_islem_getiri": 0.0704177208218911,
+  "netR_toplam": 3412.8052205425583,
+  "sharpe_egitim": 1.292696780038317,
+  "sharpe_oos": 1.2817084791351128,
+  "oos_kar": 7220.776863864652,
+  "tur": "swing",
+  "pf_maliyet2x": 3.42247566231126,
+  "komsu_n": 20,
+  "komsu_karda": 0.7,
+  "enstr_n": 37,
+  "enstr_karda": 0.972972972972973,
+  "maks_kor": 0.43344273677816975
+ },
+ "kurallar": {
+  "1_islem_sayisi": true,
+  "2_maks_dusus<=20": true,
+  "3_beklenti>=0.15R": true,
+  "4a_kf>=1.3": true,
+  "4b_sharpe>=1": true,
+  "5_oos": true,
+  "6_maliyet2x_kf>=1.1": true,
+  "7_komsu>=70": true,
+  "8_enstr>=60": true
+ },
+ "gecti": true
+}

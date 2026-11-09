@@ -1,0 +1,61 @@
+[
+ {
+  "kart_id": "daytrade__program-satisi-iki-asagi-bir-yukari-alim__farley",
+  "ad": "Program Satışı Sonrası 'İki Adım Aşağı, Bir Adım Yukarı' Alımı",
+  "stil": "daytrade",
+  "kaynak": {
+   "pdf": "Swing_Trader_-_Alan_S_Farley_306_sayfa.pdf",
+   "sayfalar": [
+    45,
+    46
+   ]
+  },
+  "ozet": "Büyük bir satış programı fiyatı sert iterek her sıçramada daha düşük seviyeye gönderirken, ilk karşı itme önceki istikrar seviyesinin %100'ünü geri alınca, bir sonraki satış dalgası sırasında alım yapılır; stop son dibin hemen altındadır.",
+  "kategori": "ortalamaya_donus",
+  "piyasa_rejimi": "volatil",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+   "islem": "5m",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "Salınım yapısı",
+    "parametreler": {}
+   }
+  ],
+  "long_giris": [
+   "Fiyat hızla alt seviyelere sıfırlanıp ani sıçramalarla yeni dengeye ulaşamıyor (iki adım aşağı, bir adım yukarı); alış-satış aralığı genişliyor",
+   "İlk karşı itme, son istikrar seviyesinin %100'ünü geri aldığında program bitiyor kabul edilir",
+   "Sonraki aşağı salınım sırasında al (örnek: sıçramalar 37,65; 37,68 ve son dip 37,30)"
+  ],
+  "short_giris": [],
+  "stop_loss": "Son (dördüncü) darbenin dibinin hemen altı (örnek 37,30)",
+  "kar_al": "Kitapta yok",
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [
+   "Stratejinin geçerliliği endeks vadeli işlem satış programları tespiti gerektirir"
+  ],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 1,
+   "gerekce": "Mantık net ama 'son istikrar seviyesi', salınım ölçüsü ve hedef yok; kitap örneği 1-2 hisse."
+  },
+  "belirsizlikler": [
+   "Endeks vadeli işlem satış programı tespiti kitapta yok",
+   "Hedef yok; öneri: son istikrar seviyesi veya sıçrama başlangıcı (test önerisi)",
+   "Kitap örneğinde hisse fiyatları sent düzeyinde; kripto uyarlaması belirsiz"
+  ],
+  "uyumluluk_notu": "Kripto'da 5m uyarlaması denenebilir ama tetik kaba; yüksek sıklıkta gürültü riski. Uyarlanabilirlik düşük.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "program-satisi",
+   "iki-adim-asagi",
+   "fib-100",
+   "salinim",
+   "gun-ici"
+  ]
+ }
+]

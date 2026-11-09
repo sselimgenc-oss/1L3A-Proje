@@ -1,0 +1,22 @@
+[
+ {
+  "kart_id": "swing__first-thrust__landry",
+  "parametreler": {
+   "itis_mum": 1,
+   "itki_atr": 3.0,
+   "dip_pencere": 120
+  },
+  "cikis_ayarlari": null,
+  "not": "Büyük yeni dip, sert yükseliş, ilk tek bar düzeltmenin üstünde long."
+ },
+ {
+  "kart_id": "daytrade__ilk-itis-modeli__bulkowski",
+  "parametreler": {
+   "itis_mum": 2,
+   "dip_pencere": 120,
+   "short": false
+  },
+  "cikis_ayarlari": null,
+  "not": "6 ay dibi, 2+ gün yüksek dip/zirve, geri çekilme mumunun üstü."
+ }
+]

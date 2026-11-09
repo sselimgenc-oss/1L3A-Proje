@@ -1,0 +1,194 @@
+[
+ {
+  "kart_id": "swing__ma-sekiz-kural-200__lee-tryde",
+  "ad": "Hareketli Ortalama Geçişlerinin Sekiz Kuralı (200 MA, Edwards-Magee)",
+  "stil": "swing",
+  "kaynak": {
+   "pdf": "Swing_Traderlar_için_Zamanlama_Çözümleri_-_Robert_TH_Lee_ve_Peter_A_Tryde_192_sayfa.pdf",
+   "sayfalar": [
+    105,
+    106
+   ]
+  },
+  "ozet": "Fiyatın 200 günlük ortalamaya göre ilişkisi ve ortalamanın eğimi 8 kuralla alım/satım sinyali üretir: yataylaşan/yükselen 200 MA'yı yukarı delmek, yükselen MA'ya geri çekilip tutunmak alım; MA'yı düzleşip/düşerken aşağı delmek, düşen MA'ya yükselip dönmek satış; aşırı uzaklaşmada ortalamaya dönüş.",
+  "kategori": "trend_takip",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+   "islem": "1d",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "SMA",
+    "parametreler": {
+     "periyot": 200
+    }
+   },
+   {
+    "ad": "SMA",
+    "parametreler": {
+     "periyot": 50,
+     "kullanim": "ara ortalama (opsiyonel)"
+    }
+   }
+  ],
+  "long_giris": [
+   "Kural 1: 200 MA düşüşten sonra yataylaşıyor/yükseliyor ve fiyat yukarı delerek geçiyor -> al",
+   "Kural 2: Fiyat 200 MA'nın altına düşer ama MA hâlâ yükseliyorsa -> al",
+   "Kural 3: Fiyat MA'nın üzerinde, MA'ya geri çekilir ama altına geçemeyip yukarı döner -> al",
+   "Kural 4: Fiyat çok hızlı düşüp düşen 200 MA'nın çok altına inerse MA'ya doğru kısa vadeli toparlanma (kısa vadeli long, karşı trend)"
+  ],
+  "short_giris": [
+   "Kural 5: Yükselişten sonra 200 MA düzleşir/düşer ve fiyat aşağı keser -> sat",
+   "Kural 6: Fiyat düşen 200 MA'yı yukarı keserse -> sat",
+   "Kural 7: Fiyat MA'nın altında, MA'ya yükselir ama geçemeyip aşağı dönerse -> sat",
+   "Kural 8: Fiyat yükselen 200 MA'nın çok üzerine çıkarsa kısa vadeli tepki (kısa vadeli short)"
+  ],
+  "stop_loss": null,
+  "kar_al": "Kitapta sayısal çıkış yok; ters sinyal kuralı",
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [
+   "Her MA periyoduna uygulanabilir; haftalık grafikte 10 hf/40 hf (50g/200g karşılığı) kullanılır",
+   "MA'lar yatay iken (parantez piyasa) kırbaç darbeleri; sinyalden kaçınılmalı"
+  ],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 2,
+   "gerekce": "Kural 1-3 ve 5-7 fiyat/MA ilişkisi ve eğimle ölçülebilir; 4 ve 8 'çok uzaklık' eşiği sayısal değil."
+  },
+  "belirsizlikler": [
+   "'Çok altına/üstüne' eşiği yok",
+   "MA düzleşme (eğim) eşiği yok",
+   "Stop ve çıkış yok",
+   "MA türü belirtilmemiş (SMA varsayıldı)"
+  ],
+  "uyumluluk_notu": "Günlük/haftalık veri; fiyat ve MA tabanlı olduğundan her piyasada kodlanır, hacim göstergesi yalnız onay için. 5m'ye değil ≥1d. Kitap yarı-takdiri sistem diyor (tam otomatik değil).",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "ma-200",
+   "sekiz-kural",
+   "edwards-magee",
+   "trend-takip",
+   "ortalamaya-donus"
+  ]
+ },
+ {
+  "kart_id": "swing__haftalik-yon-gunluk-yurutme-ma-hacim__lee-tryde",
+  "ad": "Haftalığa Bak, Günlükte İşlem Yap (BIC trend, RMA/BMA kesişimi, momentum ve hacim oranı)",
+  "stil": "swing",
+  "kaynak": {
+   "pdf": "Swing_Traderlar_için_Zamanlama_Çözümleri_-_Robert_TH_Lee_ve_Peter_A_Tryde_192_sayfa.pdf",
+   "sayfalar": [
+    113,
+    114,
+    115,
+    116,
+    117,
+    118,
+    119,
+    120
+   ]
+  },
+  "ozet": "Haftalık grafikte (hız MA'sı RMA, yavaş MA'sı BMA, 21 ve 63 haftalık MA, BIC trend rengi, momentum osilatörü ve 2/10 haftalık hacim oranı) trend yönü belirlenir; yalnız günlük sinyaller haftalık yönde olduğunda günlük grafikte fiyat-MA kesişimleriyle giriş yapılır; stop önceki çubuk dibidir.",
+  "kategori": "trend_takip",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+   "islem": "1d",
+   "ust_filtre": "1w"
+  },
+  "gostergeler": [
+   {
+    "ad": "SMA",
+    "parametreler": {
+     "periyot": 5,
+     "ad": "BIC kısa (x2)"
+    }
+   },
+   {
+    "ad": "SMA",
+    "parametreler": {
+     "periyot": 13,
+     "ad": "BIC"
+    }
+   },
+   {
+    "ad": "SMA",
+    "parametreler": {
+     "periyot": 21,
+     "periyot_birim": "hafta"
+    }
+   },
+   {
+    "ad": "SMA",
+    "parametreler": {
+     "periyot": 63,
+     "periyot_birim": "hafta"
+    }
+   },
+   {
+    "ad": "Momentum",
+    "parametreler": {
+     "ROC": [
+      13,
+      21
+     ]
+    }
+   },
+   {
+    "ad": "Hacim oranı",
+    "parametreler": {
+     "hizli": 2,
+     "yavas": 10,
+     "cizgiler": [
+      100,
+      150
+     ]
+    }
+   }
+  ],
+  "long_giris": [
+   "Haftalık: fiyat ve RMA/BMA (orta vadeli ortalama çifti) trend yönünde; RMA BMA'nın üzerinde; haftalık momentum pozitif",
+   "Günlük: fiyat önceki barın kapanışının üzerine geçer, RMA BMA'yı yukarı keser, BIC rengi yükseliş (mavi); momentum ve hacim artışıyla teyit",
+   "Ödül:risk ≥ 3:1 olduğunda pozisyon eklenir (<1:3 ise eklenmez)"
+  ],
+  "short_giris": [
+   "Ayna kurallar: haftalık trend aşağı, günlük fiyat önceki barın kapanışının altı, RMA BMA'nın altı, kırmızı BIC mumu"
+  ],
+  "stop_loss": "Koruyucu stop: önceki çubuğun dibi (örnek: 2,45$ girişte 2,35$); ATR bazlı koruyucu stop (1,3 ATR, 13 dönem) referans olarak verilmiş, kullanım önerilmemiş",
+  "kar_al": "Günlük ve haftalık momentum zayıflığı onaylayınca; ilk kırmızı BIC mumu 14 haftalık yükselişten sonra uyarı; kısmi çıkış (iki lotun bir lotu)",
+  "iz_suren_stop": "Koruyucu stop çubuk dibi/ATR bazlı iz sürer; RMA'nın BMA altına geçmesi ve günlük kapanışın önceki bar kapanışı altında olması çıkış sinyalidir",
+  "zaman_cikisi": null,
+  "filtreler": [
+   "Haftalık trend ile günlük işlem yönü uyumlu olmalı",
+   "Hacim oranı >%150 ise dikkat (uç seviye)",
+   "ADX 20 üzerinde trend gücü teyidi, ADX uyarı çizgisi (opsiyonel)",
+   "Parantez piyasasında işlem yok"
+  ],
+  "pozisyon_risk": "Ödül/risk ≥ 3:1 olmayan kurulumlara eklenmez; kitap sayısal risk yüzdesi vermiyor",
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 1,
+   "gerekce": "Sistem kitaba göre 'takdiri, tam otomatik değil'; RMA/BMA periyodları 'orta vadeli' diye verilmiş, hacim eşiği ve momentum yorumu öznel."
+  },
+  "belirsizlikler": [
+   "RMA/BMA periyotları kitapta açık yazılmamış (50/90/200 örnekleri var)",
+   "BIC rengi kuralı karmaşık",
+   "Momentum osilatörü eşikleri yok",
+   "Eklemeler için kurallar muğlak"
+  ],
+  "uyumluluk_notu": "Günlük/haftalık veri; fiyat ve MA tabanlı olduğundan her piyasada kodlanır, hacim göstergesi yalnız onay için. 5m'ye değil ≥1d. Kitap yarı-takdiri sistem diyor (tam otomatik değil).",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "haftalik-gunluk",
+   "ma-kesisim",
+   "bic-trend",
+   "momentum",
+   "hacim-orani",
+   "atr-stop"
+  ]
+ }
+]

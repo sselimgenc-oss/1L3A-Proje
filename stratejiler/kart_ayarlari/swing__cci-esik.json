@@ -1,0 +1,13 @@
+[
+  {
+    "kart_id": "swing__cci5-pristine-sinyal__velez",
+    "parametreler": {
+      "mod": "geri_cekilme",
+      "cci_periyot": 5,
+      "esik": 100.0,
+      "trend_ma": 50
+    },
+    "cikis_ayarlari": null,
+    "not": "Sayısal tetik kartta yok: trend yönünde CCI(5) -100 yukarı kesişimi varsayımı."
+  }
+]

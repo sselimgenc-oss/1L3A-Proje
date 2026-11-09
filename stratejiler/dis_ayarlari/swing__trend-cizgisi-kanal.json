@@ -1,0 +1,13 @@
+[
+ {
+  "dis_id": "tv:2u7KKcCG",
+  "kaynak_dosya": "arsiv/strateji-sg/tv/pine/2u7KKcCG.pine",
+  "parametreler": {
+   "hedef_r": 2.0,
+   "mod": "kirilim",
+   "regresyon": 50
+  },
+  "cikis_ayarlari": null,
+  "not": "Birleşik ayar, dis_id'ler: tv:2u7KKcCG, tv:uOlzLqTw. [tv:2u7KKcCG] YAKLAŞIK: trend çizgisi kırılımı -> regresyon kanalı kırılımı; AO, EMA, ADX süzgeçleri ve kısmi kâr yok. #1 aynı. | [tv:uOlzLqTw] YAKLAŞIK: trend filtreli trend çizgisi kırılımı -> regresyon kanalı kırılımı; sabit stop/hedef yerine aile stopu ve 2R."
+ }
+]

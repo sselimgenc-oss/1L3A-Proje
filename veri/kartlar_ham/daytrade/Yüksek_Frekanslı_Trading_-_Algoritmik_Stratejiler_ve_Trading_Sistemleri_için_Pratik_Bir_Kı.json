@@ -1,0 +1,70 @@
+[
+ {
+  "kart_id": "daytrade__istatistiksel-arbitraj-cift-spread-2sd__aldridge",
+  "ad": "İstatistiksel Arbitraj (Çift Spread ±2 SD Ortalamaya Dönüş)",
+  "stil": "daytrade",
+  "kaynak": {
+   "pdf": "Yüksek_Frekanslı_Trading_-_Algoritmik_Stratejiler_ve_Trading_Sistemleri_için_Pratik_Bir_Kı.pdf",
+   "sayfalar": [
+    185,
+    186,
+    187,
+    188
+   ]
+  },
+  "ozet": "İki likit menkul kıymet arasındaki fiyat farkı tarihsel ortalamasının 2 standart sapma üstüne çıkarsa pahalı olanı sat, ucuzu al; fark normale dönünce kapat, ters giderse stop. Örnek USD/CAD vs USD/CHF.",
+  "kategori": "ortalamaya_donus",
+  "piyasa_rejimi": "yatay",
+  "orijinal_piyasa": "forex",
+  "zaman_dilimi": {
+   "islem": "1h",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "Spread Z-skoru",
+    "parametreler": {
+     "ortalama_pencere": "T>=30, tercihen 500 gözlem",
+     "esik_sd": 2
+    }
+   }
+  ],
+  "long_giris": [
+   "Spread S=Si-Sj > ortalama + 2 SD -> i'yi sat, j'yi al",
+   "Çift seçimi: tarihsel fark kareleri toplamını (Gatev vd.) minimize eden / eşbütünleşen çift"
+  ],
+  "short_giris": [
+   "Spread S < ortalama - 2 SD -> i'yi al, j'yi sat"
+  ],
+  "stop_loss": "Fiyatlar tahmin edilen yönün tersine giderse zarar durdurma (seviye kitapta yok)",
+  "kar_al": "Spread ortalamaya dönünce (istenen kazanç) kapat",
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [
+   "Likit varlık evreni (seçilen frekansta en az bir işlem)",
+   "İlişki %90 istatistiksel güven"
+  ],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": "Kitap: stat-arb yetenekli ellerde faydalı; çoğu istatistiksel ilişkinin sahte olabileceği uyarısı. Performans rakamı yok.",
+  "kodlanabilirlik": {
+   "puan": 2,
+   "gerekce": "Giriş eşiği net (2 SD); çıkış hedefi ve stop seviyesi kitapta yok; çift seçimi ve pencere uzunluğu parametre."
+  },
+  "belirsizlikler": [
+   "Stop değeri ve kapanış eşiği (ortalama mı kısmi mı) yok.",
+   "Spread uzunluğu T; günlük sezonsallık uyarısı.",
+   "İki bacaklı eşzamanlı yürütme gerekir."
+  ],
+  "uyumluluk_notu": "İki enstrüman ve eş zamanlı veri gerekir; 1h-5m uyarlanabilir; kripto perpetual'da BTC/ETH gibi çiftlerde çalışır; hacim gerekmez.",
+  "varyantlar": [
+   "Getiri farkı veya korelasyon/temel faktörlere de uygulanabilir"
+  ],
+  "anahtar_kelimeler": [
+   "stat-arb",
+   "pairs",
+   "spread",
+   "z-skor",
+   "bollinger"
+  ]
+ }
+]

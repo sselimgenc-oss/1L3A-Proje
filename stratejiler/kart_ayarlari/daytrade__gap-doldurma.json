@@ -1,0 +1,16 @@
+[
+ {
+  "kart_id": "daytrade__acilis-bosluk-geri-donus__bulkowski",
+  "parametreler": {
+   "gap_olcum": "ilk_bar",
+   "min_gap_atr": 2.0,
+   "bekle_n": 1,
+   "pencere": 8,
+   "sma_gun": 50,
+   "hedef_oran": 0.5,
+   "stop_tampon_atr": 0.25
+  },
+  "cikis_ayarlari": null,
+  "not": "YAKLAŞIK: %3 boşluk -> 2 ATR ilk mum hareketi; 1m iz süren alım stopu -> oturum zirvesi kırılımı kapanışı; hedef boşluğun %50'si (kart %33/50/67). Kart short için SMA altı der (belirsiz): ayna kullanıldı."
+ }
+]

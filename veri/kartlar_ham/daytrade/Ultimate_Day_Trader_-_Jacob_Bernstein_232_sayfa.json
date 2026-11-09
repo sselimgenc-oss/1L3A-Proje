@@ -1,0 +1,547 @@
+[
+ {
+  "kart_id": "daytrade__bosluk-doldurma__bernstein",
+  "ad": "Boşluk (Gap) Doldurma Ticareti - Kurulum/Tetikleyici/Takip",
+  "stil": "daytrade",
+  "kaynak": {
+   "pdf": "Ultimate Day Trader - Jacob Bernstein (232 sayfa) - @eseckal.pdf",
+   "sayfalar": [
+    62,
+    63,
+    64,
+    65,
+    66,
+    67,
+    68,
+    69,
+    70,
+    71,
+    72,
+    73,
+    74,
+    75
+   ]
+  },
+  "ozet": "Fiyat önceki günün dibinin altında açılıp (boşluk aşağı) önceki günün dibini yukarı geçince long; önceki günün zirvesinin üstünde açılıp zirvenin altına dönünce short. Boşluk doldurulmazsa işlem yok.",
+  "kategori": "ortalamaya_donus",
+  "piyasa_rejimi": "volatil",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+   "islem": "5m",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "Önceki gün yüksek/düşük",
+    "parametreler": {}
+   }
+  ],
+  "long_giris": [
+   "Kurulum: bugünün açılışı dünün dibinin altında",
+   "Tetikleyici: fiyat dünün dibinin üstüne çıkar (boşluğun dolmaya başlaması)",
+   "Büyük açılış boşluğu = daha iyi"
+  ],
+  "short_giris": [
+   "Kurulum: bugünün açılışı dünün zirvesinin üstünde",
+   "Tetikleyici: fiyat dünün zirvesinin altına iner"
+  ],
+  "stop_loss": "Gösterge/oynaklık/fiyat aralığına dayalı stop (sabit dolar stop kabul edilmez); stop boyutu ve girişin dünün seviyesine penetrasyonu değişken",
+  "kar_al": "Seçenekler: gün sonu (EOD) çıkış, kâr hedefi, ilk kârlı açılış (FPO), yarıyı EOD yarıyı FPO, kısmi kâr + başa baş stop",
+  "iz_suren_stop": null,
+  "zaman_cikisi": "Gün sonu çıkış (basit sürüm); FPO sürümü ertesi güne taşır",
+  "filtreler": [
+   "Boşluk dolmazsa tetikleyici yok = işlem yok",
+   "Aktif hisse/vadeli (yüksek hacim)"
+  ],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": "ADM örneği 7 işlemin 5'i kârlı; E-Mini örneğinde 14 boşluktan 5 kârlı, 6 tetiklenmedi",
+  "kodlanabilirlik": {
+   "puan": 3,
+   "gerekce": "Kurulum, tetikleyici ve EOD çıkışı net sayısal; stop boyutu ve kâr hedefi kullanıcı seçimli."
+  },
+  "belirsizlikler": [
+   "Stop boyutu kitapta sayısal tanımlı değil (oynaklığa dayalı)",
+   "Boşluk büyüklüğü eşiği yok"
+  ],
+  "uyumluluk_notu": "Hisse/vadeli odaklı, gün içi ve günlük grafik; ≥5m uyumlu. Kripto/perpetual'da gap ve seans kapanışı kavramı UTC günü ile yeniden tanımlanmalı. Hacim verisi gerekli olanlar belirtildi. Vadeli ve hisse gap'i; sürekli işlem gören kripto'da gap yok, seans açılışı bazlı uyarlanabilir.",
+  "varyantlar": [
+   "FPO çıkışı (ertesi gün)",
+   "Kısmi çıkış"
+  ],
+  "anahtar_kelimeler": [
+   "gap",
+   "bosluk",
+   "doldurma",
+   "oops",
+   "onceki-gun"
+  ]
+ },
+ {
+  "kart_id": "daytrade__hareketli-ortalama-kanali-mac__bernstein",
+  "ad": "Hareketli Ortalama Kanalı (MAC): 10 SMA(High) / 8 SMA(Low) + Momentum Onayı",
+  "stil": "daytrade",
+  "kaynak": {
+   "pdf": "Ultimate Day Trader - Jacob Bernstein (232 sayfa) - @eseckal.pdf",
+   "sayfalar": [
+    83,
+    84,
+    85,
+    86,
+    87,
+    88
+   ]
+  },
+  "ozet": "Yüksekler'in 10 periyot SMA'sı ve düşüklerin 8 periyot SMA'sı bir kanal oluşturur; iki ardışık tam çubuk kanalın üstünde (altında) olunca ve 28 periyot Momentum, kendi 28 SMA'sını yukarı (aşağı) keserse trend yönünde işlem açılır.",
+  "kategori": "trend_takip",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "vadeli",
+  "zaman_dilimi": {
+   "islem": "30m",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "SMA",
+    "parametreler": {
+     "periyot": 10,
+     "kaynak": "High"
+    }
+   },
+   {
+    "ad": "SMA",
+    "parametreler": {
+     "periyot": 8,
+     "kaynak": "Low"
+    }
+   },
+   {
+    "ad": "Momentum",
+    "parametreler": {
+     "periyot": 28
+    }
+   },
+   {
+    "ad": "SMA",
+    "parametreler": {
+     "periyot": 28,
+     "kaynak": "Momentum"
+    }
+   }
+  ],
+  "long_giris": [
+   "İki ardışık fiyat çubuğu tamamen 10 SMA(High) kanal çizgisinin üstünde",
+   "Momentum(28), kendi 28 SMA'sını yukarı keser (onay)",
+   "Kanal sınırı aşıldığında ve onay varken giriş"
+  ],
+  "short_giris": [
+   "İki ardışık çubuk tamamen 8 SMA(Low) altında",
+   "Momentum(28), 28 SMA'sını aşağı keser"
+  ],
+  "stop_loss": "Karşı kanal çizgisi / ters sinyal (kitapta sayısal stop yok)",
+  "kar_al": "Destek/direnç noktası, ters sinyal, önceden belirlenmiş direnç veya seans sonu iz süren stop",
+  "iz_suren_stop": null,
+  "zaman_cikisi": "Seans sonu çıkış",
+  "filtreler": [
+   "Kanalda destek/direnç ticareti için trend yönünde işlem"
+  ],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 2,
+   "gerekce": "Göstergeler ve giriş kuralı net; stop/hedef esnek ve seçimli."
+  },
+  "belirsizlikler": [
+   "Stop kuralı sayısal değil",
+   "Günlük grafikte Momentum için 57 periyot SMA öneriliyor"
+  ],
+  "uyumluluk_notu": "Hisse/vadeli odaklı, gün içi ve günlük grafik; ≥5m uyumlu. Kripto/perpetual'da gap ve seans kapanışı kavramı UTC günü ile yeniden tanımlanmalı. Hacim verisi gerekli olanlar belirtildi.",
+  "varyantlar": [
+   "Destek-direnç ticareti: trend yönünde kanalın altında al/üstünde sat",
+   "Günlük grafikte onay için MOM 57 SMA veya Williams AD"
+  ],
+  "anahtar_kelimeler": [
+   "kanal",
+   "sma-high-low",
+   "momentum",
+   "trend"
+  ]
+ },
+ {
+  "kart_id": "daytrade__haftanin-gunu-cuma-pazartesi__bernstein",
+  "ad": "Haftanın Günü Modeli (Cuma Kapanış/Açılış -> Pazartesi Stop Girişi)",
+  "stil": "daytrade",
+  "kaynak": {
+   "pdf": "Ultimate Day Trader - Jacob Bernstein (232 sayfa) - @eseckal.pdf",
+   "sayfalar": [
+    89,
+    90,
+    91,
+    92,
+    93
+   ]
+  },
+  "ozet": "Haftanın son gününün kapanışı açılışından yüksekse Pazartesi'ye long kurulumu (düşükse short); Pazartesi fiyat Cuma zirvesinin birkaç tik/sent üstüne çıkınca buy stop tetiklenir, EOD veya ilk kârlı açılışta çıkılır.",
+  "kategori": "diger",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+   "islem": "1D",
+   "ust_filtre": null
+  },
+  "gostergeler": [],
+  "long_giris": [
+   "Cuma kapanışı > Cuma açılışı",
+   "Pazartesi fiyatı Cuma zirvesinin N puan üstüne çıkınca buy stop (N piyasadan piyasaya değişir; GOOG örneği +32 sent)"
+  ],
+  "short_giris": [
+   "Cuma kapanışı < Cuma açılışı",
+   "Pazartesi fiyatı Cuma dibinin N puan altına inince sell stop (örn. 40 sent)"
+  ],
+  "stop_loss": "Sabit dolar stop (örnek GOOG: long 4.700$, short 3.800$; POT: 2.700$/2.200$ için 300 hisse)",
+  "kar_al": "Gün sonu veya ilk kârlı açılış (FPO); iz süren stop ile uzatılabilir",
+  "iz_suren_stop": null,
+  "zaman_cikisi": "EOD veya FPO",
+  "filtreler": [
+   "Aktif piyasalar: günde 5 milyon hisse / 10.000 vadeli sözleşme",
+   "İşlem öncesi geçmiş test; art arda 2-3 kayıp bekleyip başlamak"
+  ],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": "GOOG: kâr faktörü 1,5, %75 kazanma; POT: kâr faktörü 1,89, %83,1 kazanma; Çar-Per ilişkisi GOOG %68,4",
+  "kodlanabilirlik": {
+   "puan": 2,
+   "gerekce": "Kural net; tetikleme puanı piyasaya göre optimize edilecek. Sezgisel takvim anomalisi, aşırı uyum riski."
+  },
+  "belirsizlikler": [
+   "Tetikleme puanı kitapta sabit değil",
+   "Sabit dolar stop kullanılıyor (kitabın kendi kriteriyle çelişiyor)"
+  ],
+  "uyumluluk_notu": "Hisse/vadeli odaklı, gün içi ve günlük grafik; ≥5m uyumlu. Kripto/perpetual'da gap ve seans kapanışı kavramı UTC günü ile yeniden tanımlanmalı. Hacim verisi gerekli olanlar belirtildi. Kripto'da hafta sonu da işlem gördüğünden 'Cuma/Pazartesi' tanımı değişir.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "haftanin-gunu",
+   "dow",
+   "cuma-pazartesi",
+   "takvim"
+  ]
+ },
+ {
+  "kart_id": "daytrade__hacim-artisi-sivri-uc__bernstein",
+  "ad": "Hacim Artışı (Volume Spike) Tetiklemeli Gün İçi Giriş",
+  "stil": "daytrade",
+  "kaynak": {
+   "pdf": "Ultimate Day Trader - Jacob Bernstein (232 sayfa) - @eseckal.pdf",
+   "sayfalar": [
+    101,
+    102,
+    103,
+    104
+   ]
+  },
+  "ozet": "10 dk grafikte en fazla 4 çubuk içinde hacmin en az 4 katına çıkması (spike) tespit edilir; spike çubuğunun aralığı işaretlenir, aralık bir yönde kırılınca o yönde giriş yapılır, stop karşı uç.",
+  "kategori": "momentum",
+  "piyasa_rejimi": "volatil",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+   "islem": "10m",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "Hacim",
+    "parametreler": {
+     "spike_orani": 4,
+     "pencere_bar": 4
+    }
+   }
+  ],
+  "long_giris": [
+   "Gün içi (10 dk) grafikte hacim ≥ 4x önceki hacim (en çok 4 çubukta)",
+   "Spike çubuğunun yüksek/düşüğü işaretlenir",
+   "Fiyat spike çubuğunun üst ucunu geçer (kitaptaki metin bozuk: 'bardan satın alın... fiyatın üstünde')"
+  ],
+  "short_giris": [
+   "Fiyat spike çubuğunun alt ucunun altına iner"
+  ],
+  "stop_loss": "İşlemin karşı tarafı (spike çubuğunun diğer ucu)",
+  "kar_al": "Seans sonunda kârlı pozisyonun bir kısmı iz süren stop ile taşınır",
+  "iz_suren_stop": null,
+  "zaman_cikisi": "Seans sonu",
+  "filtreler": [
+   "Açılış/kapanış hacim artışları dört kat altındaysa elenir",
+   "Sadece aktif piyasalar",
+   "Her piyasada spike deseni tutarlı değil, geriye dönük test şart"
+  ],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 2,
+   "gerekce": "Spike tanımı sayısal; giriş uç noktası ve stop yoruma açık (metin bozuk)."
+  },
+  "belirsizlikler": [
+   "Giriş seviyesi (zirve mi kapanış mı) belirsiz",
+   "Hedef yok"
+  ],
+  "uyumluluk_notu": "Hisse/vadeli odaklı, gün içi ve günlük grafik; ≥5m uyumlu. Kripto/perpetual'da gap ve seans kapanışı kavramı UTC günü ile yeniden tanımlanmalı. Hacim verisi gerekli olanlar belirtildi. Hacim verisi gerekir.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "hacim-artisi",
+   "volume-spike",
+   "10dk",
+   "4x"
+  ]
+ },
+ {
+  "kart_id": "daytrade__momentum-macd-iraksama__bernstein",
+  "ad": "Momentum(28) / MACD(9,18) Iraksama Zamanlaması (A-B-C-D-E)",
+  "stil": "daytrade",
+  "kaynak": {
+   "pdf": "Ultimate Day Trader - Jacob Bernstein (232 sayfa) - @eseckal.pdf",
+   "sayfalar": [
+    109,
+    110,
+    111,
+    112,
+    113,
+    114,
+    115,
+    116,
+    117,
+    118,
+    119,
+    120,
+    121,
+    122,
+    123,
+    124,
+    125,
+    126,
+    127,
+    128,
+    129,
+    130,
+    131,
+    132,
+    133,
+    134,
+    135,
+    136,
+    137
+   ]
+  },
+  "ozet": "Fiyat yeni dip yaparken 28 periyot Momentum yeni dip yapmazsa (yükseliş ıraksaması) ıraksama kurulumu oluşur; Momentum, iki dip arasındaki zirve (E noktası) seviyesini bar kapanışında aştığında long tetiklenir. MACD(9,18) için aynı mantık. İlk tetikleyen gösterge kullanılır.",
+  "kategori": "ortalamaya_donus",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "vadeli",
+  "zaman_dilimi": {
+   "islem": "5m",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "Momentum",
+    "parametreler": {
+     "periyot": 28
+    }
+   },
+   {
+    "ad": "MACD",
+    "parametreler": {
+     "hizli": 9,
+     "yavas": 18,
+     "not": "tek çizgi (EMA farkı)"
+    }
+   }
+  ],
+  "long_giris": [
+   "Kurulum: son ~3 ay (60 çubuk) içinde fiyat yeni dip A yapar, Momentum B'de yeni dip yapmaz (önceki dip C, karşılık fiyat D)",
+   "Iraksama dönemi en az 6 çubuk",
+   "E noktası: A-B arasında Momentum'un en yüksek değeri",
+   "Tetikleyici: bar kapanışında Momentum E seviyesini yukarı aşar (bar içi tetikleme yok)",
+   "Momentum veya MACD'den ilki tetiklemeli"
+  ],
+  "short_giris": [
+   "Fiyat yeni zirve, Momentum yeni zirve yapmaz",
+   "Momentum iki zirve arasındaki dip E seviyesinin altına bar kapanışında iner"
+  ],
+  "stop_loss": "Kitapta sayısal yok; ıraksama yapısı bozulursa (yeni dip) çıkış, riskli bölge mantığı",
+  "kar_al": "İlk hedef P1 = A'dan D'ye zirve-dip aralığının yarısı; sonra P2 (öznel); P1'de başa baş stop (serbest işlem), iz süren stop",
+  "iz_suren_stop": "P1 sonrası başa baş, sonra iz süren stop",
+  "zaman_cikisi": "Gün içi kullanımda seans sonu çıkış; isteğe bağlı FPO",
+  "filtreler": [
+   "Aktif, likit piyasa",
+   "Yalnızca bar kapanışında tetikle",
+   "Tek başına ıraksama sinyal değildir"
+  ],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 2,
+   "gerekce": "A-B-C-D-E yapısı mekanik kodlanabilir (swing dip tespiti gerekli); P2 ve takip kısmı öznel."
+  },
+  "belirsizlikler": [
+   "Swing dip tanımı (kaç bar) yok",
+   "P2 öznel",
+   "Gün içinde hangi zaman dilimi olduğu belirtilmemiş (5 dk Google örneği)"
+  ],
+  "uyumluluk_notu": "Hisse/vadeli odaklı, gün içi ve günlük grafik; ≥5m uyumlu. Kripto/perpetual'da gap ve seans kapanışı kavramı UTC günü ile yeniden tanımlanmalı. Hacim verisi gerekli olanlar belirtildi.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "iraksama",
+   "divergence",
+   "momentum",
+   "macd",
+   "guardian"
+  ]
+ },
+ {
+  "kart_id": "daytrade__stokastik-pop__bernstein",
+  "ad": "Stokastik POP (Trend Tarafı Eşik Kırılımı, 9/3 Yavaş %K, 70/30)",
+  "stil": "daytrade",
+  "kaynak": {
+   "pdf": "Ultimate Day Trader - Jacob Bernstein (232 sayfa) - @eseckal.pdf",
+   "sayfalar": [
+    143,
+    144,
+    145,
+    146,
+    147,
+    148,
+    149
+   ]
+  },
+  "ozet": "Geleneksel aşırı alım/satımın tersi: 9 periyot, 3 yumuşatmalı yavaş %K bar kapanışında %70'in üstüne çıkarsa o çubuğun kapanışında long; %30'un altına inerse short. %K karşı eşiğe dönünce çıkış.",
+  "kategori": "momentum",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "vadeli",
+  "zaman_dilimi": {
+   "islem": "5m",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "Stokastik",
+    "parametreler": {
+     "K_periyot": 9,
+     "K_yumusatma": 3,
+     "ust": 70,
+     "alt": 30
+    }
+   }
+  ],
+  "long_giris": [
+   "Yavaş %K (9,3) bar kapanışında %70 üzerine çıkar -> kapanışta long",
+   "%K tekrar %70 altına inince çık"
+  ],
+  "short_giris": [
+   "%K bar kapanışında %30 altına iner -> kapanışta short",
+   "%K %30 üstüne çıkınca çık"
+  ],
+  "stop_loss": "Kitapta sayısal stop yok; kârlı pozisyonda iz süren stop",
+  "kar_al": "Küçük kârda kısmi çıkış, kalan iz süren stop veya seans sonu",
+  "iz_suren_stop": null,
+  "zaman_cikisi": "Seans sonu / haber kaynaklı fiyat sıçramalarında çıkış",
+  "filtreler": [
+   "Yalnızca vadeli işlemler ve aktif hisse (günde ≥ 1 milyon)",
+   "Tam mekanik değil, çıkışta yargı gerekir"
+  ],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 2,
+   "gerekce": "Giriş/çıkış eşikleri net; stop yok, hedef esnek."
+  },
+  "belirsizlikler": [
+   "Stop yok",
+   "Zaman dilimi belirtilmemiş"
+  ],
+  "uyumluluk_notu": "Hisse/vadeli odaklı, gün içi ve günlük grafik; ≥5m uyumlu. Kripto/perpetual'da gap ve seans kapanışı kavramı UTC günü ile yeniden tanımlanmalı. Hacim verisi gerekli olanlar belirtildi. 'Aşırı bölge = trend devam' mantığı kriptoda da test edilebilir.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "stokastik",
+   "pop",
+   "70-30",
+   "momentum"
+  ]
+ },
+ {
+  "kart_id": "daytrade__trend-kirilim-16-bar__bernstein",
+  "ad": "Trend Kırılımı (16 Bar Donchian + Momentum(14)/MA(14) Trend Filtresi)",
+  "stil": "daytrade",
+  "kaynak": {
+   "pdf": "Ultimate Day Trader - Jacob Bernstein (232 sayfa) - @eseckal.pdf",
+   "sayfalar": [
+    156,
+    157,
+    158,
+    159,
+    160,
+    161,
+    162,
+    163,
+    164
+   ]
+  },
+  "ozet": "Fiyat son 16 çubuğun en yükseğini bir tik geçince long (en düşüğünü kırınca short). Trend filtresi: 14 periyot Momentum 14 SMA'sının üstündeyse yalnızca long, altındaysa yalnızca short. Keltner kanalı fikrinin High/Low uyarlaması.",
+  "kategori": "kirilim",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "vadeli",
+  "zaman_dilimi": {
+   "islem": "5m",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "Donchian Kanalı",
+    "parametreler": {
+     "periyot": 16
+    }
+   },
+   {
+    "ad": "Momentum",
+    "parametreler": {
+     "periyot": 14
+    }
+   },
+   {
+    "ad": "SMA",
+    "parametreler": {
+     "periyot": 14,
+     "kaynak": "Momentum"
+    }
+   }
+  ],
+  "long_giris": [
+   "Son 16 çubuğun en yüksekinin bir tik üstüne buy stop",
+   "Momentum(14) > SMA(Momentum, 14) (trend yukarı filtresi)"
+  ],
+  "short_giris": [
+   "Son 16 çubuğun en düşüğünün altına sell stop",
+   "Momentum(14) < SMA(Momentum,14)"
+  ],
+  "stop_loss": "Kitapta sayısal yok; ters sinyalde pozisyonu ters çevir veya iz süren stop",
+  "kar_al": "5. çubuk kârlı hale gelince kısmi çıkış + iz süren stop; seans sonu çıkış",
+  "iz_suren_stop": "Aynı yönde her ek sinyalde stop yukarı çekilir (muhafazakar)",
+  "zaman_cikisi": "Seans sonu",
+  "filtreler": [
+   "Trend filtresi doğruluğu artırır, işlem sayısını azaltır"
+  ],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 3,
+   "gerekce": "Giriş ve filtre sayısal, mekanik; stop ve çıkış seçimli."
+  },
+  "belirsizlikler": [
+   "Stop mesafesi yok",
+   "Alım ve satım için aynı bar sayısı varsayımı"
+  ],
+  "uyumluluk_notu": "Hisse/vadeli odaklı, gün içi ve günlük grafik; ≥5m uyumlu. Kripto/perpetual'da gap ve seans kapanışı kavramı UTC günü ile yeniden tanımlanmalı. Hacim verisi gerekli olanlar belirtildi. Doğrudan perpetual'da çalışır.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "donchian",
+   "16-bar",
+   "kirilim",
+   "momentum-filtre"
+  ]
+ }
+]

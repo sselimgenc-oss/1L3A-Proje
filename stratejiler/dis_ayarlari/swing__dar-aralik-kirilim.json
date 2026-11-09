@@ -1,0 +1,17 @@
+[
+ {
+  "dis_id": "tv:Dln4aFaM",
+  "kaynak_dosya": "arsiv/strateji-sg/tv/pine/Dln4aFaM.pine",
+  "parametreler": {
+   "gecerlilik": 1,
+   "hedef_r": 0.0,
+   "mod": "nr",
+   "nr_pencere": 7,
+   "short": false
+  },
+  "cikis_ayarlari": {
+   "zaman_cikisi_mum": 1
+  },
+  "not": "YAKLAŞIK: NR7 sonrası yükseliş mumunda long, yalnız long, ertesi kapanışta çıkış (zaman_cikisi_mum=1); iç bar (ID) koşulu eklenmedi."
+ }
+]

@@ -1,0 +1,27 @@
+# Kağıt botunun uçtan uca denemesi (yalnızca geliştirme dalında; durum kaydetmez).
+name: kagit-deneme
+on:
+  push:
+    branches-ignore: [main, kagit-durum]
+    paths: ["paper/**", ".github/workflows/kagit-deneme.yml"]
+jobs:
+  deneme:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12", cache: pip, cache-dependency-path: paper/requirements.txt }
+      - run: pip install -q -r paper/requirements.txt
+      - name: Canlı veri
+        env: { ALGO_LIVE: /tmp/durum/live }
+        run: python -m paper.fetch_live
+      - name: Motor (kağıt başlangıcı 2026-10-01 ile deneme)
+        env: { ALGO_LIVE: /tmp/durum/live }
+        run: |
+          python -c "import json; c=json.load(open('paper/config.json')); c['start']='2026-10-01T00:00:00Z'; json.dump(c, open('/tmp/cfg.json','w'))"
+          PAPER_CFG=/tmp/cfg.json python -m paper.engine --durum /tmp/durum
+          cat /tmp/durum/ozet.md
+          echo "---- hacim katsayıları"; cat /tmp/durum/live/volume_scale.json | head -30
+          echo "---- son mumlar"; tail -2 /tmp/durum/live/klines/BTCUSDT.csv; wc -l /tmp/durum/live/klines/*.csv | tail -1
+          echo "---- funding"; tail -2 /tmp/durum/live/funding/BTCUSDT.csv

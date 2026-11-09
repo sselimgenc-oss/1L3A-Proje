@@ -1,0 +1,23 @@
+[
+ {
+  "kart_id": "daytrade__pin-bar-aralik-donus__singhal",
+  "parametreler": {
+   "teyit_n": 2,
+   "hedef_r": 0.0,
+   "aralik_n": 24
+  },
+  "cikis_ayarlari": null,
+  "not": "Aralık dibinde pin bar, pin SONRASI giriş (teyit), hedef = aralık karşı ucu. 1./2./3. pin bar sayım kuralı kodlanmadı."
+ },
+ {
+  "kart_id": "scalp__fitil-reddi-seviye__vezi",
+  "parametreler": {
+   "seviye_modu": "gun",
+   "teyit_n": 0,
+   "kapanis_alt": 0.2,
+   "hedef_r": 2.0
+  },
+  "cikis_ayarlari": null,
+  "not": "Önceki UTC gün tepe/dip fitil reddi (üst fitil yok -> kapanış üst %20). 30 pip stop sınırı ATR'ye (maks_risk_atr) çevrildi; Asya filtresi yok; kartta hedef yok (2R varsayım)."
+ }
+]

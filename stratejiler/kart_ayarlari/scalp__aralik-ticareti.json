@@ -1,0 +1,14 @@
+[
+ {
+  "kart_id": "scalp__aralik-sinirli__uko",
+  "parametreler": {
+   "pencere": 40,
+   "bant": 0.2,
+   "stop_modu": "dip",
+   "stop_tampon_atr": 0.1,
+   "adx_esik": 25.0
+  },
+  "cikis_ayarlari": null,
+  "not": "Sıkı stop = aralık dışı küçük tampon; hedef karşı sınır; mum deseni/RSI onayı yerine tepki mumu. Lama kartı (sabit 5 puan hedef) ifade edilemedi."
+ }
+]

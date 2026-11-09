@@ -1,0 +1,38 @@
+name: Veri indir
+
+on:
+  workflow_dispatch:
+  push:
+    branches-ignore: [main, kagit-durum]
+    paths:
+      - "scripts/fetch_data.py"
+      - "scripts/varliklar.py"
+      - "scripts/fetch_genis.py"
+      - "scripts/fetch_stres.py"
+      - ".github/workflows/fetch-data.yml"
+      - "data/GUNCELLE"
+
+permissions:
+  contents: write
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install pandas requests yfinance
+      - run: python scripts/fetch_data.py
+      - run: python scripts/fetch_genis.py
+      - run: python scripts/fetch_stres.py
+      - name: Verileri commit et
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898699+github-actions[bot]@users.noreply.github.com"
+          git add data/raw data/yardimci data/genis data/stres
+          git diff --cached --quiet && exit 0
+          git commit -m "Veri güncellemesi: $(date -u +%Y-%m-%d)"
+          git pull --rebase origin "${GITHUB_REF_NAME}"
+          git push origin "HEAD:${GITHUB_REF_NAME}"

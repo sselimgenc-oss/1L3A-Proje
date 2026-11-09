@@ -1,0 +1,47 @@
+{
+ "ad": "kripto_mom",
+ "pine_id": "9cxy1Yu9",
+ "tf": "1d",
+ "evren": [
+  "kripto"
+ ],
+ "neden": "Betik kripto için; kripto günlük. Piyasa filtresi için TOTAL verisi yok → BTC vekil.",
+ "olcut": {
+  "n": 820,
+  "kar": 37743.507804734094,
+  "pf": 2.939999993132847,
+  "sharpe": 1.7632889136085883,
+  "beklenti_R": 1.0551707279722558,
+  "kazanma": 0.4560975609756098,
+  "maxdd": 0.08742268451098772,
+  "dd_gun": 821,
+  "cagr": 0.22251205867591173,
+  "calmar": 2.5452439480732862,
+  "psr": 0.9999999432252322,
+  "tutma_gun": 7.0,
+  "ort_islem_getiri": 0.06444013527637528,
+  "netR_toplam": 865.2399969372498,
+  "sharpe_egitim": 2.067643709645279,
+  "sharpe_oos": 0.654380259474586,
+  "oos_kar": 3447.2567995578065,
+  "tur": "swing",
+  "pf_maliyet2x": 2.831145008248797,
+  "komsu_n": 16,
+  "komsu_karda": 1.0,
+  "enstr_n": 14,
+  "enstr_karda": 1.0,
+  "maks_kor": 0.6206626235741332
+ },
+ "kurallar": {
+  "1_islem_sayisi": true,
+  "2_maks_dusus<=20": true,
+  "3_beklenti>=0.15R": true,
+  "4a_kf>=1.3": true,
+  "4b_sharpe>=1": true,
+  "5_oos": false,
+  "6_maliyet2x_kf>=1.1": true,
+  "7_komsu>=70": true,
+  "8_enstr>=60": true
+ },
+ "gecti": false
+}

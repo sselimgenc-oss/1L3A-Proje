@@ -1,0 +1,18 @@
+# Pano üretimi (tek seferlik; zamanlayıcı 1l3a-pano.timer çağırır). Pano hesap yapmaz: motorun yazdığı durum dosyalarını biçimler.
+[Unit]
+Description=1L3A pano üretimi
+
+[Service]
+Type=oneshot
+User=l3a
+Group=l3a
+WorkingDirectory=/opt/1l3a
+StateDirectory=1l3a-paper
+ExecStart=/opt/1l3a/.venv/bin/python -m motor.canli.pano --durum ${STATE_DIRECTORY}/durum --cikti ${STATE_DIRECTORY}/durum/pano.html
+# pano çıkış kodu 2 = kritik uyarı var (HTML yine de yazılır); bu servisin hatası sayılmasın.
+# Çıkış kodu 1 = durum dosyaları eksik/bozuk: BAŞARISIZ sayılır (systemctl --failed / status kırmızı gösterir).
+SuccessExitStatus=0 2
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=full
+ProtectHome=true

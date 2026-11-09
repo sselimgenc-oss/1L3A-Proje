@@ -1,0 +1,12 @@
+[
+  {
+    "kart_id": "daytrade__uc-cubuklu-net-hat-trend-degisimi__bulkowski",
+    "parametreler": {
+      "pivot_k": 3,
+      "cubuk_n": 3,
+      "sma_filtre": 50
+    },
+    "cikis_ayarlari": null,
+    "not": "Üç çubuklu net çizgi kırılımı + 50g SMA filtresi; karşı yön kırılımı çıkış; net çizgi tanımı yorumlu."
+  }
+]

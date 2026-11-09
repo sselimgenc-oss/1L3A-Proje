@@ -1,0 +1,24 @@
+[
+ {
+  "kart_id": "daytrade__yavaslama__woods",
+  "parametreler": {
+   "desen": "yavaslama",
+   "seri_n": 3,
+   "tetik": "kirilim",
+   "hedef_r": 2.0
+  },
+  "cikis_ayarlari": null,
+  "not": "Kartta hedef yok (2R varsayım); stop kurulum çubuğu ötesi (serinin ucu); 1 tik -> ATR tamponu."
+ },
+ {
+  "kart_id": "daytrade__doruga-karsi__woods",
+  "parametreler": {
+   "desen": "doruk",
+   "seri_n": 3,
+   "tetik": "kirilim",
+   "hedef_r": 2.0
+  },
+  "cikis_ayarlari": null,
+  "not": "Kartta hedef yok (2R varsayım); boğa tarafı kartta tanımsız, ayna varsayıldı."
+ }
+]

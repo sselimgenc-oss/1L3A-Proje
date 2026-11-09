@@ -1,0 +1,289 @@
+[
+ {
+  "kart_id": "daytrade__sma-atr-bant-filtreli-trend__kilincarslan",
+  "ad": "SMA + ATR Bantlı Filtreli Trend Takip (BIST100 30dk)",
+  "stil": "daytrade",
+  "kaynak": {
+   "pdf": "Teknik_Analiz_ve_Algoritmik_İşlemler_-_Bist_100_Endeksi_Üzerine_Bir_Uygulama_-_Yüksek_Lisa.pdf",
+   "sayfalar": [
+    116,
+    117,
+    118,
+    119,
+    120
+   ]
+  },
+  "ozet": "Fiyat basit hareketli ortalamayı (SMA 60-73) belirli bir bant (ATR çarpanlı, envelope veya sabit adım) kadar aşınca yönde işlem; bant filtresi işlem sayısını 1039'dan ~400'e ve kârlı işlem oranını %23'ten ~%40'a yükseltti.",
+  "kategori": "trend_takip",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+   "islem": "30m",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "SMA",
+    "parametreler": {
+     "periyot": "73 (60 son optimizasyon)"
+    }
+   },
+   {
+    "ad": "ATR",
+    "parametreler": {
+     "periyot": "10 (11 son)",
+     "carpan": 1
+    }
+   }
+  ],
+  "long_giris": [
+   "Kapanış SMA + ATR(10)*1 bandının üstünde (SMA yukarı kesilir ve bant aşılır) -> long (sürekli pozisyon)"
+  ],
+  "short_giris": [
+   "Kapanış SMA - ATR(10)*1 bandının altında -> short/pozisyon ters"
+  ],
+  "stop_loss": "Ayrıca stop yok; ters sinyalde çıkış (stop-and-reverse)",
+  "kar_al": null,
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [
+   "ATR bandı yerine BandStep (3.6 puan) veya Envelope (%0.3) kullanılabilir"
+  ],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": "Kitap: SMA(73) tek başına PF 2.03, 1039 işlem, %23.1 kârlı; +ATR bant PF 2.24, 395 işlem, %39.2 kârlı; +HHLL(29) PF 2.23, maks kayıp 240->155 TRY. (Hepsi optimizasyonlu, örneklem içi.)",
+  "kodlanabilirlik": {
+   "puan": 2,
+   "gerekce": "Kural yapısı net; fakat SMA kesişim giriş tanımı ve bandın yön uygulaması metinde açıkça yazılmamış, Pine kodu yok."
+  },
+  "belirsizlikler": [
+   "Giriş: 'fiyat SMA'yı bandı aşarak keser' varsayımı; bandın long/short uygulaması açık değil.",
+   "Stop-loss tanımı yok; komisyon/kayma yok.",
+   "Parametreler 2017-2022 BIST100 30dk'ya optimize edilmiş."
+  ],
+  "uyumluluk_notu": "30dk BIST100 endeksinde TradingView'da test edilmiş; hacim gerekmez; 30m barlar >=5m, kripto/hisseye uygulanabilir (parametreler yeniden optimize edilmeli). Kitap TRY cinsi, komisyon/kayma belirtmiyor.",
+  "varyantlar": [
+   "BandStep(3.6) filtresi",
+   "Envelope(0.3) filtresi",
+   "SMA(60), ATR(11) son optimizasyon",
+   "SMA(59), ATR(27), HHLL(31) ek optimizasyon"
+  ],
+  "anahtar_kelimeler": [
+   "sma",
+   "atr-bant",
+   "envelope",
+   "bandstep",
+   "bist100",
+   "trend-takip"
+  ]
+ },
+ {
+  "kart_id": "daytrade__turtle-hhll-kanal-kirilimi__kilincarslan",
+  "ad": "Kaplumbağa (HHLL) Kanal Kırılımı (BIST100 30dk)",
+  "stil": "daytrade",
+  "kaynak": {
+   "pdf": "Teknik_Analiz_ve_Algoritmik_İşlemler_-_Bist_100_Endeksi_Üzerine_Bir_Uygulama_-_Yüksek_Lisa.pdf",
+   "sayfalar": [
+    87,
+    88,
+    89,
+    121,
+    122,
+    123,
+    124
+   ]
+  },
+  "ozet": "Kapanış son N barlık en yüksek yüksekliği aşarsa long, en düşük düşüklüğün altına inerse short (Turtle Trade Channels / HHLL). BIST100 30dk'da N=29-53 optimize edilmiş.",
+  "kategori": "kirilim",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+   "islem": "30m",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "Donchian",
+    "parametreler": {
+     "N": "29 (31 son); walk-forward testte 53"
+    }
+   }
+  ],
+  "long_giris": [
+   "Kapanış, önceki N barın en yüksek değerini aşar (security fonksiyonu ile kapanmış bar verisi, repaint yok) -> long"
+  ],
+  "short_giris": [
+   "Kapanış, önceki N barın en düşük değerinin altına iner -> short"
+  ],
+  "stop_loss": "Stop-and-reverse (ters kanal kırılımı)",
+  "kar_al": null,
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": "Kitap: 2:1 walk-forward testte (optimizasyon 1 yıl, test 6 ay) HHLL(53) için örneklem içi net 160 TRY (alış -40), sonuç tabloları OOS tutarlılığına bakıyor; genel olarak tek başına sistem filtreyle birlikte düşüş azalttı.",
+  "kodlanabilirlik": {
+   "puan": 3,
+   "gerekce": "Tam mekanik: kanal kırılımı, tek parametre N."
+  },
+  "belirsizlikler": [
+   "Walk-forward çıktılarının ayrıntısı tablo biçiminde, OOS başarı iddiaları net değil."
+  ],
+  "uyumluluk_notu": "30dk BIST100 endeksinde TradingView'da test edilmiş; hacim gerekmez; 30m barlar >=5m, kripto/hisseye uygulanabilir (parametreler yeniden optimize edilmeli). Kitap TRY cinsi, komisyon/kayma belirtmiyor.",
+  "varyantlar": [
+   "Günlük grafikte Turtle Trade Channels(15)"
+  ],
+  "anahtar_kelimeler": [
+   "donchian",
+   "kirilim",
+   "hhll",
+   "turtle",
+   "bist100",
+   "walk-forward"
+  ]
+ },
+ {
+  "kart_id": "daytrade__stokastik-kesisim-bist__kilincarslan",
+  "ad": "Stokastik Kesişim (14,3,18,72) BIST100 30dk",
+  "stil": "daytrade",
+  "kaynak": {
+   "pdf": "Teknik_Analiz_ve_Algoritmik_İşlemler_-_Bist_100_Endeksi_Üzerine_Bir_Uygulama_-_Yüksek_Lisa.pdf",
+   "sayfalar": [
+    120,
+    121,
+    122
+   ]
+  },
+  "ozet": "Stokastik %K/%D kesişimi (14,3; alt 18, üst 72 eşikleri) ile işlem; BIST100 30dk'da tek başına en yüksek net kazanç/PF/kârlı yüzde verdi; kısa pozisyon PF'si çok iyi, uzun zayıf.",
+  "kategori": "ortalamaya_donus",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+   "islem": "30m",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "Stokastik",
+    "parametreler": {
+     "K": 14,
+     "yavaslatma": 3,
+     "alt": 18,
+     "ust": 72
+    }
+   }
+  ],
+  "long_giris": [
+   "%K, %D'yi aşağıdan yukarı keser ve bölge <= alt eşik (18) -> long"
+  ],
+  "short_giris": [
+   "%K, %D'yi yukarıdan aşağı keser ve bölge >= üst eşik (72) -> short"
+  ],
+  "stop_loss": "Stop-and-reverse varsayılır; kitapta yok",
+  "kar_al": null,
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": "Kitap: tek başına en yüksek net kazanç/PF; bütün sistemlerle birleştirme (hepsi aynı yönde) net kazanç, düşüş, PF ve kârlı oranda iyileşme sağladı.",
+  "kodlanabilirlik": {
+   "puan": 1,
+   "gerekce": "Parametre sırası (14,3,18,72) ve kesişim kuralları metinde açıkça tanımlı değil; kod yok."
+  },
+  "belirsizlikler": [
+   "Eşik tanımı varsayım: 18=alt, 72=üst.",
+   "Çıkış kuralı belirsiz."
+  ],
+  "uyumluluk_notu": "30dk BIST100 endeksinde TradingView'da test edilmiş; hacim gerekmez; 30m barlar >=5m, kripto/hisseye uygulanabilir (parametreler yeniden optimize edilmeli). Kitap TRY cinsi, komisyon/kayma belirtmiyor.",
+  "varyantlar": [
+   "Birleşik sistem: SMA+ATR, HHLL ve Stokastik üçü aynı yönde ise gir (Tablo 13), PF/düşüş en iyi",
+   "Çoğunluk oyu versiyonu (Tablo 14) iyileştirmedi"
+  ],
+  "anahtar_kelimeler": [
+   "stokastik",
+   "kesisim",
+   "bist100",
+   "oy-birlesim"
+  ]
+ },
+ {
+  "kart_id": "daytrade__uclu-sistem-oy-birlesimi-bist__kilincarslan",
+  "ad": "Üç Sistem Aynı Yönde (SMA+ATR, HHLL, Stokastik) Birleşik Sistem",
+  "stil": "daytrade",
+  "kaynak": {
+   "pdf": "Teknik_Analiz_ve_Algoritmik_İşlemler_-_Bist_100_Endeksi_Üzerine_Bir_Uygulama_-_Yüksek_Lisa.pdf",
+   "sayfalar": [
+    121,
+    122,
+    123
+   ]
+  },
+  "ozet": "SMA+ATR bant, HHLL kanal ve Stokastik kesişim sistemlerinin üçü de aynı yönde sinyal verirse işlem açılır; tek tek sistemlerden daha iyi PF ve düşüş.",
+  "kategori": "trend_takip",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+   "islem": "30m",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "SMA",
+    "parametreler": {
+     "periyot": 59
+    }
+   },
+   {
+    "ad": "ATR",
+    "parametreler": {
+     "periyot": 27,
+     "carpan": 1
+    }
+   },
+   {
+    "ad": "Donchian",
+    "parametreler": {
+     "N": 31
+    }
+   },
+   {
+    "ad": "Stokastik",
+    "parametreler": {
+     "K": 13,
+     "yavaslatma": 3,
+     "alt": 18,
+     "ust": 70
+    }
+   }
+  ],
+  "long_giris": [
+   "Üç alt sistemin üçü de long sinyalinde"
+  ],
+  "short_giris": [
+   "Üç alt sistemin üçü de short sinyalinde"
+  ],
+  "stop_loss": "Alt sistemlerin stop-and-reverse mantığı",
+  "kar_al": null,
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": "Kitap: Tablo 15 son optimizasyonda ilk tabloya göre tüm oranlarda iyileşme; tek tek sistemlerden daha etkin.",
+  "kodlanabilirlik": {
+   "puan": 2,
+   "gerekce": "Mantık net; alt sistemlerin giriş tanımları 1. ve 3. karttaki belirsizlikleri taşır."
+  },
+  "belirsizlikler": [
+   "Aşırı optimizasyon riski; walk-forward doğrulaması kitapta yalnız HHLL için yapılmış."
+  ],
+  "uyumluluk_notu": "30dk BIST100 endeksinde TradingView'da test edilmiş; hacim gerekmez; 30m barlar >=5m, kripto/hisseye uygulanabilir (parametreler yeniden optimize edilmeli). Kitap TRY cinsi, komisyon/kayma belirtmiyor.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "oy-birlesimi",
+   "sma",
+   "atr",
+   "hhll",
+   "stokastik",
+   "bist100"
+  ]
+ }
+]

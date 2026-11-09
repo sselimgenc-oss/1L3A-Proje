@@ -1,0 +1,10 @@
+[Unit]
+Description=1L3A S&P 500 günlük veri güncellemesi (ABD kapanışından sonra)
+
+[Timer]
+OnCalendar=*-*-* 22:30:00 UTC
+Persistent=true
+RandomizedDelaySec=300
+
+[Install]
+WantedBy=timers.target

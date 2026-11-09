@@ -1,0 +1,49 @@
+{
+ "ad": "sweep_sky",
+ "pine_id": "25Ffpyo0",
+ "tf": "1h",
+ "evren": [
+  "kripto",
+  "abd",
+  "emtia"
+ ],
+ "neden": "Zaman dilimi belirtilmemiş, hafta içi süzgeci var; saatlik.",
+ "olcut": {
+  "n": 4405,
+  "kar": -17368.88079767668,
+  "pf": 0.8019977112597786,
+  "sharpe": -0.04779189024420694,
+  "beklenti_R": -0.09394433222861807,
+  "kazanma": 0.5255391600454029,
+  "maxdd": 1.85562685320684,
+  "dd_gun": 2723,
+  "cagr": null,
+  "calmar": null,
+  "psr": 0.44470367732027277,
+  "tutma_gun": 7.0,
+  "ort_islem_getiri": -0.010646079036033379,
+  "netR_toplam": -413.8247834670626,
+  "sharpe_egitim": -0.06743804443019377,
+  "sharpe_oos": 1.0561233569282937,
+  "oos_kar": -3478.8066818053812,
+  "tur": "swing",
+  "pf_maliyet2x": 0.7737787458377017,
+  "komsu_n": 12,
+  "komsu_karda": 0.0,
+  "enstr_n": 27,
+  "enstr_karda": 0.3333333333333333,
+  "maks_kor": 0.024500372662322863
+ },
+ "kurallar": {
+  "1_islem_sayisi": true,
+  "2_maks_dusus<=20": false,
+  "3_beklenti>=0.15R": false,
+  "4a_kf>=1.3": false,
+  "4b_sharpe>=1": false,
+  "5_oos": false,
+  "6_maliyet2x_kf>=1.1": false,
+  "7_komsu>=70": false,
+  "8_enstr>=60": false
+ },
+ "gecti": false
+}

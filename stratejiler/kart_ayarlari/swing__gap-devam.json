@@ -1,0 +1,28 @@
+[
+ {
+  "kart_id": "swing__bosluk-devam-zirve-yakin__jordan",
+  "parametreler": {
+   "gap_olcum": "ilk_bar",
+   "min_gap_atr": 1.0,
+   "gap_korunur": false,
+   "kapanis_yuzde": 0.8,
+   "stop_modu": "dip",
+   "hedef_r": 2.0
+  },
+  "cikis_ayarlari": null,
+  "not": "Gün zirvesine yakın kapanış = aralığın üst %20'si; stop/hedef kartta yok (dip stopu, 2R varsayım)."
+ },
+ {
+  "kart_id": "swing__gapping-pattern__crane",
+  "parametreler": {
+   "gap_olcum": "acilis",
+   "min_gap_atr": 0.5,
+   "gap_korunur": true,
+   "kapanis_yuzde": 0.0,
+   "stop_modu": "dip",
+   "hedef_r": 2.0
+  },
+  "cikis_ayarlari": null,
+  "not": "Boşluk dolmaz + kapanış açılışın üstünde. RD/trail day ön koşulu kodlanmadı; '2-3 gün devam' hedef_r=2 ile yaklaşık."
+ }
+]

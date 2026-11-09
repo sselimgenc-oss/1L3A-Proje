@@ -1,0 +1,60 @@
+{
+  "_not": "Parametre sürümleri. Her sürüm 'gecerli' anından itibaren AÇILAN işlemlere uygulanır; geçmiş işlemler değişmez. Yeni sürüm eklerken eskisini silme, listenin sonuna ekle.",
+  "surumler": [
+    {
+      "gecerli": "2026-10-14T00:00:00Z",
+      "aciklama": "Kullanıcı onaylı ayrı deney (13 Ekim): kripto S10+S13+S15 parametreleri Mag7 + emtiada, BTC filtresi kapalı",
+      "stratejiler": {
+        "S13_falsebreak": {
+          "siniflar": [
+            "us_stock",
+            "commodity"
+          ],
+          "params": {
+            "trend": "po_h1",
+            "adx_min": 25,
+            "n_high": 80,
+            "n_pull": 12,
+            "k_bars": 12,
+            "stop_atr_d": 1.0,
+            "btc_filter": false,
+            "yon": "long"
+          }
+        },
+        "S15_tdpullback": {
+          "siniflar": [
+            "us_stock",
+            "commodity"
+          ],
+          "params": {
+            "level": "ema20",
+            "move_atr": 1.0,
+            "from_utc": 14,
+            "to_utc": 21,
+            "stop": "atr",
+            "stop_atr_d": 0.75,
+            "touch_atr": 0.2,
+            "btc_filter": false,
+            "yon": "long"
+          }
+        },
+        "S10_trendday": {
+          "siniflar": [
+            "us_stock",
+            "commodity"
+          ],
+          "params": {
+            "at_utc": 16,
+            "at_end": 20,
+            "move_atr": 1.0,
+            "stop_mode": "atr",
+            "stop_atr_d": 1.0,
+            "trend": "h4+h1",
+            "btc_filter": false,
+            "yon": "long"
+          }
+        }
+      }
+    }
+  ]
+}

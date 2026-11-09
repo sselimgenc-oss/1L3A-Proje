@@ -1,0 +1,24 @@
+# Trend kağıt botunun uçtan uca denemesi (yalnızca geliştirme dallarında; durum kaydetmez, rapor yazmaz).
+name: kagit-trend-deneme
+on:
+  push:
+    branches-ignore: [main, kagit-durum, kagit-trend-durum]
+    paths: ["trend/**", "scripts/fetch_trend.py", ".github/workflows/kagit-trend-deneme.yml"]
+jobs:
+  deneme:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12", cache: pip, cache-dependency-path: kagit/gereksinimler.txt }
+      - run: pip install -q -r kagit/gereksinimler.txt
+      - run: python scripts/fetch_trend.py
+      - name: Motor (gerçek ayar + 2026-08-11 başlangıçlı deneme)
+        shell: bash
+        run: |
+          set -eo pipefail
+          mkdir -p /tmp/gercek && (git fetch -q origin kagit-durum && git show origin/kagit-durum:ozsermaye.csv > /tmp/gercek/swing_ozsermaye.csv || true)
+          python -m trend.kagit --durum /tmp/gercek > /tmp/g.txt; head -30 /tmp/g.txt
+          KAGIT_BASLANGIC=2026-08-11 python -m trend.kagit --durum /tmp/deneme > /tmp/d.txt; head -40 /tmp/d.txt
+          ls -la /tmp/gercek /tmp/deneme

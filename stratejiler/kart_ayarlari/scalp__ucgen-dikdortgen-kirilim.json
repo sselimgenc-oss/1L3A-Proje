@@ -1,0 +1,13 @@
+[
+ {
+  "kart_id": "daytrade__gun-ici-simetrik-ucgen-kisa__bulkowski",
+  "parametreler": {
+   "ucgen": false,
+   "simetrik": true,
+   "dikdortgen": false,
+   "long": false
+  },
+  "cikis_ayarlari": null,
+  "not": "Gün içi simetrik üçgen short."
+ }
+]

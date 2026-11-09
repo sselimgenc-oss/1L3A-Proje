@@ -1,0 +1,85 @@
+[
+  {
+    "kart_id": "scalp__bb50-3bant-ortalamaya-donus__green-forex",
+    "ad": "Üçlü Bollinger (50; 2/3/4 sapma) Ortalamaya Dönüş Scalp",
+    "stil": "scalp",
+    "kaynak": {
+      "pdf": "GBPJPY M1 Scalp Stratejisi - Green Forex (4 sayfa) - @eseckal.pdf",
+      "sayfalar": [
+        2,
+        3,
+        4
+      ]
+    },
+    "ozet": "Fiyat 50 periyotluk Bollinger'ın 2 sapma bandının dışına, 3 sapma bandına giden mesafenin en az yarısı kadar taştığında (4 sapma bandına ulaşırsa daha iyi) merkeze dönüş yönünde işlem açılır; 5-10 pip hedeflenir.",
+    "kategori": "ortalamaya_donus",
+    "piyasa_rejimi": "yatay",
+    "orijinal_piyasa": "forex",
+    "zaman_dilimi": {
+      "islem": "1m (5m/15m de olur)",
+      "ust_filtre": null
+    },
+    "gostergeler": [
+      {
+        "ad": "Bollinger",
+        "parametreler": {
+          "periyot": 50,
+          "sapma": 2
+        }
+      },
+      {
+        "ad": "Bollinger",
+        "parametreler": {
+          "periyot": 50,
+          "sapma": 3
+        }
+      },
+      {
+        "ad": "Bollinger",
+        "parametreler": {
+          "periyot": 50,
+          "sapma": 4
+        }
+      }
+    ],
+    "long_giris": [
+      "Fiyat alt 2-sapma bandının altına, alt 3-sapma bandına olan mesafenin en az yarısına kadar uzanmış (4-sapma bandına ulaşması tercih)",
+      "Fiyat orta banda doğru geri dönmeye başlar -> AL"
+    ],
+    "short_giris": [
+      "Fiyat üst 2-sapma bandının üstüne, 3-sapma bandına olan mesafenin en az yarısına kadar uzanmış",
+      "Fiyat orta banda doğru geri dönmeye başlar -> SAT"
+    ],
+    "stop_loss": "Kitapta sabit kural yok: stop para yönetimine bırakılmış (çok sıkı olmalı).",
+    "kar_al": "5-10 pip (orta banda doğru)",
+    "iz_suren_stop": null,
+    "zaman_cikisi": "Zaman bazlı çıkış: beklenen hareket için öngörülen süre dolduysa pozisyon kapatılır (süre kitapta verilmemiş).",
+    "filtreler": [
+      "Oynak (volatil) veya sakin/ölü piyasada işlem yapma",
+      "Haber bültenlerinden önce işlem yapma",
+      "Londra seansı açılışı ile Tokyo kapanışı arası en uygun"
+    ],
+    "pozisyon_risk": "Stoplar çok sıkı; miktar para yönetim sistemine göre.",
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Bantlar ve taşma oranı ölçülebilir; dönüş onayı ve stop/süre değerleri kitapta belirsiz."
+    },
+    "belirsizlikler": [
+      "'Geri dönmeye başlama' tanımı yok (mum rengi/kapanış?)",
+      "Stop mesafesi ve zaman çıkışı süresi yok",
+      "Kitap 4 sayfa, performans verisi yok"
+    ],
+    "uyumluluk_notu": "1m-15m'de çalışır deniyor; GBPJPY'ye özel pip hedefi; 5m'ye uyarlanabilir. Hacim gerekmez. Seans filtresi forex'e özgü.",
+    "varyantlar": [
+      "M5/M15 grafikte de kullanılabilir"
+    ],
+    "anahtar_kelimeler": [
+      "bollinger",
+      "ortalamaya-donus",
+      "3-bant",
+      "gbpjpy",
+      "scalp"
+    ]
+  }
+]

@@ -1,0 +1,118 @@
+[
+  {
+    "kart_id": "scalp__payapa-ema-stokastik-mtf__blanco",
+    "ad": "Payapa: 5/8/13/21 EMA Demeti + Stokastik (5,3,3) Çoklu Zaman Dilimi",
+    "stil": "scalp",
+    "kaynak": {
+      "pdf": "Payapa Scalping Stratejisi - Türkçe ve İngilizce (12 sayfa) - @eseckal.pdf",
+      "sayfalar": [
+        2,
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    "ozet": "15dk ana grafikte 5/8/13/21 EMA demeti ve stokastik uç bölgedeyken (≈90/10), 5dk'da stokastik kesişince sniper giriş; 15dk/1s/4s hepsinde EMA'lar uçta ise 'devam tuzağı' sayılıp girilmez. Çıkış 4 EMA karşı uca ulaşınca.",
+    "kategori": "momentum",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "forex",
+    "zaman_dilimi": {
+      "islem": "15m (giriş 5m)",
+      "ust_filtre": "1h (onay), 4h (son onay)"
+    },
+    "gostergeler": [
+      {
+        "ad": "Stokastik",
+        "parametreler": {
+          "K": 5,
+          "D": 3,
+          "yavaslama": 3
+        }
+      },
+      {
+        "ad": "EMA",
+        "parametreler": {
+          "periyot": 5,
+          "fiyat": "HL/2"
+        }
+      },
+      {
+        "ad": "EMA",
+        "parametreler": {
+          "periyot": 8,
+          "fiyat": "HL/2"
+        }
+      },
+      {
+        "ad": "EMA",
+        "parametreler": {
+          "periyot": 13,
+          "fiyat": "HL/2"
+        }
+      },
+      {
+        "ad": "EMA",
+        "parametreler": {
+          "periyot": 21,
+          "fiyat": "HL/2"
+        }
+      },
+      {
+        "ad": "EMA",
+        "parametreler": {
+          "periyot": 100,
+          "fiyat": "HL/2"
+        }
+      },
+      {
+        "ad": "EMA",
+        "parametreler": {
+          "periyot": 200,
+          "fiyat": "HL/2"
+        }
+      }
+    ],
+    "long_giris": [
+      "15dk: 4 kısa EMA (5,8,13,21) ve stokastik aşırı alt uçta (≈10; bazen 10-30)",
+      "1s: 100/200 EMA uzakta; 4 kısa EMA uçta olabilir ama tüm EMA'lar 4s'de uçta olmamalı (devam tuzağı değil)",
+      "5dk grafikte stokastik ana-sinyal çizgisini yukarı keser -> AL"
+    ],
+    "short_giris": [
+      "15dk: 4 kısa EMA ve stokastik aşırı üst uçta (≈90; bazen 70-90)",
+      "1s/4s: devam tuzağı olmamalı",
+      "5dk'da stokastik aşağı kesişim -> SAT"
+    ],
+    "stop_loss": "Kitapta verilmemiş",
+    "kar_al": "15dk'da 4 EMA (5,8,13,21) karşı uç seviyeye (10/90) ulaşınca çık; alternatif: tüm EMA'lar karşı uca gelene kadar bekle",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Devam tuzağı (üç zaman diliminde EMA'lar uç bölgede) varken girme",
+      "Haber/temel olaylarda sniper giriş güvenli değil"
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": "'Asla para kaybetmezsin', 'hiç negatif işlem yok' gibi kanıtsız iddialar",
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "EMA 'seviye' (10/90, 50) kavramı gösterge ekranındaki konuma göre tanımlı, sayısal eşiği yok; stop yok."
+    },
+    "belirsizlikler": [
+      "EMA'ların '90 seviyesi' (sıralama mı, fiyat konumu mu?) tanımsız",
+      "Stop-loss kitapta yok",
+      "Devam tuzağı panzehiri çift/üçlü tepe-dip (formasyon) öznel"
+    ],
+    "uyumluluk_notu": "5/15/60dk uyarlanabilir; forex odaklı; hacim gerekmez. Stopsuz olduğu için 1L3A'da risk kuralıyla sarmalanmalı.",
+    "varyantlar": [
+      "Sniper giriş yerine 15dk kesişimi (daha geç ama daha az riskli)",
+      "Çıkışta tüm EMA'ların karşı uca varması (zoom-out)"
+    ],
+    "anahtar_kelimeler": [
+      "ema-demeti",
+      "stokastik",
+      "coklu-zaman",
+      "devam-tuzagi",
+      "payapa"
+    ]
+  }
+]

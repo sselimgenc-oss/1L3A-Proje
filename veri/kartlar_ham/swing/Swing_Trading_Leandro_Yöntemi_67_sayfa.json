@@ -1,0 +1,277 @@
+[
+ {
+  "kart_id": "swing__direnc-kirilimi-guc-cubugu__leandro",
+  "ad": "Konsolidasyon/Pivot Direnç Kırılımı + Güç Çubuğu (Kurulum 1)",
+  "stil": "swing",
+  "kaynak": {
+   "pdf": "Swing_Trading_Leandro_Yöntemi_67_sayfa.pdf",
+   "sayfalar": [
+    19,
+    29,
+    31,
+    32,
+    34,
+    35,
+    39,
+    40,
+    41,
+    42,
+    43,
+    45,
+    46,
+    47,
+    48
+   ]
+  },
+  "ozet": "Yükseliş trendindeki hissede 10+ bar konsolidasyon veya küçük düzeltme sonrası, ortalamanın üzerinde genlik ve hacimle direnci kapanışla kıran 'güç çubuğunda' long açılır; kâr kısmi alınır, kalan iz süren stopla yönetilir.",
+  "kategori": "kirilim",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+   "islem": "1d",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "SMA",
+    "parametreler": {
+     "periyot": 21,
+     "ad": "MM21"
+    }
+   },
+   {
+    "ad": "SMA",
+    "parametreler": {
+     "periyot": 50
+    }
+   },
+   {
+    "ad": "SMA",
+    "parametreler": {
+     "periyot": 200
+    }
+   },
+   {
+    "ad": "Bollinger",
+    "parametreler": {
+     "parametre": "kitapta yok"
+    }
+   },
+   {
+    "ad": "Hacim",
+    "parametreler": {}
+   },
+   {
+    "ad": "Tarihsel volatilite",
+    "parametreler": {
+     "periyot": 21
+    }
+   },
+   {
+    "ad": "HiLo",
+    "parametreler": {}
+   }
+  ],
+  "long_giris": [
+   "Trend gücü: fiyat MM21 üstünde, yükselen tepe/dipler, MM21 yükseliyor, MM21>MM50>MM200 sıralaması - en az 3 faktör sağlanmalı",
+   "En az 10 bar süren konsolidasyon (Bollinger bantları dar/ardından açılıyor) veya ABC düzeltmesi (~%50 geri çekilme) sonrası direnç",
+   "Güç çubuğu: genliği ortalamanın üstünde, hacmi ortalamanın üstünde, kapanış direncin üzerinde; giriş direncin kırıldığı seviyede (RP=çubuk tepesi+1 tik gibi, örnekte PE2 koşullu)",
+   "Fiyatın MM21'e uzaklığı ve son tepeye uzaklığı ortalama volatilitenin %30'unu aşmamalı (aşırı hareket girilmez)"
+  ],
+  "short_giris": [],
+  "stop_loss": "Kırılım çubuğunun dibinin altı / geri çekilmenin dibi; giriş sonrası hemen konur (örnek: 3 tik altı). Stop yüzdesi volatilitenin %25-30'unu aşıyorsa pozisyon küçültülür",
+  "kar_al": "Kısmi: kâr ≈ %6 veya HacimVol/10'a ulaşınca pozisyonun 1/2'si kapatılır, stop girişe çekilir; gap >%2 ise 1/3 kapatılır (büyük pozisyonlar için)",
+  "iz_suren_stop": "1) Her çubuğun dibinin 3 tik altı (günlük); 2) alternatif HiLo göstergesi sinyaline göre",
+  "zaman_cikisi": null,
+  "filtreler": [
+   "Min. hareket: günlük %3-5 veya VOL(21)'in %10-20'si",
+   "Fibonacci geri çekilme 0.382/0.5/0.618 ile düzeltme yeterliliği",
+   "Likit hisse seçimi: ortalama hacim >5000 (10 gün) kategorileri",
+   "Piyasa gergin/aşırı uzamışsa giriş veya bölme yok"
+  ],
+  "pozisyon_risk": "Sermayenin %1'i maksimum risk (RM); adet = RM/(giriş-stop); işlem başına sermayenin 1/3 veya 1/4'ü ile sınırlı; toplam açık risk %3'ü aşmaz. Ortalama volatilite (21 gün) %15'e kadar tam pozisyon, %30'a kadar yarım pozisyon; stop/giriş mesafesi %30'u aşarsa girilmez (s.35, 57, 66)",
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 1,
+   "gerekce": "Kaynak slayt formatında; çoğu kural kısaltılmış. Trend ve volatilite filtreleri ölçülebilir ama 'güç çubuğu', konsolidasyon ve Bollinger açılımı eşiği net değil."
+  },
+  "belirsizlikler": [
+   "Bollinger parametreleri yok",
+   "Hacim ve genlik 'ortalamanın üstü' için periyot/eşik yok",
+   "Pozisyon için ikinci giriş (PE2) koşulu açık değil",
+   "Volatilite tanımının (tarihsel vol 21) tam hesabı yok",
+   "Kaynak Portekizce slayt çevirisi; metin parçalı"
+  ],
+  "uyumluluk_notu": "Günlük hisse (Brezilya) bazlı; hacim zorunlu. 60dk uyarlaması var. 5m'ye uygun değil; ABD hisse/kriptoda kaba uyarlanabilir.",
+  "varyantlar": [
+   "Kırılım türleri: 'romp.cong' (konsolidasyon kırılımı) ve 'romp.pivot' (pivot/ABC düzeltme sonrası kırılım)",
+   "Giriş 2: kırılım sonrası geri çekilme, düşen hacim, kırılan çubuğun dibi korunuyor ve tersine dönüş mumu"
+  ],
+  "anahtar_kelimeler": [
+   "kirilim",
+   "guc-cubugu",
+   "konsolidasyon",
+   "bollinger",
+   "hacim",
+   "volatilite-pozisyon",
+   "kismi-kar-al",
+   "hilo"
+  ]
+ },
+ {
+  "kart_id": "swing__trend-duzeltme-60dk__leandro",
+  "ad": "Trend İçi Düzeltme Girişi - 60 Dakikada Dönüş (Kurulum 2)",
+  "stil": "swing",
+  "kaynak": {
+   "pdf": "Swing_Trading_Leandro_Yöntemi_67_sayfa.pdf",
+   "sayfalar": [
+    49,
+    50,
+    51,
+    52,
+    53,
+    54,
+    55
+   ]
+  },
+  "ozet": "Günlükte güçlü trendde destekte (MM veya önceki tepe) biten düzeltmeden sonra, 60 dakikalık grafikte Bollinger açılışı ve güçlü hacimle yapılan dönüş/pivot kırılımında trend yönünde giriş yapılır.",
+  "kategori": "trend_takip",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+   "islem": "60m",
+   "ust_filtre": "1d"
+  },
+  "gostergeler": [
+   {
+    "ad": "SMA",
+    "parametreler": {
+     "periyot": 21
+    }
+   },
+   {
+    "ad": "Bollinger",
+    "parametreler": {}
+   },
+   {
+    "ad": "Hacim",
+    "parametreler": {}
+   },
+   {
+    "ad": "Fibonacci",
+    "parametreler": {
+     "seviyeler": [
+      0.382,
+      0.5,
+      0.618
+     ]
+    }
+   }
+  ],
+  "long_giris": [
+   "Günlükte güçlü yükseliş trendi (Kurulum 1'deki trend gücü: fiyat>MM21, yükselen MM'ler)",
+   "Düzeltme güçlü bir desteğe (önceki dip/MM) geri döner, dönüş mumu oluşur",
+   "60 dakikada boğa pivotu: Bollinger bandı açılışı, güçlü hacim, MM konumu ideal -> trend yönünde girişi"
+  ],
+  "short_giris": [],
+  "stop_loss": "Düzeltme dibinin altı (maksimum risk %1 kuralı)",
+  "kar_al": "Kurulum 1 ile aynı kısmi kâr mantığı",
+  "iz_suren_stop": "Kurulum 1'deki gibi çubuk dibi veya HiLo",
+  "zaman_cikisi": null,
+  "filtreler": [
+   "Günlük trend gücü (en az 3 faktör)",
+   "Hacim teyidi"
+  ],
+  "pozisyon_risk": "Sermayenin %1'i maksimum risk (RM); adet = RM/(giriş-stop); işlem başına sermayenin 1/3 veya 1/4'ü ile sınırlı; toplam açık risk %3'ü aşmaz. Ortalama volatilite (21 gün) %15'e kadar tam pozisyon, %30'a kadar yarım pozisyon; stop/giriş mesafesi %30'u aşarsa girilmez (s.35, 57, 66)",
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 1,
+   "gerekce": "Slayt özeti; giriş ve çıkış kuralları 'ideal' ifadelerle, sayısal eşik yok."
+  },
+  "belirsizlikler": [
+   "Düzeltme derinliği ve destek tanımı sayısal değil",
+   "Bollinger parametreleri yok",
+   "60dk pivot tanımı açık değil"
+  ],
+  "uyumluluk_notu": "Günlük+60dk hisse kurulumu; hacim gerekli. Zaman dilimleri 5m'ye indirilemez, 60m'de yeniden test gerek.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "duzeltme",
+   "geri-cekilme",
+   "bollinger",
+   "60dk",
+   "trend-takip",
+   "pivot"
+  ]
+ },
+ {
+  "kart_id": "swing__trend-karsiti-mm21-uzaklik__leandro",
+  "ad": "Trend Karşıtı Dönüş - MM21'den Aşırı Uzaklık (Kurulum 3)",
+  "stil": "swing",
+  "kaynak": {
+   "pdf": "Swing_Trading_Leandro_Yöntemi_67_sayfa.pdf",
+   "sayfalar": [
+    34,
+    56
+   ]
+  },
+  "ozet": "Fiyat MM21'den 3xVOL/10 kadar uzaklaşıp bantların dışında ters (dönüş) mumu oluşturduğunda ortalamaya dönüş yönünde trend karşıtı işlem açılır.",
+  "kategori": "ortalamaya_donus",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+   "islem": "1d",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "SMA",
+    "parametreler": {
+     "periyot": 21
+    }
+   },
+   {
+    "ad": "Bollinger",
+    "parametreler": {}
+   },
+   {
+    "ad": "Tarihsel volatilite",
+    "parametreler": {
+     "periyot": 21
+    }
+   }
+  ],
+  "long_giris": [
+   "Fiyat MM21'in altına 3xVOL/10 (volatilitenin %30'u) veya daha fazla uzaklaşmıştır",
+   "Bollinger bandı dışında ters yönde (yukarı) dönüş mumu oluşur -> long (ortalamaya dönüş)"
+  ],
+  "short_giris": [
+   "Fiyat MM21'in üstüne aynı mesafe kadar uzaklaşmış ve bant dışında aşağı dönüş mumu oluşmuşsa short (simetrik, kitap net söylemiyor)"
+  ],
+  "stop_loss": "Maksimum risk kuralı içinde dönüş mumunun ucu (kitapta 'dur: maks.' şeklinde, kesin değil)",
+  "kar_al": null,
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [],
+  "pozisyon_risk": "Sermayenin %1'i maksimum risk (RM); adet = RM/(giriş-stop); işlem başına sermayenin 1/3 veya 1/4'ü ile sınırlı; toplam açık risk %3'ü aşmaz. Ortalama volatilite (21 gün) %15'e kadar tam pozisyon, %30'a kadar yarım pozisyon; stop/giriş mesafesi %30'u aşarsa girilmez (s.35, 57, 66)",
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 1,
+   "gerekce": "Yalnızca tek slayt; eşik (3xVOL/10) var ama çıkış ve stop yok."
+  },
+  "belirsizlikler": [
+   "Çıkış/hedef yok (MM21'e dönüş varsayılabilir)",
+   "Stop konumu net değil",
+   "Bollinger parametreleri yok"
+  ],
+  "uyumluluk_notu": "Günlük; ortalamaya dönüş hisse/kriptoda uygulanabilir ama kitap bilgisi eksik.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "ortalamaya-donus",
+   "mm21",
+   "bollinger",
+   "volatilite",
+   "trend-karsiti"
+  ]
+ }
+]
