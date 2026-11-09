@@ -113,6 +113,10 @@ Ana ders: önceki sonuçlar OOS'a bakılarak seçilmiş ve kâr birkaç işlemde
   saatlik dosyalar → swing/daytrade 1h+ testleri önce; 15m/30m dakikalık veri tamamlanınca.
 
 ## Lider kararları günlüğü (karar 26)
+- 2026-11-09: P0-5 dolum denetimi bitti (sonuclar/evren/v2/dolum_denetimi.md; lider motor.py:300-305, 338-360'ı doğruladı):
+  motor hatası YOK (giriş sonraki mum açılışı, mum içinde stop önce, lookahead yok). Gecikmede PF artışı = `gecersiz_stop`
+  ile çöküş devamı sinyallerinin atlanması (gerçek etki, fiyat iyileşmesi değil); yalnız 5m'de. Maliyet ×2 + mum aralığının
+  %10'u kayma stresinde 5 scalp PF 1.05–1.58; kâr flash-crash günlerinde yoğun. ON_KAYIT_V2 2.5 ön şartı sağlandı.
 - 2026-11-09: v2 havuz TASLAK mührü: 215 satır (swing 189 = 1d 182 + 4h 7; gunici_kripto 7; portfoy 19), 1 birleşme, m=939,
   havuz_v2.csv sha256 a9b5854c…; etiketler sonuç görülmeden kural metninden. Lider kararı: ON_KAYIT_V2 2.8 eklemeleri (Fable
   P2-1: kesitsel L/S, kısa açabilen yavaş TSMOM, funding) havuz SON mühründen ÖNCE kodlanır; Fable'ın ana eleştirisi short/koruma
