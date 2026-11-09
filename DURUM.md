@@ -113,6 +113,9 @@ Ana ders: önceki sonuçlar OOS'a bakılarak seçilmiş ve kâr birkaç işlemde
   saatlik dosyalar → swing/daytrade 1h+ testleri önce; 15m/30m dakikalık veri tamamlanınca.
 
 ## Lider kararları günlüğü (karar 26)
+- 2026-11-09: Y-5 (tek-grafik kaldıraç tavanında komisyon payı, ~%0.15) evren zinciri (ham→…→seçim/holdout) BİTENE KADAR
+  uygulanmaz: WF ham işlemlerini kullanır, motor zincir ortasında değişirse ham ile sağlamlık koşuları tutarsız olur. Paper etkilenmez
+  (portföy motoru zaten komisyon payını içerir).
 - 2026-11-09 (KULLANICI kararları): proje main'e birleştirildi (PR #1, #2); repo PUBLIC yapıldı (CI için). Lider: üçüncü taraf
   TradingView betikleri, kaynak PDF metinleri ve dış proje stratejileri (arsiv/.../pine, kaynak, algo-sg/dis_kaynak) git geçmişinin
   tamamından silindi (kullanıcı onaylı force-push; dosyalar yalnız yerelde, .gitignore'da). Sunucu yeni geçmişe reset edildi.
