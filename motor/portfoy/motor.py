@@ -115,6 +115,7 @@ class Kol:
     s_cikis_s: Optional[np.ndarray] = None
     s_zc: Optional[np.ndarray] = None
     atr: Optional[np.ndarray] = None
+    s_gsk: Optional[np.ndarray] = None         # gün sonu kapanış bayrağı (seanslı veri; None: yok). Bkz. _gun_sonu_kapat
     cikis_ayarlari: CikisAyarlari = field(default_factory=CikisAyarlari)
     # çalışma durumu
     hedef_emri: Optional[tuple] = None         # agirlik: (yon, w_abs, stop_ham)
@@ -696,6 +697,11 @@ class _Motor:
                     continue
                 self._mum_ici(p, kol, i, t)
 
+            # 4b) gün sonu kapanış dolumu (backtest.motor adım 3b ile aynı): stop/hedef değmediyse mumun KAPANIŞINDAN
+            for kol in self.kollar:
+                if kol.s_gsk is not None and kol.s_gsk[i] and kol.kimlik in self.acik and self.VAR[kol.sembol][i]:
+                    self._gun_sonu_kapat(self.acik[kol.kimlik], i, t)
+
             # 5) veri sonu
             if i == n - 1:
                 for p in list(self.acik.values()):
@@ -841,6 +847,15 @@ class _Motor:
             if t_c != t:
                 self.nakit -= self._funding_ode(p, t_c, False)
             self._azalt(p, fiyat_c, p.miktar, t_c, kom_o, neden, False)
+
+    def _gun_sonu_kapat(self, p: _P, i, t, aralik=None) -> None:
+        """Gün sonu kapanışı (`gun_sonu_kapanis` bayraklı mum; seanslı veri): mum içi stop/hedef bu mumda pozisyonu
+        kapatmadıysa pozisyon mumun KAPANIŞ fiyatından, sinyal çıkışıyla aynı kayma ve taker komisyonuyla kapanır
+        (neden "gun_sonu", zaman = mum kapanışı). backtest.motor adım 3b ile birebir aynı sıra/fiyat/öncelik."""
+        s = p.sembol
+        t_c = t + (self.aralik if aralik is None else aralik)
+        self.nakit -= self._funding_ode(p, t_c, False)
+        self._azalt(p, self._piyasa(s, p.yon, self.C[s][i], self._ky(s)), p.miktar, t_c, self._tk(s), "gun_sonu", False)
 
     # ------------------------------------------------------------------ kararlar (bar kapanışı)
     def _karar_agirlik(self, kol: Kol, i, t) -> None:

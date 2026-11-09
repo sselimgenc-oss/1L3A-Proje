@@ -44,6 +44,22 @@ from motor.strateji import cikislar as cks
 
 NAN = float("nan")
 
+# Paper (= portföy çekirdeği) çıkış alanlarından YALNIZ bunları uygular. CikisAyarlari'ndaki diğer alanlar (stop_basamaklari, azalan_roi,
+# geri_cekilme_*, kar_rsi_*, elder_*, agresif_iz_*, stop_sonrasi_bekleme_mum ...) yalnız tek-sembol backtest motorundadır; paper'da
+# sessizce yok sayılırsa paper backtest'ten farklı işlem yapardı. Varsayılandan farklı bir değer = kurulumda açık hata (fail-closed).
+PAPER_CIKIS_ALANLARI = frozenset({"atr_iz_suren_k", "atr_periyot", "zaman_cikisi_mum", "sabit_r_hedefi", "basabas_r_esigi", "kismi"})
+
+
+class PaperDesteklemiyorHatasi(ValueError):
+    """Strateji, paper motorunun uygulamadığı bir çıkış ayarı kullanıyor."""
+
+
+def desteklenmeyen_cikis_alanlari(ca: cks.CikisAyarlari) -> list:
+    """`ca`da varsayılandan farklı olup paper motorunun uygulamadığı alanlar."""
+    varsayilan = cks.CikisAyarlari()
+    return [f.name for f in dataclasses.fields(ca)
+            if f.name not in PAPER_CIKIS_ALANLARI and getattr(ca, f.name) != getattr(varsayilan, f.name)]
+
 
 class _Yuva:
     """`dizi[i]` çağrısına i'yi yok sayıp o anki değeri döner (vektör dizisi yerine)."""
@@ -134,6 +150,8 @@ class PaperMotor(_Motor):
             ref = fiyat
         elif neden == "stop":
             ref = p.stop
+        elif neden == "gun_sonu":
+            ref = D(self.C[p.sembol][0])
         elif self._acil or not self.VAR[p.sembol][0]:
             ref = D(self.son_kap[p.sembol])
         else:
@@ -214,6 +232,12 @@ class PaperMotor(_Motor):
     def birim_ekle(self, b: Birim):
         if b.ad in self.birimler:
             raise ValueError(f"birim tekrarlı: {b.ad}")
+        for k in b.kollar:
+            kapsam_disi = desteklenmeyen_cikis_alanlari(k.cikis_ayarlari)
+            if kapsam_disi:
+                raise PaperDesteklemiyorHatasi(
+                    f"{b.ad}/{k.kimlik} ({k.strateji_ad}): paper motoru şu çıkış ayarlarını uygulamıyor: {', '.join(kapsam_disi)}. "
+                    "Backtest'te uygulanıp paper'da sessizce yok sayılacağı için strateji paper'a alınmaz.")
         self.birimler[b.ad] = b
         for k in b.kollar:
             k.birim = b.ad
@@ -222,6 +246,7 @@ class PaperMotor(_Motor):
             else:
                 k.s_yon, k.s_stop, k.s_hedef = _Yuva(0), _Yuva(), _Yuva()
                 k.s_cikis_l, k.s_cikis_s, k.s_zc, k.atr = _Yuva(False), _Yuva(False), _Yuva(), _Yuva()
+                k.s_gsk = _Yuva(False)
             self.tum_kollar.append(k)
 
     def fiyat_serisi(self, s: str, idx: pd.DatetimeIndex, acilislar: np.ndarray):
@@ -528,11 +553,16 @@ class PaperMotor(_Motor):
     def kapanis_fazi(self, b: Birim, t, karar_fn: Optional[Callable], son_satir: bool = False) -> None:
         """Adım 4-7. `karar_fn()` sinyal/ağırlık kararlarını döner: {kol_kimligi: {alan: değer}} (adım 7)."""
         L = SERT_LIMITLER
+        # Kararlar yalnız veriden (mumlar <= t) türer, motor durumuna bağlı değildir: gün sonu bayrağı (adım 4b) aynı mumun
+        # kapanışında uygulanacağı için erken hesaplanır; adım 7'de aynı sonuç kullanılır.
+        kararlar = karar_fn() if karar_fn else {}
         for kol in b.kollar:
             p = self.acik.get(kol.kimlik)
             if p is None or not self.VAR[kol.sembol][0]:
                 continue
             self._mum_ici(p, kol, 0, t)
+            if kol.kimlik in self.acik and kol.mod == "sinyal" and kararlar.get(kol.kimlik, {}).get("gsk", False):
+                self._gun_sonu_kapat(self.acik[kol.kimlik], 0, t, b.aralik)       # 4b) backtest adım 3b ile aynı
             if kol.kimlik in self.acik:                      # pozisyon bu mumu açık atlattı: mumun uçları MFE/MAE izine girer (çıkış mumu girmez)
                 self._uc_mum(self.acik[kol.kimlik], kol.kimlik)
         if son_satir:
@@ -588,7 +618,7 @@ class PaperMotor(_Motor):
                 for kol in b.kollar:
                     if kol.kimlik in self.acik and kol.cikis_emri is None:
                         kol.kucult_emri = float(f)
-        self._kararlari_uygula(b, t, karar_fn() if karar_fn else {})
+        self._kararlari_uygula(b, t, kararlar)
 
     def _kararlari_uygula(self, b: Birim, t, kararlar: dict) -> None:
         for kol in b.kollar:
@@ -602,6 +632,7 @@ class PaperMotor(_Motor):
                 kol.s_yon.v, kol.s_stop.v, kol.s_hedef.v = d.get("yon", 0), d.get("stop", NAN), d.get("hedef", NAN)
                 kol.s_cikis_l.v, kol.s_cikis_s.v = d.get("cikis_l", False), d.get("cikis_s", False)
                 kol.s_zc.v, kol.atr.v = d.get("zc", NAN), d.get("atr", NAN)
+                kol.s_gsk.v = d.get("gsk", False)
                 if self.VAR[kol.sembol][0]:
                     self._karar_sinyal(kol, 0, t)
 
