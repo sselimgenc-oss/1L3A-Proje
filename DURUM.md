@@ -113,6 +113,10 @@ Ana ders: önceki sonuçlar OOS'a bakılarak seçilmiş ve kâr birkaç işlemde
   saatlik dosyalar → swing/daytrade 1h+ testleri önce; 15m/30m dakikalık veri tamamlanınca.
 
 ## Lider kararları günlüğü (karar 26)
+- 2026-11-09 23:11 UTC: v2 HOLDOUT (kullanıcı onayıyla, tek sefer; 2025-11-08 → 2026-11-06): SET KAPISI GEÇTİ.
+  Set net +%13.4 (tek kasa, maliyet ×1, TradFi funding dahil, işlem başı %0.5), p_set 0.0002; hatalar boş (beyan 1 sağlandı).
+  gauss-stoch-eth 1d: 159 işlem, net +%10.4, PF(R) 1.53, K2 p 0.015. ewo-ema-ofset 15m: 46 işlem, net +%3.7, PF(R) 1.64,
+  K2 p 0.0005. Budama yok; ikisi de paper'a gider (paper_girdisi.json). Beyan 5 gereği: gerekli, yeterli değil; asıl sınav paper.
 - 2026-11-09: v2 HOLDOUT ÖNCESİ BEYAN (Fable denetimi GO: 0 engel, 5 belge şartı, 14 not; sonuclar/denetim/fable_holdout_oncesi_2026-11-09.md).
   Holdout koşusundan ÖNCE yazıldı, sonra değiştirilmez:
   (1) Hata kuralı: holdout raporunda herhangi bir set stratejisinin `hatalar` alanı boş değilse koşu 'hatalı' sayılır, kapı GEÇTİ kabul edilmez.
