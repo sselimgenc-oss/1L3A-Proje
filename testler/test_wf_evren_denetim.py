@@ -91,7 +91,7 @@ def test_muhur_kapsami_ve_uyusmazlikta_dur(tmp_path, veri_dizini, monkeypatch): 
     monkeypatch.setitem(we._EVREN_OVR, "swing", ("TESTUSDT",))
     cikti = _holdout_cikti(tmp_path)
     m = json.loads((cikti / wh.MUHUR).read_text())
-    assert m["surum"] == 2 and set(m["dosyalar"]) == set(wh.MUHUR_DOSYALARI)
+    assert m["surum"] == 3 and set(m["dosyalar"]) == set(wh.MUHUR_DOSYALARI)
     assert {"wf_evren.parquet", "saglamlik.parquet", "pbo.csv"} <= set(m["dosyalar"]) and all(m["dosyalar"].values())
     assert m["olcut_hash"] == wh.olcut_hash()
     assert m["kosular"] == [{"liste": "iyi", "strateji": AD, "tf": "4h", "stil": "swing", "ayar": "varsayilan",

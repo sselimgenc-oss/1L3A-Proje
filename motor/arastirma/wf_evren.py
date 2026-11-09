@@ -345,7 +345,11 @@ def _yaz_atomik(df: pd.DataFrame, yol: Path):
 class GecikmeliStrateji:
     """K1c: sinyalleri 1 mum geciktirilmiş strateji sarmalayıcısı (giriş + çıkış sinyalleri, stop/hedef seviyeleri dahil
     1 mum sonra görünür). Diğer her şey (çıkış ayarları, ad, parametreler) sarılan stratejiden gelir. Veri hazırlığı
-    (funding sütunu) sarmalamadan ÖNCE yapılmalıdır."""
+    (funding sütunu) sarmalamadan ÖNCE yapılmalıdır.
+    TAKVİM sütunları (TAKVIM_SUTUNLARI: gün sonu kapanış bayrağı) KAYDIRILMAZ: takvim sinyal değil olgudur; kaydırılırsa
+    seanslı veride gün sonu kapanışı yanlış mumda olur ve stres testi anlamsızlaşır (denetim Y-3). Kripto çerçevesinde
+    bu sütun yoktur (davranış değişmez)."""
+    TAKVIM_SUTUNLARI = ("gun_sonu_kapanis",)
 
     def __init__(self, ic, mum: int = 1):
         self._ic, self._mum = ic, int(mum)
@@ -355,7 +359,11 @@ class GecikmeliStrateji:
 
     def sinyaller(self, mumlar: pd.DataFrame) -> pd.DataFrame:
         sig = self._ic.sinyaller(mumlar)
-        out = sig.shift(self._mum)
+        takvim = [c for c in self.TAKVIM_SUTUNLARI if c in sig.columns]
+        out = sig.drop(columns=takvim).shift(self._mum)
+        for c in takvim:
+            out[c] = sig[c].fillna(False).astype(bool)
+        out = out[list(sig.columns)]
         out["yon"] = out["yon"].fillna(0).astype(int)
         for c in ("cikis", "cikis_long", "cikis_short"):
             if c in out:
