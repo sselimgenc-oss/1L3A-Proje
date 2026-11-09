@@ -1,0 +1,19 @@
+{
+ "satir": 222,
+ "hesaplanan": 222,
+ "bekleyen": 0,
+ "gecen": 18,
+ "elenen": 198,
+ "hata": 6,
+ "m": 939,
+ "kapi_gecen": {
+  "e1": 96,
+  "e2": 135,
+  "e3": 104,
+  "e4": 73,
+  "e5": 82
+ },
+ "eleme_csv_sha256": "371a2a2423d2f2c64522c82a1a4906b6ae36d5c61ce92282f2a6aa5fba0f4f05",
+ "havuz_csv_sha256": "e06c994ed1204bfc9847c6348ee6cb74602b117fa787c0618631323e5bfeb19a",
+ "maliyet_tablosu_sha256": "eb5853191792af968227b0cbc9f37e15e24d4279b4335c042f7435d80be47c28"
+}
