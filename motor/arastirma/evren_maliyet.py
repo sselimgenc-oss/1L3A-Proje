@@ -63,6 +63,19 @@ def sembol_maliyeti(sembol: str, carpan: float = 1.0, yol=None) -> tuple:
             float(r["stop_kayma_oran"]) * 1e4 * carpan)
 
 
+def funding_long_8s_oran(sembol: str, yol=None) -> float:
+    """v2 (ON_KAYIT_V2 1.2): LONG pozisyonun tutulan her 8 saat için ödediği nominal oranı (`funding_long_8s_oran` sütunu).
+    Yalnız v2 tablosunda (motor/arastirma/v2/maliyet.py üretir) bulunur; v1 tablosunda sütun YOKTUR ve v1 yolu bu işlevi
+    çağırmaz (v1 tablo hash'i/davranışı değişmez). Sütun yoksa açık hata (sessiz 0 yok). Maliyet çarpanı funding'i çarpmaz."""
+    r = satir(sembol, yol)
+    if "funding_long_8s_oran" not in r.index:
+        raise KeyError(f"{Path(yol or TABLO_YOLU).name}: 'funding_long_8s_oran' sütunu yok (v2 tablosu gerekir)")
+    v = float(r["funding_long_8s_oran"])
+    if not v >= 0:
+        raise ValueError(f"{sembol}: funding_long_8s_oran geçersiz: {v}")
+    return v
+
+
 def maliyet_ayarlari(sembol: str, kurallar, carpan: float = 1.0, yol=None) -> MotorAyarlari:
     """Tablodan MotorAyarlari (araştırma modu: limit_modu='olc'). carpan: komisyon ve kayma çarpanı (1.0 = tablo)."""
     taker, maker, kayma, stop = sembol_maliyeti(sembol, carpan, yol)
