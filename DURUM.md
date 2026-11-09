@@ -113,10 +113,69 @@ Ana ders: önceki sonuçlar OOS'a bakılarak seçilmiş ve kâr birkaç işlemde
   saatlik dosyalar → swing/daytrade 1h+ testleri önce; 15m/30m dakikalık veri tamamlanınca.
 
 ## Lider kararları günlüğü (karar 26)
+- 2026-11-09 (KULLANICI kararı, SONUÇ SONRASI, ON_KAYIT_V2 0.3/0.4'ten SAPMA): resmi holdout bittikten sonra kıl payı kalan
+  55 strateji (set dışı kalan 3 sağlam keşif, 2 izleme, 2 BH altı, eleme'de tek kapıdan kalan 48) holdout döneminde KEŞİF amaçlı
+  koşulur. Etiket: 'sonuç sonrası keşif — kanıt değil'. Resmi v2 sonucu (set 2, GEÇTİ) değişmez; bu sonuçlarla hiçbir strateji
+  resmi sete/paper'a doğrudan alınmaz — ancak yeni ön kayıt + ileri (paper) veriyle. Aynı s=0.5, maliyet ×1, K2 B=2000 (hk2 tohumu).
+  Çıktı ayrı: sonuclar/evren/v2/holdout_kesif/. Resmi holdout dosyalarına dokunulmaz.
+- 2026-11-09 23:11 UTC: v2 HOLDOUT (kullanıcı onayıyla, tek sefer; 2025-11-08 → 2026-11-06): SET KAPISI GEÇTİ.
+  Set net +%13.4 (tek kasa, maliyet ×1, TradFi funding dahil, işlem başı %0.5), p_set 0.0002; hatalar boş (beyan 1 sağlandı).
+  gauss-stoch-eth 1d: 159 işlem, net +%10.4, PF(R) 1.53, K2 p 0.015. ewo-ema-ofset 15m: 46 işlem, net +%3.7, PF(R) 1.64,
+  K2 p 0.0005. Budama yok; ikisi de paper'a gider (paper_girdisi.json). Beyan 5 gereği: gerekli, yeterli değil; asıl sınav paper.
+- 2026-11-09: v2 HOLDOUT ÖNCESİ BEYAN (Fable denetimi GO: 0 engel, 5 belge şartı, 14 not; sonuclar/denetim/fable_holdout_oncesi_2026-11-09.md).
+  Holdout koşusundan ÖNCE yazıldı, sonra değiştirilmez:
+  (1) Hata kuralı: holdout raporunda herhangi bir set stratejisinin `hatalar` alanı boş değilse koşu 'hatalı' sayılır, kapı GEÇTİ kabul edilmez.
+  (2) Açıklama: dis__gauss-stoch-eth havuzda kilit_gorulmus=hayir görünse de Katman 4'te (2026-11-07) 4h + ızgara ayarıyla
+      ETH/SOL/META/NVDA'da 2025-11-01→2026-11-05 koşuldu (sonuclar/kilit/sonuc.csv, 4 satır; lider doğruladı). Seçim mekanikti.
+  (3) Dondurma: koşu temiz çalışma kopyasında; veri yenilenmez; motor/arastirma/v2/ içine .py eklenmez; veri dosyası sha256
+      listesi koşudan önce kaydedilir; holdout günlüğü hemen commit edilir.
+  (4) Veri sonu: kripto 15m/1d 2026-11-06; hisse/emtia 2026-10-30; kripto funding 2026-10-31.
+  (5) Yorum: p_set 15m bacakta yapısal olarak kolay (rastgele giriş maliyetten eksi) → belirleyici şart fiilen set net > 0.
+      Evren 2026-11-07'de seçildi (ileriyi görme; ör. ZEC). GEÇTİ = 'gerekli, yeterli değil'; asıl sınav paper.
+      Bilgi: ewo-ema-ofset geliştirmenin son yılında hafif ekside (net −%0.6) — holdout'ta budanması beklenen bir sonuçtur.
+- 2026-11-09 (KULLANICI kararı): holdout'tan ÖNCE Fable bağımsız denetimi (v2 kodu + çıktıları); holdout denetimden sonra.
+- 2026-11-09 (gece, v2 SONUÇ — geliştirme dönemi, kanıt değil): ham 13.628 görev; eleme 222 → 18; resmi test (K2, BH q=0.10,
+  m=939) → 7 keşif (swing 4, gün içi kripto 3), SPA p=0.02; sağlamlık → 5 sağlam keşif; SET (mühürlü) = 2 strateji:
+  dis__gauss-stoch-eth 1d (swing, genel evren) + dis__ewo-ema-ofset 15m (gün içi kripto), eşit risk s=0.5 (işlem başı %0.5;
+  bootstrap %95 düşüş %14.4). Atlananlar: ama-egri-donus (aynı etiket), aroon-stochrsi (aynı etiket), gauss-stoch-btc
+  (aynı küme). İzleme: haftalik-macd-gunluk-ma (S3), e0v1en (S2). HOLDOUT kullanıcı onayı bekliyor.
+- 2026-11-09: v2 havuz SON MÜHÜR: 222 satır (+7 short açabilen aday: kesitsel L/S 2, yavaş TSMOM 2, funding/kripto 3),
+  m=939, havuz_v2.csv sha256 e06c994e…. Eklemeler sonuç görülmeden yapıldı. Bundan sonra havuza ekleme yok.
+  P1-1/P1-2/P0-4 kodlandı (motor/arastirma/v2), tam test 4043 geçti. Sıradaki: v2 ham + eleme koşusu; paralelde P1-3..P1-6.
+- 2026-11-09: P0-5 dolum denetimi bitti (sonuclar/evren/v2/dolum_denetimi.md; lider motor.py:300-305, 338-360'ı doğruladı):
+  motor hatası YOK (giriş sonraki mum açılışı, mum içinde stop önce, lookahead yok). Gecikmede PF artışı = `gecersiz_stop`
+  ile çöküş devamı sinyallerinin atlanması (gerçek etki, fiyat iyileşmesi değil); yalnız 5m'de. Maliyet ×2 + mum aralığının
+  %10'u kayma stresinde 5 scalp PF 1.05–1.58; kâr flash-crash günlerinde yoğun. ON_KAYIT_V2 2.5 ön şartı sağlandı.
+- 2026-11-09: v2 havuz TASLAK mührü: 215 satır (swing 189 = 1d 182 + 4h 7; gunici_kripto 7; portfoy 19), 1 birleşme, m=939,
+  havuz_v2.csv sha256 a9b5854c…; etiketler sonuç görülmeden kural metninden. Lider kararı: ON_KAYIT_V2 2.8 eklemeleri (Fable
+  P2-1: kesitsel L/S, kısa açabilen yavaş TSMOM, funding) havuz SON mühründen ÖNCE kodlanır; Fable'ın ana eleştirisi short/koruma
+  eksikliği olduğundan eklemeden mühürlemek tasarımın amacını boşa çıkarır. Rejim bindirmesi v2'de yok (2.8).
+- 2026-11-09: v2 ÖN KAYIT donduruldu: sonuclar/evren/ON_KAYIT_V2.md sha256 13f17f53fe79c8c9c0063cc090f1cc57ee573355c500091ab91133802a567bf3 (Fable yazdı, lider denetledi:
+  SERT_LIMITLER/martingale/holdout kuralları korunmuş). Bundan sonra eşik/kural değişikliği yok (0.3 tek tur).
+- 2026-11-09 (KULLANICI kararı): Fable'ın v2 önerisi AYNEN uygulanacak (sonuclar/denetim/fable_havuz_secim_2026-11-09.md).
+  Holdout v2 setine saklanır; D seçeneği uygulanmaz. Sıra: P0 (ön kayıt v2 → havuz dondurma → kill switch eleme → gün içi
+  dolum denetimi) → P1. v2 ön kaydı dondurulmadan v2 koşusu yok; v1 sonucu (0 strateji) resmi kayıt olarak kalır.
+- 2026-11-09 (KULLANICI kararı): K5 için Fable'ın D önerisi (resmi sonuç 0 kalır, DSR yalnız rapor, holdout öncesi
+  stil başına ≤3 + korelasyon süzgeci, holdout tek sefer) CEPTE bekler, uygulanmadı. Önce strateji havuzu ve seçim mantığı
+  baştan değerlendirilip teoride en iyiye yakın hale getirilecek (Fable incelemesi, yalnız öneri; kod değişikliği kararla).
+- 2026-11-09 (gece, evren zinciri SONUÇ — ön kayıtlı yöntemle): sağlamlık 58 aday, 0 hata; seçim: iyi 0, iyiye yakın 0.
+  Tek sebep K5 (DSR): 58'in 58'i kaldı. K5 hariç tüm WF + K1–K4 + PBO'yu geçen 24 (swing 20, scalp 4) — BİLGİ, liste değil.
+  Teşhis: K5 eşiği SR0 her grupta o grubun EN İYİ denemesinden bile yüksek (scalp 15m SR0 yıllık 16.8 / 2483 denemenin en
+  iyisi 1.58; swing 1d 3.71 / 3.68). Neden: V, maliyetle batan ayarların geniş Sharpe yayılımından şişiyor (scalp 15m medyan
+  −5.9) ve DSR formülü denemeleri sıfır çevresinde gürültü varsayar; ayrıca V limitsiz toplam matrisinden, test edilen seri
+  tek-kasa limitli. Yöntem DEĞİŞTİRİLMEDİ; değişiklik sonuç sonrası olur → KULLANICI kararı bekleniyor. Holdout yok.
+- 2026-11-09 (KULLANICI kararı): repo PUBLIC kalır (private'ta CI çalışmıyor ve ücretsiz planda ruleset uygulanmıyor).
+- 2026-11-09 (akşam, evren zinciri): ham 32.200 görev 0 hata; WF 920 kombinasyon → 38 geçen (swing 32, scalp 5, daytrade 1);
+  portföy 19 → 1 geçen (pf__ibs_donus); PBO tüm stil×tf ≤ 0.5 (portföy 0.31, diğerleri ≤ 0.03) → düşürme yok.
+  Sağlamlık ilk denemede açık hatayla durdu: `_gunluk_dizi` maliyet_payi sütununu düşürüyordu. Yalnız sütun korundu
+  (yöntem/eşik değişmedi; DSR serisi WF net_getiri ile birebir), regresyon testi eklendi, sağlamlık yeniden başlatıldı.
+- 2026-11-09: Y-5 (tek-grafik kaldıraç tavanında komisyon payı, ~%0.15) evren zinciri (ham→…→seçim/holdout) BİTENE KADAR
+  uygulanmaz: WF ham işlemlerini kullanır, motor zincir ortasında değişirse ham ile sağlamlık koşuları tutarsız olur. Paper etkilenmez
+  (portföy motoru zaten komisyon payını içerir).
 - 2026-11-09 (KULLANICI kararları): proje main'e birleştirildi (PR #1, #2); repo PUBLIC yapıldı (CI için). Lider: üçüncü taraf
   TradingView betikleri, kaynak PDF metinleri ve dış proje stratejileri (arsiv/.../pine, kaynak, algo-sg/dis_kaynak) git geçmişinin
   tamamından silindi (kullanıcı onaylı force-push; dosyalar yalnız yerelde, .gitignore'da). Sunucu yeni geçmişe reset edildi.
-  CI (GitHub Actions) çalışıyor. Kalan: main dal koruması, pano erişim kontrolü (Cloudflare Access) — kullanıcı tarafında.
+  CI (GitHub Actions) çalışıyor, main ruleset ile korunuyor (PR + yeşil pytest, force-push yok). Pano erişim kontrolü: KULLANICI kararı şimdilik yok (yalnız paper verisi).
 - 2026-11-09 (gece, dış denetim turları 2-3 sonrası; canlı para/risk limiti değişmedi):
   (1) Test taşınabilirliği: pandas 2/3 hash farkı giderildi, pf WF veri_dizini, gerçek veri testleri işaretli; requirements pandas<4.
   (2) Y-1: gün sonu kapanışı portföy + paper motorlarına taşındı (30m seanslı veride backtest=portföy=paper birebir). Yeni set paper'a

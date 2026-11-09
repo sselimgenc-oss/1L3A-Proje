@@ -1,0 +1,224 @@
+strateji,etiket,alt_etiket,gerekce
+dis__ac-cok-katman,trend,ao_ac,AC dönüş deseni + EMA100/Alligator trend filtresi
+dis__acrypto-agirlikli,trend,skor_bilesik,5 trend/momentum alt durumunun ağırlıklı skoru (4/5 trend yönlü)
+dis__adx-di-esik-kesisimi,trend,adx_di,ADX eşiği ve DI+ kesişimi
+dis__alma-macd-kesisimi,trend,macd,ALMA üstünde MACD sinyal kesişimi
+dis__ama-egri-donus-filtresi,trend,kama,Kaufman AMA eğim değişimi
+dis__ao-ac-bolgeleri,trend,ao_ac,AO/AC yeşil bar serisi + EMA trend
+dis__ao-tabak,geri_cekilme,ao_ac,trend onaylı AO tabak (geri çekilme) deseni
+dis__arps-pivot-desenleri,formasyon,zigzag_pivot,ZigZag pivot desenleri
+dis__asiri-tepki-ertesi-gun,trend,getiri_zskor,getiri z-skor aşımı sonrası aynı yönde devam (varsayılan ters=0)
+dis__aurora-kama,trend,kama,KAMA yükseliş/düşüş + SMA200
+dis__ay-donumu,takvim,ay_gunu,ay dönümü giriş/çıkış günü
+dis__ay-mevsimsellik,takvim,mevsimsel,ay-yıl mevsimsel getiri
+dis__ayin-ilk-gunu-deseni,takvim,ay_gunu,ayın ilk işlem günü deseni
+dis__bant-kirilim-trend,kirilim,bollinger,Bollinger 60/2 bant kırılımı (varsayılan mod)
+dis__bas-omuz-rsi-short,formasyon,bas_omuz,baş-omuz + RSI uyumsuzluğu
+dis__bilateral-stokastik,trend,stokastik,bull/bear stokastik çiftinin kesişimi
+dis__btfd-gunluk-dip,donus,gun_ici_dusus,gün içi %1 düşüş dibi alımı filtre yok
+dis__carstens-9-gun-dip,donus,n_gun_dip,9 kapanış dibi + aralık genişlemesi
+dis__carstens-pazartesi,karma,pazartesi_aralik,Pazartesi takvimi + daralma/ters kapanış eşit ağırlık
+dis__codex-wd-cift-momentum,trend,roc,ROC63/ROC21 + EMA100 haftalık rejim
+dis__codex-wd-gunluk-donus,geri_cekilme,bollinger,haftalık rejim + BB alt bant + RSI2 dip
+dis__codex-wd-gunluk-momentum,trend,ma_kesisim,EMA20>EMA50 + ROC20
+dis__codex-wd-hacim-akisi,hacim,cmf,CMF yukarı kesişim + ADL/OBV
+dis__codex-wd-kama-verimlilik,trend,kama,KAMA üstüne dönüş + verimlilik oranı
+dis__cok-macd-geri-cekilme,geri_cekilme,macd,üst MACD trendinde stokastik geri çekilme (varsayılan 2macdsto)
+dis__confluence-rank,karma,skor_bilesik,trend+momentum+verimlilik+oynaklık eşit ağırlıklı skor
+dis__connors-etf,geri_cekilme,rsi,RSI2 üç düşüş dibi + SMA200 filtresi (varsayılan r3)
+dis__darvas-kutusu-kirilimi,kirilim,darvas_kutusu,Darvas kutusu üst/alt kırılımı
+dis__elliott-itki,formasyon,elliott,5 dalga itki ZigZag
+dis__ema-esik-trend,trend,ma_kesisim,EMA20 > EMA60 eşikli durum
+dis__ema-kesisim-123-kurulumu,geri_cekilme,ma_kesisim,EMA12/36 kesişim sonrası EMA36 geri çekilmesi
+dis__ema-serit-yelpaze,trend,ma_dizilim,5 EMA şeridi açılma
+dis__ema21-sapma,donus,ma_sapma,EMA21'den %2 sapma dönüşü filtre yok
+dis__ema50-200-geri,trend,fiyat_ma,fiyat EMA50 yukarı kesişimi + EMA50>EMA200
+dis__ema50-sapma,donus,ma_sapma,EMA50'den %2 sapma dönüşü filtre yok
+dis__eski-tepe-asma,kirilim,zirve_kirilim,eski tepenin geri çekilme sonrası kırılımı
+dis__ewmac-carry,trend,ewmac,EWMAC ağırlık 0.7 + carry 0.3
+dis__ewmac-carver,trend,ewmac,Carver EWMAC tahmini
+dis__farley-basarisizligin-basarisizligi,kirilim,sahte_kirilim,başarısız kırılım geri dönüşü
+dis__farley-bosluk-turleri,formasyon,gap,fiyat boşluğu türleri
+dis__fib-kanali-donus,donus,keltner,MA89 ± fib*ATR dış bant dönüşü
+dis__fraktal-alligator-sky,formasyon,fraktal,fraktal tepe kırılımı + Alligator
+dis__fraktal-kirilim-chartart,formasyon,fraktal,fraktal tepe ortalaması + kırılım
+dis__ft-highwave,formasyon,high_wave,High wave mum deseni
+dis__gann-swing-grafigi,formasyon,swing_pivot,swing pivot trend değişimi
+dis__gauss-kanal,trend,gauss_filtre,fiyat Gauss orta çizgi kesişimi
+dis__gauss-stoch-btc,trend,gauss_filtre,Gauss kanal kırılımı + StochRSI
+dis__gauss-stoch-eth,trend,gauss_filtre,Gauss kanal kırılımı + StochRSI
+dis__gmma-ls,trend,gmma,Guppy MA grup ayrışması
+dis__golden-trident,trend,swing_yapisi,30 mum swing yönü + EMA200
+dis__gosterge-rezonansi,karma,macd_rsi_adx,MACD>0 + RSI bandı + ADX eşit ağırlık
+dis__granville-ma-kurallari,trend,granville,Granville MA kuralları
+dis__gunluk-kapanis,trend,gunluk_kapanis,dünkü/evvelki kapanış yönü momentumu
+dis__ha-guclu-dusus-al,formasyon,heikin_ashi,Heikin Ashi güçlü düşüş mumu deseni
+dis__ha-stokastik-geri-cekilme,geri_cekilme,heikin_ashi,SMA100 trend + HA kırmızı geri çekilme + stokastik
+dis__hafta-gunu-braket,takvim,hafta_gunu,hafta günü girişi
+dis__hafta-ici-takvim,takvim,hafta_gunu,hafta günü etkileri (varsayılan pzt_sali)
+dis__haftalik-key-reversal,formasyon,key_reversal,haftalık key reversal mumu
+dis__haftalik-macd-gunluk-ma,trend,macd,haftalık MACD DIF>DEA + günlük EMA
+dis__heracles,karma,donchian_keltner_oran,Donchian %B / Keltner genişlik oranı hiperopt kuralı
+dis__hma-atr-rider,trend,ma_dizilim,HMA8>HMA9>HMA20 dizilimi
+dis__hp-filtre-ma,trend,ma_kesisim,HP trend bileşeninde hızlı/yavaş SMA kesişimi
+dis__ibs-donus,donus,ibs,IBS<0.2 dönüşü
+dis__ifr2,geri_cekilme,rsi,RSI2<10 + Ichimoku bulut üstü filtresi
+dis__ivanov-swing-kurulumlari,kirilim,aralik_daralma,konsolidasyon daralması kırılımı (varsayılan mod)
+dis__jt-awesome-osilator,trend,awesome_osilator,AO SMA5-SMA34 işaret durumu
+dis__kapanis-ma5,trend,fiyat_ma,kapanış SMA5 üstü
+dis__kelly-atr-bant,kirilim,keltner,EMA20 ± ATR bandı kırılımı
+dis__kst-skyrexio,trend,kst,KST sinyal kesişimi + LSMA200
+dis__laguerre-rsi,trend,laguerre,Laguerre bileşenleri kesişimi
+dis__lien-20-gun-sahte-kirilim,kirilim,sahte_kirilim,20 gün sahte kırılım
+dis__lrc-wma-kesisim,donus,lrc_wma,LRC>WMA + RSI<30 geçmişi dönüşü
+dis__lube,karma,lube,aralık sürtünmesi + FIR eğimi tek göstergeye indirgenemiyor
+dis__ma-cift-cross,trend,ma_kesisim,hızlı/yavaş MA kesişimi
+dis__ma-dizilim-5-10-30,trend,ma_dizilim,SMA5>SMA10>SMA30
+dis__ma-kumelenme-kirilimi,kirilim,ma_kumelenme,MA kümelenmesi sonrası kırılım
+dis__ma-mukemmel-siralama,trend,ma_dizilim,mükemmel MA sıralaması + ADX
+dis__ma20-rsi-cmf,karma,ma_rsi_cmf,SMA20 kırılımı + RSI çizgi kırılımı + CMF
+dis__maas-gunu,takvim,ay_gunu,ayın 15'i kuralı
+dis__macd-histogram-pivot,trend,macd,MACD histogram pivotu
+dis__macd-histogram-wm,trend,macd,MACD histogram sıfır geçişleri
+dis__macd-kdj-4h,trend,macd,MACD + KDJ onayı
+dis__macd-sma-cift,trend,macd,SMA ve MACD çift kesişim
+dis__min10-dip,donus,n_gun_dip,10 gün dibi kapanışı
+dis__momentum-roc-filtreli,trend,roc,ROC + stokastik (varsayılan roc_stok)
+dis__mtf-rsi-trend,trend,rsi,günlük/haftalık RSI>70 + MA dizilimi
+dis__multi-ma,trend,ma_dizilim,TEMA yığın sıralaması
+dis__nokta-sekil,formasyon,nokta_sekil,Nokta&Şekil üçlü tepe/dip
+dis__norn-weave,trend,dow_yapisi,EMA eğimi + Dow yapısı + ADX
+dis__norn-weave-thurisaz,trend,dow_yapisi,Dow swing trendi + EMA eğimi + ADX
+dis__ocak-barometresi,takvim,mevsimsel,Ocak barometresi
+dis__ochoa-genisleme-gunu,kirilim,aralik_genislemesi,aralık genişleme günü kırılımı
+dis__onceki-mum-ekstrem-kapanis,seviye,onceki_gun,önceki mum dip/zirve altı/üstü kapanış
+dis__one-mr1,donus,getiri_esik,2 mumluk değişim bandı dönüşü
+dis__ortalamaya-donus-gerilme,donus,connors_rsi,ConnorsRSI eşiği (varsayılan crsi)
+dis__osilator-esik-birlesimi,karma,rsi_stok_macd,RSI+stokastik+MACD histogram eşit ağırlık
+dis__paskalya-takvim,takvim,mevsimsel,Paskalya takvimi
+dis__pivot-ters-stop,kirilim,swing_pivot,onaylı pivot tepe/dip kırılımı
+dis__polinom-regresyon-trend,trend,polinom_regresyon,polinom regresyon tahmin farkı
+dis__roc20-ls,trend,roc,ROC20 işareti
+dis__rsi-failure-swing,donus,rsi,RSI failure swing
+dis__rsi-gauss-velocity,trend,gauss_filtre,Gauss filtre üst bant + StochRSI
+dis__rsi-ma-normal,trend,rsi_ma,RSI-MA seviye geçişi (varsayılan mod trend)
+dis__rsi-ma-uc,trend,rsi_ma,RSI-MA seviye geçişi (varsayılan mod trend)
+dis__rsi-t3-sqz,trend,t3,RSI-uyarlamalı T3 dönüşü + sıkışma momentumu
+dis__rsrs-egim-esigi,trend,rsrs,RSRS eğim eşiği
+dis__shm-wma,trend,ma_kesisim,WMA(63)/WMA(510) kesişimi + SMA41
+dis__shooting-star-onay,formasyon,ters_cekic,shooting star + onay mumu
+dis__sma200-bant-trend,trend,fiyat_ma,SMA200 + std bandı üstü
+dis__sma200-ls,trend,fiyat_ma,SMA200 üstü/altı
+dis__son1ay-donchian-adx,kirilim,donchian,40 mum Donchian kırılımı + EMA200 + ADX
+dis__son1ay-kanal-20-10,kirilim,donchian,20 gün kanal kırılımı
+dis__sott,trend,ott,stokastik OTT kesişimi
+dis__sparta-whb,kirilim,bollinger,BB alt bant aşağı kırılımı düşen BB ortası
+dis__spy-ayi-short,geri_cekilme,rsi,SMA250 altı ayı rejiminde RSI3 tepki short
+dis__sqz-donus,donus,sqz_momentum,sıkışma momentumu dönüşü filtre yok
+dis__sst-dmi-50ma,trend,dmi,SMA50 + DMI kesişimi + zirve kırılımı
+dis__stochrsi-uc-4h,donus,stokastik_rsi,StochRSI uç değerleri
+dis__stockbee-momentum-burst,trend,getiri_burst,%4 günlük momentum patlaması devamı
+dis__swing-asim-mesafesi,formasyon,swing_pivot,swing dip/tepe sınırlı aşım dönüşü
+dis__tasc-haftada-yuzde1,takvim,hafta_gunu,Pazartesi açılış limiti haftalık kural
+dis__trend-analysis,trend,supertrend,Trend Tracker (WMA TR süpertrend) + skor
+dis__trend-cizgisi-kirilim-retest,kirilim,trend_cizgisi,düşen trend çizgisi kırılımı + yeniden test
+dis__trend-yargisi,trend,ma_egim,çoklu SMA eğim yargısı
+dis__tsmom,trend,tsmom,12 ay zaman serisi momentumu
+dis__uc-mum-swing-noktasi,formasyon,swing_pivot,3 mumluk swing noktası dönüşü
+dis__uc-ortalama-boga,trend,fiyat_ma,üç SMA'yı kesen boğa mumu
+dis__uc-ortalama-boga-sma60,trend,fiyat_ma,üç SMA kesen mum + SMA60 trend
+dis__uclu-rsi,trend,rsi,üç periyot RSI momentumu
+dis__ust-tf-trend-60dk-donus,geri_cekilme,trend_duzeltme,günlük güçlü trend + 60dk düzeltme
+dis__vade-haftasi,takvim,ay_gunu,opsiyon vade haftası
+dis__vcp-daralma-kirilimi,kirilim,vcp,VCP daralma kırılımı
+dis__vixfix-stoch,donus,vix_fix,Williams Vix Fix dönüşü
+dis__volatilite-sikisma-reversal,kirilim,volatilite_sikisma,volatilite sıkışması direnç kırılımı
+dis__voltarget-trend,trend,fiyat_ma,SMA200 rejimi + vol hedefi
+dis__voltran-1a,trend,supertrend,Supertrend + ADX + Donchian onayı
+dis__voltran-1b,geri_cekilme,ma_geri_cekilme,haftalık yön + EMA21/FVG geri çekilme
+dis__voltran-r1,karma,ibs_zskor,IBS dip avcısı + z-skor kırılımı iki motor
+dis__yeni-zirve-trend-filtresi,kirilim,donchian,200 gün zirvesi yeni yüksek
+dis__z65-rejim,trend,zskor,65 gün z-skor rejimi
+dis__zskor-cok-faktor,karma,skor_bilesik,ROC/RSI/hacim z-skor bileşiği
+onceki__4s-kirilim,kirilim,donchian,Donchian kırılımı + hacim + EMA
+onceki__kapitulasyon,donus,getiri_esik,24 saatte %15 düşüş sonrası long
+onceki__kgt,seviye,pivot,günlük pivot R1 kırılımı + CPR + trend
+onceki__s1-geri-cekilme,geri_cekilme,ma_geri_cekilme,haftalık yön + günlük EMA geri çekilmesi + RSI soğuma
+swing__aralik-ticareti,seviye,aralik,aralık alt/üst sınırından işlem
+swing__ardisik-bar-tukenme,formasyon,ardisik_mum,ardışık aynı yönlü mum tükenmesi
+swing__bant-donus,donus,bollinger,bant dışı dönüşü
+swing__bas-omuz,formasyon,bas_omuz,baş-omuz boyun çizgisi
+swing__bayrak-flama,formasyon,bayrak,bayrak/flama formasyonu
+swing__bb-sikisma-kirilim,kirilim,bb_sikisma,bant genişliği sıkışması kırılımı
+swing__bollinger-cift-bant-trend,trend,bollinger,1SD-2SD bant arası trend
+swing__cci-esik,trend,cci,CCI ±100 eşik geçişi
+swing__cift-dip-tepe,formasyon,cift_dip_tepe,çift dip/tepe
+swing__crane-reaksiyon-swing,formasyon,swing_pivot,reaksiyon swing orta nokta tetiği
+swing__dar-aralik-kirilim,kirilim,dar_aralik,NR7/iç bar daralma kırılımı
+swing__donchian-kirilim,kirilim,donchian,N mum zirve/dip kırılımı
+swing__elmas-formasyon,formasyon,elmas,elmas formasyonu
+swing__fib-geri-cekilme,geri_cekilme,fibonacci,trendde fib seviyesine geri çekilme
+swing__gann-fan,seviye,gann_fan,Gann fan destek-direnç
+swing__gap-devam,formasyon,gap,açılış boşluğu devam
+swing__gap-doldurma,formasyon,gap,açılış boşluğu doldurma
+swing__geri-cekilme-fiyat-eylemi,geri_cekilme,fiyat_eylemi,ADX+EMA trendde ardışık karşı mum geri çekilmesi
+swing__goreceli-guc-momentum,geri_cekilme,goreceli_guc,güçlü momentum + EMA geri çekilmesi
+swing__harmonik-abcd,formasyon,harmonik,ABCD bacak oranları D noktası
+swing__heikin-ashi-donus,trend,heikin_ashi,Heikin Ashi renk değişimi
+swing__ichimoku,trend,ichimoku,Tenkan/Kijun kesişimi + bulut
+swing__kirilim-geri-test,seviye,kirilim_retest,kırılan seviyenin yeniden testi
+swing__konsolidasyon-kirilim,kirilim,konsolidasyon,konsolidasyon/aralık kırılımı
+swing__ma-geri-cekilme,geri_cekilme,ma_geri_cekilme,trendde dinamik MA desteğine geri çekilme
+swing__ma-kesisim,trend,ma_kesisim,hızlı/yavaş MA kesişimi
+swing__macd-sinyal,trend,macd,MACD sinyal kesişimi
+swing__mum-coklu-formasyon,formasyon,mum_coklu,çoklu mum dönüş desenleri
+swing__mum-yutan-donus,formasyon,yutan_mum,yutan mum dönüşü
+swing__pin-bar,formasyon,pin_bar,pin bar
+swing__pivot-seviye,seviye,pivot,pivot/CPR seviyeleri
+swing__rsi-asiri-donus,donus,rsi,RSI aşırı bölge dönüşü
+swing__rsi-diverjans,donus,rsi_diverjans,RSI diverjansı
+swing__rsi-momentum-esik,trend,rsi,RSI 50 eşik geçişi
+swing__sahte-kirilim,kirilim,sahte_kirilim,sahte kırılım ters giriş
+swing__seviye-tepki,seviye,seviye_tepki,önceki gün/yuvarlak seviye tepkisi
+swing__stokastik-donus,geri_cekilme,stokastik,trend filtreli stokastik aşırı bölge dönüşü
+swing__supertrend-psar,trend,supertrend,Supertrend/PSAR yön değişimi
+swing__talep-arz-bolgesi,seviye,talep_arz,talep/arz bölgesi
+swing__trend-cizgisi-kanal,seviye,regresyon_kanal,regresyon kanalı alt çizgi tepkisi (varsayılan tepki)
+swing__uc-cubuklu-net-hat,kirilim,uc_cubuklu_net_hat,Stowell üç çubuklu net çizgi kırılımı
+swing__ucgen-dikdortgen-kirilim,formasyon,ucgen,üçgen/dikdörtgen kırılımı
+swing__witch-hat,formasyon,witch_hat,Witch Hat deseni
+swing__yeni-dip-sonrasi-donus,formasyon,yeni_dip_donus,ilk itiş modeli
+swing__yuvarlak-dip-fincan,formasyon,fincan_sap,fincan-sap formasyonu
+dis__ewo-ema-ofset,donus,ewo,EWO + EMA ofset + RSI/CTI aşırı satım dibi
+dis__bb-alt-bant-osilator,donus,bollinger,"BB(20,3) alt bant hızlı düşüş dibi"
+dis__ft-cluc-may2018,donus,bollinger,alt BB altı + düşük hacim
+dis__ft-binhv45,donus,bollinger,"BB(40,2) alt bant delta koşulları"
+dis__ft-cofibit,donus,stokastik,hızlı stokastik <30 yukarı kesişim
+dis__e0v1en,donus,rsi,RSI4/RSI14 + SMA15 altı + CTI dip
+dis__aroon-stochrsi-ema-dip,donus,stokastik_rsi,Aroon + StochRSI + EMA ofset dip
+pf__rotasyon,kesitsel,momentum_siralama,top-K momentum rotasyonu
+pf__gem,kesitsel,cift_momentum,tek varlık çift momentum seçimi
+pf__sabit_sepet,kesitsel,sabit_sepet,sabit/eşit ağırlıklı sepet
+pf__trend_sepet,trend,fiyat_ma,varlık başına SMA trend filtreli sepet
+pf__kanarya,kesitsel,kanarya_momentum,13612W momentum kanarya tahsisi
+pf__kesit_ls,kesitsel,kesitsel_faktor,kesitsel faktör long/short
+pf__goreceli_guc,kesitsel,goreceli_guc,göreceli güç seçimi
+pf__wq_alfa,kesitsel,alfa101,WorldQuant kesitsel alfalar
+pf__cta,trend,tsmom,vol hedefli zaman serisi momentumu
+pf__pairs,kesitsel,cift_islem,çift işlemi
+pf__ref_filtreli_long,trend,ref_filtre,referans rejim filtreli momentum long
+pf__btc_hedge,trend,fiyat_ma,BTC SMA50 üstü long
+pf__rsi_cift,donus,rsi,BTC+hedef RSI eşiklerinin birlikte sağlanması
+pf__rsi_tarama,donus,rsi,RSI aşırı satım sonrası onay
+pf__ibs_donus,donus,ibs,dip-IBS ortalamaya dönüşü
+pf__son1ay_trendrider,trend,fiyat_ma,coin SMA50 trend filtresi
+pf__son1ay_e014,kesitsel,momentum_siralama,SPY/TLT/GLD 25 hafta momentum seçimi
+pf__pca_statarb,kesitsel,pca_statarb,PCA istatistiksel arbitraj
+pf__gumus_makro,trend,fiyat_ma,gümüş long + EMA150 makro çıkış
+pf__sinif_kesit_mom,kesitsel,sinif_ici_momentum_ls,varlık sınıfı içinde 12-1 ay getiri sıralaması: en iyi long en kötü short (aylık)
+pf__sinif_kesit_donus,kesitsel,sinif_ici_kisa_donus_ls,varlık sınıfı içinde 7 günlük getiri sıralaması: kaybeden long kazanan short (haftalık)
+v2__tsmom-12-1,trend,tsmom_12_1,12-1 ay getiri işaretine göre long/short (zaman serisi momentumu)
+v2__tsmom-oy,trend,tsmom_coklu_vade,1/3/12 ay getiri işaretlerinin oylaması ile long/short
+v2__funding-asiri-kontra,funding,asiri_funding_z,funding oranı 90g z-skoru ±2 aşınca karşı yön
+v2__funding-esik-karsit,funding,funding_esik,7g ortalama yıllık funding eşiğini aşınca karşı yön
+v2__trend-funding-suzgec,karma,trend_funding_suzgec,SMA100 trend yönü + funding z-skoru kalabalık süzgeci (iki koşul eşit ağırlık)
