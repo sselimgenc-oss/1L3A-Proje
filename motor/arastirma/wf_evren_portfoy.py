@@ -202,13 +202,13 @@ def _satirlari_yaz(cikti: Path, ad_dosya: str, yeni: list):
 
 
 def pf_wf_asamasi(cikti: Path, donem: str = "2017_gelistirme", stratejiler=None, surec: int = 4,
-                  butce_sn: Optional[float] = None, ilerleme: bool = True) -> dict:
+                  butce_sn: Optional[float] = None, ilerleme: bool = True, veri_dizini=None) -> dict:
     """pf stratejilerinin geliştirme dönemi WF'si -> wf_evren.parquet'e stil='portfoy' satırları (aynı strateji yeniden koşulursa ezilir)."""
     cikti = Path(cikti)
     we.holdout_kilidi(cikti, "portfoy")
     cikti.mkdir(parents=True, exist_ok=True)
     gorevler = [{"strateji": s, "cikti": cikti} for s in (stratejiler or pf_stratejileri())]
-    sonuc = we.havuz_calistir(_wf_isci, gorevler, surec, we._isci_ham, {"veri_dizini": None, "donem": donem}, butce_sn, ilerleme, "pf-wf")
+    sonuc = we.havuz_calistir(_wf_isci, gorevler, surec, we._isci_ham, {"veri_dizini": veri_dizini, "donem": donem}, butce_sn, ilerleme, "pf-wf")
     yeni = [s for s in sonuc if not s.get("ertelendi")]
     if yeni:
         _satirlari_yaz(cikti, "wf_evren", yeni)

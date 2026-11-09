@@ -703,7 +703,7 @@ def test_portfoy_evren_akisi_wf_holdout_pbo_listeler(tmp_path, pf_veri, monkeypa
     # WF (varsayılan 730/180 pencere; veri ~1247 gün -> 1 pencere) + dosyalar
     cikti = tmp_path / "cikti"
     monkeypatch.setattr(deneme_kaydi, "VARSAYILAN_YOL", tmp_path / "d.jsonl")
-    o = wep.pf_wf_asamasi(cikti, "pf_test", [ad], surec=1, ilerleme=False)
+    o = wep.pf_wf_asamasi(cikti, "pf_test", [ad], surec=1, ilerleme=False, veri_dizini=pf_veri)
     assert o["yeni"] == 1 and o["hatali"] == 0
     wf = pd.read_parquet(cikti / "wf_evren.parquet")
     r = wf.iloc[0]

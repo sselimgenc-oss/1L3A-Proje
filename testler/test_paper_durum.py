@@ -5,6 +5,7 @@ from decimal import Decimal
 
 import pandas as pd
 import pytest
+from testler.conftest import KILIT_ISLEM_NEDEN, kilit_islemleri_var
 
 from motor.canli import backtest_durum as bd
 from motor.canli import durum as d
@@ -158,6 +159,7 @@ def test_veri_yok_stratejisi_isaretlenir_ve_calistirilmaz():
     assert any("VERİ YOK" in u for u in o["saglik"]["uyarilar"])
 
 
+@pytest.mark.gercek_veri(kilit_islemleri_var(), reason=KILIT_ISLEM_NEDEN)
 def test_backtest_durum_genisletme_null_ve_neden(tmp_path):
     out = bd.olustur()
     oz = out["ozet"]

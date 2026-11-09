@@ -18,7 +18,7 @@ from motor.canli import paper as pp
 from motor.canli import paper_durum as pdr
 from motor.canli import paper_motor as pm
 from testler.test_paper_motor import TAN, kural, sentetik
-from testler.conftest import gercek_veri_yok_isle
+from testler.conftest import KILIT_ISLEM_NEDEN, gercek_veri_yok_isle, kilit_islemleri_var
 
 D = Decimal
 
@@ -330,8 +330,8 @@ def test_paper_durum_kaydet_yukle_tsi_serisi_korunur(tmp_path):
 # ---------------------------------------------------------------------------- backtest yolu (gerçek kilit çıktıları)
 @pytest.fixture(scope="module")
 def bt():
-    if not (Path(bd.KOK) / "sonuclar" / "kilit" / "sonuc.csv").exists():
-        gercek_veri_yok_isle("sonuclar/kilit yok")
+    if not kilit_islemleri_var():
+        gercek_veri_yok_isle(KILIT_ISLEM_NEDEN)
     return bd.olustur()
 
 
