@@ -1,0 +1,49 @@
+{
+ "ad": "shinobi_ha",
+ "pine_id": "CtFpKECD",
+ "tf": "1h",
+ "evren": [
+  "kripto",
+  "abd",
+  "emtia"
+ ],
+ "neden": "Seans süzgeçli gün içi (Macar yazar); saatlik.",
+ "olcut": {
+  "n": 108,
+  "kar": 401.71657633440384,
+  "pf": 1.2103772353466593,
+  "sharpe": 0.2208258085945556,
+  "beklenti_R": -0.26911496760667114,
+  "kazanma": 0.46296296296296297,
+  "maxdd": 0.044472511370961,
+  "dd_gun": 1319,
+  "cagr": 0.005074636582428793,
+  "calmar": 0.1141072637004789,
+  "psr": 0.7567634970276121,
+  "tutma_gun": 0.041666666666666664,
+  "ort_islem_getiri": 0.0025905941480147444,
+  "netR_toplam": -29.064416501520483,
+  "sharpe_egitim": 0.105794402220457,
+  "sharpe_oos": 0.38377732358861344,
+  "oos_kar": 308.3974795801769,
+  "tur": "gun",
+  "pf_maliyet2x": 0.970238661412167,
+  "komsu_n": 24,
+  "komsu_karda": 0.6666666666666666,
+  "enstr_n": 27,
+  "enstr_karda": 0.5555555555555556,
+  "maks_kor": 0.013400224431930145
+ },
+ "kurallar": {
+  "1_islem_sayisi": false,
+  "2_maks_dusus<=20": true,
+  "3_beklenti>=0.15R": false,
+  "4a_kf>=1.3": false,
+  "4b_sharpe>=1": false,
+  "5_oos": true,
+  "6_maliyet2x_kf>=1.1": false,
+  "7_komsu>=70": false,
+  "8_enstr>=60": false
+ },
+ "gecti": false
+}

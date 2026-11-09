@@ -1,0 +1,264 @@
+[
+ {
+  "kart_id": "swing__aralik-daralmasi-kirilim__ivanov",
+  "ad": "Düşük Hacimli Aralık Daralması Sonrası %2 Kırılım (Mükemmel Swing Kurulumu - Kırılım)",
+  "stil": "swing",
+  "kaynak": {
+   "pdf": "Yüksek_Kazançlı_Swing_Ticaretinin_5_Sırrı_-_Ivayla_Ivanov_52_sayfa.pdf",
+   "sayfalar": [
+    4,
+    13,
+    16,
+    17,
+    19,
+    21,
+    26,
+    27,
+    28
+   ]
+  },
+  "ozet": "Yükseliş trendindeki hisse, düşük hacimle 2-20 gün sıkı yan konsolidasyona girip 5/10/20 günlük ortalamalara yakın kalırken, açılıştan >%2 yükselerek yeni 10 günlük zirve yaptığında long açılır; 2-10 günlük momentum patlaması yakalanır.",
+  "kategori": "kirilim",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+   "islem": "1d",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "SMA",
+    "parametreler": {
+     "periyot": 5
+    }
+   },
+   {
+    "ad": "SMA",
+    "parametreler": {
+     "periyot": 10
+    }
+   },
+   {
+    "ad": "SMA",
+    "parametreler": {
+     "periyot": 20
+    }
+   },
+   {
+    "ad": "Hacim",
+    "parametreler": {
+     "ortalama_gunluk_min": 50000,
+     "bagil_hacim_min": 1
+    }
+   },
+   {
+    "ad": "Göreceli güç",
+    "parametreler": {
+     "donemler": [
+      "haftalık",
+      "aylık",
+      "3 aylık",
+      "6 aylık"
+     ]
+    }
+   }
+  ],
+  "long_giris": [
+   "Önceki yükseliş trendi; haftalık/aylık/üç aylık/6 aylık göreceli gücü yüksek",
+   "Ortalamanın altında hacimle 2-20 gün süren sıkı yan konsolidasyon; son günlerin kapanışları birbirine çok yakın",
+   "Fiyat 5, 10 veya 20 günlük ortalamaya yakın, 5 günlük SMA üzerinde ve 5 SMA > 20 SMA",
+   "Tetikleme günü: açılıştan yükseliş >%2 ve günlük değişim >%2, yeni 10 günlük en yüksek, bağıl hacim >1, ortalama günlük hacim >50 bin, fiyat >2$",
+   "Önceki 3-4 gün üst üste yükselen (genişlemiş) hisse alınmaz; aralık daralması yoksa alınmaz"
+  ],
+  "short_giris": [],
+  "stop_loss": "%2 kırılım gününün en düşüğü",
+  "kar_al": "Hedef yok, 2-10 gün içinde güçle satış. Kısmi: risk tutarı kadar kâr olunca pozisyonun 1/3-1/2'si satılır, kalan için stop girişe çekilir (örnek: 100'den alınan 200 hisse, stop 98, 102'de 100 hisse sat)",
+  "iz_suren_stop": "Çıkış sinyalleri: günlük kapanışın bir önceki günün en düşüğünün altında olması; 5 günlük (küçük hisseler) veya 10 günlük (büyük hisseler) SMA'nın kırılması; günün zirvesinden uzak ve ortalama üstü hacimle kapanış",
+  "zaman_cikisi": "Tetiklenmeden sonra 5 gün içinde %5'ten fazla hareket etmediyse sat",
+  "filtreler": [
+   "Genel piyasanın sağlıklı/boğa olması; dalgalı piyasada nakit ağırlığı",
+   "Sektör ivmesi: aynı grupta gün içi >%4 artan ve 20 günlük zirve yapan çok hisse",
+   "Kazanç raporu/FDA gibi gap riski olaylarından geçilmez"
+  ],
+  "pozisyon_risk": "İşlem başına sermayenin %0,5-1'i (boğa piyasasında %1-2, volatil dönemde %0,25-0,5); adet = risk tutarı / (giriş - stop); örnek: 100K sermaye, %1 risk, 20$ giriş 18$ stop -> 500 hisse (s.42-43)",
+  "iddia_edilen_performans": "Örnek: 77'den giriş, 75.50 stop, 84 çıkış = 6:1 ödül/risk (tek örnek)",
+  "kodlanabilirlik": {
+   "puan": 3,
+   "gerekce": "Giriş filtreleri, stop, zaman stopu ve çıkış sinyalleri sayısal ve ölçülebilir."
+  },
+  "belirsizlikler": [
+   "Hacim 'düşük' eşiği (ortalamanın kaç altı) yok",
+   "Konsolidasyon sıkılığı için aralık yüzdesi yok",
+   "Alternatif sürüm: 10 günlük zirve şartı olmadan %4 hareket (s.16)",
+   "Göreceli güç eşiği yok",
+   "Satış zamanı 'sanat' diye bırakılmış"
+  ],
+  "uyumluluk_notu": "ABD hissesi günlük bazlı; hacim zorunlu. Kripto/forexte hacim ve hisse özellikli filtreler uyarlanmalı. 5m'ye uygun değil ama 1d motorunda koşar.",
+  "varyantlar": [
+   "Kırılım %2 yerine %4 hareket (10 günlük yüksek şartı olmadan)",
+   "Hisse özelliklerine göre: küçük/ucuz hisseler 5 SMA, büyük/pahalı hisseler 10 SMA çıkışı"
+  ],
+  "anahtar_kelimeler": [
+   "aralik-daralmasi",
+   "kirilim",
+   "10-gunluk-zirve",
+   "hacim",
+   "zaman-stopu",
+   "kismi-kar-al",
+   "sma-5-20"
+  ]
+ },
+ {
+  "kart_id": "swing__aralik-daralmasi-beklenti__ivanov",
+  "ad": "Kırılım Beklentisiyle Alım (Öngörü Kurulumu)",
+  "stil": "swing",
+  "kaynak": {
+   "pdf": "Yüksek_Kazançlı_Swing_Ticaretinin_5_Sırrı_-_Ivayla_Ivanov_52_sayfa.pdf",
+   "sayfalar": [
+    13,
+    17,
+    18,
+    19
+   ]
+  },
+  "ozet": "Kırılım kurulumunun tüm teknik şartları sağlanmışken, tetiklemeyi beklemeden konsolidasyon içindeki sıkı stopla önceden alım yapılır; aynı riskle daha fazla hisse ve daha iyi ödül/risk elde edilir.",
+  "kategori": "kirilim",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+   "islem": "1d",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "SMA",
+    "parametreler": {
+     "periyot": 5
+    }
+   },
+   {
+    "ad": "SMA",
+    "parametreler": {
+     "periyot": 20
+    }
+   },
+   {
+    "ad": "Hacim",
+    "parametreler": {}
+   }
+  ],
+  "long_giris": [
+   "Mükemmel kırılım kurulumunun tüm teknik özellikleri mevcut: önceki yükseliş trendi, düşük hacimli konsolidasyon, aralık daralması, kapanışlar birbirine yakın",
+   "Hisse tetiklenmeden, konsolidasyon içinde alınır (hemen tetiklenmeyebilir)",
+   "Yalnız güçlü, yükselen genel piyasada ve o dönemin en güçlü sektörlerinden hisselerde; ek katalizör (sektör ivmesi, kazanç sonrası olumlu tepki) aranır"
+  ],
+  "short_giris": [],
+  "stop_loss": "Konsolidasyon içinde sıkı stop (örnek: 75'ten giriş, 74 stop, hisse başına 1$ risk)",
+  "kar_al": "Kırılım kurulumuyla aynı çıkış kuralları (kısmi kâr, 5/10 SMA kırılımı, 5 gün içinde %5 yok ise çık)",
+  "iz_suren_stop": null,
+  "zaman_cikisi": "5 gün içinde %5'ten fazla hareket yoksa sat",
+  "filtreler": [
+   "Boğa piyasası; günlük izleme listesi gerektirir",
+   "Sektör momentumu"
+  ],
+  "pozisyon_risk": "İşlem başına sermayenin %0,5-1'i (boğa piyasasında %1-2, volatil dönemde %0,25-0,5); adet = risk tutarı / (giriş - stop); örnek: 100K sermaye, %1 risk, 20$ giriş 18$ stop -> 500 hisse (s.42-43)",
+  "iddia_edilen_performans": "Aynı örnekte beklenti girişi 9:1, kırılım girişi 6:1 ödül/risk",
+  "kodlanabilirlik": {
+   "puan": 2,
+   "gerekce": "Kurulum filtreleri ölçülebilir; ancak 'beklenti' girişi için tetik anı ve stop seviyesi sayısal verilmemiş."
+  },
+  "belirsizlikler": [
+   "Giriş anı (hangi gün/fiyat) belirsiz",
+   "Stop konsolidasyonun dibi mi tanımsız",
+   "Katalizör ölçütü öznel"
+  ],
+  "uyumluluk_notu": "Günlük hisse; hacim gerekli. Yanlış alarm riski yüksek, backtest ile doğrulanmalı.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "oncelikli-giris",
+   "konsolidasyon",
+   "aralik-daralmasi",
+   "beklenti",
+   "sektor-momentumu"
+  ]
+ },
+ {
+  "kart_id": "swing__kisa-swing-momentum-kirilmasi__ivanov",
+  "ad": "Kısa Swing Kurulumu (momentum hissesi bozulurken açığa satış)",
+  "stil": "swing",
+  "kaynak": {
+   "pdf": "Yüksek_Kazançlı_Swing_Ticaretinin_5_Sırrı_-_Ivayla_Ivanov_52_sayfa.pdf",
+   "sayfalar": [
+    21,
+    22
+   ]
+  },
+  "ozet": "Düşüş trendine girmiş (20 SMA düşen 50 SMA altında) hissede açılıştan >%2 düşüşle yeni 5 günlük dip yapıldığında short açılır; kısmi kâr 1R'de, kalan 3 gün üst üste düşüş veya 5 SMA kırılımı ile çıkılır.",
+  "kategori": "momentum",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+   "islem": "1d",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "SMA",
+    "parametreler": {
+     "periyot": 5
+    }
+   },
+   {
+    "ad": "SMA",
+    "parametreler": {
+     "periyot": 20
+    }
+   },
+   {
+    "ad": "SMA",
+    "parametreler": {
+     "periyot": 50
+    }
+   },
+   {
+    "ad": "Hacim",
+    "parametreler": {
+     "ortalama_gunluk_min": 200000
+    }
+   }
+  ],
+  "long_giris": [],
+  "short_giris": [
+   "Açılıştan itibaren değişim < -%2",
+   "20 günlük SMA, düşen 50 günlük SMA'nın altında",
+   "5 günlük SMA 20 günlük SMA'nın altında ve fiyat 5 SMA altında",
+   "Üst üste 3 gün düşmemiş (zaten aşırı uzamış değil), yeni 5 günlük dip",
+   "Kısa satılabilir, ortalama günlük hacim >200 bin, fiyat >5$, bir haftada %10'dan fazla düşmemiş",
+   "Tercihen genel piyasa düzeltmede (Russell 2000 5 SMA < 20 SMA), zorunlu değil"
+  ],
+  "stop_loss": "Giriş gününün zirvesi",
+  "kar_al": "Kâr 1R olunca pozisyonun yarısı kapatılır (20$ giriş, 21 stop -> 19'da yarısı); kalan için stop başabaşa çekilir. 7R'de çıkış",
+  "iz_suren_stop": "3 gün üst üste düşüşten sonra üçüncü günün kapanışında kapat; 5 günlük SMA'nın ihlali; hangisi önce gelirse",
+  "zaman_cikisi": null,
+  "filtreler": [],
+  "pozisyon_risk": "İşlem başına sermayenin %0,5-1'i (boğa piyasasında %1-2, volatil dönemde %0,25-0,5); adet = risk tutarı / (giriş - stop); örnek: 100K sermaye, %1 risk, 20$ giriş 18$ stop -> 500 hisse (s.42-43)",
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 3,
+   "gerekce": "Tüm giriş/çıkış kuralları sayısal."
+  },
+  "belirsizlikler": [
+   "'Üst üste 3 gün düşmemiş' ifadesi kapanış mı gün içi mi net değil",
+   "Kısa satış maliyet/borç bulma kitapta yok"
+  ],
+  "uyumluluk_notu": "Hisse günlük short; kripto perp ve emtiada fiyat filtreleri uyarlanmalı. Hacim eşiği hisse spesifik.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "short",
+   "sma-5-20-50",
+   "momentum",
+   "kismi-kar-al",
+   "uc-gun-dusus"
+  ]
+ }
+]

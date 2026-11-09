@@ -1,0 +1,69 @@
+[
+  {
+    "kart_id": "daytrade__konsolidasyon-pivot-kirilimi__vogel",
+    "ad": "Konsolidasyon Pivot Kırılımı (hacim teyitli hisse alımı)",
+    "stil": "daytrade",
+    "kaynak": {
+      "pdf": "Day_Trading_-_Mark_Vogel_132_sayfa.pdf",
+      "sayfalar": [
+        68,
+        69,
+        70,
+        75,
+        76
+      ]
+    },
+    "ozet": "Lider sektördeki güçlü hisse fiyat konsolidasyonundan çıkıp pivot noktasını yukarı kırarken, hacim ortalamanın en az %50 üzerindeyse alınır; pivotun %5'inden fazla yukarıda kovalanmaz; stop alış fiyatının yaklaşık %8 altındadır.",
+    "kategori": "kirilim",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "hisse",
+    "zaman_dilimi": {
+      "islem": "1d (kitap gün içi/kısa vade karışık; zaman dilimi belirsiz)",
+      "ust_filtre": "Piyasa yönü (S&P 500 trendi) uygun olmalı"
+    },
+    "gostergeler": [
+      {
+        "ad": "Hacim",
+        "parametreler": {
+          "esik": "ortalamanın %150'si"
+        }
+      }
+    ],
+    "long_giris": [
+      "Hisse konsolidasyon (taban) formasyonundan çıkıyor; pivot noktası üzerinde kırılım",
+      "Kırılım günündeki hacim ortalama hacmin en az %50 üzerinde",
+      "Fiyat pivot noktasının en fazla %5 üzerinde (kovalamama)",
+      "Güçlü satış/kazanç; önde gelen sektör (temel filtre)"
+    ],
+    "short_giris": [],
+    "stop_loss": "Alış fiyatının yaklaşık %8 altı",
+    "kar_al": "Risk/ödül önceden belirlenir: 3:1 ve iyi kazananda 5:1",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "15 dolardan ucuz (penny) hisse alınmaz",
+      "S&P 500 ile aynı yönde işlem (piyasaya karşı çıkılmaz)"
+    ],
+    "pozisyon_risk": "Önceden belirlenmiş R:R 3:1 veya 5:1",
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Pivot ve hacim kuralı ölçülebilir ama konsolidasyon tanımı, zaman dilimi, giriş mumu ve temel filtreler belirsiz; kitap genel tavsiye ağırlıklı."
+    },
+    "belirsizlikler": [
+      "Zaman dilimi belirtilmemiş (gün içi mi günlük mü)",
+      "Konsolidasyon formasyon tanımı yok",
+      "Çıkış kuralı yalnızca hedef R:R",
+      "Temel filtreler (kazanç/satış) kodlanamaz"
+    ],
+    "uyumluluk_notu": "Temel veri ve sektör filtresi gerektirir; saf teknik kısım (taban kırılımı + %50 hacim + %8 stop) kripto/hisse/emtiada uyarlanabilir; ≥5m uyarlaması için yeniden test gerekir.",
+    "varyantlar": [],
+    "anahtar_kelimeler": [
+      "pivot",
+      "kirilim",
+      "konsolidasyon",
+      "hacim-teyidi",
+      "stop-yuzde"
+    ]
+  }
+]

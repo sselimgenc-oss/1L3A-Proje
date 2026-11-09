@@ -1,0 +1,49 @@
+{
+ "ad": "ibs_rev",
+ "pine_id": "6XPbhz9C",
+ "tf": "1d",
+ "evren": [
+  "abd",
+  "kripto",
+  "emtia"
+ ],
+ "neden": "SPX500 günlük; hisse/endeks mantığı → ABD evreni, ayrıca kripto ve emtia.",
+ "olcut": {
+  "n": 1372,
+  "kar": 19397.51547407642,
+  "pf": 1.6008457978696375,
+  "sharpe": 1.1619480923654228,
+  "beklenti_R": 0.1792520995200611,
+  "kazanma": 0.554089709762533,
+  "maxdd": 0.10732553094222377,
+  "dd_gun": 519,
+  "cagr": 0.09587414984535747,
+  "calmar": 0.8933023578235929,
+  "psr": 0.9999757729315042,
+  "tutma_gun": 6.0,
+  "ort_islem_getiri": 0.01972097030280287,
+  "netR_toplam": 407.61927430861897,
+  "sharpe_egitim": 1.0833470007996184,
+  "sharpe_oos": 1.3938834103466045,
+  "oos_kar": 8630.107855935938,
+  "tur": "swing",
+  "pf_maliyet2x": 1.5300375157381865,
+  "komsu_n": 24,
+  "komsu_karda": 1.0,
+  "enstr_n": 27,
+  "enstr_karda": 0.8888888888888888,
+  "maks_kor": 0.39830326870466787
+ },
+ "kurallar": {
+  "1_islem_sayisi": true,
+  "2_maks_dusus<=20": true,
+  "3_beklenti>=0.15R": true,
+  "4a_kf>=1.3": true,
+  "4b_sharpe>=1": true,
+  "5_oos": true,
+  "6_maliyet2x_kf>=1.1": true,
+  "7_komsu>=70": true,
+  "8_enstr>=60": true
+ },
+ "gecti": true
+}

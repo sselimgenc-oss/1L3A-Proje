@@ -1,0 +1,19 @@
+[
+ {
+  "kart_id": "daytrade__gann-fan-lineer-regresyon__singhal",
+  "parametreler": {
+   "cizgi_orani": 1.0
+  },
+  "cikis_ayarlari": null,
+  "not": "1x1 çizgisinde destek/direnç dönüşü; Bollinger çakışması ve lineer regresyon filtresi yok; fan ölçeği kartta tanımsız (olcek_atr varsayım)."
+ },
+ {
+  "kart_id": "swing__gann-fan__crane",
+  "parametreler": {
+   "cizgi_orani": 1.0,
+   "olcek_atr": 0.2
+  },
+  "cikis_ayarlari": null,
+  "not": "Fan majör dip/tepeden (zigzag); 1x1 destek dönüşü. Dar aralıklı gün ve al/sat penceresi teyitleri yok; 1x4 kırılım alışı kodlanmadı."
+ }
+]

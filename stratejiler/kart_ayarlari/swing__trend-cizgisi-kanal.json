@@ -1,0 +1,45 @@
+[
+ {
+  "kart_id": "swing__trend-cizgisi-yeniden-test__boxer",
+  "parametreler": {
+   "mod": "tepki"
+  },
+  "cikis_ayarlari": null,
+  "not": "Yükselen/düşen çizgiye geri çekilme ve tepki; çizgi regresyon kanalıyla temsil edildi."
+ },
+ {
+  "kart_id": "swing__yukselis-trend-cizgisi-tepki__jordan",
+  "parametreler": {
+   "mod": "tepki",
+   "short": false
+  },
+  "cikis_ayarlari": null,
+  "not": "Yükseliş çizgisinden tepki (long-only)."
+ },
+ {
+  "kart_id": "swing__kanal-kirilimi__make",
+  "parametreler": {
+   "mod": "kirilim",
+   "long": false
+  },
+  "cikis_ayarlari": null,
+  "not": "Kitap yalnız short: düşüş kanalı üst çizgisinden aşağı kırılım -> burada mod 'kirilim' aynasıyla yaklaşıldı (yükselen kanal alt çizgi kırılımı)."
+ },
+ {
+  "kart_id": "swing__kanal-sicrama__razaq",
+  "parametreler": {
+   "mod": "tepki"
+  },
+  "cikis_ayarlari": null,
+  "not": "Kanal çizgisinden sıçrama; kanal çizim kuralı yok, regresyon kanalı."
+ },
+ {
+  "kart_id": "swing__trend-kanali-kanallama__kratter",
+  "parametreler": {
+   "mod": "tepki",
+   "egim_sart": true
+  },
+  "cikis_ayarlari": null,
+  "not": "Kanal alt çizgisinde al / üst kenarda sat."
+ }
+]

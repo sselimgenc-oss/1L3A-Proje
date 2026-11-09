@@ -1,0 +1,47 @@
+{
+ "ad": "gold_orb",
+ "pine_id": "FJZvYKaB",
+ "tf": "1h",
+ "evren": [
+  "emtia"
+ ],
+ "neden": "PDF: XAUUSD 15 dk; Yahoo emtia 15 dk yalnız 60 gün → saatlik uyarlama (OR = 13:00 saat mumu, giriş penceresi 14:00–16:00 saat mumları).",
+ "olcut": {
+  "n": 633,
+  "kar": -602.5791297939465,
+  "pf": 0.9032811241253154,
+  "sharpe": -0.5479399118835107,
+  "beklenti_R": -0.06813230737387835,
+  "kazanma": 0.4391785150078989,
+  "maxdd": 0.07926425657108463,
+  "dd_gun": 845,
+  "cagr": -0.025638400774037562,
+  "calmar": -0.32345475606706664,
+  "psr": 0.19532730838403328,
+  "tutma_gun": 0.25,
+  "ort_islem_getiri": -0.00038077670129159314,
+  "netR_toplam": -43.127750567665,
+  "sharpe_egitim": -0.7306894697534596,
+  "sharpe_oos": -0.3555219072693732,
+  "oos_kar": -241.5683183126057,
+  "tur": "gun",
+  "pf_maliyet2x": 0.6946431688252193,
+  "komsu_n": 18,
+  "komsu_karda": 0.0,
+  "enstr_n": 3,
+  "enstr_karda": 0.3333333333333333,
+  "maks_kor": 0.012021340266725827
+ },
+ "kurallar": {
+  "1_islem_sayisi": true,
+  "2_maks_dusus<=20": true,
+  "3_beklenti>=0.15R": false,
+  "4a_kf>=1.3": false,
+  "4b_sharpe>=1": false,
+  "5_oos": false,
+  "6_maliyet2x_kf>=1.1": false,
+  "7_komsu>=70": false,
+  "8_enstr>=60": false
+ },
+ "gecti": false
+}

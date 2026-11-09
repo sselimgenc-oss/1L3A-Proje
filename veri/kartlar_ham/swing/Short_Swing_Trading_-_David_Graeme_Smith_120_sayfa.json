@@ -1,0 +1,80 @@
+[
+ {
+  "kart_id": "swing__sst-50ma-dmi-onay__graeme-smith",
+  "ad": "Short Swing Trading (SST) - 50 MA Trendi + DMI Kesişimi + Fiyat Onayı",
+  "stil": "swing",
+  "kaynak": {
+   "pdf": "Short_Swing_Trading_-_David_Graeme_Smith_120_sayfa.pdf",
+   "sayfalar": [
+    53,
+    58,
+    61,
+    62,
+    63,
+    67,
+    68
+   ]
+  },
+  "ozet": "Fiyat 50 günlük SMA üzerinde ise yalnız long (altında ise yalnız short); 8 periyotluk DMI'da +DI ve -DI kesişince/değince aday giriş oluşur; fiyat son önemli zirveyi (short için dibi) aşınca girilir. Stop son önemli dip/tepenin hemen ötesinde, iz süren stop her yeni önemli günün dip/tepesinde.",
+  "kategori": "trend_takip",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+   "islem": "1d",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "SMA",
+    "parametreler": {
+     "periyot": 50
+    }
+   },
+   {
+    "ad": "DMI/DI",
+    "parametreler": {
+     "periyot": 8,
+     "cizgiler": "+DI, -DI"
+    }
+   }
+  ],
+  "long_giris": [
+   "Kural 2: Fiyat 50 günlük SMA'nın üzerinde (trend yukarı)",
+   "Kural 3: +DI çizgisi -DI çizgisini yukarı keser veya ona dokunup tekrar uzaklaşır (aday)",
+   "Kural 4: Fiyat son önemli zirvenin üzerine çıkınca (fiyat onayı) long gir"
+  ],
+  "short_giris": [
+   "Fiyat 50 SMA altında; -DI, +DI'yi yukarı keser/değer; fiyat son önemli dibin altına inince short"
+  ],
+  "stop_loss": "Son önemli dibin (short için tepenin) hemen altı/üstü; ek tampon hisse fiyatının %0,5'i",
+  "kar_al": "Sabit hedef yok; çıkış iz süren stop ile",
+  "iz_suren_stop": "Kural 6: Yeni önemli gün oluştukça stop o günün dibinin (short için tepesinin) hemen altına/üstüne taşınır; %5'ten fazla hareket eden 'büyük hareket günü'nde stop o günün %50 seviyesinin hemen altına/üstüne çekilir; tampon %0,5",
+  "zaman_cikisi": null,
+  "filtreler": [
+   "İşlem yapılacak hisse 'kişilik' profili: yüksek likit, FTSE benzeri hisseler; kitap uygun hisse seçimi bölümü var (11.0)",
+   "Trendin tersine DI kesişimleri işlem yapılmaz"
+  ],
+  "pozisyon_risk": "Tek işlemde işlem sermayesinin en fazla %5'i (mutlak maksimum); yazarın kendi kuralı %3",
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 2,
+   "gerekce": "50 SMA, DMI(8) ve tepe/dip kırılımı mekanik; 'önemli zirve/dip' ve 'önemli gün' tanımları yoruma açık (swing pivot ile yaklaşıklanır)."
+  },
+  "belirsizlikler": [
+   "'Önemli zirve/dip' ve 'önemli gün' tanımı net değil",
+   "DI'ların 'değmesi' sayısal eşik yok",
+   "Hedef yok; hisse seçim kriterleri ayrı bölümde ve okunmadı",
+   "Kural seti 2004 İngiltere hisseleri için"
+  ],
+  "uyumluluk_notu": "Günlük tabanlı hisse; DMI ve SMA her piyasada hesaplanır, hacim gerekmez. Tampon %0,5 hisse oynaklığına ayarlıdır, ATR ile uyarlanmalı. Kripto/forex/emtiada uyarlanabilir.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "dmi",
+   "di-kesisim",
+   "sma-50",
+   "trend-takip",
+   "iz-suren-stop",
+   "swing-kirilim"
+  ]
+ }
+]

@@ -1,0 +1,10 @@
+- Motor: sinyal bar kapanışında, giriş sonraki barın açılışında (`process_orders_on_close=true` olan betiklerde sinyal mumunun kapanışında); stop/hedef mum içinde, aynı mumda ikisi de olursa önce stop.
+- Pozisyon boyu: stop varsa işlem başı %1 risk (10.000 $ sabit sermaye, bileşiksiz; pozisyon değeri en çok sermayenin %25'i), stop yoksa %10 (enstrüman sayısı N>10 ise %100/N: brüt pozisyon ≤ %100).
+- Masraf taraf başına: kripto %0,07, ABD %0,02, BIST %0,10, emtia %0,03 + kayma %0,02. Parametreler Pine varsayılanı, optimizasyon yok.
+- Veri: kripto Binance spot (2019→), hisse/emtia Yahoo (günlük 2015→, saatlik son ~730 gün). Dört saatlik = saatlikten türetildi.
+- Eğitim/OOS: portföy veri aralığının ilk %70'i eğitim, son %30'u OOS (parametre değişmez).
+- ±%20 sağlamlık: her sayısal parametre ×0,8/×1,2 ayrı ayrı + rastgele birlikte kombinasyonlar (en çok 24 komşu); komşuda portföy net kârı > 0 ise "kârda".
+- Beklenti R: stop olan stratejilerde kâr/başlangıç riski, stop olmayanlarda kâr/ortalama kayıp.
+- Sharpe: günlük portföy getirisi (sabit 10.000 $ tabanlı), yıllık √365 (yalnız kripto) veya √252.
+- İşlem türü: ortanca tutma süresi < 1 gün ise gün içi (≥300 işlem), değilse swing (≥100 işlem).
+- Bilinen sınırlar: (1) hayatta kalma yanlılığı — enstrüman listesi bugünün büyük/likit varlıkları; (2) Pine'daki kısmi çıkışlar, pyramiding ve seans/gün sonu kuralları motorda yok, ilgili betiklerin modül başlığında not edildi; (3) mevcut stratejilerle korelasyon `ortak/backtest_gunluk_getiri.csv` içindeki 4 seriyle (KGT, KMN ve karışımları) hesaplandı; (4) CRYPTOCAP:TOTAL verisi yok, BTC vekil kullanıldı.

@@ -1,0 +1,72 @@
+[
+ {
+  "kart_id": "swing__gatekeeper__landry",
+  "parametreler": {
+   "giris_alt": 0.618,
+   "giris_ust": 0.786,
+   "stop_seviyesi": 1.0,
+   "hedef_uzatma": 1.272
+  },
+  "cikis_ayarlari": null,
+  "not": "%61.8-78.6 geri çekilme bölgesi, bacak başlangıcı ötesi stop; hedef 1.272 uzantı (Hobbs önerisi). YAKLAŞIK: 10-11 gün süre ve 2 aylık uç şartı yok."
+ },
+ {
+  "kart_id": "swing__alis-satis-penceresi-60__crane",
+  "parametreler": {
+   "giris_alt": 0.55,
+   "giris_ust": 0.65
+  },
+  "cikis_ayarlari": null,
+  "not": "YAKLAŞIK: %60 geri çekilme penceresi ±; RD sinyali yok."
+ },
+ {
+  "kart_id": "swing__fibonacci-geri-cekilme-hedef__boxer",
+  "parametreler": {
+   "giris_alt": 0.382,
+   "giris_ust": 0.618,
+   "hedef_uzatma": 1.0
+  },
+  "cikis_ayarlari": null,
+  "not": "%38.2-61.8 bölgesi; hedef önceki tepe (uzantı oranları kartta yok)."
+ },
+ {
+  "kart_id": "swing__fibonacci-geri-cekilme__make",
+  "parametreler": {
+   "giris_alt": 0.46,
+   "giris_ust": 0.7
+  },
+  "cikis_ayarlari": null,
+  "not": "YAKLAŞIK: %46-70 bölgesinden dönüş (kartta short %70'ten); %35 seviyesinde çıkış kodlanmadı."
+ },
+ {
+  "kart_id": "swing__fibonacci-61-8-geri-cekilme__hogan",
+  "parametreler": {
+   "giris_alt": 0.55,
+   "giris_ust": 0.65
+  },
+  "cikis_ayarlari": null,
+  "not": "YAKLAŞIK: %61.8 çevresinde dönüş (kartta yalnız short, %23.6 hedef kodlanmadı)."
+ },
+ {
+  "kart_id": "swing__fibonacci-geri-cekilme__graham",
+  "parametreler": {
+   "giris_alt": 0.382,
+   "giris_ust": 0.5,
+   "stop_seviyesi": 0.618
+  },
+  "cikis_ayarlari": null,
+  "not": "%38.2-50 bölgesi; %61.8 tamamen geçilirse geçersiz -> stop seviyesi 0.618."
+ },
+ {
+  "kart_id": "swing__fib-geri-cekilme-alimi__johnson",
+  "parametreler": {
+   "giris_alt": 0.382,
+   "giris_ust": 0.618,
+   "stop_seviyesi": 0.786,
+   "hedef_uzatma": 1.0,
+   "short": false
+  },
+  "cikis_ayarlari": null,
+  "not": "%38.2-61.8 bölge, stop %78.6 altı, hedef önceki yüksek. Yalnız long."
+ }
+]

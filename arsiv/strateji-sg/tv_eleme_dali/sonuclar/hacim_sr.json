@@ -1,0 +1,50 @@
+{
+ "ad": "hacim_sr",
+ "pine_id": "CItvSvqk",
+ "tf": "4h",
+ "evren": [
+  "kripto",
+  "abd",
+  "bist",
+  "emtia"
+ ],
+ "neden": "Zaman dilimi belirtilmemiş; 4 saatlik. Pivotlar 10 bar sonra onaylanır (repaint yok).",
+ "olcut": {
+  "n": 2866,
+  "kar": 5429.006274321435,
+  "pf": 1.0613519329113832,
+  "sharpe": 0.46860724702218215,
+  "beklenti_R": 0.017867554450498112,
+  "kazanma": 0.6301465457083043,
+  "maxdd": 0.2176747406485646,
+  "dd_gun": 1350,
+  "cagr": 0.057316329394374366,
+  "calmar": 0.2633118074407699,
+  "psr": 0.90910597617183,
+  "tutma_gun": 4.333333333333333,
+  "ort_islem_getiri": 0.0009418625124852682,
+  "netR_toplam": 51.208411055127584,
+  "sharpe_egitim": 0.5965381414285447,
+  "sharpe_oos": 0.1882375113076912,
+  "oos_kar": 296.09516173705015,
+  "tur": "swing",
+  "pf_maliyet2x": 1.0097063717168566,
+  "komsu_n": 24,
+  "komsu_karda": 1.0,
+  "enstr_n": 37,
+  "enstr_karda": 0.5945945945945946,
+  "maks_kor": 0.28610793551580593
+ },
+ "kurallar": {
+  "1_islem_sayisi": true,
+  "2_maks_dusus<=20": false,
+  "3_beklenti>=0.15R": false,
+  "4a_kf>=1.3": false,
+  "4b_sharpe>=1": false,
+  "5_oos": false,
+  "6_maliyet2x_kf>=1.1": false,
+  "7_komsu>=70": true,
+  "8_enstr>=60": false
+ },
+ "gecti": false
+}

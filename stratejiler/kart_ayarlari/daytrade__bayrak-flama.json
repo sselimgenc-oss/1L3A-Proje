@@ -1,0 +1,10 @@
+[
+ {
+  "kart_id": "swing__bayrak-kirilim-retest__kratter",
+  "parametreler": {
+   "ust_tf": "4h"
+  },
+  "cikis_ayarlari": null,
+  "not": "H4 dürtü yönü (htf.py EMA20 uyumu) + M30 bayrak (1h). Retest girişi kodlanmadı, doğrudan kırılım kapanışı; kitap yalnız short örneği, long ayna varsayımı."
+ }
+]

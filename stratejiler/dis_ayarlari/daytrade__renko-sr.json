@@ -1,0 +1,16 @@
+[
+ {
+  "dis_id": "d11j:renko-tugla-donusu-basit:basit_donus",
+  "kaynak_dosya": "stratejiler/ek_kaynaklar/github_g2_kripto_bot.csv (renko)",
+  "parametreler": {
+   "renko_k": 1.0,
+   "rsi_alt": 100.0,
+   "stoch_alt": 100.0,
+   "tol_atr": 100.0,
+   "onay_n": 1,
+   "hedef_r": 2.0
+  },
+  "cikis_ayarlari": null,
+  "not": "YAKLAŞIK: RSI/StochRSI aşırı bölge ve S/R koşulları kapatılarak (eşikler 100, tolerans büyük) yalnız Renko tuğla dönüşü; tuğla boyu sabit değil ATR; stop swing, hedef 2R varsayım."
+ }
+]

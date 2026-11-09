@@ -1,0 +1,426 @@
+[
+  {
+    "kart_id": "scalp__cift-tepe-dip-macd-stokastik__ultimate-scalper",
+    "ad": "Çift Tepe / Çift Dip + MACD ve Stokastik Diverjansı",
+    "stil": "scalp",
+    "kaynak": {
+      "pdf": "Ultimate Scalper - Gün İçi İşlem Metodolojisi (496 sayfa) - @eseckal.pdf",
+      "sayfalar": [
+        102,
+        103,
+        104,
+        105
+      ]
+    },
+    "ozet": "Fiyat önceki tepeyi/dibi aynı seviyeye kadar test eder (çift tepe/dip); ikinci tepede MACD ve stokastik birincisinden düşük (dipte yüksek) kalırsa, MACD'yi aşağı (yukarı) büken ilk mumun kapanışında SAT (AL), stop ikinci tepenin 1 tik ötesine.",
+    "kategori": "formasyon",
+    "piyasa_rejimi": "herhangi",
+    "orijinal_piyasa": "vadeli",
+    "zaman_dilimi": {
+      "islem": "987-tick (veya 2000-tick; 3-5dk yardımcı)",
+      "ust_filtre": "3-5dk mum + hacim"
+    },
+    "gostergeler": [
+      {
+        "ad": "MACD",
+        "parametreler": {
+          "hizli": 5,
+          "yavas": 26,
+          "sinyal": 9
+        }
+      },
+      {
+        "ad": "Yavaş Stokastik",
+        "parametreler": {
+          "ayar": "görselde, kitapta metin yok"
+        }
+      },
+      {
+        "ad": "EMA",
+        "parametreler": {
+          "periyot": 50
+        }
+      }
+    ],
+    "long_giris": [
+      "Çift dip tamamlandı (fiyat önceki dibe eşit/biraz altı)",
+      "İkinci dipte MACD ve Stokastik birinci dibin MACD/Stokastik'inden daha YÜKSEK ve yüksek kalıyor",
+      "MACD'yi yukarı büken ilk mumun kapanışında AL (MACD yatay olmamalı, herhangi bir açıyla yukarı)"
+    ],
+    "short_giris": [
+      "Çift tepe tamamlandı",
+      "İkinci tepede MACD ve Stokastik birinci tepeden DÜŞÜK ve düşük kalıyor",
+      "MACD'yi aşağı büken ilk mumun kapanışında SAT"
+    ],
+    "stop_loss": "Long: ikinci dibin ulaştığı en düşük fiyatın 1 tik altı; short: ikinci tepe yükseğinin 1 tik üstü",
+    "kar_al": "Kitapta sistem için sabit hedef yok (yazar ortalama 1,5-2,5 puan/gün scalp hedefler); kısmi çıkış kuralı belirtilmemiş",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Piyasa saati: ilk ve son saatler daha iyi, öğlen yan kanal/yanlış sinyal",
+      "50 EMA yönü onay; 50 EMA'ya çok yakın fiyatta temkin",
+      "Floor trader pivot ve destek/direnç yakınlığı onay",
+      "Hacim 'son itme' çubukları ek onay"
+    ],
+    "pozisyon_risk": "Başlangıçta 1 sözleşme; günlük 50-200$ kâr hedefi, 200-250$ zarar limiti ile gün sonu.",
+    "iddia_edilen_performans": "Her kurulum günde en az 2-3 kez oluşur; ortalama 1,5-2,5 puan/gün (yazar)",
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Tepe/dip ve MACD/stokastik karşılaştırması kodlanabilir; tepe tanımı ve 'MACD büküldü' için küçük yorum; çıkış kuralı yok."
+    },
+    "belirsizlikler": [
+      "Çıkış/hedef kuralı yok",
+      "'Tepe' için swing penceresi tanımsız",
+      "Tik grafik gerektirir (987-tick)",
+      "Stokastik ayarları görselde"
+    ],
+    "uyumluluk_notu": "Orijinal: ES (E-mini S&P) 987/2000 tick grafiği; MACD(5,26,9)+Yavaş Stokastik(ayar görseli). Tik grafiği ≥5m'ye yaklaşık uyarlanabilir (3-5dk mum); ABD seans saatleri; forex/kripto uyarlama gerekir. Hacim kullanılan yardımcılar ayrı.",
+    "varyantlar": [
+      "Üçlü tepe/dip: üçüncü tepede MACD ve stokastik önceki tepelerden düşük, fiyat önceki ikisinden yüksek/eşit/düşük olabilir; aynı giriş",
+      "Küçük tik grafiği (233) hızlı varyant"
+    ],
+    "anahtar_kelimeler": [
+      "cift-tepe",
+      "cift-dip",
+      "macd",
+      "stokastik",
+      "diverjans",
+      "987-tick"
+    ]
+  },
+  {
+    "kart_id": "scalp__asiri-alim-satim-macd-donusu__ultimate-scalper",
+    "ad": "Aşırı Alım/Satım + MACD İlk Dönüş",
+    "stil": "scalp",
+    "kaynak": {
+      "pdf": "Ultimate Scalper - Gün İçi İşlem Metodolojisi (496 sayfa) - @eseckal.pdf",
+      "sayfalar": [
+        198,
+        199,
+        200,
+        201
+      ]
+    },
+    "ozet": "Stokastik 20'nin altına (80'in üstüne) girdikten sonra MACD'yi yukarı (aşağı) büken ilk mumun kapanışında AL (SAT); stop son uç fiyatın 1 tik ötesi.",
+    "kategori": "ortalamaya_donus",
+    "piyasa_rejimi": "herhangi",
+    "orijinal_piyasa": "vadeli",
+    "zaman_dilimi": {
+      "islem": "987-tick",
+      "ust_filtre": null
+    },
+    "gostergeler": [
+      {
+        "ad": "MACD",
+        "parametreler": {
+          "hizli": 5,
+          "yavas": 26,
+          "sinyal": 9
+        }
+      },
+      {
+        "ad": "Yavaş Stokastik",
+        "parametreler": {
+          "ayar": "görselde, kitapta metin yok"
+        }
+      }
+    ],
+    "long_giris": [
+      "Stokastik aşırı satım (<20) bölgesinde",
+      "MACD'yi yukarı büken İLK mum kapanışında AL"
+    ],
+    "short_giris": [
+      "Stokastik aşırı alım (>80)",
+      "MACD'yi aşağı büken İLK mum kapanışında SAT"
+    ],
+    "stop_loss": "Long: son ulaşılan en düşük fiyatın 1 tik altı; short: en yüksek 1 tik üstü",
+    "kar_al": "Kitapta yok",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Piyasa dönmeye hazır olmayabilir: ek onay sinyalleri kullan (pivot, son itme çubuğu)"
+    ],
+    "pozisyon_risk": "Başlangıçta 1 sözleşme; günlük 50-200$ kâr hedefi, 200-250$ zarar limiti ile gün sonu.",
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Giriş net; çıkış yok."
+    },
+    "belirsizlikler": [
+      "Çıkış kuralı yok",
+      "Stokastik ayarları görselde"
+    ],
+    "uyumluluk_notu": "Orijinal: ES (E-mini S&P) 987/2000 tick grafiği; MACD(5,26,9)+Yavaş Stokastik(ayar görseli). Tik grafiği ≥5m'ye yaklaşık uyarlanabilir (3-5dk mum); ABD seans saatleri; forex/kripto uyarlama gerekir. Hacim kullanılan yardımcılar ayrı.",
+    "varyantlar": [],
+    "anahtar_kelimeler": [
+      "asiri-alim",
+      "asiri-satim",
+      "macd",
+      "stokastik"
+    ]
+  },
+  {
+    "kart_id": "scalp__histogram-sistemi__ultimate-scalper",
+    "ad": "MACD Histogram Yön Değişimi",
+    "stil": "scalp",
+    "kaynak": {
+      "pdf": "Ultimate Scalper - Gün İçi İşlem Metodolojisi (496 sayfa) - @eseckal.pdf",
+      "sayfalar": [
+        216,
+        217,
+        218
+      ]
+    },
+    "ozet": "MACD histogramı sıfır çizgisinin bir tarafında bir dizi çubuktan sonra diğer tarafa geçtiğinde, geçişin ilk çubuğunun kapanışında piyasadan girilir (alt->üst: AL; üst->alt: SAT); yalnız histogram 'dalga' gibi düzgünken kullanılır.",
+    "kategori": "momentum",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "vadeli",
+    "zaman_dilimi": {
+      "islem": "987-tick",
+      "ust_filtre": null
+    },
+    "gostergeler": [
+      {
+        "ad": "MACD Histogram",
+        "parametreler": {
+          "hizli": 5,
+          "yavas": 26,
+          "sinyal": 9
+        }
+      }
+    ],
+    "long_giris": [
+      "Histogram sıfırın altında seri bitti, ilk çubuk sıfırın üstünde oluştu -> o çubuğun mumunun kapanışında AL"
+    ],
+    "short_giris": [
+      "Histogram sıfırın üstünde seri bitti, ilk çubuk sıfırın altında -> SAT"
+    ],
+    "stop_loss": "Kitapta yok",
+    "kar_al": "Kitapta yok",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Histogram kırık/eksik dişli gibi görünüyorsa kullanma",
+      "Çift tepe/dip veya OBOS sinyali yokken yedek giriş"
+    ],
+    "pozisyon_risk": "Başlangıçta 1 sözleşme; günlük 50-200$ kâr hedefi, 200-250$ zarar limiti ile gün sonu.",
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Giriş net; 'düzgün dalga' filtresi öznel; stop/hedef yok."
+    },
+    "belirsizlikler": [
+      "Stop ve hedef yok",
+      "'Düzgün dalga' tanımı yok"
+    ],
+    "uyumluluk_notu": "Orijinal: ES (E-mini S&P) 987/2000 tick grafiği; MACD(5,26,9)+Yavaş Stokastik(ayar görseli). Tik grafiği ≥5m'ye yaklaşık uyarlanabilir (3-5dk mum); ABD seans saatleri; forex/kripto uyarlama gerekir. Hacim kullanılan yardımcılar ayrı.",
+    "varyantlar": [],
+    "anahtar_kelimeler": [
+      "macd-histogram",
+      "sifir-cizgisi",
+      "gecis"
+    ]
+  },
+  {
+    "kart_id": "scalp__sapan-macd-ave-geri-cekilme__ultimate-scalper",
+    "ad": "Sapan (Slingshot): Trendde Geri Çekilme Stop Girişi",
+    "stil": "scalp",
+    "kaynak": {
+      "pdf": "Ultimate Scalper - Gün İçi İşlem Metodolojisi (496 sayfa) - @eseckal.pdf",
+      "sayfalar": [
+        220,
+        221,
+        225
+      ]
+    },
+    "ozet": "Trendde fiyat geri çekilirken yavaş MACD sinyal (MACDAve) çizgisi trend yönünde bozulmuyorsa, geri çekilme mumunun ters ucunun 1 tik ötesine stop emri konur ve her yeni geri çekilme mumunda emir bir kademe yaklaştırılır; stop geri çekilmenin ucuna.",
+    "kategori": "trend_takip",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "vadeli",
+    "zaman_dilimi": {
+      "islem": "987-tick (veya 3-5dk)",
+      "ust_filtre": null
+    },
+    "gostergeler": [
+      {
+        "ad": "MACD",
+        "parametreler": {
+          "hizli": 5,
+          "yavas": 26,
+          "sinyal": 9
+        }
+      },
+      {
+        "ad": "EMA",
+        "parametreler": {
+          "periyot": 50
+        }
+      }
+    ],
+    "long_giris": [
+      "Yükseliş trendi, fiyat geri çekiliyor, MACDAve (mavi) çizgisi yükselmeye devam ediyor",
+      "Geri çekilme mumunun en yükseğinin 1 tik üstüne buy-stop; her ardışık düşük geri çekilme mumunda stopu o mumun yükseğine taşı",
+      "Emir dolmadan MACDAve dönmeye başlarsa iptal"
+    ],
+    "short_giris": [
+      "Düşüş trendi, MACDAve aşağı",
+      "Geri çekilme mumunun en düşüğünün 1 tik altına sell-stop; ardışık daha yüksek mumlarda aşağı taşı"
+    ],
+    "stop_loss": "Long: geri çekilme sırasında ulaşılan en düşük fiyatın 1 tik altı; short: en yüksek 1 tik üstü",
+    "kar_al": "Kitapta yok (momentum devamı beklenir)",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Trend yönünde (50 EMA)",
+      "Öğrenci anketinde en sevilen sistem"
+    ],
+    "pozisyon_risk": "Başlangıçta 1 sözleşme; günlük 50-200$ kâr hedefi, 200-250$ zarar limiti ile gün sonu.",
+    "iddia_edilen_performans": "En çok kullanılan kurulum (öğrenci anketi)",
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Kural net: emir taşıma ve MACDAve dönüş filtresi kodlanabilir; hedef yok."
+    },
+    "belirsizlikler": [
+      "Hedef yok",
+      "Trend tanımı (50 EMA yönü?)"
+    ],
+    "uyumluluk_notu": "Orijinal: ES (E-mini S&P) 987/2000 tick grafiği; MACD(5,26,9)+Yavaş Stokastik(ayar görseli). Tik grafiği ≥5m'ye yaklaşık uyarlanabilir (3-5dk mum); ABD seans saatleri; forex/kripto uyarlama gerekir. Hacim kullanılan yardımcılar ayrı.",
+    "varyantlar": [],
+    "anahtar_kelimeler": [
+      "sapan",
+      "slingshot",
+      "macd-sinyal",
+      "geri-cekilme"
+    ]
+  },
+  {
+    "kart_id": "scalp__trend-cizgisi-kirilimi-kahve-molasi__ultimate-scalper",
+    "ad": "Trend Çizgisi Kırılımı (ve Açılış Öncesi 'Kahve Molası')",
+    "stil": "scalp",
+    "kaynak": {
+      "pdf": "Ultimate Scalper - Gün İçi İşlem Metodolojisi (496 sayfa) - @eseckal.pdf",
+      "sayfalar": [
+        233,
+        234,
+        239,
+        240
+      ]
+    },
+    "ozet": "Mükemmel hizalı en az 3 dip/tepeye çizilen trend çizgisi kırıldığında piyasa emri: yükseliş çizgisi aşağı kırılırsa SAT, düşüş çizgisi yukarı kırılırsa AL; stop önceki zirve/dibin 1 tik ötesi. Kahve Molası: aynı mantık, çizgi seans açılışından önce oluşur.",
+    "kategori": "kirilim",
+    "piyasa_rejimi": "herhangi",
+    "orijinal_piyasa": "vadeli",
+    "zaman_dilimi": {
+      "islem": "3-5dk mum (tik grafik de olur)",
+      "ust_filtre": null
+    },
+    "gostergeler": [
+      {
+        "ad": "Trend Çizgisi",
+        "parametreler": {
+          "min_nokta": 3,
+          "max_aci": "~45°"
+        }
+      }
+    ],
+    "long_giris": [
+      "Düşüş trendinde en az 3 tepeye (çapa dahil) çizilen çizgi yukarı kırılır -> AL",
+      "Çizgi 45°'den dik olmamalı, kusursuz hizalı olmalı"
+    ],
+    "short_giris": [
+      "Yükseliş trendinde en az 3 dibe çizilen çizgi aşağı kırılır -> SAT"
+    ],
+    "stop_loss": "Long: trendin önceki dibinin 1 tik altı; short: önceki zirvenin 1 tik üstü (veya konfor seviyesi)",
+    "kar_al": "Kitapta yok",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Sahte kırılma olursa çizgiyi yeniden çiz",
+      "Çizgi çapası son trend zirvesi/dibi",
+      "Kahve Molası: ES'de normal seans öncesi (5:30 PT) çizgi"
+    ],
+    "pozisyon_risk": "Başlangıçta 1 sözleşme; günlük 50-200$ kâr hedefi, 200-250$ zarar limiti ile gün sonu.",
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Trend çizgisi çizimi ('mükemmel hizalı') algoritmik zor; kaba yaklaşık zikzak+regresyon."
+    },
+    "belirsizlikler": [
+      "Hizalama toleransı yok",
+      "Stop esnek ('rahat edeceğin yer')",
+      "Hedef yok"
+    ],
+    "uyumluluk_notu": "Orijinal: ES (E-mini S&P) 987/2000 tick grafiği; MACD(5,26,9)+Yavaş Stokastik(ayar görseli). Tik grafiği ≥5m'ye yaklaşık uyarlanabilir (3-5dk mum); ABD seans saatleri; forex/kripto uyarlama gerekir. Hacim kullanılan yardımcılar ayrı.",
+    "varyantlar": [
+      "Kahve Molası: açılış öncesi çizgiyle açılış kırılımı"
+    ],
+    "anahtar_kelimeler": [
+      "trend-cizgisi",
+      "kirilim",
+      "kahve-molasi",
+      "acilis"
+    ]
+  },
+  {
+    "kart_id": "scalp__hacim-olasilik-testi-son-itme__ultimate-scalper",
+    "ad": "Hacim Olasılık Testi ve 'Son İtme' Çubuğu (yardımcı tersine dönüş sinyali)",
+    "stil": "scalp",
+    "kaynak": {
+      "pdf": "Ultimate Scalper - Gün İçi İşlem Metodolojisi (496 sayfa) - @eseckal.pdf",
+      "sayfalar": [
+        59,
+        60,
+        65,
+        66,
+        67
+      ]
+    },
+    "ozet": "Yeni zirve/dip denemesinde hacim önceki zirve/dip hacminden belirgin düşükse (VPT) seviyenin aşılamayıp dönme olasılığı yüksektir; yeni uç yaparken görülen çok büyük renkli hacim çubuğu (son yukarı/aşağı itme) hareketin sonuna işaret eder. Diğer sistemlerde onay filtresi olarak kullanılır.",
+    "kategori": "diger",
+    "piyasa_rejimi": "herhangi",
+    "orijinal_piyasa": "vadeli",
+    "zaman_dilimi": {
+      "islem": "1-3dk mum + hacim",
+      "ust_filtre": null
+    },
+    "gostergeler": [
+      {
+        "ad": "Hacim",
+        "parametreler": {
+          "ortalama": 5
+        }
+      }
+    ],
+    "long_giris": [
+      "Fiyat önceki dibi yeniden test eder ve hacim ilk dipten belirgin düşük VEYA yeni dipte çok büyük kırmızı hacim çubuğu (son aşağı itme) -> AL bakış"
+    ],
+    "short_giris": [
+      "Önceki zirve yeniden test, hacim düşük VEYA yeni zirvede çok büyük mavi çubuk (son yukarı itme) -> SAT bakış"
+    ],
+    "stop_loss": "Kitapta yok",
+    "kar_al": "Kitapta yok",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Ana sistemler için onay filtresi (tek başına işlem kuralı yok)"
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Göreli hacim karşılaştırması kodlanabilir ama tek başına giriş/çıkış kuralı yok."
+    },
+    "belirsizlikler": [
+      "Büyük çubuk eşiği yok",
+      "Giriş zamanlaması yok"
+    ],
+    "uyumluluk_notu": "Orijinal: ES (E-mini S&P) 987/2000 tick grafiği; MACD(5,26,9)+Yavaş Stokastik(ayar görseli). Tik grafiği ≥5m'ye yaklaşık uyarlanabilir (3-5dk mum); ABD seans saatleri; forex/kripto uyarlama gerekir. Hacim kullanılan yardımcılar ayrı. Hacim gerekir.",
+    "varyantlar": [],
+    "anahtar_kelimeler": [
+      "hacim",
+      "vpt",
+      "son-itme",
+      "onay"
+    ]
+  }
+]

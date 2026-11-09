@@ -1,0 +1,28 @@
+[
+ {
+  "kart_id": "scalp__bollinger40-rsi5-adx__stevenson",
+  "parametreler": {
+   "bb_periyot": 40,
+   "bb_sapma": 2.0,
+   "rsi_periyot": 5,
+   "rsi_esik": 30.0,
+   "adx_esik": 25.0,
+   "hedef_tipi": "karsi"
+  },
+  "cikis_ayarlari": null,
+  "not": "Stop son salınım yerine dışarı çıkış/tetik mumunun karşı ucu."
+ },
+ {
+  "kart_id": "scalp__bollinger40-rsi5-adx-kopya__carson",
+  "parametreler": {
+   "bb_periyot": 40,
+   "bb_sapma": 2.0,
+   "rsi_periyot": 5,
+   "rsi_esik": 30.0,
+   "adx_esik": 25.0,
+   "hedef_tipi": "karsi"
+  },
+  "cikis_ayarlari": null,
+  "not": "Stevenson kartının kopyası (aynı kural)."
+ }
+]

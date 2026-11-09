@@ -1,0 +1,52 @@
+[
+ {
+  "dis_id": "freqtrade:hlhb",
+  "kaynak_dosya": "arsiv/algo-sg/dis_kaynak/ft/strategies/hlhb.py",
+  "parametreler": {
+   "cikis_esik": 50.0,
+   "esik": 50.0,
+   "rsi_periyot": 50,
+   "short": false
+  },
+  "cikis_ayarlari": null,
+  "not": "YAKLAŞIK: RSI(50) 50'yi yukarı keserse long, aşağı kesince çıkış; EMA5/10 ve ADX>25 filtreleri yok."
+ },
+ {
+  "dis_id": "tv:B7MQqWes",
+  "kaynak_dosya": "arsiv/strateji-sg/tv/pine/B7MQqWes.pine",
+  "parametreler": {
+   "cikis_esik": 50.0,
+   "esik": 60.0,
+   "rsi_periyot": 14,
+   "short": true
+  },
+  "cikis_ayarlari": null,
+  "not": "YAKLAŞIK: RSI 60 yukarı/40 aşağı kesişimi long/short; MFI, EWO, hacim teyidi yok."
+ },
+ {
+  "dis_id": "tv:HDSdFMa3",
+  "kaynak_dosya": "arsiv/strateji-sg/tv/pine/HDSdFMa3.pine",
+  "parametreler": {
+   "cikis_esik": 50.0,
+   "esik": 50.0,
+   "rsi_periyot": 6,
+   "short": false
+  },
+  "cikis_ayarlari": null,
+  "not": "YAKLAŞIK: RSI(6) 50 yukarı kesişimi long, aşağı kesişimde çıkış; BB(200) alt bant şartı yok."
+ },
+ {
+  "dis_id": "kural:kurallar:Çoklu zaman dilimi RSI(30) günlük+haftalık >70, %8 stop",
+  "kaynak_dosya": "arsiv/algo-sg/dis_kaynak/kurallar.py",
+  "parametreler": {
+   "cikis_esik": 60.0,
+   "esik": 70.0,
+   "rsi_periyot": 30,
+   "short": false,
+   "ust_esik": 70.0,
+   "ust_tf": "1w"
+  },
+  "cikis_ayarlari": null,
+  "not": "YAKLAŞIK: RSI(30) günlük >70 ve haftalık RSI>70 long; %8 stop yerine aile stopu; çıkış eşiği 60 varsayım."
+ }
+]

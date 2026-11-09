@@ -1,0 +1,372 @@
+[
+ {
+  "kart_id": "swing__bas-omuz-kural-tabanli__tsinaslanidis",
+  "ad": "Baş ve Omuz (HS tepe/dip) Kural Tabanlı Tanıma ve İşlem",
+  "stil": "swing",
+  "kaynak": {
+   "pdf": "Algoritmik_Kalıp_Tanıma_için_Teknik_Analiz_-_Prodromos_E_Tsinaslanidis_ve_Achilleas_D_Zapr.pdf",
+   "sayfalar": [
+    91,
+    92,
+    93,
+    94,
+    110,
+    111
+   ]
+  },
+  "ozet": "Kayan pencere yerelleriyle P0..P3, T0..T2 noktaları bulunur; 5 sayısal koşul (baş omuzlardan yüksek, önceki trend, denge, simetri, boyun çizgisi kırılma zamanı) sağlanınca boyun çizgisi aşağı kırılınca short (ters formda long) açılır.",
+  "kategori": "formasyon",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+   "islem": "1d",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "Kayan pencere yerelleri (RW)",
+    "parametreler": {
+     "w": "simülasyonla seçilir; kitapta kesin sayı yok"
+    }
+   }
+  ],
+  "long_giris": [
+   "HS dibi: ayna koşullar sağlanır ve fiyat boyun çizgisini yukarı kırar",
+   "Koşul1: P2>max(P1,P3)'ın ayna; baş omuzlardan belirgin düşük",
+   "Koşul2: önceki düşüş trendi (P1<P0 ve T1<T0 ayna)",
+   "Koşul3 (denge): her omuz, diğer omuz ile komşu çukur arasındaki orta noktadan yüksek",
+   "Koşul4: t(P2)-t(P1) < 2.5*(t(P3)-t(P2)) ve tersi",
+   "Koşul5: kırılma süresi tB-t(T2) < t(P3)-t(P1)"
+  ],
+  "short_giris": [
+   "HS tepesi: koşullar: P2>max(P1,P3); P1>P0 ve T1>T0; omuz dengesi koşulu; simetri 2.5 kuralı; fiyat boyun çizgisini (T1-T2) aşağı kırar"
+  ],
+  "stop_loss": "Pozisyon kayıp %sl'ye (kullanıcı eşiği) ulaşınca veya fiyat n gün boyunca boyun çizgisinin tekrar üstünde kalırsa kapat",
+  "kar_al": "Fiyat hedefi = baş yüksekliği H (baş ile boyun çizgisi arası dikey mesafe) kadar boyun çizgisinden uzaklık; hedefe varınca kapat",
+  "iz_suren_stop": null,
+  "zaman_cikisi": "Zaman sınırı: omuz genişliği W kadar gün (kırılmadan sonra) hedefe varılmazsa kapat",
+  "filtreler": [
+   "Önceden trend"
+  ],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": "Akademik kitap; pratik getiri iddiası yok, kural tabanlı tanıma ve işlem sonrası fiyat davranışı istatistiksel olarak değerlendirilir (gerçek veride sonuçlar çoğunlukla rastgele seriyle benzer/zayıf).",
+  "kodlanabilirlik": {
+   "puan": 1,
+   "gerekce": "Koşullar sayısal ama w seçimi simülasyonlu, boyun çizgisi eğimli; kod Matlab (ek)."
+  },
+  "belirsizlikler": [
+   "Kayan pencere w değeri ve %sl/n eşiği kitapta sabitlenmemiş; tanıma çıktısı w'ye çok hassas.",
+   "Koşul3 matematiksel gösterim metin çevirisinde bozulmuş; omuz-denge koşulunun tam hali belirsiz.",
+   "Yerel tepe/dip tespiti: Kayan Pencere RW(w): bir nokta, kendinden önceki ve sonraki w gün içinde en yüksek (en düşük) ise yerel tepe (dip) sayılır."
+  ],
+  "uyumluluk_notu": "Günlük hisse (NASDAQ/NYSE) serilerinde akademik test; kural tabanlı tanıma tüm zaman dilimlerine uyarlanabilir (kayan pencere w ölçeklenir) ama yerel uç noktaları gecikmeli tespit eder. Hacim gerekmez. Kripto/emtia perpetual'larda çalışır.",
+  "varyantlar": [
+   "Pencere w ve hedef/zaman limiti her zikzak desen için tablo 5.3"
+  ],
+  "anahtar_kelimeler": [
+   "bas-omuz",
+   "formasyon",
+   "kayan-pencere",
+   "boyun-cizgisi"
+  ]
+ },
+ {
+  "kart_id": "swing__uclu-cift-tepe-dip-kural-tabanli__tsinaslanidis",
+  "ad": "Çift/Üçlü Tepe-Dip (DT/DB, TT/TB) Kural Tabanlı Kırılım",
+  "stil": "swing",
+  "kaynak": {
+   "pdf": "Algoritmik_Kalıp_Tanıma_için_Teknik_Analiz_-_Prodromos_E_Tsinaslanidis_ve_Achilleas_D_Zapr.pdf",
+   "sayfalar": [
+    100,
+    101,
+    102,
+    103
+   ]
+  },
+  "ozet": "Yaklaşık aynı seviyede (%4 fark) iki/üç tepe veya dip ve araya giren çukur/tepe destek/dirence yakınsa; destek/direnç kırılınca işlem. Çift tepe: derinlik en az %10.",
+  "kategori": "formasyon",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+   "islem": "1d",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "Kayan pencere yerelleri (RW)",
+    "parametreler": {
+     "w": null
+    }
+   }
+  ],
+  "long_giris": [
+   "Çift dip: |T1-T2|/min(T1,T2) < 0.04; (P1-T1)/T1 >= 0.10 (iki dip arası yükseliş >=%10); önceki düşüş trendi; fiyat P1 direncini yukarı kırar; kırılma sağ dipten çok geç olmamalı",
+   "Üçlü dip: 3 dip %4 içinde, ikinci dip ara pivot, simetri 2.5 oranı, destek direnç kırılımı"
+  ],
+  "short_giris": [
+   "Çift tepe: |P1-P2|/min(P1,P2) < 0.04; (P1-T1)/P1 >= 0.10; önceki yükseliş; fiyat T1 desteğini aşağı kırar",
+   "Üçlü tepe: 3 tepe %4 içinde, 2. tepe pivot değil, simetri 2.5, destek kırılımı"
+  ],
+  "stop_loss": "Kullanıcı eşiği %sl; n gün boyunca geri dönüşte kapat",
+  "kar_al": "Fiyat hedefi: TT için en yüksek tepe - en düşük dip kadar mesafe; DT/DB için desenin yüksekliği",
+  "iz_suren_stop": "Zaman sınırı: desen genişliği kadar gün",
+  "zaman_cikisi": null,
+  "filtreler": [
+   "Önceki trend"
+  ],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": "Akademik kitap; pratik getiri iddiası yok, kural tabanlı tanıma ve işlem sonrası fiyat davranışı istatistiksel olarak değerlendirilir (gerçek veride sonuçlar çoğunlukla rastgele seriyle benzer/zayıf).",
+  "kodlanabilirlik": {
+   "puan": 1,
+   "gerekce": "Eşikler sayısal ama w ve pivot seçimi belirsiz."
+  },
+  "belirsizlikler": [
+   "Çift tepe için %3/%4 (Bulkowski) alternatifi.",
+   "Hedef formülleri çeviri bozulması içeriyor."
+  ],
+  "uyumluluk_notu": "Günlük hisse (NASDAQ/NYSE) serilerinde akademik test; kural tabanlı tanıma tüm zaman dilimlerine uyarlanabilir (kayan pencere w ölçeklenir) ama yerel uç noktaları gecikmeli tespit eder. Hacim gerekmez. Kripto/emtia perpetual'larda çalışır.",
+  "varyantlar": [
+   "Üçlü tepe yerine HS olabilir (ikinci tepe pivotsa)"
+  ],
+  "anahtar_kelimeler": [
+   "cift-tepe",
+   "cift-dip",
+   "uclu-tepe",
+   "uclu-dip",
+   "formasyon"
+  ]
+ },
+ {
+  "kart_id": "swing__bayrak-flama-kama-kural-tabanli__tsinaslanidis",
+  "ad": "Bayrak, Flama ve Kama Kural Tabanlı Tanıma",
+  "stil": "swing",
+  "kaynak": {
+   "pdf": "Algoritmik_Kalıp_Tanıma_için_Teknik_Analiz_-_Prodromos_E_Tsinaslanidis_ve_Achilleas_D_Zapr.pdf",
+   "sayfalar": [
+    103,
+    104,
+    105,
+    106,
+    111
+   ]
+  },
+  "ozet": "Kısa pencere RW ile 4 art arda yerel + PIP ile önceki 3 yerel bulunur; bayrak (paralel trend çizgileri), flama (yakınsayan), kama (aynı yöne eğimli yakınsayan) sınırları kırılınca trend yönünde işlem.",
+  "kategori": "formasyon",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+   "islem": "1d",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "Kayan pencere yerelleri (RW)",
+    "parametreler": {
+     "w": "kısa"
+    }
+   },
+   {
+    "ad": "PIP (algısal önemli noktalar)",
+    "parametreler": {}
+   }
+  ],
+  "long_giris": [
+   "Boğa bayrağı/flaması/düşen kama: önceki güçlü yükseliş + son 4 yerel dar bir bant içinde; fiyat üst trend çizgisini yukarı kırar"
+  ],
+  "short_giris": [
+   "Ayı bayrağı/flaması/yükselen kama: önceki güçlü düşüş + son 4 yerel; fiyat alt trend çizgisini aşağı kırar"
+  ],
+  "stop_loss": "Kullanıcı eşiği %sl",
+  "kar_al": "Hedef: bayrak/flama için bayrak direğinin (önceki ana hareket) yüksekliği; kama için desenin başlangıç genişliği",
+  "iz_suren_stop": "Zaman sınırı: bayrak/flama ~20 işlem günü (4 hafta), kama 3 hafta-4 ay",
+  "zaman_cikisi": null,
+  "filtreler": [
+   "Önceden güçlü trend"
+  ],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": "Akademik kitap; pratik getiri iddiası yok, kural tabanlı tanıma ve işlem sonrası fiyat davranışı istatistiksel olarak değerlendirilir (gerçek veride sonuçlar çoğunlukla rastgele seriyle benzer/zayıf).",
+  "kodlanabilirlik": {
+   "puan": 1,
+   "gerekce": "Çok sayıda sayısal koşul ek 2'de; metinde kısmi ve parametre belirsiz."
+  },
+  "belirsizlikler": [
+   "Direk yüksekliği ve paralellik toleransı net değil.",
+   "Genişlik/zaman sınırları literatür ortalaması."
+  ],
+  "uyumluluk_notu": "Günlük hisse (NASDAQ/NYSE) serilerinde akademik test; kural tabanlı tanıma tüm zaman dilimlerine uyarlanabilir (kayan pencere w ölçeklenir) ama yerel uç noktaları gecikmeli tespit eder. Hacim gerekmez. Kripto/emtia perpetual'larda çalışır.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "bayrak",
+   "flama",
+   "kama",
+   "formasyon"
+  ]
+ },
+ {
+  "kart_id": "swing__islem-araligi-kirilimi-trb__tsinaslanidis",
+  "ad": "Trading Range Breakout (Destek/Direnç Kırılımı)",
+  "stil": "swing",
+  "kaynak": {
+   "pdf": "Algoritmik_Kalıp_Tanıma_için_Teknik_Analiz_-_Prodromos_E_Tsinaslanidis_ve_Achilleas_D_Zapr.pdf",
+   "sayfalar": [
+    66,
+    67,
+    68
+   ]
+  },
+  "ozet": "Direnç = son w günün en yüksek kapanışı; destek = en düşük kapanış. Fiyat dirence üstüne çıkarsa al, destek altına inerse sat; yüzde bant, zaman gecikmesi, stop ve hacim onayı filtreleri eklenebilir.",
+  "kategori": "kirilim",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+   "islem": "1d",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "Donchian (kapanış bazlı)",
+    "parametreler": {
+     "w": "kullanıcı seçer"
+    }
+   }
+  ],
+  "long_giris": [
+   "Kapanış > max(P[t-1]..P[t-w]) -> al"
+  ],
+  "short_giris": [
+   "Kapanış < min(P[t-1]..P[t-w]) -> sat"
+  ],
+  "stop_loss": "Kullanıcı eşiği (zarar durdurma pozisyonu)",
+  "kar_al": null,
+  "iz_suren_stop": null,
+  "zaman_cikisi": "Tutma süresi sabit gün sayısı (kitapta 1-10 gün analizi)",
+  "filtreler": [
+   "Yüzdelik bant filtresi",
+   "Zaman gecikmesi filtresi",
+   "Hacim onayı"
+  ],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": "Akademik kitap; pratik getiri iddiası yok, kural tabanlı tanıma ve işlem sonrası fiyat davranışı istatistiksel olarak değerlendirilir (gerçek veride sonuçlar çoğunlukla rastgele seriyle benzer/zayıf).",
+  "kodlanabilirlik": {
+   "puan": 3,
+   "gerekce": "Kural net; w ve filtre eşikleri kullanıcıya bırakılmış."
+  },
+  "belirsizlikler": [
+   "w ve filtre değerleri kitapta sabit değil."
+  ],
+  "uyumluluk_notu": "Günlük hisse (NASDAQ/NYSE) serilerinde akademik test; kural tabanlı tanıma tüm zaman dilimlerine uyarlanabilir (kayan pencere w ölçeklenir) ama yerel uç noktaları gecikmeli tespit eder. Hacim gerekmez. Kripto/emtia perpetual'larda çalışır.",
+  "varyantlar": [
+   "Brock vd. (1992) TRB ve De Zwart vd. (2009) formu"
+  ],
+  "anahtar_kelimeler": [
+   "trb",
+   "destek-direnc",
+   "kirilim",
+   "donchian"
+  ]
+ },
+ {
+  "kart_id": "swing__sma-kesisim-10-50-ve-teknik-kural-evreni__tsinaslanidis",
+  "ad": "İki SMA Kesişimi (10/50) ve Klasik Gösterge Kuralları",
+  "stil": "swing",
+  "kaynak": {
+   "pdf": "Algoritmik_Kalıp_Tanıma_için_Teknik_Analiz_-_Prodromos_E_Tsinaslanidis_ve_Achilleas_D_Zapr.pdf",
+   "sayfalar": [
+    154,
+    155,
+    156,
+    157,
+    158,
+    159,
+    160,
+    161,
+    162,
+    169,
+    170
+   ]
+  },
+  "ozet": "Kısa SMA uzun SMA'yı yukarı keserse long, aşağı keserse short. Aynı bölümde MACD(12,26,9) sinyal çizgisi kesişimi, RSI(14), Bollinger(20,2) dışına çıkış, Momentum(12) sıfır geçişi ve ROC kuralları akademik değerlendirme için tanımlanır.",
+  "kategori": "trend_takip",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+   "islem": "1d",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "SMA",
+    "parametreler": {
+     "kisa": 10,
+     "uzun": 50
+    }
+   },
+   {
+    "ad": "MACD",
+    "parametreler": {
+     "hizli": 12,
+     "yavas": 26,
+     "sinyal": 9
+    }
+   },
+   {
+    "ad": "RSI",
+    "parametreler": {
+     "periyot": 14
+    }
+   },
+   {
+    "ad": "Bollinger",
+    "parametreler": {
+     "periyot": 20,
+     "std": 2
+    }
+   },
+   {
+    "ad": "Momentum",
+    "parametreler": {
+     "periyot": 12
+    }
+   }
+  ],
+  "long_giris": [
+   "SMA(10) SMA(50)'yi yukarı keser -> long",
+   "MACD sinyal çizgisini yukarı keser -> long",
+   "RSI(14) aşırı satımdan çıkar (Wilder) -> long",
+   "Bollinger: fiyat alt bandı aşağıdan yukarı geçer -> long",
+   "Momentum(12) sıfırı yukarı keser -> long"
+  ],
+  "short_giris": [
+   "SMA(10) SMA(50)'yi aşağı keser -> short",
+   "MACD sinyal çizgisini aşağı keser -> short",
+   "RSI aşırı alımdan çıkar -> short",
+   "Bollinger: fiyat üst bandı yukarıdan aşağı geçer -> short",
+   "Momentum(12) sıfırı aşağı keser -> short"
+  ],
+  "stop_loss": null,
+  "kar_al": null,
+  "iz_suren_stop": null,
+  "zaman_cikisi": "Sabit tutma süresi (kitap 1,2,5,10 gün vb. test ediyor)",
+  "filtreler": [],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": "Kitap: 1.700-39.832 kurallık evren literatür taraması (Sullivan vd.); çoğu kural işlem maliyetiyle kârsız; örneklem içi iyi görünenler aşırı uyum.",
+  "kodlanabilirlik": {
+   "puan": 2,
+   "gerekce": "Kuralların çoğu standart; RSI/Bollinger eşikleri ve çıkış kitapta ayrıca gösterilir."
+  },
+  "belirsizlikler": [
+   "Çıkış kuralı yok (sabit tutma)",
+   "RSI eşikleri kitapta açıkça yazılmamış (30/70 varsayılır)"
+  ],
+  "uyumluluk_notu": "Günlük hisse (NASDAQ/NYSE) serilerinde akademik test; kural tabanlı tanıma tüm zaman dilimlerine uyarlanabilir (kayan pencere w ölçeklenir) ama yerel uç noktaları gecikmeli tespit eder. Hacim gerekmez. Kripto/emtia perpetual'larda çalışır.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "sma-kesisim",
+   "macd",
+   "rsi",
+   "bollinger",
+   "momentum",
+   "kural-evreni"
+  ]
+ }
+]

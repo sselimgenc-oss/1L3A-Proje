@@ -1,0 +1,39 @@
+[
+  {
+    "kart_id": "daytrade__rsi-hacim-osilator-dip__singhal",
+    "parametreler": {
+      "rsi_periyot": 14,
+      "alt": 30.0,
+      "mod": "bolgede",
+      "trend_ma": 100,
+      "vo_esik": 30.0,
+      "cikis_rsi": 70.0
+    },
+    "cikis_ayarlari": null,
+    "not": "Trend yönünde RSI 30 + Hacim Osilatörü <= -%30 ('yakın' tolerans yok); çıkış RSI 70; VO periyotları kartta yok (EMA5/20)."
+  },
+  {
+    "kart_id": "scalp__rsi-aralik-ticareti-1dk__schroder",
+    "parametreler": {
+      "rsi_periyot": 14,
+      "alt": 30.0,
+      "mod": "bolgede",
+      "trend_ma": 0
+    },
+    "cikis_ayarlari": null,
+    "not": "Periyot/eşik kartta yok (14, 30/70); işlem aralığı sınırı kodlanmadı."
+  },
+  {
+    "kart_id": "scalp__rsi7-aralik__stevenson",
+    "parametreler": {
+      "rsi_periyot": 7,
+      "alt": 30.0,
+      "mod": "geri_cikis",
+      "trend_ma": 0,
+      "adx_max": 25.0,
+      "cikis_rsi": 70.0
+    },
+    "cikis_ayarlari": null,
+    "not": "ADX<25 + RSI(7) 30'u yukarı kesme; destek/direnç yakınlığı kodlanmadı; çıkış RSI 70."
+  }
+]

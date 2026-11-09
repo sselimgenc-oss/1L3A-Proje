@@ -1,0 +1,48 @@
+{
+ "ad": "vix_macd",
+ "pine_id": "mfw4fJST",
+ "tf": "1d",
+ "evren": [
+  "endeks",
+  "abd"
+ ],
+ "neden": "Günlük; endeks ETF ve ABD hisseleri (VIX ABD volatilitesi).",
+ "olcut": {
+  "n": 1656,
+  "kar": 14133.965818115417,
+  "pf": 1.6211236509150666,
+  "sharpe": 0.8878243092349336,
+  "beklenti_R": 0.3105618254575334,
+  "kazanma": 0.5,
+  "maxdd": 0.12349752983868835,
+  "dd_gun": 721,
+  "cagr": 0.07767071976793338,
+  "calmar": 0.6289252899988069,
+  "psr": 0.9990221277991977,
+  "tutma_gun": 12.5,
+  "ort_islem_getiri": 0.010242004216025665,
+  "netR_toplam": 514.2903829576753,
+  "sharpe_egitim": 0.9420977080877713,
+  "sharpe_oos": 0.7710555299920769,
+  "oos_kar": 3475.5160887665625,
+  "tur": "swing",
+  "pf_maliyet2x": 1.5588623078885455,
+  "komsu_n": 14,
+  "komsu_karda": 1.0,
+  "enstr_n": 12,
+  "enstr_karda": 1.0,
+  "maks_kor": 0.09151122827041809
+ },
+ "kurallar": {
+  "1_islem_sayisi": true,
+  "2_maks_dusus<=20": true,
+  "3_beklenti>=0.15R": true,
+  "4a_kf>=1.3": true,
+  "4b_sharpe>=1": false,
+  "5_oos": true,
+  "6_maliyet2x_kf>=1.1": true,
+  "7_komsu>=70": true,
+  "8_enstr>=60": true
+ },
+ "gecti": false
+}

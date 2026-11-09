@@ -1,0 +1,183 @@
+[
+  {
+    "kart_id": "scalp__haber-sonrasi-scalp__binary-forex-brokers",
+    "ad": "Haber Sonrası Volatilite Scalp (10 dk sonra)",
+    "stil": "scalp",
+    "kaynak": {
+      "pdf": "Forex Piyasasında Nasıl Scalp Yapılır - Binary Forex Brokers (27 sayfa) - @eseckal.pdf",
+      "sayfalar": [
+        15,
+        16,
+        17
+      ]
+    },
+    "ozet": "Önemli haber yayınından hemen önce/sırada işlem yapılmaz; ~10 dk sonra likidite döner, spread normalleşince yön belirlenip dar stop ve 2:1 hedefle işlem açılır (örnek: 4 EURUSD saatinde 1.4250 short, SL 1.4255, TP 1.4240).",
+    "kategori": "momentum",
+    "piyasa_rejimi": "volatil",
+    "orijinal_piyasa": "forex",
+    "zaman_dilimi": {
+      "islem": "1m-5m",
+      "ust_filtre": null
+    },
+    "gostergeler": [
+      {
+        "ad": "Haber takvimi",
+        "parametreler": {}
+      }
+    ],
+    "long_giris": [
+      "Haber yayınlandıktan ~10 dk sonra spread normale döner",
+      "Fiyat haber yönünde devam ediyorsa yön trendiyle AL"
+    ],
+    "short_giris": [
+      "Haber yönü aşağıysa SAT"
+    ],
+    "stop_loss": "Spread + birkaç pip (örnek: 5 pip)",
+    "kar_al": "Stopun 2 katı (örnek 10 pip)",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Haberin tam anına işlem yapma"
+    ],
+    "pozisyon_risk": "Sabit işlem boyutu; kaldıraç düşük",
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 0,
+      "gerekce": "Yön ve giriş tanımı yok; sadece çerçeve ve örnek."
+    },
+    "belirsizlikler": [
+      "Giriş sinyali tanımsız",
+      "Haber takvimi verisi gerekir"
+    ],
+    "uyumluluk_notu": "Haber takvimi gerekir; 5m bar yeterince ince olmayabilir; forex'e özgü.",
+    "varyantlar": [],
+    "anahtar_kelimeler": [
+      "haber",
+      "volatilite",
+      "spread",
+      "scalp"
+    ]
+  },
+  {
+    "kart_id": "scalp__aralik-bayrak-ucta-donus__binary-forex-brokers",
+    "ad": "Aralık / Bayrak Kenarı Dönüş Scalp (3. dokunuş)",
+    "stil": "scalp",
+    "kaynak": {
+      "pdf": "Forex Piyasasında Nasıl Scalp Yapılır - Binary Forex Brokers (27 sayfa) - @eseckal.pdf",
+      "sayfalar": [
+        17,
+        18,
+        19,
+        20
+      ]
+    },
+    "ozet": "Yatay aralıkta (veya bayrak/üçgen konsolidasyonunda) üst sınırda satış, alt sınırda alış; kırılma olasılığı nedeniyle sınıra gelince hemen değil, fiyat dönmeye başladıktan sonra girilir. Hedef karşı sınır; kırılma olursa çıkılır.",
+    "kategori": "ortalamaya_donus",
+    "piyasa_rejimi": "yatay",
+    "orijinal_piyasa": "forex",
+    "zaman_dilimi": {
+      "islem": "1m-5m",
+      "ust_filtre": "1s (aralık teyidi)"
+    },
+    "gostergeler": [
+      {
+        "ad": "Destek/Direnç",
+        "parametreler": {}
+      }
+    ],
+    "long_giris": [
+      "Fiyat aralığın alt sınırına inip yeniden yükselmeye başlar (3. dokunuş tercih) -> AL"
+    ],
+    "short_giris": [
+      "Fiyat üst sınıra çıkıp geri dönmeye başlar -> SAT"
+    ],
+    "stop_loss": "Aralığın dışı (kırılırsa çık)",
+    "kar_al": "Aralığın karşı sınırı / küçük sabit pip",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Saatlik grafikte genel aktivite sakin olmalı",
+      "Güçlü trend yönündeki bayraklarda kırılma beklenir: dikkat"
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Aralık/bayrak çizimi ve 'dönmeye başlama' öznel."
+    },
+    "belirsizlikler": [
+      "Mum/dönüş tanımı yok",
+      "Stop mesafesi yok"
+    ],
+    "uyumluluk_notu": "Forex; 1-5m; ≥5m'ye uyar.",
+    "varyantlar": [
+      "Üçgen ve diğer konsolidasyonlar"
+    ],
+    "anahtar_kelimeler": [
+      "aralik",
+      "bayrak",
+      "ucgen",
+      "donus"
+    ]
+  },
+  {
+    "kart_id": "scalp__fibonacci-uzanti-trend-scalp__binary-forex-brokers",
+    "ad": "Fibonacci Uzantılarıyla Trend Scalp (61.8/100/161.8)",
+    "stil": "scalp",
+    "kaynak": {
+      "pdf": "Forex Piyasasında Nasıl Scalp Yapılır - Binary Forex Brokers (27 sayfa) - @eseckal.pdf",
+      "sayfalar": [
+        20,
+        21,
+        22
+      ]
+    },
+    "ozet": "Ani bir trend hareketinin ilk momentum kontrolünden (ilk karşı mum) sonra uzantı çizilir; fiyat 61.8, 100 ve 161.8 uzantı seviyelerinde toparlanma/direnç gösterir. Trend yönünde seviyelerde alım-satım yapılır ve seviyeler arasında scalp alınır; geri dönüşte beklenir.",
+    "kategori": "trend_takip",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "forex",
+    "zaman_dilimi": {
+      "islem": "5m",
+      "ust_filtre": null
+    },
+    "gostergeler": [
+      {
+        "ad": "Fibonacci Uzantı",
+        "parametreler": {
+          "seviyeler": "61.8, 100, 161.8"
+        }
+      }
+    ],
+    "long_giris": [
+      "Yükseliş: fiyat bir uzantı seviyesinden destek bulur ve toparlanır -> AL (trend yönünde)"
+    ],
+    "short_giris": [
+      "Düşüş: fiyat uzantı seviyesinden direnç görür -> SAT"
+    ],
+    "stop_loss": "Uzantı seviyesinin ötesi (kırılırsa dur, netlik bekle)",
+    "kar_al": "Bir sonraki uzantı seviyesi",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Trend belirsizse işlemi bırak"
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Seviye hesaplanabilir (swing seç); giriş onayı ve stop yok."
+    },
+    "belirsizlikler": [
+      "Başlangıç/bitiş noktası seçimi öznel",
+      "Onay tetikleyicisi yok"
+    ],
+    "uyumluluk_notu": "Forex 5m; ≥5m uyar; hacim gerekmez.",
+    "varyantlar": [],
+    "anahtar_kelimeler": [
+      "fibonacci",
+      "uzanti",
+      "trend",
+      "161-8"
+    ]
+  }
+]

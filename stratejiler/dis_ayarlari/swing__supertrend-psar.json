@@ -1,0 +1,167 @@
+[
+ {
+  "dis_id": "freqtrade:CustomStoplossWithPSAR",
+  "kaynak_dosya": "arsiv/algo-sg/dis_kaynak/ft/strategies/CustomStoplossWithPSAR.py",
+  "parametreler": {
+   "gosterge": "psar",
+   "psar_adim": 0.02,
+   "psar_maks": 0.2
+  },
+  "cikis_ayarlari": null,
+  "not": "Birleşik ayar, dis_id'ler: freqtrade:CustomStoplossWithPSAR, jesuistm:jesuistm:JT_Parabolic_SAR. [freqtrade:CustomStoplossWithPSAR] PSAR yön değişimi girişi/stop çizgisi. | [jesuistm:jesuistm:JT_Parabolic_SAR] PSAR yön değişiminde ters pozisyon."
+ },
+ {
+  "dis_id": "tv:3wdQu7P3",
+  "kaynak_dosya": "arsiv/strateji-sg/tv/pine/3wdQu7P3.pine",
+  "parametreler": {
+   "atr_periyot": 14,
+   "carpan": 1.0,
+   "gosterge": "supertrend"
+  },
+  "cikis_ayarlari": null,
+  "not": "YAKLAŞIK: AlphaTrend (ATR14 x1 izleyen çizgi, MFI yön seçici) = ATR izleyen çizgi dönüşü; MFI ayrımı yok."
+ },
+ {
+  "dis_id": "tv:DG9ePZuk",
+  "kaynak_dosya": "arsiv/strateji-sg/tv/pine/DG9ePZuk.pine",
+  "parametreler": {
+   "atr_periyot": 10,
+   "carpan": 3.0,
+   "gosterge": "supertrend"
+  },
+  "cikis_ayarlari": null,
+  "not": "Birleşik ayar, dis_id'ler: tv:DG9ePZuk, tv:DwdC6FT4, tv:P5Gu6F8k, tv:WpJ5ym7u, tv:mpjNqADq, tv:nHGK4Qtp, kural:kurallar:SuperTrend(10,3) long. [tv:DG9ePZuk] Supertrend(10,3) dönüşü. #192, #150, #155, #190, #151 aynı parametre; farkları: bir mum gecikme, %8 stop, pivot merkezi, skor filtresi (uygulanmadı). | [tv:DwdC6FT4] YAKLAŞIK: Pivot Point SuperTrend (ATR10 x3) -> klasik Supertrend(10,3); pivot merkez çizgisi yok. | [tv:P5Gu6F8k] SuperTrend (ATR10 x3), yön dönüşünde giriş; hep piyasada. | [tv:WpJ5ym7u] YAKLAŞIK: Pivot SuperTrend ATR10 x3 -> Supertrend(10,3); KivancST ve SMA20 yönü yok. | [tv:mpjNqADq] YAKLAŞIK: Supertrend(10,3) dönüşü; rejim çarpanı, 5 bileşenli skor ve EMA50 uyumu yok. | [tv:nHGK4Qtp] YAKLAŞIK: PMax (EMA10 ± ATR10x3) -> Supertrend(10,3); EMA(hl2,10) merkezi yok. | [kural:kurallar:SuperTrend(10,3) long] SuperTrend(10,3) yukarı dönünce long, aşağı dönünce çıkış (aile ters yönde de girer)."
+ },
+ {
+  "dis_id": "tv:Hrc7Gfqe",
+  "kaynak_dosya": "arsiv/strateji-sg/tv/pine/Hrc7Gfqe.pine",
+  "parametreler": {
+   "atr_periyot": 28,
+   "carpan": 1.2,
+   "gosterge": "supertrend"
+  },
+  "cikis_ayarlari": null,
+  "not": "YAKLAŞIK: McGinley bantlı ATR(28)x1.2 izleyen çizgi -> Supertrend(28,1.2); McGinley merkezi yok; 1R/2R/3R kademeli kâr alma yok."
+ },
+ {
+  "dis_id": "tv:NfihxKxr",
+  "kaynak_dosya": "arsiv/strateji-sg/tv/pine/NfihxKxr.pine",
+  "parametreler": {
+   "atr_periyot": 10,
+   "carpan": 2.0,
+   "gosterge": "supertrend"
+  },
+  "cikis_ayarlari": null,
+  "not": "Birleşik ayar, dis_id'ler: tv:NfihxKxr, tv:OUOx3rYT. [tv:NfihxKxr] YAKLAŞIK: Supertrend(10,2) dönüşü; hacim ve SMA50 filtresi yok; %10 hedef/%5 stop yerine çizgi stopu. | [tv:OUOx3rYT] YAKLAŞIK: EMA21±2 ATR izleyen bant dönüşü -> Supertrend(10,2); merkez EMA21 yerine hl2."
+ },
+ {
+  "dis_id": "tv:NgSIfKQx",
+  "kaynak_dosya": "arsiv/strateji-sg/tv/pine/NgSIfKQx.pine",
+  "parametreler": {
+   "atr_periyot": 10,
+   "carpan": 1.8,
+   "gosterge": "supertrend"
+  },
+  "cikis_ayarlari": null,
+  "not": "YAKLAŞIK: Supertrend(10,1.8); EMA200 yön filtresi yok."
+ },
+ {
+  "dis_id": "tv:TbK1rB5B",
+  "kaynak_dosya": "arsiv/strateji-sg/tv/pine/TbK1rB5B.pine",
+  "parametreler": {
+   "atr_periyot": 10,
+   "carpan": 1.75,
+   "gosterge": "supertrend"
+  },
+  "cikis_ayarlari": null,
+  "not": "YAKLAŞIK: trend rejiminde çarpan 1.75; ADX rejim ayrımı ve yatayda giriş kapatma yok."
+ },
+ {
+  "dis_id": "tv:VuYM89Tw",
+  "kaynak_dosya": "arsiv/strateji-sg/tv/pine/VuYM89Tw.pine",
+  "parametreler": {
+   "atr_periyot": 480,
+   "carpan": 14.0,
+   "gosterge": "supertrend"
+  },
+  "cikis_ayarlari": null,
+  "not": "YAKLAŞIK: Grover Llorens Activator ATR(480)x14 izleyen çizgi -> Supertrend(480,14)."
+ },
+ {
+  "dis_id": "tv:dxhgQwyI",
+  "kaynak_dosya": "arsiv/strateji-sg/tv/pine/dxhgQwyI.pine",
+  "parametreler": {
+   "atr_periyot": 14,
+   "carpan": 3.5,
+   "gosterge": "supertrend"
+  },
+  "cikis_ayarlari": null,
+  "not": "YAKLAŞIK: Supertrend(14,3.5); EMA200, ADX>=25 ve DI yön filtresi yok."
+ },
+ {
+  "dis_id": "tv:lDGmh7ou",
+  "kaynak_dosya": "arsiv/strateji-sg/tv/pine/lDGmh7ou.pine",
+  "parametreler": {
+   "atr_periyot": 10,
+   "carpan": 1.0,
+   "gosterge": "supertrend"
+  },
+  "cikis_ayarlari": null,
+  "not": "YAKLAŞIK: UT Bot v2: ATR(10) x1 izleyen stop çizgisi, fiyat kesince yön değiştirir; kaynakta kaynak=close, burada hl2 merkezli."
+ },
+ {
+  "dis_id": "tv:n9ty3SVh",
+  "kaynak_dosya": "arsiv/strateji-sg/tv/pine/n9ty3SVh.pine",
+  "parametreler": {
+   "atr_periyot": 15,
+   "carpan": 9.1,
+   "gosterge": "supertrend"
+  },
+  "cikis_ayarlari": null,
+  "not": "Supertrend(ATR15 x9.1) dönüşü; hep piyasada."
+ },
+ {
+  "dis_id": "tv:6zYF9Xts",
+  "kaynak_dosya": "arsiv/strateji-sg/tv_eleme_dali/pine/6zYF9Xts.pine",
+  "parametreler": {
+   "atr_periyot": 16,
+   "carpan": 3.11,
+   "gosterge": "supertrend"
+  },
+  "cikis_ayarlari": null,
+  "not": "Supertrend(16,3.11) dönüşü; zaman filtresi yok."
+ },
+ {
+  "dis_id": "d11j:atr-chandelier-nrtr-donus:chandelier22_3",
+  "kaynak_dosya": "stratejiler/ek_kaynaklar/github_g2_kripto_bot.csv (ATR_MA, ATR_ADX); github_g5_mt_pine.csv (CEZLSMA, Chandelier Exit, NRTR, EA31337 ATR MA Trend)",
+  "parametreler": {
+   "gosterge": "chandelier",
+   "ch_periyot": 22,
+   "ch_carpan": 3.0
+  },
+  "cikis_ayarlari": null,
+  "not": "Chandelier Exit: 22 kapanış zirvesi - 3*ATR22, yalnız yükselen çizgi, kapanışla dönüş. ZLSMA(50)/HA süzgeci kodlanmadı."
+ },
+ {
+  "dis_id": "d11j:atr-chandelier-nrtr-donus:nrtr_2yuzde",
+  "kaynak_dosya": "stratejiler/ek_kaynaklar/github_g2_kripto_bot.csv (ATR_MA, ATR_ADX); github_g5_mt_pine.csv (CEZLSMA, Chandelier Exit, NRTR, EA31337 ATR MA Trend)",
+  "parametreler": {
+   "gosterge": "nrtr",
+   "nrtr_yuzde": 0.02
+  },
+  "cikis_ayarlari": null,
+  "not": "NRTR: en yüksek kapanıştan %2 izleyen çizgi, kapanışla dönüş (ilk 20 bar sinyal yok)."
+ },
+ {
+  "dis_id": "d11j:atr-chandelier-nrtr-donus:ha_atr_ma",
+  "kaynak_dosya": "stratejiler/ek_kaynaklar/github_g2_kripto_bot.csv (ATR_MA, ATR_ADX); github_g5_mt_pine.csv (CEZLSMA, Chandelier Exit, NRTR, EA31337 ATR MA Trend)",
+  "parametreler": {
+   "gosterge": "ha_atr",
+   "ch_periyot": 22,
+   "ha_ma": 22,
+   "ha_yarim": 0.5
+  },
+  "cikis_ayarlari": null,
+  "not": "YAKLAŞIK: Heikin-Ashi kapanış SMA22 +/- 0.5*ATR22 bandının dışına kapanışla dönüş (ATR_MA); ATR_ADX çarpan formülü belirsiz -> kodlanmadı."
+ }
+]

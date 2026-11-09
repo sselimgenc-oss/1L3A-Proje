@@ -1,0 +1,17 @@
+[
+ {
+  "dis_id": "d11j:hacim-patlamali-48-mum-zirve-kirilimi:nfi_pump_dump",
+  "kaynak_dosya": "stratejiler/ek_kaynaklar/github_g1_freqtrade.csv (NFI pump/dump)",
+  "parametreler": {
+   "kirilim_ref": "n_mum_zirve",
+   "zirve_n": 48,
+   "govde_yuzde": 0.2,
+   "hacim_k": 4.0,
+   "yonler": "ls",
+   "gun_sonu": 0,
+   "hedef_r": 2.0
+  },
+  "cikis_ayarlari": null,
+  "not": "YAKLAŞIK: patlama mumunda 48 mum zirvesini ilk kez yukarı kırma + yeşil gövde >%0.2 + üst yarı kapanış (long); aynası short. Hacim eşiği tek (4x); 24s getiri tavanı ve günlük ROC kodlanmadı. 15m TF."
+ }
+]

@@ -1,6 +1,6 @@
 [
   {
-    "kart_id": "scalp__superscalp-vsa__holmes",
+    "kart_id": "scalp__superscalp-vsa__holmes__scalp-stratejisi",
     "ad": "Superscalp - çok zaman dilimi hizalı VSA güç/zayıflık onayı",
     "stil": "scalp",
     "kaynak": {"pdf": "Gavin_Holmes_Scalp_Stratejisi_24_sayfa.pdf", "sayfalar": [3, 4, 5, 6, 7, 8, 9, 10, 11, 15, 16, 23]},
@@ -57,7 +57,7 @@
     "anahtar_kelimeler": ["vsa", "wyckoff", "hacim-yayılımı", "trend-hizalama", "superscalp", "onay-çubuğu", "avize-stop", "akıllı-para"]
   },
   {
-    "kart_id": "scalp__ultra-hacim-seviye__holmes",
+    "kart_id": "scalp__ultra-hacim-seviye__holmes__scalp-stratejisi",
     "ad": "Ultra yüksek hacimli bar seviyeleri ve düşük hacim tetikleyicisi",
     "stil": "scalp",
     "kaynak": {"pdf": "Gavin_Holmes_Scalp_Stratejisi_24_sayfa.pdf", "sayfalar": [12, 13, 14]},

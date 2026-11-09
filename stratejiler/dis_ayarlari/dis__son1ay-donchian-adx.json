@@ -1,0 +1,9 @@
+[
+ {
+  "cikis_ayarlari": {"atr_iz_suren_k": 3.0},
+  "dis_id": "son1ay:delta-strategy.py-varsayilan",
+  "kaynak_dosya": "EPFRAGHU/delta-paper-bot strategy.py Params varsayılanları (2026-11-07 okundu)",
+  "not": "Kaynak kodundaki eski varsayılan: 20/10 kanal, ATR stop 2.0 (params.json'daki 40/20/2.5 bizim sınıf varsayılanı).",
+  "parametreler": {"giris_n": 20, "cikis_n": 10, "atr_stop": 2.0}
+ }
+]

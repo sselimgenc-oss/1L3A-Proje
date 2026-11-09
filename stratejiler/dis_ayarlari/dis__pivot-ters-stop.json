@@ -1,0 +1,16 @@
+[
+ {
+  "dis_id": "d11j:pivot-onayli-ters-stop:sol4_sag2_olusum",
+  "kaynak_dosya": "stratejiler/ek_kaynaklar/github_g2_kripto_bot.csv (customPivotJbk)",
+  "parametreler": {
+   "sol": 4,
+   "sag": 2,
+   "giris": "olusum",
+   "stop_yuzde": 5.0,
+   "hedef_yuzde": 4.0,
+   "short": true
+  },
+  "cikis_ayarlari": null,
+  "not": "Onaylı pivot tepe oluşunca long (stop %5, hedef %4), pivot dip oluşunca short; pivot sol 4 sağ 2 (giriş onay mumunda)."
+ }
+]

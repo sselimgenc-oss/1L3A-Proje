@@ -1,0 +1,81 @@
+kimlik,tur,kol,pencere_hafta,metrik,p05,p25,p50,p75,p95,alarm_yonu,alarm_esigi,oran_hesaplanabilir,havuz_gun,n_segment,blok_gun,n_orneklem,kaynak
+dis__dual-thrust|ETHUSDT|30m,strateji,tek_grafik,4,net_getiri,-0.022495203411024726,-0.00726105697404511,0.0024558330222297364,0.015484170694931576,0.04817374823563486,,,1.0,2080,2,14,10000,wf_oos:k3_kripto+kilit
+dis__dual-thrust|ETHUSDT|30m,strateji,tek_grafik,4,islem_sayisi,2.0,3.0,4.0,6.0,8.0,,,1.0,2080,2,14,10000,wf_oos:k3_kripto+kilit
+dis__dual-thrust|ETHUSDT|30m,strateji,tek_grafik,4,max_dusus,0.0,0.0036203665260681195,0.010396308305878255,0.015000818786219616,0.027575684496534938,,,1.0,2080,2,14,10000,wf_oos:k3_kripto+kilit
+dis__dual-thrust|ETHUSDT|30m,strateji,tek_grafik,4,kazanma_orani,0.0,0.3333333333333333,0.5,0.6666666666666666,1.0,,,0.9934,2080,2,14,10000,wf_oos:k3_kripto+kilit
+dis__dual-thrust|ETHUSDT|30m,strateji,tek_grafik,8,net_getiri,-0.03118014645923222,-0.008686823093100093,0.00776447467195629,0.028379018419586288,0.0754821000746958,alt,-0.03118014645923222,1.0,2080,2,14,10000,wf_oos:k3_kripto+kilit
+dis__dual-thrust|ETHUSDT|30m,strateji,tek_grafik,8,islem_sayisi,5.0,7.0,9.0,11.0,14.0,,,1.0,2080,2,14,10000,wf_oos:k3_kripto+kilit
+dis__dual-thrust|ETHUSDT|30m,strateji,tek_grafik,8,max_dusus,0.003091711727416928,0.01047997991935348,0.015475307870059034,0.023914252806008035,0.03916529795403294,ust,0.03916529795403294,1.0,2080,2,14,10000,wf_oos:k3_kripto+kilit
+dis__dual-thrust|ETHUSDT|30m,strateji,tek_grafik,8,kazanma_orani,0.2222222222222222,0.375,0.5,0.6,0.75,,,1.0,2080,2,14,10000,wf_oos:k3_kripto+kilit
+pf__kanarya|hisse_emtia|1d,strateji,portfoy,4,net_getiri,-0.03690190471767567,-0.007744985321830683,0.007187317846334196,0.029476279290715335,0.07668797370160739,,,1.0,2702,2,14,10000,wf_portfoy_oos:p3_hisse_emtia_v3+kilit
+pf__kanarya|hisse_emtia|1d,strateji,portfoy,4,islem_sayisi,0.0,0.0,1.0,2.0,5.0,,,1.0,2702,2,14,10000,wf_portfoy_oos:p3_hisse_emtia_v3+kilit
+pf__kanarya|hisse_emtia|1d,strateji,portfoy,4,max_dusus,0.0,0.009215255708958375,0.017814250886958725,0.02986469335491785,0.05410922599127526,,,1.0,2702,2,14,10000,wf_portfoy_oos:p3_hisse_emtia_v3+kilit
+pf__kanarya|hisse_emtia|1d,strateji,portfoy,4,kazanma_orani,0.0,0.0,0.5,1.0,1.0,,,0.6634,2702,2,14,10000,wf_portfoy_oos:p3_hisse_emtia_v3+kilit
+pf__kanarya|hisse_emtia|1d,strateji,portfoy,8,net_getiri,-0.04609104306300511,-0.007128678339214517,0.019583146039305444,0.052946353550770875,0.11573176296266702,alt,-0.04609104306300511,1.0,2702,2,14,10000,wf_portfoy_oos:p3_hisse_emtia_v3+kilit
+pf__kanarya|hisse_emtia|1d,strateji,portfoy,8,islem_sayisi,0.0,1.0,3.0,5.0,8.0,,,1.0,2702,2,14,10000,wf_portfoy_oos:p3_hisse_emtia_v3+kilit
+pf__kanarya|hisse_emtia|1d,strateji,portfoy,8,max_dusus,0.0082128931693497,0.018671380884054477,0.029315568729876562,0.04343683839303725,0.06981519463943642,ust,0.06981519463943642,1.0,2702,2,14,10000,wf_portfoy_oos:p3_hisse_emtia_v3+kilit
+pf__kanarya|hisse_emtia|1d,strateji,portfoy,8,kazanma_orani,0.0,0.15384615384615385,0.5,1.0,1.0,,,0.8892,2702,2,14,10000,wf_portfoy_oos:p3_hisse_emtia_v3+kilit
+pf__rotasyon|hepsi|1d,strateji,portfoy,4,net_getiri,-0.0648496233041347,-0.023587056666159567,0.004458130292153917,0.040495345871995825,0.11640689351235457,,,1.0,2710,2,14,10000,wf_portfoy_oos:p3_hepsi_v3+kilit
+pf__rotasyon|hepsi|1d,strateji,portfoy,4,islem_sayisi,0.0,1.0,2.0,3.0,5.0,,,1.0,2710,2,14,10000,wf_portfoy_oos:p3_hepsi_v3+kilit
+pf__rotasyon|hepsi|1d,strateji,portfoy,4,max_dusus,0.0059664226999335684,0.02173128683093898,0.035079899062331034,0.05412278067894552,0.08315597072089607,,,1.0,2710,2,14,10000,wf_portfoy_oos:p3_hepsi_v3+kilit
+pf__rotasyon|hepsi|1d,strateji,portfoy,4,kazanma_orani,0.0,0.0,0.3333333333333333,0.6666666666666666,1.0,,,0.7892,2710,2,14,10000,wf_portfoy_oos:p3_hepsi_v3+kilit
+pf__rotasyon|hepsi|1d,strateji,portfoy,8,net_getiri,-0.08685579509912147,-0.0300659448235919,0.014848949873129902,0.06887552311986866,0.16958709171041056,alt,-0.08685579509912147,1.0,2710,2,14,10000,wf_portfoy_oos:p3_hepsi_v3+kilit
+pf__rotasyon|hepsi|1d,strateji,portfoy,8,islem_sayisi,1.0,2.0,4.0,5.0,8.0,,,1.0,2710,2,14,10000,wf_portfoy_oos:p3_hepsi_v3+kilit
+pf__rotasyon|hepsi|1d,strateji,portfoy,8,max_dusus,0.0205353674146225,0.037646469652193155,0.05583741244675884,0.07571161050767325,0.11447649315194236,ust,0.11447649315194236,1.0,2710,2,14,10000,wf_portfoy_oos:p3_hepsi_v3+kilit
+pf__rotasyon|hepsi|1d,strateji,portfoy,8,kazanma_orani,0.0,0.0,0.3333333333333333,0.5714285714285714,1.0,,,0.9554,2710,2,14,10000,wf_portfoy_oos:p3_hepsi_v3+kilit
+pf__kesit_ls|kripto|1d,strateji,portfoy,4,net_getiri,-0.037758618743705355,-0.015228800120419494,9.77831459889611e-05,0.01880173609366842,0.08673369296919561,,,1.0,1630,2,14,10000,wf_portfoy_oos:p3_kripto_v2+kilit
+pf__kesit_ls|kripto|1d,strateji,portfoy,4,islem_sayisi,0.0,1.0,2.0,3.0,4.0,,,1.0,1630,2,14,10000,wf_portfoy_oos:p3_kripto_v2+kilit
+pf__kesit_ls|kripto|1d,strateji,portfoy,4,max_dusus,0.007250843176269561,0.013679319426568458,0.019992343690184426,0.029871129751230123,0.054227863423641214,,,1.0,1630,2,14,10000,wf_portfoy_oos:p3_kripto_v2+kilit
+pf__kesit_ls|kripto|1d,strateji,portfoy,4,kazanma_orani,0.0,0.0,0.3333333333333333,0.5,1.0,,,0.8707,1630,2,14,10000,wf_portfoy_oos:p3_kripto_v2+kilit
+pf__kesit_ls|kripto|1d,strateji,portfoy,8,net_getiri,-0.052877037980659417,-0.020305279564654305,0.004257348618358137,0.039626507228191665,0.1257113478697115,alt,-0.052877037980659417,1.0,1630,2,14,10000,wf_portfoy_oos:p3_kripto_v2+kilit
+pf__kesit_ls|kripto|1d,strateji,portfoy,8,islem_sayisi,1.0,3.0,4.0,5.0,6.0,,,1.0,1630,2,14,10000,wf_portfoy_oos:p3_kripto_v2+kilit
+pf__kesit_ls|kripto|1d,strateji,portfoy,8,max_dusus,0.01374234651661962,0.022176788395771082,0.03180048903031929,0.04706192069831645,0.07460766762832423,ust,0.07460766762832423,1.0,1630,2,14,10000,wf_portfoy_oos:p3_kripto_v2+kilit
+pf__kesit_ls|kripto|1d,strateji,portfoy,8,kazanma_orani,0.0,0.2,0.3333333333333333,0.5,0.75,,,0.9842,1630,2,14,10000,wf_portfoy_oos:p3_kripto_v2+kilit
+swing__cci-esik|SOLUSDT|1d,strateji,tek_grafik,4,net_getiri,-0.009439170051688936,-0.003133652006261811,0.0011571854496014167,0.00878150571851899,0.028822842417896774,,,1.0,1450,2,14,10000,wf_oos:k3_kripto+kilit
+swing__cci-esik|SOLUSDT|1d,strateji,tek_grafik,4,islem_sayisi,1.0,2.0,3.0,3.0,5.0,,,1.0,1450,2,14,10000,wf_oos:k3_kripto+kilit
+swing__cci-esik|SOLUSDT|1d,strateji,tek_grafik,4,max_dusus,0.0,0.0,0.002562137222252108,0.005196097771750567,0.010728163036942769,,,1.0,1450,2,14,10000,wf_oos:k3_kripto+kilit
+swing__cci-esik|SOLUSDT|1d,strateji,tek_grafik,4,kazanma_orani,0.0,0.25,0.5,1.0,1.0,,,0.9645,1450,2,14,10000,wf_oos:k3_kripto+kilit
+swing__cci-esik|SOLUSDT|1d,strateji,tek_grafik,8,net_getiri,-0.012123414953839395,-0.0028352899754184313,0.0050580394610467705,0.015972375330844557,0.049524671288278754,alt,-0.012123414953839395,1.0,1450,2,14,10000,wf_oos:k3_kripto+kilit
+swing__cci-esik|SOLUSDT|1d,strateji,tek_grafik,8,islem_sayisi,2.0,4.0,5.0,6.0,8.0,,,1.0,1450,2,14,10000,wf_oos:k3_kripto+kilit
+swing__cci-esik|SOLUSDT|1d,strateji,tek_grafik,8,max_dusus,0.0,0.002645878906864849,0.005001335081972572,0.008659748175782512,0.014965643349912324,ust,0.014965643349912324,1.0,1450,2,14,10000,wf_oos:k3_kripto+kilit
+swing__cci-esik|SOLUSDT|1d,strateji,tek_grafik,8,kazanma_orani,0.14285714285714285,0.3333333333333333,0.5,0.6666666666666666,1.0,,,0.9984,1450,2,14,10000,wf_oos:k3_kripto+kilit
+swing__konsolidasyon-kirilim|SOLUSDT|4h,strateji,tek_grafik,4,net_getiri,-0.01477010230292281,-0.003505725520322134,0.0020625661643336457,0.008737669013870297,0.022806017436642772,,,1.0,1450,2,14,10000,wf_oos:k3_kripto+kilit
+swing__konsolidasyon-kirilim|SOLUSDT|4h,strateji,tek_grafik,4,islem_sayisi,0.0,1.0,2.0,3.0,4.0,,,1.0,1450,2,14,10000,wf_oos:k3_kripto+kilit
+swing__konsolidasyon-kirilim|SOLUSDT|4h,strateji,tek_grafik,4,max_dusus,0.0,0.0,0.0,0.01020289314285719,0.020135861418083545,,,1.0,1450,2,14,10000,wf_oos:k3_kripto+kilit
+swing__konsolidasyon-kirilim|SOLUSDT|4h,strateji,tek_grafik,4,kazanma_orani,0.0,0.5,0.7142857142857143,1.0,1.0,,,0.8581,1450,2,14,10000,wf_oos:k3_kripto+kilit
+swing__konsolidasyon-kirilim|SOLUSDT|4h,strateji,tek_grafik,8,net_getiri,-0.02038318793663918,-0.004966393365266941,0.005379480110747847,0.016158505505075083,0.03291857401285762,alt,-0.02038318793663918,1.0,1450,2,14,10000,wf_oos:k3_kripto+kilit
+swing__konsolidasyon-kirilim|SOLUSDT|4h,strateji,tek_grafik,8,islem_sayisi,1.0,2.0,3.0,5.0,7.0,,,1.0,1450,2,14,10000,wf_oos:k3_kripto+kilit
+swing__konsolidasyon-kirilim|SOLUSDT|4h,strateji,tek_grafik,8,max_dusus,0.0,0.0,0.010192597324723218,0.012581895386180375,0.02423090229978143,ust,0.02423090229978143,1.0,1450,2,14,10000,wf_oos:k3_kripto+kilit
+swing__konsolidasyon-kirilim|SOLUSDT|4h,strateji,tek_grafik,8,kazanma_orani,0.0,0.5,0.6666666666666666,1.0,1.0,,,0.9788,1450,2,14,10000,wf_oos:k3_kripto+kilit
+dis__fraktal-alligator-sky|DK_NVDA|4h,strateji,tek_grafik,4,net_getiri,-0.01215748025276464,-0.003893082191780861,0.0,0.0,0.06976646788990815,,,1.0,2704,2,14,10000,wf_oos:k3_dk_v2+kilit
+dis__fraktal-alligator-sky|DK_NVDA|4h,strateji,tek_grafik,4,islem_sayisi,0.0,0.0,1.0,1.0,2.0,,,1.0,2704,2,14,10000,wf_oos:k3_dk_v2+kilit
+dis__fraktal-alligator-sky|DK_NVDA|4h,strateji,tek_grafik,4,max_dusus,0.0,0.0,0.0,0.008035039999999969,0.01215748025276464,,,1.0,2704,2,14,10000,wf_oos:k3_dk_v2+kilit
+dis__fraktal-alligator-sky|DK_NVDA|4h,strateji,tek_grafik,4,kazanma_orani,0.0,0.0,0.0,1.0,1.0,,,0.5232,2704,2,14,10000,wf_oos:k3_dk_v2+kilit
+dis__fraktal-alligator-sky|DK_NVDA|4h,strateji,tek_grafik,8,net_getiri,-0.02091403485305349,-0.01019846153846149,0.0,0.025758304107386998,0.11026756622516554,alt,-0.02091403485305349,1.0,2704,2,14,10000,wf_oos:k3_dk_v2+kilit
+dis__fraktal-alligator-sky|DK_NVDA|4h,strateji,tek_grafik,8,islem_sayisi,0.0,1.0,1.0,2.0,3.0,,,1.0,2704,2,14,10000,wf_oos:k3_dk_v2+kilit
+dis__fraktal-alligator-sky|DK_NVDA|4h,strateji,tek_grafik,8,max_dusus,0.0,0.0,0.00430508928571427,0.01072787414965981,0.021336448594274082,ust,0.021336448594274082,1.0,2704,2,14,10000,wf_oos:k3_dk_v2+kilit
+dis__fraktal-alligator-sky|DK_NVDA|4h,strateji,tek_grafik,8,kazanma_orani,0.0,0.0,0.5,1.0,1.0,,,0.7724,2704,2,14,10000,wf_oos:k3_dk_v2+kilit
+tek_grafik,kol,tek_grafik,4,net_getiri,-0.0316695922123887,-0.008923095911624657,0.009408274977113162,0.038195350671148265,0.12048140497712714,,,1.0,1364,2,14,10000,"wf_oos+kilit (4 strateji yeniden oynatma, kesişim günleri)"
+tek_grafik,kol,tek_grafik,4,islem_sayisi,5.0,7.0,9.0,10.0,13.0,,,1.0,1364,2,14,10000,"wf_oos+kilit (4 strateji yeniden oynatma, kesişim günleri)"
+tek_grafik,kol,tek_grafik,4,max_dusus,0.0024677662218872166,0.010186986642925482,0.015044083976520512,0.02297555375124234,0.0397473636321448,,,1.0,1364,2,14,10000,"wf_oos+kilit (4 strateji yeniden oynatma, kesişim günleri)"
+tek_grafik,kol,tek_grafik,4,kazanma_orani,0.2,0.375,0.5,0.625,0.7777777777777778,,,0.9999,1364,2,14,10000,"wf_oos+kilit (4 strateji yeniden oynatma, kesişim günleri)"
+tek_grafik,kol,tek_grafik,8,net_getiri,-0.03954040108078892,-0.003697365019276727,0.0288005216257049,0.0786804579054039,0.17789471293194545,alt,-0.03954040108078892,1.0,1364,2,14,10000,"wf_oos+kilit (4 strateji yeniden oynatma, kesişim günleri)"
+tek_grafik,kol,tek_grafik,8,islem_sayisi,12.0,15.0,17.5,20.0,24.0,,,1.0,1364,2,14,10000,"wf_oos+kilit (4 strateji yeniden oynatma, kesişim günleri)"
+tek_grafik,kol,tek_grafik,8,max_dusus,0.009987138624557088,0.01637152551306629,0.024002472718114575,0.03545705780668311,0.05469998669160327,ust,0.05469998669160327,1.0,1364,2,14,10000,"wf_oos+kilit (4 strateji yeniden oynatma, kesişim günleri)"
+tek_grafik,kol,tek_grafik,8,kazanma_orani,0.29411764705882354,0.4166666666666667,0.5,0.5882352941176471,0.7,,,1.0,1364,2,14,10000,"wf_oos+kilit (4 strateji yeniden oynatma, kesişim günleri)"
+portfoy,kol,portfoy,4,net_getiri,-0.031536456324958585,-0.012424764110014391,0.0004846381787734222,0.016897749625228664,0.06427593869100205,,,1.0,1364,2,14,10000,"wf_portfoy_oos+kilit (3 strateji eşit ağırlık, kesişim günleri)"
+portfoy,kol,portfoy,4,islem_sayisi,1.0,3.0,5.0,7.0,11.0,,,1.0,1364,2,14,10000,"wf_portfoy_oos+kilit (3 strateji eşit ağırlık, kesişim günleri)"
+portfoy,kol,portfoy,4,max_dusus,0.0061856883228894564,0.012014722996985616,0.01886011302223123,0.027520530619791296,0.044032823978934495,,,1.0,1364,2,14,10000,"wf_portfoy_oos+kilit (3 strateji eşit ağırlık, kesişim günleri)"
+portfoy,kol,portfoy,4,kazanma_orani,0.0,0.16666666666666666,0.3333333333333333,0.5,0.75,,,0.9833,1364,2,14,10000,"wf_portfoy_oos+kilit (3 strateji eşit ağırlık, kesişim günleri)"
+portfoy,kol,portfoy,8,net_getiri,-0.04409710676104668,-0.017337116704334465,0.0037262740486199153,0.03024293255843108,0.0885067111371785,alt,-0.04409710676104668,1.0,1364,2,14,10000,"wf_portfoy_oos+kilit (3 strateji eşit ağırlık, kesişim günleri)"
+portfoy,kol,portfoy,8,islem_sayisi,5.0,8.0,11.0,14.0,19.0,,,1.0,1364,2,14,10000,"wf_portfoy_oos+kilit (3 strateji eşit ağırlık, kesişim günleri)"
+portfoy,kol,portfoy,8,max_dusus,0.012014722996985585,0.021031892842100514,0.03005787993979464,0.041571799816600724,0.06030237877301013,ust,0.06030237877301013,1.0,1364,2,14,10000,"wf_portfoy_oos+kilit (3 strateji eşit ağırlık, kesişim günleri)"
+portfoy,kol,portfoy,8,kazanma_orani,0.09090909090909091,0.2222222222222222,0.3333333333333333,0.4444444444444444,0.625,,,0.9995,1364,2,14,10000,"wf_portfoy_oos+kilit (3 strateji eşit ağırlık, kesişim günleri)"
+set,set,,4,net_getiri,-0.020604307850074256,-0.005862162021442935,0.0065712652407433625,0.02717831007281657,0.07124415682278029,,,1.0,1364,2,14,10000,kollar 50/50 (kesişim günleri)
+set,set,,4,islem_sayisi,8.0,11.0,14.0,17.0,22.0,,,1.0,1364,2,14,10000,kollar 50/50 (kesişim günleri)
+set,set,,4,max_dusus,0.005317954389211203,0.008933020025487058,0.012899190659502745,0.018510280754289118,0.028224662856614062,,,1.0,1364,2,14,10000,kollar 50/50 (kesişim günleri)
+set,set,,4,kazanma_orani,0.21052631578947367,0.3333333333333333,0.4375,0.5384615384615384,0.6923076923076923,,,0.9999,1364,2,14,10000,kollar 50/50 (kesişim günleri)
+set,set,,8,net_getiri,-0.025721303333356958,-0.0013384776773574802,0.020170966455273942,0.04959621970514494,0.10385345913393605,alt,-0.025721303333356958,1.0,1364,2,14,10000,kollar 50/50 (kesişim günleri)
+set,set,,8,islem_sayisi,19.0,25.0,29.0,33.0,40.0,,,1.0,1364,2,14,10000,kollar 50/50 (kesişim günleri)
+set,set,,8,max_dusus,0.009057109468758562,0.013747248501544839,0.019186751087041935,0.025709924512125594,0.03895247113627036,ust,0.03895247113627036,1.0,1364,2,14,10000,kollar 50/50 (kesişim günleri)
+set,set,,8,kazanma_orani,0.28,0.3684210526315789,0.4375,0.5,0.6086956521739131,,,1.0,1364,2,14,10000,kollar 50/50 (kesişim günleri)

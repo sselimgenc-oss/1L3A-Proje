@@ -1,0 +1,39 @@
+[
+  {
+    "kart_id": "swing__rsi-ayrisma__sharpe",
+    "parametreler": {
+      "osilator": "rsi",
+      "teyit": "ema",
+      "teyit_ema": 21,
+      "hedef_tipi": "r",
+      "hedef_r": 2.0
+    },
+    "cikis_ayarlari": null,
+    "not": "Düzenli diverjans + 21 EMA üstü teyit; stop son dip altı; RSI periyodu kartta yok (14); hedef kartta yok."
+  },
+  {
+    "kart_id": "swing__rsi-farklilik__jordan",
+    "parametreler": {
+      "osilator": "rsi",
+      "teyit": "yok",
+      "bolge_rsi": 40.0,
+      "hedef_tipi": "r",
+      "hedef_r": 2.0
+    },
+    "cikis_ayarlari": null,
+    "not": "Teyitsiz; kitap aşırı bölgede daha temelli der -> bolge_rsi=40."
+  },
+  {
+    "kart_id": "swing__rsi-sapma__johnson",
+    "parametreler": {
+      "osilator": "rsi",
+      "rsi_periyot": 14,
+      "teyit": "yok",
+      "bolge_rsi": 100.0,
+      "hedef_tipi": "r",
+      "hedef_r": 2.0
+    },
+    "cikis_ayarlari": null,
+    "not": "Teyitsiz, bölge şartsız (kitap teknik onay önerir ama kural vermez)."
+  }
+]

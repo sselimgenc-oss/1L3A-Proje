@@ -1,0 +1,15 @@
+[
+ {
+  "dis_id": "d11j:kapanis-kanali-min-dip-alim:pencere15_zirve_cikis",
+  "kaynak_dosya": "stratejiler/ek_kaynaklar/github_g2_kripto_bot.csv (HL_Scalp, HL)",
+  "parametreler": {
+   "pencere": 15,
+   "cikis_modu": "pencere_zirve",
+   "zaman_cikisi": 0,
+   "stop_atr_k": 3.0,
+   "yonler": "long"
+  },
+  "cikis_ayarlari": null,
+  "not": "Son 15 mumun en düşük kapanışı altında/eşit kapanış long; pencere en yüksek kapanışına eşit/üstünde kapanışta çık (HL_Scalp 15, HL 24-25: pencere 24 de denenebilir). Stop kaynakta yok: 3 ATR varsayım."
+ }
+]

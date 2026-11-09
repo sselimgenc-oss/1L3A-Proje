@@ -1,0 +1,312 @@
+[
+ {
+  "kart_id": "scalp__kuyruk-pozisyonu-hizli-dolum__norden",
+  "ad": "Kuyruk Pozisyonu ve Likidite Filtresiyle Hızlı Dolum Girişi (yavaş/kalın piyasa)",
+  "stil": "scalp",
+  "kaynak": {
+   "pdf": "Scalping Kılavuzu - Gary Norden - Türkçe ve İngilizce (114 sayfa) - @eseckal.pdf",
+   "sayfalar": [
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27
+   ]
+  },
+  "ozet": "Yavaş ve kalın vadeli piyasada, bid (veya offer) kuyruğundaki lot sayısı kısa bir pencerede (örn. 5 sn) işlem gören ortalama hacmi aşmıyorsa ve çıkış tarafında da engel yoksa limit emirle kuyruğa katılınır; belirlenen süre içinde dolmazsa emir iptal edilir, koşullar sürüyorsa birkaç saniye sonra yeniden girilir. Amaç hem girişte hem çıkışta hızlı dolumdur.",
+  "kategori": "diger",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "vadeli",
+  "zaman_dilimi": {
+   "islem": "tick/DOM",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "DOM/Emir Defteri",
+    "parametreler": {}
+   },
+   {
+    "ad": "Time&Sales",
+    "parametreler": {}
+   },
+   {
+    "ad": "Hacim (kısa pencerede işlem gören lot)",
+    "parametreler": {
+     "pencere_sn_ornek": 5
+    }
+   }
+  ],
+  "long_giris": [
+   "Bid kuyruğundaki lot sayısı, seçilen pencerede (örnek 5 sn) ortalama işlem gören lotu (örnek 190) aşmıyorsa bid'e limit alış koy; aşıyorsa (örnek 400 lot) işlem yapma",
+   "Çıkış tarafı (offer) kuyruğu da büyük değilse gir; 1 tik hedefleyen yavaş piyasada offer'da 450 gibi büyük bir yığın varsa giriş yapma, çünkü çıkış engellenir",
+   "Dolum, kuyruğa katıldıktan sonra beklenen süre içinde gelmezse emri iptal et; koşullar hâlâ iyiyse birkaç sn sonra yeniden gir"
+  ],
+  "short_giris": [
+   "Ayna: offer kuyruğu kısa pencerede işlem gören ortalama hacmi aşmıyorsa ve bid tarafı çıkışı engellemiyorsa offer'a limit satış koy"
+  ],
+  "stop_loss": "Sabit stop tanımlı değil; dolum yavaşsa veya dolumdan sonra durum bozulursa emir/pozisyon hemen çekilir/kapatılır (bkz. dolum kontrol listesi)",
+  "kar_al": "Yavaş piyasada tipik olarak 1 tik (spread kadar), çıkış emri de kuyruk kısaysa karşı tarafa limit olarak verilir",
+  "iz_suren_stop": null,
+  "zaman_cikisi": "Emir birkaç saniye (piyasaya göre; çok yavaş piyasada 60 sn ve üstü olabilir) içinde dolmazsa iptal; kısmi dolumda kalan miktar iptal edilir",
+  "filtreler": [
+   "Teklif/alışta ortalama lot ve piyasa hızı gün içinde sürekli yeniden ölçülür",
+   "Kuyruğun önünde 1000 lot varken ilk sırada olmak avantajdır, 1000'inci sırada olmak avantaj vermez; çok kalın sözleşmelerde (ABD 10 yıllık tahvil gibi) avantaj bulmak zordur",
+   "Hedef fiyatta çok az lot varsa (örnek 10) arkasındaki lota bakılır; efektif kuyruk (10+80=91) hâlâ hızlı dolum sınırının içindeyse katılınır",
+   "Piyasa saniyede/dakikada yeterli işlem yapmıyorsa işlem yapma",
+   "Fiyat seviyesi önemsiz; kuyruk koşulu sağlanmıyorsa istenen fiyat olsa da işlem yok"
+  ],
+  "pozisyon_risk": "Yeni başlayan 1 lot ile başlar; kısmi dolum durumunda kalan lotlar iptal edilir (s.45)",
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 0,
+   "gerekce": "Kuyruk boyu ve saniye ölçeğinde hacim, emir defteri ve tick verisi ister; OHLCV'den türetilemez."
+  },
+  "belirsizlikler": [
+   "'Hızlı dolum' penceresi sayısal verilmemiş (5 sn yalnız örnek; piyasaya ve seansa göre değişir)",
+   "'Kalın/ince' ve 'yavaş/hızlı' için eşik yok (ince: bid/offer başına ≤20 lot gibi yalnız bir örnek)",
+   "Ölçülebilir öneri (kural değil): kuyruk ≤ pencere hacmi oranı ve dolum süresi limitlerini backtest parametresi yap; OHLCV'de bu ancak hacim/bar ile kaba temsil edilir"
+  ],
+  "uyumluluk_notu": "Emir defteri (DOM), kuyruk pozisyonu, tick/saniye ölçeği ve korelasyonlu enstrüman verisi gerekir; spot forex/CFD'de uygulanamaz (yazar da önermiyor). Binance perpetual emir defteri teorik olarak var ama kuyruk/saniye ölçeğinde bu 1L3A'da (≥5m OHLC, 15m+ scalp) yapılamaz.",
+  "varyantlar": [
+   "Yavaş piyasada dolum için 60 sn'ye kadar beklenebilir",
+   "Hızlı piyasada kuyruk önemsizleşir, emir yerleşimine geçilir (bkz. sıçrama sonrası geri dönüş kartı)"
+  ],
+  "anahtar_kelimeler": [
+   "kuyruk-pozisyonu",
+   "likidite",
+   "hizli-dolum",
+   "dom",
+   "emir-iptal",
+   "piyasa-yapici"
+  ]
+ },
+ {
+  "kart_id": "scalp__sicrama-sonrasi-geri-donus-teklifi__norden",
+  "ad": "Hızlı/İnce Piyasada Sıçrama Sonrası Eski Fiyata Geri Dönüş Emri (ilk süpürme kuralı)",
+  "stil": "scalp",
+  "kaynak": {
+   "pdf": "Scalping Kılavuzu - Gary Norden - Türkçe ve İngilizce (114 sayfa) - @eseckal.pdf",
+   "sayfalar": [
+    28,
+    29,
+    30,
+    31,
+    34
+   ]
+  },
+  "ozet": "Hızlı ve ince piyasada fiyat birkaç tik sıçradığında (örn. 15b/16o -> 19b/20o), korelasyon yönü doğruluyorsa sıçramadan önceki iki yönlü işlem bölgesine (16) limit emir konur; yalnız ilk süpürmede dolarsa kalınır, dolmazsa iptal edilir. Dolunca bir sonraki baskı noktasından (18/19/20) çıkılır, sıçramanın dibi yeniden işlem görürse kayıpla çıkılır.",
+  "kategori": "ortalamaya_donus",
+  "piyasa_rejimi": "volatil",
+  "orijinal_piyasa": "vadeli",
+  "zaman_dilimi": {
+   "islem": "tick/DOM",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "DOM/Emir Defteri",
+    "parametreler": {}
+   },
+   {
+    "ad": "Time&Sales",
+    "parametreler": {}
+   },
+   {
+    "ad": "Korelasyon",
+    "parametreler": {}
+   }
+  ],
+  "long_giris": [
+   "Piyasa 15b/16o iken yukarı sıçrayıp 19b/20o veya 20b/21o oldu; diğer kanıtlar (korelasyon) uzun yönü doğruluyor",
+   "Alış emrini sıçramadan önceki iki yönlü akış bölgesine yakın koy (örnek 16); boşluk alanına (eski fiyat ile yeni fiyat arası) koyma",
+   "Yalnız ilk süpürmede dolarsan kal; piyasa aşağı akıp 17'de işlem görüp seni doldurmazsa veya 16'da işlem görüp doldurmazsa emri iptal et"
+  ],
+  "short_giris": [
+   "Ayna: piyasa 19b/20o'dan 10b/11o'ya düştü, korelasyon destekliyorsa satış emrini 18 (en fazla 17) civarına koy, son baskıdan uzak",
+   "Emir mesafesi son hamle büyüklüğüyle orantılı (6-8 tik hareket eden piyasada benzer mesafe)"
+  ],
+  "stop_loss": "Sıçramanın dibi (örnek 15) yeniden işlem görürse çık (1 tik zarar); dolumdan sonra 1-2 sn sıçrama beklenir, gelmezse hemen çıkılır. Short örneğinde kaba stop 19 veya 20 (tercih edilen kötü çıkış scratch)",
+  "kar_al": "Dolumdan sonraki bir sonraki baskı noktası (örnek 18'de baskı varsa orada; yoksa 19-20); short örneğinde 10-11'de çıkışla 6-8 tik maksimum kâr beklenir, piyasa daha azını verirse onu al",
+  "iz_suren_stop": null,
+  "zaman_cikisi": "Hızlı piyasada dolum saniyeler içinde olmalı; ilk süpürmede dolmayan emir iptal",
+  "filtreler": [
+   "Korelasyon ya da başka destekleyici kanıt yoksa her hamleyi kovalama (kumar)",
+   "Dalga dalga tek yönlü yükselen/düşen piyasayı kovalama; 15b/16o -> 20b/21o -> 25b/26o -> 30b/31o gibi dizide işlemi bırak, iki yönlü akış dönene kadar bekle",
+   "Kovalarsan emri çok kısa süre bırak",
+   "Tek yönlü piyasada işlem yok",
+   "Kayıp 3-4 tik, kâr 1-2 tik çıkıyorsa emirler fazla yakın demektir; uzağa taşı"
+  ],
+  "pozisyon_risk": "Yeni scalper işlemleri kaçırmaktan korkmamalı; doldurulandan çok iptal edilir ama dolanlarda risk/ödül iyi ve kazanma oranı yüksek beklenir",
+  "iddia_edilen_performans": "Bu tür işlemlerde doldurulduğunda iyi risk/ödül ve yüksek kazanma oranı sunduğu iddia ediliyor (sayı verilmemiş)",
+  "kodlanabilirlik": {
+   "puan": 0,
+   "gerekce": "Tick/süpürme ve emir defteri verisi ve korelasyon izleme gerekir; OHLCV'de 'ilk süpürme' tanımlanamaz."
+  },
+  "belirsizlikler": [
+   "'Sıçrama' büyüklüğü sayısal verilmemiş (örnekler 4-5 tik veya 9 tik)",
+   "'Korelasyon destekliyor' ölçüsü yok",
+   "'Bir sonraki baskı noktası' defterdeki gerçek baskıya bağlı",
+   "Ölçülebilir öneri (kural değil): tek bir 5m/15m mumun aralığı N×ATR'yi aşınca, mumun açılış/yarı seviyesine limit geri çekilme emri ve 1-2 mum zaman çıkışı denenebilir; kitap bunu söylemiyor, yalnız yaklaşıktır"
+  ],
+  "uyumluluk_notu": "Emir defteri (DOM), kuyruk pozisyonu, tick/saniye ölçeği ve korelasyonlu enstrüman verisi gerekir; spot forex/CFD'de uygulanamaz (yazar da önermiyor). Binance perpetual emir defteri teorik olarak var ama kuyruk/saniye ölçeğinde bu 1L3A'da (≥5m OHLC, 15m+ scalp) yapılamaz.",
+  "varyantlar": [
+   "Alım ve satım yönlü aynalı örnekler (s.28-30)"
+  ],
+  "anahtar_kelimeler": [
+   "sicrama",
+   "ilk-supurme",
+   "gap",
+   "geri-donus",
+   "hizli-piyasa",
+   "dom",
+   "ince-piyasa"
+  ]
+ },
+ {
+  "kart_id": "scalp__dolum-kontrol-listesi-scratch__norden",
+  "ad": "Dolum Anı Kontrol Listesi ve Kâr-veya-Sıfır (Scratch) Çıkış Yönetimi",
+  "stil": "scalp",
+  "kaynak": {
+   "pdf": "Scalping Kılavuzu - Gary Norden - Türkçe ve İngilizce (114 sayfa) - @eseckal.pdf",
+   "sayfalar": [
+    36,
+    37,
+    42,
+    43,
+    44,
+    54
+   ]
+  },
+  "ozet": "Emir dolduğu anda beş soru sorulur (yön doğru mu, değer net mi, hızlı dolum mu, kâr-veya-sıfır kurulumu var mı, küçük mü büyük oyuncu mu doldurdu). Hepsi evetse hızlı çıkış beklenir; karışıksa scratch düşünülür; çoğu hayırsa hemen çıkılıp 1 tikten fazla zarar kabul edilmez.",
+  "kategori": "diger",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "vadeli",
+  "zaman_dilimi": {
+   "islem": "tick/DOM",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "DOM/Emir Defteri",
+    "parametreler": {}
+   },
+   {
+    "ad": "Time&Sales",
+    "parametreler": {}
+   },
+   {
+    "ad": "Korelasyon",
+    "parametreler": {}
+   }
+  ],
+  "long_giris": [
+   "Giriş kuralı yok (yönetim kartı): 15b/16o'da 15 bid'e katılıp dolunca hemen 16 offer koy; dolumdan sonra piyasanın hâlâ 15b/16o olması beklenen ideal durum",
+   "Dolum anında kontrol: 1) alış doğru muydu (değer+korelasyon yukarı) 2) değer daha yüksek fiyatta (örn. 16'da makul büyüklükte işlemler) açıkça görüldü mü 3) hızlı dolum mu 4) kâr-veya-sıfır kurulumu var mı 5) küçük işlemci mi doldurdu"
+  ],
+  "short_giris": [
+   "Ayna"
+  ],
+  "stop_loss": "Tüm cevaplar evetse hızlı çıkış beklenir; karışıksa hemen çıkmasan da scratch (başabaş) ara; çoğu/tümü hayırsa hemen çık ve mevcut kaybı kabul et. Büyük emirle dolup piyasa 14b/15o'ya gidip hemen 15b'ye dönmüyorsa 14'ü satıp maks 1 tik kaybı al; 3+ tik kayıp seyrek ve olağandışı olmalı",
+  "kar_al": "1 tik veya sıfır (scratch)",
+  "iz_suren_stop": null,
+  "zaman_cikisi": "İşlemde uzun kalmak kötü işaret sayılır; çıkmayı düşündüğün halde hâlâ içindeysen çık. Ortalama işlem süresi düşük tutulur",
+  "filtreler": [
+   "Bir kayıp/scratch sonrası nedeni bulunana kadar işlem yapma",
+   "Kötü işlem tekrar ediyorsa emir yerleşimini uzağa taşı, dolum hızı ve kuyruğu ayarla"
+  ],
+  "pozisyon_risk": "Hedef: kazanma oranı ≥%70, kâr+scratch ≈%90, scratch sayısı kayıp sayısından fazla; kayıp günü küçük (yaklaşık en fazla 10 tik)",
+  "iddia_edilen_performans": "~%80 kazanma + ~%10 scratch hedefi; %70 kazanma da scratch>kayıp ise karlı olabilir; büyük tik değerli sözleşmede daha çok scratch tolere edilir (ABD 30 yıllık tahvilde kâr scratch'in ~8 katı, eMini'de <3 katı, s.9)",
+  "kodlanabilirlik": {
+   "puan": 0,
+   "gerekce": "Dolum kalitesi, oyuncu büyüklüğü ve değer yargısı emir defteri/tape verisi ve öznel değerlendirme ister."
+  },
+  "belirsizlikler": [
+   "Beş sorunun puanlaması/eşiği yok ('çoğu hayır' sayısal değil)",
+   "'Hızlı' çıkış süresi verilmemiş",
+   "Ölçülebilir öneri (kural değil): 1L3A'da bu kartın karşılığı, girişten N mum sonra kâr yoksa başabaşta çıkma (zaman+scratch çıkış modülü) olarak ayrı test edilebilir"
+  ],
+  "uyumluluk_notu": "Mantık (başabaşa yakın scratch çıkışı, zaman çıkışı) genel bir çıkış modülü fikri olarak ≥5m'de denenebilir ama kitabın kontrol listesi tick/DOM verisi ister; kartın kendisi kodlanamaz.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "scratch",
+   "kontrol-listesi",
+   "dolum",
+   "cikis-yonetimi",
+   "kar-veya-sifir",
+   "dom"
+  ]
+ },
+ {
+  "kart_id": "scalp__volatil-gun-teklif-vurma__norden",
+  "ad": "Volatil Günde Spread'in Yanlış Tarafında Agresif Giriş (teklifi vur / teklifi kaldır)",
+  "stil": "scalp",
+  "kaynak": {
+   "pdf": "Scalping Kılavuzu - Gary Norden - Türkçe ve İngilizce (114 sayfa) - @eseckal.pdf",
+   "sayfalar": [
+    51,
+    52,
+    53
+   ]
+  },
+  "ozet": "Çok oynak günlerde bid/offer'da beklemek dolum getirmeyebilir; spread en fazla 1-2 tik ise ve korelasyon yönü destekliyorsa piyasa emriyle spread'e vurulur (1 tik verilir), 5 tik ve üzeri olası ödül aranır. Başarısızsa normalden farklı işlem yapıldığı bilinerek işlem kesilir.",
+  "kategori": "momentum",
+  "piyasa_rejimi": "volatil",
+  "orijinal_piyasa": "vadeli",
+  "zaman_dilimi": {
+   "islem": "tick/DOM",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "DOM/Emir Defteri",
+    "parametreler": {}
+   },
+   {
+    "ad": "Korelasyon",
+    "parametreler": {}
+   }
+  ],
+  "long_giris": [
+   "Çok oynak gün; spread ≤1-2 tik; korelasyon önemli faktör olarak yukarıyı destekliyor",
+   "Offer'ı kaldır (spread'i ver, 1 tik); ödül beklentisi normalden büyük (5 tik veya fazlası)"
+  ],
+  "short_giris": [
+   "Ayna: bid'i vur"
+  ],
+  "stop_loss": "Spread 1 tik verildi; başarısızsa işlemi hemen durdur (kitapta sayısal stop yok)",
+  "kar_al": "Olası ödül 5 tik veya fazlası (potansiyel; sabit hedef yok)",
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [
+   "Spread genişse vurma/kaldırma yapma",
+   "Defter dengesizliğine (teklif ağırlığı) güvenme; emirler çekilir, volatil günde defter hızla döner",
+   "Tek yönlü piyasadan kaçın",
+   "Deneyimsizse bu koşullarda hiç işlem yapma (yazar çoğu yatırımcıya işlem yapmamayı öneriyor)",
+   "İşlem sayısını azalt, işlem başına kârın normalden yüksek olmasını bekle"
+  ],
+  "pozisyon_risk": "Sermaye koruması birinci hedef; pratik yapmamış ve scalping geçmişi olmayan denemesin",
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 0,
+   "gerekce": "Spread, korelasyon ve çekilen emir davranışı DOM verisi ister; volatil gün tanımı sayısal değil."
+  },
+  "belirsizlikler": [
+   "'Çok oynak' için sayısal eşik yok",
+   "'5 tik veya fazlası' potansiyel, hedef değil",
+   "Ölçülebilir öneri (kural değil): volatilite rejimi eşiği (ATR yüzdelik) ve işlem sayısı azaltma filtresi olarak denenebilir; yön sinyali kitapta korelasyondur ve OHLCV tabanlı karşılığı yoktur"
+  ],
+  "uyumluluk_notu": "Emir defteri (DOM), kuyruk pozisyonu, tick/saniye ölçeği ve korelasyonlu enstrüman verisi gerekir; spot forex/CFD'de uygulanamaz (yazar da önermiyor). Binance perpetual emir defteri teorik olarak var ama kuyruk/saniye ölçeğinde bu 1L3A'da (≥5m OHLC, 15m+ scalp) yapılamaz.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "volatil-gun",
+   "teklifi-vur",
+   "agresif-giris",
+   "spread",
+   "dom",
+   "korelasyon"
+  ]
+ }
+]

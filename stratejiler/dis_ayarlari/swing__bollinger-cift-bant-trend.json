@@ -1,0 +1,15 @@
+[
+ {
+  "dis_id": "kural:kurallar:TechIndicator Bollinger(20,2) kırılım L/S",
+  "kaynak_dosya": "arsiv/algo-sg/dis_kaynak/kurallar.py",
+  "parametreler": {
+   "dis_dahil": true,
+   "dis_sapma": 2.0,
+   "ic_sapma": 1.0,
+   "periyot": 20,
+   "short": true
+  },
+  "cikis_ayarlari": null,
+  "not": "YAKLAŞIK: Bollinger(20,2) bant kırılımı L/S -> 1SD üstü/2SD dahil bölgeye ilk giriş."
+ }
+]

@@ -1,0 +1,89 @@
+[
+ {
+  "kart_id": "swing__ma20-rsi-momentum-cmf__tmp",
+  "ad": "MA20 Kırılımı + RSI Momentum Trend Çizgisi Kırılımı + Chaikin Para Akışı",
+  "stil": "swing",
+  "kaynak": {
+   "pdf": "RSI_Swing_Trading_Stratejisi_-_TMP_13_sayfa.pdf",
+   "sayfalar": [
+    4,
+    5,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13
+   ]
+  },
+  "ozet": "Fiyat 20 periyotluk ortalamanın üstünde kapanırken, önceki salınım ayağındaki RSI düşüş trend çizgisi yukarı kırıldığında ve Chaikin Money Flow sıfırın üstüne geçtiğinde long açılır; CMF sıfırın altına inince çıkılır.",
+  "kategori": "momentum",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "forex",
+  "zaman_dilimi": {
+   "islem": "4h",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "SMA",
+    "parametreler": {
+     "periyot": 20,
+     "not": "kitap 'hareketli ortalama' diyor, tür belirtmiyor"
+    }
+   },
+   {
+    "ad": "RSI",
+    "parametreler": {
+     "periyot": 20
+    }
+   },
+   {
+    "ad": "Chaikin Money Flow",
+    "parametreler": {
+     "periyot": 20
+    }
+   }
+  ],
+  "long_giris": [
+   "Aynı mumda fiyat 20 MA'yı yukarı kırar ve onun üzerinde kapanır (temiz kırılım)",
+   "Önceki fiyat salınım ayağına denk gelen RSI zirvelerini kapsayan bir trend çizgisi çizilebilir ve RSI bu çizgiyi yukarı kırar (momentum dönüşü); çizgi çizilemezse işlem atlanır",
+   "Chaikin Money Flow sıfırın üzerine çıkar; bu anda long girilir"
+  ],
+  "short_giris": [
+   "Kitap kısa yönü ayrıca anlatmıyor; ters simetri varsayılabilir (MA20 altı kapanış, RSI yükseliş çizgisi aşağı kırılımı, CMF<0)"
+  ],
+  "stop_loss": "20 MA'nın altı",
+  "kar_al": "Chaikin Money Flow sıfır çizgisinin altına düştüğünde çıkış",
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [
+   "4s'den yüksek zaman dilimleri; 4s altına inilmez",
+   "Piyasa istikrarlı ve trendli olmalı"
+  ],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": "Örnek işlemde 6 günde 385 pip, 1:7 risk-ödül (tek örnek)",
+  "kodlanabilirlik": {
+   "puan": 2,
+   "gerekce": "MA, RSI ve CMF kuralları ölçülebilir; RSI trend çizgisi çizimi otomatikleştirilebilir (RSI swing-high bağlantısı) ama öznel."
+  },
+  "belirsizlikler": [
+   "MA türü (SMA/EMA) belirtilmemiş",
+   "RSI trend çizgisinin tanımı (hangi tepeler) yok",
+   "Stop için tampon yok",
+   "Kısa yön anlatılmamış",
+   "Metinde hem 'gün' hem 4s zaman dilimi var; net değil"
+  ],
+  "uyumluluk_notu": "4s+ üzerinde; 5m'ye uyarlama zayıf. CMF hacim gerektirir (forex tick hacmi ile olur). Kripto/hisse/emtiada çalışır.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "ma20",
+   "rsi",
+   "chaikin-money-flow",
+   "momentum",
+   "trend-cizgisi-kirilimi",
+   "hacim"
+  ]
+ }
+]

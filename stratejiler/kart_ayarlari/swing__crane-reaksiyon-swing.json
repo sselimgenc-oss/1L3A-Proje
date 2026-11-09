@@ -1,0 +1,25 @@
+[
+  {
+    "kart_id": "swing__reaksiyon-swing-tetik__crane",
+    "parametreler": {
+      "mod": "reaksiyon",
+      "pivot_k": 3,
+      "min_gun": 3,
+      "tetik_oran": 0.5,
+      "iki_gun_onay": true,
+      "hedef_carpan": 1.0
+    },
+    "cikis_ayarlari": null,
+    "not": "Orta nokta tetik, C+(B-A) hedef, C altı stop; buy-stop yerine kapanış>=tetik."
+  },
+  {
+    "kart_id": "swing__iki-gun-kurali__crane",
+    "parametreler": {
+      "mod": "iki_gun",
+      "pivot_k": 2,
+      "iki_gun_onay": false
+    },
+    "cikis_ayarlari": null,
+    "not": "Tepeden sonra iki düşüş günü, tetik H-(H-L2)/2; hedef pivot tepesi (basitleştirme)."
+  }
+]

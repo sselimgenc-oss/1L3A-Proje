@@ -1,0 +1,369 @@
+[
+  {
+    "kart_id": "scalp__15dk-acilis-araligi-kirilimi__ho-lbr",
+    "ad": "15 Dakikalık Açılış Aralığı Kırılma Scalp (15ORS)",
+    "stil": "scalp",
+    "kaynak": {
+      "pdf": "LBR Scalp İşlem Kurulumları -  Kevin  Ho (4 sayfa) - @eseckal.pdf",
+      "sayfalar": [
+        2
+      ]
+    },
+    "ozet": "Açılıştan sonraki ilk 15 dakikalık aralığın 2 tik üstüne buy-stop / 2 tik altına sell-stop konur; dolarsa 1 puan kârla çıkılır, 1 puan zarar veya 1 dakikadan uzun sürerse çıkılır.",
+    "kategori": "kirilim",
+    "piyasa_rejimi": "volatil",
+    "orijinal_piyasa": "vadeli",
+    "zaman_dilimi": {
+      "islem": "15m (aralık) / tick-1m (işlem)",
+      "ust_filtre": null
+    },
+    "gostergeler": [
+      {
+        "ad": "Açılış Aralığı",
+        "parametreler": {
+          "sure": "ilk 15 dk"
+        }
+      }
+    ],
+    "long_giris": [
+      "Açılıştan sonra ilk 15 dk aralığı oluşana kadar bekle",
+      "Aralık yükseğinin 2 tik üstüne buy-stop"
+    ],
+    "short_giris": [
+      "Aralık düşüğünün 2 tik altına sell-stop"
+    ],
+    "stop_loss": "Girişten 1 puan",
+    "kar_al": "Girişten 1 puan kâr",
+    "iz_suren_stop": null,
+    "zaman_cikisi": "İşlem 1 dakikadan uzun sürerse kapat",
+    "filtreler": [
+      "Yalnız NY açılışı"
+    ],
+    "pozisyon_risk": "Kitap: ~%75 isabet, 6 kurulum birlikte S&P'nin 1 lotunda günlük ~200$ iddiası; 10 lota kadar ölçekleme önerisi.",
+    "iddia_edilen_performans": "Kitaptaki çizelgede 9 işlem gününde 9 işlemin tamamı kazanan (S&P 500, 15dk açık aralık)",
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Kurallar sayısal; 1 dakikalık süre ve tick düzeyi veri gerektirir."
+    },
+    "belirsizlikler": [
+      "Hangi iki yönün de dolması halinde ne yapılacağı belirtilmemiş (ters emir iptali?)",
+      "Kitapta '1.5 puan hedef' kurallarının hangi modele ait olduğu metinde karışık; burada 10OJ'ye atandı"
+    ],
+    "uyumluluk_notu": "S&P 500 vadeli (puan/tick) üzerine; hisse endeksi/ABD seans saatine bağlı (NY açılışı); hacim gerekmez ama düşük tick/puan kaçınılmaz. Kripto/forex'te seans saati ve puan boyutu uyarlaması gerekir; 1 dakikalık çıkış kuralı ≥5m'de uygulanamaz.",
+    "varyantlar": [],
+    "anahtar_kelimeler": [
+      "acilis-araligi",
+      "kirilim",
+      "15orf",
+      "sp500",
+      "lbr"
+    ]
+  },
+  {
+    "kart_id": "scalp__saat-10-donus__ho-lbr",
+    "ad": "Saat 10 Dönüş Scalp (10OJ)",
+    "stil": "scalp",
+    "kaynak": {
+      "pdf": "LBR Scalp İşlem Kurulumları -  Kevin  Ho (4 sayfa) - @eseckal.pdf",
+      "sayfalar": [
+        2
+      ]
+    },
+    "ozet": "NY saatiyle 10:00 civarında piyasanın gün içi eğilimi tersine çevirme eğilimi kullanılır: açılıştan ilk 30 dk gün içi zirveye yakınsa short, dibe yakınsa long hazırlanır; son 15 dk barının uç noktasına 1 tik stop emri.",
+    "kategori": "formasyon",
+    "piyasa_rejimi": "herhangi",
+    "orijinal_piyasa": "vadeli",
+    "zaman_dilimi": {
+      "islem": "15m",
+      "ust_filtre": "tick-1m"
+    },
+    "gostergeler": [
+      {
+        "ad": "15 dakikalık bar",
+        "parametreler": {}
+      }
+    ],
+    "long_giris": [
+      "15 dk barı kapandığında piyasa ilk 30 dk için gün içi DİBE yakın",
+      "Son 15 dk barının YÜKSEĞİNİN 1 tik üstüne buy-stop"
+    ],
+    "short_giris": [
+      "15 dk barı kapandığında piyasa ilk 30 dk için gün içi ZİRVEYE yakın",
+      "Son 15 dk barının DÜŞÜĞÜNÜN 1 tik altına sell-stop"
+    ],
+    "stop_loss": "1 puan",
+    "kar_al": "1,5 puan",
+    "iz_suren_stop": null,
+    "zaman_cikisi": "1 dakikadan uzun süren işlem kapatılır; 10:30'dan sonra dolmamış emirler iptal, yeniden giriş yok",
+    "filtreler": [
+      "Yalnız 10:00-10:30 NY penceresi"
+    ],
+    "pozisyon_risk": "Kitap: ~%75 isabet, 6 kurulum birlikte S&P'nin 1 lotunda günlük ~200$ iddiası; 10 lota kadar ölçekleme önerisi.",
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "'Zirve/dibe yakın' için eşik verilmemiş; geri kalan sayısal."
+    },
+    "belirsizlikler": [
+      "'Yakın' ölçütü yok",
+      "Metin sütunları karışık: kar/zarar değerleri 15ORS ile ayrıştırması çıkarım"
+    ],
+    "uyumluluk_notu": "S&P 500 vadeli (puan/tick) üzerine; hisse endeksi/ABD seans saatine bağlı (NY açılışı); hacim gerekmez ama düşük tick/puan kaçınılmaz. Kripto/forex'te seans saati ve puan boyutu uyarlaması gerekir; 1 dakikalık çıkış kuralı ≥5m'de uygulanamaz.",
+    "varyantlar": [],
+    "anahtar_kelimeler": [
+      "saat-10",
+      "donus",
+      "acilis",
+      "sp500",
+      "lbr"
+    ]
+  },
+  {
+    "kart_id": "scalp__saat-15-donus__ho-lbr",
+    "ad": "Saat 15:00 Dönüş Scalp (3OJ)",
+    "stil": "scalp",
+    "kaynak": {
+      "pdf": "LBR Scalp İşlem Kurulumları -  Kevin  Ho (4 sayfa) - @eseckal.pdf",
+      "sayfalar": [
+        3
+      ]
+    },
+    "ozet": "ABD tahvil piyasasının 15:00 NY kapanışına bağlı dönüş eğilimi: 15:00'den önceki 30 dk'lık hareketin tersine stop emri verilir.",
+    "kategori": "formasyon",
+    "piyasa_rejimi": "herhangi",
+    "orijinal_piyasa": "vadeli",
+    "zaman_dilimi": {
+      "islem": "tick-5m",
+      "ust_filtre": null
+    },
+    "gostergeler": [
+      {
+        "ad": "30 dk hareket",
+        "parametreler": {}
+      }
+    ],
+    "long_giris": [
+      "15:00'ten önceki 30 dk hareket AŞAĞI ise buy-stop kur"
+    ],
+    "short_giris": [
+      "15:00'ten önceki 30 dk hareket YUKARI ise sell-stop kur"
+    ],
+    "stop_loss": "10OJ ile aynı varsayıldı (kitapta açık değil)",
+    "kar_al": "10OJ ile aynı varsayıldı",
+    "iz_suren_stop": null,
+    "zaman_cikisi": "15:30 sonrası dolmamış emirler iptal; yeniden giriş yok",
+    "filtreler": [
+      "Yalnız 15:00-15:30 NY"
+    ],
+    "pozisyon_risk": "Kitap: ~%75 isabet, 6 kurulum birlikte S&P'nin 1 lotunda günlük ~200$ iddiası; 10 lota kadar ölçekleme önerisi.",
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Giriş emrinin tam fiyatı ve çıkış rakamları açıkça verilmemiş."
+    },
+    "belirsizlikler": [
+      "Giriş stop seviyesi (son bar uç noktası?) belirtilmemiş",
+      "Stop/hedef değerleri 10OJ'den kopyalanmış varsayım"
+    ],
+    "uyumluluk_notu": "S&P 500 vadeli (puan/tick) üzerine; hisse endeksi/ABD seans saatine bağlı (NY açılışı); hacim gerekmez ama düşük tick/puan kaçınılmaz. Kripto/forex'te seans saati ve puan boyutu uyarlaması gerekir; 1 dakikalık çıkış kuralı ≥5m'de uygulanamaz.",
+    "varyantlar": [],
+    "anahtar_kelimeler": [
+      "saat-15",
+      "tahvil-kapanis",
+      "donus",
+      "lbr"
+    ]
+  },
+  {
+    "kart_id": "scalp__penny-pincher-yutan-mum__ho-lbr",
+    "ad": "Penny Pincher: Yutan Mum Scalp (10PP)",
+    "stil": "scalp",
+    "kaynak": {
+      "pdf": "LBR Scalp İşlem Kurulumları -  Kevin  Ho (4 sayfa) - @eseckal.pdf",
+      "sayfalar": [
+        3
+      ]
+    },
+    "ozet": "10 dakikalık mumlarda, işlem gününün ilk ve son saatlerinde yutan (engulfing) mum oluşunca piyasa fiyatından girilir; 1 puan kâr, 1 puan zarar veya 30 saniye zaman çıkışı.",
+    "kategori": "formasyon",
+    "piyasa_rejimi": "herhangi",
+    "orijinal_piyasa": "vadeli",
+    "zaman_dilimi": {
+      "islem": "10m",
+      "ust_filtre": null
+    },
+    "gostergeler": [
+      {
+        "ad": "Mum formasyonu",
+        "parametreler": {
+          "tur": "yutan"
+        }
+      }
+    ],
+    "long_giris": [
+      "Yükseliş yutan: mevcut mumun beyaz (yeşil) gövdesi son koyu gövdeli mumun en yükseğini aşınca piyasadan AL"
+    ],
+    "short_giris": [
+      "Düşüş yutan: mevcut koyu gövde son beyaz gövdeli mumun en düşüğüne inince piyasadan SAT"
+    ],
+    "stop_loss": "1 puan",
+    "kar_al": "1 puan",
+    "iz_suren_stop": null,
+    "zaman_cikisi": "İşlem 30 saniyeden uzun sürerse çık",
+    "filtreler": [
+      "Yalnız işlem gününün ilk ve son saati"
+    ],
+    "pozisyon_risk": "Kitap: ~%75 isabet, 6 kurulum birlikte S&P'nin 1 lotunda günlük ~200$ iddiası; 10 lota kadar ölçekleme önerisi.",
+    "iddia_edilen_performans": "Bir haftada 15 işlemden 14'ü kazanan (kitap grafiği)",
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Tanım net; 30 sn çıkışı tick verisi ister."
+    },
+    "belirsizlikler": [
+      "'Yutan' mumda gövde/gölge karşılaştırma ayrıntısı eksik",
+      "Aynı mumda yutma sinyali çok sık olabilir"
+    ],
+    "uyumluluk_notu": "S&P 500 vadeli (puan/tick) üzerine; hisse endeksi/ABD seans saatine bağlı (NY açılışı); hacim gerekmez ama düşük tick/puan kaçınılmaz. Kripto/forex'te seans saati ve puan boyutu uyarlaması gerekir; 1 dakikalık çıkış kuralı ≥5m'de uygulanamaz.",
+    "varyantlar": [],
+    "anahtar_kelimeler": [
+      "yutan-mum",
+      "engulfing",
+      "penny-pincher",
+      "lbr"
+    ]
+  },
+  {
+    "kart_id": "scalp__5dk-std-sapma-geri-cekilme__ho-lbr",
+    "ad": "5 Dakika 10-bar MA ±1 SD Geri Çekilme Scalp",
+    "stil": "scalp",
+    "kaynak": {
+      "pdf": "LBR Scalp İşlem Kurulumları -  Kevin  Ho (4 sayfa) - @eseckal.pdf",
+      "sayfalar": [
+        3,
+        4
+      ]
+    },
+    "ozet": "5 dk grafikte 10 barlık MA ve ±1 standart sapma bantları; bantlar yukarı eğimliyken alt banda inen düşüş AL, aşağı eğimliyken üst banda çıkan rallide SAT.",
+    "kategori": "trend_takip",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "vadeli",
+    "zaman_dilimi": {
+      "islem": "5m",
+      "ust_filtre": null
+    },
+    "gostergeler": [
+      {
+        "ad": "SMA",
+        "parametreler": {
+          "periyot": 10
+        }
+      },
+      {
+        "ad": "Bollinger",
+        "parametreler": {
+          "periyot": 10,
+          "sapma": 1
+        }
+      }
+    ],
+    "long_giris": [
+      "Bantların eğimi yukarı (yükseliş trendi)",
+      "Fiyat alt banda düşer -> AL"
+    ],
+    "short_giris": [
+      "Bantların eğimi aşağı (düşüş trendi)",
+      "Fiyat üst banda çıkar -> SAT"
+    ],
+    "stop_loss": "1,25 puan zarar VEYA girişten sonra bantların eğimi değişirse çık",
+    "kar_al": "2 puan kâr VEYA fiyat karşı banda dokununca (hangisi önce)",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Eğim koşulu: bantların eğimi trend yönünde"
+    ],
+    "pozisyon_risk": "Kitap: ~%75 isabet, 6 kurulum birlikte S&P'nin 1 lotunda günlük ~200$ iddiası; 10 lota kadar ölçekleme önerisi.",
+    "iddia_edilen_performans": "Grafik örneği: 3 işlem gününde 14 işlemden 10 kârlı",
+    "kodlanabilirlik": {
+      "puan": 3,
+      "gerekce": "Tamamen sayısal: MA, SD, eğim işareti, 2 puan/1,25 puan."
+    },
+    "belirsizlikler": [
+      "'Eğim' için eşik/tanım yok (son N bar farkı?)",
+      "Puan değerleri S&P'ye göre"
+    ],
+    "uyumluluk_notu": "S&P 500 vadeli (puan/tick) üzerine; hisse endeksi/ABD seans saatine bağlı (NY açılışı); hacim gerekmez ama düşük tick/puan kaçınılmaz. Kripto/forex'te seans saati ve puan boyutu uyarlaması gerekir; 1 dakikalık çıkış kuralı ≥5m'de uygulanamaz. Puan hedefleri enstrümana ATR ile ölçeklenmeli.",
+    "varyantlar": [],
+    "anahtar_kelimeler": [
+      "bollinger",
+      "10-ma",
+      "1-sd",
+      "geri-cekilme",
+      "lbr"
+    ]
+  },
+  {
+    "kart_id": "scalp__anti-stokastik__ho-lbr",
+    "ad": "Linda Raschke 'ANTI' (7 Stokastik + 10 MA) Scalp",
+    "stil": "scalp",
+    "kaynak": {
+      "pdf": "LBR Scalp İşlem Kurulumları -  Kevin  Ho (4 sayfa) - @eseckal.pdf",
+      "sayfalar": [
+        4
+      ]
+    },
+    "ozet": "5 dk'da 7 periyot yavaş stokastik ve onun 10 barlık hareketli ortalaması: stokastik yukarı eğimli MA'sını yukarı keserse AL, aşağı eğimli MA'sını aşağı keserse SAT; 2 puan hedef, 1,5 puan stop.",
+    "kategori": "momentum",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "vadeli",
+    "zaman_dilimi": {
+      "islem": "5m",
+      "ust_filtre": null
+    },
+    "gostergeler": [
+      {
+        "ad": "Yavaş Stokastik",
+        "parametreler": {
+          "periyot": 7
+        }
+      },
+      {
+        "ad": "SMA (stokastik üzerinde)",
+        "parametreler": {
+          "periyot": 10
+        }
+      }
+    ],
+    "long_giris": [
+      "5 dk bar kapanışında stokastik, kendi YUKARI eğimli 10 barlık MA'sını yukarı keser -> piyasadan AL"
+    ],
+    "short_giris": [
+      "5 dk bar kapanışında stokastik, kendi AŞAĞI eğimli 10 barlık MA'sını aşağı keser -> piyasadan SAT"
+    ],
+    "stop_loss": "1,5 puan zarar VEYA 3 dakika sonra ilerleme yoksa çık",
+    "kar_al": "2 puan kâr",
+    "iz_suren_stop": null,
+    "zaman_cikisi": "3 dk içinde ilerleme yoksa çıkış; yeniden giriş yok",
+    "filtreler": [
+      "MA eğimi trend filtresi"
+    ],
+    "pozisyon_risk": "Kitap: ~%75 isabet, 6 kurulum birlikte S&P'nin 1 lotunda günlük ~200$ iddiası; 10 lota kadar ölçekleme önerisi.",
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Kurallar net; stokastik K/D yumuşatma değerleri ve 'eğim' tanımı eksik."
+    },
+    "belirsizlikler": [
+      "Stokastik K, D yumuşatma değerleri verilmemiş",
+      "'3 dk ilerleme yok' tanımı"
+    ],
+    "uyumluluk_notu": "S&P 500 vadeli (puan/tick) üzerine; hisse endeksi/ABD seans saatine bağlı (NY açılışı); hacim gerekmez ama düşük tick/puan kaçınılmaz. Kripto/forex'te seans saati ve puan boyutu uyarlaması gerekir; 1 dakikalık çıkış kuralı ≥5m'de uygulanamaz. 5m'de çalışır; 3 dk çıkışı 5m barlarla kodlanamaz.",
+    "varyantlar": [],
+    "anahtar_kelimeler": [
+      "stokastik",
+      "anti",
+      "raschke",
+      "ortalama-kesisim",
+      "lbr"
+    ]
+  }
+]

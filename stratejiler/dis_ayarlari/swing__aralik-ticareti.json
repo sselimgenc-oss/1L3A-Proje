@@ -1,0 +1,14 @@
+[
+ {
+  "dis_id": "tv:XRZCjbFr",
+  "kaynak_dosya": "arsiv/strateji-sg/tv_eleme_dali/pine/XRZCjbFr.pine",
+  "parametreler": {
+   "adx_esik": 0.0,
+   "bant": 0.25,
+   "min_genislik_atr": 3.0,
+   "pencere": 50
+  },
+  "cikis_ayarlari": null,
+  "not": "YAKLAŞIK: 50 mumluk kanalın alt %25 bölgesi; hedef karşı sınır (kaynakta orta); SMA200 filtresi yok."
+ }
+]

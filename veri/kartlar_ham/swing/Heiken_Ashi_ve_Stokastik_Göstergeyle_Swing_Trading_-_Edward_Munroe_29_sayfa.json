@@ -1,0 +1,233 @@
+[
+ {
+  "kart_id": "swing__ha-stokastik-100sma-geri-cekilme__munroe",
+  "ad": "Heikin Ashi + Stokastik Geri Çekilme Girişi (100 SMA trend filtresi)",
+  "stil": "swing",
+  "kaynak": {
+   "pdf": "Heiken_Ashi_ve_Stokastik_Göstergeyle_Swing_Trading_-_Edward_Munroe_29_sayfa.pdf",
+   "sayfalar": [
+    9,
+    10,
+    17
+   ]
+  },
+  "ozet": "100 SMA eğimi ve fiyatın konumu trendi belirler; trend içi geri çekilmede HA mumları karşı renge döndükten sonra trend rengine geri döndüğünde ve stokastik trend yönünde kesiştiğinde trend yönünde giriş yapılır.",
+  "kategori": "trend_takip",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "forex",
+  "zaman_dilimi": {
+   "islem": "4h",
+   "ust_filtre": "1w"
+  },
+  "gostergeler": [
+   {
+    "ad": "Heikin Ashi",
+    "parametreler": {}
+   },
+   {
+    "ad": "SMA",
+    "parametreler": {
+     "periyot": 100
+    }
+   },
+   {
+    "ad": "Stokastik",
+    "parametreler": {
+     "K": 8,
+     "D": 3,
+     "yavaslama": 3,
+     "fiyat_alani": "low/high"
+    }
+   }
+  ],
+  "long_giris": [
+   "Fiyat 100 SMA'nın üzerinde ve SMA yukarı eğimli",
+   "Trende karşı (kırmızı) HA mumlarından oluşan bir geri çekilme yaşanmıştır",
+   "HA mumları yeşile döner",
+   "Stokastik (8,3,3) yukarı yönlü, düzgün (yumuşak) bir kesişim yapar -> long"
+  ],
+  "short_giris": [
+   "Fiyat 100 SMA altında ve SMA aşağı eğimli; yeşil HA mumlarıyla geri çekilme; HA kırmızıya döner ve stokastik aşağı kesişir -> short"
+  ],
+  "stop_loss": "HA renk değişiminden önceki son dip/tepenin hemen ötesi (4s'te ortalama ~50 pip); ortalamanın çok üzerinde stop gerekiyorsa işlem atlanır",
+  "kar_al": "Sabit hedef yok; 1:3'e kadar R:R mümkün olduğu belirtilir. Çıkış stopun iz sürmesiyle",
+  "iz_suren_stop": "Fiyat hareketinin arkasından stop takip edilir (HA mumlarının arkası); basit çıkış: ters renkte HA mumu/stokastik dönüşü",
+  "zaman_cikisi": null,
+  "filtreler": [
+   "SMA düzse ve fiyat SMA'yı sık kesiyorsa işlem yok",
+   "Yuvarlak sayı seviyelerine yakın işlemler daha güçlü; destek/direnç yakınından uzak durulmalı",
+   "Güçlü para birimini zayıfa karşı al (aylık 8 SMA tabanlı güç sıralaması) ve faiz farkı, opsiyonel"
+  ],
+  "pozisyon_risk": "İşlem başına bakiyenin %0,5'i (örnek); pip başına değer ona göre",
+  "iddia_edilen_performans": "Temel girişle ~%40 vuruş oranı ve 1:3'e varan R:R (kitabın iddiası, doğrulanmamış)",
+  "kodlanabilirlik": {
+   "puan": 3,
+   "gerekce": "SMA100 eğimi, HA renk dönüşü ve stokastik kesişimi tamamen ölçülebilir; 'yumuşak' kesişim ve 'eğimli' için küçük varsayım gerekir."
+  },
+  "belirsizlikler": [
+   "SMA eğiminin eşiği (kitapta ATR yüzdesi göstergesi var) yok",
+   "'Yumuşak' stokastik kesişim tanımı yok",
+   "Kar alma net değil, yalnızca iz süren stop",
+   "Stop tampon büyüklüğü yok"
+  ],
+  "uyumluluk_notu": "4s ve altında da çalışır; 5m'ye uyarlanabilir ama kitap 4s öneriyor. Hacim gerekmez. Forex dili ama kripto/hisse/emtiada denenebilir.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "heikin-ashi",
+   "stokastik",
+   "sma-100",
+   "geri-cekilme",
+   "trend-takip"
+  ]
+ },
+ {
+  "kart_id": "swing__coklu-zd-trend-piramit__munroe",
+  "ad": "Çoklu Zaman Dilimi Trend Takibi + Piramitleme (haftalık sinyal, 4s giriş)",
+  "stil": "swing",
+  "kaynak": {
+   "pdf": "Heiken_Ashi_ve_Stokastik_Göstergeyle_Swing_Trading_-_Edward_Munroe_29_sayfa.pdf",
+   "sayfalar": [
+    17,
+    18,
+    19,
+    20,
+    25
+   ]
+  },
+  "ozet": "Üst zaman diliminde (haftalık) HA renk değişimi ve stokastik kesişimi trend başlangıcını işaret edince, alt zaman diliminde (4s) 100 SMA tarafında temel giriş modeli tekrar tekrar uygulanır; önceki pozisyonların stopları başabaşa çekilerek trend boyunca piramitlenir.",
+  "kategori": "trend_takip",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "forex",
+  "zaman_dilimi": {
+   "islem": "4h",
+   "ust_filtre": "1w"
+  },
+  "gostergeler": [
+   {
+    "ad": "Heikin Ashi",
+    "parametreler": {}
+   },
+   {
+    "ad": "SMA",
+    "parametreler": {
+     "periyot": 100
+    }
+   },
+   {
+    "ad": "Stokastik",
+    "parametreler": {
+     "K": 8,
+     "D": 3,
+     "yavaslama": 3,
+     "fiyat_alani": "low/high"
+    }
+   }
+  ],
+  "long_giris": [
+   "Üst zaman diliminde (4s için haftalık; günlük için aylık; saatlik için günlük) HA yeşile döner ve stokastik yukarı keser",
+   "Alt zaman diliminde fiyat 100 SMA üzerinde",
+   "Alt zaman diliminde her geri çekilme sonrası temel giriş modeli (HA yeşil + stokastik yukarı) ile long girilir; trend gelişirken yeni girişler eklenir"
+  ],
+  "short_giris": [
+   "Aynı kurallar ters yönde (haftalık HA kırmızı + stokastik aşağı kesişim, 4s fiyat SMA altı)"
+  ],
+  "stop_loss": "Alt zaman diliminde 100 SMA'nın 10-20 pip gerisinde ortak stop; önceki girişlerin stopları yeni giriş yükseldikçe başabaş veya daha iyisine çekilir (toplam risk hep tek stop)",
+  "kar_al": "Kar alma kullanılmaz",
+  "iz_suren_stop": "Stoplar fiyat hareketinin arkasından, durdurulana kadar taşınır",
+  "zaman_cikisi": null,
+  "filtreler": [
+   "Üst/alt zaman dilimi oranı: 4s için haftalık, günlük için aylık, 1s için günlük, 15m için 4s, 5m için 1s",
+   "Üst zaman dilimi sinyalinin mükemmel olması gerekmez (SMA eğimi kusurlu olabilir)"
+  ],
+  "pozisyon_risk": "İşlem başına %0,5 bakiye riski; hesabın yalnızca 10 işlem için gereken marjı yatırılır",
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 2,
+   "gerekce": "Üst zaman dilimi sinyali ve alt zaman dilimi girişi ölçülebilir; piramitleme ve stop taşıma kuralları genel bırakılmış."
+  },
+  "belirsizlikler": [
+   "Kaç girişe kadar piramitleme yapılacağı yok",
+   "Stopun hangi girişlerde nasıl taşınacağı sayısal değil",
+   "Üst zaman dilimi sinyalinin geçerlilik süresi yok"
+  ],
+  "uyumluluk_notu": "Zaman dilimi oranı mantığı 5m/1s'ye taşınabilir (5m için 1s üst). Kaldıraç/pip kısmı forexe özgü. Çoklu giriş motoru gerekir.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "coklu-zaman-dilimi",
+   "piramitleme",
+   "heikin-ashi",
+   "stokastik",
+   "trend-takip",
+   "kar-alma-yok"
+  ]
+ },
+ {
+  "kart_id": "swing__ha-doji-donus__munroe",
+  "ad": "Heikin Ashi Doji Dönüşü (geri çekilme sonu)",
+  "stil": "swing",
+  "kaynak": {
+   "pdf": "Heiken_Ashi_ve_Stokastik_Göstergeyle_Swing_Trading_-_Edward_Munroe_29_sayfa.pdf",
+   "sayfalar": [
+    14,
+    15,
+    16
+   ]
+  },
+  "ozet": "Trend karşıtı yumuşak bir harekette stokastik tepeden/dipten döner ve her iki ucunda uzun fitilli, küçük gövdeli HA dojisi oluşur; sonraki mumun trend yönünde büyük gövdeyle açıldığı yerde trend yönünde giriş yapılır.",
+  "kategori": "formasyon",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "forex",
+  "zaman_dilimi": {
+   "islem": "5m",
+   "ust_filtre": "1h"
+  },
+  "gostergeler": [
+   {
+    "ad": "Heikin Ashi",
+    "parametreler": {}
+   },
+   {
+    "ad": "Stokastik",
+    "parametreler": {
+     "K": 8,
+     "D": 3,
+     "yavaslama": 3,
+     "fiyat_alani": "low/high"
+    }
+   }
+  ],
+  "long_giris": [
+   "Trend aşağı yönlü bir geri çekilmeyle (kırmızı HA'lar) ilerlemiş ve stokastik dipten yukarı keser",
+   "Küçük gövdeli, iki ucunda uzun fitilli HA dojisi oluşur",
+   "Sonraki mumun açılışında büyük gövdeli trend yönlü HA mumu görülünce long (trend yönü yukarı)"
+  ],
+  "short_giris": [
+   "Aynı mantık ters yönde (stokastik tepeden aşağı keser, HA doji, sonraki büyük kırmızı HA mumu)"
+  ],
+  "stop_loss": null,
+  "kar_al": "Fiyat trend yönünde ilerledikten sonra HA mumları karşı renge dönüp stokastik tersine kesince kapat veya stopu mumların arkasına sıkıştır",
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 1,
+   "gerekce": "Doji tanımı (küçük gövde, uzun fitiller) görsel; stop ve eşikler yok."
+  },
+  "belirsizlikler": [
+   "Stop kuralı verilmemiş",
+   "Doji için gövde/fitil oranı yok",
+   "Örnekler 5dk EURUSD simülatörü, kuralları genel"
+  ],
+  "uyumluluk_notu": "5m dahil her zaman dilimine uyarlanabilir (kitapta 5m örneği var). Hacim gerekmez.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "heikin-ashi",
+   "doji",
+   "stokastik",
+   "geri-donus",
+   "fitil"
+  ]
+ }
+]

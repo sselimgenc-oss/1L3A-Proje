@@ -1,6 +1,6 @@
 # 1L3A — Durum ve Kararlar
 
-_Son güncelleme: 2026-11-06_
+_Son güncelleme: 2026-11-06 (Aşama 1 ara durum)_
 
 ## Takım düzeni
 - **Lider (Claude Opus):** planlama, görev/ajan dağıtımı, denetim, kalite.
@@ -13,9 +13,11 @@ _Son güncelleme: 2026-11-06_
 3. Min zaman dilimi 5 dk. Stratejiler deterministik kod; LLM ajanları her mumda değil, ≥15 dk aralıkla üst seviyede karar verir (rejim, sermaye dağılımı, işlem sonrası analiz).
 4. Öğrenme: lider değişiklik önerir → walk-forward test → kullanıcı onayı. Canlıda kendini değiştiren kod yok.
 5. Sert risk limitleri LLM kontrolü dışında. Martingale kesin ret.
-6. Binance: kripto + TradFi (ABD hisse, emtia) perpetual'ları. BIST yok.
+6. Binance: kripto + TradFi (ABD hisse, emtia) perpetual'ları. ~~BIST yok.~~ (2026-11-07 kullanıcı: BIST eklendi, karar 27)
 7. Önce paper trading (Binance testnet değil, canlı veri + kendi simülasyon motoru).
 8. DigitalOcean'da çalışır; dashboard + Telegram.
+9. ~~(2026-11-06) Az enstrüman, derin uzmanlık.~~ (2026-11-07 kullanıcı kararıyla değişti → karar 23)
+10. (2026-11-06) Önceki projelerden aday stratejileri lider seçer (enstrüman sayısına bakmadan, işe yarayacağını düşündükleri); hepsi 1L3A'da yeniden test edilir. Delist/hayatta kalma yanlılığı ile uğraşılmaz.
 
 ## Aşama 0 — tamamlandı
 - 50 PDF → `veri/kartlar_ham/` altında **438 kart** (scalp 94, day trade 126, swing 218).
@@ -31,12 +33,309 @@ _Son güncelleme: 2026-11-06_
 - Elenenler: opsiyon, temel/olay verisi, tescilli göstergeler (LuxAlgo, VSA, ML), Level-2/TICK, martingale.
 - Kitaplardaki kazanma oranı iddiaları çoğunlukla kanıtsız (raporda "şüpheli" işaretli).
 
-## Sıradaki — Aşama 1
-1. Binance'te TradFi perpetual'larının geçmiş veri uzunluğunu kontrol et (yeni listelendikleri için kısa olabilir → gerekirse dayanak varlık verisiyle backtest, seans farkına dikkat).
-2. Geçmiş mum verisi indirme ve saklama (`veri/mumlar/`, parquet; repoya girmez).
-3. Strateji arayüzü (tek tip: sinyal üret → giriş/stop/hedef) + çıkış/risk modülleri.
-4. Backtest motoru: komisyon, kayma, funding, `Decimal` + borsa filtreleri, walk-forward.
-5. Aday aileleri koda dök (Sonnet), denetle (lider).
+## Aşama 1 — devam ediyor
+Yapılanlar:
+- **Veri:** Binance API bu bulut makinesinden konum nedeniyle engelli; geçmiş veri `data.binance.vision` arşivinden
+  (`motor/veri/`: indirme + sha256 + parquet + 5m→üst TF). Arşivde 2026-10-28 günü tüm sembollerde eksik.
+  Funding aralığı sembole göre değişir (BTC 8s, XAU 4s).
+- **Sembol envanteri:** `veri/sembol_envanteri.csv` — 1080 sembol. TradFi geçmişi kısa: en eski XAU 2025-12,
+  hisseler 2026-01..10 (≈1–10 ay). Sınıflandırma tahmini; kesin liste exchangeInfo ile (API erişimli sunucudan).
+- **Backtest çekirdeği:** strateji arayüzü, göstergeler, Decimal motor (komisyon/kayma/funding, step aşağı yuvarlama),
+  sert limitler (TASLAK), walk-forward, metrikler. İlk deneme (BTC 5m, EMA 9/21, 2 ay): −%17, komisyon sermayenin ~%9'u
+  → 5m'de %1 risk kaldıraç tavanına dayanıyor, maliyet baskın.
+- **Sürüyor:** swing ailelerinin kodu (9 aile), stop kayması ayrı + limit "ölç" modu, yazar sayısı denetimi,
+  BTC/ETH 2020– 5m veri indirme.
+
+### Aşama 0 denetim bulguları (lider)
+- Kartların piyasası: hisse 185, genel 154, vadeli 64, forex 32, **kripto 2**, emtia 1 → kitap iddiaları bizim enstrümanlarda denenmemiş.
+- 51 kart 1m kaynaklı (çoğu scalp) → 5m'ye taşınınca "esinlenen" stratejiye dönüşür.
+- Day trade önerilenlerin 6/10'u ≤2 yazar; bb-sıkışma ve stokastik tek kart.
+- Çok stilli 33 ailenin kanonik kuralı stiller arasında birebir kopya (ör. daytrade__stokastik-donus'un tek kartı Williams %R).
+  → Koda dökerken kaynak kartlar esas alınır.
+- Yazar sayısı yakın-ama-farklı kurallarla şişmiş olabilir (denetim sürüyor: `stratejiler/yazar_denetimi.csv`).
+- 166 kartta stop, 192 kartta kâr al yok → çıkış modülü seçimi sonucu belirleyecek.
+- Çoklu test riski (45 aday × ızgara × sembol) → Aşama 2'de eleme eşikleri gerekli.
+
+### Önceki projeler (kapatıldı, arşivlendi)
+`algo-sg`, `strateji-sg`, `swing-sg` kapatıldı; kod, stratejiler, sonuçlar, kağıt bot durumları `arsiv/` altında
+(kitap/PDF alınmadı — kullanıcı kararı). Dersler ve aday/elenen listesi: [arsiv/OZET.md](arsiv/OZET.md).
+Ana ders: önceki sonuçlar OOS'a bakılarak seçilmiş ve kâr birkaç işlemde yoğun → üst sınır kabul edilir.
+
+### Kararlar (2026-11-06, kullanıcı onaylı)
+11. **Scalp:** yalnız ≥15m, en güçlü 4–5 aday; hiçbiri geçmezse scalp ajanı kapanır.
+12. **Day trade:** 10'a tamamlanmaz; en güçlü 5–6 aday (KGT dahil).
+13. **Eleme ölçütü:** maliyet+funding sonrası kârlı, OOS PF ≥ 1.2, ≥ 50 işlem, en iyi %5 işlem çıkarılınca çökmez,
+    OOS parametre seçiminde asla görülmez (seçim yalnız walk-forward eğitim pencerelerinde).
+14. **Sert limitler kesin:** işlem başı %1 (2026-11-09'dan itibaren MALİYET DAHİL: fiyat riski + stop kayması + 2 komisyon; ON_KAYIT Güncelleme 8), günlük %3 (dolunca açık pozisyon da kapanır), 3x, %20 kill switch.
+15. **Sunucu:** DigitalOcean Frankfurt.
+16. ~~Veri/seçim: BTC+ETH 2020–; TradFi yalnız doğrulama.~~ (2026-11-06 kullanıcı kararıyla değişti → karar 22)
+17. ~~Enstrüman: başlangıçta 3–5 (BTC, ETH, XAU + 1–2).~~ (2026-11-06 → karar 22). README'deki ~25 enstrüman planı iptal.
+19. (2026-11-06) **Hepsi test edilir, erken eleme yok:** ~700 aday (438 kart + 160 TradingView + 68 freqtrade + ~30 dış kural).
+    Huni: (1) hepsi kodlanır → (2) geniş tarama, yalnız apaçık umutsuzlar elenir → (3) walk-forward (karar 13) →
+    (4) kilitli dönem → ajan başına ~3.
+20. (2026-11-06) **Kilitli dönem:** 2025-11-01 00:00 UTC sonrası veri kasada. Tarama/walk-forward/seçimde kullanılmaz;
+    final seçimde yalnız BİR kez açılır (açılış kayda geçer).
+21. (2026-11-06) KGT iki aday: `onceki__kgt` (swing, orijinal, günlerce tutar) + `onceki__kgt-gun` (day trade, gün sonu kapanır).
+22. (2026-11-06) **Test evreni (kullanıcı kararı):** yalnız kripto değil. Kripto: BTC, ETH, SOL (Binance verisi).
+    TradFi: Magnificent 7 (AAPL, MSFT, GOOGL, AMZN, NVDA, META, TSLA) + altın (XAU) + petrol (WTI) + bakır.
+    TradFi geçmişi Binance'ta kısa olduğundan veri **Dukascopy**'den çekilir (`DK_` önekli semboller); canlı işlem
+    Binance TradFi perp'lerinde. Maliyet modeli Binance'ınki; Dukascopy verisinde funding yok. Kilit tarihi aynı.
+    Canlıda yine az enstrüman (karar 9): enstrüman seçimi testlerin sonucuna göre yapılır.
+23. (2026-11-07) **Canlıda enstrüman sayısı artacak (kullanıcı kararı); portföy katmanı zorunlu.** (a) Çok enstrümanlı
+    portföy motoru: aynı anda birden çok grafik, portföy düzeyinde sert limitler (günlük %3, %20 kill switch, toplam 3x;
+    işlem başı %1 risk her pozisyonda korunur). (b) Tek-grafik stratejilerinin birleşik çalıştırılması (risk üst üste
+    binmesi, korelasyon). (c) "Tek enstrüman mimarisi" yüzünden elenen tüm stratejiler (rotasyon, kesitsel momentum,
+    çift işlemi, KMN vb.) kodlanıp test edilir — strateji kaçırılmaz. ML ve opsiyon gibi başka nedenle elenenler hariç.
+24. (2026-11-07) **Portföy stratejileri için eleme ölçütü (kullanıcı onayı):** işlem sayısı yerine OOS ≥ 3 yıl ve
+    ≥ 20 yeniden dengeleme; başarı Sharpe ve düşüşle ölçülür (lider eşikleri: OOS net > 0, OOS Sharpe ≥ 0.5,
+    OOS max düşüş ≤ %20). (2026-11-07 güncelleme, kullanıcı onayı: "en iyi %5 gün hariç net > 0" kaldırıldı — al-tut dahil
+    hiçbir günlük seri geçemiyordu; yoğunlaşma sağlamlık aşamasında ölçülür.) Tek-grafik stratejilerinde karar 13 aynen geçerli.
+25. (2026-11-07) **Portföy risk bütçesi (kullanıcı onayı):** tek-grafik stratejilerinde işlem başı %1 aynen kalır.
+    Portföy (hedef ağırlık) stratejilerinde pozisyon başına %1 yerine **portföyün toplam stop riski ≤ %5**; günlük %3,
+    %20 kill switch ve 3x tavanı her iki türde aynen geçerli. Değer koddadır (SERT_LIMITLER), ajan aşamaz.
+26. (2026-11-07) **Yetki devri (kullanıcı):** canlı para dışındaki strateji/araştırma kararlarını lider sorumluluk alarak
+    verir ve sonrasında kullanıcıya bildirir. Canlı para (gerçek emir, sermaye, API anahtarı, sert limitlerin gevşetilmesi)
+    her zaman kullanıcı onayı ister. Lider kararları "Lider kararları günlüğü" bölümüne yazılır.
+18. Önceki projelerden alınanlar: 4S kırılım (algo-sg A + swing-sg S2 birleşik), KGT, S1; yedek B. S3 alınmadı. KMN portföy katmanında test edilecek (karar 23).
+
+## Aşama 2 — devam ediyor (2026-11-07)
+- Katman 1 ✅: 192 strateji kodlu (105 kitap + 87 dış), 226 kart ayarı, 110 dış ayar. 1501+ test.
+- Katman 2 ✅ (kripto): geniş tarama 3168 + ızgara ~27k koşu (`sonuclar/tarama/`). Swing %66 PF>1; daytrade %8, scalp %3.
+  Uyarı: 2020–25 kripto boğa dönemi (BTC 15x) uzun-trend stratejilerini şişiriyor.
+- Katman 3 (kripto) ✅: hızlı walk-forward (`motor/arastirma/wf_tarama.py`; swing 730/180 gün, day/scalp 365/90).
+  1140 görevden karar 13'ü geçen 32 (swing 31, daytrade 1, scalp 0). Hiçbiri 3 kripto sembolün üçünde birden geçmedi.
+- Katman 3b (kripto) ✅: sağlamlık (`motor/arastirma/saglamlik.py`; kapılar: maliyet×2 PF≥1.05, rastgele giriş p≤0.05,
+  bootstrap PF alt sınırı >1, komşu parametrelerin ≥%60'ında PF>1). 32 adaydan 13'ü geçti (öneri). Uyarılar: Bonferroni'yi
+  hiçbiri geçmiyor; aynı strateji komşu sembol/TF'de çoğunlukla zayıf; DSR ≈ 0.
+- Portföy katmanı (karar 23) ✅ motor + 15 strateji sınıfı (71 adaydan 54 bağlandı) + portföy walk-forward.
+  Kripto: 0/15 karar 13; 8'i Sharpe'ta al-tutu geçiyor; 2022'de al-tut −%75, çoğu strateji −%14..+%5.
+- Veri ⏳: Dukascopy (karar 22). DK_AAPL 5m tamam (2017–); dakikalık indirme yavaş (9–30 saat). Hızlı yol: aylık
+  saatlik dosyalar → swing/daytrade 1h+ testleri önce; 15m/30m dakikalık veri tamamlanınca.
+
+## Lider kararları günlüğü (karar 26)
+- 2026-11-09 (gece, dış denetim turları 2-3 sonrası; canlı para/risk limiti değişmedi):
+  (1) Test taşınabilirliği: pandas 2/3 hash farkı giderildi, pf WF veri_dizini, gerçek veri testleri işaretli; requirements pandas<4.
+  (2) Y-1: gün sonu kapanışı portföy + paper motorlarına taşındı (30m seanslı veride backtest=portföy=paper birebir). Yeni set paper'a
+  bu düzeltme olmadan alınamazdı. (3) Y-2: paper desteklemediği çıkış alanında başlamaz (fail-closed). (4) Y-3: K1c gecikme stresi
+  takvim bayrağını kaydırmaz. (5) Y-4: holdout mührü v3 (evren, git commit, 14 ortak modül). (6) Y-5 (tek-grafik kaldıraç tavanı
+  komisyonsuz, ~%0.15 fazla) ham tarama BİTİNCE düzeltilecek — tarama ortasında motor davranışı değiştirilmez.
+  Kullanıcıya sorulacak: main'e birleştirme + dal koruması, CI kurulumu, pano erişim kontrolü.
+- 2026-11-09: Güncelleme 8 uygulandı. Lider kararları: sonuclar/kilit/set.csv ve final beklenti aralıkları ESKİ boyutla üretilmiş tarihsel
+  kayıt olarak kalır (yeniden üretilmez; testi eski kurala göre doğrular). Portföy toplam %5 stop riski fiyat riski olarak kalır.
+- 2026-11-09 (KULLANICI onayı, lider önerisi): (1) işlem başı %1 risk MALİYET DAHİL (stop kayması + 2 komisyon) — backtest, evren oynatma,
+  portföy ve paper motorunda tutarlı; ham tarama etkilenmez (r tanımı aynı), WF bu kuralla koşar (ON_KAYIT Güncelleme 8).
+  (2) Paper TradFi funding ödenir ama ayrı alanda tutulur; backtest beklentisine uyum karşılaştırmaları TradFi funding hariç yapılır.
+- 2026-11-09 (KULLANICI): sunucudaki paper eski 7'li setle yalnız 'deneme sürüşü' (altyapı izleme) olarak çalışır; sonuçlarına bakılmaz.
+  Evren testi + seçim bitince yeni setle sıfırdan başlatılır. Öncelik: Fable denetim düzeltmeleri ve strateji testleri.
+- 2026-11-08 (KULLANICI kararı): BIST projeden TAMAMEN çıkarıldı (karar 27 evreni değişti: 48 -> 35 = 13 kripto + 17 ABD hissesi + 5 emtia;
+  scalp da bu 35'te). Gerekçe: canlı işlem yolu yok, açığa satış/ödünç maliyeti ve TRY enflasyonu gerçekçi modellenemiyor. ON_KAYIT Güncelleme 7.
+  İleride BIST istenirse ayrı test (yalnız long, USD bazlı, gerçek maliyet) kurulur. Tüm stillerin WF'si 35 evrenle yeniden hesaplanır.
+- 2026-11-08: ON_KAYIT Güncelleme 6 uygulandı. Aşama sırası artık: ham → wf → (olcut: BIST'siz genişlik yeniden değerlendirme) → pbo → sağlamlık → seçim → holdout.
+  Holdout mührü sürüm 2 (wf/sağlamlık/pbo + strateji kodu/kart hash'leri; holdout başlayınca önceki aşamalar yazamaz). K2 tutma süresi mum konumundan.
+- 2026-11-08 (KULLANICI kararları, Fable denetimi sonrası; WF sonuçları GÖRÜLDÜKTEN sonra, sağlamlık koşulmadan önce):
+  1) DSR/K5: seçenek (a) — N ve V aynı popülasyondan (stil×tf grubunun aday-ayar OOS Sharpe'ları); eski denemeler ayrı 'bilgi DSR'si'; eşik 0.90 aynı.
+  2) Kill switch olayı: kapı değil, bilgi sütunu.  3) BIST: yalnız bilgi — geçme kapılarında (kârlı sınıf/enstrüman oranı) sayılmaz, evrende koşar.
+  4) İşlem başı %1 riske maliyet katılması: evren testi bittikten sonra ele alınacak.
+  Sonuç: kapılar değiştiği için swing/daytrade/scalp/portföy WF aşaması yeni kurallarla yeniden hesaplanır (ham tarama gerekmez, swing hamı korunur);
+  daytrade/scalp hamı seans gün sonu düzeltmesinden sonra yeniden taranır. Ayrıntı ON_KAYIT Güncelleme 6.
+- 2026-11-08 (KULLANICI kararı, scalp 4 enstrümanda 0/204 sonucunu GÖRDÜKTEN SONRA): scalp stratejileri genel 48 evrende test edilir
+  (EVREN_STIL['scalp'] = EVREN_GENEL). Eski sonuç arşivde (sonuclar/evren/2017_gelistirme/arsiv_scalp4/); deneme_kaydi eski 204 denemeyi
+  tutar, DSR deneme sayısı ikisini de içerir. Bu sonuç-sonrası bir değişikliktir; raporda böyle işaretlenir.
+- 2026-11-08 (KULLANICI talimatı): Fable denetimi bitince bulgular Opus tarafından düzeltilir; işler sırayla, durmadan 2026-11-09 13:59 TSİ'ye
+  kadar sürdürülür; kullanım limiti dolarsa yenilenince kendiliğinden devam edilir.
+- 2026-11-08: Evren ön sonuçları (WF): swing 380'de 44, daytrade 336'da 5 (hepsi 30m), scalp 204'te 0 geçen. Portföy aşaması başlatıldı.
+  sağlamlık/pbo/seçim/holdout, Fable denetiminin araştırma bulguları DOĞRULANANA kadar başlatılmaz (holdout tek seferlik; denetimde
+  DSR kapısı ve holdout mühür kapsamı hakkında doğrulanmamış bulgular var).
+- 2026-11-08: Fable 5.1 bağımsız denetimi YARIDA durduruldu (kullanıcı isteği; sonraki oturumda devam). 7 boyuttan 6'sı bitti
+  (araştırma, backtest, risk, paper, ops, pano: 40 HAM bulgu, DOĞRULANMADI) -> sonuclar/denetim/fable_ham_bulgular_2026-11-08.json.
+  Kalan: test-kalite boyutu, her bulguya bağımsız çürütme, sentez+öneriler. Betik: sonuclar/denetim/fable_denetim_betigi.js.
+  Ham bulgular doğrulanmadan kullanıcıya sunulmaz / koda uygulanmaz.
+- 2026-11-08 (KULLANICI kararı): mevduat kıyası yıllık %30 bileşik (stratejiler/kiyas_ayar.json); yoğunlaşma uyarısı: tek sembol açık stop
+  riskinin %40'ından fazlası → panoda uyarı (yalnız uyarı, SERT_LIMITLER'e dokunmaz); sunucuya günlük DK_SPX güncellemesi (1l3a-spx.timer, 22:30 UTC).
+  Lider: paper canlı yolu kıyas/güven okumasına artık tohum dizinini veriyor (önce /opt/1l3a/veri/mumlar'a bakıyordu, sunucuda yanlıştı).
+- 2026-11-08: Pano öncelik 6 (karne/koç/çekmece) onaylandı: karne 'kalite' ekseninde PF ≥ 1.2 (ON_KAYIT) eşiği kalır;
+  koç örnek sınırları (kova ≥ 5, tutma süresi grup başı ≥ 10) ve aile içi Bonferroni yeterli; tek genel puan yok.
+  Pano backtest görünümü tarayıcıda (Chromium) tüm sekmelerle açıldı, JS hatası yok.
+- 2026-11-08 (kullanıcı): Pano karne/rapor eşikleri eski panonunkiler (%10 DD, PSR>%95) değil, projenin kendi kurallarıyla
+  (ON_KAYIT geçme ölçütleri, beklenti aralıkları). Günlük K/Z ve dönemsel getiri gün kesimi Türkiye saati (00:00 TSİ).
+  Pano öncelik 1 (motor yazıcı paketi) onaylandı, başladı. ML panoya filtre olarak eklenmez; ayrı ön kayıtlı deney
+  (meta-etiket, gölge mod) olarak evren testi sonrası konuşulacak.
+- 2026-11-08: Evren testi kullanıcı onayıyla ("1 tamam") parça parça koşulur: swing ham+wf → ön sonuç → daytrade
+  ham+wf → scalp ham+wf → portföy → sağlamlık/pbo/seçim/holdout HEPSİ BİRLİKTE en sonda. Sebep: DSR deneme sayısı
+  tüm stillerin toplamıyla hesaplanmalı; swing'e erken sağlamlık koşmak sayıyı küçültüp kapıyı gevşetirdi.
+  DK_WTI 5m 2017-2019 indirilemedi → scalp'te WTI 2020'den başlar.
+- 2026-11-07: Portföy sağlamlık paketi eklenir (rastgele ağırlık/sepet kıyası, blok bootstrap Sharpe alt sınırı,
+  maliyet ×2, parametre komşuluğu); karar 24'ten kaldırılan yoğunlaşma ölçütünün yerini alır.
+- 2026-11-07: Veri kaynağı sabitlendi: DK_ sembollerinde tf ≥ 1h için her zaman 1h dosyası (dakikalık indirme sürerken
+  kaynak kayıyordu; 5m'de eksik günler var). k3_dk ve DK içeren portföy koşuları yeni etiketle (v2) yeniden koşulur.
+- 2026-11-07: Portföy sonuçları: kripto 5/15 karar 24, sağlamlıkta yalnız pf__kesit_ls (sınırda, p=0.03); hepsi evreni
+  1/15 (ibs_donus), sağlamlıkta rastgele kıyastan kaldı. Karar: "hepsi" evreninde OOS 2009'dan başlıyor (yalnız altın
+  varken) → portföy koşularında başlangıç, evrendeki sembollerin çoğunun (≥ %75) verisi olduğu tarihe çekilir; v3 ile tekrar.
+  v3 sonucu (OOS 2019-01 → 2025-06; emtia 2014 →): sağlam = hepsi: pf__rotasyon (Sharpe 1.12), pf__btc_hedge (0.92);
+  hisse_emtia: pf__kanarya (1.60, maliyet×2'de 1.55). Al-tut Sharpe ~1.1 (Mag7 boğası); yalnız kanarya belirgin üstün.
+
+- 2026-11-07: TradFi tek-grafik (sabit veri, k3_dk_v2): WF 198/2877 geçti, sağlamlık 36. Kripto 15. Final tek-grafik
+  aday havuzu 51 satır / 34 strateji (`sonuclar/final_aday_havuzu_tek_grafik.csv`); hepsi swing, tek daytrade
+  (dis__dual-thrust ETH 1h/30m), scalp 0 (TradFi dakikalık veri bekleniyor). Çok sembolde sağlam: fraktal-alligator (5 hisse),
+  rsi-gauss-velocity (3 hisse). Emtiada sağlam tek-grafik yok.
+- 2026-11-07: Hisse kısa TF (15m/30m scalp + 30m/1h daytrade, k3_hisse_kisa): WF 27/1358 geçti, sağlamlık 0.
+  Karar (karar 11 + 26): **scalp ajanı kapatıldı** (kripto 0, hisse 0 sağlam); emtia dakikalık veri tamamlanınca
+  bir kez daha denenir, sağlam çıkarsa yeniden açılır. Daytrade'de tek aday dis__dual-thrust ETH 30m.
+- 2026-11-07: **Katman 4 kilitli dönem testi** (ön kayıt `sonuclar/kilit/ON_KAYIT.md`, kilit bir kez açıldı, günlük
+  `sonuclar/kilit_acilis.jsonl`; ayarlar kilit açılmadan seçildi). Set ölçütü GEÇTİ: tek-grafik kolu +%17.8 / Sharpe 1.21 /
+  düşüş %8.0; portföy kolu −%2.8; 50/50 harman +%7.2 / Sharpe 0.85 / düşüş %4.2. A'da 7'nin 3'ü geçti (cci-esik SOL,
+  dual-thrust ETH, kesit_ls). Ayırt edicilik tek-grafikte YOK (C medyan R −0.107 < D −0.054; WF PF ile kilitli PF
+  Spearman −0.09). Kilitli dönem artık kullanılmış sayılır. Karar (ön kayıt gereği): set değiştirilmeden Aşama 3 (Pano)
+  ve Aşama 4 (paper trading) başlar; seçim yönteminin öngörü gücü zayıf olduğu için paper trading asıl bağımsız sınavdır,
+  canlıya geçiş paper sonucu + kullanıcı onayı olmadan konuşulmaz.
+- 2026-11-07: Kullanıcı: kilitli yılda geçen 14'lük ayrı izleme listesi istenmedi, final 7 ile devam. Lider kararları:
+  (1) paper'da ağırlıklar kilit testindeki set oynatmasıyla aynı (tek-grafik %1/işlem, portföy %5 bütçe, kollar 50/50),
+  pf__rotasyon dahil — sert limitler (günlük %3, kill %20) paper'da da durdurucu; (2) paper ayarları WF kuralının
+  ileriye devamı: son eğitim penceresi verinin sonuna kadar, yenileme swing/portföy 180 gün, daytrade 90 gün;
+  (3) Aşama 2 kapanışı (final_set.json, beklenti aralıkları) ve Aşama 3 Pano v1 başlatıldı.
+- 2026-11-07: **Aşama 2 kapandı, Aşama 3 Pano v1 hazır.** `stratejiler/final_set.json` (7), `sonuclar/final/`
+  (guncel_ayarlar, beklenti_araliklari, OZET.md, pano_ornek.html), `motor/canli/` (durum sözleşmesi, backtest_durum, pano).
+  Güncel ayar (veri sonuna kadar eğitim) 7'nin 4'ünde kilit testindekinden farklı (dual-thrust, fraktal-alligator,
+  rotasyon, kesit_ls). Set 8 hafta beklenti: net %5/%50/%95 = −2.6/+2.0/+10.4, düşüş %95 = 3.9 → alarm eşiği.
+  Kilit günlüğünde ajanın veri kontrolü sırasında yazdığı 6 "deneme" satırı var (silinmedi: günlük ekle-yalnız).
+  **Aşama 4 için zorunlu notlar:** (a) portföy kolu kilit testinde limit_modu="olc" ile koştu — paper'da limitler
+  uygulanır olmalı; (b) iki kolun ortak hesap limit kontrolü yazılmalı; (c) bayatlık eşiğine seans takvimi
+  (hisse hafta sonu); (d) portföy kolu ortalamasında hafta sonu paydası tutarsızlığı (set.csv mean vs beklenti 0/3) tekleştirilmeli.
+
+- 2026-11-07: Son 1 ay açık kaynak araştırması (Haiku oturumu, kullanıcı onaylı 4 aday) test edildi: hiçbiri final havuza
+  girmedi. dis__son1ay-donchian-adx BTC 4h WF+karar 13+sağlamlık geçti (PF 1.93) ama kilitli dönemde (bilgi) PF 0.94;
+  kanal 20/10 işlem sayısı yetersiz; TrendRider (OOS 15 gün kısa, al-tut altı) ve E014 makro (düşüş %29.9) karar 24'ten kaldı.
+  Yeni veri: DK_SPX, DK_UST (1h). Donchian-ADX BTC 4h yedek gözlem listesinde, sette değil.
+
+- 2026-11-07: **Aşama 4 paper motoru kodu hazır** (`motor/canli/paper*.py`, `deploy/KURULUM.md`). Tekrar modu ↔ backtest
+  kilitli dönemde 7/7 stratejide işlem/fiyat/miktar/PnL birebir (NVDA'da 5 çıkışın yalnız zaman etiketi farklı: backtest
+  seanslı 4h'ta medyan aralık kullanıyor). Limitler UYGULANIR (tek hesap, iki kol ortak). Açık: fapi.binance.com bu
+  konteynerden 451 (konum kısıtı) → canlı WS/exchangeInfo ilk kez sunucuda doğrulanacak; TradFi perp 7/24 vs seanslı
+  araştırma verisi (seans süzgeci varsayımı); TradFi funding backtestte yoktu.
+
+- 2026-11-07: GTAA 10 aylık SMA (SPY/EFA/IEF/VNQ/DBC, Haiku araştırma önerisi) paper'a ALINMADI: varlıklar Binance TradFi'de
+  yok, SPY'a üstünlük bootstrap'ta kanıtsız, boru hattımızdan geçmedi. Yeniden değerlendirme şartı: Binance vekilleriyle
+  karar 24 + sağlamlık, sonra ≥6 ay paper (DD ≤ %15, beklenti aralığında).
+- 2026-11-07: Paper sunucusu açıldı (DigitalOcean Frankfurt, Ubuntu 24.04, 2 GB); fapi.binance.com erişimi var ({}),
+  repo salt-okur deploy key ile çekildi, veri indiriliyor.
+
+- 2026-11-07 16:12 UTC: **Aşama 4 paper trading BAŞLADI** (DigitalOcean FRA1, servis 1l3a-paper, sanal 10.000 USD, 7 strateji,
+  güncel ayarlar). Binance TradFi sözleşmeleri exchangeInfo'da "TRADIFI_PERPETUAL" türünde → kod düzeltildi (cab5d2e), durum sıfırlanıp
+  yeniden başlatıldı. Sağlık: tüm semboller bayat değil. Süre ≥ 8 hafta (en erken değerlendirme 2027-01-02). Telegram henüz kapalı;
+  pano yalnız sunucuda (telefona yayın yolu açık iş).
+
+- 2026-11-07: Haiku Ar-Ge alt projesi (elenen 120 strateji × XU30/SPX/XAUUSD/UKOIL/BTCUSDT) kapandı: WF'de 3 geçen
+  (altın 1d swing, XU30 1h daytrade ×2), hepsi sağlamlıktan kaldı; ön kayıtlı 12 geliştirme varyantı da kaldı → kazanan yok.
+  Kayıt: dal claude/haiku-arge-5-enstruman, sonuclar/haiku_arge/KAPANIS.md. Deneme sayısı 787 — DSR hesabında toplam
+  deneme sayısına eklenmeli.
+
+- 2026-11-07 17:12 UTC: Paper kurulumu tamam. Düzeltmeler: Binance kline akışı `/market/stream` yolunda (eski `/stream` veri
+  göndermiyor; 60a76b3); Telegram yeni bot + kullanıcı dostu HTML mesajlar (b2abb50); pano Cloudflare Workers'ta
+  (adres repoda tutulmaz; 15 dk), masaüstü/mobil tasarım (2146654). Sunucu güncelleme: `git pull` (root,
+  deploy key), motor durumu korunur. Açık soru: günlük Telegram özeti saati (şu an 00:10 UTC = 03:10 TSİ).
+
+- 2026-11-07: **Karar 27 (kullanıcı):** tek sembol–strateji ikilileri (SOL'de CCI, NVDA'da Fraktal…) istenmiyor; final set
+  paper'dan kaldırılır. Yeni hedef: **evren stratejileri** — tek parametre setiyle 13 enstrümanın hepsinde çalışan, sinyal
+  nerede çıkarsa orada işleme giren stratejiler; ajan (stil) başına ≤ 3. Ön kayıt: `sonuclar/evren/ON_KAYIT.md`.
+  Evren (kullanıcı, aynı gün): daytrade/swing = emtia 5 (altın, gümüş, petrol, bakır, doğalgaz) + S&P 500'de piyasa değeri
+  > 500 milyar $ hisseler (bugün 18) + stabil hariç piyasa değeri > 5 milyar $ kriptolar (bugün 15, Binance perp'i olanlar);
+  üyelik her gün kontrol. Scalp = yalnız SPX, XAUUSD, petrol, BTCUSDT.
+  BIST eklendi (kullanıcı): daytrade/swing'e AKBNK, ASELS, ASTOR, BIMAS, EKGYO, EREGL, FROTO, KCHOL, SISE, TCELL, THYAO,
+  TRALT, TUPRS; scalp'e XU030 (scalp evreni 5). BIST Binance'te yok → canlı için ayrı aracı kurum gerekir.
+  Test dönemi (kullanıcı): 2020-01-01 → bugün, kilit ayrımı yok (WF örneklem-dışı sürer; bağımsız sınav paper). Tüm stratejiler
+  kodlama bitince evrende test edilir; tüm veri 2020→bugün indirilir.
+
+- 2026-11-07: Kullanıcı eski repoları geri yükledi ve **tüm PDF'lerden ve kodlardan strateji alınmasını** istedi (önceki
+  "PDF alma" kısıtı kullanıcı kararıyla kalktı; PDF/metinler yine repoya girmez, yalnız kartlar/envanter). 11 repo klonlandı;
+  130 tekil PDF (40'ı Aşama 0'da işlenmiş, 90 yeni: daytrade 25, swing 20, algo 17, scalp 9, diğer kitap 6, rapor/liste 13).
+  8 ajan: 5 kart çıkarma, rapor PDF envanteri, eski repo kod envanteri, eski panoların incelenip panoya eklenmesi.
+  Sonuç: 308 yeni kart (toplam 745), rapor envanteri 314 strateji (65 yeni, 54 yasak DCA/grid), kod envanteri 398 satır (44 yeni).
+  Repolar silinmeden önce son kontrol: 130 PDF'in tamamı envanterde (eksik görünen 9'u başka repodaki aynı dosya, md5 eşit).
+  Kodu arşivlenmemiş 6 repo `arsiv/`e alındı (day-trade-sg, scalp-sg, codex-algo, sg-arge-, sg-pano, strateji-test-pano;
+  PDF/metinler/veri hariç). Taranmış `pano ekranlar.pdf` sayfaları `arsiv/sg-algo-proje/pano_ekranlar/` (kullanıcının kendi
+  ekranları). Panoda olmayan bölümler (pano fazı işi): Karne (radar), Koç/dersler + "ne olurdu" simülatörü, Öğrenme
+  kaydı, aylık Rapor sayfası, Dönemsel getiri tablosu, Risk (varlık yoğunlaşması, korelasyon, kaldıraç dışı düşüş).
+- 2026-11-07 (gece) DEVAM NOKTASI: kodlandı d10a-e (89) + d11f/g/i (52) → kayıtta ~430 strateji; htf seanslı piyasa düzeltmesi
+  (e048f90). GitHub 50 repo tarandı (github_g1..g7, 1198 satır) → kodlama_kuyrugu_github.csv. 5 kitap tam okundu (+65 kart, 810).
+  Veri indirildi (ABBV yok; BIST 1h yalnız 2023-12'den, XU030 5m yok → scalp XU030 ve BIST daytrade kısa dönem; kullanıcıya soruldu).
+  AÇIK İŞLER: d11h (daytrade 20 aile) ve d11j (mevcut sınıflara mod; ma_kesisim, supertrend_psar, bant_donus, macd_sinyal,
+  rsi_asiri_donus değişiyor — varsayılan değişmezlik kontrolü şart) ajanları; tam okuma kartlarının eşleştirmesi
+  (kodlama_kuyrugu_tam_okuma.csv); çıkış modülleri listesi (basamaklı stop, cooldown, RSI çıkış, azalan ROI, Elder güvenli bölge,
+  Brooks/Farley yönetim kartları). Sonra: kalan yenileri kodla → wf_evren tam koşu (2020→bugün).
+- 2026-11-07: **Kullanıcı kararı (BIST verisi):** elinde kaynak yok; "çekebiliyorsan çek yoksa olanla bakalım". Ücretsiz
+  2020+ BIST gün içi kaynağı yok (Yahoo 1h ~2 yıl/5m 60 gün; İş Yatırım yalnız günlük; Stooq/Investing bu ağdan erişilemiyor ve
+  geçmişleri de kısa). Karar: BIST swing 1d ile 2020→bugün; BIST daytrade 1h 2023-12→bugün (kısa dönem, raporda ayrı işaretlenir);
+  XU030 scalp evrenden çıkar (scalp 4 enstrüman: DK_SPX, DK_XAU, DK_WTI, BTCUSDT). ABBV veri yok, ABD listesinden çıkar.
+- 2026-11-07: Çıkış modülleri eklendi (CikisAyarlari: stop_basamaklari, azalan_roi, geri_cekilme_yuzde, kar_rsi_esikleri,
+  elder_guvenli_bolge_k, agresif_iz_*, stop_sonrasi_bekleme_mum; hepsi varsayılan kapalı, 100 strateji öncesi/sonrası birebir).
+  **AÇIK İŞ (yeni paper setinden önce şart):** motor/canli/paper_motor.py CikisAyarlari'nın gelişmiş alanlarını (atr_iz_suren_k,
+  basabas_r_esigi dahil) uygulamıyor; paper'a alınacak stratejide bu alanlar varsa backtest ile paper farklı davranır.
+- 2026-11-08: **STRATEJİLER HAZIR** (kullanıcı "hazır olunca bekle, konuşalım" dedi; evren testi kullanıcıyla konuşmadan başlamaz).
+  460 tek grafik strateji (swing 190, daytrade 168, scalp 102) + 19 portföy sınıfı; ~120 ek ayar/mod kaydı; 7 çıkış modülü.
+  Tüm test paketi geçiyor (3568). Sıradaki: kullanıcıyla konuşma → wf_evren tam koşu (2020→bugün, BIST/XU030 kararlarıyla).
+- 2026-11-08: Kullanıcı ON_KAYIT Güncelleme 5'i seçti (holdout son 12 ay, DSR/PBO kapı, rastgele giriş kapı, enstrüman bazlı
+  maliyet+stres, 2017'den veri). wf_evren uygulandı (b876c1d), 2017 verisi indi (kripto spot vekil 2017-08'den; DK 1h 2017;
+  SPX/WTI 5m 2017-2019 indirmesi arka planda). Tam koşu KULLANICI "başla" DEYİNCE: --donem 2017_gelistirme ile
+  ham → wf → portfoy → saglamlik → pbo → secim → holdout (tahmin: ham ~35 saat/4 çekirdek, toplam ~2 gün+).
+- 2026-11-08: Pano öncelik 2 ve 3 (motor tarafı) yazıldı: `dersler.json` (canlı ↔ backtest beklentisi; binom + Welch t) ve `aylik_rapor.json` (TSİ ay özeti + paper kabul listesi),
+  panoda DERSLER ve RAPOR sekmeleri. Kabul ölçütleri bu dosyadaki kurallardan: süre ≥ 8 hafta (en erken 2027-01-02), set 8 hf beklenti aralığı, sert limit ihlali yok. **Kullanıcı kararı (2026-11-08, tek kayıt):** (1) kabul için set toplamında ≥ 30 kapanan işlem (geçti/kaldı); (2) Dersler'de "altında" çıkan strateji kabulü bozmaz ama canlıya geçmez
+  (`canliya_uygun` false + neden), "örnek az" da canlıya uygun sayılmaz (ayrı neden); (3) günlük %3 kayıp limitinin tetiklenmesi ihlal sayılmaz (sayı bilgi olarak raporda), kill switch / kaldıraç /
+  stop riski aşımı ihlal; (4) toplam kesinti ≤ 24 saat, aşarsa kabul reddedilmez, en erken değerlendirme (başlangıç + 56 gün) aşan kesinti kadar kayar — kesinti `paper_state` olay kayıtlarından
+  ölçülür (veri_bosluk aralığı, ws_koptu süresi), süresi kayıtta olmayan olay varsa null + neden; Dersler eşikleri (asgari 30 işlem, alfa 0.05) onaylandı, "geçici" etiketi kalktı. Açık soru: yalnız
+  strateji bazlı alarmın kabulde aranıp aranmayacağı.
+- 2026-11-08: Pano öncelik 4 (motor tarafı) yazıldı: `veri_guveni.json` (sembol başına son mum, bayatlık, son 30 günde eksik mum/boşluk, kaynak), `butunluk.json` (dayanılan dosyaların sha256 ↔ kayıtlı değer
+  `sonuclar/final/butunluk_kayit.json`, kod sürümü git commit), `islemler.jsonl`'e `ayar_surumu` (parametre seti hash'i + set dosyası) ve `giris_gerekcesi` (sinyal anındaki genel şablon; stratejiler koşul metni üretmiyor),
+  kalp atışı (`durum/kalp_atisi.json` + `paper_state.json`; yeniden başlatma kesintisi süresiyle olaya yazılır, `kesinti_olc` okur). Panoda SAĞLIK ve İŞLEMLER sekmelerinde kartlar. Kayıt dosyası ayar yenilemesinde
+  (guncel_ayarlar.csv değişince) "uyuşmuyor" gösterir; yeni özeti kaydetmek kullanıcı onayıyladır (`python -m motor.canli.guven --kaydet`). Ayrıntı: `motor/canli/DURUM_SOZLESMESI.md`.
+- 2026-11-08: Pano öncelik 5 (motor tarafı) yazıldı: `koni.json` (paper başlangıcında sabit Monte Carlo konisi: set OOS günlük getirisi `sonuclar/final/beklenti_koni_havuzu.csv`, beklenti_araliklari ile aynı blok bootstrap, 112 gün, tohum 42, havuz sha256'ya bağlı, lookahead yok), `kiyas.json` (paper ↔ BTC / DK_SPX al-tut / mevduat),
+  `korelasyon.json` (≥30 ortak gün yoksa null + neden), `yogunlasma.json` (sınıf/sembol brüt ve açık risk payı). Panoda ÖZET (koni, kıyas) ve RİSK (korelasyon, yoğunlaşma) kartları. **Kullanıcıya sorulacak:** (1) mevduat yıllık oranı (`stratejiler/kiyas_ayar.json`, şimdi null → çizgi yok);
+  (2) sembol/sınıf bazında yoğunlaşma eşiği isteniyor mu (şimdi tanımlı eşik yok, yalnız bilgi); (3) DK_SPX arşivi sunucuda güncellenmiyorsa S&P kıyası bayat kalır: güncel S&P kaynağı gerekir. Ayrıntı: `motor/canli/DURUM_SOZLESMESI.md`.
+- 2026-11-08: Pano öncelik 6 (motor tarafı) yazıldı: `karne.json` (strateji ve set başına 6 eksen 0-100: getiri, risk/düşüş, kâr kalitesi [PF], isabet, beklentiye uyum, veri/çalışma sağlığı; eşikler projenin kendi kuralları: beklenti aralığı alarm eşikleri, ON_KAYIT PF ≥ 1.2, Dersler alfa 0.05 ve 30 işlem, paper kabul kararları [kesinti 24 sa, sert limit]; eski %10 DD / PSR eşikleri yok; tek genel puan bilerek yok; örnek az ise null + neden),
+  `koc.json` (kurallı tespitler, LLM yok: stop sıklığı, çıkış nedeni payı, ardışık kayıp serisi, tutma süresi, saat/gün/sembol kayıp yoğunluğu, Dersler "altında"/set alarmı; dayanak sayılar + p + Bonferroni; seviye yalnız incele / izle / beklenti dışı; risk büyütme/ekleme/Kelly ASLA önermez, geriye dönük ayar seçimi önermez),
+  işlem satırlarına MFE/MAE (paper motorunda işlem boyunca en iyi/en kötü fiyat; çıkış mumunun uçları sayılmaz, lookahead yok; gerçek değerin alt sınırı) ve panoda İŞLEMLER satırına tıklayınca açılan çekmece. Ayrıntı: `motor/canli/DURUM_SOZLESMESI.md`.
+  **Kullanıcıya sorulacak:** (1) karnede PF ≥ 1.2 (ON_KAYIT evren-OOS ölçütü) paper "kalite" eşiği olarak uygun mu, yoksa bilgi mi kalsın; (2) koçun örnek sınırları: saat/gün/sembol kovasında ≥ 5 işlem, tutma süresinde her grupta ≥ 10 (30 işlem Dersler'den); (3) karnede tek "genel puan" istenmiyor (Goodhart): yine de istenirse formül ve ağırlık sizin kararınız;
+  (4) koçun çoklu test düzeltmesi yalnız aynı kural ailesi/kapsam içinde (kapsamlar arası yok): daha sıkısı mı isteniyor.
+
+## Kullanıcıyı bekleyen kararlar
+- ~~Final seçim ve kilitli dönemin bir kez açılması (karar 20)~~ — kullanıcı "aç" dedi (2026-11-07), yapıldı: `sonuclar/kilit/RAPOR.md`.
+- Karar 13 eşikleri çoklu test düzeltmesi içermiyor; sağlamlık paketi öneri kapısı ekliyor (son karar kullanıcıda).
+
+## Yol haritası (2026-11-06)
+**Aşama 1 — Altyapı ve adaylar**
+- 1A Motor: zorunlu çıkış kuralı; günlük limitte açık pozisyon kapatma; kısmi kâr alma; üst zaman dilimi hizalama
+  (haftalık/günlük filtre, lookahead'siz); deneme sayısı kaydı; kâr yoğunlaşması ve günlük MTM düşüş metrikleri.
+- 1B Veri: XAU + 1–2 aday enstrüman indirme; enstrüman listesinin kesinleşmesi (3–5).
+- 1C Adaylar: swing 10 (✅ 9 + MA kesişim) + önceki projelerden 4S kırılım, KGT, S1 (+ yedek B);
+  day trade 5–6; scalp (≥15m) 4–5.
+- Bitiş: tüm adaylar kodlu, lookahead testli, 1A özellikleri testli.
+
+**Aşama 2 — Test ve seçim**
+- Karar 22 evreni (kripto + Mag7 + XAU/WTI/bakır): her aday için walk-forward (OOS seçimde görülmez), karar 13 ölçütleri.
+- Geçenler: rejim analizi (boğa/ayı/yatay), parametre duyarlılığı, rastgele giriş karşılaştırması, maliyet ×2 stresi.
+- Hedef: canlıda **ajan başına ortalama ~3 strateji** (10 aday bilerek fazla tutuldu, eleme beklenir). Aralarında korelasyon kontrolü.
+- TradFi: Dukascopy uzun geçmişiyle tam test (karar 22); Binance TradFi verisi (2025-12+) kilitli dönemde fiyat tutarlılığı kontrolü.
+- Bitiş: her stil için onaylı final listesi + beklenti aralıkları (paper'da karşılaştırmak için).
+
+**Aşama 3 — Pano**
+- sg-arge `copytrade/canli/pano.py` örnek alınır. İlke: **pano yeni hesap yapmaz**, yalnız motorun yazdığı durum/kayıt
+  dosyalarını biçimler (motor ile pano asla farklı sayı göstermez).
+- İçerik: ajan/strateji bazında özsermaye, açık pozisyonlar, kapanan işlemler, risk limitleri durumu, backtest
+  beklenti aralığına göre konum, sağlık (veri bayatlığı, servis çalışıyor mu). Telefondan okunur; Telegram özetiyle uyumlu.
+- Önce Aşama 2 backtest sonuçlarıyla çalışır, sonra paper verisine bağlanır.
+- Bitiş: pano paper'ın ilk gününden hazır.
+
+**Aşama 4 — Paper trading**
+- DigitalOcean Frankfurt; Binance WS canlı veri; sanal dolum + hesap/risk/Telegram (sg-arge'den uyarlanır, Decimal), pano bağlı.
+- Kağıt motoru = backtest motoru doğrulaması (aynı dönem aynı işlemler); dashboard.
+- Süre ≥ 8 hafta; sonuç backtest beklenti aralığıyla karşılaştırılır.
+- Bitiş: kesintisiz çalışma + sonuçların beklenti aralığında olması.
+
+**Aşama 5 — Lider ajan ve öğrenme** (Aşama 4 sırasında başlar)
+- ≥15 dk aralıkla: rejim tespiti, stiller arası sermaye dağılımı, işlem sonrası analiz, haftalık rapor.
+- Değişiklik önerisi → walk-forward test → kullanıcı onayı. Canlıda kendini değiştiren kod yok.
+
+**Aşama 6 — Küçük bütçeyle canlı**
+- Gerçek emir yürütücü, borsa filtreleri (exchangeInfo), mutabakat; küçük bütçe; sert limitler aynı.
 
 ## Yeniden kullanılacak eski kod
 Kullanıcının kendi `sselimgenc-oss/sg-arge` reposu (Hyperliquid copy trade, GPLv3):

@@ -1,0 +1,50 @@
+{
+ "ad": "stoch_rsi",
+ "pine_id": "IGJPEi7L",
+ "tf": "1d",
+ "evren": [
+  "kripto",
+  "abd",
+  "bist",
+  "emtia"
+ ],
+ "neden": "Zaman dilimi belirtilmemiş; günlük (klasik 2015 betiği).",
+ "olcut": {
+  "n": 358,
+  "kar": -62638.06639980041,
+  "pf": 0.24719675781419126,
+  "sharpe": -0.20855978913152684,
+  "beklenti_R": -0.30911194581372586,
+  "kazanma": 0.5893854748603352,
+  "maxdd": 6.155511466002989,
+  "dd_gun": 3805,
+  "cagr": null,
+  "calmar": null,
+  "psr": 0.15816173071700573,
+  "tutma_gun": 237.02083333333331,
+  "ort_islem_getiri": -0.6473766639085518,
+  "netR_toplam": -110.66207660131386,
+  "sharpe_egitim": -0.2716169900020724,
+  "sharpe_oos": 1.5304920154536694,
+  "oos_kar": -28098.694128478433,
+  "tur": "swing",
+  "pf_maliyet2x": 0.24549566606011503,
+  "komsu_n": 24,
+  "komsu_karda": 0.25,
+  "enstr_n": 37,
+  "enstr_karda": 0.1891891891891892,
+  "maks_kor": 0.006460280558759291
+ },
+ "kurallar": {
+  "1_islem_sayisi": true,
+  "2_maks_dusus<=20": false,
+  "3_beklenti>=0.15R": false,
+  "4a_kf>=1.3": false,
+  "4b_sharpe>=1": false,
+  "5_oos": false,
+  "6_maliyet2x_kf>=1.1": false,
+  "7_komsu>=70": false,
+  "8_enstr>=60": false
+ },
+ "gecti": false
+}

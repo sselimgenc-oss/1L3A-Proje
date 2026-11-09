@@ -1,0 +1,48 @@
+[
+ {
+  "dis_id": "tv:OqjKbuRp",
+  "kaynak_dosya": "arsiv/strateji-sg/tv/pine/OqjKbuRp.pine",
+  "parametreler": {
+   "hacim_k": 0.0,
+   "hedef_r": 2.0,
+   "stop_modu": "uc",
+   "trend_mum": 6
+  },
+  "cikis_ayarlari": {
+   "kismi": [
+    [
+     1.0,
+     0.5
+    ]
+   ]
+  },
+  "not": "YAKLAŞIK: yutan mum girişi; sabah/akşam yıldızı ve EMA yok; TP1 kısmi 1R'de yarım."
+ },
+ {
+  "dis_id": "d11j:marubozu-yutan-mum-devam:yutan_devam",
+  "kaynak_dosya": "stratejiler/ek_kaynaklar/github_g1_freqtrade.csv (NFI yutan mum devamı, marubozu momentum)",
+  "parametreler": {
+   "mod": "devam",
+   "desen": "yutan",
+   "devam_ma": 200,
+   "devam_rsi": 50.0,
+   "hacim_k": 0.0
+  },
+  "cikis_ayarlari": null,
+  "not": "Trend DEVAMI yutan boğa mumu: kapanış > EMA200, RSI14 > 50 (short aynası). 1sa RSI3/CMF ve 4sa EMA12>EMA200 filtreleri kodlanmadı. 15m TF."
+ },
+ {
+  "dis_id": "d11j:marubozu-yutan-mum-devam:marubozu_devam",
+  "kaynak_dosya": "stratejiler/ek_kaynaklar/github_g1_freqtrade.csv (NFI yutan mum devamı, marubozu momentum)",
+  "parametreler": {
+   "mod": "devam",
+   "desen": "marubozu",
+   "maru_oran": 0.9,
+   "maru_govde": 0.5,
+   "devam_ma": 200,
+   "devam_rsi": 50.0
+  },
+  "cikis_ayarlari": null,
+  "not": "Marubozu (gövde/aralık > 0.9, gövde > %0.5) + kapanış > EMA200 + RSI14 > 50 (short aynası). Üst TF filtreleri kodlanmadı. 15m TF."
+ }
+]

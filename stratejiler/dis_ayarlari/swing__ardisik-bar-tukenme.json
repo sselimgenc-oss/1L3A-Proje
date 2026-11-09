@@ -1,0 +1,16 @@
+[
+ {
+  "dis_id": "d11j:ardisik-mum-degisimi-al-sat:3_2",
+  "kaynak_dosya": "stratejiler/ek_kaynaklar/github_g2_kripto_bot.csv (bryanbeck)",
+  "parametreler": {
+   "desen": "renk",
+   "seri_n": 3,
+   "seri_n_short": 2,
+   "tetik": "seri_sonu",
+   "hedef_r": 2.0,
+   "short": true
+  },
+  "cikis_ayarlari": null,
+  "not": "3 ardışık düşüş mumu sonrası AL, 2 ardışık yükseliş mumu sonrası SAT (asimetri). Kaynak mutlak eşikler 1e-5/2e-5 -> sıfır (renk). Kaynakta stop/hedef yok: ATR'siz seri stopu + 2R hedef varsayım (sınıf varsayılanı)."
+ }
+]

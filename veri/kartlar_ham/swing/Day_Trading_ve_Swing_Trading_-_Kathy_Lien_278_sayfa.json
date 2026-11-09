@@ -1,0 +1,298 @@
+[
+ {
+  "kart_id": "swing__ic-gun-kirilim__lien",
+  "ad": "İç Gün (Inside Day) Kırılımı - Stop ve Ters Çevirme",
+  "stil": "swing",
+  "kaynak": {
+   "pdf": "Day Trading ve Swing Trading - Kathy Lien (278 sayfa) - @eseckal.pdf",
+   "sayfalar": [
+    130,
+    131,
+    132,
+    133
+   ]
+  },
+  "ozet": "En az iki ardışık iç gün (günlük aralık önceki gün aralığı içinde) sonrası, önceki günün zirvesinin 10 pip üstüne buy stop ve dibinin 10 pip altına sell stop; ters yönde tetiklenirse stop-and-reverse.",
+  "kategori": "kirilim",
+  "piyasa_rejimi": "yatay",
+  "orijinal_piyasa": "forex",
+  "zaman_dilimi": {
+   "islem": "1D",
+   "ust_filtre": null
+  },
+  "gostergeler": [],
+  "long_giris": [
+   "Günlük aralığı en az iki gün boyunca önceki günün aralığında kalan çift (birden çok iç gün tercih)",
+   "Önceki günün (iç gün öncesi) zirvesinin 10 pip üstüne buy stop"
+  ],
+  "short_giris": [
+   "Önceki günün dibinin 10 pip altına sell stop"
+  ],
+  "stop_loss": "En yakın günün ters ucunun en az 10 pip ötesi; stop tetiklenirse ters pozisyon (stop-and-reverse), yeni stop son iç günün ters ucundan 10 pip ötesi",
+  "kar_al": "İki lotta riskin 2 katında kâr al veya iz süren stop",
+  "iz_suren_stop": "Riskin 2 katına ulaşınca stopu takip başlat",
+  "zaman_cikisi": null,
+  "filtreler": [
+   "Daha dar aralıklı çiftlerde (EUR/GBP, USD/CAD, EUR/CHF) yanlış kırılma daha az",
+   "Yükselen/alçalan üçgen, MACD yönü, Fib/MA desteği yönü seçmeye yardımcı"
+  ],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": "Örnekler: 90 pip, 78 pip ortalama",
+  "kodlanabilirlik": {
+   "puan": 2,
+   "gerekce": "Kurallar net; stop-and-reverse ters pozisyon açar (ardışık kayıp riski); iki yönlü bekleyen emirler mekanik."
+  },
+  "belirsizlikler": [
+   "Stop-reverse sonrası boyut kuralı belirsiz (martingale olmamalı)"
+  ],
+  "uyumluluk_notu": "Forex'e özgü (pip, seans: Londra/NY, çift sıfır) ama mantık ATR/yüzde ile uyarlanır. Hacim gerekmiyor. Kripto için yuvarlak sayı (ör. 100/1000 seviyeleri) ve seans saatleri yeniden tanımlanmalı.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "inside-day",
+   "ic-gun",
+   "kirilim",
+   "stop-and-reverse"
+  ]
+ },
+ {
+  "kart_id": "swing__sahte-kirilim-20-gun__lien",
+  "ad": "Yanlış Kırılma Filtresi (20 Günlük Zirve Başarısızlık Dönüşü)",
+  "stil": "swing",
+  "kaynak": {
+   "pdf": "Day Trading ve Swing Trading - Kathy Lien (278 sayfa) - @eseckal.pdf",
+   "sayfalar": [
+    138,
+    139,
+    140
+   ]
+  },
+  "ozet": "20 günlük zirve yapan parite 3 gün içinde 2 günlük dibe düşüp 3 gün içinde tekrar 20 günlük zirveyi geçerse, zayıf eller temizlenmiş sayılır ve long girilir.",
+  "kategori": "kirilim",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "forex",
+  "zaman_dilimi": {
+   "islem": "1D",
+   "ust_filtre": null
+  },
+  "gostergeler": [],
+  "long_giris": [
+   "Parite 20 günün en yükseğine çıkar",
+   "Önümüzdeki 3 gün içinde 2 günün en düşüğüne iner",
+   "Bu dibi gördükten sonra 3 gün içinde yeniden 20 günlük zirveyi aşar -> al"
+  ],
+  "short_giris": [
+   "20 günün en düşüğü, 3 gün içinde 2 günlük zirve, sonra tekrar 20 günlük dibin altı -> sat"
+  ],
+  "stop_loss": "Orijinal iki günlük dibin (short için zirvenin) birkaç pip ötesi",
+  "kar_al": "Riskin 2 katı veya iki barlık dip/zirve iz süren stop",
+  "iz_suren_stop": "İki barlık dip/zirve",
+  "zaman_cikisi": null,
+  "filtreler": [],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": "Örnek: 722 pip (2 haftada), 280 pip hedef vs 41 pip iz süren sonuç",
+  "kodlanabilirlik": {
+   "puan": 3,
+   "gerekce": "Gün sayıları ve seviyeler net, mekanik."
+  },
+  "belirsizlikler": [
+   "'Birkaç pip' stop mesafesi sayısal değil"
+  ],
+  "uyumluluk_notu": "Forex'e özgü (pip, seans: Londra/NY, çift sıfır) ama mantık ATR/yüzde ile uyarlanır. Hacim gerekmiyor. Kripto için yuvarlak sayı (ör. 100/1000 seviyeleri) ve seans saatleri yeniden tanımlanmalı.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "20-gun-zirve",
+   "sahte-kirilim",
+   "fakeout"
+  ]
+ },
+ {
+  "kart_id": "swing__mukemmel-siralama-ma__lien",
+  "ad": "Mükemmel Sıralama (Perfect Order) Hareketli Ortalamalar",
+  "stil": "swing",
+  "kaynak": {
+   "pdf": "Day Trading ve Swing Trading - Kathy Lien (278 sayfa) - @eseckal.pdf",
+   "sayfalar": [
+    144,
+    145
+   ]
+  },
+  "ozet": "10 > 20 > 50 SMA ve 100 > 200 SMA'nın altında (yükselişte) dizilimi oluşunca ve ADX 20 üzerinde yükseliyorsa, ilk oluşumdan 5 mum sonra girilir; dizilim bozulana dek pozisyonda kalınır.",
+  "kategori": "trend_takip",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "forex",
+  "zaman_dilimi": {
+   "islem": "1D",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "SMA",
+    "parametreler": {
+     "periyotlar": [
+      10,
+      20,
+      50,
+      100,
+      200
+     ]
+    }
+   },
+   {
+    "ad": "ADX",
+    "parametreler": {
+     "esik": 20
+    }
+   }
+  ],
+  "long_giris": [
+   "Fiyat > SMA10 > SMA20 > SMA50 > SMA100 > SMA200",
+   "ADX yukarı dönük, ideal olarak 20 üstünde",
+   "Mükemmel dizilim ilk oluşumundan 5 mum sonra hâlâ geçerliyse al"
+  ],
+  "short_giris": [
+   "Tam ters dizilim; 5 mum sonra hâlâ geçerliyse sat"
+  ],
+  "stop_loss": "Long için ilk geçiş gününün dibi, short için zirvesi",
+  "kar_al": "Mükemmel sıralama bozulunca (örn. SMA20 SMA10'un altına geçince) çık",
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": "Örnekler: 550 pip/125 risk, 410/97, 443/149",
+  "kodlanabilirlik": {
+   "puan": 3,
+   "gerekce": "Kurallar mekanik. Kitap giriş ve çıkış belirlemenin zor olduğunu söylüyor ama kural listesi net."
+  },
+  "belirsizlikler": [
+   "Sıralamada fiyatın yeri ve '5 mum' sayımı"
+  ],
+  "uyumluluk_notu": "Forex'e özgü (pip, seans: Londra/NY, çift sıfır) ama mantık ATR/yüzde ile uyarlanır. Hacim gerekmiyor. Kripto için yuvarlak sayı (ör. 100/1000 seviyeleri) ve seans saatleri yeniden tanımlanmalı.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "perfect-order",
+   "sma",
+   "adx",
+   "trend-takip"
+  ]
+ },
+ {
+  "kart_id": "swing__yedi-gun-uzatma-donusu__lien",
+  "ad": "Yüksek Olasılıklı Dönüş (7 Ardışık Gün Uzatma Hareketi Fade)",
+  "stil": "swing",
+  "kaynak": {
+   "pdf": "Day Trading ve Swing Trading - Kathy Lien (278 sayfa) - @eseckal.pdf",
+   "sayfalar": [
+    161,
+    162,
+    163,
+    164,
+    165,
+    166,
+    167,
+    168,
+    169,
+    170,
+    171,
+    172
+   ]
+  },
+  "ozet": "EUR/USD, GBP/USD, USD/JPY'de art arda 7 gün aynı yönde kapanış (her günün kapanışı açılıştan düşük/yüksek) sonrası NY 17:00 mumunun açılışında tersine pozisyon açılır; 30 pip stop, 60 ve 120 pip hedefler.",
+  "kategori": "ortalamaya_donus",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "forex",
+  "zaman_dilimi": {
+   "islem": "1D",
+   "ust_filtre": null
+  },
+  "gostergeler": [],
+  "long_giris": [
+   "Art arda 7 gün her günün kapanışı açılışından düşük",
+   "Bir sonraki mum başlarken (NY 17:00) long"
+  ],
+  "short_giris": [
+   "Art arda 7 gün her günün kapanışı açılışından yüksek",
+   "NY 17:00'de short"
+  ],
+  "stop_loss": "30 pip",
+  "kar_al": "İki lot: ilk lot 2R (60 pip), sonra stop başa baş; ikinci lot 4R veya 120 pip",
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [
+   "Majör çiftler (GBP için 8 gün)"
+  ],
+  "pozisyon_risk": "Hareket uzarsa 8., 9. günde tekrar giriş yapılır (kitap tablo ile hesaplar)",
+  "iddia_edilen_performans": "Örnekler: 180 pip toplam (lot başına 90). İstatistik: 10 yılda 7 günlük hareketin 8. güne uzama oranı yaklaşık %50",
+  "kodlanabilirlik": {
+   "puan": 1,
+   "gerekce": "Giriş kuralı mekanik, ama hareket devam ederse 'tekrar giriş' kuralı ardışık kayıp sonrası yeniden deneme (zarar ardından katlama olmasa da kayıp kovalama niteliği taşıyor) ve istatistik tablolar eksik. UYARI: ardışık yeniden giriş martingale'e yakın; tekrar girişlerde boyut artırılmamalı."
+  },
+  "belirsizlikler": [
+   "Tekrar giriş kuralı martingale riski",
+   "İstatistik tabloları sadece EUR/GBP/JPY için",
+   "Pip değerleri ATR'ye uyarlanmalı"
+  ],
+  "uyumluluk_notu": "Forex'e özgü (pip, seans: Londra/NY, çift sıfır) ama mantık ATR/yüzde ile uyarlanır. Hacim gerekmiyor. Kripto için yuvarlak sayı (ör. 100/1000 seviyeleri) ve seans saatleri yeniden tanımlanmalı. Günlük kapanış zamanı (NY 17:00) kripto için UTC gün sınırına uyarlanır.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "uzatma",
+   "7-gun",
+   "donus",
+   "istatistik"
+  ]
+ },
+ {
+  "kart_id": "swing__carry-trade-kaldiracli__lien",
+  "ad": "Kaldıraçlı Carry Trade (Yüksek Faizli / Düşük Faizli Çift)",
+  "stil": "swing",
+  "kaynak": {
+   "pdf": "Day Trading ve Swing Trading - Kathy Lien (278 sayfa) - @eseckal.pdf",
+   "sayfalar": [
+    173,
+    174,
+    175,
+    176,
+    177,
+    178
+   ]
+  },
+  "ozet": "Yüksek faizli para birimi alınır, düşük faizliye karşı satılır (örnek AUD/CHF); faiz farkı + sermaye kazancı beklenir; risk iştahı yüksekken kullanılır.",
+  "kategori": "diger",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "forex",
+  "zaman_dilimi": {
+   "islem": "1D",
+   "ust_filtre": null
+  },
+  "gostergeler": [],
+  "long_giris": [
+   "Yüksek getirili para birimi long, düşük getirili short (örn. AUD/CHF, faiz farkı %4,5)",
+   "Risk iştahı yüksek (VIX düşük) dönemlerde"
+  ],
+  "short_giris": [],
+  "stop_loss": null,
+  "kar_al": null,
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [
+   "Risk iştahı rejimi",
+   "Faiz oranı farkı kaynağı (merkez bankası) verisi gerekir"
+  ],
+  "pozisyon_risk": "5-10 kat kaldıraç örneği: %2,5 fark = %25 yıllık getiri",
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 0,
+   "gerekce": "Temel veri (faiz oranı), swap maliyeti ve uzun tutma gerektirir; giriş/çıkış/stop kuralı net değil. Kaldıraç önerisi proje risk limitleriyle çelişir."
+  },
+  "belirsizlikler": [
+   "Giriş zamanlaması, stop ve çıkış yok",
+   "Kaldıraç önerisi riskli"
+  ],
+  "uyumluluk_notu": "Perp funding rate carry'ye benzer ama kitap spot forex içindir; swap/faiz verisi gerekir.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "carry-trade",
+   "faiz-farki",
+   "temel"
+  ]
+ }
+]

@@ -1,0 +1,198 @@
+[
+ {
+  "kart_id": "swing__uc-dalga-salinim-donus__arps",
+  "ad": "Üç Dalga Salınım Deseni (5 Pivot Trend Değişimi)",
+  "stil": "swing",
+  "kaynak": {
+   "pdf": "Swing_Trading_-_Piyasa_Dalgalarında_Sörf_Yapmak_-_Jan_Arps_37_sayfa.pdf",
+   "sayfalar": [
+    10
+   ]
+  },
+  "ozet": "ZigZag pivotlarından ardışık 5 pivot (P1..P5) yükselen dipler/tepeler ilişkisini sağladığında trend yönü değişimi sinyali verilir; gösterge P5'te yükseliş için alım, düşüş için satış noktası işaretler.",
+  "kategori": "formasyon",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "genel",
+  "zaman_dilimi": {
+   "islem": "1d",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "ZigZag",
+    "parametreler": {
+     "PCTCHG_veya_TICKCHG": "kullanıcı ayarı, kitapta sabit değer yok"
+    }
+   }
+  ],
+  "long_giris": [
+   "ZigZag ile 5 ardışık pivot (P1..P5) bulunur",
+   "Yükseliş dönüşü koşulu: P5 > P3 ve P3 > P1 ve P4 > P2",
+   "P5 oluşunca (gösterge noktası) long"
+  ],
+  "short_giris": [
+   "Düşüş dönüşü koşulu: P5 < P3 ve P3 < P1 ve P4 < P2 (kitaptaki 'P3 < P5' ifadesi çeviri hatası, P3<P1 kastedilmiş)",
+   "P5 oluşunca short"
+  ],
+  "stop_loss": null,
+  "kar_al": null,
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [
+   "ZigZag hassasiyeti (yüzde veya tick) enstrüman ve zaman dilimine göre denenerek seçilmeli"
+  ],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 2,
+   "gerekce": "Pivot ilişkileri tamamen matematiksel; ancak pivot hassasiyeti, stop ve çıkış kitapta yok."
+  },
+  "belirsizlikler": [
+   "ZigZag eşiği yok",
+   "Stop ve hedef yok",
+   "Pivotun onaylanma gecikmesi (repaint) sorunu",
+   "Sinyal P5 anında mı P5 onayında mı net değil"
+  ],
+  "uyumluluk_notu": "Her zaman diliminde/piyasada pivot tabanlı uygulanabilir; 5m'ye ZigZag eşiği ayarıyla uyarlanır. Hacim gerekmez. Repaint riski var.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "zigzag",
+   "pivot",
+   "uc-dalga",
+   "trend-donusu",
+   "swing"
+  ]
+ },
+ {
+  "kart_id": "swing__fox-dalga-desen__arps",
+  "ad": "Arps 'Fox' Dalga Deseni (6 Pivot, giriş ve hedef çizgisi)",
+  "stil": "swing",
+  "kaynak": {
+   "pdf": "Swing_Trading_-_Piyasa_Dalgalarında_Sörf_Yapmak_-_Jan_Arps_37_sayfa.pdf",
+   "sayfalar": [
+    11,
+    12,
+    13
+   ]
+  },
+  "ozet": "P1-P4 pivotları belirli yükseklik/süre kurallarını sağlarsa P1-P3 'giriş çizgisi' ve P1-P4 'hedef çizgisi' çizilir; fiyat P4'ten giriş çizgisi uzantısına geri çekildiğinde P5'te giriş yapılır, hedef P1-P4 çizgisinin uzantısıdır.",
+  "kategori": "formasyon",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "genel",
+  "zaman_dilimi": {
+   "islem": "1d",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "ZigZag",
+    "parametreler": {
+     "PCTCHG_veya_TICKCHG": "kullanıcı ayarı"
+    }
+   },
+   {
+    "ad": "Trend çizgisi",
+    "parametreler": {}
+   }
+  ],
+  "long_giris": [
+   "Yukarı dalga koşulları: P2 > P1; P4 > P3; P4 < P2; P3 < P1; P4 > P1; P1-P2 yatay mesafesi P3-P4 mesafesinden büyük",
+   "P1-P3 'giriş' çizgisi ve P1-P4 'hedef' çizgisi çizilir",
+   "Fiyat P4'ten geri çekilip giriş çizgisinin uzantısına gelince (P5) long"
+  ],
+  "short_giris": [
+   "Aşağı dalga: P2 < P1; P4 < P3; P4 > P2; P3 > P1; P4 < P1; aynı mesafe koşulu; P5'te short"
+  ],
+  "stop_loss": null,
+  "kar_al": "Fiyat P1-P4 hedef çizgisine ulaşınca çıkış; 2-4 hedef zamanlama çizgisinin giriş çizgisiyle kesiştiği zamana yakın ulaşması beklenir",
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 2,
+   "gerekce": "Pivot koşulları net matematik; çizgi kesişimleri hesaplanabilir. Stop yok, pivot eşiği kullanıcıya bırakılmış."
+  },
+  "belirsizlikler": [
+   "Stop kuralı yok",
+   "ZigZag eşiği yok",
+   "Giriş toleransı (INCR) belirtilmemiş",
+   "Zaman hedefinin zorunluluğu belirsiz"
+  ],
+  "uyumluluk_notu": "Tamamen fiyat tabanlı; her piyasa ve ≥5m'de pivot eşiği ayarıyla uygulanabilir. Hacim gerekmez.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "fox-dalgasi",
+   "zigzag",
+   "pivot",
+   "trend-cizgisi",
+   "hedef-cizgisi"
+  ]
+ },
+ {
+  "kart_id": "swing__fib-kanali-ma89-ortalamaya-donus__arps",
+  "ad": "Fib Kanalı (89 MA) Dış Sınırdan Karşı Sınıra Dönüş",
+  "stil": "swing",
+  "kaynak": {
+   "pdf": "Swing_Trading_-_Piyasa_Dalgalarında_Sörf_Yapmak_-_Jan_Arps_37_sayfa.pdf",
+   "sayfalar": [
+    13,
+    14
+   ]
+  },
+  "ozet": "89 periyotluk hareketli ortalama etrafında çizilen Fibonacci kanalının dış sınırı aşıldığında fiyatın neredeyse her zaman karşı dış sınıra döndüğü gözlemi; sınır dışına çıkış sonrası geri dönüş yönünde işlem.",
+  "kategori": "ortalamaya_donus",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "genel",
+  "zaman_dilimi": {
+   "islem": "1d",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "MA",
+    "parametreler": {
+     "periyot": 89
+    }
+   },
+   {
+    "ad": "Fibonacci kanalı",
+    "parametreler": {
+     "SCALING": "1-3 arası (1 en geniş)"
+    }
+   }
+  ],
+  "long_giris": [
+   "Fiyat alt Fib kanal dış sınırının dışına çıkar ve sınır içine geri döner -> long (karşı dış sınır hedef)"
+  ],
+  "short_giris": [
+   "Fiyat üst dış sınırın dışına çıkar ve içeri döner -> short"
+  ],
+  "stop_loss": null,
+  "kar_al": "Karşı dış kanal sınırı",
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": "Fiyat dış sınırı aştığında 'neredeyse her zaman' karşı dış sınıra döner (sayısal değil)",
+  "kodlanabilirlik": {
+   "puan": 1,
+   "gerekce": "Kanal formülü araç içinde tanımlı, kitapta yazmıyor; giriş anı ve stop yok."
+  },
+  "belirsizlikler": [
+   "Kanal genişlik formülü kitapta yok",
+   "Giriş tetikleyicisi (sınır dışı kapanış mı geri dönüş mü) belirsiz",
+   "Stop yok",
+   "'Neredeyse her zaman' iddiası kanıtsız"
+  ],
+  "uyumluluk_notu": "Bollinger/Keltner benzeri kanal olarak kodlanabilir; her piyasada çalışır, kitap formülü eksik.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "fibonacci-kanali",
+   "ma-89",
+   "ortalamaya-donus",
+   "kanal"
+  ]
+ }
+]

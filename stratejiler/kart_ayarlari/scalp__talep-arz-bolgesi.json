@@ -1,0 +1,14 @@
+[
+ {
+  "kart_id": "scalp__talep-arz-tuzak-mum__christopher",
+  "parametreler": {
+   "giris_modu": "tuzak",
+   "stop_modu": "tuzak",
+   "ust_tf": "1h",
+   "hacim_onay": true,
+   "hedef_r": 2.0
+  },
+  "cikis_ayarlari": null,
+  "not": "1h bölge + 15m tuzak mum kırılımı (kitap 5m); en az 1:2."
+ }
+]

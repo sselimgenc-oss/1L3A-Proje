@@ -1,0 +1,110 @@
+[
+ {
+  "kart_id": "swing__ema12-36-123-kurulum-3lot__mermigas",
+  "ad": "EMA12/36 Kesişimi + 123 Kurulumu + 2-3 Çizgisi Kırılımı (3 lotlu swing)",
+  "stil": "swing",
+  "kaynak": {
+   "pdf": "Swing_Trading_Uzmanlığı_-_Nikos_Mermigas_120_sayfa.pdf",
+   "sayfalar": [
+    16,
+    17,
+    19,
+    22,
+    26,
+    29,
+    30,
+    33,
+    102
+   ]
+  },
+  "ozet": "Haftalık/günlük trend yönü belirlenir; EMA12'nin EMA36'yı kesmesinden sonra EMA36'ya geri çekilme ile oluşan 123 kurulumunda, 2-3 çizgisini güçlü mumla kıran kapanışta trend yönünde işlem açılır. Pozisyon 3 parçaya bölünüp 1R, 2R ve iz süren 'bonus' lot ile yönetilir.",
+  "kategori": "trend_takip",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "forex",
+  "zaman_dilimi": {
+   "islem": "1d",
+   "ust_filtre": "1w"
+  },
+  "gostergeler": [
+   {
+    "ad": "EMA",
+    "parametreler": {
+     "periyot": 12
+    }
+   },
+   {
+    "ad": "EMA",
+    "parametreler": {
+     "periyot": 36
+    }
+   },
+   {
+    "ad": "EMA",
+    "parametreler": {
+     "periyot": 200
+    }
+   },
+   {
+    "ad": "EMA",
+    "parametreler": {
+     "periyot": 633
+    }
+   },
+   {
+    "ad": "Heikin Ashi",
+    "parametreler": {}
+   },
+   {
+    "ad": "Trend çizgisi",
+    "parametreler": {
+     "min_dokunus": 3
+    }
+   }
+  ],
+  "long_giris": [
+   "Üst zaman diliminde (haftalık, sonra günlük) ana trend yukarı ve canlı fiyat yönü yukarı",
+   "EMA12 EMA36'yı yukarı keser",
+   "Fiyat EMA36 (veya trend çizgisi) yakınına geri çekilerek 123 kurulumu oluşturur (3. nokta = geri çekilme dibi)",
+   "Mum rengi kırmızıdan maviye (Heikin Ashi) döner; 2-3 çizgisini (2. tepeyi 3. noktanın bulunduğu geri çekilmenin tepesine bağlayan çizgi) kıran ve açılışının çok üzerinde kapanan 'iyi' mum kapanışında long"
+  ],
+  "short_giris": [
+   "Aynı kurallar ters yönde: trend aşağı, EMA12 EMA36'yı aşağı keser, EMA36'ya yükselme ile 123 kurulumu, mum maviden kırmızıya döner ve 2-3 çizgisini aşağı kıran güçlü kırmızı mumun kapanışında short"
+  ],
+  "stop_loss": "123 kurulumunun 3. noktasının ve trend çizgisinin altı (short için üstü); 3 lotun tümü için aynı stop",
+  "kar_al": "Stop mesafesi = 1R. Lot 1: 1R, Lot 2: 2R (ör. 70 pip stop için 70 ve 140 pip). Lot 3 (bonus) hedefsiz",
+  "iz_suren_stop": "Lot 3 için stop yeni onaylı 123 kurulumlarının 3. noktasının altına, trend çizgisi ve EMA36'nın altına taşınır; ters dönüş işareti (EMA36 kırılımı, tepe/dip formasyonu, üst zaman dilimi direnci) görülene veya stop olana kadar tutulur",
+  "zaman_cikisi": null,
+  "filtreler": [
+   "Üstten alta analiz: haftalık -> günlük -> (isteğe bağlı) 4s",
+   "Trend çizgisinde en az 3 dokunuş",
+   "Giriş mumunda küçük/yok kuyruk, güçlü gövde; geri çekilme %50-70 civarı EMA36/200/633'e yakın",
+   "Yatay piyasada bu kurulum kullanılmaz"
+  ],
+  "pozisyon_risk": "Tek işlemde (3 lot toplamı) hesabın en fazla %1-2'si riske edilir; stop girişten hemen sonra konur",
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 1,
+   "gerekce": "Kurallar var ancak 123 kurulumu, 'iyi mum', trend çizgisi ve destek/direnç çizimi öznel; kaba yaklaşıkla (pivot tabanlı 123 + EMA12/36 kesişimi + EMA36 geri çekilme) kodlanabilir."
+  },
+  "belirsizlikler": [
+   "123 kurulumunun matematiksel tanımı (pivot hassasiyeti) yok",
+   "'İyi mum' ölçütü sayısal değil",
+   "Metnin yaklaşık yarısı taranmış/boş (65 boş sayfa); 4s ve yatay piyasa kurulum detayları okunamadı",
+   "Iz süren stop için ters dönüş işaretlerinin tam listesi yok"
+  ],
+  "uyumluluk_notu": "Günlük/4s tabanlı; pip ve forex dili var ama mantık genel. Hacim gerekmez. 5m'ye değil 4s+ zaman dilimine uygun; kripto/hisse/emtiada uyarlanabilir.",
+  "varyantlar": [
+   "Stil 1: günlük işlem + haftalık filtre; Stil 2: 4s işlem + günlük filtre (4s'te de 123 kurulumu)",
+   "Gün içi/scalp için 2. mumun 2-3 çizgisinden 1 pip öteye gitmesini bekleyerek giriş (s.102)"
+  ],
+  "anahtar_kelimeler": [
+   "ema-kesisim",
+   "123-formasyonu",
+   "heikin-ashi",
+   "trend-cizgisi",
+   "uc-lot",
+   "kademeli-kar-al",
+   "ust-zaman-dilimi"
+  ]
+ }
+]

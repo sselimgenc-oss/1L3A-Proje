@@ -1,0 +1,747 @@
+[
+  {
+    "stil": "daytrade",
+    "kaynak": {
+      "pdf": "Price Action Trading Ranges - Al Brooks (572 sayfa) - @eseckal.pdf",
+      "sayfalar": [
+        385,
+        389,
+        390,
+        391,
+        399,
+        405,
+        406,
+        407
+      ]
+    },
+    "piyasa_rejimi": "yatay",
+    "orijinal_piyasa": "vadeli",
+    "zaman_dilimi": {
+      "islem": "5m",
+      "ust_filtre": null
+    },
+    "short_giris": [
+      "Yukarı yönlü bir trend çubuğu bölgeden çıkıp kapanınca: çıkış çubuğunun en düşüğünün 1 tik altına sell-stop (s390)",
+      "Alternatif: bölgenin tepesine yakın küçük ayı dönüş çubuğunun 1 tik altına sell-stop (s391)",
+      "Dikenli tel hareketli ortalamanın çoğunlukla ALTINDAysa yalnız short yönlü işlem arar (s389)"
+    ],
+    "iz_suren_stop": null,
+    "zaman_cikisi": "Dikenli tel 20+ çubuk uzarsa tahmin değeri yok; kırılışı bekle (s385). Girişten sonra kurulum dikenli tele dönerse başabaşta/1 tik zararda çık (s386).",
+    "pozisyon_risk": "Martingale (kayıptan sonra pozisyonu 2x/3x) açıkça reddedilir; 10 ardışık kayıp örneği (s401-402). Zorunlu olarak bölge içinde işlem yapma.",
+    "iddia_edilen_performans": "Dikenli telde ardışık 6-10 kayıp 'neredeyse her gün' görülebilir (s388, 401-402); kırılış yönü olasılığı en çok %51-55 (s384-385).",
+    "uyumluluk_notu": "Orijinal: ABD vadeli/hisse (E-mini 5dk) seans grafikleri; tik/puan değerleri E-mini'ye özgü, 1L3A'da ATR veya günlük aralığın oranına çevrilmeli. Çubuk/limit emir mantığı OHLC ile ≥5m'de uygulanabilir; hacim gerekmez; limit emir dolumu için fiyatın limitin 1 tik ötesine geçmesi gerekir (backtest'te dolum varsayımı konservatif olmalı). Seans/ilk saat kuralları kriptoda yaklaşık (UTC günü).",
+    "varyantlar": [
+      "ioi (dış-iç-dış) formasyonunda dikenli tel: iç çubuğun en yükseğinde veya üstünde sell-limit, boğa kırılışı tuzak varsayımıyla (s405-406)",
+      "Başarısız yukarı kırılış sonrası 'başarısız H2' short (s407)"
+    ],
+    "kart_id": "daytrade__dikenli-tel-basarisiz-kirilim__brooks_r3",
+    "ad": "Dikenli Tel (Barbwire): Kırılışa Girme, Başarısızlığına Gir",
+    "ozet": "Üst üste binen, dojili 3+ çubuktan oluşan 'dikenli tel' bölgesinde stop girişleri sistematik kaybettirir. Kural: bölgenin içinde işlem yapma; bir trend çubuğu bölgeden çıkınca ona girme, çubuk kapanınca onun karşı ucunun 1 tik ötesine ters stop koy; ters giriş de başarısız olursa tekrar ters çevir.",
+    "kategori": "kirilim",
+    "gostergeler": [
+      {
+        "ad": "EMA",
+        "parametreler": {
+          "periyot": 20
+        }
+      },
+      {
+        "ad": "Çubuk örtüşmesi",
+        "parametreler": {}
+      }
+    ],
+    "long_giris": [
+      "Dikenli tel tanımı: ardışık 3+ çubuk büyük ölçüde üst üste; en az biri doji (küçük gövde). Ölçüt: üç çubuğun ortadakinin yüksekliğinin yarısından fazlası komşu çubukların aralığı içindeyse dikenli tel (s389)",
+      "Aşağı yönlü bir trend çubuğu bölgeden çıkıp kapanınca: çıkış çubuğunun en yükseğinin 1 tik üstüne buy-stop (kırılış başarısızlığına long) (s390)",
+      "Alternatif: bölgenin dibine yakın küçük boğa dönüş çubuğunun 1 tik üstüne buy-stop (kenar fade); çubuklar en az günün ortalama çubuğu kadar büyükse (s391)",
+      "Dikenli tel hareketli ortalamanın çoğunlukla ÜSTÜNDEyse yalnız long yönlü işlem arar (s389, 399)"
+    ],
+    "stop_loss": "Kitapta açık sayı yok. Ters çevirme kuralı: short giriş çubuğu kapanınca, onun en yükseğinin 1 tik üstüne ters (long) emir; yani stop-and-reverse (s390). Fade girişlerinde stop = fade edilen küçük çubuğun karşı ucu (varsayım).",
+    "kar_al": "Kitapta yok (sayfa 391: fade işlemleri kısa scalp). Öneri belirsizliklerde.",
+    "filtreler": [
+      "Hareketli ortalamaya bitişik dikenli tel genelde ortalamadan UZAĞA kırar: ortalamanın üstündeyse yukarı, altındaysa aşağı (s389)",
+      "Ortalamaya doğru geri çekilmenin sonunda ve çoğunlukla ortalamanın trend tarafındaysa trend yönünde kırılır; güçlü trendde o yönde 2. giriş (H2/L2) alınır (s390-391)",
+      "İki veya daha fazla ardışık trend çubuğu kırılışı varsa fade etme (başarı olasılığı artar) (s390)",
+      "Çubuklar çok küçük/aralık çok darsa kenar scalp'ı yapma (s391)",
+      "1dk yerine 3-5dk daha iyi kazanma yüzdesi verir (s391)",
+      "Mikro kanalın ilk kırılışı genelde 1-2 çubukta başarısız olur: ters trend yönünde işlem (s392)"
+    ],
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Dikenli tel için ölçülebilir tanım var (3 çubuk, ≥1 doji, orta çubuk >%50 örtüşme, MA tarafı); 'trend çubuğu' ve fade çubuğu tanımı yoruma açık."
+    },
+    "belirsizlikler": [
+      "Doji ve trend çubuğu için sayısal eşik yok (öneri: gövde/aralık <%25 doji; gövde/aralık >%60 trend çubuğu - kural gibi sunulmaz)",
+      "Kar hedefi ve stop mesafesi kitapta yok (öneri: bölge yüksekliği kadar ölçülü hareket; stop = bölgenin karşı ucu)",
+      "'Çoğunlukla MA üstünde/altında' için yüzde eşiği yok (öneri: bölge çubuklarının ≥%70'i kapanış olarak bir tarafta)",
+      "Kitap bu işlemi 'yalnız çok deneyimli tüccar' için görür; backtest'te beklenti negatif çıkabilir"
+    ],
+    "anahtar_kelimeler": [
+      "dikenli-tel",
+      "barbwire",
+      "dar-aralik",
+      "basarisiz-kirilim",
+      "stop-and-reverse",
+      "doji"
+    ]
+  },
+  {
+    "stil": "daytrade",
+    "kaynak": {
+      "pdf": "Price Action Trading Ranges - Al Brooks (572 sayfa) - @eseckal.pdf",
+      "sayfalar": [
+        499,
+        500,
+        497
+      ]
+    },
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "vadeli",
+    "zaman_dilimi": {
+      "islem": "5m",
+      "ust_filtre": null
+    },
+    "short_giris": [
+      "Güçlü ayı trendinde ayna: boğa scalper'larının kâr alma seviyesinin 2-3 tik altına limit short (s499)"
+    ],
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": "Güçlü trendde L1/L2 short'ların ~%80 oranda boğa bayrağına dönüştüğü belirtilir (s505).",
+    "uyumluluk_notu": "Orijinal: ABD vadeli/hisse (E-mini 5dk) seans grafikleri; tik/puan değerleri E-mini'ye özgü, 1L3A'da ATR veya günlük aralığın oranına çevrilmeli. Çubuk/limit emir mantığı OHLC ile ≥5m'de uygulanabilir; hacim gerekmez; limit emir dolumu için fiyatın limitin 1 tik ötesine geçmesi gerekir (backtest'te dolum varsayımı konservatif olmalı). Seans/ilk saat kuralları kriptoda yaklaşık (UTC günü).",
+    "varyantlar": [
+      "Güçlü boğa yükselişinde önceki çubuğun en düşüğünde/altında limit alım (s497)",
+      "Güçlü ayı yükselişinde önceki çubuğun en yükseğinde/üstünde limit short (s497)"
+    ],
+    "kart_id": "daytrade__guclu-trendde-karsi-scalp-fade__brooks_r3",
+    "ad": "Güçlü Trendde Karşı Yöndeki Scalp'ı Soldurma (Limit Giriş)",
+    "ozet": "Güçlü boğa trendinde bir ayı sinyal çubuğu çıkınca, kısa scalper'lar kâr almak istediği seviyenin 2-3 tik üstüne (E-mini'de ayı sinyal çubuğunun ~4 tik altına) limit alım yerleştirilir; kısa scalp'ların çoğu başarısız olacağı için küçük risk (~3 tik) alınır. Güçlü ayı trendinde ayna.",
+    "kategori": "diger",
+    "gostergeler": [
+      {
+        "ad": "Çubuk analizi",
+        "parametreler": {}
+      },
+      {
+        "ad": "EMA",
+        "parametreler": {
+          "periyot": 20
+        }
+      }
+    ],
+    "long_giris": [
+      "Güçlü boğa trendi (always-in long); bir ayı sinyal çubuğu (L1/L2 kurulumu) çıkmış",
+      "Ayı sinyal çubuğunun yaklaşık 4 tik altına (E-mini 5dk örneği) limit alım: ayıların tek puanlık scalp kâr alma seviyesinin (6 tik) altında satışın bitmesi beklenir (s499)",
+      "Limit emir yalnız fiyat o seviyeye inerse dolar; inmezse işlem yok"
+    ],
+    "stop_loss": "~3 tik (E-mini örneği: ayıların tek puanlık scalp'ı için gereken 6 tike ulaşmayacağı varsayımı ile) (s499). Sayısal stop kitapta yalnız bu örnekte var.",
+    "kar_al": "Kitapta yok; ima: ayı scalp'ı başarısız olunca fiyat trend yönünde yeniden hızlanır (hedef = önceki zirve/ölçülü hareket - varsayım).",
+    "filtreler": [
+      "Yalnız TREND yönünde (limit alım güçlü boğa trendinde); karşı trendde değil",
+      "Trendin güçlü olduğuna dair kanıt: ardışık boğa trend çubukları, sıkı kanal; ayı çubuğu zayıf (kuyruk, doji, küçük gövde)",
+      "Güçlü ayı trendinin 'klimaks' sonrası olmaması (klimaks sonrası trend yönü tersine dönebilir) (s504)"
+    ],
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Tek sayısal örnek (4 tik / 3 tik) E-mini'ye özgü; trend gücü ve sinyal çubuğu zayıflığı öznel."
+    },
+    "belirsizlikler": [
+      "Hedef ve zaman çıkışı yok",
+      "4 tik/3 tik oranı ATR veya çubuk boyuna nasıl çevrilir (öneri: ortalama çubuk aralığının ~%30-40'ı; kural değil)",
+      "Limit dolumu varsayımı (fiyat limiti 1 tik aşmalı)",
+      "Dolum olasılığı ve kazanma oranı kitapta verilmemiş"
+    ],
+    "anahtar_kelimeler": [
+      "fade",
+      "limit-emir",
+      "scalp",
+      "guclu-trend",
+      "tuzak"
+    ]
+  },
+  {
+    "stil": "daytrade",
+    "kaynak": {
+      "pdf": "Price Action Trading Ranges - Al Brooks (572 sayfa) - @eseckal.pdf",
+      "sayfalar": [
+        497,
+        498,
+        502,
+        503,
+        508,
+        512,
+        513,
+        514
+      ]
+    },
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "vadeli",
+    "zaman_dilimi": {
+      "islem": "5m",
+      "ust_filtre": null
+    },
+    "short_giris": [
+      "Güçlü ayı trendinde ayna: önceki çubuğun en yükseğinde/üstünde limit short; ayı kanalında erken aşamada (s496, 497-499)"
+    ],
+    "iz_suren_stop": "Giriş sonrası ayrı iz süren stop: en son swing dibinin 1 tik altı (s531).",
+    "zaman_cikisi": null,
+    "pozisyon_risk": "Limit girişte pozisyon küçültülür; piyasa aleyhe gitmeye devam ederse eklemeye hazır olunur (s494). Toplam risk normal limiti aşmaz (s548).",
+    "iddia_edilen_performans": "Duruma göre yaklaşık %60 olasılık (ii formasyonu, 2 tik risk/4+ tik hedef) (s497).",
+    "uyumluluk_notu": "Orijinal: ABD vadeli/hisse (E-mini 5dk) seans grafikleri; tik/puan değerleri E-mini'ye özgü, 1L3A'da ATR veya günlük aralığın oranına çevrilmeli. Çubuk/limit emir mantığı OHLC ile ≥5m'de uygulanabilir; hacim gerekmez; limit emir dolumu için fiyatın limitin 1 tik ötesine geçmesi gerekir (backtest'te dolum varsayımı konservatif olmalı). Seans/ilk saat kuralları kriptoda yaklaşık (UTC günü).",
+    "varyantlar": [],
+    "kart_id": "daytrade__onceki-cubuk-ucunda-limit-geri-cekilme__brooks_r3",
+    "ad": "Güçlü Trendde Önceki Çubuğun Ucunda Limit Giriş (Geri Çekilme Alımı)",
+    "ozet": "Güçlü boğa yükselişinde/erken kanalında geri çekilmeler çoğunlukla kâr alımıdır; alıcılar fiyatı önceki çubuğun dibine çekilmesini bekler. Bu nedenle stop yerine önceki çubuğun en düşüğünde veya altında limit alım verilir (mikro kanalda ilk alt kırılış genelde başarısızdır). Ayı trendinde ayna.",
+    "kategori": "trend_takip",
+    "gostergeler": [
+      {
+        "ad": "Çubuk analizi",
+        "parametreler": {}
+      },
+      {
+        "ad": "EMA",
+        "parametreler": {
+          "periyot": 20
+        }
+      }
+    ],
+    "long_giris": [
+      "Güçlü boğa yükselişi veya yeni başlayan boğa kanalı; mikro kanal varsa özellikle (s496-497, 512)",
+      "Önceki çubuğun en düşüğüne veya altına limit alım (s497); alt yön: önceki çubuğun kapanışına limit alım (güçlü boğa trend çubuğundan sonra) (s497-498)",
+      "Kanal ilerledikçe: ilk ~10 çubuk stop girişi (H1/H2), 10+ çubuktan sonra limit girişe geç; ~20 çubuk ve direnç yakınında alımı bırak, yukarıda limit short (s496)",
+      "ii (iç-iç) formasyonunun dibinin 1 tik üstüne limit; 2 tik risk, 4+ tik hedef, ~%60 olasılık (s497)"
+    ],
+    "stop_loss": "E-mini 5dk örnekleri: ~2 tik (ii formasyonu, s497), 4-6 tik (çoğu limit girişi, s508-509, 513). Mantıksal: giriş çubuğunun/önceki dipten 1 tik aşağısı. Büyük stop gerekiyorsa pozisyon küçültülür (s521).",
+    "kar_al": "Trend yönünde yeni ekstrem testi; scalp için 4+ tik; ölçülü hareket (s497, 512-513). Kısmi kâr: ilk hedef 4-6 tik, kalan yeni zirve (s513).",
+    "filtreler": [
+      "Yalnız güçlü boğa yükselişi/trendinde; belirsiz durumda piyasa düşerken limitle alma (satış ≥10 çubuk ve 2 ayak sürebilir) (s504)",
+      "Güçlü yükselişin tek başına geri çekilme limit girişi için yeterli olmadığı; bağlam (klimaks, aralık tepesi) kontrol edilir (s504)",
+      "Zayıf kurulumu alma, başka fırsat bekle (s508)"
+    ],
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Önceki çubuk dibine limit emri mekanik; 'güçlü yükseliş/erken kanal' ve 10/20 çubuk eşikleri yaklaşık sayısal."
+    },
+    "belirsizlikler": [
+      "'Güçlü boğa yükselişi' için sayısal tanım yok (öneri: son N çubukta ≥X boğa trend çubuğu; kural değil)",
+      "Limit dolumu için fiyatın limitin altına inmesi gerekir; dolmayan emirler fırsat kaçırır",
+      "Stop ve hedef için ATR karşılığı kitapta yok; 2-6 tik E-mini'ye özgü",
+      "Kazanma oranı yalnız 'yaklaşık %60' olarak veriliyor, kanıt yok"
+    ],
+    "anahtar_kelimeler": [
+      "limit-emir",
+      "geri-cekilme",
+      "onceki-cubuk-dibi",
+      "mikro-kanal",
+      "kanal"
+    ]
+  },
+  {
+    "stil": "daytrade",
+    "kaynak": {
+      "pdf": "Price Action Trading Ranges - Al Brooks (572 sayfa) - @eseckal.pdf",
+      "sayfalar": [
+        502,
+        504,
+        505,
+        514,
+        515
+      ]
+    },
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "vadeli",
+    "zaman_dilimi": {
+      "islem": "5m",
+      "ust_filtre": null
+    },
+    "short_giris": [
+      "Ayı trendinde mevcut en düşükten %60-70 geri çekilme seviyesine limit short; stop daha yüksek zirve, hedef yeni dip (s502)"
+    ],
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": "Ödül ~2x risk, olasılık ~%60 (s502).",
+    "uyumluluk_notu": "Orijinal: ABD vadeli/hisse (E-mini 5dk) seans grafikleri; tik/puan değerleri E-mini'ye özgü, 1L3A'da ATR veya günlük aralığın oranına çevrilmeli. Çubuk/limit emir mantığı OHLC ile ≥5m'de uygulanabilir; hacim gerekmez; limit emir dolumu için fiyatın limitin 1 tik ötesine geçmesi gerekir (backtest'te dolum varsayımı konservatif olmalı). Seans/ilk saat kuralları kriptoda yaklaşık (UTC günü).",
+    "varyantlar": [],
+    "kart_id": "daytrade__yuzde60-70-geri-cekilme-limit__brooks_r3",
+    "ad": "Trendde %60-70 Geri Çekilmede Limit Alım (Ödül ~2x Risk)",
+    "ozet": "Boğa trendinde mevcut zirveden yaklaşık %60-70'lik geri çekilmeye limit alım verilir; stop bir önceki daha düşük dibin altında, hedef yeni zirve veya üstü (ödül ~risk x2, olasılık ~%60). Ayı trendinde ayna.",
+    "kategori": "trend_takip",
+    "gostergeler": [
+      {
+        "ad": "Geri çekilme yüzdesi",
+        "parametreler": {
+          "aralik_pct": [
+            60,
+            70
+          ]
+        }
+      }
+    ],
+    "long_giris": [
+      "Boğa trendi; mevcut en yüksek seviyeden sonra %60-70 geri çekilme seviyesine limit alım (s502)",
+      "Geri çekilme seviyesi başka destekle çakışıyorsa (hareketli ortalama, kırılış testi, önceki dip) güven artar (s542)"
+    ],
+    "stop_loss": "Bir önceki daha düşük dibin (swing low) altı; ana örnekte kararlaştırılmış sayı yok (s502, 514).",
+    "kar_al": "Yeni zirvede veya üzerinde (ödül riskin yaklaşık 2 katı) (s502); geri çekilmeye girişte risk ~1/3, hedef zirve testi (s514).",
+    "filtreler": [
+      "Yalnız TREND durumunda: piyasa trend değilse Fibonacci/%62 limit girişi trend karşıtı olur ve çoğu kez çalışmaz (s504)",
+      "Daha güvenli alternatif: seviye civarında dönüş çubuğunun kapanmasını bekle, yükseliş kapanışıysa o çubuğun 1 tik üstüne buy-stop (s505)"
+    ],
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "%60-70 seviyesi ve swing dibi stop net; trend tanımı ve 'yeni zirve' hedefi mekanik olarak kolay."
+    },
+    "belirsizlikler": [
+      "Geri çekilmenin ölçüldüğü bacak (son impuls) tanımı kitapta yok",
+      "Kazanma olasılığı %60 'yaklaşık'; gerçek oran test edilmeli",
+      "Kitap Fibonacci'yi anlamsız bulur ('her geri çekilme bir Fibonacci'ye yakındır', s396): seviye tek başına edge değil"
+    ],
+    "anahtar_kelimeler": [
+      "geri-cekilme",
+      "fibonacci",
+      "limit-emir",
+      "trend"
+    ]
+  },
+  {
+    "stil": "daytrade",
+    "kaynak": {
+      "pdf": "Price Action Trading Ranges - Al Brooks (572 sayfa) - @eseckal.pdf",
+      "sayfalar": [
+        505,
+        506,
+        507,
+        484,
+        442,
+        443
+      ]
+    },
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "vadeli",
+    "zaman_dilimi": {
+      "islem": "5m",
+      "ust_filtre": null
+    },
+    "short_giris": [
+      "Güçlü ayı trendinde H1/H2 sinyal çubuğunun en yüksek seviyesinde/üstünde limit short (s505)"
+    ],
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": "Güçlü boğa trendindeki zirvelerin yaklaşık %80'i boğa bayrağına dönüşür (s505).",
+    "uyumluluk_notu": "Orijinal: ABD vadeli/hisse (E-mini 5dk) seans grafikleri; tik/puan değerleri E-mini'ye özgü, 1L3A'da ATR veya günlük aralığın oranına çevrilmeli. Çubuk/limit emir mantığı OHLC ile ≥5m'de uygulanabilir; hacim gerekmez; limit emir dolumu için fiyatın limitin 1 tik ötesine geçmesi gerekir (backtest'te dolum varsayımı konservatif olmalı). Seans/ilk saat kuralları kriptoda yaklaşık (UTC günü).",
+    "varyantlar": [],
+    "kart_id": "daytrade__basarisiz-l1-l2-tuzagi-limit__brooks_r3",
+    "ad": "Güçlü Boğa Trendinde L1/L2 Short'u Tuzak Say: Sinyal Çubuğunun Altından Limit Alım",
+    "ozet": "Güçlü boğa trendinde L1/L2 (düşük 1/2) short sinyalleri tuzaktır (güçlü boğa tepelerinin ~%80'i boğa bayrağına döner). Bunun yerine L1/L2 sinyal çubuğunun en düşüğünde veya 1-3 tik altında limit alım verilir; stop dar (E-mini ~4 tik). Ayı trendinde H1/H2 için ayna.",
+    "kategori": "trend_takip",
+    "gostergeler": [
+      {
+        "ad": "Çubuk sayımı",
+        "parametreler": {}
+      },
+      {
+        "ad": "EMA",
+        "parametreler": {
+          "periyot": 20
+        }
+      }
+    ],
+    "long_giris": [
+      "Güçlü boğa trendi veya ayı kamasından/aralık dibinden başlayan yeni boğa salınımı; L1 veya L2 sinyal çubuğu oluşmuş (s505-506)",
+      "L1/L2 sinyal çubuğunun en düşüğüne veya 1-3 tik altına limit alım (s505)",
+      "Yüksek 1/2 uzun sinyalinin zayıf olduğu durumda (aralık tepesi) tersine kısa limit: H1/H2 sinyal çubuğunun en yüksek seviyesinde veya üstünde (s442-443, 498)"
+    ],
+    "stop_loss": "Dar: E-mini'de ~4 tik (s506). Mantık: L2 bayrağının birkaç tikten fazla kırılmayacağı beklenir.",
+    "kar_al": "Kitapta yok; ima: bayrağın başarısızlığı sonrası boğa kanalının yeniden başlaması / yeni zirve (s506).",
+    "filtreler": [
+      "L1 short güvenilir olarak yalnız güçlü ayı trendinin yükseliş aşamasında; trend dönüşü sonrası asla (s505)",
+      "Güçlü ayı trendinde zayıf kurulumlarda alım yapma (s523)",
+      "En az iki neden kuralı: tek başına L1/L2 yetmez (s484-485)"
+    ],
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Çubuk sayımı kuralı net; 'güçlü boğa trendi' tanımı öznel; 4 tik stop E-mini'ye özgü."
+    },
+    "belirsizlikler": [
+      "Hedef kitapta yok",
+      "'~%80 boğa bayrağı' kanıtsız genel ifade",
+      "L1/L2 sayımı geri çekilme başlangıcının nerede başladığına duyarlı"
+    ],
+    "anahtar_kelimeler": [
+      "low1",
+      "low2",
+      "high1",
+      "high2",
+      "limit-emir",
+      "bayrak",
+      "tuzak"
+    ]
+  },
+  {
+    "stil": "daytrade",
+    "kaynak": {
+      "pdf": "Price Action Trading Ranges - Al Brooks (572 sayfa) - @eseckal.pdf",
+      "sayfalar": [
+        507,
+        526,
+        547,
+        550,
+        566
+      ]
+    },
+    "piyasa_rejimi": "yatay",
+    "orijinal_piyasa": "vadeli",
+    "zaman_dilimi": {
+      "islem": "5m",
+      "ust_filtre": null
+    },
+    "short_giris": [
+      "Yükseliş + boğa kanalı, kanal zayıf (düşük momentum, belirgin kuyruklar); günün güçlü boğa trendi olmadığı doğrulanmış",
+      "Kanaldaki önceki swing zirvesinde limit short, normal pozisyonun ~1/4'ü (s526)",
+      "Kanal devam ederse sonraki 2-3 swing zirvesinde ekleme; her yeni giriş öncekinden ≥2 E-mini puanı yukarıda (s547)"
+    ],
+    "iz_suren_stop": null,
+    "zaman_cikisi": "Günün son saatlerinde trende karşı ölçekleme riskli: kapanışta zararla kapatmak zorunda kalınır (s550).",
+    "pozisyon_risk": "İlk pozisyon küçük (1/4-1/2 boyut); toplam risk (son stop-ortalama giriş) normal toleransın içinde (s548-549, 551). Bir arkadaşın 30 kontrat için $5-10k risk aldığı anlatılır; kitap bunu savunmaz (s547).",
+    "iddia_edilen_performans": null,
+    "uyumluluk_notu": "Orijinal: ABD vadeli/hisse (E-mini 5dk) seans grafikleri; tik/puan değerleri E-mini'ye özgü, 1L3A'da ATR veya günlük aralığın oranına çevrilmeli. Çubuk/limit emir mantığı OHLC ile ≥5m'de uygulanabilir; hacim gerekmez; limit emir dolumu için fiyatın limitin 1 tik ötesine geçmesi gerekir (backtest'te dolum varsayımı konservatif olmalı). Seans/ilk saat kuralları kriptoda yaklaşık (UTC günü). Bu kart 1L3A karar 14 (işlem başı %1 risk) ve 'martingale yasak' ile gerginlik taşır; ölçekli eklemeler toplam riski sert limit altında tutacak şekilde kodlanmazsa elenmeli.",
+    "varyantlar": [
+      "Yarım boy ilk giriş + ikinci yarım ~stop mesafesi aşağıda, tüm pozisyona 2x stop (s551, 554)"
+    ],
+    "kart_id": "daytrade__zayif-kanalda-karsi-trend-olcekli-fade__brooks_r3",
+    "ad": "Zayıf Kanalda Karşı Trend Ölçekli Fade (Çok Deneyimliler İçin)",
+    "ozet": "Boğa kanalı zayıfsa (momentum düşük) küçük pozisyon (normal boyun ~1/4'ü) ile kanalın swing zirvelerinden short limit verilir, kanal sürerse sonraki 1-2 yeni zirvede eklenir; hedef kanalın başlangıcı/ilk giriş. Kitap bunu yalnız deneyimliler için ve yalnız kanal 'zayıf' ve gün güçlü trend günü değilse uygun görür.",
+    "kategori": "ortalamaya_donus",
+    "gostergeler": [
+      {
+        "ad": "Swing zirve/dip",
+        "parametreler": {}
+      }
+    ],
+    "long_giris": [
+      "Ayna: ayı kanalı zayıfsa, önceki dipte limit alım, yeni düşüklerde ekle (s507)"
+    ],
+    "stop_loss": "Tüm pozisyon için son giriş + geniş stop: E-mini (ort. günlük aralık 10-15 puan) örneğinde ilk girişten ~8 puan (s526). Toplam risk normal limit dahilinde kalmalı (s548).",
+    "kar_al": "İlk giriş fiyatının testi (kanalın başlangıcı); geri dönüş güçlüyse pozisyonun bir kısmı orijinal girişin altına taşınır (s526). Ölçekli girişlerde tüm pozisyon ilk girişten çıkılırsa ilk giriş başabaş, sonrakiler kârlı (s492, 505).",
+    "filtreler": [
+      "Gün güçlü trend günü OLMAMALI; güçlü trendde karşı yöne ölçeklenme yasak (s556, 550)",
+      "Piyasa aleyhe ikinci hamle yaparsa (örn. ayı trendinde L2 sinyal) çık, gerekirse ters çevir (s505, 550)",
+      "Önermen artık geçerli değilse çık, umut etme (s544-545)"
+    ],
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Ölçekleme planı sayısal (1/4 boy, ≥2 puan aralık, 8 puan stop) ama 'zayıf kanal' ve 'güçlü trend günü değil' ayrımı öznel."
+    },
+    "belirsizlikler": [
+      "Martingale benzeri risk: pozisyon kayıpta büyür, kill-switch kuralları 1L3A'nın sert limitleriyle çelişebilir (%1 işlem riski) - büyük olasılıkla kodlanmaz",
+      "Ölçekleme sayısı ve her kademenin boyu kitapta kesin değil",
+      "Kazanma oranı verilmemiş",
+      "E-mini sayıları (8 puan stop) ATR'ye çevrilmeli"
+    ],
+    "anahtar_kelimeler": [
+      "olceklendirme",
+      "kanal",
+      "fade",
+      "karsi-trend",
+      "zayif-kanal"
+    ]
+  },
+  {
+    "stil": "daytrade",
+    "kaynak": {
+      "pdf": "Price Action Trading Ranges - Al Brooks (572 sayfa) - @eseckal.pdf",
+      "sayfalar": [
+        526,
+        527,
+        444,
+        498,
+        442
+      ]
+    },
+    "piyasa_rejimi": "volatil",
+    "orijinal_piyasa": "vadeli",
+    "zaman_dilimi": {
+      "islem": "5m",
+      "ust_filtre": null
+    },
+    "short_giris": [
+      "Ayna: boğa klimaksı (30+ çubuk süren trendin sonu, büyük boğa trend çubuğu + 1-2 çubuk geri çekilme); çubuğun kapanışında/üstünde short; sonraki çubuk da büyük boğa çubuğuysa kapanışında short (s526)"
+    ],
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": "Hedefe (çubuk tepesi) ulaşma olasılığı yaklaşık %60 (s526).",
+    "uyumluluk_notu": "Orijinal: ABD vadeli/hisse (E-mini 5dk) seans grafikleri; tik/puan değerleri E-mini'ye özgü, 1L3A'da ATR veya günlük aralığın oranına çevrilmeli. Çubuk/limit emir mantığı OHLC ile ≥5m'de uygulanabilir; hacim gerekmez; limit emir dolumu için fiyatın limitin 1 tik ötesine geçmesi gerekir (backtest'te dolum varsayımı konservatif olmalı). Seans/ilk saat kuralları kriptoda yaklaşık (UTC günü).",
+    "varyantlar": [],
+    "kart_id": "daytrade__klimaks-cubugu-kapanis-fade__brooks_r3",
+    "ad": "Klimaks Trend Çubuğunun Kapanışında Karşı Yön Girişi (Geniş Stop)",
+    "ozet": "Ardışık üçüncü satış zirvesi (ayı klimaksı) gibi günün en büyük trend çubuğu dip yakınında kapanıp destek bölgesindeyse, çubuğun kapanışında alım yapılır; stop yaklaşık çubuk boyu kadar uzaklıkta, hedef en azından çubuğun tepesi. Boğa klimaksında ayna: çubuk boyu kadar (örn. 10 tik) stop, ilk hedef çubuğun dibi.",
+    "kategori": "diger",
+    "gostergeler": [
+      {
+        "ad": "Çubuk boyu",
+        "parametreler": {}
+      }
+    ],
+    "long_giris": [
+      "Önemli bir geri çekilme olmadan art arda üçüncü satış zirvesi; üçüncüsünün günün en büyük ayı trend çubuğu olması ve dibe yakın kapanması (s526)",
+      "Destek bölgesinde (önceki dip, kanal altı) çubuğun kapanışında alım (s444, 498)",
+      "Alternatif: çubuğun dibinin altında / sonraki çubuğun kapanışında alım; ayrıca çubuğun kapanışında kısmi giriş (s498)"
+    ],
+    "stop_loss": "Long: yaklaşık ayı trend çubuğunun boyu kadar risk; ayna short: çubuk 10 tik ise ~10 tik stop (s526-527). Kitap bu işlemde güvenilir stop yeri 'hiçbir zaman kesin değil' der (s526).",
+    "kar_al": "İlk hedef: büyük ayı trend çubuğunun tepesi (long) / çubuğun dibi (short) (s526-527); sonraki hedef ölçülü hareket (s527).",
+    "filtreler": [
+      "Çok büyük hacim (kurumsal alım) eşlik eder; hacim verisi yoksa uygulanamaz (s526)",
+      "Çok deneyimli tüccarlar için; 'güvenilir' ama yüksek stop (s526)",
+      "Normal pozisyon büyüklüğü azaltılır (risk $ sabit kalsın diye) (s526)"
+    ],
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Klimaks/'üçüncü satış zirvesi' ve 'destek bölgesi' öznel; stop = çubuk boyu net."
+    },
+    "belirsizlikler": [
+      "Klimaks çubuğunun sayısal tanımı yok (öneri: çubuk aralığı > k×ATR ve kapanış aralığın alt %20'si; kural değil)",
+      "Hacim şartı kripto/hisse'de ölçülebilir ama kitapta eşik yok",
+      "Başarı olasılığı '%60' ilke olarak veriliyor"
+    ],
+    "anahtar_kelimeler": [
+      "klimaks",
+      "satis-zirvesi",
+      "trend-cubugu",
+      "karsi-trend",
+      "genis-stop"
+    ]
+  },
+  {
+    "stil": "daytrade",
+    "kaynak": {
+      "pdf": "Price Action Trading Ranges - Al Brooks (572 sayfa) - @eseckal.pdf",
+      "sayfalar": [
+        443,
+        501,
+        502,
+        508,
+        526,
+        527
+      ]
+    },
+    "piyasa_rejimi": "yatay",
+    "orijinal_piyasa": "vadeli",
+    "zaman_dilimi": {
+      "islem": "5m",
+      "ust_filtre": null
+    },
+    "short_giris": [
+      "Ayna: yukarı yönlü zayıf kırılış; aralığın (4 puan) üstüne limit short (s443); boğa trendli aralık gününde alt aralığın zirvesinin 4-6 puan üstüne limit short (s501)"
+    ],
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": "Tipik durumda başarı şansı >%60 (s526).",
+    "uyumluluk_notu": "Orijinal: ABD vadeli/hisse (E-mini 5dk) seans grafikleri; tik/puan değerleri E-mini'ye özgü, 1L3A'da ATR veya günlük aralığın oranına çevrilmeli. Çubuk/limit emir mantığı OHLC ile ≥5m'de uygulanabilir; hacim gerekmez; limit emir dolumu için fiyatın limitin 1 tik ötesine geçmesi gerekir (backtest'te dolum varsayımı konservatif olmalı). Seans/ilk saat kuralları kriptoda yaklaşık (UTC günü).",
+    "varyantlar": [],
+    "kart_id": "daytrade__kirilim-testi-limit-fade__brooks_r3",
+    "ad": "Zayıf Kırılışı Ölçülü Hareket Civarında Limit ile Soldurma (Kırılış Testi)",
+    "ozet": "Aralık kırılışı çok güçlü değilse, aralık yüksekliği kadar ölçülü hareketin civarına (veya trend eden aralık gününde alt aralığın tepesinin 4-6 puan üstüne) limit emir verilir; risk ve hedef yaklaşık aralık yüksekliğine eşit, hedef kırılış noktasının testi. Çok güçlü kırılışta yapılmaz.",
+    "kategori": "ortalamaya_donus",
+    "gostergeler": [
+      {
+        "ad": "Aralık yüksekliği",
+        "parametreler": {}
+      }
+    ],
+    "long_giris": [
+      "Aşağı yönlü zayıf kırılış; aralık ~4 puan yüksekliğindeyse aralığın 4 puan altına (ölçülü hareket) limit alım, 4 puan risk, kırılış noktasının testi hedef (s443)",
+      "Trend eden aralık gününde (ayı): üst aralığın dibinin 4-6 puan altına limit alım (aralık ~10 puan) (s501-502)"
+    ],
+    "stop_loss": "Giriş seviyesinden ≈ aralık yüksekliği kadar uzak (örnek: 4 puan; 5 puan kırılış için ~5 puan) (s443, 526).",
+    "kar_al": "Kırılış noktasının testi (kırılış çıkış fiyatı); ödül ≈ risk (s443, 526-527). Olasılık '>%60' ise pozitif.",
+    "filtreler": [
+      "Yalnız zayıf kırılış; güçlü kırılışta (art arda büyük trend çubukları) bu işlem yapılmaz (s443)",
+      "Çok deneyimli tüccarlar için (s443)"
+    ],
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Aralık yüksekliği ve ölçülü hareket seviyesi mekanik; 'zayıf kırılış' öznel."
+    },
+    "belirsizlikler": [
+      "Zayıf/güçlü kırılış ölçütü yok (öneri: kırılış çubuğu gövde/aralık ve ardışık trend çubuğu sayısı)",
+      "Limit emir doldurma ve ilk test sonrası stop kuralı yok",
+      "4-6 puan değerleri E-mini 10 puanlık günlük aralığa özel"
+    ],
+    "anahtar_kelimeler": [
+      "olculu-hareket",
+      "kirilis-testi",
+      "limit-emir",
+      "aralik",
+      "fade"
+    ]
+  },
+  {
+    "stil": "daytrade",
+    "kaynak": {
+      "pdf": "Price Action Trading Ranges - Al Brooks (572 sayfa) - @eseckal.pdf",
+      "sayfalar": [
+        424,
+        425,
+        426,
+        433,
+        461,
+        521,
+        522,
+        523,
+        524,
+        525,
+        528,
+        529,
+        531,
+        535,
+        537,
+        538,
+        541,
+        544,
+        545
+      ]
+    },
+    "piyasa_rejimi": "herhangi",
+    "orijinal_piyasa": "vadeli",
+    "zaman_dilimi": {
+      "islem": "5m",
+      "ust_filtre": null
+    },
+    "short_giris": [],
+    "iz_suren_stop": "Giriş çubuğu kapanınca güçlü trend çubuğuysa stop giriş çubuğu ucunun 1-2 tik ötesine; doji ise sinyal çubuğu ötesinde bırak (s522, 528-529, 537). İlk hedefe ulaşıp kısmi kâr alındıktan sonra stop başabaşa (giriş) (s523-524). Güçlü boğa trendinde yeni yükseliş (önceki swing zirve aşılınca) son swing dibinin 1 tik altına izle; aralığa geçince izleme yerine kısmi kâr al (s521, 531-532).",
+    "zaman_cikisi": "Gün sonu/net ters sinyal (s541). Önermen artık geçerli değilse hemen çık ('pozisyonsuz olsaydım girer miydim?' testi) (s541).",
+    "pozisyon_risk": "Adet = sabit risk $ / stop mesafesi (örnek: $500 risk, $1 stop = 500 hisse) (s447).",
+    "iddia_edilen_performans": "Hedef = stop iken başabaş için ~%50, hedef = 0.5×stop iken ~%67 (komisyonla ~%70) (s424, 441, 459).",
+    "uyumluluk_notu": "Orijinal: ABD vadeli/hisse (E-mini 5dk) seans grafikleri; tik/puan değerleri E-mini'ye özgü, 1L3A'da ATR veya günlük aralığın oranına çevrilmeli. Çubuk/limit emir mantığı OHLC ile ≥5m'de uygulanabilir; hacim gerekmez; limit emir dolumu için fiyatın limitin 1 tik ötesine geçmesi gerekir (backtest'te dolum varsayımı konservatif olmalı). Seans/ilk saat kuralları kriptoda yaklaşık (UTC günü).",
+    "varyantlar": [
+      "Şüpheli sinyalde yarım boy gir, stop olursa 2. sinyalde tam boy (s522)",
+      "Scalp: tek puanlık kâr için %67 (komisyonla ~%70) kazanma gerekir; bu nedenle önerilmez (s424, 459)",
+      "Euro FX ort. günlük aralık ~100 tik: stop 10 tik, hedef 20 tik; 10Y T-note aralık 32 tik: stop 6, hedef 8 tik (s537)"
+    ],
+    "kart_id": "daytrade__islem-yonetimi-kismi-kar-izleyen-stop__brooks_r3",
+    "ad": "Brooks İşlem Yönetimi: Stop Yerleşimi, Kısmi Kâr, Başabaş ve İzleyen Stop (çıkış modülü)",
+    "ozet": "Giriş kuralından bağımsız çıkış/yönetim modülü: ilk stop sinyal çubuğunun 1 tik ötesi (çubuk büyükse para stopu), giriş çubuğu kapanınca duruma göre sıkılaştır, ilk hedef sonrası başabaş, yeni swing sonrası izleyen stop; hedef için kısmi çıkış planı (2x risk yarım, 3x çeyrek, kalan ters sinyal/gün sonu).",
+    "kategori": "diger",
+    "gostergeler": [
+      {
+        "ad": "Swing zirve/dip",
+        "parametreler": {}
+      },
+      {
+        "ad": "ATR (öneri)",
+        "parametreler": {}
+      }
+    ],
+    "long_giris": [
+      "Giriş kuralı yok; herhangi bir long kuruluma uygulanır (modül)"
+    ],
+    "stop_loss": "İlk stop: sinyal çubuğunun karşı ucunun 1 tik ötesi (s528). Büyük sinyal çubuğunda para yönetimi stopu: E-mini 5dk'da ~8 tik, veya sinyal çubuğu yüksekliğinin ~%60-70'ini riske at (s523, 528-529); 5 dk girişte 1dk stop kullanma (s529). Stop her zaman piyasada; zihinsel stop yok (s520). Tipik E-mini 5dk (ort. günlük aralık 10-15 puan): 8 tik/2 puan; cubuklar büyükse 3 puan (s520, 525). Günün ilk işleminin gerektirdiği maksimum stop, gün boyu stop boyutunu belirler (9 tik örneği) (s535).",
+    "kar_al": "Scalp: hedef ≈ risk, ≥%60 olasılık gerekir; swing: hedef ≥2x risk (s424, 441, 538). OCO braket: stop+hedef girer girmez (s424, 539). Güçlü trendde: stop mesafesinin 2 katı kâra ulaşınca pozisyonun yarısı, 3 katında çeyreği, son çeyrek karşı sinyal veya gün sonunda (s541). Hedefe dokunup dolmazsa stop başabaşa (s433). Bar-başına 2 puan/4 puan örnekleri E-mini'ye özgü (s424, 432).",
+    "filtreler": [
+      "Çubuk girişten hemen sonra güçlü hareket etmedikçe (~4 tik veya güçlü gövdeli çubuk) stopu sıkma (s529)",
+      "Piyasa trend aralığına dönerse izleyen stop'u geri çekilme dibinin altına koyma; aralık tepesinden kısmi kâr al (s521)",
+      "Stop büyükse pozisyon küçült (risk $ sabit) (s447, 523)"
+    ],
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Stop/BE/izleme/kısmi çıkış kuralları sayısal ya da çubuk-tabanlı; 'güçlü giriş çubuğu', 'trend aralığa dönüyor' öznel."
+    },
+    "belirsizlikler": [
+      "BE ifadesi belirsiz: 'giriş fiyatı, sinyal çubuğunun en uç noktasından bir tık' (s523-524) - büyük olasılıkla 'giriş fiyatı' (öneri)",
+      "%30 vs %60-70 sinyal çubuğu oranı kitapta tutarsız (s523 'yaklaşık %30'u'; s528-529 '%60 / %70'i'): çevirmede belirsiz",
+      "Tik/puan değerleri E-mini 5dk (ort. günlük aralık 10-15 puan) için; ATR'ye çevrim yapılmalı (öneri: 2 puan ≈ günlük aralığın %13-20'si - türetilmiş oran, kitapta doğrudan yok)",
+      "Kısmi çıkış oranları (yarım, çeyrek) kitapta örnek; backtest'te parametre olarak ele alınmalı",
+      "Kitap 'başabaşta çık' kısmını (limit hedefe yaklaşınca) yüksek olasılık varsayımına bağlıyor (%90): test edilmeli"
+    ],
+    "anahtar_kelimeler": [
+      "kismi-kar",
+      "izleyen-stop",
+      "basabas",
+      "okb",
+      "cikis-modulu",
+      "risk-odul"
+    ]
+  },
+  {
+    "stil": "daytrade",
+    "kaynak": {
+      "pdf": "Price Action Trading Ranges - Al Brooks (572 sayfa) - @eseckal.pdf",
+      "sayfalar": [
+        426,
+        427,
+        546,
+        548,
+        549,
+        551,
+        552,
+        553,
+        556,
+        565
+      ]
+    },
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "vadeli",
+    "zaman_dilimi": {
+      "islem": "5m",
+      "ust_filtre": null
+    },
+    "short_giris": [
+      "Ayna: ayı trendinde her yeni L1/L2 vb. sinyali ayrı işlem olarak ekle"
+    ],
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "pozisyon_risk": "Toplam risk (en son stop ile ortalama giriş arası) normal toleransı aşmamalı; 5 dk'da bir arkadaş 2 kontrat+ekleme yapıp 1. kontrata BE stop koyarak toplam riski sabit tutar (s565).",
+    "iddia_edilen_performans": null,
+    "uyumluluk_notu": "Orijinal: ABD vadeli/hisse (E-mini 5dk) seans grafikleri; tik/puan değerleri E-mini'ye özgü, 1L3A'da ATR veya günlük aralığın oranına çevrilmeli. Çubuk/limit emir mantığı OHLC ile ≥5m'de uygulanabilir; hacim gerekmez; limit emir dolumu için fiyatın limitin 1 tik ötesine geçmesi gerekir (backtest'te dolum varsayımı konservatif olmalı). Seans/ilk saat kuralları kriptoda yaklaşık (UTC günü).",
+    "varyantlar": [],
+    "kart_id": "daytrade__trend-yonunde-ekleme-ayri-islem__brooks_r3",
+    "ad": "Trend Yönünde Ekleme: Her Yeni Sinyali Ayrı İşlem Say",
+    "ozet": "Güçlü trendde (always-in) her yeni geçerli giriş sinyali (H2, kırılış geri çekilmesi, MA boşluk çubuğu) ayrı işlem olarak eklenir; her birinin kendi stop/hedefi vardır. Alternatif: tüm pozisyonu son girişin stopuyla yönet. Karşı trendde ölçeklemenin tersine, burada kâr varken eklenir.",
+    "kategori": "trend_takip",
+    "gostergeler": [
+      {
+        "ad": "Çubuk sayımı",
+        "parametreler": {}
+      },
+      {
+        "ad": "EMA",
+        "parametreler": {
+          "periyot": 20
+        }
+      }
+    ],
+    "long_giris": [
+      "Her zaman uzun (always-in) piyasa; ilk giriş açıkken yeni bir H1/H2 veya kırılış geri çekilmesi/MA boşluk çubuğu sinyali çıktı ve önerme hâlâ geçerli (s551)",
+      "Her yeni giriş ayrı işlem; kendi stop/hedefi var (s551-553)",
+      "Çok güçlü yükselişte (çubuk çubuk) hızlıca ekleme: her çubuk kapanışında/üstünde (s546, 552)"
+    ],
+    "stop_loss": "Her ek giriş için kendi sinyal çubuğu ötesi; ya da tüm pozisyon için en son eklemenin stopu (böylece önceki girişlerde kâr varsa son giriş kaybetse de net kâr kalır) (s427).",
+    "kar_al": "Her eklemenin kendi hedefi; örnek: 3 ayrı giriş de aynı 1 puanlık kârla çıkarılır (s553). SPY örneği: ilk hedef 2x risk (28 sent), sonra 4x risk (s555).",
+    "filtreler": [
+      "Ters sinyal gelirse tümünden çık (s427)",
+      "Önerme geçerliyse ekle; karmaşıklaşırsa (üçüncü+ giriş) çoğu tüccar ekleme yapmamalı (s551)",
+      "Trende karşı ölçekleme DEĞİL (güçlü kanalda karşı ölçek yasak) (s550, 556)"
+    ],
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Her giriş ayrı stop-hedefle yönetilir; 'önerme geçerli' filtresi yaklaşık."
+    },
+    "belirsizlikler": [
+      "Ekleme sayısı üst sınırı yok (öneri: en çok 2-3 ek)",
+      "Toplam risk üst sınırı 1L3A sert limitleriyle (işlem başı %1) çakışmamalı - eklemeler aynı risk bütçesi içinde tanımlanmalı",
+      "Ekleme aralığı (sabit tik mi, sinyal mi) kitapta tek değil"
+    ],
+    "anahtar_kelimeler": [
+      "ekleme",
+      "piramit",
+      "olceklendirme",
+      "trend",
+      "h2",
+      "always-in"
+    ]
+  }
+]

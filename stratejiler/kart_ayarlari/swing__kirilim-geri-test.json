@@ -1,0 +1,26 @@
+[
+ {
+  "kart_id": "daytrade__geri-cekilme-girisi__bulkowski",
+  "parametreler": {
+   "uzunluk": 20,
+   "pencere": 5,
+   "temas_atr": 0.3,
+   "stop_tampon_atr": 0.25,
+   "hedef_r": 2.0
+  },
+  "cikis_ayarlari": null,
+  "not": "Gerileme 1-5 gün -> pencere 5 (1d TF). Önceki mum dibi iz süren stop CikisAyarlari ile ayrıca verilebilir; kartta yüzde hedef yok -> 2R."
+ },
+ {
+  "kart_id": "swing__direnc-destek-rol-degisimi__jordan",
+  "parametreler": {
+   "uzunluk": 20,
+   "pencere": 10,
+   "temas_atr": 0.3,
+   "stop_tampon_atr": 0.5,
+   "hedef_r": 2.0
+  },
+  "cikis_ayarlari": null,
+  "not": "Kartta sayısal stop/hedef yok; stop seviyenin ters tarafı (tamponlu), hedef 2R varsayım."
+ }
+]

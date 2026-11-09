@@ -1,0 +1,13 @@
+[
+ {
+  "kart_id": "daytrade__bb-genislik-kirilim__singhal",
+  "parametreler": {
+   "bb_periyot": 20,
+   "bb_sapma": 2.0,
+   "stop_modu": "orta",
+   "hedef_r": 0.0
+  },
+  "cikis_ayarlari": null,
+  "not": "BB 20/2 sıkışma sonrası bant kırılımı; stop orta bant, çıkış orta bant karşı kapanışı (hedef yok)."
+ }
+]

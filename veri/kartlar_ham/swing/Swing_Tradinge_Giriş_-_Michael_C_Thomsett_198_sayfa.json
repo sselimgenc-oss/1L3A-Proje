@@ -1,0 +1,84 @@
+[
+ {
+  "kart_id": "swing__tepki-salinimi-dar-aralik-teyidi__thomsett",
+  "ad": "Tepki Salınımı Sonu - Dar Aralıklı Gün / Yutan Mum + Hacim Teyidi",
+  "stil": "swing",
+  "kaynak": {
+   "pdf": "Swing_Tradinge_Giriş_-_Michael_C_Thomsett_198_sayfa.pdf",
+   "sayfalar": [
+    19,
+    20,
+    21,
+    89,
+    90
+   ]
+  },
+  "ozet": "2-5 günlük bir yükseliş/düşüş trendinin ucunda (kurulum) dar aralıklı gün, yutan çizgi veya fiyat boşluğu ve olağanüstü yüksek hacim birlikte oluşunca ters yönde (alım: düşüş sonu, satış: yükseliş sonu) swing girişi yapılır; giriş ancak sinyal teyit edildiğinde stop emirle gerçekleşir, çıkışta önceden belirlenmiş kural ve yüzde iz süren stop kullanılır.",
+  "kategori": "formasyon",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+   "islem": "1d",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "Mum formasyonu (yutan çizgi)",
+    "parametreler": {}
+   },
+   {
+    "ad": "Hacim",
+    "parametreler": {
+     "koşul": "olağanüstü yüksek"
+    }
+   },
+   {
+    "ad": "Aralık",
+    "parametreler": {
+     "koşul": "önceki tipik aralıktan çok küçük"
+    }
+   }
+  ],
+  "long_giris": [
+   "2-5 günlük düşüş trendi (3+ gün tercih)",
+   "Trend sonunda dar aralıklı gün (high-low mesafesi önceki tipik günlerden çok küçük) VEYA boğa yutan çizgi VEYA aşağı boşluk/ardından dönüş, hacimle teyit",
+   "Birden çok sinyalin birleşimi (dar aralık + yüksek hacim) en güçlü sinyaldir",
+   "Sinyali teyit et: giriş için buy stop emri sinyal gününün yükseğinin üzerine"
+  ],
+  "short_giris": [
+   "2-5 günlük yükseliş trendi sonunda aynı sinyaller (kayan yıldız/ayı yutan, dar aralıklı gün, yüksek hacim) -> satış"
+  ],
+  "stop_loss": null,
+  "kar_al": "Önceden belirlenmiş çıkış kriteri (kitapta kural gösterilmiyor); uzatılmış trendlerde 2-5 günün ötesinde çıkış teyidi beklenebilir",
+  "iz_suren_stop": "Yüzde bazlı takip eden stop: piyasa fiyatının belirli yüzde altında, fiyat yükseldikçe yukarı ayarlanır (yüzde sayısı verilmemiş)",
+  "zaman_cikisi": "'Normal' swing süresi 2-5 gün",
+  "filtreler": [
+   "Dar aralıklı gün yalnızca önemli bir fiyat hareketinden (3+ günlük trend) sonra anlamlı",
+   "Yutan çizgi düşük hacimle yanlış sinyal verebilir",
+   "Hiçbir gösterge tek başına kullanılmamalı (onay ilkesi)"
+  ],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 1,
+   "gerekce": "Sinyal tipleri ölçülebilir (aralık, hacim, yutan çizgi) ancak eşikler ('çok küçük', 'olağanüstü') sayısal değil; stop ve hedef yok."
+  },
+  "belirsizlikler": [
+   "Dar aralık eşiği (örneğin ADR'nin %X'i) yok",
+   "Hacim eşiği yok",
+   "Stop yeri yok",
+   "Yüzde iz süren stop değeri yok",
+   "Kısa için kitabın 7. bölümü (opsiyon bölümleri okunmadı)"
+  ],
+  "uyumluluk_notu": "Günlük hisse; hacim gerekli. Mum/aralık/hacim tabanlı olduğundan kripto/forexte de kodlanabilir; sayısal eşikler araştırmayla belirlenmeli. Opsiyon bölümleri (8-9) kapsam dışı.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "tepki-salinimi",
+   "dar-aralik-gunu",
+   "yutan-mum",
+   "hacim",
+   "swing",
+   "onay"
+  ]
+ }
+]

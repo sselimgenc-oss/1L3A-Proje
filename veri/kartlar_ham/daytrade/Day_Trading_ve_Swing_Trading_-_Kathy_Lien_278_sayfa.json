@@ -1,0 +1,407 @@
+[
+ {
+  "kart_id": "daytrade__cift-sifir-fade__lien",
+  "ad": "Çift Sıfırları Silme (Yuvarlak Sayı Fade, 10/15 dk)",
+  "stil": "daytrade",
+  "kaynak": {
+   "pdf": "Day Trading ve Swing Trading - Kathy Lien (278 sayfa) - @eseckal.pdf",
+   "sayfalar": [
+    121,
+    122,
+    123
+   ]
+  },
+  "ozet": "Gün içi 20 SMA'dan çok uzaklaşan fiyat çift sıfır (yuvarlak sayı) seviyesine yaklaşırken, seviyenin birkaç pip ötesine ters yönde limit giriş konur; 15-20 pip risk, 50 pip potansiyel.",
+  "kategori": "destek_direnc",
+  "piyasa_rejimi": "yatay",
+  "orijinal_piyasa": "forex",
+  "zaman_dilimi": {
+   "islem": "15m",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "SMA",
+    "parametreler": {
+     "periyot": 20
+    }
+   }
+  ],
+  "long_giris": [
+   "10 veya 15 dk grafikte fiyat gün içi 20 SMA'nın çok altında",
+   "Fiyat çift sıfır seviyesine (örn. 1,2800) iner",
+   "Seviyenin en fazla 10 pip altına long giriş emri"
+  ],
+  "short_giris": [
+   "Fiyat 20 SMA'nın çok üzerinde, çift sıfıra yaklaşır",
+   "Seviyenin birkaç pip (en fazla 10) üstüne short giriş"
+  ],
+  "stop_loss": "Girişten en fazla 20 pip ötede ilk koruyucu stop",
+  "kar_al": "Risk kadar 2 katı kârda pozisyonun yarısı kapatılır, kalan için stop başa baş, sonra iz süren stop (2-5 barlık dip/zirve)",
+  "iz_suren_stop": "Kalan yarı için 2-5 barlık dip/zirve takibi",
+  "zaman_cikisi": null,
+  "filtreler": [
+   "Sakin piyasa (önemli ekonomik veri yok)",
+   "Çift sıfır ek teknik seviye ile çakışırsa (MA, Fib, Bollinger) daha iyi",
+   "Dar aralıklı çiftler, çaprazlar, emtia paraları"
+  ],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": "Örnekler: 15-20 pip riske 50 pip potansiyel; 1. lot 40 pip, 2. lot 36/76/86 pip",
+  "kodlanabilirlik": {
+   "puan": 2,
+   "gerekce": "Kurallar sayısal; 'çok altında' (20 SMA'dan uzaklık) tanımsız, ATR katına çevrilmeli."
+  },
+  "belirsizlikler": [
+   "20 SMA'dan uzaklık eşiği yok",
+   "Yuvarlak sayı tanımı varlığa göre"
+  ],
+  "uyumluluk_notu": "Forex'e özgü (pip, seans: Londra/NY, çift sıfır) ama mantık ATR/yüzde ile uyarlanır. Hacim gerekmiyor. Kripto için yuvarlak sayı (ör. 100/1000 seviyeleri) ve seans saatleri yeniden tanımlanmalı.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "yuvarlak-sayi",
+   "cift-sifir",
+   "fade",
+   "20-sma",
+   "forex"
+  ]
+ },
+ {
+  "kart_id": "daytrade__gercek-anlasma-londra-acilis__lien",
+  "ad": "Gerçek Anlaşmayı Bekleme (GBP/USD Londra Açılışı Sahte Hareket Fade)",
+  "stil": "daytrade",
+  "kaynak": {
+   "pdf": "Day Trading ve Swing Trading - Kathy Lien (278 sayfa) - @eseckal.pdf",
+   "sayfalar": [
+    126,
+    127,
+    128
+   ]
+  },
+  "ozet": "Avrupa açılışının ilk saatinde (NY 01:00-02:00 aralığı) açılıştan 25+ pip oluşan sahte hareket tersine dönünce, aralığın ters ucunun 10 pip ötesinde girilerek gerçek yönlü hareket yakalanır.",
+  "kategori": "kirilim",
+  "piyasa_rejimi": "volatil",
+  "orijinal_piyasa": "forex",
+  "zaman_dilimi": {
+   "islem": "5m",
+   "ust_filtre": null
+  },
+  "gostergeler": [],
+  "long_giris": [
+   "NY 01:00-02:00 Londra/Frankfurt açılış aralığı belirlenir",
+   "Parite aralıkta açılıştan en az 25 pip yeni dip yapar",
+   "Parite döner ve aralığın zirvesini aşar",
+   "Aralık zirvesinin 10 pip üstüne buy stop"
+  ],
+  "short_giris": [
+   "Parite açılış aralığında zirveden en az 25 pip yukarı gider",
+   "Döner ve aralığın dibini kırar",
+   "Aralık dibinin 10 pip altına sell stop"
+  ],
+  "stop_loss": "Girişten en fazla 20 pip",
+  "kar_al": "Risk kadar 2 katı pip kârda yarım kapat, kalan stop başa baş, iki barlık zirve/dip iz süren stop",
+  "iz_suren_stop": "2 barlık dip/zirve",
+  "zaman_cikisi": "Seans tabanlı (Londra açılış saatleri)",
+  "filtreler": [
+   "ABD açılışı sonrası veya büyük ekonomik veriden sonra daha iyi çalışır"
+  ],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": "Örnek işlemler: 1. lot 40 pip, 2. lot 52-90 pip",
+  "kodlanabilirlik": {
+   "puan": 2,
+   "gerekce": "Saat ve pip eşikleri net; aralık/dönüş tanımı biraz belirsiz. Kitap kural metninde yön/stop çelişkisi var (long kuralında '2 kat aşağı' yazıyor, yazım hatası varsayıldı)."
+  },
+  "belirsizlikler": [
+   "Kural 5 long için ters yazılmış (aşağı yerine yukarı olmalı)",
+   "Seans saatleri DST'ye duyarlı"
+  ],
+  "uyumluluk_notu": "Forex'e özgü (pip, seans: Londra/NY, çift sıfır) ama mantık ATR/yüzde ile uyarlanır. Hacim gerekmiyor. Kripto için yuvarlak sayı (ör. 100/1000 seviyeleri) ve seans saatleri yeniden tanımlanmalı. Londra açılışı saatine bağlı; 7/24 piyasada seans tabanlı uyarlama gerekir.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "londra-acilis",
+   "sahte-hareket",
+   "gbpusd",
+   "stop-avi"
+  ]
+ },
+ {
+  "kart_id": "daytrade__fader-adx-onceki-gun__lien",
+  "ad": "Fader (Düşük ADX'te Önceki Gün Aralığı Sahte Kırılım)",
+  "stil": "daytrade",
+  "kaynak": {
+   "pdf": "Day Trading ve Swing Trading - Kathy Lien (278 sayfa) - @eseckal.pdf",
+   "sayfalar": [
+    134,
+    135,
+    136
+   ]
+  },
+  "ozet": "14 periyot ADX 35'in altındayken (zayıflayan trend), fiyat önceki günün dibinin 15 pip altına inip döner ve önceki günün zirvesinin 15 pip üzerinde (tersi short) giriş yapılır; 30 pip stop, 60 pip hedef.",
+  "kategori": "ortalamaya_donus",
+  "piyasa_rejimi": "yatay",
+  "orijinal_piyasa": "forex",
+  "zaman_dilimi": {
+   "islem": "1h",
+   "ust_filtre": "1D"
+  },
+  "gostergeler": [
+   {
+    "ad": "ADX",
+    "parametreler": {
+     "periyot": 14,
+     "esik": 35
+    }
+   }
+  ],
+  "long_giris": [
+   "14 periyot ADX < 35 (ideal olarak düşüyor)",
+   "Fiyat önceki günün dibinin en az 15 pip altına düşer",
+   "Önceki günün zirvesinin 15 pip üstüne buy stop"
+  ],
+  "short_giris": [
+   "ADX < 35",
+   "Fiyat önceki günün zirvesinin en az 15 pip üstüne çıkar",
+   "Önceki günün dibinin 15 pip altına sell stop"
+  ],
+  "stop_loss": "Girişten en fazla 30 pip",
+  "kar_al": "Risk iki katı veya 60 pip",
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [
+   "Planlı önemli ekonomik veri yokken",
+   "Dar aralıklı, düşük oynaklıklı çiftler"
+  ],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 3,
+   "gerekce": "Tüm koşullar sayısal ve mekanik (pip değerleri ATR'ye uyarlanır)."
+  },
+  "belirsizlikler": [
+   "Hedef 'risk 2 katı veya 60 pip' hangisi önce belirsiz"
+  ],
+  "uyumluluk_notu": "Forex'e özgü (pip, seans: Londra/NY, çift sıfır) ama mantık ATR/yüzde ile uyarlanır. Hacim gerekmiyor. Kripto için yuvarlak sayı (ör. 100/1000 seviyeleri) ve seans saatleri yeniden tanımlanmalı.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "fader",
+   "adx",
+   "onceki-gun",
+   "sahte-kirilim"
+  ]
+ },
+ {
+  "kart_id": "daytrade__kanal-kirilim-dar__lien",
+  "ad": "Dar Kanal Kırılımı (Haber/Seans Öncesi)",
+  "stil": "daytrade",
+  "kaynak": {
+   "pdf": "Day Trading ve Swing Trading - Kathy Lien (278 sayfa) - @eseckal.pdf",
+   "sayfalar": [
+    141,
+    142,
+    143
+   ]
+  },
+  "ozet": "Önemli veri veya seans açılışı öncesi dar bir kanalda sıkışan fiyatta, kanalın üst/alt çizgisinin 10 pip ötesine iki yönlü emir konur; kırılım yönünde stop kanal çizgisinin 10 pip içine yerleştirilir, hedef kanal genişliğinin iki katı.",
+  "kategori": "kirilim",
+  "piyasa_rejimi": "yatay",
+  "orijinal_piyasa": "forex",
+  "zaman_dilimi": {
+   "islem": "30m",
+   "ust_filtre": null
+  },
+  "gostergeler": [],
+  "long_giris": [
+   "Gün içi/günlük grafikte dar kanal (örnek: 30 pip, 15 pip, 13 pip genişlik)",
+   "Kanal üst çizgisinin 10 pip üstüne buy stop",
+   "Stop üst kanal çizgisinin hemen (10 pip) altı"
+  ],
+  "short_giris": [
+   "Alt kanal çizgisinin 10 pip altına sell stop",
+   "Stop alt çizginin 10 pip üstü"
+  ],
+  "stop_loss": "Kanal çizgisinin içine 10 pip",
+  "kar_al": "Kanal aralığının iki katı (örnek); iz süren stop opsiyonel",
+  "iz_suren_stop": "Fiyat lehine ilerledikçe stop takibi",
+  "zaman_cikisi": null,
+  "filtreler": [
+   "Büyük ABD verisi veya piyasa açılışı öncesi",
+   "Asya kanalı, Londra/ABD kırılımı"
+  ],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 2,
+   "gerekce": "Kanal tanımı ('dar' eşiği) sübjektif; diğer kurallar net."
+  },
+  "belirsizlikler": [
+   "'Dar kanal' eşiği yok",
+   "Tek yönlü kural metni yarım (long için verilmiş)"
+  ],
+  "uyumluluk_notu": "Forex'e özgü (pip, seans: Londra/NY, çift sıfır) ama mantık ATR/yüzde ile uyarlanır. Hacim gerekmiyor. Kripto için yuvarlak sayı (ör. 100/1000 seviyeleri) ve seans saatleri yeniden tanımlanmalı.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "kanal",
+   "kirilim",
+   "haber-oncesi",
+   "sikisma"
+  ]
+ },
+ {
+  "kart_id": "daytrade__proaktif-reaktif-haber__lien",
+  "ad": "Haber Ticareti (Proaktif / Reaktif / Kombine)",
+  "stil": "daytrade",
+  "kaynak": {
+   "pdf": "Day Trading ve Swing Trading - Kathy Lien (278 sayfa) - @eseckal.pdf",
+   "sayfalar": [
+    146,
+    147,
+    148,
+    149,
+    150,
+    151,
+    152,
+    153,
+    154,
+    155
+   ]
+  },
+  "ozet": "Önemli ekonomik veri açıklamasından en fazla 20 dk önce (proaktif) veya sürpriz büyükse açıklamadan 5 dk sonra haber mumunun ucuna stop koyarak (reaktif) pozisyon açılır; yarısı 1R'de kapatılır, kalan 20 günlük SMA ile iz sürülür.",
+  "kategori": "momentum",
+  "piyasa_rejimi": "volatil",
+  "orijinal_piyasa": "forex",
+  "zaman_dilimi": {
+   "islem": "5m",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "SMA",
+    "parametreler": {
+     "periyot": 20,
+     "zaman_dilimi": "5m grafikte"
+    }
+   }
+  ],
+  "long_giris": [
+   "Proaktif: veri açıklamasından en fazla 20 dk önce yönlü giriş (veri tahmini gerekir)",
+   "Reaktif: sürpriz konsensüsten %100 büyükse (örn. beklenti 11K, açıklanan >22K) açıklamadan 5 dk sonra giriş",
+   "Kombine: yarısı öncesi, doğrulanırsa ikinci yarı veri sonrası"
+  ],
+  "short_giris": [
+   "Aynı mantık ters yönde"
+  ],
+  "stop_loss": "Proaktif: son iki saatlik aralığın 10 pip ötesi veya girişten 30 pip (hangisi yakınsa). Reaktif: haber mumunun dibi/zirvesi. Kombine: ikinci girişten 45 pip",
+  "kar_al": "Risk kadar kârda yarım pozisyon kapat; kalan yarı için stop başa baş + 20 SMA iz süren stop veya 3R sabit hedef",
+  "iz_suren_stop": "5 dk grafikte 20 SMA",
+  "zaman_cikisi": null,
+  "filtreler": [
+   "Ekonomik takvim ve konsensüs tahmini verisi şart",
+   "Spread genişlemesinden kaçınmak için 5 dk öncesine kadar bekleme"
+  ],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": "Örnekler: ortalama 17-75 pip kâr",
+  "kodlanabilirlik": {
+   "puan": 1,
+   "gerekce": "Konsensüs/olay verisi gerektirir; kural kısmı net ama veri tahmini kodlanamaz. Reaktif kısım sürpriz verisi ile mekanik kodlanabilir."
+  },
+  "belirsizlikler": [
+   "Tahmin verisi kitapta yok",
+   "Tahmini sürpriz eşiği veri başına değişir"
+  ],
+  "uyumluluk_notu": "Ekonomik takvim verisi gerekli; kripto/hisse için haber API'si olmadan uygulanamaz.",
+  "varyantlar": [
+   "Sadece proaktif",
+   "Sadece reaktif",
+   "Kombine"
+  ],
+  "anahtar_kelimeler": [
+   "haber",
+   "ekonomik-veri",
+   "proaktif",
+   "reaktif",
+   "sma20"
+  ]
+ },
+ {
+  "kart_id": "daytrade__momentum-20-100__lien",
+  "ad": "20-100 Kısa Vadeli Momentum (EMA20 + SMA100 + MACD)",
+  "stil": "daytrade",
+  "kaynak": {
+   "pdf": "Day Trading ve Swing Trading - Kathy Lien (278 sayfa) - @eseckal.pdf",
+   "sayfalar": [
+    156,
+    157,
+    158,
+    159,
+    160
+   ]
+  },
+  "ozet": "Fiyat hem 20 EMA hem 100 SMA'nın 15 pip üzerine çıkınca (MACD en fazla 5 mum önce pozitife dönmüşse) long, tersinde short; yarısı 1R'de kapatılır, kalan 20 EMA ∓ 15 pip ile iz sürülür.",
+  "kategori": "momentum",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "forex",
+  "zaman_dilimi": {
+   "islem": "5m",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "EMA",
+    "parametreler": {
+     "periyot": 20
+    }
+   },
+   {
+    "ad": "SMA",
+    "parametreler": {
+     "periyot": 100
+    }
+   },
+   {
+    "ad": "MACD",
+    "parametreler": {
+     "hizli": 12,
+     "yavas": 26,
+     "sinyal": 9,
+     "tur": "histogram"
+    }
+   }
+  ],
+  "long_giris": [
+   "Fiyat 20 EMA ve 100 SMA'nın altındayken her ikisini de yukarı kırar",
+   "Fiyat hareketli ortalamaların 15 pip üzerine çıkar",
+   "MACD histogramı en fazla 5 mum önce pozitife dönmüş",
+   "Giriş: ortalamaların 15 pip üstü"
+  ],
+  "short_giris": [
+   "Fiyat her iki MA'nın üstündeyken aşağı kırar",
+   "15 pip altına iner",
+   "MACD en fazla 5 mum önce negatife dönmüş"
+  ],
+  "stop_loss": "Hareketli ortalamaları kıran mumun dibi (long) / zirvesi (short)",
+  "kar_al": "Risk kadar kârda yarım kapat, stop başa baş; kalan için 20 EMA ∓ 15 pip iz süren stop",
+  "iz_suren_stop": "20 EMA - 15 pip (long), +15 pip (short)",
+  "zaman_cikisi": null,
+  "filtreler": [
+   "Uzun Asya konsolidasyonu sonrası kırılım örnekleri"
+  ],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": "Örnekler: 67, 95, 144 pip, bir zarar -34 pip",
+  "kodlanabilirlik": {
+   "puan": 3,
+   "gerekce": "Tüm kurallar sayısal; pip eşiği ATR'ye çevrilebilir."
+  },
+  "belirsizlikler": [
+   "MACD 'döndü' kontrolü histogram işareti olarak varsayıldı",
+   "İlk hedef = risk kadar"
+  ],
+  "uyumluluk_notu": "Forex'e özgü (pip, seans: Londra/NY, çift sıfır) ama mantık ATR/yüzde ile uyarlanır. Hacim gerekmiyor. Kripto için yuvarlak sayı (ör. 100/1000 seviyeleri) ve seans saatleri yeniden tanımlanmalı. 5m'de uygulanır; 100 SMA 5m periyodudur ('günlük' etiketine rağmen 5m grafikte).",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "ema20",
+   "sma100",
+   "macd",
+   "momentum",
+   "15-pip"
+  ]
+ }
+]

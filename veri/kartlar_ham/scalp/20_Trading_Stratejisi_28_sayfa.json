@@ -1,0 +1,1470 @@
+[
+  {
+    "kart_id": "scalp__5dk-sistem-1-macd-stokastik-ema5__carter",
+    "ad": "5 Dakika Sistem #1: MACD + Stokastik + EMA5 Açılış/Kapanış",
+    "stil": "scalp",
+    "kaynak": {
+      "pdf": "20 Trading Stratejisi (28 sayfa) - @eseckal.pdf",
+      "sayfalar": [
+        2
+      ]
+    },
+    "ozet": "Stokastik(5,3,3) 20'yi yukarı keser, MACD(12,26,1) önceki barın üstünde kapanır, sinyal mumu yükseliş kapanışlı ve EMA5(kapanış) EMA5(açılış)'ı yukarı keserse AL; stop 20 pip; EMA5 kapanış/açılış ters kesişince kapat.",
+    "kategori": "momentum",
+    "piyasa_rejimi": "herhangi",
+    "orijinal_piyasa": "forex",
+    "zaman_dilimi": {
+      "islem": "5m",
+      "ust_filtre": null
+    },
+    "gostergeler": [
+      {
+        "ad": "MACD",
+        "parametreler": {
+          "hizli": 12,
+          "yavas": 26,
+          "sinyal": 1
+        }
+      },
+      {
+        "ad": "Stokastik",
+        "parametreler": {
+          "K": 5,
+          "D": 3,
+          "yavaslama": 3
+        }
+      },
+      {
+        "ad": "EMA",
+        "parametreler": {
+          "periyot": 5,
+          "fiyat": "kapanış"
+        }
+      },
+      {
+        "ad": "EMA",
+        "parametreler": {
+          "periyot": 5,
+          "fiyat": "açılış"
+        }
+      }
+    ],
+    "long_giris": [
+      "Stokastik 20 seviyesini yukarı geçer (aşırı alımda değil)",
+      "MACD önceki barın üzerinde kapanır",
+      "Sinyal mumu yükseliş kapanışı",
+      "EMA5(kapanış) EMA5(açılış)'ı yukarı keser"
+    ],
+    "short_giris": [
+      "Stokastik 80'i aşağı geçer",
+      "MACD önceki barın altında kapanır",
+      "Sinyal mumu düşüş kapanışı",
+      "EMA5(kapanış) EMA5(açılış)'ı aşağı keser"
+    ],
+    "stop_loss": "20 pip",
+    "kar_al": "EMA5 kapanış / EMA5 açılış ters kesişimi (kapanış kuralı)",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 3,
+      "gerekce": "Tüm koşullar sayısal."
+    },
+    "belirsizlikler": [
+      "Aşırı alımda/satımda olmama için eşik verilmemiş (80/20 varsayıldı)"
+    ],
+    "uyumluluk_notu": "5m forex sistemi; pip tabanlı sabit stop/hedef ATR ile ölçeklenmeli; hacim gerekmez; kripto/emtia perpetual'larda pip yerine ATR/% kullanılmalı.",
+    "varyantlar": [],
+    "anahtar_kelimeler": [
+      "macd",
+      "stokastik",
+      "ema5",
+      "eurusd"
+    ]
+  },
+  {
+    "kart_id": "scalp__5dk-sistem-2-ema-bolge-geri-cekilme__carter",
+    "ad": "5 Dakika Sistem #2: 10/21 EMA Bölgesine Geri Çekilme (50 EMA trend gücü)",
+    "stil": "scalp",
+    "kaynak": {
+      "pdf": "20 Trading Stratejisi (28 sayfa) - @eseckal.pdf",
+      "sayfalar": [
+        3
+      ]
+    },
+    "ozet": "5 dk grafikte 50 EMA trendi (≈30° eğim) gösterirken fiyat 10-21 EMA 'bölgesine' geri çekilince trend yönünde giriş; stop 5 pip+spread, hedef 10 pip.",
+    "kategori": "trend_takip",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "forex",
+    "zaman_dilimi": {
+      "islem": "5m",
+      "ust_filtre": null
+    },
+    "gostergeler": [
+      {
+        "ad": "EMA",
+        "parametreler": {
+          "periyot": 10
+        }
+      },
+      {
+        "ad": "EMA",
+        "parametreler": {
+          "periyot": 21
+        }
+      },
+      {
+        "ad": "EMA",
+        "parametreler": {
+          "periyot": 50
+        }
+      }
+    ],
+    "long_giris": [
+      "Yükseliş trendi (daha yüksek zirveler; 50 EMA yatayın ~30° üstünde)",
+      "Fiyat 10 ile 21 EMA arasındaki bölgeye girer, geri çekilmeyi bekle -> AL"
+    ],
+    "short_giris": [
+      "Düşüş trendi (50 EMA ~30° aşağı)",
+      "Fiyat bölgeye yükselir -> SAT"
+    ],
+    "stop_loss": "5 pip + spread",
+    "kar_al": "10 pip",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Asya seansı veya Londra/ABD seans sonunda işlem yok",
+      "Yakın önemli haber yok"
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Bölge ve eğim ölçülebilir; 'geri çekilmeyi bekle' tetikleyicisi yok."
+    },
+    "belirsizlikler": [
+      "Giriş tetikleyici (bölgeye giriş mü, çıkış mı) belirsiz",
+      "30° eğim ölçeklemeye bağlı"
+    ],
+    "uyumluluk_notu": "5m forex sistemi; pip tabanlı sabit stop/hedef ATR ile ölçeklenmeli; hacim gerekmez; kripto/emtia perpetual'larda pip yerine ATR/% kullanılmalı.",
+    "varyantlar": [],
+    "anahtar_kelimeler": [
+      "ema-bolge",
+      "10-21-50",
+      "geri-cekilme"
+    ]
+  },
+  {
+    "kart_id": "scalp__5dk-sistem-3-bollinger-disi-kapanis-stokastik__carter",
+    "ad": "5 Dakika Sistem #3: Bollinger Dışı Kapanış + Stokastik + Zıt Renkli Sinyal Mumu",
+    "stil": "scalp",
+    "kaynak": {
+      "pdf": "20 Trading Stratejisi (28 sayfa) - @eseckal.pdf",
+      "sayfalar": [
+        4
+      ]
+    },
+    "ozet": "Bollinger (20,2) dışında bir kapanış ve stokastik(5,3,3) aşırı bölgedeyken, trend yönünün tersi renkli bir 'sinyal mumu' görülünce o yönde (trend yönünde) giriş; 10 pip hedef, 20 pip stop.",
+    "kategori": "momentum",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "forex",
+    "zaman_dilimi": {
+      "islem": "5m",
+      "ust_filtre": null
+    },
+    "gostergeler": [
+      {
+        "ad": "Bollinger",
+        "parametreler": {
+          "periyot": 20,
+          "sapma": 2
+        }
+      },
+      {
+        "ad": "Stokastik",
+        "parametreler": {
+          "K": 5,
+          "D": 3,
+          "yavaslama": 3
+        }
+      }
+    ],
+    "long_giris": [
+      "Bollinger dışında kapanış",
+      "Stokastik 20'nin altında",
+      "Piyasa yükseliş trendinde iken kırmızı mum = sinyal mumu; aynı yöne (AL) gir"
+    ],
+    "short_giris": [
+      "Stokastik 80'in üstünde",
+      "Piyasa düşüş trendinde iken yeşil sinyal mumu; aynı yöne (SAT) gir"
+    ],
+    "stop_loss": "20 pip",
+    "kar_al": "10 pip",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Sayısal; trend tanımı ve 'sinyal mumunun' hangi yönde girileceği çeviri belirsiz."
+    },
+    "belirsizlikler": [
+      "Sinyal mumu sonrası giriş yönü 'aynı yöne' (mum yönü mü trend mi?) çelişkili",
+      "Trend tanımı yok"
+    ],
+    "uyumluluk_notu": "5m forex sistemi; pip tabanlı sabit stop/hedef ATR ile ölçeklenmeli; hacim gerekmez; kripto/emtia perpetual'larda pip yerine ATR/% kullanılmalı.",
+    "varyantlar": [],
+    "anahtar_kelimeler": [
+      "bollinger",
+      "stokastik",
+      "sinyal-mumu"
+    ]
+  },
+  {
+    "kart_id": "scalp__5dk-sistem-4-bb-orta-bant-geri-cekilme__carter",
+    "ad": "5 Dakika Sistem #4: Bollinger Orta Banda Geri Çekilme",
+    "stil": "scalp",
+    "kaynak": {
+      "pdf": "20 Trading Stratejisi (28 sayfa) - @eseckal.pdf",
+      "sayfalar": [
+        5
+      ]
+    },
+    "ozet": "Bollinger (20,2) yukarı eğimliyken fiyat orta banda yukarıdan dokununca AL (stop alt bant veya 15 pip, hedef üst bant); aşağı eğimliyken orta banda aşağıdan dokununca SAT.",
+    "kategori": "trend_takip",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "forex",
+    "zaman_dilimi": {
+      "islem": "5m",
+      "ust_filtre": null
+    },
+    "gostergeler": [
+      {
+        "ad": "Bollinger",
+        "parametreler": {
+          "periyot": 20,
+          "sapma": 2
+        }
+      }
+    ],
+    "long_giris": [
+      "Bollinger bandı yukarı eğimli",
+      "Fiyat yukarıdan orta banda dokunur -> AL"
+    ],
+    "short_giris": [
+      "Bollinger aşağı eğimli",
+      "Fiyat aşağıdan orta banda dokunur -> SAT"
+    ],
+    "stop_loss": "Alt bant (short: üst bant) veya 15 pip",
+    "kar_al": "Üst bant (short: alt bant)",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 3,
+      "gerekce": "Sayısal; eğim eşiği yok."
+    },
+    "belirsizlikler": [
+      "Eğim tanımı yok"
+    ],
+    "uyumluluk_notu": "5m forex sistemi; pip tabanlı sabit stop/hedef ATR ile ölçeklenmeli; hacim gerekmez; kripto/emtia perpetual'larda pip yerine ATR/% kullanılmalı.",
+    "varyantlar": [],
+    "anahtar_kelimeler": [
+      "bollinger",
+      "orta-bant",
+      "geri-cekilme"
+    ]
+  },
+  {
+    "kart_id": "scalp__5dk-sistem-5-3-5-15-45-ema-ghl-qti__carter",
+    "ad": "5 Dakika Sistem #5: 3/5/15/45 EMA Demeti + GHL + QTI Çoklu Zaman Dilimi",
+    "stil": "scalp",
+    "kaynak": {
+      "pdf": "20 Trading Stratejisi (28 sayfa) - @eseckal.pdf",
+      "sayfalar": [
+        6,
+        7,
+        8
+      ]
+    },
+    "ozet": "15 dk'da fiyat>3EMA>5EMA>15EMA>45EMA ve GHL/QTI yeşil iken fiyat 5 EMA'ya dokunana kadar geri çekilir; 5 dk'ya inilir, fiyat tüm EMA'ların üstünde kapanır ve histogramlar yeşil ise AL; stop son dip, hedef = stop (1:1).",
+    "kategori": "trend_takip",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "forex",
+    "zaman_dilimi": {
+      "islem": "5m",
+      "ust_filtre": "15m"
+    },
+    "gostergeler": [
+      {
+        "ad": "EMA",
+        "parametreler": {
+          "periyot": 3,
+          "kayma": 1
+        }
+      },
+      {
+        "ad": "EMA",
+        "parametreler": {
+          "periyot": 5,
+          "kayma": 3
+        }
+      },
+      {
+        "ad": "EMA",
+        "parametreler": {
+          "periyot": 15,
+          "kayma": 3
+        }
+      },
+      {
+        "ad": "EMA",
+        "parametreler": {
+          "periyot": 45,
+          "kayma": 3
+        }
+      },
+      {
+        "ad": "GHL (HiLo Activator)",
+        "parametreler": {}
+      },
+      {
+        "ad": "QTI (Quick Trend Index)",
+        "parametreler": {}
+      }
+    ],
+    "long_giris": [
+      "15dk: fiyat>3>5>15>45 EMA, GHL ve QTI yeşil",
+      "15dk: fiyat 5 EMA'ya dokunana kadar geri çeker (mum 5 EMA'da kapanmak zorunda değil)",
+      "5dk: fiyat tüm EMA'ların üstünde kapanır, 15EMA>45EMA, iki histogram yeşil, 15dk trendi hala geçerli -> mum kapanışında AL"
+    ],
+    "short_giris": [
+      "Ayna (fiyat<3<5<15<45, GHL/QTI kırmızı, 5 EMA'ya yükseliş)"
+    ],
+    "stop_loss": "Son dip (short: son zirve)",
+    "kar_al": "Stop mesafesine eşit (1:1)",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "GHL ve QTI özel göstergeler."
+    },
+    "belirsizlikler": [
+      "GHL/QTI parametreleri ve formülleri kitapta yok",
+      "EMA kayma (shift) değerleri tuhaf tanımlı"
+    ],
+    "uyumluluk_notu": "5m forex sistemi; pip tabanlı sabit stop/hedef ATR ile ölçeklenmeli; hacim gerekmez; kripto/emtia perpetual'larda pip yerine ATR/% kullanılmalı.",
+    "varyantlar": [],
+    "anahtar_kelimeler": [
+      "ema-demeti",
+      "coklu-zaman",
+      "ghl",
+      "qti"
+    ]
+  },
+  {
+    "kart_id": "scalp__5dk-sistem-6-ema14-21-50-bb-mtf__carter",
+    "ad": "5 Dakika Sistem #6: 14/21/50 EMA Hizası + 5dk ve 1s Çift Zaman Dilimi",
+    "stil": "scalp",
+    "kaynak": {
+      "pdf": "20 Trading Stratejisi (28 sayfa) - @eseckal.pdf",
+      "sayfalar": [
+        9,
+        10
+      ]
+    },
+    "ozet": "Hem 5dk hem 1s'de EMA14>EMA21>EMA50 ve EMA50 Bollinger bantları içindeyken, 5dk mum EMA14 veya EMA21'e dokunup yükseliş kapanışı yaparsa AL; çıkış sıralama bozulunca.",
+    "kategori": "trend_takip",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "forex",
+    "zaman_dilimi": {
+      "islem": "5m",
+      "ust_filtre": "1h"
+    },
+    "gostergeler": [
+      {
+        "ad": "EMA",
+        "parametreler": {
+          "periyot": 14
+        }
+      },
+      {
+        "ad": "EMA",
+        "parametreler": {
+          "periyot": 21
+        }
+      },
+      {
+        "ad": "EMA",
+        "parametreler": {
+          "periyot": 50
+        }
+      },
+      {
+        "ad": "Bollinger",
+        "parametreler": {
+          "periyot": 20,
+          "sapma": "20 (kitapta 20,20)"
+        }
+      }
+    ],
+    "long_giris": [
+      "5dk ve 1s: EMA14>EMA21>EMA50 ve EMA50 Bollinger bantları içinde",
+      "5dk mevcut bar EMA14/EMA21'e dokunuyor",
+      "Bar kapanışı açılışının üstünde; bar kapanınca AL"
+    ],
+    "short_giris": [
+      "Ayna (EMA14<21<50), bar EMA'ya dokunur, düşüş kapanışı"
+    ],
+    "stop_loss": "Kitapta yok",
+    "kar_al": "Her iki zaman diliminde EMA sıralaması artık sağlanmayınca çık",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Kurallar sayısal; stop yok; BB(20,20) çeviri hatası."
+    },
+    "belirsizlikler": [
+      "Bollinger sapması '20' muhtemelen 2",
+      "Stop yok"
+    ],
+    "uyumluluk_notu": "5m forex sistemi; pip tabanlı sabit stop/hedef ATR ile ölçeklenmeli; hacim gerekmez; kripto/emtia perpetual'larda pip yerine ATR/% kullanılmalı.",
+    "varyantlar": [],
+    "anahtar_kelimeler": [
+      "ema-hizasi",
+      "coklu-zaman",
+      "14-21-50"
+    ]
+  },
+  {
+    "kart_id": "scalp__5dk-sistem-8-3-bollinger-rsi3-stokastik__carter",
+    "ad": "5 Dakika Sistem #8: Üçlü Bollinger(50) + RSI(3) + Stokastik(6,3,3) Dönüş",
+    "stil": "scalp",
+    "kaynak": {
+      "pdf": "20 Trading Stratejisi (28 sayfa) - @eseckal.pdf",
+      "sayfalar": [
+        12
+      ]
+    },
+    "ozet": "Mum Bollinger(50,2) kırmızı bandı delip RSI(3)<20 ve stokastik<20 iken, sonraki mum banttan geri dönüp RSI 20'yi ve stokastik çizgileri 40'ı yukarı aşınca AL; stop sarı/turuncu bant, hedef orta bant.",
+    "kategori": "ortalamaya_donus",
+    "piyasa_rejimi": "yatay",
+    "orijinal_piyasa": "forex",
+    "zaman_dilimi": {
+      "islem": "5m",
+      "ust_filtre": null
+    },
+    "gostergeler": [
+      {
+        "ad": "Bollinger",
+        "parametreler": {
+          "periyot": 50,
+          "sapma": 2
+        }
+      },
+      {
+        "ad": "Bollinger",
+        "parametreler": {
+          "periyot": 50,
+          "sapma": 3
+        }
+      },
+      {
+        "ad": "Bollinger",
+        "parametreler": {
+          "periyot": 50,
+          "sapma": 4
+        }
+      },
+      {
+        "ad": "RSI",
+        "parametreler": {
+          "periyot": 3
+        }
+      },
+      {
+        "ad": "Stokastik",
+        "parametreler": {
+          "K": 6,
+          "D": 3,
+          "yavaslama": 3
+        }
+      }
+    ],
+    "long_giris": [
+      "Mum alt 2-sapma bandına dokunur/delik",
+      "RSI(3)<20 ve stokastik<20",
+      "Sonraki mum bandın içine döner, RSI 20'nin üstüne ve stokastik çizgileri 40 üstüne çıkar -> AL"
+    ],
+    "short_giris": [
+      "Mum üst 2-sapma bandına dokunur/delik",
+      "RSI(3)>80 ve stokastik>80",
+      "Sonraki mum geri döner, RSI 80'in altına ve stokastik çizgileri 60'ın altına iner -> SAT"
+    ],
+    "stop_loss": "Sarı veya turuncu bant (3-4 sapma)",
+    "kar_al": "Orta bant",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 3,
+      "gerekce": "Sayısal."
+    },
+    "belirsizlikler": [
+      "Sarı mı turuncu mu stop belirsiz (3. veya 4. sapma)"
+    ],
+    "uyumluluk_notu": "5m forex sistemi; pip tabanlı sabit stop/hedef ATR ile ölçeklenmeli; hacim gerekmez; kripto/emtia perpetual'larda pip yerine ATR/% kullanılmalı.",
+    "varyantlar": [],
+    "anahtar_kelimeler": [
+      "bollinger-50",
+      "rsi3",
+      "stokastik",
+      "ortalamaya-donus"
+    ]
+  },
+  {
+    "kart_id": "scalp__5dk-sistem-9-ema50-100-macd__carter",
+    "ad": "5 Dakika Sistem #9: 50/100 EMA Üstü Kırılım + MACD Teyidi, Yarım Çıkış",
+    "stil": "scalp",
+    "kaynak": {
+      "pdf": "20 Trading Stratejisi (28 sayfa) - @eseckal.pdf",
+      "sayfalar": [
+        13
+      ]
+    },
+    "ozet": "Fiyat 50 ve 100 EMA'nın üzerindeyken 50 EMA'yı 10+ pip yukarı kırınca, son 5 bar içinde MACD sıfırı yukarı geçtiyse AL; stop 5 bar dip; 2R'de yarısını kapat, stopu başabaşa çek; kalan 50 EMA'nın 10 pip altına inince kapanır.",
+    "kategori": "trend_takip",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "forex",
+    "zaman_dilimi": {
+      "islem": "5m",
+      "ust_filtre": null
+    },
+    "gostergeler": [
+      {
+        "ad": "EMA",
+        "parametreler": {
+          "periyot": 50
+        }
+      },
+      {
+        "ad": "EMA",
+        "parametreler": {
+          "periyot": 100
+        }
+      },
+      {
+        "ad": "MACD",
+        "parametreler": {
+          "hizli": 12,
+          "yavas": 26,
+          "sinyal": 9
+        }
+      }
+    ],
+    "long_giris": [
+      "Fiyat 50 ve 100 EMA üstünde",
+      "Fiyat 50 EMA'nın 10+ pip üstüne çıkar",
+      "MACD son 5 bar içinde pozitife geçmiş (yoksa sonraki MACD sinyalini bekle) -> AL"
+    ],
+    "short_giris": [
+      "Fiyat 50 ve 100 EMA altında",
+      "Fiyat 50 EMA'nın 10+ pip altına iner",
+      "MACD son 5 barda negatife geçmiş -> SAT"
+    ],
+    "stop_loss": "Girişten 5 bar önceki dip (short: zirve)",
+    "kar_al": "2R'de yarım kapat; kalan 50 EMA'nın 10 pip aşağısında kapanır",
+    "iz_suren_stop": "Yarım çıkıştan sonra stop başabaş",
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Fiyat yalnız 50-100 EMA arasında ise işlem yok"
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 3,
+      "gerekce": "Sayısal."
+    },
+    "belirsizlikler": [
+      "'İlk durdurma, girişten beş bar düşük' ifadesi son 5 barın dibi olarak okundu"
+    ],
+    "uyumluluk_notu": "5m forex sistemi; pip tabanlı sabit stop/hedef ATR ile ölçeklenmeli; hacim gerekmez; kripto/emtia perpetual'larda pip yerine ATR/% kullanılmalı.",
+    "varyantlar": [],
+    "anahtar_kelimeler": [
+      "ema50",
+      "ema100",
+      "macd",
+      "yarim-cikis"
+    ]
+  },
+  {
+    "kart_id": "scalp__5dk-sistem-10-ema40-80-cci21__carter",
+    "ad": "5 Dakika Sistem #10: 40/80 EMA Trend + CCI(21) Sıfır Geçişi",
+    "stil": "scalp",
+    "kaynak": {
+      "pdf": "20 Trading Stratejisi (28 sayfa) - @eseckal.pdf",
+      "sayfalar": [
+        14
+      ]
+    },
+    "ozet": "40 EMA 80 EMA'nın üstündeyse CCI(21) 0'ı yukarı keserken AL; altındaysa CCI 0'ı aşağı keserken SAT; stop ve hedef 10-15 pip.",
+    "kategori": "trend_takip",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "forex",
+    "zaman_dilimi": {
+      "islem": "5m",
+      "ust_filtre": null
+    },
+    "gostergeler": [
+      {
+        "ad": "EMA",
+        "parametreler": {
+          "periyot": 40
+        }
+      },
+      {
+        "ad": "EMA",
+        "parametreler": {
+          "periyot": 80
+        }
+      },
+      {
+        "ad": "CCI",
+        "parametreler": {
+          "periyot": 21
+        }
+      }
+    ],
+    "long_giris": [
+      "EMA40>EMA80",
+      "CCI(21) 0'ın altından 0'ın üstüne geçer -> AL"
+    ],
+    "short_giris": [
+      "EMA40<EMA80",
+      "CCI 0'ın üstünden altına geçer -> SAT"
+    ],
+    "stop_loss": "10-15 pip",
+    "kar_al": "10-15 pip",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 3,
+      "gerekce": "Sayısal."
+    },
+    "belirsizlikler": [
+      "Pip yerine ATR kullanmak gerekebilir"
+    ],
+    "uyumluluk_notu": "5m forex sistemi; pip tabanlı sabit stop/hedef ATR ile ölçeklenmeli; hacim gerekmez; kripto/emtia perpetual'larda pip yerine ATR/% kullanılmalı.",
+    "varyantlar": [],
+    "anahtar_kelimeler": [
+      "cci",
+      "ema40-80",
+      "sifir-gecisi"
+    ]
+  },
+  {
+    "kart_id": "scalp__5dk-sistem-11-4s-trend-5dk-rsi-stok-macd__carter",
+    "ad": "5 Dakika Sistem #11: 4 Saat Trend + 5/15dk EMA5/10, RSI, Stokastik, MACD Hist",
+    "stil": "scalp",
+    "kaynak": {
+      "pdf": "20 Trading Stratejisi (28 sayfa) - @eseckal.pdf",
+      "sayfalar": [
+        15,
+        16
+      ]
+    },
+    "ozet": "4s grafikte EMA5>EMA10 (trend yukarı) iken 5/15dk'da EMA5 EMA10'u yukarı keser, RSI>50, stokastik yukarı ve aşırı alımda değil, MACD histogramı negatiften pozitife (veya negatif iken artıyor) ise AL; stop ve hedef 20-30 pip.",
+    "kategori": "momentum",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "forex",
+    "zaman_dilimi": {
+      "islem": "5m",
+      "ust_filtre": "4h"
+    },
+    "gostergeler": [
+      {
+        "ad": "EMA",
+        "parametreler": {
+          "periyot": 5
+        }
+      },
+      {
+        "ad": "EMA",
+        "parametreler": {
+          "periyot": 10
+        }
+      },
+      {
+        "ad": "RSI",
+        "parametreler": {
+          "periyot": 14
+        }
+      },
+      {
+        "ad": "Stokastik",
+        "parametreler": {
+          "K": 5,
+          "D": 3,
+          "yavaslama": 3
+        }
+      },
+      {
+        "ad": "MACD",
+        "parametreler": {
+          "hizli": 12,
+          "yavas": 26,
+          "sinyal": 9
+        }
+      }
+    ],
+    "long_giris": [
+      "4s: EMA5>EMA10",
+      "5/15dk: EMA5, EMA10'u yukarı keser",
+      "RSI>50",
+      "Stokastik yukarı yönlü, aşırı alımda değil",
+      "MACD histogramı negatiften pozitife veya negatifken artıyor -> AL"
+    ],
+    "short_giris": [
+      "4s: EMA5<EMA10",
+      "5/15dk: EMA5, EMA10'u aşağı keser",
+      "RSI<50",
+      "Stokastik aşağı, aşırı satımda değil",
+      "MACD histogramı pozitiften negatife veya pozitifken azalıyor -> SAT"
+    ],
+    "stop_loss": "20-30 pip",
+    "kar_al": "20-30 pip",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Sayısal; stokastik 'yönlü' ve 'aşırı alım' eşiği belirsiz."
+    },
+    "belirsizlikler": [
+      "Eşikler (80/20) kitapta yok"
+    ],
+    "uyumluluk_notu": "5m forex sistemi; pip tabanlı sabit stop/hedef ATR ile ölçeklenmeli; hacim gerekmez; kripto/emtia perpetual'larda pip yerine ATR/% kullanılmalı.",
+    "varyantlar": [],
+    "anahtar_kelimeler": [
+      "rsi",
+      "stokastik",
+      "macd",
+      "coklu-zaman"
+    ]
+  },
+  {
+    "kart_id": "scalp__5dk-sistem-12-ema16-48-laguerre__carter",
+    "ad": "5 Dakika Sistem #12: 16/48 EMA + Laguerre 0.8/0.2",
+    "stil": "scalp",
+    "kaynak": {
+      "pdf": "20 Trading Stratejisi (28 sayfa) - @eseckal.pdf",
+      "sayfalar": [
+        17
+      ]
+    },
+    "ozet": "Kapanış EMA16 üstünde, EMA16>EMA48 ve Laguerre göstergesi 0,8'in üstüne çıkınca AL; stop girişten 30 pip, hedef 20-30 pip.",
+    "kategori": "momentum",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "forex",
+    "zaman_dilimi": {
+      "islem": "5m",
+      "ust_filtre": null
+    },
+    "gostergeler": [
+      {
+        "ad": "EMA",
+        "parametreler": {
+          "periyot": 16
+        }
+      },
+      {
+        "ad": "EMA",
+        "parametreler": {
+          "periyot": 48
+        }
+      },
+      {
+        "ad": "Laguerre RSI",
+        "parametreler": {
+          "seviyeler": "0.8 / 0.2"
+        }
+      }
+    ],
+    "long_giris": [
+      "Kapanış>EMA16",
+      "EMA16>EMA48",
+      "Laguerre 0,8'in üzerine çıktı -> AL"
+    ],
+    "short_giris": [
+      "Kapanış<EMA16",
+      "EMA16<EMA48",
+      "Laguerre 0,2'nin altına indi -> SAT"
+    ],
+    "stop_loss": "30 pip",
+    "kar_al": "20-30 pip",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Laguerre gamma parametresi verilmemiş."
+    },
+    "belirsizlikler": [
+      "Laguerre gamma yok",
+      "Stop hedeften büyük (R:R<1)"
+    ],
+    "uyumluluk_notu": "5m forex sistemi; pip tabanlı sabit stop/hedef ATR ile ölçeklenmeli; hacim gerekmez; kripto/emtia perpetual'larda pip yerine ATR/% kullanılmalı.",
+    "varyantlar": [],
+    "anahtar_kelimeler": [
+      "laguerre",
+      "ema16",
+      "ema48"
+    ]
+  },
+  {
+    "kart_id": "scalp__5dk-sistem-13-cci14-macd-hist__carter",
+    "ad": "5 Dakika Sistem #13: CCI(14) ±100 + MACD Histogram Momentum",
+    "stil": "scalp",
+    "kaynak": {
+      "pdf": "20 Trading Stratejisi (28 sayfa) - @eseckal.pdf",
+      "sayfalar": [
+        18
+      ]
+    },
+    "ozet": "CCI(14) +100'ü aşağıdan yukarı geçip MACD histogram çubuğu bir öncekinden büyük, MACD ortalaması histogramın altında iken AL; short -100'ü yukarıdan aşağı geçince; stop 12-15 pip, hedef parite başına 7-10 pip.",
+    "kategori": "momentum",
+    "piyasa_rejimi": "herhangi",
+    "orijinal_piyasa": "forex",
+    "zaman_dilimi": {
+      "islem": "5m",
+      "ust_filtre": null
+    },
+    "gostergeler": [
+      {
+        "ad": "CCI",
+        "parametreler": {
+          "periyot": 14
+        }
+      },
+      {
+        "ad": "MACD",
+        "parametreler": {
+          "hizli": 12,
+          "yavas": 26,
+          "sinyal": 9
+        }
+      }
+    ],
+    "long_giris": [
+      "CCI aşağıdan +100'ü geçer",
+      "MACD histogram çubuğu önceki çubuktan yüksek",
+      "MACD hareketli ortalaması histogramın altında -> AL"
+    ],
+    "short_giris": [
+      "CCI yukarıdan -100'ü geçer",
+      "MACD histogram önceki çubuktan düşük",
+      "MACD hareketli ortalaması histogramın üstünde -> SAT"
+    ],
+    "stop_loss": "12-15 pip",
+    "kar_al": "AUDUSD 7 pip, EURUSD 8 pip, GBPUSD 10 pip",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Sayısal; 'MACD ortalaması histogramın altında' ifadesi belirsiz."
+    },
+    "belirsizlikler": [
+      "Ifade 'MACD hareketli ortalaması histogramın altında' yorum gerektirir"
+    ],
+    "uyumluluk_notu": "5m forex sistemi; pip tabanlı sabit stop/hedef ATR ile ölçeklenmeli; hacim gerekmez; kripto/emtia perpetual'larda pip yerine ATR/% kullanılmalı.",
+    "varyantlar": [],
+    "anahtar_kelimeler": [
+      "cci",
+      "macd-histogram",
+      "momentum"
+    ]
+  },
+  {
+    "kart_id": "scalp__5dk-sistem-14-wma10-sma20-rsi28-macd__carter",
+    "ad": "5 Dakika Sistem #14: 10 WMA/20 SMA + Stokastik + RSI(28) + MACD(24,52,18)",
+    "stil": "scalp",
+    "kaynak": {
+      "pdf": "20 Trading Stratejisi (28 sayfa) - @eseckal.pdf",
+      "sayfalar": [
+        19
+      ]
+    },
+    "ozet": "10 WMA>20 SMA, yavaş stokastik (10,6,6) hızlı çizgi yavaşın üstünde, RSI(28)>50 ve MACD(24,52,18)>0 ise AL; stop son salınım dibi, hedef stop kadar.",
+    "kategori": "trend_takip",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "forex",
+    "zaman_dilimi": {
+      "islem": "5m",
+      "ust_filtre": null
+    },
+    "gostergeler": [
+      {
+        "ad": "WMA",
+        "parametreler": {
+          "periyot": 10
+        }
+      },
+      {
+        "ad": "SMA",
+        "parametreler": {
+          "periyot": 20
+        }
+      },
+      {
+        "ad": "Yavaş Stokastik",
+        "parametreler": {
+          "K": 10,
+          "D": 6,
+          "yavaslama": 6
+        }
+      },
+      {
+        "ad": "RSI",
+        "parametreler": {
+          "periyot": 28
+        }
+      },
+      {
+        "ad": "MACD",
+        "parametreler": {
+          "hizli": 24,
+          "yavas": 52,
+          "sinyal": 18
+        }
+      }
+    ],
+    "long_giris": [
+      "10 WMA>20 SMA",
+      "Stokastik hızlı çizgi yavaş çizginin üstünde",
+      "RSI(28)>50",
+      "MACD>0 -> AL"
+    ],
+    "short_giris": [
+      "Ayna (hepsi ters)"
+    ],
+    "stop_loss": "Son salınım dibi (short: zirvesi)",
+    "kar_al": "Stop mesafesi (1:1)",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 3,
+      "gerekce": "Sayısal."
+    },
+    "belirsizlikler": [
+      "Giriş anı (hepsi aynı anda olunca mı, kesişimde mi?)"
+    ],
+    "uyumluluk_notu": "5m forex sistemi; pip tabanlı sabit stop/hedef ATR ile ölçeklenmeli; hacim gerekmez; kripto/emtia perpetual'larda pip yerine ATR/% kullanılmalı.",
+    "varyantlar": [],
+    "anahtar_kelimeler": [
+      "wma",
+      "sma",
+      "rsi28",
+      "macd-yavas"
+    ]
+  },
+  {
+    "kart_id": "scalp__5dk-sistem-15-ema15-50-kanal-macd__carter",
+    "ad": "5 Dakika Sistem #15: 15 EMA + 50 EMA Kanalı (High/Low) + Renkli MACD Oku",
+    "stil": "scalp",
+    "kaynak": {
+      "pdf": "20 Trading Stratejisi (28 sayfa) - @eseckal.pdf",
+      "sayfalar": [
+        20
+      ]
+    },
+    "ozet": "15 EMA, 50 EMA (high ve low) kanalının üstündeyse ve MACD yeşil/yeşil ok varsa AL; 15 EMA kanalın içinde iken iyi sinyal gelebilir; stop son salınım, hedef stop kadar.",
+    "kategori": "trend_takip",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "forex",
+    "zaman_dilimi": {
+      "islem": "5m",
+      "ust_filtre": null
+    },
+    "gostergeler": [
+      {
+        "ad": "EMA",
+        "parametreler": {
+          "periyot": 15
+        }
+      },
+      {
+        "ad": "EMA (high)",
+        "parametreler": {
+          "periyot": 50
+        }
+      },
+      {
+        "ad": "EMA (low)",
+        "parametreler": {
+          "periyot": 50
+        }
+      },
+      {
+        "ad": "MACD (renkli ok)",
+        "parametreler": {
+          "hizli": 15,
+          "yavas": 70,
+          "sinyal": 1
+        }
+      }
+    ],
+    "long_giris": [
+      "15 EMA, 50 EMA kanalının üstünde",
+      "MACD yeşil",
+      "Yeşil ok"
+    ],
+    "short_giris": [
+      "15 EMA kanalın altında",
+      "MACD kırmızı",
+      "Kırmızı ok"
+    ],
+    "stop_loss": "Son salınım dibi/zirvesi",
+    "kar_al": "Stop mesafesi (1:1)",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Renkli MACD ok göstergesi özel; parametre '15,70,1,24' belirsiz."
+    },
+    "belirsizlikler": [
+      "Ok göstergesinin kuralı kitapta yok",
+      "MACD parametreleri tutarsız yazılmış"
+    ],
+    "uyumluluk_notu": "5m forex sistemi; pip tabanlı sabit stop/hedef ATR ile ölçeklenmeli; hacim gerekmez; kripto/emtia perpetual'larda pip yerine ATR/% kullanılmalı.",
+    "varyantlar": [],
+    "anahtar_kelimeler": [
+      "ema-kanali",
+      "macd-ok",
+      "15-ema"
+    ]
+  },
+  {
+    "kart_id": "scalp__5dk-sistem-16-adx-psar-wma5-sma11__carter",
+    "ad": "5 Dakika Sistem #16: ADX DI + Parabolik SAR + 5 WMA / 11 SMA",
+    "stil": "scalp",
+    "kaynak": {
+      "pdf": "20 Trading Stratejisi (28 sayfa) - @eseckal.pdf",
+      "sayfalar": [
+        22
+      ]
+    },
+    "ozet": "5 WMA>11 SMA, Parabolik SAR (0.1,0.01) mumların altında ve DI+>DI- ise AL; çıkış ters SAR sinyali; stop önceki salınım dibi.",
+    "kategori": "trend_takip",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "forex",
+    "zaman_dilimi": {
+      "islem": "5m",
+      "ust_filtre": null
+    },
+    "gostergeler": [
+      {
+        "ad": "ADX/DMI",
+        "parametreler": {
+          "periyot": 14
+        }
+      },
+      {
+        "ad": "WMA",
+        "parametreler": {
+          "periyot": 5,
+          "fiyat": "kapanış"
+        }
+      },
+      {
+        "ad": "SMA",
+        "parametreler": {
+          "periyot": 11,
+          "fiyat": "kapanış"
+        }
+      },
+      {
+        "ad": "Parabolik SAR",
+        "parametreler": {
+          "adim": 0.1,
+          "maks": 0.01
+        }
+      }
+    ],
+    "long_giris": [
+      "5 WMA>11 SMA",
+      "Parabolik SAR mumların altında",
+      "DI+ > DI- -> AL"
+    ],
+    "short_giris": [
+      "5 WMA<11 SMA",
+      "SAR mumların üstünde",
+      "DI- > DI+ -> SAT"
+    ],
+    "stop_loss": "Önceki salınım dibi (short: zirvesi)",
+    "kar_al": "Ters SAR sinyali veya takdire bağlı",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 3,
+      "gerekce": "Sayısal."
+    },
+    "belirsizlikler": [
+      "SAR parametre sırası (0.1, 0.01) alışılmadık: adım=0.1?"
+    ],
+    "uyumluluk_notu": "5m forex sistemi; pip tabanlı sabit stop/hedef ATR ile ölçeklenmeli; hacim gerekmez; kripto/emtia perpetual'larda pip yerine ATR/% kullanılmalı.",
+    "varyantlar": [],
+    "anahtar_kelimeler": [
+      "adx",
+      "parabolik-sar",
+      "wma",
+      "sma"
+    ]
+  },
+  {
+    "kart_id": "scalp__5dk-sistem-17-ema3-8-sar-macd-stok-sd__carter",
+    "ad": "5 Dakika Sistem #17: 3/8 EMA + SAR + MACD + Stokastik + Standart Sapma Filtresi",
+    "stil": "scalp",
+    "kaynak": {
+      "pdf": "20 Trading Stratejisi (28 sayfa) - @eseckal.pdf",
+      "sayfalar": [
+        23,
+        24
+      ]
+    },
+    "ozet": "3 EMA>8 EMA, SAR mumun altında, MACD>0, stokastik mavi çizgi kırmızıyı yukarı keser ve 20 periyot standart sapma orta/güçlü ise AL; 3 EMA<8 EMA olunca kapat; stop son dip.",
+    "kategori": "trend_takip",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "forex",
+    "zaman_dilimi": {
+      "islem": "5m",
+      "ust_filtre": null
+    },
+    "gostergeler": [
+      {
+        "ad": "EMA",
+        "parametreler": {
+          "periyot": 3
+        }
+      },
+      {
+        "ad": "EMA",
+        "parametreler": {
+          "periyot": 8
+        }
+      },
+      {
+        "ad": "MACD",
+        "parametreler": {
+          "hizli": 12,
+          "yavas": 26,
+          "sinyal": 9
+        }
+      },
+      {
+        "ad": "Stokastik",
+        "parametreler": {
+          "K": 10,
+          "D": 15,
+          "yavaslama": 15
+        }
+      },
+      {
+        "ad": "Parabolik SAR",
+        "parametreler": {
+          "adim": 0.02,
+          "maks": 0.2
+        }
+      },
+      {
+        "ad": "Standart Sapma",
+        "parametreler": {
+          "periyot": 20
+        }
+      },
+      {
+        "ad": "RSI",
+        "parametreler": {
+          "periyot": 9
+        }
+      }
+    ],
+    "long_giris": [
+      "3 EMA>8 EMA",
+      "SAR mumun altında",
+      "MACD>0",
+      "Stokastik mavi çizgi kırmızıyı yukarı keser",
+      "20 periyot SD orta veya güçlü (AUD/NZD 0.0005+, JPY çiftleri 0.10+, diğerleri 0.010+)"
+    ],
+    "short_giris": [
+      "3 EMA<8 EMA",
+      "SAR mumun üstünde",
+      "MACD<0",
+      "Stokastik aşağı kesişim",
+      "SD orta/güçlü"
+    ],
+    "stop_loss": "Son dip (short: son zirve)",
+    "kar_al": "3 EMA/8 EMA ters kesişince kapat",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 3,
+      "gerekce": "Sayısal; RSI(9) listede ama kuralda kullanılmıyor."
+    },
+    "belirsizlikler": [
+      "RSI(9) göstergesi kurallarda yok"
+    ],
+    "uyumluluk_notu": "5m forex sistemi; pip tabanlı sabit stop/hedef ATR ile ölçeklenmeli; hacim gerekmez; kripto/emtia perpetual'larda pip yerine ATR/% kullanılmalı.",
+    "varyantlar": [],
+    "anahtar_kelimeler": [
+      "sar",
+      "macd",
+      "stokastik",
+      "standart-sapma",
+      "ema3-8"
+    ]
+  },
+  {
+    "kart_id": "scalp__5dk-sistem-18-ema20-macd-yarim-cikis__carter",
+    "ad": "5 Dakika Sistem #18: 20 EMA Üstü + MACD Geçişi, 2R Yarım Çıkış + EMA İz Süren",
+    "stil": "scalp",
+    "kaynak": {
+      "pdf": "20 Trading Stratejisi (28 sayfa) - @eseckal.pdf",
+      "sayfalar": [
+        25
+      ]
+    },
+    "ozet": "Fiyat 20 EMA'nın altındayken MACD negatif ise, fiyat 20 EMA'nın üstüne çıkıp MACD yeni pozitife geçmiş (≤5 bar) ise 20 EMA'nın 10 pip üstünde AL; agresif stop: 5 dk son dip, muhafazakar: 20 EMA'nın 20 pip altı; yarısı riskin 1 katı (artı riske edilen tutar) kârda kapatılır, stop başabaş; kalan 20 EMA - 15 pip ile izlenir.",
+    "kategori": "trend_takip",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "forex",
+    "zaman_dilimi": {
+      "islem": "5m",
+      "ust_filtre": null
+    },
+    "gostergeler": [
+      {
+        "ad": "EMA",
+        "parametreler": {
+          "periyot": 20
+        }
+      },
+      {
+        "ad": "MACD",
+        "parametreler": {
+          "hizli": 12,
+          "yavas": 26,
+          "sinyal": 9
+        }
+      }
+    ],
+    "long_giris": [
+      "Fiyat 20 EMA ve MACD negatifken izle",
+      "Fiyat 20 EMA'nın üstüne çıkar ve MACD pozitife yeni geçti (≤5 bar önce) veya geçiyor",
+      "20 EMA'nın 10 pip üstünde AL"
+    ],
+    "short_giris": [
+      "Ayna (20 EMA'nın 10 pip altında SAT)"
+    ],
+    "stop_loss": "Agresif: 5dk son dip; muhafazakar: 20 EMA'nın 20 pip altı",
+    "kar_al": "Pozisyonun yarısı 1R+ kârda; kalan iz süren",
+    "iz_suren_stop": "20 EMA - 15 pip (short: +15)",
+    "zaman_cikisi": null,
+    "filtreler": [],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 3,
+      "gerekce": "Sayısal."
+    },
+    "belirsizlikler": [
+      "'Yarısını artı riske edilen tutar' ifadesi 1R/2R belirsiz"
+    ],
+    "uyumluluk_notu": "5m forex sistemi; pip tabanlı sabit stop/hedef ATR ile ölçeklenmeli; hacim gerekmez; kripto/emtia perpetual'larda pip yerine ATR/% kullanılmalı.",
+    "varyantlar": [],
+    "anahtar_kelimeler": [
+      "ema20",
+      "macd",
+      "yarim-cikis",
+      "iz-suren-stop"
+    ]
+  },
+  {
+    "kart_id": "scalp__5dk-sistem-19-psar-macd64-128-ema100__carter",
+    "ad": "5 Dakika Sistem #19: Parabolik SAR + MACD(64,128,9) + 100 EMA",
+    "stil": "scalp",
+    "kaynak": {
+      "pdf": "20 Trading Stratejisi (28 sayfa) - @eseckal.pdf",
+      "sayfalar": [
+        26
+      ]
+    },
+    "ozet": "Fiyat 100 EMA'nın üstündeyken SAR yükselirken ve MACD(64,128,9)>0 ise AL; stop ilk SAR noktasının 3 pip altı; hedef 7-12 pip.",
+    "kategori": "trend_takip",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "forex",
+    "zaman_dilimi": {
+      "islem": "5m",
+      "ust_filtre": null
+    },
+    "gostergeler": [
+      {
+        "ad": "Parabolik SAR",
+        "parametreler": {
+          "adim": 0.01,
+          "maks": 0.01
+        }
+      },
+      {
+        "ad": "MACD",
+        "parametreler": {
+          "hizli": 64,
+          "yavas": 128,
+          "sinyal": 9
+        }
+      },
+      {
+        "ad": "EMA",
+        "parametreler": {
+          "periyot": 100
+        }
+      }
+    ],
+    "long_giris": [
+      "Fiyat 100 EMA üstünde",
+      "SAR yükseliş yönünde",
+      "MACD>0 -> AL"
+    ],
+    "short_giris": [
+      "Fiyat 100 EMA altında",
+      "SAR düşüş",
+      "MACD<0 -> SAT"
+    ],
+    "stop_loss": "İlk SAR noktasının 3 pip altı/üstü",
+    "kar_al": "7-12 pip veya daha iyi",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 3,
+      "gerekce": "Sayısal."
+    },
+    "belirsizlikler": [
+      "SAR parametreleri (0.01-0.01) alışılmadık"
+    ],
+    "uyumluluk_notu": "5m forex sistemi; pip tabanlı sabit stop/hedef ATR ile ölçeklenmeli; hacim gerekmez; kripto/emtia perpetual'larda pip yerine ATR/% kullanılmalı.",
+    "varyantlar": [],
+    "anahtar_kelimeler": [
+      "sar",
+      "macd-64-128",
+      "ema100"
+    ]
+  },
+  {
+    "kart_id": "scalp__5dk-sistem-20-ema3-bb-orta-macd__carter",
+    "ad": "5 Dakika Sistem #20: 3 EMA ile Bollinger Orta Bant Geçişi + MACD Sıfır Çizgisi",
+    "stil": "scalp",
+    "kaynak": {
+      "pdf": "20 Trading Stratejisi (28 sayfa) - @eseckal.pdf",
+      "sayfalar": [
+        27
+      ]
+    },
+    "ozet": "3 EMA, Bollinger(20,3) orta bandını yukarı keserken MACD yukarı yönde sıfır çizgisine yaklaşıyor/kesiyorsa AL; stop ve hedef 10-15 pip.",
+    "kategori": "momentum",
+    "piyasa_rejimi": "herhangi",
+    "orijinal_piyasa": "forex",
+    "zaman_dilimi": {
+      "islem": "5m",
+      "ust_filtre": null
+    },
+    "gostergeler": [
+      {
+        "ad": "EMA",
+        "parametreler": {
+          "periyot": 3
+        }
+      },
+      {
+        "ad": "Bollinger",
+        "parametreler": {
+          "periyot": 20,
+          "sapma": 3
+        }
+      },
+      {
+        "ad": "MACD",
+        "parametreler": {
+          "hizli": 12,
+          "yavas": 26,
+          "sinyal": 9
+        }
+      }
+    ],
+    "long_giris": [
+      "3 EMA orta bandı yukarı keser",
+      "MACD sıfıra yukarıdan yaklaşıyor veya kesiyor -> AL"
+    ],
+    "short_giris": [
+      "3 EMA orta bandı aşağı keser",
+      "MACD sıfıra aşağı yaklaşıyor veya kesiyor -> SAT"
+    ],
+    "stop_loss": "10-15 pip",
+    "kar_al": "10-15 pip",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 3,
+      "gerekce": "Sayısal."
+    },
+    "belirsizlikler": [
+      "'Sıfır çizgisine yaklaşma' eşiği yok"
+    ],
+    "uyumluluk_notu": "5m forex sistemi; pip tabanlı sabit stop/hedef ATR ile ölçeklenmeli; hacim gerekmez; kripto/emtia perpetual'larda pip yerine ATR/% kullanılmalı.",
+    "varyantlar": [],
+    "anahtar_kelimeler": [
+      "ema3",
+      "bollinger-orta",
+      "macd-sifir"
+    ]
+  }
+]

@@ -1,0 +1,50 @@
+{
+ "ad": "ichimoku",
+ "pine_id": "boHD0HzE",
+ "tf": "1d",
+ "evren": [
+  "kripto",
+  "abd",
+  "bist",
+  "emtia"
+ ],
+ "neden": "Zaman dilimi belirtilmemiş; günlük (Ichimoku klasik).",
+ "olcut": {
+  "n": 1015,
+  "kar": 9456.81939383035,
+  "pf": 1.7109817069333721,
+  "sharpe": 0.7954039322571668,
+  "beklenti_R": 0.4216857020432413,
+  "kazanma": 0.4068965517241379,
+  "maxdd": 0.11085588056699307,
+  "dd_gun": 1207,
+  "cagr": 0.05811161220864114,
+  "calmar": 0.524208656423263,
+  "psr": 0.9975235931223589,
+  "tutma_gun": 25.0,
+  "ort_islem_getiri": 0.03447313473613034,
+  "netR_toplam": 428.0109875738899,
+  "sharpe_egitim": 0.8342858577682021,
+  "sharpe_oos": 0.7129896172431589,
+  "oos_kar": 2417.755609562457,
+  "tur": "swing",
+  "pf_maliyet2x": 1.6640044488945673,
+  "komsu_n": 16,
+  "komsu_karda": 1.0,
+  "enstr_n": 37,
+  "enstr_karda": 0.7837837837837838,
+  "maks_kor": 0.4278190858281597
+ },
+ "kurallar": {
+  "1_islem_sayisi": true,
+  "2_maks_dusus<=20": true,
+  "3_beklenti>=0.15R": true,
+  "4a_kf>=1.3": true,
+  "4b_sharpe>=1": false,
+  "5_oos": true,
+  "6_maliyet2x_kf>=1.1": true,
+  "7_komsu>=70": true,
+  "8_enstr>=60": true
+ },
+ "gecti": false
+}

@@ -1,0 +1,47 @@
+{
+ "ad": "ichi_sol",
+ "pine_id": "71yKm18B",
+ "tf": "4h",
+ "evren": [
+  "kripto"
+ ],
+ "neden": "Açıklamada 'SOL 4h' geçiyor; 4 saatlik kripto.",
+ "olcut": {
+  "n": 791,
+  "kar": 40699.12121199186,
+  "pf": 2.805030004668796,
+  "sharpe": 1.4840640644015142,
+  "beklenti_R": 0.5851119836987141,
+  "kazanma": 0.3463969658659924,
+  "maxdd": 0.13914283594992047,
+  "dd_gun": 992,
+  "cagr": 0.23198580217683418,
+  "calmar": 1.6672493455597617,
+  "psr": 0.9999992775919601,
+  "tutma_gun": 4.0,
+  "ort_islem_getiri": 0.04287294676430047,
+  "netR_toplam": 462.8235791056828,
+  "sharpe_egitim": 1.6155652416723953,
+  "sharpe_oos": 1.2240886409054297,
+  "oos_kar": 9496.166936158748,
+  "tur": "swing",
+  "pf_maliyet2x": 2.6359531160880474,
+  "komsu_n": 18,
+  "komsu_karda": 1.0,
+  "enstr_n": 14,
+  "enstr_karda": 0.9285714285714286,
+  "maks_kor": 0.6741440380515387
+ },
+ "kurallar": {
+  "1_islem_sayisi": true,
+  "2_maks_dusus<=20": true,
+  "3_beklenti>=0.15R": true,
+  "4a_kf>=1.3": true,
+  "4b_sharpe>=1": true,
+  "5_oos": true,
+  "6_maliyet2x_kf>=1.1": true,
+  "7_komsu>=70": true,
+  "8_enstr>=60": true
+ },
+ "gecti": true
+}

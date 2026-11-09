@@ -1,0 +1,28 @@
+# Her gönderimde (push) ve PR'da test paketini temiz bir makinede koşar.
+# Gerçek (gitignore'lu) veri gerektiren testler burada ATLANIR (conftest gercek_veri işareti).
+# Gizli anahtar kullanılmaz; ağdan veri indiren adım yoktur.
+name: testler
+
+on:
+  push:
+    branches: [main, "claude/**"]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  pytest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: pip
+      - name: Bağımlılıklar
+        run: pip install -r requirements.txt
+      - name: Testler
+        run: python -m pytest testler -q -p no:cacheprovider

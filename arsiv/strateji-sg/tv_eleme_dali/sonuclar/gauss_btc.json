@@ -1,0 +1,47 @@
+{
+ "ad": "gauss_btc",
+ "pine_id": "d1JxXpid",
+ "tf": "4h",
+ "evren": [
+  "kripto"
+ ],
+ "neden": "Başlık BTC; saat dilimi belirtilmemiş, 4 saatlik kripto.",
+ "olcut": {
+  "n": 2850,
+  "kar": 46719.97068372036,
+  "pf": 1.7969723742671757,
+  "sharpe": 1.4223298429576683,
+  "beklenti_R": 0.16857603675729488,
+  "kazanma": 0.24210526315789474,
+  "maxdd": 0.1241135782919878,
+  "dd_gun": 447,
+  "cagr": 0.2498823405563939,
+  "calmar": 2.0133360426409137,
+  "psr": 0.9999919870172829,
+  "tutma_gun": 1.3333333333333333,
+  "ort_islem_getiri": 0.01653516586222278,
+  "netR_toplam": 480.4417047582904,
+  "sharpe_egitim": 1.620505622924538,
+  "sharpe_oos": 0.8080886933038117,
+  "oos_kar": 7180.537354167282,
+  "tur": "swing",
+  "pf_maliyet2x": 1.6324511023368764,
+  "komsu_n": 16,
+  "komsu_karda": 1.0,
+  "enstr_n": 14,
+  "enstr_karda": 1.0,
+  "maks_kor": 0.6590575518585323
+ },
+ "kurallar": {
+  "1_islem_sayisi": true,
+  "2_maks_dusus<=20": true,
+  "3_beklenti>=0.15R": true,
+  "4a_kf>=1.3": true,
+  "4b_sharpe>=1": true,
+  "5_oos": false,
+  "6_maliyet2x_kf>=1.1": true,
+  "7_komsu>=70": true,
+  "8_enstr>=60": true
+ },
+ "gecti": false
+}

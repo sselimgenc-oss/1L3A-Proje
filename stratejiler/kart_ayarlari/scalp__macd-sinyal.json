@@ -1,0 +1,14 @@
+[
+ {
+  "kart_id": "scalp__macd-histogram-sifir-donusu__schroder",
+  "parametreler": {
+   "mod": "hist_donus",
+   "hizli": 12,
+   "yavas": 26,
+   "sinyal": 9,
+   "atr_k": 2.0
+  },
+  "cikis_ayarlari": null,
+  "not": "Kartta MACD parametresi/stop/hedef yok: 12/26/9, stop 2 ATR, çıkış histogram sıfır geçişi (varsayım)."
+ }
+]

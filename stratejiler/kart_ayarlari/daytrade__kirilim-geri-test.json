@@ -1,0 +1,10 @@
+[
+ {
+  "kart_id": "daytrade__geri-cekilme-yeniden-test__singhal",
+  "parametreler": {
+   "hedef_r": 3.0
+  },
+  "cikis_ayarlari": null,
+  "not": "Kırılım sonrası eski seviyeye geri test + tepki mumu; R/R 1:3."
+ }
+]

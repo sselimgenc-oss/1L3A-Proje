@@ -1,0 +1,15 @@
+{
+  "baslangic": "2026-10-11",
+  "gun": 60,
+  "sermaye": 10000,
+  "aciklama": "Swing kağıt al-sat: S1 geri çekilme + S2 kırılım + S3 aşırı satım, haftalık yön / günlük işlem",
+  "beklenti": {
+    "kaynak": "SONUCLAR.md, örneklem-dışı 2023-2026",
+    "kazanma_orani": 0.55,
+    "yillik_getiri": 0.25,
+    "max_dusus": -0.13,
+    "ort_R": 0.26,
+    "60_gunde_islem": "25-45",
+    "60_gunde_getiri": "yaklaşık +%3-4 (geniş aralık: -%8 ile +%15 arası normal)"
+  }
+}

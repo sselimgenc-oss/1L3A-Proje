@@ -1,0 +1,98 @@
+[
+  {
+    "kart_id": "scalp__rsi8-vadi-tepe-momentum__dekan-you-learn-forex",
+    "ad": "RSI(8) + MA(3) Vadi/Tepe Trend Scalp",
+    "stil": "scalp",
+    "kaynak": {
+      "pdf": "RSI Pro Scalping Stratejisi - You Learn Forex (30 sayfa) - @eseckal.pdf",
+      "sayfalar": [
+        10,
+        11,
+        12,
+        13,
+        21,
+        23,
+        24
+      ]
+    },
+    "ozet": "M5'te RSI(8) ve RSI'nin 3'lük MA'sı ile fiyatın 3'lük MA'sı birlikte yönü trend yönündeyken, yükselen piyasada RSI/fiyat 'vadi'lerinde (ikisi de yukarı dönünce) AL; düşen piyasada ikisi de aşağı dönen 'tepe'lerde SAT. Trend yönü 24 periyot fiyat MA'sı ve RSI Paint sinyalleri (PR/ND) ile belirlenir.",
+    "kategori": "trend_takip",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "forex",
+    "zaman_dilimi": {
+      "islem": "5m",
+      "ust_filtre": "15m (onay)"
+    },
+    "gostergeler": [
+      {
+        "ad": "RSI",
+        "parametreler": {
+          "periyot": 8
+        }
+      },
+      {
+        "ad": "SMA (RSI üzerinde)",
+        "parametreler": {
+          "periyot": 3
+        }
+      },
+      {
+        "ad": "SMA (fiyat)",
+        "parametreler": {
+          "periyot": 3
+        }
+      },
+      {
+        "ad": "SMA (fiyat)",
+        "parametreler": {
+          "periyot": 24
+        }
+      },
+      {
+        "ad": "RSI Paint",
+        "parametreler": {
+          "aciklama": "PR/NR/ND sinyalleri"
+        }
+      }
+    ],
+    "long_giris": [
+      "Trend yukarı: 24 periyot fiyat MA'sı yukarı eğimli ve RSI Paint'te PR/ND hakim",
+      "RSI(8)'in 3-MA'sı ve fiyatın 3-MA'sı aynı anda yukarı dönüşte bir 'vadi' oluşur -> AL"
+    ],
+    "short_giris": [
+      "Trend aşağı: 24 MA aşağı ve NR/negatif sinyaller",
+      "RSI-MA ve fiyat-MA aynı anda aşağı dönen 'tepe' oluşur -> SAT"
+    ],
+    "stop_loss": "Çok sıkı (MT4 min.); sıkı stop pozisyon büyütmeye izin verir; kitapta sayısal yok",
+    "kar_al": "Yok: çıkış, ters yönde 'tepe' (NR) oluşunca veya momentum+fiyat MA'ları ters dönünce",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Haber yayınlarından önce piyasadan çık",
+      "Trend yönüne karşı işlem yapma",
+      "Küresel piyasa/haber bağlamını kontrol et (Dow vadeli, altın)"
+    ],
+    "pozisyon_risk": "Demo/küçük pozisyonla en az 100 işlem test; sıkı stoplarda daha büyük pozisyon mümkün (önerilmez)",
+    "iddia_edilen_performans": "Bir günde 6-10 işlem; örnek gün: 10 kazanç-7 kayıp",
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "RSI Paint sinyal mantığı (PR/NR/ND) başka kitaba bağlı; vadi/tepe tanımı yorum."
+    },
+    "belirsizlikler": [
+      "RSI Paint göstergesinin tam tanımı bu kitapta yok",
+      "Stop mesafesi sayısal verilmemiş",
+      "'Vadi' tespiti için kural yok (yerel minimum?)"
+    ],
+    "uyumluluk_notu": "M5'te çalışır; forex; hacim gerekmez; ≥5m uygun.",
+    "varyantlar": [
+      "M1/M15'te de kullanılabilir"
+    ],
+    "anahtar_kelimeler": [
+      "rsi",
+      "rsi8",
+      "momentum",
+      "vadi",
+      "trend"
+    ]
+  }
+]

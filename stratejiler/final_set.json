@@ -1,0 +1,165 @@
+{
+ "surum": 1,
+ "aciklama": "Final set (7 strateji). Kaynak: sonuclar/secim/oneri.csv rol=secim. DEĞİŞTİRİLMEZ (kilit testi sonrası, DURUM.md).",
+ "risk": {
+  "tek_grafik": {
+   "islem_basi_risk": 0.01,
+   "toplam_stop_risk": 0.05,
+   "max_kaldirac": 3.0,
+   "gunluk_max_kayip": 0.03,
+   "kill_switch": 0.2,
+   "yontem": "secim.yeniden_oyna (tek hesap, olay sırası); kilit_testi.set_testi ile aynı"
+  },
+  "portfoy": {
+   "toplam_stop_risk": 0.05,
+   "max_kaldirac": 3.0,
+   "gunluk_max_kayip": 0.03,
+   "kill_switch": 0.2,
+   "yontem": "kol getirisi = 3 stratejinin eşit ağırlıklı günlük ortalaması (karar 25 bütçesi, portföy motorunda)"
+  },
+  "kol_paylari": {
+   "tek_grafik": 0.5,
+   "portfoy": 0.5
+  },
+  "harman": "günlük yeniden dengeli 50/50 (secim.harmanla); kollar arası ortak limit kontrolü YOK"
+ },
+ "stratejiler": [
+  {
+   "kimlik": "dis__dual-thrust|ETHUSDT|30m",
+   "ajan": "daytrade",
+   "stil": "daytrade",
+   "strateji": "dis__dual-thrust",
+   "sembol": "ETHUSDT",
+   "tf": "30m",
+   "kol": "tek_grafik",
+   "kol_payi": 0.5,
+   "kol_ici_agirlik": null,
+   "islem_basi_risk": 0.01,
+   "toplam_stop_risk_butcesi": 0.05,
+   "kilit_testi_ayari": "izgara:{\"k1\": 0.7, \"n\": 5, \"stop_atr_k\": 3.0}",
+   "wf_dosya": "k3_kripto"
+  },
+  {
+   "kimlik": "pf__kanarya|hisse_emtia|1d",
+   "ajan": "portfoy",
+   "stil": "portfoy",
+   "strateji": "pf__kanarya",
+   "sembol": "hisse_emtia",
+   "tf": "1d",
+   "kol": "portfoy",
+   "kol_payi": 0.5,
+   "kol_ici_agirlik": 0.3333333333333333,
+   "islem_basi_risk": null,
+   "toplam_stop_risk_butcesi": 0.05,
+   "kilit_testi_ayari": "csv:4",
+   "wf_dosya": "p3_hisse_emtia_v3",
+   "evren_semboller": [
+    "DK_AAPL",
+    "DK_MSFT",
+    "DK_GOOGL",
+    "DK_AMZN",
+    "DK_NVDA",
+    "DK_META",
+    "DK_TSLA",
+    "DK_XAU",
+    "DK_WTI",
+    "DK_COPPER"
+   ]
+  },
+  {
+   "kimlik": "pf__rotasyon|hepsi|1d",
+   "ajan": "portfoy",
+   "stil": "portfoy",
+   "strateji": "pf__rotasyon",
+   "sembol": "hepsi",
+   "tf": "1d",
+   "kol": "portfoy",
+   "kol_payi": 0.5,
+   "kol_ici_agirlik": 0.3333333333333333,
+   "islem_basi_risk": null,
+   "toplam_stop_risk_butcesi": 0.05,
+   "kilit_testi_ayari": "izgara:{\"k\": 2, \"lookback_gun\": 30, \"takvim\": \"W\"}",
+   "wf_dosya": "p3_hepsi_v3",
+   "evren_semboller": [
+    "BTCUSDT",
+    "ETHUSDT",
+    "SOLUSDT",
+    "DK_AAPL",
+    "DK_MSFT",
+    "DK_GOOGL",
+    "DK_AMZN",
+    "DK_NVDA",
+    "DK_META",
+    "DK_TSLA",
+    "DK_XAU",
+    "DK_WTI",
+    "DK_COPPER"
+   ]
+  },
+  {
+   "kimlik": "pf__kesit_ls|kripto|1d",
+   "ajan": "portfoy",
+   "stil": "portfoy",
+   "strateji": "pf__kesit_ls",
+   "sembol": "kripto",
+   "tf": "1d",
+   "kol": "portfoy",
+   "kol_payi": 0.5,
+   "kol_ici_agirlik": 0.3333333333333333,
+   "islem_basi_risk": null,
+   "toplam_stop_risk_butcesi": 0.05,
+   "kilit_testi_ayari": "izgara:{\"k\": 1, \"lookback_gun\": 14, \"takvim\": \"30\"}",
+   "wf_dosya": "p3_kripto_v2",
+   "evren_semboller": [
+    "BTCUSDT",
+    "ETHUSDT",
+    "SOLUSDT"
+   ]
+  },
+  {
+   "kimlik": "swing__cci-esik|SOLUSDT|1d",
+   "ajan": "swing",
+   "stil": "swing",
+   "strateji": "swing__cci-esik",
+   "sembol": "SOLUSDT",
+   "tf": "1d",
+   "kol": "tek_grafik",
+   "kol_payi": 0.5,
+   "kol_ici_agirlik": null,
+   "islem_basi_risk": 0.01,
+   "toplam_stop_risk_butcesi": 0.05,
+   "kilit_testi_ayari": "izgara:{\"cci_periyot\": 5, \"mod\": \"lambert\", \"stop_n\": 5}",
+   "wf_dosya": "k3_kripto"
+  },
+  {
+   "kimlik": "swing__konsolidasyon-kirilim|SOLUSDT|4h",
+   "ajan": "swing",
+   "stil": "swing",
+   "strateji": "swing__konsolidasyon-kirilim",
+   "sembol": "SOLUSDT",
+   "tf": "4h",
+   "kol": "tek_grafik",
+   "kol_payi": 0.5,
+   "kol_ici_agirlik": null,
+   "islem_basi_risk": 0.01,
+   "toplam_stop_risk_butcesi": 0.05,
+   "kilit_testi_ayari": "izgara:{\"hacim_k\": 0.0, \"tampon_atr\": 0.5, \"uzunluk\": 20}",
+   "wf_dosya": "k3_kripto"
+  },
+  {
+   "kimlik": "dis__fraktal-alligator-sky|DK_NVDA|4h",
+   "ajan": "swing",
+   "stil": "swing",
+   "strateji": "dis__fraktal-alligator-sky",
+   "sembol": "DK_NVDA",
+   "tf": "4h",
+   "kol": "tek_grafik",
+   "kol_payi": 0.5,
+   "kol_ici_agirlik": null,
+   "islem_basi_risk": 0.01,
+   "toplam_stop_risk_butcesi": 0.05,
+   "kilit_testi_ayari": "izgara:{\"atr_esik\": 50.0, \"atr_ort\": 3, \"stop_yuzde\": 3.0}",
+   "wf_dosya": "k3_dk_v2"
+  }
+ ]
+}

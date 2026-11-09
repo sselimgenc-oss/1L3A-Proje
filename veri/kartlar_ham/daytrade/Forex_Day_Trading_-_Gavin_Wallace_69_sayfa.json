@@ -1,0 +1,377 @@
+[
+  {
+    "kart_id": "daytrade__ema-5-8-34-55-200__wallace",
+    "ad": "EMA 5/8 Kesişimi + 34/55 EMA Onayı + 200 EMA Yön Filtresi",
+    "stil": "daytrade",
+    "kaynak": {
+      "pdf": "Forex_Day_Trading_-_Gavin_Wallace_69_sayfa.pdf",
+      "sayfalar": [
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        27,
+        28,
+        29
+      ]
+    },
+    "ozet": "15 dk grafikte 5 EMA'nın 8 EMA'yı yukarı (aşağı) kesmesi giriş sinyali, mumların 34/55 EMA üzerinde (altında) kapanması onay; 200 EMA yönü ters ise işlem alınmaz. 34 EMA'nın 55 EMA'yı kesmesi sonrası 45-65+ pip hareket beklenir.",
+    "kategori": "trend_takip",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "forex",
+    "zaman_dilimi": {
+      "islem": "15m",
+      "ust_filtre": "4h/1d (200 EMA yönü, çoklu zaman dilimi)"
+    },
+    "gostergeler": [
+      {
+        "ad": "EMA",
+        "parametreler": {
+          "periyot": 5
+        }
+      },
+      {
+        "ad": "EMA",
+        "parametreler": {
+          "periyot": 8
+        }
+      },
+      {
+        "ad": "EMA",
+        "parametreler": {
+          "periyot": 34
+        }
+      },
+      {
+        "ad": "EMA",
+        "parametreler": {
+          "periyot": 55
+        }
+      },
+      {
+        "ad": "EMA",
+        "parametreler": {
+          "periyot": 200
+        }
+      }
+    ],
+    "long_giris": [
+      "5 EMA, 8 EMA'yı aşağıdan yukarı keser",
+      "Mum 34 ve 55 EMA'nın üzerinde kapanır (34/55 yukarı kesişim en güçlü ipucu)",
+      "200 EMA yukarı yönlü / fiyat 200 EMA üzerinde"
+    ],
+    "short_giris": [
+      "5 EMA, 8 EMA'yı yukarıdan aşağı keser",
+      "Mum 34/55 EMA'nın altında kapanır",
+      "200 EMA aşağı yönlü / fiyat 200 EMA altında"
+    ],
+    "stop_loss": "Giriş mumundan önceki (üçüncü) mumun zirvesi/dibi + 5 pip + spread; alternatif: 34/55 EMA'nın diğer yanında 10-20 pip",
+    "kar_al": "Çıkış: 5/8 EMA ters kesişimi; veya yarı kâr Bollinger üst bandı/psikolojik sayıda, kalan için stop 34/55 altına sonra girişe",
+    "iz_suren_stop": "Kâr %50 alınınca stop 34/55 kesişimi altına, sonra girişe",
+    "zaman_cikisi": null,
+    "filtreler": [
+      "200 EMA girişe yakın ve ters yöndeyse işlem alma",
+      "Yalnız 5/8 kullanılırsa kaybettirir (yazar uyarıyor); en az bir teyit gerekir",
+      "Temel/USD gücüne bakılır (kodlanamaz)"
+    ],
+    "pozisyon_risk": "İşlem başına hesabın %0,5-1 (yazarın pratiği); acemi için en fazla %2,5",
+    "iddia_edilen_performans": "34/55 kesişiminden sonra 15m'de kablo (GBP/USD) 60+ pip, EUR/USD 45+ pip (anekdotik)",
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "EMA kesişimleri mekanik; stop ve çıkış kuralı tanımlı; teyit mumu ve 200 EMA 'yakınlığı' yorum içerir."
+    },
+    "belirsizlikler": [
+      "'200 EMA girişe yakın' mesafesi yok",
+      "Kar al seviyesi sabit değil",
+      "Yazar çoğu zaman diğer göstergelerle birlikte karar veriyor"
+    ],
+    "uyumluluk_notu": "Forex pip tabanlı; pip değerleri ATR/yüzde ile uyarlanmalı. Hacim gerekmez. Kripto/emtiada çalışır. 15m uygun (≥5m).",
+    "varyantlar": [],
+    "anahtar_kelimeler": [
+      "ema-5-8",
+      "ema-34-55",
+      "ema-200",
+      "ema-kesisim",
+      "forex-15dk"
+    ]
+  },
+  {
+    "kart_id": "daytrade__fibonacci-geri-cekilme-50-618__wallace",
+    "ad": "Fibonacci 50 / 61.8 Geri Çekilme Girişi (trend yönünde)",
+    "stil": "daytrade",
+    "kaynak": {
+      "pdf": "Forex_Day_Trading_-_Gavin_Wallace_69_sayfa.pdf",
+      "sayfalar": [
+        29,
+        30,
+        31,
+        32
+      ]
+    },
+    "ozet": "Güçlü hareketten sonra fiyat %50-%61.8 Fibonacci geri çekilme bölgesine inip tekrar trend yönüne dönmeye başlarsa trend yönünde girilir; MACD, RSI, EMA kesişimi, ters mum gibi teyitler aranır; %78.6 altı kapanışta senaryo bozulur.",
+    "kategori": "destek_direnc",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "forex",
+    "zaman_dilimi": {
+      "islem": "4h",
+      "ust_filtre": "1d (trend)"
+    },
+    "gostergeler": [
+      {
+        "ad": "Fibonacci",
+        "parametreler": {
+          "seviyeler": "23.6, 50, 61.8, 78.6, 100, 121.4"
+        }
+      },
+      {
+        "ad": "MACD",
+        "parametreler": {}
+      },
+      {
+        "ad": "RSI",
+        "parametreler": {}
+      }
+    ],
+    "long_giris": [
+      "Net yukarı hareket (swing); fiyat bu hareketin %50-%61.8 geri çekilme bölgesinde",
+      "Fiyat bu bölgede tekrar yükselmeye başlar (teyit: ters mum, MACD/RSI dönüşü, EMA kesişimi)",
+      "%78.6 altında kapanış yok"
+    ],
+    "short_giris": [
+      "Net aşağı hareket; fiyat bu hareketin %50-%61.8 geri çekilmesine yükselir; tekrar düşmeye başlar (teyit aynı)"
+    ],
+    "stop_loss": "%78.6 seviyesinin altında kapanış (geri çekilme başarısız)",
+    "kar_al": "Geri çekilme %50 ise %100 (önceki tepe/dip); %61.8 ise %121.4 uzantısı",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Fib seviyeleri ve hedefleri ölçülebilir; swing seçimi ve teyit yoruma açık."
+    },
+    "belirsizlikler": [
+      "Swing başlangıç/bitiş seçimi tanımsız",
+      "Teyit göstergesi eşikleri yok",
+      "Stop mesafesi net değil (kapanış bazlı geçersizleşme)"
+    ],
+    "uyumluluk_notu": "Forex pip tabanlı; pip değerleri ATR/yüzde ile uyarlanmalı. Hacim gerekmez. Kripto/emtiada çalışır. 4h/1d: 1L3A'da ≥5m olduğundan uyarlanabilir (4h bazı kısıtlara göre).",
+    "varyantlar": [],
+    "anahtar_kelimeler": [
+      "fibonacci",
+      "geri-cekilme",
+      "50",
+      "618",
+      "1214-uzanti"
+    ]
+  },
+  {
+    "kart_id": "daytrade__asya-araligi-kirilimi-londra__wallace",
+    "ad": "Asya Seansı Aralığı Kırılımı + Geri Çekilme (Londra Açılışı)",
+    "stil": "daytrade",
+    "kaynak": {
+      "pdf": "Forex_Day_Trading_-_Gavin_Wallace_69_sayfa.pdf",
+      "sayfalar": [
+        55,
+        56,
+        57
+      ]
+    },
+    "ozet": "Asya seansının dar gece aralığı (örn. 30 pip) belirlenir; Londra açılışına yakın fiyat aralığı kırar ve kapanır, ardından kırılan seviyeye/34-55 EMA'ya geri çekilmede kırılım yönünde girilir. 200 EMA kırılmadan 200 EMA'ya yakın kırılım alınmaz. Yazar 2017 sonrası etkinliğin azaldığını belirtir.",
+    "kategori": "kirilim",
+    "piyasa_rejimi": "yatay",
+    "orijinal_piyasa": "forex",
+    "zaman_dilimi": {
+      "islem": "15m",
+      "ust_filtre": null
+    },
+    "gostergeler": [
+      {
+        "ad": "EMA",
+        "parametreler": {
+          "periyot": 34
+        }
+      },
+      {
+        "ad": "EMA",
+        "parametreler": {
+          "periyot": 55
+        }
+      },
+      {
+        "ad": "EMA",
+        "parametreler": {
+          "periyot": 200
+        }
+      }
+    ],
+    "long_giris": [
+      "Asya gecesi aralığı dar (örn. 30 pip), günlük ortalama hareket ~100 pip",
+      "Mum Asya aralığının üstünde kapanır (kırılım)",
+      "Giriş: kırılan seviyeye veya 34/55 EMA'ya geri çekilmede; veya kırılım kapanışı",
+      "200 EMA yakınsa mum 200 EMA'yı kırıp kapatana kadar bekle"
+    ],
+    "short_giris": [
+      "Mum Asya aralığının altında kapanır",
+      "Geri çekilmede short"
+    ],
+    "stop_loss": "Asya aralığının diğer ucu / son zirvenin ~15 pip ötesi; 200 EMA kırılımında 20 pip, 34/55 EMA'nın hemen ötesi",
+    "kar_al": "Hedef en az 70-100 pip (günlük ortalama hareketin ~%70'i)",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Londra açılışı civarı",
+      "Aralık dar olmalı (gece 30 pip)",
+      "Kırılımın hemen içine girme: kırılım anında girmek çoğunlukla kaybettirir (on seferden sekizinde önce kırılım, sonra geri çekilme)"
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Aralık ve kırılım ölçülebilir; geri çekilme girişi ve sayısal hedefler esnek."
+    },
+    "belirsizlikler": [
+      "Aralık tanımı için seans saatleri verilmemiş",
+      "'Dar' aralık eşiği örnek (30 pip)",
+      "2017 sonrası etkinlik azalmış"
+    ],
+    "uyumluluk_notu": "Forex pip tabanlı; pip değerleri ATR/yüzde ile uyarlanmalı. Hacim gerekmez. Kripto/emtiada çalışır. Seans saatleri (Tokyo/Londra) 24 saatlik kripto için UTC saatiyle taklit edilebilir; ≥5m uygun.",
+    "varyantlar": [],
+    "anahtar_kelimeler": [
+      "asya-seansi",
+      "londra-acilisi",
+      "aralik-kirilimi",
+      "geri-cekilme",
+      "200-ema"
+    ]
+  },
+  {
+    "kart_id": "daytrade__onayli-kirilim-yeniden-test__wallace",
+    "ad": "Onaylı Kırılım ve Yeniden Test (Destek/Direnç, 4h-Günlük)",
+    "stil": "daytrade",
+    "kaynak": {
+      "pdf": "Forex_Day_Trading_-_Gavin_Wallace_69_sayfa.pdf",
+      "sayfalar": [
+        58,
+        59,
+        60,
+        61,
+        62,
+        63,
+        64
+      ]
+    },
+    "ozet": "Fiyat destek/direnç bölgesini kırıp mum kapanışıyla teyit ettikten sonra, kırılan seviyeye geri dönüşte (destek direnç olur) kırılım yönünde girilir; stop eski seviyenin 20-30 pip ötesine konur.",
+    "kategori": "kirilim",
+    "piyasa_rejimi": "herhangi",
+    "orijinal_piyasa": "forex",
+    "zaman_dilimi": {
+      "islem": "4h",
+      "ust_filtre": "1d"
+    },
+    "gostergeler": [],
+    "long_giris": [
+      "Mum, destek/direnç çizgisinin üstünde kapanarak kırılım onaylar",
+      "Sonraki mumlarda fiyat kırılan seviyeye geri döner ve yukarı tepki verir -> long"
+    ],
+    "short_giris": [
+      "Mum desteğin altında kapanır; geri çekilmede kırılan desteğe yükselir ve reddedilir -> short"
+    ],
+    "stop_loss": "Eski destek/direnç çizgisinin 20-30 pip ötesi",
+    "kar_al": "Önceki aralık/Fib seviyeleri (örnekte 300-400 pip); risk-ödül en az 1:2",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Fiyat bölgeye çok yakınsa işlem alma (sıçrama riski)",
+      "Seviye 4-5 kez reddedilmişse o yönde uzun/kısa kovalama"
+    ],
+    "pozisyon_risk": "İşlem başına %0,5-1; en az 1:2 R:R",
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Onaylı kırılım (kapanış) ve geri test tanımı net; 'bölge' ve geri dönüş toleransı yok."
+    },
+    "belirsizlikler": [
+      "Geri dönüş toleransı",
+      "Hedef tanımı net değil",
+      "Seviye çizimi"
+    ],
+    "uyumluluk_notu": "Forex pip tabanlı; pip değerleri ATR/yüzde ile uyarlanmalı. Hacim gerekmez. Kripto/emtiada çalışır. 4h/1d; 5m'de uygulanabilir.",
+    "varyantlar": [],
+    "anahtar_kelimeler": [
+      "kirilim",
+      "yeniden-test",
+      "destek-direnc",
+      "4-saatlik",
+      "onayli-kirilim"
+    ]
+  },
+  {
+    "kart_id": "daytrade__bollinger-asiri-uzama-donus__wallace",
+    "ad": "Bollinger Bandı Aşırı Uzama Dönüşü (ters mum + çift tepe teyidi)",
+    "stil": "daytrade",
+    "kaynak": {
+      "pdf": "Forex_Day_Trading_-_Gavin_Wallace_69_sayfa.pdf",
+      "sayfalar": [
+        13,
+        14,
+        15,
+        16,
+        17
+      ]
+    },
+    "ozet": "Fiyat mumlarla Bollinger bandının dışına çıkınca çoğunlukla geri döner; yutan mum / çift tepe gibi ek kanıtla ters yönde işlem yapılır. Dik açılı bant 'milyonda bir kırılmaz' bölge olarak işaretlenir. Tek başına kullanılmaz.",
+    "kategori": "ortalamaya_donus",
+    "piyasa_rejimi": "herhangi",
+    "orijinal_piyasa": "forex",
+    "zaman_dilimi": {
+      "islem": "15m",
+      "ust_filtre": null
+    },
+    "gostergeler": [
+      {
+        "ad": "Bollinger",
+        "parametreler": {
+          "periyot": "belirtilmemis"
+        }
+      }
+    ],
+    "long_giris": [
+      "Fiyat alt Bollinger bandının dışına çıkar ve ters (yutan boğa) mum / çift dip oluşur -> long"
+    ],
+    "short_giris": [
+      "Fiyat üst Bollinger bandının dışına çıkar; yutan düşüş mumu / çift tepe -> short"
+    ],
+    "stop_loss": "Kitapta yok",
+    "kar_al": "Kitapta yok (diğer destek/direnç seviyeleri)",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Tek başına Bollinger ile işlem yok; ek kanıt şart",
+      "Bantlar sıkışıksa (yatay) hareket beklenir; genişleme volatilite artışı"
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Ters mum/çift tepe teyidi yoruma bağlı, stop-hedef yok."
+    },
+    "belirsizlikler": [
+      "Bollinger periyodu ve sapması yok",
+      "Stop/hedef yok",
+      "Dik bantta kırılmaz iddiası (%90) kanıtsız"
+    ],
+    "uyumluluk_notu": "Forex pip tabanlı; pip değerleri ATR/yüzde ile uyarlanmalı. Hacim gerekmez. Kripto/emtiada çalışır.",
+    "varyantlar": [],
+    "anahtar_kelimeler": [
+      "bollinger",
+      "asiri-uzama",
+      "yutan-mum",
+      "ters-mum",
+      "cift-tepe"
+    ]
+  }
+]

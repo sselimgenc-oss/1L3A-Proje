@@ -1,0 +1,21 @@
+yeni_aile,kaynak_kartlar,yeni_strateji_adi,stil,durum,gerekce
+yeni__gun-zirvesi-sikisma-kirilimi,daytrade__5m-gun-zirvesi-konsolidasyon-kirilimi__rudd,dis__gun-zirvesi-sikisma-kirilimi,daytrade,kodlandi,Rudd; 5m gün zirvesi sıkışma kırılımı; stop/iz süren varsayım
+yeni__kuvvet-endeksi-bollinger,daytrade__bollinger-kuvvet-indeksi-forex__charles,dis__kuvvet-endeksi-bollinger,daytrade,kodlandi,1m yerine 5m+30m teyit; sabit \$ stop/hedef ATR/2R varsayım
+yeni__momentum-macd-diverjans,daytrade__momentum-macd-iraksama__bernstein,dis__momentum-macd-diverjans,daytrade,kodlandi,fraktal pivot ile A/C/E tanımı; hedef P1 yerine R
+yeni__stokastik-pop,daytrade__stokastik-pop__bernstein,dis__stokastik-pop,daytrade,kodlandi,"yavaş %K(9,3) 70/30 geçişi; stop 2 ATR varsayım"
+yeni__supertrend-geri-cekilme,daytrade__supertrend-geri-cekilme__roy,dis__supertrend-geri-cekilme,daytrade,kodlandi,dokunuş toleransı ATR parametresi
+yeni__vwap-ema-devam,daytrade__vwap-ema-trend__christensen,dis__vwap-ema-devam,daytrade,kodlandi,teyit mumu = yeşil/kırmızı mum EMA'nın doğru tarafında
+yeni__ardisik-bar-devam,daytrade__mikro-kanal-gec-giris__brooks;repo_raporlari:TIS BTC Momentum + Confluencia,dis__ardisik-bar-devam,daytrade,kodlandi,Brooks+TIS tek sınıf; swing varyantı gun_sonu=False sma_n=50; ekleme kodlanmadı
+yeni__brooks-kama,daytrade__kama-uc-itme__brooks;daytrade__kama-geri-cekilme-ve-donus__brooks,dis__brooks-kama,daytrade,kodlandi,iki kart tek sınıf; itme = fraktal pivot
+yeni__abcd-c-girisi,daytrade__abcd-deseni__christensen,dis__abcd-c-girisi,daytrade,kodlandi,"C onayında giriş, hedef D=C+(B-A); swing__harmonik-abcd'den farklı (o D'de dönüş)"
+yeni__acik-alan-seviye-arasi,daytrade__acik-alanlar-5-tik__noonan,dis__acik-alan-seviye-arasi,daytrade,kodlandi,tik->ATR; ilk 2 saat uç değerleri swing yerine
+yeni__bladerunner-ters,daytrade__bladerunner-ters__velez,,daytrade,kurala_dokulemez,'polarite göstergesi' kartta ve kitapta hesaplanamaz (belirsizlik); stop/hedef de yok; yuvarlak sayı/pivot desteği + engulfing tek başına ters-dönüş stratejisi seviye-tepki ailesiyle (daytrade__seviye-tepki) örtüşür
+yeni__d1h1-macd,repo_raporlari:Bitcoin D1H1 MACD Filter;repo_raporlari:Bitcoin D1H1 + Negative Candle Exit,dis__d1h1-macd,daytrade,kodlandi,iki repo varyantı cikis_modu ile (0/1/2)
+yeni__aksam-momentumu,repo_raporlari:Day trade — S10 Akşam Momentumu,dis__aksam-momentumu,daytrade,kodlandi,dis__trend-gun-ici'den farklı: günlük ATR eşiği + EMA filtreleri + akşam penceresi
+yeni__ilk-yarim-saat-son-yarim-saat,repo_kodlari:Attention Prop Traders: first half hour predicts last half h,dis__ilk-yarim-saat-son-yarim-saat,daytrade,kodlandi,dis__trend-gun-ici'den farkı: yalnız ilk bölüm getirisi; stop varsayım
+yeni__rrs-goreceli-guc,repo_raporlari:R3 r/RealDayTrading Gerçek Göreceli Güç (RRS),,daytrade,veri_yok,"RRS referans endeks (SPY/BTC) serisi gerektirir; motor tek grafik, grep referans motor/ referans veri desteği bulmadı"
+yeni__seans-yeniden-acilis-long,repo_kodlari:SessionReopenEA,dis__seans-yeniden-acilis-long,daytrade,kodlandi,UTC giriş saati parametre; 2 saat tut; Pazartesi atla
+yeni__tuzak-kirilim,repo_raporlari:Day trade — S13 Tuzak Kırılım,dis__tuzak-kirilim,daytrade,kodlandi,15m; MTF filtreler ust_zaman ile
+yeni__voltran-2a,repo_raporlari:VOLTRAN-2A: Saatlik Adaptif Kanal (TOTT) & Seans Kırılım Mot,dis__voltran-2a,daytrade,kodlandi,skor tabanlı; kâr kilidi girişe çekme (basabas_r_esigi 0.3R)
+yeni__voltran-2b,repo_raporlari:VOLTRAN-2B: Saatlik Momentum Şeridi & Likidite Dönüş Motoru,dis__voltran-2b,daytrade,kodlandi,EMA şeridi + stokastik + sweep
+yeni__voltran-r2,repo_raporlari:VOLTRAN-R2: Intraday Hibrit (4H PMax + RRS Göreceli Güç + RV,,daytrade,veri_yok,Motor A/B RRS (endekse göre göreceli güç) gerektirir; referans endeks serisi motorda yok

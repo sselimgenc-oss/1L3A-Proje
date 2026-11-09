@@ -1,0 +1,150 @@
+[
+ {
+  "kart_id": "daytrade__aralik-kanal-ticareti__logue",
+  "ad": "Aralık (Kanal) Ticareti - Gün İçi Tipik Yüksek/Düşük",
+  "stil": "daytrade",
+  "kaynak": {
+   "pdf": "Day Trading - Ann C. Logue (360 sayfa) - @eseckal.pdf",
+   "sayfalar": [
+    199,
+    200
+   ]
+  },
+  "ozet": "Güvenliğin gün içindeki tipik en yüksek ve en düşük seviyeleri ve aradaki fark grafikten belirlenir; fiyat aralığın altına inince alım emri, üstüne çıkınca satış emri verilir. Stop güvenlik girişin altına inerse, limit emri aralığın en üstünde kâr alır.",
+  "kategori": "ortalamaya_donus",
+  "piyasa_rejimi": "yatay",
+  "orijinal_piyasa": "genel",
+  "zaman_dilimi": {
+   "islem": null,
+   "ust_filtre": null
+  },
+  "gostergeler": [],
+  "long_giris": [
+   "Son dönem işlem geçmişinden tipik gün içi dip ve zirve belirlenir",
+   "Fiyat aralığın alt kısmına düştüğünde al"
+  ],
+  "short_giris": [
+   "Fiyat aralığın üstüne çıktığında sat"
+  ],
+  "stop_loss": "Giriş noktasının altında/üstünde stop emri (mesafe tanımsız)",
+  "kar_al": "Aralığın en üstüne limit emri (long)",
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [
+   "Yeterli oynaklık var ama aralığı kırıp yeni trend başlatacak kadar değil (normal piyasa)"
+  ],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 1,
+   "gerekce": "Kavramsal; aralık hesabı, stop mesafesi, giriş eşiği sayısal verilmemiş."
+  },
+  "belirsizlikler": [
+   "Aralık tanımı yok",
+   "Stop mesafesi yok",
+   "Kırılım halinde ne yapılacağı yok"
+  ],
+  "uyumluluk_notu": "Hisse/vadeli/forex'te genel; kural boşlukları büyük. Kripto/perpetual'a uyarlanabilir ama sayısal parametreler kitapta yok.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "aralik-ticareti",
+   "kanal",
+   "destek-direnc",
+   "ortalamaya-donus"
+  ]
+ },
+ {
+  "kart_id": "daytrade__1-2-3-4-ters-donus__logue",
+  "ad": "1-2-3-4 Kriteri (Üç Ardışık Gün Sonrası Dördüncü Gün Ters)",
+  "stil": "daytrade",
+  "kaynak": {
+   "pdf": "Day Trading - Ann C. Logue (360 sayfa) - @eseckal.pdf",
+   "sayfalar": [
+    177
+   ]
+  },
+  "ozet": "Fiyat üç gün üst üste artarsa dördüncü gün düşme olasılığı yüksek kabul edilir, üç gün üst üste düşerse dördüncü gün yükselme beklenir; kitap simülasyonla doğrulanmasını ister.",
+  "kategori": "ortalamaya_donus",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+   "islem": "1D",
+   "ust_filtre": null
+  },
+  "gostergeler": [],
+  "long_giris": [
+   "Üç gün üst üste düşüş (kapanışlar), dördüncü gün long (beklenen toparlanma)"
+  ],
+  "short_giris": [
+   "Üç gün üst üste yükseliş, dördüncü gün short"
+  ],
+  "stop_loss": null,
+  "kar_al": null,
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 1,
+   "gerekce": "Giriş mantığı var; stop, hedef, çıkış yok; doğrulama istatistiği kitapta yok."
+  },
+  "belirsizlikler": [
+   "Çıkış/stop yok",
+   "Giriş zamanı (kapanış mı dördüncü gün açılışı mı) belirsiz"
+  ],
+  "uyumluluk_notu": "Hisse/vadeli/forex'te genel; kural boşlukları büyük. Kripto/perpetual'a uyarlanabilir ama sayısal parametreler kitapta yok.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "1-2-3-4",
+   "ardisik-gun",
+   "ters-donus"
+  ]
+ },
+ {
+  "kart_id": "daytrade__ciftler-ticareti__logue",
+  "ad": "Çiftler Ticareti (Güçlü Varlıkta Long / Zayıf Varlıkta Short)",
+  "stil": "daytrade",
+  "kaynak": {
+   "pdf": "Day Trading - Ann C. Logue (360 sayfa) - @eseckal.pdf",
+   "sayfalar": [
+    201
+   ]
+  },
+  "ozet": "Birbiriyle ilişkili iki varlık (aynı sektör hisseleri, metal-faiz vadelisi, dolar-euro) seçilir; güçlü olanda long, zayıf olanda short alınarak ortak trendden azami getiri hedeflenir.",
+  "kategori": "ortalamaya_donus",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "genel",
+  "zaman_dilimi": {
+   "islem": null,
+   "ust_filtre": null
+  },
+  "gostergeler": [],
+  "long_giris": [
+   "İlişkili iki varlık seç",
+   "Göreceli olarak güçlü olanda long, zayıf olanda short"
+  ],
+  "short_giris": [],
+  "stop_loss": null,
+  "kar_al": null,
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 0,
+   "gerekce": "Güç/zayıflık ölçütü, giriş, çıkış, stop tanımsız; sadece kavram."
+  },
+  "belirsizlikler": [
+   "Her şey tanımsız"
+  ],
+  "uyumluluk_notu": "İki bacaklı; 1L3A tek varlık modeline uymaz, kitapta kural yok.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "cift-ticareti",
+   "pairs",
+   "goreceli-guc"
+  ]
+ }
+]

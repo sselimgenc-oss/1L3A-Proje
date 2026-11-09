@@ -1,0 +1,30 @@
+[
+ {
+  "dis_id": "tv:N1OCoFkf",
+  "kaynak_dosya": "arsiv/strateji-sg/tv/pine/N1OCoFkf.pine",
+  "parametreler": {
+   "hacim_k": 1.0,
+   "hedef_r": 2.0,
+   "sikisma_pencere": 120,
+   "sikisma_yuzdelik": 20.0,
+   "stop_modu": "orta"
+  },
+  "cikis_ayarlari": null,
+  "not": "YAKLAŞIK: BB genişliği sıkışması sonrası bant kırılımı + hacim; kaynak 'genişlik ortalamanın %80 altı' eşiği yüzdelik olarak yaklaşıldı; ATR1.5 stop/ATR3 hedef = 2R olarak çevrildi (stop orta band)."
+ },
+ {
+  "dis_id": "tv:97gxVA5b",
+  "kaynak_dosya": "arsiv/strateji-sg/tv_eleme_dali/pine/97gxVA5b.pine",
+  "parametreler": {
+   "hacim_k": 1.0,
+   "short": false,
+   "sikisma_pencere": 120,
+   "sikisma_yuzdelik": 15.0,
+   "stop_modu": "orta"
+  },
+  "cikis_ayarlari": {
+   "atr_iz_suren_k": 2.0
+  },
+  "not": "YAKLAŞIK: BB genişliği yüzdelik sıkışma + zirve kırılımı + hacim, yalnız long; 2 ATR izleyen stop CikisAyarlari ile; SMA200 ve 20g zirve şartı yok."
+ }
+]

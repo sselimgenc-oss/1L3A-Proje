@@ -1,0 +1,42 @@
+[
+ {
+  "kart_id": "daytrade__yuksek-ve-sikli-bayrak__bulkowski",
+  "parametreler": {
+   "short": false,
+   "bayrak_min": 5,
+   "bayrak_maks": 19,
+   "maks_derinlik": 0.5,
+   "direk_min_atr": 8.0,
+   "hedef_olcu": 1.0
+  },
+  "cikis_ayarlari": null,
+  "not": "Yalnız long (boğa yüksek ve sıkı bayrak); bayrak 5-19 gün; stop bayrak dibi; hedef kartta kesin değil -> direk yüksekliği ölçüsü. Direğin 'iki kat' şartı ATR çarpanına çevrildi."
+ },
+ {
+  "kart_id": "swing__bayrak-kirilim__heikinashi",
+  "parametreler": {
+   "bayrak_min": 3,
+   "bayrak_maks": 10,
+   "hedef_olcu": 1.0
+  },
+  "cikis_ayarlari": null,
+  "not": "Heikin Ashi renk koşulları kodlanmadı; 'birkaç mum' = 3-10. Kartta hedef yok (trend bitene kadar tutar) -> ölçü hedefi + motor iz süren stop seçeneği."
+ },
+ {
+  "kart_id": "swing__bayrak-flama-kirilim__penn",
+  "parametreler": {
+   "hacim_k": 1.0
+  },
+  "cikis_ayarlari": null,
+  "not": "Kırılımda hacim genişlemesi (hacim_k=1.0: bayrak ortalamasından büyük). Stop/hedef kartta yok: varsayılan bayrak dibi + ölçü hedefi. Yakınsayan çizgiler yerine yatay bayrak tepesi."
+ },
+ {
+  "kart_id": "swing__bayrak-kirilim__graham",
+  "parametreler": {
+   "hacim_k": 1.0,
+   "hedef_olcu": 1.0
+  },
+  "cikis_ayarlari": null,
+  "not": "Kırılım hacmi ortalamanın üstünde. Kart 2R + kısmi kâr söyler; burada ölçü hedefi, kısmi kâr motor CikisAyarlari.kismi ile."
+ }
+]

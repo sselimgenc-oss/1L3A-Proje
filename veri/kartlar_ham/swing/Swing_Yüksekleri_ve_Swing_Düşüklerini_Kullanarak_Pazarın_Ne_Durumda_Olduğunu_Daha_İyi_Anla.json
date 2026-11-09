@@ -1,0 +1,81 @@
+[
+ {
+  "kart_id": "swing__swing-asimi-donus-devam__anonim",
+  "ad": "Swing Yüksek/Düşük Aşım Mesafesi ile Trend Dönüşü/Devamı ve Bölgeden Giriş",
+  "stil": "swing",
+  "kaynak": {
+   "pdf": "Swing_Yüksekleri_ve_Swing_Düşüklerini_Kullanarak_Pazarın_Ne_Durumda_Olduğunu_Daha_İyi_Anla.pdf",
+   "sayfalar": [
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    36,
+    37,
+    38,
+    39,
+    40
+   ]
+  },
+  "ozet": "Yeni swing dibi/tepesi önceki swing'i yalnızca birkaç pip (35-50 pip altı, 1s) aşıyorsa 'banka alımı/dönüş' olasılığı yüksek sayılır; aşırım 50 pipi geçerse trend devamı onaylanır. Dönüş şüphesinde swing çevresine bölge çizilir ve bölgede dönüş mumu (boğa yutan) görülünce long girilir.",
+  "kategori": "destek_direnc",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "forex",
+  "zaman_dilimi": {
+   "islem": "1h",
+   "ust_filtre": "4h"
+  },
+  "gostergeler": [
+   {
+    "ad": "Swing Yüksek/Düşük",
+    "parametreler": {}
+   },
+   {
+    "ad": "Mum formasyonu (yutan)",
+    "parametreler": {}
+   }
+  ],
+  "long_giris": [
+   "Düşüş hareketinde yeni swing dip, önceki swing dibini küçük bir mesafe (eşik altı) aşar -> olası dönüş; fiyat o swing düşüğü çevresine çizilen bölgeye indiğinde bekle",
+   "Bölgede 4s'te boğa yutan mum oluşur (veya bölgede herhangi bir yukarı onay) -> long",
+   "Dönüşün teyidi: fiyat, düşüş sırasında oluşan swing tepesini eşiğin ötesinde (50+ pip) kırar"
+  ],
+  "short_giris": [
+   "Yükseliş hareketinde ayna kural: yeni swing tepe önceki tepeyi eşik altında aşar -> bölgede ayı yutan mum ile short"
+  ],
+  "stop_loss": "Bölgenin dayandığı swing dibinin (short için swing tepesinin) altı/üstü",
+  "kar_al": "Kitapta tanımlı değil; ters swing seviyeleri takip edilir",
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [
+   "Aşım eşiği volatiliteye göre: EURUSD 1s ~35 pip, AUDUSD 1s ~40 pip, USDJPY 1s ~50 pip; volatilite değişince yeniden ölçülmeli",
+   "Küçük (az pip) geri çekilmeyle oluşan swing dipleri dönüş swing'i sayılmaz",
+   "Daha fazla fiyat hareketi onayı bekle; %100 kesinlik yok"
+  ],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 1,
+   "gerekce": "Eşik mesafeleri ve swing tanımı sayısal; ancak yazarın 'banka emirleri' varsayımı kanıtlanamaz, giriş/çıkış ve hedef eksik."
+  },
+  "belirsizlikler": [
+   "Swing tanımı (kaç mum) yok",
+   "Hedef ve pozisyon boyutu yok",
+   "Eşikler yalnızca 3 döviz çifti için 1s'te verilmiş (volatilite normalizasyonu yok, ATR çarpanı varsayılabilir)",
+   "Bölge kalınlığı belirsiz"
+  ],
+  "uyumluluk_notu": "Pip eşikleri forexe özgü; ATR ile normalize edilirse her piyasaya taşınabilir. 5m'ye uyarlama için eşiklerin yeniden ölçülmesi gerekir. Hacim gerekmez.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "swing-yuksek",
+   "swing-dusuk",
+   "piyasa-yapisi",
+   "yutan-mum",
+   "bolge",
+   "donus",
+   "devam"
+  ]
+ }
+]

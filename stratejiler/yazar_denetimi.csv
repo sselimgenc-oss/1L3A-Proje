@@ -1,0 +1,211 @@
+aile_id,kart_id,yazar,etiket,gerekce
+swing__ma-kesisim,daytrade__weinstein-30hma-asama-cikis__bulkowski,Thomas N Bulkowski,yakin,"Haftalik 30 MA yonu ve fiyat ustu; kesisim degil, durum filtresi."
+swing__ma-kesisim,scalp__altin-hac-olum-hac-rejim__schroder,Philipp Schroder ve Valentin Rossiwall,yakin,50/200 EMA ust uste durumu rejim filtresi; kesisim tetigi yok.
+swing__ma-kesisim,swing__hareketli-ortalama-kesisim__ladha,Pankaj Ladha ve Anant Ladha,ayni,Kisa ve uzun EMA kesisimi; aile mekanigiyle birebir.
+swing__ma-kesisim,swing__ma-gecis-rsi4__sharpe,Dennis Sharpe,ayni,26 EMA'nin 50 SMA'yi yukari kesmesi; kesisim tetigi var.
+swing__ma-kesisim,swing__bow-ties__landry,Dave Landry,yakin,"MA dizilimi ve sikisma; kesisim degil, siralama tetigi."
+swing__ma-kesisim,swing__ma-10-21-50-gecis-geri-cekilme__boxer,Harry Boxer,yakin,MA gecisinden sonra geri cekilme tetigi; kesisim ana giris degil.
+swing__ma-kesisim,swing__ema9-13-50-hibrit__jordan,Simon Jordan,ayni,9 EMA'nin 13 EMA'yi yukari kesmesi.
+swing__ma-kesisim,swing__sma4-9-18-kesisim__jordan,Simon Jordan,ayni,4 SMA'nin 9 SMA'yi yukari kesmesi.
+swing__ma-kesisim,swing__fiyat-hareketli-ortalama-konumu__jordan,Simon Jordan,yakin,"Fiyatin MA ustunde kalmasi; kesisim degil, konum tetigi."
+swing__ma-kesisim,swing__ma-kesisim__penn,Joe Penn,ayni,Kisa MA uzun MA'yi yukari keser; altin kesisim.
+swing__ma-kesisim,swing__sma-10-20-kesisim__make,Mark Make,ayni,10 SMA'nin 20 SMA'yi yukari kesmesi.
+swing__ma-kesisim,swing__golden-cross-50-200__make,Mark Make,ayni,50 SMA'nin 200 SMA'yi yukari kesmesi (altin capraz).
+swing__ma-kesisim,swing__sma10-20-kesisim__razaq,Razaq Adekunle,ayni,10 SMA'nin 20 SMA'yi yukari kesmesi.
+swing__ma-kesisim,swing__sma-kesisim-10-50__hogan,Timothy T Hogan,ayni,10 SMA'nin 50 SMA'yi yukari kesmesi.
+swing__ma-kesisim,swing__ema-9-13-50__hogan,Timothy T Hogan,ayni,"EMA9'un EMA13'u kesmesi, EMA13 EMA50 ustunde."
+swing__ma-kesisim,swing__elder-uclu-ortalama__hogan,Timothy T Hogan,yakin,MA'larin yonu (ucu de yukseliyor); kesisim tetigi yok.
+swing__ma-kesisim,swing__sma50-200-hac__johnson,Aaron Lee Johnson,ayni,50 SMA'nin 200 SMA'yi yukari kesmesi.
+swing__ma-kesisim,swing__sma20-50-kesisim__johnson,Aaron Lee Johnson,ayni,20 MA'nin 50 MA'yi yukari kesmesi.
+swing__macd-sinyal,swing__macd-sinyal-sifir-gecis__boxer,Harry Boxer,ayni,MACD cizgisinin sinyal cizgisini yukari kesmesi.
+swing__macd-sinyal,swing__macd-sinyal-kesisimi__make,Mark Make,ayni,MACD cizgisinin sinyal cizgisini yukari kesmesi.
+swing__macd-sinyal,swing__macd-sinyal-caprazi__razaq,Razaq Adekunle,ayni,MACD cizgisinin sinyal cizgisini yukari kesmesi.
+swing__macd-sinyal,swing__macd-12-26-9__hogan,Timothy T Hogan,ayni,MACD cizgisinin sinyal cizgisini yukari kesmesi.
+swing__macd-sinyal,swing__macd-sifir-gecisi__graham,Dave Robert Warren Graham,yakin,Sinyal cizgisinin sifir cizgisini gecmesi; farkli cizgi kesisimi.
+swing__macd-sinyal,swing__macd-sinyal-kesisim__johnson,Aaron Lee Johnson,ayni,MACD cizgisi sinyal cizgisini yukari keser.
+swing__macd-sinyal,swing__impuls-sistemi-ema13-macd__kratter,Andrew David Kratter,yakin,EMA13 yonu ve histogram rengi; MACD kesisimi tetik degil.
+swing__macd-sinyal,swing__macd-sifir-caprazi__kratter,Andrew David Kratter,ayni,MACD cizgisinin sifir cizgisini yukari gecmesi (ailede var).
+scalp__stokastik-donus,daytrade__stokastik-rsi-ema20-2dk__backus,Manny Backus,yakin,Stokastik kesisimi var ama asiri bolge sarti yok; RSI ek filtre.
+scalp__stokastik-donus,daytrade__stokastik-20-donus-yuzde-1__backus,Manny Backus,ayni,Stokastik 20 altindan cikip %D'yi yukari keser; aile mekanigi.
+scalp__stokastik-donus,scalp__macd-stokastik-m1-m5__eseckal,M1-M5 Forex Scalping Stratejisi,ayni,"Stokastik 20 altindan yukari kesisim, EMA trend filtresi."
+scalp__stokastik-donus,scalp__bir-dakika-ema50-100-stoch__ellis,Para Kazanma Yöntemleri,ayni,"Stokastik asiri satimdan yukari kesisim, EMA50/100 filtresi."
+scalp__stokastik-donus,scalp__sma500-hma30-stokastik-rsi__carson,Zackary Carson,yakin,Stokastik RSI ve HMA gecisi; tetik fiyatin HMA'yi gecmesi.
+scalp__stokastik-donus,swing__stochsplit__scheier,M William Scheier,yakin,Stokastik ayrismasi iki zaman diliminde; bolge cikisi farkli tetik.
+scalp__ma-kesisim,daytrade__ema5-7-ilk-saat-scalp__singhal,51 Trading Stratejisi,yakin,EMA 5/7 uzun kurali acik degil; kesisim varsayimi belirsiz.
+scalp__ma-kesisim,daytrade__ema9-21-kesisim-kirilim__singhal,51 Trading Stratejisi,yakin,EMA kesisimi kirilim mumuna bagli; tetik kirilim.
+scalp__ma-kesisim,scalp__ema14-50-kesisim__waqar,Waqar,ayni,EMA14'un EMA50'yi yukari kesmesi.
+scalp__ma-kesisim,scalp__ma3-ma7-bollinger-trend-kirilim__simvour,Forex Scalping Stratejisi,yakin,MA3/MA7 kesisimi var ama tetik Bollinger sapma mumu.
+scalp__ma-kesisim,scalp__linreg-5-34-cizgileri-hizala__schroder,Philipp Schroder ve Valentin Rossiwall,yakin,Regresyon cizgisi kirilimi; MA kesisimi degil.
+scalp__ma-kesisim,scalp__petrol-ema5-34-rsi-10dk__schroder,Philipp Schroder ve Valentin Rossiwall,ayni,EMA5'in EMA34'u yukari kesmesi (RSI onayiyla).
+scalp__ma-kesisim,scalp__basit-trend-ma-egim__connell,S Connell,yakin,MA egimi ve fiyat-MA konumu; kesisim tetigi yok.
+scalp__ma-kesisim,scalp__kisa-momentum-ema8-34__ellis,Para Kazanma Yöntemleri,yakin,EMA8 fiyat kesisimi ve EMA konumu; MA kesisimi degil.
+scalp__ma-kesisim,scalp__rsi-wma-hma__carson,Zackary Carson,yakin,RSI ile WMA kesisimi; fiyatin HMA ustune cikmasi tetik.
+scalp__ma-kesisim,scalp__mfi-hma65-sma200__carson,Zackary Carson,yakin,Fiyatin HMA65'i mum kapanisiyla gecmesi; MFI ayri tetik.
+swing__ma-geri-cekilme,swing__dip-alim-geri-cekilme__ladha,Pankaj Ladha ve Anant Ladha,ayni,10/20/50 EMA'ya geri cekilme ve tutunma; aile mekanigi.
+swing__ma-geri-cekilme,swing__50sma-geri-cekilme__sharpe,Dennis Sharpe,ayni,50 SMA'ya geri cekilme ve sicrama.
+swing__ma-geri-cekilme,swing__ma-50-geri-cekilme__penn,Joe Penn,ayni,"50 MA'ya geri cekilme, donus mumuyla uzun."
+swing__ma-geri-cekilme,swing__sma200-destek-uzun__make,Mark Make,yakin,Dusus trendinde 200 SMA desteginden alim; trend ters.
+swing__ma-geri-cekilme,swing__asama2-dusus-alimi__velez,Oliver Velez,ayni,Yukselis trendinde 20/40 SMA bolgesine geri cekilme.
+swing__ma-geri-cekilme,swing__20ema-dinamik-destek__graham,Dave Robert Warren Graham,ayni,20 EMA dinamik destege geri cekilme ve sicrama.
+swing__ma-geri-cekilme,swing__ema50-geri-cekilme-red__kratter,Andrew David Kratter,ayni,50 EMA'ya geri cekilme ve reddetme mumu.
+swing__ma-geri-cekilme,swing__adx30-sma20-geri-cekilme__kratter,Andrew David Kratter,ayni,20 SMA'ya geri cekilme ve temas mumu.
+swing__cift-dip-tepe,daytrade__eve-eve-cift-dip__bulkowski,Thomas N Bulkowski,ayni,"Cift dip, boyun cizgisi ustu teyit; aile mekanigi."
+swing__cift-dip-tepe,daytrade__cirkin-cift-dip__bulkowski,Thomas N Bulkowski,ayni,"Cift dip, boyun cizgisi ustu teyit; aile mekanigi."
+swing__cift-dip-tepe,daytrade__iki-b-zirve-satis__bulkowski,Thomas N Bulkowski,ayni,Cift tepe acik satis; boyun cizgisi mekanigi.
+swing__cift-dip-tepe,swing__cift-dip-tepe__sharpe,Dennis Sharpe,ayni,Cift dip boyun cizgisi kirilimi.
+swing__cift-dip-tepe,swing__cift-dip-tepe__heikinashi,Heikin Ashi Trader,yakin,Cift dip ters donus mumuyla; boyun kirilimi tetik degil.
+swing__cift-dip-tepe,swing__cift-dip-tepe-donus__penn,Joe Penn,yakin,Cift dip donusu; kirilim tetigi kitapta belirsiz.
+swing__cift-dip-tepe,swing__cift-ust-dip-kirilim__graham,Dave Robert Warren Graham,ayni,"Cift dip, boyun cizgisi yukari kirilimi."
+swing__cift-dip-tepe,swing__cift-dip-boyun-kirilim__johnson,Aaron Lee Johnson,ayni,"Cift dip, boyun cizgisi kirilimi; RSI teyidi."
+swing__konsolidasyon-kirilim,daytrade__saf-fiyat-ralli-konsolidasyon-hacim__singhal,51 Trading Stratejisi,ayni,Konsolidasyon sonrasi hacimli kirilim.
+swing__konsolidasyon-kirilim,daytrade__tikanikliktan-kirilim__bulkowski,Thomas N Bulkowski,ayni,Dar konsolidasyondan kirilim.
+swing__konsolidasyon-kirilim,daytrade__destek-kirilim-satis__bulkowski,Thomas N Bulkowski,ayni,Destek kirilimi; kisa taraf ayni mekanik.
+swing__konsolidasyon-kirilim,swing__hacim-patlamasi__ladha,Pankaj Ladha ve Anant Ladha,ayni,Konsolidasyon ust siniri kirilimi.
+swing__konsolidasyon-kirilim,swing__kesilmis-fiyat-kopusu__make,Mark Make,ayni,Direnc kirilimi ve hacim onayi.
+swing__konsolidasyon-kirilim,swing__kopus-hacim-onayi__hogan,Timothy T Hogan,ayni,"Yatay direnc kirilimi, hacim onayi."
+swing__konsolidasyon-kirilim,swing__kirilim-hacim-onayli__johnson,Aaron Lee Johnson,yakin,Hacim patlamasi ve fiyat artisi; konsolidasyon kirilimi sart degil.
+swing__dar-aralik-kirilim,daytrade__vcp-minervini-daralma__singhal,51 Trading Stratejisi,ayni,Daralma sonrasi hacimli kirilim (VCP).
+swing__dar-aralik-kirilim,daytrade__nr7-dar-aralik-kirilim__bulkowski,Thomas N Bulkowski,ayni,NR7 dar araligin ustunde kapanis kirilimi.
+swing__dar-aralik-kirilim,swing__ic-bar-kirilim__graham,Dave Robert Warren Graham,ayni,Ic bar ust sinirinin kirilmasi.
+swing__dar-aralik-kirilim,swing__ic-bar-devam__day,Edward Day,ayni,Ic bar kumesi ust sinirinin kirilmasi.
+scalp__bant-donus,daytrade__keltner-dis-stokastik-asiri-satim__backus,Manny Backus,ayni,Keltner alt bant disina cikis ve geri donus; stokastik onayi.
+scalp__bant-donus,scalp__geri-cekilme-bollinger__connell,S Connell,ayni,Alt Bollinger bant asiri satim ve orta banda donus.
+scalp__bant-donus,scalp__bollinger-meta-scalper__ellis,Para Kazanma Yöntemleri,ayni,Alt bant disi asiri satim ve geri donus.
+scalp__bant-donus,scalp__bollinger40-rsi5-adx-kopya__carson,Zackary Carson,ayni,"Bollinger(40,2), RSI(5) ve ADX<25 onayi; aileyle ayni."
+scalp__bant-donus,scalp__bollinger40-rsi5-adx__stevenson,Max Stevenson,ayni,"Bollinger(40,2), RSI(5) ve ADX<25 onayi; aileyle ayni."
+scalp__bant-donus,scalp__rsi5-keltner-ema200__stevenson,Max Stevenson,ayni,RSI(5) ve Keltner alt bant; 200 EMA filtresi.
+swing__trend-cizgisi-kanal,daytrade__trend-cizgisi-kirilim__bulkowski,Thomas N Bulkowski,ayni,Trend cizgisi kirilimi.
+swing__trend-cizgisi-kanal,daytrade__kanal-dokunus__bulkowski,Thomas N Bulkowski,ayni,Kanal alt cizgisine dokunup tepki.
+swing__trend-cizgisi-kanal,swing__trend-cizgisi-yeniden-test__boxer,Harry Boxer,ayni,Trend cizgisi yeniden testi ve tepki.
+swing__trend-cizgisi-kanal,swing__yukselis-trend-cizgisi-tepki__jordan,Simon Jordan,ayni,Yukselis trend cizgisinden tepki.
+swing__trend-cizgisi-kanal,swing__kanal-kirilimi__make,Mark Make,ayni,Kanal alt cizgisi kirilimi; kisa taraf.
+swing__trend-cizgisi-kanal,swing__kanal-sicrama__razaq,Razaq Adekunle,ayni,Kanal disina cikip geri donus.
+swing__trend-cizgisi-kanal,swing__trend-kanali-kanallama__kratter,Andrew David Kratter,ayni,Kanal alt cizgisinden alim.
+swing__rsi-diverjans,daytrade__rsi-mw-pozisyonel__singhal,51 Trading Stratejisi,yakin,"RSI M ve W yapisi; uyumsuzluk degil, RSI formasyonu."
+swing__rsi-diverjans,swing__rsi-ayrisma__sharpe,Dennis Sharpe,ayni,RSI boga uyumsuzlugu ve 21 EMA teyidi.
+swing__rsi-diverjans,swing__ssto-uyumsuzluk__crane,John Crane,ayni,SSTO uyumsuzlugu; osilator ayrismasi.
+swing__rsi-diverjans,swing__obv-fiyat-farkliligi__boxer,Harry Boxer,ayni,OBV uyumsuzlugu; osilator-fiyat ayrismasi.
+swing__rsi-diverjans,swing__rsi-farklilik__jordan,Simon Jordan,ayni,RSI boga uyumsuzlugu.
+swing__rsi-diverjans,swing__macd-uyumsuzluk__penn,Joe Penn,ayni,MACD histogram uyumsuzlugu.
+swing__rsi-diverjans,swing__rsi-basarisizlik-salinimi__johnson,Aaron Lee Johnson,yakin,"RSI basarisizlik salinimi; uyumsuzluk degil, RSI yapisi."
+swing__rsi-diverjans,swing__rsi-sapma__johnson,Aaron Lee Johnson,ayni,RSI boga sapmasi ile donus.
+swing__mum-yutan-donus,daytrade__bar-inversiyon-tersine-donus__derr,Issac Derr,ayni,Cubuk tersine donus; iki mumlu donus formasyonu.
+swing__mum-yutan-donus,swing__yutan-mum-doji-donus__jordan,Simon Jordan,ayni,Yutan mum ve doji donus onayi.
+swing__mum-yutan-donus,swing__karsit-desen-kisa__penn,Joe Penn,yakin,Karsit desen; giris tetigi ve mum tanimi belirsiz.
+swing__mum-yutan-donus,swing__gann-dis-gun-trend__razaq,Razaq Adekunle,ayni,Dis gun (outside bar) donus sinyali.
+swing__mum-yutan-donus,swing__yutma-formasyonu__hogan,Timothy T Hogan,ayni,Boga yutma donus formasyonu.
+swing__mum-yutan-donus,swing__yutan-mum-hacim__graham,Dave Robert Warren Graham,ayni,"Yutan mum, hacim onayiyla."
+swing__mum-yutan-donus,swing__yutan-mum-trend-sonu__day,Edward Day,ayni,Yutan mum trend sonu donusu.
+swing__mum-yutan-donus,swing__iki-bar-tersine-donus__day,Edward Day,ayni,Iki bar tersine donus.
+swing__fib-geri-cekilme,swing__gatekeeper__landry,Dave Landry,ayni,Fibonacci geri cekilme seviyesinden trend yonunde giris.
+swing__fib-geri-cekilme,swing__alis-satis-penceresi-60__crane,John Crane,ayni,%60 geri cekilme penceresi; ayni geri cekilme mekanigi.
+swing__fib-geri-cekilme,swing__fibonacci-geri-cekilme-hedef__boxer,Harry Boxer,ayni,Fibonacci geri cekilme seviyesi destek ve tepki.
+swing__fib-geri-cekilme,swing__fibonacci-geri-cekilme__make,Mark Make,ayni,"Fibonacci geri cekilmesi, kisa taraf."
+swing__fib-geri-cekilme,swing__fibonacci-61-8-geri-cekilme__hogan,Timothy T Hogan,ayni,"%61,8 geri cekilme donusu, kisa taraf."
+swing__fib-geri-cekilme,swing__fibonacci-geri-cekilme__graham,Dave Robert Warren Graham,ayni,"Fibonacci %38,2-50 geri cekilme ve onay."
+swing__fib-geri-cekilme,swing__fib-geri-cekilme-alimi__johnson,Aaron Lee Johnson,ayni,Fibonacci %50 geri cekilme alimi.
+swing__bant-donus,swing__bollinger-w-m-formasyon__boxer,Harry Boxer,yakin,W dip/M tepe formasyonu bant uzerinde; bant dokunusu tetik degil.
+swing__bant-donus,swing__bollinger-bant-donus__make,Mark Make,ayni,Alt Bollinger bant donusu ve teyit.
+swing__bant-donus,swing__bb-alt-bant-rsi30__johnson,Aaron Lee Johnson,ayni,Alt bant dokunusu ve RSI<30 birlikte.
+swing__bant-donus,swing__bb-ortalamaya-donus__johnson,Aaron Lee Johnson,ayni,Alt Bollinger bant alti kapanis ve ortalamaya donus.
+swing__bant-donus,swing__gimmee-bar-bollinger__kratter,Andrew David Kratter,ayni,"Bant dokunusu, ADX filtresi ve geri donus mumu."
+swing__aralik-ticareti,swing__destek-direnc-aralik__ladha,Pankaj Ladha ve Anant Ladha,ayni,Destek bolgesinde yatay aralik alimi.
+swing__aralik-ticareti,swing__destek-direnc-aralik__penn,Joe Penn,ayni,Destek bolgesinden salinim ve alim.
+swing__aralik-ticareti,swing__kripto-kutu-destek-ustu-kapanis__razaq,Razaq Adekunle,ayni,Destek ustu kapanisla kutu alimi.
+swing__aralik-ticareti,swing__aralik-sinir-ticareti__graham,Dave Robert Warren Graham,ayni,Yatay aralik sinirindan alim.
+swing__aralik-ticareti,swing__kutu-destekten-alim__kratter,Andrew David Kratter,ayni,"Kutu destekten alim, direnc hedefi."
+swing__bayrak-flama,daytrade__yuksek-ve-sikli-bayrak__bulkowski,Thomas N Bulkowski,ayni,Yuksek sikli bayrak kirilimi (direk ustu).
+swing__bayrak-flama,swing__bayrak-kirilim__heikinashi,Heikin Ashi Trader,ayni,"Bayrak kirilimi, trend devami."
+swing__bayrak-flama,swing__bayrak-flama-kirilim__penn,Joe Penn,ayni,Bayrak/flama ust cizgi kirilimi.
+swing__bayrak-flama,swing__bayrak-kirilim__graham,Dave Robert Warren Graham,ayni,"Bayrak ust cizgisi kirilimi, hacimle."
+swing__goreceli-guc-momentum,daytrade__goreceli-guc-donus-kirilim__bulkowski,Thomas N Bulkowski,ayni,Goreceli guc donusu ve kirilim filtresi.
+swing__goreceli-guc-momentum,scalp__piyasa-lideri-tarama-geri-cekilme__schroder,Philipp Schroder ve Valentin Rossiwall,ayni,"Lider hisse, geri cekilme alimi; momentum secimi."
+swing__goreceli-guc-momentum,swing__goreceli-guc__ladha,Pankaj Ladha ve Anant Ladha,ayni,"Goreceli guc, geri cekilmede alim."
+scalp__ma-geri-cekilme,scalp__ema200-psar-macd-bb__candle,Trevor Candle,ayni,200 EMA trendinde 20 EMA geri cekilme alimi.
+scalp__ma-geri-cekilme,scalp__ema10-21-orta-nokta-geri-cekilme__eseckal,5 Dakikalık Scalp Stratejisi,ayni,EMA10/21 orta noktasina geri cekilme.
+scalp__ma-geri-cekilme,swing__son-sans-texaco-ema200__scheier,M William Scheier,ayni,200 EMA'ya geri cekilme ve sicrama.
+scalp__ma-geri-cekilme,swing__ema-cup__scheier,M William Scheier,yakin,200 EMA'ya ikinci kirilim ve tutunma; geri cekilme farkli tetik.
+scalp__ma-geri-cekilme,swing__mini-pup__yu,Jea Yu,ayni,5 SMA geri cekilmesi ve stokastik donusu.
+scalp__ma-geri-cekilme,swing__mukemmel-firtina__yu,Jea Yu,ayni,Mini-pup geri cekilmesi ve stokastik tetik.
+daytrade__orb,daytrade__ilk-saat-yon-takibi__derr,Issac Derr,farkli,Ilk saat yonu; acilis araligi kirilimi kullanilmiyor.
+daytrade__orb,daytrade__acilis-araligi-kirilimi__bulkowski,Thomas N Bulkowski,ayni,Acilis araligi ustunde kapanisla giris.
+daytrade__orb,swing__orb-3-bar__scheier,M William Scheier,ayni,"Ilk uc dakika araligi, kirilim yonunde giris."
+daytrade__orb,swing__orb-flama__scheier,M William Scheier,ayni,ORB flamasi cift tarafli kirilim.
+daytrade__orb,swing__orb-eslesen-yuksek-dusuk__scheier,M William Scheier,yakin,ORB sinirinin basarisiz kirilimi; ters yon tetik.
+daytrade__orb,swing__test-reddet-2-trend__scheier,M William Scheier,yakin,ORB'nin tekrar test ve red sonrasi kirilim.
+daytrade__orb,swing__kalici-trend-orb-geri-cekilme__scheier,M William Scheier,yakin,ORB'ye geri cekilme girisi; kirilim yerine pullback.
+daytrade__orb,swing__maymun-barlari-orb-geri-donus__scheier,M William Scheier,yakin,ORB'ye tekrarli geri donus; sayim tetigi.
+daytrade__orb,swing__bosluk-aralik-kirilim__penn,Joe Penn,ayni,Acilis bosluğu ve acilis araligi kirilimi.
+swing__rsi-asiri-donus,scalp__rsi2-90-10-her-zaman-icerde__schroder,Philipp Schroder ve Valentin Rossiwall,ayni,RSI(2) asiri satim donusu.
+swing__rsi-asiri-donus,swing__rsi-30-70-ortalama-donus__jordan,Simon Jordan,ayni,RSI 30 yukari kesisi; aile mekanigi.
+swing__rsi-asiri-donus,swing__rsi30-geri-donus__johnson,Aaron Lee Johnson,ayni,RSI 30'un geri cikisi ile uzun.
+scalp__supertrend-psar,daytrade__supertrend-pivot-r1s1__singhal,51 Trading Stratejisi,yakin,Supertrend ustunde ve pivot R1 kirilimi; trend donusu degil.
+scalp__supertrend-psar,daytrade__sar-rsi-heikin-ashi-3dk__singhal,51 Trading Stratejisi,yakin,PSAR yalniz filtre; tetik heikin ashi ve RSI.
+scalp__supertrend-psar,scalp__halftrend-fisher-plus__carson,Zackary Carson,ayni,HalfTrend yon degisimi sinyali.
+scalp__macd-sinyal,scalp__macd-histogram-sifir-donusu__schroder,Philipp Schroder ve Valentin Rossiwall,ayni,MACD histogrami sifir donusu = MACD-sinyal kesisimi (lider duzeltmesi).
+scalp__macd-sinyal,scalp__macd-histogram-stokastik__ellis,Para Kazanma Yöntemleri,yakin,Histogram ve yavas stokastik; sinyal kesisimi tetik degil.
+scalp__macd-sinyal,scalp__tsi-bjorgum__carson,Zackary Carson,yakin,"TSI cizgi caprazi; farkli gosterge, benzer caprazlama mekanigi."
+scalp__rsi-asiri-donus,daytrade__rsi-hacim-osilator-dip__singhal,51 Trading Stratejisi,ayni,RSI 30 asiri satim ve hacim osilatoru onayi.
+scalp__rsi-asiri-donus,scalp__rsi-aralik-ticareti-1dk__schroder,Philipp Schroder ve Valentin Rossiwall,yakin,RSI asiri satim ve aralik alt siniri; tetik aralik.
+scalp__rsi-asiri-donus,scalp__rsi7-aralik__stevenson,Max Stevenson,ayni,"RSI(7) 30 ustune cikis, asiri satim donusu."
+daytrade__trend-yapi-dow,daytrade__dow-piyasa-yapisi-kirilim__singhal,51 Trading Stratejisi,ayni,Onceki salinim tepesinin kirilmasi.
+daytrade__trend-yapi-dow,daytrade__trend-takibi-yukselen-dusen__derr,Issac Derr,yakin,Yukselen trend tanimi belirsiz; trend takibi tetigi.
+daytrade__trend-yapi-dow,scalp__trendi-yakala-1-2-3-vwap__schroder,Philipp Schroder ve Valentin Rossiwall,yakin,Yuksek dip yapisi ve VWAP; kirilim tetigi yok.
+scalp__rsi-momentum-esik,daytrade__cift-rsi-5dk-1sa__singhal,51 Trading Stratejisi,yakin,RSI 30 alti ve mum; 50 esigi yerine farkli tetik.
+scalp__rsi-momentum-esik,scalp__triple-rsi-heikin-ashi__carson,Zackary Carson,ayni,RSI 30 esiginin yukari kirilimi.
+scalp__heikin-ashi-donus,scalp__heikin-ashi-renk-donusu__lama,Teva Lama,ayni,HA mum renk degisimi ile yeni yon.
+scalp__heikin-ashi-donus,scalp__ha-renk-donusu__heikinashi,Heikin Ashi Trader,ayni,"HA mum renk donusu, karsi-trend giris."
+daytrade__konsolidasyon-kirilim,daytrade__basinc-bolgesi__woods,Galen Woods,farkli,Alt golge basinc bolgesi; konsolidasyon kirilimi degil.
+daytrade__konsolidasyon-kirilim,swing__ogle-kanali-kirilim__scheier,M William Scheier,ayni,Ogle kanali ust siniri kirilimi.
+daytrade__konsolidasyon-kirilim,swing__kirilim-oncesi-duraklama__scheier,M William Scheier,ayni,"Kirilim oncesi duraklama, stop giris."
+daytrade__konsolidasyon-kirilim,swing__kopus-kirilim__graham,Dave Robert Warren Graham,ayni,Yuksek hacimli direnc kirilimi.
+daytrade__kirilim-geri-test,daytrade__geri-cekilme-yeniden-test__singhal,51 Trading Stratejisi,ayni,Kirilim sonrasi geri cekilme ve yeniden test.
+daytrade__kirilim-geri-test,daytrade__sikisiklik-bolgesi__woods,Galen Woods,yakin,"Uc mumluk sikisma bolgesi; yeniden test degil, kirilim kurulumu."
+daytrade__kirilim-geri-test,swing__kopma-pivot-ledge__scheier,M William Scheier,ayni,Kopma pivot seviyesinde yeniden test.
+daytrade__bant-donus,daytrade__bollinger-ema9-bant__singhal,51 Trading Stratejisi,ayni,Alt Bollinger bant desteginden boga mumu.
+daytrade__bant-donus,swing__bollinger-bant-ihlal-ters__day,Edward Day,ayni,Bant ihlali ve ters donus mumu.
+scalp__rsi-diverjans,daytrade__rsi-diverjans-bollinger-1dk__singhal,51 Trading Stratejisi,ayni,RSI boga uyumsuzlugu ve bant teyidi.
+scalp__rsi-diverjans,scalp__cci-ayrisma__busiere,İşlemlerinizin Başarısını Arttırın,ayni,CCI uyumsuzlugu; osilator-fiyat ayrismasi.
+scalp__rsi-diverjans,scalp__rsi-diverjans-filtreli__carson,Zackary Carson,ayni,RSI uyumsuzlugu ve filtre ile alim.
+daytrade__aralik-ticareti,daytrade__aralik-ticareti-yatay__derr,Issac Derr,ayni,"Aralik alt sinirinda alim, karsi sinir hedefi."
+daytrade__aralik-ticareti,swing__aralik-hedef-stop__heikinashi,Heikin Ashi Trader,ayni,Iki yatay sinir arasinda alim.
+daytrade__aralik-ticareti,swing__aralik-sinirlari-ters__day,Edward Day,ayni,Aralik sinirinda ters islem.
+scalp__geri-cekilme-fiyat-eylemi,daytrade__iki-bacakli-geri-cekilme__singhal,51 Trading Stratejisi,ayni,Iki bacakli geri cekilmede trend yonunde giris.
+scalp__geri-cekilme-fiyat-eylemi,scalp__trend-gunu-toparlanma__heikinashi,Heikin Ashi Trader,ayni,Trend gununde kisa toparlanma; aile mekanigi.
+scalp__geri-cekilme-fiyat-eylemi,scalp__dusuk-hacimli-geri-cekilme__schroder,Philipp Schroder ve Valentin Rossiwall,ayni,"Dusuk hacimli geri cekilme, trend yonunde alim."
+daytrade__pivot-seviye,daytrade__pivot-geri-cekilme-devam-donus__singhal,51 Trading Stratejisi,ayni,Pivot etrafinda geri cekilme ve donus.
+daytrade__pivot-seviye,daytrade__cpr-genis-dar-kirilim__singhal,51 Trading Stratejisi,ayni,CPR seviyelerinde destek ve kirilim.
+daytrade__pivot-seviye,scalp__pivot-noktasi__lama,Teva Lama,ayni,Pivot seviyesinde tepki ve alim.
+scalp__cci-esik,scalp__cci-30-kirilim__busiere,İşlemlerinizin Başarısını Arttırın,ayni,CCI -100 ve -30 esik kirilimi.
+scalp__cci-esik,scalp__cci-100-kirilim__busiere,İşlemlerinizin Başarısını Arttırın,ayni,CCI +100 esik kirilimi.
+scalp__cci-esik,scalp__cci-zirve__busiere,İşlemlerinizin Başarısını Arttırın,yakin,"CCI dip ve donus; esik kirilimi degil, dip yapisi."
+daytrade__vwap-donus,daytrade__vwap-2sd-ortalamaya-donus__singhal,51 Trading Stratejisi,ayni,VWAP +-2 sapma bandindan ortalamaya donus.
+daytrade__vwap-donus,daytrade__rsi-vwap-scalp-1dk__singhal,51 Trading Stratejisi,yakin,VWAP destegi ve RSI; bant disi uc yok.
+daytrade__vwap-donus,scalp__vwap-geri-cekilme-plani__schroder,Philipp Schroder ve Valentin Rossiwall,yakin,VWAP geri cekilmesinde dip alimi; bant donusu degil.
+daytrade__gap-doldurma,daytrade__acilis-bosluk-geri-donus__bulkowski,Thomas N Bulkowski,ayni,Acilis bosluğunu kapatma (dolum) mekanigi.
+daytrade__gap-doldurma,swing__bosluk-kapanisi-y-kapanis__scheier,M William Scheier,ayni,Bosluk kapanisi ve Y-kapanis seviyesinden giris.
+scalp__konsolidasyon-kirilim,daytrade__1dk-konsolidasyon-kirilim-scalp__singhal,51 Trading Stratejisi,ayni,"1 dk konsolidasyon kirilimi, trend yonunde."
+scalp__konsolidasyon-kirilim,scalp__blok-kirma__volman,Bob Volman,ayni,Blok ust siniri kirilimi.
+scalp__konsolidasyon-kirilim,scalp__yuvarlak-sayi-aralik-kirilimi__volman,Bob Volman,ayni,Yuvarlak sayi aralik ust bariyeri kirilimi.
+scalp__konsolidasyon-kirilim,scalp__ic-aralik-kirilimi__volman,Bob Volman,ayni,Ic aralik ust siniri kirilimi.
+scalp__konsolidasyon-kirilim,scalp__devrilme-noktasi-arb__volman,Bob Volman,ayni,Devrilme noktasi (ARB) bariyer kirilimi.
+scalp__seviye-tepki,scalp__50-100-seviye__lama,Teva Lama,ayni,Yuvarlak seviye tepkisi ve alim emri.
+scalp__seviye-tepki,scalp__destek-direnc-ha-donus__heikinashi,Heikin Ashi Trader,ayni,Destek seviyesi ve HA donusu.
+scalp__seviye-tepki,scalp__onceki-gun-swing-ha__heikinashi,Heikin Ashi Trader,ayni,Onceki gun dibi ve HA donusu.
+scalp__seviye-tepki,scalp__yuvarlak-sayi-dip-ha__heikinashi,Heikin Ashi Trader,ayni,Yuvarlak sayi dibi ve HA donusu.
+scalp__seviye-tepki,scalp__petrol-yuvarlak-seviye-araligi__schroder,Philipp Schroder ve Valentin Rossiwall,yakin,Yuvarlak seviye aralik ticareti; tepki tetigi yok.
+daytrade__bb-sikisma-kirilim,daytrade__bb-genislik-kirilim__singhal,51 Trading Stratejisi,ayni,Bant genisligi daralmasi sonrasi bant kirilimi.
+daytrade__donchian-kirilim,daytrade__fraktal-williams-sma50__singhal,51 Trading Stratejisi,yakin,Williams fraktal kirilimi; Donchian kanali degil.
+daytrade__donchian-kirilim,daytrade__donchian-geri-cekilme-kirilim__singhal,51 Trading Stratejisi,ayni,Donchian ust bant geri cekilme ve kirilim.
+daytrade__stokastik-donus,daytrade__williams-r-sma14__singhal,51 Trading Stratejisi,ayni,Williams %R asiri bolge cikisi ve geri donus.
+daytrade__vwap-trend,swing__vwap-kesisim__graham,Dave Robert Warren Graham,ayni,VWAP yukari kesisimi.
+daytrade__vwap-trend,swing__vwap-konum__johnson,Aaron Lee Johnson,yakin,VWAP alti konum; kesisim tetigi tanimsiz.
+scalp__cift-dip-tepe,daytrade__yanal-momentum-cift-dip-tepe__maza,Duarte Maza,ayni,Yanal piyasada destek/direnc yakininda cift dip/tepe.
+scalp__cift-dip-tepe,daytrade__geri-cekilme-cift-dip-tepe__maza,Duarte Maza,ayni,Trend geri cekilmesinde cift tepe/dip.
+scalp__cift-dip-tepe,daytrade__gun-ici-cift-tepe-kisa__bulkowski,Thomas N Bulkowski,ayni,"Gun ici cift tepe, acik satis."
+scalp__cift-dip-tepe,daytrade__gun-ici-ucl-tepe-kisa__bulkowski,Thomas N Bulkowski,ayni,"Gun ici uclu tepe, acik satis."
+scalp__cift-dip-tepe,daytrade__gun-ici-cift-dip-uzun__bulkowski,Thomas N Bulkowski,ayni,"Gun ici cift dip, boyun ustu alim."
+scalp__cift-dip-tepe,daytrade__gun-ici-ucl-dip-uzun__bulkowski,Thomas N Bulkowski,ayni,"Uclu dip, formasyon tepesi kirilimi."
+daytrade__pin-bar,daytrade__pin-bar-aralik-donus__singhal,51 Trading Stratejisi,ayni,Aralik dibinde pin bar donusu.
+daytrade__pin-bar,scalp__fitil-reddi-seviye__vezi,Türkçe ve İngilizce,ayni,Seviyede fitil reddi ve alim.
+daytrade__ma-geri-cekilme,swing__sloth-psar-ema-roc__kratter,Andrew David Kratter,ayni,EMA geri cekilme bolgesinde trend yonunde giris.

@@ -1,0 +1,119 @@
+[
+ {
+  "kart_id": "swing__altin-kesisim-50-200__koru",
+  "ad": "Altın/Ölüm Kesişimi (50/200 hareketli ortalama)",
+  "stil": "swing",
+  "kaynak": {
+   "pdf": "Algoritmik_Trading_-_Kalara_Koru_-_Türkçe_ve_İngilizce_126_sayfa.pdf",
+   "sayfalar": [
+    25,
+    26
+   ]
+  },
+  "ozet": "Kısa vadeli ortalama (örnek 50 gün) uzun vadeli ortalamayı (örnek 200 gün) yukarı keserse al; aşağı keserse sat/kısa.",
+  "kategori": "trend_takip",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "genel",
+  "zaman_dilimi": {
+   "islem": "1d",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "SMA",
+    "parametreler": {
+     "kisa": 50,
+     "uzun": 200
+    }
+   }
+  ],
+  "long_giris": [
+   "50 günlük ortalama 200 günlük ortalamayı yukarı keser (altın kesişim)"
+  ],
+  "short_giris": [
+   "50 günlük ortalama 200 günlük ortalamayı aşağı keser (ölüm kesişimi)"
+  ],
+  "stop_loss": null,
+  "kar_al": null,
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 1,
+   "gerekce": "Kitap yalnızca kavram anlatıyor; ortalama türü (SMA/EMA), stop, çıkış ve filtre yok; parametreler 'örneğin'."
+  },
+  "belirsizlikler": [
+   "Stop, kar al, ortalama türü ve zaman dilimi yok.",
+   "Kesişimle ters sinyalde çıkış varsayımı."
+  ],
+  "uyumluluk_notu": "Genel; günlük bar örnekleri, parametreler uyarlanabilir. Hacim gerekmez. Kripto/hisse/emtia perpetual'larda kurallar çalışır ama kitapta test sonucu yok.",
+  "varyantlar": [
+   "Ortalama kanalları: fiyat bantların dışına çıkınca trend değişimi (parametresiz)"
+  ],
+  "anahtar_kelimeler": [
+   "sma",
+   "altin-kesisim",
+   "trend-takip"
+  ]
+ },
+ {
+  "kart_id": "swing__bollinger-bant-dokunusu-ortalamaya-donus__koru",
+  "ad": "Bollinger Bandı Dokunuşu ile Ortalamaya Dönüş",
+  "stil": "swing",
+  "kaynak": {
+   "pdf": "Algoritmik_Trading_-_Kalara_Koru_-_Türkçe_ve_İngilizce_126_sayfa.pdf",
+   "sayfalar": [
+    27,
+    28
+   ]
+  },
+  "ozet": "Fiyat üst banda dokununca/dışına çıkınca kısa, alt banda dokununca/altına inince uzun pozisyon açılır; ortalamaya dönüş beklenir.",
+  "kategori": "ortalamaya_donus",
+  "piyasa_rejimi": "yatay",
+  "orijinal_piyasa": "genel",
+  "zaman_dilimi": {
+   "islem": "1d",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "Bollinger",
+    "parametreler": {
+     "periyot": null,
+     "std": null
+    }
+   }
+  ],
+  "long_giris": [
+   "Fiyat alt Bollinger bandına değer veya altına iner -> al"
+  ],
+  "short_giris": [
+   "Fiyat üst Bollinger bandına değer veya üstüne çıkar -> sat"
+  ],
+  "stop_loss": null,
+  "kar_al": "Çıkış hedefi orta bant (kitapta açıkça yok; 'ortalamaya dönüş beklenir')",
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [
+   "Güçlü trendlerde fiyat bantta kalabilir (uyarı)"
+  ],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 1,
+   "gerekce": "Parametre (periyot, std), stop, çıkış ve filtre yok; yalnızca kavramsal."
+  },
+  "belirsizlikler": [
+   "Bollinger periyodu/std verilmemiş (SMA N periyot, birkaç std).",
+   "Stop ve çıkış tanımı yok."
+  ],
+  "uyumluluk_notu": "Genel; günlük bar örnekleri, parametreler uyarlanabilir. Hacim gerekmez. Kripto/hisse/emtia perpetual'larda kurallar çalışır ama kitapta test sonucu yok.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "bollinger",
+   "ortalamaya-donus"
+  ]
+ }
+]

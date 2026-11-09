@@ -1,0 +1,147 @@
+[
+ {
+  "kart_id": "swing__50ema-geri-cekilme__farley",
+  "ad": "Kırılım Sonrası 50 Günlük EMA'ya Geri Çekilme Alımı",
+  "stil": "swing",
+  "kaynak": {
+   "pdf": "Swing_Trader_-_Alan_S_Farley_306_sayfa.pdf",
+   "sayfalar": [
+    137,
+    138,
+    139,
+    140
+   ]
+  },
+  "ozet": "Güçlü bir kırılımdan sonra fiyat 50 günlük EMA'ya geri çekilince, alarmla bekleyip alt zaman diliminde (60 dk) yükseliş dönüş formasyonu görülünce alım yapılır; stoplar doğal destek altında değil 50 EMA altında olduğundan giriş burada daha güvenlidir.",
+  "kategori": "trend_takip",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+   "islem": "1d",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "EMA",
+    "parametreler": {
+     "periyot": 50
+    }
+   },
+   {
+    "ad": "Alt zaman dilimi teyidi",
+    "parametreler": {
+     "zaman_dilimi": "60 dakika"
+    }
+   }
+  ],
+  "long_giris": [
+   "Güçlü bir kırılım olmuş; fiyat 50 günlük EMA'ya geri çekiliyor (kırılma seviyesine ve EMA'ya)",
+   "50 EMA'nın 1-2 puan üstüne alarm kur ve bekle (günler/haftalar sürebilir)",
+   "Fiyat EMA'yı test edip satış ivmesi azaldığında; günlük kurulum için 60 dakikalık grafikte yukarı dönüş formasyonuyla al (alt zaman dilimi teyidi)"
+  ],
+  "short_giris": [
+   "Düşüş trendinde ayna: 50 EMA'ya yükseliş ve alt zaman dilimi aşağı dönüş formasyonu ile short"
+  ],
+  "stop_loss": "50 EMA'nın (ve doğal destek seviyesinin) altı; kitapta sayısal tampon yok",
+  "kar_al": "Önceki zirve/kırılım yüksekleri; sabit hedef verilmemiş",
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [
+   "Modern piyasada çoğu kırılım 50 EMA'ya dönüyor (sabırla tam geri çekilme beklenir)",
+   "Yükseliş trendinde destek, düşüş trendinde direnç"
+  ],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 1,
+   "gerekce": "EMA ve alt zaman dilimi dönüşü tanımlı ama 'dönüş formasyonu', stop mesafesi ve hedef sayısal değil."
+  },
+  "belirsizlikler": [
+   "Alt zaman dilimi dönüş formasyonu tanımı yok",
+   "Stop tamponu ve hedef yok",
+   "'Güçlü kırılım' tanımı yok"
+  ],
+  "uyumluluk_notu": "ABD hisse/ETF swing mantığı; 50 EMA ve 60m/15m teyidi her piyasada kodlanır, hacim şart değil. Yazar birçok kuralı takdirî bırakır.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "ema-50",
+   "geri-cekilme",
+   "kirilim",
+   "coklu-zaman-dilimi",
+   "alarm"
+  ]
+ },
+ {
+  "kart_id": "swing__fibonacci-62-78-kamci__farley",
+  "ad": "Fibonacci %62/%78 Geri Çekilme Kamçı (Whipsaw) Dönüşü",
+  "stil": "swing",
+  "kaynak": {
+   "pdf": "Swing_Trader_-_Alan_S_Farley_306_sayfa.pdf",
+   "sayfalar": [
+    145,
+    146,
+    147,
+    148
+   ]
+  },
+  "ozet": "Ralli %62'lik Fibonacci geri çekilmesinde satışla karşılaşıp %78'e kadar kamçılandıktan sonra tekrar %62'nin altına geri düşünce ilk kısa giriş sinyali verir; çoklu doğrulama (günlük EMA, trend çizgisi) varsa daha güçlüdür.",
+  "kategori": "destek_direnc",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+   "islem": "1h",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "Fibonacci",
+    "parametreler": {
+     "seviyeler": [
+      0.5,
+      0.618,
+      0.78
+     ]
+    }
+   },
+   {
+    "ad": "EMA",
+    "parametreler": {
+     "periyot": "günlük, kitapta yok"
+    }
+   }
+  ],
+  "long_giris": [
+   "Düşüş geri çekilmesi %62-%78 bölgesinde dip yapıp ve tekrar %62'nin üzerine çıkınca long (aynadır)"
+  ],
+  "short_giris": [
+   "Yükselişin %62'si ve %78'ine kadar kamçı; fiyat %62 seviyesinin altına gerileyince ilk short sinyali",
+   "Sonra %50'de durak; %62'nin üstüne geri dönüş tekrar giriş fırsatı"
+  ],
+  "stop_loss": "%78 seviyesinin / önceki zirvenin ötesi; sayısal değil",
+  "kar_al": "Önceki hareketin başlangıç noktası (örnek: 162)",
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [
+   "Fibonacci seviyesinde asla tek başına işlem yapma: seviye ile günlük EMA, trend çizgisi gibi çapraz doğrulama aranır"
+  ],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 1,
+   "gerekce": "Seviyeler mekanik; kamçı onayı, stop ve hedef örnekle anlatılmış."
+  },
+  "belirsizlikler": [
+   "Swing seçimi",
+   "Stop sayısal değil",
+   "Zaman dilimi kitapta genel"
+  ],
+  "uyumluluk_notu": "ABD hisse/ETF swing mantığı; 50 EMA ve 60m/15m teyidi her piyasada kodlanır, hacim şart değil. Yazar birçok kuralı takdirî bırakır.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "fibonacci",
+   "kamci",
+   "geri-cekilme",
+   "cok-katmanli-dogrulama"
+  ]
+ }
+]

@@ -1,0 +1,15 @@
+[
+ {
+  "kart_id": "swing__stokastik-asiri-satim-donus__boxer",
+  "parametreler": {
+   "k_periyot": 14,
+   "k_yumusat": 3,
+   "d_periyot": 3,
+   "asiri_esik": 20.0,
+   "trend_ema": 100,
+   "hedef_r": 2.0
+  },
+  "cikis_ayarlari": null,
+  "not": "Büyük trend = EMA100 (varsayım); stop son 10 mum dibi (kartta destek ihlali); hedef 2R (kartta sabit yok). 50 üstü teyidi yok."
+ }
+]

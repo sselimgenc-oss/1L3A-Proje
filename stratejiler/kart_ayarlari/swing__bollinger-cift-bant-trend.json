@@ -1,0 +1,13 @@
+[
+  {
+    "kart_id": "swing__bb-cift-bant-trend__johnson",
+    "parametreler": {
+      "periyot": 20,
+      "ic_sapma": 1.0,
+      "dis_sapma": 2.0,
+      "dis_dahil": false
+    },
+    "cikis_ayarlari": null,
+    "not": "1SD-2SD arası bölgeye ilk giriş; stop orta bant (kanonik)."
+  }
+]

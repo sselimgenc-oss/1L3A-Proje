@@ -1,0 +1,101 @@
+[
+ {
+  "dis_id": "tv:gqaZYhUN",
+  "kaynak_dosya": "arsiv/strateji-sg/tv/pine/gqaZYhUN.pine",
+  "parametreler": {
+   "cikis_n": 10,
+   "giris_n": 20,
+   "hacim_k": 1.0,
+   "stop_atr": 2.0,
+   "stop_modu": "atr",
+   "trend_ma": 50
+  },
+  "cikis_ayarlari": null,
+  "not": "YAKLAŞIK: 20 mumluk zirve kırılımı + hacim + EMA20>EMA50 (trend_ma=50 EMA/SMA yaklaşığı); zayıf kırılım short mantığı ve RSI yok."
+ },
+ {
+  "dis_id": "tv:9qFCuXqF",
+  "kaynak_dosya": "arsiv/strateji-sg/tv_eleme_dali/pine/9qFCuXqF.pine",
+  "parametreler": {
+   "cikis_n": 10,
+   "giris_n": 20,
+   "short": true,
+   "stop_modu": "kanal"
+  },
+  "cikis_ayarlari": null,
+  "not": "Turtle: 20 mum Donchian kırılımı, 10 mumluk karşı kanal izleyen çıkış (stop=kanal)."
+ },
+ {
+  "dis_id": "kural:kurallar:20 mum zirvesine dokununca al, 2 gün tut",
+  "kaynak_dosya": "arsiv/algo-sg/dis_kaynak/kurallar.py",
+  "parametreler": {
+   "giris_n": 20,
+   "short": false,
+   "stop_modu": "atr"
+  },
+  "cikis_ayarlari": {
+   "zaman_cikisi_mum": 2
+  },
+  "not": "YAKLAŞIK: 20 mum zirvesine temas -> kapanışla kırılım; '2 gün tut' = zaman çıkışı 2 mum (günlük TF varsayımı)."
+ },
+ {
+  "dis_id": "kural:kurallar:Sma4Cross 50/100 rejim, 20 giriş 10 çıkış",
+  "kaynak_dosya": "arsiv/algo-sg/dis_kaynak/kurallar.py",
+  "parametreler": {
+   "cikis_n": 10,
+   "giris_n": 20,
+   "trend_ma": 100
+  },
+  "cikis_ayarlari": null,
+  "not": "YAKLAŞIK: SMA50/100 rejimi trend_ma=100 (EMA) filtresine indirgendi; 20 giriş/10 çıkış."
+ },
+ {
+  "dis_id": "kural:kurallar:Turtle 20/10 + 2xATR stop",
+  "kaynak_dosya": "arsiv/algo-sg/dis_kaynak/kurallar.py",
+  "parametreler": {
+   "cikis_n": 10,
+   "giris_n": 20,
+   "stop_atr": 2.0,
+   "stop_modu": "atr"
+  },
+  "cikis_ayarlari": null,
+  "not": "Turtle 20/10 + 2 ATR stop."
+ },
+ {
+  "dis_id": "awesome:awesome:MAX: 10 gün zirvesinde long (Padysak-Vojtko)",
+  "kaynak_dosya": "arsiv/algo-sg/dis_kaynak/awesome.py",
+  "parametreler": {
+   "giris_n": 10,
+   "short": false
+  },
+  "cikis_ayarlari": null,
+  "not": "10 gün zirvesinde long (MAX); çıkış 10 mumluk kanal."
+ },
+ {
+  "dis_id": "awesome:awesome:Tüm zamanların zirvesi + 1xATR(10) iz",
+  "kaynak_dosya": "arsiv/algo-sg/dis_kaynak/awesome.py",
+  "parametreler": {
+   "atr_periyot": 10,
+   "giris_n": 365,
+   "short": false
+  },
+  "cikis_ayarlari": {
+   "atr_iz_suren_k": 1.0,
+   "atr_periyot": 10
+  },
+  "not": "YAKLAŞIK: 'Tüm zamanların zirvesi' = 365 mumluk zirve kırılımı; 1 ATR(10) iz süren stop CikisAyarlari ile."
+ },
+ {
+  "cikis_ayarlari": null,
+  "dis_id": "ek77:19",
+  "kaynak_dosya": "stratejiler/ek_kaynaklar/ek_77_strateji.md#19 (gabrielweich/jesse-strategies Donchian/__init__.py)",
+  "not": "YAKLAŞIK: kapanış önceki 20 mumun zirvesini aşınca long, SMA200 üstünde; çıkış = alt kanal (20) kırılımı, stop = alt kanal (kaynakta ayrı stop yok, alt bant fiilen iz süren stop). Donchian periyodu belgede verilmemiş (Jesse varsayılanı 20 varsayımı). Orijinal 6h; ailenin TF'leri 4h/1d. Trend filtresi ailede EMA/SMA yaklaşığı.",
+  "parametreler": {
+   "cikis_n": 20,
+   "giris_n": 20,
+   "short": false,
+   "stop_modu": "kanal",
+   "trend_ma": 200
+  }
+ }
+]

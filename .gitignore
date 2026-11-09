@@ -22,3 +22,20 @@ veri/mumlar/
 *.parquet
 *.sqlite
 *.db
+
+# Büyük tarama dökümleri (sıkıştırılmış .csv.gz sürümü repoda)
+sonuclar/tarama/k2_izgara.csv
+sonuclar/**/*.log
+sonuclar/saglamlik_portfoy/m2_wf/
+
+# Canlı/paper durum dosyaları ve üretilen pano (motor yazar; Aşama 3). Örnek: sonuclar/final/pano_ornek.html
+/durum/
+/pano.html
+sonuclar/evren/kilit_oncesi/
+sonuclar/evren/ham/
+veri/pdf_metin_2/
+sonuclar/evren/*/ham/
+sonuclar/evren/*/oos/
+sonuclar/evren/*/arsiv_*/oos/
+sonuclar/evren/*/arsiv_*/pf/
+sonuclar/evren/*/arsiv_*/*.parquet

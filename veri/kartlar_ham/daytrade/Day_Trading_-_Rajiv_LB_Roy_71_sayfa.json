@@ -1,0 +1,750 @@
+[
+ {
+  "kart_id": "daytrade__gap-and-go__roy",
+  "ad": "Gap and Go (Boğa/Ayı) - İlk Mum Kırılımı",
+  "stil": "daytrade",
+  "kaynak": {
+   "pdf": "Day Trading - Rajiv LB Roy (71 sayfa) - @eseckal.pdf",
+   "sayfalar": [
+    17,
+    18,
+    19,
+    21,
+    22
+   ]
+  },
+  "ozet": "Yüksek hacimle ve katalizörle gap açan hissede, önceki gün mumu gap yönünün tersiyse (boğa gap için ayı mumu), ilk 5 dk mumunun ucu kırıldığında gap yönünde işlem açılır.",
+  "kategori": "kirilim",
+  "piyasa_rejimi": "volatil",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+   "islem": "5m",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "Hacim",
+    "parametreler": {}
+   }
+  ],
+  "long_giris": [
+   "Hisse yüksek hacimle yukarı gap açar (haber/kazanç katalizörü tercih)",
+   "Önceki günlük mum ayı mumu",
+   "İlk 5 dk (veya 2/10/15 dk) mum kırmızı/küçük/alt fitilli olur; gap anında direnç bırakmamalı",
+   "Fiyat ilk mumun en yükseğini geçince al"
+  ],
+  "short_giris": [
+   "Yüksek hacimle aşağı gap",
+   "Önceki günlük mum boğa mumu",
+   "İlk 15 dk içinde ters pin bar vb. oluşur",
+   "Mumun altı kırılınca sat (tampon ile)"
+  ],
+  "stop_loss": "Long: ilk mumun en düşüğü (günün dibi). Short: giriş mumunun en yükseği; gap oynak olduğundan stop'u biraz uzak tut.",
+  "kar_al": "Kısmi kâr 1:1 ve 2. hedef 1:2 R:R.",
+  "iz_suren_stop": "Short örneğinde her swing zirvesinde stop takibi.",
+  "zaman_cikisi": null,
+  "filtreler": [
+   "Katalizör (haber/kazanç) aranır",
+   "Önceki gün mumu yönü filtresi"
+  ],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": "Örnek: yaklaşık 1,5 saatte makul kâr (sayısal oran yok)",
+  "kodlanabilirlik": {
+   "puan": 2,
+   "gerekce": "Kurallar net ama 'katalizör', 'anında direnç yok' yorum içerir; katalizör filtresi atlanıp gap% + hacim eşiğine çevrilebilir."
+  },
+  "belirsizlikler": [
+   "Gap büyüklüğü ve hacim eşiği kitapta yok",
+   "Zaman çıkışı yok"
+  ],
+  "uyumluluk_notu": "Hisse (NSE) odaklı; 5-15m'de çalışır, ≥5m uyumlu. Açılış/gap ve hacim verisi gerekir; 7/24 kripto'da 'seans açılışı' tanımı uyarlama ister. Forex'e özgü değil.",
+  "varyantlar": [
+   "Zaman dilimi 2/5/10/15 dk"
+  ],
+  "anahtar_kelimeler": [
+   "gap",
+   "gap-and-go",
+   "ilk-mum",
+   "hisse"
+  ]
+ },
+ {
+  "kart_id": "daytrade__gap-geri-test__roy",
+  "ad": "Gap Yeniden Test (Boğa/Ayı Retest)",
+  "stil": "daytrade",
+  "kaynak": {
+   "pdf": "Day Trading - Rajiv LB Roy (71 sayfa) - @eseckal.pdf",
+   "sayfalar": [
+    19,
+    20,
+    23,
+    24
+   ]
+  },
+  "ozet": "Gap açan hissede önceki gün mumu gap yönündeyse (boğa gap + boğa mum) gap sonrası düzeltmenin bitmesi beklenir; düzeltme bitince gap yönünde giriş yapılır.",
+  "kategori": "destek_direnc",
+  "piyasa_rejimi": "volatil",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+   "islem": "5m",
+   "ust_filtre": "1D"
+  },
+  "gostergeler": [
+   {
+    "ad": "Supertrend",
+    "parametreler": {
+     "not": "Ayı örneğinde direnç olarak kullanıldı, parametre yok"
+    }
+   }
+  ],
+  "long_giris": [
+   "Yukarı gap, günlük önceki mum boğa",
+   "Fiyat düzeltme yapıp yeniden test eder (örnek: 2 uzun kırmızı mum)",
+   "Son kırmızı mumun zirvesi geçilince al"
+  ],
+  "short_giris": [
+   "Aşağı gap, günlük önceki mum ayı",
+   "Yeniden test (örnek: 3 mum, Supertrend direnci)",
+   "Test sonrası 3. mumun dibi kırılınca sat"
+  ],
+  "stop_loss": "Long: swing dip (örnek 71,60). Short: yeniden test direncinin hemen üstü.",
+  "kar_al": "1:1'de kısmi kâr, 2. hedef 2R; short örneğinde gün dibi hedef, yarısı kapatılıp kalan için iz süren stop.",
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [
+   "Hacim + katalizör"
+  ],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 1,
+   "gerekce": "'Düzeltmenin bittiği' an sübjektif; kaba yaklaşıkla (n mumluk geri çekilme sonrası önceki mum yüksek kırılımı) kodlanır."
+  },
+  "belirsizlikler": [
+   "Düzeltme derinliği/süresi tanımsız",
+   "Giriş zamanlaması yoruma açık"
+  ],
+  "uyumluluk_notu": "Hisse (NSE) odaklı; 5-15m'de çalışır, ≥5m uyumlu. Açılış/gap ve hacim verisi gerekir; 7/24 kripto'da 'seans açılışı' tanımı uyarlama ister. Forex'e özgü değil.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "gap",
+   "retest",
+   "geri-test",
+   "hisse"
+  ]
+ },
+ {
+  "kart_id": "daytrade__orb-acilis-araligi__roy",
+  "ad": "Açılış Aralığı Kırılımı (ORB)",
+  "stil": "daytrade",
+  "kaynak": {
+   "pdf": "Day Trading - Rajiv LB Roy (71 sayfa) - @eseckal.pdf",
+   "sayfalar": [
+    25,
+    26,
+    27
+   ]
+  },
+  "ozet": "Açılışta 5/10/15 dk (yeni başlayana uzun olanı) aralığın tepe/dibi hesaplanır; yüksek hacimle aralık dışına çıkış yönünde işlem açılır.",
+  "kategori": "kirilim",
+  "piyasa_rejimi": "volatil",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+   "islem": "5m",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "Hacim",
+    "parametreler": {}
+   }
+  ],
+  "long_giris": [
+   "İlk N dk aralığı (5/10/15) belirlenir",
+   "Fiyat yüksek hacimle aralık zirvesini kırar"
+  ],
+  "short_giris": [
+   "Fiyat yüksek hacimle aralık dibini kırar"
+  ],
+  "stop_loss": "Long: işlem aralığının dibi / günün dibi / ilk swing dibi. Short: aralığın hemen üstü.",
+  "kar_al": "1. hedef 1:1 (kısmi kâr, stop başa baş), 2. hedef 1:2; yakın direnç varsa orada. Short örneği swing zirvelerinde iz süren stop (3. swing'de çıkış).",
+  "iz_suren_stop": "Her yeni swing dip/zirvede stop takibi",
+  "zaman_cikisi": null,
+  "filtreler": [
+   "Kırılımda yüksek hacim (gerçek/sahte ayrımı)",
+   "Yakınlarda anlık direnç olmaması"
+  ],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": "Short örneği: tek günde yaklaşık %7",
+  "kodlanabilirlik": {
+   "puan": 2,
+   "gerekce": "Aralık ve kırılım net; 'yüksek hacim' eşiği kitapta sayısal değil, göreli hacim çarpanı varsayılır."
+  },
+  "belirsizlikler": [
+   "Hacim eşiği yok",
+   "Aralık süresi seçimi kullanıcıya bırakılmış"
+  ],
+  "uyumluluk_notu": "Hisse (NSE) odaklı; 5-15m'de çalışır, ≥5m uyumlu. Açılış/gap ve hacim verisi gerekir; 7/24 kripto'da 'seans açılışı' tanımı uyarlama ister. Forex'e özgü değil. Kripto için 'açılış' yerine UTC günü/seans açılışı seçilebilir.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "orb",
+   "acilis-araligi",
+   "kirilim",
+   "hacim"
+  ]
+ },
+ {
+  "kart_id": "daytrade__fiyat-ma20-kesisim__roy",
+  "ad": "Fiyat - 20 MA Kesişim (15 dk)",
+  "stil": "daytrade",
+  "kaynak": {
+   "pdf": "Day Trading - Rajiv LB Roy (71 sayfa) - @eseckal.pdf",
+   "sayfalar": [
+    28,
+    29,
+    30,
+    31
+   ]
+  },
+  "ozet": "Fiyat 20 periyotluk hareketli ortalamanın üstünde kapanınca (veya önceki mum zirvesi geçilince) long, altında kapanınca short; çıkış fiyatın MA'nın karşı tarafında kapanışıdır.",
+  "kategori": "trend_takip",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+   "islem": "15m",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "MA",
+    "parametreler": {
+     "periyot": 20,
+     "tip": "belirtilmemiş (SMA varsayımı)"
+    }
+   }
+  ],
+  "long_giris": [
+   "Mum 20 MA'nın üzerinde kapanır (iyi hacimle)",
+   "Agresif: hemen gir; temkinli: son mum zirvesi geçilince gir"
+  ],
+  "short_giris": [
+   "Mum 20 MA altında kapanır",
+   "Giriş kapanış mumunun dibinin hemen altı"
+  ],
+  "stop_loss": "Swing dip/son mum dibi (long); swing zirvesi veya uzun mumda aynı mum zirvesi (short). Küçük mumda stop'u girişe yapıştırma.",
+  "kar_al": "Fiyat MA'nın karşı tarafında kapanınca çık; ya da R:R'ye göre (örnek: risk 1,60 -> hedef 3,20 = 1:2).",
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 2,
+   "gerekce": "Net MA kuralı; stop ve giriş seçenekleri iki alternatifli, birini seçmek gerekir."
+  },
+  "belirsizlikler": [
+   "MA tipi belirtilmemiş",
+   "Stop seçim kuralı esnek"
+  ],
+  "uyumluluk_notu": "Hisse (NSE) odaklı; 5-15m'de çalışır, ≥5m uyumlu. Açılış/gap ve hacim verisi gerekir; 7/24 kripto'da 'seans açılışı' tanımı uyarlama ister. Forex'e özgü değil.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "ma-kesisim",
+   "20-ma",
+   "fiyat-ma"
+  ]
+ },
+ {
+  "kart_id": "daytrade__ema5-sma20-kesisim__roy",
+  "ad": "5 EMA / 20 SMA Kesişimi (15 dk)",
+  "stil": "daytrade",
+  "kaynak": {
+   "pdf": "Day Trading - Rajiv LB Roy (71 sayfa) - @eseckal.pdf",
+   "sayfalar": [
+    31,
+    32,
+    33
+   ]
+  },
+  "ozet": "5 EMA, 20 SMA'yı yukarı keserse long, aşağı keserse short. Çıkış 1:1 hedef veya bir mumun 5 EMA'nın karşı yanında kapanması.",
+  "kategori": "trend_takip",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+   "islem": "15m",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "EMA",
+    "parametreler": {
+     "periyot": 5
+    }
+   },
+   {
+    "ad": "SMA",
+    "parametreler": {
+     "periyot": 20
+    }
+   }
+  ],
+  "long_giris": [
+   "5 EMA, 20 SMA'yı yukarı keser",
+   "Giriş: önceki mum zirvesi geçilince"
+  ],
+  "short_giris": [
+   "5 EMA, 20 SMA'yı aşağı keser",
+   "Giriş: kesişim mumunun dibi altı"
+  ],
+  "stop_loss": "Long: swing dibinin altı (çok uzaksa giriş mumundan önceki dip). Short: günün zirvesi/swing zirvesi.",
+  "kar_al": "1:1 R:R veya mum 5 EMA'nın ters tarafında kapanınca tam çıkış.",
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": "Örnek: 15 Rs risk, 399'da kâr kapama",
+  "kodlanabilirlik": {
+   "puan": 3,
+   "gerekce": "Gösterge ve çıkış kuralları mekanik; 'kesin kural yok' denerek çıkış esnek bırakılmış."
+  },
+  "belirsizlikler": [
+   "Çıkış kuralı 'kişisel rahatlığa göre' bırakılmış"
+  ],
+  "uyumluluk_notu": "Hisse (NSE) odaklı; 5-15m'de çalışır, ≥5m uyumlu. Açılış/gap ve hacim verisi gerekir; 7/24 kripto'da 'seans açılışı' tanımı uyarlama ister. Forex'e özgü değil.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "ema5",
+   "sma20",
+   "ema-kesisim"
+  ]
+ },
+ {
+  "kart_id": "daytrade__macd-sinyal-kesisim__roy",
+  "ad": "MACD Sinyal Çizgisi Kesişimi (Trend Yönünde)",
+  "stil": "daytrade",
+  "kaynak": {
+   "pdf": "Day Trading - Rajiv LB Roy (71 sayfa) - @eseckal.pdf",
+   "sayfalar": [
+    34,
+    35,
+    36
+   ]
+  },
+  "ozet": "MACD ve sinyal çizgisi sıfırın üstündeyken MACD sinyali yukarı keserse long (altındayken aşağı keserse short); ters kesişimde çıkılır.",
+  "kategori": "momentum",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+   "islem": "5m",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "MACD",
+    "parametreler": {
+     "hizli": 12,
+     "yavas": 26,
+     "sinyal": 9
+    }
+   }
+  ],
+  "long_giris": [
+   "MACD ve Sinyal çizgisi sıfır çizgisinin üstünde",
+   "MACD, Sinyal'i yukarı keser",
+   "Düşüş trendinde alım yapılmaz"
+  ],
+  "short_giris": [
+   "MACD ve Sinyal sıfırın altında",
+   "MACD, Sinyal'i aşağı keser"
+  ],
+  "stop_loss": "Yakın swing dip/zirvesi; short örneğinde günün zirvesi veya swing zirvesi.",
+  "kar_al": "Sinyal çizgisi MACD'yi ters kesince çık.",
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 3,
+   "gerekce": "Tüm kurallar gösterge tabanlı ve mekanik."
+  },
+  "belirsizlikler": [
+   "Zaman dilimi kısıtı yok (5m ve günlük örnek)"
+  ],
+  "uyumluluk_notu": "Hisse (NSE) odaklı; 5-15m'de çalışır, ≥5m uyumlu. Açılış/gap ve hacim verisi gerekir; 7/24 kripto'da 'seans açılışı' tanımı uyarlama ister. Forex'e özgü değil.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "macd",
+   "sinyal-kesisim"
+  ]
+ },
+ {
+  "kart_id": "daytrade__supertrend-donus__roy",
+  "ad": "Supertrend Dönüş (Renk Değişimi) Stratejisi",
+  "stil": "daytrade",
+  "kaynak": {
+   "pdf": "Day Trading - Rajiv LB Roy (71 sayfa) - @eseckal.pdf",
+   "sayfalar": [
+    38,
+    39,
+    40,
+    41
+   ]
+  },
+  "ozet": "Supertrend rengi değişir ve mum yeni yönde göstergenin diğer yanında kapanırsa, renk değiştiren mumun zirvesi (short için dibi) kırılınca işlem açılır; Supertrend tekrar dönene dek taşınır.",
+  "kategori": "trend_takip",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+   "islem": "5m",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "Supertrend",
+    "parametreler": {
+     "parametre": "kitapta yok (ATR tabanlı)"
+    }
+   }
+  ],
+  "long_giris": [
+   "Supertrend kırmızıdan yeşile döner",
+   "Mum göstergenin üstünde kapanır (teyit)",
+   "Renk değiştiren mumun zirvesi geçilince al"
+  ],
+  "short_giris": [
+   "Supertrend yeşilden kırmızıya döner",
+   "Mumun dibi kırılınca sat"
+  ],
+  "stop_loss": "Hemen önceki swing dibi/zirvesi; çok genişse sinyal mumunun dibi/zirvesi.",
+  "kar_al": "Supertrend rengi tekrar dönünce çık.",
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [
+   "Yatay piyasada yanlış sinyal; hacim teyidi (örnek short)"
+  ],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 3,
+   "gerekce": "Gösterge sinyali + mum kırılımı net."
+  },
+  "belirsizlikler": [
+   "Supertrend ATR periyodu/çarpanı kitapta yok"
+  ],
+  "uyumluluk_notu": "Hisse (NSE) odaklı; 5-15m'de çalışır, ≥5m uyumlu. Açılış/gap ve hacim verisi gerekir; 7/24 kripto'da 'seans açılışı' tanımı uyarlama ister. Forex'e özgü değil.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "supertrend",
+   "trend-donus"
+  ]
+ },
+ {
+  "kart_id": "daytrade__supertrend-geri-cekilme__roy",
+  "ad": "Supertrend Geri Çekilme (Destek/Direnç) Girişi",
+  "stil": "daytrade",
+  "kaynak": {
+   "pdf": "Day Trading - Rajiv LB Roy (71 sayfa) - @eseckal.pdf",
+   "sayfalar": [
+    41,
+    42,
+    43,
+    44
+   ]
+  },
+  "ozet": "Trend içinde fiyat Supertrend çizgisine geri çekilip tepki verirse (pin bar/doji), önceki mum zirvesi (short: dibi) kırılınca trend yönünde işlem açılır.",
+  "kategori": "trend_takip",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+   "islem": "5m",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "Supertrend",
+    "parametreler": {
+     "parametre": "kitapta yok"
+    }
+   }
+  ],
+  "long_giris": [
+   "Supertrend yükselişte",
+   "Fiyat Supertrend'e dokunup destek alır",
+   "Fiyat önceki mum zirvesini geçince al (agresif: pin bar zirvesi)"
+  ],
+  "short_giris": [
+   "Supertrend düşüşte",
+   "Fiyat Supertrend'e dokunup direnç görür",
+   "Önceki mum dibi kırılınca sat"
+  ],
+  "stop_loss": "Anlık swing dibi / doji zirvesi.",
+  "kar_al": "Gösterge dönene dek veya uygun R:R; örnek short 1600'de çıkış.",
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 2,
+   "gerekce": "Dokunma ve 'tepki' tanımı sezgisel; mum içi temas + önceki mum kırılımı olarak kodlanabilir."
+  },
+  "belirsizlikler": [
+   "Dokunuş toleransı yok"
+  ],
+  "uyumluluk_notu": "Hisse (NSE) odaklı; 5-15m'de çalışır, ≥5m uyumlu. Açılış/gap ve hacim verisi gerekir; 7/24 kripto'da 'seans açılışı' tanımı uyarlama ister. Forex'e özgü değil.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "supertrend",
+   "pullback",
+   "geri-cekilme"
+  ]
+ },
+ {
+  "kart_id": "daytrade__geri-cekilme-fib-destek__roy",
+  "ad": "Geri Çekilme Girişi (Fibonacci/MA/Pivot Desteği)",
+  "stil": "daytrade",
+  "kaynak": {
+   "pdf": "Day Trading - Rajiv LB Roy (71 sayfa) - @eseckal.pdf",
+   "sayfalar": [
+    45,
+    46,
+    47,
+    48
+   ]
+  },
+  "ozet": "Güçlü trendde (haber/hacim destekli) düzeltmenin Fibonacci %38,2 / MA / Supertrend / pivot desteğinde tutunması beklenir; yakın direnç kırılınca trend yönünde giriş yapılır.",
+  "kategori": "destek_direnc",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+   "islem": "5m",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "Fibonacci",
+    "parametreler": {
+     "seviye": 0.382
+    }
+   },
+   {
+    "ad": "MA",
+    "parametreler": {
+     "periyot": "30 (günlük örnek)"
+    }
+   }
+  ],
+  "long_giris": [
+   "Önceki yükseliş dalgası üzerinde Fibonacci çizilir",
+   "Fiyat %38,2 gibi seviyede destek alır",
+   "Anlık direnç kırılınca al (örnek 713,50)"
+  ],
+  "short_giris": [],
+  "stop_loss": "Anlık swing dibi (destek hemen altı).",
+  "kar_al": "1:1'de pozisyonun yarısı, kalan için gün sonuna iz süren stop.",
+  "iz_suren_stop": "Kısmi kârdan sonra stop takibi",
+  "zaman_cikisi": null,
+  "filtreler": [
+   "Yakında direnç olmaması",
+   "Ana trendi destekleyen göstergeler",
+   "Hacim"
+  ],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 1,
+   "gerekce": "Destek seviyesi seçimi (Fib/MA/Supertrend/pivot) sübjektif."
+  },
+  "belirsizlikler": [
+   "Hangi destek aracı seçilecek belirsiz"
+  ],
+  "uyumluluk_notu": "Hisse (NSE) odaklı; 5-15m'de çalışır, ≥5m uyumlu. Açılış/gap ve hacim verisi gerekir; 7/24 kripto'da 'seans açılışı' tanımı uyarlama ister. Forex'e özgü değil.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "geri-cekilme",
+   "fibonacci",
+   "destek"
+  ]
+ },
+ {
+  "kart_id": "daytrade__rsi-asiri-dip-tersine__roy",
+  "ad": "Trend Tersi Dönüş (Destek/Direnç + RSI Aşırı Bölge)",
+  "stil": "daytrade",
+  "kaynak": {
+   "pdf": "Day Trading - Rajiv LB Roy (71 sayfa) - @eseckal.pdf",
+   "sayfalar": [
+    49,
+    50,
+    51,
+    52,
+    53
+   ]
+  },
+  "ozet": "Güçlü düşüşte hisse günlük/haftalık destekten dönüp RSI aşırı satımdaysa (RSI<10) 5 dk mum zirvesinden long; yükselişte dirençten dönüp aşırı alımdaysa kararsız mumun altından short.",
+  "kategori": "ortalamaya_donus",
+  "piyasa_rejimi": "volatil",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+   "islem": "5m",
+   "ust_filtre": "1D/1H"
+  },
+  "gostergeler": [
+   {
+    "ad": "RSI",
+    "parametreler": {
+     "periyot": "belirtilmemiş",
+     "asiri_satim": 10
+    }
+   }
+  ],
+  "long_giris": [
+   "Güçlü düşüş trendi",
+   "Günlük/haftalık destek seviyesine ulaşır",
+   "RSI < 10 (aşırı satım)",
+   "Destekten sıçrayınca son 5/15 dk mumun üstünden al"
+  ],
+  "short_giris": [
+   "Güçlü yükseliş",
+   "Saatlik+ grafikte direnç seviyesi",
+   "Direnç kırılmazsa/dönerse: doji, çekiç gibi kararsız mumun altından sat",
+   "RSI aşırı alım bölgesinde"
+  ],
+  "stop_loss": "Long: dibin hemen altı, çok sıkı; Short: son swing zirvesinin hemen üstü.",
+  "kar_al": "Kısmi kâr (örnek 10 Rs sonra), kalanı ORB'deki gibi iz süren stop; short için en az 1:2 R:R.",
+  "iz_suren_stop": "Swing bazlı stop takibi",
+  "zaman_cikisi": null,
+  "filtreler": [
+   "Destek/direnç için günlük-saatlik grafik"
+  ],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 1,
+   "gerekce": "Destek/direnç ve 'kararsız mum' yoruma açık; RSI<10 kriteri sadece long'da anılıyor."
+  },
+  "belirsizlikler": [
+   "RSI periyodu yok",
+   "Short için RSI eşiği sayısal değil"
+  ],
+  "uyumluluk_notu": "Hisse (NSE) odaklı; 5-15m'de çalışır, ≥5m uyumlu. Açılış/gap ve hacim verisi gerekir; 7/24 kripto'da 'seans açılışı' tanımı uyarlama ister. Forex'e özgü değil. Karşı trend: yüksek risk, stop sıkı.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "rsi",
+   "tersine-donus",
+   "destek-direnc"
+  ]
+ },
+ {
+  "kart_id": "daytrade__bayrak-formasyonu__roy",
+  "ad": "Boğa/Ayı Bayrağı Kırılımı",
+  "stil": "daytrade",
+  "kaynak": {
+   "pdf": "Day Trading - Rajiv LB Roy (71 sayfa) - @eseckal.pdf",
+   "sayfalar": [
+    54,
+    55,
+    56,
+    57
+   ]
+  },
+  "ozet": "Sert hacimli direk hareketi ve düşük hacimli bayrak konsolidasyonu sonrası, bayrağın trend çizgisi kırılınca yönde giriş; hedef direk yüksekliği kadar.",
+  "kategori": "formasyon",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+   "islem": "15m",
+   "ust_filtre": null
+  },
+  "gostergeler": [],
+  "long_giris": [
+   "Yüksek hacimli ani yükseliş (direk)",
+   "Düşük hacimli bayrak (üçgen/kama/kanal, min 2 mum)",
+   "Bayrağın üst trend çizgisi kırılır"
+  ],
+  "short_giris": [
+   "Düşüş direği",
+   "Bayrak konsolidasyonu",
+   "Alt trend çizgisi kırılır"
+  ],
+  "stop_loss": "Bayraktaki son swing dibi/zirvesi (agresif: son mumun dibi/zirvesi; oynaklığı hesaba kat).",
+  "kar_al": "Hedef: direk yüksekliği kadar; ilk hedefte kısmi kâr, kalan iz süren stop.",
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [
+   "Bayrakta düşük hacim"
+  ],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 1,
+   "gerekce": "Formasyonu 'görme' gerekiyor; swing/ATR ile yaklaşık kodlanabilir."
+  },
+  "belirsizlikler": [
+   "Bayrak süresi/derinliği sınırı yok"
+  ],
+  "uyumluluk_notu": "Hisse (NSE) odaklı; 5-15m'de çalışır, ≥5m uyumlu. Açılış/gap ve hacim verisi gerekir; 7/24 kripto'da 'seans açılışı' tanımı uyarlama ister. Forex'e özgü değil.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "bayrak",
+   "bull-flag",
+   "formasyon"
+  ]
+ },
+ {
+  "kart_id": "daytrade__ucgen-formasyonu__roy",
+  "ad": "Üçgen (Simetrik/Yükselen/Alçalan) Kırılımı",
+  "stil": "daytrade",
+  "kaynak": {
+   "pdf": "Day Trading - Rajiv LB Roy (71 sayfa) - @eseckal.pdf",
+   "sayfalar": [
+    58,
+    59,
+    60,
+    61,
+    62,
+    63
+   ]
+  },
+  "ozet": "Mevcut trend yönünde oluşan üçgen formasyonunun trend çizgisi hacimle kırılınca (%0,10 tampon ile) o yönde işlem; hedef üçgenin yüksekliği (3. kenar).",
+  "kategori": "formasyon",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+   "islem": "15m",
+   "ust_filtre": null
+  },
+  "gostergeler": [],
+  "long_giris": [
+   "Yükseliş trendinde simetrik/yükselen üçgen",
+   "Üst trend çizgisi kırılır, en az %0,10 tamponla"
+  ],
+  "short_giris": [
+   "Düşüş trendinde simetrik/alçalan üçgen",
+   "Alt trend çizgisi kırılır"
+  ],
+  "stop_loss": "Formasyonun son mumunun dibi/zirvesi (alternatif: ikinci son mum).",
+  "kar_al": "Hedef = üçgenin yüksekliği kadar (ilk mum yüksekliği vb.).",
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [
+   "İlk mumda yüksek hacim, sonra düşük"
+  ],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 1,
+   "gerekce": "Formasyon tespiti sübjektif."
+  },
+  "belirsizlikler": [
+   "Üçgen büyüklüğü tanımı belirsiz"
+  ],
+  "uyumluluk_notu": "Hisse (NSE) odaklı; 5-15m'de çalışır, ≥5m uyumlu. Açılış/gap ve hacim verisi gerekir; 7/24 kripto'da 'seans açılışı' tanımı uyarlama ister. Forex'e özgü değil.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "ucgen",
+   "kirilim",
+   "formasyon"
+  ]
+ }
+]

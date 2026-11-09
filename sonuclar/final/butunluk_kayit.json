@@ -1,0 +1,72 @@
+{
+ "surum": 1,
+ "kaydedildi": "2026-11-08T04:07:33Z",
+ "kod_commit": "4d2f9e2dfd0562172603391bcb49c7dbc38fa7ed",
+ "dosyalar": {
+  "set_dosyasi": {
+   "yol": "stratejiler/final_set.json",
+   "sha256": "f7d8b33d8932efe8aef95bc1ce6bcf216b27f16ab0ec4c8cd95a8d9fe46ad441",
+   "ad": "Final set: 7 strateji, kol payları, risk bütçesi, kilit testi ayarları"
+  },
+  "beklenti_araliklari": {
+   "yol": "sonuclar/final/beklenti_araliklari.csv",
+   "sha256": "4b3688f847d455ae7bd3017e1bdeb17d5658e26d6885e1e8afaeb4ec491d3692",
+   "ad": "Beklenti aralıkları (4/8 hafta persentiller, alarm eşikleri)"
+  },
+  "beklenti_islem_referansi": {
+   "yol": "sonuclar/final/beklenti_islem_referansi.csv",
+   "sha256": "791538534004e341fdc62caee49dd6eb878081bc894e3bffe8839a9b3fdc6180",
+   "ad": "Dersler için örneklem-dışı işlem referansı"
+  },
+  "guncel_ayarlar": {
+   "yol": "sonuclar/final/guncel_ayarlar.csv",
+   "sha256": "fd1262e9b82f919e874e82ca7af8d14089f573b330846c36d02dbd83636079e4",
+   "ad": "Paper'ın kullandığı güncel strateji ayarları"
+  },
+  "maliyet_tablosu": {
+   "yol": "sonuclar/evren/maliyet_tablosu.csv",
+   "sha256": "d32acbdd8b44641e97b52949a924b981bfd3270115a878c276c2f3205841274f",
+   "ad": "Sembol başına maliyet tablosu (mühürlü)"
+  },
+  "kilit_set": {
+   "yol": "sonuclar/kilit/set.csv",
+   "sha256": "ee547342109962040b2e3047491ffc08992848e130584e8304bd8e49bb6e48ae",
+   "ad": "Kilit testi set günlük serisi (backtest görünümü buna birebir bağlıdır)"
+  },
+  "kilit_sonuc": {
+   "yol": "sonuclar/kilit/sonuc.csv",
+   "sha256": "55f2fdcce3ce202549f14d6efb2865ebea96c90cf311e3253ac998d1ff09b480",
+   "ad": "Kilit testi strateji sonuçları (final set A grubu)"
+  }
+ },
+ "sanal": {
+  "maliyet_modeli": {
+   "sha256": "000305d09b9f3a15172162a01800b2a941f6059a6e1c77e60400c61c47a2dac2",
+   "ayrinti": {
+    "baslangic_sermaye": 10000.0,
+    "risk_yuzde": 1.0,
+    "kaldirac": 3.0,
+    "komisyon_taker_yuzde": 0.05,
+    "komisyon_maker_yuzde": 0.02,
+    "hedef_limit_emri": false,
+    "kayma_bps": 2.0,
+    "stop_kayma_bps": 5.0,
+    "limit_modu": "uygula",
+    "toplam_risk_tavani_yuzde": null,
+    "max_pozisyon": null,
+    "maliyet_sembol": null
+   }
+  },
+  "sert_limitler": {
+   "sha256": "bc2518d3519ce6b854bd425183c37bca79e8ef594ce09e3c1d19190b822c264b",
+   "ayrinti": {
+    "islem_basi_max_risk_yuzde": 1.0,
+    "gunluk_max_kayip_yuzde": 3.0,
+    "max_kaldirac": 3.0,
+    "kill_switch_dusus_yuzde": 20.0,
+    "portfoy_toplam_risk_yuzde": 5.0
+   }
+  }
+ },
+ "not": "Bu kayıt butunluk.json'daki 'kayıtlı değer'dir. Güncellemek kullanıcı kararıdır."
+}

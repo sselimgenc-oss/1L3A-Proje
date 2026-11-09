@@ -1,0 +1,20 @@
+yeni_aile,kaynak_kartlar,yeni_strateji_adi,stil,durum,gerekce
+yeni__adx-seviye-durumu,github_g2_kripto_bot:tulip-adx,dis__adx-seviye-durumu,daytrade,kodlandi,"ADX(15) 30 üstüne çıkış long, 20 altına iniş short; kesişim olayı olarak kodlandı"
+yeni__aroon-uc-deger-ters-yon,github_g2_kripto_bot:aroon_public,dis__aroon-uc-deger,daytrade,kodlandi,Aroon(46) uç değerde karşı yön; çıkış kaynakta yok -> 24 mum zaman çıkışı + ATR stop
+yeni__asiri-bolge-sonrasi-osilator-kesisimi,github_g2_kripto_bot:RSI-PHA;github_g5_mt_pine:MACD + RSI;github_g5_mt_pine:ADX + Stokastik,dis__asiri-bolge-osilator-kesisimi,daytrade,kodlandi,"iki mod (rsi_macd, stoch_adx); RSI-PHA EMA koşulları eksik olduğundan kodlanmadı"
+yeni__cci-stochrsi-donus,github_g2_kripto_bot:cci_srsi,dis__cci-stochrsi-donus,daytrade,kodlandi,"CCI+StochRSI ikili dönüş, EMA eğim rejimi; hedef 1.5R varsayım"
+yeni__gosterge-oy-toplami-hedef-pozisyon,github_g2_kripto_bot:MultiSignalStrategy,dis__gosterge-oy-toplami,daytrade,kodlandi,"skor eşiğiyle giriş, skor sıfıra dönünce çıkış; pozisyon büyüklüğü uygulanmaz"
+yeni__hafta-sonu-bosluk-doldurma,github_g2_kripto_bot:momentum:weekendGap,dis__hafta-sonu-bosluk,daytrade,kodlandi,"Cuma 20 UTC referans, Pazar 22 UTC ilk mum; kriptoda gerçek boşluk yok, TradFi için anlamlı"
+yeni__iki-gosterge-egimi-ayni-yon,github_g2_kripto_bot:Bro-StochRSI-ADX-DI;ao-fab-base;hma-fab-base;trix-fab,dis__iki-gosterge-egimi,daytrade,kodlandi,4 mod; ADOSC yerine HMA (hacim yok); %2 kârdan sonra stop yukarı -> 1R başabaş
+yeni__lineer-regresyon-cizgisi-rsi-dip,github_g2_kripto_bot:lsma,dis__linreg-rsi-dip,daytrade,kodlandi,ATR eşiği %0.01 anlamsız -> %0.2 varsayım
+yeni__momentum-ema-dizilim-9-bar,github_g5_mt_pine:2MOMEMA,dis__momentum-ema-dizilim,daytrade,kodlandi,1h varsayım; çıkış EMA dizilimi bozulunca + ATR stop
+yeni__obv-onculu-fiyat-gecikmesi,github_g2_kripto_bot:momentum:obvLead,dis__obv-onculu-fiyat,daytrade,kodlandi,3xATR izleyen stop CikisAyarlari ile
+yeni__pump-mumu-devam-tek-giris,github_g2_kripto_bot:Martingale V3 giris kurali,dis__pump-mumu-devam,daytrade,kodlandi,ekleme/katlama kodlanmadı; zirveden %1 geri çekilme 1.5 ATR izleyen stopla yaklaşıldı; -%5 stop olarak alındı
+yeni__rsi-boga-ayi-rejim-esikleri,github_g2_kripto_bot:RSI_BULL_BEAR ailesi;NEO;MK_RSI_BULL_BEAR,dis__rsi-boga-ayi-rejim,daytrade,kodlandi,"üç rejimli RSI; ADX kaydırma, pingpong, MK, BB, Combination, STC varyantları kodlanmadı"
+yeni__sma400-sapma-choppiness-tukenme,github_g2_kripto_bot:momentum:exhaustion,dis__sma400-tukenme,daytrade,kodlandi,1.5 ATR izleyen stop
+yeni__tepeden-dusus-yuzdesi-dip-alim,github_g2_kripto_bot:Martingale V2;Dave;saichovsky;github_g1_freqtrade:NFI,dis__tepeden-dusus-dip,daytrade,kodlandi,"V2/Dave çekirdeği kodlandı; saichovsky (işlem geçmişi) ve NFI MTF şartları kodlanmadı, Williams %R isteğe bağlı filtre; stop %4 varsayım"
+yeni__uo-obv-dip,github_g2_kripto_bot:ult-obv-fab,dis__uo-obv-dip,daytrade,kodlandi,OBV penceresi belirsiz -> obv_n mumluk artış
+yeni__yuzde-zigzag-donus,github_g2_kripto_bot:custom-fab;trust_distrust,dis__yuzde-zigzag,daytrade,kodlandi,nedensel onaylı yüzde zigzag (kapanış bazlı); trust_distrust panik/açgözlülük hedefi kodlanmadı
+yeni__alligator-dizilim-gator,github_g5_mt_pine:EA31337 Alligator;EA31337 Gator,dis__alligator-dizilim,daytrade,kodlandi,pip eşiği ATR çarpanına çevrildi; MT ileri kaydırması yok (nedensel)
+yeni__andean-osilator-teyitli,github_g5_mt_pine:2MAAOS;AFAOSMD;DHLAOS,dis__andean-osilator,daytrade,kodlandi,yalnız 2MAAOS kodlandı; AFAOSMD ve DHLAOS (EA'ya özgü ters sinyal) kodlanmadı; Grid yok
+yeni__bb-stoch-gu-orani-dip,github_g2_kripto_bot:2xTheMarket-min;bear-market,dis__bb-stoch-gu-dip,daytrade,kodlandi,GU oranı kaynaktaki kapanış farkları toplamı oranıyla tanımlandı; mutlak EMA-fiyat farkı ve kademeli hedef kodlanmadı

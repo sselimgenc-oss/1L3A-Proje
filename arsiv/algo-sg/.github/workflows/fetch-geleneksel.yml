@@ -1,0 +1,27 @@
+name: fetch-geleneksel
+on:
+  push:
+    branches-ignore: [main, kagit-durum]
+    paths: [".github/workflows/fetch-geleneksel.yml", "scripts/fetch_yf.py"]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with: { ref: "${{ github.ref_name }}" }
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - run: pip install yfinance pandas
+      - run: python scripts/fetch_yf.py data_gel
+      - name: Commit data
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data_gel
+          git commit -m "Geleneksel piyasa günlük verisi (Mag7, BIST10, altın, petrol)" || exit 0
+          git pull --rebase origin "${{ github.ref_name }}"
+          git push origin "HEAD:${{ github.ref_name }}"

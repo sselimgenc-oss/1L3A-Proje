@@ -1,0 +1,25 @@
+[
+ {
+  "kart_id": "swing__parabolik-sar-donus__make",
+  "parametreler": {
+   "gosterge": "psar",
+   "psar_adim": 0.02,
+   "psar_maks": 0.2,
+   "rsi_esik": 0.0
+  },
+  "cikis_ayarlari": null,
+  "not": "Stop = SAR; çıkış SAR'ın karşı tarafa geçmesi."
+ },
+ {
+  "kart_id": "daytrade__rsi-supertrend-pozisyonel__singhal",
+  "parametreler": {
+   "gosterge": "supertrend",
+   "atr_periyot": 10,
+   "carpan": 3.0,
+   "rsi_periyot": 14,
+   "rsi_esik": 60.0
+  },
+  "cikis_ayarlari": null,
+  "not": "YAKLAŞIK: kart RSI 60'ı geçişi tetikler; sınıf Supertrend dönüş mumunda RSI>60 arar. Supertrend parametreleri kartta yok."
+ }
+]

@@ -1,0 +1,65 @@
+# Swing kağıt al-sat botu (S1 geri çekilme + S2 kırılım + S3 aşırı satım, 10.000$ sanal, 60 gün).
+# Günde 2 kez çalışır (00:23 UTC: kripto, BIST ve ABD günlük mumları kapanmış olur; 12:23 UTC yedek). Her çalıştırmada
+# kağıt dönemi başından bugüne tüm KAPANMIŞ günlük mumlar backtest koduyla birebir yeniden oynatılır; çalıştırma
+# kaçsa bile işlem kaçmaz. Durum/kayıtlar ayrı dalda: kagit-durum (main kirlenmez). Günlük rapor GitHub issue'ya yazılır.
+name: kagit-al-sat
+on:
+  schedule:
+    - cron: "23 0,12 * * *"  # saat başı yoğun; :23. Ücretsiz kota diğer botlarla ortak (~120 dk/ay)
+  workflow_dispatch:
+permissions:
+  contents: write
+  issues: write
+concurrency:
+  group: kagit-swing
+  cancel-in-progress: false
+jobs:
+  calis:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Durum dalını hazırla
+        run: |
+          git config --global user.name "kagit-bot"
+          git config --global user.email "kagit-bot@users.noreply.github.com"
+          if git ls-remote --exit-code --heads origin kagit-durum >/dev/null; then
+            git fetch -q origin kagit-durum
+            git worktree add -q -B kagit-durum kagit_durum FETCH_HEAD
+          else
+            git worktree add -q --orphan -b kagit-durum kagit_durum
+          fi
+          if [ -f kagit_durum/BITTI ]; then echo "Kağıt dönemi bitti; çalıştırma atlanıyor."; echo "SKIP=1" >> $GITHUB_ENV; fi
+      - uses: actions/setup-python@v5
+        if: env.SKIP != '1'
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: kagit/gereksinimler.txt
+      - if: env.SKIP != '1'
+        run: pip install -q -r kagit/gereksinimler.txt
+      - name: Güncel veriyi indir (Binance + Yahoo)
+        if: env.SKIP != '1'
+        run: python scripts/fetch_data.py
+      - name: Kağıt al-sat motoru
+        if: env.SKIP != '1'
+        run: python -m kagit.motor --durum kagit_durum
+      - name: Durumu kaydet
+        if: env.SKIP != '1'
+        run: |
+          cd kagit_durum
+          git add -A
+          git commit -q -m "durum $(date -u +%FT%H:%MZ)" || exit 0
+          git push -q origin kagit-durum
+      - name: Günlük raporu GitHub issue'ya yaz
+        if: env.SKIP != '1' && hashFiles('kagit_durum/gunluk_rapor.md') != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          baslik="Kağıt al-sat raporu (swing-sg S1+S2+S3, 10.000 USD)"
+          n=$(gh issue list --state open --limit 50 --json number,title -q ".[] | select(.title==\"$baslik\") | .number" | head -1)
+          if [ -z "$n" ]; then
+            n=$(gh issue create --title "$baslik" --body "swing-sg kağıt al-sat botunun (S1 geri çekilme, S2 kırılım, S3 aşırı satım; haftalık yön + günlük işlem) günlük raporları bu konuya yazılır. Gerçek para yoktur." | grep -o '[0-9]*$')
+          fi
+          gh issue comment "$n" --body-file kagit_durum/gunluk_rapor.md
+          cd kagit_durum && git rm -q gunluk_rapor.md && git commit -q -m "rapor gönderildi" && git push -q origin kagit-durum

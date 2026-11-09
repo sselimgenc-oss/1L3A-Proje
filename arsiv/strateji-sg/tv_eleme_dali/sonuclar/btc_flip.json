@@ -1,0 +1,47 @@
+{
+ "ad": "btc_flip",
+ "pine_id": "XGqSzuxJ",
+ "tf": "1h",
+ "evren": [
+  "kripto"
+ ],
+ "neden": "Betik 1s için (başlık: BTC, 1H); kripto saatlik.",
+ "olcut": {
+  "n": 2513,
+  "kar": 242725.4318626959,
+  "pf": 3.3104876594016157,
+  "sharpe": 0.6485445356732372,
+  "beklenti_R": 2.6553955874084556,
+  "kazanma": 0.1547950656585754,
+  "maxdd": 0.770702662044464,
+  "dd_gun": 1984,
+  "cagr": 0.5144904792368754,
+  "calmar": 0.6675602726894344,
+  "psr": 0.9996110022918852,
+  "tutma_gun": 0.5,
+  "ort_islem_getiri": 0.03840460203544688,
+  "netR_toplam": 6673.009111157448,
+  "sharpe_egitim": 0.7772946378151139,
+  "sharpe_oos": -0.23089722270524968,
+  "oos_kar": -4784.4596754819795,
+  "tur": "gun",
+  "pf_maliyet2x": 3.0186372138278594,
+  "komsu_n": 24,
+  "komsu_karda": 1.0,
+  "enstr_n": 14,
+  "enstr_karda": 0.5,
+  "maks_kor": 0.1256192880094141
+ },
+ "kurallar": {
+  "1_islem_sayisi": true,
+  "2_maks_dusus<=20": false,
+  "3_beklenti>=0.15R": true,
+  "4a_kf>=1.3": true,
+  "4b_sharpe>=1": false,
+  "5_oos": false,
+  "6_maliyet2x_kf>=1.1": true,
+  "7_komsu>=70": true,
+  "8_enstr>=60": false
+ },
+ "gecti": false
+}

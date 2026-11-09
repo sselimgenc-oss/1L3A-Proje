@@ -1,0 +1,435 @@
+[
+  {
+    "kart_id": "daytrade__dusmus-melek__christensen",
+    "ad": "Fallen Angel (Düşmüş Melek) — Açılış Sonrası Konsolidasyon Kırılımı",
+    "stil": "daytrade",
+    "kaynak": {
+      "pdf": "Day_Trading_-_Carole_Christensen_88_sayfa.pdf",
+      "sayfalar": [
+        7,
+        8,
+        9
+      ]
+    },
+    "ozet": "Haber nedeniyle gap yapan düşük float hisse açılışta yükselip sert satılır; önemli bir seviyede (pre-market dip, günlük/5m ortalamalar) konsolide olduktan sonra, yüksek hacimle yeni 5m/1m zirve yapınca long alınır.",
+    "kategori": "kirilim",
+    "piyasa_rejimi": "volatil",
+    "orijinal_piyasa": "hisse",
+    "zaman_dilimi": {
+      "islem": "5m",
+      "ust_filtre": "1m"
+    },
+    "gostergeler": [
+      {
+        "ad": "Hacim",
+        "parametreler": {}
+      }
+    ],
+    "long_giris": [
+      "Hisse haber nedeniyle gap yapmış, düşük float (yaklaşık 20 milyon altı), pre-market hacmi > 1 milyon",
+      "Açılışta sert düşüş, sonra önemli seviye (pre-market dibi veya günlük/5m hareketli ortalama) etrafında konsolidasyon",
+      "Konsolidasyon sonrası yüksek hacimle (önceki mumlardan belirgin yüksek) yeni 5m veya 1m yüksek"
+    ],
+    "short_giris": [],
+    "stop_loss": "Konsolidasyon bölgesinin altı",
+    "kar_al": "VWAP, tam sayı seviyeleri, pre-market seviyeleri veya diğer belirgin seviyeler",
+    "iz_suren_stop": null,
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Hacmi düşük hisselerden uzak dur (pump and dump riski)",
+      "Belirgin destek/konsolidasyon yoksa işlem yok"
+    ],
+    "pozisyon_risk": "Küçük pozisyon (10 doların altı hisselerde yaklaşık 4.000 hisse); önce simülatörde dene",
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Gap/float/konsolidasyon/yüksek hacim tanımları yoruma açık, sayısal eşik yok; hisse tarayıcısı gerekir."
+    },
+    "belirsizlikler": [
+      "'Yüksek hacim' sayısal eşiği yok",
+      "Konsolidasyon tanımı yok",
+      "Kar hedefi seçimi öznel"
+    ],
+    "uyumluluk_notu": "ABD hisse (düşük float/gap hisseleri) için; hacim, tarayıcı ve gün içi VWAP gerekir. Kripto/forex perpetual'da gün başı VWAP ile uyarlanabilir ama hisse tarayıcısı/gap/float kavramları taşınmaz. 5m uygun.",
+    "varyantlar": [],
+    "anahtar_kelimeler": [
+      "gap",
+      "konsolidasyon",
+      "hacim",
+      "dusuk-float",
+      "vwap"
+    ]
+  },
+  {
+    "kart_id": "daytrade__abcd-deseni__christensen",
+    "ad": "ABCD / Ters ABCD Deseni (C noktası geri çekilme girişi)",
+    "stil": "daytrade",
+    "kaynak": {
+      "pdf": "Day_Trading_-_Carole_Christensen_88_sayfa.pdf",
+      "sayfalar": [
+        9,
+        10,
+        11
+      ]
+    },
+    "ozet": "A'dan B'ye güçlü hareket, B'den C'ye geri çekilme; geri çekilme C'de destek bulunca (1m grafikte tutunma) D hedefi için girilir. Ters ABCD kısa tarafın aynasıdır.",
+    "kategori": "formasyon",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "hisse",
+    "zaman_dilimi": {
+      "islem": "1m",
+      "ust_filtre": "5m (stop/hedef için)"
+    },
+    "gostergeler": [],
+    "long_giris": [
+      "Güçlü A->B yükselişi (yüksek hacimli, trend yönünde)",
+      "B'den sonra geri çekilme; fiyatın C seviyesinde destek bulduğu (1m grafikte tutunma) görülür",
+      "C'ye yakın al, hedef D veya üstü (isteğe bağlı: D'de teyit için bekleyerek al)"
+    ],
+    "short_giris": [
+      "Ters ABCD: aynı yapı aşağı yönlü; yeni dibe doğru giderken (örn. piyasa öncesi seviye altında tutunamama) kısa"
+    ],
+    "stop_loss": "C noktasının altı (kısa için 5m zirvenin üstü)",
+    "kar_al": "D noktasında pozisyonun yarısı satılır, stop girişe çekilir; kalan 5m yeni dip yapana veya 200 SMA'ya kadar",
+    "iz_suren_stop": "D'de yarım satış sonrası stop giriş fiyatına",
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Kovalamayın: B noktasında girilmez, geri çekilme beklenir",
+      "Stop yeri bilinmeden girilmez"
+    ],
+    "pozisyon_risk": "Stop mesafesine göre boyut; küçük boyut",
+    "iddia_edilen_performans": "Örnek: Amicus (FOLD) kısa işlemde 595 dolar kâr",
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "A, B, C, D noktaları ve 'destek bulma' görsel yoruma dayalı; kaba bir zigzag/swing algoritmasıyla yaklaşık kodlanabilir."
+    },
+    "belirsizlikler": [
+      "Geri çekilme oranı (Fibonacci vb.) verilmemiş",
+      "Destek bulma tanımı belirsiz"
+    ],
+    "uyumluluk_notu": "Mantık her piyasaya uyarlanabilir (swing zigzag ile); 1m yerine 5m kullanılmalı; hacim yardımcı.",
+    "varyantlar": [
+      "Hesap girişi D'de teyitle (daha az risk, daha az ödül)"
+    ],
+    "anahtar_kelimeler": [
+      "abcd",
+      "geri-cekilme",
+      "destek",
+      "formasyon",
+      "200-sma"
+    ]
+  },
+  {
+    "kart_id": "daytrade__boga-bayragi-dusuk-float__christensen",
+    "ad": "Boğa Bayrağı Scalp (düşük float hisse)",
+    "stil": "daytrade",
+    "kaynak": {
+      "pdf": "Day_Trading_-_Carole_Christensen_88_sayfa.pdf",
+      "sayfalar": [
+        11,
+        12,
+        13,
+        14,
+        15
+      ]
+    },
+    "ozet": "Direk (güçlü yeni gün zirvesi) sonrası yatay konsolidasyon (bayrak) oluşur; konsolidasyon zirvesi aşıldığında, 1m/5m yeni zirve ve yüksek hacimle long scalp yapılır.",
+    "kategori": "formasyon",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "hisse",
+    "zaman_dilimi": {
+      "islem": "1m",
+      "ust_filtre": "5m"
+    },
+    "gostergeler": [],
+    "long_giris": [
+      "Direk: hisse gün içinde yeni yüksek yapmış, hacim yüksek (tarayıcıdan)",
+      "Konsolidasyon (bayrak): birkaç küçük mum yatay",
+      "Fiyat tüm konsolidasyon mumlarının zirvesini aşar; ideal: 1m ve 5m aynı anda yeni yüksek, yüksek hacim"
+    ],
+    "short_giris": [],
+    "stop_loss": "Konsolidasyon bölgesinin altı",
+    "kar_al": "Yarım pozisyon yukarıda satılır, stop girişe çekilir; fiyat yeni 1m/5m dip yapınca kalan çıkılır",
+    "iz_suren_stop": "Yarım satıştan sonra stop girişe",
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Hisseyi kovalamayın (yükselirken girmeyin)",
+      "Ayı bayrağı (short) işlem yapılmaz: düşük float short squeeze riski",
+      "Yalnız 10 dolar altı düşük float hisseler"
+    ],
+    "pozisyon_risk": "Küçük boyut",
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "Direk/bayrak tanımları yoruma açık ama 'konsolidasyon zirvesi kırılımı + stop konsolidasyon altı' mekanik."
+    },
+    "belirsizlikler": [
+      "Konsolidasyon uzunluğu ve derinliği verilmemiş",
+      "Hacim eşiği yok"
+    ],
+    "uyumluluk_notu": "ABD hisse (düşük float/gap hisseleri) için; hacim, tarayıcı ve gün içi VWAP gerekir. Kripto/forex perpetual'da gün başı VWAP ile uyarlanabilir ama hisse tarayıcısı/gap/float kavramları taşınmaz. 5m uygun.",
+    "varyantlar": [],
+    "anahtar_kelimeler": [
+      "boga-bayragi",
+      "konsolidasyon",
+      "kirilim",
+      "scalp"
+    ]
+  },
+  {
+    "kart_id": "daytrade__acilis-araligi-kirilimi__christensen",
+    "ad": "Açılış Aralığı Kırılımı (ORB 5/15/30/60 dk)",
+    "stil": "daytrade",
+    "kaynak": {
+      "pdf": "Day_Trading_-_Carole_Christensen_88_sayfa.pdf",
+      "sayfalar": [
+        16,
+        17,
+        18
+      ]
+    },
+    "ozet": "Açılışın ilk 5 dakikasının (veya 15/30/60 dk) yüksek-düşük aralığı belirlenir; aralığın üstü kırılırsa long, altı kırılırsa short girilir.",
+    "kategori": "kirilim",
+    "piyasa_rejimi": "herhangi",
+    "orijinal_piyasa": "hisse",
+    "zaman_dilimi": {
+      "islem": "5m",
+      "ust_filtre": "Günlük seviyeler"
+    },
+    "gostergeler": [],
+    "long_giris": [
+      "Açılışın ilk 5 dakikasının (veya 15/30/60 dk) yüksek/düşüğü belirlenir",
+      "Fiyat aralık zirvesini yukarı kırar -> long"
+    ],
+    "short_giris": [
+      "Fiyat aralık dibini aşağı kırar -> short"
+    ],
+    "stop_loss": "Long için VWAP altında kapanış; short için VWAP üstüne kırılım",
+    "kar_al": "Sonraki teknik seviye: ön piyasa kritik günlük seviyeler, hareketli ortalamalar veya önceki gün kapanışı",
+    "iz_suren_stop": null,
+    "zaman_cikisi": "Seviye yoksa zayıflık sinyalinde (long: yeni 5m dip; short: yeni 5m yüksek) çıkış",
+    "filtreler": [
+      "Orta/büyük sermayeli, hacmi yüksek hisseler",
+      "Açılış aralığı ATR'ye göre normal günlük aralıktan belirgin küçük olmalı",
+      "Gap'li düşük float hisselerde önerilmez"
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 3,
+      "gerekce": "Aralık, kırılım, VWAP stop ve zayıflık çıkışı net ve ölçülebilir; kar hedefi seviye seçimi hafif yorumlu."
+    },
+    "belirsizlikler": [
+      "'Aralık ATR'den küçük' için oran verilmemiş",
+      "Kar hedefi seçimi seviyeler arasında seçim gerektirir"
+    ],
+    "uyumluluk_notu": "Günlük seans açılışı olan piyasalarda (hisse, endeks vadeli) kullanılır; 24 saatlik kripto/forex'te seans başına uyarlanmalı (örn. UTC günü ilk 5/15/30 dk). VWAP ve hacim gerekir.",
+    "varyantlar": [
+      "15, 30 ve 60 dk ORB"
+    ],
+    "anahtar_kelimeler": [
+      "acilis-araligi",
+      "orb",
+      "vwap",
+      "kirilim",
+      "atr"
+    ]
+  },
+  {
+    "kart_id": "daytrade__vwap-sahte-kirilim__christensen",
+    "ad": "VWAP Sahte Kırılımı (VWAP Reclaim / Loss)",
+    "stil": "daytrade",
+    "kaynak": {
+      "pdf": "Day_Trading_-_Carole_Christensen_88_sayfa.pdf",
+      "sayfalar": [
+        19,
+        20,
+        21,
+        22,
+        23
+      ]
+    },
+    "ozet": "Sabahın geç saatlerinde (10:30'dan sonra) hisse VWAP altına kısa süreli sarkıp hemen VWAP üstüne dönerse long (alıcılar kontrolde, shortlar sıkışır); VWAP'yi kaybedip geri alamazsa short.",
+    "kategori": "ortalamaya_donus",
+    "piyasa_rejimi": "herhangi",
+    "orijinal_piyasa": "hisse",
+    "zaman_dilimi": {
+      "islem": "5m",
+      "ust_filtre": null
+    },
+    "gostergeler": [
+      {
+        "ad": "VWAP",
+        "parametreler": {}
+      }
+    ],
+    "long_giris": [
+      "Hisse güçlü gün geçiriyor, VWAP üstünde işlem görüyor",
+      "Fiyat VWAP'nin altına iner ama hemen geri sıçrayıp VWAP üstüne çıkar (sahte kırılım)",
+      "10:30'dan sonra (geç sabah/öğlen) gerçekleşen kurulum"
+    ],
+    "short_giris": [
+      "Güçlü hisse VWAP'yi kaybeder ve VWAP üstüne geri dönemez (alıcılar tükenmiş)",
+      "Giriş VWAP kaybedilirken veya kaybedildikten sonra, VWAP'nin altında"
+    ],
+    "stop_loss": "Long: VWAP'nin biraz altı; short: VWAP üstü",
+    "kar_al": "Pozisyonun bir kısmı VWAP civarında/teknik seviyede alınır, kalan VWAP squeeze/pop için tutulur",
+    "iz_suren_stop": "Kar alındığında stop girişe",
+    "zaman_cikisi": null,
+    "filtreler": [
+      "Sabah 10:30 ile öğlen 12 arası tercih edilir",
+      "İzleme listesindeki hisseler"
+    ],
+    "pozisyon_risk": "Küçük hisselerde küçük boyut",
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "VWAP kırılma/geri dönme mekanik; 'güçlü hisse' ve 'hemen geri' kriterleri yorum gerektirir."
+    },
+    "belirsizlikler": [
+      "'Hemen geri' kaç mum olduğu verilmemiş",
+      "Kar hedefi net değil"
+    ],
+    "uyumluluk_notu": "ABD hisse (düşük float/gap hisseleri) için; hacim, tarayıcı ve gün içi VWAP gerekir. Kripto/forex perpetual'da gün başı VWAP ile uyarlanabilir ama hisse tarayıcısı/gap/float kavramları taşınmaz. 5m uygun. VWAP gün başından hesaplanmalı.",
+    "varyantlar": [],
+    "anahtar_kelimeler": [
+      "vwap",
+      "sahte-kirilim",
+      "reclaim",
+      "kisa-sikisma"
+    ]
+  },
+  {
+    "kart_id": "daytrade__vwap-tersine-donus__christensen",
+    "ad": "VWAP Tersine Dönüş (VWAP'e geri dönüş)",
+    "stil": "daytrade",
+    "kaynak": {
+      "pdf": "Day_Trading_-_Carole_Christensen_88_sayfa.pdf",
+      "sayfalar": [
+        23,
+        24
+      ]
+    },
+    "ozet": "Açılış aralığı kırılımı sonrası hisse yeni 5m dip/zirve yapamazsa (zayıflık) ters dönüp VWAP'ye doğru hareket eder; bu dönüşü yakalayan işlem.",
+    "kategori": "ortalamaya_donus",
+    "piyasa_rejimi": "volatil",
+    "orijinal_piyasa": "hisse",
+    "zaman_dilimi": {
+      "islem": "5m",
+      "ust_filtre": null
+    },
+    "gostergeler": [
+      {
+        "ad": "VWAP",
+        "parametreler": {}
+      }
+    ],
+    "long_giris": [
+      "VWAP altındaki hisse yeni 5m (gün) dibi yapmaz, 5m grafikte daha yüksek dipler/zirveler oluşturur (satıcılar tükendi) -> long, hedef VWAP"
+    ],
+    "short_giris": [
+      "VWAP üstündeki hisse yeni zirve üretemez (alıcılar tükenmiş) -> short, hedef VWAP"
+    ],
+    "stop_loss": "Kitapta sayısal yok",
+    "kar_al": "VWAP seviyesi; pozisyonun bir kısmı orada alınır, kalan VWAP squeeze için tutulur",
+    "iz_suren_stop": "Kar alındığında stop girişe",
+    "zaman_cikisi": null,
+    "filtreler": [],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 1,
+      "gerekce": "Zayıflık/yeni dip yapamama kuralı ölçülebilir ama stop/giriş tetikleyicisi net değil."
+    },
+    "belirsizlikler": [
+      "Stop yeri verilmemiş",
+      "Giriş tetikleyicisi (hangi mum) belirsiz"
+    ],
+    "uyumluluk_notu": "ABD hisse (düşük float/gap hisseleri) için; hacim, tarayıcı ve gün içi VWAP gerekir. Kripto/forex perpetual'da gün başı VWAP ile uyarlanabilir ama hisse tarayıcısı/gap/float kavramları taşınmaz. 5m uygun.",
+    "varyantlar": [],
+    "anahtar_kelimeler": [
+      "vwap",
+      "tersine-donus",
+      "ortalamaya-donus"
+    ]
+  },
+  {
+    "kart_id": "daytrade__vwap-ema-trend__christensen",
+    "ad": "VWAP + 9/20 EMA Trend Devamı (Trade2Hold / All Day Fade)",
+    "stil": "daytrade",
+    "kaynak": {
+      "pdf": "Day_Trading_-_Carole_Christensen_88_sayfa.pdf",
+      "sayfalar": [
+        24,
+        25,
+        26,
+        27
+      ]
+    },
+    "ozet": "Sabahın geç saatlerinde VWAP'yi tutmuş (veya kaybetmiş) hisse trend yönünde 9 veya 20 EMA'ya geri çekilince, EMA'dan sıçrama teyidiyle trend yönünde girilir; EMA kırılana kadar tutulur.",
+    "kategori": "trend_takip",
+    "piyasa_rejimi": "trend",
+    "orijinal_piyasa": "hisse",
+    "zaman_dilimi": {
+      "islem": "5m",
+      "ust_filtre": "1m"
+    },
+    "gostergeler": [
+      {
+        "ad": "VWAP",
+        "parametreler": {}
+      },
+      {
+        "ad": "EMA",
+        "parametreler": {
+          "periyot": 9
+        }
+      },
+      {
+        "ad": "EMA",
+        "parametreler": {
+          "periyot": 20
+        }
+      }
+    ],
+    "long_giris": [
+      "Hisse VWAP'nin üstünde (VWAP'yi tuttu) ve 1m/5m 9 EMA ve 20 EMA üstünde",
+      "Fiyat 9 veya 20 EMA'ya geri çekilip destek bulur (teyit), EMA'ya yakın al"
+    ],
+    "short_giris": [
+      "Hisse VWAP'yi geç sabah kaybetti, 9/20 EMA altında",
+      "Fiyat EMA'ya geri çekilip direnç görür, EMA'ya yakın short"
+    ],
+    "stop_loss": "Long: ortalamanın 5-10 sent altı veya mum EMA altında kapanış; short: ortalamanın üstü",
+    "kar_al": "Hisse ortalamadan çok uzaklaşırsa 1/4 veya yarım pozisyonda kâr al; kalan EMA kırılana kadar",
+    "iz_suren_stop": "İz süren stop zorunlu değil; trend EMA kırılana kadar izlenir",
+    "zaman_cikisi": "EMA kırılınca çık",
+    "filtreler": [
+      "Açılışta değil; düşük oynaklıkta sabahın geç saatleri ve öğlen",
+      "20 EMA genelde daha güçlü destek/direnç"
+    ],
+    "pozisyon_risk": null,
+    "iddia_edilen_performans": null,
+    "kodlanabilirlik": {
+      "puan": 2,
+      "gerekce": "EMA/VWAP şartları ve stop net; geri çekilme 'teyidi' yorum gerektirir."
+    },
+    "belirsizlikler": [
+      "Teyit mumunun tanımı yok",
+      "Sent bazlı stop hisse fiyatına göre uyarlanmalı"
+    ],
+    "uyumluluk_notu": "Her piyasaya uyarlanabilir (VWAP gün başından); 1m/5m, ≥5m uyumlu; hacim gerekmez ama VWAP için gerekir.",
+    "varyantlar": [
+      "Trend Devam Modeli",
+      "Trade2Hold",
+      "All Day Fade"
+    ],
+    "anahtar_kelimeler": [
+      "vwap",
+      "ema-9",
+      "ema-20",
+      "trend-devami",
+      "geri-cekilme"
+    ]
+  }
+]

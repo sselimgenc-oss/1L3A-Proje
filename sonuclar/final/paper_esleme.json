@@ -1,0 +1,150 @@
+{
+ "aciklama": "Kağıt motoru (tekrar modu) ↔ backtest eşleşmesi, kilitli dönem 2025-11-01 → veri sonu, kilit testindeki ayarlarla, izole (tek strateji/hesap, limitler uygulanır). dual-thrust: strateji girdisi son 6000 bar; diğerleri tüm geçmiş.",
+ "sonuclar": [
+  {
+   "n_backtest": 33,
+   "n_paper": 33,
+   "n_esit": 33,
+   "max_mutlak_fark": 0.0,
+   "toplam_net_backtest": 491.47941435500013,
+   "toplam_net_paper": 491.47941435500013,
+   "tam_esit": true,
+   "kimlik": "pf__kanarya|hisse_emtia|1d",
+   "motor": "portfoy.motor.portfoy_backtest",
+   "reddedilen_paper": 1,
+   "reddedilen_backtest": 377,
+   "kirpma_paper": 34,
+   "kirpma_backtest": 313,
+   "tam_esit_zaman_haric": true,
+   "zaman_etiketi_farki": 0,
+   "ilk_farklar": []
+  },
+  {
+   "n_backtest": 36,
+   "n_paper": 36,
+   "n_esit": 36,
+   "max_mutlak_fark": 0.0,
+   "toplam_net_backtest": -1135.4677921279927,
+   "toplam_net_paper": -1135.4677921279927,
+   "tam_esit": true,
+   "kimlik": "pf__rotasyon|hepsi|1d",
+   "motor": "portfoy.motor.portfoy_backtest",
+   "reddedilen_paper": 31,
+   "reddedilen_backtest": 1350,
+   "kirpma_paper": 99,
+   "kirpma_backtest": 1067,
+   "tam_esit_zaman_haric": true,
+   "zaman_etiketi_farki": 0,
+   "ilk_farklar": []
+  },
+  {
+   "n_backtest": 24,
+   "n_paper": 24,
+   "n_esit": 24,
+   "max_mutlak_fark": 0.0,
+   "toplam_net_backtest": 111.89080239245811,
+   "toplam_net_paper": 111.89080239245811,
+   "tam_esit": true,
+   "kimlik": "pf__kesit_ls|kripto|1d",
+   "motor": "portfoy.motor.portfoy_backtest",
+   "reddedilen_paper": 0,
+   "reddedilen_backtest": 142,
+   "kirpma_paper": 49,
+   "kirpma_backtest": 189,
+   "tam_esit_zaman_haric": true,
+   "zaman_etiketi_farki": 0,
+   "ilk_farklar": []
+  },
+  {
+   "n_backtest": 53,
+   "n_paper": 53,
+   "n_esit": 53,
+   "max_mutlak_fark": 0.0,
+   "toplam_net_backtest": 999.0465045494599,
+   "toplam_net_paper": 999.0465045494599,
+   "tam_esit": true,
+   "kimlik": "swing__cci-esik|SOLUSDT|1d",
+   "motor": "backtest.motor.backtest",
+   "reddedilen_paper": 0,
+   "reddedilen_backtest": 263,
+   "tam_esit_zaman_haric": true,
+   "zaman_etiketi_farki": 0,
+   "ilk_farklar": []
+  },
+  {
+   "n_backtest": 14,
+   "n_paper": 14,
+   "n_esit": 14,
+   "max_mutlak_fark": 0.0,
+   "toplam_net_backtest": -63.581839613949995,
+   "toplam_net_paper": -63.581839613949995,
+   "tam_esit": true,
+   "kimlik": "swing__konsolidasyon-kirilim|SOLUSDT|4h",
+   "motor": "backtest.motor.backtest",
+   "reddedilen_paper": 0,
+   "reddedilen_backtest": 272,
+   "tam_esit_zaman_haric": true,
+   "zaman_etiketi_farki": 0,
+   "ilk_farklar": []
+  },
+  {
+   "n_backtest": 12,
+   "n_paper": 12,
+   "n_esit": 7,
+   "max_mutlak_fark": 0.0,
+   "zaman_etiketi_farki": 5,
+   "diger_farklar": 0,
+   "toplam_net_backtest": -379.7882703,
+   "toplam_net_paper": -379.7882703,
+   "tam_esit": false,
+   "tam_esit_zaman_haric": true,
+   "kimlik": "dis__fraktal-alligator-sky|DK_NVDA|4h",
+   "motor": "backtest.motor.backtest",
+   "reddedilen_paper": 0,
+   "reddedilen_backtest": 138,
+   "ilk_farklar": [
+    {
+     "sira": 0,
+     "giris": "2025-12-08 18:00:00+00:00",
+     "sembol": "",
+     "sorun": [
+      "cikis_zamani: bt=2025-12-12 10:00:00+00:00 paper=2025-12-11 18:00:00+00:00"
+     ]
+    },
+    {
+     "sira": 4,
+     "giris": "2026-03-17 13:00:00+00:00",
+     "sembol": "",
+     "sorun": [
+      "cikis_zamani: bt=2026-03-20 09:00:00+00:00 paper=2026-03-19 17:00:00+00:00"
+     ]
+    },
+    {
+     "sira": 8,
+     "giris": "2026-08-12 17:00:00+00:00",
+     "sembol": "",
+     "sorun": [
+      "cikis_zamani: bt=2026-08-20 09:00:00+00:00 paper=2026-08-19 17:00:00+00:00"
+     ]
+    }
+   ]
+  },
+  {
+   "n_backtest": 55,
+   "n_paper": 55,
+   "n_esit": 55,
+   "max_mutlak_fark": 0.0,
+   "zaman_etiketi_farki": 0,
+   "diger_farklar": 0,
+   "toplam_net_backtest": 1344.0825284414198,
+   "toplam_net_paper": 1344.0825284414198,
+   "tam_esit": true,
+   "tam_esit_zaman_haric": true,
+   "kimlik": "dis__dual-thrust|ETHUSDT|30m",
+   "motor": "backtest.motor.backtest",
+   "reddedilen_paper": 0,
+   "reddedilen_backtest": 470,
+   "ilk_farklar": []
+  }
+ ]
+}

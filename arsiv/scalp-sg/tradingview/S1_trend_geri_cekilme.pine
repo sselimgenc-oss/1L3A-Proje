@@ -1,0 +1,27 @@
+//@version=5
+// S1 — Trend Geri Çekilme (H1 yön + M5 giriş). Grafiği 5 dakikaya açın.
+strategy("S1 Trend Geri Cekilme", overlay=true, default_qty_type=strategy.percent_of_equity, default_qty_value=10, commission_type=strategy.commission.percent, commission_value=0.05)
+hFast = input.int(8, "H1 hızlı EMA"), hSlow = input.int(34, "H1 yavaş EMA")
+eFast = input.int(8, "M5 hızlı EMA"), ePull = input.int(21, "M5 geri çekilme EMA")
+stK = input.int(5, "Stokastik K"), stLvl = input.int(30, "Stokastik seviye")
+look = input.int(6, "Geri çekilme penceresi"), rr = input.float(1.5, "R/R"), maxBars = input.int(36, "Zaman stopu (bar)")
+[hf, hs, hc] = request.security(syminfo.tickerid, "60", [ta.ema(close, hFast)[1], ta.ema(close, hSlow)[1], close[1]], lookahead=barmerge.lookahead_on)
+hDir = hf > hs and hc > hs ? 1 : hf < hs and hc < hs ? -1 : 0
+ef = ta.ema(close, eFast), ep = ta.ema(close, ePull), a = ta.atr(14)
+k = ta.sma(ta.stoch(close, high, low, stK), 3), d = ta.sma(k, 3)
+pulledDn = ta.highest(low <= ep ? 1 : 0, look) > 0, pulledUp = ta.highest(high >= ep ? 1 : 0, look) > 0
+os = ta.highest(k < stLvl ? 1 : 0, look) > 0, ob = ta.highest(k > 100 - stLvl ? 1 : 0, look) > 0
+longSig = hDir == 1 and pulledDn and os and close > ef and ta.crossover(k, d) and close > open
+shortSig = hDir == -1 and pulledUp and ob and close < ef and ta.crossunder(k, d) and close < open
+var float stp = na, var float tgt = na, var int eb = na
+if longSig and strategy.position_size == 0
+    stp := math.min(ta.lowest(low, 6) - 0.1 * a, close - 0.5 * a), tgt := close + rr * (close - stp), eb := bar_index
+    strategy.entry("L", strategy.long)
+if shortSig and strategy.position_size == 0
+    stp := math.max(ta.highest(high, 6) + 0.1 * a, close + 0.5 * a), tgt := close - rr * (stp - close), eb := bar_index
+    strategy.entry("S", strategy.short)
+strategy.exit("xL", "L", stop=stp, limit=tgt), strategy.exit("xS", "S", stop=stp, limit=tgt)
+if strategy.position_size != 0 and bar_index - eb >= maxBars
+    strategy.close_all("zaman")
+plot(ef, "EMA hızlı", color.blue), plot(ep, "EMA geri çekilme", color.orange)
+bgcolor(hDir == 1 ? color.new(color.green, 92) : hDir == -1 ? color.new(color.red, 92) : na)

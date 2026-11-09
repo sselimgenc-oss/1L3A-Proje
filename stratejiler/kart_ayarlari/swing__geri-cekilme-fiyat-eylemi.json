@@ -1,0 +1,22 @@
+[
+ {
+  "kart_id": "swing__persistent-pullbacks__landry",
+  "parametreler": {
+   "geri_min": 2,
+   "geri_maks": 5
+  },
+  "cikis_ayarlari": null,
+  "not": "2-7 mum geri çekilme -> 2-5; trend çizgisi şartı yerine ADX+EMA."
+ },
+ {
+  "kart_id": "swing__strong-advance__crane",
+  "parametreler": {
+   "geri_min": 1,
+   "geri_maks": 1,
+   "zayif": false,
+   "adx_esik": 0.0
+  },
+  "cikis_ayarlari": null,
+  "not": "Crane: kapanış<açılış, >, < sonra 4. gün 3. gün yükseğinin üstü ~ tek karşı mum sonrası yükseğin aşılması."
+ }
+]

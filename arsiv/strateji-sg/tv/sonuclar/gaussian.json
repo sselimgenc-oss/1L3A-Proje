@@ -1,0 +1,50 @@
+{
+ "ad": "gaussian",
+ "pine_id": "erJi1tWf",
+ "tf": "1d",
+ "evren": [
+  "kripto",
+  "abd",
+  "bist",
+  "emtia"
+ ],
+ "neden": "Zaman dilimi belirtilmemiş; günlük, tüm pazarlar. Bant çizgileri yalnız görsel (sinyal orta çizgi).",
+ "olcut": {
+  "n": 4130,
+  "kar": 59449.15807449852,
+  "pf": 2.5369795860856845,
+  "sharpe": 0.7628956552358456,
+  "beklenti_R": 1.1618523650749413,
+  "kazanma": 0.2440677966101695,
+  "maxdd": 0.4369961225683218,
+  "dd_gun": 1982,
+  "cagr": 0.17876251452810354,
+  "calmar": 0.40907116858949943,
+  "psr": 0.9976953555313717,
+  "tutma_gun": 8.0,
+  "ort_islem_getiri": 0.053259536289502314,
+  "netR_toplam": 4798.450267759507,
+  "sharpe_egitim": 0.8743883867647477,
+  "sharpe_oos": 0.7720909647336784,
+  "oos_kar": 6617.433319412274,
+  "tur": "swing",
+  "pf_maliyet2x": 2.4388924432338994,
+  "komsu_n": 16,
+  "komsu_karda": 1.0,
+  "enstr_n": 37,
+  "enstr_karda": 0.8918918918918919,
+  "maks_kor": 0.2564109015585505
+ },
+ "kurallar": {
+  "1_islem_sayisi": true,
+  "2_maks_dusus<=20": false,
+  "3_beklenti>=0.15R": true,
+  "4a_kf>=1.3": true,
+  "4b_sharpe>=1": false,
+  "5_oos": true,
+  "6_maliyet2x_kf>=1.1": true,
+  "7_komsu>=70": true,
+  "8_enstr>=60": true
+ },
+ "gecti": false
+}

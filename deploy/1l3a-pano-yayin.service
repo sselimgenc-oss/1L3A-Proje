@@ -1,0 +1,19 @@
+[Unit]
+Description=1L3A pano Cloudflare yayını
+After=network-online.target 1l3a-pano.service
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=l3a
+Group=l3a
+StateDirectory=1l3a-paper
+EnvironmentFile=/etc/1l3a-pano.env
+# wrangler kendi önbelleğini HOME altına yazar; ProtectHome nedeniyle durum dizininde tutulur
+Environment=HOME=/var/lib/1l3a-paper/yayin-ev
+ExecStartPre=/usr/bin/mkdir -p /var/lib/1l3a-paper/yayin-ev
+ExecStart=/opt/1l3a/deploy/pano_yayinla.sh
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=full
+ProtectHome=true

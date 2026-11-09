@@ -1,0 +1,14 @@
+[
+ {
+  "dis_id": "tv:pMOjQJwT",
+  "kaynak_dosya": "arsiv/strateji-sg/tv_eleme_dali/pine/pMOjQJwT.pine",
+  "parametreler": {
+   "adx_esik": 0.0,
+   "bb_periyot": 20,
+   "bb_sapma": 2.0,
+   "hedef_tipi": "orta"
+  },
+  "cikis_ayarlari": null,
+  "not": "YAKLAŞIK: BB(20,2) ters işlem, hedef orta band; hafta içi 14:00-14:40 UTC penceresi ve limit emir yok (aile gün sonunda kapanır); ADX filtresi kapatıldı."
+ }
+]

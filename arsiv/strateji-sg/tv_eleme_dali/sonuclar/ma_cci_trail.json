@@ -1,0 +1,47 @@
+{
+ "ad": "ma_cci_trail",
+ "pine_id": "d117dN6D",
+ "tf": "1h",
+ "evren": [
+  "kripto"
+ ],
+ "neden": "Betikte MA ve CCI zaman dilimi 60 dk; saatlik kripto.",
+ "olcut": {
+  "n": 9916,
+  "kar": -58335.461920379676,
+  "pf": 0.796839948987552,
+  "sharpe": -0.3500479356421364,
+  "beklenti_R": -0.07240569946986034,
+  "kazanma": 0.6419927390076644,
+  "maxdd": 5.256349160159449,
+  "dd_gun": 2734,
+  "cagr": null,
+  "calmar": null,
+  "psr": 0.03775328796271571,
+  "tutma_gun": 0.25,
+  "ort_islem_getiri": -0.0023531852327704585,
+  "netR_toplam": -717.9749159431351,
+  "sharpe_egitim": -0.4206394214521739,
+  "sharpe_oos": 2.079784091060757,
+  "oos_kar": -17956.990582073988,
+  "tur": "gun",
+  "pf_maliyet2x": 0.6603213336898244,
+  "komsu_n": 22,
+  "komsu_karda": 0.0,
+  "enstr_n": 14,
+  "enstr_karda": 0.0,
+  "maks_kor": 0.0032467213577892177
+ },
+ "kurallar": {
+  "1_islem_sayisi": true,
+  "2_maks_dusus<=20": false,
+  "3_beklenti>=0.15R": false,
+  "4a_kf>=1.3": false,
+  "4b_sharpe>=1": false,
+  "5_oos": false,
+  "6_maliyet2x_kf>=1.1": false,
+  "7_komsu>=70": false,
+  "8_enstr>=60": false
+ },
+ "gecti": false
+}

@@ -1,0 +1,16 @@
+[
+ {
+  "kart_id": "swing__aralik-kirilimi__ladha",
+  "parametreler": {
+   "giris_n": 20,
+   "kirilim_pct": 3.0,
+   "cikis_n": 10,
+   "stop_modu": "bar",
+   "stop_tampon_atr": 0.25,
+   "trend_ma": 0,
+   "short": false
+  },
+  "cikis_ayarlari": null,
+  "not": "Yalnız long. Stop kırılma günü dibinin %1 altı -> dip - 0.25 ATR; çıkış 10 günlük EMA altı yerine 10 mum kanal dibi; ciro/endeks filtreleri kodlanmadı."
+ }
+]

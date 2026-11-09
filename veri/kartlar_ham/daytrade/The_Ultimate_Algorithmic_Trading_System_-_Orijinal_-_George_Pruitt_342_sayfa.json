@@ -1,0 +1,64 @@
+[
+ {
+  "kart_id": "daytrade__mini-russell-dar-aralik-gunu__pruitt",
+  "ad": "Mini-Russell Dar Aralıklı Gün Kırılımı (iki kontrat)",
+  "stil": "daytrade",
+  "kaynak": {
+   "pdf": "The_Ultimate_Algorithmic_Trading_System_-_Orijinal_-_George_Pruitt_342_sayfa.pdf",
+   "sayfalar": [
+    124
+   ]
+  },
+  "ozet": "Dünkü True Range 10g ortalamanın altındaysa (dar gün), dünkü kapanışa göre yön seçilir ve açılış +/- 0.2*MAV(TR,10) stop emriyle iki birim girilir; birimin biri kârda çıkar, kalan izleyen stopla gider, gün sonu kapatılır.",
+  "kategori": "kirilim",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "vadeli",
+  "zaman_dilimi": {
+   "islem": "5m",
+   "ust_filtre": null
+  },
+  "gostergeler": [
+   {
+    "ad": "ATR",
+    "parametreler": {
+     "periyot": 10,
+     "tur": "True Range ortalaması"
+    }
+   }
+  ],
+  "long_giris": [
+   "Dünkü TR < 10g ortalama TR",
+   "Dünkü kapanış >= önceki kapanış",
+   "Ertesi gün açılış + 0.2*MAV(TR,10) buy stop (2 birim)"
+  ],
+  "short_giris": [
+   "Dünkü TR < 10g ortalama TR",
+   "Dünkü kapanış < önceki kapanış",
+   "Açılış - 0.2*MAV(TR,10) sell stop (2 birim)"
+  ],
+  "stop_loss": "Kitapta koruyucu stop belirtilmiş ama değeri yazılmamış; ilk birim çıkınca kalan birimin stopu girişe (başabaş) çekilir",
+  "kar_al": "İlk birim: 5 dk bar high girişin 4 puan üstüne çıkınca günün high'ı - 4 puan stopla çıkar",
+  "iz_suren_stop": "Kalan birim başabaşa taşınır, gün sonu (MOC) kapanır",
+  "zaman_cikisi": "Gün sonu kapanış",
+  "filtreler": "Dar aralık günü filtresi",
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": null,
+  "kodlanabilirlik": {
+   "puan": 2,
+   "gerekce": "Kuralların çoğu verilmiş; koruyucu stop miktarı ve breakeven ayrıntısı kitapta yok, kod Chapter 7'de."
+  },
+  "belirsizlikler": [
+   "Başlangıç koruyucu stop değeri belirtilmemiş.",
+   "4 puan mini-Russell'a özgü; yüzde/ATR'ye çevrilmeli."
+  ],
+  "uyumluluk_notu": "5dk veri gerekir; mini-Russell vadelisine özgü puan değerleri; kripto/hisse için ATR ile ölçeklenmeli.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+   "dar-aralik",
+   "nr",
+   "kirilim",
+   "gun-ici",
+   "iki-kontrat"
+  ]
+ }
+]
