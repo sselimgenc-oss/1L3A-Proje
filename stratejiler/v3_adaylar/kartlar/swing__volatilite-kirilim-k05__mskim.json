@@ -1,0 +1,70 @@
+{
+  "kart_id": "swing__volatilite-kirilim-k05__mskim",
+  "ad": "Değişken Volatilite Kırılımı k=0.5 (3 gün trend filtreli)",
+  "stil": "swing",
+  "kaynak": {
+    "url": "https://mskim8717.tistory.com/122",
+    "lisans": "belirtilmemiş (kopyalanmadı)",
+    "tur": "blog"
+  },
+  "ozet": "Günün açılışına, önceki günün (yüksek-düşük) aralığının %50'si eklenir; gün içinde bu seviye aşılırsa long girilir ve ertesi günün açılışında satılır. Açılış, önceki 3 günün ortalama kapanışının üstündeyse işlem yapılır.",
+  "kategori": "kirilim",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "kripto",
+  "zaman_dilimi": {
+    "islem": "1d (gün içi tetik)",
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {
+      "ad": "Önceki gün aralığı",
+      "parametreler": {
+        "k": 0.5
+      }
+    },
+    {
+      "ad": "SMA kapanış",
+      "parametreler": {
+        "periyot": 3
+      }
+    }
+  ],
+  "long_giris": [
+    "Açılış > önceki 3 günün ortalama kapanışı",
+    "Bugünün yükseği > Açılış + 0.5 x önceki gün aralığı; giriş fiyatı = Açılış + 0.5 x aralık"
+  ],
+  "short_giris": [],
+  "stop_loss": null,
+  "kar_al": null,
+  "iz_suren_stop": null,
+  "zaman_cikisi": "Ertesi günün açılışında sat",
+  "filtreler": [
+    "3 gün ortalama kapanış trend filtresi"
+  ],
+  "pozisyon_risk": "Ağırlık = 2 / (aralığın açılışa yüzdesi), en çok %50",
+  "iddia_edilen_performans": "Toplam -%3.28, maks. düşüş -%10.99, 98 işlem, kazanma %39.8, ort. kazanç %0.94, ort. kayıp -%0.67 — iddia (doğrulanmadı)",
+  "kanit": "Blog yazısı; test dönemi ve enstrüman belirtilmemiş; komisyon %0.2/yön.",
+  "veri_uygun": [
+    true,
+    "Binance OHLCV günlük/5m ile kodlanır; enstrüman kaynakta belli değil; BTC/ETH perp'te test edilebilir."
+  ],
+  "kodlanabilirlik": {
+    "puan": 3,
+    "gerekce": "Tüm kurallar mekanik; stop yok, enstrüman ve dönem belirsiz."
+  },
+  "belirsizlikler": [
+    "Enstrüman kaynakta yok",
+    "Test dönemi yok",
+    "Slipaj yok",
+    "Stop yok",
+    "Gün içi tetik, günlük barda yaklaşık (aynı gün high içinde sıra bilinmez)"
+  ],
+  "uyumluluk_notu": "Larry Williams tipi volatilite kırılımı; mevcut kırılım kartlarıyla çakışma kontrol edilmeli.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+    "volatilite-kırılımı",
+    "önceki-gün-aralığı",
+    "k-0.5",
+    "günlük"
+  ]
+}

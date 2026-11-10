@@ -1,0 +1,4 @@
+BTC_Iki_Seansta_Gecikmeli_Reversal | kaynak (MDPI 19/9/692) WebFetch ile 403, kural okunamadı; ayrıca makalede holdout'ta al-tutun gerisi
+ETH_Gece_Long_Gunduz_TersYon | kaynak (MDPI 19/9/692) WebFetch ile 403, seans kuralı doğrulanamadı
+BTC_Hacim_Saati_Ilk30_Son30_Momentum | kaynak (Wiley fire.12290) WebFetch ile 403, kural okunamadı
+QC gomulu backtest 9f6d23eb (hisse Sharpe secimi) | sayfa kesik, main.py kuralları okunamadı; kural doğrulanamadı

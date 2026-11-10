@@ -1,0 +1,63 @@
+{
+  "kart_id": "swing__yahudi-3-etf-esit-yillik__psystat",
+  "ad": "Yahudi Portföyü (SPY/TLT/VNQ eşit, yıllık)",
+  "stil": "swing",
+  "kaynak": {
+    "url": "https://psystat.tistory.com/177",
+    "lisans": "belirtilmemiş",
+    "tur": "blog"
+  },
+  "ozet": "Hisse (SPY), uzun vadeli tahvil (TLT) ve gayrimenkul (VNQ) fonlarına üçte bir eşit ağırlık; yılda bir kez dengeleme. Sinyal yok, pasif tahsis.",
+  "kategori": "diger",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+    "islem": "1d",
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {
+      "ad": "Eşit ağırlık",
+      "parametreler": {
+        "varlik": 3,
+        "agirlik": "1/3"
+      }
+    }
+  ],
+  "long_giris": [
+    "Başlangıçta SPY, TLT, VNQ'ya 1/3'er al",
+    "Yılda 1 kez ağırlıkları 1/3'e geri getir"
+  ],
+  "zaman_cikisi": "Yıllık yeniden dengeleme; çıkış yok",
+  "pozisyon_risk": "Eşit ağırlık; stop yok",
+  "iddia_edilen_performans": "iddia (doğrulanmadı): kitap 1994-2021 CAGR %9,85, MDD -%36,95, Sharpe 0,76; yazar 2004-sonrası CAGR %8,77, MDD -%39,8, Sharpe 0,64",
+  "kanit": null,
+  "veri_uygun": [
+    false,
+    "SPY/TLT/VNQ ETF'leri; Dukascopy ETF kapsamı doğrulanmadı, tahvil/REIT verisi yok. Kripto/emtia sepetine uyarlanabilir ama kaynak kural değil."
+  ],
+  "kodlanabilirlik": {
+    "puan": 3,
+    "gerekce": "Tamamen mekanik, ama sinyalsiz pasif tahsis."
+  },
+  "belirsizlikler": [
+    "Dengeleme günü kaynakta yok",
+    "Maliyet/vergi/slipaj yok",
+    "OOS yok",
+    "Kitap sonucu simülasyon verisiyle (ETF öncesi)",
+    "Kitap ve yazar tablosu birebir aynı görünüyor, doğrulama gerek"
+  ],
+  "uyumluluk_notu": "Pasif tahsis, intraday sinyal değil. Benzer mevcut: Eşit ağırlık (aylık). Verimizle doğrudan test edilemez.",
+  "anahtar_kelimeler": [
+    "eşit-ağırlık",
+    "yıllık-dengeleme",
+    "etf",
+    "tahsis"
+  ],
+  "filtreler": [],
+  "varyantlar": [],
+  "stop_loss": null,
+  "kar_al": null,
+  "iz_suren_stop": null,
+  "short_giris": []
+}

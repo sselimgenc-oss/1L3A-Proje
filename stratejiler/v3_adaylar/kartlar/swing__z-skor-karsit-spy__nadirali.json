@@ -1,0 +1,70 @@
+{
+  "kart_id": "swing__z-skor-karsit-spy__nadirali",
+  "ad": "Günlük Z-skor Karşıt (Contrarian) SPY",
+  "stil": "swing",
+  "kaynak": {
+    "url": "https://github.com/NadirAliOfficial/contrarian-strategy",
+    "lisans": "MIT",
+    "tur": "github"
+  },
+  "ozet": "Günlük getirilerin kayan z-skoru -2'nin altına inince long, +2'nin üstüne çıkınca short açılır; z-skor 0'a dönünce çıkılır.",
+  "kategori": "ortalamaya_donus",
+  "piyasa_rejimi": "yatay",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+    "islem": "1d",
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {
+      "ad": "Z-skor (getiri)",
+      "parametreler": {
+        "pencere": "20 gün (varsayılan --lookback)"
+      }
+    },
+    {
+      "ad": "ATR",
+      "parametreler": {
+        "periyot": null
+      }
+    }
+  ],
+  "long_giris": [
+    "Getirilerin 20 günlük kayan z-skoru < -2"
+  ],
+  "short_giris": [
+    "Z-skor > +2"
+  ],
+  "stop_loss": null,
+  "kar_al": null,
+  "iz_suren_stop": null,
+  "zaman_cikisi": "Z-skor 0'a dönünce çık",
+  "filtreler": [],
+  "pozisyon_risk": "ATR'ye göre pozisyon boyutu (formül kaynakta yok)",
+  "iddia_edilen_performans": "SPY 2018-2023: getiri +42.3%, Sharpe 1.38, maks. düşüş -12.1%, kazanma %58.4 — iddia (doğrulanmadı)",
+  "kanit": "Yazar README tablosu; OOS, maliyet, kayma yok.",
+  "veri_uygun": [
+    true,
+    "ABD hisse/ETF günlük; SPY'nin Dukascopy'de bulunup bulunmadığı doğrulanmalı, yoksa benzer hisse/endeks ile test."
+  ],
+  "kodlanabilirlik": {
+    "puan": 2,
+    "gerekce": "Giriş/çıkış net; z-skor formülü (ham/log getiri, ortalama-std) ve ATR boyutlandırma formülü kaynakta yok."
+  },
+  "belirsizlikler": [
+    "Z-skor formülü yok",
+    "Stop yok",
+    "Short çıkış ayrıntısı yok",
+    "Maliyet ve OOS yok",
+    "Pozisyon boyutu formülü yok"
+  ],
+  "uyumluluk_notu": "Mevcut Multi-Factor Adaptive Z-Score ile akraba; günlük, 5m kısıtına uygun.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+    "z-skor",
+    "karşıt",
+    "ortalamaya-dönüş",
+    "spy",
+    "günlük"
+  ]
+}

@@ -1,0 +1,80 @@
+{
+  "kart_id": "daytrade__pullback-pencere-usdjpy__ilahuerta",
+  "ad": "EMA Pullback + Kırılım Penceresi (USDJPY 5m)",
+  "stil": "daytrade",
+  "kaynak": {
+    "url": "https://github.com/ilahuerta-IA/backtrader-pullback-window-usdjpy",
+    "lisans": "MIT",
+    "tur": "github"
+  },
+  "ozet": "5 dakikalık USDJPY'de EMA kesişimi sonrası 2 ters mumluk geri çekilme beklenir, 7 barlık pencerede kırılım olursa long girilir; ATR tabanlı stop ve hedef kullanılır.",
+  "kategori": "momentum",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "forex",
+  "zaman_dilimi": {
+    "islem": "5m",
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {
+      "ad": "EMA",
+      "parametreler": {
+        "periyot": null
+      }
+    },
+    {
+      "ad": "EMA açısı filtresi",
+      "parametreler": {
+        "aralik": "30-95 derece"
+      }
+    },
+    {
+      "ad": "ATR",
+      "parametreler": {
+        "periyot": null
+      }
+    }
+  ],
+  "long_giris": [
+    "SCANNING: EMA kesişimi (yukarı) görülür; EMA açısı 30-95 derece ve fiyat > EMA",
+    "ARMED: 2 ters yönlü (karşı trend) mum bekle",
+    "WINDOW_OPEN: kırılım seviyeleri tanımlanır, 7 barlık sayaç başlar",
+    "ENTRY: pencere içinde kırılım teyit olursa long"
+  ],
+  "short_giris": [],
+  "stop_loss": "3.5 x ATR",
+  "kar_al": "6.5 x ATR",
+  "iz_suren_stop": null,
+  "zaman_cikisi": "7 bar pencere dolunca iptal; INVALIDATION durumunda SCANNING'e dön",
+  "filtreler": [
+    "Yalnız LONG",
+    "Seans filtresi kaynakta yok"
+  ],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": "Yazar: 2020-07/2025-07 PF 2.04, Sharpe 0.91, kazanma %44.3; genişletilmiş 2020-2025 PF 1.15, Sharpe 0.67, maks. düşüş %20.4. Yazar ilk dönemi 'cherry-picked' diye etiketliyor — iddia (doğrulanmadı)",
+  "kanit": "Yazar backtesti; maliyet ve OOS yok.",
+  "veri_uygun": [
+    false,
+    "USDJPY forex; Dukascopy verimiz yalnız hisse/emtia olarak tanımlı, forex kapsamı doğrulanmadı."
+  ],
+  "kodlanabilirlik": {
+    "puan": 1,
+    "gerekce": "Durum makinesi var ama EMA/ATR periyotları, kırılım seviyesi ve geçersizleşme koşulu kaynakta okunamadı."
+  },
+  "belirsizlikler": [
+    "EMA ve ATR periyotları kaynakta yok",
+    "Kırılım seviyelerinin tanımı yok",
+    "INVALIDATION koşulu yok",
+    "Yalnız dönem seçimine duyarlı (overfit riski)",
+    "Maliyet yok"
+  ],
+  "uyumluluk_notu": "5m sınırına uyar; forex'e özgü, veri uygunluğu düşük.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+    "pullback",
+    "ema",
+    "atr",
+    "durum-makinesi",
+    "usdjpy"
+  ]
+}

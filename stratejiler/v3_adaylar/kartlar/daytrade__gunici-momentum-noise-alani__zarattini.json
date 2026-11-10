@@ -1,0 +1,68 @@
+{
+  "kart_id": "daytrade__gunici-momentum-noise-alani__zarattini",
+  "ad": "Gün İçi Momentum: Noise Area Kırılımı + VWAP Stop (SPY)",
+  "stil": "daytrade",
+  "kaynak": {
+    "url": "https://github.com/PazSheimy/spy-intraday-momentum-oos",
+    "lisans": "MIT (kod); makale metni telifli",
+    "tur": "github"
+  },
+  "ozet": "Gün açılışından itibaren zamana bağlı bir 'noise area' bandı hesaplanır (son 14 günün aynı saatteki açılıştan mutlak hareket ortalaması). 30 dakikalık kontrollerde kapanış hem banttan hem VWAP'tan dışarıdaysa yönde girilir; VWAP tabanlı iz süren stopla çıkılır.",
+  "kategori": "kirilim",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+    "islem": "30m kontrol (1m veriden)",
+    "ust_filtre": "5m"
+  },
+  "gostergeler": [
+    {
+      "ad": "Noise Area",
+      "parametreler": {
+        "pencere": "14 gün"
+      }
+    },
+    {
+      "ad": "VWAP",
+      "parametreler": {}
+    }
+  ],
+  "long_giris": [
+    "30 dakikalık işaretlerde kapanış noise area üst sınırının ve VWAP'ın üstünde"
+  ],
+  "short_giris": [
+    "Kapanış alt sınırın ve VWAP'ın altında"
+  ],
+  "stop_loss": null,
+  "kar_al": null,
+  "iz_suren_stop": "max(sınır, VWAP) tabanlı iz süren stop",
+  "zaman_cikisi": "Gün sonu çıkış kaynakta açık yazılmamış",
+  "filtreler": [],
+  "pozisyon_risk": "Günlük %2 volatilite hedefi, en çok 4x kaldıraç",
+  "iddia_edilen_performans": "Makale 2007-2024: yıllık 19.6%, Sharpe 1.33; replikasyon 2015-2024 19.8% / 1.34; OOS 2024-2026 4.8% / Sharpe 0.39 — iddia (doğrulanmadı)",
+  "kanit": "Zarattini ve ark. makalesinin yazarın kendi uygulaması; OOS'ta belirgin zayıflama.",
+  "veri_uygun": [
+    false,
+    "Hacim/VWAP SPY gün içi gerekiyor; Dukascopy'de SPY 5m ve hacim doğrulanmadı; sinyal 1m veriden, biz 5m'e inmeli."
+  ],
+  "kodlanabilirlik": {
+    "puan": 2,
+    "gerekce": "Mantık net; sınır çarpanı formülü ve çıkış saati kaynakta yok."
+  },
+  "belirsizlikler": [
+    "Sınır formülü kaynakta yok",
+    "Çıkış saati yok",
+    "OOS performansı çökmüş",
+    "Maliyet 0.0035$/hisse + 0.001 kayma (hisse bazlı)",
+    "Kod/Makale telif: metin kopyalanmadı"
+  ],
+  "uyumluluk_notu": "Mevcut Initial Balance BO ile benzer; VWAP hacim gerektirir.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+    "noise-area",
+    "vwap",
+    "gün-içi",
+    "kırılım",
+    "spy"
+  ]
+}
