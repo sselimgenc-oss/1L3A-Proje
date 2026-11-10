@@ -14,6 +14,12 @@ Kod yazmaz, test koşmaz, başka dosyaya dokunmaz. Bunun dışında bir şey ist
 - `stratejiler/KART_SEMASI.md` (kart formatı).
 - `stratejiler/dis_envanter.csv` ve `stratejiler/havuz_v2.csv`: zaten elimizde olanlar. Aynısını ya da küçük varyantını getirme.
 
+## Önce elindeki ham listeyi işle (limit tasarrufu)
+`stratejiler/v3_adaylar/ham/MASTER_katalog_2026-11.csv` (251 satır, 2026-11-07 taraması: Quantpedia, Quantocracy, MQL5) ve yanındaki
+.md özetleri daha önce bulundu, işlenmedi. Yeni aramadan ÖNCE: `durum` = izle veya aday olan satırları tekrar kontrolünden geçir,
+verimize ve kurallara uyanları kart yap. `elendi` ve `bilgi` satırlarını atla. Sonra kalan limitle aşağıdaki boşlukları ara.
+Bu ham dosyaları değiştirme.
+
 ## Ne arıyoruz (öncelik sırasıyla)
 1. Gün içi kripto (5m–1h): elimizde az ve zayıf.
 2. Piyasa yönünden bağımsız kripto: funding, baz (perp–spot), coinler arası göreli güç / kesit sıralama.
