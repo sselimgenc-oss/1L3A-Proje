@@ -10,3 +10,4 @@ MAX anomalisi (kesit) | kaynak (JFE doi 10.1016/j.jfineco.2010.08.014) okunamad�
 moobilly32/alpha_engine | DIP ve BREAKOUT giriş tetikleyicileri kaynakta tanımlı değil ("confirmed oversold setup"/"the moment it prints"); kesin ölçülebilir giriş yok, kart yazılamaz
 Guillain-RDCDE/Open-Alpha-Lab | kaynakta (README) en yüksekten düşüşten kaçınma kuralı yok; yalnız overnight anomali çalışması ve test araçları anlatılıyor, kural ölçülebilir biçimde okunamadı; katalogda ML/RL kategorili, lisans NOASSERTION
 adiv-1/momentum-clustered-algorithmic-trading-strategy | K-Means kümeleme (denetimsiz ML) hisse seçim çekirdeği: ML modeli kesin dışlama
+A Trend Factor for the Crypto Cross-Section (and Its Overfit Tell) | kaynak CTREND faktörü elastic net (ML modeli) ile birleştiriliyor; ML dışlama kuralı

@@ -1,0 +1,71 @@
+{
+  "piyasa_rejimi": "herhangi",
+  "filtreler": [
+    "Giriş yalnız 09:30-12:00 ET",
+    "Aynı anda tek pozisyon",
+    "Günlük işlem sayısı sınırı (değer kaynakta yok)"
+  ],
+  "iz_suren_stop": null,
+  "varyantlar": [],
+  "short_giris": [],
+  "kar_al": "2R",
+  "zaman_cikisi": "15:45 ET'de pozisyonu kapat",
+  "pozisyon_risk": "Backtestte 1 MNQ; günlük zarar limiti değeri kaynakta yok",
+  "kart_id": "daytrade__ters-fvg-nq__prashanthaitha24",
+  "ad": "15m FVG İçinde 5m Ters FVG Long (NQ)",
+  "stil": "daytrade",
+  "kaynak": {
+    "url": "https://github.com/prashanthaitha24/nq-strategy-b-bot",
+    "lisans": "MIT",
+    "tur": "github",
+    "not": "diğer_aynı_kaynak: tumu.csv:749"
+  },
+  "ozet": "15 dakikalık yükseliş FVG bölgesi içinde 5 dakikalık FVG oluşup fiyat bölgeye inip üstünde kapanınca bir sonraki mum açılışında long. Seans 09:30-12:00 ET.",
+  "kategori": "diger",
+  "orijinal_piyasa": "vadeli",
+  "zaman_dilimi": {
+    "islem": "5m",
+    "ust_filtre": "15m"
+  },
+  "gostergeler": [
+    {
+      "ad": "FVG (adil değer boşluğu)",
+      "parametreler": {
+        "tanim": "bir mumun yükseği ile iki mum sonraki düşüğü arasında boşluk"
+      }
+    }
+  ],
+  "long_giris": [
+    "Aktif 15m yükseliş FVG bölgesi var; 5m FVG bu bölgenin içinde (üstte 5 puan tampon)",
+    "Aktif, doldurulmamış 5m yükseliş FVG var",
+    "Mevcut 5m mumun düşüğü FVG içine iner (alt ≤ düşük ≤ üst)",
+    "Mum kapanışı FVG üstünde",
+    "Giriş: bir sonraki mumun açılışı"
+  ],
+  "stop_loss": "5m FVG altının 2 puan altı",
+  "iddia_edilen_performans": "iddia (doğrulanmadı): README ~3 yıl, ~%53.5 kazanç, PF ~2.3, net ~$17K (1 MNQ); sayfa kendi içinde tutarsız (MaxDD $786 vs $840, kazanç %53.5 vs %56)",
+  "kanit": "README sonuçları; seçim in-sample, tutarsız rakamlar (iddia, doğrulanmadı)",
+  "veri_uygun": [
+    true,
+    "Dukascopy NAS100 endeks/CFD 5m ve 15m (5m'den türetilir) var; seans ET'ye çevrilmeli, puan değerleri endeks ölçeğine göre değişir."
+  ],
+  "kodlanabilirlik": {
+    "puan": 2,
+    "gerekce": "Giriş/stop/hedef net; 15m FVG tanımı ve 'ters' ifadesi tam açık değil"
+  },
+  "belirsizlikler": [
+    "15m FVG tanımı yalnız kısaca",
+    "'Ters FVG' bir retest dizisi olarak anlaşıldı",
+    "Günlük işlem ve zarar limiti değerleri yok",
+    "Short: kaynakta shortlar daha kötü, long-only",
+    "Stop/tampon 'puan' NQ'ya özgü"
+  ],
+  "uyumluluk_notu": "Mevcut kartla benzeri yok. Long-only, tek endeks; in-sample seçim riski.",
+  "anahtar_kelimeler": [
+    "fvg",
+    "ict",
+    "nq",
+    "5m",
+    "seans"
+  ]
+}

@@ -1,0 +1,82 @@
+{
+  "piyasa_rejimi": "trend",
+  "filtreler": [],
+  "iz_suren_stop": null,
+  "varyantlar": [
+    "Versiyon A: 200g filtre 5 gün onaylı, aylık, ilk 20",
+    "Versiyon B: piyasa filtresi yok"
+  ],
+  "short_giris": [],
+  "kar_al": null,
+  "zaman_cikisi": "Haftalık: hisse sıralamanın ilk beşte birinden çıkınca sat (Versiyon A: aylık, ilk 100 dışına çıkınca)",
+  "pozisyon_risk": "Kitap: sakin hisselere daha çok, oynak hisselere az sermaye; Versiyon A ilk 20 hisse. Kesin ağırlık formülü bu sayfada yok",
+  "kart_id": "swing__stocks-on-the-move__clenow",
+  "ad": "Clenow Stocks on the Move (S&P 500 momentum, Quanter Lab testi)",
+  "stil": "swing",
+  "kaynak": {
+    "url": "https://quanterlab.substack.com/p/clenows-stocks-on-the-move-tested",
+    "lisans": "lisans belirsiz (blog); kural kendi cümlelerimle",
+    "tur": "blog",
+    "not": "Orijinal kural: Clenow kitabı; diğer_aynı_kaynak yok"
+  },
+  "ozet": "S&P 500 üyeleri arasında 90 günlük, düzgün seyreden yükseliş trendi en güçlü olanlar alınır; S&P 500 200 günlük ortalamanın üstündeyse yeni alım yapılır; haftalık (veya aylık) yeniden dengeleme.",
+  "kategori": "momentum",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+    "islem": "1d",
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {
+      "ad": "SMA",
+      "parametreler": {
+        "periyot": 100,
+        "kullanim": "hisse filtresi"
+      }
+    },
+    {
+      "ad": "SMA",
+      "parametreler": {
+        "periyot": 200,
+        "kullanim": "S&P 500 piyasa filtresi"
+      }
+    },
+    {
+      "ad": "Momentum/düzgünlük sıralaması",
+      "parametreler": {
+        "pencere": 90
+      }
+    }
+  ],
+  "long_giris": [
+    "Fiyatı 100 günlük ortalamanın üstünde olmalı",
+    "Son 90 günde tek günde %15'ten büyük hareket yapmamış olmalı",
+    "90 günlük hız ve düzgünlük sıralamasında üst sıralarda (kitap: sıralamanın ilk beşte biri içinde) olmalı",
+    "S&P 500 200 günlük ortalamanın üstündeyse yeni alım yap"
+  ],
+  "stop_loss": null,
+  "iddia_edilen_performans": "iddia (doğrulanmadı): sayfa, kitap kurallarının 2006-2025'te SPY'ı geçemediğini, 2015 sonrası geride kaldığını söylüyor; toplam getiri rakamları sayfada var, doğrulanmadı",
+  "kanit": "Quanter Lab yazısı: nokta-zamanlı S&P 500 üyelikleri ile test; sonuç olumsuz/zayıf (iddia, doğrulanmadı)",
+  "veri_uygun": [
+    false,
+    "Nokta-zamanlı S&P 500 üyeliği ve 500 hisse verimizde yok; Dukascopy hisse evreni dar. Hayatta kalma yanlılığı riski."
+  ],
+  "kodlanabilirlik": {
+    "puan": 2,
+    "gerekce": "Yapı net; düzgünlük (regresyon eğimi x R2) formülü ve ağırlık bu sayfada açık değil"
+  },
+  "belirsizlikler": [
+    "Düzgünlük formülü kaynakta yok (sayfada)",
+    "ATR ile boyutlandırma sayfada yok",
+    "Versiyon A ağırlık yöntemi belirtilmemiş",
+    "Kural, eşik ('ilk beşte bir') uydurma değil ama kitaptan; sayfa dolaylı aktarıyor"
+  ],
+  "uyumluluk_notu": "pf__kesit_ls ile aynı aile (kesitsel momentum); kaynak sonucu zayıf, öncelik düşük.",
+  "anahtar_kelimeler": [
+    "clenow",
+    "momentum",
+    "sp500",
+    "kesitsel",
+    "regresyon-egimi"
+  ]
+}
