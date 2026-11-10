@@ -384,6 +384,49 @@ def tekrar_calistir(tanimlar: list, mumlar: dict, fundingler: dict, kurallar: di
     return p
 
 
+# ---------------------------------------------------------------------------- evrenden düşen semboller (tek satır, sembole göre gruplu)
+BEKLENEN_DISARIDA = ("DK_JNJ", "DK_MA")        # Binance TradFi perpetual envanterinde karşılığı yok (DURUM_SOZLESMESI; kalıcı). Başka sembol düşerse BEKLENMEYEN.
+BILGI_ONEKI = "BİLGİ: "                         # saglik.uyarilar içinde bu önekle başlayan satır pano'da sarı uyarı değil bilgi olarak gösterilir
+
+
+def disarida_gruplari(tanimlar: list) -> list:
+    """Evrenden düşen semboller, SEMBOLE göre: [{sembol, neden, beklenen, stratejiler}] (sembol sıralı). Beklenen = sabit listede VE nedeni
+    'exchangeInfo'da yok' (başka neden: TRADING değil, yerel veri yok... = yeni sorun, beklenen sayılmaz)."""
+    g: dict = {}
+    for t in tanimlar:
+        for sembol, neden in (t.disarida or {}).items():
+            x = g.setdefault(sembol, {"sembol": sembol, "neden": str(neden), "stratejiler": []})
+            x["stratejiler"].append(t.kimlik)
+    for x in g.values():
+        x["beklenen"] = x["sembol"] in BEKLENEN_DISARIDA and "exchangeInfo'da yok" in x["neden"]
+    return [g[k] for k in sorted(g)]
+
+
+def disarida_metinleri(gruplar: list) -> tuple:
+    """-> (bilgi_satiri | None, [uyari_satirlari]). Beklenenler TEK satır ("DK_JNJ, DK_MA: Binance'te karşılığı yok -> 7 stratejinin evreninden
+    çıkarıldı (beklenen, kalıcı)"); beklenmeyen her sembol kendi satırında ve nedeniyle (gizlenmez, uyarı düzeyinde)."""
+    bek = [x for x in gruplar if x["beklenen"]]
+    bilgi = None
+    if bek:
+        n = len({k for x in bek for k in x["stratejiler"]})
+        bilgi = f"{', '.join(x['sembol'] for x in bek)}: Binance'te karşılığı yok → {n} stratejinin evreninden çıkarıldı (beklenen, kalıcı)"
+    uyari = [f"BEKLENMEYEN evren düşmesi: {x['sembol']}: {x['neden']} → {len(x['stratejiler'])} stratejinin evreninden çıkarıldı "
+             f"({', '.join(x['stratejiler'])})" for x in gruplar if not x["beklenen"]]
+    return bilgi, uyari
+
+
+def disarida_bildir(p, tanimlar: list, simdi) -> None:
+    """Servis başlangıcı: beklenen düşmeler TEK bilgi olayı (Telegram'a gitmez, uyarı listesine BİLGİ önekiyle girer); beklenmeyenler eskisi gibi
+    uyarı + 'veri_yok' olayı (Telegram'a gider)."""
+    bilgi, uyari = disarida_metinleri(disarida_gruplari(tanimlar))
+    if bilgi:
+        p.uyarilar.append(BILGI_ONEKI + bilgi)
+        p.olay_ekle("evren_bilgi", bilgi, simdi, bildir=False)
+    for msg in uyari:
+        p.uyarilar.append(msg)
+        p.olay_ekle("veri_yok", msg, simdi)
+
+
 # ---------------------------------------------------------------------------- servis
 def _tanimlara_veri_yok_isle(tanimlar: list, esl: dict) -> None:
     """Eşlemesi bulunamayan/TRADING olmayan sembol gerektiren stratejiler 'veri yok' işaretlenir (uydurma yok)."""
@@ -460,11 +503,7 @@ def canli_calistir(durum_dizini: Path, tohum_dizin: Optional[Path] = None, ayar_
         p.olay_ekle("baslangic", f"Paper başlatıldı, başlangıç sermayesi {p.ayarlar.baslangic_sermaye}", simdi)
     for t in p.veri_yok:
         p.olay_ekle("veri_yok", f"{t.kimlik}: {t.veri_yok}", simdi)
-    for t in p.tanimlar:
-        if t.disarida:
-            msg = f"{t.kimlik}: evrenden düşen semboller (Binance karşılığı yok/TRADING değil): " + "; ".join(f"{s} ({n})" for s, n in t.disarida.items())
-            p.uyarilar.append(msg)
-            p.olay_ekle("veri_yok", msg, simdi)
+    disarida_bildir(p, p.tanimlar, simdi)                  # sembole göre TEK satır (7 benzer satır yerine); beklenmeyen düşmeler uyarı kalır
     for u in pv.tradfi_sinif_uyusmazliklari(bilgi, semboller):     # TradFi funding ayrımı (2026-11-09) sınıflamaya dayanır
         p.olay_ekle("tradfi_sinif", u, simdi)
     from motor.canli import paper_durum as pdr
