@@ -1,0 +1,66 @@
+{
+  "kart_id": "swing__momentum-sifir-kesisim__chandanp001",
+  "ad": "20 Günlük Momentum Sıfır Kesişimi (Long/Flat)",
+  "stil": "swing",
+  "kaynak": {
+    "url": "https://github.com/ChandanP001/Quant-foundations",
+    "lisans": "yok",
+    "tur": "github"
+  },
+  "ozet": "20 günlük momentum pozitifse long, negatifse nakitte; sinyal bir gün geciktirilerek (lookahead önleme) uygulanır. Ek varyant: 10 hisselik evrende günlük en iyi 3'ü tut.",
+  "kategori": "momentum",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+    "islem": "1d",
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {
+      "ad": "Momentum",
+      "parametreler": {
+        "periyot": 20,
+        "formul": "kaynakta yok (getiri mi log getiri mi)"
+      }
+    }
+  ],
+  "long_giris": [
+    "20 günlük momentum > 0 olunca long (sinyal ertesi gün uygulanır)"
+  ],
+  "short_giris": [],
+  "stop_loss": null,
+  "kar_al": null,
+  "iz_suren_stop": null,
+  "zaman_cikisi": "Momentum < 0 olunca nakite geç",
+  "filtreler": [],
+  "pozisyon_risk": "Long ya da nakit; kısa yok",
+  "iddia_edilen_performans": "README: toplam %79.72 (kıyas %97.06), yıllık %10.68 (kıyas %12.46), piyasada kalma %62.2 (Nifty 50, 2018-2024) (iddia, doğrulanmadı)",
+  "kanit": "README sonuçları yazar iddiası; al-tut altında kalıyor (iddia, doğrulanmadı).",
+  "veri_uygun": [
+    true,
+    "Kural varlıktan bağımsız; Nifty 50 Dukascopy'de yok ama günlük kripto veya Dukascopy hisse/emtia serilerine uygulanabilir."
+  ],
+  "kodlanabilirlik": {
+    "puan": 3,
+    "gerekce": "Tek gösterge ve sıfır eşiği; momentum formülü ve nakit getirisi kaynakta yok."
+  },
+  "belirsizlikler": [
+    "Momentum formülü kaynakta yok",
+    "Nakitteyken getiri belirtilmemiş",
+    "Orijinal piyasa Nifty 50 (hindistan endeksi), bizim verimizde yok",
+    "Lisans yok: kod kopyalanmadı",
+    "Çok basit; tek başına al-tut'un altında",
+    "07B varyantında 1 gün gecikme belirtilmemiş"
+  ],
+  "uyumluluk_notu": "Çok basit zaman serisi momentum; mevcut momentum kartlarıyla bir benzer olabilir. Düşük öncelik.",
+  "varyantlar": [
+    "07B: 10 hisselik evrende günlük 20 günlük momentuma göre en iyi 3 eşit ağırlık, günlük yeniden dengeleme (long-only)"
+  ],
+  "anahtar_kelimeler": [
+    "momentum",
+    "sifir-kesisim",
+    "zaman-serisi",
+    "long-flat",
+    "hisse"
+  ]
+}

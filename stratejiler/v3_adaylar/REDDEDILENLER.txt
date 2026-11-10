@@ -2,3 +2,11 @@ BTC_Iki_Seansta_Gecikmeli_Reversal | kaynak (MDPI 19/9/692) WebFetch ile 403, ku
 ETH_Gece_Long_Gunduz_TersYon | kaynak (MDPI 19/9/692) WebFetch ile 403, seans kuralı doğrulanamadı
 BTC_Hacim_Saati_Ilk30_Son30_Momentum | kaynak (Wiley fire.12290) WebFetch ile 403, kural okunamadı
 QC gomulu backtest 9f6d23eb (hisse Sharpe secimi) | sayfa kesik, main.py kuralları okunamadı; kural doğrulanamadı
+BTC_1H_UcSigma_Sicrama_TersYon | kaynak (ledger doi 10.5195/ledger.2021.213) WebFetch ile okunamadı (503); kuralı doğrulayamadığım için kart yazılmadı, yeniden denenmeli
+BTC_15M_Mum_Donusu_Ilk5M_Long | kaynak (Heliyon doi 10.1016/j.heliyon.2023.e14236) okunamadı (yönlendirme/403); ayrıca etki 1 dakikada, bizde 1m yok; kart yazılmadı
+Funding_Saati_Hacim_Kirilimi | kaynak (tandfonline doi) 403 ile okunamadı; kaynak kârlılık iddia etmiyor, kural aday uyarlaması; kart yazılmadı
+UTC_15_16_Getiri_Mevsimselligi | kaynak (Springer doi 10.1007/s11156-024-01304-1) okunamadı (erişim/oturum yönlendirmesi); kart yazılmadı
+MAX anomalisi (kesit) | kaynak (JFE doi 10.1016/j.jfineco.2010.08.014) okunamadı (Elsevier yönlendirme); ayrıca 17 hisse evreninde decil anlamsız, short maliyeti; kart yazılmadı
+moobilly32/alpha_engine | DIP ve BREAKOUT giriş tetikleyicileri kaynakta tanımlı değil ("confirmed oversold setup"/"the moment it prints"); kesin ölçülebilir giriş yok, kart yazılamaz
+Guillain-RDCDE/Open-Alpha-Lab | kaynakta (README) en yüksekten düşüşten kaçınma kuralı yok; yalnız overnight anomali çalışması ve test araçları anlatılıyor, kural ölçülebilir biçimde okunamadı; katalogda ML/RL kategorili, lisans NOASSERTION
+adiv-1/momentum-clustered-algorithmic-trading-strategy | K-Means kümeleme (denetimsiz ML) hisse seçim çekirdeği: ML modeli kesin dışlama

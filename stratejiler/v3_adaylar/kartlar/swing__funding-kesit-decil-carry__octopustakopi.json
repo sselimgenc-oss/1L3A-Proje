@@ -1,0 +1,65 @@
+{
+  "kart_id": "swing__funding-kesit-decil-carry__octopustakopi",
+  "ad": "Funding Kesit Decil Carry (dolar nötr)",
+  "stil": "swing",
+  "kaynak": {
+    "url": "https://github.com/OctopusTakopi/funding-rate-alpha",
+    "lisans": "MIT",
+    "tur": "github"
+  },
+  "ozet": "Her gün 00:00 UTC'de bilinen ham funding oranına göre sözleşmeleri sırala; en düşük decil long, en yüksek decil short, dolar nötr, günlük yeniden dengeleme.",
+  "kategori": "diger",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "kripto",
+  "zaman_dilimi": {
+    "islem": "1d",
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {
+      "ad": "Funding oranı",
+      "parametreler": {
+        "sinyal": "ham funding",
+        "decil": 0.1
+      }
+    }
+  ],
+  "long_giris": [
+    "00:00 UTC kararında en düşük funding'li %10 dilimdeki sözleşmelere long"
+  ],
+  "short_giris": [
+    "Aynı anda en yüksek funding'li %10 dilime short"
+  ],
+  "stop_loss": null,
+  "zaman_cikisi": "Günlük yeniden sıralama; karşı dilime geçen/çıkan pozisyon kapanır",
+  "pozisyon_risk": "Dolar nötr; long ve short nominal eşit; likidite filtresi: son 90 gün ortalama günlük hacim >= 5 milyon USD; gün başına en az 20 işlem yapılabilir isim (kaynak evreni)",
+  "iddia_edilen_performans": "Kaynak iddiası (doğrulanmadı): net +17,7 bp/gün, Sharpe 2,40; carry bacağı +11,6 bp/gün, fiyat bacağı +10,2 bp/gün; fiyat bacağı maks. düşüş -%74; yıllık net 2020-2026: +228/+216/+50/+16/-14/+20/-43 %",
+  "kanit": "iddia (doğrulanmadı): kaynak README'si in-sample; maliyet 4 bp tek yön taker; ileri OOS yok. Son yıllarda zayıflama/negatif yıl var.",
+  "veri_uygun": [
+    true,
+    "Funding geçmişi ve perp OHLCV bizde var; evren 13-15 coin (kaynak 671 sözleşme), decil çok yoğunlaşır."
+  ],
+  "kodlanabilirlik": {
+    "puan": 3,
+    "gerekce": "Sıralama, decil, saat ve yeniden dengeleme net."
+  },
+  "belirsizlikler": [
+    "Kaynakta sabit fiyat stopu yok (yalnız getiri kırpma -%90/+%200 simülasyon vekili)",
+    "Likidasyon/ADL modellenmemiş, slipaj yok",
+    "13 coinle decil ~1 long + ~1 short; evren birebir tekrarlanamaz",
+    "Funding zaman damgası lookahead'e dikkat: karar anında bilinen son settlement kullanılmalı",
+    "Maliyet 4 bp tek yön kaynak varsayımı; bizde 13 coinle tekrar test gerekir"
+  ],
+  "uyumluluk_notu": "Mevcut pf__kesit_ls / swing__kesit-funding-baz-vekil__chi ile örtüşür (kesitsel funding sıralaması); burada ham funding, günlük, MIT kaynaklı net kural. Piyasa nötr.",
+  "anahtar_kelimeler": [
+    "funding",
+    "kesitsel",
+    "decil",
+    "carry",
+    "piyasa-notr"
+  ],
+  "filtreler": [],
+  "varyantlar": [],
+  "iz_suren_stop": null,
+  "kar_al": null
+}

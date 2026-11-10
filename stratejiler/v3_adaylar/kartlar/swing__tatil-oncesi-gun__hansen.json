@@ -1,0 +1,57 @@
+{
+  "kart_id": "swing__tatil-oncesi-gun__hansen",
+  "ad": "Tatil Öncesi Etkisi",
+  "stil": "swing",
+  "kaynak": {
+    "url": "https://quantpedia.com/strategies/pre-holiday-effect/",
+    "lisans": "belirtilmemiş",
+    "tur": "makale"
+  },
+  "ozet": "ABD hisse endeksinde, listedeki 10 tatilden önceki son işlem gününde long kalınır, diğer günlerde nakit (Hansen-Lunde).",
+  "kategori": "diger",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+    "islem": "1d",
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {
+      "ad": "ABD tatil takvimi (10 tatil)",
+      "parametreler": {}
+    }
+  ],
+  "long_giris": [
+    "Listedeki bir tatilden önceki son işlem günü ABD hisse endeksine long tut: Yılbaşı, MLK, Başkanlar Günü, Kutsal Cuma, Anma Günü, Bağımsızlık Günü, İşçi Bayramı, Seçim Günü, Şükran Günü, Noel"
+  ],
+  "short_giris": [],
+  "stop_loss": null,
+  "kar_al": null,
+  "iz_suren_stop": null,
+  "zaman_cikisi": "Tatil öncesi seansın sonunda çık (örtük)",
+  "filtreler": [],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": "Kaynak (Quantpedia özeti): 1896-2002, ~%6.39 gösterge getiri (Quantpedia'nın hesabı); etki 1980'ler sonrası büyük endekslerde zayıf (iddia, doğrulanmadı).",
+  "kanit": "Hansen-Lunde takvim etkileri makalesi Quantpedia özetinden okundu; makale metni açılmadı. Sayılar doğrulanmadı.",
+  "veri_uygun": [
+    false,
+    "ABD endeksi Dukascopy'de doğrulanmadı; tatil takvimi dış veri. Kripto 7/24 işlediği için bu kural kripto perp'e uygulanmaz."
+  ],
+  "kodlanabilirlik": {
+    "puan": 3,
+    "gerekce": "Net takvim kuralı; çıkış zamanı örtük."
+  },
+  "belirsizlikler": [
+    "Çıkış saati yazılı değil",
+    "Etki sonraki dönemde zayıflıyor, güncel geçerlilik belirsiz",
+    "Stop/kar-al: kaynakta yok"
+  ],
+  "uyumluluk_notu": "Yılda ~10 işlem; istatistik gücü düşük. Düşük öncelik.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+    "tatil-oncesi",
+    "takvim",
+    "gun-etkisi",
+    "endeks"
+  ]
+}

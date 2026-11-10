@@ -1,0 +1,78 @@
+{
+  "kart_id": "swing__dusuk-vol-momentum-rank__drishti7033",
+  "ad": "Düşük Volatilite + Momentum Sıralaması (Aylık)",
+  "stil": "swing",
+  "kaynak": {
+    "url": "https://github.com/drishti7033/Quant-Beyond-IRR-Kriti",
+    "lisans": "belirtilmemiş",
+    "tur": "github"
+  },
+  "ozet": "Likit hisselerde 12-1 ay momentum ve 126 günlük düşük volatilite z-skorlarının eşit karışımıyla sıralanan ilk ~30 hisse eşit ağırlıkla tutulur; aylık yeniden dengeleme, endeks MA200 altında yarı nakit.",
+  "kategori": "momentum",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+    "islem": "1d",
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {
+      "ad": "Momentum",
+      "parametreler": {
+        "formül": "Fiyat(t-21)/Fiyat(t-252)-1"
+      }
+    },
+    {
+      "ad": "Volatilite",
+      "parametreler": {
+        "pencere": 126,
+        "yillik": "sqrt(252)"
+      }
+    },
+    {
+      "ad": "SMA",
+      "parametreler": {
+        "periyot": 200,
+        "hedef": "endeks"
+      }
+    }
+  ],
+  "long_giris": [
+    "Likidite: 21 gün ort. işlem değeri alt %50 elenir",
+    "Skor=0,5*Z(momentum)+0,5*Z(-volatilite); sıra<=20 ise gir, sıra<=40 ise tut; ~30 hisse eşit ağırlık"
+  ],
+  "short_giris": [],
+  "stop_loss": null,
+  "kar_al": null,
+  "iz_suren_stop": null,
+  "zaman_cikisi": "Sıra>40 olunca çık; her 21 işlem gününde yeniden dengele",
+  "filtreler": [
+    "Endeks MA200 üstü: %100 yatırımlı; altı: %50 nakit"
+  ],
+  "pozisyon_risk": "Eşit ağırlık 1/N, tam hisse",
+  "iddia_edilen_performans": "Kaynakta CAGR %17,50, Sharpe 0,857 iddiası; hangi sütunun strateji olduğu belirsiz (iddia, doğrulanmadı)",
+  "kanit": null,
+  "veri_uygun": [
+    false,
+    "Evren NSE500 (yaklaşık 900 tarihsel üye); bizde yok. ABD hisse alt kümesiyle çok dar kalır, kesit sıralama anlamsızlaşabilir."
+  ],
+  "kodlanabilirlik": {
+    "puan": 2,
+    "gerekce": "Formüller net; rejim filtresi yeniden giriş kuralı yok."
+  },
+  "belirsizlikler": [
+    "Momentum etiketi 12-1 ay ama formül ~11 ay",
+    "Nakit seviyesinden yeniden giriş kuralı kaynakta yok",
+    "Delist işlemi 'temkinli' diye geçiyor, tanımsız",
+    "Stop yok",
+    "Lisans yok: kod kopyalanmadı"
+  ],
+  "uyumluluk_notu": "Kesitsel; kripto perp evrenine (13-15 coin) uyarlanırsa çok dar. Hisse evreni büyük olmalı.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+    "dusuk-volatilite",
+    "momentum",
+    "kesitsel",
+    "rotasyon"
+  ]
+}

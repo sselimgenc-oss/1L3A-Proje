@@ -1,0 +1,60 @@
+{
+  "kart_id": "swing__ramazan-mevsimsel__bialkowski",
+  "ad": "Ramazan Etkisi (Müslüman Ülke Hisseleri)",
+  "stil": "swing",
+  "kaynak": {
+    "url": "https://quantpedia.com/strategies/ramadan-effect/",
+    "lisans": "belirtilmemiş",
+    "tur": "makale"
+  },
+  "ozet": "Nüfusunun yarısından fazlası Müslüman olan ülkelerin hisse ETF'lerinden oluşan eşit ağırlıklı sepet Ramazan başında alınır, Ramazan boyunca tutulur, sonra nakde geçilir (Bialkowski-Etebari-Wisniewski).",
+  "kategori": "diger",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+    "islem": "1d (aylık)",
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {
+      "ad": "Ramazan takvimi (Hicri 9. ay)",
+      "parametreler": {}
+    }
+  ],
+  "long_giris": [
+    "Ramazan başlangıcında 14 Müslüman çoğunluklu ülkenin hisse ETF'sinden eşit ağırlıklı sepeti long al"
+  ],
+  "short_giris": [],
+  "stop_loss": null,
+  "kar_al": null,
+  "iz_suren_stop": null,
+  "zaman_cikisi": "Ramazan sonunda (veya hemen sonrasında) nakde geç; kesin zamanlama kaynakta yok",
+  "filtreler": [
+    "Evren: nüfusu >%50 Müslüman olan 14 ülke"
+  ],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": "Kaynak (Quantpedia özeti): 1989-2007, Ramazan getirisi yılın kalanından ~9 kat yüksek ve daha az oynak; ~%6.7 yıllık gösterge (Quantpedia'nın hesabı) (iddia, doğrulanmadı); maliyet düşülmemiş.",
+  "kanit": "Bialkowski-Etebari-Wisniewski 'Piety and Profits' Quantpedia özetinden okundu; makale metni açılmadı. Sayılar doğrulanmadı.",
+  "veri_uygun": [
+    false,
+    "Müslüman ülke ETF sepeti Dukascopy'de yok; Ramazan takvimi dış veri. Kripto uyarlaması kaynakta test edilmedi."
+  ],
+  "kodlanabilirlik": {
+    "puan": 2,
+    "gerekce": "Takvim net; ülke listesi ve çıkış zamanlaması kaynakta tam değil."
+  },
+  "belirsizlikler": [
+    "14 ülkenin tam listesi Quantpedia özetinde yok",
+    "Çıkış zamanlaması yazılı değil",
+    "Etki sonraki dönemde sürüyor mu: kaynakta yok",
+    "Stop/kar-al: kaynakta yok"
+  ],
+  "uyumluluk_notu": "Evren verimizde yok; düşük öncelik.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+    "ramazan",
+    "takvim",
+    "mevsimsellik",
+    "gelismekte-olan"
+  ]
+}

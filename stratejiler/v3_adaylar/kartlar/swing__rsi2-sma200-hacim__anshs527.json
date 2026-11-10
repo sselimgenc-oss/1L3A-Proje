@@ -1,0 +1,82 @@
+{
+  "kart_id": "swing__rsi2-sma200-hacim__anshs527",
+  "ad": "RSI(2) Aşırı Satım + SMA200 + Hacim",
+  "stil": "swing",
+  "kaynak": {
+    "url": "https://github.com/anshs527/rsitradingalgo",
+    "lisans": "belirtilmemiş",
+    "tur": "github"
+  },
+  "ozet": "Uzun vadeli yükselen trendde (fiyat SMA200 üstü) RSI(2) 10'un altına inip hacim ortalamanın 1,5 katını aşınca alınır; RSI(2)>65 veya fiyatın SMA200 altına inmesiyle çıkılır.",
+  "kategori": "ortalamaya_donus",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+    "islem": "1d",
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {
+      "ad": "RSI",
+      "parametreler": {
+        "periyot": 2
+      }
+    },
+    {
+      "ad": "SMA",
+      "parametreler": {
+        "periyot": 200
+      }
+    },
+    {
+      "ad": "Hacim",
+      "parametreler": {
+        "carpan": 1.5,
+        "ortalama_periyodu": null
+      }
+    },
+    {
+      "ad": "ATR",
+      "parametreler": {
+        "carpan": 2,
+        "periyot": null
+      }
+    }
+  ],
+  "long_giris": [
+    "RSI(2)<10",
+    "Fiyat > SMA200",
+    "Hacim > 1,5 x ortalama hacim"
+  ],
+  "short_giris": [],
+  "stop_loss": "Girişin 2 ATR altı",
+  "kar_al": "RSI(2)>65",
+  "iz_suren_stop": null,
+  "zaman_cikisi": "Fiyat SMA200 altına inerse çık",
+  "filtreler": [],
+  "pozisyon_risk": "İşlem başına %2 risk, pozisyon en çok sermayenin %25'i",
+  "iddia_edilen_performans": "Kaynakta NVDA 2020-2025 için %11,19 getiri, %69,23 kazanma, 13 işlem iddiası (iddia, doğrulanmadı)",
+  "kanit": null,
+  "veri_uygun": [
+    true,
+    "Dukascopy ABD hisse günlüğü + hacim; hacim verisinin kalitesi (CFD tik hacmi) doğrulanmalı."
+  ],
+  "kodlanabilirlik": {
+    "puan": 2,
+    "gerekce": "Kurallar net; hacim ortalaması ve ATR periyodu kaynakta yok."
+  },
+  "belirsizlikler": [
+    "Hacim ortalama periyodu ve ATR periyodu kaynakta yok",
+    "README RSI(2) diyor, QuantConnect kodu hâlâ RSI(14); tutarsızlık",
+    "Evren 'blue-chip', tek test NVDA",
+    "Lisans yok: kod kopyalanmadı"
+  ],
+  "uyumluluk_notu": "Günlük hisse; kripto günlüğüne de uyarlanabilir.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+    "rsi2",
+    "sma200",
+    "hacim",
+    "atr-stop"
+  ]
+}

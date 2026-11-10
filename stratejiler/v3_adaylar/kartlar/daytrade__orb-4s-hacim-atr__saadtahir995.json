@@ -1,0 +1,77 @@
+{
+  "kart_id": "daytrade__orb-4s-hacim-atr__saadtahir995",
+  "ad": "4s Açılış Aralığı Kırılımı + Hacim Filtresi (ORB)",
+  "stil": "daytrade",
+  "kaynak": {
+    "url": "https://github.com/saadtahir995/orb-trading-bot",
+    "lisans": "belirtilmemiş",
+    "tur": "github"
+  },
+  "ozet": "UTC gününün ilk 4 saatlik mumu açılış aralığını (OR high/low) belirler; sonraki bir 4s mum aralığı hacim filtresiyle kırarsa işlem açılır; başlangıç stopu 2 ATR, sonra iz süren çıkış.",
+  "kategori": "kirilim",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "kripto",
+  "zaman_dilimi": {
+    "islem": "4h",
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {
+      "ad": "Hacim SMA",
+      "parametreler": {
+        "periyot": 20,
+        "eşik": "hacim >= 1.5 x SMA"
+      }
+    },
+    {
+      "ad": "ATR",
+      "parametreler": {
+        "periyot": null,
+        "stop_carpani": 2.0
+      }
+    }
+  ],
+  "long_giris": [
+    "UTC gününün ilk 4s mumunun yüksek/düşüğü OR-high/OR-low; sonraki bir 4s mum OR-high üstünde kapanır VE hacim >= 1.5 x hacim SMA(20) (yön varsayımı: kaynak açık yazmıyor)"
+  ],
+  "short_giris": [
+    "Simetrik: OR-low altında kırılım ve aynı hacim şartı (varsayım, kaynak yönü açık yazmıyor)"
+  ],
+  "stop_loss": "Başlangıç stopu giriş fiyatından 2 x ATR",
+  "kar_al": "Sabit hedef yok",
+  "iz_suren_stop": "İz süren stop 1.0 x ATR kârda aktifleşir, geri çekilme mesafesi 1.0 x ATR",
+  "zaman_cikisi": "Kaynakta yok",
+  "filtreler": [
+    "Hacim >= 1.5 x SMA(20)"
+  ],
+  "pozisyon_risk": "İşlem başı %2 risk, komisyon %0.04 (README)",
+  "iddia_edilen_performans": "README: 59.5% kazanma, PF 1.68, CAGR +134.6%, maks DD %47.1 (Haz 2025-Haz 2026) (iddia, doğrulanmadı)",
+  "kanit": "README'deki sonuçlar yazar iddiasıdır (iddia, doğrulanmadı); OOS ve yöntem anlatılmamış.",
+  "veri_uygun": [
+    true,
+    "Binance 4s verisi 5m'den türetilir; kripto perp OHLCV ve hacim bizde var. 8 coin, adları kaynakta yok."
+  ],
+  "kodlanabilirlik": {
+    "puan": 2,
+    "gerekce": "Giriş/stop/iz stop sayısal; yön, ATR periyodu ve iz süren stop mekaniği net değil."
+  },
+  "belirsizlikler": [
+    "Giriş yönü kaynakta açık yazmıyor",
+    "ATR periyodu kaynakta yok",
+    "İz süren stop aktivasyon/çekilme mekaniği ayrıntısız",
+    "Kırılımın mum kapanışı mı fiyat teması mı belirsiz",
+    "Evren 8 coin, adlar yok",
+    "Lisans yok: kod kopyalanmadı",
+    "CAGR şüpheli derecede yüksek; lookahead anlatılmamış"
+  ],
+  "uyumluluk_notu": "Mevcut [M4] ORB Real Version MNQ ile benzer kavram; bu kripto 4s versiyonu. Kripto 24/7 olduğu için 'günün ilk mumu' UTC günü kabulü gerekir.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+    "orb",
+    "acilis-araligi",
+    "kirilim",
+    "atr",
+    "hacim-filtresi",
+    "kripto"
+  ]
+}

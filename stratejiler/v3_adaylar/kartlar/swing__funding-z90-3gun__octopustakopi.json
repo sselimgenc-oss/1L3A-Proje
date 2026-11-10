@@ -1,0 +1,67 @@
+{
+  "kart_id": "swing__funding-z90-3gun__octopustakopi",
+  "ad": "Funding Z-Skor 90G Kesit (3 gün tutuş)",
+  "stil": "swing",
+  "kaynak": {
+    "url": "https://github.com/OctopusTakopi/funding-rate-alpha",
+    "lisans": "MIT",
+    "tur": "github"
+  },
+  "ozet": "Her sözleşmenin kendi son 90 günlük settlement funding z-skorunu hesapla; kesitte en düşük decil long, en yüksek decil short, dolar nötr, 3 gün tut.",
+  "kategori": "diger",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "kripto",
+  "zaman_dilimi": {
+    "islem": "1d",
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {
+      "ad": "Funding z-skoru",
+      "parametreler": {
+        "pencere_gun": 90,
+        "decil": 0.1,
+        "tutus_gun": 3
+      }
+    }
+  ],
+  "long_giris": [
+    "z=(r-ort90)/std90; kesitte en düşük %10 z-skor dilimine long"
+  ],
+  "short_giris": [
+    "Kesitte en yüksek %10 z-skor dilimine short"
+  ],
+  "stop_loss": null,
+  "zaman_cikisi": "3 gün tut; sonraki yeniden dengelemede kapat",
+  "pozisyon_risk": "Dolar nötr; long ve short nominal eşit; likidite filtresi: son 90 gün ortalama günlük hacim >= 5 milyon USD; gün başına en az 20 işlem yapılabilir isim (kaynak evreni)",
+  "iddia_edilen_performans": "Kaynak iddiası (doğrulanmadı): 3 günlük tutuşta net +8,9 bp/gün, Sharpe 1,42, maks. düşüş yaklaşık -%40; günlük yeniden dengelemede +10,4 bp/gün, Sharpe 1,55. 2020-21 hariç +3,7 bp/gün, Sharpe 0,77 (t=1,63, anlamlı değil)",
+  "kanit": "iddia (doğrulanmadı): in-sample; kaynak z-skorun kendi 24s IC'sinin sıfırdan ayırt edilemediğini, kenarın carry'den geldiğini söylüyor.",
+  "veri_uygun": [
+    true,
+    "Funding geçmişi ve perp OHLCV bizde var; evren 13-15 coin (kaynak 671 sözleşme), decil çok yoğunlaşır."
+  ],
+  "kodlanabilirlik": {
+    "puan": 3,
+    "gerekce": "Formül, pencere, tutuş süresi net."
+  },
+  "belirsizlikler": [
+    "Kaynakta sabit fiyat stopu yok (yalnız getiri kırpma -%90/+%200 simülasyon vekili)",
+    "Likidasyon/ADL modellenmemiş, slipaj yok",
+    "13 coinle decil ~1 long + ~1 short; evren birebir tekrarlanamaz",
+    "Funding zaman damgası lookahead'e dikkat: karar anında bilinen son settlement kullanılmalı",
+    "Std=0 ise sinyal üretme",
+    "3 günlük tutuşun üst üste binen kohortlar mı tek kohort mu olduğu kaynakta belirtilmemiş (kaynakta yok)"
+  ],
+  "uyumluluk_notu": "Mevcut v2__funding-asiri-kontra tek sembol zaman serisidir; bu kesitsel z-skor. 2020-21 sonrası kenar zayıf.",
+  "anahtar_kelimeler": [
+    "funding",
+    "z-skor",
+    "kesitsel",
+    "decil",
+    "piyasa-notr"
+  ],
+  "filtreler": [],
+  "varyantlar": [],
+  "iz_suren_stop": null,
+  "kar_al": null
+}

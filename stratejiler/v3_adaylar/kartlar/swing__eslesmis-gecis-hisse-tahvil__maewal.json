@@ -1,0 +1,60 @@
+{
+  "kart_id": "swing__eslesmis-gecis-hisse-tahvil__maewal",
+  "ad": "Eşleşmiş Geçiş (Hisse/Tahvil)",
+  "stil": "swing",
+  "kaynak": {
+    "url": "https://quantpedia.com/strategies/paired-switching/",
+    "lisans": "belirtilmemiş",
+    "tur": "makale"
+  },
+  "ozet": "Negatif korelasyonlu iki varlıktan (VFINX hisse, VUSTX devlet tahvili) önceki çeyrekte getirisi yüksek olan çeyrek boyunca tutulur, çeyrek sonunda yeniden seçilir (Maewal-Bock).",
+  "kategori": "momentum",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "genel",
+  "zaman_dilimi": {
+    "islem": "1d (çeyreklik yeniden dengeleme)",
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {
+      "ad": "Getiri (geriye bakış)",
+      "parametreler": {
+        "pencere": "önceki çeyrek"
+      }
+    }
+  ],
+  "long_giris": [
+    "Her çeyrek sonunda iki varlığın önceki çeyrek getirisini karşılaştır; getirisi yüksek olanı bir çeyrek tut"
+  ],
+  "short_giris": [],
+  "stop_loss": null,
+  "kar_al": null,
+  "iz_suren_stop": null,
+  "zaman_cikisi": "Çeyrek sonunda yeniden sıralayıp gerekirse diğer varlığa geç (yılda en fazla 4 işlem)",
+  "filtreler": [],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": "Kaynak (Quantpedia özeti): VFINX-VUSTX 1991-2011, ~%11.3 yıllık, Sharpe 0.78, maliyetler hariç (iddia, doğrulanmadı).",
+  "kanit": "Maewal-Bock paired-switching makalesi (SSRN 1917044) Quantpedia özetinden okundu; makale metni açılmadı. Sayılar doğrulanmadı.",
+  "veri_uygun": [
+    false,
+    "Devlet tahvili fonu/ETF serisi Dukascopy'de doğrulanmadı; iki varlık gerekir (hisse + tahvil). Kripto-nakit ya da altın-endeks gibi alternatif çift kaynakta test edilmedi."
+  ],
+  "kodlanabilirlik": {
+    "puan": 3,
+    "gerekce": "Çok basit ve mekanik; sadece varlık verisi uyumsuzluğu var."
+  },
+  "belirsizlikler": [
+    "Geriye bakış penceresi tek çeyrek; diğer pencereler kaynakta yok",
+    "Stop/kar-al: kaynakta yok",
+    "Parametreler ayarlanmamış denildi, kaba örnek tek çift"
+  ],
+  "uyumluluk_notu": "Çok az işlem; tahvil verisi yoksa başka çiftle (ör. altın-endeks) uyarlama ancak ayrı test sayılır.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+    "eslesmis-gecis",
+    "iki-varlik",
+    "rotasyon",
+    "ceyreklik",
+    "hisse-tahvil"
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "kart_id": "swing__funding-7g-haftalik-tercil__vine",
+  "ad": "7 Gün Funding Haftalık Tercil (dolar nötr)",
+  "stil": "swing",
+  "kaynak": {
+    "url": "https://bryanvine.github.io/alpha-research/paper2.html",
+    "lisans": "bilinmiyor (sayfada lisans yok; © 2026 Bryan Vine; kod kopyalanmayacak)",
+    "tur": "blog"
+  },
+  "ozet": "Her coinin son 7 günlük settlement funding ortalaması/toplamı 1 gün geciktirilerek sıralanır; haftalık en düşük tercil long, en yüksek tercil short, dolar nötr.",
+  "kategori": "diger",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "kripto",
+  "zaman_dilimi": {
+    "islem": "1d",
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {
+      "ad": "Funding oranı",
+      "parametreler": {
+        "geri_bakis_gun": 7,
+        "gecikme_gun": 1,
+        "tercil": 3,
+        "yeniden_dengeleme": "haftalık"
+      }
+    }
+  ],
+  "long_giris": [
+    "Haftalık yeniden dengelemede, 1 gün gecikmeli 7 günlük funding'e göre en düşük tercile long"
+  ],
+  "short_giris": [
+    "Aynı anda en yüksek tercile short"
+  ],
+  "stop_loss": null,
+  "zaman_cikisi": "Haftalık yeniden dengeleme",
+  "pozisyon_risk": "Dolar nötr, brüt maruziyet 1,0; maliyet tabanı 6 bp/taraf",
+  "iddia_edilen_performans": "Kaynak iddiası (doğrulanmadı): net IS Sharpe 0,71, purged walk-forward OOS Sharpe 0,39, maks. düşüş -%35, deflated Sharpe 0,63, PBO 0,81; 36 konfigürasyonda en iyi 1,50 (yazar ~0,4 beklenmesini öneriyor)",
+  "kanit": "iddia (doğrulanmadı): blog yazısı; 30 Binance USD-M perp, 2023-01..2026-05; purged WF OOS 0,39 raporlanmış; PBO 0,81 yüksek parametre seçimi riski. Yıllık net Sharpe: 2023 -0,57; 2024 0,45; 2025 1,17.",
+  "veri_uygun": [
+    true,
+    "Funding ve perp OHLCV var; kaynak 30 perp, bizde 13-15 coin, tercil daha uygun ama yine dar."
+  ],
+  "kodlanabilirlik": {
+    "puan": 3,
+    "gerekce": "Pencere, gecikme, tercil, sıklık net."
+  },
+  "belirsizlikler": [
+    "Fiyat getirisi için spot proxy kullanılmış; bizde perp fiyatı",
+    "Funding ortalama mı toplam mı: kaynak 'toplam' ve 'ortalama' diyor, sıralama için eşdeğer",
+    "PBO 0,81: parametreler seçim yanlılığı taşıyor",
+    "Sabit fiyat stopu kaynakta yok; likidasyon kuyruğu riski"
+  ],
+  "uyumluluk_notu": "Mevcut v2__funding-esik-karsit tek sembol; bu kesitsel haftalık. Chi kartıyla benzer, OOS'lu ama zayıf.",
+  "anahtar_kelimeler": [
+    "funding",
+    "tercil",
+    "haftalik",
+    "kesitsel",
+    "piyasa-notr"
+  ],
+  "filtreler": [],
+  "varyantlar": [],
+  "iz_suren_stop": null,
+  "kar_al": null
+}

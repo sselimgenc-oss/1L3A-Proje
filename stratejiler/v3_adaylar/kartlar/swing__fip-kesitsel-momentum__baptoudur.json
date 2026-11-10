@@ -1,0 +1,69 @@
+{
+  "kart_id": "swing__fip-kesitsel-momentum__baptoudur",
+  "ad": "FIP Skorlu Kesitsel Momentum (L/S)",
+  "stil": "swing",
+  "kaynak": {
+    "url": "https://github.com/baptoudur/claudetest",
+    "lisans": "belirtilmemiş (README MIT diyor, LICENSE dosyası doğrulanamadı)",
+    "tur": "github"
+  },
+  "ozet": "Her varlık için 90 günlük getiri ve getirinin düzgünlüğü (pozitif gün - negatif gün) çarpılarak FIP skoru bulunur; skora göre sıralanıp en üst %20 long, en alt %20 short alınır, piyasa nötre yakın.",
+  "kategori": "momentum",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "kripto",
+  "zaman_dilimi": {
+    "islem": "1d",
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {
+      "ad": "FIP skoru",
+      "parametreler": {
+        "geri_bakis": 90,
+        "tanim": "işaret(getiri90) x (pozitif gün sayısı - negatif gün sayısı)/90"
+      }
+    }
+  ],
+  "long_giris": [
+    "Yeniden dengeleme gününde evreni FIP skoruna göre sırala; en yüksek %20'ye eşit ağırlıkla long (bacak ağırlığı %50)"
+  ],
+  "short_giris": [
+    "En düşük %20'ye eşit ağırlıkla short (bacak ağırlığı %50)"
+  ],
+  "stop_loss": null,
+  "kar_al": null,
+  "iz_suren_stop": null,
+  "zaman_cikisi": "Haftalık yeniden dengeleme (günlük/aylık seçenekli); ağırlık hedeften %20'den fazla saptıysa yeniden dengele",
+  "filtreler": [],
+  "pozisyon_risk": "Long %50 / short %50 net ≈ 0; bacak içinde eşit ağırlık (skor-ağırlıklı seçenek de var)",
+  "iddia_edilen_performans": null,
+  "kanit": "README: yalnız kural anlatımı; sayısal sonuç alınmadı.",
+  "veri_uygun": [
+    true,
+    "Binance USDT-M perp günlük OHLCV bizde var; evren sembolleri kaynakta yok, 13-15 coinlik evrende dar olur."
+  ],
+  "kodlanabilirlik": {
+    "puan": 3,
+    "gerekce": "Skor formülü, yüzde, geri bakış ve yeniden dengeleme kaynakta net; evren sembolleri belirsiz."
+  },
+  "belirsizlikler": [
+    "Evren sembolleri kaynakta yok",
+    "Eşik rebalans (%20 sapma) tanımı net değil: hangi ağırlık sapması",
+    "Stop kuralı yok",
+    "LICENSE dosyası yok/doğrulanamadı: kod kopyalanmadı, kural kendi cümlelerimizle yazıldı",
+    "Kaynak bir test deposu; strateji adı yok",
+    "Funding ve short maliyeti README'de modelleniyor (ücret %0.05, kayma %0.1)"
+  ],
+  "uyumluluk_notu": "Mevcut kesit-funding / kesit-düşük-hacim kartlarıyla aynı kesitsel mantık, sinyal farklı (FIP). Piyasa nötre yakın; evren darlığı riski.",
+  "varyantlar": [
+    "Skor-ağırlıklı pozisyon boyutu seçeneği",
+    "Günlük/aylık yeniden dengeleme seçeneği"
+  ],
+  "anahtar_kelimeler": [
+    "fip",
+    "kesitsel",
+    "momentum",
+    "piyasa-notr",
+    "kripto"
+  ]
+}

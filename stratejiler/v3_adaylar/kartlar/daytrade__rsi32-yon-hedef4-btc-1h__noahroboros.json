@@ -1,0 +1,65 @@
+{
+  "kart_id": "daytrade__rsi32-yon-hedef4-btc-1h__noahroboros",
+  "ad": "RSI(32) Yön + %4 Hedef (1h Kripto)",
+  "stil": "daytrade",
+  "kaynak": {
+    "url": "https://github.com/upupnoah/noahroboros",
+    "lisans": "MIT",
+    "tur": "github"
+  },
+  "ozet": "1 saatlikte RSI(32) 50'nin üstündeyse long, altındaysa short; %4 kâr hedefi ya da RSI 77/23 dönüşünde çık, 85/15'te güvenlik çıkışı.",
+  "kategori": "momentum",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "kripto",
+  "zaman_dilimi": {
+    "islem": "1h",
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {
+      "ad": "RSI",
+      "parametreler": {
+        "periyot": 32
+      }
+    }
+  ],
+  "long_giris": [
+    "RSI(32) > 50"
+  ],
+  "short_giris": [
+    "RSI(32) < 50"
+  ],
+  "stop_loss": null,
+  "kar_al": "%4 kâr hedefi",
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [],
+  "pozisyon_risk": "İşlem başına sermayenin %8'i (kaynak)",
+  "iddia_edilen_performans": "iddia (doğrulanmadı): BTC/ETH/SOL 1h, Eyl 2025-Mar 2026, Sharpe 2,569, toplam getiri %6,37, MaxDD %1,74, kazanma %83,1 (64/77), PF 7,3; skor ile Sharpe aynı değer (şüpheli)",
+  "kanit": "Strateji 88 otomatik AI deneyiyle evrilmiş (aşırı uyum riski); nihai kural sabit RSI eşikleridir, ML modeli değil. Doğrulanmadı.",
+  "veri_uygun": [
+    true,
+    "Binance USDT-M 1h OHLCV bizde var (kaynak spot klines kullanıyor)."
+  ],
+  "kodlanabilirlik": {
+    "puan": 2,
+    "gerekce": "Giriş/çıkış sayısal; çıkış katmanlarının sırası/yönü ve stop belirsiz."
+  },
+  "belirsizlikler": [
+    "Kaynakta yok: fiyat stopu (yalnız RSI 85/15 güvenlik çıkışı)",
+    "RSI 77/23 çıkışının yön eşlemesi (long için 77 mı?) belirtilmemiş: varsayım long RSI>77, short RSI<23",
+    "Çıkış sonrası aynı barda yeniden giriş kuralı yok",
+    "Lookahead denetimi yok",
+    "Parametreler otomatik evrimle seçilmiş (aşırı uyum)",
+    "Stopsuz: risk katmanında ATR stop eklenmeli"
+  ],
+  "uyumluluk_notu": "Kripto 1h uyumlu. Stop yokluğu nedeniyle risk katmanı gerekir.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+    "rsi32",
+    "rsi-esik",
+    "kar-hedefi",
+    "1h",
+    "kripto"
+  ]
+}

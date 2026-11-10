@@ -1,0 +1,82 @@
+{
+  "kart_id": "swing__momentum-btc-rejim-top5__adensvaz",
+  "ad": "Momentum + BTC Rejim Filtresi (Top5, Perp)",
+  "stil": "swing",
+  "kaynak": {
+    "url": "https://github.com/adensvaz/sentinel-hyperliquid",
+    "lisans": "MIT",
+    "tur": "github"
+  },
+  "ozet": "24 coinlik evrende 30 günlük momentuma göre sırala; kendi 50g trend filtresini geçen en iyi 5'i eşit ağırlıkla long tut. BTC 100g MA altındaysa tamamen nakde geç.",
+  "kategori": "momentum",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "kripto",
+  "zaman_dilimi": {
+    "islem": "1d",
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {
+      "ad": "Momentum (getiri)",
+      "parametreler": {
+        "pencere": 30
+      }
+    },
+    {
+      "ad": "MA",
+      "parametreler": {
+        "periyot": 50,
+        "not": "her coinin kendi trend filtresi; tür (SMA/EMA) belirtilmemiş"
+      }
+    },
+    {
+      "ad": "MA",
+      "parametreler": {
+        "periyot": 100,
+        "not": "BTC rejim"
+      }
+    }
+  ],
+  "long_giris": [
+    "Risk-on: BTC kapanış > BTC 100g MA",
+    "30g momentuma göre sırala",
+    "Kendi 50g trend filtresini geçenler arasından ilk 5'i eşit ağırlıkla long al"
+  ],
+  "short_giris": [],
+  "stop_loss": null,
+  "kar_al": null,
+  "iz_suren_stop": null,
+  "zaman_cikisi": "BTC < 100g MA ise tüm pozisyonları kapat (%100 nakit)",
+  "filtreler": [
+    "BTC 100g MA rejimi",
+    "Coin bazında 50g trend filtresi"
+  ],
+  "pozisyon_risk": "Eşit ağırlık, long-only, risk-on'da brüt 1x; volatilite hedefi + DD kısma + çökme koruması ile brüt %25-100 (eşikler kaynakta yok)",
+  "iddia_edilen_performans": "iddia (doğrulanmadı): README'de ~5,5 yıl Binance günlük veride +%39/yıl (dengeli), Sharpe 1,12, MaxDD ~%32",
+  "kanit": null,
+  "veri_uygun": [
+    true,
+    "Binance USDT-M günlük OHLCV bizde var; kaynak Hyperliquid vadelisi ama veri Binance günlüğü. Evren 24 coin listesi kaynakta yok."
+  ],
+  "kodlanabilirlik": {
+    "puan": 2,
+    "gerekce": "Çekirdek kural net; risk katmanı eşikleri ve yeniden dengeleme sıklığı yok."
+  },
+  "belirsizlikler": [
+    "Kaynakta yok: 24 coin listesi, 50g MA türü, yeniden dengeleme sıklığı, vol-target/DD/crash-guard eşikleri, anti-churn bant genişliği",
+    "Düşen coinin top-5'ten çıkış kuralı belirsiz",
+    "Coin bazlı stop kaynakta bu kitap için yok",
+    "Katalog notu: bir başka strateji temiz veride Sharpe 0,06"
+  ],
+  "uyumluluk_notu": "Funding-kesitsel kartlardan farklı: fiyat momentumu + rejim. Evren bizde 13-15 coin; 24 coin kuralı uyarlanmalı.",
+  "varyantlar": [
+    "Risk overlay'siz ham sürüm (iddia: +%69/yıl raw)"
+  ],
+  "anahtar_kelimeler": [
+    "momentum",
+    "kesitsel",
+    "btc-rejim",
+    "ma100",
+    "rotasyon"
+  ]
+}

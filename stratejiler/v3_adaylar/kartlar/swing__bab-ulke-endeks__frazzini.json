@@ -1,0 +1,65 @@
+{
+  "kart_id": "swing__bab-ulke-endeks__frazzini",
+  "ad": "Beta'ya Karşı Bahis (Ülke Endeksleri)",
+  "stil": "swing",
+  "kaynak": {
+    "url": "https://quantpedia.com/strategies/betting-against-beta-factor-in-country-equity-indexes/",
+    "lisans": "belirtilmemiş",
+    "tur": "makale"
+  },
+  "ozet": "Ülke ETF'leri, ABD endeksine göre 1 yıllık beta ile sıralanır; düşük beta portföyü long, yüksek beta portföyü short alınır ve beta nötr kurulur (Frazzini-Pedersen).",
+  "kategori": "diger",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+    "islem": "1d (aylık yeniden dengeleme)",
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {
+      "ad": "Beta (MSCI ABD endeksine karşı, kayan pencere)",
+      "parametreler": {
+        "pencere": "1 yıl"
+      }
+    }
+  ],
+  "long_giris": [
+    "Her ay ülke ETF'lerini artan beta ile sırala; düşük beta portföyünü, sıralanmış betalarla ağırlıklandırıp beta=1 olacak şekilde ölçekleyerek long al"
+  ],
+  "short_giris": [
+    "Yüksek beta portföyünü aynı şekilde beta=1'e ölçekleyip short al (sıfır maliyetli, sıfır beta pozisyon)"
+  ],
+  "stop_loss": null,
+  "kar_al": null,
+  "iz_suren_stop": null,
+  "zaman_cikisi": "Aylık (takvim ayı) yeniden dengeleme; açık çıkış kuralı yok",
+  "filtreler": [
+    "Evren: tüm ülke ETF'leri"
+  ],
+  "pozisyon_risk": "Beta nötr; düşük beta tarafı kaldıraçla ölçeklenir (borçlanma maliyeti kaynakta ayrıntılı değil)",
+  "iddia_edilen_performans": "Kaynak (Quantpedia özeti): 1980-2009, ~%6.8 yıllık, Sharpe 0.51 (iddia, doğrulanmadı); maliyetler hariç.",
+  "kanit": "Frazzini-Pedersen BAB makalesi Quantpedia özetinden okundu; makale metni açılmadı. Sayılar doğrulanmadı.",
+  "veri_uygun": [
+    false,
+    "Dukascopy'de ülke ETF/endeks sepeti yok ya da çok sınırlı; ABD referans endeksi ve çok ülke serisi gerekir. Kaldıraç ve short ETF maliyeti modellenmeli."
+  ],
+  "kodlanabilirlik": {
+    "puan": 2,
+    "gerekce": "Kural net; sıralanmış beta ağırlık formülü ve düşük/yüksek bölünme noktası kaynakta ayrıntılı değil."
+  },
+  "belirsizlikler": [
+    "Düşük/yüksek portföy bölünme noktası: kaynakta yok",
+    "Ağırlık formülü tam yazılmamış",
+    "Kaldıraç/finansman maliyeti: kaynakta belirsiz",
+    "Stop/kar-al: kaynakta yok"
+  ],
+  "uyumluluk_notu": "Ülke ETF evreni verimizde yok; düşük öncelik. Beta fikri kripto kesitine (BTC'ye karşı beta) taşınabilir ama kaynak bunu test etmiyor.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+    "beta",
+    "bab",
+    "kesitsel",
+    "ulke-endeksi",
+    "beta-notr"
+  ]
+}

@@ -1,0 +1,69 @@
+{
+  "kart_id": "swing__252g-zirve-kirilim-yuzde16-iz__yashkondawar",
+  "ad": "252 Gün Kapanış Zirvesi Kırılımı + %16 İz Süren Stop",
+  "stil": "swing",
+  "kaynak": {
+    "url": "https://github.com/yashkondawar/agentic-portfolio-manager",
+    "lisans": "MIT (README beyanı)",
+    "tur": "github"
+  },
+  "ozet": "Hisse son 252 seansın tüm kapanışlarının üstüne çıkıp yaşam boyu kapanış zirvesine %15'ten yakınsa alınır; girişten sonraki en yüksek kapanıştan %16 düşünce satılır.",
+  "kategori": "kirilim",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+    "islem": "1d",
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {
+      "ad": "Kapanış zirvesi",
+      "parametreler": {
+        "pencere": 252
+      }
+    },
+    {
+      "ad": "Momentum",
+      "parametreler": {
+        "pencere": "3 ay (sıralama)"
+      }
+    }
+  ],
+  "long_giris": [
+    "Kapanış > önceki 252 seansın her kapanışı",
+    "Kapanış yaşam boyu kapanış zirvesinin %15 içinde",
+    "Boş slot sayısı kadar aday 3 aylık momentuma göre sıralanıp alınır"
+  ],
+  "short_giris": [],
+  "stop_loss": "Girişten sonraki en yüksek kapanıştan %16 aşağıda kapanış (tek risk kontrolü)",
+  "kar_al": null,
+  "iz_suren_stop": "Girişten beri en yüksek kapanıştan %16 geri çekilme (kapanış bazlı)",
+  "zaman_cikisi": null,
+  "filtreler": [],
+  "pozisyon_risk": "En çok 28 slot, eşit pay, üç ayda bir yeniden ayarlanır",
+  "iddia_edilen_performans": "iddia (doğrulanmadı): 2014-01-01..2026-09-01 Nifty 500 (nokta-zamanlı) net CAGR %23,79, MaxDD -%29,4, Sharpe 1,34, kazanma %50,2 (729 işlem)",
+  "kanit": null,
+  "veri_uygun": [
+    false,
+    "Evren Hindistan Nifty 750/500 hisseleri; Dukascopy'de yok. Kural başka bir hisse evrenine taşınabilir ama bizim verimizde Hindistan hissesi yok."
+  ],
+  "kodlanabilirlik": {
+    "puan": 3,
+    "gerekce": "Tüm kurallar mekanik ve sayısal."
+  },
+  "belirsizlikler": [
+    "Aynı repoda LLM ajanları var; bu kart yalnız kural tabanlı ATH kırılım kolunu kapsar",
+    "Kâr hedefi, zaman çıkışı, rejim filtresi yok",
+    "Kapanış bazlı stop uygulaması ertesi gün mü belirsiz",
+    "Raporlanan evren adı net değil (Nifty 750 canlı / 500 backtest)"
+  ],
+  "uyumluluk_notu": "Mevcut Turtle/Donchian ailesine yakın ama 252g + yaşam zirvesi yakınlığı + %16 iz. Hisse evreni uygun değil.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+    "252-gun",
+    "zirve-kirilim",
+    "iz-suren-stop",
+    "ath",
+    "hisse"
+  ]
+}
