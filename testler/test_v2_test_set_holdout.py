@@ -694,10 +694,10 @@ def test_set_asamasi_uctan_uca_ve_muhur_icerigi(muhurlu):
               "strateji_hash", "evren"):
         assert k in muhur
     assert set(muhur["dosyalar"]) == {"havuz_v2.csv", "eleme.csv", "test.csv", "saglamlik.csv", "set.csv"}
-    if o["secilen"]:
-        assert all(a["ayar"] for a in muhur["set"]) and muhur["s"] in sabit.S_IZGARA
-        assert 1 <= len(muhur["set"]) <= 2 * sabit.STIL_BASINA_MAKS
-        assert holdout.muhur_kontrol(tmp_path, hv)["s"] == muhur["s"]
+    assert o["secilen"]                                        # B17: koşullu doğrulama yok, set seçilmiş olmalı
+    assert all(a["ayar"] for a in muhur["set"]) and muhur["s"] in sabit.S_IZGARA
+    assert 1 <= len(muhur["set"]) <= 2 * sabit.STIL_BASINA_MAKS
+    assert holdout.muhur_kontrol(tmp_path, hv)["s"] == muhur["s"]
     # mühürden sonra geliştirme aşamaları yazamaz
     with pytest.raises(kasa.MuhurEngeli):
         setm.set_asamasi(tmp_path, None, hv, mh, ilerleme=False)
@@ -707,8 +707,7 @@ def test_set_asamasi_uctan_uca_ve_muhur_icerigi(muhurlu):
 
 def test_muhurlu_dosyalardan_biri_degisince_holdout_durur(muhurlu):
     tmp_path, hv, mh, o = muhurlu
-    if not o["secilen"]:
-        pytest.skip("sentetik koşuda s bulunamadı")
+    assert o["secilen"], "sentetik koşuda set seçilmeli (s bulunamadıysa test sessizce atlanmaz, FAIL eder)"
     sag = SentetikHoldout({})
     for dosya in ("eleme.csv", "test.csv", "saglamlik.csv", "set.csv"):
         yol = tmp_path / dosya
@@ -995,3 +994,79 @@ def test_spa_asamasi_havuz_gunluk_mtm_ile_ozete_yazilir(gelistirme):
     csv1 = (tmp_path / "test.csv").read_bytes()
     k2.test_asamasi(tmp_path, 1, None, hv, mh, ilerleme=False, spa_hesapla=False)
     assert (tmp_path / "test.csv").read_bytes() == csv1
+
+
+# ================================================================== B15: veri hatası kapıyı KODDA düşürür
+def test_b15_set_kapisi_hata_varsa_gecmez():
+    assert holdout.set_kapisi(0.01, 0.05, [])
+    assert holdout.set_kapisi(0.01, 0.05, None)
+    assert not holdout.set_kapisi(0.01, 0.001, {"hA": ["X: veri_okunamadi"]})
+    assert not holdout.set_kapisi(0.01, 0.001, ["X: veri_okunamadi"])
+
+
+def test_b15_holdout_hatali_sembol_kapiyi_dusurur_ve_raporlanir(ho_ortam, tablo, monkeypatch):
+    class HataliSag(SentetikHoldout):
+        def tek_islemler(self, kayit):
+            isl, sira, _ = super().tek_islemler(kayit)
+            return isl, sira, ["ZZZ: holdout_verisi_yok: son mum 2022-12-31 < HOLDOUT_BAS"]
+    hv = _set_kur(ho_ortam, monkeypatch, tablo, [("hA", "swing")])
+    isl = {"hA": {EVREN[0]: _holdout_islem(0, 2.0, 1)}}
+    _sim_p_sabitle(monkeypatch, 0)                               # net > 0 ve p_set küçük: hatasız olsaydı kapı GEÇERDİ
+    o = holdout.holdout_asamasi(ho_ortam, HataliSag(isl), hv)
+    assert o["net_set"] > 0 and o["p_set"] < 0.05
+    assert not o["kapi_gecti"] and o["kapi_hata_engeli"]
+    assert o["hatalar"]["hA"] and "ZZZ" in o["hatalar"]["hA"][0]
+    assert o["kapsam"]["hA"] == {"evren": len(EVREN), "islemli": 1, "hatali": 1}
+    assert not (ho_ortam / "holdout" / "paper_girdisi.json").exists()
+    csv = pd.read_csv(ho_ortam / "holdout" / "holdout.csv")
+    assert "ZZZ" in csv["hatalar"].iloc[0] and csv["kapsam_hatali"].iloc[0] == 1
+    assert "ZZZ" in (ho_ortam / "holdout" / "holdout_raporu.md").read_text(encoding="utf-8")
+
+
+def test_b15_gercek_saglayici_atlanan_sembolleri_hatalara_yazar(monkeypatch):
+    class Deneme:
+        pass
+    monkeypatch.setitem(holdout._YETKI, "acik", True)
+    monkeypatch.setattr(we, "veri_ayarla", lambda *a, **k: None)
+    sag = holdout.GercekSaglayici("tablo.csv")
+    monkeypatch.setattr(sag, "_strateji", lambda kayit: Deneme())
+    sira = sabit.evren_listesi("kripto")
+    ekle = pd.DataFrame({"kapanis": [1.0]}, index=pd.DatetimeIndex([sabit.HOLDOUT_BAS - pd.Timedelta(days=5)]))
+    bos = ekle.iloc[0:0]
+
+    def sahte_veri(s, tf):
+        if s == sira[0]:
+            raise FileNotFoundError("yok")
+        if s == sira[1]:
+            raise ValueError("bozuk")
+        if s == sira[2]:
+            return bos, None
+        return ekle, None                                         # holdout öncesinde biten veri
+    monkeypatch.setattr(we, "_veri", sahte_veri)
+    out, s2, hatalar = sag.tek_islemler({"strateji": "x", "tf": "1d", "evren": "kripto"})
+    assert out == {} and s2 == sira
+    assert len(hatalar) == len(sira)                              # HİÇBİR sembol sessizce atlanmaz
+    assert hatalar[0].startswith(f"{sira[0]}: veri_okunamadi") and hatalar[1].startswith(f"{sira[1]}: veri_okunamadi")
+    assert hatalar[2].startswith(f"{sira[2]}: veri_bos") and "holdout_verisi_yok" in hatalar[3]
+
+
+# ================================================================== B14: atomik başlangıç işareti
+def test_b14_baslangic_isareti_atomik_ve_eski_gunluk_okunur(tmp_path):
+    assert not holdout.baslamis_mi(tmp_path)
+    holdout.baslangic_isaretle(tmp_path)
+    assert holdout.baslamis_mi(tmp_path)
+    with pytest.raises(holdout.HoldoutTekrarHatasi):              # ikinci (yarışan) deneme O_EXCL ile reddedilir
+        holdout.baslangic_isaretle(tmp_path)
+    # eski biçim: yalnız günlükte "basladi" (işaret dosyası yok) hâlâ başlamış sayılır
+    d2 = tmp_path / "eski"
+    holdout.gunluge_yaz(d2, {"olay": "basladi"})
+    assert not holdout._baslangic_isareti(d2).exists() and holdout.baslamis_mi(d2)
+
+
+def test_b14_holdout_isaret_dosyasi_olusur_ve_gunluk_yazilmadan_ikinci_kosu_reddedilir(ho_ortam, tablo, monkeypatch):
+    hv = _set_kur(ho_ortam, monkeypatch, tablo, [("hA", "swing")])
+    holdout.baslangic_isaretle(ho_ortam)                          # başka bir koşu işareti yarıştan önce koymuş
+    sag = SentetikHoldout({"hA": {EVREN[0]: _holdout_islem(0, 2.0, 1)}})
+    with pytest.raises(holdout.HoldoutTekrarHatasi):
+        holdout.holdout_asamasi(ho_ortam, sag, hv)
+    assert not sag.cagrildi and holdout.gunluk_oku(ho_ortam) == []

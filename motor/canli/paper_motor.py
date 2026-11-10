@@ -115,6 +115,7 @@ class PaperMotor(_Motor):
         self.kurallar_tablo = dict(kurallar)
         self.maliyet_log: list = []               # {zaman, sk, tur: ucret|kayma|funding, tutar: Decimal} (raporlama; muhasebeyi etkilemez)
         self._acil = False
+        self._acil_acilis = False                 # _acil_kapat açılış fazında (referans fiyat: bu satırın açılışı)
         # Yalnız TEKRAR modu (araştırma varsayımı, ON_KAYIT_V2 1.2): bu sembollerde SHORT pozisyona funding geliri yazılmaz (yalnız LONG öder).
         # Canlıda boş: gerçek Binance TradFi funding'i iki yönde de aynen işler.
         self.funding_short_sifir: frozenset = frozenset()
@@ -129,6 +130,14 @@ class PaperMotor(_Motor):
         self.uc: dict = {}
         # askıda kollar (bkz. 5): {"acik": {kimlik: ham pozisyon}, "kol": {kimlik: ham emirler}, "birimler": {ad: son_t}, "son_kap": {sembol: fiyat}}
         self.askida: dict = {"acik": {}, "kol": {}, "birimler": {}, "son_kap": {}}
+        # kill / günlük limitte askıdaki (kolu kurulu olmayan) pozisyonların son bilinen fiyattan kapatılma kayıtları (B11). İşlem satırı DEĞİL
+        # (kol kurulu olmadığı için strateji eşlemesi yok); K/Z nakite yazılır, burada ayrıca izlenir. Eski durum dosyasında yok (boş liste).
+        self.askida_kapanislar: list = []
+        # GEÇ GELEN BAR (B07): çok sembollü birimde satır bekleme süresi dolunca eksik sembolle işlenir; mum sonradan gelirse o barın stop/hedef
+        # kontrolü `gec_bar_isle` ile (yalnız o barın OHLC'si, sırayla) yapılır. gec_ankraj: satır işlenirken sembolü mumsuz kalan açık pozisyonların
+        # o anki (stop, hedef) değeri (sonradan yükselen iz süren stop eski bara uygulanmasın) - bellekte, kalıcı değil.
+        self.gec_ankraj: dict = {}
+        self.gec_bar_olaylari: list = []
 
     # ------------------------------------------------------------------ maliyet kaydı (çekirdek yöntemlerini sarar, davranışı değiştirmez)
     def _maliyet(self, t, kol_veya_p, tur: str, tutar: Decimal) -> None:
@@ -155,7 +164,7 @@ class PaperMotor(_Motor):
             ref = p.stop
         elif neden == "gun_sonu":
             ref = D(self.C[p.sembol][0])
-        elif self._acil or not self.VAR[p.sembol][0]:
+        elif (self._acil and not (self._acil_acilis and self.VAR[p.sembol][0])) or not self.VAR[p.sembol][0]:
             ref = D(self.son_kap[p.sembol])
         else:
             ref = D(self.A[p.sembol][0])
@@ -308,7 +317,7 @@ class PaperMotor(_Motor):
         return min(qty_w, qty_r)
 
     def _kap_orani(self, E, i, emirler, bekleyen_tahmin, grup, pay) -> Decimal:
-        kap = Decimal(self.kal) * E * pay / (1 + Decimal(self.kal) * self.taker)
+        kap = Decimal(self.kal) * E * pay / (1 + Decimal(self.kal) * self.kap_maliyet)
         hedefli = {e.kol.kimlik for e in emirler}
         sabit = self._askida_katki()[1] if (grup is None and self.askida["acik"]) else Decimal(0)
         for k, p in self.acik.items():
@@ -435,8 +444,8 @@ class PaperMotor(_Motor):
                 if p.miktar - red_q < self.min_qty[s]:
                     red_q = p.miktar
                     neden = "hedef_sifir"
-            fiyat = self._piyasa(s, p.yon, self.A[s][i], self.kayma)
-            self._azalt(p, fiyat, red_q, t, self.taker, neden, True)
+            fiyat = self._piyasa(s, p.yon, self.A[s][i], self._ky(s))
+            self._azalt(p, fiyat, red_q, t, self._tk(s), neden, True)
         for e in emirler:                                    # Faz B: açma / ekleme
             kol, s = e.kol, e.kol.sembol
             if e.yon == 0:
@@ -464,8 +473,8 @@ class PaperMotor(_Motor):
                 if hedef_q <= cur:
                     self._red(t, kol, e.yon, "toplam_risk_tavani")
                     continue
-            kap1 = Decimal(self.kal) * E * kol.grup_payi / (1 + Decimal(self.kal) * self.taker)
-            kap2 = Decimal(self.kal) * E / (1 + Decimal(self.kal) * self.taker)
+            kap1 = Decimal(self.kal) * E * kol.grup_payi / (1 + Decimal(self.kal) * self.kap_maliyet)
+            kap2 = Decimal(self.kal) * E / (1 + Decimal(self.kal) * self.kap_maliyet)
             oda = min(kap1 - self._brut_k(i, kol.kimlik, kol.grup), kap2 - self._brut_k(i, kol.kimlik, None))
             ust = max(oda, Decimal(0)) / e.px
             if ust < hedef_q:
@@ -515,6 +524,13 @@ class PaperMotor(_Motor):
         for p in list(self.acik.values()):
             if p.kol.birim == b.ad and self.VAR[p.sembol][0]:
                 self.nakit -= self._funding_ode(p, t, True)
+        for p in self.acik.values():
+            if p.kol.birim == b.ad and not self.VAR[p.sembol][0]:
+                self.gec_ankraj[(p.kol.kimlik, t)] = (p.stop, p.hedef)
+        if len(self.gec_ankraj) > 500:
+            for k in sorted(self.gec_ankraj, key=lambda x: x[1])[:len(self.gec_ankraj) - 500]:
+                del self.gec_ankraj[k]
+        limit_neden = self._acilis_limit_kontrol(b, t)          # B09: açılış MTM ile limit, girişlerden ÖNCE
         for kol in b.kollar:
             p = self.acik.get(kol.kimlik)
             s = kol.sembol
@@ -525,8 +541,8 @@ class PaperMotor(_Motor):
                 continue
             if kol.cikis_emri:
                 neden = kol.cikis_emri
-                k = self.stop_kayma if neden in ("kill_switch", "gunluk_limit") else self.kayma
-                self._azalt(p, self._piyasa(s, p.yon, self.A[s][0], k), p.miktar, t, self.taker, neden, False)
+                k = self._sk(s) if neden in ("kill_switch", "gunluk_limit") else self._ky(s)
+                self._azalt(p, self._piyasa(s, p.yon, self.A[s][0], k), p.miktar, t, self._tk(s), neden, False)
                 kol.hedef_emri = None
             elif kol.kucult_emri is not None:
                 f = D(kol.kucult_emri)
@@ -536,25 +552,131 @@ class PaperMotor(_Motor):
                     red_q = p.miktar
                 if red_q > 0:
                     self._kirp(t, kol, "kaldirac_azalt", 1.0, float(f))
-                    self._azalt(p, self._piyasa(s, p.yon, self.A[s][0], self.kayma), red_q, t, self.taker,
+                    self._azalt(p, self._piyasa(s, p.yon, self.A[s][0], self._ky(s)), red_q, t, self._tk(s),
                                 "kaldirac_azalt", True)
             kol.cikis_emri = None
             kol.kucult_emri = None
+        if limit_neden is not None:                             # açılışı olmayan birimler / diğer birimler: son bilinen fiyattan hemen
+            self._acil_kapat(t, limit_neden, None if self.tetikleyen_hemen_kapat else b.ad, acilista=True)
+        elif (self.kill or self.gunluk_blok) and self.askida["acik"]:
+            self._askida_kapat(t, "kill_switch" if self.kill else "gunluk_limit")
         self._emirleri_yurut(0, t)
 
-    def _acil_kapat(self, t, neden: str, haric_birim: Optional[str] = None) -> None:
-        """Pozisyonları (haric_birim verilirse o birim hariç) beklemeden son bilinen fiyattan kapatır (stop kayması)."""
+    def _acil_kapat(self, t, neden: str, haric_birim: Optional[str] = None, acilista: bool = False) -> None:
+        """Pozisyonları (haric_birim verilirse o birim hariç) beklemeden son bilinen fiyattan kapatır (stop kayması).
+        acilista=True (açılış fazı limit kontrolü, B09): bu satırda mumu görünen sembol açılış fiyatından kapanır (boşluk fiyatı; eski kapanış değil)."""
         self._acil = True
+        self._acil_acilis = acilista
         for p in list(self.acik.values()):
             if p.kol.birim == haric_birim:
                 continue
-            fiyat_ham = self.son_kap[p.sembol]
+            fiyat_ham = self.A[p.sembol][0] if (acilista and self.VAR[p.sembol][0]) else self.son_kap[p.sembol]
             if fiyat_ham != fiyat_ham:                      # NaN: hiç mum görülmedi (olmamalı)
                 raise RuntimeError(f"acil kapatma: {p.sembol} için fiyat yok")
             self.nakit -= self._funding_ode(p, t, False)
-            self._azalt(p, self._piyasa(p.sembol, p.yon, fiyat_ham, self.stop_kayma), p.miktar, t, self.taker, neden, False)
+            self._azalt(p, self._piyasa(p.sembol, p.yon, fiyat_ham, self._sk(p.sembol)), p.miktar, t, self._tk(p.sembol), neden, False)
             p.kol.cikis_emri = p.kol.kucult_emri = None
+        self._askida_kapat(t, neden)                        # B11: askıdaki pozisyonlar da kapanır (haric_birim kurulu birimdir; askıda kol hariç tutulmaz)
         self._acil = False
+
+    def gec_bar_isle(self, b: Birim, t, s: str, mum) -> dict:
+        """Satır işlendikten SONRA gelen (bekleme süresi dolmuş) `s` mumu `t` için kaçırılan stop/hedef kontrolünü yapar (B07). Yalnız o barın
+        O/H/L/C'si kullanılır (sonraki veri yok); stop/hedef o satır işlenirken kayıtlı değerdir (yoksa güncel). Bardan sonra açılmış pozisyona
+        dokunulmaz. Kapanış kararı/sinyal bu barla yeniden üretilmez (bar sonraki kararlarda strateji geçmişinde zaten vardır). Değerleme fiyatı
+        (son_kap) değişmez. -> olay kaydı {zaman, birim, sembol, sonuc: temiz|<çıkış nedeni>, kolar}."""
+        o, h, l, c = (float(x) for x in mum)
+        yuvalar = (self.A[s], self.Hh[s], self.Ll[s], self.C[s], self.VAR[s])
+        eski = [y.v for y in yuvalar]
+        self.A[s].v, self.Hh[s].v, self.Ll[s].v, self.C[s].v, self.VAR[s].v = o, h, l, c, True
+        sonuclar = []
+        try:
+            for kol in b.kollar:
+                if kol.sembol != s:
+                    continue
+                p = self.acik.get(kol.kimlik)
+                if p is None or p.zaman >= t:
+                    self.gec_ankraj.pop((kol.kimlik, t), None)
+                    continue
+                guncel = (p.stop, p.hedef)
+                p.stop, p.hedef = self.gec_ankraj.pop((kol.kimlik, t), guncel)
+                n0 = len(self.islemler)
+                self._mum_ici(p, kol, 0, t)
+                if kol.kimlik in self.acik and self.acik[kol.kimlik] is p:
+                    p.stop, p.hedef = guncel
+                    self._uc_mum(p, kol.kimlik)
+                    sonuclar.append((kol.kimlik, "temiz"))
+                else:
+                    kol.cikis_emri = kol.kucult_emri = None
+                    sonuclar.append((kol.kimlik, self.islemler[-1]["cikis_nedeni"] if len(self.islemler) > n0 else "kapandi"))
+        finally:
+            for y, v in zip(yuvalar, eski):
+                y.v = v
+        ol = {"zaman": t, "birim": b.ad, "sembol": s, "sonuc": next((n for _, n in sonuclar if n != "temiz"), "temiz"),
+              "kollar": [k for k, _ in sonuclar]}
+        self.gec_bar_olaylari.append(ol)
+        return ol
+
+    def _askida_kapat(self, t, neden: str) -> None:
+        """Askıdaki (kolu kurulu olmayan) açık pozisyonları son bilinen fiyattan, stop kaymasıyla kapatır (B11). Kol kurulu olmadığı için
+        işlem satırı yazılmaz: K/Z nakite yazılır, `askida_kapanislar`a kaydedilir (paper.py `askida_kapatma` olayı yazar). Funding yazılmaz
+        (kayıtlı seri yok). Fiyat: sembolün canlı son kapanışı, yoksa askıya alınırken dondurulan fiyat, yoksa giriş fiyatı (kaynak alanında yazılır)."""
+        for k, q in list(self.askida["acik"].items()):
+            s = q["sembol"]
+            f, kaynak = self.son_kap.get(s, NAN), "son_kapanis"
+            if f != f:
+                f, kaynak = self.askida["son_kap"].get(s, NAN), "askida_donmus_fiyat"
+            if f != f:
+                f, kaynak = q["giris"], "giris_fiyati (fiyat bilinmiyor)"
+            f = D(f)
+            yon, qty = q["yon"], q["miktar"]
+            fiyat = f * (1 - yon * self._sk(s))
+            if s in self.tick:
+                fiyat = _tick(fiyat, self.tick[s])
+            brut = (fiyat - q["giris"]) * qty * yon
+            kom = fiyat * qty * self._tk(s)
+            self.nakit += brut - kom
+            self.toplam_notional += fiyat * qty
+            net = q["brut_toplam"] + brut - q["giris_kom"] - q["cikis_kom"] - kom - q["funding"]
+            self.askida_kapanislar.append({"zaman": t, "kol": q["kol"], "sembol": s, "yon": yon, "miktar": float(qty), "giris_fiyati": float(q["giris"]),
+                                           "cikis_fiyati": float(fiyat), "brut_pnl": float(brut), "komisyon": float(kom), "net_pnl": float(net),
+                                           "cikis_nedeni": neden, "fiyat_kaynagi": kaynak})
+            del self.askida["acik"][k]
+            kd = self.askida["kol"].get(q["kol"])
+            if kd is not None:
+                kd.update({"hedef_emri": None, "giris_emri": None, "cikis_emri": None, "kucult_emri": None})
+
+    def _acilis_limit_kontrol(self, b: Birim, t) -> Optional[str]:
+        """Açılış MTM'siyle günlük kayıp / kill kontrolü (B09): açılış boşluğu limiti aşıyorsa bayraklar GİRİŞLERDEN ÖNCE kurulur (eskiden yalnız
+        bar kapanışında kuruluyordu; gün başı sıfırlanan bayrakla boşluk günü yeni giriş açılabiliyordu). Bu birimin pozisyonlarına bu açılışta
+        kapanış emri verilir (adım 2, stop kayması); diğer pozisyonlar için çağıran `_acil_kapat` yapar. -> tetiklenen neden | None."""
+        L = SERT_LIMITLER
+        E = self._ozs(0, True)
+        dusus = (self.zirve - E) / self.zirve * 100
+        kill_yeni = (not self.kill) and dusus >= D(L.kill_switch_dusus_yuzde)
+        gunluk_pct = (E - self.gun_basi) / self.gun_basi * 100
+        gunluk_tetik = gunluk_pct <= -D(L.gunluk_max_kayip_yuzde)
+        if kill_yeni:
+            self.kill = True
+            self.limit_olaylari.append({"tur": "kill_switch", "zaman": t, "ozsermaye": float(E), "dusus_yuzde": float(dusus), "mod": "uygula",
+                                        "evre": "acilis"})
+        if gunluk_tetik:
+            if not self.gunluk_kaydedildi:
+                self.gunluk_kaydedildi = True
+                self.gunluk_limit_sayisi += 1
+                self.limit_olaylari.append({"tur": "gunluk_kayip", "zaman": t, "ozsermaye": float(E), "dusus_yuzde": float(-gunluk_pct),
+                                            "mod": "uygula", "evre": "acilis"})
+            self.gunluk_blok = True
+        if not (kill_yeni or gunluk_tetik):
+            return None
+        neden = "kill_switch" if self.kill else "gunluk_limit"
+        for kol in b.kollar:
+            if kol.kimlik in self.acik:
+                kol.cikis_emri = neden
+        if self.kill:
+            for kol in self.tum_kollar:
+                kol.hedef_emri = None
+                kol.giris_emri = None
+        return neden
 
     def kapanis_fazi(self, b: Birim, t, karar_fn: Optional[Callable], son_satir: bool = False) -> None:
         """Adım 4-7. `karar_fn()` sinyal/ağırlık kararlarını döner: {kol_kimligi: {alan: değer}} (adım 7)."""
@@ -658,7 +780,7 @@ class PaperMotor(_Motor):
             s = p.sembol
             ham = self._fiyat_ham(s, 0, False)
             self.nakit -= self._funding_ode(p, t + b.aralik, False)
-            self._azalt(p, _tick(D(ham), self.tick[s]), p.miktar, t + b.aralik, self.taker, "veri_sonu", False)
+            self._azalt(p, _tick(D(ham), self.tick[s]), p.miktar, t + b.aralik, self._tk(s), "veri_sonu", False)
 
     # ------------------------------------------------------------------ raporlama yardımcıları
     def ozsermaye(self, fiyatlar: Optional[dict] = None) -> Decimal:
@@ -702,7 +824,7 @@ class PaperMotor(_Motor):
                      for k, p in self.acik.items()} | self.askida["acik"],
             "kol": kol_durum | self.askida["kol"], "islemler": self.islemler, "reddedilenler": self.reddedilenler, "kirpmalar": self.kirpmalar,
             "limit_olaylari": self.limit_olaylari, "maliyet_log": self.maliyet_log,
-            "karar_meta": self.karar_meta, "giris_meta": self.giris_meta, "uc": self.uc,
+            "karar_meta": self.karar_meta, "giris_meta": self.giris_meta, "uc": self.uc, "askida_kapanislar": self.askida_kapanislar, "gec_bar_olaylari": self.gec_bar_olaylari,
             "birimler": {**self.askida["birimler"], **{a: b.son_t for a, b in self.birimler.items()}}})
 
     def durum_yukle(self, d: dict, atilan_kollar: frozenset = frozenset()) -> None:
@@ -752,6 +874,8 @@ class PaperMotor(_Motor):
         self.maliyet_log = list(d.get("maliyet_log", []))
         self.karar_meta, self.giris_meta = dict(d.get("karar_meta", {})), dict(d.get("giris_meta", {}))      # eski durum dosyasında yok
         self.uc = dict(d.get("uc", {}))                                                                      # eski durum dosyasında yok
+        self.askida_kapanislar = list(d.get("askida_kapanislar", []))                                        # eski durum dosyasında yok (B11)
+        self.gec_bar_olaylari = list(d.get("gec_bar_olaylari", []))                                          # eski durum dosyasında yok (B07)
         for a, t in d["birimler"].items():
             if a in self.birimler:
                 self.birimler[a].son_t = t

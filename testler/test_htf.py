@@ -84,7 +84,49 @@ def test_seansli_piyasa_ust_mumlari_atilmaz():
     df = pd.DataFrame({"acilis": x, "yuksek": x, "dusuk": x, "kapanis": x, "hacim": 1.0}, index=idx)
     g = ust_zaman(df, "1d", lambda u: u["kapanis"])
     assert g.notna().mean() > 0.95
-    assert g.loc["2024-01-02 14:00"] == 106.0           # 1 Ocak'ın son (20:00) mumu, ertesi gün kullanılır
+    # B02: sınıflama NEDENSEL; ilk periyotta (1 Ocak, 7 mum) seans/24-7 ayrımı için geçmiş yok -> 24/7 kuralıyla eksik, atılır.
+    # (Eskiden tüm serinin doluluğuyla seanslı sayılıp tutuluyordu: 1 Ocak'ın 20:00 kapanışı 106.0 2 Ocak 14:00'dan itibaren geçerliydi.)
+    assert np.isnan(g.loc["2024-01-02 14:00"])
+    assert g.loc["2024-01-03 14:00"] == 113.0           # 2 Ocak'ın son (20:00) mumu (ikinci periyottan itibaren seanslı tanınır)
     h = ust_zaman(df, "1w", lambda u: u["kapanis"])
     assert h.notna().mean() > 0.85
     assert h.loc["2024-01-08 14:00"] == 100 + 5 * 7 - 1  # 1. haftanın son mumu
+
+
+def _kesme_kontrol(df, aralik, t_son_dahil):
+    """t'ye kadar kesilmiş seri ile uzun seri, t'ye kadar (dahil) AYNI değerleri vermeli."""
+    uzun = ust_zaman(df, aralik, lambda u: u["kapanis"])
+    kisa = ust_zaman(df[df.index <= t_son_dahil], aralik, lambda u: u["kapanis"])
+    pdt.assert_series_equal(kisa, uzun.loc[:t_son_dahil], check_freq=False)
+
+
+def test_b02_kesme_degismezligi_24_7_ve_seansli():
+    # 24/7: tam günlerin sonunda kesilen seri ile uzun seri aynı
+    df = mumlar_1h(40)
+    for aralik in ("4h", "1d", "1w"):
+        for t in (pd.Timestamp("2024-01-10 23:00", tz="UTC"), pd.Timestamp("2024-01-21 23:00", tz="UTC"), pd.Timestamp("2024-02-04 15:00", tz="UTC")):
+            if aralik != "4h" and t.hour != 23:
+                continue
+            _kesme_kontrol(df, aralik, t)
+    # seanslı (hafta içi 14-21 UTC): periyot sonlarında kesme
+    idx = pd.date_range("2024-01-01", "2024-03-15", freq="1h", tz="UTC", name="zaman")
+    idx = idx[(idx.dayofweek < 5) & (idx.hour >= 14) & (idx.hour < 21)]
+    x = np.arange(len(idx), dtype=float) + 100
+    ds = pd.DataFrame({"acilis": x, "yuksek": x, "dusuk": x, "kapanis": x, "hacim": 1.0}, index=idx)
+    for aralik, t in (("1d", "2024-01-18 20:00"), ("1d", "2024-02-20 20:00"), ("1w", "2024-02-02 20:00"), ("1w", "2024-03-01 20:00")):
+        _kesme_kontrol(ds, aralik, pd.Timestamp(t, tz="UTC"))
+
+
+def test_b02_seanslilik_gelecek_veriyle_degismez_gecmis_deger_sabit():
+    # Eski hata: tüm serinin doluluğu seanslılığı belirlerdi. Kısa seri (24/7 görünür, ilk periyot kısmi) ileride seyrek veri
+    # eklenince seanslı sayılıp geçmişteki kısmi ilk periyot farklı kuralla değerlendiriliyordu (değer NaN <-> dolu değişirdi).
+    rng = np.random.default_rng(1)
+    kisa = mumlar_1h(3, bas="2024-01-01 02:00")
+    t_son = kisa.index[-1]
+    gel = mumlar_1h(30, bas=str(t_son + pd.Timedelta("1h")))
+    gel = gel[rng.random(len(gel)) < 0.4]                       # sonradan %60 delikli (seanslı benzeri) veri
+    uzun = pd.concat([kisa, gel])
+    for aralik in ("4h", "1d"):
+        a = ust_zaman(kisa, aralik, lambda u: u["kapanis"])
+        b = ust_zaman(uzun, aralik, lambda u: u["kapanis"])
+        pdt.assert_series_equal(a.loc[:t_son], b.loc[:t_son], check_freq=False)

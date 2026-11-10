@@ -113,6 +113,14 @@ Ana ders: önceki sonuçlar OOS'a bakılarak seçilmiş ve kâr birkaç işlemde
   saatlik dosyalar → swing/daytrade 1h+ testleri önce; 15m/30m dakikalık veri tamamlanınca.
 
 ## Lider kararları günlüğü (karar 26)
+- 2026-11-10: BAĞIMSIZ DENETİM (Codex raporu B01-B18; Denetçi SG + Fable doğruladı: 17 gerçek, 1 şüphe) → düzeltmeler (testli):
+  paper/portföy: B09 günlük/kill limiti açılışta girişlerden önce; B11 askıdaki pozisyon da limitte kapanır (+alarm); B05 geç gelen funding
+  bir kez ödenir; B06 sembol bazlı maliyet; B07 geç gelen mumda kaçan stop/hedef kontrolü; B10 kaldıraç tavanında kayma payı.
+  araştırma: B04 sıfır süreli işlem hayalet pozisyon bırakmaz (v2 ham: 1.6M işlemde 267, paper setindeki 10 stratejide 0 → v2 seçimi etkilenmedi);
+  B15 holdout'ta atlanan sembol hata sayılır ve kapı KODDA kapanır; B16 ham/eleme yan dosyasına veri/strateji/motor hash + commit
+  (eski v2 dosyaları yalnız --eski-yan-dosya ile); B17 sessiz skip → assert; B14 holdout başlangıç işareti atomik; B02 htf/yeniden_örnekle
+  eşiği nedensel (ilk seans dönemi artık atılır). B01, B13 → v3 ön kaydında karar. B03, B08, B12 zaten belgeli. B18 (pano erişimi) canlıdan önce.
+  Tüm suite: 4161 geçti. Paper sunucuda güncellenmeli (git pull + restart).
 - 2026-11-10 (KULLANICI): ChatGPT (Codex) denetim + öneri + geliştirme için kullanılır. Kurallar AGENTS.md: kendi dalında PR açar,
   birleştirmez; lider her PR'ı doğrulayıp birleştirir. Sırayla: salt-okur denetim raporu → öneri listesi → seçilenler PR olarak.
 - 2026-11-10: Y-5 UYGULANDI (evren zinciri bitti): tek-grafik kaldıraç tavanı komisyon payı dahil (portföy motoruyla aynı K·E/(1+K·taker)).
@@ -145,7 +153,7 @@ Ana ders: önceki sonuçlar OOS'a bakılarak seçilmiş ve kâr birkaç işlemde
   giriş riskiyle sabit sayıyor; motorlar (backtest/paper/canlı) anlık riski sayıyor. Limitsiz karşılaştırmada işlem mekaniği uyuşuyor.
   LİDER KARARI: paper motor kuralıyla çalışır (canlıda geçerli olacak kural bu); holdout oynatmasının limit yaklaşıklığı bilinen
   sınırlama olarak kaydedildi, resmi holdout sonucu değiştirilmez. Sonuç: jt'nin +%23'ünün büyük kısmı limit yaklaşıklığından.
-  Ayrıntı: sonuclar/paper_v2/uyum_raporu.md. Kilit günlüğüne bir ajan ön denemesi 4 satır 'bench' gerekçesiyle yazdı; dürüst kayıt olarak kalır.
+  Ayrıntı: sonuclar/paper_v2/uyum/uyum_raporu.md. Kilit günlüğüne bir ajan ön denemesi 4 satır 'bench' gerekçesiyle yazdı; dürüst kayıt olarak kalır.
 - 2026-11-09 23:11 UTC: v2 HOLDOUT (kullanıcı onayıyla, tek sefer; 2025-11-08 → 2026-11-06): SET KAPISI GEÇTİ.
   Set net +%13.4 (tek kasa, maliyet ×1, TradFi funding dahil, işlem başı %0.5), p_set 0.0002; hatalar boş (beyan 1 sağlandı).
   gauss-stoch-eth 1d: 159 işlem, net +%10.4, PF(R) 1.53, K2 p 0.015. ewo-ema-ofset 15m: 46 işlem, net +%3.7, PF(R) 1.64,

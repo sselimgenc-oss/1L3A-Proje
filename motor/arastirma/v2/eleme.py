@@ -279,11 +279,32 @@ def _isci(g: dict):
     cikti = Path(_AYAR["cikti"])
     try:
         s = satir_degerlendir(g["row"], cikti, _AYAR["tablo_yolu"], _AYAR["tablo_hash"])
+        s["kimlik"] = _satir_kimligi(g["row"], cikti, _AYAR["tablo_hash"])
     except RuntimeError as e:
         if "bitmemiş" in str(e):
             return {"ertelendi": True, "neden": str(e), "strateji": g["row"]["strateji"], "tf": g["row"]["tf"]}
         raise
     _satir_yaz(cikti, s)
+    return s
+
+
+def _satir_kimligi(row: dict, cikti: Path, tablo_hash: str) -> dict:
+    """B16: eleme satırı yan dosyası damgası. veri_sha256 = satırın dayandığı ham yan dosyalarının veri özetlerinin özeti."""
+    ad, tf, stil = row["strateji"], row["tf"], row["stil_v2"]
+    if stil == "portfoy":
+        veri = hm._sha_json([hm.pf_yukle(cikti, c, ad, tablo_hash)[1].get("veri_sha256") for c in (1.0, 2.0)])
+    else:
+        evren_t = sabit.evren_listesi(row["evren"])
+        veri = hm._sha_json({str(c): hm.ham_yukle(cikti, c, ad, tf, evren_t, tablo_hash)[1].get("veri_sha256", {}) for c in (1.0, 2.0)})
+    return hm.kimlik_damgasi(ad, "portfoy" if stil == "portfoy" else "swing", veri)
+
+
+def _satir_oku(cikti: Path, row) -> dict:
+    """Satır yan dosyasını okur; kimlik damgası (strateji/motor/commit) şimdiki kodla uyuşmuyorsa RuntimeError (B16).
+    Damgasız eski v2 satırı yalnız V2_ESKI_YAN_DOSYA=1 ile okunur."""
+    y = _satir_yolu(cikti, row["strateji"], row["tf"])
+    s = json.loads(y.read_text())
+    hm.kimlik_dogrula(s.get("kimlik") or {}, row["strateji"], "portfoy" if row["stil_v2"] == "portfoy" else "swing", y.name)
     return s
 
 
@@ -314,6 +335,7 @@ def eleme_asamasi(cikti: Path = None, surec: int = sabit.SUREC_VARSAYILAN, butce
     for _, row in havuz.iterrows():
         y = _satir_yolu(cikti, row["strateji"], row["tf"])
         if y.exists() and not yeniden:
+            _satir_oku(cikti, row)             # B16: bayat/uyumsuz önbellek sessizce kullanılmaz
             continue
         gorev.append({"row": {k: (None if (isinstance(v, float) and math.isnan(v)) else v) for k, v in row.items()}})
     if ilerleme:
@@ -331,7 +353,8 @@ def eleme_asamasi(cikti: Path = None, surec: int = sabit.SUREC_VARSAYILAN, butce
         return ozet
     satirlar = []
     for _, row in havuz.iterrows():
-        s = json.loads(_satir_yolu(cikti, row["strateji"], row["tf"]).read_text())
+        s = _satir_oku(cikti, row)
+        s.pop("kimlik", None)             # damga yan dosyada kalır; eleme.csv şeması değişmez
         for c in ("etiket", "alt_etiket", "kume_no", "kilit_gorulmus"):
             s[c] = row.get(c)
         satirlar.append(s)

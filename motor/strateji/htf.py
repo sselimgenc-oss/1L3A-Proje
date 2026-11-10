@@ -33,17 +33,24 @@ def _aralik_str(td: pd.Timedelta) -> str:
 _SEANS_ESIK_ORANI = 0.25
 
 
-def _seansli(index: pd.DatetimeIndex, kaynak_s: pd.Timedelta) -> bool:
-    """Verinin kapsadığı sürede beklenen kaynak mumlarının %90'ından azı varsa seanslı piyasa (kripto ~%100;
-    emtia ~%68, BIST ~%24, ABD hisse ~%19)."""
-    beklenen = (index[-1] - index[0]) / kaynak_s + 1
-    return len(index) < 0.9 * beklenen
+def _seansli_seri(index: pd.DatetimeIndex, anahtar, kaynak_s: pd.Timedelta) -> pd.Series:
+    """NEDENSEL seans sınıflaması (B02): her üst periyot k için, YALNIZ k'nın sonuna kadarki veriyle: gözlenen kaynak mumu sayısı
+    (kümülatif) beklenenin (ilk mumdan k'nın son gözlemine kadar) %90'ından azsa seanslı (kripto ~%100; emtia ~%68, BIST ~%24,
+    ABD hisse ~%19). Eskiden tüm serinin doluluğu kullanılıyordu: sonradan veri eklenince geçmiş değer değişiyordu."""
+    anahtar = pd.DatetimeIndex(anahtar)
+    sayi = pd.Series(1, index=index).groupby(anahtar).sum()
+    son = pd.Series(index, index=index).groupby(anahtar).max()
+    beklenen = (son - index[0]) / kaynak_s + 1
+    return sayi.cumsum() < 0.9 * beklenen
 
 
-def _eksik(sayi: pd.Series, beklenen: int, seansli: bool) -> pd.Series:
-    if not seansli:                                      # 24/7 (kripto): tam doluluk şartı (eski davranış)
-        return sayi < beklenen
-    return sayi < _SEANS_ESIK_ORANI * sayi.median()     # seanslı piyasa
+def _eksik(sayi: pd.Series, beklenen: int, seansli: pd.Series) -> pd.Series:
+    """Üst periyot eksik mi? `seansli`: periyot indeksli bool Series (nedensel, _seansli_seri). 24/7: tam doluluk şartı.
+    Seanslı: önceki periyotların EXPANDING medyanının %25'inden az (geçmiş yoksa eksik sayılmaz); gelecek veri hiçbir
+    periyotun bayrağını değiştirmez."""
+    onceki = sayi.expanding().median().shift(1).fillna(sayi)
+    seans_eksik = sayi < _SEANS_ESIK_ORANI * onceki
+    return seans_eksik.where(seansli.reindex(sayi.index).fillna(False).astype(bool), sayi < beklenen)
 
 
 def _haftalik(df: pd.DataFrame, kaynak_s: pd.Timedelta) -> pd.DataFrame:
@@ -56,7 +63,7 @@ def _haftalik(df: pd.DataFrame, kaynak_s: pd.Timedelta) -> pd.DataFrame:
         "hacim": g["hacim"].sum(), "quote_hacim": g["quote_hacim"].sum(),
         "islem_sayisi": g["islem_sayisi"].sum().astype("int64"),
     })
-    c["eksik"] = _eksik(g["acilis"].count(), int(_HAFTA / kaynak_s), _seansli(df.index, kaynak_s))
+    c["eksik"] = _eksik(g["acilis"].count(), int(_HAFTA / kaynak_s), _seansli_seri(df.index, hafta, kaynak_s))
     c.index.name = "zaman"
     return c
 
@@ -78,8 +85,9 @@ def ust_zaman(mumlar: pd.DataFrame, aralik: str, fonk):
         ust = _haftalik(df, kaynak_s)
     else:
         ust = yeniden_ornekle(df, aralik, _aralik_str(kaynak_s))
-        sayi = df.groupby(df.index.floor(ust_s))["acilis"].count()
-        ust["eksik"] = _eksik(sayi.reindex(ust.index).fillna(0), int(ust_s / kaynak_s), _seansli(df.index, kaynak_s))
+        anahtar = df.index.floor(ust_s)
+        sayi = df.groupby(anahtar)["acilis"].count()
+        ust["eksik"] = _eksik(sayi, int(ust_s / kaynak_s), _seansli_seri(df.index, anahtar, kaynak_s)).reindex(ust.index).fillna(True)
     ust = ust[~ust["eksik"]].drop(columns="eksik")
 
     sonuc = fonk(ust)

@@ -226,6 +226,10 @@ class _Motor:
         self.mal = {s: (D(a) / 100, D(b) / 100, D(c) / 10000, D(d) / 10000)
                     for s, (a, b, c, d) in (ayarlar.maliyet_sembol or {}).items()}
         self.taker_en_yuksek = max([self.taker] + [v[0] for v in self.mal.values()])
+        self.kayma_en_yuksek = max([self.kayma] + [v[2] for v in self.mal.values()])
+        # brüt tavan paydasındaki birim maliyet: dolum fiyatı (kayma dahil) üzerinden nominal + komisyon + kayma kaybı özsermayeden düşer
+        # (B10, 2026-11-10: kayma payda dışındaydı -> dolumdan sonra kaldıraç ~%0.2 üstte kalıyordu)
+        self.kap_maliyet = self.taker_en_yuksek + self.kayma_en_yuksek
         top_sert = L.portfoy_toplam_risk_yuzde
         top = top_sert if ayarlar.toplam_risk_tavani_yuzde is None else min(ayarlar.toplam_risk_tavani_yuzde, top_sert)
         if ayarlar.toplam_risk_tavani_yuzde is not None and ayarlar.toplam_risk_tavani_yuzde > top_sert:
@@ -328,8 +332,11 @@ class _Motor:
             j = max(oi.searchsorted(zamanlar[k], side="right") - 1, 0)
             toplam += p.miktar * D(oo[j]) * D(oranlar[k]) * p.yon
         p.funding += toplam
-        if dahil:
-            p.son_f = bitis
+        if dahil and b > a:
+            # imleç ÖDENEN son funding kaydına ilerler (bitis'e değil): bitis'ten önceki ama henüz gelmemiş (geç gelen, paper funding'i 30 dk'da
+            # bir yeniler) kayıt sonraki çağrıda bir kez ödenir; ödenen kayıt tekrar ödenmez (B05). Backtest'te tüm kayıtlar baştan var,
+            # (son ödenen, bitis] aralığında kayıt olmadığı için sonuç eskisiyle birebir aynıdır.
+            p.son_f = max(p.son_f, zamanlar[b - 1])
         return toplam
 
     def _kirp(self, t, kol, tur, istenen, uygulanan):
@@ -517,7 +524,7 @@ class _Motor:
         # ham None: emir iptal (pozisyona dokunma)
         emirler = [e for e in emirler if not (e.ham is None)]
         # --- 2(a) orantılı kaldıraç ölçeklemesi
-        kap = Decimal(self.kal) * E / (1 + Decimal(self.kal) * self.taker_en_yuksek)
+        kap = Decimal(self.kal) * E / (1 + Decimal(self.kal) * self.kap_maliyet)
         hedefli = {e.kol.kimlik for e in emirler}
         sabit = Decimal(0)
         for k, p in self.acik.items():
@@ -656,6 +663,33 @@ class _Motor:
             for p in list(self.acik.values()):
                 if self.VAR[p.sembol][i]:
                     self.nakit -= self._funding_ode(p, t, True)
+
+            # 1b) açılış MTM ile limit kontrolü (B09): açılış boşluğu günlük -%3 / kill -%20'yi aşıyorsa bayraklar BU satırda, girişlerden
+            #     (adım 3) ÖNCE kurulur; açık pozisyonlar bu açılışta (adım 2) stop kaymasıyla kapanır. Kapanış kontrolü (adım 6) aynen sürer.
+            if not self.olc:
+                E_ac = self._ozs(i, True)
+                kill_y = (not self.kill) and (zirve - E_ac) / zirve * 100 >= D(L.kill_switch_dusus_yuzde)
+                gun_pct_ac = (E_ac - gun_basi) / gun_basi * 100
+                gunluk_y = gun_pct_ac <= -D(L.gunluk_max_kayip_yuzde)
+                if kill_y:
+                    self.kill = True
+                    self.limit_olaylari.append({"tur": "kill_switch", "zaman": t, "ozsermaye": float(E_ac),
+                                                "dusus_yuzde": float((zirve - E_ac) / zirve * 100), "mod": "uygula", "evre": "acilis"})
+                if gunluk_y:
+                    if not gunluk_kaydedildi:
+                        gunluk_kaydedildi = True
+                        self.limit_olaylari.append({"tur": "gunluk_kayip", "zaman": t, "ozsermaye": float(E_ac),
+                                                    "dusus_yuzde": float(-gun_pct_ac), "mod": "uygula", "evre": "acilis"})
+                    self.gunluk_blok = True
+                if kill_y or gunluk_y:
+                    neden_l = "kill_switch" if self.kill else "gunluk_limit"
+                    for kol in self.kollar:
+                        if kol.kimlik in self.acik:
+                            kol.cikis_emri = neden_l
+                    if self.kill:
+                        for kol in self.kollar:
+                            kol.hedef_emri = None
+                            kol.giris_emri = None
 
             # 2) açılışta bekleyen çıkışlar (kill / günlük limit / sinyal / zaman / kaldıraç azaltma)
             for kol in self.kollar:

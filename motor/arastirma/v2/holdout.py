@@ -129,8 +129,25 @@ def gunluk_oku(cikti: Path) -> list:
     return [json.loads(x) for x in yol.read_text(encoding="utf-8").splitlines() if x.strip()] if yol.exists() else []
 
 
+def _baslangic_isareti(cikti: Path) -> Path:
+    return Path(cikti) / (sabit.HOLDOUT_GUNLUK + ".basladi")
+
+
 def baslamis_mi(cikti: Path) -> bool:
-    return any(k.get("olay") == "basladi" for k in gunluk_oku(cikti))
+    """Başlamış sayılır: atomik işaret dosyası VAR ya da (eski kayıtlar) günlükte "basladi" olayı var."""
+    return _baslangic_isareti(cikti).exists() or any(k.get("olay") == "basladi" for k in gunluk_oku(cikti))
+
+
+def baslangic_isaretle(cikti: Path) -> None:
+    """B14: "başladı" işaretini ATOMİK yazar (open "x" = O_EXCL). Kontrol-sonra-yaz yarışı yok: eşzamanlı ikinci koşu
+    FileExistsError -> HoldoutTekrarHatasi alır. Eski günlük (işaretsiz) okunabilir kalır (baslamis_mi ikisine de bakar)."""
+    yol = _baslangic_isareti(cikti)
+    yol.parent.mkdir(parents=True, exist_ok=True)
+    try:
+        with open(yol, "x", encoding="utf-8") as f:
+            f.write(datetime.now(timezone.utc).isoformat() + "\n")
+    except FileExistsError as e:
+        raise HoldoutTekrarHatasi("holdout bir kerelik ve daha önce başlatıldı; ikinci deneme yoktur") from e
 
 
 def gunluge_yaz(cikti: Path, olay: dict) -> None:
@@ -161,6 +178,10 @@ class HoldoutSaglayici:
 
     def pf_k2_p(self, kayit: dict, n_sim: int, tohum: int) -> float:
         raise NotImplementedError
+
+    def pf_hatalar(self, kayit: dict) -> list:
+        """Portföy satırının holdout evreninde veri bulunamayan sembolleri (neden metniyle). Varsayılan: yok."""
+        return []
 
 
 _YETKI = {"acik": False}
@@ -198,9 +219,16 @@ class GercekSaglayici(HoldoutSaglayici):
         for s in sira:
             try:
                 mumlar, fund = we._veri(s, tf)
-            except (FileNotFoundError, ValueError):
+            except (FileNotFoundError, ValueError) as e:
+                # B15: sessizce atlanmaz; sembol + neden hatalara yazılır ve set kapısı KODDA başarısız olur
+                hatalar.append(f"{s}: veri_okunamadi: {type(e).__name__}: {e}"[:200])
                 continue
-            if not len(mumlar) or mumlar.index[-1] < sabit.HOLDOUT_BAS:
+            if not len(mumlar):
+                hatalar.append(f"{s}: veri_bos: holdout verisinde hiç mum yok")
+                continue
+            if mumlar.index[-1] < sabit.HOLDOUT_BAS:
+                # geliştirme döneminde verisi olan ama holdout'ta eksik sembol (veri < HOLDOUT_BAS'ta bitiyor)
+                hatalar.append(f"{s}: holdout_verisi_yok: son mum {mumlar.index[-1]} < HOLDOUT_BAS")
                 continue
             try:
                 kural = we.tarama.SEMBOL_KURALLARI.get(s, we.tarama.VARSAYILAN_KURAL)
@@ -243,6 +271,11 @@ class GercekSaglayici(HoldoutSaglayici):
             raise HoldoutHatasi(f"{kayit['strateji']}: varsayılan ayar holdout evreninde uygun değil")
         return wep._kos(st, v, f, ev, hm.maliyet_pf(ev, 1.0, self.tablo_yolu), 0), v
 
+    def pf_hatalar(self, kayit):
+        from motor.arastirma import wf_evren_portfoy as wep
+        _, _, dis = wep.veri_yukle(sabit.evren_listesi(kayit["evren"]), "1d")
+        return [f"{x}: holdout_verisi_yok_ya_da_okunamadi (portföy evreni)" for x in dis]
+
     def pf_gunluk(self, kayit):
         r, v = self._pf_kos(kayit)
         return k2.pf_gunluk_getiri(r, v, self.tablo_yolu, sabit.HOLDOUT_BAS)
@@ -278,7 +311,7 @@ def strateji_olc(kayit: dict, sag: HoldoutSaglayici, s: float, tablo_yolu, bit, 
         g = ilk["pf_gunluk"][ad]
         tohum = sabit.satir_tohumu(ad, tf, "hk2")
         p = sag.pf_k2_p(kayit, sabit.HOLDOUT_B_STRATEJI, tohum)
-        return {"net": pf_net(g, s), "pf_r": math.nan, "n_islem": int(len(g)), "k2_p": p, "hatalar": ""}
+        return {"net": pf_net(g, s), "pf_r": math.nan, "n_islem": int(len(g)), "k2_p": p, "hatalar": "; ".join(ilk["hatalar"].get(ad, []))}
     islemler = ilk["islemler"][ad]
     sira = ilk["sira"][ad]
     net = oynat_net({ad: islemler}, {ad: sira}, s, tablo_yolu, bit)
@@ -294,8 +327,11 @@ def strateji_olc(kayit: dict, sag: HoldoutSaglayici, s: float, tablo_yolu, bit, 
     return {"net": net, "pf_r": pf, "n_islem": int(sum(len(d) for d in islemler.values())), "k2_p": p, "hatalar": "; ".join(ilk["hatalar"][ad])}
 
 
-def set_kapisi(net_set: float, p_set: float) -> bool:
-    """Set kapısı: net > 0 VE p_set <= HOLDOUT_P_SET (NaN = geçmez)."""
+def set_kapisi(net_set: float, p_set: float, hatalar=None) -> bool:
+    """Set kapısı: net > 0 VE p_set <= HOLDOUT_P_SET (NaN = geçmez) VE hiç veri/koşu hatası yok (B15: `hatalar` boş olmalı;
+    atlanan/eksik sembol varsa kapı KODDA geçmez)."""
+    if hatalar:
+        return False
     return bool(math.isfinite(net_set) and net_set > 0 and math.isfinite(p_set) and p_set <= sabit.HOLDOUT_P_SET)
 
 
@@ -322,6 +358,7 @@ def holdout_asamasi(cikti: Path = None, saglayici: Optional[HoldoutSaglayici] = 
     if baslamis_mi(cikti):
         raise HoldoutTekrarHatasi("holdout bir kerelik ve daha önce başlatıldı; ikinci deneme yoktur")
     s = float(muhur["s"])
+    baslangic_isaretle(cikti)            # atomik (B14); günlükten ÖNCE, veri okunmadan ÖNCE
     gunluge_yaz(cikti, {"olay": "basladi", "set": [a["strateji"] for a in muhur["set"]], "s": s, "muhur_dosyalar": muhur["dosyalar"]})
     _YETKI["acik"] = True
     try:
@@ -345,6 +382,7 @@ def _kos(muhur: dict, sag: HoldoutSaglayici, s: float, tablo_yolu, cikti: Path) 
     for k in set_:
         if k["stil_v2"] == "portfoy":
             ilk["pf_gunluk"][k["strateji"]] = sag.pf_gunluk(k)
+            ilk["hatalar"][k["strateji"]] = list(sag.pf_hatalar(k))
         else:
             isl, sira, hat = sag.tek_islemler(k)
             ilk["islemler"][k["strateji"]], ilk["sira"][k["strateji"]], ilk["hatalar"][k["strateji"]] = isl, sira, hat
@@ -366,12 +404,22 @@ def _kos(muhur: dict, sag: HoldoutSaglayici, s: float, tablo_yolu, cikti: Path) 
                                    alt_sinir=sabit.HOLDOUT_BAS)["toplam_r"]
     if tek:
         T_set, p_set = T, k2.p_degeri(T, toplam)
-    kapi = set_kapisi(net_set, p_set)
+    tum_hata = {ad: list(h) for ad, h in ilk["hatalar"].items() if h}
+    kapi = set_kapisi(net_set, p_set, tum_hata)
+    kapsam = {}
+    for k in set_:
+        ad = k["strateji"]
+        if k["stil_v2"] == "portfoy":
+            kapsam[ad] = {"evren": len(sabit.evren_listesi(k["evren"])) if k.get("evren") else None, "islemli": None,
+                          "hatali": len(ilk["hatalar"][ad])}
+        else:
+            kapsam[ad] = {"evren": len(ilk["sira"][ad]), "islemli": len(ilk["islemler"][ad]), "hatali": len(ilk["hatalar"][ad])}
     # ---- strateji düzeyi ölçümler (rapor; budama yalnız kapı geçtiyse)
     olc = {k["strateji"]: strateji_olc(k, sag, s, tablo_yolu, bit, ilk) for k in set_}
     kalan, cikan = (budama(olc) if kapi else ([], {}))
     sonuc = {"kapi_gecti": bool(kapi), "net_set": net_set, "net_tek": net_tek, "net_portfoy": net_pf, "p_set": p_set, "T_set": T_set,
              "B_set": B_set, "s": s, "veri_sonu": str(bit), "olcumler": olc, "cikan": cikan, "kalan": kalan,
+             "hatalar": tum_hata, "kapsam": kapsam, "kapi_hata_engeli": bool(tum_hata),
              "kilit_gorulmus": {k["strateji"]: k.get("kilit_gorulmus") for k in set_}}
     _rapor_yaz(cikti, sonuc, set_)
     if kapi and kalan:
@@ -389,7 +437,8 @@ def _rapor_yaz(cikti: Path, sonuc: dict, set_: list) -> None:
         satirlar.append({"strateji": k["strateji"], "tf": k["tf"], "stil_v2": k["stil_v2"], "ayar": k["ayar"], "net": o["net"],
                          "pf_r": o["pf_r"], "n_islem": o["n_islem"], "k2_p": o["k2_p"], "kilit_gorulmus": k.get("kilit_gorulmus"),
                          "durum": ("budandi" if k["strateji"] in sonuc["cikan"] else ("kaldi" if k["strateji"] in sonuc["kalan"] else "kapi_kalmadi")),
-                         "hatalar": o["hatalar"]})
+                         "hatalar": o["hatalar"], "kapsam_evren": sonuc["kapsam"][k["strateji"]]["evren"],
+                         "kapsam_islemli": sonuc["kapsam"][k["strateji"]]["islemli"], "kapsam_hatali": sonuc["kapsam"][k["strateji"]]["hatali"]})
     pd.DataFrame(satirlar).to_csv(d / "holdout.csv", index=False)
     kasa.atomik_yaz_json(d / "holdout_sonuc.json", sonuc)
     sat = ["# v2 holdout raporu", "",
@@ -398,6 +447,11 @@ def _rapor_yaz(cikti: Path, sonuc: dict, set_: list) -> None:
            "| strateji | tf | net | PF(R) | işlem | K2 p | kilit_gorulmus | durum |", "|---|---|---|---|---|---|---|---|"]
     for r in satirlar:
         sat.append(f"| {r['strateji']} | {r['tf']} | {r['net']:.4f} | {r['pf_r']} | {r['n_islem']} | {r['k2_p']} | {r['kilit_gorulmus']} | {r['durum']} |")
+    sat += ["", "Sembol kapsamı (strateji: evren / işlem üreten / hatalı-atlanan):"]
+    for ad, c in sonuc["kapsam"].items():
+        sat.append(f"- {ad}: {c['evren']} / {c['islemli']} / {c['hatali']}")
+    if sonuc["hatalar"]:
+        sat += ["", "VERİ/KOŞU HATALARI (set kapısı kodda KALDI):"] + [f"- {ad}: {h}" for ad, hs in sonuc["hatalar"].items() for h in hs]
     sat += ["", EVREN_NOTU, "",
             "Kapı kaldıysa bu set paper'a gitmez; holdout'a bakılarak ayar/eşik/set değiştirilmez; yeni tasarım denenmez (ON_KAYIT_V2 0.3)."]
     (d / "holdout_raporu.md").write_text("\n".join(sat), encoding="utf-8")

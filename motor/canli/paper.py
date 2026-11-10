@@ -75,6 +75,8 @@ class Paper:
         self.strateji_gun_tsi: dict = {}         # aynısı TSİ günü kesimiyle (pano dönemsel getiri)
         self.bildirim = None                     # callback(tur, mesaj) (Telegram vb.); None: yok
         self._limit_gorulen = 0
+        self._askida_kap_gorulen = 0
+        self._son_gec = 0
         self.karar_onbellek: Optional[dict] = None   # tekrar modu hızlandırması (tek_evren): {(kol_kimligi, t): karar}; canlıda None
         # kalp atışı (kalp_atisi.py): düzenli zaman damgası; yeniden başlatmadaki kesinti süresi bundan ölçülür
         self.kalp_atisi: Optional[str] = None     # son kalp atışı (UTC ISO); paper_state.json'a da yazılır
@@ -235,6 +237,10 @@ class Paper:
                 self.olay_ekle("gunluk_limit", f"Günlük kayıp limiti: gün başından %{o['dusus_yuzde']:.2f} kayıp; açıklar kapanıyor, "
                                               f"bugün yeni işlem yok", o["zaman"])
         self._limit_gorulen = len(m.limit_olaylari)
+        for x in m.askida_kapanislar[self._askida_kap_gorulen:]:         # B11: askıdaki pozisyon limitte son bilinen fiyattan kapandı: ayrı alarm
+            self.olay_ekle("askida_kapatma", f"{x['kol']} ({x['sembol']}) askıda açık pozisyon {x['cikis_nedeni']} ile {x['cikis_fiyati']:.6g}'dan kapatıldı "
+                                             f"(fiyat kaynağı: {x['fiyat_kaynagi']}); net K/Z {x['net_pnl']:+.2f} USD", x["zaman"])
+        self._askida_kap_gorulen = len(m.askida_kapanislar)
 
     def bekleyen(self, simdi) -> list:
         """İşlenecek (kapanış, birim sırası, t, mumlar) satırları, kapanış zamanına göre."""
@@ -245,10 +251,21 @@ class Paper:
         rows.sort(key=lambda r: (r[0], r[1]))
         return rows
 
+    def _gec_barlari_isle(self) -> int:
+        """Satırı zaman aşımıyla mumsuz işlenmiş sembolün mumu sonradan geldiyse o barın stop/hedef kontrolü yapılır (B07) ve olay yazılır."""
+        n = 0
+        for b in self.birimler:
+            for t, s, mum in self.kaynak.gec_barlar(b):
+                ol = self.motor.gec_bar_isle(b, t, s, mum)
+                n += 1
+                self.olay_ekle("gec_bar", f"{b.ad} {t}: {s} {b.tf} mumu bekleme süresinden sonra geldi; kaçırılan stop/hedef kontrolü yapıldı -> {ol['sonuc']}", t)
+        return n
+
     def adim(self, simdi, son_satir_bayragi: bool = False) -> int:
         """Kapanmış tüm bekleyen satırları kronolojik işler. -> işlenen satır sayısı."""
         if not self.baslatildi:
             raise RuntimeError("önce baslat(simdi) ya da yukle()")
+        self._son_gec = self._gec_barlari_isle()
         rows = self.bekleyen(simdi)
         for k, (kap, bi, t, mumlar) in enumerate(rows):
             b = self.birimler[bi]
@@ -332,6 +349,7 @@ class Paper:
         self.son_ozet = d.get("son_ozet")                           # eski durum dosyasında yok (None)
         self.motor.durum_yukle(d["motor"], atilan_kollar=frozenset(atilan))
         self._limit_gorulen = len(self.motor.limit_olaylari)
+        self._askida_kap_gorulen = len(self.motor.askida_kapanislar)
         if olay_yaz:
             for msg in notlar:
                 self.uyarilar.append(msg)
@@ -529,6 +547,7 @@ def canli_calistir(durum_dizini: Path, tohum_dizin: Optional[Path] = None, ayar_
             p.olay_ekle(t_, m_, simdi)
         kaynak.guncelle(simdi)
         n = p.adim(simdi)
+        n_gec = p._son_gec
         bld.kontrol()                          # WS 10 dk'dır kopuksa tek uyarı
         p.kalp_at(simdi, durum_dizini)         # tur başarıyla tamamlandı: kalp atışı (en çok 60 sn'de bir diske)
         for a in pdr.acik_pozisyonlar(p):
@@ -543,7 +562,7 @@ def canli_calistir(durum_dizini: Path, tohum_dizin: Optional[Path] = None, ayar_
             kiyas_son[0] = simdi
             kiyas_btc_guncelle(ist, tohum_dizin, simdi, p)
         o = durum_yazici(p, kaynak, durum_dizini, simdi, veri_dizini=tohum_dizin)   # kıyas/güven okuması = tohum dizini (sunucuda StateDirectory)
-        if n:
+        if n or n_gec:
             p.kaydet()
         if ozet_zamani(p, simdi):
             dun = dun_tsi(simdi)

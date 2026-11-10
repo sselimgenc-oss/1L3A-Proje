@@ -226,9 +226,82 @@ def _yan_yaz(yol: Path, meta: dict):
     gecici.replace(yol)
 
 
-def _meta_taslak(ad, tf, sembol, carpan, tablo_hash, etiket="") -> dict:
+# ---------------------------------------------------------------------------- kimlik damgası (B16)
+# Yan dosya yalnız maliyet_hash tutuyordu: veri, strateji kodu ya da ortak motor değişse de eski sonuç sessizce okunurdu.
+# Damga: veri_sha256 (okunan mum+funding içeriği), strateji_hash (kaynak+kart/ayar dosyaları), motor_hash (paylaşılan motor modülleri),
+# git_commit. Okumada strateji/motor/(isteğe bağlı veri) uyuşmazlığı RuntimeError; commit yalnız "mühürdeki şimdikinin atası mı"
+# diye bakılır (her commit'te sonuç geçersiz olmasın; muhur_kontrol ile aynı kural).
+# ESKİ (damgasız) v2 yan dosyaları tarihsel kayıttır: yalnız AÇIK bayrakla (eski_kabul=True ya da V2_ESKI_YAN_DOSYA=1) okunur.
+ESKI_ORTAM = "V2_ESKI_YAN_DOSYA"
+DAMGA_ALANLARI = ("veri_sha256", "strateji_hash", "motor_hash", "git_commit")
+_DAMGA_ONBELLEK: dict = {}
+
+
+def _sha_json(o) -> str:
+    import hashlib
+    return hashlib.sha256(json.dumps(o, sort_keys=True, ensure_ascii=False).encode("utf-8")).hexdigest()
+
+
+def veri_sha256(*cerceveler) -> Optional[str]:
+    """Mum/funding DataFrame'lerinin içerik özeti (indeks + değerler, sıralı). Hepsi None/boşsa None."""
+    import hashlib
+    h = hashlib.sha256()
+    var = False
+    for df in cerceveler:
+        if df is None or not len(df):
+            h.update(b"-")
+            continue
+        var = True
+        h.update(pd.util.hash_pandas_object(df, index=True).to_numpy().tobytes())
+        h.update(("|".join(map(str, df.columns))).encode())
+    return h.hexdigest() if var else None
+
+
+def kimlik_damgasi(ad: str, stil: str = "swing", veri: Optional[str] = None) -> dict:
+    """Bu sürecin kodu için damga (süreç ömrü boyunca önbellekli: git/hash hesabı pahalı)."""
+    from motor.arastirma import wf_evren_holdout as v1h
+    if "motor" not in _DAMGA_ONBELLEK:
+        _DAMGA_ONBELLEK["motor"] = _sha_json(v1h.ortak_modul_hashleri())
+        _DAMGA_ONBELLEK["git"] = v1h.git_commit()
+    k = ("strateji", ad, stil)
+    if k not in _DAMGA_ONBELLEK:
+        try:
+            _DAMGA_ONBELLEK[k] = _sha_json(v1h.strateji_hashleri([{"strateji": ad, "stil": stil}]))
+        except (KeyError, ImportError):                        # kayıtlı olmayan strateji (yalnız sentetik test): sabit işaret
+            _DAMGA_ONBELLEK[k] = "kayitsiz"
+    return {"veri_sha256": veri, "strateji_hash": _DAMGA_ONBELLEK[k], "motor_hash": _DAMGA_ONBELLEK["motor"],
+            "git_commit": _DAMGA_ONBELLEK["git"]}
+
+
+def eski_kabul_mu(eski_kabul: Optional[bool] = None) -> bool:
+    import os
+    return bool(eski_kabul) if eski_kabul is not None else os.environ.get(ESKI_ORTAM, "") not in ("", "0")
+
+
+def kimlik_dogrula(meta: dict, ad: str, stil: str, kaynak: str, eski_kabul: Optional[bool] = None, veri_simdi: Optional[str] = None) -> None:
+    """meta (yan dosya / eleme satırı) damgasını şimdiki kodla karşılaştırır; uyuşmazlıkta RuntimeError (açık mesaj).
+    Damga alanı hiç yoksa (v2 tarihsel dosya): yalnız eski_kabul (ya da V2_ESKI_YAN_DOSYA=1) ile geçer.
+    veri_simdi verilirse (şimdiki verinin veri_sha256'sı) kayıtlı veri özetiyle de karşılaştırılır."""
+    if not any(a in meta for a in DAMGA_ALANLARI):
+        if eski_kabul_mu(eski_kabul):
+            return
+        raise RuntimeError(f"{kaynak}: kimlik damgası yok (eski v2 yan dosyası, yalnız maliyet_hash içerir). Tarihsel kayıt olarak okumak için "
+                           f"eski_kabul=True ya da {ESKI_ORTAM}=1 verin; yeni koşular damgalıdır")
+    from motor.arastirma import wf_evren_holdout as v1h
+    simdi = kimlik_damgasi(ad, stil)
+    for alan in ("strateji_hash", "motor_hash"):
+        if meta.get(alan) != simdi[alan]:
+            raise RuntimeError(f"{kaynak}: {alan} uyuşmuyor (kayıtlı {str(meta.get(alan))[:12]}, şimdi {simdi[alan][:12]}): sonuç başka kod "
+                               f"sürümüyle üretilmiş; yeniden üretin ya da tarihsel kayıt olarak eski_kabul ile okuyun")
+    if not v1h._commit_ata_mi(str(meta.get("git_commit", "yok")), simdi["git_commit"]):
+        raise RuntimeError(f"{kaynak}: kayıtlı git_commit {meta.get('git_commit')} şimdiki HEAD'in atası değil")
+    if veri_simdi is not None and meta.get("veri_sha256") != veri_simdi:
+        raise RuntimeError(f"{kaynak}: veri_sha256 uyuşmuyor (kayıtlı {str(meta.get('veri_sha256'))[:12]}, şimdi {veri_simdi[:12]}): veri değişmiş")
+
+
+def _meta_taslak(ad, tf, sembol, carpan, tablo_hash, etiket="", stil="swing") -> dict:
     return {"strateji": ad, "tf": tf, "sembol": sembol, "carpan": carpan, "ayar": etiket, "veri_yok": False, "hata": "",
-            "donem": sabit.DONEM, "maliyet_hash": tablo_hash}
+            "donem": sabit.DONEM, "maliyet_hash": tablo_hash, **kimlik_damgasi(ad, stil)}
 
 
 # ============================================================================ tek-grafik görev
@@ -251,6 +324,7 @@ def ham_gorev(ad: str, tf: str, sembol: str, carpan: float, cikti: Path, tablo_y
         _yan_yaz(yan, meta)
         return meta
     sizinti_kontrol(sembol, tf, mumlar, fund)
+    meta["veri_sha256"] = veri_sha256(mumlar, fund)
     if not len(mumlar):
         meta.update(veri_yok=True, hata="dönem içinde mum yok")
         _yan_yaz(yan, meta)
@@ -332,7 +406,7 @@ def pf_gorev(ad: str, carpan: float, cikti: Path, tablo_yolu, tablo_hash: str, e
     if yan.exists() and not yeniden:
         return {"atlandi": True}
     t0 = time.perf_counter()
-    meta = _meta_taslak(ad, "1d", PF_SEMBOL, carpan, tablo_hash, "varsayilan")
+    meta = _meta_taslak(ad, "1d", PF_SEMBOL, carpan, tablo_hash, "varsayilan", stil="portfoy")
     meta["portfoy"] = True
     try:
         evren = sabit.evren_listesi(evren_adi)
@@ -340,6 +414,7 @@ def pf_gorev(ad: str, carpan: float, cikti: Path, tablo_yolu, tablo_hash: str, e
         for s, df in v.items():
             sizinti_kontrol(s, "1d", df, f.get(s))
         meta["disarida"] = list(dis)
+        meta["veri_sha256"] = _sha_json({s: veri_sha256(v[s], f.get(s)) for s in sorted(v)})
         evren_t = tuple(v)
         st = varsayilan_pf(ad, evren_t)
         if st is None:
@@ -489,9 +564,12 @@ def ham_asamasi(cikti: Path = None, surec: int = sabit.SUREC_VARSAYILAN, butce_s
 
 
 # ============================================================================ okuma (eleme/sonraki aşamalar için)
-def ham_yukle(cikti: Path, carpan: float, ad: str, tf: str, evren: tuple, tablo_hash: str) -> tuple:
+def ham_yukle(cikti: Path, carpan: float, ad: str, tf: str, evren: tuple, tablo_hash: str, eski_kabul: Optional[bool] = None,
+              veri_al=None) -> tuple:
     """-> ({sembol: ham df}, bilgi). Yan dosyası olmayan görev varsa RuntimeError('ham koşu bitmemiş'). Bilgi: disarida (veri
-    yok), hatali (hata veren semboller), veri_bas/veri_bit, n_hata, ornek. Maliyet hash'i / holdout sızıntısı kontrol edilir."""
+    yok), hatali (hata veren semboller), veri_bas/veri_bit, n_hata, ornek. Maliyet hash'i / kimlik damgası (strateji, motor, commit) /
+    holdout sızıntısı kontrol edilir. veri_al(sembol, tf) -> (mumlar, funding) verilirse veri_sha256 de yeniden hesaplanıp karşılaştırılır
+    (varsayılan: hesaplanmaz, veri okumak pahalı). Damgasız eski v2 dosyası yalnız eski_kabul=True / V2_ESKI_YAN_DOSYA=1 ile okunur (B16)."""
     hd = Path(cikti) / "ham" / carpan_adi(carpan)
     ham, bilgi = {}, {"disarida": [], "hatali": [], "veri_bas": {}, "veri_bit": {}, "hata_ornegi": "", "ayar": ""}
     for s in evren:
@@ -504,6 +582,10 @@ def ham_yukle(cikti: Path, carpan: float, ad: str, tf: str, evren: tuple, tablo_
             raise RuntimeError(f"{yan.name}: başka bir maliyet tablosuyla yapılmış")
         if not m.get("veri_yok") and m.get("veri_bit") and zaman_utc(m["veri_bit"]) >= sabit.HOLDOUT_BAS:
             raise HoldoutSizintisi(f"{yan.name}: veri_bit {m['veri_bit']} HOLDOUT_BAS ve sonrası")
+        vs = None
+        if veri_al is not None and not m.get("veri_yok"):
+            vs = veri_sha256(*veri_al(s, tf))
+        kimlik_dogrula(m, ad, "swing", yan.name, eski_kabul, vs)
         if m.get("veri_yok"):
             bilgi["disarida"].append(s)
             continue
@@ -514,11 +596,12 @@ def ham_yukle(cikti: Path, carpan: float, ad: str, tf: str, evren: tuple, tablo_
         ham[s] = pd.read_parquet(yol)
         bilgi["veri_bas"][s] = zaman_utc(m["veri_bas"])
         bilgi["veri_bit"][s] = zaman_utc(m["veri_bit"])
+        bilgi.setdefault("veri_sha256", {})[s] = m.get("veri_sha256")
         bilgi["ayar"] = m.get("ayar", "")
     return ham, bilgi
 
 
-def pf_yukle(cikti: Path, carpan: float, ad: str, tablo_hash: str) -> tuple:
+def pf_yukle(cikti: Path, carpan: float, ad: str, tablo_hash: str, eski_kabul: Optional[bool] = None) -> tuple:
     """-> (günlük DataFrame(gun, getiri, dengeleme) | None, meta). Hata/yan dosya yoksa: (None, meta) / RuntimeError."""
     yol = dosya_yolu(Path(cikti) / "ham" / carpan_adi(carpan), ad, "1d", PF_SEMBOL)
     yan = yol.with_suffix(".json")
@@ -529,6 +612,7 @@ def pf_yukle(cikti: Path, carpan: float, ad: str, tablo_hash: str) -> tuple:
         raise RuntimeError(f"{yan.name}: başka bir maliyet tablosuyla yapılmış")
     if m.get("veri_bit") and zaman_utc(m["veri_bit"]) >= sabit.HOLDOUT_BAS:
         raise HoldoutSizintisi(f"{yan.name}: veri_bit {m['veri_bit']} HOLDOUT_BAS ve sonrası")
+    kimlik_dogrula(m, ad, "portfoy", yan.name, eski_kabul)
     if m.get("hata"):
         return None, m
     return pd.read_parquet(yol), m

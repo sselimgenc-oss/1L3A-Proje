@@ -51,7 +51,8 @@ from motor.strateji.temel import SINYAL_SUTUNLARI, Strateji
 
 
 def kaldirac_tavani_miktar(nakit, kaldirac, taker, fiyat):
-    """Kaldıraç tavanında en çok miktar; komisyon payı dahil (Y-5; portföy motoruyla aynı: kap = K·E / (1 + K·taker))."""
+    """Kaldıraç tavanında en çok miktar; komisyon payı dahil (Y-5; portföy motoruyla aynı: kap = K·E / (1 + K·taker)).
+    `taker` yerine taker + kayma verilirse tavan dolum kaymasını da taşır (B10; çağıran taker + kayma geçer, imza aynı)."""
     return nakit * kaldirac / (1 + kaldirac * taker) / fiyat
 
 
@@ -337,7 +338,8 @@ def backtest(mumlar: pd.DataFrame, strateji: Strateji, ayarlar: MotorAyarlari = 
                 # stop kayması + giriş/çıkış taker <= nakit·risk_oran. r tanımı değişmez (net / (miktar·|giriş−ilk stop|)).
                 miktar = nakit * risk_oran / maliyetli_risk_birim(fiyat, stop, stop_kayma, taker)
                 # kaldıraç tavanı komisyon payı dahil (Y-5; portföy motoruyla aynı tanım: kap = K·E / (1 + K·taker))
-                miktar = min(miktar, kaldirac_tavani_miktar(nakit, D(kaldirac), taker, fiyat))
+                # B10 (2026-11-10): payda dolum kaymasını da taşır (K·E / (1 + K·(taker + kayma))); aksi halde dolum fiyatından nominal ~%0.2 tavanı aşıyordu
+                miktar = min(miktar, kaldirac_tavani_miktar(nakit, D(kaldirac), taker + kayma, fiyat))
                 miktar = _step_asagi(miktar, step)
                 if miktar < D(kural.min_qty) or miktar <= 0:
                     red = "min_qty"

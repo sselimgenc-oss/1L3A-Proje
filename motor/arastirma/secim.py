@@ -354,7 +354,9 @@ def yeniden_oyna(tablo: pd.DataFrame, ayar: OynatmaAyari = None, bas=None, bit=N
     geceler = pd.date_range(bas_ts, bit_ts, freq="D")
     # olay: (zaman_ns, tür, indeks); tür -1 gece yarısı, 0 çıkış, 1 giriş
     olay = [(t.as_unit('ns').value, -1, -1) for t in geceler]
-    olay += [(int(c_ns[i]), 0, i) for i in range(len(T))]
+    # süresi sıfır işlem (giris == cikis; ör. stop_gap ile giriş mumunda kapanan): çıkışı kendi girişinden ÖNCE işlenemez
+    # (hayalet pozisyon: hiç kapanmaz, risk/kaldıraç bütçesini sonsuza dek tutar). Gerçekleşme girişte yapılır; ayrı çıkış olayı yok.
+    olay += [(int(c_ns[i]), 0, i) for i in range(len(T)) if c_ns[i] > g_ns[i]]
     olay += [(int(g_ns[i]), 1, i) for i in range(len(T))]
     olay.sort()
 
@@ -430,9 +432,13 @@ def yeniden_oyna(tablo: pd.DataFrame, ayar: OynatmaAyari = None, bas=None, bit=N
             sayac["reddedilen"] += 1; sayac[neden_red] += 1; continue
         if olcek < 1.0:
             sayac["kirpilan"] += 1
-        acik[i] = (hedef_risk * olcek, nominal_1 * olcek)
         sayac["giris_kabul"] += 1
         kabul.append(i)
+        if c_ns[i] <= g_ns[i]:           # süresi sıfır: girişte gerçekleşir, bütçe tutmaz
+            nakit += hedef_risk * olcek * r[i]
+            islem_pnl[i] = (int(t), hedef_risk * olcek * r[i])
+            continue
+        acik[i] = (hedef_risk * olcek, nominal_1 * olcek)
     ozs = pd.Series(gunluk_ozs).sort_index()
     getiri = ozs.pct_change().dropna()
     return {"gunluk": ozs, "getiri": getiri, "olaylar": olaylar, "sayac": sayac, "kabul": kabul,
