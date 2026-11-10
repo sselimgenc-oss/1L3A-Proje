@@ -1,0 +1,60 @@
+{
+  "kart_id": "swing__donchian-ansambl-vol-hedef__zarattini",
+  "ad": "Donchian Kanal Ansambli + Volatilite Hedefi (Catching Crypto Trends)",
+  "stil": "swing",
+  "kaynak": {
+    "url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5209907",
+    "lisans": "makale",
+    "tur": "makale"
+  },
+  "ozet": "Farklı geriye bakışlarla birden çok Donchian kanal trend modelini tek sinyalde toplar, volatiliteye göre boyutlandırır; en likit ilk 20 coinde rotasyon portföyü.",
+  "kategori": "trend_takip",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "kripto",
+  "zaman_dilimi": {
+    "islem": "1d",
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {
+      "ad": "Donchian",
+      "parametreler": {
+        "geriye_bakislar": "kaynakta alınamadı"
+      }
+    }
+  ],
+  "long_giris": [
+    "Her geriye bakış için kanal üst kırılımı = o model 1 oy; sinyal = oyların ortalaması (UYARLAMA, kesin kural PDF'te)"
+  ],
+  "short_giris": [],
+  "stop_loss": null,
+  "kar_al": null,
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [
+    "En likit ilk 20 coin"
+  ],
+  "pozisyon_risk": "Volatilite tabanlı boyutlandırma (formül alınamadı)",
+  "iddia_edilen_performans": "Ücret sonrası Sharpe > 1.5, BTC'ye göre yıllık alfa %10.8 (özet; hayatta kalma yanlılığı olmayan veri, 2015–)",
+  "kanit": "SwissFinance Inst. çalışma kağıdı 25-80; örneklem dışı ayrımı ve maliyet varsayımları özet sayfada yok. Tam PDF okunamadı.",
+  "veri_uygun": [
+    true,
+    "Günlük OHLCV yeterli; evren 13-15 coin ile sınırlı."
+  ],
+  "kodlanabilirlik": {
+    "puan": 2,
+    "gerekce": "Donchian ve oylama net; lookback listesi ve boyut formülü PDF'ten alınmalı."
+  },
+  "belirsizlikler": [
+    "Geriye bakış listesi, boyut formülü, maliyet azaltma tekniği bilinmiyor",
+    "2015-2022 boğa ağırlıklı kripto örneklem"
+  ],
+  "uyumluluk_notu": "Donchian dis__son1ay-donchian-adx, swing__donchian-kirilim ile yakın; fark ansambl + vol hedefi. Benzerlik nedeniyle düşük öncelik.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+    "donchian",
+    "ansambl",
+    "trend",
+    "vol-hedef"
+  ]
+}

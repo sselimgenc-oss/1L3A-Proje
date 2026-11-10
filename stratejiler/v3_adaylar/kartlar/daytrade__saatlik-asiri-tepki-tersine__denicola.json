@@ -1,0 +1,65 @@
+{
+  "kart_id": "daytrade__saatlik-asiri-tepki-tersine__denicola",
+  "ad": "Saatlik Aşırı Tepki Tersine Dönüşü (1s/2s/4s negatif otokorelasyon)",
+  "stil": "daytrade",
+  "kaynak": {
+    "url": "https://epub.ub.uni-muenchen.de/97651/",
+    "lisans": "makale",
+    "tur": "makale"
+  },
+  "ozet": "BTC getirilerinde 1, 2 ve 4 saatlik ufuklarda negatif birinci derece otokorelasyon bulunur ve büyük hareketler daha güçlü geri döner; buna göre büyük saatlik hareketin tersine işlem açılır.",
+  "kategori": "ortalamaya_donus",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "kripto",
+  "zaman_dilimi": {
+    "islem": "1h",
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {
+      "ad": "Getiri",
+      "parametreler": {
+        "pencere": "1 mum"
+      }
+    },
+    {
+      "ad": "ATR/Standart sapma",
+      "parametreler": {}
+    }
+  ],
+  "long_giris": [
+    "Son saatlik getiri < -k·σ ise bir sonraki mum açılışında long (k kaynakta yok; ızgara parametresi)"
+  ],
+  "short_giris": [
+    "Son saatlik getiri > +k·σ ise short"
+  ],
+  "stop_loss": "Giriş mumunun aşırı ucunun ötesi veya m·ATR (UYARLAMA, kaynakta yok)",
+  "kar_al": null,
+  "iz_suren_stop": null,
+  "zaman_cikisi": "N mum sonra kapat (N kaynakta yok; 1, 2, 4 saat ufukları test edilir)",
+  "filtreler": [],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": "Kaynak: 'basit algoritmik strateji geriye dönük uygulandı'; kural ve sonuç sayısı alınamadı",
+  "kanit": "De Nicola 2021, Ledger 6:58-80 (negatif otokorelasyon bulgusu; kural ve maliyet sayfada yok). Yan kanıt: Miralles-Quirós vd. 2022, saatlik BTC'de negatif şoklardan sonra aşırı tepki (özetten, tam metin doğrulanmadı).",
+  "veri_uygun": [
+    true,
+    "Saatlik/5m OHLCV yeterli."
+  ],
+  "kodlanabilirlik": {
+    "puan": 2,
+    "gerekce": "Mantık nettir ama eşik k, tutma süresi ve stop kaynakta yok; ızgarayla belirlenir (aşırı uydurma riski)."
+  },
+  "belirsizlikler": [
+    "Eşik, tutma süresi, stop kaynakta yok",
+    "Maliyet etkisi bilinmiyor; 1s tersine işlem çok işlem üretir",
+    "Likidasyon zincirlerinde düşen bıçağı yakalama riski"
+  ],
+  "uyumluluk_notu": "Yalnız kripto. Mevcut gün-içi tersine stratejilere benzerlik: dis__asiri-tepki-ertesi-gun (günlük), dis__ortalamaya-donus-gerilme.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+    "asiri-tepki",
+    "ortalamaya-donus",
+    "saatlik",
+    "otokorelasyon"
+  ]
+}

@@ -1,0 +1,62 @@
+{
+  "kart_id": "swing__kesit-funding-baz-vekil__chi",
+  "ad": "Kesitsel Baz/Funding Sıralaması (Perp)",
+  "stil": "swing",
+  "kaynak": {
+    "url": "https://ideas.repec.org/a/wly/jfutmk/v43y2023i8p1161-1180.html",
+    "lisans": "makale",
+    "tur": "makale"
+  },
+  "ozet": "Kripto vadelide bazın (vadeli-spot farkı) kesitsel getiriyi en güçlü öngören sinyal olduğu bulgusu. Biz spot fiyatı olmadığı için funding oranını baz vekili olarak kullanır, yüksek funding'li coini short, düşüğü long yaparız.",
+  "kategori": "diger",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "kripto",
+  "zaman_dilimi": {
+    "islem": "1d",
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {
+      "ad": "Funding oranı",
+      "parametreler": {
+        "pencere": "son 7 gün ortalaması (UYARLAMA)"
+      }
+    }
+  ],
+  "long_giris": [
+    "Günlük sırala; en düşük funding'li k coine long"
+  ],
+  "short_giris": [
+    "En yüksek funding'li k coine short"
+  ],
+  "stop_loss": null,
+  "kar_al": null,
+  "iz_suren_stop": null,
+  "zaman_cikisi": "Günlük/haftalık yeniden dengeleme",
+  "filtreler": [],
+  "pozisyon_risk": "Piyasa nötr, eşit ağırlık",
+  "iddia_edilen_performans": "Chi vd.: baz en güçlü kesitsel sinyal; günlük faktör getirisi haftalıktan anlamlı şekilde güçlü (rakam doğrulanmadı)",
+  "kanit": "J. Futures Markets 2023 (Chi, Hao, Hu, Ran), vadeli sözleşmeler 2017-2021. Perp'e özel 'Anatomy of Perpetual Futures Returns' sonucu ikincil kaynaktan; doğrulanmadı. Funding'in bazla birebir aynı olmadığı bir uyarlama.",
+  "veri_uygun": [
+    true,
+    "Funding geçmişi bizde var (13-15 coin); spot bazı yok, funding vekil."
+  ],
+  "kodlanabilirlik": {
+    "puan": 2,
+    "gerekce": "Sıralama net; pencere, k, yeniden dengeleme sıklığı kaynakta kesin değil."
+  },
+  "belirsizlikler": [
+    "Funding ≠ baz; sinyal gücü değişebilir",
+    "Evren çok dar",
+    "Funding aralığı sembole göre değişir (4s/8s)",
+    "Funding'in kendisi PnL kalemi (short yüksek funding alır)"
+  ],
+  "uyumluluk_notu": "Mevcut v2__funding-asiri-kontra / funding-esik-karsit tek sembol zaman serisi; bu kesitsel sıralama, piyasa nötre yakın. İlk öncelik.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+    "funding",
+    "baz",
+    "kesitsel",
+    "piyasa-notr"
+  ]
+}

@@ -1,0 +1,62 @@
+{
+  "kart_id": "daytrade__ilk-yari-saat-momentum__shen",
+  "ad": "BTC Gün İçi Zaman Serisi Momentumu (ilk yarım saat → son yarım saat)",
+  "stil": "daytrade",
+  "kaynak": {
+    "url": "https://research.birmingham.ac.uk/en/publications/bitcoin-intraday-time-series-momentum/",
+    "lisans": "makale",
+    "tur": "makale"
+  },
+  "ozet": "Hacmi piyasa saati olarak kullanıp yüksek hacimli/oynak seansın ilk 30 dakikalık getirisinin, aynı seansın son 30 dakikasının yönünü öngördüğü bulgusu (S&P ETF'indeki Gao-Han-Li-Zhou etkisinin Bitcoin uyarlaması).",
+  "kategori": "momentum",
+  "piyasa_rejimi": "volatil",
+  "orijinal_piyasa": "kripto",
+  "zaman_dilimi": {
+    "islem": "15m",
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {
+      "ad": "Hacim",
+      "parametreler": {}
+    }
+  ],
+  "long_giris": [
+    "Seans penceresinin ilk 30 dk getirisi > 0 ise, seansın son 30 dk başında long (UYARLAMA: seans sınırı yazarın hacim saatine göre değil sabit UTC penceresiyle tanımlanır)"
+  ],
+  "short_giris": [
+    "İlk 30 dk getirisi < 0 ise son 30 dk başında short"
+  ],
+  "stop_loss": null,
+  "kar_al": null,
+  "iz_suren_stop": null,
+  "zaman_cikisi": "Seans sonunda kapat",
+  "filtreler": [
+    "Yüksek hacim ya da yüksek volatilite seansları (kaynak bulgusu); eşik kaynakta bulunamadı"
+  ],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": "Kaynak özetinde: piyasa zamanlaması ve varlık tahsisinde 'önemli ekonomik kazanç' (rakam doğrulanmadı)",
+  "kanit": "Financial Review 2022 (Shen, Urquhart, Wang); özet: tahmin gücü örneklem içinde ve dışında geçerli, ayuı düşüşlerinde güçlü, likidite sağlama kaynaklı. Tam metne erişilemedi; sayısal sonuç doğrulanmadı.",
+  "veri_uygun": [
+    true,
+    "Binance perp 5m/15m OHLCV ve hacim yeterli; ancak seans tanımı (hacim saati) uyarlama gerektirir."
+  ],
+  "kodlanabilirlik": {
+    "puan": 1,
+    "gerekce": "Temel fikir kodlanabilir, ama makalenin tam seans/hacim-saati tanımı ve eşikler elimizde yok; sabit UTC penceresi kaba yaklaşık."
+  },
+  "belirsizlikler": [
+    "Hacim-saati seans tanımı doğrulanmadı",
+    "Pencere ve eşikler kaynakta alınamadı",
+    "Gerçek veri seti (borsa, dönem) doğrulanmadı",
+    "Maliyet sonrası kâr bilinmiyor"
+  ],
+  "uyumluluk_notu": "15m veya 30m ile çalışır. Hisse ETF'inde de gösterilmiş (orijinal), TradFi'ye taşınabilir ama seans sınırı net.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+    "gun-ici-momentum",
+    "ilk-yari-saat",
+    "btc",
+    "seans"
+  ]
+}
