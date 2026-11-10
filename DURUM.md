@@ -113,6 +113,8 @@ Ana ders: önceki sonuçlar OOS'a bakılarak seçilmiş ve kâr birkaç işlemde
   saatlik dosyalar → swing/daytrade 1h+ testleri önce; 15m/30m dakikalık veri tamamlanınca.
 
 ## Lider kararları günlüğü (karar 26)
+- 2026-11-10 (KULLANICI): ikinci Claude hesabı yalnız v3 aday araştırması yapar (stratejiler/v3_adaylar/TALIMAT.md). Yalnız o klasöre yazar,
+  PR açar, birleştirmez; ana oturum diff'i denetleyip birleştirir. Adaylar v3 kuyruğu; test yeni ön kayıt + holdout sonrası verisiyle.
 - 2026-11-09 (KULLANICI kararı, SONUÇ SONRASI, ON_KAYIT_V2 0.3/0.4'ten SAPMA): resmi holdout bittikten sonra kıl payı kalan
   55 strateji (set dışı kalan 3 sağlam keşif, 2 izleme, 2 BH altı, eleme'de tek kapıdan kalan 48) holdout döneminde KEŞİF amaçlı
   koşulur. Etiket: 'sonuç sonrası keşif — kanıt değil'. Resmi v2 sonucu (set 2, GEÇTİ) değişmez; bu sonuçlarla hiçbir strateji
