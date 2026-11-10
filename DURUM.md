@@ -113,6 +113,8 @@ Ana ders: önceki sonuçlar OOS'a bakılarak seçilmiş ve kâr birkaç işlemde
   saatlik dosyalar → swing/daytrade 1h+ testleri önce; 15m/30m dakikalık veri tamamlanınca.
 
 ## Lider kararları günlüğü (karar 26)
+- 2026-11-10 (KULLANICI): ChatGPT (Codex) denetim + öneri + geliştirme için kullanılır. Kurallar AGENTS.md: kendi dalında PR açar,
+  birleştirmez; lider her PR'ı doğrulayıp birleştirir. Sırayla: salt-okur denetim raporu → öneri listesi → seçilenler PR olarak.
 - 2026-11-10: Y-5 UYGULANDI (evren zinciri bitti): tek-grafik kaldıraç tavanı komisyon payı dahil (portföy motoruyla aynı K·E/(1+K·taker)).
   Etki: tavanın bağladığı işlemlerde miktar −%0.15 (taker %0.05). Eski sonuçlar (v1/v2, kilit, final) tarihsel kayıt; yeniden üretilmez.
   test_cikis_modulleri_ek altın değerleri eski tavanla (monkeypatch) doğrulanmaya devam eder. Dolum denetimi öneri 2 testi eklendi;
