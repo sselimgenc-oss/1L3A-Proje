@@ -340,8 +340,11 @@ def backtest(mumlar: pd.DataFrame, strateji: Strateji, ayarlar: MotorAyarlari = 
                 # kaldıraç tavanı komisyon payı dahil (Y-5; portföy motoruyla aynı tanım: kap = K·E / (1 + K·taker))
                 # B10 (2026-11-10): payda dolum kaymasını da taşır (K·E / (1 + K·(taker + kayma))); aksi halde dolum fiyatından nominal ~%0.2 tavanı aşıyordu
                 # B10b: short'ta dolum fiyatı ham fiyatın ALTINDA; brüt ham fiyatla ölçüldüğünden tavan max(ham, dolum) fiyatıyla hesaplanır
+                # B10c: dolum fiyatı tick'e yuvarlandığı için GERÇEKLEŞEN kayma nominali aşabilir (XRP benzeri: 5 bps -> ~5.86 bps);
+                # tavan paydasına max(nominal, gerçekleşen) girer (aksi halde short tavanda 3x'i 3.0001-3.0008 aşar)
+                kayma_etkin = max(kayma, abs(fiyat - D(o_ref)) / D(o_ref))
                 tavan_fiyat = max(fiyat, D(o), D(o_ref))
-                miktar = min(miktar, kaldirac_tavani_miktar(nakit, D(kaldirac), taker + kayma, tavan_fiyat))
+                miktar = min(miktar, kaldirac_tavani_miktar(nakit, D(kaldirac), taker + kayma_etkin, tavan_fiyat))
                 miktar = _step_asagi(miktar, step)
                 if miktar < D(kural.min_qty) or miktar <= 0:
                     red = "min_qty"

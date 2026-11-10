@@ -285,6 +285,19 @@ class _Motor:
         """Kaldıraç tavanı için fiyat: max(ham açılış, dolum). Brüt ham fiyatla ölçülür; short dolumu ham fiyatın altında kalır (B10b)."""
         return max(e.px, D(self.A[e.kol.sembol][i]))
 
+    def _kap_maliyet_etkin(self, emirler, i) -> Decimal:
+        """Brüt tavan paydasındaki birim maliyet (B10c): taker + max(nominal kayma, bu satırdaki emirlerin GERÇEKLEŞEN kayması).
+        Dolum fiyatı tick'e yuvarlandığından |dolum - ham| / ham nominalden büyük olabilir; tavan bunu taşımazsa short tavanda 3x aşılır.
+        Satırın en büyük gerçekleşen kaymasını tüm emirlere uygulamak (sembol başına değil) tek ölçek faktörü için yeterince basit ve
+        yalnız muhafazakâr yönde (tavan en fazla ~yarım tick/fiyat kadar daralır); yuvarlama nominali aşmıyorsa değer eskisiyle aynıdır."""
+        k = self.kayma_en_yuksek
+        for e in emirler:
+            if e.yon != 0 and e.px is not None:
+                ham = D(self.A[e.kol.sembol][i])
+                if ham > 0:
+                    k = max(k, abs(e.px - ham) / ham)
+        return self.taker_en_yuksek + k
+
     def _ozs(self, i, acilista: bool) -> Decimal:
         top = self.nakit
         for p in self.acik.values():
@@ -528,7 +541,8 @@ class _Motor:
         # ham None: emir iptal (pozisyona dokunma)
         emirler = [e for e in emirler if not (e.ham is None)]
         # --- 2(a) orantılı kaldıraç ölçeklemesi
-        kap = Decimal(self.kal) * E / (1 + Decimal(self.kal) * self.kap_maliyet)
+        kap_m = self._kap_maliyet_etkin(emirler, i)
+        kap = Decimal(self.kal) * E / (1 + Decimal(self.kal) * kap_m)
         hedefli = {e.kol.kimlik for e in emirler}
         sabit = Decimal(0)
         for k, p in self.acik.items():

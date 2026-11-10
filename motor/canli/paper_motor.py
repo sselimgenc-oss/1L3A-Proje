@@ -317,7 +317,7 @@ class PaperMotor(_Motor):
         return min(qty_w, qty_r)
 
     def _kap_orani(self, E, i, emirler, bekleyen_tahmin, grup, pay) -> Decimal:
-        kap = Decimal(self.kal) * E * pay / (1 + Decimal(self.kal) * self.kap_maliyet)
+        kap = Decimal(self.kal) * E * pay / (1 + Decimal(self.kal) * self._kap_maliyet_etkin(emirler, i))      # B10c
         hedefli = {e.kol.kimlik for e in emirler}
         sabit = self._askida_katki()[1] if (grup is None and self.askida["acik"]) else Decimal(0)
         for k, p in self.acik.items():
@@ -473,8 +473,9 @@ class PaperMotor(_Motor):
                 if hedef_q <= cur:
                     self._red(t, kol, e.yon, "toplam_risk_tavani")
                     continue
-            kap1 = Decimal(self.kal) * E * kol.grup_payi / (1 + Decimal(self.kal) * self.kap_maliyet)
-            kap2 = Decimal(self.kal) * E / (1 + Decimal(self.kal) * self.kap_maliyet)
+            kap_m = self._kap_maliyet_etkin(emirler, i)                  # B10c: tick yuvarlaması dahil gerçekleşen kayma
+            kap1 = Decimal(self.kal) * E * kol.grup_payi / (1 + Decimal(self.kal) * kap_m)
+            kap2 = Decimal(self.kal) * E / (1 + Decimal(self.kal) * kap_m)
             oda = min(kap1 - self._brut_k(i, kol.kimlik, kol.grup), kap2 - self._brut_k(i, kol.kimlik, None))
             ust = max(oda, Decimal(0)) / self._brut_px(e, i)
             if ust < hedef_q:
