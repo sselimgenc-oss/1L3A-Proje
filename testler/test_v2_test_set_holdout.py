@@ -25,6 +25,15 @@ EVREN = sabit.evren_listesi("kripto")
 
 
 # ------------------------------------------------------------------ yardımcılar
+@pytest.fixture(autouse=True)
+def _gercek_veri_yok(monkeypatch):
+    """B16: ham_yukle/eleme veri özetini şimdiki veriden yeniden hesaplar; sentetik ham yan dosyaları veri özeti None damgalıdır.
+    Testler makinedeki gerçek veri/ klasörüne bağlı olmasın (veri yok = None özet). Üretim denetimi gevşetilmez."""
+    def yok(sembol, tf):
+        raise FileNotFoundError(f"{sembol} {tf}: test ortamında gerçek veri yok")
+    monkeypatch.setattr(we, "_veri", yok)
+
+
 @pytest.fixture()
 def tablo(tmp_path):
     y = maliyet.tabloyu_hazirla(tmp_path)
