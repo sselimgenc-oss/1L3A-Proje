@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import csv
+import json
 from pathlib import Path
 
 import numpy as np
@@ -212,12 +213,28 @@ def test_fip_ust_long_alt_short_ve_stoplu():
 def test_kayit_ve_kodlama_csv_ilk_parti_tam():
     tek = tum_stratejiler()
     pf = tum_portfoy_stratejileri()
-    assert sum(a.startswith("v3__") for a in tek) == 8
-    assert sum(a.startswith("pf__v3-") for a in pf) == 4
+    ilk_tek = {
+        "v3__asya-kutu-kirilim-ma50", "v3__saat-21-23-utc", "v3__saatlik-asiri-tepki",
+        "v3__adaptivetrend-6s-momentum", "v3__donchian-ansambl-vol-hedef",
+        "v3__haftalik-sma-trix-kirilim", "v3__kirmizi-mum-2x-hacim", "v3__volatilite-kirilim-k05",
+    }
+    ilk_pf = {
+        "pf__v3-funding-1s-devam", "pf__v3-funding-kesit-decil-carry",
+        "pf__v3-funding-7g-haftalik-tercil", "pf__v3-fip-kesitsel-momentum",
+    }
+    assert ilk_tek <= set(tek) and ilk_pf <= set(pf)
     yol = KOK / "stratejiler/v3_adaylar/kodlama_v3.csv"
     with yol.open(encoding="utf-8", newline="") as f:
-        satirlar = list(csv.DictReader(f))
-    assert len(satirlar) == 14
+        tum_satirlar = list(csv.DictReader(f))
+    with (KOK / "stratejiler/v3_adaylar/adaylar.csv").open(encoding="utf-8-sig", newline="") as f:
+        adaylar = list(csv.DictReader(f))
+    beklenen = set()
+    for aday in adaylar:
+        kart = KOK / "stratejiler/v3_adaylar/kartlar" / f"{aday['kart_id']}.json"
+        if aday["oncelik"] == "1" and json.loads(kart.read_text())["veri_uygun"][0]:
+            beklenen.add(aday["kart_id"])
+    satirlar = [r for r in tum_satirlar if r["kart_id"] in beklenen]
+    assert {r["kart_id"] for r in satirlar} == beklenen and len(satirlar) == 14
     assert {r["durum"] for r in satirlar} == {"kodlandi", "tekrar", "altyapi_yok"}
     assert sum(r["durum"] == "kodlandi" for r in satirlar) == 11
     saatlik = next(r for r in satirlar if r["kart_id"] == "daytrade__funding-1s-devam__octopustakopi")
