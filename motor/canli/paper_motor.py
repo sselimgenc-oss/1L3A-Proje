@@ -323,7 +323,7 @@ class PaperMotor(_Motor):
         for k, p in self.acik.items():
             if k not in hedefli and self._kapsam(p, grup):
                 sabit += abs(D(self._fiyat_ham(p.sembol, i, True)) * p.miktar)
-        istek = bekleyen_tahmin + sum((e.ham * e.px for e in emirler if e.yon != 0), Decimal(0))
+        istek = bekleyen_tahmin + sum((e.ham * self._brut_px(e, i) for e in emirler if e.yon != 0), Decimal(0))
         f = Decimal(1)
         if istek > 0 and sabit + istek > kap:
             f = max(Decimal(0), (kap - sabit) / istek)
@@ -476,7 +476,7 @@ class PaperMotor(_Motor):
             kap1 = Decimal(self.kal) * E * kol.grup_payi / (1 + Decimal(self.kal) * self.kap_maliyet)
             kap2 = Decimal(self.kal) * E / (1 + Decimal(self.kal) * self.kap_maliyet)
             oda = min(kap1 - self._brut_k(i, kol.kimlik, kol.grup), kap2 - self._brut_k(i, kol.kimlik, None))
-            ust = max(oda, Decimal(0)) / e.px
+            ust = max(oda, Decimal(0)) / self._brut_px(e, i)
             if ust < hedef_q:
                 self._kirp(t, kol, "kaldirac", e.w_abs, ust * e.px / E)
                 hedef_q = _step_asagi(ust, self.step[s])
