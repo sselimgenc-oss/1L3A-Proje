@@ -113,6 +113,10 @@ Ana ders: önceki sonuçlar OOS'a bakılarak seçilmiş ve kâr birkaç işlemde
   saatlik dosyalar → swing/daytrade 1h+ testleri önce; 15m/30m dakikalık veri tamamlanınca.
 
 ## Lider kararları günlüğü (karar 26)
+- 2026-11-10 09:27 UTC: **PAPER v2 BAŞLADI** (sunucu, deploy/v2_gecis.sh): 10 hesap aktif, WS 46 akış, yeni 10 DK sembolü tohumu
+  sunucuda indirildi (başarısız ay 0). DK_JNJ/DK_MA Binance'te yok → evrenden düştü (beklenen). Eski 7'li durum:
+  /var/lib/1l3a-paper/durum_eski_7li_20261110_0906. Sunucu kilit günlüğü yedeği: /var/lib/1l3a-paper/kilit_acilis_sunucu_eski_20261110.jsonl.
+  Uyum (fidelity) kontrolü 28 gün: en erken 2026-12-08; performans değerlendirmesi ≥12 hafta: en erken 2027-02-02.
 - 2026-11-10 (KULLANICI): ikinci Claude hesabı yalnız v3 aday araştırması yapar (stratejiler/v3_adaylar/TALIMAT.md). Yalnız o klasöre yazar,
   PR açar, birleştirmez; ana oturum diff'i denetleyip birleştirir. Adaylar v3 kuyruğu; test yeni ön kayıt + holdout sonrası verisiyle.
 - 2026-11-09 (KULLANICI kararı, SONUÇ SONRASI, ON_KAYIT_V2 0.3/0.4'ten SAPMA): resmi holdout bittikten sonra kıl payı kalan
