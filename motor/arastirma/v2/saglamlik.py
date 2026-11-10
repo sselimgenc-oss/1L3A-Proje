@@ -29,6 +29,9 @@ from motor.backtest.motor import backtest
 from motor.strateji import funding
 
 
+SATIR_BITTI = ("tamam", "hata")
+
+
 # ============================================================================ saf kapı kararları
 def pf_r(r) -> float:
     r = np.asarray(r, dtype=float)
@@ -188,9 +191,7 @@ def saglamlik_satiri(row: dict, cikti: Path, tablo_yolu, tablo_hash: str, son: O
     cikti = Path(cikti)
     ad, tf, evren, stil = row["strateji"], row["tf"], row["evren"], row["stil_v2"]
     yol = satir_yolu(cikti, ad, tf)
-    s = json.loads(yol.read_text()) if yol.exists() else {"strateji": ad, "tf": tf, "evren": evren, "stil_v2": stil, "durum": "bekliyor"}
-    if s.get("durum") == "tamam":
-        return s
+    s = json.loads(yol.read_text()) if yol.exists() else None
 
     def doldu():
         return son is not None and time.time() > son
@@ -199,6 +200,16 @@ def saglamlik_satiri(row: dict, cikti: Path, tablo_yolu, tablo_hash: str, son: O
         kasa.atomik_yaz_json(yol, s)
     evren_t = sabit.evren_listesi(evren)
     try:
+        # B16b: önbellek kararı girdi damgasına bağlıdır (x1+x2 ham yan damgaları, şimdiki kod/veri, aşama kodu)
+        damga = kasa.girdi_damgasi(cikti, row, (1.0, 2.0), "motor/arastirma/v2/saglamlik.py")
+        if s is not None and not kasa.onbellek_gecerli_mi(s, damga, SATIR_BITTI):
+            kasa.temizle(_kismi_yolu(cikti, ad, tf))                  # bayat S2 komşu sonuçları yeni girdiyle birleşmesin
+            s = None
+        if s is None:
+            s = {"strateji": ad, "tf": tf, "evren": evren, "stil_v2": stil, "durum": "bekliyor"}
+        s[kasa.DAMGA_ANAHTARI] = damga
+        if s.get("durum") == "tamam":
+            return s
         _, st = hm.varsayilan_strateji(ad) if stil != "portfoy" else (None, None)
         if stil == "portfoy":
             return _pf_satiri(row, s, cikti, tablo_yolu, tablo_hash, doldu, kaydet, evren_t)
@@ -262,6 +273,8 @@ def saglamlik_satiri(row: dict, cikti: Path, tablo_yolu, tablo_hash: str, son: O
             kaydet()
     except hm.HoldoutSizintisi:
         raise
+    except hm.DamgaUyusmazligi as e:                         # bayat/damgasız girdi: KALICI hata yazılmaz; girdi yenilenince yeniden denenir
+        return {"ertelendi": True, "neden": str(e), "damga": True, "strateji": ad, "tf": tf}
     except (FileNotFoundError, ValueError, RuntimeError, KeyError) as e:
         if isinstance(e, RuntimeError) and "bitmemiş" in str(e):
             return {"ertelendi": True, "neden": str(e), "strateji": ad, "tf": tf}
@@ -346,6 +359,8 @@ def _pf_satiri(row, s, cikti, tablo_yolu, tablo_hash, doldu, kaydet, evren_t) ->
             kaydet()
     except hm.HoldoutSizintisi:
         raise
+    except hm.DamgaUyusmazligi as e:                         # bayat/damgasız girdi: KALICI hata yazılmaz; girdi yenilenince yeniden denenir
+        return {"ertelendi": True, "neden": str(e), "damga": True, "strateji": ad, "tf": tf}
     except (FileNotFoundError, ValueError, RuntimeError, KeyError) as e:
         if isinstance(e, RuntimeError) and "bitmemiş" in str(e):
             return {"ertelendi": True, "neden": str(e), "strateji": ad, "tf": tf}
@@ -439,12 +454,14 @@ def saglamlik_asamasi(cikti: Path = None, surec: int = sabit.SUREC_VARSAYILAN, b
     from motor.arastirma.v2 import maliyet
     tablo = maliyet.tablo_yolu(cikti)
     tablo_hash = evren_maliyet.tablo_hash(tablo)
+    we.veri_ayarla(None, sabit.DONEM)                             # planlama de veri özetini bu dönemden hesaplar (işçilerle aynı)
     gorev = []
     for _, row in kes.iterrows():
         y = satir_yolu(cikti, row["strateji"], row["tf"])
-        if y.exists() and json.loads(y.read_text()).get("durum") in ("tamam", "hata"):
+        r = {k: (None if (isinstance(v, float) and math.isnan(v)) else v) for k, v in row.items()}
+        if kasa.satir_bitti_mi(cikti, y, r, (1.0, 2.0), "motor/arastirma/v2/saglamlik.py", SATIR_BITTI):     # B16b: damga-duyarlı devam
             continue
-        gorev.append({"row": {k: (None if (isinstance(v, float) and math.isnan(v)) else v) for k, v in row.items()}})
+        gorev.append({"row": r})
     if ilerleme:
         print(f"[v2 saglamlik] keşif {len(kes)}, bekleyen {len(gorev)}", flush=True)
     ayar = {"cikti": str(cikti), "tablo_yolu": str(tablo), "tablo_hash": tablo_hash}
