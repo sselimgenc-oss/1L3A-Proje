@@ -419,6 +419,10 @@ def disarida_bildir(p, tanimlar: list, simdi) -> None:
     """Servis başlangıcı: beklenen düşmeler TEK bilgi olayı (Telegram'a gitmez, uyarı listesine BİLGİ önekiyle girer); beklenmeyenler eskisi gibi
     uyarı + 'veri_yok' olayı (Telegram'a gider)."""
     bilgi, uyari = disarida_metinleri(disarida_gruplari(tanimlar))
+    # Bu satırlar her başlangıçta yeniden üretilir: kayıtlı durumdan gelen eski kopyaları (eski strateji başına biçim dahil) at,
+    # yoksa her yeniden başlatmada birikir.
+    yeni = set(uyari) | ({BILGI_ONEKI + bilgi} if bilgi else set())
+    p.uyarilar = [u for u in p.uyarilar if u not in yeni and ": evrenden düşen semboller (" not in u]
     if bilgi:
         p.uyarilar.append(BILGI_ONEKI + bilgi)
         p.olay_ekle("evren_bilgi", bilgi, simdi, bildir=False)
