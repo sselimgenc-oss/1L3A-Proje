@@ -113,6 +113,11 @@ Ana ders: önceki sonuçlar OOS'a bakılarak seçilmiş ve kâr birkaç işlemde
   saatlik dosyalar → swing/daytrade 1h+ testleri önce; 15m/30m dakikalık veri tamamlanınca.
 
 ## Lider kararları günlüğü (karar 26)
+- 2026-11-10: Y-5 UYGULANDI (evren zinciri bitti): tek-grafik kaldıraç tavanı komisyon payı dahil (portföy motoruyla aynı K·E/(1+K·taker)).
+  Etki: tavanın bağladığı işlemlerde miktar −%0.15 (taker %0.05). Eski sonuçlar (v1/v2, kilit, final) tarihsel kayıt; yeniden üretilmez.
+  test_cikis_modulleri_ek altın değerleri eski tavanla (monkeypatch) doğrulanmaya devam eder. Dolum denetimi öneri 2 testi eklendi;
+  öneri 4/5 için motor'da İSTEĞE BAĞLI 'olumsuz_dolum' stresi (varsayılan 0 = birebir eski). Kapıya bağlanmadı: v3 ön kaydında karar verilecek.
+  Yapılmadı: K1c reddedilen sayımı ve eşleşen-işlem PF (öneri 2b/3) → v3 ön kaydıyla birlikte.
 - 2026-11-10 09:27 UTC: **PAPER v2 BAŞLADI** (sunucu, deploy/v2_gecis.sh): 10 hesap aktif, WS 46 akış, yeni 10 DK sembolü tohumu
   sunucuda indirildi (başarısız ay 0). DK_JNJ/DK_MA Binance'te yok → evrenden düştü (beklenen). Eski 7'li durum:
   /var/lib/1l3a-paper/durum_eski_7li_20261110_0906. Sunucu kilit günlüğü yedeği: /var/lib/1l3a-paper/kilit_acilis_sunucu_eski_20261110.jsonl.

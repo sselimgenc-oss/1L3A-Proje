@@ -50,6 +50,11 @@ from motor.strateji.seans_takvimi import mum_suresi
 from motor.strateji.temel import SINYAL_SUTUNLARI, Strateji
 
 
+def kaldirac_tavani_miktar(nakit, kaldirac, taker, fiyat):
+    """Kaldıraç tavanında en çok miktar; komisyon payı dahil (Y-5; portföy motoruyla aynı: kap = K·E / (1 + K·taker))."""
+    return nakit * kaldirac / (1 + kaldirac * taker) / fiyat
+
+
 def D(x) -> Decimal:
     if isinstance(x, Decimal):
         return x
@@ -78,6 +83,10 @@ class MotorAyarlari:
     # "olc": durdurmaz, sadece limit_olaylari'na kaydeder. YALNIZCA araştırma/backtest;
     # canlı ve paper'da kullanılmaz. İşlem başı risk ve kaldıraç tavanı her iki modda uygulanır.
     limit_modu: str = "uygula"
+    # ARAŞTIRMA STRES ARACI (varsayılan 0 = kapalı, davranış birebir aynı; hiçbir kapıya bağlı DEĞİL): piyasa dolumlarında
+    # (giriş, sinyal/zaman/gün sonu çıkışı, stop, stop_gap, kill_switch) referans fiyat, DOLUM MUMUNUN olumsuz ucuna doğru
+    # bu oranda (0..1) kaydırılır: alışta yüksek, satışta düşük. Kayma/komisyon bunun ÜSTÜNE uygulanır. Hedef (limit) dolumu etkilenmez.
+    olumsuz_dolum: float = 0.0
     kurallar: SembolKurallari = field(default_factory=SembolKurallari)
 
 
@@ -263,8 +272,17 @@ def backtest(mumlar: pd.DataFrame, strateji: Strateji, ayarlar: MotorAyarlari = 
         p.miktar -= qty
         return brut - kom
 
+    olumsuz = D(min(max(ayarlar.olumsuz_dolum, 0.0), 1.0))
+
+    def olumsuz_ref(ham: float, alis: bool, yuksek_i: float, dusuk_i: float) -> float:
+        """Stres: referans fiyatı dolum mumunun olumsuz ucuna doğru `olumsuz` oranında kaydır (0 iken çağrılmaz)."""
+        r = D(ham)
+        return float(r + olumsuz * (D(yuksek_i) - r)) if alis else float(r - olumsuz * (r - D(dusuk_i)))
+
     def piyasa_fiyati(p: _Poz, ham: float, k: Decimal = kayma) -> Decimal:
         """Çıkış tarafına kayma uygula (long satar -> düşük, short alır -> yüksek)."""
+        if olumsuz:
+            ham = olumsuz_ref(ham, p.yon == -1, h, l)
         return _tick(D(ham) * (1 - p.yon * k), tick)
 
     for i in range(n):
@@ -298,7 +316,8 @@ def backtest(mumlar: pd.DataFrame, strateji: Strateji, ayarlar: MotorAyarlari = 
                   and i - son_stop_i <= cks_ayar.stop_sonrasi_bekleme_mum):
                 red = "bekleme"
             if red is None:
-                fiyat = _tick(D(o) * (1 + yon * kayma), tick)
+                o_ref = olumsuz_ref(o, yon == 1, h, l) if olumsuz else o
+                fiyat = _tick(D(o_ref) * (1 + yon * kayma), tick)
                 stop = _tick(D(stop_ham), tick)
                 risk_birim = abs(fiyat - stop)
                 if risk_birim == 0 or (yon == 1 and stop >= fiyat) or (yon == -1 and stop <= fiyat):
@@ -317,7 +336,8 @@ def backtest(mumlar: pd.DataFrame, strateji: Strateji, ayarlar: MotorAyarlari = 
                 # işlem başı risk MALİYET DAHİL (kullanıcı kararı 2026-11-09; motor/risk/limitler.py): stop'ta fiyat riski +
                 # stop kayması + giriş/çıkış taker <= nakit·risk_oran. r tanımı değişmez (net / (miktar·|giriş−ilk stop|)).
                 miktar = nakit * risk_oran / maliyetli_risk_birim(fiyat, stop, stop_kayma, taker)
-                miktar = min(miktar, nakit * D(kaldirac) / fiyat)
+                # kaldıraç tavanı komisyon payı dahil (Y-5; portföy motoruyla aynı tanım: kap = K·E / (1 + K·taker))
+                miktar = min(miktar, kaldirac_tavani_miktar(nakit, D(kaldirac), taker, fiyat))
                 miktar = _step_asagi(miktar, step)
                 if miktar < D(kural.min_qty) or miktar <= 0:
                     red = "min_qty"

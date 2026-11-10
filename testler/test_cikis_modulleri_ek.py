@@ -89,6 +89,7 @@ def test_varsayilanlar_kapaliyken_eski_sonuclar_birebir_ayni(monkeypatch):
     # bilinçli bir boyut değişikliğidir ve test_maliyet_dahil_risk.py'de sınanır.
     import motor.backtest.motor as bm
     monkeypatch.setattr(bm, "maliyetli_risk_birim", lambda g, s, k, t: abs(g - s))
+    monkeypatch.setattr(bm, "kaldirac_tavani_miktar", lambda n, K, t, f: n * K / f)   # Y-5 öncesi tavan (altın değerler o tanımla)
     sapan = []
     for si, sinif in enumerate((MaKesisim, DarAralikKirilim)):
         for vi, v in enumerate(VARYANTLAR):
