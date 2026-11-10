@@ -17,11 +17,11 @@ Kod yazmaz, test koşmaz, başka dosyaya dokunmaz. Bunun dışında bir şey ist
 ## Önce elindeki ham listeyi işle (limit tasarrufu)
 `stratejiler/v3_adaylar/ham/MASTER_katalog_2026-11.csv` (251 satır, 2026-11-07 taraması: Quantpedia, Quantocracy, MQL5) ve yanındaki
 .md özetleri daha önce bulundu, işlenmedi. Yeni aramadan ÖNCE: `durum` = izle veya aday olan satırları tekrar kontrolünden geçir,
-verimize ve kurallara uyanları kart yap. `elendi` ve `bilgi` satırlarını atla. Sonra kalan limitle aşağıdaki boşlukları ara.
+verimize ve kurallara uyanları kart yap. `elendi` ve `bilgi` satırları da ön elemeden geçer (eski karar yeniden kontrol edilir). Sonra kalan limitle aşağıdaki boşlukları ara.
 Bu ham dosyaları değiştirme.
 Ayrıca kullanıcının başka oturumda derlediği kataloglar (aynı klasör, 2026-11-10 eklendi). İşleme sırası:
 1. `github-backtest-katalog-denetimli__dogrulanan_48.csv` (doğrulanmış 48), sonra `__tumu.csv` içinde `nihai` = GERÇEK-TEMİZ olanlar
-   (ARAÇ, ÖRNEK, KOPYA, BELİRSİZ atlanır; GERÇEK-ŞÜPHELİ yalnız limit kalırsa).
+   ve diğer TÜM satırlar (ŞÜPHELİ, BELİRSİZ, ÖRNEK, ARAÇ, KOPYA dahil; sıra yalnız önceliktir, hiçbir satır atlanmaz).
 2. `github-backtest-katalog-v4__sayfa_dogrulamasi.csv`, `diger-siteler-derin-21.csv`, `*__b_duzeyi.csv` (asya, bölgesel).
 3. `github-backtest-katalog-v4__reddit.csv`, `__diger_siteler.csv`, `*__tumu.csv` (asya, bölgesel): en düşük öncelik.
 Repo listelerinde lisansı GPL/AGPL olanlardan yalnız kural mantığı alınır. Yayımlanmış Sharpe/getiri iddiaları kanıt değildir;
@@ -52,9 +52,11 @@ Repo listelerinde lisansı GPL/AGPL olanlardan yalnız kural mantığı alınır
 
 ## Hedef: açık kaynak kodlu HER stratejiyi kaçırmadan eleme (kullanıcı isteği 2026-11-10)
 İki aşama; sayı sınırı yok:
-1. ÖN ELEME (Haiku ajanları, ucuz): ham listelerdeki açık kaynak kodlu her satır için `stratejiler/v3_adaylar/on_eleme.csv`'ye
+KULLANICI KURALI: SINIR YOK. Ham klasördeki ~1300 satırın HEPSİ titizlikle incelenir; nereden ne çıkacağı belli olmaz.
+1. ÖN ELEME (Haiku ajanları, ucuz): ham listelerdeki HER satır için (kaynak linki/kodu açılıp bakılarak) `stratejiler/v3_adaylar/on_eleme.csv`'ye
    bir satır: kaynak_dosya, satir_no, ad, url, lisans, karar (kart|tekrar|veri_yok|yasak|arac|kod_yok|belirsiz), neden, benzer_mevcut.
-   ARAÇ/ÖRNEK/KOPYA satırları da tek kelimeyle işaretlenir; hiçbir satır sessizce atlanmaz.
+   ARAÇ/ÖRNEK/KOPYA satırları da açılıp bakılır (içinde strateji olabilir); hiçbir satır sessizce atlanmaz.
+   `belirsiz` çıkanlara Sonnet ikinci kez bakar.
 2. KART (Sonnet): `karar = kart` olan HER satır için kart yazılır (sayı sınırı yok). Limit biterse kaldığın yer
    RAPOR.md'ye yazılır; bir sonraki oturum oradan devam eder. Ara ara commit + push yap ki iş kaybolmasın.
 Kart yazmadan önce tekrar kontrolü yap.
