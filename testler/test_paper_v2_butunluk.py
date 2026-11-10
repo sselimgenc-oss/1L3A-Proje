@@ -143,3 +143,19 @@ def test_pano_v2_gercek_olmayan_hesaplar_uyusmuyor_gosterir(tmp_path):
     p, simdi = _durum(tmp_path, _tanimlar(2))
     v2.durum_yaz(p, p.kaynak, tmp_path, simdi, kaynak_adi="paper", veri_dizini=tmp_path)
     assert d.ek_oku(tmp_path, "butunluk")["genel_durum"] == "uyusmuyor"
+
+
+def test_disarida_bildir_eski_kopyalari_temizler():
+    """Kayıtlı durumdan gelen eski strateji-başı satırlar ve önceki başlangıcın bilgi satırı yeniden başlatmada birikmez."""
+    from types import SimpleNamespace
+    from motor.canli import paper as pp
+
+    olay = []
+    p = SimpleNamespace(uyarilar=["dis__x: evrenden düşen semboller (Binance karşılığı yok/TRADING değil): DK_JNJ (yok)", "baska uyari"],
+                        olay_ekle=lambda *a, **k: olay.append(a))
+    t = SimpleNamespace(kimlik="dis__x", disarida={"DK_JNJ": "DK_JNJ Binance USDⓈ-M exchangeInfo'da yok"})
+    pp.disarida_bildir(p, [t], "2026-11-10")
+    pp.disarida_bildir(p, [t], "2026-11-10")
+    assert "baska uyari" in p.uyarilar
+    assert not any("evrenden düşen semboller (" in u for u in p.uyarilar)
+    assert sum(u.startswith(pp.BILGI_ONEKI) for u in p.uyarilar) == 1
