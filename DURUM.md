@@ -118,6 +118,11 @@ Ana ders: önceki sonuçlar OOS'a bakılarak seçilmiş ve kâr birkaç işlemde
   koşulur. Etiket: 'sonuç sonrası keşif — kanıt değil'. Resmi v2 sonucu (set 2, GEÇTİ) değişmez; bu sonuçlarla hiçbir strateji
   resmi sete/paper'a doğrudan alınmaz — ancak yeni ön kayıt + ileri (paper) veriyle. Aynı s=0.5, maliyet ×1, K2 B=2000 (hk2 tohumu).
   Çıktı ayrı: sonuclar/evren/v2/holdout_kesif/. Resmi holdout dosyalarına dokunulmaz.
+- 2026-11-10: KEŞİF SONUCU (kanıt değil). 55'in 35'i net > 0; net > 0 ve K2 p ≤ 0.05: 8 (şansla beklenen ≈ 2.75).
+  8: jt-awesome-osilator 1d (+%23.1, p .005, eleme E5 kill), uc-ortalama-boga-sma60 1d (+%9.0, p .0005, E4), pf__sabit_sepet
+  (+%7.8, p .0005, E5 kill), haftalik-macd-gunluk-ma 1d (+%2.4, p .019), e0v1en 15m kripto (+%2.0, p .0015), lube 1d
+  (+%3.0, p .016, yalnız 20 işlem, E2), hma-atr-rider 1d (+%2.8, p .016, E5 kill), voltarget-trend 1d (+%2.5, p .023, E4).
+  aroon-stochrsi-ema-dip 15m: p .036 ama net −%0.3. Paper önerisi kullanıcıya sunuldu (mühürlü 2 "doğrulandı" + keşif "iyi göründü").
 - 2026-11-09 23:11 UTC: v2 HOLDOUT (kullanıcı onayıyla, tek sefer; 2025-11-08 → 2026-11-06): SET KAPISI GEÇTİ.
   Set net +%13.4 (tek kasa, maliyet ×1, TradFi funding dahil, işlem başı %0.5), p_set 0.0002; hatalar boş (beyan 1 sağlandı).
   gauss-stoch-eth 1d: 159 işlem, net +%10.4, PF(R) 1.53, K2 p 0.015. ewo-ema-ofset 15m: 46 işlem, net +%3.7, PF(R) 1.64,
