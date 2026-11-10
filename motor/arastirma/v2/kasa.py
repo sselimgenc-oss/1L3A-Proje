@@ -11,6 +11,7 @@ Gelişme aşamaları yazma engeli: set mührü varsa test/saglamlik/set aşamala
 from __future__ import annotations
 
 import json
+import shutil
 from pathlib import Path
 
 import numpy as np
@@ -49,6 +50,79 @@ def atomik_yaz_parquet(df: pd.DataFrame, yol: Path) -> None:
     g = yol.with_suffix(".tmp")
     df.to_parquet(g, index=False)
     g.replace(yol)
+
+
+# ============================================================================ devam önbelleği: girdi damgası (B16b)
+DAMGA_ANAHTARI = "girdi_damgasi"
+SATIR_BITTI = ("tamam", "hata", "rnd_desteklenmeyen")
+
+
+def asama_kodu_ozeti(modul: str) -> str:
+    """Aşama modülünün (test.py / saglamlik.py / kasa.py) import kapanışının içerik özeti: aşama kodu değişince önbellek bayatlar."""
+    from motor.arastirma import wf_evren_holdout as v1h
+    from motor.arastirma.v2 import kapsam
+    return hm._sha_json({y: v1h._sha(we.KOK / y) for y in kapsam.kapanis([modul])})
+
+
+def girdi_damgasi(cikti: Path, row: dict, carpanlar: tuple, asama_modulu: str) -> str:
+    """Bir satırın önbellekli sonucunun GİRDİ kimliği. İçerik: (1) satırın ham yan dosyalarının damgaları (her çarpan x sembol:
+    strateji_hash, motor_hash, veri_sha256, git_commit, maliyet_hash, hata/veri_yok/n_islem), (2) ŞİMDİKİ kod damgası (strateji_hash,
+    motor_hash), (3) ŞİMDİKİ verinin özeti (sembol başına), (4) aşama kodu. Herhangi biri değişirse damga değişir => önbellek bayat.
+    Ham yan dosya yoksa damgada None (ham_yukle sonra 'ham koşu bitmemiş' ile satırı erteler). HoldoutSizintisi yukarı çıkar."""
+    ad, tf, evren, stil = row["strateji"], row["tf"], row["evren"], row["stil_v2"]
+    pf = stil == "portfoy"
+    semboller = (hm.PF_SEMBOL,) if pf else sabit.evren_listesi(evren)
+    tfx = "1d" if pf else tf
+    yanlar = {}
+    for c in carpanlar:
+        hd = Path(cikti) / "ham" / hm.carpan_adi(c)
+        for sm in semboller:
+            yan = hm.dosya_yolu(hd, ad, tfx, sm).with_suffix(".json")
+            if not yan.exists():                          # eksik ham: damgada "yok"; asıl hatayı (bitmemiş) ham_yukle verir
+                yanlar[f"{hm.carpan_adi(c)}/{sm}"] = None
+                continue
+            m = json.loads(yan.read_text())
+            yanlar[f"{hm.carpan_adi(c)}/{sm}"] = {a: m.get(a) for a in (*hm.DAMGA_ALANLARI, "maliyet_hash", "hata", "veri_yok", "n_islem")}
+    kod = hm.kimlik_damgasi(ad, stil)
+    veri = (hm.pf_veri_ozeti_simdi(hm.pf_veri_oku, evren) if pf else
+            {sm: hm.veri_ozeti_simdi(hm.veri_oku, sm, tf) for sm in semboller})
+    return hm._sha_json({"yan": yanlar, "kod": {k: kod[k] for k in ("strateji_hash", "motor_hash")}, "veri": veri,
+                         "asama": [asama_modulu, asama_kodu_ozeti(asama_modulu)]})
+
+
+def onbellek_gecerli_mi(kayit: dict, damga: str, bitti_durumlari: tuple, eski_kabul=None) -> bool:
+    """Önbellekteki satır kaydı bu damgayla üretilmiş mi? True = geçerli (atla); False = bayat/yarım (yeniden koş).
+    Damga alanı yok: bitmiş kayıt (tarihsel/mühürlü çıktı) yalnız eski_kabul / V2_ESKI_YAN_DOSYA ile geçerli sayılır, yoksa
+    DamgaUyusmazligi (sessizce atlanmaz, üzerine de yazılmaz); bitmemiş damgasız kayıt yarımdır -> False."""
+    if DAMGA_ANAHTARI in kayit:
+        return kayit[DAMGA_ANAHTARI] == damga
+    if kayit.get("durum") in bitti_durumlari:
+        if hm.eski_kabul_mu(eski_kabul):
+            return True
+        raise hm.DamgaUyusmazligi(f"{kayit.get('strateji')} {kayit.get('tf')}: önbellek satırında girdi damgası yok (eski çıktı). "
+                                  f"Tarihsel kayıt olarak okumak için {hm.ESKI_ORTAM}=1 / --eski-yan-dosya verin")
+    return False
+
+
+def satir_bitti_mi(cikti: Path, yol: Path, row: dict, carpanlar: tuple, asama_modulu: str, bitti_durumlari: tuple, eski_kabul=None) -> bool:
+    """Planlama kararı: satır dosyası var, bitmiş VE damgası şimdiki girdiyle uyumlu. Ham yan dosya yoksa damga uyuşmaz -> False (görev kuyruğa girer, worker erteler)."""
+    if not Path(yol).exists():
+        return False
+    kayit = json.loads(Path(yol).read_text())
+    if DAMGA_ANAHTARI not in kayit:
+        return onbellek_gecerli_mi(kayit, "", bitti_durumlari, eski_kabul) and kayit.get("durum") in bitti_durumlari
+    damga = girdi_damgasi(cikti, row, carpanlar, asama_modulu)
+    return onbellek_gecerli_mi(kayit, damga, bitti_durumlari, eski_kabul) and kayit.get("durum") in bitti_durumlari
+
+
+def temizle(*yollar) -> None:
+    """Bayat önbellek parçalarını (kısmi sonuç dizin/dosyaları) siler: eski p-değerleri yeni girdiyle birleşmesin."""
+    for y in yollar:
+        y = Path(y)
+        if y.is_dir():
+            shutil.rmtree(y)
+        elif y.exists():
+            y.unlink()
 
 
 # ============================================================================ tablo kurma
@@ -184,9 +258,19 @@ def satir_gunluk(cikti: Path, row: dict, tablo_yolu, tablo_hash: str, onbellekle
     cikti = Path(cikti)
     ad, tf = row["strateji"], row["tf"]
     yol = cikti / "gunluk" / f"{ad}--{tf}.parquet"
+    yan = yol.with_suffix(".json")
+    damga = girdi_damgasi(cikti, row, (1.0,), "motor/arastirma/v2/kasa.py") if onbellekle else None
     if onbellekle and yol.exists():
-        d = pd.read_parquet(yol)
-        return pd.Series(d["getiri"].to_numpy(dtype=float), index=pd.DatetimeIndex(d["gun"]))
+        if yan.exists():
+            gecerli = json.loads(yan.read_text()).get(DAMGA_ANAHTARI) == damga          # bayat damga: aşağıda yeniden hesaplanır
+        elif hm.eski_kabul_mu():
+            gecerli = True                                                              # damgasız tarihsel önbellek: yalnız açık bayrakla
+        else:
+            raise hm.DamgaUyusmazligi(f"{yol.name}: günlük önbellekte girdi damgası yok (eski çıktı); "
+                                      f"{hm.ESKI_ORTAM}=1 / --eski-yan-dosya ile okuyun")
+        if gecerli:
+            d = pd.read_parquet(yol)
+            return pd.Series(d["getiri"].to_numpy(dtype=float), index=pd.DatetimeIndex(d["gun"]))
     if row["stil_v2"] == "portfoy":
         g1, m1 = hm.pf_yukle(cikti, 1.0, ad, tablo_hash, pf_veri_al=hm.pf_veri_oku, evren_adi=row["evren"])
         if g1 is None:
@@ -200,4 +284,5 @@ def satir_gunluk(cikti: Path, row: dict, tablo_yolu, tablo_hash: str, onbellekle
         s = gunluk_mtm_getiri(o["oos"], o["tablo"], o["res"], mtm, o["analiz_bas"], o["oos_bit"])
     if onbellekle:
         atomik_yaz_parquet(pd.DataFrame({"gun": pd.DatetimeIndex(s.index).as_unit("ns"), "getiri": s.to_numpy(dtype=float)}), yol)
+        atomik_yaz_json(yan, {DAMGA_ANAHTARI: damga})
     return s

@@ -314,10 +314,10 @@ def satir_test(row: dict, cikti: Path, tablo_yolu, tablo_hash: str, son: Optiona
     cikti = Path(cikti)
     ad, tf, evren, stil = row["strateji"], row["tf"], row["evren"], row["stil_v2"]
     yol = satir_yolu(cikti, ad, tf)
-    s = json.loads(yol.read_text()) if yol.exists() else {"strateji": ad, "tf": tf, "evren": evren, "stil_v2": stil, "durum": "bekliyor",
-                                                          "hata": "", "rnd_desteklenmeyen": ""}
-    if s.get("durum") in ("tamam", "hata", "rnd_desteklenmeyen"):
-        return s
+    s = json.loads(yol.read_text()) if yol.exists() else None
+
+    def taze():
+        return {"strateji": ad, "tf": tf, "evren": evren, "stil_v2": stil, "durum": "bekliyor", "hata": "", "rnd_desteklenmeyen": ""}
 
     def bitir(**kw):
         s.update(kw)
@@ -327,6 +327,16 @@ def satir_test(row: dict, cikti: Path, tablo_yolu, tablo_hash: str, son: Optiona
     def doldu():
         return son is not None and time.time() > son
     try:
+        # B16b: önbellek kararı girdi damgasına bağlıdır (yalnız "dosya var / durum tamam" değil). _ctx (test enjeksiyonu) kimliksizdir.
+        damga = "ctx" if _ctx is not None else kasa.girdi_damgasi(cikti, row, (1.0,), "motor/arastirma/v2/test.py")
+        if s is not None and not kasa.onbellek_gecerli_mi(s, damga, kasa.SATIR_BITTI):
+            kasa.temizle(*(kismi_dizin(cikti, ad, tf, a) for a in ("k2a", "k2b")))      # bayat kısmi sonuçlar yeni girdiyle birleşmesin
+            s = None
+        if s is None:
+            s = taze()
+        s[kasa.DAMGA_ANAHTARI] = damga
+        if s.get("durum") in kasa.SATIR_BITTI:
+            return s
         if stil == "portfoy":
             return _pf_satir_test(row, s, cikti, tablo_yolu, tablo_hash, bitir, doldu, _ctx)
         if _ctx is not None:
@@ -358,6 +368,8 @@ def satir_test(row: dict, cikti: Path, tablo_yolu, tablo_hash: str, son: Optiona
         return _final(s, bitir)
     except hm.HoldoutSizintisi:
         raise                                                # ASLA yutulmaz
+    except hm.DamgaUyusmazligi as e:                         # bayat/damgasız girdi: KALICI hata satırı yazılmaz; girdi yenilenince yeniden denenir
+        return {"ertelendi": True, "neden": str(e), "damga": True, "strateji": ad, "tf": tf}
     except (FileNotFoundError, ValueError, RuntimeError, KeyError) as e:   # satır "hata" olur ve sayılır (0.5)
         if isinstance(e, RuntimeError) and "bitmemiş" in str(e):
             return {"ertelendi": True, "neden": str(e), "strateji": ad, "tf": tf}
@@ -442,14 +454,16 @@ def test_asamasi(cikti: Path = None, surec: int = sabit.SUREC_VARSAYILAN, butce_
     if not tablo.exists():
         raise RuntimeError(f"v2 maliyet tablosu yok: {tablo}")
     tablo_hash = evren_maliyet.tablo_hash(tablo)
+    we.veri_ayarla(None, sabit.DONEM)                             # planlama de veri özetini bu dönemden hesaplar (işçilerle aynı)
     gorev = []
     for _, row in havuz.iterrows():
         if el.loc[(row["strateji"], row["tf"]), "durum"] != "gecti":
             continue
         s = satir_yolu(cikti, row["strateji"], row["tf"])
-        if s.exists() and json.loads(s.read_text()).get("durum") in ("tamam", "hata", "rnd_desteklenmeyen"):
+        r = {k: (None if (isinstance(v, float) and math.isnan(v)) else v) for k, v in row.items()}
+        if kasa.satir_bitti_mi(cikti, s, r, (1.0,), "motor/arastirma/v2/test.py", kasa.SATIR_BITTI):     # B16b: damga-duyarlı devam
             continue
-        gorev.append({"row": {k: (None if (isinstance(v, float) and math.isnan(v)) else v) for k, v in row.items()}})
+        gorev.append({"row": r})
     if ilerleme:
         print(f"[v2 test] {len(havuz)} satır, elemeyi geçen testte {len(gorev)} bekliyor", flush=True)
     ayar = {"cikti": str(cikti), "tablo_yolu": str(tablo), "tablo_hash": tablo_hash}

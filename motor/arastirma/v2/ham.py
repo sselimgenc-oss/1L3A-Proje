@@ -30,7 +30,7 @@ import pandas as pd
 
 from motor.arastirma import evren_maliyet, secim
 from motor.arastirma import wf_evren as we
-from motor.arastirma.v2 import maliyet, sabit
+from motor.arastirma.v2 import kapsam, maliyet, sabit
 from motor.backtest.motor import backtest
 from motor.strateji import funding, kayit
 from motor.veri import depo
@@ -236,20 +236,51 @@ ESKI_ORTAM = "V2_ESKI_YAN_DOSYA"
 DAMGA_ALANLARI = ("veri_sha256", "strateji_hash", "motor_hash", "git_commit")
 _DAMGA_ONBELLEK: dict = {}
 _YOK = object()                       # "veri özeti verilmedi" işareti (None = veri yok, geçerli bir özet değeridir)
-# motor_hash kapsamı: v1 mührünün ortak modülleri (ORTAK_MODULLER; mühür biçimi değişmesin diye ona dokunulmaz) + ham çıktıyı
-# doğrudan belirleyen ek modüller (B16 kapsam genişletme: htf/gösterge/yeniden örnekleme/çıkış/funding/depo/ham).
+# motor_hash kapsamı (B16b): OTOMATİK. Kök dosyalardan proje-içi import kapanışı (kapsam.py, statik AST) + v1 mührünün ortak
+# modülleri (ORTAK_MODULLER; mühür biçimi değişmesin diye ona dokunulmaz). Kapanış, elle liste unutulsa da paylaşılan gösterge/
+# motor modüllerini yakalar. MOTOR_EK_MODULLER artık yalnız TABAN: import ile görünmeyen bir bağımlılık kapanıştan düşse bile hash'te kalır.
 MOTOR_EK_MODULLER = ("motor/strateji/htf.py", "motor/strateji/gostergeler.py", "motor/veri/yeniden_ornekle.py",
                      "motor/strateji/cikislar.py", "motor/strateji/funding.py", "motor/veri/depo.py", "motor/arastirma/v2/ham.py")
+MOTOR_KOKLERI = ("motor/backtest/motor.py", "motor/arastirma/v2/ham.py", "motor/arastirma/wf_evren.py")          # tek-grafik motor girişleri
+PF_MOTOR_KOKLERI = ("motor/portfoy/motor.py", "motor/arastirma/wf_evren_portfoy.py", "motor/arastirma/wf_portfoy.py",
+                    "motor/portfoy/stratejiler/__init__.py")                                                     # pf__ satırı ek girişleri
+
+
+class DamgaUyusmazligi(RuntimeError):
+    """Kimlik damgası uyuşmuyor / yok (bayat ham çıktı, bayat önbellek, damgasız tarihsel dosya). RuntimeError alt sınıfıdır (eski
+    `except RuntimeError` / pytest.raises kullanımları aynen çalışır). Önbellekli aşamalar bunu KALICI 'hata' satırı yapmaz: görev
+    ertelenir ve girdi yenilenince yeniden denenir."""
 
 
 def motor_hash_girdisi() -> dict:
-    """{göreli yol: sha256} — motor_hash'in girdisi (ortak modüller + ek modüller). Testte sahtelenebilir."""
+    """{göreli yol: sha256} — tek-grafik motor_hash girdisi: ortak modüller + ek taban + MOTOR_KOKLERI import kapanışı. Sıralı.
+    Testte sahtelenebilir."""
     from motor.arastirma import wf_evren_holdout as v1h
-    return {**v1h.ortak_modul_hashleri(), **{y: v1h._sha(we.KOK / y) for y in MOTOR_EK_MODULLER}}
+    yollar = sorted(set(MOTOR_EK_MODULLER) | set(kapsam.kapanis(MOTOR_KOKLERI)))
+    return {**v1h.ortak_modul_hashleri(), **{y: v1h._sha(we.KOK / y) for y in yollar}}
+
+
+def motor_hash_girdisi_pf() -> dict:
+    """pf__ satırları: tek-grafik girdisi + portföy motoru ve stratejilerinin kapanışı (motor/portfoy/motor.py dahil)."""
+    from motor.arastirma import wf_evren_holdout as v1h
+    ek = sorted(kapsam.kapanis(PF_MOTOR_KOKLERI))
+    return {**motor_hash_girdisi(), **{y: v1h._sha(we.KOK / y) for y in ek}}
+
+
+def strateji_hash_girdisi(ad: str, stil: str) -> dict:
+    """{strateji adı: {göreli yol: sha256}} — v1 `strateji_hashleri` (sınıf+ata modülleri+kart/ayar dosyaları; v1 aynen) + her
+    .py dosyasının import kapanışı. Kapanış strateji_hash'e girer (motor_hash'e değil): paylaşılan gösterge modülü (gostergeler_b2,
+    pivotlar, ...) değişince onu kullanan stratejinin damgası bozulur, kullanmayanın bozulmaz; motor_hash yalnız motor girişlerini taşır."""
+    from motor.arastirma import wf_evren_holdout as v1h
+    v1 = v1h.strateji_hashleri([{"strateji": ad, "stil": stil}])
+    kokler = [y for y in v1h.strateji_dosyalari(ad, stil) if y.endswith(".py")]
+    ek = {y: v1h._sha(we.KOK / y) for y in kapsam.kapanis(kokler)}
+    return {**v1, "_kapanis": ek}
 
 
 def damga_onbellegini_sifirla() -> None:
     _DAMGA_ONBELLEK.clear()
+    kapsam.onbellegi_sifirla()
 
 
 def _sha_json(o) -> str:
@@ -278,14 +309,16 @@ def kimlik_damgasi(ad: str, stil: str = "swing", veri: Optional[str] = None) -> 
     if "motor" not in _DAMGA_ONBELLEK:
         _DAMGA_ONBELLEK["motor"] = _sha_json(motor_hash_girdisi())
         _DAMGA_ONBELLEK["git"] = v1h.git_commit()
+    if stil == "portfoy" and "motor_pf" not in _DAMGA_ONBELLEK:
+        _DAMGA_ONBELLEK["motor_pf"] = _sha_json(motor_hash_girdisi_pf())
     k = ("strateji", ad, stil)
     if k not in _DAMGA_ONBELLEK:
         try:
-            _DAMGA_ONBELLEK[k] = _sha_json(v1h.strateji_hashleri([{"strateji": ad, "stil": stil}]))
+            _DAMGA_ONBELLEK[k] = _sha_json(strateji_hash_girdisi(ad, stil))
         except (KeyError, ImportError):                        # kayıtlı olmayan strateji (yalnız sentetik test): sabit işaret
             _DAMGA_ONBELLEK[k] = "kayitsiz"
-    return {"veri_sha256": veri, "strateji_hash": _DAMGA_ONBELLEK[k], "motor_hash": _DAMGA_ONBELLEK["motor"],
-            "git_commit": _DAMGA_ONBELLEK["git"]}
+    return {"veri_sha256": veri, "strateji_hash": _DAMGA_ONBELLEK[k],
+            "motor_hash": _DAMGA_ONBELLEK["motor_pf" if stil == "portfoy" else "motor"], "git_commit": _DAMGA_ONBELLEK["git"]}
 
 
 def eski_kabul_mu(eski_kabul: Optional[bool] = None) -> bool:
@@ -323,7 +356,7 @@ def kimlik_dogrula(meta: dict, ad: str, stil: str, kaynak: str, eski_kabul: Opti
     (ya da V2_ESKI_YAN_DOSYA=1) ile geçer."""
     tur, mesaj = kimlik_farki(meta, ad, stil, eski_kabul, veri_simdi)
     if tur is not None:
-        raise RuntimeError(f"{kaynak}: {mesaj}")
+        raise DamgaUyusmazligi(f"{kaynak}: {mesaj}")
 
 
 def veri_ozeti_simdi(veri_al, sembol: str, tf: str) -> Optional[str]:
@@ -364,7 +397,7 @@ def _bayat_mi(yan: Path, ad: str, stil: str, tablo_hash: str, veri_simdi_fn, esk
     if not any(a in m for a in DAMGA_ALANLARI):
         tur, mesaj = kimlik_farki(m, ad, stil, eski_kabul)
         if tur is not None:
-            raise RuntimeError(f"{yan.name}: {mesaj}")
+            raise DamgaUyusmazligi(f"{yan.name}: {mesaj}")
         return False
     if m.get("maliyet_hash") != tablo_hash:
         return True
@@ -667,7 +700,7 @@ def ham_yan_denetle(cikti: Path, carpan: float, ad: str, tf: str, evren: tuple, 
             raise RuntimeError(f"ham koşu bitmemiş: {yan.name} ({carpan_adi(carpan)})")
         m = json.loads(yan.read_text())
         if m.get("maliyet_hash") != tablo_hash:
-            raise RuntimeError(f"{yan.name}: başka bir maliyet tablosuyla yapılmış")
+            raise DamgaUyusmazligi(f"{yan.name}: başka bir maliyet tablosuyla yapılmış")
         if not m.get("veri_yok") and m.get("veri_bit") and zaman_utc(m["veri_bit"]) >= sabit.HOLDOUT_BAS:
             raise HoldoutSizintisi(f"{yan.name}: veri_bit {m['veri_bit']} HOLDOUT_BAS ve sonrası")
         vs = _YOK
@@ -719,7 +752,7 @@ def pf_yukle(cikti: Path, carpan: float, ad: str, tablo_hash: str, eski_kabul: O
         raise RuntimeError(f"ham koşu bitmemiş: {yan.name} ({carpan_adi(carpan)})")
     m = json.loads(yan.read_text())
     if m.get("maliyet_hash") != tablo_hash:
-        raise RuntimeError(f"{yan.name}: başka bir maliyet tablosuyla yapılmış")
+        raise DamgaUyusmazligi(f"{yan.name}: başka bir maliyet tablosuyla yapılmış")
     if m.get("veri_bit") and zaman_utc(m["veri_bit"]) >= sabit.HOLDOUT_BAS:
         raise HoldoutSizintisi(f"{yan.name}: veri_bit {m['veri_bit']} HOLDOUT_BAS ve sonrası")
     vs = _YOK
