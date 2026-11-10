@@ -228,3 +228,15 @@ Dosya yoksa (eski motor) pano "veri yok" der. Ölçülemeyen değer `null` + ned
 - **İşlem başı risk maliyet dahil** (`motor/risk/limitler.py`): sinyal kollarında miktar = özsermaye·%1 / (|giriş−stop| + max(giriş, stop)·(stop_kayma + 2·taker)).
   `r` tanımı değişmedi (fiyat riski cinsinden net); tam stop kaybında r ≈ −(1 + maliyet payı/fiyat riski), hesap kaybı ≈ −%1. Beklenti aralıkları (`beklenti_araliklari.csv`)
   eski (yalnız fiyat riski) boyutla üretildiyse set düzeyi beklenti yeniden üretilmelidir (tek-grafik strateji kıyasları R tabanlıdır, etkilenmez).
+
+## Genişletme (Paper v2 seti: 10 strateji, her biri kendi kasasında; 2026-11-10; sürüm 1 içinde EKLEMELİ)
+Kod: `motor/canli/paper_v2.py`; set tanımı `stratejiler/paper_v2_seti.json`. Üst düzey `durum/` dosyaları 10 kasanın TOPLAMIDIR (toplamda sert limit
+uygulanmaz; her kasanın kendi motoru limitleri ayrı uygular). Eski alanlar değişmedi; eski motor/dosyalarda yeni alanlar yoktur (pano yokluğu tolere eder).
+- **`stratejiler.json` → her strateji**: `etiket` ("dogrulandi" = resmi v2 holdout kapısını geçti; "iyi_gorundu" = sonuç sonrası keşif, KANIT DEĞİL; eski sette `null`),
+  `hesap {baslangic, ozsermaye (para), getiri, zirveden_dusus, kill, gunluk_blok, risk_yuzde (işlem başı %), kaldirac, acik_stop_riski}` (stratejinin kendi sanal kasası),
+  `kol`: "tek_evren" (aynı strateji evrendeki tüm sembollerde, TEK kasada) | "portfoy"; `kol_payi` v2'de grup payı (pf için s = 0.5, tek_evren için 1).
+- **`durum/hesaplar/<strateji kimliği>/`**: her kasanın tam dosya seti (ozet, stratejiler, islemler, saglik, ... aynı şema; `ozet.baslangic_ozsermaye` 10000). Yeni satır
+  işlendiyse en çok 10 dakikada bir yenilenir.
+- **`paper_state.json`**: `{"surum": 2, "set": "paper_v2", "set_imza", "hesaplar": {kimlik: <eski tek-hesap kaydı>}, ...}`; eski 7'li set kaydı (`surum` 1) v2'ye YÜKLENMEZ (açık hata).
+- Beklenti aralığı/Dersler referansı yeni stratejiler için YOKTUR (`beklenti` boş, uydurma yok); Dersler/Karne bu alanlar için "ölçülmedi" der.
+- Evrenden düşen semboller (Binance TradFi karşılığı yok: `DK_JNJ`, `DK_MA`) `ozet.notlar`, `saglik.uyarilar` ve `olaylar`'da görünür.

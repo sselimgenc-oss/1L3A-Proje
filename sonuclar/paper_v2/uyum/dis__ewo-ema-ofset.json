@@ -1,0 +1,81 @@
+{
+ "strateji": "dis__ewo-ema-ofset",
+ "etiket": "dogrulandi",
+ "tf": "15m",
+ "evren": "kripto",
+ "referans": {
+  "kaynak": "holdout.csv",
+  "net": 0.0366951909275194,
+  "n_islem": 46
+ },
+ "disarida": {},
+ "paper": {
+  "net": 0.03642494310840093,
+  "n_islem": 46,
+  "reddedilen": {},
+  "kirpilan": {},
+  "cikis_nedenleri": {
+   "sinyal": 32,
+   "stop": 11,
+   "zaman": 3
+  },
+  "kill": false,
+  "gunluk_limit": 0
+ },
+ "holdout_yeniden": {
+  "net": 0.036695190927519494,
+  "n_ham": 46,
+  "n_kabul": 46,
+  "sayac": {
+   "giris_kabul": 46,
+   "reddedilen": 0,
+   "kirpilan": 0,
+   "red_toplam_risk": 0,
+   "red_kaldirac": 0,
+   "red_gunluk": 0,
+   "red_kill": 0,
+   "gunluk_limit_olayi": 0,
+   "kill_olayi": 0,
+   "zorla_kapanan": 0
+  }
+ },
+ "eslesme": {
+  "holdout_kabul": 46,
+  "paper": 46,
+  "ortak": 46,
+  "sadece_holdout": 0,
+  "sadece_paper": 0,
+  "sadece_paper_ham_listede": 0,
+  "sadece_paper_baslangic_n": 0,
+  "sadece_paper_baslangic_pnl": 0.0,
+  "ortak_medyan_abs_dR": 2.0693577851282896e-08,
+  "ortak_maks_abs_dR": 0.00640705256278698,
+  "ortak_pnl_holdout": 366.95190927519843,
+  "ortak_pnl_paper": 364.2494310840092,
+  "sadece_holdout_pnl": 0.0,
+  "sadece_paper_pnl": 0.0
+ },
+ "teshis_limitsiz": {
+  "holdout_net": 0.036695190927519494,
+  "paper_net": 0.03642494310840093,
+  "holdout_n": 46,
+  "paper_n": 46,
+  "eslesme": {
+   "holdout_kabul": 46,
+   "paper": 46,
+   "ortak": 46,
+   "sadece_holdout": 0,
+   "sadece_paper": 0,
+   "sadece_paper_ham_listede": 0,
+   "sadece_paper_baslangic_n": 0,
+   "sadece_paper_baslangic_pnl": 0.0,
+   "ortak_medyan_abs_dR": 2.0693577851282896e-08,
+   "ortak_maks_abs_dR": 0.00640705256278698,
+   "ortak_pnl_holdout": 366.95190927519843,
+   "ortak_pnl_paper": 364.2494310840092,
+   "sadece_holdout_pnl": 0.0,
+   "sadece_paper_pnl": 0.0
+  }
+ },
+ "sure_sn": 86.25250720977783
+}

@@ -1,0 +1,25 @@
+{
+  "surum": 1,
+  "ad": "paper_v2",
+  "tarih": "2026-11-10",
+  "kaynak": "DURUM.md lider günlüğü 2026-11-10 (KULLANICI onayı): paper seti = 10 strateji",
+  "s": 0.5,
+  "baslangic_sermaye": 10000,
+  "not": "Her strateji KENDİ sanal kasasında (tek başına tek kasa; v2 holdout ölçümüyle aynı): işlem başı risk s x %1 = %0.5 (maliyet dahil), sert limitler kasa başına. Ayarlar v2 VARSAYILAN ayarlardır (motor/arastirma/v2/ham.py varsayilan_strateji / varsayilan_pf). Evren ve tf stratejiler/havuz_v2.csv satırından (tf/evren burada yinelenir ve havuzla uyuşmak zorundadır). Portföy stratejisinde s, grup payı (ağırlık ölçeği) olarak uygulanır: holdout pf_net = prod(1 + s x günlük getiri) - 1 ile aynı mantık.",
+  "etiketler": {
+    "dogrulandi": "resmi v2 holdout set kapısını geçti (sonuclar/evren/v2/holdout/paper_girdisi.json); gerekli, yeterli değil: asıl sınav paper",
+    "iyi_gorundu": "sonuç sonrası keşif — KANIT DEĞİL (sonuclar/evren/v2/holdout_kesif/holdout_kesif.csv); şansla beklenen ≈ 2.75 / 8"
+  },
+  "stratejiler": [
+    {"strateji": "dis__gauss-stoch-eth", "tf": "1d", "evren": "genel", "tur": "tek", "etiket": "dogrulandi"},
+    {"strateji": "dis__ewo-ema-ofset", "tf": "15m", "evren": "kripto", "tur": "tek", "etiket": "dogrulandi"},
+    {"strateji": "dis__jt-awesome-osilator", "tf": "1d", "evren": "genel", "tur": "tek", "etiket": "iyi_gorundu"},
+    {"strateji": "dis__uc-ortalama-boga-sma60", "tf": "1d", "evren": "genel", "tur": "tek", "etiket": "iyi_gorundu"},
+    {"strateji": "pf__sabit_sepet", "tf": "1d", "evren": "genel", "tur": "pf", "etiket": "iyi_gorundu"},
+    {"strateji": "dis__lube", "tf": "1d", "evren": "genel", "tur": "tek", "etiket": "iyi_gorundu"},
+    {"strateji": "dis__hma-atr-rider", "tf": "1d", "evren": "genel", "tur": "tek", "etiket": "iyi_gorundu"},
+    {"strateji": "dis__voltarget-trend", "tf": "1d", "evren": "genel", "tur": "tek", "etiket": "iyi_gorundu"},
+    {"strateji": "dis__haftalik-macd-gunluk-ma", "tf": "1d", "evren": "genel", "tur": "tek", "etiket": "iyi_gorundu"},
+    {"strateji": "dis__e0v1en", "tf": "15m", "evren": "kripto", "tur": "tek", "etiket": "iyi_gorundu"}
+  ]
+}

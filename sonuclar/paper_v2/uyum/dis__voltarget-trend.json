@@ -1,0 +1,87 @@
+{
+ "strateji": "dis__voltarget-trend",
+ "etiket": "iyi_gorundu",
+ "tf": "1d",
+ "evren": "genel",
+ "referans": {
+  "kaynak": "holdout_kesif.csv",
+  "net": 0.0251627153000699,
+  "n_islem": 140
+ },
+ "disarida": {},
+ "paper": {
+  "net": 0.01273809499700124,
+  "n_islem": 22,
+  "reddedilen": {
+   "toplam_risk_tavani": 687,
+   "min_notional": 3
+  },
+  "kirpilan": {
+   "toplam_risk": 694
+  },
+  "cikis_nedenleri": {
+   "sinyal": 13,
+   "stop": 6,
+   "stop_gap": 1,
+   "veri_sonu": 2
+  },
+  "kill": false,
+  "gunluk_limit": 0
+ },
+ "holdout_yeniden": {
+  "net": 0.02516271530006997,
+  "n_ham": 140,
+  "n_kabul": 98,
+  "sayac": {
+   "giris_kabul": 98,
+   "reddedilen": 42,
+   "kirpilan": 7,
+   "red_toplam_risk": 42,
+   "red_kaldirac": 0,
+   "red_gunluk": 0,
+   "red_kill": 0,
+   "gunluk_limit_olayi": 0,
+   "kill_olayi": 0,
+   "zorla_kapanan": 0
+  }
+ },
+ "eslesme": {
+  "holdout_kabul": 98,
+  "paper": 22,
+  "ortak": 6,
+  "sadece_holdout": 92,
+  "sadece_paper": 16,
+  "sadece_paper_ham_listede": 0,
+  "sadece_paper_baslangic_n": 10,
+  "sadece_paper_baslangic_pnl": -381.832853880975,
+  "ortak_medyan_abs_dR": 0.001464804551911919,
+  "ortak_maks_abs_dR": 0.0028623422910894203,
+  "ortak_pnl_holdout": -59.98509076000084,
+  "ortak_pnl_paper": -55.582896622812605,
+  "sadece_holdout_pnl": 311.61224376070237,
+  "sadece_paper_pnl": 182.963846592825
+ },
+ "teshis_limitsiz": {
+  "holdout_net": 0.04412162020507382,
+  "paper_net": 0.07336682951246064,
+  "holdout_n": 140,
+  "paper_n": 163,
+  "eslesme": {
+   "holdout_kabul": 140,
+   "paper": 163,
+   "ortak": 140,
+   "sadece_holdout": 0,
+   "sadece_paper": 23,
+   "sadece_paper_ham_listede": 0,
+   "sadece_paper_baslangic_n": 17,
+   "sadece_paper_baslangic_pnl": 495.1957924680251,
+   "ortak_medyan_abs_dR": 0.003520470783128976,
+   "ortak_maks_abs_dR": 0.194702147913973,
+   "ortak_pnl_holdout": 441.21620205073197,
+   "ortak_pnl_paper": 386.07579419858143,
+   "sadece_holdout_pnl": 0.0,
+   "sadece_paper_pnl": 347.5925009260251
+  }
+ },
+ "sure_sn": 5.178832292556763
+}

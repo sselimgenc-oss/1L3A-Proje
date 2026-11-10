@@ -317,14 +317,17 @@ def olustur(p, simdi, kaynak_saglik: Optional[list] = None, olaylar: Optional[li
         perf = performans(isl)
         perf_tum[sk] = perf
         satirlar = [_islem_satiri(p, x) for x in isl]
-        if t.kol == "tek_grafik":
+        bk = bek_csv.get(sk)                       # v2 paper setinde stratejilerin eski set beklenti aralığı YOK: beklenti konumu boş (uydurma yok)
+        if bk is None:
+            seri = pd.Series(dtype=float)
+        elif t.tek_sinyal:
             # backtest beklentisi kıyası TradFi funding HARİÇ (r_kiyas; 2026-11-09)
             df = pd.DataFrame({"cikis_zamani": [pd.Timestamp(x["cikis_zamani"]) for x in isl], "r": [islem_tradfi(x)["r_kiyas"] for x in isl]})
             gunler = pd.date_range(S["ilk_gun"], pd.Timestamp(simdi.date(), tz="UTC"), freq="D") if S["ilk_gun"] is not None else pd.DatetimeIndex([], tz="UTC")
             seri = bek.gunluk_tablo_islem(df, gunler)["ret"] if len(gunler) else pd.Series(dtype=float)
         else:
             seri = p_strateji_gunluk(p, sk)
-        kon = beklenti_konumlari(seri, bek_csv[sk]) if len(seri) else {}
+        kon = beklenti_konumlari(seri, bk) if (bk is not None and len(seri)) else {}
         strat_kon[sk] = kon
         for hf, b in kon.items():
             for metrik in ("net_getiri", "max_dusus"):
@@ -333,19 +336,20 @@ def olustur(p, simdi, kaynak_saglik: Optional[list] = None, olaylar: Optional[li
         ap = acik_pozisyonlar(p, sk)
         kazanan = sum(1 for x in isl if D(x["net_pnl"]) > 0)
         strat_json.append({
-            "kimlik": sk, "ajan": t.ajan, "kol": t.kol, "kol_payi": float(t.grup_payi) if t.kol == "tek_grafik" else float(t.grup_payi) * 3,
+            "kimlik": sk, "ajan": t.ajan, "kol": t.kol, "etiket": t.etiket or None,
+            "kol_payi": float(t.grup_payi) * (3 if (t.kol == "portfoy" and not t.etiket) else 1),
             "ozsermaye_katkisi": d.para(pn["toplam"]), "katki_getiri": d.sayi(pn["toplam"] / bas),
             "acik_pozisyonlar": ap, "son_islem": (satirlar[-1] if satirlar else None), "islem_sayisi": len(isl),
             "kazanma_orani": d.sayi(kazanan / len(isl)) if isl else None, "beklenti": kon, "performans": perf,
             "ayar": t.ayar, "sonraki_yenileme": t.sonraki_yenileme, "durum": "calisiyor"})
     for t in p.veri_yok:
-        strat_json.append({"kimlik": t.kimlik, "ajan": t.ajan, "kol": t.kol, "kol_payi": float(t.grup_payi),
+        strat_json.append({"kimlik": t.kimlik, "ajan": t.ajan, "kol": t.kol, "etiket": t.etiket or None, "kol_payi": float(t.grup_payi),
                            "ozsermaye_katkisi": d.para(0), "katki_getiri": 0.0, "acik_pozisyonlar": [], "son_islem": None,
                            "islem_sayisi": 0, "kazanma_orani": None, "beklenti": {},
                            "performans": performans([]), "ayar": t.ayar, "sonraki_yenileme": t.sonraki_yenileme,
                            "durum": f"veri yok: {t.veri_yok}"})
         uyari_listesi.append(f"VERİ YOK: {t.kimlik} çalıştırılmıyor ({t.veri_yok})")
-    set_kon = beklenti_konumlari(set_getiri, bek_csv["set"]) if len(set_getiri) else {}
+    set_kon = beklenti_konumlari(set_getiri, bek_csv["set"]) if (len(set_getiri) and "set" in bek_csv and not any(t.etiket for t in p.tanimlar)) else {}
     for hf, b in set_kon.items():
         for metrik in ("net_getiri", "max_dusus"):
             if b[metrik]["alarm"]:
@@ -547,11 +551,13 @@ def icgoruler(p, simdi, E, bas, katkilar, perf, ap_hepsi, mal24, S, hafta_pnl, a
     # beklenti alarmına en yakın strateji (8 hafta penceresi dolduysa)
     en_yakin = None
     for t in p.tanimlar:
+        if t.kimlik not in bek_csv:
+            continue
         seri = (bek.gunluk_tablo_islem(pd.DataFrame({"cikis_zamani": [pd.Timestamp(x["cikis_zamani"]) for x in p.motor.islemler
                                                                      if m_kol_sk(p.motor, x["kol"]) == t.kimlik],
                                                      "r": [islem_tradfi(x)["r_kiyas"] for x in p.motor.islemler if m_kol_sk(p.motor, x["kol"]) == t.kimlik]}),
                                        pd.date_range(S["ilk_gun"], pd.Timestamp(simdi.date(), tz="UTC"), freq="D"))["ret"]
-                if (t.kol == "tek_grafik" and S["ilk_gun"] is not None) else p_strateji_gunluk(p, t.kimlik))
+                if (t.tek_sinyal and S["ilk_gun"] is not None) else p_strateji_gunluk(p, t.kimlik))
         if len(seri) < 56:
             continue
         kon = beklenti_konumlari(seri, bek_csv[t.kimlik]).get("8")

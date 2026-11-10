@@ -239,7 +239,7 @@ def test_canli_yeniden_baslatma_kesintiyi_olcer(tmp_path, monkeypatch):
     monkeypatch.setattr(pv, "FapiIstemci", SahteFapi)
     for tf, n in (("1d", 120), ("4h", 120), ("30m", 300)):
         monkeypatch.setitem(pp.PENCERE, tf, n)
-    assert pp.canli_calistir(tmp_path, None, False, tek_sefer=True) == 0
+    assert pp.canli_calistir(tmp_path, None, False, tek_sefer=True, set_modu="eski") == 0
     kd = kh.oku(tmp_path)
     assert kd["zaman"] == "2026-03-01T12:07:00Z" and kd["onceki_kalp_atisi"] is None
     s1 = d.oku_saglik(tmp_path)
@@ -247,7 +247,7 @@ def test_canli_yeniden_baslatma_kesintiyi_olcer(tmp_path, monkeypatch):
     assert json.loads((tmp_path / "paper_state.json").read_text())["kalp_atisi"] == "2026-03-01T12:07:00Z"
     # 3 saat sonra yeniden başlat
     monkeypatch.setattr(pv, "FapiIstemci", _SahteFapiGec)
-    assert pp.canli_calistir(tmp_path, None, False, tek_sefer=True) == 0
+    assert pp.canli_calistir(tmp_path, None, False, tek_sefer=True, set_modu="eski") == 0
     ev = [o for o in d.ek_oku(tmp_path, "olaylar") if o["tur"] == "yeniden_baslatma"]
     assert len(ev) == 1 and "(2026-03-01T12:07:00Z -> 2026-03-01T15:07:00Z)" in ev[0]["mesaj"] and "10800 sn" in ev[0]["mesaj"]
     s2 = d.oku_saglik(tmp_path)
@@ -265,19 +265,19 @@ def test_eski_durumla_baslatma_kesinti_olculemedi_olay_yazar(tmp_path, monkeypat
     monkeypatch.setattr(pv, "FapiIstemci", SahteFapi)
     for tf, n in (("1d", 120), ("4h", 120), ("30m", 300)):
         monkeypatch.setitem(pp.PENCERE, tf, n)
-    assert pp.canli_calistir(tmp_path, None, False, tek_sefer=True) == 0
+    assert pp.canli_calistir(tmp_path, None, False, tek_sefer=True, set_modu="eski") == 0
     yol = tmp_path / "paper_state.json"
     v = json.loads(yol.read_text())
     v.pop("kalp_atisi")
     yol.write_text(json.dumps(v))
     (tmp_path / kh.DOSYA).unlink()
-    assert pp.canli_calistir(tmp_path, None, False, tek_sefer=True) == 0
+    assert pp.canli_calistir(tmp_path, None, False, tek_sefer=True, set_modu="eski") == 0
     ev = [o for o in d.ek_oku(tmp_path, "olaylar") if o["tur"] == "yeniden_baslatma"]
     assert len(ev) == 1 and "ölçülemedi" in ev[0]["mesaj"]
     assert d.oku_saglik(tmp_path)["kalp_atisi"]["son_kesinti_sn"] is None
     # bozuk kalp atışı dosyası da açık hata olarak olaya yazılır (sessiz değil)
     (tmp_path / kh.DOSYA).write_text("{bozuk")
-    assert pp.canli_calistir(tmp_path, None, False, tek_sefer=True) == 0
+    assert pp.canli_calistir(tmp_path, None, False, tek_sefer=True, set_modu="eski") == 0
     assert any("okunamadı" in o["mesaj"] for o in d.ek_oku(tmp_path, "olaylar") if o["tur"] == "yeniden_baslatma")
 
 

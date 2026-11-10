@@ -33,7 +33,11 @@ ISTEK_ZAMAN_ASIMI = 20
 # Strateji sembolü -> Binance USDⓈ-M sembolü. Kripto kendisi. TradFi: Binance'in kendi arşivindeki (data.binance.vision)
 # sembol envanterinde (veri/sembol_envanteri.csv) bulunan karşılıklar; canlı doğrulama exchangeInfo ile yapılır.
 ESLEME = {"DK_AAPL": "AAPLUSDT", "DK_MSFT": "MSFTUSDT", "DK_GOOGL": "GOOGLUSDT", "DK_AMZN": "AMZNUSDT", "DK_NVDA": "NVDAUSDT",
-          "DK_META": "METAUSDT", "DK_TSLA": "TSLAUSDT", "DK_XAU": "XAUUSDT", "DK_WTI": "CLUSDT", "DK_COPPER": "COPPERUSDT"}
+          "DK_META": "METAUSDT", "DK_TSLA": "TSLAUSDT", "DK_XAU": "XAUUSDT", "DK_WTI": "CLUSDT", "DK_COPPER": "COPPERUSDT",
+          # v2 paper seti genişlemesi (veri/sembol_envanteri.csv'de bulunanlar; canlı doğrulama exchangeInfo ile: bulunamazsa o sembol
+          # 'veri yok' olur). DK_JNJ ve DK_MA için Binance TradFi karşılığı envanterde YOK -> evrenden düşer (uyarı + olay).
+          "DK_AVGO": "AVGOUSDT", "DK_LLY": "LLYUSDT", "DK_WMT": "WMTUSDT", "DK_JPM": "JPMUSDT", "DK_V": "VUSDT", "DK_MU": "MUUSDT",
+          "DK_AMD": "AMDUSDT", "DK_XOM": "XOMUSDT", "DK_XAG": "XAGUSDT", "DK_NATGAS": "NATGASUSDT"}
 
 
 def binance_sembol(sembol: str) -> str:

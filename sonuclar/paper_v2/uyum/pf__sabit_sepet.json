@@ -1,0 +1,29 @@
+{
+ "strateji": "pf__sabit_sepet",
+ "etiket": "iyi_gorundu",
+ "tf": "1d",
+ "evren": "genel",
+ "referans": {
+  "kaynak": "holdout_kesif.csv",
+  "net": 0.077612432174875,
+  "n_islem": 363
+ },
+ "disarida": {},
+ "paper": {
+  "net": 0.07804198311921806,
+  "n_islem": 21,
+  "reddedilen": {},
+  "kirpilan": {
+   "portfoy_risk": 29,
+   "risk": 11,
+   "zarar_buyutme": 1
+  },
+  "cikis_nedenleri": {
+   "stop": 18,
+   "veri_sonu": 3
+  },
+  "kill": false,
+  "gunluk_limit": 0
+ },
+ "sure_sn": 8.556225061416626
+}

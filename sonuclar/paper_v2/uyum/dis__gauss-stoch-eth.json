@@ -1,0 +1,86 @@
+{
+ "strateji": "dis__gauss-stoch-eth",
+ "etiket": "dogrulandi",
+ "tf": "1d",
+ "evren": "genel",
+ "referans": {
+  "kaynak": "holdout.csv",
+  "net": 0.1037033216428326,
+  "n_islem": 159
+ },
+ "disarida": {},
+ "paper": {
+  "net": 0.06109579916312089,
+  "n_islem": 123,
+  "reddedilen": {
+   "toplam_risk_tavani": 166,
+   "min_notional": 4
+  },
+  "kirpilan": {
+   "toplam_risk": 202
+  },
+  "cikis_nedenleri": {
+   "sinyal": 115,
+   "stop": 1,
+   "veri_sonu": 7
+  },
+  "kill": false,
+  "gunluk_limit": 0
+ },
+ "holdout_yeniden": {
+  "net": 0.10370332164283269,
+  "n_ham": 159,
+  "n_kabul": 137,
+  "sayac": {
+   "giris_kabul": 137,
+   "reddedilen": 22,
+   "kirpilan": 6,
+   "red_toplam_risk": 22,
+   "red_kaldirac": 0,
+   "red_gunluk": 0,
+   "red_kill": 0,
+   "gunluk_limit_olayi": 0,
+   "kill_olayi": 0,
+   "zorla_kapanan": 0
+  }
+ },
+ "eslesme": {
+  "holdout_kabul": 137,
+  "paper": 123,
+  "ortak": 95,
+  "sadece_holdout": 42,
+  "sadece_paper": 28,
+  "sadece_paper_ham_listede": 0,
+  "sadece_paper_baslangic_n": 4,
+  "sadece_paper_baslangic_pnl": -35.1895705593065,
+  "ortak_medyan_abs_dR": 0.004665463959537153,
+  "ortak_maks_abs_dR": 0.09356661827600465,
+  "ortak_pnl_holdout": 833.7687111714271,
+  "ortak_pnl_paper": 539.705999003284,
+  "sadece_holdout_pnl": 203.26450525689876,
+  "sadece_paper_pnl": 71.25199262792479
+ },
+ "teshis_limitsiz": {
+  "holdout_net": 0.08151959541264864,
+  "paper_net": 0.06775986446794025,
+  "holdout_n": 159,
+  "paper_n": 166,
+  "eslesme": {
+   "holdout_kabul": 159,
+   "paper": 166,
+   "ortak": 159,
+   "sadece_holdout": 0,
+   "sadece_paper": 7,
+   "sadece_paper_ham_listede": 0,
+   "sadece_paper_baslangic_n": 4,
+   "sadece_paper_baslangic_pnl": -35.1895705593065,
+   "ortak_medyan_abs_dR": 0.0043020070823184264,
+   "ortak_maks_abs_dR": 0.09356661827600465,
+   "ortak_pnl_holdout": 815.195954126479,
+   "ortak_pnl_paper": 744.4895738057088,
+   "sadece_holdout_pnl": 0.0,
+   "sadece_paper_pnl": -66.89092912630649
+  }
+ },
+ "sure_sn": 5.157532215118408
+}

@@ -115,6 +115,9 @@ class PaperMotor(_Motor):
         self.kurallar_tablo = dict(kurallar)
         self.maliyet_log: list = []               # {zaman, sk, tur: ucret|kayma|funding, tutar: Decimal} (raporlama; muhasebeyi etkilemez)
         self._acil = False
+        # Yalnız TEKRAR modu (araştırma varsayımı, ON_KAYIT_V2 1.2): bu sembollerde SHORT pozisyona funding geliri yazılmaz (yalnız LONG öder).
+        # Canlıda boş: gerçek Binance TradFi funding'i iki yönde de aynen işler.
+        self.funding_short_sifir: frozenset = frozenset()
         self.tsi_aktarildi = False
         # sürüm izi + giriş gerekçesi (giris_izi.py): karar anında üretilir (karar_meta), pozisyon açılınca pozisyona bağlanır (giris_meta),
         # işlem kapanınca işlem satırına yazılır. {kol kimliği: {"ayar_surumu": dict, "giris_gerekcesi": dict}}. Muhasebeyi etkilemez.
@@ -135,7 +138,7 @@ class PaperMotor(_Motor):
 
     def _giris(self, kol, yon, qty, px, stop, t, i, hedef=None, zc=None) -> None:
         ham = D(self.A[kol.sembol][i])
-        self._maliyet(t, kol, "ucret", qty * px * self.taker)
+        self._maliyet(t, kol, "ucret", qty * px * self._tk(kol.sembol))
         self._maliyet(t, kol, "kayma", qty * abs(px - ham))
         yeni = kol.kimlik not in self.acik
         super()._giris(kol, yon, qty, px, stop, t, i, hedef=hedef, zc=zc)
@@ -210,6 +213,9 @@ class PaperMotor(_Motor):
 
     def _funding_ode(self, p, bitis, dahil: bool) -> Decimal:
         x = super()._funding_ode(p, bitis, dahil)
+        if x != 0 and p.yon == -1 and p.sembol in self.funding_short_sifir:
+            p.funding -= x
+            x = Decimal(0)
         self._maliyet(bitis, p, "funding", x)
         return x
 

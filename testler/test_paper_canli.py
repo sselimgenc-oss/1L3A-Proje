@@ -121,7 +121,7 @@ def test_canli_calistir_tek_sefer_sahte_binance(tmp_path, monkeypatch):
     monkeypatch.setitem(pp.PENCERE, "1d", 120)
     monkeypatch.setitem(pp.PENCERE, "4h", 120)
     monkeypatch.setitem(pp.PENCERE, "30m", 300)
-    assert pp.canli_calistir(tmp_path, None, False, tek_sefer=True) == 0
+    assert pp.canli_calistir(tmp_path, None, False, tek_sefer=True, set_modu="eski") == 0       # eski 7'li set yolu (varsayılan artık v2)
     veri, sorun = d.oku_hepsi(tmp_path)
     assert not sorun
     s = {x["kimlik"]: x for x in veri["stratejiler"]["stratejiler"]}
@@ -132,5 +132,5 @@ def test_canli_calistir_tek_sefer_sahte_binance(tmp_path, monkeypatch):
     assert any("VERİ YOK" in u for u in veri["saglik"]["uyarilar"])
     assert (tmp_path / "paper_state.json").exists()
     # ikinci çalıştırma durumu yükler (yeniden başlatma)
-    assert pp.canli_calistir(tmp_path, None, False, tek_sefer=True) == 0
+    assert pp.canli_calistir(tmp_path, None, False, tek_sefer=True, set_modu="eski") == 0
     assert any(o["tur"] == "yeniden_baslatma" for o in d.ek_oku(tmp_path, "olaylar"))

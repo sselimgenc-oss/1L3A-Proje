@@ -7,6 +7,7 @@ strateji varsa tekrar-modu testi backtest ile farkı gösterir.
 """
 from __future__ import annotations
 
+import dataclasses
 import json
 from dataclasses import dataclass, field
 from decimal import Decimal
@@ -35,7 +36,7 @@ GUNCEL_AYAR_CSV = KOK / "sonuclar" / "final" / "guncel_ayarlar.csv"
 class StratejiTanim:
     kimlik: str
     ajan: str
-    kol: str                       # tek_grafik | portfoy
+    kol: str                       # tek_grafik | tek_evren (v2: aynı strateji, birden çok sembol, TEK hesap) | portfoy
     strateji_ad: str
     sembol: str
     tf: str
@@ -47,10 +48,23 @@ class StratejiTanim:
     sonraki_yenileme: Optional[str] = None
     veri_yok: str = ""             # doluysa: neden (strateji çalıştırılmaz)
     ayar_dosyasi: str = ""         # ayarın geldiği dosya (işlem kaydında `ayar_surumu.set_dosyasi`)
+    etiket: str = ""               # v2 paper seti: "dogrulandi" | "iyi_gorundu" (durum dosyalarına ve panoya taşınır); eski sette boş
+    disarida: dict = field(default_factory=dict)   # tek_evren: Binance'te karşılığı olmayan semboller {sembol: neden} (çalıştırılmaz, uyarı olur)
 
     @property
     def veri_semboller(self) -> list:
         return [self.sembol] if self.kol == "tek_grafik" else list(self.evren)
+
+    @property
+    def tek_sinyal(self) -> bool:
+        """Sinyal kollu (tek_grafik ya da tek_evren): beklenti/R mantığı portföy (ağırlık) kolundan ayrılır."""
+        return self.kol in ("tek_grafik", "tek_evren")
+
+    def alt_tanim(self, sembol: str) -> "StratejiTanim":
+        """tek_evren: tek bir sembolün tek_grafik görünümü (kol kimliği `<kimlik>#<sembol>`, sk = ana kimlik). Sinyal hesabı bunun üstünden."""
+        if self.kol != "tek_evren":
+            raise ValueError("alt_tanim yalnız tek_evren içindir")
+        return dataclasses.replace(self, kol="tek_grafik", sembol=sembol, kimlik=f"{self.kimlik}#{sembol}", evren=(), disarida={})
 
 
 def ayar_nesnesi(s: dict, ayar: str):
@@ -94,19 +108,22 @@ def tanimlari_yukle(set_: Optional[dict] = None, ayar_kaynagi: str = "guncel", c
 
 
 # ---------------------------------------------------------------------------- birim kurma
-def tek_kol(t: StratejiTanim) -> PKol:
+def tek_kol(t: StratejiTanim, sk: Optional[str] = None) -> PKol:
+    """sk: raporlama kimliği (tek_evren alt kollarında ana strateji kimliği; verilmezse kolun kendi kimliği)."""
     st = t.nesne
     ca = st.cikis_ayarlari
     if not (st.cikis_var_mi() or ca.atr_iz_suren_k or ca.zaman_cikisi_mum or ca.sabit_r_hedefi):
         raise CikisYokHatasi(f"{st.ad}/{t.sembol}: {MESAJ_CIKIS_YOK}")
     return PKol(kimlik=t.kimlik, sembol=t.sembol, mod="sinyal", strateji_ad=st.ad, cikis_ayarlari=ca,
-                grup=t.grup, grup_payi=t.grup_payi, sk=t.kimlik)
+                grup=t.grup, grup_payi=t.grup_payi, sk=sk or t.kimlik)
 
 
 def birim_kur(t: StratejiTanim, pf_sutunlar: Optional[list] = None) -> Birim:
     aralik = aralik_suresi(t.tf)
     if t.kol == "tek_grafik":
         return Birim(t.kimlik, t.tf, aralik, [tek_kol(t)], [t.sembol])
+    if t.kol == "tek_evren":
+        return Birim(t.kimlik, t.tf, aralik, [tek_kol(t.alt_tanim(s), sk=t.kimlik) for s in t.evren], list(t.evren))
     kollar = [PKol(kimlik=f"{t.kimlik}#{s}", sembol=s, mod="agirlik", strateji_ad=t.strateji_ad,
                    grup=t.grup, grup_payi=t.grup_payi, sk=t.kimlik) for s in pf_sutunlar]
     return Birim(t.kimlik, t.tf, aralik, kollar, list(t.evren))
@@ -141,6 +158,23 @@ def tek_karar(t: StratejiTanim, mumlar: pd.DataFrame, fund: Optional[pd.DataFram
         karar["ayar_surumu"] = gi.ayar_surumu(t.strateji_ad, t.ayar, t.ayar_dosyasi)
         karar["gerekce"] = gi.gerekce_tek(t, mumlar, sig, yon, r["stop"], r["hedef"])
     return {t.kimlik: karar}
+
+
+def evren_karar(t: StratejiTanim, zaman, satir: dict, gecmis, fund_fn, onbellek: Optional[dict] = None) -> dict:
+    """tek_evren: bu satırda mumu OLAN her sembol için tek_karar (mumlar <= zaman; gecmis(sembol) ve fund_fn(sembol) kaynaktan).
+    satir: {sembol: (o,h,l,c) | None}. -> {kol_kimligi: karar}. Mumu olmayan sembol karar üretmez (motor o satırda zaten işlemez).
+    onbellek: {(kol_kimligi, zaman): karar} — YALNIZ tekrar modunda, AYNI tek_karar çağrısının önceden (paralel) hesaplanmış sonucu
+    (saf fonksiyon belleği; farklı bir hesap değildir, bkz. paper_v2.karar_onbellegi_olustur)."""
+    out = {}
+    for s, m in satir.items():
+        if m is None:
+            continue
+        alt = t.alt_tanim(s)
+        if onbellek is not None and (alt.kimlik, zaman) in onbellek:
+            out[alt.kimlik] = onbellek[(alt.kimlik, zaman)]
+            continue
+        out.update(tek_karar(alt, gecmis(s), fund_fn(s)))
+    return out
 
 
 def pf_karar(t: StratejiTanim, veriler: dict) -> tuple:

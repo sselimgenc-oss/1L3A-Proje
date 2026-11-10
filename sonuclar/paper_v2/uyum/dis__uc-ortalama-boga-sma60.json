@@ -1,0 +1,85 @@
+{
+ "strateji": "dis__uc-ortalama-boga-sma60",
+ "etiket": "iyi_gorundu",
+ "tf": "1d",
+ "evren": "genel",
+ "referans": {
+  "kaynak": "holdout_kesif.csv",
+  "net": 0.0903708292013265,
+  "n_islem": 48
+ },
+ "disarida": {},
+ "paper": {
+  "net": 0.0930540666567375,
+  "n_islem": 42,
+  "reddedilen": {
+   "toplam_risk_tavani": 6
+  },
+  "kirpilan": {
+   "toplam_risk": 7
+  },
+  "cikis_nedenleri": {
+   "sinyal": 40,
+   "stop": 1,
+   "veri_sonu": 1
+  },
+  "kill": false,
+  "gunluk_limit": 0
+ },
+ "holdout_yeniden": {
+  "net": 0.09037082920132655,
+  "n_ham": 48,
+  "n_kabul": 48,
+  "sayac": {
+   "giris_kabul": 48,
+   "reddedilen": 0,
+   "kirpilan": 0,
+   "red_toplam_risk": 0,
+   "red_kaldirac": 0,
+   "red_gunluk": 0,
+   "red_kill": 0,
+   "gunluk_limit_olayi": 0,
+   "kill_olayi": 0,
+   "zorla_kapanan": 0
+  }
+ },
+ "eslesme": {
+  "holdout_kabul": 48,
+  "paper": 42,
+  "ortak": 42,
+  "sadece_holdout": 6,
+  "sadece_paper": 0,
+  "sadece_paper_ham_listede": 0,
+  "sadece_paper_baslangic_n": 0,
+  "sadece_paper_baslangic_pnl": 0.0,
+  "ortak_medyan_abs_dR": 0.003512249651518362,
+  "ortak_maks_abs_dR": 0.05657147530096207,
+  "ortak_pnl_holdout": 907.8890573985551,
+  "ortak_pnl_paper": 930.5406665673751,
+  "sadece_holdout_pnl": -4.180765385290362,
+  "sadece_paper_pnl": 0.0
+ },
+ "teshis_limitsiz": {
+  "holdout_net": 0.09037082920132655,
+  "paper_net": 0.08942711850958499,
+  "holdout_n": 48,
+  "paper_n": 48,
+  "eslesme": {
+   "holdout_kabul": 48,
+   "paper": 48,
+   "ortak": 48,
+   "sadece_holdout": 0,
+   "sadece_paper": 0,
+   "sadece_paper_ham_listede": 0,
+   "sadece_paper_baslangic_n": 0,
+   "sadece_paper_baslangic_pnl": 0.0,
+   "ortak_medyan_abs_dR": 0.003428425971098187,
+   "ortak_maks_abs_dR": 0.05657147530096207,
+   "ortak_pnl_holdout": 903.708292013265,
+   "ortak_pnl_paper": 894.2711850958499,
+   "sadece_holdout_pnl": 0.0,
+   "sadece_paper_pnl": 0.0
+  }
+ },
+ "sure_sn": 4.272526979446411
+}
