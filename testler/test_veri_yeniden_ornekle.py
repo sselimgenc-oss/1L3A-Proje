@@ -140,3 +140,20 @@ def test_dk_kaynak_sabitleme_1h_onceliği(tmp_path):
     assert (tf_mumlari("DK_NVDA", "1h", dizin=dizin)["kapanis"] == 999.0).all()
     assert (tf_mumlari("DK_NVDA", "1d", dizin=dizin)["kapanis"] == 999.0).all()
     assert (tf_mumlari("DK_NVDA", "15m", dizin=dizin)["kapanis"] == 100.5).all()
+
+
+def test_b02_esik_orani_nedensel_kesme_degismezligi():
+    """Seanslı (esik_orani): bir kovanın 'eksik' bayrağı, sonradan eklenen veriyle DEĞİŞMEZ (eskiden tüm-seri medyanı)."""
+    # ilk 10 gün günde 3 mum (kısa seans), sonra günde 24 mum (uzun seans): tüm-seri medyanı 24 -> eski kural ilk 10 günü 'eksik' atardı
+    erken = pd.date_range("2024-01-01", periods=10, freq="1D", tz="UTC")
+    idx = pd.DatetimeIndex([d + pd.Timedelta(hours=h) for d in erken for h in (14, 15, 16)])
+    gec = pd.date_range("2024-01-11", periods=24 * 30, freq="1h", tz="UTC")
+    idx = idx.append(gec)
+    x = np.arange(len(idx), dtype=float) + 100
+    df = pd.DataFrame({"acilis": x, "yuksek": x, "dusuk": x, "kapanis": x, "hacim": 1.0, "quote_hacim": 1.0, "islem_sayisi": 1}, index=idx)
+    tam = yeniden_ornekle(df, "1d", "1h", esik_orani=0.25)
+    for son in ("2024-01-08", "2024-01-12", "2024-02-06"):
+        kes = df[df.index < pd.Timestamp(son, tz="UTC")]
+        kisa = yeniden_ornekle(kes, "1d", "1h", esik_orani=0.25)
+        pd.testing.assert_frame_equal(kisa, tam.loc[kisa.index], check_freq=False)       # kesilen gün tam bitmiş kovalar
+    assert not tam["eksik"].iloc[:10].any()          # kısa seanslı ilk günler geçmişe göre normal: eksik sayılmaz

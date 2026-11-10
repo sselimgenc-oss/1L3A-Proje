@@ -29,13 +29,13 @@ def yeniden_ornekle(df: pd.DataFrame, hedef: str, kaynak: str = "5m",
     periyotlar atılır.
 
     SEANSLI PİYASALAR (hisse/emtia; 24/7 olmayan): `esik_orani` verilirse "eksik" tanımı değişir: periyottaki kaynak
-    mum sayısı, tüm periyotların MEDYAN sayısının `esik_orani` katından azsa eksiktir (kısmi seans periyotları -
+    mum sayısı, ÖNCEKİ periyotların (expanding, nedensel) MEDYAN sayısının `esik_orani` katından azsa eksiktir (kısmi seans periyotları -
     yarım saatlik ilk mum, yarım gün, hisse 1d'si - tutulur). `yerel=(saat_dilimi, saat)` verilirse 2h..<1d hedefler
     periyot sınırlarını o saat diliminde `saat`'e hizalar (DST doğru; ör. ("America/New_York", 9): 4h kovaları
     09-13, 13-17 NY). Çıktı indeksi yine UTC. Varsayılanlarda (None) davranış değişmez (kripto).
     `beklenen_sayi` (yalnız `esik_orani` ile): medyan yerine bu SABİT sayı kullanılır (eşik = esik_orani x beklenen_sayi). Canlı/paper
     yolu kısa pencerelerle çağırır; küçük pencerenin medyanı uzun geçmişin medyanını temsil etmez (bkz. paper_veri.beklenen_mum_sayisi).
-    Araştırma yolu bunu vermez: davranışı değişmez."""
+    Araştırma yolu bunu vermez: nedensel expanding medyan kullanılır (v3; v1/v2 sonuçları eski tüm-seri medyanıyla üretilmişti)."""
     kaynak_s, hedef_s = aralik_suresi(kaynak), aralik_suresi(hedef)
     if hedef_s < kaynak_s or hedef_s % kaynak_s != pd.Timedelta(0):
         raise ValueError(f"{kaynak} -> {hedef} birleştirilemez")
@@ -59,7 +59,12 @@ def yeniden_ornekle(df: pd.DataFrame, hedef: str, kaynak: str = "5m",
     if esik_orani is None:
         cikti["eksik"] = sayi < beklenen
     else:
-        taban = sayi.median() if beklenen_sayi is None else beklenen_sayi
+        if beklenen_sayi is None:
+            # NEDENSEL taban (B02): önceki kovaların expanding medyanı (geçmiş yoksa kendi sayısı: eksik sayılmaz). Eskiden tüm serinin
+            # medyanı kullanılıyordu: sonradan veri eklenince geçmiş kovaların bayrağı değişiyordu.
+            taban = sayi.expanding().median().shift(1).fillna(sayi)
+        else:
+            taban = beklenen_sayi
         cikti["eksik"] = sayi < esik_orani * taban
     cikti.index.name = "zaman"
     if eksikleri_at:

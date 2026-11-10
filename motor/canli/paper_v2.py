@@ -294,6 +294,7 @@ class PaperKasalar(Paper):
         self.veri_yok = [t for t in tanimlar if t.veri_yok]
         self.tanim_ad = {t.kimlik: t for t in self.tanimlar}
         self.baslatildi = False
+        self._son_gec = 0
         self.satir_sayisi = 0
         self.uyarilar: list = []
         self.olaylar: list = []
@@ -353,6 +354,7 @@ class PaperKasalar(Paper):
         if not self.baslatildi:
             raise RuntimeError("önce baslat(simdi) ya da yukle()")
         n = sum(h.adim(simdi, son_satir_bayragi) for h in self.hesaplar.values())
+        self._son_gec = sum(h._son_gec for h in self.hesaplar.values())
         self.satir_sayisi += n
         self.motor.yenile()
         if self.her_satir_kaydet and self.durum_yolu and n:

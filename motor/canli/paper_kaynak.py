@@ -52,6 +52,10 @@ class TekrarKaynagi:
             out.append((t, {s: tablo[s].get(t) for s in birim.semboller}))
         return out
 
+    def gec_barlar(self, birim) -> list:
+        """Satırı bekleme süresi dolduktan sonra gelen mumlar: [(t_acilis, sembol, (o,h,l,c))]. Tekrar modunda tüm veri baştan var: boş."""
+        return []
+
     def son_satir(self, birim, simdi) -> Optional[tuple]:
         """Kapanışı <= simdi olan en son satır (başlangıç kararı için)."""
         idx = None

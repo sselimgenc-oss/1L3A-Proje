@@ -153,3 +153,21 @@ def test_kumeler():
     k[2, 3] = k[3, 2] = 0.8
     kume = S.kumeler(pd.DataFrame(k, index=ids, columns=ids))
     assert kume["a"] == kume["b"] and kume["c"] == kume["d"] and kume["a"] != kume["c"]
+
+
+def test_b04_sifir_sureli_islem_hayalet_pozisyon_birakmaz():
+    # B04: giris == cikis (stop_gap ile giriş mumunda kapanan işlem). Eskiden çıkış kendi girişinden önce işlenir, pozisyon
+    # hiç kapanmaz ve risk/kaldıraç bütçesini sonsuza dek tutardı; sonraki girişler red_kaldirac ile reddedilirdi.
+    satirlar = [(2, 2, -17.0, 0.05, 1, "X")] + [(30 + 24 * i, 40 + 24 * i, 1.0, 0.05, 1, "Y") for i in range(10)]
+    s = S.yeniden_oyna(_t(satirlar))
+    assert s["sayac"]["reddedilen"] == 0 and s["sayac"]["giris_kabul"] == 11
+    assert s["sayac"]["red_kaldirac"] == 0
+    beklenen = (1 - 0.17) * 1.01 ** 10
+    assert abs(s["nakit_son"] - beklenen) < 1e-9
+    assert 0 in s["islem_pnl"]
+
+
+def test_b04_ayni_zamanli_diger_cikis_giristen_once_kalir():
+    # başka işlemin aynı zaman damgasındaki çıkışı hâlâ girişten ÖNCE işlenir (bütçe serbest kalır)
+    s = S.yeniden_oyna(_t([(1, 10, 0.0, 0.05)] * 5 + [(10, 20, 0.0, 0.05)]))
+    assert s["sayac"]["giris_kabul"] == 6 and s["sayac"]["reddedilen"] == 0

@@ -21,7 +21,7 @@ from typing import Optional
 import pandas as pd
 
 from motor.canli import paper_veri as pv
-from motor.canli.paper_kaynak import TekrarKaynagi
+from motor.canli.paper_kaynak import MUM_SUTUNLARI, TekrarKaynagi
 from motor.veri.depo import aralik_suresi
 
 log = logging.getLogger("paper.canli")
@@ -44,6 +44,7 @@ class CanliKaynak(TekrarKaynagi):
         self.son_kontrol: dict = {}
         self.funding_son: dict = {}
         self._bosluk_yazilan: set = set()
+        self._gec_bekleyen: set = set()          # (birim, t, sembol): bekleme süresi dolduğu için mumsuz işlenen satırlar; mum sonradan gelirse gec_barlar verir
 
     # ------------------------------------------------------------------ satırlar (çok sembollü birim: tüm semboller gelene kadar beklet)
     def satirlar(self, birim, son_t, simdi) -> list:
@@ -64,12 +65,28 @@ class CanliKaynak(TekrarKaynagi):
                 break
             for s in eksik:
                 anahtar = (birim.ad, t, s)
+                if s in gelecek:
+                    self._gec_bekleyen.add(anahtar)
                 if anahtar not in self._bosluk_yazilan:
                     self._bosluk_yazilan.add(anahtar)
                     self.olay("veri_bosluk", f"{birim.ad} {t}: {s} {birim.tf} mumu gelmedi"
                                              + (f" ({BIRIM_BEKLEME_SN} sn beklendi)" if s in gelecek else " (borsa bu mumu vermedi)")
                                              + "; satır bu sembol olmadan işlendi")
             out.append((t, mumlar))
+        return out
+
+    def gec_barlar(self, birim) -> list:
+        """Satırı zaman aşımıyla mumsuz işlenmiş (veri_bosluk) ve mumu SONRADAN gelen (birim, t, sembol) kayıtları: [(t, sembol, (o,h,l,c))].
+        Her kayıt bir kez verilir. Satır henüz işlenmediyse (birim.son_t < t) beklenir: o zaman mum satırın kendisiyle işlenecektir."""
+        out = []
+        for anahtar in sorted(self._gec_bekleyen, key=lambda k: (k[1], k[2])):
+            ad, t, s = anahtar
+            if ad != birim.ad or birim.son_t is None or birim.son_t < t:
+                continue
+            df = self.mumlar.get((s, birim.tf))
+            if df is not None and t in df.index:
+                out.append((t, s, tuple(float(x) for x in df.loc[t, list(MUM_SUTUNLARI)].to_numpy(dtype=float))))
+                self._gec_bekleyen.discard(anahtar)
         return out
 
     # ------------------------------------------------------------------ başlangıç

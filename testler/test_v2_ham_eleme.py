@@ -430,7 +430,8 @@ def _ham_yaz(cikti, h, ad, tf, semboller, carpan, tohum=1, kar=0.25, tek_sembol=
         p = ham.dosya_yolu(hd, ad, tf, s)
         ham._yaz_atomik(df, p)
         ham._yan_yaz(p.with_suffix(".json"), {"maliyet_hash": h, "veri_yok": False, "hata": "", "veri_bas": "2018-01-01 00:00:00+00:00",
-                                              "veri_bit": "2025-11-07 00:00:00+00:00", "ayar": "varsayilan"})
+                                              "veri_bit": "2025-11-07 00:00:00+00:00", "ayar": "varsayilan",
+                                              **ham.kimlik_damgasi(ad)})
 
 
 def _havuz_kur(tmp_path, satirlar):
@@ -471,7 +472,7 @@ def test_eleme_ham_eksikse_yazmaz_ve_hata_satiri(tablo, tmp_path):
     for c in (1.0, 2.0):
         _ham_yaz(tmp_path, h, "eksik", "1d", kripto, c)
         p = ham.dosya_yolu(tmp_path / "ham" / ham.carpan_adi(c), "eksik", "1d", kripto[0]).with_suffix(".json")
-        p.write_text(json.dumps({"maliyet_hash": h, "veri_yok": False, "hata": "ValueError: patladı"}))
+        p.write_text(json.dumps({"maliyet_hash": h, "veri_yok": False, "hata": "ValueError: patladı", **ham.kimlik_damgasi("eksik")}))
     o = eleme.eleme_asamasi(tmp_path, 1, None, hv, mh, ilerleme=False)
     d = pd.read_csv(tmp_path / "eleme.csv")
     assert o["hata"] == 1 and d.loc[0, "durum"] == "hata" and d.loc[0, "p_ust"] == 1.0 and "patladı" in d.loc[0, "hata"]
@@ -519,3 +520,54 @@ def test_pf_fonlama_duzeltmesi_dk_long_kripto_short(tablo):
     gunluk = 1.0 * 100.0 * 0.0001 * 3 / 1000.0                      # 1 adet × 100 × %0.01 × 3 periyot / özsermaye
     assert adj.iloc[1] == pytest.approx(0.01 - gunluk) and adj.iloc[2] == 0.0 and adj.iloc[3] == 0.0    # short/kripto: düzeltme yok
     assert adj.iloc[0] == pytest.approx(-gunluk) and top == pytest.approx(2 * gunluk)
+
+
+# ------------------------------------------------------------------ B16: kimlik damgası
+def test_b16_yan_dosya_damgasi_ve_uyusmazlik_reddi(tablo, tmp_path, monkeypatch):
+    y, h = tablo
+    _ham_yaz(tmp_path, h, "swing__a", "1d", ["BTCUSDT"], 1.0)
+    yan = ham.dosya_yolu(tmp_path / "ham" / "x1", "swing__a", "1d", "BTCUSDT").with_suffix(".json")
+    m = json.loads(yan.read_text())
+    assert set(ham.DAMGA_ALANLARI) <= set(m) and m["motor_hash"] and m["strateji_hash"] and "git_commit" in m
+    ham.ham_yukle(tmp_path, 1.0, "swing__a", "1d", ("BTCUSDT",), h)                     # uyumlu: okunur
+    for alan in ("strateji_hash", "motor_hash"):
+        bozuk = dict(m, **{alan: "0" * 64})
+        yan.write_text(json.dumps(bozuk))
+        with pytest.raises(RuntimeError, match=alan):
+            ham.ham_yukle(tmp_path, 1.0, "swing__a", "1d", ("BTCUSDT",), h)
+    # veri özeti: veri_al verilirse karşılaştırılır
+    mum = sentetik(30, bas="2020-01-01")
+    yan.write_text(json.dumps(dict(m, veri_sha256=ham.veri_sha256(mum, None))))
+    ham.ham_yukle(tmp_path, 1.0, "swing__a", "1d", ("BTCUSDT",), h, veri_al=lambda s, t: (mum, None))
+    with pytest.raises(RuntimeError, match="veri_sha256"):
+        ham.ham_yukle(tmp_path, 1.0, "swing__a", "1d", ("BTCUSDT",), h, veri_al=lambda s, t: (mum.iloc[:-1], None))
+
+
+def test_b16_eski_damgasiz_yan_dosya_yalniz_acik_bayrakla_okunur(tablo, tmp_path, monkeypatch):
+    y, h = tablo
+    _ham_yaz(tmp_path, h, "swing__a", "1d", ["BTCUSDT"], 1.0)
+    yan = ham.dosya_yolu(tmp_path / "ham" / "x1", "swing__a", "1d", "BTCUSDT").with_suffix(".json")
+    m = json.loads(yan.read_text())
+    yan.write_text(json.dumps({k: v for k, v in m.items() if k not in ham.DAMGA_ALANLARI}))     # v2 tarihsel biçim
+    monkeypatch.delenv(ham.ESKI_ORTAM, raising=False)
+    with pytest.raises(RuntimeError, match="kimlik damgası yok"):
+        ham.ham_yukle(tmp_path, 1.0, "swing__a", "1d", ("BTCUSDT",), h)
+    assert "BTCUSDT" in ham.ham_yukle(tmp_path, 1.0, "swing__a", "1d", ("BTCUSDT",), h, eski_kabul=True)[0]
+    monkeypatch.setenv(ham.ESKI_ORTAM, "1")
+    assert "BTCUSDT" in ham.ham_yukle(tmp_path, 1.0, "swing__a", "1d", ("BTCUSDT",), h)[0]
+
+
+def test_b16_eleme_satiri_damgali_ve_uyusmazlik_reddedilir(tablo, tmp_path):
+    y, h = tablo
+    kripto = sabit.evren_listesi("kripto")
+    hv, mh = _havuz_kur(tmp_path, [{"strateji": "swing__a", "stil_v2": "swing", "tf": "1d", "evren": "kripto"}])
+    for c in (1.0, 2.0):
+        _ham_yaz(tmp_path, h, "swing__a", "1d", kripto, c)
+    eleme.eleme_asamasi(tmp_path, 1, None, hv, mh, ilerleme=False)
+    satir = eleme._satir_yolu(tmp_path, "swing__a", "1d")
+    s = json.loads(satir.read_text())
+    assert set(ham.DAMGA_ALANLARI) <= set(s["kimlik"]) and s["kimlik"]["veri_sha256"]
+    assert "kimlik" not in pd.read_csv(tmp_path / "eleme.csv").columns                    # csv şeması değişmedi
+    satir.write_text(json.dumps(dict(s, kimlik=dict(s["kimlik"], motor_hash="1" * 64))))
+    with pytest.raises(RuntimeError, match="motor_hash"):
+        eleme.eleme_asamasi(tmp_path, 1, None, hv, mh, ilerleme=False)

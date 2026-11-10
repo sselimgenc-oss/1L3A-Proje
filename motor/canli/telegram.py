@@ -105,7 +105,7 @@ NEDEN_TR = {"stop": "stop çalıştı", "hedef": "hedefe ulaştı", "kismi": "k�
             "veri_sonu": "veri sonu", "sinyal": "sinyal kapandı", "hedef_sifir": "sinyal kapandı", "yon_degisim": "sinyal yön değiştirdi",
             "kucultme": "pozisyon küçültüldü", "kill_switch": "kill switch", "gunluk_limit": "günlük kayıp limiti",
             "gunluk_kayip_limiti": "günlük kayıp limiti", "isinma": "ısınma dönemi"}
-TEKNIK = {"ws_baglandi", "ws_yeniden_baglandi", "ws_koptu", "ws_24sa_yenileme", "yeniden_baslatma", "veri_uyusmazlik"}
+TEKNIK = {"ws_baglandi", "ws_yeniden_baglandi", "ws_koptu", "ws_24sa_yenileme", "yeniden_baslatma", "veri_uyusmazlik", "gec_bar"}
 
 
 def ad(kimlik: str) -> str:
@@ -293,6 +293,7 @@ UYARI = {"kill_switch": ("🚨", "Kill switch devrede", "Tüm işlemler durdu; p
          "motor_hatasi": ("🚨", "Motor hatası", "Motor son kayıttan devam etmeyi dener; aynı hata 5 kez olursa durur. Log: journalctl -u 1l3a-paper -n 200"),
          "motor_durdu": ("🚨", "Motor durdu", "systemd yeniden başlatır; düzelmezse sunucuda: sudo systemctl status 1l3a-paper"),
          "askida": ("⚠️", "Strateji askıda", "Sembol verisi yok; durumu korunuyor, emir verilmiyor. Panoda veri durumuna bak."),
+         "askida_kapatma": ("🚨", "Askıdaki pozisyon limitte kapatıldı", "Kill/günlük limit askıdaki pozisyonu son bilinen fiyattan kapattı; panoda bakiyeyi ve sembol verisini kontrol et."),
          "servis_hatasi": ("🚨", "Servis durdu", "Sunucuda: sudo systemctl status 1l3a-paper ; journalctl -u 1l3a-paper -n 200")}
 
 

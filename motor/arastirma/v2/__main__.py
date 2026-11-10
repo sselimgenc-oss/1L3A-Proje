@@ -25,7 +25,12 @@ def main(argv=None) -> int:
     ap.add_argument("--spa-yok", action="store_true", help="test: Hansen SPA (rapor) hesaplanmasın")
     ap.add_argument("--holdout-bir-kez", action="store_true",
                     help="holdout: BİR KEZ açılacağını onaylar (set mührü + ilk koşu şartı; ikinci deneme yoktur)")
+    ap.add_argument("--eski-yan-dosya", action="store_true",
+                    help="damgasız (v2 tarihsel) ham/eleme yan dosyalarını okumaya izin ver (B16; ortam değişkeni işçi süreçlere de geçer)")
     a = ap.parse_args(argv)
+    if a.eski_yan_dosya:
+        import os
+        os.environ["V2_ESKI_YAN_DOSYA"] = "1"
     cikti = Path(a.cikti) if a.cikti else sabit.CIKTI
     if a.asama == "maliyet":
         from motor.arastirma.v2 import maliyet
