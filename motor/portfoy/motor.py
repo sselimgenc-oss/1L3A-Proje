@@ -281,6 +281,10 @@ class _Motor:
             return self.A[s][i] if acilista else self.C[s][i]
         return self.son_kap[s]
 
+    def _brut_px(self, e, i) -> Decimal:
+        """Kaldıraç tavanı için fiyat: max(ham açılış, dolum). Brüt ham fiyatla ölçülür; short dolumu ham fiyatın altında kalır (B10b)."""
+        return max(e.px, D(self.A[e.kol.sembol][i]))
+
     def _ozs(self, i, acilista: bool) -> Decimal:
         top = self.nakit
         for p in self.acik.values():
@@ -530,7 +534,7 @@ class _Motor:
         for k, p in self.acik.items():
             if k not in hedefli:
                 sabit += abs(D(self._fiyat_ham(p.sembol, i, True)) * p.miktar)
-        istek = bekleyen_tahmin + sum((e.ham * e.px for e in emirler if e.yon != 0), Decimal(0))
+        istek = bekleyen_tahmin + sum((e.ham * self._brut_px(e, i) for e in emirler if e.yon != 0), Decimal(0))
         f = Decimal(1)
         if istek > 0 and sabit + istek > kap:
             f = max(Decimal(0), (kap - sabit) / istek)
@@ -614,7 +618,7 @@ class _Motor:
                         continue
             # sert brüt tavan (sıralı)
             oda = kap - self._brut(i, True, haric=kol.kimlik)
-            ust = max(oda, Decimal(0)) / e.px
+            ust = max(oda, Decimal(0)) / self._brut_px(e, i)
             if ust < hedef_q:
                 self._kirp(t, kol, "kaldirac", e.w_abs, ust * e.px / E)
                 hedef_q = _step_asagi(ust, self.step[s])

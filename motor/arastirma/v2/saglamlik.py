@@ -202,13 +202,13 @@ def saglamlik_satiri(row: dict, cikti: Path, tablo_yolu, tablo_hash: str, son: O
         _, st = hm.varsayilan_strateji(ad) if stil != "portfoy" else (None, None)
         if stil == "portfoy":
             return _pf_satiri(row, s, cikti, tablo_yolu, tablo_hash, doldu, kaydet, evren_t)
-        ham1, b1 = hm.ham_yukle(cikti, 1.0, ad, tf, evren_t, tablo_hash)
+        ham1, b1 = hm.ham_yukle(cikti, 1.0, ad, tf, evren_t, tablo_hash, veri_al=hm.veri_oku)
         if b1["hatali"] or not ham1:
             raise RuntimeError(f"x1 ham sonuç kullanılamaz (hatalı {len(b1['hatali'])}, veri {len(ham1)})")
         analiz_bas, _ = kasa.donem_sinirlari(b1)
         # ---- ×2 PF (set sıralaması için; kapı değil)
         if "pf_x2" not in s:
-            ham2, b2 = hm.ham_yukle(cikti, 2.0, ad, tf, evren_t, tablo_hash)
+            ham2, b2 = hm.ham_yukle(cikti, 2.0, ad, tf, evren_t, tablo_hash, veri_al=hm.veri_oku)
             s["pf_x2"] = kasa_pf(ham2, b2, evren_t, analiz_bas, tablo_yolu) if ham2 else math.nan
             kaydet()
         # ---- S1
@@ -309,8 +309,8 @@ def _pf_satiri(row, s, cikti, tablo_yolu, tablo_hash, doldu, kaydet, evren_t) ->
     ad, tf = row["strateji"], row["tf"]
     yol = satir_yolu(cikti, ad, tf)
     try:
-        g1, m1 = hm.pf_yukle(cikti, 1.0, ad, tablo_hash)
-        g2, _ = hm.pf_yukle(cikti, 2.0, ad, tablo_hash)
+        g1, m1 = hm.pf_yukle(cikti, 1.0, ad, tablo_hash, pf_veri_al=hm.pf_veri_oku, evren_adi=row["evren"])
+        g2, _ = hm.pf_yukle(cikti, 2.0, ad, tablo_hash, pf_veri_al=hm.pf_veri_oku, evren_adi=row["evren"])
         if g1 is None or g2 is None:
             raise RuntimeError("portföy x1/x2 koşusu hata")
         analiz_bas = we.analiz_bas_hesapla({k: pd.Timestamp(t) for k, t in m1["veri_bas_sembol"].items()})
