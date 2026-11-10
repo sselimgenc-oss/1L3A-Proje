@@ -31,6 +31,14 @@ def sentetik(n=1500, seed=3, bas="2018-01-01", tf="D"):
     return pd.DataFrame({"acilis": o, "yuksek": h, "dusuk": l, "kapanis": c, "hacim": rng.uniform(1e3, 2e3, n)}, index=idx)
 
 
+@pytest.fixture(autouse=True)
+def _gercek_veri_yok(monkeypatch):
+    """B16: ham_yukle/eleme veri özetini şimdiki veriden yeniden hesaplar; testler gerçek veri diskine bağlı olmasın (veri yok = None özet)."""
+    def yok(sembol, tf):
+        raise FileNotFoundError(f"{sembol} {tf}: test ortamında gerçek veri yok")
+    monkeypatch.setattr(we, "_veri", yok)
+
+
 @pytest.fixture()
 def tablo(tmp_path):
     y = maliyet.tabloyu_hazirla(tmp_path)
@@ -297,10 +305,12 @@ def test_ayni_girdi_ayni_cikti_bayt_bayt(tablo, tmp_path):
 def test_gorevleri_uret_biten_listeye_girmez(tablo, tmp_path):
     y, h = tablo
     havuz = pd.DataFrame([{"strateji": "swing__a", "stil_v2": "swing", "tf": "1d", "evren": "kripto"}])
-    g, toplam, kalan = ham.gorevleri_uret(havuz, tmp_path)
+    veri = lambda s, t: (sentetik(30), None)                                             # noqa: E731
+    g, toplam, kalan = ham.gorevleri_uret(havuz, tmp_path, veri_al=veri)
     assert toplam == 26 and kalan == 26 and {x["carpan"] for x in g} == {1.0, 2.0} and len(g) == 26
-    ham._yan_yaz(ham.dosya_yolu(tmp_path / "ham" / "x1", "swing__a", "1d", "BTCUSDT").with_suffix(".json"), {"hata": ""})
-    g, toplam, kalan = ham.gorevleri_uret(havuz, tmp_path)
+    damga = ham.kimlik_damgasi("swing__a", veri=ham.veri_sha256(sentetik(30), None))       # B16: bitti = var + damga uyumlu
+    ham._yan_yaz(ham.dosya_yolu(tmp_path / "ham" / "x1", "swing__a", "1d", "BTCUSDT").with_suffix(".json"), {"hata": "", **damga})
+    g, toplam, kalan = ham.gorevleri_uret(havuz, tmp_path, veri_al=veri)
     assert kalan == 25
     gp = ham.gorevleri_uret(pd.DataFrame([{"strateji": "pf__z", "stil_v2": "portfoy", "tf": "1d", "evren": "genel"}]), tmp_path)
     assert gp[1] == 2 and gp[0][0]["tur"] == "portfoy"
@@ -529,12 +539,14 @@ def test_b16_yan_dosya_damgasi_ve_uyusmazlik_reddi(tablo, tmp_path, monkeypatch)
     yan = ham.dosya_yolu(tmp_path / "ham" / "x1", "swing__a", "1d", "BTCUSDT").with_suffix(".json")
     m = json.loads(yan.read_text())
     assert set(ham.DAMGA_ALANLARI) <= set(m) and m["motor_hash"] and m["strateji_hash"] and "git_commit" in m
-    ham.ham_yukle(tmp_path, 1.0, "swing__a", "1d", ("BTCUSDT",), h)                     # uyumlu: okunur
+    with pytest.raises(ValueError, match="veri özeti"):                                  # B16: veri_al zorunlu
+        ham.ham_yukle(tmp_path, 1.0, "swing__a", "1d", ("BTCUSDT",), h)
+    ham.ham_yukle(tmp_path, 1.0, "swing__a", "1d", ("BTCUSDT",), h, veri_al=ham.veri_oku)  # uyumlu: okunur
     for alan in ("strateji_hash", "motor_hash"):
         bozuk = dict(m, **{alan: "0" * 64})
         yan.write_text(json.dumps(bozuk))
         with pytest.raises(RuntimeError, match=alan):
-            ham.ham_yukle(tmp_path, 1.0, "swing__a", "1d", ("BTCUSDT",), h)
+            ham.ham_yukle(tmp_path, 1.0, "swing__a", "1d", ("BTCUSDT",), h, veri_al=ham.veri_oku)
     # veri özeti: veri_al verilirse karşılaştırılır
     mum = sentetik(30, bas="2020-01-01")
     yan.write_text(json.dumps(dict(m, veri_sha256=ham.veri_sha256(mum, None))))

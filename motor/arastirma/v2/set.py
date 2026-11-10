@@ -120,7 +120,7 @@ def set_gunluk_getiri(cikti: Path, secilen: list, tablo_yolu, tablo_hash: str) -
     ham, sira, tf_of, bilgiler = {}, {}, {}, []
     for a in tek:
         evren_t = sabit.evren_listesi(a["evren"])
-        h, b = hm.ham_yukle(cikti, 1.0, a["strateji"], a["tf"], evren_t, tablo_hash)
+        h, b = hm.ham_yukle(cikti, 1.0, a["strateji"], a["tf"], evren_t, tablo_hash, veri_al=hm.veri_oku)
         if b["hatali"] or not h:
             raise RuntimeError(f"{a['strateji']}: ham sonuç kullanılamaz")
         ham[a["strateji"]], sira[a["strateji"]], tf_of[a["strateji"]] = h, evren_t, a["tf"]
@@ -163,6 +163,7 @@ def set_asamasi(cikti: Path = None, butce_sn: Optional[float] = None, havuz_yolu
     sg = saglamlik_oku(cikti)
     tablo = maliyet.tablo_yolu(cikti)
     tablo_hash = evren_maliyet.tablo_hash(tablo)
+    we.veri_ayarla(None, sabit.DONEM)          # B16: ham yan dosyalarının veri özeti şimdiki (geliştirme dönemi) veriden doğrulanır
     saglam = sg[sg["liste"] == "saglam_kesif"]
     el = pd.read_csv(cikti / "eleme.csv").set_index(["strateji", "tf"])
     adaylar = [{**{k: (None if (isinstance(v, float) and math.isnan(v)) else v) for k, v in r.items()},

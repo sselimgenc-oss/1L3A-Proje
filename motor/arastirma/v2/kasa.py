@@ -165,7 +165,7 @@ def satir_oynat(cikti: Path, row: dict, tablo_yolu, tablo_hash: str, carpan: flo
     Ham koşu bitmemişse RuntimeError('ham koşu bitmemiş')."""
     ad, tf, evren = row["strateji"], row["tf"], row["evren"]
     evren_t = sabit.evren_listesi(evren)
-    ham, bilgi = hm.ham_yukle(cikti, carpan, ad, tf, evren_t, tablo_hash)
+    ham, bilgi = hm.ham_yukle(cikti, carpan, ad, tf, evren_t, tablo_hash, veri_al=hm.veri_oku)
     if bilgi["hatali"]:
         raise RuntimeError(f"{ad} {tf}: {len(bilgi['hatali'])} sembolde koşu hatası: {bilgi['hata_ornegi']}")
     if not ham:
@@ -188,7 +188,7 @@ def satir_gunluk(cikti: Path, row: dict, tablo_yolu, tablo_hash: str, onbellekle
         d = pd.read_parquet(yol)
         return pd.Series(d["getiri"].to_numpy(dtype=float), index=pd.DatetimeIndex(d["gun"]))
     if row["stil_v2"] == "portfoy":
-        g1, m1 = hm.pf_yukle(cikti, 1.0, ad, tablo_hash)
+        g1, m1 = hm.pf_yukle(cikti, 1.0, ad, tablo_hash, pf_veri_al=hm.pf_veri_oku, evren_adi=row["evren"])
         if g1 is None:
             raise RuntimeError(f"{ad}: portföy koşusu hata: {m1.get('hata')}")
         analiz_bas = we.analiz_bas_hesapla({s: pd.Timestamp(t) for s, t in m1["veri_bas_sembol"].items()})

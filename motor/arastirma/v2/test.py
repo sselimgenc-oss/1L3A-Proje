@@ -332,7 +332,7 @@ def satir_test(row: dict, cikti: Path, tablo_yolu, tablo_hash: str, son: Optiona
         if _ctx is not None:
             gercek, veri_al, cikis_al, destek_yok = _ctx["gercek"], _ctx["veri_al"], _ctx["cikis_al"], _ctx.get("destek_yok", [])
         else:
-            ham, bilgi = hm.ham_yukle(cikti, 1.0, ad, tf, sabit.evren_listesi(evren), tablo_hash)
+            ham, bilgi = hm.ham_yukle(cikti, 1.0, ad, tf, sabit.evren_listesi(evren), tablo_hash, veri_al=hm.veri_oku)
             if bilgi["hatali"] or not ham:
                 raise RuntimeError(f"ham sonuç kullanılamaz (hatalı sembol {len(bilgi['hatali'])}, veri {len(ham)})")
             gercek = cakisma_suz(ham, we.analiz_bas_hesapla(bilgi["veri_bas"]))
@@ -379,7 +379,7 @@ def _pf_satir_test(row, s, cikti, tablo_yolu, tablo_hash, bitir, doldu, ctx) -> 
     if ctx is not None:
         gercek_sharpe, analiz_bas, simulator = ctx["gercek_sharpe"], ctx.get("analiz_bas"), ctx.get("simulator")
     else:
-        g1, m1 = hm.pf_yukle(cikti, 1.0, ad, tablo_hash)
+        g1, m1 = hm.pf_yukle(cikti, 1.0, ad, tablo_hash, pf_veri_al=hm.pf_veri_oku, evren_adi=evren)
         if g1 is None:
             return bitir(durum="hata", hata=f"portföy koşusu hata: {m1.get('hata')}", p=1.0, asama=0)
         analiz_bas = we.analiz_bas_hesapla({k: pd.Timestamp(t) for k, t in m1["veri_bas_sembol"].items()})

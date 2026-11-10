@@ -227,8 +227,8 @@ def satir_degerlendir(row: dict, cikti: Path, tablo_yolu, tablo_hash: str) -> di
     out = {"strateji": ad, "tf": tf, "evren": evren, "stil_v2": stil, "durum": "", "hata": "", "n_disarida": 0, "n_hatali": 0,
            "maliyet_hash": tablo_hash}
     if stil == "portfoy":
-        g1, m1 = hm.pf_yukle(cikti, 1.0, ad, tablo_hash)
-        g2, m2 = hm.pf_yukle(cikti, 2.0, ad, tablo_hash)
+        g1, m1 = hm.pf_yukle(cikti, 1.0, ad, tablo_hash, pf_veri_al=hm.pf_veri_oku, evren_adi=evren)
+        g2, m2 = hm.pf_yukle(cikti, 2.0, ad, tablo_hash, pf_veri_al=hm.pf_veri_oku, evren_adi=evren)
         if g1 is None or g2 is None:
             hata = (m1 if g1 is None else m2).get("hata", "")
             return _hata_satir(out, f"portföy koşusu hata: {hata}")
@@ -237,8 +237,8 @@ def satir_degerlendir(row: dict, cikti: Path, tablo_yolu, tablo_hash: str) -> di
         k = eleme_portfoy(met)
     else:
         evren_t = sabit.evren_listesi(evren)
-        ham1, b1 = hm.ham_yukle(cikti, 1.0, ad, tf, evren_t, tablo_hash)
-        ham2, b2 = hm.ham_yukle(cikti, 2.0, ad, tf, evren_t, tablo_hash)
+        ham1, b1 = hm.ham_yukle(cikti, 1.0, ad, tf, evren_t, tablo_hash, veri_al=hm.veri_oku)
+        ham2, b2 = hm.ham_yukle(cikti, 2.0, ad, tf, evren_t, tablo_hash, veri_al=hm.veri_oku)
         out["n_disarida"], out["n_hatali"] = len(b1["disarida"]), len(set(b1["hatali"]) | set(b2["hatali"]))
         if out["n_hatali"]:
             return _hata_satir(out, f"{out['n_hatali']} sembolde koşu hatası: {b1['hata_ornegi'] or b2['hata_ornegi']}")
@@ -268,6 +268,7 @@ _AYAR: dict = {}
 
 
 def _baslat(ayar: dict):
+    we.veri_ayarla(ayar.get("veri_dizini"), sabit.DONEM)      # B16: ham yan dosyalarının veri özeti geliştirme dönemi verisinden doğrulanır
     _AYAR.clear()
     _AYAR.update(ayar)
 
@@ -291,20 +292,33 @@ def _isci(g: dict):
 def _satir_kimligi(row: dict, cikti: Path, tablo_hash: str) -> dict:
     """B16: eleme satırı yan dosyası damgası. veri_sha256 = satırın dayandığı ham yan dosyalarının veri özetlerinin özeti."""
     ad, tf, stil = row["strateji"], row["tf"], row["stil_v2"]
+    return hm.kimlik_damgasi(ad, "portfoy" if stil == "portfoy" else "swing", _satir_veri_ozeti(row, cikti, tablo_hash))
+
+
+def _satir_veri_ozeti(row: dict, cikti: Path, tablo_hash: str) -> str:
+    """Satırın dayandığı ham yan dosyalarının veri özetlerinin özeti; yan dosyaların veri_sha256'sı ŞİMDİKİ veriyle de doğrulanır
+    (hm.ham_yan_denetle / pf_yukle: uyuşmazlıkta RuntimeError). Parquet okumaz."""
+    ad, tf, stil = row["strateji"], row["tf"], row["stil_v2"]
     if stil == "portfoy":
-        veri = hm._sha_json([hm.pf_yukle(cikti, c, ad, tablo_hash)[1].get("veri_sha256") for c in (1.0, 2.0)])
-    else:
-        evren_t = sabit.evren_listesi(row["evren"])
-        veri = hm._sha_json({str(c): hm.ham_yukle(cikti, c, ad, tf, evren_t, tablo_hash)[1].get("veri_sha256", {}) for c in (1.0, 2.0)})
-    return hm.kimlik_damgasi(ad, "portfoy" if stil == "portfoy" else "swing", veri)
+        ms = []
+        for c in (1.0, 2.0):
+            ms.append(hm.pf_yukle(cikti, c, ad, tablo_hash, pf_veri_al=hm.pf_veri_oku, evren_adi=row["evren"])[1].get("veri_sha256"))
+        return hm._sha_json(ms)
+    evren_t = sabit.evren_listesi(row["evren"])
+    return hm._sha_json({str(c): hm.veri_ozetleri_ozeti(hm.ham_yan_denetle(cikti, c, ad, tf, evren_t, tablo_hash, veri_al=hm.veri_oku))
+                         for c in (1.0, 2.0)})
 
 
-def _satir_oku(cikti: Path, row) -> dict:
+def _satir_oku(cikti: Path, row, tablo_hash: str) -> dict:
     """Satır yan dosyasını okur; kimlik damgası (strateji/motor/commit) şimdiki kodla uyuşmuyorsa RuntimeError (B16).
     Damgasız eski v2 satırı yalnız V2_ESKI_YAN_DOSYA=1 ile okunur."""
     y = _satir_yolu(cikti, row["strateji"], row["tf"])
     s = json.loads(y.read_text())
-    hm.kimlik_dogrula(s.get("kimlik") or {}, row["strateji"], "portfoy" if row["stil_v2"] == "portfoy" else "swing", y.name)
+    kim = s.get("kimlik") or {}
+    vs = hm._YOK
+    if any(a in kim for a in hm.DAMGA_ALANLARI):             # damgalı satır: veri özeti şimdiki veriden yeniden hesaplanır (B16)
+        vs = _satir_veri_ozeti(row, cikti, tablo_hash)
+    hm.kimlik_dogrula(kim, row["strateji"], "portfoy" if row["stil_v2"] == "portfoy" else "swing", y.name, None, vs)
     return s
 
 
@@ -331,11 +345,12 @@ def eleme_asamasi(cikti: Path = None, surec: int = sabit.SUREC_VARSAYILAN, butce
     if not tablo.exists():
         raise RuntimeError(f"v2 maliyet tablosu yok: {tablo} (önce ham aşaması)")
     tablo_hash = evren_maliyet.tablo_hash(tablo)
+    we.veri_ayarla(None, sabit.DONEM)          # B16: önbellekteki satırların veri özeti şimdiki (geliştirme dönemi) veriden doğrulanır
     gorev = []
     for _, row in havuz.iterrows():
         y = _satir_yolu(cikti, row["strateji"], row["tf"])
         if y.exists() and not yeniden:
-            _satir_oku(cikti, row)             # B16: bayat/uyumsuz önbellek sessizce kullanılmaz
+            _satir_oku(cikti, row, tablo_hash)             # B16: bayat/uyumsuz önbellek sessizce kullanılmaz
             continue
         gorev.append({"row": {k: (None if (isinstance(v, float) and math.isnan(v)) else v) for k, v in row.items()}})
     if ilerleme:
@@ -353,7 +368,7 @@ def eleme_asamasi(cikti: Path = None, surec: int = sabit.SUREC_VARSAYILAN, butce
         return ozet
     satirlar = []
     for _, row in havuz.iterrows():
-        s = _satir_oku(cikti, row)
+        s = _satir_oku(cikti, row, tablo_hash)
         s.pop("kimlik", None)             # damga yan dosyada kalır; eleme.csv şeması değişmez
         for c in ("etiket", "alt_etiket", "kume_no", "kilit_gorulmus"):
             s[c] = row.get(c)

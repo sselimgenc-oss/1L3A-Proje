@@ -628,7 +628,7 @@ def test_saglamlik_satiri_s1_s4_uctan_uca(gelistirme, monkeypatch):
 
     def sahte_ham(st, tf, evren_t, tablo_yolu, gecikme=0, carpan=1.0):
         kayit.setdefault("cagri", []).append((tf, gecikme, getattr(st, "kw", None)))
-        ham1, b1 = ham.ham_yukle(tmp_path, 1.0, "iyi1", "1d", evren_t, h)
+        ham1, b1 = ham.ham_yukle(tmp_path, 1.0, "iyi1", "1d", evren_t, h, veri_al=ham.veri_oku)
         return ham1, b1
     monkeypatch.setattr(saglamlik, "strateji_ham", sahte_ham)
     monkeypatch.setattr(saglamlik, "kapanis_serileri", lambda ev: {"A": _kapanis(2500), "B": _kapanis(2500, seed=3)})
