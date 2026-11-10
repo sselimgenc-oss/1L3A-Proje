@@ -41,6 +41,7 @@ Repo listelerinde lisansı GPL/AGPL olanlardan yalnız kural mantığı alınır
 - 5m altı zaman dilimi.
 
 ## Çıktı
+0. `stratejiler/v3_adaylar/on_eleme.csv` (yukarıda).
 1. `stratejiler/v3_adaylar/kartlar/<kart_id>.json`: aday başına bir kart, KART_SEMASI alanlarıyla. Farklar:
    `kaynak` = {"url": "...", "lisans": "MIT / GPL-3.0 / makale / bilinmiyor", "tur": "makale|github|tv|blog"};
    ek alan `kanit` = yayımlanmış sonuç / örneklem dışı kanıt özeti (yoksa null; uydurma rakam YOK);
@@ -49,15 +50,21 @@ Repo listelerinde lisansı GPL/AGPL olanlardan yalnız kural mantığı alınır
    kart_id, ad, kaynak_url, lisans, tur, stil, zaman_dilimi, kategori, piyasa, kanit_var, benzer_mevcut (dis_envanter/havuz'daki en yakın ad ya da yok), oncelik (1-3), not
 3. `stratejiler/v3_adaylar/RAPOR.md`: kısa Türkçe özet; kaç kaynak tarandı, kaç aday, kaç elendi ve neden, Fable hakem sonucu.
 
-## Hedef sayı
-En çok 40 aday kart. Az ve kaliteli, çok ve zayıftan iyidir. Kart yazmadan önce tekrar kontrolü yap.
+## Hedef: açık kaynak kodlu HER stratejiyi kaçırmadan eleme (kullanıcı isteği 2026-11-10)
+İki aşama; sayı sınırı yok:
+1. ÖN ELEME (Haiku ajanları, ucuz): ham listelerdeki açık kaynak kodlu her satır için `stratejiler/v3_adaylar/on_eleme.csv`'ye
+   bir satır: kaynak_dosya, satir_no, ad, url, lisans, karar (kart|tekrar|veri_yok|yasak|arac|kod_yok|belirsiz), neden, benzer_mevcut.
+   ARAÇ/ÖRNEK/KOPYA satırları da tek kelimeyle işaretlenir; hiçbir satır sessizce atlanmaz.
+2. KART (Sonnet): `karar = kart` olan HER satır için kart yazılır (sayı sınırı yok). Limit biterse kaldığın yer
+   RAPOR.md'ye yazılır; bir sonraki oturum oradan devam eder. Ara ara commit + push yap ki iş kaybolmasın.
+Kart yazmadan önce tekrar kontrolü yap.
 
 ## Model kullanımı (limit tasarrufu)
 - Ana oturum (Sonnet 5.5): arama, okuma, kart yazma.
 - Haiku ajanı: tekrar kontrolü (adayı dis_envanter.csv / havuz_v2.csv ile karşılaştırma), CSV/JSON biçim kontrolü, link kontrolü.
 - Opus: kullanılmaz (gerekmez).
 - Fable: EN SONDA, bir kez. Tüm kartları hakem olarak değerlendirir: kurallar kodlanabilir mi, lookahead var mı, kanıt sağlam mı,
-  aşırı uydurma (çok parametre) riski. Her karta 0-10 puan + kısa gerekçe; en iyi 15-20'yi işaretler. Sonucu RAPOR.md'ye yaz,
+  aşırı uydurma (çok parametre) riski. Her karta 0-10 puan + kısa gerekçe; en iyi 15-20'yi işaretler (test hepsine yapılır; puan yalnız sıra içindir). Sonucu RAPOR.md'ye yaz,
   `oncelik` sütununu buna göre güncelle.
 
 ## Bitiş
