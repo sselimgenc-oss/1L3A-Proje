@@ -19,6 +19,13 @@ Kod yazmaz, test koşmaz, başka dosyaya dokunmaz. Bunun dışında bir şey ist
 .md özetleri daha önce bulundu, işlenmedi. Yeni aramadan ÖNCE: `durum` = izle veya aday olan satırları tekrar kontrolünden geçir,
 verimize ve kurallara uyanları kart yap. `elendi` ve `bilgi` satırlarını atla. Sonra kalan limitle aşağıdaki boşlukları ara.
 Bu ham dosyaları değiştirme.
+Ayrıca kullanıcının başka oturumda derlediği kataloglar (aynı klasör, 2026-11-10 eklendi). İşleme sırası:
+1. `github-backtest-katalog-denetimli__dogrulanan_48.csv` (doğrulanmış 48), sonra `__tumu.csv` içinde `nihai` = GERÇEK-TEMİZ olanlar
+   (ARAÇ, ÖRNEK, KOPYA, BELİRSİZ atlanır; GERÇEK-ŞÜPHELİ yalnız limit kalırsa).
+2. `github-backtest-katalog-v4__sayfa_dogrulamasi.csv`, `diger-siteler-derin-21.csv`, `*__b_duzeyi.csv` (asya, bölgesel).
+3. `github-backtest-katalog-v4__reddit.csv`, `__diger_siteler.csv`, `*__tumu.csv` (asya, bölgesel): en düşük öncelik.
+Repo listelerinde lisansı GPL/AGPL olanlardan yalnız kural mantığı alınır. Yayımlanmış Sharpe/getiri iddiaları kanıt değildir;
+`kanit` alanına "iddia (doğrulanmadı)" diye yazılır.
 
 ## Ne arıyoruz (öncelik sırasıyla)
 1. Gün içi kripto (5m–1h): elimizde az ve zayıf.
