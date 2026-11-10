@@ -1,0 +1,64 @@
+{
+  "piyasa_rejimi": "herhangi",
+  "filtreler": [],
+  "iz_suren_stop": null,
+  "varyantlar": [],
+  "short_giris": [
+    "En yüksek çarpıklıklı 3 emtiaya short"
+  ],
+  "kar_al": null,
+  "zaman_cikisi": "Aylık yeniden dengeleme",
+  "pozisyon_risk": "Eşit ağırlık",
+  "kart_id": "swing__carpiklik-emtia__dujava",
+  "ad": "Emtia Vadelilerinde Getiri Çarpıklığı Sıralaması (3/3 L-S)",
+  "stil": "swing",
+  "kaynak": {
+    "url": "https://quantpedia.com/strategies/skewness-effect-in-commodities",
+    "lisans": "telif: Quantpedia (ücretsiz ekran); kural kendi cümlelerimle",
+    "tur": "blog",
+    "not": "Makale: Dujava & Vojtko, SSRN 4488725"
+  },
+  "ozet": "22 emtia vadelisi her ay son 12 aylık getiri çarpıklığına göre sıralanır; en negatif çarpıklıklı 3 emtia long, en pozitif 3 emtia short, eşit ağırlık.",
+  "kategori": "diger",
+  "orijinal_piyasa": "emtia",
+  "zaman_dilimi": {
+    "islem": "1d",
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {
+      "ad": "Getiri çarpıklığı (skewness)",
+      "parametreler": {
+        "pencere": "12 ay"
+      }
+    }
+  ],
+  "long_giris": [
+    "Ay sonunda evrendeki emtiaları 12 aylık getiri çarpıklığına göre sırala; en düşük 3'e long"
+  ],
+  "iddia_edilen_performans": "iddia (doğrulanmadı): Quantpedia özeti yıllık ~%8 getiri, ~%10.2 volatilite",
+  "kanit": "Quantpedia sayfası; sonuçlar iddia (doğrulanmadı)",
+  "veri_uygun": [
+    false,
+    "Dukascopy emtia sayısı 22'ye yetmeyebilir (altın, gümüş, petrol vb. sınırlı); vadeli değil spot/CFD olabilir, vade yapısı yok. Az emtiayla 3/3 anlamsız; küçültülmüş test ancak."
+  ],
+  "kodlanabilirlik": {
+    "puan": 2,
+    "gerekce": "Kural net; çarpıklık formülü (örneklem çarpıklığı, günlük getiri) açık yazılmamış"
+  },
+  "belirsizlikler": [
+    "Çarpıklık formülü ve getiri frekansı kaynakta yok",
+    "Stop yok",
+    "Maliyet raporlanan sonuca dahil mi belli değil",
+    "Evren 22 mi 27 mi kaynaklara göre değişiyor"
+  ],
+  "uyumluluk_notu": "Evren darlığı ana engel; mevcut kartlarla çakışma yok.",
+  "anahtar_kelimeler": [
+    "carpiklik",
+    "skewness",
+    "emtia",
+    "kesitsel",
+    "aylik"
+  ],
+  "stop_loss": null
+}

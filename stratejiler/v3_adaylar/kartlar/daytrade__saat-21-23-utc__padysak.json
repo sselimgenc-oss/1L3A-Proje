@@ -1,0 +1,55 @@
+{
+  "kart_id": "daytrade__saat-21-23-utc__padysak",
+  "ad": "BTC Saat Anomalisi: 21:00-23:00 UTC Long",
+  "stil": "daytrade",
+  "kaynak": {
+    "url": "https://quantpedia.com/are-there-seasonal-intraday-or-overnight-anomalies-in-bitcoin/",
+    "lisans": "bilinmiyor",
+    "tur": "blog"
+  },
+  "ozet": "BTC'de yalnız 21:00 UTC'de alıp 23:00 UTC'de satan, günün geri kalanında nakitte duran saat-günü mevsimsellik kuralı.",
+  "kategori": "diger",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "kripto",
+  "zaman_dilimi": {
+    "islem": "1h",
+    "ust_filtre": null
+  },
+  "gostergeler": [],
+  "long_giris": [
+    "Her gün 21:00 UTC mumunun açılışında long aç"
+  ],
+  "short_giris": [],
+  "stop_loss": null,
+  "kar_al": null,
+  "iz_suren_stop": null,
+  "zaman_cikisi": "23:00 UTC'de kapat (2 saatlik tutma)",
+  "filtreler": [],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": "Yıllık getiri %33, yıllık volatilite %20.93, maks. düşüş -%22.45 (Gemini saatlik BTC, 2015-10 → 2022-02)",
+  "kanit": "Yalnız örneklem-içi: Quantpedia kendi analizi; 22:00 ve 23:00 saatlik getirileri %5'te anlamlı. Örneklem dışı test ve maliyet yok. Hakemli makale değil.",
+  "veri_uygun": [
+    true,
+    "Binance BTCUSDT perp saatlik/5m OHLCV yeterli; UTC saat bilgisi var."
+  ],
+  "kodlanabilirlik": {
+    "puan": 3,
+    "gerekce": "Tamamen zamana bağlı, parametresiz."
+  },
+  "belirsizlikler": [
+    "Saatlik mum zaman damgası konvansiyonu (açılış/kapanış) kaynakta yok",
+    "Maliyet yok; günde 2 işlem komisyonu yüksek olabilir",
+    "Stop yok: işlem başı %1 risk için sert limit koruyucu stop gerekir (strateji kuralı değil, motor kuralı)",
+    "Gemini verisi, Binance perp'te aynı etki doğrulanmadı"
+  ],
+  "uyumluluk_notu": "5m'den üst TF'de kodlanır; yalnız kripto. Anomali örneklem-içi, zayıf kanıt; ETH/SOL'de doğrulanmadı.",
+  "varyantlar": [
+    "Kaynakta en kötü saatler 03:00-04:00 UTC (kural değil, gözlem)"
+  ],
+  "anahtar_kelimeler": [
+    "saat-etkisi",
+    "mevsimsellik",
+    "btc",
+    "zaman-bazli"
+  ]
+}

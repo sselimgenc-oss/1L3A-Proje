@@ -1,0 +1,63 @@
+{
+  "kart_id": "swing__permanent-portfoy-4-varlik__psystat",
+  "ad": "Permanent Portfolio (SPY/TLT/GLD/nakit, yıllık)",
+  "stil": "swing",
+  "kaynak": {
+    "url": "https://psystat.tistory.com/180",
+    "lisans": "belirtilmemiş",
+    "tur": "blog"
+  },
+  "ozet": "Hisse, uzun tahvil, altın ve nakit/kısa tahvile %25'er; yılda bir kez eşit ağırlığa dengeleme. Sinyal yok.",
+  "kategori": "diger",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+    "islem": "1d",
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {
+      "ad": "Eşit ağırlık",
+      "parametreler": {
+        "varlik": 4,
+        "agirlik": "%25"
+      }
+    }
+  ],
+  "long_giris": [
+    "SPY, TLT, GLD, BIL (yazar testinde sabit fiyatlı nakit) her birine %25",
+    "12 ayda bir %25'e geri dengele"
+  ],
+  "zaman_cikisi": "Yıllık yeniden dengeleme; çıkış yok",
+  "pozisyon_risk": "Eşit ağırlık; eşik bazlı dengeleme yok",
+  "iddia_edilen_performans": "iddia (doğrulanmadı): kitap 1970-2021 CAGR %8,8, MDD -%12,7, Sharpe 0,57; yazar 2004-2022 CAGR %6,09, MDD -%14,6, Sharpe 0,87",
+  "kanit": null,
+  "veri_uygun": [
+    false,
+    "TLT/BIL/SPY ETF; Dukascopy'de yalnız altın (emtia) var olabilir, tahvil/nakit verisi yok."
+  ],
+  "kodlanabilirlik": {
+    "puan": 3,
+    "gerekce": "Tamamen mekanik, pasif."
+  },
+  "belirsizlikler": [
+    "Dengeleme günü yok",
+    "Maliyet yok",
+    "OOS yok",
+    "BIL yerine sabit nakit varsayımı",
+    "Yazarın 60/40 kıyası gerçek 60/40 değil (SPY/IEF eşit)"
+  ],
+  "uyumluluk_notu": "Pasif tahsis; benzer: Eşit ağırlık (aylık). Dukascopy verisiyle tahvil bacağı yok.",
+  "anahtar_kelimeler": [
+    "permanent-portfolio",
+    "eşit-ağırlık",
+    "altın",
+    "yıllık-dengeleme"
+  ],
+  "filtreler": [],
+  "varyantlar": [],
+  "stop_loss": null,
+  "kar_al": null,
+  "iz_suren_stop": null,
+  "short_giris": []
+}

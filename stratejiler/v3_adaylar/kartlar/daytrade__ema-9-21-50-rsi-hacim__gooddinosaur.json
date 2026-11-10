@@ -1,0 +1,94 @@
+{
+  "kart_id": "daytrade__ema-9-21-50-rsi-hacim__gooddinosaur",
+  "ad": "EMA 9/21 Kesişimi + EMA50 Trend, RSI ve Hacim Filtresi",
+  "stil": "daytrade",
+  "kaynak": {
+    "url": "https://github.com/gooddinosaur/crypto-bot-trade",
+    "lisans": "yok (lisans alanı boş)",
+    "tur": "github"
+  },
+  "ozet": "EMA9'un EMA21'i kesmesiyle işlem açılır; fiyatın EMA50'ye göre yönü, RSI ve hacim filtreleri onaylar; sabit TP/SL, iz süren stop veya ters EMA kesişimi çıkış yapar.",
+  "kategori": "trend_takip",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "kripto",
+  "zaman_dilimi": {
+    "islem": "15m",
+    "ust_filtre": "1h"
+  },
+  "gostergeler": [
+    {
+      "ad": "EMA",
+      "parametreler": {
+        "hizli": 9,
+        "yavas": 21,
+        "trend": 50
+      }
+    },
+    {
+      "ad": "RSI",
+      "parametreler": {
+        "long_ust_sinir": 70,
+        "short_alt_sinir": 30,
+        "periyot": null
+      }
+    },
+    {
+      "ad": "Hacim MA",
+      "parametreler": {
+        "periyot": 20,
+        "min_hacim_usdt": 500000
+      }
+    }
+  ],
+  "long_giris": [
+    "EMA9, EMA21'i yukarı keser",
+    "Fiyat EMA50 üstünde",
+    "RSI < 70",
+    "Hacim > hacim MA(20) ve > 500K USDT"
+  ],
+  "short_giris": [
+    "EMA9, EMA21'i aşağı keser",
+    "Fiyat EMA50 altında",
+    "RSI > 30",
+    "Hacim > hacim MA(20) ve > 500K USDT"
+  ],
+  "stop_loss": "Giriş fiyatından %1.5",
+  "kar_al": "Giriş fiyatından %3.0 (R:R 1:2)",
+  "iz_suren_stop": "En yüksekten (long) / en düşükten (short) %1.0 iz süren stop",
+  "zaman_cikisi": "Ters EMA kesişiminde kapat (zaman çıkışı değil)",
+  "filtreler": [
+    "Hacim filtresi",
+    "EMA50 trend filtresi",
+    "RSI aşırı bölge filtresi"
+  ],
+  "pozisyon_risk": "İşlem başı %1 risk, 5x kaldıraç (10x aşılmasın)",
+  "iddia_edilen_performans": null,
+  "kanit": "README sonuç içermiyor; yalnız eşik ve parametre önerileri.",
+  "veri_uygun": [
+    true,
+    "Binance USDT-M perp 15m OHLCV ve hacim bizde var."
+  ],
+  "kodlanabilirlik": {
+    "puan": 3,
+    "gerekce": "Tüm giriş, stop, TP, iz süren stop sayısal; RSI periyodu ve çıkış öncelik sırası kaynakta yok."
+  },
+  "belirsizlikler": [
+    "RSI periyodu kaynakta yok",
+    "Aynı anda birden çok çıkış koşulunda öncelik tanımsız",
+    "Mum kapanışı mı anlık mı belirsiz",
+    "Lisans yok: kod kopyalanmadı, kural kendi cümlelerimizle yazıldı",
+    "Sonuç/kanıt yok",
+    "Pozisyon boyutu formülü yok"
+  ],
+  "uyumluluk_notu": "Mevcut dis__ema-esik-trend (1g) ile benzer fikir; bu 15m çok filtreli sürüm. 5m altı yok kuralıyla uyumlu. Kâr/stop oranı sabit.",
+  "varyantlar": [
+    "Zaman dilimi 1h (swing denemesi) ve 4h seçenekleri README'de öneri"
+  ],
+  "anahtar_kelimeler": [
+    "ema-kesisim",
+    "rsi",
+    "hacim-filtresi",
+    "iz-suren-stop",
+    "kripto"
+  ]
+}

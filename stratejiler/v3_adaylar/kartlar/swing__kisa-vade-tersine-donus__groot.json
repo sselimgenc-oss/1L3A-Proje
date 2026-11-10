@@ -1,0 +1,67 @@
+{
+  "piyasa_rejimi": "herhangi",
+  "filtreler": [],
+  "iz_suren_stop": null,
+  "varyantlar": [],
+  "short_giris": [
+    "Önceki ay getirisi en yüksek 10 hisseye short"
+  ],
+  "kar_al": null,
+  "zaman_cikisi": "Haftalık yeniden dengeleme (sayfada 5 günlük de geçiyor)",
+  "pozisyon_risk": "Ağırlıklandırma kaynakta yok; yüksek volatilite günlerinde 'çok sıkı' risk yönetimi deniyor, sayısal kural yok",
+  "kart_id": "swing__kisa-vade-tersine-donus__groot",
+  "ad": "Hisselerde Haftalık Kısa Vade Tersine Dönüş (kesitsel)",
+  "stil": "swing",
+  "kaynak": {
+    "url": "https://quantpedia.com/strategies/short-term-reversal-in-stocks",
+    "lisans": "telif: Quantpedia (ücretsiz ekran); kural kendi cümlelerimle",
+    "tur": "blog",
+    "not": "Makale: de Groot, Huij, Zhou, SSRN 1605049"
+  },
+  "ozet": "Büyük hisselerde geçen haftanın en zayıf performanslıları alınır, geçen ayın en güçlüleri açığa satılır; haftalık yeniden dengelenir. Aşırı tepkinin kısa sürede düzelmesine dayanır.",
+  "kategori": "ortalamaya_donus",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+    "islem": "1d",
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {
+      "ad": "Getiri sıralaması",
+      "parametreler": {
+        "uzun_bacak_pencere": "önceki 1 hafta",
+        "kisa_bacak_pencere": "önceki 1 ay",
+        "evren": "en büyük 100 ABD hissesi"
+      }
+    }
+  ],
+  "long_giris": [
+    "Haftalık yeniden dengelemede evrenin önceki hafta getirisi en düşük 10 hissesine long"
+  ],
+  "stop_loss": null,
+  "iddia_edilen_performans": "iddia (doğrulanmadı): 1990-2009 net ~haftada 29 bp, yıllık ~%16, Sharpe 1.09; sayfa MaxDD -52.94% yazıyor ama kaynakta olmadığını da not ediyor",
+  "kanit": "Quantpedia sayfası; sonuçlar iddia (doğrulanmadı), bağımsız yeniden üretim yok",
+  "veri_uygun": [
+    false,
+    "Dukascopy hisse OHLCV evreni dar; 100 büyük ABD hissesinin tam, nokta-zamanlı listesi doğrulanmadı. Yeterli sayıda hisse varsa kısmen test edilir."
+  ],
+  "kodlanabilirlik": {
+    "puan": 2,
+    "gerekce": "Sıralama net; ağırlık ve yeniden dengeleme günü belirsiz"
+  },
+  "belirsizlikler": [
+    "Ağırlıklandırma kaynakta yok",
+    "Long için 1 hafta, short için 1 ay pencere asimetrik; makalede doğrulanmalı",
+    "Haftalık vs 5 günlük yeniden dengeleme tutarsız",
+    "Stop kuralı kaynakta yok",
+    "Maliyet Nomura tahmini; bizim maliyet modelimizle farklı"
+  ],
+  "uyumluluk_notu": "Mevcut pf__kesit_ls ile benzer ailede; fark: hisse evreni ve 1 hafta/1 ay pencere. Evren darsa değeri düşer.",
+  "anahtar_kelimeler": [
+    "kesitsel",
+    "kisa-vade-tersine-donus",
+    "haftalik",
+    "hisse",
+    "ortalamaya-donus"
+  ]
+}

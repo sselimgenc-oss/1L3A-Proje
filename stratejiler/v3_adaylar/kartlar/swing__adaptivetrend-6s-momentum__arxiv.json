@@ -1,0 +1,74 @@
+{
+  "kart_id": "swing__adaptivetrend-6s-momentum__arxiv",
+  "ad": "AdaptiveTrend: 6 Saatlik Momentum + ATR İz Süren Stop",
+  "stil": "swing",
+  "kaynak": {
+    "url": "https://arxiv.org/html/2602.11708v1",
+    "lisans": "makale",
+    "tur": "makale"
+  },
+  "ozet": "Binance perp'lerinde 6 saatlik getiri momentumu eşiği aşınca giriş, ATR iz süren stop ile çıkış; evren aylık seçilir, ağırlık 70% long / 30% short.",
+  "kategori": "momentum",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "kripto",
+  "zaman_dilimi": {
+    "islem": "6h",
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {
+      "ad": "ROC",
+      "parametreler": {
+        "L": "aylık optimize"
+      }
+    },
+    {
+      "ad": "ATR",
+      "parametreler": {
+        "k": "kaynakta yok"
+      }
+    }
+  ],
+  "long_giris": [
+    "MOM_t = (P_t - P_{t-L})/P_{t-L} > θ_giris ise long (θ ve L aylık ızgarayla, aralıklar kaynakta yok)"
+  ],
+  "short_giris": [
+    "MOM_t < -θ_short ise short; short çıkış/stop kuralı kaynakta yok"
+  ],
+  "stop_loss": "S_t = max(S_{t-1}, P_t - α·ATR_t), girişte P - α·ATR",
+  "kar_al": null,
+  "iz_suren_stop": "Yukarıdaki yalnız yukarı çıkan ATR stopu",
+  "zaman_cikisi": null,
+  "filtreler": [
+    "Aylık evren: piyasa değerine göre ilk 15 (long), alt K_S (short, K_S yok); önceki ay Sharpe ≥ 1.3 (long) / 1.7 (short)"
+  ],
+  "pozisyon_risk": "Eşit ağırlık: long λ/n_L (λ=0.7), short (1-λ)/n_S",
+  "iddia_edilen_performans": "OOS 2022-2024: getiri %40.5, vol %16.8, Sharpe 2.41, maks. DD -%12.7 (70/30); ablasyonda stop kaldırılınca Sharpe 1.68",
+  "kanit": "Yazar iddiası, 36 ay OOS, Binance perp, maliyet+funding dahil (taker 4 bp). Hakemsiz arXiv; kendi içinde tutarsızlık: dönem 2022-2024 vs 2025, Sharpe hesabı r_f=%4.5 ile ≈2.14 çıkıyor, 2.41 değil. Üstelik kilitli holdout'umuz gibi yinelenebilir değil: monthly optimizasyon.",
+  "veri_uygun": [
+    true,
+    "Perp OHLCV 5m→6h, funding var; piyasa değeri sıralaması için Coingecko YOK (yaklaşık: sabit evren)."
+  ],
+  "kodlanabilirlik": {
+    "puan": 2,
+    "gerekce": "Giriş/stop net; ATR periyodu, short kuralları, K_S ve ızgara aralıkları eksik."
+  },
+  "belirsizlikler": [
+    "ATR periyodu k yok",
+    "Short stop/çıkış tanımsız",
+    "Piyasa değeri verisi bizde yok",
+    "Aylık yeniden optimizasyon aşırı uydurma kaynağı",
+    "Sharpe hesabı tutarsız"
+  ],
+  "uyumluluk_notu": "6h bar bizim 5m→üst TF yolundan üretilir. En az 5 parametre; çoklu test riski yüksek. Mevcut dis__voltarget-trend, tsmom ile ilişkili.",
+  "varyantlar": [
+    "50/50 long-short: Sharpe 2.12",
+    "Zaman dilimi: H4 2.08, H8 2.18, H12 1.91, D1 1.63"
+  ],
+  "anahtar_kelimeler": [
+    "momentum",
+    "atr-iz-suren-stop",
+    "kripto",
+    "6s"
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "kart_id": "swing__12-1-momentum-decile__kyraroy",
+  "ad": "12-1 Ay Kesitsel Momentum (Decile L/S)",
+  "stil": "swing",
+  "kaynak": {
+    "url": "https://github.com/KyraRoy/quant-portfolio",
+    "lisans": "belirtilmemiş (lisanssız; kural kendi cümlelerimle)",
+    "tur": "github"
+  },
+  "ozet": "S&P 500 hisselerini son 12 ayın en yakın 1 ayı atlanmış getirisine göre sırala; en iyi onda biri long, en kötü onda biri short; aylık yeniden dengele.",
+  "kategori": "momentum",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+    "islem": "1d",
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {
+      "ad": "12-1 ay getiri",
+      "parametreler": {
+        "pencere": "12 ay, son 1 ay hariç"
+      }
+    }
+  ],
+  "long_giris": [
+    "Ay sonu: 12-1 ay getiriye göre sırala",
+    "En üst decile long"
+  ],
+  "short_giris": [
+    "En alt decile short"
+  ],
+  "stop_loss": null,
+  "kar_al": null,
+  "iz_suren_stop": null,
+  "zaman_cikisi": "Aylık yeniden dengeleme",
+  "filtreler": [],
+  "pozisyon_risk": "Maliyet işlem başı 10 bps (kaynak); ağırlıklandırma belirtilmemiş",
+  "iddia_edilen_performans": "iddia (doğrulanmadı): aynı repodaki pairs kolu için CAGR -%0,44, Sharpe -1,29 (başka yerde 0,686 / -0,096 gibi çelişkili Sharpe'lar); momentum kolunun sonucu net çıkarılamadı",
+  "kanit": "Kaynakta momentum kolunun sonucu net değil; çelişkili rakamlar.",
+  "veri_uygun": [
+    true,
+    "Dukascopy ABD hisseleri günlük OHLCV; ancak 484 hisselik S&P 500 evreninin tamamı Dukascopy'de bulunmayabilir; doğrulanmadı."
+  ],
+  "kodlanabilirlik": {
+    "puan": 2,
+    "gerekce": "Sinyal net; ağırlık ve evren kaynakta kısmen yok."
+  },
+  "belirsizlikler": [
+    "Kaynakta yok: ağırlık yöntemi, stop, momentum kolunun sonuç rakamları",
+    "Aynı repoda pairs kolu (|z|>2,0 giriş, <0,5 çıkış, >3,0 stop; 60g z-skor, korelasyon≥0,85, Engle-Granger) var ve negatif sonuçlu; bu kart yalnız momentumu kapsar",
+    "Short bacak hisse ödünç maliyetini içermez",
+    "Sharpe değerleri çelişkili"
+  ],
+  "uyumluluk_notu": "Mevcut swing__goreceli-guc-momentum ile aynı aileden; aday büyük ölçüde mükerrer olabilir, düşük öncelik.",
+  "varyantlar": [
+    "Pairs kolu: 60g z-skor, giriş |z|>2,0, çıkış |z|<0,5, stop |z|>3,0 (ayrı kart değil; sonuç negatif)"
+  ],
+  "anahtar_kelimeler": [
+    "12-1",
+    "momentum",
+    "decile",
+    "long-short",
+    "sp500"
+  ]
+}

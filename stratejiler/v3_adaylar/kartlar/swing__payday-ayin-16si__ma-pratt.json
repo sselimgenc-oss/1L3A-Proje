@@ -1,0 +1,60 @@
+{
+  "kart_id": "swing__payday-ayin-16si__ma-pratt",
+  "ad": "Maaş Günü Anomalisi (Ayın 16'sı)",
+  "stil": "swing",
+  "kaynak": {
+    "url": "https://quantpedia.com/strategies/payday-anomaly/",
+    "lisans": "belirtilmemiş",
+    "tur": "makale"
+  },
+  "ozet": "S&P 500 endeksi her ayın 16. gününde long tutulur; ayın diğer günleri nakit. Maaş günü akışı varsayımı (Ma-Pratt).",
+  "kategori": "diger",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+    "islem": "1d",
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {
+      "ad": "Ayın günü (takvim)",
+      "parametreler": {
+        "gun": 16
+      }
+    }
+  ],
+  "long_giris": [
+    "Her ayın 16. işlem gününde (kaynak: ayın 16. günü) S&P 500'e long tut; gün sonu kapanışta çık"
+  ],
+  "short_giris": [],
+  "stop_loss": null,
+  "kar_al": null,
+  "iz_suren_stop": null,
+  "zaman_cikisi": "Aynı günün kapanışında çık (Quantpedia özetine göre örtük)",
+  "filtreler": [],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": "Kaynak (Quantpedia özeti): 1980-2010, 16. gün ayın 3. en iyi günü, ~%2.57 gösterge getiri, Sharpe 0.6, t=3.07 (iddia, doğrulanmadı; sayfa kendi içinde tutarsız).",
+  "kanit": "Ma-Pratt 'Payday Anomaly' (SSRN 3257064) Quantpedia özetinden okundu; makale metni açılmadı. Sayılar doğrulanmadı.",
+  "veri_uygun": [
+    false,
+    "S&P 500 endeks CFD'si Dukascopy'de var mı doğrulanmadı; günlük OHLCV yeterli olurdu."
+  ],
+  "kodlanabilirlik": {
+    "puan": 3,
+    "gerekce": "Tamamen mekanik, tek kural."
+  },
+  "belirsizlikler": [
+    "16. gün hafta sonuna denk gelirse ne yapılır: kaynakta yok",
+    "Çıkış saati açıkça yazılmamış",
+    "Etkinin sonraki dönemde sürmesi kaynakta yok",
+    "Stop/kar-al: kaynakta yok"
+  ],
+  "uyumluluk_notu": "Yılda 12 işlem; çok düşük getiri. Düşük öncelik.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+    "maas-gunu",
+    "takvim",
+    "ayin-gunu",
+    "endeks"
+  ]
+}

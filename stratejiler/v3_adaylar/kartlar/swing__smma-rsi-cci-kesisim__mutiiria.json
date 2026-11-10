@@ -1,0 +1,89 @@
+{
+  "kart_id": "swing__smma-rsi-cci-kesisim__mutiiria",
+  "ad": "SMMA Kesişimi + RSI + Çift CCI (MQL5 EA)",
+  "stil": "swing",
+  "kaynak": {
+    "url": "https://www.mql5.com/ja/articles/17247",
+    "lisans": "belirtilmemiş",
+    "tur": "blog"
+  },
+  "ozet": "Hızlı SMMA yavaş SMMA'yı kestiğinde RSI ve iki CCI aynı yönü teyit ediyorsa son swing noktasına stop ile işlem açılır, 300 puanlık sabit hedefle kapanır.",
+  "kategori": "momentum",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "forex",
+  "zaman_dilimi": {
+    "islem": null,
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {
+      "ad": "SMMA",
+      "parametreler": {
+        "hizli": 11,
+        "yavas": 25,
+        "fiyat": "medyan"
+      }
+    },
+    {
+      "ad": "RSI",
+      "parametreler": {
+        "periyot": 27
+      }
+    },
+    {
+      "ad": "CCI",
+      "parametreler": {
+        "periyot": 36
+      }
+    },
+    {
+      "ad": "CCI",
+      "parametreler": {
+        "periyot": 55
+      }
+    }
+  ],
+  "long_giris": [
+    "Son kapanmış çubukta SMMA(11) SMMA(25)'i yukarı keser (önceki hızlı<yavaş, şimdiki hızlı>yavaş)",
+    "RSI(27) > 58",
+    "CCI(36) > 0 ve CCI(55) > 0"
+  ],
+  "short_giris": [
+    "SMMA(11) SMMA(25)'i aşağı keser",
+    "RSI(27) < 42",
+    "CCI(36) < 0 ve CCI(55) < 0"
+  ],
+  "stop_loss": "Long: son 100 çubukta (2 sol/2 sağ pivot) bulunan son swing dibi; short: son swing tepesi. Pivot yoksa giriş fiyatı. Tampon yok.",
+  "kar_al": "Girişten 300 puan sabit",
+  "pozisyon_risk": "Sabit 0,1 lot (kaynakta)",
+  "iddia_edilen_performans": null,
+  "kanit": null,
+  "veri_uygun": [
+    true,
+    "Kural yalnız OHLC göstergesi; kripto/hisse/emtia OHLCV'de çalışır. 300 puan sembole göre yeniden ölçeklenmeli (ATR vb.)."
+  ],
+  "kodlanabilirlik": {
+    "puan": 2,
+    "gerekce": "Tüm kurallar kodda net; zaman dilimi ve 300 puanın fiyat karşılığı kaynakta yok."
+  },
+  "belirsizlikler": [
+    "Zaman dilimi kaynakta yok (grafik periyodu)",
+    "300 puan hedef sembole özgü; kripto/hisse için karşılığı yok",
+    "'Flat' filtresi başlıkta var ama kuralda yok",
+    "Swing bulunamazsa stop = giriş fiyatı (anlamsız); kaynakta yok sayılmalı",
+    "Sayısal sonuç yalnız görselde, metinde yok",
+    "Tarama/arka plan olarak swing pivot sağ 2 çubuk gecikmeli (repaint yok ama gecikme)"
+  ],
+  "uyumluluk_notu": "Forex kökenli puan hedefi yeniden tanımlanmalı. Benzer: swing__cci-esik. Önceliği düşük.",
+  "anahtar_kelimeler": [
+    "smma",
+    "rsi",
+    "cci",
+    "ma-kesisim",
+    "swing-stop"
+  ],
+  "filtreler": [],
+  "varyantlar": [],
+  "iz_suren_stop": null,
+  "zaman_cikisi": null
+}

@@ -1,0 +1,65 @@
+{
+  "kart_id": "daytrade__l-sekli-ma-kirilim-long__mgcha85",
+  "ad": "BTC L-Şekli MA Kırılım Long (1h)",
+  "stil": "daytrade",
+  "kaynak": {
+    "url": "https://github.com/mgcha85/btc-lshape-long",
+    "lisans": "MIT",
+    "tur": "github"
+  },
+  "ozet": "BTC 1 saatlikte en az %3 düşüşün ardından dar konsolidasyon olur ve fiyat MA'yı yukarı kırarsa long açılır; sabit TP/SL ve isteğe bağlı yarım kapama.",
+  "kategori": "kirilim",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "kripto",
+  "zaman_dilimi": {
+    "islem": "1h",
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {
+      "ad": "MA",
+      "parametreler": {
+        "periyot": "25/50/100 denenmiş; örnek 100"
+      }
+    }
+  ],
+  "long_giris": [
+    "Son 20 mumda en az drop_threshold_pct (örnek %3,0) düşüş",
+    "Son N mum (örnek 3) consolidation_range_pct (örnek %5,0) aralığında kalır",
+    "Önceki mum kapanışı MA altında, mevcut mum boğa mumu ve MA üstünde kapanır"
+  ],
+  "short_giris": [],
+  "stop_loss": "Girişten -%N (örnek %5; profil1: %3)",
+  "kar_al": "Girişten +%N (örnek %10)",
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [],
+  "pozisyon_risk": "Yarım kapama (isteğe bağlı): orta hedefte (örnek %3) pozisyonun %50'sini kapat, stopu girişe çek; kaldıraç profilleri kaynakta belirtilmemiş",
+  "iddia_edilen_performans": "iddia (doğrulanmadı): yarım kapamasız MA50/TP10/SL3 toplam %188,6, MaxDD %62, kazanma %28,8; yarım kapamalı MA100/TP10/SL5/%3: toplam %112,5, MaxDD %26, kazanma %69,7; dönem belirsiz",
+  "kanit": null,
+  "veri_uygun": [
+    true,
+    "Binance USDT-M BTC 1h OHLCV bizde var; yalnız long."
+  ],
+  "kodlanabilirlik": {
+    "puan": 2,
+    "gerekce": "Üç koşul sayısal; eşikler örnek değer, MA türü yok."
+  },
+  "belirsizlikler": [
+    "Kaynakta yok: MA türü (SMA/EMA), kaldıraç, dönem, işlem sayısı",
+    "Eşikler örnek; en iyi profil geçmişe optimize edilmiş olabilir",
+    "Repo ML modülleri (XGBoost/CNN) içerir ama kural tabanlı strateji ML kullanmaz; ML kısmı kullanılmaz",
+    "Düşüş 'son 20 mumda' tepe-dip mi başlangıç-son mu belirsiz"
+  ],
+  "uyumluluk_notu": "Kripto 1h uyumlu; mevcut btfd-günlük-dip kartı ile benzer ruh (dip sonrası alım), kural farklı.",
+  "varyantlar": [
+    "Yarım kapama yok / var profilleri"
+  ],
+  "anahtar_kelimeler": [
+    "l-sekli",
+    "ma-kirilim",
+    "konsolidasyon",
+    "btc",
+    "1h"
+  ]
+}

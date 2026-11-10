@@ -1,0 +1,65 @@
+{
+  "kart_id": "daytrade__saatlik-kesit-ters-donus__apex",
+  "ad": "Saatlik Kesitsel Ters Dönüş (Gün İçi Hisse)",
+  "stil": "daytrade",
+  "kaynak": {
+    "url": "https://github.com/SM1LE-X/Apex-Quant",
+    "lisans": "MIT",
+    "tur": "github"
+  },
+  "ozet": "Günün açılışından beri getiriye göre 50 büyük hisseyi sırala; her saat en çok kaybeden 10'u long, en çok kazanan 10'u short yap; gün sonu hepsini kapat.",
+  "kategori": "ortalamaya_donus",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+    "islem": "1h",
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {
+      "ad": "Açılıştan beri getiri",
+      "parametreler": {
+        "top_k": 10,
+        "bottom_k": 10
+      }
+    }
+  ],
+  "long_giris": [
+    "Her saat başı: açılıştan beri getiriye göre sırala",
+    "En kötü 10 hisseye long"
+  ],
+  "short_giris": [
+    "En iyi 10 hisseye short"
+  ],
+  "stop_loss": null,
+  "kar_al": null,
+  "iz_suren_stop": null,
+  "zaman_cikisi": "Gün sonunda tüm pozisyonlar kapatılır",
+  "filtreler": [],
+  "pozisyon_risk": "Eşit ağırlık belirtilmemiş; boyutlandırma kaynakta yok",
+  "iddia_edilen_performans": "iddia (doğrulanmadı): Sharpe 8,53, kazanma %79, yıllık +%176, MaxDD -%4 — dönem/yöntem yok",
+  "kanit": null,
+  "veri_uygun": [
+    false,
+    "Dukascopy hisse saatlik OHLCV var, ancak ABD 50 mega-cap tam evreninin Dukascopy'de bulunup bulunmadığı ve giriş saatleri (entry_hours 8-20, saat dilimi belirsiz) doğrulanmadı; kısmi uygun olabilir."
+  ],
+  "kodlanabilirlik": {
+    "puan": 2,
+    "gerekce": "Sıralama net; stop, ağırlık, maliyet yok."
+  },
+  "belirsizlikler": [
+    "Kaynakta yok: ticker listesi, saat dilimi, stop, ağırlıklandırma, maliyet/kayma",
+    "Aynı repo ML ranker (XGBoost/LSTM) içerir; bu kart yalnız kural tabanlı gün içi sıralamadır, ML kullanılmaz",
+    "Rakamların hiçbir dönemi/yöntemi yok; çok şüpheli",
+    "Her saat yeniden giriş mi, yalnız tek giriş mi net değil (entry_hours listesi örnek)"
+  ],
+  "uyumluluk_notu": "Gün içi long-short; hisse perp yok. Dukascopy hisse kapsamı doğrulanmalı. Şüpheli iddia, düşük güven.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+    "kesitsel",
+    "ters-donus",
+    "gun-ici",
+    "hisse",
+    "long-short"
+  ]
+}

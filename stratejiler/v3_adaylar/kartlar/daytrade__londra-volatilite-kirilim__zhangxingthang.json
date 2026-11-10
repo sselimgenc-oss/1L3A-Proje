@@ -1,0 +1,67 @@
+{
+  "piyasa_rejimi": "volatil",
+  "filtreler": [
+    "Londra iş günü başına en fazla 1 işlem",
+    "Aynı mumda iki yön de tetiklenirse atla"
+  ],
+  "iz_suren_stop": "%0.5 iz süren stop",
+  "varyantlar": [],
+  "short_giris": [
+    "Fiyat önceki 60 mumun dibini kırarsa short (sell-stop)"
+  ],
+  "kar_al": null,
+  "zaman_cikisi": "16:00 Londra saatinde kapat",
+  "pozisyon_risk": "İşlem başına equity'nin %0.05'i; miktar = risk bütçesi / stop mesafesi",
+  "kart_id": "daytrade__londra-volatilite-kirilim__zhangxingthang",
+  "ad": "BTC Londra Seansı Saatlik Aralık Kırılımı",
+  "stil": "daytrade",
+  "kaynak": {
+    "url": "https://github.com/zhangxingthang/BTCUSDT-London-Volatility-Breakout",
+    "lisans": "lisans belirtilmemiş; kod kopyalanmadı",
+    "tur": "github"
+  },
+  "ozet": "Londra seansında (08:00-11:00) önceki 60 kapanmış 1 dakikalık mumun tepe/dibine buy-stop/sell-stop konur; tetiklenen yönde girilir, %0.5 iz süren stop, 16:00 Londra'da kapanış.",
+  "kategori": "kirilim",
+  "orijinal_piyasa": "kripto",
+  "zaman_dilimi": {
+    "islem": "1m (5m'ye uyarlanabilir)",
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {
+      "ad": "Yuvarlanan aralık (tepe/dip)",
+      "parametreler": {
+        "pencere": "önceki 60 kapanmış 1m mum"
+      }
+    }
+  ],
+  "long_giris": [
+    "08:00-11:00 Londra penceresinde fiyat önceki 60 kapanmış mumun tepesini geçerse long (buy-stop)"
+  ],
+  "stop_loss": "Girişten %0.5",
+  "iddia_edilen_performans": "iddia (doğrulanmadı): 2021-2026 toplam %2.63, CAGR %0.52, MaxDD -%1.34, kazanç %39.35, 1301 işlem",
+  "kanit": "README sonuçları; küçük getiri, komisyon bilgisi yok (iddia, doğrulanmadı)",
+  "veri_uygun": [
+    true,
+    "Binance BTCUSDT 5m var; kaynak 1m kullanıyor, bizde 5m altı yok: 60x1m yerine 12x5m uyarlama gerekir (sonuç değişebilir)."
+  ],
+  "kodlanabilirlik": {
+    "puan": 3,
+    "gerekce": "Kurallar net; 1m→5m uyarlaması gerekli"
+  },
+  "belirsizlikler": [
+    "1m kural 5m'de farklı davranır",
+    "Komisyon/slipaj kaynakta yok",
+    "İz süren stopun işleyişi (yüzde mi, tepe-takip mi) ayrıntısız",
+    "config/params.yaml içeriği görülemedi",
+    "Sonuç zayıf"
+  ],
+  "uyumluluk_notu": "tv ORB Breakout ile benzer fikir; fark: kayan 60 mumluk aralık ve Londra penceresi. Düşük öncelik (kaynak sonucu zayıf).",
+  "anahtar_kelimeler": [
+    "londra",
+    "seans",
+    "kirilim",
+    "btc",
+    "iz-suren-stop"
+  ]
+}

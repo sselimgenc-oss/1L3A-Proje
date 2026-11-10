@@ -1,0 +1,64 @@
+{
+  "kart_id": "swing__12ay-dongu-kesit__heston",
+  "ad": "12 Aylık Mevsimsel Döngü (Kesitsel Hisse)",
+  "stil": "swing",
+  "kaynak": {
+    "url": "https://quantpedia.com/strategies/12-month-cycle-in-cross-section-of-stocks-returns/",
+    "lisans": "belirtilmemiş",
+    "tur": "makale"
+  },
+  "ozet": "Her ay hisseler, bir yıl önceki aynı takvim ayındaki getirilerine göre sıralanır; en iyi onda birlik dilime long, en kötüsüne short açılır (Heston-Sadka mevsimsellik makalesi).",
+  "kategori": "momentum",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+    "islem": "1d (aylık yeniden dengeleme)",
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {
+      "ad": "Getiri (aynı takvim ayı, 12 ay gecikmeli)",
+      "parametreler": {
+        "gecikme_ay": 12
+      }
+    }
+  ],
+  "long_giris": [
+    "Ay sonunda evrendeki hisseleri bir yıl önceki aynı ayın getirisine göre sırala, 10 eşit dilime böl; en üst dilimi (kazananlar) eşit ağırlıkla long al"
+  ],
+  "short_giris": [
+    "En alt dilimi (kaybedenler) eşit ağırlıkla short al"
+  ],
+  "stop_loss": null,
+  "kar_al": null,
+  "iz_suren_stop": null,
+  "zaman_cikisi": "Aylık yeniden dengeleme",
+  "filtreler": [
+    "Evren: NYSE+AMEX'te piyasa değeri en büyük %30 (yaklaşık 1000 hisse)"
+  ],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": "Kaynak (Quantpedia özeti): uzun-kısa ~%8.6 yıllık, 1965-2002 (iddia, doğrulanmadı). Kaynak, aylık tam yeniden dengelemenin maliyet sonrası kârı yok edebileceğini belirtiyor.",
+  "kanit": "Heston ve Sadka mevsimsellik makalesi (SSRN 687022) Quantpedia özetinden okundu; makale metni açılmadı. Sayılar doğrulanmadı.",
+  "veri_uygun": [
+    false,
+    "Dukascopy'de ~1000 ABD hissesi evreni yok (sınırlı hisse listesi); kesitsel sıralama için evren çok dar. Kripto perp'e uyarlama (12 ay önceki aynı takvim ayı) mantıksız."
+  ],
+  "kodlanabilirlik": {
+    "puan": 2,
+    "gerekce": "Sıralama kuralı net; evren ve ağırlıklandırma kaynakta belli ama bizim verimizde yok."
+  },
+  "belirsizlikler": [
+    "Giriş/çıkış zamanı ay sonu kapanış mı ertesi gün açılış mı: kaynakta yok",
+    "Stop/kar-al: kaynakta yok",
+    "Kaynak sayfası maksimum düşüşü tutarsız veriyor"
+  ],
+  "uyumluluk_notu": "Büyük hisse evreni gerekir; Dukascopy hisse listesi dar olduğu için uygulanabilirlik düşük. Düşük öncelik.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+    "mevsimsellik",
+    "kesitsel",
+    "12-ay-gecikme",
+    "hisse",
+    "uzun-kisa"
+  ]
+}

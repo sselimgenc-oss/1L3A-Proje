@@ -1,0 +1,73 @@
+{
+  "kart_id": "swing__bb-genislik-rejim-psar__wchia016",
+  "ad": "BB Genişlik Rejimi + PSAR Yönü (S&P 500)",
+  "stil": "swing",
+  "kaynak": {
+    "url": "https://github.com/wchia016/sp500-trading-backtest",
+    "lisans": "LGPL-3.0 (kural kendi cümlelerimle)",
+    "tur": "github"
+  },
+  "ozet": "Bollinger genişliği 0,071'in altındaysa (sakin) varsayılan long; üstündeyse (oynak) PSAR yönünü izle.",
+  "kategori": "trend_takip",
+  "piyasa_rejimi": "volatil",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+    "islem": "1d",
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {
+      "ad": "Bollinger Genişliği",
+      "parametreler": {
+        "esik": 0.071,
+        "not": "periyot/sapma ve genişlik formülü kaynakta yok"
+      }
+    },
+    {
+      "ad": "Parabolik SAR",
+      "parametreler": {
+        "not": "adım/maks kaynakta yok"
+      }
+    }
+  ],
+  "long_giris": [
+    "BB-Genişlik < 0,071: varsayılan long",
+    "BB-Genişlik ≥ 0,071: PSAR yönü yukarı ise long"
+  ],
+  "short_giris": [
+    "BB-Genişlik < 0,071 iken günlük dipler günlük tepelerden hızlı düşüyorsa short (tanım kaynakta kesin değil)",
+    "BB-Genişlik ≥ 0,071: PSAR yönü aşağı ise short"
+  ],
+  "stop_loss": null,
+  "kar_al": null,
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [
+    "200 EMA yalnız çizim, kullanılmıyor"
+  ],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": "iddia (doğrulanmadı): CAGR %20,54, Sharpe 0,93; S&P 500 %8,26; SPY %9,05 — ~5 yıllık kayan pencere",
+  "kanit": "README: 0,071 eşiği tekrarlı backtestle seçilmiş (aşırı uyum riski); OOS/walk-forward yok.",
+  "veri_uygun": [
+    true,
+    "S&P 500 endeksi; Dukascopy'de ABD500 endeks/CFD varsa günlük OHLC yeterli, hisse değil endeks; doğrulanmadı."
+  ],
+  "kodlanabilirlik": {
+    "puan": 1,
+    "gerekce": "Rejim kuralı net ama giriş/çıkış anları, stop, BB ve PSAR parametreleri yok."
+  },
+  "belirsizlikler": [
+    "Kaynakta yok: BB periyodu/sapması, genişlik formülü, PSAR adım/maks, giriş-çıkış ayrıntısı, stop, maliyet",
+    "Eşik 0,071 geçmişe uydurulmuş",
+    "Short koşulu muğlak",
+    "Lookahead denetimi kaynakta yok"
+  ],
+  "uyumluluk_notu": "Endeks günlük; yüksek aşırı uyum riski, düşük öncelik.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+    "bollinger-genislik",
+    "psar",
+    "rejim",
+    "sp500"
+  ]
+}

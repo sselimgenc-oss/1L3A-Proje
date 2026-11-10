@@ -1,0 +1,52 @@
+{
+  "kart_id": "daytrade__sma-trend-rsi-atr-btc15m__devansh-dek",
+  "ad": "BTCUSDT 1s SMA Trend + 15m RSI İvme + ATR Stop/Hedef",
+  "stil": "daytrade",
+  "kaynak": {
+    "url": "https://github.com/devansh-dek/Live-Trading-and-Backtesting-Strategy",
+    "lisans": "yok (lisanssız; kod kopyalanmadı, yalnız README kuralı Türkçe özetlendi)",
+    "tur": "github"
+  },
+  "ozet": "1 saatlik SMA(20)/SMA(60) yönü trend filtresi verir; 15 dakikada RSI(14) yönde en az 2 puan hareket ederse trend yönünde girilir. SMA(20) çıkışı, ATR tabanlı stop ve hedef var.",
+  "kategori": "trend_takip",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "kripto",
+  "zaman_dilimi": {"islem": "15m", "ust_filtre": "1h"},
+  "gostergeler": [
+    {"ad": "SMA", "parametreler": {"periyot": 20, "zaman": "1h ve 15m çıkış için"}},
+    {"ad": "SMA", "parametreler": {"periyot": 60, "zaman": "1h"}},
+    {"ad": "RSI", "parametreler": {"periyot": 14, "zaman": "15m"}},
+    {"ad": "ATR", "parametreler": {"periyot": 14}}
+  ],
+  "long_giris": [
+    "1h SMA(20) > SMA(60)",
+    "15m RSI(14) en az 2 puan yükselmiş (ölçüm süresi kaynakta belirsiz)"
+  ],
+  "short_giris": [
+    "1h SMA(20) < SMA(60)",
+    "15m RSI(14) en az 2 puan düşmüş"
+  ],
+  "stop_loss": "1.5 x ATR(14)",
+  "kar_al": "2.5 x ATR(14)",
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": ["Günlük %3 kayıp limiti"],
+  "pozisyon_risk": "İşlem başına %1 özkaynak riski; boyut formülü kaynakta yok",
+  "iddia_edilen_performans": "README/katalog: negatif sonuç (iddia, doğrulanmadı)",
+  "kanit": null,
+  "veri_uygun": [true, "Binance USDT-M BTCUSDT 15m/1h OHLCV bizde var; resample ile 1h üretilebilir."],
+  "kodlanabilirlik": {
+    "puan": 2,
+    "gerekce": "Kurallar sayısal ama RSI değişim ölçümü ve SMA(20) çıkışının hangi zamanda olduğu belirsiz."
+  },
+  "belirsizlikler": [
+    "RSI 2 puan artışı kaç bardan ölçülüyor: kaynakta yok",
+    "Çıkış SMA(20) 15m mi 1h mi: kaynakta yok",
+    "Pozisyon boyutu formülü kaynakta yok",
+    "Detaylı metodoloji docs/METHODOLOGY.md'de; okunamadı",
+    "Kaynağın kendi sonucu negatif (iddia, doğrulanmadı); edge kanıtı yok"
+  ],
+  "uyumluluk_notu": "15m ve 1h Binance verisiyle birebir uyumlu. Mevcut EMA/SMA trend+RSI kartlarına benzer; düşük öncelik çünkü kaynak kendi testinde negatif.",
+  "varyantlar": [],
+  "anahtar_kelimeler": ["sma", "rsi", "atr", "btcusdt", "mtf-trend", "walk-forward"]
+}

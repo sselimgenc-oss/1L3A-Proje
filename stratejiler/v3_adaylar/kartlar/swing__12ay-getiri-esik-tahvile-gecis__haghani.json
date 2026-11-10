@@ -1,0 +1,63 @@
+{
+  "kart_id": "swing__12ay-getiri-esik-tahvile-gecis__haghani",
+  "ad": "12 Aylık Getiri < -%5 İse Tahvile Geçiş (S&P 500)",
+  "stil": "swing",
+  "kaynak": {
+    "url": "https://www.zonebourse.com/actualite-bourse/Couper-ses-pertes-laisser-courir-ses-gains-une-strategie-payante--46437038/",
+    "lisans": "belirtilmemiş",
+    "tur": "blog"
+  },
+  "ozet": "S&P 500'ün 12 aylık getirisi -%5 altına inerse hisse satılıp ABD hazine tahviline geçilir; en az 3 ay sonra getiri eşiğin üstüne çıkınca hisseye dönülür.",
+  "kategori": "trend_takip",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+    "islem": "1d",
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {
+      "ad": "Getiri (ROC)",
+      "parametreler": {
+        "pencere_ay": 12,
+        "esik": "-%5"
+      }
+    }
+  ],
+  "long_giris": [
+    "12 aylık getiri >= -%5 ise S&P 500'de ol",
+    "Tahviledeyken: en az 3 ay geçmiş ve 12 aylık getiri -%5 üstünde ise hisseye dön"
+  ],
+  "short_giris": [],
+  "zaman_cikisi": "12 aylık getiri < -%5 ise hisseyi sat, tahvile geç; en az 3 ay bekle",
+  "pozisyon_risk": "Tam hisse veya tam tahvil",
+  "iddia_edilen_performans": "iddia (doğrulanmadı): 1929-2023 arası 1 $ -> 5.500 $, klasik %70/%30 portföy 1.600 $ (gazete özeti, Haghani-Ragulin-White çalışmasına atıf)",
+  "kanit": null,
+  "veri_uygun": [
+    false,
+    "S&P 500 endeks + hazine tahvili getirisi gerekir; bizde yok. Kripto/emtia günlüğüne trend eşiği olarak uyarlanabilir ama kaynak kuralı değil."
+  ],
+  "kodlanabilirlik": {
+    "puan": 2,
+    "gerekce": "Kural net; değerlendirme sıklığı ve getiri tanımı (fiyat/toplam) kaynakta yok."
+  },
+  "belirsizlikler": [
+    "Değerlendirme sıklığı yok (günlük/aylık)",
+    "Fiyat mı toplam getiri mi belirtilmemiş",
+    "Aşırı optimizasyon uyarısı kaynakta var",
+    "Sharpe/CAGR/DD yok",
+    "Gazete özeti; birincil çalışma okunmadı"
+  ],
+  "uyumluluk_notu": "Havuzda benzeri yok. Rejim/trend filtresi fikri olarak kullanışlı, ancak tahvil bacağı verimizde yok.",
+  "anahtar_kelimeler": [
+    "12-aylik-getiri",
+    "trend",
+    "tahvil",
+    "rejim"
+  ],
+  "filtreler": [],
+  "varyantlar": [],
+  "stop_loss": null,
+  "kar_al": null,
+  "iz_suren_stop": null
+}

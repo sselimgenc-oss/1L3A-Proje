@@ -1,0 +1,61 @@
+{
+  "piyasa_rejimi": "herhangi",
+  "filtreler": [],
+  "iz_suren_stop": null,
+  "varyantlar": [],
+  "short_giris": [],
+  "kar_al": null,
+  "zaman_cikisi": "Karar günü New York saatiyle 14:00'te kapat",
+  "pozisyon_risk": null,
+  "kart_id": "swing__pre-fomc-surunme__delphic",
+  "ad": "FOMC Öncesi Sürüklenme (endeks, kapanıştan karar gününe)",
+  "stil": "swing",
+  "kaynak": {
+    "url": "https://delphicalpha.substack.com/",
+    "lisans": "bilinmiyor; kural kendi cümlelerimle",
+    "tur": "blog",
+    "not": "Quantocracy listesi 2026-11-02; yazının kendisi açılamadı (WebFetch ana sayfa verdi); kural WebSearch özetinden"
+  },
+  "ozet": "Planlı FOMC kararından önceki işlem günü kapanışında endeks vadelisi alınır, karar günü öğleden sonra kapatılır. Yılda yaklaşık 8 işlem.",
+  "kategori": "diger",
+  "orijinal_piyasa": "vadeli",
+  "zaman_dilimi": {
+    "islem": "5m",
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {
+      "ad": "Takvim: planlı FOMC tarihleri",
+      "parametreler": {}
+    }
+  ],
+  "long_giris": [
+    "Planlı FOMC karar gününden bir önceki işlem günü, New York 16:00 kapanışında long"
+  ],
+  "stop_loss": null,
+  "iddia_edilen_performans": "iddia (doğrulanmadı): NY Fed raporu ortalama ~20 bp (futures örnekleminde ~54 bp) iddia ediyor; sonraki çalışmalar etkinin 2015 sonrası zayıfladığını söylüyor",
+  "kanit": "Yazı açılamadı; kural ikincil özetten (doğrulanmadı)",
+  "veri_uygun": [
+    true,
+    "Dukascopy ABD500 endeks/CFD 5m OHLCV var (varsayım); FOMC tarihleri harici takvim, elle girilmeli; saat dilimi (NY) dönüşümü gerekir."
+  ],
+  "kodlanabilirlik": {
+    "puan": 2,
+    "gerekce": "Giriş/çıkış saati net; FOMC tarih listesi dış girdi"
+  },
+  "belirsizlikler": [
+    "Yazının gerçek kuralı/stop'u açılamadı",
+    "Stop kaynakta yok",
+    "FOMC tarihleri kaynakta yok",
+    "Fiyat verisi tarihi 16:00 ET kapanışı vs endeks CFD seansı uyuşmayabilir",
+    "Acil toplantılar dışlanmalı mı belirsiz"
+  ],
+  "uyumluluk_notu": "dis__ay-mevsimsellik ile takvim ailesi, farklı olay. Az işlem (yılda ~8): istatistiksel güç düşük.",
+  "anahtar_kelimeler": [
+    "fomc",
+    "takvim",
+    "endeks",
+    "olay",
+    "surunme"
+  ]
+}

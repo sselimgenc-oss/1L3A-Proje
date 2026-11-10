@@ -1,0 +1,79 @@
+{
+  "kart_id": "daytrade__asya-kutu-kirilim-ma50__mutiiria",
+  "ad": "Asya Seansı Kutu Kırılımı + MA50 (M15)",
+  "stil": "daytrade",
+  "kaynak": {
+    "url": "https://www.mql5.com/ja/articles/17239",
+    "lisans": "belirtilmemiş (kod kopyalanmayacak)",
+    "tur": "blog"
+  },
+  "ozet": "23:00-03:00 GMT arası M15 yüksek/düşük kutusu çıkarılır; fiyat MA50'nin üstündeyse kutu tepesine buy stop, altındaysa kutu dibine sell stop konur; 13:00 GMT'de kapanır.",
+  "kategori": "kirilim",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "forex",
+  "zaman_dilimi": {
+    "islem": "15m",
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {
+      "ad": "SMA",
+      "parametreler": {
+        "periyot": 50,
+        "fiyat": "kapanış",
+        "zaman_dilimi": "M15"
+      }
+    },
+    {
+      "ad": "Seans kutusu",
+      "parametreler": {
+        "baslangic": "23:00 GMT",
+        "bitis": "03:00 GMT"
+      }
+    }
+  ],
+  "long_giris": [
+    "Kutu 23:00-03:00 GMT'de oluşur; fiyat (bid) SMA50 üzerindeyse kutu tepesi + sapma (10, kaynakta 'pip' etiketli ama kodda point; belirsiz) seviyesine buy stop; seans başına tek bekleyen emir"
+  ],
+  "short_giris": [
+    "Fiyat SMA50 altındaysa kutu dibi - aynı sapma seviyesine sell stop"
+  ],
+  "stop_loss": "Long: kutu dibi - sapma; short: kutu tepesi + sapma",
+  "kar_al": "Giriş-stop mesafesi x 1,3 (RR 1:1,3)",
+  "zaman_cikisi": "13:00 GMT'de açık pozisyonu kapat, dolmamış stop emirleri sil",
+  "filtreler": [
+    "MA50 yön filtresi",
+    "Seans başına tek emir"
+  ],
+  "pozisyon_risk": "Sabit lot 0,1 (kaynak); martingale/grid yok",
+  "iddia_edilen_performans": null,
+  "kanit": null,
+  "veri_uygun": [
+    true,
+    "Forex EA; ancak kutu mantığı 5m/15m OHLCV'de uygulanabilir; kripto/emtia (Dukascopy) için GMT seans saatleri yeniden tanımlanmalı. Kaynakta geçerli sayısal sonuç yok (yalnız görsel)."
+  ],
+  "kodlanabilirlik": {
+    "puan": 3,
+    "gerekce": "Tüm giriş/stop/hedef/çıkış kuralları mekanik."
+  },
+  "belirsizlikler": [
+    "Sayısal backtest sonucu kaynakta metin olarak yok (yalnız görsel)",
+    "Sapma birimi pip/point belirsiz",
+    "Kaynak gösterimli 30 puanlık iz süren stop base kural değil, backtest iyileştirmesi",
+    "Kutu zaman dilimi 15 veya 30 dk denmiş",
+    "Sinyal MA50'si hangi bar kapanışında okunur belirsiz"
+  ],
+  "uyumluluk_notu": "Forex seans kırılımı; bizde forex yok. Kripto 7/24'te seans etkisi farklı; Dukascopy emtia/hisse için seans saatleri uyarlanmalı.",
+  "varyantlar": [
+    "Kutu M15 veya M30",
+    "30 puan iz süren stop (isteğe bağlı)"
+  ],
+  "anahtar_kelimeler": [
+    "asya-seansi",
+    "kutu-kirilim",
+    "ma50",
+    "buy-stop",
+    "sell-stop"
+  ],
+  "iz_suren_stop": null
+}

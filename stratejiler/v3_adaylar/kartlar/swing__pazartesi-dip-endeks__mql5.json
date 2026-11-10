@@ -1,0 +1,71 @@
+{
+  "piyasa_rejimi": "herhangi",
+  "filtreler": [],
+  "iz_suren_stop": null,
+  "varyantlar": [],
+  "short_giris": [],
+  "kar_al": null,
+  "zaman_cikisi": "Çarşamba günlük kapanışında çık; kaçırılırsa sonraki günlük kapanış",
+  "pozisyon_risk": "Sabit lot (0.10), aynı anda tek pozisyon",
+  "kart_id": "swing__pazartesi-dip-endeks__mql5",
+  "ad": "Pazartesi Dip: Endeks Ortalamaya Dönüş (D1)",
+  "stil": "swing",
+  "kaynak": {
+    "url": "https://www.mql5.com/en/code/78343",
+    "lisans": "belirtilmemiş (MQL5 CodeBase serbest indirme); kod kopyalanmadı",
+    "tur": "github",
+    "not": "tur: mql5 kod sayfası"
+  },
+  "ozet": "Pazartesi günlük kapanışı bir önceki işlem gününün kapanışından düşükse long açılır, çarşamba günlük kapanışında çıkılır. Haftada en fazla bir pozisyon.",
+  "kategori": "ortalamaya_donus",
+  "orijinal_piyasa": "genel",
+  "zaman_dilimi": {
+    "islem": "1d",
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {
+      "ad": "IBS",
+      "parametreler": {
+        "formül": "(Kapanış-Dip)/(Tepe-Dip)",
+        "esik_maks": 0.25
+      }
+    },
+    {
+      "ad": "SMA",
+      "parametreler": {
+        "periyot": 180
+      }
+    }
+  ],
+  "long_giris": [
+    "Pazartesi kapanışı bir önceki işlem günü kapanışından kesin düşük",
+    "IBS filtresi (varsayılan açık): Pazartesi mumunun IBS değeri 0.25 veya altı",
+    "MA filtresi (varsayılan açık): Pazartesi kapanışı 180 günlük SMA'nın kesin altında"
+  ],
+  "stop_loss": "Girişin %10 altı (varsayılan, parametre)",
+  "iddia_edilen_performans": null,
+  "kanit": null,
+  "veri_uygun": [
+    true,
+    "Dukascopy endeks (ABD500 vb.) günlük OHLC var; yalnız long."
+  ],
+  "kodlanabilirlik": {
+    "puan": 3,
+    "gerekce": "Tüm kurallar ve varsayılan değerler sayfada net"
+  },
+  "belirsizlikler": [
+    "Sayfada performans/backtest sonucu verilmiyor",
+    "Filtre varsayılanlarının neden seçildiği belirsiz",
+    "Hangi endeksin iyi çalıştığı belirtilmemiş",
+    "Yalnızca long; short yok"
+  ],
+  "uyumluluk_notu": "dis__carstens-pazartesi ile kısmen benzer; IBS+MA filtreli ve çarşamba çıkışı farklı. Ek %10 stop çok geniş.",
+  "anahtar_kelimeler": [
+    "pazartesi",
+    "ibs",
+    "ortalamaya-donus",
+    "endeks",
+    "haftanin-gunu"
+  ]
+}

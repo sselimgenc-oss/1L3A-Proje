@@ -1,0 +1,54 @@
+{
+  "kart_id": "daytrade__aralik-kirilim-bekleyen-emir__fxcraft",
+  "ad": "00-07 Sunucu Saati Aralık Kırılımı (Bekleyen Emir, 1R)",
+  "stil": "daytrade",
+  "kaynak": {
+    "url": "https://www.mql5.com/en/code/78688",
+    "lisans": "bilinmiyor (FxCraft Example EA License; şartlar sayfada görünmüyor, kod kopyalanmadı)",
+    "tur": "blog"
+  },
+  "ozet": "Gün başındaki 00:00-07:00 sunucu saati aralığının en yüksek/en düşük seviyesi hesaplanır; üstüne BuyStop, altına SellStop konur. Biri dolunca diğeri silinir. Stop karşı uçta, hedef 1R.",
+  "kategori": "kirilim",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "genel",
+  "zaman_dilimi": {"islem": "5m", "ust_filtre": null},
+  "gostergeler": [
+    {"ad": "Aralık yüksek/düşük", "parametreler": {"baslangic": "00:00 sunucu saati", "bitis": "07:00 sunucu saati", "kaynak_mum": "M1 (bizde 5m)"}}
+  ],
+  "long_giris": [
+    "Aralık bittikten sonra BuyStop = aralık yükseği + Shift (varsayılan 20 puan) + spread",
+    "Fiyat zaten bu seviyenin üstündeyse (gap) long tarafı atlanır"
+  ],
+  "short_giris": [
+    "SellStop = aralık düşüğü - Shift (varsayılan 20 puan)",
+    "Fiyat zaten bu seviyenin altındaysa short tarafı atlanır"
+  ],
+  "stop_loss": "Long: aralık düşüğü - ShiftSL (varsayılan 20 puan). Short: aralık yükseği + ShiftSL + spread.",
+  "kar_al": "RR çarpanı (varsayılan 1.0): giriş ± RR x (giriş-SL mesafesi)",
+  "iz_suren_stop": null,
+  "zaman_cikisi": "Dolmamış emirler 20:00'de iptal; açık pozisyon (seçenek, varsayılan açık) 22:00'de kapatılır",
+  "filtreler": [
+    "Aralık genişliği min/max sınırı (puan; 0 = sınırsız; varsayılan değerler kaynakta yok)",
+    "Maks. spread varsayılan 30 puan (0 = kapalı)",
+    "Pazartesi-Cuma, günler tek tek kapatılabilir",
+    "Günde tek emir seti"
+  ],
+  "pozisyon_risk": "Sabit lot 0.10 (kaynak varsayılanı); risk yüzdesi yok",
+  "iddia_edilen_performans": null,
+  "kanit": null,
+  "veri_uygun": [true, "Dukascopy XAU 5m OHLCV ile test edilebilir; sunucu saati UTC'ye çevrilmeli (broker UTC+2/+3 olabilir, kaynakta yok), spread/puan değerleri sembole göre uyarlanmalı."],
+  "kodlanabilirlik": {
+    "puan": 3,
+    "gerekce": "Tüm giriş/stop/hedef/iptal kuralları sayısal. Tek boşluk sunucu saati ve min/max genişlik varsayılanları."
+  },
+  "belirsizlikler": [
+    "Sunucu saati dilimi kaynakta yok",
+    "Aralık min/max genişlik varsayılanları kaynakta yok",
+    "Aynı 5m mumda iki emrin de tetiklenme sırası kaynakta yok",
+    "Spread/Shift puan değeri sembole göre uyarlanmalı",
+    "Kaynak EA yalnız demo/strateji testerinde çalışıyor; edge'in kanıtı yok"
+  ],
+  "uyumluluk_notu": "Mevcut asya-kutu-kirilim-ma50__mutiiria ile benzer ama MA filtresi yok, bekleyen emir + 1R + 22:00 çıkış var. 5m ile uyumlu; XAU ve kripto için uyarlanabilir.",
+  "varyantlar": ["RR çarpanı değiştirilebilir", "22:00 kapanış seçeneği kapatılabilir"],
+  "anahtar_kelimeler": ["aralik-kirilim", "bekleyen-emir", "xau", "seans-kutusu", "1r-hedef"]
+}

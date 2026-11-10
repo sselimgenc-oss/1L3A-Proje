@@ -1,0 +1,67 @@
+{
+  "kart_id": "daytrade__funding-1s-devam__octopustakopi",
+  "ad": "Funding 1 Saatlik Devam (00:00 UTC)",
+  "stil": "daytrade",
+  "kaynak": {
+    "url": "https://github.com/OctopusTakopi/funding-rate-alpha",
+    "lisans": "MIT",
+    "tur": "github"
+  },
+  "ozet": "00:00 UTC'de bilinen funding'e göre en yüksek decili long, en düşük decili short aç; 1 saat sonra kapat (kaynak: 1s ufukta yüksek funding yönünde pozitif devam).",
+  "kategori": "diger",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "kripto",
+  "zaman_dilimi": {
+    "islem": "1h",
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {
+      "ad": "Funding oranı",
+      "parametreler": {
+        "karar_saati": "00:00 UTC",
+        "decil": 0.1,
+        "tutus_saat": 1
+      }
+    }
+  ],
+  "long_giris": [
+    "00:00 UTC'de en yüksek funding'li %10 dilime long"
+  ],
+  "short_giris": [
+    "Aynı anda en düşük funding'li %10 dilime short"
+  ],
+  "stop_loss": null,
+  "zaman_cikisi": "Girişten 1 saat sonra tüm pozisyonları kapat",
+  "pozisyon_risk": "Dolar nötr; long ve short nominal eşit; likidite filtresi: son 90 gün ortalama günlük hacim >= 5 milyon USD; gün başına en az 20 işlem yapılabilir isim (kaynak evreni)",
+  "iddia_edilen_performans": "Kaynak iddiası (doğrulanmadı): 2025-26'da decil farkı +11,4 bp (tek yön yaklaşık 5,7 bp maliyeti karşılar); 2024-26 +8,6 bp; 2020-23 anlamsız (t=0,33). Havuzlanmış IC +%1,89",
+  "kanit": "iddia (doğrulanmadı): kaynak 'mekanizması olmayan bir olgu' diyor; icra settlement print fiyatından varsayıldığı için üst sınır; ileri OOS yok.",
+  "veri_uygun": [
+    true,
+    "Funding geçmişi ve perp OHLCV bizde var; evren 13-15 coin (kaynak 671 sözleşme), decil çok yoğunlaşır."
+  ],
+  "kodlanabilirlik": {
+    "puan": 2,
+    "gerekce": "Kural net ama icra anı (settlement fiyatı) bizde 1h bar açılışıyla vekillenmeli."
+  },
+  "belirsizlikler": [
+    "Kaynakta sabit fiyat stopu yok (yalnız getiri kırpma -%90/+%200 simülasyon vekili)",
+    "Likidasyon/ADL modellenmemiş, slipaj yok",
+    "13 coinle decil ~1 long + ~1 short; evren birebir tekrarlanamaz",
+    "Funding zaman damgası lookahead'e dikkat: karar anında bilinen son settlement kullanılmalı",
+    "Kaynak icrayı settlement print'ten varsayar; bizde 1h mum açılışı kullanılırsa sonuç değişir",
+    "Rejime bağlı: 2020-23'te etki yok"
+  ],
+  "uyumluluk_notu": "1h bar yeterli; ancak 8 bp gidiş-dönüş maliyetine karşı 3,66 bp ham fark (kaynak) çok ince kenar. Düşük öncelik.",
+  "anahtar_kelimeler": [
+    "funding",
+    "1-saat",
+    "devam",
+    "decil",
+    "00-utc"
+  ],
+  "filtreler": [],
+  "varyantlar": [],
+  "iz_suren_stop": null,
+  "kar_al": null
+}

@@ -1,0 +1,98 @@
+{
+  "kart_id": "swing__haftalik-30sma-20h-kirilim-trix__ccadic",
+  "ad": "Haftalık 30 SMA + 20 Hafta Kırılım + TRIX",
+  "stil": "swing",
+  "kaynak": {
+    "url": "https://github.com/ccadic/yahoo-weekly-trading-bot",
+    "lisans": "GPL-3.0",
+    "tur": "github"
+  },
+  "ozet": "Piyasa ve hisse haftalık 30 SMA üstündeyken, haftalık kapanış 20 haftalık zirveyi aşınca ve TRIX sinyal çizgisinin üstündeyse alınır; kısa MA/dip kırılımı veya 2 ATR stopla çıkılır.",
+  "kategori": "kirilim",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+    "islem": "1w",
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {
+      "ad": "SMA",
+      "parametreler": {
+        "periyot": 30,
+        "zaman": "haftalık"
+      }
+    },
+    {
+      "ad": "Donchian",
+      "parametreler": {
+        "yuksek": 20,
+        "dusuk": 10
+      }
+    },
+    {
+      "ad": "TRIX",
+      "parametreler": {
+        "periyot": null,
+        "sinyal": null
+      }
+    },
+    {
+      "ad": "ATR",
+      "parametreler": {
+        "carpan": 2,
+        "periyot": null
+      }
+    },
+    {
+      "ad": "EMA",
+      "parametreler": {
+        "periyot": 10,
+        "zaman": "haftalık"
+      }
+    }
+  ],
+  "long_giris": [
+    "SPY > 30 haftalık SMA",
+    "Hisse kapanış > 30 haftalık SMA ve SMA eğimi pozitif",
+    "Kapanış > 20 haftalık zirve",
+    "TRIX > TRIX sinyal çizgisi",
+    "Ort. haftalık hacim > 100 bin; volatilite üst sınırı"
+  ],
+  "short_giris": [],
+  "stop_loss": "2 ATR stop",
+  "kar_al": "yok",
+  "iz_suren_stop": null,
+  "zaman_cikisi": "Kapanış < 10 haftalık EMA veya < 10 haftalık dip ise çık",
+  "filtreler": [
+    "Hacim ve volatilite filtresi (volatilite eşiği kaynakta 0,5/0,8 çelişkili)"
+  ],
+  "pozisyon_risk": "İşlem başı %1-2 risk, 5-8 azami pozisyon",
+  "iddia_edilen_performans": "Kaynakta yıllık %15,37, PF 2,55 iddiası; backtest mi canlı mı belirsiz (iddia, doğrulanmadı)",
+  "kanit": null,
+  "veri_uygun": [
+    true,
+    "5m verisinden haftalık üretilebilir; Dukascopy ABD hisse günlüğü/haftalığı yeterli, SPY filtresi kapsamı doğrulanmalı."
+  ],
+  "kodlanabilirlik": {
+    "puan": 2,
+    "gerekce": "Çekirdek kurallar mekanik; TRIX/ATR periyodu ve volatilite eşiği kaynakta yok."
+  },
+  "belirsizlikler": [
+    "TRIX periyodu/sinyal uzunluğu yok",
+    "ATR periyodu yok",
+    "Volatilite üst sınırı çelişkili (0,5 / 0,8)",
+    "10 haftalık dip kapanış mı gün içi mi belirsiz",
+    "V2'de yerel LLM sinyal puanı var; backtesti değiştirmediği için dışlandı (ML modeli bu karta alınmadı)",
+    "GPL: kod kopyalanmadı, kural kendi cümlelerimle"
+  ],
+  "uyumluluk_notu": "Haftalık kırılım trend takibi; kripto günlükten haftalığa uyarlanabilir. Ailede benzeri yok.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+    "donchian",
+    "trix",
+    "30-hafta-sma",
+    "haftalik",
+    "kirilim"
+  ]
+}

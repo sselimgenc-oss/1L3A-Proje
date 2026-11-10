@@ -1,0 +1,61 @@
+{
+  "kart_id": "swing__kesit-dusuk-hacim-haftalik__liu",
+  "ad": "Kesitsel Hacim Faktörü: Düşük Hacimli Long, Yüksek Hacimli Short (haftalık)",
+  "stil": "swing",
+  "kaynak": {
+    "url": "https://papers.ssrn.com/abstract=3379131",
+    "lisans": "makale",
+    "tur": "makale"
+  },
+  "ozet": "Coinleri hacme göre sıralar; en düşük hacimliyi alır, en yüksek hacimliyi açığa satar. Makalede haftalık yaklaşık %3 fazla getiri raporlanıyor.",
+  "kategori": "diger",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "kripto",
+  "zaman_dilimi": {
+    "islem": "1d",
+    "ust_filtre": "1w"
+  },
+  "gostergeler": [
+    {
+      "ad": "Hacim",
+      "parametreler": {
+        "olcu": "dolar hacmi (kaynak ayrıntısı doğrulanmadı)"
+      }
+    }
+  ],
+  "long_giris": [
+    "Hafta başında evrendeki coinleri bir önceki haftanın ortalama dolar hacmine göre sırala; en düşük çeyreğe (veya k adet) long (kesim UYARLAMA)"
+  ],
+  "short_giris": [
+    "En yüksek hacimli çeyreğe short"
+  ],
+  "stop_loss": null,
+  "kar_al": null,
+  "iz_suren_stop": null,
+  "zaman_cikisi": "Haftalık yeniden dengeleme",
+  "filtreler": [],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": "Çalışma kağıdı: düşük-yüksek hacim sıfır-yatırım stratejisi ≈ %3 haftalık fazla getiri (kaynak özeti)",
+  "kanit": "Journal of Finance 77(2), 2022 (Liu, Tsyvinski, Wu). Örneklem 2014-2018, 1M$+ piyasa değerli ~1500 coin, çoğu küçük ve likit olmayan: Binance perp 13-15 majör coinde geçerlilik zayıf.",
+  "veri_uygun": [
+    true,
+    "OHLCV hacim var; ama evren dar (13-15 majör), makale küçük coinlerle çalıştı."
+  ],
+  "kodlanabilirlik": {
+    "puan": 2,
+    "gerekce": "Sıralama net, kesim oranı ve hacim tanımı uyarlama."
+  },
+  "belirsizlikler": [
+    "Majör coinlerde etki kayboluyor olabilir",
+    "Kesim oranı kaynakta doğrulanmadı",
+    "Maliyet sonrası sonuç yok"
+  ],
+  "uyumluluk_notu": "Mevcut pf__kesit_ls, pf__sinif_kesit_mom ile aynı portföy altyapısı; hacim faktörü ayrı sinyal.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+    "kesitsel",
+    "hacim",
+    "long-short",
+    "haftalik"
+  ]
+}

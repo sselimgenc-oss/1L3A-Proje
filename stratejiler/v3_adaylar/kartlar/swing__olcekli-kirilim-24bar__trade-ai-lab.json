@@ -1,0 +1,76 @@
+{
+  "kart_id": "swing__olcekli-kirilim-24bar__trade-ai-lab",
+  "ad": "Hacim-ölçekli Kırılım (k=12, z>2, 24 bar tut)",
+  "stil": "swing",
+  "kaynak": {
+    "url": "https://github.com/Trade-AI-Lab/MAD_BTC",
+    "lisans": "lisans belirtilmemiş (kopyalanmadı)",
+    "tur": "github"
+  },
+  "ozet": "4 saatlik barlarda k=12 bar kırılımı ve z>2 koşulunda long açılır, 24 bar (4 gün) tutulup çıkılır. Dondurulmuş kural 'izleme' aşamasında; Deflated Sharpe sınırda.",
+  "kategori": "kirilim",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "kripto",
+  "zaman_dilimi": {
+    "islem": "4h",
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {
+      "ad": "Kırılım",
+      "parametreler": {
+        "k": 12
+      }
+    },
+    {
+      "ad": "z-skoru",
+      "parametreler": {
+        "esik": 2
+      }
+    },
+    {
+      "ad": "Hacim sıçraması filtresi",
+      "parametreler": {
+        "esik": null
+      }
+    }
+  ],
+  "long_giris": [
+    "k=12 bar kırılımı ve z>2 birlikte (tanımları kaynakta yok)"
+  ],
+  "short_giris": [],
+  "stop_loss": null,
+  "kar_al": null,
+  "iz_suren_stop": null,
+  "zaman_cikisi": "24 bar tutma sonunda çık",
+  "filtreler": [
+    "Dondurulmuş kuralda hacim sıçraması filtresi var (parametresi yok)"
+  ],
+  "pozisyon_risk": "8 coinde eşit ağırlık eğrisi; işlem başı boyut belirtilmemiş",
+  "iddia_edilen_performans": "Havuz 8 coin: CAGR 35% (BTC al-tut 33%), maks. düşüş -26% (BTC -77%), ~%13 yatırımda; Deflated Sharpe sınırda — iddia (doğrulanmadı)",
+  "kanit": "Yazar 2026-10-25'te kuralı dondurmuş, 'watch-only, doğrulanmadı'; ileri doğrulama 100 işlemde. Sonuçlar yazarın backtesti.",
+  "veri_uygun": [
+    true,
+    "Binance 4h OHLCV var; kaynak spot, perp'e uyarlama gerekir; hacim OHLCV'de mevcut."
+  ],
+  "kodlanabilirlik": {
+    "puan": 1,
+    "gerekce": "Kırılım ve z-skoru tanımları kaynak sayfasında yok; kodda olabilir ama okunamadı."
+  },
+  "belirsizlikler": [
+    "Kırılım ve z-skoru tanımı kaynakta yok",
+    "Stop kaynakta yok",
+    "Lisans yok",
+    "Giriş yönü short destekli mi belli değil",
+    "Kural tanımı için kod dosyası (frozen_breakout.py) okunmalı"
+  ],
+  "uyumluluk_notu": "Mevcut dis__bant-kirilim-trend ile benzer olabilir; tanımlar netleşmeden kesin karşılaştırma yapılamaz.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+    "kırılım",
+    "z-skoru",
+    "hacim",
+    "4h",
+    "24-bar"
+  ]
+}

@@ -1,0 +1,86 @@
+{
+  "kart_id": "swing__ranked-alloc-etf-5__stef",
+  "ad": "Sıralamalı Varlık Dağılımı (RAAM) - 11 ETF, aylık",
+  "stil": "swing",
+  "kaynak": {
+    "url": "https://github.com/Stef-creator/Rank-Allocation-Model",
+    "lisans": "lisans belirtilmemiş (kopyalanmadı)",
+    "tur": "github"
+  },
+  "ozet": "Her ay 11 riskli ETF momentum, volatilite, ortalama korelasyon ve ATR-trend sırasına göre puanlanır; en iyi 5 eşit ağırlık alınır. Seçilen ETF'nin momentumu negatifse payı SHY'ye (nakit vekili) kayar.",
+  "kategori": "momentum",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+    "islem": "1d (aylık yeniden dengeleme)",
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {
+      "ad": "Momentum (ROC)",
+      "parametreler": {
+        "periyot": "4 ay (~84 gün)"
+      }
+    },
+    {
+      "ad": "EWMA volatilite (RiskMetrics)",
+      "parametreler": {
+        "lambda": 0.943,
+        "yumusatma": "10 gün"
+      }
+    },
+    {
+      "ad": "Ortalama ikili korelasyon",
+      "parametreler": {
+        "periyot": "4 ay"
+      }
+    },
+    {
+      "ad": "ATR bant kırılımı",
+      "parametreler": {
+        "atr_periyot": 42,
+        "carpan": 2
+      }
+    }
+  ],
+  "long_giris": [
+    "Ayın sonunda 11 ETF için M (yüksek iyi), V (düşük iyi), C (düşük iyi) sıralaması çıkar",
+    "Toplam sıra = wM*Sıra(M) + wV*Sıra(V) + wC*Sıra(C) - T + M/100 (wM=wV=wC=1; T=ATR trend sinyali, boğa ise skoru iyileştirir)",
+    "En düşük toplam sıralı 5 ETF'ye eşit ağırlık long"
+  ],
+  "short_giris": [],
+  "stop_loss": null,
+  "kar_al": null,
+  "iz_suren_stop": null,
+  "zaman_cikisi": "Aylık yeniden dengeleme",
+  "filtreler": [
+    "Seçilen ETF'nin 4 aylık momentumu negatifse o ETF'nin ağırlığı SHY'ye aktarılır"
+  ],
+  "pozisyon_risk": "Eşit ağırlık, 5 pozisyon",
+  "iddia_edilen_performans": "Yazar replikasyonu: yıllık getiri 2.50%, Sharpe 0.39, maks. düşüş -13.38% (SPY 10.34% / 0.71) — iddia (doğrulanmadı)",
+  "kanit": "Giordano 'Ranked Asset Allocation' replikasyonu, 2004-07 sonrası; yazarın kendi sonuçları, bağımsız doğrulama yok.",
+  "veri_uygun": [
+    false,
+    "Evren ETF (VV, IJH, IJR, EFA, EEM, RWR, DBC, VAW, AGG, TIP, IGOV, SHY); Dukascopy'de bu ETF'lerin hepsi var mı doğrulanmadı; ayrıca kripto/perp değil."
+  ],
+  "kodlanabilirlik": {
+    "puan": 2,
+    "gerekce": "Sıralama formülü net; T sinyalinin ayrıntısı (kalıcılık) ve negatif momentum tanımı kısmen yorum."
+  },
+  "belirsizlikler": [
+    "Kaynakta lisans yok",
+    "ATR trend sinyalinin tam tanımı ('±2, kalıcı') belirsiz",
+    "Maliyet varsayımı kaynakta yok",
+    "Getiri SPY'nin çok altında, strateji zayıf görünüyor"
+  ],
+  "uyumluluk_notu": "Aylık, düşük frekans; Dukascopy ETF kapsamı kontrol edilmeli. Portföy tahsisi, tek sembol sinyali değil.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+    "etf",
+    "sıralama",
+    "momentum",
+    "korelasyon",
+    "aylık",
+    "tahsis"
+  ]
+}
