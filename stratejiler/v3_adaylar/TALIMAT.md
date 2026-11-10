@@ -78,7 +78,7 @@ PR açıldığında dur. PR açıklamasına aday sayısını ve Fable'ın ilk 15
 Tur 1'in çıktıları (on_eleme.csv, kartlar/, adaylar.csv, fable_hakem.csv, RAPOR.md) main'de. Onları SİLME, YENİDEN YAZMA; yalnız ekle.
 Kurallar, dışlamalar, kart biçimi ve model kullanımı yukarıdaki gibi. Yeni dal aç (main'den), iş bitince PR aç, birleştirme.
 Sıra:
-1. `ham/gemini_dr_6bolge.csv` (Gemini Deep Research, 6 bölge, 69 satır). Ana oturum linkleri kontrol etti:
+1. `ham/gemini_dr_6bolge.csv` (Gemini Deep Research, 6 bölge, 69 satır) ve `ham/gemini_dr_afrika.csv` (Afrika, 8 satır; çoğu MQL5 forex/altın EA'sı: forex verimiz yok, XAU var). Ana oturum linkleri kontrol etti:
    `link_durumu`, `kod_var`, `lisans_gercek`, `tekrar` sütunlarına bak. Gemini bazı yerlerde UYDURDU (404 repo, olmayan dosya yolu,
    yanlış lisans): her satırın linkini kendin aç; 404 ise elenir. `erisilemedi` satırlar (fmz, tistory, tradingview, dergipark)
    bu ortamda engelliydi; sende açılırsa değerlendir, açılmazsa `belirsiz` yaz. Lisans için `lisans_gercek` esas; `lisans` sütununa güvenme.
