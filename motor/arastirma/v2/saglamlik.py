@@ -222,8 +222,12 @@ def saglamlik_satiri(row: dict, cikti: Path, tablo_yolu, tablo_hash: str, son: O
                 pf = kasa_pf(hg, bg, evren_t, analiz_bas, tablo_yolu)
                 s.update(s1=s1_karar(pf), s1_pf=pf, s1_hata="")
                 if bg.get("k1c_indeks"):
-                    temel_pf = kasa_pf(ham1, b1, evren_t, analiz_bas, tablo_yolu)
-                    s.update(k1c_rapor(ham1, hg, bg, analiz_bas, temel_pf, pf))
+                    # Yalnız rapor: hesaplanamazsa S1 kararı ve satır sonucu DEĞİŞMEZ; neden açıkça k1c_hata'ya yazılır.
+                    try:
+                        temel_pf = kasa_pf(ham1, b1, evren_t, analiz_bas, tablo_yolu)
+                        s.update(k1c_rapor(ham1, hg, bg, analiz_bas, temel_pf, pf), k1c_hata="")
+                    except Exception as e:  # noqa: BLE001  (görünür: k1c_hata alanı)
+                        s["k1c_hata"] = f"{type(e).__name__}: {e}"[:200]
             kaydet()
         # ---- S2
         if "s2" not in s:
