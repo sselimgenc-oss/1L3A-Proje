@@ -1,0 +1,13 @@
+LePotoRico2105/pine-script-strategies (EMA21/50 + günlük EMA200) | https://github.com/LePotoRico2105/pine-script-strategies | tekrar: 3Commas Bot (dis_envanter, EMA21/EMA50 kesişim ATR); pip/forex tanımlı
+NDAR123909/ou-statarb | https://github.com/NDAR123909/ou-statarb | tekrar: swing__pairs-coz-60-ols__rw762 / kalman-cift-zskor; katalog Sharpe negatif
+PremModhaOfficial/trad_bot_pi42 | https://github.com/PremModhaOfficial/trad_bot_pi42 | ortalama düşürme (kademeli alım) riskli yolu var; kalan kural tekrar: swing__z-skor-karsit-spy__nadirali
+xunxuntj/ETH_Perp_Trading_bot | https://github.com/xunxuntj/ETH_Perp_Trading_bot | tekrar: BTCUSD Supertrend + EMA Trend Filter (dis_envanter) / supertrend ailesi
+VeinDevTtv/vein_smc_bot | https://github.com/VeinDevTtv/vein_smc_bot | SMC/FVG/order block yorum ağırlıklı, NAS100 endeks verimizde yok; tekrar: daytrade__ters-fvg-nq__prashanthaitha24; kaynak açılmadı
+samisuleman10/ai-trade Strategy 02 v1.5 | https://github.com/samisuleman10/ai-trade | tekrar: dis__fraktal-alligator-sky; OOS PF 0.69
+LandwoIf/Cross-Sectional-Mean-Reversion | https://github.com/LandwoIf/Cross-Sectional-Mean-Reversion | tekrar: swing__kisa-vade-tersine-donus__groot; kaynak açılmadı
+lhcbenac/Personal_Repository Market Neutral | https://github.com/lhcbenac/Personal_Repository | tekrar: swing__kisa-vade-tersine-donus__groot; kaynak açılmadı
+WiseAmos/btc-perp-research | https://github.com/WiseAmos/btc-perp-research | tekrar: daytrade__ema-9-21-50-rsi-hacim__gooddinosaur (S1 EMA9/21+ADX); S2-S7 stratejileri ayrı aday olarak incelenmedi
+tomasbatovsky-png/portfolio-momentum-trading | https://github.com/tomasbatovsky-png/portfolio-momentum-trading | US100 CFD'ye özgü mutlak ATR eşiği (15-80 puan) taşınamaz; tekrar: daytrade__ilk-yari-saat-momentum__shen
+wuchuxuanfacai/jiamihuobi | https://github.com/wuchuxuanfacai/jiamihuobi | tekrar: swing__momentum-btc-rejim-top5__adensvaz; stopsuz, grid seçimli; kaynak açılmadı
+zhizhiL/CUATS-Trading-Challenge-2024-2025 | https://github.com/zhizhiL/CUATS-Trading-Challenge-2024-2025 | tekrar: swing__ranked-alloc-etf-5__stef; kaynak açılmadı
+adamincident/TRB | https://github.com/adamincident/TRB | tekrar: daytrade__ema-9-21-50-rsi-hacim__gooddinosaur; kaynak açılmadı

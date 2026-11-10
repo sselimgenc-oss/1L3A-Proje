@@ -1,0 +1,80 @@
+{
+  "kart_id": "swing__50g-kirilim-sma-filtre-3atr-iz__wilki2021",
+  "ad": "50 Gün Kırılım + SMA50/100 Filtre + 3xATR İz Süren Stop",
+  "stil": "swing",
+  "kaynak": {
+    "url": "https://github.com/wilki2021/hedgeit",
+    "lisans": "belirtilmemiş",
+    "tur": "github"
+  },
+  "ozet": "Günlük barda kapanış son 50 günün en yüksek (düşük) seviyesine eşit/üstündeyse ve SMA50, SMA100'ün üstündeyse (altındaysa) long (short) açılır; çıkış yalnız ATR tabanlı iz süren stopla olur. Çok piyasalı trend takip.",
+  "kategori": "kirilim",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "vadeli",
+  "zaman_dilimi": {
+    "islem": "1d",
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {
+      "ad": "Donchian (en yüksek/en düşük kapanış-bar)",
+      "parametreler": {
+        "periyot": 50
+      }
+    },
+    {
+      "ad": "SMA",
+      "parametreler": {
+        "kisa": 50,
+        "uzun": 100
+      }
+    },
+    {
+      "ad": "ATR",
+      "parametreler": {
+        "periyot": 100
+      }
+    }
+  ],
+  "long_giris": [
+    "Pozisyon yokken: SMA(50) >= SMA(100) ve kapanış >= son 50 barın en yüksek değeri"
+  ],
+  "short_giris": [
+    "Pozisyon yokken: SMA(50) <= SMA(100) ve kapanış <= son 50 barın en düşük değeri"
+  ],
+  "stop_loss": "Giriş sonrası ilk stop: girişten beri en yüksek seviye - 3 x ATR(100) (short için en düşük + 3 x ATR)",
+  "kar_al": null,
+  "iz_suren_stop": "Long: işlem boyunca görülen en yüksek seviye - 3 x ATR(100); short simetrik. Çıkış yalnız bu stopla.",
+  "zaman_cikisi": null,
+  "filtreler": [
+    "SMA50/SMA100 yön filtresi"
+  ],
+  "pozisyon_risk": "ATR tabanlı: hisse sayısı = özsermaye x %0,2 / (kontrat değeri x ATR(100)); kontrat çarpanı gerekir",
+  "iddia_edilen_performans": null,
+  "kanit": null,
+  "veri_uygun": [
+    true,
+    "OHLCV günlük yeterli; kripto perp ve Dukascopy emtia/hisse üzerinde kurulabilir. Kontrat çarpanı gerekmez (yüzde risk ile boyut)."
+  ],
+  "kodlanabilirlik": {
+    "puan": 3,
+    "gerekce": "Tüm kurallar kodda sayısal; stop kontrol sırası (gün içi mi kapanış mı) ayarlanabilir."
+  },
+  "belirsizlikler": [
+    "Kaynakta performans sonucu doğrulanmadı",
+    "Aynı bar kapanışı sinyalinin hangi fiyattan doldurulduğu çerçeveye bağlı (sonraki bar açılışı alınmalı)",
+    "Gün içi stopun bar içi dolum varsayımı (kodda intradayStop=True)",
+    "Lisans belirtilmemiş: yalnız kural özetlendi"
+  ],
+  "uyumluluk_notu": "Mevcut swing__252g-zirve-kirilim-yuzde16-iz (yüzde stoplu zirve kırılımı) ve donchian-ansambl ile benzer aile; bu kart SMA50/100 filtresi ve ATR(100) çarpanlı stopla ayrışır. Kripto ve emtia günlükte uygulanır.",
+  "varyantlar": [
+    "Aynı repoda SMA20/200 kesişim stratejisi (stop 6 ATR) var; ayrı kart yazılmadı"
+  ],
+  "anahtar_kelimeler": [
+    "donchian",
+    "kirilim",
+    "sma-filtre",
+    "atr-iz-suren",
+    "trend-takip"
+  ]
+}
