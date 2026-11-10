@@ -115,7 +115,7 @@ def veri():
 def test_kayit_15_sinif_ve_adlar():
     t = tum_portfoy_stratejileri()
     assert len(SINIFLAR) == 15 and len(t) == len(SINIFLAR) + len(EK_SINIFLAR) + len(V2_SINIFLAR) + len(V3_SINIFLAR) == 25
-    assert all(ad.startswith(("pf__", "v3__")) and c.ad == ad for ad, c in t.items())
+    assert all(ad.startswith("pf__") and c.ad == ad for ad, c in t.items())
 
 
 @pytest.mark.parametrize("sinif", SINIFLAR, ids=lambda c: c.ad)

@@ -38,6 +38,7 @@ from motor.backtest.walk_forward import pencereler_uret
 from motor.portfoy import veri as pveri
 from motor.portfoy.motor import PortfoyAyarlari, portfoy_backtest
 from motor.portfoy.stratejiler import tum_portfoy_stratejileri
+from motor.strateji import funding
 from motor.veri import depo
 
 STIL = "portfoy"
@@ -100,10 +101,11 @@ def veri_yukle(evren=None, tf: str = TF):
     return _VERI[k]
 
 
-def _kos(st, v, f, evren, ay, gecikme: int = 0):
+def _kos(st, v, f, evren, ay, gecikme: int = 0, tf: str = TF):
     sec = wp.gerekli_semboller(st, evren)
     stx = GecikmePf(st, gecikme) if gecikme else st
-    return portfoy_backtest({s: v[s] for s in sec}, stx, ay, {s: f[s] for s in sec if s in f})
+    hazir = {s: funding.stratejiye_hazirla(st, v[s], f.get(s), s, tf) for s in sec}
+    return portfoy_backtest(hazir, stx, ay, {s: f[s] for s in sec if s in f})
 
 
 def aday_hesap(r) -> wp.AdayHesap:
@@ -134,7 +136,7 @@ def pf_gorev(ad: str, carpan: float = 1.0, gecikme: int = 0, evren=None, tf: str
         hesaplar, hatalar = {}, []
         for etiket, st in adaylar:
             try:
-                hesaplar[etiket] = aday_hesap(_kos(st, v, f, evren_t, ay, gecikme))
+                hesaplar[etiket] = aday_hesap(_kos(st, v, f, evren_t, ay, gecikme, tf))
             except Exception as e:  # noqa: BLE001
                 hatalar.append(f"{etiket}: {type(e).__name__}: {e}"[:160])
         satir.update(n_kosu=len(hesaplar), n_aday_hata=len(hatalar), hata_ornegi=hatalar[0] if hatalar else "")
@@ -279,7 +281,7 @@ def pf_sag_icerik(g: dict, satir: dict):
             gorulen.add(kimlik)
             if not st.uygun_mu(evren_t):
                 raise ValueError("evrende uygun değil")
-            gl = sp._gunluk(_kos(st, v, f, evren_t, ay))
+            gl = sp._gunluk(_kos(st, v, f, evren_t, ay, tf=tf))
             sh = sp.sharpe(gl[(gl.index >= oos_bas) & (gl.index < oos_bit)].to_numpy())
             if not np.isfinite(sh):
                 raise ValueError("Sharpe hesaplanamadı")
@@ -317,7 +319,7 @@ def holdout_kos(ad: str, etiket: str, tf: str = TF, dislanan=(), ayar=None) -> d
     st = dict(wp.aday_listesi(ad, evren_t, True)[0]).get(etiket)
     if st is None:
         raise KeyError(f"aday bulunamadı: {etiket}")
-    r = _kos(st, v, f, evren_t, maliyet_pf(evren_t, 1.0))
+    r = _kos(st, v, f, evren_t, maliyet_pf(evren_t, 1.0), tf=tf)
     g = sp._gunluk(r)
     g = g[g.index >= we.HOLDOUT_BAS]
     t = r.islemler

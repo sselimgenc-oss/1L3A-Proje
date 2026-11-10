@@ -17,6 +17,7 @@ class _FundingKesit(PortfoyStratejisi):
     settlement olmalıdır. Eksik sütun sıfır varsayılmaz, açık hata verir.
     """
 
+    funding_gerekli = True
     min_sembol = 2
     varsayilan_parametreler = {
         "semboller": KRIPTO, "dilim": 0.1, "takvim": "D", "bakis_gun": 0,
@@ -27,6 +28,9 @@ class _FundingKesit(PortfoyStratejisi):
 
     def etkin_semboller(self, mevcut):
         return tuple(s for s in self.parametreler["semboller"] if s in set(mevcut))
+
+    def ek_semboller(self):
+        return ()
 
     def uygun_mu(self, mevcut):
         return len(self.etkin_semboller(mevcut)) >= self.min_sembol
@@ -98,7 +102,7 @@ class Funding1sDevam(_FundingKesit):
     hedefi bir sonraki bar açılışında doldurduğundan saatlik veri kullanılmalıdır.
     """
 
-    ad = "v3__funding-1s-devam"
+    ad = "pf__v3-funding-1s-devam"
     varsayilan_parametreler = {**_FundingKesit.varsayilan_parametreler, "devam": True}
 
     def hedefler(self, veriler):
@@ -116,7 +120,7 @@ class FundingKesitCarry(_FundingKesit):
     Kaynak: https://github.com/OctopusTakopi/funding-rate-alpha.
     """
 
-    ad = "v3__funding-kesit-decil-carry"
+    ad = "pf__v3-funding-kesit-decil-carry"
 
 
 class Funding7gTercil(_FundingKesit):
@@ -125,7 +129,7 @@ class Funding7gTercil(_FundingKesit):
     Kaynak: https://bryanvine.github.io/alpha-research/paper2.html.
     """
 
-    ad = "v3__funding-7g-haftalik-tercil"
+    ad = "pf__v3-funding-7g-haftalik-tercil"
     varsayilan_parametreler = {
         **_FundingKesit.varsayilan_parametreler, "dilim": 1.0 / 3.0,
         "takvim": "W", "bakis_gun": 7, "gecikme_gun": 1,
@@ -139,7 +143,7 @@ class FipKesitsel(PfTemel):
     tanımdır: işaret(90g getiri) * (pozitif gün - negatif gün) / 90.
     """
 
-    ad = "v3__fip-kesitsel-momentum"
+    ad = "pf__v3-fip-kesitsel-momentum"
     min_sembol = 2
     varsayilan_parametreler = {
         **ORTAK_PARAMETRELER, "semboller": KRIPTO, "lookback_gun": 90,

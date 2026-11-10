@@ -8,8 +8,12 @@ import numpy as np
 import pandas as pd
 import pytest
 
+from motor.arastirma import wf_evren_portfoy
+from motor.arastirma.v2 import ham
+from motor.portfoy.motor import PortfoyAyarlari
 from motor.portfoy.stratejiler import tum_portfoy_stratejileri
 from motor.portfoy.stratejiler.v3 import FipKesitsel, Funding1sDevam, Funding7gTercil, FundingKesitCarry
+from motor.strateji import funding
 from motor.strateji.dis.v3_adaylar import (
     AdaptiveTrend6s, AsyaKutuKirilimMa50, DonchianAnsambl, HaftalikSmaTrixKirilim,
     KirmiziMumHacim, Saat2123Utc, SaatlikAsiriTepki, VolatiliteKirilimK05,
@@ -62,7 +66,12 @@ def test_saatlik_asiri_hareketin_tersine_girer():
 @pytest.mark.parametrize("sinif,n", [(AdaptiveTrend6s, 80), (DonchianAnsambl, 180), (HaftalikSmaTrixKirilim, 180)])
 def test_trend_adaylari_yukseliste_long_ve_stop_uretir(sinif, n):
     x = np.linspace(0, 1.0, n)
-    fiyat = 50 * np.exp(2 * x * x) if sinif is HaftalikSmaTrixKirilim else np.linspace(50, 200, n)
+    if sinif is HaftalikSmaTrixKirilim:
+        fiyat = 50 * np.exp(2 * x * x)
+    elif sinif is DonchianAnsambl:
+        fiyat = 50 * np.exp(3 * x)
+    else:
+        fiyat = np.linspace(50, 200, n)
     df = mum(fiyat, "7D" if sinif is HaftalikSmaTrixKirilim else "6h")
     g = girisleri(sinif().sinyaller(df))
     assert len(g) > 0 and (g.yon == 1).all() and g.stop.notna().all()
@@ -79,6 +88,13 @@ def test_trend_adaylarinin_kendi_cikis_kurallari_tetiklenir():
     haftalik_fiyat = np.r_[50 * np.exp(2 * x * x), np.linspace(50 * np.e ** 2, 40, 30)]
     haftalik = HaftalikSmaTrixKirilim().sinyaller(mum(haftalik_fiyat, "7D"))
     assert haftalik["cikis"].any()
+
+
+def test_donchian_ansambl_en_az_iki_oy_ister():
+    fiyat = np.r_[np.full(70, 100.0), 130.0, np.full(48, 100.0), 120.0, 140.0]
+    sig = DonchianAnsambl().sinyaller(mum(fiyat, "1D", genlik=0.001))
+    assert sig.iloc[-2].yon == 0
+    assert sig.iloc[-1].yon == 1
 
 
 def test_kirmizi_yuksek_hacim_ertesi_gun_sinyali():
@@ -133,6 +149,57 @@ def test_funding_eksigi_sessizce_sifir_sayilmaz():
         FundingKesitCarry().sinyaller(veri)
 
 
+def ham_funding_verisi():
+    v = {s: df.drop(columns="funding_orani") for s, df in pf_veri("1D", 140).items()}
+    f = {}
+    for i, (s, df) in enumerate(v.items()):
+        idx = df.index - pd.Timedelta(hours=1)
+        f[s] = pd.DataFrame({"oran": np.full(len(idx), (-0.001, 0.0, 0.001)[i])}, index=idx)
+    return v, f
+
+
+def test_portfoy_kos_funding_sutununu_nedensel_hazirlar(monkeypatch):
+    v, f = ham_funding_verisi()
+    cagrilar = []
+    asil = funding.stratejiye_hazirla
+
+    def kaydet(st, mumlar, fund, sembol="?", aralik=None):
+        hazir = asil(st, mumlar, fund, sembol, aralik)
+        cagrilar.append((sembol, aralik, hazir["funding_orani"].iloc[0]))
+        return hazir
+
+    monkeypatch.setattr(funding, "stratejiye_hazirla", kaydet)
+    st = FundingKesitCarry(semboller=tuple(v))
+    sonuc = wf_evren_portfoy._kos(st, v, f, tuple(v), PortfoyAyarlari(limit_modu="olc"), tf="1d")
+    assert len(sonuc.gunluk_ozsermaye) > 0
+    assert {x[0] for x in cagrilar} == set(v)
+    assert all(x[1] == "1d" and pd.notna(x[2]) for x in cagrilar)
+    assert all("funding_orani" not in df for df in v.values())
+
+
+def test_portfoy_kos_funding_dosyasi_eksikse_acik_hata():
+    v, f = ham_funding_verisi()
+    f.pop("BTCUSDT")
+    st = FundingKesitCarry(semboller=tuple(v))
+    with pytest.raises(funding.FundingYokHatasi, match="BTCUSDT.*funding dosyası yok"):
+        wf_evren_portfoy._kos(st, v, f, tuple(v), PortfoyAyarlari(limit_modu="olc"), tf="1d")
+
+
+def test_v2_ham_pf_gorev_funding_hazirlar_ve_eksigi_raporlar(monkeypatch, tmp_path):
+    v, f = ham_funding_verisi()
+    monkeypatch.setattr(wf_evren_portfoy, "veri_yukle", lambda evren, tf: (v, f, []))
+    monkeypatch.setattr(ham, "sizinti_kontrol", lambda *args: None)
+    monkeypatch.setattr(ham, "varsayilan_pf", lambda ad, evren: FundingKesitCarry(semboller=evren))
+    monkeypatch.setattr(ham, "maliyet_pf", lambda *args: PortfoyAyarlari(limit_modu="olc"))
+    monkeypatch.setattr(ham, "pf_fonlama_duzeltmesi", lambda getiri, *args: (getiri, 0.0))
+    tablo = tmp_path / "maliyet.csv"
+    meta = ham.pf_gorev(FundingKesitCarry.ad, 1.0, tmp_path / "tam", tablo, "hash", yeniden=True)
+    assert meta.get("hata", "") == ""
+    f.pop("ETHUSDT")
+    meta = ham.pf_gorev(FundingKesitCarry.ad, 1.0, tmp_path / "eksik", tablo, "hash", yeniden=True)
+    assert "FundingYokHatasi" in meta["hata"] and "ETHUSDT" in meta["hata"]
+
+
 def test_fip_ust_long_alt_short_ve_stoplu():
     h, s = FipKesitsel().sinyaller(pf_veri())
     acik = h.dropna(how="all")
@@ -146,10 +213,12 @@ def test_kayit_ve_kodlama_csv_ilk_parti_tam():
     tek = tum_stratejiler()
     pf = tum_portfoy_stratejileri()
     assert sum(a.startswith("v3__") for a in tek) == 8
-    assert sum(a.startswith("v3__") for a in pf) == 4
+    assert sum(a.startswith("pf__v3-") for a in pf) == 4
     yol = KOK / "stratejiler/v3_adaylar/kodlama_v3.csv"
     with yol.open(encoding="utf-8", newline="") as f:
         satirlar = list(csv.DictReader(f))
     assert len(satirlar) == 14
-    assert {r["durum"] for r in satirlar} == {"kodlandi", "tekrar"}
-    assert sum(r["durum"] == "kodlandi" for r in satirlar) == 12
+    assert {r["durum"] for r in satirlar} == {"kodlandi", "tekrar", "altyapi_yok"}
+    assert sum(r["durum"] == "kodlandi" for r in satirlar) == 11
+    saatlik = next(r for r in satirlar if r["kart_id"] == "daytrade__funding-1s-devam__octopustakopi")
+    assert saatlik["durum"] == "altyapi_yok" and "1d" in saatlik["not"]

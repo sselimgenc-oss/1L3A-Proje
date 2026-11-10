@@ -25,7 +25,7 @@ V2_SINIFLAR = (SinifIciKesitMom, SinifIciKesitDonus)
 
 
 def tum_portfoy_stratejileri() -> dict:
-    """{ad: sınıf} (ad = ``pf__...`` veya v3 kartlarında ``v3__...``)."""
+    """{ad: sınıf} (ad = ``pf__...``)."""
     tum = SINIFLAR + EK_SINIFLAR + V2_SINIFLAR + V3_SINIFLAR
     s = {c.ad: c for c in tum}
     if len(s) != len(tum):

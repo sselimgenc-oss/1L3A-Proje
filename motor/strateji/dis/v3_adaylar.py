@@ -168,7 +168,7 @@ class DonchianAnsambl(Strateji):
         for n in p["pencereler"]:
             oy += (k > m["yuksek"].shift(1).rolling(int(n), min_periods=int(n)).max()).astype(int)
         cikis = k < m["dusuk"].shift(1).rolling(int(p["cikis_n"]), min_periods=int(p["cikis_n"])).min()
-        return _atr_cerceve(m, oy > 0, False, p["atr_k"], p["atr_n"], cikis=cikis)
+        return _atr_cerceve(m, oy >= 2, False, p["atr_k"], p["atr_n"], cikis=cikis)
 
 
 class HaftalikSmaTrixKirilim(Strateji):
