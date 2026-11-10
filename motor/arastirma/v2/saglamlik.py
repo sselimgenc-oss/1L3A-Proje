@@ -15,6 +15,7 @@ from __future__ import annotations
 import json
 import math
 import time
+from collections import Counter, defaultdict
 from pathlib import Path
 from typing import Optional
 
@@ -65,7 +66,8 @@ def strateji_ham(st, tf: str, evren_t: tuple, tablo_yolu, gecikme: int = 0, carp
     """Verilen strateji nesnesini evrenin her enstrümanında geliştirme döneminde koşar (ham.ham_gorev ile AYNI yol: hazırla ->
     backtest -> islem_hazirla). -> ({sembol: ham df}, bilgi{veri_bas, veri_bit, disarida, hatali, hata_ornegi}).
     Verisi olmayan enstrüman 'disarida'; diğer her istisna 'hatali' (sayılır, çağıran satırı 'hata' yapar). HoldoutSizintisi yutulmaz."""
-    ham, bilgi = {}, {"veri_bas": {}, "veri_bit": {}, "disarida": [], "hatali": [], "hata_ornegi": ""}
+    ham, bilgi = {}, {"veri_bas": {}, "veri_bit": {}, "disarida": [], "hatali": [], "hata_ornegi": "",
+                      "k1c_indeks": {}, "k1c_reddedilenler": {}}
     run = we.GecikmeliStrateji(st, gecikme) if gecikme else st
     for s in evren_t:
         try:
@@ -89,9 +91,56 @@ def strateji_ham(st, tf: str, evren_t: tuple, tablo_yolu, gecikme: int = 0, carp
             bilgi["hata_ornegi"] = bilgi["hata_ornegi"] or f"{s}: {type(e).__name__}: {e}"[:200]
             continue
         ham[s] = h
+        if gecikme:
+            bilgi["k1c_indeks"][s] = mumlar.index
+            bilgi["k1c_reddedilenler"][s] = dict(Counter(x["neden"] for x in res.reddedilenler))
         bilgi["veri_bas"][s] = hm.zaman_utc(mumlar.index[0])
         bilgi["veri_bit"][s] = hm.zaman_utc(mumlar.index[-1])
     return ham, bilgi
+
+
+def k1c_rapor(temel: dict, gecikmeli: dict, bilgi: dict, analiz_bas, temel_pf: float, gecikmeli_pf: float) -> dict:
+    """S1'e dokunmadan, aynı sinyal mumundan gelen işlemlerin R ayrışımını raporla.
+
+    Motor girişleri sinyalden bir sonraki mum açılışındadır; S1'de bu mesafe iki mumdur.
+    Aynı sinyalden yinelenen işlemler sıra numarasıyla bire bir eşleştirilir.
+    """
+    def anahtarlar(df, idx, gecikme):
+        if df is None or not len(df):
+            return defaultdict(list)
+        d = df[pd.DatetimeIndex(df["giris_zamani"]) >= analiz_bas]
+        giris = pd.DatetimeIndex(d["giris_zamani"])
+        konum = idx.get_indexer(giris)
+        if (konum < 1 + gecikme).any():
+            raise ValueError("K1c giriş zamanı mum indeksinde bulunamadı")
+        sonuc = defaultdict(list)
+        for p, yon, r in zip(konum, d["yon"], d["r"]):
+            sonuc[(idx[p - 1 - gecikme], int(yon))].append(float(r))
+        return sonuc
+
+    sayim = Counter()
+    temel_es, gecikme_es, atlanan = [], [], []
+    for sembol, idx in bilgi.get("k1c_indeks", {}).items():
+        a = anahtarlar(temel.get(sembol), idx, 0)
+        b = anahtarlar(gecikmeli.get(sembol), idx, 1)
+        for anahtar in a.keys() | b.keys():
+            x, y = a[anahtar], b[anahtar]
+            n = min(len(x), len(y))
+            temel_es.extend(x[:n])
+            gecikme_es.extend(y[:n])
+            atlanan.extend(x[n:])
+            sayim["yalniz_gecikmeli"] += len(y) - n
+        for neden, adet in bilgi.get("k1c_reddedilenler", {}).get(sembol, {}).items():
+            sayim[neden] += adet
+    return {"k1c_eslesen_islem": len(temel_es), "k1c_yalniz_temel": len(atlanan),
+            "k1c_yalniz_gecikmeli": sayim["yalniz_gecikmeli"],
+            "k1c_reddedilenler": json.dumps({k: sayim[k] for k in sorted(sayim) if k != "yalniz_gecikmeli"}, ensure_ascii=False),
+            "k1c_reddedilen_gecersiz_stop": sayim["gecersiz_stop"],
+            "k1c_eslesen_temel_pf": pf_r(temel_es), "k1c_eslesen_gecikmeli_pf": pf_r(gecikme_es),
+            "k1c_atlanan_toplam_r": float(sum(atlanan)),
+            "k1c_atlanan_ortalama_r": float(np.mean(atlanan)) if atlanan else math.nan,
+            "k1c_aciklama_gerekli": bool(math.isfinite(gecikmeli_pf) and math.isfinite(temel_pf)
+                                         and gecikmeli_pf > temel_pf)}
 
 
 def evren_pf(ham: dict, analiz_bas) -> float:
@@ -172,6 +221,13 @@ def saglamlik_satiri(row: dict, cikti: Path, tablo_yolu, tablo_hash: str, son: O
             else:
                 pf = kasa_pf(hg, bg, evren_t, analiz_bas, tablo_yolu)
                 s.update(s1=s1_karar(pf), s1_pf=pf, s1_hata="")
+                if bg.get("k1c_indeks"):
+                    # Yalnız rapor: hesaplanamazsa S1 kararı ve satır sonucu DEĞİŞMEZ; neden açıkça k1c_hata'ya yazılır.
+                    try:
+                        temel_pf = kasa_pf(ham1, b1, evren_t, analiz_bas, tablo_yolu)
+                        s.update(k1c_rapor(ham1, hg, bg, analiz_bas, temel_pf, pf), k1c_hata="")
+                    except Exception as e:  # noqa: BLE001  (görünür: k1c_hata alanı)
+                        s["k1c_hata"] = f"{type(e).__name__}: {e}"[:200]
             kaydet()
         # ---- S2
         if "s2" not in s:
