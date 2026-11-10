@@ -123,6 +123,16 @@ Ana ders: önceki sonuçlar OOS'a bakılarak seçilmiş ve kâr birkaç işlemde
   (+%7.8, p .0005, E5 kill), haftalik-macd-gunluk-ma 1d (+%2.4, p .019), e0v1en 15m kripto (+%2.0, p .0015), lube 1d
   (+%3.0, p .016, yalnız 20 işlem, E2), hma-atr-rider 1d (+%2.8, p .016, E5 kill), voltarget-trend 1d (+%2.5, p .023, E4).
   aroon-stochrsi-ema-dip 15m: p .036 ama net −%0.3. Paper önerisi kullanıcıya sunuldu (mühürlü 2 "doğrulandı" + keşif "iyi göründü").
+- 2026-11-10 (KULLANICI onayı): paper seti = 10 strateji (doğrulandı: gauss-stoch-eth 1d, ewo-ema-ofset 15m; iyi göründü: yukarıdaki 8).
+  Lider kararı: her strateji kendi sanal kasasında (10.000 USD, s=0.5, sert limitler kasa başına) — holdout ölçümüyle aynı, şanslılar tek tek elenir.
+  Kabul şartı: tekrar modu holdout dönemindeki neti yeniden üretmeli. Eski 7'li deneme sürüşünün durumu silinmez, kenara alınır.
+- 2026-11-10: paper v2 kodu hazır (motor/canli/paper_v2.py, 10 hesap, kasa başı s=0.5, sert limitler kasa başına; KURULUM §12).
+  Kabul testi: 6 strateji holdout'a ≤0.45 puan yakın. 4'ünde fark büyük: gauss-stoch-eth +10.4→+6.1, jt-awesome +23.1→+8.9,
+  hma-atr-rider +2.8→+9.6, voltarget +2.5→+1.3. Neden (ölçüldü): holdout oynatması (secim.yeniden_oyna) %5 toplam stop riskini
+  giriş riskiyle sabit sayıyor; motorlar (backtest/paper/canlı) anlık riski sayıyor. Limitsiz karşılaştırmada işlem mekaniği uyuşuyor.
+  LİDER KARARI: paper motor kuralıyla çalışır (canlıda geçerli olacak kural bu); holdout oynatmasının limit yaklaşıklığı bilinen
+  sınırlama olarak kaydedildi, resmi holdout sonucu değiştirilmez. Sonuç: jt'nin +%23'ünün büyük kısmı limit yaklaşıklığından.
+  Ayrıntı: sonuclar/paper_v2/uyum_raporu.md. Kilit günlüğüne bir ajan ön denemesi 4 satır 'bench' gerekçesiyle yazdı; dürüst kayıt olarak kalır.
 - 2026-11-09 23:11 UTC: v2 HOLDOUT (kullanıcı onayıyla, tek sefer; 2025-11-08 → 2026-11-06): SET KAPISI GEÇTİ.
   Set net +%13.4 (tek kasa, maliyet ×1, TradFi funding dahil, işlem başı %0.5), p_set 0.0002; hatalar boş (beyan 1 sağlandı).
   gauss-stoch-eth 1d: 159 işlem, net +%10.4, PF(R) 1.53, K2 p 0.015. ewo-ema-ofset 15m: 46 işlem, net +%3.7, PF(R) 1.64,

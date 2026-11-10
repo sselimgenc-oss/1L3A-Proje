@@ -1,4 +1,9 @@
-"""Paper trading (Aşama 4): final set (7 strateji) canlı Binance herkese açık verisiyle, SANAL emirlerle.
+"""Paper trading (Aşama 4): canlı Binance herkese açık verisiyle, SANAL emirlerle.
+
+VARSAYILAN SET = v2 (2026-11-10): 10 strateji, HER BİRİ KENDİ 10.000 USD sanal kasasında (motor/canli/paper_v2.py,
+stratejiler/paper_v2_seti.json). Aşağıdaki "final set (7 strateji, tek hesap)" yolu `--set eski` ile hâlâ çalışır (yalnız geriye
+uyumluluk; eski durum dosyasıyla v2 seti karıştırılmaz: v2, eski kaydı açık hatayla reddeder).
+Eski (7 strateji) açıklama:
 
 Gerçek emir YOK, API anahtarı YOK (yalnız herkese açık REST/WS). Limitler UYGULANIR: işlem başı %1 (grup özsermayesinde),
 toplam stop riski %5, 3x, günlük -%3 (o gün yeni işlem yok + açıklar kapanır), kill %20 (her şey durur). İki kol (tek-grafik +
@@ -70,6 +75,7 @@ class Paper:
         self.strateji_gun_tsi: dict = {}         # aynısı TSİ günü kesimiyle (pano dönemsel getiri)
         self.bildirim = None                     # callback(tur, mesaj) (Telegram vb.); None: yok
         self._limit_gorulen = 0
+        self.karar_onbellek: Optional[dict] = None   # tekrar modu hızlandırması (tek_evren): {(kol_kimligi, t): karar}; canlıda None
         # kalp atışı (kalp_atisi.py): düzenli zaman damgası; yeniden başlatmadaki kesinti süresi bundan ölçülür
         self.kalp_atisi: Optional[str] = None     # son kalp atışı (UTC ISO); paper_state.json'a da yazılır
         self.baslangic_zamani: Optional[str] = None
@@ -104,11 +110,15 @@ class Paper:
             self.motor.fiyat_serisi(s, *self.kaynak.fiyat_dizisi(s))
             self.motor.funding_serisi(s, *self.kaynak.funding_dizisi(s))
 
-    def _karar(self, b: Birim, t) -> dict:
+    def _karar(self, b: Birim, t, mumlar: Optional[dict] = None) -> dict:
         td = self.tanim_ad[b.ad]
         if td.kol == "tek_grafik":
             m = self.kaynak.gecmis(td.sembol, td.tf, t)
             return psg.tek_karar(td, m, self.kaynak.funding_df(td.sembol))
+        if td.kol == "tek_evren":
+            if mumlar is None:
+                raise RuntimeError(f"{b.ad}: tek_evren kararı için satır mumları gerekli")
+            return psg.evren_karar(td, t, mumlar, lambda s: self.kaynak.gecmis(s, td.tf, t), self.kaynak.funding_df, self.karar_onbellek)
         k, _, son = psg.pf_karar(td, self._mumlar_t(b, t))
         if son != t:
             raise RuntimeError(f"{b.ad}: portföy ekseni son satırı {son} != işlenen satır {t}")
@@ -131,16 +141,36 @@ class Paper:
             if sr is None:
                 raise RuntimeError(f"{b.ad}: başlangıç için kapanmış mum yok")
             t, mumlar = sr
+            if self.tanim_ad[b.ad].kol == "tek_evren":
+                self._evren_baslat(b, self.tanim_ad[b.ad], simdi, t)
+                continue
             self._motor_besle(b)
-            self.motor.ilk_karar(b, t, mumlar, self._karar(b, t))
+            self.motor.ilk_karar(b, t, mumlar, self._karar(b, t, mumlar))
             b.son_t = t
         self.baslatildi = True
+
+    def _evren_baslat(self, b: Birim, td, simdi, t) -> None:
+        """tek_evren başlangıcı: her sembol KENDİ son kapanmış barının kararıyla başlar (ortak eksenin son satırında mumu olmayan
+        sembol - ör. hafta sonu satırında hisse - Cuma kararını kaybetmesin). Dolum yok; bekleyen emirler kurulur."""
+        mumlar, kararlar = {}, {}
+        for s in b.semboller:
+            sr = self.kaynak.son_satir(Birim(f"{b.ad}#{s}", b.tf, b.aralik, [], [s]), simdi)
+            if sr is None:
+                mumlar[s] = None
+                continue
+            ts, satir = sr
+            mumlar[s] = satir[s]
+            kararlar.update(psg.evren_karar(td, ts, {s: satir[s]}, lambda x, ts=ts: self.kaynak.gecmis(x, td.tf, ts),
+                                            self.kaynak.funding_df, self.karar_onbellek))
+        self._motor_besle(b)
+        self.motor.ilk_karar(b, t, mumlar, kararlar)
+        b.son_t = t
 
     # ------------------------------------------------------------------ işleme
     def isle(self, b: Birim, t, mumlar: dict, son_satir: bool = False):
         self._motor_besle(b)
         self.motor.acilis_fazi(b, t, mumlar)
-        self.motor.kapanis_fazi(b, t, lambda: self._karar(b, t), son_satir)
+        self.motor.kapanis_fazi(b, t, lambda: self._karar(b, t, mumlar), son_satir)
         b.son_t = t
         self.satir_sayisi += 1
         self._satir_sonrasi(b, t)
@@ -269,6 +299,11 @@ class Paper:
         if not yol.exists():
             return False
         d = _dec(json.loads(yol.read_text(encoding="utf-8")))
+        self.sozlukten_yukle(d, ayar_guncelle, olay_yaz)
+        return True
+
+    def sozlukten_yukle(self, d: dict, ayar_guncelle: bool = False, olay_yaz: bool = True) -> None:
+        """`yukle`nin dosya okumadan sonraki gövdesi (çok hesaplı paper_v2 her hesabın kayıt sözlüğünü buraya verir)."""
         if d["surum"] != SURUM:
             raise RuntimeError(f"durum dosyası sürümü uyumsuz: {d['surum']}")
         fark = {k: (d["ayarlar"].get(k), t.ayar) for k, t in self.tanim_ad.items() if d["ayarlar"].get(k) != t.ayar}
@@ -313,7 +348,6 @@ class Paper:
                 raise RuntimeError(f"{b.ad}: kayıtlı durumda son işlenen satır yok")
             self._motor_besle(b)
         self.baslatildi = True
-        return True
 
 
 # ---------------------------------------------------------------------------- tekrar modu
@@ -355,7 +389,18 @@ def _tanimlara_veri_yok_isle(tanimlar: list, esl: dict) -> None:
     """Eşlemesi bulunamayan/TRADING olmayan sembol gerektiren stratejiler 'veri yok' işaretlenir (uydurma yok)."""
     for t in tanimlar:
         eksik = [f"{s}: {esl[s][1]}" for s in t.veri_semboller if esl.get(s, (None, "eşleme tablosunda yok"))[0] is None]
-        if eksik:
+        if not eksik:
+            continue
+        if t.kol == "tek_evren":
+            # çok sembollü tek-grafik stratejisi: eşlemesi olmayan semboller evrenden DÜŞER (görünür: disarida -> uyarı/olay/ozet.notlar);
+            # hiçbiri kalmazsa strateji 'veri yok'. Portföyde (ortak evren bütünlüğü) tüm strateji 'veri yok' kalır.
+            kalan = [s for s in t.veri_semboller if esl.get(s, (None, ""))[0] is not None]
+            t.disarida = {s: esl.get(s, (None, "eşleme tablosunda yok"))[1] for s in t.veri_semboller if s not in kalan}
+            if kalan:
+                t.evren = tuple(kalan)
+            else:
+                t.veri_yok = "; ".join(eksik)
+        else:
             t.veri_yok = "; ".join(eksik)
 
 
@@ -373,7 +418,7 @@ def _durum_yaz(p: "Paper", kaynak, dizin: Path, simdi, servis=None, kaynak_adi="
 
 
 def canli_calistir(durum_dizini: Path, tohum_dizin: Optional[Path] = None, ayar_guncelle: bool = False,
-                   tek_sefer: bool = False) -> int:
+                   tek_sefer: bool = False, set_modu: str = "v2") -> int:
     import asyncio
     import signal
     from motor.canli import paper_canli as pc, paper_veri as pv, telegram as tg
@@ -382,7 +427,13 @@ def canli_calistir(durum_dizini: Path, tohum_dizin: Optional[Path] = None, ayar_
     ist = pv.FapiIstemci()
     simdi = ist.sunucu_zamani()
     bilgi = ist.exchange_info()
-    tanimlar = psg.tanimlari_yukle(ayar_kaynagi="guncel")
+    v2_modu = set_modu == "v2"
+    if v2_modu:
+        from motor.canli import paper_v2 as v2
+        set_v2 = v2.set_yukle()
+        tanimlar = v2.tanimlari_yukle(set_v2)           # fail-closed: desteklenmeyen çıkış alanı -> burada açık hata (servis başlamaz)
+    else:
+        tanimlar = psg.tanimlari_yukle(ayar_kaynagi="guncel")
     semboller = sorted({s for t in tanimlar for s in t.veri_semboller})
     esl = pv.esleme_dogrula(bilgi, semboller)
     _tanimlara_veri_yok_isle(tanimlar, esl)
@@ -396,7 +447,10 @@ def canli_calistir(durum_dizini: Path, tohum_dizin: Optional[Path] = None, ayar_
     aktif = [t for t in tanimlar if not t.veri_yok]
     kaynak = pc.CanliKaynak(ist, aktif, PENCERE, tohum_dizin, olay)
     kaynak.baslat(simdi)
-    p = Paper(tanimlar, kaynak, kurallar, durum_yolu=durum_dizini / "paper_state.json", her_satir_kaydet=True)
+    if v2_modu:
+        p = v2.PaperKasalar(tanimlar, kaynak, kurallar, set_v2, durum_yolu=durum_dizini / "paper_state.json", her_satir_kaydet=True)
+    else:
+        p = Paper(tanimlar, kaynak, kurallar, durum_yolu=durum_dizini / "paper_state.json", her_satir_kaydet=True)
     bld = tg.Bildirimci()
     p.bildirim = bld.olay                      # teknik olaylar gönderilmez; sorun sürerse tek uyarı; sel koruması
     yuklendi = p.yukle(ayar_guncelle=ayar_guncelle)
@@ -406,16 +460,24 @@ def canli_calistir(durum_dizini: Path, tohum_dizin: Optional[Path] = None, ayar_
         p.olay_ekle("baslangic", f"Paper başlatıldı, başlangıç sermayesi {p.ayarlar.baslangic_sermaye}", simdi)
     for t in p.veri_yok:
         p.olay_ekle("veri_yok", f"{t.kimlik}: {t.veri_yok}", simdi)
+    for t in p.tanimlar:
+        if t.disarida:
+            msg = f"{t.kimlik}: evrenden düşen semboller (Binance karşılığı yok/TRADING değil): " + "; ".join(f"{s} ({n})" for s, n in t.disarida.items())
+            p.uyarilar.append(msg)
+            p.olay_ekle("veri_yok", msg, simdi)
     for u in pv.tradfi_sinif_uyusmazliklari(bilgi, semboller):     # TradFi funding ayrımı (2026-11-09) sınıflamaya dayanır
         p.olay_ekle("tradfi_sinif", u, simdi)
     from motor.canli import paper_durum as pdr
     tg.gonder(tg.baslangic_metni(len(aktif), p.motor.ozsermaye()))
-    bildirilen = [len(p.motor.islemler)]
+    def _anahtar(x):
+        return (x["kol"], str(x["giris_zamani"]), str(x["cikis_zamani"]))
+    bildirilen = {_anahtar(x) for x in p.motor.islemler}          # kimlikle izlenir (çok hesaplı toplam listede yeni işlem sona eklenmeyebilir)
     gorulen_acik = {(a["kimlik"], a["sembol"], a["giris_zamani"]) for a in pdr.acik_pozisyonlar(p)}
     if not yuklendi:
         p.son_ozet = dun_tsi(simdi)            # ilk çalışma: paper'dan önceki gün özetlenmez
         p.kaydet()                             # hata sonrası geri yükleme için her zaman tutarlı bir kayıt bulunsun
     kiyas_son = [None]
+    durum_yazici = v2.durum_yaz if v2_modu else _durum_yaz
 
     def tur() -> None:
         simdi = ist.sunucu_zamani()
@@ -430,13 +492,14 @@ def canli_calistir(durum_dizini: Path, tohum_dizin: Optional[Path] = None, ayar_
             if (a["kimlik"], a["sembol"], a["giris_zamani"]) not in gorulen_acik:
                 gorulen_acik.add((a["kimlik"], a["sembol"], a["giris_zamani"]))
                 tg.gonder(tg.islem_acildi_metni(a))
-        for x in p.motor.islemler[bildirilen[0]:]:
-            tg.gonder(tg.islem_kapandi_metni(pdr._islem_satiri(p, x)))
-        bildirilen[0] = len(p.motor.islemler)
+        for x in p.motor.islemler:
+            if _anahtar(x) not in bildirilen:
+                bildirilen.add(_anahtar(x))
+                tg.gonder(tg.islem_kapandi_metni(pdr._islem_satiri(p, x)))
         if tohum_dizin is not None and (kiyas_son[0] is None or simdi - kiyas_son[0] >= pd.Timedelta(hours=1)):
             kiyas_son[0] = simdi
             kiyas_btc_guncelle(ist, tohum_dizin, simdi, p)
-        o = _durum_yaz(p, kaynak, durum_dizini, simdi, veri_dizini=tohum_dizin)   # kıyas/güven okuması = tohum dizini (sunucuda StateDirectory)
+        o = durum_yazici(p, kaynak, durum_dizini, simdi, veri_dizini=tohum_dizin)   # kıyas/güven okuması = tohum dizini (sunucuda StateDirectory)
         if n:
             p.kaydet()
         if ozet_zamani(p, simdi):
@@ -460,7 +523,7 @@ def canli_calistir(durum_dizini: Path, tohum_dizin: Optional[Path] = None, ayar_
 
     def kalici_yaz():
         p.kaydet()
-        _durum_yaz(p, kaynak, durum_dizini, pd.Timestamp.now(tz="UTC"), veri_dizini=tohum_dizin)
+        durum_yazici(p, kaynak, durum_dizini, pd.Timestamp.now(tz="UTC"), veri_dizini=tohum_dizin)
 
     koruyucu = TurKoruyucu(p, geri_yukle, kalici_yaz, binance_hata=pv.BinanceHata)
 
@@ -644,6 +707,25 @@ def tekrar_cli(bas, bit, ayar: str, durum_dizini: Path, veri_dizini=None) -> int
     return 0
 
 
+def tekrar_cli_v2(bas, bit, durum_dizini: Path, veri_dizini=None, surec: int = 4) -> int:
+    """v2 seti (10 hesap): geçmişi canlıymış gibi besler, toplam + hesap başına durum dosyalarını yazar. Holdout dönemi verisi için onaylı
+    kilit yolu kullanılır (kilit_acilis.jsonl'e yazılır). tek_evren kararları paralel önbellekle hesaplanır (aynı tek_karar; bkz. paper_v2)."""
+    from motor.canli import paper_v2 as v2
+    s = v2.set_yukle()
+    tanimlar = v2.tanimlari_yukle(s)
+    bas = pd.Timestamp(bas, tz="UTC") if pd.Timestamp(bas).tzinfo is None else pd.Timestamp(bas)
+    bit_ts = pd.Timestamp(bit, tz="UTC") if bit else None
+    mumlar, fund = v2.veri_yukle(tanimlar, veri_dizini, bit=bit_ts)
+    tanimlar = [t for t in tanimlar if not t.veri_yok]
+    son = bit_ts or max(df.index[-1] + pd.Timedelta(0) for df in mumlar.values())
+    onb = v2.karar_onbellegi_olustur(tanimlar, mumlar, fund, bas, son, KOK / "sonuclar" / "paper_v2" / "onbellek", surec)
+    p = v2.kos(v2.kasalar_kur(tanimlar, mumlar, fund, s, onbellek=onb), bas, son, kapat=False)
+    v2.durum_yaz(p, p.kaynak, durum_dizini, son, kaynak_adi="backtest", hesaplari_yaz=True)
+    print(f"[tekrar v2] {p.satir_sayisi} satır; hesap başına: " + ", ".join(
+        f"{k} {len(h.motor.islemler)} işlem {float(h.motor.ozsermaye()):.2f}" for k, h in p.hesaplar.items()))
+    return 0
+
+
 def main(argv=None) -> int:
     import argparse
     ap = argparse.ArgumentParser(description="1L3A paper trading (gerçek emir yok)")
@@ -651,16 +733,23 @@ def main(argv=None) -> int:
     g.add_argument("--canli", action="store_true", help="servis: canlı Binance verisiyle paper")
     g.add_argument("--tek-sefer", action="store_true", help="bir tur çalış, durum yaz, çık")
     g.add_argument("--tekrar", nargs="+", metavar=("BAS", "BIT"), help="geçmiş tekrarı: BAS [BIT] (UTC tarih)")
-    ap.add_argument("--durum", default=str(KOK / "durum"))
+    ap.add_argument("--set", default="v2", choices=["v2", "eski"], dest="set_modu",
+                    help="v2: 10 stratejilik paper seti, her biri kendi kasasında (varsayılan); eski: 7'li final set (tek hesap; yalnız geriye uyumluluk)")
+    ap.add_argument("--surec", type=int, default=4, help="tekrar v2: karar önbelleği için süreç sayısı")
+    ap.add_argument("--durum", default=None, help="durum dizini (varsayılan: v2 için durum_v2/, eski set için durum/)")
     ap.add_argument("--tohum", default=None, help="yerel tohum veri dizini (veri/mumlar); yoksa yalnız REST")
     ap.add_argument("--ayar", default=None, choices=["guncel", "kilit"], help="tekrar modu ayar kaynağı (varsayılan: guncel)")
     ap.add_argument("--ayar-guncelle", action="store_true", help="kayıtlı durumdaki ayarlar csv'den farklıysa KULLANICI ONAYIYLA yeni ayara geç")
     ap.add_argument("--log", default="INFO")
     a = ap.parse_args(argv)
     logging.basicConfig(level=a.log, format="%(asctime)s %(levelname)s %(name)s: %(message)s")
+    durum = Path(a.durum) if a.durum else KOK / ("durum_v2" if a.set_modu == "v2" else "durum")
     if a.tekrar:
-        return tekrar_cli(a.tekrar[0], a.tekrar[1] if len(a.tekrar) > 1 else None, a.ayar or "guncel", Path(a.durum))
-    return canli_calistir(Path(a.durum), Path(a.tohum) if a.tohum else None, a.ayar_guncelle, a.tek_sefer)   # != 0: kontrollü hata durması
+        bit = a.tekrar[1] if len(a.tekrar) > 1 else None
+        if a.set_modu == "v2":
+            return tekrar_cli_v2(a.tekrar[0], bit, durum, surec=a.surec)
+        return tekrar_cli(a.tekrar[0], bit, a.ayar or "guncel", durum)
+    return canli_calistir(durum, Path(a.tohum) if a.tohum else None, a.ayar_guncelle, a.tek_sefer, a.set_modu)   # != 0: kontrollü hata durması
 
 
 if __name__ == "__main__":

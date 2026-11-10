@@ -1,0 +1,87 @@
+{
+ "strateji": "dis__jt-awesome-osilator",
+ "etiket": "iyi_gorundu",
+ "tf": "1d",
+ "evren": "genel",
+ "referans": {
+  "kaynak": "holdout_kesif.csv",
+  "net": 0.2309154357798586,
+  "n_islem": 208
+ },
+ "disarida": {},
+ "paper": {
+  "net": 0.08896924000772238,
+  "n_islem": 70,
+  "reddedilen": {
+   "toplam_risk_tavani": 136,
+   "min_notional": 2
+  },
+  "kirpilan": {
+   "toplam_risk": 149
+  },
+  "cikis_nedenleri": {
+   "sinyal": 52,
+   "stop": 7,
+   "gunluk_limit": 4,
+   "veri_sonu": 7
+  },
+  "kill": false,
+  "gunluk_limit": 1
+ },
+ "holdout_yeniden": {
+  "net": 0.23091543577985862,
+  "n_ham": 208,
+  "n_kabul": 112,
+  "sayac": {
+   "giris_kabul": 112,
+   "reddedilen": 96,
+   "kirpilan": 25,
+   "red_toplam_risk": 96,
+   "red_kaldirac": 0,
+   "red_gunluk": 0,
+   "red_kill": 0,
+   "gunluk_limit_olayi": 0,
+   "kill_olayi": 0,
+   "zorla_kapanan": 0
+  }
+ },
+ "eslesme": {
+  "holdout_kabul": 112,
+  "paper": 70,
+  "ortak": 61,
+  "sadece_holdout": 51,
+  "sadece_paper": 9,
+  "sadece_paper_ham_listede": 9,
+  "sadece_paper_baslangic_n": 0,
+  "sadece_paper_baslangic_pnl": 0.0,
+  "ortak_medyan_abs_dR": 0.0031210050166566583,
+  "ortak_maks_abs_dR": 0.982727160253611,
+  "ortak_pnl_holdout": 889.0117053213374,
+  "ortak_pnl_paper": 903.934079625154,
+  "sadece_holdout_pnl": 1420.1426524772437,
+  "sadece_paper_pnl": -14.24167954793019
+ },
+ "teshis_limitsiz": {
+  "holdout_net": 0.1741399336880085,
+  "paper_net": 0.16359557995892823,
+  "holdout_n": 208,
+  "paper_n": 208,
+  "eslesme": {
+   "holdout_kabul": 208,
+   "paper": 208,
+   "ortak": 208,
+   "sadece_holdout": 0,
+   "sadece_paper": 0,
+   "sadece_paper_ham_listede": 0,
+   "sadece_paper_baslangic_n": 0,
+   "sadece_paper_baslangic_pnl": 0.0,
+   "ortak_medyan_abs_dR": 0.0038039229759972426,
+   "ortak_maks_abs_dR": 0.28244369736927233,
+   "ortak_pnl_holdout": 1741.399336880082,
+   "ortak_pnl_paper": 1635.9557995892824,
+   "sadece_holdout_pnl": 0.0,
+   "sadece_paper_pnl": 0.0
+  }
+ },
+ "sure_sn": 5.441265344619751
+}

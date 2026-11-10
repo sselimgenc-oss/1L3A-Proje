@@ -28,6 +28,7 @@ sudo -u l3a .venv/bin/pip install -r requirements.txt
 ```
 
 ## 3. Tohum veri (geçmiş mumlar) — önemli
+(v2 seti için sembol listesi §12-A'dadır; ilk kurulumda doğrudan oradaki listeyi kullanın.)
 Stratejilerin gösterge ısınması için uzun geçmiş gerekir; Binance TradFi geçmişi kısadır (2026'dan). Bu yüzden kendi
 bilgisayarınızdaki `veri/mumlar` klasöründen YALNIZ gerekli sembolleri kopyalayın (yaklaşık 600 MB'ın küçük bir kısmı):
 ```bash
@@ -146,3 +147,49 @@ cp deploy/1l3a-pano-yayin.service deploy/1l3a-pano-yayin.timer /etc/systemd/syst
 systemctl daemon-reload && systemctl enable --now 1l3a-pano-yayin.timer && systemctl start 1l3a-pano-yayin.service
 journalctl -u 1l3a-pano-yayin -n 20 --no-pager        # "pano yayımlandı" ve workers.dev adresi görünmeli
 ```
+
+## 12. v2 paper setine geçiş (eski 7'li deneme sürüşünden 10'lu v2 setine)
+Yeni set: 10 strateji, **her biri kendi 10.000 USD sanal kasasında** (`stratejiler/paper_v2_seti.json`). Eski 7'li deneme sürüşünün durumu
+**silinmez**, kenara alınır; yeni set temiz başlar. Eski durumu yeni sete yüklemeye çalışırsanız motor açık hata verip başlamaz (güvenlik).
+Her adımı sırayla, kopyala-yapıştır yapın.
+
+**A. Kendi bilgisayarınızda — yeni semboller için tohum veriyi sunucuya gönderin** (yaklaşık 520 MB; var olanlar yeniden gönderilmez):
+```bash
+cd <proje klasörünüz>
+rsync -av veri/mumlar/{BTCUSDT,ETHUSDT,BNBUSDT,XRPUSDT,SOLUSDT,TRXUSDT,ZECUSDT,HYPEUSDT,DOGEUSDT,LINKUSDT,ADAUSDT,XLMUSDT,BCHUSDT} \
+      root@SUNUCU:/var/lib/1l3a-paper/veri/mumlar/
+rsync -av veri/mumlar/{DK_AAPL,DK_NVDA,DK_MSFT,DK_GOOGL,DK_AMZN,DK_META,DK_TSLA,DK_AVGO,DK_LLY,DK_WMT,DK_JPM,DK_V,DK_MU,DK_AMD,DK_XOM,DK_JNJ,DK_MA,DK_XAU,DK_XAG,DK_WTI,DK_COPPER,DK_NATGAS,DK_SPX} \
+      root@SUNUCU:/var/lib/1l3a-paper/veri/mumlar/
+ssh root@SUNUCU "chown -R l3a:l3a /var/lib/1l3a-paper"
+```
+**B. Sunucuda (root olarak):**
+```bash
+systemctl stop 1l3a-paper
+cd /var/lib/1l3a-paper
+mv durum durum_eski_7li_$(date +%Y%m%d)          # SİLMİYORUZ, yalnız kenara alıyoruz
+cd /opt/1l3a
+sudo -u l3a git pull
+sudo -u l3a .venv/bin/pip install -r requirements.txt
+systemctl daemon-reload
+systemctl start 1l3a-paper
+```
+**C. Kontrol** (ilk açılış 3-5 dakika sürebilir: 35 sembolün geçmişini kurar):
+```bash
+journalctl -u 1l3a-paper -n 60 --no-pager        # hata yok; "Paper başlatıldı" yazmalı
+ls /var/lib/1l3a-paper/durum/hesaplar | wc -l    # 10 yazmalı (her strateji için bir klasör)
+ls /var/lib/1l3a-paper/durum_eski_7li_*          # eski durum duruyor mu (paper_state.json görünmeli)
+```
+Beklenen, **normal** uyarılar: `DK_JNJ` ve `DK_MA` için "Binance karşılığı yok": bu iki hisse evrenden düşer, strateji kalan sembollerle çalışır
+(panoda ve `saglik.json` uyarılarında görünür). Pano "Backtest bütünlüğü: maliyet_modeli kayıtlı sha256 ile uyuşmuyor" uyarısı verirse bu
+beklenir (kayıt eski sete aitti); yenilemek sizin onayınızla `python -m motor.canli.guven --kaydet` ile yapılır, motor kendiliğinden yazmaz.
+Pano: her stratejinin yanında **doğrulandı** (resmi holdout kapısını geçti) ya da **iyi göründü** (sonuç sonrası keşif, kanıt değil) etiketi ve
+"Kasa" satırı (o stratejinin kendi sanal hesabı) görünür. Üst düzey sayılar 10 kasanın TOPLAMIDIR; sert limitler her kasada ayrı uygulanır.
+Her kasanın tam dosyaları `durum/hesaplar/<strateji>/` altındadır.
+
+**Hata mesajları:**
+- `bu durum dosyası v2 paper setine ait değil`: eski durum dizini hâlâ yerinde. B adımındaki `mv durum ...` satırını yapın, tekrar `systemctl start 1l3a-paper`.
+- `paper v2 seti BAŞLAMAZ: ... çıkış ayarlarını kullanıyor`: bir strateji paper'ın uygulamadığı çıkış ayarı taşıyor (bilerek durur; kodda düzeltilmeden başlamaz).
+- `kayıtlı set imzası ... şimdiki ...`: set dosyası (strateji/etiket/s) kayıttan sonra değişmiş. Bilinçli değişiklikse durumu kenara alıp temiz başlayın.
+
+**Geri dönüş (gerekirse):** `systemctl stop 1l3a-paper; cd /var/lib/1l3a-paper; mv durum durum_v2_deneme; mv durum_eski_7li_* durum`, sonra
+`/etc/systemd/system/1l3a-paper.service` içindeki `ExecStart` satırının sonuna `--set eski` ekleyip `systemctl daemon-reload && systemctl start 1l3a-paper`.

@@ -19,8 +19,10 @@ import pandas as pd
 from dateutil.easter import easter
 
 NY = ZoneInfo("America/New_York")
-ABD_HISSELERI = ("DK_AAPL", "DK_MSFT", "DK_GOOGL", "DK_AMZN", "DK_NVDA", "DK_META", "DK_TSLA")
-EMTIALAR = ("DK_XAU", "DK_WTI", "DK_COPPER")
+ABD_HISSELERI = ("DK_AAPL", "DK_MSFT", "DK_GOOGL", "DK_AMZN", "DK_NVDA", "DK_META", "DK_TSLA",
+                 # v2 paper seti (evren 'genel' = 17 ABD hissesi): eski set 7 hissede kalmıştı; kalanlar kripto sayılıp 7/24 işlenirdi
+                 "DK_AVGO", "DK_LLY", "DK_WMT", "DK_JPM", "DK_V", "DK_MU", "DK_AMD", "DK_XOM", "DK_JNJ", "DK_MA")
+EMTIALAR = ("DK_XAU", "DK_WTI", "DK_COPPER", "DK_XAG", "DK_NATGAS")
 
 
 def tur(sembol: str) -> str:

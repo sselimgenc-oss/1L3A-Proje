@@ -735,6 +735,18 @@ def _poz_satiri(p: dict) -> str:
     return " ".join(f"{k}={v}" for k, v in p.items())
 
 
+ETIKET_GOSTERIM = {"dogrulandi": ("doğrulandı", "iyi", "Resmi v2 holdout set kapısını geçti (gerekli, yeterli değil: asıl sınav paper)."),
+                   "iyi_gorundu": ("iyi göründü", "uyari", "Sonuç sonrası keşif — KANIT DEĞİL (holdout sonucu görüldükten sonra seçildi).")}
+
+
+def _etiket_cipi(etiket) -> str:
+    """Paper v2 seti etiketi (stratejiler.json -> etiket); alan yoksa/boşsa hiçbir şey gösterilmez (eski motor)."""
+    if not etiket:
+        return ""
+    ad, sinif, ipucu = ETIKET_GOSTERIM.get(etiket, (str(etiket), "uyari", ""))
+    return f' <span class="cip {sinif}" title="{esc(ipucu)}">{esc(ad)}</span>'
+
+
 @_guvenli
 def _strateji_html(x: dict, sem: Optional[dict] = None) -> str:
     """Strateji satırı: tablo görünümlü özet satırı + tıklayınca açılan <details> (JS gerekmez; mobilde kart gibi yığılır)."""
@@ -742,6 +754,7 @@ def _strateji_html(x: dict, sem: Optional[dict] = None) -> str:
     perf = x.get("performans")
     kol = esc(x["kol"]) + (f' · {esc(f_yuzde(x["kol_payi"], ondalik=0))}' if x.get("kol_payi") is not None else "")
     durum = f' <span class="cip uyari">{esc(x["durum"])}</span>' if x.get("durum") and x["durum"] != "calisiyor" else ""
+    durum += _etiket_cipi(x.get("etiket"))
     konum = "".join(_cip(f"{hf} hf", v) for hf, v in _sirali(b)) or '<span class="alt">—</span>'
     ust = (f'<span class="ad"><b>{esc(kisa_kimlik(x["kimlik"]))}</b>{durum}</span>'
            f'<span class="h" data-e="Stil">{_nokta(x["ajan"])}{esc(x["ajan"])}</span><span class="h" data-e="Kol">{kol}</span>'
@@ -757,6 +770,10 @@ def _strateji_html(x: dict, sem: Optional[dict] = None) -> str:
         g.append(_sat("Net · PF", f"{f_para(perf['net'], True)} · {f_sayi(perf['pf'])}", _isaret_sinifi(perf["net"])))
     if x.get("ayar") is not None:
         g.append(_sat("Ayar", str(x["ayar"])))
+    h = x.get("hesap")
+    if h:     # v2 paper seti: strateji kendi kasasında (motor yazar; pano yalnız biçimler)
+        g.append(_sat("Kasa (kendi sanal hesabı)", f"{f_para(h['ozsermaye'])} (başlangıç {f_para(h['baslangic'])}) · {f_yuzde(h['getiri'], True)} · "
+                      f"zirveden düşüş {f_yuzde(h['zirveden_dusus'])}" + (" · KILL SWITCH" if h.get("kill") else ""), _isaret_sinifi(h["getiri"])))
     if "sonraki_yenileme" in x:
         g.append(_sat("Sonraki ayar yenileme (TSİ)", tsi(x["sonraki_yenileme"])))
     if x["acik_pozisyonlar"]:
