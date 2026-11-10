@@ -78,6 +78,8 @@ def uyarilar(veri: dict, sorunlar: list, simdi: datetime) -> list:
             u.append(("kritik", f"Motor durumu: {sg['durum']}"))
         for m in sg["uyarilar"]:
             u.append(("bilgi" if oz and oz["kaynak"] == "backtest" else "uyari", m))
+        for m in sg.get("bilgiler") or []:                 # beklenen/kalıcı durumlar (ör. Binance'te karşılığı olmayan semboller): uyarı değil bilgi
+            u.append(("bilgi", m))
     bt = veri.get("butunluk")
     if bt and bt.get("genel_durum") == "uyusmuyor":
         u.append(("uyari", "Backtest bütünlüğü: " + ", ".join(x["id"] for x in bt["dosyalar"] + bt["sanal"] if x["durum"] == "uyusmuyor")
@@ -1629,12 +1631,17 @@ def _sekme_saglik(sg, vg=None, bt=None, lim=None) -> str:
     veri = ('<div class="izgara oto">' + "".join(
         _kutu(f"{v['sembol']} {v['tf']} son mum (TSİ)", tsi(v["son_mum_zamani"]), "kotu" if v["bayat"] else "", f"{v['bayatlik_dk']} dk" + (" · BAYAT" if v["bayat"] else ""))
         for v in sg["veri"]) + "</div>") if sg["veri"] else '<div class="alt">Veri akışı kaydı yok.</div>'
+    ed = sg.get("evren_disi") or []
+    evren_disi = (_p("Evrenden düşen semboller", _tablo(["Sembol", "Neden", "Durum", "Etkilenen stratejiler"], [
+        [f"<b>{esc(x['sembol'])}</b>", esc(x["neden"]), _h("beklenen, kalıcı", "") if x["beklenen"] else _h("BEKLENMEYEN", "kotu"),
+         f'<span style="white-space:normal">{esc(", ".join(x["stratejiler"]))}</span>'] for x in ed], sinif="kay"),
+        "sembole göre · motor hesaplar", "g3", duz=True)) if ed else ""
     soz = '<dl class="soz">' + "".join(f"<dt>{esc(k)}</dt><dd>{esc(v)}</dd>" for k, v in sozluk(lim)) + "</dl>"
     guven = _p("Veri güveni", _veri_guveni_html(vg) if vg is not None else _bekleyen("veri_guveni.json", "son mum, bayatlık, eksik mum, kaynak"),
                "eksik mum ve kaynak · motor hesaplar", "g3", duz=True)
     butun = _p("Backtest bütünlüğü", _butunluk_html(bt) if bt is not None else _bekleyen("butunluk.json", "dosya sha256 özetleri ve kod sürümü"),
                "sha256 ↔ kayıtlı değer · motor hesaplar", "g3", duz=True)
-    return _ig(_p("Motor", motor, "", "g3") + _p("Veri akışları", veri, "son mum zamanı ve gecikme", "g3") + guven + butun
+    return _ig(_p("Motor", motor, "", "g3") + _p("Veri akışları", veri, "son mum zamanı ve gecikme", "g3") + evren_disi + guven + butun
                + _p("Sözlük", f'<details class="ince"><summary>Terimler ({len(SOZLUK)}) — dokun/tıkla</summary>{soz}</details>', "R, PF, kill switch...", "g3"))
 
 

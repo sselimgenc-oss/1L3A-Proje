@@ -462,7 +462,9 @@ def olustur(p, simdi, kaynak_saglik: Optional[list] = None, olaylar: Optional[li
     # --- veri güveni (sembol başına son mum, bayatlık, eksik mum, kaynak) + backtest bütünlüğü (sha256 ↔ kayıt, kod sürümü)
     indeksler = {(x["sembol"], x["tf"]): x["mum_indeksi"] for x in (kaynak_saglik or []) if x.get("mum_indeksi") is not None}
     guven = gv.veri_guveni(saglik["veri"], indeksler or None, simdi, kaynak, _z(simdi), veri_dizini=veri_dizini or gv.VERI_DIZINI)
-    butun = gv.butunluk(kaynak, _z(simdi), p.ayarlar)
+    profil = getattr(p, "butunluk_profili", "eski")             # v2 (hesap başına kasa): v2 dosyaları + hesap başına maliyet modeli
+    butun = gv.butunluk(kaynak, _z(simdi), p.ayarlar, profil=profil,
+                        maliyet=p.butunluk_maliyet() if profil == "v2" else None)
     # --- karne (radar) + koç (pano öncelik 6; motor hesaplar, pano yalnız biçimler)
     sag_set = kr_.saglik_set_kontrolleri(saglik, butun, rapor["kabul_listesi"])
     sag_str = {t.kimlik: kr_.saglik_strateji_kontrolleri(
@@ -524,12 +526,17 @@ def saglik_olustur(p, simdi, kaynak_saglik: list, uyarilar: list, servis: Option
     elif bayat_var:
         durum = "veri_bayat"
     canli = kaynak != "backtest"
+    from motor.canli import paper as pp
+    ON = pp.BILGI_ONEKI                       # BİLGİ önekli satırlar (beklenen, kalıcı durumlar) uyarı değil bilgi: pano sarı banner yapmaz
+    gercek_uyari = [u for u in uyarilar if not str(u).startswith(ON)]
+    bilgiler = [str(u)[len(ON):] for u in uyarilar if str(u).startswith(ON)]
     return {**d._zarf("saglik", kaynak, _z(simdi)), "son_calisma": _z(datetime.now(timezone.utc)), "durum": durum,
             "bayat_denetimi": canli, "dosya_esik_dk": DOSYA_ESIK_DK if canli else None, "veri": veri,
             "servis": servis or ({"calisiyor": True, "surum": SURUM_ADI, "not": ""} if canli else
                                  {"calisiyor": None, "surum": SURUM_ADI, "not": "tekrar modu; canlı servis yok"}),
             "kalp_atisi": p.kalp_bilgisi() if canli else None,
-            "uyarilar": list(uyarilar)}
+            "uyarilar": gercek_uyari, "bilgiler": bilgiler,
+            "evren_disi": pp.disarida_gruplari(list(p.tanimlar))}
 
 
 def icgoruler(p, simdi, E, bas, katkilar, perf, ap_hepsi, mal24, S, hafta_pnl, alarmlar, bek_csv, kon_tum=None) -> list:

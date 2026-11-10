@@ -154,14 +154,39 @@ def hesap_ayarlari(t, s: dict, tablo_yolu: Path = TABLO_YOLU) -> PortfoyAyarlari
                            limit_modu="uygula", maliyet_sembol=ms or None, **kw)
 
 
+def maliyet_modelleri(hesaplar: dict) -> dict:
+    """Bütünlük kontrolü için: {hesap kimliği: maliyet_modeli(hesap ayarları)} (guven.maliyet_modeli alanları; maliyet_sembol dahil)."""
+    from motor.canli import guven as gv
+    return {k: gv.maliyet_modeli(h.ayarlar) for k, h in hesaplar.items()}
+
+
+def cevrimdisi_maliyet_modeli(s: Optional[dict] = None, tablo_yolu: Path = TABLO_YOLU) -> dict:
+    """Sunucudaki `PaperKasalar`ın bütünlük modeliyle AYNI değer, Binance'e bağlanmadan (kayıt yazmak için: `guven --kaydet`).
+    Sunucu, exchangeInfo'da karşılığı olmayan sembolleri evrenden düşürüp hesap ayarlarını ondan sonra kurar; burada aynı düşürme
+    `paper_veri.ESLEME`'ye göre yapılır (DK_ sembolü ESLEME'de yoksa karşılığı yok). Sunucuda başka bir sembol düşerse bütünlük 'uyuşmuyor'
+    gösterir (gizlenmez) ve kayıt kullanıcı onayıyla yenilenir."""
+    from motor.canli import guven as gv
+    from motor.canli import paper_veri as pv
+    s = s or set_yukle()
+    tanimlar = tanimlari_yukle(s)
+    esl = {x: ((pv.binance_sembol(x), None) if (not x.startswith("DK_") or x in pv.ESLEME) else (None, "çevrimdışı: ESLEME'de yok"))
+           for t in tanimlar for x in t.veri_semboller}
+    pp._tanimlara_veri_yok_isle(tanimlar, esl)
+    return {t.kimlik: gv.maliyet_modeli(hesap_ayarlari(t, s, tablo_yolu)) for t in tanimlar}
+
+
 # =============================================================================================== hesaplar
 class HesapPaper(Paper):
     """Tek stratejinin kendi kasası. Olaylar üst `PaperKasalar`a (hesap kimliği önekiyle) iletilir."""
 
     def __init__(self, tanim, kaynak, kurallar: dict, ayarlar, ust=None, **kw):
         self.ust = ust
+        self.butunluk_profili = "v2"
         super().__init__([tanim], kaynak, {s: kurallar[s] for s in tanim.veri_semboller if not tanim.veri_yok}, ayarlar, **kw)
         self.kimlik = tanim.kimlik
+
+    def butunluk_maliyet(self) -> dict:
+        return self.ust.butunluk_maliyet() if self.ust is not None else maliyet_modelleri({self.kimlik: self})
 
     def olay_ekle(self, tur: str, mesaj: str, zaman=None, bildir: bool = True):
         if self.ust is not None:
@@ -256,6 +281,8 @@ class PaperKasalar(Paper):
     """10 bağımsız hesap; `Paper` arayüzünün servis/durum yazıcısının kullandığı alt kümesi. (Paper.__init__ BİLEREK çağrılmaz:
     tek hesap/tek motor varsayımı burada geçerli değildir; ortak kalp atışı/olay kodu miras alınır.)"""
 
+    butunluk_profili = "v2"             # guven.butunluk: v2 dosyaları + kayıt butunluk_kayit_v2.json
+
     def __init__(self, tanimlar: list, kaynak: TekrarKaynagi, kurallar: dict, s: Optional[dict] = None,
                  durum_yolu: Optional[Path] = None, her_satir_kaydet: bool = False, tablo_yolu: Path = TABLO_YOLU,
                  tetikleyen_hemen_kapat: bool = True):
@@ -289,6 +316,9 @@ class PaperKasalar(Paper):
                                        limit_modu="uygula")
         self.motor = ToplamMotor(self)
         self._hesap_yazilan: dict = {}
+
+    def butunluk_maliyet(self) -> dict:
+        return maliyet_modelleri(self.hesaplar)
 
     # ------------------------------------------------------------------ Paper arayüzü (toplam görünüm)
     @property
@@ -395,8 +425,10 @@ def durum_yaz(p: PaperKasalar, kaynak, dizin: Path, simdi, servis=None, kaynak_a
     sag = kaynak.saglik_veri() if hasattr(kaynak, "saglik_veri") else [
         {"sembol": s, "tf": tf, "son_mum_acilis": df.index[-1], "mum_indeksi": df.index} for (s, tf), df in kaynak.mumlar.items()]
     notlar = [f"VERİ YOK: {t.kimlik} — {t.veri_yok}" for t in p.veri_yok]
-    notlar += [f"{t.kimlik}: evrenden düşen semboller (Binance karşılığı yok/TRADING değil; çalıştırılmıyor): " + "; ".join(f"{s} ({n})" for s, n in t.disarida.items())
-               for t in p.tanimlar if t.disarida]
+    bilgi, uyari = pp.disarida_metinleri(pp.disarida_gruplari(p.tanimlar))
+    if bilgi:
+        notlar.append(bilgi + " — ayrıntı: SAĞLIK sekmesi, saglik.json evren_disi")
+    notlar += uyari
     notlar.append("PAPER v2 SETİ: 10 strateji, HER BİRİ KENDİ 10.000 USD kasasında; üst düzey sayılar kasaların TOPLAMIDIR (toplamda sert limit uygulanmaz; "
                   "limitler her kasada ayrıdır, bkz. stratejiler[].hesap ve durum/hesaplar/<kimlik>/). "
                   "'dogrulandi' = resmi holdout kapısını geçti; 'iyi_gorundu' = sonuç sonrası keşif, KANIT DEĞİL.")

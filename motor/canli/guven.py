@@ -7,7 +7,10 @@ günde eksik mum ve boşluk sayısı, veri kaynağı. Eksik mum = ardışık iki
 
 `butunluk.json`: pano/backtest durumunun dayandığı dosyaların sha256 özeti ↔ KAYITLI değer, kod sürümü (git commit). Kayıtlı değer:
   - maliyet tablosu: kendi mühür dosyası `sonuclar/evren/maliyet_tablosu.sha256` (araştırma katmanı koşulardan önce yazar);
-  - diğerleri: `sonuclar/final/butunluk_kayit.json` (`python -m motor.canli.guven --kaydet` ile, kullanıcı onayıyla yazılır; bu modül otomatik YAZMAZ).
+  - diğerleri: `sonuclar/final/butunluk_kayit.json` (`python -m motor.canli.guven --kaydet --set eski` ile, kullanıcı onayıyla yazılır; bu modül otomatik YAZMAZ).
+  PAPER V2 profili (`profil="v2"`): izlenen dosyalar `IZLENEN_V2` (paper_v2_seti.json, havuz_v2.csv, maliyet_tablosu_v2.csv + kendi .sha256 mührü),
+  kayıt `sonuclar/final/butunluk_kayit_v2.json` (`python -m motor.canli.guven --kaydet`), maliyet_modeli = HESAP BAŞINA PortfoyAyarlari özeti
+  (paper_v2.hesap_ayarlari: v2 tablosundan sembol bazlı maliyet); sert_limitler aynı kod sabiti.
   Eşleşmeme gizlenmez: `durum` = eslesti | uyusmuyor | kayit_yok | dosya_yok. Ayar yenilemesi `guncel_ayarlar.csv`'yi bilerek değiştirir:
   bu "uyusmuyor" gösterir ve kullanıcı yeni özeti kaydedene kadar öyle kalır (sessizce uydurulmaz).
 Sanal kalemler (dosya değil, kod sabiti): `maliyet_modeli` (paper'ın PortfoyAyarlari maliyet/risk alanları), `sert_limitler` (SERT_LIMITLER değerleri).
@@ -35,6 +38,7 @@ from motor.veri.depo import aralik_suresi
 KOK = Path(__file__).resolve().parents[2]
 VERI_DIZINI = KOK / "veri" / "mumlar"
 KAYIT_YOLU = KOK / "sonuclar" / "final" / "butunluk_kayit.json"
+KAYIT_YOLU_V2 = KOK / "sonuclar" / "final" / "butunluk_kayit_v2.json"
 GUVEN_PENCERE_GUN = 30
 GIT_ZAMAN_ASIMI_SN = 10
 GIT_YOLLARI = ("motor", "stratejiler", "araclar", "sonuclar/final", "sonuclar/kilit", "sonuclar/evren")   # kirli denetimi (kilit_acilis.jsonl günlüğü hariç)
@@ -50,6 +54,24 @@ IZLENEN = (
     ("kilit_set", "sonuclar/kilit/set.csv", "Kilit testi set günlük serisi (backtest görünümü buna birebir bağlıdır)", None),
     ("kilit_sonuc", "sonuclar/kilit/sonuc.csv", "Kilit testi strateji sonuçları (final set A grubu)", None),
 )
+
+# Paper v2 seti (10 strateji, hesap başına kasa): izlenen dosyalar. Eski sette olup v2'de karşılığı olmayanlar (beklenti aralıkları, güncel ayarlar,
+# kilit testi) bilerek yok: v2 paper'ı onları kullanmaz. Maliyet tablosu kendi mühür dosyasıyla (araştırma katmanı yazar) karşılaştırılır.
+IZLENEN_V2 = (
+    ("set_dosyasi", "stratejiler/paper_v2_seti.json", "Paper v2 seti: 10 strateji, etiketler, hesap başına sermaye ve risk ölçeği", None),
+    ("havuz", "stratejiler/havuz_v2.csv", "v2 havuzu (evren/tf/ayar kaynağı; set ile tutarlılık denetlenir)", None),
+    ("maliyet_tablosu", "sonuclar/evren/v2/maliyet_tablosu_v2.csv", "v2 sembol başına maliyet tablosu (mühürlü)", "sonuclar/evren/v2/maliyet_tablosu_v2.sha256"),
+)
+PROFILLER = {
+    "eski": {"izlenen": IZLENEN, "kayit_yolu": KAYIT_YOLU, "kayit_adi": "butunluk_kayit.json"},
+    "v2": {"izlenen": IZLENEN_V2, "kayit_yolu": KAYIT_YOLU_V2, "kayit_adi": "butunluk_kayit_v2.json"},
+}
+
+
+def _profil(profil: str) -> dict:
+    if profil not in PROFILLER:
+        raise ValueError(f"bilinmeyen bütünlük profili: {profil!r} ({'|'.join(PROFILLER)})")
+    return PROFILLER[profil]
 
 
 # ---------------------------------------------------------------------------- yardımcılar
@@ -153,28 +175,36 @@ def _karsilastir(sha: Optional[str], kayitli: Optional[str], kaynak: Optional[st
     return _kalem("uyusmuyor", sha, kayitli, kaynak, "dosya kayıt alındıktan sonra değişmiş (ayar yenilemesi/elle değişiklik); yeni özet kullanıcı onayıyla kaydedilir")
 
 
-def dosya_ozetleri(kok: Path = KOK, kayit: Optional[dict] = None) -> list:
+def dosya_ozetleri(kok: Path = KOK, kayit: Optional[dict] = None, profil: str = "eski") -> list:
     """Her izlenen dosya için {id, ad, yol, sha256, kayitli_sha256, kayit_kaynagi, eslesti, durum, neden}."""
     kayit_d = (kayit or {}).get("dosyalar", {})
+    pr = _profil(profil)
     out = []
-    for kid, yol, ad, muhur in IZLENEN:
+    for kid, yol, ad, muhur in pr["izlenen"]:
         p = kok / yol
         sha = sha256_dosya(p) if p.exists() else None
         if muhur:
             kayitli, kaynak = _muhur(kok, muhur), muhur
             if kayitli is None:
-                kayitli, kaynak = (kayit_d.get(kid) or {}).get("sha256"), "butunluk_kayit.json"
+                kayitli, kaynak = (kayit_d.get(kid) or {}).get("sha256"), pr["kayit_adi"]
         else:
-            kayitli, kaynak = (kayit_d.get(kid) or {}).get("sha256"), "butunluk_kayit.json"
+            kayitli, kaynak = (kayit_d.get(kid) or {}).get("sha256"), pr["kayit_adi"]
         out.append({"id": kid, "ad": ad, "yol": yol, **_karsilastir(sha, kayitli, kaynak if kayitli else None, "dosya bu makinede yok")})
     return out
 
 
-def sanal_ozetler(ayarlar, kayit: Optional[dict] = None) -> list:
-    """Kod sabitleri (maliyet modeli, sert limitler). `ayarlar` None ise (backtest) maliyet modeli ölçülmez: null + neden."""
+def sanal_ozetler(ayarlar, kayit: Optional[dict] = None, profil: str = "eski", maliyet: Optional[dict] = None) -> list:
+    """Kod sabitleri (maliyet modeli, sert limitler). `ayarlar` None ise (backtest) maliyet modeli ölçülmez: null + neden.
+    `maliyet` (v2): {hesap kimliği: maliyet_modeli(hesap ayarları)} — v2'de maliyet modeli hesap başınadır (sembol bazlı tablo + risk ölçeği);
+    verilirse `ayarlar` yerine bu ölçülür."""
     kayit_s = (kayit or {}).get("sanal", {})
+    kaynak_adi = _profil(profil)["kayit_adi"]
     out = []
-    if ayarlar is None:
+    if maliyet is not None:
+        out.append({"id": "maliyet_modeli", "ad": "Maliyet modeli (hesap başına PortfoyAyarlari, v2 maliyet tablosundan)",
+                    "yol": "kod: motor/canli/paper_v2.py::hesap_ayarlari", "ayrinti": maliyet,
+                    **_karsilastir(sha256_sozluk(maliyet), (kayit_s.get("maliyet_modeli") or {}).get("sha256"), kaynak_adi, "")})
+    elif ayarlar is None:
         out.append({"id": "maliyet_modeli", "ad": "Maliyet modeli (paper PortfoyAyarlari)", "yol": "kod: motor/portfoy/motor.py::PortfoyAyarlari",
                     **_kalem("olculmedi", None, (kayit_s.get("maliyet_modeli") or {}).get("sha256"), None,
                              "backtest besleyici maliyeti kilit testi kodunda (secim.yeniden_oyna) uygular; ayrı tablo yok")})
@@ -182,19 +212,21 @@ def sanal_ozetler(ayarlar, kayit: Optional[dict] = None) -> list:
         mm = maliyet_modeli(ayarlar)
         out.append({"id": "maliyet_modeli", "ad": "Maliyet modeli (paper PortfoyAyarlari)", "yol": "kod: motor/portfoy/motor.py::PortfoyAyarlari",
                     "ayrinti": mm, **_karsilastir(sha256_sozluk(mm), (kayit_s.get("maliyet_modeli") or {}).get("sha256"),
-                                                  "butunluk_kayit.json", "")})
+                                                  kaynak_adi, "")})
     sl = sert_limitler()
     out.append({"id": "sert_limitler", "ad": "Sert risk limitleri", "yol": "kod: motor/risk/limitler.py::SERT_LIMITLER", "ayrinti": sl,
-                **_karsilastir(sha256_sozluk(sl), (kayit_s.get("sert_limitler") or {}).get("sha256"), "butunluk_kayit.json", "")})
+                **_karsilastir(sha256_sozluk(sl), (kayit_s.get("sert_limitler") or {}).get("sha256"), kaynak_adi, "")})
     return out
 
 
 _BUTUNLUK_ONBELLEK: dict = {}
 
 
-def butunluk(kaynak: str, zaman: str, ayarlar=None, kok: Path = KOK, kayit_yolu: Path = KAYIT_YOLU, onbellek_sn: float = ONBELLEK_SN) -> dict:
-    """butunluk.json içeriği. Hesap pahalı değil ama her turda git çağırmamak için `onbellek_sn` kadar kod sürümü önbelleğe alınır
+def butunluk(kaynak: str, zaman: str, ayarlar=None, kok: Path = KOK, kayit_yolu: Optional[Path] = None, onbellek_sn: float = ONBELLEK_SN,
+             profil: str = "eski", maliyet: Optional[dict] = None) -> dict:
+    """butunluk.json içeriği. profil: "eski" (7'li final set) | "v2" (paper v2 seti; kayıt butunluk_kayit_v2.json, `maliyet` = hesap başına model). Hesap pahalı değil ama her turda git çağırmamak için `onbellek_sn` kadar kod sürümü önbelleğe alınır
     (dosya özetleri mtime ile zaten önbellekli; değişiklik anında görünür)."""
+    kayit_yolu = kayit_yolu or _profil(profil)["kayit_yolu"]
     kayit = kayit_oku(kayit_yolu)
     anahtar = str(kok)
     simdi = time.monotonic()
@@ -202,8 +234,8 @@ def butunluk(kaynak: str, zaman: str, ayarlar=None, kok: Path = KOK, kayit_yolu:
     if k is None or simdi - k[0] >= onbellek_sn:
         k = (simdi, kod_surumu(kok))
         _BUTUNLUK_ONBELLEK[anahtar] = k
-    dosyalar = dosya_ozetleri(kok, kayit)
-    sanal = sanal_ozetler(ayarlar, kayit)
+    dosyalar = dosya_ozetleri(kok, kayit, profil)
+    sanal = sanal_ozetler(ayarlar, kayit, profil, maliyet)
     tum = dosyalar + sanal
     sayim = Counter(x["durum"] for x in tum)
     if sayim.get("uyusmuyor"):
@@ -212,7 +244,7 @@ def butunluk(kaynak: str, zaman: str, ayarlar=None, kok: Path = KOK, kayit_yolu:
         genel = "eksik"
     else:
         genel = "eslesti"
-    return {**d._zarf("butunluk", kaynak, zaman), "kod_surumu": k[1], "dosyalar": dosyalar, "sanal": sanal, "genel_durum": genel,
+    return {**d._zarf("butunluk", kaynak, zaman), "kod_surumu": k[1], "dosyalar": dosyalar, "sanal": sanal, "genel_durum": genel, "profil": profil,
             "sayim": {a: sayim.get(a, 0) for a in ("eslesti", "uyusmuyor", "kayit_yok", "dosya_yok", "olculmedi")},
             "kayit_dosyasi": str(kayit_yolu.relative_to(kok)) if kayit_yolu.is_relative_to(kok) else str(kayit_yolu),
             "kayit_zamani": (kayit or {}).get("kaydedildi"),
@@ -220,18 +252,21 @@ def butunluk(kaynak: str, zaman: str, ayarlar=None, kok: Path = KOK, kayit_yolu:
                    "(o zaman 'uyuşmuyor' görünür, yeni özet onayla kaydedilir). Backtest sonuçları sonuclar/kilit/set.csv'ye birebir bağlıdır."}
 
 
-def kaydet(ayarlar, kaydedildi: str, kok: Path = KOK, kayit_yolu: Path = KAYIT_YOLU) -> dict:
+def kaydet(ayarlar, kaydedildi: str, kok: Path = KOK, kayit_yolu: Optional[Path] = None, profil: str = "eski",
+           maliyet: Optional[dict] = None) -> dict:
     """Güncel özetleri kayıt dosyasına yazar (KULLANICI ONAYIYLA çağrılır; motor otomatik çağırmaz). Mühürlü dosyalar (.sha256) kendi mührünü kullanır."""
+    kayit_yolu = kayit_yolu or _profil(profil)["kayit_yolu"]
     dosyalar = {}
-    for kid, yol, ad, muhur in IZLENEN:
+    for kid, yol, ad, muhur in _profil(profil)["izlenen"]:
         p = kok / yol
         if not p.exists():
             raise FileNotFoundError(f"{yol}: kayıt için dosya yok")
         dosyalar[kid] = {"yol": yol, "sha256": sha256_dosya(p), "ad": ad}
-    sanal = {"maliyet_modeli": {"sha256": sha256_sozluk(maliyet_modeli(ayarlar)), "ayrinti": maliyet_modeli(ayarlar)},
+    mm = maliyet if maliyet is not None else maliyet_modeli(ayarlar)
+    sanal = {"maliyet_modeli": {"sha256": sha256_sozluk(mm), "ayrinti": mm},
              "sert_limitler": {"sha256": sha256_sozluk(sert_limitler()), "ayrinti": sert_limitler()}}
     kod = kod_surumu(kok)
-    veri = {"surum": 1, "kaydedildi": kaydedildi, "kod_commit": kod["commit"], "dosyalar": dosyalar, "sanal": sanal,
+    veri = {"surum": 1, "profil": profil, "kaydedildi": kaydedildi, "kod_commit": kod["commit"], "dosyalar": dosyalar, "sanal": sanal,
             "not": "Bu kayıt butunluk.json'daki 'kayıtlı değer'dir. Güncellemek kullanıcı kararıdır."}
     d.atomik_yaz_json(kayit_yolu, veri)
     return veri
@@ -325,15 +360,22 @@ def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description="Backtest bütünlük kaydı (sha256 özetleri) — KULLANICI ONAYIYLA çalıştırın")
     ap.add_argument("--kaydet", action="store_true", help="güncel özetleri sonuclar/final/butunluk_kayit.json'a yaz")
     ap.add_argument("--goster", action="store_true", help="kayıtlı değerlerle karşılaştırmayı yazdır (varsayılan)")
+    ap.add_argument("--set", choices=tuple(PROFILLER), default="v2", dest="set_adi",
+                    help="v2 (varsayılan): paper v2 seti, kayıt butunluk_kayit_v2.json | eski: 7'li final set, kayıt butunluk_kayit.json")
     a = ap.parse_args(argv)
     from motor.portfoy.motor import PortfoyAyarlari
     ay = PortfoyAyarlari(limit_modu="uygula")
+    mal = None
+    if a.set_adi == "v2":
+        from motor.canli import paper_v2 as v2
+        mal = v2.cevrimdisi_maliyet_modeli()       # sunucudaki PaperKasalar'la aynı hesap (bkz. fonksiyon açıklaması)
+    yol = PROFILLER[a.set_adi]["kayit_yolu"]
     if a.kaydet:
         from datetime import datetime, timezone
-        v = kaydet(ay, d.zaman_str(datetime.now(timezone.utc)))
-        print(f"[guven] kayıt yazıldı: {KAYIT_YOLU} ({len(v['dosyalar'])} dosya, {len(v['sanal'])} sanal kalem, commit {v['kod_commit']})")
+        v = kaydet(ay, d.zaman_str(datetime.now(timezone.utc)), profil=a.set_adi, maliyet=mal)
+        print(f"[guven] kayıt yazıldı: {yol} ({len(v['dosyalar'])} dosya, {len(v['sanal'])} sanal kalem, commit {v['kod_commit']})")
         return 0
-    b = butunluk("paper", d.zaman_str(pd.Timestamp.now(tz="UTC")), ay)
+    b = butunluk("paper", d.zaman_str(pd.Timestamp.now(tz="UTC")), ay, profil=a.set_adi, maliyet=mal)
     for x in b["dosyalar"] + b["sanal"]:
         print(f"{x['durum']:10s} {x['id']:26s} {(x.get('sha256') or '-')[:12]}")
     print(f"genel: {b['genel_durum']}; kod: {b['kod_surumu']['kisa']} kirli={b['kod_surumu']['kirli']}")
