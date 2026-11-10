@@ -1,0 +1,81 @@
+{
+  "kart_id": "swing__entropi-rejim-sigmoid__akshathp0",
+  "ad": "Entropi/Markov Rejim + Sigmoid Z-Skor (ETF)",
+  "stil": "swing",
+  "kaynak": {
+    "url": "https://github.com/akshathp0/entropy-trading",
+    "lisans": "belirtilmemiş",
+    "tur": "github"
+  },
+  "ozet": "Her varlık için 60 günlük volatilite ve 200 günlük t-istatistiğinden 4 rejim belirlenir (1 gün gecikmeli); log getiri z-skoru sigmoidle 0-1 sinyale çevrilir, hedef vol / güncel vol ile ölçeklenir. Entropi pozisyonu değiştiren ikincil unsur.",
+  "kategori": "ortalamaya_donus",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+    "islem": "1d",
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {
+      "ad": "Gerçekleşen volatilite",
+      "parametreler": {
+        "pencere": 60
+      }
+    },
+    {
+      "ad": "t-istatistiği",
+      "parametreler": {
+        "pencere": 200
+      }
+    },
+    {
+      "ad": "Z-skor",
+      "parametreler": {
+        "pencere": null
+      }
+    },
+    {
+      "ad": "Markov geçiş matrisi",
+      "parametreler": {
+        "pencere": 750
+      }
+    }
+  ],
+  "long_giris": [
+    "Yalnız long: sigmoid(z-skor) sinyali x (hedef_vol/güncel_vol) kadar pozisyon (kaynak yalnız bunu söylüyor)"
+  ],
+  "short_giris": [],
+  "stop_loss": null,
+  "kar_al": null,
+  "iz_suren_stop": null,
+  "zaman_cikisi": "Kaynakta yok",
+  "filtreler": [
+    "Evren: VUG, IBB, XLV, XLU, XLP, VNQ, XLF, SPY"
+  ],
+  "pozisyon_risk": "Hedef vol ölçekleme",
+  "iddia_edilen_performans": "Kaynakta Sharpe 0,632/0,774, getiri %4,29/%11,07 iddiası; hangisi strateji belirsiz (iddia, doğrulanmadı)",
+  "kanit": null,
+  "veri_uygun": [
+    true,
+    "ETF'ler Dukascopy'de kısmen olabilir; kapsam doğrulanmalı."
+  ],
+  "kodlanabilirlik": {
+    "puan": 0,
+    "gerekce": "Giriş/çıkış, yeniden dengeleme, sigmoid ölçeği, z-skor penceresi, entropi eşlemesi kaynakta yok."
+  },
+  "belirsizlikler": [
+    "Entry/exit ve yeniden dengeleme sıklığı yok",
+    "Z-skor penceresi ve sigmoid ölçeği yok",
+    "Entropi yararı ~0,01 Sharpe; baş sütun belirsiz",
+    "Maliyet modellenmemiş",
+    "Lisans yok: kod kopyalanmadı"
+  ],
+  "uyumluluk_notu": "Kodlanamaz düzeyde eksik; yalnız fikir olarak tutulur.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+    "entropi",
+    "markov",
+    "rejim",
+    "sigmoid"
+  ]
+}

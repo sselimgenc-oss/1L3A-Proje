@@ -1,0 +1,72 @@
+{
+  "kart_id": "swing__ozvektor-merkeziyet-momentum__dermawan",
+  "ad": "Ağ Merkeziyeti x Momentum Sıralaması (Long Top 10)",
+  "stil": "swing",
+  "kaynak": {
+    "url": "https://github.com/joseph-dermawan/network_graph",
+    "lisans": "Apache-2.0",
+    "tur": "github"
+  },
+  "ozet": "40 büyük ABD hissesinin getiri ağında özvektör merkeziyeti hesaplanır, 60 günlük getiriyle çarpılıp sıralanır; en iyi 10 hisse eşit ağırlıkla tutulur, yaklaşık 20 günde bir yeniden dengelenir.",
+  "kategori": "momentum",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+    "islem": "1d",
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {
+      "ad": "Özvektör merkeziyeti (kısmi korelasyon grafiği, Graphical Lasso)",
+      "parametreler": {
+        "pencere": 60
+      }
+    },
+    {
+      "ad": "60 günlük toplam getiri",
+      "parametreler": {
+        "pencere": 60
+      }
+    }
+  ],
+  "long_giris": [
+    "Yeniden dengeleme gününde skor = merkeziyet x 60 günlük getiri; en yüksek 10 hisseye eşit ağırlıkla long"
+  ],
+  "short_giris": [],
+  "stop_loss": null,
+  "kar_al": null,
+  "iz_suren_stop": null,
+  "zaman_cikisi": "20 işlem günü sonra yeniden dengele",
+  "filtreler": [
+    "Evren: 40 likit büyük ABD hissesi (sektör çeşitli)"
+  ],
+  "pozisyon_risk": "Eşit ağırlık, yalnız long (README açık yazmıyor)",
+  "iddia_edilen_performans": "README: CAGR %24.25 (kıyas ~%13), Sharpe 0.84 (kıyas 0.60), toplam %206.7 (iddia, doğrulanmadı)",
+  "kanit": "README'deki sonuçlar yazar iddiası (iddia, doğrulanmadı); dönem tam belli değil, maliyet 10 baz puan/işlem deniyor.",
+  "veri_uygun": [
+    false,
+    "ABD hisse evreni; Dukascopy hisse OHLCV evreninin 40 hisseyi kapsadığı doğrulanmadı. Kural kripto evrenine (13-15 coin) uyarlanabilir ama evren çok dar."
+  ],
+  "kodlanabilirlik": {
+    "puan": 2,
+    "gerekce": "Skor, sıralama, top-10 ve 20 gün sayısal; Glasso düzenleme parametresi, ağ eşiği ve evren listesi yok."
+  },
+  "belirsizlikler": [
+    "Graphical Lasso düzenleme parametresi kaynakta yok",
+    "Korelasyon eşiği kaynakta yok",
+    "Evren listesi yok",
+    "Yalnız-long açık yazmıyor",
+    "Graphical Lasso istatistiksel kovaryans tahmincisi; README ML demiyor, ML modeli sayılmadı",
+    "Lookahead güvencesi anlatılmamış"
+  ],
+  "uyumluluk_notu": "Mevcut pf__rotasyon ile benzer rotasyon fikri; fark ağ merkeziyeti ağırlığı. Kripto evreni darlığı nedeniyle anlamlılık zayıf.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+    "agi-merkeziyet",
+    "ozvektor",
+    "momentum",
+    "rotasyon",
+    "graphical-lasso",
+    "hisse"
+  ]
+}

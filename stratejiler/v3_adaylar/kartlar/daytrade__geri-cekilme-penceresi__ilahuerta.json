@@ -1,0 +1,87 @@
+{
+  "piyasa_rejimi": "trend",
+  "filtreler": [
+    "EMA açı filtresi",
+    "ATR volatilite filtresi",
+    "Saat filtresi (saatler kaynakta yok)"
+  ],
+  "iz_suren_stop": null,
+  "varyantlar": [],
+  "short_giris": [
+    "Simetrik; kaynakta short şu an kapalı/belirsiz"
+  ],
+  "kar_al": "12 x ATR",
+  "zaman_cikisi": null,
+  "pozisyon_risk": "Kaynak: işlem başına equity'nin %1'i",
+  "kart_id": "daytrade__geri-cekilme-penceresi__ilahuerta",
+  "ad": "EMA Geri Çekilme Pencere Kırılımı (XAUUSD 5m)",
+  "stil": "daytrade",
+  "kaynak": {
+    "url": "https://github.com/ilahuerta-IA/backtrader-pullback-window-xauusd",
+    "lisans": "NOASSERTION (README MIT diyor); kod kopyalanmadı",
+    "tur": "github",
+    "not": "diğer_aynı_kaynak: tumu.csv:287, gercek_ek.csv:486"
+  },
+  "ozet": "5 dakikalık altında EMA kesişimiyle yön belirlenir, 1-3 ters mumluk geri çekilme beklenir, ardından 2 mumluk pencerede kırılım olursa girilir. Stop 2.5 ATR, hedef 12 ATR.",
+  "kategori": "trend_takip",
+  "orijinal_piyasa": "emtia",
+  "zaman_dilimi": {
+    "islem": "5m",
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {
+      "ad": "EMA",
+      "parametreler": {
+        "onay": 1,
+        "hizli": 14,
+        "orta": 18,
+        "yavas": 24
+      }
+    },
+    {
+      "ad": "ATR",
+      "parametreler": {
+        "periyot": null
+      }
+    },
+    {
+      "ad": "EMA eğimi (derece)",
+      "parametreler": {}
+    }
+  ],
+  "long_giris": [
+    "Durum 1 TARAMA: EMA kesişimi ve yön onayı",
+    "Durum 2 HAZIR: 1-3 ters renkli mum (geri çekilme)",
+    "Durum 3 PENCERE: kırılım seviyeleri belirlenir, 2 mum boyunca izlenir (ofset çarpanı 1.0)",
+    "Durum 4 GİRİŞ: kanal üstü (long) kırılım teyit edilirse gir",
+    "Filtreler: EMA açısı güçlü, ATR aşırı volatil değil, mum rengi yönle uyumlu"
+  ],
+  "stop_loss": "2.5 x ATR",
+  "iddia_edilen_performans": "iddia (doğrulanmadı): 2020-2025, 175 işlem, %55.4 kazanç, PF 1.64, Sharpe 0.892, MaxDD %5.81; in-sample",
+  "kanit": "README sonuçları; in-sample, komisyon/slipaj değerleri belirsiz (iddia, doğrulanmadı)",
+  "veri_uygun": [
+    true,
+    "Dukascopy XAUUSD 5m OHLCV var."
+  ],
+  "kodlanabilirlik": {
+    "puan": 1,
+    "gerekce": "Kesişim yönü, EMA açı eşiği, ATR eşiği, kanal hesabı ve saatler README'de yok; kaynak kodu okumak gerek (lisans belirsiz)"
+  },
+  "belirsizlikler": [
+    "Hızlı EMA 1 mi 14 mü: README çelişkili",
+    "ATR periyodu ve volatilite/EMA açı eşikleri kaynakta yok",
+    "Kanal ofsetinin hesabı yok",
+    "Saat filtresi yok",
+    "Short taraf: yol haritasında 'devre dışı' deniyor",
+    "Parametreler in-sample ayarlı"
+  ],
+  "uyumluluk_notu": "swing__ma-geri-cekilme ile benzer fikir; burada 5m, durum makinesi ve ATR hedefi. 5m'ye doğrudan uygun.",
+  "anahtar_kelimeler": [
+    "ema",
+    "geri-cekilme",
+    "atr",
+    "altin",
+    "durum-makinesi"
+  ]
+}

@@ -1,0 +1,75 @@
+{
+  "kart_id": "swing__zs-momentum-vol-hedef__fiction-junction",
+  "ad": "Zaman Serisi Momentumu (1-3-6-12 Ay, Vol Hedefli ETF)",
+  "stil": "swing",
+  "kaynak": {
+    "url": "https://github.com/Fiction-Junction/time-series-momentum",
+    "lisans": "belirtilmemiş",
+    "tur": "github"
+  },
+  "ozet": "ETF sepetinde 1, 3, 6 ve 12 aylık getirilerin işaretiyle yön belirlenir, pozisyon hedef volatiliteye göre ölçeklenir; 3 yıl eğitim/1 yıl test kayan pencereli.",
+  "kategori": "momentum",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+    "islem": "1d",
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {
+      "ad": "Getiri",
+      "parametreler": {
+        "pencereler_ay": [
+          1,
+          3,
+          6,
+          12
+        ]
+      }
+    },
+    {
+      "ad": "Volatilite hedefi",
+      "parametreler": {
+        "hedef": null,
+        "pencere": null
+      }
+    }
+  ],
+  "long_giris": [
+    "Getiri işaretlerinin toplamı pozitifse long (birleştirme ağırlığı kaynakta yok)"
+  ],
+  "short_giris": [
+    "Negatif ise short/nakit (kaynakta belirsiz)"
+  ],
+  "stop_loss": null,
+  "kar_al": null,
+  "iz_suren_stop": null,
+  "zaman_cikisi": "Yeniden dengeleme sıklığı kaynakta yok",
+  "filtreler": [],
+  "pozisyon_risk": "Volatilite hedefiyle boyutlandırma",
+  "iddia_edilen_performans": "Kaynakta yıllık %13,82 (kıyas %8,64), Sharpe 0,9274, MDD %17,67 iddiası; hangi sütun strateji belirsiz (iddia, doğrulanmadı)",
+  "kanit": null,
+  "veri_uygun": [
+    true,
+    "Mantık kripto perp ve Dukascopy emtia/hisse günlüğüne uygulanabilir; kaynağın ETF listesi bilinmiyor."
+  ],
+  "kodlanabilirlik": {
+    "puan": 1,
+    "gerekce": "Birleştirme, vol hedefi, yeniden dengeleme, evren kaynak README'sinde yok (kod/rapor görülmedi)."
+  },
+  "belirsizlikler": [
+    "Sinyal birleştirme ağırlığı yok",
+    "Hedef vol ve pencere yok",
+    "Yeniden dengeleme sıklığı yok",
+    "Maliyet yok",
+    "Evren listesi yok",
+    "Lisans yok: kod kopyalanmadı"
+  ],
+  "uyumluluk_notu": "Mevcut Zarattini/AdaptiveTrend kartlarına yakın aile; ayrıntı eksik, öncelik düşük.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+    "zaman-serisi-momentum",
+    "vol-hedefi",
+    "tsmom"
+  ]
+}

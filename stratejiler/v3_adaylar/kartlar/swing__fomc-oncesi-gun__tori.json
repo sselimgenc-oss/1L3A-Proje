@@ -1,0 +1,58 @@
+{
+  "kart_id": "swing__fomc-oncesi-gun__tori",
+  "ad": "FOMC Toplantı Etkisi (Toplantıdan Bir Gün Önce Long)",
+  "stil": "swing",
+  "kaynak": {
+    "url": "https://quantpedia.com/strategies/federal-open-market-committee-meeting-effect-in-stocks/",
+    "lisans": "belirtilmemiş",
+    "tur": "makale"
+  },
+  "ozet": "FOMC toplantısından bir gün önceki kapanışta S&P 500 benzeri endekse long girilir, toplantı sonrası kapanışta çıkılır; diğer günler nakit.",
+  "kategori": "diger",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+    "islem": "1d",
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {
+      "ad": "FOMC takvimi (dış takvim)",
+      "parametreler": {}
+    }
+  ],
+  "long_giris": [
+    "FOMC toplantısından bir gün önceki kapanışta ABD hisse endeksine (S&P 500 ETF/vadeli) long gir"
+  ],
+  "short_giris": [],
+  "stop_loss": null,
+  "kar_al": null,
+  "iz_suren_stop": null,
+  "zaman_cikisi": "Toplantı sonrası kapanışta çık (toplantı günü kapanışı mı ertesi gün mü: kaynakta belirsiz)",
+  "filtreler": [],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": "Kaynak (Quantpedia özeti): 1980-2000, ~%6.19 yıllık, yılda ~8 gün pozisyon (iddia, doğrulanmadı); etki 1960-79'da yok.",
+  "kanit": "Tori FOMC makalesi Quantpedia özetinden okundu; makale metni açılmadı. Sayılar doğrulanmadı.",
+  "veri_uygun": [
+    false,
+    "FOMC tarih listesi dış veri (bizde yok, elle eklenebilir); ABD endeks CFD'si Dukascopy'de var mı doğrulanmadı. Günlük kapanış-kapanış testi yeterli olurdu."
+  ],
+  "kodlanabilirlik": {
+    "puan": 2,
+    "gerekce": "Giriş net, çıkış gününde belirsizlik var; takvim elle sağlanmalı."
+  },
+  "belirsizlikler": [
+    "Çıkış: toplantı günü kapanışı mı ertesi gün kapanışı mı: kaynakta belirsiz",
+    "Etki 1980 öncesinde yok; güncel dönemde sürüp sürmediği kaynakta yok",
+    "Stop/kar-al: kaynakta yok"
+  ],
+  "uyumluluk_notu": "Çok az işlem (yılda ~8); istatistiksel güç düşük. Takvim verisi gerekir.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+    "fomc",
+    "takvim",
+    "gun-etkisi",
+    "endeks",
+    "olay"
+  ]
+}

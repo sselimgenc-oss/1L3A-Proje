@@ -1,0 +1,71 @@
+{
+  "kart_id": "swing__ma-v-kalman-cift__yibaii",
+  "ad": "Mastercard/Visa Kalman Hedge Çift Stratejisi",
+  "stil": "swing",
+  "kaynak": {
+    "url": "https://github.com/Yibaii/wakeup",
+    "lisans": "belirtilmemiş",
+    "tur": "github"
+  },
+  "ozet": "MA ve V hisselerinin farkı Kalman filtresiyle dinamik hedge oranına göre standartlaştırılır; z ≤ -2'de spread long, z ≥ +2'de short, z sıfıra gelince kapanır, |z|≥3.5 stop, 20 gün zaman çıkışı.",
+  "kategori": "ortalamaya_donus",
+  "piyasa_rejimi": "yatay",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+    "islem": "1d",
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {
+      "ad": "Kalman filtresi",
+      "parametreler": {
+        "delta": 0.0001,
+        "durum": "rastgele yürüyüş, beta ve alfa"
+      }
+    },
+    {
+      "ad": "Z-skor (standartlaştırılmış tek adım artık)",
+      "parametreler": {
+        "tanim": "(MA - alfa - beta*V)/karekök(Q)"
+      }
+    }
+  ],
+  "long_giris": [
+    "z ≤ -2 olunca spread long: MA al, V sat (dolar-hedge)"
+  ],
+  "short_giris": [
+    "z ≥ +2 olunca spread short: MA sat, V al"
+  ],
+  "stop_loss": "|z| ≥ 3.5 olunca kapat",
+  "kar_al": "z, 0 çizgisini kesince kapat (SUCCESS)",
+  "iz_suren_stop": null,
+  "zaman_cikisi": "Girişten 20 işlem günü sonra kapat",
+  "filtreler": [],
+  "pozisyon_risk": "MA bacağı 10.000 dolar, V bacağı 10.000 x beta(t) dolar (README)",
+  "iddia_edilen_performans": "README: 93% SUCCESS / 88 işlem, P&L 1.520,94 dolar (sermaye belirsiz) (iddia, doğrulanmadı); SUCCESS kazanma anlamına gelmiyor",
+  "kanit": "README sonuçları iddia (doğrulanmadı); sermaye ve maliyet etkisi tam anlaşılmıyor.",
+  "veri_uygun": [
+    false,
+    "ABD hisseleri MA ve V; Dukascopy hisse listesinde varlıkları doğrulanmadı. Kural başka çiftlere uyarlanabilir."
+  ],
+  "kodlanabilirlik": {
+    "puan": 3,
+    "gerekce": "Giriş, stop, kâr çıkışı ve zaman çıkışı sayısal; yalnız Kalman başlangıç ayarları (Ve, ilk durum) kaynakta yok."
+  },
+  "belirsizlikler": [
+    "Gözlem gürültüsü ve başlangıç durumu kaynakta yok",
+    "Çift sabit (MA/V), seçim süreci tarif edilmemiş",
+    "Lookahead güvencesi açıkça anlatılmamış (tek adım ileri artık diyor)",
+    "Lisans yok: kod kopyalanmadı",
+    "Veri kaynağı IBKR/yfinance karışık"
+  ],
+  "uyumluluk_notu": "Mevcut pf__pairs ile benzer; fark Kalman dinamik hedge ve 3.5 stop/20 gün zaman çıkışı. Tek çift olduğu için evren dar.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+    "kalman",
+    "cift-arbitraji",
+    "z-skor",
+    "zaman-cikisi",
+    "hisse"
+  ]
+}

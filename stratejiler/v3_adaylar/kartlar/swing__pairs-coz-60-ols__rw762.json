@@ -1,0 +1,72 @@
+{
+  "kart_id": "swing__pairs-coz-60-ols__rw762",
+  "ad": "Kointegre Hisse Çifti Z-Skor (60 kapanış)",
+  "stil": "swing",
+  "kaynak": {
+    "url": "https://github.com/rw762-sketch/pairs-trading",
+    "lisans": "belirtilmemiş",
+    "tur": "github"
+  },
+  "ozet": "S&P 500 hisselerinden kümeleme ve kointegrasyon testiyle seçilen çiftlerde, sabit OLS hedge oranlı farkın 60 kapanışlık z-skoru aşırıya gidince ortalamaya dönüş işlemi açılır; ±0,5'te çıkılır, ±3,5'te stop.",
+  "kategori": "ortalamaya_donus",
+  "piyasa_rejimi": "yatay",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+    "islem": "1d",
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {
+      "ad": "Z-skor",
+      "parametreler": {
+        "pencere": "önceki 60 kapanış (fark ort./std)"
+      }
+    },
+    {
+      "ad": "OLS hedge oranı",
+      "parametreler": {
+        "pencere": "son 252 kapanış, sabit"
+      }
+    }
+  ],
+  "long_giris": [
+    "Fark z-skoru -3,5<z<-2 ise farkı long (A long, B short); sonraki kapanışta icra"
+  ],
+  "short_giris": [
+    "Fark z-skoru 2<z<3,5 ise farkı short; sonraki kapanışta icra"
+  ],
+  "stop_loss": "|z| 3,5'e ulaşırsa (aleyhte) kapat",
+  "kar_al": "z ±0,5 sınırına dönünce çık",
+  "iz_suren_stop": null,
+  "zaman_cikisi": "Zaman limiti yok; dönem sonunda kapat",
+  "filtreler": [
+    "Çift seçimi: kümeleme sonrası kointegrasyon p<0,05, pozitif OLS hedge, yarı-ömür 1-20 kapanış, yıllık en az 12 ortalama kesişimi",
+    "6 örtüşen 252 kapanış oluşumunun en az 3'ünde p<0,05"
+  ],
+  "pozisyon_risk": "Çift başına bütçe periods_passed/ortalama_p ile orantılı (kaynak)",
+  "iddia_edilen_performans": "Kaynakta net 3,90% (brüt 5,78%) iddiası var (iddia, doğrulanmadı)",
+  "kanit": null,
+  "veri_uygun": [
+    true,
+    "Dukascopy ABD hisse günlüğü varsa çalışır; S&P 500 evreninin yalnız bir kısmı bizde olabilir, kapsam doğrulanmalı."
+  ],
+  "kodlanabilirlik": {
+    "puan": 2,
+    "gerekce": "Kurallar net; küme sayısı ve seçim hattı kodlanabilir ama kaynak hedge regresyon tanımını vermiyor."
+  },
+  "belirsizlikler": [
+    "Hedge regresyonunun bağımlı değişkeni/log fiyat kullanımı kaynakta yok",
+    "Giriş 2<|z|<3,5 bandı; yön kuralı varsayım",
+    "Eğitim dönemi uzunluğu ve k-means girdileri tam belli değil",
+    "Lisans yok: kod kopyalanmadı"
+  ],
+  "uyumluluk_notu": "Hisse çifti; evren sınırlı olursa az çift çıkar. Kripto perp çiftlerine de uyarlanabilir. JT_Pair_trading ile çakışma kontrolü gerekir.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+    "pairs",
+    "kointegrasyon",
+    "z-skor",
+    "ols",
+    "hisse"
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "kart_id": "swing__opsiyon-vade-haftasi__stivers",
+  "ad": "Opsiyon Vade Haftası Etkisi",
+  "stil": "swing",
+  "kaynak": {
+    "url": "https://quantpedia.com/strategies/option-expiration-week-effect/",
+    "lisans": "belirtilmemiş",
+    "tur": "makale"
+  },
+  "ozet": "Aylık opsiyon vadesinden önceki haftada (üçüncü cumadan önceki hafta) büyük ABD hisselerine / S&P 100'e long kalınır, diğer zamanlarda nakit.",
+  "kategori": "diger",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+    "islem": "1d",
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {
+      "ad": "Opsiyon vade takvimi (üçüncü cumadan önceki hafta)",
+      "parametreler": {}
+    }
+  ],
+  "long_giris": [
+    "Aylık opsiyon vade haftasında S&P 100 (veya büyük hisse endeksi) pozisyonunu long tut"
+  ],
+  "short_giris": [],
+  "stop_loss": null,
+  "kar_al": null,
+  "iz_suren_stop": null,
+  "zaman_cikisi": "Vade haftası bitince nakde geç; tam giriş/çıkış saati kaynakta yok",
+  "filtreler": [],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": "Kaynak (Quantpedia özeti): 1988-2010, ~%9.3 yıllık (Quantpedia'nın hesabı), maliyet raporlanmamış (iddia, doğrulanmadı).",
+  "kanit": "Stivers-Sun makalesi Quantpedia özetinden okundu; makale metni açılmadı. Sayılar doğrulanmadı.",
+  "veri_uygun": [
+    false,
+    "Vade takvimi hesaplanabilir (opsiyon verisi gerekmiyor) ama ABD hisse endeksi Dukascopy'de doğrulanmadı."
+  ],
+  "kodlanabilirlik": {
+    "puan": 2,
+    "gerekce": "Kural net; giriş/çıkış anı (Pazartesi açılışı mı Cuma kapanışı mı) kaynakta belirsiz."
+  },
+  "belirsizlikler": [
+    "Hafta tanımı: 'üçüncü cumadan önceki hafta' (Cuma vade günü mü, önceki Cuma mı) belirsiz",
+    "Sayfada 'yılın kalanı nakit' ifadesi aylık yapıyla tutarsız",
+    "Stop/kar-al: kaynakta yok"
+  ],
+  "uyumluluk_notu": "Yılda 12 işlem; basit takvim kuralı. Düşük öncelik.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+    "opsiyon-vade",
+    "takvim",
+    "hafta-etkisi",
+    "endeks"
+  ]
+}

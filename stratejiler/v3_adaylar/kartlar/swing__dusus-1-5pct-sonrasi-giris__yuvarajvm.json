@@ -1,0 +1,62 @@
+{
+  "kart_id": "swing__dusus-1-5pct-sonrasi-giris__yuvarajvm",
+  "ad": "Günlük %1,5 Düşüş Sonrası Tepki (NIFTY)",
+  "stil": "swing",
+  "kaynak": {
+    "url": "https://github.com/Yuvarajvm/algochowk-quant-intern-challenge",
+    "lisans": "MIT",
+    "tur": "github"
+  },
+  "ozet": "Günlük kapanış getirisi -%1,5 veya altına inince ertesi açılışta girilip sabit süre tutulur. Kaynak kendi testinde hipotezi reddediyor (anlamsız sonuç).",
+  "kategori": "ortalamaya_donus",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "genel",
+  "zaman_dilimi": {
+    "islem": "1d",
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {
+      "ad": "Kapanış getirisi",
+      "parametreler": {
+        "esik": "<= -%1,5"
+      }
+    }
+  ],
+  "long_giris": [
+    "Gün t getirisi <= -%1,5 ise t+1 açılışta long (gerçekçi model)"
+  ],
+  "short_giris": [],
+  "stop_loss": null,
+  "kar_al": null,
+  "iz_suren_stop": null,
+  "zaman_cikisi": "Tutma süresi 1,2,3,5,10 gün olarak taranmış; backtest süresi kaynakta belirsiz",
+  "filtreler": [
+    "3 günlük kilit penceresi: örtüşen olaylar azaltılır"
+  ],
+  "pozisyon_risk": "Stop ve boyut kaynakta yok",
+  "iddia_edilen_performans": "Kaynakta CAGR %1,70 (alıp-tut %9,07), p=0,719 (iddia, doğrulanmadı); yazar tezi reddediyor",
+  "kanit": null,
+  "veri_uygun": [
+    false,
+    "Evren NIFTY 50; Dukascopy'de yok. Kural başka piyasa günlüğüne taşınabilir."
+  ],
+  "kodlanabilirlik": {
+    "puan": 2,
+    "gerekce": "Giriş net; çıkış/tutma süresi kaynakta tek değer değil."
+  },
+  "belirsizlikler": [
+    "Çıkış kuralı kaynakta yok",
+    "Maliyet 10 bp gidiş-dönüş, kayma tutarı yok",
+    "Sonuç anlamsız; öncelik düşük"
+  ],
+  "uyumluluk_notu": "Günlük OHLC yeter; kripto/hisse günlüğüne uyarlanabilir. Mevcut dip-alım kartıyla neredeyse aynı.",
+  "varyantlar": [
+    "Eşik -%1,0 ile -%3,0 arası taranmış"
+  ],
+  "anahtar_kelimeler": [
+    "dip-alimi",
+    "gunluk-dusus",
+    "olay-calismasi"
+  ]
+}

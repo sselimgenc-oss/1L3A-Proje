@@ -1,0 +1,82 @@
+{
+  "kart_id": "swing__kalman-cift-zskor__octaviodegodoy",
+  "ad": "Kalman Hedge Oranlı Çift Arbitrajı (Z-skor)",
+  "stil": "swing",
+  "kaynak": {
+    "url": "https://github.com/octaviodegodoy/kalman-pairs-trading",
+    "lisans": "MIT",
+    "tur": "github"
+  },
+  "ozet": "İki eş-bütünleşik varlığın farkı Kalman filtresiyle değişen hedge oranı kullanılarak hesaplanır; fark z-skoru -2'nin altına inince spread long, +2'nin üstüne çıkınca short açılır, |z|<0.5'te kapanır.",
+  "kategori": "ortalamaya_donus",
+  "piyasa_rejimi": "yatay",
+  "orijinal_piyasa": "genel",
+  "zaman_dilimi": {
+    "islem": "1d",
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {
+      "ad": "Kalman filtresi (dinamik hedge oranı)",
+      "parametreler": {
+        "delta": 0.0001,
+        "Ve": 0.001
+      }
+    },
+    {
+      "ad": "Z-skor (spread)",
+      "parametreler": {
+        "pencere": 20
+      }
+    },
+    {
+      "ad": "Eş-bütünleşme testi (ADF/Johansen, yarı ömür)",
+      "parametreler": {
+        "min_pvalue": 0.05
+      }
+    }
+  ],
+  "long_giris": [
+    "Spread = A - beta*B; z-skor < -2.0 ise spread long (A al, B sat)"
+  ],
+  "short_giris": [
+    "z-skor > +2.0 ise spread short (A sat, B al)"
+  ],
+  "stop_loss": "|z-skor| > 4.0 olunca pozisyonu kapat",
+  "kar_al": "|z-skor| < 0.5 olunca kapat (ortalamaya dönüş)",
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [
+    "Çift seçimi: evrende eş-bütünleşme p<0.05 ve yarı ömür filtresi, sıralama sonrası en iyi çiftler"
+  ],
+  "pozisyon_risk": "Kaynakta ayarlarda max_position_size=1.0 ve max_drawdown_limit=0.15; işlem başına boyut formülü yok",
+  "iddia_edilen_performans": "README örneği (GLD/GDX, 2020-2024): yıllık %7.73, Sharpe 1.84, maks DD %-8.23, kazanma %64.3, 87 işlem (iddia, doğrulanmadı)",
+  "kanit": "README yazar tarafından raporlanan örnek sonuçlar; iddia (doğrulanmadı). Maliyet varsayımı, lookahead önlemi ve çift seçim ayrıntısı kaynakta yok.",
+  "veri_uygun": [
+    false,
+    "Örnek evren ABD ETF'leri (SPY, QQQ, GLD, GDX...); Dukascopy'de bu ETF'lerin varlığı doğrulanmadı. Kural Dukascopy hisse/emtia çiftlerine (ör. altın/gümüş) uyarlanabilir."
+  ],
+  "kodlanabilirlik": {
+    "puan": 2,
+    "gerekce": "Giriş/stop/çıkış eşikleri kesin; zaman çıkışı, çift seçim sıklığı ve zaman dilimi kaynakta açık değil."
+  },
+  "belirsizlikler": [
+    "Zaman dilimi açıkça yazmıyor (252/63 pencere günlük çıkarımı)",
+    "Zaman çıkışı kaynakta yok",
+    "Lookahead/walk-forward güvenceleri anlatılmamış",
+    "README LSTM beta tahmini ve rejim tespiti özelliklerini sayıyor; bunlar ML olduğundan kurala DAHİL EDİLMEZ, yalnız Kalman+z-skor çekirdeği alınır",
+    "Spread tanımı fiyat farkı; log fiyat mı belirsiz",
+    "Stop eşiği -4 sonrası yeniden giriş kuralı yok"
+  ],
+  "uyumluluk_notu": "Mevcut pf__pairs ile benzer olabilir ama 'benzer_mevcut: yok' denmiş; Kalman dinamik hedge farkı. Kripto çiftlerine (BTC/ETH) 1d üzerinde de uygulanabilir; çapraz-hisse için Dukascopy evreni kontrol edilmeli.",
+  "varyantlar": [
+    "Giriş eşiği 1.5/2.0/2.5, çıkış 0.3/0.5/0.7, delta 1e-5/1e-4/1e-3 ızgara değerleri kaynakta var"
+  ],
+  "anahtar_kelimeler": [
+    "kalman",
+    "cift-arbitraji",
+    "z-skor",
+    "eslesme",
+    "ortalamaya-donus"
+  ]
+}

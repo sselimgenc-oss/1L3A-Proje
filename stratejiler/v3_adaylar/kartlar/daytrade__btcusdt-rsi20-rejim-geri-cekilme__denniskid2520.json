@@ -1,0 +1,67 @@
+{
+  "kart_id": "daytrade__btcusdt-rsi20-rejim-geri-cekilme__denniskid2520",
+  "ad": "BTC 4s RSI(20)>70 Rejimi + Geri Çekilme/Kırılım Girişi",
+  "stil": "daytrade",
+  "kaynak": {
+    "url": "https://github.com/denniskid2520/btcusdt-perp-live",
+    "lisans": "belirtilmemiş",
+    "tur": "github"
+  },
+  "ozet": "4s RSI(20) 70'in üstündeyken rejim açılır; 1s barlarda bölge yükseğinden %0.75 geri çekilme veya %0.25 kırılım girişi aranır, %1.25 ve %2.5 stoplar, en çok 24 bar tutma.",
+  "kategori": "momentum",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "kripto",
+  "zaman_dilimi": {
+    "islem": "1h",
+    "ust_filtre": "4h"
+  },
+  "gostergeler": [
+    {
+      "ad": "RSI",
+      "parametreler": {
+        "periyot": 20,
+        "eşik": 70,
+        "zaman_dilimi": "4h"
+      }
+    }
+  ],
+  "long_giris": [
+    "4s RSI(20) > 70 rejimi aktifken: bölge yüksekten -%0.75 geri çekilme VEYA bölge yüksekten +%0.25 kırılım (hibrit giriş; 'bölge' tanımı kaynakta yok; yön açık yazmıyor)"
+  ],
+  "short_giris": [],
+  "stop_loss": "Alfa stop %1.25 (bar kapanışında kontrol); felaket stopu %2.5 (borsada reduce-only STOP_MARKET)",
+  "kar_al": null,
+  "iz_suren_stop": null,
+  "zaman_cikisi": "24 bar sonra çık",
+  "filtreler": [],
+  "pozisyon_risk": "3x izole kaldıraç (README); boyutlandırma diğer ayrıntı yok",
+  "iddia_edilen_performans": "README: PF 4.63, kazanma %69.3, DD -%12.7 (iddia, doğrulanmadı)",
+  "kanit": "README'deki sayılar yazar iddiası; backtest/canlı ayrımı yok (iddia, doğrulanmadı). 8 OOS pencereli walk-forward ve 6.427 parametre kombinasyonu denendiği belirtiliyor, yani aşırı uyum riski yüksek.",
+  "veri_uygun": [
+    true,
+    "Binance BTCUSDT perp 1s ve 4s verisi 5m'den türetilir; bizde var."
+  ],
+  "kodlanabilirlik": {
+    "puan": 1,
+    "gerekce": "Eşikler sayısal ama bölge tanımı, yön ve boyut ayrıntıları ACTIVE_STRATEGY.md ve kodda; kaynak sayfada yok."
+  },
+  "belirsizlikler": [
+    "İşlem yönü kaynakta yazılı değil",
+    "'Bölge yüksek' hesaplaması tanımsız",
+    "Boyutlandırma yok",
+    "24 bar 1s bar mı belirsiz (1s çıkarımı)",
+    "Lisans yok: kod kopyalanmadı",
+    "6.427 kombinasyon denendi: veri madenciliği riski",
+    "Lookahead anlatılmamış"
+  ],
+  "uyumluluk_notu": "Kuralların eksik parçaları nedeniyle düşük öncelik; yön ve bölge tanımı elde edilirse test edilebilir.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+    "rsi",
+    "rejim",
+    "geri-cekilme",
+    "kirilim",
+    "btc",
+    "kripto"
+  ]
+}

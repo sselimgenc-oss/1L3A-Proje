@@ -1,0 +1,67 @@
+{
+  "kart_id": "swing__kirmizi-mum-2x-hacim-ertesi-gun__habr",
+  "ad": "Kırmızı Mum + 2x Hacim, Ertesi Gün Long (ETH/BTC)",
+  "stil": "swing",
+  "kaynak": {
+    "url": "https://habr.com/ru/articles/960670/",
+    "lisans": "belirtilmemiş",
+    "tur": "blog"
+  },
+  "ozet": "Günlük mum kırmızı kapanır (close<open) ve hacmi önceki 60 günün ortalamasının en az 2 katıysa ertesi günün açılışında long açılıp aynı günün kapanışında kapatılır.",
+  "kategori": "ortalamaya_donus",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "kripto",
+  "zaman_dilimi": {
+    "islem": "1d",
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {
+      "ad": "Hacim",
+      "parametreler": {
+        "sma": 60,
+        "carpan": 2.0,
+        "sinyal_mumu_haric": true
+      }
+    }
+  ],
+  "long_giris": [
+    "Günlük mum close < open",
+    "Hacim >= 2 x ortalama(önceki 60 günlük hacim)",
+    "Ertesi günün açılışında long gir (00:00 UTC)"
+  ],
+  "zaman_cikisi": "Girişten 1 gün sonra (ertesi günün açılış/kapanışında) kapat; backtest'te giriş açılış, çıkış aynı mumun kapanışı",
+  "pozisyon_risk": "Sabit büyüklük, martingale yok",
+  "iddia_edilen_performans": "iddia (doğrulanmadı): ETH 60 işlem, %60 kazanç, toplam %94,6, MDD ~%20; BTC 63 işlem, %84,26, MDD ~%10 (komisyonsuz, bileşiksiz)",
+  "kanit": null,
+  "veri_uygun": [
+    true,
+    "Binance USDT-M günlük OHLCV ile doğrudan test edilir (ETH, BTC)."
+  ],
+  "kodlanabilirlik": {
+    "puan": 3,
+    "gerekce": "Tüm kurallar kesin."
+  },
+  "belirsizlikler": [
+    "Stop/TP yok",
+    "Komisyon backtest'te yok; yazar tahmini tutarsız (%0,05 / %0,5)",
+    "Süre '5 yıl' ile 2500 gün (~6,8 yıl) tutarsız",
+    "~60 işlem, OOS yok, 2x ve 60 gün seçilmiş olabilir",
+    "Çıkışın tam anı: backtest aynı gün kapanış, canlı bot ertesi 00:00 UTC; kaynakta çelişki",
+    "Spesifik kod deposu yok"
+  ],
+  "uyumluluk_notu": "Benzer: dis__asiri-tepki-ertesi-gun. Düşük örneklem; küçük hacimle gözden geçir. Stop yoksa risk limiti koddan eklenmeli.",
+  "anahtar_kelimeler": [
+    "kirmizi-mum",
+    "hacim-patlamasi",
+    "ertesi-gun",
+    "eth",
+    "btc"
+  ],
+  "filtreler": [],
+  "varyantlar": [],
+  "stop_loss": null,
+  "kar_al": null,
+  "iz_suren_stop": null,
+  "short_giris": []
+}

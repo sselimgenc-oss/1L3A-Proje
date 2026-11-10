@@ -1,0 +1,73 @@
+{
+  "kart_id": "swing__erc-vol-hedef-6etf__quantucf",
+  "ad": "6 ETF Aylık ERC + %10 Vol Hedefi",
+  "stil": "swing",
+  "kaynak": {
+    "url": "https://github.com/quantucf/gqh",
+    "lisans": "MIT",
+    "tur": "github"
+  },
+  "ozet": "QQQ, IWM, HYG, TLT, GLD, DBC arasında 126 günlük kovaryanstan aylık eşit-risk-katkılı ağırlık hesapla ve portföyü %10 yıllık volatilite hedefine ölçekle.",
+  "kategori": "diger",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+    "islem": "1d",
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {
+      "ad": "ERC ağırlık",
+      "parametreler": {
+        "kovaryans": "Ledoit-Wolf, 126 seans",
+        "ust_limit": "fon başına %35"
+      }
+    },
+    {
+      "ad": "EWMA volatilite",
+      "parametreler": {
+        "span": [
+          20,
+          63
+        ],
+        "kural": "iki tahminin büyüğü"
+      }
+    }
+  ],
+  "long_giris": [
+    "Aylık: 126 seanslık Ledoit-Wolf kovaryansından kısıtlı ERC ağırlıkları hesapla (fon başı üst sınır %35)",
+    "Maruziyeti %10 yıllık vol hedefi / öngörülen vol oranında ölçekle, brüt ≤ 1,0"
+  ],
+  "short_giris": [],
+  "stop_loss": null,
+  "kar_al": null,
+  "iz_suren_stop": null,
+  "zaman_cikisi": "Maruziyet 5 puan değişince yeniden dengele; emirler kapanıştan türetilir, ertesi kapanışta uygulanır",
+  "filtreler": [],
+  "pozisyon_risk": "Vol hedefi %10; long-only; brüt ≤1; maliyet 5 bps",
+  "iddia_edilen_performans": "iddia (doğrulanmadı): README OOS (2024-10-02/2026-10-02) net getiri %9,52, Sharpe 0,714, MaxDD -%7,00; eğitim Sharpe 0,859, doğrulama 0,660",
+  "kanit": null,
+  "veri_uygun": [
+    true,
+    "ETF'ler Dukascopy'de bulunuyorsa günlük OHLCV yeterli; QQQ/IWM/HYG/TLT/GLD/DBC için Dukascopy kapsamı doğrulanmadı. Nakit getirisi için FRED verisi bizde yok."
+  ],
+  "kodlanabilirlik": {
+    "puan": 2,
+    "gerekce": "Kurallar net ama kovaryans/optimizasyon kısıtlı ERC çözücüsü gerektirir."
+  },
+  "belirsizlikler": [
+    "Kısıtlı ERC'nin alt sınırı/çözücüsü belirtilmemiş",
+    "Nakit faizi (ALFRED DGS3MO) bizde yok",
+    "Üç varyant var, hangisi seçilmiş belirsiz (yarışma gönderimi)",
+    "Risk kontrolü yalnız vol ölçekleme; drawdown stopu yok"
+  ],
+  "uyumluluk_notu": "Portföy yönetimi/ağırlıklandırma; mevcut pf__sabit_sepet'e yakın ama ağırlık yöntemi farklı. ML yok.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+    "erc",
+    "risk-esitleme",
+    "vol-hedefi",
+    "etf",
+    "portfoy"
+  ]
+}

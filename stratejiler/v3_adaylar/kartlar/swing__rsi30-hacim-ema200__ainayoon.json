@@ -1,0 +1,87 @@
+{
+  "kart_id": "swing__rsi30-hacim-ema200__ainayoon",
+  "ad": "RSI 30 Yukarı Kırılım + Hacim + EMA200",
+  "stil": "swing",
+  "kaynak": {
+    "url": "https://ainayoon.tistory.com/55",
+    "lisans": "belirtilmemiş",
+    "tur": "blog"
+  },
+  "ozet": "Yükseliş trendinde (kapanış EMA200 üstü) RSI 30'u yukarı keserken hacim ortalamanın 1,5 katından büyükse long açılır; RSI 70 altına inince ya da ATR stopuna değince kapanır.",
+  "kategori": "ortalamaya_donus",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+    "islem": "1d",
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {
+      "ad": "RSI",
+      "parametreler": {
+        "periyot": 14,
+        "esikler": [
+          30,
+          70
+        ]
+      }
+    },
+    {
+      "ad": "Hacim",
+      "parametreler": {
+        "sma": 20,
+        "carpan": 1.5
+      }
+    },
+    {
+      "ad": "EMA",
+      "parametreler": {
+        "periyot": 200
+      }
+    },
+    {
+      "ad": "ATR",
+      "parametreler": {
+        "periyot": 14
+      }
+    }
+  ],
+  "long_giris": [
+    "RSI(14) 30'u yukarı keser",
+    "Hacim > 1,5 x SMA(hacim,20)",
+    "Kapanış > EMA(200)",
+    "Açık pozisyon yok"
+  ],
+  "stop_loss": "Giriş kapanışı - 2 x ATR(14), girişte bir kez sabitlenir (iz süren değil)",
+  "kar_al": "RSI 70'i aşağı keserse kapat",
+  "pozisyon_risk": "Büyüklük = (kasa x %2) / ATR",
+  "iddia_edilen_performans": "iddia (doğrulanmadı): tek hisse, sayfada çelişkili test dönemi, Sharpe ~0,84, toplam ~%42,6 (kaynak tablosu)",
+  "kanit": null,
+  "veri_uygun": [
+    true,
+    "Günlük OHLCV yeterli; kaynak Samsung Heavy (KRX) ama kural genel, Dukascopy hisse/kripto günlükte uygulanabilir."
+  ],
+  "kodlanabilirlik": {
+    "puan": 3,
+    "gerekce": "Tüm kurallar kodda kesin."
+  },
+  "belirsizlikler": [
+    "Zaman dilimi günlük varsayıldı (kodda günlük veri)",
+    "Test dönemi sayfada çelişkili, OOS yok",
+    "Çıkışta çift satış emri hatası kaynakta (kopyalanmamalı)",
+    "Zaman dilimi açık yazılmamış",
+    "Pozisyon boyutu ATR bölme: kaldıraç sınırı yok, bizde risk limitine bağlanmalı"
+  ],
+  "uyumluluk_notu": "Benzer: dis__ifr2 (ortalamaya dönüş). Burada trend filtreli kırılım-dönüş; hacim verisi gerekli (kripto/hisse OHLCV'de var).",
+  "anahtar_kelimeler": [
+    "rsi",
+    "ema200",
+    "hacim",
+    "atr-stop"
+  ],
+  "filtreler": [],
+  "varyantlar": [],
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "short_giris": []
+}

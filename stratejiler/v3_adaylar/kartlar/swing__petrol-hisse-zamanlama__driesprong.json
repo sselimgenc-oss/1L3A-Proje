@@ -1,0 +1,61 @@
+{
+  "kart_id": "swing__petrol-hisse-zamanlama__driesprong",
+  "ad": "Petrol Değişimi ile Hisse Zamanlaması",
+  "stil": "swing",
+  "kaynak": {
+    "url": "https://quantpedia.com/strategies/crude-oil-predicts-equity-returns/",
+    "lisans": "belirtilmemiş",
+    "tur": "makale"
+  },
+  "ozet": "Bir önceki ayın petrol fiyat değişimiyle hisse getirisi regresyonu her ay yeniden tahmin edilir; tahmin risksiz getiriyi aşarsa hisse endeksinde kalınır, aşmazsa nakde geçilir (Driesprong-Jacobsen-Maat).",
+  "kategori": "diger",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "emtia",
+  "zaman_dilimi": {
+    "islem": "1d (aylık)",
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {
+      "ad": "Doğrusal regresyon (aylık hisse getirisi ~ önceki ay petrol değişimi)",
+      "parametreler": {
+        "yeniden_tahmin": "her ay, son gözlem eklenerek"
+      }
+    }
+  ],
+  "long_giris": [
+    "Ay sonunda regresyonla bir sonraki ay için hisse getirisi tahmini yap; tahmin > risksiz getiri ise hisse endeksinde tam pozisyon long"
+  ],
+  "short_giris": [],
+  "stop_loss": null,
+  "kar_al": null,
+  "iz_suren_stop": null,
+  "zaman_cikisi": "Tahmin < risksiz getiri ise nakde geç; aylık yeniden değerlendirme",
+  "filtreler": [],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": "Kaynak (Quantpedia özeti): ABD, 1988-2003, ~%11.9 yıllık (al-tut %10.7), 0.10% geçiş maliyeti düşülmüş (iddia, doğrulanmadı). Yazarlar tablonun lookahead'den tam arınık olmadığını belirtiyor.",
+  "kanit": "Driesprong-Jacobsen-Maat 'Striking Oil' Quantpedia özetinden okundu; makale metni açılmadı. Sayılar doğrulanmadı.",
+  "veri_uygun": [
+    false,
+    "Hisse endeksi (SP500 benzeri) ve ham petrol (Dukascopy emtia) var olabilir, ancak endeks CFD uygunluğu doğrulanmadı; ayrıca kaynak tek sinyalli aylık zamanlama, risksiz oran gerekir."
+  ],
+  "kodlanabilirlik": {
+    "puan": 2,
+    "gerekce": "Regresyon kuralı net ama pencere (tahmin örneklemi), tahmin eşiği ve petrol serisi seçimi belirsiz."
+  },
+  "belirsizlikler": [
+    "Regresyonun eğitim penceresi (genişleyen mi): Quantpedia özetinde 'son gözlem eklenir' deniyor, başlangıç örneklemi yok",
+    "Risksiz oran serisi bizde yok",
+    "Yazarlar tablonun tam lookahead-free olmadığını söylüyor: dikkatli dışarı-örneklem gerekir",
+    "Stop/kar-al: kaynakta yok"
+  ],
+  "uyumluluk_notu": "Aylık ve tek endeks; Dukascopy'de ham petrol + endeks günlükten türetilebilir. Lookahead riski nedeniyle yalnızca genişleyen pencereyle kodlanmalı (ML değil, tek değişkenli OLS).",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+    "petrol",
+    "hisse-zamanlama",
+    "regresyon",
+    "aylik",
+    "emtia-hisse"
+  ]
+}

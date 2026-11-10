@@ -1,0 +1,75 @@
+{
+  "piyasa_rejimi": "herhangi",
+  "filtreler": [
+    "Girişten sonra seansın en az 3 saati kalmalı (son giriş 13:00 ET)",
+    "Tek pozisyon",
+    "Yalnız normal seans"
+  ],
+  "iz_suren_stop": null,
+  "varyantlar": [],
+  "short_giris": [
+    "Mum kırmızı (K<A)",
+    "0.40 ≤ (Kapanış-Dip)/R ≤ 0.60",
+    "(Tepe-Açılış)/R ≤ 0.20"
+  ],
+  "kar_al": "Long: sinyal mumunun tepesi; short: dibi",
+  "zaman_cikisi": "Günün son kapanışında kapat; gecelik pozisyon yok",
+  "pozisyon_risk": "Backtestte %100 equity bileşik; komisyon $0.005/hisse",
+  "kart_id": "daytrade__yarim-fitil__tesudesu",
+  "ad": "Yarım Fitil Mum Oranı Gün İçi (SPY 30m)",
+  "stil": "daytrade",
+  "kaynak": {
+    "url": "https://github.com/tesudesu/half-wick",
+    "lisans": "lisans belirtilmemiş; kod kopyalanmadı",
+    "tur": "github",
+    "not": "diğer_aynı_kaynak: gercek_ek.csv:472"
+  },
+  "ozet": "30 dakikalık mumun fitili aralığın yaklaşık yarısıysa ve karşı fitil küçükse, mum yönünde giriş; hedef mum tepesi/dibi, stop ters uç. Gün sonu kapanış.",
+  "kategori": "formasyon",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+    "islem": "30m",
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {
+      "ad": "Mum oranı",
+      "parametreler": {
+        "R": "tepe-dip",
+        "baskin_fitil": "0.40-0.60 (optimize: 0.45-0.55)",
+        "karsi_fitil_maks": "0.20 (optimize: 0.10)"
+      }
+    }
+  ],
+  "long_giris": [
+    "Kapanmış 30m mum yeşil (K>A)",
+    "0.40 ≤ (Tepe-Kapanış)/R ≤ 0.60",
+    "(Açılış-Dip)/R ≤ 0.20",
+    "Giriş: o mumun kapanışı"
+  ],
+  "stop_loss": "Long: sinyal mumunun dibi; short: tepesi",
+  "iddia_edilen_performans": "iddia (doğrulanmadı): README kendi sonuçlarında SPY 5 yıl, toplam ~%1.12, CAGR %0.37, ortalama R -0.019 (negatif)",
+  "kanit": "Sonuçlar negatif/önemsiz; optimizasyon in-sample (iddia, doğrulanmadı)",
+  "veri_uygun": [
+    true,
+    "Dukascopy SPY/ABD hisse-ETF 5m'den 30m türetilir; hedef/stop sırası kaynakta 1m ile çözülüyor, bizde 5m (aynı mumda ikisi de gelirse belirsiz)."
+  ],
+  "kodlanabilirlik": {
+    "puan": 3,
+    "gerekce": "Oranlar ve çıkışlar kesin; 1m çözünürlük yerine 5m varsayımı gerekir"
+  },
+  "belirsizlikler": [
+    "Aynı 5m mumda hem stop hem hedef çıkarsa sıra belirsiz",
+    "Parametre aralığı optimizasyonla seçilmiş (30 kombinasyon)",
+    "Sonuç negatif",
+    "Lisans yok"
+  ],
+  "uyumluluk_notu": "dis__onceki-mum-ekstrem-kapanis ile mum bazlı ailede; farklı tanım. Kaynak sonucu negatif: düşük öncelik.",
+  "anahtar_kelimeler": [
+    "fitil",
+    "mum-orani",
+    "spy",
+    "30m",
+    "gun-ici"
+  ]
+}

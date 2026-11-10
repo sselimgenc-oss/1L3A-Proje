@@ -1,0 +1,63 @@
+{
+  "kart_id": "swing__dusus-2pct-5g-tutma__rishon1245",
+  "ad": "Günlük %2 Düşüş Sonrası 5 Gün Tutma (NIFTY)",
+  "stil": "swing",
+  "kaynak": {
+    "url": "https://github.com/rishon1245/nifty-event-study",
+    "lisans": "belirtilmemiş",
+    "tur": "github"
+  },
+  "ozet": "Endeksin kapanıştan kapanışa %2 veya daha fazla düştüğü gün ertesi açılışta long girilir, 5 işlem günü sonra kapanışta çıkılır. Olay çalışması; kaynak sonucu negatif.",
+  "kategori": "ortalamaya_donus",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "genel",
+  "zaman_dilimi": {
+    "islem": "1d",
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {
+      "ad": "Kapanış getirisi",
+      "parametreler": {
+        "esik": "<= -%2"
+      }
+    }
+  ],
+  "long_giris": [
+    "Gün t kapanış getirisi <= -%2 ise t+1 açılışta long",
+    "Aynı anda tek pozisyon; ilk olaydan sonraki 5 gün içindeki olaylar atlanır"
+  ],
+  "short_giris": [],
+  "stop_loss": null,
+  "kar_al": null,
+  "iz_suren_stop": null,
+  "zaman_cikisi": "t+5 kapanışında çık",
+  "filtreler": [
+    "Alternatif tetikler: 60 günlük vol z<=-2; genişleyen yüzdelik"
+  ],
+  "pozisyon_risk": "Tek pozisyon; nakit getirisi %0",
+  "iddia_edilen_performans": "Kaynakta CAGR -1,44% (toplam -11,86%) iddiası var (iddia, doğrulanmadı)",
+  "kanit": null,
+  "veri_uygun": [
+    false,
+    "Evren NIFTY 50 endeksi; Dukascopy'de yok. Mantık ABD endeks/hisse veya kripto günlüğüne taşınabilir ama kaynak sonucu o piyasalarda test edilmedi."
+  ],
+  "kodlanabilirlik": {
+    "puan": 3,
+    "gerekce": "Tüm kurallar mekanik."
+  },
+  "belirsizlikler": [
+    "Stop yok (yalnız günlük bar)",
+    "Maliyet 2 bp ücret + 3 bp kayma/taraf kaynakta var",
+    "Sonuç negatif; yeniden test gerekir"
+  ],
+  "uyumluluk_notu": "Günlük OHLC yeter. Dukascopy hisse/emtia ve kripto günlüğüne uygulanabilir.",
+  "varyantlar": [
+    "Tutma süresi 1-20 gün taranmış"
+  ],
+  "anahtar_kelimeler": [
+    "dip-alimi",
+    "olay-calismasi",
+    "gunluk-dusus"
+  ]
+}

@@ -1,0 +1,70 @@
+{
+  "kart_id": "swing__rsi14-ema200-izleyen-stop__tamnguyen",
+  "ad": "RSI(14) Geri Çekilme + EMA200 + İzleyen Stop",
+  "stil": "swing",
+  "kaynak": {
+    "url": "https://github.com/tamnguyen-2905/ProjectAcademic_Tammy",
+    "lisans": "belirtilmemiş",
+    "tur": "github"
+  },
+  "ozet": "Fiyat EMA200 üstündeyken RSI(14) 40'ın altına inince alınır; RSI(14)>75 veya tepeden %10-12 geri çekilmeyle çıkılır. Yalnız long, günlük.",
+  "kategori": "ortalamaya_donus",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+    "islem": "1d",
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {
+      "ad": "RSI",
+      "parametreler": {
+        "periyot": 14
+      }
+    },
+    {
+      "ad": "EMA",
+      "parametreler": {
+        "periyot": 200
+      }
+    }
+  ],
+  "long_giris": [
+    "Fiyat > EMA200",
+    "RSI(14) < 40"
+  ],
+  "short_giris": [],
+  "stop_loss": "Girişten sonraki tepeden %10-12 düşüş (izleyen)",
+  "kar_al": "RSI(14) > 75",
+  "iz_suren_stop": "Tepeden %10-12 düşüş (kaynak 10-12 diyor; ızgarada 8/10/12/15 taranmış)",
+  "zaman_cikisi": null,
+  "filtreler": [],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": "Kaynakta CAGR %18,63, toplam %526,85, Sharpe 1,25 iddiası; 10 hisselik seçilmiş evren (iddia, doğrulanmadı)",
+  "kanit": null,
+  "veri_uygun": [
+    true,
+    "Dukascopy ABD hisse günlüğü (NVDA, AMD, AVGO, MSFT, AMZN, GOOGL, META, TSLA vb.) büyük ölçüde var; SMCI/PLTR kapsamı doğrulanmalı."
+  ],
+  "kodlanabilirlik": {
+    "puan": 2,
+    "gerekce": "Kurallar net; izleyen stop yüzdesi tek değer değil."
+  },
+  "belirsizlikler": [
+    "İzleyen stop %10-12 kesin değil",
+    "ATR kaynakta kullanılmıyor/tanımsız",
+    "Maliyet ve boyut yok",
+    "Evren 10 yüksek getirili teknoloji hissesi: seçim yanlılığı",
+    "Lisans yok: kod kopyalanmadı"
+  ],
+  "uyumluluk_notu": "Günlük hisse; kripto günlüğüne de uygulanabilir.",
+  "varyantlar": [
+    "Giriş eşiği 30/35/40 taranmış"
+  ],
+  "anahtar_kelimeler": [
+    "rsi14",
+    "ema200",
+    "izleyen-stop",
+    "geri-cekilme"
+  ]
+}

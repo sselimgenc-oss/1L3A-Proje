@@ -1,0 +1,64 @@
+{
+  "kart_id": "swing__dusuk-volatilite-desil__blitz",
+  "ad": "Düşük Volatilite Faktörü (Hisse Deciles)",
+  "stil": "swing",
+  "kaynak": {
+    "url": "https://quantpedia.com/strategies/low-volatility-factor-effect-in-stocks/",
+    "lisans": "belirtilmemiş",
+    "tur": "makale"
+  },
+  "ozet": "Hisseler son 3 yılın haftalık getiri oynaklığına göre sıralanır; en düşük oynaklıklı onda birlik dilime long alınır (isteğe bağlı: en yüksek dilime short). Blitz-van Vliet.",
+  "kategori": "diger",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+    "islem": "1d (aylık yeniden dengeleme)",
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {
+      "ad": "Haftalık getiri standart sapması",
+      "parametreler": {
+        "pencere": "3 yıl"
+      }
+    }
+  ],
+  "long_giris": [
+    "Ay sonunda büyük sermayeli hisseleri son 3 yıllık haftalık getiri standart sapmasına göre sırala, 10 eşit ağırlıklı dilime böl; en düşük oynaklık dilimine (D1) long gir"
+  ],
+  "short_giris": [
+    "İsteğe bağlı uzun-kısa varyant: en yüksek oynaklık dilimine short"
+  ],
+  "stop_loss": null,
+  "kar_al": null,
+  "iz_suren_stop": null,
+  "zaman_cikisi": "Aylık yeniden dengeleme",
+  "filtreler": [
+    "Evren: küresel veya ABD büyük sermayeli hisseler"
+  ],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": "Kaynak (Quantpedia özeti): 1986-2006, D1 long ~%11.3 yıllık, Sharpe 0.72, küresel uzun-kısa alfa ~%12 (iddia, doğrulanmadı); maliyetler hariç.",
+  "kanit": "Blitz-van Vliet 'The Volatility Effect' Quantpedia özetinden okundu; makale metni açılmadı. Sayılar doğrulanmadı.",
+  "veri_uygun": [
+    false,
+    "Yüzlerce hisselik evren Dukascopy'de yok; küçük hisse listesinde 10 dilim anlamsız. Kripto perp'te (13-15 coin) uyarlama kaynakta yok; haftalık verimiz yeterli olsa da evren dar."
+  ],
+  "kodlanabilirlik": {
+    "puan": 3,
+    "gerekce": "Tamamen mekanik; yalnızca evren verimizle uyumsuz."
+  },
+  "belirsizlikler": [
+    "Evren filtresi 'büyük sermayeli' dışında tanımsız",
+    "Bağlanma/tie-break: kaynakta yok",
+    "Stop/kar-al: kaynakta yok"
+  ],
+  "uyumluluk_notu": "Fikir (düşük vol sıralaması) kripto kesitine uyarlanabilir ama bu kaynaktan doğrulanmış değil; evren darlığı nedeniyle düşük öncelik.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+    "dusuk-volatilite",
+    "kesitsel",
+    "desil",
+    "hisse",
+    "faktor"
+  ]
+}

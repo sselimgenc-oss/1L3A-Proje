@@ -1,0 +1,73 @@
+kart_id,puan_0_10,ilk_20,gerekce
+daytrade__aralik-kirilim-bekleyen-emir__fxcraft,4,hayir,"Tam kodlanır ama kanıt yok, sunucu saati belirsiz ve dış envanterdeki 0-7 saat altın kırılımıyla büyük ölçüde aynı."
+daytrade__asya-kutu-kirilim-ma50__mutiiria,5,evet,"Kurallar kesin ve az parametreli, lookahead yok; ancak sayısal kanıt sıfır ve mevcut Tokyo/Londra kırılımına yakın."
+daytrade__btcusdt-rsi20-rejim-geri-cekilme__denniskid2520,2,hayir,"İşlem yönü ve 'bölge' tanımı yok, 6.427 kombinasyon denenmiş; aşırı uydurma riski çok yüksek."
+daytrade__ema-9-21-50-rsi-hacim__gooddinosaur,3,hayir,"Sıradan EMA kesişimi, kanıt yok, RSI periyodu eksik ve havuzdaki ema-esik-trend ile tekrar."
+daytrade__funding-1s-devam__octopustakopi,5,evet,"Yeni fikir ve veri var; fakat 1 saatlik getiri maliyeti zor karşılar, funding zaman damgası lookahead riski taşır, 13 coinde decil 1-2 coine iner."
+daytrade__geri-cekilme-penceresi__ilahuerta,3,hayir,"EMA/ATR periyotları ve kanal ofseti kaynakta yok, sonuç in-sample ve hedef 12 ATR uydurma kokuyor."
+daytrade__gunici-momentum-noise-alani__zarattini,6,evet,"Akademik kaynaklı ve yenilikçi; bant formülü kartta eksik, kaynak OOS'ta belirgin zayıflamış, DK_SPX 5m ile test edilebilir (veri_uygun fazla kötümser)."
+daytrade__ilk-yari-saat-momentum__shen,6,evet,"Hakemli makale ve az parametre; ancak seans tanımı bizim uyarlamamız ve stop yok, sabit UTC penceresi önceden kayıt edilmeli."
+daytrade__l-sekli-ma-kirilim-long__mgcha85,4,hayir,"Kodlanabilir ama 5+ ayar geçmişe optimize edilmiş, dönem ve işlem sayısı bilinmiyor."
+daytrade__londra-volatilite-kirilim__zhangxingthang,3,hayir,Kural net fakat 1m'den 5m'e çevrilince değişir ve kaynağın kendi sonucu komisyonsuz bile yok denecek kadar küçük.
+daytrade__orb-4s-hacim-atr__saadtahir995,4,hayir,"Giriş yönü ve ATR periyodu varsayım, 1 yıllık %134 CAGR iddiası güvenilmez; ORB havuzda zaten var."
+daytrade__pullback-pencere-usdjpy__ilahuerta,1,hayir,"Forex verimiz yok, periyotlar tanımsız ve yazar kendi dönemini 'cherry-picked' diye etiketliyor."
+daytrade__rsi32-yon-hedef4-btc-1h__noahroboros,2,hayir,"88 otomatik deneyle evrilmiş, 6 aylık veri, fiyat stopu yok; aşırı uydurma örneği."
+daytrade__saat-21-23-utc__padysak,6,evet,"Sıfır parametre, tam mekanik, lookahead yok; kanıt yalnız örneklem içi (2015-2022) ve günde 2 işlem maliyeti kenarı yiyebilir."
+daytrade__saatlik-asiri-tepki-tersine__denicola,6,evet,"Hakemli bulguya dayanıyor ve veri tam; ancak eşik/stop/tutma süresi bizim ızgaramız, bunlar önceden sabitlenmezse uydurma riski doğar."
+daytrade__saatlik-kesit-ters-donus__apex,2,hayir,"Sharpe 8,5 iddiası inandırıcı değil, 50 hisselik evren bizde yok, stop ve maliyet tanımsız."
+daytrade__sma-trend-rsi-atr-btc15m__devansh-dek,2,hayir,Kaynağın kendi sonucu negatif ve RSI ölçüm penceresi tanımsız.
+daytrade__ters-fvg-nq__prashanthaitha24,4,hayir,"Kural büyük ölçüde mekanik ama NAS100 verisi doğrulanmamış (veri_uygun iyimser), rakamlar tutarsız ve FVG stratejileri envanterde var."
+daytrade__yarim-fitil__tesudesu,2,hayir,Kodlanır ama kaynağın kendi sonucu negatif ve aynı mumda stop/hedef sırası 5m'de belirsiz.
+swing__12-1-momentum-decile__kyraroy,2,hayir,"S&P 500 evreni bizde yok (veri_uygun yanlış işaretli), kaynak rakamları çelişkili."
+swing__12ay-dongu-kesit__heston,1,hayir,Yaklaşık 1000 hisselik kesit gerekir; verimizle test edilemez.
+swing__12ay-getiri-esik-tahvile-gecis__haghani,3,hayir,"Tahvil verisi yok, gazete özeti ve kaynak aşırı optimizasyon uyarısı içeriyor; yalnız SPX/nakit olarak kısmen denenebilir."
+swing__252g-zirve-kirilim-yuzde16-iz__yashkondawar,4,hayir,"Kural kesin, ama kanıt Hindistan hisselerinde; 7 hisselik evrende sıralama anlamsız ve Donchian kırılımı havuzda var."
+swing__adaptivetrend-6s-momentum__arxiv,5,evet,"Veri uygun ve maliyet/funding dahil OOS iddiası var; fakat aylık yeniden optimizasyon, tutarsız Sharpe ve eksik ATR periyodu güveni düşürüyor."
+swing__bab-ulke-endeks__frazzini,1,hayir,Ülke ETF sepeti bizde yok; test edilemez.
+swing__bb-genislik-rejim-psar__wchia016,2,hayir,"0,071 eşiği geçmişe uydurulmuş, BB/PSAR ayarları kaynakta yok."
+swing__carpiklik-emtia__dujava,1,hayir,"22 emtia gerekir, bizde 3 var; kesit kurulamaz."
+swing__donchian-ansambl-vol-hedef__zarattini,7,evet,Hayatta kalma yanlılığı olmayan veriyle akademik çalışma ve ansambl yapısı tek parametre seçimini azaltır; kesin geriye bakış listesi PDF'ten doğrulanmalı.
+swing__dusuk-vol-momentum-rank__drishti7033,1,hayir,NSE500 evreni bizde yok; kesit sıralama yapılamaz.
+swing__dusuk-volatilite-desil__blitz,1,hayir,Yüzlerce hisse gerekir; verimizle test edilemez.
+swing__dusus-1-5pct-sonrasi-giris__yuvarajvm,2,hayir,"Kaynak kendi hipotezini reddediyor (p=0,72), çıkış kuralı yok ve btfd-gunluk-dip ile tekrar."
+swing__dusus-2pct-5g-tutma__rishon1245,3,hayir,Tam mekanik ama kaynak sonucu negatif ve havuzdaki btfd-gunluk-dip ile aynı fikir.
+swing__entropi-rejim-sigmoid__akshathp0,0,hayir,"Giriş/çıkış, pencere ve ölçek tanımsız; kodlanamaz."
+swing__erc-vol-hedef-6etf__quantucf,2,hayir,Sinyal değil tahsis yöntemi; 6 ETF'in çoğu bizde yok (veri_uygun yanlış işaretli).
+swing__eslesmis-gecis-hisse-tahvil__maewal,3,hayir,"Kural çok basit ve kesin, ama tahvil bacağı bizde yok; başka çifte uyarlamak kaynağın kanıtını geçersiz kılar."
+swing__fip-kesitsel-momentum__baptoudur,5,evet,Tam kodlanır ve yeni bir sıralama ölçütü; kaynakta hiç sonuç yok ve 13-15 coinde %20'lik dilim 2-3 coine iner.
+swing__fomc-oncesi-gun__tori,4,hayir,Sıfır parametre ve DK_SPX ile test edilebilir; ama yılda ~8 işlem istatistiksel güç vermez ve etki zayıflamış.
+swing__funding-7g-haftalik-tercil__vine,7,evet,"En dürüst kanıt bu: purged walk-forward OOS Sharpe 0,39 ve PBO 0,81 açıkça verilmiş, 1 gün gecikmeyle lookahead önlenmiş, veri tam; beklenti düşük tutulmalı."
+swing__funding-kesit-decil-carry__octopustakopi,5,evet,"Tam kodlanır ve veri var; ancak in-sample, son yıllarda negatif (2024 -%14, 2026 -%43) ve fiyat bacağı düşüşü -%74."
+swing__funding-z90-3gun__octopustakopi,4,hayir,Kaynak z-skorun kendi öngörü gücünün sıfırdan ayırt edilemediğini söylüyor; v2 funding-asiri-kontra ile örtüşüyor.
+swing__haftalik-30sma-20h-kirilim-trix__ccadic,5,evet,Weinstein tarzı haftalık kırılım Mag7+SPX'te uygulanabilir; TRIX/ATR periyotları eksik ve kanıt belirsiz.
+swing__kalman-cift-zskor__octaviodegodoy,3,hayir,"Örnek ETF çiftleri bizde yok, Kalman ayarları ve çift seçimi lookahead'e açık."
+swing__kesit-dusuk-hacim-haftalik__liu,3,hayir,"Kaynak güçlü (Journal of Finance) ama etki küçük, likit olmayan coinlerde; 13-15 majör perp'te geçerliliği zayıf."
+swing__kesit-funding-baz-vekil__chi,4,hayir,Funding baz ile aynı şey değil; pratikte funding decil kartlarının tekrarı.
+swing__kirmizi-mum-2x-hacim-ertesi-gun__habr,5,evet,"Tam mekanik, 3 parametre, veri hazır; ama ~60 işlem, komisyonsuz ve OOS yok, asiri-tepki-ertesi-gun ile kısmen örtüşür."
+swing__kisa-vade-tersine-donus__groot,2,hayir,100 büyük hisselik nokta-zamanlı evren bizde yok.
+swing__ma-v-kalman-cift__yibaii,2,hayir,"DK_MA evrenden düşmüş, tek çift seçilmiş ve '%93 başarı' kazanma oranı değil."
+swing__momentum-btc-rejim-top5__adensvaz,5,evet,"Veri uygun ve BTC rejim filtresi mantıklı; coin listesi, yeniden dengeleme sıklığı ve koruma eşikleri kaynakta yok."
+swing__momentum-sifir-kesisim__chandanp001,3,hayir,Tam mekanik ama kaynağında al-tut'un altında ve havuzdaki momentum-roc ile aynı.
+swing__olcekli-kirilim-24bar__trade-ai-lab,3,hayir,Yazar kuralı dondurmuş (olumlu) ama kırılım ve z tanımı kartta yok; bu haliyle kodlanamaz.
+swing__ols-coz-pairs-eski__akkuya,1,hayir,"Kaynak sonucu negatif, pencere ve çıkış eşiği tanımsız."
+swing__opsiyon-vade-haftasi__stivers,4,hayir,Takvim hesaplanabilir ve DK_SPX var (veri_uygun fazla kötümser); hafta tanımı belirsiz ve kanıt 2010'da bitiyor.
+swing__ozvektor-merkeziyet-momentum__dermawan,1,hayir,40 hisselik evren ve Graphical Lasso ayarları yok; karmaşık ve test edilemez.
+swing__pairs-coz-60-ols__rw762,2,hayir,"Çift seçimi S&P 500 kümelemesi gerektirir, bizde 7 hisse var; kaynak getirisi de düşük (%3,9)."
+swing__payday-ayin-16si__ma-pratt,3,hayir,"Kural basit ama ayda 1 gün, etki küçük ve kaynak sayfası kendi içinde tutarsız."
+swing__pazartesi-dip-endeks__mql5,3,hayir,Tam mekanik fakat hiç sonuç yok ve havuzdaki carstens-pazartesi ile tekrar.
+swing__permanent-portfoy-4-varlik__psystat,1,hayir,"Sinyal yok, pasif tahsis; tahvil/nakit verisi bizde yok."
+swing__petrol-hisse-zamanlama__driesprong,2,hayir,Yazarların kendisi lookahead'den tam arınık olmadığını söylüyor; regresyon ve risksiz oran gerekir.
+swing__pre-fomc-surunme__delphic,4,hayir,"Bilinen bir anomali ama kaynak açılamamış, yılda 8 işlem ve 2015 sonrası zayıflama; tori kartıyla aynı fikir."
+swing__ramazan-mevsimsel__bialkowski,0,hayir,Gerekli ülke ETF sepeti bizde yok; uygulanamaz.
+swing__ranked-alloc-etf-5__stef,1,hayir,ETF evreni yok ve replikasyon sonucu SPY'nin çok altında.
+swing__rsi14-ema200-izleyen-stop__tamnguyen,3,hayir,"10 yüksek getirili teknoloji hissesi seçilmiş (seçim yanlılığı), stop yüzdesi kesin değil, ifr2 ile yakın."
+swing__rsi2-sma200-geri-cekilme__toney,4,hayir,"Bilinen Connors kuralı, tam kodlanır; ama havuzdaki dis__ifr2 ile tekrar ve kaynakta sonuç yok."
+swing__rsi2-sma200-hacim__anshs527,2,hayir,Tek hissede 13 işlem ve README ile kod tutarsız (RSI2/RSI14).
+swing__rsi30-hacim-ema200__ainayoon,3,hayir,Kural kesin ama kanıt tek Kore hissesi ve çelişkili test dönemi; ifr2 ailesine yakın.
+swing__smma-rsi-cci-kesisim__mutiiria,2,hayir,"Zaman dilimi yok, 300 puan hedef sembole özgü, alışılmadık periyotlar (11/25/27/36/55) uydurma izlenimi veriyor."
+swing__stocks-on-the-move__clenow,1,hayir,Nokta-zamanlı S&P 500 üyeliği yok ve kaynak testinde SPY'yi geçemiyor.
+swing__tatil-oncesi-gun__hansen,3,hayir,"Kural net, DK_SPX ile denenebilir; yılda ~10 işlem ve etki 1980 sonrası zayıf."
+swing__volatilite-kirilim-k05__mskim,5,evet,Larry Williams kuralı tam mekanik ve 5m veriyle gün içi tetik lookahead'siz kurulabilir; kaynağın kendi sonucu negatif ve stop yok.
+swing__yahudi-3-etf-esit-yillik__psystat,0,hayir,"Sinyal yok, pasif tahsis; tahvil ve gayrimenkul verisi bizde yok."
+swing__z-skor-karsit-spy__nadirali,3,hayir,"Z-skor formülü ve stop yok, kanıt tek README tablosu; z-skor karşıt stratejiler envanterde var."
+swing__zs-momentum-vol-hedef__fiction-junction,2,hayir,"Ağırlık, hedef vol ve yeniden dengeleme tanımsız; havuzdaki voltarget-trend ile tekrar."
