@@ -8,7 +8,7 @@ import pandas as pd
 import pytest
 
 from motor.portfoy.motor import PortfoyAyarlari, portfoy_backtest
-from motor.portfoy.stratejiler import EK_SINIFLAR, SINIFLAR, V2_SINIFLAR, tum_portfoy_stratejileri
+from motor.portfoy.stratejiler import EK_SINIFLAR, SINIFLAR, V2_SINIFLAR, V3_SINIFLAR, tum_portfoy_stratejileri
 from motor.portfoy.stratejiler.baglama import BAGLAMA, BAGLANAMAYAN
 from motor.portfoy.stratejiler.ortak import HEPSI, Takvim, donem_kimligi, tetik_satirlari
 from motor.portfoy.stratejiler.pairs import Pairs, adf_t, johansen_iki, kalman_hata, ols_cizgi
@@ -114,8 +114,8 @@ def veri():
 # ------------------------------------------------------------------ kayıt / ızgara / csv
 def test_kayit_15_sinif_ve_adlar():
     t = tum_portfoy_stratejileri()
-    assert len(SINIFLAR) == 15 and len(t) == len(SINIFLAR) + len(EK_SINIFLAR) + len(V2_SINIFLAR) == 21
-    assert all(ad.startswith("pf__") and c.ad == ad for ad, c in t.items())
+    assert len(SINIFLAR) == 15 and len(t) == len(SINIFLAR) + len(EK_SINIFLAR) + len(V2_SINIFLAR) + len(V3_SINIFLAR) == 25
+    assert all(ad.startswith(("pf__", "v3__")) and c.ad == ad for ad, c in t.items())
 
 
 @pytest.mark.parametrize("sinif", SINIFLAR, ids=lambda c: c.ad)

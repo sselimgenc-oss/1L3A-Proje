@@ -13,6 +13,7 @@ from motor.portfoy.stratejiler.rotasyon import Gem, Kanarya, Rotasyon, SabitSepe
 from motor.portfoy.stratejiler.son1ay import SonBirAyE014, SonBirAyTrendRider
 from motor.portfoy.stratejiler.sinif_ici import SinifIciKesitDonus, SinifIciKesitMom
 from motor.portfoy.stratejiler.sinyal import BtcHedge, IbsDonus, ReferansFiltreliLong, RsiCift, RsiTarama
+from motor.portfoy.stratejiler.v3 import V3_SINIFLAR
 
 SINIFLAR = (Rotasyon, Gem, SabitSepet, TrendSepet, Kanarya, KesitLS, GoreceliGuc, WqAlfa, Cta, Pairs,
             ReferansFiltreliLong, BtcHedge, RsiCift, RsiTarama, IbsDonus)
@@ -24,8 +25,8 @@ V2_SINIFLAR = (SinifIciKesitMom, SinifIciKesitDonus)
 
 
 def tum_portfoy_stratejileri() -> dict:
-    """{ad: sınıf} (ad = 'pf__...')."""
-    tum = SINIFLAR + EK_SINIFLAR + V2_SINIFLAR
+    """{ad: sınıf} (ad = ``pf__...`` veya v3 kartlarında ``v3__...``)."""
+    tum = SINIFLAR + EK_SINIFLAR + V2_SINIFLAR + V3_SINIFLAR
     s = {c.ad: c for c in tum}
     if len(s) != len(tum):
         raise ValueError("yinelenen portföy strateji adı")

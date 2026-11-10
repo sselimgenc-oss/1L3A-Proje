@@ -98,6 +98,7 @@ def _portfoy_veri(tohum: int, mod: str) -> dict[str, pd.DataFrame]:
                 "dusuk": np.minimum(acilis, fiyat) * (1.0 - rng.uniform(0.0002, 0.008, n)),
                 "kapanis": fiyat,
                 "hacim": rng.lognormal(np.log(1_000.0), 0.25, n),
+                "funding_orani": rng.normal(0.0, 0.0001, n),
             },
             index=ortak_indeks,
         )
