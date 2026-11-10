@@ -23,6 +23,8 @@ Ayrıca kullanıcının başka oturumda derlediği kataloglar (aynı klasör, 20
 1. `github-backtest-katalog-denetimli__dogrulanan_48.csv` (doğrulanmış 48), sonra `__tumu.csv` içinde `nihai` = GERÇEK-TEMİZ olanlar
    ve diğer TÜM satırlar (ŞÜPHELİ, BELİRSİZ, ÖRNEK, ARAÇ, KOPYA dahil; sıra yalnız önceliktir, hiçbir satır atlanmaz).
 2. `github-backtest-katalog-v4__sayfa_dogrulamasi.csv`, `diger-siteler-derin-21.csv`, `*__b_duzeyi.csv` (asya, bölgesel).
+2b. `chatgpt_dr_tur1_gunici_kripto.csv`, `chatgpt_dr_tur2_funding.csv`, `chatgpt_dr_tur3_akademik_kismi.csv` (ChatGPT Deep Research, 13 aday;
+   iddialar doğrulanmadı; ATR stopları ChatGPT uyarlaması, kaynakta yok).
 3. `github-backtest-katalog-v4__reddit.csv`, `__diger_siteler.csv`, `*__tumu.csv` (asya, bölgesel): en düşük öncelik.
 Repo listelerinde lisansı GPL/AGPL olanlardan yalnız kural mantığı alınır. Yayımlanmış Sharpe/getiri iddiaları kanıt değildir;
 `kanit` alanına "iddia (doğrulanmadı)" diye yazılır.
