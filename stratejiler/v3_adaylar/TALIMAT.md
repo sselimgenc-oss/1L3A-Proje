@@ -73,3 +73,20 @@ Kart yazmadan önce tekrar kontrolü yap.
 
 ## Bitiş
 PR açıldığında dur. PR açıklamasına aday sayısını ve Fable'ın ilk 15-20 listesini yaz.
+
+## TUR 2 (2026-11-10 eklendi; tur 1 = PR #18, birleşti)
+Tur 1'in çıktıları (on_eleme.csv, kartlar/, adaylar.csv, fable_hakem.csv, RAPOR.md) main'de. Onları SİLME, YENİDEN YAZMA; yalnız ekle.
+Kurallar, dışlamalar, kart biçimi ve model kullanımı yukarıdaki gibi. Yeni dal aç (main'den), iş bitince PR aç, birleştirme.
+Sıra:
+1. `ham/gemini_dr_6bolge.csv` (Gemini Deep Research, 6 bölge, 69 satır) ve `ham/gemini_dr_afrika.csv` (Afrika, 8 satır; çoğu MQL5 forex/altın EA'sı: forex verimiz yok, XAU var). Ana oturum linkleri kontrol etti:
+   `link_durumu`, `kod_var`, `lisans_gercek`, `tekrar` sütunlarına bak. Gemini bazı yerlerde UYDURDU (404 repo, olmayan dosya yolu,
+   yanlış lisans): her satırın linkini kendin aç; 404 ise elenir. `erisilemedi` satırlar (fmz, tistory, tradingview, dergipark)
+   bu ortamda engelliydi; sende açılırsa değerlendir, açılmazsa `belirsiz` yaz. Lisans için `lisans_gercek` esas; `lisans` sütununa güvenme.
+   Satırları `on_eleme.csv` SONUNA ekle (kaynak_dosya = gemini_dr_6bolge.csv).
+2. Tur 1'de `kod_yok` kararı alan 799 satır: çoğunda yalnız README okundu. GitHub repolarında asıl strateji dosyasını
+   (.py/.pine/.mq4/.mq5 vb.) aç; kural kodda kesin ve ölçülebilirse karar `kart` olur. on_eleme.csv'de o satırın kararını değiştirme;
+   ayrı dosya `on_eleme_tur2_kod_yok.csv` yaz (aynı sütunlar + `tur1_karar`). Sonuç değişmiyorsa da satırı yaz (atlanmadığı görülsün).
+3. Tur 1 RAPOR.md "Devam noktası": web araması açıksa gün içi kripto (5m–1h), funding/baz/kesit, SSRN/arXiv boşluklarını ara;
+   REDDEDILENLER.txt'deki 5 makaleyi yeniden dene.
+4. Yeni `kart` kararları için kart yaz (tekrar kontrolü: dis_envanter, havuz_v2 VE tur 1 kartları). adaylar.csv'ye satır EKLE.
+5. Fable: yalnız YENİ kartları puanla, `fable_hakem.csv`'ye ekle. RAPOR.md'ye "Tur 2" bölümü ekle (tur 1 metnine dokunma).
