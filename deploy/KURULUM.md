@@ -201,9 +201,27 @@ Her kasanın tam dosyaları `durum/hesaplar/<strateji>/` altındadır.
 **Mantık (sade):** canlı servis, paper motoruyla AYNI sinyalleri üretir; sanal dolum yerine Binance'e gerçek emir verir. Her girişten hemen
 sonra Binance'in kendi sunucusunda bir **stop emri** durur (sunucumuz kapansa bile korur). Stop kurulamazsa pozisyon hemen kapatılır.
 **Bir Binance hesabı = bir strateji.** Alt hesabınız (sub-account) varsa her canlı strateji kendi alt hesabının anahtarını kullanır;
-yoksa yalnız bir strateji canlı çalışır. Sert limitler (işlem başı %1, toplam stop riski %5, brüt 3x, günlük -%3, toplam -%20) burada da kodla zorlanır.
-Risk bazlı miktar borsanın minimum tutarının altında kalırsa işlem **atlanır** (miktar asla yukarı yuvarlanmaz) ve Telegram'a "min_tutar_alti" gider.
+yoksa yalnız bir strateji canlı çalışır. **Canlı risk kuralı (kullanıcı kararı 2026-11-11; yalnız canlı yürütücü için — paper/backtest eski sert limitlerle AYNEN devam eder).**
+Tek kaynak: `motor/canli/borsa/canli_limitler.py` (`CANLI_LIMITLER`); kodla zorlanır, strateji ya da ajan aşamaz. "Kasa" = her strateji hesabında
+`min(borsadaki özsermaye, o stratejiye ayırdığınız tahsis_usd)`.
+
+| Kural | Değer |
+|---|---|
+| İşlem başı stopta kayıp (komisyon + stop kayması dahil) | kasanın en fazla %3'ü |
+| İşlem başı marj / nominal | kasanın en fazla %50'si / en fazla 1.5 katı |
+| Miktar | `min(1.5·kasa/fiyat, 0.03·kasa/(stop mesafesi + birim maliyet))`, borsanın adımına **aşağı** yuvarlanır |
+| Borsa minimumunun altında kalırsa | işlem **atlanır** (asla yukarı yuvarlanmaz), Telegram'a `min_tutar_alti` |
+| Tüm açık pozisyonların toplam stop riski / brüt nominal | kasanın en fazla %6'sı / 1.5 katı |
+| Günlük kayıp | UTC günü içinde gün başı kasadan -%6: ertesi UTC gününe kadar **yeni giriş yok**; açık pozisyonlar KAPATILMAZ (borsa stopu ve stratejinin kendi çıkışı sürer) |
+| Strateji kill | kasa zirveden -%30: hepsi kapatılır, strateji KALICI durur (yeniden başlatma kaldırmaz) |
+| Hesap kill | TÜM canlı stratejilerin kasa toplamı ortak zirveden -%20: tüm stratejiler kapatılır ve KALICI durur |
+| Marj / kaldıraç | izole marj; stop mesafesi <= %15 ise 3x, > %15 ise 2x (girişten önce sembole ayarlanır). 2x'te nominal tavanı fiilen 1.0x kasa (marj %50 sınırı) |
+| Stop mesafesi > %25 | işlem atlanır |
+
+Girişten sonra gerçek dolum fiyatıyla kural yeniden kontrol edilir; aşılmışsa pozisyon küçültülür (sığmazsa kapatılır).
+Küçük kasada (ör. 165 USD) BTC (min 100 USD) ve ETH (min ~20 USD) gibi sembollerde işlem sık sık `min_tutar_alti` ile atlanabilir: bu beklenen ve güvenlidir.
 Şimdilik **yalnız tek-grafik (sinyal) stratejileri** canlıya alınabilir: portföy (`pf__...`) stratejileri ve kısmi çıkışlı stratejiler açık hatayla reddedilir.
+Geçmiş verideki "yeniden oynatma" sonucu: `sonuclar/canli/BOYUT_RAPORU.md` (geçmiş; gelecek tahmini DEĞİL).
 
 **A. Binance API anahtarı (her strateji/hesap için ayrı):**
 1. Binance → API Yönetimi → yeni anahtar. İzinler: **yalnız "Enable Reading" ve "Enable Futures"**. **"Enable Withdrawals" KAPALI kalmalı**
@@ -241,7 +259,9 @@ systemctl restart 1l3a-canli && journalctl -u 1l3a-canli -n 40 --no-pager
 ```
 `CANLI_ONAY=evet` yoksa servis "GERÇEK PARA ile başlatma reddedildi" diyerek **başlamaz** (bu bir güvenlik özelliğidir).
 
-**Kill switch ve acil durdurma:** borsa özsermayesi günde -%3 ya da zirveden -%20 düşerse yürütücü tüm emirleri iptal eder, tüm pozisyonları kapatır ve
-yeni giriş yapmaz (günlük limit ertesi UTC günü açılır; -%20 kalıcıdır: `/var/lib/1l3a-canli/durum/canli/yurutucu_*.json` içindeki `"kill": true` satırını
-yalnız nedenini anladıktan sonra elle `false` yapın). Elle durdurma: `systemctl stop 1l3a-canli` (borsadaki stop emirleri yerinde kalır, pozisyonlar korunur).
+**Kill switch ve acil durdurma:** günlük kasa kaybı -%6 olursa yürütücü ertesi UTC gününe kadar yeni giriş yapmaz (açık pozisyonları kapatmaz; stoplar ve strateji çıkışları sürer).
+Strateji kasası zirveden -%30 düşerse (strateji kill) ya da tüm canlı stratejilerin kasa toplamı ortak zirveden -%20 düşerse (hesap kill) tüm pozisyonlar
+ÖNCE kapatılır, kapanış borsada doğrulanınca emirler iptal edilir ve yeni giriş yapılmaz. İkisi de KALICIDIR: strateji için
+`/var/lib/1l3a-canli/durum/canli/yurutucu_*.json` içindeki `"kill": true`, hesap için `/var/lib/1l3a-canli/durum/canli/hesap_durumu.json` içindeki `"kill": true`
+satırını yalnız nedenini anladıktan sonra elle `false` yapın (hesap kill'i kaldırırken stratejilerinkini de kaldırın; hesap zirvesi `"zirve": null` ile yeniden başlar). Elle durdurma: `systemctl stop 1l3a-canli` (borsadaki stop emirleri yerinde kalır, pozisyonlar korunur).
 Tanımadığı bir pozisyon görürse yürütücü **dokunmaz**, yalnız Telegram'a "BİLİNMEYEN pozisyon" yazar.

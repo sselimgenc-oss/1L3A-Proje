@@ -1,11 +1,12 @@
 {
   "surum": 1,
+  "aciklama": "tahsis_usd = bu strateji hesabına ayırdığınız sermaye. Kasa = min(borsa özsermayesi, tahsis_usd). Canlı risk kuralı (motor/canli/borsa/canli_limitler.py, karar 2026-11-11): işlem başı stop kaybı <= kasa %3 (maliyet dahil), marj <= %50, nominal <= 1.5x; toplam açık stop riski <= %6; günlük -%6 = o gün yeni giriş yok; zirveden -%30 = strateji kalıcı durur; TÜM stratejilerin kasa toplamı zirveden -%20 = hepsi kalıcı durur; izole marj, stop <= %15 ise 3x, üstü 2x kaldıraç. Borsa minimumunun altı atlanır (yukarı yuvarlanmaz). Bu dosyada risk sayısı AYARLANMAZ.",
   "mod": "testnet",
   "working_type": "MARK_PRICE",
   "kosullu_modu": "algo",
   "giris_gecikme_max_sn": 900,
   "hedef_emri": true,
   "stratejiler": [
-    {"id": "BURAYA_STRATEJI_KIMLIGI", "api_key_env": "BINANCE_API_KEY_S1", "api_secret_env": "BINANCE_API_SECRET_S1", "tahsis_usd": 1000}
+    {"id": "BURAYA_STRATEJI_KIMLIGI", "api_key_env": "BINANCE_API_KEY_S1", "api_secret_env": "BINANCE_API_SECRET_S1", "tahsis_usd": 165}
   ]
 }
