@@ -1,0 +1,89 @@
+{
+  "kart_id": "swing__macd-rsi-atr-momentum__algotrade-education",
+  "ad": "MACD Histogram + RSI Momentum, ATR Stop/Hedef (Günlük)",
+  "stil": "swing",
+  "kaynak": {
+    "url": "https://github.com/algotrade-education/MomMean",
+    "lisans": "yok (lisans dosyası yok)",
+    "tur": "github"
+  },
+  "ozet": "Günlük kapanışta MACD histogramı pozitif ve RSI 50-70 arasındaysa long, histogram negatif ve RSI 30-50 arasındaysa short açılır. ATR tabanlı stop/hedef, RSI aşırı bölgesi veya MACD histogram işaret değişimi çıkış verir.",
+  "kategori": "momentum",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "vadeli",
+  "zaman_dilimi": {
+    "islem": "1d",
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {
+      "ad": "MACD",
+      "parametreler": {
+        "hizli_ema": 10,
+        "yavas_ema": 15,
+        "sinyal_ema": 5,
+        "cikti": "histogram"
+      }
+    },
+    {
+      "ad": "RSI",
+      "parametreler": {
+        "periyot": 10,
+        "esik": 30
+      }
+    },
+    {
+      "ad": "ATR",
+      "parametreler": {
+        "periyot": 7,
+        "carpan": 2.0
+      }
+    }
+  ],
+  "long_giris": [
+    "MACD histogramı > 0",
+    "50 < RSI(10) < 70 (yani 100 - eşik; eşik=30)",
+    "Momentum bacağında açık pozisyon yok",
+    "Giriş = aynı günün kapanışı"
+  ],
+  "short_giris": [
+    "MACD histogramı < 0",
+    "30 < RSI(10) < 50",
+    "Momentum bacağında açık pozisyon yok"
+  ],
+  "stop_loss": "Long: giriş - 2 x ATR(7); short: giriş + 2 x ATR(7). Kontrol bar kapanışıyla yapılır",
+  "kar_al": "Long: giriş + 2 x ATR(7); short: giriş - 2 x ATR(7) (kapanış bazlı)",
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [
+    "Çıkış: long için RSI >= 70 veya MACD histogramı < 0; short için RSI <= 30 veya histogram > 0"
+  ],
+  "pozisyon_risk": "Sermayenin yarısı momentum bacağına ayrılır (diğer yarısı ortalamaya dönüş bacağına)",
+  "iddia_edilen_performans": "Örneklem içi (2020-2023, VN30F1M günlük) getiri %28,74 (iddia, doğrulanmadı); dinamik varyantın örneklem dışı (2024) getirisi -%6,10 (iddia, doğrulanmadı)",
+  "kanit": "Kaynak README: parametreler ızgara aramasıyla örneklem içinde seçilmiş; örneklem dışı sonuç zayıf/negatif. Rakamlar doğrulanmadı.",
+  "veri_uygun": [
+    true,
+    "Günlük OHLC yeter; Binance perp ve Dukascopy emtia/hisse günlüğünde uygulanır. Kaynak evreni Vietnam VN30F1M vadelisi (bizde yok)."
+  ],
+  "kodlanabilirlik": {
+    "puan": 3,
+    "gerekce": "Tüm kurallar gösterge eşikleriyle ölçülebilir, kod kısa."
+  },
+  "belirsizlikler": [
+    "Parametreler örneklem içi optimize (aşırı uyum riski)",
+    "Kaynaktaki ortalamaya dönüş bacağı hızlı=yavaş=20 EMA verdiği için MACD histogramı hep 0 kalır ve giriş koşulu hiç oluşmaz: yani fiilen yalnız momentum bacağı işliyor",
+    "Dinamik varyantta ATR çarpanı fiilen sabit (2,0/1,5), adaptasyon etkisiz",
+    "Komisyon vergi sabiti kaynak evrenine özgü"
+  ],
+  "uyumluluk_notu": "Günlük zamanda çalışır, hacim gerekmez. Ortalamaya dönüş bacağı kodda ölü olduğundan karta alınmadı. Mevcut MACD/RSI kartlarıyla aynı aile ama ATR stop/hedef ve iki yönlü RSI bandı ayrı.",
+  "varyantlar": [
+    "Dinamik varyant: ATR çarpanı kısa/uzun ATR kıyasıyla seçiliyor ama iki dal da 2,0 (momentum) olduğu için etkisiz"
+  ],
+  "anahtar_kelimeler": [
+    "macd",
+    "rsi",
+    "atr",
+    "momentum",
+    "gunluk"
+  ]
+}

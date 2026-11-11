@@ -1,0 +1,106 @@
+{
+  "kart_id": "daytrade__ce-zlsma-ha-anahtar-mum__ha56412003-lab",
+  "ad": "CE + ZLSMA(50) Heikin Ashi Anahtar Mum Trendi",
+  "stil": "daytrade",
+  "kaynak": {
+    "url": "https://github.com/ha56412003-lab/quant-bot",
+    "lisans": "MIT",
+    "tur": "github"
+  },
+  "ozet": "15 dakikalık grafikte Chandelier Exit yönü değiştiğinde, Heikin Ashi mumu ZLSMA50'nin doğru tarafında kapanır, ham mum büyük gövdeli 'anahtar mum' olur ve Bollinger genişliği yüksek yüzdelikteyse yön yönünde girilir. Stop üç adaydan en yakını, çıkış 1.2R'de yarım, kalan 2R veya ters anahtar mum.",
+  "kategori": "trend_takip",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "kripto",
+  "zaman_dilimi": {
+    "islem": "15m",
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {
+      "ad": "Chandelier Exit",
+      "parametreler": {
+        "ce_len": 1,
+        "ce_carpan": 1.5,
+        "kapanis_bazli": true
+      }
+    },
+    {
+      "ad": "ZLSMA",
+      "parametreler": {
+        "periyot": 50
+      }
+    },
+    {
+      "ad": "Heikin Ashi",
+      "parametreler": {}
+    },
+    {
+      "ad": "ATR (ham mum)",
+      "parametreler": {
+        "periyot": 20
+      }
+    },
+    {
+      "ad": "Bollinger genislik yuzdeligi",
+      "parametreler": {
+        "bb": 20,
+        "sapma": 2.0,
+        "pencere": 100
+      }
+    }
+  ],
+  "long_giris": [
+    "Son kapanan 15m barda Chandelier Exit yonu onceki bara gore asagidan yukari donmus (olay, durum degil)",
+    "Heikin Ashi kapanis > ZLSMA50 ve HA kapanis > HA acilis",
+    "Ham mum yesil, govde > 0.7 x ATR(20), kapanis mumun ust %34 diliminde (kapanis-dusuk)/(yuksek-dusuk) > 0.66, govde/aralik > 0.5",
+    "Bollinger genisligi (20,2) son 100 barlik yuzdeligi >= %70",
+    "Gercek kapanis ile ZLSMA arasi uzaklik >= 1.0 x ATR(20) (fiyatin %'si olarak)",
+    "Son 48 barda |son kapanis/ilk kapanis-1| / ((en yuksek-en dusuk)/en dusuk) >= 0.30",
+    "Stop mesafesi fiyatin en fazla %5'i"
+  ],
+  "short_giris": [
+    "Aynisinin aynasi: CE yonu yukaridan asagi doner, HA kapanis < ZLSMA50 ve HA mumu kirmizi, ham mum kirmizi anahtar mum (kapanis alt %34 diliminde), digerleri ayni"
+  ],
+  "stop_loss": "Uc adaydan fiyata en yakin olan: son 8 ham mumun en dusugu (short: en yuksegi), CE kanal stopu, anahtar mumun dusugu (short: yuksegi). Bu mesafe < %0.5 ise yalniz CE kanal stopu kullanilir.",
+  "kar_al": "1.2R'de pozisyonun yarisi kapanir. Kalan yari: ters yonde anahtar mum olusur ve HA kapanisi ZLSMA50'yi ters yone gecerse kapanir; hic gecmezse 2R'de tamami kapanir.",
+  "iz_suren_stop": null,
+  "zaman_cikisi": "Zaman cikisi yok (16 saatlik zaman stopu kodda kaldirilmis).",
+  "filtreler": [
+    "Bollinger genislik yuzdeligi >= 70",
+    "Anahtar mum gucu",
+    "Giris-ZLSMA uzakligi >= 1 ATR",
+    "48 bar trend verimliligi >= 0.30",
+    "Stop mesafesi <= %5"
+  ],
+  "pozisyon_risk": "Kaynakta risk_per_trade_pct 0 (sabit yok); kaldirac 6. Boyutlandirma bu kartin kurali degil, bizim risk katmanimiz belirler.",
+  "iddia_edilen_performans": "Kaynakta backtest ozeti: 40 coin, 60 gun, yalniz CE iki kademeli stop ile 336 islem, kazanma %54.8, +52.21R (iddia, dogrulanmadi).",
+  "kanit": "Kaynak notlari ayni 60 gunluk veriyle cok sayida ayar degisikligi yapildigini gosteriyor (ce_mult 2.0->1.5, swing 20->8, kapi ekleme); iddia (doğrulanmadı), asiri uyum riski yuksek.",
+  "veri_uygun": [
+    true,
+    "Yalniz OHLCV; Binance USDT-M 15m. Heikin Ashi, ZLSMA, ATR, Bollinger hepsi OHLCV'den turetilir."
+  ],
+  "kodlanabilirlik": {
+    "puan": 2,
+    "gerekce": "Kurallar kodda sayisal ve tek anlamli; ama 7 kapi ve yari-cikis var, parametreler tek 60 gunluk pencerede ayarlanmis."
+  },
+  "belirsizlikler": [
+    "ZLSMA tanimi: iki kez linreg(50) ve a+(a-b); linreg ofseti 0 kabul edildi (kodda 0)",
+    "Kapilar ayni 60 gunde secilmis (cok sayida ayar)",
+    "CE'nin ATR(1)'i: ce_len=1 oldugundan o barin gercek araligi",
+    "Gerceklesen giris fiyati kaynakta 'maker' varsayimiyla hesaplanmis (ucret 0.02%); gercekte limit emir dolmayabilir",
+    "Boyutlandirma kuralı kartta yok"
+  ],
+  "uyumluluk_notu": "15m'de uygulanir (>=5m sarti saglanir). Hacim gerektirmez. Cok kapi oldugu icin islem sayisi dusuk olabilir; her kapi ayri test edilmeli.",
+  "varyantlar": [
+    "CE carpani 2.0 (yazarin ilk tasarimi) / 1.5 (guncel)",
+    "Yalniz CE iki kademe stop"
+  ],
+  "anahtar_kelimeler": [
+    "chandelier-exit",
+    "zlsma",
+    "heikin-ashi",
+    "anahtar-mum",
+    "bollinger-genislik",
+    "yari-cikis"
+  ]
+}

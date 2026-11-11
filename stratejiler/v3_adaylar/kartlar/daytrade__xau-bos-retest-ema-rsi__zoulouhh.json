@@ -1,0 +1,99 @@
+{
+  "kart_id": "daytrade__xau-bos-retest-ema-rsi__zoulouhh",
+  "ad": "XAUUSD H1 Trend + M15 Kırılım + M5 Geri Test (BOS Retest)",
+  "stil": "daytrade",
+  "kaynak": {
+    "url": "https://github.com/zoulouhh/holbertonschool-portfolio",
+    "lisans": "belirtilmemiş",
+    "tur": "github"
+  },
+  "ozet": "H1 EMA50/EMA200 yönünde, M15 RSI onayıyla, M15'te son 20 barın zirvesi/dibi kapanışla kırılınca o seviye işaretlenir; fiyat M5'te seviyeyi geri test edip yönde kapanınca piyasa emriyle girilir. Londra ve New York seans pencerelerinde, ATR tabanlı SL/TP ile.",
+  "kategori": "kirilim",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "emtia",
+  "zaman_dilimi": {
+    "islem": "5m",
+    "ust_filtre": "1h (EMA), 15m (kırılım, RSI, ATR)"
+  },
+  "gostergeler": [
+    {
+      "ad": "EMA",
+      "parametreler": {
+        "hizli": 50,
+        "yavas": 200,
+        "zaman_dilimi": "H1"
+      }
+    },
+    {
+      "ad": "RSI",
+      "parametreler": {
+        "periyot": 14,
+        "zaman_dilimi": "M15"
+      }
+    },
+    {
+      "ad": "ATR",
+      "parametreler": {
+        "periyot": 14,
+        "zaman_dilimi": "M15"
+      }
+    }
+  ],
+  "long_giris": [
+    "H1 (kapanmış bar) EMA50 > EMA200",
+    "M15 RSI(14) (kapanmış bar) > 55",
+    "Kırılım: son kapanmış M15 barının kapanışı > ondan önceki 20 M15 barının en yüksek değeri; bu değer 'alış seviyesi' olarak saklanır",
+    "Geri test (her yeni M5 bar kapanışında): son kapanmış M5 barının düşüğü <= seviye + 50 puan VE kapanışı > seviye; her seviye yalnız bir kez kullanılır",
+    "Seans: 08:00-11:30 veya 13:30-17:00 GMT",
+    "M15 ATR >= 80 puan; açık pozisyon sayısı < 2",
+    "Koşullar sağlanınca piyasa emriyle (ask) gir"
+  ],
+  "short_giris": [
+    "H1 EMA50 < EMA200; M15 RSI < 45",
+    "Kırılım: M15 kapanışı < önceki 20 M15 barının en düşüğü; bu değer 'satış seviyesi'",
+    "Geri test: son M5 barının yükseği >= seviye - 50 puan VE kapanışı < seviye",
+    "Aynı seans, ATR ve pozisyon sayısı koşulları"
+  ],
+  "stop_loss": "Giriş fiyatından 1.5 x ATR(14, M15) uzakta",
+  "kar_al": "Giriş fiyatından 3.0 x ATR(14, M15) uzakta (TP/SL oranı >= 2 şart)",
+  "iz_suren_stop": "Kâr 1R'ye ulaşınca SL girişe çekilir (breakeven); 1R sonrası iz süren stop: fiyat -/+ 1.0 x ATR, hiçbir zaman girişin kötü tarafında olmaz",
+  "zaman_cikisi": null,
+  "filtreler": [
+    "Spread <= 30 puan (kodda; veri setimizde spread yok, atlanır)",
+    "Günlük zarar limiti %10 (hesap seviyesi)",
+    "Haber filtresi (USD yüksek önemli FED/FOMC/NFP/CPI vb., +-30 dk) kodda var ama haber verimiz yok, atlanır"
+  ],
+  "pozisyon_risk": "İşlem başına bakiyenin %1'i riske edilir (SL mesafesine göre lot); en fazla 2 eşzamanlı işlem",
+  "iddia_edilen_performans": null,
+  "kanit": null,
+  "veri_uygun": [
+    true,
+    "Dukascopy XAU OHLCV 5m/15m/1h ile kurulabilir. Spread ve haber filtreleri verimizde yok ve atlanır; 'puan' birimi (XAU için tipik 0.01 USD) ve GMT seans saatleri Dukascopy UTC verisine uyarlanmalı."
+  ],
+  "kodlanabilirlik": {
+    "puan": 2,
+    "gerekce": "Tüm giriş ve çıkış kuralları kodda sayısal; seviye saklama süresi, puan/USD dönüşümü ve çoklu zaman dilimi eşleştirmesi için makul varsayım gerekir."
+  },
+  "belirsizlikler": [
+    "Kırılım seviyesi için zaman aşımı yok: kullanılana dek geçerli kalıyor ve yeni kırılım üzerine yazıyor",
+    "Kaynakta sonuç/performans verisi yok",
+    "Tolerans 50 puan ve ATR eşiği 80 puan: XAU'da 1 puan = 0.01 USD varsayımı broker'a bağlı",
+    "Order block, likidite süpürme, hacim filtreleri kodda var ama varsayılan kapalı, kartta yok",
+    "Lisans belirtilmemiş: kod kopyalanmadı, kural kendi cümlelerimizle yazıldı"
+  ],
+  "uyumluluk_notu": "Forex'e özgü değil ama XAU odaklı; Dukascopy XAU ile çalışır. Mevcut daytrade__orb-4s-hacim-atr ve aralik-kirilim kartlarından farklı: bu bir geri test girişli çok zaman dilimli yapı kırılımı. Kriptoda saat penceresi UTC'ye göre yeniden düşünülmeli.",
+  "varyantlar": [
+    "Order block, likidite süpürme ve hacim filtreleri (varsayılan kapalı)"
+  ],
+  "anahtar_kelimeler": [
+    "xauusd",
+    "bos",
+    "retest",
+    "kirilim",
+    "ema50-200",
+    "rsi",
+    "atr",
+    "breakeven",
+    "seans"
+  ]
+}

@@ -1,0 +1,64 @@
+{
+  "kart_id": "daytrade__bollinger-alt-bant-donus-long__rauterfrank-ui",
+  "ad": "Bollinger Alt Bant Ortalamaya Dönüş (Long)",
+  "stil": "daytrade",
+  "kaynak": {
+    "url": "https://github.com/rauterfrank-ui/Peak_Trade",
+    "lisans": "yok (LICENSE dosyası yok)",
+    "tur": "github"
+  },
+  "ozet": "Kapanış alt Bollinger bandının %95'inin altına inince long açılır; fiyat orta banda yukarı değince kapanır. Yalnız long, ortalamaya dönüş mantığı.",
+  "kategori": "ortalamaya_donus",
+  "piyasa_rejimi": "yatay",
+  "orijinal_piyasa": "kripto",
+  "zaman_dilimi": {
+    "islem": null,
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {
+      "ad": "Bollinger",
+      "parametreler": {
+        "periyot": 20,
+        "std": 2.0,
+        "kaynak": "kapanış"
+      }
+    }
+  ],
+  "long_giris": [
+    "Bir önceki kapanış, önceki barın 0,95 x alt bandının üstündeydi VE bu barın kapanışı bu barın 0,95 x alt bandına eşit ya da altında (aşağı kesişim)",
+    "Açık pozisyon yok"
+  ],
+  "short_giris": [],
+  "stop_loss": "Girişe göre sabit %3 (yapılandırma dosyasında stop_pct=0,03; sinyal kodunda uygulanmıyor, motor tarafında olduğu varsayılır)",
+  "kar_al": "Kapanış orta bandı (SMA20) aşağıdan yukarı keserse çıkış",
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": null,
+  "kanit": null,
+  "veri_uygun": [
+    true,
+    "Yalnız kapanış ve rolling ortalama/std gerekir; Binance perp OHLCV ile test edilir. Zaman dilimi kaynakta yok."
+  ],
+  "kodlanabilirlik": {
+    "puan": 3,
+    "gerekce": "Sinyal fonksiyonu tamamen mekanik, shift ile önceki bar kıyası yapıyor, lookahead yok."
+  },
+  "belirsizlikler": [
+    "Zaman dilimi ve evren kaynakta yok",
+    "Stop kodda sinyal tarafında yok, yalnız config'te %3 yazıyor",
+    "Girişte alt bandın %95'i kullanımı mantıksız (eşik bandın ALTINDA kalıyor, fiyat ölçeğine bağlı)",
+    "Kaynak notunda deney sonucu negatif; rakam doğrulanmadı",
+    "Short tarafı yok"
+  ],
+  "uyumluluk_notu": "Kapanış tabanlı, forex'e özgü değil, hacim gerekmez. dis_envanter'de RSI+Bollinger ve bant-dönüş kuralları var; bu kural RSI'sız ve bant dışı kapanışta giriş yaptığı için ayrı tutuldu. Fiyat ölçeği bağımlı 0,95 çarpanı yerine yüzde sapma ile uyarlanabilir.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+    "bollinger",
+    "ortalamaya-donus",
+    "alt-bant",
+    "orta-bant-cikis"
+  ]
+}

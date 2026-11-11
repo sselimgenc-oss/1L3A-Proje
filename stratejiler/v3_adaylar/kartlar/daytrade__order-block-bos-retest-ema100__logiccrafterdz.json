@@ -1,0 +1,92 @@
+{
+  "kart_id": "daytrade__order-block-bos-retest-ema100__logiccrafterdz",
+  "ad": "Order Block + BOS Yeniden Test (EMA100 Trend)",
+  "stil": "daytrade",
+  "kaynak": {
+    "url": "https://github.com/logiccrafterdz/strategy002-SmartOrderBlocks",
+    "lisans": "MIT",
+    "tur": "github"
+  },
+  "ozet": "Fiyat 3 kapanıştır EMA100'ün bir tarafındayken, yapı kırılımı (BOS) sonrası oluşan order block bölgesine geri dönüş mumu yutan/pin bar ise trend yönünde işlem açılır. Stop bölgenin ötesinde, hedef 2R.",
+  "kategori": "kirilim",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "emtia",
+  "zaman_dilimi": {
+    "islem": "1h (kaynak periyot belirtmiyor: 'grafik periyodu'; README testi XAUUSD H1)",
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {
+      "ad": "EMA",
+      "parametreler": {
+        "periyot": 100
+      }
+    },
+    {
+      "ad": "ATR",
+      "parametreler": {
+        "periyot": 14
+      }
+    },
+    {
+      "ad": "Swing (fraktal)",
+      "parametreler": {
+        "sol": 3,
+        "sag": 3
+      }
+    }
+  ],
+  "long_giris": [
+    "Trend: son 3 kapanışın her biri kendi barındaki EMA100'ün üstünde",
+    "BOS: kapanış, en son swing tepesinin (3 sol/3 sağ mum) üstünde ve fark en az 8 pip (XAU için pip tanımı belirsiz)",
+    "Order block mumu: BOS mumundan önceki 50 mum içindeki ters renkli (düşen) mum; kodun gerçek davranışı bu aralıktaki EN ESKİ ters renkli mumu seçer; yorumu 'son' diyor, çelişki var",
+    "OB kalite: gövde > 0,6 x ATR(14) ve OB'den BOS'a kadar en büyük mum aralığı > 1,2 x ATR(14)",
+    "Bölge = OB mumunun açılış-kapanış gövdesi (fitil dahil değil); bölge kapanışı bölgenin altına inene kadar geçerli",
+    "Giriş mumu: kapanış bölge içinde (touch değil close modu) ve mum yükselen yutan mum veya boğa pin bar (alt fitil >= 1,8 x gövde, kapanış aralığın üst %25'inde)",
+    "Giriş: sonraki bar açılışı (kaynakta anlık ask)"
+  ],
+  "short_giris": [
+    "Aynalı: son 3 kapanış EMA100'ün altında, BOS aşağı, düşüş OB (yükselen mum) bölgesine kapanış, düşüş yutan veya ayı pin bar"
+  ],
+  "stop_loss": "Long: bölge alt sınırının 5 pip altı; short: bölge üst sınırının 5 pip üstü",
+  "kar_al": "2R (giriş-stop mesafesinin 2 katı)",
+  "iz_suren_stop": null,
+  "zaman_cikisi": "Yok (kaynakta yok). Kodda: 0,5R'de stop girişin 3 pip ötesine çekilir; 1R'de pozisyonun %25'i kapatılır; iz süren stop varsayılan kapalı",
+  "filtreler": [
+    "Seans: 07:00-11:00 ve 13:00-17:00 (GMT ofseti 0 varsayımı)",
+    "Haber penceresi 14:25-15:10 elle sabit saatle girişi engeller (bizde haber verisi yok; saat filtresi olarak uygulanabilir)",
+    "Aynı anda tek pozisyon",
+    "Maks spread filtresi (bizde spread yok)"
+  ],
+  "pozisyon_risk": "Hesap riskinin %0,3'ü",
+  "iddia_edilen_performans": "README: XAUUSD H1, Oca-Mar 2024, 23 işlem, kazanma %65,2, PF 1,85, maks DD %8,3 (iddia, doğrulanmadı; örneklem çok küçük)",
+  "kanit": "Yalnız README'deki 23 işlemlik XAUUSD H1 iddiası; bağımsız doğrulama yok.",
+  "veri_uygun": [
+    true,
+    "XAUUSD Dukascopy OHLCV var; hacim/spread/haber gerekmeyen çekirdek kural kurulabilir."
+  ],
+  "kodlanabilirlik": {
+    "puan": 2,
+    "gerekce": "Kurallar kodda sayısal ama OB seçimi kod-yorum çelişkisi, pip tanımı ve periyot belirsiz."
+  },
+  "belirsizlikler": [
+    "Periyot kaynakta yok (PERIOD_CURRENT)",
+    "Pip: 5/3 basamaklı sembolde 10 puan; XAU 2 basamaklı ise 1 puan = 8 pip=0,08 USD gibi saçma küçük eşik çıkar, XAU için ölçek uyarlaması şart",
+    "OB mum seçimi kodda en eski ters mum (50 bar), yorumda son ters mum",
+    "Kısmi kapanış ve BE kuralı sonuçları etkiler; çekirdek ile ayrı test edilmeli",
+    "Kaynakta örneklem 23 işlem; sonuç kanıtı sayılmaz"
+  ],
+  "uyumluluk_notu": "ICT/SMC tarzı; bizde 'ters-fvg-nq' ile aynı aile değil (BOS+OB), ama formasyon odaklı. XAU H1 ile test edilebilir, haber/spread filtreleri atılır.",
+  "varyantlar": [
+    "Breaker block girişi (varsayılan kapalı)",
+    "Hacim patlaması filtresi (varsayılan kapalı)"
+  ],
+  "anahtar_kelimeler": [
+    "order-block",
+    "bos",
+    "ema100",
+    "smc",
+    "yutan-mum",
+    "pin-bar"
+  ]
+}

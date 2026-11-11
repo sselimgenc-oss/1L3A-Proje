@@ -1,0 +1,86 @@
+{
+  "kart_id": "daytrade__orb-15dk-etf-aralik-hedef__liamrr18",
+  "ad": "15 Dakikalik Acilis Araligi Kirilimi (SPY/QQQ)",
+  "stil": "daytrade",
+  "kaynak": {
+    "url": "https://github.com/liamrr18/quant1",
+    "lisans": "lisanssiz",
+    "tur": "github"
+  },
+  "ozet": "ABD seansinin ilk 15 dakikasinin yuksek/dusugu aralik sayilir; araligi kapanisla yukari kiran bara long, asagi kirana short. Stop karsi uc, hedef 1.5 x aralik, gun sonu (15:30) kapanis. Aralik genisligi, ATR yuzdeligi, kirilim hacmi ve gap filtreleri ile.",
+  "kategori": "kirilim",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+    "islem": "5m",
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {
+      "ad": "Acilis araligi",
+      "parametreler": {
+        "dakika": 15
+      }
+    },
+    {
+      "ad": "ATR yuzdeligi",
+      "parametreler": {}
+    },
+    {
+      "ad": "Goreli hacim",
+      "parametreler": {}
+    }
+  ],
+  "long_giris": [
+    "Seans acilisi 09:30 NY; 09:45'ten sonraki bir barin kapanisi > acilis araligi yuksegi",
+    "Aralik/aralik dusugu orani 0.001 ile 0.008 arasinda",
+    "ATR yuzdeligi >= 25 (SPY, QQQ)",
+    "Kirilim bar hacmi >= 1.2 x ortalama",
+    "Son giris 15:00'e kadar",
+    "SPY icin: acilis gap'i >= %0.3"
+  ],
+  "short_giris": [
+    "Aynasi: kapanis < aralik dusugu"
+  ],
+  "stop_loss": "Karsi aralik ucu (long: aralik dusugu, short: aralik yuksegi); kapanis bazli kontrol",
+  "kar_al": "Giris + 1.5 x aralik genisligi (short ayna), kapanis bazli",
+  "iz_suren_stop": null,
+  "zaman_cikisi": "Gun sonu 15:30 NY'de kapanis; QQQ icin giriste 90 bar sonra hala zararda ise cikis.",
+  "filtreler": [
+    "Aralik genisligi filtresi",
+    "ATR yuzdeligi",
+    "Hacim teyidi",
+    "Gap filtresi (yalniz SPY)",
+    "Son giris saati 15:00"
+  ],
+  "pozisyon_risk": "Kaynakta yok.",
+  "iddia_edilen_performans": "Kaynak README'sinde 'kilitli OOS Sharpe 3.35' iddiasi (doğrulanmadı).",
+  "kanit": "Kaynak, sembol profillerinin gelistirme ve kilitli OOS dilimleriyle ayarlandigini yaziyor; cok sayida deney kaydi var (veri kazima riski).",
+  "veri_uygun": [
+    false,
+    "Hisse/ETF kurali (SPY/QQQ, NY seansi). Dukascopy'de ETF/US hisse OHLCV var ama NY seans acilis saatine baglı; kripto 24s oldugundan dogrudan uygulanamaz."
+  ],
+  "kodlanabilirlik": {
+    "puan": 2,
+    "gerekce": "Kural sayisal; ATR yuzdeligi pencere tanimi kaynakta ayri dosyada ve burada okunmadi."
+  },
+  "belirsizlikler": [
+    "Kod 1 dakikalik bar kullaniyor (5m'e uyarlama bizim)",
+    "ATR yuzdeliginin penceresi ve goreli hacim ortalamasi okunmadi",
+    "Giris barin kapanisinda (ayni bar kapanisi) varsayiliyor",
+    "Parametreler sembolde farkli (profil)",
+    "Sonuclar komisyon/kayma varsayimina bagli"
+  ],
+  "uyumluluk_notu": "NY seans acilisine bagli oldugundan kripto icin UTC-gun acilisi uyarlamasi gerekir (ayri kart gerektirir).",
+  "varyantlar": [
+    "QQQ: 90 bar zararda cikis",
+    "Per-sembol profil"
+  ],
+  "anahtar_kelimeler": [
+    "acilis-araligi",
+    "orb",
+    "aralik-hedefi",
+    "hisse",
+    "gap-filtresi"
+  ]
+}

@@ -1,0 +1,103 @@
+{
+  "kart_id": "swing__macd-hist-mad-bb-atr__bachng0111",
+  "ad": "MACD Histogram (MAD eşikli) + Bollinger + ATR Dört Bacaklı Sistem",
+  "stil": "swing",
+  "kaynak": {
+    "url": "https://github.com/bachng0111/MACD-BB-ATR-Automated-Trading-System",
+    "lisans": "MIT",
+    "tur": "github"
+  },
+  "ozet": "Günlük kapanışta MACD histogramı, kayan MAD ile ölçeklenen eşiklerle ve log-fiyat Bollinger bandıyla birlikte okunur: bant dışı aşırılıkta ters yönde (reversion), orta bölgede trend yönünde (momentum) işlem açılır. Çıkış ATR tabanlı sabit TP/SL; sinyal bir sonraki barın açılışında icra edilir.",
+  "kategori": "momentum",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+    "islem": "1d",
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {
+      "ad": "MACD histogramı",
+      "parametreler": {
+        "hizli": 12,
+        "yavas": 26,
+        "sinyal": 9,
+        "kaynak_varsayilan": "kodun varsayılanı; Optuna ile 35-44 yavaş, 10-20 hızlı aralığında ayarlanmış"
+      }
+    },
+    {
+      "ad": "Kayan MAD",
+      "parametreler": {
+        "pencere": 50,
+        "olcek": "1.4826 x MAD(histogram)",
+        "esik_carpani_k": 2.0,
+        "orta_esik_k_mid": 0.5
+      }
+    },
+    {
+      "ad": "Bollinger (log fiyat)",
+      "parametreler": {
+        "pencere": 20,
+        "std": 2.0,
+        "std_tipi": "ddof=0, log kapanış üzerinde; bantlar exp ile fiyata çevrilir"
+      }
+    },
+    {
+      "ad": "ATR",
+      "parametreler": {
+        "periyot": 14
+      }
+    }
+  ],
+  "long_giris": [
+    "Sistem flat, cooldown (5 bar) dolmuş ve son kısa pozisyondan bu yana rebounce_block (10 bar) geçmiş olmalı",
+    "LM (momentum long): 0 <= MACD_hist <= +k_mid x 1.4826 x MAD50 VE kapanış > BB orta bant VE long-momentum sayacı < 4",
+    "LR (reversion long): MACD_hist < -k x 1.4826 x MAD50 VE kapanış < BB alt bant",
+    "Öncelik sırası: LM, SM, SR, LR; ilk sağlanan işlem açar; giriş sinyal barını izleyen barın açılışında"
+  ],
+  "short_giris": [
+    "Aynı cooldown ve rebounce_block koşulları",
+    "SM (momentum short): -k_mid x 1.4826 x MAD50 <= MACD_hist <= 0 VE kapanış < BB orta bant VE short-momentum sayacı < 4",
+    "SR (reversion short): MACD_hist > +k x 1.4826 x MAD50 VE kapanış > BB üst bant VE long-momentum sayacı > 1"
+  ],
+  "stop_loss": "Giriş açılışından ATR çarpanı kadar uzakta: LM/SM 1.5 x ATR, LR/SR 1.0 x ATR (kapanışla kontrol; ihlalde sonraki açılışta çık)",
+  "kar_al": "Giriş açılışından ATR çarpanı kadar: LM/SM 3.0 x ATR, LR/SR 2.0 x ATR (kapanışla kontrol)",
+  "iz_suren_stop": "Varsayılan kapalı; açılırsa SL = max(SL, en yüksek kapanış - trail_mult x ATR), trail_mult 2.0",
+  "zaman_cikisi": "time_stop parametresi var; varsayılan 0 (kapalı), Optuna denemelerinde 0-30 bar arasında",
+  "filtreler": [
+    "Momentum girişleri (LM/SM) art arda en fazla 4 kez",
+    "Reversion girişleri trend sayacı koşuluna bağlı (SR için sayaç > 1)"
+  ],
+  "pozisyon_risk": "Kodda sabit bir risk yüzdesi yok; ayrı bir portföy katmanı (Ledoit-Wolf kovaryans, teğet portföy) var, karta alınmadı",
+  "iddia_edilen_performans": "README: yıllık getiri %32,87 vs SPY %11,62; ortalama aylık %2,48 (iddia, doğrulanmadı; örneklem içi Optuna ayarlı)",
+  "kanit": "Yazar iddiası (iddia, doğrulanmadı): MAANG hisseleri günlük, Optuna ile Sharpe maksimize edilerek ayarlanmış; OOS ayrımı belirsiz, maliyet kodda 0. Kart kuralları kodun varsayılan parametreleriyle yazıldı, README'deki sonuç ayarlı parametrelere ait.",
+  "veri_uygun": [
+    true,
+    "OHLC yeterli; kural varlıktan bağımsız, günlük kripto perp veya Dukascopy hisselerine uygulanabilir. Kaynağın MAANG evreni dar ve seçim yanlılığı riski var."
+  ],
+  "kodlanabilirlik": {
+    "puan": 2,
+    "gerekce": "Kurallar kodda tam ve geleceğe bakmıyor (kayan pencere, sonraki açılışta giriş); ancak sayaç ve cooldown durum makinesi karmaşık, varsayılan ile ayarlı parametreler ayrışıyor."
+  },
+  "belirsizlikler": [
+    "Varsayılan ve Optuna sonrası parametreler farklı (ör. BB std 1.45-1.75, time_stop 10-18, rebounce_block 3-5); hangisinin referans alınacağı kaynakta kesin değil",
+    "Kural 4 bacak arası öncelik sırasını kodun if-sırasından alıyor (LM, SM, SR, LR)",
+    "Sayaçların (buy/sell_trend_counter) sıfırlanma koşulu karmaşık: yalnız LR girişinde buy sayacı sıfırlanıyor",
+    "Maliyet 0; komisyon ve kayma yok",
+    "Örneklem içi ayar, OOS doğrulaması yok"
+  ],
+  "uyumluluk_notu": "Günlük barda çalışır, hacim gerekmez. Kriptoda uzun-kısa ikisi de açık. Mevcut dis__macd-sma-cift ile çakışmaz (burada MAD ölçekli histogram + log Bollinger + ATR TP/SL). Çok parametreli, aşırı uyum riski yüksek; önce varsayılan parametrelerle test edilmeli.",
+  "varyantlar": [
+    "Trailing stop (use_trailing) ve trail_tp seçenekleri",
+    "time_stop ile zaman çıkışı"
+  ],
+  "anahtar_kelimeler": [
+    "macd",
+    "bollinger",
+    "atr",
+    "mad",
+    "robust-olcek",
+    "momentum",
+    "ortalamaya-donus"
+  ]
+}
