@@ -35,7 +35,11 @@ AY_ESIK, YIL_ESIK = 0.80, 0.70
 
 
 def _per(ts, f):
-    return pd.DatetimeIndex(ts).tz_convert("UTC").tz_localize(None).to_period(f)
+    """Dönem etiketi. Veri sonunda zorunlu kapanan işlemin çıkış damgası = 2025-11-08 00:00 (son geliştirme mumunun bitişi);
+    dönem ataması için 1 ns geriye alınır (2025-11'e taşmaz)."""
+    t = pd.DatetimeIndex(ts).as_unit("ns").tz_convert("UTC")
+    t = t.where(t < HOLDOUT_BAS, HOLDOUT_BAS - pd.Timedelta(1, "ns"))
+    return t.tz_localize(None).to_period(f)
 
 
 def _u(x) -> pd.Timestamp:
@@ -98,7 +102,7 @@ def _takvim(ilk_giris):
 
 def olc_islem(d: pd.DataFrame) -> dict:
     """d: giris_zamani, cikis_zamani, r, sembol."""
-    if d["cikis_zamani"].max() >= HOLDOUT_BAS or d["giris_zamani"].max() >= HOLDOUT_BAS:
+    if d["cikis_zamani"].max() > HOLDOUT_BAS or d["giris_zamani"].max() >= HOLDOUT_BAS:       # Ek-1: çıkış == HOLDOUT_BAS serbest
         raise RuntimeError("tarih sınırı aşıldı")
     d = d.sort_values(["cikis_zamani", "giris_zamani"], kind="stable").reset_index(drop=True)
     r = d["r"].to_numpy(float)
@@ -112,7 +116,7 @@ def olc_islem(d: pd.DataFrame) -> dict:
     ay_pct = float((ay_say >= 1).mean() * 100)
     yil_pct = float((yil_r > 0).mean() * 100)
     et, neden = etiketle(ay_pct, yil_pct, kalan5)
-    return {"n_islem": len(d), "n_ay": len(aylar), "ayda_ort_islem": float(ay_say.mean()), "ayda_medyan_islem": float(ay_say.median()),
+    return {"n_islem": len(d), "n_veri_sonu_kapanis": int((d["cikis_zamani"] == HOLDOUT_BAS).sum()), "n_ay": len(aylar), "ayda_ort_islem": float(ay_say.mean()), "ayda_medyan_islem": float(ay_say.median()),
             "islemli_ay_pct": ay_pct, "en_uzun_islemsiz_gun": en_uzun_bosluk_gun(d["giris_zamani"]),
             "yil_r": {str(k): float(v) for k, v in yil_r.items()}, "n_yil": len(yillar), "arti_yil": int((yil_r > 0).sum()),
             "arti_yil_pct": yil_pct, "arti_ay_pct": float((ay_r > 0).mean() * 100), "toplam_sigma": float(r.sum()),
@@ -139,7 +143,7 @@ def olc_portfoy(g: pd.DataFrame) -> dict:
     p10, _, _ = en_iyi_pay(x, adet=10)
     ay_pct, yil_pct = float((ay_say >= 1).mean() * 100), float((yil_r > 0).mean() * 100)
     et, neden = etiketle(ay_pct, yil_pct, kalan5)
-    return {"n_islem": int(len(deng)), "n_ay": len(aylar), "ayda_ort_islem": float(ay_say.mean()), "ayda_medyan_islem": float(ay_say.median()),
+    return {"n_islem": int(len(deng)), "n_veri_sonu_kapanis": 0, "n_ay": len(aylar), "ayda_ort_islem": float(ay_say.mean()), "ayda_medyan_islem": float(ay_say.median()),
             "islemli_ay_pct": ay_pct, "en_uzun_islemsiz_gun": en_uzun_bosluk_gun(deng["gun"]),
             "yil_r": {str(k): float(v) for k, v in yil_r.items()}, "n_yil": len(yillar), "arti_yil": int((yil_r > 0).sum()),
             "arti_yil_pct": yil_pct, "arti_ay_pct": float((ay_r > 0).mean() * 100), "toplam_sigma": float(x.sum()),

@@ -129,3 +129,16 @@ def test_olc_islem_tarih_siniri():
 def test_sabit_holdout_v2_ile_ayni():
     from motor.arastirma.v2 import sabit
     assert C.HOLDOUT_BAS == sabit.HOLDOUT_BAS and D.HOLDOUT_BAS == sabit.HOLDOUT_BAS
+
+
+def test_veri_sonu_kapanisi_serbest_ama_sonrasi_degil():
+    """Ek-1: veri sonunda zorunlu kapanan işlemin çıkış damgası tam HOLDOUT_BAS olabilir; 1 ns sonrası ya da giriş >= HOLDOUT_BAS hata."""
+    ok = pd.DataFrame({"giris_zamani": pd.to_datetime(["2025-10-01"], utc=True), "cikis_zamani": [D.HOLDOUT_BAS], "r": [1.0], "sembol": ["A"]})
+    o = D.olc_islem(ok)
+    assert o["n_veri_sonu_kapanis"] == 1 and o["yil_r"]["2025"] == 1.0
+    assert pd.Period("2025-11", "M") not in D._per([D.HOLDOUT_BAS], "M")
+    kotu = ok.assign(cikis_zamani=[D.HOLDOUT_BAS + pd.Timedelta(1, "ns")])
+    with pytest.raises(RuntimeError):
+        D.olc_islem(kotu)
+    with pytest.raises(RuntimeError):
+        D.olc_islem(ok.assign(giris_zamani=[D.HOLDOUT_BAS]))

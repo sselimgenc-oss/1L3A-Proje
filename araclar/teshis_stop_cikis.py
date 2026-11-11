@@ -76,7 +76,7 @@ def mum_yukle(sembol: str):
 
 def islem_olc(df: pd.DataFrame, sembol: str, tf: str) -> pd.DataFrame:
     """Ham işlem tablosu -> MAE/MFE sütunları eklenmiş tablo (sm geçersizse NaN)."""
-    if len(df) and (df["cikis_zamani"].max() >= HOLDOUT_BAS or df["giris_zamani"].max() >= HOLDOUT_BAS):
+    if len(df) and (df["cikis_zamani"].max() > HOLDOUT_BAS or df["giris_zamani"].max() >= HOLDOUT_BAS):   # Ek-1: çıkış == HOLDOUT_BAS serbest
         raise RuntimeError(f"{sembol}: işlem tarihi geliştirme dönemi dışında")
     t, o, h, l = mum_yukle(sembol)
     dur = TF_SURE[tf].value
@@ -117,7 +117,8 @@ def strateji_olcu(d: pd.DataFrame) -> dict:
     fl = d.loc[(~kaz) & ok, "mfe_r"].to_numpy(float)
     geri = (d.loc[kaz & ok, "mfe_r"] - d.loc[kaz & ok, "r"]).to_numpy(float)
     kayip_r = r[~kaz]
-    o = {"n_islem": n, "n_mae_mfe_olculen": int(ok.sum()), "n_pencere_bos": int(((d["n_mum_pencere"] == 0) & ok).sum()),
+    o = {"n_islem": n, "n_veri_sonu_kapanis": int((pd.to_datetime(d["cikis_zamani"], utc=True) == HOLDOUT_BAS).sum()),
+         "n_mae_mfe_olculen": int(ok.sum()), "n_pencere_bos": int(((d["n_mum_pencere"] == 0) & ok).sum()),
          "kazanma_orani": kazanma, "ort_kazanc_r": ort_k, "ort_kayip_r": ort_l, "payoff": payoff, "beklenti_r": float(r.mean()),
          "tip": sinifla(kazanma, payoff) if np.isfinite(payoff) else "karma",
          "kaz_mae_medyan": float(np.median(mk)), "kaz_mae_p75": float(np.percentile(mk, 75)), "kaz_mae_p90": float(np.percentile(mk, 90)),
@@ -162,7 +163,7 @@ def main():
         print(s, o["n_islem"], round(o["kazanma_orani"], 3), round(o["payoff"], 2), o["tip"], flush=True)
     sonuc = pd.DataFrame(satirlar)
     tum = pd.concat(islemler, ignore_index=True)
-    assert tum["cikis_zamani"].max() < HOLDOUT_BAS and tum["giris_zamani"].max() < HOLDOUT_BAS, "tarih sınırı"
+    assert tum["cikis_zamani"].max() <= HOLDOUT_BAS and tum["giris_zamani"].max() < HOLDOUT_BAS, "tarih sınırı"
     sonuc.to_csv(CIKTI / "sonuc.csv", index=False)
     tum[["strateji", "sembol", "tf", "giris_zamani", "cikis_zamani", "yon", "r", "stop_mesafe", "giris_fiyati_turetilen",
          "mae_r", "mfe_r", "n_mum_pencere"]].to_parquet(CIKTI / "islem_mae_mfe.parquet", index=False)

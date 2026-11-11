@@ -52,9 +52,16 @@ Strateji başına, tüm sembollerin işlemleri birlikte:
 sonuclar/teshis/stop_cikis/ ve sonuclar/teshis/duzenlilik/ : sonuc.csv, ozet.json, rapor.md (sade Türkçe).
 Denetim: 2 strateji × 3 rastgele işlem için MAE/MFE mum verisine bakılarak elle kontrol, rapora yazılır.
 
+## Ek-1 (koşu BAŞLAMADAN hata verdi, hiçbir sonuç görülmeden yazıldı)
+İlk deneme tarih doğrulamasında durdu: veri sonunda açık kalan işlemler motorca son geliştirme mumunun BİTİŞ anıyla
+(cikis_zamani = 2025-11-08 00:00 UTC, "veri sonu zorunlu kapanış") kapatılıyor; bu damga holdout verisi değil. Kural:
+giriş < 2025-11-08 ve çıkış <= 2025-11-08 00:00 serbest; kullanılan mum (fiyat) < 2025-11-08 SERT kalır; çıkış damgası
+dönem (ay/yıl) atamasında 2025-10/2025'te sayılır; bu işlemlerin sayısı (n_veri_sonu_kapanis) raporda gösterilir.
+Başka bir değişiklik yok. Aşağıdaki sha256 bu hâlin hash'leridir (ilk commit'teki hash'ler geçersiz).
+
 ## sha256 (koşu öncesi)
 ```
-61c89d66cadde01ee6df1758a6261d39416cdebe0312fb93f14c82e0bffabe1c araclar/teshis_stop_cikis.py
-ed4036201686701cecd510c0b58006fd2c868dcb035e3aa7169b6bd498b8c4a0 araclar/teshis_duzenlilik.py
-95db2dbfa8539781170a62bc3836f95972681e5dd6e088182f6386047620026a testler/test_teshis_stop_cikis_duzenlilik.py
+be559435a174f47b9ac15b612c78235b9e5bdaac5f7cf72ee68faa3c641e15cf araclar/teshis_stop_cikis.py
+297b1fe70e2b55ee387e874579ab751d226504d7cffea8ab84ca65fc21a24a8b araclar/teshis_duzenlilik.py
+d9486acd4d14d41d12f42079a0ebc54d288d4c3d17f099d5991c28db9fe71b35 testler/test_teshis_stop_cikis_duzenlilik.py
 ```
