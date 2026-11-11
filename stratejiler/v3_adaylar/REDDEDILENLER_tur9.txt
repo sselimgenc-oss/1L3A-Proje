@@ -1,0 +1,33 @@
+TUR 9 (scalp arastirmasi) - reddedilen / tekrar kaynaklar. 30 satir (bazi satirlar 2-5 sayfalik grup; ~36 sayfa/kaynak tarandi); 1 kart yazildi (12s-seans-ters-donus), 29 satir red/tekrar/bilgi.
+Sayac (satir, ana neden): tekrar 5 | maliyet ya da OOS dogrulanamadi/yok 6 | kod/kural yok 4 | arac-cerceve 4 | gunluk-kesit-hisse (scalp degil) 4 | tick/likidasyon verisi gerekir 2 | yalniz satici/haber/blog 4 | ML 1 (toplam 30 satir)
+NOT: Birincil makale metinlerine erisilemedi (arxiv, mdpi, ssrn, quantpedia, reading.ac.uk, cesifo, doi.org, ncbi agi izin listesinde degil: DNS hatasi). Yalnizca arama ozetleri ve GitHub sayfalari okundu; asagidaki "maliyet/OOS yok" hukumleri "bu erisimle dogrulanamadi" demektir, "kaynakta yok" demek degildir.
+Shen-Urquhart-Wang, Bitcoin intraday TSM (Financial Review 2022) | https://research.birmingham.ac.uk/en/publications/bitcoin-intraday-time-series-momentum/ | tekrar: daytrade__ilk-yari-saat-momentum__shen (15m); maliyet ve Sharpe ozetten dogrulanamadi
+Quantpedia BTC 21-23 UTC mevsimsellik (Padysak-Vojtko) | https://quantpedia.com/strategies/intraday-seasonality-in-bitcoin | tekrar: daytrade__saat-21-23-utc__padysak; maliyet "Reported degil", OOS temiz degil
+De Nicola saatlik asiri tepki | https://epub.ub.uni-muenchen.de/97651/ | tekrar: daytrade__saatlik-asiri-tepki-tersine__denicola
+Bianchi-Babiak-Dickerson (Riksbank WP 413) | https://www.riksbank.se/globalassets/media/rapporter/working-papers/2022/no.-413-trading-volume-and-liquidity-provision-in-cryptocurreny-markets.pdf | tekrar/gunluk kesit: Tur 5'te incelendi; 20-40 bp maliyet; scalp degil
+Bianchi-Dickerson 2018 ("342% net" haber alintisi) | https://www.wbs.ac.uk/news/why-are-cryptocurrency-prices-so-volatile/ | kural gorulmedi, 26 coin/150 borsa verisi, 2017-18 kisa orneklem, birincil metin yok; haber alintisi kanit degil
+Gao-Han-Li-Zhou SPY ilk yari saat | https://alphaarchitect.com/2014/08/attention-prop-traders-the-first-half-hour-of-trading-predicts-the-last-half-hour/ | hisse/ETF, kripto degil; kriptodaki esi Shen kartinda
+Zarattini noise-area SPY OOS (PazSheimy) | https://github.com/PazSheimy/spy-intraday-momentum-oos | tekrar: daytrade__gunici-momentum-noise-alani__zarattini; OOS 2024-26 Sharpe 0.39 (okundu); SPY hacim/VWAP verisi bizde yok
+AutoQuant arXiv 2512.22476 | https://arxiv.org/abs/2512.22476v1 | strateji degil, maliyet-sisme analizi (yalniz ozet): fee-only ve sifir-maliyet backtest sismis; ders olarak RAPOR'da; kural yok
+arXiv 2212.06888 rastgele vadeli arbitraj | https://arxiv.org/html/2212.06888v5 | baz arbitraji (Sharpe 1.8 yuksek maliyetle, ozet); scalp degil, spot+perp iki bacak
+Notp1ssed saatlik mevsimsellik notu | https://notp1ssed.github.io/portfolio/assets/docs/001_Seasonality_Backtest.html | maliyetsiz; Monte Carlo permutasyon testinde "saglam strateji degil" (ozet)
+tmr-crypto/wf_optim_crypto_analysis (arXiv 2602.10785) | https://github.com/tmr-crypto/wf_optim_crypto_analysis | okundu: BTC 1-60 dk EMA, ucret %0.1/islem, 21 ay OOS: sonuc al-tut ile benzer, sayi yok; EMA uzunluklari/giris-cikis yok, lisans yok; kod_yok
+Caporale-Plastun asiri tepki (saatlik/gunluk) | https://www.brunel.ac.uk/economics-finance-and-accounting/research/pdf/1801-Jan-GMC-Price-Overreactions-In-The-Cryptocurrency-Market.pdf | yazarlar kendileri "somurulebilir kar yok (maliyet olabilir)" diyor (ozet)
+Kozlowski-Puleo-Zhou kripto ters donus | https://fairfield.elsevierpure.com/en/publications/cryptocurrency-return-reversals/ | gunluk/haftalik/aylik; scalp degil
+Springer tick-by-tick sicrama (s42521-024-00116-1) | https://link.springer.com/article/10.1007/s42521-024-00116-1 | tick verisi gerekir, net kar yok
+Heliyon "turn-of-the-candle" BTC | https://www.ncbi.nlm.nih.gov/pmc/articles/PMC10015199/ | 15 dk mum donumunde dakika basina +0.58 bp (ozet): 1 dakika veri gerekir (karar 3), brut hareket maliyetin cok altinda; islem kurali tanimsiz; kod_yok
+"Power Hour" BTC ters donus (MEXC haber alintisi) | https://www.mexc.com/news/621960 | brut Sharpe 2.89 -> net -0.09 (haber alintisi, birincil makale bulunamadi); olumsuz kanit: maliyet edgeyi yiyor; NY saati 15-16, kural eksik
+Reddit/GitHub BTC 15m ORB (russs123/backtests) | https://redlib.ssps.io/r/Trading/comments/1j9q0nx/backtest_results_for_the_opening_range_breakout | maliyet/OOS arama ozetinde gorunmuyor; dogrulanamadi
+Altrady ORB sayfasi | https://www.altrady.com/charts/library/strategy/opening-range-breakout | "yakinda" sonuc yok; kanit yok
+Substack ORB (endeks vadelisi, OOS var) | https://backtestsnotsignals.substack.com/p/opening-range-breakout-real-edge | kripto degil, endeks vadelisi
+TradingView RC Crypto Scalper v3 | https://it.tradingview.com/script/VBAg2A7R-RC-Crypto-Scalper-v3 | korumali kaynak, kural gorulemez; kod_yok
+maxgfr/ai-strategy-backtester | https://awesome.ecosyste.ms/projects/github.com%2Fmaxgfr%2Fai-strategy-backtester | arac (maker/taker, funding, WF) strateji degil
+breaded-xyz/alphavec | https://awesome.ecosyste.ms/projects/github.com%2Fbreaded-xyz%2Falphavec | arac (MIT perp backtester) strateji degil
+warren618/AlphaForge | https://ddprojects.chickenkiller.com/warren618/AlphaForge | factor-mining/ML benzeri, lisans dogrulanmadi; yasak kapsam
+backtest-kit | https://backtest-kit.github.io/ | cerceve; yan bilgi: tek tarafa %0.1 kayma varsayilan ornek
+loot-fi metodoloji | https://loot-fi.pages.dev/methodology | gunluk veri, 7 bp gidis-donus; scalp degil
+Bart (Medium) islem ucreti etkisi | https://medium.com/@bart_46269/the-impact-of-trading-fees-on-low-to-medium-frequency-systematic-bitcoin-trading-strategies-bb90f6990c | %0.3 ucretle stres testi; strateji karti yok
+askrubyai maker-taker kuyruk blogu | https://askrubyai.github.io/blog/posts/2026-03-03-maker-taker-queue/index.html | forum/blog; bootstrap GA her yurutme turunde sifiri iciriyor (maker dahil): bilgi
+Likidasyon kaskadi yazilari (coinchange, bitsgap, beincrypto vb.) | birkac sayfa | backtest/kural yok; likidasyon verisi (OHLCV disi) gerekir
+Funding yerlesim saati ve fiyat etkisi (sharpe.ai, kucoin, cryptoquant vb. aciklayicilar) | birkac sayfa | satici icerik, olay calismasi yok
+Seans bazli volatilite calismalari (altindex, k33, bitbank, bloomberg) | birkac sayfa | betimleyici; giris/cikis kurali ve maliyet yok
