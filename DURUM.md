@@ -123,8 +123,12 @@ Kaynak: `sonuclar/canli/CANLI_PLAN_V2.md` (eski `CANLI_PLAN.md`'nin yerini aldı
   birleşik hesap oynatması (8–20 Ara) → ewo 250 USD (Ocak) → değerlendirme (Şubat sonu).
 - **Dayanak (11 Kasım testleri):** meta-test + sağlamlık (PR #42, #44), teşhis (PR #43), yeni sembol sınavı (PR #45:
   4/4 genelleşmiyor; yeni coinlerin al-tut medyanı −%77), portföy boyutu (PR #44).
-- **Açık işler:** haftalık canlı rapor aracı ve birleşik hesap oynatması (alt ajanlarda); B18 pano kilidi; kullanıcı:
-  Binance alt hesaplar + testnet API anahtarı (/etc/1l3a-canli.env, asla sohbete değil).
+- **Faz 0 yazılım tarafı TAMAM (2026-11-11 gece):** haftalık rapor + yürütücü append-only kayıt (#48), birleşik hesap
+  oynatması geçti (#47: S1 en kötü 12 ay −%11,5, hesap kill yok), risk kodda 0.015'e kilitli (#50), B18 pano şifre kilidi
+  (#51), testnet/duman kontrol listesi `sonuclar/canli/TESTNET_KONTROL.md` (#49). Sunucu gideri 12 USD/ay.
+- **Sırada (kullanıcı, 25 Kasım'a kadar):** sunucuda `git pull` + PANO_SIFRE (KURULUM §11 "Pano kilidi"); Binance alt
+  hesaplar; testnet API anahtarı → TESTNET_KONTROL.md A bölümü. Yeni kayıt uçları (userTrades/income) ve algo stop uçları
+  ilk kez testnet'te doğrulanacak. 2026-12-08 sadakat hatırlatması kurulu.
 
 ## DEVİR NOTU — 2026-11-11 akşamı (ESKİ; v2 planı bunun yerini aldı) (projeye dönüşte buradan başla)
 Kullanıcı: "çok dağıldık, proje üzerinde yeniden çalışacağım". Açık iş bırakılmadı. Görsel özet: kullanıcıya gönderilen
