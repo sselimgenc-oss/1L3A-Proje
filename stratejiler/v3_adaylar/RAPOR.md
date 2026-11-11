@@ -290,3 +290,28 @@ Etiketleri "işlem bizde evet/bilinmiyor" olan satırlara göre sıralarsak en �
 - Birkaç satırda ajan kaynak tahmini yaptı (ör. Binance public veri, Ken French kütüphanesi) ve notta belirtti; doğrulanmadı.
 - Bir repoda açık FRED API anahtarı görüldü (satır "quant-macro"); değer kopyalanmadı, depo sahibinin iptal etmesi gerekebilir.
 - Yasak kategoriler (ML, HMM, genetik algoritma, ortalama düşürme şüphesi) etiketlendi ama notta işaretlendi; ayrıca dışarıda bırakılmadı.
+
+# Tur 7 (2026-11-11)
+Önceki tur dosyalarına dokunulmadı; eklenenler: `veri/takvim/fomc.csv` + `veri/takvim/README.md` ve `stratejiler/v3_adaylar/on_kayit_girdi.csv`. Kod yazılmadı. **Bağımlılık:** `on_kayit_girdi.csv` tur 5 verisini (`kaynak_dogrulama_tur5.csv`, RAPOR Tur 5) PR #29 dalından (`claude/v3-tur5`) okuyarak üretildi; bu PR #29'dan bağımsız açıldı, ama içeriği #29'a dayanıyor (birleştirme sırası: #29, sonra bu). `RAPOR.md`'ye üç PR da ek yapıyor; sırayla birleşirken bölümler yan yana tutulmalı.
+
+## 1. FOMC takvimi (`veri/takvim/fomc.csv`, 121 satır)
+Kaynak federalreserve.gov (2013-2020 `fomchistorical<yıl>.htm`, 2021-2026 `fomccalendars.htm`, saatler her toplantının resmi basın bülteninden); çekme 2026-11-11. Sütunlar istenenler + iki ek (`tip`, `not`). Ayrıntı: `veri/takvim/README.md`.
+- Yılda 8 planlı toplantı: 2013-2019 ve 2021-2026'nın hepsinde var (2026'nın Aralık toplantısı henüz yapılmadı: `planli_gelecek`). **2020'de 7:** 17-18 Mart iptal ("cancelled"), yerine 15 Mart (Pazar) plansız toplantı yapıldı.
+- 110 planlı geçmiş + 5 plansız (2013-10-16, 2014-03-04, 2019-10, 2020-03-03, 2020-03-15) + 5 yazılı oylama (2020: 03-19, 03-23, 03-31, 08-27; 2025-08-22) + 1 gelecek.
+- Saat yazılı: 86 toplantı 14:00 ET; 28 satır "bilinmiyor": **2013-2015'in 24 planlı toplantısı** (bültenlerde yalnız "For immediate release" yazıyor, tahmin edilmedi), 2 plansız konferans görüşmesi (sayfada açıklama yok), 2020-03-19 oylaması (bülten linki yok), 2026-12-09 (gelecek). aciklama_utc, yaz saati `America/New_York` ile hesaplandı; bültendeki EST/EDT kısaltması bununla uyumlu (uyumsuzluk yok).
+- `basin_toplantisi` sayfada "Press Conference" linkinin varlığına göre; 2019-01'den itibaren her toplantıda var.
+- Kullanım notu: pre-FOMC kartının "olay başına duyuru saati tablosu" 2016+ için artık hazır (2016+ planlı toplantıların tamamı 14:00 ET → KWG'ye göre pencere sonu 13:45 ET); 2013-2015 için saat henüz yok.
+
+## 2. Ön kayıt girdi tablosu (`on_kayit_girdi.csv`, 205 satır, 10 kart)
+İki Sonnet ajanı tur 4 + tur 5 csv'lerini, kartları, kanıt özetini ve RAPOR Fable kararlarını birleştirdi (tur 5, tur 4'ten yeniyse tur 5 kazandı); ben ÖNERİ satırlarını denetleyip düzelttim.
+- `deger_kaynagi`: kaynak 131, bizim_varsayim 68, bizim_ekleme 6 (ATR stopları ve short-bacak raporu/ısınma eklemeleri).
+- Her kart için `KANIT_OZETI` ve `ONERI` satırı var. 136 satırda `acik_soru` dolu.
+- **44 satırda `on_kayit_degeri` = KARAR GEREKLI** (sayısal geçme eşiği, değerlendirme dönemi, maliyet, evren listesi vb. mevcut kayıtlarda yok; uydurulmadı). En çok: kripto-max 8, btc-gecelik 6, FIP 6, pre-FOMC 6, vol-yönetimli 5, saatlik-aşırı-tepki 4. Bu satırlarda `deger_kaynagi` yer tutucu olarak `bizim_varsayim` yazıldı (değer henüz yok, karar verilince bizim varsayımımız olacak); izin verilen üç değerden biri olsun diye.
+- **ÖNERİ satırlarında düzeltme:** parça B ajanı Fable'ın açık hüküm vermediği kartlara "test et" yazmıştı. Fable'ın açıkça "test et/beklet" dediği kartlar kaldı: cuma-15 (tek ucuz ön kayıtlı test), noise-area, vol-yönetimli, funding-7g ("iyi test edilebilir"), saatlik-aşırı-tepki ("beklet"), donchian ("yeniden kodla/adlandır, sonra test"). **btc-gecelik, FIP, kripto-max, pre-FOMC için ÖNERİ = "KARAR GEREKLI (Fable açık test et/beklet demedi)"**; Fable hükmü metinde duruyor.
+- Çelişkiler `acik_soru`'da: FIP dilimi (Tur 3 tercil / Tur 4 kaynak %20; sonraki tur esas alındı), kripto-max dilimi (3-4 coin / tercil), pre-FOMC 2013-2015 saati, funding-7g günlük-toplam kod değişikliği kararı, donchian izleyen stop ile motorun stopsuz hedef açmaması, noise-area VWAP tanımı.
+
+## Dürüst sınırlar (tur 7)
+- Takvim yalnız resmi sayfalardan ayrıştırıldı; sayfa yapısı değişirse yeniden üretmek gerekir (ayrıştırma betiği repoda yok). `basin_toplantisi` link varlığından türetildi.
+- 2013-2015 duyuru saatleri bilinmiyor; literatürde saatin 2011 sonrası değiştiği geçiyor (doğrulanmadı).
+- `on_kayit_girdi.csv` bir birleştirme: yeni karar yok; ajanlar motor kodunu yeniden okumadı (yalnız tur 4/5 csv'lerindeki aktarımlar). Tur 5 verisi henüz `main`'de olmadığı için dosya #29 birleşmeden bağımsız doğrulanamaz.
+- Tablo ön kayıt değildir; ön kayıt kararı (KARAR GEREKLI satırları) kullanıcı ve ana oturumda.
