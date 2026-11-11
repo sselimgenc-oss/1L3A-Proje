@@ -1,0 +1,11 @@
+{
+  "surum": 1,
+  "mod": "testnet",
+  "working_type": "MARK_PRICE",
+  "kosullu_modu": "algo",
+  "giris_gecikme_max_sn": 900,
+  "hedef_emri": true,
+  "stratejiler": [
+    {"id": "BURAYA_STRATEJI_KIMLIGI", "api_key_env": "BINANCE_API_KEY_S1", "api_secret_env": "BINANCE_API_SECRET_S1", "tahsis_usd": 1000}
+  ]
+}

@@ -193,3 +193,55 @@ Her kasanın tam dosyaları `durum/hesaplar/<strateji>/` altındadır.
 
 **Geri dönüş (gerekirse):** `systemctl stop 1l3a-paper; cd /var/lib/1l3a-paper; mv durum durum_v2_deneme; mv durum_eski_7li_* durum`, sonra
 `/etc/systemd/system/1l3a-paper.service` içindeki `ExecStart` satırının sonuna `--set eski` ekleyip `systemctl daemon-reload && systemctl start 1l3a-paper`.
+
+## 13. Canlı (gerçek emirli) yürütücü — küçük bütçe
+> **Uyarı:** Bu bölüm GERÇEK PARA ile ilgilidir. Önce **kuru**, sonra **testnet**, ancak ikisi de günlerce sorunsuz çalıştıktan sonra **canlı**.
+> Paper servisi (`1l3a-paper`) aynen çalışmaya devam eder; canlı yürütücü ayrı bir servistir (`1l3a-canli`) ve ayrı durum dizini kullanır.
+
+**Mantık (sade):** canlı servis, paper motoruyla AYNI sinyalleri üretir; sanal dolum yerine Binance'e gerçek emir verir. Her girişten hemen
+sonra Binance'in kendi sunucusunda bir **stop emri** durur (sunucumuz kapansa bile korur). Stop kurulamazsa pozisyon hemen kapatılır.
+**Bir Binance hesabı = bir strateji.** Alt hesabınız (sub-account) varsa her canlı strateji kendi alt hesabının anahtarını kullanır;
+yoksa yalnız bir strateji canlı çalışır. Sert limitler (işlem başı %1, toplam stop riski %5, brüt 3x, günlük -%3, toplam -%20) burada da kodla zorlanır.
+Risk bazlı miktar borsanın minimum tutarının altında kalırsa işlem **atlanır** (miktar asla yukarı yuvarlanmaz) ve Telegram'a "min_tutar_alti" gider.
+Şimdilik **yalnız tek-grafik (sinyal) stratejileri** canlıya alınabilir: portföy (`pf__...`) stratejileri ve kısmi çıkışlı stratejiler açık hatayla reddedilir.
+
+**A. Binance API anahtarı (her strateji/hesap için ayrı):**
+1. Binance → API Yönetimi → yeni anahtar. İzinler: **yalnız "Enable Reading" ve "Enable Futures"**. **"Enable Withdrawals" KAPALI kalmalı**
+   (hiçbir koşulda açmayın), "Enable Spot & Margin Trading" da gerekmez, kapalı bırakın.
+2. **IP kısıtlaması:** "Restrict access to trusted IPs only" seçin ve yalnız **sunucunun IP adresini** ekleyin.
+3. Önce **testnet** için ayrı anahtar alın (https://testnet.binancefuture.com, GitHub ile giriş; sahte para). Gerçek anahtarla karıştırmayın.
+4. Anahtarı ve gizli değeri **sohbete, e-postaya, depoya yazmayın**; yalnız aşağıdaki sunucu dosyasına koyun.
+
+**B. Sunucuda dosyalar (root olarak):**
+```bash
+cd /opt/1l3a && sudo -u l3a git pull
+cp deploy/1l3a-canli.service /etc/systemd/system/
+cp deploy/1l3a-canli.env.ornek /etc/1l3a-canli.env
+chown root:root /etc/1l3a-canli.env && chmod 600 /etc/1l3a-canli.env     # yalnız root okuyabilir
+nano /etc/1l3a-canli.env          # BINANCE_API_KEY_S1= ve BINANCE_API_SECRET_S1= satırlarını doldurun. CANLI_ONAY BOŞ kalsın (testnet).
+cp stratejiler/canli_ayar.ornek.json /etc/1l3a-canli.json
+nano /etc/1l3a-canli.json         # "id": canlıya alınacak stratejinin kimliği (paper_v2_seti.json'daki "strateji"), "tahsis_usd": ayırdığınız tutar
+# paper'ın tohum verisini canlıya kopyalayın (iki servis aynı veri dizinine yazmasın)
+install -d -o l3a -g l3a /var/lib/1l3a-canli/veri && cp -a /var/lib/1l3a-paper/veri/mumlar /var/lib/1l3a-canli/veri/ && chown -R l3a:l3a /var/lib/1l3a-canli
+systemctl daemon-reload
+```
+**C. Kuru çalıştırma (hiçbir emir gitmez, anahtar gerekmez):** `/etc/1l3a-canli.json` içinde `"mod": "kuru"` yapıp
+`systemctl start 1l3a-canli; journalctl -u 1l3a-canli -f` ile "KURU piyasa ..." satırlarına bakın. Beklenen emirler paper işlemleriyle uyumlu olmalı.
+
+**D. Testnet (sahte para, gerçek emir akışı):** `"mod": "testnet"` (varsayılan) yapın, testnet anahtarlarını `/etc/1l3a-canli.env`'e koyun,
+`systemctl restart 1l3a-canli`. Telegram'da "canli_emir_doldu" ve "canli_stop_kuruldu" mesajlarını görmelisiniz; Binance testnet arayüzünde
+pozisyonun yanında stop emrini kontrol edin. **Koşullu emir uçları (algo) ilk kez testnet'te doğrulanır**; hata alırsanız `"kosullu_modu": "klasik"` deneyin ve bana bildirin.
+Servisi bir kez `systemctl restart` edin: mevcut pozisyon/stop'lar çift emir üretmeden devralınmalı.
+
+**E. Canlıya geçiş (yalnız testnet temiz çalıştıktan sonra, bilerek):**
+```bash
+nano /etc/1l3a-canli.env     # GERÇEK anahtarlar + en alta  CANLI_ONAY=evet
+nano /etc/1l3a-canli.json    # "mod": "canli"
+systemctl restart 1l3a-canli && journalctl -u 1l3a-canli -n 40 --no-pager
+```
+`CANLI_ONAY=evet` yoksa servis "GERÇEK PARA ile başlatma reddedildi" diyerek **başlamaz** (bu bir güvenlik özelliğidir).
+
+**Kill switch ve acil durdurma:** borsa özsermayesi günde -%3 ya da zirveden -%20 düşerse yürütücü tüm emirleri iptal eder, tüm pozisyonları kapatır ve
+yeni giriş yapmaz (günlük limit ertesi UTC günü açılır; -%20 kalıcıdır: `/var/lib/1l3a-canli/durum/canli/yurutucu_*.json` içindeki `"kill": true` satırını
+yalnız nedenini anladıktan sonra elle `false` yapın). Elle durdurma: `systemctl stop 1l3a-canli` (borsadaki stop emirleri yerinde kalır, pozisyonlar korunur).
+Tanımadığı bir pozisyon görürse yürütücü **dokunmaz**, yalnız Telegram'a "BİLİNMEYEN pozisyon" yazar.

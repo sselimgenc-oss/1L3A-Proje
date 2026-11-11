@@ -483,7 +483,9 @@ def _durum_yaz(p: "Paper", kaynak, dizin: Path, simdi, servis=None, kaynak_adi="
 
 
 def canli_calistir(durum_dizini: Path, tohum_dizin: Optional[Path] = None, ayar_guncelle: bool = False,
-                   tek_sefer: bool = False, set_modu: str = "v2") -> int:
+                   tek_sefer: bool = False, set_modu: str = "v2", tur_kancasi=None, strateji_filtre=None, telegram_sessiz=False) -> int:
+    """`tur_kancasi(p, simdi)`: her turda `p.adim`dan sonra çağrılır (gerçek emir yürütücüsü, motor/canli/borsa); `strateji_filtre`: yalnız bu
+    strateji kimlikleri kurulur (v2); `telegram_sessiz`: paper'ın kendi Telegram bildirimleri gitmez (canlı serviste yalnız 🔴 CANLI mesajları). Varsayılanlarda (paper servisi) davranış DEĞİŞMEZ."""
     import asyncio
     import signal
     from motor.canli import paper_canli as pc, paper_veri as pv, telegram as tg
@@ -497,6 +499,11 @@ def canli_calistir(durum_dizini: Path, tohum_dizin: Optional[Path] = None, ayar_
         from motor.canli import paper_v2 as v2
         set_v2 = v2.set_yukle()
         tanimlar = v2.tanimlari_yukle(set_v2)           # fail-closed: desteklenmeyen çıkış alanı -> burada açık hata (servis başlamaz)
+        if strateji_filtre is not None:
+            eksik = set(strateji_filtre) - {t.kimlik for t in tanimlar}
+            if eksik:
+                raise ValueError(f"sette olmayan strateji kimliği: {sorted(eksik)}")
+            tanimlar = [t for t in tanimlar if t.kimlik in set(strateji_filtre)]
     else:
         tanimlar = psg.tanimlari_yukle(ayar_kaynagi="guncel")
     semboller = sorted({s for t in tanimlar for s in t.veri_semboller})
@@ -505,6 +512,9 @@ def canli_calistir(durum_dizini: Path, tohum_dizin: Optional[Path] = None, ayar_
     kurallar_b = pv.kurallar_cikar(bilgi)
     kurallar = {s: kurallar_b[b] for s, (b, _) in esl.items() if b is not None}
     olaylar_onbellek: list = []
+
+    def gonder(metin):
+        return False if telegram_sessiz else tg.gonder(metin)
 
     def olay(tur, mesaj):
         olaylar_onbellek.append((tur, mesaj))
@@ -516,7 +526,7 @@ def canli_calistir(durum_dizini: Path, tohum_dizin: Optional[Path] = None, ayar_
         p = v2.PaperKasalar(tanimlar, kaynak, kurallar, set_v2, durum_yolu=durum_dizini / "paper_state.json", her_satir_kaydet=True)
     else:
         p = Paper(tanimlar, kaynak, kurallar, durum_yolu=durum_dizini / "paper_state.json", her_satir_kaydet=True)
-    bld = tg.Bildirimci()
+    bld = tg.Bildirimci(gonder_fn=gonder)
     p.bildirim = bld.olay                      # teknik olaylar gönderilmez; sorun sürerse tek uyarı; sel koruması
     yuklendi = p.yukle(ayar_guncelle=ayar_guncelle)
     p.surec_basla(simdi, durum_dizini, yuklendi)         # kalp atışı + yeniden başlatma kesintisi (süresiyle `yeniden_baslatma` olayı)
@@ -529,7 +539,7 @@ def canli_calistir(durum_dizini: Path, tohum_dizin: Optional[Path] = None, ayar_
     for u in pv.tradfi_sinif_uyusmazliklari(bilgi, semboller):     # TradFi funding ayrımı (2026-11-09) sınıflamaya dayanır
         p.olay_ekle("tradfi_sinif", u, simdi)
     from motor.canli import paper_durum as pdr
-    tg.gonder(tg.baslangic_metni(len(aktif), p.motor.ozsermaye()))
+    gonder(tg.baslangic_metni(len(aktif), p.motor.ozsermaye()))
     def _anahtar(x):
         return (x["kol"], str(x["giris_zamani"]), str(x["cikis_zamani"]))
     bildirilen = {_anahtar(x) for x in p.motor.islemler}          # kimlikle izlenir (çok hesaplı toplam listede yeni işlem sona eklenmeyebilir)
@@ -548,16 +558,18 @@ def canli_calistir(durum_dizini: Path, tohum_dizin: Optional[Path] = None, ayar_
         kaynak.guncelle(simdi)
         n = p.adim(simdi)
         n_gec = p._son_gec
+        if tur_kancasi is not None:
+            tur_kancasi(p, simdi)              # canlı yürütücü: paper motorunun niyetlerini borsaya taşır (yürütücü kendi hatasını yutmadan raporlar)
         bld.kontrol()                          # WS 10 dk'dır kopuksa tek uyarı
         p.kalp_at(simdi, durum_dizini)         # tur başarıyla tamamlandı: kalp atışı (en çok 60 sn'de bir diske)
         for a in pdr.acik_pozisyonlar(p):
             if (a["kimlik"], a["sembol"], a["giris_zamani"]) not in gorulen_acik:
                 gorulen_acik.add((a["kimlik"], a["sembol"], a["giris_zamani"]))
-                tg.gonder(tg.islem_acildi_metni(a))
+                gonder(tg.islem_acildi_metni(a))
         for x in p.motor.islemler:
             if _anahtar(x) not in bildirilen:
                 bildirilen.add(_anahtar(x))
-                tg.gonder(tg.islem_kapandi_metni(pdr._islem_satiri(p, x)))
+                gonder(tg.islem_kapandi_metni(pdr._islem_satiri(p, x)))
         if tohum_dizin is not None and (kiyas_son[0] is None or simdi - kiyas_son[0] >= pd.Timedelta(hours=1)):
             kiyas_son[0] = simdi
             kiyas_btc_guncelle(ist, tohum_dizin, simdi, p)
@@ -566,7 +578,7 @@ def canli_calistir(durum_dizini: Path, tohum_dizin: Optional[Path] = None, ayar_
             p.kaydet()
         if ozet_zamani(p, simdi):
             dun = dun_tsi(simdi)
-            tg.gonder(tg.ozet_metni(o, dun=dun_ozeti(p, dun)))
+            gonder(tg.ozet_metni(o, dun=dun_ozeti(p, dun)))
             p.son_ozet = dun                   # gönderim başarısız olsa da işaretlenir (her turda yeniden deneme seli olmasın; log'da görünür)
             p.kaydet()                         # yeniden başlatmada aynı gün tekrar gitmesin
 
