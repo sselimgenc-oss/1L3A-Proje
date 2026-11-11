@@ -289,3 +289,28 @@ class BinanceFutures:
         self._ham("DELETE", "/fapi/v1/allOpenOrders", {"symbol": sembol})
         if self.kosullu_modu == "algo":
             self._ham("DELETE", "/fapi/v1/algoOpenOrders", {"symbol": sembol})
+
+    # ------------------------------------------------------------------ SALT OKUMA: kayıt (islemler.jsonl) için dolum ve funding geçmişi
+    def kullanici_islemleri(self, sembol: str, bas_ms: int, bit_ms: Optional[int] = None) -> list:
+        """Hesabın DOLUM kayıtları (userTrades), zamana göre sıralı, normalize: [{id, emir_id, yon, fiyat, miktar, komisyon, komisyon_varlik,
+        gercek_pnl, zaman_ms}]. Binance en çok 7 günlük pencere verir: pencereler halinde gezilir, id ile tekrarlar elenir. Emir vermez."""
+        bit_ms = bit_ms or int(self.saat() * 1000) + (self.zaman_farki_ms or 0)
+        gorulen, out, bas = set(), [], int(bas_ms)
+        yedi_gun = 7 * 24 * 3600 * 1000 - 1
+        while bas <= bit_ms:
+            son = min(bas + yedi_gun, bit_ms)
+            for x in self._get("/fapi/v1/userTrades", {"symbol": sembol, "startTime": bas, "endTime": son, "limit": 1000}):
+                if x["id"] not in gorulen:
+                    gorulen.add(x["id"])
+                    out.append({"id": int(x["id"]), "emir_id": str(x.get("orderId", "")), "yon": x["side"], "fiyat": Decimal(str(x["price"])),
+                                "miktar": Decimal(str(x["qty"])), "komisyon": Decimal(str(x.get("commission", "0"))),
+                                "komisyon_varlik": str(x.get("commissionAsset", "")), "gercek_pnl": Decimal(str(x.get("realizedPnl", "0"))),
+                                "zaman_ms": int(x["time"])})
+            bas = son + 1
+        return sorted(out, key=lambda f: (f["zaman_ms"], f["id"]))
+
+    def funding_gecmisi(self, sembol: str, bas_ms: int, bit_ms: Optional[int] = None) -> Decimal:
+        """Aralıktaki FUNDING_FEE toplamı (işaretli: negatif = ödenen). Emir vermez."""
+        bit_ms = bit_ms or int(self.saat() * 1000) + (self.zaman_farki_ms or 0)
+        r = self._get("/fapi/v1/income", {"symbol": sembol, "incomeType": "FUNDING_FEE", "startTime": int(bas_ms), "endTime": int(bit_ms), "limit": 1000})
+        return sum((Decimal(str(x["income"])) for x in r), Decimal(0))
