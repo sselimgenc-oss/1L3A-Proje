@@ -265,3 +265,13 @@ Strateji kasası zirveden -%30 düşerse (strateji kill) ya da tüm canlı strat
 `/var/lib/1l3a-canli/durum/canli/yurutucu_*.json` içindeki `"kill": true`, hesap için `/var/lib/1l3a-canli/durum/canli/hesap_durumu.json` içindeki `"kill": true`
 satırını yalnız nedenini anladıktan sonra elle `false` yapın (hesap kill'i kaldırırken stratejilerinkini de kaldırın; hesap zirvesi `"zirve": null` ile yeniden başlar). Elle durdurma: `systemctl stop 1l3a-canli` (borsadaki stop emirleri yerinde kalır, pozisyonlar korunur).
 Tanımadığı bir pozisyon görürse yürütücü **dokunmaz**, yalnız Telegram'a "BİLİNMEYEN pozisyon" yazar.
+
+**F. Kayıt dosyaları ve haftalık rapor (salt okunur araç; borsaya bağlanmaz).** Yürütücü işlem mantığına dokunmadan, `/var/lib/1l3a-canli/durum/canli/` altına append-only yazar:
+`islemler.jsonl` (kapanan her gerçek işlem: dolum fiyatı, komisyon, funding, net PnL, R, çıkış nedeni, maliyet bps), `ozsermaye_gunluk.jsonl` (servis başı ve her UTC günü
+strateji özsermaye/tahsis/kasa + hesap toplamı ve zirve; tahsis değişimi `sermaye_hareketi` satırı olarak ayrı), `olaylar_arsiv.jsonl` (her olay: dolan/atlanan sinyal ve neden).
+Kayıt yazılamazsa işlem durmaz; Telegram'a "canli_kayit_hatasi" gelir. Haftalık rapor (sunucuda tek komut; `--yaz-karsilastirma` risk adımı kontrolünün okuduğu `haftalik_karsilastirma.json`'u da üretir):
+```bash
+cd /opt/1l3a && sudo -u l3a .venv/bin/python -m araclar.canli_haftalik_rapor --canli-durum /var/lib/1l3a-canli/durum --paper-durum /var/lib/1l3a-paper/durum \
+  --ayar /etc/1l3a-canli.json --baslangic 2026-12-15 --sunucu-gider-usd-ay 6 --yaz-karsilastirma --cikti /var/lib/1l3a-canli/rapor/haftalik_$(date +%F).md
+```
+Çıktı: aynı adla `.md` (sade Türkçe) ve `.json`. Risk adımı şartlarına bakmak için: `python -m motor.canli.borsa.risk_adim_kontrol --durum /var/lib/1l3a-canli/durum`.

@@ -4,11 +4,15 @@ Borsaya bağlanmaz, emir vermez, hiçbir şeyi değiştirmez. YALNIZ canlı serv
   DIZIN/canli/yurutucu_*.json     strateji başına yürütücü durumu (zirve, kill, açık pozisyon kayıtları)
   DIZIN/canli/hesap_durumu.json   hesap toplamı: Σ min(borsa özsermayesi, tahsis) ve ortak zirve (açık pozisyon K/Z dahil: borsanın marj bakiyesi)
   DIZIN/canli/haftalik_karsilastirma.json  (varsa) {sid: {canli_maliyet_bps, model_maliyet_bps, eslesme_orani, islem_sayisi}}  (risk_adim_kontrol ile aynı sözleşme)
-  DIZIN/canli/islemler.jsonl      (varsa) GERÇEK canlı kapanan işlemler (durum sözleşmesi biçimi, `r` alanı ile). BUGÜN YÜRÜTÜCÜ BUNU YAZMIYOR.
+  DIZIN/canli/islemler.jsonl      GERÇEK canlı kapanan işlemler (yürütücü yazar: motor/canli/borsa/canli_kayit.py; r, komisyon, funding, maliyet bps)
+  DIZIN/canli/ozsermaye_gunluk.jsonl  strateji özsermaye/tahsis/kasa günlük kesitleri, sermaye_hareketi ve hesap toplamı+zirve satırları
+  DIZIN/canli/olaylar_arsiv.jsonl yürütücünün TÜM olayları (dolan/atlanan sinyal ve neden); son-50 sınırı yok
   DIZIN/olaylar.jsonl, islemler.jsonl, maliyet.json, saglik.json   canlı servisin İÇİNDEKİ paper motorunun çıktıları (niyetler; canlı dolum DEĞİL)
   --paper-durum DIZIN             bağımsız paper servisi (yalnız paper'daki stratejiler için bilgi)
   --ayar DOSYA                    (isteğe bağlı) canli_ayar.json: tahsis_usd ve islem_risk buradan okunur (yürütücü bunları durum dosyasına yazmıyor)
 Yürütücünün yazmadığı alan raporda "veri yok (yürütücü yazmıyor)" diye görünür; uydurma yok.
+`--yaz-karsilastirma` verilirse (TEK yazma): islemler.jsonl ve olaylar_arsiv.jsonl'den hesaplanan canli_maliyet_bps / model_maliyet_bps / eslesme_orani /
+islem_sayisi DIZIN/canli/haftalik_karsilastirma.json'a (risk_adim_kontrol'ün okuduğu sözleşme) atomik yazılır.
 """
 from __future__ import annotations
 
@@ -21,6 +25,7 @@ from pathlib import Path
 from typing import Optional
 
 from motor.canli.borsa.risk_adim_kontrol import HATA_TURLERI
+from motor.canli.durum import atomik_yaz_json
 
 # ============================================================================ SABİTLER
 # Kaynak (hepsi): "1L3A v2 planı (2026-11-11, kullanıcı onaylı)". Eşik değiştirmek plan değişikliğidir: kullanıcıya sorulur.
@@ -88,7 +93,7 @@ def _kimlik_sid(kimlik: str) -> str:
 
 def _r_listesi(islemler: Optional[list], sid: str) -> list:
     """[(cikis_zamani, r|None)] çıkış sırasıyla."""
-    out = [(_zaman(x.get("cikis_zamani") or x.get("zaman")), x.get("r")) for x in (islemler or []) if _kimlik_sid(x.get("kimlik", "")) == sid]
+    out = [(_zaman(x.get("cikis_zamani") or x.get("zaman")), x.get("r")) for x in (islemler or []) if _kimlik_sid(x.get("kimlik") or x.get("strateji") or "") == sid]
     return sorted(out, key=lambda t: (t[0] is None, t[0]))
 
 
@@ -138,7 +143,7 @@ def dusus_durumu(zirve: float, toplam: float, kill: bool) -> dict:
     return {"guncel_dusus": round(d, 6), "mesajlar": mesajlar}
 
 
-def maliyet_durumu(sid: str, k: dict, islem_sayisi: Optional[int]) -> dict:
+def maliyet_durumu(sid: str, k: dict, islem_sayisi: Optional[int], k_ilk30: Optional[dict] = None) -> dict:
     out = {"canli_bps": None, "model_bps": None, "oran": None, "durum": YOK, "islem_sayisi": islem_sayisi}
     try:
         c, m = float(k["canli_maliyet_bps"]), float(k["model_maliyet_bps"])
@@ -151,6 +156,13 @@ def maliyet_durumu(sid: str, k: dict, islem_sayisi: Optional[int]) -> dict:
     out.update(canli_bps=c, model_bps=m, oran=round(oran, 4))
     out["durum"] = f"oran {oran:.2f}" + (f" > {MALIYET_ORAN_UYARI:g}: UYARI" if oran > MALIYET_ORAN_UYARI else " (uyarı yok)")
     if sid == S_E0V1EN:
+        if k_ilk30:                                       # ilk 30 işlemin ölçülen oranı (varsa): emeklilik ölçütü bunun üzerinden
+            try:
+                oran = float(k_ilk30["canli_maliyet_bps"]) / float(k_ilk30["model_maliyet_bps"])
+            except (KeyError, TypeError, ValueError, ZeroDivisionError):
+                pass
+            else:
+                out["oran_ilk30"] = round(oran, 4)
         if islem_sayisi is None:
             out["emeklilik"] = "ilk 30 işlem ölçütü: işlem sayısı bilinmiyor"
         elif islem_sayisi < E0V1EN_ILK_ISLEM:
@@ -180,15 +192,16 @@ def _atlama_nedeni(tur: str, mesaj: str) -> str:
     return "diğer: " + mesaj.split("]", 1)[-1].strip()[:70]
 
 
-def eslesme_olaylardan(olaylar: Optional[list], sid: str, bas: datetime, bit: datetime) -> dict:
-    """Her paper niyeti canlıda ya 'canli_emir_doldu' ya da bir atlama/hata olayı üretir. Olay kaydı yalnız SON 50 olay: pencere tam kapsanmıyorsa 'veri yok'."""
+def eslesme_olaylardan(olaylar: Optional[list], sid: str, bas: datetime, bit: datetime, tam: bool = False) -> dict:
+    """Her paper niyeti canlıda ya 'canli_emir_doldu' ya da bir atlama/hata olayı üretir. `tam=True`: olaylar_arsiv.jsonl (sınırsız arşiv).
+    Aksi halde olaylar.jsonl yalnız SON 50 olayı tutar: pencere tam kapsanmıyorsa 'veri yok'."""
     out = {"doldu": None, "atlanan": None, "oran": None, "nedenler": {}, "aciklama": YOK}
     if olaylar is None:
-        out["aciklama"] = "olaylar.jsonl yok"
+        out["aciklama"] = "olaylar_arsiv.jsonl / olaylar.jsonl yok"
         return out
     onek = f"[{sid}]"
     ilk = _zaman(olaylar[0]["zaman"]) if olaylar else None
-    kesik = len(olaylar) >= OLAY_KAYIT_SINIRI and (ilk is None or ilk > bas)
+    kesik = (not tam) and len(olaylar) >= OLAY_KAYIT_SINIRI and (ilk is None or ilk > bas)
     if kesik:
         out["aciklama"] = f"olaylar.jsonl yalnız son {OLAY_KAYIT_SINIRI} olayı tutar; pencere başı ({bas.date()}) kapsanmıyor: veri yok (yürütücü yazmıyor)"
         return out
@@ -203,7 +216,8 @@ def eslesme_olaylardan(olaylar: Optional[list], sid: str, bas: datetime, bit: da
             n = _atlama_nedeni(o["tur"], str(o.get("mesaj", "")))
             atl[n] = atl.get(n, 0) + 1
     top = doldu + sum(atl.values())
-    out.update(doldu=doldu, atlanan=sum(atl.values()), nedenler=atl, aciklama="olaylardan (yalnız bu pencere)")
+    out.update(doldu=doldu, atlanan=sum(atl.values()), nedenler=atl,
+               aciklama=("olaylar_arsiv.jsonl" if tam else "olaylar.jsonl (son 50 olay)") + (f"; arşiv {ilk.date()} tarihinde başlıyor" if (tam and ilk and ilk > bas) else ""))
     out["oran"] = round(doldu / top, 4) if top else None
     return out
 
@@ -226,8 +240,95 @@ def sistem_sagligi(sid: str, durum: Optional[dict], olaylar: Optional[list], bas
     return out
 
 
+def arsiv_olaylari(arsiv: Optional[list]) -> Optional[list]:
+    """olaylar_arsiv.jsonl satırları -> paper olay biçimi ('[sid] mesaj' önekli): eslesme/sağlık fonksiyonları ortak çalışır."""
+    if arsiv is None:
+        return None
+    return [{"zaman": a.get("zaman"), "tur": a.get("tur"), "mesaj": f"[{a.get('strateji')}] {a.get('mesaj', '')}"} for a in arsiv]
+
+
+def gunluk_analiz(gunluk: Optional[list]) -> Optional[dict]:
+    """ozsermaye_gunluk.jsonl -> {strateji: {ilk_kasa, hareket_usd, son_kasa, ...}, hareketler: [(zaman, usd)], hesap: [satirlar], servis_basi: [zaman]}.
+    SERMAYE HAREKETİ kâr sayılmaz: sermaye_hareketi satırındaki tahsis değişimi, o andaki gerçek kasa (min(özsermaye, yeni tahsis)) eksi önceki kesitteki kasa
+    olarak ölçülür (işaret tahsis farkıyla aynı yönde sınırlanır: ara dönem kâr/zararı sermaye sayılmasın). Sonradan eklenen strateji = ilk kasası kadar hareket."""
+    if gunluk is None:
+        return None
+    strat, hareketler, hesap, servis, son_kasa, ilk_gun = {}, [], [], {}, {}, None
+    for x in gunluk:
+        tur, z = x.get("tur"), _zaman(x.get("zaman"))
+        if tur == "strateji":
+            sid, kasa = x["strateji"], float(x["kasa"])
+            ilk_gun = ilk_gun or x.get("gun")
+            st = strat.get(sid)
+            if st is None:
+                st = strat[sid] = {"ilk_kasa": kasa, "ilk_zaman": z, "hareket_usd": 0.0, "hareket_sayisi": 0}
+                if x.get("gun") != ilk_gun:                              # kadroya sonradan eklendi: ilk kasası sermaye girişi
+                    st.update(ilk_kasa=0.0, hareket_usd=kasa, hareket_sayisi=1)
+                    hareketler.append((z, kasa))
+            st.update(son_kasa=kasa, son_zaman=z, tahsis_usd=float(x["tahsis_usd"]), ozsermaye=float(x["ozsermaye"]), acik_kz_usd=float(x.get("acik_kz_usd") or 0))
+            son_kasa[sid] = kasa
+            if x.get("neden") == "servis_basi":
+                servis.setdefault(sid, []).append(z)
+        elif tur == "sermaye_hareketi":
+            sid, fark = x["strateji"], float(x["fark_usd"])
+            if sid in son_kasa:
+                h = min(float(x["ozsermaye_o_an"]), float(x["yeni_tahsis_usd"])) - son_kasa[sid]
+                h = max(h, 0.0) if fark >= 0 else min(h, 0.0)
+            else:
+                h = fark
+            strat.setdefault(sid, {"ilk_kasa": 0.0, "ilk_zaman": z, "hareket_usd": 0.0, "hareket_sayisi": 0})
+            strat[sid]["hareket_usd"] += h
+            strat[sid]["hareket_sayisi"] += 1
+            hareketler.append((z, h))
+        elif tur == "hesap":
+            hesap.append(x)
+    return {"stratejiler": strat, "hareketler": hareketler, "hesap": hesap, "servis_basi": servis}
+
+
+def duzeltilmis_dusus(hesap: list, hareketler: list) -> Optional[dict]:
+    """Hesap toplamı kesitlerinden, SERMAYE HAREKETLERİ ayıklanmış getiri endeksiyle zirveden düşüş. Kesitler günlük (gün içi tepe/dip görünmez)."""
+    pts = sorted(((_zaman(x["zaman"]), float(x["toplam"])) for x in hesap if x.get("toplam") is not None), key=lambda t: t[0])
+    if len(pts) < 2:
+        return None
+    idx = zirve = 1.0
+    zirve_z = pts[0][0]
+    en, en_z, guncel = 0.0, None, 0.0
+    for (z0, t0), (z1, t1) in zip(pts, pts[1:]):
+        h = sum(v for z, v in hareketler if z0 < z <= z1)
+        idx *= 1 + ((t1 - t0 - h) / t0 if t0 > 0 else 0.0)
+        if idx > zirve:
+            zirve, zirve_z = idx, z1
+        guncel = (zirve - idx) / zirve
+        if guncel > en:
+            en, en_z = guncel, (zirve_z, z1)
+    return {"en_buyuk": round(en, 6), "en_buyuk_zirve_zaman": en_z[0].isoformat() if en_z else None, "en_buyuk_dip_zaman": en_z[1].isoformat() if en_z else None,
+            "guncel": round(guncel, 6), "kesit_sayisi": len(pts), "not": "günlük kesitlerden (gün içi tepe/dip dahil değil); sermaye hareketleri ayıklanmış"}
+
+
+def maliyet_bps(satirlar: list) -> Optional[dict]:
+    """Kapanan işlemlerden nominal ağırlıklı canlı/model maliyet bps (yalnız gercek_maliyet_bps'i olan işlemler)."""
+    c = m = den = 0.0
+    n = 0
+    for x in satirlar:
+        if x.get("gercek_maliyet_bps") is None or x.get("model_maliyet_bps") is None or not x.get("giris_fiyati") or not x.get("miktar"):
+            continue
+        nom = float(x["giris_fiyati"]) * float(x["miktar"])
+        c, m, den, n = c + float(x["gercek_maliyet_bps"]) * nom, m + float(x["model_maliyet_bps"]) * nom, den + nom, n + 1
+    return {"canli_maliyet_bps": round(c / den, 4), "model_maliyet_bps": round(m / den, 4), "olculen_islem": n} if den > 0 else None
+
+
+def islem_ozeti(satirlar: list, bas: datetime, bit: datetime) -> dict:
+    def top(rows, alan):
+        v = [float(x[alan]) for x in rows if x.get(alan) is not None]
+        return round(sum(v), 4) if v else None
+    hafta = [x for x in satirlar if (z := _zaman(x.get("cikis_zamani") or x.get("zaman"))) is not None and bas < z <= bit]
+    return {"islem": len(satirlar), "net_usd": top(satirlar, "net_pnl_usd"), "net_olmayan": sum(1 for x in satirlar if x.get("net_pnl_usd") is None),
+            "komisyon_usd": top(satirlar, "komisyon_usd"), "funding_usd": top(satirlar, "funding_usd"), "r": top(satirlar, "r"),
+            "hafta_islem": len(hafta), "hafta_net_usd": top(hafta, "net_pnl_usd"), "hafta_r": top(hafta, "r")}
+
+
 def rapor_uret(canli_durum, paper_durum=None, bitis: Optional[str] = None, ayar: Optional[str] = None, baslangic: Optional[str] = None,
-               sunucu_gider_usd_ay: Optional[float] = None) -> dict:
+               sunucu_gider_usd_ay: Optional[float] = None, karsilastirma_yaz: bool = False) -> dict:
     ok = Okuyucu()
     dizin = Path(canli_durum)
     canli = dizin / "canli"
@@ -244,8 +345,11 @@ def rapor_uret(canli_durum, paper_durum=None, bitis: Optional[str] = None, ayar:
     hesap = ok.json(canli / "hesap_durumu.json")
     kars = ok.json(canli / "haftalik_karsilastirma.json")
     kars = kars if isinstance(kars, dict) else {}
-    canli_isl = ok.jsonl(canli / "islemler.jsonl")           # GERÇEK canlı işlemler (bugün yazılmıyor)
+    canli_isl = ok.jsonl(canli / "islemler.jsonl")           # GERÇEK canlı kapanan işlemler (yürütücü yazar)
+    gunluk = gunluk_analiz(ok.jsonl(canli / "ozsermaye_gunluk.jsonl"))
+    arsiv = arsiv_olaylari(ok.jsonl(canli / "olaylar_arsiv.jsonl"))
     olaylar = ok.jsonl(dizin / "olaylar.jsonl")
+    olay_e, olay_tam = (arsiv, True) if arsiv is not None else (olaylar, False)      # eşleşme/sağlık için tercih: sınırsız arşiv
     paper_ic_isl = ok.jsonl(dizin / "islemler.jsonl")        # gömülü paper motoru (niyet) işlemleri: VEKİL
     mal = ok.json(dizin / "maliyet.json")
     saglik = ok.json(dizin / "saglik.json")
@@ -255,35 +359,57 @@ def rapor_uret(canli_durum, paper_durum=None, bitis: Optional[str] = None, ayar:
         tahsis[s["id"]] = Decimal(str(s["tahsis_usd"]))
         islem_risk[s["id"]] = Decimal(str(s.get("islem_risk", "0.015")))
     hesap_ids = set(hesap.get("kimlikler") or []) if isinstance(hesap, dict) else set()
-    ids = sorted(set(durumlar) | set(tahsis) | set(kars) | hesap_ids | ({_kimlik_sid(x.get("kimlik", "")) for x in canli_isl} if canli_isl else set()))
+    ids = sorted(set(durumlar) | set(tahsis) | set(kars) | hesap_ids | set((gunluk or {}).get("stratejiler", {})) |
+                 ({_kimlik_sid(x.get("kimlik") or x.get("strateji") or "") for x in canli_isl} if canli_isl else set()))
 
     uyarilar: list = []
     eksik: list = []
 
     # --- 1-2. toplam ve düşüş
-    toplam = {"baslangic_tahsis": None, "guncel_ozsermaye": None, "net_usd": None, "net_pct": None, "zirve": None, "dusus": None,
-              "en_buyuk_dusus": YOK, "acik_pozisyon_dahil": None}
-    if tahsis:
+    toplam = {"baslangic_tahsis": None, "sermaye_kaynagi": None, "sermaye_hareketi_usd": None, "guncel_ozsermaye": None, "net_usd": None, "net_pct": None,
+              "zirve": None, "dusus": None, "en_buyuk_dusus": YOK, "acik_pozisyon_dahil": None}
+    gst = (gunluk or {}).get("stratejiler") or {}
+    if gst:                                                  # tercih: yürütücünün yazdığı günlük kesit (sermaye hareketleri ayrıştırılmış)
+        toplam["baslangic_tahsis"] = round(sum(v["ilk_kasa"] + v["hareket_usd"] for v in gst.values()), 2)
+        toplam["sermaye_hareketi_usd"] = round(sum(v["hareket_usd"] for v in gst.values()), 2)
+        toplam["sermaye_kaynagi"] = "ozsermaye_gunluk.jsonl (ilk kasa + sermaye hareketleri; hareketler kâr sayılmaz)"
+    elif tahsis:
         toplam["baslangic_tahsis"] = float(sum(tahsis.values()))
+        toplam["sermaye_kaynagi"] = "--ayar tahsis_usd (ozsermaye_gunluk.jsonl yok: sermaye hareketi ayrıştırılamadı)"
     else:
-        eksik.append("tahsis: --ayar verilmedi (yürütücü tahsisi durum dosyasına yazmıyor)")
+        eksik.append("tahsis: --ayar verilmedi ve ozsermaye_gunluk.jsonl yok")
+    t = None
     if isinstance(hesap, dict) and hesap.get("toplam") is not None:
         t = float(hesap["toplam"])
-        toplam["guncel_ozsermaye"] = t
         z = float(hesap["zirve"]) if hesap.get("zirve") is not None else t
         toplam.update(zirve=z, acik_pozisyon_dahil=True, hesap_zaman=hesap.get("yazildi_zaman") or hesap.get("zaman"))
+        if hesap.get("kimlikler") and tahsis and sorted(tahsis) != sorted(hesap["kimlikler"]):
+            uyarilar.append(f"hesap_durumu.json kimlikleri ({hesap['kimlikler']}) ayar ({sorted(tahsis)}) ile farklı: toplam/zirve bu kadroya göre değil")
+    elif gst:
+        t = round(sum(v["son_kasa"] for v in gst.values()), 2)
+        toplam["hesap_zaman"] = "ozsermaye_gunluk.jsonl son kesit (hesap_durumu.json yok)"
+        eksik.append("canli/hesap_durumu.json yok: güncel toplam günlük kesitten (en fazla 1 gün eski)")
+    else:
+        eksik.append("canli/hesap_durumu.json yok ya da toplam yok: özsermaye/düşüş hesaplanamadı")
+    if t is not None:
+        toplam["guncel_ozsermaye"] = t
         if toplam["baslangic_tahsis"]:
             toplam["net_usd"] = round(t - toplam["baslangic_tahsis"], 2)
             toplam["net_pct"] = round(toplam["net_usd"] / toplam["baslangic_tahsis"], 6)
-        dd = dusus_durumu(z, t, bool(hesap.get("kill")))
+        dz = duzeltilmis_dusus(gunluk["hesap"], gunluk["hareketler"]) if gunluk else None
+        z = toplam["zirve"] if toplam["zirve"] is not None else t
+        # eşik: sermaye hareketi ayıklanmış güncel düşüş (varsa); yoksa ham (ortak zirve). İkisi de raporda.
+        dd = dusus_durumu(z, t, bool(hesap.get("kill")) if isinstance(hesap, dict) else False)
+        if dz is not None:
+            dd2 = dusus_durumu(1.0, 1.0 - dz["guncel"], bool(hesap.get("kill")) if isinstance(hesap, dict) else False)
+            dd = {"guncel_dusus": dz["guncel"], "mesajlar": dd2["mesajlar"], "ham_guncel_dusus": dd["guncel_dusus"], "kaynak": "sermaye hareketi ayıklanmış"}
+            toplam["en_buyuk_dusus"] = {"oran": dz["en_buyuk"], "zirve_zaman": dz["en_buyuk_zirve_zaman"], "dip_zaman": dz["en_buyuk_dip_zaman"], "kesit_sayisi": dz["kesit_sayisi"], "not": dz["not"]}
+        else:
+            dd["kaynak"] = "ham (hesap_durumu.json ortak zirve; sermaye hareketi ayıklanmadı)"
         toplam["dusus"] = dd
         uyarilar += dd["mesajlar"]
-        if hesap.get("kimlikler") and tahsis and sorted(tahsis) != sorted(hesap["kimlikler"]):
-            uyarilar.append(f"hesap_durumu.json kimlikleri ({hesap['kimlikler']}) ayar ({sorted(tahsis)}) ile farklı: toplam/zirve bu kadroya göre değil")
-    else:
-        eksik.append("canli/hesap_durumu.json yok ya da toplam yok: özsermaye/düşüş hesaplanamadı")
-    toplam["en_buyuk_dusus_not"] = ("yürütücü en büyük düşüşü yazmıyor (yalnız ortak zirve ve güncel toplam); 'güncel düşüş' açık pozisyonları DAHİL eder (borsa marj bakiyesi). "
-                                    "Dönemin en büyük düşüşü için haftalık raporların zirve/toplam değerleri birleştirilmeli.")
+    toplam["en_buyuk_dusus_not"] = ("güncel düşüş açık pozisyon K/Z'yi DAHİL eder (borsa marj bakiyesi). En büyük düşüş ozsermaye_gunluk.jsonl hesap kesitlerinden (günlük; gün içi dip dahil değil)."
+                                    if gunluk else "ozsermaye_gunluk.jsonl yok: en büyük düşüş hesaplanamadı; güncel düşüş açık pozisyon K/Z dahil (borsa marj bakiyesi).")
     sg = None
     if sunucu_gider_usd_ay is not None:
         sg = {"usd_ay": sunucu_gider_usd_ay, "not": "net sonuca DÜŞÜLMEDİ; ayrı satır"}
@@ -298,6 +424,9 @@ def rapor_uret(canli_durum, paper_durum=None, bitis: Optional[str] = None, ayar:
 
     # --- strateji bazında
     strat = {}
+    satirlar_sid = {sid: sorted([x for x in (canli_isl or []) if _kimlik_sid(x.get("kimlik") or x.get("strateji") or "") == sid],
+                                key=lambda x: (_zaman(x.get("cikis_zamani") or x.get("zaman")) or datetime.min.replace(tzinfo=timezone.utc))) for sid in ids}
+    kars_yaz = {}
     for sid in ids:
         canli_r = _r_listesi(canli_isl, sid) if canli_isl is not None else None
         vekil_r = _r_listesi(paper_ic_isl, sid) if paper_ic_isl is not None else None
@@ -306,8 +435,20 @@ def rapor_uret(canli_durum, paper_durum=None, bitis: Optional[str] = None, ayar:
             n_canli = kars[sid]["islem_sayisi"]
         s = {"tahsis_usd": float(tahsis[sid]) if sid in tahsis else None, "islem_risk": float(islem_risk[sid]) if sid in islem_risk else None,
              "guncel_kasa": YOK, "net_sonuc": YOK, "canli_islem_sayisi": n_canli}
+        gs = ((gunluk or {}).get("stratejiler") or {}).get(sid)
+        if gs and "son_kasa" in gs:
+            s.update(guncel_kasa=gs["son_kasa"], kasa_kesit_zamani=gs["son_zaman"].isoformat(), tahsis_usd=gs["tahsis_usd"], acik_kz_usd=gs["acik_kz_usd"],
+                     sermaye_hareketi_usd=round(gs["hareket_usd"], 2), net_sonuc=round(gs["son_kasa"] - gs["ilk_kasa"] - gs["hareket_usd"], 2))
+        rows = satirlar_sid.get(sid) or []
+        if canli_isl is not None:
+            s["canli_islemler"] = islem_ozeti(rows, bas, bit)
         k = kars.get(sid) if isinstance(kars.get(sid), dict) else {}
-        s["maliyet"] = maliyet_durumu(sid, k, n_canli)
+        k_ilk30 = None
+        olcum = maliyet_bps(rows) if rows else None
+        if olcum:                                            # yürütücünün yazdığı gerçek işlemlerden (haftalik_karsilastirma.json dosyasına tercih)
+            k = {**olcum, "islem_sayisi": n_canli}
+            k_ilk30 = maliyet_bps(rows[:E0V1EN_ILK_ISLEM]) if (sid == S_E0V1EN and len(rows) >= E0V1EN_ILK_ISLEM) else None
+        s["maliyet"] = maliyet_durumu(sid, k, n_canli, k_ilk30)
         if mal and isinstance(mal.get("stratejiler", {}).get(sid), dict):
             t = mal["stratejiler"][sid]["tum"]
             s["maliyet"]["paper_model_usd"] = {"ucret": t["ucret"], "kayma": t["kayma"], "funding": t["funding"]}
@@ -317,15 +458,24 @@ def rapor_uret(canli_durum, paper_durum=None, bitis: Optional[str] = None, ayar:
         if s["maliyet"].get("emeklilik", "").startswith("EMEKLİLİK"):
             uyarilar.append(f"{sid}: {s['maliyet']['emeklilik']}")
         # eşleşme
-        es = eslesme_olaylardan(olaylar, sid, bas, bit)
-        if isinstance(k, dict) and k.get("eslesme_orani") is not None:
+        es = eslesme_olaylardan(olay_e, sid, bas, bit, olay_tam)
+        kum = eslesme_olaylardan(olay_e, sid, datetime.min.replace(tzinfo=timezone.utc), bit, olay_tam) if olay_tam else None
+        if kum:
+            es["kumulatif_oran"], es["kumulatif_doldu"], es["kumulatif_atlanan"] = kum["oran"], kum["doldu"], kum["atlanan"]
+        if (not olay_tam) and isinstance(k, dict) and k.get("eslesme_orani") is not None:
             es.update(oran=float(k["eslesme_orani"]), aciklama="haftalik_karsilastirma.json")
         es["hedef"] = ESLESME_HEDEF
         es["durum"] = YOK if es["oran"] is None else ("hedefte" if es["oran"] >= ESLESME_HEDEF else f"HEDEF ALTINDA (< %{ESLESME_HEDEF * 100:g})")
         if es["durum"].startswith("HEDEF ALTINDA"):
             uyarilar.append(f"{sid}: canlı-paper eşleşme %{es['oran'] * 100:.1f} < %{ESLESME_HEDEF * 100:g}")
         s["eslesme"] = es
-        s["saglik"] = sistem_sagligi(sid, durumlar.get(sid), olaylar, bas, bit)
+        s["saglik"] = sistem_sagligi(sid, durumlar.get(sid), olay_e, bas, bit)
+        s["saglik"]["kayit_hata_sayisi"] = (durumlar.get(sid) or {}).get("kayit_hata_sayisi")
+        if s["saglik"]["kayit_hata_sayisi"]:
+            uyarilar.append(f"{sid}: kayıt yazım hataları var {s['saglik']['kayit_hata_sayisi']} (islem akışı sürdü; kayıt eksik olabilir)")
+        kars_yaz[sid] = {"canli_maliyet_bps": olcum["canli_maliyet_bps"] if olcum else None, "model_maliyet_bps": olcum["model_maliyet_bps"] if olcum else None,
+                         "eslesme_orani": (es.get("kumulatif_oran") if kum else None), "islem_sayisi": n_canli if canli_isl is not None else None,
+                         "kaynak": "araclar/canli_haftalik_rapor.py (islemler.jsonl + olaylar_arsiv.jsonl, kümülatif)"}
         if s["saglik"]["stopsuz_pozisyon"]:
             uyarilar.append(f"{sid}: {s['saglik']['stopsuz_pozisyon']} STOPSUZ pozisyon kaydı")
         # R kuralları (canlı R yoksa 'veri yok'; vekil yalnız bilgi)
@@ -371,32 +521,52 @@ def rapor_uret(canli_durum, paper_durum=None, bitis: Optional[str] = None, ayar:
     # --- sistem düzeyi
     sistem = {"saglik_durum": saglik.get("durum") if isinstance(saglik, dict) else None, "saglik_uyari_sayisi": len(saglik.get("uyarilar", [])) if isinstance(saglik, dict) else None,
               "yeniden_baslatma_haftada": None, "olay_kaydi_kesik": None}
-    if olaylar is not None:
+    if gunluk is not None and (gunluk["servis_basi"] or gunluk["hesap"]):
+        # servis_basi satırı = servis (yeniden) başladı; kaynaktaki İLK başlangıç yeniden başlatma değil. Hesap satırı servis başına bir tanedir; yoksa strateji satırlarının en büyüğü.
+        hz = [_zaman(x["zaman"]) for x in gunluk["hesap"] if x.get("neden") == "servis_basi"]
+        liste = hz or (max(gunluk["servis_basi"].values(), key=len) if gunluk["servis_basi"] else [])
+        sistem["yeniden_baslatma_haftada"] = sum(1 for z in liste[1:] if bas < z <= bit)
+        sistem["olay_kaydi_kesik"] = False
+    elif olaylar is not None:
         sistem["yeniden_baslatma_haftada"] = sum(1 for o in olaylar if o.get("tur") == "yeniden_baslatma" and (z := _zaman(o.get("zaman"))) is not None and bas < z <= bit)
         ilk = _zaman(olaylar[0]["zaman"]) if olaylar else None
         sistem["olay_kaydi_kesik"] = len(olaylar) >= OLAY_KAYIT_SINIRI and (ilk is None or ilk > bas)
     else:
-        eksik.append("olaylar.jsonl yok: hata/yeniden başlatma/atlanan sinyal sayıları yok")
+        eksik.append("ozsermaye_gunluk.jsonl / olaylar.jsonl yok: yeniden başlatma sayısı yok")
+    if olay_e is None:
+        eksik.append("olaylar_arsiv.jsonl ve olaylar.jsonl yok: hata/atlanan sinyal sayıları yok")
     if saglik is None:
         eksik.append("saglik.json yok")
     stopsuz_top = sum(s["saglik"]["stopsuz_pozisyon"] or 0 for s in strat.values())
     sistem["stopsuz_toplam"] = stopsuz_top
 
-    # --- yürütücünün yazmadığı alanlar (sabit liste; rapor her seferinde basar)
+    # --- yürütücünün yazmadığı / bulunamayan alanlar
     yazilmayan = []
     if canli_isl is None:
         yazilmayan += ["canlı kapanan işlem kaydı (R, giriş/çıkış fiyatı, net PnL): canli/islemler.jsonl yok",
-                       "gerçek dolum kayması ve komisyon (canlı maliyet bps): haftalik_karsilastirma.json yok",
-                       "strateji başına güncel kasa/net sonuç (yalnız hesap toplamı yazılıyor)",
-                       "gerçek funding ödemesi"]
-    if not kars:
-        yazilmayan.append("canlı-paper eşleşme oranı (haftalik_karsilastirma.json yok; yalnız olaylar.jsonl'den, son 50 olay sınırıyla)")
-    yazilmayan.append("dönemin en büyük düşüşü (yalnız güncel zirve ve toplam yazılıyor)")
-    yazilmayan.append("tahsis/işlem riski (durum dosyasında yok; --ayar ile canli_ayar.json'dan okunur)")
+                       "gerçek dolum kayması ve komisyon (canlı maliyet bps): islemler.jsonl yok",
+                       "gerçek funding ödemesi: islemler.jsonl yok"]
+    if gunluk is None:
+        yazilmayan += ["strateji başına güncel kasa/net sonuç, sermaye hareketi ve dönemin en büyük düşüşü: canli/ozsermaye_gunluk.jsonl yok"]
+    if arsiv is None:
+        yazilmayan.append("canlı-paper eşleşme/atlanan sinyal nedenleri: canli/olaylar_arsiv.jsonl yok (olaylar.jsonl yalnız son 50 olay)")
+    if not tahsis and not gst:
+        yazilmayan.append("tahsis/işlem riski: --ayar verilmedi ve ozsermaye_gunluk.jsonl yok")
 
-    return {"sema": "1l3a.canli_haftalik_rapor", "surum": 1, "donem": {"bas": bas.isoformat(), "bit": bit.isoformat(), "kumulatif_baslangic": sure_bas.isoformat() if sure_bas else None},
+    sonuc = {"sema": "1l3a.canli_haftalik_rapor", "surum": 1, "donem": {"bas": bas.isoformat(), "bit": bit.isoformat(), "kumulatif_baslangic": sure_bas.isoformat() if sure_bas else None},
             "toplam": toplam, "stratejiler": strat, "paper_stratejileri": paper, "sistem": sistem, "uyarilar": uyarilar, "yazilmayan_alanlar": yazilmayan,
-            "eksik_dosyalar": eksik, "okuma_hatalari": ok.hatalar}
+            "eksik_dosyalar": eksik, "okuma_hatalari": ok.hatalar,
+            "karsilastirma": kars_yaz}
+    if karsilastirma_yaz:
+        sonuc["karsilastirma_yazildi"] = _karsilastirma_yaz(canli / "haftalik_karsilastirma.json", kars_yaz, bit)
+    return sonuc
+
+
+def _karsilastirma_yaz(yol: Path, kars: dict, bit: datetime) -> str:
+    """haftalik_karsilastirma.json (risk_adim_kontrol sözleşmesi) — atomik. Ölçülemeyen alan null: risk_adim_kontrol onu 'bilinmiyor' sayar."""
+    veri = {sid: {**v, "yazildi": bit.isoformat()} for sid, v in kars.items()}
+    atomik_yaz_json(yol, veri)
+    return str(yol)
 
 
 # ---------------------------------------------------------------------------- markdown
@@ -409,15 +579,17 @@ def markdown(r: dict) -> str:
     L += ["# Haftalık canlı rapor", "", f"Dönem: {r['donem']['bas'][:10]} → {r['donem']['bit'][:10]} (son 7 gün). Salt okunur; borsaya bağlanmadı.", ""]
     L += ["## Özet uyarılar"] + ([f"- {u}" for u in r["uyarilar"]] or ["- Uyarı yok."]) + [""]
     L += ["## 1. Dönem ve toplam",
-          f"- Başlangıç tahsisi: {_p(t['baslangic_tahsis'])} USD" + ("" if t["baslangic_tahsis"] else " (--ayar verilmedi)"),
+          f"- Yatırılan sermaye (ilk + sonradan eklenen): {_p(t['baslangic_tahsis'])} USD" + (f" — kaynak: {t['sermaye_kaynagi']}" if t["sermaye_kaynagi"] else " (--ayar verilmedi)"),
+          f"- Sermaye hareketi (kâr sayılmaz): {_p(t['sermaye_hareketi_usd'])} USD",
           f"- Güncel özsermaye (Σ min(özsermaye, tahsis)): {_p(t['guncel_ozsermaye'])} USD",
           f"- Net sonuç (komisyon ve funding düşülmüş; borsa bakiyesi): {_p(t['net_usd'])} USD" + (f" ({t['net_pct'] * 100:+.2f}%)" if t["net_pct"] is not None else "")]
     sg = t["sunucu_gideri"]
     L += [f"- Sunucu gideri (ayrı satır, net sonuca dahil değil): " + ("girilmedi" if sg is None else f"{sg['usd_ay']:g} USD/ay" + (f", dönem ≈ {sg['donem_usd']:g} USD" if "donem_usd" in sg else "")), ""]
     L += ["## 2. Düşüş"]
     if t["dusus"]:
-        L += [f"- Zirve: {_p(t['zirve'])} USD; güncel düşüş: %{t['dusus']['guncel_dusus'] * 100:.2f} (açık pozisyon K/Z dahil)",
-              f"- En büyük düşüş: {t['en_buyuk_dusus']}"]
+        e = t["en_buyuk_dusus"]
+        L += [f"- Zirve: {_p(t['zirve']) + ' USD' if t['zirve'] is not None else 'hesap_durumu.json yok'}; güncel düşüş: %{t['dusus']['guncel_dusus'] * 100:.2f} (açık pozisyon K/Z dahil; {t['dusus'].get('kaynak', '')})",
+              "- En büyük düşüş: " + (e if isinstance(e, str) else f"%{e['oran'] * 100:.2f} ({e['zirve_zaman'][:10]} → {e['dip_zaman'][:10]}, {e['kesit_sayisi']} günlük kesit)")]
         L += [f"- **{m}**" for m in t["dusus"]["mesajlar"]] or ["- Eşik uyarısı yok (büyüme freni %10, hedef aşıldı %15, hesap kill %20)."]
     else:
         L += [f"- {YOK}"]
@@ -426,6 +598,14 @@ def markdown(r: dict) -> str:
     for sid, s in r["stratejiler"].items():
         m = s["maliyet"]
         L.append(f"- {sid}: {m['durum']}" + (f" (canlı {m['canli_bps']:g} bps, model {m['model_bps']:g} bps)" if m["oran"] is not None else ""))
+        ci = s.get("canli_islemler")
+        if ci:
+            L.append(f"  - kapanan canlı işlem {ci['islem']} (bu hafta {ci['hafta_islem']}); net {_p(ci['net_usd'])} USD, komisyon {_p(ci['komisyon_usd'])}, funding {_p(ci['funding_usd'])}, ΣR {_p(ci['r'])}"
+                     + (f"; net'i olmayan {ci['net_olmayan']} işlem" if ci["net_olmayan"] else ""))
+        if s["net_sonuc"] != YOK:
+            L.append(f"  - kasa {s['guncel_kasa']:.2f} USD (kesit {s['kasa_kesit_zamani'][:16]}), net sonuç {s['net_sonuc']:+.2f} USD (sermaye hareketi {s['sermaye_hareketi_usd']:+.2f} ayrı)")
+        if m.get("oran_ilk30") is not None:
+            L.append(f"  - ilk 30 işlem maliyet oranı {m['oran_ilk30']:.2f}")
         if "emeklilik" in m:
             L.append(f"  - {m['emeklilik']}")
         if "paper_model_usd" in m:
@@ -436,6 +616,8 @@ def markdown(r: dict) -> str:
     for sid, s in r["stratejiler"].items():
         e = s["eslesme"]
         L.append(f"- {sid}: " + (f"%{e['oran'] * 100:.1f} ({e['durum']})" if e["oran"] is not None else e["durum"]) + f" — {e['aciklama']}")
+        if e.get("kumulatif_oran") is not None:
+            L.append(f"  - kümülatif eşleşme %{e['kumulatif_oran'] * 100:.1f} (dolan {e['kumulatif_doldu']}, atlanan {e['kumulatif_atlanan']})")
         if e["doldu"] is not None:
             L.append(f"  - dolan {e['doldu']}, atlanan {e['atlanan']}" + (": " + ", ".join(f"{k} {v}" for k, v in e["nedenler"].items()) if e["nedenler"] else ""))
     L.append("")
@@ -488,9 +670,10 @@ def main(argv=None) -> int:
     ap.add_argument("--baslangic", help="canlı başlangıç tarihi (YYYY-MM-DD): ewo beklenti bandı süre oranı için")
     ap.add_argument("--ayar", help="canli_ayar.json (tahsis_usd, islem_risk)")
     ap.add_argument("--sunucu-gider-usd-ay", type=float, help="aylık sunucu gideri (USD); verilmezse 'girilmedi'")
+    ap.add_argument("--yaz-karsilastirma", action="store_true", help="DIZIN/canli/haftalik_karsilastirma.json'u (risk_adim_kontrol sözleşmesi) islemler/arşivden üretip yaz")
     ap.add_argument("--cikti", help="markdown çıktı dosyası; aynı adla .json da yazılır. Yoksa ekrana basılır")
     a = ap.parse_args(argv)
-    r = rapor_uret(a.canli_durum, a.paper_durum, a.bitis, a.ayar, a.baslangic, a.sunucu_gider_usd_ay)
+    r = rapor_uret(a.canli_durum, a.paper_durum, a.bitis, a.ayar, a.baslangic, a.sunucu_gider_usd_ay, a.yaz_karsilastirma)
     md = markdown(r)
     if a.cikti:
         yol = Path(a.cikti)

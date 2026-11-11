@@ -206,3 +206,135 @@ def test_paper_stratejileri(tmp_path):
     r = cr.rapor_uret(tmp_path, paper_durum=pdir, bitis=BIT)
     p = r["paper_stratejileri"]["dis__lube"]
     assert p["islem"] == 2 and p["toplam_r"] == 1.0 and p["hafta_islem"] == 1 and p["hafta_r"] == 2.0
+
+
+# ============================================================================= yürütücünün yazdığı yeni kayıt dosyalarından (islemler / ozsermaye_gunluk / olaylar_arsiv)
+def _srow(gun, sid, kasa, tahsis, ozs=None, neden="gun", kz=0):
+    return {"tur": "strateji", "zaman": f"{gun}T00:05:00.000000Z", "gun": gun, "neden": neden, "strateji": sid, "mod": "canli", "ozsermaye": str(ozs or kasa),
+            "tahsis_usd": str(tahsis), "kasa": str(kasa), "acik_kz_usd": str(kz), "acik_pozisyon": 0}
+
+
+def _hrow(gun, toplam, neden="gun"):
+    return {"tur": "hesap", "gun": gun, "zaman": f"{gun}T00:06:00.000000Z", "neden": neden, "toplam": str(toplam), "zirve": str(toplam), "kimlikler": [cr.S_EWO], "kill": False}
+
+
+def test_en_buyuk_dusus_gunluk_kesitten_ve_esik(tmp_path):
+    S = cr.S_EWO
+    rows = [_srow("2026-12-15", S, 250, 250, neden="servis_basi"), _hrow("2026-12-15", 250, "servis_basi"),
+            _srow("2026-12-16", S, 280, 280), _hrow("2026-12-16", 280),
+            _srow("2026-12-17", S, 252, 280), _hrow("2026-12-17", 252),
+            _srow("2026-12-18", S, 266, 280), _hrow("2026-12-18", 266)]       # dip %10, güncel %5
+    _jsonl(tmp_path / "canli" / "ozsermaye_gunluk.jsonl", rows)
+    _hesap(tmp_path, {S: 266}, zirve=280)
+    r = _rapor(tmp_path)
+    e = r["toplam"]["en_buyuk_dusus"]
+    assert abs(e["oran"] - 0.10) < 1e-6 and e["dip_zaman"].startswith("2026-12-17") and e["kesit_sayisi"] == 4
+    assert abs(r["toplam"]["dusus"]["guncel_dusus"] - 0.05) < 1e-6
+    assert r["toplam"]["net_usd"] == 16.0 and r["toplam"]["baslangic_tahsis"] == 250.0       # ilk kasa 250; ayar gerekmedi
+    md = cr.markdown(r)
+    assert "En büyük düşüş: %10.00" in md
+
+
+def test_sermaye_hareketi_kar_sayilmaz_net_ve_dusus(tmp_path):
+    S = cr.S_E0V1EN
+    rows = [_srow("2026-12-15", S, 60, 60, ozs=60, neden="servis_basi"), _hrow("2026-12-15", 60, "servis_basi"),
+            {"tur": "sermaye_hareketi", "zaman": "2026-12-16T00:04:00.000000Z", "gun": "2026-12-16", "strateji": S, "onceki_tahsis_usd": "60", "yeni_tahsis_usd": "250",
+             "fark_usd": "190", "ozsermaye_o_an": "250"},
+            _srow("2026-12-16", S, 250, 250, neden="servis_basi"), _hrow("2026-12-16", 250, "servis_basi")]
+    _jsonl(tmp_path / "canli" / "ozsermaye_gunluk.jsonl", rows)
+    _hesap(tmp_path, {S: 250})
+    r = _rapor(tmp_path)
+    t = r["toplam"]
+    assert t["sermaye_hareketi_usd"] == 190.0 and t["baslangic_tahsis"] == 250.0
+    assert t["net_usd"] == 0.0                                                       # 60 -> 250 geçişi kâr sayılmadı
+    assert r["stratejiler"][S]["net_sonuc"] == 0.0 and r["stratejiler"][S]["sermaye_hareketi_usd"] == 190.0
+    assert t["en_buyuk_dusus"]["oran"] == 0.0 and r["toplam"]["dusus"]["guncel_dusus"] == 0.0
+    assert r["sistem"]["yeniden_baslatma_haftada"] == 1                              # ilk başlangıç yeniden başlatma değil, ikincisi öyle
+
+
+def test_sermaye_hareketi_ara_donem_zarari_sermaye_sayilmaz():
+    g = cr.gunluk_analiz([_srow("2026-12-15", "a", 100, 100, neden="servis_basi"),
+                          {"tur": "sermaye_hareketi", "zaman": "2026-12-16T00:04:00Z", "strateji": "a", "yeni_tahsis_usd": "250", "fark_usd": "150", "ozsermaye_o_an": "90"},
+                          _srow("2026-12-16", "a", 90, 250)])
+    assert g["stratejiler"]["a"]["hareket_usd"] == 0.0                              # para yatırılmadı (özsermaye düşmüş): hareket 0, zarar korunur
+
+
+def test_yeni_strateji_sonradan_eklenince_sermaye_girisi():
+    g = cr.gunluk_analiz([_srow("2026-12-15", "a", 100, 100, neden="servis_basi"), _srow("2026-12-20", "b", 250, 250, neden="servis_basi")])
+    assert g["stratejiler"]["b"]["ilk_kasa"] == 0.0 and g["stratejiler"]["b"]["hareket_usd"] == 250.0
+    assert g["stratejiler"]["a"]["hareket_usd"] == 0.0
+
+
+def _islem(sid, i, r, gercek=None, model=6.0, net=1.0):
+    return {"strateji": sid, "kol": "K", "sembol": "BTCUSDT", "cikis_zamani": f"2026-12-{1 + i % 20:02d}T10:{i % 60:02d}:00.000000Z", "zaman": f"2026-12-{1 + i % 20:02d}T10:{i % 60:02d}:00.000000Z",
+            "giris_fiyati": "50000", "miktar": "0.01", "r": r, "net_pnl_usd": str(net), "komisyon_usd": "0.5", "funding_usd": "-0.01",
+            "gercek_maliyet_bps": gercek, "model_maliyet_bps": model}
+
+
+def test_maliyet_ilk30_islem_emeklilik_olcutu_islemlerden(tmp_path):
+    S = cr.S_E0V1EN
+    _hesap(tmp_path, {S: 60})
+    _jsonl(tmp_path / "canli" / "islemler.jsonl", [_islem(S, i, -0.1, gercek=12.0) for i in range(30)])        # oran 12/6 = 2
+    r = _rapor(tmp_path)
+    m = r["stratejiler"][S]["maliyet"]
+    assert m["oran"] == 2.0 and m["oran_ilk30"] == 2.0 and m["emeklilik"].startswith("EMEKLİLİK")
+    assert any("maliyet oranı 2.00" in u for u in r["uyarilar"]) and any("EMEKLİLİK ölçütü" in u for u in r["uyarilar"])
+    ci = r["stratejiler"][S]["canli_islemler"]
+    assert ci["islem"] == 30 and ci["net_usd"] == 30.0 and ci["komisyon_usd"] == 15.0 and ci["funding_usd"] == -0.3
+
+
+def test_maliyet_yalniz_ilk_30_islem_sayilir_sonrasi_oran_degistirmez(tmp_path):
+    S = cr.S_E0V1EN
+    _hesap(tmp_path, {S: 60})
+    satirlar = [_islem(S, i, 0.0, gercek=7.0) for i in range(30)] + [_islem(S, 30 + i, 0.0, gercek=30.0) for i in range(10)]   # ilk 30: 7/6 (< 1,5); sonraki 10 pahalı
+    for i, x in enumerate(satirlar):
+        x["cikis_zamani"] = x["zaman"] = f"2026-12-{1 + i // 2:02d}T{i % 2:02d}:00:00.000000Z"
+    _jsonl(tmp_path / "canli" / "islemler.jsonl", satirlar)
+    m = _rapor(tmp_path)["stratejiler"][S]["maliyet"]
+    assert m["oran_ilk30"] < 1.5 and "geçildi" in m["emeklilik"] and m["oran"] > 1.5          # genel oran uyarı, emeklilik ölçütü yalnız ilk 30
+
+
+def test_e0v1en_ve_ewo_kurallari_islemler_jsonl_strateji_alanindan(tmp_path):
+    _hesap(tmp_path, {cr.S_E0V1EN: 60, cr.S_EWO: 250})
+    _jsonl(tmp_path / "canli" / "islemler.jsonl", [_islem(cr.S_E0V1EN, i, -0.3) for i in range(60)] + [_islem(cr.S_EWO, i, -1.0) for i in range(16)])
+    r = _rapor(tmp_path, baslangic="2026-12-01")
+    assert r["stratejiler"][cr.S_E0V1EN]["emeklilik_kurali"]["durum"].startswith("EMEKLİLİK")
+    assert r["stratejiler"][cr.S_EWO]["ewo_bant"]["inceleme"] is True and any("EMEKLİLİK İNCELEMESİ" in u for u in r["uyarilar"])
+
+
+def test_eslesme_arsivden_sinirsiz_ve_kumulatif(tmp_path):
+    S = cr.S_EWO
+    _hesap(tmp_path, {S: 250})
+    ol = [{"zaman": f"2026-12-{10 + i // 12:02d}T{i % 12:02d}:00:00.000000Z", "strateji": S, "tur": "canli_emir_doldu", "mesaj": "k BTCUSDT LONG 1 @ 1"} for i in range(60)]   # 60 > 50
+    ol += [{"zaman": "2026-12-19T20:00:00.000000Z", "strateji": S, "tur": "min_tutar_alti", "mesaj": "k (X): min_tutar_alti: ..."}]
+    _jsonl(tmp_path / "canli" / "olaylar_arsiv.jsonl", ol)
+    e = _rapor(tmp_path)["stratejiler"][S]["eslesme"]
+    assert e["kumulatif_doldu"] == 60 and e["kumulatif_atlanan"] == 1 and abs(e["kumulatif_oran"] - 60 / 61) < 1e-3
+    assert e["oran"] is not None and "olaylar_arsiv" in e["aciklama"] and e["nedenler"] == {"min tutar (borsa asgari emri)": 1}
+
+
+def test_yaz_karsilastirma_risk_adim_kontrol_sozlesmesiyle(tmp_path):
+    from motor.canli.borsa.risk_adim_kontrol import kontrol
+    S = cr.S_E0V1EN
+    _hesap(tmp_path, {S: 60})
+    _jsonl(tmp_path / "canli" / "islemler.jsonl", [_islem(S, i, 0.1, gercek=12.0) for i in range(5)])        # oran 2,0 -> maliyet şartı HAYIR
+    _jsonl(tmp_path / "canli" / "olaylar_arsiv.jsonl", [{"zaman": "2026-12-18T10:00:00.000000Z", "strateji": S, "tur": "canli_emir_doldu", "mesaj": "k"} for _ in range(19)]
+           + [{"zaman": "2026-12-18T11:00:00.000000Z", "strateji": S, "tur": "min_tutar_alti", "mesaj": "k"}])                                     # %95 eşleşme
+    _yaz(tmp_path / "canli" / "yurutucu_x.json", {"strateji": S, "kill": False, "pozlar": {}})
+    r = _rapor(tmp_path, karsilastirma_yaz=True)
+    d = json.loads((tmp_path / "canli" / "haftalik_karsilastirma.json").read_text(encoding="utf-8"))
+    assert d[S]["canli_maliyet_bps"] == 12.0 and d[S]["model_maliyet_bps"] == 6.0 and d[S]["eslesme_orani"] == 0.95 and d[S]["islem_sayisi"] == 5
+    assert r["karsilastirma_yazildi"].endswith("haftalik_karsilastirma.json")
+    k = kontrol(tmp_path)[S]
+    assert k["maliyet_orani_ok"] == "hayir" and k["eslesme_ok"] == "evet"                    # risk_adim_kontrol artık 'bilinmiyor' değil
+    # yazma yalnız bayrakla
+    (tmp_path / "canli" / "haftalik_karsilastirma.json").unlink()
+    _rapor(tmp_path)
+    assert not (tmp_path / "canli" / "haftalik_karsilastirma.json").exists()
+
+
+def test_kayit_hata_sayisi_uyari(tmp_path):
+    _hesap(tmp_path, {cr.S_EWO: 250})
+    _yaz(tmp_path / "canli" / "yurutucu_x.json", {"strateji": cr.S_EWO, "kill": False, "pozlar": {}, "kayit_hata_sayisi": {"islemler": 2}})
+    r = _rapor(tmp_path)
+    assert any("kayıt yazım hataları" in u for u in r["uyarilar"])
