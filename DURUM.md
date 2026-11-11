@@ -6,6 +6,7 @@ _Son güncelleme: 2026-11-06 (Aşama 1 ara durum)_
 - **Lider (Claude Opus):** planlama, görev/ajan dağıtımı, denetim, kalite.
 - **Kod:** Sonnet ajanları. **Düşük eforlu işler** (özetleme, veri ayıklama): Haiku ajanları.
 - Kararlar kullanıcıyla birlikte verilir.
+- Dış ajanlar: ikinci Claude hesabı ("Sonnet", yalnız araştırma, `stratejiler/v3_adaylar/`). ChatGPT Codex 2026-11-11 itibarıyla KULLANILMIYOR (kullanıcı kararı); kodlama ana oturumun Sonnet ajanlarında. `CODEX_KODLAMA.md` kuralları bu ajanlar için de geçerli.
 
 ## Alınan kararlar
 1. Strateji seçimi = kitaplarda yaygın (**farklı yazar sayısı**) + kurala dökülebilir + **backtest'te avantaj**.
