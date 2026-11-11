@@ -139,7 +139,7 @@ PAPER_AG_TESTI=1 python -m pytest testler/test_paper_veri.py -k gercek_ag       
 
 ## 11. Panoyu telefondan görmek (Cloudflare Workers, 15 dakikada bir)
 Sunucu `pano.html`'i her 15 dakikada Cloudflare'e yükler; sayfa `https://1l3a-pano.<hesabınız>.workers.dev` adresinde açılır
-(adresi bilen herkes görebilir; içerik yalnız paper sonuçlarıdır, anahtar/gizli bilgi içermez).
+(B18 sonrası kullanıcı adı/şifre sorar; aşağıdaki "Pano kilidi" bölümü).
 ```bash
 curl -fsSL https://deb.nodesource.com/setup_22.x | bash - && apt install -y nodejs && npm install -g wrangler@4.158.0
 cp deploy/1l3a-pano.env.ornek /etc/1l3a-pano.env && chmod 600 /etc/1l3a-pano.env && nano /etc/1l3a-pano.env
@@ -147,6 +147,21 @@ cp deploy/1l3a-pano-yayin.service deploy/1l3a-pano-yayin.timer /etc/systemd/syst
 systemctl daemon-reload && systemctl enable --now 1l3a-pano-yayin.timer && systemctl start 1l3a-pano-yayin.service
 journalctl -u 1l3a-pano-yayin -n 20 --no-pager        # "pano yayımlandı" ve workers.dev adresi görünmeli
 ```
+
+### Pano kilidi (B18)
+Pano bir Worker'ın arkasına alınır: her istekte kullanıcı adı (`1l3a`) ve şifre sorulur; şifre tanımlı değilse hiç kimse giremez.
+Şifreyi önce koymazsanız yayın betiği hata verir ve eski (açık) sürüm yerinde kalır; bu yüzden sırayla yapın. DigitalOcean konsolunda:
+```bash
+cd /opt/1l3a && git pull
+openssl rand -base64 18        # çıktıyı kendi şifre yöneticinize kaydedin; Claude'a/sohbete YAZMAYIN
+nano /etc/1l3a-pano.env        # en alta şu satırı ekleyin (şifrenizle): PANO_SIFRE=...   sonra Ctrl+O, Enter, Ctrl+X
+systemctl start 1l3a-pano-yayin.service
+journalctl -u 1l3a-pano-yayin -n 20 --no-pager   # "PANO_SIFRE secret'ı güncellendi" ve "pano yayımlandı" görünmeli
+```
+Doğrulama: telefondan panonun adresini açın; kullanıcı adı `1l3a` ve şifre sorması gerekir. Yanlış şifre girişi reddedilmeli.
+Şifreyi değiştirmek için `/etc/1l3a-pano.env` içindeki satırı değiştirip `systemctl start 1l3a-pano-yayin.service` çalıştırın (otomatik algılanır).
+Geri alma: `git checkout <önceki-commit> -- deploy/pano_yayinla.sh` ile eski betiği döndürüp servisi başlatın (pano yine açık olur; yalnız acil durumda).
+Panoyu tamamen kapatmak için: `wrangler delete --name 1l3a-pano` (env değişkenleri yüklüyken) ve `systemctl disable --now 1l3a-pano-yayin.timer`.
 
 ## 12. v2 paper setine geçiş (eski 7'li deneme sürüşünden 10'lu v2 setine)
 Yeni set: 10 strateji, **her biri kendi 10.000 USD sanal kasasında** (`stratejiler/paper_v2_seti.json`). Eski 7'li deneme sürüşünün durumu
