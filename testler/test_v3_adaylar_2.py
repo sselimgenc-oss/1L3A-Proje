@@ -7,12 +7,16 @@ from pathlib import Path
 
 import numpy as np
 import pandas as pd
+import pytest
 
 from motor.portfoy.stratejiler import tum_portfoy_stratejileri
 from motor.portfoy.stratejiler.v3 import FundingZ90UcGun
+from motor.strateji import gostergeler as gosterge
+from motor.strateji.cikislar import CikisAyarlari
+from motor.strateji.dis.d5_ek import ConnorsEtf
 from motor.strateji.dis.v3_adaylar_2 import (
     AralikKirilimBekleyenEmir, LSekliMaKirilimLong, Orb4sHacimAtr,
-    Rsi2Sma200GeriCekilme, TersFvgNqLong,
+    TersFvgNqLong,
 )
 from motor.strateji.kayit import tum_stratejiler
 
@@ -63,6 +67,20 @@ def test_orb_ilk_4s_araligini_hacimle_kirar_ve_iz_stop_ayarlidir():
     assert Orb4sHacimAtr.cikis_ayarlari.atr_iz_suren_k == 1.0
 
 
+def test_orb_1s_mumlarda_ilk_dort_saati_birlestirir():
+    fiyat = np.full(3 * 24, 100.0)
+    hacim = np.ones(len(fiyat))
+    i = 2 * 24 + 4
+    fiyat[i], hacim[i] = 110.0, 3.0
+    sig = Orb4sHacimAtr(hacim_n=20).sinyaller(mum(fiyat, "1h", hacim=hacim))
+    assert sig.iloc[i].yon == 1
+
+
+def test_orb_dort_saati_tam_bolmeyen_mum_acik_hata():
+    with pytest.raises(ValueError, match="ilk 4 saati tam bölmeli"):
+        Orb4sHacimAtr().sinyaller(mum(np.full(40, 100.0), "3h"))
+
+
 def test_ters_fvg_15m_kapandiktan_sonra_5m_retest_long_ve_1545_cikis():
     idx = pd.date_range("2024-01-02 14:00", periods=84, freq="5min", tz="UTC", name="zaman")
     df = pd.DataFrame({"acilis": 99.0, "yuksek": 100.0, "dusuk": 98.0,
@@ -81,12 +99,39 @@ def test_ters_fvg_15m_kapandiktan_sonra_5m_retest_long_ve_1545_cikis():
     assert sig.loc[pd.Timestamp("2024-01-02 20:40", tz="UTC"), "cikis"]
 
 
-def test_rsi2_sma200_ustunde_dipte_long_stop_ve_bes_mum_suresi():
+def test_rsi2_sma200_karti_connors_ayariyla_birebir_karsilanir():
     fiyat = np.r_[np.linspace(100, 200, 210), 198.0, 194.0, 190.0]
     df = mum(fiyat, "1D")
-    sig = Rsi2Sma200GeriCekilme().sinyaller(df)
-    g = sig[sig["yon"] == 1]
-    assert len(g) > 0 and g.stop.notna().all() and g.zaman_cikisi_mum.eq(5).all()
+    st = ConnorsEtf(
+        cikis_ayarlari=CikisAyarlari(zaman_cikisi_mum=5), kural="rsi4", rsi_n=2,
+        rsi_giris=10.0, rsi_cikis=70.0, trend_n=200, short=False, stop_atr_k=3.0,
+    )
+    sig = st.sinyaller(df)
+    rsi = gosterge.rsi(df["kapanis"], 2)
+    beklenen = (df["kapanis"] > gosterge.sma(df["kapanis"], 200)) & (rsi < 10.0)
+    assert (sig["yon"].eq(1) == beklenen.fillna(False)).all()
+    assert sig.loc[sig["yon"] == 1, "stop"].notna().all() and not sig["yon"].eq(-1).any()
+    assert (sig["cikis_long"] == (rsi > 70.0).fillna(False)).all()
+    assert st.cikis_ayarlari.zaman_cikisi_mum == 5
+
+
+@pytest.mark.parametrize(
+    "freq,ust_tf", [("5min", "15m"), ("15min", "1h"), ("1h", "4h")],
+)
+def test_saatli_cikislar_mum_suresine_gore_son_kapanisi_secer(freq, ust_tf):
+    sure = pd.Timedelta(freq)
+    n = int(pd.Timedelta(days=3) / sure)
+    df = mum(np.full(n, 100.0), freq)
+    stratejiler = (
+        (AralikKirilimBekleyenEmir(), "UTC", 22, 0),
+        (TersFvgNqLong(ust_tf=ust_tf), "America/New_York", 15, 45),
+    )
+    for st, bolge, saat, dakika in stratejiler:
+        cikislar = st.sinyaller(df).index[st.sinyaller(df)["cikis"]]
+        assert len(cikislar) >= 2
+        kapanis = (cikislar + sure).tz_convert(bolge)
+        hedef = kapanis.normalize() + pd.Timedelta(hours=saat, minutes=dakika)
+        assert (kapanis <= hedef).all() and (kapanis + sure > hedef).all()
 
 
 def test_funding_z90_uc_gunde_bir_dolar_notr_ve_stoplu():
@@ -111,7 +156,7 @@ def test_ikinci_parti_kayitlari_ve_csv_durumlari_tam():
     pf = tum_portfoy_stratejileri()
     yeni_tek = {
         "v3__aralik-kirilim-bekleyen-emir", "v3__l-sekli-ma-kirilim-long",
-        "v3__orb-4s-hacim-atr", "v3__ters-fvg-nq-long", "v3__rsi2-sma200-geri-cekilme",
+        "v3__orb-4s-hacim-atr", "v3__ters-fvg-nq-long",
     }
     assert yeni_tek <= set(tek) and "pf__v3-funding-z90-3gun" in pf
 
@@ -126,6 +171,8 @@ def test_ikinci_parti_kayitlari_ve_csv_durumlari_tam():
         if json.loads(kart.read_text())["veri_uygun"][0]:
             uygun.add(aday["kart_id"])
     assert len(uygun) == 8
-    assert {kodlama[x]["durum"] for x in uygun} == {"kodlandi", "tekrar", "belirsiz"}
-    assert sum(kodlama[x]["durum"] == "kodlandi" for x in uygun) == 6
+    assert {kodlama[x]["durum"] for x in uygun} == {"kodlandi", "tekrar", "belirsiz", "veri_yok"}
+    assert sum(kodlama[x]["durum"] == "kodlandi" for x in uygun) == 4
+    assert kodlama["daytrade__ters-fvg-nq__prashanthaitha24"]["durum"] == "veri_yok"
+    assert kodlama["swing__rsi2-sma200-geri-cekilme__toney"]["strateji_ad"] == "dis__connors-etf"
     assert all(kodlama[r["kart_id"]]["durum"] == "veri_yok" for r in adaylar if r["kart_id"] not in uygun)
