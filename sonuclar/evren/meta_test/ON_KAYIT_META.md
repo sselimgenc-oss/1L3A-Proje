@@ -88,4 +88,4 @@ sonra hiçbir parametre değişmez. Bu test strateji SEÇMEZ; seçim YÖNTEMİM�
   sonradan tasarlanan kural, 11 pencereyle düşük güç).
 
 ## Betik sha256
-(koşudan önce eklenecek)
+432ebfff77f39a304945caa52f7cd4cbd994314215c4c19dbba0c5c8677d083b  araclar/meta_test_secim.py
