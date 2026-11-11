@@ -195,6 +195,53 @@ Tur 3'te **9 yeni kart** (toplam **153**; `adaylar.csv` 153 satır). Fable yaln�
 
 ---
 
+# Tur 5 (2026-11-11)
+Önceki tur dosyalarına dokunulmadı; yalnız `kaynak_dogrulama_tur5.csv` (60 satır) ve `yeni_aday_taramasi_tur5.md` eklendi, bu bölüm eklendi. Kod yazılmadı. 4 Sonnet ajanı okudu/taradı, Fable hakem oldu. Kart dosyalarına, `adaylar.csv` ve `aileler_v3.csv`'ye dokunulmadı (yeni kart yok).
+
+## 1. Açık kaynaklar (kaynak_dogrulama_tur5.csv)
+60 satır: 12 aynı, 16 farklı, 20 kaynakta yok, 12 kaynak okunamadı.
+- **De Nicola (Ledger):** birincil metin yine OKUNAMADI (ledger.pitt.edu TLS/503; Unpaywall/Crossref/OpenAlex yalnız meta; SSRN/CORE/Europe PMC proxy 403; web.archive tünel koptu). Zaman ölçeği, eşik, tutma, maliyet, OOS hâlâ ikincil kaynağa dayanıyor. PDF'i kullanıcı tarayıcıdan indirip sağlarsa okunur.
+- **pre-FOMC:** kripto uyarlaması bulunamadı. Lucca-Moench ana pencere 14:00→14:00 (duyuru 14:15, 1994-2011, 49 bp); 2011 sonrası pencere sonu 13:45 (KWG 2021); KWG: drift 2015 sonrası "essentially disappeared". FOMC tarihleri federalreserve.gov'dan alınabilir (2015-2020 yıllık sayfalar, 2021+ takvim); plansız toplantı = tek günlük conference call / notation vote. Olay başına duyuru saati tablosu henüz çıkarılmadı.
+- **btc-gecelik (Quantpedia, tablo görselleri okundu):** nihai gece-only strateji tüm örnek CAR %68,38, Sharpe 2,40, MDD %-17,24; IS Sharpe 2,15; OOS (2021-10-18 sonrası) CAR %20,09, Sharpe 1,14, MDD %-11,17. Kartın "%35 / -%12" tüm-gün MAX(10) stratejisine ait (OOS %35,65). Maliyet ve işlem sayısı yok. N=5'in Sharpe'ı N=10'dan yüksek.
+- **cuma-15 (Miralles):** Tablo 7: Cuma 15:00 sonrası 4s ort. +0,0038 log (t=3,98), komşu hücreler de anlamlı. Toplam ~1680 t-testi (168 + 1512; sayı tablolardan hesaplandı), düzeltme yok. Sharpe yalnız grafikte (Şekil 2-3 görsel tahmin; kanıt alanına yazılmaz). Çalışma kâğıdı bulunamadı.
+- **donchian-ansambl (Zarattini):** ağırlık = 9 modelin eşit ortalaması, model başına min(0,25/σ; %200); %20 eşik yalnız vol ayarında; ay sonu evren + 1/B sermaye; evren filtresi ≥365 gün listeli + 30g medyan hacim ≥2 milyon USD; sinyal kapanışta, aynı kapanış fiyatından icra (ek gecikme yok); 365/252 yazmıyor; maliyet 10 bps (tek yön/gidiş-dönüş yazmıyor); long-short Combo Sharpe 1,31 (long-only 1,58). Sürüm ayrımı (Nisan/Ekim 2025) PDF'ten yapılamadı.
+- **funding-7g (Vine + motor):** kaynak = günlük settlement TOPLAMI, 7 günlük ortalama, 1 gün kaydırma; son ödeme DEĞİL. Motor (`motor/strateji/funding.py:6-9,37-51`) mum kapanışındaki SON settlement'ı ffill ediyor → 1d barda günün yalnız 00:00 ödemesi sinyale giriyor. Motor funding PnL'i ise settlement başına gerçek perp fiyatıyla işliyor (kaynaktan daha gerçekçi). `Funding7gTercil` varsayılan evreni 3 coin (BTC/ETH/SOL): 13-15 coin çağrıda açıkça verilmeli. Vine repo'su okunamadı.
+
+## 2. Yeni aday taraması (madde 3)
+**Bulunamadı.** 17 arama + 8 sayfa; hiçbir aday yeni aile getirmedi ya da mevcut temsilciden daha güçlü kanıtlı (makale + OOS + maliyet dahil + verimize uygun) değildi. Ayrıntı: `yeni_aday_taramasi_tur5.md`. Fable: sonuç makul ve TALIMAT'ın izin verdiği türde, ama kapsam dar; doğru ifade "bu erişimle bulunamadı", "literatürde yok" denemez. Yan bulgu: Han-Kang-Ryu (özet) ve Bianchi vd. (tam metin) kesit momentum/ters dönüş kazancının maliyetten sonra küçüldüğünü ya da illikit coinlerde toplandığını söylüyor.
+
+## 3. Fable hükmü: ön kayıtta hangi değer
+| Kart | Ön kayıt kararı |
+|---|---|
+| saatlik-asiri-tepki | **Test bekletilsin** (birincil metin yok). Koşulacaksa tek koşu: 1 saat, k=2, tut=1, adı "özete dayalı bizim saatlik hipotezimiz"; 48 mum σ ve ATR×2 bizim eklememiz. 5 dk ile 1 saati birlikte koşup iyisini seçmek yasak |
+| pre-FOMC | Ana koşu = kaynak penceresi (giriş duyurudan 24s15dk önce, çıkış duyurudan 15 dk önce; 2011 sonrası 13:45). Kartın sabit 14:00 çıkışı kullanılmaz; kapanış→13:45 yalnız ikincil. Olay başına duyuru saati tablosu testten önce çıkarılır; plansız toplantı dışlanır; 2016+ ayrı raporlanır (beklenti ~0); geçme ölçütü önceden yazılır; karttaki "20 bp" yerine 49 bp (1994-2011) |
+| btc-gecelik | Kaynak kuralları (N=10, Cuma/Pzt/Salı geceleri, yeniden giriş); kanıt alanı nihai OOS Sharpe 1,14 (maliyetsiz) ile düzeltilir; N optimize edilmez; temiz sınav 2024-10-15 sonrası; "tüm geceler" yalnız dayanıklılık satırı; MAX tanımı/DST/tatil tek değere sabitlenir |
+| cuma-15 | Elenmeye yakın ama tek ucuz ön kayıtlı test: yalnız tek hücre (Cuma 21:00 UTC giriş, 4 saat, sabit UTC-5); komşu saat/ufuk denenmez; karar dönemi 2022+; net pozitif değilse aile kapanır. (Fable'ın kaba Bonferroni eşiği ~4,2 > t=3,98.) |
+| donchian-ansambl | Mevcut kod kaynağın stratejisi değil → kaynağa göre yeniden kodla ya da "bizim oylama varyantımız" diye adlandır. Kaynak değerleri: 9 pencere, kapanış kanalı, orta-kanal iz stop, σ90, %20 eşik, ay sonu evren, long-only. İcra motorun "sonraki bar açılışı"nda kalsın (sapma beyanı). Yıllandırma 365 (252 pozisyonları ~%20 büyütür). Maliyet: motorun gerçekçi değeri + 10 bps tek yön duyarlılığı. Açık tasarım sorusu: motor stopsuz hedef açmıyor, kaynakta 9 iz süren stop var |
+| funding-7g | Ana koşu = günlük toplam (kod değişikliği gerekir; karar ana oturum/kullanıcıda). Son-settlement sürümü aday olarak koşulmaz ("eski varyant" diye raporlanır). Karar koşusu stoplu (ATR×3, "bizim eklememiz"), stopsuz yalnız kaynak kıyası. Evren 13-15 coin açıkça sabit; tek ayar (7g/tercil/haftalık); 6 bp/taraf hizalı kıyas koşusu; beklenti düşük (kaynak OOS Sharpe 0,39) |
+Kesitsel kartlarda (funding-7g, fip, kripto-max, donchian çoklu coin) karar ölçütü maliyet sonrası net sonuç olmalı; maliyet duyarlılık satırı ve short bacak ayrı rapor. Bianchi'nin 20-40 bp'si küçük/illikit coinler içindir, üst stres değeri olarak kullanılır.
+
+## 4. Kritik 5 madde
+1. Funding sinyali kaynakla aynı değil (son settlement) ve varsayılan evren 3 coin: ikisi düzelmeden funding-7g testi kaynağı sınamaz.
+2. Donchian yeniden kodlanmadan kaynağa atfedilemez; yıllandırma, stop seçimi, maliyet testten önce yazılmalı.
+3. De Nicola birincil metni hâlâ yok; test bekletilmeli.
+4. pre-FOMC'de duyuru saati tablosu çıkarılmadı; sabit 14:00 çıkış hatalı; 2016+ beklenti sıfıra yakın.
+5. btc-gecelik ve cuma-15'te kanıt maliyetsiz ve seçim örnek içi; karar yalnız örnek sonrası dönemde, tek ön kayıtlı ayarla.
+
+## Dürüst sınırlar (tur 5)
+- İkincil kaynaklar: De Nicola tamamen ikincil; KWG metni ikincil kopya (tablolar kısmen bozuk; 0,092/0,054 birimi doğrulanmadı); Lucca-Moench 49 bp teyidi bir substack'ten; ardıl makalelerin yalnız başlıkları var.
+- Görselden okunan rakamlar (Quantpedia tabloları, Miralles Şekil 2-3) aktarım hatası taşıyabilir; bir Quantpedia tablosunda kaynak hatası şüphesi var (Vol rakamları tutarsız).
+- 1680 test sayısı ve Bonferroni eşiği tablolardan/hakemden hesaplanan çıkarımlardır, kaynakta yazmıyor.
+- Vine repo'su ve lisansı okunamadı (GitHub erişimi); Vine'ın walk-forward ayrıntıları yok, OOS yeniden üretilemez.
+- Motor tarafında yalnız funding yolu satır satır okundu; donchian icra gecikmesi ve motorun gerçek maliyet düzeyi doğrulanmadı.
+- `uyum` etiketleri yer yer tutarsız (btc-gecelik kartının "%35"i bir satırda "ayni", başka satırda "farkli"); not sütunu esas alınmalı.
+- Yeni aday taraması dar kapsamlıydı (Han-Kang-Ryu, Guo vd., Kurihara yalnız özet).
+
+## Devam noktası
+1. Kullanıcı: De Nicola PDF'i (Ledger, tarayıcıdan), funding günlük-toplam kod değişikliği ve donchian yeniden kodlama kararları.
+2. pre-FOMC duyuru saati tablosunun federalreserve.gov'dan çıkarılması.
+3. Tur 6 (veri_yok etiketleme) ayrı PR.
+
 # Tur 6 (2026-11-11)
 Önceki tur dosyalarına dokunulmadı; yalnız `veri_yok_etiket_tur6.csv` (514 satır) eklendi, bu bölüm eklendi. Kod ve kart yazılmadı. Etiketleme 13 Haiku ajanıyla yapıldı (derin okuma yok), 30 satırı Sonnet kontrol etti; Fable kullanılmadı.
 
