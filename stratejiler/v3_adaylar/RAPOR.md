@@ -192,3 +192,54 @@ Tur 3'te **9 yeni kart** (toplam **153**; `adaylar.csv` 153 satır). Fable yaln�
 1. Gün içi kripto (5m-1h) ve funding/baz web taraması (yalnız yeni aile ya da daha güçlü kanıtlı aday).
 2. De Nicola PDF'i (kullanıcı sağlarsa), Vine ve Quantpedia'nın tam metni.
 3. DonchianAnsambl'in kaynağa göre yeniden kodlanıp kodlanmayacağı kararı (ana oturum/kullanıcı).
+
+---
+
+# Tur 6 (2026-11-11)
+Önceki tur dosyalarına dokunulmadı; yalnız `veri_yok_etiket_tur6.csv` (514 satır) eklendi, bu bölüm eklendi. Kod ve kart yazılmadı. Etiketleme 13 Haiku ajanıyla yapıldı (derin okuma yok), 30 satırı Sonnet kontrol etti; Fable kullanılmadı.
+
+## 1. Girdi
+`on_eleme.csv`, `on_eleme_tur2_kod_yok.csv`, `on_eleme_tur3.csv` içinde son kararı `veri_yok` olan satırlar (aynı aday birden çok dosyada geçiyorsa (url, ad) anahtarıyla tek satır; son tur kazanır) = **485**, + `kodlama_v3.csv` durum=veri_yok **29 kart** = **514 satır**. Talimattaki "~636" ham toplamdı; tekilleştirme ve sonraki turun karar değiştirmesi farkı açıklıyor. Her satır için tam bir çıktı satırı var (girdi-çıktı sırası ve `kaynak_dosya`+satır numarası eşleşmesi doğrulandı). Parça 12'de ajan 32 satırın `ad` metnini kısaltıp çevirmişti; `ad` girdiden geri yazıldı.
+
+## 2. Örnek kontrol (Sonnet, 30 rastgele satır)
+- Kesin hata: **0/30 (%0)**; alan bazında 0. Belirsiz: 1 (TSLA satırı: Binance'te ABD hisse perp'i olabilir; etiket tanımı "kripto perp" olduğu için hata sayılmadı).
+- Kaçırılan ("bilinmiyor" ama netleşebilir): 4 satır / 6 alan (ücretsiz 3, geçmiş 1, işlem-bizde 2).
+- **Uyarı:** Sonnet de URL açmadı, yalnız `neden`/`ad`/bağlam ile yargıladı; bu nedenle %0 hata "etiketler kaynakla doğrulandı" demek DEĞİL, "metinle tutarlı" demektir.
+- Sistematik zayıflık: `ucretsiz_kaynak` (426/514) ve `gecmis_yeterli` (459/514) çoğunlukla **bilinmiyor**; bu iki alan eksik dolduruldu.
+
+## 3. Özet tablo
+`3 kriter de evet` = ucretsiz_kaynak=evet VE gecmis_yeterli=evet VE bizde_islenebilir=evet.
+
+| gereken_veri | toplam aday | 3 kriter de evet | işlem bizde: hayır | işlem bizde: evet/bilinmiyor | en sık 3 veri_ayrinti |
+|---|---|---|---|---|---|
+| hisse_fiyat | 115 | 0 | 91 | 24 | jse top 100 hisse günlük fiyat (5); sh510300 (çin csi300 etf) günlük fiyat (3); nse hisse ohlcv (2) |
+| hisse_temel | 63 | 0 | 52 | 11 | kazanç sürprizi + açıklama tarihi (2); tahakkuk (bilanço kalemleri) (1); bilanço varlık büyümesi (1) |
+| opsiyon | 60 | 0 | 59 | 1 | opsiyon zinciri (2); nifty opsiyon zinciri (2); iron condor opsiyon zinciri (2) |
+| diger | 55 | 1 | 37 | 18 | çin konvertibl tahvil fiyat ve prim (4); esg puanı + fiyat momentumu (2); açık short (short interest) verisi (2) |
+| forex | 49 | 0 | 49 | 0 | eurusd 5dk (mt5) (2); eurusd m5 (2); kur geçmişi (majör çiftler) (1) |
+| endeks | 44 | 0 | 42 | 2 | dünya hisse endeksleri (ülke) (1); ülke endeksleri (1); imoex vadeli 10dk (1) |
+| alt_1dk | 44 | 1 | 25 | 19 | krx hisse 1 dk ohlcv (6); dakikalık ohlcv ve hacim (vwap) (1); m3/m5 tetik, 5 dk altı zaman dilimi (mt5) (1) |
+| haber_duygu | 24 | 0 | 9 | 15 | şirket bildirim metinleri (10-k/8-k) (1); piyasa duygu endeksi (1); kazanç çağrısı transkriptleri (metin) (1) |
+| emir_defteri | 24 | 1 | 17 | 7 | lob ve tick verisi (hft, market making) (1); binance-upbit fiyat ve emir defteri (1); emir defteri dengesizligi (1) |
+| vadeli_emtia | 14 | 0 | 10 | 4 | vix vadeli kontrat eğrisi (1); çoklu vade emtia kontrat eğrisi (1); altın (xau) tik ve intraday fiyat (1) |
+| onchain | 12 | 0 | 11 | 1 | pump.fun memecoin on-chain akisi (1); on-chain ve duyarlilik verisi (1); solana dex ve on-chain fonlama (1) |
+| makro_takvim | 10 | 0 | 2 | 8 | fred: cpi, ppi, cfnai, reel faiz, vix (1); politika faizi, cpi ve doviz paritesi (1); vix, kredi spreadi, faiz serileri (1) |
+
+Genel: bizde_islenebilir = hayır **404**, bilinmiyor **96**, evet **14**; ücretsiz_kaynak evet 61 / hayır 27 / bilinmiyor 426; geçmiş_yeterli evet 46 / hayır 9 / bilinmiyor 459. **Üç kriterin hepsi evet olan yalnız 3 satır** var.
+
+## 4. Ana bulgu ve öneri (karar kullanıcı ve ana oturumda)
+**Darboğaz çoğunlukla veri değil, işlem piyasası:** 514 adayın 404'ü (%79) işlemini hisse/forex/opsiyon/endeks/vadeli gibi bizim açamadığımız bir piyasada yapıyor (forex 49/49, opsiyon 59/60, endeks 42/44, hisse 143/178 "hayır"). Bu adaylara veri eklemek onları açmaz.
+
+Etiketleri "işlem bizde evet/bilinmiyor" olan satırlara göre sıralarsak en çok aday açabilecek 3 veri ihtiyacı (hepsi düşük-orta güven; ücretsizlik/geçmiş alanları çoğunlukla doğrulanmadı):
+1. **makro_takvim (8 aday; en yüksek güven):** FRED serileri (CPI/PPI/faiz/VIX/kredi spreadi) + federalreserve.gov FOMC takvimi (aynı veri pre-FOMC kartının duyuru saati tablosunu da açar). Ücretsiz, geçmiş uzun. FRED anahtarı gerekir (anahtar repoya girmez).
+2. **alt_1dk (19 aday):** çoğu dakikalık Binance/kripto verisi; Binance arşivi (`data.binance.vision`) 1 dk veriyi zaten ücretsiz sunuyor. ENGEL: DURUM.md karar 3 min zaman dilimini 5 dk yapıyor; bu adaylar ancak bu karar değişirse açılır. (KRX 1 dk gibi hisse satırları dahil değil; "evet/bilinmiyor" içinde karışık.)
+3. **haber_duygu (15 aday; düşük güven):** çoğu ücretli ya da bilinmiyor (haber/duygu/transkript); kripto duygu endeksi gibi bir ücretsiz kaynak olabilir ama doğrulanmadı. "diger" kategorisi (18 evet/bilinmiyor) heterojen, tek veri kaynağı önerilemedi.
+Önerim: önce 1'i (ucuz, belirgin), 2 için karar 3'ü kullanıcıyla konuş, 3'ü açmadan önce kaynakları gerçekten kontrol et.
+
+## Dürüst sınırlar (tur 6)
+- Etiketler yalnız `neden`/`ad` metnine dayanıyor (derin okuma yok; URL çoğunlukla açılmadı). Ücretsiz/geçmiş alanları çoğu satırda bilinmiyor; tablodaki "3 kriter de evet" sayıları bu yüzden alt sınırdır, gerçek sayı daha yüksek olabilir.
+- Hisse satırlarında "işlem bizde hayır" kararı Binance'in ABD hisse/emtia perp'leri (DURUM.md karar 6) göz ardı edilerek verilmiş olabilir: ABD hisse/endeks/emtia geçen ~13 hisse satırı bu açıdan tartışmalı. Dukascopy hisse verisi zaten var; bu satırlar "veri_yok" yerine başka bir engelle (ör. temel veri, çok sembol) elenmiş olabilir.
+- "Tekilleştirme" anahtarı (url, ad); aynı strateji farklı adlarla geçiyorsa mükerrer kalmış olabilir (örn. Asya satır 35 ile 15 aynı makale).
+- Birkaç satırda ajan kaynak tahmini yaptı (ör. Binance public veri, Ken French kütüphanesi) ve notta belirtti; doğrulanmadı.
+- Bir repoda açık FRED API anahtarı görüldü (satır "quant-macro"); değer kopyalanmadı, depo sahibinin iptal etmesi gerekebilir.
+- Yasak kategoriler (ML, HMM, genetik algoritma, ortalama düşürme şüphesi) etiketlendi ama notta işaretlendi; ayrıca dışarıda bırakılmadı.
