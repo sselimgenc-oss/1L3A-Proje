@@ -1,0 +1,1081 @@
+sembol,neden,sira,hacim_30g,ilk_mum,son_mum,delist,medyan_kapanis,tick,step,ilk_ay,son_ay
+BTCUSDT,haric_liste,0,317033651167.8085,2020-01-01 00:00:00+00:00,2026-11-10 00:00:00+00:00,False,28344.5,1.0,1e-05,2020-01,2026-10
+ETHUSDT,haric_liste,0,112080993360.3903,2020-01-01 00:00:00+00:00,2026-11-10 00:00:00+00:00,False,1632.6,0.1,0.0001,2020-01,2026-10
+SOLUSDT,haric_liste,0,35240151327.383995,2020-09-14 00:00:00+00:00,2026-11-10 00:00:00+00:00,False,23.762,0.001,0.01,2020-09,2026-10
+XRPUSDT,haric_liste,0,18626628942.649857,2020-01-06 00:00:00+00:00,2026-11-10 00:00:00+00:00,False,0.52085,1e-05,1.0,2020-01,2026-10
+LINKUSDT,haric_liste,0,17984751395.06285,2020-01-17 00:00:00+00:00,2026-11-10 00:00:00+00:00,False,7.5440000000000005,0.0001,0.1,2020-01,2026-10
+BCHUSDT,haric_liste,0,9808057154.03298,2020-01-01 00:00:00+00:00,2026-11-10 00:00:00+00:00,False,230.75,0.01,0.001,2020-01,2026-10
+DOGEUSDT,haric_liste,0,9126845525.74665,2020-07-10 00:00:00+00:00,2026-11-10 00:00:00+00:00,False,0.061245,1e-06,10.0,2020-07,2026-10
+BNBUSDT,haric_liste,0,6014662014.0192,2020-02-10 00:00:00+00:00,2026-11-10 00:00:00+00:00,False,213.435,0.01,0.001,2020-02,2026-10
+ADAUSDT,haric_liste,0,4095572068.6394997,2020-01-31 00:00:00+00:00,2026-11-10 00:00:00+00:00,False,0.25865,1e-05,1.0,2020-01,2026-10
+TRXUSDT,haric_liste,0,1631968743.5701401,2020-01-15 00:00:00+00:00,2026-11-10 00:00:00+00:00,False,0.088975,1e-06,10.0,2020-01,2026-10
+XLMUSDT,haric_liste,0,1234153990.0704198,2020-01-20 00:00:00+00:00,2026-11-10 00:00:00+00:00,False,0.11073,1e-05,1.0,2020-01,2026-10
+XTZUSDT,ilk_n_disi,0,944176059.9262,2020-02-06 00:00:00+00:00,2026-11-10 00:00:00+00:00,False,0.6755,1e-05,1.0,2020-02,2026-10
+CELOUSDT,ilk_n_disi,0,906944850.7528,2021-09-27 00:00:00+00:00,2026-11-10 00:00:00+00:00,False,0.435,1e-05,1.0,2021-09,2026-10
+CHZUSDT,ilk_n_disi,0,879449655.14105,2021-01-21 00:00:00+00:00,2026-11-10 00:00:00+00:00,False,0.059995,1e-06,10.0,2021-01,2026-10
+LPTUSDT,gecmis_730g_yok,0,874293874.0173,2021-11-11 00:00:00+00:00,2026-11-10 00:00:00+00:00,False,5.871499999999999,0.0001,0.1,2021-11,2026-10
+MTLUSDT,ilk_n_disi,0,826341643.4071001,2021-03-31 00:00:00+00:00,2026-11-10 00:00:00+00:00,False,1.2841,0.0001,0.1,2021-03,2026-10
+FLMUSDT,ilk_n_disi,0,795679467.8237,2020-09-29 00:00:00+00:00,2026-11-10 00:00:00+00:00,False,0.07425,1e-06,10.0,2020-09,2026-10
+SNXUSDT,ilk_n_disi,0,750207377.1208,2020-08-14 00:00:00+00:00,2026-11-10 00:00:00+00:00,False,2.0294999999999996,0.0001,0.1,2020-08,2026-10
+QTUMUSDT,ilk_n_disi,0,739366122.038,2020-02-20 00:00:00+00:00,2026-11-10 00:00:00+00:00,False,2.2504999999999997,0.0001,0.1,2020-02,2026-10
+EGLDUSDT,ilk_n_disi,0,725350975.8280002,2020-09-14 00:00:00+00:00,2026-11-10 00:00:00+00:00,False,24.595,0.001,0.01,2020-09,2026-10
+GRTUSDT,ilk_n_disi,0,723070664.8280802,2020-12-19 00:00:00+00:00,2026-11-10 00:00:00+00:00,False,0.08504,1e-06,10.0,2020-12,2026-10
+XMRUSDT,ilk_n_disi,0,700632076.4956201,2020-02-03 00:00:00+00:00,2026-11-10 00:00:00+00:00,False,153.755,0.01,0.001,2020-02,2026-10
+OCEANUSDT,ilk_n_disi,0,695997814.5725199,2020-11-03 00:00:00+00:00,2026-11-10 00:00:00+00:00,False,0.2999,1e-05,1.0,2020-11,2026-10
+IOTXUSDT,ilk_n_disi,0,693468593.9278799,2021-08-12 00:00:00+00:00,2026-11-10 00:00:00+00:00,False,0.01806,1e-06,10.0,2021-08,2026-10
+HBARUSDT,ilk_n_disi,0,688953840.6905999,2021-03-17 00:00:00+00:00,2026-11-10 00:00:00+00:00,False,0.04832,1e-06,10.0,2021-03,2026-10
+SUSHIUSDT,ilk_n_disi,0,682285230.8842999,2020-09-04 00:00:00+00:00,2026-11-10 00:00:00+00:00,False,0.5726,1e-05,1.0,2020-09,2026-10
+ICPUSDT,ilk_n_disi,0,646081694.9539999,2021-05-11 00:00:00+00:00,2026-11-10 00:00:00+00:00,False,3.1225,0.0001,0.1,2021-05,2026-10
+XEMUSDT,ilk_n_disi,0,624431761.7454,2021-03-03 00:00:00+00:00,2026-11-10 00:00:00+00:00,False,0.026099999999999998,1e-06,10.0,2021-03,2026-10
+C98USDT,ilk_n_disi,0,596807073.8668001,2021-08-24 00:00:00+00:00,2026-11-10 00:00:00+00:00,False,0.1451,1e-05,1.0,2021-08,2026-10
+SXPUSDT,ilk_n_disi,0,561453689.77677,2020-07-21 00:00:00+00:00,2026-06-01 00:00:00+00:00,True,0.27895000000000003,1e-05,1.0,2020-07,2026-05
+LITUSDT,ilk_n_disi,0,538050936.0740999,2021-02-18 00:00:00+00:00,2026-11-10 00:00:00+00:00,False,0.69,1e-05,1.0,2021-02,2026-10
+1000XECUSDT,ilk_n_disi,0,536841991.9732599,2021-09-17 00:00:00+00:00,2026-11-10 00:00:00+00:00,False,0.025125,1e-06,10.0,2021-09,2026-10
+1INCHUSDT,ilk_n_disi,0,525870324.3777001,2020-12-25 00:00:00+00:00,2026-11-10 00:00:00+00:00,False,0.2565,1e-05,1.0,2020-12,2026-10
+VETUSDT,ilk_n_disi,0,515360235.80553,2020-02-14 00:00:00+00:00,2026-11-10 00:00:00+00:00,False,0.01683,1e-06,10.0,2020-02,2026-10
+GTCUSDT,ilk_n_disi,0,511471558.32509995,2021-06-11 00:00:00+00:00,2026-11-10 00:00:00+00:00,False,0.89,1e-05,1.0,2021-06,2026-10
+KAVAUSDT,ilk_n_disi,0,505609835.7271101,2020-07-28 00:00:00+00:00,2026-11-10 00:00:00+00:00,False,0.61485,1e-05,1.0,2020-07,2026-10
+SFPUSDT,ilk_n_disi,0,478234886.1895,2021-02-24 00:00:00+00:00,2026-11-10 00:00:00+00:00,False,0.6236999999999999,1e-05,1.0,2021-02,2026-10
+THETAUSDT,ilk_n_disi,0,461236826.15417004,2020-05-27 00:00:00+00:00,2026-11-10 00:00:00+00:00,False,0.6167499999999999,1e-05,1.0,2020-05,2026-10
+ICXUSDT,ilk_n_disi,0,453064080.12460005,2020-09-15 00:00:00+00:00,2026-11-10 00:00:00+00:00,False,0.17775,1e-05,1.0,2020-09,2026-10
+ONTUSDT,ilk_n_disi,0,434398235.25314,2020-02-11 00:00:00+00:00,2026-11-10 00:00:00+00:00,False,0.1679,1e-05,1.0,2020-02,2026-10
+KLAYUSDT,ilk_n_disi,0,430806804.13684005,2021-10-12 00:00:00+00:00,2026-11-10 00:00:00+00:00,False,0.12235,1e-05,1.0,2021-10,2026-10
+COTIUSDT,ilk_n_disi,0,417400327.8561801,2021-03-10 00:00:00+00:00,2026-11-10 00:00:00+00:00,False,0.039705000000000004,1e-06,10.0,2021-03,2026-10
+ZILUSDT,ilk_n_disi,0,394826035.72189,2020-06-18 00:00:00+00:00,2026-11-10 00:00:00+00:00,False,0.0169,1e-06,10.0,2020-06,2026-10
+RENUSDT,ilk_n_disi,0,384190519.04613,2020-10-13 00:00:00+00:00,2026-11-10 00:00:00+00:00,False,0.04465,1e-06,10.0,2020-10,2026-10
+YFIUSDT,ilk_n_disi,0,375247378.45100003,2020-08-31 00:00:00+00:00,2026-11-10 00:00:00+00:00,False,5262.5,0.1,0.0001,2020-08,2026-10
+OMGUSDT,ilk_n_disi,0,361986191.39166,2020-07-02 00:00:00+00:00,2026-11-10 00:00:00+00:00,False,0.4662,1e-05,1.0,2020-07,2026-10
+ANKRUSDT,ilk_n_disi,0,361134352.99131006,2021-01-26 00:00:00+00:00,2026-11-10 00:00:00+00:00,False,0.019975,1e-06,10.0,2021-01,2026-10
+ALICEUSDT,ilk_n_disi,0,352645995.74970007,2021-03-16 00:00:00+00:00,2026-11-10 00:00:00+00:00,False,0.7044999999999999,1e-05,1.0,2021-03,2026-10
+CHRUSDT,ilk_n_disi,0,331200770.04300004,2021-03-12 00:00:00+00:00,2026-11-10 00:00:00+00:00,False,0.09425,1e-06,10.0,2021-03,2026-10
+CTSIUSDT,ilk_n_disi,0,319058454.56979996,2021-10-26 00:00:00+00:00,2026-11-10 00:00:00+00:00,False,0.12985,1e-05,1.0,2021-10,2026-10
+ARUSDT,ilk_n_disi,0,315689923.8992,2021-09-28 00:00:00+00:00,2026-11-10 00:00:00+00:00,False,4.0125,0.0001,0.1,2021-09,2026-10
+IOTAUSDT,ilk_n_disi,0,299082278.18981,2020-02-12 00:00:00+00:00,2026-11-10 00:00:00+00:00,False,0.15145,1e-05,1.0,2020-02,2026-10
+BELUSDT,ilk_n_disi,0,294759989.21000004,2020-11-18 00:00:00+00:00,2026-11-10 00:00:00+00:00,False,0.57795,1e-05,1.0,2020-11,2026-10
+RLCUSDT,ilk_n_disi,0,286210013.80356,2020-07-31 00:00:00+00:00,2026-11-10 00:00:00+00:00,False,1.0131000000000001,0.0001,0.1,2020-07,2026-10
+ARPAUSDT,ilk_n_disi,0,281241353.32558,2021-10-19 00:00:00+00:00,2026-11-10 00:00:00+00:00,False,0.042615,1e-06,10.0,2021-10,2026-10
+ZECUSDT,haric_liste,0,274791931.51445,2020-02-05 00:00:00+00:00,2026-11-10 00:00:00+00:00,False,26.439999999999998,0.001,0.01,2020-02,2026-10
+KSMUSDT,ilk_n_disi,0,268724555.45199996,2020-10-14 00:00:00+00:00,2026-11-10 00:00:00+00:00,False,18.025,0.001,0.01,2020-10,2026-10
+REEFUSDT,ilk_n_disi,0,262395525.56141198,2021-02-22 00:00:00+00:00,2026-11-10 00:00:00+00:00,False,0.001326,1e-07,100.0,2021-02,2026-10
+IOSTUSDT,ilk_n_disi,0,255908706.359144,2020-02-21 00:00:00+00:00,2026-11-10 00:00:00+00:00,False,0.0072105,1e-07,100.0,2020-02,2026-10
+BATUSDT,ilk_n_disi,0,255434494.77263,2020-02-13 00:00:00+00:00,2026-11-10 00:00:00+00:00,False,0.178,1e-05,1.0,2020-02,2026-10
+ALPHAUSDT,ilk_n_disi,0,254049154.67098,2020-11-23 00:00:00+00:00,2026-11-10 00:00:00+00:00,False,0.07363,1e-06,10.0,2020-11,2026-10
+ONEUSDT,ilk_n_disi,0,249950350.79898,2021-03-18 00:00:00+00:00,2026-11-10 00:00:00+00:00,False,0.00942,1e-07,100.0,2021-03,2026-10
+DENTUSDT,ilk_n_disi,0,240734734.534484,2021-03-24 00:00:00+00:00,2026-11-10 00:00:00+00:00,False,0.000613,1e-08,1000.0,2021-03,2026-10
+RSRUSDT,ilk_n_disi,0,230487348.265528,2020-10-19 00:00:00+00:00,2026-11-10 00:00:00+00:00,False,0.0018119999999999998,1e-07,100.0,2020-10,2026-10
+AUDIOUSDT,ilk_n_disi,0,226923099.57169998,2021-08-19 00:00:00+00:00,2024-05-28 00:00:00+00:00,True,0.14529999999999998,1e-05,1.0,2021-08,2024-05
+DASHUSDT,ilk_n_disi,0,225918599.49893,2020-02-04 00:00:00+00:00,2026-11-10 00:00:00+00:00,False,26.655,0.001,0.01,2020-02,2026-10
+CELRUSDT,ilk_n_disi,0,220169728.43164998,2021-03-29 00:00:00+00:00,2026-11-10 00:00:00+00:00,False,0.012395,1e-06,10.0,2021-03,2026-10
+LRCUSDT,ilk_n_disi,0,211755742.3403,2020-10-19 00:00:00+00:00,2026-11-10 00:00:00+00:00,False,0.17409999999999998,1e-05,1.0,2020-10,2026-10
+ATAUSDT,ilk_n_disi,0,208993498.3251,2021-08-31 00:00:00+00:00,2026-11-10 00:00:00+00:00,False,0.0796,1e-06,10.0,2021-08,2026-10
+ENSUSDT,gecmis_730g_yok,0,204687417.78969997,2021-11-30 00:00:00+00:00,2026-11-10 00:00:00+00:00,False,7.49,0.0001,0.1,2021-11,2026-10
+ZENUSDT,ilk_n_disi,0,202429022.36919993,2020-11-24 00:00:00+00:00,2026-11-10 00:00:00+00:00,False,8.024000000000001,0.0001,0.1,2020-11,2026-10
+RVNUSDT,ilk_n_disi,0,191556875.33954,2021-02-23 00:00:00+00:00,2026-11-10 00:00:00+00:00,False,0.014705,1e-06,10.0,2021-02,2026-10
+SKLUSDT,ilk_n_disi,0,172868847.71436,2020-12-08 00:00:00+00:00,2026-11-10 00:00:00+00:00,False,0.021565,1e-06,10.0,2020-12,2026-10
+NKNUSDT,ilk_n_disi,0,161542346.12020996,2021-04-09 00:00:00+00:00,2026-11-10 00:00:00+00:00,False,0.083685,1e-06,10.0,2021-04,2026-10
+TLMUSDT,ilk_n_disi,0,158034610.61386,2021-07-16 00:00:00+00:00,2026-11-10 00:00:00+00:00,False,0.00998,1e-07,100.0,2021-07,2026-10
+DGBUSDT,ilk_n_disi,0,152756851.48141,2021-04-21 00:00:00+00:00,2026-11-10 00:00:00+00:00,False,0.0064600000000000005,1e-07,100.0,2021-04,2026-10
+BALUSDT,ilk_n_disi,0,141284193.87030002,2020-09-01 00:00:00+00:00,2026-11-10 00:00:00+00:00,False,3.2155,0.0001,0.1,2020-09,2026-10
+BTCDOMUSDT,endeks_kontrat,0,119073161.1305,2021-06-21 00:00:00+00:00,2026-11-10 00:00:00+00:00,False,2059.3500000000004,0.1,0.0001,2021-06,2026-10
+CTKUSDT,ilk_n_disi,0,114789577.12089998,2020-11-19 00:00:00+00:00,2026-11-10 00:00:00+00:00,False,0.43620000000000003,1e-05,1.0,2020-11,2026-10
+DEFIUSDT,endeks_kontrat,0,73607588.83919999,2020-08-28 00:00:00+00:00,2026-11-10 00:00:00+00:00,False,531.05,0.01,0.001,2020-08,2026-10
+BTCSTUSDT,S_de_islem_yok,0,0.0,2021-03-04 00:00:00+00:00,2026-07-29 00:00:00+00:00,True,319.408,0.01,0.001,2021-03,2026-06
+BTSUSDT,S_de_islem_yok,0,0.0,2021-02-01 00:00:00+00:00,2024-05-28 00:00:00+00:00,True,0.01251,1e-06,10.0,2021-02,2024-05
+CVCUSDT,S_de_islem_yok,0,0.0,2020-11-11 00:00:00+00:00,2026-11-10 00:00:00+00:00,False,0.10201,1e-05,1.0,2020-11,2026-10
+HNTUSDT,S_de_islem_yok,0,0.0,2020-09-28 00:00:00+00:00,2024-05-28 00:00:00+00:00,True,1.433,0.0001,0.1,2020-09,2024-05
+RAYUSDT,S_de_islem_yok,0,0.0,2021-08-20 00:00:00+00:00,2026-11-10 00:00:00+00:00,False,0.248,1e-05,1.0,2021-08,2026-10
+SCUSDT,S_de_islem_yok,0,0.0,2021-04-12 00:00:00+00:00,2026-11-10 00:00:00+00:00,False,0.003653,1e-07,100.0,2021-04,2026-10
+SRMUSDT,S_de_islem_yok,0,0.0,2020-09-05 00:00:00+00:00,2024-05-28 00:00:00+00:00,True,0.287,1e-05,1.0,2020-09,2024-05
+0GUSDT,S_de_islem_yok,0,,,,False,,,,2025-09,2026-10
+1000000BOBUSDT,S_de_islem_yok,0,,,,False,,,,2025-06,2026-10
+1000000MOGUSDT,S_de_islem_yok,0,,,,False,,,,2024-11,2026-10
+1000BONKUSDT,S_de_islem_yok,0,,,,False,,,,2023-11,2026-10
+1000BTTCUSDT,S_de_islem_yok,0,,,,False,,,,2022-01,2022-04
+1000CATUSDT,S_de_islem_yok,0,,,,False,,,,2024-10,2026-10
+1000CHEEMSUSDT,S_de_islem_yok,0,,,,False,,,,2024-11,2026-10
+1000FLOKIUSDT,S_de_islem_yok,0,,,,False,,,,2023-05,2026-10
+1000LUNCUSDT,S_de_islem_yok,0,,,,False,,,,2022-09,2026-10
+1000PEPEUSDT,S_de_islem_yok,0,,,,False,,,,2023-05,2026-10
+1000RATSUSDT,S_de_islem_yok,0,,,,False,,,,2023-12,2026-10
+1000SATSUSDT,S_de_islem_yok,0,,,,False,,,,2023-12,2026-10
+1000WHYUSDT,S_de_islem_yok,0,,,,False,,,,2024-11,2026-10
+1000XUSDT,S_de_islem_yok,0,,,,False,,,,2024-11,2026-10
+1MBABYDOGEUSDT,S_de_islem_yok,0,,,,False,,,,2024-09,2026-10
+2ZUSDT,S_de_islem_yok,0,,,,False,,,,2025-10,2026-10
+42USDT,S_de_islem_yok,0,,,,False,,,,2025-10,2026-10
+4USDT,S_de_islem_yok,0,,,,False,,,,2025-10,2026-10
+A2ZUSDT,S_de_islem_yok,0,,,,False,,,,2025-07,2026-10
+AAOIUSDT,S_de_islem_yok,0,,,,False,,,,2026-06,2026-10
+AAPLUSDT,S_de_islem_yok,0,,,,False,,,,2026-04,2026-10
+ABBVUSDT,S_de_islem_yok,0,,,,False,,,,2026-10,2026-10
+ACEUSDT,S_de_islem_yok,0,,,,False,,,,2023-12,2026-10
+ACHUSDT,S_de_islem_yok,0,,,,False,,,,2023-02,2026-10
+ACNUSDT,S_de_islem_yok,0,,,,False,,,,2026-09,2026-10
+ACTUSDT,S_de_islem_yok,0,,,,False,,,,2024-11,2026-10
+ACUUSDT,S_de_islem_yok,0,,,,False,,,,2026-01,2026-10
+ACXUSDT,S_de_islem_yok,0,,,,False,,,,2024-12,2026-10
+ADBEUSDT,S_de_islem_yok,0,,,,False,,,,2026-06,2026-10
+AERGOUSDT,S_de_islem_yok,0,,,,False,,,,2024-09,2026-06
+AEROUSDT,S_de_islem_yok,0,,,,False,,,,2024-12,2026-10
+AEVOUSDT,S_de_islem_yok,0,,,,False,,,,2024-03,2026-10
+AGIXUSDT,S_de_islem_yok,0,,,,False,,,,2023-02,2026-10
+AGLDUSDT,S_de_islem_yok,0,,,,False,,,,2023-07,2026-10
+AGPUUSDT,S_de_islem_yok,0,,,,False,,,,2026-09,2026-10
+AGTUSDT,S_de_islem_yok,0,,,,False,,,,2025-05,2026-10
+AI16ZUSDT,S_de_islem_yok,0,,,,False,,,,2025-01,2026-10
+AIAUSDT,S_de_islem_yok,0,,,,False,,,,2025-09,2026-10
+AIGENSYNUSDT,S_de_islem_yok,0,,,,False,,,,2026-04,2026-10
+AINUSDT,S_de_islem_yok,0,,,,False,,,,2025-07,2026-10
+AIOTUSDT,S_de_islem_yok,0,,,,False,,,,2025-04,2026-10
+AIOUSDT,S_de_islem_yok,0,,,,False,,,,2025-08,2026-10
+AIUSDT,S_de_islem_yok,0,,,,False,,,,2024-01,2026-10
+AIXBTUSDT,S_de_islem_yok,0,,,,False,,,,2024-12,2026-10
+AKAMUSDT,S_de_islem_yok,0,,,,False,,,,2026-10,2026-10
+AKEUSDT,S_de_islem_yok,0,,,,False,,,,2025-09,2026-10
+AKROUSDT,S_de_islem_yok,0,,,,False,,,,2021-01,2022-05
+AKTUSDT,S_de_islem_yok,0,,,,False,,,,2024-11,2026-10
+ALABUSDT,S_de_islem_yok,0,,,,False,,,,2026-06,2026-10
+ALCHUSDT,S_de_islem_yok,0,,,,False,,,,2025-01,2026-10
+ALLOUSDT,S_de_islem_yok,0,,,,False,,,,2025-11,2026-10
+ALLUSDT,S_de_islem_yok,0,,,,False,,,,2025-08,2026-10
+ALPACAUSDT,S_de_islem_yok,0,,,,False,,,,2024-08,2026-10
+ALPINEUSDT,S_de_islem_yok,0,,,,False,,,,2025-05,2026-10
+ALTUSDT,S_de_islem_yok,0,,,,False,,,,2024-01,2026-10
+AMATUSDT,S_de_islem_yok,0,,,,False,,,,2026-06,2026-10
+AMBUSDT,S_de_islem_yok,0,,,,False,,,,2023-03,2026-10
+AMCUSDT,S_de_islem_yok,0,,,,False,,,,2026-09,2026-10
+AMDUSDT,S_de_islem_yok,0,,,,False,,,,2026-05,2026-10
+AMGNUSDT,S_de_islem_yok,0,,,,False,,,,2026-10,2026-10
+AMZNUSDT,S_de_islem_yok,0,,,,False,,,,2026-02,2026-10
+ANCUSDT,S_de_islem_yok,0,,,,False,,,,2022-03,2022-05
+ANETUSDT,S_de_islem_yok,0,,,,False,,,,2026-09,2026-10
+ANIMEUSDT,S_de_islem_yok,0,,,,False,,,,2025-01,2026-10
+ANTHROPICUSDT,S_de_islem_yok,0,,,,False,,,,2026-06,2026-10
+ANTUSDT,S_de_islem_yok,0,,,,False,,,,2021-12,2024-05
+APEUSDT,S_de_islem_yok,0,,,,False,,,,2022-03,2026-10
+API3USDT,S_de_islem_yok,0,,,,False,,,,2022-02,2026-10
+APLDUSDT,S_de_islem_yok,0,,,,False,,,,2026-09,2026-10
+APPUSDT,S_de_islem_yok,0,,,,False,,,,2026-07,2026-10
+APRUSDT,S_de_islem_yok,0,,,,False,,,,2025-10,2026-10
+APTUSDT,S_de_islem_yok,0,,,,False,,,,2022-10,2026-10
+ARBUSDT,S_de_islem_yok,0,,,,False,,,,2023-03,2026-10
+ARCUSDT,S_de_islem_yok,0,,,,False,,,,2025-01,2026-10
+ARIAUSDT,S_de_islem_yok,0,,,,False,,,,2025-09,2026-10
+ARKMUSDT,S_de_islem_yok,0,,,,False,,,,2023-07,2026-10
+ARKUSDT,S_de_islem_yok,0,,,,False,,,,2023-09,2026-10
+ARMUSDT,S_de_islem_yok,0,,,,False,,,,2026-05,2026-10
+ARXUSDT,S_de_islem_yok,0,,,,False,,,,2026-06,2026-10
+ASMLUSDT,S_de_islem_yok,0,,,,False,,,,2026-06,2026-10
+ASRUSDT,S_de_islem_yok,0,,,,False,,,,2025-05,2026-10
+ASTERUSDT,S_de_islem_yok,0,,,,False,,,,2025-09,2026-10
+ASTRUSDT,S_de_islem_yok,0,,,,False,,,,2023-02,2026-10
+ASTSUSDT,S_de_islem_yok,0,,,,False,,,,2026-06,2026-10
+ATHUSDT,S_de_islem_yok,0,,,,False,,,,2025-04,2026-10
+ATUSDT,S_de_islem_yok,0,,,,False,,,,2025-10,2026-10
+AUCTIONUSDT,S_de_islem_yok,0,,,,False,,,,2023-12,2026-10
+AUSDT,S_de_islem_yok,0,,,,False,,,,2025-05,2026-10
+AVAAIUSDT,S_de_islem_yok,0,,,,False,,,,2025-01,2026-10
+AVAUSDT,S_de_islem_yok,0,,,,False,,,,2024-12,2026-10
+AVGOUSDT,S_de_islem_yok,0,,,,False,,,,2026-04,2026-10
+AVNTUSDT,S_de_islem_yok,0,,,,False,,,,2025-09,2026-10
+AWEUSDT,S_de_islem_yok,0,,,,False,,,,2025-05,2026-10
+AXLUSDT,S_de_islem_yok,0,,,,False,,,,2024-03,2026-10
+AXTIUSDT,S_de_islem_yok,0,,,,False,,,,2026-06,2026-10
+AZTECUSDT,S_de_islem_yok,0,,,,False,,,,2026-02,2026-10
+B2USDT,S_de_islem_yok,0,,,,False,,,,2025-05,2026-10
+B3USDT,S_de_islem_yok,0,,,,False,,,,2025-02,2026-10
+BABAUSDT,S_de_islem_yok,0,,,,False,,,,2026-04,2026-10
+BABYUSDT,S_de_islem_yok,0,,,,False,,,,2025-04,2026-10
+BACUSDT,S_de_islem_yok,0,,,,False,,,,2026-10,2026-10
+BADGERUSDT,S_de_islem_yok,0,,,,False,,,,2023-11,2026-10
+BANANAS31USDT,S_de_islem_yok,0,,,,False,,,,2025-03,2026-10
+BANANAUSDT,S_de_islem_yok,0,,,,False,,,,2024-08,2026-10
+BANKUSDT,S_de_islem_yok,0,,,,False,,,,2025-04,2026-10
+BANUSDT,S_de_islem_yok,0,,,,False,,,,2024-11,2026-10
+BARDUSDT,S_de_islem_yok,0,,,,False,,,,2025-09,2026-10
+BASEDUSDT,S_de_islem_yok,0,,,,False,,,,2026-03,2026-10
+BASUSDT,S_de_islem_yok,0,,,,False,,,,2025-08,2026-10
+BBUSDT,S_de_islem_yok,0,,,,False,,,,2024-05,2026-10
+BBXUSDT,S_de_islem_yok,0,,,,False,,,,2026-06,2026-10
+BDXNUSDT,S_de_islem_yok,0,,,,False,,,,2025-06,2026-03
+BEAMXUSDT,S_de_islem_yok,0,,,,False,,,,2023-11,2026-10
+BEATUSDT,S_de_islem_yok,0,,,,False,,,,2025-11,2026-10
+BERAUSDT,S_de_islem_yok,0,,,,False,,,,2025-02,2026-10
+BEUSDT,S_de_islem_yok,0,,,,False,,,,2026-05,2026-10
+BICOUSDT,S_de_islem_yok,0,,,,False,,,,2023-09,2026-10
+BIDUSDT,S_de_islem_yok,0,,,,False,,,,2025-03,2026-10
+BIGTIMEUSDT,S_de_islem_yok,0,,,,False,,,,2023-10,2026-10
+BILLUSDT,S_de_islem_yok,0,,,,False,,,,2026-05,2026-10
+BIOUSDT,S_de_islem_yok,0,,,,False,,,,2025-01,2026-10
+BIRBUSDT,S_de_islem_yok,0,,,,False,,,,2026-01,2026-10
+BITOUSDT,S_de_islem_yok,0,,,,False,,,,2026-07,2026-10
+BLESSUSDT,S_de_islem_yok,0,,,,False,,,,2025-09,2026-10
+BLUAIUSDT,S_de_islem_yok,0,,,,False,,,,2025-10,2026-10
+BLUEBIRDUSDT,S_de_islem_yok,0,,,,False,,,,2022-11,2024-05
+BLURUSDT,S_de_islem_yok,0,,,,False,,,,2023-04,2026-10
+BMNRUSDT,S_de_islem_yok,0,,,,False,,,,2026-06,2026-10
+BMTUSDT,S_de_islem_yok,0,,,,False,,,,2025-03,2026-10
+BNCUSDT,S_de_islem_yok,0,,,,False,,,,2026-07,2026-10
+BNTUSDT,S_de_islem_yok,0,,,,False,,,,2023-08,2026-10
+BNXUSDT,S_de_islem_yok,0,,,,False,,,,2022-04,2026-10
+BOBUSDT,S_de_islem_yok,0,,,,False,,,,2025-11,2026-10
+BOMEUSDT,S_de_islem_yok,0,,,,False,,,,2024-03,2026-10
+BONDUSDT,S_de_islem_yok,0,,,,False,,,,2023-10,2026-10
+BOTUSDT,S_de_islem_yok,0,,,,False,,,,2026-07,2026-10
+BRETTUSDT,S_de_islem_yok,0,,,,False,,,,2024-08,2026-10
+BREVUSDT,S_de_islem_yok,0,,,,False,,,,2025-12,2026-10
+BRKBUSDT,S_de_islem_yok,0,,,,False,,,,2026-05,2026-10
+BROCCOLI714USDT,S_de_islem_yok,0,,,,False,,,,2025-03,2026-10
+BROCCOLIF3BUSDT,S_de_islem_yok,0,,,,False,,,,2025-03,2026-10
+BRUSDT,S_de_islem_yok,0,,,,False,,,,2025-03,2026-10
+BSBUSDT,S_de_islem_yok,0,,,,False,,,,2026-03,2026-10
+BSPUSDT,S_de_islem_yok,0,,,,False,,,,2026-07,2026-10
+BSVUSDT,S_de_islem_yok,0,,,,False,,,,2023-10,2026-10
+BSWUSDT,S_de_islem_yok,0,,,,False,,,,2024-09,2026-10
+BTRUSDT,S_de_islem_yok,0,,,,False,,,,2025-08,2026-10
+BTTUSDT,S_de_islem_yok,0,,,,False,,,,2021-04,2022-01
+BTWUSDT,S_de_islem_yok,0,,,,False,,,,2026-06,2026-10
+BULLAUSDT,S_de_islem_yok,0,,,,False,,,,2025-07,2026-10
+BUSDT,S_de_islem_yok,0,,,,False,,,,2025-05,2026-10
+BWETUSDT,S_de_islem_yok,0,,,,False,,,,2026-09,2026-10
+BXUSDT,S_de_islem_yok,0,,,,False,,,,2026-06,2026-10
+BYDUSDT,S_de_islem_yok,0,,,,False,,,,2026-09,2026-10
+BZRXUSDT,S_de_islem_yok,0,,,,False,,,,2020-09,2021-12
+BZUSDT,S_de_islem_yok,0,,,,False,,,,2026-04,2026-10
+CAKEUSDT,S_de_islem_yok,0,,,,False,,,,2023-11,2026-10
+CAPUSDT,S_de_islem_yok,0,,,,False,,,,2026-06,2026-10
+CARVUSDT,S_de_islem_yok,0,,,,False,,,,2025-08,2026-10
+CATIUSDT,S_de_islem_yok,0,,,,False,,,,2024-09,2026-10
+CATUSDT,S_de_islem_yok,0,,,,False,,,,2026-07,2026-10
+CBRSUSDT,S_de_islem_yok,0,,,,False,,,,2026-05,2026-10
+CCUSDT,S_de_islem_yok,0,,,,False,,,,2025-10,2026-10
+CEGUSDT,S_de_islem_yok,0,,,,False,,,,2026-10,2026-10
+CETUSUSDT,S_de_islem_yok,0,,,,False,,,,2024-11,2026-10
+CFGUSDT,S_de_islem_yok,0,,,,False,,,,2026-03,2026-10
+CFXUSDT,S_de_islem_yok,0,,,,False,,,,2023-02,2026-10
+CGPTUSDT,S_de_islem_yok,0,,,,False,,,,2024-12,2026-10
+CHESSUSDT,S_de_islem_yok,0,,,,False,,,,2024-08,2026-10
+CHILLGUYUSDT,S_de_islem_yok,0,,,,False,,,,2024-11,2026-10
+CHIPUSDT,S_de_islem_yok,0,,,,False,,,,2026-04,2026-10
+CIENUSDT,S_de_islem_yok,0,,,,False,,,,2026-06,2026-10
+CKBUSDT,S_de_islem_yok,0,,,,False,,,,2023-02,2026-10
+CLANKERUSDT,S_de_islem_yok,0,,,,False,,,,2025-11,2026-10
+CLOUSDT,S_de_islem_yok,0,,,,False,,,,2025-10,2026-10
+CLUSDT,S_de_islem_yok,0,,,,False,,,,2026-04,2026-10
+COAIUSDT,S_de_islem_yok,0,,,,False,,,,2025-09,2026-10
+COCOSUSDT,S_de_islem_yok,0,,,,False,,,,2023-02,2024-05
+COHRUSDT,S_de_islem_yok,0,,,,False,,,,2026-05,2026-10
+COINUSDT,S_de_islem_yok,0,,,,False,,,,2026-02,2026-10
+COLLECTUSDT,S_de_islem_yok,0,,,,False,,,,2025-12,2026-10
+COMBOUSDT,S_de_islem_yok,0,,,,False,,,,2023-06,2026-10
+COMMONUSDT,S_de_islem_yok,0,,,,False,,,,2025-10,2026-10
+COOKIEUSDT,S_de_islem_yok,0,,,,False,,,,2025-01,2026-10
+COPPERUSDT,S_de_islem_yok,0,,,,False,,,,2026-03,2026-10
+COSTUSDT,S_de_islem_yok,0,,,,False,,,,2026-06,2026-10
+COSUSDT,S_de_islem_yok,0,,,,False,,,,2024-09,2026-10
+COWUSDT,S_de_islem_yok,0,,,,False,,,,2024-11,2026-10
+CRCLUSDT,S_de_islem_yok,0,,,,False,,,,2026-02,2026-10
+CRDOUSDT,S_de_islem_yok,0,,,,False,,,,2026-06,2026-10
+CRMLUSDT,S_de_islem_yok,0,,,,False,,,,2026-09,2026-10
+CRMUSDT,S_de_islem_yok,0,,,,False,,,,2026-06,2026-10
+CROSSUSDT,S_de_islem_yok,0,,,,False,,,,2025-07,2026-10
+CRWDUSDT,S_de_islem_yok,0,,,,False,,,,2026-06,2026-10
+CRWVUSDT,S_de_islem_yok,0,,,,False,,,,2026-05,2026-10
+CSCOUSDT,S_de_islem_yok,0,,,,False,,,,2026-05,2026-10
+CSOPSAMSUNG2LUSDT,S_de_islem_yok,0,,,,False,,,,2026-08,2026-10
+CSOPSKHYNIX2LUSDT,S_de_islem_yok,0,,,,False,,,,2026-08,2026-10
+CTRUSDT,S_de_islem_yok,0,,,,False,,,,2026-05,2026-10
+CTUSDT,S_de_islem_yok,0,,,,False,,,,2026-10,2026-10
+CUDISUSDT,S_de_islem_yok,0,,,,False,,,,2025-08,2026-10
+CUSDT,S_de_islem_yok,0,,,,False,,,,2025-07,2026-10
+CVNAUSDT,S_de_islem_yok,0,,,,False,,,,2026-09,2026-10
+CVXUSDT,S_de_islem_yok,0,,,,False,,,,2022-09,2026-10
+CXMTUSDT,S_de_islem_yok,0,,,,False,,,,2026-08,2026-10
+CYBERUSDT,S_de_islem_yok,0,,,,False,,,,2023-08,2026-10
+CYPHUSDT,S_de_islem_yok,0,,,,False,,,,2026-09,2026-10
+CYSUSDT,S_de_islem_yok,0,,,,False,,,,2025-12,2026-10
+DAMUSDT,S_de_islem_yok,0,,,,False,,,,2025-08,2026-10
+DARUSDT,S_de_islem_yok,0,,,,False,,,,2022-04,2026-10
+DATAIPUSDT,S_de_islem_yok,0,,,,False,,,,2026-07,2026-10
+DDOGUSDT,S_de_islem_yok,0,,,,False,,,,2026-09,2026-10
+DEEPUSDT,S_de_islem_yok,0,,,,False,,,,2025-04,2026-10
+DEGENUSDT,S_de_islem_yok,0,,,,False,,,,2024-11,2026-10
+DEGOUSDT,S_de_islem_yok,0,,,,False,,,,2024-12,2026-10
+DELLUSDT,S_de_islem_yok,0,,,,False,,,,2026-06,2026-10
+DEXEUSDT,S_de_islem_yok,0,,,,False,,,,2024-12,2026-10
+DFUSDT,S_de_islem_yok,0,,,,False,,,,2024-12,2026-10
+DIAUSDT,S_de_islem_yok,0,,,,False,,,,2024-10,2026-10
+DISUSDT,S_de_islem_yok,0,,,,False,,,,2026-05,2026-10
+DJTUSDT,S_de_islem_yok,0,,,,False,,,,2026-08,2026-10
+DKNGUSDT,S_de_islem_yok,0,,,,False,,,,2026-06,2026-10
+DMCUSDT,S_de_islem_yok,0,,,,False,,,,2025-06,2026-10
+DODOUSDT,S_de_islem_yok,0,,,,False,,,,2021-02,2022-05
+DODOXUSDT,S_de_islem_yok,0,,,,False,,,,2023-08,2026-10
+DOGSUSDT,S_de_islem_yok,0,,,,False,,,,2024-08,2026-10
+DOLOUSDT,S_de_islem_yok,0,,,,False,,,,2025-05,2026-10
+DOODUSDT,S_de_islem_yok,0,,,,False,,,,2025-05,2026-10
+DOSUSDT,S_de_islem_yok,0,,,,False,,,,2026-08,2026-10
+DOTECOUSDT,S_de_islem_yok,0,,,,False,,,,2021-01,2021-02
+DRAMUSDT,S_de_islem_yok,0,,,,False,,,,2026-05,2026-10
+DRIFTUSDT,S_de_islem_yok,0,,,,False,,,,2024-11,2026-10
+DUSDT,S_de_islem_yok,0,,,,False,,,,2025-01,2026-10
+DUSKUSDT,S_de_islem_yok,0,,,,False,,,,2022-01,2026-10
+DYMUSDT,S_de_islem_yok,0,,,,False,,,,2024-02,2026-10
+EBAYUSDT,S_de_islem_yok,0,,,,False,,,,2026-06,2026-10
+EDENUSDT,S_de_islem_yok,0,,,,False,,,,2025-09,2026-10
+EDGEUSDT,S_de_islem_yok,0,,,,False,,,,2026-03,2026-10
+EDUUSDT,S_de_islem_yok,0,,,,False,,,,2023-04,2026-10
+EIDOUSDT,S_de_islem_yok,0,,,,False,,,,2026-10,2026-10
+EIGENUSDT,S_de_islem_yok,0,,,,False,,,,2024-10,2026-10
+ELSAUSDT,S_de_islem_yok,0,,,,False,,,,2026-01,2026-10
+ENAUSDT,S_de_islem_yok,0,,,,False,,,,2024-04,2026-10
+ENSOUSDT,S_de_islem_yok,0,,,,False,,,,2025-10,2026-10
+EPICUSDT,S_de_islem_yok,0,,,,False,,,,2025-03,2026-10
+EPTUSDT,S_de_islem_yok,0,,,,False,,,,2025-04,2026-10
+EQTUSDT,S_de_islem_yok,0,,,,False,,,,2026-10,2026-10
+ERAUSDT,S_de_islem_yok,0,,,,False,,,,2025-07,2026-10
+ESPORTSUSDT,S_de_islem_yok,0,,,,False,,,,2025-07,2026-10
+ESPUSDT,S_de_islem_yok,0,,,,False,,,,2026-02,2026-10
+ETHFIUSDT,S_de_islem_yok,0,,,,False,,,,2024-03,2026-10
+ETHWUSDT,S_de_islem_yok,0,,,,False,,,,2023-11,2026-10
+EULUSDT,S_de_islem_yok,0,,,,False,,,,2025-10,2026-10
+EVAAUSDT,S_de_islem_yok,0,,,,False,,,,2025-10,2026-10
+EWJUSDT,S_de_islem_yok,0,,,,False,,,,2026-03,2026-10
+EWTUSDT,S_de_islem_yok,0,,,,False,,,,2026-06,2026-10
+EWYUSDT,S_de_islem_yok,0,,,,False,,,,2026-03,2026-10
+EWZSUSDT,S_de_islem_yok,0,,,,False,,,,2026-10,2026-10
+EWZUSDT,S_de_islem_yok,0,,,,False,,,,2026-06,2026-10
+FARTCOINUSDT,S_de_islem_yok,0,,,,False,,,,2024-12,2026-10
+FETUSDT,S_de_islem_yok,0,,,,False,,,,2023-01,2026-10
+FFUSDT,S_de_islem_yok,0,,,,False,,,,2025-09,2026-10
+FHEUSDT,S_de_islem_yok,0,,,,False,,,,2025-04,2026-10
+FIDAUSDT,S_de_islem_yok,0,,,,False,,,,2024-09,2026-10
+FIGHTUSDT,S_de_islem_yok,0,,,,False,,,,2026-01,2026-10
+FIOUSDT,S_de_islem_yok,0,,,,False,,,,2024-09,2026-10
+FISUSDT,S_de_islem_yok,0,,,,False,,,,2025-04,2026-10
+FLEXUSDT,S_de_islem_yok,0,,,,False,,,,2026-07,2026-10
+FLNCUSDT,S_de_islem_yok,0,,,,False,,,,2026-05,2026-10
+FLOCKUSDT,S_de_islem_yok,0,,,,False,,,,2025-09,2026-10
+FLOWUSDT,S_de_islem_yok,0,,,,False,,,,2022-02,2026-10
+FLUIDUSDT,S_de_islem_yok,0,,,,False,,,,2025-09,2026-10
+FLUXUSDT,S_de_islem_yok,0,,,,False,,,,2024-09,2026-10
+FOGOUSDT,S_de_islem_yok,0,,,,False,,,,2026-01,2026-10
+FOLKSUSDT,S_de_islem_yok,0,,,,False,,,,2025-11,2026-10
+FOOTBALLUSDT,S_de_islem_yok,0,,,,False,,,,2022-09,2024-05
+FORMUSDT,S_de_islem_yok,0,,,,False,,,,2025-03,2026-10
+FORTHUSDT,S_de_islem_yok,0,,,,False,,,,2025-04,2026-10
+FRAXUSDT,S_de_islem_yok,0,,,,False,,,,2026-01,2026-10
+FRONTUSDT,S_de_islem_yok,0,,,,False,,,,2023-09,2024-09
+FTTUSDT,S_de_islem_yok,0,,,,False,,,,2022-04,2026-10
+FUNUSDT,S_de_islem_yok,0,,,,False,,,,2025-03,2026-10
+FUSDT,S_de_islem_yok,0,,,,False,,,,2025-06,2026-10
+FWDIUSDT,S_de_islem_yok,0,,,,False,,,,2026-07,2026-10
+FXSUSDT,S_de_islem_yok,0,,,,False,,,,2023-01,2026-10
+GALUSDT,S_de_islem_yok,0,,,,False,,,,2022-05,2024-07
+GASUSDT,S_de_islem_yok,0,,,,False,,,,2023-10,2026-10
+GDXUSDT,S_de_islem_yok,0,,,,False,,,,2026-08,2026-10
+GENIUSUSDT,S_de_islem_yok,0,,,,False,,,,2026-04,2026-10
+GEVUSDT,S_de_islem_yok,0,,,,False,,,,2026-07,2026-10
+GHSTUSDT,S_de_islem_yok,0,,,,False,,,,2024-09,2026-10
+GIGADEVUSDT,S_de_islem_yok,0,,,,False,,,,2026-08,2026-10
+GIGGLEUSDT,S_de_islem_yok,0,,,,False,,,,2025-10,2026-10
+GLMRUSDT,S_de_islem_yok,0,,,,False,,,,2023-09,2026-10
+GLMUSDT,S_de_islem_yok,0,,,,False,,,,2024-02,2026-10
+GLWUSDT,S_de_islem_yok,0,,,,False,,,,2026-06,2026-10
+GMEUSDT,S_de_islem_yok,0,,,,False,,,,2026-06,2026-10
+GMTUSDT,S_de_islem_yok,0,,,,False,,,,2022-03,2026-10
+GMXUSDT,S_de_islem_yok,0,,,,False,,,,2023-02,2026-10
+GOATUSDT,S_de_islem_yok,0,,,,False,,,,2024-10,2026-10
+GOOGLUSDT,S_de_islem_yok,0,,,,False,,,,2026-03,2026-10
+GPROUSDT,S_de_islem_yok,0,,,,False,,,,2026-09,2026-10
+GPSUSDT,S_de_islem_yok,0,,,,False,,,,2025-02,2026-10
+GRAMUSDT,S_de_islem_yok,0,,,,False,,,,2026-07,2026-10
+GRASSUSDT,S_de_islem_yok,0,,,,False,,,,2024-11,2026-10
+GRIFFAINUSDT,S_de_islem_yok,0,,,,False,,,,2025-01,2026-10
+GRVTUSDT,S_de_islem_yok,0,,,,False,,,,2026-07,2026-10
+GSUSDT,S_de_islem_yok,0,,,,False,,,,2026-07,2026-10
+GTLBUSDT,S_de_islem_yok,0,,,,False,,,,2026-09,2026-10
+GUAUSDT,S_de_islem_yok,0,,,,False,,,,2025-12,2026-10
+GUNUSDT,S_de_islem_yok,0,,,,False,,,,2025-03,2026-10
+GUSDT,S_de_islem_yok,0,,,,False,,,,2024-08,2026-10
+GWEIUSDT,S_de_islem_yok,0,,,,False,,,,2026-01,2026-10
+HAEDALUSDT,S_de_islem_yok,0,,,,False,,,,2025-05,2026-10
+HANAUSDT,S_de_islem_yok,0,,,,False,,,,2025-09,2026-10
+HANMIUSDT,S_de_islem_yok,0,,,,False,,,,2026-08,2026-10
+HDUSDT,S_de_islem_yok,0,,,,False,,,,2026-05,2026-10
+HEIUSDT,S_de_islem_yok,0,,,,False,,,,2025-02,2026-10
+HEMIUSDT,S_de_islem_yok,0,,,,False,,,,2025-08,2026-10
+HFTUSDT,S_de_islem_yok,0,,,,False,,,,2023-04,2026-10
+HIFIUSDT,S_de_islem_yok,0,,,,False,,,,2023-09,2026-10
+HIGHUSDT,S_de_islem_yok,0,,,,False,,,,2023-02,2026-10
+HIMSUSDT,S_de_islem_yok,0,,,,False,,,,2026-06,2026-10
+HIPPOUSDT,S_de_islem_yok,0,,,,False,,,,2024-11,2026-10
+HIVEUSDT,S_de_islem_yok,0,,,,False,,,,2024-12,2026-10
+HK0625USDT,S_de_islem_yok,0,,,,False,,,,2026-09,2026-10
+HK0700USDT,S_de_islem_yok,0,,,,False,,,,2026-07,2026-10
+HK0992USDT,S_de_islem_yok,0,,,,False,,,,2026-09,2026-10
+HK1810USDT,S_de_islem_yok,0,,,,False,,,,2026-07,2026-10
+HMSTRUSDT,S_de_islem_yok,0,,,,False,,,,2024-09,2026-10
+HOLOUSDT,S_de_islem_yok,0,,,,False,,,,2025-09,2026-10
+HOMEUSDT,S_de_islem_yok,0,,,,False,,,,2025-06,2026-10
+HOODUSDT,S_de_islem_yok,0,,,,False,,,,2026-02,2026-10
+HOOKUSDT,S_de_islem_yok,0,,,,False,,,,2023-01,2026-10
+HPEUSDT,S_de_islem_yok,0,,,,False,,,,2026-06,2026-10
+HUMAUSDT,S_de_islem_yok,0,,,,False,,,,2025-05,2026-10
+HUSDT,S_de_islem_yok,0,,,,False,,,,2025-06,2026-10
+HUTUSDT,S_de_islem_yok,0,,,,False,,,,2026-09,2026-10
+HYPERUSDT,S_de_islem_yok,0,,,,False,,,,2025-04,2026-10
+HYPEUSDT,S_de_islem_yok,0,,,,False,,,,2025-05,2026-10
+HYUNDAIUSDT,S_de_islem_yok,0,,,,False,,,,2026-06,2026-10
+IBKRUSDT,S_de_islem_yok,0,,,,False,,,,2026-10,2026-10
+IBMUSDT,S_de_islem_yok,0,,,,False,,,,2026-06,2026-10
+ICNTUSDT,S_de_islem_yok,0,,,,False,,,,2025-07,2026-10
+IDEXUSDT,S_de_islem_yok,0,,,,False,,,,2023-05,2026-10
+IDOLUSDT,S_de_islem_yok,0,,,,False,,,,2025-07,2026-10
+IDUSDT,S_de_islem_yok,0,,,,False,,,,2023-03,2026-10
+ILVUSDT,S_de_islem_yok,0,,,,False,,,,2023-11,2026-10
+IMXUSDT,S_de_islem_yok,0,,,,False,,,,2022-02,2026-10
+INITUSDT,S_de_islem_yok,0,,,,False,,,,2025-04,2026-10
+INJUSDT,S_de_islem_yok,0,,,,False,,,,2022-08,2026-10
+INTCUSDT,S_de_islem_yok,0,,,,False,,,,2026-02,2026-10
+INTWUSDT,S_de_islem_yok,0,,,,False,,,,2026-07,2026-10
+INUSDT,S_de_islem_yok,0,,,,False,,,,2025-08,2026-10
+INXUSDT,S_de_islem_yok,0,,,,False,,,,2026-01,2026-10
+IONQUSDT,S_de_islem_yok,0,,,,False,,,,2026-08,2026-10
+IOUSDT,S_de_islem_yok,0,,,,False,,,,2024-06,2026-10
+IPUSDT,S_de_islem_yok,0,,,,False,,,,2025-02,2026-10
+IRENUSDT,S_de_islem_yok,0,,,,False,,,,2026-06,2026-10
+IRUSDT,S_de_islem_yok,0,,,,False,,,,2025-12,2026-10
+IRYSUSDT,S_de_islem_yok,0,,,,False,,,,2025-11,2026-10
+IWMUSDT,S_de_islem_yok,0,,,,False,,,,2026-06,2026-10
+JASMYUSDT,S_de_islem_yok,0,,,,False,,,,2022-04,2026-10
+JCTUSDT,S_de_islem_yok,0,,,,False,,,,2025-11,2026-10
+JELLYJELLYUSDT,S_de_islem_yok,0,,,,False,,,,2025-03,2026-10
+JOEUSDT,S_de_islem_yok,0,,,,False,,,,2023-03,2026-10
+JPMUSDT,S_de_islem_yok,0,,,,False,,,,2026-05,2026-10
+JSTUSDT,S_de_islem_yok,0,,,,False,,,,2025-04,2026-10
+JTOUSDT,S_de_islem_yok,0,,,,False,,,,2023-12,2026-10
+JUPUSDT,S_de_islem_yok,0,,,,False,,,,2024-01,2026-10
+KAIAUSDT,S_de_islem_yok,0,,,,False,,,,2024-12,2026-10
+KAITOUSDT,S_de_islem_yok,0,,,,False,,,,2025-02,2026-10
+KASUSDT,S_de_islem_yok,0,,,,False,,,,2023-11,2026-10
+KATUSDT,S_de_islem_yok,0,,,,False,,,,2026-03,2026-10
+KDAUSDT,S_de_islem_yok,0,,,,False,,,,2024-09,2026-10
+KEEPUSDT,S_de_islem_yok,0,,,,False,,,,2021-06,2022-02
+KERNELUSDT,S_de_islem_yok,0,,,,False,,,,2025-04,2026-10
+KEYUSDT,S_de_islem_yok,0,,,,False,,,,2023-05,2026-10
+KGENUSDT,S_de_islem_yok,0,,,,False,,,,2025-10,2026-10
+KITEUSDT,S_de_islem_yok,0,,,,False,,,,2025-10,2026-10
+KLACUSDT,S_de_islem_yok,0,,,,False,,,,2026-06,2026-10
+KMNOUSDT,S_de_islem_yok,0,,,,False,,,,2024-12,2026-10
+KODEX200USDT,S_de_islem_yok,0,,,,False,,,,2026-08,2026-10
+KOMAUSDT,S_de_islem_yok,0,,,,False,,,,2024-12,2026-10
+KORUUSDT,S_de_islem_yok,0,,,,False,,,,2026-06,2026-10
+KOUSDT,S_de_islem_yok,0,,,,False,,,,2026-08,2026-10
+KSTRUSDT,S_de_islem_yok,0,,,,False,,,,2026-07,2026-10
+KUAISHOUUSDT,S_de_islem_yok,0,,,,False,,,,2026-08,2026-10
+LABUSDT,S_de_islem_yok,0,,,,False,,,,2025-10,2026-10
+LAUSDT,S_de_islem_yok,0,,,,False,,,,2025-06,2026-10
+LAYERUSDT,S_de_islem_yok,0,,,,False,,,,2025-02,2026-10
+LDOUSDT,S_de_islem_yok,0,,,,False,,,,2022-09,2026-10
+LENDUSDT,S_de_islem_yok,0,,,,False,,,,2020-07,2020-11
+LEVERUSDT,S_de_islem_yok,0,,,,False,,,,2023-03,2026-10
+LGELECTRONICSUSDT,S_de_islem_yok,0,,,,False,,,,2026-08,2026-10
+LIGHTUSDT,S_de_islem_yok,0,,,,False,,,,2025-09,2026-10
+LINEAUSDT,S_de_islem_yok,0,,,,False,,,,2025-09,2026-10
+LISTAUSDT,S_de_islem_yok,0,,,,False,,,,2024-06,2026-10
+LITEUSDT,S_de_islem_yok,0,,,,False,,,,2026-05,2026-10
+LLYUSDT,S_de_islem_yok,0,,,,False,,,,2026-06,2026-10
+LOKAUSDT,S_de_islem_yok,0,,,,False,,,,2024-09,2026-10
+LOOMUSDT,S_de_islem_yok,0,,,,False,,,,2023-10,2026-10
+LQTYUSDT,S_de_islem_yok,0,,,,False,,,,2023-03,2026-10
+LRCXUSDT,S_de_islem_yok,0,,,,False,,,,2026-06,2026-10
+LSKUSDT,S_de_islem_yok,0,,,,False,,,,2024-01,2026-10
+LUMIAUSDT,S_de_islem_yok,0,,,,False,,,,2024-12,2026-10
+LUNA2USDT,S_de_islem_yok,0,,,,False,,,,2022-09,2026-10
+LUNAUSDT,S_de_islem_yok,0,,,,False,,,,2021-01,2022-05
+LYNUSDT,S_de_islem_yok,0,,,,False,,,,2025-10,2026-10
+LYTEUSDT,S_de_islem_yok,0,,,,False,,,,2026-08,2026-10
+MAGICUSDT,S_de_islem_yok,0,,,,False,,,,2023-01,2026-10
+MAGMAUSDT,S_de_islem_yok,0,,,,False,,,,2025-12,2026-10
+MANTAUSDT,S_de_islem_yok,0,,,,False,,,,2024-01,2026-10
+MANTRAUSDT,S_de_islem_yok,0,,,,False,,,,2026-03,2026-10
+MARAUSDT,S_de_islem_yok,0,,,,False,,,,2026-08,2026-10
+MARSCOINUSDT,S_de_islem_yok,0,,,,False,,,,2026-09,2026-10
+MAVIAUSDT,S_de_islem_yok,0,,,,False,,,,2024-02,2026-10
+MAVUSDT,S_de_islem_yok,0,,,,False,,,,2023-06,2026-10
+MBLUSDT,S_de_islem_yok,0,,,,False,,,,2023-11,2024-05
+MBOXUSDT,S_de_islem_yok,0,,,,False,,,,2024-08,2026-10
+MCDUSDT,S_de_islem_yok,0,,,,False,,,,2026-10,2026-10
+MDBUSDT,S_de_islem_yok,0,,,,False,,,,2026-09,2026-10
+MDTUSDT,S_de_islem_yok,0,,,,False,,,,2023-06,2026-10
+MEGAUSDT,S_de_islem_yok,0,,,,False,,,,2026-01,2026-10
+MEITUANUSDT,S_de_islem_yok,0,,,,False,,,,2026-08,2026-10
+MELANIAUSDT,S_de_islem_yok,0,,,,False,,,,2025-01,2026-10
+MELIUSDT,S_de_islem_yok,0,,,,False,,,,2026-10,2026-10
+MEMEFIUSDT,S_de_islem_yok,0,,,,False,,,,2025-04,2026-10
+MEMEUSDT,S_de_islem_yok,0,,,,False,,,,2023-11,2026-10
+MERLUSDT,S_de_islem_yok,0,,,,False,,,,2025-05,2026-10
+METAUSDT,S_de_islem_yok,0,,,,False,,,,2026-03,2026-10
+METISUSDT,S_de_islem_yok,0,,,,False,,,,2024-03,2026-10
+METUSDT,S_de_islem_yok,0,,,,False,,,,2025-10,2026-10
+MEUSDT,S_de_islem_yok,0,,,,False,,,,2024-12,2026-10
+MEWUSDT,S_de_islem_yok,0,,,,False,,,,2024-06,2026-10
+MILKUSDT,S_de_islem_yok,0,,,,False,,,,2025-05,2026-10
+MINAUSDT,S_de_islem_yok,0,,,,False,,,,2023-02,2026-10
+MINIMAXUSDT,S_de_islem_yok,0,,,,False,,,,2026-07,2026-10
+MIRAUSDT,S_de_islem_yok,0,,,,False,,,,2025-09,2026-10
+MITOUSDT,S_de_islem_yok,0,,,,False,,,,2025-08,2026-10
+MLNUSDT,S_de_islem_yok,0,,,,False,,,,2025-03,2026-10
+MMTUSDT,S_de_islem_yok,0,,,,False,,,,2025-11,2026-10
+MOCAUSDT,S_de_islem_yok,0,,,,False,,,,2024-12,2026-10
+MONUSDT,S_de_islem_yok,0,,,,False,,,,2025-10,2026-10
+MOODENGUSDT,S_de_islem_yok,0,,,,False,,,,2024-10,2026-10
+MOONSHOTUSDT,S_de_islem_yok,0,,,,False,,,,2026-09,2026-10
+MORPHOUSDT,S_de_islem_yok,0,,,,False,,,,2024-11,2026-10
+MOVEUSDT,S_de_islem_yok,0,,,,False,,,,2024-12,2026-10
+MOVRUSDT,S_de_islem_yok,0,,,,False,,,,2023-12,2026-10
+MPUSDT,S_de_islem_yok,0,,,,False,,,,2026-09,2026-10
+MRKUSDT,S_de_islem_yok,0,,,,False,,,,2026-08,2026-10
+MRNAUSDT,S_de_islem_yok,0,,,,False,,,,2026-08,2026-10
+MRVLUSDT,S_de_islem_yok,0,,,,False,,,,2026-05,2026-10
+MSFTUSDT,S_de_islem_yok,0,,,,False,,,,2026-04,2026-10
+MSTRUSDT,S_de_islem_yok,0,,,,False,,,,2026-02,2026-10
+MSTUUSDT,S_de_islem_yok,0,,,,False,,,,2026-10,2026-10
+MUBARAKUSDT,S_de_islem_yok,0,,,,False,,,,2025-03,2026-10
+MUSDT,S_de_islem_yok,0,,,,False,,,,2025-07,2026-10
+MUUSDT,S_de_islem_yok,0,,,,False,,,,2026-04,2026-10
+MUUUSDT,S_de_islem_yok,0,,,,False,,,,2026-07,2026-10
+MVLLUSDT,S_de_islem_yok,0,,,,False,,,,2026-06,2026-10
+MYROUSDT,S_de_islem_yok,0,,,,False,,,,2024-03,2026-10
+MYXUSDT,S_de_islem_yok,0,,,,False,,,,2025-06,2026-10
+NAORISUSDT,S_de_islem_yok,0,,,,False,,,,2025-07,2026-10
+NATGASUSDT,S_de_islem_yok,0,,,,False,,,,2026-04,2026-10
+NAVERUSDT,S_de_islem_yok,0,,,,False,,,,2026-08,2026-10
+NBISUSDT,S_de_islem_yok,0,,,,False,,,,2026-05,2026-10
+NEIROETHUSDT,S_de_islem_yok,0,,,,False,,,,2024-09,2026-10
+NEIROUSDT,S_de_islem_yok,0,,,,False,,,,2024-09,2026-10
+NETUSDT,S_de_islem_yok,0,,,,False,,,,2026-08,2026-10
+NEWTUSDT,S_de_islem_yok,0,,,,False,,,,2025-06,2026-10
+NFLXUSDT,S_de_islem_yok,0,,,,False,,,,2026-06,2026-10
+NFPUSDT,S_de_islem_yok,0,,,,False,,,,2023-12,2026-10
+NIGHTUSDT,S_de_islem_yok,0,,,,False,,,,2025-12,2026-10
+NILUSDT,S_de_islem_yok,0,,,,False,,,,2025-03,2026-10
+NKEUSDT,S_de_islem_yok,0,,,,False,,,,2026-09,2026-10
+NMRUSDT,S_de_islem_yok,0,,,,False,,,,2023-06,2026-10
+NOKUSDT,S_de_islem_yok,0,,,,False,,,,2026-06,2026-10
+NOMUSDT,S_de_islem_yok,0,,,,False,,,,2025-10,2026-10
+NOTUSDT,S_de_islem_yok,0,,,,False,,,,2024-05,2026-10
+NOWUSDT,S_de_islem_yok,0,,,,False,,,,2026-06,2026-10
+NTRNUSDT,S_de_islem_yok,0,,,,False,,,,2023-11,2026-10
+NULSUSDT,S_de_islem_yok,0,,,,False,,,,2024-08,2026-10
+NUUSDT,S_de_islem_yok,0,,,,False,,,,2021-10,2022-02
+NVDAUSDT,S_de_islem_yok,0,,,,False,,,,2026-03,2026-10
+NVDLUSDT,S_de_islem_yok,0,,,,False,,,,2026-09,2026-10
+NVOUSDT,S_de_islem_yok,0,,,,False,,,,2026-06,2026-10
+NXPCUSDT,S_de_islem_yok,0,,,,False,,,,2025-05,2026-10
+OBOLUSDT,S_de_islem_yok,0,,,,False,,,,2025-05,2026-10
+OGUSDT,S_de_islem_yok,0,,,,False,,,,2025-05,2026-10
+OKLOUSDT,S_de_islem_yok,0,,,,False,,,,2026-09,2026-10
+OLUSDT,S_de_islem_yok,0,,,,False,,,,2025-06,2026-10
+OMNIUSDT,S_de_islem_yok,0,,,,False,,,,2024-04,2026-10
+OMUSDT,S_de_islem_yok,0,,,,False,,,,2024-02,2026-10
+ONDOUSDT,S_de_islem_yok,0,,,,False,,,,2024-01,2026-10
+ONDSUSDT,S_de_islem_yok,0,,,,False,,,,2026-06,2026-10
+ONGUSDT,S_de_islem_yok,0,,,,False,,,,2023-11,2026-10
+ONUSDT,S_de_islem_yok,0,,,,False,,,,2025-10,2026-10
+OPENAIUSDT,S_de_islem_yok,0,,,,False,,,,2026-05,2026-10
+OPENUSDT,S_de_islem_yok,0,,,,False,,,,2025-09,2026-10
+OPGUSDT,S_de_islem_yok,0,,,,False,,,,2026-04,2026-10
+OPNUSDT,S_de_islem_yok,0,,,,False,,,,2026-02,2026-10
+OPUSDT,S_de_islem_yok,0,,,,False,,,,2022-06,2026-10
+ORBSUSDT,S_de_islem_yok,0,,,,False,,,,2023-10,2026-10
+ORCAUSDT,S_de_islem_yok,0,,,,False,,,,2024-12,2026-10
+ORCLUSDT,S_de_islem_yok,0,,,,False,,,,2026-05,2026-10
+ORDERUSDT,S_de_islem_yok,0,,,,False,,,,2025-09,2026-10
+ORDIUSDT,S_de_islem_yok,0,,,,False,,,,2023-11,2026-10
+OURAUSDT,S_de_islem_yok,0,,,,False,,,,2026-09,2026-10
+OUSDT,S_de_islem_yok,0,,,,False,,,,2026-06,2026-10
+OXTUSDT,S_de_islem_yok,0,,,,False,,,,2023-08,2026-10
+OXYUSDT,S_de_islem_yok,0,,,,False,,,,2026-10,2026-10
+PANWUSDT,S_de_islem_yok,0,,,,False,,,,2026-07,2026-10
+PARTIUSDT,S_de_islem_yok,0,,,,False,,,,2025-03,2026-10
+PATHUSDT,S_de_islem_yok,0,,,,False,,,,2026-09,2026-10
+PAXGUSDT,S_de_islem_yok,0,,,,False,,,,2025-03,2026-10
+PAYPUSDT,S_de_islem_yok,0,,,,False,,,,2026-03,2026-10
+PDDUSDT,S_de_islem_yok,0,,,,False,,,,2026-08,2026-10
+PENDLEUSDT,S_de_islem_yok,0,,,,False,,,,2023-07,2026-10
+PENGUSDT,S_de_islem_yok,0,,,,False,,,,2026-07,2026-10
+PENGUUSDT,S_de_islem_yok,0,,,,False,,,,2024-12,2026-10
+PEOPLEUSDT,S_de_islem_yok,0,,,,False,,,,2021-12,2026-10
+PERPUSDT,S_de_islem_yok,0,,,,False,,,,2023-03,2026-10
+PFEUSDT,S_de_islem_yok,0,,,,False,,,,2026-10,2026-10
+PHAROSUSDT,S_de_islem_yok,0,,,,False,,,,2026-05,2026-10
+PHAUSDT,S_de_islem_yok,0,,,,False,,,,2024-12,2026-10
+PHBUSDT,S_de_islem_yok,0,,,,False,,,,2023-02,2026-10
+PIEVERSEUSDT,S_de_islem_yok,0,,,,False,,,,2025-11,2026-10
+PIPPINUSDT,S_de_islem_yok,0,,,,False,,,,2025-01,2026-10
+PIXELUSDT,S_de_islem_yok,0,,,,False,,,,2024-02,2026-10
+PLAYUSDT,S_de_islem_yok,0,,,,False,,,,2025-07,2026-10
+PLTRUSDT,S_de_islem_yok,0,,,,False,,,,2026-02,2026-10
+PLUMEUSDT,S_de_islem_yok,0,,,,False,,,,2025-03,2026-10
+PNUTUSDT,S_de_islem_yok,0,,,,False,,,,2024-11,2026-10
+POLUSDT,S_de_islem_yok,0,,,,False,,,,2024-09,2026-10
+POLYXUSDT,S_de_islem_yok,0,,,,False,,,,2023-10,2026-10
+PONKEUSDT,S_de_islem_yok,0,,,,False,,,,2024-11,2026-10
+PONSUSDT,S_de_islem_yok,0,,,,False,,,,2026-09,2026-10
+POPCATUSDT,S_de_islem_yok,0,,,,False,,,,2024-08,2026-10
+POPMARTUSDT,S_de_islem_yok,0,,,,False,,,,2026-07,2026-10
+PORT3USDT,S_de_islem_yok,0,,,,False,,,,2025-06,2026-10
+PORTALUSDT,S_de_islem_yok,0,,,,False,,,,2024-02,2026-10
+POWERUSDT,S_de_islem_yok,0,,,,False,,,,2025-12,2026-10
+POWRUSDT,S_de_islem_yok,0,,,,False,,,,2023-10,2026-10
+PREDICTUSDT,S_de_islem_yok,0,,,,False,,,,2026-10,2026-10
+PRLUSDT,S_de_islem_yok,0,,,,False,,,,2026-04,2026-10
+PROMPTUSDT,S_de_islem_yok,0,,,,False,,,,2025-04,2026-10
+PROMUSDT,S_de_islem_yok,0,,,,False,,,,2025-01,2026-10
+PROVEUSDT,S_de_islem_yok,0,,,,False,,,,2025-08,2026-10
+PTBUSDT,S_de_islem_yok,0,,,,False,,,,2025-09,2026-10
+PUFFERUSDT,S_de_islem_yok,0,,,,False,,,,2025-06,2026-10
+PUMPBTCUSDT,S_de_islem_yok,0,,,,False,,,,2025-06,2026-10
+PUMPUSDT,S_de_islem_yok,0,,,,False,,,,2025-04,2026-10
+PUNDIXUSDT,S_de_islem_yok,0,,,,False,,,,2025-04,2026-10
+PYPLUSDT,S_de_islem_yok,0,,,,False,,,,2026-07,2026-10
+PYTHUSDT,S_de_islem_yok,0,,,,False,,,,2023-11,2026-10
+QCOMUSDT,S_de_islem_yok,0,,,,False,,,,2026-05,2026-10
+QNTUSDT,S_de_islem_yok,0,,,,False,,,,2022-10,2026-10
+QNTXUSDT,S_de_islem_yok,0,,,,False,,,,2026-05,2026-10
+QQQUSDT,S_de_islem_yok,0,,,,False,,,,2026-04,2026-10
+QUICKUSDT,S_de_islem_yok,0,,,,False,,,,2024-09,2026-10
+QUSDT,S_de_islem_yok,0,,,,False,,,,2025-09,2026-10
+RADUSDT,S_de_islem_yok,0,,,,False,,,,2023-05,2026-10
+RAMUSDT,S_de_islem_yok,0,,,,False,,,,2026-08,2026-10
+RAREUSDT,S_de_islem_yok,0,,,,False,,,,2024-08,2026-10
+RAVEUSDT,S_de_islem_yok,0,,,,False,,,,2025-12,2026-10
+RAYSOLUSDT,S_de_islem_yok,0,,,,False,,,,2024-12,2026-10
+RDDTUSDT,S_de_islem_yok,0,,,,False,,,,2026-08,2026-10
+RDNTUSDT,S_de_islem_yok,0,,,,False,,,,2023-04,2026-10
+RDWUSDT,S_de_islem_yok,0,,,,False,,,,2026-10,2026-10
+RECALLUSDT,S_de_islem_yok,0,,,,False,,,,2025-10,2026-10
+REDUSDT,S_de_islem_yok,0,,,,False,,,,2025-03,2026-10
+REIUSDT,S_de_islem_yok,0,,,,False,,,,2024-09,2026-10
+RENDERUSDT,S_de_islem_yok,0,,,,False,,,,2024-07,2026-10
+RESOLVUSDT,S_de_islem_yok,0,,,,False,,,,2025-06,2026-10
+REUSDT,S_de_islem_yok,0,,,,False,,,,2026-06,2026-10
+REZUSDT,S_de_islem_yok,0,,,,False,,,,2024-04,2026-10
+RIFUSDT,S_de_islem_yok,0,,,,False,,,,2023-10,2026-10
+RIVERUSDT,S_de_islem_yok,0,,,,False,,,,2025-10,2026-10
+RIVNUSDT,S_de_islem_yok,0,,,,False,,,,2026-06,2026-10
+RKLBUSDT,S_de_islem_yok,0,,,,False,,,,2026-05,2026-10
+RLSUSDT,S_de_islem_yok,0,,,,False,,,,2025-12,2026-10
+RNDRUSDT,S_de_islem_yok,0,,,,False,,,,2023-02,2024-07
+ROBOUSDT,S_de_islem_yok,0,,,,False,,,,2026-02,2026-10
+RONINUSDT,S_de_islem_yok,0,,,,False,,,,2024-02,2026-10
+ROSEUSDT,S_de_islem_yok,0,,,,False,,,,2021-12,2026-10
+RPLUSDT,S_de_islem_yok,0,,,,False,,,,2024-09,2026-10
+RUMUSDT,S_de_islem_yok,0,,,,False,,,,2026-09,2026-10
+RVVUSDT,S_de_islem_yok,0,,,,False,,,,2025-10,2026-10
+SAFEUSDT,S_de_islem_yok,0,,,,False,,,,2024-10,2026-10
+SAGAUSDT,S_de_islem_yok,0,,,,False,,,,2024-04,2026-10
+SAHARAUSDT,S_de_islem_yok,0,,,,False,,,,2025-06,2026-10
+SAMSUNGEMUSDT,S_de_islem_yok,0,,,,False,,,,2026-08,2026-10
+SAMSUNGUSDT,S_de_islem_yok,0,,,,False,,,,2026-06,2026-10
+SANTOSUSDT,S_de_islem_yok,0,,,,False,,,,2024-10,2026-10
+SAPIENUSDT,S_de_islem_yok,0,,,,False,,,,2025-08,2026-10
+SCRTUSDT,S_de_islem_yok,0,,,,False,,,,2024-11,2026-10
+SCRUSDT,S_de_islem_yok,0,,,,False,,,,2024-10,2026-10
+SECZUSDT,S_de_islem_yok,0,,,,False,,,,2026-09,2026-10
+SEIUSDT,S_de_islem_yok,0,,,,False,,,,2023-08,2026-10
+SENTUSDT,S_de_islem_yok,0,,,,False,,,,2025-11,2026-10
+SHAZUSDT,S_de_islem_yok,0,,,,False,,,,2026-07,2026-10
+SHELLUSDT,S_de_islem_yok,0,,,,False,,,,2025-02,2026-10
+SHOPUSDT,S_de_islem_yok,0,,,,False,,,,2026-08,2026-10
+SIGNUSDT,S_de_islem_yok,0,,,,False,,,,2025-04,2026-10
+SIRENUSDT,S_de_islem_yok,0,,,,False,,,,2025-03,2026-10
+SKATEUSDT,S_de_islem_yok,0,,,,False,,,,2025-06,2026-10
+SKDDUSDT,S_de_islem_yok,0,,,,False,,,,2026-08,2026-10
+SKHYNIXUSDT,S_de_islem_yok,0,,,,False,,,,2026-06,2026-10
+SKHYUSDT,S_de_islem_yok,0,,,,False,,,,2026-07,2026-10
+SKRUSDT,S_de_islem_yok,0,,,,False,,,,2026-01,2026-10
+SKUUUSDT,S_de_islem_yok,0,,,,False,,,,2026-08,2026-10
+SKYAIUSDT,S_de_islem_yok,0,,,,False,,,,2025-05,2026-10
+SKYUSDT,S_de_islem_yok,0,,,,False,,,,2025-09,2026-10
+SLERFUSDT,S_de_islem_yok,0,,,,False,,,,2024-11,2026-10
+SLPUSDT,S_de_islem_yok,0,,,,False,,,,2023-10,2026-10
+SLXUSDT,S_de_islem_yok,0,,,,False,,,,2026-06,2026-10
+SMCIUSDT,S_de_islem_yok,0,,,,False,,,,2026-06,2026-10
+SMHUSDT,S_de_islem_yok,0,,,,False,,,,2026-07,2026-10
+SMRUSDT,S_de_islem_yok,0,,,,False,,,,2026-10,2026-10
+SNDKUSDT,S_de_islem_yok,0,,,,False,,,,2026-04,2026-10
+SNOWUSDT,S_de_islem_yok,0,,,,False,,,,2026-07,2026-10
+SNPSUSDT,S_de_islem_yok,0,,,,False,,,,2026-10,2026-10
+SNTUSDT,S_de_islem_yok,0,,,,False,,,,2023-11,2026-10
+SNXXUSDT,S_de_islem_yok,0,,,,False,,,,2026-07,2026-10
+SOFIUSDT,S_de_islem_yok,0,,,,False,,,,2026-07,2026-10
+SOLVUSDT,S_de_islem_yok,0,,,,False,,,,2025-01,2026-10
+SOMIUSDT,S_de_islem_yok,0,,,,False,,,,2025-08,2026-10
+SONICUSDT,S_de_islem_yok,0,,,,False,,,,2025-01,2026-10
+SONYUSDT,S_de_islem_yok,0,,,,False,,,,2026-06,2026-10
+SOONUSDT,S_de_islem_yok,0,,,,False,,,,2025-05,2026-10
+SOPHUSDT,S_de_islem_yok,0,,,,False,,,,2025-05,2026-10
+SOXLUSDT,S_de_islem_yok,0,,,,False,,,,2026-05,2026-10
+SOXSUSDT,S_de_islem_yok,0,,,,False,,,,2026-07,2026-10
+SPACEUSDT,S_de_islem_yok,0,,,,False,,,,2026-01,2026-10
+SPCXUSDT,S_de_islem_yok,0,,,,False,,,,2026-05,2026-10
+SPELLUSDT,S_de_islem_yok,0,,,,False,,,,2022-09,2026-10
+SPKUSDT,S_de_islem_yok,0,,,,False,,,,2025-06,2026-10
+SPORTFUNUSDT,S_de_islem_yok,0,,,,False,,,,2026-01,2026-10
+SPXUSDT,S_de_islem_yok,0,,,,False,,,,2024-12,2026-10
+SPYUSDT,S_de_islem_yok,0,,,,False,,,,2026-04,2026-10
+SQDUSDT,S_de_islem_yok,0,,,,False,,,,2025-06,2026-10
+SQQQUSDT,S_de_islem_yok,0,,,,False,,,,2026-06,2026-10
+SSVUSDT,S_de_islem_yok,0,,,,False,,,,2023-02,2026-10
+STABLEUSDT,S_de_islem_yok,0,,,,False,,,,2025-11,2026-10
+STARUSDT,S_de_islem_yok,0,,,,False,,,,2026-05,2026-10
+STBLUSDT,S_de_islem_yok,0,,,,False,,,,2025-09,2026-10
+STEEMUSDT,S_de_islem_yok,0,,,,False,,,,2023-11,2026-10
+STGUSDT,S_de_islem_yok,0,,,,False,,,,2022-08,2026-10
+STMUSDT,S_de_islem_yok,0,,,,False,,,,2026-10,2026-10
+STOUSDT,S_de_islem_yok,0,,,,False,,,,2025-04,2026-10
+STPTUSDT,S_de_islem_yok,0,,,,False,,,,2023-10,2026-10
+STRAXUSDT,S_de_islem_yok,0,,,,False,,,,2023-10,2026-10
+STRCUSDT,S_de_islem_yok,0,,,,False,,,,2026-07,2026-10
+STRKUSDT,S_de_islem_yok,0,,,,False,,,,2024-02,2026-10
+STXUSDT,S_de_islem_yok,0,,,,False,,,,2023-02,2026-10
+STXXUSDT,S_de_islem_yok,0,,,,False,,,,2026-06,2026-10
+SUIUSDT,S_de_islem_yok,0,,,,False,,,,2023-05,2026-10
+SUNUSDT,S_de_islem_yok,0,,,,False,,,,2024-08,2026-10
+SUPERUSDT,S_de_islem_yok,0,,,,False,,,,2023-11,2026-10
+SUSDT,S_de_islem_yok,0,,,,False,,,,2025-01,2026-10
+SWARMSUSDT,S_de_islem_yok,0,,,,False,,,,2025-01,2026-10
+SWELLUSDT,S_de_islem_yok,0,,,,False,,,,2024-11,2026-10
+SXTUSDT,S_de_islem_yok,0,,,,False,,,,2025-05,2026-10
+SYNUSDT,S_de_islem_yok,0,,,,False,,,,2024-08,2026-10
+SYRUPUSDT,S_de_islem_yok,0,,,,False,,,,2025-05,2026-10
+SYSUSDT,S_de_islem_yok,0,,,,False,,,,2024-08,2026-10
+TACUSDT,S_de_islem_yok,0,,,,False,,,,2025-07,2026-10
+TAGUSDT,S_de_islem_yok,0,,,,False,,,,2025-07,2026-10
+TAIKOUSDT,S_de_islem_yok,0,,,,False,,,,2025-06,2026-10
+TAKEUSDT,S_de_islem_yok,0,,,,False,,,,2025-09,2026-10
+TANSSIUSDT,S_de_islem_yok,0,,,,False,,,,2025-07,2026-10
+TAOUSDT,S_de_islem_yok,0,,,,False,,,,2024-04,2026-10
+TAUSDT,S_de_islem_yok,0,,,,False,,,,2025-07,2026-10
+TBTUSDT,S_de_islem_yok,0,,,,False,,,,2026-07,2026-10
+TEAMUSDT,S_de_islem_yok,0,,,,False,,,,2026-09,2026-10
+TEMUSDT,S_de_islem_yok,0,,,,False,,,,2026-08,2026-10
+TENCENTUSDT,S_de_islem_yok,0,,,,False,,,,2026-07,2026-10
+TERUSDT,S_de_islem_yok,0,,,,False,,,,2026-07,2026-10
+THEUSDT,S_de_islem_yok,0,,,,False,,,,2024-11,2026-10
+TIAUSDT,S_de_islem_yok,0,,,,False,,,,2023-10,2026-10
+TMFUSDT,S_de_islem_yok,0,,,,False,,,,2026-07,2026-10
+TNSRUSDT,S_de_islem_yok,0,,,,False,,,,2024-04,2026-10
+TOKENUSDT,S_de_islem_yok,0,,,,False,,,,2023-11,2026-10
+TONUSDT,S_de_islem_yok,0,,,,False,,,,2024-03,2026-10
+TOSHIUSDT,S_de_islem_yok,0,,,,False,,,,2025-09,2026-10
+TOWNSUSDT,S_de_islem_yok,0,,,,False,,,,2025-08,2026-10
+TQQQUSDT,S_de_islem_yok,0,,,,False,,,,2026-06,2026-10
+TRADOORUSDT,S_de_islem_yok,0,,,,False,,,,2025-09,2026-10
+TREEUSDT,S_de_islem_yok,0,,,,False,,,,2025-07,2026-10
+TRIAUSDT,S_de_islem_yok,0,,,,False,,,,2026-02,2026-10
+TROYUSDT,S_de_islem_yok,0,,,,False,,,,2024-10,2026-10
+TRUMPUSDT,S_de_islem_yok,0,,,,False,,,,2025-01,2026-10
+TRUSTUSDT,S_de_islem_yok,0,,,,False,,,,2025-11,2026-10
+TRUTHUSDT,S_de_islem_yok,0,,,,False,,,,2025-10,2026-10
+TRUUSDT,S_de_islem_yok,0,,,,False,,,,2023-03,2026-10
+TSLAUSDT,S_de_islem_yok,0,,,,False,,,,2026-01,2026-10
+TSLLUSDT,S_de_islem_yok,0,,,,False,,,,2026-09,2026-10
+TSMUSDT,S_de_islem_yok,0,,,,False,,,,2026-04,2026-10
+TSTUSDT,S_de_islem_yok,0,,,,False,,,,2025-02,2026-10
+TTWOUSDT,S_de_islem_yok,0,,,,False,,,,2026-07,2026-10
+TURBOUSDT,S_de_islem_yok,0,,,,False,,,,2024-05,2026-10
+TURTLEUSDT,S_de_islem_yok,0,,,,False,,,,2025-10,2026-10
+TUSDT,S_de_islem_yok,0,,,,False,,,,2023-02,2026-10
+TUTUSDT,S_de_islem_yok,0,,,,False,,,,2025-03,2026-10
+TWSTUSDT,S_de_islem_yok,0,,,,False,,,,2026-09,2026-10
+TWTUSDT,S_de_islem_yok,0,,,,False,,,,2023-11,2026-10
+TXNUSDT,S_de_islem_yok,0,,,,False,,,,2026-07,2026-10
+TZAUSDT,S_de_islem_yok,0,,,,False,,,,2026-07,2026-10
+UAIUSDT,S_de_islem_yok,0,,,,False,,,,2025-11,2026-10
+UBERUSDT,S_de_islem_yok,0,,,,False,,,,2026-05,2026-10
+UBUSDT,S_de_islem_yok,0,,,,False,,,,2025-09,2026-10
+UMAUSDT,S_de_islem_yok,0,,,,False,,,,2023-05,2026-10
+UNHUSDT,S_de_islem_yok,0,,,,False,,,,2026-09,2026-10
+UNITREEUSDT,S_de_islem_yok,0,,,,False,,,,2026-08,2026-10
+URNMUSDT,S_de_islem_yok,0,,,,False,,,,2026-06,2026-10
+USARUSDT,S_de_islem_yok,0,,,,False,,,,2026-05,2026-10
+USDBRLUSDT,S_de_islem_yok,0,,,,False,,,,2026-09,2026-10
+USDCUSDT,S_de_islem_yok,0,,,,False,,,,2023-03,2026-10
+USDEXUSDT,S_de_islem_yok,0,,,,False,,,,2026-10,2026-10
+USELESSUSDT,S_de_islem_yok,0,,,,False,,,,2025-08,2026-10
+USTCUSDT,S_de_islem_yok,0,,,,False,,,,2023-11,2026-10
+USUALUSDT,S_de_islem_yok,0,,,,False,,,,2024-12,2026-10
+USUSDT,S_de_islem_yok,0,,,,False,,,,2025-12,2026-10
+UVXYUSDT,S_de_islem_yok,0,,,,False,,,,2026-06,2026-10
+UXLINKUSDT,S_de_islem_yok,0,,,,False,,,,2024-09,2026-10
+VANAUSDT,S_de_islem_yok,0,,,,False,,,,2024-12,2026-10
+VANRYUSDT,S_de_islem_yok,0,,,,False,,,,2024-03,2026-10
+VELODROMEUSDT,S_de_islem_yok,0,,,,False,,,,2024-12,2026-10
+VELVETUSDT,S_de_islem_yok,0,,,,False,,,,2025-07,2026-10
+VFYUSDT,S_de_islem_yok,0,,,,False,,,,2025-09,2026-10
+VICUSDT,S_de_islem_yok,0,,,,False,,,,2025-03,2026-10
+VIDTUSDT,S_de_islem_yok,0,,,,False,,,,2024-08,2026-10
+VINEUSDT,S_de_islem_yok,0,,,,False,,,,2025-01,2026-10
+VIRTUALUSDT,S_de_islem_yok,0,,,,False,,,,2024-12,2026-10
+VKTXUSDT,S_de_islem_yok,0,,,,False,,,,2026-10,2026-10
+VOXELUSDT,S_de_islem_yok,0,,,,False,,,,2024-08,2026-10
+VRTUSDT,S_de_islem_yok,0,,,,False,,,,2026-07,2026-10
+VSTUSDT,S_de_islem_yok,0,,,,False,,,,2026-08,2026-10
+VTHOUSDT,S_de_islem_yok,0,,,,False,,,,2025-01,2026-10
+VUSDT,S_de_islem_yok,0,,,,False,,,,2026-05,2026-10
+VVVUSDT,S_de_islem_yok,0,,,,False,,,,2025-01,2026-10
+WALUSDT,S_de_islem_yok,0,,,,False,,,,2025-03,2026-10
+WAXPUSDT,S_de_islem_yok,0,,,,False,,,,2023-10,2026-10
+WCTUSDT,S_de_islem_yok,0,,,,False,,,,2025-04,2026-10
+WDCUSDT,S_de_islem_yok,0,,,,False,,,,2026-05,2026-10
+WENUSDT,S_de_islem_yok,0,,,,False,,,,2026-07,2026-10
+WETUSDT,S_de_islem_yok,0,,,,False,,,,2025-12,2026-10
+WIFUSDT,S_de_islem_yok,0,,,,False,,,,2024-01,2026-10
+WLDUSDT,S_de_islem_yok,0,,,,False,,,,2023-07,2026-10
+WLFIUSDT,S_de_islem_yok,0,,,,False,,,,2025-08,2026-10
+WMTUSDT,S_de_islem_yok,0,,,,False,,,,2026-05,2026-10
+WOOUSDT,S_de_islem_yok,0,,,,False,,,,2022-04,2026-10
+WUSDT,S_de_islem_yok,0,,,,False,,,,2024-04,2026-10
+XAGUSDT,S_de_islem_yok,0,,,,False,,,,2026-01,2026-10
+XAIUSDT,S_de_islem_yok,0,,,,False,,,,2024-01,2026-10
+XANUSDT,S_de_islem_yok,0,,,,False,,,,2025-09,2026-10
+XAUTUSDT,S_de_islem_yok,0,,,,False,,,,2026-03,2026-10
+XAUUSDT,S_de_islem_yok,0,,,,False,,,,2025-12,2026-10
+XBIUSDT,S_de_islem_yok,0,,,,False,,,,2026-07,2026-10
+XCNUSDT,S_de_islem_yok,0,,,,False,,,,2025-04,2026-10
+XLEUSDT,S_de_islem_yok,0,,,,False,,,,2026-06,2026-10
+XNYUSDT,S_de_islem_yok,0,,,,False,,,,2025-08,2026-10
+XOMUSDT,S_de_islem_yok,0,,,,False,,,,2026-09,2026-10
+XPDUSDT,S_de_islem_yok,0,,,,False,,,,2026-01,2026-10
+XPINUSDT,S_de_islem_yok,0,,,,False,,,,2025-09,2026-10
+XPLUSDT,S_de_islem_yok,0,,,,False,,,,2025-08,2026-10
+XPTUSDT,S_de_islem_yok,0,,,,False,,,,2026-01,2026-10
+XVGUSDT,S_de_islem_yok,0,,,,False,,,,2023-07,2026-10
+XVSUSDT,S_de_islem_yok,0,,,,False,,,,2023-04,2026-10
+YALAUSDT,S_de_islem_yok,0,,,,False,,,,2025-08,2026-10
+YBUSDT,S_de_islem_yok,0,,,,False,,,,2025-10,2026-10
+YFIIUSDT,S_de_islem_yok,0,,,,False,,,,2020-09,2022-04
+YGGUSDT,S_de_islem_yok,0,,,,False,,,,2023-08,2026-10
+ZAMAUSDT,S_de_islem_yok,0,,,,False,,,,2026-01,2026-10
+ZBTUSDT,S_de_islem_yok,0,,,,False,,,,2025-10,2026-10
+ZCSHUSDT,S_de_islem_yok,0,,,,False,,,,2026-10,2026-10
+ZEREBROUSDT,S_de_islem_yok,0,,,,False,,,,2025-01,2026-10
+ZESTUSDT,S_de_islem_yok,0,,,,False,,,,2026-06,2026-10
+ZETAUSDT,S_de_islem_yok,0,,,,False,,,,2024-02,2026-10
+ZHIPUUSDT,S_de_islem_yok,0,,,,False,,,,2026-07,2026-10
+ZHONGJIUSDT,S_de_islem_yok,0,,,,False,,,,2026-08,2026-10
+ZKCUSDT,S_de_islem_yok,0,,,,False,,,,2025-09,2026-10
+ZKJUSDT,S_de_islem_yok,0,,,,False,,,,2025-05,2026-10
+ZKPUSDT,S_de_islem_yok,0,,,,False,,,,2025-12,2026-10
+ZKUSDT,S_de_islem_yok,0,,,,False,,,,2024-06,2026-10
+ZMUSDT,S_de_islem_yok,0,,,,False,,,,2026-06,2026-10
+ZORAUSDT,S_de_islem_yok,0,,,,False,,,,2025-07,2026-10
+ZRCUSDT,S_de_islem_yok,0,,,,False,,,,2025-07,2026-10
+ZROUSDT,S_de_islem_yok,0,,,,False,,,,2024-06,2026-10
+ZSUSDT,S_de_islem_yok,0,,,,False,,,,2026-09,2026-10
+1000BONKUSDC,usdt_surekli_degil,0,,,,False,,,,,
+1000LUNCBUSD,usdt_surekli_degil,0,,,,False,,,,,
+1000PEPEUSDC,usdt_surekli_degil,0,,,,False,,,,,
+1000SHIBBUSD,usdt_surekli_degil,0,,,,False,,,,,
+1000SHIBUSDC,usdt_surekli_degil,0,,,,False,,,,,
+AAVEUSDC,usdt_surekli_degil,0,,,,False,,,,,
+ADABUSD,usdt_surekli_degil,0,,,,False,,,,,
+ADAUSDC,usdt_surekli_degil,0,,,,False,,,,,
+AERGOUSDTSETTLED,usdt_surekli_degil,0,,,,False,,,,,
+AERGOUSDTSETTLEDSETTLED,usdt_surekli_degil,0,,,,False,,,,,
+AGIXBUSD,usdt_surekli_degil,0,,,,False,,,,,
+AIAUSDTSETTLED,usdt_surekli_degil,0,,,,False,,,,,
+AMBBUSD,usdt_surekli_degil,0,,,,False,,,,,
+ANCBUSD,usdt_surekli_degil,0,,,,False,,,,,
+APEBUSD,usdt_surekli_degil,0,,,,False,,,,,
+APTBUSD,usdt_surekli_degil,0,,,,False,,,,,
+ARBUSDC,usdt_surekli_degil,0,,,,False,,,,,
+AUCTIONBUSD,usdt_surekli_degil,0,,,,False,,,,,
+AVAXBUSD,usdt_surekli_degil,0,,,,False,,,,,
+AVAXUSDC,usdt_surekli_degil,0,,,,False,,,,,
+BCHUSDC,usdt_surekli_degil,0,,,,False,,,,,
+BDXNUSDTSETTLED,usdt_surekli_degil,0,,,,False,,,,,
+BIOUSDC,usdt_surekli_degil,0,,,,False,,,,,
+BNBBUSD,usdt_surekli_degil,0,,,,False,,,,,
+BNBUSDC,usdt_surekli_degil,0,,,,False,,,,,
+BNXUSDTSETTLED,usdt_surekli_degil,0,,,,False,,,,,
+BOMEUSDC,usdt_surekli_degil,0,,,,False,,,,,
+BTCBUSD,usdt_surekli_degil,0,,,,False,,,,,
+BTCBUSD_210129,usdt_surekli_degil,0,,,,False,,,,,
+BTCBUSD_210226,usdt_surekli_degil,0,,,,False,,,,,
+BTCSTUSDTSETTLED,usdt_surekli_degil,0,,,,False,,,,,
+BTCU,usdt_surekli_degil,0,,,,False,,,,,
+BTCUSD1,usdt_surekli_degil,0,,,,False,,,,,
+BTCUSDC,usdt_surekli_degil,0,,,,False,,,,,
+BTCUSDT_210326,usdt_surekli_degil,0,,,,False,,,,,
+BTCUSDT_210625,usdt_surekli_degil,0,,,,False,,,,,
+BTCUSDT_210924,usdt_surekli_degil,0,,,,False,,,,,
+BTCUSDT_211231,usdt_surekli_degil,0,,,,False,,,,,
+BTCUSDT_220325,usdt_surekli_degil,0,,,,False,,,,,
+BTCUSDT_220624,usdt_surekli_degil,0,,,,False,,,,,
+BTCUSDT_220930,usdt_surekli_degil,0,,,,False,,,,,
+BTCUSDT_221230,usdt_surekli_degil,0,,,,False,,,,,
+BTCUSDT_230331,usdt_surekli_degil,0,,,,False,,,,,
+BTCUSDT_230630,usdt_surekli_degil,0,,,,False,,,,,
+BTCUSDT_230929,usdt_surekli_degil,0,,,,False,,,,,
+BTCUSDT_231229,usdt_surekli_degil,0,,,,False,,,,,
+BTCUSDT_240329,usdt_surekli_degil,0,,,,False,,,,,
+BTCUSDT_240628,usdt_surekli_degil,0,,,,False,,,,,
+BTCUSDT_240927,usdt_surekli_degil,0,,,,False,,,,,
+BTCUSDT_241227,usdt_surekli_degil,0,,,,False,,,,,
+BTCUSDT_250328,usdt_surekli_degil,0,,,,False,,,,,
+BTCUSDT_250627,usdt_surekli_degil,0,,,,False,,,,,
+BTCUSDT_250926,usdt_surekli_degil,0,,,,False,,,,,
+BTCUSDT_251226,usdt_surekli_degil,0,,,,False,,,,,
+BTCUSDT_260327,usdt_surekli_degil,0,,,,False,,,,,
+BTCUSDT_260626,usdt_surekli_degil,0,,,,False,,,,,
+BTCUSDT_260925,usdt_surekli_degil,0,,,,False,,,,,
+BTCUSDT_261225,usdt_surekli_degil,0,,,,False,,,,,
+BTCUSDT_270326,usdt_surekli_degil,0,,,,False,,,,,
+CRVUSDC,usdt_surekli_degil,0,,,,False,,,,,
+CTKUSDTSETTLED,usdt_surekli_degil,0,,,,False,,,,,
+CVCUSDTSETTLED,usdt_surekli_degil,0,,,,False,,,,,
+CVXBUSD,usdt_surekli_degil,0,,,,False,,,,,
+CVXUSDTSETTLED,usdt_surekli_degil,0,,,,False,,,,,
+DATAIPUSDC,usdt_surekli_degil,0,,,,False,,,,,
+DODOBUSD,usdt_surekli_degil,0,,,,False,,,,,
+DOGEBUSD,usdt_surekli_degil,0,,,,False,,,,,
+DOGEUSDC,usdt_surekli_degil,0,,,,False,,,,,
+DOTBUSD,usdt_surekli_degil,0,,,,False,,,,,
+ENAUSDC,usdt_surekli_degil,0,,,,False,,,,,
+ETCBUSD,usdt_surekli_degil,0,,,,False,,,,,
+ETHBTC,usdt_surekli_degil,0,,,,False,,,,,
+ETHBUSD,usdt_surekli_degil,0,,,,False,,,,,
+ETHFIUSDC,usdt_surekli_degil,0,,,,False,,,,,
+ETHU,usdt_surekli_degil,0,,,,False,,,,,
+ETHUSD1,usdt_surekli_degil,0,,,,False,,,,,
+ETHUSDC,usdt_surekli_degil,0,,,,False,,,,,
+ETHUSDT_210326,usdt_surekli_degil,0,,,,False,,,,,
+ETHUSDT_210625,usdt_surekli_degil,0,,,,False,,,,,
+ETHUSDT_210924,usdt_surekli_degil,0,,,,False,,,,,
+ETHUSDT_211231,usdt_surekli_degil,0,,,,False,,,,,
+ETHUSDT_220325,usdt_surekli_degil,0,,,,False,,,,,
+ETHUSDT_220624,usdt_surekli_degil,0,,,,False,,,,,
+ETHUSDT_220930,usdt_surekli_degil,0,,,,False,,,,,
+ETHUSDT_221230,usdt_surekli_degil,0,,,,False,,,,,
+ETHUSDT_230331,usdt_surekli_degil,0,,,,False,,,,,
+ETHUSDT_230630,usdt_surekli_degil,0,,,,False,,,,,
+ETHUSDT_230929,usdt_surekli_degil,0,,,,False,,,,,
+ETHUSDT_231229,usdt_surekli_degil,0,,,,False,,,,,
+ETHUSDT_240329,usdt_surekli_degil,0,,,,False,,,,,
+ETHUSDT_240628,usdt_surekli_degil,0,,,,False,,,,,
+ETHUSDT_240927,usdt_surekli_degil,0,,,,False,,,,,
+ETHUSDT_241227,usdt_surekli_degil,0,,,,False,,,,,
+ETHUSDT_250328,usdt_surekli_degil,0,,,,False,,,,,
+ETHUSDT_250627,usdt_surekli_degil,0,,,,False,,,,,
+ETHUSDT_250926,usdt_surekli_degil,0,,,,False,,,,,
+ETHUSDT_251226,usdt_surekli_degil,0,,,,False,,,,,
+ETHUSDT_260327,usdt_surekli_degil,0,,,,False,,,,,
+ETHUSDT_260626,usdt_surekli_degil,0,,,,False,,,,,
+ETHUSDT_260925,usdt_surekli_degil,0,,,,False,,,,,
+ETHUSDT_261225,usdt_surekli_degil,0,,,,False,,,,,
+ETHUSDT_270326,usdt_surekli_degil,0,,,,False,,,,,
+FILBUSD,usdt_surekli_degil,0,,,,False,,,,,
+FILUSDC,usdt_surekli_degil,0,,,,False,,,,,
+FTMBUSD,usdt_surekli_degil,0,,,,False,,,,,
+FTTBUSD,usdt_surekli_degil,0,,,,False,,,,,
+GALABUSD,usdt_surekli_degil,0,,,,False,,,,,
+GALBUSD,usdt_surekli_degil,0,,,,False,,,,,
+GMTBUSD,usdt_surekli_degil,0,,,,False,,,,,
+HBARUSDC,usdt_surekli_degil,0,,,,False,,,,,
+ICPBUSD,usdt_surekli_degil,0,,,,False,,,,,
+ICPUSDT_SETTLED,usdt_surekli_degil,0,,,,False,,,,,
+IPUSDC,usdt_surekli_degil,0,,,,False,,,,,
+KAITOUSDC,usdt_surekli_degil,0,,,,False,,,,,
+LDOBUSD,usdt_surekli_degil,0,,,,False,,,,,
+LEVERBUSD,usdt_surekli_degil,0,,,,False,,,,,
+LINKBUSD,usdt_surekli_degil,0,,,,False,,,,,
+LINKUSDC,usdt_surekli_degil,0,,,,False,,,,,
+LITUSDTSETTLED,usdt_surekli_degil,0,,,,False,,,,,
+LTCBUSD,usdt_surekli_degil,0,,,,False,,,,,
+LTCUSDC,usdt_surekli_degil,0,,,,False,,,,,
+LUNA2BUSD,usdt_surekli_degil,0,,,,False,,,,,
+LUNABUSD,usdt_surekli_degil,0,,,,False,,,,,
+MATICBUSD,usdt_surekli_degil,0,,,,False,,,,,
+MATICUSDC,usdt_surekli_degil,0,,,,False,,,,,
+MAVIAUSDTSETTLED,usdt_surekli_degil,0,,,,False,,,,,
+MDTUSDTSETTLED,usdt_surekli_degil,0,,,,False,,,,,
+MINAUSDTSETTLED,usdt_surekli_degil,0,,,,False,,,,,
+NEARBUSD,usdt_surekli_degil,0,,,,False,,,,,
+NEARUSDC,usdt_surekli_degil,0,,,,False,,,,,
+NEOUSDC,usdt_surekli_degil,0,,,,False,,,,,
+ORDIUSDC,usdt_surekli_degil,0,,,,False,,,,,
+PENGUUSDC,usdt_surekli_degil,0,,,,False,,,,,
+PHBBUSD,usdt_surekli_degil,0,,,,False,,,,,
+PNUTUSDC,usdt_surekli_degil,0,,,,False,,,,,
+PUMPUSDTSETTLED,usdt_surekli_degil,0,,,,False,,,,,
+SANDBUSD,usdt_surekli_degil,0,,,,False,,,,,
+SLPUSDTSETTLED,usdt_surekli_degil,0,,,,False,,,,,
+SOLBUSD,usdt_surekli_degil,0,,,,False,,,,,
+SOLUSDC,usdt_surekli_degil,0,,,,False,,,,,
+SPCXUSD1,usdt_surekli_degil,0,,,,False,,,,,
+SUIUSDC,usdt_surekli_degil,0,,,,False,,,,,
+SXPUSDTSETTLED,usdt_surekli_degil,0,,,,False,,,,,
+TIAUSDC,usdt_surekli_degil,0,,,,False,,,,,
+TLMBUSD,usdt_surekli_degil,0,,,,False,,,,,
+TLMUSDTSETTLED,usdt_surekli_degil,0,,,,False,,,,,
+TRUMPUSDC,usdt_surekli_degil,0,,,,False,,,,,
+TRXBUSD,usdt_surekli_degil,0,,,,False,,,,,
+UNIBUSD,usdt_surekli_degil,0,,,,False,,,,,
+UNIUSDC,usdt_surekli_degil,0,,,,False,,,,,
+WAVESBUSD,usdt_surekli_degil,0,,,,False,,,,,
+WIFUSDC,usdt_surekli_degil,0,,,,False,,,,,
+WLDUSDC,usdt_surekli_degil,0,,,,False,,,,,
+WLFIUSDC,usdt_surekli_degil,0,,,,False,,,,,
+XRPBUSD,usdt_surekli_degil,0,,,,False,,,,,
+XRPUSDC,usdt_surekli_degil,0,,,,False,,,,,
+ZECUSDC,usdt_surekli_degil,0,,,,False,,,,,
+哈基米USDT,usdt_surekli_degil,0,,,,False,,,,,
+币安人生USDT,usdt_surekli_degil,0,,,,False,,,,,
+我踏马来了USDT,usdt_surekli_degil,0,,,,False,,,,,
+牛来USDT,usdt_surekli_degil,0,,,,False,,,,,
+龙虾USDT,usdt_surekli_degil,0,,,,False,,,,,
+TRBUSDT,,1,23401899789.950302,2020-09-03 00:00:00+00:00,2026-11-10 00:00:00+00:00,False,58.150499999999994,0.001,0.01,2020-09,2026-10
+AVAXUSDT,,2,6450986005.894002,2020-09-23 00:00:00+00:00,2026-11-10 00:00:00+00:00,False,9.854500000000002,0.0001,0.1,2020-09,2026-10
+MATICUSDT,,3,6268670113.0483,2020-10-22 00:00:00+00:00,2024-09-11 00:00:00+00:00,True,0.5612,1e-05,1.0,2020-10,2024-09
+GALAUSDT,,4,5631771856.75402,2021-09-18 00:00:00+00:00,2026-11-10 00:00:00+00:00,False,0.01439,1e-06,10.0,2021-09,2026-10
+LTCUSDT,,5,5028163544.19281,2020-01-09 00:00:00+00:00,2026-11-10 00:00:00+00:00,False,65.005,0.001,0.01,2020-01,2026-10
+RUNEUSDT,,6,4899654117.273998,2020-09-04 00:00:00+00:00,2026-11-10 00:00:00+00:00,False,1.7545000000000002,0.0001,0.1,2020-09,2026-10
+STORJUSDT,,7,4862674968.956201,2020-09-16 00:00:00+00:00,2026-11-10 00:00:00+00:00,False,0.4108,1e-05,1.0,2020-09,2026-10
+BLZUSDT,,8,3837214715.72123,2020-09-17 00:00:00+00:00,2026-11-10 00:00:00+00:00,False,0.14603,1e-05,1.0,2020-09,2026-10
+DOTUSDT,,9,3749496634.2852,2020-08-22 00:00:00+00:00,2026-11-10 00:00:00+00:00,False,4.013999999999999,0.0001,0.1,2020-08,2026-10
+CRVUSDT,,10,3317229524.8707,2020-09-01 00:00:00+00:00,2026-11-10 00:00:00+00:00,False,0.465,1e-05,1.0,2020-09,2026-10
+MKRUSDT,,11,3147151689.3246007,2020-08-13 00:00:00+00:00,2026-11-10 00:00:00+00:00,False,1421.15,0.1,0.0001,2020-08,2026-10
+1000SHIBUSDT,,12,2976818725.5024743,2021-05-10 00:00:00+00:00,2026-11-10 00:00:00+00:00,False,0.007161,1e-07,100.0,2021-05,2026-10
+DYDXUSDT,,13,2964348858.9792,2021-09-10 00:00:00+00:00,2026-11-10 00:00:00+00:00,False,1.9845000000000002,0.0001,0.1,2021-09,2026-10
+OGNUSDT,,14,2855535833.8173003,2021-04-01 00:00:00+00:00,2026-11-10 00:00:00+00:00,False,0.1179,1e-05,1.0,2021-04,2026-10
+ETCUSDT,,15,2821634316.37467,2020-01-16 00:00:00+00:00,2026-11-10 00:00:00+00:00,False,15.637,0.001,0.01,2020-01,2026-10
+ZRXUSDT,,16,2796913998.04009,2020-06-24 00:00:00+00:00,2026-11-10 00:00:00+00:00,False,0.2164,1e-05,1.0,2020-06,2026-10
+ATOMUSDT,,17,2741991171.7136297,2020-02-07 00:00:00+00:00,2026-11-10 00:00:00+00:00,False,6.8645,0.0001,0.1,2020-02,2026-10
+EOSUSDT,,18,2626103230.2578,2020-01-08 00:00:00+00:00,2025-05-21 00:00:00+00:00,True,0.5645,1e-05,1.0,2020-01,2025-05
+FILUSDT,,19,2596954956.7455006,2020-10-16 00:00:00+00:00,2026-11-10 00:00:00+00:00,False,3.319,0.0001,0.1,2020-10,2026-10
+STMXUSDT,,20,2589820931.1039395,2021-03-22 00:00:00+00:00,2026-11-10 00:00:00+00:00,False,0.006665,1e-07,100.0,2021-03,2026-10
+FTMUSDT,,21,2422338775.5316997,2020-09-24 00:00:00+00:00,2026-11-10 00:00:00+00:00,False,0.19345,1e-05,1.0,2020-09,2026-10
+AAVEUSDT,,22,2302143303.1629996,2020-10-16 00:00:00+00:00,2026-11-10 00:00:00+00:00,False,66.655,0.001,0.01,2020-10,2026-10
+BAKEUSDT,,23,2291233106.2543,2021-05-19 00:00:00+00:00,2026-11-10 00:00:00+00:00,False,0.13205,1e-05,1.0,2021-05,2026-10
+TOMOUSDT,,24,2243177379.6447,2020-10-12 00:00:00+00:00,2024-05-28 00:00:00+00:00,True,1.4892500000000002,0.0001,0.1,2020-10,2024-05
+UNFIUSDT,,25,2197658777.3423,2021-02-19 00:00:00+00:00,2026-11-10 00:00:00+00:00,False,6.8045,0.0001,0.1,2021-02,2026-10
+AXSUSDT,,26,2096142654.709,2020-11-20 00:00:00+00:00,2026-11-10 00:00:00+00:00,False,4.449,0.0001,0.1,2020-11,2026-10
+BANDUSDT,,27,2039603567.8724298,2020-07-29 00:00:00+00:00,2026-11-10 00:00:00+00:00,False,1.3709500000000001,0.0001,0.1,2020-07,2026-10
+MASKUSDT,,28,1888889660.3209996,2021-08-27 00:00:00+00:00,2026-11-10 00:00:00+00:00,False,2.665,0.0001,0.1,2021-08,2026-10
+NEARUSDT,,29,1726877393.418,2020-10-15 00:00:00+00:00,2026-11-10 00:00:00+00:00,False,1.0805,0.0001,0.1,2020-10,2026-10
+UNIUSDT,,30,1382831255.684,2020-09-18 00:00:00+00:00,2026-11-10 00:00:00+00:00,False,4.140499999999999,0.0001,0.1,2020-09,2026-10
+HOTUSDT,,31,1354247434.0621214,2021-03-30 00:00:00+00:00,2026-11-10 00:00:00+00:00,False,0.001238,1e-07,100.0,2021-03,2026-10
+WAVESUSDT,,32,1351490395.3867402,2020-08-12 00:00:00+00:00,2026-11-10 00:00:00+00:00,False,1.5271,0.0001,0.1,2020-08,2026-10
+KNCUSDT,,33,1323228714.1226,2020-06-22 00:00:00+00:00,2026-11-10 00:00:00+00:00,False,0.6746,1e-05,1.0,2020-06,2026-10
+SANDUSDT,,34,1308634310.7700999,2021-01-25 00:00:00+00:00,2026-11-10 00:00:00+00:00,False,0.29885,1e-05,1.0,2021-01,2026-10
+COMPUSDT,,35,1161711429.92869,2020-06-30 00:00:00+00:00,2026-11-10 00:00:00+00:00,False,43.37,0.001,0.01,2020-06,2026-10
+LINAUSDT,,36,1145429455.7228599,2021-03-19 00:00:00+00:00,2026-11-10 00:00:00+00:00,False,0.009944999999999999,1e-07,100.0,2021-03,2026-10
+NEOUSDT,,37,1035753838.86248,2020-02-17 00:00:00+00:00,2026-11-10 00:00:00+00:00,False,7.135999999999999,0.0001,0.1,2020-02,2026-10
+ENJUSDT,,38,1001248906.1106999,2020-09-29 00:00:00+00:00,2026-11-10 00:00:00+00:00,False,0.22139999999999999,1e-05,1.0,2020-09,2026-10
+MANAUSDT,,39,995581505.9264,2021-03-15 00:00:00+00:00,2026-11-10 00:00:00+00:00,False,0.29784999999999995,1e-05,1.0,2021-03,2026-10
+ALGOUSDT,,40,954809329.4164001,2020-06-16 00:00:00+00:00,2026-11-10 00:00:00+00:00,False,0.0987,1e-06,10.0,2020-06,2026-10
