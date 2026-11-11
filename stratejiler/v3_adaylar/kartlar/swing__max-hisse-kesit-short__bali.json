@@ -1,0 +1,64 @@
+{
+  "kart_id": "swing__max-hisse-kesit-short__bali",
+  "ad": "Hisse MAX Anomalisi (Yüksek MAX Short, Düşük MAX Long)",
+  "stil": "swing",
+  "kaynak": {
+    "url": "https://www.nber.org/papers/w14804.pdf",
+    "lisans": "makale (NBER WP, serbest PDF)",
+    "tur": "makale"
+  },
+  "ozet": "Her ay hisseleri önceki ayın en yüksek günlük getirisine (MAX) göre decillere ayırır; en yüksek MAX'lı decile short, en düşüğüne long, ertesi ay tutar. Yüksek MAX'lı hisseler ertesi ay düşük getirir.",
+  "kategori": "diger",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+    "islem": "1d",
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {
+      "ad": "MAX (önceki ayın en yüksek günlük getirisi)",
+      "parametreler": {
+        "pencere": "1 ay"
+      }
+    }
+  ],
+  "long_giris": [
+    "Ay sonunda hisseleri MAX'a göre sırala; en düşük MAX'lı decile (decil 1) long"
+  ],
+  "short_giris": [
+    "En yüksek MAX'lı decile (decil 10) short"
+  ],
+  "stop_loss": null,
+  "kar_al": null,
+  "iz_suren_stop": null,
+  "zaman_cikisi": "Aylık yeniden dengeleme; bir ay tutulur",
+  "filtreler": [],
+  "pozisyon_risk": "Kaynakta değer ağırlıklı decil portföyler (ana tablo) ve eşit ağırlıklı",
+  "iddia_edilen_performans": "Bali-Cakici-Whitelaw: decil 10-decil 1 değer ağırlıklı ham fark -1,03%/ay (Newey-West t -2,83), dört faktör alfa farkı -1,18%/ay (t -4,71); eşit ağırlıklı ham fark -0,65%/ay (t -1,83) (iddia, doğrulanmadı)",
+  "kanit": "JFE 2011 (NBER WP 14804): NYSE/AMEX/NASDAQ, Temmuz 1962-Aralık 2005, 522 ay; ABD hisseleri, yazar ayrıca 1926'dan başlayarak da benzer buluyor. Başka piyasa/örneklem dışı sonuç bizde yok; kriptoda işaret TERS (Özdamar vd.). Doğrulanmadı.",
+  "veri_uygun": [
+    false,
+    "Dukascopy'da yalnız yaklaşık 17 hisse var; decil anlamsız, hisse short'u ve açığa satış maliyeti; sinyal binlerce hisselik evrene dayanır."
+  ],
+  "kodlanabilirlik": {
+    "puan": 3,
+    "gerekce": "Kurallar tamamen mekanik (MAX, decil, aylık)."
+  },
+  "belirsizlikler": [
+    "Dar evrende decil kurulamaz",
+    "Short uygulanabilirliği ve maliyet",
+    "Stop yok",
+    "Sonuçlar 1962-2005 ABD, güncel dönem kaynakta yok"
+  ],
+  "uyumluluk_notu": "Mevcut karta tekrar yok. Verimizle uygulanamaz (17 hisse). Yalnız referans: kriptoda işaret tersi.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+    "max",
+    "piyango",
+    "hisse",
+    "kesitsel",
+    "decil",
+    "aylik"
+  ]
+}
