@@ -104,6 +104,7 @@ def main(argv=None) -> int:
     ap.add_argument("--baslangic", help="sistem hatası penceresi başı (ISO tarih, ör. 2026-12-15); verilmezse tüm olaylar")
     ap.add_argument("--ayar", help="yapılandırma dosyası (varsa o stratejiler de listelenir)")
     a = ap.parse_args(argv)
+    print("UYARI: 1L3A v2 planında risk artışı YOK (CANLI_PLAN_V2 §3); bu araç yalnız bilgi verir.\n")
     ids = None
     if a.ayar:
         ids = [x["id"] for x in json.loads(Path(a.ayar).read_text(encoding="utf-8")).get("stratejiler", [])]

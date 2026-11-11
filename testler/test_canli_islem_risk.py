@@ -12,16 +12,21 @@ from testler.test_canli_borsa import COST, bilgi
 S = {"id": "A", "api_key_env": "K1", "api_secret_env": "S1", "tahsis_usd": 250}
 
 
-def test_islem_risk_varsayilan_ve_gecerli_araligi():
+def test_islem_risk_varsayilan_ve_yalniz_015_kabul():
     assert ca.coz({"stratejiler": [S]}, {}).stratejiler[0].islem_risk == D("0.015")
-    for v, beklenen in ((0.015, "0.015"), (0.02, "0.02"), (0.03, "0.03"), ("0.025", "0.025")):
-        assert ca.coz({"stratejiler": [{**S, "islem_risk": v}]}, {}).stratejiler[0].islem_risk == D(beklenen)
+    for v in (0.015, "0.015", "0.0150", D("0.015")):
+        assert ca.coz({"stratejiler": [{**S, "islem_risk": v}]}, {}).stratejiler[0].islem_risk == D("0.015")
 
 
-@pytest.mark.parametrize("v", [0.0149, 0.01, 0, 0.0301, 0.05, 1, -0.02, "abc", None, True, [0.02], float("nan"), float("inf")])
+@pytest.mark.parametrize("v", [0.02, 0.03, 0.01, "0.025", 0.0149, 0.0151, 0, 0.0301, 0.05, 1, -0.02, "abc", None, True, [0.02], float("nan"), float("inf")])
 def test_islem_risk_aralik_disi_reddedilir(v):
     with pytest.raises(ca.CanliAyarHatasi):
         ca.coz({"stratejiler": [{**S, "islem_risk": v}]}, {})
+
+
+def test_islem_risk_hata_mesaji_plana_atif_yapar():
+    with pytest.raises(ca.CanliAyarHatasi, match="CANLI_PLAN_V2.md §3"):
+        ca.coz({"stratejiler": [{**S, "islem_risk": 0.03}]}, {})
 
 
 def test_ornek_ayar_asama1_kadrosu():
