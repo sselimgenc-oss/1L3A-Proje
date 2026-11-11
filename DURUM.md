@@ -6,6 +6,7 @@ _Son güncelleme: 2026-11-06 (Aşama 1 ara durum)_
 - **Lider (Claude Opus):** planlama, görev/ajan dağıtımı, denetim, kalite.
 - **Kod:** Sonnet ajanları. **Düşük eforlu işler** (özetleme, veri ayıklama): Haiku ajanları.
 - Kararlar kullanıcıyla birlikte verilir.
+- Dış ajanlar: ikinci Claude hesabı ("Sonnet", yalnız araştırma, `stratejiler/v3_adaylar/`). ChatGPT Codex 2026-11-11 itibarıyla KULLANILMIYOR (kullanıcı kararı); kodlama ana oturumun Sonnet ajanlarında. `CODEX_KODLAMA.md` kuralları bu ajanlar için de geçerli.
 
 ## Alınan kararlar
 1. Strateji seçimi = kitaplarda yaygın (**farklı yazar sayısı**) + kurala dökülebilir + **backtest'te avantaj**.
@@ -394,6 +395,14 @@ Ana ders: önceki sonuçlar OOS'a bakılarak seçilmiş ve kâr birkaç işlemde
   işlem satırlarına MFE/MAE (paper motorunda işlem boyunca en iyi/en kötü fiyat; çıkış mumunun uçları sayılmaz, lookahead yok; gerçek değerin alt sınırı) ve panoda İŞLEMLER satırına tıklayınca açılan çekmece. Ayrıntı: `motor/canli/DURUM_SOZLESMESI.md`.
   **Kullanıcıya sorulacak:** (1) karnede PF ≥ 1.2 (ON_KAYIT evren-OOS ölçütü) paper "kalite" eşiği olarak uygun mu, yoksa bilgi mi kalsın; (2) koçun örnek sınırları: saat/gün/sembol kovasında ≥ 5 işlem, tutma süresinde her grupta ≥ 10 (30 işlem Dersler'den); (3) karnede tek "genel puan" istenmiyor (Goodhart): yine de istenirse formül ve ağırlık sizin kararınız;
   (4) koçun çoklu test düzeltmesi yalnız aynı kural ailesi/kapsam içinde (kapsamlar arası yok): daha sıkısı mı isteniyor.
+- 2026-11-11: v3 araştırma kararları (lider):
+  - Paper başlangıç bayat dolumu: 2026-11-10 12:27 başlatıldı; 14 günlük pozisyon 03:00 açılışından doldu (`islem_baslangic` canlıda verilmiyor). Kullanıcı: pano/pozisyonlar böyle kalsın. 2026-12-08 sadakat kontrolünde bu 14 giriş hariç tutulacak; `islem_baslangic` yeni kadro başlarken verilecek.
+  - Test bütçesi: yalnız 10 aile temsilcisi (çoklu test); aynı ailenin diğer kodlu varyantlarına yalnız temsilci geçerse bakılır. Testte elenen v2 stratejileri canlandırılmaz (aşırı uyum).
+  - Tur 6: veri_yok 514 adayın %79'u bizim açamadığımız piyasada işlem yapıyor; veri ekleyerek kurtarma beklentisi düşük. Yalnız FOMC takvimi eklendi (`veri/takvim/fomc.csv`, tur 7).
+  - Kaynağa uyum düzeltmeleri (tur 4/5 → Codex parti 4, PR #32): noise-area makaleye göre; Donchian ansambl portföy stratejisi olarak yeniden (eski tek grafik sürüm "kaynağa aykırı"); funding-7g günlük ödeme TOPLAMI (`funding_gunluk_toplam`, eski sütun değişmedi), evren 13 coin; FIP min_sembol 5; vol-yönetimli-long portföy stratejisi (sabit %20 hedef, geleceğe bakan c yok, 1/n eşit sermaye: ana oturum düzeltmesi).
+  - Kaynakta olmayan ATR stopları ön kayıtta "bizim eklememiz" diye yazılacak; stopsuz koşu da raporlanacak. saatlik-aşırı-tepki (De Nicola) birincil metin okunana dek bekletilir.
+  - KULLANICI KARARI (canlı): 2027'den önce canlıya geçilecek (bu proje + ayrı copy trade projesi); kullanıcı riskleri ve kanıt eksikliğini kabul etti, 3-12 ay beklenmeyecek. İstatistiksel kanıt (84 gün / 365 gün sepet testi) canlı şartı DEĞİL, bilgi. Canlı şartları (güvenlik): sadakat kontrolü (v2: 2026-12-08), SERT_LIMITLER, B18, para çekme izni kapalı + IP kısıtlı API anahtarı, küçük bütçe. Denetçiler bu kararı bilir, süre şartı dayatmaz. Ayrıntı: sonuclar/v3/ON_KAYIT_V3.md 4.5.
+  - Sıradaki: Codex parti 5 (pre-FOMC), Sonnet tur 8 (kod-kaynak çapraz kontrolü), ana oturum ON_KAYIT v3 taslağı (`stratejiler/v3_adaylar/on_kayit_girdi.csv` temel) → kullanıcı onayı → test.
 
 ## Kullanıcıyı bekleyen kararlar
 - ~~Final seçim ve kilitli dönemin bir kez açılması (karar 20)~~ — kullanıcı "aç" dedi (2026-11-07), yapıldı: `sonuclar/kilit/RAPOR.md`.
