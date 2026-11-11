@@ -1,0 +1,111 @@
+{
+  "kart_id": "daytrade__smoothoperator-rsi-cci-mfi-5m__buymeanicecream",
+  "ad": "SmoothOperator Optimized: 5m RSI/CCI/MFI Aşırı Satım + Piyasa Filtresi",
+  "stil": "daytrade",
+  "kaynak": {
+    "url": "https://github.com/BuyMeAnIcecream/freqtrade-strategies",
+    "lisans": "GPL-3.0 (kod kopyalanmadı, kural kendi cümlelerimle yazıldı)",
+    "tur": "github"
+  },
+  "ozet": "5 dakikada RSI, CCI ve MFI aşırı satımda ve fiyat BB orta bandı altındayken, fiyat 200 SMA'nın altında veya ±%5 çevresinde ise ve bar yükselerek kapanıyorsa long. ROI tablosu, %6.1 stop ve aşırı alım çıkışları var.",
+  "kategori": "ortalamaya_donus",
+  "piyasa_rejimi": "yatay",
+  "orijinal_piyasa": "kripto",
+  "zaman_dilimi": {
+    "islem": "5m",
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {
+      "ad": "RSI",
+      "parametreler": {
+        "periyot": 14,
+        "esik_giris": 29
+      }
+    },
+    {
+      "ad": "CCI",
+      "parametreler": {
+        "periyot": 20,
+        "esik_giris": -198
+      }
+    },
+    {
+      "ad": "MFI",
+      "parametreler": {
+        "periyot": 14,
+        "esik_giris": 15
+      }
+    },
+    {
+      "ad": "Bollinger",
+      "parametreler": {
+        "periyot": 20,
+        "std": 2.0,
+        "kullanim": "orta bant"
+      }
+    },
+    {
+      "ad": "SMA",
+      "parametreler": {
+        "periyot": 200
+      }
+    },
+    {
+      "ad": "SMA",
+      "parametreler": {
+        "periyot": 49,
+        "not": "hızlı, hiperopt"
+      }
+    },
+    {
+      "ad": "SMA",
+      "parametreler": {
+        "periyot": 101,
+        "not": "orta, hiperopt"
+      }
+    }
+  ],
+  "long_giris": [
+    "Piyasa filtresi: kapanış < SMA(200) VEYA SMA(200)*0.95 <= kapanış <= SMA(200)*1.05",
+    "Kapanış bir önceki kapanıştan yüksek",
+    "Ve şunlardan biri: (a) low < BB(20,2) orta bant, CCI < -198, RSI < 29, MFI < 15; (b) son 5 bardaki ortalama fiyat (OHLC/4) 4 bar üst üste düştükten sonra 1 bar önce dönüş yapmış, bir önceki barın low'u BB orta bandın altında, bir önceki barın CCI < -198 ve RSI < 29; (c) MFI < 10, CCI < -150 ve RSI < MFI"
+  ],
+  "short_giris": [],
+  "stop_loss": "Sabit %6.1 (giriş fiyatından)",
+  "kar_al": "ROI tablosu: 0 dk %14.6, 37 dk %10, 55 dk %3.6, 158 dk %0 (kâr eşiği zamanla düşer)",
+  "iz_suren_stop": null,
+  "zaman_cikisi": "ROI tablosunun son basamağı: 158 dk sonra başa baş",
+  "filtreler": [
+    "Yalnız ayı/yatay piyasa (yukarıdaki SMA200 filtresi)"
+  ],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": "README: Sortino 4.01, Sharpe 1.66, Calmar 124.25; 100 hiperopt denemesi sonucu, yalnız kısa bir test dönemi (iddia, doğrulanmadı; aşırı uyum riski yüksek)",
+  "kanit": "iddia (doğrulanmadı): README'de Sharpe 1.66 / Calmar 124.25; hiperopt ile seçilmiş parametreler",
+  "veri_uygun": [
+    true,
+    "5m OHLCV + hacim (MFI için) Binance USDT-M'de var; kaynakta çıkışlar da mum verisinden hesaplanıyor."
+  ],
+  "kodlanabilirlik": {
+    "puan": 2,
+    "gerekce": "Tüm kurallar kodda sayısal ama çok dallı (3 giriş dalı, 6 çıkış dalı) ve parametreler hiperopt ürünü."
+  },
+  "belirsizlikler": [
+    "Parametreler hiperopt ile seçilmiş; aşırı uyum riski",
+    "Çıkış dalları: TEMA ile yumuşatılmış RSI/CCI/MFI bileşik gösterge > 110 ve dönüş, 10 yeşil mum, aşırı alım (RSI>80, CCI>187, MFI>85), hızlı SMA'nın orta SMA'yı aşağı kesmesi + 2 düşen kapanış, kapanış > SMA200*1.044: çıkış listesi karta tam yazılamadı, kaynağa bakılmalı",
+    "Kaynakta test dönemi/evren belirsiz",
+    "Freqtrade ROI/stop çıkışı bar içinde mi bar sonunda mı: kaynakta yok"
+  ],
+  "uyumluluk_notu": "Kripto 5m ile uyumlu. Bandtastic / BbandRsi ailesine benzer (aşırı satım + BB); düşük öncelik, aşırı uyum riski.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+    "rsi",
+    "cci",
+    "mfi",
+    "bollinger",
+    "sma200",
+    "freqtrade",
+    "hiperopt",
+    "5m"
+  ]
+}
