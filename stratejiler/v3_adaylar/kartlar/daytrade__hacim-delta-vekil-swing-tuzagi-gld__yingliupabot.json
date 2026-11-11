@@ -1,0 +1,69 @@
+{
+  "kart_id": "daytrade__hacim-delta-vekil-swing-tuzagi-gld__yingliupabot",
+  "ad": "Hacim Deltası Vekili + 20 Gün Swing Reddi (Tuzağa Düşenleri Fade)",
+  "stil": "daytrade",
+  "kaynak": {
+    "url": "https://github.com/yingliupabot/reading",
+    "lisans": "yok",
+    "tur": "github"
+  },
+  "ozet": "Her günün hacim deltası, o günün saatlik mumlarının yönüne göre işaretlenmiş hacim toplamıyla tahmin edilir (yeşil saat +hacim, kırmızı saat -hacim). Delta EMA'sı güçlüyken fiyat 20 günlük dip/tepeyi sınayıp gün içinde geri dönerse (kapanış günlük aralığın üst/alt yarısında) ters yönde işlem açılır; ATR stop/hedef ve en fazla 10 gün tutma.",
+  "kategori": "ortalamaya_donus",
+  "piyasa_rejimi": "yatay",
+  "orijinal_piyasa": "emtia",
+  "zaman_dilimi": {
+    "islem": "1d",
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {"ad": "Hacim deltası vekili (saatlik mum yönü x hacim, günlük toplam)", "parametreler": {"alt_zaman_dilimi": "1h"}},
+    {"ad": "EMA (delta üzerinde)", "parametreler": {"periyot": 12}},
+    {"ad": "Delta gücü", "parametreler": {"formul": "|delta_ema| / delta_ema'nın son 120 günlük maksimumu", "esik": 0.12}},
+    {"ad": "Z-skor (delta_ema, 120 gün)", "parametreler": {"pencere": 120}},
+    {"ad": "Swing dip/tepe", "parametreler": {"pencere": 20, "not": "önceki 20 günün en düşük/en yüksek değeri, bugün hariç"}},
+    {"ad": "ATR", "parametreler": {"periyot": 14}}
+  ],
+  "long_giris": [
+    "Gün kapanışında: delta gücü >= 0.12",
+    "delta_ema z-skoru < 0 (net satış baskısı)",
+    "Günün düşüğü <= önceki 20 günün en düşüğü (dipi sınadı)",
+    "Günün aralığı > 0 ve (kapanış - düşük) / (yüksek - düşük) >= 0.5 (reddedildi, kapanış üst yarıda)",
+    "Giriş fiyatı o günün kapanışı"
+  ],
+  "short_giris": [
+    "Gün kapanışında: delta gücü >= 0.12",
+    "delta_ema z-skoru > 0 (net alış baskısı)",
+    "Günün yükseği >= önceki 20 günün en yükseği",
+    "Günün aralığı > 0 ve (yüksek - kapanış) / (yüksek - düşük) >= 0.5",
+    "Giriş fiyatı o günün kapanışı"
+  ],
+  "stop_loss": "Girişten 1.5 x ATR(14) ters yönde (sonraki günlerde gün içi düşük/yüksek değerse çıkış)",
+  "kar_al": "Girişten 3.0 x ATR(14) lehte (sonraki günlerde gün içi yüksek/düşük değerse çıkış)",
+  "iz_suren_stop": null,
+  "zaman_cikisi": "10 işlem günü sonunda kapanışta çıkış",
+  "filtreler": [
+    "Isınma: ilk 120 gün işlem yok",
+    "Aynı anda tek pozisyon"
+  ],
+  "pozisyon_risk": "Kaynakta yok (kodda sabit 10.000 nominal, kaldıraçsız, tek pozisyon)",
+  "iddia_edilen_performans": "Kaynağın kendi testi: GLD, 2025-03 -> 2026-09, 9 işlem, kazanma %22, toplam getiri -%4.06, profit factor 0.76, maks. düşüş -%9.18 (iddia, doğrulanmadı; komisyon/kayma yok). Yazar bunu tek başına sistem olarak değil zamanlama yardımcısı olarak yorumluyor.",
+  "kanit": "Kaynağın kendi küçük örneklemi (9 işlem, 2 yıl) olumsuz; edge kanıtı yok. Delta gerçek emir akışı değil, saatlik mum yönünden vekil (iddia, doğrulanmadı).",
+  "veri_uygun": [
+    true,
+    "Saatlik OHLCV'den günlük delta hesaplanır: Binance perp (UTC gün) ve Dukascopy XAU/hisse için mümkün. Gerçek emir akışı/order book gerekmiyor. Hacim kalitesi Dukascopy için kontrol edilmeli."
+  ],
+  "kodlanabilirlik": {
+    "puan": 3,
+    "gerekce": "Tüm eşikler kodda sayısal; shift(1) ile nedensel (swing seviyesi bugünü hariç tutar). Giriş sinyal gününün kapanışında, çıkış sonraki günlerde."
+  },
+  "belirsizlikler": [
+    "Kodda z-skor eşiği (|z|>=1.5) yalnız raporlama için, girişte kullanılmıyor; yalnız z işareti kullanılıyor",
+    "Günün 'kapanışında giriş' pratikte kapanış fiyatına yakın emir gerektirir",
+    "Kripto 7/24 olduğundan günlük sınır (UTC) ve haftasonu mumları hisseden farklı davranır; kaynakta yok",
+    "Kâr/zarar aynı günde hem stop hem hedefe değerse kodda önce stop kontrol edilir",
+    "Çok az işlem; eşiklerin (0.12, 120, 20) mantığı yazarın TradingView göstergesinin varsayılanları"
+  ],
+  "uyumluluk_notu": "1L3A için: günlük karar, 1h alt veri yeterli (>=5m kuralı sağlanıyor). Hacim gerekir (OHLCV'de var). Kripto ve XAU/hisse için denenebilir; kaynağın kendi sonucu zayıf, düşük öncelik. Lisans yok: kural kendi cümlelerimle yazıldı.",
+  "varyantlar": [],
+  "anahtar_kelimeler": ["hacim-deltasi", "delta-vekil", "swing-reddi", "atr-stop", "tuzak-fade"]
+}

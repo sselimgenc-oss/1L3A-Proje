@@ -106,3 +106,37 @@ Fable'ın 3 riski:
 2. `kod_yok` kalan 277 satırın URL'si olmayanları için kaynak linki bulunmalı (k00 MASTER satırları, blog/forum satırları).
 3. Okunamayan makaleler (MDPI JRFM 19/9/692, Springer Brauneis, Ledger 213, Han-Kang-Ryu): kullanıcı metin sağlarsa denenir.
 4. Aile kümelemesi: 144 kartı ailelere ayırıp temsilci seçmek (kod yazmadan, kart düzeyinde).
+
+---
+
+# Tur 3 (2026-11-11)
+Tur 1-2 metnine ve dosyalarına dokunulmadı; yalnız dosya/satır eklendi. Çalışma sırasında tur 2 (PR #22) main'e birleşti; bu PR'ın farkı yalnız tur 3'tür.
+
+## 1. Aile kümelemesi (`aileler_v3.csv`, 153 satır)
+- 153 kart (144 + tur 3'ün 9 yeni kartı) **34 aileye** ayrıldı; **10 aile temsilcisi** seçildi (her aileden en çok 1-2; önce Fable puanı, sonra kural netliği, sonra kanıt; havuzdaki bir stratejinin küçük varyantı ve `veri_uygun=false` kart temsilci olamaz). Her kart için havuzdaki en yakın strateji (`havuz_v2` / `dis_envanter`) ve fark özeti yazıldı.
+- Taslak Sonnet ajanıyla yapıldı, **Fable bir kez gözden geçirdi** (3 temsilci değişikliği, 5 aile düzeltmesi, ~20 `havuzda_en_yakin` düzeltmesi; yanlış/olmayan havuz adları grep ile doğrulanıp düzeltildi).
+- En kalabalık aileler: kesit-momentum 12, donchian-kirilim 10, orb-seans-kirilim 8-9, rsi-trend-geri-cekilme 8, gun-takvim-olay 7, varlik-tahsis-rotasyon 7. **22 aile temsilcisiz** (hepsi havuz varyantı ya da verisi olmayan kartlardan oluşuyor).
+- **Temsilciler (10):** donchian-ansambl-vol-hedef__zarattini (7), funding-7g-haftalik-tercil__vine (7), saatlik-asiri-tepki-tersine__denicola (6), gunici-momentum-noise-alani__zarattini (6; `veri_uygun=false` olmasına rağmen bilinçli istisna: DK_SPX ile test edilebilir, kabul edilmezse `hayir` yapılmalı), fip-kesitsel-momentum__baptoudur (5), btc-gecelik-max10-hafta-sonu__dujava (5), vol-yonetimli-long__moreira (5), cuma-15-est-tutma-saatlik__miralles (4), kripto-max-piyango-kesit__ozdamar (4), pre-fomc-surunme__delphic (4).
+- **Test bütçesi önerileri (Fable):** (1) çekirdek 7 + yedek 3: önce Fable ≥ 5 olan yedi temsilci (dördü zaten kodlu: donchian-ansambl, funding-7g-tercil, saatlik-asiri-tepki, FIP; üçü yeni kod ister: noise-area, btc-gecelik-max10, vol-yonetimli-long); Fable 4 olan üçü (kripto-MAX, cuma-15, pre-FOMC) bütçe kalırsa, ilk elenecekler cuma-15 (168 hücreden veri kazıma) ve pre-FOMC (yılda ~8 işlem). (2) Kodlanmış ama temsilci olmayan varyantlara (saat-21-23, volatilite-kirilim-k05, asya-kutu, aralik-kirilim, orb-4s, adaptivetrend, funding-decil, funding-z90, kirmizi-mum, l-sekli, haftalik-trix) resmi ön kayıtta yeni deneme hakkı harcanmasın; kısa-vade kesit momentum (Fable 6) yeni kod olmadan mevcut `pf__kesit_ls` sınıfının tek ön-sabitlenmiş ayarı olarak koşturulabilir. (3) Serbest parametreler ön kayıtta tek değere sabitlensin (saatlik-asiri-tepki eşik/tutma, donchian-ansambl geriye bakış listesi, noise-area bant formülü); kesit kartlarında 13-15 coinde decil/quintil yerine tercil ve tek ayar; vol-yonetimli-long strateji olarak değil, mevcut set üzerinde boyut katmanı olarak ölçülsün.
+- Fable ayrıca `veri_uygun` işaretlerinin FOMC, opsiyon vadesi, tatil öncesi kartlarında fazla kötümser olduğunu (DK_SPX var), gap-z-fade kartında ise fazla iyimser olduğunu not etti.
+
+## 2. Kaynağı açılmadan reddedilenler ve sınırdaki retler (`on_eleme_tur3_gorev2.csv`, 19 satır)
+Tur 2'de açılmadan reddedilen 13 grup-5 adayı + sınırdaki retler yeniden açıldı: **6 kart** (alligator-HA-zigzag, kesit-bosluk-z-fade, xunxuntj Supertrend CHOP/ER, tomasbatovsky momentum itkisi, tranduy216 MA hizalama [yalnız canlı kural], abbujo seans tepe/dip), 10 tekrar, 2 yasak (S4 RSI2 tüm örneklemde rank = lookahead; trad_bot_pi42 ortalama düşürme), 1 kod_yok. Dönen kararlar `REDDEDILENLER_tur3.txt`'de.
+
+## 3. `belirsiz` satırlar (`on_eleme_tur3.csv`, 122 satır = tur 2'nin 103 + Gemini 19)
+Hepsi Haiku ajanlarıyla kaynağı açılarak yeniden karara bağlandı: tekrar 34, yasak 26, kod_yok 24, kart 17, veri_yok 12, arac 8, belirsiz 1 (yalnız gerçekten okunamayan). Kart çıkan 17 satırın birleştirilmesi ve aile kontrolünden sonra **3 kart** yazıldı (hacim-delta-vekil, KamaFama_2, stokastik-ters-mum); 14'ü, ailesi dolu ve havuz/tur 1-2 kartlarının küçük varyantı olduğu için `REDDEDILENLER_tur3.txt`'ye gitti (27 satır).
+
+## 4. Yeni kartlar ve Fable
+Tur 3'te **9 yeni kart** (toplam **153**; `adaylar.csv` 153 satır). Fable yalnız yeni 9 kartı puanladı (`fable_hakem.csv`'ye eklendi): puanlar 1-3, hiçbiri ilk_20 eşiğini (≥ 5) geçmedi, hiçbiri aile temsilcisi olmadı. `oncelik` = 3. Tur 3 yeni kartların güçlü yanı yok: kaynağın kendi testi çoğunda olumsuz/küçük örneklem (alligator PF 0,69; hacim-delta 9 işlem -%4; momentum itkisi 13 işlem), %25 sabit stop, hata içeren kaynak kod (stokastik kartı).
+
+## Dürüst sınırlar (tur 3)
+- Bu turda yeni web taraması yapılmadı (talimat). Aile kümelemesi kart özetlerine dayanıyor; ajan bazı kartların yalnız özetini okudu, asıl JSON'larını değil.
+- "Küçük varyant = tekrar" kararlarının çoğu ajan yargısıdır. Sınırdaki örnekler: Sqetchii XAU sweep-reversal, dipayansamanta Fib-FVG, viki-m13/bonds BTC SMA200, gagandocx EMA/ADX (hepsi `tekrar` yazıldı; kart yapılabilir).
+- `kod_yok`'ta kalan 277 satırın URL'siz olanları için kaynak linki hâlâ bulunamadı; tur 2'nin bu sınırı geçerli.
+- Fable puanları kart metnine göre; kaynaklar açılmadı.
+- Hakem kümelemede bir istisna yaptı (noise-area temsilcisi `veri_uygun=false`); karar kullanıcıya/ana oturuma ait.
+
+## Devam noktası (tur 4)
+1. Kullanıcı/ana oturum: aile temsilcileri ve test bütçesi (çekirdek 7 + yedek 3) onayı; noise-area istisnası.
+2. `kod_yok` kalan 277 satırın URL'siz olanları; okunamayan makaleler (MDPI JRFM 19/9/692, Springer Brauneis, Ledger 213, Han-Kang-Ryu).
+3. Sınırdaki `tekrar` kararlarının (yukarıdaki 4) gözden geçirilmesi.

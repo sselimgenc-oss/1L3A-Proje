@@ -1,0 +1,83 @@
+{
+  "kart_id": "swing__12s-1g-ma357-hizalama-geri-cekilme__tranduy216",
+  "ad": "1G MA3>MA5>MA7 Trend + 12s MA Yakınlık Geri Çekilme Girişi (TP %6 / SL %3)",
+  "stil": "swing",
+  "kaynak": {
+    "url": "https://github.com/tranduy216/auto-alert-gg-chat",
+    "lisans": "yok",
+    "tur": "github"
+  },
+  "ozet": "Günlük SMA3>SMA5>SMA7 (long) veya tersi (short) trend sıralaması varken 12 saatlik grafikte fiyat SMA3'e %1 ve SMA3 de SMA7'ye %1 yakınsa trend yönünde işlem açılır; sabit %6 hedef ve %3 stop, günde coin başına en fazla bir giriş.",
+  "kategori": "trend_takip",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "kripto",
+  "zaman_dilimi": {
+    "islem": "12h",
+    "ust_filtre": "1d"
+  },
+  "gostergeler": [
+    {
+      "ad": "SMA",
+      "parametreler": {
+        "periyotlar": "3, 5, 7",
+        "zaman_dilimi": "1d"
+      }
+    },
+    {
+      "ad": "SMA",
+      "parametreler": {
+        "periyotlar": "3, 7",
+        "zaman_dilimi": "12h"
+      }
+    }
+  ],
+  "long_giris": [
+    "Günlük SMA3 > SMA5 > SMA7 (son TAMAMLANMIŞ günlük bar)",
+    "12s kapanış ile 12s SMA3 farkı: |kapanış - SMA3| / SMA3 <= %1",
+    "12s SMA3 ile SMA7 farkı: |SMA3 - SMA7| / SMA7 <= %1",
+    "Coin başına açık pozisyon yok ve o gün giriş yapılmamış"
+  ],
+  "short_giris": [
+    "Günlük SMA3 < SMA5 < SMA7",
+    "12s yakınlık koşulları long ile aynı",
+    "Aynı pozisyon/gün kuralı"
+  ],
+  "stop_loss": "Giriş fiyatından %3 ters yönde",
+  "kar_al": "Giriş fiyatından %6 lehte yönde",
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [
+    "Günde coin başına tek giriş",
+    "Aynı anda coin başına tek pozisyon"
+  ],
+  "pozisyon_risk": "Kaynak: giriş başına sermayenin %1'i x 1x kaldıraç; bizde risk limitleri kodda",
+  "iddia_edilen_performans": "Kaynakta sayısal sonuç alınmadı; README 3x piramit ve TP merdiveni anlatıyor ve canlı koddan farklı",
+  "kanit": "scripts/trading_ma_short.py (canlı kural) açıldı; sinyal ve TP/SL net. Backtest betiği backtest_ma_short.py ise günlük barı 12s barlardan ri//2 ile kuruyor: günün ilk 12s barında günlük kapanış/MA ikinci yarıyı içeriyor (LOOKAHEAD). Bu kart yalnız canlı kuralı alır; backtest sonuçları geçersiz sayılmalı.",
+  "veri_uygun": [
+    true,
+    "BTC/ETH/SOL 5m'den 12s ve 1g yeniden örneklenir (12s bar sınırı 00:00/12:00 UTC kabulüyle)."
+  ],
+  "kodlanabilirlik": {
+    "puan": 2,
+    "gerekce": "Giriş ve çıkış sayısal; canlı kodda bar kapanışı/oluşum bilgisi yok (OKX son mumu henüz kapanmamış olabilir)."
+  },
+  "belirsizlikler": [
+    "Canlı kod son mumu (kapanmamış olabilir) kullanıyor; testte yalnız kapanmış barlar kullanılmalı (giriş: 12s bar kapanışı, günlük trend: son tamamlanmış gün)",
+    "Kaynak backtest betiği günlük barı yarım gün ileriden kuruyor (lookahead): backtest hatası nedeniyle kaynaktaki sonuçlar kullanılamaz",
+    "TP/SL canlıda günlük kapanışa göre izleniyor (cc = günlük son kapanış), borsa tarafında emir olarak da konuyor; bar içi/kapanış ayrımı belirsiz",
+    "Giriş 'yakınlık' koşulları yön bilgisi içermiyor: fiyat SMA3'ün üstünde de altında da olabilir",
+    "README'deki 3x piramit ve TP merdiveni canlı kodda yok (karta alınmadı)",
+    "12s bar sınırı saat dilimine bağlı"
+  ],
+  "uyumluluk_notu": "Kesişim değil, hizalanmış MA yığını + yakınlık; mevcut geri çekilme kartlarından (rsi/ema21 geri çekilme) MA sıkışması + sabit yüzde çıkışı ile ayrışıyor. 12s bar bizim 5m'den türetilebilir.",
+  "varyantlar": [
+    "README: trading_ma_short.py dışında RSI/ATR/snowball (kademeli ekleme) botu; ekleme içerdiği için alınmadı"
+  ],
+  "anahtar_kelimeler": [
+    "sma-yigini",
+    "geri-cekilme",
+    "12s",
+    "sabit-tp-sl",
+    "trend-takip"
+  ]
+}

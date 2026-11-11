@@ -1,0 +1,128 @@
+{
+  "kart_id": "daytrade__supertrend-30m-chop-er-rejim-3-asama-stop__xunxuntj",
+  "ad": "Supertrend 30m + 4s CHOP/ER Rejim Kapısı + BTC Günlük EMA50 + 3 Aşamalı Stop",
+  "stil": "daytrade",
+  "kaynak": {
+    "url": "https://github.com/xunxuntj/ETH_Perp_Trading_bot",
+    "lisans": "MIT",
+    "tur": "github"
+  },
+  "ozet": "30m Supertrend yönünde işlem: yalnız 4s trend rejimi (CHOP<51, Kaufman ER>0.40), ani oynaklık yok (1s ATR z<3), hem coin hem BTC günlük EMA50 aynı yönde, 30m kapanış EMA20 doğru tarafında ve ADX yüksek iken girer. Stop Supertrend çizgisi, 1R'de 0,5R kâr kilitleme, sonra 1s Supertrend'e geçiş, 5R hedef.",
+  "kategori": "trend_takip",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "kripto",
+  "zaman_dilimi": {
+    "islem": "30m",
+    "ust_filtre": "4h ve 1d"
+  },
+  "gostergeler": [
+    {
+      "ad": "Supertrend",
+      "parametreler": {
+        "periyot": 10,
+        "carpan": 3.0,
+        "zaman_dilimleri": "30m ve 1h"
+      }
+    },
+    {
+      "ad": "Choppiness Index",
+      "parametreler": {
+        "periyot": 14,
+        "zaman_dilimi": "4h"
+      }
+    },
+    {
+      "ad": "Kaufman Verimlilik Oranı (ER)",
+      "parametreler": {
+        "periyot": 10,
+        "zaman_dilimi": "4h"
+      }
+    },
+    {
+      "ad": "ATR z-skoru",
+      "parametreler": {
+        "atr_periyot": 14,
+        "z_pencere": 100,
+        "zaman_dilimi": "1h"
+      }
+    },
+    {
+      "ad": "EMA",
+      "parametreler": {
+        "periyot": 50,
+        "zaman_dilimi": "1d (coin ve BTC)"
+      }
+    },
+    {
+      "ad": "EMA",
+      "parametreler": {
+        "periyot": 20,
+        "zaman_dilimi": "30m"
+      }
+    },
+    {
+      "ad": "ADX",
+      "parametreler": {
+        "uzunluk": 16,
+        "zaman_dilimi": "30m",
+        "esik": "BTC 45, ETH ve diğerleri 40 (kaynak kodu varsayılanı)"
+      }
+    }
+  ],
+  "long_giris": [
+    "Son kapanmış 1s ATR z-skoru < 3.0 (aksi halde yeni giriş yok)",
+    "Son kapanmış 4s CHOP < 51.0 VE 4s ER > 0.40",
+    "Coin 1d kapanış >= 1d EMA50 VE BTC 1d kapanış >= BTC 1d EMA50",
+    "Son kapanmış 30m Supertrend yönü +1 (yeşil)",
+    "30m kapanış >= 30m EMA20",
+    "Son kapanmış 30m ADX(16) > eşik (40/45)",
+    "Pozisyon yok; aynı 30m barda tekrar işlem yok"
+  ],
+  "short_giris": [
+    "ATR z < 3.0; 4s CHOP < 51 ve ER > 0.40",
+    "Coin 1d kapanış < 1d EMA50 VE BTC 1d kapanış < BTC 1d EMA50",
+    "30m Supertrend yönü -1",
+    "30m kapanış <= 30m EMA20",
+    "30m ADX > eşik"
+  ],
+  "stop_loss": "Başlangıç: giriş anındaki 30m Supertrend çizgisi. Sonrasında yalnız sıkılaştırılır (long: yalnız yukarı).",
+  "kar_al": "Giriş +/- 5 x |giriş - başlangıç 30m Supertrend| (BTC 5R; ETH 6R, diğerleri 5R kaynak varsayılanı)",
+  "iz_suren_stop": "3 aşama: (1) Hayatta kalma: stop = 30m Supertrend (yalnız sıkılaşır) ta ki 30m ST, kilit eşiğine (giriş + 0,5R kâr) ulaşana dek; (2) Kilit: 30m ST kilit eşiğini aşmışsa stop = kilit eşiği (giriş +/- 0,5R), aksi halde 30m ST; (3) Saatlik: 1s Supertrend kilit eşiğinden daha sıkıysa stop = 1s Supertrend (yalnız sıkılaşır). Aşama 1-2'de 30m ST ters dönünce, aşama 3'te 1s ST ters dönünce kapat.",
+  "zaman_cikisi": null,
+  "filtreler": [
+    "Aynı coinde art arda 3 stop sonrası 48 saat bekleme",
+    "Çoklu coin sepeti ağırlıkları BTC 35, ETH 30, SOL 25, DOGE 10 (sermaye dağılımı, giriş kuralı değil)"
+  ],
+  "pozisyon_risk": "Kaynak: işlem başı risk sermayenin %0,8'i (kodda sabit tutar da var), 10x kaldıraç; bizde risk limitleri kodda",
+  "iddia_edilen_performans": "README/kart: maks. düşüş %12,31, Calmar 2,87, kâr/zarar oranı 2,55 (ortamsal backtest, doğrulanmadı)",
+  "kanit": "strategy.py, config.py, indicators.py ve TRADING_STRATEGY_CARD.md açıldı; giriş/çıkış kodda sayısal ve kapanmış bar (iloc[-2]) üzerinden. Çok-parametreli (ADX eşiği 40/45 yüksek, coine göre DEMA/TP/ADX değerleri) ve backtest/ klasöründeki sonuçlar tek örneklemde optimizasyonlu; OOS yok.",
+  "veri_uygun": [
+    true,
+    "BTC/ETH/SOL 5m'den 30m, 1s, 4s, 1g yeniden örneklenir; BTC günlük EMA50 filtresi de mevcut veriyle hesaplanır."
+  ],
+  "kodlanabilirlik": {
+    "puan": 2,
+    "gerekce": "Giriş filtreleri ve üç aşamalı stop kodda net; aşama geçişleri ve canlı fiyat (current_price) ile kapanmış bar karışımı yoruma açık."
+  },
+  "belirsizlikler": [
+    "Giriş fiyatı olarak canlı 'current_price' kullanılıyor; backtestte kapanmış 30m barın kapanışı alınmalı (bar içi kayma farkı)",
+    "ADX eşiği 40-45 ve 30m'de nadir koşul; işlem sayısı çok düşük olabilir; eşikler kaynakta coine göre optimize edilmiş",
+    "1h DEMA(150/200) hesaplanıp bilgi mesajında kullanılıyor ama giriş kapısında görünmüyor",
+    "Ters sinyal geldiğinde pozisyonu çevirme (reverse) mantığı kodda var; karta alınmadı (çıkış sonrası normal giriş kuralı)",
+    "Kilit eşiği 0,5R 'risk tutarı x 0,5' ile hesaplanıyor; sabit tutarlı boyutlamada R tanımı sembole göre değişir",
+    "Önceki turlarda belgeler arası eşik tutarsızlığı işaretlendi: kodda CHOP/ER kapısı strategy.py içinde mevcut ve belgeyle uyumlu (bu turda doğrulandı)"
+  ],
+  "uyumluluk_notu": "Supertrend ailesi (swing__supertrend-psar) çok kalabalık, ama bu kart farklı rejim mantığı (CHOP/ER/ATR-z kapısı + BTC öncü günlük EMA50) ve çıkış mantığı (30m->1s Supertrend aşamalı stop + 0,5R kilit + 5R hedef) taşıyor. Kısa TradFi geçmişi için yalnız kripto.",
+  "varyantlar": [
+    "BTC/ETH/SOL/DOGE için coine özgü DEMA, TP oranı ve ADX eşikleri"
+  ],
+  "anahtar_kelimeler": [
+    "supertrend",
+    "chop",
+    "kaufman-er",
+    "rejim-kapisi",
+    "btc-oncu",
+    "asamali-stop",
+    "kilit-kar"
+  ]
+}
