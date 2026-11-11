@@ -1,9 +1,16 @@
 """Yeni sembol sınavı betiği testleri: YALNIZ küçük sentetik girdi (ağ/gerçek veri yok)."""
+import os
+
 import numpy as np
 import pandas as pd
 import pytest
 
-from araclar import yeni_sembol_sinavi as y
+_KL = os.environ.get("L3A_KILIT_LOG")          # betik içe aktarılırken ortam değişkenini ayarlar; diğer testlere sızmasın
+from araclar import yeni_sembol_sinavi as y    # noqa: E402
+if _KL is None:
+    os.environ.pop("L3A_KILIT_LOG", None)
+else:
+    os.environ["L3A_KILIT_LOG"] = _KL
 
 S = y.SECIM_TARIHI
 
