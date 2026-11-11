@@ -35,6 +35,7 @@ Kapsam dışı: scalp, yön bağımsız kol, yeni sembol, yeni strateji araması
 | Konu | Ölçüt |
 |---|---|
 | "Yatay" | 12 ayda net sonuç, yatırılan canlı sermayenin −%10 … +%10'u (sunucu gideri ayrı satır) |
+| Sunucu gideri | 12 USD/ay (DigitalOcean, kullanıcı 2026-11-11) = yılda 144 USD; haftalık raporda `--sunucu-gider-usd-ay 12`. 370 USD riskteki sermayede yılda ≈ %39 — "masraf sonrası yatay" hedefi bu satırı ayrıca gösterir, net sonuca karıştırmaz |
 | Düşüş | Günlük, açık pozisyonlar dahil, toplam canlı sermaye zirvesinden; hedef ≤ %15 |
 | ewo beklenti (250 USD) | 12 ayda −7R … +33R (≈ −26 … +125 USD; medyan ≈ +20R); ≤ −15R → emeklilik incelemesi |
 | e0v1en emeklilik | Son 60 işlem ΣR ≤ −10R → uyarı; ≤ −15R → emeklilik; ilk 30 işlemde maliyet > modelin 1,5 katı → emeklilik |
