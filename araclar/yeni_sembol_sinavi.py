@@ -376,17 +376,30 @@ def _kurallar(sembol: str, semboller_df: pd.DataFrame):
     return SembolKurallari(tick_size=float(r["tick"]), step_size=float(r["step"]), min_qty=float(r["step"]), min_notional=5.0)
 
 
+def son_islem_kes(df: pd.DataFrame, son_islem) -> pd.DataFrame:
+    """Delist sonrası arşiv, sıfır hacimli DÜZ mumlarla dolar (kapanış sabit). Son GERÇEK işlem mumunu (quote hacmi > 0) içeren
+    mumdan sonrası atılır; açık işlem bu mumun kapanışından kapanır ("veri_sonu"). Girdi/çıktı indeksi: açılış zamanı."""
+    return df[df.index <= utc(son_islem)]
+
+
 def veri_oku(sembol: str, tf: str) -> tuple:
-    """(mumlar, funding): [OKUMA_BAS, 2026-11-01). Sınır SERT doğrulanır. Okunan en büyük zamanlar da döner."""
+    """(mumlar, funding, en büyük mum zamanı, en büyük funding zamanı, son gerçek işlem 5m mumu): [OKUMA_BAS, 2026-11-01), son gerçek
+    işlem mumunda kesilir. Sınır SERT doğrulanır."""
     from motor.veri import depo
     from motor.veri.yeniden_ornekle import tf_mumlari
-    mumlar = tf_mumlari(sembol, tf, OKUMA_BAS, OLCUM_BIT_SINIR, kilit_ac=True, gerekce=KILIT_GEREKCE)
-    fund = depo.funding_oku(sembol, OKUMA_BAS, OLCUM_BIT_SINIR, kilit_ac=True, gerekce=KILIT_GEREKCE)
+    ham5 = depo.mum_oku(sembol, "5m", OKUMA_BAS, OLCUM_BIT_SINIR, kilit_ac=True, gerekce=KILIT_GEREKCE)
+    tarih_siniri_dogrula(ham5.index, f"{sembol} 5m ham")
+    gercek = ham5.index[(ham5["quote_hacim"] > 0).to_numpy()]
+    if not len(gercek):
+        raise RuntimeError(f"{sembol}: ölçüm aralığında işlem hacmi olan mum yok")
+    son_islem = gercek.max()
+    mumlar = son_islem_kes(tf_mumlari(sembol, tf, OKUMA_BAS, OLCUM_BIT_SINIR, kilit_ac=True, gerekce=KILIT_GEREKCE), son_islem)
+    fund = son_islem_kes(depo.funding_oku(sembol, OKUMA_BAS, OLCUM_BIT_SINIR, kilit_ac=True, gerekce=KILIT_GEREKCE), son_islem)
     mx_m = tarih_siniri_dogrula(mumlar.index, f"{sembol} {tf} mum")
     mx_f = tarih_siniri_dogrula(fund.index, f"{sembol} funding")
     if mx_m is None:
         raise RuntimeError(f"{sembol} {tf}: ölçüm aralığında mum yok")
-    return mumlar, fund, mx_m, mx_f
+    return mumlar, fund, mx_m, mx_f, son_islem
 
 
 def islem_kos(strateji_ad: str, tf: str, sembol: str, carpan: float, mumlar, fund, kurallar, tablo_yolu) -> pd.DataFrame:
@@ -425,9 +438,9 @@ _AYAR: dict = {}
 def _isci(gorev: tuple) -> dict:
     sembol, evren, tf = gorev
     a = _AYAR
-    mumlar, fund, mx_m, mx_f = veri_oku(sembol, tf)
+    mumlar, fund, mx_m, mx_f, son_islem = veri_oku(sembol, tf)
     kurallar = _kurallar(sembol, a["semboller_df"])
-    sonuc = {"sembol": sembol, "evren": evren, "tf": tf, "max_mum": str(mx_m), "max_fund": str(mx_f) if mx_f is not None else "",
+    sonuc = {"sembol": sembol, "evren": evren, "tf": tf, "max_mum": str(mx_m), "max_fund": str(mx_f) if mx_f is not None else "", "son_islem": str(son_islem),
              "veri_sha256": veri_ozeti(mumlar, fund), "islemler": {}}
     for ad, stf in STRATEJILER.items():
         if stf != tf:
@@ -489,6 +502,13 @@ def kos(cikti: Path = CIKTI, surec: int = 4) -> dict:
                 m2 = r_olculeri(r2)
                 sembol_satirlari.append({"evren": evren, "strateji": ad, "sembol": sm, "n_islem_x1": len(r1), "sum_r_x1": float(r1.sum()),
                                          "n_islem_x2": len(r2), "sum_r_x2": float(r2.sum()), "ort_r_x2": m2["ort_r"], "pf_x2": m2["pf"]})
+    son_islem = {}
+    for s in sonuclar:
+        son_islem[(s["evren"], s["sembol"])] = s["son_islem"]
+    ref = max(pd.Timestamp(v) for v in son_islem.values())
+    pd.DataFrame([{"evren": e, "sembol": sm, "son_islem_mumu": v,
+                   "delist": bool(pd.Timestamp(v) < ref - pd.Timedelta(days=DELIST_TOLERANS_GUN))}
+                  for (e, sm), v in sorted(son_islem.items())]).to_csv(cikti / "delist_duzeltme.csv", index=False)
     pd.DataFrame(satirlar).to_csv(cikti / "sonuc_strateji.csv", index=False)
     pd.DataFrame(sembol_satirlari).to_csv(cikti / "sonuc_sembol.csv", index=False)
     mx = max(pd.Timestamp(s["max_mum"]) for s in sonuclar)

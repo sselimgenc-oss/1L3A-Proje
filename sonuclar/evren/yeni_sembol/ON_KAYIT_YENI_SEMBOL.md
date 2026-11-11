@@ -41,12 +41,22 @@ ortalaması = ΣR toplamı / işlem toplamı; %90 GA = 5. ve 95. yüzdelik) orta
 
 ## Uyarılar (baştan)
 Kripto semboller birbirine yüksek korelasyonlu → semboller bağımsız değil, GA iyimser; tek dönem (2023-11→2026-10); 40 sembolün
-3'ü delist (MATIC, EOS, TOMO) ama liste "arşivde adı geçen" evrenle sınırlı → survivorship kalıntısı (S'den sonra listelenmeyen ya da
+bir kısmı delist (kesin sayı: koşu çıktısı delist_duzeltme.csv; bkz. düzeltme) ama liste "arşivde adı geçen" evrenle sınırlı → survivorship kalıntısı (S'den sonra listelenmeyen ya da
 arşive girmeyen yok; S'de işlem görüp arşivden silinmiş sembol varsa görünmez). Arşivde 2026-10-28 günü bazı sembollerde eksik olabilir.
 Ölçüm dönemi eski evrenin geliştirme/kilit/holdout dönemleriyle örtüşür (eski evren burada referanstır, bağımsız sınav değildir).
 
 ## Yeni evren listesi (kilitli, 40)
 1. TRB, 2. AVAX, 3. MATIC (delist 2024-09-11), 4. GALA, 5. LTC, 6. RUNE, 7. STORJ, 8. BLZ, 9. DOT, 10. CRV, 11. MKR, 12. 1000SHIB, 13. DYDX, 14. OGN, 15. ETC, 16. ZRX, 17. ATOM, 18. EOS (delist 2025-05-21), 19. FIL, 20. STMX, 21. FTM, 22. AAVE, 23. BAKE, 24. TOMO (delist 2024-05-28), 25. UNFI, 26. AXS, 27. BAND, 28. MASK, 29. NEAR, 30. UNI, 31. HOT, 32. WAVES, 33. KNC, 34. SAND, 35. COMP, 36. LINA, 37. NEO, 38. ENJ, 39. MANA, 40. ALGO
 
+## ÖN KAYIT DÜZELTMESİ (koşudan ÖNCE, 2026-11-11; sonuç görülmedi)
+Veri indirilirken fark edildi: arşiv, delist sonrası günlük/5m mumları SIFIR hacimli ve sabit kapanışlı "düz" mumlarla uzatıyor.
+Sonuçları: (a) \`semboller.csv\`'deki son_mum/delist sütunları (1d arşivinden) delist'i kaçırıyor (orada yalnız 3 görünüyordu; gerçek
+sayı çok daha yüksek); (b) "delist sembolde açık işlem son mumun kapanışından kapanır" kuralı düz mumlarla boşa çıkardı.
+Düzeltme (kural aynı, uygulaması netleşti): betik her sembolde 5m quote_hacim > 0 olan SON mumu "son gerçek işlem" sayar, tf mumları
+ve funding bu mumu içeren mumda kesilir; açık işlem o mumun kapanışından kapanır. Sembol listesi ve sıralaması DEĞİŞMEDİ
+(seçim S öncesi hacimle yapıldı; 40 sembolün hepsinin son gerçek işlemi >= S doğrulandı). \`semboller.csv\` kilitli kalır; doğru
+delist bilgisi koşu çıktısı \`delist_duzeltme.csv\`'dedir. Delist eşiği: son gerçek işlem, koşudaki en yeni son işlemden >7 gün eski.
+Betik bu düzeltmeyle güncellendi; aşağıdaki sha256 GEÇERLİDİR (ilk commit'teki eski sha geçersiz).
+
 ## Betik sha256 (koşudan önce)
-0769a509d23eb628576dbea4ecf38d4fa23e82d3dc5eeeef30c0f86ea33e5010  araclar/yeni_sembol_sinavi.py
+525a41e3576213237085cac9ecc6d0f9dba6864f0d017db6dedb859769d3b5b7  araclar/yeni_sembol_sinavi.py

@@ -145,3 +145,10 @@ def test_kural_turet():
     assert y.kural_turet(60000.0) == (1.0, 1e-05)
     with pytest.raises(ValueError):
         y.kural_turet(0.0)
+
+
+def test_son_islem_kes_duz_mumlari_atar():
+    idx = pd.date_range("2024-01-01", periods=6, freq="5min", tz="UTC")
+    df = pd.DataFrame({"kapanis": [1, 2, 3, 3, 3, 3.0]}, index=idx)
+    out = y.son_islem_kes(df, idx[2])
+    assert len(out) == 3 and out.index.max() == idx[2]
