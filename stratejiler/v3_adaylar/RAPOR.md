@@ -315,3 +315,32 @@ Kaynak federalreserve.gov (2013-2020 `fomchistorical<yıl>.htm`, 2021-2026 `fomc
 - 2013-2015 duyuru saatleri bilinmiyor; literatürde saatin 2011 sonrası değiştiği geçiyor (doğrulanmadı).
 - `on_kayit_girdi.csv` bir birleştirme: yeni karar yok; ajanlar motor kodunu yeniden okumadı (yalnız tur 4/5 csv'lerindeki aktarımlar). Tur 5 verisi henüz `main`'de olmadığı için dosya #29 birleşmeden bağımsız doğrulanamaz.
 - Tablo ön kayıt değildir; ön kayıt kararı (KARAR GEREKLI satırları) kullanıcı ve ana oturumda.
+
+---
+
+# Tur 8 (2026-11-11)
+Kod-kaynak çapraz kontrolü. Güncel `main` (PR #31 ve #32 dahil) üzerinden; **kod değiştirilmedi**, yalnız `kod_kontrol_tur8.csv` (139 satır) eklendi. 4 Sonnet ajanı kodlanmış sürümleri satır satır okudu (sentetik veriyle küçük denemeler yaptılar, repoya yazmadılar), Fable ajan iddialarını koddan doğrulayıp sıraladı.
+
+## 1. Kapsam
+7 kodlu temsilci: donchian (`pf__v3-donchian-ansambl`), vol-yönetimli (`pf__v3-vol-yonetimli-long`), funding-7g (`funding_gunluk_toplam` ile), FIP, noise-alanı (`v3_adaylar_4.py`), btc-gecelik, saatlik-aşırı-tepki. **cuma-15, kripto-max ve pre-FOMC'nin kodu yok** (1'er `kodda_yok` satırı; kod yazılmadan test edilemez).
+
+## 2. Sonuç
+139 satır: **ayni 74, farkli 21, kodda_yok 11, belirsiz 33**. Önem: yüksek 11 (farklı 8, kodda_yok 1, belirsiz 2), orta 34, düşük 94. `farkli` ve `kodda_yok` satırlarının hepsinde önem gerekçesi `not` sütununda. **Lookahead: hiçbir kodlanmış temsilcide bulunmadı** (donchian ve vol-yönetimli ilk 500 günü kısaltma/Mart fiyatını x4 yapma denemesiyle, funding-7g sentetik testle; noise-alanı ve btc-gecelik shift/cumsum kod okumasıyla).
+
+## 3. Test sonucunu en çok değiştirecek 5 fark (Fable sıralaması; "düzelt" kararı kullanıcıda)
+1. **noise-alanı:** giriş anındaki max(üst bant, VWAP) motora **sabit mum-içi stop** olarak veriliyor (kaynakta yalnız yarım saatlik kontrolde cari bantla karşılaştırılır); boyut %1 risk / dar stop mesafesi (3x tavan), ön kayıt sabit %100; fitil değmesi çıkış tetikler (+5 bps), kapanış hâlâ bant dışındaysa aynı gün yeniden giriş. Gün sonu çıkışı 15:30 mumunda `cikis=True`, dolum sonraki açılışta (veri yalnız seans mumlarıysa gece tutma; veri bu ortamda yok, doğrulanamadı). → **DÜZELT (test öncesi)**.
+2. **FIP:** kod skoru `işaret(mom90) × (pozitif gün − negatif gün)/90` (kartla aynı); ama düzgün DÜŞEN coin +1 alıp long oluyor, yani sıralama "momentum" değil "düzgünlük". Da-Gurun-Warachka'da (açılmadı, hafızadan) ID momentuma göre sıralı gruplar içinde kullanılır. → **kaynak doğrulanmadan "FIP momentum" diye koşulmamalı**; doğrulanamazsa "bizim düzgünlük sıralamamız" diye beyan.
+3. **btc-gecelik:** 1 saatlik ATR(14)×2 **sabit** stop (kaynak stopsuz; 18-66 saatlik tutuşta dar) ve MAX(10) tanımı = önceki 10 NY takvim gününün en yüksek **HIGH**'ı (ön kayıt: 16:00 **kapanışı** ≥ önceki 10 günün en yüksek 16:00 kapanışı; kod daha sıkı). → **DÜZELT/tek değere bağla** (MAX için ucuz yol kodu ön kayda çekmek; stop için karar kullanıcıda).
+4. **donchian:** ATR(14)×3 **iz süren** stop (kaynakta yok; zirve kapanıştan 3 ATR geri çekilme = tam çıkış), stop sonrası strateji modeli hâlâ long saydığı için yeniden giriş yalnız model değişince/%20 sapmada; sabit 13 sembol listesi (ay sonu evren seçimi, hacim/yaş filtresi yok: hayatta kalma yanlılığı). → stopsuz kaynak-sadık kıyas koşusu **ya da beyan**; sabit evren: veri kısıtı, "sonuç yukarı yanlı olabilir" beyanı.
+5. **vol-yönetimli:** ağırlık `0,20 / (önceki takvim ayı günlük getiri STD'si × √252)`, tavan 1, 1/n: std'nin tersi (vol hedefleme), ön kayıt satırı "varyansın tersi" diyor (iç çelişki: Tur 4 Fable "sabit hedef vol + tavan 1" demişti, kod buna uyuyor); √252 kriptoya da uygulanmış (kripto vol'ü ~%17 düşük ölçülür); ATR×2 iz süren stop sonrası pozisyon ay sonuna kadar nakitte. Ön kayıtta "boyut katmanı", kodda bağımsız strateji. → ön kayıt satırı düzeltilerek **beyan**, kripto için 365 küçük bir düzeltme adayı, stopsuz kıyas satırı.
+Hemen ardından: **funding-7g ve FIP'te portföy motorunun %5 toplam stop riski kırpması** (ATR×3 stopla fiili brüt kabaca 0,3-0,55; hedef "brüt 1,0") ve `zarar_buyutme` hedefi aşağı çekiyor; Sharpe ölçekten büyük ölçüde bağımsız, mutlak getiri/MDD ve sayısal eşikler etkilenir → ön kayıtta beyan.
+
+## 4. Eskimiş ön kayıt satırları (PR #32 sonrası)
+funding-7g günlük toplam artık kodda (`funding_gunluk_toplam`; Tur 4/5 "farklı" hükmü eskidi), evren 13 coin (kayıttaki "varsayılan 3 coin" eskidi), `min_periods` kayıtta 2 / kodda 7, `min_sembol` funding-7g'de 2 (FIP'te 5). Pazartesi hizası ve `Takvim.mom`'un skip içermediği teyit edildi. Zamanlama temiz: funding-7g skoru t-7..t-1 barlarının ortalaması, dolum Salı 00:00 (efektif 1 gün gecikme + 1 bar dolum).
+
+## Dürüst sınırlar (tur 8)
+- **Gerçek veriyle hiçbir koşu yok** (`veri/mumlar` bu ortamda yok); ajanların sayıları (fiili brüt, kırpma adetleri, stop çıkışı oranı) sentetik veriden; Fable'ın büyüklük tahminleri kaba el hesabı. "Sonucu ne kadar değiştirir" sıralaması yargıdır, ölçüm değil.
+- Fable'ın okumadığı: saatlik-aşırı-tepki sınıfı (`v3_adaylar.py`; ajan D kodu okudu: lookahead yok, dolum sonraki açılış, ciddi hata yok), `funding.py` gövdesi, koşu betikleri/maliyet tablosu, veri hazırlama katmanı, testler. Bu satırlardaki ajan iddiaları Fable tarafından doğrulanmadı.
+- 74 `ayni` satır tek tek denetlenmedi; kaynak cümleleri Tur 4/5 aktarımlarına dayanıyor (Quantpedia/Vine özet düzeyinde, Da-Gurun-Warachka açılmadı, De Nicola birincil metni yok).
+- Ajan etiketleri yer yer tutarsız: `kodda_yok` hem "kart kodlanmamış" hem "kaynakta olmayan kural kodda var" için kullanıldı; önem dereceleri ajanlar arasında aynı ölçüyle verilmedi (Fable vol-yönetimli stopunu "orta" yerine yüksek sayıyor).
+- Koşuda fiilen hangi parametre/maliyet/evrenin geçeceği koşu betiğine bağlı; sınıf varsayılanlarını doğrulamak koşuyu doğrulamak değildir.
