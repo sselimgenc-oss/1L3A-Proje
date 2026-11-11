@@ -1,0 +1,101 @@
+{
+  "kart_id": "swing__sma-pullback-rsi-sl5-tp10__adobyy",
+  "ad": "SMA50/100 Trend + SMA20 Kesişim Girişi, RSI Filtre, %5 SL / %10 TP",
+  "stil": "swing",
+  "kaynak": {
+    "url": "https://github.com/AdobyY/TA-Bot",
+    "lisans": "yok (lisanssız; kod kopyalanmadı)",
+    "tur": "github"
+  },
+  "ozet": "Günlük grafikte SMA(n1) > SMA(n2) iken kapanış SMA(giriş)'i yukarı keserse (ve RSI<70) long; tersi short. Çıkış SMA(çıkış) kesişimi, %5 stop veya %10 hedef.",
+  "kategori": "trend_takip",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "kripto",
+  "zaman_dilimi": {
+    "islem": "1d",
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {
+      "ad": "SMA",
+      "parametreler": {
+        "periyot": 50,
+        "rol": "n1 trend"
+      }
+    },
+    {
+      "ad": "SMA",
+      "parametreler": {
+        "periyot": 100,
+        "rol": "n2 trend"
+      }
+    },
+    {
+      "ad": "SMA",
+      "parametreler": {
+        "periyot": 20,
+        "rol": "giriş"
+      }
+    },
+    {
+      "ad": "SMA",
+      "parametreler": {
+        "periyot": 10,
+        "rol": "çıkış"
+      }
+    },
+    {
+      "ad": "RSI",
+      "parametreler": {
+        "periyot": 14
+      }
+    }
+  ],
+  "long_giris": [
+    "SMA(50) > SMA(100)",
+    "Kapanış SMA(20)'yi yukarı kesti (önceki bar altında, bu bar üstünde)",
+    "RSI(14) < 70",
+    "Pozisyon yok"
+  ],
+  "short_giris": [
+    "SMA(50) < SMA(100)",
+    "SMA(20) kapanışı yukarı kesti (kapanış SMA(20)'nin altına geçti)",
+    "RSI(14) > 30",
+    "Pozisyon yok"
+  ],
+  "stop_loss": "Giriş fiyatının %5 ötesi",
+  "kar_al": "Giriş fiyatının %10 ötesi",
+  "iz_suren_stop": null,
+  "zaman_cikisi": "Long: kapanış SMA(10)'u aşağı kesince kapat; short: yukarı kesince kapat",
+  "filtreler": [
+    "RSI aşırı bölge filtresi"
+  ],
+  "pozisyon_risk": "Sermayenin %2'si risk, boyut = %2 / %5 stop mesafesi, dinamik %5-%20 çarpan eklenir (formül volatilite/RSI/trend'e bağlı)",
+  "iddia_edilen_performans": "README: toplam getiri +%176, CAGR +%39.34, MaxDD -%19.65, Sharpe 1.44 (SOL-USD, 2022-2025; iddia, doğrulanmadı; parametreler aynı veride optimize edilmiş)",
+  "kanit": "iddia (doğrulanmadı): README'de +%176 getiri, Sharpe 1.44; dış örneklem testi yok",
+  "veri_uygun": [
+    true,
+    "SOL-USD günlük; Binance USDT-M günlük (veya 1h->1d resample) ile test edilir. Short da var."
+  ],
+  "kodlanabilirlik": {
+    "puan": 3,
+    "gerekce": "Tüm giriş/çıkış kuralları sayısal. Backtesting.py varsayılanı: sinyal bar kapanışında, emir sonraki bar açılışında (lookahead yok)."
+  },
+  "belirsizlikler": [
+    "Varsayılan n1=50,n2=100,n_enter=20,n_exit=10; optimize edilmiş final değerler kaynakta okunmadı",
+    "Boyut çarpanı karışık; kartta sabit risk önerilir",
+    "2022-2025 tek varlık, dış örneklem yok"
+  ],
+  "uyumluluk_notu": "Kripto günlükte doğrudan uyumlu. MA kesişim/pullback ailesinin varyantı; sabit %5/%10 SL/TP ve SMA(10) çıkışı farklı.",
+  "varyantlar": [
+    "Parametre aralıkları: n1 20-70, n2 50-140, n_enter 10-25, n_exit 5-15, SL %3-10, TP %8-20 (kaynağın optimizasyon ızgarası)"
+  ],
+  "anahtar_kelimeler": [
+    "sma",
+    "rsi",
+    "trend",
+    "pullback",
+    "sol",
+    "sl-tp"
+  ]
+}

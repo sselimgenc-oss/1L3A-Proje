@@ -1,0 +1,97 @@
+{
+  "kart_id": "daytrade__hacim-klimaksi-bant-donus__rafael-silvaa",
+  "ad": "Hacim Klimaksı + Bollinger/RSI Bant Dönüşü (15m)",
+  "stil": "daytrade",
+  "kaynak": {
+    "url": "https://github.com/rafael-silvaa/mexc-trading-bot",
+    "lisans": "YOK",
+    "tur": "github"
+  },
+  "ozet": "15 dakikalıkta fiyat Bollinger alt bandının altına iğne atıp bandın içinde, yeşil mumla kapanırsa, RSI aşırı satımdaysa ve hacim ortalamanın üstündeyse long; üst bant için ayna short. Orta banda dokunuşta kâr alır, 1.5 ATR stop kullanır.",
+  "kategori": "ortalamaya_donus",
+  "piyasa_rejimi": "yatay",
+  "orijinal_piyasa": "kripto",
+  "zaman_dilimi": {
+    "islem": "15m",
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {
+      "ad": "Bollinger",
+      "parametreler": {
+        "periyot": 20,
+        "carpan": 2.0
+      }
+    },
+    {
+      "ad": "RSI",
+      "parametreler": {
+        "periyot": 14,
+        "asiri_satim": 27,
+        "asiri_alim": 75
+      }
+    },
+    {
+      "ad": "ATR",
+      "parametreler": {
+        "periyot": 14
+      }
+    },
+    {
+      "ad": "Hacim SMA",
+      "parametreler": {
+        "periyot": 20,
+        "carpan": 1.2
+      }
+    }
+  ],
+  "long_giris": [
+    "Mumun dibi BB alt bandın altında (low < alt bant) ve kapanış alt bandın üstünde (close > alt bant)",
+    "RSI(14) < 27",
+    "Mum yeşil (close > open)",
+    "Hacim > 1.2 x SMA(20, hacim)",
+    "Açık pozisyon yok"
+  ],
+  "short_giris": [
+    "Mumun tepesi BB üst bandın üstünde (high > üst bant) ve kapanış üst bandın altında",
+    "RSI(14) > 75",
+    "Mum kırmızı (close < open)",
+    "Hacim > 1.2 x SMA(20, hacim)",
+    "Açık pozisyon yok"
+  ],
+  "stop_loss": "Sinyal mumunun kapanışından 1.5 x ATR(14) uzakta (long: aşağıda, short: yukarıda)",
+  "kar_al": "Long: bar yükseği orta banda (BB SMA20) değince kapat; short: bar düşüğü orta banda değince kapat",
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [
+    "Hacim klimaksı filtresi (varsayılan açık)",
+    "Mum yönü onayı"
+  ],
+  "pozisyon_risk": "Kaynakta sermayenin %20'si (Pine varsayılanı; risk modeli değil)",
+  "iddia_edilen_performans": "iddia (doğrulanmadı): README 2 aylık örnekte kazanma ~%60, PF ~1.72, maks. düşüş <%0.50, ayda ~5 işlem",
+  "kanit": "Yalnız 2 aylık tek-sembol (SOLUSDT) örnek; küçük örnek ve parametreler o örnekte seçilmiş (iddia, doğrulanmadı).",
+  "veri_uygun": [
+    true,
+    "SOL perp 15m OHLCV+hacim bizde var."
+  ],
+  "kodlanabilirlik": {
+    "puan": 3,
+    "gerekce": "Tüm koşullar OHLCV ile ölçülebilir; stop ve çıkış net."
+  },
+  "belirsizlikler": [
+    "README RSI eşiğini 30 yazıyor, SOLUSDT.pine dosyası 27 kullanıyor; kartta dosya değeri alındı",
+    "Sinyalin hangi bar açılışında doldurulacağı Pine varsayılanı (sinyal barı kapanışı sonrası) olarak varsayıldı",
+    "Orta bandın hareketli olması: hedef her barda güncel orta bant"
+  ],
+  "uyumluluk_notu": "Mevcut bant dönüş ailesinden (ChartArt, Bandtastic) farkı: iğne+kapanış içeri, RSI<27, hacim klimaksı, ATR stop. Kripto 15m, uyumlu.",
+  "varyantlar": [
+    "Kaynakta ayrı sembol dosyaları (configs/)"
+  ],
+  "anahtar_kelimeler": [
+    "bollinger",
+    "rsi",
+    "hacim-klimaksi",
+    "ortalamaya-donus",
+    "atr-stop"
+  ]
+}

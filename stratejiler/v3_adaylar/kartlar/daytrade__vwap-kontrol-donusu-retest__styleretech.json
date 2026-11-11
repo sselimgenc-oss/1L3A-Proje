@@ -1,0 +1,104 @@
+{
+  "kart_id": "daytrade__vwap-kontrol-donusu-retest__styleretech",
+  "ad": "VWAP Kontrol Dönüşü: Kesişim Sonrası Retest Girişi",
+  "stil": "daytrade",
+  "kaynak": {
+    "url": "https://github.com/StylereTech/VWAP-trading-",
+    "lisans": "yok (lisans dosyası yok)",
+    "tur": "github"
+  },
+  "ozet": "Günlük sıfırlanan VWAP'ı fiyat yukarı keser, sonra 12 bar içinde VWAP'a retest edip tutunursa long (aşağı kesişim + red için short). Hacim, EMA90 eğimi, VWMA10 eğimi ve seans filtresi onaylar; çıkış band ilerlemesi veya iz süren stop.",
+  "kategori": "destek_direnc",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "kripto",
+  "zaman_dilimi": {
+    "islem": "5m",
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {
+      "ad": "Günlük VWAP + hacim ağırlıklı sigma",
+      "parametreler": {
+        "sifirlama_utc": "23:00",
+        "fiyat": "(H+L+C)/3",
+        "bantlar": "1, 2, 3 sigma"
+      }
+    },
+    {
+      "ad": "EMA",
+      "parametreler": {
+        "periyot": 90
+      }
+    },
+    {
+      "ad": "VWMA",
+      "parametreler": {
+        "periyot": 10
+      }
+    },
+    {
+      "ad": "ATR",
+      "parametreler": {
+        "periyot": 20,
+        "ema_ort": 5
+      }
+    },
+    {
+      "ad": "Hacim SMA",
+      "parametreler": {
+        "periyot": 20
+      }
+    }
+  ],
+  "long_giris": [
+    "Kapanış VWAP'ı yukarı keser (önceki kapanış<=VWAP, şimdiki>VWAP); kesişimin üzerinden en fazla 12 bar geçmiş",
+    "Retest: barın düşüğü VWAP'a ATR(20) x 0,05 toleransla değer ve kapanış VWAP üstü; kesişimden sonra 2-4. retest (varsayılan penceresi)",
+    "Hacim >= 1,1 x hacim SMA(20)",
+    "EMA90 yatay veya yukarı",
+    "VWMA10 yatay veya yukarı",
+    "Seans: 08:00-10:00 ve 13:30-17:00 UTC",
+    "ATR(20) <= 2,5 x ATR'nin EMA(5)'i"
+  ],
+  "short_giris": [
+    "Aşağı kesişim; retest: barın tepesi VWAP'a değer ve kapanış VWAP altı",
+    "Diğer filtreler ayna simetrik (EMA90 ve VWMA10 yatay/aşağı)"
+  ],
+  "stop_loss": "Giriş fiyatından ATR x 2,0 mesafe (varsayılan atr_mult_stop)",
+  "kar_al": "Band ilerlemesi: kapanış 1/2/3 sigma bandına ulaştığında çık (her bant bir kez)",
+  "iz_suren_stop": "Kâr %0,7 olunca aktif; zirveden/dipten %0,7 geri",
+  "zaman_cikisi": "Zaman çıkışı varsayılan kapalı",
+  "filtreler": [
+    "Seans filtresi",
+    "Hacim filtresi (çarpan, yüzdelik, itki, geri alım kalitesi seçenekleri var)",
+    "Oynaklık sınırı"
+  ],
+  "pozisyon_risk": "Hesap riski %0,3 işlem başına (prop firm güvenli)",
+  "iddia_edilen_performans": null,
+  "kanit": "Repo notlarında backtest sonuçları var; hiçbiri doğrulanmadı ve kart sonuç iddia etmiyor.",
+  "veri_uygun": [
+    true,
+    "Binance perp 5m OHLCV+hacim bizde var; seans filtresi UTC'de kripto için anlamlı olmayabilir."
+  ],
+  "kodlanabilirlik": {
+    "puan": 2,
+    "gerekce": "Kurallar kodda açık ama ayar çok (~20), kısmi kâr/başa baş/RL ve optimizasyon katmanları ayrı."
+  },
+  "belirsizlikler": [
+    "Repo ML/RL ve kuantum optimize katmanları içeriyor; kart yalnız kural tabanlı VWAP kolunu kapsar",
+    "Nth retest pencerası iç içe varsayılanlar (2-4) kodda sert kodlanmış",
+    "Orijinal piyasa forex/CFD (GBPJPY vb.); kriptoda performans bilinmiyor",
+    "Sinyal dolumu aynı bar kapanışı mı sonraki açılış mı kaynakta net değil",
+    "Aşırı parametreli optimizasyon riski"
+  ],
+  "uyumluluk_notu": "Mevcut VWAP kartı yalnız zarattini gün içi momentum; bu retest tabanlı VWAP kolu farklı.",
+  "varyantlar": [
+    "Band ilerlemesi kısmi çıkış, %40 kısmi TP +1R, başa baş +1R (kodda opsiyonel)"
+  ],
+  "anahtar_kelimeler": [
+    "vwap",
+    "retest",
+    "kontrol-donusu",
+    "sigma-bandi",
+    "seans-filtresi"
+  ]
+}

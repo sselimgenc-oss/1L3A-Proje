@@ -1,0 +1,69 @@
+{
+  "kart_id": "daytrade__cuma-15-est-tutma-saatlik__miralles",
+  "ad": "Cuma 15:00 (EST) Sonrası Saatlik Tutma",
+  "stil": "daytrade",
+  "kaynak": {
+    "url": "https://oeconomia.pl/index.php/oc/article/download/2091/1935/2736",
+    "lisans": "CC BY 4.0",
+    "tur": "makale"
+  },
+  "ozet": "Bitcoin'de saat-bazlı olay çalışması: Cuma günü 15:00 (EST) saatinden sonraki 4-24 saatlik birikimli getiriler 3 yıllık kayan pencerelerde sürekli anlamlı bulunmuş. Yazarlar Cuma 15:00'te alıp birkaç saat tutmayı öneriyor; yalnız 15:00-15:59 mumunu tutmak ise sürekli negatif çıkmış.",
+  "kategori": "diger",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "kripto",
+  "zaman_dilimi": {
+    "islem": "1h",
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {
+      "ad": "Saat-haftanın günü takvimi",
+      "parametreler": {
+        "olay_saati": "Cuma 15:00 EST",
+        "tutma_saat": "4, 5, 6, 12, 18 veya 24 (yazar 4-6 saati en iyi buluyor)"
+      }
+    }
+  ],
+  "long_giris": [
+    "Cuma günü saat 15:00 (EST) mumunun kapanışından sonra (13. saat/16:00 açılışı) long aç; yazar 'saat 16:00'da al' ifadesini de kullanıyor, tam giriş mumu kaynakta tutarsız"
+  ],
+  "short_giris": [],
+  "stop_loss": null,
+  "kar_al": null,
+  "iz_suren_stop": null,
+  "zaman_cikisi": "Girişten 4 saat sonra kapat (en iyi seçenek: 16:00'da al, 19:59:59'da sat); 5, 6, 12, 18, 24 saat alternatifleri test edilmiş",
+  "filtreler": [
+    "Yalnız Cuma",
+    "Saat dilimi EST (yaz saati uygulaması kaynakta belirtilmemiş)"
+  ],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": "Kaynak: 3 yıllık kayan pencerede Cuma 15:00 sonrası 4-24 saatlik birikimli ortalama getiriler anlamlı; Sharpe oranı al-tut ve yalnız 15:00 mumunu tutan seçeneğin üstünde (Sharpe rakamı metinde sayısal verilmemiş, yalnız şekilde). İşlem maliyeti dahil değil (iddia, doğrulanmadı)",
+  "kanit": "Miralles-Quiros & Miralles-Quiros, Oeconomia Copernicana 13(3) 2022; Kraken saatlik BTC, 2016-2021. Örneklem içi kayan pencere; hold-out yok; maliyet hariç; seçilen kural (Cuma 15:00) aynı örneklemden bulunmuş, çoklu test düzeltmesi yok. İddia (doğrulanmadı).",
+  "veri_uygun": [
+    true,
+    "Binance USDT-M BTC 1h OHLCV yeterli; zaman dilimini UTC'ye çevirmek gerekir."
+  ],
+  "kodlanabilirlik": {
+    "puan": 2,
+    "gerekce": "Kural basit takvim kuralı; giriş mumu ve EST/yaz saati yorumu kaynakta net değil."
+  },
+  "belirsizlikler": [
+    "EST sabit UTC-5 mi yoksa ABD yaz saatli mi kaynakta yok",
+    "Giriş saati 15:00 mu 16:00 mı: metinde iki ifade var",
+    "Stop, maliyet, hacim filtresi kaynakta yok",
+    "Seçilen saat/gün aynı örneklemde bulunmuş: veri kazıma riski",
+    "Yalnız BTC; diğer coinlerde test yok"
+  ],
+  "uyumluluk_notu": "1h BTC perp'e doğrudan uyar, hacim/order book gerekmez. Mevcut daytrade__saat-21-23-utc__padysak ile aynı saat-mevsimsellik ailesi ama farklı (haftanın günü + 15:00 EST) kural; Cuma 20:00-21:00 UTC civarına denk gelir, çakışma kontrolü yapılmalı. Zayıf kanıt: örneklem içi.",
+  "varyantlar": [
+    "Tutma süresi 4/5/6/12/18/24 saat",
+    "Pazartesi 4-6 ve 12-15, Pazar 9-15 saatleri de anlamlı bulunmuş (Cuma kadar sağlam değil)"
+  ],
+  "anahtar_kelimeler": [
+    "saat-mevsimselligi",
+    "hafta-gunu",
+    "cuma",
+    "btc",
+    "takvim"
+  ]
+}

@@ -1,0 +1,75 @@
+{
+  "kart_id": "daytrade__kayan-vwap-sekme-rsi__alwin48",
+  "ad": "20 Barlık Kayan VWAP'a Sekme (RSI Onaylı)",
+  "stil": "daytrade",
+  "kaynak": {
+    "url": "https://github.com/alwin48/fyers-trading-bot",
+    "lisans": "MIT",
+    "tur": "github"
+  },
+  "ozet": "Fiyat 20 barlık VWAP'ın en az %0,5 altından VWAP'ı yukarı keserse long (RSI<70), %0,5 üstünden aşağı keserse short (RSI>30). Sabit %1 stop, %2 hedef.",
+  "kategori": "ortalamaya_donus",
+  "piyasa_rejimi": "yatay",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+    "islem": "5m",
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {
+      "ad": "Kayan VWAP",
+      "parametreler": {
+        "pencere": 20,
+        "tur": "close x hacim toplamı / hacim toplamı"
+      }
+    },
+    {
+      "ad": "RSI",
+      "parametreler": {
+        "periyot": 14,
+        "ust": 70,
+        "alt": 30
+      }
+    }
+  ],
+  "long_giris": [
+    "Önceki kapanış < 0,995 x önceki VWAP",
+    "Şimdiki kapanış >= VWAP",
+    "RSI(14) < 70"
+  ],
+  "short_giris": [
+    "Önceki kapanış > 1,005 x önceki VWAP",
+    "Şimdiki kapanış <= VWAP",
+    "RSI(14) > 30"
+  ],
+  "stop_loss": "Giriş fiyatından %1 (varsayılan stop_loss_percentage)",
+  "kar_al": "Giriş fiyatından %2 (take_profit_percentage)",
+  "iz_suren_stop": null,
+  "zaman_cikisi": "Kodda: açık long, 'sell_signal' ile kapanır",
+  "filtreler": [],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": null,
+  "kanit": null,
+  "veri_uygun": [
+    true,
+    "Binance perp 5m OHLCV+hacim bizde var; kaynak NSE hisse."
+  ],
+  "kodlanabilirlik": {
+    "puan": 2,
+    "gerekce": "Sinyal mekanik; yalnız %1/%2 stop/hedef base_strategy'den geliyor, short kolunun işlem yönü bot katmanına bağlı."
+  },
+  "belirsizlikler": [
+    "Short kolunun gerçekten işlem yapıp yapmadığı kaynakta net değil (should_sell yalnız açık pozisyonu kapatıyor)",
+    "RSI basit hareketli ortalamayla (Wilder değil) hesaplanıyor",
+    "Zaman dilimi 5m not edilmiş ama kodda sabit değil",
+    "Stop/hedef config'ten okunuyor, varsayılan değerler notlandı"
+  ],
+  "uyumluluk_notu": "20 barlık kayan VWAP (günlük sıfırlamalı değil); mevcut VWAP kartlarıyla çakışmaz.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+    "vwap",
+    "sekme",
+    "rsi",
+    "kayan-vwap"
+  ]
+}

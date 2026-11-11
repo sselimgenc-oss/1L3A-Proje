@@ -53,3 +53,56 @@ Fable'ın 3 genel riski:
 
 ## Dosyalar
 `on_eleme.csv` (2515 satır), `kartlar/*.json` (72), `adaylar.csv` (72), `fable_hakem.csv` (72), `REDDEDILENLER.txt`, bu rapor. `ham/` ve `TALIMAT.md` değiştirilmedi.
+
+---
+
+# Tur 2 (2026-11-11)
+Tur 1 metnine dokunulmadı; yalnız dosyalara satır/dosya eklendi.
+
+## Özet
+- **Gemini** (`gemini_dr_6bolge.csv` 69 + `gemini_dr_afrika.csv` 8 = 77 satır): `on_eleme.csv` sonuna eklendi (artık 2592 veri satırı). Kararlar: tekrar 24, belirsiz 19, kod_yok 19, veri_yok 7, kart 4, yasak 2, arac 2. Gemini'nin birçok linki/tarifi uydurma ya da yanlıştı (404 repo, kodla uyuşmayan stop/lisans); karar kodu/sayfayı açıp okuyarak verildi. Açılmayan fmz/tistory/dergipark satırları `belirsiz` bırakıldı.
+- **kod_yok yeniden bakış** (`on_eleme_tur2_kod_yok.csv`, tur 1'in 799 satırının tamamı, tur1_karar sütunuyla): kod_yok 277, kart 162, belirsiz 103, yasak 95, veri_yok 94, tekrar 46, arac 22. Yani tur 1'de `kod_yok` denen satırların yaklaşık beşte biri, asıl kod açılınca kural çıkan satırlar çıktı. Bu 162 + Gemini'nin 4 satırı, aynı kaynakların birleştirilmesi ve tur 1 kartlarıyla çakışanların elenmesiyle 135 benzersiz adaya indi.
+- **Kart yazımı:** 135 adaydan 60 kart yazıldı (75 aday kaynak/kod açılıp okunduktan sonra tekrar, lookahead/örneklem içi seçim, ML, martingale benzeri ya da kural çıkarılamadığı için `REDDEDILENLER_tur2.txt`'ye gitti).
+- **Web araması** (artık açık): 12 yeni kart; gün içi kripto 3, funding/baz/kesit 5, yayımlanmış kanıt 4. Tur 1'de okunamayan makalelerin açık kopyası denendi: Heliyon "turn-of-the-candle" PMC'den okundu (etki 1 dakikalıkta, 5m altı: ret). MDPI, Springer, Ledger yine okunamadı; Wiley/Shen zaten kartlı.
+- **Toplam yeni kart: 72** (`kartlar/` artık 144 kart). `adaylar.csv` 144 satır. Stil: daytrade 37, swing 35 (scalp 0). `veri_uygun` true 62, false 10.
+- `REDDEDILENLER_tur2.txt`: 110 satır (ad | url | neden).
+
+## Fable hakem sonucu (yalnız yeni 72 kart, `fable_hakem.csv`'ye eklendi)
+Fable kart metnine baktı, kaynakları açmadı. En yüksek puan 6; "ilk_20 = evet" eşiği 4 (tur 1'de 5'ti: bu turun kartları daha zayıf). `oncelik`: 1 = bu turun Fable ilk 15'i, 2 = puan ≥ 4, 3 = geri kalan (tur 1 satırlarına dokunulmadı).
+
+İlk 15 (puan):
+1. swing__kisa-vade-momentum-2-3-hafta-kesit__liu-tsyvinski-wu (6)
+2. swing__btc-gecelik-max10-hafta-sonu__dujava (5)
+3. swing__vol-yonetimli-long__moreira (5)
+4. swing__4s-kirilim-ema200-adx__epfraghu (5)
+5. daytrade__donchian20-ema100-400-xau-1s__guannings (5)
+6. swing__50g-kirilim-sma-filtre-3atr-iz__wilki2021 (5)
+7. daytrade__cuma-15-est-tutma-saatlik__miralles (4)
+8. daytrade__orb-5dk-oynak-hisse-hacim__zarattini (4)
+9. swing__kripto-max-piyango-kesit__ozdamar (4)
+10. swing__kripto-30g-momentum-vol-yonetimli__grobys (4)
+11. swing__rsi5-esik-70-momentum__aries744 (4)
+12. daytrade__ema21-geri-cekilme-h4-yapi-xau__abbujo (4)
+13. swing__hacim-patlamasi-sma50-rsi-atr-btc1g__parakh20 (4)
+14. daytrade__bb-ust-kirilim-rsi-4s__tradingstrategy-ai (4)
+15. swing__donchian10-ema200-egim-impuls-3atr-iz__tientung2501 (4)
+
+Fable'ın 3 riski:
+1. Kanıt neredeyse yok: çoğu kart GitHub deposu; sonuç ya yok ya tek coin/tek dönem, örneklem içi, maliyetsiz. Birkaç kaynak kendi sonucunu negatif bildiriyor ya da geri çekmiş (markov, kesit-z-skor, üst-fitil, çok-ufuk, d200-roc, 100g-roc).
+2. Dolum/bar sırası iyimserliği: sinyal barının kapanışından işlem, aynı barda hedef/stop sırası, limit doluyor varsayımı; pivot/fraktal onaylı kartlarda sağ bar beklenmezse lookahead. Testte "sonraki bar açılışı + stop önce" zorunlu olmalı. Kesit kartları yüzlerce coin/hisse varsayıyor, bizde 13-15 coin ve ~17 hisse; seans kartları sunucu saati/yaz saatine bağlı; bazı `veri_uygun=true` iyimser (orb-5dk-zarattini, nikkei, gap-fade).
+3. Sistematik: tur 2 çoğunlukla standart gösterge kombinasyonlarının kanıtsız GitHub varyantı ve havuz aileleriyle yoğun örtüşüyor (Donchian/kırılım ailesinden 6 kart; bant-dönüş ve RSI geri çekilme çok). Parametreler çoğunlukla aynı kısa örnekte hyperopt/Optuna/ızgara ile seçilmiş; zaman dilimi/periyot/stop çoğu kartta "kaynakta yok" ve yazan ajanın varsayımıyla doldurulmuş. Test öncesi aileleri kümeleyip tek temsilciyle sınamak ve varsayımları ön kayıtla sabitlemek önerilir.
+
+## Dürüst sınırlar (tur 2)
+- Tur 2'de `kod_yok` satırlarını Haiku ajanları okudu; 40 parçanın bir kısmı önce yalnız raw/README ile çalıştı (k06, k09 `git clone` ile yeniden yapıldı; k00 ve k32/k35/k36/k37/k38 satırlarının hiçbirinde GitHub URL yok, yani kod açılamadı, `kod_yok` kalan 277 satırın çoğu bu). Diskin dolması bazı ajanların klonlarını bozdu; etkilenen k23 (9 satır) ve k24 yeniden işlendi. Diğer parçalarda da ajanlar geçici disk/klon sorunu bildirdi (k11, k12, k16, k21, k22, k25 ve diğerleri); o satırların kararı yer yer zayıf olabilir.
+- Kart yazan Sonnet ajanlarından grup 5, 13 adayı klonlamadan "ön eleme notuna/mevcut kartlara bakarak tekrar" diye reddetti (ou-statarb, trad_bot_pi42, vein_smc_bot, ai-trade, Cross-Sectional-Mean-Reversion, lhcbenac, jiamihuobi, CUATS, TRB, ETH_Perp, btc-perp-research S2/S4 vb.); bunlar kaynağı açılmadan reddedildi, sonraki turda yeniden bakılabilir. Birçok ajan ayrıca "küçük varyant = tekrar" kararlarını (RSI/MA/Donchian/pairs aileleri) kendi yargısıyla verdi: sınırdaki bazı retler (tranduy216, Initin0, trading-learn XAU, Aggressor session_level_retest) geri alınabilir.
+- `araclar/kart_dogrula.py` v3 kartlarını taramıyor; kartlar `kesit-funding-baz-vekil__chi.json` alan kümesiyle karşılaştırıldı (144 kartta fark yok, kart_id = dosya adı).
+- Birçok kartta periyot/zaman dilimi/stop kaynakta olmayıp `null` ya da ajan varsayımı; belirsizlikler alanına yazıldı.
+- Tüm sayısal sonuçlar "iddia (doğrulanmadı)"; hiçbir strateji test edilmedi.
+- Bazı repolarda açık token/API anahtarı görüldü (aatmanjoshi, wefiwett, adamincident/TRB, IchimokuBot, neelshah1903); değerler kopyalanmadı, ilgili depo sahiplerinin iptal etmesi gerekebilir.
+- Aileler arası örtüşme yüksek: test bütçesi için kümeleme önerilir (Fable riski 3).
+
+## Devam noktası (tur 3)
+1. `belirsiz` kalan ~120 satır (103 + 19) ve kaynağı açılmadan reddedilen 13 grup-5 adayı.
+2. `kod_yok` kalan 277 satırın URL'si olmayanları için kaynak linki bulunmalı (k00 MASTER satırları, blog/forum satırları).
+3. Okunamayan makaleler (MDPI JRFM 19/9/692, Springer Brauneis, Ledger 213, Han-Kang-Ryu): kullanıcı metin sağlarsa denenir.
+4. Aile kümelemesi: 144 kartı ailelere ayırıp temsilci seçmek (kod yazmadan, kart düzeyinde).

@@ -1,0 +1,80 @@
+{
+  "kart_id": "swing__graf-laplasyen-kalinti-tda-rejim__ciaranmccarthy1",
+  "ad": "Graf Difüzyon Kalıntısı Kesit (TDA Rejim Anahtarlı)",
+  "stil": "swing",
+  "kaynak": {
+    "url": "https://github.com/CiaranMccarthy1/Laplacian-Trade",
+    "lisans": "MIT",
+    "tur": "github"
+  },
+  "ozet": "Günlük getirilerin korelasyon grafında komşulardan beklenen getiri hesaplanır; gerçek-beklenen kalıntı z-skoruna göre 6 long/6 short seçilir. Persistent homology (H1) rejimi 'trend' ise kalıntı yönünde, 'dönüş' ise tersine işlem yapılır; 50 barda bir yeniden dengelenir.",
+  "kategori": "diger",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+    "islem": "1d",
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {
+      "ad": "Korelasyon grafı + normalize Laplasyen",
+      "parametreler": {
+        "pencere": 80,
+        "korelasyon_esigi": 0.45,
+        "alfa": 0.3
+      }
+    },
+    {
+      "ad": "Vietoris-Rips H1 kalıcılık",
+      "parametreler": {
+        "mesafe": "sqrt(2*(1-rho))",
+        "metrik": "en uzun sonlu H1 ömrü"
+      }
+    }
+  ],
+  "long_giris": [
+    "Her 50 barda (i % 50 == 0) kapanışta: son 80 günlük getirilerle korelasyon matrisi kur; rho>=0,45 olan çiftler kenar",
+    "Difüzyon h = (I - 0,3 x L)^-1 x x, burada x o günün (son bar) tüm hisse getirileri; kalıntı e = x - h",
+    "z = (e - kesit ortalaması)/kesit std. Rejim: H1 kalıcılık > 0,025 ardışık 2 kez 'trend'; < 0,01 ardışık 2 kez 'dönüş'; arada rejim korunur",
+    "Sinyal = z (trend) veya -z (dönüş); |sinyal|>1 olanlar (yoksa >0,4); en yüksek 6 pozitif long, en düşük 6 negatif short",
+    "Ağırlık: exp(0,5 x |sinyal|) oranlı; kaldıraç 0,8; net maruziyet H1>0,04 ise 1,0, <0,0015 ise 0, arası 0,85 (long payı=(1+net)/2)"
+  ],
+  "short_giris": [
+    "Yukarıdaki sinyalin negatifleri short"
+  ],
+  "stop_loss": "Pozisyon başına: o günkü ağırlık x getiri < -%5 ise pozisyon sıfırlanır; ayrıca 252 bar tepeden DD < -%15 ise kaldıraç 0",
+  "kar_al": null,
+  "iz_suren_stop": null,
+  "zaman_cikisi": "Yeniden dengeleme 50 barda bir",
+  "filtreler": [
+    "19 hisselik sabit evren (kaynakta)"
+  ],
+  "pozisyon_risk": "Kaldıraç çarpanı 0,8; DD ölçekleme: DD<0 iken 1+DD/0,15",
+  "iddia_edilen_performans": "README: 20 yıl +%231,96, Sharpe 0,53; SPY getirisinin 0,40 katı; Monte Carlo 'kayıp olasılığı %0' (iddia, doğrulanmadı; son derece şüpheli)",
+  "kanit": "README iddiası: Sharpe 0,53, getiri SPY'ın %40'ı. Doğrulanmadı.",
+  "veri_uygun": [
+    false,
+    "Hisse OHLCV var ama 19 ABD hissesi bizde olmayabilir; kripto 13-15 coin ile evren çok dar. Ripser (TDA) kütüphanesi gerekir."
+  ],
+  "kodlanabilirlik": {
+    "puan": 1,
+    "gerekce": "Tanım kodda net ama TDA/graf adımı ağır; rejim eşikleri docstring ile kodda çelişkili (0,18/0,08 vs 0,04/0,0015)."
+  },
+  "belirsizlikler": [
+    "Eşikler (0,025/0,01/0,04/0,0015) elle ayarlı; yorumlarla tutarsız",
+    "Tek günlük getiri kalıntısı 50 bar boyunca tutuluyor: sinyal yaşlanır",
+    "Evren sabit, hayatta kalma yanlılığı olası",
+    "Sonuçlar SPY'ın gerisinde; Monte Carlo yöntemi güvenilmez",
+    "Çok parametreli, mühendislik maliyeti yüksek"
+  ],
+  "uyumluluk_notu": "Kesitsel kısa vade ters/devam ailesi ile örtüşebilir; en düşük öncelik, TDA bağımlılığı yüzünden.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+    "laplasyen",
+    "graf",
+    "tda",
+    "kesitsel",
+    "rejim",
+    "hisse"
+  ]
+}

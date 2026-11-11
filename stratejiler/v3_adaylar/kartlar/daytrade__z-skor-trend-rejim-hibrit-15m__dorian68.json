@@ -1,0 +1,94 @@
+{
+  "kart_id": "daytrade__z-skor-trend-rejim-hibrit-15m__dorian68",
+  "ad": "Rejim Geçişli Z-Skor Ters + Trend Takip Hibriti (BTC 15m)",
+  "stil": "daytrade",
+  "kaynak": {
+    "url": "https://github.com/dorian68/TradingStrat_mean_reversion",
+    "lisans": "YOK",
+    "tur": "github"
+  },
+  "ozet": "EMA(10)-EMA(50) farkı küçükse (yatay) z-skor<=-2 ve RSI<=25'te long, z>=+2 ve RSI>=65'te short, z -0.7'ye dönünce çıkar; fark büyükse (trend) EMA yönünde ve RSI teyidiyle trend takip pozisyonu. ATR stop/hedef 2.5/4.0.",
+  "kategori": "ortalamaya_donus",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "kripto",
+  "zaman_dilimi": {
+    "islem": "15m",
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {
+      "ad": "Z-skor",
+      "parametreler": {
+        "periyot": 30,
+        "tanim": "(close - SMA30)/std30"
+      }
+    },
+    {
+      "ad": "EMA",
+      "parametreler": {
+        "hizli": 10,
+        "yavas": 50
+      }
+    },
+    {
+      "ad": "RSI",
+      "parametreler": {
+        "periyot": 14,
+        "tanim": "Cutler (SMA) RSI"
+      }
+    },
+    {
+      "ad": "ATR",
+      "parametreler": {
+        "periyot": 14,
+        "tanim": "SMA(TR)"
+      }
+    }
+  ],
+  "long_giris": [
+    "Trend gücü = |EMA10 - EMA50| / close",
+    "YATAY REJİM (trend gücü <= 0.01, 0.001 <= ATR/close <= 0.04, bekleme sayacı 0): z-skor <= -2.0 ve RSI <= 25 ise long",
+    "TREND REJİMİ (trend gücü > 0.01, ATR/close <= 0.06): EMA10 > EMA50 ve RSI >= 60 ise long"
+  ],
+  "short_giris": [
+    "Yatay rejim: z-skor >= +2.0 ve RSI >= 65 ise short",
+    "Trend rejimi: EMA10 < EMA50 ve RSI <= 45 ise short"
+  ],
+  "stop_loss": "Giriş anındaki ATR(14) x 2.5 (backtest motoru)",
+  "kar_al": "ATR(14) x 4.0",
+  "iz_suren_stop": null,
+  "zaman_cikisi": "Yatay modda: en çok 144 bar; çıkış sonrası 4 bar bekleme",
+  "filtreler": [
+    "Yatay modda çıkış: long z >= -0.7, short z <= +0.7, ya da rejim yatay olmaktan çıkarsa",
+    "Trend modunda koşul bozulunca hedef pozisyon sıfır"
+  ],
+  "pozisyon_risk": "Kaynak motorda sermaye riski/stop mesafesi ile boyut; oran kaynakta ayrı preset",
+  "iddia_edilen_performans": null,
+  "kanit": "Kaynakta yalnız 30 günlük örnek ve rejim bazlı kalibrasyon bölümü var; rakamlar alınmadı.",
+  "veri_uygun": [
+    true,
+    "Binance BTC 15m OHLCV bizde var."
+  ],
+  "kodlanabilirlik": {
+    "puan": 2,
+    "gerekce": "Kural kodda net; ATR stop/TP motor preset'inden, parametre seçimi kalibrasyonlu."
+  },
+  "belirsizlikler": [
+    "Kaynak 'aggressive_return' vb. preset'ler parametreleri değiştirebilir; kartta sınıf varsayılanları alındı",
+    "Sinyal bar kapanışında, işlem sonraki bar açılışında (backtest signals[i-1]): ileriye bakma yok",
+    "Trend rejiminden yataya geçişte eldeki pozisyonun kaderi kod akışına bağlı"
+  ],
+  "uyumluluk_notu": "15m BTC, bizim verimizle uyumlu. Çekirdeği (fiyat z-skor +-2) swing z-skor kartından getiri değil fiyat z-skorudur; ek olarak trend dalı var.",
+  "varyantlar": [
+    "Yalnız yatay dal (trend_follow=False)",
+    "Tersine dönüş mumu şartı (require_reversal)"
+  ],
+  "anahtar_kelimeler": [
+    "z-skor",
+    "rejim",
+    "ema",
+    "rsi",
+    "atr-stop",
+    "hibrit"
+  ]
+}

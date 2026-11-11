@@ -1,0 +1,101 @@
+{
+  "kart_id": "daytrade__coklu-gosterge-3-4-onay-m5__morh492bunu-debug",
+  "ad": "Çoklu Gösterge 3/4 Onaylı M5 Scalp (EMA/RSI/MACD/BB)",
+  "stil": "daytrade",
+  "kaynak": {
+    "url": "https://github.com/morh492bunu-debug/https-YOUR-USERNAME.github.io-cloudfx",
+    "lisans": "YOK",
+    "tur": "github"
+  },
+  "ozet": "5 dakikalıkta EMA kesişimi, RSI aşırı bölgesi, MACD kesişimi ve Bollinger bandına temas koşullarından en az üçü aynı kapalı barda sağlanırsa işlem açar; stop 1.5 ATR, hedef stopun 2 katıdır.",
+  "kategori": "diger",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "forex",
+  "zaman_dilimi": {
+    "islem": "5m",
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {
+      "ad": "EMA",
+      "parametreler": {
+        "hizli": 8,
+        "yavas": 21
+      }
+    },
+    {
+      "ad": "RSI",
+      "parametreler": {
+        "periyot": 14,
+        "asiri_satim": 30,
+        "asiri_alim": 70
+      }
+    },
+    {
+      "ad": "MACD",
+      "parametreler": {
+        "hizli": 12,
+        "yavas": 26,
+        "sinyal": 9
+      }
+    },
+    {
+      "ad": "Bollinger",
+      "parametreler": {
+        "periyot": 20,
+        "carpan": 2.0
+      }
+    },
+    {
+      "ad": "ATR",
+      "parametreler": {
+        "periyot": 14
+      }
+    }
+  ],
+  "long_giris": [
+    "Son kapalı barda şu 4 koşuldan en az 3'ü: (a) EMA(8) EMA(21)'i yukarı kesti, (b) RSI(14) < 30, (c) MACD çizgisi sinyali yukarı kesti, (d) kapanış <= BB alt bant"
+  ],
+  "short_giris": [
+    "Aynı 4 koşulun aynası, en az 3'ü: EMA(8) EMA(21)'i aşağı kesti, RSI > 70, MACD sinyali aşağı kesti, kapanış >= BB üst bant"
+  ],
+  "stop_loss": "1.5 x ATR(14) (giriş fiyatından)",
+  "kar_al": "2 x stop mesafesi (R:R 1:2)",
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [
+    "Spread <= 5 pip (forex'e özgü)",
+    "Seans 08:00-22:00 GMT",
+    "Günde en fazla 10 işlem",
+    "Günlük zarar %5 üstünde dur",
+    "Sembolde açık pozisyon varken yeni giriş yok"
+  ],
+  "pozisyon_risk": "İşlem başı bakiyenin %1'i riske edilir (lot = risk / stop mesafesi)",
+  "iddia_edilen_performans": null,
+  "kanit": null,
+  "veri_uygun": [
+    true,
+    "Yalnız XAUUSD kartlanabilir (Dukascopy 5m); EURUSD/GBPUSD/USDJPY verimizde yok, spread filtresi pip bazlı."
+  ],
+  "kodlanabilirlik": {
+    "puan": 3,
+    "gerekce": "MQL5 kodunda GetSignal tüm koşulları açıkça veriyor; hepsi OHLC ile hesaplanır."
+  },
+  "belirsizlikler": [
+    "EMA kesişimi ve RSI<30 aynı barda nadiren birlikte olur; sinyal çok seyrek çıkabilir (kodda ayrı bir uyarı yok)",
+    "Emir fiyatı o anki ask/bid (sonraki bar açılışı yerine)",
+    "Kaynakta performans kanıtı yok"
+  ],
+  "uyumluluk_notu": "Gold (XAUUSD) 5m'ye uyarlanabilir; forex çiftleri veri dışı. Mevcut gooddinosaur kartından farklı (oy sayımı, EMA 8/21).",
+  "varyantlar": [
+    "Sadece XAUUSD uyarlaması"
+  ],
+  "anahtar_kelimeler": [
+    "ema-kesisim",
+    "rsi",
+    "macd",
+    "bollinger",
+    "oy-sistemi",
+    "atr-stop"
+  ]
+}

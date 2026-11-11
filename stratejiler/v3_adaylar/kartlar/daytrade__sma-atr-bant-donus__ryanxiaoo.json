@@ -1,0 +1,69 @@
+{
+  "kart_id": "daytrade__sma-atr-bant-donus__ryanxiaoo",
+  "ad": "SMA20 - 1.5 ATR Alt Bant Ortalamaya Dönüş (long)",
+  "stil": "daytrade",
+  "kaynak": {
+    "url": "https://github.com/RyanXiaoo/crypto-trader",
+    "lisans": "yok (lisanssız; kod kopyalanmadı, kural Türkçe özetlendi)",
+    "tur": "github"
+  },
+  "ozet": "Kapanış SMA(20)'nin 1.5 ATR altına inerse long açılır; fiyat SMA(20)'ye dönünce çıkılır. Stop girişin 2 ATR altı, hedef 2R.",
+  "kategori": "ortalamaya_donus",
+  "piyasa_rejimi": "yatay",
+  "orijinal_piyasa": "kripto",
+  "zaman_dilimi": {
+    "islem": null,
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {
+      "ad": "SMA",
+      "parametreler": {
+        "periyot": 20
+      }
+    },
+    {
+      "ad": "ATR",
+      "parametreler": {
+        "periyot": null
+      }
+    }
+  ],
+  "long_giris": [
+    "Bar kapanışı < SMA(20) - 1.5 x ATR"
+  ],
+  "short_giris": [],
+  "stop_loss": "Giriş fiyatı - 2 x ATR (giriş barındaki ATR)",
+  "kar_al": "Giriş + 2 x (2 x ATR) = giriş + 4 ATR (risk_reward 2.0); ayrıca kapanış >= SMA(20) olunca çıkış",
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [
+    "Kaynağın rejim seçicisi (ADX 25, ATR yüzdeliği) tüm veri üzerinde quantile ile hesaplanıyor: lookahead riski, karta ALINMADI"
+  ],
+  "pozisyon_risk": "İşlem başına %2 sermaye riski; boyut = risk / (2 x ATR), en fazla sermayenin %90'ı",
+  "iddia_edilen_performans": null,
+  "kanit": null,
+  "veri_uygun": [
+    true,
+    "Kural yalnız OHLC; Binance USDT-M 5m-1d her zaman diliminde çalışır. Kaynakta zaman dilimi/ATR periyodu yok."
+  ],
+  "kodlanabilirlik": {
+    "puan": 3,
+    "gerekce": "Giriş, stop, hedef ve çıkış sayısal; yalnız ATR periyodu ve zaman dilimi kaynakta belli değil (atr sütunu dışarıdan geliyor)."
+  },
+  "belirsizlikler": [
+    "ATR periyodu: kaynakta yok",
+    "Zaman dilimi/evren: kaynakta yok",
+    "Hem SMA üstü çıkış hem 4 ATR hedef var: hangisi önce gelirse çıkılır varsayıldı",
+    "Rejim kapısı lookahead'li: nedensel biçimde yeniden yazılmadan kullanılmamalı",
+    "Yalnız long kuralı kodda var"
+  ],
+  "uyumluluk_notu": "Kripto perp'te doğrudan test edilir. Mevcut RSI+BB / bant dönüş ailesine benzer ama ATR-bant + SMA dönüş çıkışı farklı; küçük bir varyant sayılabilir.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+    "sma",
+    "atr",
+    "ortalamaya-donus",
+    "atr-bant"
+  ]
+}

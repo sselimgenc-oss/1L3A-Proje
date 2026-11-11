@@ -1,0 +1,68 @@
+{
+  "kart_id": "swing__perp-spot-baz-esik-kapama__he-manela",
+  "ad": "Perp-Spot Baz Eşiği Dışında Aç, Sıfırda Kapat",
+  "stil": "swing",
+  "kaynak": {
+    "url": "https://arxiv.org/abs/2212.06888",
+    "lisans": "makale (arXiv, serbest)",
+    "tur": "makale"
+  },
+  "ozet": "Perp fiyatı ile spot arasındaki yıllıklandırılmış sapma (rho) işlem maliyeti bandının dışına çıkınca aç, rho sıfıra dönünce kapat. Perp spotun üstündeyse perp short + spot long, altındaysa tersi.",
+  "kategori": "ortalamaya_donus",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "kripto",
+  "zaman_dilimi": {
+    "islem": "1h",
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {
+      "ad": "rho (yıllık baz sapması)",
+      "parametreler": {
+        "formül": "rho ≈ kappa*(f-s) - (r - r')",
+        "kappa": 1095,
+        "r_spot": 0
+      }
+    }
+  ],
+  "long_giris": [
+    "rho alt bandın altındaysa (perp spotun altında): perp long + spot short, kazanç spot short geliri ile finanse"
+  ],
+  "short_giris": [
+    "rho üst bandın üstündeyse (perp spotun üstünde): perp short + spot long, spot borçla finanse"
+  ],
+  "stop_loss": null,
+  "kar_al": null,
+  "iz_suren_stop": null,
+  "zaman_cikisi": "rho ilk kez 0'a döndüğünde kapat (açıkta kalma süresi sabit değil; BTC için ortalama yaklaşık 135 saat)",
+  "filtreler": [],
+  "pozisyon_risk": "Marjin sürekli yatırılmalı; sabit vade yok; kaldıraç/boyut kaynakta tek kural olarak verilmiyor",
+  "iddia_edilen_performans": "He vd.: Sharpe BTC 3,53 (ücretsiz), 1,80 (yüksek maliyet); ETH 2,55, BNB 4,84, DOGE 3,58, ADA 2,68 (yüksek maliyet) (iddia, doğrulanmadı; Binance verisi, Mart 2024'e kadar, örneklem içi)",
+  "kanit": "arXiv 2212.06888 v5 (He, Manela, Ross, von Wachter), Binance, sonu Mart 2024; getirinin çoğu fiyat yakınsamasından (BTC 13,7 puandan yaklaşık 8,6) kalanı funding'den. Yazarlar riskli olduğunu söylüyor (marjin, rastgele vade). İddia doğrulanmadı. Tam metnin son kısmı (yaklaşık %21) okunmadı.",
+  "veri_uygun": [
+    false,
+    "Spot bacağı zorunlu; Binance spot fiyatı verimizde yok, yalnız USDT-M perp var. Funding yalnız kısmi vekil, rho yeniden kurulamaz."
+  ],
+  "kodlanabilirlik": {
+    "puan": 2,
+    "gerekce": "Kural net ama spot fiyat ve borçlanma faizi (Aave) verisi gerekiyor."
+  },
+  "belirsizlikler": [
+    "Spot verisi yok -> uygulanamaz",
+    "Aave borçlanma/mevduat faizi verisi gerekir",
+    "Stop yok, marjin/likidasyon riski",
+    "Binance funding'in sıkıştırma (clamp) bölgesi rho ile birebir örtüşmez",
+    "Maliyet bandı maker ücretine dayanır"
+  ],
+  "uyumluluk_notu": "Spot yok olduğundan şu an veri_uygun=false; ileride spot OHLCV eklenirse yeniden değerlendirilir. Mevcut funding kartları tek perp serisine dayanır, bu spot-perp sapma stratejisi.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+    "baz",
+    "perp-spot",
+    "funding",
+    "carry",
+    "arbitraj",
+    "rho",
+    "kripto"
+  ]
+}

@@ -1,0 +1,68 @@
+{
+  "kart_id": "daytrade__pin-bar-sonrasi-long-4s__atm4tech",
+  "ad": "Pin-Bar Sonrası Long (BTCUSDT 4s, TP/SL yüzde)",
+  "stil": "daytrade",
+  "kaynak": {
+    "url": "https://github.com/atm4tech/BAT_codes",
+    "lisans": "yok (LICENSE dosyası yok)",
+    "tur": "github"
+  },
+  "ozet": "4 saatlik mumda uzun fitilli, küçük gövdeli 'pin bar' oluştuktan sonra gelen ilk pin-bar-olmayan mumun kapanışında long açılır; sabit yüzdelik TP ve SL ile çıkılır.",
+  "kategori": "formasyon",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "kripto",
+  "zaman_dilimi": {
+    "islem": "4h",
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {
+      "ad": "Mum formasyonu (pin bar)",
+      "parametreler": {
+        "min_fitil_gövde_orani": 2,
+        "max_gövde_aralik_orani": 0.33
+      }
+    }
+  ],
+  "long_giris": [
+    "Önceki mum pin bar: (üst fitil > 2 x gövde VEYA alt fitil > 2 x gövde) VE gövde <= 0,33 x (yüksek-düşük)",
+    "Mevcut mum pin bar DEĞİL",
+    "Açık pozisyon yok",
+    "Giriş fiyatı = mevcut mumun kapanışı"
+  ],
+  "short_giris": [],
+  "stop_loss": "Girişin yüzde X altı (X kaynakta komut satırı argümanı, değer yok)",
+  "kar_al": "Girişin yüzde Y üstü (Y kaynakta komut satırı argümanı, değer yok)",
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [],
+  "pozisyon_risk": "Bakiyenin komut satırında verilen yüzdesi kadar pozisyon (değer kaynakta yok)",
+  "iddia_edilen_performans": null,
+  "kanit": null,
+  "veri_uygun": [
+    true,
+    "Binance 4s OHLCV yeter (5m'den türetilebilir). Kaynak spot BTCUSDT, perp'e uyarlanır."
+  ],
+  "kodlanabilirlik": {
+    "puan": 2,
+    "gerekce": "Pin bar tanımı ölçülebilir ama yön ayrımı yok (iki fitilden biri yeter) ve TP/SL değerleri kaynakta verilmiyor."
+  },
+  "belirsizlikler": [
+    "TP ve SL yüzdeleri kaynakta yok (argüman)",
+    "Pin bar yönden bağımsız tanımlı ama hep long açılıyor; boğa/ayı ayrımı yok",
+    "Aynı mumda TP ve SL birlikte vurulursa kod önce TP'yi sayıyor (iyimser)",
+    "Komisyon/slipaj yok",
+    "Giriş, sinyal mumundan bir mum sonra kapanışta"
+  ],
+  "uyumluluk_notu": "4s mum 5m verisinden türetilir. Kaynakta sonuç iddiası yok. Test edilirken TP/SL ızgarası aşırı uyum riski taşır, sabit makul değerlerle başlanmalı.",
+  "varyantlar": [
+    "Aynı depoda SMA10 üstü kapanışta long (4s) ve 5dk SMA10/50 yukarı kesişimde long varyantları: aynı TP/SL çatısı, genel MA kuralları olduğu için ayrı kart yazılmadı"
+  ],
+  "anahtar_kelimeler": [
+    "pin-bar",
+    "fitil",
+    "formasyon",
+    "btcusdt",
+    "4s"
+  ]
+}

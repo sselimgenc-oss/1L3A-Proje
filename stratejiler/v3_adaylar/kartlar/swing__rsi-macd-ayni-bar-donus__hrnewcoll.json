@@ -1,0 +1,73 @@
+{
+  "kart_id": "swing__rsi-macd-ayni-bar-donus__hrnewcoll",
+  "ad": "RSI Aşırı Satımdan Dönüş + MACD Yukarı Kesişim (günlük)",
+  "stil": "swing",
+  "kaynak": {
+    "url": "https://github.com/HRnewcoll/alpacatrader",
+    "lisans": "YOK",
+    "tur": "github"
+  },
+  "ozet": "Aynı günlük barda RSI(14) 30'u yukarı keserken MACD çizgisi sinyal çizgisini yukarı keserse alır; RSI 70 üstüne çıkınca veya MACD aşağı kesişince satar.",
+  "kategori": "momentum",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+    "islem": "1d",
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {
+      "ad": "RSI",
+      "parametreler": {
+        "periyot": 14,
+        "asiri_satim": 30,
+        "asiri_alim": 70
+      }
+    },
+    {
+      "ad": "MACD",
+      "parametreler": {
+        "hizli": 12,
+        "yavas": 26,
+        "sinyal": 9
+      }
+    }
+  ],
+  "long_giris": [
+    "Pozisyon yok",
+    "RSI(14) bir önceki barda <= 30 ve bu barda > 30",
+    "MACD çizgisi önceki barda < sinyal ve bu barda >= sinyal"
+  ],
+  "short_giris": [],
+  "stop_loss": "%2 (risk ayarı STOP_LOSS_PCT varsayılanı; strateji dosyasında değil, uygulanışı doğrulanmadı)",
+  "kar_al": "%4 (TAKE_PROFIT_PCT varsayılanı; aynı belirsizlik)",
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [
+    "Yalnız long"
+  ],
+  "pozisyon_risk": "Pozisyon başı sermayenin en çok %10'u (kaynak ayarı)",
+  "iddia_edilen_performans": null,
+  "kanit": null,
+  "veri_uygun": [
+    true,
+    "Kaynak ABD hisse günlük; biz Dukascopy hisse günlük OHLCV ile test edebiliriz, kripto için de çalışır."
+  ],
+  "kodlanabilirlik": {
+    "puan": 3,
+    "gerekce": "Giriş/çıkış kuralları net; stop/TP yönetimi dosya dışında."
+  },
+  "belirsizlikler": [
+    "İki koşulun aynı barda birlikte oluşması çok seyrek olabilir",
+    "Stop/TP'nin gerçekten uygulandığı kontrol edilmedi",
+    "Dolum fiyatı: sinyal barı kapanışı (kaynakta kesin değil)"
+  ],
+  "uyumluluk_notu": "Günlük hisse; 1L3A'da hisse/kripto günlük OHLCV ile uyumlu. Mevcut RSI kartlarından (rsi2-sma200, rsi14-ema200) farkı: RSI+MACD aynı bar teyidi.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+    "rsi",
+    "macd",
+    "kesisim",
+    "gunluk"
+  ]
+}

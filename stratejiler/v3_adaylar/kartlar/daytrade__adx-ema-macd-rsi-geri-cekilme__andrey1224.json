@@ -1,0 +1,118 @@
+{
+  "kart_id": "daytrade__adx-ema-macd-rsi-geri-cekilme__andrey1224",
+  "ad": "ADX + EMA12/35 + SMA200 + MACD + RSI Geri Çekilme Trend Kolu (Long)",
+  "stil": "daytrade",
+  "kaynak": {
+    "url": "https://github.com/Andrey1224/CryptoTradinBot",
+    "lisans": "belirtilmemiş",
+    "tur": "github"
+  },
+  "ozet": "Güçlü trendde (ADX>25, fiyat SMA200 üstü, EMA12>EMA35, MACD histogramı pozitif) RSI(8) 55'in altına gerilediğinde long alınır; EMA35 altı kapanış, RSI<35 veya EMA bearish kesişimiyle çıkılır.",
+  "kategori": "trend_takip",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "kripto",
+  "zaman_dilimi": {
+    "islem": null,
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {
+      "ad": "ADX",
+      "parametreler": {
+        "periyot": 14,
+        "esik": 25
+      }
+    },
+    {
+      "ad": "SMA",
+      "parametreler": {
+        "periyot": 200
+      }
+    },
+    {
+      "ad": "EMA",
+      "parametreler": {
+        "hizli": 12,
+        "yavas": 35
+      }
+    },
+    {
+      "ad": "MACD",
+      "parametreler": {
+        "hizli": 12,
+        "yavas": 26,
+        "sinyal": 9
+      }
+    },
+    {
+      "ad": "RSI",
+      "parametreler": {
+        "periyot": 8,
+        "geri_cekilme_ust": 55,
+        "cikis": 35
+      }
+    },
+    {
+      "ad": "Hacim",
+      "parametreler": {
+        "hacim_orani_esik": 0.8
+      }
+    },
+    {
+      "ad": "ATR",
+      "parametreler": {
+        "periyot": 14,
+        "carpan": 1.8
+      }
+    }
+  ],
+  "long_giris": [
+    "ADX(14) > 25",
+    "Kapanış > SMA(200)",
+    "EMA(12) > EMA(35)",
+    "MACD histogramı > 0",
+    "RSI(8) < 55",
+    "Hacim oranı > 0,8 (hacim oranının tanımı kaynakta kod dosyasında, ortalama hacme göre)"
+  ],
+  "short_giris": [],
+  "stop_loss": "Giriş - 1,8 x ATR(14) (kodda parametre var; uygulandığı yer backtest motoru, ayrıntı doğrulanmadı)",
+  "kar_al": null,
+  "iz_suren_stop": "Kapanış < EMA(35) x 0,995 olunca çıkış",
+  "zaman_cikisi": null,
+  "filtreler": [
+    "ADX>25 trend gücü",
+    "SMA200 yön filtresi",
+    "Hacim oranı"
+  ],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": null,
+  "kanit": null,
+  "veri_uygun": [
+    true,
+    "Kripto OHLCV ile hesaplanır; zaman dilimi kaynakta açık okunmadı, 5m-1h uygulanabilir."
+  ],
+  "kodlanabilirlik": {
+    "puan": 2,
+    "gerekce": "Giriş/çıkış kuralları kodda net; zaman dilimi ve ATR stop uygulaması belirsiz."
+  },
+  "belirsizlikler": [
+    "Zaman dilimi kaynakta okunmadı",
+    "ATR stop çıkış mantığı backtest motorunda, okunmadı",
+    "Hacim oranı tanımı doğrulanmadı",
+    "Rejim dedektörü ve ml_opt klasörü okunmadı, kart yalnız trend_rsi kuralını kapsar",
+    "Repo ML optimizasyon içeriyor: parametreler optimize edilmiş olabilir (aşırı uyum riski)",
+    "Lisans belirtilmemiş: kural kendi cümlelerimle yazıldı"
+  ],
+  "uyumluluk_notu": "Mevcut swing__rsi14-ema200-izleyen-stop ve daytrade__sma-trend-rsi-atr-btc15m ile aynı aile; fark ADX+MACD+EMA12/35 birleşimi ve RSI(8) geri çekilme eşiği. Küçük varyant riski var, öncelik düşük.",
+  "varyantlar": [
+    "Aynı repoda range_rsi.py yatay piyasa kolu var, okunmadı"
+  ],
+  "anahtar_kelimeler": [
+    "adx",
+    "ema",
+    "macd",
+    "rsi-geri-cekilme",
+    "trend-takip",
+    "atr-stop"
+  ]
+}

@@ -1,0 +1,96 @@
+{
+  "kart_id": "swing__d200-roc-mesafe-atr-stop-hisse__calmdude",
+  "ad": "SMA200 Üstü Momentum (ROC/Mesafe) + ATR Stop",
+  "stil": "swing",
+  "kaynak": {
+    "url": "https://github.com/CalmDude/my_script_project",
+    "lisans": "lisanssız (kod kopyalanmadı)",
+    "tur": "github"
+  },
+  "ozet": "Haftalık taramada kapanış 200 günlük ortalamanın üstündeyse ve 4 haftalık getiri/mesafe güçlüyse hisse alınır; kapanış SMA200'ün %5'ten fazla altına inince satılır. Faz 2 sürümü ek momentum filtresi ve 2xATR stop ekler.",
+  "kategori": "momentum",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+    "islem": "1d",
+    "ust_filtre": "haftalık tarama (cuma kapanışı)"
+  },
+  "gostergeler": [
+    {
+      "ad": "SMA",
+      "parametreler": {
+        "periyot": 200
+      }
+    },
+    {
+      "ad": "ROC",
+      "parametreler": {
+        "gun": 20
+      }
+    },
+    {
+      "ad": "RSI",
+      "parametreler": {
+        "periyot": 14,
+        "not": "kodda basit ortalamalı RSI (Wilder değil)"
+      }
+    },
+    {
+      "ad": "SMA",
+      "parametreler": {
+        "periyot": 50
+      }
+    },
+    {
+      "ad": "ATR",
+      "parametreler": {
+        "periyot": 14
+      }
+    }
+  ],
+  "long_giris": [
+    "Cuma kapanışında: kapanış > SMA200",
+    "VE (20 günlük getiri > %5 VEYA kapanışın SMA200'e uzaklığı > %10) [temel sürüm 'P1']",
+    "Faz 2 ek filtreler: RSI(14) >= 50, kapanış > SMA50, 20 günlük getiri >= %10",
+    "Giriş: sinyal cuma kapanışı fiyatı (kaynak 'pazartesi icra, cuma kapanış fiyatı' kullanır; bizde pazartesi açılışı)"
+  ],
+  "short_giris": [],
+  "stop_loss": "Faz 2: girişten 2 x ATR(14) aşağıda (kapanış bazlı)",
+  "kar_al": null,
+  "iz_suren_stop": null,
+  "zaman_cikisi": "Çıkış: kapanış < SMA200 ve SMA200'e uzaklık <= -%5 ('N2' durumu); haftalık kontrol",
+  "filtreler": [
+    "Yalnız long",
+    "Faz 2 filtreleri temel sürümün üzerine ek"
+  ],
+  "pozisyon_risk": "Eşit ağırlık, en fazla 20 aday (kaynakta portföy sınırı yapılandırma dosyasında)",
+  "iddia_edilen_performans": "Yazar Faz 2'yi kendisi 'tam başarısızlık' ilan etti: CAGR %15,28 -> %3,86, kazanma %39,06 -> %18,75 (iddia, doğrulanmadı)",
+  "kanit": "Kaynağın kendi analizi: temel sürüm CAGR %15,28 / maks DD -%38,41; Faz 2 (bu filtreler+ATR stop) %3,86. Doğrulanmadı; arşivde 'kullanımdan kalktı'.",
+  "veri_uygun": [
+    true,
+    "Hisse günlük OHLCV (Dukascopy hisse) ile kurulabilir; evren S&P500 geçmiş üyeleri bizde olmayabilir, sinyal kendisi tek hisse üzerinde çalışır."
+  ],
+  "kodlanabilirlik": {
+    "puan": 3,
+    "gerekce": "Tüm koşullar sayısal ve kodda net."
+  },
+  "belirsizlikler": [
+    "Eşikler (5, 10, 50, ATR 2) tarama/deneme sonucu seçilmiş; aşırı uyum riski",
+    "Kaynak kendi Faz 2 sonucunu başarısız buluyor: kart temel sürümü ve Faz 2'yi ayrı test etmeli",
+    "Faz 2 ATR stopu pozisyon başına ayrı kontrol; stop sonrası yeniden giriş kuralı yok",
+    "Evren kuralı kaynakta S&P500 üyeliği; hayatta kalma yanlılığı"
+  ],
+  "uyumluluk_notu": "Hisse/ETF kuralı; Dukascopy hisse verisinde test edilir, kripto'ya doğrudan taşınmaz. Mevcut 'rsi2-sma200' ailesinden farklı: giriş momentum, geri çekilme değil.",
+  "varyantlar": [
+    "Faz 2: RSI/SMA50/ROC filtreli giriş + 2xATR stop",
+    "Temel (P1/N2) sürüm"
+  ],
+  "anahtar_kelimeler": [
+    "sma200",
+    "roc",
+    "momentum",
+    "atr-stop",
+    "haftalik-tarama",
+    "hisse"
+  ]
+}

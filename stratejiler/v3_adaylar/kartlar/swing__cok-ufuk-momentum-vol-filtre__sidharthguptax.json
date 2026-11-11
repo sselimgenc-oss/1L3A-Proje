@@ -1,0 +1,91 @@
+{
+  "kart_id": "swing__cok-ufuk-momentum-vol-filtre__sidharthguptax",
+  "ad": "Çok Ufuklu Momentum (20/60/120/250) + Oynaklık Oranı Filtresi",
+  "stil": "swing",
+  "kaynak": {
+    "url": "https://github.com/sidharthguptax/quant-research",
+    "lisans": "belirtilmemiş",
+    "tur": "github"
+  },
+  "ozet": "Dört pencerenin (20,60,120,250 gün) getiri toplamı kendi oynaklığına bölünüp z-skora çevrilir, 250 günlük ortalamasından arındırılır ve eşit ağırlıkla birleştirilir; birleşik sinyal kendi genişleyen standart sapmasının 0.5 katını aşarsa long, altına inerse short; kısa oynaklık uzun vadeliye göre 1.4 katını aşarsa flat.",
+  "kategori": "momentum",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+    "islem": "1d",
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {
+      "ad": "Momentum z-skoru",
+      "parametreler": {
+        "pencereler": [
+          20,
+          60,
+          120,
+          250
+        ],
+        "hesap": "w günlük log getiri toplamı / (w günlük getiri std x karekök w)"
+      }
+    },
+    {
+      "ad": "Arındırma",
+      "parametreler": {
+        "pencere": 250,
+        "hesap": "z - z'nin 250 günlük kayan ortalaması"
+      }
+    },
+    {
+      "ad": "Oynaklık oranı",
+      "parametreler": {
+        "kisa": 20,
+        "uzun": "genişleyen std (en az 250 gün)",
+        "esik": 1.4
+      }
+    }
+  ],
+  "long_giris": [
+    "Dört arındırılmış momentum z-skorunun eşit ağırlıklı ortalaması (hepsi mevcut olmalı) > 0.5 x ortalamanın genişleyen std'si (en az 250 gün)",
+    "20 günlük getiri std / genişleyen getiri std <= 1.4 (aksi halde flat)",
+    "Sinyal bir gün geciktirilerek uygulanır"
+  ],
+  "short_giris": [
+    "Birleşik sinyal < -0.5 x genişleyen std",
+    "Aynı oynaklık filtresi (>1.4 ise flat)",
+    "Sinyal bir gün geciktirilir"
+  ],
+  "stop_loss": null,
+  "kar_al": null,
+  "iz_suren_stop": null,
+  "zaman_cikisi": "Birleşik sinyal [-0.5, +0.5] x std bandına dönünce flat; sabit süre yok",
+  "filtreler": [
+    "Oynaklık oranı > 1.4 ise pozisyon sıfırlanır (kaynağa göre fiilen yalnız short'ları eler)"
+  ],
+  "pozisyon_risk": "Sabit tam pozisyon (+1/0/-1); kaynakta oynaklık hedefleme yok",
+  "iddia_edilen_performans": "README (kaynağın kendi negatif sonucu): Sharpe -1.03 vs al-tut +0.74, yıllık getiri -%6.15, maks. düşüş -%42.5, isabet %48.9 (SPY 2010-2019) (iddia, doğrulanmadı)",
+  "kanit": "Yazar README'sinde stratejinin 5 kapıdan hiçbirini geçemediğini bildiriyor (iddia, doğrulanmadı). Kural nedensel (kayan/genişleyen pencereler); sonuç olumsuz olduğu için yalnız kural çeşitliliği değeri var.",
+  "veri_uygun": [
+    true,
+    "Günlük OHLC yeterli; kural varlıktan bağımsız. Kaynak SPY kullanıyor, ETF kapsamı Dukascopy'de doğrulanmadı; kripto perp veya hisse sepetine uygulanabilir."
+  ],
+  "kodlanabilirlik": {
+    "puan": 3,
+    "gerekce": "Tüm adımlar kodda sayısal ve nedensel; warm-up kuralı açık (NaN)."
+  },
+  "belirsizlikler": [
+    "Kaynakta sonuç olumsuz",
+    "Birleşik sinyal eşiği 0.5 sigma ve vol_cutoff 1.4 için gerekçe yok",
+    "Sinyalin bir gün geciktirilmesi backtest_signal fonksiyonunda (src/), karta README'den alındı",
+    "Maliyet varsayımı kaynağın notunda; kartta yok",
+    "Lisans belirtilmemiş: kod kopyalanmadı"
+  ],
+  "uyumluluk_notu": "Mevcut swing__momentum-sifir-kesisim__chandanp001 tek pencereli sıfır kesişimi; bu çok ufuklu, arındırılmış, 3 durumlu (long/flat/short) ve oynaklık oranı filtreli. Kripto günlükte denenebilir.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+    "momentum",
+    "cok-ufuk",
+    "z-skor",
+    "oynaklik-filtresi",
+    "long-short"
+  ]
+}

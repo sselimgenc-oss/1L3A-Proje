@@ -1,0 +1,82 @@
+{
+  "kart_id": "swing__kripto-30g-momentum-vol-yonetimli__grobys",
+  "ad": "Kripto Kesitsel 30 Günlük Momentum + Volatilite Yönetimi (Haftalık)",
+  "stil": "swing",
+  "kaynak": {
+    "url": "https://link.springer.com/article/10.1007/s11408-025-00474-9",
+    "lisans": "makale (Springer, açık erişim kopya)",
+    "tur": "makale"
+  },
+  "ozet": "Büyük kripto evreninde son 30 günlük getiriye göre beşliklere ayır; en iyi beşliği long, en kötüyü short tut (haftalık). Long/short portföyün getirisi, kendi son 8 haftalık volatilitesinin tersiyle ölçeklenir; yüksek volatilite dönemlerinde pozisyon küçülür.",
+  "kategori": "momentum",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "kripto",
+  "zaman_dilimi": {
+    "islem": "1d",
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {
+      "ad": "Formasyon dönemi getirisi",
+      "parametreler": {
+        "hesap": "(p[j-1] - p[j-30]) / p[j-30]",
+        "not": "en son günü atlar (1 gün boşluk)"
+      }
+    },
+    {
+      "ad": "Momentum portföyü realize volatilitesi",
+      "parametreler": {
+        "pencere_hafta": 8,
+        "alternatifler": [
+          4,
+          12
+        ],
+        "olcek": "c / sigma_hat",
+        "c": "kaynakta 10 (birimi metinden net değil)"
+      }
+    }
+  ],
+  "long_giris": [
+    "Her hafta başı: evren = bir önceki yıl sonu piyasa değeriyle ilk 30 coin (stablecoin hariç). Coinleri 30 günlük getiriye göre 5 eşit gruba böl; en yüksek beşliği eşit ağırlıkla long al, 1 hafta tut"
+  ],
+  "short_giris": [
+    "Aynı gün en düşük beşliği eşit ağırlıkla short aç, 1 hafta tut"
+  ],
+  "stop_loss": null,
+  "kar_al": null,
+  "iz_suren_stop": null,
+  "zaman_cikisi": "Haftalık yeniden dengeleme",
+  "filtreler": [
+    "Boyut ölçeği: momentum portföyünün önceki 8 haftalık haftalık getiri standart sapmasının tersi (sigma_hat, t-8..t-1 haftaları)"
+  ],
+  "pozisyon_risk": "Her bacak eşit ağırlık; toplam ölçek c/sigma_hat. Kaldıraç üst sınırı kaynakta anlatılmıyor (bizde sınır koyulmalı).",
+  "iddia_edilen_performans": "Kaynak 2016-2023 (416 hafta): düz momentum tüm örneklemde haftalık %0,90 (anlamsız); 2016-Temmuz 2020 alt örneklemde %1,74 (%10 düzeyinde anlamlı). Risk yönetimli sürümler düz stratejiden yüksek: Nisan 2016-Aralık 2023 düz %0,71/hafta, yönetilenlerin çoğu bunun üstünde (iddia, doğrulanmadı). Yazarlar momentumun çökmeye eğilimli olduğunu, volatilite yönetiminin çökmeleri azalttığını söylüyor, ama kuyruk üssünün değişmediğini de belirtiyor.",
+  "kanit": "iddia (doğrulanmadı): Grobys, Kolari, Sandretto, Shahzad, Äijö; Financial Markets and Portfolio Management 2025. Üç alt örnek (tümü, 2016-Tem 2020, Ağu 2020-Ara 2023) raporlanıyor; ikinci alt örnekte getiri çok yüksek, sonrası zayıf okunuyor (tam rakamlar okunmadı). Zayıf kanıt: ham momentum tek başına anlamsız; yazarlar ayrıca hacim/likidite için büyük coinlere odaklanıyor. Vol ölçeğinin ileriye bakma eleştirisini (Liu vd. 2019) kendileri anıyor.",
+  "veri_uygun": [
+    true,
+    "Binance USDT-M perp OHLCV günlük yeterli; short bacağı perp ile mümkün. Kaynak evreni piyasa değeriyle seçiyor, bizde piyasa değeri yok: likidite (ör. önceki yıl ortalama hacim) vekil olur (UYARLAMA). Funding maliyeti shortta PnL kalemi."
+  ],
+  "kodlanabilirlik": {
+    "puan": 2,
+    "gerekce": "Sıralama, bölme, tutma süresi ve ölçek net; c'nin birimi/değeri ve evren seçimi (piyasa değeri yok) yoruma açık."
+  },
+  "belirsizlikler": [
+    "c=10 hangi birimde (yüzde mi oran mı) kaynakta net değil; hedef volatiliteyi kodlayıcı belirler",
+    "Beşlik gruplarında 6 coin var; evren küçük olunca gürültü büyük",
+    "Kaynak raporuna göre yalnız ilk alt örnekte güçlü",
+    "Piyasa değeri yerine likidite vekili"
+  ],
+  "uyumluluk_notu": "1d. Mevcut kripto kesit kartlarından (swing__funding-kesit-decil-carry, swing__momentum-btc-rejim-top5__adensvaz) farkı: 30g getiri sıralaması + L/S + vol yönetimli boyut. Piyasa nötre yakın. Tek başına zayıf kanıt, ama vol ölçeği diğer kesit kartlarına eklenebilir.",
+  "varyantlar": [
+    "Ölçek penceresi 4 veya 12 hafta",
+    "Yalnız long bacak (kaynakta ayrı raporlanıp raporlanmadığı belirsiz)"
+  ],
+  "anahtar_kelimeler": [
+    "kripto",
+    "kesitsel-momentum",
+    "30-gun",
+    "vol-yonetimli",
+    "haftalik",
+    "long-short"
+  ]
+}

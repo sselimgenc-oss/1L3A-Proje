@@ -1,0 +1,82 @@
+{
+  "kart_id": "daytrade__killzone-h4-ema200-altin__bakome-hub",
+  "ad": "Londra/NY Kill Zone + H4 EMA200 Yonlu Altin (XAUUSD M5)",
+  "stil": "daytrade",
+  "kaynak": {
+    "url": "https://github.com/BAKOME-Hub/BAKOMEGoldScalper",
+    "lisans": "MIT",
+    "tur": "github"
+  },
+  "ozet": "Altinda 5 dakikalik grafikte yalniz iki saat penceresinde (sunucu saati 08-09 ve 15-16) fiyat H4 EMA200'un ustundeyse long, altindaysa short; stop 2 ATR, hedef 3 ATR. Kaynaktaki ICT kavramlari (FVG, order block, likidite) hesaplanir ama giris kararinda kullanilmaz.",
+  "kategori": "trend_takip",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "emtia",
+  "zaman_dilimi": {
+    "islem": "5m",
+    "ust_filtre": "4h"
+  },
+  "gostergeler": [
+    {
+      "ad": "EMA",
+      "parametreler": {
+        "periyot": 200,
+        "zaman_dilimi": "4h"
+      }
+    },
+    {
+      "ad": "ATR",
+      "parametreler": {
+        "periyot": 14,
+        "zaman_dilimi": "5m"
+      }
+    }
+  ],
+  "long_giris": [
+    "Sunucu saati 08:00-08:59 veya 15:00-15:59 icinde",
+    "Son kapanis > H4 EMA200",
+    "Genel seans: 07-11 veya 13-17 sunucu saati icinde",
+    "ATR(14) >= 100 puan (altin icin)",
+    "Spread <= 50 puan",
+    "Gunluk islem < 10, acik pozisyon < 2"
+  ],
+  "short_giris": [
+    "Aynasi: fiyat < H4 EMA200, ayni saat/ATR/spread filtreleri"
+  ],
+  "stop_loss": "Giris fiyatindan 2 x ATR(14, M5)",
+  "kar_al": "Giris fiyatindan 3 x ATR(14, M5)",
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [
+    "Saat penceresi (sunucu saati)",
+    "Min ATR 100 puan",
+    "Max spread 50 puan",
+    "Gunluk kayip %5 / kar %8 limiti"
+  ],
+  "pozisyon_risk": "Islem basi %1 risk (bizim risk katmani gecerli).",
+  "iddia_edilen_performans": null,
+  "kanit": "Kaynakta sonuc yok; kodda basabasa ve izleyen stop yazili ama 'stop==0' kosulu nedeniyle hic tetiklenmiyor, bu yuzden kart yalniz giris ve SL/TP ile yazildi.",
+  "veri_uygun": [
+    true,
+    "Dukascopy XAU OHLCV var. Spread filtresi test edilemez; saat sunucu saati (broker) olarak veriliyor, UTC karsiligi kaynakta yok."
+  ],
+  "kodlanabilirlik": {
+    "puan": 2,
+    "gerekce": "Kural cok basit ve sayisal; ama saat dilimi ve tick bazli tekrar girisi belirsiz."
+  },
+  "belirsizlikler": [
+    "Sunucu saati dilimi (GMT+2/+3?) kaynakta yok, UTC'ye cevirmek bize kalir",
+    "Kod her tikte giris dener; pencere icinde tekrar tekrar giris (azami 2 pozisyon, 10/gun) - bar bazli kural bizim yorumumuz: pencerede ilk bar kapanisinda bir giris",
+    "Kullanilan ICT kosullari (FVG/OB) giris kararinda yok",
+    "BE/iz suren stop kodda islemez, kartta yok",
+    "M5 'close[0]' (olusan bar) kullaniliyor: canli fiyat"
+  ],
+  "uyumluluk_notu": "5m XAU'da uygulanir; kural kaba (saat + yon filtresi), edge'i test edilmeli. ICT adi tasiyor ama ICT kurali icermiyor.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+    "kill-zone",
+    "h4-ema200",
+    "altin",
+    "atr-stop",
+    "saat-penceresi"
+  ]
+}

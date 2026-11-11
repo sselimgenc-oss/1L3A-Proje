@@ -1,0 +1,62 @@
+{
+  "kart_id": "swing__rsi5-esik-70-momentum__aries744",
+  "ad": "BTC Günlük RSI(5) > 70 Momentum Long",
+  "stil": "swing",
+  "kaynak": {
+    "url": "https://github.com/Aries744/BTC-Simple-RSI-Strategy",
+    "lisans": "MIT",
+    "tur": "github"
+  },
+  "ozet": "Günlük kapanışta RSI(5) 70'in üstüne çıkınca long açılır (aşırı alım = momentum); RSI(5) 70'in altına inince pozisyon kapatılır. Stop yok.",
+  "kategori": "momentum",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "kripto",
+  "zaman_dilimi": {
+    "islem": "1d",
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {
+      "ad": "RSI",
+      "parametreler": {
+        "periyot": 5,
+        "esik": 70
+      }
+    }
+  ],
+  "long_giris": [
+    "Pozisyon yokken RSI(5) kapanışı > 70"
+  ],
+  "short_giris": [],
+  "stop_loss": null,
+  "kar_al": null,
+  "iz_suren_stop": null,
+  "zaman_cikisi": "RSI(5) < 70 olan ilk bar kapanışında kapat",
+  "filtreler": [],
+  "pozisyon_risk": "Kaynak sabit %32.44 Kelly kullanıyor ama bu oran tüm örneklemin kazanç/kayıp istatistiğinden çıkarıldığı için (hindsight) karta ALINMADI; boyut ayrıca belirlenmeli",
+  "iddia_edilen_performans": "README: toplam getiri %563.97, kazanma oranı %40.6, Sharpe 1.08 (iddia, doğrulanmadı; boyut örnek içi Kelly)",
+  "kanit": "iddia (doğrulanmadı): README'de %563.97 getiri, Sharpe 1.08; boyut tüm örneklemden türetilmiş",
+  "veri_uygun": [
+    true,
+    "BTC günlük; Binance USDT-M günlük OHLCV yeterli."
+  ],
+  "kodlanabilirlik": {
+    "puan": 3,
+    "gerekce": "Tek gösterge, iki eşik; ancak sinyal ve işlem aynı bar kapanışında (kodda); bizde sonraki bar açılışı kullanılmalı."
+  },
+  "belirsizlikler": [
+    "Stop yok: bizde risk limitleri koddan eklenmeli",
+    "Kodda işlem sinyal barının kapanış fiyatından: bizde sonraki bar açılışı",
+    "RSI yumuşatma türü ('ta' kütüphanesi, Wilder) kaynakta ayrıca belirtilmemiş",
+    "Yalnız BTC ve kısa/tek dönem"
+  ],
+  "uyumluluk_notu": "Kripto günlükte uyumlu. Mevcut RSI kartlarından (rsi2 geri çekilme, rsi32) farklı: aşırı alımda trend takip.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+    "rsi",
+    "rsi5",
+    "momentum",
+    "btc",
+    "stopsuz"
+  ]
+}
