@@ -196,6 +196,10 @@ Her kasanın tam dosyaları `durum/hesaplar/<strateji>/` altındadır.
 
 ## 13. Canlı (gerçek emirli) yürütücü — küçük bütçe
 > **Uyarı:** Bu bölüm GERÇEK PARA ile ilgilidir. Önce **kuru**, sonra **testnet**, ancak ikisi de günlerce sorunsuz çalıştıktan sonra **canlı**.
+> **1L3A v2 planı (2026-11-11, `sonuclar/canli/CANLI_PLAN_V2.md`):** testnet'te YALNIZ e0v1en (testnet tek hesap = tek strateji;
+> `/etc/1l3a-canli.json` içinden ewo satırını silin). Gerçek parada önce duman: e0v1en ve ewo, her biri kendi alt hesabında 60 USD,
+> `islem_risk` 0.015 sabit; alt hesapta 60 USD'den fazla para tutmayın.
+>
 > Paper servisi (`1l3a-paper`) aynen çalışmaya devam eder; canlı yürütücü ayrı bir servistir (`1l3a-canli`) ve ayrı durum dizini kullanır.
 
 **Mantık (sade):** canlı servis, paper motoruyla AYNI sinyalleri üretir; sanal dolum yerine Binance'e gerçek emir verir. Her girişten hemen

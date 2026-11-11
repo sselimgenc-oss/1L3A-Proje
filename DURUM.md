@@ -1,6 +1,6 @@
 # 1L3A — Durum ve Kararlar
 
-_Son güncelleme: 2026-11-06 (Aşama 1 ara durum)_
+_Son güncelleme: 2026-11-11 gece (1L3A v2 planı onaylandı)_
 
 ## Takım düzeni
 - **Lider (Claude Opus):** planlama, görev/ajan dağıtımı, denetim, kalite.
@@ -113,7 +113,20 @@ Ana ders: önceki sonuçlar OOS'a bakılarak seçilmiş ve kâr birkaç işlemde
 - Veri ⏳: Dukascopy (karar 22). DK_AAPL 5m tamam (2017–); dakikalık indirme yavaş (9–30 saat). Hızlı yol: aylık
   saatlik dosyalar → swing/daytrade 1h+ testleri önce; 15m/30m dakikalık veri tamamlanınca.
 
-## DEVİR NOTU — 2026-11-11 akşamı (projeye dönüşte buradan başla)
+## 1L3A v2 PLANI — 2026-11-11 gece (KULLANICI ONAYLI; geçerli plan)
+Kaynak: `sonuclar/canli/CANLI_PLAN_V2.md` (eski `CANLI_PLAN.md`'nin yerini aldı). Özet:
+- **Tanım:** yürütme ve ölçüm projesi; kanıtlanmış avantaj yok, yapı tamamen long; ilk yıl hedefi "yatay" (±%10), düşüş ≤ %15.
+- **Kadro:** ewo-ema-ofset çekirdek (60 → 250 USD); e0v1en 60 USD (kod sınayıcı, kırılgan, ilk emeklilik adayı);
+  hma-atr-rider ve lube paper'da (canlıya geçiş V2 §6, en erken 2027 Ç2). "6–9 strateji" hedefi kaldırıldı.
+- **Risk:** %1,5 sabit; %2/%3 takvimi kaldırıldı; CANLI_LIMITLER aynen; yeni: toplam −%10 büyüme freni (elle).
+- **Takvim:** Faz 0 hazırlık (25 Kas) → testnet (25 Kas–5 Ara) → 2 × 60 USD duman (Aralık 1. hf) → 08.12 sadakat +
+  birleşik hesap oynatması (8–20 Ara) → ewo 250 USD (Ocak) → değerlendirme (Şubat sonu).
+- **Dayanak (11 Kasım testleri):** meta-test + sağlamlık (PR #42, #44), teşhis (PR #43), yeni sembol sınavı (PR #45:
+  4/4 genelleşmiyor; yeni coinlerin al-tut medyanı −%77), portföy boyutu (PR #44).
+- **Açık işler:** haftalık canlı rapor aracı ve birleşik hesap oynatması (alt ajanlarda); B18 pano kilidi; kullanıcı:
+  Binance alt hesaplar + testnet API anahtarı (/etc/1l3a-canli.env, asla sohbete değil).
+
+## DEVİR NOTU — 2026-11-11 akşamı (ESKİ; v2 planı bunun yerini aldı) (projeye dönüşte buradan başla)
 Kullanıcı: "çok dağıldık, proje üzerinde yeniden çalışacağım". Açık iş bırakılmadı. Görsel özet: kullanıcıya gönderilen
 "1L3A_Proje_Akis.pdf" (6 sayfa). Kaynak dosyalar:
 - **Canlı plan (kilitli, kullanıcı onaylı):** `sonuclar/canli/CANLI_PLAN.md`. Aşama 1 = 4 × 250 USD: e0v1en, ewo-ema-ofset (15m; %1,5 → 6. hf %2 → 12. hf %3, şartlı, ELLE) + 2 swing (%1,5 sabit).
@@ -127,6 +140,9 @@ Kullanıcı: "çok dağıldık, proje üzerinde yeniden çalışacağım". Açı
 - **Ekip:** Codex ve ikinci Claude hesabı çıkarıldı; her şey ana oturum + alt ajanlar (Sonnet/Haiku) + Fable hakem.
 
 ## Lider kararları günlüğü (karar 26)
+- 2026-11-11 gece (KULLANICI): "planı onaylıyorum, uygula" → 1L3A v2 planı (CANLI_PLAN_V2.md) geçerli; CANLI_PLAN.md yerini aldı.
+  Kullanıcıya sunulan 4 dış belgeden yalnız paper testli ikisi (Öneri Formu, Yönetici Sentezi) dikkate alındı; doğrudan-canlı belgeleri kullanıcı eledi.
+  stratejiler/canli_ayar.ornek.json v2 kadrosuna (ewo + e0v1en, 60'ar USD) güncellendi.
 - 2026-11-10: BAĞIMSIZ DENETİM (Codex raporu B01-B18; Denetçi SG + Fable doğruladı: 17 gerçek, 1 şüphe) → düzeltmeler (testli):
   paper/portföy: B09 günlük/kill limiti açılışta girişlerden önce; B11 askıdaki pozisyon da limitte kapanır (+alarm); B05 geç gelen funding
   bir kez ödenir; B06 sembol bazlı maliyet; B07 geç gelen mumda kaçan stop/hedef kontrolü; B10 kaldıraç tavanında kayma payı.

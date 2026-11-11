@@ -1,5 +1,9 @@
 # Canlı geçiş planı (kullanıcı onaylı, 2026-11-11)
 
+> **YERİNİ ALDI (2026-11-11, kullanıcı onayı):** geçerli plan `CANLI_PLAN_V2.md`. Bu dosyadaki 4 × 250 USD kadrosu,
+> %2/%3 risk artış takvimi, "atlanan > %50 → %2" maddesi ve Aşama 2 artık geçerli DEĞİL. Yalnız SWING SEÇİM KURALI,
+> trend kolu ileride canlıya geçerse aday sırası olarak geçerlidir (V2 §6).
+
 Fable + lider ortak önerisi; kullanıcı madde 1 ve 2'yi onayladı, madde 3 (Aşama 2 kasası) sonra karar.
 Bu dosyadaki SEÇİM KURALI, sonuç (paper / yeniden oynatma sıralaması) görülmeden yazıldı ve kilitlidir.
 
