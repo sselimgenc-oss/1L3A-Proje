@@ -36,7 +36,7 @@ AY_ESIK, YIL_ESIK = 0.80, 0.70
 
 def _per(ts, f):
     """Dönem etiketi. Veri sonunda zorunlu kapanan işlemin çıkış damgası = 2025-11-08 00:00 (son geliştirme mumunun bitişi);
-    dönem ataması için 1 ns geriye alınır (2025-11'e taşmaz)."""
+    dönem ataması için 1 ns geriye alınır (2025-11-07'ye; 2025 yılı. Ay aralığı 2025-10'da bittiğinden kısmi 2025-11 aylık ölçülerde yok sayılır)."""
     t = pd.DatetimeIndex(ts).as_unit("ns").tz_convert("UTC")
     t = t.where(t < HOLDOUT_BAS, HOLDOUT_BAS - pd.Timedelta(1, "ns"))
     return t.tz_localize(None).to_period(f)

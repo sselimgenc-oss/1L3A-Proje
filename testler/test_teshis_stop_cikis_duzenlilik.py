@@ -120,7 +120,7 @@ def test_olc_islem_ay_yil_semboller():
 
 
 def test_olc_islem_tarih_siniri():
-    d = pd.DataFrame({"giris_zamani": pd.to_datetime(["2025-11-07"], utc=True), "cikis_zamani": pd.to_datetime(["2025-11-08"], utc=True),
+    d = pd.DataFrame({"giris_zamani": pd.to_datetime(["2025-11-07"], utc=True), "cikis_zamani": pd.to_datetime(["2025-11-08 00:00:01"], utc=True),
                       "r": [1.0], "sembol": ["A"]})
     with pytest.raises(RuntimeError):
         D.olc_islem(d)
@@ -136,7 +136,7 @@ def test_veri_sonu_kapanisi_serbest_ama_sonrasi_degil():
     ok = pd.DataFrame({"giris_zamani": pd.to_datetime(["2025-10-01"], utc=True), "cikis_zamani": [D.HOLDOUT_BAS], "r": [1.0], "sembol": ["A"]})
     o = D.olc_islem(ok)
     assert o["n_veri_sonu_kapanis"] == 1 and o["yil_r"]["2025"] == 1.0
-    assert pd.Period("2025-11", "M") not in D._per([D.HOLDOUT_BAS], "M")
+    assert D._per([D.HOLDOUT_BAS], "Y")[0] == pd.Period("2025", "Y")      # son geliştirme günü (11-07) 2025 yılındadır
     kotu = ok.assign(cikis_zamani=[D.HOLDOUT_BAS + pd.Timedelta(1, "ns")])
     with pytest.raises(RuntimeError):
         D.olc_islem(kotu)

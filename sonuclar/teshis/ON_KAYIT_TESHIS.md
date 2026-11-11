@@ -56,12 +56,13 @@ Denetim: 2 strateji × 3 rastgele işlem için MAE/MFE mum verisine bakılarak e
 İlk deneme tarih doğrulamasında durdu: veri sonunda açık kalan işlemler motorca son geliştirme mumunun BİTİŞ anıyla
 (cikis_zamani = 2025-11-08 00:00 UTC, "veri sonu zorunlu kapanış") kapatılıyor; bu damga holdout verisi değil. Kural:
 giriş < 2025-11-08 ve çıkış <= 2025-11-08 00:00 serbest; kullanılan mum (fiyat) < 2025-11-08 SERT kalır; çıkış damgası
-dönem (ay/yıl) atamasında 2025-10/2025'te sayılır; bu işlemlerin sayısı (n_veri_sonu_kapanis) raporda gösterilir.
+dönem atamasında son geliştirme gününe (2025-11-07) yazılır, yani 2025 yılında sayılır; takvim ayı aralığı 2025-10'da biter,
+2025-11'in ilk 7 günü (kısmi ay) aylık ölçülerde (işlemli ay %, artı ay %, ayda işlem) YOK SAYILIR, yıl ΣR ve toplam ΣR'ye dahildir; bu işlemlerin sayısı (n_veri_sonu_kapanis) raporda gösterilir.
 Başka bir değişiklik yok. Aşağıdaki sha256 bu hâlin hash'leridir (ilk commit'teki hash'ler geçersiz).
 
 ## sha256 (koşu öncesi)
 ```
 be559435a174f47b9ac15b612c78235b9e5bdaac5f7cf72ee68faa3c641e15cf araclar/teshis_stop_cikis.py
-297b1fe70e2b55ee387e874579ab751d226504d7cffea8ab84ca65fc21a24a8b araclar/teshis_duzenlilik.py
-d9486acd4d14d41d12f42079a0ebc54d288d4c3d17f099d5991c28db9fe71b35 testler/test_teshis_stop_cikis_duzenlilik.py
+7b7fb0a42527c7fda989e8b1f7ff73ffb61830686220870b2b66788d4c2ca1b2 araclar/teshis_duzenlilik.py
+0ce858e9a5ee54a962e6fb204be635d84265cfc25338ef58a55e9197be1e2054 testler/test_teshis_stop_cikis_duzenlilik.py
 ```
