@@ -50,12 +50,12 @@ arşive girmeyen yok; S'de işlem görüp arşivden silinmiş sembol varsa gör�
 
 ## ÖN KAYIT DÜZELTMESİ (koşudan ÖNCE, 2026-11-11; sonuç görülmedi)
 Veri indirilirken fark edildi: arşiv, delist sonrası günlük/5m mumları SIFIR hacimli ve sabit kapanışlı "düz" mumlarla uzatıyor.
-Sonuçları: (a) \`semboller.csv\`'deki son_mum/delist sütunları (1d arşivinden) delist'i kaçırıyor (orada yalnız 3 görünüyordu; gerçek
+Sonuçları: (a) `semboller.csv`'deki son_mum/delist sütunları (1d arşivinden) delist'i kaçırıyor (orada yalnız 3 görünüyordu; gerçek
 sayı çok daha yüksek); (b) "delist sembolde açık işlem son mumun kapanışından kapanır" kuralı düz mumlarla boşa çıkardı.
 Düzeltme (kural aynı, uygulaması netleşti): betik her sembolde 5m quote_hacim > 0 olan SON mumu "son gerçek işlem" sayar, tf mumları
 ve funding bu mumu içeren mumda kesilir; açık işlem o mumun kapanışından kapanır. Sembol listesi ve sıralaması DEĞİŞMEDİ
-(seçim S öncesi hacimle yapıldı; 40 sembolün hepsinin son gerçek işlemi >= S doğrulandı). \`semboller.csv\` kilitli kalır; doğru
-delist bilgisi koşu çıktısı \`delist_duzeltme.csv\`'dedir. Delist eşiği: son gerçek işlem, koşudaki en yeni son işlemden >7 gün eski.
+(seçim S öncesi hacimle yapıldı; 40 sembolün hepsinin son gerçek işlemi >= S doğrulandı). `semboller.csv` kilitli kalır; doğru
+delist bilgisi koşu çıktısı `delist_duzeltme.csv`'dedir. Delist eşiği: son gerçek işlem, koşudaki en yeni son işlemden >7 gün eski.
 Betik bu düzeltmeyle güncellendi; aşağıdaki sha256 GEÇERLİDİR (ilk commit'teki eski sha geçersiz).
 
 ## Betik sha256 (koşudan önce)
