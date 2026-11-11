@@ -105,3 +105,18 @@ Sıra (öncelik sırasıyla; limit biterse kaldığın yeri RAPOR.md'ye yaz):
 3. `belirsiz` kalan ~120 satır (on_eleme_tur2_kod_yok.csv 103 + Gemini 19): kaynağı aç, karar ver. Ayrı dosya: `on_eleme_tur3.csv`.
 4. Yeni `kart` kararları için kart yaz (tekrar kontrolü: havuz + 144 kart + aileler_v3.csv), adaylar.csv'ye EKLE; Fable yalnız yeni kartları puanlasın.
 Bu turda yeni web taraması YAPMA (aile kümelemesi ve açık kalanlar öncelikli).
+
+## TUR 4 (2026-11-11 eklendi; tur 3 = PR #24)
+Amaç: test ÖNCESİ, aile temsilcilerinin kurallarını kaynaktan kesinleştirmek (ön kayıtta varsayım yerine kaynak değeri kullanılsın).
+Önceki tur dosyalarını silme/yeniden yazma; yalnız ekle. Kod yazma. main'den yeni dal, PR aç, birleştirme.
+1. KAYNAK DOĞRULAMA (en önemli): `aileler_v3.csv`'de aile_temsilcisi_mi=evet olan 10 kart. Her biri için kaynağı (makale tam metni / repo kodu)
+   BAŞTAN SONA oku. Kartın ve (varsa) `kodlama_v3.csv`'deki kodlanmış sürümün her parametresini/kuralını kaynakla karşılaştır.
+   Kodlanmış sürüm: `kodlama_v3.csv` modul sütunundaki dosyada (yalnız oku). Çıktı: `kaynak_dogrulama_tur4.csv`
+   (kart_id, kural_veya_parametre, kaynakta_deger, kodda_veya_kartta_deger, uyum (ayni|farkli|kaynakta_yok|kaynak_okunamadi),
+   kaynak_konum (sayfa/bölüm/dosya:satır), not). Kaynakta OOS dönemi, maliyet varsayımı, evren ve sonuçlar ayrıca özetlensin
+   (`kanit` alanı için; rakamı yalnız kaynakta yazıyorsa ver).
+   Makale açılamazsa (403 vb.) arXiv/SSRN/yazar sayfası/açık kopya ara; yine olmazsa kaynak_okunamadi yaz.
+2. Fable bu doğrulamayı bir kez gözden geçirsin: hangi farklar test sonucunu anlamlı değiştirir, ön kayıtta hangi değer kullanılmalı (kaynak mı, mevcut varsayım mı).
+   Sonucu RAPOR.md "Tur 4" bölümüne yaz.
+3. Bütçe kalırsa: web araması ile gün içi kripto (5m–1h) ve funding/baz boşluğu — YALNIZ yeni aile ya da mevcut aile temsilcisinden
+   daha güçlü kanıtlı (örneklem dışı / makale) aday getir; aksi halde kart yazma. Yeni kartlar aileler_v3.csv'ye satır olarak eklensin.
