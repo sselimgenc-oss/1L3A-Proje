@@ -27,8 +27,8 @@ def test_islem_risk_aralik_disi_reddedilir(v):
 def test_ornek_ayar_asama1_kadrosu():
     from pathlib import Path
     a = ca.yukle(Path(__file__).resolve().parents[1] / "stratejiler/canli_ayar.ornek.json", {})
-    assert [s.id for s in a.stratejiler] == ["dis__e0v1en", "dis__ewo-ema-ofset", "SWING_1", "SWING_2"]
-    assert all(s.tahsis_usd == 250 and s.islem_risk == D("0.015") for s in a.stratejiler)
+    assert [s.id for s in a.stratejiler] == ["dis__e0v1en", "dis__ewo-ema-ofset"]
+    assert all(s.tahsis_usd == 60 and s.islem_risk == D("0.015") for s in a.stratejiler)
 
 
 def _boyut(E=D(250), **kw):
