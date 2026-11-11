@@ -123,7 +123,7 @@ def main(argv=None) -> int:
             log.error("%s: borsa bağlantısı kurulamadı (%s): %s", s.id, type(e).__name__, e)
             return 3
         log.info("%s: %s hesabı hazır, özsermaye %s, tahsis %s", s.id, ayar.mod, b["ozsermaye"], s.tahsis_usd)
-        yurutuculer[s.id] = Yurutucu(s.id, borsa, bilgi, Ayar(ayar.mod, s.tahsis_usd, ayar.working_type, ayar.giris_gecikme_max_sn, ayar.hedef_emri),
+        yurutuculer[s.id] = Yurutucu(s.id, borsa, bilgi, Ayar(ayar.mod, s.tahsis_usd, s.islem_risk, ayar.working_type, ayar.giris_gecikme_max_sn, ayar.hedef_emri),
                                      durum_yolu=_durum_dosyasi(dizin, s.id), olay=olay, bildir=tg.gonder)
 
     def kanca(p, simdi) -> None:

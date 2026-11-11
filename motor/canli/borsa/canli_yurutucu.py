@@ -75,6 +75,7 @@ class MotorGorunumu:
 class Ayar:
     mod: str = "testnet"                  # kuru | testnet | canli
     tahsis: Decimal = D(1000)
+    islem_risk: Optional[Decimal] = None  # None: yalnız CANLI_LIMITLER %3 tavanı (doğrudan kullanım); calistir.py yapılandırmadan HER ZAMAN verir
     working_type: str = "MARK_PRICE"      # MARK_PRICE | CONTRACT_PRICE
     giris_gecikme_max_sn: int = 900       # sinyal barı kapandıktan en geç bu kadar sonra giriş; sonrası atlanır
     hedef_emri: bool = True               # stratejinin hedefi varsa TAKE_PROFIT_MARKET kur
@@ -307,7 +308,7 @@ class Yurutucu:
         mark = self.borsa.mark_fiyat(bs)
         brut, risk = self._risk_ozeti(poz)
         stop = stop_yuvarla(n.stop, n.yon, k)
-        ortak = dict(ozsermaye=E, tahsis=self.ayar.tahsis, yon=n.yon, stop=stop, kural=k,
+        ortak = dict(ozsermaye=E, tahsis=self.ayar.tahsis, islem_risk=self.ayar.islem_risk, yon=n.yon, stop=stop, kural=k,
                      stop_kayma=n.stop_kayma, taker=n.taker, diger_brut=brut, diger_stop_riski=risk)
         bo = boyutlandir(giris=mark, **ortak)
         if bo.neden is not None:

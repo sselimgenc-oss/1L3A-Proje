@@ -6,6 +6,7 @@ işlem atlanır (neden `min_tutar_alti`). Nihai emir, YUVARLANMIŞ miktarla ve g
 """
 from __future__ import annotations
 
+import dataclasses
 from dataclasses import dataclass
 from decimal import ROUND_CEILING, ROUND_FLOOR, Decimal
 from typing import Optional
@@ -91,10 +92,12 @@ class Boyut:
 
 def boyutlandir(*, ozsermaye: Decimal, tahsis: Decimal, yon: int, giris: Decimal, stop: Decimal, kural: SembolKurali,
                 stop_kayma: Decimal, taker: Decimal, diger_brut: Decimal = D(0), diger_stop_riski: Decimal = D(0), kaldirac_ust=None,
-                limitler=cl.CANLI_LIMITLER) -> Boyut:
+                limitler=cl.CANLI_LIMITLER, islem_risk=None) -> Boyut:
     """kasa = min(borsa özsermayesi, tahsis). Miktar `canli_limitler.miktar_hesapla` ile; borsa filtreleri (MARKET_LOT_SIZE adımı/üst sınırı,
     min miktar, min tutar) burada verilir. Sonra yuvarlanmış miktar `limit_ihlalleri` ile doğrulanır."""
     kasa = min(D(ozsermaye), D(tahsis))
+    if islem_risk is not None:                           # strateji başına işlem riski: etkin tavan = min(islem_risk, CANLI_LIMITLER işlem başı azami)
+        limitler = dataclasses.replace(limitler, islem_basi_max_kayip_oran=min(float(islem_risk), limitler.islem_basi_max_kayip_oran))
     s = cl.miktar_hesapla(kasa=kasa, yon=yon, giris=giris, stop=stop, stop_kayma=stop_kayma, taker=taker, adim=kural.market_step,
                           min_qty=kural.market_min, min_tutar=kural.min_notional, max_qty=kural.market_max, diger_brut=diger_brut,
                           diger_stop_riski=diger_stop_riski, kaldirac_ust=kaldirac_ust, limitler=limitler)
