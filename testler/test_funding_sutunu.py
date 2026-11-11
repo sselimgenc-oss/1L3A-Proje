@@ -9,7 +9,9 @@ from motor.portfoy.birlesik import birlesik_backtest
 from motor.strateji import kayit
 from motor.strateji.dis.d4_sistematik import EwmacCarver
 from motor.strateji.dis.d6_funding import EwmacCarry, FundingCarry
-from motor.strateji.funding import SUTUN, FundingYokHatasi, funding_sutunu_ekle, stratejiye_hazirla
+from motor.strateji.funding import (
+    GUNLUK_TOPLAM_SUTUN, SUTUN, FundingYokHatasi, funding_sutunu_ekle, stratejiye_hazirla,
+)
 from testler.test_daytrade import rastgele_mumlar
 
 
@@ -38,6 +40,26 @@ def test_funding_zamani_tam_kapanista_gorunur():
     f = pd.DataFrame({"oran": [0.5]}, index=pd.DatetimeIndex(["2022-01-01 03:00"], tz="UTC", name="zaman"))
     c = funding_sutunu_ekle(m, f, "1h")[SUTUN]
     assert np.isnan(c["2022-01-01 01:00"]) and c["2022-01-01 02:00"] == 0.5
+
+
+def test_funding_gunluk_toplam_uc_odeme_ve_gelecek_odemeyi_dislar():
+    idx = pd.date_range("2022-01-01", periods=3, freq="1D", tz="UTC", name="zaman")
+    m = pd.DataFrame({"acilis": 100.0, "yuksek": 101.0, "dusuk": 99.0,
+                      "kapanis": 100.0, "hacim": 1.0}, index=idx)
+    f = pd.DataFrame(
+        {"oran": [0.001, 0.002, 0.003, 0.500]},
+        index=pd.DatetimeIndex(["2022-01-01 01:00", "2022-01-01 09:00", "2022-01-02 00:00",
+                                "2022-01-02 00:00:00.001"], tz="UTC", name="zaman"),
+    )
+    o = funding_sutunu_ekle(m, f, "1d")
+    assert o.loc[idx[0], GUNLUK_TOPLAM_SUTUN] == pytest.approx(0.006)
+    assert o.loc[idx[0], SUTUN] == pytest.approx(0.003)
+    assert o.loc[idx[1], GUNLUK_TOPLAM_SUTUN] == pytest.approx(0.500)
+    # İlk mum kapanışından 1 ms sonraki ödeme ilk günün toplamına sızmaz.
+    f2 = f.copy()
+    f2.loc[pd.Timestamp("2022-01-02 00:00:00.001", tz="UTC"), "oran"] = 9.0
+    o2 = funding_sutunu_ekle(m, f2, "1d")
+    assert o2.loc[idx[0], GUNLUK_TOPLAM_SUTUN] == o.loc[idx[0], GUNLUK_TOPLAM_SUTUN]
 
 
 def test_gelecek_funding_degisince_gecmis_sutun_degismez():

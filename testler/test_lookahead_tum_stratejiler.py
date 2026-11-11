@@ -49,6 +49,7 @@ def _mumlar(n: int, tohum: int, mod: str) -> pd.DataFrame:
             "hacim": rng.lognormal(np.log(1_000.0), 0.25, len(idx)),
             # Funding isteyen kayıtlı kripto stratejileri için nedensel sentetik girdi.
             "funding_orani": rng.normal(0.0, 0.0001, len(idx)),
+            "funding_gunluk_toplam": rng.normal(0.0, 0.0003, len(idx)),
         },
         index=idx,
     )
@@ -99,6 +100,7 @@ def _portfoy_veri(tohum: int, mod: str) -> dict[str, pd.DataFrame]:
                 "kapanis": fiyat,
                 "hacim": rng.lognormal(np.log(1_000.0), 0.25, n),
                 "funding_orani": rng.normal(0.0, 0.0001, n),
+                "funding_gunluk_toplam": rng.normal(0.0, 0.0003, n),
             },
             index=ortak_indeks,
         )

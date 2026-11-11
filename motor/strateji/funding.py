@@ -6,6 +6,10 @@ Strateji.sinyaller(mumlar) yalnız mumları alır. `funding_gerekli = True` olan
   funding_orani[t] = mum t'nin KAPANIŞ anında (açılış + mum süresi) bilinen SON funding oranı
                      (funding zamanı <= mum kapanışı; ileri doldurma; o ana kadar funding yoksa NaN).
 
+  funding_gunluk_toplam[t] = (önceki mum kapanışı, mum t'nin kapanışı] aralığındaki funding
+                              ödemelerinin toplamı. İlk funding görülene dek NaN; sonrasında ödeme
+                              olmayan aralıkta 0. Günlük mumda o takvim aralığındaki tüm settlement'ları toplar.
+
 Funding zamanı mum kapanışından sonraysa o mumda görünmez. Funding dosyası yoksa (DK_ semboller) açık hata verilir;
 funding sessizce 0 sayılmaz. `funding_gerekli = False` stratejilerin girdisi DEĞİŞMEZ (aynı nesne döner).
 Backtest motorunun funding muhasebesi (backtest(funding=...)) ayrıdır ve bu sütundan etkilenmez.
@@ -18,6 +22,7 @@ import numpy as np
 import pandas as pd
 
 SUTUN = "funding_orani"
+GUNLUK_TOPLAM_SUTUN = "funding_gunluk_toplam"
 
 
 class FundingYokHatasi(ValueError):
@@ -35,11 +40,12 @@ def mum_suresi(index: pd.DatetimeIndex, aralik: Optional[str] = None) -> pd.Time
 
 
 def funding_sutunu_ekle(mumlar: pd.DataFrame, fund: pd.DataFrame, aralik: Optional[str] = None) -> pd.DataFrame:
-    """mumlar'ın kopyasına `funding_orani` ekler (bkz. modül açıklaması). Girdiler değiştirilmez."""
+    """Mumların kopyasına son oranı ve aralık toplamını ekler. Girdiler değiştirilmez."""
     kapanis = (mumlar.index + mum_suresi(mumlar.index, aralik)).as_unit("ns")
     out = mumlar.copy()
     if fund is None or len(fund) == 0:
         out[SUTUN] = np.nan
+        out[GUNLUK_TOPLAM_SUTUN] = np.nan
         return out
     f = fund["oran"].astype("float64").sort_index()
     f.index = f.index.as_unit("ns")
@@ -48,6 +54,17 @@ def funding_sutunu_ekle(mumlar: pd.DataFrame, fund: pd.DataFrame, aralik: Option
     sag = pd.DataFrame({"t": f.index, SUTUN: f.to_numpy()})
     birlesik = pd.merge_asof(sol, sag, on="t", direction="backward", allow_exact_matches=True)
     out[SUTUN] = birlesik[SUTUN].to_numpy()
+    f_ns = f.index.asi8
+    kapanis_ns = kapanis.asi8
+    onceki_ns = np.empty(len(kapanis_ns), dtype=np.int64)
+    onceki_ns[0] = mumlar.index[0].as_unit("ns").value
+    onceki_ns[1:] = kapanis_ns[:-1]
+    ust = np.searchsorted(f_ns, kapanis_ns, side="right")
+    alt = np.searchsorted(f_ns, onceki_ns, side="right")
+    kum = np.r_[0.0, np.cumsum(f.to_numpy(dtype=float))]
+    toplam = kum[ust] - kum[alt]
+    toplam[ust == 0] = np.nan
+    out[GUNLUK_TOPLAM_SUTUN] = toplam
     return out
 
 

@@ -11,10 +11,15 @@ from motor.strateji.temel import Strateji
 
 
 class GuniciMomentumNoise(Strateji):
-    """Kaynak: https://github.com/PazSheimy/spy-intraday-momentum-oos"""
+    """Zarattini gün içi noise alanı, 30 dakikalık DK_SPX uyarlaması.
+
+    Kaynak: https://github.com/PazSheimy/spy-intraday-momentum-oos
+    Bant yalnız geçmiş 14 seansın aynı HH:MM yüzde hareketinden hesaplanır.
+    Giriş yalnız banda bağlıdır; VWAP, açık pozisyonun çıkış çizgisidir.
+    """
 
     ad, stil = "v3__gunici-momentum-noise-alani", "daytrade"
-    varsayilan_parametreler = {"gun": 14, "bant_k": 1.0, "atr_n": 14, "atr_k": 2.0}
+    varsayilan_parametreler = {"gun": 14, "bant_k": 1.0}
     parametre_izgarasi = {}
 
     def cikis_var_mi(self):
@@ -28,25 +33,28 @@ class GuniciMomentumNoise(Strateji):
         # DK_SPX 30m: yalnız ABD nakit seansındaki mumlar kullanılır.
         aktif = (saat >= 570) & (saat < 960) & (ny.day_of_week < 5)
         ac = m["acilis"].where(aktif).groupby(tarih).transform("first")
-        sapma = (m["kapanis"] - ac).abs().where(aktif)
+        sapma = (m["kapanis"] / ac - 1.0).abs().where(aktif)
         slot = pd.Series(saat.to_numpy(), index=idx)
-        bant = sapma.groupby(slot).transform(
+        sigma = sapma.groupby(slot).transform(
             lambda s: s.shift(1).rolling(int(self.parametreler["gun"]), min_periods=int(self.parametreler["gun"])).mean()
         ) * float(self.parametreler["bant_k"])
+        gunluk_kapanis = m["kapanis"].where(aktif).groupby(tarih).last()
+        onceki_gun = gunluk_kapanis.shift(1)
+        onceki_kapanis = pd.Series(onceki_gun.reindex(tarih.to_numpy()).to_numpy(), index=idx)
         vwap = g.vwap_seans(m["yuksek"], m["dusuk"], m["kapanis"],
                             m["hacim"].where(aktif, 0.0), tarih.to_numpy())["vwap"]
         k = m["kapanis"]
-        ust, alt = ac + bant, ac - bant
-        long_ok = aktif & (k > ust) & (k > vwap)
-        short_ok = aktif & (k < alt) & (k < vwap)
-        atr = g.atr(m["yuksek"], m["dusuk"], k, int(self.parametreler["atr_n"]))
-        stop_l = pd.concat([alt, vwap], axis=1).max(axis=1).clip(upper=k - atr * 0.01)
-        stop_s = pd.concat([ust, vwap], axis=1).min(axis=1).clip(lower=k + atr * 0.01)
-        # Stop tetiklenmezse seans sonunda pozisyon kapatılır.
+        ust = pd.concat([ac, onceki_kapanis], axis=1).max(axis=1) * (1.0 + sigma)
+        alt = pd.concat([ac, onceki_kapanis], axis=1).min(axis=1) * (1.0 - sigma)
+        long_ok = aktif & (k > ust)
+        short_ok = aktif & (k < alt)
+        stop_l = pd.concat([ust, vwap], axis=1).max(axis=1)
+        stop_s = pd.concat([alt, vwap], axis=1).min(axis=1)
+        # 15:30 açılışlı 30m mum 16:00'da kapanır; o mumda yeni giriş yoktur.
         cikis = aktif & (saat >= 930)
         out = cerceve(m, long_ok & ~cikis, short_ok & ~cikis, stop_l, stop_s, cikis=cikis)
-        out["cikis_long"] = (k < vwap) | cikis
-        out["cikis_short"] = (k > vwap) | cikis
+        out["cikis_long"] = (k < stop_l) | cikis
+        out["cikis_short"] = (k > stop_s) | cikis
         return out
 
 
