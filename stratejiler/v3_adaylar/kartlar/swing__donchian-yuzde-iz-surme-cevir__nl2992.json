@@ -1,0 +1,69 @@
+{
+  "kart_id": "swing__donchian-yuzde-iz-surme-cevir__nl2992",
+  "ad": "Donchian Kırılımı + Tepeden Yüzde İz Süren Stop, Ters Kırılımda Çevir",
+  "stil": "swing",
+  "kaynak": {
+    "url": "https://github.com/nl2992/MATH5360_Final_Project",
+    "lisans": "yok (lisans dosyası yok)",
+    "tur": "github"
+  },
+  "ozet": "Son L barın en yüksek/en düşük seviyesi kırılınca o yönde gir; çıkış girişten sonraki zirveden (long) yüzde S geri çekilme veya ters kırılım (pozisyon çevir).",
+  "kategori": "kirilim",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "genel",
+  "zaman_dilimi": {
+    "islem": null,
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {
+      "ad": "Donchian kanalı",
+      "parametreler": {
+        "pencere_L": "kaynakta taranan parametre, varsayılan yok",
+        "kapsam": "giriş barı hariç önceki L bar"
+      }
+    },
+    {
+      "ad": "Yüzde iz süren stop",
+      "parametreler": {
+        "yuzde_S": "kaynakta taranan parametre, varsayılan yok"
+      }
+    }
+  ],
+  "long_giris": [
+    "Bar yükseği, önceki L barın en yükseği seviyesine değerse (stop emir) long gir"
+  ],
+  "short_giris": [
+    "Bar düşüğü, önceki L barın en düşüğü seviyesine değerse short gir"
+  ],
+  "stop_loss": null,
+  "kar_al": null,
+  "iz_suren_stop": "Long: giriş sonrası görülen en yüksekten %S aşağı; short: en düşükten %S yukarı (bar içi dokunma)",
+  "zaman_cikisi": null,
+  "filtreler": [],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": "Kaynakta raporlanan sonuçlar kart tarafından aktarılmadı.",
+  "kanit": null,
+  "veri_uygun": [
+    true,
+    "OHLC yeterli; BTC/ETH ve XAU üzerinde 5m+ uygulanabilir; kaynak TY/CME vadelisi."
+  ],
+  "kodlanabilirlik": {
+    "puan": 2,
+    "gerekce": "Kural kodda mekanik, ancak L ve S değerleri kaynakta sabit değil, taramayla seçiliyor."
+  },
+  "belirsizlikler": [
+    "L ve S kaynakta yok (taranan değerler)",
+    "Aynı barda hem giriş hem ters kırılım olursa kodda özel durum var (zarar yazılıyor)",
+    "Dolum seviyede varsayılıyor (stop emir kayması ayrı parametre)",
+    "Zaman dilimi kaynakta 1m TY; bizim için >=5m'ye uyarlama gerekir"
+  ],
+  "uyumluluk_notu": "Mevcut donchian-ansambl-vol-hedef (Zarattini) kartından farkı: tek L, yüzde iz süren stop, her zaman piyasada (çevirme), vol hedefleme yok.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+    "donchian",
+    "kirilim",
+    "yuzde-iz-suren",
+    "dur-ve-cevir"
+  ]
+}

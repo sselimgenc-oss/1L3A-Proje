@@ -1,0 +1,81 @@
+{
+  "kart_id": "swing__rsi-bb-asiri-donus-atr__akariba",
+  "ad": "RSI<30 + Bollinger Alt Bant Altı Kapanış Dönüş Al (ATR Stop/Hedef)",
+  "stil": "swing",
+  "kaynak": {
+    "url": "https://github.com/akariba/Algo-RADAR",
+    "lisans": "yok (lisans dosyası yok)",
+    "tur": "github"
+  },
+  "ozet": "Kapanış Bollinger(20,2) alt bandının altında ve RSI(14)<30 ise ertesi bar açılışında long; üstte RSI>70 ve üst bant üstü ise short. ATR(14) x2 stop, ATR x4 hedef.",
+  "kategori": "ortalamaya_donus",
+  "piyasa_rejimi": "yatay",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+    "islem": "1d",
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {
+      "ad": "RSI",
+      "parametreler": {
+        "periyot": 14,
+        "alt": 30,
+        "ust": 70
+      }
+    },
+    {
+      "ad": "Bollinger",
+      "parametreler": {
+        "periyot": 20,
+        "sapma": 2,
+        "std": "popülasyon"
+      }
+    },
+    {
+      "ad": "ATR",
+      "parametreler": {
+        "periyot": 14
+      }
+    }
+  ],
+  "long_giris": [
+    "Bar kapanışı: RSI(14) < 30 VE kapanış < Bollinger(20,2) alt bandı",
+    "Ertesi bar açılışından gir (pozisyon yoksa)"
+  ],
+  "short_giris": [
+    "RSI(14) > 70 VE kapanış > Bollinger(20,2) üst bandı",
+    "Ertesi bar açılışından gir"
+  ],
+  "stop_loss": "Giriş fiyatından ATR(14) x 2,0 (gap'te açılışta çık)",
+  "kar_al": "Giriş fiyatından ATR(14) x 4,0",
+  "iz_suren_stop": null,
+  "zaman_cikisi": "Ters sinyal gelirse ertesi açılışta çık",
+  "filtreler": [],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": "Kaynaktaki sayılar demo olduğu için aktarılmadı.",
+  "kanit": null,
+  "veri_uygun": [
+    true,
+    "Günlük OHLCV; kripto ve Dukascopy hisse/XAU için uygulanabilir (kaynak piyasası hisse)."
+  ],
+  "kodlanabilirlik": {
+    "puan": 3,
+    "gerekce": "Giriş/çıkış/stop/hedef kodda tam parametreli, sinyal t'de, dolum t+1 açılışında (lookahead yok)."
+  },
+  "belirsizlikler": [
+    "Kodda aynı dosyada 3 başka sinyal var; kart yalnız mean_rev kolu",
+    "Rejim filtresi yalnız etiketleme için, işlem kuralı değil",
+    "Stop/hedef çarpanları parametre olarak değişebilir (varsayılan 2 ve 4)",
+    "Maliyet modeli kaynakta var, kart kuralına dahil değil"
+  ],
+  "uyumluluk_notu": "Mevcut bant-donus kartlarından farkı: bant dışında kapanış + RSI aşırı eşiği ile erken (karşı) giriş, bandın içine dönüşü beklemiyor.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+    "rsi",
+    "bollinger",
+    "asiri-bolge",
+    "atr-stop",
+    "ortalamaya-donus"
+  ]
+}
