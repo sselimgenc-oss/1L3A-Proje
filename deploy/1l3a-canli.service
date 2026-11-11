@@ -1,0 +1,37 @@
+# 1L3A CANLI yürütücü (GERÇEK EMİR). Ubuntu 24.04. Kurulum: deploy/KURULUM.md §13. ÖNCE testnet'te çalıştırın.
+# Anahtarlar YALNIZ /etc/1l3a-canli.env içinde (sahibi root, izin 600); repoya ASLA girmez. Strateji/tahsis listesi /etc/1l3a-canli.json (gizli içermez).
+# `mod: canli` için /etc/1l3a-canli.env içinde CANLI_ONAY=evet de gerekir; yoksa servis BAŞLAMAZ (çıkış kodu 2, yeniden denenmez).
+# Paper servisinden AYRI durum dizini kullanır (1l3a-canli); paper servisine dokunmaz.
+[Unit]
+Description=1L3A canli yurutucu (gercek emir)
+After=network-online.target
+Wants=network-online.target
+StartLimitIntervalSec=3600
+StartLimitBurst=8
+OnFailure=1l3a-bildirim@%n.service
+
+[Service]
+Type=simple
+User=l3a
+Group=l3a
+WorkingDirectory=/opt/1l3a
+EnvironmentFile=/etc/1l3a-canli.env
+StateDirectory=1l3a-canli
+Environment=PYTHONUNBUFFERED=1
+Environment=L3A_KILIT_LOG=/var/lib/1l3a-canli/kilit_acilis.jsonl
+ExecStart=/opt/1l3a/.venv/bin/python -m motor.canli.borsa.calistir --ayar /etc/1l3a-canli.json --durum ${STATE_DIRECTORY}/durum --tohum ${STATE_DIRECTORY}/veri/mumlar
+Restart=on-failure
+RestartSec=30
+RestartSteps=5
+RestartMaxDelaySec=600
+# Yapılandırma / onay / anahtar hatası (2, 3): tekrar denemek anlamsız
+RestartPreventExitStatus=2 3
+TimeoutStopSec=120
+KillSignal=SIGTERM
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=full
+ProtectHome=true
+
+[Install]
+WantedBy=multi-user.target
