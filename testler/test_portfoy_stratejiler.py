@@ -114,7 +114,7 @@ def veri():
 # ------------------------------------------------------------------ kayıt / ızgara / csv
 def test_kayit_15_sinif_ve_adlar():
     t = tum_portfoy_stratejileri()
-    assert len(SINIFLAR) == 15 and len(t) == len(SINIFLAR) + len(EK_SINIFLAR) + len(V2_SINIFLAR) + len(V3_SINIFLAR) == 26
+    assert len(SINIFLAR) == 15 and len(t) == len(SINIFLAR) + len(EK_SINIFLAR) + len(V2_SINIFLAR) + len(V3_SINIFLAR) == 28
     assert all(ad.startswith("pf__") and c.ad == ad for ad, c in t.items())
 
 
