@@ -229,7 +229,9 @@ def test_kayit_ve_kodlama_csv_ilk_parti_tam():
     with (KOK / "stratejiler/v3_adaylar/adaylar.csv").open(encoding="utf-8-sig", newline="") as f:
         adaylar = list(csv.DictReader(f))
     beklenen = set()
-    for aday in adaylar:
+    # Parti 1 = TUR 1 kartlarının öncelik-1'i. Tur 2 (PR #22) adaylar.csv SONUNA kendi öncelik 1-3'üyle eklendi;
+    # tur 1 satırları ilk 72 satırdır (RAPOR.md). Kapsam daraltma değil, partinin tanımı.
+    for aday in adaylar[:72]:
         kart = KOK / "stratejiler/v3_adaylar/kartlar" / f"{aday['kart_id']}.json"
         if aday["oncelik"] == "1" and json.loads(kart.read_text())["veri_uygun"][0]:
             beklenen.add(aday["kart_id"])
