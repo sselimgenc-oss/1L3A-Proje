@@ -81,7 +81,7 @@ Her satır ATR × 20 stopla bir kez daha koşulur. %1 risk boyutlamasında pozis
 
 | Ad | Değer |
 |---|---|
-| Veri sonu | **2026-10-31 00:00 UTC** (sabit; v2 holdout dönemi de okunur, 0.1 gereği kanıt değildir) |
+| Veri sonu | **2026-10-31 00:00 UTC** (sabit; v2 holdout dönemi de okunur, 0.1 gereği kanıt değildir). DK_SPX verisi 2025-10-31'de bitiyor: satır 6 ve 9 için fiilî veri sonu odur |
 | Veri başı | her satırın verisinin başladığı gün; kapılar bölüm 1'deki eleme dönemi üzerinden |
 | Isınma | stratejinin en uzun geri bakışı; ısınmadaki sinyaller sayılmaz |
 | Maliyet | `sonuclar/evren/maliyet_tablosu.csv` (v2 ile aynı, sha256 kayda) + DK_ long funding (ON_KAYIT_V2 1.2) |
