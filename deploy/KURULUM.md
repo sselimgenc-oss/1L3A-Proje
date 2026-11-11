@@ -254,6 +254,7 @@ systemctl daemon-reload
 `systemctl restart 1l3a-canli`. Telegram'da "canli_emir_doldu" ve "canli_stop_kuruldu" mesajlarını görmelisiniz; Binance testnet arayüzünde
 pozisyonun yanında stop emrini kontrol edin. **Koşullu emir uçları (algo) ilk kez testnet'te doğrulanır**; hata alırsanız `"kosullu_modu": "klasik"` deneyin ve bana bildirin.
 Servisi bir kez `systemctl restart` edin: mevcut pozisyon/stop'lar çift emir üretmeden devralınmalı.
+Adım adım kontrol listesi (kuru, testnet, nadir yollar, kayıt dosyaları, 60 USD duman): [sonuclar/canli/TESTNET_KONTROL.md](../sonuclar/canli/TESTNET_KONTROL.md).
 
 **E. Canlıya geçiş (yalnız testnet temiz çalıştıktan sonra, bilerek):**
 ```bash
