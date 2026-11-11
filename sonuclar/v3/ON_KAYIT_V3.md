@@ -81,7 +81,7 @@ Her satır ATR × 20 stopla bir kez daha koşulur. %1 risk boyutlamasında pozis
 
 | Ad | Değer |
 |---|---|
-| Veri sonu | **2026-10-31 00:00 UTC** (sabit; v2 holdout dönemi de okunur, 0.1 gereği kanıt değildir). DK_SPX verisi 2025-10-31'de bitiyor: satır 6 ve 9 için fiilî veri sonu odur |
+| Veri sonu | **2026-10-31 00:00 UTC** (sabit; v2 holdout dönemi de okunur, 0.1 gereği kanıt değildir). DK_SPX 5m verisi 2026-10-30'da bitiyor (önceki notta 2025 yazılmıştı, yanlıştı; dondurma öncesi düzeltildi) |
 | Veri başı | her satırın verisinin başladığı gün; kapılar bölüm 1'deki eleme dönemi üzerinden |
 | Isınma | stratejinin en uzun geri bakışı; ısınmadaki sinyaller sayılmaz |
 | Maliyet | `sonuclar/evren/maliyet_tablosu.csv` (v2 ile aynı, sha256 kayda) + DK_ long funding (ON_KAYIT_V2 1.2) |
@@ -175,3 +175,26 @@ stratejilerin kendini kanıtlamadığını biliyorum; 3-5 ay / 1 yıl beklemem."
 Sonra (a) bu dosyanın sha256'sı, (b) dondurma commit'i (9 stratejinin kodu ve `kodlama_v3.csv`), (c) maliyet
 tablosu sha256'sı `sonuclar/v3/dondurma.json`'a yazılır. Koşu bu commit'ten yapılır; eleme koşusu başladıktan sonra
 strateji kodu değişirse koşu geçersizdir.
+
+---
+
+## Güncelleme 0 — dondurma öncesi uygulama yorumları (2026-11-11, SONUÇ GÖRÜLMEDEN)
+Eleme kodu (`motor/arastirma/v3/`) yazılırken ön kayıttaki açık noktalar aşağıdaki gibi (sıkı okuma) kapatıldı;
+lider onayladı. Hiçbir gerçek-veri performans değeri hesaplanmadan yazıldı.
+1. "Tüm veri" (portföy satırları 1–5): v2 kuralı; evrenin %75'inin verisi başladığı gün (13 kripto için ~2019-07).
+2. Portföy motoru SERT_LIMITLER'i gerçekten uygular (`limit_modu="uygula"`); rastgele-ağırlık simülasyonu aynı ayarla.
+3. V2 örnek kapısı: tek hesap oynatmasında KABUL edilen işlem sayısı.
+4. Tohum aşama adları: `k2` (rastgele giriş), `rw` (rastgele ağırlık).
+5. Rastgele giriş (satır 6–9, v3 yerel değişken; v2 yolu tutma süresini korumadığı için): enstrüman, yön, stop katı
+   (gerçek stop mesafesi / ATR14), tutma süresi (mum) korunur; giriş gerçek işlemin UTC takvim çeyreğinden tekdüze
+   (satır 7–8'de çeyrek eleme başlangıcının altına inmez); simülasyonda funding yok (gerçek R'de var: test hafif sıkı).
+6. V3 yıl kapısı: giriş yılına göre Σ R (×1, kabul edilen işlemler); P3: ×1 günlük getiri.
+7. P6 al-tut: o gün verisi olan sembollerin eşit ağırlıklı günlük getirisi, stratejinin ortalama brüt maruziyetiyle
+   ölçekli; Sharpe √365; eşitlik geçmez.
+8. Geniş stop duyarlılığı (1.2): her satırda `atr_k` = 20, yalnız ×1.
+9. Satır 7–8 tüm dönem: yalnız rapor, rastgele test yok. Satır 9 BTCUSDT: ayrı koşu, yalnız rapor.
+10. Ayar: strateji sınıfının varsayılanı (`kayit.al(ad)()`); kart ayarı dosyası kullanılmaz.
+11. Maliyet: v2 maliyet tablosu (DK_ funding sütunlu); iki tablonun sha256'sı dondurmada.
+12. Hata: veri okuma/bellek hatası "altyapi" → bir kez yeniden koşu (`--yeniden-altyapi`); diğerleri "hesap" = elendi.
+13. Dondurma kapsamı: 9 strateji kaynağı + import kapanışı, ortak motor, `motor/arastirma/v3/`, bu dosya,
+    `kodlama_v3.csv`, maliyet tabloları, `veri/takvim/fomc.csv`.
