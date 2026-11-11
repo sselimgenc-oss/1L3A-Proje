@@ -1,0 +1,67 @@
+{
+  "kart_id": "daytrade__12s-seans-ters-donus-btc__mdpi-jrfm",
+  "ad": "BTC 12 Saatlik Seans Gecikmeli Ters Dönüş (gündüz/gece)",
+  "stil": "daytrade",
+  "kaynak": {
+    "url": "https://www.mdpi.com/1911-8074/19/9/692",
+    "lisans": "makale",
+    "tur": "makale"
+  },
+  "ozet": "Gün iki tamamlayıcı 12 saatlik seansa bölünür. Bitcoin için kaynağın en iyi bulduğu kural: her seansta, bir önceki (gecikmeli) seansın getirisine TERS yönde pozisyon al (ters dönüş/ters dönüş), seans sonunda kapat/çevir. Tam metne erişilemedi; kural ayrıntısı arama özetinden.",
+  "kategori": "ortalamaya_donus",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "kripto",
+  "zaman_dilimi": {
+    "islem": "12 saatlik seans (saatlik Kraken verisinden)",
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {
+      "ad": "Seans getirisi",
+      "parametreler": {
+        "seans_uzunlugu": "12 saat",
+        "gecikme": "1 seans (kaynakta tam tanım yok)"
+      }
+    }
+  ],
+  "long_giris": [
+    "Bir önceki 12 saatlik seansın getirisi negatifse, bu seansın başında long (kaynakta tam kural doğrulanamadı)"
+  ],
+  "short_giris": [
+    "Bir önceki seansın getirisi pozitifse, bu seansın başında short"
+  ],
+  "stop_loss": null,
+  "kar_al": null,
+  "iz_suren_stop": null,
+  "zaman_cikisi": "Seans sonunda (12 saat) kapat ya da yönü çevir",
+  "filtreler": [],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": "Arama özetinde: BTC gece ters dönüş kontrastı seans başına 23.89 baz puan (güven aralığı kesik, doğrulanmadı); BTC ters/ters kuralı 2 baz puan maliyette pozitif kalıyor — iddia (doğrulanmadı)",
+  "kanit": "Kraken saatlik BTC ve ETH 2016-2025; 25 sıralı kural denendi; maliyet tabloları yalnız 0, 1 ve 2 baz puan (bizim taker+kayma 8-10+ baz puanın 4-10 katı altında). Chronological holdout ve çoklu test düzeltmesi var diye özette geçiyor ama ayrıntı/OOS dönemi kaynakta yok (tam metne ulaşılamadı). 25 kuralın en iyisi seçildiği için seçim yanlılığı riski yüksek.",
+  "veri_uygun": [
+    true,
+    "OHLCV 5m'den 12 saatlik seans getirisi türetilir; funding 8 saatte bir ödendiği için tutma süresince ayrıca düşülmeli."
+  ],
+  "kodlanabilirlik": {
+    "puan": 1,
+    "gerekce": "Seans sınırlarının UTC saati ve 'gecikmeli' tanımı özetten bilinmiyor; yaklaşık kodlanır."
+  },
+  "belirsizlikler": [
+    "Seans sınırları (UTC) kaynakta yok / doğrulanamadı",
+    "Kuralın gecikme tanımı doğrulanamadı",
+    "Chronological holdout dönemi doğrulanamadı",
+    "Maliyet yalnız 0-2 baz puan",
+    "25 kural arasından seçilmiş en iyi sonuç"
+  ],
+  "uyumluluk_notu": "Scalp değil, 12 saatlik gün içi/overnight sınıfı. Tutma süresi uzun olduğu için işlem başı maliyet oranı scalptan çok daha iyi; ama kanıt zayıf ve havuzdaki btc-gecelik / saatlik-aşırı-tepki ailesine yakın (kısmen tekrar).",
+  "varyantlar": [
+    "ETH: gece long + gündüz ters dönüş (kaynak özeti)"
+  ],
+  "anahtar_kelimeler": [
+    "seans",
+    "ters-donus",
+    "gecikmeli",
+    "btc",
+    "12-saat"
+  ]
+}

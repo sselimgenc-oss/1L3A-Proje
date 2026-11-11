@@ -344,3 +344,43 @@ funding-7g günlük toplam artık kodda (`funding_gunluk_toplam`; Tur 4/5 "farkl
 - 74 `ayni` satır tek tek denetlenmedi; kaynak cümleleri Tur 4/5 aktarımlarına dayanıyor (Quantpedia/Vine özet düzeyinde, Da-Gurun-Warachka açılmadı, De Nicola birincil metni yok).
 - Ajan etiketleri yer yer tutarsız: `kodda_yok` hem "kart kodlanmamış" hem "kaynakta olmayan kural kodda var" için kullanıldı; önem dereceleri ajanlar arasında aynı ölçüyle verilmedi (Fable vol-yönetimli stopunu "orta" yerine yüksek sayıyor).
 - Koşuda fiilen hangi parametre/maliyet/evrenin geçeceği koşu betiğine bağlı; sınıf varsayılanlarını doğrulamak koşuyu doğrulamak değildir.
+
+---
+
+# Tur 9 (2026-11-11) — Scalp araştırması (1m–15m, maliyete dayanıklı mı?)
+Önceki tur dosyalarına dokunulmadı. Eklenenler: 1 kart (`kartlar/daytrade__12s-seans-ters-donus-btc__mdpi-jrfm.json`), `adaylar.csv` ve `aileler_v3.csv` sonuna 1'er satır, `REDDEDILENLER_tur9.txt`. Kod yazılmadı.
+
+## 1. Sonuç (kısa)
+**Gerçek anlamda maliyete dayanıklı, taker emirle yaşayan bir scalp adayı BULUNAMADI.** ~36 sayfa/kaynak tarandı (14 arama, ~12 sayfa açma denemesi); (a) maliyet dahil + (b) örneklem dışı + (c) kesin kural üçlüsünü birlikte sağlayan kaynak çıkmadı. Bulunan her şey ya zaten havuzda (tekrar: Shen ilk-yarı-saat, Padyšák 21-23 UTC, De Nicola saatlik, Bianchi günlük kesit, Zarattini noise-area), ya maliyetsiz/OOS'suz, ya kural eksik, ya da scalp değil (günlük/kesit/12 saat). Tek yeni kart 12 saatlik seans ters dönüşü: scalp değil ve kanıtı zayıf.
+
+**Önemli sınır (dürüstlük):** Bu oturumda WebFetch yalnız GitHub'a ulaşabildi; arxiv, mdpi, ssrn, quantpedia, reading.ac.uk, cesifo, doi.org, ncbi DNS hatası verdi (ağ izin listesinde yok). Makale hükümleri **arama özetlerine** dayanır, tam metin okunmadı. "Maliyet yok" ifadeleri çoğunlukla "bu erişimle doğrulanamadı" demektir. Bu hostlar izinlendirilirse Tur 9 kısa sürede tamamlanabilir (özellikle MDPI JRFM 19(9):692 ve Shen-Urquhart-Wang tam metni).
+
+## 2. Aday tablosu: brüt hareket / maliyet
+Gidiş-dönüş maliyet varsayımı: taker %0,08-0,10 + kayma (kaymasız alt sınır %0,08-0,10). Oran = brüt beklenen hareket / maliyet; 1'in altı maliyet sonrası kayıp demek. "Türetilmiş" = kaynakta işlem başı rakam yok, ben yıllık getiriyi işlem sayısına böldüm (kaba, bileşik etkisiz).
+
+| Aday | Zaman dilimi | İşlem başı brüt hareket | Maliyet oranı | Maker gerekir mi | Kaynakta OOS ve maliyet |
+|---|---|---|---|---|---|
+| **12s-seans-ters-donus** (yeni kart; MDPI JRFM 2026, Kraken BTC/ETH 2016-2025) | 12 saat (5m'den türetilir) | Özette BTC gece ters dönüş kontrastı 23,89 bp/seans (güven aralığı kesik, doğrulanmadı) | 23,89 / (8-10 bp) ≈ 2,4-3 kayma hariç; yön çevirme = 1 gidiş-dönüş. Kaynak yalnız 0/1/2 bp maliyet denedi (bizimkinin 4-10 katı altı): oran kaynağın değil benim hesabım | Hayır (12 saat tutma, taker olur); funding ayrıca düşülmeli | "Chronological holdout" özette geçiyor, dönem/sonuç yok; 25 kuraldan en iyisi: seçim yanlılığı. **Scalp değil.** |
+| Padyšák/Quantpedia BTC 21-23 UTC (tekrar, kart var) | 1h (2 saat tutma) | Yıllık %33 → ~%0,09/işlem (türetilmiş, 365 işlem); genişletilmiş %40,6 → ~%0,11 | ~0,9-1,4, kayma sonrası ≈ 1 civarı veya altı | Hayır ama kenar çok ince | Maliyet "raporlanmadı", OOS temiz değil; bağımsız not permütasyon testinde reddetti |
+| Shen-Urquhart-Wang BTC gün içi TSM (tekrar, kart var) | 30 dk (hacim saati) | Kaynakta yok (özet) | Hesaplanamaz (kaynakta yok) | Hayır | OOS var (özet), maliyet doğrulanamadı |
+| Heliyon "turn-of-the-candle" (reddedildi) | 1m (15m mum dönümü) | +0,58 bp/dakika (özet) → 2-3 dk tutma ≈ 1-2 bp | ≈ 0,1-0,2 | Taker ile ölür; **maker gerekir (altyapı yok)** | Kraken 2016-2021; maliyet/OOS yok. **1m: kullanıcı kararı gerekli: karar 3** |
+| "Power Hour" BTC ters dönüş (reddedildi) | 1 saat (NY 15-16) | Brüt Sharpe 2,89 → net -0,09 (haber alıntısı, birincil yok) | <1 (net sıfır/negatif) | — | Olumsuz kanıt: maliyet edgeyi yiyor |
+| BTC 15m ORB (Reddit/GitHub), tmr-crypto EMA WF | 1m-60m / 15m | Kaynakta yok | Hesaplanamaz | — | tmr-crypto: ücret %0,1/işlem, 21 ay OOS, sonuç al-tut ile benzer, kural/sayı yok |
+
+Diğer yönler (likidasyon kaskadı tersine dönüşü, funding yerleşim saati etkisi, açılış/seans kırılımı, emir akışı vekilleri): **kural + maliyet + OOS üçlüsü olan kaynak bulunamadı**; likidasyon ve emir akışı çoğunlukla OHLCV dışı veri ister (bizde yok).
+
+## 3. Hakem (Fable-tarzı) — kendim yaptım
+`fable` modelli ayrı bir alt ajan çağıracak Agent aracı bu ajan oturumunda yoktu; bu yüzden hakem adımını ben (araştırma ajanı) yaptım. Fable denetimi değildir; lider isterse ayrıca Fable'a gösterebilir.
+- **Maliyet sonrası makul:** yalnız tutma süresi uzun olan (12 saat seans ters dönüşü) oran kâğıt üstünde 2-3 çıkıyor, ama dayandığı tek rakam özet kaynaklı, kaynağın maliyet testi 1-2 bp ile bizim gerçek maliyetimizin çok altında, 25 kuraldan seçilmiş. Ön kayıtlı, küçük ve "umut verici sayma" şartıyla en fazla izlenebilir; scalp sayılmaz.
+- **Yalnız maker ile yaşayanlar:** 1m dakikalık mum-dönümü etkisi ve benzeri mikro desenler (brüt 1-3 bp). Maker emri yok ve fill/kuyruk riski ayrı problem (kuyruk modeli yazısında bootstrap GA sıfırı içeriyor): kâğıt üstü kenar gerçekte tutmaz.
+- **Taker ile makul ama ince:** 21-23 UTC mevsimselliği: brüt ≈ maliyet; kayma sonrası ≈ 0.
+- **Dürüst beklenti:** Havuzdaki 15m+ stratejilerin ötesinde yeni bir scalp kenarı beklenmemeli. Kamuya açık literatürde (bu erişimle) maliyet sonrası ayakta kalan 1m-15m kripto scalp'i örneği yok; AutoQuant (arXiv 2512.22476, özet) tam maliyetli kurulumun ücret-yalnız ve sıfır-maliyet backtestlere göre performansı belirgin düşürdüğünü söylüyor. Önerim: scalp ajanı kapalı kalsın (karar 11), 1m veriyi yalnız bu amaçla indirmeye değmez.
+
+### Bu tür projede neden şimdiye kadar başarısız oldu (3 cümle)
+Scalp'te işlem başı brüt hareket çoğunlukla 5-30 bp iken taker gidiş-dönüş maliyet 8-10 bp + kayma olduğundan edge maliyetin içinde eriyor; Katman 2'de scalp'in yalnız %3'ü PF>1, WF'de 0 geçen buna uyuyor. Çok deneme (scalp 15m'de ~2500) DSR/çoklu test eşiğini yükseltti: iyi görünen birkaç koşu şansla açıklanabilir, K5'te hiçbiri geçmedi. Canlıda yalnız MARKET emir olduğu için maker avantajına (ve rebate'e) ulaşılamıyor; backtest'in fill varsayımı da iyimser kalıyor.
+
+## 4. Dürüst sınırlar (tur 9)
+- Tam metin okunmadı (ağ engeli); hükümler arama özeti + GitHub sayfalarına dayanır. Rakamların çoğu doğrulanmadı ve tabloda öyle işaretli.
+- "Türetilmiş" brüt/işlem rakamları bölme ile kaba hesap; bileşik ve işlem atlama etkisi yok.
+- Arama kapsamı dar (14 arama); "literatürde yok" denemez, "bu erişimle bulunamadı" denir (Tur 5 ile aynı ifade).
+- 12s-seans kartının kuralı özetten çıkarıldı (seans UTC sınırı ve gecikme tanımı bilinmiyor); ön kayda girmeden önce tam metinle doğrulanmalı.
