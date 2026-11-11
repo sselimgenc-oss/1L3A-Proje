@@ -33,4 +33,8 @@ B2 → üstünlük birkaç büyük kazanana bağlı; B3 → üstünlük long yö
 11 pencere = düşük güç; süzülmüş verilerde kapı geçen sayısı az olabilir (S_k çoğunlukla N1'den tamamlanır); sonuç sonrası tasarlanmış keşif.
 
 ## Betik sha256
-a18296636be41b5bb70b659e376d0c81e1d0a1ce3b3bc53947a895264e8e1312  araclar/meta_test_saglamlik.py
+1e0932e317ecb37354968c651e3b4d4f9e2e1df72f532d3048441494fd0d162e  araclar/meta_test_saglamlik.py
+
+Not: ilk koşu `yon_tablosu` adımında (B3 ek long-payı tablosu) KeyError ile çöktü; hiçbir sonuç yazılmadan/görülmeden. Neden: pf__ (portföy) satırlarının
+ham dosyasında işlem sütunları yok; `yon_tablosu` havuz kuralını (mtm'siz satırları atla) uygulamıyordu. Yalnız bu süzgeç düzeltildi (parametre/kural
+değişmedi); sha256 yukarıda düzeltilmiş betiğindir.

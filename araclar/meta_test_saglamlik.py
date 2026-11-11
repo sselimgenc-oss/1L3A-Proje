@@ -175,7 +175,7 @@ def yon_tablosu(kok: Path, eleme: pd.DataFrame) -> dict:
     for _, r in eleme[eleme["durum"] != "hata"].iterrows():
         ons = f"{r['strateji']}--{r['tf']}--"
         dosyalar = idx["ham2"].get(ons, [])
-        if not dosyalar:
+        if not (dosyalar and idx["mtm2"].get(ons) and idx["ham1"].get(ons)):      # havuz kuralı: mtm'siz (pf__) satırlar dışarıda
             continue
         bas = pd.Timestamp(r["analiz_bas"])
         g, c, y = [], [], []

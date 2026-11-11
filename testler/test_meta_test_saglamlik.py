@@ -119,6 +119,14 @@ def test_yon_tablosu_ve_long_payi(kok):
     assert lp["ol_n"] == 2 and lp["ol_long_payi"] == 0.0
 
 
+def test_yon_tablosu_mtmsiz_satiri_atlar(kok):
+    k, el = kok
+    (k / "ham/x2" / "pf__x--1d--_PORTFOY.parquet").write_bytes((k / "ham/x2" / "st--1d--AAA.parquet").read_bytes())
+    el2 = pd.concat([el, pd.DataFrame({"strateji": ["pf__x"], "tf": ["1d"], "etiket": ["t"],
+                                       "analiz_bas": ["2018-01-01 00:00:00+00:00"], "durum": ["gecti"]})], ignore_index=True)
+    assert list(sg.yon_tablosu(k, el2)) == ["st|1d"]
+
+
 # ---------------------------------------------------------------- B2 kazananlar
 def seri(baslangic, fiyatlar):
     return pd.Series(fiyatlar, index=pd.date_range(baslangic, periods=len(fiyatlar), freq="D", tz=UTC), dtype=float)
