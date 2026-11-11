@@ -146,18 +146,23 @@ dengeleme). İkinci değerlendirme yoktur. 730 günde şartlar oluşmazsa satır
 - Aksi halde **"çürütülmedi"**, paper sürer.
 - İzleme: herhangi bir gün %5 bandının altına inerse duraklat + inceleme; devam kararı kullanıcıda.
 Not: 84 günde avantajı olmayan bir strateji yaklaşık yarı olasılıkla "çürütülmedi" çıkar; bu yüzden bu adım kanıt
-değildir.
+değildir. Canlı kararı için bkz. 4.5 (84 gün beklenmesi şart değil).
 
-**4.4 Kanıt testi (tek, sepet düzeyinde).** Paper başlangıcından **365 gün sonra**, bir kez:
+**4.4 Kanıt testi (BİLGİ; canlı şartı değil).** Paper başlangıcından 365 gün sonra, bir kez:
 - Sepet = elemeyi geçen bütün satırların eşit ağırlıklı günlük net getirisi ("çürütüldü" olanlar durduğu günden
-  sonra 0 getiriyle sepette kalır; sonradan çıkarılmaz).
-- Fark serisi = sepet − aynı günlerin maruziyet-eşlenmiş al-tut getirisi (her satırın kendi evreninin eşit ağırlıklı
-  al-tut'u, o satırın günlük brüt maruziyetiyle ölçeklenmiş, sonra eşit ağırlıkla toplanmış).
-- Kanıt: fark serisinin tek yönlü t istatistiği ≥ **1.645** (Newey-West, 5 gecikme).
-- Strateji başına sonuçlar yalnız rapordur.
+  sonra 0 getiriyle sepette kalır).
+- Fark serisi = sepet − maruziyet-eşlenmiş al-tut (her satırın kendi evreninin eşit ağırlıklı al-tut'u, günlük brüt
+  maruziyetiyle ölçeklenmiş, eşit ağırlıkla toplanmış).
+- Ölçüt: fark serisinin tek yönlü t istatistiği ≥ 1.645 (Newey-West, 5 gecikme). Sonuç yalnız raporlanır.
 
-**4.5 Canlı.** Kanıt testi geçmeden canlı para önerilmez. Geçse bile canlıya geçiş yalnız kullanıcı onayıyla; B18
-(pano erişim güvenliği) canlıdan önce kapanır.
+**4.5 Canlı — KULLANICI KARARI (2026-11-11).** Kullanıcı: "2027'den önce canlıya geçeceğim; riskleri ve
+stratejilerin kendini kanıtlamadığını biliyorum; 3-5 ay / 1 yıl beklemem." Bu yüzden:
+- Canlıya geçiş istatistiksel kanıta (4.3 / 4.4) bağlı DEĞİLDİR; karar kullanıcınındır. Denetçiler (Fable dahil) bu
+  kararı bilir ve süre şartı dayatmaz; yalnız riskleri raporlar.
+- Canlı için yine de ŞART olanlar (güvenlik, istatistik değil): (a) 4.2 sadakat geçmiş olmalı (sistem doğru
+  çalışıyor); (b) 4.3 "çürütüldü" olan satır canlıya alınmaz; (c) SERT_LIMITLER aynen; (d) B18 (pano erişim
+  güvenliği) kapalı; (e) borsa API anahtarı para çekme izni KAPALI ve IP kısıtlı; (f) küçük başlangıç bütçesi,
+  büyütme kullanıcı kararıyla.
 
 ---
 
