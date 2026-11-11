@@ -110,7 +110,7 @@ Fable'ın 3 riski:
 ---
 
 # Tur 3 (2026-11-11)
-Tur 1-2 metnine ve dosyalarına dokunulmadı; yalnız dosya/satır eklendi. Bu dal tur 2'nin (PR #22) üstüne kuruldu, çünkü TUR 3 girdileri (144 kart) yalnız orada; PR #22 birleşmeden bu PR'ın farkı tur 2 commit'lerini de içerir.
+Tur 1-2 metnine ve dosyalarına dokunulmadı; yalnız dosya/satır eklendi. Çalışma sırasında tur 2 (PR #22) main'e birleşti; bu PR'ın farkı yalnız tur 3'tür.
 
 ## 1. Aile kümelemesi (`aileler_v3.csv`, 153 satır)
 - 153 kart (144 + tur 3'ün 9 yeni kartı) **34 aileye** ayrıldı; **10 aile temsilcisi** seçildi (her aileden en çok 1-2; önce Fable puanı, sonra kural netliği, sonra kanıt; havuzdaki bir stratejinin küçük varyantı ve `veri_uygun=false` kart temsilci olamaz). Her kart için havuzdaki en yakın strateji (`havuz_v2` / `dis_envanter`) ve fark özeti yazıldı.
