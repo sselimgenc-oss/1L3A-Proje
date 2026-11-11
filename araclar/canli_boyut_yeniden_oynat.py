@@ -110,10 +110,12 @@ def maliyet_oranlari(sembol: str) -> tuple:
     return D(str(stop_bps / 1e4)), D(str(taker / 100.0))
 
 
-def boyut_yeni(kasa, giris, stop, yon, sembol, diger_brut, diger_risk):
+def boyut_yeni(kasa, giris, stop, yon, sembol, diger_brut, diger_risk, min_tutar_yok=False, limitler=None):
+    """min_tutar_yok / limitler: YALNIZ teşhis (araclar/canli_atlanan_teshis.py); varsayılanlarla sonuç değişmez."""
     sk, tk = maliyet_oranlari(sembol)
-    s = cl.miktar_hesapla(kasa=kasa, yon=yon, giris=giris, stop=stop, stop_kayma=sk, taker=tk, adim=D("1e-8"), min_tutar=min_tutar(sembol),
-                          diger_brut=diger_brut, diger_stop_riski=diger_risk)
+    ek = {"limitler": limitler} if limitler is not None else {}
+    s = cl.miktar_hesapla(kasa=kasa, yon=yon, giris=giris, stop=stop, stop_kayma=sk, taker=tk, adim=D("1e-8"),
+                          min_tutar=D(0) if min_tutar_yok else min_tutar(sembol), diger_brut=diger_brut, diger_stop_riski=diger_risk, **ek)
     return s.qty, s.neden, s.baglayan
 
 
@@ -137,7 +139,7 @@ def boyut_yuzde1(kasa, giris, stop, yon, sembol, diger_brut, diger_risk):
     return q, None, b
 
 
-def oyna(tr: pd.DataFrame, mtm: pd.DataFrame, mod: str, baslangic=None, bitis=None) -> dict:
+def oyna(tr: pd.DataFrame, mtm: pd.DataFrame, mod: str, baslangic=None, bitis=None, kayit=None, boyut_ek=None) -> dict:
     """Gün gün yeniden oynatma (tek strateji hesabı). mod: 'canli' (CANLI_LIMITLER) | 'yuzde1' (SERT_LIMITLER eski boyut, karşılaştırma).
 
     Tanımlar / yaklaşıklıklar (rapora da yazılır):
@@ -149,8 +151,14 @@ def oyna(tr: pd.DataFrame, mtm: pd.DataFrame, mod: str, baslangic=None, bitis=No
       - açık pozisyonların stop riski girişteki stopla ölçülür (stop yükseltme riski azaltır; tutucu), diğer pozisyonların nominali giriş fiyatıyla
       - adım (stepSize) yuvarlaması modellenmedi; min tutar tablosu MIN_TUTAR (tutucu varsayım)
     """
+    # kayit: liste verilirse her sinyal için {sembol, islem_no, durum, neden} eklenir; boyut_ek: boyut_yeni'ye ek kwargs (yalnız teşhis). Varsayılan: davranış aynı.
+    def not_et(x, durum, neden="", qty=0.0):
+        if kayit is not None:
+            kayit.append(dict(sembol=x["sembol"], islem_no=int(x["islem_no"]), durum=durum, neden=neden, qty=qty))
     if mod == "canli":
         gunluk_oran, kill_oran, boyutla = cl.CANLI_LIMITLER.gunluk_max_kayip_oran, cl.CANLI_LIMITLER.strateji_kill_oran, boyut_yeni
+        if boyut_ek:
+            boyutla = lambda *a, _b=boyut_yeni: _b(*a, **boyut_ek)
     else:
         gunluk_oran, kill_oran, boyutla = SERT_LIMITLER.gunluk_max_kayip_yuzde / 100, SERT_LIMITLER.kill_switch_dusus_yuzde / 100, boyut_yuzde1
     tr = tr.sort_values(["giris_zamani", "sembol"], kind="stable").reset_index(drop=True)
@@ -185,10 +193,12 @@ def oyna(tr: pd.DataFrame, mtm: pd.DataFrame, mod: str, baslangic=None, bitis=No
                 simdi = gerc + mtm_toplam(onceki_gun)
                 if gun_basi > 0 and (gun_basi - simdi) / gun_basi >= gunluk_oran - 1e-12:
                     sayac["gunluk_blok"] += 1
+                    not_et(x, "atlandi", "gunluk_blok")
                     continue
                 kasa = min(simdi, KASA_USD)
                 if kasa <= 0:
                     sayac["diger_red"] += 1
+                    not_et(x, "atlandi", "diger")
                     continue
                 giris, sd, yon = D(repr(float(x["giris_fiyati"]))), D(repr(float(x["stop_mesafe"]))), int(x["yon"])
                 diger_brut = sum((D(repr(p["qty"])) * D(repr(p["giris"])) for p in acik), D(0))
@@ -196,12 +206,15 @@ def oyna(tr: pd.DataFrame, mtm: pd.DataFrame, mod: str, baslangic=None, bitis=No
                 qty, neden, bagl = boyutla(D(repr(kasa)), giris, giris - yon * sd, yon, x["sembol"], diger_brut, diger_risk)
                 if neden == "min_tutar_alti":
                     sayac["min_tutar"] += 1
+                    not_et(x, "atlandi", "min_tutar")
                     continue
                 if neden is not None or qty <= 0:
                     sayac["diger_red"] += 1
                     red[neden] = red.get(neden, 0) + 1
+                    not_et(x, "atlandi", {"risk_butcesi_dolu": "brut_tavan" if bagl == "brut" else "risk_butcesi_dolu", "stop_cok_uzak": "stop_cok_uzak"}.get(neden, "diger"))
                     continue
                 q = float(qty)
+                not_et(x, "alindi", "", q)
                 sayac["islem"] += 1
                 sayac["nominal_bagli" if bagl in ("nominal", "marj", "brut") else "risk_bagli"] += 1
                 m = mtmd.get((x["sembol"], int(x["islem_no"])), {})
@@ -210,6 +223,8 @@ def oyna(tr: pd.DataFrame, mtm: pd.DataFrame, mod: str, baslangic=None, bitis=No
                 acik.append(dict(cikis=x["cikis_zamani"], qty=q, sd=float(sd), giris=float(giris), pnl=float(x["r"]) * q * float(sd), mt=m, son=0.0))
         elif kill_gun is not None:
             sayac["kill_sonrasi"] += int(len(giris_gun.get(gun, ())))
+            for _, x in giris_gun.get(gun, pd.DataFrame()).iterrows():
+                not_et(x, "atlandi", "kill_sonrasi")
         kapat(gun + pd.Timedelta(days=1) - pd.Timedelta(1, "ns"))            # gün içinde biten her işlem gün sonuna kadar gerçekleşir
         ozs = gerc + mtm_toplam(gun)
         if kill_gun is None:
