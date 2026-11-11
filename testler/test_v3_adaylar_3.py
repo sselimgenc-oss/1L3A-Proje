@@ -144,7 +144,8 @@ def test_ucuncu_parti_kayitlari_ve_csv_tam():
     yeni = {k for k, s in tum_stratejiler().items() if s.__module__.endswith("v3_adaylar_3")}
     assert len(yeni) == 11 and all(k.startswith("v3__") for k in yeni)
     with (KOK / "stratejiler/v3_adaylar/adaylar.csv").open(encoding="utf-8-sig", newline="") as f:
-        adaylar = [r for r in csv.DictReader(f) if r["oncelik"] == "3"]
+        # Parti 3 = TUR 1 kartlarının öncelik-3'ü (tur 1 = adaylar.csv ilk 72 satır; tur 2-3 sona kendi öncelikleriyle eklendi).
+        adaylar = [r for r in list(csv.DictReader(f))[:72] if r["oncelik"] == "3"]
     with (KOK / "stratejiler/v3_adaylar/kodlama_v3.csv").open(encoding="utf-8", newline="") as f:
         kodlama = {r["kart_id"]: r for r in csv.DictReader(f)}
     assert len(adaylar) == 46 and {r["kart_id"] for r in adaylar} <= set(kodlama)
