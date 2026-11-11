@@ -113,6 +113,19 @@ Ana ders: önceki sonuçlar OOS'a bakılarak seçilmiş ve kâr birkaç işlemde
 - Veri ⏳: Dukascopy (karar 22). DK_AAPL 5m tamam (2017–); dakikalık indirme yavaş (9–30 saat). Hızlı yol: aylık
   saatlik dosyalar → swing/daytrade 1h+ testleri önce; 15m/30m dakikalık veri tamamlanınca.
 
+## DEVİR NOTU — 2026-11-11 akşamı (projeye dönüşte buradan başla)
+Kullanıcı: "çok dağıldık, proje üzerinde yeniden çalışacağım". Açık iş bırakılmadı. Görsel özet: kullanıcıya gönderilen
+"1L3A_Proje_Akis.pdf" (6 sayfa). Kaynak dosyalar:
+- **Canlı plan (kilitli, kullanıcı onaylı):** `sonuclar/canli/CANLI_PLAN.md`. Aşama 1 = 4 × 250 USD: e0v1en, ewo-ema-ofset (15m; %1,5 → 6. hf %2 → 12. hf %3, şartlı, ELLE) + 2 swing (%1,5 sabit).
+- **Kilitli swing seçimi:** `sonuclar/canli/SWING_SECIM.md` → hma-atr-rider, lube (yedek sırası: gauss-stoch-eth, haftalik-macd). 2026-12-08 sadakatini geçemeyen düşer, sıradaki alınır.
+- **Ölçüm:** `sonuclar/canli/OLCUM_250_15.md`. Atlanan sinyal > %50: gauss, jt-awesome, voltarget ve **hma-atr-rider (%50,7)**. Plan maddesi "o strateji %2 ile başlar" → mekanik okuma: hma-atr-rider %2 ile başlar ve swing olduğu için %2'de sabit kalır. **Kullanıcı teyidi bekliyor** (plan, swing için "%1,5 sabit" de diyor).
+- **Canlı kod:** `motor/canli/borsa/` (kuru/testnet/canli; CANLI_LIMITLER; strateji başına islem_risk 0,015–0,03; `python -m motor.canli.borsa.risk_adim_kontrol --durum DIR` salt okunur). Kurulum: `deploy/KURULUM.md` §13.
+- **Eksik:** haftalık canlı–paper raporu yok (risk adım şartı 2 ve 3 bu yüzden "bilinmiyor" döner) — Aşama 1 başlamadan yazılmalı.
+- **Sırada:** (1) Binance testnet: kullanıcı testnet API anahtarını oluşturup /etc/1l3a-canli.env'e koyar; tek strateji e0v1en; önce kuru, sonra testnet (algo emir uçları ilk kez burada doğrulanır). (2) B18 pano kilidi (Cloudflare Access). (3) 2026-12-08 sadakat kontrolü (14 bayat dolum hariç). (4) Aralık başı USDT yatırma, alt hesaplar. (5) Aralık ortası Aşama 1.
+- **Bekleyen kullanıcı kararları:** hma-atr-rider başlangıç riski (%2 mekanik okuma mı, %1,5 mi); Aşama 2 kasası (+500 USD ya da 4'te kal; 6–8 hafta sonra).
+- **Sonuçlar:** v3 eleme 0/9 (`sonuclar/v3/ELEME_RAPORU.md`), scalp araştırması: aday yok (RAPOR Tur 9), noise inceleme: motor hatası yok (`sonuclar/v3/INCELEME_NOISE.md`).
+- **Ekip:** Codex ve ikinci Claude hesabı çıkarıldı; her şey ana oturum + alt ajanlar (Sonnet/Haiku) + Fable hakem.
+
 ## Lider kararları günlüğü (karar 26)
 - 2026-11-10: BAĞIMSIZ DENETİM (Codex raporu B01-B18; Denetçi SG + Fable doğruladı: 17 gerçek, 1 şüphe) → düzeltmeler (testli):
   paper/portföy: B09 günlük/kill limiti açılışta girişlerden önce; B11 askıdaki pozisyon da limitte kapanır (+alarm); B05 geç gelen funding
