@@ -5,23 +5,31 @@ import numpy as np
 import pandas as pd
 
 from motor.portfoy.temel import PortfoyStratejisi, atr_tablosu, ortak_eksen
+from motor.strateji.funding import GUNLUK_TOPLAM_SUTUN, SUTUN as FUNDING_SUTUNU
 from motor.portfoy.stratejiler.ortak import (
-    KRIPTO, ORTAK_PARAMETRELER, PfTemel, Takvim, dongusel_hedef, tetik_satirlari,
+    HEPSI, KRIPTO, ORTAK_PARAMETRELER, PfTemel, Takvim, dongusel_hedef, tetik_satirlari,
+)
+
+
+V3_KRIPTO = (
+    "BTCUSDT", "ETHUSDT", "BNBUSDT", "XRPUSDT", "SOLUSDT", "TRXUSDT", "ZECUSDT",
+    "HYPEUSDT", "DOGEUSDT", "LINKUSDT", "ADAUSDT", "XLMUSDT", "BCHUSDT",
 )
 
 
 class _FundingKesit(PortfoyStratejisi):
     """Funding sütunlarını aynı anda sıralayan ortak çekirdek.
 
-    Her sembol DataFrame'inde ``funding_orani`` mum kapanışında bilinen son
-    settlement olmalıdır. Eksik sütun sıfır varsayılmaz, açık hata verir.
+    Alt sınıf ``funding_sutunu`` ile son settlement oranını ya da mum aralığı
+    toplamını seçer. Eksik sütun sıfır varsayılmaz, açık hata verir.
     """
 
     funding_gerekli = True
+    funding_sutunu = FUNDING_SUTUNU
     min_sembol = 2
     varsayilan_parametreler = {
         "semboller": KRIPTO, "dilim": 0.1, "takvim": "D", "bakis_gun": 0,
-        "gecikme_gun": 0, "devam": False, "atr_k": 3.0, "atr_periyot": 14,
+        "gecikme_gun": 0, "bakis_min": 2, "devam": False, "atr_k": 3.0, "atr_periyot": 14,
         "iz_stop_yuzde": 0.0,
     }
     parametre_izgarasi = {}
@@ -39,16 +47,16 @@ class _FundingKesit(PortfoyStratejisi):
         adlar = self.etkin_semboller(veriler)
         if len(adlar) < self.min_sembol:
             raise ValueError(f"{self.ad}: en az iki sembol gerekli")
-        eksik = [s for s in adlar if "funding_orani" not in veriler[s]]
+        eksik = [s for s in adlar if self.funding_sutunu not in veriler[s]]
         if eksik:
-            raise ValueError(f"{self.ad}: funding_orani eksik: {eksik}")
+            raise ValueError(f"{self.ad}: {self.funding_sutunu} eksik: {eksik}")
         return {s: veriler[s] for s in adlar}
 
     def _skor(self, panel):
         p = self.parametreler
         skor = panel
         if p["bakis_gun"]:
-            skor = panel.rolling(f"{int(p['bakis_gun'])}D", min_periods=2).mean()
+            skor = panel.rolling(f"{int(p['bakis_gun'])}D", min_periods=int(p["bakis_min"])).mean()
         if p["gecikme_gun"]:
             hedef_idx = skor.index - pd.Timedelta(days=int(p["gecikme_gun"]))
             skor = skor.reindex(skor.index.union(hedef_idx)).sort_index().ffill().reindex(hedef_idx)
@@ -58,7 +66,7 @@ class _FundingKesit(PortfoyStratejisi):
     def hedefler(self, veriler):
         ev = self._evren(veriler)
         eksen = ortak_eksen(ev)
-        panel = pd.DataFrame({s: d["funding_orani"].reindex(eksen) for s, d in ev.items()}).ffill()
+        panel = pd.DataFrame({s: d[self.funding_sutunu].reindex(eksen) for s, d in ev.items()}).ffill()
         skor = self._skor(panel)
         p = self.parametreler
         if p["takvim"] == "D":
@@ -127,15 +135,19 @@ class FundingKesitCarry(_FundingKesit):
 
 
 class Funding7gTercil(_FundingKesit):
-    """Bir gün gecikmeli 7 günlük funding ortalamasıyla haftalık tercil L/S.
+    """Bir gün gecikmeli 7 günlük toplam-funding ortalamasıyla haftalık tercil L/S.
 
-    Kaynak: https://bryanvine.github.io/alpha-research/paper2.html.
+    Günlük toplam, o günlük mumun aralığındaki tüm settlement oranlarının
+    toplamıdır; son settlement oranı değildir. Kaynak:
+    https://bryanvine.github.io/alpha-research/paper2.html.
     """
 
     ad = "pf__v3-funding-7g-haftalik-tercil"
+    funding_sutunu = GUNLUK_TOPLAM_SUTUN
     varsayilan_parametreler = {
         **_FundingKesit.varsayilan_parametreler, "dilim": 1.0 / 3.0,
-        "takvim": "W", "bakis_gun": 7, "gecikme_gun": 1,
+        "semboller": V3_KRIPTO, "takvim": "W", "bakis_gun": 7,
+        "bakis_min": 7, "gecikme_gun": 1,
     }
 
 
@@ -166,9 +178,9 @@ class FipKesitsel(PfTemel):
     """
 
     ad = "pf__v3-fip-kesitsel-momentum"
-    min_sembol = 2
+    min_sembol = 5
     varsayilan_parametreler = {
-        **ORTAK_PARAMETRELER, "semboller": KRIPTO, "lookback_gun": 90,
+        **ORTAK_PARAMETRELER, "semboller": V3_KRIPTO, "lookback_gun": 90,
         "dilim": 0.2, "takvim": "W", "brut": 1.0,
     }
     parametre_izgarasi = {}
@@ -180,11 +192,13 @@ class FipKesitsel(PfTemel):
         duzgunluk = ((r > 0).astype(float) - (r < 0).astype(float)).rolling(n, min_periods=n).sum() / n
         skor = np.sign(tk.mom(n)[kolon]) * duzgunluk
         S = tk.eksene(skor).to_numpy(dtype=float)
-        gecerli = np.isfinite(S).sum(axis=1) >= 2
+        gecerli = np.isfinite(S).sum(axis=1) >= self.min_sembol
         tetik = tetik_satirlari(ax, p["takvim"], gecerli)
 
         def agirlik(i):
             s = pd.Series(S[i], index=kolon).dropna().sort_values(kind="stable")
+            if len(s) < self.min_sembol:
+                return {}
             k = min(max(1, int(np.ceil(len(s) * p["dilim"]))), len(s) // 2)
             if k < 1:
                 return {}
@@ -195,4 +209,126 @@ class FipKesitsel(PfTemel):
         return dongusel_hedef(ax, kolon, tetik, agirlik)
 
 
-V3_SINIFLAR = (Funding1sDevam, FundingKesitCarry, Funding7gTercil, FundingZ90UcGun, FipKesitsel)
+class DonchianAnsambl(PfTemel):
+    """Dokuz kapanış kanalının eşit ortalamasıyla long-only kripto ansamblı.
+
+    Kaynak: Zarattini vd., ``A Century of Evidence on Trend-Following
+    Investing`` revize kripto uygulaması; Tur 4 doğrulama tablosundaki Bölüm
+    4.1--5.1. Her model kendi orta-kanal iz stop durumunu taşır. Model ağırlığı
+    yıllık %25 / 90 günlük yıllık volatilite, en çok %200'dür. Semboller eşit
+    sermaye bütçesi (1/B) alır. Volatilitenin tek başına yarattığı %20'den küçük
+    göreli hedef değişimleri emir üretmez; model sinyali değişince emir anında
+    üretilir. Motorun zorunlu fiyat stopu ayrıca ATR(14) x 3'tür.
+    """
+
+    ad = "pf__v3-donchian-ansambl"
+    min_sembol = 2
+    varsayilan_parametreler = {
+        **ORTAK_PARAMETRELER, "semboller": V3_KRIPTO,
+        "pencereler": (5, 10, 20, 30, 60, 90, 150, 250, 360),
+        "vol_gun": 90, "hedef_vol": 0.25, "model_tavan": 2.0,
+        "vol_islem_esigi": 0.20,
+    }
+    parametre_izgarasi = {}
+
+    @staticmethod
+    def _model_durumu(kap: pd.Series, pencere: int) -> pd.Series:
+        up = kap.rolling(pencere, min_periods=pencere).max()
+        down = kap.rolling(pencere, min_periods=pencere).min()
+        mid = (up + down) / 2.0
+        sonuc = np.zeros(len(kap), dtype=bool)
+        aktif, ts = False, np.nan
+        for i in range(len(kap)):
+            c, u, m = kap.iloc[i], up.iloc[i], mid.iloc[i]
+            if not (np.isfinite(c) and np.isfinite(u) and np.isfinite(m)):
+                continue
+            cikti = False
+            if aktif:
+                if c <= ts:
+                    aktif, ts, cikti = False, np.nan, True
+                else:
+                    ts = max(ts, m)
+            if not aktif and not cikti and c == u:
+                aktif, ts = True, m
+            sonuc[i] = aktif
+        return pd.Series(sonuc, index=kap.index)
+
+    def _hedef(self, ev, tk: Takvim):
+        p, kolon, ax = self.parametreler, list(ev), tk.eksen
+        modeller = []
+        for n in p["pencereler"]:
+            modeller.append(pd.DataFrame({s: self._model_durumu(tk.kap[s], int(n)) for s in kolon}))
+        durum = np.stack([x.to_numpy(dtype=bool) for x in modeller], axis=2)
+        degisim = np.any(durum != np.roll(durum, 1, axis=0), axis=2)
+        degisim[0] = durum[0].any(axis=1)
+
+        vol = tk.getiri()[kolon].rolling(int(p["vol_gun"]), min_periods=int(p["vol_gun"])).std() * np.sqrt(365.0)
+        model_w = (float(p["hedef_vol"]) / vol).clip(upper=float(p["model_tavan"]))
+        model_w_np = np.nan_to_num(model_w.to_numpy(dtype=float), nan=0.0, posinf=0.0, neginf=0.0)
+        istek = durum.astype(float) * model_w_np[:, :, None]
+        hedef = np.mean(istek, axis=2) / len(kolon)
+
+        emir = np.full_like(hedef, np.nan, dtype=float)
+        mevcut = np.zeros(len(kolon), dtype=float)
+        kap = tk.kap[kolon].to_numpy(dtype=float)
+        esik = float(p["vol_islem_esigi"])
+        for i in range(len(tk.gun)):
+            if i > 0:
+                oran = np.divide(kap[i], kap[i - 1], out=np.ones(len(kolon)),
+                                 where=np.isfinite(kap[i]) & np.isfinite(kap[i - 1]) & (kap[i - 1] != 0))
+                nakit = 1.0 - mevcut.sum()
+                nominal = mevcut * oran
+                toplam = nakit + nominal.sum()
+                mevcut = nominal / toplam if toplam > 0 else mevcut
+            fark = np.abs(hedef[i] - mevcut)
+            vol_degisti = (fark > 0.0) & (fark >= esik * np.abs(mevcut))
+            vol_degisti |= (mevcut == 0.0) & (fark > 0.0)
+            yaz = degisim[i] | vol_degisti
+            emir[i, yaz] = hedef[i, yaz]
+            mevcut[yaz] = hedef[i, yaz]
+        return pd.DataFrame(emir, index=tk.gun, columns=kolon).reindex(ax)
+
+
+class VolYonetimliLong(PfTemel):
+    """Önceki tam takvim ayının gerçekleşen voluna göre aylık long ağırlık.
+
+    Kaynak: Moreira ve Muir (2017), NBER w22208. Tüm örneklemden seçilen
+    ileriye bakan ``c`` yerine önceden sabit yıllık %20 hedef kullanılır;
+    ağırlık 1,0 ile sınırlıdır; semboller eşit sermaye (1/n) alır. Kaynakta stop yoktur; motor sözleşmesi için
+    ATR(14) x 2 felaket stopu bizim eklememizdir.
+    """
+
+    ad = "pf__v3-vol-yonetimli-long"
+    min_sembol = 1
+    varsayilan_parametreler = {
+        **ORTAK_PARAMETRELER, "semboller": HEPSI, "hedef_vol": 0.20,
+        "agirlik_tavan": 1.0, "yillik_gun": 252, "atr_k": 2.0,
+    }
+    parametre_izgarasi = {}
+
+    def _hedef(self, ev, tk: Takvim):
+        p, kolon, ax = self.parametreler, list(ev), tk.eksen
+        aylik_vol = {}
+        for s in kolon:
+            r = ev[s]["kapanis"].pct_change(fill_method=None)
+            ay = r.index.tz_localize(None).to_period("M")
+            aylik_vol[s] = r.groupby(ay).std() * np.sqrt(float(p["yillik_gun"]))
+        tetik = tetik_satirlari(ax, "M", np.ones(len(ax), dtype=bool))
+
+        def agirlik(i):
+            # Semboller eşit sermaye (1/n) alır; her sembolün kendi payı içinde ağırlık en çok agirlik_tavan.
+            onceki_ay = (ax[i].tz_localize(None).to_period("M") - 1)
+            sonuc = {}
+            for s in kolon:
+                v = aylik_vol[s].get(onceki_ay, np.nan)
+                sonuc[s] = (min(float(p["hedef_vol"]) / v, float(p["agirlik_tavan"])) / len(kolon)
+                              if np.isfinite(v) and v > 0 else 0.0)
+            return sonuc
+
+        return dongusel_hedef(ax, kolon, tetik, agirlik)
+
+
+V3_SINIFLAR = (
+    Funding1sDevam, FundingKesitCarry, Funding7gTercil, FundingZ90UcGun,
+    FipKesitsel, DonchianAnsambl, VolYonetimliLong,
+)

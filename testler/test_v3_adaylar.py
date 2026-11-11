@@ -13,7 +13,9 @@ from motor.arastirma import wf_evren_portfoy
 from motor.arastirma.v2 import ham
 from motor.portfoy.motor import PortfoyAyarlari
 from motor.portfoy.stratejiler import tum_portfoy_stratejileri
-from motor.portfoy.stratejiler.v3 import FipKesitsel, Funding1sDevam, Funding7gTercil, FundingKesitCarry
+from motor.portfoy.stratejiler.v3 import (
+    V3_KRIPTO, FipKesitsel, Funding1sDevam, Funding7gTercil, FundingKesitCarry,
+)
 from motor.strateji import funding
 from motor.strateji.dis.v3_adaylar import (
     AdaptiveTrend6s, AsyaKutuKirilimMa50, DonchianAnsambl, HaftalikSmaTrixKirilim,
@@ -125,6 +127,7 @@ def pf_veri(freq="1D", n=140):
         df = mum(k, freq=freq)
         df.index = idx
         df["funding_orani"] = (-0.001, 0.0, 0.001)[i]
+        df["funding_gunluk_toplam"] = (-0.003, 0.0, 0.003)[i]
         sonuc[s] = df
     return sonuc
 
@@ -148,6 +151,21 @@ def test_funding_eksigi_sessizce_sifir_sayilmaz():
     del veri["BTCUSDT"]["funding_orani"]
     with pytest.raises(ValueError, match="funding_orani eksik"):
         FundingKesitCarry().sinyaller(veri)
+
+
+def test_funding_7g_tercil_gunluk_toplami_kullanir_ve_13_coin_varsayilandir():
+    taban = pf_veri("1D", 140)["BTCUSDT"]
+    veri = {}
+    for i, sembol in enumerate(V3_KRIPTO):
+        df = taban.copy()
+        df["funding_orani"] = float(len(V3_KRIPTO) - i)       # ters sıralama: kullanılmamalı
+        df["funding_gunluk_toplam"] = float(i)                # düşük toplam long, yüksek toplam short
+        veri[sembol] = df
+    st = Funding7gTercil()
+    h, _ = st.sinyaller(veri)
+    son = h.dropna(how="all").iloc[-1]
+    assert st.parametreler["semboller"] == V3_KRIPTO and len(V3_KRIPTO) == 13
+    assert son[V3_KRIPTO[0]] > 0 and son[V3_KRIPTO[-1]] < 0
 
 
 def ham_funding_verisi():
@@ -202,12 +220,25 @@ def test_v2_ham_pf_gorev_funding_hazirlar_ve_eksigi_raporlar(monkeypatch, tmp_pa
 
 
 def test_fip_ust_long_alt_short_ve_stoplu():
-    h, s = FipKesitsel().sinyaller(pf_veri())
+    veri = pf_veri()
+    veri["DOGEUSDT"] = veri["BTCUSDT"].copy()
+    veri["DOGEUSDT"]["kapanis"] *= np.linspace(1.0, 0.8, len(veri["DOGEUSDT"]))
+    veri["AVAXUSDT"] = veri["ETHUSDT"].copy()
+    veri["AVAXUSDT"]["kapanis"] *= np.linspace(1.0, 1.2, len(veri["AVAXUSDT"]))
+    semboller = tuple(veri)
+    h, s = FipKesitsel(semboller=semboller).sinyaller(veri)
     acik = h.dropna(how="all")
     assert len(acik) > 0 and np.allclose(acik.sum(axis=1), 0.0)
     son = acik.iloc[-1]
     assert (son > 0).sum() == 1 and (son < 0).sum() == 1
     assert s.loc[acik.index].notna().any(axis=1).all()
+
+
+def test_fip_bes_sembolden_azsa_portfoy_bos_kalir():
+    veri = pf_veri()
+    assert not FipKesitsel(semboller=tuple(veri)).uygun_mu(veri)
+    with pytest.raises(ValueError, match="en az 5 sembol"):
+        FipKesitsel(semboller=tuple(veri)).sinyaller(veri)
 
 
 def test_kayit_ve_kodlama_csv_ilk_parti_tam():
