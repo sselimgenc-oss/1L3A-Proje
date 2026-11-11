@@ -1,0 +1,416 @@
+{
+  "karar": "SEÇİM ÇALIŞIYOR",
+  "ana": {
+    "dbar": 7.919384277692302,
+    "p_yukari": 0.04638671875,
+    "p_asagi": 0.9541015625,
+    "ga90": [
+      0.1723676550138169,
+      15.666400900370787
+    ],
+    "D_k": [
+      -5.913192952299099,
+      9.554542781534856,
+      -7.834504120803146,
+      -7.215399610136451,
+      -14.29808680334687,
+      11.77607732581555,
+      22.589772066211857,
+      22.320075757575765,
+      13.774567610062888,
+      24.447916666666657,
+      17.91145833333332
+    ],
+    "n_pencere": 11,
+    "permutasyon_sayisi": 2048
+  },
+  "ikincil": {
+    "istatistik_N2": {
+      "dbar": 17.650142131391487,
+      "n": 11,
+      "p_yukari": 0.00537109375,
+      "p_asagi": 0.9951171875,
+      "desen": 2048,
+      "ga90": [
+        8.290253343743577,
+        27.010030919039394
+      ]
+    },
+    "istatistik_N3": {
+      "dbar": 7.934566537855687,
+      "n": 11,
+      "p_yukari": 0.04052734375,
+      "p_asagi": 0.9599609375,
+      "desen": 2048,
+      "ga90": [
+        0.6738525010181258,
+        15.19528057469325
+      ]
+    },
+    "ic": {
+      "dbar": 0.4038709567789842,
+      "n": 11,
+      "p_yukari": 0.00048828125,
+      "p_asagi": 1.0,
+      "desen": 2048
+    },
+    "isabet": 8,
+    "ort_sumR": {
+      "S": 24.05482813882527,
+      "N1": 8.083781356604844,
+      "N2": -3.4893825460386925,
+      "gecen": 23.873308957951522,
+      "kalan": -12.630073547261496
+    },
+    "rastgele_p_yukari": [
+      0.8091190880911909,
+      0.0585941405859414,
+      0.8169183081691831,
+      0.8365163483651635,
+      0.9786021397860214,
+      0.05119488051194881,
+      0.00029997000299970003,
+      9.999000099990002e-05,
+      0.0344965503449655,
+      9.999000099990002e-05,
+      0.007799220077992201
+    ]
+  },
+  "dayaniklilik": {
+    "12 aylık ufuk (5 pencere)": {
+      "n": 5,
+      "dbar": 9.805178845639414,
+      "p_yukari": 0.1875,
+      "p_asagi": 0.84375,
+      "ga90": [
+        -3.936021419810677,
+        23.546379111089507
+      ],
+      "etiket": "RASTGELEDEN AYIRT EDİLEMİYOR",
+      "D": [
+        1.0915341641598602,
+        -2.3917252060401495,
+        -0.6419728923031656,
+        23.83362420011636,
+        27.13443396226416
+      ],
+      "kesimler": [
+        "2020-05-08",
+        "2021-05-08",
+        "2022-05-08",
+        "2023-05-08",
+        "2024-05-08"
+      ]
+    },
+    "24 aylık kayan geriye bakış": {
+      "n": 11,
+      "dbar": 3.7875446449974444,
+      "p_yukari": 0.1240234375,
+      "p_asagi": 0.87646484375,
+      "ga90": [
+        -1.796222531782501,
+        9.37131182177739
+      ],
+      "etiket": "RASTGELEDEN AYIRT EDİLEMİYOR",
+      "D": [
+        -5.913192952299099,
+        5.516591505687572,
+        3.1005586592178744,
+        -8.12754860123281,
+        -11.633801438567303,
+        4.491236057363977,
+        21.190410581427386,
+        2.8982843137254903,
+        16.663939790575903,
+        0.4410815462956208,
+        13.035431632777275
+      ],
+      "kesimler": [
+        "2020-05-08",
+        "2020-11-08",
+        "2021-05-08",
+        "2021-11-08",
+        "2022-05-08",
+        "2022-11-08",
+        "2023-05-08",
+        "2023-11-08",
+        "2024-05-08",
+        "2024-11-08",
+        "2025-05-08"
+      ]
+    },
+    "+3 ay kaydırılmış kesimler (10 pencere)": {
+      "n": 10,
+      "dbar": 11.575978297310167,
+      "p_yukari": 0.0107421875,
+      "p_asagi": 0.990234375,
+      "ga90": [
+        3.936754945064412,
+        19.215201649555922
+      ],
+      "etiket": "SEÇİM ÇALIŞIYOR",
+      "D": [
+        0.010569228446307477,
+        12.93460400920145,
+        8.103787506148542,
+        -19.159810521067072,
+        13.02404498739579,
+        11.76231383113911,
+        21.65506023483963,
+        24.931576797385617,
+        22.098503236245953,
+        20.399133663366342
+      ],
+      "kesimler": [
+        "2020-08-08",
+        "2021-02-08",
+        "2021-08-08",
+        "2022-02-08",
+        "2022-08-08",
+        "2023-02-08",
+        "2023-08-08",
+        "2024-02-08",
+        "2024-08-08",
+        "2025-02-08"
+      ]
+    },
+    "ilk 5": {
+      "n": 11,
+      "dbar": 7.492664694512154,
+      "p_yukari": 0.06591796875,
+      "p_asagi": 0.9345703125,
+      "ga90": [
+        -0.7235417886571796,
+        15.708871177681488
+      ],
+      "etiket": "SEÇİM ÇALIŞIYOR",
+      "D": [
+        -9.04168457241083,
+        4.8059394295795315,
+        1.9420321920460282,
+        -3.0048732943469787,
+        -22.20384596565053,
+        6.540475231574717,
+        21.38558358453647,
+        20.028409090909093,
+        13.09748427672956,
+        23.979166666666657,
+        24.89062499999998
+      ],
+      "kesimler": [
+        "2020-05-08",
+        "2020-11-08",
+        "2021-05-08",
+        "2021-11-08",
+        "2022-05-08",
+        "2022-11-08",
+        "2023-05-08",
+        "2023-11-08",
+        "2024-05-08",
+        "2024-11-08",
+        "2025-05-08"
+      ]
+    },
+    "ilk 20": {
+      "n": 11,
+      "dbar": 7.003561944025054,
+      "p_yukari": 0.02783203125,
+      "p_asagi": 0.97265625,
+      "ga90": [
+        1.2948150274987809,
+        12.712308860551328
+      ],
+      "etiket": "SEÇİM ÇALIŞIYOR",
+      "D": [
+        -3.4550923936398803,
+        12.487503675389597,
+        1.9978981138337346,
+        -9.846978557504869,
+        -8.538924499681947,
+        8.058799838904548,
+        18.68924850600242,
+        17.632575757575765,
+        9.790192610062903,
+        17.49479166666667,
+        12.72916666666665
+      ],
+      "kesimler": [
+        "2020-05-08",
+        "2020-11-08",
+        "2021-05-08",
+        "2021-11-08",
+        "2022-05-08",
+        "2022-11-08",
+        "2023-05-08",
+        "2023-11-08",
+        "2024-05-08",
+        "2024-11-08",
+        "2025-05-08"
+      ]
+    },
+    "v1 havuzu (9 pencere, 2021-05-08'den)": {
+      "n": 9,
+      "dbar": 8.951075392035884,
+      "p_yukari": 0.1484375,
+      "p_asagi": 0.853515625,
+      "ga90": [
+        -6.324907995521983,
+        24.22705877959375
+      ],
+      "etiket": "RASTGELEDEN AYIRT EDİLEMİYOR",
+      "D": [
+        -25.210449927431068,
+        -16.473149492017406,
+        -24.442435865191147,
+        26.85741040696496,
+        26.39496679033224,
+        21.739350912778896,
+        9.245730550284634,
+        22.574836601307176,
+        39.873418551294655
+      ],
+      "kesimler": [
+        "2021-05-08",
+        "2021-11-08",
+        "2022-05-08",
+        "2022-11-08",
+        "2023-05-08",
+        "2023-11-08",
+        "2024-05-08",
+        "2024-11-08",
+        "2025-05-08"
+      ]
+    }
+  },
+  "sadakat": {
+    "vekil_gecen_n": 63,
+    "gercek_gecti_n": 18,
+    "gercek_gecti_havuzda_n": 16,
+    "kesisim_n": 15,
+    "yalniz_vekil": [
+      "dis__ao-ac-bolgeleri|1d",
+      "dis__ao-tabak|1d",
+      "dis__ay-donumu|1d",
+      "dis__ay-mevsimsellik|1d",
+      "dis__bant-kirilim-trend|1d",
+      "dis__codex-wd-cift-momentum|1d",
+      "dis__confluence-rank|1d",
+      "dis__ema-esik-trend|1d",
+      "dis__ewmac-carver|1d",
+      "dis__fraktal-alligator-sky|1d",
+      "dis__ft-highwave|1d",
+      "dis__gmma-ls|1d",
+      "dis__golden-trident|1d",
+      "dis__gosterge-rezonansi|1d",
+      "dis__hma-atr-rider|1d",
+      "dis__jt-awesome-osilator|1d",
+      "dis__kapanis-ma5|1d",
+      "dis__kelly-atr-bant|1d",
+      "dis__laguerre-rsi|1d",
+      "dis__ma-cift-cross|1d",
+      "dis__ma-dizilim-5-10-30|1d",
+      "dis__osilator-esik-birlesimi|1d",
+      "dis__rsi-ma-normal|1d",
+      "dis__rsi-t3-sqz|1d",
+      "dis__rsrs-egim-esigi|1d",
+      "dis__sma200-bant-trend|1d",
+      "dis__son1ay-donchian-adx|1d",
+      "dis__son1ay-kanal-20-10|1d",
+      "dis__sott|1d",
+      "dis__sst-dmi-50ma|1d",
+      "dis__stockbee-momentum-burst|1d",
+      "dis__trend-yargisi|1d",
+      "dis__uc-ortalama-boga-sma60|1d",
+      "dis__uclu-rsi|1d",
+      "dis__ust-tf-trend-60dk-donus|1d",
+      "dis__vixfix-stoch|1d",
+      "dis__voltarget-trend|1d",
+      "dis__voltran-1b|1d",
+      "dis__yeni-zirve-trend-filtresi|1d",
+      "dis__z65-rejim|1d",
+      "onceki__kapitulasyon|1d",
+      "onceki__s1-geri-cekilme|1d",
+      "swing__bb-sikisma-kirilim|1d",
+      "swing__bollinger-cift-bant-trend|1d",
+      "swing__donchian-kirilim|1d",
+      "swing__ma-geri-cekilme|1d",
+      "swing__ma-kesisim|1d",
+      "v2__trend-funding-suzgec|1d"
+    ],
+    "yalniz_gercek": [
+      "dis__sma200-ls|1d",
+      "pf__cta|1d",
+      "pf__ref_filtreli_long|1d"
+    ],
+    "jaccard": 0.22727272727272727,
+    "spearman_puan_eksi_p_n": 63,
+    "spearman_puan_eksi_p": 0.37949408856366623,
+    "spearman_kesisim_n": 15,
+    "spearman_kesisim": 0.053958230912714455
+  },
+  "maks_tarih": "2025-11-07 22:00:00+00:00",
+  "tohum": 20261111,
+  "girdi_hash": {
+    "betik": "432ebfff77f39a304945caa52f7cd4cbd994314215c4c19dbba0c5c8677d083b",
+    "eleme_csv": "371a2a2423d2f2c64522c82a1a4906b6ae36d5c61ce92282f2a6aa5fba0f4f05",
+    "test_csv": "1169c70173ed53e5c8157cea863dd33cddf9101d05905f6254d1916796750a1c",
+    "on_kayit_meta": "7573ca89c43aa8e7f0e112963834b6b303a4ce8fcb8d8a9146884fa78f50bc91",
+    "v2_dosyalar": "e207073e3de3503817dc28560db44de2d09ded222204ac2a4452eb8bbccacc3d",
+    "v1_dosyalar": "12aef346a8dbad9233ada824389f8f8c375a4f907f29c3fb3730fabb8227ef72"
+  },
+  "commit": "7213aeebf3c0b66092c35b2838419f53f1e15f59",
+  "veri": {
+    "atilan_islem": 4800,
+    "atilan_mtm_satiri": 2400,
+    "kum_r_kontrol_islem": 803558,
+    "kum_r_max_fark": 0.0,
+    "fonlama_sifir_degil": 345088,
+    "fonlama_r_ayrica_eklenirse_uyumsuz": 345088,
+    "veri_kok": "/home/user/1L3A-Proje/sonuclar/evren/v2",
+    "eleme_satiri_hata_disi": 216,
+    "havuz_n": 197,
+    "dosyasiz_satir_n": 19,
+    "dosyasiz_satirlar": [
+      "pf__btc_hedge|1d",
+      "pf__cta|1d",
+      "pf__gem|1d",
+      "pf__goreceli_guc|1d",
+      "pf__ibs_donus|1d",
+      "pf__kanarya|1d",
+      "pf__kesit_ls|1d",
+      "pf__pairs|1d",
+      "pf__pca_statarb|1d",
+      "pf__ref_filtreli_long|1d",
+      "pf__rotasyon|1d",
+      "pf__rsi_cift|1d",
+      "pf__rsi_tarama|1d",
+      "pf__sabit_sepet|1d",
+      "pf__sinif_kesit_donus|1d",
+      "pf__sinif_kesit_mom|1d",
+      "pf__son1ay_trendrider|1d",
+      "pf__trend_sepet|1d",
+      "pf__wq_alfa|1d"
+    ],
+    "dosya_hash_ozeti": "e207073e3de3503817dc28560db44de2d09ded222204ac2a4452eb8bbccacc3d",
+    "okunan_dosya_n": 19959,
+    "v1_dizin": "/home/user/1L3A-Proje/sonuclar/evren/2017_gelistirme/oos",
+    "v1_havuz_n": 902,
+    "v1_atilan_islem": 122,
+    "v1_dosya_hash_ozeti": "12aef346a8dbad9233ada824389f8f8c375a4f907f29c3fb3730fabb8227ef72"
+  },
+  "uygulama_notlari": [
+    "ΣR(×2), PF(×1), kapanan işlem sayısı, en iyi enstrüman/yıl çıkarma: yalnız T_k'den ÖNCE KAPANAN (çıkış < T_k) işlemler, girişi analiz başlangıcından sonra olanlar (sıkı okuma, ileriye sızıntı yok). En iyi yıl = giriş yılı (UTC), eleme.py ile aynı.",
+    "G2 sayacı: x1 ve x2 kapanan işlem sayısının küçüğü (sıkı okuma). Geriye bakış yılı = (T_k − geriye bakış başı) gün / 365,25.",
+    "Günlük seri (puan, sd, pencere ΣR): mtm kum_r farkı, işlem+enstrüman toplamı, eksik gün = 0; analiz başlangıcından sonra girilen işlemler; T_k'den önce başlayıp sonra bitenlerin günlük artışları ilgili güne yazılır (takvim günü sayısıyla: geriye bakışta takvim günü, pencerede takvim günü). sd: ddof=1 (takvim günleri üzerinden).",
+    "Geriye bakış günlük sd'si 0 olan (hiç etkinlik yok) strateji 'uygun' sayılmaz (puan/ölçek tanımsız); N2 bu uygunlar üzerindedir.",
+    "P_i,k = (ortalama sıra − 1)/(n − 1) × 100 (0–100 aralığı; eşitlikte ortalama sıra). N2'ye karşı D_k bu yüzden = ort P(S_k) − 50.",
+    "Havuz: eleme.csv'de durum != hata VE ham x1, ham x2 ve mtm x2 dosyası olan satırlar. Portföy (pf__) satırlarının mtm dosyası yoktur; MTM serisi kurulamadığı için dışarıda (sıkı okuma). Bu yüzden havuz beklenen ~212'den küçüktür (bkz. ozet.json).",
+    "Yükleme süzgeci: çıkışı ≥ 2025-11-08 olan işlemler (veri sonunda zorla kapananlar) ve gün ≥ 2025-11-08 mtm satırları atılır; kum_r = r doğrulaması kalan (kapanan) işlemlerde yapılır. Atılan MTM satırlarının öncesindeki günlük artışlar pencerede kalır.",
+    "kum_r doğrulaması: son kum_r = net r (tol 1e-4) tüm kapanan işlemlerde sağlandı; fonlama_r ayrıca EKLENMEZ (r'ye zaten dahil).",
+    "N3: S_k etiket payları × o etiketin N1 ortalama P'si. N1 ve S_k'de aynı etiketler olduğundan boş tabaka olmaz (S_k ⊂ N1).",
+    "Sadakat: Spearman(puan, −p) için test.csv'deki `p` (geliştirme dönemi resmi test p'si) kullanıldı; eleme.csv'de gecti satırlarında p_ust boş. Yalnız vekil geçenler içinde p'si olanlar üzerinde; ayrıca vekil ∩ gerçek kümesinde.",
+    "Pencere içi rastgeleleştirme p: (sayı+1)/(10001) (sıkı); tek rng (tohum 20261111), kesim sırasıyla ana koşuda.",
+    "Dayanıklılık: 12 ay ufku = 5 pencere (T_0, T_2, …, T_8 = 2020-05 … 2024-05; kesin işaret çevirme 2^5=32). +3 ay kaydırma = T_0…T_9 + 3 ay (10 pencere; T_10+3 ay holdout'a taşar, atıldı). 24 ay kayan: geriye bakış = [max(analiz_bas, T−24 ay), T). v1: kabul==True işlem pnl'i (hesap kesri, R değil); günlük seri pnl'nin çıkış gününe toplamı; PF ve G1–G3 aynı pnl üzerinden; analiz başlangıcı = oos_bas; etiket yok (yalnız N1'e karşı); 9 pencere (2021-05-08…2025-05-08); v1 oos verisi 2025-09 civarında biter (sonraki günler 0).",
+    "secilenler.csv yalnız seçilenleri değil, her kesimde tüm uygun stratejileri (S bayrağıyla) içerir (kapılar/P/ölçüm için)."
+  ]
+}
