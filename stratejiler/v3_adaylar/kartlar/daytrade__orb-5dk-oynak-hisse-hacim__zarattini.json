@@ -1,0 +1,82 @@
+{
+  "kart_id": "daytrade__orb-5dk-oynak-hisse-hacim__zarattini",
+  "ad": "5 Dakika ORB, Göreli Hacimli Hisseler (Stocks in Play)",
+  "stil": "daytrade",
+  "kaynak": {
+    "url": "https://papers.ssrn.com/abstract=4729284",
+    "lisans": "SSRN ön baskı",
+    "tur": "makale"
+  },
+  "ozet": "ABD seansının ilk 5 dakikalık mumunun yönünde, o mumun uç noktası kırılınca işlem açılır. Yalnız ilk 5 dakika hacmi son 14 günün ortalamasının en az %100'ü olan ve en yüksek göreli hacimli 20 hisse işlenir; stop 14 günlük ATR'nin %10'u, çıkış seans kapanışı.",
+  "kategori": "kirilim",
+  "piyasa_rejimi": "volatil",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+    "islem": "5m",
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {
+      "ad": "ATR",
+      "parametreler": {
+        "periyot": 14,
+        "gunluk": true
+      }
+    },
+    {
+      "ad": "Hacim",
+      "parametreler": {
+        "gosterge": "ilk 5 dk hacmi / önceki 14 günün ilk 5 dk hacim ortalaması",
+        "esik": "1.0 (>=%100)"
+      }
+    }
+  ],
+  "long_giris": [
+    "İlk 5 dk mumu yükselişse (kapanış > açılış): bu mumun yüksekliğinin üstüne stop emri ile long gir"
+  ],
+  "short_giris": [
+    "İlk 5 dk mumu düşüşse: bu mumun dip noktasının altına stop emri ile short gir",
+    "İlk mum doji (açılış=kapanış) ise emir yok"
+  ],
+  "stop_loss": "Giriş fiyatından 14 günlük günlük ATR'nin %10'u uzakta",
+  "kar_al": null,
+  "iz_suren_stop": null,
+  "zaman_cikisi": "Stop çalışmazsa seans kapanışında (16:00 ET) kapat",
+  "filtreler": [
+    "Açılış fiyatı > 5 USD",
+    "Önceki 14 gün ortalama hacim >= 1.000.000 adet",
+    "14 günlük ATR > 0.50 USD",
+    "Göreli hacim >= %100",
+    "Göreli hacmi en yüksek 20 hisse"
+  ],
+  "pozisyon_risk": "Stop vurulursa sermayenin %1'i kaybolacak şekilde boyut; azami 4x kaldıraç",
+  "iddia_edilen_performans": "Kaynak: 2016-2023, komisyon sonrası toplam getiri 1,637%, Sharpe 2.81, MDD %12, yıllık alfa %36; filtresiz temel ORB: Sharpe 0.48 (iddia, doğrulanmadı)",
+  "kanit": "Zarattini, Barbon, Aziz, SSRN 4729284 / SFI 24-98; ABD hisseleri 2016-2023, komisyon 0.0035 USD/hisse, kayma/spread yok; hold-out yok, filtreler örneklem içi incelemeyle seçilmiş. İddia (doğrulanmadı).",
+  "veri_uygun": [
+    true,
+    "Dukascopy hisse 5m OHLCV; ilk 5 dk hacmi bulunabilir. Evren küçükse 'ilk 20' sıralaması anlamsızlaşır (eşik daraltılmalı). Dukascopy hacmi gerçek borsa hacmi olmayabilir, kontrol edilmeli."
+  ],
+  "kodlanabilirlik": {
+    "puan": 3,
+    "gerekce": "Tüm giriş, stop, çıkış ve filtre kuralları sayısal ve açık."
+  },
+  "belirsizlikler": [
+    "ATR tanımı (Wilder/SMA) kaynakta yok",
+    "Stop emri aynı 5 dk mum içinde dolarsa sıra belirsiz",
+    "Kayma ve spread hesaba katılmamış; MQL5 replikasyonu aynı tür ORB'de net sonucun sıfıra indiğini bildiriyor (ikincil, doğrulanmadı)",
+    "Evren ve hacim verisi bizde dar olabilir"
+  ],
+  "uyumluluk_notu": "Kripto değil; hisse 5m verisine uyar, 5m sınırında. Mevcut daytrade__orb-4s-hacim-atr ve orb-15dk-etf kartlarından fark: göreli hacim sıralaması ve ATR yüzde stop. Hacim verisi güvenilirliği Dukascopy'de doğrulanmalı.",
+  "varyantlar": [
+    "Temel ORB (hacim filtresiz): stop 10% ATR, Sharpe 0.48",
+    "QQQ/TQQQ 5 dk ORB (Zarattini-Aziz SSRN 4416622): stop ilk mum ucu, hedef 10R, kaynak hesabı QQQ'da Sharpe 1.12"
+  ],
+  "anahtar_kelimeler": [
+    "orb",
+    "acilis-araligi",
+    "goreli-hacim",
+    "stocks-in-play",
+    "atr-stop",
+    "hisse"
+  ]
+}

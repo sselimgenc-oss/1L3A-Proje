@@ -1,0 +1,66 @@
+{
+  "kart_id": "swing__vol-yonetimli-long__moreira",
+  "ad": "Volatilite-Yönetimli Long (Önceki Ay Gerçekleşen Varyansa Ters Ağırlık)",
+  "stil": "swing",
+  "kaynak": {
+    "url": "https://www.nber.org/papers/w22208.pdf",
+    "lisans": "makale",
+    "tur": "makale"
+  },
+  "ozet": "Varlık her zaman long tutulur; ama aylık olarak pozisyon büyüklüğü, önceki ayın gerçekleşen varyansının tersiyle ölçeklenir: önceki ay dalgalıysa küçül, sakinse büyüt. Yön sinyali yok, yalnız boyut zamanlaması var.",
+  "kategori": "diger",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+    "islem": "1d",
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {
+      "ad": "Gerçekleşen varyans (önceki ayın günlük getirileri)",
+      "parametreler": {
+        "pencere": "önceki takvim ayı (~22 işlem günü)",
+        "hesap": "günlük getirilerin ortalamadan sapma karelerinin toplamı"
+      }
+    }
+  ],
+  "long_giris": [
+    "Her ay başı ağırlık w = c / RV2(önceki ay); varlığı bu ağırlıkla long tut (ay boyunca değiştirme)"
+  ],
+  "short_giris": [],
+  "stop_loss": null,
+  "kar_al": null,
+  "iz_suren_stop": null,
+  "zaman_cikisi": "Aylık yeniden ağırlıklandırma",
+  "filtreler": [
+    "Kaynakta c sabiti tüm örneklemde yönetilen portföyün volatilitesini al-tut ile eşitleyecek biçimde seçiliyor (ileriye bakma; Sharpe'ı etkilemez ama gerçek zamanlı uygulanamaz). Bizde UYARLAMA: c yerine hedef yıllık vol (ör. kodlayıcı seçer) ve ağırlık üst sınırı 1 (ya da 1,5)."
+  ],
+  "pozisyon_risk": "Kaynak kaldıraç sınırını 1 ve 1,5 ile ayrıca test ediyor (alfa küçülüyor ama pozitif kalıyor); bizim için üst sınır 1 (kaldıraçsız) önerilir. Hedef vol rakamı kaynakta yok.",
+  "iddia_edilen_performans": "Kaynak: ABD piyasa faktörü, 1926-2015: yönetilen portföy yıllık alfa %4,86, beta 0,6, değerlendirme oranı 0,33, al-tut Sharpe'a göre yaklaşık %25 artış (iddia, doğrulanmadı). Brüt; maliyet duyarlılığı kaynakta ayrı tabloda.",
+  "kanit": "iddia (doğrulanmadı): Moreira-Muir, J. Finance 2017 (NBER w22208). Yazarlar birçok hisse faktöründe ve döviz carry'sinde aynı örüntüyü gösteriyor (başka piyasa); 1956-1986 alt döneminde alfa daha zayıf. Eleştiri (ikincil, Grobys vd. giriş metninden): Liu vd. (2019) ölçek sabitinde ileriye bakma buldu, düzeltince yönetilen portföyler anlamlı üstünlük göstermedi; Cederburg vd. (2020) benzer şüphe. Yani gerçek zamanlı örneklem dışı kanıt karışık.",
+  "veri_uygun": [
+    true,
+    "Günlük kapanış yeterli. Hisse/ETF günlük (QQQ, SPY vb.) ve XAU, BTC perp için uygulanabilir; ama orijinal kanıt ABD hisse faktörlerinde, kripto/altına taşınması doğrulanmadı. Envanterdeki tradfi perp geçmişleri kısa (SPYUSDT/QQQUSDT 2026-04'ten, XAUUSDT 2025-12'den); anlamlı test için Dukascopy günlük geçmiş gerekir."
+  ],
+  "kodlanabilirlik": {
+    "puan": 3,
+    "gerekce": "Tek formül, aylık yeniden dengeleme; tek yorum noktası c'nin (hedef vol) seçimi."
+  },
+  "belirsizlikler": [
+    "c sabiti gerçek zamanlı nasıl seçilecek: kaynakta tüm örneklem kullanılıyor (UYARLAMA gerekir)",
+    "Kaynak varyans yerine standart sapma ile ve kaldıraç sınırlı sürümleri de raporluyor (maliyeti azaltmak için)",
+    "Kripto gibi 7/24 varlıkta 'önceki ay' = 30 takvim günü diye uyarlanmalı"
+  ],
+  "uyumluluk_notu": "1d. Tek varlık, yön sinyali yok; çıplak al-tut'u boyutlandırır. Mevcut swing__zs-momentum-vol-hedef__fiction-junction (TSMOM + vol hedef) ve swing__donchian-ansambl-vol-hedef__zarattini'den farkı: yön sinyali yok, boyut zamanlaması tek başına. Başka kartlara filtre/boyutlayıcı olarak da eklenebilir.",
+  "varyantlar": [
+    "Standart sapma (karekök) ile ölçekleme",
+    "Kaldıraç üst sınırı 1 veya 1,5"
+  ],
+  "anahtar_kelimeler": [
+    "vol-yonetimli",
+    "ters-varyans",
+    "boyut-zamanlama",
+    "gerceklesen-varyans",
+    "aylik"
+  ]
+}

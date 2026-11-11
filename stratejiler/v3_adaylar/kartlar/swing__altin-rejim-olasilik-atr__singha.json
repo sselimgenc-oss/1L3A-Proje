@@ -1,0 +1,95 @@
+{
+  "kart_id": "swing__altin-rejim-olasilik-atr__singha",
+  "ad": "Altın Trend-Momentum Rejim Olasılığı + ATR Çıkışlı Long (Forecast-to-Fill)",
+  "stil": "swing",
+  "kaynak": {
+    "url": "https://arxiv.org/abs/2511.08571",
+    "lisans": "CC BY 4.0",
+    "tur": "makale"
+  },
+  "ozet": "Günlük altında, yumuşatılmış log-fiyat eğimi ve 50 günlük momentumu tek bir 'boğa olasılığı' skoruna birleştirir. Skor 0,52 üstü ve eğim pozitifse long açar; ATR stopları ve 30 gün zaman çıkışı ile kapatır; boyutu %15 hedef volatiliteye göre ayarlar.",
+  "kategori": "trend_takip",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "emtia",
+  "zaman_dilimi": {
+    "islem": "1d",
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {
+      "ad": "EMA (log-fiyat üzerinde, eğim için)",
+      "parametreler": {
+        "yumusatma_lambda": "kaynakta yok"
+      }
+    },
+    {
+      "ad": "Eğim z-skoru",
+      "parametreler": {
+        "standartlastirma": "eğitim penceresi ort/std",
+        "kirpma": "[-3,3]",
+        "p_trend": "(z+3)/6"
+      }
+    },
+    {
+      "ad": "Momentum (ikili)",
+      "parametreler": {
+        "K": 50,
+        "m": "1 eğer P_t/P_(t-50)>1 değilse 0"
+      }
+    },
+    {
+      "ad": "ATR",
+      "parametreler": {
+        "periyot": 14
+      }
+    },
+    {
+      "ad": "EWMA volatilite",
+      "parametreler": {
+        "hedef_yillik": 0.15,
+        "bozunma": "kaynakta yok (metinde 20 günlük EWMA ifadesi de geçiyor)"
+      }
+    }
+  ],
+  "long_giris": [
+    "p_bull = 0,6 x p_trend + 0,4 x m (omega=0,6 eğitimde ayarlanmış); p_bull >= 0,52 VE yumuşatılmış log-fiyatın 1 günlük değişimi > 0 ise long (kaynak: t gününde giriş; uygulama gecikmesi için aşağıya bak)"
+  ],
+  "short_giris": [],
+  "stop_loss": "Girişin 2 x ATR(14) altı (sabit stop)",
+  "kar_al": null,
+  "iz_suren_stop": "Tepe fiyatın 1,5 x ATR(14) altı",
+  "zaman_cikisi": "30 işlem günü sonunda kapat; ayrıca p_bear = 1 - p_bull > 0,5 olursa pozisyonu yarıya indir veya kapat",
+  "filtreler": [
+    "Yalnız long",
+    "Sinyal kaynakta t gününde işleme alınıyor; metinde baz uygulama T+1 diye de geçiyor (çelişki). Biz kapanışta hesapla, ertesi açılışta işle (T+1) varsay."
+  ],
+  "pozisyon_risk": "w_vol = min(2,0; sigma*/sigma_hat), sigma* = 0,15/karekök(252); güven ölçeği w_conf = w_vol x (p_bull-0,5)/0,5; kaynakta ayrıca 0,40 çarpanlı kesirli Kelly (maliyet-ayarlı ikinci dereceden formül) var; ağırlık üst sınırı 2,0. Kelly kısmı bizde sadeleştirilir: yalnız w_conf kullanılır (UYARLAMA).",
+  "iddia_edilen_performans": "Kaynak: 2015-2025 CME altın vadelisi, net maliyet sonrası Sharpe 2,88; maks. düşüş %0,52; gerçekleşen yıllık getiri %2,65 (vol %0,91); 1282 giriş, isabet %65,8, kazanç/kayıp 1,49. 'CAGR %43' sayısı %15 volatiliteye doğrusal ölçekleme, gerçekleşmiş değil (iddia, doğrulanmadı).",
+  "kanit": "iddia (doğrulanmadı): arXiv 2511.08571 (Singha, Aguilera-Toste, Lahiri), tek ön baskı. Yazarlar kayan pencere ileri-test gösteriyor: 10 yıl eğitim, 6 ay test, aylık ilerletme, parametreler testten önce donduruluyor. Gecikme testi: T+1 Sharpe 2,28, T+2 2,24; sinyal ters çevrilince Sharpe -2,95. Başka piyasada doğrulama yok (yalnız altın vadelisi). Kaynak içinde tutarsızlıklar var (CAGR ölçekleme, T+0/T+1, EWMA tanımı).",
+  "veri_uygun": [
+    true,
+    "Günlük altın OHLC yeterli (XAU). Envanterdeki XAUUSDT perp yalnız 2025-12'den beri (11 ay): 10 yıllık eğitim penceresi buna sığmaz; uzun geçmiş için Dukascopy XAU/USD günlük şart. Kaynağın vadeli sözleşmesi ile spot XAU farkı (roll) önemsiz kabul edilir."
+  ],
+  "kodlanabilirlik": {
+    "puan": 2,
+    "gerekce": "Giriş, stop ve zaman çıkışı kesin; EMA lambda'sı, EWMA bozunması ve eğitim penceresindeki z-skor standartlaştırması kaynakta eksik/yoruma açık."
+  },
+  "belirsizlikler": [
+    "EMA yumuşatma parametresi kaynakta yok",
+    "EWMA vol bozunma değeri kaynakta yok",
+    "z-skor eğitim penceresi ortalaması/std'si: bizde ilk N yıl ya da genişleyen pencere seçilmeli, kaynakta 10 yıl eğitim",
+    "Kelly bileşeni sadeleştirildi",
+    "T+0 mı T+1 mi: kaynak çelişkili",
+    "Rakamlar (özellikle %0,52 düşüş) alışılmadık derecede iyi; ön baskı hakem görmedi"
+  ],
+  "uyumluluk_notu": "1d, 5m üstü. ML yok. Hacim gerekmez. Yalnız altın için tasarlanmış; XAG ve hisse endeksinde çalışması doğrulanmadı. Benzer: swing__ma50-200-trend-rsi55 ailesi (trend+momentum) ama burada olasılık skoru, ATR iz süren stop ve vol hedefi birlikte.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+    "altin",
+    "rejim-olasiligi",
+    "atr-iz-suren",
+    "vol-hedefi",
+    "50g-momentum",
+    "ema-egim"
+  ]
+}
