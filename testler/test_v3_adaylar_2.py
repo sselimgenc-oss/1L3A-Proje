@@ -171,8 +171,10 @@ def test_ikinci_parti_kayitlari_ve_csv_durumlari_tam():
         if json.loads(kart.read_text())["veri_uygun"][0]:
             uygun.add(aday["kart_id"])
     assert len(uygun) == 8
-    assert {kodlama[x]["durum"] for x in uygun} == {"kodlandi", "tekrar", "belirsiz", "veri_yok"}
-    assert sum(kodlama[x]["durum"] == "kodlandi" for x in uygun) == 4
+    # Parti 2'de belirsiz kalan pre-FOMC, FOMC takvimi gelince (tur 7) parti 5'te kodlandı.
+    assert {kodlama[x]["durum"] for x in uygun} == {"kodlandi", "tekrar", "veri_yok"}
+    assert sum(kodlama[x]["durum"] == "kodlandi" for x in uygun) == 5
+    assert kodlama["swing__pre-fomc-surunme__delphic"]["strateji_ad"] == "v3__pre-fomc-surunme"
     assert kodlama["daytrade__ters-fvg-nq__prashanthaitha24"]["durum"] == "veri_yok"
     assert kodlama["swing__rsi2-sma200-geri-cekilme__toney"]["strateji_ad"] == "dis__connors-etf"
     assert all(kodlama[r["kart_id"]]["durum"] == "veri_yok" for r in adaylar if r["kart_id"] not in uygun)

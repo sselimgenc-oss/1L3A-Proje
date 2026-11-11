@@ -209,6 +209,54 @@ class FipKesitsel(PfTemel):
         return dongusel_hedef(ax, kolon, tetik, agirlik)
 
 
+class KriptoMaxPiyango(PfTemel):
+    """MAX (piyango) kesiti: son 28 günün en yüksek günlük getirisine göre haftalık üst %20 long / alt %20 short.
+
+    Kaynak: Özdamar, Akdeniz, Şensoy, Financial Innovation 2021, Eq.(1), dipnot 9, Tablo 2
+    (https://link.springer.com/article/10.1186/s40854-021-00291-9). Kriptoda 7/24 olduğundan "ay" = 28 gün kayan
+    pencere, her hafta yeniden hesaplanır (kaynak dipnot 9). MAX(N=1) = penceredeki en yüksek günlük getiri.
+    YÖN kaynağın bulduğu gibi: yüksek MAX long, düşük MAX short (hisse literatürünün tersi; kriptoda 10-1 pozitif).
+    Satır t'nin skoru t günlük çubuğunun kapanışına kadar olan 28 günlük getiriyi kullanır (t dahil, tamamlanmış çubuk);
+    emir bir sonraki barın açılışında dolar (FIP ile aynı zamanlama), gelecek veri yoktur.
+    Bizim uyarlamalarımız: sabit 13 coinlik evren (hayatta kalma yanlılığı), decil yerine üst/alt %20 (en az 1,
+    en çok n/2 sembol), eşit ağırlık, brüt 1,0 (bacak başına 0,5), haftalık Pazartesi tetik. Kaynakta stop yok:
+    ortak ATR(14) x 3 stop "bizim eklememiz".
+    """
+
+    ad = "pf__v3-kripto-max-piyango"
+    min_sembol = 5
+    varsayilan_parametreler = {
+        **ORTAK_PARAMETRELER, "semboller": V3_KRIPTO, "pencere_gun": 28, "max_n": 1,
+        "dilim": 0.2, "takvim": "W", "brut": 1.0,
+    }
+    parametre_izgarasi = {}
+
+    def _hedef(self, ev, tk: Takvim):
+        p, kolon, ax = self.parametreler, list(ev), tk.eksen
+        n, mn = int(p["pencere_gun"]), int(p["max_n"])
+        r = tk.getiri()[kolon]
+        if mn == 1:
+            skor = r.rolling(n, min_periods=n).max()
+        else:
+            skor = r.rolling(n, min_periods=n).apply(lambda x: np.sort(x)[-mn:].mean(), raw=True)
+        S = tk.eksene(skor).to_numpy(dtype=float)
+        gecerli = np.isfinite(S).sum(axis=1) >= self.min_sembol
+        tetik = tetik_satirlari(ax, p["takvim"], gecerli)
+
+        def agirlik(i):
+            s = pd.Series(S[i], index=kolon).dropna().sort_values(kind="stable")
+            if len(s) < self.min_sembol:
+                return {}
+            k = min(max(1, int(np.ceil(len(s) * p["dilim"]))), len(s) // 2)
+            if k < 1:
+                return {}
+            w = {c: -p["brut"] / (2 * k) for c in s.index[:k]}
+            w.update({c: p["brut"] / (2 * k) for c in s.index[-k:]})
+            return w
+
+        return dongusel_hedef(ax, kolon, tetik, agirlik)
+
+
 class DonchianAnsambl(PfTemel):
     """Dokuz kapanış kanalının eşit ortalamasıyla long-only kripto ansamblı.
 
@@ -330,5 +378,5 @@ class VolYonetimliLong(PfTemel):
 
 V3_SINIFLAR = (
     Funding1sDevam, FundingKesitCarry, Funding7gTercil, FundingZ90UcGun,
-    FipKesitsel, DonchianAnsambl, VolYonetimliLong,
+    FipKesitsel, DonchianAnsambl, VolYonetimliLong, KriptoMaxPiyango,
 )
