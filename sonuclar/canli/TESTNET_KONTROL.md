@@ -458,10 +458,10 @@ systemctl restart 1l3a-canli && sleep 30 && journalctl -u 1l3a-canli -n 40 --no-
 | Ölçüt | Nasıl sayılır | Kutu |
 |---|---|---|
 | **≥ 10 giriş** | Toplam `canli_emir_doldu` (iki strateji birlikte; planda "≥ 10 giriş" tek toplam olarak yazılı) | ☐ |
-| **≥ 1 borsa stopu** | En az bir girişte borsada stop görüldü (`canli_stop_kuruldu` + Binance ekranı). ⚠ doğrulanmadı: plan metni "borsa stopu"nun *kurulması* mı yoksa *tetiklenip pozisyonu kapatması* mı demek olduğunu söylemiyor. Sıkı okuma (tetiklenmiş stop, `islemler.jsonl` `cikis_nedeni: stop`) için sizin kararınız gerekir | ☐ |
+| **≥ 1 borsa stopu** | En az bir pozisyon **borsadaki stop emriyle kapanmış** olmalı (`islemler.jsonl` satırında `cikis_nedeni: stop`; Binance geçmişinde stop emri "Triggered/Filled"). Yalnız stopun kurulması yetmez (kurulma her girişte zaten C3'te kontrol edilir). Lider kararı 2026-11-11: plan metnindeki "borsa stopu" = tetiklenen stop. | ☐ |
 | **1 yeniden başlatma** | D1 gerçek paradaki pozisyonla da yapıldı: çift emir yok, stop devralındı | ☐ |
 | **Stopsuz pozisyon 0** | Rapor "7. Sistem sağlığı": `Stopsuz pozisyon (toplam): 0`; hiç `canli_stop_basarisiz`, `STOPSUZ` olayı yok; Binance'te her pozisyonun stopu var | ☐ |
-| **Mutabakat farkı 0** | ⚠ doğrulanmadı: planda yöntem yazılı değil, önerim: (a) Binance'teki pozisyon/emirler = durum dosyası, hiç beklenmedik `canli_uyusmazlik` yok (normal stop kapanış mesajı hariç); (b) Binance Transaction History'de (Realized PnL + Commission + Funding fee) toplamı = `islemler.jsonl` `net_pnl_usd` toplamı, fark ≤ 0,01 USD; (c) `ozsermaye_gunluk.jsonl` kasası Binance bakiyesiyle uyumlu. Yöntemi onaylamak sizin kararınız | ☐ |
+| **Mutabakat farkı 0** | Lider kararı 2026-11-11 (üç şart birlikte): (a) Binance'teki açık pozisyon ve emirler = durum dosyası; beklenmedik `canli_uyusmazlik` yok (normal stop kapanış mesajı hariç); (b) Binance Transaction History'de (Realized PnL + Commission + Funding Fee) toplamı ile `islemler.jsonl` `net_pnl_usd` toplamı arasındaki fark ≤ 0,01 USD; (c) `ozsermaye_gunluk.jsonl` kasası Binance bakiyesiyle (≤ 0,01 USD) uyumlu. | ☐ |
 
 Sonuç kuralı ve kararı: ☐ Faz 2 geçti (siz onaylayın, tarih: ____ ). Plan §5: bu, **basamak 1** (ewo 250 USD) için gereken şartlardan **yalnız biridir**; 8 Aralık sadakat kontrolü ve birleşik hesap oynatması da gerekir. Basamak geçişi ayrı kullanıcı kararıdır.
 
