@@ -140,3 +140,55 @@ Tur 3'te **9 yeni kart** (toplam **153**; `adaylar.csv` 153 satır). Fable yaln�
 1. Kullanıcı/ana oturum: aile temsilcileri ve test bütçesi (çekirdek 7 + yedek 3) onayı; noise-area istisnası.
 2. `kod_yok` kalan 277 satırın URL'siz olanları; okunamayan makaleler (MDPI JRFM 19/9/692, Springer Brauneis, Ledger 213, Han-Kang-Ryu).
 3. Sınırdaki `tekrar` kararlarının (yukarıdaki 4) gözden geçirilmesi.
+
+---
+
+# Tur 4 (2026-11-11)
+Önceki tur dosyalarına dokunulmadı; yalnız `kaynak_dogrulama_tur4.csv` (136 satır) ve `kanit_ozet_tur4.md` eklendi. Kod yazılmadı. Kaynakları 5 Sonnet ajanı okudu (kart başına iki), Fable gözden geçirdi. Haiku biçim kontrolü ayrı ajanla yapılmadı; CSV'yi betikle doğruladım (7 sütun, `uyum` değerleri geçerli).
+
+## 1. Doğrulama sonucu (10 temsilci)
+136 satır: 70 aynı, 38 farklı, 23 kaynakta yok, 5 kaynak okunamadı. Ayrıntı ve kanıt rakamları CSV ve `kanit_ozet_tur4.md` içinde.
+
+## 2. Fable hükmü (kısa)
+| Kart | Hüküm | Ön kayıtta kullanılacak |
+|---|---|---|
+| donchian-ansambl | Şüpheli (mevcut kodla); yeniden kodlanırsa test edilebilir | Kaynak değerleri: 9 pencere (5-360g, kapanış bazlı), ortalama ağırlık, orta-kanal iz stop, %25/σ90, %200 tavan, %20 eşik. Mevcut kod (20/55/100, 2/3 oy, ATR×3) kaynağın stratejisi DEĞİL; yeniden kodla ya da "bizim oylama varyantımız" diye adlandır |
+| vol-yonetimli-long | İyi test edilebilir | Bizim uyarlama: ileriye bakmayan sabit hedef vol + tavan 1 (kaynağın c'si canlıda yok); hedef vol testten önce sabitlenir; kıyas al-tut |
+| funding-7g-tercil | İyi test edilebilir, beklenti düşük (kaynak OOS Sharpe 0,39, PBO 0,81) | Kaynak: günlük toplanmış funding, 7g, 1g gecikme, tercil, haftalık, 6 bp/taraf, stopsuz. ATR stopu "bizim eklememiz" diye ayrı raporlanır. Testten önce: funding ızgarası (günlük toplam mı son settlement mı), motorun funding PnL'i, motor maliyeti |
+| fip-kesitsel | Şüpheli; kaynakta sonuç yok, lisans belirsiz, asıl makale açılmadı | Kural kaynaktan (90g, %20, haftalık); min_sembol 2→5 düzeltmesi; eşikli dengeleme eklenmeyecekse sapma yazılır; funding için bizim gerçek funding |
+| cuma-15 | Şüpheli (hücre kayan-pencereyle seçilmiş, OOS ve maliyet yok) | Giriş 16:00 EST = 21:00 UTC, 4 saat tutma, sabit UTC-5; kartın "kaynak tutarsız" notu yanlış |
+| btc-gecelik-max10 | Şüpheli (blog, tablolar okunamadı, gece seçimi örneklem içi) | Kaynaktaki N=10, Cuma/Pazartesi/Salı geceleri, yeniden giriş; MAX tanımı ve DST/tatil boşlukları testten önce tek değere sabitlenir (varsayım diye işaretli) |
+| kripto-max | Şüpheli, elenmeye en yakın (etki küçük coinlerde; evrenimizde yok) | 28 gün kayan pencere, haftalık; dilim ve evren sapması yazılır |
+| pre-FOMC | Şüpheli (yılda ~8 işlem; zayıflama literatürü doğrulanmadı) | Kaynak aslında Lucca-Moench; Delphic yazısı bulunamadı. Planlı FOMC, olay başına duyuru saati takvimi; 2016+ ayrı raporlanır |
+| saatlik-asiri-tepki | Şüpheli (kaynak teyitsiz) | Birincil metin okunana kadar test bekletilir (öneri) ya da "özete dayalı bizim saatlik hipotezimiz" diye kaydedilir. İkincil kaynak: 5 dk, 2σ, tek periyot; kart 1 saat |
+| noise-area | İyi test edilebilir (hacim verisi şartıyla) | VM=1, 14 gün (optimize 1,5/90 kullanılmaz), 30 dk, yalnız bant girişi, max(UB,VWAP) iz stop, 16:00 çıkış; ana koşu sabit %100 boyut, dinamik ikincil |
+
+## 3. En kritik 5 bulgu
+1. DonchianAnsambl kodu kaynağın stratejisi değil.
+2. saatlik-asiri-tepki'de zaman ölçeği (5 dk / 1 saat) teyitsiz.
+3. funding-7g testi iki doğrulanmamış altyapı noktasına bağlı (funding ızgarası, funding PnL).
+4. Eklenen ATR stopları (funding, FIP, asiri-tepki, donchian) hiçbir kaynakta yok; ön kayıtta "bizim eklememiz" diye yazılmalı, stopsuz koşu da raporlanmalı.
+5. Evren darlığı (13-15 coin) dört kesitsel kartta zorunlu sapma; 10 kaynağın 8'inde gerçek OOS yok, çoğunda maliyet yok.
+
+## 4. Kart düzeltme önerileri (kart dosyalarına dokunulmadı; ana oturum karar verir)
+- noise-area: "bant formülü yok" ve "çıkış açık değil" notları yanlış (ikisi de makalede var).
+- cuma-15: olay saati tanımı eklenmeli; "kaynak tutarsız" kalkmalı.
+- btc-gecelik: maliyet "okunamadı" değil "kaynakta yok"; yeniden giriş eklenmeli; 35%/-12% MAX(10) açıklamasına ait.
+- pre-FOMC: kaynak Lucca-Moench olarak atfedilmeli; "20 bp" 1980-1993 örneği, "54 bp" SPX sonucu (futures değil).
+- kripto-max: pencere 30→28 gün.
+- saatlik-asiri-tepki: "k kaynakta yok" yerine "ikincil kaynak 2σ"; birincil metin okunamadı notu.
+- vol-yonetimli: "~%25 Sharpe artışı" ve Liu/Cederburg eleştirileri doğrulanamadı.
+- donchian: "lookback listesi alınamadı" artık biliniyor; `aileler_v3.csv` özetindeki 20/55/100 kaynağa aykırı.
+
+## Dürüst sınırlar (tur 4)
+- Birincil metin okunamayanlar: De Nicola (Ledger; TLS/503/403), Delphic yazısı (bulunamadı), Da/Gurun/Warachka (açılmadı).
+- Yalnız özet düzeyinde okunanlar: Vine paper2.html ve Dujava/Quantpedia blogu (WebFetch özeti); "baştan sona oku" şartı bu ikisinde karşılanmadı. FIP repo'su da dosya dosya özet olarak okundu.
+- Sürüm riski: Donchian makalesi SSRN yerine yazarların sitesindeki revize sürümden, noise-area Şubat 2025 sürümünden okundu.
+- Kod tarafı: motor gecikmesi, maliyeti, funding işleyişi, `Takvim.mom`, Pazartesi hizası kontrol edilmedi. 5 temsilci kodsuz; kodlanınca doğrulama tekrarlanmalı.
+- `uyum` etiketleri yer yer tutarsız; ön kayıtta not sütununa bakılmalı.
+- Madde 3 (yeni web taraması, yeni aile/daha güçlü kanıtlı aday) YAPILMADI; kart eklenmedi, `aileler_v3.csv`'ye satır eklenmedi. Sonraki tura kalır.
+
+## Devam noktası (tur 5)
+1. Gün içi kripto (5m-1h) ve funding/baz web taraması (yalnız yeni aile ya da daha güçlü kanıtlı aday).
+2. De Nicola PDF'i (kullanıcı sağlarsa), Vine ve Quantpedia'nın tam metni.
+3. DonchianAnsambl'in kaynağa göre yeniden kodlanıp kodlanmayacağı kararı (ana oturum/kullanıcı).

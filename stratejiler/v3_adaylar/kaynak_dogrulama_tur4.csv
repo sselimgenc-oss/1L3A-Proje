@@ -1,0 +1,137 @@
+kart_id,kural_veya_parametre,kaynakta_deger,kodda_veya_kartta_deger,uyum,kaynak_konum,not
+swing__donchian-ansambl-vol-hedef__zarattini,geriye bakis pencereleri,"5,10,20,30,60,90,150,250,360 gun (9 model)",kod: 20/55/100 (3 pencere); kart: alinamadi,farkli,Bolum 4.3 s.10,Kod kaynaktan degil; kaynakta 55 ve 100 yok. En iyi Sharpe kisa pencerelerde (5-30g)
+swing__donchian-ansambl-vol-hedef__zarattini,kanal tanimi,"Up=max(Close[t-n+1..t]); Mid=0.5*(Up+Down); KAPANIS bazli, bugun dahil",kod: yuksek.shift(1) rolling max (high bazli; onceki n bar),farkli,Bolum 4.1 s.6-7,
+swing__donchian-ansambl-vol-hedef__zarattini,long giris,Close = DonchianUp(n),kod: kapanis > onceki n yuksek maks (>=2 pencere oyu),farkli,Bolum 4.1 s.7; 4.3 s.10,Kaynakta esik/cogunluk yok
+swing__donchian-ansambl-vol-hedef__zarattini,ansambl birlestirme,esit agirlikli ortalama w=(1/N) toplam w_n (N=9); oylama yok,kod: oy>=2 sonra ikili long,farkli,Bolum 4.3 s.10,Kaynakta kismi pozisyon (0..%200 ortalamasi)
+swing__donchian-ansambl-vol-hedef__zarattini,cikis / trailing stop,"Close <= TS ise cik; TS[t+1]=max(TS[t], DonchianMid_t); asagi inmez",kod: kapanis < onceki 20g dusuk min veya ATR(14)x3; kart: stop yok,farkli,Bolum 4.1 s.7 + dipnot 3,Kaynakta ATR stop yok
+swing__donchian-ansambl-vol-hedef__zarattini,vol hedefi,yillik %25 (w=0.25/sigma_t),kod: yok; kart: formul alinamadi,farkli,Bolum 4.2 s.8-9,Boyutlandirma stratejinin merkezinde
+swing__donchian-ansambl-vol-hedef__zarattini,vol tahmin penceresi,90 gunluk yillandirilmis getiri volatilitesi,kodda ve kartta yok,kaynakta_yok,Bolum 4.2 s.9,365/252 carpani acik degil
+swing__donchian-ansambl-vol-hedef__zarattini,kaldirac tavani,Tek varlik en fazla %200,kodda ve kartta yok,farkli,Bolum 4.2 s.9,Bizim sert limitler (3x) ayri
+swing__donchian-ansambl-vol-hedef__zarattini,yeniden dengeleme (pozisyon),vol kaynakli ayar yalniz hedef-mevcut fark >%20 ise; sinyal degisimi hemen,kodda yok,farkli,Bolum 5.1 s.14-15,Maliyet azaltma
+swing__donchian-ansambl-vol-hedef__zarattini,yeniden dengeleme (portfoy),Ay sonu evren yeniden secilir; esit sermaye 1/B,kart: siklik belirtilmemis,farkli,Bolum 7.1-7.2 s.16-18,
+swing__donchian-ansambl-vol-hedef__zarattini,evren secimi,Wrapped/stablecoin haric; 30g medyan hacim >= 2 milyon USD; ilk B (B=20 ana; 5-50),kart: en likit ilk 20 coin,farkli,Bolum 7.1 s.16-17; Tablo 4,Cikis: 30g medyan hacim < 1 milyon USD (s.18)
+swing__donchian-ansambl-vol-hedef__zarattini,evren / veri,CoinMarketCap; hayatta kalma yanliligindan arindirilmis; 10.000+ coin,bizde 13-15 coin,farkli,Bolum 3 s.5; Bolum 6,B=5 ile bile Sharpe 1.44 (Tablo 4)
+swing__donchian-ansambl-vol-hedef__zarattini,maliyet,%0.10 ana; %0.25 ve %0.50 duyarlilik; Tablo 1-2 maliyetsiz,belirtilmemis,kaynakta_yok,Bolum 5.1 s.13-15,Tek yon mu gidis-donus mu acik degil
+swing__donchian-ansambl-vol-hedef__zarattini,short tarafi,Ana sonuc long-only; long-short Ek Tablo 5,kod: long-only,ayni,Bolum 4; Ek Tablo 5,
+swing__donchian-ansambl-vol-hedef__zarattini,gecikme,Pozisyon w_(t-1) ile t getirisi (sinyal kapanista; ertesi gun getiri),motor varsayimi kontrol edilmedi,kaynakta_yok,Bolum 4.3 s.10,
+swing__donchian-ansambl-vol-hedef__zarattini,donem / OOS,Ocak 2015 - 19 Mart 2025; OOS ayrimi YOK,kart: 2015- ,ayni,Bolum 5 s.11; Tablo 4,Tum donem in-sample
+swing__vol-yonetimli-long__moreira,formul,f_managed=(c/sigma2_hat_t)*f_(t+1),kart: w = c / RV2(onceki ay),ayni,Bolum 2.2 denklem (1) s.5-6,
+swing__vol-yonetimli-long__moreira,varyans tahmini,Onceki ayin gerceklesen varyansi (gunluk getirilerden),kart: onceki takvim ayi (~22 gun),ayni,Bolum 2.2 s.6,
+swing__vol-yonetimli-long__moreira,c sabiti,c tum orneklemde secilir (ileriye bakar; Sharpe'i etkilemez),kart: hedef yillik vol; ust sinir 1 (veya 1.5),farkli,Bolum 2.2 s.6; dipnot 5,Bilincli uyarlama
+swing__vol-yonetimli-long__moreira,yeniden dengeleme,Aylik,kart: aylik,ayni,Bolum 2.2 s.6,Kripto 30 takvim gunu uyarlamasi kaynakta yok
+swing__vol-yonetimli-long__moreira,kaldirac siniri,Ana: sinirsiz; ek test tavan 1 ve 1.5; w medyan ~1; 99. yuzdelik ~6,kart: ust sinir 1,ayni,Bolum 3.3 s.12 Tablo 5,Tavan alfayi dusurur anlamli kalir
+swing__vol-yonetimli-long__moreira,vol tahmin alternatifi,AR(1) beklenen varyans da test edilmis,kartta yok,kaynakta_yok,Bolum 3.2-3.3 s.11-12,
+swing__vol-yonetimli-long__moreira,maliyet,"1 bp, 10 bps, 10+4 bps duyarlilik; piyasa portfoyunde alfa pozitif kalir",kart: brut,ayni,Bolum 3.2 Tablo 4 s.11,
+swing__vol-yonetimli-long__moreira,evren,ABD piyasa + Ken French faktorleri; kripto/altin/tekil varlik yok,kart: kripto/altin dogrulanmadi,ayni,Bolum 2.1 s.4-5,
+swing__vol-yonetimli-long__moreira,orneklem,1926-2015; alt donem 1956-1985 zayif,kart: 1956-1986,farkli,Bolum 3.1 s.9,Kucuk sapma
+swing__vol-yonetimli-long__moreira,stop/kar al,Yok (yalniz agirlik zamanlamasi),null,ayni,Tum makale,
+swing__funding-7g-haftalik-tercil__vine,sinyal tanimi,trailing 7 gunluk ortalama funding,"kod: rolling('7D').mean(), min_periods=2 (v3.py _FundingKesit._skor)",ayni,paper2.html (ozet),min_periods kaynakta yok (onemsiz)
+swing__funding-7g-haftalik-tercil__vine,gecikme,1 gun kaydirma,gecikme_gun=1,ayni,paper2.html (ozet),
+swing__funding-7g-haftalik-tercil__vine,tercil,alt tercil long / ust tercil short,"dilim=1/3, ceil(N/3) sinir N//2; dusuk funding long",ayni,paper2.html (ozet),N=30 -> 10/bacak; bizde 13-15 coin -> ~5/bacak
+swing__funding-7g-haftalik-tercil__vine,agirlik,dolar notr brut 1.0 (bacak ici esit agirlik ozette acik degil),0.5/n long -0.5/n short,ayni,paper2.html (ozet),
+swing__funding-7g-haftalik-tercil__vine,yeniden dengeleme sikligi,haftalik,takvim=W (Pazartesi 00:00 UTC),ayni,paper2.html (ozet),
+swing__funding-7g-haftalik-tercil__vine,yeniden dengeleme gunu,haftanin gunu belirtilmemis,Pazartesi 00:00 UTC,kaynakta_yok,paper2.html (ozet),On kayitta varsayim olarak isaretle
+swing__funding-7g-haftalik-tercil__vine,evren,30 likit Binance USD-M perp; MATIC funding POL yeniden adlandirmasi (~2024-09) sonrasi maskeli,bizde 13-15 coin,farkli,paper2.html (ozet),MATIC/POL maskesi ayrica ele alinmali
+swing__funding-7g-haftalik-tercil__vine,veri donemi,2023-01..2026-05 (112.853 funding olayi),kartta yok,kaynakta_yok,paper2.html (ozet),
+swing__funding-7g-haftalik-tercil__vine,funding veri izgarasi,gunluk izgarada TOPLANMIS (8s settlement; TIA 4s),kod: funding_orani = mum kapanisinda bilinen SON settlement ffill; rolling mean bunun uzerinde,farkli,paper2.html (ozet); v3.py _FundingKesit docstring,Gunluk toplam yerine son settlement kullaniliyor: veri hazirlayici kontrol edilmeli
+swing__funding-7g-haftalik-tercil__vine,fiyat getirisi,spot gunluk getiri (perp proxy),perp fiyati,farkli,paper2.html (ozet),Basis farki kucuk
+swing__funding-7g-haftalik-tercil__vine,funding PnL,fiyat spread + toplanan funding net turnover maliyeti,motorun funding isleyisi bu gorevde dogrulanmadi,kaynakta_yok,paper2.html (ozet),Ayrica test edilmeli
+swing__funding-7g-haftalik-tercil__vine,stop,kaynakta stop yok,kod: ATR(14)x3 (portfoy sozlesmesi); kart null,farkli,paper2.html (ozet); v3.py _FundingKesit.stoplar,Eklenen stop kaynakta yok
+swing__funding-7g-haftalik-tercil__vine,maliyet,6 bp/taraf taban; 0-15 bp tarama,kart: 6 bp/taraf; kodda yok (motor),ayni,paper2.html (ozet),Motor maliyeti 6 bp mi kontrol edilmedi
+swing__funding-7g-haftalik-tercil__vine,parametre secimi,36 konfigurasyon (lookback x quantile x rebalance); secilen 7g/tercil/haftalik,7/1-3/haftalik,ayni,paper2.html (ozet),PBO 0.81: secim yanliligi yuksek
+swing__fip-kesitsel-momentum__baptoudur,sinyal,FIP = sign(getiri) x (pozitif gun - negatif gun)/lookback,isaret(mom90) x rolling_sum(sign(gunluk getiri))/90,ayni,README; src/fip_calculator.py,
+swing__fip-kesitsel-momentum__baptoudur,lookback,90 gun (min 60 gozlem),90 (min_periods=90),farkli,config.yaml; fip_calculator.py,Onemsiz
+swing__fip-kesitsel-momentum__baptoudur,getiri tanimi,fiyat simdi / 90 donem once - 1 (skip yok),tk.mom(n) (Takvim.mom tanimi okunmadi),kaynakta_yok,README,Takvim.mom'un skip icermedigi teyit edilmeli
+swing__fip-kesitsel-momentum__baptoudur,skip donemi,kaynakta skip yok,kodda gecikme yok,ayni,README,
+swing__fip-kesitsel-momentum__baptoudur,quantile,ust %20 long / alt %20 short,dilim=0.2 ceil(N*0.2) sinir N//2,ayni,config.yaml,13-15 coinde 3 coin/bacak; kaynakta 50-100 coin
+swing__fip-kesitsel-momentum__baptoudur,minimum varlik,min 5 varlik yoksa portfoy bos,min_sembol=2,farkli,src/portfolio_builder.py (select_assets),
+swing__fip-kesitsel-momentum__baptoudur,agirlik,bacak ici esit; long %50 short %50,+-brut/(2k) esit,ayni,README; config.yaml,Skor-agirlikli secenek kodda yok
+swing__fip-kesitsel-momentum__baptoudur,yeniden dengeleme,haftalik Pazartesi,takvim=W,ayni,config.yaml,Pazartesi teyidi yapilmadi
+swing__fip-kesitsel-momentum__baptoudur,esikli rebalans / min tutma,agirlik hedeften >%20 saparsa islem; min 7 gun tutma,kodda yok (her hafta tam dengeleme),farkli,README; config.yaml; src/portfolio_builder.py,Turnover ve maliyet kaynaktan yuksek
+swing__fip-kesitsel-momentum__baptoudur,evren,Binance USDT 50-100 varlik; min gunluk hacim 1M USDT; stablecoin haric,13-15 coin,farkli,config.yaml; README,Kartin 'sembol yok' notu yaniltici: kriter var liste yok
+swing__fip-kesitsel-momentum__baptoudur,stop,kaynakta stop yok,kod: ATR(14)x3 ortak parametre,farkli,README; v3.py ORTAK_PARAMETRELER,
+swing__fip-kesitsel-momentum__baptoudur,maliyet,maker 0.05% taker 0.05% kayma 0.1% (~15 bp tek yon),kodda yok (motor),ayni,config.yaml; backtester.py,
+swing__fip-kesitsel-momentum__baptoudur,funding/borc,gunluk sabit %0.01 funding+borrow,kodda yok; motor gercek funding isler,farkli,config.yaml; backtester.py,
+swing__fip-kesitsel-momentum__baptoudur,asil makale (Da/Gurun/Warachka 2014),"12-2 ay sinyal, hisse, aylik, FIP=sign(ret) x (neg gun% - poz gun%) [onceki bilgiden; ACILMADI]",repo: 90 gun gunluk haftalik,farkli,makale acilmadi,DOGRULANMADI: repo makalenin yeniden yorumu; makale sonucu kriptoya tasinamaz
+daytrade__cuma-15-est-tutma-saatlik__miralles,veri / orneklem,Kraken saatlik BTC/USD 2016-01-01..2021-12-31 (52.608 gozlem),Kraken saatlik BTC 2016-2021,ayni,Sec.3 s.751,
+daytrade__cuma-15-est-tutma-saatlik__miralles,saat dilimi,EST; DST'den soz edilmiyor (52.608 = 2192x24 -> sabit ofset),EST; yaz saati belirtilmemis,ayni,s.751,Oneri: sabit UTC-5; Cuma 15:00 EST = Cuma 20:00 UTC
+daytrade__cuma-15-est-tutma-saatlik__miralles,olay saati,Olay 3 p.m. = 15:00-15:59:59 mumu,kartta tanim yok,kaynakta_yok,s.751,Karta eklenmeli
+daytrade__cuma-15-est-tutma-saatlik__miralles,giris zamani,P0 = olay saati kapanisi; '4 saat = 4 p.m.'de al 7:59:59 p.m. sat',Cuma 15:00 mum kapanisi sonrasi long; kart 'kaynakta tutarsiz',farkli,Eq.1 s.751; s.757,Kaynak tutarsiz degil: giris 16:00 EST (=21:00 UTC) cikis 4 saat sonra
+daytrade__cuma-15-est-tutma-saatlik__miralles,tutma suresi,4 5 6 12 18 24 saat test; 4-6 en iyi,ana: 4 saat,ayni,s.756-757,
+daytrade__cuma-15-est-tutma-saatlik__miralles,secilen hucre,Cuma 15:00 olayi: 3 yillik kayan pencerede 4-24s tutma %100 anlamli; hucre kayan-pencere anlamlilik yuzdesiyle secilmis,Cuma 15:00 EST,ayni,Abstract; s.754-756 Tablo 7 10-12,Veri kazima riski; coklu test duzeltmesi yok
+daytrade__cuma-15-est-tutma-saatlik__miralles,yalniz 15:00 mumu tutma,Sharpe surekli negatif,,ayni,s.756,
+daytrade__cuma-15-est-tutma-saatlik__miralles,Sharpe sayisi,Yalniz Sekil 2'de (grafik); metinde sayi yok,,kaynak_okunamadi,s.756 Sekil 2,
+daytrade__cuma-15-est-tutma-saatlik__miralles,islem maliyeti,Dahil degil ('ihmal edilebilir' Caporale-Plastun 2020),maliyet hariç,ayni,s.752,Iyimser; on kayitta gercekci maliyet konmali
+daytrade__cuma-15-est-tutma-saatlik__miralles,hold-out / OOS,Yok; tum 2016-2021 ornekleme ici; kayan pencereler ortusuyor,hold-out yok,ayni,s.754-756,
+daytrade__cuma-15-est-tutma-saatlik__miralles,stop / filtre,Yok,,kaynakta_yok,tum makale,
+daytrade__cuma-15-est-tutma-saatlik__miralles,evren,Yalniz BTC/USD (Kraken),yalniz BTC,ayni,s.758,
+swing__btc-gecelik-max10-hafta-sonu__dujava,seans tanimi,Gunduz 10:00-16:00 EST NYSE gunlerinde; gerisi gece,10-16 EST gunduz,ayni,Quantpedia blog,
+swing__btc-gecelik-max10-hafta-sonu__dujava,MAX(N) tanimi,'new local highs (5..50 gun)'; kapanis/ici yuksek ve bugunun dahil olup olmadigi yazmiyor,10 gunluk zirve; tanim belirsiz,kaynakta_yok,Quantpedia blog,On kayit varsayimi CIKARIM: 16:00 EST saatlik kapanisi >= onceki 10 gunun en yuksek 16:00 kapanisi
+swing__btc-gecelik-max10-hafta-sonu__dujava,N secimi,N=5..50 denenmis; 10 'onceki yayinlarla tutarlilik icin' secilmis (en iyi degil),N=10,ayni,Quantpedia blog,
+swing__btc-gecelik-max10-hafta-sonu__dujava,gece pencereleri,Yalniz Cuma-Pazartesi (hafta sonu dahil) Pazartesi-Sali Sali-Carsamba geceleri,Cuma/Pazartesi/Sali geceleri,ayni,Quantpedia blog,
+swing__btc-gecelik-max10-hafta-sonu__dujava,Carsamba/Persembe disi,Gerekce yok; 'Cumaya yaklastikca performans duser',kaynak gerekcesi kisa,kaynakta_yok,Quantpedia blog,Orneklem ici gozleme dayali: veri kazima riski
+swing__btc-gecelik-max10-hafta-sonu__dujava,giris ve cikis,Giris NYSE kapanisi zirvedeyse; tutma sonraki NYSE acilisina; Pazartesi/Sali zirve suruyorsa yeniden giris,16:00 EST giris ertesi gun 10:00 EST cikis,farkli,Quantpedia blog,Yeniden giris (ek pozisyon) kartta yok
+swing__btc-gecelik-max10-hafta-sonu__dujava,NYSE tatilleri,NYSE takvimi kullanilmis; tatil ele alisi yazmiyor,tatil gunleri ayri davranir,kaynakta_yok,Quantpedia blog,
+swing__btc-gecelik-max10-hafta-sonu__dujava,DST / EST,'10 am EST - 4 pm EST'; DST'den soz yok,EST/yaz saati koda eklenmeli,kaynakta_yok,Quantpedia blog,Sabit EST mi gercek NYSE saati mi: on kayitta belirle
+swing__btc-gecelik-max10-hafta-sonu__dujava,veri,Gemini saatlik BTC 2015-10-08..2024-10-15,Gemini saatlik BTC,ayni,Quantpedia blog,
+swing__btc-gecelik-max10-hafta-sonu__dujava,IS/OOS,IS: Ekim 2021'e kadar; OOS: sonrasi (BITO 2021-10-18); yazar bolunmeyi 'very arbitrary' diyor,2021-10-18,ayni,Quantpedia blog,
+swing__btc-gecelik-max10-hafta-sonu__dujava,OOS sonucu,MAX(10) OOS: 'over 35%' ve -12% maks dusus,over 35% MDD ~-12%,ayni,Quantpedia blog,Rakamlar MAX(10) aciklamasina ait; yalniz-gece nihai strateji icin sayi yok; sure belirsiz
+swing__btc-gecelik-max10-hafta-sonu__dujava,Sharpe / tablolar,Sayi yok; 'attractive Sharpe'; tablolar gorsel,,kaynak_okunamadi,Quantpedia blog,
+swing__btc-gecelik-max10-hafta-sonu__dujava,islem maliyeti,Hic bahsedilmiyor,kartta 'okunamadi',kaynakta_yok,Quantpedia blog,Kart duzeltilmeli: kaynakta yok
+swing__btc-gecelik-max10-hafta-sonu__dujava,asil makale,Ayri makale yok (Quantpedia / Dujava); dayanak Cliff-Cooper-Gulen SSRN 1004081 (hisse),yalniz blog,kaynakta_yok,Quantpedia blog,Blog hakemsiz
+swing__kripto-max-piyango-kesit__ozdamar,MAX tanimi,Ay icindeki en yuksek gunluk getiri; her hafta yeniden hesap,Onceki ayin en yuksek gunluk getirisi,ayni,s.6 Eq.(1),
+swing__kripto-max-piyango-kesit__ozdamar,MAX penceresi,Kripto 7/24: 1 hafta=7 gun 1 ay=28 gun kayan pencere haftalik guncellenir,kart: onceki ay (30 gun uyarlama; net degil),farkli,s.6 dipnot 9,28 gun kullanilmali
+swing__kripto-max-piyango-kesit__ozdamar,siralama/dilim,Decil 10 vs decil 1; her hafta,ust/alt 3-4 coin (13-15 coinde decil yok),farkli,s.8 Tablo 2,Dilim buyuklugu bizim uyarlama
+swing__kripto-max-piyango-kesit__ozdamar,yon,Yuksek MAX long dusuk MAX short; 10-1 pozitif,en yuksek MAX long en dusuk short,ayni,s.8 Tablo 2,Hisselerin tersi
+swing__kripto-max-piyango-kesit__ozdamar,yeniden dengeleme,Haftalik sirala ertesi hafta getirisi,haftalik,ayni,s.4 dipnot 5; s.8,Hafta baslangic gunu kaynakta yok
+swing__kripto-max-piyango-kesit__ozdamar,agirlik,VW ve EW rapor edilir; ana baslik VW,EW dolar notr,farkli,s.8 Tablo 2,EW sonucu da pozitif (10-1 ham 2.45%/hf)
+swing__kripto-max-piyango-kesit__ozdamar,evren,CMC gunluk; piyasa degeri >=5 milyon $; yeni coin ilk 6 ay disi; 2014-01..2020-09; 17->523 coin,13-15 buyuk perp coin,farkli,s.6 Data dipnot 8,Etki kucuk coinlerde yogun (decil10 medyan 21.92 milyon $)
+swing__kripto-max-piyango-kesit__ozdamar,veri frekansi,Gunluk kapanis,1d bar,ayni,s.6,
+swing__kripto-max-piyango-kesit__ozdamar,maliyet,Makalede islem maliyeti analizi yok,kartta yok,kaynakta_yok,tum makale,Sonuclar brut; short/funding yok
+swing__kripto-max-piyango-kesit__ozdamar,kisa satis,Tartisilmaz,short bacak perp,kaynakta_yok,tum makale,
+swing__kripto-max-piyango-kesit__ozdamar,stop,Yok,null,ayni,tum makale,
+swing__kripto-max-piyango-kesit__ozdamar,OOS,Yok; tum sonuclar ornekleme ici; alt donem yok,ornekleme ici,ayni,tum makale,
+swing__kripto-max-piyango-kesit__ozdamar,MAX(N),N=1..5 ortalamasi; sonuc dayanikli; EW alfa 1.7-2.4%/hf,N=2-5 varyanti,ayni,s.9 Tablo 3,
+swing__kripto-max-piyango-kesit__ozdamar,baslik sayilar,VW 10-1 ham 3.03%/hf (t=4.10) alfa 1.99%; EW ham 2.45% alfa 2.44%,kart ayni,ayni,s.8 Tablo 2,
+swing__kripto-max-piyango-kesit__ozdamar,volatilite kontrolu,VOL kontrollu VW fark 1.58% (t=5.17); IVOL kontrollu 0.91%,kart: volatilite vekili olabilir,ayni,s.10,
+swing__kripto-max-piyango-kesit__ozdamar,celisen literatur,Grobys-Sapkota 2019 Jia vd. 2020 Grobys-Junttila 2021 ile celisir,kart ayni atiflar,ayni,s.3,
+swing__pre-fomc-surunme__delphic,kaynak yazi,Delphic Alpha yazisi bulunamadi (arsivde yok),kart: kural WebSearch ozetinden,kaynak_okunamadi,delphicalpha.substack.com/archive,Asagisi Lucca-Moench'e gore
+swing__pre-fomc-surunme__delphic,giris zamani,Ana pencere: onceki gun 14:00 ET -> karar gunu 14:00 ET; dayaniklilik: onceki gun KAPANIS -> 14:00 Sharpe 1.43,onceki islem gunu 16:00 kapanisinda long,farkli,Lucca-Moench s.7-9 Tablo 2,Ayni yon
+swing__pre-fomc-surunme__delphic,cikis zamani,Duyurudan ~15 dk once (14:00 ET; duyuru 14:15 1994-2011),karar gunu 14:00'te kapat,ayni,Lucca-Moench s.3 s.5,2011 sonrasi duyuru saati 12:30-14:00 degisti; olay basina saat girilmeli
+swing__pre-fomc-surunme__delphic,olaylar,Yalniz planli FOMC (yilda 8); plansiz dislanir,planli FOMC,ayni,Lucca-Moench s.4,
+swing__pre-fomc-surunme__delphic,takvim kaynagi,federalreserve.gov fomccalendars,harici takvim elle,ayni,Lucca-Moench s.4-5,
+swing__pre-fomc-surunme__delphic,enstruman,S&P500 (SPX); E-mini benzer,Dukascopy ABD500 5m,ayni,Lucca-Moench s.12-13,Kartin '54 bp futures' etiketi yanlis: SPX'in iki gun onceki kapanis->14:00 sonucu
+swing__pre-fomc-surunme__delphic,karttaki ~20 bp,20 bp yalniz 1980-1993 gunluk ornek; 1994 sonrasi 24 saat = 49 bp,NY Fed ort ~20 bp,farkli,Lucca-Moench s.2,Kart iki ornekleme karistirmis
+swing__pre-fomc-surunme__delphic,stop,Yok,null,ayni,Lucca-Moench,
+swing__pre-fomc-surunme__delphic,maliyet,Strateji icin maliyet varsayilmaz (Sharpe brut 1.14),kartta yok,kaynakta_yok,Lucca-Moench s.8-9,
+swing__pre-fomc-surunme__delphic,zaman dilimi,Intraday (24 saat penceresi),5m,ayni,Lucca-Moench s.5,
+daytrade__saatlik-asiri-tepki-tersine__denicola,negatif otokorelasyon ufku,1 2 4 saatlik aralikta anlamli negatif otokorelasyon; buyuk hareketler daha guclu geri doner (ozet),kart: 1 2 4 saatlik ufuk,ayni,epub.ub.uni-muenchen.de/97651 ozet,Yalniz ozet dogrulandi; tam metin okunamadi
+daytrade__saatlik-asiri-tepki-tersine__denicola,kontrol/bar sikligi,Her 5 dakikada fiyat kontrol edilir (IKINCIL kaynak alintisi),kart: islem=1h; kod: saatlik mum,farkli,harbourfrontquant.substack.com (makaleden alinti); birincil metin okunamadi,Olcek farki test sonucunu anlamli degistirir; birincil metinle teyit sart
+daytrade__saatlik-asiri-tepki-tersine__denicola,sinyal getiri penceresi,Son 5 dakikalik getiri (ikincil),kart: son saatlik getiri; kod: kapanis.pct_change() 1s mum,farkli,ikincil alinti,1s/2s/4s otokorelasyon bulgusu ile 5 dk strateji arasinda tutarsizlik olabilir
+daytrade__saatlik-asiri-tepki-tersine__denicola,giris esigi k,2 standart sapma (ikincil),kart: 'k kaynakta yok'; kod k=2.0,ayni,ikincil alinti,Kart metni guncellenmeli
+daytrade__saatlik-asiri-tepki-tersine__denicola,sigma tahmin penceresi,Belirtilmemis (ikincil),kod: 48 mum r.shift(1).rolling(48).std(),kaynakta_yok,ikincil alinti,48 varsayim
+daytrade__saatlik-asiri-tepki-tersine__denicola,yon,Negatif asiri getiri long; pozitif asiri short,kod: r<-k*sd long r>k*sd short,ayni,ikincil alinti,
+daytrade__saatlik-asiri-tepki-tersine__denicola,tutma suresi,Her islem tek periyot sonra kapanir (ikincil),kod: tut_mum=1,ayni,ikincil alinti,Periyot 5 dk ise kodun 1s mumu farkli olcek
+daytrade__saatlik-asiri-tepki-tersine__denicola,stop,Belirtilmemis (stop yok),kod: ATR(14)x2; kart: UYARLAMA,kaynakta_yok,ikincil alinti,Stop kodun eklemesi
+daytrade__saatlik-asiri-tepki-tersine__denicola,maliyet,Birincil okunamadi; ikincil maliyet anmiyor,kart: maliyet sayfada yok,kaynak_okunamadi,birincil metin okunamadi,
+daytrade__saatlik-asiri-tepki-tersine__denicola,evren / veri donemi,Bitcoin; analiz verisi 2015-03..2018-06 (ikincil); borsa belirtilmemis,kart: BTC,ayni,harbourfrontquant.substack.com,Veri eski
+daytrade__saatlik-asiri-tepki-tersine__denicola,sonuc sayilari,Ikincil: 'significantly positive across the board'; rakam yok,kart: sonuc sayisi alinamadi,kaynak_okunamadi,birincil metin okunamadi,Rakam uydurulmadi
+daytrade__saatlik-asiri-tepki-tersine__denicola,bilinen zayiflik,Ikincil blog: hindsight/lookback yanliligi uyarisi,,kaynakta_yok,harbourfrontquant blog,
+daytrade__gunici-momentum-noise-alani__zarattini,noise area sigma,sigma(t;HH:MM)= onceki 14 gunun ayni HH:MM icin |Close/Open(9:30)-1| ortalamasi,repo: rolling(14 min_periods=13).mean().shift(1),ayni,Makale s.6-7 Bolum 3; repo satir 92-108,Kart 'bant formulu kaynakta yok' diyor: YANLIS (formul acik); min_periods=13 kucuk fark
+daytrade__gunici-momentum-noise-alani__zarattini,ust sinir UB,max(Open 9:30; Close(t-1;16:00)) x (1+VM x sigma),repo: np.maximum(open;prev_close)*(1+BAND_MULT*sigma),ayni,Makale s.7 s.21; repo satir 147,Kartta formul eksik
+daytrade__gunici-momentum-noise-alani__zarattini,alt sinir LB,min(Open; Close(t-1)) x (1-VM x sigma),repo np.minimum,ayni,Makale s.7 s.21; repo satir 148,
+daytrade__gunici-momentum-noise-alani__zarattini,band carpani VM,VM=1 ana model; duyarlilik: en iyi ~1.5 (Sharpe 1.35->1.55),repo BAND_MULT=1.0,ayni,Makale s.21-22 Bolum 4.4; SSS Q14,On kayitta paper degeri VM=1 ve 14 gun kullanilmali (optimize degil)
+daytrade__gunici-momentum-noise-alani__zarattini,lookback,14 gun (ana); SSS Q6: 5g 1.31 10g 1.23 14g 1.35 20g 1.33 25g 1.35 30g 1.31 60g 1.31 90g 1.50 Sharpe,14,ayni,Makale s.6; SSS Q6 s.31,
+daytrade__gunici-momentum-noise-alani__zarattini,giris kosulu,Fiyat ust bandin ustune cikinca long alt bandin altina inince short; VWAP girisde yok (yalniz iz suren stopta),kart/repo: kapanis hem banttan hem VWAP'tan disarida,farkli,Makale s.9; repo satir 152-153,Repo kendi sadelestirmesi: makalede denklik argumani yok; stop sonrasi yeniden giris farkli
+daytrade__gunici-momentum-noise-alani__zarattini,kontrol sikligi,Yalniz HH:00 ve HH:30'da islem; stop da yalniz yarim saatlik aralikta,30 dk (repo TRADE_FREQ=30),ayni,Makale s.9; repo satir 27 166,Repoda exposure.shift(1) ile 1 dk kayma olabilir
+daytrade__gunici-momentum-noise-alani__zarattini,iz suren stop,Long: max(UB;VWAP); Short: min(LB;VWAP); cari banda gore,repo: sinyal yarim saatte yeniden hesaplanir 0 olunca pozisyon duser,ayni,Makale s.13; repo satir 150-180,
+daytrade__gunici-momentum-noise-alani__zarattini,ters bant gecisi,Karsi banda gecilince kapat ve ters yonde ac,repo: +1 den -1'e dogrudan ters,ayni,Makale s.9; repo satir 170-180,
+daytrade__gunici-momentum-noise-alani__zarattini,gun sonu cikisi,Tum pozisyonlar kapanista (16:00) kapanir; 14:00 sonrasi ozel kural YOK,kart: 'cikis kaynakta acik degil'; repo: gun sonu sifirlama,ayni,Makale s.9-10 s.12; repo satir 183,Kart yanlis: cikis kaynakta acik
+daytrade__gunici-momentum-noise-alani__zarattini,VWAP tanimi,Yalniz piyasa saati verisiyle (dipnot 2); formul baska yayina atif,repo: (H+L+C)/3 x hacim kumulatif,kaynakta_yok,Makale s.13 dipnot 2; repo satir 86-90,Tipik fiyat varsayimi repoya ait
+daytrade__gunici-momentum-noise-alani__zarattini,pozisyon buyuklugu,Ana model: her gun basi ozsermayenin %100'u,repo: vol_target round(AUM/open x min(hedef/vol;4)),farkli,Makale s.10; repo satir 156-163,Iki surum: sabit %100 (Sharpe 1.24) ve dinamik (1.33); kart/repo dinamik: on kayitta hangisi yazilmali
+daytrade__gunici-momentum-noise-alani__zarattini,volatilite hedefi,Gunluk %2; Shares=AUM x min(4; hedef/sigma_SPY)/Open; sigma onceki 14 gun std,kart/repo: %2 ve 4x; ddof=1,ayni,Makale s.15; repo satir 99-101 157-161,Repo vol NaN ise 4x kullanir (makalede yok)
+daytrade__gunici-momentum-noise-alani__zarattini,kaldirac siniri,4x,4x,ayni,Makale s.15,
+daytrade__gunici-momentum-noise-alani__zarattini,maliyet,Komisyon 0.0035 USD/hisse (hacimde 0.0020; gunlerin ~%20'sinde dusuk); kayma 0.001 USD/hisse,repo COMMISSION=0.0035 SLIPPAGE=0.001 min emir 0.35 USD; kademe yok,farkli,Makale s.10 s.24-25 Bolum 4.6; repo satir 22-25,Repo biraz muhafazakar; SSS Q15: I-Star kayma ile Sharpe 1.17
+daytrade__gunici-momentum-noise-alani__zarattini,sinyal veri cozunurlugu,1 dk OHLCV (IQFeed) 2007-05..2024-04,kart: 30m kontrol; ust_filtre 5m,farkli,Makale s.6 Bolum 2; repo satir 36-51,'ust_filtre 5m' kaynakta yok
+daytrade__gunici-momentum-noise-alani__zarattini,evren,Yalniz SPY (+VIX); SSS Q12 diger ETF/hisse; Q13: 33 vadeli,kart: SPY,ayni,Makale s.6; SSS Q12-Q13,Kart piyasasi 'hisse' (aslinda ETF)
+daytrade__gunici-momentum-noise-alani__zarattini,seans,9:30-16:00 ET,repo 09:30-15:59 1m,ayni,Makale s.6-7,Saat dilimi acik yazilmiyor
