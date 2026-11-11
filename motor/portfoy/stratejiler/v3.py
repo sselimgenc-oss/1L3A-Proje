@@ -63,6 +63,9 @@ class _FundingKesit(PortfoyStratejisi):
         p = self.parametreler
         if p["takvim"] == "D":
             tetik = (eksen.hour == 0) & (eksen.minute == 0)
+        elif p["takvim"] == "3D":
+            gun = (eksen.floor("D") - pd.Timestamp("1970-01-01", tz="UTC")) // pd.Timedelta(days=1)
+            tetik = (gun % 3 == 0) & (eksen.hour == 0) & (eksen.minute == 0)
         elif p["takvim"] == "W":
             tetik = (eksen.day_of_week == 0) & (eksen.hour == 0) & (eksen.minute == 0)
         else:
@@ -136,6 +139,25 @@ class Funding7gTercil(_FundingKesit):
     }
 
 
+class FundingZ90UcGun(_FundingKesit):
+    """90 günlük kendi-tarihçe funding z-skoruyla üç günde bir decil L/S.
+
+    Kaynak: https://github.com/OctopusTakopi/funding-rate-alpha. Üst üste
+    binen kohort kaynakta belirsiz olduğundan tek kohort üç günde bir yenilenir.
+    """
+
+    ad = "pf__v3-funding-z90-3gun"
+    varsayilan_parametreler = {
+        **_FundingKesit.varsayilan_parametreler, "takvim": "3D", "z_gun": 90,
+    }
+
+    def _skor(self, panel):
+        n = int(self.parametreler["z_gun"])
+        ort = panel.rolling(f"{n}D", min_periods=n).mean()
+        sapma = panel.rolling(f"{n}D", min_periods=n).std(ddof=0).replace(0.0, np.nan)
+        return (panel - ort) / sapma
+
+
 class FipKesitsel(PfTemel):
     """90 günlük FIP skoruyla haftalık üst %20 long/alt %20 short.
 
@@ -173,4 +195,4 @@ class FipKesitsel(PfTemel):
         return dongusel_hedef(ax, kolon, tetik, agirlik)
 
 
-V3_SINIFLAR = (Funding1sDevam, FundingKesitCarry, Funding7gTercil, FipKesitsel)
+V3_SINIFLAR = (Funding1sDevam, FundingKesitCarry, Funding7gTercil, FundingZ90UcGun, FipKesitsel)
