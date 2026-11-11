@@ -1,0 +1,93 @@
+{
+  "kart_id": "daytrade__fib-4s-yapi-pin-yutan-limit__h0peson1",
+  "ad": "4s Yapı + Fib 50-61.8 Bölgesi + Pin/Yutan Mum, Limit Giriş (BTC/XAU 1s)",
+  "stil": "daytrade",
+  "kaynak": {
+    "url": "https://github.com/h0peson1/Trading-Bot",
+    "lisans": "yok (lisanssız; kod kopyalanmadı)",
+    "tur": "github"
+  },
+  "ozet": "4 saatte HH+HL (veya LH+LL) yapısı ve 100 SMA hizası varken, 1 saatlik bar son salınımın 50-61.8 fib bölgesine girer ve pin bar/yutan/sabah-akşam yıldızı onayı verirse, onay mumunun orta noktasından limit emirle girilir. TP1 0.9R'de %65 kapanır, kalan stop başa baş, TP2 2R.",
+  "kategori": "destek_direnc",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "forex",
+  "zaman_dilimi": {
+    "islem": "1h",
+    "ust_filtre": "4h"
+  },
+  "gostergeler": [
+    {
+      "ad": "Fibonacci",
+      "parametreler": {
+        "seviyeler": [
+          0.5,
+          0.618
+        ]
+      }
+    },
+    {
+      "ad": "SMA",
+      "parametreler": {
+        "periyot": 100,
+        "zaman": "4h"
+      }
+    },
+    {
+      "ad": "Fraktal salınım",
+      "parametreler": {
+        "order": 3,
+        "zaman": "4h"
+      }
+    }
+  ],
+  "long_giris": [
+    "4s salınım yapısı: son 4s tepe HH ve son 4s dip HL, ve tepe diptten sonra",
+    "4s kapanış >= 4s SMA(100)",
+    "1s bar low <= tepe-0.5*(tepe-dip) ve 1s bar high >= tepe-0.618*(tepe-dip)",
+    "1s kapanış >= son 4s dip",
+    "1s bar onayı (tamamlanmış): pin bar (alt fitil >= 2x gövde ve >= %50 aralık, üst fitil <= %25, kapanış >= açılış) VEYA yutan (önceki mum kırmızı, bu yeşil, kapanış >= önceki high, gövde >= %50 aralık) VEYA sabah yıldızı",
+    "Giriş: onay barının (high+low)/2 seviyesine limit emir; en fazla 5 bar içinde dolmazsa iptal",
+    "Seans filtresi 07-15 UTC (BTC için yok, 7/24)"
+  ],
+  "short_giris": [
+    "Yukarıdakinin tersi (LH+LL, kapanış <= 4s SMA(100), ters mum onayı); BTC için kapalı (yalnız long)"
+  ],
+  "stop_loss": "Pin bar: onay barı dibi; yutan: iki barın en düşüğü; yıldız: üç barın en düşüğü; bunun BTC için %0.5 (en az 10 puan), diğerlerinde %0.15 tampon kadar ötesi",
+  "kar_al": "TP1 = giriş + 0.9R (pozisyonun %65'i), TP2 = giriş + 2R (kalan %35)",
+  "iz_suren_stop": "TP1 sonrası kalan pozisyon için stop girişe (başa baş) çekilir",
+  "zaman_cikisi": "120 bar (1s) sonra kapat; aynı barda SL ve TP1 birlikte olursa SL varsayılır",
+  "filtreler": [
+    "4s SMA(100) hizası",
+    "Seans 07-15 UTC (BTC hariç)",
+    "BTC yalnız long"
+  ],
+  "pozisyon_risk": "Sabit oranlı %1.5 risk",
+  "iddia_edilen_performans": null,
+  "kanit": null,
+  "veri_uygun": [
+    true,
+    "BTCUSDT ve XAU 1h OHLCV bizde var (4h resample). Forex (EURJPY) bizde yok, karta yalnız BTC/XAU için alınmalı. XAU Dukascopy verisinde seans 07-15 UTC filtresi anlamlı."
+  ],
+  "kodlanabilirlik": {
+    "puan": 3,
+    "gerekce": "Kodda tüm kurallar deterministik, 4s verisi yalnızca kapanmış barlarla hizalanmış (lookahead kontrolü kodda var)."
+  },
+  "belirsizlikler": [
+    "Salınım etiketleme: HH = yeni 4s tepe öncekinden yüksek, HL = yeni dip öncekinden yüksek (kod mantığı); fraktal order=3",
+    "Kaynağın sonuçları okunmadı; kendi testimizde doğrulanmalı",
+    "Aynı barda limit dolum varsayımı spread+kayma içeriyor: bizde kaynakta olmayan değerler uydurulmadı"
+  ],
+  "uyumluluk_notu": "BTC/XAU 1h+4h ile uyumlu; forex bacağı kapsam dışı. swing__fib-geri-cekilme ailesine benzer; 4s yapı + mum onayı + kısmi kâr farklı.",
+  "varyantlar": [
+    "Kaynağın signal_bot.py'sinde 15 dk onay, TP 1.5R/3R varyantı var (okunmadı, yalnız özet)"
+  ],
+  "anahtar_kelimeler": [
+    "fibonacci",
+    "pin-bar",
+    "yutan-mum",
+    "limit-giris",
+    "4s-yapi",
+    "btc",
+    "xau"
+  ]
+}

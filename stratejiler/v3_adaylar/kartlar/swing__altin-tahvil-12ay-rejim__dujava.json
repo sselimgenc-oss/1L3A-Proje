@@ -1,0 +1,73 @@
+{
+  "kart_id": "swing__altin-tahvil-12ay-rejim__dujava",
+  "ad": "Altın + Uzun Tahvil 12 Aylık Ortak Momentum Rejimi (GLD)",
+  "stil": "swing",
+  "kaynak": {
+    "url": "https://quantpedia.com/cross-asset-price-based-regimes-for-gold/",
+    "lisans": "blog (Quantpedia, kendi araştırması)",
+    "tur": "blog"
+  },
+  "ozet": "Altın ve uzun vadeli ABD tahvilinin ikisi de son 12 ayda pozitif getirili ise (reel faiz düşüş rejimi) ay sonunda altını tut; aksi halde nakitte kal. Aylık yeniden dengeleme.",
+  "kategori": "momentum",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "emtia",
+  "zaman_dilimi": {
+    "islem": "1d",
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {
+      "ad": "12 aylık toplam getiri (altın)",
+      "parametreler": {
+        "pencere_ay": 12,
+        "esik": 0
+      }
+    },
+    {
+      "ad": "12 aylık toplam getiri (IEF, 7-10 yıl ABD tahvili)",
+      "parametreler": {
+        "pencere_ay": 12,
+        "esik": 0
+      }
+    }
+  ],
+  "long_giris": [
+    "Ay sonu: altının 12 aylık getirisi kesin pozitif VE tahvil endeksinin 12 aylık getirisi kesin pozitif ise sonraki ay %100 altın (GLD) long"
+  ],
+  "short_giris": [],
+  "stop_loss": null,
+  "kar_al": null,
+  "iz_suren_stop": null,
+  "zaman_cikisi": "Aylık; koşul bozulursa pozisyon nakde döner",
+  "filtreler": [
+    "İki 12 aylık getiri aynı anda pozitif olmalı"
+  ],
+  "pozisyon_risk": "Ya %100 altın ya %0 (nakit/Fed funds getirili sürüm 'nihai' sürüm). Kaldıraç yok.",
+  "iddia_edilen_performans": "Kaynak metninde rakamlar yalnız görsellerde; metinde nakit sürümünün getiriyi, Sharpe'ı artırdığı, maks. düşüşü yaklaşık aynı bıraktığı yazıyor (sayı yok) (iddia, doğrulanmadı).",
+  "kanit": "iddia (doğrulanmadı): Quantpedia blogu (Dujava, Ocak 2026), 1969-12-31 ile 2025-09-30 arası, ETF öncesi dönem altın spot ve tahvil endeksinin iç yeniden inşası. Örneklem dışı doğrulama YOK (yazar ileri-test ve bootstrap'in gerekli olduğunu söylüyor ama sunmuyor); maliyet ve ETF ücreti hesaba katılmamış. Yani yalnız örneklem içi.",
+  "veri_uygun": [
+    false,
+    "Tahvil bacağı (IEF) envanterde yok; yalnız altın momentumu ile sadeleştirirse kaynak kanıtı geçerli kalmaz. Altın bacağı XAU ile kurulabilir ama kural iki varlık gerektirir. Dukascopy'de ABD tahvil CFD'si var mı bilinmiyor, doğrulanmadı."
+  ],
+  "kodlanabilirlik": {
+    "puan": 3,
+    "gerekce": "İki 12 aylık işaret testi, aylık dengeleme; mekanik."
+  },
+  "belirsizlikler": [
+    "Tahvil endeksi yerine ne kullanılacak (veri sorunu)",
+    "Aylık sonundaki getiri hesabının günlük mü aylık mı örneklendiği (metinde aylık)",
+    "Blog; hakemli değil, tek örneklem içi sonuç"
+  ],
+  "uyumluluk_notu": "1d/aylık. Tek altın kuralı değil, çapraz varlık filtresi. Tahvil verisi yoksa uygulanamaz; ancak XAU için 12 aylık TSMOM kartlarıyla (v2__tsmom-12-1) büyük ölçüde örtüşür. Düşük öncelik.",
+  "varyantlar": [
+    "1, 3, 6 aylık geriye bakış analizde de test ediliyor (nihai kural 12 ay)"
+  ],
+  "anahtar_kelimeler": [
+    "altin",
+    "tahvil",
+    "12-aylik",
+    "rejim",
+    "gld",
+    "aylik"
+  ]
+}

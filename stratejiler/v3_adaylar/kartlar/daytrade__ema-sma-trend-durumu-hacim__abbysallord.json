@@ -1,0 +1,91 @@
+{
+  "kart_id": "daytrade__ema-sma-trend-durumu-hacim__abbysallord",
+  "ad": "EMA/SMA Trend Sürme (durum bazlı, TP yok, ATR izleyen stop)",
+  "stil": "daytrade",
+  "kaynak": {
+    "url": "https://github.com/abbysallord/trading-bot",
+    "lisans": "YOK",
+    "tur": "github"
+  },
+  "ozet": "Hızlı EMA yavaş EMA'nın, kapanış da SMA trend ortalamasının üstündeyken ve hacim ortalamanın üstündeyse long açar; kâr hedefi yoktur, momentum bozulunca veya ATR izleyen stop'a değince çıkar.",
+  "kategori": "trend_takip",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "kripto",
+  "zaman_dilimi": {
+    "islem": "1h",
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {
+      "ad": "EMA hızlı",
+      "parametreler": {
+        "periyot": 4
+      }
+    },
+    {
+      "ad": "EMA yavaş",
+      "parametreler": {
+        "periyot": 9
+      }
+    },
+    {
+      "ad": "SMA trend",
+      "parametreler": {
+        "periyot": 20
+      }
+    },
+    {
+      "ad": "Hacim oranı",
+      "parametreler": {
+        "tanim": "hacim / SMA(20, hacim)"
+      }
+    },
+    {
+      "ad": "ATR",
+      "parametreler": {
+        "periyot": 14
+      }
+    }
+  ],
+  "long_giris": [
+    "Pozisyon yokken: EMA(4) > EMA(9)",
+    "Kapanış > SMA(20)",
+    "hacim / SMA20(hacim) >= 1.0",
+    "En az 50 mum geçmiş"
+  ],
+  "short_giris": [],
+  "stop_loss": "Backtest motorunda: giriş fiyatı - 4 x ATR(14), sonra her barda bar yükseği - 4 x ATR ile yalnız yukarı çekilen izleyen stop. Canlı main.py ayrıca sabit %5 felaket stopu hesaplar.",
+  "kar_al": null,
+  "iz_suren_stop": "Bar yüksekliğinden 4 x ATR(14) aşağıda, yalnız yukarı taşınan izleyen stop (backtest kodu)",
+  "zaman_cikisi": "Çıkış: (kapanış < EMA(4) ve EMA(4) < EMA(9)) veya kapanış < SMA(20)",
+  "filtreler": [
+    "Yalnız long, tek açık pozisyon"
+  ],
+  "pozisyon_risk": "Kaynakta kasanın %90'ı tek işlem (kural değil, bot ayarı)",
+  "iddia_edilen_performans": null,
+  "kanit": null,
+  "veri_uygun": [
+    true,
+    "Kripto 1h OHLCV+hacim bizde var."
+  ],
+  "kodlanabilirlik": {
+    "puan": 3,
+    "gerekce": "Koşullar sayısal; yalnız stop tanımı backtest ile canlıda farklı."
+  },
+  "belirsizlikler": [
+    "Dosya başlığı/docstring EMA9/21 ve SMA50 yazıyor, config.py gerçek değerleri EMA4/EMA9/SMA20 veriyor; kartta config alındı",
+    "Backtest 'current_high' tanımı bar yüksekliği varsayıldı",
+    "Giriş fiyatı sinyal barı kapanışı mı sonraki açılış mı: kaynakta kesin değil"
+  ],
+  "uyumluluk_notu": "Mevcut daytrade__ema-9-21-50-rsi-hacim__gooddinosaur kesişim + sabit %1.5 stop + RSI iken bu durum bazlı (kesişim değil), TP'siz, ATR izleyen stoplu. Kripto 1h uyumlu.",
+  "varyantlar": [
+    "EMA/SMA periyotları config.py'de ayarlanabilir"
+  ],
+  "anahtar_kelimeler": [
+    "ema",
+    "sma",
+    "hacim",
+    "atr-izleyen-stop",
+    "trend"
+  ]
+}

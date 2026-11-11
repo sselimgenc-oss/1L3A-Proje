@@ -1,0 +1,82 @@
+{
+  "stop_loss": null,
+  "kar_al": null,
+  "iz_suren_stop": null,
+  "zaman_cikisi": "Matris her 20 günde bir yeniden kurulur; pozisyon her gün sinyale göre ayarlanır, durum satırı bir sonraki karara kadar geçerli",
+  "short_giris": [
+    "sinyal < 0 ise short; hedef pozisyon = -min(1, |sinyal|/0,5)"
+  ],
+  "filtreler": [
+    "Isınma: ilk 500 bar işlem yok",
+    "FILTER modu (varyant): dış bir stratejinin pozisyonunu tut, sinyal < -0,15 ise düzleş"
+  ],
+  "pozisyon_risk": "Pozisyon sinyalle orantılı (0-1); maliyet varsayımı değişimde 1 baz puan",
+  "varyantlar": [
+    "FILTER modu: 10/50 SMA sinyalini bear-only kapı olarak sınırlama",
+    "Gelişmiş mod: KMeans kümeleri (ML, alınmadı)"
+  ],
+  "kart_id": "swing__markov-gecis-matrisi-rejim-sinyali__bpeters19",
+  "ad": "Markov Geçiş Matrisi: 20 Günlük Getiri Durumu, P(Boğa)-P(Ayı) Sinyali",
+  "stil": "swing",
+  "kaynak": {
+    "url": "https://github.com/bpeters19/Markov-Trading-Bot",
+    "lisans": "yok",
+    "tur": "github"
+  },
+  "ozet": "Her gün 20 günlük getiri +%5 üstü BOĞA, -%5 altı AYI, arası YATAY diye etiketlenir. Yalnız geçmiş veriden, üst üste binmeyen 20 günlük adımlarla durum geçiş matrisi kurulur; bugünkü durumun satırından P(boğa) - P(ayı) sinyal olur ve pozisyon boyutu/yönü bu sinyale göre belirlenir.",
+  "kategori": "diger",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "genel",
+  "zaman_dilimi": {
+    "islem": "1d",
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {
+      "ad": "20 günlük getiri",
+      "parametreler": {
+        "pencere": 20,
+        "boga_esik": 0.05,
+        "ayi_esik": -0.05
+      }
+    },
+    {
+      "ad": "Geçiş matrisi",
+      "parametreler": {
+        "adim": 20,
+        "yeniden_kurma": "her 20 günde",
+        "isitma": 500
+      }
+    }
+  ],
+  "long_giris": [
+    "Her gün kapanışta durumu etiketle (ret20 >= +%5 BOĞA, <= -%5 AYI, aksi YATAY)",
+    "Matrisi yalnız bugüne kadarki etiketlerle kur: her 20. etiketi örnekle, ardışık örnekler arası geçişleri say, satırları normalleştir (düzeltme yok)",
+    "sinyal = P(BOĞA|bugünkü durum) - P(AYI|bugünkü durum)",
+    "sinyal > 0 ise long; hedef pozisyon = min(1, sinyal/0,5) x sermaye payı"
+  ],
+  "iddia_edilen_performans": null,
+  "kanit": "Kaynağın kendi BTC-USD demosu (STANDALONE, 2019-2026, ~2137 gün): düzeltilmiş matrisle toplam getiri -%36,7, Sharpe -0,27, PF 0,94, MaxDD -%55,6; al-tut +%507, Sharpe 0,68. Yani kaynakta kural BTC'de al-tuttan kötü (rapor çıktısı, doğrulanmadı).",
+  "veri_uygun": [
+    true,
+    "Günlük kapanış yeterli; Binance perp 5m'den günlük türetilir, hisse/emtia da olur."
+  ],
+  "kodlanabilirlik": {
+    "puan": 3,
+    "gerekce": "Fiyat-tabanlı mod tamamen mekanik; KMeans ve HMM modları kart dışı (ML)."
+  },
+  "belirsizlikler": [
+    "Matris 20 günlük adımda tahmin ediyor ama sinyal günlük uygulanıyor: sinyal aslında 20 gün sonraki durumu söylüyor",
+    "Seyrek durumlarda satır sıfır olabilir, düzeltme yok",
+    "Kaynak kodunda pozisyon dünün durumundan alınıp bir bar daha gecikmeli kazanıyor; uygulamada karar kapanışta, işlem sonraki barda",
+    "Kanıt negatif: kural gerçekten edge taşıyor mu belirsiz"
+  ],
+  "uyumluluk_notu": "Mevcut entropi-rejim-sigmoid__akshathp0 farklı (4 rejim + sigmoid z-skor). Bu kart ayrık durum geçiş olasılığı. Düşük beklenti, test maliyeti düşük.",
+  "anahtar_kelimeler": [
+    "markov",
+    "gecis-matrisi",
+    "rejim",
+    "20-gun-getiri",
+    "walk-forward"
+  ]
+}

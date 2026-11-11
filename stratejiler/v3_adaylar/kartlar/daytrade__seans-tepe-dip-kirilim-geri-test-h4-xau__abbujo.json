@@ -1,0 +1,89 @@
+{
+  "kart_id": "daytrade__seans-tepe-dip-kirilim-geri-test-h4-xau__abbujo",
+  "ad": "XAU M15 Önceki Seans Tepe/Dip Kırılım + Geri Test (H4 Trend Uyumlu)",
+  "stil": "daytrade",
+  "kaynak": {
+    "url": "https://github.com/abbujo/Aggressor-XAUUSD",
+    "lisans": "yok",
+    "tur": "github"
+  },
+  "ozet": "Altında Londra (08-13 EET) ve New York (13-22 EET) seanslarının tepe ve dibi bir sonraki seansta seviye olarak alınır; son 19 M15 barda seviye aşılmışsa ve fiyat seviyeye geri dönüp doğru renkli mumla kapanırsa, H4 trendi yönünde limit emirle girilir (stop H1 swing, hedef 2R).",
+  "kategori": "destek_direnc",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "emtia",
+  "zaman_dilimi": {
+    "islem": "15m",
+    "ust_filtre": "4h"
+  },
+  "gostergeler": [
+    {
+      "ad": "Seans tepe/dip",
+      "parametreler": {
+        "londra": "08:00-12:59 EET (aynı gün, 13-22 arası kullanılır)",
+        "new_york": "13:00-21:59 EET (önceki gün, 08-13 arası kullanılır)",
+        "min_bar": 4
+      }
+    },
+    {
+      "ad": "Swing pivot (H4 trend sınıflaması)",
+      "parametreler": {
+        "H4_pencere": 3,
+        "H4_bar_sayisi": 40
+      }
+    }
+  ],
+  "long_giris": [
+    "Saat 13-22 EET: aynı günün Londra seansı tepesi (>=4 M15 bar) seviye; saat 08-13 EET: önceki günün NY seansı tepesi seviye",
+    "H4 trendi AŞAĞI değil (YUKARI veya YATAY): son swing tepe > önceki VE son swing dip > önceki = YUKARI; ters = AŞAĞI; aksi = YATAY",
+    "Son 19 M15 barın (mevcut hariç) en az birinin kapanışı > seviye + 3 USD (kırılım)",
+    "Sinyal mumu Low <= seviye + 12 USD VE Close > seviye VE Close > Open (yükseliş mumu)",
+    "Giriş bölgesi = seviye +/- 10 USD; limit emir bölge içinde dolar (kaynak: sonraki M5 mumları, 24 saat/10 saat bekleme)"
+  ],
+  "short_giris": [
+    "Aynı seans seviyelerinin DİBİ seviye",
+    "H4 trendi YUKARI değil (AŞAĞI veya YATAY)",
+    "Son 19 M15 barın en az birinin kapanışı < seviye - 3 USD",
+    "Sinyal mumu High >= seviye - 12 USD VE Close < seviye VE Close < Open",
+    "Giriş bölgesi ve dolum long ile aynı mantık"
+  ],
+  "stop_loss": "Aynı depodaki ortak SL/TP: giriş fiyatının en az 8 USD ötesindeki son 50 kapanmış H1 mum (pivot penceresi 5) swing seviyesi; yoksa giriş -/+ 8 USD (EMA21 kartıyla aynı yöntem)",
+  "kar_al": "Stop mesafesinin 2 katı (2R); spread sonrası min 1,5R",
+  "iz_suren_stop": null,
+  "zaman_cikisi": "Doluştan 288 M5 bar (24 saat) sonra piyasa fiyatından kapat",
+  "filtreler": [
+    "H4 trend uyumu (BUY: UP/RANGE, SELL: DOWN/RANGE)",
+    "Seans saat filtresi yok (24/5), ancak seviye seansa göre seçiliyor",
+    "Aynı anda en fazla 3 pozisyon (kaynak)"
+  ],
+  "pozisyon_risk": "Kaynak: 1. işlem %1,6, 2. %1,2, 3. %1,0 risk; bizde risk limitleri kodda",
+  "iddia_edilen_performans": "BACKTEST_GOLDEN.md: SLR + EMA pullback birlikte 2021-2025, 2.148 işlem, kazanma %58, PF 2,18 (iddia, doğrulanmadı, OOS yok; 2R hedefle %58 şüpheli)",
+  "kanit": "core/strategies_system2.py session_level_retest ve SYSTEM_REFERENCE.md açıldı: kural sayısal ve kapanmış M15 bar üzerinden. Kaynak backtest OOS'suz, dolum fiyatı bölge ortası varsayımı, spread/kayma tahmini; sonuç iddiaları doğrulanmadı. EMA21 geri çekilme kuralı ayrı kartta (daytrade__ema21-geri-cekilme-h4-yapi-xau__abbujo).",
+  "veri_uygun": [
+    true,
+    "XAU Dukascopy 5m'de var; M15/H1/H4 yeniden örneklenir. EET saatleri UTC'ye çevrilmeli (yaz/kış kayması)."
+  ],
+  "kodlanabilirlik": {
+    "puan": 2,
+    "gerekce": "Seans seviyeleri, kırılım ve geri test kuralı kodda sayısal; H4 trend sınıflaması, dolum ve USD sabitleri uyarlama ister."
+  },
+  "belirsizlikler": [
+    "Tolerans değerleri (12, 3, 10, 8 USD) altın fiyatına bağlı sabit dolar; ATR'ye bölünerek uyarlanmalı (kaynakta yok)",
+    "EET saat dilimi ve yaz saati: kod bar.hour ile çalışıyor, saat dilimi dönüşümü belirsiz",
+    "Her iki seviye de (tepe ve dip) aynı barda uygun olabilir: kodda ilk uygun seviye döner",
+    "Dolum bölge ortası/limit fiyatı varsayımı gerçek M5 fiyatından farklı olabilir",
+    "Kaynak backtestte SL ve TP aynı M5 barda ise stop önce sayılıyor",
+    "H4 'YATAY' iken hem long hem short serbest"
+  ],
+  "uyumluluk_notu": "Aynı depodaki EMA21 kartıyla SL/TP/H4 filtresi ortak; fark giriş seviyesi (seans tepe/dip kırılım-geri test). Genel swing__kirilim-geri-test ailesine yakın ama seans seviyesi tanımı ve H4 uyumu ayırıyor; kalabalık aile uyarısı.",
+  "varyantlar": [
+    "Aynı depoda asian_range_breakout, liquidity_sweep_reversal, fair_value_gap, order_block_retest, prev_day_hl_retest gibi 10 setup (bu karta alınmadı)"
+  ],
+  "anahtar_kelimeler": [
+    "seans-tepe-dip",
+    "kirilim-geri-test",
+    "h4-trend",
+    "xau",
+    "londra",
+    "new-york"
+  ]
+}

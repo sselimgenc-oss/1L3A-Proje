@@ -1,0 +1,79 @@
+{
+  "stop_loss": null,
+  "kar_al": null,
+  "iz_suren_stop": null,
+  "zaman_cikisi": "APR < %2 olunca kapat (günlük değerlendirme)",
+  "short_giris": [],
+  "filtreler": [
+    "Evren v1: BTC, ETH, BNB, XRP, SOL",
+    "En fazla N sembol sınırı yok (hepsi bant içindeyse eşit ağırlık)",
+    "Isınma 14 gün"
+  ],
+  "pozisyon_risk": "Eşit ağırlık; delta-nötr (spot ve perp eşit nominal); maliyet varsayımı: spot taker %0,10, perp taker %0,05, bacak başı kayma %0,02",
+  "varyantlar": [
+    "v2 üst-K seçim + basis vetosu, v3 ters basis-vol boyutlandırma (kaynakta sonraki sürümler)"
+  ],
+  "kart_id": "swing__funding-ewma-histerezis-carry__samuelahou-g20",
+  "ad": "Funding Carry v1: EWMA Funding APR Histerezis (Delta-Nötr)",
+  "stil": "swing",
+  "kaynak": {
+    "url": "https://github.com/samuelahou-g20/MM-Automation",
+    "lisans": "yok",
+    "tur": "github"
+  },
+  "ozet": "Her sembolün günlük funding gelirinin 7 günlük yarı ömürlü EWMA ortalaması yıllıklandırılır (APR). APR >= %8 ise spot long + perp short ile funding toplanır; APR >= %2 oldukça pozisyon tutulur, altına düşünce çıkılır. Tutulan semboller eşit ağırlık.",
+  "kategori": "diger",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "kripto",
+  "zaman_dilimi": {
+    "islem": "1d",
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {
+      "ad": "EWMA funding",
+      "parametreler": {
+        "yari_omur_gun": 7,
+        "yillik_carpan": 365
+      }
+    },
+    {
+      "ad": "Histerezis eşikleri",
+      "parametreler": {
+        "giris_apr": 0.08,
+        "tut_apr": 0.02
+      }
+    }
+  ],
+  "long_giris": [
+    "Günlük karar: gunluk_funding_geliri = o günün funding oranları toplamı (short perp bacağı açısından)",
+    "APR = ewma(gunluk_funding, yari_omur=7 gün) x 365",
+    "Pozisyon yoksa APR >= %8 ise gir (spot long + eşit değerde perp short)",
+    "Pozisyon varsa APR >= %2 oldukça tut"
+  ],
+  "iddia_edilen_performans": null,
+  "kanit": "Repo README (iddia, doğrulanmadı): v0 (histerezissiz) 5 majörde net +%1,6, Sharpe 0,84, kapıyı geçemedi (devir ~54x); v1 histerezisle devri düşürüyor, majörlerde Sharpe 6,4 geniş evrende ~1,5. Sonraki sürümler (v2+) bu karta dahil değil.",
+  "veri_uygun": [
+    false,
+    "Delta-nötr için spot bacak gerekir, bizde spot yok; funding geçmişi ve perp OHLCV var. Yalnız perp short yönsel risk taşır, aynı strateji olmaz."
+  ],
+  "kodlanabilirlik": {
+    "puan": 3,
+    "gerekce": "Karar kuralı sade ve saf fonksiyon; asıl engel veri (spot bacak)."
+  },
+  "belirsizlikler": [
+    "Spot bacağı olmadan PnL funding + perp fiyat hareketi; delta-nötr sayılamaz",
+    "Funding işareti: short perp pozitif funding alır",
+    "EWMA pandas varsayılanı (adjust=True) mı kaynakta öyle, kod pandas ewm(halflife=7).mean()",
+    "Eşikler 'araştırma varsayılanı', elde tutma örnekleminde ayarlanmamış denmiş ama doğrulanmadı",
+    "Aralık değişimi: funding 8s/4s sembole göre değişir"
+  ],
+  "uyumluluk_notu": "Mevcut funding kartları (kesit decil, z90-3gün, haftalık tercil) yönsel/kesitsel sıralama; bu mutlak eşikli carry toplama. Spot bacak yok: ancak funding gelir serisi olarak simüle edilebilir (fiyat riski hedge edilmiş varsayımıyla).",
+  "anahtar_kelimeler": [
+    "funding",
+    "carry",
+    "ewma",
+    "histerezis",
+    "delta-notr"
+  ]
+}

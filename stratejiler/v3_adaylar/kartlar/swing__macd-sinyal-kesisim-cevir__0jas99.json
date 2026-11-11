@@ -1,0 +1,63 @@
+{
+  "kart_id": "swing__macd-sinyal-kesisim-cevir__0jas99",
+  "ad": "MACD(12,26,9) Sinyal Kesişimi, Pozisyon Çevirme",
+  "stil": "swing",
+  "kaynak": {
+    "url": "https://github.com/0jas99/NSE-Backtester-",
+    "lisans": "yok (belirtilmemiş)",
+    "tur": "github"
+  },
+  "ozet": "MACD çizgisi sinyal çizgisini yukarı kesince long, aşağı kesince short; pozisyon ters kesişimde çevrilir. Stop ve hedef yok.",
+  "kategori": "momentum",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+    "islem": "1d",
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {
+      "ad": "MACD",
+      "parametreler": {
+        "hizli": 12,
+        "yavas": 26,
+        "sinyal": 9,
+        "ema": "adjust=False"
+      }
+    }
+  ],
+  "long_giris": [
+    "MACD > sinyal ve bir önceki barda MACD <= sinyal (kapanışta); sinyal t'de, işlem sonraki barda"
+  ],
+  "short_giris": [
+    "MACD < sinyal ve bir önceki barda MACD >= sinyal"
+  ],
+  "stop_loss": null,
+  "kar_al": null,
+  "iz_suren_stop": null,
+  "zaman_cikisi": "Çıkış yalnız ters kesişim (long'dan short'a çevir)",
+  "filtreler": [],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": null,
+  "kanit": null,
+  "veri_uygun": [
+    true,
+    "Günlük OHLCV; kripto ve Dukascopy hisse/XAU uygulanabilir."
+  ],
+  "kodlanabilirlik": {
+    "puan": 3,
+    "gerekce": "Tek göstergeli tamamen mekanik."
+  },
+  "belirsizlikler": [
+    "Stop yok: kuyruk riski; risk limitleri bizim tarafta zorunlu",
+    "Dolum anı (sinyal barı kapanışı mı sonraki açılış mı) kaynakta açık değil",
+    "Kaynakta kanıt yok; klasik MACD kesişimi, yüksek whipsaw bekleniyor"
+  ],
+  "uyumluluk_notu": "Düz MACD kesişimi; havuzda MACD türevleri filtreli (SMA200, histogram vb.), saf kesişim çevirme yok.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+    "macd",
+    "sinyal-kesisimi",
+    "cevir"
+  ]
+}

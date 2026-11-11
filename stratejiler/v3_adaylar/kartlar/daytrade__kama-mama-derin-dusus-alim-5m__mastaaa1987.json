@@ -1,0 +1,116 @@
+{
+  "kart_id": "daytrade__kama-mama-derin-dusus-alim-5m__mastaaa1987",
+  "ad": "KamaFama_2: KAMA/MAMA/FAMA Derin Düşüş Alımı (5m)",
+  "stil": "daytrade",
+  "kaynak": {
+    "url": "https://github.com/Mastaaa1987/freqtrade-strategie/tree/main/KamaFama",
+    "lisans": "MIT",
+    "tur": "github"
+  },
+  "ozet": "Fiyat son 4 saatte en az %5, son 24 saatte en az %12,5 düşmüş ve MAMA, FAMA'nın belirgin altına inmişken (aşırı satım) long açılır. Pozisyon kâra geçip hızlı stokastik 84'ü aşınca kapanır. Yalnız long, 5 dakikalık grafik.",
+  "kategori": "ortalamaya_donus",
+  "piyasa_rejimi": "volatil",
+  "orijinal_piyasa": "kripto",
+  "zaman_dilimi": {
+    "islem": "5m",
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {
+      "ad": "MAMA/FAMA (Ehlers, TA-Lib, hl2 üzerinden)",
+      "parametreler": {
+        "fastlimit": 0.25,
+        "slowlimit": 0.025,
+        "mama_diff": "(MAMA-FAMA)/hl2"
+      }
+    },
+    {
+      "ad": "KAMA",
+      "parametreler": {
+        "periyot": 84,
+        "fiyat": "close"
+      }
+    },
+    {
+      "ad": "CTI (Ehlers korelasyon trend göstergesi)",
+      "parametreler": {
+        "periyot": 20
+      }
+    },
+    {
+      "ad": "Williams %R",
+      "parametreler": {
+        "periyot": 14
+      }
+    },
+    {
+      "ad": "RSI",
+      "parametreler": {
+        "periyotlar": [
+          84,
+          112
+        ]
+      }
+    },
+    {
+      "ad": "Hızlı Stokastik (fastk)",
+      "parametreler": {
+        "fastk_periyot": 5,
+        "fastd_periyot": 3
+      }
+    }
+  ],
+  "long_giris": [
+    "KAMA(84) > FAMA",
+    "FAMA > MAMA x 0,981",
+    "(MAMA-FAMA)/hl2 < -0,025",
+    "Williams %R(14) < -61,3",
+    "CTI(20) < -0,715",
+    "48 mumluk en yüksek kapanış >= kapanış x 1,05",
+    "288 mumluk en yüksek kapanış >= kapanış x 1,125",
+    "RSI(84) < 60 ve RSI(112) < 60",
+    "Tüm koşullar bar kapanışında sağlanınca bir sonraki mumun açılışında piyasa emriyle gir"
+  ],
+  "short_giris": [],
+  "stop_loss": "Girişten %25 aşağıda sabit stop",
+  "kar_al": "Pozisyon kârdayken (kâr > 0) hızlı stokastik fastk(5,3) > 84 olunca piyasa emriyle çık. minimal_roi 0:1 = %100 kâr (pratikte devre dışı)",
+  "iz_suren_stop": "Kâr >= %5 olunca stop güncel fiyatın %0,2 altına çekilir (kodda custom_stoploss -0,002; freqtrade'de güncel fiyata göre okunur, kaynakta açıkça yazmıyor)",
+  "zaman_cikisi": null,
+  "filtreler": [
+    "Koruma: son 60 mumda pair toplam kâr <= -%5 ise o pair 60 mum durur",
+    "Çıkış sonrası 5 mum bekleme (cooldown)",
+    "Giriş için 400 mum ısınma"
+  ],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": "README: kazanma oranı ~%96-98, canlı (dry-run) denemede küçük kazançlar; ancak aynı README'de tek günlük -%14,69 gibi günler de var (iddia, doğrulanmadı)",
+  "kanit": "Yazarın README iddiası (backtest/dry-run, doğrulanmadı): win rate ~%96-98; kayıplar tek seferde -%25'e kadar gidebilir, kazançlar küçük (kuyruk riski).",
+  "veri_uygun": [
+    true,
+    "Binance USDT çiftleri, 5m OHLCV yeterli; hacim/orderbook gerekmez. Freqtrade config'i Binance USDT."
+  ],
+  "kodlanabilirlik": {
+    "puan": 3,
+    "gerekce": "Tüm giriş ve çıkış kuralları sayısal ve kodda açık; MAMA/CTI/STOCHF standart kütüphane göstergeleri."
+  },
+  "belirsizlikler": [
+    "İntrabar (canlı) fastk hesabı ile backtest mum kapanışı farklı; biz yalnız kapanış mumuyla kodlamalı",
+    "%25 stop çok geniş: tek işlem kaybı küçük kazançların çoğunu siler, risk limiti koddaki sınırdan geçmeli",
+    "custom_stoploss'un %0,2 iz sürme yorumu doğrulanmalı",
+    "Kaynakta pozisyon boyutu/risk kuralı yok",
+    "Aynı repodaki KamaFama.py ve KamaFama_3.py farklı eşikli kardeş sürümler (incelenmedi/ayrı kart yok)"
+  ],
+  "uyumluluk_notu": "5m Binance USDT perp'e doğrudan uygulanır; yalnız long, funding'e duyarlı olabilir. dis__ama-egri-donus-filtresi ile yalnız KAMA ortak, kural farklı.",
+  "varyantlar": [
+    "KamaFama_3: eşikler optimizasyon parametresi (buy_r_14=-80,2; buy_cti=-0,56; rsi eşikleri 90/99), ek koşul MAMA > KAMA"
+  ],
+  "anahtar_kelimeler": [
+    "kama",
+    "mama",
+    "fama",
+    "derin-dusus",
+    "williams-r",
+    "cti",
+    "hizli-stokastik",
+    "kripto-5m"
+  ]
+}

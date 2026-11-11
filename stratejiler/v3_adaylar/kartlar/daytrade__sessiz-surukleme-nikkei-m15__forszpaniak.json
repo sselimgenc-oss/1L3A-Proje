@@ -1,0 +1,93 @@
+{
+  "kart_id": "daytrade__sessiz-surukleme-nikkei-m15__forszpaniak",
+  "ad": "Sessiz Sürüklenme: Düşük Hacimli Yükselişte Long (Nikkei M15)",
+  "stil": "daytrade",
+  "kaynak": {
+    "url": "https://www.mql5.com/de/code/78027",
+    "lisans": "MQL5 CodeBase, ücretsiz (açık lisans adı yok)",
+    "tur": "blog"
+  },
+  "ozet": "Gün içi 11:00-14:59 sunucu saatinde, fiyat 34 barlık ortalamanın yarım standart sapma üstündeyken, MACD histogramı ATR cinsinden küçükken ve tick hacmi aynı saatin 20 günlük ortalamasının %60'ının altındayken sonraki barın açılışında long girilir; 17:00'de kapatılır.",
+  "kategori": "trend_takip",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "genel",
+  "zaman_dilimi": {
+    "islem": "15m",
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {
+      "ad": "SMA/MA",
+      "parametreler": {
+        "periyot": 34,
+        "tip": "kaynakta yok"
+      }
+    },
+    {
+      "ad": "MACD histogram / ATR",
+      "parametreler": {
+        "esik": 0.2,
+        "ayar": "kaynakta yok"
+      }
+    },
+    {
+      "ad": "ATR",
+      "parametreler": {
+        "stop_carpan": 4.0,
+        "hedef_carpan": 3.5,
+        "periyot": "kaynakta yok"
+      }
+    },
+    {
+      "ad": "Hacim",
+      "parametreler": {
+        "esik": "aynı gün saatinin 20 gün ortalamasının %60'ı"
+      }
+    }
+  ],
+  "long_giris": [
+    "Kapanan bar sinyal penceresinde (11:00-14:59 sunucu saati; giriş 11:15-15:00 arası)",
+    "Kapanış > 34 barlık ortalama + 0,5 x standart sapma",
+    "MACD histogramı / ATR < 0,2",
+    "Bar tick hacmi < aynı saatin son 20 günlük ortalama hacminin %60'ı",
+    "Açık pozisyon yok, hafta içi",
+    "Giriş = sonraki barın açılışı"
+  ],
+  "short_giris": [],
+  "stop_loss": "Giriş - 4 x ATR",
+  "kar_al": "Giriş + 3,5 x ATR",
+  "iz_suren_stop": null,
+  "zaman_cikisi": "Sunucu saati 17:00'de açık pozisyon kapatılır (işlemlerin %63'ü buradan çıkıyor)",
+  "filtreler": [
+    "Hafta içi",
+    "Tek pozisyon"
+  ],
+  "pozisyon_risk": "Sabit lot (kaynakta 10 bin hesapta 15 lot; risk yüzdesi yok)",
+  "iddia_edilen_performans": "Yazar testi 2021-: net kâr %87,8, kâr faktörü 1,68, kazanma oranı %61,8, 309 işlem, maks. düşüş %8,5 (iddia, doğrulanmadı)",
+  "kanit": "MQL5 CodeBase sayfası, yazarın kendi verisi ve kendi sağlamlık testleri (PF 1,50 çift komisyon, örneklem dışı PF 1,81 vb.) iddia (doğrulanmadı). Kod (.mq5) eki açılmadı, yalnız sayfa metni okundu.",
+  "veri_uygun": [
+    true,
+    "Endeks CFD'si (JPN225); bizde Nikkei yok. Kural 15m OHLCV + tick hacmi ister, Binance perp ve Dukascopy emtia/hisse 15m'e uyarlanabilir; sunucu saati seans tanımı Nikkei'ye özgü, uyarlamada seans penceresi yeniden tanımlanmalı."
+  ],
+  "kodlanabilirlik": {
+    "puan": 2,
+    "gerekce": "Eşikler net ama MA tipi, standart sapma penceresi, MACD ayarları ve ATR periyodu kaynakta yok; kod eki okunmadı."
+  },
+  "belirsizlikler": [
+    "MA tipi, standart sapma penceresi kaynakta yok",
+    "MACD hızlı/yavaş/sinyal ayarları kaynakta yok",
+    "ATR periyodu kaynakta yok",
+    "Sunucu saati GMT+2/+3 kayması; seans penceresi bu saate bağlı",
+    "Hacim 'tick hacmi'; bizim hacim verisi aynı anlamda olmayabilir",
+    "Kaynak tek yazar, çok aday denenmiş (385 aday), seçilim yanlılığı riski"
+  ],
+  "uyumluluk_notu": "Endeks vadeli/CFD kuralı; veri setimizde Nikkei yok. Kripto 24 saat olduğundan 'aynı saatin hacim ortalaması' ve 17:00 kapanışı UTC seans penceresine çevrilmeli. Mevcut sessiz-trend kartlarıyla aynı değil; hacim düşüklüğü şartı yeni.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+    "dusuk-hacim",
+    "gun-ici",
+    "atr-stop",
+    "macd-atr",
+    "endeks"
+  ]
+}

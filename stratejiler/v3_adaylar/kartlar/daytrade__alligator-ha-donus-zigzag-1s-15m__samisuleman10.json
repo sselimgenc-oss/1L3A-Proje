@@ -1,0 +1,104 @@
+{
+  "kart_id": "daytrade__alligator-ha-donus-zigzag-1s-15m__samisuleman10",
+  "ad": "Alligator Çene Dönüşü (1s Heikin Ashi) + 15m Hizalama + ZigZag Yapı Stopu",
+  "stil": "daytrade",
+  "kaynak": {
+    "url": "https://github.com/samisuleman10/ai-trade",
+    "lisans": "yok",
+    "tur": "github"
+  },
+  "ozet": "1 saatlik Heikin Ashi mumu Alligator çenesini (Jaw) ters yönden keserken 1s Alligator hâlâ eski yönde açıksa ve 15m Alligator yeni yönde açıksa, 15m ZigZag destek/direnç ötesine stop koyup bir sonraki 15m açılışında girilir; hedef 1R.",
+  "kategori": "trend_takip",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+    "islem": "15m",
+    "ust_filtre": "1h"
+  },
+  "gostergeler": [
+    {
+      "ad": "Alligator (SMMA medyan fiyat)",
+      "parametreler": {
+        "jaw": "SMMA(13) 8 bar ileri",
+        "teeth": "SMMA(8) 5 bar ileri",
+        "lips": "SMMA(5) 3 bar ileri",
+        "egim_geriye_bakis": 3,
+        "min_cizgi_ayrimi": "|Lips-Jaw|/Close >= 0.0002",
+        "ayrim_genisliyor": true
+      }
+    },
+    {
+      "ad": "Heikin Ashi",
+      "parametreler": {
+        "zaman_dilimi": "1h"
+      }
+    },
+    {
+      "ad": "ZigZag (Heikin Ashi high/low üzerinde)",
+      "parametreler": {
+        "depth": 18,
+        "deviation": "5 tick x 0.01",
+        "backstep": 3,
+        "zaman_dilimi": "15m"
+      }
+    },
+    {
+      "ad": "ATR (Wilder/SMMA)",
+      "parametreler": {
+        "periyot": 14,
+        "stop_tamponu_carpan": 0.1
+      }
+    }
+  ],
+  "long_giris": [
+    "Tamamlanan 1s Heikin Ashi mumu: HA açılış < 1s Jaw < HA kapanış (çene yukarı kesildi)",
+    "1s Alligator 'aşağı açık' (Lips<Teeth<Jaw, üçü de 3 bar önceye göre düşük, |Lips-Jaw|/Close >= 0.0002 ve ayrım 3 bar öncekinden büyük)",
+    "1s mum kapanışından hemen önceki son tamamlanmış 15m Alligator 'yukarı açık' (Lips>Teeth>Jaw, üçü de 3 bar önceye göre yüksek, aynı ayrım koşulları)",
+    "Aktif (kırılmamış) onaylı 15m ZigZag destek seviyesi mevcut",
+    "Giriş: 1s mum kapanışından sonraki ilk 15m mumunun açılışı"
+  ],
+  "short_giris": [
+    "Tamamlanan 1s Heikin Ashi mumu: HA açılış > 1s Jaw > HA kapanış",
+    "1s Alligator 'yukarı açık'",
+    "Son tamamlanmış 15m Alligator 'aşağı açık'",
+    "Aktif onaylı 15m ZigZag direnç seviyesi mevcut",
+    "Giriş: sonraki 15m mumunun açılışı"
+  ],
+  "stop_loss": "Long: ZigZag destek seviyesi (pivot dibi - 1 tick) - max(0.01, 0.10 x ATR14(15m)); short aynalı. Risk = giriş - stop > 0 olmalı, değilse sinyal atlanır",
+  "kar_al": "1R (giriş +/- giriş-stop mesafesi)",
+  "iz_suren_stop": null,
+  "zaman_cikisi": "Kaynak backtestte: ABD seansı dışı/ilk-son saat/Cuma girişi yok, Cuma son 15m barında zorla kapanış (hisse için); bizde zaman çıkışı kaynak kuralında yok (null)",
+  "filtreler": [
+    "Kaynak backtest: açılış saati, son saat ve Cuma girişleri engelli (SPY RTH); strateji.md'de bu filtre yok"
+  ],
+  "pozisyon_risk": "Sabit riskli ve RRMS değişken boyutlu iki mod var; bizde risk limitleri kodda",
+  "iddia_edilen_performans": "Repo kendi tam-örneklem testinde 38 işlem PF 1,68; kilitli 1 yıllık OOS: 9 işlem, kazanma %44, PF 0,69, ort. R -0,12 (kapıyı geçemedi)",
+  "kanit": "Kaynakta kural deterministik ve nedensel (tüm değerler önceki/tamamlanmış barlardan, giriş sonraki açılış). Repo kendi OOS kapısında BAŞARISIZ; 38 işlem tek enstrüman (SPY), çok az örnek. Kod açıldı: strategy_02_v1_5.py, strategy_01.py (alligator_points, smma), strategy_02_v1_3.py (hourly_structure_points).",
+  "veri_uygun": [
+    true,
+    "OHLCV yeterli: BTC/ETH/SOL ve Dukascopy hisse/XAU 5m'den 15m ve 1s yeniden örneklenir. ZigZag deviation ve minimum tick fiyat ölçeğine bağlı (SPY için 0,05 USD) ve uyarlanmalı."
+  ],
+  "kodlanabilirlik": {
+    "puan": 2,
+    "gerekce": "Tüm kurallar kodda sayısal ve nedensel; ZigZag onay mantığı (depth/backstep/deviation, eşit uç kümesinde son bar) karmaşık ama tam tanımlı. Mutlak tick parametreleri uyarlama ister."
+  },
+  "belirsizlikler": [
+    "ZigZag deviation = 5 x minimum_tick(0.01)=0,05 USD: SPY'ye özgü mutlak değer; kripto/XAU için ATR çarpanına çevrilmeli (kaynakta yok)",
+    "Yapı seviyesi 15m mumların Heikin Ashi high/low'undan hesaplanıyor (kaynak kodda), strategy.md ise sade 'ZigZag support' diyor",
+    "Kaynak OOS testinde başarısız (PF 0,69, 9 işlem): kenar kanıtı yok, yalnız mekanik aday",
+    "Stop-hedef aynı 15m barda görülürse backtest stopu önce sayıyor",
+    "Seans/Cuma filtreleri yalnız backtest betiğinde, hisse seansına özgü"
+  ],
+  "uyumluluk_notu": "Mevcut dis__fraktal-alligator-sky Alligator + fraktal kırılım stop-girişi; bu kart farklı mekanik: HA-Jaw dönüşü + çok zaman dilimli açık-ağız hizalaması + ZigZag stoplu 1R. Kripto 24/7 için Cuma/seans filtresi atılmalı.",
+  "varyantlar": [
+    "Kaynakta v1.1-v1.4 ve v2/v3 sürümleri var; kilitli son sürüm v1.5 alındı"
+  ],
+  "anahtar_kelimeler": [
+    "alligator",
+    "heikin-ashi",
+    "zigzag",
+    "cok-zaman-dilimi",
+    "donus",
+    "1r-hedef"
+  ]
+}

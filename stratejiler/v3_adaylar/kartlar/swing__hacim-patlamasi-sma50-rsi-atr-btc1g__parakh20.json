@@ -1,0 +1,97 @@
+{
+  "stop_loss": "Başlangıç: giriş kapanışı ∓ 2 x ATR(14)",
+  "kar_al": null,
+  "iz_suren_stop": "Long: stop = max(stop, kapanış - 2 x ATR(14)); kapanış stop altına inerse kapat (kapanışa göre). Short ayna",
+  "zaman_cikisi": null,
+  "short_giris": [
+    "Aynı hacim patlaması",
+    "Close < Open",
+    "Close < SMA(50)",
+    "RSI(14) > 30",
+    "Pozisyon yok (ya da long açıkken çevirme)"
+  ],
+  "filtreler": [
+    "Isınma: max(SMA, ATR, RSI, hacim penceresi) bar"
+  ],
+  "pozisyon_risk": null,
+  "varyantlar": [],
+  "kart_id": "swing__hacim-patlamasi-sma50-rsi-atr-btc1g__parakh20",
+  "ad": "BTC Günlük Hacim Patlaması Kırılımı + SMA50 + RSI Filtresi + ATR İz Süren Stop",
+  "stil": "swing",
+  "kaynak": {
+    "url": "https://github.com/Parakh20/iitb-coursework",
+    "lisans": "MIT",
+    "tur": "github"
+  },
+  "ozet": "Günlük hacim son 6 günün ortalaması + 1,5 standart sapmayı aşarken mum yükselişse ve fiyat SMA(50) üstündeyse long, düşüşse ve SMA altındaysa short açılır. RSI aşırı alım/satımda giriş yok; 2 ATR'lik iz süren stop çıkış sağlar, ters sinyalde pozisyon çevrilir.",
+  "kategori": "kirilim",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "kripto",
+  "zaman_dilimi": {
+    "islem": "1d",
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {
+      "ad": "Hacim eşiği",
+      "parametreler": {
+        "pencere": 6,
+        "std_carpan": 1.5,
+        "std": "popülasyon (ddof=0), mevcut bar dahil"
+      }
+    },
+    {
+      "ad": "SMA",
+      "parametreler": {
+        "periyot": 50
+      }
+    },
+    {
+      "ad": "RSI",
+      "parametreler": {
+        "periyot": 14,
+        "yontem": "Wilder"
+      }
+    },
+    {
+      "ad": "ATR",
+      "parametreler": {
+        "periyot": 14,
+        "yontem": "Wilder"
+      }
+    }
+  ],
+  "long_giris": [
+    "Hacim > ortalama(son 6 gün hacmi, bugün dahil) + 1,5 x std(aynı pencere)",
+    "Close > Open (yükseliş mumu)",
+    "Close > SMA(50)",
+    "RSI(14) < 70",
+    "Pozisyon yok (ya da short açıkken aynı koşul = çevirme)"
+  ],
+  "iddia_edilen_performans": null,
+  "kanit": "Repo README (iddia, doğrulanmadı): 2019-09/2024-01 eğitim verisinde varsayılan parametre Sharpe 1,64 (günlük equity), 37 işlem, kazanma %48,6, MaxDD %40,9; iz stop 1,5 ayarı örneklem içi Sharpe 1,89, örneklem dışı 1,11 (aşırı uyum uyarısı kaynakta var). Yarışmadaki 6,32 Sharpe iddiası kodla doğrulanamamış, kaynak da öyle diyor.",
+  "veri_uygun": [
+    true,
+    "BTC günlük kapanış; Binance perp 5m'den günlük türetilir."
+  ],
+  "kodlanabilirlik": {
+    "puan": 3,
+    "gerekce": "Tüm kurallar sayısal; sinyal bar kapanışında, uygulama sonraki bar açılışı olmalı."
+  },
+  "belirsizlikler": [
+    "Kaynak backtest sinyal barının kapanış fiyatından işlem yapıyor (aynı bar kapanışı); biz sonraki bar açılışı kullanmalıyız",
+    "Hacim penceresi mevcut barı içerdiği için eşik kendi spike'ından etkilenir",
+    "Stop kapanış bazlı; gün içi stop yok",
+    "Kısa vadeli hacim penceresi (6) ve işlem sayısı az (37): istatistiksel güç zayıf",
+    "Ücret kaynakta %0,15 nominal"
+  ],
+  "uyumluluk_notu": "Binance perp uyarlanabilir; funding maliyeti shortta yoksayılmış. Mevcut hacim kartlarından (kırmızı-mum-2x-hacim, orb-4s-hacim) farklı: SMA/RSI filtreli iz stoplu çevirme sistemi.",
+  "anahtar_kelimeler": [
+    "hacim-patlamasi",
+    "sma50",
+    "rsi",
+    "atr-iz-stop",
+    "btc",
+    "gunluk"
+  ]
+}

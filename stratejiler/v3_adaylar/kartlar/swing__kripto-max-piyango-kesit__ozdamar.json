@@ -1,0 +1,69 @@
+{
+  "kart_id": "swing__kripto-max-piyango-kesit__ozdamar",
+  "ad": "Kripto MAX (Piyango) Kesitsel Sıralaması",
+  "stil": "swing",
+  "kaynak": {
+    "url": "https://link.springer.com/article/10.1186/s40854-021-00291-9",
+    "lisans": "makale (açık erişim, Financial Innovation)",
+    "tur": "makale"
+  },
+  "ozet": "Her hafta coinleri son bir ayın en yüksek günlük getirisine (MAX) göre sıralar; kriptoda hisselerin tersine, en yüksek MAX'lı coinler ertesi hafta daha iyi getirir. En yüksek MAX grubuna long, en düşüğüne short.",
+  "kategori": "diger",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "kripto",
+  "zaman_dilimi": {
+    "islem": "1d",
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {
+      "ad": "MAX (son bir ayın en yüksek günlük getirisi)",
+      "parametreler": {
+        "pencere": "önceki ay (takvim/kayan 30 gün ayrımı kaynakta net değil, kayan 30 gün UYARLAMA)"
+      }
+    }
+  ],
+  "long_giris": [
+    "Her hafta başında coinleri MAX'a göre sırala; en yüksek MAX'lı grubuna (kaynakta decil 10) long"
+  ],
+  "short_giris": [
+    "En düşük MAX'lı grubuna (kaynakta decil 1) short"
+  ],
+  "stop_loss": null,
+  "kar_al": null,
+  "iz_suren_stop": null,
+  "zaman_cikisi": "Haftalık yeniden sıralama; pozisyon ertesi hafta sonunda kapanır/yenilenir",
+  "filtreler": [],
+  "pozisyon_risk": "Kaynakta değer ağırlıklı ve eşit ağırlıklı portföyler raporlanır; bizde market cap yok, eşit ağırlık, dolar nötr",
+  "iddia_edilen_performans": "Özdamar vd.: en yüksek-en düşük MAX decil farkı değer ağırlıklı ham 3,03%/hafta, eşit ağırlıklı 2,45%/hafta; üç faktör alfa farkı 1,99%/hafta (VW) ve 2,44%/hafta (EW) (iddia, doğrulanmadı)",
+  "kanit": "Financial Innovation 2021 (Özdamar, Akdeniz, Şensoy), CoinMarketCap günlük kapanış, Ocak 2014-Eylül 2020, 17'den 523'e coin, piyasa değeri >5 milyon $ ve ilk 6 ay dışarıda; tüm sonuçlar örneklem içi, ayrı örneklem dışı test yok. Aksine bulgular: Grobys-Sapkota 2019, Jia vd. 2020, Grobys-Junttila 2021 (makalenin kendi ifadesi); Liu-Tsyvinski-Wu'da haftalık pencerede MAXRET anlamsız. Hisse piyasasında (Bali vd.) işaret terstir. İddia doğrulanmadı.",
+  "veri_uygun": [
+    true,
+    "Günlük OHLCV'den MAX hesaplanır (13-15 coin). Ama evren kaynakta 17-523 coin ve decil; 13-15 coinde decil yok, üst/alt 3-4 coin kullanılır; piyasa değeri ağırlığı ve filtresi yok."
+  ],
+  "kodlanabilirlik": {
+    "puan": 2,
+    "gerekce": "Sıralama net; MAX penceresi, üst/alt dilim büyüklüğü ve elde tutma ayrıntısı kaynakta tek anlamlı değil."
+  },
+  "belirsizlikler": [
+    "MAX penceresi 'önceki ay': kayan 30 gün mü takvim ayı mı kaynakta net değil",
+    "Dar evrende (13-15) decil kurulamaz; dilim büyüklüğü uyarlama",
+    "Stop-loss/kar-al kaynakta yok (null)",
+    "Sonuç büyük-küçük coin karışımı; bizim evren yalnız büyük perp coinleri, etki küçük coinlerde güçlü olabilir",
+    "MAX ile volatilite yüksek korelasyonlu (makale belirtir); sinyal volatilite vekili olabilir",
+    "Aksi bulgular var (Grobys vd.); LTW haftalık MAXRET anlamsız"
+  ],
+  "uyumluluk_notu": "Daha önce kartlanmış kesitler funding/hacim/momentum; MAX (aşırı pozitif günlük getiri) yeni. Binance perp günlük barlarla uygulanabilir. Kesit long-short, piyasa nötre yakın. Hisse sonucunun tersi olduğuna dikkat.",
+  "varyantlar": [
+    "MAX(N): en yüksek N (2-5) günlük getirinin ortalaması (makale tablo 3'te dener)"
+  ],
+  "anahtar_kelimeler": [
+    "max",
+    "piyango",
+    "lottery",
+    "kesitsel",
+    "kripto",
+    "haftalik",
+    "long-short"
+  ]
+}

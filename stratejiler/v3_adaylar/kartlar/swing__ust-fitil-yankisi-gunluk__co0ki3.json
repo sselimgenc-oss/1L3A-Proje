@@ -1,0 +1,72 @@
+{
+  "kart_id": "swing__ust-fitil-yankisi-gunluk__co0ki3",
+  "ad": "Üst Fitil Yankısı (TailEcho): fitil P80 + ertesi gün yüksek kırılımı (BTC günlük)",
+  "stil": "swing",
+  "kaynak": {
+    "url": "https://github.com/CO0Ki3/CCNCP",
+    "lisans": "YOK",
+    "tur": "github"
+  },
+  "ozet": "Önceki günün üst fitili son 60 günün %80 persentilini aşıyorsa ve bugünkü kapanış dünün yükseğini geçerse ertesi gün açılışında long; %10 izleyen stop veya en çok 10 gün.",
+  "kategori": "formasyon",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "kripto",
+  "zaman_dilimi": {
+    "islem": "1d",
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {
+      "ad": "Üst fitil",
+      "parametreler": {
+        "tanim": "high - max(open, close)"
+      }
+    },
+    {
+      "ad": "Persentil",
+      "parametreler": {
+        "pencere": 60,
+        "yuzde": 80
+      }
+    }
+  ],
+  "long_giris": [
+    "Dünün üst fitili > dünkü fitilden önceki son 60 günün üst fitil P80 değeri (pencere dünü içermeden kaydırılmış)",
+    "Dünün gövdesi > 0",
+    "Bugünün kapanışı > dünün yükseği",
+    "Giriş: ertesi günün açılışı"
+  ],
+  "short_giris": [],
+  "stop_loss": null,
+  "kar_al": null,
+  "iz_suren_stop": "%10 izleyen stop: tepe = girişten sonraki en yüksek high; gün içi low <= tepe x 0.90 ise stop fiyatından çıkış",
+  "zaman_cikisi": "En çok 10 gün tutma, 10. gün kapanışında çık",
+  "filtreler": [
+    "Yalnız long"
+  ],
+  "pozisyon_risk": "Kaynakta işlem başı boyut yok; komisyon %0.1/taraf varsayıldı",
+  "iddia_edilen_performans": "iddia (doğrulanmadı): repo v2 kombinasyonunun (TailEcho+BearAbsorption+TripleRise) eski 'OOS Sharpe 2.42' iddiasını geri çekmiş; düzeltilmiş CAGR %10.6 vs BTC al-tut %19.4",
+  "kanit": "Repo kendi 30 varlıklı genellik testinde TailEcho için PF medyanı 0.98, FDR'den sağ çıkan 0 diyor (iddia, doğrulanmadı). Kural mekanik ve ileriye bakmıyor.",
+  "veri_uygun": [
+    true,
+    "Binance günlük OHLCV yeterli."
+  ],
+  "kodlanabilirlik": {
+    "puan": 3,
+    "gerekce": "Kural net, kaydırmalar doğru; stop motoru günlük bar içi high/low kullanıyor."
+  },
+  "belirsizlikler": [
+    "Aynı repodaki BearAbsorption ve TripleRise desenleri varyant olarak kartlanmadı",
+    "Stop gap'te açılırsa stop fiyatından doldurulduğu varsayılıyor (iyimser)"
+  ],
+  "uyumluluk_notu": "Düşük öncelik: kaynak kendi sonucunu geri çekmiş. Mevcut yarim-fitil kartından farklı (30m, hisse).",
+  "varyantlar": [
+    "BearAbsorption (t-2 güçlü düşüş, t-1 güçlü yükseliş ve kapanış > t-2 açılışı)"
+  ],
+  "anahtar_kelimeler": [
+    "fitil",
+    "mum-deseni",
+    "izleyen-stop",
+    "btc"
+  ]
+}

@@ -1,0 +1,77 @@
+{
+  "kart_id": "daytrade__renko-macd-sinyal-xau__gavaav",
+  "ad": "Renko (2 Tugla Donus) MACD Sinyal Kesisimi, Sanal SL/TP (XAUUSD)",
+  "stil": "daytrade",
+  "kaynak": {
+    "url": "https://www.mql5.com/en/code/78581",
+    "lisans": "belirtilmemis",
+    "tur": "blog"
+  },
+  "ozet": "Iki tuglali donusle uretilen Renko grafigi uzerinde MACD (5/30/5 on-ayar) sinyal cizgisini yukari keserse long, asagi keserse short; sanal SL 13 tugla, TP 14 tugla, en fazla 1380 dakika tutma, cikistan sonra 1 tugla bekleme.",
+  "kategori": "momentum",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "emtia",
+  "zaman_dilimi": {
+    "islem": "5m",
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {
+      "ad": "Renko",
+      "parametreler": {
+        "tugla_boyutu_xau": 12.0,
+        "donus_tugla": 2
+      }
+    },
+    {
+      "ad": "MACD (tugla bazli)",
+      "parametreler": {
+        "ayar": "5/30/5 (alanlarin anlami sayfada yok)"
+      }
+    }
+  ],
+  "long_giris": [
+    "Tamamlanan Renko tuglasinda MACD cizgisi sinyal cizgisini asagidan yukari kesti (ilk gecerli okuma yalniz durumu baslatir)",
+    "Pozisyon yok, onceki cikistan beri en az 1 tugla olusmus",
+    "Spread/tugla filtresi giriste uygulanir (esik sayfada yok)"
+  ],
+  "short_giris": [
+    "Aynasi: MACD sinyal cizgisini yukaridan asagi keser"
+  ],
+  "stop_loss": "Sanal stop: giristen 13 tugla",
+  "kar_al": "Sanal hedef: giristen 14 tugla",
+  "iz_suren_stop": null,
+  "zaman_cikisi": "En fazla 1380 dakika",
+  "filtreler": [
+    "Spread/tugla orani filtresi",
+    "Ters sinyal pozisyonu kapatmaz"
+  ],
+  "pozisyon_risk": "Lot 0.01 on-ayar (bizim risk katmani gecerli).",
+  "iddia_edilen_performans": null,
+  "kanit": "Yalniz MQL5 kod sayfasi aciklamasi; sonuc yok. Kaynak dosya eki sayfada gosterilmiyor, kurallar sayfa metninden alindi.",
+  "veri_uygun": [
+    true,
+    "XAU OHLCV var; Renko 5m OHLC'den yaklasik uretilir (tik yok): tugla olusum sirasi mum ici hareketle belirsiz."
+  ],
+  "kodlanabilirlik": {
+    "puan": 1,
+    "gerekce": "Sayfa metni kural verir ama MACD'nin uc sayisi ve RSI esigi etiketli degil; kod ek dosyada."
+  },
+  "belirsizlikler": [
+    "MACD 5/30/5 sirasinin anlami (hizli/yavas/sinyal?) sayfada yok",
+    "Renko'yu 5m OHLC'den uretme yontemi (kapanis bazli mi, high/low mu) bizim secimimiz",
+    "SL/TP/sure on-ayar degerleri XAUUSD icin; kaynak varsayilanlari farkli",
+    "Lisans belirtilmemis"
+  ],
+  "uyumluluk_notu": "Renko 5m bardan turetilir; XAU icin tugla 12.00 fiyat birimi. Dogru ureme olmadan sonuc yanlis olur; dusuk oncelik.",
+  "varyantlar": [
+    "RSI Re-entry, RSI Midline, MACD Zero modlari (sayfada isim olarak var)"
+  ],
+  "anahtar_kelimeler": [
+    "renko",
+    "macd",
+    "sanal-sl-tp",
+    "altin",
+    "tugla"
+  ]
+}

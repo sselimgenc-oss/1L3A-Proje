@@ -1,0 +1,78 @@
+{
+  "kart_id": "swing__ma50-200-trend-rsi55-geri-cekilme__samsondoski",
+  "ad": "MA50>MA200 Trendinde RSI<55 Geri Çekilme Alımı",
+  "stil": "swing",
+  "kaynak": {
+    "url": "https://github.com/SamsonDoski/Trading_Assistant",
+    "lisans": "lisanssız (kod kopyalanmadı)",
+    "tur": "github"
+  },
+  "ozet": "Uzun vadeli trend yukarıyken (SMA50 > SMA200) RSI(14) 55'in altına inerse long alınır; SMA50 SMA200'ün altına inerse veya %15 stop gelirse çıkılır.",
+  "kategori": "ortalamaya_donus",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+    "islem": "1d",
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {
+      "ad": "SMA",
+      "parametreler": {
+        "periyot": [
+          50,
+          200
+        ]
+      }
+    },
+    {
+      "ad": "RSI",
+      "parametreler": {
+        "periyot": 14,
+        "tur": "Wilder (ewm com=13)"
+      }
+    }
+  ],
+  "long_giris": [
+    "SMA50 > SMA200",
+    "RSI(14) < 55 (varsayılan 'rsi_buy_threshold')",
+    "Bar kapanışında sinyal; icra sonraki bar (kaynak backtest'inde icra şeklini ayrı simülatör belirler)"
+  ],
+  "short_giris": [],
+  "stop_loss": "Girişten kapanış bazlı -%15 (varsayılan; profillerde -%5 ile -%15 arası)",
+  "kar_al": null,
+  "iz_suren_stop": null,
+  "zaman_cikisi": "Çıkış: SMA50 < SMA200 olunca; isteğe bağlı: RSI >= 70 (varsayılan kapalı)",
+  "filtreler": [
+    "Yalnız long",
+    "Pozisyondayken RSI 55 üstüne çıksa da tutulur (sinyal ileriye taşınır)"
+  ],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": null,
+  "kanit": null,
+  "veri_uygun": [
+    true,
+    "Hisse/ETF günlük OHLCV (Dukascopy hisse) ile kurulabilir; kripto günlükte de denenebilir."
+  ],
+  "kodlanabilirlik": {
+    "puan": 3,
+    "gerekce": "Giriş/çıkış kodda sayısal; yalnız stop sonrası yeniden giriş davranışı belirsiz."
+  },
+  "belirsizlikler": [
+    "Stop sonrası aynı trend sürerken tekrar giriş: kod yalnız stop barında sinyali sıfırlıyor, sonraki barda tekrar 1 olabilir (davranış tanımsız)",
+    "Profil bazlı pencereler (10/30, 20/50, 50/100, 15/40) kaynakta var; varsayılan 50/200",
+    "Kaynakta sonuç yok",
+    "RSI<55 çok gevşek: ortalama yatay trendde çoğu bar sağlanır"
+  ],
+  "uyumluluk_notu": "Mevcut swing__rsi14-ema200-izleyen-stop__tamnguyen (RSI<40, EMA200, izleyen stop) ile aynı aile ama farklı trend filtresi, RSI eşiği ve çıkış; küçük varyant sayılabilir, kalite denetiminde birleştirme düşünülmeli.",
+  "varyantlar": [
+    "Profil varyantları: 10/30 (stop %5), 20/50 (%8), 15/40 (%12), 50/100 (%15)"
+  ],
+  "anahtar_kelimeler": [
+    "sma50-200",
+    "rsi",
+    "geri-cekilme",
+    "trend-filtresi",
+    "hisse"
+  ]
+}

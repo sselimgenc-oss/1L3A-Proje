@@ -1,0 +1,94 @@
+{
+  "kart_id": "daytrade__rsi-bb-ema-geri-donus-5m__nickfloman",
+  "ad": "5m RSI + Bollinger Dip/Tepe Geri Donus (EMA20/50 Yonlu)",
+  "stil": "daytrade",
+  "kaynak": {
+    "url": "https://github.com/nickfloman/Ai-Crypto-Scalping-Agent",
+    "lisans": "MIT",
+    "tur": "github"
+  },
+  "ozet": "5 dakikalik grafikte EMA20 > EMA50 iken RSI(14) < 28 ve kapanis alt Bollinger'in altindaysa long; EMA20 < EMA50 iken RSI > 72 ve kapanis ust Bollinger'in ustundeyse short. Cikis RSI ters esigi veya Bollinger orta bandi; stop %1.2.",
+  "kategori": "ortalamaya_donus",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "kripto",
+  "zaman_dilimi": {
+    "islem": "5m",
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {
+      "ad": "RSI",
+      "parametreler": {
+        "periyot": 14
+      }
+    },
+    {
+      "ad": "Bollinger (tipik fiyat)",
+      "parametreler": {
+        "periyot": 20,
+        "sapma": 2.0
+      }
+    },
+    {
+      "ad": "EMA",
+      "parametreler": {
+        "hizli": 20,
+        "yavas": 50
+      }
+    },
+    {
+      "ad": "Hacim SMA",
+      "parametreler": {
+        "periyot": 20
+      }
+    }
+  ],
+  "long_giris": [
+    "RSI(14) < 28",
+    "Kapanis <= alt Bollinger (tipik fiyat uzerinden, 20, 2.0)",
+    "Hacim > 0.75 x SMA(hacim,20)",
+    "EMA20 > EMA50"
+  ],
+  "short_giris": [
+    "RSI(14) > 72",
+    "Kapanis >= ust Bollinger",
+    "Hacim > 0.75 x SMA(hacim,20)",
+    "EMA20 < EMA50"
+  ],
+  "stop_loss": "Giris fiyatindan %1.2 (sabit)",
+  "kar_al": "Kademeli ROI tablosu: 0-8 bar +%1.2, 8-16 bar +%0.8, 16-30 bar +%0.4, 30 bar sonrasi 0 (kapali pozisyon basabasta cikar)",
+  "iz_suren_stop": "Kar %0.8'e ulasinca izleme aktif; sonra tepeden %0.4 geri cekilmede cikar (trailing_stop_positive 0.004, offset 0.008)",
+  "zaman_cikisi": "ROI tablosu zaman cikisi gibi calisir (30 bardan sonra kar>=0 olursa cikis).",
+  "filtreler": [
+    "Hacim > 0.75 x ortalama",
+    "Kisa/uzun yonu EMA20-EMA50 ile uyumlu"
+  ],
+  "pozisyon_risk": "Kaynakta islem basi %1 risk, azami 100 USDT; bizim risk katmani gecerli.",
+  "iddia_edilen_performans": null,
+  "kanit": "Kaynakta yayimlanmis backtest sonucu yok (README 'Published sample backtest results' maddesi bos).",
+  "veri_uygun": [
+    true,
+    "Binance USDT-M 5m OHLCV + hacim yeterli."
+  ],
+  "kodlanabilirlik": {
+    "puan": 3,
+    "gerekce": "Tum kosullar sayisal; Freqtrade sinyal bar kapanisinda uretilir, emir sonraki bar."
+  },
+  "belirsizlikler": [
+    "Cikis: RSI > 72 VEYA kapanis >= orta band; girisle ayni barda tetiklenebilir mi kaynakta net degil (long girisinde RSI<28, kapanis alt bantta oldugu icin orta bant cikisi sonraki barda olur)",
+    "ROI tablosu ile stop/iz suren stop ayni anda aktif; sirasi Freqtrade'e baglı",
+    "Parametreler hyperopt araliginda, varsayilan degerler alindi",
+    "Limit emirle giris varsayimi; dolum garanti degil"
+  ],
+  "uyumluluk_notu": "5m'de dogrudan uygulanir. Kaynakta 1m surumu de var (ayni mantik, kart disi). Funding ucreti ve kayma 5m'de sonucu belirler.",
+  "varyantlar": [
+    "1m surumu (Scalp_RSI_BB_Short_1m.py)"
+  ],
+  "anahtar_kelimeler": [
+    "rsi",
+    "bollinger",
+    "ema-filtre",
+    "5m",
+    "geri-donus"
+  ]
+}

@@ -1,0 +1,106 @@
+{
+  "kart_id": "daytrade__pivot-ma-macd-rsi-altin__monkeyattack",
+  "ad": "Altın: Günlük Pivot Üstü MA21/50 + MACD + RSI Trend Girişi",
+  "stil": "daytrade",
+  "kaynak": {
+    "url": "https://github.com/Monkeyattack/monkeyattack-gold-pivot-ea",
+    "lisans": "yok (lisans dosyası yok)",
+    "tur": "github"
+  },
+  "ozet": "Hızlı SMA yavaşın üstünde, MACD ana çizgi sinyalin üstünde, RSI>50 ve kapanış günlük pivotun üstündeyse long (simetrik short). Stop ATR bazlı ve nokta olarak sınırlı, hedef sabit R:R.",
+  "kategori": "trend_takip",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "emtia",
+  "zaman_dilimi": {
+    "islem": null,
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {
+      "ad": "SMA",
+      "parametreler": {
+        "hizli": 21,
+        "yavas": 50
+      }
+    },
+    {
+      "ad": "MACD",
+      "parametreler": {
+        "hizli": 12,
+        "yavas": 26,
+        "sinyal": 9
+      }
+    },
+    {
+      "ad": "RSI",
+      "parametreler": {
+        "periyot": 14,
+        "esik": 50
+      }
+    },
+    {
+      "ad": "ATR",
+      "parametreler": {
+        "periyot": 14
+      }
+    },
+    {
+      "ad": "Günlük pivot",
+      "parametreler": {
+        "tur": "klasik (önceki gün H+L+C)/3 varsayımı"
+      }
+    }
+  ],
+  "long_giris": [
+    "Önceki kapanan barda SMA21 > SMA50",
+    "MACD ana çizgi > sinyal çizgisi",
+    "RSI(14) > 50",
+    "Kapanış > günlük pivot",
+    "Pozisyon yoksa yeni bar açılışında gir"
+  ],
+  "short_giris": [
+    "SMA21 < SMA50",
+    "MACD ana < sinyal",
+    "RSI(14) < 50",
+    "Kapanış < günlük pivot",
+    "Pozisyon yoksa gir"
+  ],
+  "stop_loss": "ATR(14) x 2,0 mesafe, 300-800 nokta (XAU'da 3-8 USD, 2 haneli fiyat) arasına kırpılır",
+  "kar_al": "Risk:ödül 1,5 x stop mesafesi",
+  "iz_suren_stop": "Opsiyonel: ATR x 1,5 (varsayılan kapalı)",
+  "zaman_cikisi": null,
+  "filtreler": [
+    "Spread üst sınırı (MaxSpread)",
+    "İsteğe bağlı seans filtresi (kaynakta varsayılan kapalı olabilir)",
+    "İsteğe bağlı oynaklık filtresi"
+  ],
+  "pozisyon_risk": "Hesap riski %1,5 (otomatik lot açıkken)",
+  "iddia_edilen_performans": null,
+  "kanit": "Kaynakta performans rakamı doğrulanmadı; EA kodu okundu.",
+  "veri_uygun": [
+    true,
+    "XAU Dukascopy OHLCV bizde var; nokta tabanlı stop USD'ye çevrilmeli."
+  ],
+  "kodlanabilirlik": {
+    "puan": 2,
+    "gerekce": "Trend kolu tamamen mekanik; destek/direnç kolu karmaşık (GetNearestSupport) olduğu için karta alınmadı."
+  },
+  "belirsizlikler": [
+    "Zaman dilimi kaynakta yok (grafik periyodu); 'kaynakta yok'",
+    "Nokta tabanlı min/max stop sembolün Point değerine bağlı",
+    "Destek/direnç yakınında ek giriş koşulu (RSI<40 + MACD + MA) ayrı varyant olarak kodda var ama yardımcı fonksiyonları karmaşık",
+    "Koda yerleşmiş bazı 'her zaman yanlış' koşul satırları var, varsayılanlar OnInit içinde"
+  ],
+  "uyumluluk_notu": "Mevcut ema-9-21-50-rsi-hacim kartından farkı: SMA21/50 + MACD + günlük pivot filtresi, altın odaklı, hacim yok.",
+  "varyantlar": [
+    "Destek/direnç yakınında RSI<40 ile ek giriş (kodda var, karta alınmadı)"
+  ],
+  "anahtar_kelimeler": [
+    "altin",
+    "pivot",
+    "ma21-50",
+    "macd",
+    "rsi",
+    "atr-stop"
+  ]
+}

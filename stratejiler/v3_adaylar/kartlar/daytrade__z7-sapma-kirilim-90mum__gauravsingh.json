@@ -1,0 +1,78 @@
+{
+  "kart_id": "daytrade__z7-sapma-kirilim-90mum__gauravsingh",
+  "ad": "BTC 15 dk: SMA7/Std7 Z-Skoru +-2 Yönünde Giriş, 90 Mum Zaman Çıkışı",
+  "stil": "daytrade",
+  "kaynak": {
+    "url": "https://github.com/gauravsingh-ss/trading_model",
+    "lisans": "yok (lisans dosyası yok)",
+    "tur": "github"
+  },
+  "ozet": "Kapanışın 7 barlık SMA'ya göre z-skoru > +2 ise long, < -2 ise short (adı 'reversion' ama yön kırılım/momentum). En fazla 90 mum tutulur; zarar eşiği shortta çalışır.",
+  "kategori": "momentum",
+  "piyasa_rejimi": "volatil",
+  "orijinal_piyasa": "kripto",
+  "zaman_dilimi": {
+    "islem": "15m",
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {
+      "ad": "SMA",
+      "parametreler": {
+        "periyot": 7
+      }
+    },
+    {
+      "ad": "Std",
+      "parametreler": {
+        "periyot": 7
+      }
+    },
+    {
+      "ad": "Z-skor",
+      "parametreler": {
+        "formul": "(kapanış - SMA7) / Std7"
+      }
+    }
+  ],
+  "long_giris": [
+    "z = (kapanış - SMA7)/Std7 > 2",
+    "Bar kapanışından gir"
+  ],
+  "short_giris": [
+    "z < -2",
+    "Bar kapanışından gir"
+  ],
+  "stop_loss": "Kodda -70 USD (1000 USD sermayede ~%7 zarar eşiği) ama long tarafta işaret hatası var; yalnız short tarafta fiilen çalışıyor",
+  "kar_al": null,
+  "iz_suren_stop": null,
+  "zaman_cikisi": "90 mum sonra çık; ayrıca z=4 (long) veya z=-4 (short) çıkışı yazılmış ama 7 barlık pencerede |z| en fazla ~2,27 olabildiği için ulaşılamaz",
+  "filtreler": [],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": "README iddiası (doğrulanmadı): Sharpe 2,71, getiri %90,08, kazanma %47,28, MaxDD %10,09.",
+  "kanit": "README iddiası (doğrulanmadı): Sharpe 2,71, Sortino 4,53, getiri %90,08, kazanma oranı %47,28, düşüş %10,09. Kod hatalı/tutarsız olduğu için sonuç güvenilmez.",
+  "veri_uygun": [
+    true,
+    "Binance perp BTC 15m OHLCV bizde var."
+  ],
+  "kodlanabilirlik": {
+    "puan": 2,
+    "gerekce": "Giriş ve zaman çıkışı net; z=4 çıkışı pratikte ölü, stop kısmı hatalı; fiilen 'z>2 gir, 90 mum tut'."
+  },
+  "belirsizlikler": [
+    "z=4 çıkışı matematiksel olarak ulaşılamaz (n=7)",
+    "Long tarafta kâr/zarar işareti ters: stop mantığı güvenilmez",
+    "Giriş aynı bar kapanışında; pozisyon tutarken yeni sinyal aranmıyor",
+    "Başlangıç sermayesi sabit 1000 USD üzerinden PnL, bileşik değil",
+    "Komisyon yalnız sonradan hesaplanıyor"
+  ],
+  "uyumluluk_notu": "Z-skor eşik girişi mevcut z-skor-karsit-spy (günlük, ters yön) kartından farklı: 15m, 7 bar pencere, momentum yönü.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+    "z-skor",
+    "sma7",
+    "kirilim",
+    "zaman-cikisi",
+    "15m"
+  ]
+}

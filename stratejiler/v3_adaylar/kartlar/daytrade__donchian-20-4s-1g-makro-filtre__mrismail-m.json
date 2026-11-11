@@ -1,0 +1,85 @@
+{
+  "kart_id": "daytrade__donchian-20-4s-1g-makro-filtre__mrismail-m",
+  "ad": "4s Donchian(20) Kırılımı + Hacim, 1g EMA50/ROC14 Makro Filtre",
+  "stil": "daytrade",
+  "kaynak": {
+    "url": "https://github.com/mrismail-m/ClaudeTradingBot",
+    "lisans": "YOK",
+    "tur": "github"
+  },
+  "ozet": "1 günlük kapanış EMA(50)'nin üstünde ve ROC(14) pozitifse, 4 saatlikte kapanış önceki 20 mumun en yükseğini hacim teyidiyle aşarsa long; önceki 20 mum dibini kaybedince veya makro filtre bozulunca çıkar.",
+  "kategori": "kirilim",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "kripto",
+  "zaman_dilimi": {
+    "islem": "4h",
+    "ust_filtre": "1d"
+  },
+  "gostergeler": [
+    {
+      "ad": "Donchian",
+      "parametreler": {
+        "periyot": 20,
+        "not_": "mevcut mum hariç önceki 20 mum"
+      }
+    },
+    {
+      "ad": "Hacim SMA",
+      "parametreler": {
+        "periyot": 20,
+        "carpan": 1.2
+      }
+    },
+    {
+      "ad": "EMA (1g)",
+      "parametreler": {
+        "periyot": 50
+      }
+    },
+    {
+      "ad": "ROC (1g)",
+      "parametreler": {
+        "periyot": 14
+      }
+    }
+  ],
+  "long_giris": [
+    "Son kapanmış 1g mum: close > EMA(50) ve ROC(14) > 0",
+    "4s kapanış > önceki 20 4s mumun en yükseği (mevcut hariç)",
+    "4s hacim >= 1.2 x SMA(20, hacim)",
+    "Sembolde açık pozisyon yok"
+  ],
+  "short_giris": [],
+  "stop_loss": "Strateji içinde yok; risk yöneticisi varsayılanı: girişten %5 aşağı (ayarlanabilir)",
+  "kar_al": "Risk yöneticisi varsayılanı %15 (kaynakta stratejinin parçası değil)",
+  "iz_suren_stop": "Kaynakta izleyen stop fonksiyonu var (peak'ten yüzde), oranı strateji dosyasında yok",
+  "zaman_cikisi": null,
+  "filtreler": [
+    "Çıkış: 4s kapanış < önceki 20 mumun en düşüğü, veya 1g makro filtre bozulursa (close<=EMA50 ya da ROC<=0)",
+    "Yalnız long, spot; 30 coinlik evren"
+  ],
+  "pozisyon_risk": "Kaynakta evren üzerinde en çok 5 eşzamanlı pozisyon (risk ayarı)",
+  "iddia_edilen_performans": null,
+  "kanit": null,
+  "veri_uygun": [
+    true,
+    "Binance 4h/1g OHLCV+hacim; kapanmış 1g mum için bar sonrası hizalama ileriye bakmıyor."
+  ],
+  "kodlanabilirlik": {
+    "puan": 3,
+    "gerekce": "Kural kodda kesin; stop/TP risk modülünde ayarlanabilir değerler."
+  },
+  "belirsizlikler": [
+    "Stop/TP/izleyen stop değerleri strateji dışında (risk ayarı)",
+    "Hacim kapısı 4s mumun kendi hacmi: kapanış anında bilinir"
+  ],
+  "uyumluluk_notu": "Kripto perp'e long-short genişletilebilir ama kaynak yalnız long; mevcut donchian-ansambl kartı günlük ve ansambl, bu 4s + makro filtreli tek kanal.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+    "donchian",
+    "kirilim",
+    "hacim",
+    "mtf",
+    "makro-filtre"
+  ]
+}

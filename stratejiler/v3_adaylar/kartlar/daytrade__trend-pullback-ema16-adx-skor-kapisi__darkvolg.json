@@ -1,0 +1,129 @@
+{
+  "kart_id": "daytrade__trend-pullback-ema16-adx-skor-kapisi__darkvolg",
+  "ad": "Freqtrade TrendRider: Trend İçi EMA Geri Çekilme (1s, skor kapılı)",
+  "stil": "daytrade",
+  "kaynak": {
+    "url": "https://github.com/darkvolg/trendrider-strategy",
+    "lisans": "MIT",
+    "tur": "github"
+  },
+  "ozet": "1 saatlikte boğa trendinde (kapanış > EMA200, EMA50 > EMA200) fiyat EMA(16)'ya %2 yaklaşıp yeşil kapanışla üzerine çıkarsa, ADX/hacim/OBV/yön onayı ve 10 üzerinden en az 5 güven skoruyla long; geniş %6 stop, RSI>78 ve EMA bozulması çıkışları.",
+  "kategori": "trend_takip",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "kripto",
+  "zaman_dilimi": {
+    "islem": "1h",
+    "ust_filtre": "4h, 1d, BTC 1h"
+  },
+  "gostergeler": [
+    {
+      "ad": "EMA",
+      "parametreler": {
+        "hizli": 9,
+        "yavas": 16,
+        "trend": [
+          50,
+          200
+        ]
+      }
+    },
+    {
+      "ad": "RSI",
+      "parametreler": {
+        "periyot": 16
+      }
+    },
+    {
+      "ad": "ADX",
+      "parametreler": {
+        "periyot": 14,
+        "esik": 18
+      }
+    },
+    {
+      "ad": "MACD",
+      "parametreler": {
+        "hizli": 12,
+        "yavas": 26,
+        "sinyal": 9
+      }
+    },
+    {
+      "ad": "Bollinger",
+      "parametreler": {
+        "periyot": 20,
+        "carpan": 2.0
+      }
+    },
+    {
+      "ad": "OBV",
+      "parametreler": {
+        "ema": 20
+      }
+    },
+    {
+      "ad": "Hacim EMA",
+      "parametreler": {
+        "periyot": 20
+      }
+    },
+    {
+      "ad": "ATR",
+      "parametreler": {
+        "periyot": 14
+      }
+    }
+  ],
+  "long_giris": [
+    "Boğa: kapanış > EMA200 ve EMA50 > EMA200",
+    "Geri çekilme: düşük <= EMA16 x 1.02, kapanış > EMA16, kapanış > açılış",
+    "30 < RSI(16) < 65 ve RSI < 70",
+    "ADX(14) > 18",
+    "hacim / EMA20(hacim) > 0.7",
+    "+DI > -DI",
+    "OBV > EMA20(OBV)",
+    "BTC 1s RSI(14) > 35",
+    "Kapanış > 1g EMA200",
+    "Güven skoru kapısı (puan: RSI 35-60 +1.5; ADX>30 +2.5 / >18 +1.5; hacim oranı>1.5 +2.5 / >1 +1.5; MACD hist>0 +1.5 (+0.5 artıyorsa); OBV>EMA +1.5; BTC RSI 40-70 +1.5; 4s boğa ve ADX4s>20 +1.5; BB konumu<0.35 +1; DI farkı>10 +1; ikisi sabit +2): puan x 10/17.5 yuvarlanıp 1-10, giriş için >=5 (rejim 'Trending Bear' veya düşük ADX'te >=6)"
+  ],
+  "short_giris": [],
+  "stop_loss": "Sabit %6 (stoploss -0.06)",
+  "kar_al": "ROI tablosu: 0 dk %22.9, 124 dk %13.6, 290 dk %4.4, 764 dk %0 (başabaş)",
+  "iz_suren_stop": "Kâr %5'i geçince %3 izleyen stop",
+  "zaman_cikisi": "Kademeli erken çıkış: 2s'de zarar<-%1.5, 4s'de zarar, 8s'de kâr<%0.5, 16s'de kâr<%1 ise kapat; 24 saatte zorunlu çıkış",
+  "filtreler": [
+    "Rejim: ADX<20 yatay, boğa ve kapanış>EMA200 Trending Bull, aksi Bear",
+    "Çıkış sinyalleri: RSI(16)>78; EMA9 EMA16'yı aşağı keser ve MACD hist<0 ve RSI>50; kapanış EMA200 x 0.99 altına iner"
+  ],
+  "pozisyon_risk": "Kaldıraç 1, yalnız long",
+  "iddia_edilen_performans": null,
+  "kanit": null,
+  "veri_uygun": [
+    true,
+    "Kripto perp 1h OHLCV+hacim; 4h/1g/BTC referansı türetilebilir; funding bileşeni kodda sabit 0 (kullanılmıyor)."
+  ],
+  "kodlanabilirlik": {
+    "puan": 2,
+    "gerekce": "Tüm koşullar sayısal ama çok parçalı (skor kapısı, 5 giriş etiketi, hyperopt parametreleri)."
+  },
+  "belirsizlikler": [
+    "Kodda 5 giriş etiketi var; kartta yalnız 'trend_pullback' alındı (diğerleri: ema50_bounce, rsi_bounce, ema_crossover, bb_bounce, macd_reversal)",
+    "buy_params sınıfı IntParameter varsayılanlarını geçersiz kılar: ema_slow 16, rsi_period 16, rsi_pullback 30/65, adx 18, hacim 0.7 (kartta bunlar)",
+    "FNG ve funding sabit placeholder: skorda hep +2 puan veriyor",
+    "Parametreler hyperopt ürünü, aşırı uyum riski",
+    "Çok sayıda koşul: eşiklerin etkisi ayrı ayrı doğrulanmamış"
+  ],
+  "uyumluluk_notu": "Kripto 1h perp uyumlu. Skor kapısı çok karmaşık: backtest için sadeleştirme gerekebilir. Benzer: AdxSmas (freqtrade).",
+  "varyantlar": [
+    "Diğer 5 giriş etiketi ayrı kural olarak"
+  ],
+  "anahtar_kelimeler": [
+    "trend",
+    "pullback",
+    "ema",
+    "adx",
+    "obv",
+    "skor-kapisi",
+    "freqtrade"
+  ]
+}

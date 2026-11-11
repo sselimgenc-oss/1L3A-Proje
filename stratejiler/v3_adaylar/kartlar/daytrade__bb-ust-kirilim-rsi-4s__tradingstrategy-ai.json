@@ -1,0 +1,74 @@
+{
+  "kart_id": "daytrade__bb-ust-kirilim-rsi-4s__tradingstrategy-ai",
+  "ad": "Bollinger Üst Bant Kırılımı + RSI(14)>=65 (4s, %2 stop, orta bant çıkış)",
+  "stil": "daytrade",
+  "kaynak": {
+    "url": "https://github.com/tradingstrategy-ai/tradingview-defi-strategy",
+    "lisans": "YOK",
+    "tur": "github"
+  },
+  "ozet": "4 saatlikte kapanış Bollinger(20,2) üst bandının üstündeyse ve RSI(14) >= 65 ise long; %2 stop; kapanış orta bandın altına inince çıkış.",
+  "kategori": "kirilim",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "kripto",
+  "zaman_dilimi": {
+    "islem": "4h",
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {
+      "ad": "Bollinger",
+      "parametreler": {
+        "periyot": 20,
+        "carpan": 2.0
+      }
+    },
+    {
+      "ad": "RSI",
+      "parametreler": {
+        "periyot": 14,
+        "esik": 65
+      }
+    }
+  ],
+  "long_giris": [
+    "Açık pozisyon yok",
+    "4s kapanış > BB üst bant (20, 2.0)",
+    "RSI(14) >= 65"
+  ],
+  "short_giris": [],
+  "stop_loss": "Giriş fiyatından %2 aşağı (stop 0.98)",
+  "kar_al": null,
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [
+    "Çıkış: 4s kapanış < BB orta bant (SMA20)",
+    "Yalnız long"
+  ],
+  "pozisyon_risk": "Notebook varsayılanı sermayenin bir kısmı (POSITION_SIZE; oranı alınmadı)",
+  "iddia_edilen_performans": null,
+  "kanit": null,
+  "veri_uygun": [
+    true,
+    "Binance 4h OHLCV; kaynak DeFi (Uniswap) verisi, kriptoya uyar."
+  ],
+  "kodlanabilirlik": {
+    "puan": 3,
+    "gerekce": "Kural kodda ve Pine'da sayısal."
+  },
+  "belirsizlikler": [
+    "Pine sürümü farklı: EMA tabanlı bant, std 1.9, RSI eşiği 60, kesişim (crossover) girişi; kartta not defteri sürümü alındı",
+    "Notebook stopu 15m mumlarla izliyor (4s'te değil)",
+    "Kaynak yalnız 7 aylık tek örnek, performans iddiası kartlanmadı"
+  ],
+  "uyumluluk_notu": "Kripto 4s uyumlu; mevcut ChartArt BB+RSI kartı ters (alt banda dönüş) kural, bu üst bant devam kırılımı.",
+  "varyantlar": [
+    "TradingView Pine sürümü (EMA bant, std 1.9, RSI 60, crossover)"
+  ],
+  "anahtar_kelimeler": [
+    "bollinger",
+    "rsi",
+    "kirilim",
+    "izleyen-stop"
+  ]
+}

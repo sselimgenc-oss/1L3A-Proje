@@ -1,0 +1,75 @@
+{
+  "kart_id": "swing__momentum-carpiklik-filtre-top50-aylik__alesarabandi",
+  "ad": "Momentum + Pozitif Çarpıklık Filtresi (Aylık, Eşit Ağırlık)",
+  "stil": "swing",
+  "kaynak": {
+    "url": "https://github.com/Alesarabandi/Quantitative-Momentum-Strategy-Backtesting",
+    "lisans": "MIT",
+    "tur": "github"
+  },
+  "ozet": "Aylık getiri momentumuna göre en iyi hisseler seçilir, bunlar arasından getiri çarpıklığı en düşükler elenir, kalanlara eşit ağırlıkla bir ay yatırım yapılır.",
+  "kategori": "momentum",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+    "islem": "1M",
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {
+      "ad": "Momentum (toplam log getiri)",
+      "parametreler": {
+        "pencere_ay": 12,
+        "atlanan": "kodda efektif 2 ay (en son tam ay ve formasyon ayı dışarıda)"
+      }
+    },
+    {
+      "ad": "Çarpıklık",
+      "parametreler": {
+        "pencere": "aynı 11 ay"
+      }
+    }
+  ],
+  "long_giris": [
+    "Her ay sonu: her hisse için aylık log getirilerin son pencere toplamı (momentum) ve çarpıklığı hesapla",
+    "Temel sürüm: momentuma göre en iyi 20 hisse seç; bunlardan çarpıklığı en düşük %30'u at; kalanı eşit ağırlıkla al",
+    "Son sürüm (yazarın 'optimal'i): 6 ay pencere, 1 ay atlama, en iyi 50 momentum, çarpıklığı en düşük %50 at, kalan en iyi 30 (kodda 25 tutulur) eşit ağırlık",
+    "Bir sonraki ay boyunca tut"
+  ],
+  "short_giris": [],
+  "stop_loss": null,
+  "kar_al": null,
+  "iz_suren_stop": null,
+  "zaman_cikisi": "Aylık yeniden dengeleme, tüm pozisyon yenilenir",
+  "filtreler": [
+    "Evren: S&P500 (kaynakta) / STOXX600"
+  ],
+  "pozisyon_risk": "Eşit ağırlık",
+  "iddia_edilen_performans": "Notebook: 30 hisse 12ay: CAGR %11,82 / vol %26,64; 6 ay: CAGR %14,16; benchmark ~%4 (iddia, doğrulanmadı, in-sample)",
+  "kanit": "Notebook çıktıları (iddia, doğrulanmadı). Parametreler aynı veride taranarak seçilmiş.",
+  "veri_uygun": [
+    false,
+    "Evren S&P500/STOXX600 geniş kesit gerekir; bizde yalnız sınırlı Dukascopy hisse seti; kripto evreni 13-15 coin için çarpıklık kesiti çok dar."
+  ],
+  "kodlanabilirlik": {
+    "puan": 2,
+    "gerekce": "Kurallar net ama hangi sürümün esas olduğu belirsiz ve parametreler veri üzerinde seçilmiş."
+  },
+  "belirsizlikler": [
+    "Evren güncel endeks üyeleri (hayatta kalma yanlılığı) ve eksik veri",
+    "12-1 yerine kodda efektif 2 ay atlama",
+    "En iyi sürüm parametreleri tarama ile seçilmiş (in-sample)",
+    "Aylık getiri toplamı log getiri; çarpıklık aylık 11 gözlemle çok gürültülü"
+  ],
+  "uyumluluk_notu": "Mevcut swing__12-1-momentum-decile__kyraroy'un üstüne çarpıklık filtresi ekleyen küçük varyant; ayrı değer yalnız filtre ise.",
+  "varyantlar": [
+    "12ay/6ay, 20-50 aday, %30/%50 çarpıklık elemesi varyantları"
+  ],
+  "anahtar_kelimeler": [
+    "momentum",
+    "carpiklik",
+    "kesitsel",
+    "aylik",
+    "hisse"
+  ]
+}

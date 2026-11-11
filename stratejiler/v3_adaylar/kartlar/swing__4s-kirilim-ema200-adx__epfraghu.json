@@ -1,0 +1,90 @@
+{
+  "kart_id": "swing__4s-kirilim-ema200-adx__epfraghu",
+  "ad": "4s 40 Bar Kirilim + EMA200 + ADX (ETH)",
+  "stil": "swing",
+  "kaynak": {
+    "url": "https://github.com/EPFRAGHU/delta-paper-bot",
+    "lisans": "belirtilmemis",
+    "tur": "github"
+  },
+  "ozet": "4 saatlik mumlarda kapanis son 40 barin zirvesini asar, EMA200 yukselir ve ustunde, ADX>=20 ise long (ayna short). Stop 2.5 ATR, sonra 20 bar dip/zirve ve en iyi fiyattan 3 ATR izleyen stopun siki olani.",
+  "kategori": "kirilim",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "kripto",
+  "zaman_dilimi": {
+    "islem": "4h",
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {
+      "ad": "Donchian kirilimi",
+      "parametreler": {
+        "giris_bar": 40,
+        "cikis_bar": 20
+      }
+    },
+    {
+      "ad": "EMA",
+      "parametreler": {
+        "periyot": 200
+      }
+    },
+    {
+      "ad": "ADX (Wilder)",
+      "parametreler": {
+        "periyot": 14
+      }
+    },
+    {
+      "ad": "ATR (Wilder)",
+      "parametreler": {
+        "periyot": 14
+      }
+    }
+  ],
+  "long_giris": [
+    "Kapanan 4s barin kapanisi > onceki 40 barin en yuksek (bar dahil degil)",
+    "Kapanis > EMA200",
+    "EMA200 yukseliyor: EMA200[i] - EMA200[i-5] > 0",
+    "ADX(14) >= 20",
+    "Acik pozisyon yok"
+  ],
+  "short_giris": [
+    "Aynasi: kapanis < onceki 40 barin en dusugu, kapanis < EMA200, EMA200 egimi < 0, ADX >= 20"
+  ],
+  "stop_loss": "Giris fiyatindan 2.5 x ATR(14) (borsada stop emri)",
+  "kar_al": null,
+  "iz_suren_stop": "Stop yalniz lehe yonde hareket eder: long icin max(mevcut stop, son 20 barin en dusugu, en iyi fiyat - 3 x ATR); short ayna.",
+  "zaman_cikisi": "Sinyal-cikisi yok; cikislar yalniz izleyen stoptan.",
+  "filtreler": [
+    "EMA200 egimi",
+    "ADX >= 20"
+  ],
+  "pozisyon_risk": "Kaynakta islem basi %1.5 risk, nominal 10x ozsermaye ustu degil, gunluk %5 zarar limiti (bizim risk katmanimiz bunun yerini alir).",
+  "iddia_edilen_performans": "Kaynak README'de iddia (doğrulanmadı): 62 islem, kazanma %47, ornek-disi donem +%9.7 PF 1.56 (23 islem).",
+  "kanit": "Kaynak README'sindeki backtest tablosu; parametreler 2024-2025 orneginde secilmis (iddia, doğrulanmadı).",
+  "veri_uygun": [
+    true,
+    "Binance USDT-M ETH 4s OHLCV yeterli; kural gostergeler ve OHLCV'den."
+  ],
+  "kodlanabilirlik": {
+    "puan": 3,
+    "gerekce": "Tum giris/cikis kodda sayisal; yalnizca kapali bar kullaniliyor."
+  },
+  "belirsizlikler": [
+    "Parametreler (40/20/2.5/3.0) ayni ornekte secilmis; orneklem kucuk (62 islem)",
+    "Kaynak borsasi Delta Exchange (Binance degil); fiyat farki kucuk ama fonlama farkli",
+    "Ayni-bar tersine donus: sinyal cikisi yok, o yuzden belirsizlik yok"
+  ],
+  "uyumluluk_notu": "4s'te uygulanir. Donchian ailesindeki daha genel kartlardan ADX+EMA200 egim filtresi ve iki katmanli izleyen stop ile ayrilir.",
+  "varyantlar": [
+    "profiles: EMA 9/21 + EMA200 (90 dk) alternatifi kaynakta var, kart disi"
+  ],
+  "anahtar_kelimeler": [
+    "donchian",
+    "ema200",
+    "adx",
+    "atr-izleyen-stop",
+    "kirilim"
+  ]
+}

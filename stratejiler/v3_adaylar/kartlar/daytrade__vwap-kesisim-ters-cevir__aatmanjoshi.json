@@ -1,0 +1,63 @@
+{
+  "kart_id": "daytrade__vwap-kesisim-ters-cevir__aatmanjoshi",
+  "ad": "Gun Ici VWAP Kesisimi Ters Cevirme (QQQ)",
+  "stil": "daytrade",
+  "kaynak": {
+    "url": "https://github.com/aatmanjoshi/Momentum-Trading-Strategy---QQQ",
+    "lisans": "lisanssiz",
+    "tur": "github"
+  },
+  "ozet": "Gunluk sifirlanan VWAP'a gore fiyat kapanisla yukari keserse long, asagi keserse short; zit kesisimde pozisyon ters cevrilir, stop yoktur, gun sonunda kapanir.",
+  "kategori": "momentum",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+    "islem": "5m",
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {
+      "ad": "VWAP (tipik fiyat, gunluk sifirlanan)",
+      "parametreler": {}
+    }
+  ],
+  "long_giris": [
+    "Onceki bar kapanisi <= onceki VWAP ve bu bar kapanisi > bu bar VWAP; pozisyon yoksa long (acilan ilk barda sinyal yok)"
+  ],
+  "short_giris": [
+    "Onceki bar kapanisi >= onceki VWAP ve bu bar kapanisi < bu bar VWAP; pozisyon yoksa short"
+  ],
+  "stop_loss": null,
+  "kar_al": null,
+  "iz_suren_stop": null,
+  "zaman_cikisi": "Seans sonunda (16:00 NY) acik pozisyon kapanir; zit kesisimde ters cevirme.",
+  "filtreler": [
+    "Yalniz 09:30-16:00 NY"
+  ],
+  "pozisyon_risk": "Kaynakta tum sermaye ile (shares = sermaye // fiyat).",
+  "iddia_edilen_performans": "Kaynak README'sinde 5 yil QQQ: CAGR %22.08, Sharpe 1.28, kazanma %16.13, 19416 islem (iddia, doğrulanmadı).",
+  "kanit": "Kaynakta yalniz 1 dk bar ve yalniz komisyon 0.0005/hisse; kayma yok, islem sayisi cok yuksek.",
+  "veri_uygun": [
+    false,
+    "Kural seans VWAP'ina ve hacme bagli; QQQ ETF'i Dukascopy listesinde dogrulanmadi; kripto UTC-gun VWAP uyarlamasi baska bir test."
+  ],
+  "kodlanabilirlik": {
+    "puan": 3,
+    "gerekce": "Tamamen mekanik ve kisa; stop yok, hep piyasada."
+  },
+  "belirsizlikler": [
+    "Stop yok: gun ici buyuk zarar siniri yok",
+    "Kayma/spread yok; 19416 islemde ucret baskin olur",
+    "Sinyal ve giris ayni bar kapanisinda (ayni bar)",
+    "Kaynak 1 dk bar kullaniyor, 5m'ye uyarlama bizim",
+    "Kaynakta gomulu API anahtari gorüldü, kopyalanmadi"
+  ],
+  "uyumluluk_notu": "5m uyarlamasinda islem sayisi azalir. Hacimli VWAP'a ihtiyac var (kripto OHLCV hacmi var).",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+    "vwap",
+    "ters-cevirme",
+    "gun-ici",
+    "qqq"
+  ]
+}

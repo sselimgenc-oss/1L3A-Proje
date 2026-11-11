@@ -1,0 +1,67 @@
+{
+  "kart_id": "swing__funding-azalan-agirlik-fark-kesit__prestolabs",
+  "ad": "Funding Hızlı-Yavaş Azalan Ağırlıklı Ortalama Farkı (Kesit)",
+  "stil": "swing",
+  "kaynak": {
+    "url": "https://prestolabs.io/research/can-funding-rate-predict-price-change",
+    "lisans": "blog (Presto Research)",
+    "tur": "blog"
+  },
+  "ozet": "Her coin için uzun pencereli doğrusal azalan ağırlıklı funding ortalamasından kısa pencereliyi çıkarır, kesitte ortalamasını çıkarıp ölçekler; sonucu işlem ağırlığı (alfa) yapar. Funding'i düşmekte olan coinler pozitif ağırlık alır.",
+  "kategori": "diger",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "kripto",
+  "zaman_dilimi": {
+    "islem": "1d",
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {
+      "ad": "Doğrusal azalan ağırlıklı ortalama (decay_linear) funding",
+      "parametreler": {
+        "uzun": 24,
+        "kisa": 6,
+        "birim": "kaynakta belirsiz"
+      }
+    }
+  ],
+  "long_giris": [
+    "alfa_i = ölçekle(evren_ortalaması_çıkar(decay_linear(funding_i,24) - decay_linear(funding_i,6))); alfa pozitif coinlere long, ağırlık alfa ile orantılı"
+  ],
+  "short_giris": [
+    "alfa negatif coinlere short (ağırlık |alfa| ile orantılı)"
+  ],
+  "stop_loss": null,
+  "kar_al": null,
+  "iz_suren_stop": null,
+  "zaman_cikisi": "Yeniden dengeleme sıklığı kaynakta yok; yazar devir hızının çok yüksek olduğunu söylüyor",
+  "filtreler": [],
+  "pozisyon_risk": "Evren ortalaması çıkarılıp ölçeklenir (dolar nötr); ölçek 2e6 (kaynakta nominal hedef)",
+  "iddia_edilen_performans": "Sonuçlar yalnız grafikte; metin 'yıllık getiri, Sharpe, Sortino, Getiri/MDD yüksek' diyor ama sayı vermiyor (iddia, doğrulanmadı; işlem maliyeti yok; örneklem içi)",
+  "kanit": "Presto Research blog: BTC regresyonunda funding değişimi ile eş zamanlı fiyat değişimi R2 yüzde 12,5, ileriye dönük R2 sıfıra yakın; kesitsel alfa en likit 50 Binance USDT-M varlığı, 5 dakikalık veri. Sayısal sonuç ve dönem metinde yok. Doğrulanmadı.",
+  "veri_uygun": [
+    true,
+    "Funding geçmişi bizde var; ama pencere birimi (5m bar mı funding periyodu mu) kaynakta belirsiz. 13-15 coin, kaynak 50 coin."
+  ],
+  "kodlanabilirlik": {
+    "puan": 1,
+    "gerekce": "Formül net ama pencere birimi, yeniden dengeleme sıklığı ve sayısal sonuç kaynakta yok."
+  },
+  "belirsizlikler": [
+    "decay_linear pencere birimleri (24 ve 6) kaynakta tanımsız",
+    "Yeniden dengeleme sıklığı yok",
+    "Stop/maliyet yok; devir hızı çok yüksek",
+    "Sonuçlar sayısız, grafik",
+    "Mevcut funding sıralama kartlarından farkı: seviye değil, hızlı-yavaş fark"
+  ],
+  "uyumluluk_notu": "Kesit funding seviyesi kartlarının (octopustakopi, vine, chi) türevi; funding değişimine dayalı. Birimler belirsiz olduğundan öncelik düşük.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+    "funding",
+    "kesitsel",
+    "decay-linear",
+    "alfa",
+    "kripto",
+    "fark"
+  ]
+}

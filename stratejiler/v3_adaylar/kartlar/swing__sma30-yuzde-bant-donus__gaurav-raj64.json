@@ -1,0 +1,67 @@
+{
+  "kart_id": "swing__sma30-yuzde-bant-donus__gaurav-raj64",
+  "ad": "SMA30 Çevresi %2 Bant: Altında Al, Üstünde Sat",
+  "stil": "swing",
+  "kaynak": {
+    "url": "https://github.com/Gaurav-Raj64/Mean-Reversion-Trading-Strategy",
+    "lisans": "yok (belirtilmemiş)",
+    "tur": "github"
+  },
+  "ozet": "Kapanış SMA(30)'un %2 altındaysa ertesi gün long, %2 üstündeyse short; bant içine dönünce pozisyon kapanır (nötr).",
+  "kategori": "ortalamaya_donus",
+  "piyasa_rejimi": "yatay",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+    "islem": "1d",
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {
+      "ad": "SMA",
+      "parametreler": {
+        "periyot": 30
+      }
+    },
+    {
+      "ad": "Yüzde zarf",
+      "parametreler": {
+        "asagi": 0.98,
+        "yukari": 1.02
+      }
+    }
+  ],
+  "long_giris": [
+    "Kapanış < 0,98 x SMA30 (sinyal bir gün kaydırılır: ertesi günün pozisyonu)"
+  ],
+  "short_giris": [
+    "Kapanış > 1,02 x SMA30"
+  ],
+  "stop_loss": null,
+  "kar_al": null,
+  "iz_suren_stop": null,
+  "zaman_cikisi": "Fiyat SMA30'un +-%2 bandının içine dönünce pozisyon sıfırlanır",
+  "filtreler": [],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": null,
+  "kanit": null,
+  "veri_uygun": [
+    true,
+    "Günlük OHLCV; kripto/XAU/hisse uygulanabilir (kaynak: TCS.NS)."
+  ],
+  "kodlanabilirlik": {
+    "puan": 3,
+    "gerekce": "Tamamen mekanik, sinyal 1 gün kaydırılmış (lookahead yok)."
+  },
+  "belirsizlikler": [
+    "Stop yok",
+    "Kaynakta tek hisse ve kısa dönem (2022-2024) var; kanıt zayıf",
+    "Bant yüzdesi sabit, oynaklığa göre ölçeklenmiyor"
+  ],
+  "uyumluluk_notu": "Mevcut swing__bant-donus Bollinger tabanlı; bu sabit yüzdeli zarf, farklı kural.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+    "sma30",
+    "yuzde-zarf",
+    "ortalamaya-donus"
+  ]
+}

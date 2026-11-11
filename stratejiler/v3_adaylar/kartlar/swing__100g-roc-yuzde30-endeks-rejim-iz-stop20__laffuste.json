@@ -1,0 +1,82 @@
+{
+  "kart_id": "swing__100g-roc-yuzde30-endeks-rejim-iz-stop20__laffuste",
+  "ad": "100 Günlük Getiri >%30 Kırılımı + Endeks SMA200 Rejim + %20 İzleyen Stop",
+  "stil": "swing",
+  "kaynak": {
+    "url": "https://github.com/laffuste/weekend-backtrader",
+    "lisans": "YOK",
+    "tur": "github"
+  },
+  "ozet": "Endeks 200 günlük ortalamasının üstündeyken, bir hissenin dünkü kapanışı 100 gün önceki kapanışa göre %30'dan fazla yükselmişse alır; %20 izleyen stop ile tutar, tek çıkış stoptur.",
+  "kategori": "momentum",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+    "islem": "1d",
+    "ust_filtre": "1d endeks"
+  },
+  "gostergeler": [
+    {
+      "ad": "ROC",
+      "parametreler": {
+        "periyot": 100,
+        "esik": 0.3,
+        "tanim": "(close[-1] - close[-100]) / close[-1]"
+      }
+    },
+    {
+      "ad": "SMA (endeks)",
+      "parametreler": {
+        "periyot": 200
+      }
+    },
+    {
+      "ad": "SMA (hisse)",
+      "parametreler": {
+        "periyot": 15
+      }
+    }
+  ],
+  "long_giris": [
+    "Endeks (kaynakta ^AORD) kapanışı > endeks SMA(200)",
+    "Hissede ROC = (dünkü kapanış - 100 gün önceki kapanış) / dünkü kapanış > 0.30",
+    "Bu hissede açık pozisyon yok",
+    "Piyasa emri (sonraki bar açılışı)"
+  ],
+  "short_giris": [],
+  "stop_loss": "%20 izleyen stop (StopTrail trailpercent 0.20), girişle birlikte kurulur",
+  "kar_al": null,
+  "iz_suren_stop": "%20 izleyen stop (tepeden %20 düşüş)",
+  "zaman_cikisi": "Veri sonunda tüm pozisyonlar kapatılır (backtest bitişi)",
+  "filtreler": [
+    "Yalnız long",
+    "Rejim filtresi yalnız yeni girişleri engeller; açık pozisyonun stopunu daraltmaz (kodda böyle)",
+    "Hisse başı sermayenin %5'i"
+  ],
+  "pozisyon_risk": "Pozisyon başı sermayenin %5'i, hisse başına tek pozisyon",
+  "iddia_edilen_performans": null,
+  "kanit": "Repo README'si stratejinin kârlı olmadığını ve survivorship bias uyarısını belirtiyor (iddia, doğrulanmadı).",
+  "veri_uygun": [
+    true,
+    "Kaynak ASX hisseleri; biz Dukascopy hisse + endeks vekili (örn. SPY benzeri) günlük OHLCV ile uyarlayabiliriz; endeks serisi gerekir."
+  ],
+  "kodlanabilirlik": {
+    "puan": 3,
+    "gerekce": "Kural kodda net; kâr hedefi yok."
+  },
+  "belirsizlikler": [
+    "Paydada dünkü kapanış kullanılıyor (klasik ROC'tan farklı, eşik %30 buna göre)",
+    "SMA(15) hesaplanıyor ama giriş/çıkışta kullanılmıyor",
+    "README ile kod arasında rejim düşünce %10 stop anlatısı: kodda yok, kartta kodun davranışı alındı",
+    "Survivorship bias kaynaktan geliyor"
+  ],
+  "uyumluluk_notu": "Hisse günlük; mevcut 252g-zirve-kirilim kartı zirve kırılımı, bu 100 günlük getiri eşiği + endeks rejimi.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+    "roc",
+    "momentum",
+    "endeks-rejim",
+    "izleyen-stop",
+    "turtle"
+  ]
+}

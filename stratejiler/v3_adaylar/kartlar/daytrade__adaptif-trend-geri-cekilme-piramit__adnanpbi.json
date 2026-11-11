@@ -1,0 +1,74 @@
+{
+  "kart_id": "daytrade__adaptif-trend-geri-cekilme-piramit__adnanpbi",
+  "ad": "Adaptif Trend: EMA12/26 + Geri Cekilme/Kirilim + Piramit (BTC)",
+  "stil": "daytrade",
+  "kaynak": {
+    "url": "https://github.com/adnanPBI/Trading-Strategy-BTC",
+    "lisans": "lisanssiz",
+    "tur": "github"
+  },
+  "ozet": "EMA12 EMA26'nin en az %2 ustunde ve fiyat EMA12 ustundeyken son 20 barin zirvesinden %1-3 geri cekilmede veya son 20 bar zirvesini %1.5 asan kirilimda long; karda %1'in ustunde piramit ekleme, %4 stop, %2 izleyen stop, %2/%4/%8'de 1/3'er kismi cikis.",
+  "kategori": "trend_takip",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "kripto",
+  "zaman_dilimi": {
+    "islem": null,
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {
+      "ad": "EMA",
+      "parametreler": {
+        "hizli": 12,
+        "yavas": 26
+      }
+    },
+    {
+      "ad": "20 bar yuksek/dusuk",
+      "parametreler": {}
+    }
+  ],
+  "long_giris": [
+    "Trend 'yukari': EMA12 > EMA26 ve fiyat > EMA12 ve (EMA12-EMA26)/EMA26 >= 0.02",
+    "Geri cekilme girisi: pozisyon yok, (20 bar zirve - fiyat)/zirve 1% ile 3% arasi ve fiyat > EMA26",
+    "VEYA kirilim girisi: fiyat > onceki 20 barin en yuksegi ve asim >= %1.5 (trend 'asagi' degilse)",
+    "Son islemden en az 15 dakika gecmis",
+    "Piramit: mevcut pozisyon karda >= %1 ise portfoyun %10'u kadar ekleme (azami %50, 5 pozisyon)"
+  ],
+  "short_giris": [],
+  "stop_loss": "En yuksek giris fiyatindan %4 asagi",
+  "kar_al": "Ortalama girise gore %2, %4, %8 karda pozisyonun 1/3'er kismi",
+  "iz_suren_stop": "Giristen sonraki en yuksek fiyattan %2 geri cekilme",
+  "zaman_cikisi": "Trend 'asagi'ya donerse tum pozisyon kapanir",
+  "filtreler": [
+    "Trend 'asagi' ise giris yok",
+    "Islem araligi 15 dk"
+  ],
+  "pozisyon_risk": "Ilk giris portfoyun %10'u, piramit %10, azami %50 (bizim risk katmani gecerli).",
+  "iddia_edilen_performans": "Kaynakta iddia: 2024 H1 icin 'OPTIMIZED' (doğrulanmadı).",
+  "kanit": "Kaynakta backtest ozeti yok (kod aciklamasinda 'Jan-Jun 2024 icin tasarlandi').",
+  "veri_uygun": [
+    true,
+    "Binance USDT-M BTC OHLCV yeterli; ancak kaynak spot long-only Coinbase sablonu."
+  ],
+  "kodlanabilirlik": {
+    "puan": 1,
+    "gerekce": "Kurallar sayisal ama mum zaman dilimi kaynakta yok (fiyat listesi); ekleme/kısmi cikis karmasik."
+  },
+  "belirsizlikler": [
+    "Mum zaman dilimi kaynakta yok (sinyal fiyat listesinden, 15 dk islem araligi)",
+    "Piramit yalniz kazanan pozisyona ekler (martingale degil) ama toplam risk artar",
+    "Parametreler 2024 H1'e gore ayarlanmis",
+    "Stop referansi en yuksek giris fiyati (ortalama degil)",
+    "Yalniz long"
+  ],
+  "uyumluluk_notu": "Zaman dilimi belirlenmeden test edilemez; 15m-1h arasi yorum bizim.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+    "ema12-26",
+    "geri-cekilme",
+    "kirilim",
+    "piramit",
+    "kismi-cikis"
+  ]
+}

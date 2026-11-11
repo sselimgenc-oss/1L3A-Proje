@@ -1,0 +1,81 @@
+{
+  "kart_id": "daytrade__stokastik-kesisim-ters-mum-bb-hedef__muokapwambua",
+  "ad": "Stokastik(6,3) Kesişim + Ters Renkli Mum, BB Hedefli",
+  "stil": "daytrade",
+  "kaynak": {
+    "url": "https://github.com/MuokaPWambua/NSE-BOT",
+    "lisans": "yok (LICENSE dosyası yok); kural kendi cümlelerimle yazıldı",
+    "tur": "github"
+  },
+  "ozet": "Hızlı stokastikte %K'nın %D'yi kesmesiyle aynı barda ters renkli iki mumluk dönüş (önceki mum kırmızı, güncel yeşil) birleşirse long; tersi short. Hedef Bollinger(10,2) karşı bandı, stop sinyal mumunun dibi/tepesi.",
+  "kategori": "ortalamaya_donus",
+  "piyasa_rejimi": "yatay",
+  "orijinal_piyasa": "genel",
+  "zaman_dilimi": {
+    "islem": "5m (kaynakta 1m Nifty endeksi, biz >=5m'ye uyarlarız)",
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {
+      "ad": "Stokastik",
+      "parametreler": {
+        "k_periyot": 6,
+        "d_periyot": 3,
+        "not": "%K ham, %D = %K'nın 3 SMA'sı"
+      }
+    },
+    {
+      "ad": "Bollinger",
+      "parametreler": {
+        "periyot": 10,
+        "sapma": 2,
+        "orta": "SMA"
+      }
+    }
+  ],
+  "long_giris": [
+    "Bir önceki bar: %K < %D, güncel bar: %K > %D (yukarı kesişim)",
+    "Önceki mum kırmızı (kapanış < açılış), güncel mum yeşil (kapanış > açılış)",
+    "Güncel bar kapanışında gir (en az 21 bar ısınma)"
+  ],
+  "short_giris": [
+    "Önceki bar: %K > %D, güncel bar: %K < %D (aşağı kesişim)",
+    "Önceki mum yeşil, güncel mum kırmızı",
+    "Güncel bar kapanışında gir"
+  ],
+  "stop_loss": "Long: sinyal mumunun en düşüğü; short: sinyal mumunun en yükseği",
+  "kar_al": "Long: sinyal anındaki BB(10,2) üst bandı; short: alt bandı (seviye giriş anında sabitlenir)",
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [
+    "Kaynakta işlem saati 09:15-15:30 (Hindistan seansı); 7/24 kriptoda karşılığı yok"
+  ],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": null,
+  "kanit": null,
+  "veri_uygun": [
+    true,
+    "Yalnız OHLC gerekir; kripto perp ve Dukascopy hisse/emtia 5m+ ile uygulanabilir. Kaynak piyasası Hindistan Nifty endeksi, kriptoda doğrulanmamış."
+  ],
+  "kodlanabilirlik": {
+    "puan": 2,
+    "gerekce": "Kurallar sayısal; ancak kaynak kodda bullish_pattern/bearish_pattern bar i yerine son iki mumu okuyor (hata), niyete göre yeniden kodlanmalı."
+  },
+  "belirsizlikler": [
+    "Kaynakta backtest sonucu yok; stop mum dibi çok dar olabilir (stop/hedef oranı belirsiz)",
+    "Hedef BB bandı giriş anında mı yoksa dinamik mi izlenir kaynakta net değil (kod giriş anı değerini yazıyor)",
+    "Kodda mevcut pozisyon çıkışı 'TODO': ters sinyalde ne olacağı kaynakta yok",
+    "Kaynak 1 dk çalışıyor, >=5m uyarlamasında parametreler yeniden bakılmalı",
+    "Bar içi sinyalle bar kapanışı karışmamalı: yalnız kapanmış barla kodlanmalı"
+  ],
+  "uyumluluk_notu": "Küçük zaman diliminde komisyon/spread stop-hedef mesafesini yiyebilir; BB(10) dar. Mevcut bollinger-rsi-donus ailesine yakın ama giriş tetikleyicisi stokastik kesişimi + mum rengi dönüşü.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+    "stokastik",
+    "kesisim",
+    "bollinger",
+    "ters-mum",
+    "nifty",
+    "ortalamaya-donus"
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "stop_loss": "Giriş fiyatından 1,0 x ATR(10) ters yönde (short için yukarıda)",
+  "kar_al": "Giriş fiyatından 0,5 x ATR(10) lehte",
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "short_giris": [
+    "High > önceki High VE Low > önceki Low",
+    "Close < Open (düşüş mumu)",
+    "Close < EMA(10)",
+    "Giriş: o mumun Low - 1 tik seviyesine satış stop emri"
+  ],
+  "filtreler": [],
+  "pozisyon_risk": "İşlem başına hesabın %1'i riske edilir (kaynak varsayılanı); komisyon %0,075 ve kayma %0,05 her yönde modellenmiş",
+  "varyantlar": [],
+  "kart_id": "daytrade__dusuk-yuksek-mum-ema10-atr-btc15m__ilyasustun",
+  "ad": "BTC 15m Geri Çekilme Mumu + EMA10, ATR Hedef/Stop (Bekleyen Emir)",
+  "stil": "daytrade",
+  "kaynak": {
+    "url": "https://github.com/ilyasustun/ATR-BTC",
+    "lisans": "MIT",
+    "tur": "github"
+  },
+  "ozet": "15 dakikada fiyat EMA(10) üstündeyken önceki muma göre hem yüksek hem düşüğü alçalan ama yükselişle kapanan bir mum (kısa geri çekilme içinde dönüş mumu) görülürse, o mumun zirvesinin 1 tik üstüne bekleyen alış emri konur; hedef 0,5 ATR, stop 1 ATR. Short simetriktir.",
+  "kategori": "momentum",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "kripto",
+  "zaman_dilimi": {
+    "islem": "15m",
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {
+      "ad": "EMA",
+      "parametreler": {
+        "periyot": 10,
+        "adjust": false
+      }
+    },
+    {
+      "ad": "ATR",
+      "parametreler": {
+        "periyot": 10,
+        "yontem": "basit ortalama (TR 10 bar)"
+      }
+    }
+  ],
+  "long_giris": [
+    "Mum kapanışında: High < önceki High VE Low < önceki Low",
+    "Close > Open (yükseliş mumu)",
+    "Close > EMA(10)",
+    "Giriş: o mumun High + 1 tik seviyesine alış stop emri (kapanış sonrası)"
+  ],
+  "iddia_edilen_performans": null,
+  "kanit": "README'deki 'kazanma ~%55, PF 1,4, MaxDD %12' açıkça 'örnek' diye yazılmış; kod çıktısı repoda yok. Gerçek sonuç kaynakta görülmedi (doğrulanmadı).",
+  "veri_uygun": [
+    true,
+    "15m OHLCV bizde var (Binance USDT-M); kaynak Bybit 2024 verisi, evren BTC."
+  ],
+  "kodlanabilirlik": {
+    "puan": 2,
+    "gerekce": "Kurulum ve çıkışlar sayısal; bekleyen emrin geçerlilik süresi ve doluş kontrolü kaynakta yok."
+  },
+  "belirsizlikler": [
+    "Bekleyen emrin kaç bar geçerli olduğu kaynakta yok; backtest kodu emrin hiç dolmadığı durumu kontrol etmeden işlemi dolmuş sayıyor (iyimser)",
+    "Aynı barda hem hedef hem stop görülürse kod önce hedefi sayıyor (iyimser); biz stop-önce varsaymalıyız",
+    "TR hesabında np.maximum üçüncü argümanı çıktı dizisi olarak yutuyor: |Low-öncekiKapanış| terimi fiilen kullanılmıyor (küçük hata)",
+    "Üst üste binen kurulumlar bağımsız işlem sayılıyor; aynı anda tek pozisyon kuralı yok",
+    "Hedef/stop oranı 0,5:1 olduğundan başa baş için ~%67 kazanma gerekir; maliyet etkisi büyük"
+  ],
+  "uyumluluk_notu": "15m Binance perp'te doğrudan uygulanabilir; kaynağın Bybit verisi ve tik=0,1 varsayımı sembole göre uyarlanmalı. Mevcut sma-trend-rsi-atr-btc15m ile farklı kural (mum yapısı bazlı).",
+  "anahtar_kelimeler": [
+    "ema",
+    "atr",
+    "bekleyen-emir",
+    "geri-cekilme-mumu",
+    "btc",
+    "15m"
+  ]
+}

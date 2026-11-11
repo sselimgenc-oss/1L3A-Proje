@@ -1,0 +1,82 @@
+{
+  "kart_id": "swing__donchian10-ema200-egim-impuls-3atr-iz__tientung2501",
+  "ad": "Donchian(10) Kırılım + EMA200 Eğim + 3 ATR İz Süren",
+  "stil": "swing",
+  "kaynak": {
+    "url": "https://github.com/TienTung2501/backtest_trading_strategy",
+    "lisans": "lisanssız (kod kopyalanmadı)",
+    "tur": "github"
+  },
+  "ozet": "EMA200 yükselirken, önceki 10 mumun tepesi kırılır ve mum güçlü yeşil gövdeliyse long açılır. Başlangıç stopu 2 ATR, 1R kârdan sonra tepeden 3 ATR iz süren stop devreye girer.",
+  "kategori": "kirilim",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "genel",
+  "zaman_dilimi": {
+    "islem": "1d (README örnekleri 1d; kod periyottan bağımsız)",
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {
+      "ad": "EMA",
+      "parametreler": {
+        "periyot": 200
+      }
+    },
+    {
+      "ad": "Donchian tepe",
+      "parametreler": {
+        "periyot": 10
+      }
+    },
+    {
+      "ad": "ATR",
+      "parametreler": {
+        "periyot": 14,
+        "tur": "basit ortalama"
+      }
+    }
+  ],
+  "long_giris": [
+    "Kapanış > EMA200",
+    "EMA200 bugün > 20 bar önceki EMA200 (eğim pozitif)",
+    "Bu barın tepesi > önceki barın 10 barlık en yüksek tepesi (mevcut bar hariç)",
+    "Bar yeşil (kapanış>açılış) ve gövde >= 0,3 x ATR(14)",
+    "ATR/kapanış %0,3 ile %6 arasında",
+    "Son sinyalden en az 5 bar geçmiş olmalı (bekleme)",
+    "Giriş: sinyal barının kapanışı (bizde sonraki açılış)"
+  ],
+  "short_giris": [],
+  "stop_loss": "Başlangıç: giriş - 2 x ATR(14)",
+  "kar_al": null,
+  "iz_suren_stop": "Kâr >= 1R olunca: girişten sonraki en yüksek tepe - 3 x ATR(14); giriş fiyatının altına inmez, yalnız yukarı çekilir",
+  "zaman_cikisi": null,
+  "filtreler": [
+    "Yalnız long (short kodda var ama kapalı)"
+  ],
+  "pozisyon_risk": "İşlem başına özsermayenin %1,5'i riske edilir",
+  "iddia_edilen_performans": "Repo sonuç dosyası: çoklu varlık portföyü 2006-2026, 172 işlem, kazanma %45,9, PF 2,06, getiri +%6,74, maks DD -%1,24 (iddia, doğrulanmadı; sharpe iki farklı değer: 0,28 ve 0,83)",
+  "kanit": "Repo içi sonuç özeti (portföy trend_rider 1d); bağımsız doğrulama yok, Sharpe tutarsız.",
+  "veri_uygun": [
+    true,
+    "OHLCV yeterli; kripto günlük ve Dukascopy hisse/emtia günlük kullanılabilir."
+  ],
+  "kodlanabilirlik": {
+    "puan": 3,
+    "gerekce": "Tüm koşullar kodda sayısal."
+  },
+  "belirsizlikler": [
+    "Kodda iz süren stop güncellemesi ve bar içi sıra: tepe ile düşük aynı barda olabilir, kontrol ertesi bar",
+    "Bekleme sayacı (5 bar) yalnız giriş sinyalinden",
+    "Risk boyutu portföy motoruna bağlı",
+    "Sonuç özetinde Sharpe değerleri çelişkili"
+  ],
+  "uyumluluk_notu": "Mevcut Donchian kartlarına (swing__50g-kirilim-sma-filtre-3atr-iz__wilki2021, donchian-ansambl) yakın aile; farkı EMA200 eğimi, güçlü gövde ve ATR bandı filtreleri ve 1R sonrası iz stop. Çakışırsa birleştirilebilir.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+    "donchian",
+    "ema200",
+    "atr-iz-stop",
+    "kirilim",
+    "trend-takip"
+  ]
+}

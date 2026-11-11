@@ -1,0 +1,78 @@
+{
+  "kart_id": "daytrade__momentum-itkisi-10atr-20bar-long-5m__tomasbatovsky",
+  "ad": "5m Aşırı Momentum İtkisi (20 Bar > 10 ATR) Long, 1,5 ATR Stop / 2R Hedef",
+  "stil": "daytrade",
+  "kaynak": {
+    "url": "https://github.com/tomasbatovsky-png/portfolio-momentum-trading",
+    "lisans": "yok",
+    "tur": "github"
+  },
+  "ozet": "5 dakikalık grafikte son 20 barın net yükselişi ATR(14) x 0,5 x 20 eşiğini (10 ATR) ilk kez aştığında bar kapanışından long açılır; stop 1,5 ATR, hedef 2R. Yalnız long, çok seyrek (ayda ~1,5 işlem).",
+  "kategori": "momentum",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "genel",
+  "zaman_dilimi": {
+    "islem": "5m",
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {
+      "ad": "ATR (basit ortalama TR)",
+      "parametreler": {
+        "periyot": 14
+      }
+    },
+    {
+      "ad": "Momentum",
+      "parametreler": {
+        "formul": "Close_t - Close_t-20",
+        "esik": "ATR x 0.5 x 20"
+      }
+    }
+  ],
+  "long_giris": [
+    "Momentum_t = Close_t - Close_(t-20) > ATR14_t x 0,5 x 20",
+    "Önceki barda aynı koşul sağlanmıyordu (koşulun ilk doğru olduğu bar)",
+    "Stop mesafesi (1,5 x ATR) > 0 ve <= 200 puan (NAS100'e özgü sağlık kontrolü)",
+    "Giriş: sinyal barının kapanış fiyatı"
+  ],
+  "short_giris": [],
+  "stop_loss": "Giriş - 1,5 x ATR14",
+  "kar_al": "Giriş + 2 x (1,5 x ATR14) = 2R (3 ATR)",
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [
+    "Kaynakta ATR14 mutlak aralığı 15-80 puan (NAS100'e özgü; bizde ATR/fiyat yüzdesi karşılığı kaynakta yok: null)",
+    "Kaynak backtest: 15:30-20:00 CET seans ve günlük işlem limiti"
+  ],
+  "pozisyon_risk": "Kaynak: %0,5 risk (hesap büyüdükçe merdiven %2'ye kadar); bizde risk limitleri kodda",
+  "iddia_edilen_performans": "Kod başlığı: ~13 işlem/9 ay, kazanma %69, PF 4,0, getiri +%6,2, maks. düşüş -%0,5 (tek enstrüman, 13 işlem; doğrulanmadı)",
+  "kanit": "Kod strategy.py/backtest_engine.py açıldı. README ile kod tutarsız (README: 0,3 çarpanı + EMA20>EMA50 + RSI<70 filtresi; kod: 0,5 çarpanı, bu filtreler yok). Kod 'OPTIMIZED PARAMETERS' diyor: in-sample optimizasyon, 13 işlemle istatistiksel kanıt yok. Aynı SL ve TP aynı barda ise stop önce sayılıyor.",
+  "veri_uygun": [
+    true,
+    "OHLCV 5m yeter; ATR mutlak aralık filtresi bırakılırsa BTC/ETH/XAU/hisse 5m'de çalışır."
+  ],
+  "kodlanabilirlik": {
+    "puan": 3,
+    "gerekce": "Giriş, stop, hedef kodda tam sayısal; tek eksik NAS100'e özgü mutlak ATR filtresi (null)."
+  },
+  "belirsizlikler": [
+    "Eşik: 20 barlık net yükseliş > 10 x ATR14 çok aşırı; kripto 5m'de bile çok seyrek tetiklenir, çarpan değeri taşınabilir mi belirsiz",
+    "ATR 15-80 puan filtresi NAS100'e özgü; kripto/XAU/hisse için karşılığı kaynakta yok",
+    "Parametreler yazarın kendi verisinde optimize edilmiş ('OPTIMIZED PARAMETERS'), OOS yok",
+    "README ile kod arasında çarpan (0,3 vs 0,5) ve ek filtre farkı var; kod esas alındı",
+    "Yalnız long: NAS100 yükseliş yanlılığına bağlı olabilir"
+  ],
+  "uyumluluk_notu": "Mevcut daytrade__ilk-yari-saat-momentum__shen seans-içi ilk yarım saat momentumu; bu kart seansa bağlı değil, ATR-normalize N-bar itki eşiği. Düşük işlem sayısı nedeniyle test gücü zayıf olabilir.",
+  "varyantlar": [
+    "README: M1 'scalp' katmanı ve US30/SP500/DAX40 portföyü; DAX40 PF 0,44 ile çıkarılmış"
+  ],
+  "anahtar_kelimeler": [
+    "momentum",
+    "atr",
+    "itki",
+    "long-only",
+    "5m",
+    "2r-hedef"
+  ]
+}

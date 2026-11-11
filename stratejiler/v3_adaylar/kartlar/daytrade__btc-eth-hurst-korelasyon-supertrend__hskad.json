@@ -1,0 +1,118 @@
+{
+  "kart_id": "daytrade__btc-eth-hurst-korelasyon-supertrend__hskad",
+  "ad": "BTC Rejim Kapılı ETH Trend Girişi (Hurst + Korelasyon + Supertrend)",
+  "stil": "daytrade",
+  "kaynak": {
+    "url": "https://github.com/hskad/Curating-Alphas-on-ETH-USDT-and-BTC-USDT-Crypto-Markets",
+    "lisans": "yok (lisans dosyası yok)",
+    "tur": "github"
+  },
+  "ozet": "BTC düşük oynaklıkta, BTC-ETH korelasyonu yüksek ve ETH Hurst>0,5 iken; BTC RSI aşırı bölgesi, BTC Bollinger/CUSUM rejimi ve ETH Supertrend yönü aynı tarafı gösterirse ETH'de işlem açılır. Çıkış: iz süren stop, azami tutma süresi, BTC oynaklık patlaması veya ters rejim.",
+  "kategori": "trend_takip",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "kripto",
+  "zaman_dilimi": {
+    "islem": "1h",
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {
+      "ad": "RSI",
+      "parametreler": {
+        "periyot": 14,
+        "tur": "basit ortalama (Wilder değil)"
+      }
+    },
+    {
+      "ad": "ATR",
+      "parametreler": {
+        "periyot": 12,
+        "tur": "basit ortalama"
+      }
+    },
+    {
+      "ad": "Bollinger",
+      "parametreler": {
+        "periyot": 20,
+        "sapma": 2
+      }
+    },
+    {
+      "ad": "Supertrend",
+      "parametreler": {
+        "periyot": 12,
+        "carpan": 2.5,
+        "not_": "kaynaktaki özel uygulama"
+      }
+    },
+    {
+      "ad": "Hurst üssü",
+      "parametreler": {
+        "pencere": "120 bar (5 gün)"
+      }
+    },
+    {
+      "ad": "Korelasyon",
+      "parametreler": {
+        "pencere": "7 bar, BTC-ETH kapanış"
+      }
+    },
+    {
+      "ad": "Kalman filtresi + CUSUM rejim",
+      "parametreler": {
+        "k": "0,8 x 5 barlık std",
+        "esik": "1,5 x 5 barlık std"
+      }
+    }
+  ],
+  "long_giris": [
+    "Kapı: BTC ATR < %1 x BTC açılışı VE 7 barlık BTC-ETH korelasyonu > 0,6 VE ETH Hurst > 0,5",
+    "BTC RSI > 70",
+    "BTC CUSUM rejimi 'bullish' (S_hi > 1,5 x 5 barlık std)",
+    "BTC kapanış > BTC Bollinger orta bandı",
+    "ETH Supertrend yönü = yukarı",
+    "Pozisyon yoksa ETH'de long"
+  ],
+  "short_giris": [
+    "Aynı kapı koşulları",
+    "BTC RSI < 30",
+    "BTC rejimi 'bearish' (bullish değil)",
+    "BTC kapanış < BTC Bollinger alt bandı",
+    "ETH Supertrend yönü = aşağı",
+    "ETH'de short"
+  ],
+  "stop_loss": "Long: son 24 barın en düşüğü L24 ve zirveden %10 aşağıdaki iz seviyesi T olsun; L24 < T ise stop=(L24+T)/2, değilse stop=L24; kapanış stopun altına inerse çık. Short: giriş sonrası en düşükten %10 yukarıdaki seviyenin üstünde kapanış. Stop sonrası 24 bar işlem yok.",
+  "kar_al": null,
+  "iz_suren_stop": "Long: giriş sonrası kapanış zirvesinden %10 aşağı (yukarıdaki stop formülünün T bileşeni); short: en düşükten %10 yukarı",
+  "zaman_cikisi": "Azami 28 gün (672 bar) tutma; BTC ATR > %2,5 x BTC açılışı ise zorla çık; long çıkışı: BTC RSI<30 + ETH RSI düşüyor + bearish rejim + BTC kapanış<alt bant + ETH Supertrend aşağı (kapı içindeyken); short çıkışı: BTC RSI>70 iki bar üst üste + ETH RSI yükseliyor + bullish rejim + BTC kapanış>orta bant + ETH Supertrend yukarı",
+  "filtreler": [
+    "Sinyal yalnız ETH 1 saatlik; BTC yalnız rejim kaynağı"
+  ],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": "README iddiası (doğrulanmadı): Sharpe 5,966 ve 9,15 (iki farklı dönem/kol).",
+  "kanit": "README'de Sharpe 5,966 ve 9,15 iddia (doğrulanmadı); kodu kendi gözümle okudum, çalıştırmadım. Sonuçlar dar bir dönemde, çok parametreli bir kapıyla elde edilmiş.",
+  "veri_uygun": [
+    true,
+    "Binance ETH ve BTC perp 1h OHLCV bizde var; hacim/funding gerekmiyor."
+  ],
+  "kodlanabilirlik": {
+    "puan": 2,
+    "gerekce": "Tüm kurallar kodda mekanik, ML yok; ama ~15 parametre ve özel Supertrend/CUSUM uygulaması var."
+  },
+  "belirsizlikler": [
+    "Sinyalin hangi bardan doldurulduğu kaynakta yok (backtest motoru untrade, kapanışta mı sonraki açılışta mı belirsiz)",
+    "Hurst hesabı (compute_Hc türü) kaynakta açıkça belirtilmemiş",
+    "Kalman filtresi parametreleri sabit (kaynakta var) ama filtre tüm seriyi ileri doğru işler (nedensel)",
+    "Aşırı parametreli: aşırı uyum riski yüksek",
+    "Long/short stop kuralları asimetrik"
+  ],
+  "uyumluluk_notu": "BTC'den ETH'ye rejim kapılı çok koşullu trend; mevcut kartlarla doğrudan kopya yok. Aşırı parametre nedeniyle düşük güven.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+    "hurst",
+    "korelasyon-kapisi",
+    "supertrend",
+    "cusum",
+    "btc-eth"
+  ]
+}

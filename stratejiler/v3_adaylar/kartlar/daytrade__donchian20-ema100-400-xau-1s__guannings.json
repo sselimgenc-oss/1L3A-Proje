@@ -1,0 +1,97 @@
+{
+  "stop_loss": "Giriş kapanışından 2 x ATR(14) ters yönde",
+  "kar_al": null,
+  "iz_suren_stop": "Chandelier: lehe en uç (long için giriş sonrası en yüksek High) - 4 x ATR(14); stop yalnız lehe hareket eder",
+  "zaman_cikisi": "Gün sonu zorunlu kapanış (kaynakta borsa gün seansı, 13:30 yerel; bizde seans tanımı yok, UYARLAMA)",
+  "short_giris": [
+    "Günlük EMA(400) - EMA(100) > 0,005 x EMA(400)",
+    "1s kapanış < önceki 20 barın en düşük Low'u",
+    "Pozisyon yok"
+  ],
+  "filtreler": [
+    "Rejim nötr (ölü bant içinde) ise yeni giriş yok; açık pozisyon bu yüzden kapanmaz",
+    "Ters yönde rejim dönerse (kesin işaret değişimi) açık pozisyon kapatılır",
+    "İsteğe bağlı haber yasağı penceresi (kaynakta boş)"
+  ],
+  "pozisyon_risk": "Kaynak: yıllık %15 hedef volatilite, drawdown %15'i aşınca boyut yarıya; bizde risk limitleri kodda",
+  "varyantlar": [
+    "Repodaki orb_strategy.py açılış aralığı kırılımı (kaynakta elenmiş)"
+  ],
+  "kart_id": "daytrade__donchian20-ema100-400-xau-1s__guannings",
+  "ad": "Altın 1s Donchian-20 Kırılımı + Günlük EMA100/400 Rejim Kapısı",
+  "stil": "daytrade",
+  "kaynak": {
+    "url": "https://github.com/Guannings/systematic-futures-research",
+    "lisans": "MIT",
+    "tur": "github"
+  },
+  "ozet": "Günlük EMA(100) ve EMA(400) arası fark %0,5'lik ölü bandı aşıyorsa yön izni verilir; saatlik grafikte önceki 20 barın zirvesi (long) veya dibi (short) kapanışla kırılırsa girilir. Stop 2 ATR, iz süren 4 ATR, gün sonunda zorunlu kapanış.",
+  "kategori": "kirilim",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "emtia",
+  "zaman_dilimi": {
+    "islem": "1h",
+    "ust_filtre": "1d"
+  },
+  "gostergeler": [
+    {
+      "ad": "EMA",
+      "parametreler": {
+        "periyot": 100,
+        "zaman": "1d"
+      }
+    },
+    {
+      "ad": "EMA",
+      "parametreler": {
+        "periyot": 400,
+        "zaman": "1d"
+      }
+    },
+    {
+      "ad": "Donchian",
+      "parametreler": {
+        "periyot": 20,
+        "zaman": "1h"
+      }
+    },
+    {
+      "ad": "ATR",
+      "parametreler": {
+        "periyot": 14,
+        "yontem": "son 14 TR basit ortalama",
+        "zaman": "1h"
+      }
+    }
+  ],
+  "long_giris": [
+    "Günlük EMA(100) - EMA(400) > 0,005 x EMA(400) (yükseliş rejimi)",
+    "1s kapanış > önceki 20 saatlik barın en yüksek High'ı (mevcut bar hariç)",
+    "Pozisyon yok ve gün sonu çıkış saatinden önce"
+  ],
+  "iddia_edilen_performans": null,
+  "kanit": "Kod yorumu: günlük EMA 100/400 ile Sharpe 0,99 tüm örneklem / 0,95 OOS; EMA 50/200 ile 0,63 / 0,34 (iddia, doğrulanmadı; vekil altın verisi, maliyet öncesi; kaynak dokümanı maliyetle ~%10 azalma diyor). Canlıda vekil verinin sorun çıkardığı belirtilmiş.",
+  "veri_uygun": [
+    true,
+    "XAU Dukascopy 1s/günlük (5m'den) türetilir; kaynağın vadeli seans mantığı yerine 24s XAU için seans/gün sonu tanımı seçilmeli."
+  ],
+  "kodlanabilirlik": {
+    "puan": 3,
+    "gerekce": "Tüm giriş, stop ve rejim kuralları sayısal ve kodda net; yalnız seans saati uyarlanacak."
+  },
+  "belirsizlikler": [
+    "Günlük barın hangi saatlerden oluştuğu (borsa gün seansı) kaynakta veriye bağlı; 24s XAU için tanım yok",
+    "Kodun başlığı 15 dk çağrısından söz ediyor, README ve backtest saatlik veri; saatlik alındı",
+    "Aynı barda hem trailing güncelleme hem stop kontrolü yapılıyor; barın içindeki sıra belirsiz (iyimser olabilir)",
+    "EMA(400) için en az 400 günlük çubuk ısınma gerekir",
+    "Parametreler (100/400) örneklem içi/dışı karşılaştırmayla seçilmiş; yine de ayar riski var"
+  ],
+  "uyumluluk_notu": "Mevcut donchian-ansambl-vol-hedef__zarattini kripto çoklu geriye-bakış rotasyonu; bu kart tek altın enstrümanı, günlük rejim kapılı saatlik kırılım, farklı kural.",
+  "anahtar_kelimeler": [
+    "donchian",
+    "ema-rejim",
+    "atr-chandelier",
+    "xau",
+    "gun-ici"
+  ]
+}

@@ -1,0 +1,77 @@
+{
+  "kart_id": "swing__btc-gecelik-max10-hafta-sonu__dujava",
+  "ad": "BTC Gecelik Seans + 10 Günlük Zirve (MAX10)",
+  "stil": "swing",
+  "kaynak": {
+    "url": "https://quantpedia.com/how-to-profitably-trade-bitcoins-overnight-sessions/",
+    "lisans": "blog (Quantpedia)",
+    "tur": "blog"
+  },
+  "ozet": "BTC getirileri 2021'den beri ağırlıkla ABD hisse seansı dışında (gece) oluşuyor. Strateji yalnızca gece seanslarını (Cuma-Pazartesi, Pazartesi-Salı, Salı-Çarşamba) ve yalnız fiyat yerel 10 günlük zirvedeyken long taşıyor, aksi halde nakitte.",
+  "kategori": "momentum",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "kripto",
+  "zaman_dilimi": {
+    "islem": "1h",
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {
+      "ad": "MAX (N günlük zirve)",
+      "parametreler": {
+        "N": 10
+      }
+    },
+    {
+      "ad": "Seans takvimi",
+      "parametreler": {
+        "gunduz_seansi": "10:00-16:00 EST, NYSE açık günler",
+        "gece": "geri kalan tüm saatler"
+      }
+    }
+  ],
+  "long_giris": [
+    "Cuma, Pazartesi veya Salı gün seansı kapanışında (16:00 EST) BTC yerel 10 günlük zirvedeyse long aç ve bir sonraki gün seansı açılışına (10:00 EST; Cuma için Pazartesi) kadar tut"
+  ],
+  "short_giris": [],
+  "stop_loss": null,
+  "kar_al": null,
+  "iz_suren_stop": null,
+  "zaman_cikisi": "Sonraki gün seansının başlangıcında (10:00 EST) kapat; Cuma girişi hafta sonunu taşır",
+  "filtreler": [
+    "10 günlük zirve koşulu",
+    "Yalnız Cuma/Pazartesi/Salı geceleri",
+    "NYSE açık gün (tatil günleri ayrı davranır)"
+  ],
+  "pozisyon_risk": null,
+  "iddia_edilen_performans": "Yazar: örneklem dışı (2021-10 sonrası) 'over 35%' getiri, maksimum düşüş yaklaşık -12%; Sharpe rakamı metinde yok, tablolar görsel (iddia, doğrulanmadı)",
+  "kanit": "Quantpedia blog, Cyril Dujava; Gemini saatlik BTC 2015-10 ile 2024-10; örneklem içi/dışı ayrımı 2021-10-18 (BITO tarihi). Maliyet varsayımı okunamadı; blog, hakemli değil. İddia (doğrulanmadı).",
+  "veri_uygun": [
+    true,
+    "BTC saatlik OHLCV yeterli; NYSE takvimi ve EST/yaz saati hesabı koda eklenmeli (ek veri gerekmez)."
+  ],
+  "kodlanabilirlik": {
+    "puan": 2,
+    "gerekce": "Kurallar net ama 'yerel 10 günlük zirve' tanımı ve giriş/çıkış mumları yoruma açık."
+  },
+  "belirsizlikler": [
+    "'Local 10-day high' tam tanımı kaynakta yok (kapanış mı, gün içi yüksek mi)",
+    "Gün seansı 10:00-16:00 EST; 16:00 kapanışta giriş, 10:00 çıkış varsayımı",
+    "Maliyet ve kayma varsayımı okunamadı",
+    "Tablolar görsel, rakamlar doğrulanamadı",
+    "Çarşamba-Cuma geceleri neden dışarıda: kaynak gerekçesi kısa"
+  ],
+  "uyumluluk_notu": "Yalnız BTC OHLCV gerekir. Yön ve süre takvim tabanlı; ABD hisse saatine bağlı olduğundan DST ve tatil takvimi şart. Mevcut swing__gun-zirve-kirilim-mmr kartıyla zirve filtresi benzer ama burada asıl unsur gece seansı zamanlaması.",
+  "varyantlar": [
+    "N=5 ve N=50 günlük zirve (daha önceki Quantpedia MAX çalışmasında denenmiş)",
+    "Filtresiz: tüm gece seansları long"
+  ],
+  "anahtar_kelimeler": [
+    "gecelik",
+    "seans",
+    "hafta-sonu",
+    "max10",
+    "zirve",
+    "btc"
+  ]
+}

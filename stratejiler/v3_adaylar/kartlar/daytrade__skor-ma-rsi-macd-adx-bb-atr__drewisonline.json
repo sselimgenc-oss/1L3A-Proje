@@ -1,0 +1,122 @@
+{
+  "kart_id": "daytrade__skor-ma-rsi-macd-adx-bb-atr__drewisonline",
+  "ad": "Puanlı Trend Takip (MA/RSI/MACD/ADX/BB) + ATR Stop",
+  "stil": "daytrade",
+  "kaynak": {
+    "url": "https://github.com/DrewIsonline/cryptocaller-streamlit",
+    "lisans": "MIT",
+    "tur": "github"
+  },
+  "ozet": "SMA20/50 ve EMA20/50 dizilimi, RSI, MACD, ADX ve Bollinger durumlarına puan verilir; toplam puan yeterince yüksekse trend yönünde giriş, 2xATR stop ve 3xATR hedef konur.",
+  "kategori": "trend_takip",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "kripto",
+  "zaman_dilimi": {
+    "islem": "kullanıcı seçer (1m-1d); kaynakta sabit periyot yok, test için 1h önerilir",
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {
+      "ad": "SMA",
+      "parametreler": {
+        "periyot": [
+          20,
+          50
+        ]
+      }
+    },
+    {
+      "ad": "EMA",
+      "parametreler": {
+        "periyot": [
+          20,
+          50
+        ]
+      }
+    },
+    {
+      "ad": "RSI",
+      "parametreler": {
+        "periyot": 14
+      }
+    },
+    {
+      "ad": "MACD",
+      "parametreler": {
+        "hizli": 12,
+        "yavas": 26,
+        "sinyal": 9
+      }
+    },
+    {
+      "ad": "ADX",
+      "parametreler": {
+        "periyot": 14
+      }
+    },
+    {
+      "ad": "Bollinger",
+      "parametreler": {
+        "periyot": 20,
+        "sapma": 2
+      }
+    },
+    {
+      "ad": "ATR",
+      "parametreler": {
+        "periyot": 14
+      }
+    }
+  ],
+  "long_giris": [
+    "Puan p = 0 ile başla (kapanış, son bar):",
+    "+2 eğer SMA20>SMA50 ve EMA20>EMA50; -2 eğer ikisi de ters",
+    "+1 eğer kapanış>SMA20>SMA50; -1 eğer kapanış<SMA20<SMA50",
+    "RSI<30: +1; RSI>70: -1; 40<RSI<60: +0,5",
+    "MACD>sinyal ve histogram>0: +1; tersi: -1",
+    "ADX>25 ise p'yi 1,2 ile çarp",
+    "Kapanış<alt Bollinger: +0,5; kapanış>üst Bollinger: -0,5",
+    "Long: p >= 2,5 (kodda p>=2 ve güven=|p|/5>=0,5 birlikte, yani fiilen p>=2,5)"
+  ],
+  "short_giris": [
+    "Short: p <= -2,5"
+  ],
+  "stop_loss": "Giriş fiyatından 2 x ATR(14) ters yönde",
+  "kar_al": "Girişten 3 x ATR(14) lehte (R:R 1,5)",
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [
+    "Yeterli geçmiş: en az 60 bar"
+  ],
+  "pozisyon_risk": "Kaynakta fonksiyon var: hesap bakiyesinin sabit yüzdesi risk / stop mesafesi; yüzde değeri çağırandan gelir (kaynakta sabit yok)",
+  "iddia_edilen_performans": null,
+  "kanit": null,
+  "veri_uygun": [
+    true,
+    "Kripto OHLCV ile kurulabilir; hacim gerekmez."
+  ],
+  "kodlanabilirlik": {
+    "puan": 3,
+    "gerekce": "Tüm puanlar ve eşikler kodda sayısal."
+  },
+  "belirsizlikler": [
+    "Periyot kaynakta sabit değil",
+    "Kod son (belki açılmamış/kapanmamış) mumu kullanıyor; bizde yalnız kapanmış mum kullanılacak",
+    "Çıkış kuralı yalnız stop/hedef; zaman çıkışı yok",
+    "Puanlar sezgisel toplam; tekil katkılar çakışıyor (MA kesişimi iki yerde), aşırı uyum riski",
+    "Kaynakta sonuç/kanıt yok"
+  ],
+  "uyumluluk_notu": "Mevcut çoklu-gösterge puan kartlarıyla (dis__ ma_kesisim ailesi) benzerlik olabilir; ayrım: ADX çarpanı ve +0,5 RSI nötr puanı.",
+  "varyantlar": [
+    "Aynı dosyada ortalamaya dönüş motoru (z-skor + RSI, %2 stop) ve kırılım motoru da var; ayrı kart değil"
+  ],
+  "anahtar_kelimeler": [
+    "puanli-trend",
+    "sma-ema",
+    "macd",
+    "adx",
+    "bollinger",
+    "atr-stop",
+    "kripto"
+  ]
+}

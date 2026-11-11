@@ -1,0 +1,96 @@
+{
+  "kart_id": "swing__rsi-geri-cekilme-ema-yigin-gunluk__kunal14901",
+  "ad": "Gunluk RSI Geri Cekilme (EMA20>EMA50, RSI 40-54)",
+  "stil": "swing",
+  "kaynak": {
+    "url": "https://github.com/kunal14901/KA-MATS",
+    "lisans": "lisanssiz",
+    "tur": "github"
+  },
+  "ozet": "Gunluk grafikte EMA20 > EMA50 yukselis trendinde RSI(14) 40-54 bandina cekildiginde, fiyat EMA50'nin %4'unden fazla altinda degilse, getiri siralamasi ust yarida ve ADX>15 ise long. Stop 2.5 ATR, hedef 11 ATR.",
+  "kategori": "ortalamaya_donus",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "kripto",
+  "zaman_dilimi": {
+    "islem": "1d",
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {
+      "ad": "EMA",
+      "parametreler": {
+        "hizli": 20,
+        "yavas": 50
+      }
+    },
+    {
+      "ad": "RSI",
+      "parametreler": {
+        "periyot": 14
+      }
+    },
+    {
+      "ad": "ATR",
+      "parametreler": {
+        "periyot": 14
+      }
+    },
+    {
+      "ad": "ADX",
+      "parametreler": {
+        "periyot": 14
+      }
+    },
+    {
+      "ad": "20 gunluk getiri kesit sirasi",
+      "parametreler": {
+        "pencere": 20
+      }
+    }
+  ],
+  "long_giris": [
+    "EMA20 > EMA50",
+    "RSI(14) 40 ile 54 arasinda",
+    "Kapanis >= 0.96 x EMA50",
+    "Hacim / ortalama hacim < 2.0",
+    "20 gunluk getiri sirasi (evren icinde 0=en kotu, 1=en iyi) >= 0.55",
+    "ADX > 15"
+  ],
+  "short_giris": [],
+  "stop_loss": "Giris kapanisindan 2.5 x ATR(14) asagisi",
+  "kar_al": "Giris kapanisindan 11 x ATR(14) yukarisi",
+  "iz_suren_stop": "Kaynak docstring'inde 'izleyen stop uzun kosulari yakalar' diyor, kural kodda bu sinifta yok",
+  "zaman_cikisi": null,
+  "filtreler": [
+    "Kesit sirasi >= 0.55",
+    "ADX > 15",
+    "Hacim orani < 2"
+  ],
+  "pozisyon_risk": "Kaynakta risk yuzdesi kart disi sinifta; yok sayildi.",
+  "iddia_edilen_performans": "Kaynak README'sinde 22 coin 2020-2026 walk-forward iddiasi (doğrulanmadı).",
+  "kanit": "Kaynak, 'OOS bozulmasini azaltmak icin filtreler siklastirildi' diyor: filtreler ornek-disi veriye bakilarak ayarlanmis (iddia).",
+  "veri_uygun": [
+    true,
+    "Binance USDT-M gunluk OHLCV + 13-15 coinlik kesit sirasi hesaplanabilir; evren kaynaktaki 22 coinden dar."
+  ],
+  "kodlanabilirlik": {
+    "puan": 2,
+    "gerekce": "Giris kosullari sayisal; hacim orani ve rejim siniflandirmasi tanimi ikincil, hedef 11 ATR cok uzak (zaman cikisi yok)."
+  },
+  "belirsizlikler": [
+    "Hacim orani tanimi (kac gunluk ortalama) kaynakta bu sinifta yok",
+    "Rejim tanimi: gunluk EMA20-EMA50 farki ve RSI; EMA20>EMA50 sarti rejim kosulunu zaten kapsiyor",
+    "Zaman cikisi/izleyen stop yok: 11 ATR hedefe kadar pozisyon cok uzun acik kalabilir",
+    "Kesit sirasi evren buyuklugune bagli",
+    "Ayni veride filtre ayari var (asiri uyum riski)"
+  ],
+  "uyumluluk_notu": "Gunluk bar, uyumlu. Mevcut RSI kartlarindan (rsi30-hacim-ema200, rsi2-sma200) farki: EMA20/50 yigini, RSI bandi ve kesit sirasi.",
+  "varyantlar": [],
+  "anahtar_kelimeler": [
+    "rsi-geri-cekilme",
+    "ema20-ema50",
+    "adx",
+    "kesit-siralama",
+    "11-atr-hedef"
+  ]
+}

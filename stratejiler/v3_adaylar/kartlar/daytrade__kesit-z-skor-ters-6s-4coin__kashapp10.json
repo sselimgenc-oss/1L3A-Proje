@@ -1,0 +1,68 @@
+{
+  "kart_id": "daytrade__kesit-z-skor-ters-6s-4coin__kashapp10",
+  "ad": "Kesitsel Bar-Getirisi Z-Skor Ters (6s, 4 coin, nötr)",
+  "stil": "daytrade",
+  "kaynak": {
+    "url": "https://github.com/KASHAPP10/statistical-arbitrage-crypto",
+    "lisans": "YOK",
+    "tur": "github"
+  },
+  "ozet": "Her 6 saatlik barda 4 coinin son bar getirisinin kayan 120 bar z-skoruna göre sıralanır; en düşük 2 long, en yüksek 2 short, dolar nötr eşit ağırlık. Her bar yeniden sıralama.",
+  "kategori": "ortalamaya_donus",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "kripto",
+  "zaman_dilimi": {
+    "islem": "6h",
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {
+      "ad": "Getiri z-skoru",
+      "parametreler": {
+        "pencere": 120,
+        "getiri": "1 barlık yüzde değişim"
+      }
+    }
+  ],
+  "long_giris": [
+    "Her barın kapanışında 1 barlık getirinin kayan 120 bar ortalama/std'ine göre z-skorunu hesapla",
+    "Z-skoru en düşük 2 coine long (her biri %25)"
+  ],
+  "short_giris": [
+    "Z-skoru en yüksek 2 coine short (her biri %25)"
+  ],
+  "stop_loss": null,
+  "kar_al": null,
+  "iz_suren_stop": null,
+  "zaman_cikisi": "Her bar sıralama yenilenir (1 bar tutma); pozisyon sinyalden 1 bar sonra uygulanır (shift 1)",
+  "filtreler": [
+    "Evren içi sıralama, toplam brüt kaldıraç 1.0 (long %50, short %50)"
+  ],
+  "pozisyon_risk": "Dolar nötr, eşit ağırlık",
+  "iddia_edilen_performans": "iddia (doğrulanmadı): notebook final holdout net yıllık getiri -%97.6, günlük Sharpe -19.8; brüt kenar bulunamadı (top_n=1 'no gross edge' notu)",
+  "kanit": "Kaynak kendi OOS sonucunu olumsuz raporluyor: -%97.6 (iddia, doğrulanmadı). Hysteresis (entry_z/exit_z) varyantı grid ile seçilmiş, kartlanmadı.",
+  "veri_uygun": [
+    true,
+    "Binance perp 6h için 1h/5m yeniden örnekleme; yalnız 4 coin evreni dar (BTC, ETH, XRP, DOT vb., tam liste kaynak verisinde)."
+  ],
+  "kodlanabilirlik": {
+    "puan": 2,
+    "gerekce": "Kural net ve ileriye bakmıyor (pozisyon shift(1)); ama evren ve sıklık son derece maliyet duyarlı."
+  },
+  "belirsizlikler": [
+    "Evrenin tam 4 coini kaynak veri dosyasında; kart için biz kendi evrenimizi seçeceğiz",
+    "Çok yüksek devir: her bar tam yeniden sıralama, maliyet ve funding ölümcül olabilir",
+    "Stop yok"
+  ],
+  "uyumluluk_notu": "6h barlar kripto perp 1h'den türetilir. Kaynağın kendi sonucu negatif; düşük öncelikli, çoğunlukla negatif kontrol örneği.",
+  "varyantlar": [
+    "Yeniden dengeleme N bar (rebalance_every), top_n=3, entry_z/exit_z histerezisi"
+  ],
+  "anahtar_kelimeler": [
+    "kesitsel",
+    "z-skor",
+    "ters",
+    "piyasa-notr",
+    "istatistiksel-arbitraj"
+  ]
+}

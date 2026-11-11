@@ -1,0 +1,82 @@
+{
+  "kart_id": "swing__gun-zirve-kirilim-mmr__kechprog",
+  "ad": "Günlük Zirve Kırılımı + Ortalamaya Dönüş/Momentum Gösterge Onayı (VOO)",
+  "stil": "swing",
+  "kaynak": {
+    "url": "https://github.com/kechprog/trading_strat",
+    "lisans": "belirtilmemiş",
+    "tur": "github"
+  },
+  "ozet": "Günlük kapanışta kapanışın önceki 14 kapanış ortalamasına göre sapması hesaplanır; sapma -2.5 baz puandan küçükse 'mmr' göstergesi pozitif (al), +2.5 bp'den büyükse negatif olur. Gösterge pozitifken fiyat önceki günlerin zirvesini aşarsa long; gösterge negatife dönünce veya fiyat 5 günlük dibin altına inince çıkış. Ters işlem için kaynak ters ETF (SH) alıyor.",
+  "kategori": "kirilim",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+    "islem": "1d",
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {
+      "ad": "MMR (momentum/ortalamaya dönüş) göstergesi",
+      "parametreler": {
+        "reversion_pencere": 15,
+        "asiri_sapma_bp": 2.5,
+        "orta_sapma": "10 bp"
+      }
+    },
+    {
+      "ad": "Günlük yüksek/düşük kanalı",
+      "parametreler": {
+        "giris_zirve_gun": 1,
+        "giris_dip_gun": 1,
+        "cikis_dip_gun": 5,
+        "cikis_zirve_gun": 6
+      }
+    }
+  ],
+  "long_giris": [
+    "mmr değeri (günlük bar kapanışında güncellenir) > 0. Hesap: sapma = (son kapanış - önceki 14 kapanışın ortalaması) / o ortalama. sapma < -0.00025 ise değer = +2.0 x 1.5 (alış); sapma > +0.00025 ise değer = -2.0 x 1.5 (satış); |sapma| <= 0.00025 ise momentum terimi kullanılır (son 5 günlük hacim ağırlıklı ortalama fiyatın önceki 5 güne göre göreli değişimi x 1500 x min(hacim faktörü, 5) x 2.0)",
+    "Gün içi 1 dk barın yükseği > kanal giriş zirvesi (kanal günlük bar kapanışında, o günü katmadan hesaplanır)",
+    "Pozisyon yokken gir; fiyat = o 1 dk barın kapanışı"
+  ],
+  "short_giris": [
+    "Gösterge < 0 VE bar düşük < kanal giriş dibi: kaynak SH (ters ETF) alıyor; bizde ters ETF yoksa ana varlıkta short olarak uyarlanır"
+  ],
+  "stop_loss": null,
+  "kar_al": null,
+  "iz_suren_stop": null,
+  "zaman_cikisi": "Long çıkış: bar düşük < 5 günlük dip VEYA gösterge < 0; short (SH) çıkış: bar yüksek > 6 günlük zirve VEYA gösterge > 0",
+  "filtreler": [],
+  "pozisyon_risk": "Bakiyenin %95'i tek pozisyonda",
+  "iddia_edilen_performans": null,
+  "kanit": null,
+  "veri_uygun": [
+    false,
+    "Kaynak VOO ve SH (ETF) 1 dk verisi kullanıyor; Dukascopy ETF kapsamı doğrulanmadı ve hacim kullanılıyor. Kural günlük bara indirgenirse kripto perp veya hisseye uyarlanabilir."
+  ],
+  "kodlanabilirlik": {
+    "puan": 1,
+    "gerekce": "Sabitler (1500, 2.5 bp eşik, 1.5/2.0 çarpanlar) gerekçelendirilmemiş; 2.5 bp eşiği çok dar olduğundan gösterge neredeyse her gün ortalamadan sapma yönünün tersini verir, orta bant (10 bp) dalı hiç çalışmaz; giriş 1 dk bar yükseğiyle gün içi."
+  },
+  "belirsizlikler": [
+    "Kanal günlük bar kapanışında güncelleniyor; giriş seviyesi fiilen bir önceki günün zirvesinden bir gün eski olabiliyor (halka tampon sırası)",
+    "Giriş 1 dk bar yükseğiyle, fiyat ise aynı barın kapanışıyla alınıyor",
+    "Gösterge indikatör_bar günlük; ama README farklı bir gösterge (trend sapması + hacim sıçraması) anlatıyor, kodun varsayılanı mmr",
+    "Sonuç ve performans verisi yok",
+    "Lisans belirtilmemiş: kod kopyalanmadı",
+    "Hard stop yok",
+    "Kodda 10 bp 'orta sapma' dalı 2.5 bp eşiği yüzünden erişilemez (ölü kod)"
+  ],
+  "uyumluluk_notu": "Mevcut Turtle 20/10 + 2xATR kartından farklı: 1 günlük kırılım ve ortalamaya dönüş onaylı gösterge. Hacim gerektirir. ETF kapsamı belirsiz; düşük öncelik.",
+  "varyantlar": [
+    "Gösterge olarak tdvs (trend sapması + hacim sıçraması), ema veya ap_volume seçilebiliyor"
+  ],
+  "anahtar_kelimeler": [
+    "kirilim",
+    "gunluk-zirve",
+    "ortalamaya-donus",
+    "momentum",
+    "etf",
+    "hacim"
+  ]
+}
