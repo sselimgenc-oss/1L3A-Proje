@@ -1,0 +1,13 @@
+NDAR123909/ou-statarb | https://github.com/NDAR123909/ou-statarb | tekrar: pairs-coz-60-ols__rw762 ile aynı z eşikleri (2/0,5/3,5); fark yalnız ADF/yarı ömür kapısı ve 3xHL tutma sınırı; evren dar
+PremModhaOfficial/trad_bot_pi42 | https://github.com/PremModhaOfficial/trad_bot_pi42 | tekrar/yasak: 24 bar 1 sigma band long-only, stopsuz, muhasebe hatalı; risk modunda ortalama düşürme
+VeinDevTtv/vein_smc_bot | https://github.com/VeinDevTtv/vein_smc_bot | yasak: günlük kapanış gün içi barda kullanılıyor (lookahead); mutlak puan eşikleri, NAS100
+LandwoIf/Cross-Sectional-Mean-Reversion | https://github.com/LandwoIf/Cross-Sectional-Mean-Reversion | tekrar: kesitsel 1 bar tersine dönüş (groot/apex); kodda normalizasyon hatası
+wuchuxuanfacai/jiamihuobi | https://github.com/wuchuxuanfacai/jiamihuobi | kod_yok: ~90 optimize edilmiş sürekli parametre, stopsuz, aşırı uyum
+zhizhiL/CUATS-Trading-Challenge-2024-2025 | https://github.com/zhizhiL/CUATS-Trading-Challenge-2024-2025 | tekrar: ranked-alloc-etf-5__stef; stop hatası short'ları kapatıyor; elle seçilmiş evren
+adamincident/TRB | https://github.com/adamincident/TRB | tekrar: EMA trendinde RSI geri çekilme long ailesi (tamnguyen/andrey1224)
+WiseAmos/btc-perp-research S2 Donchian | https://github.com/WiseAmos/btc-perp-research | tekrar + ölü kural: don_high_20 mevcut barı içerdiğinden close>don_high asla doğru olmaz (0 işlem)
+WiseAmos/btc-perp-research S4 RSI2 | https://github.com/WiseAmos/btc-perp-research | yasak: bb_pct_width tüm örneklemde rank(pct=True) (lookahead); S5 aynı, S3 shift(-1)
+Initin0/Comp_finance | https://github.com/Initin0/Comp_finance | tekrar: EMA12/26 + ADX/RSI ailesi; ffill().bfill() lookahead
+chinnusmitiv/trading-learn | https://github.com/chinnusmitiv/trading-learn | tekrar: üç setup birleşimi (sahte-kirilim, kirilim-geri-test, asya); mutlak USD stop
+NishaanthSivakumar/Quant-Strategies | https://github.com/NishaanthSivakumar/Quant-Strategies | tekrar: SMA10/50 ma-kesişim ailesi
+Zuytan/rustrade | https://github.com/Zuytan/rustrade | tekrar: 20 fiyat z-skor < -2 band ortalamaya dönüş ailesi (nadirali/rauterfrank-ui)

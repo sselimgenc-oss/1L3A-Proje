@@ -1,0 +1,82 @@
+{
+  "kart_id": "daytrade__kesit-bosluk-z-fade-acilis-kapanis__lhcbenac",
+  "ad": "Kesitsel Gap Z-Skoru Fade (Açılıştan Kapanışa, Piyasa Nötr)",
+  "stil": "daytrade",
+  "kaynak": {
+    "url": "https://github.com/lhcbenac/Personal_Repository",
+    "lisans": "yok",
+    "tur": "github"
+  },
+  "ozet": "Her gün açılışta evrendeki hisseleri geceleme gap'inin oynaklığa bölünmüş z-skoruna göre sıralar; en düşük 5'e long, en yüksek 5'e short açar ve kapanışta hepsini kapatır (eşit ağırlık, %50 long / %50 short).",
+  "kategori": "ortalamaya_donus",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "hisse",
+  "zaman_dilimi": {
+    "islem": "1d",
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {
+      "ad": "Geceleme gap yüzdesi",
+      "parametreler": {
+        "formul": "(Açılış_t - Kapanış_t-1) / Kapanış_t-1"
+      }
+    },
+    {
+      "ad": "Günlük getiri standart sapması",
+      "parametreler": {
+        "pencere": 20,
+        "gecikme": "t-1 değeri (gap günü hariç)"
+      }
+    },
+    {
+      "ad": "Gap z-skoru",
+      "parametreler": {
+        "formul": "gap_t / std20_(t-1)"
+      }
+    }
+  ],
+  "long_giris": [
+    "Her işlem günü açılışında evrende gap z-skoru (gap / önceki günün 20 günlük getiri std'si) en DÜŞÜK 5 hisseye long, her biri sermayenin %10'u"
+  ],
+  "short_giris": [
+    "Aynı gün gap z-skoru en YÜKSEK 5 hisseye short, her biri sermayenin %10'u"
+  ],
+  "stop_loss": null,
+  "kar_al": null,
+  "iz_suren_stop": null,
+  "zaman_cikisi": "Aynı günün kapanışında tüm pozisyonlar kapatılır (açılıştan kapanışa); ertesi gün yeniden sıralama",
+  "filtreler": [
+    "En az 21 günlük veri (20 gün std ısınması)"
+  ],
+  "pozisyon_risk": "100% brüt, %50 long / %50 short, 10 pozisyon x %10",
+  "iddia_edilen_performans": "README: 39 hisselik evrende başlangıç 10.000 USD -> 20.291 USD, Sharpe 1,47, kazanma %55,4, beta 0,00 (5 yıl, yfinance; maliyet yok; doğrulanmadı). Aynı yazar ham getiri versiyonunun Sharpe -0,11 olduğunu yazıyor.",
+  "kanit": "Notebook kodu açıldı (Market_Neutral_Strategy_2.ipynb): sinyal nedensel (açılış ve önceki kapanış ve t-1 std), PnL açılış->kapanış. Evren 39 hisse elle seçilmiş ve yfinance 5y'den dropna ile hayatta kalanlar (hayatta kalma yanlılığı); maliyet/kayma yok; tek örneklem, yazarın kendi parametre aramasından geçmiş olabilir (ham versiyon sonradan z-skora çevrilmiş).",
+  "veri_uygun": [
+    true,
+    "Dukascopy ABD hisseleri 5m'den günlük açılış/kapanış (RTH) türetilebilir ama evren dar (Mag7 + birkaç DK sembolü); k=5 yerine evrene göre küçük k ve açılış/kapanış tanımı (seans) doğrulanmalı. Binance TradFi perp'te gerçek geceleme gap'i yoktur, yalnız RTH açılış-kapanış için geçerli."
+  ],
+  "kodlanabilirlik": {
+    "puan": 3,
+    "gerekce": "Sıralama, ağırlık ve çıkış saati kodda kesin; tek eksik evren büyüklüğü."
+  },
+  "belirsizlikler": [
+    "Evren 39 hisse elle seçilmiş (hayatta kalma yanlılığı); bizim evren çok daha dar, k=5 uygulanamaz",
+    "Komisyon/kayma/borç maliyeti yok; günde 10 işlem x 2 yön, maliyet duyarlılığı kritik",
+    "Açılış fiyatında dolum varsayımı (açılış auction'ı); gerçekte açılış mumunda dolum farkı",
+    "Kar-zarar sınırlayıcı stop yok; açılış gap'i genişlerse gün içi tek hisse zararı sınırsız (yalnız kapanış çıkışı)",
+    "Sonuçlar kaynağın kendi in-sample sonucu; OOS yok"
+  ],
+  "uyumluluk_notu": "Mevcut swing__gap-doldurma tek enstrüman ve gap'i kapama hedefli; swing__kisa-vade-tersine-donus kesitsel ama günlük kapanış getirisi sıralıyor. Bu kart kesitsel, oynaklık-normalize gap z-skoru ve açılış-kapanış tutma ile farklı. Evren gereği yalnız ABD hisse DK sembolleri.",
+  "varyantlar": [
+    "Aynı depoda gap yerine önceki gün getirisi sıralaması (kısa vade tersine dönüş) ve en büyük mutlak mutlak hareketleri fade etme (top 3) versiyonları var; ikincisi parametre ızgarasıyla seçilmiş, alınmadı"
+  ],
+  "anahtar_kelimeler": [
+    "gap",
+    "z-skor",
+    "kesitsel",
+    "piyasa-notr",
+    "acilis-kapanis",
+    "tersine-donus"
+  ]
+}
