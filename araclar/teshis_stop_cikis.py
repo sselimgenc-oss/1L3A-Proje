@@ -4,8 +4,11 @@ optimizasyonu, "ne olurdu" simülasyonu YOK. Yalnız geliştirme dönemi (< 2025
 Giriş fiyatı ham dosyada YOK. Türetme: motor girişi, işlem zaman ölçeğindeki (tf) giriş mumunun AÇILIŞINDA doldurur
 (motor.py: bekleyen_giris -> açılış ± kayma). giris_zamani = o mumun açılış anı. Giriş fiyatı = en ince fiyat serisinde
 [giris_zamani, giris_zamani + tf) içindeki İLK mumun açılışı (kayma payı hariç: stop mesafesinin çok küçük bir kesri).
-Pencere (alt sınır): en ince mumlardan açılışı [giris_zamani + tf, cikis_zamani) olanlar = giriş tf-mumundan SONRAKİ,
-çıkış tf-mumundan ÖNCEKİ. Uçlar (giriş mumu ve çıkış mumu) dışarıda => MAE/MFE gerçek değerin ALT SINIRI. Boş pencere => 0.
+Pencere (alt sınır): en ince mumlardan açılışı [giris_zamani + tf, cikis_zamani − tf) olanlar. Neden cikis_zamani − tf (Ek-2,
+SONUÇ SONRASI): motor mum-içi stop/hedef, gün sonu ve veri sonu çıkışlarını mumun BİTİŞ anıyla (t + tf) damgalar; açılış
+dolumlu çıkışları (sinyal, boşluk) mumun açılış anıyla. Ham dosyada çıkış nedeni yok; damgadan ayırt edilemediği için çıkış
+mumu iki durumda da dışarıda kalsın diye pencere cikis_zamani − tf'te biter (bir mum fazladan atılabilir => daha da alt sınır).
+Uçlar dışarıda => MAE/MFE gerçek değerin ALT SINIRI. Boş pencere => 0.
 Fiyat serisi: kripto 5m; DK_ (hisse/emtia) 1h (motorun kullandığı kaynak; DK 5m eksik günlü).
 Kullanım: python araclar/teshis_stop_cikis.py
 """
@@ -43,9 +46,9 @@ def sinifla(kazanma: float, payoff: float) -> str:
 
 
 def mae_mfe(yon, gf, sm, g_ns, c_ns, dur_ns, t_ns, hi, lo):
-    """(mae_r, mfe_r, n_mum). Pencere: açılışı [g+dur, c) olan mumlar. Boş pencere -> (0,0,0). Yöne göre."""
+    """(mae_r, mfe_r, n_mum). Pencere: açılışı [g+dur, c-dur) olan mumlar (Ek-2). Boş pencere -> (0,0,0). Yöne göre."""
     a = int(np.searchsorted(t_ns, g_ns + dur_ns, side="left"))
-    b = int(np.searchsorted(t_ns, c_ns, side="left"))
+    b = int(np.searchsorted(t_ns, c_ns - dur_ns, side="left"))
     if b <= a:
         return 0.0, 0.0, 0
     h = float(hi[a:b].max())

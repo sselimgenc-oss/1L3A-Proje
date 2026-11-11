@@ -30,9 +30,10 @@ def test_mae_mfe_long_uclar_haric():
     t, o, h, l = _mumlar()
     h[3], l[3] = 110.0, 90.0          # pencerenin İÇİNDE
     h[1], l[1] = 200.0, 1.0           # giriş mumu (index 1) -> dışarıda
-    h[8], l[8] = 300.0, 0.0           # çıkış mumu (index 8) -> dışarıda
+    h[7], l[7] = 300.0, 0.0           # çıkış damgası 8 = mum-içi stop/hedef: çıkış mumu = [7,8) -> dışarıda (Ek-2)
+    h[8], l[8] = 300.0, 0.0           # damga mumu (açılış dolumlu çıkış durumu) -> dışarıda
     mae, mfe, n = C.mae_mfe(1, 100.0, 5.0, 1 * GUN, 8 * GUN, GUN, t, h, l)
-    assert (mae, mfe, n) == (2.0, 2.0, 6)     # mumlar 2..7; en kötü 90 -> 10/5, en iyi 110 -> 10/5
+    assert (mae, mfe, n) == (2.0, 2.0, 5)     # mumlar 2..6; en kötü 90 -> 10/5, en iyi 110 -> 10/5
 
 
 def test_mae_mfe_short_yon():
@@ -44,8 +45,8 @@ def test_mae_mfe_short_yon():
 
 def test_mae_mfe_bos_pencere_ve_sifira_kirpma():
     t, o, h, l = _mumlar()
-    assert C.mae_mfe(1, 100.0, 5.0, 1 * GUN, 2 * GUN, GUN, t, h, l) == (0.0, 0.0, 0)      # giriş+1 = çıkış
-    mae, mfe, _ = C.mae_mfe(1, 50.0, 5.0, 0, 5 * GUN, GUN, t, h, l)                        # fiyat hep lehte
+    assert C.mae_mfe(1, 100.0, 5.0, 1 * GUN, 3 * GUN, GUN, t, h, l) == (0.0, 0.0, 0)      # [2, 2) boş
+    mae, mfe, _ = C.mae_mfe(1, 50.0, 5.0, 0, 6 * GUN, GUN, t, h, l)                        # fiyat hep lehte
     assert mae == 0.0 and mfe > 0
 
 

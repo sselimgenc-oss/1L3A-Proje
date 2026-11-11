@@ -66,3 +66,17 @@ be559435a174f47b9ac15b612c78235b9e5bdaac5f7cf72ee68faa3c641e15cf araclar/teshis_
 7b7fb0a42527c7fda989e8b1f7ff73ffb61830686220870b2b66788d4c2ca1b2 araclar/teshis_duzenlilik.py
 0ce858e9a5ee54a962e6fb204be635d84265cfc25338ef58a55e9197be1e2054 testler/test_teshis_stop_cikis_duzenlilik.py
 ```
+
+## Ek-2 — SONUÇ SONRASI DEĞİŞİKLİK (Test C penceresi)
+İlk koşu (teshis_stop_cikis.py, yukarıdaki sha256) sonuçları görüldükten SONRA, denetimde 3 işlemin elle kontrolünde
+tutarsızlık bulundu: e0v1en/ewo'da kaybedenlerin ~%26-29'unda MAE >= 1.2R görünürken r ≈ −1.06R idi. Neden: motor mum-içi
+stop/hedef, gün sonu ve veri sonu çıkışlarını mumun BİTİŞ anıyla (t + tf) damgalıyor (motor/backtest/motor.py: `t + aralik`);
+benim pencerem [giris + tf, cikis) bu durumda stop'un vurduğu çıkış mumunu (ve stop sonrası fitilini) İÇERİYORDU. Çıkış nedeni
+ham dosyada yok. Düzeltme: pencere [giris + tf, cikis − tf) (çıkış mumu iki damga türünde de dışarıda; alt sınır daha da
+sıkı). Yalnız bu değişti; Test D, eşikler, sınıflama, ölçüler aynı. İlk koşu çıktıları `sonuc_ilk_kosu.csv` /
+`ozet_ilk_kosu.json` olarak saklanır, rapor.md'de karşılaştırılır. Yeni koşu da TEK koşudur (düzeltilmiş betikle).
+Güncel sha256 (Ek-2 sonrası, koşu öncesi):
+```
+4bdbe91255b6899d3bf81e1f484a9ed731034f05cf2752b0fa0468e75e685bc9 araclar/teshis_stop_cikis.py
+cb3ef4064b2d5dd799ed401b0b9b6abfb0f1d97d6cbb3066ff82a267b32a7558 testler/test_teshis_stop_cikis_duzenlilik.py
+```
