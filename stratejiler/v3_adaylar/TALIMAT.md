@@ -90,3 +90,18 @@ Sıra:
    REDDEDILENLER.txt'deki 5 makaleyi yeniden dene.
 4. Yeni `kart` kararları için kart yaz (tekrar kontrolü: dis_envanter, havuz_v2 VE tur 1 kartları). adaylar.csv'ye satır EKLE.
 5. Fable: yalnız YENİ kartları puanla, `fable_hakem.csv`'ye ekle. RAPOR.md'ye "Tur 2" bölümü ekle (tur 1 metnine dokunma).
+
+## TUR 3 (2026-11-11 eklendi; tur 2 = PR #22)
+Tur 1-2 çıktılarını SİLME/YENİDEN YAZMA; yalnız ekle. Kurallar, dışlamalar, kart biçimi, model kullanımı yukarıdaki gibi. main'den yeni dal, PR aç, birleştirme.
+Sıra (öncelik sırasıyla; limit biterse kaldığın yeri RAPOR.md'ye yaz):
+1. AİLE KÜMELEMESİ (en önemli; kod yazmadan, kart düzeyinde): 144 kartı (kartlar/*.json) ve
+   `kodlama_v3.csv`'deki kodlanmış/tekrar kayıtlarını mantık ailelerine ayır (ör. donchian/kırılım, bant-dönüş, RSI geri çekilme,
+   ORB/seans, takvim/saat, funding kesit, kesitsel momentum, vol-yönetimli trend...). Ayrıca her kartın havuzdaki
+   (`stratejiler/havuz_v2.csv`, `dis_envanter.csv`) en yakın mevcut stratejisini yaz. Çıktı: `aileler_v3.csv`
+   (kart_id, aile, aile_temsilcisi_mi (evet/hayir), havuzda_en_yakin, fark_ozeti, gerekce). Her aileden en fazla 1-2 temsilci seç:
+   önce Fable puanı, sonra kural netliği, sonra kanıt. Havuzdakinin "küçük varyantı" olan kart temsilci olamaz (fark_ozeti'ne yaz).
+   Fable bu kümelemeyi bir kez gözden geçirsin; sonucu RAPOR.md "Tur 3" bölümüne yaz.
+2. Tur 2'de kaynağı AÇILMADAN reddedilen 13 grup-5 adayı ve sınırdaki retler (RAPOR tur 2 "Dürüst sınırlar"): kaynağı aç, yeniden karar ver.
+3. `belirsiz` kalan ~120 satır (on_eleme_tur2_kod_yok.csv 103 + Gemini 19): kaynağı aç, karar ver. Ayrı dosya: `on_eleme_tur3.csv`.
+4. Yeni `kart` kararları için kart yaz (tekrar kontrolü: havuz + 144 kart + aileler_v3.csv), adaylar.csv'ye EKLE; Fable yalnız yeni kartları puanlasın.
+Bu turda yeni web taraması YAPMA (aile kümelemesi ve açık kalanlar öncelikli).
