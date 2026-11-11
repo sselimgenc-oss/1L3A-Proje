@@ -1,0 +1,96 @@
+{
+  "stop_loss": "Giriş fiyatının en az 8 USD altındaki son 50 kapanmış H1 mum içindeki (pivot penceresi 5) en yüksek swing dip; yoksa giriş - 8 USD (short için ayna)",
+  "kar_al": "Stop mesafesinin 2 katı (2R)",
+  "iz_suren_stop": null,
+  "zaman_cikisi": "Doluştan 288 M5 bar (24 saat) sonra piyasa fiyatından kapat",
+  "short_giris": [
+    "H4 trendi AŞAĞI: son swing tepe < önceki ve son swing dip < önceki",
+    "EMA21 şimdi < 4 bar önceki",
+    "Sinyal mumu High >= EMA21 x 0,999",
+    "Close < Open VE Close < EMA21",
+    "Gövde >= 2 USD ve oran >= 0,60",
+    "Giriş: EMA21 seviyesinde limit, aynı bölge ve 24 saat kuralı, M5 mumu düşüş mumu"
+  ],
+  "filtreler": [
+    "H4 trendi YUKARI/AŞAĞI olmalı, YATAY ise işlem yok",
+    "Aynı stratejide tetiklenen işlemden sonra 4 saat bekleme (kaynak notu)",
+    "Aynı anda tek pozisyon (backtest)"
+  ],
+  "pozisyon_risk": "Kaynakta işlem başına %1 risk; bizde risk limitleri kodda",
+  "varyantlar": [
+    "session_level_retest (önceki Londra/NY seans tepe-dip kırılım + geri test, ±12 USD tolerans) aynı sistemin ikinci kuralı"
+  ],
+  "kart_id": "daytrade__ema21-geri-cekilme-h4-yapi-xau__abbujo",
+  "ad": "XAU M15 EMA21 Geri Çekilme + H4 Swing Yapı Trendi",
+  "stil": "daytrade",
+  "kaynak": {
+    "url": "https://github.com/abbujo/Aggressor-XAUUSD",
+    "lisans": "yok",
+    "tur": "github"
+  },
+  "ozet": "H4 grafiğinde swing yapısı yükseliyorsa (yüksek tepe + yüksek dip) M15'te EMA(21)'e dokunup EMA üstünde güçlü gövdeli yükseliş mumuyla kapanan fiyatta long, düşüşte simetrik short aranır. Giriş EMA seviyesindeki limit emirle, stop H1 swing, hedef 2R.",
+  "kategori": "trend_takip",
+  "piyasa_rejimi": "trend",
+  "orijinal_piyasa": "emtia",
+  "zaman_dilimi": {
+    "islem": "15m",
+    "ust_filtre": "4h"
+  },
+  "gostergeler": [
+    {
+      "ad": "EMA",
+      "parametreler": {
+        "periyot": 21,
+        "uygulama": "close"
+      }
+    },
+    {
+      "ad": "Swing pivot",
+      "parametreler": {
+        "H4 pencere": 3,
+        "H1 pencere": 5
+      }
+    },
+    {
+      "ad": "Mum gövde/aralık oranı",
+      "parametreler": {
+        "esik": 0.6
+      }
+    }
+  ],
+  "long_giris": [
+    "H4 trendi YUKARI: son 40 kapanmış H4 mumunda (pivot penceresi 3) son swing tepe > önceki swing tepe VE son swing dip > önceki swing dip",
+    "M15 EMA(21) şimdiki değeri > 4 bar önceki değeri (yükseliyor)",
+    "Sinyal mumu Low <= EMA21 x 1,001",
+    "Sinyal mumu Close > Open VE Close > EMA21",
+    "Mum gövdesi >= 2 USD VE gövde/(High-Low) >= 0,60",
+    "Giriş: EMA21 seviyesinde limit; bölge = EMA ± max(0,3 x gövde, 5 USD); sinyal mumu kapandıktan sonraki 24 saat içinde bir M5 mumu bölgeye değer ve yükseliş mumu ise dolum"
+  ],
+  "iddia_edilen_performans": "Repodaki BACKTEST_GOLDEN.md (yönetimsiz taban, SLR+EMA pullback birlikte, 2021-2025, 2.148 işlem): kazanma %58,4, PF 2,18, net 104 bin USD. iddia (doğrulanmadı); 2R hedefle %58 kazanma şüpheli.",
+  "kanit": "Kaynak backtesti OOS yok, doluş fiyatı bölge ortası varsayılıyor (gerçek M5 fiyatı değil), spread/kayma tahmini; rakamlar iddia (doğrulanmadı).",
+  "veri_uygun": [
+    true,
+    "XAU 5m Dukascopy'de var; M15/H1/H4 yeniden örneklenir."
+  ],
+  "kodlanabilirlik": {
+    "puan": 2,
+    "gerekce": "Tüm eşikler kodda sayısal; USD sabitleri altın fiyatına bağlı, H4 swing penceresi uygulaması yorum istiyor."
+  },
+  "belirsizlikler": [
+    "Eşikler (2, 5, 8, 12 USD) sabit dolar: altın fiyat seviyesi değişince anlamı değişir, ATR'ye bölünerek uyarlanmalı",
+    "Kaynak kodu EMA'yı yalnız son 30 kapanıştan hesaplıyor (ısınma farkı); standart EMA kullanılmalı",
+    "Dolum fiyatı bölge ortası (EMA) kabul ediliyor; gerçek dolum farklı olabilir",
+    "Aynı M5 barında SL ve TP görülürse kod stop'u önce sayıyor (tutucu, iyi)",
+    "H4 trend sınıflaması pivotların sağ tarafında 3 bar gerektirir; son 3 bar swing olamaz",
+    "Aynı depodaki session_level_retest (önceki seans tepe/dip kırılım-geri test) bu karta alınmadı: kırılım-geri-test ailesi"
+  ],
+  "uyumluluk_notu": "XAU Dukascopy verisiyle backtest edilebilir. Genel 'ma geri çekilme' ailesine yakın ama H4 yapı filtresi + limit dolum + H1 swing stop bileşimi özgün.",
+  "anahtar_kelimeler": [
+    "ema21",
+    "geri-cekilme",
+    "h4-trend",
+    "xau",
+    "limit-emir",
+    "swing-stop"
+  ]
+}

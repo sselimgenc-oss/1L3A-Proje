@@ -1,0 +1,70 @@
+{
+  "kart_id": "daytrade__rsi-asiri-bolge-geri-donus__hooper18",
+  "ad": "RSI 80/20 Aşırı Bölgeden 70/30'a Geri Dönüş (BTC 1s)",
+  "stil": "daytrade",
+  "kaynak": {
+    "url": "https://github.com/Hooper18/quant-btc",
+    "lisans": "YOK",
+    "tur": "github"
+  },
+  "ozet": "1 saatlikte RSI(14) önce 80'in üstüne çıkıp sonra 70'in altına inerse short; önce 20'nin altına inip sonra 30'un üstüne çıkarsa long. Sabit %5 stop, %8 hedef.",
+  "kategori": "ortalamaya_donus",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "kripto",
+  "zaman_dilimi": {
+    "islem": "1h",
+    "ust_filtre": null
+  },
+  "gostergeler": [
+    {
+      "ad": "RSI",
+      "parametreler": {
+        "periyot": 14,
+        "tetik_ust": 80,
+        "onay_ust": 70,
+        "tetik_alt": 20,
+        "onay_alt": 30
+      }
+    }
+  ],
+  "long_giris": [
+    "RSI(14) bir noktada <= 20 oldu (durum işareti kuruldu)",
+    "Sonra RSI(14) >= 30 oldu: işaret silinir ve long açılır"
+  ],
+  "short_giris": [
+    "RSI(14) bir noktada >= 80 oldu (durum işareti kuruldu)",
+    "Sonra RSI(14) <= 70 oldu: işaret silinir ve short açılır"
+  ],
+  "stop_loss": "%5 (giriş fiyatından)",
+  "kar_al": "%8 (giriş fiyatından)",
+  "iz_suren_stop": null,
+  "zaman_cikisi": null,
+  "filtreler": [
+    "Engine aynı yönde ikinci pozisyon açmaz"
+  ],
+  "pozisyon_risk": "Sermayenin %10'u (size_pct); kaynakta ortalama büyütme yok",
+  "iddia_edilen_performans": null,
+  "kanit": "Config dosyasındaki bu kural için kaynakta sonuç yok. Aynı repodaki 'v2 optimized' kural seti 72'lik grid + walk-forward ile seçilmiş, kartlanmadı.",
+  "veri_uygun": [
+    true,
+    "Binance BTC perp 1h OHLCV yeterli."
+  ],
+  "kodlanabilirlik": {
+    "puan": 3,
+    "gerekce": "Durum belleği rule_engine.py'de net: tetik eşiğe değince bayrak, onay eşiğine inince giriş."
+  },
+  "belirsizlikler": [
+    "Bayrağın süresi yok: tetikten haftalar sonra bile onay gelirse giriş (kodda zaman sınırı yok)",
+    "Yön çakışması durumunda 'arbitraj' mantığı kaynakta ayrı"
+  ],
+  "uyumluluk_notu": "BTC 1h, tek sembol. Kaynakta farklı kural: mevcut noahroboros kartı RSI(32)>50 yön kuralı, bu kart aşırı bölge dönüşü.",
+  "varyantlar": [
+    "v2 optimized: 1h RSI>55 ve MACD histogram<0 short (SL5/TP4); 4h MACD kesişimi long (SL2/TP4); grid ile seçilmiş"
+  ],
+  "anahtar_kelimeler": [
+    "rsi",
+    "asiri-bolge",
+    "durum-bellegi",
+    "btc"
+  ]
+}

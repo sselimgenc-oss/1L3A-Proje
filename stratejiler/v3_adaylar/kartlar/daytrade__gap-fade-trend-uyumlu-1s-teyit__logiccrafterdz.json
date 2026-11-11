@@ -1,0 +1,80 @@
+{
+  "kart_id": "daytrade__gap-fade-trend-uyumlu-1s-teyit__logiccrafterdz",
+  "ad": "Gün Açılış Boşluğu Fade (trend yönlü gap, 1s teyit, 3 kademeli hedef)",
+  "stil": "daytrade",
+  "kaynak": {
+    "url": "https://github.com/logiccrafterdz/Strategy004-Gap-Reversion-Pro",
+    "lisans": "MIT",
+    "tur": "github"
+  },
+  "ozet": "Gün açılışı ile önceki kapanış farkı ortalama günlük aralığın en az %15'iyse ve gap yönü son 5 günlük eğilimle aynıysa, günün ilk 1 saatlik mumu gap'e ters kapandıktan sonra gap'in aksi yönde işlem açılır; hedefler gap'in %50/75/100'ü.",
+  "kategori": "ortalamaya_donus",
+  "piyasa_rejimi": "herhangi",
+  "orijinal_piyasa": "forex",
+  "zaman_dilimi": {
+    "islem": "1h",
+    "ust_filtre": "1d"
+  },
+  "gostergeler": [
+    {
+      "ad": "Ortalama günlük aralık",
+      "parametreler": {
+        "periyot": 20,
+        "tanim": "son 20 günün (high-low) ortalaması"
+      }
+    },
+    {
+      "ad": "Gap",
+      "parametreler": {
+        "tanim": "gün açılışı - önceki gün kapanışı"
+      }
+    }
+  ],
+  "long_giris": [
+    "Gün açılışı < önceki kapanış (aşağı gap) ve |gap| >= 0.15 x ortalama günlük aralık(20)",
+    "Eğilim aşağı: o anki fiyat - 5 gün önceki kapanış < -0.10 x ortalama aralık",
+    "Günün ilk 1s mumu yeşil kapandı (close > open)",
+    "Gün içinde henüz işlem açılmadı, açık pozisyon yok"
+  ],
+  "short_giris": [
+    "Gün açılışı > önceki kapanış (yukarı gap) ve |gap| >= 0.15 x ortalama günlük aralık(20)",
+    "Eğilim yukarı: o anki fiyat - 5 gün önceki kapanış > +0.10 x ortalama aralık",
+    "Günün ilk 1s mumu kırmızı kapandı (close < open)"
+  ],
+  "stop_loss": "Long: günün o ana kadarki dibi - 0.10 x |gap|; short: günün tepesi + 0.10 x |gap|",
+  "kar_al": "Pozisyon 3 parçaya bölünür (%50/%30/%20); hedefler gün açılışından gap tarafına doğru |gap|'ın %50, %75, %100'ü (100% = önceki kapanış)",
+  "iz_suren_stop": null,
+  "zaman_cikisi": "Kaynak kodda zaman çıkışı devre dışı (6s ve gün sonu kapanışı parametreleri kullanılmıyor); yalnız SL/TP",
+  "filtreler": [
+    "Günde en fazla 1 işlem",
+    "Kaynak varsayılanı XAUUSD atlar; hafta sonu işlem yok",
+    "Güven skoru >= 0.3 kapısı (pratikte hep geçer)"
+  ],
+  "pozisyon_risk": "Kaynakta risk %2 girdisi var ama lot hesabı sabit baz lota dayalı",
+  "iddia_edilen_performans": null,
+  "kanit": "Performans kanıtı yok; README yalnız özellik anlatıyor.",
+  "veri_uygun": [
+    true,
+    "Kaynak MT5 forex; Dukascopy hisse günlük açılış gap'inde ve XAU'da uygulanabilir (forex yok). İlk saat teyidi için hisse seans açılışı ilk saatlik mum kullanılmalı."
+  ],
+  "kodlanabilirlik": {
+    "puan": 2,
+    "gerekce": "Gap/eğilim/stop/TP net; seans ve 'açılış' tanımı hisse için uyarlanmalı."
+  },
+  "belirsizlikler": [
+    "Eğilim 'şimdiki fiyat' kullanıyor (bar henüz kapanmadı, teyit saatinden sonra bakıyor); kartta teyit mumu kapanışı varsayıldı",
+    "Önceki notta 'trend ters yönde' deniyordu; kodda gap yönü = eğilim yönü (gap trendle aynı yönde, fade edilir)",
+    "Kazanma oranına göre lot artıran adaptasyon modülü kartlanmadı",
+    "Kademeli hedeflerin kısmi boyutları"
+  ],
+  "uyumluluk_notu": "Dukascopy hisse günlük + 1h verisiyle test edilebilir; forex çiftleri veri dışı. Benzer: swing__gap-doldurma (ayrı değerlendirilecek).",
+  "varyantlar": [
+    "Tek hedef (%100) veya 2 kademe"
+  ],
+  "anahtar_kelimeler": [
+    "gap",
+    "gap-fade",
+    "ortalamaya-donus",
+    "acilis"
+  ]
+}
