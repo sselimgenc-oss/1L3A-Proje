@@ -107,3 +107,8 @@ def test_vol_yonetimli_long_onceki_tam_ayi_kullanir_ve_aylik_dengeler():
     h2, _ = st.sinyaller(veri2)
     assert h2.loc[mart, "X"] == pytest.approx(h.loc[mart, "X"])
     assert tum_portfoy_stratejileri()[VolYonetimliLong.ad] is VolYonetimliLong
+    # İki sembolde her biri 1/2 sermaye alır: toplam ağırlık tavanı aşmaz.
+    st2 = VolYonetimliLong(semboller=("X", "Y"))
+    h3, _ = st2.sinyaller({"X": veri["X"], "Y": veri["X"].copy()})
+    assert h3.loc[mart, "X"] == pytest.approx(beklenen / 2)
+    assert h3.loc[mart].sum() <= 1.0 + 1e-12

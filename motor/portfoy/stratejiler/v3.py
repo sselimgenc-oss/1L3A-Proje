@@ -294,7 +294,7 @@ class VolYonetimliLong(PfTemel):
 
     Kaynak: Moreira ve Muir (2017), NBER w22208. Tüm örneklemden seçilen
     ileriye bakan ``c`` yerine önceden sabit yıllık %20 hedef kullanılır;
-    ağırlık 1,0 ile sınırlıdır. Kaynakta stop yoktur; motor sözleşmesi için
+    ağırlık 1,0 ile sınırlıdır; semboller eşit sermaye (1/n) alır. Kaynakta stop yoktur; motor sözleşmesi için
     ATR(14) x 2 felaket stopu bizim eklememizdir.
     """
 
@@ -316,11 +316,12 @@ class VolYonetimliLong(PfTemel):
         tetik = tetik_satirlari(ax, "M", np.ones(len(ax), dtype=bool))
 
         def agirlik(i):
+            # Semboller eşit sermaye (1/n) alır; her sembolün kendi payı içinde ağırlık en çok agirlik_tavan.
             onceki_ay = (ax[i].tz_localize(None).to_period("M") - 1)
             sonuc = {}
             for s in kolon:
                 v = aylik_vol[s].get(onceki_ay, np.nan)
-                sonuc[s] = (min(float(p["hedef_vol"]) / v, float(p["agirlik_tavan"]))
+                sonuc[s] = (min(float(p["hedef_vol"]) / v, float(p["agirlik_tavan"])) / len(kolon)
                               if np.isfinite(v) and v > 0 else 0.0)
             return sonuc
 
