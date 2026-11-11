@@ -24,6 +24,7 @@ import pandas as pd
 from motor.strateji import cikislar as cks
 
 from motor.canli.borsa.binance_futures import BorsaHata, EmirReddi
+from motor.canli.borsa import canli_kayit as ck
 from motor.canli.borsa import canli_limitler as cl
 from motor.canli.borsa.kurallar import KuralHatasi, SembolKurali, boyutlandir, hedef_yuvarla, kural_cikar, stop_yuvarla
 
@@ -113,6 +114,11 @@ class Yurutucu:
         self._uyarilan: set = set()
         self._ardisik_hata = 0
         self.kurallar: dict = {}
+        self.kayit_dizin = self.durum_yolu.parent if self.durum_yolu else None     # KAYIT dosyaları (canli_kayit.py); işlem mantığına bağlı değil
+        self.kayit_hata_sayisi: dict = {}
+        self._tur_kapat: dict = {}
+        self._tur_oncesi: dict = {}
+        self._kayit_basladi = False
 
     # ------------------------------------------------------------------ durum / olay
     def _bos(self) -> dict:
@@ -137,6 +143,7 @@ class Yurutucu:
 
     def olay(self, tur: str, mesaj: str, bildir: bool = True) -> None:
         log.info("canlı olay %s [%s]: %s", tur, self.sid, mesaj)
+        self._olay_kaydet(tur, mesaj)
         if self._olay:
             self._olay(tur, f"[{self.sid}] {mesaj}")
         if bildir and self._bildir:
@@ -159,6 +166,8 @@ class Yurutucu:
     # ------------------------------------------------------------------ ana tur
     def adim(self, g: MotorGorunumu) -> None:
         """Bir tur. İstisnayı yutmaz ama paper turunu da düşürmez: hata loglanır + olay + Telegram; art arda 3 hatada yeni giriş bloklanır."""
+        self._tur_kapat = {}
+        self._tur_oncesi = {k: dict(v) for k, v in self.durum["pozlar"].items()}      # kayıt için tur öncesi görüntü (yalnız okuma)
         try:
             self._adim(g)
             self._ardisik_hata = 0
@@ -167,6 +176,7 @@ class Yurutucu:
             self.olay("canli_yurutucu_hatasi", f"{type(e).__name__}: {e} (art arda {self._ardisik_hata}/{HATA_BLOK_SINIRI})")
             log.exception("yürütücü turu başarısız")
         finally:
+            self._kayit_tur_sonu()
             self._kaydet()
 
     def _poz(self) -> dict:
@@ -324,6 +334,7 @@ class Yurutucu:
         d["pozlar"][n.kol] = rec
         d["islenen"][gid] = str(simdi)
         self._kaydet()                                    # emirden ÖNCE yaz: belirsiz/çökme olursa mutabakat stopu buradaki kayıttan kurar
+        self._kayit_acilis(n, bs, gid, E, stop, bo, mark)
         yanit, sonuc = self._giris_gonder(bs, n, bo.qty, gid)
         if sonuc == "yok":
             d["pozlar"].pop(n.kol, None)
@@ -332,6 +343,7 @@ class Yurutucu:
             return
         qty, avg = yanit["dolan"], (yanit.get("ort_fiyat") or mark)
         rec.update(durum="acik", qty=str(qty), giris=str(avg))
+        self._kayit_dolum(n.kol, yanit, qty, avg)
         self.olay("canli_emir_doldu", f"{n.kol} {bs} {'LONG' if n.yon == 1 else 'SHORT'} {qty} @ {avg} (stopta kayıp %{bo.risk_yuzde:.3f} kasa, brüt {bo.brut_kat:.2f}x, {bo.kaldirac}x, sınırlayan: {bo.baglayan})")
         qty = self._dolum_sonrasi_risk(n.kol, rec, qty, D(avg), ortak)
         if qty is None:
@@ -581,3 +593,154 @@ class Yurutucu:
                     self.olay("canli_uyusmazlik", f"{o['sembol']}: pozisyonsuz yetim {o['tur']} emri iptal edildi", bildir=False)
                 except BorsaHata as e:
                     self._bir_kez(f"yetim:{o['client_id']}", "canli_iptal_hatasi", f"{o['sembol']}: yetim emir iptal edilemedi: {e}")
+
+    # ------------------------------------------------------------------ KAYIT (denetim dosyaları; işlem mantığına DOKUNMAZ)
+    # Kural: kayıt yazımı/okuması başarısız olsa da işlem akışı SÜRER; ama hata sessiz de değildir: log + sayaç (kayit_hata_sayisi, durum["kayit_hata_sayisi"])
+    # + olay/Telegram uyarısı (aynı dosya için bir kez; başarılı yazımdan sonra yeniden uyarabilir). Dosyalar ve alanlar: canli_kayit.py.
+    def _kayit_hata(self, ad: str, e: Exception) -> None:
+        self.kayit_hata_sayisi[ad] = self.kayit_hata_sayisi.get(ad, 0) + 1
+        self.durum["kayit_hata_sayisi"] = dict(self.kayit_hata_sayisi)
+        log.error("kayıt hatası [%s] %s: %s: %s", self.sid, ad, type(e).__name__, str(e)[:200])
+        self._bir_kez(f"kayit:{ad}", "canli_kayit_hatasi", f"{ad} kaydı yazılamadı ({type(e).__name__}: {str(e)[:200]}); işlem akışı sürüyor, kayıt eksik kalabilir "
+                                                           f"(bu dosyada hata sayısı {self.kayit_hata_sayisi[ad]})")
+
+    def _kayit_guvenli(self, ad: str, fn, *a) -> bool:
+        try:
+            fn(*a)
+        except Exception as e:  # noqa: BLE001  (kayıt hatası işlemi durdurmaz; AÇIK: log + sayaç + olay/Telegram uyarısı)
+            self._kayit_hata(ad, e)
+            return False
+        self._uyari_sil(f"kayit:{ad}")
+        return True
+
+    def _kayit_yolu(self, dosya: str) -> Path:
+        return self.kayit_dizin / dosya
+
+    def _zaman_iso(self, ts=None) -> str:
+        return pd.Timestamp(ts if ts is not None else self.saat()).tz_convert("UTC").strftime("%Y-%m-%dT%H:%M:%S.%fZ")
+
+    def _olay_kaydet(self, tur: str, mesaj: str) -> None:
+        """Her olay append-only arşive; 'canli_kapandi' metninden kapatma nedeni (çıkış nedeni sınıflaması için) tutulur."""
+        if self.kayit_dizin is None:
+            return
+        if tur == "canli_kapandi":
+            c = ck.kapat_nedeni_cikar(mesaj)
+            if c and c[1] != "risk_azalt":
+                self._tur_kapat[c[0]] = c[1]
+        self._kayit_guvenli("olaylar_arsiv", ck.satir_ekle, self._kayit_yolu("olaylar_arsiv.jsonl"),
+                            {"zaman": self._zaman_iso(), "strateji": self.sid, "tur": tur, "mesaj": mesaj[:1000]})
+
+    def _kayit_acilis(self, n, bs: str, gid: str, E: Decimal, stop: Decimal, bo, mark: Decimal) -> None:
+        if self.kayit_dizin is None:
+            return
+
+        def f():
+            kayit = self.durum.setdefault("kayit", {})
+            eski = kayit.get(n.kol)
+            if eski is not None:                                  # aynı kolda önceki pozisyon henüz sonuçlanmadıysa kaybolmasın
+                kayit[f"{n.kol}#{str(eski.get('niyet_id'))[-8:]}"] = eski
+            simdi = self.saat()
+            kayit[n.kol] = {"strateji": self.sid, "kol": n.kol, "bsembol": bs, "yon": n.yon, "stop_giris": str(stop), "son_stop": str(stop),
+                            "son_hedef": str(n.hedef) if n.hedef else None, "planlanan_risk_usd": str(E * D(str(bo.risk_yuzde)) / 100),
+                            "mark_giris": str(mark), "giris_order_id": None, "acilis_zaman": self._zaman_iso(simdi),
+                            "acilis_ms": int(pd.Timestamp(simdi).value // 10**6) - 2000, "niyet_id": gid,
+                            "sinyal_zamani": str(pd.Timestamp(n.sinyal_zamani)), "model_taker": str(n.taker), "model_stop_kayma": str(n.stop_kayma),
+                            "deneme": 0}
+        self._kayit_guvenli("islemler", f)
+
+    def _kayit_dolum(self, kol: str, yanit: dict, qty: Decimal, avg) -> None:
+        if self.kayit_dizin is None:
+            return
+
+        def f():
+            k = self.durum.get("kayit", {}).get(kol)
+            if k is not None:
+                k.update(giris_order_id=str(yanit.get("id")) if yanit.get("id") is not None else None, giris_qty=str(qty), giris_ort=str(avg))
+        self._kayit_guvenli("islemler", f)
+
+    def _kayit_tur_sonu(self) -> None:
+        if self.kayit_dizin is None:
+            return
+        self._kayit_guvenli("ozsermaye_gunluk", self._kayit_gunluk)
+        self._kayit_guvenli("islemler", self._kayit_kapanislar)
+
+    def _kayit_gunluk(self) -> None:
+        """Servis başlangıcında ve her UTC günü: strateji özsermaye satırı; tahsis değiştiyse ayrıca `sermaye_hareketi` (kâr sayılmaz)."""
+        simdi = pd.Timestamp(self.saat())
+        gun = str(simdi.date())
+        if self._kayit_basladi and self.durum.get("kayit_gun") == gun:
+            return
+        b, poz = self.borsa.bakiye(), self.borsa.pozisyonlar()
+        ozs, tahsis = b["ozsermaye"], self.ayar.tahsis
+        dosya = self._kayit_yolu("ozsermaye_gunluk.jsonl")
+        onceki = self.durum.get("kayit_tahsis")
+        if onceki is not None and D(onceki) != tahsis:
+            ck.satir_ekle(dosya, {"tur": "sermaye_hareketi", "zaman": self._zaman_iso(simdi), "gun": gun, "strateji": self.sid, "onceki_tahsis_usd": onceki,
+                                  "yeni_tahsis_usd": str(tahsis), "fark_usd": str(tahsis - D(onceki)), "ozsermaye_o_an": str(ozs),
+                                  "not": "tahsis (ayar) değişimi: sermaye hareketi, kâr/zarar DEĞİL"})
+        self.durum["kayit_tahsis"] = str(tahsis)
+        kz = sum(((p["mark"] - p["giris"]) * p["miktar"] for p in poz), D(0))
+        ck.satir_ekle(dosya, {"tur": "strateji", "zaman": self._zaman_iso(simdi), "gun": gun, "neden": "gun" if self._kayit_basladi else "servis_basi",
+                              "strateji": self.sid, "mod": self.ayar.mod, "ozsermaye": str(ozs), "tahsis_usd": str(tahsis), "kasa": str(min(ozs, tahsis)),
+                              "acik_kz_usd": str(kz), "acik_pozisyon": len(poz)})
+        self.durum["kayit_gun"], self._kayit_basladi = gun, True
+
+    def _kayit_kapanislar(self) -> None:
+        """Bu turda sonuçlanan (kaydı pozlar'dan düşen) her pozisyon için BİR `islemler.jsonl` satırı. Dolum/komisyon/funding borsanın
+        userTrades/income uçlarından (salt okuma); alınamazsa alan null + neden. Giriş hiç dolmadıysa satır yazılmaz."""
+        kayit = self.durum.setdefault("kayit", {})
+        pozlar = self.durum["pozlar"]
+        for kol, rec in pozlar.items():                       # açık pozisyonların güncel stop/hedefi (çıkış sınıflaması ve kayma için)
+            if kol in kayit:
+                kayit[kol].update(son_stop=rec["stop"], son_hedef=rec.get("hedef"))
+        adaylar = [k for k in kayit if k not in pozlar] + [k for k in self._tur_oncesi if k not in kayit and k not in pozlar]
+        for anahtar in adaylar:
+            kay = kayit.get(anahtar)
+            if kay is None:                                   # kayıt yok (yeniden başlatma / benimsenen pozisyon): tur öncesi kayıttan türet
+                r = self._tur_oncesi[anahtar]
+                kay = {"strateji": self.sid, "kol": anahtar, "bsembol": r["bsembol"], "yon": r["yon"], "stop_giris": r["stop"], "son_stop": r["stop"],
+                       "son_hedef": r.get("hedef"), "planlanan_risk_usd": None, "mark_giris": None, "giris_order_id": None, "acilis_zaman": r["giris_bar"],
+                       "acilis_ms": int(pd.Timestamp(r["giris_bar"]).value // 10**6), "niyet_id": r.get("giris_id"), "sinyal_zamani": r["giris_bar"],
+                       "model_taker": "0.0005", "model_stop_kayma": "0.0005", "deneme": 0,
+                       "notlar": ["giriş kaydı yok (yeniden başlatma ya da benimsenen pozisyon): planlanan risk/mark bilinmiyor"]}
+            if not kay.get("giris_qty") and kay.get("planlanan_risk_usd") is not None and getattr(self.borsa, "kullanici_islemleri", None) is None:
+                kayit.pop(anahtar, None)                      # giriş hiç dolmadı (doldu kaydı yok) ve dolum geçmişi okunamıyor: işlem yok
+                continue
+            bs = kay["bsembol"]
+            fills = fills_neden = None
+            oku = getattr(self.borsa, "kullanici_islemleri", None)
+            if oku is None:
+                fills_neden = "borsa dolum geçmişini desteklemiyor (kuru/sahte)"
+            else:
+                try:
+                    fills = oku(bs, int(kay["acilis_ms"]))
+                except BorsaHata as e:
+                    kay["deneme"] = kay.get("deneme", 0) + 1
+                    kayit[anahtar] = kay
+                    self._kayit_hata("dolum_gecmisi", e)
+                    if kay["deneme"] < ck.DENEME_SINIRI:
+                        continue                              # sonraki turda yeniden denenir
+                    fills_neden = f"dolum geçmişi alınamadı ({type(e).__name__}) {ck.DENEME_SINIRI} denemede"
+            funding = funding_neden = None
+            if fills is not None:
+                g, c, _tam = ck.yasam_dongusu(fills, int(kay["yon"]), kay.get("giris_order_id"), int(kay["acilis_ms"]))
+                if not g:
+                    kayit.pop(anahtar, None)                  # giriş dolmadı: işlem yok
+                    continue
+                ful = getattr(self.borsa, "funding_gecmisi", None)
+                if ful is None:
+                    funding_neden = "borsa funding geçmişini desteklemiyor"
+                else:
+                    try:
+                        funding = ful(bs, g[0]["zaman_ms"], (c[-1]["zaman_ms"] if c else int(pd.Timestamp(self.saat()).value // 10**6)) + 1)
+                    except BorsaHata as e:
+                        funding_neden = f"funding alınamadı ({type(e).__name__})"
+                cikis_z = self._zaman_iso(pd.Timestamp(c[-1]["zaman_ms"], unit="ms", tz="UTC")) if c else self._zaman_iso()
+            else:
+                cikis_z = self._zaman_iso()
+            satir = ck.islem_satiri(kay, fills, fills_neden, funding, funding_neden, self._tur_kapat.get(bs), cikis_z)
+            if satir is None:
+                kayit.pop(anahtar, None)
+                continue
+            if self._kayit_guvenli("islemler", ck.satir_ekle, self._kayit_yolu("islemler.jsonl"), satir):
+                kayit.pop(anahtar, None)
