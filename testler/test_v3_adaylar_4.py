@@ -16,9 +16,10 @@ def _mum(idx, fiyat):
                          "hacim": 10.0}, index=idx)
 
 
-def test_noise_yuzde_bandi_onceki_kapanis_cikisi_ve_ters_donus():
+def _noise_veri(son_gun_duzenle=None):
+    """15 seans x 13 adet 30 dk mum (09:30-15:30 ET açılışlı). İlk 14 gün: 10:00 slotunda %1 hareket, kapanış 110."""
     gunler = pd.bdate_range("2024-01-02", periods=15, tz="America/New_York")
-    idx = pd.DatetimeIndex([t + pd.Timedelta(hours=9, minutes=30) + pd.Timedelta(minutes=30*i)
+    idx = pd.DatetimeIndex([t + pd.Timedelta(hours=9, minutes=30) + pd.Timedelta(minutes=30 * i)
                             for t in gunler for i in range(13)]).tz_convert("UTC")
     fiyat = np.full(len(idx), 100.0)
     for g in range(14):
@@ -26,29 +27,180 @@ def test_noise_yuzde_bandi_onceki_kapanis_cikisi_ve_ters_donus():
         fiyat[g * 13 + 12] = 110.0      # dünkü 16:00 kapanışı
     fiyat[-13 + 1] = 112.0              # UB = max(100,110) * 1.01 = 111.10
     fiyat[-13 + 3] = 80.0               # karşı bandı kırar: long çıkış + short giriş
+    if son_gun_duzenle:
+        son_gun_duzenle(fiyat)
     m = _mum(idx, fiyat)
     m.loc[m.index[::13], "acilis"] = 100.0
+    return m
+
+
+def _gunluk_atr_beklenen(m, n=14):
+    """Bağımsız hesap: tamamlanmış nakit seansların (09:30-16:00 ET) günlük ATR(14) değeri, tarih -> ATR (shift'siz)."""
+    ny = m.index.tz_convert("America/New_York")
+    d = pd.Series(ny.date, index=m.index)
+    h, l, c = (m[x].groupby(d).agg(f) for x, f in (("yuksek", "max"), ("dusuk", "min"), ("kapanis", "last")))
+    tr = pd.concat([h - l, (h - c.shift(1)).abs(), (l - c.shift(1)).abs()], axis=1).max(axis=1)
+    return tr.ewm(alpha=1 / n, adjust=False, min_periods=n).mean()
+
+
+def test_noise_yuzde_bandi_onceki_kapanis_cikisi_ve_ters_donus():
+    m = _noise_veri()
     s = GuniciMomentumNoise().sinyaller(m)
+    atr = _gunluk_atr_beklenen(m)
+    son_gun = m.index[-1].tz_convert("America/New_York").date()
+    onceki_atr = atr.shift(1)[son_gun]              # yalnız tamamlanmış önceki seanslar
+    assert np.isfinite(onceki_atr) and onceki_atr > 0
     assert s.yon.iloc[-13 + 1] == 1
-    assert s.stop.iloc[-13 + 1] == pytest.approx(111.1)
+    # Motor stopu felaket stopu: giriş kapanışı - 1 x günlük ATR (giriş anı bant/VWAP seviyesi DEĞİL).
+    assert s.stop.iloc[-13 + 1] == pytest.approx(112.0 - onceki_atr)
+    assert s.stop.iloc[-13 + 1] != pytest.approx(111.1)
     assert s.yon.iloc[-13 + 3] == -1 and s.cikis_long.iloc[-13 + 3]
-    assert s.stop.iloc[-13 + 3] > m.kapanis.iloc[-13 + 3]
+    assert s.stop.iloc[-13 + 3] == pytest.approx(80.0 + onceki_atr)
     assert s.cikis.iloc[-1]
     assert not (s.yon.iloc[:14*13] != 0).any()
     assert al(GuniciMomentumNoise.ad) is GuniciMomentumNoise
 
 
+def test_noise_cikis_kapanis_tabanli_cari_cizgiye_gore_fitil_cikis_degil():
+    """Çıkış yalnız mum KAPANIŞINDA, o anki max(UB,VWAP) ile karşılaştırılır; fitil tek başına çıkış sayılmaz."""
+    def fitil(f):
+        f[-13 + 2] = 111.5      # kapanış UB (111.1) üstünde kalır
+        f[-13 + 3] = 111.5
+    m = _noise_veri(fitil)
+    m.loc[m.index[-13 + 2], "dusuk"] = 90.0       # derin fitil: eski mum-içi stop bunu tetiklerdi
+    s = GuniciMomentumNoise().sinyaller(m)
+    assert s.yon.iloc[-13 + 1] == 1
+    assert not s.cikis_long.iloc[-13 + 2]
+    # 10:30 slotunda sigma=0: UB=110. Kapanış 109.5 < 110 -> çıkış işareti; stop ise çok daha aşağıda kalır.
+    def alti(f):
+        f[-13 + 2] = 109.5
+    m2 = _noise_veri(alti)
+    s2 = GuniciMomentumNoise().sinyaller(m2)
+    assert s2.cikis_long.iloc[-13 + 2]
+    assert s2.stop.iloc[-13 + 1] < 109.5 - 0.5
+
+
+def test_noise_gun_sonu_16_00_fiyatindan_kapanir_ve_son_mumda_giris_yok():
+    def son_mum(f):
+        f[-1] = 125.0         # 15:30 mumu bandın çok üstünde: yeni giriş olmamalı
+    m = _noise_veri(son_mum)
+    s = GuniciMomentumNoise().sinyaller(m)
+    ny = m.index.tz_convert("America/New_York")
+    son = np.asarray((ny.hour * 60 + ny.minute) >= 930)
+    assert s.gun_sonu_kapanis.to_numpy().tolist() == son.tolist()       # motor 15:30 mumunun KAPANIŞINDA (16:00) kapatır
+    assert s.cikis.to_numpy()[son].all() and not s.cikis.to_numpy()[~son].any()
+    assert s.cikis_long.to_numpy()[son].all() and s.cikis_short.to_numpy()[son].all()
+    assert (s.yon.to_numpy()[son] == 0).all()
+
+
+def test_noise_lookahead_yok_gelecegi_kesmek_gecmis_sinyali_degistirmez():
+    m = _noise_veri()
+    tam = GuniciMomentumNoise().sinyaller(m)
+    for kes in (m.index[-13 + 2], m.index[-13 + 5]):
+        kisa = GuniciMomentumNoise().sinyaller(m[m.index <= kes])
+        pd.testing.assert_frame_equal(kisa, tam.loc[kisa.index], check_dtype=False)
+    # Aynı seansın sonraki mumları değişse de önceki mumun stopu (günlük ATR) değişmez.
+    m2 = m.copy()
+    m2.iloc[-8:, m2.columns.get_loc("yuksek")] = 500.0
+    s2 = GuniciMomentumNoise().sinyaller(m2)
+    assert s2.stop.iloc[-13 + 1] == pytest.approx(tam.stop.iloc[-13 + 1])
+
+
+def _btc_veri(bas="2023-12-01", gun=70, fiyat_fn=None):
+    idx = pd.date_range(bas, periods=gun * 24, freq="1h", tz="UTC")
+    f = np.linspace(100.0, 160.0, len(idx))
+    if fiyat_fn:
+        f = fiyat_fn(idx, f)
+    return _mum(idx, f)
+
+
+def _ny_konum(m, tarih, saat):
+    ny = m.index.tz_convert("America/New_York")
+    return int(np.where((ny.date == pd.Timestamp(tarih).date()) & (ny.hour == saat))[0][0])
+
+
 def test_btc_max10_cuma_giris_hafta_sonu_tutma_pazartesi_cikis():
-    idx = pd.date_range("2024-01-01", periods=30*24, freq="1h", tz="UTC")
-    m = _mum(idx, np.linspace(100, 120, len(idx)))
+    m = _btc_veri()
     s = BtcGecelikMax10().sinyaller(m)
-    ny = idx.tz_convert("America/New_York")
-    friday = np.where((ny.day_of_week == 4) & (ny.hour == 15) & (ny.date >= pd.Timestamp("2024-01-19").date()))[0][0]
+    ny = m.index.tz_convert("America/New_York")
+    friday = _ny_konum(m, "2024-01-26", 15)
     assert s.yon.iloc[friday] == 1 and s.stop.iloc[friday] < m.kapanis.iloc[friday]
-    monday = np.where((ny.day_of_week == 0) & (ny.hour == 9) & (ny.date == pd.Timestamp("2024-01-22").date()))[0][0]
+    monday = _ny_konum(m, "2024-01-29", 9)
     assert s.cikis.iloc[monday]
     assert not s.cikis.iloc[friday + 1:monday].any()
+    # Giriş yalnız Cuma/Pzt/Salı 15:00 ET mumunda; başka saat/gün sinyal yok.
+    giris = np.flatnonzero(s.yon.to_numpy() == 1)
+    assert len(giris) > 0
+    assert set(ny.hour[giris]) == {15} and set(ny.day_of_week[giris]) <= {0, 1, 4}
     assert al(BtcGecelikMax10.ad) is BtcGecelikMax10
+
+
+def test_btc_max10_zirve_16_00_kapanislarindan_gelir_fitil_ve_esitlik():
+    """MAX = önceki 10 işlem gününün 16:00 KAPANIŞLARI (gün içi fitil değil); eşitlik (>=) giriş verir."""
+    def duz(idx, f):
+        return np.full(len(f), 100.0)
+    m = _btc_veri(fiyat_fn=duz)
+    ny = m.index.tz_convert("America/New_York")
+    cuma = _ny_konum(m, "2024-01-26", 15)
+    # Düz 100: her 16:00 kapanışı 100 -> eşitlik: giriş var.
+    assert BtcGecelikMax10().sinyaller(m).yon.iloc[cuma] == 1
+    # Önceki bir günün gün içi FITILI çok yüksek: kapanış tanımında etkisiz, giriş sürer.
+    m_f = m.copy()
+    m_f.iloc[_ny_konum(m, "2024-01-22", 11), m_f.columns.get_loc("yuksek")] = 500.0
+    assert BtcGecelikMax10().sinyaller(m_f).yon.iloc[cuma] == 1
+    # Önceki bir günün 16:00 KAPANIŞI yüksek: Cuma kapanışı onu geçemez, giriş yok.
+    m_k = m.copy()
+    j = _ny_konum(m, "2024-01-22", 15)
+    m_k.iloc[j, m_k.columns.get_loc("kapanis")] = 130.0
+    m_k.iloc[j, m_k.columns.get_loc("yuksek")] = 130.0
+    s_k = BtcGecelikMax10().sinyaller(m_k)
+    assert s_k.yon.iloc[cuma] == 0
+    # Pencere dışı (11 işlem günü önce) yüksek kapanış etkisiz.
+    m_e = m.copy()
+    j2 = _ny_konum(m, "2024-01-10", 15)
+    m_e.iloc[j2, m_e.columns.get_loc("kapanis")] = 130.0
+    m_e.iloc[j2, m_e.columns.get_loc("yuksek")] = 130.0
+    assert BtcGecelikMax10().sinyaller(m_e).yon.iloc[cuma] == 1
+
+
+def test_btc_max10_islem_gunu_takvimi_tatil_ve_eksik_gun():
+    def duz(idx, f):
+        return np.full(len(f), 100.0)
+    m = _btc_veri(fiyat_fn=duz)
+    sali = _ny_konum(m, "2024-01-16", 15)   # Pzt 15 Ocak = MLK tatili; Salı girişi çalışır
+    # Tatil günü (MLK) 16:00 kapanışı yüksek olsa da pencereye girmez (NYSE işlem günü değil).
+    m_t = m.copy()
+    jt = _ny_konum(m, "2024-01-15", 15)
+    m_t.iloc[jt, m_t.columns.get_loc("kapanis")] = 150.0
+    s_t = BtcGecelikMax10().sinyaller(m_t)
+    assert s_t.yon.iloc[sali] == 1
+    assert s_t.yon.iloc[jt] == 0           # tatil gününde giriş yok
+    # Pencerede eksik işlem günü (15:00 mumu veride yok): kısa pencereden sinyal üretilmez.
+    m_x = m.drop(m.index[_ny_konum(m, "2024-01-22", 15)])
+    s_x = BtcGecelikMax10().sinyaller(m_x)
+    cuma = m_x.index[_ny_konum(m, "2024-01-26", 15) - 1]
+    assert s_x.loc[cuma, "yon"] == 0
+
+
+def test_btc_max10_stop_gunluk_atr_ve_lookahead_yok():
+    m = _btc_veri()
+    s = BtcGecelikMax10().sinyaller(m)
+    ny = m.index.tz_convert("America/New_York")
+    d = pd.Series(ny.date, index=m.index)
+    h, l, c = (m[x].groupby(d).agg(f) for x, f in (("yuksek", "max"), ("dusuk", "min"), ("kapanis", "last")))
+    tr = pd.concat([h - l, (h - c.shift(1)).abs(), (l - c.shift(1)).abs()], axis=1).max(axis=1)
+    atr = tr.ewm(alpha=1 / 14, adjust=False, min_periods=14).mean().shift(1)   # yalnız tamamlanmış günler
+    cuma = _ny_konum(m, "2024-01-26", 15)
+    beklenen = m.kapanis.iloc[cuma] - 2.0 * atr[pd.Timestamp("2024-01-26").date()]
+    assert s.stop.iloc[cuma] == pytest.approx(beklenen)
+    # Gelecek kesilirse / değişirse geçmiş sinyal ve stop aynı kalır.
+    kisa = BtcGecelikMax10().sinyaller(m.iloc[:cuma + 1])
+    pd.testing.assert_frame_equal(kisa, s.iloc[:cuma + 1], check_dtype=False)
+    m2 = m.copy()
+    m2.iloc[cuma + 1:, m2.columns.get_loc("yuksek")] = 1000.0
+    m2.iloc[cuma + 1:, m2.columns.get_loc("kapanis")] = 1000.0
+    s2 = BtcGecelikMax10().sinyaller(m2)
+    assert s2.stop.iloc[cuma] == pytest.approx(s.stop.iloc[cuma]) and s2.yon.iloc[cuma] == 1
 
 
 def _gunluk_veri(kapanis, bas="2022-01-01"):
