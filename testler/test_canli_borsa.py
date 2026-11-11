@@ -11,6 +11,7 @@ import pandas as pd
 import pytest
 
 from motor.canli.borsa import canli_ayar as ca
+from motor.canli.borsa import canli_limitler as cl
 from motor.canli.borsa import kurallar as kr
 from motor.canli.borsa.binance_futures import (BinanceFutures, BorsaHata, BorsaYasagi, EmirReddi, duz, imzala, temizle)
 from motor.canli.borsa.canli_yurutucu import Ayar, MotorGorunumu, Niyet, PozGorunum, Yurutucu, client_id
@@ -182,64 +183,65 @@ def test_kural_cikar_ve_yuvarlama():
 
 
 COST = dict(stop_kayma=D("0.0005"), taker=D("0.0005"))
+Q = D("0.027")        # varsayılan senaryo: kasa 1000, BTC 50000, stop 49000 (%2): kayıp tavanı 30/1075 = 0.0279 -> 0.027 (nominal tavanı 0.03 daha gevşek)
 
 
 def boyut(E=D(1000), **kw):
     k = kr.kural_cikar(bilgi(), "BTCUSDT")
-    a = dict(ozsermaye=E, tahsis=D(1000), yon=1, giris=D(50000), stop=D(49000), kural=k, risk_oran=D("0.01"), **COST)
+    a = dict(ozsermaye=E, tahsis=D(1000), yon=1, giris=D(50000), stop=D(49000), kural=k, **COST)
     a.update(kw)
     return kr.boyutlandir(**a), k
 
 
-def test_boyut_risk_maliyet_dahil_ve_asagi_yuvarlanmis():
+def test_boyut_kayip_maliyet_dahil_ve_asagi_yuvarlanmis():
     b, k = boyut()
-    assert b.neden is None and b.qty == D("0.009")                              # ham 10/1075 = 0.0093 -> 0.009 (YUKARI DEĞİL)
-    risk = b.qty * maliyetli_risk_birim(D(50000), D(49000), D("0.0005"), D("0.0005")) / D(1000) * 100
-    assert risk <= D(SERT_LIMITLER.islem_basi_max_risk_yuzde) and b.risk_yuzde == pytest.approx(float(risk))
+    assert b.neden is None and b.qty == Q and b.baglayan == "kayip" and b.kaldirac == 3   # ham 30/1075 = 0.0279 -> 0.027 (YUKARI DEĞİL)
+    kayip = b.qty * (D(1000) + D(50000) * D("0.0015")) / D(1000)
+    assert kayip <= D("0.03") and b.risk_yuzde == pytest.approx(float(kayip * 100))
 
 
 def test_min_tutar_altinda_yukari_yuvarlanmaz_atlanir():
-    b, _ = boyut(E=D(100), tahsis=D(100))                                       # ham 0.00093 < minQty 0.001: yukarı yuvarlansa risk %1,07 olurdu
+    b, _ = boyut(E=D(50), tahsis=D(50))                                         # ham 0.0014 -> 0.001, tutar 50 < min 100: atla (yukarı yuvarlanmaz)
     assert b.qty == 0 and b.neden == "min_tutar_alti" and "YUKARI YUVARLANMAZ" in b.ayrinti
-    b2, _ = boyut(E=D(500), tahsis=D(500))                                      # ham 0.00465 -> 0.004 -> tutar 200 >= 100 ama...
-    assert b2.neden is None and b2.qty == D("0.004")
-    k = kr.kural_cikar(bilgi(min_notional="1000"), "BTCUSDT")                   # min tutar 1000: 0.009 x 50000 = 450 < 1000 -> atla
-    b3 = kr.boyutlandir(ozsermaye=D(1000), tahsis=D(1000), yon=1, giris=D(50000), stop=D(49000), kural=k, risk_oran=D("0.01"), **COST)
+    b2, _ = boyut(E=D(500), tahsis=D(500))                                      # ham 0.0139 -> 0.013 -> tutar 650 >= 100
+    assert b2.neden is None and b2.qty == D("0.013")
+    k = kr.kural_cikar(bilgi(min_notional="2000"), "BTCUSDT")                   # min tutar 2000: 0.027 x 50000 = 1350 < 2000 -> atla
+    b3 = kr.boyutlandir(ozsermaye=D(1000), tahsis=D(1000), yon=1, giris=D(50000), stop=D(49000), kural=k, **COST)
     assert b3.neden == "min_tutar_alti" and b3.qty == 0
 
 
-def test_boyut_tahsis_ve_risk_orani_tavani():
+def test_boyut_tahsis_tavani_ve_nominal_tavani():
     b, _ = boyut(E=D(100000), tahsis=D(1000))
-    assert b.qty == D("0.009")                                                  # tahsis 1000 ile sınırlı
-    b2, _ = boyut(risk_oran=D("0.5"))                                           # strateji %50 isterse bile sert limit %1
-    assert b2.qty == D("0.009")
+    assert b.qty == Q                                                           # tahsis 1000 ile sınırlı
+    b2, _ = boyut(stop=D(49900))                                                # sıkı stop (%0.2): nominal tavanı (1.5x) bağlar, kayıp tavanı değil
+    assert b2.qty == D("0.03") and b2.baglayan in ("nominal", "marj")
 
 
 def test_boyut_toplam_stop_riski_ve_brut_tavani():
-    b, _ = boyut(diger_stop_riski=D(45))                                        # %5 = 50 USD; 45 dolu -> kalan 5 USD / 1000 = 0.005
-    assert b.qty == D("0.005")
-    b2, _ = boyut(diger_stop_riski=D(50))
+    b, _ = boyut(diger_stop_riski=D(55))                                        # %6 = 60 USD; 55 dolu -> kalan 5 USD / 1075 = 0.0046 -> 0.004
+    assert b.qty == D("0.004") and b.baglayan == "toplam_risk"
+    b2, _ = boyut(diger_stop_riski=D(60))
     assert b2.neden == "risk_butcesi_dolu"
-    b3, _ = boyut(diger_brut=D(2900))                                           # brüt 3x = 3000; kalan 100 USD / 50000 = 0.002
-    assert b3.qty == D("0.002")
-    b4, _ = boyut(diger_brut=D(3000))
+    b3, _ = boyut(diger_brut=D(1400))                                           # brüt 1.5x = 1500; kalan 100 USD / 50000 = 0.002
+    assert b3.qty == D("0.002") and b3.baglayan == "brut"
+    b4, _ = boyut(diger_brut=D(1500))
     assert b4.neden == "risk_butcesi_dolu"
 
 
 def test_boyut_gecersiz_ve_uzak_stop():
     assert boyut(stop=D(51000))[0].neden == "gecersiz_stop"
     assert boyut(stop=D(30000))[0].neden == "stop_cok_uzak"
-    assert boyut(E=D(0))[0].neden == "ozsermaye_yok"
+    assert boyut(E=D(0))[0].neden == "kasa_yok"
 
 
-def test_sert_limit_ihlalleri_yuvarlanmis_miktarla():
-    ok = kr.sert_limit_ihlalleri(qty=D("0.009"), giris=D(50000), stop=D(49000), ozsermaye=D(1000), **COST)
+def test_limit_ihlalleri_yuvarlanmis_miktarla():
+    ok = cl.limit_ihlalleri(qty=Q, giris=D(50000), stop=D(49000), kasa=D(1000), kaldirac=3, **COST)
     assert ok == []
-    kotu = kr.sert_limit_ihlalleri(qty=D("0.0094"), giris=D(50000), stop=D(49000), ozsermaye=D(1000), **COST)   # yukarı yuvarlama %1'i aşar
-    assert any("islem_basi_risk" in x for x in kotu)
-    assert any("brut" in x for x in kr.sert_limit_ihlalleri(qty=D("0.07"), giris=D(50000), stop=D(49500), ozsermaye=D(1000), **COST))
-    assert any("toplam_stop" in x for x in kr.sert_limit_ihlalleri(qty=D("0.001"), giris=D(50000), stop=D(49000), ozsermaye=D(1000),
-                                                                    diger_stop_riski=D(50), **COST))
+    kotu = cl.limit_ihlalleri(qty=D("0.0285"), giris=D(50000), stop=D(49000), kasa=D(1000), kaldirac=3, **COST)   # yukarı yuvarlama %3'ü aşar
+    assert any("islem_basi_kayip" in x for x in kotu)
+    assert any("nominal" in x or "brut" in x for x in cl.limit_ihlalleri(qty=D("0.04"), giris=D(50000), stop=D(49900), kasa=D(1000), kaldirac=3, **COST))
+    assert any("toplam_stop" in x for x in cl.limit_ihlalleri(qty=D("0.001"), giris=D(50000), stop=D(49000), kasa=D(1000), kaldirac=3,
+                                                              diger_stop_riski=D(60), **COST))
 
 
 # ============================================================================================= sahte borsa + yürütücü
@@ -354,10 +356,10 @@ def test_giris_hemen_ardindan_borsa_stopu(tmp_path):
     c = [x for x in e.borsa.cagrilar if x[0] in ("piyasa", "kosullu")]
     assert [x[0] for x in c] == ["piyasa", "kosullu", "kosullu"]
     piyasa, stop, hedef = c
-    assert piyasa[2:4] == ("BUY", D("0.009")) and piyasa[5] is False
-    assert stop[2:5] == ("STOP_MARKET", "SELL", D("0.009")) and stop[5] == D("49000") and stop[7] == "MARK_PRICE"
+    assert piyasa[2:4] == ("BUY", Q) and piyasa[5] is False
+    assert stop[2:5] == ("STOP_MARKET", "SELL", Q) and stop[5] == D("49000") and stop[7] == "MARK_PRICE"
     assert hedef[2] == "TAKE_PROFIT_MARKET" and hedef[5] == D("52000")
-    assert e.borsa.poz == {"BTCUSDT": D("0.009")}
+    assert e.borsa.poz == {"BTCUSDT": Q}
     assert {"canli_emir_doldu", "canli_stop_kuruldu"} <= set(e.turler())
     assert any("canli_stop_kuruldu" in b for b in e.bildirimler) and any("canli_emir_doldu" in b for b in e.bildirimler)
     assert ("hazirla", "BTCUSDT", 3) in e.borsa.cagrilar
@@ -367,10 +369,11 @@ def test_sert_limit_gercek_miktar_ve_borsa_ozsermayesiyle(tmp_path):
     e = Ortam(tmp_path, ozs="800", tahsis=5000)                                   # tahsis büyük ama borsa özsermayesi 800: 800 üzerinden
     e.y.adim(gor([ac_niyeti()]))
     q = e.borsa.poz["BTCUSDT"]
-    risk = q * maliyetli_risk_birim(D(50000), D(49000), D("0.0005"), D("0.0005")) / D(800) * 100
-    assert 0 < risk <= D(SERT_LIMITLER.islem_basi_max_risk_yuzde)
-    assert q * 50000 / 800 <= D(SERT_LIMITLER.max_kaldirac)
-    assert q * 1000 / 800 * 100 <= D(SERT_LIMITLER.portfoy_toplam_risk_yuzde)
+    kayip = q * (D(1000) + D(50000) * D("0.0015")) / D(800)
+    assert 0 < kayip <= D(str(cl.CANLI_LIMITLER.islem_basi_max_kayip_oran))
+    assert q * 50000 / 800 <= D(str(cl.CANLI_LIMITLER.islem_basi_max_nominal_kat))
+    assert q * 50000 / 3 / 800 <= D(str(cl.CANLI_LIMITLER.islem_basi_max_marj_oran))
+    assert q * 1000 / 800 <= D(str(cl.CANLI_LIMITLER.toplam_stop_riski_oran))
 
 
 def test_stop_basarisiz_pozisyon_hemen_kapanir(tmp_path):
@@ -395,7 +398,7 @@ def test_stop_ve_kapatma_ikisi_de_basarisiz_alarm_ve_tekrar(tmp_path):
 
 
 def test_min_tutar_alti_atlanir_olay_ve_telegram(tmp_path):
-    e = Ortam(tmp_path, ozs="100", tahsis=100)
+    e = Ortam(tmp_path, ozs="50", tahsis=50)
     e.y.adim(gor([ac_niyeti()]))
     assert e.borsa.poz == {} and "piyasa" not in e.borsa.adlar()
     assert "min_tutar_alti" in e.turler() and any("min_tutar_alti" in b for b in e.bildirimler)
@@ -507,7 +510,7 @@ def test_stop_yukselir_once_yeni_sonra_eski_iptal_gevsetme_yok(tmp_path):
 def test_kill_switch_toplam_dusus_hepsini_kapatir_ve_bloklar(tmp_path):
     e = Ortam(tmp_path)
     e.y.adim(gor([ac_niyeti()]))
-    e.borsa.ozs = D("790")                                                         # zirve 1000 -> -%21
+    e.borsa.ozs = D("690")                                                         # zirve 1000 -> -%31 (strateji kill -%30)
     e.y.adim(gor([]))
     assert e.borsa.poz == {} and e.borsa.acik == {} and e.y.durum["kill"] is True
     assert "canli_kill_switch" in e.turler() and any("KILL" in b for b in e.bildirimler)
@@ -519,17 +522,20 @@ def test_kill_switch_toplam_dusus_hepsini_kapatir_ve_bloklar(tmp_path):
     assert e.y.durum["kill"] is True                                                # yeniden başlatma kaldırmaz
 
 
-def test_gunluk_limit_kapatir_ertesi_gun_acilir(tmp_path):
+def test_gunluk_limit_yeni_giris_yok_kapatmaz_ertesi_gun_acilir(tmp_path):
     e = Ortam(tmp_path)
     e.y.adim(gor([]))                                                               # gün başı 1000
-    e.borsa.poz["BTCUSDT"] = D("0.009")
-    e.borsa.ozs = D("965")                                                          # -%3,5
-    e.y.adim(gor([]))
-    assert e.borsa.poz == {} and e.y.durum["gun_blok"] and not e.y.durum["kill"]
+    e.borsa.poz["BTCUSDT"] = Q
+    e.borsa.ozs = D("935")                                                          # -%6,5 (günlük limit -%6)
+    e.y.adim(gor([ac_niyeti(kol="K2")]))
+    assert e.borsa.poz == {"BTCUSDT": Q} and e.y.durum["gun_blok"] and not e.y.durum["kill"]   # açık pozisyon KAPATILMAZ
+    assert piyasa_sayisi(e.borsa) == 0 and piyasa_sayisi(e.borsa, reduce=True) == 0             # yeni giriş de yok, kapatma da
+    assert "canli_giris_atlandi" in e.turler()
     e.zaman[0] += pd.Timedelta(days=1)
+    e.borsa.poz.clear()
     t1 = e.zaman[0] - ARALIK - pd.Timedelta(seconds=30)
     e.y.adim(gor([ac_niyeti(t=t1)]))
-    assert e.borsa.poz                                                              # ertesi UTC günü yeniden girişe izin
+    assert not e.y.durum["gun_blok"] and e.borsa.poz                                # ertesi UTC günü yeniden girişe izin
 
 
 def test_hata_yutulmaz_ama_turu_dusurmez_ve_blok(tmp_path):
@@ -546,7 +552,7 @@ def test_kuru_borsa_emir_gondermeden_ayni_akis(tmp_path):
     kb = KuruBorsa(lambda s: D(50000), D(1000))
     e = Ortam(tmp_path, borsa=kb, mod="kuru")
     e.y.adim(gor([ac_niyeti()]))
-    assert [x[0] for x in kb.gonderilen] == ["piyasa", "STOP_MARKET"] and kb.poz["BTCUSDT"]["miktar"] == D("0.009")
+    assert [x[0] for x in kb.gonderilen] == ["piyasa", "STOP_MARKET"] and kb.poz["BTCUSDT"]["miktar"] == Q
     e.y.adim(gor([Niyet("kapat", "K1", "BTCUSDT", 1, neden="sinyal", aralik=ARALIK)], {"K1": PozGorunum("BTCUSDT", 1, D(49000))}))
     assert kb.poz == {} and kb.acik == {}
 
@@ -699,7 +705,7 @@ def test_r1_belirsiz_giris_emir_dolduysa_tekrar_gonderilmez(tmp_path):
     e = Ortam(tmp_path)
     e.borsa.piyasa_mod = "belirsiz_dolar"                                              # POST ağ hatasıyla bitti ama borsada doldu
     e.y.adim(gor([ac_niyeti()]))
-    assert piyasa_sayisi(e.borsa) == 1 and e.borsa.poz == {"BTCUSDT": D("0.009")}
+    assert piyasa_sayisi(e.borsa) == 1 and e.borsa.poz == {"BTCUSDT": Q}
     assert any(o["tur"] == "STOP_MARKET" for o in e.borsa.acik.values())
 
 
@@ -707,7 +713,7 @@ def test_r1_belirsiz_giris_emir_yoksa_bir_kez_yeniden_gonderilir(tmp_path):
     e = Ortam(tmp_path)
     e.borsa.piyasa_mod = "belirsiz_dolmaz"
     e.y.adim(gor([ac_niyeti()]))
-    assert piyasa_sayisi(e.borsa) == 2 and e.borsa.poz == {"BTCUSDT": D("0.009")}      # ikincisi: borsa 'emir yok' dedi
+    assert piyasa_sayisi(e.borsa) == 2 and e.borsa.poz == {"BTCUSDT": Q}      # ikincisi: borsa 'emir yok' dedi
     assert piyasa_sayisi(e.borsa) == 2
 
 
@@ -736,7 +742,7 @@ def test_r3_kill_once_kapat_sonra_iptal_kapatma_basarisizsa_stop_kalir(tmp_path)
     e = Ortam(tmp_path)
     e.y.adim(gor([ac_niyeti()]))
     e.borsa.kapat_hatasi = True
-    e.borsa.ozs = D("790")
+    e.borsa.ozs = D("690")
     e.y.adim(gor([], {"K1": PozGorunum("BTCUSDT", 1, D(49000))}))
     assert e.borsa.poz and any(o["tur"] == "STOP_MARKET" for o in e.borsa.acik.values())   # stop yerinde
     assert "hepsini_iptal" not in e.borsa.adlar() and "canli_kill_hatasi" in e.turler()
@@ -755,7 +761,7 @@ def test_r3_kill_kapatma_basarisizken_stopsuz_pozisyona_stop_kurulur(tmp_path):
     e.y.adim(gor([ac_niyeti()]))
     e.borsa.acik.clear()
     e.borsa.kapat_hatasi = True
-    e.borsa.ozs = D("790")
+    e.borsa.ozs = D("690")
     e.y.adim(gor([], {"K1": PozGorunum("BTCUSDT", 1, D(49000))}))
     assert any(o["tur"] == "STOP_MARKET" for o in e.borsa.acik.values())                   # kill sırasında da mutabakat stopu korur
 
@@ -795,10 +801,10 @@ def test_r6_dolum_kaymasi_riski_asarsa_reduceonly_kucultulur(tmp_path):
     e.borsa.fill_px = D(50800)                                                              # mark 50000, gerçek dolum %1,6 kötü: stop mesafesi 1800 > 1000
     e.y.adim(gor([ac_niyeti()]))
     q = e.borsa.poz["BTCUSDT"]
-    assert q < D("0.009") and "canli_risk_asimi" in e.turler()
+    assert q < Q and "canli_risk_asimi" in e.turler()
     assert piyasa_sayisi(e.borsa, reduce=True) == 1
-    risk = q * maliyetli_risk_birim(D(50800), D(49000), D("0.0005"), D("0.0005")) / D(1000) * 100
-    assert risk <= D(SERT_LIMITLER.islem_basi_max_risk_yuzde)                               # GERÇEK dolumla uyumlu
+    kayip = q * (D(1800) + D(50800) * D("0.0015")) / D(1000)
+    assert kayip <= D(str(cl.CANLI_LIMITLER.islem_basi_max_kayip_oran))                               # GERÇEK dolumla uyumlu
     assert [o["miktar"] for o in e.borsa.acik.values() if o["tur"] == "STOP_MARKET"] == [q]  # stop kalan miktar için
 
 
@@ -808,7 +814,7 @@ def test_r6_kill_ve_gunluk_tahsis_tabanli(tmp_path):
     e.borsa.ozs = D("4000")                                                                  # hesap -%20 ama tahsis tabanı hâlâ 1000: kill YOK
     e.y.adim(gor([]))
     assert not e.y.durum["kill"] and not e.y.durum["gun_blok"]
-    e.borsa.ozs = D("790")                                                                   # tahsisin altına indi: min(790,1000) -> -%21
+    e.borsa.ozs = D("690")                                                                   # tahsisin altına indi: min(690,1000) -> -%31
     e.y.adim(gor([]))
     assert e.y.durum["kill"]
 
@@ -838,13 +844,13 @@ def test_r8_stop_miktar_uyusmazligi_yeni_stopu_iptal_etmez_tolerans_step(tmp_pat
     e = Ortam(tmp_path)
     e.y.adim(gor([ac_niyeti()]))
     eski = list(e.borsa.acik.values())[0]
-    eski["miktar"] = D("0.0095")                                                              # fark 0.0005 < step 0.001: eşleşme sayılır
+    eski["miktar"] = D("0.0275")                                                              # fark 0.0005 < step 0.001: eşleşme sayılır
     e.y.adim(gor([], {"K1": PozGorunum("BTCUSDT", 1, D(49000))}))
     assert list(e.borsa.acik) == [eski["client_id"]] and "canli_uyusmazlik" not in [t for t in e.turler() if t == "canli_uyusmazlik"]
     eski["miktar"] = D("0.004")                                                               # gerçek uyuşmazlık
     e.y.adim(gor([], {"K1": PozGorunum("BTCUSDT", 1, D(49000))}))
     stoplar = list(e.borsa.acik.values())
-    assert len(stoplar) == 1 and stoplar[0]["miktar"] == D("0.009") and stoplar[0]["client_id"] == e.y.durum["pozlar"]["K1"]["stop_id"]
+    assert len(stoplar) == 1 and stoplar[0]["miktar"] == Q and stoplar[0]["client_id"] == e.y.durum["pozlar"]["K1"]["stop_id"]
 
 
 def test_r9_iptal_basarisizsa_kayit_silinmez_yetim_emirler_temizlenir(tmp_path):

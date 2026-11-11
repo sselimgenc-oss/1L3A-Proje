@@ -1,11 +1,39 @@
 {
   "surum": 1,
+  "aciklama": "Aşama 1 kadrosu (CANLI_PLAN.md, kilitli): 4 strateji x 250 USD. tahsis_usd = bu strateji hesabına ayırdığınız sermaye; kasa = min(borsa özsermayesi, tahsis_usd). islem_risk = işlem başı stopta kayıp / kasa (maliyet dahil): izinli 0.015 <= x <= 0.03, varsayılan 0.015, dışı REDDEDİLİR. 15m stratejilerde 0.015 -> 0.02 (6. hafta) -> 0.03 (12. hafta) artışı ELLE yapılır, yalnız CANLI_PLAN.md şartları kontrol edildikten sonra (python -m motor.canli.borsa.risk_adim_kontrol --durum DIZIN); otomatik değildir. Ölçümde atlanan sinyal oranı > %50 çıkan strateji 0.02 ile başlar (sonuclar/canli/OLCUM_250_15.md). Swing adları SWING_SECIM.md'deki KİLİTLİ kuraldan gelir (2026-12-08 sadakat kontrolünden sonra); buradaki SWING_1/SWING_2 yer tutucudur. Diğer canlı risk kuralı (motor/canli/borsa/canli_limitler.py): işlem başı kayıp tavanı %3 (boyut = min(islem_risk, %3)), marj <= %50, nominal <= 1.5x; toplam açık stop riski <= %6; günlük -%6 = o gün yeni giriş yok; zirveden -%30 = strateji kalıcı durur; tüm kasa toplamı -%20 = hepsi kalıcı durur; izole marj, stop <= %15 ise 3x, üstü 2x. Borsa minimumunun altı atlanır (yukarı yuvarlanmaz).",
   "mod": "testnet",
   "working_type": "MARK_PRICE",
   "kosullu_modu": "algo",
   "giris_gecikme_max_sn": 900,
   "hedef_emri": true,
   "stratejiler": [
-    {"id": "BURAYA_STRATEJI_KIMLIGI", "api_key_env": "BINANCE_API_KEY_S1", "api_secret_env": "BINANCE_API_SECRET_S1", "tahsis_usd": 1000}
+    {
+      "id": "dis__e0v1en",
+      "api_key_env": "BINANCE_API_KEY_S1",
+      "api_secret_env": "BINANCE_API_SECRET_S1",
+      "tahsis_usd": 250,
+      "islem_risk": 0.015
+    },
+    {
+      "id": "dis__ewo-ema-ofset",
+      "api_key_env": "BINANCE_API_KEY_S2",
+      "api_secret_env": "BINANCE_API_SECRET_S2",
+      "tahsis_usd": 250,
+      "islem_risk": 0.015
+    },
+    {
+      "id": "SWING_1",
+      "api_key_env": "BINANCE_API_KEY_S3",
+      "api_secret_env": "BINANCE_API_SECRET_S3",
+      "tahsis_usd": 250,
+      "islem_risk": 0.015
+    },
+    {
+      "id": "SWING_2",
+      "api_key_env": "BINANCE_API_KEY_S4",
+      "api_secret_env": "BINANCE_API_SECRET_S4",
+      "tahsis_usd": 250,
+      "islem_risk": 0.015
+    }
   ]
 }

@@ -1,0 +1,10 @@
+strateji,sinyal,alinan,atlanan,atlanan_yuzde,atlanan_min_tutar,atlanan_risk_butcesi_dolu,atlanan_brut_tavan,atlanan_stop_cok_uzak,atlanan_gunluk_blok,atlanan_kill_sonrasi,atlanan_diger,r3_sinyal,r3_atlanan,r3_atlanan_pay,son_ozsermaye_usd,maks_dusus,kill,kill_tarihi,toplam_net_r,en_buyuk_r,bayrak_50
+dis__gauss-stoch-eth,1336,598,738,55.2,511,17,0,210,0,0,0,32,21,0.6562,350.07,0.2424,hayir,,220.917,40.638,EVET
+dis__ewo-ema-ofset,1287,993,294,22.8,272,0,0,5,17,0,0,1,0,0.0,812.71,0.1175,hayir,,206.732,3.874,
+dis__jt-awesome-osilator,1851,595,1256,67.9,1112,40,1,103,0,0,0,102,78,0.7647,616.68,0.3844,hayir,,706.985,86.048,EVET
+dis__uc-ortalama-boga-sma60,367,297,70,19.1,35,0,0,35,0,0,0,9,4,0.4444,311.84,0.2452,hayir,,34.207,17.586,
+dis__lube,175,121,54,30.9,40,0,0,14,0,0,0,21,5,0.2381,678.98,0.1276,hayir,,127.937,52.745,
+dis__hma-atr-rider,2124,1048,1076,50.7,808,51,0,217,0,0,0,26,14,0.5385,264.57,0.3734,hayir,,131.101,6.701,EVET
+dis__voltarget-trend,1421,188,1233,86.8,56,8,0,1,0,1168,0,73,66,0.9041,174.0,0.4568,evet,2018-12-17,273.19,30.29,EVET
+dis__haftalik-macd-gunluk-ma,618,426,192,31.1,174,0,0,18,0,0,0,17,5,0.2941,614.71,0.2174,hayir,,111.624,70.222,
+dis__e0v1en,2461,2247,214,8.7,211,0,0,0,3,0,0,1,0,0.0,757.44,0.1241,hayir,,176.886,4.439,

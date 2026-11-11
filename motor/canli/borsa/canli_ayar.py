@@ -3,6 +3,7 @@
 
 Örnek: stratejiler/canli_ayar.ornek.json. Kurallar:
   - mod: kuru | testnet | canli (varsayılan testnet). `canli` için ayrıca ortamda CANLI_ONAY=evet şart; yoksa başlamaz.
+  - Strateji başına `islem_risk` (işlem başı stopta kayıp / kasa): 0.015 <= x <= 0.03, varsayılan 0.015; dışı reddedilir. Boyut = min(islem_risk, CANLI_LIMITLER %3).
   - Bir Binance hesabı (API anahtar çifti) = bir strateji. Aynı anahtar adı iki stratejide kullanılamaz (strateji arası netleştirme yok).
 """
 from __future__ import annotations
@@ -19,6 +20,9 @@ ONAY_ENV, ONAY_DEGER = "CANLI_ONAY", "evet"
 VARSAYILAN_YOL = Path(__file__).resolve().parents[3] / "stratejiler" / "canli_ayar.json"
 
 
+ISLEM_RISK_MIN, ISLEM_RISK_MAX, ISLEM_RISK_VARSAYILAN = Decimal("0.015"), Decimal("0.03"), Decimal("0.015")   # CANLI_PLAN.md: %1,5 -> %2 -> %3
+
+
 class CanliAyarHatasi(ValueError):
     pass
 
@@ -33,6 +37,7 @@ class StratejiAyar:
     api_key_env: str
     api_secret_env: str
     tahsis_usd: Decimal
+    islem_risk: Decimal = Decimal("0.015")   # işlem başı stopta kayıp / kasa (maliyet dahil); izinli aralık [ISLEM_RISK_MIN, ISLEM_RISK_MAX]
 
 
 @dataclass(frozen=True)
@@ -43,6 +48,19 @@ class CanliAyar:
     giris_gecikme_max_sn: int = 900
     kosullu_modu: str = "algo"
     hedef_emri: bool = True
+
+
+def _islem_risk(sid: str, ham) -> Decimal:
+    """Fail-closed: sayı değilse / aralık dışıysa (0.015 <= x <= 0.03) yapılandırma reddedilir. Artış (6./12. hafta) ELLE yapılır, otomatik değil."""
+    if isinstance(ham, bool) or not isinstance(ham, (int, float, str, Decimal)):
+        raise CanliAyarHatasi(f"{sid}: islem_risk sayı olmalı: {ham!r}")
+    try:
+        r = Decimal(str(ham))
+    except Exception:  # noqa: BLE001
+        raise CanliAyarHatasi(f"{sid}: islem_risk sayı olmalı: {ham!r}") from None
+    if not r.is_finite() or not (ISLEM_RISK_MIN <= r <= ISLEM_RISK_MAX):
+        raise CanliAyarHatasi(f"{sid}: islem_risk {ISLEM_RISK_MIN} ile {ISLEM_RISK_MAX} arasında olmalı: {ham!r}")
+    return r
 
 
 def yukle(yol: Optional[Path] = None, env: Optional[dict] = None) -> CanliAyar:
@@ -77,9 +95,10 @@ def coz(h: dict, env: dict) -> CanliAyar:
             raise CanliAyarHatasi(f"{x['id']}: tahsis_usd > 0 olmalı")
         if x["id"] in gorulen_id or x["api_key_env"] in gorulen_anahtar:
             raise CanliAyarHatasi(f"{x['id']}: bir hesap = bir strateji (strateji ya da anahtar adı tekrarlı)")
+        islem_risk = _islem_risk(x["id"], x.get("islem_risk", ISLEM_RISK_VARSAYILAN))
         gorulen_id.add(x["id"])
         gorulen_anahtar.add(x["api_key_env"])
-        ss.append(StratejiAyar(x["id"], x["api_key_env"], x["api_secret_env"], tahsis))
+        ss.append(StratejiAyar(x["id"], x["api_key_env"], x["api_secret_env"], tahsis, islem_risk))
     if not ss:
         raise CanliAyarHatasi("en az bir strateji gerekir")
     return CanliAyar(mod, tuple(ss), wt, int(h.get("giris_gecikme_max_sn", 900)), km, bool(h.get("hedef_emri", True)))

@@ -1,10 +1,10 @@
 """Canlı yürütücü: paper motorunun NİYETLERİNİ (aç / kapat / stop yükselt) tek strateji = tek Binance hesabı için gerçek emre çevirir.
 
 Karar mantığı BURADA DEĞİLDİR: sinyal yolu paper motorunun kendisidir (köprü: motor_kopru.py). Burası yalnız
-  - borsa filtrelerine göre boyutlandırır, SERT_LIMITLER'i yuvarlanmış miktarla ve borsadaki özsermayeyle doğrular (kurallar.py),
+  - borsa filtrelerine göre boyutlandırır, CANLI_LIMITLER'i (canli_limitler.py; kullanıcı kararı 2026-11-11) yuvarlanmış miktarla ve kasayla doğrular (kurallar.py),
   - girişten HEMEN sonra borsa tarafında STOP_MARKET (reduceOnly) kurar; kurulamazsa pozisyonu hemen kapatır (çıplak pozisyon yok),
   - her turda borsayı doğruluk kaynağı sayıp mutabakat yapar (stopsuz / bilinmeyen / kayıp pozisyon),
-  - borsa özsermayesinde günlük -%3 / toplam -%20'de her şeyi iptal edip kapatır ve yeni girişi bloklar (kill switch),
+  - kasada günlük -%6'da o gün YENİ girişi bloklar (açık pozisyonlar kapatılmaz); zirveden -%30'da (strateji) ya da hesap toplamında -%20'de (calistir.py) kapatıp KALICI durur (kill),
   - idempotent newClientOrderId kullanır (yeniden başlatma çift emir üretmez).
 Modlar: kuru (hiçbir şey gönderilmez; KuruBorsa), testnet, canli (CANLI_ONAY=evet gerekir; bkz. canli_ayar).
 Bilinmeyen pozisyon için ASLA otomatik işlem yapılmaz (yalnız uyarı). Bu dosyada gizli anahtar yoktur ve loga yazılmaz.
@@ -24,14 +24,12 @@ import pandas as pd
 from motor.strateji import cikislar as cks
 
 from motor.canli.borsa.binance_futures import BorsaHata, EmirReddi
-from motor.canli.borsa.kurallar import (KuralHatasi, SembolKurali, boyutlandir, hedef_yuvarla, kural_cikar, sert_limit_ihlalleri,
-                                        stop_yuvarla)
-from motor.risk.limitler import SERT_LIMITLER
+from motor.canli.borsa import canli_limitler as cl
+from motor.canli.borsa.kurallar import KuralHatasi, SembolKurali, boyutlandir, hedef_yuvarla, kural_cikar, stop_yuvarla
 
 log = logging.getLogger("canli.yurutucu")
 D = Decimal
 ONEK = "1l3a"
-KALDIRAC = int(SERT_LIMITLER.max_kaldirac)
 HATA_BLOK_SINIRI = 3
 SONLANMIS = {"CANCELED", "CANCELLED", "EXPIRED", "REJECTED", "FILLED", "TRIGGERED", "FINISHED", "EXPIRED_IN_MATCH"}
 
@@ -49,8 +47,8 @@ class Niyet:
     sinyal_zamani: Optional[pd.Timestamp] = None   # sinyali üreten barın AÇILIŞ zamanı
     aralik: pd.Timedelta = pd.Timedelta(hours=1)
     neden: str = ""
-    risk_oran: Decimal = D("0.01")
-    grup_payi: Decimal = D(1)
+    risk_oran: Decimal = D("0.01")     # paper alanı; CANLIDA KULLANILMAZ (canlı risk kuralı canli_limitler.py'de sabit)
+    grup_payi: Decimal = D(1)          # paper alanı; canlıda kullanılmaz
     stop_kayma: Decimal = D("0.0005")
     taker: Decimal = D("0.0005")
     sabit_r: Optional[float] = None    # CikisAyarlari.sabit_r_hedefi: paper hedefi dolum fiyatından türetir; canlıda GERÇEK dolumdan aynı formülle
@@ -77,6 +75,7 @@ class MotorGorunumu:
 class Ayar:
     mod: str = "testnet"                  # kuru | testnet | canli
     tahsis: Decimal = D(1000)
+    islem_risk: Optional[Decimal] = None  # None: yalnız CANLI_LIMITLER %3 tavanı (doğrudan kullanım); calistir.py yapılandırmadan HER ZAMAN verir
     working_type: str = "MARK_PRICE"      # MARK_PRICE | CONTRACT_PRICE
     giris_gecikme_max_sn: int = 900       # sinyal barı kapandıktan en geç bu kadar sonra giriş; sonrası atlanır
     hedef_emri: bool = True               # stratejinin hedefi varsa TAKE_PROFIT_MARKET kur
@@ -175,38 +174,44 @@ class Yurutucu:
 
     def _adim(self, g: MotorGorunumu) -> None:
         simdi = self.saat()
-        E = min(self.borsa.bakiye()["ozsermaye"], self.ayar.tahsis)      # TAHSİS tabanı: boyutlandırma, günlük -%3 ve kill -%20 hepsi bunun üzerinden
+        E = self.kasa_oku()      # kasa = min(borsa özsermayesi, tahsis): boyutlandırma, günlük -%6 ve kill -%30 hepsi bunun üzerinden
         self._risk_izle(E, simdi)
         poz = self._poz()
-        if self.durum["kill"] or self.durum["gun_blok"]:
-            self._hepsini_kapat(poz, self.durum["kill_neden"] or "gunluk_limit", g)
+        if self.durum["kill"]:                                  # kill (strateji -%30 / hesap -%20): hepsini kapat, kalıcı dur
+            self._hepsini_kapat(poz, self.durum["kill_neden"] or "kill_switch", g)
             return
         self._mutabakat(g, poz)
         poz = self._poz()
         for n in [x for x in g.niyetler if x.tur == "kapat"]:
             self._kapat_niyeti(n, poz)
-        for n in [x for x in g.niyetler if x.tur == "ac"]:
-            self._ac_niyeti(n, g, E, simdi)
+        if self.durum["gun_blok"]:                              # günlük -%6: YALNIZ yeni giriş yok (açık pozisyonlar stop + strateji çıkışıyla sürer); ertesi UTC günü açılır
+            for n in [x for x in g.niyetler if x.tur == "ac"]:
+                gid = client_id("G", self.sid, n.kol, n.sinyal_zamani)
+                if gid not in self.durum["islenen"] and n.kol not in self.durum["pozlar"]:
+                    self.durum["islenen"][gid] = str(simdi)
+                    self.olay("canli_giris_atlandi", f"{n.kol}: günlük kayıp limiti (-%{cl.CANLI_LIMITLER.gunluk_max_kayip_oran * 100:g}) aşıldı; bugün yeni giriş yok", bildir=False)
+        else:
+            for n in [x for x in g.niyetler if x.tur == "ac"]:
+                self._ac_niyeti(n, g, E, simdi)
         self._stop_yukselt(g, self._poz())
 
-    # ------------------------------------------------------------------ kill switch (tahsis tabanlı özsermaye = min(borsa özsermayesi, tahsis))
+    # ------------------------------------------------------------------ kasa / kill switch
+    def kasa_oku(self) -> Decimal:
+        """Bu strateji hesabının kasası = min(borsa özsermayesi, tahsis edilen sermaye)."""
+        return min(self.borsa.bakiye()["ozsermaye"], self.ayar.tahsis)
+
     def _risk_izle(self, E: Decimal, simdi) -> None:
-        d, L = self.durum, SERT_LIMITLER
-        gun = str(pd.Timestamp(simdi).date())
-        if d["gun"] != gun:
-            d["gun"], d["gun_basi"], d["gun_blok"] = gun, str(E), False
+        for tur, mesaj in cl.gunluk_kill_guncelle(self.durum, E, str(pd.Timestamp(simdi).date())):
+            self.olay(tur, mesaj)
+        if not self.durum["gun_blok"]:
             self._uyari_sil("gunluk")
-        z = D(d["zirve"]) if d["zirve"] else E
-        d["zirve"] = str(max(z, E))
-        zirve, gb = D(d["zirve"]), D(d["gun_basi"])
-        if not d["kill"] and zirve > 0 and (zirve - E) / zirve * 100 >= D(L.kill_switch_dusus_yuzde):
-            d["kill"], d["kill_neden"] = True, "kill_switch"
-            self.olay("canli_kill_switch", f"KILL SWITCH: tahsis tabanlı özsermaye {E:.2f}, zirve {zirve:.2f} (düşüş >= %{L.kill_switch_dusus_yuzde}); "
-                                           "tüm pozisyonlar kapatılıyor, sonra emirler iptal; yeni giriş yok. Elle sıfırlama gerekir.")
-        if not d["kill"] and not d["gun_blok"] and gb > 0 and (gb - E) / gb * 100 >= D(L.gunluk_max_kayip_yuzde):
-            d["gun_blok"] = True
-            self.olay("canli_kill_switch", f"GÜNLÜK LİMİT: gün başı {gb:.2f} -> {E:.2f} (>= %{L.gunluk_max_kayip_yuzde} kayıp); "
-                                           "pozisyonlar kapatılıyor, bugün yeni giriş yok.")
+
+    def hesap_kill_ver(self, mesaj: str) -> None:
+        """Hesap düzeyi kill (calistir.py toplam kasayı izler): bu stratejiyi de kalıcı durdurur; sonraki turda pozisyonlar kapatılır."""
+        if not self.durum["kill"]:
+            self.durum["kill"], self.durum["kill_neden"] = True, "hesap_kill"
+            self.olay("canli_kill_switch", mesaj)
+            self._kaydet()
 
     def _hepsini_kapat(self, poz: dict, neden: str, g: MotorGorunumu) -> None:
         """ÖNCE reduceOnly piyasa ile kapat; emirler (stoplar) YALNIZ pozisyonun sıfırlandığı borsada doğrulanınca iptal edilir.
@@ -254,10 +259,11 @@ class Yurutucu:
             if o["client_id"].startswith(ONEK + "-"):
                 self.borsa.iptal(bs, o["client_id"], kosullu=o.get("kosullu", True))
 
-    def _hazirla(self, bs: str) -> None:
-        if bs not in self._hazir:
-            self.borsa.hazirla(bs, KALDIRAC)
-            self._hazir.add(bs)
+    def _hazirla(self, bs: str, kaldirac: int) -> None:
+        """İzole marj + one-way + bu girişin kaldıracı (stop mesafesine göre 3x/2x). Pozisyon yokken sembol başına her girişte ayarlanır."""
+        if (bs, kaldirac) not in self._hazir:
+            self.borsa.hazirla(bs, kaldirac)
+            self._hazir = {h for h in self._hazir if h[0] != bs} | {(bs, kaldirac)}
 
     def _risk_ozeti(self, poz: dict) -> tuple:
         """(brüt nominal, açık stop riski) borsa pozisyonlarından; stopu bilinmeyen pozisyon tüm nominaliyle risk sayılır (tutucu)."""
@@ -302,7 +308,7 @@ class Yurutucu:
         mark = self.borsa.mark_fiyat(bs)
         brut, risk = self._risk_ozeti(poz)
         stop = stop_yuvarla(n.stop, n.yon, k)
-        ortak = dict(ozsermaye=E, tahsis=self.ayar.tahsis, yon=n.yon, stop=stop, kural=k, risk_oran=n.risk_oran, grup_payi=n.grup_payi,
+        ortak = dict(ozsermaye=E, tahsis=self.ayar.tahsis, islem_risk=self.ayar.islem_risk, yon=n.yon, stop=stop, kural=k,
                      stop_kayma=n.stop_kayma, taker=n.taker, diger_brut=brut, diger_stop_riski=risk)
         bo = boyutlandir(giris=mark, **ortak)
         if bo.neden is not None:
@@ -310,11 +316,11 @@ class Yurutucu:
             tur = "min_tutar_alti" if bo.neden == "min_tutar_alti" else "canli_giris_atlandi"
             self.olay(tur, f"{n.kol} ({bs}): {bo.neden}: {bo.ayrinti}")
             return
-        self._hazirla(bs)
+        self._hazirla(bs, bo.kaldirac)
         hedef = hedef_yuvarla(n.hedef, n.yon, k) if (n.hedef is not None and self.ayar.hedef_emri) else None
         rec = {"sembol": n.sembol, "bsembol": bs, "yon": n.yon, "qty": str(bo.qty), "stop": str(stop), "hedef": str(hedef) if hedef else None,
                "giris_bar": str(pd.Timestamp(n.sinyal_zamani)), "aralik_sn": int(n.aralik.total_seconds()), "durum": "gonderildi",
-               "giris_id": gid, "stop_id": None, "hedef_id": None, "stop_deneme": 0}
+               "giris_id": gid, "stop_id": None, "hedef_id": None, "stop_deneme": 0, "kaldirac": bo.kaldirac}
         d["pozlar"][n.kol] = rec
         d["islenen"][gid] = str(simdi)
         self._kaydet()                                    # emirden ÖNCE yaz: belirsiz/çökme olursa mutabakat stopu buradaki kayıttan kurar
@@ -326,7 +332,7 @@ class Yurutucu:
             return
         qty, avg = yanit["dolan"], (yanit.get("ort_fiyat") or mark)
         rec.update(durum="acik", qty=str(qty), giris=str(avg))
-        self.olay("canli_emir_doldu", f"{n.kol} {bs} {'LONG' if n.yon == 1 else 'SHORT'} {qty} @ {avg} (hesaplanan risk %{bo.risk_yuzde:.3f}, brüt {bo.brut_kat:.2f}x)")
+        self.olay("canli_emir_doldu", f"{n.kol} {bs} {'LONG' if n.yon == 1 else 'SHORT'} {qty} @ {avg} (stopta kayıp %{bo.risk_yuzde:.3f} kasa, brüt {bo.brut_kat:.2f}x, {bo.kaldirac}x, sınırlayan: {bo.baglayan})")
         qty = self._dolum_sonrasi_risk(n.kol, rec, qty, D(avg), ortak)
         if qty is None:
             return
@@ -335,16 +341,16 @@ class Yurutucu:
         self._koru(n.kol, rec, qty)
 
     def _dolum_sonrasi_risk(self, kol: str, rec: dict, qty: Decimal, avg: Decimal, ortak: dict) -> Optional[Decimal]:
-        """GERÇEK dolum fiyatı ve miktarıyla SERT_LIMITLER yeniden doğrulanır (kayma riski artırmış olabilir). İhlalde pozisyon reduceOnly ile
+        """GERÇEK dolum fiyatı ve miktarıyla CANLI_LIMITLER yeniden doğrulanır (kayma riski artırmış olabilir). İhlalde pozisyon reduceOnly ile
         küçültülür (sığmıyorsa tamamen kapatılır). -> kalan miktar; None: pozisyon kapandı."""
         bs, yon = rec["bsembol"], rec["yon"]
         E = min(ortak["ozsermaye"], ortak["tahsis"])
-        ihlal = sert_limit_ihlalleri(qty=qty, giris=avg, stop=D(rec["stop"]), ozsermaye=E, stop_kayma=ortak["stop_kayma"], taker=ortak["taker"],
-                                     diger_brut=ortak["diger_brut"], diger_stop_riski=ortak["diger_stop_riski"])
+        ihlal = cl.limit_ihlalleri(qty=qty, giris=avg, stop=D(rec["stop"]), kasa=E, stop_kayma=ortak["stop_kayma"], taker=ortak["taker"],
+                                   kaldirac=rec.get("kaldirac") or 1, diger_brut=ortak["diger_brut"], diger_stop_riski=ortak["diger_stop_riski"])
         if not ihlal:
             return qty
         girdi = {k: v for k, v in ortak.items() if k != "stop"}
-        yeni = boyutlandir(giris=avg, stop=D(rec["stop"]), **girdi)
+        yeni = boyutlandir(giris=avg, stop=D(rec["stop"]), kaldirac_ust=rec.get("kaldirac"), **girdi)
         if yeni.neden is not None or yeni.qty <= 0:
             self.olay("canli_risk_asimi", f"{kol} {bs}: gerçek dolumla sert limit aşıldı ({'; '.join(ihlal)}) ve küçültme mümkün değil; pozisyon kapatılıyor")
             if self._piyasa_kapat(bs, qty * yon, client_id("K", self.sid, kol, rec["giris_bar"], "risk_asimi"), "risk_asimi"):
