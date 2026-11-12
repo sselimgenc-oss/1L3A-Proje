@@ -1,0 +1,910 @@
+﻿dosya,aile_klasor,kume_id,dosya_sinif,neden,bayraklar,tf,stoploss,hyperopt_param,katalog_LA_high,katalog_LA_medium,kendi_LA_yuksek,kopya_sayisi
+AIRA - open code v2/strategies/arima-statistical/ARIMA.py,arima-statistical,K368,ML_FREQAI,FreqAI ; ML-kutuphane:pmdarima ; giris-mantigi-yok(model/arac sinifi),,,,,0,0,,0
+AIRA - open code v2/strategies/arima-statistical/ARIMABTC.py,arima-statistical,K373,ML_FREQAI,"ML-kutuphane:pmdarima,sklearn",LA_ORTA ; ILOC_SON_SATIR ; SADECE_KARDA_CIKIS,5m,-0.03,20,0,1,,0
+AIRA - open code v2/strategies/arima-statistical/ARIMAModel.py,arima-statistical,K374,ML_FREQAI,FreqAI ; istatistik-model:statsmodels ; giris-mantigi-yok(model/arac sinifi),,,,,0,0,,0
+AIRA - open code v2/strategies/arima-statistical/ARIMA_15.py,arima-statistical,K368,ML_FREQAI,"ML-kutuphane:pmdarima,sklearn",LA_ORTA ; ILOC_SON_SATIR ; SL_TABAN_-0.99_CUSTOM_SL ; SADECE_KARDA_CIKIS,15m,-0.99,20,0,1,,0
+AIRA - open code v2/strategies/arima-statistical/ARIMA_1h.py,arima-statistical,K370,ML_FREQAI,"ML-kutuphane:pmdarima,sklearn",LA_ORTA ; ILOC_SON_SATIR ; SADECE_KARDA_CIKIS,1h,-0.03,20,0,1,,0
+AIRA - open code v2/strategies/arima-statistical/ARIMA_1h__2.py,arima-statistical,K370,ML_FREQAI,"ML-kutuphane:pmdarima,sklearn",LA_ORTA ; ILOC_SON_SATIR ; SADECE_KARDA_CIKIS,1h,-0.03,20,0,1,,0
+AIRA - open code v2/strategies/arima-statistical/ARIMA_5.py,arima-statistical,K368,ML_FREQAI,"ML-kutuphane:pmdarima,sklearn",LA_ORTA ; ILOC_SON_SATIR ; SL_TABAN_-0.99_CUSTOM_SL,5m,-0.99,20,0,1,,0
+AIRA - open code v2/strategies/arima-statistical/ARIMA_5_DCA.py,arima-statistical,K367,ML_FREQAI,"ML-kutuphane:pmdarima,sklearn ; adjust_trade_position (pozisyon buyutme)",LA_ORTA ; ILOC_SON_SATIR ; SL_TABAN_-0.99_CUSTOM_SL ; SADECE_KARDA_CIKIS,5m,-0.99,20,0,1,,0
+AIRA - open code v2/strategies/arima-statistical/ARIMA_5_DCA_SCALP.py,arima-statistical,K367,ML_FREQAI,"ML-kutuphane:pmdarima,sklearn ; adjust_trade_position (pozisyon buyutme)",LA_ORTA ; ILOC_SON_SATIR ; SADECE_KARDA_CIKIS,5m,-0.2,17,0,0,,0
+AIRA - open code v2/strategies/arima-statistical/ARIMA_5_DCA_SCALP_HO.py,arima-statistical,K367,ML_FREQAI,"ML-kutuphane:pmdarima,sklearn ; adjust_trade_position (pozisyon buyutme)",LA_ORTA ; ILOC_SON_SATIR ; SADECE_KARDA_CIKIS,5m,-0.2,11,0,1,,0
+AIRA - open code v2/strategies/arima-statistical/ARIMA_5_DCA_SCALP__2.py,arima-statistical,K367,ML_FREQAI,"ML-kutuphane:pmdarima,sklearn ; adjust_trade_position (pozisyon buyutme)",LA_ORTA ; ILOC_SON_SATIR ; SADECE_KARDA_CIKIS,5m,-0.2,17,0,0,,0
+AIRA - open code v2/strategies/arima-statistical/ARIMA_5_DCA__10.py,arima-statistical,K367,ML_FREQAI,"ML-kutuphane:pmdarima,sklearn ; adjust_trade_position (pozisyon buyutme)",LA_ORTA ; ILOC_SON_SATIR ; SL_TABAN_-0.99_CUSTOM_SL ; SADECE_KARDA_CIKIS,5m,-0.99,21,0,1,,0
+AIRA - open code v2/strategies/arima-statistical/ARIMA_5_DCA__2.py,arima-statistical,K367,ML_FREQAI,"ML-kutuphane:pmdarima,sklearn ; adjust_trade_position (pozisyon buyutme)",LA_ORTA ; ILOC_SON_SATIR ; SL_TABAN_-0.99_CUSTOM_SL ; SADECE_KARDA_CIKIS,5m,-0.99,21,0,1,,0
+AIRA - open code v2/strategies/arima-statistical/ARIMA_5_DCA__3.py,arima-statistical,K367,ML_FREQAI,"ML-kutuphane:pmdarima,sklearn ; adjust_trade_position (pozisyon buyutme)",LA_ORTA ; ILOC_SON_SATIR ; SL_TABAN_-0.99_CUSTOM_SL ; SADECE_KARDA_CIKIS,5m,-0.99,21,0,1,,0
+AIRA - open code v2/strategies/arima-statistical/ARIMA_5_DCA__4.py,arima-statistical,K367,ML_FREQAI,"ML-kutuphane:pmdarima,sklearn ; adjust_trade_position (pozisyon buyutme)",LA_ORTA ; ILOC_SON_SATIR ; SL_TABAN_-0.99_CUSTOM_SL ; SADECE_KARDA_CIKIS,5m,-0.99,21,0,1,,0
+AIRA - open code v2/strategies/arima-statistical/ARIMA_5_DCA__5.py,arima-statistical,K367,ML_FREQAI,"ML-kutuphane:pmdarima,sklearn ; adjust_trade_position (pozisyon buyutme)",LA_ORTA ; ILOC_SON_SATIR ; SL_TABAN_-0.99_CUSTOM_SL ; SADECE_KARDA_CIKIS,5m,-0.99,17,0,1,,0
+AIRA - open code v2/strategies/arima-statistical/ARIMA_5_DCA__6.py,arima-statistical,K367,ML_FREQAI,"ML-kutuphane:pmdarima,sklearn ; adjust_trade_position (pozisyon buyutme)",LA_ORTA ; ILOC_SON_SATIR ; SL_TABAN_-0.99_CUSTOM_SL ; SADECE_KARDA_CIKIS,5m,-0.99,16,0,1,,0
+AIRA - open code v2/strategies/arima-statistical/ARIMA_5_DCA__7.py,arima-statistical,K367,ML_FREQAI,"ML-kutuphane:pmdarima,sklearn ; adjust_trade_position (pozisyon buyutme)",LA_ORTA ; ILOC_SON_SATIR ; SL_TABAN_-0.99_CUSTOM_SL ; SADECE_KARDA_CIKIS,5m,-0.99,21,0,1,,0
+AIRA - open code v2/strategies/arima-statistical/ARIMA_5_DCA__8.py,arima-statistical,K367,ML_FREQAI,"ML-kutuphane:pmdarima,sklearn ; adjust_trade_position (pozisyon buyutme)",LA_ORTA ; ILOC_SON_SATIR ; SL_TABAN_-0.99_CUSTOM_SL ; SADECE_KARDA_CIKIS,5m,-0.99,21,0,1,,0
+AIRA - open code v2/strategies/arima-statistical/ARIMA_5_DCA__9.py,arima-statistical,K367,ML_FREQAI,"ML-kutuphane:pmdarima,sklearn ; adjust_trade_position (pozisyon buyutme)",LA_ORTA ; ILOC_SON_SATIR ; SL_TABAN_-0.99_CUSTOM_SL ; SADECE_KARDA_CIKIS,5m,-0.99,21,0,1,,0
+AIRA - open code v2/strategies/arima-statistical/ARIMA_5_N.py,arima-statistical,K003,KULLANILABILIR,,LA_ORTA ; SL_TABAN_-0.99_CUSTOM_SL ; SHORT ; SKLEARN_YARDIMCI,5m,-0.99,20,0,0,,0
+AIRA - open code v2/strategies/arima-statistical/ARIMA_5__2.py,arima-statistical,K368,ML_FREQAI,"ML-kutuphane:pmdarima,sklearn",KISMI_CIKIS_ADJUST ; LA_ORTA ; ILOC_SON_SATIR ; SL_TABAN_-0.99_CUSTOM_SL ; SHORT,5m,-0.99,22,0,1,,0
+AIRA - open code v2/strategies/arima-statistical/ARIMA_5__3.py,arima-statistical,K368,ML_FREQAI,"ML-kutuphane:pmdarima,sklearn",LA_ORTA ; ILOC_SON_SATIR ; SL_TABAN_-0.99_CUSTOM_SL,5m,-0.99,20,0,1,,0
+AIRA - open code v2/strategies/arima-statistical/ARIMA_5__4.py,arima-statistical,K368,ML_FREQAI,"ML-kutuphane:pmdarima,sklearn",LA_ORTA ; ILOC_SON_SATIR ; SADECE_KARDA_CIKIS,5m,-0.03,20,0,1,,0
+AIRA - open code v2/strategies/arima-statistical/ARIMA_5__5.py,arima-statistical,K368,ML_FREQAI,"ML-kutuphane:pmdarima,sklearn",LA_ORTA ; ILOC_SON_SATIR ; SADECE_KARDA_CIKIS,5m,-0.03,20,0,1,,0
+AIRA - open code v2/strategies/arima-statistical/ARIMA_5__6.py,arima-statistical,K368,ML_FREQAI,"ML-kutuphane:pmdarima,sklearn",LA_ORTA ; ILOC_SON_SATIR ; SADECE_KARDA_CIKIS,5m,-0.03,20,0,1,,0
+AIRA - open code v2/strategies/arima-statistical/ARIMA_5__7.py,arima-statistical,K368,ML_FREQAI,"ML-kutuphane:pmdarima,sklearn",LA_ORTA ; ILOC_SON_SATIR ; SADECE_KARDA_CIKIS,5m,-0.03,20,0,1,,0
+AIRA - open code v2/strategies/arima-statistical/ARIMA_5v2_TB_dca.py,arima-statistical,K375,ML_FREQAI,"ML-kutuphane:pmdarima,sklearn ; adjust_trade_position (pozisyon buyutme)",LA_ORTA ; ILOC_SON_SATIR ; SHORT,5m,-0.2,22,0,1,,0
+AIRA - open code v2/strategies/arima-statistical/ARIMA_DCA_1h.py,arima-statistical,K371,ML_FREQAI,"ML-kutuphane:pmdarima,sklearn ; adjust_trade_position (pozisyon buyutme)",LA_ORTA ; ILOC_SON_SATIR ; SL_TABAN_-0.99_CUSTOM_SL ; SADECE_KARDA_CIKIS,1h,-0.99,21,0,1,,0
+AIRA - open code v2/strategies/arima-statistical/ARIMA_DCA_1h__2.py,arima-statistical,K371,ML_FREQAI,"ML-kutuphane:pmdarima,sklearn ; adjust_trade_position (pozisyon buyutme)",LA_ORTA ; ILOC_SON_SATIR ; SL_TABAN_-0.99_CUSTOM_SL ; SADECE_KARDA_CIKIS,1h,-0.99,21,0,1,,0
+AIRA - open code v2/strategies/arima-statistical/ARIMA_Futures.py,arima-statistical,K372,ML_FREQAI,"ML-kutuphane:pmdarima,sklearn",LA_ORTA ; ILOC_SON_SATIR ; SL_TABAN_-0.99_CUSTOM_SL ; INFORMATIVE_TF ; SHORT ; SADECE_KARDA_CIKIS,15m,-0.98,23,0,1,,0
+AIRA - open code v2/strategies/arima-statistical/ARIMA_MTF.py,arima-statistical,K369,ML_FREQAI,"ML-kutuphane:pmdarima,sklearn",LA_ORTA ; ILOC_SON_SATIR ; SL_TABAN_-0.99_CUSTOM_SL ; INFORMATIVE_TF ; SADECE_KARDA_CIKIS,15m,-0.99,20,0,1,,0
+AIRA - open code v2/strategies/arima-statistical/ARIMA_MTF_CS.py,arima-statistical,K369,ML_FREQAI,"ML-kutuphane:pmdarima,sklearn ; istatistik-model:statsmodels ; adjust_trade_position (pozisyon buyutme)",LA_ORTA ; ILOC_SON_SATIR ; HP_COK(26) ; INFORMATIVE_TF ; SHORT,15m,-0.08,26,0,1,,0
+AIRA - open code v2/strategies/arima-statistical/ARIMA_MTF_Trusting_Futures.py,arima-statistical,K369,ML_FREQAI,"ML-kutuphane:pmdarima,sklearn",LA_ORTA ; ILOC_SON_SATIR ; INFORMATIVE_TF ; SHORT,15m,-0.1,23,0,1,,0
+AIRA - open code v2/strategies/arima-statistical/ARIMA_MTF__2.py,arima-statistical,K369,ML_FREQAI,"ML-kutuphane:pmdarima,sklearn",LA_ORTA ; ILOC_SON_SATIR ; SL_TABAN_-0.99_CUSTOM_SL ; INFORMATIVE_TF ; SADECE_KARDA_CIKIS,15m,-0.99,20,0,1,,0
+AIRA - open code v2/strategies/arima-statistical/ARIMA_MTF__3.py,arima-statistical,K369,ML_FREQAI,"ML-kutuphane:pmdarima,sklearn",LA_ORTA ; ILOC_SON_SATIR ; SL_TABAN_-0.99_CUSTOM_SL ; INFORMATIVE_TF ; SADECE_KARDA_CIKIS,15m,-0.99,20,0,1,,0
+AIRA - open code v2/strategies/arima-statistical/ARIMA__2.py,arima-statistical,K368,ML_FREQAI,"ML-kutuphane:pmdarima,sklearn",LA_ORTA ; ILOC_SON_SATIR ; SL_TABAN_-0.99_CUSTOM_SL ; SADECE_KARDA_CIKIS,15m,-0.99,14,0,1,,0
+AIRA - open code v2/strategies/arima-statistical/BaseAutoARIMAModel.py,arima-statistical,K376,ML_FREQAI,FreqAI ; ML-kutuphane:pmdarima ; giris-mantigi-yok(model/arac sinifi),,,,,0,0,,0
+AIRA - open code v2/strategies/arima-statistical/MCMC.py,arima-statistical,K377,ML_FREQAI,elle-yazilmis-model (Markov/GPR/kNN/HMM; elle dogrulandi),SHORT,1h,-0.2,0,0,0,,0
+AIRA - open code v2/strategies/arima-statistical/arima15.py,arima-statistical,K368,ML_FREQAI,"ML-kutuphane:pmdarima,sklearn",LA_ORTA ; ILOC_SON_SATIR ; SL_TABAN_-0.99_CUSTOM_SL ; SADECE_KARDA_CIKIS,15m,-0.99,20,0,1,,0
+AIRA - open code v2/strategies/battle-tank/NOTankAi_15_unlookahead_v5.py,battle-tank,K387,DCA_POZISYON_BUYUTME,adjust_trade_position (pozisyon buyutme),SADECE_KARDA_CIKIS,15m,-0.15,11,0,0,,0
+AIRA - open code v2/strategies/battle-tank/Tank5ModulusDCAV3.py,battle-tank,K383,DCA_POZISYON_BUYUTME,adjust_trade_position (pozisyon buyutme),LA_ORTA ; ILOC_SON_SATIR ; SL_TABAN_-0.99_CUSTOM_SL ; HP_COK(34) ; SADECE_KARDA_CIKIS,5m,-0.99,34,0,0,,0
+AIRA - open code v2/strategies/bollinger/.py,bollinger,K039,KULLANILABILIR,,SHORT,5m,-0.08,0,0,0,,0
+AIRA - open code v2/strategies/bollinger/BB_RTR.py,bollinger,K403,DCA_POZISYON_BUYUTME,adjust_trade_position (pozisyon buyutme),SL_TABAN_-0.99_CUSTOM_SL ; HP_COK(64) ; INFORMATIVE_TF,5m,-1,64,0,0,,1
+AIRA - open code v2/strategies/bollinger/ECR.py,bollinger,K401,DCA_POZISYON_BUYUTME,adjust_trade_position (pozisyon buyutme),MARTINGALE_METIN ; ROI_BAGIMLI,5m,-0.12,0,0,0,,0
+AIRA - open code v2/strategies/bollinger/ECRV2.py,bollinger,K401,DCA_POZISYON_BUYUTME,adjust_trade_position (pozisyon buyutme),MARTINGALE_METIN ; ROI_BAGIMLI ; SHORT,5m,-0.12,0,0,0,,0
+AIRA - open code v2/strategies/bollinger/ECRV3.py,bollinger,K401,DCA_POZISYON_BUYUTME,adjust_trade_position (pozisyon buyutme),MARTINGALE_METIN ; SHORT,5m,-0.12,0,0,0,,0
+AIRA - open code v2/strategies/bollinger/ECRV32.py,bollinger,K401,DCA_POZISYON_BUYUTME,adjust_trade_position (pozisyon buyutme),MARTINGALE_METIN ; SHORT,5m,-0.12,0,0,0,,0
+AIRA - open code v2/strategies/bollinger/HMMDR.py,bollinger,K404,ML_FREQAI,elle-yazilmis-model (Markov/GPR/kNN/HMM; elle dogrulandi),SHORT,15m,-0.1,5,0,0,,0
+AIRA - open code v2/strategies/bollinger/StarRise.py,bollinger,K031,DCA_POZISYON_BUYUTME,adjust_trade_position (pozisyon buyutme),SL_TABAN_-0.99_CUSTOM_SL ; INFORMATIVE_TF,5m,-0.998,5,0,0,,0
+AIRA - open code v2/strategies/bollinger/StarRise_V2.py,bollinger,K040,KULLANILABILIR,,ILOC_SON_SATIR ; INFORMATIVE_TF ; SADECE_KARDA_CIKIS,5m,-0.2,0,0,0,,0
+AIRA - open code v2/strategies/bollinger/StarRise_V3.py,bollinger,K030,KULLANILABILIR,,LA_ORTA ; ILOC_SON_SATIR ; INFORMATIVE_TF ; SADECE_KARDA_CIKIS,5m,-0.2,22,0,0,,0
+AIRA - open code v2/strategies/bollinger/StarRise_V3__2.py,bollinger,K030,KULLANILABILIR,,LA_ORTA ; ILOC_SON_SATIR ; INFORMATIVE_TF ; SADECE_KARDA_CIKIS,5m,-0.2,22,0,0,,0
+AIRA - open code v2/strategies/bollinger/StarRise__2.py,bollinger,K031,KULLANILABILIR,,SL_TABAN_-0.99_CUSTOM_SL ; INFORMATIVE_TF ; SADECE_KARDA_CIKIS,5m,-0.998,5,0,0,,0
+AIRA - open code v2/strategies/bollinger/ZaratustraV11.py,bollinger,K041,KULLANILABILIR,,SL_GENIS ; INFORMATIVE_TF ; SHORT ; SADECE_KARDA_CIKIS,5m,-0.3,0,0,0,,1
+AIRA - open code v2/strategies/bollinger/ZaratustraV13.py,bollinger,K032,KULLANILABILIR,,SHORT ; SADECE_KARDA_CIKIS,5m,-0.296,0,0,0,,0
+AIRA - open code v2/strategies/bollinger/ZaratustraV17.py,bollinger,K032,KULLANILABILIR,,SHORT ; SADECE_KARDA_CIKIS,5m,-0.2,0,0,0,,0
+AIRA - open code v2/strategies/bollinger/ZaratustraV4.py,bollinger,K033,KULLANILABILIR,,INFORMATIVE_TF ; SHORT ; SADECE_KARDA_CIKIS,5m,-0.296,0,0,0,,0
+AIRA - open code v2/strategies/bollinger/ZaratustraV8.py,bollinger,K033,DCA_POZISYON_BUYUTME,adjust_trade_position (pozisyon buyutme),ROI_BAGIMLI ; INFORMATIVE_TF ; SHORT ; SADECE_KARDA_CIKIS,5m,-0.296,0,0,0,,1
+AIRA - open code v2/strategies/bollinger/bbw1h.py,bollinger,K042,KULLANILABILIR,,INFORMATIVE_TF ; SHORT,5m,-0.03,0,0,0,,0
+AIRA - open code v2/strategies/bollinger/monte_carlo_strategy.py,bollinger,K043,KULLANILABILIR,,INFORMATIVE_TF,5m,-0.08,12,0,0,,0
+AIRA - open code v2/strategies/bollinger/nfl.py,bollinger,K104,KULLANILABILIR,,SL_TABAN_-0.99_TRAILING ; HP_COK(809) ; INFORMATIVE_TF ; SHORT,5m,-0.99,809,0,0,,0
+AIRA - open code v2/strategies/channels/KC_NOBB.py,channels,K087,KULLANILABILIR,,SL_GENIS ; INFORMATIVE_TF ; SHORT,5m,-0.6,7,0,0,,0
+AIRA - open code v2/strategies/channels/keltner.py,channels,K088,KULLANILABILIR,,SHORT,15m,-0.24,10,0,0,,0
+AIRA - open code v2/strategies/channels/ultra_creative_strategy_20250721_210729_iter_2.py,channels,K089,KULLANILABILIR,,,3m,-0.1,0,0,0,,0
+AIRA - open code v2/strategies/cycle-oscillators/GEAR.py,cycle-oscillators,K095,KULLANILABILIR,,ROI_BAGIMLI ; SHORT,15m,-0.06,11,0,0,,0
+AIRA - open code v2/strategies/cycle-oscillators/el.py,cycle-oscillators,K241,KULLANILABILIR,,INFORMATIVE_TF ; SHORT,5m,-0.242,7,0,0,,0
+AIRA - open code v2/strategies/elliott-wave/AngleWave.py,elliott-wave,K113,KULLANILABILIR,,SL_GENIS ; INFORMATIVE_TF,5m,-0.318,24,0,0,,0
+AIRA - open code v2/strategies/elliott-wave/AngleWaveCT.py,elliott-wave,K207,KULLANILABILIR,,SL_GENIS ; INFORMATIVE_TF ; BTC_BILGI_PARITE,5m,-0.318,24,0,0,,0
+AIRA - open code v2/strategies/elliott-wave/Auto_EI_t4c0s.py,elliott-wave,K107,KULLANILABILIR,,LA_ORTA ; SL_TABAN_-0.99_CUSTOM_SL ; HP_COK(59) ; SADECE_KARDA_CIKIS,5m,-0.99,59,0,0,,0
+AIRA - open code v2/strategies/elliott-wave/Auto_EI_t4c0s__2.py,elliott-wave,K107,KULLANILABILIR,,LA_ORTA ; SL_TABAN_-0.99_CUSTOM_SL ; HP_COK(59) ; SADECE_KARDA_CIKIS,5m,-0.99,59,0,0,,1
+AIRA - open code v2/strategies/elliott-wave/Auto_EI_t4c0s__3.py,elliott-wave,K107,KULLANILABILIR,,LA_ORTA ; SL_TABAN_-0.99_CUSTOM_SL ; HP_COK(60) ; SADECE_KARDA_CIKIS,5m,-0.99,60,0,0,,0
+AIRA - open code v2/strategies/elliott-wave/CryptoFrogNFI_fixed.py,elliott-wave,K106,KULLANILABILIR,,LA_ORTA ; SL_IFADE ; HP_COK(697) ; INFORMATIVE_TF ; EK_VERI:orderbook ; EK_VERI:ticker,5m,param/ifade,697,0,1,,0
+AIRA - open code v2/strategies/elliott-wave/CryptoFrogNFI_fixed__2.py,elliott-wave,K106,KULLANILABILIR,,LA_ORTA ; SL_IFADE ; HP_COK(697) ; INFORMATIVE_TF ; EK_VERI:orderbook ; EK_VERI:ticker,5m,param/ifade,697,0,1,,0
+AIRA - open code v2/strategies/elliott-wave/EI1_t4c0s.py,elliott-wave,K103,KULLANILABILIR,,LA_ORTA ; SL_TABAN_-0.99_CUSTOM_SL ; HP_COK(28) ; SADECE_KARDA_CIKIS,1h,-0.99,28,0,0,,1
+AIRA - open code v2/strategies/elliott-wave/EI1_t4c0s_V4.py,elliott-wave,K103,KULLANILABILIR,,LA_ORTA ; SL_TABAN_-0.99_CUSTOM_SL ; HP_COK(26) ; SADECE_KARDA_CIKIS,1h,-0.99,26,0,0,,0
+AIRA - open code v2/strategies/elliott-wave/EI1_t4c0s_V4__2.py,elliott-wave,K103,KULLANILABILIR,,LA_ORTA ; SL_TABAN_-0.99_CUSTOM_SL ; HP_COK(26) ; SADECE_KARDA_CIKIS,1h,-0.99,26,0,0,,0
+AIRA - open code v2/strategies/elliott-wave/EI3v2_tag_cofi_green.py,elliott-wave,K105,KULLANILABILIR,,SL_GENIS ; INFORMATIVE_TF ; BTC_BILGI_PARITE ; SADECE_KARDA_CIKIS,15m,-0.85,18,0,0,,0
+AIRA - open code v2/strategies/elliott-wave/EI3v2_tag_cofi_green_2.py,elliott-wave,K105,KULLANILABILIR,,ADJUST_ETKISIZ ; SL_TABAN_-0.99_TRAILING ; INFORMATIVE_TF ; BTC_BILGI_PARITE ; SADECE_KARDA_CIKIS,5m,-0.99,16,0,0,,0
+AIRA - open code v2/strategies/elliott-wave/EI3v2_tag_cofi_green_2_2.py,elliott-wave,K105,KULLANILABILIR,,ADJUST_ETKISIZ ; SL_TABAN_-0.99_TRAILING ; INFORMATIVE_TF ; BTC_BILGI_PARITE ; SADECE_KARDA_CIKIS,5m,-0.99,16,0,0,,1
+AIRA - open code v2/strategies/elliott-wave/EI3v2_tag_cofi_green_2__2.py,elliott-wave,K105,KULLANILABILIR,,ADJUST_ETKISIZ ; SL_TABAN_-0.99_TRAILING ; INFORMATIVE_TF ; BTC_BILGI_PARITE ; SADECE_KARDA_CIKIS,5m,-0.99,16,0,0,,0
+AIRA - open code v2/strategies/elliott-wave/EI3v2_tag_cofi_green_Future_Long.py,elliott-wave,K105,KULLANILABILIR,,ADJUST_ETKISIZ ; SL_TABAN_-0.99_TRAILING ; INFORMATIVE_TF ; BTC_BILGI_PARITE ; SHORT ; SADECE_KARDA_CIKIS,5m,-0.99,16,0,0,,1
+AIRA - open code v2/strategies/elliott-wave/EI3v2_tag_cofi_green_Future_Short.py,elliott-wave,K114,KULLANILABILIR,,ADJUST_ETKISIZ ; SL_TABAN_-0.99_TRAILING ; INFORMATIVE_TF ; BTC_BILGI_PARITE ; SHORT ; SADECE_KARDA_CIKIS,5m,-0.99,16,0,0,,0
+AIRA - open code v2/strategies/elliott-wave/EI3v2_tag_cofi_green__2.py,elliott-wave,K105,KULLANILABILIR,,ADJUST_ETKISIZ ; SL_TABAN_-0.99_TRAILING ; INFORMATIVE_TF ; BTC_BILGI_PARITE ; SADECE_KARDA_CIKIS,5m,-0.99,16,0,0,,0
+AIRA - open code v2/strategies/elliott-wave/EI3v2_tag_cofi_green__3.py,elliott-wave,K105,DCA_POZISYON_BUYUTME,adjust_trade_position (pozisyon buyutme),SL_TABAN_-0.99_TRAILING ; INFORMATIVE_TF ; BTC_BILGI_PARITE ; SADECE_KARDA_CIKIS,5m,-0.99,16,0,0,,0
+AIRA - open code v2/strategies/elliott-wave/EI4_t4c0s.py,elliott-wave,K103,KULLANILABILIR,,LA_ORTA ; SL_TABAN_-0.99_CUSTOM_SL ; SADECE_KARDA_CIKIS,5m,-0.99,18,0,0,,0
+AIRA - open code v2/strategies/elliott-wave/EI4_t4c0s_QA3.py,elliott-wave,K409,ML_FREQAI,FreqAI,MAX_ADJ_ATANMIS ; LA_ORTA ; SL_TABAN_-0.99_CUSTOM_SL ; SADECE_KARDA_CIKIS,5m,-0.99,18,0,0,,0
+AIRA - open code v2/strategies/elliott-wave/EI4_t4c0s_QA3__2.py,elliott-wave,K409,ML_FREQAI,FreqAI,MAX_ADJ_ATANMIS ; LA_ORTA ; SL_TABAN_-0.99_CUSTOM_SL ; SADECE_KARDA_CIKIS,5m,-0.99,18,0,0,,1
+AIRA - open code v2/strategies/elliott-wave/EI4_t4c0s_RL.py,elliott-wave,K409,ML_FREQAI,FreqAI,MAX_ADJ_ATANMIS ; LA_ORTA ; SL_TABAN_-0.99_CUSTOM_SL ; INFORMATIVE_TF ; SADECE_KARDA_CIKIS,5m,-0.99,18,0,0,,0
+AIRA - open code v2/strategies/elliott-wave/EI4_t4c0s_V2.py,elliott-wave,K103,KULLANILABILIR,,LA_ORTA ; SL_TABAN_-0.99_CUSTOM_SL ; SADECE_KARDA_CIKIS,5m,-0.99,21,0,0,,0
+AIRA - open code v2/strategies/elliott-wave/EI4_t4c0s_V2_15.py,elliott-wave,K103,KULLANILABILIR,,LA_ORTA ; SL_TABAN_-0.99_CUSTOM_SL ; SADECE_KARDA_CIKIS,15m,-0.99,21,0,0,,0
+AIRA - open code v2/strategies/elliott-wave/EI4_t4c0s_V2_15__2.py,elliott-wave,K103,KULLANILABILIR,,LA_ORTA ; ILOC_SON_SATIR ; SL_TABAN_-0.99_CUSTOM_SL ; SADECE_KARDA_CIKIS,15m,-0.99,21,0,0,,0
+AIRA - open code v2/strategies/elliott-wave/EI4_t4c0s_V2__2.py,elliott-wave,K103,KULLANILABILIR,,LA_ORTA ; SADECE_KARDA_CIKIS,5m,-0.25,21,0,0,,0
+AIRA - open code v2/strategies/elliott-wave/EI4_t4c0s_V2__3.py,elliott-wave,K103,KULLANILABILIR,,LA_ORTA ; SL_TABAN_-0.99_CUSTOM_SL ; SADECE_KARDA_CIKIS,5m,-0.99,21,0,0,,1
+AIRA - open code v2/strategies/elliott-wave/EI4_t4c0s_V2__4.py,elliott-wave,K103,KULLANILABILIR,,LA_ORTA ; SL_TABAN_-0.99_CUSTOM_SL ; SADECE_KARDA_CIKIS,5m,-0.99,21,0,0,,0
+AIRA - open code v2/strategies/elliott-wave/EI4_t4c0s_V2__5.py,elliott-wave,K103,KULLANILABILIR,,LA_ORTA ; SL_TABAN_-0.99_CUSTOM_SL ; SADECE_KARDA_CIKIS,5m,-0.99,21,0,0,,0
+AIRA - open code v2/strategies/elliott-wave/EI5_t4c0s.py,elliott-wave,K103,KULLANILABILIR,,LA_ORTA ; SL_TABAN_-0.99_CUSTOM_SL ; HP_COK(26) ; SADECE_KARDA_CIKIS,5m,-0.99,26,0,0,,0
+AIRA - open code v2/strategies/elliott-wave/EI5_t4c0s_DCA.py,elliott-wave,K103,DCA_POZISYON_BUYUTME,adjust_trade_position (pozisyon buyutme),LA_ORTA ; SL_TABAN_-0.99_CUSTOM_SL ; SADECE_KARDA_CIKIS,5m,-0.99,18,0,0,,0
+AIRA - open code v2/strategies/elliott-wave/EI5_t4c0s_DCA__2.py,elliott-wave,K103,DCA_POZISYON_BUYUTME,adjust_trade_position (pozisyon buyutme),LA_ORTA ; SL_TABAN_-0.99_CUSTOM_SL ; SADECE_KARDA_CIKIS,5m,-0.99,18,0,0,,0
+AIRA - open code v2/strategies/elliott-wave/EI5_t4c0s_LL.py,elliott-wave,K103,KULLANILABILIR,,LA_ORTA ; SL_TABAN_-0.99_CUSTOM_SL ; HP_COK(26) ; SADECE_KARDA_CIKIS,5m,-0.99,26,0,0,,0
+AIRA - open code v2/strategies/elliott-wave/NasosRV6.py,elliott-wave,K110,KULLANILABILIR,,LA_ORTA ; HP_COK(70) ; INFORMATIVE_TF ; BTC_BILGI_PARITE,5m,-0.15,70,0,1,,0
+AIRA - open code v2/strategies/elliott-wave/NasosRV6__2.py,elliott-wave,K110,KULLANILABILIR,,LA_ORTA ; HP_COK(70) ; INFORMATIVE_TF ; BTC_BILGI_PARITE,5m,-0.15,70,0,1,,0
+AIRA - open code v2/strategies/elliott-wave/V8ichi.py,elliott-wave,K102,KULLANILABILIR,,SADECE_KARDA_CIKIS,5m,-0.2,8,0,0,,0
+AIRA - open code v2/strategies/elliott-wave/V8ichi__2.py,elliott-wave,K102,KULLANILABILIR,,SADECE_KARDA_CIKIS,5m,-0.2,8,0,0,,0
+AIRA - open code v2/strategies/elliott-wave/overwatch.py,elliott-wave,K102,KULLANILABILIR,,SL_GENIS ; HP_COK(27) ; INFORMATIVE_TF,1h,-0.329,27,0,0,,0
+AIRA - open code v2/strategies/elliott-wave/ttV8dca.py,elliott-wave,K408,DCA_POZISYON_BUYUTME,adjust_trade_position (pozisyon buyutme),HP_COK(31) ; INFORMATIVE_TF ; BTC_BILGI_PARITE ; SADECE_KARDA_CIKIS,5m,-0.25,31,0,0,,0
+AIRA - open code v2/strategies/elliott-wave/ttV8dca__2.py,elliott-wave,K408,DCA_POZISYON_BUYUTME,adjust_trade_position (pozisyon buyutme),HP_COK(31) ; INFORMATIVE_TF ; BTC_BILGI_PARITE ; SADECE_KARDA_CIKIS,5m,-0.25,31,0,0,,0
+AIRA - open code v2/strategies/elliott-wave/ttV8dca_cafftech.py,elliott-wave,K408,DCA_POZISYON_BUYUTME,adjust_trade_position (pozisyon buyutme),HP_COK(40) ; INFORMATIVE_TF ; BTC_BILGI_PARITE ; SADECE_KARDA_CIKIS,5m,-0.25,40,0,0,,0
+AIRA - open code v2/strategies/elliott-wave/ttV8dca_cafftech__2.py,elliott-wave,K408,DCA_POZISYON_BUYUTME,adjust_trade_position (pozisyon buyutme),HP_COK(40) ; INFORMATIVE_TF ; BTC_BILGI_PARITE ; SADECE_KARDA_CIKIS,5m,-0.25,40,0,0,,0
+AIRA - open code v2/strategies/elliott-wave/twinturboV8.py,elliott-wave,K408,DCA_POZISYON_BUYUTME,adjust_trade_position (pozisyon buyutme),HP_COK(31) ; INFORMATIVE_TF ; BTC_BILGI_PARITE ; SADECE_KARDA_CIKIS,5m,-0.25,31,0,0,,0
+AIRA - open code v2/strategies/freqai-models/ArimaMultiTarget.py,freqai-models,K417,ML_FREQAI,FreqAI ; ML-kutuphane:pmdarima ; giris-mantigi-yok(model/arac sinifi),,,,,0,0,,0
+AIRA - open code v2/strategies/freqai-models/GPTStrategyV4.py,freqai-models,K418,ML_FREQAI,FreqAI,MAX_ADJ_ATANMIS ; SHORT,,-0.04,0,0,0,,0
+AIRA - open code v2/strategies/freqai-models/GPTTraderV4.py,freqai-models,K419,ML_FREQAI,FreqAI ; giris-mantigi-yok(model/arac sinifi),EK_VERI:oi ; EK_VERI:dis_api,,,,0,0,,0
+AIRA - open code v2/strategies/freqai-models/MCMCLinearRegressor.py,freqai-models,K420,ML_FREQAI,FreqAI ; giris-mantigi-yok(model/arac sinifi),,,,,0,0,,0
+AIRA - open code v2/strategies/freqai-models/MyRLStrat.py,freqai-models,K421,ML_FREQAI,FreqAI,SL_GENIS ; SHORT,5m,-0.3,0,0,0,,0
+AIRA - open code v2/strategies/freqai-models/RLAgentStrategy.py,freqai-models,K422,ML_FREQAI,FreqAI,ILOC_SON_SATIR ; SL_GENIS,,-0.6,0,0,0,,0
+AIRA - open code v2/strategies/freqai-models/XGBoostRegressorMultiTargetQuickAdapterV4.py,freqai-models,K415,ML_FREQAI,"FreqAI ; ML-kutuphane:sklearn,xgboost ; giris-mantigi-yok(model/arac sinifi) ; LA:normalize_tum_veri",,,,,0,0,normalize_tum_veri,0
+AIRA - open code v2/strategies/freqai-models/XGBoostRegressorQuickAdapterV3.py,freqai-models,K415,ML_FREQAI,FreqAI ; ML-kutuphane:xgboost ; giris-mantigi-yok(model/arac sinifi),,,,,0,0,,0
+AIRA - open code v2/strategies/freqai-models/XGBoostRegressorQuickAdapterV35.py,freqai-models,K415,ML_FREQAI,"FreqAI ; ML-kutuphane:sklearn,xgboost ; giris-mantigi-yok(model/arac sinifi)",,,,,0,0,,0
+AIRA - open code v2/strategies/freqai-models/XGBoostRegressorQuickAdapterV3_1.py,freqai-models,K415,ML_FREQAI,FreqAI ; ML-kutuphane:xgboost ; giris-mantigi-yok(model/arac sinifi),,,,,0,0,,0
+AIRA - open code v2/strategies/freqai-models/XGBoostRegressorQuickAdapterV3__2.py,freqai-models,K415,ML_FREQAI,FreqAI ; ML-kutuphane:xgboost ; giris-mantigi-yok(model/arac sinifi),,,,,0,0,,0
+AIRA - open code v2/strategies/freqai-models/XGBoostRegressorQuickAdapterV3__3.py,freqai-models,K415,ML_FREQAI,FreqAI ; ML-kutuphane:xgboost ; giris-mantigi-yok(model/arac sinifi),,,,,0,0,,0
+AIRA - open code v2/strategies/freqai-models/elAI.py,freqai-models,K423,ML_FREQAI,FreqAI ; LA:negative_shift_var,INFORMATIVE_TF ; SHORT,5m,-0.05,10,0,0,negative_shift_var,0
+AIRA - open code v2/strategies/freqai-models/t4c0s_QA3.py,freqai-models,K416,ML_FREQAI,FreqAI ; ML-kutuphane:xgboost ; giris-mantigi-yok(model/arac sinifi),,,,,0,0,,0
+AIRA - open code v2/strategies/freqai-models/t4c0s_QA3__2.py,freqai-models,K416,ML_FREQAI,FreqAI ; ML-kutuphane:xgboost ; giris-mantigi-yok(model/arac sinifi),,,,,0,0,,0
+AIRA - open code v2/strategies/gkd/GKD_FisherTransformV4.py,gkd,K124,DCA_POZISYON_BUYUTME,adjust_trade_position (pozisyon buyutme),SL_TABAN_-0.99_CUSTOM_SL ; SHORT,4h,-1,15,0,0,,0
+AIRA - open code v2/strategies/grid-dca/GridV6_tmp7.py,grid-dca,K426,DCA_POZISYON_BUYUTME,adjust_trade_position (pozisyon buyutme),STOPSUZ,5m,-0.99,2,0,0,,0
+AIRA - open code v2/strategies/grid-dca/gridAI.py,grid-dca,K427,ML_FREQAI,FreqAI ; ML-kutuphane:hmmlearn ; adjust_trade_position (pozisyon buyutme) ; LA:negative_shift_var,LA_ORTA ; KAUSAL_OLMAYAN_FILTRE_ADAYI ; SL_TABAN_-0.99_CUSTOM_SL ; INFORMATIVE_TF ; SHORT,15m,-0.99,11,0,1,negative_shift_var,0
+AIRA - open code v2/strategies/grid-dca/grid_t4c0s.py,grid-dca,K426,DCA_POZISYON_BUYUTME,adjust_trade_position (pozisyon buyutme),LA_ORTA ; STOPSUZ,5m,-0.99,0,0,1,,0
+AIRA - open code v2/strategies/grid-dca/grid_t4c0s__2.py,grid-dca,K426,DCA_POZISYON_BUYUTME,adjust_trade_position (pozisyon buyutme),LA_ORTA ; STOPSUZ,5m,-0.99,0,0,1,,0
+AIRA - open code v2/strategies/grid-dca/grid_t4c0s__3.py,grid-dca,K426,DCA_POZISYON_BUYUTME,adjust_trade_position (pozisyon buyutme),LA_ORTA ; STOPSUZ,5m,-0.99,4,0,1,,0
+AIRA - open code v2/strategies/hyperopt-and-tools/backtest-result-2025-07-08_19-18-29_NS2.py,hyperopt-and-tools,K136,KULLANILABILIR,,KISMI_CIKIS_ADJUST ; SL_TABAN_-0.99_CUSTOM_SL ; INFORMATIVE_TF ; BTC_BILGI_PARITE ; SHORT ; SADECE_KARDA_CIKIS,5m,-0.9,8,0,0,,1
+AIRA - open code v2/strategies/ichimoku/Alien.py,ichimoku,K005,KULLANILABILIR,,LA_ORTA ; ILOC_SON_SATIR ; SL_TABAN_-0.99_CUSTOM_SL ; HP_COK(511) ; INFORMATIVE_TF ; BTC_BILGI_PARITE,15m,-0.99,511,0,1,,0
+AIRA - open code v2/strategies/ichimoku/ZaratustraLukeMod.py,ichimoku,K141,KULLANILABILIR,,LA_ORTA ; ROI_BAGIMLI ; SHORT,5m,-0.15,0,0,1,,0
+AIRA - open code v2/strategies/ichimoku/ckNSJT_morning.py,ichimoku,K142,KULLANILABILIR,,ADJUST_ETKISIZ ; MAX_ADJ_ATANMIS ; SL_TABAN_-0.99_CUSTOM_SL ; SADECE_KARDA_CIKIS,5m,-0.99,15,0,0,,0
+AIRA - open code v2/strategies/ichimoku/ichiV1.py,ichimoku,K138,KULLANILABILIR,,SL_TABAN_-0.99_TRAILING ; ROI_BAGIMLI,30m,-0.99,0,0,0,,0
+AIRA - open code v2/strategies/ichimoku/ichiV1__2.py,ichimoku,K138,KULLANILABILIR,,SADECE_KARDA_CIKIS,30m,-0.275,0,0,0,,0
+AIRA - open code v2/strategies/ichimoku/ichiV1__3.py,ichimoku,K138,KULLANILABILIR,,,30m,-0.275,0,0,0,,0
+AIRA - open code v2/strategies/ichimoku/ichiV1__4.py,ichimoku,K138,KULLANILABILIR,,SL_TABAN_-0.99_TRAILING,30m,-0.99,0,0,0,,0
+AIRA - open code v2/strategies/ichimoku/ichiV1__5.py,ichimoku,K138,KULLANILABILIR,,,30m,-0.1,0,0,0,,0
+AIRA - open code v2/strategies/machine-learning/BuyRegions.py,machine-learning,K451,ML_FREQAI,ML-kutuphane:sklearn ; LA:global_scaler,INFORMATIVE_ELLE_MERGE ; INFORMATIVE_TF,5m,-0.1,15,0,0,global_scaler,0
+AIRA - open code v2/strategies/machine-learning/GGYT_SAC.py,machine-learning,K452,ML_FREQAI,"ML-kutuphane:sklearn,torch ; LA:global_scaler",POSADJ_ACIK_FN_YOK ; SL_GENIS ; SHORT,1h,-0.5,7,0,0,global_scaler,0
+AIRA - open code v2/strategies/machine-learning/GYN.py,machine-learning,K453,ML_FREQAI,"ML-kutuphane:sklearn,xgboost ; LA:negative_shift_var ; LA:global_scaler",INFORMATIVE_ELLE_MERGE ; SL_GENIS ; INFORMATIVE_TF,5m,-0.6,15,0,0,negative_shift_var ; global_scaler,0
+AIRA - open code v2/strategies/machine-learning/LorentzianClassification.py,machine-learning,K448,ML_FREQAI,elle-yazilmis-model (Markov/GPR/kNN/HMM; elle dogrulandi),HP_COK(32),1h,-0.1,32,0,0,,0
+AIRA - open code v2/strategies/moving-average/Alex_AgentStrategy.py,moving-average,K456,DIGER_KULLANILAMAZ,DIGER:dis servis/ajan paneli (HTTP) ve iloc[-1] ile giris; backtest edilemez,ILOC_SON_SATIR ; SHORT ; EK_VERI:dis_api,15m,-0.05,2,0,0,,0
+AIRA - open code v2/strategies/moving-average/EMAX.py,moving-average,K164,KULLANILABILIR,,SL_GENIS ; INFORMATIVE_TF,5m,-0.3,0,0,0,,0
+AIRA - open code v2/strategies/moving-average/GnF.py,moving-average,K165,KULLANILABILIR,,STOPSUZ ; SHORT,1h,-0.99,0,0,0,,0
+AIRA - open code v2/strategies/moving-average/GnF_V2.py,moving-average,K166,KULLANILABILIR,,STOPSUZ ; SHORT,1h,-0.99,0,0,0,,0
+AIRA - open code v2/strategies/moving-average/LongStrat2h.py,moving-average,K167,KULLANILABILIR,,SL_GENIS ; ROI_BAGIMLI ; SHORT,3m,-0.342,4,0,0,,0
+AIRA - open code v2/strategies/moving-average/LongStrat2h_Long_Short.py,moving-average,K168,KULLANILABILIR,,SL_GENIS ; ROI_BAGIMLI ; SHORT,15m,-0.342,6,0,0,,0
+AIRA - open code v2/strategies/moving-average/MUSE.py,moving-average,K457,LOOKAHEAD_YUKSEK,LA:normalize_tum_veri,LA_ORTA,5m,-0.1,0,0,1,normalize_tum_veri,0
+AIRA - open code v2/strategies/moving-average/MoMy5.py,moving-average,K169,KULLANILABILIR,,LA_ORTA ; SHORT,5m,-0.15,4,0,0,,0
+AIRA - open code v2/strategies/moving-average/MoMy6.py,moving-average,K170,KULLANILABILIR,,LA_ORTA ; SHORT,5m,-0.15,4,0,0,,0
+AIRA - open code v2/strategies/moving-average/SMAOffset_Hippocritical_dca.py,moving-average,K458,DCA_POZISYON_BUYUTME,adjust_trade_position (pozisyon buyutme),STOPSUZ,5m,-1,7,0,0,,0
+AIRA - open code v2/strategies/moving-average/ZeroLag.py,moving-average,K171,KULLANILABILIR,,INFORMATIVE_TF,1h,-0.1,3,0,0,,0
+AIRA - open code v2/strategies/murrey-gann/AWATRCT.py,murrey-gann,K207,KULLANILABILIR,,SL_GENIS ; HP_COK(48),15m,-0.318,48,0,0,,0
+AIRA - open code v2/strategies/murrey-gann/AWATRCT__2.py,murrey-gann,K207,KULLANILABILIR,,SL_GENIS ; HP_COK(48) ; EK_VERI:orderbook,15m,-0.318,48,0,0,,0
+AIRA - open code v2/strategies/orderbook-volume/DarkProphetLLMAIV2.py,orderbook-volume,K469,ML_FREQAI,FreqAI ; giris-mantigi-yok(model/arac sinifi),EK_VERI:dis_api,,,,0,0,,0
+AIRA - open code v2/strategies/orderbook-volume/DarkProphetLLMAIV3.py,orderbook-volume,K469,ML_FREQAI,FreqAI ; giris-mantigi-yok(model/arac sinifi),EK_VERI:dis_api,,,,0,0,,0
+AIRA - open code v2/strategies/orderbook-volume/GPT_STR.py,orderbook-volume,K475,ML_FREQAI,FreqAI,ILOC_SON_SATIR ; SL_IFADE ; SHORT ; EK_VERI:ticker ; EK_VERI:dis_api,,param/ifade,0,0,0,,0
+AIRA - open code v2/strategies/orderbook-volume/HybridOrderbookStrategy15m.py,orderbook-volume,K220,KULLANILABILIR,,ROI_BAGIMLI ; SHORT,15m,-0.1,0,0,0,,0
+AIRA - open code v2/strategies/orderbook-volume/HybridOrderbookStrategy15m__2.py,orderbook-volume,K220,KULLANILABILIR,,ROI_BAGIMLI ; SHORT,15m,-0.1,0,0,0,,0
+AIRA - open code v2/strategies/orderbook-volume/LLMStrategy.py,orderbook-volume,K470,ML_FREQAI,FreqAI,SHORT,15m,-0.28,0,0,0,,0
+AIRA - open code v2/strategies/orderbook-volume/LLMStrategyV1.py,orderbook-volume,K470,ML_FREQAI,FreqAI,SHORT,15m,-0.28,0,0,0,,0
+AIRA - open code v2/strategies/orderbook-volume/LLMTankAIHybrid.py,orderbook-volume,K471,DCA_POZISYON_BUYUTME,adjust_trade_position (pozisyon buyutme),ILOC_SON_SATIR ; SADECE_KARDA_CIKIS ; EK_VERI:dis_api,15m,-0.15,0,0,0,,0
+AIRA - open code v2/strategies/orderbook-volume/LLMTankAIHybrid__2.py,orderbook-volume,K471,DCA_POZISYON_BUYUTME,adjust_trade_position (pozisyon buyutme),ILOC_SON_SATIR ; SADECE_KARDA_CIKIS ; EK_VERI:dis_api,15m,-0.15,0,0,0,,0
+AIRA - open code v2/strategies/orderbook-volume/POC.py,orderbook-volume,K476,DCA_POZISYON_BUYUTME,martingale-yeniden-giris kodu (adjust etkisiz ama martingale tasarimi),ADJUST_ETKISIZ ; MARTINGALE_METIN ; SL_TABAN_-0.99_CUSTOM_SL ; INFORMATIVE_TF ; SHORT ; SADECE_KARDA_CIKIS,15m,-0.99,23,0,0,,0
+AIRA - open code v2/strategies/orderbook-volume/QMR.py,orderbook-volume,K221,KULLANILABILIR,,STOPSUZ ; SHORT ; SADECE_KARDA_CIKIS,15m,-0.99,5,0,0,,0
+AIRA - open code v2/strategies/orderbook-volume/VolatileCoins.py,orderbook-volume,K222,KULLANILABILIR,,POSADJ_ACIK_FN_YOK ; ILOC_SON_SATIR ; SL_GENIS,5m,-0.3,0,0,0,,0
+AIRA - open code v2/strategies/orderbook-volume/generated_strategy55.py,orderbook-volume,K477,DCA_POZISYON_BUYUTME,adjust_trade_position (pozisyon buyutme),ILOC_SON_SATIR ; STOPSUZ ; HP_COK(74),4h,-1,74,0,0,,0
+AIRA - open code v2/strategies/orderbook-volume/generated_strategy57.py,orderbook-volume,K472,DCA_POZISYON_BUYUTME,adjust_trade_position (pozisyon buyutme),ILOC_SON_SATIR ; STOPSUZ ; HP_COK(67),2h,-1,67,0,0,,0
+AIRA - open code v2/strategies/orderbook-volume/generated_strategy58.py,orderbook-volume,K472,DCA_POZISYON_BUYUTME,adjust_trade_position (pozisyon buyutme),ILOC_SON_SATIR ; STOPSUZ ; HP_COK(67),2h,-1,67,0,0,,0
+AIRA - open code v2/strategies/orderbook-volume/generated_strategy65.py,orderbook-volume,K478,DCA_POZISYON_BUYUTME,adjust_trade_position (pozisyon buyutme),ILOC_SON_SATIR ; STOPSUZ ; HP_COK(67),4h,-1,67,0,0,,0
+AIRA - open code v2/strategies/orderbook-volume/generated_strategy71.py,orderbook-volume,K479,DCA_POZISYON_BUYUTME,adjust_trade_position (pozisyon buyutme),STOPSUZ ; HP_COK(67),1d,-1,67,0,0,,0
+AIRA - open code v2/strategies/orderbook-volume/generated_strategy76.py,orderbook-volume,K480,DCA_POZISYON_BUYUTME,adjust_trade_position (pozisyon buyutme),STOPSUZ ; HP_COK(67),1h,-1,67,0,0,,0
+AIRA - open code v2/strategies/orderbook-volume/generated_strategy79.py,orderbook-volume,K481,DCA_POZISYON_BUYUTME,adjust_trade_position (pozisyon buyutme),STOPSUZ ; HP_COK(67),1h,-1,67,0,0,,0
+AIRA - open code v2/strategies/orderbook-volume/generated_strategy81.py,orderbook-volume,K482,DCA_POZISYON_BUYUTME,adjust_trade_position (pozisyon buyutme),STOPSUZ ; HP_COK(67),1h,-1,67,0,0,,0
+AIRA - open code v2/strategies/orderbook-volume/generated_strategy82.py,orderbook-volume,K483,DCA_POZISYON_BUYUTME,adjust_trade_position (pozisyon buyutme),STOPSUZ ; HP_COK(67),1h,-1,67,0,0,,0
+AIRA - open code v2/strategies/orderbook-volume/generated_strategy84.py,orderbook-volume,K484,DCA_POZISYON_BUYUTME,adjust_trade_position (pozisyon buyutme),STOPSUZ ; HP_COK(67),1h,-1,67,0,0,,0
+AIRA - open code v2/strategies/orderbook-volume/generated_strategy86.py,orderbook-volume,K485,DCA_POZISYON_BUYUTME,adjust_trade_position (pozisyon buyutme),STOPSUZ ; HP_COK(67),1h,-1,67,0,0,,0
+AIRA - open code v2/strategies/orderbook-volume/generated_strategy88.py,orderbook-volume,K486,DCA_POZISYON_BUYUTME,adjust_trade_position (pozisyon buyutme),STOPSUZ ; HP_COK(67),1h,-1,67,0,0,,0
+AIRA - open code v2/strategies/orderbook-volume/generated_strategy92.py,orderbook-volume,K487,DCA_POZISYON_BUYUTME,adjust_trade_position (pozisyon buyutme),STOPSUZ ; HP_COK(67),1h,-1,67,0,0,,0
+AIRA - open code v2/strategies/orderbook-volume/generated_strategy93.py,orderbook-volume,K488,DCA_POZISYON_BUYUTME,adjust_trade_position (pozisyon buyutme),STOPSUZ ; HP_COK(67),1h,-1,67,0,0,,0
+AIRA - open code v2/strategies/orderbook-volume/generated_strategy94.py,orderbook-volume,K489,DCA_POZISYON_BUYUTME,adjust_trade_position (pozisyon buyutme),STOPSUZ ; HP_COK(67),1h,-1,67,0,0,,0
+AIRA - open code v2/strategies/orderbook-volume/generated_strategy96.py,orderbook-volume,K490,DCA_POZISYON_BUYUTME,adjust_trade_position (pozisyon buyutme),STOPSUZ ; HP_COK(67),1h,-1,67,0,0,,0
+AIRA - open code v2/strategies/orderbook-volume/generated_strategy98.py,orderbook-volume,K491,DCA_POZISYON_BUYUTME,adjust_trade_position (pozisyon buyutme),STOPSUZ ; HP_COK(67),1h,-1,67,0,0,,0
+AIRA - open code v2/strategies/orderbook-volume/generated_strategy99.py,orderbook-volume,K492,DCA_POZISYON_BUYUTME,adjust_trade_position (pozisyon buyutme),STOPSUZ ; HP_COK(67),1h,-1,67,0,0,,0
+AIRA - open code v2/strategies/pivot-supertrend/AlexBandSniperV5.py,pivot-supertrend,K230,KULLANILABILIR,,HP_COK(26) ; INFORMATIVE_TF ; SHORT ; PIVOT_RETRO_YAZMA,15m,-0.2,26,0,0,,0
+AIRA - open code v2/strategies/pivot-supertrend/AlexDivergenceV6.py,pivot-supertrend,K228,KULLANILABILIR,,SHORT ; PIVOT_RETRO_YAZMA,15m,-0.25,0,0,0,,0
+AIRA - open code v2/strategies/pivot-supertrend/AlexDivergenceV6__2.py,pivot-supertrend,K228,KULLANILABILIR,,SHORT ; PIVOT_RETRO_YAZMA,15m,-0.25,0,0,0,,0
+AIRA - open code v2/strategies/pivot-supertrend/CTIBS2.py,pivot-supertrend,K498,DCA_POZISYON_BUYUTME,adjust_trade_position (pozisyon buyutme),HP_COK(125) ; SADECE_KARDA_CIKIS,15m,-0.28,125,0,0,,0
+AIRA - open code v2/strategies/pivot-supertrend/DSA_General_v2.py,pivot-supertrend,K499,DCA_POZISYON_BUYUTME,adjust_trade_position (pozisyon buyutme),STOPSUZ ; INFORMATIVE_TF ; BTC_BILGI_PARITE ; SHORT ; EK_VERI:trades_tick ; EK_VERI:oi ; EK_VERI:dis_api,15m,-0.99,0,0,0,,0
+AIRA - open code v2/strategies/pivot-supertrend/HarmonicDivergence-fix.py,pivot-supertrend,K227,KULLANILABILIR,,PIVOT_RETRO_YAZMA,15m,-0.02,0,0,0,,0
+AIRA - open code v2/strategies/pivot-supertrend/HarmonicDivergence.py,pivot-supertrend,K227,KULLANILABILIR,,SL_GENIS ; PIVOT_RETRO_YAZMA,15m,-0.5,0,0,0,,0
+AIRA - open code v2/strategies/pivot-supertrend/HarmonicDivergencev2.py,pivot-supertrend,K227,KULLANILABILIR,,PIVOT_RETRO_YAZMA,5m,-0.021,10,0,0,,0
+AIRA - open code v2/strategies/pivot-supertrend/OmniAdaptiveAlpha.py,pivot-supertrend,K495,DCA_POZISYON_BUYUTME,adjust_trade_position (pozisyon buyutme),SL_GENIS ; HP_COK(42) ; INFORMATIVE_TF ; SADECE_KARDA_CIKIS,15m,-0.35,42,0,0,,0
+AIRA - open code v2/strategies/pivot-supertrend/OmniAdaptiveAlpha__2.py,pivot-supertrend,K495,DCA_POZISYON_BUYUTME,adjust_trade_position (pozisyon buyutme),SL_GENIS ; HP_COK(42) ; INFORMATIVE_TF,15m,-0.35,42,0,0,,0
+AIRA - open code v2/strategies/pivot-supertrend/PnF.py,pivot-supertrend,K500,DCA_POZISYON_BUYUTME,adjust_trade_position (pozisyon buyutme),STOPSUZ ; SADECE_KARDA_CIKIS,5m,-0.99,6,0,0,,0
+AIRA - open code v2/strategies/pivot-supertrend/RUSTOBSTRAT.py,pivot-supertrend,K496,DCA_POZISYON_BUYUTME,adjust_trade_position (pozisyon buyutme),INFORMATIVE_ELLE_MERGE ; SHORT,1h,-0.2,2,0,0,,0
+AIRA - open code v2/strategies/pivot-supertrend/RUSTOBSTRAT2.py,pivot-supertrend,K496,DCA_POZISYON_BUYUTME,adjust_trade_position (pozisyon buyutme),INFORMATIVE_ELLE_MERGE ; SHORT,1h,-0.2,2,0,0,,0
+AIRA - open code v2/strategies/pivot-supertrend/eltoro1_4_simple.py,pivot-supertrend,K231,KULLANILABILIR,,KISMI_CIKIS_ADJUST ; HP_COK(67) ; INFORMATIVE_TF ; BTC_BILGI_PARITE ; SADECE_KARDA_CIKIS,15m,-0.25,67,0,0,,0
+AIRA - open code v2/strategies/rsi-momentum/Best5m.py,rsi-momentum,K249,KULLANILABILIR,,SL_TABAN_-0.99_CUSTOM_SL ; SHORT ; SADECE_KARDA_CIKIS,5m,-0.99,11,0,0,,0
+AIRA - open code v2/strategies/rsi-momentum/DC_UT.py,rsi-momentum,K250,KULLANILABILIR,,INFORMATIVE_TF ; SADECE_KARDA_CIKIS,1h,-0.2,0,0,0,,0
+AIRA - open code v2/strategies/rsi-momentum/E0V1E.py,rsi-momentum,K251,KULLANILABILIR,,,5m,-0.25,7,0,0,,0
+AIRA - open code v2/strategies/rsi-momentum/E0V1E_53_Sharpe.py,rsi-momentum,K243,KULLANILABILIR,,,5m,-0.25,7,0,0,,0
+AIRA - open code v2/strategies/rsi-momentum/E0V1E__2.py,rsi-momentum,K243,KULLANILABILIR,,,5m,-0.25,7,0,0,,0
+AIRA - open code v2/strategies/rsi-momentum/FFT_AdaptiveCycle_v1.py,rsi-momentum,K504,DCA_POZISYON_BUYUTME,adjust_trade_position (pozisyon buyutme),KAUSAL_OLMAYAN_FILTRE_ADAYI ; STOPSUZ ; SHORT,5m,-0.99,0,0,0,,1
+AIRA - open code v2/strategies/rsi-momentum/ImprovedClaudioStrategy036.py,rsi-momentum,K252,KULLANILABILIR,,ADJUST_ETKISIZ,1h,-0.2,0,0,0,,0
+AIRA - open code v2/strategies/rsi-momentum/ImpulseMACD.py,rsi-momentum,K253,KULLANILABILIR,,LA_ORTA ; SL_GENIS ; SHORT,1h,-0.5,3,0,0,,1
+AIRA - open code v2/strategies/rsi-momentum/InnovativeReversalStrategy.py,rsi-momentum,K244,KULLANILABILIR,,SL_TABAN_-0.99_TRAILING ; ROI_BAGIMLI ; SHORT,1h,-0.99,4,0,0,,0
+AIRA - open code v2/strategies/rsi-momentum/InnovativeReversalStrategy__2.py,rsi-momentum,K244,KULLANILABILIR,,SL_TABAN_-0.99_TRAILING ; ROI_BAGIMLI,1h,-0.99,4,0,0,,0
+AIRA - open code v2/strategies/rsi-momentum/MKV3.py,rsi-momentum,K240,DCA_POZISYON_BUYUTME,adjust_trade_position (pozisyon buyutme),SHORT,15m,-0.168,7,0,0,,0
+AIRA - open code v2/strategies/rsi-momentum/RSIBB_V3.py,rsi-momentum,K254,KULLANILABILIR,,SHORT,15m,-0.2,0,0,0,,0
+AIRA - open code v2/strategies/rsi-momentum/RSIBB_V4.py,rsi-momentum,K255,KULLANILABILIR,,SHORT,15m,-0.2,6,0,0,,0
+AIRA - open code v2/strategies/rsi-momentum/RSI_Futures.py,rsi-momentum,K256,KULLANILABILIR,,ILOC_SON_SATIR ; SL_GENIS ; SHORT,1h,-0.3,4,0,0,,0
+AIRA - open code v2/strategies/rsi-momentum/RSI_Futures9.py,rsi-momentum,K505,DCA_POZISYON_BUYUTME,adjust_trade_position (pozisyon buyutme),SL_TANIMSIZ ; SHORT,5m,,0,0,0,,0
+AIRA - open code v2/strategies/rsi-momentum/RSI_Futures__2.py,rsi-momentum,K506,DCA_POZISYON_BUYUTME,adjust_trade_position (pozisyon buyutme),ILOC_SON_SATIR ; STOPSUZ ; SHORT,1h,-0.99,4,0,0,,0
+AIRA - open code v2/strategies/rsi-momentum/RSI_Futures__3.py,rsi-momentum,K507,DCA_POZISYON_BUYUTME,adjust_trade_position (pozisyon buyutme),SL_GENIS ; SHORT,4h,-0.5,0,0,0,,0
+AIRA - open code v2/strategies/rsi-momentum/ZaratustraV30.py,rsi-momentum,K257,KULLANILABILIR,,SHORT ; SADECE_KARDA_CIKIS,1m,-0.184,0,0,0,,0
+AIRA - open code v2/strategies/rsi-momentum/cascadeTG.py,rsi-momentum,K508,DCA_POZISYON_BUYUTME,adjust_trade_position (pozisyon buyutme),SL_TABAN_-0.99_CUSTOM_SL ; SHORT,15m,-0.99,3,0,0,,0
+AIRA - open code v2/strategies/rsi-momentum/el.py,rsi-momentum,K241,KULLANILABILIR,,INFORMATIVE_TF ; SHORT,5m,-0.05,10,0,0,,0
+AIRA - open code v2/strategies/rsi-momentum/feratrading_rv_strategy.py,rsi-momentum,K258,KULLANILABILIR,,,5m,-0.05,8,0,0,,0
+AIRA - open code v2/strategies/rsi-momentum/mk1.py,rsi-momentum,K245,KULLANILABILIR,,SHORT,5m,-0.213,5,0,0,,0
+AIRA - open code v2/strategies/rsi-momentum/mk2.py,rsi-momentum,K245,KULLANILABILIR,,MAX_ADJ_ATANMIS ; SHORT,5m,-0.213,5,0,0,,0
+AIRA - open code v2/strategies/rsi-momentum/mk3.py,rsi-momentum,K240,KULLANILABILIR,,MAX_ADJ_ATANMIS ; SHORT,15m,-0.213,5,0,0,,0
+AIRA - open code v2/strategies/rsi-momentum/mk4.py,rsi-momentum,K240,KULLANILABILIR,,MAX_ADJ_ATANMIS ; SHORT,15m,-0.213,5,0,0,,0
+AIRA - open code v2/strategies/rsi-momentum/mk4__2.py,rsi-momentum,K240,KULLANILABILIR,,MAX_ADJ_ATANMIS ; SHORT,15m,-0.213,5,0,0,,0
+AIRA - open code v2/strategies/rsi-momentum/ultra_creative_strategy.py,rsi-momentum,K246,KULLANILABILIR,,,3m,-0.22,0,0,0,,0
+AIRA - open code v2/strategies/rsi-momentum/ultra_creative_strategy_filtered.py,rsi-momentum,K246,KULLANILABILIR,,,3m,-0.22,0,0,0,,0
+AIRA - open code v2/strategies/samples-and-templates/sample_strategy.py,samples-and-templates,K309,KULLANILABILIR,,INFORMATIVE_TF ; BTC_BILGI_PARITE ; EK_VERI:orderbook,5m,-0.1,4,0,0,,0
+AIRA - open code v2/strategies/samples-and-templates/sample_strategy__2.py,samples-and-templates,K309,KULLANILABILIR,,INFORMATIVE_TF ; BTC_BILGI_PARITE ; EK_VERI:orderbook,1h,-0.1,4,0,0,,0
+AIRA - open code v2/strategies/samples-and-templates/sample_strategy__3.py,samples-and-templates,K518,ML_FREQAI,FreqAI,ILOC_SON_SATIR ; SL_IFADE ; SHORT ; EK_VERI:orderbook ; EK_VERI:ticker ; EK_VERI:dis_api,,param/ifade,0,0,0,,0
+AIRA - open code v2/strategies/scalping/ForexRobootSuperScalper.py,scalping,K315,KULLANILABILIR,,SL_TABAN_-0.99_CUSTOM_SL,5m,-0.99,7,0,0,,0
+AIRA - open code v2/strategies/scalping/ScalpInUptrend.py,scalping,K316,KULLANILABILIR,,,5m,-0.05,3,0,0,,0
+AIRA - open code v2/strategies/scalping/scalpv3.py,scalping,K317,KULLANILABILIR,,SL_GENIS ; SHORT,5m,-0.7,4,0,0,,0
+AIRA - open code v2/strategies/schism-hyperion/Apollo11.py,schism-hyperion,K322,KULLANILABILIR,,,15m,-0.16,0,0,0,,0
+AIRA - open code v2/strategies/smart-money-concepts/Chronos2LLMTankAIHybrid.py,smart-money-concepts,K525,ML_FREQAI,fit+predict,ILOC_SON_SATIR ; SADECE_KARDA_CIKIS ; EK_VERI:orderbook ; EK_VERI:dis_api,15m,-0.12,0,0,0,,0
+AIRA - open code v2/strategies/smart-money-concepts/FVGAdvancedStrategy.py,smart-money-concepts,K523,DCA_POZISYON_BUYUTME,adjust_trade_position (pozisyon buyutme) ; LA:normalize_tum_veri,LA_ORTA ; SL_GENIS ; INFORMATIVE_TF ; SHORT,5m,-0.3,3,0,1,normalize_tum_veri,0
+AIRA - open code v2/strategies/smart-money-concepts/FVGAdvancedStrategy_V2.py,smart-money-concepts,K523,DCA_POZISYON_BUYUTME,adjust_trade_position (pozisyon buyutme) ; LA:normalize_tum_veri,LA_ORTA ; SL_GENIS ; INFORMATIVE_TF ; SHORT,5m,-0.3,3,0,1,normalize_tum_veri,0
+AIRA - open code v2/strategies/smart-money-concepts/FVGAdvancedStrategy_V3.py,smart-money-concepts,K523,DCA_POZISYON_BUYUTME,adjust_trade_position (pozisyon buyutme) ; LA:normalize_tum_veri,LA_ORTA ; SL_GENIS ; ROI_BAGIMLI ; INFORMATIVE_TF ; SHORT,5m,-0.347,3,0,1,normalize_tum_veri,0
+AIRA - open code v2/strategies/ts-predict/TSPredict.py,ts-predict,K529,ML_FREQAI,"ML-kutuphane:lightgbm,sklearn,xgboost ; LA:negative_shift_var ; LA:global_scaler",INFORMATIVE_ELLE_MERGE ; STOPSUZ ; INFORMATIVE_TF ; SHORT,1m,-0.99,15,0,0,negative_shift_var ; global_scaler,0
+AIRA - open code v2/strategies/ts-predict/TSPredict__2.py,ts-predict,K529,ML_FREQAI,"ML-kutuphane:lightgbm,sklearn,xgboost ; LA:negative_shift_var ; LA:global_scaler",INFORMATIVE_ELLE_MERGE ; INFORMATIVE_TF ; SHORT,1m,-0.2,15,0,0,negative_shift_var ; global_scaler,0
+AIRA - open code v2/strategies/uncategorized/COPY_HL.py,uncategorized,K530,DCA_POZISYON_BUYUTME,adjust_trade_position (pozisyon buyutme),STOPSUZ,5m,-0.95,1,0,0,,0
+AIRA - open code v2/strategies/uncategorized/ComprehensiveDeepSeekStrategy.py,uncategorized,K531,DIGER_KULLANILAMAZ,"DIGER:LLM (DeepSeek) karar veriyor; deterministik degil, geriye donuk test edilemez",KISMI_CIKIS_ADJUST ; ILOC_SON_SATIR ; SL_TABAN_-0.99_CUSTOM_SL ; INFORMATIVE_TF ; SHORT,5m,-0.99,0,0,0,,0
+AIRA - open code v2/strategies/uncategorized/SSLongonly15_OPT.py,uncategorized,K344,KULLANILABILIR,,SL_GENIS,15m,-0.5,0,0,0,,0
+AIRA - open code v2/strategies/uncategorized/SlopeV2.py,uncategorized,K345,KULLANILABILIR,,SL_GENIS ; SHORT ; SADECE_KARDA_CIKIS,15m,-0.344,5,0,0,,0
+AIRA - open code v2/strategies/uncategorized/TrendFollowingStrategy.py,uncategorized,K341,KULLANILABILIR,,,5m,-0.265,0,0,0,,0
+AIRA - open code v2/strategies/uncategorized/lw_tdw_tdm_btc_eth_v1.py,uncategorized,K342,KULLANILABILIR,,STOPSUZ,15m,-1,0,0,0,,0
+AIRA - open code v2/strategies/uncategorized/lw_tdw_tdm_btc_v1.py,uncategorized,K346,KULLANILABILIR,,STOPSUZ,15m,-1,0,0,0,,0
+AIRA - open code v2/strategies/uncategorized/lw_tdw_tdm_btc_v1__2.py,uncategorized,K342,KULLANILABILIR,,STOPSUZ,15m,-1,0,0,0,,0
+AIRA - open code v2/strategies/wavetrend/MarketCypherHyperStrategy.py,wavetrend,K358,KULLANILABILIR,,HP_COK(33) ; INFORMATIVE_TF ; BTC_BILGI_PARITE,1h,-0.0247,33,0,0,,0
+AIRA - open code v2/strategies/wavetrend/SuperTrade.py,wavetrend,K362,KULLANILABILIR,,SHORT ; SADECE_KARDA_CIKIS,5m,-0.296,0,0,0,,0
+AIRA - open code v2/strategies/wavetrend/SuperTrade__2.py,wavetrend,K363,KULLANILABILIR,,SHORT ; SADECE_KARDA_CIKIS,5m,-0.296,9,0,0,,0
+AIRA - open code v2/strategies/wavetrend/dualwave.py,wavetrend,K359,KULLANILABILIR,,KISMI_CIKIS_ADJUST ; HP_COK(58) ; INFORMATIVE_TF ; SADECE_KARDA_CIKIS,15m,-0.25,58,0,0,,0
+dirty LA/from-AIRA/arima-statistical/ARIMA.py,arima-statistical,K368,ML_FREQAI,"ML-kutuphane:pmdarima,sklearn ; LA:extrema_scan",ILOC_SON_SATIR ; SL_TABAN_-0.99_CUSTOM_SL ; SADECE_KARDA_CIKIS,15m,-0.99,23,1,0,extrema_scan,0
+dirty LA/from-AIRA/arima-statistical/ARIMA_FUTURES.py,arima-statistical,K372,ML_FREQAI,"ML-kutuphane:pmdarima,sklearn ; LA:extrema_scan",ADJUST_ETKISIZ ; ILOC_SON_SATIR ; SL_TABAN_-0.99_CUSTOM_SL ; HP_COK(37) ; SHORT,15m,-0.99,37,1,0,extrema_scan,0
+dirty LA/from-AIRA/battle-tank/AlexBattleTankKillerV4.py,battle-tank,K385,DCA_POZISYON_BUYUTME,adjust_trade_position (pozisyon buyutme) ; LA:backfill,INTERPOLATE ; HP_COK(70) ; ROI_BAGIMLI,15m,-0.12,70,1,0,backfill,0
+dirty LA/from-AIRA/battle-tank/AlexBattleTankKillerV48.py,battle-tank,K382,DCA_POZISYON_BUYUTME,adjust_trade_position (pozisyon buyutme) ; LA:backfill,ILOC_SON_SATIR ; INTERPOLATE ; HP_COK(93) ; INFORMATIVE_TF ; BTC_BILGI_PARITE ; SHORT,1h,-0.15,93,1,0,backfill,0
+dirty LA/from-AIRA/battle-tank/NOTankAi_15_Cleaned.py,battle-tank,K388,DCA_POZISYON_BUYUTME,adjust_trade_position (pozisyon buyutme) ; LA:extrema_scan,STOPSUZ ; SADECE_KARDA_CIKIS,15m,-0.99,8,1,0,extrema_scan,0
+dirty LA/from-AIRA/battle-tank/NOTankAi_15__2.py,battle-tank,K379,ML_FREQAI,FreqAI ; adjust_trade_position (pozisyon buyutme) ; LA:extrema_scan,LA_ORTA ; ILOC_SON_SATIR ; SADECE_KARDA_CIKIS,15m,-0.2,8,1,1,extrema_scan,0
+dirty LA/from-AIRA/battle-tank/NOTankAi_15__3.py,battle-tank,K379,ML_FREQAI,FreqAI ; adjust_trade_position (pozisyon buyutme) ; LA:extrema_scan,LA_ORTA ; ILOC_SON_SATIR ; STOPSUZ ; SADECE_KARDA_CIKIS,15m,-0.99,8,1,1,extrema_scan,1
+dirty LA/from-AIRA/battle-tank/NOTankAi_15m.py,battle-tank,K379,ML_FREQAI,FreqAI ; adjust_trade_position (pozisyon buyutme) ; LA:extrema_scan,LA_ORTA ; ILOC_SON_SATIR ; STOPSUZ ; SADECE_KARDA_CIKIS,15m,-0.99,8,1,1,extrema_scan,0
+dirty LA/from-AIRA/battle-tank/NOTankAi_5.py,battle-tank,K379,ML_FREQAI,FreqAI ; adjust_trade_position (pozisyon buyutme) ; LA:extrema_scan,LA_ORTA ; STOPSUZ ; SADECE_KARDA_CIKIS,5m,-0.99,8,1,1,extrema_scan,0
+dirty LA/from-AIRA/battle-tank/NOTankAi_Futures.py,battle-tank,K379,ML_FREQAI,FreqAI ; adjust_trade_position (pozisyon buyutme) ; LA:extrema_scan,LA_ORTA ; ILOC_SON_SATIR ; STOPSUZ ; SHORT ; SADECE_KARDA_CIKIS,15m,-0.99,8,1,1,extrema_scan,1
+dirty LA/from-AIRA/battle-tank/NOTankAi_vX.py,battle-tank,K379,ML_FREQAI,FreqAI ; adjust_trade_position (pozisyon buyutme) ; LA:extrema_scan,LA_ORTA ; ILOC_SON_SATIR ; SADECE_KARDA_CIKIS,15m,-0.1,8,1,1,extrema_scan,0
+dirty LA/from-AIRA/battle-tank/NoTankAi_19_2.py,battle-tank,K379,ML_FREQAI,FreqAI ; adjust_trade_position (pozisyon buyutme) ; LA:extrema_scan,LA_ORTA ; ILOC_SON_SATIR ; SHORT ; SADECE_KARDA_CIKIS,15m,-0.15,8,1,1,extrema_scan,0
+dirty LA/from-AIRA/battle-tank/Tank1Modulus.py,battle-tank,K389,DCA_POZISYON_BUYUTME,adjust_trade_position (pozisyon buyutme) ; LA:extrema_scan,LA_ORTA ; ILOC_SON_SATIR ; SL_TABAN_-0.99_CUSTOM_SL ; SADECE_KARDA_CIKIS,1h,-0.99,15,1,1,extrema_scan,0
+dirty LA/from-AIRA/battle-tank/Tank5HurstDCAV1.py,battle-tank,K390,DCA_POZISYON_BUYUTME,adjust_trade_position (pozisyon buyutme) ; LA:rolling_center ; LA:normalize_tum_veri,LA_ORTA ; KAUSAL_OLMAYAN_FILTRE_ADAYI ; SL_TABAN_-0.99_CUSTOM_SL ; HP_COK(26) ; SADECE_KARDA_CIKIS,5m,-0.99,26,1,1,rolling_center ; normalize_tum_veri,0
+dirty LA/from-AIRA/battle-tank/Tank5HurstDCAV3.py,battle-tank,K391,DCA_POZISYON_BUYUTME,adjust_trade_position (pozisyon buyutme) ; LA:rolling_center ; LA:normalize_tum_veri,LA_ORTA ; KAUSAL_OLMAYAN_FILTRE_ADAYI ; SL_TABAN_-0.99_CUSTOM_SL ; HP_COK(33) ; SADECE_KARDA_CIKIS,5m,-0.99,33,1,1,rolling_center ; normalize_tum_veri,0
+dirty LA/from-AIRA/battle-tank/Tank5ModulusDCA.py,battle-tank,K383,DCA_POZISYON_BUYUTME,adjust_trade_position (pozisyon buyutme) ; LA:extrema_scan,LA_ORTA ; ILOC_SON_SATIR ; SL_TABAN_-0.99_CUSTOM_SL ; HP_COK(27) ; SADECE_KARDA_CIKIS,5m,-0.99,27,1,1,extrema_scan,0
+dirty LA/from-AIRA/battle-tank/TankAi15.py,battle-tank,K380,ML_FREQAI,FreqAI ; adjust_trade_position (pozisyon buyutme) ; LA:extrema_scan ; LA:rolling_center,LA_ORTA ; ILOC_SON_SATIR ; STOPSUZ ; SADECE_KARDA_CIKIS,15m,-0.99,8,2,1,extrema_scan ; rolling_center,0
+dirty LA/from-AIRA/battle-tank/TankAi15Modulus.py,battle-tank,K381,ML_FREQAI,FreqAI ; adjust_trade_position (pozisyon buyutme) ; LA:extrema_scan ; LA:rolling_center,LA_ORTA ; ILOC_SON_SATIR ; SL_TABAN_-0.99_CUSTOM_SL ; HP_COK(25) ; SADECE_KARDA_CIKIS,15m,-0.99,25,2,1,extrema_scan ; rolling_center,0
+dirty LA/from-AIRA/battle-tank/TankAi15Modulus__2.py,battle-tank,K381,ML_FREQAI,FreqAI ; adjust_trade_position (pozisyon buyutme) ; LA:extrema_scan ; LA:rolling_center,LA_ORTA ; ILOC_SON_SATIR ; SL_TABAN_-0.99_CUSTOM_SL ; HP_COK(25) ; SHORT ; SADECE_KARDA_CIKIS,15m,-0.99,25,2,1,extrema_scan ; rolling_center,0
+dirty LA/from-AIRA/battle-tank/TankAi15_Futures.py,battle-tank,K381,ML_FREQAI,FreqAI ; adjust_trade_position (pozisyon buyutme) ; LA:extrema_scan ; LA:rolling_center,LA_ORTA ; ILOC_SON_SATIR ; STOPSUZ ; SHORT ; SADECE_KARDA_CIKIS,15m,-0.99,8,2,1,extrema_scan ; rolling_center,0
+dirty LA/from-AIRA/battle-tank/TankAi15_WIP.py,battle-tank,K381,ML_FREQAI,FreqAI ; adjust_trade_position (pozisyon buyutme) ; LA:extrema_scan ; LA:rolling_center,LA_ORTA ; ILOC_SON_SATIR ; SL_TABAN_-0.99_CUSTOM_SL ; SHORT ; SADECE_KARDA_CIKIS,15m,-0.99,21,2,1,extrema_scan ; rolling_center,0
+dirty LA/from-AIRA/battle-tank/TankAi15__2.py,battle-tank,K380,ML_FREQAI,FreqAI ; adjust_trade_position (pozisyon buyutme) ; LA:extrema_scan ; LA:rolling_center,LA_ORTA ; ILOC_SON_SATIR ; SL_TABAN_-0.99_CUSTOM_SL ; SADECE_KARDA_CIKIS,15m,-0.99,21,2,1,extrema_scan ; rolling_center,0
+dirty LA/from-AIRA/battle-tank/TankAi15__3.py,battle-tank,K380,ML_FREQAI,FreqAI ; adjust_trade_position (pozisyon buyutme) ; LA:extrema_scan ; LA:rolling_center,LA_ORTA ; ILOC_SON_SATIR ; SL_TABAN_-0.99_CUSTOM_SL ; SHORT ; SADECE_KARDA_CIKIS,15m,-0.99,19,2,1,extrema_scan ; rolling_center,0
+dirty LA/from-AIRA/channels/HPStrategyV8UltraDCACSL.py,channels,K407,DCA_POZISYON_BUYUTME,adjust_trade_position (pozisyon buyutme) ; LA:negative_shift,SL_IFADE,5m,param/ifade,17,1,0,negative_shift,1
+dirty LA/from-AIRA/channels/HPStrategyV8UltraDCACSL__2.py,channels,K407,DCA_POZISYON_BUYUTME,adjust_trade_position (pozisyon buyutme) ; LA:negative_shift,SL_IFADE,5m,param/ifade,17,1,0,negative_shift,1
+dirty LA/from-AIRA/elliott-wave/GeneTrader_gen5_1735014093_4541.py,elliott-wave,K410,DCA_POZISYON_BUYUTME,adjust_trade_position (pozisyon buyutme) ; LA:rolling_center,SL_TABAN_-0.99_CUSTOM_SL ; HP_COK(45) ; INFORMATIVE_TF ; BTC_BILGI_PARITE,5m,-0.99,45,1,0,rolling_center,0
+dirty LA/from-AIRA/elliott-wave/PCA3_short.py,elliott-wave,K411,ML_FREQAI,ML-kutuphane:sklearn ; adjust_trade_position (pozisyon buyutme) ; LA:negative_shift_var ; LA:rolling_center ; LA:global_scaler ; LA:zscore_tum_veri,LA_ORTA ; KAUSAL_OLMAYAN_FILTRE_ADAYI ; SHORT,5m,-0.1,15,2,1,negative_shift_var ; rolling_center ; global_scaler ; zscore_tum_veri,1
+dirty LA/from-AIRA/gkd/GKD_FisherTransformV4_ML_V1_2_RU-4_FIXED.py,gkd,K424,ML_FREQAI,ML-kutuphane:sklearn ; adjust_trade_position (pozisyon buyutme) ; LA:negative_shift ; LA:global_scaler,ILOC_SON_SATIR ; SHORT,5m,-0.2,18,1,0,negative_shift ; global_scaler,0
+dirty LA/from-AIRA/heikin-ashi/Peekaboo.py,heikin-ashi,K428,DCA_POZISYON_BUYUTME,adjust_trade_position (pozisyon buyutme) ; LA:extrema_scan,ILOC_SON_SATIR ; SL_TABAN_-0.99_CUSTOM_SL ; HP_COK(26) ; SADECE_KARDA_CIKIS,5m,-0.99,26,1,0,extrema_scan,0
+dirty LA/from-AIRA/heikin-ashi/PeekabooV2.py,heikin-ashi,K428,LOOKAHEAD_YUKSEK,LA:extrema_scan,ADJUST_ETKISIZ ; ILOC_SON_SATIR ; HP_COK(28) ; SADECE_KARDA_CIKIS,5m,-0.15,28,1,0,extrema_scan,0
+dirty LA/from-AIRA/heikin-ashi/PeekabooV2__2.py,heikin-ashi,K428,DCA_POZISYON_BUYUTME,adjust_trade_position (pozisyon buyutme) ; LA:extrema_scan,ILOC_SON_SATIR ; SL_TABAN_-0.99_CUSTOM_SL ; HP_COK(28) ; SADECE_KARDA_CIKIS,5m,-0.99,28,1,0,extrema_scan,0
+dirty LA/from-AIRA/heikin-ashi/PeekabooV2_updated.py,heikin-ashi,K428,DCA_POZISYON_BUYUTME,adjust_trade_position (pozisyon buyutme) ; LA:extrema_scan,ILOC_SON_SATIR ; SL_TABAN_-0.99_CUSTOM_SL ; HP_COK(28) ; SADECE_KARDA_CIKIS,5m,-0.99,28,1,0,extrema_scan,0
+dirty LA/from-AIRA/heikin-ashi/PeekabooV4.py,heikin-ashi,K429,DCA_POZISYON_BUYUTME,adjust_trade_position (pozisyon buyutme) ; LA:extrema_scan,ILOC_SON_SATIR ; SL_TABAN_-0.99_CUSTOM_SL ; SADECE_KARDA_CIKIS,15m,-0.99,24,1,0,extrema_scan,0
+dirty LA/from-AIRA/heikin-ashi/PeekabooV4002.py,heikin-ashi,K429,DCA_POZISYON_BUYUTME,adjust_trade_position (pozisyon buyutme) ; LA:extrema_scan,ILOC_SON_SATIR ; HP_COK(27) ; SADECE_KARDA_CIKIS,15m,-0.139,27,1,0,extrema_scan,0
+dirty LA/from-AIRA/heikin-ashi/Peekaboo__2.py,heikin-ashi,K428,DCA_POZISYON_BUYUTME,adjust_trade_position (pozisyon buyutme) ; LA:extrema_scan,ILOC_SON_SATIR ; SL_TABAN_-0.99_CUSTOM_SL ; HP_COK(31) ; SADECE_KARDA_CIKIS,5m,-0.99,31,1,0,extrema_scan,1
+dirty LA/from-AIRA/hurst-cycle/DarkProphetRL.py,hurst-cycle,K434,ML_FREQAI,FreqAI ; LA:backfill,LA_ORTA ; SHORT ; EK_VERI:funding ; EK_VERI:oi,,-0.15,0,1,1,backfill,0
+dirty LA/from-AIRA/hurst-cycle/FFTEWO.py,hurst-cycle,K207,LOOKAHEAD_YUKSEK,LA:rolling_center,KAUSAL_OLMAYAN_FILTRE_ADAYI ; HP_COK(41),5m,-0.15,41,1,0,rolling_center,0
+dirty LA/from-AIRA/hurst-cycle/haGradient.py,hurst-cycle,K431,LOOKAHEAD_YUKSEK,LA:rolling_center,KAUSAL_OLMAYAN_FILTRE_ADAYI ; HP_COK(44) ; SADECE_KARDA_CIKIS,15m,-0.12,44,1,0,rolling_center,0
+dirty LA/from-AIRA/hyperopt-and-tools/backtest-result-2025-06-17_16-19-01_FTPv5.py,hyperopt-and-tools,K443,DCA_POZISYON_BUYUTME,adjust_trade_position (pozisyon buyutme) ; LA:negative_shift,SL_IFADE ; HP_COK(25) ; INFORMATIVE_TF ; BTC_BILGI_PARITE ; SHORT ; SADECE_KARDA_CIKIS,5m,param/ifade,25,1,0,negative_shift,0
+dirty LA/from-AIRA/ichimoku/FTPv5_20250630_opt_btc_bnb.py,ichimoku,K443,DCA_POZISYON_BUYUTME,adjust_trade_position (pozisyon buyutme) ; LA:negative_shift,SL_IFADE ; HP_COK(33) ; INFORMATIVE_TF ; BTC_BILGI_PARITE ; SHORT ; SADECE_KARDA_CIKIS,5m,param/ifade,33,1,0,negative_shift,0
+dirty LA/from-AIRA/ichimoku/HarmonicDivergencev3.py,ichimoku,K445,DCA_POZISYON_BUYUTME,adjust_trade_position (pozisyon buyutme) ; LA:negative_shift_var,LA_ORTA ; INFORMATIVE_TF ; BTC_BILGI_PARITE ; SHORT,15m,-0.03,22,1,1,negative_shift_var,0
+dirty LA/from-AIRA/machine-learning/ALEXGKD_FisherTransformV61_ML.py,machine-learning,K449,ML_FREQAI,ML-kutuphane:sklearn ; LA:negative_shift ; LA:global_scaler,ADJUST_ETKISIZ ; ILOC_SON_SATIR ; SHORT,1h,-0.15,18,1,0,negative_shift ; global_scaler,0
+dirty LA/from-AIRA/machine-learning/Alex_GKD_FisherTransformV5_ML.py,machine-learning,K449,ML_FREQAI,ML-kutuphane:sklearn ; adjust_trade_position (pozisyon buyutme) ; LA:negative_shift ; LA:global_scaler,ILOC_SON_SATIR ; SHORT,1h,-0.2,18,1,0,negative_shift ; global_scaler,0
+dirty LA/from-AIRA/machine-learning/AutoGluonTS15.py,machine-learning,K447,ML_FREQAI,ML-kutuphane:torch ; LA:backfill ; LA:rolling_center ; LA:normalize_tum_veri,LA_ORTA ; ILOC_SON_SATIR ; KAUSAL_OLMAYAN_FILTRE_ADAYI ; SADECE_KARDA_CIKIS,15m,-0.05,17,2,1,backfill ; rolling_center ; normalize_tum_veri,0
+dirty LA/from-AIRA/machine-learning/AutoGluonTankAIHybrid.py,machine-learning,K447,ML_FREQAI,ML-kutuphane:torch ; LA:rolling_center ; LA:zscore_tum_veri,LA_ORTA ; ILOC_SON_SATIR ; KAUSAL_OLMAYAN_FILTRE_ADAYI,1h,-0.05,2,1,0,rolling_center ; zscore_tum_veri,0
+dirty LA/from-AIRA/machine-learning/AutoGluonTankAIHybridV2.py,machine-learning,K447,ML_FREQAI,ML-kutuphane:torch ; LA:rolling_center ; LA:zscore_tum_veri,LA_ORTA ; ILOC_SON_SATIR ; KAUSAL_OLMAYAN_FILTRE_ADAYI,1h,-0.05,2,1,0,rolling_center ; zscore_tum_veri,0
+dirty LA/from-AIRA/machine-learning/PeekabooCUSUM.py,machine-learning,K450,ML_FREQAI,ML-kutuphane:torch ; adjust_trade_position (pozisyon buyutme) ; LA:extrema_scan,ILOC_SON_SATIR ; SL_TABAN_-0.99_CUSTOM_SL ; HP_COK(30) ; SHORT ; SADECE_KARDA_CIKIS,15m,-0.99,30,1,0,extrema_scan,0
+dirty LA/from-AIRA/machine-learning/PeekabooV4.py,machine-learning,K450,ML_FREQAI,ML-kutuphane:torch ; adjust_trade_position (pozisyon buyutme) ; LA:extrema_scan,ILOC_SON_SATIR ; SL_TABAN_-0.99_CUSTOM_SL ; HP_COK(30) ; SHORT ; SADECE_KARDA_CIKIS,15m,-0.99,30,1,0,extrema_scan,0
+dirty LA/from-AIRA/murrey-gann/ANF_v2.py,murrey-gann,K461,ML_FREQAI,"ML-kutuphane:hmmlearn,sklearn ; LA:negative_shift_var ; LA:backfill ; LA:global_scaler",ILOC_SON_SATIR ; KAUSAL_OLMAYAN_FILTRE_ADAYI ; HP_COK(84) ; INFORMATIVE_TF ; BTC_BILGI_PARITE ; SHORT ; EK_VERI:dis_api,1h,-0.1,84,2,0,negative_shift_var ; backfill ; global_scaler,0
+dirty LA/from-AIRA/murrey-gann/ANF_v2s.py,murrey-gann,K462,ML_FREQAI,"ML-kutuphane:hmmlearn,sklearn ; LA:negative_shift_var ; LA:backfill ; LA:global_scaler",ILOC_SON_SATIR ; KAUSAL_OLMAYAN_FILTRE_ADAYI ; HP_COK(84) ; INFORMATIVE_TF ; BTC_BILGI_PARITE ; SHORT ; EK_VERI:dis_api,1h,-0.1,84,2,0,negative_shift_var ; backfill ; global_scaler,0
+dirty LA/from-AIRA/murrey-gann/AlexNexusForgeV7.py,murrey-gann,K463,DCA_POZISYON_BUYUTME,adjust_trade_position (pozisyon buyutme) ; LA:negative_shift,ILOC_SON_SATIR ; HP_COK(88) ; ROI_BAGIMLI ; SHORT,15m,-0.15,88,1,0,negative_shift,0
+dirty LA/from-AIRA/murrey-gann/AlexNexusForgeV8AIV2.py,murrey-gann,K460,ML_FREQAI,ML-kutuphane:sklearn ; LA:negative_shift_var ; LA:backfill ; LA:rolling_center ; LA:global_scaler,ILOC_SON_SATIR ; KAUSAL_OLMAYAN_FILTRE_ADAYI ; HP_COK(89) ; ROI_BAGIMLI ; INFORMATIVE_TF ; BTC_BILGI_PARITE ; SHORT,1h,-0.11,89,3,0,negative_shift_var ; backfill ; rolling_center ; global_scaler,0
+dirty LA/from-AIRA/murrey-gann/AlexNexusForgeV8AIV8.py,murrey-gann,K460,ML_FREQAI,ML-kutuphane:sklearn ; LA:negative_shift_var ; LA:backfill ; LA:rolling_center ; LA:global_scaler,ILOC_SON_SATIR ; KAUSAL_OLMAYAN_FILTRE_ADAYI ; HP_COK(88) ; INFORMATIVE_TF ; BTC_BILGI_PARITE ; SHORT,1h,-0.1,88,3,0,negative_shift_var ; backfill ; rolling_center ; global_scaler,0
+dirty LA/from-AIRA/murrey-gann/NoTV15D20241230.py,murrey-gann,K464,ML_FREQAI,FreqAI ; adjust_trade_position (pozisyon buyutme) ; LA:extrema_scan,LA_ORTA ; STOPSUZ ; SHORT ; SADECE_KARDA_CIKIS,5m,-0.99,8,1,1,extrema_scan,0
+dirty LA/from-AIRA/orderbook-volume/BotOwskyStrategy.py,orderbook-volume,K468,ML_FREQAI,ML-kutuphane:sklearn ; LA:negative_shift ; LA:extrema_scan ; LA:global_scaler,POSADJ_ACIK_FN_YOK ; KAUSAL_OLMAYAN_FILTRE_ADAYI ; SHORT,1h,-0.08,14,2,0,negative_shift ; extrema_scan ; global_scaler,0
+dirty LA/from-AIRA/orderbook-volume/BotOwskyStrategy__2.py,orderbook-volume,K468,ML_FREQAI,"ML-kutuphane:sklearn,torch ; adjust_trade_position (pozisyon buyutme) ; LA:negative_shift ; LA:negative_shift_var ; LA:extrema_scan ; LA:global_scaler",ILOC_SON_SATIR ; KAUSAL_OLMAYAN_FILTRE_ADAYI ; SHORT,1h,-0.08,14,2,0,negative_shift ; negative_shift_var ; extrema_scan ; global_scaler,0
+dirty LA/from-AIRA/orderbook-volume/BotOwskyt4c0s.py,orderbook-volume,K468,ML_FREQAI,ML-kutuphane:sklearn ; LA:negative_shift ; LA:extrema_scan ; LA:global_scaler,POSADJ_ACIK_FN_YOK ; KAUSAL_OLMAYAN_FILTRE_ADAYI ; HP_COK(36) ; SHORT,1h,-0.08,36,2,0,negative_shift ; extrema_scan ; global_scaler,0
+dirty LA/from-AIRA/orderbook-volume/QuickAdapterV3.py,orderbook-volume,K473,ML_FREQAI,FreqAI ; LA:extrema_scan ; LA:rolling_center,MAX_ADJ_ATANMIS ; SHORT,,-0.04,0,2,0,extrema_scan ; rolling_center,1
+dirty LA/from-AIRA/orderbook-volume/QuickAdapterV3__2.py,orderbook-volume,K473,ML_FREQAI,FreqAI ; LA:extrema_scan ; LA:rolling_center,KISMI_CIKIS_ADJUST ; ILOC_SON_SATIR,5m,-0.02,0,2,0,extrema_scan ; rolling_center,0
+dirty LA/from-AIRA/orderbook-volume/VVRPStrategyBETA0_1.py,orderbook-volume,K474,LOOKAHEAD_YUKSEK,LA:backfill,SHORT,15m,-0.28,14,1,0,backfill,0
+dirty LA/from-AIRA/orderbook-volume/VVRPStrategyBETA0_1__2.py,orderbook-volume,K474,LOOKAHEAD_YUKSEK,LA:backfill,SHORT,15m,-0.28,14,1,0,backfill,0
+dirty LA/from-AIRA/orderbook-volume/falconTrader.py,orderbook-volume,K410,DCA_POZISYON_BUYUTME,adjust_trade_position (pozisyon buyutme) ; LA:rolling_center,SL_TABAN_-0.99_CUSTOM_SL ; HP_COK(45) ; INFORMATIVE_TF ; BTC_BILGI_PARITE,5m,-0.99,45,1,0,rolling_center,0
+dirty LA/from-AIRA/pivot-supertrend/AlexBandSniperV4.py,pivot-supertrend,K497,LOOKAHEAD_YUKSEK,LA:backfill,ILOC_SON_SATIR ; SL_TABAN_-0.99_CUSTOM_SL ; HP_COK(26) ; INFORMATIVE_TF ; SHORT,1h,-0.99,26,1,0,backfill,0
+dirty LA/from-AIRA/pivot-supertrend/AlexBandSniperV4Optimize.py,pivot-supertrend,K497,LOOKAHEAD_YUKSEK,LA:backfill,SL_TABAN_-0.99_CUSTOM_SL ; HP_COK(26) ; INFORMATIVE_TF ; SHORT,1h,-0.99,26,1,0,backfill,0
+dirty LA/from-AIRA/pivot-supertrend/AlexBandSniperV6553.py,pivot-supertrend,K501,LOOKAHEAD_YUKSEK,LA:backfill ; LA:rolling_center,ILOC_SON_SATIR ; HP_COK(34) ; INFORMATIVE_TF ; SHORT,15m,-0.15,34,2,0,backfill ; rolling_center,0
+dirty LA/from-AIRA/pivot-supertrend/haFbmVVRP.py,pivot-supertrend,K524,DCA_POZISYON_BUYUTME,adjust_trade_position (pozisyon buyutme) ; LA:rolling_center,ILOC_SON_SATIR ; KAUSAL_OLMAYAN_FILTRE_ADAYI ; HP_COK(28),5m,-0.2,28,1,0,rolling_center,0
+dirty LA/from-AIRA/pivot-supertrend/haFbmVVRPlev.py,pivot-supertrend,K502,LOOKAHEAD_YUKSEK,LA:rolling_center,ADJUST_ETKISIZ ; ILOC_SON_SATIR ; KAUSAL_OLMAYAN_FILTRE_ADAYI ; SL_GENIS ; HP_COK(31),5m,-0.3,31,1,0,rolling_center,0
+dirty LA/from-AIRA/rsi-momentum/RSI_Futures.py,rsi-momentum,K509,DCA_POZISYON_BUYUTME,adjust_trade_position (pozisyon buyutme) ; LA:backfill,INFORMATIVE_TF ; BTC_BILGI_PARITE ; SHORT ; EK_VERI:orderbook,15m,-0.15,22,1,0,backfill,0
+dirty LA/from-AIRA/rsi-momentum/StarMark5mv5_1.py,rsi-momentum,K510,LOOKAHEAD_YUKSEK,LA:backfill,ILOC_SON_SATIR ; INFORMATIVE_ELLE_MERGE ; SL_GENIS ; INFORMATIVE_TF ; SHORT ; EK_VERI:oi,5m,-0.618,4,1,0,backfill,0
+dirty LA/from-AIRA/rsi-momentum/el_extrema.py,rsi-momentum,K241,LOOKAHEAD_YUKSEK,LA:extrema_scan,INFORMATIVE_TF ; SHORT ; SADECE_KARDA_CIKIS,5m,-0.05,10,1,0,extrema_scan,0
+dirty LA/from-AIRA/rsi-momentum/el_extrema_rsiqui.py,rsi-momentum,K511,LOOKAHEAD_YUKSEK,LA:extrema_scan,INFORMATIVE_TF ; SHORT ; SADECE_KARDA_CIKIS,5m,-0.05,10,1,0,extrema_scan,0
+dirty LA/from-AIRA/rsi-momentum/picasso_CE_CTI_STC_EMA_1h_V5_4x_3mt_Jan16_np_Jan20.py,rsi-momentum,K512,LOOKAHEAD_YUKSEK,LA:negative_shift,INFORMATIVE_TF ; SHORT ; EK_VERI:oi,1h,-0.139,22,1,0,negative_shift,0
+dirty LA/from-AIRA/rsi-momentum/snd.py,rsi-momentum,K513,LOOKAHEAD_YUKSEK,LA:negative_shift,SL_GENIS ; SHORT,5m,-0.3,0,1,0,negative_shift,0
+dirty LA/from-AIRA/smart-money-concepts/haFbm.py,smart-money-concepts,K524,DCA_POZISYON_BUYUTME,adjust_trade_position (pozisyon buyutme) ; LA:rolling_center,ILOC_SON_SATIR ; KAUSAL_OLMAYAN_FILTRE_ADAYI ; HP_COK(34),5m,-0.2,34,1,0,rolling_center,0
+dirty LA/from-AIRA/smart-money-concepts/haFbm__2.py,smart-money-concepts,K524,DCA_POZISYON_BUYUTME,adjust_trade_position (pozisyon buyutme) ; LA:rolling_center,ILOC_SON_SATIR ; KAUSAL_OLMAYAN_FILTRE_ADAYI ; HP_COK(34),5m,-0.2,34,1,0,rolling_center,0
+dirty LA/from-AIRA/wavetrend/AstroQAXGV3_1.py,wavetrend,K537,ML_FREQAI,FreqAI ; adjust_trade_position (pozisyon buyutme) ; LA:extrema_scan ; LA:rolling_center,LA_ORTA ; SL_TABAN_-0.99_CUSTOM_SL ; SADECE_KARDA_CIKIS,5m,-0.99,15,2,1,extrema_scan ; rolling_center,0
+dirty LA/from-AIRA/wavetrend/AstroQAXGV4_541.py,wavetrend,K537,ML_FREQAI,FreqAI ; adjust_trade_position (pozisyon buyutme) ; LA:extrema_scan ; LA:rolling_center,LA_ORTA ; SL_TABAN_-0.99_CUSTOM_SL ; SADECE_KARDA_CIKIS,5m,-0.99,15,2,1,extrema_scan ; rolling_center,0
+dirty LA/from-repo/battle-tank/AlexBTK_CT.py,battle-tank,K384,DCA_POZISYON_BUYUTME,adjust_trade_position (pozisyon buyutme) ; LA:backfill,INTERPOLATE ; SL_GENIS ; HP_COK(44),15m,-0.3,44,1,0,backfill,0
+dirty LA/from-repo/battle-tank/AlexBattleTankKiller.py,battle-tank,K384,DCA_POZISYON_BUYUTME,adjust_trade_position (pozisyon buyutme) ; LA:backfill,INTERPOLATE ; SL_GENIS ; HP_COK(44),15m,-0.3,44,1,0,backfill,0
+dirty LA/from-repo/battle-tank/AlexBattleTankKillerV3.py,battle-tank,K385,DCA_POZISYON_BUYUTME,adjust_trade_position (pozisyon buyutme) ; LA:backfill,INTERPOLATE ; HP_COK(70) ; ROI_BAGIMLI,15m,-0.12,70,1,0,backfill,0
+dirty LA/from-repo/battle-tank/AlexBattleTankKillerV4H.py,battle-tank,K382,DCA_POZISYON_BUYUTME,adjust_trade_position (pozisyon buyutme) ; LA:backfill ; LA:iloc_last_assign ; LA:normalize_tum_veri,LA_ORTA ; ILOC_SON_SATIR ; INTERPOLATE ; HP_COK(97) ; INFORMATIVE_TF ; BTC_BILGI_PARITE,1h,-0.07,97,1,1,backfill ; iloc_last_assign ; normalize_tum_veri,0
+dirty LA/from-repo/battle-tank/NoTankAi_17.py,battle-tank,K379,ML_FREQAI,FreqAI ; adjust_trade_position (pozisyon buyutme) ; LA:extrema_scan,LA_ORTA ; ILOC_SON_SATIR ; STOPSUZ ; SHORT ; SADECE_KARDA_CIKIS,15m,-0.99,8,1,1,extrema_scan,1
+dirty LA/from-repo/battle-tank/NoTankAi_19_1.py,battle-tank,K379,ML_FREQAI,FreqAI ; adjust_trade_position (pozisyon buyutme) ; LA:extrema_scan,LA_ORTA ; ILOC_SON_SATIR ; STOPSUZ ; SHORT ; SADECE_KARDA_CIKIS,15m,-0.99,8,1,1,extrema_scan,1
+dirty LA/from-repo/battle-tank/TankAi.py,battle-tank,K380,ML_FREQAI,FreqAI ; adjust_trade_position (pozisyon buyutme) ; LA:extrema_scan ; LA:rolling_center,LA_ORTA ; ILOC_SON_SATIR ; SL_TABAN_-0.99_CUSTOM_SL ; SADECE_KARDA_CIKIS,30m,-0.99,9,2,1,extrema_scan ; rolling_center,2
+dirty LA/from-repo/battle-tank/TankAiRevival.py,battle-tank,K392,ML_FREQAI,FreqAI ; adjust_trade_position (pozisyon buyutme) ; LA:negative_shift_var ; LA:extrema_scan ; LA:rolling_center,LA_ORTA ; KAUSAL_OLMAYAN_FILTRE_ADAYI ; SL_TABAN_-0.99_CUSTOM_SL ; HP_COK(27) ; SADECE_KARDA_CIKIS,30m,-0.99,27,3,1,negative_shift_var ; extrema_scan ; rolling_center,0
+dirty LA/from-repo/battle-tank/kalthetank.py,battle-tank,K393,DCA_POZISYON_BUYUTME,adjust_trade_position (pozisyon buyutme) ; LA:rolling_center,KAUSAL_OLMAYAN_FILTRE_ADAYI ; HP_COK(62) ; SADECE_KARDA_CIKIS,1h,-0.2,62,1,0,rolling_center,0
+dirty LA/from-repo/bb-rpb-tsl/NFIX_BB_RPB.py,bb-rpb-tsl,K466,LOOKAHEAD_YUKSEK,LA:rolling_center,LA_ORTA ; SL_TABAN_-0.99_CUSTOM_SL ; INFORMATIVE_TF ; BTC_BILGI_PARITE,5m,-0.99,0,1,1,rolling_center,0
+dirty LA/from-repo/bb-rpb-tsl/NFIX_BB_RPB_c7c477d_20211030.py,bb-rpb-tsl,K400,LOOKAHEAD_YUKSEK,LA:rolling_center,LA_ORTA ; SL_TABAN_-0.99_CUSTOM_SL ; INFORMATIVE_TF ; BTC_BILGI_PARITE,5m,-0.99,0,1,1,rolling_center,0
+dirty LA/from-repo/bollinger/bbema.py,bollinger,K405,LOOKAHEAD_YUKSEK,LA:negative_shift,INFORMATIVE_TF ; BTC_BILGI_PARITE,1h,-0.1,0,1,0,negative_shift,1
+dirty LA/from-repo/elliott-wave/HEW.py,elliott-wave,K412,DCA_POZISYON_BUYUTME,adjust_trade_position (pozisyon buyutme) ; LA:extrema_scan ; LA:rolling_center ; LA:normalize_tum_veri,LA_ORTA ; ILOC_SON_SATIR ; KAUSAL_OLMAYAN_FILTRE_ADAYI ; SL_TABAN_-0.99_CUSTOM_SL ; HP_COK(25),1h,-0.99,25,2,1,extrema_scan ; rolling_center ; normalize_tum_veri,0
+dirty LA/from-repo/elliott-wave/custom.py,elliott-wave,K413,LOOKAHEAD_YUKSEK,LA:negative_shift_var,ROI_BAGIMLI ; INFORMATIVE_TF,5m,-0.11,18,1,0,negative_shift_var,1
+dirty LA/from-repo/gkd/GKD_CT.py,gkd,K425,LOOKAHEAD_YUKSEK,LA:rolling_center ; LA:normalize_tum_veri,KISMI_CIKIS_ADJUST ; LA_ORTA ; KAUSAL_OLMAYAN_FILTRE_ADAYI ; HP_COK(25),1h,-0.1,25,1,1,rolling_center ; normalize_tum_veri,1
+dirty LA/from-repo/hurst-cycle/HurstCycle3.py,hurst-cycle,K432,LOOKAHEAD_YUKSEK,LA:rolling_center,KAUSAL_OLMAYAN_FILTRE_ADAYI,15m,-0.04,0,1,0,rolling_center,0
+dirty LA/from-repo/hurst-cycle/HurstCycle3__2.py,hurst-cycle,K432,LOOKAHEAD_YUKSEK,LA:negative_shift_var ; LA:rolling_center,KAUSAL_OLMAYAN_FILTRE_ADAYI,15m,-0.04,0,2,0,negative_shift_var ; rolling_center,0
+dirty LA/from-repo/hurst-cycle/HurstCycle3__3.py,hurst-cycle,K435,LOOKAHEAD_YUKSEK,LA:rolling_center,LA_ORTA ; KAUSAL_OLMAYAN_FILTRE_ADAYI,4h,-0.04,1,1,1,rolling_center,0
+dirty LA/from-repo/hurst-cycle/HurstCycle7.py,hurst-cycle,K430,LOOKAHEAD_YUKSEK,LA:rolling_center ; LA:normalize_tum_veri,LA_ORTA ; KAUSAL_OLMAYAN_FILTRE_ADAYI ; INFORMATIVE_TF,15m,-0.15,2,1,1,rolling_center ; normalize_tum_veri,0
+dirty LA/from-repo/hurst-cycle/HurstCycle7__2.py,hurst-cycle,K430,LOOKAHEAD_YUKSEK,LA:rolling_center ; LA:normalize_tum_veri,LA_ORTA ; KAUSAL_OLMAYAN_FILTRE_ADAYI ; INFORMATIVE_TF,1h,-0.15,2,1,1,rolling_center ; normalize_tum_veri,0
+dirty LA/from-repo/hurst-cycle/HurstCycleV4.py,hurst-cycle,K436,LOOKAHEAD_YUKSEK,LA:rolling_center,LA_ORTA ; KAUSAL_OLMAYAN_FILTRE_ADAYI,4h,-0.04,3,1,1,rolling_center,0
+dirty LA/from-repo/hurst-cycle/HurstCycleV5.py,hurst-cycle,K437,DCA_POZISYON_BUYUTME,adjust_trade_position (pozisyon buyutme) ; LA:rolling_center ; LA:normalize_tum_veri,LA_ORTA ; KAUSAL_OLMAYAN_FILTRE_ADAYI ; STOPSUZ ; SHORT,1h,-0.99,3,1,1,rolling_center ; normalize_tum_veri,0
+dirty LA/from-repo/hurst-cycle/HurstCycleV5RSI.py,hurst-cycle,K438,DCA_POZISYON_BUYUTME,adjust_trade_position (pozisyon buyutme) ; LA:rolling_center ; LA:normalize_tum_veri,LA_ORTA ; KAUSAL_OLMAYAN_FILTRE_ADAYI ; SL_TABAN_-0.99_CUSTOM_SL,1h,-0.99,22,1,1,rolling_center ; normalize_tum_veri,1
+dirty LA/from-repo/hurst-cycle/HurstCycleV5__2.py,hurst-cycle,K430,LOOKAHEAD_YUKSEK,LA:rolling_center ; LA:normalize_tum_veri,LA_ORTA ; KAUSAL_OLMAYAN_FILTRE_ADAYI,15m,-0.15,2,1,1,rolling_center ; normalize_tum_veri,0
+dirty LA/from-repo/hurst-cycle/HurstCycleV6.py,hurst-cycle,K439,LOOKAHEAD_YUKSEK,LA:rolling_center ; LA:normalize_tum_veri,LA_ORTA ; KAUSAL_OLMAYAN_FILTRE_ADAYI,15m,-0.15,2,1,1,rolling_center ; normalize_tum_veri,0
+dirty LA/from-repo/hurst-cycle/KMM.py,hurst-cycle,K440,LOOKAHEAD_YUKSEK,LA:rolling_center,ADJUST_ETKISIZ ; KAUSAL_OLMAYAN_FILTRE_ADAYI ; EK_VERI:dis_api,15m,-0.08,17,1,0,rolling_center,0
+dirty LA/from-repo/hurst-cycle/KitchenSink.py,hurst-cycle,K441,DCA_POZISYON_BUYUTME,adjust_trade_position (pozisyon buyutme) ; LA:rolling_center ; LA:normalize_tum_veri,LA_ORTA ; KAUSAL_OLMAYAN_FILTRE_ADAYI ; HP_COK(57),1h,-0.1,57,1,1,rolling_center ; normalize_tum_veri,1
+dirty LA/from-repo/hurst-cycle/TGMA.py,hurst-cycle,K442,LOOKAHEAD_YUKSEK,LA:rolling_center,KAUSAL_OLMAYAN_FILTRE_ADAYI ; HP_COK(26),1h,-0.12,26,1,0,rolling_center,1
+dirty LA/from-repo/hurst-cycle/haGradient.py,hurst-cycle,K431,LOOKAHEAD_YUKSEK,LA:rolling_center,KAUSAL_OLMAYAN_FILTRE_ADAYI ; HP_COK(44) ; SHORT ; SADECE_KARDA_CIKIS,15m,-0.12,44,1,0,rolling_center,0
+dirty LA/from-repo/hurst-cycle/tsp0chicken.py,hurst-cycle,K433,ML_FREQAI,"ML-kutuphane:lightgbm,sklearn,xgboost ; LA:negative_shift_var ; LA:rolling_center ; LA:global_scaler",LA_ORTA ; KAUSAL_OLMAYAN_FILTRE_ADAYI,5m,-0.06,15,1,1,negative_shift_var ; rolling_center ; global_scaler,0
+dirty LA/from-repo/hurst-cycle/tsp0chickenV2.py,hurst-cycle,K433,ML_FREQAI,"ML-kutuphane:lightgbm,sklearn,xgboost ; LA:negative_shift_var ; LA:rolling_center ; LA:global_scaler",LA_ORTA ; ILOC_SON_SATIR ; KAUSAL_OLMAYAN_FILTRE_ADAYI,5m,-0.2,17,1,1,negative_shift_var ; rolling_center ; global_scaler,0
+dirty LA/from-repo/ichimoku/IchiVwapAdx.py,ichimoku,K444,LOOKAHEAD_YUKSEK,LA:negative_shift_var ; LA:backfill,HP_COK(88) ; SHORT,15m,-0.2,88,1,0,negative_shift_var ; backfill,0
+dirty LA/from-repo/ichimoku/IchiVwapAdx__2.py,ichimoku,K444,LOOKAHEAD_YUKSEK,LA:negative_shift_var ; LA:backfill ; LA:rolling_center,KAUSAL_OLMAYAN_FILTRE_ADAYI ; HP_COK(98) ; SHORT,15m,-0.2,98,2,0,negative_shift_var ; backfill ; rolling_center,0
+dirty LA/from-repo/machine-learning/LorentzianClassification.py,machine-learning,K448,ML_FREQAI,elle-yazilmis-model (Markov/GPR/kNN/HMM; elle dogrulandi) ; LA:negative_shift,HP_COK(32),1h,-0.1,32,1,0,negative_shift,0
+dirty LA/from-repo/machine-learning/NeuroV1.py,machine-learning,K454,LOOKAHEAD_YUKSEK,LA:extrema_scan,LA_ORTA,1h,-0.1,0,1,1,extrema_scan,0
+dirty LA/from-repo/murrey-gann/AstroQAV4.py,murrey-gann,K465,ML_FREQAI,FreqAI ; adjust_trade_position (pozisyon buyutme) ; LA:extrema_scan ; LA:rolling_center,ILOC_SON_SATIR ; SL_TABAN_-0.99_CUSTOM_SL ; SADECE_KARDA_CIKIS,30m,-0.99,16,2,0,extrema_scan ; rolling_center,0
+dirty LA/from-repo/nostalgia-for-infinity/NostalgiaForInfinityNextGen.py,nostalgia-for-infinity,K467,LOOKAHEAD_YUKSEK,LA:rolling_center,LA_ORTA ; SL_GENIS ; INFORMATIVE_TF ; BTC_BILGI_PARITE,15m,-0.5,0,1,1,rolling_center,2
+dirty LA/from-repo/nostalgia-for-infinity/NostalgiaForInfinityNextGen_TSL.py,nostalgia-for-infinity,K467,LOOKAHEAD_YUKSEK,LA:rolling_center,LA_ORTA ; INFORMATIVE_TF ; BTC_BILGI_PARITE,15m,-0.1,0,1,1,rolling_center,0
+dirty LA/from-repo/nostalgia-for-infinity/NostalgiaForInfinityX.py,nostalgia-for-infinity,K466,LOOKAHEAD_YUKSEK,LA:rolling_center,LA_ORTA ; STOPSUZ ; INFORMATIVE_TF ; BTC_BILGI_PARITE,5m,-0.99,0,1,1,rolling_center,0
+dirty LA/from-repo/nostalgia-for-infinity/NostalgiaForInfinityXw.py,nostalgia-for-infinity,K466,LOOKAHEAD_YUKSEK,LA:rolling_center ; LA:normalize_tum_veri,LA_ORTA ; STOPSUZ ; HP_COK(36) ; INFORMATIVE_TF ; BTC_BILGI_PARITE ; SADECE_KARDA_CIKIS,5m,-0.99,36,1,1,rolling_center ; normalize_tum_veri,0
+dirty LA/from-repo/rsi-momentum/MKR.py,rsi-momentum,K514,LOOKAHEAD_YUKSEK,LA:negative_shift,HP_COK(34),1h,-0.1,34,1,0,negative_shift,0
+dirty LA/from-repo/rsi-momentum/RaposaDivergenceV1.py,rsi-momentum,K515,LOOKAHEAD_YUKSEK,LA:extrema_scan,SL_GENIS ; ROI_BAGIMLI,5m,-0.3,4,1,0,extrema_scan,1
+dirty LA/from-repo/schism-hyperion/Schism2MM.py,schism-hyperion,K519,DIGER_KULLANILAMAZ,LA:extrema_scan ; DIGER:populate_* icinde islem verisi (trade_data/Trade) kullaniyor: backtestte anlamsiz/gecersiz,ILOC_SON_SATIR ; STOPSUZ ; ROI_BAGIMLI ; INFORMATIVE_TF ; EK_VERI:orderbook ; EK_VERI:ticker,5m,-0.99,0,1,0,extrema_scan,1
+dirty LA/from-repo/two-candle/2Candle.py,two-candle,K337,LOOKAHEAD_YUKSEK,LA:rolling_center,KISMI_CIKIS_ADJUST ; LA_ORTA ; KAUSAL_OLMAYAN_FILTRE_ADAYI ; HP_COK(40) ; INFORMATIVE_TF,1h,-0.04,40,1,1,rolling_center,0
+dirty LA/from-repo/two-candle/2Candle__2.py,two-candle,K337,LOOKAHEAD_YUKSEK,LA:rolling_center,KISMI_CIKIS_ADJUST ; LA_ORTA ; KAUSAL_OLMAYAN_FILTRE_ADAYI ; INFORMATIVE_TF,1h,-0.04,24,1,1,rolling_center,1
+dirty LA/from-repo/uncategorized/Minmax.py,uncategorized,K532,LOOKAHEAD_YUKSEK,LA:extrema_scan,,1h,-0.05,0,1,0,extrema_scan,1
+dirty LA/from-repo/wavetrend/WTAI.py,wavetrend,K539,ML_FREQAI,FreqAI ; adjust_trade_position (pozisyon buyutme) ; LA:negative_shift,SL_GENIS ; SADECE_KARDA_CIKIS,15m,-0.4,9,1,0,negative_shift,0
+dirty LA/from-repo/wavetrend/WTRSIAI.py,wavetrend,K540,ML_FREQAI,FreqAI ; adjust_trade_position (pozisyon buyutme) ; LA:negative_shift,SL_GENIS ; SADECE_KARDA_CIKIS,1h,-0.4,9,1,0,negative_shift,0
+strategies/alligator/AlligatorStrat.py,alligator,K002,KULLANILABILIR,,,4h,-0.2,0,0,0,,1
+strategies/alligator/AlligatorStrategy.py,alligator,K001,KULLANILABILIR,,STOPSUZ ; INFORMATIVE_TF ; BTC_BILGI_PARITE,1h,-0.99,2,0,0,,1
+strategies/arima-statistical/GPR.py,arima-statistical,K378,ML_FREQAI,elle-yazilmis-model (Markov/GPR/kNN/HMM; elle dogrulandi),,1h,-0.05,6,0,0,,1
+strategies/battle-tank/battletank.py,battle-tank,K394,DCA_POZISYON_BUYUTME,adjust_trade_position (pozisyon buyutme),HP_COK(31) ; INFORMATIVE_TF ; BTC_BILGI_PARITE ; SADECE_KARDA_CIKIS ; EK_VERI:ticker,15m,-0.09,31,0,0,,0
+strategies/battle-tank/cryptotank.py,battle-tank,K395,DCA_POZISYON_BUYUTME,adjust_trade_position (pozisyon buyutme),SADECE_KARDA_CIKIS,1h,-0.25,23,0,0,,0
+strategies/battle-tank/cryptotankV2.py,battle-tank,K396,DCA_POZISYON_BUYUTME,adjust_trade_position (pozisyon buyutme),HP_COK(30) ; SADECE_KARDA_CIKIS,5m,-0.25,30,0,0,,1
+strategies/battle-tank/cryptotankV5.py,battle-tank,K397,DCA_POZISYON_BUYUTME,adjust_trade_position (pozisyon buyutme),HP_COK(27) ; SADECE_KARDA_CIKIS,15m,-0.25,27,0,0,,1
+strategies/battle-tank/thetank2.py,battle-tank,K386,DCA_POZISYON_BUYUTME,adjust_trade_position (pozisyon buyutme),ILOC_SON_SATIR ; HP_COK(26) ; SADECE_KARDA_CIKIS ; EK_VERI:ticker,15m,-0.09,26,0,0,,0
+strategies/battle-tank/thetank3.py,battle-tank,K398,DCA_POZISYON_BUYUTME,adjust_trade_position (pozisyon buyutme),HP_COK(28) ; SADECE_KARDA_CIKIS ; EK_VERI:ticker,15m,-0.09,28,0,0,,0
+strategies/battle-tank/thetank4TV.py,battle-tank,K399,DCA_POZISYON_BUYUTME,adjust_trade_position (pozisyon buyutme),LA_ORTA ; HP_COK(26) ; SADECE_KARDA_CIKIS ; EK_VERI:ticker,15m,-0.09,26,0,1,,0
+strategies/battle-tank/ultratank.py,battle-tank,K386,DCA_POZISYON_BUYUTME,adjust_trade_position (pozisyon buyutme),HP_COK(70),1h,-0.25,70,0,0,,1
+strategies/bb-rpb-tsl/BB_RPB_TSL.py,bb-rpb-tsl,K006,KULLANILABILIR,,SL_TABAN_-0.99_CUSTOM_SL ; HP_COK(71) ; INFORMATIVE_TF,5m,-0.99,71,0,0,,1
+strategies/bb-rpb-tsl/BB_RPB_TSL_2.py,bb-rpb-tsl,K007,KULLANILABILIR,,HP_COK(61) ; INFORMATIVE_TF,3m,-0.15,61,0,0,,1
+strategies/bb-rpb-tsl/BB_RPB_TSL_BI.py,bb-rpb-tsl,K006,KULLANILABILIR,,SL_TABAN_-0.99_CUSTOM_SL ; HP_COK(62) ; INFORMATIVE_TF,5m,-0.99,62,0,0,,1
+strategies/bb-rpb-tsl/BB_RPB_TSL_BIV1.py,bb-rpb-tsl,K006,KULLANILABILIR,,SL_TABAN_-0.99_CUSTOM_SL ; HP_COK(62) ; INFORMATIVE_TF,5m,-0.99,62,0,0,,1
+strategies/bb-rpb-tsl/BB_RPB_TSL_RNG.py,bb-rpb-tsl,K004,KULLANILABILIR,,SL_TABAN_-0.99_CUSTOM_SL ; HP_COK(36) ; INFORMATIVE_TF ; BTC_BILGI_PARITE,5m,-0.99,36,0,0,,0
+strategies/bb-rpb-tsl/BB_RPB_TSL_RNG_2.py,bb-rpb-tsl,K004,KULLANILABILIR,,SL_TABAN_-0.99_CUSTOM_SL ; HP_COK(36) ; INFORMATIVE_TF ; BTC_BILGI_PARITE,5m,-0.99,36,0,0,,1
+strategies/bb-rpb-tsl/BB_RPB_TSL_RNG_TBS.py,bb-rpb-tsl,K004,KULLANILABILIR,,ILOC_SON_SATIR ; SL_TABAN_-0.99_CUSTOM_SL ; HP_COK(36) ; INFORMATIVE_TF ; BTC_BILGI_PARITE,5m,-0.99,36,0,0,,1
+strategies/bb-rpb-tsl/BB_RPB_TSL_RNG_TBS_G.py,bb-rpb-tsl,K004,KULLANILABILIR,,ILOC_SON_SATIR ; HP_COK(36) ; INFORMATIVE_TF ; BTC_BILGI_PARITE,5m,-0.049,36,0,0,,0
+strategies/bb-rpb-tsl/BB_RPB_TSL_RNG_VWAP.py,bb-rpb-tsl,K004,KULLANILABILIR,,SL_TABAN_-0.99_CUSTOM_SL ; HP_COK(36) ; INFORMATIVE_TF ; BTC_BILGI_PARITE,5m,-0.99,36,0,0,,1
+strategies/bb-rpb-tsl/BB_RPB_TSL_SMA_Tranz.py,bb-rpb-tsl,K005,KULLANILABILIR,,LA_ORTA ; ILOC_SON_SATIR ; HP_COK(511) ; INFORMATIVE_TF ; BTC_BILGI_PARITE,5m,-0.15,511,0,1,,0
+strategies/bb-rpb-tsl/BB_RPB_TSL_SMA_Tranz_1.py,bb-rpb-tsl,K005,KULLANILABILIR,,LA_ORTA ; ILOC_SON_SATIR ; HP_COK(511) ; INFORMATIVE_TF ; BTC_BILGI_PARITE,5m,-0.15,511,0,1,,1
+strategies/bb-rpb-tsl/BB_RPB_TSL_SMA_Tranz_TB_1_1_1.py,bb-rpb-tsl,K005,KULLANILABILIR,,LA_ORTA ; ILOC_SON_SATIR ; STOPSUZ ; HP_COK(469) ; INFORMATIVE_TF,5m,-0.99,469,0,1,,1
+strategies/bb-rpb-tsl/BB_RPB_TSL_SMA_Tranz_TB_MOD.py,bb-rpb-tsl,K005,KULLANILABILIR,,LA_ORTA ; ILOC_SON_SATIR ; HP_COK(481) ; INFORMATIVE_TF ; BTC_BILGI_PARITE,5m,-0.15,481,0,1,,0
+strategies/bb-rpb-tsl/BB_RPB_TSL_Tranz.py,bb-rpb-tsl,K005,KULLANILABILIR,,LA_ORTA ; ILOC_SON_SATIR ; SL_TABAN_-0.99_CUSTOM_SL ; HP_COK(78) ; INFORMATIVE_TF,5m,-0.99,78,0,1,,0
+strategies/bb-rpb-tsl/BB_RPB_TSL__2.py,bb-rpb-tsl,K006,KULLANILABILIR,,SL_TABAN_-0.99_CUSTOM_SL ; HP_COK(71) ; INFORMATIVE_TF,5m,-0.99,71,0,0,,0
+strategies/bb-rpb-tsl/BB_RPB_TSL_c7c477d_20211030.py,bb-rpb-tsl,K004,KULLANILABILIR,,SL_TABAN_-0.99_CUSTOM_SL ; HP_COK(34) ; INFORMATIVE_TF ; BTC_BILGI_PARITE,5m,-0.99,34,0,0,,2
+strategies/bb-rpb-tsl/BB_RPB_TSLmeneguzzo.py,bb-rpb-tsl,K006,KULLANILABILIR,,SL_TABAN_-0.99_CUSTOM_SL ; HP_COK(58) ; INFORMATIVE_TF,5m,-0.99,58,0,0,,1
+strategies/bigz-bcmbigz/BcmbigzDevelop.py,bigz-bcmbigz,K011,KULLANILABILIR,,SL_TABAN_-0.99_CUSTOM_SL ; HP_COK(76) ; INFORMATIVE_TF,5m,-0.99,76,0,0,,1
+strategies/bigz-bcmbigz/BcmbigzV1.py,bigz-bcmbigz,K008,KULLANILABILIR,,SL_TABAN_-0.99_CUSTOM_SL ; HP_COK(30) ; INFORMATIVE_TF,5m,-0.99,30,0,0,,1
+strategies/bigz-bcmbigz/BigPete.py,bigz-bcmbigz,K008,KULLANILABILIR,,SL_TABAN_-0.99_CUSTOM_SL ; HP_COK(45) ; INFORMATIVE_TF,5m,-0.99,45,0,0,,1
+strategies/bigz-bcmbigz/BigZ03.py,bigz-bcmbigz,K010,KULLANILABILIR,,SL_TABAN_-0.99_CUSTOM_SL ; HP_COK(31) ; INFORMATIVE_TF,5m,-0.99,31,0,0,,1
+strategies/bigz-bcmbigz/BigZ0307HO.py,bigz-bcmbigz,K012,KULLANILABILIR,,SL_TABAN_-0.99_CUSTOM_SL ; HP_COK(212) ; INFORMATIVE_TF,5m,-0.99,212,0,0,,1
+strategies/bigz-bcmbigz/BigZ03HO.py,bigz-bcmbigz,K010,KULLANILABILIR,,SL_TABAN_-0.99_CUSTOM_SL ; HP_COK(31) ; INFORMATIVE_TF,5m,-0.99,31,0,0,,1
+strategies/bigz-bcmbigz/BigZ04.py,bigz-bcmbigz,K008,KULLANILABILIR,,SL_TABAN_-0.99_CUSTOM_SL ; HP_COK(30) ; INFORMATIVE_TF,5m,-0.99,30,0,0,,3
+strategies/bigz-bcmbigz/BigZ0407.py,bigz-bcmbigz,K009,KULLANILABILIR,,SL_TABAN_-0.99_CUSTOM_SL ; HP_COK(212) ; INFORMATIVE_TF,5m,-0.99,212,0,0,,1
+strategies/bigz-bcmbigz/BigZ0407HO.py,bigz-bcmbigz,K009,KULLANILABILIR,,SL_TABAN_-0.99_CUSTOM_SL ; HP_COK(212) ; INFORMATIVE_TF,5m,-0.99,212,0,0,,1
+strategies/bigz-bcmbigz/BigZ04HO.py,bigz-bcmbigz,K008,KULLANILABILIR,,SL_TABAN_-0.99_CUSTOM_SL ; HP_COK(30) ; INFORMATIVE_TF,5m,-0.99,30,0,0,,1
+strategies/bigz-bcmbigz/BigZ04HO2.py,bigz-bcmbigz,K009,KULLANILABILIR,,SL_TABAN_-0.99_CUSTOM_SL ; HP_COK(46) ; INFORMATIVE_TF,5m,-0.99,46,0,0,,1
+strategies/bigz-bcmbigz/BigZ04_TSL3.py,bigz-bcmbigz,K008,KULLANILABILIR,,SL_TABAN_-0.99_CUSTOM_SL ; HP_COK(41) ; INFORMATIVE_TF,5m,-0.99,41,0,0,,1
+strategies/bigz-bcmbigz/BigZ04_TSL4.py,bigz-bcmbigz,K008,KULLANILABILIR,,SL_TABAN_-0.99_CUSTOM_SL ; HP_COK(45) ; INFORMATIVE_TF,5m,-0.99,45,0,0,,1
+strategies/bigz-bcmbigz/BigZ06.py,bigz-bcmbigz,K008,KULLANILABILIR,,SL_TABAN_-0.99_CUSTOM_SL ; HP_COK(30) ; INFORMATIVE_TF,5m,-0.99,30,0,0,,1
+strategies/bigz-bcmbigz/BigZ07.py,bigz-bcmbigz,K008,KULLANILABILIR,,SL_TABAN_-0.99_CUSTOM_SL ; HP_COK(30) ; INFORMATIVE_TF,5m,-0.99,30,0,0,,1
+strategies/bigz-bcmbigz/BigZ07Next.py,bigz-bcmbigz,K008,KULLANILABILIR,,STOPSUZ ; HP_COK(199) ; INFORMATIVE_TF ; BTC_BILGI_PARITE,5m,-0.99,199,0,0,,1
+strategies/bigz-bcmbigz/BigZ07Next2.py,bigz-bcmbigz,K008,KULLANILABILIR,,STOPSUZ ; HP_COK(199) ; INFORMATIVE_TF ; BTC_BILGI_PARITE,5m,-0.99,199,0,0,,1
+strategies/binh-cluc-mad/BinClucMad.py,binh-cluc-mad,K014,KULLANILABILIR,,SL_TABAN_-0.99_CUSTOM_SL ; HP_COK(33) ; INFORMATIVE_TF,5m,-0.99,33,0,0,,1
+strategies/binh-cluc-mad/BinClucMadDevelop.py,binh-cluc-mad,K014,KULLANILABILIR,,SL_TABAN_-0.99_CUSTOM_SL ; HP_COK(76) ; INFORMATIVE_TF,5m,-0.99,76,0,0,,1
+strategies/binh-cluc-mad/BinClucMadSMADevelop.py,binh-cluc-mad,K014,KULLANILABILIR,,HP_COK(82) ; INFORMATIVE_TF,5m,-0.228,82,0,0,,1
+strategies/binh-cluc-mad/BinClucMadV1.py,binh-cluc-mad,K014,KULLANILABILIR,,SL_TABAN_-0.99_CUSTOM_SL ; HP_COK(69) ; INFORMATIVE_TF,5m,-0.99,69,0,0,,0
+strategies/binh-cluc-mad/BinHV27.py,binh-cluc-mad,K019,KULLANILABILIR,,SL_GENIS,5m,-0.5,0,0,0,,0
+strategies/binh-cluc-mad/BinHV45.py,binh-cluc-mad,K019,KULLANILABILIR,,,1m,-0.05,3,0,0,,0
+strategies/binh-cluc-mad/BinHV45HO.py,binh-cluc-mad,K022,KULLANILABILIR,,,1m,-0.19,3,0,0,,1
+strategies/binh-cluc-mad/ClucHAnix.py,binh-cluc-mad,K023,KULLANILABILIR,,SL_TABAN_-0.99_CUSTOM_SL ; INFORMATIVE_TF,1m,-0.99,5,0,0,,1
+strategies/binh-cluc-mad/ClucHAnix5m.py,binh-cluc-mad,K016,KULLANILABILIR,,ILOC_SON_SATIR ; SL_TABAN_-0.99_CUSTOM_SL ; HP_COK(47) ; INFORMATIVE_TF ; BTC_BILGI_PARITE,5m,-0.99,47,0,0,,2
+strategies/binh-cluc-mad/ClucHAnix_5m.py,binh-cluc-mad,K024,KULLANILABILIR,,SL_TABAN_-0.99_CUSTOM_SL ; INFORMATIVE_TF,5m,-0.99,12,0,0,,0
+strategies/binh-cluc-mad/ClucHAnix_5m1.py,binh-cluc-mad,K015,KULLANILABILIR,,ILOC_SON_SATIR ; SL_TABAN_-0.99_CUSTOM_SL ; INFORMATIVE_TF,5m,-0.99,0,0,0,,3
+strategies/binh-cluc-mad/ClucHAnix_BB_RPB_MOD.py,binh-cluc-mad,K016,KULLANILABILIR,,SL_TABAN_-0.99_CUSTOM_SL ; HP_COK(47) ; INFORMATIVE_TF ; BTC_BILGI_PARITE,1m,-0.99,47,0,0,,1
+strategies/binh-cluc-mad/ClucHAnix_BB_RPB_MOD2_ROI.py,binh-cluc-mad,K016,KULLANILABILIR,,ILOC_SON_SATIR ; SL_TABAN_-0.99_CUSTOM_SL ; HP_COK(47) ; INFORMATIVE_TF ; BTC_BILGI_PARITE,5m,-0.99,47,0,0,,1
+strategies/binh-cluc-mad/ClucHAnix_BB_RPB_MOD_CTT.py,binh-cluc-mad,K016,KULLANILABILIR,,ILOC_SON_SATIR ; SL_TABAN_-0.99_CUSTOM_SL ; HP_COK(47) ; INFORMATIVE_TF ; BTC_BILGI_PARITE,5m,-0.99,47,0,0,,0
+strategies/binh-cluc-mad/ClucHAnix_BB_RPB_MOD_E0V1E_ROI.py,binh-cluc-mad,K016,KULLANILABILIR,,ILOC_SON_SATIR ; SL_TABAN_-0.99_CUSTOM_SL ; HP_COK(47) ; INFORMATIVE_TF ; BTC_BILGI_PARITE,5m,-0.99,47,0,0,,2
+strategies/binh-cluc-mad/ClucHAnix_hhll.py,binh-cluc-mad,K015,KULLANILABILIR,,ILOC_SON_SATIR ; SL_TABAN_-0.99_CUSTOM_SL ; INFORMATIVE_TF,5m,-0.99,0,0,0,,2
+strategies/binh-cluc-mad/CombinedBinHAndCluc.py,binh-cluc-mad,K013,KULLANILABILIR,,SADECE_KARDA_CIKIS,5m,-0.05,0,0,0,,0
+strategies/binh-cluc-mad/CombinedBinHAndCluc2021.py,binh-cluc-mad,K020,KULLANILABILIR,,,5m,-0.09,0,0,0,,1
+strategies/binh-cluc-mad/CombinedBinHAndCluc2021Bull.py,binh-cluc-mad,K020,KULLANILABILIR,,,5m,-0.09,0,0,0,,1
+strategies/binh-cluc-mad/CombinedBinHAndClucHyperV0.py,binh-cluc-mad,K021,KULLANILABILIR,,,1m,-0.1,12,0,0,,1
+strategies/binh-cluc-mad/CombinedBinHAndClucHyperV3.py,binh-cluc-mad,K021,KULLANILABILIR,,,1m,-0.06,14,0,0,,1
+strategies/binh-cluc-mad/CombinedBinHAndClucV2.py,binh-cluc-mad,K013,KULLANILABILIR,,INFORMATIVE_TF,5m,-0.05,0,0,0,,1
+strategies/binh-cluc-mad/CombinedBinHAndClucV3.py,binh-cluc-mad,K013,KULLANILABILIR,,SL_TABAN_-0.99_CUSTOM_SL ; SADECE_KARDA_CIKIS,5m,-0.99,0,0,0,,1
+strategies/binh-cluc-mad/CombinedBinHAndClucV4.py,binh-cluc-mad,K013,KULLANILABILIR,,SL_TABAN_-0.99_CUSTOM_SL ; SADECE_KARDA_CIKIS,5m,-0.99,0,0,0,,1
+strategies/binh-cluc-mad/CombinedBinHAndClucV5.py,binh-cluc-mad,K013,KULLANILABILIR,,SL_TABAN_-0.99_CUSTOM_SL ; SADECE_KARDA_CIKIS,5m,-0.99,0,0,0,,1
+strategies/binh-cluc-mad/CombinedBinHAndClucV5Hyperoptable.py,binh-cluc-mad,K025,KULLANILABILIR,,SL_TABAN_-0.99_CUSTOM_SL ; SADECE_KARDA_CIKIS,5m,-0.99,5,0,0,,0
+strategies/binh-cluc-mad/CombinedBinHAndClucV6.py,binh-cluc-mad,K214,KULLANILABILIR,,SL_TABAN_-0.99_CUSTOM_SL ; INFORMATIVE_TF ; SADECE_KARDA_CIKIS,5m,-0.99,0,0,0,,1
+strategies/binh-cluc-mad/CombinedBinHAndClucV6H.py,binh-cluc-mad,K026,KULLANILABILIR,,SL_TABAN_-0.99_CUSTOM_SL ; INFORMATIVE_TF ; SADECE_KARDA_CIKIS,5m,-0.99,15,0,0,,1
+strategies/binh-cluc-mad/CombinedBinHAndClucV7.py,binh-cluc-mad,K017,KULLANILABILIR,,SL_TABAN_-0.99_CUSTOM_SL ; INFORMATIVE_TF ; SADECE_KARDA_CIKIS,5m,-0.99,20,0,0,,1
+strategies/binh-cluc-mad/CombinedBinHAndClucV8.py,binh-cluc-mad,K017,KULLANILABILIR,,SL_TABAN_-0.99_CUSTOM_SL ; HP_COK(33) ; INFORMATIVE_TF ; SADECE_KARDA_CIKIS,5m,-0.99,33,0,0,,2
+strategies/binh-cluc-mad/CombinedBinHAndClucV8Hyper.py,binh-cluc-mad,K017,KULLANILABILIR,,HP_COK(33) ; INFORMATIVE_TF ; SADECE_KARDA_CIKIS,5m,-0.274,33,0,0,,1
+strategies/binh-cluc-mad/CombinedBinHAndClucV8XH.py,binh-cluc-mad,K017,KULLANILABILIR,,SL_TABAN_-0.99_CUSTOM_SL ; HP_COK(34) ; INFORMATIVE_TF ; SADECE_KARDA_CIKIS,5m,-0.99,34,0,0,,1
+strategies/binh-cluc-mad/CombinedBinHAndClucV8XHO.py,binh-cluc-mad,K017,KULLANILABILIR,,SL_TABAN_-0.99_CUSTOM_SL ; HP_COK(34) ; INFORMATIVE_TF ; SADECE_KARDA_CIKIS,5m,-0.99,34,0,0,,1
+strategies/binh-cluc-mad/CombinedBinHClucAndMADV3.py,binh-cluc-mad,K018,KULLANILABILIR,,SL_TABAN_-0.99_CUSTOM_SL ; INFORMATIVE_TF,5m,-0.99,0,0,0,,1
+strategies/binh-cluc-mad/CombinedBinHClucAndMADV5.py,binh-cluc-mad,K018,KULLANILABILIR,,SL_TABAN_-0.99_CUSTOM_SL ; INFORMATIVE_TF,5m,-0.99,0,0,0,,1
+strategies/binh-cluc-mad/CombinedBinHClucAndMADV6.py,binh-cluc-mad,K018,KULLANILABILIR,,SL_TABAN_-0.99_CUSTOM_SL ; INFORMATIVE_TF,5m,-0.99,0,0,0,,1
+strategies/binh-cluc-mad/CombinedBinHClucAndMADV9.py,binh-cluc-mad,K014,KULLANILABILIR,,SL_TABAN_-0.99_CUSTOM_SL ; INFORMATIVE_TF,5m,-0.99,24,0,0,,1
+strategies/bollinger/BBMod1.py,bollinger,K044,KULLANILABILIR,,SL_TABAN_-0.99_CUSTOM_SL ; HP_COK(77) ; INFORMATIVE_TF,5m,-0.99,77,0,0,,1
+strategies/bollinger/BBRSI.py,bollinger,K028,KULLANILABILIR,,SL_GENIS ; INFORMATIVE_TF ; BTC_BILGI_PARITE,4h,-0.3603667187598833,0,0,0,,1
+strategies/bollinger/BBRSI2.py,bollinger,K027,KULLANILABILIR,,,1m,-0.2,0,0,0,,1
+strategies/bollinger/BBRSI21.py,bollinger,K027,KULLANILABILIR,,SL_GENIS,5m,-0.30054,0,0,0,,2
+strategies/bollinger/BBRSI3366.py,bollinger,K027,KULLANILABILIR,,SL_GENIS,5m,-0.33233,0,0,0,,2
+strategies/bollinger/BBRSI4cust.py,bollinger,K045,KULLANILABILIR,,,15m,-0.1,3,0,0,,0
+strategies/bollinger/BBRSINaiveStrategy.py,bollinger,K027,KULLANILABILIR,,INFORMATIVE_TF ; BTC_BILGI_PARITE,15m,-0.1,0,0,0,,1
+strategies/bollinger/BBRSIOptim2020Strategy.py,bollinger,K046,KULLANILABILIR,,SL_GENIS ; INFORMATIVE_TF ; BTC_BILGI_PARITE,5m,-0.331,0,0,0,,1
+strategies/bollinger/BBRSIOptimStrategy.py,bollinger,K028,KULLANILABILIR,,SL_GENIS ; INFORMATIVE_TF ; BTC_BILGI_PARITE,5m,-0.344,0,0,0,,1
+strategies/bollinger/BBRSIOptimizedStrategy.py,bollinger,K047,KULLANILABILIR,,INFORMATIVE_TF ; BTC_BILGI_PARITE,5m,-0.295,0,0,0,,1
+strategies/bollinger/BBRSIS.py,bollinger,K048,KULLANILABILIR,,STOPSUZ,5m,-0.99,0,0,0,,1
+strategies/bollinger/BBRSIStrategy.py,bollinger,K028,KULLANILABILIR,,SL_GENIS ; INFORMATIVE_TF ; BTC_BILGI_PARITE,15m,-0.3603667187598833,0,0,0,,2
+strategies/bollinger/BBRSITV.py,bollinger,K049,KULLANILABILIR,,SL_GENIS,5m,-0.3,0,0,0,,1
+strategies/bollinger/BBRSIoriginal.py,bollinger,K050,KULLANILABILIR,,SL_GENIS,1h,-0.36828,0,0,0,,1
+strategies/bollinger/BBRSIv2.py,bollinger,K051,KULLANILABILIR,,SL_TABAN_-0.99_CUSTOM_SL ; SADECE_KARDA_CIKIS,15m,-0.99,0,0,0,,2
+strategies/bollinger/BB_RSI.py,bollinger,K027,KULLANILABILIR,,INFORMATIVE_TF ; BTC_BILGI_PARITE ; SADECE_KARDA_CIKIS,1h,-0.06491,0,0,0,,1
+strategies/bollinger/BB_Strategy04.py,bollinger,K052,KULLANILABILIR,,SL_GENIS ; INFORMATIVE_TF ; BTC_BILGI_PARITE,1h,-0.32530922906811843,0,0,0,,1
+strategies/bollinger/BBands.py,bollinger,K053,KULLANILABILIR,,INFORMATIVE_TF ; BTC_BILGI_PARITE ; EK_VERI:orderbook,1m,-0.05,2,0,0,,1
+strategies/bollinger/BBandsRSI.py,bollinger,K054,KULLANILABILIR,,,5m,-0.15,2,0,0,,1
+strategies/bollinger/BBlower.py,bollinger,K055,KULLANILABILIR,,ROI_BAGIMLI ; INFORMATIVE_TF ; BTC_BILGI_PARITE,5m,-0.13912,0,0,0,,1
+strategies/bollinger/Babico_SMA5xBBmid.py,bollinger,K056,KULLANILABILIR,,STOPSUZ ; SADECE_KARDA_CIKIS,1d,-0.99,0,0,0,,2
+strategies/bollinger/Bandtastic.py,bollinger,K057,KULLANILABILIR,,SL_GENIS,15m,-0.345,16,0,0,,0
+strategies/bollinger/BbRoi.py,bollinger,K058,KULLANILABILIR,,,15m,-0.23701,0,0,0,,1
+strategies/bollinger/BbandRsi.py,bollinger,K027,KULLANILABILIR,,,1h,-0.25,0,0,0,,0
+strategies/bollinger/BbandRsiRolling.py,bollinger,K059,KULLANILABILIR,,ROI_BAGIMLI,5m,-0.08,0,0,0,,1
+strategies/bollinger/CBPete9.py,bollinger,K014,KULLANILABILIR,,SL_TABAN_-0.99_CUSTOM_SL ; ROI_BAGIMLI ; INFORMATIVE_TF,5m,-0.99,24,0,0,,1
+strategies/bollinger/Chandem.py,bollinger,K060,KULLANILABILIR,,INFORMATIVE_TF ; BTC_BILGI_PARITE,5m,-0.28031,0,0,0,,1
+strategies/bollinger/Chandemtwo.py,bollinger,K061,KULLANILABILIR,,SL_GENIS ; INFORMATIVE_TF ; BTC_BILGI_PARITE,5m,-0.33572,0,0,0,,1
+strategies/bollinger/Cluc4.py,bollinger,K013,KULLANILABILIR,,INFORMATIVE_TF ; SADECE_KARDA_CIKIS,1m,-0.01,0,0,0,,1
+strategies/bollinger/Cluc4werk.py,bollinger,K034,KULLANILABILIR,,SL_GENIS ; INFORMATIVE_TF ; BTC_BILGI_PARITE,1m,-0.31742,0,0,0,,1
+strategies/bollinger/Cluc5werk.py,bollinger,K034,KULLANILABILIR,,INFORMATIVE_TF,1m,-0.22405,0,0,0,,1
+strategies/bollinger/ClucHAwerk.py,bollinger,K062,KULLANILABILIR,,INFORMATIVE_TF,1m,-0.02139,0,0,0,,1
+strategies/bollinger/ClucMay72018.py,bollinger,K063,KULLANILABILIR,,,5m,-0.05,0,0,0,,0
+strategies/bollinger/Combined_Indicators.py,bollinger,K013,KULLANILABILIR,,,1m,-0.0658,0,0,0,,1
+strategies/bollinger/DD.py,bollinger,K027,KULLANILABILIR,,SL_GENIS,5m,-0.32745,0,0,0,,1
+strategies/bollinger/DevilStra.py,bollinger,K406,LOOKAHEAD_YUKSEK,LA:normalize_tum_veri,LA_ORTA,4h,-0.28,2,0,1,normalize_tum_veri,2
+strategies/bollinger/Dracula.py,bollinger,K064,KULLANILABILIR,,,1m,-0.2,1,0,0,,0
+strategies/bollinger/EMABBRSI.py,bollinger,K065,KULLANILABILIR,,,1h,-0.2,0,0,0,,1
+strategies/bollinger/EXPERIMENTAL_STRATEGY.py,bollinger,K066,KULLANILABILIR,,INFORMATIVE_TF ; BTC_BILGI_PARITE,5m,-0.1,0,0,0,,1
+strategies/bollinger/FiveMinCrossAbove.py,bollinger,K067,KULLANILABILIR,,STOPSUZ ; ROI_BAGIMLI ; INFORMATIVE_TF ; BTC_BILGI_PARITE ; SADECE_KARDA_CIKIS,5m,-0.99,0,0,0,,1
+strategies/bollinger/FrostAuraM115mStrategy.py,bollinger,K035,KULLANILABILIR,,SL_GENIS ; INFORMATIVE_TF,15m,-0.34316,0,0,0,,1
+strategies/bollinger/FrostAuraM11hStrategy.py,bollinger,K035,KULLANILABILIR,,SL_GENIS ; INFORMATIVE_TF,1h,-0.40618,0,0,0,,1
+strategies/bollinger/FrostAuraM315mStrategy.py,bollinger,K036,KULLANILABILIR,,SL_GENIS ; INFORMATIVE_TF,15m,-0.41114,0,0,0,,1
+strategies/bollinger/FrostAuraM31hStrategy.py,bollinger,K036,KULLANILABILIR,,SL_GENIS ; INFORMATIVE_TF,1h,-0.44439,0,0,0,,1
+strategies/bollinger/GodCard.py,bollinger,K068,KULLANILABILIR,,INFORMATIVE_TF ; SADECE_KARDA_CIKIS,5m,-0.087,9,0,0,,1
+strategies/bollinger/GodStra.py,bollinger,K402,LOOKAHEAD_YUKSEK,LA:normalize_tum_veri,LA_ORTA ; STOPSUZ,4h,-1,24,0,1,normalize_tum_veri,1
+strategies/bollinger/GodStraNew40.py,bollinger,K402,LOOKAHEAD_YUKSEK,LA:normalize_tum_veri,LA_ORTA ; STOPSUZ,4h,-1,24,0,1,normalize_tum_veri,1
+strategies/bollinger/GodStraNew_SMAonly.py,bollinger,K402,LOOKAHEAD_YUKSEK,LA:normalize_tum_veri,LA_ORTA ; SL_TABAN_-0.99_TRAILING ; ROI_BAGIMLI,5m,-1,24,0,1,normalize_tum_veri,0
+strategies/bollinger/Gumbo1.py,bollinger,K069,KULLANILABILIR,,INFORMATIVE_TF,5m,-0.25,4,0,0,,1
+strategies/bollinger/Leveraged.py,bollinger,K038,KULLANILABILIR,,INFORMATIVE_ELLE_MERGE ; INTERPOLATE,5m,-0.05,0,0,0,,1
+strategies/bollinger/Low_BB.py,bollinger,K070,KULLANILABILIR,,ROI_BAGIMLI,1m,-0.015,0,0,0,,0
+strategies/bollinger/MiniLambo.py,bollinger,K015,KULLANILABILIR,,ILOC_SON_SATIR ; ROI_BAGIMLI ; INFORMATIVE_TF ; BTC_BILGI_PARITE,1m,-0.1,0,0,0,,1
+strategies/bollinger/MontrealStrategy.py,bollinger,K071,KULLANILABILIR,,INFORMATIVE_TF ; BTC_BILGI_PARITE,15m,-0.28646,0,0,0,,1
+strategies/bollinger/ONUR.py,bollinger,K072,KULLANILABILIR,,SL_TABAN_-0.99_TRAILING ; ROI_BAGIMLI,15m,-0.99,0,0,0,,1
+strategies/bollinger/Roth01.py,bollinger,K037,KULLANILABILIR,,,5m,-0.29585,0,0,0,,1
+strategies/bollinger/Roth03.py,bollinger,K037,KULLANILABILIR,,SL_GENIS,5m,-0.31939,0,0,0,,1
+strategies/bollinger/SMA_BBRSI.py,bollinger,K073,KULLANILABILIR,,SL_GENIS ; INFORMATIVE_TF,5m,-0.5,19,0,0,,0
+strategies/bollinger/STRATEGY_RSI_BB_BOUNDS_CROSS.py,bollinger,K074,KULLANILABILIR,,INFORMATIVE_TF ; BTC_BILGI_PARITE,5m,-0.1,0,0,0,,1
+strategies/bollinger/STRATEGY_RSI_BB_CROSS.py,bollinger,K075,KULLANILABILIR,,INFORMATIVE_TF ; BTC_BILGI_PARITE,5m,-0.1,0,0,0,,1
+strategies/bollinger/Saturn5.py,bollinger,K322,KULLANILABILIR,,,15m,-0.2,0,0,0,,0
+strategies/bollinger/Simple.py,bollinger,K076,KULLANILABILIR,,,5m,-0.25,0,0,0,,0
+strategies/bollinger/SmoothOperator.py,bollinger,K077,KULLANILABILIR,,,5m,-0.05,0,0,0,,0
+strategies/bollinger/TemaMaster.py,bollinger,K029,KULLANILABILIR,,ROI_BAGIMLI ; INFORMATIVE_TF ; BTC_BILGI_PARITE,5m,-0.14791,0,0,0,,1
+strategies/bollinger/TemaMaster3.py,bollinger,K029,KULLANILABILIR,,INFORMATIVE_TF ; BTC_BILGI_PARITE,1m,-0.08848,0,0,0,,1
+strategies/bollinger/TemaPure.py,bollinger,K078,KULLANILABILIR,,INFORMATIVE_TF ; BTC_BILGI_PARITE,5m,-0.09754,0,0,0,,1
+strategies/bollinger/TemaPureNeat.py,bollinger,K029,KULLANILABILIR,,INFORMATIVE_TF ; BTC_BILGI_PARITE,5m,-0.10145,0,0,0,,1
+strategies/bollinger/TemaPureTwo.py,bollinger,K079,KULLANILABILIR,,INFORMATIVE_TF ; BTC_BILGI_PARITE,5m,-0.11,0,0,0,,1
+strategies/bollinger/TheRealPullbackV2.py,bollinger,K080,KULLANILABILIR,,,5m,-0.035,0,0,0,,1
+strategies/bollinger/XebTradeStrat.py,bollinger,K081,KULLANILABILIR,,ROI_BAGIMLI,1m,-0.01,0,0,0,,1
+strategies/bollinger/adxbbrsi2.py,bollinger,K082,KULLANILABILIR,,SL_GENIS,1h,-0.32237,0,0,0,,1
+strategies/bollinger/bb_rsi_opt.py,bollinger,K083,KULLANILABILIR,,ROI_BAGIMLI ; INFORMATIVE_TF ; BTC_BILGI_PARITE,1h,-0.29207,0,0,0,,1
+strategies/bollinger/bbrsi1_strategy.py,bollinger,K084,KULLANILABILIR,,INFORMATIVE_TF ; BTC_BILGI_PARITE,5m,-0.1,6,0,0,,0
+strategies/bollinger/bbrsi4Freq.py,bollinger,K085,KULLANILABILIR,,SL_GENIS ; INFORMATIVE_TF ; BTC_BILGI_PARITE,1h,-0.36727,0,0,0,,1
+strategies/bollinger/mark_strat_opt.py,bollinger,K086,KULLANILABILIR,,INFORMATIVE_TF ; BTC_BILGI_PARITE,1m,-0.20206,0,0,0,,1
+strategies/channels/Heracles.py,channels,K090,KULLANILABILIR,,ROI_BAGIMLI,4h,-0.256,4,0,0,,0
+strategies/channels/custom_sell.py,channels,K091,KULLANILABILIR,,SL_GENIS,5m,-0.347,1,0,0,,0
+strategies/channels/keltnerchannel.py,channels,K092,KULLANILABILIR,,,6h,-0.254,0,0,0,,1
+strategies/cycle-oscillators/Cluc7werk.py,cycle-oscillators,K093,KULLANILABILIR,,SADECE_KARDA_CIKIS,1m,-0.02,0,0,0,,1
+strategies/cycle-oscillators/DCBBBounce.py,cycle-oscillators,K096,KULLANILABILIR,,SL_TANIMSIZ ; INFORMATIVE_TF ; BTC_BILGI_PARITE ; SADECE_KARDA_CIKIS,5m,,7,0,0,,1
+strategies/cycle-oscillators/Divergences.py,cycle-oscillators,K097,KULLANILABILIR,,INFORMATIVE_TF ; BTC_BILGI_PARITE,1h,-0.1,0,0,0,,1
+strategies/cycle-oscillators/Inverse.py,cycle-oscillators,K094,KULLANILABILIR,,INFORMATIVE_TF ; BTC_BILGI_PARITE,1h,-0.2,5,0,0,,1
+strategies/cycle-oscillators/InverseV2.py,cycle-oscillators,K094,KULLANILABILIR,,INFORMATIVE_TF ; BTC_BILGI_PARITE,1h,-0.2,5,0,0,,1
+strategies/cycle-oscillators/KC_BB.py,cycle-oscillators,K098,KULLANILABILIR,,SL_TABAN_-0.99_CUSTOM_SL,5m,-0.99,0,0,0,,0
+strategies/cycle-oscillators/Seb.py,cycle-oscillators,K130,KULLANILABILIR,,INFORMATIVE_TF ; BTC_BILGI_PARITE ; SADECE_KARDA_CIKIS,5m,-0.1,8,0,0,,1
+strategies/cycle-oscillators/TenderEnter.py,cycle-oscillators,K099,KULLANILABILIR,,ROI_BAGIMLI ; INFORMATIVE_TF ; BTC_BILGI_PARITE,15m,-0.25933,0,0,0,,1
+strategies/cycle-oscillators/fahmibah.py,cycle-oscillators,K100,KULLANILABILIR,,ROI_BAGIMLI ; INFORMATIVE_TF,5m,-0.1,15,0,0,,1
+strategies/cycle-oscillators/mark_strat.py,cycle-oscillators,K027,KULLANILABILIR,,INFORMATIVE_TF ; BTC_BILGI_PARITE,1m,-0.23936,0,0,0,,1
+strategies/cycle-oscillators/quantumfirst.py,cycle-oscillators,K101,KULLANILABILIR,,INFORMATIVE_TF ; BTC_BILGI_PARITE ; SADECE_KARDA_CIKIS,5m,-0.1,0,0,0,,1
+strategies/elliott-wave/Combined_NFIv6_SMA.py,elliott-wave,K104,KULLANILABILIR,,SL_TABAN_-0.99_TRAILING ; HP_COK(689) ; INFORMATIVE_TF,5m,-0.99,689,0,0,,1
+strategies/elliott-wave/Combined_NFIv7_SMA.py,elliott-wave,K104,KULLANILABILIR,,SL_TABAN_-0.99_TRAILING ; HP_COK(809) ; INFORMATIVE_TF,5m,-0.99,809,0,0,,1
+strategies/elliott-wave/Combined_NFIv7_SMA_Rallipanos_20210707.py,elliott-wave,K104,KULLANILABILIR,,SL_TABAN_-0.99_TRAILING ; HP_COK(809) ; INFORMATIVE_TF,5m,-0.99,809,0,0,,1
+strategies/elliott-wave/Combined_NFIv7_SMA_bAdBoY_20211204.py,elliott-wave,K104,KULLANILABILIR,,SL_TABAN_-0.99_TRAILING ; HP_COK(809) ; INFORMATIVE_TF,5m,-0.99,809,0,0,,1
+strategies/elliott-wave/CoreStrategy.py,elliott-wave,K014,KULLANILABILIR,,HP_COK(82) ; INFORMATIVE_TF,5m,-0.228,82,0,0,,1
+strategies/elliott-wave/CryptoFrogNFI.py,elliott-wave,K106,KULLANILABILIR,,LA_ORTA ; SL_IFADE ; HP_COK(697) ; INFORMATIVE_TF ; EK_VERI:orderbook ; EK_VERI:ticker,5m,param/ifade,697,0,1,,1
+strategies/elliott-wave/CryptoFrogNFIHO1A.py,elliott-wave,K106,KULLANILABILIR,,LA_ORTA ; SL_IFADE ; HP_COK(697) ; INFORMATIVE_TF ; EK_VERI:orderbook ; EK_VERI:ticker,5m,param/ifade,697,0,1,,0
+strategies/elliott-wave/EI3v2_tag_cofi_green.py,elliott-wave,K105,KULLANILABILIR,,ADJUST_ETKISIZ ; SL_TABAN_-0.99_TRAILING ; INFORMATIVE_TF ; BTC_BILGI_PARITE ; SADECE_KARDA_CIKIS,5m,-0.99,16,0,0,,6
+strategies/elliott-wave/ElliotV2.py,elliott-wave,K102,KULLANILABILIR,,INFORMATIVE_TF ; EK_VERI:orderbook,5m,-0.179,7,0,0,,1
+strategies/elliott-wave/ElliotV4.py,elliott-wave,K102,KULLANILABILIR,,SL_TABAN_-0.99_TRAILING ; ROI_BAGIMLI ; INFORMATIVE_TF ; SADECE_KARDA_CIKIS,5m,-0.97,7,0,0,,1
+strategies/elliott-wave/ElliotV531.py,elliott-wave,K102,KULLANILABILIR,,ROI_BAGIMLI ; INFORMATIVE_TF,5m,-0.189,7,0,0,,1
+strategies/elliott-wave/ElliotV5HO.py,elliott-wave,K102,KULLANILABILIR,,SL_GENIS ; INFORMATIVE_TF,5m,-0.302,7,0,0,,1
+strategies/elliott-wave/ElliotV5HOMod2.py,elliott-wave,K102,KULLANILABILIR,,SL_TABAN_-0.99_CUSTOM_SL ; INFORMATIVE_TF ; SADECE_KARDA_CIKIS,5m,-0.99,8,0,0,,1
+strategies/elliott-wave/ElliotV5HOMod3.py,elliott-wave,K102,KULLANILABILIR,,INFORMATIVE_TF,5m,-0.06,7,0,0,,1
+strategies/elliott-wave/ElliotV7.py,elliott-wave,K102,KULLANILABILIR,,SL_GENIS ; INFORMATIVE_TF,5m,-0.32,8,0,0,,1
+strategies/elliott-wave/ElliotV8HO.py,elliott-wave,K102,KULLANILABILIR,,INFORMATIVE_TF ; SADECE_KARDA_CIKIS,5m,-0.189,8,0,0,,2
+strategies/elliott-wave/ElliotV8_original.py,elliott-wave,K102,KULLANILABILIR,,SL_GENIS ; SADECE_KARDA_CIKIS,5m,-0.32,8,0,0,,1
+strategies/elliott-wave/ElliotV8_original_ichiv2.py,elliott-wave,K102,KULLANILABILIR,,SADECE_KARDA_CIKIS,5m,-0.2,8,0,0,,3
+strategies/elliott-wave/ElliotV8_original_ichiv3.py,elliott-wave,K102,KULLANILABILIR,,SADECE_KARDA_CIKIS,5m,-0.2,8,0,0,,3
+strategies/elliott-wave/ElliotWave.py,elliott-wave,K115,KULLANILABILIR,,INFORMATIVE_TF,4h,-0.04,18,0,0,,0
+strategies/elliott-wave/Elliotv8.py,elliott-wave,K102,KULLANILABILIR,,SL_GENIS,5m,-0.32,8,0,0,,1
+strategies/elliott-wave/NASOSRv6_private_Reinuvader_20211121.py,elliott-wave,K116,KULLANILABILIR,,LA_ORTA ; HP_COK(31) ; INFORMATIVE_TF ; BTC_BILGI_PARITE,5m,-0.15,31,0,1,,0
+strategies/elliott-wave/NASOSv4.py,elliott-wave,K102,KULLANILABILIR,,INFORMATIVE_TF,5m,-0.15,17,0,0,,1
+strategies/elliott-wave/NASOSv5.py,elliott-wave,K117,KULLANILABILIR,,INFORMATIVE_TF,5m,-0.15,13,0,0,,1
+strategies/elliott-wave/NASOSv5_mod1.py,elliott-wave,K108,KULLANILABILIR,,ILOC_SON_SATIR ; SL_GENIS ; INFORMATIVE_TF ; EK_VERI:ticker,5m,-0.3,0,0,0,,0
+strategies/elliott-wave/NASOSv5_mod2.py,elliott-wave,K108,KULLANILABILIR,,ILOC_SON_SATIR ; SL_GENIS ; INFORMATIVE_TF ; EK_VERI:ticker,5m,-0.3,0,0,0,,0
+strategies/elliott-wave/NASOSv5_mod3.py,elliott-wave,K108,KULLANILABILIR,,ILOC_SON_SATIR ; SL_GENIS ; INFORMATIVE_TF ; EK_VERI:ticker,5m,-0.3,0,0,0,,0
+strategies/elliott-wave/NFI46Frog.py,elliott-wave,K109,KULLANILABILIR,,LA_ORTA ; SL_TABAN_-0.99_CUSTOM_SL ; HP_COK(263) ; INFORMATIVE_TF ; EK_VERI:orderbook ; EK_VERI:ticker,5m,-1.0,263,0,1,,1
+strategies/elliott-wave/NFI46FrogZ.py,elliott-wave,K109,KULLANILABILIR,,LA_ORTA ; SL_TABAN_-0.99_CUSTOM_SL ; HP_COK(263) ; INFORMATIVE_TF ; EK_VERI:orderbook ; EK_VERI:ticker,5m,-0.99,263,0,1,,1
+strategies/elliott-wave/NFI46Z.py,elliott-wave,K118,KULLANILABILIR,,SL_TABAN_-0.99_CUSTOM_SL ; HP_COK(291) ; INFORMATIVE_TF,5m,-0.99,291,0,0,,1
+strategies/elliott-wave/NFI47V2.py,elliott-wave,K211,KULLANILABILIR,,STOPSUZ ; HP_COK(272) ; INFORMATIVE_TF,5m,-0.99,272,0,0,,1
+strategies/elliott-wave/NFI4Frog.py,elliott-wave,K109,KULLANILABILIR,,LA_ORTA ; SL_TABAN_-0.99_CUSTOM_SL ; HP_COK(139) ; INFORMATIVE_TF ; EK_VERI:orderbook ; EK_VERI:ticker,5m,-1.0,139,0,1,,1
+strategies/elliott-wave/NFI5MOHO.py,elliott-wave,K119,KULLANILABILIR,,HP_COK(195) ; INFORMATIVE_TF,5m,-0.1,195,0,0,,1
+strategies/elliott-wave/NFI5MOHO2.py,elliott-wave,K210,KULLANILABILIR,,STOPSUZ ; HP_COK(195) ; INFORMATIVE_TF,5m,-0.99,195,0,0,,1
+strategies/elliott-wave/NFI5MOHO_WIP.py,elliott-wave,K210,KULLANILABILIR,,STOPSUZ ; HP_COK(195) ; INFORMATIVE_TF,5m,-0.99,195,0,0,,2
+strategies/elliott-wave/NFI5MOHO_WIP_1.py,elliott-wave,K210,KULLANILABILIR,,SL_TABAN_-0.99_TRAILING ; HP_COK(195) ; INFORMATIVE_TF ; SADECE_KARDA_CIKIS,5m,-0.99,195,0,0,,0
+strategies/elliott-wave/NFI5MOHO_WIP_2.py,elliott-wave,K210,KULLANILABILIR,,SL_TABAN_-0.99_TRAILING ; HP_COK(195) ; INFORMATIVE_TF,5m,-0.99,195,0,0,,0
+strategies/elliott-wave/NFI731_BUSD.py,elliott-wave,K212,KULLANILABILIR,,STOPSUZ ; HP_COK(1179) ; INFORMATIVE_TF ; BTC_BILGI_PARITE,5m,-0.99,1179,0,0,,0
+strategies/elliott-wave/NFI7MOHO.py,elliott-wave,K210,KULLANILABILIR,,STOPSUZ ; HP_COK(825) ; INFORMATIVE_TF,5m,-0.99,825,0,0,,1
+strategies/elliott-wave/Nostalgia.py,elliott-wave,K212,KULLANILABILIR,,STOPSUZ ; HP_COK(962) ; INFORMATIVE_TF ; BTC_BILGI_PARITE,5m,-0.99,962,0,0,,0
+strategies/elliott-wave/RalliV1.py,elliott-wave,K111,KULLANILABILIR,,SL_GENIS,5m,-0.3,11,0,0,,1
+strategies/elliott-wave/RalliV1_disable56.py,elliott-wave,K111,KULLANILABILIR,,SL_GENIS,5m,-0.3,11,0,0,,2
+strategies/elliott-wave/bestV2.py,elliott-wave,K102,KULLANILABILIR,,LA_ORTA ; INFORMATIVE_TF,5m,-0.19,7,0,1,,1
+strategies/elliott-wave/eltoro.py,elliott-wave,K120,KULLANILABILIR,,KISMI_CIKIS_ADJUST ; HP_COK(69) ; INFORMATIVE_TF ; BTC_BILGI_PARITE ; SADECE_KARDA_CIKIS,15m,-0.25,69,0,0,,1
+strategies/elliott-wave/eltoro1_4.py,elliott-wave,K112,KULLANILABILIR,,KISMI_CIKIS_ADJUST ; HP_COK(72) ; INFORMATIVE_TF ; BTC_BILGI_PARITE ; SADECE_KARDA_CIKIS,1h,-0.25,72,0,0,,2
+strategies/elliott-wave/true_lambo.py,elliott-wave,K121,KULLANILABILIR,,SL_TABAN_-0.99_CUSTOM_SL ; HP_COK(72) ; INFORMATIVE_TF,5m,-0.99,72,0,0,,0
+strategies/elliott-wave/turbov8.py,elliott-wave,K414,DCA_POZISYON_BUYUTME,adjust_trade_position (pozisyon buyutme),ILOC_SON_SATIR ; HP_COK(29) ; INFORMATIVE_TF ; BTC_BILGI_PARITE ; SADECE_KARDA_CIKIS,5m,-0.2,29,0,0,,2
+strategies/elliott-wave/twinturboV8.py,elliott-wave,K408,DCA_POZISYON_BUYUTME,adjust_trade_position (pozisyon buyutme),HP_COK(31) ; INFORMATIVE_TF ; BTC_BILGI_PARITE ; SADECE_KARDA_CIKIS,5m,-0.25,31,0,0,,1
+strategies/freqai-models/ReinforcedAverageStrategy.py,freqai-models,K122,KULLANILABILIR,,,4h,-0.2,0,0,0,,0
+strategies/freqai-models/ReinforcedQuickie.py,freqai-models,K038,KULLANILABILIR,,INFORMATIVE_ELLE_MERGE ; INTERPOLATE,5m,-0.05,0,0,0,,0
+strategies/freqai-models/ReinforcedSmoothScalp.py,freqai-models,K123,KULLANILABILIR,,,1m,-0.1,18,0,0,,1
+strategies/gkd/GKD_Baseline.py,gkd,K125,KULLANILABILIR,,,1h,-0.1,0,0,0,,0
+strategies/gkd/GKD_BaselineAllMAs.py,gkd,K125,KULLANILABILIR,,ROI_BAGIMLI,1h,-0.1,0,0,0,,0
+strategies/gkd/GKD_C.py,gkd,K126,KULLANILABILIR,,,1h,-0.1,21,0,0,,0
+strategies/gkd/GKD_FisherTransform.py,gkd,K124,KULLANILABILIR,,INFORMATIVE_TF,1h,-0.1,7,0,0,,0
+strategies/gkd/GKD_FisherTransformMTF.py,gkd,K124,KULLANILABILIR,,INFORMATIVE_TF,1h,-0.1,11,0,0,,0
+strategies/gkd/GKD_FisherTransform__2.py,gkd,K124,KULLANILABILIR,,,4h,-0.1,7,0,0,,1
+strategies/gkd/GKD_HurstExponent.py,gkd,K127,KULLANILABILIR,,,1h,-0.1,0,0,0,,0
+strategies/gkd/GKD_PFE.py,gkd,K128,KULLANILABILIR,,,1h,-0.1,0,0,0,,0
+strategies/grid-dca/AverageStrategy.py,grid-dca,K129,KULLANILABILIR,,,4h,-0.2,2,0,0,,0
+strategies/heikin-ashi/HSI.py,heikin-ashi,K131,KULLANILABILIR,,,5m,-0.01,0,0,0,,0
+strategies/heikin-ashi/HSI__2.py,heikin-ashi,K131,KULLANILABILIR,,,5m,-0.01,0,0,0,,1
+strategies/heikin-ashi/Strategy001_custom_exit.py,heikin-ashi,K130,KULLANILABILIR,,INFORMATIVE_TF ; BTC_BILGI_PARITE ; SADECE_KARDA_CIKIS,5m,-0.1,0,0,0,,0
+strategies/heikin-ashi/Strategy001_custom_sell.py,heikin-ashi,K130,KULLANILABILIR,,INFORMATIVE_TF ; BTC_BILGI_PARITE ; SADECE_KARDA_CIKIS,5m,-0.1,0,0,0,,4
+strategies/heikin-ashi/cryptohassle.py,heikin-ashi,K132,KULLANILABILIR,,,1h,-0.2,0,0,0,,1
+strategies/heikin-ashi/grad.py,heikin-ashi,K133,KULLANILABILIR,,SL_GENIS,1h,-0.35,23,0,0,,0
+strategies/heikin-ashi/heikin.py,heikin-ashi,K134,KULLANILABILIR,,LA_ORTA ; STOPSUZ,1h,-0.99,0,0,1,,1
+strategies/heikin-ashi/tacos1.py,heikin-ashi,K135,KULLANILABILIR,,,6h,-0.03,6,0,0,,0
+strategies/hyperopt-and-tools/Freqtrade_backtest_validation_freqtrade1.py,hyperopt-and-tools,K137,KULLANILABILIR,,STOPSUZ,1h,-0.9,0,0,0,,0
+strategies/ichimoku/GodStra.py,ichimoku,K143,KULLANILABILIR,,SL_GENIS,12h,-0.34549,0,0,0,,0
+strategies/ichimoku/INSIDEUP.py,ichimoku,K144,KULLANILABILIR,,SL_TABAN_-0.99_TRAILING ; ROI_BAGIMLI,1d,-0.99,0,0,0,,2
+strategies/ichimoku/Ichess.py,ichimoku,K145,KULLANILABILIR,,LA_ORTA ; SL_GENIS,1d,-0.314,4,0,0,,1
+strategies/ichimoku/Ichi.py,ichimoku,K146,KULLANILABILIR,,,15m,-0.2,0,0,0,,1
+strategies/ichimoku/Ichimoku.py,ichimoku,K147,KULLANILABILIR,,INFORMATIVE_TF ; SADECE_KARDA_CIKIS,5m,-0.1,0,0,0,,1
+strategies/ichimoku/Ichimoku_SenkouSpanCross.py,ichimoku,K148,KULLANILABILIR,,SL_TABAN_-0.99_TRAILING ; INFORMATIVE_TF,4h,-0.99,0,0,0,,0
+strategies/ichimoku/Ichimoku_v12.py,ichimoku,K149,KULLANILABILIR,,STOPSUZ ; INFORMATIVE_TF,4h,-1,0,0,0,,1
+strategies/ichimoku/Ichimoku_v12__2.py,ichimoku,K150,KULLANILABILIR,,SL_TABAN_-0.99_CUSTOM_SL ; HP_COK(32) ; SADECE_KARDA_CIKIS,4h,-1,32,0,0,,2
+strategies/ichimoku/Ichimoku_v30.py,ichimoku,K139,KULLANILABILIR,,STOPSUZ ; INFORMATIVE_TF,4h,-1,0,0,0,,1
+strategies/ichimoku/Ichimoku_v31.py,ichimoku,K151,KULLANILABILIR,,STOPSUZ ; INFORMATIVE_TF,1h,-0.99,0,0,0,,1
+strategies/ichimoku/Ichimoku_v32.py,ichimoku,K152,KULLANILABILIR,,STOPSUZ ; INFORMATIVE_TF,4h,-1,0,0,0,,1
+strategies/ichimoku/Ichimoku_v33.py,ichimoku,K139,KULLANILABILIR,,STOPSUZ ; INFORMATIVE_TF,4h,-1,0,0,0,,1
+strategies/ichimoku/Ichimoku_v37.py,ichimoku,K153,KULLANILABILIR,,STOPSUZ ; INFORMATIVE_TF,4h,-0.99,0,0,0,,2
+strategies/ichimoku/MacheteV8b.py,ichimoku,K154,KULLANILABILIR,,HP_COK(29) ; INFORMATIVE_TF ; EK_VERI:orderbook ; EK_VERI:ticker,15m,-0.1,29,0,0,,1
+strategies/ichimoku/MacheteV8bRallimod2.py,ichimoku,K155,KULLANILABILIR,,INFORMATIVE_TF ; EK_VERI:orderbook ; EK_VERI:ticker,5m,-0.05,20,0,0,,1
+strategies/ichimoku/NowoIchimoku1hV1.py,ichimoku,K140,KULLANILABILIR,,,1h,-0.08,0,0,0,,0
+strategies/ichimoku/NowoIchimoku1hV2.py,ichimoku,K140,KULLANILABILIR,,SL_GENIS ; ROI_BAGIMLI,1h,-0.345,5,0,0,,0
+strategies/ichimoku/NowoIchimoku5mV2.py,ichimoku,K156,KULLANILABILIR,,INFORMATIVE_TF,5m,-0.293,5,0,0,,0
+strategies/ichimoku/Obelisk_Ichimoku_Slow_v1_3.py,ichimoku,K157,KULLANILABILIR,,LA_ORTA ; SL_TABAN_-0.99_TRAILING ; INFORMATIVE_TF,1h,-0.99,0,0,1,,1
+strategies/ichimoku/Obelisk_Ichimoku_ZEMA_v1.py,ichimoku,K158,KULLANILABILIR,,LA_ORTA ; INFORMATIVE_TF,5m,-0.294,4,0,1,,2
+strategies/ichimoku/Stavix2.py,ichimoku,K159,KULLANILABILIR,,,1m,-0.1,0,0,0,,1
+strategies/ichimoku/conny.py,ichimoku,K160,KULLANILABILIR,,INFORMATIVE_TF,15m,-0.0203,0,0,0,,1
+strategies/ichimoku/epretrace.py,ichimoku,K161,KULLANILABILIR,,SL_TABAN_-0.99_CUSTOM_SL,5m,-0.999,6,0,0,,1
+strategies/ichimoku/ichiV1.py,ichimoku,K138,KULLANILABILIR,,,5m,-0.275,0,0,0,,3
+strategies/ichimoku/ichiV1_Marius.py,ichimoku,K446,DCA_POZISYON_BUYUTME,adjust_trade_position (pozisyon buyutme),LA_ORTA ; ROI_BAGIMLI ; INFORMATIVE_TF ; BTC_BILGI_PARITE,5m,-0.275,20,0,1,,2
+strategies/moving-average/ActionZone.py,moving-average,K172,KULLANILABILIR,,SL_TABAN_-0.99_CUSTOM_SL ; INFORMATIVE_TF ; BTC_BILGI_PARITE,1d,-1.0,0,0,0,,0
+strategies/moving-average/Chispei.py,moving-average,K173,KULLANILABILIR,,SL_GENIS,4h,-0.32336,0,0,0,,1
+strategies/moving-average/CryptoFrogOffset.py,moving-average,K323,KULLANILABILIR,,LA_ORTA ; SL_IFADE ; HP_COK(656) ; INFORMATIVE_TF ; BTC_BILGI_PARITE ; EK_VERI:orderbook ; EK_VERI:ticker,5m,param/ifade,656,0,1,,0
+strategies/moving-average/Diamond.py,moving-average,K174,KULLANILABILIR,,,5m,-0.271,8,0,0,,0
+strategies/moving-average/DoubleEMACrossoverWithTrend.py,moving-average,K175,KULLANILABILIR,,,1h,-0.2,0,0,0,,1
+strategies/moving-average/EMA50.py,moving-average,K176,KULLANILABILIR,,SL_GENIS ; INFORMATIVE_TF ; BTC_BILGI_PARITE ; SADECE_KARDA_CIKIS,5m,-0.333,16,0,0,,1
+strategies/moving-average/EMA520015_V17.py,moving-average,K177,KULLANILABILIR,,,4h,-0.1,0,0,0,,1
+strategies/moving-average/EMABreakout.py,moving-average,K178,KULLANILABILIR,,SL_GENIS ; INFORMATIVE_TF ; BTC_BILGI_PARITE ; SADECE_KARDA_CIKIS,5m,-0.333,3,0,0,,1
+strategies/moving-average/EMAPriceCrossoverWithThresh.py,moving-average,K179,KULLANILABILIR,,,1h,-0.15,0,0,0,,1
+strategies/moving-average/EMASkipPump.py,moving-average,K180,KULLANILABILIR,,,5m,-0.05,0,0,0,,0
+strategies/moving-average/EMAVolume.py,moving-average,K181,KULLANILABILIR,,,15m,-0.2,0,0,0,,1
+strategies/moving-average/EMA_CROSSOVER_STRATEGY.py,moving-average,K182,KULLANILABILIR,,INFORMATIVE_TF ; BTC_BILGI_PARITE,5m,-0.1,0,0,0,,1
+strategies/moving-average/HansenSmaOffsetV1.py,moving-average,K183,KULLANILABILIR,,LA_ORTA ; STOPSUZ,15m,-99,0,0,1,,1
+strategies/moving-average/HyperStra_GSN_SMAOnly.py,moving-average,K455,LOOKAHEAD_YUKSEK,LA:normalize_tum_veri,LA_ORTA,5m,-0.05,24,0,1,normalize_tum_veri,2
+strategies/moving-average/HyperStra_SMAOnly.py,moving-average,K455,LOOKAHEAD_YUKSEK,LA:normalize_tum_veri,LA_ORTA,5m,-0.05,24,0,1,normalize_tum_veri,1
+strategies/moving-average/InformativeSample.py,moving-average,K184,KULLANILABILIR,,INFORMATIVE_TF ; BTC_BILGI_PARITE ; SADECE_KARDA_CIKIS,5m,-0.1,0,0,0,,0
+strategies/moving-average/LookaheadStrategy.py,moving-average,K459,LOOKAHEAD_YUKSEK,LA:freqtrade lookahead test stratejisi (kasitli lookahead),,5m,-0.194,0,0,0,,1
+strategies/moving-average/MSO.py,moving-average,K185,KULLANILABILIR,,,1h,-0.1,7,0,0,,0
+strategies/moving-average/MultiMA_TSL.py,moving-average,K186,KULLANILABILIR,,HP_COK(26),5m,-0.15,26,0,0,,1
+strategies/moving-average/MultiMA_TSL3.py,moving-average,K187,KULLANILABILIR,,LA_ORTA ; INFORMATIVE_TF,5m,-0.15,0,0,1,,1
+strategies/moving-average/MultiMA_TSL3_Mod.py,moving-average,K188,KULLANILABILIR,,LA_ORTA,5m,-0.15,24,0,1,,0
+strategies/moving-average/MultiMa.py,moving-average,K189,KULLANILABILIR,,SL_GENIS,4h,-0.345,4,0,0,,0
+strategies/moving-average/MultiOffsetLamboV0.py,moving-average,K190,KULLANILABILIR,,SL_GENIS,5m,-0.5,16,0,0,,1
+strategies/moving-average/NFI46Offset.py,moving-average,K211,KULLANILABILIR,,STOPSUZ ; HP_COK(279) ; INFORMATIVE_TF,5m,-0.99,279,0,0,,1
+strategies/moving-average/NFI46OffsetHOA1.py,moving-average,K211,KULLANILABILIR,,STOPSUZ ; HP_COK(279) ; INFORMATIVE_TF,5m,-0.99,279,0,0,,1
+strategies/moving-average/NotAnotherSMAOffSetStrategy_V2.py,moving-average,K102,KULLANILABILIR,,SL_GENIS,5m,-0.35,10,0,0,,2
+strategies/moving-average/NotAnotherSMAOffsetStrategy.py,moving-average,K102,KULLANILABILIR,,SL_GENIS,5m,-0.35,10,0,0,,1
+strategies/moving-average/NotAnotherSMAOffsetStrategyHO.py,moving-average,K102,KULLANILABILIR,,SL_GENIS,5m,-0.35,10,0,0,,1
+strategies/moving-average/NotAnotherSMAOffsetStrategyHOv3.py,moving-average,K102,KULLANILABILIR,,SL_GENIS,5m,-0.3,10,0,0,,1
+strategies/moving-average/NotAnotherSMAOffsetStrategyLite.py,moving-average,K191,KULLANILABILIR,,,5m,-0.1,4,0,0,,1
+strategies/moving-average/NotAnotherSMAOffsetStrategyModHO.py,moving-average,K102,KULLANILABILIR,,SL_GENIS,5m,-0.32,8,0,0,,1
+strategies/moving-average/NotAnotherSMAOffsetStrategyModHO_LamineDz_20210901.py,moving-average,K102,KULLANILABILIR,,SL_TABAN_-0.99_CUSTOM_SL,5m,-0.9,8,0,0,,1
+strategies/moving-average/NotAnotherSMAOffsetStrategyX1.py,moving-average,K102,KULLANILABILIR,,SL_GENIS,5m,-0.35,15,0,0,,1
+strategies/moving-average/NotAnotherSMAOffsetStrategy_uzi.py,moving-average,K102,KULLANILABILIR,,,5m,-0.07,8,0,0,,1
+strategies/moving-average/NotAnotherSMAOffsetStrategy_uzi3.py,moving-average,K192,KULLANILABILIR,,ILOC_SON_SATIR,5m,-0.1,20,0,0,,1
+strategies/moving-average/ObeliskIM_v1_1.py,moving-average,K193,KULLANILABILIR,,,5m,-0.04,0,0,0,,1
+strategies/moving-average/ObeliskRSI_v6_1.py,moving-average,K194,KULLANILABILIR,,SL_GENIS,5m,-0.3,0,0,0,,1
+strategies/moving-average/Obelisk_3EMA_StochRSI_ATR.py,moving-average,K195,KULLANILABILIR,,SL_TABAN_-0.99_CUSTOM_SL ; INFORMATIVE_TF,5m,-0.99,0,0,0,,1
+strategies/moving-average/Obelisk_TradePro_Ichi_v1_1.py,moving-average,K163,KULLANILABILIR,,,1h,-0.015,0,0,0,,1
+strategies/moving-average/Obelisk_TradePro_Ichi_v2_1.py,moving-average,K163,KULLANILABILIR,,,1h,-0.075,0,0,0,,1
+strategies/moving-average/PumpDetector.py,moving-average,K196,KULLANILABILIR,,STOPSUZ,5m,-0.99,0,0,0,,1
+strategies/moving-average/Renko.py,moving-average,K197,KULLANILABILIR,,ILOC_SON_SATIR ; STOPSUZ ; SADECE_KARDA_CIKIS,15m,-100,0,0,0,,1
+strategies/moving-average/RobotradingBody.py,moving-average,K198,KULLANILABILIR,,STOPSUZ ; INFORMATIVE_TF,4h,-0.99,2,0,0,,1
+strategies/moving-average/SMAIP3.py,moving-average,K162,KULLANILABILIR,,SL_GENIS,5m,-0.331,8,0,0,,1
+strategies/moving-average/SMAIP3v2.py,moving-average,K162,KULLANILABILIR,,,5m,-0.23,8,0,0,,1
+strategies/moving-average/SMAOG.py,moving-average,K162,KULLANILABILIR,,,5m,-0.23,9,0,0,,1
+strategies/moving-average/SMAOPv1_TTF.py,moving-average,K102,KULLANILABILIR,,SL_GENIS ; INFORMATIVE_TF,5m,-0.5,10,0,0,,1
+strategies/moving-average/SMAOffset.py,moving-average,K199,KULLANILABILIR,,SL_GENIS,5m,-0.5,6,0,0,,1
+strategies/moving-average/SMAOffsetProtectOpt.py,moving-average,K200,KULLANILABILIR,,SL_GENIS ; INFORMATIVE_TF,5m,-0.5,9,0,0,,1
+strategies/moving-average/SMAOffsetProtectOptV0.py,moving-average,K102,KULLANILABILIR,,SL_GENIS ; INFORMATIVE_TF,5m,-0.5,11,0,0,,1
+strategies/moving-average/SMAOffsetProtectOptV1.py,moving-average,K102,KULLANILABILIR,,SL_GENIS ; INFORMATIVE_TF,5m,-0.5,7,0,0,,2
+strategies/moving-average/SMAOffsetProtectOptV1HO1.py,moving-average,K102,KULLANILABILIR,,SL_GENIS ; INFORMATIVE_TF,5m,-0.5,7,0,0,,1
+strategies/moving-average/SMAOffsetProtectOptV1Mod.py,moving-average,K102,KULLANILABILIR,,SL_GENIS ; INFORMATIVE_TF,5m,-0.5,7,0,0,,1
+strategies/moving-average/SMAOffsetProtectOptV1Mod2.py,moving-average,K102,KULLANILABILIR,,SL_GENIS ; INFORMATIVE_TF,5m,-0.5,0,0,0,,0
+strategies/moving-average/SMAOffsetProtectOptV1_kkeue_20210619.py,moving-average,K102,KULLANILABILIR,,SL_GENIS ; INFORMATIVE_TF,5m,-0.5,7,0,0,,0
+strategies/moving-average/SMAOffsetV2.py,moving-average,K201,KULLANILABILIR,,INFORMATIVE_TF,5m,-0.2,0,0,0,,1
+strategies/moving-average/UniversalMACD.py,moving-average,K202,KULLANILABILIR,,SL_GENIS ; ROI_BAGIMLI,5m,-0.318,4,0,0,,0
+strategies/moving-average/UziChan.py,moving-average,K015,KULLANILABILIR,,ILOC_SON_SATIR,5m,-0.1,0,0,0,,1
+strategies/moving-average/UziChan2.py,moving-average,K015,KULLANILABILIR,,ILOC_SON_SATIR,1m,-0.1,0,0,0,,1
+strategies/moving-average/ema.py,moving-average,K203,KULLANILABILIR,,STOPSUZ,5m,-1,0,0,0,,1
+strategies/moving-average/hansencandlepatternV1.py,moving-average,K204,KULLANILABILIR,,LA_ORTA,1h,-0.1,0,0,1,,1
+strategies/moving-average/mabStra.py,moving-average,K205,KULLANILABILIR,,,4h,-0.128,10,0,0,,0
+strategies/moving-average/moonhouse.py,moving-average,K206,KULLANILABILIR,,SL_GENIS,1d,-0.318,0,0,0,,2
+strategies/murrey-gann/OmaGann.py,murrey-gann,K208,KULLANILABILIR,,,1h,-0.1,3,0,0,,0
+strategies/murrey-gann/OmaGann__2.py,murrey-gann,K208,KULLANILABILIR,,,30m,-0.1,3,0,0,,1
+strategies/murrey-gann/TD.py,murrey-gann,K209,KULLANILABILIR,,ADJUST_ETKISIZ ; MAX_ADJ_ATANMIS ; SL_GENIS,2h,-0.4,6,0,0,,0
+strategies/nostalgia-for-infinity/NFI46.py,nostalgia-for-infinity,K211,KULLANILABILIR,,STOPSUZ ; HP_COK(263) ; INFORMATIVE_TF,5m,-0.99,263,0,0,,1
+strategies/nostalgia-for-infinity/NFINextMOHO.py,nostalgia-for-infinity,K210,KULLANILABILIR,,STOPSUZ ; HP_COK(315) ; INFORMATIVE_TF ; BTC_BILGI_PARITE,5m,-0.99,315,0,0,,1
+strategies/nostalgia-for-infinity/NFINextMOHO2.py,nostalgia-for-infinity,K210,KULLANILABILIR,,STOPSUZ ; HP_COK(315) ; INFORMATIVE_TF ; BTC_BILGI_PARITE,5m,-0.99,315,0,0,,1
+strategies/nostalgia-for-infinity/NFINextMultiOffsetAndHO.py,nostalgia-for-infinity,K212,KULLANILABILIR,,STOPSUZ ; HP_COK(983) ; INFORMATIVE_TF ; BTC_BILGI_PARITE,5m,-0.99,983,0,0,,0
+strategies/nostalgia-for-infinity/NFINextMultiOffsetAndHO2.py,nostalgia-for-infinity,K212,KULLANILABILIR,,SL_TABAN_-0.99_TRAILING ; HP_COK(1041) ; INFORMATIVE_TF ; BTC_BILGI_PARITE,5m,-0.99,1041,0,0,,0
+strategies/nostalgia-for-infinity/NfiNextModded.py,nostalgia-for-infinity,K216,KULLANILABILIR,,LA_ORTA ; SL_GENIS ; INFORMATIVE_TF ; BTC_BILGI_PARITE,5m,-0.5,0,0,1,,1
+strategies/nostalgia-for-infinity/NostalgiaForInfinityNext.py,nostalgia-for-infinity,K212,KULLANILABILIR,,STOPSUZ ; HP_COK(1179) ; INFORMATIVE_TF ; BTC_BILGI_PARITE,5m,-0.99,1179,0,0,,0
+strategies/nostalgia-for-infinity/NostalgiaForInfinityNextV7155.py,nostalgia-for-infinity,K217,KULLANILABILIR,,LA_ORTA ; SL_GENIS ; INFORMATIVE_TF ; BTC_BILGI_PARITE,5m,-0.5,0,0,1,,1
+strategies/nostalgia-for-infinity/NostalgiaForInfinityNext_ChangeToTower_V5_2.py,nostalgia-for-infinity,K213,KULLANILABILIR,,STOPSUZ ; HP_COK(495) ; INFORMATIVE_TF ; BTC_BILGI_PARITE,5m,-0.99,495,0,0,,0
+strategies/nostalgia-for-infinity/NostalgiaForInfinityNext_ChangeToTower_V5_3.py,nostalgia-for-infinity,K213,KULLANILABILIR,,STOPSUZ ; HP_COK(495) ; INFORMATIVE_TF ; BTC_BILGI_PARITE,5m,-0.99,495,0,0,,0
+strategies/nostalgia-for-infinity/NostalgiaForInfinityNext_ChangeToTower_V6.py,nostalgia-for-infinity,K213,KULLANILABILIR,,STOPSUZ ; HP_COK(495) ; INFORMATIVE_TF ; BTC_BILGI_PARITE,5m,-0.99,495,0,0,,0
+strategies/nostalgia-for-infinity/NostalgiaForInfinityNext_maximizer.py,nostalgia-for-infinity,K215,KULLANILABILIR,,STOPSUZ ; INFORMATIVE_TF ; BTC_BILGI_PARITE,5m,-0.99,0,0,0,,0
+strategies/nostalgia-for-infinity/NostalgiaForInfinityV1.py,nostalgia-for-infinity,K214,KULLANILABILIR,,SL_GENIS ; INFORMATIVE_TF,5m,-0.36,0,0,0,,1
+strategies/nostalgia-for-infinity/NostalgiaForInfinityV2.py,nostalgia-for-infinity,K214,KULLANILABILIR,,STOPSUZ ; INFORMATIVE_TF,5m,-1.0,11,0,0,,1
+strategies/nostalgia-for-infinity/NostalgiaForInfinityV3.py,nostalgia-for-infinity,K218,KULLANILABILIR,,STOPSUZ ; HP_COK(79) ; INFORMATIVE_TF,5m,-0.99,79,0,0,,1
+strategies/nostalgia-for-infinity/NostalgiaForInfinityV4.py,nostalgia-for-infinity,K211,KULLANILABILIR,,STOPSUZ ; HP_COK(139) ; INFORMATIVE_TF,5m,-1.0,139,0,0,,1
+strategies/nostalgia-for-infinity/NostalgiaForInfinityV4HO.py,nostalgia-for-infinity,K211,KULLANILABILIR,,STOPSUZ ; HP_COK(139) ; INFORMATIVE_TF,5m,-1.0,139,0,0,,1
+strategies/nostalgia-for-infinity/NostalgiaForInfinityV5.py,nostalgia-for-infinity,K210,KULLANILABILIR,,STOPSUZ ; HP_COK(179) ; INFORMATIVE_TF,5m,-0.99,179,0,0,,1
+strategies/nostalgia-for-infinity/NostalgiaForInfinityV5MultiOffsetAndHO.py,nostalgia-for-infinity,K210,KULLANILABILIR,,STOPSUZ ; HP_COK(195) ; INFORMATIVE_TF,5m,-0.99,195,0,0,,1
+strategies/nostalgia-for-infinity/NostalgiaForInfinityV5MultiOffsetAndHO2.py,nostalgia-for-infinity,K210,KULLANILABILIR,,STOPSUZ ; HP_COK(195) ; INFORMATIVE_TF,5m,-0.99,195,0,0,,1
+strategies/nostalgia-for-infinity/NostalgiaForInfinityV6.py,nostalgia-for-infinity,K210,KULLANILABILIR,,STOPSUZ ; HP_COK(689) ; INFORMATIVE_TF,5m,-0.99,689,0,0,,1
+strategies/nostalgia-for-infinity/NostalgiaForInfinityV6HO.py,nostalgia-for-infinity,K210,KULLANILABILIR,,STOPSUZ ; HP_COK(689) ; INFORMATIVE_TF,5m,-0.99,689,0,0,,1
+strategies/nostalgia-for-infinity/NostalgiaForInfinityV7.py,nostalgia-for-infinity,K210,KULLANILABILIR,,STOPSUZ ; HP_COK(809) ; INFORMATIVE_TF,5m,-0.99,809,0,0,,1
+strategies/nostalgia-for-infinity/NostalgiaForInfinityV7_7_2.py,nostalgia-for-infinity,K215,KULLANILABILIR,,STOPSUZ ; INFORMATIVE_TF ; BTC_BILGI_PARITE,5m,-0.99,0,0,0,,0
+strategies/nostalgia-for-infinity/NostalgiaForInfinityV7_SMA.py,nostalgia-for-infinity,K104,KULLANILABILIR,,SL_TABAN_-0.99_TRAILING ; HP_COK(809) ; INFORMATIVE_TF,5m,-0.99,809,0,0,,1
+strategies/nostalgia-for-infinity/NostalgiaForInfinityV7_SMAv2.py,nostalgia-for-infinity,K104,KULLANILABILIR,,SL_TABAN_-0.99_TRAILING ; HP_COK(809) ; INFORMATIVE_TF,5m,-0.99,809,0,0,,0
+strategies/nostalgia-for-infinity/NostalgiaForInfinityV7_SMAv2_1.py,nostalgia-for-infinity,K104,KULLANILABILIR,,SL_TABAN_-0.99_TRAILING ; HP_COK(809) ; INFORMATIVE_TF,5m,-0.99,809,0,0,,2
+strategies/nostalgia-for-infinity/NostalgiaForInfinityX2.py,nostalgia-for-infinity,K219,KULLANILABILIR,,LA_ORTA ; STOPSUZ ; INFORMATIVE_TF ; BTC_BILGI_PARITE,5m,-0.99,0,0,1,,0
+strategies/orderbook-volume/Astro.py,orderbook-volume,K493,DCA_POZISYON_BUYUTME,adjust_trade_position (pozisyon buyutme),SL_TABAN_-0.99_CUSTOM_SL ; SADECE_KARDA_CIKIS,1d,-0.99,16,0,0,,0
+strategies/orderbook-volume/ImpulseV1.py,orderbook-volume,K494,DCA_POZISYON_BUYUTME,adjust_trade_position (pozisyon buyutme),SADECE_KARDA_CIKIS ; EK_VERI:ticker,5m,-0.09,17,0,0,,1
+strategies/orderbook-volume/NASOSv5_mod1_DanMod.py,orderbook-volume,K223,KULLANILABILIR,,SL_GENIS ; INFORMATIVE_TF,5m,-0.3,13,0,0,,2
+strategies/orderbook-volume/PrawnstarOBV.py,orderbook-volume,K224,KULLANILABILIR,,ROI_BAGIMLI ; INFORMATIVE_TF ; SADECE_KARDA_CIKIS,1h,-0.15,0,0,0,,0
+strategies/orderbook-volume/VWAP.py,orderbook-volume,K225,KULLANILABILIR,,,5m,-0.15,0,0,0,,1
+strategies/orderbook-volume/redditMA.py,orderbook-volume,K226,KULLANILABILIR,,SL_GENIS ; INFORMATIVE_TF ; SADECE_KARDA_CIKIS,15m,-0.5,0,0,0,,1
+strategies/pivot-supertrend/A9AV.py,pivot-supertrend,K232,KULLANILABILIR,,,5m,-0.2,2,0,0,,0
+strategies/pivot-supertrend/A9AV_py4_variant.py,pivot-supertrend,K233,KULLANILABILIR,,SL_TANIMSIZ,,,4,0,0,,0
+strategies/pivot-supertrend/CTIBS.py,pivot-supertrend,K498,DCA_POZISYON_BUYUTME,adjust_trade_position (pozisyon buyutme),HP_COK(95) ; SADECE_KARDA_CIKIS,15m,-0.2,95,0,0,,1
+strategies/pivot-supertrend/GPTREV.py,pivot-supertrend,K234,KULLANILABILIR,,INFORMATIVE_TF ; BTC_BILGI_PARITE ; EK_VERI:dis_api,1m,-0.04,0,0,0,,0
+strategies/pivot-supertrend/HarmonicDivergence.py,pivot-supertrend,K227,KULLANILABILIR,,SL_GENIS ; PIVOT_RETRO_YAZMA,15m,-0.5,0,0,0,,1
+strategies/pivot-supertrend/LuxOSC.py,pivot-supertrend,K235,KULLANILABILIR,,STOPSUZ,5m,-0.99,5,0,0,,0
+strategies/pivot-supertrend/MostOfAll.py,pivot-supertrend,K236,KULLANILABILIR,,SADECE_KARDA_CIKIS,5m,-0.2,5,0,0,,1
+strategies/pivot-supertrend/PnF.py,pivot-supertrend,K503,DCA_POZISYON_BUYUTME,adjust_trade_position (pozisyon buyutme),STOPSUZ ; SADECE_KARDA_CIKIS,15m,-0.99,8,0,0,,0
+strategies/pivot-supertrend/SuperTrendPure.py,pivot-supertrend,K237,KULLANILABILIR,,,1h,-0.265,0,0,0,,1
+strategies/pivot-supertrend/Supertrend.py,pivot-supertrend,K229,KULLANILABILIR,,,1h,-0.265,12,0,0,,0
+strategies/pivot-supertrend/SupertrendStrategy.py,pivot-supertrend,K238,KULLANILABILIR,,STOPSUZ ; INFORMATIVE_TF ; BTC_BILGI_PARITE,1h,-0.99,2,0,0,,1
+strategies/pivot-supertrend/eltoro1_4_simple.py,pivot-supertrend,K112,KULLANILABILIR,,KISMI_CIKIS_ADJUST ; HP_COK(66) ; INFORMATIVE_TF ; BTC_BILGI_PARITE ; SADECE_KARDA_CIKIS,15m,-0.25,66,0,0,,0
+strategies/pivot-supertrend/slope_is_dopeCT.py,pivot-supertrend,K239,KULLANILABILIR,,POSADJ_ACIK_FN_YOK ; SADECE_KARDA_CIKIS,15m,-0.25,22,0,0,,1
+strategies/rsi-momentum/ADXMomentum.py,rsi-momentum,K259,KULLANILABILIR,,,1h,-0.25,0,0,0,,0
+strategies/rsi-momentum/ADX_15M_USDT.py,rsi-momentum,K260,KULLANILABILIR,,,15m,-0.1255,0,0,0,,1
+strategies/rsi-momentum/ADX_15M_USDT2.py,rsi-momentum,K261,KULLANILABILIR,,SL_GENIS,15m,-0.31941,0,0,0,,1
+strategies/rsi-momentum/ASDTSRockwellTrading.py,rsi-momentum,K262,KULLANILABILIR,,SL_GENIS,5m,-0.3,0,0,0,,0
+strategies/rsi-momentum/AdxSmas.py,rsi-momentum,K263,KULLANILABILIR,,,1h,-0.25,0,0,0,,0
+strategies/rsi-momentum/AwesomeMacd.py,rsi-momentum,K264,KULLANILABILIR,,,1h,-0.016,0,0,0,,1
+strategies/rsi-momentum/AwesomeMacd__2.py,rsi-momentum,K265,KULLANILABILIR,,,1h,-0.25,0,0,0,,0
+strategies/rsi-momentum/CCIStrategy.py,rsi-momentum,K266,KULLANILABILIR,,INFORMATIVE_ELLE_MERGE ; INTERPOLATE,1m,-0.02,0,0,0,,0
+strategies/rsi-momentum/CMCWinner.py,rsi-momentum,K267,KULLANILABILIR,,,15m,-0.05,0,0,0,,0
+strategies/rsi-momentum/Cci.py,rsi-momentum,K268,KULLANILABILIR,,INFORMATIVE_ELLE_MERGE ; INTERPOLATE,1m,-0.23,0,0,0,,1
+strategies/rsi-momentum/CofiBitStrategy.py,rsi-momentum,K269,KULLANILABILIR,,,5m,-0.25,3,0,0,,0
+strategies/rsi-momentum/CrossEMAStrategy.py,rsi-momentum,K001,KULLANILABILIR,,STOPSUZ ; INFORMATIVE_TF ; BTC_BILGI_PARITE,1h,-0.99,2,0,0,,1
+strategies/rsi-momentum/CustomStoplossWithPSAR.py,rsi-momentum,K270,KULLANILABILIR,,,1h,-0.2,0,0,0,,0
+strategies/rsi-momentum/DIV_v1.py,rsi-momentum,K271,KULLANILABILIR,,ROI_BAGIMLI,5m,-0.15,0,0,0,,0
+strategies/rsi-momentum/FixedRiskRewardLoss.py,rsi-momentum,K516,DIGER_KULLANILAMAZ,DIGER:sablon: her mumda al + ozel stop ornegi (giris mantigi yok),SL_TABAN_-0.99_CUSTOM_SL,,-0.9,0,0,0,,0
+strategies/rsi-momentum/ForexSignal.py,rsi-momentum,K272,KULLANILABILIR,,INFORMATIVE_TF,5m,-0.03,0,0,0,,1
+strategies/rsi-momentum/FrostAuraM21hStrategy.py,rsi-momentum,K273,KULLANILABILIR,,SL_GENIS ; INFORMATIVE_TF,15m,-0.44897,0,0,0,,1
+strategies/rsi-momentum/FrostAuraRandomStrategy.py,rsi-momentum,K517,DIGER_KULLANILAMAZ,DIGER:giris rastgele sayiya dayali,,1h,-0.231,4,0,0,,1
+strategies/rsi-momentum/KAMACCIRSI.py,rsi-momentum,K274,KULLANILABILIR,,SL_GENIS ; INFORMATIVE_TF ; BTC_BILGI_PARITE ; SADECE_KARDA_CIKIS,5m,-0.32982,0,0,0,,1
+strategies/rsi-momentum/MAC.py,rsi-momentum,K275,KULLANILABILIR,,INFORMATIVE_TF ; BTC_BILGI_PARITE,1d,-0.15,2,0,0,,1
+strategies/rsi-momentum/MACDCCI.py,rsi-momentum,K276,KULLANILABILIR,,SL_GENIS ; INFORMATIVE_TF,30m,-0.3,0,0,0,,0
+strategies/rsi-momentum/MACDCrossoverWithTrend.py,rsi-momentum,K277,KULLANILABILIR,,,1h,-0.2,0,0,0,,1
+strategies/rsi-momentum/MACDRSI200.py,rsi-momentum,K247,KULLANILABILIR,,,5m,-0.04032,0,0,0,,1
+strategies/rsi-momentum/MACDStrategy.py,rsi-momentum,K278,KULLANILABILIR,,SL_GENIS,5m,-0.3,2,0,0,,0
+strategies/rsi-momentum/MACDStrategy_crossed.py,rsi-momentum,K279,KULLANILABILIR,,SL_GENIS,5m,-0.3,0,0,0,,0
+strategies/rsi-momentum/MACD_EMA.py,rsi-momentum,K280,KULLANILABILIR,,,5m,-0.25,0,0,0,,2
+strategies/rsi-momentum/MACD_TRIPLE_MA.py,rsi-momentum,K281,KULLANILABILIR,,,5m,-0.03,0,0,0,,2
+strategies/rsi-momentum/MACD_TRI_EMA.py,rsi-momentum,K282,KULLANILABILIR,,,5m,-0.03,0,0,0,,1
+strategies/rsi-momentum/MADisplaceV3.py,rsi-momentum,K283,KULLANILABILIR,,INFORMATIVE_TF,5m,-0.2,12,0,0,,1
+strategies/rsi-momentum/Macd.py,rsi-momentum,K284,KULLANILABILIR,,INFORMATIVE_TF ; BTC_BILGI_PARITE,1h,-0.1,0,0,0,,1
+strategies/rsi-momentum/Maro4hMacdSd.py,rsi-momentum,K285,KULLANILABILIR,,,5m,-0.21611,0,0,0,,1
+strategies/rsi-momentum/Momentumv2.py,rsi-momentum,K286,KULLANILABILIR,,,4h,-0.08,4,0,0,,1
+strategies/rsi-momentum/MultiRSI.py,rsi-momentum,K287,KULLANILABILIR,,,5m,-0.05,0,0,0,,0
+strategies/rsi-momentum/Persia.py,rsi-momentum,K288,KULLANILABILIR,,HP_COK(1600) ; ROI_BAGIMLI,5m,-0.19,1600,0,0,,1
+strategies/rsi-momentum/RSI.py,rsi-momentum,K289,KULLANILABILIR,,STOPSUZ ; INFORMATIVE_TF ; SADECE_KARDA_CIKIS,15m,-0.99,0,0,0,,0
+strategies/rsi-momentum/RSIBB02.py,rsi-momentum,K027,KULLANILABILIR,,,1h,-0.12515406445006344,0,0,0,,1
+strategies/rsi-momentum/RSIDirectionalWithTrend.py,rsi-momentum,K290,KULLANILABILIR,,,1h,-0.1,0,0,0,,1
+strategies/rsi-momentum/RSIDirectionalWithTrendSlow.py,rsi-momentum,K291,KULLANILABILIR,,,1h,-0.2,0,0,0,,1
+strategies/rsi-momentum/RSIv2.py,rsi-momentum,K292,KULLANILABILIR,,STOPSUZ ; INFORMATIVE_TF,15m,-0.99,0,0,0,,0
+strategies/rsi-momentum/SRsi.py,rsi-momentum,K248,KULLANILABILIR,,INFORMATIVE_TF,1m,-0.15,0,0,0,,1
+strategies/rsi-momentum/StochRSITEMA.py,rsi-momentum,K293,KULLANILABILIR,,SADECE_KARDA_CIKIS,5m,-0.02205,0,0,0,,0
+strategies/rsi-momentum/SwingHigh.py,rsi-momentum,K294,KULLANILABILIR,,INFORMATIVE_TF,30m,-0.22274,0,0,0,,1
+strategies/rsi-momentum/SwingHighToSky.py,rsi-momentum,K295,KULLANILABILIR,,SL_GENIS ; INFORMATIVE_TF,15m,-0.34338,8,0,0,,2
+strategies/rsi-momentum/TheForce.py,rsi-momentum,K296,KULLANILABILIR,,INFORMATIVE_TF ; BTC_BILGI_PARITE,15m,-0.015,0,0,0,,1
+strategies/rsi-momentum/TrendFollowingStrategy_4.py,rsi-momentum,K341,KULLANILABILIR,,SHORT,5m,-0.2,0,0,0,,1
+strategies/rsi-momentum/Trend_Strength_Directional.py,rsi-momentum,K297,KULLANILABILIR,,SL_GENIS,15m,-0.314,10,0,0,,1
+strategies/rsi-momentum/TrixStrategy.py,rsi-momentum,K298,KULLANILABILIR,,STOPSUZ ; INFORMATIVE_TF ; BTC_BILGI_PARITE,1h,-0.99,2,0,0,,1
+strategies/rsi-momentum/TrixV15Strategy.py,rsi-momentum,K242,KULLANILABILIR,,SL_GENIS ; INFORMATIVE_TF ; BTC_BILGI_PARITE ; SADECE_KARDA_CIKIS,1h,-0.31,16,0,0,,1
+strategies/rsi-momentum/TrixV21Strategy.py,rsi-momentum,K242,KULLANILABILIR,,SL_GENIS ; SADECE_KARDA_CIKIS,1h,-0.31,21,0,0,,1
+strategies/rsi-momentum/TrixV23Strategy.py,rsi-momentum,K242,KULLANILABILIR,,SL_GENIS ; HP_COK(26) ; INFORMATIVE_TF ; BTC_BILGI_PARITE ; SADECE_KARDA_CIKIS,1h,-0.31,26,0,0,,1
+strategies/rsi-momentum/UltimateMomentumIndicator.py,rsi-momentum,K299,KULLANILABILIR,,STOPSUZ,5m,-0.99,6,0,0,,1
+strategies/rsi-momentum/Uptrend.py,rsi-momentum,K300,KULLANILABILIR,,LA_ORTA,5m,-0.1,4,0,1,,1
+strategies/rsi-momentum/YOLO.py,rsi-momentum,K301,KULLANILABILIR,,ROI_BAGIMLI,1m,-0.01,0,0,0,,1
+strategies/rsi-momentum/adaptive.py,rsi-momentum,K302,KULLANILABILIR,,,5m,-0.109,0,0,0,,1
+strategies/rsi-momentum/adx_opt_strat.py,rsi-momentum,K303,KULLANILABILIR,,SL_GENIS,1m,-0.32766,0,0,0,,1
+strategies/rsi-momentum/botbaby.py,rsi-momentum,K304,KULLANILABILIR,,INFORMATIVE_TF,30m,-0.007,0,0,0,,0
+strategies/rsi-momentum/e6v34.py,rsi-momentum,K305,KULLANILABILIR,,SL_GENIS,15m,-0.54,2,0,0,,1
+strategies/rsi-momentum/macd_recovery.py,rsi-momentum,K247,KULLANILABILIR,,,5m,-0.04032,0,0,0,,1
+strategies/rsi-momentum/multi_tf.py,rsi-momentum,K306,KULLANILABILIR,,INFORMATIVE_TF ; BTC_BILGI_PARITE,5m,-0.1,0,0,0,,0
+strategies/rsi-momentum/qrsi.py,rsi-momentum,K307,KULLANILABILIR,,INFORMATIVE_ELLE_MERGE,15m,-0.05,0,0,0,,0
+strategies/rsi-momentum/stratfib.py,rsi-momentum,K308,KULLANILABILIR,,INFORMATIVE_TF ; BTC_BILGI_PARITE,1h,-0.1,2,0,0,,0
+strategies/rsi-momentum/strato.py,rsi-momentum,K248,KULLANILABILIR,,INFORMATIVE_TF,1m,-0.1,0,0,0,,1
+strategies/samples-and-templates/SampleStrategy.py,samples-and-templates,K210,KULLANILABILIR,,STOPSUZ ; HP_COK(809) ; INFORMATIVE_TF,5m,-0.99,809,0,0,,1
+strategies/samples-and-templates/SampleStrategyV2.py,samples-and-templates,K309,KULLANILABILIR,,INFORMATIVE_TF ; EK_VERI:orderbook,5m,-0.2,3,0,0,,0
+strategies/samples-and-templates/Strategy001.py,samples-and-templates,K130,KULLANILABILIR,,INFORMATIVE_TF ; BTC_BILGI_PARITE ; SADECE_KARDA_CIKIS,5m,-0.1,0,0,0,,0
+strategies/samples-and-templates/Strategy002.py,samples-and-templates,K310,KULLANILABILIR,,INFORMATIVE_TF ; BTC_BILGI_PARITE ; SADECE_KARDA_CIKIS,5m,-0.1,0,0,0,,0
+strategies/samples-and-templates/Strategy003.py,samples-and-templates,K311,KULLANILABILIR,,INFORMATIVE_TF ; BTC_BILGI_PARITE ; SADECE_KARDA_CIKIS,5m,-0.1,0,0,0,,0
+strategies/samples-and-templates/Strategy004.py,samples-and-templates,K312,KULLANILABILIR,,INFORMATIVE_TF ; BTC_BILGI_PARITE ; SADECE_KARDA_CIKIS,5m,-0.1,0,0,0,,0
+strategies/samples-and-templates/Strategy005.py,samples-and-templates,K313,KULLANILABILIR,,INFORMATIVE_TF ; BTC_BILGI_PARITE ; SADECE_KARDA_CIKIS,5m,-0.1,8,0,0,,0
+strategies/scalping/FastSupertrend.py,scalping,K229,KULLANILABILIR,,,1h,-0.265,12,0,0,,1
+strategies/scalping/FastSupertrendOpt.py,scalping,K318,KULLANILABILIR,,,1h,-0.265,12,0,0,,2
+strategies/scalping/ForexRobootSuperScalper.py,scalping,K315,KULLANILABILIR,,SL_TABAN_-0.99_CUSTOM_SL,5m,-0.99,7,0,0,,0
+strategies/scalping/Quickie.py,scalping,K319,KULLANILABILIR,,,5m,-0.25,0,0,0,,0
+strategies/scalping/Scalp.py,scalping,K314,KULLANILABILIR,,,1m,-0.04,0,0,0,,0
+strategies/scalping/SmoothScalp.py,scalping,K314,KULLANILABILIR,,SL_GENIS,1m,-0.5,0,0,0,,0
+strategies/scalping/StrategyScalpingFast.py,scalping,K314,KULLANILABILIR,,SL_GENIS,1m,-0.5,0,0,0,,1
+strategies/scalping/StrategyScalpingFast2.py,scalping,K320,KULLANILABILIR,,SL_GENIS ; ROI_BAGIMLI,1m,-0.326,0,0,0,,1
+strategies/scalping/hlhb.py,scalping,K321,KULLANILABILIR,,SL_GENIS ; INFORMATIVE_TF,4h,-0.3211,0,0,0,,0
+strategies/schism-hyperion/Apollo11.py,schism-hyperion,K322,KULLANILABILIR,,,15m,-0.16,0,0,0,,0
+strategies/schism-hyperion/Schism.py,schism-hyperion,K519,DIGER_KULLANILAMAZ,DIGER:populate_* icinde islem verisi (trade_data/Trade) kullaniyor: backtestte anlamsiz/gecersiz,ILOC_SON_SATIR ; SL_GENIS ; INFORMATIVE_TF ; EK_VERI:orderbook ; EK_VERI:ticker,5m,-0.4,0,0,0,,1
+strategies/schism-hyperion/Schism2.py,schism-hyperion,K519,DIGER_KULLANILAMAZ,DIGER:populate_* icinde islem verisi (trade_data/Trade) kullaniyor: backtestte anlamsiz/gecersiz,ILOC_SON_SATIR ; SL_GENIS ; INFORMATIVE_TF ; BTC_BILGI_PARITE ; EK_VERI:orderbook ; EK_VERI:ticker,5m,-0.3,0,0,0,,1
+strategies/schism-hyperion/Schism3.py,schism-hyperion,K520,DIGER_KULLANILAMAZ,DIGER:populate_* icinde islem verisi (trade_data/Trade) kullaniyor: backtestte anlamsiz/gecersiz,ILOC_SON_SATIR ; SL_GENIS ; ROI_BAGIMLI ; INFORMATIVE_TF ; BTC_BILGI_PARITE ; EK_VERI:orderbook ; EK_VERI:ticker,5m,-0.3,0,0,0,,0
+strategies/schism-hyperion/Schism4.py,schism-hyperion,K521,DIGER_KULLANILAMAZ,DIGER:populate_* icinde islem verisi (trade_data/Trade) kullaniyor: backtestte anlamsiz/gecersiz,ILOC_SON_SATIR ; SL_GENIS ; ROI_BAGIMLI ; INFORMATIVE_TF ; BTC_BILGI_PARITE ; EK_VERI:orderbook ; EK_VERI:ticker,5m,-0.3,0,0,0,,1
+strategies/schism-hyperion/Schism5.py,schism-hyperion,K522,DIGER_KULLANILAMAZ,DIGER:populate_* icinde islem verisi (trade_data/Trade) kullaniyor: backtestte anlamsiz/gecersiz,ILOC_SON_SATIR ; SL_GENIS ; INFORMATIVE_TF ; SADECE_KARDA_CIKIS ; EK_VERI:orderbook ; EK_VERI:ticker,5m,-0.3,0,0,0,,1
+strategies/schism-hyperion/Schism6.py,schism-hyperion,K519,DIGER_KULLANILAMAZ,DIGER:populate_* icinde islem verisi (trade_data/Trade) kullaniyor: backtestte anlamsiz/gecersiz,ILOC_SON_SATIR ; SL_GENIS ; INFORMATIVE_TF ; EK_VERI:orderbook ; EK_VERI:ticker,5m,-0.5,0,0,0,,1
+strategies/schism-hyperion/apollo.py,schism-hyperion,K322,KULLANILABILIR,,,1h,-0.16,0,0,0,,1
+strategies/smart-money-concepts/BuyOnly.py,smart-money-concepts,K328,KULLANILABILIR,,ROI_BAGIMLI ; INFORMATIVE_TF ; BTC_BILGI_PARITE ; SADECE_KARDA_CIKIS ; EK_VERI:orderbook,15m,-0.1,0,0,0,,1
+strategies/smart-money-concepts/ClucFiatROI.py,smart-money-concepts,K329,KULLANILABILIR,,SL_GENIS ; EK_VERI:orderbook,5m,-0.34299,0,0,0,,1
+strategies/smart-money-concepts/ClucFiatSlow.py,smart-money-concepts,K093,KULLANILABILIR,,SL_GENIS ; EK_VERI:orderbook,5m,-0.34299,0,0,0,,1
+strategies/smart-money-concepts/CryptoFrog.py,smart-money-concepts,K323,KULLANILABILIR,,LA_ORTA ; SL_IFADE ; INFORMATIVE_TF ; BTC_BILGI_PARITE ; EK_VERI:orderbook ; EK_VERI:ticker,5m,param/ifade,8,0,1,,1
+strategies/smart-money-concepts/CryptoFrogHO.py,smart-money-concepts,K323,KULLANILABILIR,,LA_ORTA ; SL_IFADE ; INFORMATIVE_TF ; BTC_BILGI_PARITE ; EK_VERI:orderbook ; EK_VERI:ticker,5m,param/ifade,8,0,1,,0
+strategies/smart-money-concepts/CryptoFrogHO2.py,smart-money-concepts,K323,KULLANILABILIR,,LA_ORTA ; SL_IFADE ; INFORMATIVE_TF ; BTC_BILGI_PARITE ; EK_VERI:orderbook ; EK_VERI:ticker,5m,param/ifade,8,0,1,,0
+strategies/smart-money-concepts/CryptoFrogHO2A.py,smart-money-concepts,K323,KULLANILABILIR,,LA_ORTA ; SL_IFADE ; INFORMATIVE_TF ; BTC_BILGI_PARITE ; EK_VERI:orderbook ; EK_VERI:ticker,5m,param/ifade,8,0,1,,0
+strategies/smart-money-concepts/CryptoFrogHO3A1.py,smart-money-concepts,K323,KULLANILABILIR,,LA_ORTA ; SL_IFADE ; INFORMATIVE_TF ; BTC_BILGI_PARITE ; EK_VERI:orderbook ; EK_VERI:ticker,5m,param/ifade,8,0,1,,0
+strategies/smart-money-concepts/CryptoFrogHO3A2.py,smart-money-concepts,K323,KULLANILABILIR,,LA_ORTA ; SL_IFADE ; INFORMATIVE_TF ; BTC_BILGI_PARITE ; EK_VERI:orderbook ; EK_VERI:ticker,5m,param/ifade,8,0,1,,0
+strategies/smart-money-concepts/CryptoFrogHO3A3.py,smart-money-concepts,K323,KULLANILABILIR,,LA_ORTA ; SL_IFADE ; INFORMATIVE_TF ; BTC_BILGI_PARITE ; EK_VERI:orderbook ; EK_VERI:ticker,5m,param/ifade,8,0,1,,0
+strategies/smart-money-concepts/CryptoFrogHO3A4.py,smart-money-concepts,K323,KULLANILABILIR,,LA_ORTA ; SL_IFADE ; INFORMATIVE_TF ; BTC_BILGI_PARITE ; EK_VERI:orderbook ; EK_VERI:ticker,5m,param/ifade,8,0,1,,0
+strategies/smart-money-concepts/FRAYSTRAT.py,smart-money-concepts,K330,KULLANILABILIR,,INFORMATIVE_TF ; BTC_BILGI_PARITE ; EK_VERI:orderbook,15m,-0.1,2,0,0,,1
+strategies/smart-money-concepts/FVGChannel.py,smart-money-concepts,K331,KULLANILABILIR,,,1h,-0.1,3,0,0,,0
+strategies/smart-money-concepts/Fakebuy.py,smart-money-concepts,K526,DIGER_KULLANILAMAZ,DIGER:populate_* icinde islem verisi (trade_data/Trade) kullaniyor: backtestte anlamsiz/gecersiz,INFORMATIVE_TF ; EK_VERI:orderbook ; EK_VERI:ticker,5m,-0.085,0,0,0,,1
+strategies/smart-money-concepts/Guacamole.py,smart-money-concepts,K325,KULLANILABILIR,,SL_TABAN_-0.99_TRAILING ; EK_VERI:orderbook,5m,-0.99,0,0,0,,1
+strategies/smart-money-concepts/Hacklemore2.py,smart-money-concepts,K332,KULLANILABILIR,,SL_TABAN_-0.99_TRAILING ; EK_VERI:orderbook,15m,-0.99,0,0,0,,1
+strategies/smart-money-concepts/Hacklemore3.py,smart-money-concepts,K333,KULLANILABILIR,,SL_TABAN_-0.99_TRAILING ; EK_VERI:orderbook,5m,-0.99,0,0,0,,1
+strategies/smart-money-concepts/Kamaflage.py,smart-money-concepts,K325,KULLANILABILIR,,SL_TABAN_-0.99_TRAILING ; EK_VERI:orderbook,5m,-1,0,0,0,,1
+strategies/smart-money-concepts/Martin.py,smart-money-concepts,K324,KULLANILABILIR,,INFORMATIVE_TF ; BTC_BILGI_PARITE ; EK_VERI:orderbook,5m,-0.1,0,0,0,,1
+strategies/smart-money-concepts/MomStrategy.py,smart-money-concepts,K334,KULLANILABILIR,,STOPSUZ ; INFORMATIVE_TF ; BTC_BILGI_PARITE ; EK_VERI:orderbook,1h,-1,0,0,0,,1
+strategies/smart-money-concepts/PRICEFOLLOWING.py,smart-money-concepts,K326,KULLANILABILIR,,INFORMATIVE_TF ; BTC_BILGI_PARITE ; SADECE_KARDA_CIKIS ; EK_VERI:orderbook,5m,-0.1,6,0,0,,1
+strategies/smart-money-concepts/PRICEFOLLOWING2.py,smart-money-concepts,K326,KULLANILABILIR,,INFORMATIVE_TF ; BTC_BILGI_PARITE ; SADECE_KARDA_CIKIS ; EK_VERI:orderbook,15m,-0.1,6,0,0,,1
+strategies/smart-money-concepts/PRICEFOLLOWINGX.py,smart-money-concepts,K335,KULLANILABILIR,,SL_GENIS ; INFORMATIVE_TF ; SADECE_KARDA_CIKIS ; EK_VERI:orderbook,15m,-0.5,7,0,0,,1
+strategies/smart-money-concepts/SAR.py,smart-money-concepts,K324,KULLANILABILIR,,INFORMATIVE_TF ; BTC_BILGI_PARITE ; EK_VERI:orderbook,5m,-0.1,0,0,0,,1
+strategies/smart-money-concepts/Stinkfist.py,smart-money-concepts,K527,DIGER_KULLANILAMAZ,DIGER:populate_* icinde islem verisi (trade_data/Trade) kullaniyor: backtestte anlamsiz/gecersiz,ILOC_SON_SATIR ; SL_GENIS ; INFORMATIVE_TF ; EK_VERI:orderbook ; EK_VERI:ticker,5m,-0.4,0,0,0,,1
+strategies/smart-money-concepts/SuperHV27.py,smart-money-concepts,K528,DIGER_KULLANILAMAZ,DIGER:populate_* icinde islem verisi (trade_data/Trade) kullaniyor: backtestte anlamsiz/gecersiz,ILOC_SON_SATIR ; SL_GENIS ; EK_VERI:orderbook ; EK_VERI:ticker,5m,-0.4,0,0,0,,1
+strategies/smart-money-concepts/TEMA.py,smart-money-concepts,K324,KULLANILABILIR,,INFORMATIVE_TF ; BTC_BILGI_PARITE ; EK_VERI:orderbook,1m,-0.1,2,0,0,,1
+strategies/smart-money-concepts/flawless_lambo.py,smart-money-concepts,K336,KULLANILABILIR,,ILOC_SON_SATIR ; STOPSUZ ; INFORMATIVE_TF ; BTC_BILGI_PARITE ; EK_VERI:orderbook,15m,-1,2,0,0,,1
+strategies/smart-money-concepts/flawless_lambo__2.py,smart-money-concepts,K327,KULLANILABILIR,,INFORMATIVE_TF ; BTC_BILGI_PARITE ; SADECE_KARDA_CIKIS ; EK_VERI:orderbook,5m,-0.0625,8,0,0,,1
+strategies/smart-money-concepts/lambo_testing.py,smart-money-concepts,K327,KULLANILABILIR,,INFORMATIVE_TF ; BTC_BILGI_PARITE ; SADECE_KARDA_CIKIS ; EK_VERI:orderbook,5m,-0.0625,8,0,0,,0
+strategies/smart-money-concepts/stoploss.py,smart-money-concepts,K324,KULLANILABILIR,,INFORMATIVE_TF ; BTC_BILGI_PARITE ; EK_VERI:orderbook,5m,-0.1,0,0,0,,1
+strategies/ts-predict/TSPredict.py,ts-predict,K529,ML_FREQAI,"ML-kutuphane:lightgbm,sklearn,xgboost ; LA:negative_shift_var ; LA:global_scaler",INFORMATIVE_ELLE_MERGE ; INFORMATIVE_TF,1m,-0.2,15,0,0,negative_shift_var ; global_scaler,0
+strategies/two-candle/2Candle.py,two-candle,K337,KULLANILABILIR,,INFORMATIVE_TF,1h,-0.04,6,0,0,,1
+strategies/two-candle/TwoCandle.py,two-candle,K338,KULLANILABILIR,,,1h,-0.03,0,0,0,,0
+strategies/two-candle/TwoCandleTheory.py,two-candle,K339,KULLANILABILIR,,,5m,-0.1,2,0,0,,1
+strategies/uncategorized/AlwaysBuy.py,uncategorized,K533,DIGER_KULLANILAMAZ,DIGER:sablon: her mumda al (mantik yok),ROI_BAGIMLI,5m,-0.2,0,0,0,,1
+strategies/uncategorized/BreakEven.py,uncategorized,K534,DIGER_KULLANILAMAZ,DIGER:sablon: mantiksiz test stratejisi,,5m,-0.05,0,0,0,,0
+strategies/uncategorized/BuyAllSellAllStrategy.py,uncategorized,K535,DIGER_KULLANILAMAZ,DIGER:sablon: al-sat test stratejisi,,5m,-0.25,0,0,0,,1
+strategies/uncategorized/DoesNothingStrategy.py,uncategorized,K536,DIGER_KULLANILAMAZ,DIGER:sablon: hicbir sey yapmaz,,5m,-0.25,0,0,0,,0
+strategies/uncategorized/HilbertSineWave.py,uncategorized,K347,KULLANILABILIR,,,1h,-0.05,0,0,0,,1
+strategies/uncategorized/HourBasedStrategy.py,uncategorized,K348,KULLANILABILIR,,ROI_BAGIMLI,1h,-0.1,4,0,0,,0
+strategies/uncategorized/JustROCR.py,uncategorized,K340,KULLANILABILIR,,,1h,-0.2,0,0,0,,1
+strategies/uncategorized/JustROCR3.py,uncategorized,K340,KULLANILABILIR,,,5m,-0.01,0,0,0,,1
+strategies/uncategorized/JustROCR5.py,uncategorized,K349,KULLANILABILIR,,,1m,-0.01,0,0,0,,0
+strategies/uncategorized/JustROCR6.py,uncategorized,K340,KULLANILABILIR,,,1m,-0.01,0,0,0,,1
+strategies/uncategorized/MFI.py,uncategorized,K350,KULLANILABILIR,,,5m,-0.1,0,0,0,,1
+strategies/uncategorized/NormalizerStrategy.py,uncategorized,K343,KULLANILABILIR,,SL_TABAN_-0.99_CUSTOM_SL ; SADECE_KARDA_CIKIS,1h,-0.99,0,0,0,,1
+strategies/uncategorized/NormalizerStrategyHO2.py,uncategorized,K343,KULLANILABILIR,,SL_TABAN_-0.99_CUSTOM_SL ; SADECE_KARDA_CIKIS,1h,-0.99,0,0,0,,1
+strategies/uncategorized/PatternRecognition.py,uncategorized,K351,KULLANILABILIR,,ROI_BAGIMLI,1d,-0.288,2,0,0,,0
+strategies/uncategorized/PowerTower.py,uncategorized,K352,KULLANILABILIR,,,5m,-0.288,2,0,0,,0
+strategies/uncategorized/SlowPotato.py,uncategorized,K353,KULLANILABILIR,,SL_TABAN_-0.99_TRAILING ; SADECE_KARDA_CIKIS,5m,-0.99,0,0,0,,1
+strategies/uncategorized/Slowbro.py,uncategorized,K354,KULLANILABILIR,,STOPSUZ ; INFORMATIVE_TF ; SADECE_KARDA_CIKIS,1h,-0.99,0,0,0,,0
+strategies/uncategorized/TDSequentialStrategy.py,uncategorized,K355,KULLANILABILIR,,INFORMATIVE_TF ; BTC_BILGI_PARITE,1h,-0.05,0,0,0,,0
+strategies/uncategorized/TechnicalExampleStrategy.py,uncategorized,K356,KULLANILABILIR,,,5m,-0.05,0,0,0,,0
+strategies/uncategorized/TrailingBuyStrat2.py,uncategorized,K015,KULLANILABILIR,,ILOC_SON_SATIR ; SL_TANIMSIZ,,,0,0,0,,0
+strategies/uncategorized/XtraThicc.py,uncategorized,K357,KULLANILABILIR,,INFORMATIVE_TF ; SADECE_KARDA_CIKIS,5m,-0.1,0,0,0,,0
+strategies/wavetrend/Dyna_opti.py,wavetrend,K364,KULLANILABILIR,,ROI_BAGIMLI ; INFORMATIVE_TF ; EK_VERI:orderbook ; EK_VERI:ticker,5m,-0.28819,14,0,0,,0
+strategies/wavetrend/MarketChyperHyperStrategy.py,wavetrend,K358,KULLANILABILIR,,HP_COK(33) ; INFORMATIVE_TF ; BTC_BILGI_PARITE,1h,-0.12447,33,0,0,,0
+strategies/wavetrend/TRIWAVE.py,wavetrend,K359,KULLANILABILIR,,KISMI_CIKIS_ADJUST ; HP_COK(52) ; INFORMATIVE_TF ; BTC_BILGI_PARITE ; SADECE_KARDA_CIKIS,15m,-0.25,52,0,0,,2
+strategies/wavetrend/WTHO.py,wavetrend,K365,KULLANILABILIR,,,2h,-0.025,23,0,0,,0
+strategies/wavetrend/WaveTrendStra.py,wavetrend,K360,KULLANILABILIR,,,4h,-0.25,0,0,0,,1
+strategies/wavetrend/dualwave.py,wavetrend,K366,KULLANILABILIR,,KISMI_CIKIS_ADJUST ; HP_COK(67) ; INFORMATIVE_TF ; SADECE_KARDA_CIKIS,15m,-0.25,67,0,0,,1
+strategies/wavetrend/pcb20.py,wavetrend,K361,KULLANILABILIR,,,6h,-0.015,6,0,0,,0
+strategies/wavetrend/tacos.py,wavetrend,K361,KULLANILABILIR,,,1d,-0.015,6,0,0,,0
+strategies/wavetrend/wavetrend.py,wavetrend,K538,DCA_POZISYON_BUYUTME,adjust_trade_position (pozisyon buyutme),SL_GENIS ; SADECE_KARDA_CIKIS,1h,-0.4,6,0,0,,0
+strategies/wavetrend/wavetrend_rsi.py,wavetrend,K538,DCA_POZISYON_BUYUTME,adjust_trade_position (pozisyon buyutme),SL_GENIS ; SADECE_KARDA_CIKIS,1h,-0.4,9,0,0,,0
+strategies/wavetrend/wtc.py,wavetrend,K360,LOOKAHEAD_YUKSEK,LA:global_scaler,SKLEARN_YARDIMCI,30m,-0.128,12,0,0,global_scaler,2

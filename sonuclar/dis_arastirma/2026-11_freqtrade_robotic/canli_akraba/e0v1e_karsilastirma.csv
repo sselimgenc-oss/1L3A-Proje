@@ -1,0 +1,25 @@
+konu,bizim_e0v1en (d5_ek.py:574-607),"ssssi E0V1EN.py (ASIL KAYNAK, dry_run)",ssssi E0V1E.py (buy1_and_buynew),Robotic E0V1E.py,Robotic E0V1E_53_Sharpe.py,Robotic E0V1E__2.py,Robotic ClucHAnix_BB_RPB_MOD_E0V1E_ROI.py,not
+zaman dilimi,15m (24s=96 mum),5m (24s=288 mum),5m,5m,5m,5m,5m,Bizde TF 3 kat büyük: RSI4/CTI20/SMA15 mum sayıları aynı ama süre 3 kat; orijinal dry-run kanıtı (197 işlem/35 gün) bize aktarılmaz
+startup mumu,yok (göstergeler min_periods),20,20,240,240,200,-,-
+buy_1: RSI20 düşüyor,evet (r20 < r20.shift),evet,evet,YORUMDA (kapalı),evet,evet,nfi32: evet,-
+buy_1: RSI4 eşiği,< 40,< 40,< 40,< 40 (tek koşul!),< 65,< 40,< 49 (nfi32),Robotic E0V1E.py girişi fiilen yalnız RSI4<40: kırpılmış/bozuk dosya
+buy_1: RSI14 eşiği,> 42,> 42,> 42,YORUMDA,> 19,> 42,"> 15 (kodda rsi_4 param. kullanılıyor = hata, 49)",-
+buy_1: SMA15 çarpanı,< 0.973,< 0.973,< 0.973,YORUMDA,< 0.961,< 0.973,< 0.93391,-
+buy_1: CTI(20),< 0.69,< 0.69,< 0.69,YORUMDA,< -0.04,< 0.69,"< -1.09639 (CTI [-1,1] aralığında: ulaşılamaz, iddia)",53_Sharpe CTI eşiği çok daha sıkı
+buy_new: RSI4/RSI14,< 34 / > 28,< 34 / > 28,< 34 / > 28,< 34 / YORUMDA,< 34 / > 28,< 34 / > 28,-,-
+buy_new: SMA15 çarpanı,< 0.96,< 0.96,< 0.96,YORUMDA,< 0.96,< 0.96,-,-
+buy_new: CTI,< 0.69,< 0.69,< 0.69,YORUMDA,< -0.04 (buy_cti_32 paylaşılıyor),< 0.69,-,-
+24s değişim filtresi,buy_1 ve buy_new: -%15..+%50 (varsayılan sabit),buy_1: -25.8..+122.9 ; buy_new: -24.3..+24.3 (json = dry-run değerleri); kod varsayılanı -15/+50,YOK,YOK,YOK,YOK,YOK,Bizim değerler json yerine kod varsayılanı; buy_1/buy_new ayrımı yok
+hacim>0 filtresi,yok,yok,yok,var,yok,var,"var (is_btc_safe içinde, kapalı)",Binance perp majörlerinde pratikte etkisiz
+sinyal geçişi (gecis),YOK: koşul sürdükçe her mumda sinyal (poz. varken yok sayılır),-,-,-,-,-,-,Motor tek pozisyon; etkisi küçük
+"çıkış: fastk (STOCHF 5,3)","fastk > 84 -> çık (kâr şartsız, buy_1 ve buy_new)",yalnız kâr>0 VE yalnız buy_new etiketli işlemde fastk>84,kâr>0 iken fastk>84 (her iki etiket),kâr>0 iken fastk>84 (sell_fastx=84),kâr>0 iken fastk>61,kâr>0 iken fastk>84,-,BİZDE zararda da fastk çıkışı var; orijinalde yalnız kârda
+çıkış: CCI(20)>80,cci > 80 -> çık (kâr şartsız),kâr > -%3 iken cci>80 (ad: cci_loss_sell),kâr > -%3 iken cci>80,cci>80 VE high>=giriş fiyatı,YOK (cci_loss: min_profit<=-%10 şartlı),cci>80 VE high>=giriş,-,Orijinalde -%3'ten kötü pozisyonda CCI çıkışı YOK (tutar); bizde stop %6 olduğundan kesilir
+çıkış: zaman,"tek: 28 mum (=7s) sonra çık, kâr şartsız",7s sonra kâr>=-%5 ise çık; 10s sonra kâr>=-%10 ise çık,YOK,YOK (ma120/240 mantığı),YOK,YOK (ma120/240 mantığı),-,Bizde zaman çıkışı zorunlu ve kâr/zarar bakmaz; orijinal zarardaki pozisyonu -%5 altındaysa 7s sonrası TUTAR
+ma120/ma240 çıkışları,yok,yok,yok,"var (TMP_HOLD global liste, restartta kaybolur)",var (min_profit<=-%5 şartı),var,-,Bizde yok
+stoploss,-%6 (kapanıştan; 15m için uyarlama),-%25 (stoploss_on_exchange False),-%25,-%25,-%25,-%25 (devre dışı notu),"custom stoploss, HSL -%13.4","EN BÜYÜK FARK: orijinal fiilen stopsuz (25%), bizde %6 sabit + boyut stopa göre"
+trailing,yok,trailing +%3 sonrası %0.2 (positive 0.002),+%3 sonrası %0.2,+%3 sonrası %0.3,+%3 sonrası %0.3,kapalı,kapalı,Bizde yok (CikisAyarlari ile verilebilir ama verilmedi)
+ROI,yok,"{""0"": 1} = fiilen yok","{""0"": 1}","{""0"": 1}","{""0"": 1}","{""0"": 1}",7 kademeli tablo (%10.3 -> 0 @399dk),Bizde de ROI yok
+cooldown (stop sonrası bekleme),yok (stop_sonrasi_bekleme_mum verilmedi),96 mum (=8s) CooldownPeriod,96 mum,yorumda,yok,18 mum,-,Bizde yok: stop sonrası aynı sembolde hemen yeniden giriş mümkün
+kaldıraç/pozisyon,"canlı: izole marj, risk %1,5, nominal<=1.5x",max_open_trades 2 (json),-,-,-,"kaldıraç 5, max 10",-,-
+"""53_Sharpe"" anlamı",-,-,-,-,"Dosyada açıklama YOK. Yorum: ""Optimized minimal ROI / stoploss / buy / sell parameters""; sınıf adı E0V1E_53_Sharpe. İddia: hyperopt'tan Sharpe kayıp fonksiyonuyla çıkan bir sonuç dosyası (""53"" muhtemelen epoch/sıra no ya da Sharpe değeri; KESİN DEĞİL, koddan çıkarılamaz). Parametreler (RSI4<65, RSI14>19, CTI<-0.04, sell_fastx 61) örneklem-içi uyumlu görünür",-,Hyperopt sonucu olması aşırı uyum riski demek (iddia)
+bellek/durum hatası riski,yok (saf fonksiyon),yok,yok,global TMP_HOLD listeleri,global TMP_HOLD listeleri,global TMP_HOLD,-,Orijinaller restartta durum kaybeder; bizimki yapısal olarak durumsuz
