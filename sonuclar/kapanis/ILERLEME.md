@@ -13,7 +13,7 @@ Son kontrol: 2026-11-13 11:39 UTC. **Görev bitmedi; gerçek piyasa verisi koşu
 
 | Katman | Girdi | Karar tablosu | Son karar | Kod/koşu | Durum |
 |---|---:|---:|---:|---|---|
-| K1 | 48 = 26 v3 + 18 ek ayar + 4 teknik hata | 48 | 2 kaynak/evren ret; 46 açık | 18 ayar okuyucusu kuruldu; 26 v3 kartı ve 18 ayar kaynağı satıra bağlandı; dört teknik hata için TF seçildi, koşu bağı yok | sürüyor |
+| K1 | 48 = 26 v3 + 18 ek ayar + 4 teknik hata | 48 | 2 kaynak/evren ret; 46 açık | 18 ayar okuyucusu kuruldu; 26 v3 kartı ve 18 ayar kaynağı satıra bağlandı; dört teknik hata için TF seçildi ve sentetik sinyal testi geçti; koşu bağı yok | sürüyor |
 | K2 | 7 kaynak biçimi (saatlik, T61, T21, S0002, S0005, Ichimoku, Argus); S0083 gibi alt kaynaklar K4'te | ayrı karar tablosu yok | 0 | S0002 ve S0005 yeni sınıfları + sentetik test | sürüyor |
 | K3 | 1.816 = 161 E + 35 belirsiz + 1.620 diğer D | 1.816 | 0 | kaynak uygunluğu incelenmedi | başlamadı |
 | K4 | 2.204 `benzer_hedef` dolu D (K2'ye ayrılan 5 dahil) | 2.204 | 0 | kaynak ↔ arşiv kodu tek tek karşılaştırılmadı | başlamadı |
@@ -31,7 +31,7 @@ Tablolardaki `INCELEME_BEKLIYOR` bir hüküm değildir. `kanit` sütununda eski 
 - `k1_karar.csv` içindeki 48 satırın kaynak TF/piyasa/kart izi yazıldı: 26 v3 kartı, 18 ek ayar JSON kaydı ve dört teknik hata kod izi. Kart metni birincil kaynak kuralının doğrulanması yerine geçmez.
 - `AYAR:dis__funding-carry:d11j:funding-pozitif-short:esik0_short` **KURAL_YOK**: `github_g3_cerceve.csv:24` pozitif funding’de short açma API örneği; kaynak çıkışı yok. JSON’daki 16 saat çıkışı kaynakta yazmıyor.
 - `KOD:v3__ters-fvg-nq-long` **EVREN_DISI**: NQ 5m/15m ve NQ puan tamponu gerekir; ön kayıt evreninde NQ yok.
-- V2 teknik hatalı dört kod için eski 1d üst-TF hatasını önleyen TF kaydı: Norn 4h, SHM 4h, önceki 4s kırılım 4h, KGT 1h; hepsi v2 kripto 13 sembol. Kaynak/çıkış uyumu ve hesap koşu bağı hâlâ açık.
+- V2 teknik hatalı dört kod için eski 1d üst-TF hatasını önleyen TF kaydı: Norn 4h, SHM 4h, önceki 4s kırılım 4h, KGT 1h; hepsi v2 kripto 13 sembol. Dört sınıf 1.100 sentetik mumla sinyal üretti, hiçbir giriş stopsuz değil (`testler/test_kapanis_k1_teknik.py`, 4 geçti). Kaynak/çıkış uyumu ve hesap koşu bağı hâlâ açık.
 - Kalan 46 satırın kaynak biçimi/uyarlama ve araştırma hesabı koşu bağı henüz kesinleşmedi. Özellikle eski tek grafik Donchian ansamblı, kaynak biçiminden farklı olduğu için doğrudan koşuya alınmaz; yeni portföy biçimiyle sonuç/kimlik bağı denetlenir.
 
 ## İlk kaynak denetiminde bulunan ayrımlar
@@ -49,16 +49,16 @@ Tablolardaki `INCELEME_BEKLIYOR` bir hüküm değildir. `kanit` sütununda eski 
 
 - `motor/strateji/kapanis/jesse_kaynak.py`: S0002 ve S0005, kaynak satırı/linki, ATR uyarlaması yazılı.
 - `motor/arastirma/kapanis/ek_ayarlar.py`: 18 ayarı iki JSON'dan okur, sınıfına kurar; eski araştırma aday kümelerine müdahale etmez.
-- `testler/test_kapanis_jesse_kaynak.py` ve `testler/test_kapanis_ek_ayarlar.py`: 6 sentetik test geçti (`PYTHONPATH=/tmp/kapanis-test-deps:. python -m pytest ...`). Gelecek mum değişimi geçmiş sinyali etkilemiyor; her girişte stop var; ek ayarlar eksiksiz ve tekil.
+- `testler/test_kapanis_jesse_kaynak.py`, `testler/test_kapanis_ek_ayarlar.py` ve `testler/test_kapanis_k1_teknik.py`: 10 sentetik test geçti (`PYTHONPATH=/tmp/kapanis-test-deps:. python -m pytest ...`). Gelecek mum değişimi geçmiş sinyali etkilemiyor; her girişte stop var; ek ayarlar eksiksiz ve tekil.
 - Tüm suite geçti: `PYTHONPATH=/tmp/kapanis-test-deps:. python -m pytest testler -q -p no:cacheprovider` → **5101 geçti, 17 atlandı** (315 saniye). Eksik Python geliştirme paketleri yalnız `/tmp/kapanis-test-deps` altına kuruldu; repo bağımlılık dosyaları değişmedi. Bu koşu sentetik/birim testleridir; gerçek piyasa strateji koşusu değildir.
 - `veri/mumlar` bu ortamda yok; gerçek koşu burada yapılamaz.
 - `araclar/kapanis_kosu.py` henüz yazılmadı. Koşu listesi/kapılar/BH/ikinci evren/test sonuçları hazır değil. Veri yokluğu nedeniyle gerçek strateji testi yapılmadı.
 
 ## Devam sırası
 
-1. K5 çapraz bağ çalışmasını commit et ve uzak dala gönder. K5 kaynak bağları tamam; şimdi 621 iz satırının kaynak kuralını ve test akıbetini ayrı ayrı denetle.
-2. K1'in kalan 46 satırına kaynak TF, evren, ayar ve çalıştırılabilirlik kararı ver. 18 ayarın okuyucusunu araştırma koşucusuna bağla. 1h portföy ve risk/kill ayrımını çöz.
-3. K2 kısa listesinin kaynak metnini/kodunu doğrula; yalnız tam kuralı belli biçimleri kodla, belirsizleri kanıtla dışla.
-4. K3/K4/K5'in **her** satırını kanıtla karara bağla; `INCELEME_BEKLIYOR` sıfır olmadan koşu planı dondurulmaz.
-5. Tek koşu betiği, kapılar, BH, yeni 40 sembol aşaması ve uçtan uca sentetik test; ardından tüm suite. Bu ortamda gerçek mum koşusu yapılmaz.
-6. Hazırlık raporunda kalan soru işaretlerini dürüstçe say. Her katman tamamlanınca ayrı commit; hepsi bitince PR aç, main'e birleştirme.
+1. K1'in kalan 46 satırına kaynak TF, evren, ayar ve çalıştırılabilirlik kararı ver. 18 ayarın okuyucusunu koşuya bağla; 1h portföy ve araştırma risk/kill hesabını canlı limitlere dokunmadan çöz. K5'in 621 iz akıbetini ana K1/K3/K4 kararına bağla.
+2. K2 kısa listesinin kaynak metnini/kodunu doğrula; yalnız tam kuralı belli biçimleri kodla, belirsizleri kanıtla dışla.
+3. K3'ün 1.816 satırını kanıtla karara bağla.
+4. K4'ün 2.204 satırında arşiv kodunu açıp anlamlı farkı denetle; K5 bağlarının nihai akıbetini de kapat. Bütün katmanlarda girdi = karar satırı kontrolü yap.
+5. Yalnız gerçekten koşulacak benzersiz strateji/ayarları listeye al; listeyi ve BH aile büyüklüğünü sonuç görülmeden dondur. Tek koşu betiği, kapılar ve yeni 40 sembol aşamasını hazırla. Bu ortamda gerçek mum koşusu yapılmaz.
+6. Uçtan uca sentetik test, sonra tüm pytest. Hazırlık raporunu nihai sayılarla yaz. Her katman bitince ara commit; hepsi bitince PR aç, main'e birleştirme.
