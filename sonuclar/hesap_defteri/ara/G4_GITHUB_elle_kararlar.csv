@@ -1,0 +1,122 @@
+tur,kaynak_g,ad_basi,eslesme,on_durum,neden_kodu,hedef,gerekce
+kismi_aile,g7,RSRS rotasyonu,YOK,D_KODLANMADI_NEDENLI,kod_yok,,tek-sembol RSRS kodlandı; rotasyon sürümü kodlanmadı (pf__rotasyon'a skor='rsrs' önerisi uygulanmadı)
+kismi_aile,g2,RSI_BB_ADX_Peak,YOK,D_KODLANMADI_NEDENLI,kod_yok,,BB/ADX varyantları kodlanmadı (d11g sınıf docstring: BB/Combination/STC varyantları KODLANMADI)
+kismi_aile,g2,Combination-1/2/3,YOK,D_KODLANMADI_NEDENLI,kod_yok,,Combination varyantları kodlanmadı (d11g docstring)
+kismi_aile,g2,STC_Bull_Bear_Adx,YOK,D_KODLANMADI_NEDENLI,kod_yok,,STC varyantı kodlanmadı (d11g docstring)
+kismi_aile,g2,RSI_BULL_BEAR_ADX,BENZER,D_KODLANMADI_NEDENLI,benzer_var,dis__rsi-boga-ayi-rejim,çıplak 3 rejimli RSI kodlandı; ADX(3) eşik kaydırması / stop / pingpong varyantları kodlanmadı
+kismi_aile,g2,saichovsky,YOK,D_KODLANMADI_NEDENLI,veri_yok,,"'son işlem fiyatı' (işlem geçmişi) gerekir, kodlanmadı (dis__tepeden-dusus-dip docstring)"
+kismi_aile,g5,AFAOSMD,YOK,D_KODLANMADI_NEDENLI,kural_belirsiz,,EA'ya özgü ters sinyal + Average Force; kodlanmadı (dis__andean-osilator docstring)
+kismi_aile,g5,DHLAOS,YOK,D_KODLANMADI_NEDENLI,kural_belirsiz,,Günlük yüksek/düşük çizgileri + ters sinyal EA'ya özgü; kodlanmadı (dis__andean-osilator docstring)
+kismi_aile,g2,RSI-PHA,YOK,D_KODLANMADI_NEDENLI,kural_belirsiz,,"EMA koşulları kaynakta eksik, kodlanmadı (dis__asiri-bolge-osilator-kesisimi docstring)"
+kismi_aile,g2,L1-Scalping / gekko-custom,BENZER,D_KODLANMADI_NEDENLI,benzer_var,dis__ema-serit-yelpaze,3 MACD histogramı + EMA dizilimi varyantı kodlanmadı; docstring dizilim için dis__ema-serit-yelpaze diyor (o sınıf açılmadı: doğrulanmadı)
+kismi_aile,g5,EA31337 Retracement,YOK,D_KODLANMADI_NEDENLI,kural_belirsiz,,en yakın pivota uzaklık oranı eşiği pip cinsinden; ATLANDI (dis__ma-gunluk-pivot docstring)
+kismi_aile,g1,BBMod: r_deadfish,YOK,D_KODLANMADI_NEDENLI,kural_belirsiz,,özet kesik; r_deadfish kolu kodlanmadı (dis__ewo-ema-ofset docstring)
+kismi_aile,g1,BBMod: gumbo,YOK,D_KODLANMADI_NEDENLI,kural_belirsiz,,T3 tanımı belirsiz; gumbo kolu kodlanmadı (dis__ewo-ema-ofset docstring)
+kismi_aile,g2,Strat (tik momentum),YOK,D_KODLANMADI_NEDENLI,kapsam_disi,,0.01% tik eşiği 15m'de gürültü; kodlanmadı (dis__getiri-oynaklik-momentum docstring)
+kismi_aile,g5,EA31337 ASI,YOK,D_KODLANMADI_NEDENLI,kod_yok,,gösterge dis__gosterge-egim-esik.GOSTERGELER (21) listesinde yok; sınıfa alınmadı (d11h gerekçe: ASI/SAWA/BWMFI/genel osilatör hariç)
+kismi_aile,g5,EA31337 BWMFI,YOK,D_KODLANMADI_NEDENLI,kod_yok,,gösterge dis__gosterge-egim-esik.GOSTERGELER (21) listesinde yok; sınıfa alınmadı (d11h gerekçe: ASI/SAWA/BWMFI/genel osilatör hariç)
+kismi_aile,g5,EA31337 SAWA,YOK,D_KODLANMADI_NEDENLI,kod_yok,,gösterge dis__gosterge-egim-esik.GOSTERGELER (21) listesinde yok; sınıfa alınmadı (d11h gerekçe: ASI/SAWA/BWMFI/genel osilatör hariç)
+kismi_aile,g5,EA31337 ElliottWave,YOK,D_KODLANMADI_NEDENLI,kod_yok,,gösterge dis__gosterge-egim-esik.GOSTERGELER (21) listesinde yok; sınıfa alınmadı (d11h gerekçe: ASI/SAWA/BWMFI/genel osilatör hariç)
+kismi_aile,g5,EA31337 Oscillator,YOK,D_KODLANMADI_NEDENLI,kod_yok,,gösterge dis__gosterge-egim-esik.GOSTERGELER (21) listesinde yok; sınıfa alınmadı (d11h gerekçe: ASI/SAWA/BWMFI/genel osilatör hariç)
+kismi_aile,g5,EA31337 Oscillator Multi,YOK,D_KODLANMADI_NEDENLI,kod_yok,,gösterge dis__gosterge-egim-esik.GOSTERGELER (21) listesinde yok; sınıfa alınmadı (d11h gerekçe: ASI/SAWA/BWMFI/genel osilatör hariç)
+kismi_aile,g5,EA31337 Oscillator Overlay,YOK,D_KODLANMADI_NEDENLI,kod_yok,,gösterge dis__gosterge-egim-esik.GOSTERGELER (21) listesinde yok; sınıfa alınmadı (d11h gerekçe: ASI/SAWA/BWMFI/genel osilatör hariç)
+kismi_aile,g5,EA31337 Oscillator Trend,YOK,D_KODLANMADI_NEDENLI,kod_yok,,gösterge dis__gosterge-egim-esik.GOSTERGELER (21) listesinde yok; sınıfa alınmadı (d11h gerekçe: ASI/SAWA/BWMFI/genel osilatör hariç)
+d11j_ayar_esleme,g2,ta_srsi_bollinger,AYAR,KOD,,bant-dokunusu-stokastik-onayi,ayar: stochrsi
+d11j_ayar_esleme,g2,ta_stoch_bollinger,AYAR,KOD,,bant-dokunusu-stokastik-onayi,ayar: stokastik
+d11j_ayar_esleme,g3,BBMomentumEvaluator,AYAR,KOD,,bant-dokunusu-stokastik-onayi,"ayar: stokastik,stochrsi"
+d11j_ayar_esleme,g2,ta_trix,AYAR,KOD,,gosterge-sinyal-sifir-kesisimi,"ayar: trix14_sma9,trix30_sifir"
+d11j_ayar_esleme,g2,ta_ultosc,AYAR,KOD,,gosterge-sinyal-sifir-kesisimi,ayar: uo_esik65
+d11j_ayar_esleme,g4,EMV,AYAR,KOD,,gosterge-sinyal-sifir-kesisimi,ayar: emv14_sifir
+d11j_ayar_esleme,g5,Price Volume Trend,AYAR,KOD,,gosterge-sinyal-sifir-kesisimi,ayar: pvt_sma21
+d11j_ayar_esleme,g5,MFI / sinyal,AYAR,KOD,,gosterge-sinyal-sifir-kesisimi,ayar: mfi14_ema9
+d11j_ayar_esleme,g5,TRIX / sinyal,AYAR,KOD,,gosterge-sinyal-sifir-kesisimi,"ayar: trix14_sma9,trix30_sifir"
+d11j_ayar_esleme,g5,TSI / sinyal,AYAR,KOD,,gosterge-sinyal-sifir-kesisimi,ayar: tsi25_13_ema13
+d11j_ayar_esleme,g5,Ehlers Decycler,AYAR,KOD,,gosterge-sinyal-sifir-kesisimi,ayar: decycler_sifir
+d11j_satir_karari,g5,Ehlers Triple Delay-Line,YOK,D/H,kural_belirsiz,,Triple Delay-Line Detrender kodlanmadı: tanım yok (d11j gerekçe)
+d11j_ayar_esleme,g5,Klinger Volume Oscillator,AYAR,KOD,,gosterge-sinyal-sifir-kesisimi,ayar: kvo34_55_ema13
+d11j_ayar_esleme,g5,OBV / sinyal,AYAR,KOD,,gosterge-sinyal-sifir-kesisimi,ayar: obv_sma21
+d11j_ayar_esleme,g5,Accumulation/Distribution,AYAR,KOD,,gosterge-sinyal-sifir-kesisimi,ayar: ad_sma21
+d11j_ayar_esleme,g3,Risk ayarlı momentum + 3 bar,AYAR,KOD,,kesit-skor-kombinasyonu-momentum-carry,ayar: kombine_07_03
+d11j_satir_karari,g3,Momentum + fonlama taşıma,YOK,D/H,veri_yok,,carry (fonlama z-skoru) KODLANMADI: pf arayüzü fonlama verisi taşımıyor (d11j gerekçe)
+d11j_ayar_esleme,g2,STC / SchaffTrendCycle,AYAR,KOD,,osilator-esik-donusu-gosterge-modlari,ayar: stc_25_75
+d11j_ayar_esleme,g2,TSI (Gekko),AYAR,KOD,,osilator-esik-donusu-gosterge-modlari,ayar: tsi13_25
+d11j_ayar_esleme,g2,UO (Ultimate,AYAR,KOD,,osilator-esik-donusu-gosterge-modlari,ayar: uo_30_70
+d11j_ayar_esleme,g5,Schaff Trend Cycle,AYAR,KOD,,osilator-esik-donusu-gosterge-modlari,ayar: stc_25_75
+d11j_ayar_esleme,g5,EA31337 MFI,AYAR,KOD,,osilator-esik-donusu-gosterge-modlari,ayar: mfi22_30
+d11j_satir_karari,g5,EA31337 Oscillator Range,YOK,D/H,kod_yok,,'Oscillator Range' (orta çizgi altı yükselen) kodlanmadı (d11j gerekçe)
+d11j_ayar_esleme,g5,EA31337 WPR,AYAR,KOD,,osilator-esik-donusu-gosterge-modlari,ayar: wpr18_90
+d11j_ayar_esleme,g7,Triple RSI aylık rotasyon,AYAR,KOD,,rotasyon-skor-modlari-triplersi-bb,ayar: triple_rsi_hacim_top5
+d11j_ayar_esleme,g7,Çoklu Bollinger üst bant,AYAR,KOD,,rotasyon-skor-modlari-triplersi-bb,ayar: bb_uzaklik_k1
+d11j_satir_karari,g2,ATR_ADX,YOK,D/H,kural_belirsiz,,"ATR_ADX çarpan formülü belirsiz, kodlanmadı (d11j gerekçe)"
+d11j_ayar_esleme,g2,ATR_MA,AYAR,KOD,,atr-chandelier-nrtr-donus,ayar: ha_atr_ma
+d11j_ayar_esleme,g5,CEZLSMA,AYAR,KOD,,atr-chandelier-nrtr-donus,ayar: chandelier22_3
+d11j_ayar_esleme,g5,Chandelier Exit,AYAR,KOD,,atr-chandelier-nrtr-donus,ayar: chandelier22_3
+d11j_ayar_esleme,g5,NRTR,AYAR,KOD,,atr-chandelier-nrtr-donus,ayar: nrtr_2yuzde
+d11j_ayar_esleme,g5,EA31337 ATR MA Trend,AYAR,KOD,,atr-chandelier-nrtr-donus,ayar: ha_atr_ma
+d11j_ayar_esleme,g5,EA31337 Bands,AYAR,KOD,,bant-dokunusu-orta-cizgi-egimi,ayar: bb24
+d11j_ayar_esleme,g5,EA31337 Envelopes,AYAR,KOD,,bant-dokunusu-orta-cizgi-egimi,ayar: envelope
+d11j_satir_karari,g5,EA31337 SVE Bollinger,YOK,D/H,kod_yok,,SVE özel bandı kodlanmadı (d11j gerekçe)
+d11j_satir_karari,g5,EA31337 TMAT SVEBB,YOK,D/H,kod_yok,,SVE özel bandı kodlanmadı (d11j gerekçe)
+d11j_ayar_esleme,g5,EA31337 TMA True,AYAR,KOD,,bant-dokunusu-orta-cizgi-egimi,ayar: tma
+d11j_ayar_esleme,g2,ichimoku_score,AYAR,KOD,,ichimoku-puan-skoru,ayar: skor50_49
+d11j_ayar_esleme,g2,ehlers_mama,AYAR,KOD,,mama-fama-itrend-cma-ma-turleri,ayar: mama_fama
+d11j_ayar_esleme,g2,ehlers_trend,AYAR,KOD,,mama-fama-itrend-cma-ma-turleri,ayar: itrend
+d11j_ayar_esleme,g5,Corrected Moving Average,AYAR,KOD,,mama-fama-itrend-cma-ma-turleri,ayar: cma_35
+d11j_ayar_esleme,g5,EA31337 Oscillator Cross Shift,AYAR,KOD,,osilator-cizgi-kesisimi-genel,ayar: adx_di_kaydirma10
+d11j_satir_karari,g5,EA31337 Oscillator Cross Timeframe,YOK,D/H,kod_yok,,farklı zaman diliminden osilatör (H6) kodlanmadı (d11j gerekçe)
+d11j_satir_karari,g5,EA31337 Oscillator Cross Zero,YOK,D/H,kod_yok,,"bu kaynağın (adx_di sıfır modu) ayar kaydı yok; 'hızlı çizgi yükseliyor, yüzde artış>seviye' koşulu da yok (d11j gerekçe)"
+d11j_ayar_esleme,g5,EA31337 Oscillator Cross,AYAR,KOD,,osilator-cizgi-kesisimi-genel,ayar: adx_di
+d11j_ayar_esleme,g4,Edge: rejim kayması,AYAR,KOD,,piyasa-rejim-filtreleri-genislik-ftd-dagitim,ayar: genislik_hisse
+d11j_ayar_esleme,g4,Follow-Through Day,AYAR,KOD,,piyasa-rejim-filtreleri-genislik-ftd-dagitim,ayar: ftd_spx
+d11j_ayar_esleme,g4,IBD dağıtım günü,AYAR,KOD,,piyasa-rejim-filtreleri-genislik-ftd-dagitim,ayar: dagitim_spx
+d11j_satir_karari,g4,Kripto rejim analizcisi,YOK,D/H,veri_yok,,"dominans/funding/alt genişliği bileşenleri veri_yok, atıldı (d11j gerekçe)"
+d11j_ayar_esleme,g3,Hiyerarşik Risk Paritesi,AYAR,KOD,,portfoy-agirlik-semalari-hrp-minvar-mvo,ayar: hrp
+d11j_ayar_esleme,g3,Long-only minimum varyans,AYAR,KOD,,portfoy-agirlik-semalari-hrp-minvar-mvo,ayar: min_var
+d11j_satir_karari,g4,Kümeleme ile çeşitlendirilmiş,YOK,D/H,kod_yok,,korelasyon kümeleme temsilcisi kodlanmadı (d11j gerekçe)
+d11j_ayar_esleme,g4,Ortalama-varyans ve Sharpe,AYAR,KOD,,portfoy-agirlik-semalari-hrp-minvar-mvo,ayar: mvo
+d11j_ayar_esleme,g2,rsidyn,AYAR,KOD,,rsi-dinamik-esik-tepe-dip-medyani,ayar: rsidyn
+d11j_satir_karari,g2,RSI_Autotune,YOK,D/H,kural_belirsiz,,RSI_Autotune kodlanmadı (d11j gerekçe)
+d11j_ayar_esleme,g5,Self-Adjusting RSI,AYAR,KOD,,rsi-uyarlanir-esik-ve-periyot,ayar: uyarlanir_std
+d11j_ayar_esleme,g7,Adaptif RSI,AYAR,KOD,,rsi-uyarlanir-esik-ve-periyot,ayar: arsi_8_28
+d11j_ayar_esleme,g7,AlphaRSI Pro,AYAR,KOD,,rsi-uyarlanir-esik-ve-periyot,ayar: alpharsi_atr
+d11j_ayar_esleme,g7,Hibrit AlphaRSI,AYAR,KOD,,rsi-uyarlanir-esik-ve-periyot,ayar: alpharsi_atr
+d11j_ayar_esleme,g2,bryanbeck,AYAR,KOD,,ardisik-mum-degisimi-al-sat,ayar: 3_2
+d11j_ayar_esleme,g2,AtrRsiStrategy,AYAR,KOD,,atr-rsi-momentum-yeni-periyot,ayar: atr22_rsi5
+d11j_ayar_esleme,g2,BollChannelStrategy,AYAR,KOD,,bant-ust-alt-kirilim-stop-giris,ayar: boll18_3_4_cci
+d11j_ayar_esleme,g2,KingKeltnerStrategy,AYAR,KOD,,bant-ust-alt-kirilim-stop-giris,ayar: keltner11_1_6
+d11j_ayar_esleme,g2,Martingale V1 giris,AYAR,KOD,,bant-ust-alt-kirilim-stop-giris,"ayar: boll18_3_4_cci,keltner11_1_6,trend_bollinger_100_0_5"
+d11j_ayar_esleme,g4,Bollinger bandı dışı kapanış trendi,AYAR,KOD,,bant-ust-alt-kirilim-stop-giris,"ayar: trend_bollinger_100_0_5,boll18_3_4_cci,keltner11_1_6"
+d11j_ayar_esleme,g4,Trend Bollinger bandı,AYAR,KOD,,bant-ust-alt-kirilim-stop-giris,ayar: trend_bollinger_100_0_5
+d11j_ayar_esleme,g4,Güçlü hisse + dinamik MA,AYAR,KOD,,guclu-hisse-dinamik-ma-egimi,ayar: stop4_8
+d11j_ayar_esleme,g1,NFI: Pump/Dump,AYAR,KOD,,hacim-patlamali-48-mum-zirve-kirilimi,ayar: nfi_pump_dump
+d11j_ayar_esleme,g2,HL_Scalp,AYAR,KOD,,kapanis-kanali-min-dip-alim,ayar: pencere15_zirve_cikis
+d11j_ayar_esleme,g2,HL (gekko-strat-hl,AYAR,KOD,,kapanis-kanali-min-dip-alim,ayar: pencere15_zirve_cikis
+d11j_ayar_esleme,g2,customPivotJbk,AYAR,KOD,,pivot-onayli-ters-stop,ayar: sol4_sag2_olusum
+d11j_ayar_esleme,g2,renko,AYAR,KOD,,renko-tugla-donusu-basit,ayar: basit_donus
+d11j_ayar_esleme,g2,trailing-trade giris kapilari,AYAR,KOD,,rsi-zskor-ma-sapma-giris-kapisi,ayar: z2_rsi30
+d11j_ayar_esleme,g3,DoubleMovingAverageTrendEvaluator,AYAR,KOD,,sma2-sapma-skoru,ayar: sma2_sma5
+d11j_ayar_esleme,g5,Didi Index,AYAR,KOD,,sma2-sapma-skoru,ayar: didi_sma3_sma20
+d11j_ayar_esleme,g5,EA31337 Pivot,AYAR,KOD,,camarilla-bolgesi-ea31337,"ayar: s1_s2,s2_s3"
+d11j_ayar_esleme,g3,Fonlama oranı pozitifse short,AYAR,KOD,,funding-pozitif-short,ayar: esik0_short
+d11j_ayar_esleme,g5,EA31337 HeikenAshi,AYAR,KOD,,heiken-ashi-ea31337,ayar: aralik_yuzde
+d11j_ayar_esleme,g6,ETF gün içi momentumu,AYAR,KOD,,ilk-30dk-son-30dk-r12,"ayar: r1_gece,r1_r12"
+d11j_ayar_esleme,g1,NFI: Çöküş sonrası sıçrama,AYAR,KOD,,kapitulasyon-hacimli-dip,ayar: nfi_capitulation
+d11j_ayar_esleme,g4,Edge: panic_reversal,AYAR,KOD,,kapitulasyon-hacimli-dip,ayar: edge_panic_reversal
+d11j_ayar_esleme,g1,NFI: Yutan mum devamı,AYAR,KOD,,marubozu-yutan-mum-devam,ayar: yutan_devam
+d11j_ayar_esleme,g1,NFI: Marubozu momentum,AYAR,KOD,,marubozu-yutan-mum-devam,ayar: marubozu_devam
+d11j_ayar_esleme,g5,EA31337 Oscillator Divergence,AYAR,KOD,,osilator-diverjansi-ea31337,ayar: cci_4bar
+d11j_ayar_esleme,g1,BBMod: Squeeze momentum,AYAR,KOD,,sqz-momentum-dip-donusu-ewo,ayar: nfi_ewo_wr
+d11j_ayar_esleme,g1,NFI (X v11/Next): Squeeze,AYAR,KOD,,sqz-momentum-dip-donusu-ewo,ayar: nfi_ewo_wr
+d11j_ayar_esleme,g5,3MAF,AYAR,KOD,,uc-ema-dizilim-geri-cekilme-fraktal,ayar: 3maf
+d11j_ayar_esleme,g6,Long-only çift işlemi KO/PEP,AYAR,KOD,,uzun-yonlu-cift-dunku-getiri,ayar: dunku_getiri
+d11j_satir_karari,g4,Tongdaxin yukarı boşluk,YOK,D/H,seans_gap,,aday SEÇİCİ (tarama): giriş/çıkış/stop kuralı yok; tam boşluk 7/24 kriptoda neredeyse hiç oluşmaz (d11j gerekçe; hedef swing__gap-devam: kurala_dokulemez)
+ma_kesisim_esdeger,g3,1,ESDEGER,KOD,,swing__ma-kesisim,kural:kurallar:MA5/20 long | SMA5/20; L/S; sınıf ATR stop ekler (kaynak stopsuz)
+ma_kesisim_esdeger,g3,19,ESDEGER,KOD,,swing__ma-kesisim,kural:kurallar:MA5/20 long | SMA5/20 long-only (short=False)
+ma_kesisim_esdeger,g4,141,ESDEGER,KOD,,swing__ma-kesisim,kural:kurallar:MA5/20 long | MA5/20 kesişim
+ma_kesisim_esdeger,g7,3,ESDEGER,KOD,,swing__ma-kesisim,kural:kurallar:EMA10/20 kesişim + %2 stop | EMA10/20 + %2 stop (aynı kural ayar kaydında var)
+ma_kesisim_esdeger,g7,1,ESDEGER,KOD,,swing__ma-kesisim,"kural:kurallar:SMA 10/20 dur-ve-dön; SMA 10/30 long-short (dön); SMA 13/50 kesişim long; SMA 15/50 kesişim long | 10/20,10/30,15/50,13/50 hepsi ayar kümesinde"
+ma_kesisim_esdeger,g7,12,ESDEGER,KOD,,swing__ma-kesisim,kural:kurallar:SMA 10/20 dur-ve-dön | SMA 10/20 dön
+ma_kesisim_esdeger,g7,2,ESDEGER,KOD,,swing__ma-kesisim,kural:kurallar:Kapanış SMA10 long; Kapanış SMA15 long; Kapanış SMA30 long | kapanış-SMA kesişimi = hizli=1
+ma_kesisim_esdeger,g7,28,ESDEGER,KOD,,swing__ma-kesisim,kural:kurallar:Kapanış SMA15 long | kapanış SMA15 long
+ma_kesisim_esdeger,g6,287,ESDEGER,KOD,,swing__ma-kesisim,kural:kurallar:TechIndicator SMA2 (20/50) L/S | SMA20/50 L/S (durum yerine kesişim; ilk kesişimden sonra aynı pozisyon)
+ma_kesisim_esdeger,g6,330,ESDEGER,KOD,,swing__ma-kesisim,kural:kurallar:SMA 10/30 kesişim long | SMA10/30 long-only

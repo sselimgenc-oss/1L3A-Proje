@@ -1,0 +1,246 @@
+{
+ "satir_sayisi": 2592,
+ "kaynak_basina": {
+  "V001": 251,
+  "V012": 48,
+  "V014": 999,
+  "V013": 586,
+  "V017": 144,
+  "V009": 21,
+  "V002": 50,
+  "V004": 9,
+  "V006": 7,
+  "V007": 4,
+  "V008": 2,
+  "V016": 56,
+  "V015": 66,
+  "V003": 135,
+  "V005": 137,
+  "V010": 69,
+  "V011": 8
+ },
+ "on_durum": {
+  "D_KODLANMADI_NEDENLI": 1435,
+  "H_BIZIM_EVRENDE_UYGULANAMAZ": 392,
+  "F_YASAK_TIP": 112,
+  "TEKRAR": 49,
+  "G_ML": 539,
+  "KOD": 23,
+  "BELIRSIZ": 38,
+  "E_KODLANMADI_NEDENSIZ": 4
+ },
+ "eslesme": {
+  "YOK": 2085,
+  "BENZER": 435,
+  "TEKRAR": 49,
+  "KOD": 23
+ },
+ "neden_kodu": {
+  "veri_yok": 272,
+  "kod_yok": 321,
+  "hisse_kesitsel": 176,
+  "veri_diger": 37,
+  "benzer_var": 472,
+  "forex_veri": 47,
+  "opsiyon": 58,
+  "vadeli_emtia": 10,
+  "haber_duygu": 9,
+  "ortalama_dusurme": 26,
+  "kopya": 49,
+  "ml": 539,
+  "arac_sablon": 250,
+  "": 27,
+  "martingale": 14,
+  "oncelik_disi": 68,
+  "lookahead": 32,
+  "tekrar_kart_yok": 70,
+  "kural_belirsiz": 5,
+  "stopsuz_grid": 9,
+  "alt_1dk": 25,
+  "orderbook": 17,
+  "yasak_diger": 21,
+  "kart_reddedildi": 8,
+  "onchain": 11,
+  "dca": 10,
+  "makro_takvim": 2,
+  "kaynak_okunamadi": 6,
+  "altyapi_yok": 1
+ },
+ "final_karar": {
+  "kart": 266,
+  "kod_yok": 321,
+  "veri_yok": 635,
+  "tekrar": 476,
+  "yasak": 643,
+  "arac": 250,
+  "belirsiz": 1
+ },
+ "oe_karar": {
+  "kart": 96,
+  "kod_yok": 818,
+  "veri_yok": 530,
+  "tekrar": 388,
+  "yasak": 521,
+  "arac": 220,
+  "belirsiz": 19
+ },
+ "zincir": {
+  "oe:kart": 96,
+  "oe:kod_yok>t2:kod_yok": 277,
+  "oe:veri_yok": 530,
+  "oe:tekrar": 388,
+  "oe:yasak": 521,
+  "oe:arac": 220,
+  "oe:kod_yok>t2:tekrar": 46,
+  "oe:kod_yok>t2:kart": 147,
+  "oe:kod_yok>t2:veri_yok": 93,
+  "oe:kod_yok>t2:belirsiz>t3:kod_yok": 20,
+  "oe:kod_yok>t2:belirsiz>t3:kart": 12,
+  "oe:kod_yok>t2:yasak": 94,
+  "oe:kod_yok>t2:belirsiz>t3:veri_yok": 10,
+  "oe:kod_yok>t2:belirsiz>t3:tekrar": 28,
+  "oe:kod_yok>t2:arac": 22,
+  "oe:kod_yok>t2:kart>g2:tekrar": 8,
+  "oe:kod_yok>t2:belirsiz>t3:yasak": 25,
+  "oe:kod_yok>t2:belirsiz>t3:arac": 7,
+  "oe:kod_yok>t2:kart>g2:kart": 5,
+  "oe:kod_yok>t2:belirsiz>t3:tekrar>g2:kart": 1,
+  "oe:kod_yok>t2:kart>g2:yasak": 1,
+  "oe:kod_yok>t2:kart>g2:kod_yok": 1,
+  "oe:kod_yok>t2:yasak>g2:tekrar": 1,
+  "oe:kod_yok>t2:veri_yok>g2:yasak": 1,
+  "oe:belirsiz>t3:kart": 5,
+  "oe:belirsiz>t3:tekrar": 5,
+  "oe:kod_yok": 19,
+  "oe:belirsiz>t3:kod_yok": 4,
+  "oe:belirsiz>t3:veri_yok": 2,
+  "oe:belirsiz>t3:yasak": 1,
+  "oe:belirsiz>t3:arac": 1,
+  "oe:belirsiz>t3:belirsiz": 1
+ },
+ "kart_isleme": {
+  "kodlama_veri_yok": 29,
+  "reddedildi": 91,
+  "KOD": 23,
+  "temsilci_degil": 68,
+  "kodlama_belirsiz": 5,
+  "kodlama_tekrar": 6,
+  "E_kart_kaydi_yok": 4,
+  "kodlama_altyapi_yok": 1
+ },
+ "hiza_duzeltme": [
+  [
+   "github-backtest-katalog-v4__reddit.csv",
+   "18",
+   17,
+   26
+  ],
+  [
+   "github-backtest-katalog-v4__reddit.csv",
+   "19",
+   18,
+   17
+  ],
+  [
+   "github-backtest-katalog-v4__reddit.csv",
+   "20",
+   19,
+   18
+  ],
+  [
+   "github-backtest-katalog-v4__reddit.csv",
+   "21",
+   20,
+   19
+  ],
+  [
+   "github-backtest-katalog-v4__reddit.csv",
+   "22",
+   21,
+   20
+  ],
+  [
+   "github-backtest-katalog-v4__reddit.csv",
+   "23",
+   22,
+   21
+  ],
+  [
+   "github-backtest-katalog-v4__reddit.csv",
+   "24",
+   23,
+   22
+  ],
+  [
+   "github-backtest-katalog-v4__reddit.csv",
+   "25",
+   24,
+   23
+  ],
+  [
+   "github-backtest-katalog-v4__reddit.csv",
+   "26",
+   25,
+   24
+  ],
+  [
+   "github-backtest-katalog-v4__reddit.csv",
+   "27",
+   26,
+   25
+  ]
+ ],
+ "kural_acik_aday": [
+  "V014:440",
+  "V014:617",
+  "V013:445",
+  "V005:4",
+  "V005:5",
+  "V005:25",
+  "V005:33",
+  "V005:50",
+  "V005:97",
+  "V010:19"
+ ],
+ "dal_ozet": {
+  "V901": [
+   "bolgesel_son3yil_2026-11.csv",
+   15,
+   11
+  ],
+  "V902": [
+   "cjk_son3yil_2026-11.csv",
+   17,
+   17
+  ],
+  "V903": [
+   "uzakdogu_son3yil_2026-11.csv",
+   18,
+   15
+  ]
+ },
+ "kart_ham_satirsiz": [
+  "daytrade__cuma-15-est-tutma-saatlik__miralles",
+  "daytrade__ilk-yari-saat-momentum__shen",
+  "daytrade__orb-5dk-oynak-hisse-hacim__zarattini",
+  "daytrade__pin-bar-sonrasi-long-4s__atm4tech",
+  "daytrade__saat-21-23-utc__padysak",
+  "daytrade__saatlik-asiri-tepki-tersine__denicola",
+  "daytrade__seans-tepe-dip-kirilim-geri-test-h4-xau__abbujo",
+  "swing__adaptivetrend-6s-momentum__arxiv",
+  "swing__altin-rejim-olasilik-atr__singha",
+  "swing__altin-tahvil-12ay-rejim__dujava",
+  "swing__btc-gecelik-max10-hafta-sonu__dujava",
+  "swing__donchian-ansambl-vol-hedef__zarattini",
+  "swing__funding-azalan-agirlik-fark-kesit__prestolabs",
+  "swing__funding-z90-3gun__octopustakopi",
+  "swing__kesit-dusuk-hacim-haftalik__liu",
+  "swing__kesit-funding-baz-vekil__chi",
+  "swing__kisa-vade-momentum-2-3-hafta-kesit__liu-tsyvinski-wu",
+  "swing__kripto-30g-momentum-vol-yonetimli__grobys",
+  "swing__kripto-max-piyango-kesit__ozdamar",
+  "swing__max-hisse-kesit-short__bali",
+  "swing__perp-spot-baz-esik-kapama__he-manela",
+  "swing__vol-yonetimli-long__moreira"
+ ]
+}

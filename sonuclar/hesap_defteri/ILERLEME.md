@@ -53,6 +53,25 @@ Kanıt yollarında `dal:claude/adoring-maxwell-q7t60g:<yol>` yazılır.
   (kesit_ls skor ibs/dusuk_vol/r2_alfa, agirlik orantili; rotasyon agirlik getiri_vol) ne `baglama.BAGLAMA`'da ne ızgarada.
   Nüans: `dusuk_vol` yalnız long rotasyon olarak `pf__rotasyon` BAGLAMA satır 35/40'ta var (L/S hali koşulmadı).
 
+
+## Limit kesintisi — 2026-11-13 ~01:00 UTC (devam için oku)
+Tüm alt ajanlar 5 saatlik limite takılıp durdu (yenilenme 05:30 UTC). Ajan işleri kaydedildi; devamda **yeni ajan açma**,
+aynı ajana SendMessage ile "kaldığın yerden devam et" gönder (oturum değiştiyse ajan erişilemez → o grubu yeniden başlat;
+o zaman ajan mevcut ara dosyayı ve betiği okuyup üstüne devam etsin, baştan yazmasın).
+| Grup | ajan kimliği | kesintide durum |
+|---|---|---|
+| G0_SONUC | a19776b566767384c | betik var (g0_kod_akibet.py), çıktı CSV yok |
+| G1_KITAP | a404376c3683c1b48 | yalnız elle_kararlar (263 satır), ham CSV yok |
+| G2_DIS_ESKI | a6099a7c8992bb752 | ham 758 satır var, NOTLAR yok (tamamlanmadı) |
+| G3_REPO | a382858d1d4359fe4 | yalnız betik (g3_repo.py) |
+| G4_GITHUB | ace3771aabc3c77ef | ham 1198 satır + ozet.json var, NOTLAR yok |
+| G5_151_SON1AY | (bitti) | denetlendi |
+| G6_V3 | a89f889e4a9084c6b | ham 2592 satır + ozet.json var, NOTLAR yok |
+| G8_DIS_ARASTIRMA | abfef934e755e32c5 | çıktı yok |
+| G9_ROBOTIC | ac679425a8291102b | ham 909 satır var, NOTLAR yok |
+| G10_ARSIV | a6add8fc83e9791c8 | yalnız betik (g10_arsiv.py) |
+Not: ara/ altındaki NOTLAR'ı olmayan dosyalar TASLAK'tır; lider denetiminden geçmedi.
+
 ## Zamanlanmış kontrol
 - 2026-11-13 08:35 TSİ (05:35 UTC): otomatik devam mesajı kurulu (kullanıcı isteği; limit yenilenince devam).
   Devam adımı: bitmiş ara çıktıları denetle → eksik/ölmüş grupları yeniden başlat → birleştir → denetim → RAPOR → PR.
