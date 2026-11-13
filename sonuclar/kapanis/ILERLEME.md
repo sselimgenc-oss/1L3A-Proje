@@ -170,3 +170,16 @@ Kalan 85 KURAL_YOK (kaynakta kod yok) için seçenek kullanıcıya soruldu.
 - k6_kodsuz ilk sürüm reddedildi (örnek 14'te 2-4 hata: kaynak varyant listesi 138/306 KURAL_YOK yapılmış, com→EMA 144, WebFetch yapılmamış) → ajana yeniden yaptırılıyor.
 - k6_kodsuz (85) yeniden yapıldı ve kabul edildi: K6_STANDART 18, KOSULACAK 6 (138, 306, 144, 320 düzeltildi), EVREN_DISI 7, KURAL_YOK 54 (öznel/tanımsız/tutarsız). 508'de kaynak tüm-örneklem z-skoru (lookahead) → K6 kayan 20 pencere.
 - Ağ: ortam izin listesine traders.com, medium.com, kpumangyou.tistory.com, repositorio.unipampa.edu.br eklendi (kullanıcı onayı). Proxy geçiyor ama traders.com ve medium.com Cloudflare bot korumasıyla 403 veriyor; tarayıcıyla aşma denemesi izin denetleyicisince reddedildi (yapılmadı). Bu satırlar "kaynak erişilemedi" kalır; kullanıcı sayfaları kendisi indirip yüklerse açılır.
+
+### Fable hakem denetimi (kul_*) ve politika kararları — SONUÇ GÖRÜLMEDEN
+Rapor: `HAKEM_FABLE_KUL.md`, örnekler `ara/hakem_fable_kul_ornek.csv` (107 satır izlendi). Liderin 10/10 örnek denetimi g9_a'daki sistematik hatayı kaçırdı (Fable buldu, lider kodda doğruladı: ichiV1 EMA 3/6/12/24/48/72/96, ajan 2/3/5/8/13/21/34 yazmış; pHSL etkin değer yerine hyperopt default).
+Lider kararları (Fable önerileri, hiçbir koşu yapılmadan):
+- (a) Çok kollu Freqtrade sistemleri: **≥10 giriş kolu → `COK_KOLLU`** (ayrı aşama; dosyadaki kod birebir uyarlanarak sonra ele alınır, ana BH ailesine girmez, ayrı raporlanır); **<10 kol → tüm kollar yazılarak KOSULACAK**. Üç g9 partisine aynı uygulanır.
+- (b) MA tipi yazmayan X005 satırları → ön kayıt eki 3 gereği `K6_STANDART` (MA=SMA). X005:364 kaynak tam okunmamış → yeniden okunacak; okunamazsa KURAL_YOK.
+- (c) Erişilemeyen kaynaklar: karar KURAL_YOK, `neden` tek biçim "kaynak erişilemedi: <host/hata>"; "kaynakta yok" yazılmaz.
+- (d) Stop/limit emirli girişler tek biçim: "seviye mum kapanışıyla aşılınca sonraki açılışta giriş (uyarlama)". Koşulsuz açılış girişi yazılmaz (695, 724 düzelt). Bar içi limit dolumuna ya da seans saatine özünde bağlı olanlar EVREN_DISI, neden "emir tipi/dolum modeli".
+- (e) B001:776 KOSULACAK kalır.
+- Mutlak birim (pip/puan/tik/USD) stop/hedef: tek biçim EVREN_DISI (g8_b 381/382 ve g8_c 721 buna çekilir; 721 FARK_YOK'tan çıkar).
+- Stopsuz eşiği: stoploss ≤ −0,50 → "fiilen stopsuz", ATR(14)×3 uyarlaması (kaynak stopu bilgi notu). 
+- 1w/1M/3h/6h TF: 1d/1h verisinden yeniden örnekleme ile KOSULACAK; motor desteği kodlamada sağlanacak.
+Düzeltme işleri: g9_a `kural_tam` baştan (etkin parametreler buy_params/sell_params'tan); g8_b/g8_c/g9_b/g9_c Fable satır listesi + yukarıdaki politikalar.
