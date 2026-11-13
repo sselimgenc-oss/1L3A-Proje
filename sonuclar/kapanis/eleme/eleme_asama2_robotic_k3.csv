@@ -1,0 +1,49 @@
+kimlik,karar,gerekce_turu,gerekce,tf,aile,temsilci_mi
+HAM:B001:43,KOŞ,,Ayrı fikir. Dikkat: long kolu 'kapanış<BB alt VE kapanış>EMA20' + 6 koşul daha — neredeyse çelişkili; 200 işlem sınırda olabilir ama cebirsel imkânsızlık gösterilemediği için kaldı.,5m,,
+HAM:B001:55,KOŞ,,"277'deki Zaratustra dosyalarından (56/57/58, hepsi KOŞ) koşul iskeleti farklı (üç TF'de BB orta + ADX/DI); ayrı kural.",5m,,
+HAM:B001:60,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,5m,,
+HAM:B001:63,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,5m,,
+HAM:B001:66,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,15m,,
+HAM:B001:147,KOŞ,,"Temsilci: kanonik GnF (GFI>0,7 / <0,3).",1h,GnF,evet
+HAM:B001:148,KOŞ,,"147 + iki yönde hacim>SMA50(hacim) süzgeci (işlem kümesini belirgin daraltır): ek süzgeç taşıyan alt sürüm, ikinci temsilci (sınırda; 1h, ucuz).",1h,GnF,evet
+HAM:B001:155,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1h,,
+HAM:B001:210,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1h,,
+HAM:B001:213,KOŞ,,"277'deki 214 (RSIBB_V4) ile giriş mantığı farklı (V4: sıkışma/genişleme + RSI; V3: bant + hacim bandı kesişimi), ayrı kural. Dikkat: short kolu (hacim alt hacim bandını aşağı keser) fiilen ölü.",15m,,
+HAM:B001:222,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,5m,,
+HAM:B001:234,KOŞ,,Ayrı fikir. Kâr hedefi %1 (maliyet ×2'nin ~3 katı): maliyete duyarlı ama yapısal imkânsızlık yok.,5m,,
+HAM:B001:236,KOŞ,,"Temsilci: 15m, üç dallı giriş, kademeli custom stop (özgün Apollo11).",15m,Apollo/Saturn,evet
+HAM:B001:246,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,15m,,
+HAM:B001:377,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1h,,
+HAM:B001:481,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,5m,,
+HAM:B001:489,ÇIKAR,c,"488 (Chandem, 277'de KOŞ) ile aynı kural: CMO50 sıfır kesişimi girişinin 1 mum gecikmeli teyitli hali + çıkışa CMO<−35 eki; kalan fark ROI/stop hyperopt değerleri; temsilci 488.",5m,Chandem,hayır
+HAM:B001:521,ÇIKAR,c,"236 (Apollo11) ile giriş kodu birebir aynı (diff: yalnız stoploss −0,16→−0,20, ROI kapalı→%5, custom_stoploss kapalı, koruma süreleri); aynı TF 15m; temsilci 236.",15m,Apollo/Saturn,hayır
+HAM:B001:526,KOŞ,,"Tema-BB ailesinden ama tetik farklı: TEMA25 ≤ BB alt (durum) + CMO50 sıfırı yukarı keser (tetik), çıkış TEMA × üst bant; 527/528'de tetik TEMA kesişimi. Ek/başka mantık olduğu için kaldı (sınırda).",5m,Tema-BB,evet
+HAM:B001:540,ÇIKAR,s,"Aşama 1'de koşulan HAM:X005:577#v1 (kapanis__donchian-agirlikli-bb-s0577, 5m) ile birebir: Donchian52 − ağırlıklı BB(20,2) farkı kesişimi + SAR + ADX>25. Kaynakta sell_hold=True dalı etkin (ROI %27,8/8,7/3,8; stop −%33,3; iz %17,2/%21,2) = aşama 1 değerleri; K3 kural metnindeki ROI/stop diğer (etkin olmayan) dala ait.",5m,,
+HAM:B001:607,KOŞ,,GKD şablonu (baseline + goldie bandı) ortak ama çekirdek gösterge farklı (Hurst).,1h,GKD,evet
+HAM:B001:608,KOŞ,,GKD şablonu ortak ama çekirdek gösterge farklı (PFE).,1h,GKD,evet
+HAM:B001:616,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1h,,
+HAM:B001:617,ÇIKAR,g,Kaynak dosya çalışmaz/eksik: giriş 'ema_bshort_*' / 'ema_blong_*' sütunlarını ve buy_ema_short parametresini kullanıyor ama ikisi de dosyada tanımlı değil (göstergeler yalnız SMA(HA kapanış/açılış)); kısa EMA değeri yalnız yorum satırındaki hyperopt dökümünde (10/15) ve etkin varsayılanla (uzun=5) çelişiyor. Kural uydurmadan kodlanamaz.,6h,,
+HAM:B001:644,ÇIKAR,s,"Aşama 1'de koşulan HAM:X005:418#v1 (kapanis__cdc-actionzone-s0418, 1d) ile aynı sinyal: EMA12>EMA26 ve kapanış>EMA12 giriş, tersinde çıkış. Tek fark stop (kaynak: 14 mumluk en düşük kapanış; aşama 1: ATR14×3) — yakın kopya (613 emsali).",1d,,
+HAM:B001:652,ÇIKAR,s,"Aşama 1'de koşulan HAM:X005:554#v1 (kapanis__ema800-kesisim-s0554, 1h) ile birebir: kapanış EMA800'ü yukarı keser, EMA800×0,99 altına kesişte çık, stop %15 iz süren.",1h,,
+HAM:B001:661,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1h,,
+HAM:B001:684,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,5m,,
+HAM:B001:686,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,4h,,
+HAM:B001:687,KOŞ,,"İkinci temsilci: ek trend süzgeci (EMA50>EMA200, kapanış>EMA200) + pair_is_bad düşüş süzgeci taşıyan alt sürümün özgün dosyası.",5m,SMA-ofset (EWO'suz),evet
+HAM:B001:688,ÇIKAR,c,"687 (SMAIP3) ile giriş birebir aynı (SMA18×0,968 + EMA50>EMA200 + pair_is_bad 0,130/0,075); yalnız çıkış ofseti/ROI/trailing ve satış teyidi farklı; temsilci 687.",5m,SMA-ofset (EWO'suz),hayır
+HAM:B001:689,ÇIKAR,c,"687 ile aynı giriş iskeleti (SMA26×0,968 + EMA50>EMA200 + pair_is_bad; yalnız pencere ve düşüş eşikleri farklı), çıkış 688 ile aynı tür (EMA×0,985 + RSI2 teyidi); temsilci 687.",5m,SMA-ofset (EWO'suz),hayır
+HAM:B001:691,KOŞ,,"Temsilci: ailenin kanonik/süzgeçsiz dosyası (SMA30×0,958 giriş, EMA30×1,012 çıkış).",5m,SMA-ofset (EWO'suz),evet
+HAM:B001:749,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,5m,,
+HAM:B001:750,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,5m,,
+HAM:B001:756,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,15m,,
+HAM:B001:785,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,5m,,
+HAM:B001:791,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,15m,,
+HAM:B001:802,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,15m,,
+HAM:B001:807,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,5m,,
+HAM:B001:842,KOŞ,,236 ailesinin 1h sürümü (üçüncü dal da farklı): farklı TF ön kayıt gereği ayrı hipotez.,1h,Apollo/Saturn,evet
+HAM:B001:888,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,5m,,
+HAM:B001:889,KOŞ,,Temsilci: özgün NormalizerStrategy.,1h,Normalizer,evet
+HAM:B001:890,ÇIKAR,c,889 ile sinyal kodu birebir aynı (diff: yalnız ROI tablosu ve trailing değerleri — HO2 hyperopt çıktısı); temsilci 889.,1h,Normalizer,hayır
+HAM:B001:893,ÇIKAR,s,"Aşama 1'de koşulan HAM:X005:578#v1 (kapanis__slowpotato-s0578, 5m) ile birebir: düşük ≤ SMA(düşük,1440) giriş, yüksek ≥ SMA(yüksek,1440) çıkış, aynı iz stop (%2/%3) ve stopsuz→ATR14×3 uyarlaması.",5m,,
+HAM:B001:898,KOŞ,,"Ayrı fikir. Dikkat: kural metni eksik — kaynakta custom_sell var (kâr>%1 ve ROC6<0,5 ise çık), renk dizisi koşulu dosyada yok; kodlayıcı dosyayı esas almalı. 'Çıkış yok' sanılıp m/a türünden çıkarılmadı.",5m,,
+HAM:B001:905,KOŞ,,"6h sürümü; 906 ile TF ve çıkış koşulu farklı. Dikkat: ROI 60 dk sonrası −%1 → fiilen 1 mumluk tutma, stop −%1,5.",6h,pcb20/tacos,evet
+HAM:B001:906,KOŞ,,1d sürümü; 905 ile TF ve çıkış koşulu farklı (ayrı hipotez). Aynı ROI/stop uyarısı.,1d,pcb20/tacos,evet

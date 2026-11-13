@@ -236,3 +236,75 @@ Tarih: 2026-11-13. Gerçek mum verisi açılmadı, hiçbir koşu yapılmadı, `v
 - Temsilci başka nedenle düşerse (kodlanamadı, lookahead çıktı vb.) ailesinden bir ÇIKAR kaydı geri alınmalı; temsilci kimlikleri CSV gerekçesinde yazılı.
 - "s" türünde eş kimlik aşama 1'de zaten koşulduğu için sonuç oradan okunur; aşama 2'de ikinci kez hipotez sayılmaz.
 - COK_KOLLU (87), VERI_YOK, LOOKAHEAD vb. satırlar kapsam dışıdır; bu rapor yalnız 277 KOSULACAK satırını kapsar.
+
+## Ek: K3-3 48 satır
+
+Tarih: 2026-11-13. Triyajda (`triyaj_asama2.csv`, alt küme K3-3) yukarıdaki 277 satırın dışında kalmış 48 Robotic KOSULACAK satırı (`ara/k3_p01.csv`, kaynak_id HAM:B001:*) aynı ölçütlerle elendi. Veri açılmadı, koşu yapılmadı. Kararlar kural metni + kaynak dosyaların okunması (çalıştırılmadan; içerik veri sayıldı) + aşama 1 koşu listesi ve sınıf belge satırları üzerinden verildi. Satır satır: `eleme_asama2_robotic_k3.csv` (aynı sütunlar). Yukarıdaki 277 kararının hiçbiri değişmedi.
+
+### Özet
+
+| | Önce | ÇIKAR | KOŞ |
+|---|---:|---:|---:|
+| K3-3 Robotic KOSULACAK | 48 | 10 | 38 |
+| 277 + 48 birlikte | 325 | 95 | 230 |
+
+| TF | Önce | ÇIKAR | KOŞ |
+|---|---:|---:|---:|
+| 5m | 22 | 5 | 17 |
+| 15m | 8 | 1 | 7 |
+| 1h | 13 | 2 | 11 |
+| 4h | 1 | 0 | 1 |
+| 6h | 2 | 1 | 1 |
+| 1d | 2 | 1 | 1 |
+
+Tür dağılımı: c (aile varyantı) 5, s (aşama 1 eşi) 4, g (kaynak kodlanamaz) 1; m ve a türünden çıkarılan yok. Aynı süre modeliyle: 1078 dk → 230 dk çıkarıldı (≈ %21; 5 × 5m).
+
+### ÇIKAR listesi (10)
+
+| Kimlik | TF | Dosya | Tür | Gerekçe |
+|---|---|---|---|---|
+| B001:540 | 5m | DCBBBounce.py | s | Aşama 1 HAM:X005:577#v1 (kapanis__donchian-agirlikli-bb-s0577, 5m) ile birebir. Kaynakta sell_hold=True dalı etkin (ROI %27,8/8,7/3,8; stop −%33,3; iz %17,2/%21,2) = aşama 1 değerleri; K3 kural metnindeki ROI/stop etkin olmayan dala ait. |
+| B001:652 | 1h | EMAPriceCrossoverWithThresh.py | s | Aşama 1 HAM:X005:554#v1 (kapanis__ema800-kesisim-s0554, 1h) ile birebir (EMA800 kesişimi, ×0,99 çıkış, %15 iz stop). |
+| B001:893 | 5m | SlowPotato.py | s | Aşama 1 HAM:X005:578#v1 (kapanis__slowpotato-s0578, 5m) ile birebir (SMA1440 düşük/yüksek, aynı iz stop). |
+| B001:644 | 1d | ActionZone.py | s | Aşama 1 HAM:X005:418#v1 (kapanis__cdc-actionzone-s0418, 1d) ile aynı giriş/çıkış sinyali (EMA12/26 + kapanış); tek fark stop (14 mumluk en düşük ↔ ATR14×3) — yakın kopya. |
+| B001:688 | 5m | SMAIP3v2.py | c | 687 ile giriş birebir; yalnız çıkış/ROI/trailing. Temsilci 687. |
+| B001:689 | 5m | SMAOG.py | c | 687 ile aynı giriş iskeleti (pencere/eşik farkı), çıkış 688 türü. Temsilci 687. |
+| B001:521 | 15m | Saturn5.py | c | 236 (Apollo11) ile giriş kodu birebir, aynı TF; yalnız stop/ROI. Temsilci 236. |
+| B001:890 | 1h | NormalizerStrategyHO2.py | c | 889 ile sinyal birebir; yalnız ROI/trailing (hyperopt). Temsilci 889. |
+| B001:489 | 5m | Chandemtwo.py | c | 277'de KOŞ olan 488 (Chandem) ile aynı kural: giriş 1 mum gecikmeli teyitli, çıkışa CMO<−35 eki. Temsilci 488. |
+| B001:617 | 6h | tacos1.py | g | Kaynak çalışmaz: giriş, dosyada tanımlı olmayan parametre (buy_ema_short) ve sütunları (ema_bshort_*/ema_blong_*) kullanıyor; kısa EMA değeri yalnız yorum satırındaki hyperopt dökümünde. Kural uydurmadan kodlanamaz. |
+
+### Aileler ve 277 ile tutarlılık
+
+| Aile | Üye (bu 48'de) | KOŞ | ÇIKAR | Not |
+|---|---:|---|---|---|
+| SMA-ofset (EWO'suz) — yeni | 4 | 691, 687 | 688, 689 | 691 kanonik süzgeçsiz SMAOffset; 687 ek trend + düşüş süzgeçli alt sürümün özgün dosyası. EWO koşulu olmadığı için 277'deki EWO-ofset A/B/C ailelerine katılmadı (673 "Lite" orada EWO>0 taşıyor). 277'deki 699 (SMAOffsetV2, 1h trend süzgeçli) ayrı kalmaya devam ediyor. |
+| Apollo/Saturn — yeni | 3 | 236, 842 | 521 | 842 farklı TF (1h) → ayrı hipotez. |
+| Normalizer — yeni | 2 | 889 | 890 | |
+| Chandem (277'de 488 tekti) | 1 | — | 489 | Temsilci 277'de zaten seçili (488). |
+| Tema-BB (277: 527, 528 KOŞ) | 1 | 526 | — | Tetik farklı (CMO kesişimi tetik, TEMA≤bant durum); ek mantık sayılıp kaldı. |
+| GnF — yeni | 2 | 147, 148 | — | 148 = 147 + hacim süzgeci; ek süzgeç → ikinci temsilci. |
+| GKD — yeni | 2 | 607, 608 | — | Ortak şablon, farklı çekirdek gösterge (Hurst ↔ PFE). |
+| pcb20/tacos — yeni | 2 | 905, 906 | — | Farklı TF (6h ↔ 1d) ve çıkış. |
+
+Diğer 21 satır tek başına ayrı fikir: KOŞ. 277'deki akrabalarıyla karşılaştırılıp ayrı bırakılanlar: 213 (↔ 214 RSIBB_V4, giriş mantığı farklı), 55 (↔ 56/57/58 Zaratustra, koşul iskeleti farklı).
+
+### Keyfî / tartışmalı (dürüst not)
+
+1. **644 (s).** Sinyal aşama 1 eşiyle aynı ama stop farklı (14 mumluk dip izleyen stop ↔ ATR×3). 613 emsaliyle çıkarıldı; 482/380 emsaliyle (çıkış farkı → kaldı) KOŞ da savunulabilirdi. 1d olduğu için süre etkisi yok, yalnız BH sayısını etkiler; ilk geri alınacak karar bu.
+2. **489 (c).** Giriş birebir değil, 1 mum gecikmeli teyit; "aynı fikrin hyperopt/varyantı" yargısı.
+3. **148 KOŞ / 669 ÇIKAR farkı.** 277'de 669 (hacim süzgeci eki) 13 üyeli ailede çıkarılmıştı; burada 2 üyeli 1h ailede ek süzgeçli sürüm ikinci temsilci olarak kaldı ("aile başına 1–2 temsilci, emin değilsen KOŞ"). Sert budama istenirse 148 çıkar.
+4. **521 (c).** Çıkış tarafı (ROI %5, sabit stop ↔ ROI yok, kademeli stop) belirgin farklı; 395/396 emsaliyle (giriş aynı, çıkış ayarı farklı → ÇIKAR) çıkarıldı.
+5. **617 (g).** Yapısal değil, kaynak kusuru; lider K3 kararını KURAL_YOK'a çevirmeyi tercih edebilir.
+
+### KOŞ kalıp dikkat isteyenler
+
+| Kimlik | Not |
+|---|---|
+| B001:43 | Long kolu "kapanış<BB alt VE kapanış>EMA20" + 6 koşul: neredeyse çelişkili, 200 işlem sınırda; cebirsel imkânsızlık gösterilemediği için kaldı (801/656 emsali). |
+| B001:898 | K3 kural metni eksik/yanlış: kaynakta custom_sell var (kâr>%1 ve ROC6<0,5), renk dizisi koşulu dosyada yok. Kodlayıcı dosyayı esas almalı. |
+| B001:540 | (ÇIKAR) K3 kural metni yanlış dalın ROI/stop değerlerini yazmış; geri alınırsa etkin dal sell_hold=True. |
+| B001:905, 906 | ROI 60 dk sonrası −%1 → fiilen tek mum tutma; stop −%1,5 (6h/1d mumda çok sık tetiklenir). |
+| B001:213 | Short kolu fiilen ölü (hacim, alt hacim bandını aşağı kesmeli). |
+| B001:234 | Kâr hedefi %1, 5m: maliyete duyarlı. |
+| B001:155, 55, 60, 63 | Çok-TF (informative) kurallar: hizalama/lookahead denetimi kodlamada şart. |
