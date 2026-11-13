@@ -364,7 +364,8 @@ def pf_rastgele_p(satir: dict, pk, v: dict, f: dict, b: Baglam) -> dict:
     etkin = st.etkin_semboller(evren_t)
     st = st.yeni(semboller=etkin) if etkin else st
     sec = wp.gerekli_semboller(st, evren_t)
-    vv, ff = {s: v[s] for s in sec}, {s: f[s] for s in sec if s in f}
+    ff = {s: f[s] for s in sec if s in f}
+    vv = {s: funding.stratejiye_hazirla(st, v[s], f.get(s), s, satir["tf"]) for s in sec}   # funding_gerekli: funding_orani sütunu (portfoy._hesap ile aynı)
     ay = dataclasses.replace(hm.maliyet_pf(evren_t, 2.0, b.tablo), limit_modu="uygula", baslangic_sermaye=kpf.BASLANGIC_SERMAYE,
                              risk_yuzde=kpf.ISLEM_RISK_YUZDE)
     hz = sp.RastgeleHazirlik(st, vv)

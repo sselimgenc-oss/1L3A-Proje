@@ -327,3 +327,30 @@ def test_kuru_mod_sahte_dizin(tmp_path) -> None:
     assert r["T:X"]["durum"] == "COZULEMEDI"
     (d / "BTCUSDT" / "5m.parquet").unlink()
     assert "VERI_YOK" in {x["kimlik"]: x for x in kk.kuru(satirlar[:1], mum_dizini=d)}["T:A"]["sorun"]
+
+
+def test_cikis_ayarlari_sozlugu_nesneye_cevrilir() -> None:
+    """Liste CSV'sinde `cikis_ayarlari` sözlük gelir; strateji_kur CikisAyarlari nesnesine çevirir (aksi: 'dict' ... atr_iz_suren_k)."""
+    satir = _satir("T:CA", SahteA.ad, par=json.dumps({"aralik": 6, "cikis_ayarlari": {"zaman_cikisi_mum": 4, "kismi": [[1.0, 0.25]]}}))
+    st, pf, _ = kk._kur(satir)
+    assert not pf and isinstance(st.cikis_ayarlari, CikisAyarlari)
+    assert st.cikis_ayarlari.zaman_cikisi_mum == 4 and st.cikis_ayarlari.kismi == ((1.0, 0.25),)
+    assert st.cikis_ayarlari.atr_iz_suren_k is None
+
+
+def test_pf_rastgele_p_funding_sutunu_aktarilir(monkeypatch) -> None:
+    """funding_gerekli pf sınıfında rastgele-giriş kapısı, mumları `funding.stratejiye_hazirla` ile (funding_orani) hazırlar."""
+    class Dur(Exception):
+        pass
+    cagrilar = []
+
+    def sahte(st, mumlar, fund, sembol, tf):
+        cagrilar.append((sembol, tf))
+        raise Dur
+    monkeypatch.setattr(kk.funding, "stratejiye_hazirla", sahte)
+    satir = _satir("T:PF", "pf__v3-funding-z90-3gun", tf="1d")
+    v = {s: _mumlar(i) for i, s in enumerate(SEMBOLLER)}
+    f = {s: pd.DataFrame() for s in SEMBOLLER}
+    with pytest.raises(Dur):
+        kk.pf_rastgele_p(satir, None, v, f, _baglam(Path("/tmp")))
+    assert cagrilar and cagrilar[0][1] == "1d"

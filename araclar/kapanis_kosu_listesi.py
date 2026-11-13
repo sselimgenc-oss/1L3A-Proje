@@ -113,6 +113,15 @@ def strateji_kur(sinif: str, modul: str, parametreler: dict):
     if pf:
         cls(**parametreler)                    # parametre doğrulaması (bilinmeyen anahtar -> ValueError)
         return None, True
+    parametreler = dict(parametreler)
+    ca = parametreler.get("cikis_ayarlari")
+    if isinstance(ca, dict):                   # liste CSV'sinde sözlük olarak gelir -> CikisAyarlari nesnesi (kayit.py ile aynı dönüşüm)
+        from motor.strateji.cikislar import CikisAyarlari
+        ca = dict(ca)
+        for alan in ("kismi", "stop_basamaklari", "azalan_roi", "kar_rsi_esikleri", "yasa_bagli_zarar_cikisi", "kismi_yuzde"):
+            if alan in ca:
+                ca[alan] = tuple(tuple(x) if isinstance(x, (list, tuple)) else x for x in ca[alan])
+        parametreler["cikis_ayarlari"] = CikisAyarlari(**ca)
     return cls(**parametreler), False
 
 

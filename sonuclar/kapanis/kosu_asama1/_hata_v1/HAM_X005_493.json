@@ -1,0 +1,12 @@
+{
+ "durum": "HATA",
+ "evren": "kripto13",
+ "hata": "RuntimeError: BTCUSDT x1: AttributeError: 'dict' object has no attribute 'atr_iz_suren_k'",
+ "iz": "Traceback (most recent call last):\n  File \"/home/user/1L3A-Proje/araclar/kapanis_kosu.py\", line 281, in tek_grafik_kos\n    try:\n    \n  File \"/home/user/1L3A-Proje/motor/arastirma/kapanis/tek_grafik.py\", line 41, in tek_ham_kos\n    sonuc = backtest(hazir, strateji, ayarlar, fonlama)\n  File \"/home/user/1L3A-Proje/motor/backtest/motor.py\", line 157, in backtest\n    if not (strateji.cikis_var_mi() or ca.atr_iz_suren_k or ca.zaman_cikisi_mum\n                                       ^^^^^^^^^^^^^^^^^\nAttributeError: 'dict' object has no attribute 'atr_iz_suren_k'\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File \"/home/user/1L3A-Proje/araclar/kapanis_kosu.py\", line 399, in kimlik_isle\n    return {**taban, \"durum\": \"COZULEMEDI\", \"hata\": satir[\"notlar\"]}\n                                                   ^^^^^^^^^^^^^^^^^\n  File \"/home/user/1L3A-Proje/araclar/kapanis_kosu.py\", line 285, in tek_grafik_kos\n    except Exception as e:  # noqa: BLE001 — sembol bağlamı eklenip yeniden fırlatılır (yutulmaz)\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nRuntimeError: BTCUSDT x1: AttributeError: 'dict' object has no attribute 'atr_iz_suren_k'\n",
+ "katman": "G8",
+ "kimlik": "HAM:X005:493",
+ "p": 1.0,
+ "sinif": "swing__dar-aralik-kirilim",
+ "sure_sn": 0.3,
+ "tf": "1d"
+}

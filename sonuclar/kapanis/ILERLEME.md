@@ -249,3 +249,8 @@ Talimat: `KODLAMA_TALIMATI.md`. Girdi: `kod_girdi/` (birleştirme betiğinin nih
   HAM:V001:225 `stop_sonrasi_bekleme_mum` kullandığı için kapı 6 HATA (p=1) olacak — ön kayıt gereği gizlenmez.
 - Koşucu `araclar/kapanis_kosu.py --asama 2` (ayrı çıktı/BH ailesi). Aşama 2 koşusu aşama 1 bittikten sonra başlatılacak (CPU paylaşımı).
 - Lider notu: aşama 1'i yeniden başlatırken koşu günlüğünün son satırında tek bir aşama 1 p değeri görüldü; hiçbir karar buna dayanmadı.
+
+## 2026-11-13 — Sonuç sonrası altyapı düzeltmesi (7 kayıt)
+- Fable saatlik süreç denetimi (FABLE_SUREC_DENETIM.md) 7 HATA buldu, hepsi altyapı: (a) 4 kayıtta `cikis_ayarlari` sözlük→`CikisAyarlari` dönüşümü eksik (`kapanis_kosu_listesi.strateji_kur`), (b) 3 funding pf kaydında kapı 6 yoluna `funding_orani` aktarılmıyordu (`kapanis_kosu.pf_rastgele_p`).
+- Ön kayıt gereği: eski HATA JSON'ları `kosu_asama1/_hata_v1/`'de korunur; 7 kayıt düzeltilmiş kodla yeniden koşuldu, JSON'larda `sonuc_sonrasi_duzeltme` alanı var. Raporda "sonuç sonrası" diye ayrıca gösterilecek.
+- Kapı 6 teşhisi (TESHIS_KAPI6.md): simülatörde hata yok; negatif T ile küçük p birlikte çıkabilir (rastgele giriş maliyet sürüklenmesi); asıl süzgeç kapı 1–5 + BH + ikinci kapı.
