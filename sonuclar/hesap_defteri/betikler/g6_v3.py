@@ -744,7 +744,7 @@ for vid, dfn in DAL_DOSYALAR:
     for i, r in enumerate(rows_, 1):
         sutunlar = list(r.keys())
         ad_ = r.get('strateji') or r.get('ad') or r.get(sutunlar[1] if len(sutunlar) > 1 else sutunlar[0]) or ''
-        url_ = r.get('URL') or r.get('url') or r.get('kod_linki') or ''
+        url_ = r.get('URL') or r.get('url') or r.get('kod_linki') or r.get('kaynak_url') or ''
         ek.append((i, r, ad_, url_))
     dal_rapor.append((vid, dfn, 'okundu', len(rows_), sutunlar))
     globals().setdefault('DAL_SATIRLARI', {})[vid] = (dfn, ek)
@@ -756,6 +756,37 @@ for vid, (dfn, ek) in globals().get('DAL_SATIRLARI', {}).items():
         if (nurl(url_) and nurl(url_) in ham_url_set) or (nrm(ad_) and nrm(ad_) in ham_ad_set):
             kapsanan += 1
     DAL_OZET[vid] = (dfn, len(ek), kapsanan)
+
+# dal satırları: URL/repo'su MASTER_katalog (V001) içinde bulunanlar "kapsanıyor"; bulunamayanlar (strateji olmayan
+# "proje bulunamadı / araç / okunmadı" satırları) ham satır olarak eklenir.
+_master_blob = [' '.join(r.values()).lower() for r in katalog['MASTER_katalog_2026-11.csv']]
+DAL_KAPSANAN = collections.Counter()
+for vid, (dfn, ek) in globals().get('DAL_SATIRLARI', {}).items():
+    for i, r, ad_, url_ in ek:
+        keys = []
+        u = re.sub(r'^https?://(www\.)?', '', (url_ or '').lower()).rstrip('/')
+        if len(u) > 5 and u != '-':
+            keys.append(u)
+        m = re.match(r'([^ ]+)', (ad_ or '').lower())
+        if m and '/' in m.group(1):
+            keys.append(m.group(1))
+        if keys and any(any(k in b for k in keys) for b in _master_blob):
+            DAL_KAPSANAN[vid] += 1
+            continue
+        durum = (r.get('durum') or '')
+        ad_g = ad_ if ad_ and ad_ != '-' else (r.get('bolge') or r.get('ulke') or '-')
+        notm = r.get('not') or r.get('sonuc_ozeti') or ''
+        nk, ond = 'kapsam_disi', 'D_KODLANMADI_NEDENLI'
+        if r.get('tur') == 'ML' or durum == 'elendi' and 'ML' in notm:
+            nk, ond = 'ml', 'G_ML'
+        row = {c: '' for c in SUTUNLAR}
+        row.update({'ham_id': f'{vid}:{i}', 'kaynak_id': vid, 'kaynak_satir_no': str(i), 'kaynaktaki_ad': kisalt(ad_g, 120),
+                    'kisa_mantik': kisalt(f"{r.get('sonuc_ozeti','')} | {notm}", 160), 'aile': 'diger', 'eslesme': 'YOK',
+                    'on_durum': ond, 'neden_kodu': nk,
+                    'neden_metni': kisalt(f"strateji satırı değil (durum={durum}): {notm}; {r.get('sonuc_ozeti','')}", 200),
+                    'kanit': f"{DAL_ON}{dfn}:{i}",
+                    'not': f"dal ek kataloğu; MASTER_katalog (V001) içinde karşılığı yok; kaynak_id {vid} geçici (kaynaklar.csv'de yok)"})
+        cikti.append(row)
 
 # --------------------------------------------------------------------------------------
 # 7) elle kararlar

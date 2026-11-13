@@ -361,7 +361,7 @@ def v2_havuz_disi(ad, havuz, kume_uye, temsilci_of):
                 "stratejiler/v3_adaylar/kodlama_v3.csv; sonuclar/evren/v2/havuz_muhru.json")
     if b.tur == "portfoy":
         return ("BELIRSIZ: pf stratejisi havuzda yok; havuz_v2_olustur.py tum_portfoy_stratejileri()'nin hepsini alır, sınıf mühürden sonra eklenmiş olabilir",
-                "araclar/havuz_v2_olustur.py:adaysatir_nolari")
+                "araclar/havuz_v2_olustur.py:aday_satirlari")
     if stil != "swing":
         ek = ""
         if pre in ("daytrade", "scalp"):
@@ -376,7 +376,7 @@ def v2_havuz_disi(ad, havuz, kume_uye, temsilci_of):
             else:
                 ek = "; swing__ karşılığı yok (2.3: havuza girmez)"
         return (f"stil v2 dışı: {stil} (ON_KAYIT_V2 2.2: daytrade/scalp v2 resmi ailesine girmez; yalnız 7'li gün-içi kripto hipotezi 2.5){ek}",
-                "sonuclar/evren/ON_KAYIT_V2.md:2.2,2.3,2.5; araclar/havuz_v2_olustur.py:adaysatir_nolari")
+                "sonuclar/evren/ON_KAYIT_V2.md:2.2,2.3,2.5; araclar/havuz_v2_olustur.py:aday_satirlari")
     if ad in temsilci_of:
         t = temsilci_of[ad]
         h = havuz.loc[t]
@@ -715,12 +715,17 @@ def main():
                 else:
                     kapi = f"kodlama_v3 durum={r.durum}: {r.not_}"
             else:
-                kapi = "neden yazılı değil"
+                diger = [x for k2 in v3kod.values() for x in k2 if isinstance(x.not_, str) and ad in x.not_]
+                if diger:
+                    kapi = (f"yerine {diger[0].strateji_ad} kodlandı; eski tek-grafik sürüm kaynağa aykırı sayıldı (kodlama_v3.csv satır {diger[0].satir_no} notu); "
+                            "tek-grafik sürüm v3 eleme listesinde yok")
+                else:
+                    kapi = "neden yazılı değil"
         else:
             son = st[-1]
             rank, asama, sonuc, kapi = son
             kesif_yolu = (o.get("_paper_etiket") == "iyi_gorundu")
-            if rank >= 40 or (rank == 34 and sonuc == "gecti"):
+            if asama in ("paper_v2", "canli_kadro") or (asama == "v2_holdout" and sonuc == "gecti"):
                 durum = "A_TEST_EDILDI_GECTI"
                 if kesif_yolu:
                     not_.append("keşif yolu (kanıt değil): resmi v2'de elendi/izlemede; paper'a sonuç-sonrası holdout keşfi (kullanıcı onayı 2026-11-10) ile alındı")
@@ -731,11 +736,7 @@ def main():
                 durum = "B_TEST_EDILDI_ELENDI"
             if durum.startswith("A"):
                 # A için aşama adı: spec sıralaması
-                if rank >= 41:
-                    asama = "canli_kadro"
-                elif rank >= 40:
-                    asama = "paper_v2"
-                elif asama == "v2_test":
+                if asama == "v2_test":
                     asama = "v2_test_kesif"
                 kapi = kapi if durum.startswith("B") else ""
             if asama == "v2_eleme_hata":
@@ -1066,7 +1067,7 @@ def notlar(cikti, ay, ctx):
     dd = dis.v2_havuz_disi_neden.map(sinif).value_counts()
     for k, v in dd.items():
         L.append(f"- {k}: {v}")
-    L.append("\nv1 WF'de (g1/g2) kalma, v2 havuzuna girişin ÖLÇÜTÜ DEĞİLDİR: `araclar/havuz_v2_olustur.py::adaysatir_nolari` yalnız stil, klon kuralı, kümeleme ve etiketlere bakar. "
+    L.append("\nv1 WF'de (g1/g2) kalma, v2 havuzuna girişin ÖLÇÜTÜ DEĞİLDİR: `araclar/havuz_v2_olustur.py::aday_satirlari` yalnız stil, klon kuralı, kümeleme ve etiketlere bakar. "
              "v1 sonuçları yalnız 2.7(b) kümelemesinde haftalık OOS serisi olarak kullanılır.\n")
     L.append("### havuzda olmayıp kod_kaydi'nda olan (v1'de olmayanlar dahil) toplam\n")
     d2 = cikti[cikti.v2_havuzda == "hayir"].v2_havuz_disi_neden.map(sinif).value_counts()

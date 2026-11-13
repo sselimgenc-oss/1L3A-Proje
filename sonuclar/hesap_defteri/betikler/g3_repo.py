@@ -728,3 +728,96 @@ for n, ad, url, ozet in MD2:
         s.update(eslesme='TEKRAR', hedef=f'P008:L{t}', on_durum='TEKRAR', neden_kodu='kopya',
                  neden_metni='aynı strateji aynı URL (day_trade_..._listesi.md satır %d)' % t, kanit=f'arsiv/sg-arge-/day_trade_swing_trade_strateji_listesi.md:{t}')
     md2_ham.append(s)
+
+# ---------------------------------------------------------------- çıktı
+import random
+TUM = list(P001.values()) + list(P002.values()) + list(P003.values()) + xlsx_ham + list(md1_ham.values()) + md2_ham
+ids = [s['ham_id'] for s in TUM]
+assert len(ids) == len(set(ids)), 'yinelenen ham_id'
+with open(ARA / 'G3_REPO_ham.csv', 'w', newline='', encoding='utf-8') as f:
+    w = csv.DictWriter(f, fieldnames=SUTUN)
+    w.writeheader()
+    for s in TUM:
+        w.writerow({c: s.get(c, '') for c in SUTUN})
+with open(ARA / 'G3_REPO_elle_kararlar.csv', 'w', newline='', encoding='utf-8') as f:
+    w = csv.writer(f)
+    w.writerow(['ham_id', 'karar', 'neden'])
+    w.writerows(ELLE)
+
+sayi = collections.OrderedDict((k, len(v)) for k, v in (('P001', P001), ('P002', P002), ('P003', P003), ('P006', XLSX['P006']), ('P007', XLSX['P007']), ('P008', MD1), ('P009', MD2)))
+dag = collections.defaultdict(collections.Counter)
+for s in TUM:
+    dag[s['kaynak_id']][s['on_durum']] += 1
+esl = collections.defaultdict(collections.Counter)
+for s in TUM:
+    esl[s['kaynak_id']][s['eslesme']] += 1
+kd2 = lambda P, key: collections.Counter(s['not'].split('kaynak_durum=')[1].split(';')[0] for s in P.values() if 'kaynak_durum=' in s['not'])
+rr_durum = kd2(P002, 0)
+rk_durum = kd2(P001, 0)
+tv_n = sum(1 for x in rr if x['kaynak'] == 'tv_listesi')
+tv_tekrar = sum(1 for k, s in P002.items() if rr[k - 1]['kaynak'] == 'tv_listesi' and s['eslesme'] == 'TEKRAR')
+random.seed(7)
+ornek = random.sample(TUM, 10)
+ornek_satir = []
+for s in ornek:
+    ornek_satir.append(f"- {s['ham_id']} \"{s['kaynaktaki_ad'][:50]}\" -> {s['eslesme']} {s['hedef']} ({s['on_durum']}) ")
+
+# öz kontrol: ham_id -> kaynak satırı adı gerçekten aynı mı
+hata = 0
+for s in TUM:
+    if s['kaynak_id'] == 'P001' and rk[int(s['kaynak_satir_no']) - 1]['ad'][:120] != s['kaynaktaki_ad']:
+        hata += 1
+    if s['kaynak_id'] == 'P002' and rr[int(s['kaynak_satir_no']) - 1]['ad'][:120] != s['kaynaktaki_ad']:
+        hata += 1
+
+L = []
+L.append('# G3_REPO notları\n')
+L.append('Betik: `sonuclar/hesap_defteri/betikler/g3_repo.py` (yeniden üretir). Elle kararlar: `ara/G3_REPO_elle_kararlar.csv`.\n')
+L.append('## Kaynak satır sayısı ↔ ham satır\n')
+L.append('| kaynak_id | dosya | kaynak satırı | ham satır | not |\n|---|---|---:|---:|---|')
+dos = {'P001': RK, 'P002': RR, 'P003': E77, 'P006': 'arsiv/sg-arge-/strateji_listesi.xlsx', 'P007': 'arsiv/sg-arge-/strateji_listesi (2).xlsx',
+       'P008': 'arsiv/sg-arge-/day_trade_swing_trade_strateji_listesi.md', 'P009': 'arsiv/sg-arge-/dpay_trade_swing_trade_strateji_listesi.md'}
+nt = {'P001': 'tam', 'P002': 'tam', 'P003': '#1..#77 tam', 'P006': 'ID dolu satırlar (sayfa 244 satır - başlık); hepsi TEKRAR -> P001', 'P007': '282 satır - başlık = 281; hepsi TEKRAR -> P001',
+      'P008': 'tablo satırları (Denetim/Kaynak grubu tabloları strateji değil, alınmadı)', 'P009': 'tablo satırları'}
+for k, v in sayi.items():
+    L.append(f'| {k} | {dos[k]} | {v} | {sum(dag[k].values())} | {nt[k]} |')
+L.append(f'\nToplam ham satır: {len(TUM)}. P004 (kuyruk 133 satır), P005 (b.csv 88 satır) ve kodlama d10a-e/d12a/pf dosyaları eşleme kaynağıdır, ham satır üretmez; kuyruk\'un repo atıflı 109 referansının 109\'u eşleşti.\n')
+L.append('## xlsx ↔ repo_kodlari sayı farkı\n')
+L.append('- strateji_listesi.xlsx 243 kayıt, strateji_listesi (2).xlsx 281 kayıt; (1)\'deki tüm ID\'ler (2)\'de var, (2) fazladan 38 kayıt içerir (3. tur: A6-016/017, O2-013..016, P3-001.. vb.).')
+L.append('- repo_kodlari liste_xlsx = 281 satır = (2)\'nin tamamı (ID ile birebir). Yani repo_kodlari yalnız (2)\'yi esas almış; (1) alt kümedir. 281 satırda 280 tekil ad var (AlphaTrend Strategy iki platformda: O1-001 Matriks, B1-002 TradingView).')
+L.append('- liste_md 51 satır, day_trade md 65 tablo satırı: 14 md satırı repo_kodlari\'da ayrı satır değil (aynı URL\'li satıra katılmış; 4\'ü ayrı kural olduğu için BENZER ayrıca değerlendirildi: L82, L103, L104, L105; kalan 10 TEKRAR URL eşlemesiyle).')
+L.append('- dpay md 51 satır = day_trade md\'nin 2. ve 3. tablolarıyla aynı strateji/URL (hepsi TEKRAR -> P008). Repo_kodlari yalnız day_trade md\'yi kaynak göstermiş; dpay dosyası envanterde ama hiçbir satırı doğrudan kullanılmamış.\n')
+L.append('## on_durum dağılımı (kaynak başına)\n')
+for k in sayi:
+    L.append(f'- {k}: ' + ', '.join(f'{a}={b}' for a, b in sorted(dag[k].items())))
+L.append('\n## eslesme dağılımı (kaynak başına)\n')
+for k in sayi:
+    L.append(f'- {k}: ' + ', '.join(f'{a}={b}' for a, b in sorted(esl[k].items())))
+tot = collections.Counter(s['on_durum'] for s in TUM)
+L.append('\nGenel on_durum: ' + ', '.join(f'{a}={b}' for a, b in sorted(tot.items())))
+L.append('Genel eslesme: ' + ', '.join(f'{a}={b}' for a, b in sorted(collections.Counter(s['eslesme'] for s in TUM).items())))
+L.append('\n## DURUM.md sayılarıyla karşılaştırma\n')
+L.append(f'- DURUM: rapor 314 strateji / 65 yeni / 54 yasak. Benim sayım (repo_raporlari.csv durum sütunu): {sum(rr_durum.values())} satır = 314 + 17 arac_sablon; durumlar: ' + ', '.join(f'{a}={b}' for a, b in sorted(rr_durum.items())) + ' -> yeni=65 ve yasak=54 TUTUYOR.')
+L.append(f'- DURUM: kod 398 / 44 yeni. Benim sayım: {sum(rk_durum.values())} satır; ' + ', '.join(f'{a}={b}' for a, b in sorted(rk_durum.items())) + ' -> yeni=44 TUTUYOR (liste_xlsx 37, liste_md 6, daytrade_py 1).')
+L.append(f'- ham `on_durum` sayıları kaynak durumdan farklı çıkar çünkü: tv_listesi {tv_n} satırın {tv_tekrar}\'i dis_envanter\'deki aynı betik olarak TEKRAR (D001:n) yazıldı (G2 karar verir); her satırın kaynak durumu `not` sütununda `kaynak_durum=` ile durur. yasak: 54 rapor satırının 34\'ü TEKRAR (dis_envanter yasak_dca/izgara/katlama betikleriyle aynı), 20\'si F; kod tarafında 6 yasak: 3 F, 3 TEKRAR.\n')
+L.append('## Bulgular / tutarsızlıklar\n')
+L.append('1. **ayar:X (285 kod + 89 rapor) satırlarının çoğunun ayar kaydı yok.** `stratejiler/dis_ayarlari` yalnız tv:/d11j:/kural:/freqtrade:/ek77:/son1ay:/awesome:/jesuistm: kimlikleri, `kart_ayarlari` yalnız kitap kartı kimlikleri taşıyor; repo_kodlari liste_xlsx/liste_md/codex/day-trade/scalp ya da repo_raporlari rapor satırlarına ait HİÇ ayar kaydı yok (ayarlar_d11j_ek / d12b_ek da bu kaynaklara bağlı değil: kaynak_dosya alanları github_g3/kakushadze). Bunların 234\'ü kaynakta "heuristik_esleme (anahtar kelime, dogrulanmadi)". Hepsi BENZER + D_KODLANMADI_NEDENLI/benzer_var yazıldı; `fark` sütununda kaynak özeti ile hedef sınıf docstring\'i yan yana duruyor. Lider "fark test edilmedi" listesine bunları koymalı.')
+L.append('2. repo_kodlari `kapali-kaynak-sistemler` ailesi ("kural metni yok") altına `Quantified Strategies beşli swing portföyü` (P001:359) konmuş; oysa day_trade md satır 103/104/105 aynı makalenin 3 stratejisinin kurallarını açıkça veriyor (IBS bandı, Turnaround Tuesday, 5-gün düşük). Bu md satırları ayrı BENZER değerlendirildi; P001:359 hâlâ D/kural_belirsiz — yanlış olabilir.')
+L.append('3. ek77 #17 ve #69 için d5_ek.py docstring\'i "mevcut ayarlarla aynı" diyor; sınıflar açılınca fark çıktı (EMA200 mum dibi/çıkış/stop; Supertrend EMA20 ek giriş kolu) -> BENZER. ek77 #57 (Carver) için b.csv "carry zaten kodlu" diyor; ama dis__ewmac-carry funding vekili kullanıyor, kaynağın vade-farkı carry\'si değil -> BENZER. ek77 #29 ve #68 sınıf kodu açılarak ESDEGER doğrulandı.')
+L.append('4. ek77 #54 (ML4T CME vadeli) hiçbir kodlama/eşleme dosyasında yok; ML olduğu için G_ML yazdım (lider teyit etsin).')
+L.append('5. portfoy_adaylari.csv\'de ek77 #25 Clenow satırının `pf_sinif` sütunu boş; ama ek2.BAGLAMA_EK2 (satır 3) + kodlama_pf.csv "kodlandi" var -> AYAR (pf__rotasyon). pf.csv `satir_indeksi` 0 tabanlı csv satırı.')
+L.append('6. pdf_adaylari_csv/codex_py `mevcut:dis__...` satırlarından TradingView id\'si taşıyanlar sınıf docstring\'indeki pine id\'si ile dis_envanter satırına bağlandı (TEKRAR D001:n); codex_py yazılımları (ao_ac_zones, kst_momentum, cci3/cci2, wd_pullback) Python uyarlaması olduğu için BENZER bırakıldı.')
+L.append('7. onceki__ sınıfları (s1, 4s-kirilim, kgt, kapitulasyon) modül docstring\'inde swing-sg S1/S2, algo-sg A1/B, KGT v3 kaynağını yazıyor -> ilgili rapor satırları KOD. P002 A2 (ayar:onceki__4s-kirilim) ayar kaydı yok -> BENZER. KMN -> pf__kesit_ls (KOD, baglama satir16).')
+L.append('8. kuyrukta olup kodlanmayan C-öncelikli aileler (özellikle 31 `tv-*` satırı): kodlama dosyasında kaydı yok, kuyrukta da neden yazmıyor; D/kural_belirsiz yazdım, gerekçe: rapor durumu `kural_metni_yok` + kapalı kaynak. Kesin "neden" belgesi yok; E sayılabilir.')
+L.append('9. E_KODLANMADI_NEDENSIZ: bu grupta 0 satır (tüm yeni satırların kuyruk atfı var).')
+L.append('10. portfoy_adaylari.csv `liste8` kaynağı ("8-strateji.md"): `find -maxdepth 4 -name "*8-strateji*"` (repo kökü, sonuclar hariç) sonuç vermedi -> kaynak dosya repoda yok (ek_77_strateji.md de ona link veriyor). liste8-pairs ve liste8-tinycta satırları G2\'nin (D002) satırlarıdır; benim ham satırım değil. `arsiv` kaynaklı KMN/KGT satırları repo_raporlari P002:70/P002:69 ile karşılandı.')
+L.append('11. `ayarlar_d11j_ek.json` / `ayarlar_d12b_ek.json`: G3 satırlarının hiçbiri bu dosyalara bağlı değil (kaynakları github_g3_cerceve/kakushadze_151).\n')
+L.append('## Envanter dışı kaynaklar\n')
+L.append('- `arsiv/sg-arge-/beniokuortak.md` (44 satır) envanterde yok; strateji tablosu içermiyor, atlandı. Geçici Y-id kullanılmadı.\n')
+L.append('## Öz kontrol\n')
+L.append(f'- Otomatik: P001/P002 {sum(1 for s in TUM if s["kaynak_id"] in ("P001","P002"))} satırda kaynaktaki_ad kaynak CSV\'deki satırla karşılaştırıldı, uyumsuz: {hata}.')
+L.append('- Rastgele 10 satır (tohum 7) seçildi; ad doğrulaması yalnız P001/P002 için otomatik yapıldı, xlsx/md/ek77 satırları liste_id/URL eşleşmesi ve hedef/kanıt alanı varlığıyla denetlendi, kaynakla tek tek elle karşılaştırılmadı:')
+L += ornek_satir
+L.append('- TEKRAR hedefleri (D001:n) dis_envanter\'de gerçekten var: ' + str(all(int(s['hedef'].split(':')[1]) <= len(de) for s in TUM if s['hedef'].startswith('D001:'))) + '. Sınıf hedefleri kod_kaydi.csv\'de: ' + str(all(s['hedef'] in kod for s in TUM if s['eslesme'] in ('KOD', 'AYAR', 'ESDEGER', 'BENZER') and s['hedef'])) + '.')
+open(ARA / 'G3_REPO_NOTLAR.md', 'w', encoding='utf-8').write('\n'.join(L) + '\n')
+print(len(TUM), dict(tot), hata)
