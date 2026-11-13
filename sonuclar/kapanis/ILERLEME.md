@@ -141,3 +141,8 @@ Tablolardaki `INCELEME_BEKLIYOR` bir hüküm değildir. `kanit` sütununda eski 
 4. K4'ün 2.204 satırında arşiv kodunu açıp anlamlı farkı denetle; K5 bağlarının nihai akıbetini de kapat. Bütün katmanlarda girdi = karar satırı kontrolü yap.
 5. Yalnız gerçekten koşulacak benzersiz strateji/ayarları listeye al; listeyi ve BH aile büyüklüğünü sonuç görülmeden dondur. Tek koşu betiği, kapılar ve yeni 40 sembol aşamasını hazırla. Bu ortamda gerçek mum koşusu yapılmaz.
 6. Uçtan uca sentetik test, sonra tüm pytest. Hazırlık raporunu nihai sayılarla yaz. Her katman bitince ara commit; hepsi bitince PR aç, main'e birleştirme.
+
+### Denetim notları (DEVAM 2)
+- kul_k3_g8 (45): 10/10 örnek kaynakla uyumlu. 745/746/747 kaynak sayfası erişilemedi (traders.com 403) → KURAL_YOK; ayrıca raporlanacak.
+- kul_k4_g9_b (149): 10/10 karar kaynak kodla uyumlu. Kodlama notu: B001:496 (DD.py) trailing_only_offset_is_reached=False → iz stop offsetten önce de çalışır; kural_tam'daki "offset sonrası" ifadesi kodlamada düzeltilecek. 28 KURAL_YOK "tek kural değil" (çok kollu NFI/Nostalgia vb.) → Fable denetiminde ayrıca bakılacak. emin_degil=evet 39 satır kodlamadan önce kaynak yeniden okunacak.
+- Kullanıcı isteği: 7 parti bitince Fable bağımsız denetleyecek.
