@@ -1,6 +1,6 @@
 # Kapanış turu ilerleme kaydı
 
-Son kontrol: 2026-11-13 12:02 UTC. **Görev bitmedi; gerçek piyasa verisi koşulmadı.** Bu dosya oturum devam noktasıdır.
+Son kontrol: 2026-11-13 12:05 UTC. **Görev bitmedi; gerçek piyasa verisi koşulmadı.** Bu dosya oturum devam noktasıdır.
 
 ## Değişmez ön kayıt
 
@@ -13,7 +13,7 @@ Son kontrol: 2026-11-13 12:02 UTC. **Görev bitmedi; gerçek piyasa verisi koşu
 
 | Katman | Girdi | Karar tablosu | Son karar | Kod/koşu | Durum |
 |---|---:|---:|---:|---|---|
-| K1 | 48 = 26 v3 + 18 ek ayar + 4 teknik hata | 48 | 3 kaynak/evren ret; 45 açık | 18 ayar okuyucusu kuruldu; 26 v3 kartı ve 18 ayar kaynağı satıra bağlandı; dört teknik hata için TF seçildi ve sentetik sinyal testi geçti; koşu bağı yok | sürüyor |
+| K1 | 48 = 26 v3 + 18 ek ayar + 4 teknik hata | 48 | 3 kaynak/evren ret; 45 açık | 18 ayar okuyucusu kuruldu; 26 v3 kartı ve 18 ayar kaynağı satıra bağlandı; dört teknik hata için TF seçildi ve sentetik sinyal testi geçti; tek grafik ham/hesap modülü var; koşu listesi yok | sürüyor |
 | K2 | 7 kaynak biçimi (saatlik, T61, T21, S0002, S0005, Ichimoku, Argus); S0083 gibi alt kaynaklar K4'te | ayrı karar tablosu yok | 0 | S0002 ve S0005 yeni sınıfları + sentetik test | sürüyor |
 | K3 | 1.816 = 161 E + 35 belirsiz + 1.620 diğer D | 1.816 | 0 | kaynak uygunluğu incelenmedi | başlamadı |
 | K4 | 2.204 `benzer_hedef` dolu D (K2'ye ayrılan 5 dahil) | 2.204 | 0 | kaynak ↔ arşiv kodu tek tek karşılaştırılmadı | başlamadı |
@@ -51,8 +51,9 @@ Tablolardaki `INCELEME_BEKLIYOR` bir hüküm değildir. `kanit` sütununda eski 
 
 - `motor/strateji/kapanis/jesse_kaynak.py`: S0002 ve S0005, kaynak satırı/linki, ATR uyarlaması yazılı.
 - `motor/arastirma/kapanis/ek_ayarlar.py`: 18 ayarı iki JSON'dan okur, sınıfına kurar; eski araştırma aday kümelerine müdahale etmez.
-- `testler/test_kapanis_jesse_kaynak.py`, `testler/test_kapanis_ek_ayarlar.py` ve `testler/test_kapanis_k1_teknik.py`: 10 sentetik test geçti (`PYTHONPATH=/tmp/kapanis-test-deps:. python -m pytest ...`). Gelecek mum değişimi geçmiş sinyali etkilemiyor; her girişte stop var; ek ayarlar eksiksiz ve tekil.
-- Tüm suite geçti: `PYTHONPATH=/tmp/kapanis-test-deps:. python -m pytest testler -q -p no:cacheprovider` → **5101 geçti, 17 atlandı** (315 saniye). Eksik Python geliştirme paketleri yalnız `/tmp/kapanis-test-deps` altına kuruldu; repo bağımlılık dosyaları değişmedi. Bu koşu sentetik/birim testleridir; gerçek piyasa strateji koşusu değildir.
+- `motor/arastirma/kapanis/tek_grafik.py`: v2 maliyet/ham işlem yardımcılarını yeniden kullanarak tek grafik sınıfını ×1/×2 çalıştırır; `secim.OynatmaAyari(risk=0.015, kill=0.30)` ile kendi hesabına oynatır. Portföy sınıflarını desteklemez; gerçek veri koşusu yapılmadı.
+- `testler/test_kapanis_jesse_kaynak.py`, `testler/test_kapanis_ek_ayarlar.py` ve `testler/test_kapanis_k1_teknik.py`: 13 sentetik test geçti (`PYTHONPATH=/tmp/kapanis-test-deps:. python -m pytest ...`). Gelecek mum değişimi geçmiş sinyali etkilemiyor; her girişte stop var; ek ayarlar eksiksiz ve tekil.
+- Önceki kod durumunda tüm suite geçti: `PYTHONPATH=/tmp/kapanis-test-deps:. python -m pytest testler -q -p no:cacheprovider` → **5101 geçti, 17 atlandı** (315 saniye). Eksik Python geliştirme paketleri yalnız `/tmp/kapanis-test-deps` altına kuruldu; repo bağımlılık dosyaları değişmedi. Bu tam paket yeni `tek_grafik.py` eklenmeden önceydi; 13 odaklı test yeni kodla geçti. Gerçek piyasa strateji koşusu değildir.
 - `veri/mumlar` bu ortamda yok; gerçek koşu burada yapılamaz.
 - `araclar/kapanis_kosu.py` henüz yazılmadı. Koşu listesi/kapılar/BH/ikinci evren/test sonuçları hazır değil. Veri yokluğu nedeniyle gerçek strateji testi yapılmadı.
 

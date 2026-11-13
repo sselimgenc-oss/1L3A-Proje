@@ -7,7 +7,7 @@
 3. K2 için kaynak biçimindeki Donchian S0002 ve MACD+EMA S0005 kodlandı; sentetik testleri geçti.
 4. K3'te 1.816, K4'te 2.204, K5'te 85 ayarın iz kararı verildi, 535 iz kaydı ana deftere bağlandı; 78 kart ve 8 arşiv kaydı bulundu. 621 iz satırının son akıbeti bekliyor; katmanlar örtüşüyor.
 5. Koşuya kesin bağlanmış strateji sayısı **0**. Nedenli koşulamaz sayısı da henüz doğrulanmadı; soru işareti hedefi 0'a ulaşılmadı.
-6. 10 odaklı test geçti; önceki tam paket geçti: **5101 geçti, 17 atlandı**. Piyasa verisi testi yapılmadı.
+6. 13 odaklı test geçti; önceki kodda tam paket geçti: **5101 geçti, 17 atlandı**. Piyasa verisi testi yapılmadı.
 7. Hakem raporunun işaret ettiği kaynak farkları ve ölçüm sınırları `ILERLEME.md` içinde açıkça kaydedildi.
 
 Bu belge teslim raporu değildir. Kararlar, koşu betiği ve tam test paketi tamamlanınca nihai sayılarla yeniden yazılacak.
