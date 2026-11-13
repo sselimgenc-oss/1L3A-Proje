@@ -209,3 +209,4 @@ Lider kararları:
 - Üçüncü taraf kod repoya girmez: g9_a_v2 `kural_tam` alanlarındaki kaynak kod parçaları kendi cümle/formül anlatımıyla değiştirilecek.
 - derin_erisim `neden` alanı EVREN_DISI satırlarında asıl gerekçeyle düzeltilecek; 742 derin_kod_b bilgisi korunacak.
 - Kesitsel rotasyon/pairs (politika 4): Fable "EVREN_DISI kalsın; istenirse ayrı ön kayıt ekiyle dar katman" diyor → kullanıcıya soruldu.
+- Kullanıcı kararı (politika 4): kesitsel rotasyon ve pairs kuralları EVREN_DISI kalır; ek katman açılmaz.
