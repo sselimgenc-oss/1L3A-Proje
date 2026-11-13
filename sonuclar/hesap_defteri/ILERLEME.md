@@ -53,5 +53,9 @@ Kanıt yollarında `dal:claude/adoring-maxwell-q7t60g:<yol>` yazılır.
   (kesit_ls skor ibs/dusuk_vol/r2_alfa, agirlik orantili; rotasyon agirlik getiri_vol) ne `baglama.BAGLAMA`'da ne ızgarada.
   Nüans: `dusuk_vol` yalnız long rotasyon olarak `pf__rotasyon` BAGLAMA satır 35/40'ta var (L/S hali koşulmadı).
 
+## Zamanlanmış kontrol
+- 2026-11-13 08:35 TSİ (05:35 UTC): otomatik devam mesajı kurulu (kullanıcı isteği; limit yenilenince devam).
+  Devam adımı: bitmiş ara çıktıları denetle → eksik/ölmüş grupları yeniden başlat → birleştir → denetim → RAPOR → PR.
+
 ## Commit günlüğü
 _(boş)_
