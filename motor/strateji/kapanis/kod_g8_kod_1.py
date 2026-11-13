@@ -10,7 +10,8 @@ Ortak uyarlamalar (satır notlarında tekrar edilmez):
   biraz farklı olabilir.
 - Freqtrade `minimal_roi` tablosu (dakika anahtarlı) `CikisAyarlari.azalan_roi` ile: mum sayısı = yukarı yuvarlanmış
   dakika / TF dakikası; hedef kâr kapanışta sınanır, çıkış sonraki açılışta (kaynakta mum içi). Tek basamaklı ROI
-  (zaman yok) sinyaldeki `hedef` (limit) ile ifade edilir.
+  (zaman yok) de aynı biçimde `azalan_roi = ((0, yüzde),)` ile (`RoiTek` karışımı; eskiden sinyaldeki limit `hedef`).
+- Pozisyon bilinçli çıkışlar (41, 43: kapanış bazlı ATR izi) `kod_g8_modul` kancasıyla (pozisyon_cikisi).
 - Freqtrade iz süren stop (`trailing_stop_positive` + offset) `geri_cekilme_yuzde` (iz) +
   `geri_cekilme_min_kar_yuzde` (offset) ile: kâr% farkı, kapanış bazlı (kaynakta fiyat ve mum içi).
 
@@ -31,7 +32,9 @@ from motor.strateji._gosterge_d11j import obv as _obv
 from motor.strateji._gosterge_d11j import wma as _wma
 from motor.strateji.cikislar import CikisAyarlari
 from motor.strateji.daytrade._ortak import cerceve
+from motor.strateji.cikislar import PozisyonDurumu
 from motor.strateji.htf import ust_zaman
+from motor.strateji.kapanis.kod_g8_modul import KancaDestek, RoiTek, kapanis_iz_ihlali
 from motor.strateji.seans_takvimi import mum_suresi
 from motor.strateji.temel import Strateji
 
@@ -86,29 +89,6 @@ def _ust_rsi(m: pd.DataFrame, carpan: int, n: int) -> pd.Series:
     """Alt TF'nin `carpan` katı mumlardan RSI(n); yalnız kapanmış üst mumlar."""
     dk = mum_suresi(m.index) / pd.Timedelta(minutes=1)
     return ust_zaman(m, f"{int(round(dk * carpan))}m", lambda u: g.rsi(u["kapanis"], n))
-
-
-# ================================================================ X005:5
-class MacdEma100S0005(Strateji):
-    """HAM:X005:5 (1h, long): MACD(12,26,9) > sinyal VE kapanış > EMA(100) iken long (durum); MACD < sinyal VE
-    kapanış < EMA(100) olunca kapat. Kaynak stopu yok: ATR(14)x3 (uyarlama).
-    Not: kural jesse_kaynak.MacdEmaS0005 ile aynı mantıktır (lider çiftlemeyi yönetir)."""
-
-    ad, stil = "kapanis__macd-ema100-s0005", "swing"
-    varsayilan_parametreler = {"hizli": 12, "yavas": 26, "sinyal": 9, "ema": 100, "atr_n": 14, "atr_k": 3.0}
-    parametre_izgarasi = {}
-
-    def cikis_var_mi(self) -> bool:
-        return True
-
-    def sinyaller(self, mumlar):
-        p = self.parametreler
-        kap = mumlar["kapanis"]
-        mc = g.macd(kap, int(p["hizli"]), int(p["yavas"]), int(p["sinyal"]))
-        ema = g.ema(kap, int(p["ema"]))
-        mes = _atr_mesafe(mumlar, int(p["atr_n"]), float(p["atr_k"]))
-        s = cerceve(mumlar, (mc["macd"] > mc["sinyal"]) & (kap > ema), False, kap - mes, kap + mes)
-        return _bitir(s, (mc["macd"] < mc["sinyal"]) & (kap < ema))
 
 
 # ================================================================ X005:6
@@ -191,10 +171,11 @@ class BbHl2IchimokuS0009(Strateji):
 
 
 # ================================================================ X005:10
-class RsiTradingViewS0010(Strateji):
+class RsiTradingViewS0010(RoiTek, Strateji):
     """HAM:X005:10 (1h, long): RSI(5) 35'i yukarı keser -> long. Çıkış: RSI(5) 75'i aşağı keser VEYA 10'u aşağı keser
-    (acil) VEYA +%10 kâr (hedef); sabit stop -%5."""
+    (acil) VEYA +%10 kâr (ROI, azalan_roi ((0, 10),)); sabit stop -%5."""
 
+    roi_anahtar = "tp"
     ad, stil = "kapanis__rsi5-tv-s0010", "swing"
     varsayilan_parametreler = {"rsi_n": 5, "giris": 35.0, "cikis_ust": 75.0, "cikis_acil": 10.0,
                                "tp": 0.10, "sl": 0.05}
@@ -207,15 +188,14 @@ class RsiTradingViewS0010(Strateji):
         p = self.parametreler
         kap = mumlar["kapanis"]
         r = g.rsi(kap, int(p["rsi_n"]))
-        s = cerceve(mumlar, yukari(r, float(p["giris"])), False, kap * (1 - float(p["sl"])), kap * (1 + float(p["sl"])),
-                    hedef_l=kap * (1 + float(p["tp"])))
+        s = cerceve(mumlar, yukari(r, float(p["giris"])), False, kap * (1 - float(p["sl"])), kap * (1 + float(p["sl"])))
         return _bitir(s, asagi(r, float(p["cikis_ust"])) | asagi(r, float(p["cikis_acil"])))
 
 
 # ================================================================ X005:12
-class RsiBbTipikS0012(Strateji):
+class RsiBbTipikS0012(RoiTek, Strateji):
     """HAM:X005:12 (1h, long): RSI(14) < 30 VE kapanış < Bollinger(20, 2s; TİPİK fiyat) alt bandı (aynı mumda) -> long;
-    çıkış RSI > 70 ya da +%10 (hedef); sabit stop -%25."""
+    çıkış RSI > 70 ya da ROI %10 (azalan_roi); sabit stop -%25."""
 
     ad, stil = "kapanis__rsi-bb-tipik-s0012", "swing"
     varsayilan_parametreler = {"rsi_n": 14, "rsi_alt": 30.0, "rsi_cik": 70.0, "bb_n": 20, "bb_k": 2.0,
@@ -231,16 +211,17 @@ class RsiBbTipikS0012(Strateji):
         r = g.rsi(kap, int(p["rsi_n"]))
         bb = g.bollinger(_tipik(mumlar), int(p["bb_n"]), float(p["bb_k"]))
         s = cerceve(mumlar, (r < float(p["rsi_alt"])) & (kap < bb["alt"]), False,
-                    kap * (1 - float(p["sl"])), kap * (1 + float(p["sl"])), hedef_l=kap * (1 + float(p["roi"])))
+                    kap * (1 - float(p["sl"])), kap * (1 + float(p["sl"])))
         return _bitir(s, r > float(p["rsi_cik"]))
 
 
 # ================================================================ X005:15
-class ClucMayS0015(Strateji):
+class ClucMayS0015(RoiTek, Strateji):
     """HAM:X005:15 (5m, long): kapanış < EMA(50) VE kapanış < 0,985 x Bollinger(20, 2s; tipik fiyat) alt bandı VE
-    hacim < 20 x önceki 30 mumun ortalama hacmi -> long. Çıkış: kapanış > BB orta bandı ya da +%1 (hedef);
+    hacim < 20 x önceki 30 mumun ortalama hacmi -> long. Çıkış: kapanış > BB orta bandı ya da kâr >= %1 (ROI, azalan_roi);
     sabit stop -%5."""
 
+    roi_anahtar = "tp"
     ad, stil = "kapanis__cluc-may-s0015", "daytrade"
     varsayilan_parametreler = {"ema_n": 50, "bb_n": 20, "bb_k": 2.0, "bb_carpan": 0.985, "hacim_n": 30,
                                "hacim_k": 20.0, "tp": 0.01, "sl": 0.05}
@@ -256,15 +237,14 @@ class ClucMayS0015(Strateji):
         hort = mumlar["hacim"].rolling(int(p["hacim_n"]), min_periods=int(p["hacim_n"])).mean().shift(1)
         al = ((kap < g.ema(kap, int(p["ema_n"]))) & (kap < float(p["bb_carpan"]) * bb["alt"])
               & (mumlar["hacim"] < float(p["hacim_k"]) * hort))
-        s = cerceve(mumlar, al, False, kap * (1 - float(p["sl"])), kap * (1 + float(p["sl"])),
-                    hedef_l=kap * (1 + float(p["tp"])))
+        s = cerceve(mumlar, al, False, kap * (1 - float(p["sl"])), kap * (1 + float(p["sl"])))
         return _bitir(s, kap > bb["orta"])
 
 
 # ================================================================ X005:16
-class MultiRsiS0016(Strateji):
+class MultiRsiS0016(RoiTek, Strateji):
     """HAM:X005:16 (5m, long): SMA(5) >= SMA(200) VE RSI(14) < RSI_8x(14) - 20 (RSI_8x: 8 kat (40m) süreli KAPANMIŞ üst
-    mumların RSI(14)'ü) -> long. Çıkış: RSI(14) hem 2x (10m) hem 8x (40m) RSI'ların üstüne çıkınca. ROI +%1 (hedef),
+    mumların RSI(14)'ü) -> long. Çıkış: RSI(14) hem 2x (10m) hem 8x (40m) RSI'ların üstüne çıkınca. ROI +%1 (azalan_roi),
     sabit stop -%5. Üst TF yalnız htf.ust_zaman ile (nedensel)."""
 
     ad, stil = "kapanis__multi-rsi-s0016", "daytrade"
@@ -282,8 +262,7 @@ class MultiRsiS0016(Strateji):
         ra = _ust_rsi(mumlar, int(p["carpan_a"]), int(p["rsi_n"]))
         rb = _ust_rsi(mumlar, int(p["carpan_b"]), int(p["rsi_n"]))
         al = (g.sma(kap, int(p["sma_kisa"])) >= g.sma(kap, int(p["sma_uzun"]))) & (r < rb - float(p["fark"]))
-        s = cerceve(mumlar, al, False, kap * (1 - float(p["sl"])), kap * (1 + float(p["sl"])),
-                    hedef_l=kap * (1 + float(p["roi"])))
+        s = cerceve(mumlar, al, False, kap * (1 - float(p["sl"])), kap * (1 + float(p["sl"])))
         return _bitir(s, (r > ra) & (r > rb))
 
 
@@ -373,9 +352,9 @@ class HlhbS0023(Strateji):
 
 
 # ================================================================ X005:24
-class AdxSmasS0024(Strateji):
+class AdxSmasS0024(RoiTek, Strateji):
     """HAM:X005:24 (1h, long): ADX(14) > 25 VE SMA(3) SMA(6)'yı yukarı keser -> long. Çıkış: ADX(14) < 25 VE SMA(6)
-    SMA(3)'ü yukarı keser (ters kesişim). ROI %10 (hedef); sabit stop -%25."""
+    SMA(3)'ü yukarı keser (ters kesişim). ROI %10 (azalan_roi); sabit stop -%25."""
 
     ad, stil = "kapanis__adx-smas-s0024", "swing"
     varsayilan_parametreler = {"adx_n": 14, "adx_esik": 25.0, "sma_a": 3, "sma_b": 6, "roi": 0.10, "sl": 0.25}
@@ -390,7 +369,7 @@ class AdxSmasS0024(Strateji):
         adx = g.adx(mumlar["yuksek"], mumlar["dusuk"], kap, int(p["adx_n"]))["adx"]
         sa, sb = g.sma(kap, int(p["sma_a"])), g.sma(kap, int(p["sma_b"]))
         s = cerceve(mumlar, (adx > float(p["adx_esik"])) & yukari(sa, sb), False,
-                    kap * (1 - float(p["sl"])), kap * (1 + float(p["sl"])), hedef_l=kap * (1 + float(p["roi"])))
+                    kap * (1 - float(p["sl"])), kap * (1 + float(p["sl"])))
         return _bitir(s, (adx < float(p["adx_esik"])) & yukari(sb, sa))
 
 
@@ -514,9 +493,9 @@ class CofibitS0029(Strateji):
 
 
 # ================================================================ X005:30
-class Ema821Ust48S0030(Strateji):
+class Ema821Ust48S0030(RoiTek, Strateji):
     """HAM:X005:30 (4h, long): EMA(8) EMA(21)'i yukarı keser VE kapanış > SMA(50) (48 saatlik = 12 adet 4h mumdan oluşan
-    üst TF serisinin kapanışlarından) -> long. Çıkış: EMA(8) EMA(21)'in altına keserek iner VEYA +%50 (hedef); sabit stop
+    üst TF serisinin kapanışlarından) -> long. Çıkış: EMA(8) EMA(21)'in altına keserek iner VEYA ROI %50 (azalan_roi); sabit stop
     -%20. Uyarlama: 48h mumlar UTC epoch'a hizalı (htf.ust_zaman), yalnız kapanmış 48h mumlar kullanılır; kapanış
     karşılaştırması 4h kapanışla."""
 
@@ -533,8 +512,7 @@ class Ema821Ust48S0030(Strateji):
         ea, eb = g.ema(kap, int(p["ema_a"])), g.ema(kap, int(p["ema_b"]))
         ust_sma = ust_zaman(mumlar, str(p["ust_tf"]), lambda u: g.sma(u["kapanis"], int(p["ust_sma"])))
         sl = float(p["sl"])
-        s = cerceve(mumlar, yukari(ea, eb) & (kap > ust_sma), False, kap * (1 - sl), kap * (1 + sl),
-                    hedef_l=kap * (1 + float(p["roi"])))
+        s = cerceve(mumlar, yukari(ea, eb) & (kap > ust_sma), False, kap * (1 - sl), kap * (1 + sl))
         return _bitir(s, asagi(ea, eb))
 
 
@@ -617,16 +595,16 @@ class EmaBantS0038(Strateji):
 
 
 # ================================================================ X005:41
-class MacdSmaIzS0041(Strateji):
+class MacdSmaIzS0041(KancaDestek, Strateji):
     """HAM:X005:41 (1d, long): MACD(12,26,9) sinyali yukarı keser VE SMA(30) - SMA(30)[10] < 0 (düşen SMA30) -> long.
-    Çıkış: kapanış, kapanış - 3xATR(14) iz süren stopunun (yalnız yukarı taşınır) altına inerse.
-    Uyarlama: iz süren stop motorun ATR izi ile ifade edilir (stop = girişten beri en yüksek - 3xATR(14), mum içi
-    tetik; kaynakta kapanış bazlı). Başlangıç stopu kapanış - 3xATR(14)."""
+    Çıkış: kapanış, kapanış - 3xATR(14) iz süren stopunun (yalnız yukarı taşınır) altına inerse: KAPANIŞ BAZLI iz, kancada
+    (kapanis_iz_ihlali: giriş sinyali mumundan beri en büyük (kapanış_j - 3xATR_j); kapanış ona eşit/altındaysa çık).
+    Kaynakta stop yalnız bu iz; zorunlu felaket stopu ATR(14)x3 sinyal kapanışından (uyarlama)."""
 
     ad, stil = "kapanis__macd-sma-iz-s0041", "swing"
-    varsayilan_parametreler = {"hizli": 12, "yavas": 26, "sinyal": 9, "sma": 30, "dir": 10, "atr_n": 14, "iz_k": 3.0}
+    varsayilan_parametreler = {"hizli": 12, "yavas": 26, "sinyal": 9, "sma": 30, "dir": 10, "atr_n": 14, "iz_k": 3.0,
+                               "felaket_n": 14, "felaket_k": 3.0}
     parametre_izgarasi = {}
-    cikis_ayarlari = CikisAyarlari(atr_iz_suren_k=3.0, atr_periyot=14)
 
     def cikis_var_mi(self) -> bool:
         return True
@@ -636,21 +614,28 @@ class MacdSmaIzS0041(Strateji):
         kap = mumlar["kapanis"]
         mc = g.macd(kap, int(p["hizli"]), int(p["yavas"]), int(p["sinyal"]))
         sma = g.sma(kap, int(p["sma"]))
-        mes = _atr_mesafe(mumlar, int(p["atr_n"]), float(p["iz_k"]))
+        mes = _atr_mesafe(mumlar, int(p["felaket_n"]), float(p["felaket_k"]))
         al = yukari(mc["macd"], mc["sinyal"]) & ((sma - sma.shift(int(p["dir"]))) < 0)
+        self._sakla(kap=kap, atr=g.atr(mumlar["yuksek"], mumlar["dusuk"], kap, int(p["atr_n"])))
         return cerceve(mumlar, al, False, kap - mes, kap + mes)
+
+    def pozisyon_cikisi(self, d: PozisyonDurumu) -> bool:
+        if not self._var(d.mum_indeksi):
+            return False
+        return kapanis_iz_ihlali(self._kd["kap"], self._kd["atr"], d.giris_mum_indeksi - 1, d.mum_indeksi,
+                                 float(self.parametreler["iz_k"]), 1, False)
 
 
 # ================================================================ X005:43
-class SmaKesIzS0043(Strateji):
+class SmaKesIzS0043(KancaDestek, Strateji):
     """HAM:X005:43 (1d, long): SMA(10) SMA(25)'i yukarı keser -> long. Çıkış YALNIZ 2xATR(100) iz süren stop (ters
-    kesişimde çıkış yok); stop tetiklenince sonraki yukarı kesişimde yeniden giriş. Motorun ATR izi (mum içi tetik)
-    kullanılır; başlangıç stopu kapanış - 2xATR(100)."""
+    kesişimde çıkış yok); stop tetiklenince sonraki yukarı kesişimde yeniden giriş. İz KAPANIŞ BAZLI, kancada
+    (giriş sinyali mumundan beri en büyük (kapanış_j - 2xATR(100)_j); kapanış ona eşit/altındaysa çık). Zorunlu felaket stopu
+    ATR(14)x3 sinyal kapanışından (uyarlama)."""
 
     ad, stil = "kapanis__sma-kesis-iz-s0043", "swing"
-    varsayilan_parametreler = {"hizli": 10, "yavas": 25, "atr_n": 100, "iz_k": 2.0}
+    varsayilan_parametreler = {"hizli": 10, "yavas": 25, "atr_n": 100, "iz_k": 2.0, "felaket_n": 14, "felaket_k": 3.0}
     parametre_izgarasi = {}
-    cikis_ayarlari = CikisAyarlari(atr_iz_suren_k=2.0, atr_periyot=100)
 
     def cikis_var_mi(self) -> bool:
         return True
@@ -658,9 +643,16 @@ class SmaKesIzS0043(Strateji):
     def sinyaller(self, mumlar):
         p = self.parametreler
         kap = mumlar["kapanis"]
-        mes = _atr_mesafe(mumlar, int(p["atr_n"]), float(p["iz_k"]))
+        mes = _atr_mesafe(mumlar, int(p["felaket_n"]), float(p["felaket_k"]))
         al = yukari(g.sma(kap, int(p["hizli"])), g.sma(kap, int(p["yavas"])))
+        self._sakla(kap=kap, atr=g.atr(mumlar["yuksek"], mumlar["dusuk"], kap, int(p["atr_n"])))
         return cerceve(mumlar, al, False, kap - mes, kap + mes)
+
+    def pozisyon_cikisi(self, d: PozisyonDurumu) -> bool:
+        if not self._var(d.mum_indeksi):
+            return False
+        return kapanis_iz_ihlali(self._kd["kap"], self._kd["atr"], d.giris_mum_indeksi - 1, d.mum_indeksi,
+                                 float(self.parametreler["iz_k"]), 1, False)
 
 
 # ================================================================ X005:51
@@ -927,7 +919,7 @@ def _v(kaynak: str, no: int, sinif, tf: str, parametreler: dict | None = None) -
             "parametreler": _p(sinif) if parametreler is None else parametreler, "tf": tf}
 
 
-SINIFLAR = [MacdEma100S0005, LinregAdxS0006, Rsi2Sma200S0007, BbHl2IchimokuS0009, RsiTradingViewS0010,
+SINIFLAR = [LinregAdxS0006, Rsi2Sma200S0007, BbHl2IchimokuS0009, RsiTradingViewS0010,
             RsiBbTipikS0012, ClucMayS0015, MultiRsiS0016, BandtasticS0018, HaEmaS0019, HlhbS0023, AdxSmasS0024,
             EmaObvS0025, AdxSma1248S0027, UcSupertrendS0028, CofibitS0029, Ema821Ust48S0030, AralikKirilimS0036,
             MacdTolS0037, EmaBantS0038, MacdSmaIzS0041, SmaKesIzS0043, Rsi4DonusS0051, IbsEma252S0054,
@@ -935,7 +927,11 @@ SINIFLAR = [MacdEma100S0005, LinregAdxS0006, Rsi2Sma200S0007, BbHl2IchimokuS0009
             MacdHaftalikS0084]
 
 VARYANTLAR = [
-    _v("HAM:X005:5", 1, MacdEma100S0005, "1h"),
+    # X005:5 = jesse_kaynak.MacdEmaS0005 ile aynı hipotez (MACD > sinyal VE kapanış > EMA100, 1h long): yeni sınıf yazılmadı,
+    # mevcut sınıfa bağlı tek kayıt (modul alanı sınıfın bulunduğu modülü gösterir).
+    {"kimlik": "HAM:X005:5#v1", "sinif": "kapanis__macd-ema-s0005",
+     "parametreler": {"ema_n": 100, "macd_hizli": 12, "macd_yavas": 26, "macd_sinyal": 9, "atr_n": 14, "atr_k": 3.0},
+     "tf": "1h", "modul": "motor.strateji.kapanis.jesse_kaynak"},
     _v("HAM:X005:6", 1, LinregAdxS0006, "4h"),
     _v("HAM:X005:6", 2, LinregAdxS0006, "1d"),
     _v("HAM:X005:7", 1, Rsi2Sma200S0007, "3h"),
@@ -978,24 +974,5 @@ KODLANAMADI = [
     {"kimlik": "HAM:X005:3",
      "neden": "TA-Lib HT_TRENDMODE (Ehlers Hilbert) göstergesi motorda yok, TA-Lib kurulu değil; formül kaynak dosyada "
               "olmadan birebir yazılamaz (uydurma çözüm yok)"},
-    {"kimlik": "HAM:X005:4",
-     "neden": "çıkışın bir kolu 'pozisyon kârdaysa' (açık K/Z > 0) koşulu: motor sinyal çıkışını açık pozisyon "
-              "kârına koşullayamaz (yalnız RSI'lı kar_rsi_esikleri var); sanal pozisyonla kestirmek yasak"},
-    {"kimlik": "HAM:X005:20",
-     "neden": "exit_profit_only: SAR/Fisher çıkışı yalnız kârdayken; motor sinyal çıkışını açık K/Z'ye koşullayamaz. "
-              "Ayrıca TA-Lib CDLHAMMER ve fisher_rsi tanımı kaynak dosyada, bu partide yok"},
-    {"kimlik": "HAM:X005:21",
-     "neden": "exit_profit_only: SAR>kapanış VE FisherRSI>0,3 çıkışı yalnız kârdayken; motor sinyal çıkışını açık "
-              "K/Z'ye koşullayamaz (ROI/stop tek başına farklı kural olur)"},
-    {"kimlik": "HAM:X005:22",
-     "neden": "exit_profit_only (RSI74 yukarı kesiş VE MACD<0 VE -DI>4 çıkışı yalnız kârdayken); ayrıca fastd/fastk "
-              "periyotları ve fisher_rsi_norma tanımı kaynak dosyada, bu partide yok"},
-    {"kimlik": "HAM:X005:60",
-     "neden": "stop/limit her barda güncel kapanıştan yeniden hesaplanıp verilir (kayan stop ve kayan TP; motor giriş "
-              "anında sabitlenen stop/hedef ve yalnız yukarı taşınan iz ifade eder); iki modül (KC fade + EMA trend) "
-              "tek pozisyonda modüle özgü çıkış gerektirir, pozisyon durumu olmadan ayrılamaz (satır notu: uygulama "
-              "biçimi lider onayı)"},
-    {"kimlik": "HAM:X005:79",
-     "neden": "kademeli kâr al yüzde cinsinden (+%6'da %12, +%12'de %8, +%18'de %4); motor kısmi kârı R cinsinden "
-              "(CikisAyarlari.kismi) tanımlar, ATR stopuyla giriş başına değişen R'ye sabit yüzde çevrilemez"},
+    # 4, 20, 21, 22, 60, 79: pozisyon bilinçli çıkış modülüyle kod_g8_modul.py'de kodlandı (VARYANTLAR orada).
 ]

@@ -10,12 +10,13 @@ Genel biçim kararları (ILERLEME.md politikaları, g8_kod_4 ile aynı):
   x[t-1] >= seviye > x[t] (aşağı).
 - Freqtrade ROI / iz süren stop: motorun `azalan_roi` ve `geri_cekilme_yuzde` modülleriyle (kapanış bazlı kâr, sonraki açılışta
   çıkış). ROI tablosu dakika cinsindense mum çözünürlüğüne çevrilir (ara basamaklar mum sınırına denk gelmiyorsa düşer).
-- Kaynak çıkışı KAPANIŞ bazlıysa ve giriş fiyatına / giriş sonrası tepeye bağlıysa (pozisyon durumu) motorun bar içi modülleriyle
-  yaklaşık çözülmedi: KODLANAMADI ("pozisyon bilinçli çıkış gerekli").
-- Haftalık (1w) ve 8h mumlar koşu tarafında 1d / 1h-4h verisinden yeniden örneklenir; sınıf kendisine verilen mumlarla çalışır.
+- Kaynak çıkışı KAPANIŞ bazlıysa ve giriş fiyatına / giriş sonrası tepeye bağlıysa (pozisyon durumu) strateji kancasıyla
+  (`pozisyon_cikisi`, kod_g8_modul) yazılır; 436, 446, 447 oraya taşındı. 554/556 yüzde iz süren stop de kancadadır
+  (zirve fiyatının %'si, zirve = giriş sonrası en yüksek HIGH; kapanışta kontrol, çıkış sonraki açılışta).
+- Haftalık satır (438) 1d mumlarla koşulur (VARYANTLAR tf = "1d"): haftalık değerler `htf.ust_zaman("1w")` ile yalnız kapanmış
+  haftadan, karar yeni haftanın ilk günü. 8h mumlar koşu tarafında 1h-4h verisinden yeniden örneklenir.
 
-KODLANAMADI (bkz. `KODLANAMADI`): 436, 446, 447 (kapanış bazlı, giriş fiyatı / giriş sonrası tepe kapanışına bağlı çıkış ve stop),
-553 (başka sembole (BTC) bağlı filtre + kâra/süreye bağlı zararda zaman çıkışı kaskadı).
+KODLANAMADI (bkz. `KODLANAMADI`): 553 (başka sembole (BTC) bağlı filtre; üst TF bilgi verisi + güven skoru süzgeci).
 """
 from __future__ import annotations
 
@@ -30,7 +31,9 @@ from motor.strateji.daytrade._ortak import cerceve
 from motor.strateji.dis._gosterge_d1 import ao_ac
 from motor.strateji.dis._gosterge_d2 import var_ma
 from motor.strateji.dis._gosterge_d5 import kama, ott
+from motor.strateji.cikislar import PozisyonDurumu
 from motor.strateji.gostergeler_b2 import cci, ichimoku
+from motor.strateji.kapanis.kod_g8_modul import KancaDestek, hafta_degerleri, tepe_geri_cekilme
 from motor.strateji.temel import Strateji
 
 
@@ -150,19 +153,25 @@ class MacdRsiAtrHedef(_Taban):
 
 
 class HaftalikSmaMacd(_Taban):
-    """X005:438 (K6, 1w, long): haftalık kapanış 20 haftalık SMA'nın üstünde VE haftalık MACD(12,26,9) çizgisi sinyalin üstündeyse
-    long (durum); haftalık kapanış SMA20 altına inince çık. Ayı piyasası %20 kapısı uygulanmadı (kaynakta yalnız tanım).
-    Stop yok -> ATR(14)x3. Haftalık mumlar koşu tarafında 1d'den yeniden örneklenir; sınıf verilen mumlarla çalışır."""
+    """X005:438 (K6, haftalık, 1d mumlarla, long): haftalık kapanış 20 haftalık SMA'nın üstünde VE haftalık MACD(12,26,9) çizgisi sinyalin
+    üstündeyse long (durum); haftalık kapanış SMA20 altına inince çık. Ayı piyasası %20 kapısı uygulanmadı (kaynakta yalnız tanım).
+    Haftalık değerler `htf.ust_zaman('1w')` ile kapanmış haftadan, karar yeni haftanın ilk günü. Stop yok -> ATR(14)x3 (günlük)."""
     ad = "kapanis__haftalik-sma-macd-s0438"
     varsayilan_parametreler = {"sma_n": 20, "macd_h": 12, "macd_y": 26, "macd_s": 9, **_ATR}
 
     def sinyaller(self, mumlar):
         p = self.parametreler
+
+        def fonk(u):
+            k = u["kapanis"]
+            m = g.macd(k, int(p["macd_h"]), int(p["macd_y"]), int(p["macd_s"]))
+            return pd.DataFrame({"kw": k, "sma": g.sma(k, int(p["sma_n"])), "macd": m["macd"], "sinyal": m["sinyal"]})
+
+        w, yeni = hafta_degerleri(mumlar, fonk)
         k = mumlar["kapanis"]
-        sma = g.sma(k, int(p["sma_n"]))
-        m = g.macd(k, int(p["macd_h"]), int(p["macd_y"]), int(p["macd_s"]))
         r = _atr_riski(mumlar, p)
-        return _ekle(cerceve(mumlar, (k > sma) & (m["macd"] > m["sinyal"]), False, k - r, k + r), cikis_long=k < sma)
+        return _ekle(cerceve(mumlar, yeni & (w["kw"] > w["sma"]) & (w["macd"] > w["sinyal"]), False, k - r, k + r),
+                     cikis_long=yeni & (w["kw"] < w["sma"]))
 
 
 class RejimRsiBantAlt(_Taban):
@@ -705,13 +714,15 @@ class MacdBbRsiRoi5m(_Taban):
                      cikis_long=r > float(p["cikis"]))
 
 
-class Ema800Kesisim(_Taban):
+class Ema800Kesisim(KancaDestek, _Taban):
     """X005:554 (1h, long): kapanış EMA(800)'ü yukarı keserse (hacim>0) long; kapanış EMA(800)x0,99 çizgisini aşağı keserse çık; stop
-    giriş (sinyal kapanışı) fiyatının %15 altı, iz süren: geri_cekilme_yuzde=15 (min kâr 0; kaynakta iz süren ofseti yok, stop değeri kadar
-    iz). Motorda iz = zirve kâr% - kâr% >= 15 puan (giriş fiyatı bazlı), kaynakta zirve fiyatın %15'i: yaklaşık."""
+    giriş (sinyal kapanışı) fiyatının %15 altı, iz süren: giriş sonrası zirve fiyatın (en yüksek HIGH) %15 altına kapanış inerse çık
+    (kanca; kaynakta iz süren ofseti yok, stop değeri kadar iz)."""
     ad = "kapanis__ema800-kesisim-s0554"
     varsayilan_parametreler = {"ema_n": 800, "cikis_esik": 0.01, "sl_yuzde": 15.0}
-    cikis_ayarlari = CikisAyarlari(geri_cekilme_yuzde=15.0, geri_cekilme_min_kar_yuzde=0.0)
+
+    def pozisyon_cikisi(self, d: PozisyonDurumu) -> bool:
+        return tepe_geri_cekilme(d, float(self.parametreler["sl_yuzde"]))
 
     def sinyaller(self, mumlar):
         p = self.parametreler
@@ -738,14 +749,17 @@ class MacdSifirAltiEma(_Taban):
                      cikis_long=_asagi(m["macd"], 0.0) | (d < ema))
 
 
-class IchimokuSenkouKesisim(_Taban):
+class IchimokuSenkouKesisim(KancaDestek, _Taban):
     """X005:556 (4h, long): Ichimoku (dönüşüm 20, baz 60, Senkou B 120, kaydırma 30): Senkou A Senkou B'yi yukarı keser VE kapanış
     her iki spanın üstünde (A>B: yeşil bulut) -> long; çıkış Senkou B Senkou A'yı yukarı keser VE kapanış her iki spanın altında
-    (kırmızı bulut). Kâr %50'yi geçince %45 mesafeli iz süren (geri_cekilme_yuzde=45, min kâr 50). Kaynakta başlangıç stopu yok ->
-    ATR(14)x3 (uyarlama)."""
+    (kırmızı bulut). Kâr %50'yi geçince %45 mesafeli iz süren (kanca: zirve kârı >= %50 iken kapanış, giriş sonrası en yüksek HIGH'ın %45
+    altına inerse çık). Kaynakta başlangıç stopu yok -> ATR(14)x3 (uyarlama)."""
     ad = "kapanis__ichimoku-senkou-s0556"
-    varsayilan_parametreler = {"tenkan": 20, "kijun": 60, "senkou_b": 120, "kaydirma": 30, **_ATR}
-    cikis_ayarlari = CikisAyarlari(geri_cekilme_yuzde=45.0, geri_cekilme_min_kar_yuzde=50.0)
+    varsayilan_parametreler = {"tenkan": 20, "kijun": 60, "senkou_b": 120, "kaydirma": 30, "iz_esik": 50.0, "iz_mesafe": 45.0, **_ATR}
+
+    def pozisyon_cikisi(self, d: PozisyonDurumu) -> bool:
+        p = self.parametreler
+        return tepe_geri_cekilme(d, float(p["iz_mesafe"]), float(p["iz_esik"]))
 
     def sinyaller(self, mumlar):
         p = self.parametreler
@@ -803,7 +817,7 @@ _kayit("HAM:X005:428", CciEsikSifir, [{"esik": 100}, {"esik": 200}], ["1d"])
 _kayit("HAM:X005:430", BbAltArdisikYukselis, _BOS, ["1d"])
 _kayit("HAM:X005:432", Rsi5mYuzdeStopHedef, _BOS, ["5m"])
 _kayit("HAM:X005:435", MacdRsiAtrHedef, _BOS, ["1d"])
-_kayit("HAM:X005:438", HaftalikSmaMacd, _BOS, ["1w"])
+_kayit("HAM:X005:438", HaftalikSmaMacd, _BOS, ["1d"])
 _kayit("HAM:X005:448", RejimRsiBantAlt, _BOS, ["1d"])
 _kayit("HAM:X005:449", UltimateOsilator, _BOS, ["1h"])
 _kayit("HAM:X005:450", SmaRsiDestekStop, _BOS, ["1h"])
@@ -839,15 +853,7 @@ _kayit("HAM:X005:556", IchimokuSenkouKesisim, _BOS, ["4h"])
 _kayit("HAM:X005:557", SmaSeritDizili, _BOS, ["1d"])
 
 KODLANAMADI = [
-    {"kimlik": "HAM:X005:436",
-     "neden": "pozisyon bilinçli çıkış gerekli: çıkış KAPANIŞ bazlı ve giriş fiyatına/giriş barı ATR'sine bağlı (close >= giriş+2xATR, "
-              "close <= giriş-2xATR); motorun stop/hedefi bar içi, kapanış bazlı pozisyon fiyatı referanslı çıkış ifade edilemiyor."},
-    {"kimlik": "HAM:X005:446",
-     "neden": "pozisyon bilinçli çıkış gerekli: iz süren stop giriş sonrası TEPE KAPANIŞTAN (tepe kapanış - 3xATR) hesaplanıyor "
-              "(motor atr_iz_suren_k bar içi tepe/dip kullanır) ve hedef/stop giriş fiyatına bağlı; yaklaşık çözüm yapılmadı."},
-    {"kimlik": "HAM:X005:447",
-     "neden": "pozisyon bilinçli çıkış gerekli: stop = max(giriş kapanışı-5,9xATR(27), giriş sonrası en yüksek kapanış-4,5xATR(27)) "
-              "kapanış bazlı tepe-kapanış izidir ve stop sonrası 'rejim tamamen bozulana kadar yeniden girme' pozisyon/stop durumuna bağlı."},
+    # 436, 446, 447: kod_g8_modul.py (kanca ile kodlandı).
     {"kimlik": "HAM:X005:553",
      "neden": "motorda ifade edilemiyor: giriş filtresi BTC 1h RSI(14)>35 (başka sembol verisi; strateji yalnız kendi mumlarını alır), "
               "4h ve 1d üst-TF bilgi verisi + güven skoru süzgeci, ve custom_exit kaskadı (2s ve kâr<-%1,5, 4s ve kâr<0, 8s ve kâr<%0,5, "

@@ -7,9 +7,8 @@ Kaynak stopu yoksa ya da ≤ -%50 ise ATR(14)x3 felaket stopu = "uyarlama" (ön 
 Ortak uyarlamalar:
 - Giriş koşulları "pozisyon yokken" okunur; motor zaten açık pozisyonda yeni girişi işlemez.
 - Durumsal çıkışlar her mumda yazılır (cikis_long / cikis_short), pozisyon durumu motora bırakılır.
-- Yüzde/ATR iz süren stop içeren satırlar (294, 310, 325) kapanmış mumlarla yürüyen SANAL pozisyon kullanır (FlipperS0879
-  örneği gibi): giriş sinyali serbestken verilir, iz süren çıkış kapanışta koşul sağlanınca cikis_long ile iletilir.
-  Gerçek pozisyon kayma/ret nedeniyle sanaldan ayrışabilir; sanal pozisyon sert stop dibe değince de serbest kalır.
+- Yüzde/ATR iz süren stop içeren satırlar (294, 310, 325) strateji kancasıyla (`pozisyon_cikisi`, kod_g8_modul) GERÇEK pozisyondan
+  çıkış verir (sanal pozisyon yok): iz kapanışta sınanır, çıkış sonraki açılışta.
 
 Satırlar: X005:247 253 257 259 260 264 268 278 283 287 288 289 290 291 292 294 295 296 297 301 304 306 310 313 314 317
 320 325 327 328 332 335 338 339 341 346 348 353 (356 kodlanamadı: KODLANAMADI).
@@ -25,7 +24,9 @@ from motor.strateji.cikislar import CikisAyarlari
 from motor.strateji.daytrade._ortak import cerceve
 from motor.strateji.gostergeler_b1 import donchian_kanal
 from motor.strateji.gostergeler_b2 import asagi_kesis, gecis, ichimoku, yukari_kesis
+from motor.strateji.cikislar import PozisyonDurumu
 from motor.strateji.htf import ust_zaman
+from motor.strateji.kapanis.kod_g8_modul import KancaDestek, kapanis_iz_ihlali, tepe_geri_cekilme
 from motor.strateji.temel import Strateji
 
 
@@ -80,41 +81,6 @@ def _wpr(yuk, dus, kap, n: int) -> pd.Series:
     hh = yuk.rolling(n, min_periods=n).max()
     ll = dus.rolling(n, min_periods=n).min()
     return -100.0 * (hh - kap) / (hh - ll)
-
-
-def _sanal_poz(giris, sat, kap, yuk, dus, stop0, zirve, yuzde=None, atr=None, atr_x=None):
-    """Kapanmış mumlarla ileri yürüyen sanal long pozisyon (yalnız geçmiş).
-
-    giris: bool dizi (koşul, zaten stop geçerli); sat: sinyal çıkışı; stop0: giriş stopu (sert stop; dibe değerse sanal
-    pozisyon sessizce biter, motor zaten kapatır). zirve: zirve takibi için kaynak dizi (yüksek ya da kapanış).
-    yuzde verilirse: kapanış <= zirve*(1-yuzde) ise çıkış. atr verilirse: iz stop = max(önceki, zirve - atr_x*ATR),
-    kapanış <= iz stop ise çıkış. Zirve girişte giriş kapanışından başlar. Döner: (giris_cikti, cikis)."""
-    n = len(kap)
-    g_out = np.zeros(n, bool)
-    c_out = np.zeros(n, bool)
-    icerde = False
-    peak = s0 = iz = 0.0
-    for i in range(n):
-        if icerde:
-            peak = max(peak, zirve[i])
-            if dus[i] <= s0:
-                icerde = False
-            else:
-                kapat = bool(sat[i])
-                if atr is not None:
-                    if np.isfinite(atr[i]):
-                        iz = max(iz, peak - atr_x * atr[i])
-                    kapat = kapat or kap[i] <= iz
-                else:
-                    kapat = kapat or kap[i] <= peak * (1.0 - yuzde)
-                if kapat:
-                    c_out[i] = True
-                    icerde = False
-        if (not icerde) and giris[i]:
-            icerde = True
-            g_out[i] = True
-            peak, s0, iz = kap[i], stop0[i], stop0[i]
-    return g_out, c_out
 
 
 def _var(src: np.ndarray, uzunluk: int, cmo_n: int = 9) -> np.ndarray:
@@ -543,11 +509,11 @@ class IchimokuAyniBarS0292(Strateji):
         return _uzun(mumlar, p, al, sat)
 
 
-class BbIzStopS0294(Strateji):
-    """YAKLAŞIK: pozisyon bilinçli çıkış modülü gelince yeniden yazılacak (sanal pozisyonla iz stop). X005:294 (15m, long): BB(20,2), Stokastik(14,1,3). AL: kapanış <= alt bant (stokastik kolu bunun alt kümesi:
+class BbIzStopS0294(KancaDestek, Strateji):
+    """X005:294 (15m, long): BB(20,2), Stokastik(14,1,3). AL: kapanış <= alt bant (stokastik kolu bunun alt kümesi:
     %K/%D <= 20 kesişimi de kapanış <= alt bant gerektirir, ayrıca yazılmadı). SAT: kapanış >= üst bant. İz süren stop:
-    giriş sonrası en yüksekten %pct (kaynak iki değer verir: 7 ve 3, ikisi de varyant). Uyarlama: iz süren stop kapanmış
-    mumla (kapanış <= en yüksek yüksek x (1-pct)) sanal pozisyonla izlenir ve sonraki açılışta çıkılır; giriş stopu
+    giriş sonrası en yüksekten %pct (kaynak iki değer verir: 7 ve 3, ikisi de varyant). Uyarlama: iz süren stop kancadadır
+    (gerçek pozisyonun giriş sonrası en yüksek HIGH'ı; kapanış <= zirve x (1-pct) ise sonraki açılışta çık); giriş stopu
     kapanış x (1-pct) sabit sert stoptur."""
 
     ad, stil = "kapanis__bb-iz-stop-s0294", "scalp"
@@ -563,13 +529,12 @@ class BbIzStopS0294(Strateji):
         b = g.bollinger(kap, int(p["bb_n"]), float(p["bb_k"]))
         stop_l = kap * (1.0 - yz)
         stop_s = kap * (1.0 + yz)
-        al = ((kap <= b["alt"]) & b["alt"].notna() & (stop_l < kap) & stop_l.notna()).to_numpy(bool, copy=True)
-        sat = ((kap >= b["ust"]) & b["ust"].notna()).to_numpy(bool, copy=True)
-        gi, ci = _sanal_poz(al, sat, kap.to_numpy(float), mumlar["yuksek"].to_numpy(float),
-                            mumlar["dusuk"].to_numpy(float), stop_l.to_numpy(float),
-                            mumlar["yuksek"].to_numpy(float), yuzde=yz)
-        return _cikti(mumlar, pd.Series(gi, index=mumlar.index), False, stop_l, stop_s,
-                      cikis_long=pd.Series(ci, index=mumlar.index))
+        al = (kap <= b["alt"]) & b["alt"].notna()
+        sat = (kap >= b["ust"]) & b["ust"].notna()
+        return _cikti(mumlar, al, False, stop_l, stop_s, cikis_long=sat)
+
+    def pozisyon_cikisi(self, d: PozisyonDurumu) -> bool:
+        return tepe_geri_cekilme(d, float(self.parametreler["iz_yuzde"]))
 
 
 class RsiMacdS0295(Strateji):
@@ -697,11 +662,11 @@ class SmaBantS0306(Strateji):
         return _uzun(mumlar, p, gecis(kisa > uzun * (1 + b)), kisa < uzun * (1 - b))
 
 
-class PmaHaftalikS0310(Strateji):
-    """YAKLAŞIK: pozisyon bilinçli çıkış modülü gelince yeniden yazılacak (sanal pozisyonla iz stop). X005:310 (1d + 1w filtre, long): PMA(n) = SMA(kapanış, n) + OLS eğimi(son n kapanış, bar başına) x n/2.
+class PmaHaftalikS0310(KancaDestek, Strateji):
+    """X005:310 (1d + 1w filtre, long): PMA(n) = SMA(kapanış, n) + OLS eğimi(son n kapanış, bar başına) x n/2.
     Giriş (pozisyon yokken): son TAMAMLANMIŞ haftalık kapanış > haftalık PMA(50) VE günlük kapanış > PMA(50) VE
     PMA(10) > PMA(50). Başlangıç stop = giriş x 0,90. İz süren stop: tepe = giriş sonrası en yüksek kapanış; stop =
-    max(önceki stop, tepe - 2xATR(14)); kapanış <= stop -> çıkış (sanal pozisyonla izlenir). Kaynak gelişen haftayı
+    max(önceki stop, tepe - 2xATR(14)); kapanış <= stop -> çıkış (kanca: gerçek pozisyon). Kaynak gelişen haftayı
     kullanıyordu; yalnız tamamlanmış haftalar (geleceksiz biçim, uyarlama)."""
 
     ad, stil = "kapanis__pma-haftalik-s0310", "swing"
@@ -720,12 +685,14 @@ class PmaHaftalikS0310(Strateji):
         stop_l = kap * (1.0 - float(p["sl_yuzde"]) / 100.0)
         stop_s = kap * (1.0 + float(p["sl_yuzde"]) / 100.0)
         atr = g.atr(mumlar["yuksek"], mumlar["dusuk"], kap, int(p["atr_n"]))
-        giris = (kos.fillna(False) & stop_l.notna() & (stop_l < kap)).to_numpy(bool)
-        gi, ci = _sanal_poz(giris, np.zeros(len(kap), bool), kap.to_numpy(float), mumlar["yuksek"].to_numpy(float),
-                            mumlar["dusuk"].to_numpy(float), stop_l.to_numpy(float), kap.to_numpy(float),
-                            atr=atr.to_numpy(float), atr_x=float(p["atr_x"]))
-        return _cikti(mumlar, pd.Series(gi, index=mumlar.index), False, stop_l, stop_s,
-                      cikis_long=pd.Series(ci, index=mumlar.index))
+        self._sakla(kap=kap, atr=atr)
+        return _cikti(mumlar, kos.fillna(False), False, stop_l, stop_s)
+
+    def pozisyon_cikisi(self, d: PozisyonDurumu) -> bool:
+        if not self._var(d.mum_indeksi):
+            return False
+        return kapanis_iz_ihlali(self._kd["kap"], self._kd["atr"], d.giris_mum_indeksi - 1, d.mum_indeksi,
+                                 float(self.parametreler["atr_x"]), 1, True)
 
 
 class RsiBantS0313(Strateji):
@@ -819,9 +786,9 @@ class ArdisikKapanisS0320(Strateji):
         return _iki(mumlar, p, dus, None, yuk, None)
 
 
-class CokluTfSmaS0325(Strateji):
-    """YAKLAŞIK: pozisyon bilinçli çıkış modülü gelince yeniden yazılacak (sanal pozisyonla iz stop). X005:325 (5m, long): pozisyon yokken 5m kapanış > 5m SMA(30) VE son KAPANMIŞ 1h mumun kapanışı > 1h SMA(45) ->
-    long; çıkış: kapanış, girişten beri en yüksek kapanışın %3 altına inerse (iz süren stop, sanal pozisyonla izlenir).
+class CokluTfSmaS0325(KancaDestek, Strateji):
+    """X005:325 (5m, long): pozisyon yokken 5m kapanış > 5m SMA(30) VE son KAPANMIŞ 1h mumun kapanışı > 1h SMA(45) ->
+    long; çıkış: kapanış, girişten beri en yüksek kapanışın %3 altına inerse (iz süren stop, kanca: gerçek pozisyon).
     Stop kaynakta yok: ATR(14)x3 (uyarlama)."""
 
     ad, stil = "kapanis__coklu-tf-sma-iz-s0325", "scalp"
@@ -837,12 +804,15 @@ class CokluTfSmaS0325(Strateji):
         saat = ust_zaman(mumlar, "1h", lambda u: pd.DataFrame({"kap": u["kapanis"], "sma": g.sma(u["kapanis"], sn)}))
         kos = (kap > g.sma(kap, int(p["sma_alt"]))) & (saat["kap"] > saat["sma"])
         sl, ss = _atr_stop(mumlar, p)
-        giris = (kos.fillna(False) & sl.notna() & (sl < kap)).to_numpy(bool)
-        gi, ci = _sanal_poz(giris, np.zeros(len(kap), bool), kap.to_numpy(float), mumlar["yuksek"].to_numpy(float),
-                            mumlar["dusuk"].to_numpy(float), sl.to_numpy(float), kap.to_numpy(float),
-                            yuzde=float(p["iz_yuzde"]))
-        return _cikti(mumlar, pd.Series(gi, index=mumlar.index), False, sl, ss,
-                      cikis_long=pd.Series(ci, index=mumlar.index))
+        self._sakla(kap=kap)
+        return _cikti(mumlar, kos.fillna(False), False, sl, ss)
+
+    def pozisyon_cikisi(self, d: PozisyonDurumu) -> bool:
+        i = d.mum_indeksi
+        if not self._var(i):
+            return False
+        tepe = float(np.nanmax(self._kd["kap"][max(d.giris_mum_indeksi - 1, 0):i + 1]))
+        return tepe_geri_cekilme(d, float(self.parametreler["iz_yuzde"]) * 100.0, 0.0, tepe)
 
 
 class TrendTakipS0327(Strateji):
@@ -1083,8 +1053,6 @@ def _ekle(kaynak: str, sinif, tfler, parametre_listesi=({},)) -> None:
         for tf in tfler:
             sira += 1
             kayit = {"kimlik": f"{kaynak}#v{sira}", "sinif": sinif.ad, "parametreler": dict(par), "tf": tf}
-            if sinif.__doc__ and sinif.__doc__.lstrip().startswith("YAKLAŞIK"):
-                kayit["yaklasik"] = True
             VARYANTLAR.append(kayit)
 
 

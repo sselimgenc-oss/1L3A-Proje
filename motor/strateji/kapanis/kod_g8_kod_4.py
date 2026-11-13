@@ -11,8 +11,12 @@ Genel biçim kararları (ILERLEME.md politikaları):
 - Kesişim: "x, y'yi yukarı keser" = x[t-1] <= y[t-1] ve x[t] > y[t]; seviye kesişimi: x[t-1] < seviye <= x[t] (yukarı),
   x[t-1] >= seviye > x[t] (aşağı).
 
-KODLANAMADI (VARYANTLAR dışında, bkz. `KODLANAMADI`): 400, 401, 416 (min. tutma süresine bağlı çıkış + süreye bağlı stop),
-419 (stop-and-reverse + pozisyona bağlı yukarı kayan stop + min. tutma).
+- Haftalık satırlar (367, 384) 1d mumlarla koşulur (VARYANTLAR tf = "1d"): haftalık değerler `htf.ust_zaman("1w")` ile yalnız KAPANMIŞ
+  haftadan, karar yeni haftanın ilk günü (kod_g8_modul.hafta_degerleri).
+- 397: kapanış bazlı chandelier gerçek pozisyondan (strateji kancası `pozisyon_cikisi`).
+
+400, 401, 416 (min/maks tutma + yaşa bağlı zarar çıkışı) ve 419 pozisyon bilinçli modülle `kod_g8_modul.py`'ye taşındı (419 orada
+KODLANAMADI); bu dosyanın KODLANAMADI listesi boştur.
 """
 from __future__ import annotations
 
@@ -22,7 +26,9 @@ import pandas as pd
 from motor.strateji import gostergeler as g
 from motor.strateji.cikislar import CikisAyarlari
 from motor.strateji.daytrade._ortak import cerceve
+from motor.strateji.cikislar import PozisyonDurumu
 from motor.strateji.gostergeler_b1 import donchian_kanal
+from motor.strateji.kapanis.kod_g8_modul import KancaDestek, hafta_degerleri
 from motor.strateji.temel import Strateji
 
 
@@ -153,6 +159,27 @@ class SmaBantKaynak(_Taban):
                      cikis_long=kisa < uzun * (1 - b))
 
 
+class SmaBantHaftalik(_Taban):
+    """X005:367 (haftalık, 1d mumlarla): haftalık kapanışların SMA(s) / SMA(l) bant kuralı (SmaBantKaynak ile aynı): haftalık kısa MA uzun
+    MA'yı b bandı kadar AŞINCA long (durum), b bandı kadar ALTINA inince çık; bant içinde pozisyon korunur. Haftalık değerler
+    `htf.ust_zaman('1w')` ile kapanmış haftadan, karar yeni haftanın ilk günü. Stop yok -> ATR(14)x3 (günlük)."""
+    varsayilan_parametreler = {"s": 5, "l": 50, "b": 0.01, "atr_n": 14, "atr_k": 3.0}
+
+    def sinyaller(self, mumlar):
+        p = self.parametreler
+        s, l, b = int(p["s"]), int(p["l"]), float(p["b"])
+
+        def fonk(u):
+            k = u["kapanis"]
+            return pd.DataFrame({"kisa": k if s == 1 else g.sma(k, s), "uzun": g.sma(k, l)})
+
+        w, yeni = hafta_degerleri(mumlar, fonk)
+        k = mumlar["kapanis"]
+        r = _atr_riski(mumlar, p)
+        return _ekle(cerceve(mumlar, yeni & (w["kisa"] > w["uzun"] * (1 + b)), False, k - r, k + r),
+                     cikis_long=yeni & (w["kisa"] < w["uzun"] * (1 - b)))
+
+
 class Rsi2HedefTepe(_Taban):
     """X005:371: RSI(2) < 25 iken kapanışta al (durum); hedef = sinyal anındaki son 2 mumun (sinyal mumu dahil) en yüksek
     tepesi (fiyat ona ulaşınca çık). Stop yok -> ATR(14)x3 (uyarlama). Alternatif çıkışlar uygulanmadı."""
@@ -248,6 +275,26 @@ class StokastikKesisim(_Taban):
                      cikis_long=_seviye_asagi(sk, float(p["ust"])))
 
 
+class StokastikHaftalik(_Taban):
+    """X005:384 (haftalık, 1d mumlarla): haftalık ham Stokastik %K(50) (yumuşatmasız; haftalık yüksek/düşük/kapanış) 20'yi yukarı keserse al;
+    80'i aşağı keserse sat. Haftalık değerler `htf.ust_zaman('1w')` ile kapanmış haftadan, karar yeni haftanın ilk günü. Stop yok ->
+    ATR(14)x3 (günlük, uyarlama). Çıkış kuralı kaynakta metinden çıkarım."""
+    varsayilan_parametreler = {"k_n": 50, "alt": 20, "ust": 80, "atr_n": 14, "atr_k": 3.0}
+
+    def sinyaller(self, mumlar):
+        p = self.parametreler
+        n, alt, ust = int(p["k_n"]), float(p["alt"]), float(p["ust"])
+
+        def fonk(u):
+            sk = g.stokastik(u["yuksek"], u["dusuk"], u["kapanis"], n, 1)["k"]
+            return pd.DataFrame({"yukari": _seviye_yukari(sk, alt).astype(float), "asagi": _seviye_asagi(sk, ust).astype(float)})
+
+        w, yeni = hafta_degerleri(mumlar, fonk)
+        k = mumlar["kapanis"]
+        r = _atr_riski(mumlar, p)
+        return _ekle(cerceve(mumlar, yeni & (w["yukari"] == 1.0), False, k - r, k + r), cikis_long=yeni & (w["asagi"] == 1.0))
+
+
 class EmaRsiTrendIki(_Taban):
     """X005:390: EMA20 > EMA50 ve RSI14 > 50 -> long (long değilse al); EMA20 < EMA50 ve RSI14 < 50 -> short; pozisyon ters koşul
     oluşana kadar korunur (long, short koşulunda kapanır; short, long koşulunda). Stop yok -> ATR(14)x3 (uyarlama)."""
@@ -300,13 +347,11 @@ class SmaKesisimLong(_Taban):
         return _ekle(cerceve(mumlar, gir, False, k - risk, k + risk), cikis_long=cik)
 
 
-class DonchianRvolIz(_Taban):
+class DonchianRvolIz(KancaDestek, _Taban):
     """X005:397: kapanış > önceki 55 barın en yüksek tepesi ve hacim / ort(hacim, önceki 20 bar) >= 2,5 ve SMA20 > SMA50 -> long.
-    Çıkış (kapanış bazlı): kapanış <= (giriş sonrası en yüksek tepe) - 3xATR(14) (hedef yok). Başlangıç stopu = kapanış - 3xATR(14).
-    Uyarlama (nedensel yaklaşım): motor pozisyon durumunu strateji görmez; "giriş mumu" sinyal serisinden türetilir = en son giriş
-    sinyali mumu s; zirve = s'den SONRAKİ mumların (s hariç) en yüksek tepesi, her mumda `cikis_long` = kapanış <= zirve - 3xATR(t).
-    Pozisyon açıkken yeni giriş sinyali gelirse referans o muma kayar (zirve sıfırlanır) ve stop-out sonrası referans bayatlayabilir;
-    gerçek dolum durumu bilinmediği için bu bir yaklaşımdır. Turnover filtresi kripto13'te etkisiz, uygulanmadı."""
+    Çıkış (kapanış bazlı, kanca): kapanış <= (giriş sonrası en yüksek tepe, bugün dahil) - 3xATR(14, güncel bar) (hedef yok);
+    zirve gerçek pozisyonun en yüksek HIGH'ıdır (PozisyonDurumu.en_yuksek). Başlangıç stopu = kapanış - 3xATR(14).
+    Turnover filtresi kripto13'te etkisiz, uygulanmadı."""
     varsayilan_parametreler = {"kanal": 55, "rvol_n": 20, "rvol_min": 2.5, "sma_h": 20, "sma_y": 50,
                                "atr_n": 14, "atr_k": 3.0}
 
@@ -319,17 +364,12 @@ class DonchianRvolIz(_Taban):
         gir = ((k > kanal) & (rvol >= float(p["rvol_min"]))
                & (g.sma(k, int(p["sma_h"])) > g.sma(k, int(p["sma_y"])))).fillna(False)
         risk = _atr_riski(mumlar, p)
-        atr = g.atr(mumlar["yuksek"], mumlar["dusuk"], k, int(p["atr_n"])).to_numpy(float)
-        yuk, kap, girv = mumlar["yuksek"].to_numpy(float), k.to_numpy(float), gir.to_numpy(bool)
-        cik = np.zeros(len(k), bool)
-        zirve, var = -np.inf, False
-        for t in range(len(k)):
-            if var:
-                zirve = max(zirve, yuk[t])
-                cik[t] = bool(kap[t] <= zirve - float(p["atr_k"]) * atr[t])
-            if girv[t]:
-                var, zirve = True, -np.inf
-        return _ekle(cerceve(mumlar, gir, False, k - risk, k + risk), cikis_long=cik)
+        self._sakla(atr=g.atr(mumlar["yuksek"], mumlar["dusuk"], k, int(p["atr_n"])))
+        return _ekle(cerceve(mumlar, gir, False, k - risk, k + risk))
+
+    def pozisyon_cikisi(self, d: PozisyonDurumu) -> bool:
+        a = self._dz("atr", d.mum_indeksi)
+        return bool(np.isfinite(a) and d.kapanis <= d.en_yuksek - float(self.parametreler["atr_k"]) * a)
 
 
 class Rsi2Ema200Iki(_Taban):
@@ -481,8 +521,8 @@ S0357 = _satir("HAM:X005:357", Bb038EmaKesisim, "kapanis__bb038-ema80-s0357", _B
 S0362 = _satir("HAM:X005:362", EmaAcilisStopEmir, "kapanis__ema9-stopemir-s0362", [dict(_ATR)], _4H1D,
                "EMA9 sinyal mumu + sonraki mum kapanışı sinyal mumu tepesini aşınca long (stop-emir kapanışa uyarlandı).")
 S0366 = _satir("HAM:X005:366", MacdKesisim, "kapanis__macd-s0366", _BOS, _4H1D, "MACD(12,26,9) kesişim long-only.")
-S0367 = _satir("HAM:X005:367", SmaBantKaynak, "kapanis__vma-bant-s0367", [{"s": 5, "l": 50, "b": 0.01}], ["1w"],
-               "SMA5 / SMA50 x 1,01 bant kuralı, haftalık (1w yeniden örnekleme koşu tarafında).")
+S0367 = _satir("HAM:X005:367", SmaBantHaftalik, "kapanis__vma-bant-s0367", [{"s": 5, "l": 50, "b": 0.01}], ["1d"],
+               "SMA5 / SMA50 x 1,01 bant kuralı, haftalık (1d mumlarla, htf.ust_zaman haftalık değer).")
 S0371 = _satir("HAM:X005:371", Rsi2HedefTepe, "kapanis__rsi2-tepe-s0371", _BOS, ["1d"],
                "RSI(2) < 25 al, son 2 mum tepesi hedef.")
 S0372 = _satir("HAM:X005:372", RsiEsikAlSat, "kapanis__rsi2-15-72-s0372", [{"rsi_n": 2, "rsi_al": 15, "rsi_cik": 72}],
@@ -497,8 +537,8 @@ S0375 = _satir("HAM:X005:375", RsiEsikAlSat, "kapanis__rsi14basit-s0375",
                "Basit ortalamalı RSI(14) < 25 al, > 75 çık.")
 S0379 = _satir("HAM:X005:379", Rsi15SonTepeHedef, "kapanis__rsi15-tepe15-s0379", _BOS, ["1d"],
                "RSI(15) < 30 al, 15 günün en yüksek fiyatı hedef.")
-S0384 = _satir("HAM:X005:384", StokastikKesisim, "kapanis__stok50-s0384", _BOS, ["1w"],
-               "Stokastik %K(50) 20 yukarı / 80 aşağı kesişim, haftalık.")
+S0384 = _satir("HAM:X005:384", StokastikHaftalik, "kapanis__stok50-s0384", _BOS, ["1d"],
+               "Stokastik %K(50) 20 yukarı / 80 aşağı kesişim, haftalık (1d mumlarla, htf.ust_zaman haftalık değer).")
 S0390 = _satir("HAM:X005:390", EmaRsiTrendIki, "kapanis__ema-rsi-trend-s0390", _BOS, ["1d"],
                "EMA20/50 + RSI14>50 / <50 iki yön, ters koşulda çık.")
 S0391 = _satir("HAM:X005:391", EmaKesisimVeyaRsi, "kapanis__ema-veya-rsi-s0391", _BOS, ["1d"],
@@ -542,17 +582,5 @@ S0427 = _satir("HAM:X005:427", AySonuEma, "kapanis__ay-sonu-ema150-s0427", _BOS,
                "Ay sonu kapanışı > EMA150 ise long, değilse flat.")
 
 KODLANAMADI = [
-    {"kimlik": "HAM:X005:400",
-     "neden": "min. 20 / maks. 40 gün tutma (ters kesişim 20. günden önce yok sayılır) ve 20 günden sonra %7,5 zarar çıkışı: "
-              "pozisyon yaşına bağlı çıkış/stop motorda ifade edilemiyor (zaman_cikisi yalnız maks. süreyi verir)."},
-    {"kimlik": "HAM:X005:401",
-     "neden": "min. 20 / maks. 40 gün tutma ve 20 günden sonra %7,5 zarar çıkışı (400 ile aynı çerçeve): pozisyon yaşına bağlı "
-              "çıkış motorda ifade edilemiyor."},
-    {"kimlik": "HAM:X005:416",
-     "neden": "min. 20 / maks. 40 gün tutma ve 20 günden sonra %7,5 zarar çıkışı (400 ile aynı çerçeve): pozisyon yaşına bağlı "
-              "çıkış motorda ifade edilemiyor."},
-    {"kimlik": "HAM:X005:419",
-     "neden": "stop-and-reverse; min. 8 bar tutma sonrası ters sinyal, pozisyon açıkken her barda kurulan reverse bayrakları, "
-              "max(önceki stop, EMA-2xATR) yukarı kayan pozisyona bağlı stop ve overBand istisnası: motor durumu ifade edemiyor "
-              "(lider onayı gerekir)."},
+    # 400, 401, 416: kod_g8_modul.py (min_tutma_mum / zaman_cikisi_mum / yasa_bagli_zarar_cikisi); 419: kod_g8_modul.KODLANAMADI.
 ]

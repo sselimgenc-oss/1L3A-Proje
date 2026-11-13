@@ -78,8 +78,10 @@ def test_kayit_butunlugu():
     assert len(kimlikler) == len(set(kimlikler)) == 33
     kaynaklar = {k["kimlik"].rsplit("#v", 1)[0] for k in K.VARYANTLAR}
     kodlanamadi = {k["kimlik"] for k in K.KODLANAMADI}
-    assert len(K.SINIFLAR) == 31 and len(kodlanamadi) == 7
-    assert not (kaynaklar & kodlanamadi) and len(kaynaklar | kodlanamadi) == 39
+    assert len(K.SINIFLAR) == 31 and len(kodlanamadi) == 2        # 573, 584, 629, 643, 644 kod_g8_modul'e taşındı
+    assert not (kaynaklar & kodlanamadi) and len(kaynaklar | kodlanamadi) == 34
+    assert {k["tf"] for k in K.VARYANTLAR} <= {"5m", "15m", "1h", "6h", "1d"}    # 1w / 1M yok
+    assert {k["tf"] for k in K.VARYANTLAR if k["kimlik"].startswith(("HAM:X005:606#", "HAM:X005:639#", "HAM:X005:655#"))} == {"1d"}
     assert {s.ad for s in K.SINIFLAR} <= {k["sinif"] for k in K.VARYANTLAR}
     assert all(k["neden"] for k in K.KODLANAMADI)
     assert {k["tf"] for k in K.VARYANTLAR} <= set(FREQ)
@@ -90,7 +92,9 @@ def test_roi_tablolari():
     assert K.EmaOranBandiS0571.cikis_ayarlari.azalan_roi == ((0.0, 21.3), (6.0, 9.9), (12.0, 3.0), (33.0, 0.0))
     assert K.Cci72Rsi36S0572.cikis_ayarlari.azalan_roi[-1] == (17.0, 0.0)
     ca = K.DonchianAgirlikliBbS0577.cikis_ayarlari
-    assert ca.geri_cekilme_yuzde == 17.2 and ca.geri_cekilme_min_kar_yuzde == 21.2
+    assert ca.geri_cekilme_yuzde is None and callable(K.DonchianAgirlikliBbS0577().pozisyon_cikisi)   # iz kancada
+    assert K.VwapDipS0576().cikis_ayarlari.azalan_roi == ((0.0, 2.0),)
+    assert K.YillikZirveKirilimS0655().cikis_ayarlari.azalan_roi == ((0.0, 300.0),)
     assert K.BbDonusH4S0633.cikis_ayarlari.zaman_cikisi_mum == 24
     assert K.IchimokuBulutKirilimS0634.cikis_ayarlari.zaman_cikisi_mum == 120
     assert K.Crsi2S0635.cikis_ayarlari.zaman_cikisi_mum == 5
@@ -111,7 +115,7 @@ def test_s0561_zirve_gunu_ve_hedef_stop():
 def test_s0576_hedef_yuzde2_stop_yuzde15():
     m, s = _sinyalli(K.VwapDipS0576(), "5m")
     g_ = s["yon"] == 1
-    assert np.allclose(s.loc[g_, "hedef"], m.loc[g_, "kapanis"] * 1.02)
+    assert s.loc[g_, "hedef"].isna().all()        # ROI artık azalan_roi (kapanış bazlı), limit hedef yok
     assert np.allclose(s.loc[g_, "stop"], m.loc[g_, "kapanis"] * 0.85)
 
 
@@ -150,9 +154,10 @@ def test_s0653_stop_sma_eksi_25sd():
 
 
 def test_s0655_hedef_4x_stop_070():
-    m, s = _sinyalli(K.YillikZirveKirilimS0655(), "1w")
+    m, s = _sinyalli(K.YillikZirveKirilimS0655(), "1d")
     g_ = s["yon"] == 1
-    assert np.allclose(s.loc[g_, "hedef"], m.loc[g_, "kapanis"] * 4.0)
+    assert g_.any() and s.loc[g_, "hedef"].isna().all()
+    assert (m.index[g_].dayofweek == 0).all()            # haftalık kural: yalnız yeni haftanın ilk günü
     assert np.allclose(s.loc[g_, "stop"], m.loc[g_, "kapanis"] * 0.7)
 
 

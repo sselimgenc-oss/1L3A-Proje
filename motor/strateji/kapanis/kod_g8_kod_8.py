@@ -15,8 +15,8 @@ Genel biçim kararları:
   Sma200Ls bant/5 gün teyitsiz, Ifr2 Ichimoku süzgeçli, SupertrendPsar çizgi stoplu/dönüş girişli, MaKesisim toleranssız,
   BantDonus RSI/ADX süzgeçli), bu yüzden yeni sınıf yazıldı.
 
-KODLANAMADI (VARYANTLAR dışında, bkz. `KODLANAMADI`): X005:863 (örtüşen dilimli net pozisyon), X005:879 (giriş sonrası zirveden
-%20 geri çekilme: pozisyon bilinçli çıkış gerekli).
+KODLANAMADI (VARYANTLAR dışında, bkz. `KODLANAMADI`): X005:863 (örtüşen dilimli net pozisyon). X005:879 (giriş sonrası zirveden %20
+geri çekilme) pozisyon bilinçli kancayla `kod_g8_modul.FlipperKancaS0879` olarak kodlandı.
 """
 from __future__ import annotations
 
@@ -970,8 +970,5 @@ KODLANAMADI = [
      "neden": "örtüşen dilimli net pozisyon: her gün bir birim long/short dilimi açılır, her dilim 25 gün tutulur, net pozisyon "
               "-25..+25 dilim toplamıdır; motorun tek giriş + tek stop modeline sığmaz (kaynak notu: lider uygulanabilirliği "
               "onaylamalı); tek pozisyonlu yaklaşım farklı bir strateji olurdu (uydurma çözüm yok)."},
-    {"kimlik": "HAM:X005:879",
-     "neden": "pozisyon bilinçli çıkış gerekli: giriş sonrası izlenen en yüksek tepeden kapanış %20 düşünce sat (kapanış bazlı, "
-              "fiyat zirvesinin yüzdesi; motorun geri_cekilme modülü kâr-puanı cinsindendir, aynı değil). Giriş (son salınım "
-              "dibinden %20 yükseliş) tek başına kodlanabilir ama çıkışı sanal pozisyonla kestirmek yasak."},
+    # 879: kod_g8_modul.py (FlipperKancaS0879).
 ]

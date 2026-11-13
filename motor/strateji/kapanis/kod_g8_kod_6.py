@@ -8,17 +8,18 @@ Ortak uyarlamalar (satır notlarında tekrar edilmez):
 - Kaynak stopu yoksa (ya da <= -%50 ise) stop = kapanış -/+ 3 x ATR(14) (ön kayıt uyarlaması).
 - Kaynak yüzde stopu / hedefi sinyal kapanışından hesaplanır (dolum sonraki açılıştan).
 - Freqtrade `minimal_roi` tablosu (dakika anahtarlı) `CikisAyarlari.azalan_roi` ile: mum sayısı = yukarı yuvarlanmış dakika /
-  TF dakikası (aynı muma düşen basamakta büyük dakikalı olan geçerli). Tek basamaklı ROI (zaman yok) sinyaldeki `hedef` ile.
-- Freqtrade iz süren stop `geri_cekilme_yuzde` (+ offset için `geri_cekilme_min_kar_yuzde`) ile (kâr% farkı, kapanış bazlı).
-- Kaynak çıkışı kapanış bazlıysa sınıfın kendi `cikis_long` / `cikis_short` sinyaliyle yazıldı (bar içi motor modülüyle
-  yaklaşık çözüm yok). Pozisyon durumu (giriş fiyatı, kâr, yaş, kurulumun işlemden sonra sıfırlanması) gerektiren kurallar
-  `KODLANAMADI`: ayrı "pozisyon bilinçli çıkış" motor modülü gelecek.
-- 1w / 1M / 6h TF'li satırlarda sınıf zaten o TF'nin mumlarını bekler (1d/1h'den yeniden örnekleme koşu tarafında).
+  TF dakikası (aynı muma düşen basamakta büyük dakikalı olan geçerli). Tek basamaklı ROI (zaman yok) de `azalan_roi = ((0, yüzde),)`
+  (`RoiTek` karışımı).
+- Freqtrade yüzde iz süren stop (574, 577, 578) ve zirveden geri çekilme (635, 643...) strateji kancasıyla (`pozisyon_cikisi`,
+  kod_g8_modul.tepe_geri_cekilme): zirve = giriş sonrası en yüksek HIGH, çıkış eşiği zirve fiyatının %'si, kapanışta kontrol.
+- Kaynak çıkışı kapanış bazlıysa sınıfın kendi `cikis_long` / `cikis_short` sinyaliyle ya da pozisyon bilinçli modülle yazıldı.
+- 1w / 1M satırları (606, 639, 655) 1d mumlarla koşulur (VARYANTLAR tf = "1d"): haftalık değerler `htf.ust_zaman("1w")` ile yalnız
+  kapanmış haftadan, karar yeni haftanın ilk günü; aylık (606) ay sonu günlük kapanışlarından (karar ay sonu kapanışı).
 
 Arşiv eşleşmesi (kural d): X005:594 kuralı `kapanis__rsi2-sma5-s0253` (kod_g8_kod_3) ile birebir aynı yapıdadır (RSI(2) eşiği
 10); yeni sınıf yazılmadı, VARYANTLAR o sınıfın adıyla ve eşik 10 ile kaydedildi.
 
-KODLANAMADI: 573, 584, 629 (pozisyon bilinçli), 643, 644 (yüzde kısmi kâr), 580, 585 (portföy ağırlık stratejisi).
+KODLANAMADI: 580, 585 (portföy ağırlık stratejisi). 573, 584, 629, 643, 644 pozisyon bilinçli modülle `kod_g8_modul.py`'ye taşındı.
 """
 from __future__ import annotations
 
@@ -37,7 +38,10 @@ from motor.strateji.cikislar import CikisAyarlari
 from motor.strateji.daytrade._ortak import cerceve
 from motor.strateji.dis._gosterge_d3 import td_sayim as _td_sayim
 from motor.strateji.dis._gosterge_d10a import connors_rsi as _connors_rsi
+from motor.strateji.cikislar import PozisyonDurumu
 from motor.strateji.htf import ust_zaman
+from motor.strateji.kapanis.kod_g8_modul import (KancaDestek, ParametreliCikis, RoiTek, ay_sonu_bayragi, hafta_degerleri,
+                                                  tepe_geri_cekilme)
 from motor.strateji.temel import Strateji
 
 yukari = b2.yukari_kesis
@@ -245,14 +249,16 @@ class Cci72Rsi36S0572(_Taban):
 
 
 # ================================================================ X005:574
-class Rsi4Ema100S0574(_Taban):
+class Rsi4Ema100S0574(KancaDestek, _Taban):
     """HAM:X005:574 (1h, long): RSI(4) 15'i yukarı keser (önceki < 15 <= şimdi) VE mum düşüğü > EMA(100) -> long; çıkış RSI(4)
-    85'i yukarı keserse ya da mum düşüğü < EMA(100) olursa. Stop giriş kapanışının %10 altı, iz süren: `geri_cekilme_yuzde`
-    10 (kapanış bazlı kâr% farkı; kaynakta fiyat). Trailing offset kaynakta yazılı değil: offset yok (varsayım)."""
+    85'i yukarı keserse ya da mum düşüğü < EMA(100) olursa. Stop giriş kapanışının %10 altı, iz süren: giriş sonrası zirve fiyatın (en
+    yüksek HIGH) %10 altına kapanış inerse çık (kanca). Trailing offset kaynakta yazılı değil: offset yok (varsayım)."""
 
     ad = "kapanis__rsi4-ema100-s0574"
     varsayilan_parametreler = {"rsi_n": 4, "alt": 15.0, "ust": 85.0, "ema_n": 100, "stop_yuzde": 0.10}
-    cikis_ayarlari = CikisAyarlari(geri_cekilme_yuzde=10.0)
+
+    def pozisyon_cikisi(self, d: PozisyonDurumu) -> bool:
+        return tepe_geri_cekilme(d, float(self.parametreler["stop_yuzde"]) * 100.0)
 
     def sinyaller(self, m):
         p = self.parametreler
@@ -267,10 +273,10 @@ class Rsi4Ema100S0574(_Taban):
 
 
 # ================================================================ X005:576
-class VwapDipS0576(_Taban):
+class VwapDipS0576(RoiTek, _Taban):
     """HAM:X005:576 (5m, long): kayan VWAP(20; tipik fiyat x hacim) - 1 x std(VWAP, 20) alt bandı altında kapanış VE son 4 mumun
     en yüksek açılışından kapanışa düşüş > %4 VE CTI(20) < -0,8 VE RSI(14) < 35 VE RSI(84) < 60 VE RSI(112) < 60 -> long.
-    Sinyal çıkışı yok; ROI +%2 (hedef); stop -%15.
+    Sinyal çıkışı yok; ROI +%2 (azalan_roi); stop -%15.
     Uyarlama: düşüş oranı en yüksek açılışa göre; bant std'si VWAP serisinin 20 mumluk örnek std'si (ddof=1)."""
 
     ad = "kapanis__vwap-dip-s0576"
@@ -288,22 +294,24 @@ class VwapDipS0576(_Taban):
         gir = ((k < alt) & dusus & (_cti(k, int(p["cti_n"])) < float(p["cti"])) & (g.rsi(k, 14) < float(p["rsi14"]))
                & (g.rsi(k, 84) < float(p["rsi84"])) & (g.rsi(k, 112) < float(p["rsi112"])))
         sl = float(p["stop_yuzde"])
-        return cerceve(m, gir, False, k * (1 - sl), k * (1 + sl), hedef_l=k * (1 + float(p["roi"])))
+        return cerceve(m, gir, False, k * (1 - sl), k * (1 + sl))
 
 
 # ================================================================ X005:577
-class DonchianAgirlikliBbS0577(_Taban):
+class DonchianAgirlikliBbS0577(KancaDestek, _Taban):
     """HAM:X005:577 (5m, long): Donchian(52) alt bandı - ağırlıklı Bollinger(20, 2 sigma, tipik fiyat) alt bandı farkı sıfırı
     yukarı keser VE mum yeşil VE kapanış < Parabolik SAR(0,02/0,2; o mumun SAR değeri) VE ADX(14) > 25 VE +DI >= -DI -> long.
-    Sinyal çıkışı yok. ROI 0 dk %27,8; 39 dk %8,7; 124 dk %3,8; 135 dk %0; stop -%33,3; kâr %21,2'yi geçince iz süren %17,2.
+    Sinyal çıkışı yok. ROI 0 dk %27,8; 39 dk %8,7; 124 dk %3,8; 135 dk %0; stop -%33,3; kâr %21,2'yi geçince iz süren %17,2 (kanca: zirve kârı >= %21,2 iken kapanış, zirve fiyatın (en yüksek HIGH) %17,2 altına inerse çık).
     Uyarlama: ağırlıklı Bollinger = orta bant lineer ağırlıklı (WMA) tipik fiyat, sapma tipik fiyatın 20 mumluk örnek std'si
     (ddof=1); kaynak formülü yeniden doğrulanmalı (satır notu). +DM >= -DM, Wilder +DI >= -DI ile ifade edildi."""
 
     ad = "kapanis__donchian-agirlikli-bb-s0577"
     varsayilan_parametreler = {"donchian_n": 52, "bb_n": 20, "bb_k": 2.0, "adx_n": 14, "adx_esik": 25.0,
                                "sar_adim": 0.02, "sar_maks": 0.2, "stop_yuzde": 0.333}
-    cikis_ayarlari = CikisAyarlari(azalan_roi=_roi({0: 0.278, 39: 0.087, 124: 0.038, 135: 0.0}, 5),
-                                   geri_cekilme_yuzde=17.2, geri_cekilme_min_kar_yuzde=21.2)
+    cikis_ayarlari = CikisAyarlari(azalan_roi=_roi({0: 0.278, 39: 0.087, 124: 0.038, 135: 0.0}, 5))
+
+    def pozisyon_cikisi(self, d: PozisyonDurumu) -> bool:
+        return tepe_geri_cekilme(d, 17.2, 21.2)
 
     def sinyaller(self, m):
         p = self.parametreler
@@ -321,15 +329,17 @@ class DonchianAgirlikliBbS0577(_Taban):
 
 
 # ================================================================ X005:578
-class SlowPotatoS0578(_Taban):
+class SlowPotatoS0578(KancaDestek, _Taban):
     """HAM:X005:578 (5m, long): düşük <= SMA(düşük, 1440) -> long; çıkış yüksek >= SMA(yüksek, 1440). SMA mevcut mumu içerir,
-    sinyal kapanmış mumdan. Kâr %3'ü geçince %2 iz süren stop (`geri_cekilme_yuzde` 2, offset 3); ROI etkisiz.
+    sinyal kapanmış mumdan. Kâr %3'ü geçince %2 iz süren stop (kanca: zirve kârı >= %3 iken kapanış zirve fiyatın %2 altına inerse); ROI etkisiz.
     Uyarlama: kaynak fiilen stopsuz (-%99) -> ATR(14)x3 felaket stopu; iz stop ofset koşulu kaynakta belirsiz, 'kâr > %3'ten
     sonra %2' diye okundu."""
 
     ad = "kapanis__slowpotato-s0578"
     varsayilan_parametreler = {"sma_n": 1440, **_ATR}
-    cikis_ayarlari = CikisAyarlari(geri_cekilme_yuzde=2.0, geri_cekilme_min_kar_yuzde=3.0)
+
+    def pozisyon_cikisi(self, d: PozisyonDurumu) -> bool:
+        return tepe_geri_cekilme(d, 2.0, 3.0)
 
     def sinyaller(self, m):
         p = self.parametreler
@@ -418,9 +428,10 @@ class KumoIzS0600(_Taban):
 
 # ================================================================ X005:606
 class AylikSma10Rsi2S0606(_Taban):
-    """HAM:X005:606 (1M; 1d'den türetilmiş aylık bar, iki yön): kapanış > SMA(10 ay) VE RSI(2) > 80 -> long; kapanış < SMA(10 ay)
-    VE RSI(2) > 30 -> short (kısa şart kaynakta böyle yazılı); kapanış hareketli ortalamanın karşı tarafına geçince çık.
-    Uyarlama: HO tipi SMA varsayıldı; stop yok -> ATR(14)x3 (aylık barlarda)."""
+    """HAM:X005:606 (1M; 1d mumlarla, iki yön): aylık barlar = ay sonu günlük kapanışları (takvimde ertesi gün başka ay: yalnız zaman
+    damgasından, gelecek yok); sinyal ay SONU kapanışında, dolum sonraki açılış (yeni ayın ilk günü). Kapanış > SMA(10 ay) VE RSI(2, aylık
+    kapanışlardan) > 80 -> long; kapanış < SMA(10 ay) VE RSI(2) > 30 -> short (kısa şart kaynakta böyle yazılı); kapanış hareketli
+    ortalamanın karşı tarafına geçince çık (ay sonu kapanışında). Uyarlama: HO tipi SMA varsayıldı; stop yok -> ATR(14)x3 (günlük)."""
 
     ad = "kapanis__aylik-sma10-rsi2-s0606"
     varsayilan_parametreler = {"sma_ay": 10, "rsi_n": 2, "long_esik": 80.0, "short_esik": 30.0, **_ATR}
@@ -428,11 +439,16 @@ class AylikSma10Rsi2S0606(_Taban):
     def sinyaller(self, m):
         p = self.parametreler
         k = m["kapanis"]
-        sma = g.sma(k, int(p["sma_ay"]))
-        r = g.rsi(k, int(p["rsi_n"]))
+        ay_sonu = ay_sonu_bayragi(m.index)
+        aylik = k[ay_sonu]
+        sma = pd.Series(np.nan, index=m.index)
+        r = pd.Series(np.nan, index=m.index)
+        sma[ay_sonu] = g.sma(aylik, int(p["sma_ay"]))
+        r[ay_sonu] = g.rsi(aylik, int(p["rsi_n"]))
         rr = _atr3(m, p)
-        return _bitir(cerceve(m, (k > sma) & (r > float(p["long_esik"])), (k < sma) & (r > float(p["short_esik"])),
-                              k - rr, k + rr), k < sma, k > sma)
+        return _bitir(cerceve(m, ay_sonu & (k > sma) & (r > float(p["long_esik"])),
+                              ay_sonu & (k < sma) & (r > float(p["short_esik"])), k - rr, k + rr),
+                      ay_sonu & (k < sma), ay_sonu & (k > sma))
 
 
 # ================================================================ X005:608
@@ -641,16 +657,19 @@ class IchimokuBulutKirilimS0634(_Taban):
 
 
 # ================================================================ X005:635
-class Crsi2S0635(_Taban):
+class Crsi2S0635(KancaDestek, _Taban):
     """HAM:X005:635 (1d, long): ConnorsRSI(2, 2, 100) < 10 VE kapanış > SMA(200) VE hacim > 1,5 x SMA(hacim, 20) -> long. Çıkış
-    CRSI > 70 ya da kapanış < SMA(200) ya da 5 gün (zaman çıkışı) ya da zirveden %5 geri çekilme (`geri_cekilme_yuzde` 5).
+    CRSI > 70 ya da kapanış < SMA(200) ya da 5 gün (zaman çıkışı) ya da zirveden %5 geri çekilme (kanca: giriş sonrası en yüksek HIGH'ın %5 altı).
     Stop giriş kapanışının %8 altı. CRSI = `dis._gosterge_d10a.connors_rsi` (RSI + seri RSI + 100 günlük yüzdelik sıra)/3.
     Fiyat/piyasa değeri tarama filtreleri hisse evrenine özgü, uygulanmadı."""
 
     ad = "kapanis__crsi2-s0635"
     varsayilan_parametreler = {"rsi_n": 2, "seri_n": 2, "sira_n": 100, "giris": 10.0, "cikis": 70.0, "trend_sma": 200,
                                "hacim_n": 20, "hacim_k": 1.5, "stop_yuzde": 0.08}
-    cikis_ayarlari = CikisAyarlari(zaman_cikisi_mum=5, geri_cekilme_yuzde=5.0)
+    cikis_ayarlari = CikisAyarlari(zaman_cikisi_mum=5)
+
+    def pozisyon_cikisi(self, d: PozisyonDurumu) -> bool:
+        return tepe_geri_cekilme(d, 5.0)
 
     def sinyaller(self, m):
         p = self.parametreler
@@ -681,19 +700,26 @@ class Rsi2Esik5Sma10S0638(_Taban):
 
 # ================================================================ X005:639
 class Weinstein40HaftaS0639(_Taban):
-    """HAM:X005:639 (1w; tamamlanmış haftalık barlar, long): geçen hafta kapanış <= SMA(40 hafta) ve bu hafta kapanış > SMA(40) ->
-    long; haftalık kapanış < SMA(40) -> çık. Stop yok -> ATR(14)x3 (haftalık barlarda; ayrı iz stop değil, uyarlama).
-    Hisse kesitsel sıralaması/hacim önceliği uygulanmadı (tek varlık SMA40 kuralı)."""
+    """HAM:X005:639 (1w; tamamlanmış haftalık barlar, 1d mumlarla, long): geçen hafta kapanış <= SMA(40 hafta) ve bu hafta kapanış > SMA(40) ->
+    long; haftalık kapanış < SMA(40) -> çık. Haftalık değerler `htf.ust_zaman('1w')` ile kapanmış haftadan, karar yeni haftanın ilk günü.
+    Stop yok -> ATR(14)x3 (günlük; ayrı iz stop değil, uyarlama). Hisse kesitsel sıralaması/hacim önceliği uygulanmadı (tek varlık SMA40)."""
 
     ad = "kapanis__weinstein40-s0639"
     varsayilan_parametreler = {"sma_hafta": 40, **_ATR}
 
     def sinyaller(self, m):
         p = self.parametreler
+        n = int(p["sma_hafta"])
+
+        def fonk(u):
+            kw = u["kapanis"]
+            sma = g.sma(kw, n)
+            return pd.DataFrame({"kw": kw, "sma": sma, "yukari": yukari(kw, sma).astype(float)})
+
+        w, yeni = hafta_degerleri(m, fonk)
         k = m["kapanis"]
-        sma = g.sma(k, int(p["sma_hafta"]))
         r = _atr3(m, p)
-        return _bitir(cerceve(m, yukari(k, sma), False, k - r, k + r), k < sma)
+        return _bitir(cerceve(m, yeni & (w["yukari"] == 1.0), False, k - r, k + r), yeni & (w["kw"] < w["sma"]))
 
 
 # ================================================================ X005:640
@@ -781,23 +807,34 @@ class SdDonusS0653(_Taban):
 
 
 # ================================================================ X005:655
-class YillikZirveKirilimS0655(_Taban):
-    """HAM:X005:655 (1w; haftalık barlar, long): haftalık kapanış > önceki 52 haftanın en yüksek kapanışı -> haftanın kapanışında al
-    (pozisyon yokken: motor). Çıkış: hedef giriş kapanışının 4 katı (+%300), kapanış önceki 24 haftanın en düşük dibinin altına
-    inerse (iz süren çıkış, `cikis_long`), stop giriş kapanışının %30 altı.
-    Uyarlama: kaynak hedef/stop kapanış bazlı; burada sinyal `hedef`/`stop` alanlarıyla (motor bar içi sınar)."""
+class YillikZirveKirilimS0655(ParametreliCikis):
+    """HAM:X005:655 (1w; haftalık barlar, 1d mumlarla, long): haftalık kapanış > önceki 52 haftanın en yüksek kapanışı -> yeni haftanın ilk
+    gününde sinyal (haftalık kapanış bilinir), dolum sonraki açılış (pozisyon yokken: motor). Çıkış: hedef giriş fiyatının 4 katı (+%300;
+    kapanış bazlı: `azalan_roi = ((0, 300),)`), haftalık kapanış önceki 24 haftanın en düşük dibinin altına inerse (iz süren çıkış,
+    `cikis_long`), stop giriş fiyatının %30 altı. Haftalık değerler `htf.ust_zaman('1w')` ile kapanmış haftadan.
+    YAKLAŞIK: kaynak stopu kapanış bazlı (haftalık kapanış giriş x 0,70); burada sinyal kapanışından %30 bar içi sert stop (motor
+    stopu sabit); hedef kapanış bazlı birebir (azalan_roi)."""
 
     ad = "kapanis__52h-zirve-kirilim-s0655"
     varsayilan_parametreler = {"zirve_hafta": 52, "dip_hafta": 24, "stop_yuzde": 0.30, "hedef": 3.0}
 
+    @staticmethod
+    def _cikis(p: dict) -> CikisAyarlari:
+        return CikisAyarlari(azalan_roi=((0, round(float(p["hedef"]) * 100.0, 6)),))
+
     def sinyaller(self, m):
         p = self.parametreler
-        k = m["kapanis"]
         zn, dn = int(p["zirve_hafta"]), int(p["dip_hafta"])
-        gir = k > k.shift(1).rolling(zn, min_periods=zn).max()
-        dip = m["dusuk"].shift(1).rolling(dn, min_periods=dn).min()
+
+        def fonk(u):
+            kw = u["kapanis"]
+            return pd.DataFrame({"kw": kw, "zirve": kw.shift(1).rolling(zn, min_periods=zn).max(),
+                                 "dip": u["dusuk"].shift(1).rolling(dn, min_periods=dn).min()})
+
+        w, yeni = hafta_degerleri(m, fonk)
+        k = m["kapanis"]
         sl = float(p["stop_yuzde"])
-        return _bitir(cerceve(m, gir, False, k * (1 - sl), k * (1 + sl), hedef_l=k * (1 + float(p["hedef"]))), k < dip)
+        return _bitir(cerceve(m, yeni & (w["kw"] > w["zirve"]), False, k * (1 - sl), k * (1 + sl)), yeni & (w["kw"] < w["dip"]))
 
 
 SINIFLAR = [Yuksek20TemasS0561, CmcWinnerS0567, TdSayimGunSonusuzS0570, EmaOranBandiS0571, Cci72Rsi36S0572, Rsi4Ema100S0574,
@@ -830,7 +867,7 @@ VARYANTLAR = [
     {"kimlik": "HAM:X005:594#v1", "sinif": "kapanis__rsi2-sma5-s0253",
      "parametreler": {"rsi_n": 2, "rsi_ust": 10.0, "trend_n": 200, "kisa_n": 5, "atr_n": 14, "atr_k": 3.0}, "tf": "1d"},
     _v("600", 1, KumoIzS0600, "1d"),
-    _v("606", 1, AylikSma10Rsi2S0606, "1M"),
+    _v("606", 1, AylikSma10Rsi2S0606, "1d"),
     _v("608", 1, Ma5DusenGunlerS0608, "1d", ma_uzun=200),
     _v("608", 2, Ma5DusenGunlerS0608, "1d", ma_uzun=220),
     _v("611", 1, PazartesiDusSalitS0611, "1d"),
@@ -843,37 +880,21 @@ VARYANTLAR = [
     _v("634", 1, IchimokuBulutKirilimS0634, "1h"),
     _v("635", 1, Crsi2S0635, "1d"),
     _v("638", 1, Rsi2Esik5Sma10S0638, "1d"),
-    _v("639", 1, Weinstein40HaftaS0639, "1w"),
+    _v("639", 1, Weinstein40HaftaS0639, "1d"),
     _v("640", 1, Macd525UzaklikS0640, "1d"),
     _v("649", 1, KeltnerDurumS0649, "1d"),
     _v("651", 1, DonchianYuksekDusukS0651, "1d"),
     _v("653", 1, SdDonusS0653, "1d"),
-    _v("655", 1, YillikZirveKirilimS0655, "1w"),
+    dict(_v("655", 1, YillikZirveKirilimS0655, "1d"), yaklasik=True),
 ]
 
 KODLANAMADI = [
-    {"kimlik": "HAM:X005:573",
-     "neden": "pozisyon bilinçli çıkış gerekli: çıkış yalnız kârdayken (exit_profit_only; slowADX<25 & fastK/D>70 & ... & "
-              "kapanış>EMA5 çıkışı açık pozisyon kârına bağlı); motor sinyal çıkışını açık K/Z'ye koşullayamaz"},
+    # 573, 584, 629, 643, 644: kod_g8_modul.py (pozisyon bilinçli modül/kanca).
     {"kimlik": "HAM:X005:580",
      "neden": "portföy ağırlık stratejisi: OLMAR hedef ağırlık simpleksi (tüm sembollerin fiyat/SMA20 vektörü, simpleks "
               "izdüşümü, günlük yeniden dengeleme) tek varlıklı Strateji.sinyaller sözleşmesine sığmaz; portföy sınıfı "
               "(motor/portfoy/stratejiler, PfTemel) arayüzü bu talimatın kapsamında değil"},
-    {"kimlik": "HAM:X005:584",
-     "neden": "pozisyon bilinçli çıkış gerekli: girişten en az 2 mum sonra kapanışın GİRİŞ FİYATI üstünde olması (pozisyon yaşı + "
-              "giriş fiyatı) çıkış kolu; 4h|1d TF'leri için ayrı motor modülü bekleniyor"},
     {"kimlik": "HAM:X005:585",
      "neden": "portföy ağırlık stratejisi: ay sonu kesitsel en düşük IBS'li 1 varlığa %100 ağırlık (tüm sembolleri sıralama, "
               "aylık yeniden dengeleme) tek varlıklı sinyal sözleşmesine sığmaz; portföy sınıfı arayüzü talimat kapsamında değil"},
-    {"kimlik": "HAM:X005:629",
-     "neden": "pozisyon bilinçli çıkış gerekli: kurulum (BB dışı temas) 'işlemden sonra sıfırlanır' (işlemin gerçekleştiği "
-              "bilgisi) ve kalan pozisyon için 1R yarı kâr / 2R başabaş + 1h orta bant çıkışı; çoklu TF (1h kurulum + 5m MACD) "
-              "ve pozisyon yaşam döngüsü durumu sinyal düzeyinde ifade edilemez"},
-    {"kimlik": "HAM:X005:643",
-     "neden": "yüzde cinsinden kısmi kâr (+%4'te yarım, +%8'de tam) ve %5 iz süren stop: motor kısmi kârı R cinsinden "
-              "(CikisAyarlari.kismi) tanımlar, ATR stopuyla giriş başına değişen R'ye sabit yüzdeler çevrilemez; yaklaşık "
-              "çözüm yok (kural kaynak biçimiyle yazılamaz)"},
-    {"kimlik": "HAM:X005:644",
-     "neden": "yüzde cinsinden kısmi kâr (+%4'te yarım, +%8'de tam) ve %5 iz süren stop: motor kısmi kârı R cinsinden "
-              "tanımlar, ATR stopuyla yüzde seviyeleri birebir ifade edilemez (643 ile aynı çerçeve)"},
 ]

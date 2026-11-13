@@ -11,11 +11,12 @@ Biçim kararları (ILERLEME.md politikaları):
 - Kesişim: "x, y'yi yukarı keser" = x[t-1] <= y[t-1] ve x[t] > y[t]; seviye kesişimi: x[t-1] < seviye <= x[t] (yukarı),
   x[t-1] >= seviye > x[t] (aşağı).
 - Girişe göre ölçülen seviyeler (kaynak stopu/hedefi) giriş fiyatı yerine sinyal mumunun kapanışından hesaplanır (giriş ertesi
-  açılış; sinyal anında bilinen en yakın fiyat). Pozisyon durumu (giriş fiyatı, yaş, tepe) gerektiren çıkışlar KODLANAMADI'dadır.
-- Zaman çıkışı, ROI tablosu, geri çekilme ve başabaş stopu motorun CikisAyarlari modülleriyle ifade edilir.
+  açılış; sinyal anında bilinen en yakın fiyat). Pozisyon durumu (giriş fiyatı, yaş, tepe) gerektiren çıkışlar (679 yüzde iz,
+  699, 726, 736) `pozisyon_cikisi` kancasıyla / kod_g8_modul'de yazılmıştır.
+- Zaman çıkışı, ROI tablosu ve başabaş stopu motorun CikisAyarlari modülleriyle ifade edilir; yüzde iz süren stop kancayla.
 
-KODLANAMADI: 673 (TOTT/SOTT/HOTT/LOTT/ROTT formülleri kaynak metinde yok), 699 (çıkış giriş fiyatına bağlı), 726 (çıkış giriş
-bacağına bağlı), 736 (yaşa bağlı sabit sonra izleyen stop), 742 (bölge tanımı yok).
+KODLANAMADI: 673 (TOTT/SOTT/HOTT/LOTT/ROTT formülleri kaynak metinde yok), 742 (bölge tanımı yok). 699, 726, 736 pozisyon bilinçli
+modülle `kod_g8_modul.py`'ye taşındı.
 """
 from __future__ import annotations
 
@@ -31,7 +32,9 @@ from motor.strateji.cikislar import CikisAyarlari
 from motor.strateji.daytrade._ortak import cerceve
 from motor.strateji.gostergeler_b1 import ardisik_sayac
 from motor.strateji.gostergeler_b2 import heikin_ashi
+from motor.strateji.cikislar import PozisyonDurumu
 from motor.strateji.htf import ust_zaman
+from motor.strateji.kapanis.kod_g8_modul import KancaDestek, tepe_geri_cekilme
 from motor.strateji.temel import Strateji
 
 
@@ -366,16 +369,19 @@ class BbKesisimRsiTp(_Taban):
 
 
 # ---------------------------------------------------------------- 679
-class BbHacimAdxRoi(_Taban):
+class BbHacimAdxRoi(KancaDestek, _Taban):
     """X005:679 (15m iki yön): long: kapanış BB(20,2) alt bandın altında VE önceki kapanış bandın içinde (ilk dokunuş) VE RSI(14) < 27 VE
     hacim > 1,061 x SMA(hacim,20) VE ADX(14) < 25; short: kapanış üst bandın üstünde (ilk dokunuş) VE RSI > 76 VE aynı hacim/ADX.
     Sinyal çıkışı yok. Kademeli ROI (dk -> 15m bar, yukarı yuvarlanır): %18,1 (0), %10,5 (59 dk -> 4 bar), %1,7 (232 dk -> 16 bar), %0
-    (567 dk -> 38 bar) = CikisAyarlari.azalan_roi. İz süren stop: kâr %13,4 olunca zirveden %11,3 geriden (geri_cekilme; Freqtrade
-    positive_offset/positive okuması; motor kâr% farkıyla ölçer). Sabit stop -%30."""
+    (567 dk -> 38 bar) = CikisAyarlari.azalan_roi. İz süren stop: kâr %13,4 olunca zirveden %11,3 geriden (Freqtrade positive_offset/positive
+    okuması; kanca: zirve kârı >= %13,4 iken kapanış zirve fiyatın (long: en yüksek HIGH, short: en düşük LOW) %11,3 gerisinde).
+    Sabit stop -%30."""
     varsayilan_parametreler = {"bb_n": 20, "bb_k": 2.0, "rsi_n": 14, "rsi_long": 27.0, "rsi_short": 76.0, "hacim_k": 1.061,
                                "hacim_n": 20, "adx_n": 14, "adx_max": 25.0, "stop_yuzde": 30.0}
-    cikis_ayarlari = CikisAyarlari(azalan_roi=((0, 18.1), (4, 10.5), (16, 1.7), (38, 0.0)),
-                                   geri_cekilme_yuzde=11.3, geri_cekilme_min_kar_yuzde=13.4)
+    cikis_ayarlari = CikisAyarlari(azalan_roi=((0, 18.1), (4, 10.5), (16, 1.7), (38, 0.0)))
+
+    def pozisyon_cikisi(self, d: PozisyonDurumu) -> bool:
+        return tepe_geri_cekilme(d, 11.3, 13.4)
 
     def sinyaller(self, m):
         p = self.parametreler
@@ -918,15 +924,7 @@ KODLANAMADI = [
     {"kimlik": "HAM:X005:673",
      "neden": "kaynakta formülü olmayan gösterge: TOTT/SOTT (sott_period_k, sott_smooth_k), HOTT/LOTT kapısı, minör trend ve ROTT yaması "
               "kural metninde yalnız parametre adlarıyla geçiyor; tanımları yazılı değil, kaynak kodu kopyalanamaz -> uydurma çözüm yok."},
-    {"kimlik": "HAM:X005:699",
-     "neden": "pozisyon bilinçli çıkış gerekli: long çıkışı 'önceki kapanış giriş (alış) fiyatının üstünde' ve short çıkışı 'önceki kapanış "
-              "giriş fiyatının üstüne çıkarsa' (giriş fiyatına bağlı ilk kârlı kapanış / fiilî zarar çıkışı)."},
-    {"kimlik": "HAM:X005:726",
-     "neden": "pozisyon bilinçli çıkış gerekli: çıkış kuralı pozisyonu hangi bacağın (yavaş RSI17/SMA40 ya da hızlı RSI5/SMA10) açtığına "
-              "bağlı; açılış bacağı pozisyon durumudur (sanal pozisyonla kestirilmedi)."},
-    {"kimlik": "HAM:X005:736",
-     "neden": "pozisyon bilinçli çıkış gerekli: ilk 3 bar %2 sabit stop, sonra %2 izleyen stop (pozisyon yaşına bağlı stop tipi değişimi; "
-              "motorun giriş sonrası zirveden %-izleyen stop modülü yok)."},
+    # 699, 726, 736: kod_g8_modul.py (pozisyon bilinçli).
     {"kimlik": "HAM:X005:742",
      "neden": "kaynakta formülü olmayan gösterge: 'alt/üst bölge (Zone 0,20)' ve 'karşı bölge fiyat hedefi' kural metninde tanımlı değil "
               "(bölgenin neye göre ölçüldüğü yazılı değil) -> uydurma çözüm yok."},

@@ -73,8 +73,8 @@ def test_kayit_butunlugu():
     assert len(kimlikler) == len(set(kimlikler))
     kaynaklar = {k["kimlik"].rsplit("#v", 1)[0] for k in VARYANTLAR}
     kodlanamadi = {k["kimlik"] for k in KODLANAMADI}
-    assert len(kaynaklar) == 35 and len(kodlanamadi) == 5 and not (kaynaklar & kodlanamadi)
-    assert len(kaynaklar | kodlanamadi) == 40
+    assert len(kaynaklar) == 35 and len(kodlanamadi) == 2 and not (kaynaklar & kodlanamadi)   # 699, 726, 736 kod_g8_modul'de
+    assert len(kaynaklar | kodlanamadi) == 37
     assert len(SINIFLAR) == 35 and {k["sinif"] for k in VARYANTLAR} == set(SINIFLAR)
     assert {k["tf"] for k in VARYANTLAR} <= {"5m", "15m", "30m", "1h", "4h", "1d"}
     assert all(k["neden"] for k in KODLANAMADI)
@@ -86,7 +86,7 @@ def test_cikis_ayarlari_ve_varyantlar():
     assert kod.S0756.cikis_ayarlari.zaman_cikisi_mum == 4 and kod.S0758.cikis_ayarlari.zaman_cikisi_mum == 4
     c = kod.S0679.cikis_ayarlari
     assert c.azalan_roi[0] == (0.0, 18.1) and len(c.azalan_roi) == 4
-    assert c.geri_cekilme_yuzde == 11.3 and c.geri_cekilme_min_kar_yuzde == 13.4
+    assert c.geri_cekilme_yuzde is None and callable(kod.S0679().pozisyon_cikisi)      # iz kancada (zirve fiyatın %11,3'ü)
     assert kod.S0727.cikis_ayarlari.basabas_r_esigi == 0.6
     v = [x for x in VARYANTLAR if x["kimlik"].startswith("HAM:X005:706")]
     assert [x["parametreler"]["bb_sapma"] for x in v] == [2.0, 2.5, 3.0]

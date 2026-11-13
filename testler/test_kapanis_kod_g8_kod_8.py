@@ -63,7 +63,7 @@ def test_kayit_butunlugu():
     kimlikler = [k["kimlik"] for k in VARYANTLAR]
     assert len(kimlikler) == len(set(kimlikler))
     kaynaklar = {k["kimlik"].rsplit("#v", 1)[0] for k in VARYANTLAR} | {k["kimlik"] for k in KODLANAMADI}
-    assert len(kaynaklar) == 40
+    assert len(kaynaklar) == 39 and [k["kimlik"] for k in KODLANAMADI] == ["HAM:X005:863"]    # 879 kod_g8_modul'de
     assert len(SINIFLAR) == 38 and {k["sinif"] for k in VARYANTLAR} == set(SINIFLAR)
     assert len([k for k in VARYANTLAR if k["kimlik"].startswith("HAM:X008:L15#2")]) == 6
     assert len([k for k in VARYANTLAR if k["kimlik"].startswith("HAM:X005:802#")]) == 2

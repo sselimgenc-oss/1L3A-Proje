@@ -5,6 +5,7 @@ import numpy as np
 import pandas as pd
 import pytest
 
+from motor.backtest.motor import MotorAyarlari, backtest
 from motor.strateji.kapanis import kod_g8_kod_2 as K
 
 _FREQ = {"5m": ("5min", 4000), "15m": ("15min", 4000), "1h": ("1h", 2500), "4h": ("4h", 3000), "1d": ("1D", 1500)}
@@ -65,8 +66,8 @@ def test_sinyal_stop_gelecek(kayit):
 def test_varyant_kayitlari_tam():
     kimlikler = [v["kimlik"] for v in K.VARYANTLAR]
     assert len(kimlikler) == len(set(kimlikler))
-    assert {k["kimlik"] for k in K.KODLANAMADI} == {"HAM:X005:114"}
-    kaynaklar = {k.split("#")[0] for k in kimlikler} | {k["kimlik"] for k in K.KODLANAMADI}
+    assert not K.KODLANAMADI           # 114 kod_g8_modul.KODLANAMADI'da
+    kaynaklar = {k.split("#")[0] for k in kimlikler} | {"HAM:X005:114"}
     import csv
     from pathlib import Path
     girdi = Path(__file__).resolve().parents[1] / "sonuclar/kapanis/kod_girdi/g8_kod_2.csv"
@@ -100,6 +101,16 @@ def test_s0147_iz_suren_ve_zirve():
     s = st.sinyaller(m)
     assert st.cikis_ayarlari.atr_iz_suren_k == 10.0
     assert (m.loc[s["yon"] == 1, "kapanis"] >= m["kapanis"].cummax()[s["yon"] == 1]).all()
+    # stop mesafesi >= %50 ise ATR(14)x3 (kaynak 10xATR çok geniş)
+    m2 = m.copy()
+    m2["dusuk"] = m2["dusuk"] * 0.95
+    m2["yuksek"] = m2["yuksek"] * 1.05
+    s2 = st.sinyaller(m2)
+    g2 = s2["yon"] == 1
+    assert g2.any() and (s2.loc[g2, "stop"] > m2.loc[g2, "kapanis"] * 0.5).all()
+    atr = K.g.atr(m2["yuksek"], m2["dusuk"], m2["kapanis"], 14)
+    geniş = (m2["kapanis"] - 10 * atr) <= m2["kapanis"] * 0.5
+    assert (geniş & g2).any() and np.allclose(s2.loc[geniş & g2, "stop"], (m2["kapanis"] - 3 * atr)[geniş & g2])
 
 
 def test_s0136_haftalik_gecikme_ve_yeni_hafta():
@@ -193,3 +204,98 @@ def test_s0182_aroon_formulu():
     up, dn = K._aroon(yuk, dus, 10)
     assert up[9] == 100.0 and up[10] == 90.0 and np.isnan(up[8])
     assert dn[9] == 10.0            # en düşük pencerenin en eski mumunda: (10-9)/10x100
+
+
+# ---------------------------------------------------------------- pozisyon bilinçli kanca (yaklaşık işaretleri kalktı)
+def _kancali(sinif, tf="1d", **par):
+    m = _mumlar(tf)
+    st = sinif(**par)
+    kayit = []
+    orijinal = st.pozisyon_cikisi
+
+    def sarmal(d):
+        s = orijinal(d)
+        if s:
+            kayit.append(d)
+        return s
+
+    st.pozisyon_cikisi = sarmal
+    return m, st, backtest(m, st, MotorAyarlari()), kayit
+
+
+def test_yaklasik_isaretleri_kalkti_emin_degil_kaldi():
+    assert not any(v.get("yaklasik") for v in K.VARYANTLAR)
+    emin = {v["kimlik"].split("#")[0] for v in K.VARYANTLAR if v.get("emin_degil")}
+    assert emin == {"HAM:X005:" + k for k in ("187", "188", "192", "212", "213")}
+    for sinif in (K.Keltner5mIzYuzdeS0174, K.HmaAtrKesisS0185, K.BbBantYonuS0186, K.SmaKesisAdxDiS0187, K.AtrKirilimS0188,
+                  K.UyarlanirMaKanalS0189, K.MaDizilimArS0192, K.Stokastik533S0212, K.Rsi14Asiri2585S0213):
+        assert callable(sinif().pozisyon_cikisi) and sinif().cikis_ayarlari.geri_cekilme_yuzde is None
+
+
+@pytest.mark.parametrize("sinif,tf,esik,geri", [(K.SmaKesisAdxDiS0187, "1d", 35.0, 6.8), (K.AtrKirilimS0188, "1d", 20.0, 6.8),
+                                                (K.MaDizilimArS0192, "1d", 25.0, 6.8), (K.Stokastik533S0212, "1d", 20.0, 6.8),
+                                                (K.Rsi14Asiri2585S0213, "1d", 35.0, 6.8)],
+                         ids=lambda x: getattr(x, "__name__", None))
+def test_zirveden_yuzde_geri_cekilme_kancasi(sinif, tf, esik, geri):
+    st = sinif()
+    assert (st.parametreler["iz_kar_esik"], st.parametreler["iz_kar_geri"]) == (esik, geri)
+    d = K.PozisyonDurumu if False else None
+    from motor.strateji.cikislar import PozisyonDurumu as PD
+    # zirve kârı eşiğin altında: çıkış yok; üstünde ve zirvenin %6,8 altında: çıkış
+    assert not st.pozisyon_cikisi(PD(1, 100.0, 0, 5, 5, 100 * (1 + (esik - 1) / 100), 99.0, 100 * (1 + (esik - 1) / 100) * 0.9, -5.0))
+    zirve = 100 * (1 + (esik + 5) / 100)
+    assert st.pozisyon_cikisi(PD(1, 100.0, 0, 5, 5, zirve, 99.0, zirve * (1 - 0.0681), 0.0))
+    assert not st.pozisyon_cikisi(PD(1, 100.0, 0, 5, 5, zirve, 99.0, zirve * (1 - 0.06), 0.0))
+
+
+def test_174_iz_yuzde_kanca_iki_yon():
+    from motor.strateji.cikislar import PozisyonDurumu as PD
+    st = K.Keltner5mIzYuzdeS0174()
+    assert st.pozisyon_cikisi(PD(1, 100.0, 0, 3, 3, 105.0, 99.0, 105 * 0.9919, 4.0))
+    assert not st.pozisyon_cikisi(PD(1, 100.0, 0, 3, 3, 105.0, 99.0, 105 * 0.9925, 4.0))
+    assert st.pozisyon_cikisi(PD(-1, 100.0, 0, 3, 3, 101.0, 95.0, 95 * 1.0081, 4.0))
+    m, st, r, kayit = _kancali(K.Keltner5mIzYuzdeS0174, "5m")
+    assert len(r.islemler) > 0
+
+
+def test_185_hma_stop_ve_yuzde3_hedef_gercek_pozisyondan():
+    m, st, r, kayit = _kancali(K.HmaAtrKesisS0185)
+    assert kayit, "kanca çıkışı üretmeli"
+    atr = K.g.atr(m["yuksek"], m["dusuk"], m["kapanis"], 14)
+    hh, hy = K.hma(m["kapanis"], 5), K.hma(m["kapanis"], 30)
+    for d in kayit:
+        i, s = d.mum_indeksi, d.giris_mum_indeksi - 1
+        if d.yon == 1:
+            stop = max(hy.iloc[s] - 2 * atr.iloc[s], (hh.iloc[s + 1:i + 1] - 2 * atr.iloc[s + 1:i + 1]).max())
+            assert d.kapanis < stop or d.kar_yuzde >= 3.0
+        else:
+            stop = min(hy.iloc[s] + 2 * atr.iloc[s], (hh.iloc[s + 1:i + 1] + 2 * atr.iloc[s + 1:i + 1]).min())
+            assert d.kapanis > stop or d.kar_yuzde >= 3.0
+
+
+def test_189_uyarlanir_ma_gercek_yastan():
+    m, st, r, kayit = _kancali(K.UyarlanirMaKanalS0189)
+    assert kayit
+    for d in kayit:
+        i = d.mum_indeksi
+        per = max(10, 50 - (i - (d.giris_mum_indeksi - 1)))
+        assert d.kapanis < m["kapanis"].iloc[i - per + 1:i + 1].mean()
+
+
+def test_186_en_yuksek_kapanistan_geri_cekilme():
+    m, st, r, kayit = _kancali(K.BbBantYonuS0186)
+    assert st.cikis_ayarlari.zaman_cikisi_mum == 22
+    for d in kayit:
+        tepe = m["kapanis"].iloc[d.giris_mum_indeksi:d.mum_indeksi + 1].max()
+        assert (tepe / d.giris_fiyati - 1) * 100 >= 20.0 and d.kapanis <= tepe * (1 - 0.068) + 1e-9
+
+
+def test_210_kapanis_bazli_yuzde_stop_yasa_zarar():
+    st = K.Cci10DurumGecisS0210()
+    assert st.cikis_ayarlari.yasa_bagli_zarar_cikisi == ((0.0, 1.0),)
+    m = _mumlar("1d")
+    r = backtest(m, st, MotorAyarlari())
+    assert len(r.islemler) > 0
+    for _, t in r.islemler[r.islemler["cikis_nedeni"] == "yasa_zarar"].iterrows():
+        i = m.index.get_loc(t.cikis_zamani) - 1
+        assert t.yon * (m["kapanis"].iloc[i] - t.giris_fiyati) / t.giris_fiyati * 100 <= -1.0 + 1e-9

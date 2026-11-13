@@ -9,6 +9,7 @@ import numpy as np
 import pandas as pd
 import pytest
 
+from motor.backtest.motor import MotorAyarlari, backtest
 from motor.strateji.kapanis import kod_g8_kod_3 as mod
 from motor.strateji.temel import Strateji
 
@@ -81,7 +82,10 @@ def test_varyantlar_butun():
     assert kodlu | kodsuz == kaynaklar and not (kodlu & kodsuz)
     assert all(k["neden"] for k in mod.KODLANAMADI)
     assert len(SINIFLAR) == len({v["sinif"] for v in mod.VARYANTLAR}) + 1  # EmaHiloS0353 koşulmaz
-    assert all(v.get("yaklasik") for v in mod.VARYANTLAR if v["kimlik"].split("#")[0] in ("HAM:X005:294", "HAM:X005:310", "HAM:X005:325"))
+    # pozisyon bilinçli modülle birebir yazıldı: yaklaşık işareti yok, sanal pozisyon yok, çıkış kancada
+    assert not any(v.get("yaklasik") for v in mod.VARYANTLAR)
+    for sinif in (mod.BbIzStopS0294, mod.PmaHaftalikS0310, mod.CokluTfSmaS0325):
+        assert callable(sinif().pozisyon_cikisi)
 
 
 def test_306_varyant_sayisi_ve_kural():
@@ -137,19 +141,26 @@ def test_310_baslangic_stopu_ve_iz_suren_cikis():
     s = mod.PmaHaftalikS0310().sinyaller(m)
     g = s["yon"] == 1
     assert g.any() and np.allclose(s.loc[g, "stop"], m.loc[g, "kapanis"] * 0.9)
-    assert s["cikis_long"].any()
+    assert not s["cikis_long"].any()           # iz süren çıkış artık sinyal değil, kanca
+    r = backtest(m, mod.PmaHaftalikS0310(), MotorAyarlari())
+    assert len(r.islemler) > 2 and "kanca" in set(r.islemler["cikis_nedeni"])
 
 
-def test_325_iz_suren_sanal_pozisyon():
-    # sanal pozisyon: iki giriş arasında çıkış (kapanış zirve kapanışın %3 altı) ya da sert stop olmalı
+def test_325_iz_suren_kanca():
+    # gerçek pozisyon: kanca çıkışı kapanış zirve kapanışın %3 altına inince tetiklenir
     m = _mumlar(6000, "5min")
-    s = mod.CokluTfSmaS0325().sinyaller(m)
-    gi = np.flatnonzero((s["yon"] == 1).to_numpy())
-    assert len(gi) >= 1
-    ci = (s["cikis_long"]).to_numpy()
-    kap, dus = m["kapanis"].to_numpy(), m["dusuk"].to_numpy()
-    for a, b in zip(gi[:-1], gi[1:]):
-        assert ci[a:b + 1].any() or (dus[a + 1:b + 1] <= s["stop"].iloc[a]).any()
+    st = mod.CokluTfSmaS0325()
+    s = st.sinyaller(m)
+    assert (s["yon"] == 1).any() and not s["cikis_long"].any()
+    r = backtest(m, st, MotorAyarlari())
+    kanca = r.islemler[r.islemler["cikis_nedeni"] == "kanca"]
+    assert len(kanca) >= 1
+    kap = m["kapanis"]
+    for _, t in kanca.iterrows():
+        i = m.index.get_loc(t.cikis_zamani)          # çıkış sonraki açılışta; karar mumu i-1
+        gi = m.index.get_loc(t.giris_zamani)
+        tepe = kap.iloc[gi - 1:i].max()
+        assert kap.iloc[i - 1] <= tepe * 0.97 + 1e-9
 
 
 def test_294_iz_yuzdeleri():
@@ -158,6 +169,11 @@ def test_294_iz_yuzdeleri():
         s = mod.BbIzStopS0294(iz_yuzde=y).sinyaller(m)
         g = s["yon"] == 1
         assert g.any() and np.allclose(s.loc[g, "stop"], m.loc[g, "kapanis"] * (1 - y / 100))
+    r = backtest(m, mod.BbIzStopS0294(iz_yuzde=3.0), MotorAyarlari())
+    for _, t in r.islemler[r.islemler["cikis_nedeni"] == "kanca"].iterrows():
+        i = m.index.get_loc(t.cikis_zamani) - 1
+        gi = m.index.get_loc(t.giris_zamani)
+        assert m["kapanis"].iloc[i] <= m["yuksek"].iloc[gi:i + 1].max() * 0.97 + 1e-9
 
 
 def test_356_kodlanamadi():

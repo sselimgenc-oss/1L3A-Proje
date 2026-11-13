@@ -5,8 +5,10 @@ import numpy as np
 import pandas as pd
 import pytest
 
-from motor.strateji.kapanis import k2_kaynak
+from motor.backtest.motor import MotorAyarlari, backtest
+from motor.strateji.kapanis import jesse_kaynak, k2_kaynak
 from motor.strateji.kapanis import kod_g8_kod_1 as K
+from motor.strateji.kapanis import kod_g8_modul
 
 FREQ = {"5m": "5min", "15m": "15min", "30m": "30min", "1h": "1h", "3h": "3h", "4h": "4h", "1d": "1D"}
 IKI_YON = {K.LinregAdxS0006, K.Rsi2Sma200S0007, K.EmaObvS0025, K.AdxSma1248S0027, K.AralikKirilimS0036,
@@ -62,12 +64,13 @@ def test_sinyal_stop_gelecek(sinif):
 def _cozucu() -> dict:
     sozluk = {s.ad: s for s in K.SINIFLAR}
     sozluk[k2_kaynak.DonchianEma2RS0083.ad] = k2_kaynak.DonchianEma2RS0083
+    sozluk[jesse_kaynak.MacdEmaS0005.ad] = jesse_kaynak.MacdEmaS0005
     return sozluk
 
 
 @pytest.mark.parametrize("kayit", K.VARYANTLAR, ids=lambda v: v["kimlik"])
 def test_varyant_orneklenir(kayit):
-    assert set(kayit) == {"kimlik", "sinif", "parametreler", "tf"}
+    assert set(kayit) - {"modul"} == {"kimlik", "sinif", "parametreler", "tf"}
     assert "#v" in kayit["kimlik"] and kayit["tf"] in FREQ
     st = _cozucu()[kayit["sinif"]](**kayit["parametreler"])
     m = _mumlar(kayit["tf"], 3000)
@@ -81,7 +84,10 @@ def test_varyant_ve_kodlanamadi_kapsami():
     kimlikler = set(girdi["kaynak_id"])
     kayitli = {v["kimlik"].split("#")[0] for v in K.VARYANTLAR}
     kod_yok = {x["kimlik"] for x in K.KODLANAMADI}
-    assert kayitli | kod_yok == kimlikler
+    modulde = {v["kimlik"].split("#")[0] for v in kod_g8_modul.VARYANTLAR} | {x["kimlik"] for x in kod_g8_modul.KODLANAMADI}
+    assert kayitli | kod_yok | (modulde & kimlikler) == kimlikler
+    assert not kayitli & modulde and not kod_yok & modulde      # çift kayıt yok
+    assert {"HAM:X005:4", "HAM:X005:20", "HAM:X005:21", "HAM:X005:22", "HAM:X005:60", "HAM:X005:79"} <= modulde
     assert not kayitli & kod_yok
     assert len({v["kimlik"] for v in K.VARYANTLAR}) == len(K.VARYANTLAR)
     assert all(x["neden"] for x in K.KODLANAMADI)
@@ -176,7 +182,40 @@ def test_s0067_ters_cikis_ve_s0051_dur_ve_ters():
         assert s.loc[s["yon"] == -1, "cikis_long"].all()
 
 
-def test_s0041_s0043_iz_suren_ayari():
-    assert K.MacdSmaIzS0041.cikis_ayarlari.atr_iz_suren_k == 3.0
-    assert K.SmaKesIzS0043.cikis_ayarlari.atr_iz_suren_k == 2.0
-    assert K.SmaKesIzS0043.cikis_ayarlari.atr_periyot == 100
+def test_s0041_s0043_iz_parametreleri():
+    # iz artık motorun bar içi ATR izi değil, kapanış bazlı kanca (cikis_ayarlari boş)
+    assert K.MacdSmaIzS0041.cikis_ayarlari.atr_iz_suren_k is None
+    assert K.MacdSmaIzS0041.varsayilan_parametreler["iz_k"] == 3.0 and K.MacdSmaIzS0041.varsayilan_parametreler["atr_n"] == 14
+    assert K.SmaKesIzS0043.varsayilan_parametreler["iz_k"] == 2.0 and K.SmaKesIzS0043.varsayilan_parametreler["atr_n"] == 100
+
+
+def test_x005_5_jesse_kaynagina_baglanir():
+    k = [v for v in K.VARYANTLAR if v["kimlik"].startswith("HAM:X005:5#")]
+    assert len(k) == 1 and k[0]["sinif"] == jesse_kaynak.MacdEmaS0005.ad
+    assert k[0]["modul"] == "motor.strateji.kapanis.jesse_kaynak"
+    assert not any(s.ad == "kapanis__macd-ema100-s0005" for s in K.SINIFLAR)
+
+
+def test_tek_basamakli_roi_azalan_roi():
+    for sinif, beklenen in ((K.RsiTradingViewS0010, 10.0), (K.RsiBbTipikS0012, 10.0), (K.ClucMayS0015, 1.0),
+                            (K.MultiRsiS0016, 1.0), (K.AdxSmasS0024, 10.0), (K.Ema821Ust48S0030, 50.0)):
+        st = sinif()
+        assert st.cikis_ayarlari.azalan_roi == ((0.0, beklenen),)
+        m = _mumlar(SINIF_TF[st.ad], 3000)
+        assert st.sinyaller(m)["hedef"].isna().all(), "limit hedef kalmamalı"
+        assert sinif(**{st.roi_anahtar: 0.02}).cikis_ayarlari.azalan_roi == ((0.0, 2.0),)
+
+
+def _kancali_backtest(sinif, tf="1d", n=4000):
+    m = _mumlar(tf, n, tohum=3, vol=0.02)
+    st = sinif()
+    r = backtest(m, st, MotorAyarlari())
+    return st, r
+
+
+def test_s0041_s0043_kapanis_bazli_iz_kanca():
+    for sinif in (K.MacdSmaIzS0041, K.SmaKesIzS0043):
+        st, r = _kancali_backtest(sinif)
+        assert st.cikis_ayarlari.atr_iz_suren_k is None and callable(st.pozisyon_cikisi)
+        assert len(r.islemler) > 3
+        assert "kanca" in set(r.islemler["cikis_nedeni"]), "kapanış bazlı iz kancayla tetiklenmeli"

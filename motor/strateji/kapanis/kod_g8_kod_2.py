@@ -11,12 +11,13 @@ Ortak uyarlamalar (tüm sınıflar)
     yok" sırası `_sanal` ile korunur: sanal durum YALNIZ bu girişleri süzmek ve girişe bağlı çıkışları (185, 189) hesaplamak için
     kullanılır; çıkış koşulları her mumda yazılıp motora bırakılır, sanal durum motorla ayrışırsa (reddedilen giriş vb.) kaynak
     sırasından küçük sapma olur.
-  - Kâra bağlı "zirveden geri çekilme" çıkışı motorun `geri_cekilme_*` modülüdür: zirve = girişten beri en yüksek YÜKSEK (kaynak
-    bazı satırlarda en yüksek kapanış), fark = giriş fiyatına göre kâr% farkı (kaynak: zirve fiyatının %'si), kapanışta kontrol,
-    çıkış sonraki açılışta.
+  - Kâra bağlı "zirveden geri çekilme" çıkışı strateji kancasıdır (`pozisyon_cikisi`, kod_g8_modul.tepe_geri_cekilme): zirve =
+    girişten beri en yüksek YÜKSEK (186'da kaynak açıkça en yüksek KAPANIŞ), fark = zirve fiyatının %'si (giriş kârı eşiği zirve
+    kârına göre), kapanışta kontrol, çıkış sonraki açılışta. Girişe bağlı çıkışlar (185 HMA stopu/%3 hedef, 189 uyarlanır MA) gerçek
+    pozisyondan (kanca) hesaplanır; `_sanal` yalnız "çıkış mumunda yeni giriş yok" GİRİŞ süzgecidir (ve sanal durumu eşler).
   - TF "1w" (136) ve aylık (141) satırları 1d mumlarla koşulur (VARYANTLAR tf = "1d"); haftalık değer `htf.ust_zaman` ile yalnız
     kapanmış haftadan, ertesi günün (Pazartesi) mumundan itibaren kullanılır.
-  - HAM:X005:114 kodlanamadı (iki kademeli bant hedefli çıkış); bkz. KODLANAMADI.
+  - HAM:X005:114 kodlanamadı (iki kademeli bant hedefli çıkış); kod_g8_modul.KODLANAMADI'da.
 """
 from __future__ import annotations
 
@@ -29,7 +30,9 @@ from motor.strateji.cikislar import CikisAyarlari
 from motor.strateji.daytrade._ortak import cerceve, seans_son_mumu
 from motor.strateji.dis._gosterge_d1 import hma
 from motor.strateji.gostergeler_b2 import asagi_kesis, cci, yukari_kesis
+from motor.strateji.cikislar import PozisyonDurumu
 from motor.strateji.htf import ust_zaman
+from motor.strateji.kapanis.kod_g8_modul import KancaDestek, tepe_geri_cekilme
 from motor.strateji.temel import Strateji
 
 
@@ -399,7 +402,7 @@ class EwmaKutleMerkeziS0144(Strateji):
 class TumZamanZirveIzS0147(Strateji):
     """HAM:X005:147 — 1d long: günün kapanışı bugüne kadarki tüm zamanların en yüksek kapanışına eşit/üstünse long; 10xATR(14) iz
     süren stop ihlalinde çık. "Tüm zamanlar" = eldeki serinin başından beri. Hisse fiyat/likidite filtreleri uygulanmaz.
-    İlk stop = kapanış - 10xATR(14); iz = motorun ATR iz süren stopu (atr_iz_suren_k=10)."""
+    İlk stop = kapanış - 10xATR(14) (mesafe >= %50 ise ATR(14)x3); iz = motorun ATR iz süren stopu (atr_iz_suren_k=10)."""
 
     ad, stil = "kapanis__tum-zaman-zirve-iz-s0147", "swing"
     varsayilan_parametreler = {"atr_n": 14, "atr_k": 10.0}
@@ -414,6 +417,8 @@ class TumZamanZirveIzS0147(Strateji):
         kap = m["kapanis"]
         gir = kap >= kap.cummax()
         sl, ss = _atr_stop(m, int(p["atr_n"]), float(p["atr_k"]))
+        sl3, _ = _atr_stop(m, int(p["atr_n"]), 3.0)
+        sl = sl.where(sl > kap * 0.5, sl3)          # kaynak stop mesafesi >= %50 ise ATR(14)x3 (ön kayıt politikası)
         return _cikti(m, gir, False, sl, ss)
 
 
@@ -445,23 +450,23 @@ class DualThrustS0173(Strateji):
 
 
 # ------------------------------------------------------------------ X005:174
-class Keltner5mIzYuzdeS0174(Strateji):
+class Keltner5mIzYuzdeS0174(KancaDestek, Strateji):
     """HAM:X005:174 — 5m Keltner(11; 1,6): merkez SMA(kapanış,11), bantlar ± 1,6 x ATR(11).
 
     Düz pozisyondayken kapanış üst bandı yukarı keserse long, alt bandı aşağı keserse short (stop-giriş emri kapanış sinyaline
     çevrildi). Çıkış/stop: girişten sonraki en yüksek fiyatın %0,8 altı (short: en düşüğün %0,8 üstü) iz süren stop.
-    Uyarlama: ilk stop = kapanış x (1 -/+ 0,008) (bar içi); iz kısmı motorun `geri_cekilme` modülüdür (kapanışta kontrol, giriş
-    fiyatına göre %0,8 kâr geri çekilmesi, min kâr 0), bar içi sürekli iz yoktur.
-
-    YAKLAŞIK: pozisyon bilinçli çıkış modülü gelince yeniden yazılacak — fark: bar içi sürekli %0,8 iz yerine kapanışta kontrol edilen geri çekilme modülü; fark giriş fiyatına göre."""
+    Uyarlama: ilk stop = kapanış x (1 -/+ 0,008) (bar içi); iz kancadadır: giriş sonrası en yüksek HIGH'ın (short: en düşük LOW'un)
+    %0,8 altında (üstünde) kapanışta çıkılır (kapanışta kontrol, çıkış sonraki açılışta; bar içi sürekli iz yoktur)."""
 
     ad, stil = "kapanis__keltner-5m-iz-yuzde-s0174", "daytrade"
     varsayilan_parametreler = {"n": 11, "carpan": 1.6, "iz_yuzde": 0.008}
     parametre_izgarasi = {}
-    cikis_ayarlari = CikisAyarlari(geri_cekilme_yuzde=0.8, geri_cekilme_min_kar_yuzde=0.0)
 
     def cikis_var_mi(self) -> bool:
         return True
+
+    def pozisyon_cikisi(self, d: PozisyonDurumu) -> bool:
+        return tepe_geri_cekilme(d, float(self.parametreler["iz_yuzde"]) * 100.0)
 
     def sinyaller(self, m: pd.DataFrame) -> pd.DataFrame:
         p = self.parametreler
@@ -608,15 +613,14 @@ class EmaAtrBantS0183(Strateji):
 
 
 # ------------------------------------------------------------------ X005:185
-class HmaAtrKesisS0185(Strateji):
+class HmaAtrKesisS0185(KancaDestek, Strateji):
     """HAM:X005:185 — 1d iki yön: HMA(n)=WMA(2xWMA(n/2)-WMA(n), floor(sqrt(n))). Long: HMA5 yukarı kesip HMA30'u (önceki <=, şimdi >)
     VE kapanış > HMA30; ilk stop HMA30 - 2xATR(14); iz: stop = max(stop, HMA5 - 2xATR). Çıkış: ters kesişim VEYA kapanış < stop VEYA
     kapanış >= giriş x 1,03; short ayna.
 
-    Giriş fiyatı = sinyal kapanışı. İz stop ve %3 kâr hedefi girişe bağlı olduğundan sanal durumla (kapanış bazlı) hesaplanır ve
-    çıkış sinyali olarak verilir; motorda yalnız ilk stop (bar içi) vardır. Kaynaktaki kullanılmayan %2/%0,5 kâr izi uygulanmadı.
-
-    YAKLAŞIK: pozisyon bilinçli çıkış modülü gelince yeniden yazılacak — fark: %3 hedef ve HMA ratchet stopu kapanış bazlı sanal durum çıkışı, motor ratchet/hedef emri yok; giriş fiyatı = sinyal kapanışı."""
+    İz stop ve %3 kâr hedefi girişe bağlıdır: kancada GERÇEK pozisyondan (giriş fiyatı = gerçek dolum; stop = sinyal mumundaki
+    HMA30 - 2xATR ilk seviye, sonraki her mumda max(stop, HMA5 - 2xATR); kapanış < stop ya da kâr >= %3 ise çık; short ayna).
+    Motorda ayrıca ilk stop (bar içi) vardır. Kaynaktaki kullanılmayan %2/%0,5 kâr izi uygulanmadı."""
 
     ad, stil = "kapanis__hma-atr-kesis-s0185", "swing"
     varsayilan_parametreler = {"hizli": 5, "yavas": 30, "atr_n": 14, "stop_atr": 2.0, "tp_pct": 3.0}
@@ -635,6 +639,7 @@ class HmaAtrKesisS0185(Strateji):
         gs = asagi_kesis(hh, hy) & (kap < hy)
         cl, cs = asagi_kesis(hh, hy), yukari_kesis(hh, hy)
         sl, ss = hy - k * atr, hy + k * atr
+        self._sakla(kap=kap, hh=hh, hy=hy, atr=atr)
         kv, hv, av = kap.to_numpy(float), hh.to_numpy(float), atr.to_numpy(float)
         tp = float(p["tp_pct"]) / 100.0
         durum = {"yon": 0, "giris": np.nan, "stop": np.nan}
@@ -651,26 +656,55 @@ class HmaAtrKesisS0185(Strateji):
                 return kv[t] < durum["stop"] or kv[t] >= durum["giris"] * (1 + tp)
             return kv[t] > durum["stop"] or kv[t] <= durum["giris"] * (1 - tp)
 
-        vl, vs, kl, ks = _sanal(m, gl, gs, cl, cs, sl, ss, baslat=baslat, ek=ek)
-        return _cikti(m, vl, vs, sl, ss, cl=_np(cl) | kl, cs=_np(cs) | ks)
+        vl, vs, _kl, _ks = _sanal(m, gl, gs, cl, cs, sl, ss, baslat=baslat, ek=ek)   # yalnız giriş süzgeci
+        return _cikti(m, vl, vs, sl, ss, cl=cl, cs=cs)
+
+    def pozisyon_cikisi(self, d: PozisyonDurumu) -> bool:
+        i, s = d.mum_indeksi, d.giris_mum_indeksi - 1
+        if not self._var(i) or s < 0:
+            return False
+        p = self.parametreler
+        k = float(p["stop_atr"])
+        hy, hh, atr = self._kd["hy"], self._kd["hh"], self._kd["atr"]
+        if d.yon == 1:
+            stop = hy[s] - k * atr[s]
+            iz = hh[s + 1:i + 1] - k * atr[s + 1:i + 1]
+            iz = iz[np.isfinite(iz)]
+            if len(iz):
+                stop = max(stop, iz.max())
+            return bool(d.kapanis < stop or d.kar_yuzde >= float(p["tp_pct"]))
+        stop = hy[s] + k * atr[s]
+        iz = hh[s + 1:i + 1] + k * atr[s + 1:i + 1]
+        iz = iz[np.isfinite(iz)]
+        if len(iz):
+            stop = min(stop, iz.min())
+        return bool(d.kapanis > stop or d.kar_yuzde >= float(p["tp_pct"]))
 
 
 # ------------------------------------------------------------------ X005:186
-class BbBantYonuS0186(Strateji):
+class BbBantYonuS0186(KancaDestek, Strateji):
     """HAM:X005:186 — 1d long: BB(22,2σ) üst, orta ve alt bandı son 3 gündür artıyor (her biri üç ardışık günde bir öncekinden yüksek)
     VE kapanış > orta bant -> long. Çıkış: üç bant birlikte düşüyorsa (aynı tanım, ayna) VEYA kapanış < orta bant; en çok 22 gün;
     kâr >= %20 iken zirveden %6,8 geri çekilmede çık. Sabit zarar stopu kapalı -> felaket stopu ATR(14)x3 (uyarlama).
-    Geri çekilme motor modülüdür (bkz. modül notu).
-
-    YAKLAŞIK: pozisyon bilinçli çıkış modülü gelince yeniden yazılacak — fark: zirve = en yüksek yüksek (kaynak en yüksek kapanış), fark giriş fiyatına göre kâr% farkı (kaynak zirvenin %6,8'i)."""
+    Geri çekilme kancadadır: zirve = girişten beri en yüksek KAPANIŞ (kaynakta açık), zirve kârı >= %20 iken kapanış zirvenin %6,8 altına
+    inerse çık (kapanışta kontrol, çıkış sonraki açılışta)."""
 
     ad, stil = "kapanis__bb-bant-yonu-s0186", "swing"
-    varsayilan_parametreler = {"bb_n": 22, "bb_std": 2.0, "yon_gun": 3, "atr_n": 14, "atr_k": 3.0}
+    varsayilan_parametreler = {"bb_n": 22, "bb_std": 2.0, "yon_gun": 3, "atr_n": 14, "atr_k": 3.0, "iz_kar_esik": 20.0,
+                               "iz_kar_geri": 6.8}
     parametre_izgarasi = {}
-    cikis_ayarlari = CikisAyarlari(zaman_cikisi_mum=22, geri_cekilme_yuzde=6.8, geri_cekilme_min_kar_yuzde=20.0)
+    cikis_ayarlari = CikisAyarlari(zaman_cikisi_mum=22)
 
     def cikis_var_mi(self) -> bool:
         return True
+
+    def pozisyon_cikisi(self, d: PozisyonDurumu) -> bool:
+        i = d.mum_indeksi
+        if not self._var(i):
+            return False
+        tepe = float(np.nanmax(self._kd["kap"][d.giris_mum_indeksi:i + 1]))
+        p = self.parametreler
+        return tepe_geri_cekilme(d, float(p["iz_kar_geri"]), float(p["iz_kar_esik"]), tepe)
 
     def sinyaller(self, m: pd.DataFrame) -> pd.DataFrame:
         p = self.parametreler
@@ -689,24 +723,27 @@ class BbBantYonuS0186(Strateji):
         gir = hepsi(1) & (kap > bb["orta"])
         cik = hepsi(-1) | (kap < bb["orta"])
         sl, ss = _atr_stop(m, int(p["atr_n"]), float(p["atr_k"]))
+        self._sakla(kap=kap)
         return _cikti(m, gir, False, sl, ss, cl=cik)
 
 
 # ------------------------------------------------------------------ X005:187
-class SmaKesisAdxDiS0187(Strateji):
+class SmaKesisAdxDiS0187(KancaDestek, Strateji):
     """HAM:X005:187 — 1d long: SMA(5) SMA(20)'yi yukarı keserken ADX(14) yükseliyor (ADX[0] > ADX[1]) VE +DI > -DI -> long; çıkış SMA(5)
     SMA(20)'yi aşağı keserken ADX düşüyor VE +DI < -DI. Stop: maliyetin -%6,8'i (sinyal kapanışı); kâr >= %35 olunca zirveden %6,8
-    geri çekilmede kâr al (motor modülü, bkz. modül notu).
-
-    YAKLAŞIK: pozisyon bilinçli çıkış modülü gelince yeniden yazılacak — fark: zirve = en yüksek YÜKSEK (kaynak: en yüksek kapanış/zirve fiyatı), fark = giriş fiyatına göre kâr% farkı (kaynak: zirvenin %'si), kapanışta kontrol."""
+    geri çekilmede kâr al (kanca: zirve = giriş sonrası en yüksek HIGH; zirve kârı >= %35 iken kapanış zirvenin %6,8 altında). Kaynakta
+    "zirve" fiyatının high mı kapanış mı olduğu yazılı değil (emin_degil)."""
 
     ad, stil = "kapanis__sma-kesis-adx-di-s0187", "swing"
-    varsayilan_parametreler = {"ma_hizli": 5, "ma_yavas": 20, "adx_n": 14, "sl": 0.068}
+    varsayilan_parametreler = {"ma_hizli": 5, "ma_yavas": 20, "adx_n": 14, "sl": 0.068, "iz_kar_esik": 35.0, "iz_kar_geri": 6.8}
     parametre_izgarasi = {}
-    cikis_ayarlari = CikisAyarlari(geri_cekilme_yuzde=6.8, geri_cekilme_min_kar_yuzde=35.0)
 
     def cikis_var_mi(self) -> bool:
         return True
+
+    def pozisyon_cikisi(self, d: PozisyonDurumu) -> bool:
+        p = self.parametreler
+        return tepe_geri_cekilme(d, float(p["iz_kar_geri"]), float(p["iz_kar_esik"]))
 
     def sinyaller(self, m: pd.DataFrame) -> pd.DataFrame:
         p = self.parametreler
@@ -722,20 +759,22 @@ class SmaKesisAdxDiS0187(Strateji):
 
 
 # ------------------------------------------------------------------ X005:188
-class AtrKirilimS0188(Strateji):
+class AtrKirilimS0188(KancaDestek, Strateji):
     """HAM:X005:188 — 1d long: kapanış > önceki kapanış + 2xATR(14) -> long (fiyat dokunuşu kapanış sinyaline çevrildi); kapanış <
     önceki kapanış - 2xATR(14) -> çık. ATR önceki mumun değeridir (seviye önceki kapanışta bilinir). Stop: maliyetin -%6,8'i
-    (sinyal kapanışı); kâr >= %20 olunca zirveden %6,8 iz süren kâr al (motor modülü, bkz. modül notu).
-
-    YAKLAŞIK: pozisyon bilinçli çıkış modülü gelince yeniden yazılacak — fark: zirve = en yüksek YÜKSEK (kaynak: en yüksek kapanış/zirve fiyatı), fark = giriş fiyatına göre kâr% farkı (kaynak: zirvenin %'si), kapanışta kontrol."""
+    (sinyal kapanışı); kâr >= %20 olunca zirveden %6,8 iz süren kâr al (kanca: zirve = giriş sonrası en yüksek HIGH; zirve kârı >= %20
+    iken kapanış zirvenin %6,8 altında). "Zirve" high mı kapanış mı belirsiz (emin_degil)."""
 
     ad, stil = "kapanis__atr-kirilim-s0188", "swing"
-    varsayilan_parametreler = {"atr_n": 14, "carpan": 2.0, "sl": 0.068}
+    varsayilan_parametreler = {"atr_n": 14, "carpan": 2.0, "sl": 0.068, "iz_kar_esik": 20.0, "iz_kar_geri": 6.8}
     parametre_izgarasi = {}
-    cikis_ayarlari = CikisAyarlari(geri_cekilme_yuzde=6.8, geri_cekilme_min_kar_yuzde=20.0)
 
     def cikis_var_mi(self) -> bool:
         return True
+
+    def pozisyon_cikisi(self, d: PozisyonDurumu) -> bool:
+        p = self.parametreler
+        return tepe_geri_cekilme(d, float(p["iz_kar_geri"]), float(p["iz_kar_esik"]))
 
     def sinyaller(self, m: pd.DataFrame) -> pd.DataFrame:
         p = self.parametreler
@@ -755,14 +794,13 @@ def _kayan_ort(x: np.ndarray, per: int, t: int) -> float:
     return float(x[t - per + 1:t + 1].mean())
 
 
-class UyarlanirMaKanalS0189(Strateji):
+class UyarlanirMaKanalS0189(KancaDestek, Strateji):
     """HAM:X005:189 — 1d long: ortalama SMA(50), bant ± 1,25σ(50); kapanış üst bandı aşarsa VE kapanış > 30 gün önceki kapanış (ROC30 > 0) ->
     long. Çıkış: pozisyonda geçen her gün ortalama periyodu 1 azalır (50'den başlayıp en az 10) ve kapanış bu uyarlanan SMA'nın altına
     inerse çık (VEYA ROC < 0 VE kapanış alt bandın altında); ek stop: maliyetin -%6,8'i (sinyal kapanışı).
 
-    Periyot = max(10, 50 - girişten beri geçen mum); giriş sanal durumla izlenir (bkz. modül notu), çıkış sinyali o durumdan çıkar.
-
-    YAKLAŞIK: pozisyon bilinçli çıkış modülü gelince yeniden yazılacak — fark: uyarlanır periyotlu çıkış sanal pozisyon yaşından hesaplanıyor; motorla ayrışırsa (reddedilen giriş, ayrı stop) yaş sapar."""
+    Periyot = max(10, 50 - girişten beri geçen mum): kancada GERÇEK pozisyon yaşından (giriş sinyali mumundan beri geçen mum) hesaplanır;
+    kapanış bu uyarlanır SMA'nın altına inerse çıkılır. `_sanal` yalnız giriş süzgecidir (bkz. modül notu)."""
 
     ad, stil = "kapanis__uyarlanir-ma-kanal-s0189", "swing"
     varsayilan_parametreler = {"ma": 50, "sapma": 1.25, "roc": 30, "liq_min": 10, "sl": 0.068}
@@ -793,26 +831,36 @@ class UyarlanirMaKanalS0189(Strateji):
             ma = _kayan_ort(kv, max(liq, n - (t - durum["e"])), t)
             return bool(np.isfinite(ma) and kv[t] < ma)
 
-        vl, _, kl, _ = _sanal(m, gl, False, cl, False, sl, ss, baslat=baslat, ek=ek)
-        return _cikti(m, vl, False, sl, ss, cl=_np(cl) | kl)
+        vl, _, _kl, _ = _sanal(m, gl, False, cl, False, sl, ss, baslat=baslat, ek=ek)   # yalnız giriş süzgeci
+        self._sakla(kap=kap)
+        return _cikti(m, vl, False, sl, ss, cl=cl)
+
+    def pozisyon_cikisi(self, d: PozisyonDurumu) -> bool:
+        i = d.mum_indeksi
+        if not self._var(i):
+            return False
+        p = self.parametreler
+        ma = _kayan_ort(self._kd["kap"], max(int(p["liq_min"]), int(p["ma"]) - (i - (d.giris_mum_indeksi - 1))), i)
+        return bool(np.isfinite(ma) and d.kapanis < ma)
 
 
 # ------------------------------------------------------------------ X005:192
-class MaDizilimArS0192(Strateji):
+class MaDizilimArS0192(KancaDestek, Strateji):
     """HAM:X005:192 — 1d long: SMA(5) > SMA(10) > SMA(30) VE AR(26) < 75 -> long; çıkış SMA(5) < SMA(10) < SMA(30) VE AR(26) > 130; stop:
-    maliyetin -%6,8'i (sinyal kapanışı); kâr >= %25 olunca zirveden %6,8 geri çekilmede kâr al (motor modülü, bkz. modül notu).
-    AR(26) = Σ(yüksek-açılış) / Σ(açılış-düşük) x 100 (kaynakta formül yok, standart AR varsayıldı).
-
-    YAKLAŞIK: pozisyon bilinçli çıkış modülü gelince yeniden yazılacak — fark: zirve = en yüksek YÜKSEK (kaynak: en yüksek kapanış/zirve fiyatı), fark = giriş fiyatına göre kâr% farkı (kaynak: zirvenin %'si), kapanışta kontrol.
-    AR formülü kaynakta yok, standart AR tanımı (emin_degil)."""
+    maliyetin -%6,8'i (sinyal kapanışı); kâr >= %25 olunca zirveden %6,8 geri çekilmede kâr al (kanca: zirve = giriş sonrası en yüksek HIGH).
+    AR(26) = Σ(yüksek-açılış) / Σ(açılış-düşük) x 100 (kaynakta formül yok, standart AR varsayıldı; "zirve" tanımı da belirsiz: emin_degil)."""
 
     ad, stil = "kapanis__ma-dizilim-ar-s0192", "swing"
-    varsayilan_parametreler = {"ma1": 5, "ma2": 10, "ma3": 30, "ar_n": 26, "ar_giris": 75.0, "ar_cikis": 130.0, "sl": 0.068}
+    varsayilan_parametreler = {"ma1": 5, "ma2": 10, "ma3": 30, "ar_n": 26, "ar_giris": 75.0, "ar_cikis": 130.0, "sl": 0.068,
+                               "iz_kar_esik": 25.0, "iz_kar_geri": 6.8}
     parametre_izgarasi = {}
-    cikis_ayarlari = CikisAyarlari(geri_cekilme_yuzde=6.8, geri_cekilme_min_kar_yuzde=25.0)
 
     def cikis_var_mi(self) -> bool:
         return True
+
+    def pozisyon_cikisi(self, d: PozisyonDurumu) -> bool:
+        p = self.parametreler
+        return tepe_geri_cekilme(d, float(p["iz_kar_geri"]), float(p["iz_kar_esik"]))
 
     def sinyaller(self, m: pd.DataFrame) -> pd.DataFrame:
         p = self.parametreler
@@ -906,12 +954,18 @@ class Rsi6DonusS0209(Strateji):
 class Cci10DurumGecisS0210(Strateji):
     """HAM:X005:210 — 1d iki yön: CCI(10) durumu: > 100 = 1, < -100 = -1, arası 0; flat iken önceki durum -1 ve şimdi 0 -> long; önceki 1 ve şimdi 0
     -> short; long çıkış: önceki 1 ve şimdi 0 VEYA kapanış < giriş x 0,99; short çıkış: önceki -1 şimdi 0 VEYA kapanış > giriş x 1,01.
-    Kapanış bazlı %1 stop motorun bar içi stopuna uyarlandı. Giriş olayı ters çıkış olayıyla aynı mumda doğar: "çıkış mumunda yeni giriş
-    yok" sırası (bkz. modül notu); yani ters olay pozisyonu kapatır, çevirmez."""
+    Kapanış bazlı %1 stop motorun `yasa_bagli_zarar_cikisi` modülüyle (kapanış zararı >= %1 -> sonraki açılışta çık; kapanış < giriş x 0,99
+    / > giriş x 1,01) birebir; zorunlu felaket stopu ATR(14)x3 (sinyal kapanışından, uyarlama). Giriş olayı ters çıkış olayıyla aynı
+    mumda doğar: "çıkış mumunda yeni giriş yok" sırası (bkz. modül notu); yani ters olay pozisyonu kapatır, çevirmez."""
 
     ad, stil = "kapanis__cci10-durum-gecis-s0210", "swing"
-    varsayilan_parametreler = {"cci": 10, "ust": 100.0, "alt": -100.0, "stop_pct": 1.0}
+    varsayilan_parametreler = {"cci": 10, "ust": 100.0, "alt": -100.0, "stop_pct": 1.0, "atr_n": 14, "atr_k": 3.0}
     parametre_izgarasi = {}
+
+    def __init__(self, cikis_ayarlari: CikisAyarlari = None, **parametreler):
+        super().__init__(cikis_ayarlari=cikis_ayarlari, **parametreler)
+        if cikis_ayarlari is None:
+            self.cikis_ayarlari = CikisAyarlari(yasa_bagli_zarar_cikisi=((0, float(self.parametreler["stop_pct"])),))
 
     def cikis_var_mi(self) -> bool:
         return True
@@ -923,26 +977,38 @@ class Cci10DurumGecisS0210(Strateji):
                       index=m.index)
         alttan = (d.shift(1) == -1) & (d == 0)
         ustten = (d.shift(1) == 1) & (d == 0)
-        sl, ss = _yuzde_stop(m, float(p["stop_pct"]) / 100.0)
-        vl, vs, kl, ks = _sanal(m, alttan, ustten, ustten, alttan, sl, ss)
-        return _cikti(m, vl, vs, sl, ss, cl=_np(ustten) | kl, cs=_np(alttan) | ks)
+        sl, ss = _atr_stop(m, int(p["atr_n"]), float(p["atr_k"]))
+        kv, st = m["kapanis"].to_numpy(float), float(p["stop_pct"]) / 100.0
+        giris = {"f": np.nan}
+
+        def baslat(t, yon):
+            giris["f"] = kv[t]
+
+        def ek(t, yon):       # kapanış bazlı %stop (sanal durumu gerçekle eşler)
+            return bool(kv[t] < giris["f"] * (1 - st)) if yon == 1 else bool(kv[t] > giris["f"] * (1 + st))
+
+        vl, vs, _kl, _ks = _sanal(m, alttan, ustten, ustten, alttan, sl, ss, baslat=baslat, ek=ek)   # yalnız giriş süzgeci
+        return _cikti(m, vl, vs, sl, ss, cl=ustten, cs=alttan)
 
 
 # ------------------------------------------------------------------ X005:212
-class Stokastik533S0212(Strateji):
+class Stokastik533S0212(KancaDestek, Strateji):
     """HAM:X005:212 — 1d long: Stokastik(fastk 5, slowk 3, slowd 3): slowK < 25 VEYA slowD < 25 -> long; çıkış slowK > 75 VEYA slowD > 75 veya 22 gün
-    sonra; stop maliyetin -%6,8'i (sinyal kapanışı); kâr >= %20 olunca zirveden %6,8 geri çekilmede kâr al (motor modülü, bkz. modül
-    notu). slowK = SMA3(fastK), slowD = SMA3(slowK). Trend filtresi yok, durum tabanlı.
-
-    YAKLAŞIK: pozisyon bilinçli çıkış modülü gelince yeniden yazılacak — fark: zirve = en yüksek YÜKSEK (kaynak: en yüksek kapanış/zirve fiyatı), fark = giriş fiyatına göre kâr% farkı (kaynak: zirvenin %'si), kapanışta kontrol."""
+    sonra; stop maliyetin -%6,8'i (sinyal kapanışı); kâr >= %20 olunca zirveden %6,8 geri çekilmede kâr al (kanca: zirve = giriş sonrası en
+    yüksek HIGH; "zirve" tanımı belirsiz: emin_degil). slowK = SMA3(fastK), slowD = SMA3(slowK). Trend filtresi yok, durum tabanlı."""
 
     ad, stil = "kapanis__stokastik-533-s0212", "swing"
-    varsayilan_parametreler = {"fastk": 5, "slowk": 3, "slowd": 3, "alt": 25.0, "ust": 75.0, "sl": 0.068}
+    varsayilan_parametreler = {"fastk": 5, "slowk": 3, "slowd": 3, "alt": 25.0, "ust": 75.0, "sl": 0.068, "iz_kar_esik": 20.0,
+                               "iz_kar_geri": 6.8}
     parametre_izgarasi = {}
-    cikis_ayarlari = CikisAyarlari(zaman_cikisi_mum=22, geri_cekilme_yuzde=6.8, geri_cekilme_min_kar_yuzde=20.0)
+    cikis_ayarlari = CikisAyarlari(zaman_cikisi_mum=22)
 
     def cikis_var_mi(self) -> bool:
         return True
+
+    def pozisyon_cikisi(self, d: PozisyonDurumu) -> bool:
+        p = self.parametreler
+        return tepe_geri_cekilme(d, float(p["iz_kar_geri"]), float(p["iz_kar_esik"]))
 
     def sinyaller(self, m: pd.DataFrame) -> pd.DataFrame:
         p = self.parametreler
@@ -956,19 +1022,20 @@ class Stokastik533S0212(Strateji):
 
 
 # ------------------------------------------------------------------ X005:213
-class Rsi14Asiri2585S0213(Strateji):
+class Rsi14Asiri2585S0213(KancaDestek, Strateji):
     """HAM:X005:213 — 1d long: RSI(14) < 25 -> long; RSI(14) > 85 -> kapat; stop giriş maliyetinin -%6,8'i (sinyal kapanışı); kâr >= %35 olduktan
-    sonra zirveden %6,8 iz süren çıkış (motor geri çekilme modülü, bkz. modül notu).
-
-    YAKLAŞIK: pozisyon bilinçli çıkış modülü gelince yeniden yazılacak — fark: zirve = en yüksek YÜKSEK (kaynak: en yüksek kapanış/zirve fiyatı), fark = giriş fiyatına göre kâr% farkı (kaynak: zirvenin %'si), kapanışta kontrol."""
+    sonra zirveden %6,8 iz süren çıkış (kanca: zirve = giriş sonrası en yüksek HIGH; "zirve" tanımı belirsiz: emin_degil)."""
 
     ad, stil = "kapanis__rsi14-asiri-2585-s0213", "swing"
-    varsayilan_parametreler = {"rsi": 14, "alt": 25.0, "ust_cikis": 85.0, "sl": 0.068}
+    varsayilan_parametreler = {"rsi": 14, "alt": 25.0, "ust_cikis": 85.0, "sl": 0.068, "iz_kar_esik": 35.0, "iz_kar_geri": 6.8}
     parametre_izgarasi = {}
-    cikis_ayarlari = CikisAyarlari(geri_cekilme_yuzde=6.8, geri_cekilme_min_kar_yuzde=35.0)
 
     def cikis_var_mi(self) -> bool:
         return True
+
+    def pozisyon_cikisi(self, d: PozisyonDurumu) -> bool:
+        p = self.parametreler
+        return tepe_geri_cekilme(d, float(p["iz_kar_geri"]), float(p["iz_kar_esik"]))
 
     def sinyaller(self, m: pd.DataFrame) -> pd.DataFrame:
         p = self.parametreler
@@ -1189,10 +1256,7 @@ class GunIciHacimKirilimS0244(Strateji):
 
 # ------------------------------------------------------------------ kayıtlar
 KODLANAMADI = [
-    {"kimlik": "HAM:X005:114",
-     "neden": ("iki kademeli çıkış motorda ifade edilemiyor: lot1 hedefi dinamik orta bant (SMA20) ve hedef sonrası kalan lotun stopunun "
-               "başabaşa çekilmesi, lot2 karşı 2,5σ bantta kapanış çıkışı; motorun kısmi çıkışı yalnız sabit R çarpanıyla "
-               "(CikisAyarlari.kismi), başabaşı yalnız R eşiğiyle çalışır, bant tabanlı kısmi hedef yok; tek lota indirgemek kuralı değiştirir")},
+    # 114: kod_g8_modul.KODLANAMADI'da (pozisyon bilinçli modülle de ifade edilemeyen iki kademeli dinamik bant hedefi).
 ]
 
 
@@ -1253,9 +1317,8 @@ def _liste():
 
 
 VARYANTLAR = _liste()
-_YAKLASIK = {"HAM:X005:" + k for k in ("174", "185", "186", "187", "188", "189", "192", "212", "213")}
+# "zirve" tanımı (high mı kapanış mı) kaynakta yazılı olmayan geri çekilme satırları ve AR formülü: emin_degil.
+_EMIN_DEGIL = {"HAM:X005:" + k for k in ("187", "188", "192", "212", "213")}
 for _k in VARYANTLAR:
-    if _k["kimlik"].split("#")[0] in _YAKLASIK:
-        _k["yaklasik"] = True
-    if _k["kimlik"].split("#")[0] == "HAM:X005:192":
+    if _k["kimlik"].split("#")[0] in _EMIN_DEGIL:
         _k["emin_degil"] = True

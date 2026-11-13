@@ -10,6 +10,7 @@ import numpy as np
 import pandas as pd
 import pytest
 
+from motor.backtest.motor import MotorAyarlari, backtest
 from motor.strateji.kapanis import kod_g8_kod_5 as M
 
 _FREKANS = {"1d": "D", "5m": "5min", "1h": "h", "4h": "4h", "8h": "8h", "1w": "7D"}
@@ -118,9 +119,10 @@ def test_kaynak_satirlari_tam_kapsanir():
         ids = [r["kaynak_id"] for r in csv.DictReader(f)]
     kodlu = {v["kimlik"].split("#")[0] for v in M.VARYANTLAR}
     kodsuz = {k["kimlik"] for k in M.KODLANAMADI}
+    tasinan = {"HAM:X005:436", "HAM:X005:446", "HAM:X005:447"}      # kod_g8_modul'de kancayla kodlandı
     assert len(ids) == 40
     assert not (kodlu & kodsuz)
-    assert set(ids) == kodlu | kodsuz
+    assert set(ids) == kodlu | kodsuz | tasinan
     assert all(k["neden"] for k in M.KODLANAMADI)
 
 
@@ -190,10 +192,12 @@ def test_kademeli_ve_roi_ayarlari():
     ca = _st("HAM:X005:550#v1").cikis_ayarlari
     assert ca.azalan_roi == ((0.0, 10.0), (1.0, 5.0), (2.0, 2.5))
     assert (ca.geri_cekilme_yuzde, ca.geri_cekilme_min_kar_yuzde) == (5.0, 10.0)
-    ca = _st("HAM:X005:554#v1").cikis_ayarlari
-    assert (ca.geri_cekilme_yuzde, ca.geri_cekilme_min_kar_yuzde) == (15.0, 0.0)
-    ca = _st("HAM:X005:556#v1").cikis_ayarlari
-    assert (ca.geri_cekilme_yuzde, ca.geri_cekilme_min_kar_yuzde) == (45.0, 50.0)
+    # 554/556: yüzde iz süren stop artık kanca (zirve fiyatın %'si), motorun puan farkı modülü değil
+    for kim in ("HAM:X005:554#v1", "HAM:X005:556#v1"):
+        st = _st(kim)
+        assert st.cikis_ayarlari.geri_cekilme_yuzde is None and callable(st.pozisyon_cikisi)
+    assert _st("HAM:X005:554#v1").parametreler["sl_yuzde"] == 15.0
+    assert (_st("HAM:X005:556#v1").parametreler["iz_esik"], _st("HAM:X005:556#v1").parametreler["iz_mesafe"]) == (50.0, 45.0)
     assert _st("HAM:X005:508#v1").cikis_ayarlari.zaman_cikisi_mum == 1
 
 
@@ -265,5 +269,5 @@ def test_ao_macd_ve_ema800():
 
 def test_kodlanamadi_listesi():
     ids = [k["kimlik"] for k in M.KODLANAMADI]
-    assert ids == ["HAM:X005:436", "HAM:X005:446", "HAM:X005:447", "HAM:X005:553"]
-    assert "pozisyon bilinçli çıkış gerekli" in M.KODLANAMADI[0]["neden"]
+    assert ids == ["HAM:X005:553"]          # 436, 446, 447 kod_g8_modul'e taşındı
+    assert "BTC" in M.KODLANAMADI[0]["neden"]
