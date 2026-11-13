@@ -103,3 +103,12 @@ Not (açıklık için): bu sırada aşama 1 koşusu sürüyordu ve 9 aşama 1 ka
 - **Aşama 2 Robotic:** ek 5 ve K3-3 elemesinden geçen 230 kayıttan yalnız zaman dilimi 1h ve üstü olanlar ile EWO-ofset (A/B/C) ve E0V1E aileleri (her TF) kalır: **87 kayıt** (`eleme/daraltma_asama2.csv`). 5m/15m/30m Freqtrade kayıtları bırakılır (maliyet ×2 gidiş-dönüş %0,28–0,40; geçmiş scalp turu 0/204).
 - **Aşama 2 küçük kümeler:** K3-5a'nın 13 hipotezi kalır. K4-11 (75 satır) incelemesi ve `ara/asama2_incele.csv`'nin 15 KOSULACAK kaydı (eski proje/kart; aynı veride önceden seçilmiş, "yeniden keşif") bırakılır.
 - Bırakılan kayıtlar koşulmaz ve aşama 2 BH ailesine girmez; raporda "ek 7 ile bırakıldı, koşulmadı" diye sayılır.
+
+## Ön kayıt düzeltmesi (8): kısa zaman dilimli kayıtlar koşulmaz — sapma
+
+Tarih: 2026-11-13. Kullanıcı kararıyla. **Sapma kaydıdır:** aşama 1 koşusu başlamıştı ve 9 kayıt bitmişti; karar o sonuçlara bakılarak değil, ölçülen süreye göre verildi (kapı 6 rastgele giriş testi 5m/15m kayıtta sembol başına ~20 dk, kayıt başına ~4 saat; 1. aşamada 47 kayıt ≈ 2 gün; bağımsız hakemin önceden "pratikte umut yok" değerlendirmesi).
+
+- Aşama 1 ve aşama 2'de TF'si **5m, 15m, 30m** olan kayıtlar koşulmaz. Birleştirmede `KOSULMADI`, **p=1** yazılır.
+- BH paydası değişmez: aşama 1 = 365, aşama 2 = 96 (dondurulmuş listeler). Koşulmayanlar ailede p=1 ile kalır; bu, sonuçları yalnız daha temkinli yapar.
+- Aşama 1'de kısa TF olup daha önce biten kayıtlar (koşu sırası gereği bitenler) sonuçlarıyla aileye girer; bu kayıtlar dışarıda bırakılmaz (seçici çıkarma yapılmaz).
+- Raporda koşulmayan kayıt sayısı TF'ye göre "ek 8 ile koşulmadı" diye verilir.

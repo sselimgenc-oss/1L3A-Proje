@@ -420,7 +420,7 @@ def _isci_gorev(satir: dict) -> str:
     return f"{satir['kimlik']}: {sonuc['durum']} p={sonuc.get('p')}"
 
 
-def kos(satirlar: list, isci: int = 4, sinir: int | None = None, b: Baglam | None = None) -> dict:
+def kos(satirlar: list, isci: int = 4, sinir: int | None = None, b: Baglam | None = None, tf_haric: tuple = ()) -> dict:
     """Bekleyen kimlikleri koşar. isci<=1 ise aynı süreçte (enjekte bağlam); >1 ise fork'lu havuz (bağlam çocuklara miras kalır)."""
     b = b or baglam()
     kume = satirlar if sinir is None else satirlar[:sinir]
@@ -428,6 +428,8 @@ def kos(satirlar: list, isci: int = 4, sinir: int | None = None, b: Baglam | Non
     # Sıra sonucu değiştirmez (her kimlik bağımsız, tohum kimlikten); hızlı TF'ler önce biter.
     _hiz = {"1d": 0, "8h": 1, "6h": 2, "4h": 3, "3h": 4, "2h": 5, "1h": 6, "30m": 7, "15m": 8, "5m": 9}
     bekleyen.sort(key=lambda s: _hiz.get(s["tf"], 5))
+    if tf_haric:                                         # ön kayıt eki 8: bu TF'ler koşulmaz, birleştirmede p=1 KOSULMADI
+        bekleyen = [s for s in bekleyen if s["tf"] not in tf_haric]
     atlanan = len(kume) - len(bekleyen)
     print(f"[kos] liste {len(satirlar)} | hedef {len(kume)} | biten (atlanan) {atlanan} | koşulacak {len(bekleyen)} | işçi {isci}", flush=True)
     if isci <= 1 or len(bekleyen) <= 1:
@@ -607,6 +609,7 @@ def main(argv=None) -> int:
     ap.add_argument("--sinir", type=int, default=None, help="ilk K kimlik (deneme)")
     ap.add_argument("--kuru", action="store_true", help="yalnız çözümleme; backtest/mum okuma yok")
     ap.add_argument("--birlestir", action="store_true")
+    ap.add_argument("--tf-haric", default="", help="virgüllü TF listesi; koşulmaz (ek 8)")
     ap.add_argument("--eksik-izin", action="store_true", help="birleştirmede bitmemiş kimliklere izin (p=1, KOSULMADI)")
     a = ap.parse_args(argv)
     ek = f"asama{a.asama}"
@@ -629,7 +632,7 @@ def main(argv=None) -> int:
     if a.birlestir:
         print(birlestir(satirlar, b, eksik_izin=a.eksik_izin, sonuc_csv=KAPANIS / f"sonuc_{ek}.csv", ozet_md=KAPANIS / f"ozet_{ek}.md"))
         return 0
-    print(kos(satirlar, isci=a.isci, sinir=a.sinir, b=b))
+    print(kos(satirlar, isci=a.isci, sinir=a.sinir, b=b, tf_haric=tuple(x for x in a.tf_haric.split(",") if x)))
     return 0
 
 
