@@ -13,12 +13,13 @@ Ajan çıktısı ham haliyle `ara/`'ya yazılır; lider denetler, sonra `k*_kara
 | D: k3_p01 | ae27bb6b30ed36d0e | denetlendi (koşullu) |
 | D: k3_p02 | a72df6ea3aec567ef | denetlendi |
 | D: k3_p03 | a99e150252c12bccd | denetlendi |
-| D: k3_p04 | a58251fdab05aa330 | sürüyor |
+| D: k3_p04 | a58251fdab05aa330 | denetlendi |
 | D: k3_p05 | a2f81192b260ced7d | sürüyor |
 | D: k3_p06 | ad2d811df5cf3a147 | sürüyor |
 | D: k3_p07 | a7716419c1e108a9a | sürüyor |
 | D: k4_p01 | ac3b409275c4033b2 | sürüyor |
-| D: k3_p08, k4_p02..p10 | — | bekliyor |
+| D: k3_p08 | (aşağı) | sürüyor |
+| D: k4_p02..p10 | — | bekliyor |
 | E: K5, F: koşu listesi, G: koşu betiği, H: pytest, rapor | — | bekliyor |
 
 Denetim günlüğü (parti, örneklem, hata, aksiyon):
@@ -29,6 +30,7 @@ Denetim günlüğü (parti, örneklem, hata, aksiyon):
 - k3_p01 (227: KURAL_YOK 90, LOOKAHEAD 58, KOSULACAK 52 YENI, VERI_YOK 13, EVREN_DISI 9, TEKRAR 2, YASAK 2, ML 1): 10 örnek (6'sı KOSULACAK, tohum 11) → karar hatası 0; ama `kural_tam` özet, bazılarında parametre eksik yazılmış (B001:689 offset değerleri, B001:750 custom_stoploss). Koşul: kodlama ajanı kuralı kaynak dosyadan (kanıttaki SHA@dosya:satır) okur; özetten kodlamaz. 48 B001 KOSULACAK varyantı koşu listesi aşamasında aynı işlem yolu için TEKRAR'a indirgenecek. B001:802 sessiz except → kodda açık hata.
 - K1 (48: KOSULACAK 19 [5 YENI: 3 funding, bb_uzaklik_k1, triple_rsi_hacim_top5], KURAL_YOK 25, EVREN_DISI 3, VERI_YOK 1): 10 örnek (tohum 3) → 10/10 kaynakla tutarlı. Rsi32Kaynak testleri 4/4.
   Lider kararı: KOSULACAK satırlarda kaynak tek sembol (BTC, BTC+ETH) yazsa da ön kayıt evreni **kripto13** uygulanır (koşu listesinde). ibs k=1 (decil) ve donus_orantili lookback 7 kaynağa göre kabul.
+- k3_p04 (227: KURAL_YOK 179, VERI_YOK 37, EVREN_DISI 6, YASAK 5): 10 örnek (7'si kitap kartı, tohum 4) → 10/10 tutarlı (Brooks öznel PA, çıkış/risk modülü kartları, short interest/tape verisi, ücretli betik). Kabul.
   Lider kararı: kural zarardaki pozisyona ekleme/grind içeriyorsa YASAK (H001:151, H002:93 → birleştirmede YASAK).
 
 ---
