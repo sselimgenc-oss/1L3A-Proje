@@ -15,7 +15,7 @@ Ajan çıktısı ham haliyle `ara/`'ya yazılır; lider denetler, sonra `k*_kara
 | D: k3_p03 | a99e150252c12bccd | denetlendi |
 | D: k3_p04 | a58251fdab05aa330 | denetlendi |
 | D: k3_p05 | a2f81192b260ced7d | sürüyor |
-| D: k3_p06 | ad2d811df5cf3a147 | sürüyor |
+| D: k3_p06 | ad2d811df5cf3a147 | YENİDEN YAPILIYOR (denetim reddi) |
 | D: k3_p07 | a7716419c1e108a9a | sürüyor |
 | D: k4_p01 | ac3b409275c4033b2 | sürüyor |
 | D: k3_p08 | ad11122ee651bd51c | sürüyor |
@@ -44,6 +44,7 @@ Denetim günlüğü (parti, örneklem, hata, aksiyon):
 - K1 (48: KOSULACAK 19 [5 YENI: 3 funding, bb_uzaklik_k1, triple_rsi_hacim_top5], KURAL_YOK 25, EVREN_DISI 3, VERI_YOK 1): 10 örnek (tohum 3) → 10/10 kaynakla tutarlı. Rsi32Kaynak testleri 4/4.
   Lider kararı: KOSULACAK satırlarda kaynak tek sembol (BTC, BTC+ETH) yazsa da ön kayıt evreni **kripto13** uygulanır (koşu listesinde). ibs k=1 (decil) ve donus_orantili lookback 7 kaynağa göre kabul.
 - k3_p04 (227: KURAL_YOK 179, VERI_YOK 37, EVREN_DISI 6, YASAK 5): 10 örnek (7'si kitap kartı, tohum 4) → 10/10 tutarlı (Brooks öznel PA, çıkış/risk modülü kartları, short interest/tape verisi, ücretli betik). Kabul.
+- k3_p06 (227: KURAL_YOK 124, EVREN_DISI 56, VERI_YOK 24, ML 13, KOSULACAK 9, YASAK 1): 10 örnek (tohum 6) → 2 şüpheli (V014:321, V014:144: GitHub repo açılmadan katalog özetiyle KURAL_YOK) = %20 > %10 → RED. Aynı ajana iade: KURAL_YOK verilen ve açık kod reposu olan tüm satırlar birincil kaynaktan yeniden incelenecek.
   Lider kararı: kural zarardaki pozisyona ekleme/grind içeriyorsa YASAK (H001:151, H002:93 → birleştirmede YASAK).
 
 ---
