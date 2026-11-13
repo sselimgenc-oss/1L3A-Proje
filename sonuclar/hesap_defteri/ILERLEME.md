@@ -1,7 +1,7 @@
 # Strateji hesap defteri — ilerleme
 
 Başlangıç: 2026-11-13. İnceleme tabanı: `a07d18d` (PR #56). Dal: `codex/hesap-defteri`.
-**P1–P9 yerel kaynak denetimi bitti ve denetlendi.** Commit/push/PR teslim adımı sürüyor.
+**P1–P9 yerel kaynak denetimi bitti ve denetlendi.** Denetim commit’i `e0f52ea` ile dal gönderildi; PR açılışı ağ erişimi nedeniyle bekliyor.
 Kaynak strateji kodu ve mühürlü sonuçlar değiştirilmedi; strateji testi/backtest ve paket kurulumu yapılmadı.
 
 | Parça | Kapsam | Durum | Dosyadan kontrol |
@@ -67,3 +67,10 @@ Kullanıcı her saat kontrol ve sınır yenilenince devam istedi. Otomatik yenid
 - PR API çağrısı `https://api.github.com/repos/sselimgenc-oss/1L3A-Proje` için ortamdan `Forbidden` döndü. Git okumasının çalışması API yetkisini kanıtlamaz. Token değeri istenmedi veya çıkarılmadı.
 - Kurulum taslağına yalnız `api.github.com` alan adı eklendi; araç `status=saved`, `requires_publish=true` döndürdü. Taslak kaydı çalışan ortam politikasının değiştiği anlamına gelmez.
 - PR açıklaması `PR_ACIKLAMASI.md`de hazır. Dal pushundan sonra ortam ayarı uygulanınca `gh pr create --base main --head codex/hesap-defteri --title 'Strateji kaynakları için kanıtlı hesap defteri' --body-file sonuclar/hesap_defteri/PR_ACIKLAMASI.md` ile devam edilir. PR açılmadan teslim tamamlandı denmez.
+
+### Git teslimi
+
+- `e0f52ea` —109 dosyalık denetim commit’i `origin/codex/hesap-defteri` dalına normal push ile gönderildi; uzak dal oluşturuldu. Force push/main push/merge yapılmadı.
+- GitHub’ın verdiği PR oluşturma bağlantısı: https://github.com/sselimgenc-oss/1L3A-Proje/pull/new/codex/hesap-defteri . Bu bir açılmış PR numarası değildir.
+- Açık kalan adım: ortam ayarlarında `api.github.com` ağ eklemesinin uygulanması; ardından API erişimini yeniden doğrulayıp yukarıdaki hazır komutla PR açmak. API kimlik doğrulaması ağ açılmadan doğrulanmış sayılmaz; token değeri sohbetten istenmez.
+- Kod/strateji analizini tekrar yapmak gerekmez; kanıtlı nihai tablo SHA256: `06cb8b36d3307e03f4f749968be027f0b00c63219e94649c0cfe25359a66da52`.
