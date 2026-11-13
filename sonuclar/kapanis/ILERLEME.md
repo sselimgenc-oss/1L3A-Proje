@@ -184,3 +184,4 @@ Lider kararları (Fable önerileri, hiçbir koşu yapılmadan):
 - 1w/1M/3h/6h TF: 1d/1h verisinden yeniden örnekleme ile KOSULACAK; motor desteği kodlamada sağlanacak.
 Düzeltme işleri: g9_a `kural_tam` baştan (etkin parametreler buy_params/sell_params'tan); g8_b/g8_c/g9_b/g9_c Fable satır listesi + yukarıdaki politikalar.
 - derin_hkf_a (101): EVREN_DISI 62, KOSULACAK 11, YASAK 9, KURAL_YOK 9, VERI_YOK 6, FARK_YOK 4. derin_hkf_b (101): EVREN_DISI 45, KURAL_YOK 15, KOSULACAK 14, VERI_YOK 13, YASAK 9, FARK_YOK 5. İkisinde 8'er örnek (KOSULACAK/FARK_YOK ağırlıklı) kaynak ve G0_ayarlar.csv ile tutarlı. Eski "KOD" etiketlerinin çoğu gerçekte kapsanmamış çıktı.
+- derin_bekleyen (90): KURAL_YOK 31, KOSULACAK 27, VERI_YOK 22, EVREN_DISI 8, LOOKAHEAD 1 (220), FARK_YOK 1 (624). 10 örnek kaynakla tutarlı. Not: 629 kaynak kodunda saat içi merge_asof sızıntısı → kapanmış 1h bar uyarlamasıyla KOSULACAK (uyarlama notu). 629/674 çoklu TF motor desteği kodlamada.
