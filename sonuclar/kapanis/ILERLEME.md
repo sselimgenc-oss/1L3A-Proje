@@ -232,3 +232,11 @@ Talimat: `KODLAMA_TALIMATI.md`. Girdi: `kod_girdi/` (birleştirme betiğinin nih
 - Kapı 6 simülatörü genişletildi ve commit edildi: desteklenmeyen yalnız stop_sonrasi_bekleme_mum. Performans: kayıt başına ~2–10 dk (B=100.000, 13 sembol), 4 çekirdek.
 - G8 düzeltme/yeniden kodlama: kod_g8_modul.py (21 sınıf, 27 kayıt) — 4, 20–22, 60, 79, 400, 401, 416, 436, 446, 447, 573, 584, 629, 643, 644, 699, 726, 736, 879 kodlandı. Kalan KODLANAMADI: 114, 419 + (3, 353, 356, 673, 742 formül yok; 553 başka sembol; 580, 585 portföy; 863 örtüşen dilim). Yaklaşık kalan: 60, 629, 655. Kesme lookahead testi: 433 kayıt × 2 seri × 4 kesme = 0 fark. Testler 1076 geçti. Lider: 879 = K2 FlipperS0879 ile aynı hipotez → koşu listesinde tek kayıt (K2).
 - **Koşu listesi elemesi (sonuç görülmeden, Fable):** `eleme/ELEME_FABLE.md`, `eleme/eleme.csv`. 494 hipotezden 148 ÇIKAR, 346 KOŞ (lider 395#5'i geri aldı). Gerekçe: kapı 2 yapısal olarak geçilemez 49, kaynağın büyük varyant listesi → temsilci 69, yakın kopya 26, ikinci TF 2, düşük kalite/sadık değil 3. BH G8 payı ~%30 küçüldü. Koşu listesi bu tabloya göre dondurulacak.
+
+## 2026-11-13 — Aşama 1 koşu listesi donduruldu (sonuç görülmeden)
+- `araclar/kapanis_kosu_listesi.py` → `kosu_listesi_asama1.csv` 365 satır (G8 338, K1 17, K2 10); BH ailesi m=365. SHA-256 `.sha256` dosyasında.
+- 14 G8↔K aynı-hipotez birleştirmesi (K kimliği kalır). Ön eleme ÇIKAR'ları + ikizleri `_elenen.csv`'de.
+- Lider kararları: (1) HAM:X005:116 ayarındaki `rsi_cik` yazım hatası → `rsi_cikis` (sınıfın parametre adı; anlam aynı).
+  (2) K1'deki iki `pf__rotasyon` ayarı kullanıcının "rotasyon evren dışı" kararıyla EVREN_DISI (ayrıca mevcut sınıfla eşlenemiyordu).
+- Kapı 6 tüm adaylarda koşulur (kapı 7 BH tüm adayların p'sini ister). Tek sembollü kimlikler kapı 3'ü yapısal olarak geçemez — ön kayda harfiyen uyuldu.
+- Kuru mod: 365/365 TAMAM. Gerçek koşu: `araclar/kapanis_kosu.py --isci 4`, kontrol noktaları `sonuclar/kapanis/kosu_asama1/`.

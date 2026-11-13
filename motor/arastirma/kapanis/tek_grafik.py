@@ -25,8 +25,9 @@ def tek_ham_kos(
     carpan: float,
     tablo_yolu: Path,
     veri_al=None,
+    kurallar=None,
 ) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
-    """Bir sembolü v2 maliyetiyle çalıştır; (ham işlem, günlük MTM, mumlar)."""
+    """Bir sembolü v2 maliyetiyle çalıştır; (ham işlem, günlük MTM, mumlar). `kurallar` (tick/step) verilmezse eski evren kuralı."""
     if carpan not in (1.0, 2.0):
         raise ValueError(f"kapanış maliyet çarpanı 1 veya 2 olmalı: {carpan}")
     veri_al = v2_ham.veri_oku if veri_al is None else veri_al
@@ -34,7 +35,7 @@ def tek_ham_kos(
     v2_ham.sizinti_kontrol(sembol, tf, mumlar, fonlama)
     if mumlar is None or mumlar.empty:
         raise FileNotFoundError(f"{sembol} {tf}: geliştirme döneminde mum yok")
-    kural = wf_evren.tarama.SEMBOL_KURALLARI.get(sembol, wf_evren.tarama.VARSAYILAN_KURAL)
+    kural = kurallar if kurallar is not None else wf_evren.tarama.SEMBOL_KURALLARI.get(sembol, wf_evren.tarama.VARSAYILAN_KURAL)
     ayarlar = evren_maliyet.maliyet_ayarlari(sembol, kural, carpan, tablo_yolu)
     hazir = funding.stratejiye_hazirla(strateji, mumlar, fonlama, sembol, tf)
     sonuc = backtest(hazir, strateji, ayarlar, fonlama)
