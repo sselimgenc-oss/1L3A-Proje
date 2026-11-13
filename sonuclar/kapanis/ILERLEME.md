@@ -211,3 +211,4 @@ Lider kararları:
 - Kesitsel rotasyon/pairs (politika 4): Fable "EVREN_DISI kalsın; istenirse ayrı ön kayıt ekiyle dar katman" diyor → kullanıcıya soruldu.
 - Kullanıcı kararı (politika 4): kesitsel rotasyon ve pairs kuralları EVREN_DISI kalır; ek katman açılmaz.
 - duzeltme_fable2.csv (49 satır, yalnız değişen kayıtlar; birleştirmede en yüksek öncelik): lider kararları uygulandı; 18 satırın 15'i + 51, 84, 366, 802, 372 → K6; 376/377 → EVREN_DISI; FARK_YOK 5 → KOSULACAK; 446 → KOSULACAK (sıralama atıldı, 816/818 ile aynı); 496/728 → KURAL_YOK.
+- kul_k4_g9_a_v2.csv kod parçalarından temizlenmiş sürümle değiştirildi (kaynak kod alıntısı kalmadı; önceki sürüm git geçmişinde). 105/156/209 hyperopt .json etkin değerleri, 440 ATR uyarlaması, 135 kol sayısı düzeltildi. Lider: 433/437/438/439 → VERI_YOK (BTC 1m kapanışına bağlı).
