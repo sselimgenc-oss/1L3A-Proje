@@ -1,0 +1,133 @@
+{
+ "kaynak_dosya": 520,
+ "kaynak_birincil": 199,
+ "kaynak_grup": {
+  "G1_KITAP": 162,
+  "G2_DIS_ESKI": 52,
+  "G3_REPO": 9,
+  "G4_GITHUB": 14,
+  "G5_151_SON1AY": 5,
+  "G6_V3": 191,
+  "G0_SONUC": 39,
+  "G8_DIS_ARASTIRMA": 16,
+  "G9_ROBOTIC": 6,
+  "G10_ARSIV": 26
+ },
+ "ham": 8941,
+ "ham_grup": {
+  "G10_ARSIV": 105,
+  "G1_KITAP": 810,
+  "G2_DIS_ESKI": 758,
+  "G3_REPO": 1446,
+  "G4_GITHUB": 1198,
+  "G5_151_SON1AY": 189,
+  "G6_V3": 2603,
+  "G8_DIS_ARASTIRMA": 923,
+  "G9_ROBOTIC": 909
+ },
+ "ham_eslesme": {
+  "KOD": 615,
+  "BENZER": 2328,
+  "YOK": 4149,
+  "TEKRAR": 1279,
+  "AYAR": 488,
+  "ESDEGER": 82
+ },
+ "tekil": 6223,
+ "tekil_kod": 521,
+ "tekil_ayar": 16,
+ "tekil_kodsuz": 5686,
+ "durum": {
+  "C_KODLANDI_KOSULMADI": 42,
+  "D_KODLANMADI_NEDENLI": 3824,
+  "E_KODLANMADI_NEDENSIZ": 161,
+  "H_BIZIM_EVRENDE_UYGULANAMAZ": 836,
+  "G_ML": 526,
+  "F_YASAK_TIP": 304,
+  "BELIRSIZ": 35,
+  "B_TEST_EDILDI_ELENDI": 485,
+  "A_TEST_EDILDI_GECTI": 10
+ },
+ "A_asama": {
+  "canli_kadro": 2,
+  "paper_v2": 8
+ },
+ "B_asama": {
+  "v1_wf": 259,
+  "v2_test": 11,
+  "v2_eleme": 192,
+  "v2_set_secimi": 3,
+  "v1_saglamlik": 5,
+  "v2_eleme_hata": 6,
+  "v3_eleme": 9
+ },
+ "B_adil": {
+  "evet": 270,
+  "yalniz_tek_TF;yalniz_varsayilan_ayar": 61,
+  "yalniz_varsayilan_ayar": 75,
+  "yalniz_tek_TF;yalniz_varsayilan_ayar;yapisal_kapi": 29,
+  "yalniz_varsayilan_ayar;yapisal_kapi": 25,
+  "yalniz_tek_TF": 7,
+  "yalniz_tek_TF;yalniz_varsayilan_ayar;yapisal_kapi;kisa_veri": 7,
+  "yalniz_tek_TF;yalniz_varsayilan_ayar;kisa_veri": 1,
+  "yalniz_varsayilan_ayar;yapisal_kapi;kisa_veri": 2,
+  "zayif_temsilci": 1,
+  "yalniz_tek_TF;yapisal_kapi": 1,
+  "yapisal_kapi": 2,
+  "yalniz_varsayilan_ayar;kisa_veri": 1,
+  "yalniz_tek_TF;yapisal_kapi;kisa_veri": 1,
+  "kisa_veri": 2
+ },
+ "B_adil_evet": 270,
+ "yapisal_kapi": 73,
+ "fark_test_edilmedi": 2226,
+ "fark_dogrulanmamis": 909,
+ "E_kaynak": {
+  "A001": 1,
+  "A002": 1,
+  "A007": 1,
+  "B001": 96,
+  "D001": 3,
+  "P001": 1,
+  "P002": 29,
+  "X005": 29
+ },
+ "D_neden": {
+  "benzer_var": 2174,
+  "kural_belirsiz": 507,
+  "kod_yok": 297,
+  "arac_sablon": 271,
+  "veri_yok": 224,
+  "lookahead": 125,
+  "oncelik_disi": 55,
+  "tekrar_kart_yok": 42,
+  "cikis_modulu": 40,
+  "kapsam_disi": 22,
+  "kapali_gosterge": 12,
+  "backtest_gecersiz": 11,
+  "on_eleme_yasak_diger": 10,
+  "kaynak_kapali": 9,
+  "kaynak_okunamadi": 7
+ },
+ "H_neden": {
+  "hisse_kesitsel": 284,
+  "opsiyon": 149,
+  "seans_gap": 69,
+  "pairs": 61,
+  "kapsam_disi": 48,
+  "orderbook": 45,
+  "forex_veri": 41,
+  "veri_diger": 35,
+  "veri_yok": 25,
+  "alt_1dk": 16,
+  "vix": 15,
+  "onchain": 11
+ },
+ "F_neden": {
+  "dca": 155,
+  "martingale": 67,
+  "stopsuz_grid": 51,
+  "ortalama_dusurme": 31
+ },
+ "kod_kaynaksiz": 31
+}

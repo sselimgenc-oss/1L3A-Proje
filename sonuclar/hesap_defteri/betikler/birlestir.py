@@ -65,6 +65,21 @@ for d in duz:
         continue
     r[d["alan"]] = d["yeni"]
     r["not"] = (r["not"] + " | " if r["not"] else "") + "lider düzeltmesi: " + d["alan"]
+# lider kuralı: F_YASAK_TIP yalnız martingale / DCA / ortalama düşürme / stopsuz grid (kullanıcı tanımı).
+# Ön elemenin "yasak" torbasına giren lookahead / model / diğer satırlar yeniden sınıflanır (neden korunur).
+ML_RE = re.compile(r"ensemble|topluluk|hmm|drl|openai|gpt|llm|bayes|mcmc|garch|model|öğren|ogren|neural|sinir ağı|evolved", re.I)
+for r in ham:
+    if r["on_durum"] == "F_YASAK_TIP" and r["neden_kodu"] in ("lookahead", "yasak_diger", "yasa_disi"):
+        eski = r["neden_kodu"]
+        if eski == "lookahead":
+            r["on_durum"] = "D_KODLANMADI_NEDENLI"
+        elif eski == "yasa_disi":
+            r["on_durum"], r["neden_kodu"] = "D_KODLANMADI_NEDENLI", "kapsam_disi"
+        elif ML_RE.search(r["neden_metni"] + " " + r["kaynaktaki_ad"]):
+            r["on_durum"], r["neden_kodu"] = "G_ML", "ml"
+        else:
+            r["on_durum"], r["neden_kodu"] = "D_KODLANMADI_NEDENLI", "on_eleme_yasak_diger"
+        r["not"] = (r["not"] + " | " if r["not"] else "") + f"lider: F→{r['on_durum'][:1]} ({eski}; F yalnız martingale/DCA/ort.düşürme/stopsuz grid)"
 for r in ham:
     if r["eslesme"].upper() == "AYAR" and ";" in r["ayar_id"]:
         r["ayar_id"] = r["ayar_id"].split(";")[0].strip()

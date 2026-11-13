@@ -1,0 +1,41 @@
+sira,tekil_id,durum,sonuc,aciklama
+1,HAM:H005:125,D_KODLANMADI_NEDENLI,dogru,kaynak satırı ve kanıt dosyası tutarlı
+2,HAM:B001:169,D_KODLANMADI_NEDENLI,dogru,BENZER doğrulanmamış (önceki ajan); klasör adı orderbook ama dosya_sinif KULLANILABILIR — hata sayılmadı
+3,HAM:H001:121,D_KODLANMADI_NEDENLI,dogru,kaynak satırı ve kanıt dosyası tutarlı
+4,HAM:Q001:154,H_BIZIM_EVRENDE_UYGULANAMAZ,dogru,kaynak satırı ve kanıt dosyası tutarlı
+5,HAM:X005:476,D_KODLANMADI_NEDENLI,dogru,kaynak satırı ve kanıt dosyası tutarlı
+6,HAM:B001:104,D_KODLANMADI_NEDENLI,dogru,kaynak satırı ve kanıt dosyası tutarlı
+7,HAM:V014:125,D_KODLANMADI_NEDENLI,dogru,kaynak satırı ve kanıt dosyası tutarlı
+8,HAM:B001:529,D_KODLANMADI_NEDENLI,dogru,kaynak satırı ve kanıt dosyası tutarlı
+9,HAM:V014:558,H_BIZIM_EVRENDE_UYGULANAMAZ,dogru,kaynak satırı ve kanıt dosyası tutarlı
+10,HAM:H001:151,D_KODLANMADI_NEDENLI,HATA,"neden_kodu yanlış (martingale değil; kodlanamaz risk modülü, kuyruk C). Durum D doğru."
+11,HAM:B001:76,D_KODLANMADI_NEDENLI,dogru,kaynak satırı ve kanıt dosyası tutarlı
+12,HAM:B001:392,D_KODLANMADI_NEDENLI,dogru,kaynak satırı ve kanıt dosyası tutarlı
+13,HAM:V001:202,H_BIZIM_EVRENDE_UYGULANAMAZ,dogru,kaynak satırı ve kanıt dosyası tutarlı
+14,HAM:B001:419,D_KODLANMADI_NEDENLI,dogru,kaynak satırı ve kanıt dosyası tutarlı
+15,HAM:V014:834,G_ML,dogru,kaynak satırı ve kanıt dosyası tutarlı
+16,HAM:B001:887,D_KODLANMADI_NEDENLI,dogru,kaynak satırı ve kanıt dosyası tutarlı
+17,HAM:X005:173,D_KODLANMADI_NEDENLI,dogru,kaynak satırı ve kanıt dosyası tutarlı
+18,HAM:P001:200,D_KODLANMADI_NEDENLI,dogru,kaynak satırı ve kanıt dosyası tutarlı
+19,HAM:B001:264,G_ML,dogru,kaynak satırı ve kanıt dosyası tutarlı
+20,HAM:P001:16,D_KODLANMADI_NEDENLI,dogru,kaynak satırı ve kanıt dosyası tutarlı
+21,HAM:V014:440,D_KODLANMADI_NEDENLI,dogru,"D kod_yok; 515 ABD hissesi → H de savunulabilir; kategori tartışmalı, hata sayılmadı"
+22,HAM:B001:137,D_KODLANMADI_NEDENLI,dogru,kaynak satırı ve kanıt dosyası tutarlı
+23,HAM:X005:598,H_BIZIM_EVRENDE_UYGULANAMAZ,dogru,kaynak satırı ve kanıt dosyası tutarlı
+24,HAM:X005:802,D_KODLANMADI_NEDENLI,HATA,"Coke/Pepsi eşbütünleşme pairs; osilatör sınıfına BENZER bağlanmış. Doğrusu H (pairs, enstrümanlar evrende yok)."
+25,KOD:onceki__s1-geri-cekilme,B_TEST_EDILDI_ELENDI,dogru,"v2 eleme.csv: E1-E4 True, E5 False → yapisal_kapi doğru"
+26,HAM:X005:855,H_BIZIM_EVRENDE_UYGULANAMAZ,dogru,kaynak satırı ve kanıt dosyası tutarlı
+27,HAM:P001:190,D_KODLANMADI_NEDENLI,HATA,"M1 trende karşı (EMA uzaklığı, MR) → swing__ma-kesisim BENZER yanlış hedef; ayar hiç yazılmamış → akıbet yok (E)."
+28,HAM:V014:476,D_KODLANMADI_NEDENLI,dogru,kaynak satırı ve kanıt dosyası tutarlı
+29,KOD:dis__adx-seviye-durumu,B_TEST_EDILDI_ELENDI,dogru,kaynak satırı ve kanıt dosyası tutarlı
+30,HAM:V005:50,D_KODLANMADI_NEDENLI,dogru,D kod_yok; H de savunulabilir
+31,HAM:K050:14,D_KODLANMADI_NEDENLI,dogru,kaynak satırı ve kanıt dosyası tutarlı
+32,HAM:B001:381,D_KODLANMADI_NEDENLI,dogru,kaynak satırı ve kanıt dosyası tutarlı
+33,HAM:V014:351,F_YASAK_TIP,dogru,kaynak satırı ve kanıt dosyası tutarlı
+34,HAM:V001:225,D_KODLANMADI_NEDENLI,dogru,kaynak satırı ve kanıt dosyası tutarlı
+35,HAM:P001:73,D_KODLANMADI_NEDENLI,dogru,kaynak satırı ve kanıt dosyası tutarlı
+36,HAM:X005:838,D_KODLANMADI_NEDENLI,dogru,kaynak satırı ve kanıt dosyası tutarlı
+37,KOD:dis__onceki-mum-ekstrem-kapanis,B_TEST_EDILDI_ELENDI,dogru,kaynak satırı ve kanıt dosyası tutarlı
+38,HAM:K105:5,D_KODLANMADI_NEDENLI,dogru,kaynak satırı ve kanıt dosyası tutarlı
+39,HAM:H001:53,D_KODLANMADI_NEDENLI,dogru,kaynak satırı ve kanıt dosyası tutarlı
+40,HAM:H004:149,H_BIZIM_EVRENDE_UYGULANAMAZ,dogru,kaynak satırı ve kanıt dosyası tutarlı

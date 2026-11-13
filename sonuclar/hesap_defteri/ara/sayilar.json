@@ -15,8 +15,8 @@
  },
  "ham_eslesme": {
   "KOD": 615,
-  "BENZER": 2330,
-  "YOK": 4147,
+  "BENZER": 2328,
+  "YOK": 4149,
   "TEKRAR": 1279,
   "AYAR": 488,
   "ESDEGER": 82
@@ -29,11 +29,11 @@
  },
  "tekil_durum": {
   "C_KODLANDI_KOSULMADI": 42,
-  "D_KODLANMADI_NEDENLI": 3788,
-  "E_KODLANMADI_NEDENSIZ": 160,
-  "H_BIZIM_EVRENDE_UYGULANAMAZ": 833,
-  "G_ML": 518,
-  "F_YASAK_TIP": 352,
+  "D_KODLANMADI_NEDENLI": 3824,
+  "E_KODLANMADI_NEDENSIZ": 161,
+  "H_BIZIM_EVRENDE_UYGULANAMAZ": 836,
+  "G_ML": 526,
+  "F_YASAK_TIP": 304,
   "BELIRSIZ": 35,
   "B_TEST_EDILDI_ELENDI": 485,
   "A_TEST_EDILDI_GECTI": 10
@@ -44,8 +44,8 @@
   "C_KODLANDI_KOSULMADI": 26
  },
  "yapisal_kapi_evet": 73,
- "fark_test_edilmedi": 2228,
- "fark_test_edilmedi_dogrulanmamis": 911,
+ "fark_test_edilmedi": 2226,
+ "fark_test_edilmedi_dogrulanmamis": 909,
  "B_adil": {
   "evet": 270,
   "yalniz_tek_TF;yalniz_varsayilan_ayar": 61,

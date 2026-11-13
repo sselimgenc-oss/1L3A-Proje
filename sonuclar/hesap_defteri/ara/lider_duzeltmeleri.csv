@@ -63,3 +63,12 @@ D002:18,eslesme,BENZER,"KGT v3 tek-sembol çekirdeği onceki__kgt olarak kodlu (
 D002:18,hedef,onceki__kgt,lider
 D002:18,fark,"portföy kısıtı (max 5 eşzamanlı, hacim sıralı 15 coin, 6 alt portföy) kodlanmadı; tek-sembol KGT kodlu",lider
 D002:18,neden_kodu,benzer_var,lider
+H001:151,neden_kodu,kural_belirsiz,öz denetim #10
+X005:802,eslesme,YOK,öz denetim #24
+X005:802,hedef,,öz denetim #24
+X005:802,on_durum,H_BIZIM_EVRENDE_UYGULANAMAZ,öz denetim #24
+X005:802,neden_kodu,pairs,"öz denetim #24: Coke/Pepsi eşbütünleşme çifti, enstrümanlar evrende yok"
+P001:190,eslesme,YOK,öz denetim #27
+P001:190,hedef,,öz denetim #27
+P001:190,on_durum,E_KODLANMADI_NEDENSIZ,öz denetim #27: kaynak ayar:swing__ma-kesisim diyor ama ayar yazılmamış ve mantık farklı (MR)
+P001:190,neden_kodu,,öz denetim #27

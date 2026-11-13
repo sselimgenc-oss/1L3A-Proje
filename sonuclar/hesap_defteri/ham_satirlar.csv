@@ -1861,7 +1861,7 @@ P001:186,P001,Trading Pullbacks System,186,HAM:P001:186,G3_REPO,BENZER,daytrade_
 P001:187,P001,Trading Made Simple,187,HAM:P001:187,G3_REPO,BENZER,daytrade__stokastik-donus,D_KODLANMADI_NEDENLI,benzer_var,evet,stratejiler/ek_kaynaklar/repo_kodlari.csv:187 ; motor/strateji/daytrade/stokastik_donus.py:18
 P001:188,P001,Another simple system - Time-Frame 15,188,HAM:P001:188,G3_REPO,BENZER,swing__ma-kesisim,D_KODLANMADI_NEDENLI,benzer_var,evet,stratejiler/ek_kaynaklar/repo_kodlari.csv:188 ; motor/strateji/ma_kesisim.py:23
 P001:189,P001,Highest Open / Lowest Open Trade,189,HAM:P001:189,G3_REPO,BENZER,daytrade__rsi-asiri-donus,D_KODLANMADI_NEDENLI,benzer_var,evet,stratejiler/ek_kaynaklar/repo_kodlari.csv:189 ; motor/strateji/daytrade/rsi_asiri_donus.py:12
-P001:190,P001,M1 Countertrend Scalping Strategy,190,HAM:P001:190,G3_REPO,BENZER,swing__ma-kesisim,D_KODLANMADI_NEDENLI,benzer_var,evet,stratejiler/ek_kaynaklar/repo_kodlari.csv:190 ; motor/strateji/ma_kesisim.py:23
+P001:190,P001,M1 Countertrend Scalping Strategy,190,HAM:P001:190,G3_REPO,YOK,,E_KODLANMADI_NEDENSIZ,,,stratejiler/ek_kaynaklar/repo_kodlari.csv:190 ; motor/strateji/ma_kesisim.py:23
 P001:191,P001,OHLCMTF Scalper EA - Multi-Timeframe Price Action,191,HAM:P001:191,G3_REPO,BENZER,daytrade__seviye-tepki,D_KODLANMADI_NEDENLI,benzer_var,evet,stratejiler/ek_kaynaklar/repo_kodlari.csv:191 ; motor/strateji/daytrade/seviye_tepki.py:20
 P001:192,P001,TemaTrendFollowing,192,HAM:P001:192,G3_REPO,BENZER,swing__ma-kesisim,D_KODLANMADI_NEDENLI,benzer_var,evet,stratejiler/ek_kaynaklar/repo_kodlari.csv:192 ; motor/strateji/ma_kesisim.py:23
 P001:193,P001,MACD + EMA,193,HAM:P001:193,G3_REPO,BENZER,swing__macd-sinyal,D_KODLANMADI_NEDENLI,benzer_var,evet,stratejiler/ek_kaynaklar/repo_kodlari.csv:193 ; motor/strateji/swing/macd_sinyal.py:31
@@ -3268,7 +3268,7 @@ H001:147,H001,"NFI Next (legacy): PMAX, Ichimoku+SSL, Moderi trend, Hull/ZLEMA o
 H001:148,H001,NFI çıkış sistemi: kâr-RSI merdiveni + zararda tutma (long_exit_main/signals/williams/dec),148,HAM:H001:148,G4_GITHUB,YOK,,D_KODLANMADI_NEDENLI,arac_sablon,,stratejiler/kodlama_github_d11i.csv:yeni__kar-rsi-merdiveni-cikis ; motor/strateji/cikislar.py:23-45 ; DURUM.md (2026-11-07 'Çıkış modülleri eklendi')
 H001:149,H001,"NFI Grind modu (v1-v4, v2 buyback): zarardaki pozisyona kademeli ekleme",149,HAM:H001:149,G4_GITHUB,YOK,,F_YASAK_TIP,dca,,stratejiler/ek_kaynaklar/github_g1_freqtrade.csv:150
 H001:150,H001,"NFI Rebuy modu (#61-63, #68 sonrası rebuy_mode_thresholds)",150,HAM:H001:150,G4_GITHUB,YOK,,F_YASAK_TIP,dca,,stratejiler/ek_kaynaklar/github_g1_freqtrade.csv:151
-H001:151,H001,NFI derisk sistemi (kısmi zarar azaltma) ve doom stop,151,HAM:H001:151,G4_GITHUB,YOK,,D_KODLANMADI_NEDENLI,martingale,,stratejiler/ek_kaynaklar/kodlama_kuyrugu_github.csv#yeni__kismi-derisk-doom-stop (öncelik C: kodlanamaz/kural eksik)
+H001:151,H001,NFI derisk sistemi (kısmi zarar azaltma) ve doom stop,151,HAM:H001:151,G4_GITHUB,YOK,,D_KODLANMADI_NEDENLI,kural_belirsiz,,stratejiler/ek_kaynaklar/kodlama_kuyrugu_github.csv#yeni__kismi-derisk-doom-stop (öncelik C: kodlanamaz/kural eksik)
 H001:152,H001,"NFI global koruma / süzgeçler (allowed_empty_candles, BTC süzgeci, top coins listesi, hold listesi)",152,HAM:H001:152,G4_GITHUB,YOK,,D_KODLANMADI_NEDENLI,arac_sablon,,stratejiler/kodlama_github_d11i.csv:yeni__cooldown-koruma-modulleri ; motor/strateji/cikislar.py:23-45 ; DURUM.md (2026-11-07 'Çıkış modülleri eklendi')
 H001:153,H001,NFI tools/tests/docs/configs (strateji değil),153,HAM:H001:153,G4_GITHUB,YOK,,D_KODLANMADI_NEDENLI,arac_sablon,,stratejiler/ek_kaynaklar/github_g1_freqtrade.csv:154
 H002:1,H002,BB (Bollinger bölge),1,HAM:H002:1,G4_GITHUB,BENZER,daytrade__bant-donus,D_KODLANMADI_NEDENLI,benzer_var,,stratejiler/ek_kaynaklar/github_g2_kripto_bot.csv:2 (durum=ayar:daytrade__bant-donus) ; motor/strateji/daytrade/bant_donus.py
@@ -4477,7 +4477,7 @@ Q001:158,Q001,16.3.3 Tür ve bölgeye göre çeşitlendirme,158,HAM:Q001:158,G5_
 Q001:159,Q001,"16.4 Emlak momentumu, bölgesel",159,HAM:Q001:159,G5_151_SON1AY,YOK,,H_BIZIM_EVRENDE_UYGULANAMAZ,kapsam_disi,,stratejiler/ek_kaynaklar/kakushadze_151.csv:160 ; stratejiler/ek_kaynaklar/kakushadze_151_OZET.md#Kapsam disi / veri yok bolumler
 Q001:160,Q001,16.5 Emlak ile enflasyon koruması,160,HAM:Q001:160,G5_151_SON1AY,YOK,,H_BIZIM_EVRENDE_UYGULANAMAZ,kapsam_disi,,stratejiler/ek_kaynaklar/kakushadze_151.csv:161 ; stratejiler/ek_kaynaklar/kakushadze_151_OZET.md#Kapsam disi / veri yok bolumler
 Q001:161,Q001,16.6 Al-yenile-sat (fix-and-flip),161,HAM:Q001:161,G5_151_SON1AY,YOK,,H_BIZIM_EVRENDE_UYGULANAMAZ,kapsam_disi,,stratejiler/ek_kaynaklar/kakushadze_151.csv:162 ; stratejiler/ek_kaynaklar/kakushadze_151_OZET.md#Kapsam disi / veri yok bolumler
-Q001:162,Q001,17.2 Kara para aklama (nakdin karanlık yüzü),162,HAM:Q001:162,G5_151_SON1AY,YOK,,F_YASAK_TIP,yasa_disi,,stratejiler/ek_kaynaklar/kakushadze_151.csv:163
+Q001:162,Q001,17.2 Kara para aklama (nakdin karanlık yüzü),162,HAM:Q001:162,G5_151_SON1AY,YOK,,D_KODLANMADI_NEDENLI,kapsam_disi,,stratejiler/ek_kaynaklar/kakushadze_151.csv:163
 Q001:163,Q001,17.3 Likidite yönetimi,163,HAM:Q001:163,G5_151_SON1AY,YOK,,H_BIZIM_EVRENDE_UYGULANAMAZ,kapsam_disi,,stratejiler/ek_kaynaklar/kakushadze_151.csv:164 ; stratejiler/ek_kaynaklar/kakushadze_151_OZET.md#Kapsam disi / veri yok bolumler
 Q001:164,Q001,17.4 Geri alım anlaşması (repo),164,HAM:Q001:164,G5_151_SON1AY,YOK,,H_BIZIM_EVRENDE_UYGULANAMAZ,kapsam_disi,,stratejiler/ek_kaynaklar/kakushadze_151.csv:165 ; stratejiler/ek_kaynaklar/kakushadze_151_OZET.md#Kapsam disi / veri yok bolumler
 Q001:165,Q001,17.5 Rehin (pawn),165,HAM:Q001:165,G5_151_SON1AY,YOK,,H_BIZIM_EVRENDE_UYGULANAMAZ,kapsam_disi,,stratejiler/ek_kaynaklar/kakushadze_151.csv:166 ; stratejiler/ek_kaynaklar/kakushadze_151_OZET.md#Kapsam disi / veri yok bolumler
@@ -4686,7 +4686,7 @@ V001:178,V001,GDS Renko RSI + MACD 4-Mode Demo EA,178,HAM:V001:178,G6_V3,YOK,,D_
 V001:179,V001,MACrossoverEA,179,HAM:V001:179,G6_V3,BENZER,swing__ma-kesisim,D_KODLANMADI_NEDENLI,benzer_var,,stratejiler/v3_adaylar/on_eleme.csv:180 ; sonuclar/hesap_defteri/ara/kod_kaydi.csv#swing__ma-kesisim
 V001:180,V001,"Telegram Trade Notifier - opens, closes, pending orders and daily summary",180,HAM:V001:180,G6_V3,YOK,,D_KODLANMADI_NEDENLI,arac_sablon,,stratejiler/v3_adaylar/on_eleme.csv:181
 V001:181,V001,"Equity Guard - daily loss, max drawdown and profit target lock",181,HAM:V001:181,G6_V3,YOK,,D_KODLANMADI_NEDENLI,arac_sablon,,stratejiler/v3_adaylar/on_eleme.csv:182
-V001:182,V001,"Smart Money Concept Expert Advisor - Market Strucutre, FVG, Pullback",182,HAM:V001:182,G6_V3,YOK,,F_YASAK_TIP,lookahead,,stratejiler/v3_adaylar/on_eleme.csv:183
+V001:182,V001,"Smart Money Concept Expert Advisor - Market Strucutre, FVG, Pullback",182,HAM:V001:182,G6_V3,YOK,,D_KODLANMADI_NEDENLI,lookahead,,stratejiler/v3_adaylar/on_eleme.csv:183
 V001:183,V001,USDX Trader EA - Trade the US Dollar Index even if your broker does not include the USDX among their symbols.,183,HAM:V001:183,G6_V3,YOK,,H_BIZIM_EVRENDE_UYGULANAMAZ,forex_veri,,stratejiler/v3_adaylar/on_eleme.csv:184 ; stratejiler/v3_adaylar/veri_yok_etiket_tur6.csv:64 ; DURUM.md:434
 V001:184,V001,370 Percent from 2022 to 2026 at 10 Percent MaxDD. The GER40 EA That Waits for the Market to Coil,184,HAM:V001:184,G6_V3,YOK,,H_BIZIM_EVRENDE_UYGULANAMAZ,hisse_kesitsel,,stratejiler/v3_adaylar/on_eleme.csv:185 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:34 ; stratejiler/v3_adaylar/veri_yok_etiket_tur6.csv:443 ; DURUM.md:434
 V001:185,V001,Monday Dip EA- Index Mean Reversion D1,185,KOD:v3__pazartesi-dip-endeks,G6_V3,KOD,v3__pazartesi-dip-endeks,KOD,,,stratejiler/v3_adaylar/on_eleme.csv:186 ; stratejiler/v3_adaylar/adaylar.csv:57 ; stratejiler/v3_adaylar/kodlama_v3.csv:59 ; sonuclar/hesap_defteri/ara/kod_kaydi.csv#v3__pazartesi-dip-endeks
@@ -4876,7 +4876,7 @@ V014:69,V014,bpranavb/volatility_trading_strategy,69,HAM:V014:69,G6_V3,YOK,,G_ML
 V014:70,V014,Akkuya/PairsTradingBot,70,HAM:V014:70,G6_V3,BENZER,pf__pairs,D_KODLANMADI_NEDENLI,benzer_var,,stratejiler/v3_adaylar/on_eleme.csv:370 ; sonuclar/hesap_defteri/ara/kod_kaydi.csv#pf__pairs
 V014:71,V014,Amol-Gupta/opt_bt,71,HAM:V014:71,G6_V3,YOK,,H_BIZIM_EVRENDE_UYGULANAMAZ,opsiyon,,stratejiler/v3_adaylar/on_eleme.csv:371 ; stratejiler/v3_adaylar/veri_yok_etiket_tur6.csv:105 ; DURUM.md:434
 V014:72,V014,Agentic-TradeOS/RSI-Mean-Reversion-Strategy,72,HAM:V014:72,G6_V3,BENZER,swing__rsi-asiri-donus,D_KODLANMADI_NEDENLI,benzer_var,,stratejiler/v3_adaylar/on_eleme.csv:372 ; sonuclar/hesap_defteri/ara/kod_kaydi.csv#swing__rsi-asiri-donus
-V014:73,V014,spustoszenie/claude-trading-strategy,73,HAM:V014:73,G6_V3,YOK,,F_YASAK_TIP,lookahead,,stratejiler/v3_adaylar/on_eleme.csv:373 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:93
+V014:73,V014,spustoszenie/claude-trading-strategy,73,HAM:V014:73,G6_V3,YOK,,D_KODLANMADI_NEDENLI,lookahead,,stratejiler/v3_adaylar/on_eleme.csv:373 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:93
 V014:74,V014,Kozphy/trading-automation-portfolio,74,HAM:V014:74,G6_V3,YOK,,D_KODLANMADI_NEDENLI,arac_sablon,,stratejiler/v3_adaylar/on_eleme.csv:374
 V014:75,V014,aatmanjoshi/Momentum-Trading-Strategy---QQQ,75,HAM:V014:75,G6_V3,YOK,,D_KODLANMADI_NEDENLI,oncelik_disi,,stratejiler/v3_adaylar/on_eleme.csv:375 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:94 ; stratejiler/v3_adaylar/adaylar.csv:92 ; stratejiler/v3_adaylar/aileler_v3.csv:52 ; stratejiler/v3_adaylar/fable_hakem.csv:92 ; DURUM.md:433
 V014:76,V014,animeshsahoo1/WhiteBox,76,HAM:V014:76,G6_V3,YOK,,D_KODLANMADI_NEDENLI,arac_sablon,,stratejiler/v3_adaylar/on_eleme.csv:376
@@ -4902,7 +4902,7 @@ V014:95,V014,KyraRoy/quant-portfolio,95,HAM:V014:95,G6_V3,BENZER,pf__kesit_ls,D_
 V014:96,V014,Lakshya1726/Axis-Bank-Futures-Mean-Reversion-Strategy,96,HAM:V014:96,G6_V3,YOK,,H_BIZIM_EVRENDE_UYGULANAMAZ,vadeli_emtia,,stratejiler/v3_adaylar/on_eleme.csv:396 ; stratejiler/v3_adaylar/veri_yok_etiket_tur6.csv:109 ; DURUM.md:434
 V014:97,V014,Samruddhi-Chetan-Shrawne/cross-asset-momentum-strategy,97,HAM:V014:97,G6_V3,YOK,,D_KODLANMADI_NEDENLI,veri_yok,,stratejiler/v3_adaylar/on_eleme.csv:397
 V014:98,V014,sudorndm/ml-pairs-trading,98,HAM:V014:98,G6_V3,YOK,,G_ML,ml,,stratejiler/v3_adaylar/on_eleme.csv:398
-V014:99,V014,PranavSharma02/MAREA-Diverse-Ensemble,99,HAM:V014:99,G6_V3,YOK,,F_YASAK_TIP,yasak_diger,,stratejiler/v3_adaylar/on_eleme.csv:399
+V014:99,V014,PranavSharma02/MAREA-Diverse-Ensemble,99,HAM:V014:99,G6_V3,YOK,,G_ML,ml,,stratejiler/v3_adaylar/on_eleme.csv:399
 V014:100,V014,PranavSharma02/MAREA-Diverse-Ensemble-RL,100,HAM:V014:100,G6_V3,YOK,,G_ML,ml,,stratejiler/v3_adaylar/on_eleme.csv:400
 V014:101,V014,Chikap1009/QuantQuest-ML-Momentum-Strategy,101,HAM:V014:101,G6_V3,YOK,,G_ML,ml,,stratejiler/v3_adaylar/on_eleme.csv:401
 V014:102,V014,sergio12S/tsmarbell-btc-slope-research-,102,HAM:V014:102,G6_V3,YOK,,G_ML,ml,,stratejiler/v3_adaylar/on_eleme.csv:402
@@ -4914,7 +4914,7 @@ V014:107,V014,AdityaTheEmpire/delta-trading-bot-backtest,107,HAM:V014:107,G6_V3,
 V014:108,V014,parthsarthisaxena/nifty-ema-reversion-strategy,108,HAM:V014:108,G6_V3,YOK,,H_BIZIM_EVRENDE_UYGULANAMAZ,hisse_kesitsel,,stratejiler/v3_adaylar/on_eleme.csv:408 ; stratejiler/v3_adaylar/veri_yok_etiket_tur6.csv:110 ; DURUM.md:434
 V014:109,V014,RohitSwami33/Fintech-analyer,109,HAM:V014:109,G6_V3,YOK,,G_ML,ml,,stratejiler/v3_adaylar/on_eleme.csv:409
 V014:110,V014,dominickdupuy/Kershner_Submission,110,HAM:V014:110,G6_V3,YOK,,D_KODLANMADI_NEDENLI,veri_yok,,stratejiler/v3_adaylar/on_eleme.csv:410
-V014:111,V014,Gabe-Soler/L-S-Equities,111,HAM:V014:111,G6_V3,YOK,,F_YASAK_TIP,lookahead,,stratejiler/v3_adaylar/on_eleme.csv:411
+V014:111,V014,Gabe-Soler/L-S-Equities,111,HAM:V014:111,G6_V3,YOK,,D_KODLANMADI_NEDENLI,lookahead,,stratejiler/v3_adaylar/on_eleme.csv:411
 V014:112,V014,yuno-404/SP-500-Momentum-Strategy,112,HAM:V014:112,G6_V3,BENZER,pf__sinif_kesit_mom,D_KODLANMADI_NEDENLI,benzer_var,,stratejiler/v3_adaylar/on_eleme.csv:412 ; sonuclar/hesap_defteri/ara/kod_kaydi.csv#pf__sinif_kesit_mom
 V014:113,V014,adnanPBI/Trading-Strategy-BTC,113,HAM:V014:113,G6_V3,YOK,,D_KODLANMADI_NEDENLI,oncelik_disi,,stratejiler/v3_adaylar/on_eleme.csv:413 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:104 ; stratejiler/v3_adaylar/adaylar.csv:93 ; stratejiler/v3_adaylar/aileler_v3.csv:2 ; stratejiler/v3_adaylar/fable_hakem.csv:93 ; DURUM.md:433
 V014:114,V014,BST1807/financial-ai-agent,114,HAM:V014:114,G6_V3,YOK,,G_ML,ml,,stratejiler/v3_adaylar/on_eleme.csv:414
@@ -4965,7 +4965,7 @@ V014:158,V014,Mario263/SystematicTrading-ABhishek,158,HAM:V014:158,G6_V3,YOK,,D_
 V014:159,V014,parthsarthisaxena/parthsarthisaxena,159,HAM:V014:159,G6_V3,YOK,,D_KODLANMADI_NEDENLI,kod_yok,,stratejiler/v3_adaylar/on_eleme.csv:459 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:123
 V014:160,V014,AlaaAbukmeil/XTrade_BTC,160,HAM:V014:160,G6_V3,YOK,,D_KODLANMADI_NEDENLI,veri_yok,,stratejiler/v3_adaylar/on_eleme.csv:460
 V014:161,V014,adam-s/volatio,161,HAM:V014:161,G6_V3,YOK,,D_KODLANMADI_NEDENLI,veri_yok,,stratejiler/v3_adaylar/on_eleme.csv:461 ; stratejiler/v3_adaylar/veri_yok_etiket_tur6.csv:117 ; DURUM.md:434
-V014:162,V014,mnyika-quant/btc-usd-elliott-wave-backtest,162,HAM:V014:162,G6_V3,YOK,,F_YASAK_TIP,yasak_diger,,stratejiler/v3_adaylar/on_eleme.csv:462 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:124 ; stratejiler/v3_adaylar/on_eleme_tur3.csv:16
+V014:162,V014,mnyika-quant/btc-usd-elliott-wave-backtest,162,HAM:V014:162,G6_V3,YOK,,D_KODLANMADI_NEDENLI,on_eleme_yasak_diger,,stratejiler/v3_adaylar/on_eleme.csv:462 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:124 ; stratejiler/v3_adaylar/on_eleme_tur3.csv:16
 V014:163,V014,CalmDude/my_script_project,163,HAM:V013:386,G6_V3,TEKRAR,V013:386,TEKRAR,kopya,,stratejiler/v3_adaylar/on_eleme.csv:463 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:125 ; stratejiler/v3_adaylar/on_eleme_tur3.csv:17 ; stratejiler/v3_adaylar/adaylar.csv:136
 V014:164,V014,Ahmedyassen77/AI-Trading-System,164,HAM:V014:164,G6_V3,YOK,,H_BIZIM_EVRENDE_UYGULANAMAZ,forex_veri,,stratejiler/v3_adaylar/on_eleme.csv:464 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:126 ; stratejiler/v3_adaylar/veri_yok_etiket_tur6.csv:453 ; DURUM.md:434
 V014:165,V014,avivelbag/stock_market_strategies,165,HAM:V014:165,G6_V3,BENZER,dis__ay-donumu,D_KODLANMADI_NEDENLI,benzer_var,,stratejiler/v3_adaylar/on_eleme.csv:465 ; sonuclar/hesap_defteri/ara/kod_kaydi.csv#dis__ay-donumu
@@ -4976,7 +4976,7 @@ V014:169,V014,AdobyY/TA-Bot,169,HAM:V014:169,G6_V3,YOK,,D_KODLANMADI_NEDENLI,onc
 V014:170,V014,Mitsume-1/quant-macd-rsi-strategy,170,HAM:V014:170,G6_V3,BENZER,swing__macd-sinyal,D_KODLANMADI_NEDENLI,benzer_var,,stratejiler/v3_adaylar/on_eleme.csv:470 ; sonuclar/hesap_defteri/ara/kod_kaydi.csv#swing__macd-sinyal
 V014:171,V014,Magician-Bee/AI-Powered-Stock-Market-System-OSS,171,HAM:V014:171,G6_V3,YOK,,D_KODLANMADI_NEDENLI,arac_sablon,,stratejiler/v3_adaylar/on_eleme.csv:471
 V014:172,V014,Dakxh69/Moving_crossover,172,HAM:V014:172,G6_V3,YOK,,D_KODLANMADI_NEDENLI,arac_sablon,,stratejiler/v3_adaylar/on_eleme.csv:472
-V014:173,V014,peiyulee22/UMHackathon,173,HAM:V014:173,G6_V3,YOK,,F_YASAK_TIP,yasak_diger,,stratejiler/v3_adaylar/on_eleme.csv:473 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:129
+V014:173,V014,peiyulee22/UMHackathon,173,HAM:V014:173,G6_V3,YOK,,G_ML,ml,,stratejiler/v3_adaylar/on_eleme.csv:473 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:129
 V014:174,V014,yuanlaik/Mix-Strategies,174,HAM:V014:174,G6_V3,YOK,,D_KODLANMADI_NEDENLI,tekrar_kart_yok,,stratejiler/v3_adaylar/on_eleme.csv:474 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:130 ; stratejiler/v3_adaylar/REDDEDILENLER_tur2.txt:19
 V014:175,V014,vladndd/GA_portfolio_optimization,175,HAM:V014:175,G6_V3,YOK,,H_BIZIM_EVRENDE_UYGULANAMAZ,hisse_kesitsel,,stratejiler/v3_adaylar/on_eleme.csv:475 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:131 ; stratejiler/v3_adaylar/on_eleme_tur3.csv:18 ; stratejiler/v3_adaylar/veri_yok_etiket_tur6.csv:454 ; DURUM.md:434
 V014:176,V014,philippeyao123/PERSONAL-PROJECTS,176,HAM:V014:176,G6_V3,BENZER,pf__pairs,D_KODLANMADI_NEDENLI,benzer_var,,stratejiler/v3_adaylar/on_eleme.csv:476 ; sonuclar/hesap_defteri/ara/kod_kaydi.csv#pf__pairs
@@ -5047,7 +5047,7 @@ V014:240,V014,asing544/multi-factor-stock-model,240,HAM:V014:240,G6_V3,BENZER,pf
 V014:241,V014,jiayuan-jiang/EECS545_project,241,HAM:V014:241,G6_V3,YOK,,G_ML,ml,,stratejiler/v3_adaylar/on_eleme.csv:541
 V014:242,V014,jiayizha-umich/Finmini,242,HAM:V014:242,G6_V3,YOK,,D_KODLANMADI_NEDENLI,veri_yok,,stratejiler/v3_adaylar/on_eleme.csv:542 ; stratejiler/v3_adaylar/veri_yok_etiket_tur6.csv:134 ; DURUM.md:434
 V014:243,V014,JYS1025/meta-fusion-trader,243,HAM:V014:243,G6_V3,YOK,,G_ML,ml,,stratejiler/v3_adaylar/on_eleme.csv:543
-V014:244,V014,DataHiveMind/Axiom-Alpha-Research-Lab,244,HAM:V014:244,G6_V3,YOK,,F_YASAK_TIP,yasak_diger,,stratejiler/v3_adaylar/on_eleme.csv:544
+V014:244,V014,DataHiveMind/Axiom-Alpha-Research-Lab,244,HAM:V014:244,G6_V3,YOK,,G_ML,ml,,stratejiler/v3_adaylar/on_eleme.csv:544
 V014:245,V014,HydraXdev/HydraX-v2,245,HAM:V014:245,G6_V3,YOK,,G_ML,ml,,stratejiler/v3_adaylar/on_eleme.csv:545
 V014:246,V014,tonyang660/crypto-signal-bot,246,HAM:V014:246,G6_V3,YOK,,D_KODLANMADI_NEDENLI,tekrar_kart_yok,,stratejiler/v3_adaylar/on_eleme.csv:546 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:155 ; stratejiler/v3_adaylar/on_eleme_tur3.csv:24 ; stratejiler/v3_adaylar/REDDEDILENLER_tur3.txt:16
 V014:247,V014,ne3mer/Trader,247,HAM:V014:247,G6_V3,YOK,,D_KODLANMADI_NEDENLI,veri_yok,,stratejiler/v3_adaylar/on_eleme.csv:547
@@ -5090,7 +5090,7 @@ V014:283,V014,B-M-Capital-Research/honeclaw,283,HAM:V014:283,G6_V3,YOK,,D_KODLAN
 V014:284,V014,VernonOY/alpha-skills,284,HAM:V014:284,G6_V3,YOK,,D_KODLANMADI_NEDENLI,arac_sablon,,stratejiler/v3_adaylar/on_eleme.csv:584
 V014:285,V014,hirazawa-yui99/Bot-Auto-Screening-Bybit,285,HAM:V014:285,G6_V3,YOK,,D_KODLANMADI_NEDENLI,veri_yok,,stratejiler/v3_adaylar/on_eleme.csv:585 ; stratejiler/v3_adaylar/veri_yok_etiket_tur6.csv:143 ; DURUM.md:434
 V014:286,V014,ilahuerta-IA/backtrader-pullback-window-xauusd,286,HAM:V012:12,G6_V3,TEKRAR,V012:12,TEKRAR,kopya,,stratejiler/v3_adaylar/on_eleme.csv:586 ; stratejiler/v3_adaylar/adaylar.csv:7
-V014:287,V014,iamrichardD/tradingview,287,HAM:V014:287,G6_V3,YOK,,F_YASAK_TIP,yasak_diger,,stratejiler/v3_adaylar/on_eleme.csv:587 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:161 ; stratejiler/v3_adaylar/on_eleme_tur3.csv:26
+V014:287,V014,iamrichardD/tradingview,287,HAM:V014:287,G6_V3,YOK,,D_KODLANMADI_NEDENLI,on_eleme_yasak_diger,,stratejiler/v3_adaylar/on_eleme.csv:587 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:161 ; stratejiler/v3_adaylar/on_eleme_tur3.csv:26
 V014:288,V014,BAKOME-Hub/BAKOMEGoldScalper,288,HAM:V012:13,G6_V3,TEKRAR,V012:13,TEKRAR,kopya,,stratejiler/v3_adaylar/on_eleme.csv:588 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:162 ; stratejiler/v3_adaylar/adaylar.csv:89
 V014:289,V014,cgemise971/PropFirmEA,289,HAM:V014:289,G6_V3,BENZER,v3__asya-kutu-kirilim-ma50,D_KODLANMADI_NEDENLI,benzer_var,,stratejiler/v3_adaylar/on_eleme.csv:589 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:163 ; stratejiler/v3_adaylar/kodlama_v3.csv:2 ; sonuclar/hesap_defteri/ara/kod_kaydi.csv#v3__asya-kutu-kirilim-ma50
 V014:290,V014,Mohamed-sm/Freqtrade-RLStrategy-IA,290,HAM:V014:290,G6_V3,YOK,,G_ML,ml,,stratejiler/v3_adaylar/on_eleme.csv:590
@@ -5144,7 +5144,7 @@ V014:337,V014,MarthosM/QuantumTrader_ML,337,HAM:V014:337,G6_V3,YOK,,G_ML,ml,,str
 V014:338,V014,akariba/Algo-RADAR,338,HAM:V014:338,G6_V3,YOK,,D_KODLANMADI_NEDENLI,oncelik_disi,,stratejiler/v3_adaylar/on_eleme.csv:638 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:177 ; stratejiler/v3_adaylar/adaylar.csv:103 ; stratejiler/v3_adaylar/aileler_v3.csv:127 ; stratejiler/v3_adaylar/fable_hakem.csv:103 ; DURUM.md:433
 V014:339,V014,atharva-m/Sentiment-driven-Alpha-Generation-for-Energy-ETFs,339,HAM:V014:339,G6_V3,YOK,,D_KODLANMADI_NEDENLI,veri_yok,,stratejiler/v3_adaylar/on_eleme.csv:639
 V014:340,V014,BSoybilgen/simple-trade,340,HAM:V014:340,G6_V3,YOK,,D_KODLANMADI_NEDENLI,arac_sablon,,stratejiler/v3_adaylar/on_eleme.csv:640
-V014:341,V014,Karans97/Pairs-Trading-Strategy-using-Statistical-Arbitrage-,341,HAM:V014:341,G6_V3,YOK,,F_YASAK_TIP,lookahead,,stratejiler/v3_adaylar/on_eleme.csv:641 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:178
+V014:341,V014,Karans97/Pairs-Trading-Strategy-using-Statistical-Arbitrage-,341,HAM:V014:341,G6_V3,YOK,,D_KODLANMADI_NEDENLI,lookahead,,stratejiler/v3_adaylar/on_eleme.csv:641 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:178
 V014:342,V014,umangworkAIML/Algo-Trading-Bot-MQL5,342,HAM:V014:342,G6_V3,BENZER,dis__ma-cift-cross,D_KODLANMADI_NEDENLI,benzer_var,,stratejiler/v3_adaylar/on_eleme.csv:642 ; sonuclar/hesap_defteri/ara/kod_kaydi.csv#dis__ma-cift-cross
 V014:343,V014,ExMsg/QuantumEA-AI_Trader_Pro,343,HAM:V014:343,G6_V3,YOK,,G_ML,ml,,stratejiler/v3_adaylar/on_eleme.csv:643
 V014:344,V014,FoXbat-25/backtestingEngine,344,HAM:V014:344,G6_V3,YOK,,D_KODLANMADI_NEDENLI,arac_sablon,,stratejiler/v3_adaylar/on_eleme.csv:644
@@ -5227,7 +5227,7 @@ V014:420,V014,gndpwnd/BearishVanish,420,HAM:V014:420,G6_V3,YOK,,D_KODLANMADI_NED
 V014:421,V014,ngesarosemary938-jpg/worldquant-alphas,421,HAM:V014:421,G6_V3,YOK,,D_KODLANMADI_NEDENLI,veri_yok,,stratejiler/v3_adaylar/on_eleme.csv:721 ; stratejiler/v3_adaylar/veri_yok_etiket_tur6.csv:159 ; DURUM.md:434
 V014:422,V014,webclinic017/iTrader,422,HAM:V014:422,G6_V3,YOK,,D_KODLANMADI_NEDENLI,arac_sablon,,stratejiler/v3_adaylar/on_eleme.csv:722
 V014:423,V014,raorjun/stock-rotate,423,HAM:V014:423,G6_V3,BENZER,pf__rotasyon,D_KODLANMADI_NEDENLI,benzer_var,,stratejiler/v3_adaylar/on_eleme.csv:723 ; sonuclar/hesap_defteri/ara/kod_kaydi.csv#pf__rotasyon
-V014:424,V014,Prajwalamin/bollinger-dynamic-fx,424,HAM:V014:424,G6_V3,YOK,,F_YASAK_TIP,yasak_diger,,stratejiler/v3_adaylar/on_eleme.csv:724 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:206
+V014:424,V014,Prajwalamin/bollinger-dynamic-fx,424,HAM:V014:424,G6_V3,YOK,,D_KODLANMADI_NEDENLI,on_eleme_yasak_diger,,stratejiler/v3_adaylar/on_eleme.csv:724 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:206
 V014:425,V014,MatinHMobini/googl-return-forecasting,425,HAM:V014:425,G6_V3,YOK,,G_ML,ml,,stratejiler/v3_adaylar/on_eleme.csv:725
 V014:426,V014,odinaka541/hft-microstructures-lstm,426,HAM:V014:426,G6_V3,YOK,,G_ML,ml,,stratejiler/v3_adaylar/on_eleme.csv:726
 V014:427,V014,1512200/portfolio-optimization-ml,427,HAM:V014:427,G6_V3,YOK,,G_ML,ml,,stratejiler/v3_adaylar/on_eleme.csv:727
@@ -5292,7 +5292,7 @@ V014:485,V014,jbus84/titan,485,HAM:V014:485,G6_V3,YOK,,G_ML,ml,,stratejiler/v3_a
 V014:486,V014,TeeraphatPhungamkuew/gold_optuna,486,HAM:V014:486,G6_V3,YOK,,G_ML,ml,,stratejiler/v3_adaylar/on_eleme.csv:786
 V014:487,V014,agarwalmaanvik/AlgoZen,487,HAM:V014:487,G6_V3,YOK,,H_BIZIM_EVRENDE_UYGULANAMAZ,opsiyon,,stratejiler/v3_adaylar/on_eleme.csv:787 ; stratejiler/v3_adaylar/veri_yok_etiket_tur6.csv:164 ; DURUM.md:434
 V014:488,V014,Fia-Me/NewTradingProject,488,HAM:V014:488,G6_V3,YOK,,G_ML,ml,,stratejiler/v3_adaylar/on_eleme.csv:788 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:226
-V014:489,V014,Brandon7771066/TI-Sigma-New,489,HAM:V014:489,G6_V3,YOK,,F_YASAK_TIP,yasak_diger,,stratejiler/v3_adaylar/on_eleme.csv:789 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:227 ; stratejiler/v3_adaylar/on_eleme_tur3.csv:37
+V014:489,V014,Brandon7771066/TI-Sigma-New,489,HAM:V014:489,G6_V3,YOK,,G_ML,ml,,stratejiler/v3_adaylar/on_eleme.csv:789 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:227 ; stratejiler/v3_adaylar/on_eleme_tur3.csv:37
 V014:490,V014,SaChIn5419/hedge_fund_v3,490,HAM:V014:490,G6_V3,YOK,,H_BIZIM_EVRENDE_UYGULANAMAZ,hisse_kesitsel,,stratejiler/v3_adaylar/on_eleme.csv:790 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:228 ; stratejiler/v3_adaylar/veri_yok_etiket_tur6.csv:165 ; DURUM.md:434
 V014:491,V014,Manikanta-Reddy-Pasala/StockExperimentUS,491,HAM:V014:491,G6_V3,YOK,,H_BIZIM_EVRENDE_UYGULANAMAZ,hisse_kesitsel,,stratejiler/v3_adaylar/on_eleme.csv:791 ; stratejiler/v3_adaylar/veri_yok_etiket_tur6.csv:166 ; DURUM.md:434
 V014:492,V014,aka-quant/pair-trading,492,HAM:V014:492,G6_V3,BENZER,pf__pairs,D_KODLANMADI_NEDENLI,benzer_var,,stratejiler/v3_adaylar/on_eleme.csv:792 ; sonuclar/hesap_defteri/ara/kod_kaydi.csv#pf__pairs
@@ -5306,7 +5306,7 @@ V014:499,V014,chinnusmitiv/trading-learn,499,HAM:V014:499,G6_V3,BENZER,swing__sa
 V014:500,V014,Priyanshu2004/vcp-momentum-breakout,500,HAM:V014:500,G6_V3,YOK,,D_KODLANMADI_NEDENLI,veri_yok,,stratejiler/v3_adaylar/on_eleme.csv:800
 V014:501,V014,milesbusiness/market-dna-engine,501,HAM:V014:501,G6_V3,YOK,,D_KODLANMADI_NEDENLI,arac_sablon,,stratejiler/v3_adaylar/on_eleme.csv:801
 V014:502,V014,Roro253/autoresearch-trading,502,HAM:V014:502,G6_V3,YOK,,D_KODLANMADI_NEDENLI,arac_sablon,,stratejiler/v3_adaylar/on_eleme.csv:802
-V014:503,V014,divishaarora30/structural-pullback-backtest,503,HAM:V014:503,G6_V3,YOK,,F_YASAK_TIP,lookahead,,stratejiler/v3_adaylar/on_eleme.csv:803 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:232
+V014:503,V014,divishaarora30/structural-pullback-backtest,503,HAM:V014:503,G6_V3,YOK,,D_KODLANMADI_NEDENLI,lookahead,,stratejiler/v3_adaylar/on_eleme.csv:803 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:232
 V014:504,V014,Exoristos/Dynamic-Regime-Portfolio-Optimizer,504,HAM:V014:504,G6_V3,YOK,,D_KODLANMADI_NEDENLI,veri_yok,,stratejiler/v3_adaylar/on_eleme.csv:804
 V014:505,V014,Astel-nixon/funding-rate-arb-,505,HAM:V014:505,G6_V3,YOK,,D_KODLANMADI_NEDENLI,veri_yok,,stratejiler/v3_adaylar/on_eleme.csv:805 ; stratejiler/v3_adaylar/veri_yok_etiket_tur6.csv:168 ; DURUM.md:434
 V014:506,V014,cor1nnama/pairs-trading-stat-arb,506,HAM:V014:506,G6_V3,BENZER,pf__pairs,D_KODLANMADI_NEDENLI,benzer_var,,stratejiler/v3_adaylar/on_eleme.csv:806 ; sonuclar/hesap_defteri/ara/kod_kaydi.csv#pf__pairs
@@ -5379,7 +5379,7 @@ V014:572,V014,unknown7751/Algorithmic-Trading-Pipeline,572,HAM:V014:572,G6_V3,YO
 V014:573,V014,nirholas/universal-crypto-mcp,573,HAM:V014:573,G6_V3,YOK,,D_KODLANMADI_NEDENLI,arac_sablon,,stratejiler/v3_adaylar/on_eleme.csv:873
 V014:574,V014,StockPro-AI/hyperliquid-ensemble-strategy,574,HAM:V014:574,G6_V3,YOK,,D_KODLANMADI_NEDENLI,tekrar_kart_yok,,stratejiler/v3_adaylar/on_eleme.csv:874 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:253 ; stratejiler/v3_adaylar/REDDEDILENLER_tur2.txt:72
 V014:575,V014,CoolatMax/viper-,575,HAM:V014:575,G6_V3,BENZER,scalp__bant-donus,D_KODLANMADI_NEDENLI,benzer_var,,stratejiler/v3_adaylar/on_eleme.csv:875 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:254 ; sonuclar/hesap_defteri/ara/kod_kaydi.csv#scalp__bant-donus
-V014:576,V014,sundaragiriv/Drishti,576,HAM:V014:576,G6_V3,YOK,,F_YASAK_TIP,yasak_diger,,stratejiler/v3_adaylar/on_eleme.csv:876
+V014:576,V014,sundaragiriv/Drishti,576,HAM:V014:576,G6_V3,YOK,,D_KODLANMADI_NEDENLI,on_eleme_yasak_diger,,stratejiler/v3_adaylar/on_eleme.csv:876
 V014:577,V014,Justant-source/Bit-Mania,577,HAM:V014:577,G6_V3,BENZER,swing__supertrend-psar,D_KODLANMADI_NEDENLI,benzer_var,,stratejiler/v3_adaylar/on_eleme.csv:877 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:255 ; sonuclar/hesap_defteri/ara/kod_kaydi.csv#swing__supertrend-psar
 V014:578,V014,Parakh20/iitb-coursework,578,HAM:V014:578,G6_V3,YOK,,D_KODLANMADI_NEDENLI,oncelik_disi,,stratejiler/v3_adaylar/on_eleme.csv:878 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:256 ; stratejiler/v3_adaylar/adaylar.csv:114 ; stratejiler/v3_adaylar/aileler_v3.csv:94 ; stratejiler/v3_adaylar/fable_hakem.csv:114 ; DURUM.md:433
 V014:579,V014,Jiten-Singh-Negi/AlphaYantra_Options,579,HAM:V014:579,G6_V3,YOK,,G_ML,ml,,stratejiler/v3_adaylar/on_eleme.csv:879
@@ -5388,7 +5388,7 @@ V014:581,V014,hemantsoni23/long_only_strategies,581,HAM:V014:581,G6_V3,YOK,,D_KO
 V014:582,V014,samarthbanodia/Aquifer_Assignment,582,HAM:V014:582,G6_V3,YOK,,D_KODLANMADI_NEDENLI,veri_yok,,stratejiler/v3_adaylar/on_eleme.csv:882 ; stratejiler/v3_adaylar/veri_yok_etiket_tur6.csv:189 ; DURUM.md:434
 V014:583,V014,CoderOggy78/Quantpairs,583,HAM:V014:583,G6_V3,BENZER,pf__pairs,D_KODLANMADI_NEDENLI,benzer_var,,stratejiler/v3_adaylar/on_eleme.csv:883 ; sonuclar/hesap_defteri/ara/kod_kaydi.csv#pf__pairs
 V014:584,V014,finos-labs/dtcc-i-h-2025-optimal-minds,584,HAM:V014:584,G6_V3,YOK,,D_KODLANMADI_NEDENLI,kod_yok,,stratejiler/v3_adaylar/on_eleme.csv:884 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:258
-V014:585,V014,EJMM17/darwin-v4,585,HAM:V014:585,G6_V3,YOK,,F_YASAK_TIP,yasak_diger,,stratejiler/v3_adaylar/on_eleme.csv:885 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:259 ; stratejiler/v3_adaylar/on_eleme_tur3.csv:40
+V014:585,V014,EJMM17/darwin-v4,585,HAM:V014:585,G6_V3,YOK,,D_KODLANMADI_NEDENLI,on_eleme_yasak_diger,,stratejiler/v3_adaylar/on_eleme.csv:885 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:259 ; stratejiler/v3_adaylar/on_eleme_tur3.csv:40
 V014:586,V014,medhansh/IchimokuTrader,586,HAM:V014:586,G6_V3,YOK,,H_BIZIM_EVRENDE_UYGULANAMAZ,hisse_kesitsel,,stratejiler/v3_adaylar/on_eleme.csv:886 ; stratejiler/v3_adaylar/veri_yok_etiket_tur6.csv:191 ; DURUM.md:434
 V014:587,V014,jimmy00415/Tesla_Qunat,587,HAM:V014:587,G6_V3,YOK,,D_KODLANMADI_NEDENLI,tekrar_kart_yok,,stratejiler/v3_adaylar/on_eleme.csv:887 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:260 ; stratejiler/v3_adaylar/REDDEDILENLER_tur2.txt:73
 V014:588,V014,joseph-dermawan/network_graph,588,HAM:V014:588,G6_V3,YOK,,D_KODLANMADI_NEDENLI,veri_yok,,stratejiler/v3_adaylar/on_eleme.csv:888 ; stratejiler/v3_adaylar/adaylar.csv:54 ; stratejiler/v3_adaylar/kodlama_v3.csv:56
@@ -5404,8 +5404,8 @@ V014:597,V014,LiamLM77/HMM-Market-Regimes,597,HAM:V014:597,G6_V3,YOK,,G_ML,ml,,s
 V014:598,V014,ahubler01/financial_database,598,HAM:V014:598,G6_V3,YOK,,G_ML,ml,,stratejiler/v3_adaylar/on_eleme.csv:898
 V014:599,V014,Alqama-svg/Quant_Strategy_Backtester,599,HAM:V014:599,G6_V3,YOK,,D_KODLANMADI_NEDENLI,veri_yok,,stratejiler/v3_adaylar/on_eleme.csv:899 ; stratejiler/v3_adaylar/veri_yok_etiket_tur6.csv:194 ; DURUM.md:434
 V014:600,V014,smucav/FinSightAI,600,HAM:V014:600,G6_V3,YOK,,D_KODLANMADI_NEDENLI,arac_sablon,,stratejiler/v3_adaylar/on_eleme.csv:900 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:263
-V014:601,V014,masonhgn/profitron,601,HAM:V014:601,G6_V3,YOK,,F_YASAK_TIP,lookahead,,stratejiler/v3_adaylar/on_eleme.csv:901 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:264
-V014:602,V014,anirudh242/Pairs-Trading-Backtester,602,HAM:V014:602,G6_V3,YOK,,F_YASAK_TIP,lookahead,,stratejiler/v3_adaylar/on_eleme.csv:902 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:265
+V014:601,V014,masonhgn/profitron,601,HAM:V014:601,G6_V3,YOK,,D_KODLANMADI_NEDENLI,lookahead,,stratejiler/v3_adaylar/on_eleme.csv:901 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:264
+V014:602,V014,anirudh242/Pairs-Trading-Backtester,602,HAM:V014:602,G6_V3,YOK,,D_KODLANMADI_NEDENLI,lookahead,,stratejiler/v3_adaylar/on_eleme.csv:902 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:265
 V014:603,V014,safanwarrr/Pairs_Trading_Strategy,603,HAM:V014:603,G6_V3,YOK,,BELIRSIZ,benzer_var,,stratejiler/v3_adaylar/on_eleme.csv:903
 V014:604,V014,rw762-sketch/pairs-trading,604,HAM:V014:604,G6_V3,YOK,,BELIRSIZ,benzer_var,,stratejiler/v3_adaylar/on_eleme.csv:904
 V014:605,V014,shreyasbs31/Cross_Asset_Portfolio_Optimisation_System,605,HAM:V014:605,G6_V3,YOK,,D_KODLANMADI_NEDENLI,arac_sablon,,stratejiler/v3_adaylar/on_eleme.csv:905 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:266
@@ -5452,7 +5452,7 @@ V014:645,V014,aaravjj2/Autopilot-public,645,HAM:V014:645,G6_V3,YOK,,H_BIZIM_EVRE
 V014:646,V014,tuyul-ai-agi/TUYUL-FX-KNOWLEDGE-VAULT-AGI,646,HAM:V014:646,G6_V3,YOK,,H_BIZIM_EVRENDE_UYGULANAMAZ,forex_veri,,stratejiler/v3_adaylar/on_eleme.csv:946 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:284 ; stratejiler/v3_adaylar/veri_yok_etiket_tur6.csv:202 ; DURUM.md:434
 V014:647,V014,ZacharyToney/tradingbot,647,HAM:V014:647,G6_V3,BENZER,dis__connors-etf,D_KODLANMADI_NEDENLI,benzer_var,,stratejiler/v3_adaylar/on_eleme.csv:947 ; stratejiler/v3_adaylar/adaylar.csv:64 ; stratejiler/v3_adaylar/kodlama_v3.csv:26
 V014:648,V014,KASHAPP10/statistical-arbitrage-crypto,648,HAM:V014:648,G6_V3,YOK,,D_KODLANMADI_NEDENLI,oncelik_disi,,stratejiler/v3_adaylar/on_eleme.csv:948 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:285 ; stratejiler/v3_adaylar/adaylar.csv:120 ; stratejiler/v3_adaylar/aileler_v3.csv:27 ; stratejiler/v3_adaylar/fable_hakem.csv:120 ; DURUM.md:433
-V014:649,V014,hitessh50/Volatility-Trading-System,649,HAM:V014:649,G6_V3,YOK,,F_YASAK_TIP,lookahead,,stratejiler/v3_adaylar/on_eleme.csv:949 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:286 ; stratejiler/v3_adaylar/on_eleme_tur3.csv:43
+V014:649,V014,hitessh50/Volatility-Trading-System,649,HAM:V014:649,G6_V3,YOK,,D_KODLANMADI_NEDENLI,lookahead,,stratejiler/v3_adaylar/on_eleme.csv:949 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:286 ; stratejiler/v3_adaylar/on_eleme_tur3.csv:43
 V014:650,V014,Vaidik6920/Fin_Agent,650,HAM:V014:650,G6_V3,YOK,,G_ML,ml,,stratejiler/v3_adaylar/on_eleme.csv:950
 V014:651,V014,llaudau/--,651,HAM:V014:651,G6_V3,YOK,,G_ML,ml,,stratejiler/v3_adaylar/on_eleme.csv:951 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:287
 V014:652,V014,ayushsom1/kk_bot,652,HAM:V014:652,G6_V3,BENZER,daytrade__skor-ma-rsi-macd-adx-bb-atr__drewisonline,D_KODLANMADI_NEDENLI,benzer_var,,stratejiler/v3_adaylar/on_eleme.csv:952 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:288 ; stratejiler/v3_adaylar/on_eleme_tur3.csv:44 ; stratejiler/v3_adaylar/adaylar.csv:137
@@ -5527,7 +5527,7 @@ V014:720,V014,qusong0627/QuantMind,720,HAM:V014:720,G6_V3,YOK,,D_KODLANMADI_NEDE
 V014:721,V014,AgriQuantAI/AgriQuant-AI,721,HAM:V014:721,G6_V3,YOK,,G_ML,ml,,stratejiler/v3_adaylar/on_eleme.csv:1021
 V014:722,V014,judder659/Forven,722,HAM:V014:722,G6_V3,YOK,,D_KODLANMADI_NEDENLI,arac_sablon,,stratejiler/v3_adaylar/on_eleme.csv:1022
 V014:723,V014,Draichi/T-1000,723,HAM:V014:723,G6_V3,YOK,,G_ML,ml,,stratejiler/v3_adaylar/on_eleme.csv:1023
-V014:724,V014,mehdi-jahani/GoldTraderEA,724,HAM:V014:724,G6_V3,YOK,,F_YASAK_TIP,lookahead,,stratejiler/v3_adaylar/on_eleme.csv:1024 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:303 ; stratejiler/v3_adaylar/on_eleme_tur3.csv:49
+V014:724,V014,mehdi-jahani/GoldTraderEA,724,HAM:V014:724,G6_V3,YOK,,D_KODLANMADI_NEDENLI,lookahead,,stratejiler/v3_adaylar/on_eleme.csv:1024 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:303 ; stratejiler/v3_adaylar/on_eleme_tur3.csv:49
 V014:725,V014,javajack/skill-algotrader,725,HAM:V014:725,G6_V3,YOK,,D_KODLANMADI_NEDENLI,arac_sablon,,stratejiler/v3_adaylar/on_eleme.csv:1025
 V014:726,V014,Lucas-Joly-GH/trends-research,726,HAM:V014:726,G6_V3,YOK,,D_KODLANMADI_NEDENLI,veri_yok,,stratejiler/v3_adaylar/on_eleme.csv:1026 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:304
 V014:727,V014,mjunaidca/polymarket-skills,727,HAM:V014:727,G6_V3,YOK,,D_KODLANMADI_NEDENLI,arac_sablon,,stratejiler/v3_adaylar/on_eleme.csv:1027
@@ -5647,7 +5647,7 @@ V014:840,V014,sagan-research/sagan-trade,840,HAM:V014:840,G6_V3,YOK,,G_ML,ml,,st
 V014:841,V014,ElenYoung/PTree-Pruning-iTransformer-Strategy,841,HAM:V014:841,G6_V3,YOK,,G_ML,ml,,stratejiler/v3_adaylar/on_eleme.csv:1141
 V014:842,V014,VaNsH-IIIT/Congrats-Congrats-Money-Money,842,HAM:V014:842,G6_V3,YOK,,G_ML,ml,,stratejiler/v3_adaylar/on_eleme.csv:1142
 V014:843,V014,KennedyOdhiambo/sfp-reversion,843,HAM:V014:843,G6_V3,YOK,,D_KODLANMADI_NEDENLI,veri_yok,,stratejiler/v3_adaylar/on_eleme.csv:1143
-V014:844,V014,kevoking/goldrush,844,HAM:V014:844,G6_V3,YOK,,F_YASAK_TIP,lookahead,,stratejiler/v3_adaylar/on_eleme.csv:1144 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:336 ; stratejiler/v3_adaylar/on_eleme_tur3.csv:59
+V014:844,V014,kevoking/goldrush,844,HAM:V014:844,G6_V3,YOK,,D_KODLANMADI_NEDENLI,lookahead,,stratejiler/v3_adaylar/on_eleme.csv:1144 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:336 ; stratejiler/v3_adaylar/on_eleme_tur3.csv:59
 V014:845,V014,Pankaj-Kumar2003/nq-orb-strategy,845,HAM:V014:845,G6_V3,YOK,,D_KODLANMADI_NEDENLI,veri_yok,,stratejiler/v3_adaylar/on_eleme.csv:1145
 V014:846,V014,PLIAN78/HacktheMarket,846,HAM:V014:846,G6_V3,YOK,,D_KODLANMADI_NEDENLI,veri_yok,,stratejiler/v3_adaylar/on_eleme.csv:1146 ; stratejiler/v3_adaylar/veri_yok_etiket_tur6.csv:244 ; DURUM.md:434
 V014:847,V014,Waqar53/QauntXAlgo,847,HAM:V014:847,G6_V3,BENZER,dis__ema-esik-trend,D_KODLANMADI_NEDENLI,benzer_var,,stratejiler/v3_adaylar/on_eleme.csv:1147 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:337 ; stratejiler/v3_adaylar/on_eleme_tur3.csv:60 ; sonuclar/hesap_defteri/ara/kod_kaydi.csv#dis__ema-esik-trend
@@ -5700,7 +5700,7 @@ V014:893,V014,kaidoescoding/alpha-engine,893,HAM:V014:893,G6_V3,BENZER,swing__ma
 V014:894,V014,LandwoIf/Cross-Sectional-Mean-Reversion,894,HAM:V014:894,G6_V3,BENZER,swing__kisa-vade-tersine-donus__groot,D_KODLANMADI_NEDENLI,benzer_var,,stratejiler/v3_adaylar/on_eleme.csv:1194 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:357 ; stratejiler/v3_adaylar/on_eleme_tur3_gorev2.csv:6 ; stratejiler/v3_adaylar/adaylar.csv:47
 V014:895,V014,rainezhong/tradingutils-demo,895,HAM:V014:895,G6_V3,YOK,,D_KODLANMADI_NEDENLI,arac_sablon,,stratejiler/v3_adaylar/on_eleme.csv:1195
 V014:896,V014,PhilZeraNTC/signal-quant-ita-2026,896,HAM:V014:896,G6_V3,YOK,,G_ML,ml,,stratejiler/v3_adaylar/on_eleme.csv:1196
-V014:897,V014,OwenWang19/equity-alpha-research,897,HAM:V014:897,G6_V3,YOK,,F_YASAK_TIP,lookahead,,stratejiler/v3_adaylar/on_eleme.csv:1197 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:358
+V014:897,V014,OwenWang19/equity-alpha-research,897,HAM:V014:897,G6_V3,YOK,,D_KODLANMADI_NEDENLI,lookahead,,stratejiler/v3_adaylar/on_eleme.csv:1197 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:358
 V014:898,V014,ncarper48-dot/smartbot,898,HAM:V014:898,G6_V3,YOK,,G_ML,ml,,stratejiler/v3_adaylar/on_eleme.csv:1198 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:359
 V014:899,V014,advaithprabhudev/Momentum-Research-Project,899,HAM:V014:899,G6_V3,BENZER,swing__ma-kesisim,D_KODLANMADI_NEDENLI,benzer_var,,stratejiler/v3_adaylar/on_eleme.csv:1199 ; sonuclar/hesap_defteri/ara/kod_kaydi.csv#swing__ma-kesisim
 V014:900,V014,vrutitailor11/Techincal-Indicator-Based-Trading-Strategies,900,HAM:V014:900,G6_V3,YOK,,G_ML,ml,,stratejiler/v3_adaylar/on_eleme.csv:1200 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:360
@@ -5708,7 +5708,7 @@ V014:901,V014,RishikeshGovind/ai-trading-app,901,HAM:V014:901,G6_V3,YOK,,G_ML,ml
 V014:902,V014,lhcbenac/Personal_Repository,902,HAM:V014:902,G6_V3,YOK,,D_KODLANMADI_NEDENLI,oncelik_disi,,stratejiler/v3_adaylar/on_eleme.csv:1202 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:361 ; stratejiler/v3_adaylar/on_eleme_tur3_gorev2.csv:7 ; stratejiler/v3_adaylar/adaylar.csv:147 ; stratejiler/v3_adaylar/aileler_v3.csv:149 ; stratejiler/v3_adaylar/fable_hakem.csv:147 ; DURUM.md:433
 V014:903,V014,AbhiZx18324/KDSH-2024-fin,903,HAM:V014:903,G6_V3,YOK,,G_ML,ml,,stratejiler/v3_adaylar/on_eleme.csv:1203
 V014:904,V014,dolese/dolesewonderlandfx,904,HAM:V014:904,G6_V3,YOK,,D_KODLANMADI_NEDENLI,arac_sablon,,stratejiler/v3_adaylar/on_eleme.csv:1204
-V014:905,V014,FatihSik/pair-trading-backtester,905,HAM:V014:905,G6_V3,YOK,,F_YASAK_TIP,lookahead,,stratejiler/v3_adaylar/on_eleme.csv:1205 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:362
+V014:905,V014,FatihSik/pair-trading-backtester,905,HAM:V014:905,G6_V3,YOK,,D_KODLANMADI_NEDENLI,lookahead,,stratejiler/v3_adaylar/on_eleme.csv:1205 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:362
 V014:906,V014,Official-Belta/il-alpha-vault,906,HAM:V014:906,G6_V3,YOK,,D_KODLANMADI_NEDENLI,veri_yok,,stratejiler/v3_adaylar/on_eleme.csv:1206
 V014:907,V014,OwenWang19/market-making-simulation,907,HAM:V014:907,G6_V3,YOK,,D_KODLANMADI_NEDENLI,veri_yok,,stratejiler/v3_adaylar/on_eleme.csv:1207 ; stratejiler/v3_adaylar/veri_yok_etiket_tur6.csv:254 ; DURUM.md:434
 V014:908,V014,OwenWang19/earnings-alpha-research,908,HAM:V014:908,G6_V3,YOK,,D_KODLANMADI_NEDENLI,veri_yok,,stratejiler/v3_adaylar/on_eleme.csv:1208
@@ -5720,7 +5720,7 @@ V014:913,V014,keshavk215/Algorithmic-Trading-Strategy-Backtesting,913,HAM:V014:9
 V014:914,V014,tomcsvan/EigenSim,914,HAM:V014:914,G6_V3,YOK,,D_KODLANMADI_NEDENLI,arac_sablon,,stratejiler/v3_adaylar/on_eleme.csv:1214
 V014:915,V014,daniaaalk/denAlgo,915,HAM:V014:915,G6_V3,YOK,,G_ML,ml,,stratejiler/v3_adaylar/on_eleme.csv:1215
 V014:916,V014,v-oss891/statistical-mean-reversion,916,HAM:V014:916,G6_V3,YOK,,D_KODLANMADI_NEDENLI,kod_yok,,stratejiler/v3_adaylar/on_eleme.csv:1216 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:365
-V014:917,V014,liefsun/quant-projects,917,HAM:V014:917,G6_V3,YOK,,F_YASAK_TIP,lookahead,,stratejiler/v3_adaylar/on_eleme.csv:1217 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:366
+V014:917,V014,liefsun/quant-projects,917,HAM:V014:917,G6_V3,YOK,,D_KODLANMADI_NEDENLI,lookahead,,stratejiler/v3_adaylar/on_eleme.csv:1217 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:366
 V014:918,V014,brijeshkanodia/black-litterman-lstm-nifty50,918,HAM:V014:918,G6_V3,YOK,,G_ML,ml,,stratejiler/v3_adaylar/on_eleme.csv:1218
 V014:919,V014,Lvuilleum/QuantBacktest---mini-Trading-system,919,HAM:V014:919,G6_V3,BENZER,dis__codex-wd-gunluk-momentum,D_KODLANMADI_NEDENLI,benzer_var,,stratejiler/v3_adaylar/on_eleme.csv:1219 ; sonuclar/hesap_defteri/ara/kod_kaydi.csv#dis__codex-wd-gunluk-momentum
 V014:920,V014,julesdesai/Hybrid-Transformer-SSM-for-Quant-Finance-Sandbox,920,HAM:V014:920,G6_V3,YOK,,G_ML,ml,,stratejiler/v3_adaylar/on_eleme.csv:1220
@@ -5740,9 +5740,9 @@ V014:933,V014,N23K9/steelfort-trader,933,HAM:V014:933,G6_V3,BENZER,swing__ma-kes
 V014:934,V014,mohanrameshwara-murugaraj/Jules_projects,934,HAM:V014:934,G6_V3,YOK,,D_KODLANMADI_NEDENLI,kod_yok,,stratejiler/v3_adaylar/on_eleme.csv:1234 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:368
 V014:935,V014,CH-Manage/fvg-backtesting-xauusd,935,HAM:V014:935,G6_V3,YOK,,BELIRSIZ,benzer_var,,stratejiler/v3_adaylar/on_eleme.csv:1235
 V014:936,V014,JC-376/mt5-trading-strategies,936,HAM:V014:936,G6_V3,YOK,,F_YASAK_TIP,stopsuz_grid,,stratejiler/v3_adaylar/on_eleme.csv:1236
-V014:937,V014,WiseAmos/btc-perp-research,937,HAM:V014:937,G6_V3,YOK,,F_YASAK_TIP,lookahead,,stratejiler/v3_adaylar/on_eleme.csv:1237 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:369 ; stratejiler/v3_adaylar/on_eleme_tur3_gorev2.csv:13
+V014:937,V014,WiseAmos/btc-perp-research,937,HAM:V014:937,G6_V3,YOK,,D_KODLANMADI_NEDENLI,lookahead,,stratejiler/v3_adaylar/on_eleme.csv:1237 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:369 ; stratejiler/v3_adaylar/on_eleme_tur3_gorev2.csv:13
 V014:938,V014,Vickey-vijay/ORB_V1,938,HAM:V014:938,G6_V3,BENZER,daytrade__orb,D_KODLANMADI_NEDENLI,benzer_var,,stratejiler/v3_adaylar/on_eleme.csv:1238 ; sonuclar/hesap_defteri/ara/kod_kaydi.csv#daytrade__orb
-V014:939,V014,wefiwett/BinanceTradingBot,939,HAM:V014:939,G6_V3,YOK,,F_YASAK_TIP,yasak_diger,,stratejiler/v3_adaylar/on_eleme.csv:1239 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:370
+V014:939,V014,wefiwett/BinanceTradingBot,939,HAM:V014:939,G6_V3,YOK,,G_ML,ml,,stratejiler/v3_adaylar/on_eleme.csv:1239 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:370
 V014:940,V014,tomasbatovsky-png/portfolio-momentum-trading,940,HAM:V014:940,G6_V3,YOK,,D_KODLANMADI_NEDENLI,oncelik_disi,,stratejiler/v3_adaylar/on_eleme.csv:1240 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:371 ; stratejiler/v3_adaylar/on_eleme_tur3_gorev2.csv:14 ; stratejiler/v3_adaylar/adaylar.csv:149 ; stratejiler/v3_adaylar/aileler_v3.csv:150 ; stratejiler/v3_adaylar/fable_hakem.csv:149 ; DURUM.md:433
 V014:941,V014,leocagli/bnb-hackathon-portfolio-risk-manager,941,HAM:V014:941,G6_V3,YOK,,G_ML,ml,,stratejiler/v3_adaylar/on_eleme.csv:1241
 V014:942,V014,suwandre/trading-bot-ts,942,HAM:V014:942,G6_V3,YOK,,F_YASAK_TIP,dca,,stratejiler/v3_adaylar/on_eleme.csv:1242
@@ -5768,7 +5768,7 @@ V014:961,V014,harrodyuan/macro_project,961,HAM:V014:961,G6_V3,YOK,,D_KODLANMADI_
 V014:962,V014,xagentAI/xagt-plugin,962,HAM:V014:962,G6_V3,YOK,,D_KODLANMADI_NEDENLI,arac_sablon,,stratejiler/v3_adaylar/on_eleme.csv:1262
 V014:963,V014,flanfly/studies,963,HAM:V014:963,G6_V3,YOK,,D_KODLANMADI_NEDENLI,kod_yok,,stratejiler/v3_adaylar/on_eleme.csv:1263 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:378
 V014:964,V014,elenakinael-del/market-microstructure-visualizer,964,HAM:V014:964,G6_V3,YOK,,D_KODLANMADI_NEDENLI,veri_yok,,stratejiler/v3_adaylar/on_eleme.csv:1264 ; stratejiler/v3_adaylar/veri_yok_etiket_tur6.csv:266 ; DURUM.md:434
-V014:965,V014,FrankRKNL/crypto-daytrader,965,HAM:V014:965,G6_V3,YOK,,F_YASAK_TIP,yasak_diger,,stratejiler/v3_adaylar/on_eleme.csv:1265 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:379 ; stratejiler/v3_adaylar/on_eleme_tur3.csv:62
+V014:965,V014,FrankRKNL/crypto-daytrader,965,HAM:V014:965,G6_V3,YOK,,D_KODLANMADI_NEDENLI,on_eleme_yasak_diger,,stratejiler/v3_adaylar/on_eleme.csv:1265 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:379 ; stratejiler/v3_adaylar/on_eleme_tur3.csv:62
 V014:966,V014,anshs527/rsitradingalgo,966,HAM:V014:966,G6_V3,BENZER,dis__ifr2,D_KODLANMADI_NEDENLI,benzer_var,,stratejiler/v3_adaylar/on_eleme.csv:1266 ; sonuclar/hesap_defteri/ara/kod_kaydi.csv#dis__ifr2
 V014:967,V014,adamincident/TRB,967,HAM:V014:967,G6_V3,BENZER,v3__rsi14-ema200-izleyen-stop,D_KODLANMADI_NEDENLI,benzer_var,,stratejiler/v3_adaylar/on_eleme.csv:1267 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:380 ; stratejiler/v3_adaylar/on_eleme_tur3_gorev2.csv:10 ; stratejiler/v3_adaylar/kodlama_v3.csv:64 ; sonuclar/hesap_defteri/ara/kod_kaydi.csv#v3__rsi14-ema200-izleyen-stop
 V014:968,V014,npallotta128/testbed-analysis,968,HAM:V014:968,G6_V3,YOK,,H_BIZIM_EVRENDE_UYGULANAMAZ,hisse_kesitsel,,stratejiler/v3_adaylar/on_eleme.csv:1268 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:381 ; stratejiler/v3_adaylar/veri_yok_etiket_tur6.csv:267 ; DURUM.md:434
@@ -5827,7 +5827,7 @@ V013:21,V013,vishnuvcr/Final-stand-v2,21,HAM:V014:620,G6_V3,YOK,,H_BIZIM_EVRENDE
 V013:22,V013,smoothbrainquant/trading-for-new-dads,22,HAM:V014:237,G6_V3,YOK,,D_KODLANMADI_NEDENLI,veri_yok,,stratejiler/v3_adaylar/on_eleme.csv:1321
 V013:23,V013,Om7398/trading-bot,23,HAM:V014:148,G6_V3,YOK,,D_KODLANMADI_NEDENLI,tekrar_kart_yok,,stratejiler/v3_adaylar/on_eleme.csv:1322 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:400 ; stratejiler/v3_adaylar/REDDEDILENLER_tur2.txt:52
 V013:24,V013,BuyMeAnIcecream/freqtrade-strategies,24,HAM:V014:127,G6_V3,TEKRAR,V014:127,TEKRAR,kopya,,stratejiler/v3_adaylar/on_eleme.csv:1323 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:401 ; stratejiler/v3_adaylar/adaylar.csv:96
-V013:25,V013,Sanchitranakoti/XAUUSD-Algorithmic-Trading-Strategy,25,HAM:V014:141,G6_V3,YOK,,F_YASAK_TIP,lookahead,,stratejiler/v3_adaylar/on_eleme.csv:1324 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:402
+V013:25,V013,Sanchitranakoti/XAUUSD-Algorithmic-Trading-Strategy,25,HAM:V014:141,G6_V3,YOK,,D_KODLANMADI_NEDENLI,lookahead,,stratejiler/v3_adaylar/on_eleme.csv:1324 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:402
 V013:26,V013,wenjiaqi8255/bloomberg-competition-2025,26,HAM:V014:345,G6_V3,YOK,,G_ML,ml,,stratejiler/v3_adaylar/on_eleme.csv:1325 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:403
 V013:27,V013,CyN1ckal/CyNickal-Software-Terminal,27,HAM:V014:139,G6_V3,YOK,,D_KODLANMADI_NEDENLI,arac_sablon,,stratejiler/v3_adaylar/on_eleme.csv:1326
 V013:28,V013,upupnoah/noahroboros,28,KOD:v3__rsi32-yon-hedef4,G6_V3,TEKRAR,V014:799,TEKRAR,kopya,,stratejiler/v3_adaylar/on_eleme.csv:1327 ; stratejiler/v3_adaylar/adaylar.csv:14
@@ -5835,7 +5835,7 @@ V013:29,V013,evan7646-cloud/Gold_Strategy_Watch,29,HAM:V014:516,G6_V3,YOK,,D_KOD
 V013:30,V013,abbujo/Aggressor-XAUUSD,30,HAM:V014:545,G6_V3,TEKRAR,V014:545,TEKRAR,kopya,,stratejiler/v3_adaylar/on_eleme.csv:1329 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:405 ; stratejiler/v3_adaylar/adaylar.csv:110
 V013:31,V013,medhansh/ITSP,31,HAM:V014:834,G6_V3,YOK,,G_ML,ml,,stratejiler/v3_adaylar/on_eleme.csv:1330
 V013:32,V013,Prajwalamin/bollinger-dynamic-fx,32,HAM:V014:424,G6_V3,YOK,,D_KODLANMADI_NEDENLI,veri_yok,,stratejiler/v3_adaylar/on_eleme.csv:1331
-V013:33,V013,2626245/statistical-arbitrage,33,HAM:V014:253,G6_V3,YOK,,F_YASAK_TIP,lookahead,,stratejiler/v3_adaylar/on_eleme.csv:1332 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:406
+V013:33,V013,2626245/statistical-arbitrage,33,HAM:V014:253,G6_V3,YOK,,D_KODLANMADI_NEDENLI,lookahead,,stratejiler/v3_adaylar/on_eleme.csv:1332 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:406
 V013:34,V013,bachng0111/MACD-BB-ATR-Automated-Trading-System,34,HAM:V014:976,G6_V3,TEKRAR,V014:976,TEKRAR,kopya,,stratejiler/v3_adaylar/on_eleme.csv:1333 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:407 ; stratejiler/v3_adaylar/adaylar.csv:131
 V013:35,V013,sivaadharsh28/form4,35,HAM:V014:708,G6_V3,YOK,,D_KODLANMADI_NEDENLI,veri_yok,,stratejiler/v3_adaylar/on_eleme.csv:1334 ; stratejiler/v3_adaylar/veri_yok_etiket_tur6.csv:219 ; DURUM.md:434
 V013:36,V013,davidesidoti/CryptoBot,36,HAM:V014:14,G6_V3,YOK,,G_ML,ml,,stratejiler/v3_adaylar/on_eleme.csv:1335
@@ -5851,7 +5851,7 @@ V013:45,V013,shreyasbs31/Cross_Asset_Portfolio_Optimisation_System,45,HAM:V014:6
 V013:46,V013,at6132/v1,46,HAM:V014:718,G6_V3,YOK,,H_BIZIM_EVRENDE_UYGULANAMAZ,orderbook,,stratejiler/v3_adaylar/on_eleme.csv:1345 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:410 ; stratejiler/v3_adaylar/veri_yok_etiket_tur6.csv:223 ; DURUM.md:434
 V013:47,V013,lileskimo/HMM_Nautilus,47,HAM:V014:633,G6_V3,YOK,,G_ML,ml,,stratejiler/v3_adaylar/on_eleme.csv:1346 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:411
 V013:48,V013,tachikoma/super-quality,48,HAM:V014:707,G6_V3,YOK,,H_BIZIM_EVRENDE_UYGULANAMAZ,hisse_kesitsel,,stratejiler/v3_adaylar/on_eleme.csv:1347 ; stratejiler/v3_adaylar/veri_yok_etiket_tur6.csv:218 ; DURUM.md:434
-V013:49,V013,masonhgn/profitron,49,HAM:V014:601,G6_V3,YOK,,F_YASAK_TIP,lookahead,,stratejiler/v3_adaylar/on_eleme.csv:1348 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:412 ; stratejiler/v3_adaylar/on_eleme_tur3.csv:66
+V013:49,V013,masonhgn/profitron,49,HAM:V014:601,G6_V3,YOK,,D_KODLANMADI_NEDENLI,lookahead,,stratejiler/v3_adaylar/on_eleme.csv:1348 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:412 ; stratejiler/v3_adaylar/on_eleme_tur3.csv:66
 V013:50,V013,notJacke/BTC-Algo,50,HAM:V014:625,G6_V3,YOK,,D_KODLANMADI_NEDENLI,veri_yok,,stratejiler/v3_adaylar/on_eleme.csv:1349 ; stratejiler/v3_adaylar/veri_yok_etiket_tur6.csv:197 ; DURUM.md:434
 V013:51,V013,Ultrahandsome/mean-reversion-trading-system,51,HAM:V014:717,G6_V3,BENZER,dis__ortalamaya-donus-gerilme,D_KODLANMADI_NEDENLI,benzer_var,,stratejiler/v3_adaylar/on_eleme.csv:1350 ; sonuclar/hesap_defteri/ara/kod_kaydi.csv#dis__ortalamaya-donus-gerilme
 V013:52,V013,anirudh242/Pairs-Trading-Backtester,52,HAM:V014:602,G6_V3,BENZER,pf__pairs,D_KODLANMADI_NEDENLI,benzer_var,,stratejiler/v3_adaylar/on_eleme.csv:1351 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:413 ; stratejiler/v3_adaylar/kodlama_v3.csv:57 ; sonuclar/hesap_defteri/ara/kod_kaydi.csv#pf__pairs
@@ -5902,7 +5902,7 @@ V013:96,V013,j1mb0o/spy-tests,96,HAM:V014:536,G6_V3,YOK,,H_BIZIM_EVRENDE_UYGULAN
 V013:97,V013,justinattw/quant-lab-rust,97,HAM:V014:534,G6_V3,BENZER,pf__rotasyon,D_KODLANMADI_NEDENLI,benzer_var,,stratejiler/v3_adaylar/on_eleme.csv:1396 ; sonuclar/hesap_defteri/ara/kod_kaydi.csv#pf__rotasyon
 V013:98,V013,Shrestha-Developer/StockPulse,98,HAM:V014:530,G6_V3,BENZER,swing__ma-kesisim,D_KODLANMADI_NEDENLI,benzer_var,,stratejiler/v3_adaylar/on_eleme.csv:1397 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:430 ; sonuclar/hesap_defteri/ara/kod_kaydi.csv#swing__ma-kesisim
 V013:99,V013,WilsonBrade/backtest_mobile_average_crossover,99,HAM:V014:529,G6_V3,BENZER,dis__ema-esik-trend,D_KODLANMADI_NEDENLI,benzer_var,,stratejiler/v3_adaylar/on_eleme.csv:1398 ; sonuclar/hesap_defteri/ara/kod_kaydi.csv#dis__ema-esik-trend
-V013:100,V013,zeyudsai/bayesian-factor-selection,100,HAM:V014:526,G6_V3,YOK,,F_YASAK_TIP,yasak_diger,,stratejiler/v3_adaylar/on_eleme.csv:1399
+V013:100,V013,zeyudsai/bayesian-factor-selection,100,HAM:V014:526,G6_V3,YOK,,G_ML,ml,,stratejiler/v3_adaylar/on_eleme.csv:1399
 V013:101,V013,huymk/vnstocks,101,HAM:V014:520,G6_V3,YOK,,G_ML,ml,,stratejiler/v3_adaylar/on_eleme.csv:1400
 V013:102,V013,andyxing00888/personal-site,102,HAM:V014:515,G6_V3,YOK,,H_BIZIM_EVRENDE_UYGULANAMAZ,veri_diger,,stratejiler/v3_adaylar/on_eleme.csv:1401 ; stratejiler/v3_adaylar/veri_yok_etiket_tur6.csv:279 ; DURUM.md:434
 V013:103,V013,neelshah1903/quant-macro-strategy-backtest,103,HAM:V014:514,G6_V3,YOK,,D_KODLANMADI_NEDENLI,veri_yok,,stratejiler/v3_adaylar/on_eleme.csv:1402 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:431 ; stratejiler/v3_adaylar/veri_yok_etiket_tur6.csv:171 ; DURUM.md:434
@@ -5914,7 +5914,7 @@ V013:108,V013,IceCurrent/long_short_equities,108,HAM:V014:507,G6_V3,BENZER,pf__k
 V013:109,V013,cor1nnama/pairs-trading-stat-arb,109,HAM:V014:506,G6_V3,BENZER,pf__pairs,D_KODLANMADI_NEDENLI,benzer_var,,stratejiler/v3_adaylar/on_eleme.csv:1408 ; sonuclar/hesap_defteri/ara/kod_kaydi.csv#pf__pairs
 V013:110,V013,Astel-nixon/funding-rate-arb-,110,HAM:V014:505,G6_V3,YOK,,D_KODLANMADI_NEDENLI,arac_sablon,,stratejiler/v3_adaylar/on_eleme.csv:1409
 V013:111,V013,Exoristos/Dynamic-Regime-Portfolio-Optimizer,111,HAM:V014:504,G6_V3,YOK,,D_KODLANMADI_NEDENLI,arac_sablon,,stratejiler/v3_adaylar/on_eleme.csv:1410 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:432
-V013:112,V013,divishaarora30/structural-pullback-backtest,112,HAM:V014:503,G6_V3,YOK,,F_YASAK_TIP,lookahead,,stratejiler/v3_adaylar/on_eleme.csv:1411 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:433
+V013:112,V013,divishaarora30/structural-pullback-backtest,112,HAM:V014:503,G6_V3,YOK,,D_KODLANMADI_NEDENLI,lookahead,,stratejiler/v3_adaylar/on_eleme.csv:1411 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:433
 V013:113,V013,Priyanshu2004/vcp-momentum-breakout,113,HAM:V014:500,G6_V3,YOK,,H_BIZIM_EVRENDE_UYGULANAMAZ,hisse_kesitsel,,stratejiler/v3_adaylar/on_eleme.csv:1412 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:434 ; stratejiler/v3_adaylar/veri_yok_etiket_tur6.csv:167 ; DURUM.md:434
 V013:114,V013,elliotma27/elliotma27.github.io,114,HAM:V014:496,G6_V3,YOK,,D_KODLANMADI_NEDENLI,kod_yok,,stratejiler/v3_adaylar/on_eleme.csv:1413 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:435
 V013:115,V013,aka-quant/pair-trading,115,HAM:V014:492,G6_V3,BENZER,pf__pairs,D_KODLANMADI_NEDENLI,benzer_var,,stratejiler/v3_adaylar/on_eleme.csv:1414 ; sonuclar/hesap_defteri/ara/kod_kaydi.csv#pf__pairs
@@ -5970,7 +5970,7 @@ V013:164,V013,AbhiZx18324/KDSH-2024-fin,164,HAM:V014:903,G6_V3,BENZER,swing__ma-
 V013:165,V013,lhcbenac/Personal_Repository,165,HAM:V014:902,G6_V3,TEKRAR,V014:902,TEKRAR,kopya,,stratejiler/v3_adaylar/on_eleme.csv:1464 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:455 ; stratejiler/v3_adaylar/adaylar.csv:147
 V013:166,V013,RishikeshGovind/ai-trading-app,166,HAM:V014:901,G6_V3,YOK,,G_ML,ml,,stratejiler/v3_adaylar/on_eleme.csv:1465
 V013:167,V013,advaithprabhudev/Momentum-Research-Project,167,HAM:V014:899,G6_V3,YOK,,G_ML,ml,,stratejiler/v3_adaylar/on_eleme.csv:1466
-V013:168,V013,OwenWang19/equity-alpha-research,168,HAM:V014:897,G6_V3,YOK,,F_YASAK_TIP,lookahead,,stratejiler/v3_adaylar/on_eleme.csv:1467 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:456 ; stratejiler/v3_adaylar/on_eleme_tur3.csv:70
+V013:168,V013,OwenWang19/equity-alpha-research,168,HAM:V014:897,G6_V3,YOK,,D_KODLANMADI_NEDENLI,lookahead,,stratejiler/v3_adaylar/on_eleme.csv:1467 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:456 ; stratejiler/v3_adaylar/on_eleme_tur3.csv:70
 V013:169,V013,PhilZeraNTC/signal-quant-ita-2026,169,HAM:V014:896,G6_V3,YOK,,G_ML,ml,,stratejiler/v3_adaylar/on_eleme.csv:1468 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:457
 V013:170,V013,kaidoescoding/alpha-engine,170,HAM:V014:893,G6_V3,BENZER,swing__ma-kesisim,D_KODLANMADI_NEDENLI,benzer_var,,stratejiler/v3_adaylar/on_eleme.csv:1469 ; sonuclar/hesap_defteri/ara/kod_kaydi.csv#swing__ma-kesisim
 V013:171,V013,SokeWang/Breakout-Trading-Strategy,171,HAM:V014:891,G6_V3,YOK,,D_KODLANMADI_NEDENLI,tekrar_kart_yok,,stratejiler/v3_adaylar/on_eleme.csv:1470 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:458 ; stratejiler/v3_adaylar/REDDEDILENLER_tur2.txt:54
@@ -5987,15 +5987,15 @@ V013:181,V013,samisuleman10/ai-trade,181,HAM:V014:870,G6_V3,TEKRAR,V014:870,TEKR
 V013:182,V013,rellis3/MacroFXModel,182,HAM:V014:869,G6_V3,YOK,,H_BIZIM_EVRENDE_UYGULANAMAZ,makro_takvim,,stratejiler/v3_adaylar/on_eleme.csv:1481 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:465 ; stratejiler/v3_adaylar/veri_yok_etiket_tur6.csv:248 ; DURUM.md:434
 V013:183,V013,v1r33x/financial-engineering-portfolio,183,HAM:V014:868,G6_V3,BENZER,pf__pairs,D_KODLANMADI_NEDENLI,benzer_var,,stratejiler/v3_adaylar/on_eleme.csv:1482 ; sonuclar/hesap_defteri/ara/kod_kaydi.csv#pf__pairs
 V013:184,V013,gokturkcolak/algorithmic-trading-system,184,HAM:V014:867,G6_V3,YOK,,G_ML,ml,,stratejiler/v3_adaylar/on_eleme.csv:1483
-V013:185,V013,davidcagoh/algo-traders,185,HAM:V014:865,G6_V3,YOK,,F_YASAK_TIP,lookahead,,stratejiler/v3_adaylar/on_eleme.csv:1484 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:466
+V013:185,V013,davidcagoh/algo-traders,185,HAM:V014:865,G6_V3,YOK,,D_KODLANMADI_NEDENLI,lookahead,,stratejiler/v3_adaylar/on_eleme.csv:1484 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:466
 V013:186,V013,ryuzaki-ved/stock_ml_model,186,HAM:V014:864,G6_V3,YOK,,G_ML,ml,,stratejiler/v3_adaylar/on_eleme.csv:1485
 V013:187,V013,xuenailao/ESG-Premium-on-Stocks,187,HAM:V014:862,G6_V3,YOK,,H_BIZIM_EVRENDE_UYGULANAMAZ,hisse_kesitsel,,stratejiler/v3_adaylar/on_eleme.csv:1486 ; stratejiler/v3_adaylar/veri_yok_etiket_tur6.csv:246 ; DURUM.md:434
-V013:188,V013,VeinDevTtv/vein_smc_bot,188,HAM:V014:854,G6_V3,YOK,,F_YASAK_TIP,lookahead,,stratejiler/v3_adaylar/on_eleme.csv:1487 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:467
-V013:189,V013,liefsun/quant-projects,189,HAM:V014:917,G6_V3,YOK,,F_YASAK_TIP,lookahead,,stratejiler/v3_adaylar/on_eleme.csv:1488 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:468
+V013:188,V013,VeinDevTtv/vein_smc_bot,188,HAM:V014:854,G6_V3,YOK,,D_KODLANMADI_NEDENLI,lookahead,,stratejiler/v3_adaylar/on_eleme.csv:1487 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:467
+V013:189,V013,liefsun/quant-projects,189,HAM:V014:917,G6_V3,YOK,,D_KODLANMADI_NEDENLI,lookahead,,stratejiler/v3_adaylar/on_eleme.csv:1488 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:468
 V013:190,V013,kechprog/trading_strat,190,HAM:V014:850,G6_V3,YOK,,D_KODLANMADI_NEDENLI,oncelik_disi,,stratejiler/v3_adaylar/on_eleme.csv:1489 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:469 ; stratejiler/v3_adaylar/adaylar.csv:134 ; stratejiler/v3_adaylar/aileler_v3.csv:93 ; stratejiler/v3_adaylar/fable_hakem.csv:134 ; DURUM.md:433
 V013:191,V013,brijeshkanodia/black-litterman-lstm-nifty50,191,HAM:V014:918,G6_V3,YOK,,G_ML,ml,,stratejiler/v3_adaylar/on_eleme.csv:1490
 V013:192,V013,XiaoYunhan/CommoditySample,192,HAM:V014:930,G6_V3,YOK,,H_BIZIM_EVRENDE_UYGULANAMAZ,veri_diger,,stratejiler/v3_adaylar/on_eleme.csv:1491 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:470 ; stratejiler/v3_adaylar/veri_yok_etiket_tur6.csv:258 ; DURUM.md:434
-V013:193,V013,rishabh0022/Statistical-Arbitrage,193,HAM:V014:993,G6_V3,YOK,,F_YASAK_TIP,lookahead,,stratejiler/v3_adaylar/on_eleme.csv:1492 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:471
+V013:193,V013,rishabh0022/Statistical-Arbitrage,193,HAM:V014:993,G6_V3,YOK,,D_KODLANMADI_NEDENLI,lookahead,,stratejiler/v3_adaylar/on_eleme.csv:1492 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:471
 V013:194,V013,Hanif-DataPactAdvisory/Backtesting-a-Moving-Average-Crossover-Strategy,194,HAM:V014:992,G6_V3,BENZER,swing__ma-kesisim,D_KODLANMADI_NEDENLI,benzer_var,,stratejiler/v3_adaylar/on_eleme.csv:1493 ; sonuclar/hesap_defteri/ara/kod_kaydi.csv#swing__ma-kesisim
 V013:195,V013,oscarholst/portfolio-optimization-ml,195,HAM:V014:991,G6_V3,YOK,,G_ML,ml,,stratejiler/v3_adaylar/on_eleme.csv:1494
 V013:196,V013,hlazevedo/macro-signal-backtester,196,HAM:V014:990,G6_V3,YOK,,D_KODLANMADI_NEDENLI,veri_yok,,stratejiler/v3_adaylar/on_eleme.csv:1495 ; stratejiler/v3_adaylar/veri_yok_etiket_tur6.csv:274 ; DURUM.md:434
@@ -6131,7 +6131,7 @@ V013:325,V013,ilahuerta-IA/backtrader-multi-asset-strategy,325,HAM:V014:49,G6_V3
 V013:326,V013,esdrastrade/Market_Manus,326,HAM:V014:263,G6_V3,BENZER,dis__confluence-rank,D_KODLANMADI_NEDENLI,benzer_var,,stratejiler/v3_adaylar/on_eleme.csv:1625 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:502 ; stratejiler/v3_adaylar/on_eleme_tur3.csv:76 ; sonuclar/hesap_defteri/ara/kod_kaydi.csv#dis__confluence-rank
 V013:327,V013,parth-6-5-4/PolyHedgeRL-Multi-Layered-Option-Hedging-Using-Deep-RL,327,HAM:V014:260,G6_V3,YOK,,G_ML,ml,,stratejiler/v3_adaylar/on_eleme.csv:1626
 V013:328,V013,Gupta-027/Crude-Oil-Futures-Market-Behaviour-Backtesting-Study,328,HAM:V014:258,G6_V3,BENZER,dis__ma-cift-cross,D_KODLANMADI_NEDENLI,benzer_var,,stratejiler/v3_adaylar/on_eleme.csv:1627 ; sonuclar/hesap_defteri/ara/kod_kaydi.csv#dis__ma-cift-cross
-V013:329,V013,Tjindl/pairs-trading,329,HAM:V014:257,G6_V3,YOK,,F_YASAK_TIP,lookahead,,stratejiler/v3_adaylar/on_eleme.csv:1628
+V013:329,V013,Tjindl/pairs-trading,329,HAM:V014:257,G6_V3,YOK,,D_KODLANMADI_NEDENLI,lookahead,,stratejiler/v3_adaylar/on_eleme.csv:1628
 V013:330,V013,octaviodegodoy/kalman-pairs-trading,330,HAM:V014:52,G6_V3,TEKRAR,V014:52,TEKRAR,kopya,,stratejiler/v3_adaylar/on_eleme.csv:1629 ; stratejiler/v3_adaylar/adaylar.csv:43
 V013:331,V013,Aries744/BTC-Simple-RSI-Strategy,331,HAM:V014:255,G6_V3,TEKRAR,V014:255,TEKRAR,kopya,,stratejiler/v3_adaylar/on_eleme.csv:1630 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:503 ; stratejiler/v3_adaylar/adaylar.csv:98
 V013:332,V013,XabiBlaz/Regime-Aware-trading-strategy,332,HAM:V014:230,G6_V3,BENZER,dis__z65-rejim,D_KODLANMADI_NEDENLI,benzer_var,,stratejiler/v3_adaylar/on_eleme.csv:1631 ; sonuclar/hesap_defteri/ara/kod_kaydi.csv#dis__z65-rejim
@@ -6189,7 +6189,7 @@ V013:383,V013,AdobyY/TA-Bot,383,HAM:V014:169,G6_V3,TEKRAR,V014:169,TEKRAR,kopya,
 V013:384,V013,pearchew/commodity-fx-underreaction,384,HAM:V014:168,G6_V3,YOK,,H_BIZIM_EVRENDE_UYGULANAMAZ,forex_veri,,stratejiler/v3_adaylar/on_eleme.csv:1683 ; stratejiler/v3_adaylar/veri_yok_etiket_tur6.csv:286 ; DURUM.md:434
 V013:385,V013,anujkushwaha612/Anuj_Kushwaha_24b0398,385,HAM:V014:166,G6_V3,YOK,,G_ML,ml,,stratejiler/v3_adaylar/on_eleme.csv:1684 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:515
 V013:386,V013,CalmDude/my_script_project,386,HAM:V013:386,G6_V3,YOK,,D_KODLANMADI_NEDENLI,oncelik_disi,,stratejiler/v3_adaylar/on_eleme.csv:1685 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:516 ; stratejiler/v3_adaylar/adaylar.csv:136 ; stratejiler/v3_adaylar/aileler_v3.csv:73 ; stratejiler/v3_adaylar/fable_hakem.csv:136 ; DURUM.md:433
-V013:387,V013,mnyika-quant/btc-usd-elliott-wave-backtest,387,HAM:V014:162,G6_V3,YOK,,F_YASAK_TIP,yasak_diger,,stratejiler/v3_adaylar/on_eleme.csv:1686 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:517 ; stratejiler/v3_adaylar/on_eleme_tur3.csv:80
+V013:387,V013,mnyika-quant/btc-usd-elliott-wave-backtest,387,HAM:V014:162,G6_V3,YOK,,D_KODLANMADI_NEDENLI,on_eleme_yasak_diger,,stratejiler/v3_adaylar/on_eleme.csv:1686 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:517 ; stratejiler/v3_adaylar/on_eleme_tur3.csv:80
 V013:388,V013,adam-s/volatio,388,HAM:V014:161,G6_V3,YOK,,H_BIZIM_EVRENDE_UYGULANAMAZ,opsiyon,,stratejiler/v3_adaylar/on_eleme.csv:1687 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:518 ; stratejiler/v3_adaylar/veri_yok_etiket_tur6.csv:473 ; DURUM.md:434
 V013:389,V013,yb-vicki/NSE_ANALYSIS,389,HAM:V014:77,G6_V3,YOK,,H_BIZIM_EVRENDE_UYGULANAMAZ,hisse_kesitsel,,stratejiler/v3_adaylar/on_eleme.csv:1688 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:519 ; stratejiler/v3_adaylar/veri_yok_etiket_tur6.csv:474 ; DURUM.md:434
 V013:390,V013,Mario263/SystematicTrading-ABhishek,390,HAM:V014:158,G6_V3,BENZER,swing__macd-sinyal,D_KODLANMADI_NEDENLI,benzer_var,,stratejiler/v3_adaylar/on_eleme.csv:1689 ; sonuclar/hesap_defteri/ara/kod_kaydi.csv#swing__macd-sinyal
@@ -6215,11 +6215,11 @@ V013:409,V013,KushT00/nifty-quant-suite,409,HAM:V014:404,G6_V3,YOK,,H_BIZIM_EVRE
 V013:410,V013,ananyad5/Long-short,410,HAM:V014:399,G6_V3,BENZER,pf__sinif_kesit_mom,D_KODLANMADI_NEDENLI,benzer_var,,stratejiler/v3_adaylar/on_eleme.csv:1709 ; sonuclar/hesap_defteri/ara/kod_kaydi.csv#pf__sinif_kesit_mom
 V013:411,V013,shaikhmubin02/multi-period-portfolio-optimization,411,HAM:V014:398,G6_V3,YOK,,G_ML,ml,,stratejiler/v3_adaylar/on_eleme.csv:1710
 V013:412,V013,NavyBlueCheese/ma-crossover-backtest,412,HAM:V014:397,G6_V3,BENZER,swing__ma-kesisim,D_KODLANMADI_NEDENLI,benzer_var,,stratejiler/v3_adaylar/on_eleme.csv:1711 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:527 ; sonuclar/hesap_defteri/ara/kod_kaydi.csv#swing__ma-kesisim
-V013:413,V013,JoshTKx/magnificent7-backtest,413,HAM:V014:396,G6_V3,YOK,,F_YASAK_TIP,lookahead,,stratejiler/v3_adaylar/on_eleme.csv:1712 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:528 ; stratejiler/v3_adaylar/on_eleme_tur3.csv:82
+V013:413,V013,JoshTKx/magnificent7-backtest,413,HAM:V014:396,G6_V3,YOK,,D_KODLANMADI_NEDENLI,lookahead,,stratejiler/v3_adaylar/on_eleme.csv:1712 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:528 ; stratejiler/v3_adaylar/on_eleme_tur3.csv:82
 V013:414,V013,rajath-s-2/fundamentals-equity-screen,414,HAM:V014:394,G6_V3,YOK,,D_KODLANMADI_NEDENLI,veri_yok,,stratejiler/v3_adaylar/on_eleme.csv:1713 ; stratejiler/v3_adaylar/veri_yok_etiket_tur6.csv:293 ; DURUM.md:434
 V013:415,V013,GeorgeSedgwick/event-driven-backtester-v2,415,HAM:V014:392,G6_V3,YOK,,G_ML,ml,,stratejiler/v3_adaylar/on_eleme.csv:1714 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:529
 V013:416,V013,amit943c/MultiFactorStockRS,416,HAM:V014:13,G6_V3,BENZER,pf__rotasyon,D_KODLANMADI_NEDENLI,benzer_var,,stratejiler/v3_adaylar/on_eleme.csv:1715 ; sonuclar/hesap_defteri/ara/kod_kaydi.csv#pf__rotasyon
-V013:417,V013,tauheed1502/Fama-French-3-Factor-Regression-Analysis-on-Equity-Returns,417,HAM:V014:390,G6_V3,YOK,,F_YASAK_TIP,lookahead,,stratejiler/v3_adaylar/on_eleme.csv:1716 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:530 ; stratejiler/v3_adaylar/on_eleme_tur3.csv:83
+V013:417,V013,tauheed1502/Fama-French-3-Factor-Regression-Analysis-on-Equity-Returns,417,HAM:V014:390,G6_V3,YOK,,D_KODLANMADI_NEDENLI,lookahead,,stratejiler/v3_adaylar/on_eleme.csv:1716 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:530 ; stratejiler/v3_adaylar/on_eleme_tur3.csv:83
 V013:418,V013,rajath-s-2/crypto-stat-arb-system,418,HAM:V014:388,G6_V3,YOK,,D_KODLANMADI_NEDENLI,kod_yok,,stratejiler/v3_adaylar/on_eleme.csv:1717 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:531
 V013:419,V013,jinwei-ang/QuantConnect-Strategy-Backtest,419,HAM:V014:387,G6_V3,YOK,,D_KODLANMADI_NEDENLI,veri_yok,,stratejiler/v3_adaylar/on_eleme.csv:1718 ; stratejiler/v3_adaylar/veri_yok_etiket_tur6.csv:294 ; DURUM.md:434
 V013:420,V013,pranathi1729/Adaptive-pairs-trading-with-kalman-filter,420,HAM:V014:386,G6_V3,YOK,,G_ML,ml,,stratejiler/v3_adaylar/on_eleme.csv:1719
@@ -6242,7 +6242,7 @@ V013:436,V013,samuelahou-g20/MM-Automation,436,HAM:V014:457,G6_V3,YOK,,H_BIZIM_E
 V013:437,V013,Jamie1377/EasyA-Consensus-Hackathon---Toronto,437,HAM:V014:5,G6_V3,YOK,,G_ML,ml,,stratejiler/v3_adaylar/on_eleme.csv:1736 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:538
 V013:438,V013,hamedator/advanced-pinescript-strategy-v6,438,HAM:V014:454,G6_V3,YOK,,D_KODLANMADI_NEDENLI,kod_yok,,stratejiler/v3_adaylar/on_eleme.csv:1737 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:539
 V013:439,V013,daudahmedch/goldgridpro,439,HAM:V014:453,G6_V3,YOK,,F_YASAK_TIP,martingale,,stratejiler/v3_adaylar/on_eleme.csv:1738
-V013:440,V013,ADRIANVM117/data-science-portfolio,440,HAM:V014:7,G6_V3,YOK,,F_YASAK_TIP,lookahead,,stratejiler/v3_adaylar/on_eleme.csv:1739 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:540
+V013:440,V013,ADRIANVM117/data-science-portfolio,440,HAM:V014:7,G6_V3,YOK,,D_KODLANMADI_NEDENLI,lookahead,,stratejiler/v3_adaylar/on_eleme.csv:1739 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:540
 V013:441,V013,FatYoshi17/Bollinger-Trading-,441,HAM:V014:449,G6_V3,YOK,,G_ML,ml,,stratejiler/v3_adaylar/on_eleme.csv:1740
 V013:442,V013,davidcagoh/feishu,442,HAM:V014:447,G6_V3,YOK,,H_BIZIM_EVRENDE_UYGULANAMAZ,orderbook,,stratejiler/v3_adaylar/on_eleme.csv:1741 ; stratejiler/v3_adaylar/veri_yok_etiket_tur6.csv:297 ; DURUM.md:434
 V013:443,V013,dbl04/digital-asset-backtester,443,HAM:V014:445,G6_V3,BENZER,swing__bant-donus,D_KODLANMADI_NEDENLI,benzer_var,,stratejiler/v3_adaylar/on_eleme.csv:1742 ; sonuclar/hesap_defteri/ara/kod_kaydi.csv#swing__bant-donus
@@ -6330,7 +6330,7 @@ V013:524,V013,Leotaby/scalpgold-sniper-ea,524,HAM:V014:48,G6_V3,YOK,,D_KODLANMAD
 V013:525,V013,bpranavb/volatility_trading_strategy,525,HAM:V014:69,G6_V3,YOK,,G_ML,ml,,stratejiler/v3_adaylar/on_eleme.csv:1824
 V013:526,V013,adhamkhaled787/Ishaara,526,HAM:V014:229,G6_V3,YOK,,G_ML,ml,,stratejiler/v3_adaylar/on_eleme.csv:1825
 V013:527,V013,SandPearlStone/trading-bot,527,HAM:V014:103,G6_V3,YOK,,G_ML,ml,,stratejiler/v3_adaylar/on_eleme.csv:1826
-V013:528,V013,KASHAPP10/statistical-arbitrage-crypto,528,HAM:V014:648,G6_V3,YOK,,F_YASAK_TIP,lookahead,,stratejiler/v3_adaylar/on_eleme.csv:1827 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:564
+V013:528,V013,KASHAPP10/statistical-arbitrage-crypto,528,HAM:V014:648,G6_V3,YOK,,D_KODLANMADI_NEDENLI,lookahead,,stratejiler/v3_adaylar/on_eleme.csv:1827 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:564
 V013:529,V013,phphlio1/VinBet-Ensembled,529,HAM:V014:639,G6_V3,YOK,,G_ML,ml,,stratejiler/v3_adaylar/on_eleme.csv:1828
 V013:530,V013,kvnishkdhiman/Regime-Conditional-Trading-System,530,HAM:V014:632,G6_V3,YOK,,G_ML,ml,,stratejiler/v3_adaylar/on_eleme.csv:1829
 V013:531,V013,dhir1007/nanoARB,531,HAM:V014:310,G6_V3,YOK,,D_KODLANMADI_NEDENLI,veri_yok,,stratejiler/v3_adaylar/on_eleme.csv:1830
@@ -6376,7 +6376,7 @@ V013:570,V013,Asura-lab/Munkhdorj_Predictrix,570,HAM:V014:191,G6_V3,YOK,,G_ML,ml
 V013:571,V013,byron92m-stack/bitcoin-analysis,571,HAM:V014:192,G6_V3,YOK,,G_ML,ml,,stratejiler/v3_adaylar/on_eleme.csv:1870
 V013:572,V013,RPala2703/order-book-imbalance,572,HAM:V014:194,G6_V3,YOK,,D_KODLANMADI_NEDENLI,veri_yok,,stratejiler/v3_adaylar/on_eleme.csv:1871 ; stratejiler/v3_adaylar/veri_yok_etiket_tur6.csv:122 ; DURUM.md:434
 V013:573,V013,Xzmjj/AdaptiveAI_Scalper_v1,573,HAM:V014:766,G6_V3,YOK,,D_KODLANMADI_NEDENLI,tekrar_kart_yok,,stratejiler/v3_adaylar/on_eleme.csv:1872 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:576 ; stratejiler/v3_adaylar/REDDEDILENLER_tur2.txt:31
-V013:574,V013,rizwann2912/sol-ray-bot,574,HAM:V014:203,G6_V3,YOK,,F_YASAK_TIP,lookahead,,stratejiler/v3_adaylar/on_eleme.csv:1873 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:577
+V013:574,V013,rizwann2912/sol-ray-bot,574,HAM:V014:203,G6_V3,YOK,,D_KODLANMADI_NEDENLI,lookahead,,stratejiler/v3_adaylar/on_eleme.csv:1873 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:577
 V013:575,V013,pranati2901/SG-HK-Roostoo,575,HAM:V014:220,G6_V3,YOK,,G_ML,ml,,stratejiler/v3_adaylar/on_eleme.csv:1874
 V013:576,V013,yanstd888/institutional-smc-scalper-mt5,576,HAM:V014:735,G6_V3,YOK,,G_ML,ml,,stratejiler/v3_adaylar/on_eleme.csv:1875
 V013:577,V013,Draichi/T-1000,577,HAM:V014:723,G6_V3,YOK,,G_ML,ml,,stratejiler/v3_adaylar/on_eleme.csv:1876
@@ -6407,11 +6407,11 @@ V017:15,V017,NadirAliOfficial/eurusd-scalper-ea,15,HAM:V014:119,G6_V3,YOK,,D_KOD
 V017:16,V017,SMalaekeh/qqq-options-alpha-research,16,HAM:V014:123,G6_V3,YOK,,G_ML,ml,,stratejiler/v3_adaylar/on_eleme.csv:1901
 V017:17,V017,andywarui/xauusd-ai-trading-bot,17,HAM:V014:124,G6_V3,YOK,,G_ML,ml,,stratejiler/v3_adaylar/on_eleme.csv:1902
 V017:18,V017,NadirAliOfficial/contrarian-strategy,18,KOD:v3__z-skor-karsit,G6_V3,KOD,v3__z-skor-karsit,KOD,,,stratejiler/v3_adaylar/on_eleme.csv:1903 ; stratejiler/v3_adaylar/adaylar.csv:72 ; stratejiler/v3_adaylar/kodlama_v3.csv:71 ; sonuclar/hesap_defteri/ara/kod_kaydi.csv#v3__z-skor-karsit
-V017:19,V017,BuyMeAnIcecream/freqtrade-strategies,19,HAM:V014:127,G6_V3,YOK,,F_YASAK_TIP,yasak_diger,,stratejiler/v3_adaylar/on_eleme.csv:1904 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:584 ; stratejiler/v3_adaylar/on_eleme_tur3.csv:88
+V017:19,V017,BuyMeAnIcecream/freqtrade-strategies,19,HAM:V014:127,G6_V3,YOK,,D_KODLANMADI_NEDENLI,on_eleme_yasak_diger,,stratejiler/v3_adaylar/on_eleme.csv:1904 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:584 ; stratejiler/v3_adaylar/on_eleme_tur3.csv:88
 V017:20,V017,KamranAliOfficial/AuroraPremiumEA,20,HAM:V014:131,G6_V3,YOK,,D_KODLANMADI_NEDENLI,kod_yok,,stratejiler/v3_adaylar/on_eleme.csv:1905 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:585
 V017:21,V017,GifariKemal/SURGE-WSI,21,HAM:V014:133,G6_V3,YOK,,G_ML,ml,,stratejiler/v3_adaylar/on_eleme.csv:1906
 V017:22,V017,piezzy/hybrid-lstm-xgboost-portfolio-optimizer,22,HAM:V014:135,G6_V3,YOK,,G_ML,ml,,stratejiler/v3_adaylar/on_eleme.csv:1907
-V017:23,V017,RyanXiaoo/crypto-trader,23,HAM:V014:136,G6_V3,YOK,,F_YASAK_TIP,lookahead,,stratejiler/v3_adaylar/on_eleme.csv:1908 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:586
+V017:23,V017,RyanXiaoo/crypto-trader,23,HAM:V014:136,G6_V3,YOK,,D_KODLANMADI_NEDENLI,lookahead,,stratejiler/v3_adaylar/on_eleme.csv:1908 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:586
 V017:24,V017,andyandikko/Trading_Competition_UChicago,24,HAM:V014:137,G6_V3,YOK,,G_ML,ml,,stratejiler/v3_adaylar/on_eleme.csv:1909
 V017:25,V017,aretephi/MTF-Confluence-Trend,25,HAM:V014:138,G6_V3,BENZER,swing__supertrend-psar,D_KODLANMADI_NEDENLI,benzer_var,,stratejiler/v3_adaylar/on_eleme.csv:1910 ; sonuclar/hesap_defteri/ara/kod_kaydi.csv#swing__supertrend-psar
 V017:26,V017,CyN1ckal/CyNickal-Software-Terminal,26,HAM:V014:139,G6_V3,YOK,,D_KODLANMADI_NEDENLI,arac_sablon,,stratejiler/v3_adaylar/on_eleme.csv:1911
@@ -6500,7 +6500,7 @@ V017:108,V017,NDAR123909/ou-statarb,108,HAM:V014:788,G6_V3,YOK,,D_KODLANMADI_NED
 V017:109,V017,aleks-drozy/fyp-trading-strategy,109,HAM:V014:790,G6_V3,YOK,,D_KODLANMADI_NEDENLI,veri_yok,,stratejiler/v3_adaylar/on_eleme.csv:1994 ; stratejiler/v3_adaylar/veri_yok_etiket_tur6.csv:304 ; DURUM.md:434
 V017:110,V017,investmentbico/futurestradingstrategies,110,HAM:V014:791,G6_V3,YOK,,H_BIZIM_EVRENDE_UYGULANAMAZ,alt_1dk,,stratejiler/v3_adaylar/on_eleme.csv:1995 ; stratejiler/v3_adaylar/veri_yok_etiket_tur6.csv:305 ; DURUM.md:434
 V017:111,V017,unbalancedparentheses/finance_research,111,HAM:V014:792,G6_V3,YOK,,H_BIZIM_EVRENDE_UYGULANAMAZ,opsiyon,,stratejiler/v3_adaylar/on_eleme.csv:1996 ; stratejiler/v3_adaylar/veri_yok_etiket_tur6.csv:306 ; DURUM.md:434
-V017:112,V017,tranduy216/auto-alert-gg-chat,112,HAM:V014:793,G6_V3,YOK,,F_YASAK_TIP,lookahead,,stratejiler/v3_adaylar/on_eleme.csv:1997 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:604 ; stratejiler/v3_adaylar/on_eleme_tur3.csv:92
+V017:112,V017,tranduy216/auto-alert-gg-chat,112,HAM:V014:793,G6_V3,YOK,,D_KODLANMADI_NEDENLI,lookahead,,stratejiler/v3_adaylar/on_eleme.csv:1997 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:604 ; stratejiler/v3_adaylar/on_eleme_tur3.csv:92
 V017:113,V017,benwaldner/Fundamental-Factor-Mining,113,HAM:V014:795,G6_V3,YOK,,D_KODLANMADI_NEDENLI,veri_yok,,stratejiler/v3_adaylar/on_eleme.csv:1998 ; stratejiler/v3_adaylar/veri_yok_etiket_tur6.csv:307 ; DURUM.md:434
 V017:114,V017,johnkimdy/helix_trading,114,HAM:V014:796,G6_V3,YOK,,G_ML,ml,,stratejiler/v3_adaylar/on_eleme.csv:1999
 V017:115,V017,Dadikusumakumari/Algorithmic-trading-of-BTC-USDT,115,HAM:V014:797,G6_V3,YOK,,G_ML,ml,,stratejiler/v3_adaylar/on_eleme.csv:2000
@@ -6508,7 +6508,7 @@ V017:116,V017,upupnoah/noahroboros,116,KOD:v3__rsi32-yon-hedef4,G6_V3,TEKRAR,V01
 V017:117,V017,amit943c/factor-decay-lab,117,HAM:V014:800,G6_V3,YOK,,H_BIZIM_EVRENDE_UYGULANAMAZ,hisse_kesitsel,,stratejiler/v3_adaylar/on_eleme.csv:2002 ; stratejiler/v3_adaylar/veri_yok_etiket_tur6.csv:308 ; DURUM.md:434
 V017:118,V017,srn91/multi-agent-trading-system,118,HAM:V014:801,G6_V3,YOK,,D_KODLANMADI_NEDENLI,tekrar_kart_yok,,stratejiler/v3_adaylar/on_eleme.csv:2003 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:605 ; stratejiler/v3_adaylar/REDDEDILENLER_tur2.txt:37
 V017:119,V017,shiviancodes/nexus,119,HAM:V014:802,G6_V3,YOK,,D_KODLANMADI_NEDENLI,veri_yok,,stratejiler/v3_adaylar/on_eleme.csv:2004 ; stratejiler/v3_adaylar/veri_yok_etiket_tur6.csv:309 ; DURUM.md:434
-V017:120,V017,RaajitSingh1306/Volatility-Regime-Classifier,120,HAM:V014:803,G6_V3,YOK,,F_YASAK_TIP,yasak_diger,,stratejiler/v3_adaylar/on_eleme.csv:2005
+V017:120,V017,RaajitSingh1306/Volatility-Regime-Classifier,120,HAM:V014:803,G6_V3,YOK,,G_ML,ml,,stratejiler/v3_adaylar/on_eleme.csv:2005
 V017:121,V017,denis-mikhalev/reinforcement-learning-trading-agent,121,HAM:V014:804,G6_V3,YOK,,G_ML,ml,,stratejiler/v3_adaylar/on_eleme.csv:2006
 V017:122,V017,wt2381-ai/pair_trading,122,HAM:V014:806,G6_V3,YOK,,BELIRSIZ,benzer_var,,stratejiler/v3_adaylar/on_eleme.csv:2007 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:606
 V017:123,V017,Ayaan-Khalid/quantitative-finance,123,HAM:V014:807,G6_V3,BENZER,swing__ma-kesisim,D_KODLANMADI_NEDENLI,benzer_var,,stratejiler/v3_adaylar/on_eleme.csv:2008 ; sonuclar/hesap_defteri/ara/kod_kaydi.csv#swing__ma-kesisim
@@ -6532,7 +6532,7 @@ V017:140,V017,sohanHajra/quant_trading_system,140,HAM:V014:839,G6_V3,BENZER,swin
 V017:141,V017,Pankaj-Kumar2003/nq-orb-strategy,141,HAM:V014:845,G6_V3,BENZER,daytrade__orb,D_KODLANMADI_NEDENLI,benzer_var,,stratejiler/v3_adaylar/on_eleme.csv:2026 ; sonuclar/hesap_defteri/ara/kod_kaydi.csv#daytrade__orb
 V017:142,V017,Waqar53/QauntXAlgo,142,HAM:V014:847,G6_V3,BENZER,swing__ma-kesisim,D_KODLANMADI_NEDENLI,benzer_var,,stratejiler/v3_adaylar/on_eleme.csv:2027 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:612 ; stratejiler/v3_adaylar/on_eleme_tur3.csv:94 ; sonuclar/hesap_defteri/ara/kod_kaydi.csv#swing__ma-kesisim
 V017:143,V017,neelshah1903/systematic-active-industry-rotation,143,HAM:V014:848,G6_V3,YOK,,D_KODLANMADI_NEDENLI,veri_yok,,stratejiler/v3_adaylar/on_eleme.csv:2028 ; stratejiler/v3_adaylar/veri_yok_etiket_tur6.csv:312 ; DURUM.md:434
-V017:144,V017,VeinDevTtv/vein_smc_bot,144,HAM:V014:854,G6_V3,YOK,,F_YASAK_TIP,lookahead,,stratejiler/v3_adaylar/on_eleme.csv:2029 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:613 ; stratejiler/v3_adaylar/on_eleme_tur3_gorev2.csv:4
+V017:144,V017,VeinDevTtv/vein_smc_bot,144,HAM:V014:854,G6_V3,YOK,,D_KODLANMADI_NEDENLI,lookahead,,stratejiler/v3_adaylar/on_eleme.csv:2029 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:613 ; stratejiler/v3_adaylar/on_eleme_tur3_gorev2.csv:4
 V009:1,V009,TradingView ETH 1H script (5BQgShxl),1,HAM:V009:1,G6_V3,YOK,,D_KODLANMADI_NEDENLI,kod_yok,,stratejiler/v3_adaylar/on_eleme.csv:2030 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:614
 V009:2,V009,Emintrader trading system (Elite Trader),2,HAM:V009:2,G6_V3,YOK,,D_KODLANMADI_NEDENLI,kod_yok,,stratejiler/v3_adaylar/on_eleme.csv:2031 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:615
 V009:3,V009,QC gomulu backtest 9f6d23eb (hisse Sharpe secimi),3,HAM:V009:3,G6_V3,YOK,,D_KODLANMADI_NEDENLI,kaynak_okunamadi,,stratejiler/v3_adaylar/on_eleme.csv:2032 ; stratejiler/v3_adaylar/REDDEDILENLER.txt:4
@@ -6574,14 +6574,14 @@ V002:17,V002,小市值因子选股策略,17,HAM:V003:34,G6_V3,YOK,,H_BIZIM_EVREN
 V002:18,V002,双MA交差タイミング (10/160 ve optimize 43/144),18,HAM:V003:39,G6_V3,BENZER,swing__ma-kesisim,D_KODLANMADI_NEDENLI,benzer_var,,stratejiler/v3_adaylar/on_eleme.csv:2068 ; sonuclar/hesap_defteri/ara/kod_kaydi.csv#swing__ma-kesisim
 V002:19,V002,3MA クロス EA (MT4),19,HAM:V003:40,G6_V3,BENZER,swing__ma-kesisim,D_KODLANMADI_NEDENLI,benzer_var,,stratejiler/v3_adaylar/on_eleme.csv:2069 ; sonuclar/hesap_defteri/ara/kod_kaydi.csv#swing__ma-kesisim
 V002:20,V002,pSAR (パラボリックSAR) EA (MT4),20,HAM:V003:41,G6_V3,BENZER,swing__supertrend-psar,D_KODLANMADI_NEDENLI,benzer_var,,stratejiler/v3_adaylar/on_eleme.csv:2070 ; sonuclar/hesap_defteri/ara/kod_kaydi.csv#swing__supertrend-psar
-V002:21,V002,"error EA (long only, MT4)",21,HAM:V003:42,G6_V3,YOK,,F_YASAK_TIP,yasak_diger,,stratejiler/v3_adaylar/on_eleme.csv:2071
+V002:21,V002,"error EA (long only, MT4)",21,HAM:V003:42,G6_V3,YOK,,D_KODLANMADI_NEDENLI,on_eleme_yasak_diger,,stratejiler/v3_adaylar/on_eleme.csv:2071
 V002:22,V002,"Billy expert (M15 3陰線+M1/M5 Stoch, long only, MT4)",22,HAM:V003:43,G6_V3,YOK,,H_BIZIM_EVRENDE_UYGULANAMAZ,forex_veri,,stratejiler/v3_adaylar/on_eleme.csv:2072 ; stratejiler/v3_adaylar/veri_yok_etiket_tur6.csv:323 ; DURUM.md:434
 V002:23,V002,マルチ通貨グリッド/マーチンゲール EA,23,HAM:V003:44,G6_V3,YOK,,F_YASAK_TIP,martingale,,stratejiler/v3_adaylar/on_eleme.csv:2073
 V002:24,V002,EMA+Williams %R EA (MT4),24,HAM:V003:45,G6_V3,BENZER,scalp__stokastik-donus,D_KODLANMADI_NEDENLI,benzer_var,,stratejiler/v3_adaylar/on_eleme.csv:2074 ; sonuclar/hesap_defteri/ara/kod_kaydi.csv#scalp__stokastik-donus
 V002:25,V002,"EA Kloss (Stoch + CCI の水準ブレイク, MT4)",25,HAM:V003:46,G6_V3,YOK,,D_KODLANMADI_NEDENLI,kod_yok,,stratejiler/v3_adaylar/on_eleme.csv:2075 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:623
 V002:26,V002,"Doubler (両方向同時ポジション, MT4 ドラフト)",26,HAM:V003:47,G6_V3,YOK,,D_KODLANMADI_NEDENLI,kod_yok,,stratejiler/v3_adaylar/on_eleme.csv:2076 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:624
 V002:27,V002,RSI_MA (RSI+移動平均) EA (MT4),27,HAM:V003:48,G6_V3,YOK,,D_KODLANMADI_NEDENLI,kod_yok,,stratejiler/v3_adaylar/on_eleme.csv:2077 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:625
-V002:28,V002,"Pinball machine (hedging, MT4)",28,HAM:V003:49,G6_V3,YOK,,F_YASAK_TIP,yasak_diger,,stratejiler/v3_adaylar/on_eleme.csv:2078
+V002:28,V002,"Pinball machine (hedging, MT4)",28,HAM:V003:49,G6_V3,YOK,,D_KODLANMADI_NEDENLI,on_eleme_yasak_diger,,stratejiler/v3_adaylar/on_eleme.csv:2078
 V002:29,V002,"MA Reverse (MA乖離で逆張り, ATR フィルタ, MT4)",29,HAM:V003:50,G6_V3,YOK,,H_BIZIM_EVRENDE_UYGULANAMAZ,forex_veri,,stratejiler/v3_adaylar/on_eleme.csv:2079 ; stratejiler/v3_adaylar/veri_yok_etiket_tur6.csv:325 ; DURUM.md:434
 V002:30,V002,"AVer12345 (Aver4Sto + Postzigzag, USDJPY専用, MT4)",30,HAM:V003:51,G6_V3,YOK,,F_YASAK_TIP,ortalama_dusurme,,stratejiler/v3_adaylar/on_eleme.csv:2080
 V002:31,V002,"exp_Amstell (TP 150pt 到達で決済, MT4)",31,HAM:V003:52,G6_V3,YOK,,F_YASAK_TIP,stopsuz_grid,,stratejiler/v3_adaylar/on_eleme.csv:2081
@@ -6891,7 +6891,7 @@ V005:5,V005,"Momentum: geçmiş 26 hafta (K=26) kazananı al, 8 hafta (J=8) tut;
 V005:6,V005,"Hareketli ortalama tabanlı basit zamanlama; 4619 varyant, ""robust"" varyant seçimi",6,HAM:V005:6,G6_V3,YOK,,D_KODLANMADI_NEDENLI,kod_yok,,stratejiler/v3_adaylar/on_eleme.csv:2385 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:741
 V005:7,V005,"DAX gap kurulumu (5 puan gap, stop çarpanı 1,3/1,8)",7,HAM:V005:7,G6_V3,BENZER,swing__gap-doldurma,D_KODLANMADI_NEDENLI,benzer_var,,stratejiler/v3_adaylar/on_eleme.csv:2386 ; sonuclar/hesap_defteri/ara/kod_kaydi.csv#swing__gap-doldurma
 V005:8,V005,Turnaround Tuesday (34 günlük hareketli ort.),8,HAM:V005:8,G6_V3,YOK,,D_KODLANMADI_NEDENLI,kod_yok,,stratejiler/v3_adaylar/on_eleme.csv:2387 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:742
-V005:9,V005,"IRMA algoritması (22 gösterge, 0/1 sinyal, kategori skorları)",9,HAM:V005:9,G6_V3,YOK,,F_YASAK_TIP,yasak_diger,,stratejiler/v3_adaylar/on_eleme.csv:2388 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:743 ; stratejiler/v3_adaylar/on_eleme_tur3.csv:102
+V005:9,V005,"IRMA algoritması (22 gösterge, 0/1 sinyal, kategori skorları)",9,HAM:V005:9,G6_V3,YOK,,D_KODLANMADI_NEDENLI,on_eleme_yasak_diger,,stratejiler/v3_adaylar/on_eleme.csv:2388 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:743 ; stratejiler/v3_adaylar/on_eleme_tur3.csv:102
 V005:10,V005,İtalyan hisse trading system (trend/short-long),10,HAM:V005:10,G6_V3,YOK,,D_KODLANMADI_NEDENLI,kod_yok,,stratejiler/v3_adaylar/on_eleme.csv:2389 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:744
 V005:11,V005,Ay sonu rotasyonu (Ekim-Kasım takvim kuralı),11,HAM:V005:11,G6_V3,BENZER,dis__ay-donumu,D_KODLANMADI_NEDENLI,benzer_var,,stratejiler/v3_adaylar/on_eleme.csv:2390 ; sonuclar/hesap_defteri/ara/kod_kaydi.csv#dis__ay-donumu
 V005:12,V005,TradingView uyarılı strateji,12,HAM:V005:12,G6_V3,YOK,,D_KODLANMADI_NEDENLI,kod_yok,,stratejiler/v3_adaylar/on_eleme.csv:2391 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:745
@@ -6958,7 +6958,7 @@ V005:72,V005,"DEMA crossover (n_fast=12, n_slow=26 görünen varsayılanlar)",72
 V005:73,V005,"M5 zaman dilimi, ~90 dk işlem penceresi algoritmik EA (strateji kuralları yok)",73,HAM:V005:73,G6_V3,YOK,,D_KODLANMADI_NEDENLI,kod_yok,,stratejiler/v3_adaylar/on_eleme.csv:2452 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:776
 V005:74,V005,Simple ETF Portfolio: aylık en iyi tek ETF'e yatırım (göreceli güç),74,HAM:V005:74,G6_V3,YOK,,H_BIZIM_EVRENDE_UYGULANAMAZ,hisse_kesitsel,,stratejiler/v3_adaylar/on_eleme.csv:2453 ; stratejiler/v3_adaylar/veri_yok_etiket_tur6.csv:398 ; DURUM.md:434
 V005:75,V005,"PMA + ATR trailing stop, sadece long (LongOnlyPMAMultiTimeframeATRTrailingStop)",75,HAM:V005:75,G6_V3,YOK,,H_BIZIM_EVRENDE_UYGULANAMAZ,hisse_kesitsel,,stratejiler/v3_adaylar/on_eleme.csv:2454 ; stratejiler/v3_adaylar/veri_yok_etiket_tur6.csv:399 ; DURUM.md:434
-V005:76,V005,"Bollinger bandı, rastgele parametre simülatörü ve ""iyileştirme"" (TSLab değil, kendi simülatörü)",76,HAM:V005:76,G6_V3,YOK,,F_YASAK_TIP,yasak_diger,,stratejiler/v3_adaylar/on_eleme.csv:2455 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:777 ; stratejiler/v3_adaylar/on_eleme_tur3.csv:103
+V005:76,V005,"Bollinger bandı, rastgele parametre simülatörü ve ""iyileştirme"" (TSLab değil, kendi simülatörü)",76,HAM:V005:76,G6_V3,YOK,,D_KODLANMADI_NEDENLI,on_eleme_yasak_diger,,stratejiler/v3_adaylar/on_eleme.csv:2455 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:777 ; stratejiler/v3_adaylar/on_eleme_tur3.csv:103
 V005:77,V005,"SMA Golden Short (PineScript v5, TradingView)",77,HAM:V005:77,G6_V3,BENZER,dis__ma-cift-cross,D_KODLANMADI_NEDENLI,benzer_var,,stratejiler/v3_adaylar/on_eleme.csv:2456 ; sonuclar/hesap_defteri/ara/kod_kaydi.csv#dis__ma-cift-cross
 V005:78,V005,"""Frodo"" trend/momentum robotu (TSLab, C#)",78,HAM:V005:78,G6_V3,YOK,,D_KODLANMADI_NEDENLI,kod_yok,,stratejiler/v3_adaylar/on_eleme.csv:2457 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:778
 V005:79,V005,"Martynov stratejisi ve ""Феникс"" (MA_cross) — CANLI HESAP, backtest değil",79,HAM:V005:79,G6_V3,YOK,,D_KODLANMADI_NEDENLI,kod_yok,,stratejiler/v3_adaylar/on_eleme.csv:2458 ; stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv:779
@@ -7049,7 +7049,7 @@ V010:26,V010,Wrapper-Backtrader SMA,26,HAM:V010:26,G6_V3,YOK,,D_KODLANMADI_NEDEN
 V010:27,V010,Trading Algo Nico Momentum,27,HAM:V010:27,G6_V3,YOK,,BELIRSIZ,benzer_var,,stratejiler/v3_adaylar/on_eleme.csv:2543
 V010:28,V010,Backtest-Kit MTF Suite,28,HAM:V010:28,G6_V3,YOK,,D_KODLANMADI_NEDENLI,arac_sablon,,stratejiler/v3_adaylar/on_eleme.csv:2544
 V010:29,V010,妖币动量轮转策略,29,HAM:V010:29,G6_V3,YOK,,D_KODLANMADI_NEDENLI,kod_yok,,stratejiler/v3_adaylar/on_eleme.csv:2545 ; stratejiler/v3_adaylar/on_eleme_tur3.csv:110
-V010:30,V010,币本位做空资费套利策略,30,HAM:V010:30,G6_V3,YOK,,F_YASAK_TIP,yasak_diger,,stratejiler/v3_adaylar/on_eleme.csv:2546
+V010:30,V010,币本位做空资费套利策略,30,HAM:V010:30,G6_V3,YOK,,D_KODLANMADI_NEDENLI,on_eleme_yasak_diger,,stratejiler/v3_adaylar/on_eleme.csv:2546
 V010:31,V010,首板低开策略（性能优化版）,31,HAM:V010:31,G6_V3,YOK,,D_KODLANMADI_NEDENLI,kod_yok,,stratejiler/v3_adaylar/on_eleme.csv:2547
 V010:32,V010,高股息低市盈率高增长的价投策略,32,HAM:V010:32,G6_V3,YOK,,D_KODLANMADI_NEDENLI,kod_yok,,stratejiler/v3_adaylar/on_eleme.csv:2548
 V010:33,V010,四大搅屎棍策略,33,HAM:V010:33,G6_V3,YOK,,D_KODLANMADI_NEDENLI,kod_yok,,stratejiler/v3_adaylar/on_eleme.csv:2549
@@ -7082,7 +7082,7 @@ V010:59,V010,5m RSI-DMI Scalp Strategy,59,HAM:V010:59,G6_V3,YOK,,D_KODLANMADI_NE
 V010:60,V010,PyUpbit VBS Cumulative Momentum,60,HAM:V010:60,G6_V3,YOK,,BELIRSIZ,benzer_var,,stratejiler/v3_adaylar/on_eleme.csv:2576
 V010:61,V010,MomMean Adaptive Dual Strategy,61,HAM:V010:61,G6_V3,YOK,,D_KODLANMADI_NEDENLI,oncelik_disi,,stratejiler/v3_adaylar/on_eleme.csv:2577 ; stratejiler/v3_adaylar/adaylar.csv:144 ; stratejiler/v3_adaylar/aileler_v3.csv:107 ; stratejiler/v3_adaylar/fable_hakem.csv:144 ; DURUM.md:433
 V010:62,V010,InstiFund Cross-Sectional Ranking,62,HAM:V010:62,G6_V3,YOK,,H_BIZIM_EVRENDE_UYGULANAMAZ,hisse_kesitsel,,stratejiler/v3_adaylar/on_eleme.csv:2578 ; stratejiler/v3_adaylar/veri_yok_etiket_tur6.csv:439 ; DURUM.md:434
-V010:63,V010,Hammer and Hanging Man Setup,63,HAM:V010:63,G6_V3,YOK,,F_YASAK_TIP,yasak_diger,,stratejiler/v3_adaylar/on_eleme.csv:2579 ; stratejiler/v3_adaylar/on_eleme_tur3.csv:118
+V010:63,V010,Hammer and Hanging Man Setup,63,HAM:V010:63,G6_V3,YOK,,D_KODLANMADI_NEDENLI,on_eleme_yasak_diger,,stratejiler/v3_adaylar/on_eleme.csv:2579 ; stratejiler/v3_adaylar/on_eleme_tur3.csv:118
 V010:64,V010,AlphaTrend Strategy,64,HAM:V010:64,G6_V3,BENZER,swing__supertrend-psar,D_KODLANMADI_NEDENLI,benzer_var,,stratejiler/v3_adaylar/on_eleme.csv:2580 ; sonuclar/hesap_defteri/ara/kod_kaydi.csv#swing__supertrend-psar
 V010:65,V010,Profit Maximizer (PMax) Strategy,65,HAM:V010:65,G6_V3,BENZER,swing__supertrend-psar,D_KODLANMADI_NEDENLI,benzer_var,,stratejiler/v3_adaylar/on_eleme.csv:2581 ; sonuclar/hesap_defteri/ara/kod_kaydi.csv#swing__supertrend-psar
 V010:66,V010,Stochastic Optimized Trend Tracker (SOTT),66,HAM:V010:66,G6_V3,YOK,,BELIRSIZ,benzer_var,,stratejiler/v3_adaylar/on_eleme.csv:2582
@@ -7909,7 +7909,7 @@ X005:798,X005,Classic RSI2 Mean-Reversion Strategy (SPY/TLT),798,HAM:X005:798,G8
 X005:799,X005,"Sample Mean Reversion Algorithm (Quantopian örneği, Q1500US)",799,HAM:X005:799,G8_DIS_ARASTIRMA,YOK,,H_BIZIM_EVRENDE_UYGULANAMAZ,hisse_kesitsel,,dal:claude/adoring-maxwell-q7t60g:sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/tur4_degerlendirme/yeni_199.csv#S0799
 X005:800,X005,Mean-Reversion Long for Alpaca's Pylivetrader,800,HAM:X005:800,G8_DIS_ARASTIRMA,BENZER,swing__rsi-asiri-donus,D_KODLANMADI_NEDENLI,benzer_var,evet,motor/strateji/swing/rsi_asiri_donus.py:41 ; dal:claude/adoring-maxwell-q7t60g:sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/tur4_degerlendirme/yeni_199.csv#S0800
 X005:801,X005,Pair Trade with Cointegration and Mean-Reversion Tests (USO/GLD),801,HAM:X005:801,G8_DIS_ARASTIRMA,YOK,,H_BIZIM_EVRENDE_UYGULANAMAZ,pairs,,dal:claude/adoring-maxwell-q7t60g:sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/tur4_degerlendirme/yeni_199.csv#S0801
-X005:802,X005,"Cointegration, RSI signals, Long Only (Coke/Pepsi, RSI + Williams %R)",802,HAM:X005:802,G8_DIS_ARASTIRMA,BENZER,dis__osilator-esik-and,D_KODLANMADI_NEDENLI,benzer_var,evet,motor/strateji/dis/d11h_github.py:86 ; dal:claude/adoring-maxwell-q7t60g:sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/tur4_degerlendirme/yeni_199.csv#S0802
+X005:802,X005,"Cointegration, RSI signals, Long Only (Coke/Pepsi, RSI + Williams %R)",802,HAM:X005:802,G8_DIS_ARASTIRMA,YOK,,H_BIZIM_EVRENDE_UYGULANAMAZ,pairs,,motor/strateji/dis/d11h_github.py:86 ; dal:claude/adoring-maxwell-q7t60g:sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/tur4_degerlendirme/yeni_199.csv#S0802
 X005:803,X005,"Enhancing Short-Term Mean-Reversion Strategies (Blue'nun sürümü, Rob Reider fikri)",803,HAM:X005:803,G8_DIS_ARASTIRMA,YOK,,H_BIZIM_EVRENDE_UYGULANAMAZ,hisse_kesitsel,,dal:claude/adoring-maxwell-q7t60g:sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/tur4_degerlendirme/yeni_199.csv#S0803
 X005:804,X005,Gap Up strategy (açılış boşluğunu açığa satma),804,HAM:X005:804,G8_DIS_ARASTIRMA,YOK,,H_BIZIM_EVRENDE_UYGULANAMAZ,seans_gap,,dal:claude/adoring-maxwell-q7t60g:sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/tur4_degerlendirme/yeni_199.csv#S0804
 X005:805,X005,Sector Rotation Momentum + Mean Reversion,805,HAM:X005:805,G8_DIS_ARASTIRMA,YOK,,H_BIZIM_EVRENDE_UYGULANAMAZ,hisse_kesitsel,,dal:claude/adoring-maxwell-q7t60g:sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/tur4_degerlendirme/yeni_199.csv#S0805
