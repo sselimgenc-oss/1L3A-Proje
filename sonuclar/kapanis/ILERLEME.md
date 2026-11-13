@@ -13,7 +13,9 @@ Ajan çıktısı ham haliyle `ara/`'ya yazılır; lider denetler, sonra `k*_kara
 | D: k3_p01 | ae27bb6b30ed36d0e | sürüyor |
 | D: k3_p02 | a72df6ea3aec567ef | denetlendi |
 | D: k3_p03 | a99e150252c12bccd | denetlendi |
-| D: k3_p04..p06 | (bkz. aşağı) | sürüyor |
+| D: k3_p04 | a58251fdab05aa330 | sürüyor |
+| D: k3_p05 | a2f81192b260ced7d | sürüyor |
+| D: k3_p06 | ad2d811df5cf3a147 | sürüyor |
 | D: k3_p07..p08, k4_p01..p10 | — | bekliyor |
 | E: K5, F: koşu listesi, G: koşu betiği, H: pytest, rapor | — | bekliyor |
 
