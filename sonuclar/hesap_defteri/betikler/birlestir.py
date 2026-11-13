@@ -31,9 +31,18 @@ ayar_havuz = {}
 for a in ayarlar:
     ayar_havuz[(a["hedef_kod_id"], a["ayar_id"])] = a
 kaynaklar = {r["kaynak_id"]: r for r in oku(HD / "kaynaklar.csv")}
-if (ARA / "G10_ARSIV_kaynaklar.csv").exists():
-    for r in oku(ARA / "G10_ARSIV_kaynaklar.csv"):
-        kaynaklar.setdefault(r["kaynak_id"], r)
+for ek in ("G10_ARSIV_kaynaklar.csv", "lider_ek_kaynaklar.csv"):
+    if (ARA / ek).exists():
+        for r in oku(ARA / ek):
+            kaynaklar.setdefault(r["kaynak_id"], r)
+# v1 evren WF: strateji -> (tf sayısı, en büyük n_aday) — boş adil_test için
+v1 = defaultdict(lambda: {"tf": set(), "n_aday": 0})
+for r in oku(KOK / "sonuclar" / "evren" / "2017_gelistirme" / "wf_evren.csv"):
+    v1[r["strateji"]]["tf"].add(r["tf"])
+    try:
+        v1[r["strateji"]]["n_aday"] = max(v1[r["strateji"]]["n_aday"], int(float(r["n_aday"] or 0)))
+    except ValueError:
+        pass
 
 HAM_DOSYALAR = sorted(glob.glob(str(ARA / "G*_ham.csv")))
 ALAN_HAM = ["ham_id", "kaynak_id", "kaynak_satir_no", "kaynaktaki_ad", "kisa_mantik", "aile", "eslesme", "hedef",
@@ -46,12 +55,40 @@ for p in HAM_DOSYALAR:
         r = {k: (r.get(k) or "").strip() for k in ALAN_HAM}
         r["grup"] = grup
         ham.append(r)
+# lider düzeltmeleri (ajan dosyaları değişmez; düzeltme burada uygulanır)
+duz = oku(ARA / "lider_duzeltmeleri.csv") if (ARA / "lider_duzeltmeleri.csv").exists() else []
+_idx = {r["ham_id"]: r for r in ham}
+for d in duz:
+    r = _idx.get(d["ham_id"])
+    if r is None:
+        sorunlar.append({"tur": "duzeltme_ham_yok", "ham_id": d["ham_id"], "aciklama": d["alan"]})
+        continue
+    r[d["alan"]] = d["yeni"]
+    r["not"] = (r["not"] + " | " if r["not"] else "") + "lider düzeltmesi: " + d["alan"]
+for r in ham:
+    if r["eslesme"].upper() == "AYAR" and ";" in r["ayar_id"]:
+        r["ayar_id"] = r["ayar_id"].split(";")[0].strip()
+    r["benzer_dogrulanmadi"] = "evet" if (r["eslesme"].upper() == "BENZER" and re.search(
+        r"doğrulanmadı|dogrulanmadi|doğrulanmamış|dogrulanmamis|heuristik|anahtar kelime|önceki ajan kararı|kural farkı açılmadı",
+        r["fark"] + " " + r["not"], re.I)) else ""
 ham_by = {}
 for r in ham:
     if r["ham_id"] in ham_by:
         sorunlar.append({"tur": "ham_id_tekrar", "ham_id": r["ham_id"], "aciklama": r["grup"]})
         continue
     ham_by[r["ham_id"]] = r
+
+# portföy WF aday kümesi = baglama.BAGLAMA (csv:<satir>) + varsayılan + ızgara (motor/arastirma/wf_portfoy.py::aday_listesi)
+sys.path.insert(0, str(KOK))
+from motor.portfoy.stratejiler.baglama import BAGLAMA  # noqa: E402
+BAGLAMA_SET = {(b["sinif"], int(b["satir"])) for b in BAGLAMA}
+
+def baglama_mi(hedef, ayar_id):
+    m = re.search(r"(?:baglama|csv)\w*[:=]\s*satir\s*=?\s*(\d+)|csv:(\d+)", ayar_id)
+    if not m:
+        return False
+    n = int(m.group(1) or m.group(2))
+    return (hedef, n) in BAGLAMA_SET
 
 def ayar_havuzda(hedef, ayar_id):
     a = ayar_havuz.get((hedef, ayar_id))
@@ -74,6 +111,10 @@ for r in ham:
             dogrudan[r["ham_id"]] = f"HAM:{r['ham_id']}"
     elif e == "AYAR":
         a = ayar_havuzda(h, r["ayar_id"])
+        if h in kod and a is None and baglama_mi(h, r["ayar_id"]):
+            dogrudan[r["ham_id"]] = f"KOD:{h}"
+            r["not"] = (r["not"] + " | " if r["not"] else "") + "portföy BAGLAMA ayarı (WF aday kümesinde)"
+            continue
         if h not in kod:
             sorunlar.append({"tur": "ayar_hedefi_kodda_yok", "ham_id": r["ham_id"], "aciklama": f"{h} {r['ayar_id']}"})
             dogrudan[r["ham_id"]] = f"HAM:{r['ham_id']}"
@@ -127,6 +168,35 @@ def kisalt(s, n=300):
     s = re.sub(r"\s+", " ", s or "").strip()
     return s if len(s) <= n else s[: n - 1] + "…"
 
+def adil_normal(etiket):
+    p = [x for x in etiket.split(";") if x]
+    if len(p) > 1 and "evet" in p:
+        p.remove("evet")
+    return ";".join(p)
+
+def adil_turet(k, g):
+    """B için adil_test: G0 önerisi varsa o; yoksa v1 evren WF'den (TF sayısı, ayar adayı sayısı) türetilir."""
+    if not (g.get("durum_onerisi") or "").startswith("B_"):
+        return ""
+    if g.get("adil_test_onerisi"):
+        return (adil_normal(g["adil_test_onerisi"]) + (" — " + g["adil_test_gerekce"] if g.get("adil_test_gerekce") else "")).strip()
+    v = v1.get(k)
+    if not v or not v["tf"]:
+        if g.get("v2_tf"):
+            et = ["yalniz_tek_TF"] + (["yalniz_varsayilan_ayar"] if g.get("v2_ayar_kaynagi") != "izgara" else [])
+            return ";".join(et) + f" — lider türetmesi: yalnız v2 elemesinde tek TF ({g['v2_tf']}), sabit ayar ({g.get('v2_ayar_kaynagi') or '?'}); v1 WF yok"
+        if g.get("v3_eleme"):
+            return f"yalniz_tek_TF;yalniz_varsayilan_ayar — lider türetmesi: yalnız v3 elemesi (ön kayıtlı tek ayar, tek TF: {g.get('tf_evren', '')[:60]})"
+        return "BELIRSIZ — adil test bilgisi türetilemedi"
+    et = []
+    if len(v["tf"]) == 1:
+        et.append("yalniz_tek_TF")
+    if v["n_aday"] <= 1:
+        et.append("yalniz_varsayilan_ayar")
+    gerekce = (f"lider türetmesi: v1 evren WF (35 enstrüman, 2017→2025, walk-forward) {len(v['tf'])} TF "
+               f"({','.join(sorted(v['tf']))}), {v['n_aday']} ayar adayı (varsayılan+kart/dış+ızgara)")
+    return (";".join(et) if et else "evet") + " — " + gerekce
+
 tekil = []
 for tid, rs in sorted(uyeler.items()):
     kaynak_set = sorted({x["kaynak_id"] for x in rs})
@@ -140,7 +210,7 @@ for tid, rs in sorted(uyeler.items()):
             "ad": k, "durum": g.get("durum_onerisi", "BELIRSIZ") or "BELIRSIZ", "asama": g.get("asama", ""),
             "tf_evren": g.get("tf_evren", ""), "kapi_ve_deger": g.get("kapi_ve_deger", ""),
             "yapisal_kapi": g.get("yapisal_kapi", ""),
-            "adil_test": (g.get("adil_test_onerisi", "") + (" — " + g.get("adil_test_gerekce", "") if g.get("adil_test_gerekce") else "")).strip(" —"),
+            "adil_test": adil_turet(k, g),
             "islem_sayisi": g.get("islem_sayisi", ""),
             "kod_dosyasi": g.get("kod_dosyasi") or f"{kod[k]['dosya']}:{kod[k]['sinif']}:{kod[k]['satir']}",
             "kanit_dosyasi": g.get("kanit", ""), "neden_kodu": "",
@@ -171,6 +241,8 @@ for tid, rs in sorted(uyeler.items()):
         temsil = next((x for x in rs if x["on_durum"] == durum), rs[0])
         benzer = [x for x in rs if x["eslesme"].upper() == "BENZER"]
         notlar = []
+        if any(x["benzer_dogrulanmadi"] for x in benzer):
+            notlar.append("benzer_dogrulanmadi (eşleme kaynak/önceki ajan kararı; kodla karşılaştırılmadı)")
         if benzer:
             notlar.append("fark_test_edilmedi: " + kisalt("; ".join(sorted({f"{x['hedef']} ({x['fark']})" for x in benzer})), 300))
         if temsil["not"]:
@@ -192,7 +264,7 @@ ALAN_TEKIL = ["tekil_id", "ad", "aile", "kisa_mantik", "kaynak_sayisi", "ham_say
 with open(HD / "tekil_stratejiler.csv", "w", newline="", encoding="utf-8") as f:
     w = csv.DictWriter(f, fieldnames=ALAN_TEKIL, extrasaction="ignore"); w.writeheader(); w.writerows(tekil)
 ALAN_CIKTI_HAM = ["ham_id", "kaynak_id", "kaynaktaki_ad", "kaynak_satir_no", "tekil_id", "grup", "eslesme", "hedef",
-                  "on_durum", "neden_kodu", "kanit"]
+                  "on_durum", "neden_kodu", "benzer_dogrulanmadi", "kanit"]
 with open(HD / "ham_satirlar.csv", "w", newline="", encoding="utf-8") as f:
     w = csv.DictWriter(f, fieldnames=ALAN_CIKTI_HAM, extrasaction="ignore"); w.writeheader(); w.writerows(ham)
 with open(ARA / "birlestirme_sorunlari.csv", "w", newline="", encoding="utf-8") as f:
@@ -209,6 +281,8 @@ s = {
     "kod_durum": dict(Counter(t["durum"] for t in tekil if t["tekil_id"].startswith("KOD:"))),
     "yapisal_kapi_evet": sum(1 for t in tekil if t["yapisal_kapi"] == "evet"),
     "fark_test_edilmedi": sum(1 for t in tekil if t.get("benzer_hedef")),
+    "fark_test_edilmedi_dogrulanmamis": sum(1 for t in tekil if "benzer_dogrulanmadi" in t.get("not", "")),
+    "B_adil": dict(Counter(t["adil_test"].split(" — ")[0] for t in tekil if t["durum"].startswith("B_"))),
     "kod_kaynaksiz": sum(1 for t in tekil if t["tekil_id"].startswith("KOD:") and t["ham_sayisi"] == 0),
     "sorun": dict(Counter(x["tur"] for x in sorunlar)),
 }

@@ -1,0 +1,68 @@
+{
+ "kaynak_dosya": 520,
+ "kaynak_dosya_birincil": 199,
+ "ham_satir": 8941,
+ "ham_grup": {
+  "G10_ARSIV": 105,
+  "G1_KITAP": 810,
+  "G2_DIS_ESKI": 758,
+  "G3_REPO": 1446,
+  "G4_GITHUB": 1198,
+  "G5_151_SON1AY": 189,
+  "G6_V3": 2603,
+  "G8_DIS_ARASTIRMA": 923,
+  "G9_ROBOTIC": 909
+ },
+ "ham_eslesme": {
+  "KOD": 615,
+  "BENZER": 2330,
+  "YOK": 4147,
+  "TEKRAR": 1279,
+  "AYAR": 488,
+  "ESDEGER": 82
+ },
+ "tekil": 7014,
+ "tekil_tur": {
+  "AYAR": 16,
+  "HAM": 6477,
+  "KOD": 521
+ },
+ "tekil_durum": {
+  "C_KODLANDI_KOSULMADI": 42,
+  "D_KODLANMADI_NEDENLI": 4260,
+  "E_KODLANMADI_NEDENSIZ": 160,
+  "H_BIZIM_EVRENDE_UYGULANAMAZ": 885,
+  "G_ML": 746,
+  "F_YASAK_TIP": 372,
+  "BELIRSIZ": 54,
+  "B_TEST_EDILDI_ELENDI": 485,
+  "A_TEST_EDILDI_GECTI": 10
+ },
+ "kod_durum": {
+  "B_TEST_EDILDI_ELENDI": 485,
+  "A_TEST_EDILDI_GECTI": 10,
+  "C_KODLANDI_KOSULMADI": 26
+ },
+ "yapisal_kapi_evet": 73,
+ "fark_test_edilmedi": 2330,
+ "fark_test_edilmedi_dogrulanmamis": 911,
+ "B_adil": {
+  "evet": 270,
+  "yalniz_tek_TF;yalniz_varsayilan_ayar": 61,
+  "yalniz_varsayilan_ayar": 75,
+  "yalniz_tek_TF;yalniz_varsayilan_ayar;yapisal_kapi": 29,
+  "yalniz_varsayilan_ayar;yapisal_kapi": 25,
+  "yalniz_tek_TF": 7,
+  "yalniz_tek_TF;yalniz_varsayilan_ayar;yapisal_kapi;kisa_veri": 7,
+  "yalniz_tek_TF;yalniz_varsayilan_ayar;kisa_veri": 1,
+  "yalniz_varsayilan_ayar;yapisal_kapi;kisa_veri": 2,
+  "zayif_temsilci": 1,
+  "yalniz_tek_TF;yapisal_kapi": 1,
+  "yapisal_kapi": 2,
+  "yalniz_varsayilan_ayar;kisa_veri": 1,
+  "yalniz_tek_TF;yapisal_kapi;kisa_veri": 1,
+  "kisa_veri": 2
+ },
+ "kod_kaynaksiz": 31,
+ "sorun": {}
+}
