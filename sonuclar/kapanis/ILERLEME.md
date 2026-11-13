@@ -10,13 +10,14 @@ Ajan çıktısı ham haliyle `ara/`'ya yazılır; lider denetler, sonra `k*_kara
 | A: K1 nihai (44 açık + Rsi32 test + funding + 18 ayar) → ara/k1_nihai.csv | a278b72aa35c4ad47 | sürüyor |
 | B: portföy araştırma hesabı → motor/arastirma/kapanis/portfoy.py + test | ac1d98c6103e6a870 | denetlendi (ön kayıt eki 2) |
 | C: K2 kısa liste → ara/k2_nihai.csv + motor/strateji/kapanis/k2_kaynak.py | a378817cb3454c13b | denetlendi |
-| D: k3_p01 | ae27bb6b30ed36d0e | sürüyor |
+| D: k3_p01 | ae27bb6b30ed36d0e | denetlendi (koşullu) |
 | D: k3_p02 | a72df6ea3aec567ef | denetlendi |
 | D: k3_p03 | a99e150252c12bccd | denetlendi |
 | D: k3_p04 | a58251fdab05aa330 | sürüyor |
 | D: k3_p05 | a2f81192b260ced7d | sürüyor |
 | D: k3_p06 | ad2d811df5cf3a147 | sürüyor |
-| D: k3_p07..p08, k4_p01..p10 | — | bekliyor |
+| D: k3_p07 | (aşağı) | sürüyor |
+| D: k3_p08, k4_p01..p10 | — | bekliyor |
 | E: K5, F: koşu listesi, G: koşu betiği, H: pytest, rapor | — | bekliyor |
 
 Denetim günlüğü (parti, örneklem, hata, aksiyon):
@@ -24,6 +25,7 @@ Denetim günlüğü (parti, örneklem, hata, aksiyon):
 - B portföy hesabı: kod okundu (SERT_LIMITLER geçici bağlam yöneticisiyle, finally geri yükler; dönem sonrası veri HoldoutSizintisi). Lider kararları ön kayıt eki 2'de (portföy toplam stop riski %7,5, kapılar ×2, v2 portföy kapı karşılıkları).
 - C K2 (18 satır: 16 KOSULACAK, 2 KURAL_YOK): yeni sınıflar DonchianEma2RS0083, FlipperS0879, VmaBantKaynak (T21 #1–#10), IchimokuC4Arsiv, ArgusGizliBogaD3. Lookahead taraması temiz (yalnız rolling; shift(- yok). Kapanış testleri 44/44 geçti. T21 = 10 ayrı hipotez (makale ayrı raporluyor; (S,L,B) Brock SMA tanımı; birincil PDF erişilemedi → emin_degil). Ichimoku/Argus arşiv biçimi (aday_listesi bu biçimi tarif ediyor).
 - k3_p03 (227: KURAL_YOK 130, ML 66, VERI_YOK 17, EVREN_DISI 13, KOSULACAK 1): 10 örnek (tohum 7) → 10/10 tutarlı. Kabul.
+- k3_p01 (227: KURAL_YOK 90, LOOKAHEAD 58, KOSULACAK 52 YENI, VERI_YOK 13, EVREN_DISI 9, TEKRAR 2, YASAK 2, ML 1): 10 örnek (6'sı KOSULACAK, tohum 11) → karar hatası 0; ama `kural_tam` özet, bazılarında parametre eksik yazılmış (B001:689 offset değerleri, B001:750 custom_stoploss). Koşul: kodlama ajanı kuralı kaynak dosyadan (kanıttaki SHA@dosya:satır) okur; özetten kodlamaz. 48 B001 KOSULACAK varyantı koşu listesi aşamasında aynı işlem yolu için TEKRAR'a indirgenecek. B001:802 sessiz except → kodda açık hata.
   Lider kararı: kural zarardaki pozisyona ekleme/grind içeriyorsa YASAK (H001:151, H002:93 → birleştirmede YASAK).
 
 ---
