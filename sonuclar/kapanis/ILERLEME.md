@@ -1,6 +1,15 @@
 # Kapanış turu ilerleme kaydı
 
-Son kontrol: 2026-11-13 12:05 UTC. **Görev bitmedi; gerçek piyasa verisi koşulmadı.** Bu dosya oturum devam noktasıdır.
+Son kontrol: 2026-11-13 12:13 UTC. **Görev bitmedi; gerçek piyasa verisi koşulmadı.** Kullanıcı limit nedeniyle burada durmamı istedi; bu dosya oturum devam noktasıdır.
+
+## 12:13 UTC duraklama notu
+
+- Son kullanıcı isteğiyle iş burada durduruldu. BH aile düzeltmesi `02e0424` commit'inde, özgün ön kayıt metni korunarak eklendi. Aile yalnız gerçekten koşulacak benzersiz hipotezlerden oluşacak; sayı henüz dondurulmadı.
+- K1 tablosu **48/48 satır** içeriyor: 2 `KURAL_YOK`, 1 `EVREN_DISI`, 1 `VERI_YOK`; diğer **44** satırın nihai akıbeti açık. 26 v3 kartı, 18 ek ayar ve dört teknik hata için kaynak izleri tabloya işlendi. Dört teknik hata 4h/4h/4h/1h sentetik sinyal testini geçti. `k1_karar.csv` içindeki `KAYNAK_*_BEKLIYOR` durumları nihai ret/geçiş kararı değildir.
+- Tek grafik ham ve kendi hesap araştırma modülü `45c2c1c` commit'inde: maliyet ×1/×2, %1,5 risk, −%30 kill, holdout sızıntısında açık hata. Sentetik testleri geçti. **Portföy araştırma hesabı, 18 ayarın gerçek koşu bağı, koşu listesi ve `araclar/kapanis_kosu.py` yok.** Mevcut motor sert %1/−%20 limit kullanır; bu sınırlar değiştirilmedi.
+- Birincil kaynaklar `/tmp/kapanis-src-*` altında salt okunur açıldı. `mgcha85/btc-lshape-long` kaynak profilinden yeni `LSekliKaynak` alt sınıfı yazıldı ve 2 sentetik testi geçti. `upupnoah/noahroboros` kaynak kodunda RSI77/23 **geri kesişim** çıkışı görüldü; buna göre `Rsi32Kaynak` taslağı yazıldı, **test edilmedi ve K1 satırına bağlanmadı**. Bir sonraki adım bu sınıfa sinyal/gelecek/stop testi yazmak, sonra K1 satırını kaynak kod SHA/commit'iyle bağlamak.
+- `OctopusTakopi/funding-rate-alpha` kaynak karşılaştırması: günlük carry yönü doğrulandı; saatlik 00:00 decil ve z90 tek kohort kodlarında kaynak farkları açık. `zhangxingthang/BTCUSDT-London-Volatility-Breakout` özgün 1m işlem yolu izinli veriyle koşulamadığı için `VERI_YOK` hükmü verildi. Bunlar `k1_karar.csv` içinde kanıtlı.
+- K2, K3, K4 kararları ve gerçek tek koşu henüz yapılmadı. K3 **1.816**, K4 **2.204** satırın kararı bekliyor. K5'in 621 iz kimliği kaynağa bağlandı; nihai akıbetleri K1/K3/K4 ile birlikte açık. PR açılmadı. Önceki tam pytest sonucu 5101 geçti/17 atlandı; son yeni sınıflardan sonra tam paket yeniden çalıştırılmadı.
 
 ## Değişmez ön kayıt
 
@@ -13,7 +22,7 @@ Son kontrol: 2026-11-13 12:05 UTC. **Görev bitmedi; gerçek piyasa verisi koşu
 
 | Katman | Girdi | Karar tablosu | Son karar | Kod/koşu | Durum |
 |---|---:|---:|---:|---|---|
-| K1 | 48 = 26 v3 + 18 ek ayar + 4 teknik hata | 48 | 3 kaynak/evren ret; 45 açık | 18 ayar okuyucusu kuruldu; 26 v3 kartı ve 18 ayar kaynağı satıra bağlandı; dört teknik hata için TF seçildi ve sentetik sinyal testi geçti; tek grafik ham/hesap modülü var; koşu listesi yok | sürüyor |
+| K1 | 48 = 26 v3 + 18 ek ayar + 4 teknik hata | 48 | 4 kaynak/evren ret; 44 açık | 18 ayar okuyucusu kuruldu; 26 v3 kartı ve 18 ayar kaynağı satıra bağlandı; dört teknik hata için TF seçildi ve sentetik sinyal testi geçti; tek grafik ham/hesap modülü var; koşu listesi yok | sürüyor |
 | K2 | 7 kaynak biçimi (saatlik, T61, T21, S0002, S0005, Ichimoku, Argus); S0083 gibi alt kaynaklar K4'te | ayrı karar tablosu yok | 0 | S0002 ve S0005 yeni sınıfları + sentetik test | sürüyor |
 | K3 | 1.816 = 161 E + 35 belirsiz + 1.620 diğer D | 1.816 | 0 | kaynak uygunluğu incelenmedi | başlamadı |
 | K4 | 2.204 `benzer_hedef` dolu D (K2'ye ayrılan 5 dahil) | 2.204 | 0 | kaynak ↔ arşiv kodu tek tek karşılaştırılmadı | başlamadı |
@@ -34,7 +43,11 @@ Tablolardaki `INCELEME_BEKLIYOR` bir hüküm değildir. `kanit` sütununda eski 
 - V2 teknik hatalı dört kod için eski 1d üst-TF hatasını önleyen TF kaydı: Norn 4h, SHM 4h, önceki 4s kırılım 4h, KGT 1h; hepsi v2 kripto 13 sembol. Dört sınıf 1.100 sentetik mumla sinyal üretti, hiçbir giriş stopsuz değil (`testler/test_kapanis_k1_teknik.py`, 4 geçti). Kaynak/çıkış uyumu ve hesap koşu bağı hâlâ açık.
 - `v3__momentum-sifir-kesisim` birincil `ChandanP001/Quant-foundations` notebook commit `c222dd2` ile doğrulandı: 20 günlük yüzde getiri, long/flat, ertesi gün. `v3__z-skor-karsit` için `NadirAliOfficial/contrarian-strategy` commit `9034fce` README ve `utils.py` 20 günlük getiri z-skoru ±2/sıfır kuralını veriyor; aynı deponun `script.py` dosyası ise başka, DCA yapan yasak bir kod ve kullanılmaz. Bu iki sınıfın 1d/kripto uyarlama izi var; koşu bağı açık.
 - `v3__saatlik-asiri-tepki` **KURAL_YOK**: `kod_kontrol_tur8.csv:38` ve `kaynak_dogrulama_tur4.csv:108` yalnız özet doğrulamış; eşik/tutuş kaynakta yok ve birincil metin bu ortamda 403. Mevcut 2σ/48s/1s değerleri bizim varsayımımız.
-- Kalan 45 satırın kaynak biçimi/uyarlama ve araştırma hesabı koşu bağı henüz kesinleşmedi. Özellikle eski tek grafik Donchian ansamblı, kaynak biçiminden farklı olduğu için doğrudan koşuya alınmaz; yeni portföy biçimiyle sonuç/kimlik bağı denetlenir.
+- `v3__londra-volatilite-kirilim` **VERI_YOK**: birincil `zhangxingthang/BTCUSDT-London-Volatility-Breakout` commit `f4bd593` 1m OHLC ve mum içi stop sırası kullanıyor; ön kayıt 5m–1d. Mevcut kapanış sinyali kaynak işlem yolu değildir.
+- `pf__v3-funding-1s-devam`: birincil `OctopusTakopi/funding-rate-alpha` commit `cf9f87c` 1h katsayısı ve ayrı settlement çevresi tutuşunu ölçüyor; mevcut kodun 00:00 decil/tek saat portföyü aynı kaynak kuralı olarak doğrulanmadı. `pf__v3-funding-z90-3gun` için settlement akışı/kohort farkı açık. Günlük ham-funding decil carry yönü kaynaktan doğrulandı, araştırma portföy hesabı açık.
+- `v3__l-sekli-ma-kirilim-long`: birincil `mgcha85/btc-lshape-long` commit `a797953` ilk 10 mum tepe/son 10 mum dip sırasını ve README örnek profilinde +%3 yarım kâr/başabaşı kullanıyor. Eski sınıf farklıydı; `motor/strateji/kapanis/l_sekli_kaynak.py` yeni alt sınıfı eklendi, iki sentetik testi geçti. Kaynak kodun kendi `_check_entry` çağrısında fazla argüman hatası var; açık fonksiyon kuralları esas alındı. Gerçek koşu bağı açık.
+- `v3__rsi32-yon-hedef4`: birincil `upupnoah/noahroboros` commit `1e3edc6` 77/23'e erişince değil, eşiğin gerisine kesince çıkıyor; eski sınıf farklı. `motor/strateji/kapanis/rsi32_kaynak.py` yeni alt sınıfı yazıldı, **test ve karar tablosu bağlantısı henüz bitmedi**.
+- Kalan 44 satırın kaynak biçimi/uyarlama ve araştırma hesabı koşu bağı henüz kesinleşmedi. Özellikle eski tek grafik Donchian ansamblı, kaynak biçiminden farklı olduğu için doğrudan koşuya alınmaz; yeni portföy biçimiyle sonuç/kimlik bağı denetlenir.
 
 ## İlk kaynak denetiminde bulunan ayrımlar
 
@@ -52,7 +65,7 @@ Tablolardaki `INCELEME_BEKLIYOR` bir hüküm değildir. `kanit` sütununda eski 
 - `motor/strateji/kapanis/jesse_kaynak.py`: S0002 ve S0005, kaynak satırı/linki, ATR uyarlaması yazılı.
 - `motor/arastirma/kapanis/ek_ayarlar.py`: 18 ayarı iki JSON'dan okur, sınıfına kurar; eski araştırma aday kümelerine müdahale etmez.
 - `motor/arastirma/kapanis/tek_grafik.py`: v2 maliyet/ham işlem yardımcılarını yeniden kullanarak tek grafik sınıfını ×1/×2 çalıştırır; `secim.OynatmaAyari(risk=0.015, kill=0.30)` ile kendi hesabına oynatır. Portföy sınıflarını desteklemez; gerçek veri koşusu yapılmadı.
-- `testler/test_kapanis_jesse_kaynak.py`, `testler/test_kapanis_ek_ayarlar.py` ve `testler/test_kapanis_k1_teknik.py`: 13 sentetik test geçti (`PYTHONPATH=/tmp/kapanis-test-deps:. python -m pytest ...`). Gelecek mum değişimi geçmiş sinyali etkilemiyor; her girişte stop var; ek ayarlar eksiksiz ve tekil.
+- `testler/test_kapanis_l_sekli_kaynak.py` dahil 15 odaklı sentetik test geçti (`PYTHONPATH=/tmp/kapanis-test-deps:. python -m pytest ...`). Gelecek mum değişimi geçmiş sinyali etkilemiyor; her girişte stop var; ek ayarlar eksiksiz ve tekil. RSI32 alt sınıfı henüz test edilmedi.
 - Önceki kod durumunda tüm suite geçti: `PYTHONPATH=/tmp/kapanis-test-deps:. python -m pytest testler -q -p no:cacheprovider` → **5101 geçti, 17 atlandı** (315 saniye). Eksik Python geliştirme paketleri yalnız `/tmp/kapanis-test-deps` altına kuruldu; repo bağımlılık dosyaları değişmedi. Bu tam paket yeni `tek_grafik.py` eklenmeden önceydi; 13 odaklı test yeni kodla geçti. Gerçek piyasa strateji koşusu değildir.
 - `veri/mumlar` bu ortamda yok; gerçek koşu burada yapılamaz.
 - `araclar/kapanis_kosu.py` henüz yazılmadı. Koşu listesi/kapılar/BH/ikinci evren/test sonuçları hazır değil. Veri yokluğu nedeniyle gerçek strateji testi yapılmadı.
