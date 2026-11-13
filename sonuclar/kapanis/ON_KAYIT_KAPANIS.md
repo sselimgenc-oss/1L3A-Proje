@@ -80,3 +80,16 @@ Tarih: 2026-11-13. Kullanıcı yönlendirmesiyle ("test etmemize gerek yok dedi�
 - Robotic (HAM:B001) KOSULACAK 277 satırına sonuç görülmeden eleme uygulandı: `eleme/eleme_asama2_robotic.csv` (192 KOŞ, 85 ÇIKAR; gerekçe `eleme/ELEME_FABLE_ROBOTIC.md`). Ek 4'teki aşama 1 kuralı aynen geçerlidir: ÇIKAR kayıtlar koşulmaz ve aşama 2 BH ailesine girmez.
 - "Aşama 1'de koşulanın aynısı" gerekçesiyle çıkarılan 8 satır aşama 1 ailesinde zaten bir hipotezdir; aşama 2'de ikinci kez sayılmaz.
 - Bir temsilci kodlanamaz ya da birebir kopya diff'i anlamlı fark gösterirse, ailesinden ÇIKAR kaydı kodlamadan önce (sonuç görülmeden) geri alınır ve bu dosyaya not edilir.
+
+## Ön kayıt düzeltmesi — sonuç görülmeden (6): aşama 2 kapsam triyajı
+
+Tarih: 2026-11-13. Kullanıcı kararıyla (2026-11-13 soru-cevap: Robotic koşulsun; COK_KOLLU çıksın; eski katmanlardaki satırlar triyajla kapatılsın); aşama 1 koşusu sürerken, aşama 1 dahil hiçbir kapanış sonucu görülmeden yazıldı. Yukarıdaki metinler korunur; bu ek, ana metindeki "her satırın kararı kayda geçer" ve "bütün uygun kodlar hazır olmadan çalıştırılamaz" cümlelerini ve ek 4'teki aşama 2 tanımını aşağıdaki biçimde daraltır.
+
+- **Dayanak:** `eleme/TRIYAJ_FABLE_ASAMA2.md` ve `eleme/triyaj_asama2.csv` (SHA-256 bu commit'te). Triyaj yalnız kaynak türü, önceki karar tabloları ve hesap defterindeki arşiv akıbetinden yapıldı; mum verisi ve koşu sonucu kullanılmadı.
+- **Aşamalı koşu kaydı:** Aşama 1, K3/K4/K5 incelemesi tamamlanmadan başlatıldı. Ek 4'ün aşama tanımı bunu kapsar; ana metnin "bütün uygun kodlar hazır olmadan çalıştırılamaz" cümlesi aşama bazında uygulanır.
+- **Kapsam dışı bırakılanlar:** `triyaj_asama2.csv` içindeki K3-6, K3-7, K4-5, K4-8, K4-9, K4-10, K5-5b alt kümeleri (1.759 satır) ve COK_KOLLU kümesinin CK-1…CK-6 satırları (86 dosya) satır satır incelenmez ve koşulmaz. Karar tablolarında `KAPSAM_DISI_TRIYAJ` kodu ve alt küme adıyla kaydedilir (K4-5 için ayrıca mevcut kullanıcı kararı: kesitsel/pairs/rotasyon evren dışı). Bu kod "kural yok" ya da "test edildi, elendi" anlamına gelmez. K3-5b'deki 4 kimlik, aşama 1 ön elemesiyle aynı ölçütlerle (`eleme/ELEME_FABLE.md`) koşu listesine alınmaz.
+- **Kapalı sayılanlar:** Daha önce karar verilmiş satırlar mevcut kararlarıyla kalır. K5 iz satırları bağlı oldukları ana kimliğin kararını betikle devralır.
+- **Aşama 2'nin yeni tanımı:** (a) Robotic KOSULACAK satırlarının ayrı hakem elemesinden geçenleri (ek 5; 192 satır); (b) `triyaj_asama2.csv` içinde KOŞ olan kimlikler; (c) İNCELE alt kümelerinden, incelemede kuralı tam bulunanlar. (c) için inceleme kararları aşama 2 koşusundan önce mühürlenir.
+- **BH:** Aşama 2 ailesi yine dondurulmuş aşama 2 koşu listesidir (ek 4). Kapsam dışı satırlar aileye girmez.
+- **Rapor yükümlülüğü:** Nihai rapor, kapsam dışı bırakılan satır sayısını alt küme bazında ve "incelenmedi" ifadesiyle verir. Bu satırlar bu turda sonradan kapsama alınmaz.
+- Kapılar, çarpanlar, evren ve ikinci kapı değişmez.
