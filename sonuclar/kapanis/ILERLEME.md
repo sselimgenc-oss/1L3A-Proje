@@ -17,14 +17,14 @@ Son kontrol: 2026-11-13 11:39 UTC. **Görev bitmedi; gerçek piyasa verisi koşu
 | K2 | 7 kaynak biçimi (saatlik, T61, T21, S0002, S0005, Ichimoku, Argus); S0083 gibi alt kaynaklar K4'te | ayrı karar tablosu yok | 0 | S0002 ve S0005 yeni sınıfları + sentetik test | sürüyor |
 | K3 | 1.816 = 161 E + 35 belirsiz + 1.620 diğer D | 1.816 | 0 | kaynak uygunluğu incelenmedi | başlamadı |
 | K4 | 2.204 `benzer_hedef` dolu D (K2'ye ayrılan 5 dahil) | 2.204 | 0 | kaynak ↔ arşiv kodu tek tek karşılaştırılmadı | başlamadı |
-| K5 | 706 = 85 ayar izi + 621 iz adayı | 706 | 85 ayarın iz kararı; 520 iz kaydı ana deftere, 78 kaynak kartına bağlandı; nihai akıbet bekliyor | 18 ayar gerçekten aday havuzuna girmemiş; 67 eski WF aday havuzunda | sürüyor |
+| K5 | 706 = 85 ayar izi + 621 iz adayı | 706 | 85 ayarın iz kararı; 535 iz kaydı ana deftere, 78 kart ve 8 arşiv kaydı özgün kaynağa bağlandı; nihai akıbet bekliyor | 18 ayar gerçekten aday havuzuna girmemiş; 67 eski WF aday havuzunda | sürüyor |
 
 Tablolardaki `INCELEME_BEKLIYOR` bir hüküm değildir. `kanit` sütununda eski hesap defterinin başlangıç izi vardır; kaynak-kod eşitliğinin yeni doğrulaması değildir. Satır sayılarını koşudan önce tekrar doğrula. K2/K5 katmanları K1/K3/K4 ile örtüştüğünden rakamlar toplanıp bağımsız strateji sayısı diye sunulmaz.
 
 ## K5 koşu izi çapraz denetimi
 
 - Eski dalın 85 `P5_ayar_kosu_izleri.csv` ayarının tümü `G0_ayarlar.csv` kayıtlarına yol/indeks ve ayar kimliğiyle eşlendi: 18 ek JSON ayarı aday havuzunda yok, 67 ayar v1 WF aday havuzunda. 67 için bu iz, tam eşit kaynak kuralının adil kapılardan geçtiği anlamına gelmez; tam koşu/kaynak karşılaştırması K1/K4 kararıyla yapılır. G0 sınıflaması 20 seçilen + 47 aday; Fable 18 + 49 dediği için bu sayım uyuşmazlığı ayrıca kontrol edilecek.
-- Eski dalın 621 `P8_iz_eksigi_E_adaylari.csv` satırından 80 `DIS906:Sxxxx`, `ham_satirlar.csv` içindeki `X005:xxxx` üzerinden ana `tekil_id`ye bağlandı: 29 E, 24 H, 16 D, 10 F, 1 belirsiz ön durum. KAYIT ve EXCELKURAL kayıtlarının 440 tanesi daha eski P8 adı ile ana `ham_satirlar.csv` adı birebir ve tekil eşleştiği için yalnız kimlik düzeyinde bağlandı. 23 KAYIT/EXCELKURAL kimlik bağı belirsiz. 78 KART kaydının özgün kart dosyası `stratejiler/v3_adaylar/kartlar/` altında ayrı ayrı bulundu; ana defter kapsamı ve kuralın koşulabilirliği açık. Ad eşitliği kural eşitliği kanıtı değildir. Bunlar ayrı aday değildir. Kalan 23 kimlikte kaynak eşlemesi belirsiz; 621 iz satırının nihai kural/koşu hükmü bekliyor.
+- Eski dalın 621 `P8_iz_eksigi_E_adaylari.csv` satırından 80 `DIS906:Sxxxx`, `ham_satirlar.csv` içindeki `X005:xxxx` üzerinden ana `tekil_id`ye bağlandı: 29 E, 24 H, 16 D, 10 F, 1 belirsiz ön durum. KAYIT ve EXCELKURAL kayıtlarının 440 tanesi daha eski P8 adı ile ana `ham_satirlar.csv` adı birebir ve tekil eşleştiği için yalnız kimlik düzeyinde bağlandı. 23 KAYIT/EXCELKURAL satırının 15’i xlsx satırıyla ana deftere bağlandı; 8’i ayrı arşiv kaydında. 78 KART kaydının özgün kart dosyası `stratejiler/v3_adaylar/kartlar/` altında ayrı ayrı bulundu; ana defter kapsamı ve kuralın koşulabilirliği açık. Ad eşitliği kural eşitliği kanıtı değildir. Bunlar ayrı aday değildir. Kalan 23 kaydın 15’i xlsx sayfa/satır ve adla ana deftere bağlandı; 8’i `arsiv/codex-algo/config/pdf_candidates.csv` içinde bulundu. Böylece 621 iz kimliğinin kaynağı belli; 621’inin de nihai kural/koşu hükmü bekliyor.
 
 ## İlk kaynak denetiminde bulunan ayrımlar
 
@@ -48,7 +48,7 @@ Tablolardaki `INCELEME_BEKLIYOR` bir hüküm değildir. `kanit` sütununda eski 
 
 ## Devam sırası
 
-1. K5 çapraz bağ çalışmasını commit et ve uzak dala gönder. Sonra kalan 23 iz kimliğini kaynakta tekilleştir; kaynak eşitliğini ayrıca denetle.
+1. K5 çapraz bağ çalışmasını commit et ve uzak dala gönder. K5 kaynak bağları tamam; şimdi 621 iz satırının kaynak kuralını ve test akıbetini ayrı ayrı denetle.
 2. K1'in 48 satırına kaynak TF, evren, ayar ve çalıştırılabilirlik kararı ver. 18 ayarın okuyucusunu araştırma koşucusuna bağla. 1h portföy ve risk/kill ayrımını çöz.
 3. K2 kısa listesinin kaynak metnini/kodunu doğrula; yalnız tam kuralı belli biçimleri kodla, belirsizleri kanıtla dışla.
 4. K3/K4/K5'in **her** satırını kanıtla karara bağla; `INCELEME_BEKLIYOR` sıfır olmadan koşu planı dondurulmaz.
