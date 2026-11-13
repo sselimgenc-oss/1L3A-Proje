@@ -1,5 +1,24 @@
 # Kapanış turu ilerleme kaydı
 
+## DEVAM (Claude lider, dal `claude/kapanis-devam`, 2026-11-13) — ÖNCE BUNU OKU
+Taban: `origin/codex/kapanis-turu` (fa48bbe) + `origin/main` birleştirildi. Ortak ajan kuralları: `AJAN_TALIMATI_KAPANIS.md`.
+Parti girdileri: `ara/girdi/k3_p01..p08.csv` (227'şer), `ara/girdi/k4_p01..p10.csv` (221; son 215). Çıktılar `ara/<parti>.csv`.
+Ajan çıktısı ham haliyle `ara/`'ya yazılır; lider denetler, sonra `k*_karar.csv` ile birleştirme betiği yazılır (ön kayıt dosyaları değişmez).
+
+| İş | Ajan kimliği | Durum |
+|---|---|---|
+| A: K1 nihai (44 açık + Rsi32 test + funding + 18 ayar) → ara/k1_nihai.csv | a278b72aa35c4ad47 | sürüyor |
+| B: portföy araştırma hesabı → motor/arastirma/kapanis/portfoy.py + test | ac1d98c6103e6a870 | sürüyor |
+| C: K2 kısa liste → ara/k2_nihai.csv + motor/strateji/kapanis/k2_kaynak.py | a378817cb3454c13b | sürüyor |
+| D: k3_p01 | ae27bb6b30ed36d0e | sürüyor |
+| D: k3_p02 | a72df6ea3aec567ef | sürüyor |
+| D: k3_p03..p08, k4_p01..p10 | — | bekliyor |
+| E: K5, F: koşu listesi, G: koşu betiği, H: pytest, rapor | — | bekliyor |
+
+Denetim günlüğü (parti, örneklem, hata, aksiyon): _(boş)_
+
+---
+
 Son kontrol: 2026-11-13 12:13 UTC. **Görev bitmedi; gerçek piyasa verisi koşulmadı.** Kullanıcı limit nedeniyle burada durmamı istedi; bu dosya oturum devam noktasıdır.
 
 ## 12:13 UTC duraklama notu
