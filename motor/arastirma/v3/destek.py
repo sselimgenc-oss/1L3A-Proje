@@ -80,7 +80,7 @@ def satir_destek_st(satir, st) -> dict:
                                    else "rastgele test uygulanmaz (P4 yalnız kesitsel satırlar 2-4)"),
                    cikis="portfoy", v2_tutma_korur=None, kullanilan="yok" if satir.rastgele != "agirlik" else "rastgele-agirlik")
         return out
-    dm = evren_k2.desteklenmeyen(st.cikis_ayarlari)
+    dm = evren_k2.desteklenmeyen_eski(st.cikis_ayarlari)
     ct = cikis_turu(st, satir.tf)
     saat_tabanli = bool(ct["sinyal_cikis_sutunlari"])
     out.update(cikis=",".join(ct["sinyal_cikis_sutunlari"]) or "yok", hedef=ct["hedef"], desteklenmeyen_modul=",".join(dm),

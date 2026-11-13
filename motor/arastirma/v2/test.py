@@ -150,7 +150,7 @@ def _sembol_k2(d: pd.DataFrame, mumlar: pd.DataFrame, ay, ci: Optional[dict], n_
                 r = evren_k2.tek_islem_r(
                     o, h, l, c, atr, jj, int(yon[k]), hk, float(mult[k]), kayma, skayma, taker,
                     ex=ci["ex_long"] if yon[k] == 1 else ci["ex_short"], hedef_r=ci["hedef_r"], iz_k=ci["iz_k"],
-                    iz_atr=iz_atr(ci["iz_periyot"]) if ci["iz_k"] else None, be_r=ci["be_r"])
+                    iz_atr=iz_atr(ci["iz_periyot"]) if ci["iz_k"] else None, be_r=ci["be_r"], ek=ci.get("ek"))
                 v = math.nan if r is None else float(r)
             onb[jj] = v
             return v
