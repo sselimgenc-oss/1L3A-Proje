@@ -1,5 +1,17 @@
 # Kapanış turu ilerleme kaydı
 
+## DEVAM 2 (Claude lider — ana oturum, dal `claude/adoring-maxwell-q7t60g`, 2026-11-13)
+Diğer hesabın limiti bitti; ana oturum devraldı. Kullanıcı önceliği: dış araştırma (G8, 906 liste) ve Robotic (G9, 909) satırları —
+"benzeri var" 479 + 446, E 29 + 96, belirsiz 16 = 1.066 satır. Bunların 96'sı (G9 E) k3_p01'de zaten kararlı/denetlendi.
+Kalan 970 satır kendi partilerine ayrıldı (ilgili k3_p08 / k4_p01–p03, p08–p10 satırlarının alt kümesi; aynı kaynak_id iki kez kararlanmaz,
+birleştirmede kul_* kararı esas alınır):
+| Parti | Satır | Durum |
+|---|---:|---|
+| kul_k3_g8 | 45 | sürüyor |
+| kul_k4_g8_a/b/c | 160/160/159 | sürüyor |
+| kul_k4_g9_a/b/c | 149/149/148 | sürüyor |
+Diğer hesabın sürmekte görünen ajanları (k3_p06 yeniden, k3_p07, k3_p08, k4_p01, k4_p02) o oturumla birlikte durdu; çıktıları commit'lenmemiş.
+
 ## DEVAM (Claude lider, dal `claude/kapanis-devam`, 2026-11-13) — ÖNCE BUNU OKU
 Taban: `origin/codex/kapanis-turu` (fa48bbe) + `origin/main` birleştirildi. Ortak ajan kuralları: `AJAN_TALIMATI_KAPANIS.md`.
 Parti girdileri: `ara/girdi/k3_p01..p08.csv` (227'şer), `ara/girdi/k4_p01..p10.csv` (221; son 215). Çıktılar `ara/<parti>.csv`.
