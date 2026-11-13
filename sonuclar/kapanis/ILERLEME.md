@@ -5,7 +5,7 @@ Son kontrol: 2026-11-13 11:39 UTC. **Görev bitmedi; gerçek piyasa verisi koşu
 ## Değişmez ön kayıt
 
 - Dal: `codex/kapanis-turu`, taban `origin/main` `d960401`.
-- Ön kayıt commit'i: `7a89080`. `ON_KAYIT_KAPANIS.md` ve `aday_listesi.csv` sonraki commit'lerde değişmez.
+- Ön kayıt commit'i: `7a89080`. `aday_listesi.csv` değişmez. `ON_KAYIT_KAPANIS.md` asıl metni korunarak, kullanıcının 2026-11-13 tarihli BH aile düzeltmesi sonuç görülmeden ek başlıkta kaydedildi (`02e0424`).
 - 4.773 kapalı kayıt: 4.067 ana kaynak kimliği + 85 ayar izi + 621 iz incelemesi. Ana 4.067 = K1 46 + K2 6 + K3 1.816 + K4 2.199. K2'deki 5 D kaydı K4 karar tablosunda da sayılır; bunlar koşuda tek hipotez olur.
 - Kaynak SHA-256'ları ön kayıtta. Hakem metni main'de yoktu; `origin/pr-58` dalındaki `HAKEM_FABLE.md` okundu, bu dala kopyalanmadı.
 
@@ -13,7 +13,7 @@ Son kontrol: 2026-11-13 11:39 UTC. **Görev bitmedi; gerçek piyasa verisi koşu
 
 | Katman | Girdi | Karar tablosu | Son karar | Kod/koşu | Durum |
 |---|---:|---:|---:|---|---|
-| K1 | 48 = 26 v3 + 18 ek ayar + 4 teknik hata | 48 | 0 | 18 ayar okuyucusu kuruldu; veri/hesap koşu bağı yok | sürüyor |
+| K1 | 48 = 26 v3 + 18 ek ayar + 4 teknik hata | 48 | 2 kaynak/evren ret; 46 açık | 18 ayar okuyucusu kuruldu; 26 v3 kartı ve 18 ayar kaynağı satıra bağlandı; dört teknik hata için TF seçildi, koşu bağı yok | sürüyor |
 | K2 | 7 kaynak biçimi (saatlik, T61, T21, S0002, S0005, Ichimoku, Argus); S0083 gibi alt kaynaklar K4'te | ayrı karar tablosu yok | 0 | S0002 ve S0005 yeni sınıfları + sentetik test | sürüyor |
 | K3 | 1.816 = 161 E + 35 belirsiz + 1.620 diğer D | 1.816 | 0 | kaynak uygunluğu incelenmedi | başlamadı |
 | K4 | 2.204 `benzer_hedef` dolu D (K2'ye ayrılan 5 dahil) | 2.204 | 0 | kaynak ↔ arşiv kodu tek tek karşılaştırılmadı | başlamadı |
@@ -25,6 +25,14 @@ Tablolardaki `INCELEME_BEKLIYOR` bir hüküm değildir. `kanit` sütununda eski 
 
 - Eski dalın 85 `P5_ayar_kosu_izleri.csv` ayarının tümü `G0_ayarlar.csv` kayıtlarına yol/indeks ve ayar kimliğiyle eşlendi: 18 ek JSON ayarı aday havuzunda yok, 67 ayar v1 WF aday havuzunda. 67 için bu iz, tam eşit kaynak kuralının adil kapılardan geçtiği anlamına gelmez; tam koşu/kaynak karşılaştırması K1/K4 kararıyla yapılır. G0 sınıflaması 20 seçilen + 47 aday; Fable 18 + 49 dediği için bu sayım uyuşmazlığı ayrıca kontrol edilecek.
 - Eski dalın 621 `P8_iz_eksigi_E_adaylari.csv` satırından 80 `DIS906:Sxxxx`, `ham_satirlar.csv` içindeki `X005:xxxx` üzerinden ana `tekil_id`ye bağlandı: 29 E, 24 H, 16 D, 10 F, 1 belirsiz ön durum. KAYIT ve EXCELKURAL kayıtlarının 440 tanesi daha eski P8 adı ile ana `ham_satirlar.csv` adı birebir ve tekil eşleştiği için yalnız kimlik düzeyinde bağlandı. 23 KAYIT/EXCELKURAL satırının 15’i xlsx satırıyla ana deftere bağlandı; 8’i ayrı arşiv kaydında. 78 KART kaydının özgün kart dosyası `stratejiler/v3_adaylar/kartlar/` altında ayrı ayrı bulundu; ana defter kapsamı ve kuralın koşulabilirliği açık. Ad eşitliği kural eşitliği kanıtı değildir. Bunlar ayrı aday değildir. Kalan 23 kaydın 15’i xlsx sayfa/satır ve adla ana deftere bağlandı; 8’i `arsiv/codex-algo/config/pdf_candidates.csv` içinde bulundu. Böylece 621 iz kimliğinin kaynağı belli; 621’inin de nihai kural/koşu hükmü bekliyor.
+
+## K1 kaynak izi ve ilk hükümler
+
+- `k1_karar.csv` içindeki 48 satırın kaynak TF/piyasa/kart izi yazıldı: 26 v3 kartı, 18 ek ayar JSON kaydı ve dört teknik hata kod izi. Kart metni birincil kaynak kuralının doğrulanması yerine geçmez.
+- `AYAR:dis__funding-carry:d11j:funding-pozitif-short:esik0_short` **KURAL_YOK**: `github_g3_cerceve.csv:24` pozitif funding’de short açma API örneği; kaynak çıkışı yok. JSON’daki 16 saat çıkışı kaynakta yazmıyor.
+- `KOD:v3__ters-fvg-nq-long` **EVREN_DISI**: NQ 5m/15m ve NQ puan tamponu gerekir; ön kayıt evreninde NQ yok.
+- V2 teknik hatalı dört kod için eski 1d üst-TF hatasını önleyen TF kaydı: Norn 4h, SHM 4h, önceki 4s kırılım 4h, KGT 1h; hepsi v2 kripto 13 sembol. Kaynak/çıkış uyumu ve hesap koşu bağı hâlâ açık.
+- Kalan 46 satırın kaynak biçimi/uyarlama ve araştırma hesabı koşu bağı henüz kesinleşmedi. Özellikle eski tek grafik Donchian ansamblı, kaynak biçiminden farklı olduğu için doğrudan koşuya alınmaz; yeni portföy biçimiyle sonuç/kimlik bağı denetlenir.
 
 ## İlk kaynak denetiminde bulunan ayrımlar
 
@@ -49,7 +57,7 @@ Tablolardaki `INCELEME_BEKLIYOR` bir hüküm değildir. `kanit` sütununda eski 
 ## Devam sırası
 
 1. K5 çapraz bağ çalışmasını commit et ve uzak dala gönder. K5 kaynak bağları tamam; şimdi 621 iz satırının kaynak kuralını ve test akıbetini ayrı ayrı denetle.
-2. K1'in 48 satırına kaynak TF, evren, ayar ve çalıştırılabilirlik kararı ver. 18 ayarın okuyucusunu araştırma koşucusuna bağla. 1h portföy ve risk/kill ayrımını çöz.
+2. K1'in kalan 46 satırına kaynak TF, evren, ayar ve çalıştırılabilirlik kararı ver. 18 ayarın okuyucusunu araştırma koşucusuna bağla. 1h portföy ve risk/kill ayrımını çöz.
 3. K2 kısa listesinin kaynak metnini/kodunu doğrula; yalnız tam kuralı belli biçimleri kodla, belirsizleri kanıtla dışla.
 4. K3/K4/K5'in **her** satırını kanıtla karara bağla; `INCELEME_BEKLIYOR` sıfır olmadan koşu planı dondurulmaz.
 5. Tek koşu betiği, kapılar, BH, yeni 40 sembol aşaması ve uçtan uca sentetik test; ardından tüm suite. Bu ortamda gerçek mum koşusu yapılmaz.
