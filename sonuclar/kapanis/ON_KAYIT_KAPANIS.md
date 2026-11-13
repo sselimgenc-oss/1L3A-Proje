@@ -37,3 +37,7 @@ Geçen strateji yalnız **paper adayı**dır. En az 12 hafta ileri paper gözlem
 ## Çalıştırma ve dürüstlük sınırı
 
 Bu ön kayıt, adayların işlem kurallarının henüz doğrulandığı anlamına gelmez. K3/K4/K5 kaynak karşılaştırması, yeni sınıflar, koşu betiği ve sentetik testler sonraki commit'lerde hazırlanır. İlk gerçek veri koşusu, satır sayısı denetimleri ve bütün uygun kodlar hazır olmadan çalıştırılamaz. Geçmiş geliştirme verisinde seçilmiş fikirlerin iyi görünmesi kanıt sayılamaz; tur yalnız açık soruları kapatır.
+
+## Ön kayıt düzeltmesi — sonuç görülmeden
+
+Tarih: 2026-11-13. Bu ek, kullanıcı düzeltmesiyle, ilk gerçek mum koşusundan ve herhangi bir kapanış sonucu görülmeden yazıldı. Yukarıdaki asıl metin korunur. **Benjamini–Hochberg (BH) ailesi için yukarıdaki 7. maddenin aile tanımı yerine bu paragraf geçerlidir:** Aile yalnız kaynak incelemesi tamamlanıp kodlanan ve tek koşu listesine alınan benzersiz strateji/ayar hipotezlerinden oluşur. Kodlanamayan, `KURAL_YOK`, tekrar ve kapsam dışı kayıtlar p=1 verilerek aileye katılmaz; karar tablolarında gerekçeleriyle tutulur. Aynı işlem kuralının tekrar kaynak kayıtları tek hipotez sayılır. Aile büyüklüğü, koşu listesi tüm katman kararlarından sonra ve gerçek sonuç görülmeden dondurulduğunda, listedeki benzersiz koşulacak kimliklerin sayısı olarak sabitlenir; sayı, kimlik listesi ve liste özeti SHA-256 değeri koşu planına ve rapora yazılır. Bu sabitlemeden sonra aday eklenmez veya çıkarılmaz. BH eşik değeri q=0,10 ve diğer kapılar değişmez.
