@@ -51,3 +51,15 @@ Tarih: 2026-11-13. Lider kararı; hiçbir kapanış koşusu yapılmadan ve sonu�
 - **Portföy (`pf__*`) stratejileri:** işlem başı risk yerine karar 25'teki toplam stop riski bütçesi aynı oranla ölçeklenir: %5 × (1,5 / 1,0) = **%7,5** toplam stop riski; kill −%30, günlük −%3, 3x. Uygulama: `motor/arastirma/kapanis/portfoy.py` (SERT_LIMITLER değişmez, koşu süresince ayrı araştırma limiti).
 - **Portföy kapıları** (v2 portföy satırlarının karşılıkları, `ON_KAYIT_V2.md` E1–E5 portföy paragrafı): (1) net×2 > 0 ve günlük Sharpe×2 ≥ 0,5; (2) dönem ≥ 1.095 gün ve ≥ 20 yeniden dengeleme; (3) en iyi takvim yılı çıkarılınca net×2 > 0 (sembol çıkarma portföyde tanımsız, uygulanmaz); (4) ×2 hesabında kill hiç tetiklenmez; (5) long-only ise aynı evren/dönemde eşit ağırlıklı al-tut Sharpe'ını (aynı maliyet ×2) aşar; (6) rastgele kıyas v2'deki `RastgeleAgirlik` yöntemiyle aynı yeniden dengeleme takviminde, B=100.000 yerine v2 test ayarı korunarak p ≤ 0,05 (yöntem ve B koşu betiğinde v2 kodundan aynen alınır, kayda yazılır); (7) BH ailesine tek grafiklerle birlikte girer.
 - **Veri:** sabit evrendeki bir sembolün geliştirme döneminde hiç verisi yoksa o koşu `HATA` sayılır (kapı geçilmez, sembol yazılır). Dönem içinde geç başlayan sembol, v2'deki gibi başlangıç öncesinde dışarıda kalır.
+
+## Ön kayıt düzeltmesi — sonuç görülmeden (3): 906 listesi için standart ayar katmanı (K6)
+
+Tarih: 2026-11-13. Kullanıcı kararıyla ("hiçbir kod atlanmayacak"; seçenek: "Standart ayarla koş"). Hiçbir kapanış koşusu yapılmadan ve sonuç görülmeden yazıldı. Yukarıdaki metinler korunur.
+
+- **Kapsam:** Yalnız `HAM:X005:*` (trend/ortalamaya dönüş 906 listesi) satırlarından, kaynak (metin ve varsa kod) okunduktan sonra yalnız **sayısal parametre, MA tipi ya da zaman dilimi eksikliği** yüzünden `KURAL_YOK` kalanlar. Öznel/takdire bağlı kural ("yatay piyasa", el ile çizgi), tanımsız özel gösterge formülü, kapalı kod ve tutarsız kural `KURAL_YOK` kalır; K6'ya girmez.
+- **Standart değerler (değişmez tablo):** RSI 14; ATR 14; ADX/DMI 14; Stokastik 14/3/3; MACD 12/26/9; Bollinger 20/2σ (kapanış); MA tipi yazılmamışsa SMA; CCI 20; Williams %R 14; MFI 14; ROC/momentum 10; Donchian 20; Keltner EMA20 ± 2×ATR10; Ichimoku 9/26/52; Parabolic SAR 0,02/0,02/0,2; SuperTrend ATR10×3; hacim ortalaması 20; z-skoru penceresi 20. Kaynak kendi varsayılanını yazmışsa o kullanılır.
+- **Aralık verilmişse** (ör. "EMA 7–10"): kaynağın belirttiği varsayılan; yoksa aralığın orta noktası (tamsayı parametrede aşağı yuvarlanır). Izgara yoktur, tek değer.
+- **Zaman dilimi yazılmamışsa:** 4h ve 1d iki ayrı hipotez olarak koşulur. Kaynak yalnız "gün içi" diyorsa 1h.
+- **Kaynakta stop yoksa** ATR(14)×3 uyarlaması (ana kuraldaki gibi).
+- **Etiket ve kapılar:** Bu satırlar `K6_STANDART` katmanı olarak ayrı raporlanır; kapılar ve ikinci kapı aynıdır. BH ailesine **dahildir** (aile büyüklüğü artar, eşik sıkılaşır). Geçen olursa raporda "standart ayar uyarlaması" notuyla yalnız paper adayıdır.
+- Her K6 satırının hangi parametreye hangi standart değerin verildiği koşu listesinde satır satır yazılır ve koşudan önce dondurulur.
