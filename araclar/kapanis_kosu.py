@@ -425,6 +425,9 @@ def kos(satirlar: list, isci: int = 4, sinir: int | None = None, b: Baglam | Non
     b = b or baglam()
     kume = satirlar if sinir is None else satirlar[:sinir]
     bekleyen = [s for s in kume if not json_yolu(s["kimlik"], b.cikti).exists()]
+    # Sıra sonucu değiştirmez (her kimlik bağımsız, tohum kimlikten); hızlı TF'ler önce biter.
+    _hiz = {"1d": 0, "8h": 1, "6h": 2, "4h": 3, "3h": 4, "2h": 5, "1h": 6, "30m": 7, "15m": 8, "5m": 9}
+    bekleyen.sort(key=lambda s: _hiz.get(s["tf"], 5))
     atlanan = len(kume) - len(bekleyen)
     print(f"[kos] liste {len(satirlar)} | hedef {len(kume)} | biten (atlanan) {atlanan} | koşulacak {len(bekleyen)} | işçi {isci}", flush=True)
     if isci <= 1 or len(bekleyen) <= 1:
