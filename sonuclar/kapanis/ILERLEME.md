@@ -212,3 +212,6 @@ Lider kararları:
 - Kullanıcı kararı (politika 4): kesitsel rotasyon ve pairs kuralları EVREN_DISI kalır; ek katman açılmaz.
 - duzeltme_fable2.csv (49 satır, yalnız değişen kayıtlar; birleştirmede en yüksek öncelik): lider kararları uygulandı; 18 satırın 15'i + 51, 84, 366, 802, 372 → K6; 376/377 → EVREN_DISI; FARK_YOK 5 → KOSULACAK; 446 → KOSULACAK (sıralama atıldı, 816/818 ile aynı); 496/728 → KURAL_YOK.
 - kul_k4_g9_a_v2.csv kod parçalarından temizlenmiş sürümle değiştirildi (kaynak kod alıntısı kalmadı; önceki sürüm git geçmişinde). 105/156/209 hyperopt .json etkin değerleri, 440 ATR uyarlaması, 135 kol sayısı düzeltildi. Lider: 433/437/438/439 → VERI_YOK (BTC 1m kapanışına bağlı).
+
+### KODLAMA AŞAMASI (kullanıcının belgeleri önce)
+Talimat: `KODLAMA_TALIMATI.md`. Girdi: `kod_girdi/` (birleştirme betiğinin nihai kararından). G8: 49 mevcut sınıf+ayar (kod gerekmez), 317 YENI → 8 parti (g8_kod_1..8). Sonra G9 Robotic (325 YENI), sonra COK_KOLLU ve diğer katmanlar.
