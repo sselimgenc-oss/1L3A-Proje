@@ -63,3 +63,12 @@ Tarih: 2026-11-13. Kullanıcı kararıyla ("hiçbir kod atlanmayacak"; seçenek:
 - **Kaynakta stop yoksa** ATR(14)×3 uyarlaması (ana kuraldaki gibi).
 - **Etiket ve kapılar:** Bu satırlar `K6_STANDART` katmanı olarak ayrı raporlanır; kapılar ve ikinci kapı aynıdır. BH ailesine **dahildir** (aile büyüklüğü artar, eşik sıkılaşır). Geçen olursa raporda "standart ayar uyarlaması" notuyla yalnız paper adayıdır.
 - Her K6 satırının hangi parametreye hangi standart değerin verildiği koşu listesinde satır satır yazılır ve koşudan önce dondurulur.
+
+## Ön kayıt düzeltmesi — sonuç görülmeden (4): aşamalı koşu ve BH aileleri
+
+Tarih: 2026-11-13. Kullanıcı önceliği (önce kendi belgeleri) ve süre nedeniyle; hiçbir kapanış koşusu yapılmadan yazıldı. Yukarıdaki metinler korunur.
+
+- Koşu iki aşamadır. **Aşama 1:** kullanıcı belgeleri (HAM:X005 906 listesi + HAM:X008 ajan2) + K1 + K2 katmanları. **Aşama 2:** Robotic (HAM:B001), COK_KOLLU, K3/K4/K5'in kalan katmanları.
+- Benjamini–Hochberg (q=0,10) her aşamada **ayrı aile** olarak uygulanır; aile = o aşamanın dondurulmuş koşu listesindeki benzersiz hipotez kimlikleri (varyant ve TF ayrı kimlik). Aşama 1 listesi koşudan önce dondurulur (kimlik listesi + SHA-256); aşama 2 sonuçları aşama 1 ailesini değiştirmez. Raporda her iki aileyi birleştiren ek (bilgi amaçlı) BH tablosu da verilir.
+- Sonuç görülmeden yapılan koşu listesi elemesi (`eleme/eleme.csv`, kullanıcı yönlendirmesiyle) aşama 1 listesinin parçasıdır; ÇIKAR kayıtlar koşulmaz ve aileye girmez.
+- Diğer kapılar, çarpanlar ve ikinci kapı değişmez.
