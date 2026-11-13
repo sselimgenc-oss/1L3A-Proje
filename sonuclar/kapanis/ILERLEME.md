@@ -163,3 +163,5 @@ Yeni partiler (girdi/ altında; çıktı ara/<parti>.csv):
 | derin_hkf_a/b/c | 101/101/102 | H/KOD/F etiketlerini yeniden yargıla (KOD → FARK_YOK prosedürü) |
 | derin_kod_a/b | 64/64 | KURAL_YOK ama kaynakta kod var → kodu açıp eksik parametreyi ara |
 Kalan 85 KURAL_YOK (kaynakta kod yok) için seçenek kullanıcıya soruldu.
+- Kullanıcı netleştirdi: öncelik kendi gönderdiği belgeler (ajan1 tur1–4 → 906 listesi; ajan2 26 kayıt raporu). Doğrulandı: tur1 (417), tur2 (547), tur3 (707) satırlarının hepsi 906 listesinde var.
+- Ek partiler: derin_ajan2 (ajan2 raporundaki stratejilerin birincil kaynağını bulup karar; önceki 13 X008 satırı "link yok" diye KURAL_YOK/bekleyen idi), k6_kodsuz (85; ön kayıt eki 3 standart ayar). derin_kod_a/b sonrası hâlâ parametre eksikliğiyle KURAL_YOK kalanlar da K6'ya alınacak.
