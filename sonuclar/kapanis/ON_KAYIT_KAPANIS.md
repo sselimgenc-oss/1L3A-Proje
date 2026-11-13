@@ -72,3 +72,11 @@ Tarih: 2026-11-13. Kullanıcı önceliği (önce kendi belgeleri) ve süre neden
 - Benjamini–Hochberg (q=0,10) her aşamada **ayrı aile** olarak uygulanır; aile = o aşamanın dondurulmuş koşu listesindeki benzersiz hipotez kimlikleri (varyant ve TF ayrı kimlik). Aşama 1 listesi koşudan önce dondurulur (kimlik listesi + SHA-256); aşama 2 sonuçları aşama 1 ailesini değiştirmez. Raporda her iki aileyi birleştiren ek (bilgi amaçlı) BH tablosu da verilir.
 - Sonuç görülmeden yapılan koşu listesi elemesi (`eleme/eleme.csv`, kullanıcı yönlendirmesiyle) aşama 1 listesinin parçasıdır; ÇIKAR kayıtlar koşulmaz ve aileye girmez.
 - Diğer kapılar, çarpanlar ve ikinci kapı değişmez.
+
+## Ön kayıt düzeltmesi — sonuç görülmeden (5): aşama 2 Robotic elemesi
+
+Tarih: 2026-11-13. Kullanıcı yönlendirmesiyle ("test etmemize gerek yok dediği şeyleri çıkartalım"); aşama 1 koşusu sürerken, hiçbir aşama 2 kaydı kodlanmadan ve koşulmadan, aşama 1 sonucu raporlanmadan yazıldı. Eleme yalnız kural metni ve aile ilişkisi üzerinden yapıldı.
+
+- Robotic (HAM:B001) KOSULACAK 277 satırına sonuç görülmeden eleme uygulandı: `eleme/eleme_asama2_robotic.csv` (192 KOŞ, 85 ÇIKAR; gerekçe `eleme/ELEME_FABLE_ROBOTIC.md`). Ek 4'teki aşama 1 kuralı aynen geçerlidir: ÇIKAR kayıtlar koşulmaz ve aşama 2 BH ailesine girmez.
+- "Aşama 1'de koşulanın aynısı" gerekçesiyle çıkarılan 8 satır aşama 1 ailesinde zaten bir hipotezdir; aşama 2'de ikinci kez sayılmaz.
+- Bir temsilci kodlanamaz ya da birebir kopya diff'i anlamlı fark gösterirse, ailesinden ÇIKAR kaydı kodlamadan önce (sonuç görülmeden) geri alınır ve bu dosyaya not edilir.

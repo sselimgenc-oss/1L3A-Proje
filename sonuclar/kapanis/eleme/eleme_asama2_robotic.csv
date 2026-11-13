@@ -1,0 +1,278 @@
+kimlik,karar,gerekce_turu,gerekce,tf,aile,temsilci_mi
+HAM:B001:52,KOŞ,,Temsilci.,5m,StarRise,evet
+HAM:B001:53,ÇIKAR,c,"52 ile aynı sınıf/yapı, yalnız JSON hyperopt seti farklı; temsilci 52 (V3) ve 54 (sabit sınıf parametreleri).",5m,StarRise,hayır
+HAM:B001:54,KOŞ,,İkinci temsilci.,5m,StarRise,evet
+HAM:B001:56,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,5m,,
+HAM:B001:57,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,5m,,
+HAM:B001:58,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,5m,,
+HAM:B001:64,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,15m,,
+HAM:B001:67,ÇIKAR,b,"221 (rsi-momentum/el.py) ile aynı strateji: aynı eşikler (EMA12×0,915; 4,428/−12,383; RSI<44; short EMA72×1,008); temsilci 221.",5m,EWO-ofset A (Elliot),hayır
+HAM:B001:68,ÇIKAR,c,69 (AngleWaveCT) aynı etkin değerler + ATR-uyarlamalı bant ve 2 ek kol (üst küme); temsilci 69 (5m) ve 156 (15m).,5m,AngleWave,hayır
+HAM:B001:69,KOŞ,,Temsilci (5m).,5m,AngleWave,evet
+HAM:B001:78,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,15m,,
+HAM:B001:103,ÇIKAR,b,"567 ile birebir aynı kural (giriş, çıkış, ROI, stop, trailing); o da 570 ile temsil ediliyor.",5m,EWO-ofset B (ElliotV8),hayır
+HAM:B001:105,KOŞ,,"Aynı şablonun 1h sürümü (farklı TF, ucuz) → kaldı.",1h,EWO-ofset A (Elliot),evet
+HAM:B001:134,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,5m,,
+HAM:B001:136,KOŞ,,İkinci temsilci: farklı EMA yelpazesi + 60 dk zaman çıkışı.,30m,ichiV1-30m,evet
+HAM:B001:137,ÇIKAR,c,138 ile aynı giriş (yalnız kaydırma 3↔1 ve yalnız-kârda bayrağı); temsilci 138.,30m,ichiV1-30m,hayır
+HAM:B001:138,KOŞ,,Temsilci: varsayılan parametreler (çıkış EMA24).,30m,ichiV1-30m,evet
+HAM:B001:139,ÇIKAR,c,"138 ile aynı giriş, çıkış göstergesi EMA24→EMA3; temsilci 138.",30m,ichiV1-30m,hayır
+HAM:B001:140,ÇIKAR,c,138 ile aynı giriş ve çıkış (yalnız ROI/stop ayarı); temsilci 138.,30m,ichiV1-30m,hayır
+HAM:B001:146,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,5m,,
+HAM:B001:150,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,15m,,
+HAM:B001:156,KOŞ,,Temsilci (15m sürümü).,15m,AngleWave,evet
+HAM:B001:168,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,15m,,
+HAM:B001:190,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,15m,,
+HAM:B001:201,ÇIKAR,b,"755 ile aynı dosyanın (eltoro1_4_simple.py) AIRA klasöründeki kopyası; temsilci 755. Not: kodlayıcı iki dosyayı/JSON'u karşılaştırsın, fark çıkarsa geri alınır.",15m,eltoro,hayır
+HAM:B001:202,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,5m,,
+HAM:B001:203,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1h,,
+HAM:B001:204,ÇIKAR,c,Giriş koşullarının çoğu kaynakta yorum satırı (fiilen yalnız RSI4<40): ailenin bozuk/eksik kopyası; temsilci 206 (tam sürüm) ve 205.,5m,E0V1E,hayır
+HAM:B001:205,KOŞ,,İkinci temsilci (farklı eşik/çıkış seti).,5m,E0V1E,evet
+HAM:B001:206,KOŞ,,Temsilci (tam sürüm).,5m,E0V1E,evet
+HAM:B001:208,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1h,,
+HAM:B001:209,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1h,,
+HAM:B001:214,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,15m,,
+HAM:B001:221,KOŞ,,long+short el.py temsilcisi.,5m,EWO-ofset A (Elliot),evet
+HAM:B001:226,ÇIKAR,c,227 ile aynı kod; farkı kaynak hatası (short kolu enter_long sütununa yazılmış); temsilci 227 (doğru sürüm).,15m,mk4,hayır
+HAM:B001:227,KOŞ,,Temsilci.,15m,mk4,evet
+HAM:B001:230,KOŞ,,Temsilci (5m özgün şablon).,5m,sample_strategy,evet
+HAM:B001:231,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1h,,
+HAM:B001:233,ÇIKAR,b,828 ile aynı dosyanın AIRA klasöründeki kopyası (aynı giriş/çıkış/TP); temsilci 828.,5m,ForexRobootSuperScalper,hayır
+HAM:B001:235,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,5m,,
+HAM:B001:248,ÇIKAR,c,250 ile aynı kural; (hafta günü:ay günü) tablosu 250'nin alt kümesi (32 ↔ 38 çift); temsilci 250.,15m,lw_tdw_tdm,hayır
+HAM:B001:249,ÇIKAR,m,"Her gün 00:00'da al, 23:00'te sat (süzgeç yok) = al-tut eksi günde 1 saat eksi her gün gidiş-dönüş maliyet ×2 (≈%0,28–0,40/gün ≈ yılda %100+). Kapı 5 (al-tut Sharpe'ını aşmak) yapısal olarak olanaksız.",15m,lw_tdw_tdm,hayır
+HAM:B001:250,KOŞ,,Temsilci (takvim tablosu geniş olan; 248'in üst kümesi).,15m,lw_tdw_tdm,evet
+HAM:B001:251,KOŞ,,Temsilci.,1h,MarketCypher,evet
+HAM:B001:252,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,5m,,
+HAM:B001:380,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,4h,,
+HAM:B001:381,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1h,,
+HAM:B001:395,KOŞ,,Aile temsilcisi (taban RNG sürümü).,5m,BB_RPB_TSL,evet
+HAM:B001:396,ÇIKAR,c,"395 ile giriş birebir aynı, yalnız çıkış parametreleri farklı; temsilci 395.",5m,BB_RPB_TSL,hayır
+HAM:B001:398,ÇIKAR,c,"395'ten tek fark stoploss −0,049; temsilci 395.",5m,BB_RPB_TSL,hayır
+HAM:B001:399,KOŞ,,"395 + ek vwap giriş kolu, ROI yok: ek giriş mantığı olduğu için kaldı.",5m,BB_RPB_TSL,evet
+HAM:B001:406,KOŞ,,Ailenin eski sürümü: farklı filtre (ichimoku/btc_safe) ve çıkış; ikinci temsilci.,5m,BB_RPB_TSL,evet
+HAM:B001:434,KOŞ,,Aile temsilcisi (taban ClucHAnix_5m).,5m,ClucHAnix,evet
+HAM:B001:435,ÇIKAR,c,"434 ile yalnız pHSL (−0,10 ↔ −0,35) farkı; temsilci 434.",5m,ClucHAnix,hayır
+HAM:B001:440,KOŞ,,hhll sürümü: ROI tablosu + pHSL yok; ikinci temsilci.,5m,ClucHAnix,evet
+HAM:B001:442,KOŞ,,"Temsilci: 2021 sürümü (3 kol, sabit stop, ROI tablosu).",5m,CombinedBinHCluc,evet
+HAM:B001:443,ÇIKAR,c,442 ile yalnız ROI farkı (tek kademe %1); temsilci 442.,5m,CombinedBinHCluc,hayır
+HAM:B001:446,KOŞ,,"V2: 1h go_long (SSL/MFI/StochRSI) süzgeci — ek giriş koşulu, kaldı.",5m,CombinedBinHCluc,evet
+HAM:B001:447,ÇIKAR,c,V3: 449 (V5) ile aynı iki kol; yalnız ROI/trailing/zaman-stop ayarı; temsilci 449.,5m,CombinedBinHCluc,hayır
+HAM:B001:448,ÇIKAR,c,V4: 449 (V5) ile aynı iki kol; yalnız ROI ayarı; temsilci 449.,5m,CombinedBinHCluc,hayır
+HAM:B001:449,KOŞ,,Temsilci: V3–V5 alt grubunun (2 kol + iz stop) son sürümü.,5m,CombinedBinHCluc,evet
+HAM:B001:450,ÇIKAR,c,"V5Hyperoptable: 449 ile aynı, bir eşik (bbdelta 0,0175) farklı; temsilci 449.",5m,CombinedBinHCluc,hayır
+HAM:B001:451,KOŞ,,Temsilci: V6 (1h trend süzgeçli 3 kol).,5m,CombinedBinHCluc,evet
+HAM:B001:453,ÇIKAR,c,"V7: V6 (451) ile V8 (454) arası ara sürüm (4 kol, V8'in alt kümesi); temsilci 451/454.",5m,CombinedBinHCluc,hayır
+HAM:B001:454,KOŞ,,Temsilci: V8 (5 kol; V6–V8 alt grubunun en kapsamlısı).,5m,CombinedBinHCluc,evet
+HAM:B001:455,ÇIKAR,c,"V8Hyper: 454 ile aynı 5 kol, hyperopt eşik/ROI/stop farkı; temsilci 454.",5m,CombinedBinHCluc,hayır
+HAM:B001:456,ÇIKAR,c,"V8XH: 454 ile aynı 5 kol, eşik farkı; temsilci 454.",5m,CombinedBinHCluc,hayır
+HAM:B001:457,ÇIKAR,c,"V8XHO: 456 ile aynı, birkaç eşik farkı; temsilci 454.",5m,CombinedBinHCluc,hayır
+HAM:B001:458,ÇIKAR,c,MADV3: kolları 451 (BinH kolu birebir) ve 459 (MAD kolu) içinde zaten var; ara sürüm; temsilci 459.,5m,CombinedBinHCluc,hayır
+HAM:B001:459,KOŞ,,"Temsilci: MAD kollu alt grup (MADV5, 5 kol).",5m,CombinedBinHCluc,evet
+HAM:B001:460,ÇIKAR,c,"MADV6: 459 ile aynı 5 kol, küçük eşik/süzgeç farkı; temsilci 459.",5m,CombinedBinHCluc,hayır
+HAM:B001:463,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,4h,,
+HAM:B001:465,ÇIKAR,c,"Aynı şablon, RSI<21 eşik varyantı (çıkış RSI>99 fiilen yok → ROI); temsilci 533.",5m,BbandRsi-5m,hayır
+HAM:B001:466,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,5m,,
+HAM:B001:467,ÇIKAR,m,"ROI {0:0.003}: kâr hedefi %0,3 = maliyet ×2 gidiş-dönüş (%0,28–0,40) düzeyinde; kazananların neti ≤ ~0, zarar tarafı −%10 stop → net>0 yapısal olarak olanaksız.",15m,BbandRsi-15m,hayır
+HAM:B001:468,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,15m,,
+HAM:B001:469,KOŞ,,Temsilci: 3σ kolu.,5m,BbandRsi-5m,evet
+HAM:B001:470,KOŞ,,Temsilci: RSI süzgeçsiz 2σ kolu (rsi>12 bağlamaz).,5m,BbandRsi-5m,evet
+HAM:B001:471,ÇIKAR,c,"469 ile aynı giriş (kapanış<BB 3σ alt), çıkışta yalnız RSI>64 eki ve ROI farkı; temsilci 469.",5m,BbandRsi-5m,hayır
+HAM:B001:472,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,5m,,
+HAM:B001:473,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,15m,,
+HAM:B001:474,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,5m,,
+HAM:B001:475,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1h,,
+HAM:B001:476,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,15m,,
+HAM:B001:477,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1h,,
+HAM:B001:478,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1h,,
+HAM:B001:480,ÇIKAR,m,"ROI {0:0.0}: her kârlı işlem brüt ~%0'da kapanır, maliyet ×2 (gidiş-dönüş ≈ %0,28–0,40) altında net kazanç yapısal olarak olanaksız; zarar tarafı −%15 stop / RSI>70.",5m,BbandRsi-5m,hayır
+HAM:B001:482,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,,
+HAM:B001:484,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,15m,,
+HAM:B001:486,ÇIKAR,c,"Aynı şablon; min(RSI,8)<37 koşulu alt bant altında fiilen bağlamaz → 470 ile aynı giriş, yalnız ROI tablosu farklı; temsilci 470.",5m,BbandRsi-5m,hayır
+HAM:B001:488,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,5m,,
+HAM:B001:496,ÇIKAR,c,"5m ""kapanış<BB(20,2) alt + RSI eşiği"" şablonunun hyperopt varyantı (RSI<40, çıkış üst bant); temsilci 533.",5m,BbandRsi-5m,hayır
+HAM:B001:499,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1h,,
+HAM:B001:501,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,5m,,
+HAM:B001:502,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,15m,,
+HAM:B001:503,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1h,,
+HAM:B001:504,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,15m,,
+HAM:B001:505,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1h,,
+HAM:B001:506,KOŞ,,"Aynı giriş ama çıkış farklı fikir (yalnız kârda ilk mum, sıkı stop); kaldı.",5m,BbandRsi-5m,evet
+HAM:B001:510,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,5m,,
+HAM:B001:514,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,15m,,
+HAM:B001:515,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,15m,,
+HAM:B001:516,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,5m,,
+HAM:B001:517,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,5m,,
+HAM:B001:518,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,5m,,
+HAM:B001:519,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,5m,,
+HAM:B001:520,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,5m,,
+HAM:B001:524,ÇIKAR,c,"527 ile neredeyse aynı giriş (TEMA18 x BB alt; 26/1,4σ ↔ 25/1,5σ; aynı CMO14>−5, aynı ROI); temsilci 527 (sinyal çıkışı olan).",5m,Tema-BB,hayır
+HAM:B001:527,KOŞ,,Temsilci.,5m,Tema-BB,evet
+HAM:B001:528,KOŞ,,"BB 1σ + CMO50>0: farklı süzgeç, ikinci temsilci.",5m,Tema-BB,evet
+HAM:B001:529,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,5m,,
+HAM:B001:531,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1h,,
+HAM:B001:532,ÇIKAR,a,"1h kapanış < BB(20, 4σ) alt bandı: n=20 pencerede en büyük olası z = √19 ≈ 4,36; z ≤ −4 için son kapanışın önceki 19 barın ortalamasından ≥ 10,3 standart sapma aşağıda olması gerekir (cebirsel). Yılda ~1 olay/sembol → ~70 işlem; kapı 2 geçilemez.",1h,BB4σ-1h,hayır
+HAM:B001:533,KOŞ,,"Temsilci: şablonun kanonik biçimi (RSI<30, çıkış RSI>70, ROI 4/2/1).",5m,BbandRsi-5m,evet
+HAM:B001:534,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1h,,
+HAM:B001:537,ÇIKAR,g,"Kaynak ""custom_sell"" API gösterim dosyası: giriş ""kapanış>Keltner orta"" (barların ~yarısı), çıkış koşulsuz sonraki mum → 1 mumluk 5m tutma; fikir değil, ayrıca tek 5m mumun tipik hareketi maliyet ×2'nin altında.",5m,demo,hayır
+HAM:B001:538,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,6h,,
+HAM:B001:541,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1h,,
+HAM:B001:542,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1h,,
+HAM:B001:543,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1h,,
+HAM:B001:544,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,5m,,
+HAM:B001:545,ÇIKAR,s,"Aşama 1'de koşulan HAM:X005:19#v1 (kapanis__ha-ema-s0019, 5m) ile birebir: EMA20×EMA50 + HA, aynı çıkış, aynı ROI {5/4/3/1}, stop −%10.",5m,Strategy001,hayır
+HAM:B001:547,KOŞ,,ClucHA + lambo1 kolu (ek giriş mantığı).,5m,ClucHAnix,evet
+HAM:B001:549,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,5m,,
+HAM:B001:558,KOŞ,,"İkinci temsilci: yavaş çıkışlı uç (EMA99×1,054).",5m,EWO-ofset A (Elliot),evet
+HAM:B001:559,ÇIKAR,c,"Şablon A varyantı (EMA14×0,983, sinyal çıkışı kapalı); temsilci 561.",5m,EWO-ofset A (Elliot),hayır
+HAM:B001:560,ÇIKAR,c,"561 ile giriş birebir aynı (EMA11×0,979; EWO 2,337/−15,87); yalnız çıkış/ROI ayarı farklı; temsilci 561.",5m,EWO-ofset A (Elliot),hayır
+HAM:B001:561,KOŞ,,"Temsilci: şablon A'nın (kapanış<EMA×ofset + EWO/RSI; çıkış EMA×ofset) orta/kanonik sürümü (ElliotV5HO, sinyal çıkışı açık).",5m,EWO-ofset A (Elliot),evet
+HAM:B001:562,ÇIKAR,c,"Şablon A varyantı (EMA17×0,978); temsilci 561.",5m,EWO-ofset A (Elliot),hayır
+HAM:B001:563,ÇIKAR,c,"562 ile aynı giriş, çıkış ayarı farklı; temsilci 561.",5m,EWO-ofset A (Elliot),hayır
+HAM:B001:564,KOŞ,,İkinci temsilci: V8 + 1h yükseliş trendi süzgeci (ek giriş koşulu).,5m,EWO-ofset B (ElliotV8),evet
+HAM:B001:565,ÇIKAR,c,"V8 şablonunun hyperopt varyantı (EMA19×0,983); temsilci 570.",5m,EWO-ofset B (ElliotV8),hayır
+HAM:B001:566,ÇIKAR,c,570 ile giriş/çıkış birebir; yalnız ROI ilk kademe ve yalnız-kârda bayrağı; temsilci 570.,5m,EWO-ofset B (ElliotV8),hayır
+HAM:B001:567,ÇIKAR,c,"V8 şablonunun eşik varyantı (EMA12×0,987); temsilci 570.",5m,EWO-ofset B (ElliotV8),hayır
+HAM:B001:568,ÇIKAR,c,"567 ile aynı, yalnız ROI'ye 200 dk zaman çıkışı eki; temsilci 570.",5m,EWO-ofset B (ElliotV8),hayır
+HAM:B001:570,KOŞ,,Temsilci: V8 şablonunun kanonik dosyası.,5m,EWO-ofset B (ElliotV8),evet
+HAM:B001:571,KOŞ,,5 kollu (clucHA + zema ekli) sürüm: ek giriş kolları → kaldı.,5m,EWO-ofset C (NASOS),evet
+HAM:B001:572,ÇIKAR,c,"NASOSv5'in önceki sürümü, eşik/pencere farkı; temsilci 573.",5m,EWO-ofset C (NASOS),hayır
+HAM:B001:573,KOŞ,,İkinci temsilci: pump süzgeçli + kâr basamaklı stoplu sürüm (NASOSv5).,5m,EWO-ofset C (NASOS),evet
+HAM:B001:574,KOŞ,,EWO tanımı farklı (EMA5/35) mod kolu temsilcisi.,5m,EWO-ofset C (NASOS),evet
+HAM:B001:575,ÇIKAR,c,"574 ile aynı giriş/çıkış, EWO katsayısı ve küçük ek süzgeç farkı; temsilci 574.",5m,EWO-ofset C (NASOS),hayır
+HAM:B001:576,ÇIKAR,c,575 ile aynı metin; temsilci 574.,5m,EWO-ofset C (NASOS),hayır
+HAM:B001:590,KOŞ,,Ralli: trend yönüne göre kol değiştiren sürüm → kaldı.,5m,EWO-ofset C (NASOS),evet
+HAM:B001:591,ÇIKAR,c,590'ın bazı kolları kapalı alt kümesi; temsilci 590.,5m,EWO-ofset C (NASOS),hayır
+HAM:B001:592,ÇIKAR,c,"Şablon A'nın hyperopt varyantı (EMA31×0,978; 558 ile aynı giriş iskeleti, eşik farkı); temsilci 558/561.",5m,EWO-ofset A (Elliot),hayır
+HAM:B001:610,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,5m,,
+HAM:B001:613,ÇIKAR,s,HAM:X005:19#v1 ile aynı giriş/çıkış/ROI/stop; tek fark ek custom_exit (RSI>70 ve kârda) — yakın kopya.,5m,Strategy001,hayır
+HAM:B001:614,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1h,,
+HAM:B001:621,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,,
+HAM:B001:622,ÇIKAR,m,"ROI tablosu ilk 15 dk sonrası ≤%0,25, 60 dk sonra %0 (herhangi bir kârda çık); sinyal çıkışı yok, stop −%20. Kazananlar yapısal olarak maliyet ×2 (≈%0,28–0,40) düzeyinde/altında, kayıplar −%20 → net>0 ve PF≥1,2 olanaksız.",15m,,
+HAM:B001:623,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,5m,,
+HAM:B001:624,ÇIKAR,s,"Aşama 1'de koşulan HAM:X005:556#v1 (kapanis__ichimoku-senkou-s0556, 4h) ile birebir: Ichimoku 20/60/120/30 Senkou A×B kesişimi, %45/%50 iz stop.",4h,,
+HAM:B001:625,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,4h,,
+HAM:B001:626,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,4h,,
+HAM:B001:627,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,4h,,
+HAM:B001:628,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1h,,
+HAM:B001:629,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,4h,,
+HAM:B001:630,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,4h,,
+HAM:B001:631,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,4h,,
+HAM:B001:634,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1h,,
+HAM:B001:635,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1h,,
+HAM:B001:636,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,5m,,
+HAM:B001:637,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1h,,
+HAM:B001:638,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,5m,,
+HAM:B001:642,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,5m,,
+HAM:B001:645,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,4h,,
+HAM:B001:648,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1h,,
+HAM:B001:649,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,5m,,
+HAM:B001:650,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,4h,,
+HAM:B001:651,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,5m,,
+HAM:B001:655,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,5m,,
+HAM:B001:656,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,15m,,
+HAM:B001:662,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,5m,,
+HAM:B001:663,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,5m,,
+HAM:B001:664,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,5m,,
+HAM:B001:666,KOŞ,,694 eşikleriyle çoklu MA tipi (VEYA) — ek kollar olduğu için kaldı (sınırda).,5m,EWO-ofset A (Elliot),evet
+HAM:B001:669,ÇIKAR,c,"670 + hacim süzgeci ve ofset 0,991→0,998; temsilci 670.",5m,EWO-ofset C (NASOS),hayır
+HAM:B001:670,KOŞ,,Temsilci: 3 kollu NASOS'un özgün dosyası (NotAnotherSMAOffsetStrategy).,5m,EWO-ofset C (NASOS),evet
+HAM:B001:671,ÇIKAR,c,"670 ile aynı 3 kollu yapı, yalnız hyperopt değerleri farklı (kaynak notu da böyle); temsilci 670.",5m,EWO-ofset C (NASOS),hayır
+HAM:B001:672,ÇIKAR,c,"670 ile aynı 3 kollu yapı, yalnız hyperopt değerleri farklı; temsilci 670.",5m,EWO-ofset C (NASOS),hayır
+HAM:B001:673,KOŞ,,"Lite: RSI süzgeçsiz tek kol (EWO>0) — sadeleştirilmiş ayrı kural, kaldı.",5m,EWO-ofset A (Elliot),evet
+HAM:B001:674,ÇIKAR,c,"V8 şablonunun hyperopt varyantı (EMA10×0,984 / EMA6×1,002); temsilci 570.",5m,EWO-ofset B (ElliotV8),hayır
+HAM:B001:675,ÇIKAR,c,"674 ile giriş/çıkış birebir, yalnız stop ayarı; temsilci 570.",5m,EWO-ofset B (ElliotV8),hayır
+HAM:B001:676,ÇIKAR,c,570 ile giriş ve çıkış sinyali birebir aynı (yalnız EWO paydası low ve kâr basamaklı stop); temsilci 570.,5m,EWO-ofset B (ElliotV8),hayır
+HAM:B001:677,ÇIKAR,c,"V8 girişinin yüksek-ofset süzgeçsiz hali, çıkış/stop ayarı farklı; temsilci 570.",5m,EWO-ofset B (ElliotV8),hayır
+HAM:B001:679,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,5m,,
+HAM:B001:680,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,5m,,
+HAM:B001:681,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,5m,,
+HAM:B001:682,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1h,,
+HAM:B001:683,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1h,,
+HAM:B001:685,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,15m,,
+HAM:B001:690,ÇIKAR,c,694 ile giriş birebir aynı; yalnız ek TTF çıkışı ve ROI yok; temsilci 694.,5m,EWO-ofset A (Elliot),hayır
+HAM:B001:692,ÇIKAR,c,"Şablon A'nın SMAOffsetProtectOpt varyantı (EMA20×0,975); temsilci 694.",5m,EWO-ofset A (Elliot),hayır
+HAM:B001:693,ÇIKAR,c,"692 ile aynı giriş, çıkış/ROI ayarı farklı; temsilci 694.",5m,EWO-ofset A (Elliot),hayır
+HAM:B001:694,KOŞ,,Üçüncü temsilci: SMAOffsetProtectOpt kolunun kanonik V1'i (kısa ROI'li uç).,5m,EWO-ofset A (Elliot),evet
+HAM:B001:695,ÇIKAR,c,"Şablon A hyperopt varyantı (EMA17×0,98); temsilci 694.",5m,EWO-ofset A (Elliot),hayır
+HAM:B001:696,ÇIKAR,c,"697/698 ile aynı giriş, ROI tablosu farklı; temsilci 694.",5m,EWO-ofset A (Elliot),hayır
+HAM:B001:697,ÇIKAR,c,"Şablon A hyperopt varyantı (EMA16×0,973); temsilci 694.",5m,EWO-ofset A (Elliot),hayır
+HAM:B001:698,ÇIKAR,b,"697 ile birebir aynı kural metni (giriş, çıkış, ROI, stop); o da 694 ile temsil ediliyor.",5m,EWO-ofset A (Elliot),hayır
+HAM:B001:699,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,5m,,
+HAM:B001:701,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,5m,,
+HAM:B001:703,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,5m,,
+HAM:B001:704,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1h,,
+HAM:B001:707,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1h,,
+HAM:B001:708,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,30m,,
+HAM:B001:722,ÇIKAR,c,"723 ile aynı 3 giriş kolu, yalnız eşikler farklı; ayrıca V1 göstergeleri doğrulanmamış (emin_degil); temsilci 723.",5m,NFI V1/V2,hayır
+HAM:B001:723,KOŞ,,Temsilci.,5m,NFI V1/V2,evet
+HAM:B001:740,ÇIKAR,c,574 (NASOSv5_mod1) ile aynı eşikler; yalnız ewo1 koluna VWAP/düşüş süzgeci ve RSI periyodu farkı; temsilci 574.,5m,EWO-ofset C (NASOS),hayır
+HAM:B001:741,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1h,,
+HAM:B001:742,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,5m,,
+HAM:B001:744,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,5m,,
+HAM:B001:754,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1h,,
+HAM:B001:755,KOŞ,,Temsilci.,15m,eltoro,evet
+HAM:B001:758,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,15m,,
+HAM:B001:759,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,15m,,
+HAM:B001:762,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1h,,
+HAM:B001:763,ÇIKAR,s,"Aşama 1'de koşulan HAM:X005:549#v1 (kapanis__macd-ao-roi-s0549, 1h) ile birebir: MACD>0 + AO sıfır kesişimi, ROI %10, stop %25.",1h,,
+HAM:B001:768,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1h,,
+HAM:B001:770,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,5m,,
+HAM:B001:772,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,5m,,
+HAM:B001:773,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,15m,,
+HAM:B001:775,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,5m,,
+HAM:B001:776,ÇIKAR,a,1d EMA50/200 altın çapraz: yılda ~1/sembol → ~70 işlem (kapı 2 geçilemez); aşama 1 elemesinde X005:307#a2 aynı kural aynı gerekçeyle çıkarıldı.,1d,,
+HAM:B001:777,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,30m,,
+HAM:B001:778,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1h,,
+HAM:B001:779,ÇIKAR,c,"814 ile birebir aynı kural, yalnız MACD periyotları (24,56,6 ↔ 12,26,9); ROI/stop aynı; temsilci 814 (standart MACD).",5m,MACD-RSI200,hayır
+HAM:B001:782,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,5m,,
+HAM:B001:783,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,5m,,
+HAM:B001:784,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,5m,,
+HAM:B001:786,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1h,,
+HAM:B001:787,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,5m,,
+HAM:B001:788,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,4h,,
+HAM:B001:792,ÇIKAR,a,"532 ile aynı giriş (1h kapanış < BB(20,4σ) alt; yalnız RSI>19 ↔ >28): aynı cebirsel sınır (≥10,3σ sapma) → ~70 işlem; kapı 2 geçilemez.",1h,BB4σ-1h,hayır
+HAM:B001:793,ÇIKAR,s,"Aşama 1'de koşulan HAM:X005:574#v1 (kapanis__rsi4-ema100-s0574, 1h) ile birebir: RSI4 15/85 kesişimi + EMA100, stop %10 iz süren.",1h,,
+HAM:B001:794,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1h,,
+HAM:B001:795,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,15m,,
+HAM:B001:797,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,5m,,
+HAM:B001:798,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,30m,,
+HAM:B001:800,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,15m,,
+HAM:B001:801,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,5m,,
+HAM:B001:803,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1h,,
+HAM:B001:804,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1h,,
+HAM:B001:805,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1h,,
+HAM:B001:806,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1h,,
+HAM:B001:810,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,5m,,
+HAM:B001:812,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,30m,,
+HAM:B001:813,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,15m,,
+HAM:B001:814,KOŞ,,Temsilci.,5m,MACD-RSI200,evet
+HAM:B001:816,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,15m,,
+HAM:B001:817,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1h,,
+HAM:B001:820,KOŞ,,V2: ek trend_dir süzgeci + farklı stop/trailing; kaldı.,5m,sample_strategy,evet
+HAM:B001:823,ÇIKAR,s,"Aşama 1'de koşulan HAM:X005:21#v1 (kapanis__ft-strategy003-s0021, 5m) ile birebir (aynı eşikler, ROI, stop).",5m,,
+HAM:B001:824,ÇIKAR,s,"Aşama 1'de koşulan HAM:X005:573#v1 (kapanis__ft-strategy004-s0573, 5m) ile birebir (aynı eşikler, ROI, stop).",5m,,
+HAM:B001:826,ÇIKAR,s,"Aşama 1'de koşulan HAM:X005:28#v1 (kapanis__uc-supertrend-s0028, 1h) ile birebir: aynı 3+3 Supertrend parametreleri, ROI, stop −%26,5, trailing.",1h,,
+HAM:B001:828,KOŞ,,Temsilci. Uyarı: kâr hedefi 1×ATR(10) (5m) maliyet ×2 düzeyine yakın; kural metninden kesin çıkmadığı için kaldı.,5m,ForexRobootSuperScalper,evet
+HAM:B001:843,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,15m,,
+HAM:B001:845,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,5m,,
+HAM:B001:846,KOŞ,,Temsilci: özgün dosya.,5m,CryptoFrog,evet
+HAM:B001:847,KOŞ,,İkinci temsilci: ilk hyperopt sürümü (farklı ROI/stop/trailing ucu).,5m,CryptoFrog,evet
+HAM:B001:848,ÇIKAR,c,"847 ile birebir aynı metin (giriş, çıkış, ROI, stop); temsilci 847.",5m,CryptoFrog,hayır
+HAM:B001:849,ÇIKAR,c,Giriş/çıkış sinyali 846 ile aynı; yalnız trailing ayarı; temsilci 847.,5m,CryptoFrog,hayır
+HAM:B001:850,ÇIKAR,c,Giriş/çıkış sinyali 846 ile aynı; yalnız ROI/stop/trailing hyperopt değerleri; temsilci 846/847.,5m,CryptoFrog,hayır
+HAM:B001:851,ÇIKAR,c,Giriş/çıkış sinyali 846 ile aynı; yalnız ROI/stop/trailing hyperopt değerleri; temsilci 846/847.,5m,CryptoFrog,hayır
+HAM:B001:852,ÇIKAR,c,Giriş/çıkış sinyali 846 ile aynı; yalnız ROI/stop/trailing hyperopt değerleri; temsilci 846/847.,5m,CryptoFrog,hayır
+HAM:B001:853,ÇIKAR,c,Giriş/çıkış sinyali 846 ile aynı; yalnız ROI/stop/trailing hyperopt değerleri; temsilci 846/847.,5m,CryptoFrog,hayır
+HAM:B001:854,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,15m,,
+HAM:B001:861,ÇIKAR,b,"230 (sample_strategy) ile birebir aynı kural (RSI 30 kesişimi + TEMA9 ≤ BB orta + TEMA yükseliyor; aynı çıkış, ROI, stop).",5m,sample_strategy,hayır
+HAM:B001:865,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,15m,,
+HAM:B001:870,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,15m,,
+HAM:B001:871,KOŞ,,Temsilci.,5m,flawless_lambo-5m,evet
+HAM:B001:872,ÇIKAR,c,"871 ile aynı giriş, ROI ve stop; yalnız çıkış ifadesinde parantez/öncelik farkı; temsilci 871.",5m,flawless_lambo-5m,hayır
+HAM:B001:875,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1h,,
+HAM:B001:876,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1h,,
+HAM:B001:894,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1h,,
+HAM:B001:899,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,5m,,
+HAM:B001:900,ÇIKAR,b,251 ile aynı strateji (aynı rejim eşikleri −37/−28/−43 ve ağırlıklar 96/5/91); klasör kopyası; temsilci 251.,1h,MarketCypher,hayır
+HAM:B001:903,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,4h,,
