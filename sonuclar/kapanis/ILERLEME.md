@@ -11,11 +11,14 @@ Ajan çıktısı ham haliyle `ara/`'ya yazılır; lider denetler, sonra `k*_kara
 | B: portföy araştırma hesabı → motor/arastirma/kapanis/portfoy.py + test | ac1d98c6103e6a870 | sürüyor |
 | C: K2 kısa liste → ara/k2_nihai.csv + motor/strateji/kapanis/k2_kaynak.py | a378817cb3454c13b | sürüyor |
 | D: k3_p01 | ae27bb6b30ed36d0e | sürüyor |
-| D: k3_p02 | a72df6ea3aec567ef | sürüyor |
-| D: k3_p03..p08, k4_p01..p10 | — | bekliyor |
+| D: k3_p02 | a72df6ea3aec567ef | denetlendi |
+| D: k3_p03 | a99e150252c12bccd | sürüyor |
+| D: k3_p04..p08, k4_p01..p10 | — | bekliyor |
 | E: K5, F: koşu listesi, G: koşu betiği, H: pytest, rapor | — | bekliyor |
 
-Denetim günlüğü (parti, örneklem, hata, aksiyon): _(boş)_
+Denetim günlüğü (parti, örneklem, hata, aksiyon):
+- k3_p02 (227: KURAL_YOK 201, VERI_YOK 15, LOOKAHEAD 4, EVREN_DISI 3, YASAK 2, ML 2): `ara/denetim.py k3_p02 12 20261113` → 12/12 kaynak metniyle tutarlı (şablon/başlık/koruma modülü/kapalı kaynak). 1 tartışmalı: H001:80 (consensus oyları açık `technical` kütüphanesinde tanımlı olabilir). Kabul.
+  Lider kararı: kural zarardaki pozisyona ekleme/grind içeriyorsa YASAK (H001:151, H002:93 → birleştirmede YASAK).
 
 ---
 
