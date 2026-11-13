@@ -196,3 +196,16 @@ Düzeltme işleri: g9_a `kural_tam` baştan (etkin parametreler buy_params/sell_
 - derin_erisim (126): 57 kaynak açıldı; 9 karar değişti (222, 328, X008:L15#2 → KOSULACAK; 234, 327 → K6; 334, 365, 380, 514 → EVREN_DISI mutlak birim), hiçbir satır düşürülmedi. Kalan erişilemeyenler `ERISILEMEYEN_KAYNAKLAR.md` (kullanıcı elle kaydedebilir).
 - kul_k4_g9_a_v2 (149) baştan yazıldı: KOSULACAK 84, COK_KOLLU 35, VERI_YOK 13, LOOKAHEAD 10, TEKRAR 6, KURAL_YOK 1. Etkin değerler (buy/sell_params) betikle çözüldü; ichiV1 EMA ve pHSL değerleri lider tarafından örnekle doğrulandı. 190 LOOKAHEAD→KOSULACAK (window=2, shift(2) nedensel). Lider: 248/250 takvim kuralı tek mantık → KOSULACAK kabul.
 - Tüm partiler bitti. Sıradaki: Fable ikinci denetim (v2 + derin_* + k6), ardından nihai karar tablosu ve kodlama.
+
+### Fable ikinci denetim ve lider kararları — SONUÇ GÖRÜLMEDEN
+Rapor: `HAKEM_FABLE_IKINCI.md` (138 satır izlendi; "yeniden yap" yok, 6 dosya kabul, 9 dosyada satır düzeltmesi).
+Lider kararları:
+- X005:508 → KOSULACAK (kaynağın sabit eşikleri); 103 → EVREN_DISI (stop-emir + aynı gün kapanış = bar içi, 98 ile aynı); 517 → EVREN_DISI (mutlak birim); 236 → EVREN_DISI (bar içi limit dolumu); 162 → KOSULACAK (kaynağın tek-ETF IBS varyantı, dis__ibs-donus).
+- Fable'ın listelediği 18 satır (1, 6, 56, 260, 296, 297, 356, 357, 362, 376, 377, 393, 411, 584, 676, 697, 699, 742) → yalnız TF/tablo periyodu eksikse K6_STANDART (362/697 stop-emir, 376 limit, 377 tick süzgecinden geçirilerek).
+- Zayıf kanıtlı FARK_YOK (355, 624, 76, 116, 894) → KOSULACAK (mevcut sınıf + kaynak ayarı; kendi sonucu yok).
+- Sıralamayı yalnız kapasite için kullanan tek-varlık sinyalleri (816, 818, 446) → sıralama atılır, notla KOSULACAK (tek ölçü).
+- Aralık → orta nokta (ek 3) tüm X005 satırlarına (51, 319, 372 dahil).
+- Her kaynak varyantı ve her TF ayrı hipotez kimliği alır (koşu listesinde `kaynak_id#v1..`); BH ailesi buna göre sayılır.
+- Üçüncü taraf kod repoya girmez: g9_a_v2 `kural_tam` alanlarındaki kaynak kod parçaları kendi cümle/formül anlatımıyla değiştirilecek.
+- derin_erisim `neden` alanı EVREN_DISI satırlarında asıl gerekçeyle düzeltilecek; 742 derin_kod_b bilgisi korunacak.
+- Kesitsel rotasyon/pairs (politika 4): Fable "EVREN_DISI kalsın; istenirse ayrı ön kayıt ekiyle dar katman" diyor → kullanıcıya soruldu.

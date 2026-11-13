@@ -1,0 +1,139 @@
+kaynak_id,dosya,ajan_karar,hakem_karar,uyum,gerekce
+HAM:B001:454,kul_k4_g9_a_v2,KOSULACAK,KOSULACAK,uyumlu,ayar 40/40 dosyayla aynı (Parameter default=etkin; buy_params sözlüğü yok); stop −0.99 → ATR uyarlaması doğru
+HAM:B001:471,kul_k4_g9_a_v2,KOSULACAK,KOSULACAK,uyumlu,ROI/SL/TF ve giriş-çıkış eşikleri dosyayla aynı
+HAM:B001:456,kul_k4_g9_a_v2,KOSULACAK,KOSULACAK,uyumlu,buy_params/sell_params 41/41 aynı; kural_tamdaki bbdelta 0.039 vb. etkin değer
+HAM:B001:488,kul_k4_g9_a_v2,KOSULACAK,KOSULACAK,uyumlu,"ROI/SL/trailing/CMO50/BB(25,3.5) dosyayla aynı"
+HAM:B001:465,kul_k4_g9_a_v2,KOSULACAK,KOSULACAK,uyumlu,"RSI<21, RSI>99, ROI/SL/trailing dosyayla aynı"
+HAM:B001:475,kul_k4_g9_a_v2,KOSULACAK,KOSULACAK,uyumlu,"TF 1h, ROI/SL, BB3σ, RSI>75 aynı"
+HAM:B001:227,kul_k4_g9_a_v2,KOSULACAK,KOSULACAK,uyumlu,"rsi_entry 41/59, window 24, ROI/SL/trailing aynı (AIRA kopyası)"
+HAM:B001:226,kul_k4_g9_a_v2,KOSULACAK,KOSULACAK,uyumlu,her satır dosyadan doğrulandı; kol-2 enter_long hatası ve ölü çıkış sinyali doğru saptanmış
+HAM:B001:480,kul_k4_g9_a_v2,KOSULACAK,KOSULACAK,uyumlu,6/6 değer aynı
+HAM:B001:457,kul_k4_g9_a_v2,KOSULACAK,KOSULACAK,uyumlu,41/41 değer aynı
+HAM:B001:476,kul_k4_g9_a_v2,KOSULACAK,KOSULACAK,uyumlu,"TF 15m, stop −0.99 → ATR; değerler aynı"
+HAM:B001:190,kul_k4_g9_a_v2,KOSULACAK,KOSULACAK,uyumlu,window=2 + shift(2) nedensel; ROI/SL/trailing/gösterge listesi dosyayla aynı
+HAM:B001:461,kul_k4_g9_a_v2,COK_KOLLU,COK_KOLLU,uyumlu,10 OR dalı (9 BitOr) sayıldı = ajan 10
+HAM:B001:487,kul_k4_g9_a_v2,COK_KOLLU,COK_KOLLU,uyumlu,10 OR dalı sayıldı = ajan 10
+HAM:B001:135,kul_k4_g9_a_v2,COK_KOLLU,COK_KOLLU,kismi,"ajan 11 dedi; etkin kol 10 (buy_1 append satırı yorumda). Eşik yine ≥10, karar değişmez; sayı düzeltilsin"
+HAM:B001:407,kul_k4_g9_a_v2,COK_KOLLU,COK_KOLLU,uyumlu,11 conditions.append = ajan 11
+HAM:B001:410,kul_k4_g9_a_v2,COK_KOLLU,COK_KOLLU,uyumlu,toplamda 12 cond (cond0 toplam dışı) = ajan 12
+HAM:B001:440,kul_k4_g9_a_v2,KOSULACAK,KOSULACAK,kismi,"custom_stoploss taban değeri −0.99 (pHSL yok); ""pHSL>−0.50, ATR gerekmez"" cümlesi yanlış → fiilen stopsuz, ATR(14)×3 uyarlaması yazılmalı"
+HAM:B001:209,kul_k4_g9_a_v2,KOSULACAK,KOSULACAK,uyumsuz,"yanındaki ImpulseMACD.json uygulanmamış: etkin ROI {0:.244,245:.174,935:.034,2251:0}, stop −0.35 (ATR uyarlaması gerekmez), trailing .011/.014; ajan sınıf değerlerini (ROI .8, SL −.5→ATR, trailing .01/.09) yazmış"
+HAM:B001:105,kul_k4_g9_a_v2,KOSULACAK,KOSULACAK,uyumsuz,"yanındaki overwatch.json uygulanmamış: etkin base_nb_candles_buy 19, low_offset .903, ewo_high 5.775, ewo_low −19.765, rsi_buy 44, sell 58/1.098; ajan sınıf sözlüğünü (46/.938/2.239/−8.029/64, 49/1.019) yazmış"
+HAM:B001:156,kul_k4_g9_a_v2,KOSULACAK,KOSULACAK,uyumsuz,"yanındaki AWATRCT.json uygulanmamış: base_nb_candles_buy 51, low_offset .96, ewo_lo_limit −4.8, rsi_buy_low 32, atr_buy 2.1 vb.; ajan EMA20/.95/−2.5/35/1 yazmış"
+HAM:B001:678,kul_k4_g9_b_v2,LOOKAHEAD,LOOKAHEAD,emin_degil,"iloc[-1] ile parametre kümesi seçimi backtest sızıntısı; g9_a 157/169 ile tutarlı. ""Geleceksiz uyarlama"" politikasına göre nedensel biçimi yazılabilir; karar liderde"
+HAM:X005:103,kul_k4_g8_a_v2,KOSULACAK,EVREN_DISI,uyumsuz,"ertesi gün dünkü tepeye alış-stop + aynı gün kapanış çıkışı: g8_c X005:98 ile aynı tür; orada EVREN_DISI (emir tipi/dolum modeli), burada KOSULACAK"
+HAM:X005:517,kul_k4_g8_b_v2,KOSULACAK,EVREN_DISI,uyumsuz,350 pip stop ATR×3 ile değiştirilip KOSULACAK yapılmış; mutlak birim politikası (381/382/721/514) aynı durumu EVREN_DISI sayıyor
+HAM:X005:816,kul_k4_g8_c_v2,KOSULACAK,KOSULACAK,kismi,"kesitsel ROC sıralaması ""yalnız tahsis önceliği"" diye atılmış; derin_kod_a 446 aynı yapıda EVREN_DISI. Politika 4 ile tek ölçü gerekir"
+HAM:X005:818,kul_k4_g8_c_v2,KOSULACAK,KOSULACAK,kismi,816 ile aynı (RSI sıralaması atılmış)
+HAM:X005:798,kul_k4_g8_c_v2,EVREN_DISI,KOSULACAK,emin_degil,"SPY ayağı (RSI2<40 al, >80 çık) tek varlık kuralı; 894 (QQQ IBS) ve 40 (^GSPC BTFD) kriptoya taşınırken bu satır ""eşik enstrümana özel"" diye dışarıda"
+HAM:X005:73,kul_k4_g8_c_v2,K6_STANDART,K6_STANDART,uyumlu,"mql5 sayfası açıldı: WMA14, iAO (yerleşik 5/34), 3 gün önceki günlük dip/tepe stop emri, SL 1.5 ATR, TP %0.7 doğru. AO tabloda yok ama tanımı sabit"
+HAM:X005:81,kul_k4_g8_c_v2,K6_STANDART,K6_STANDART,kismi,MA tipi=SMA tabloya uygun; kaynak örneği GBPUSD 4h → TF 4h tek hipotez olmalı (4h|1d değil)
+HAM:X005:728,kul_k4_g8_c_v2,K6_STANDART,K6_STANDART,kismi,"MA tipi/TF tabloya uygun; ""HA ortalaması = HA kapanış ortalaması"" varsayımı tablo dışı (formül varsayımı), sayfa açılamadı"
+HAM:X005:693,kul_k4_g8_c_v2,K6_STANDART,K6_STANDART,uyumlu,yalnız TF (ve 698de 3/3 yumuşatma) eksik; tablo değeri doğru; diğer parametreler liste satırıyla aynı
+HAM:X005:698,kul_k4_g8_c_v2,K6_STANDART,K6_STANDART,uyumlu,yalnız TF (ve 698de 3/3 yumuşatma) eksik; tablo değeri doğru; diğer parametreler liste satırıyla aynı
+HAM:X005:710,kul_k4_g8_c_v2,K6_STANDART,K6_STANDART,uyumlu,yalnız TF (ve 698de 3/3 yumuşatma) eksik; tablo değeri doğru; diğer parametreler liste satırıyla aynı
+HAM:X005:711,kul_k4_g8_c_v2,K6_STANDART,K6_STANDART,uyumlu,yalnız TF (ve 698de 3/3 yumuşatma) eksik; tablo değeri doğru; diğer parametreler liste satırıyla aynı
+HAM:X005:727,kul_k4_g8_c_v2,K6_STANDART,K6_STANDART,uyumlu,yalnız TF (ve 698de 3/3 yumuşatma) eksik; tablo değeri doğru; diğer parametreler liste satırıyla aynı
+HAM:X005:730,kul_k4_g8_c_v2,K6_STANDART,K6_STANDART,uyumlu,yalnız TF (ve 698de 3/3 yumuşatma) eksik; tablo değeri doğru; diğer parametreler liste satırıyla aynı
+HAM:X005:736,kul_k4_g8_c_v2,K6_STANDART,K6_STANDART,uyumlu,yalnız TF (ve 698de 3/3 yumuşatma) eksik; tablo değeri doğru; diğer parametreler liste satırıyla aynı
+HAM:X005:594,kul_k4_g8_b_v2,K6_STANDART,K6_STANDART,uyumlu,tek eksik MA tipi → SMA; diğer değerler liste satırıyla aynı
+HAM:X005:624,derin_bekleyen,FARK_YOK,FARK_YOK,kismi,"kod kapsıyor (giris 20/cikis 20/stop 3 ızgara içi); koşu v1 WF aday havuzu, ayarın kendi sonucu yok; sınıf ""ilk kesişim"", kaynak ""≥ kanal"" durumu"
+HAM:X005:40,derin_hkf_a,FARK_YOK,FARK_YOK,uyumlu,"BtfdGunlukDip varsayılanı kaynakla birebir; v2 1d varsayılan ayar gerçekten koştu (elendi, 314 işlem; evren ""genel"")"
+HAM:X005:53,derin_hkf_a,FARK_YOK,FARK_YOK,uyumlu,"IbsDonus varsayılanı 0.2/0.8; v2 1d varsayılan koştu (1524 işlem). Kaynağın saat penceresi varsayılansız, yok sayılmış"
+HAM:X005:76,derin_hkf_a,FARK_YOK,FARK_YOK,kismi,"20/10/2ATR sınıf varsayılanı; yalnız v1 WF ızgarasında, v2 kart ayarıyla koştu; ATR periyodu kaynakta yok"
+HAM:X005:116,derin_hkf_a,FARK_YOK,FARK_YOK,kismi,"rsi4/trend200 kodda var; yalnız v1 WF ızgara noktası, stop ATR×4 (ön kayıt uyarlaması ×3); v2 r3 ayarıydı"
+HAM:X005:286,derin_hkf_b,FARK_YOK,FARK_YOK,kismi,"SMA50/200 long dış ayar #30, WF pencerelerinde 6 kez seçilmiş; kaynakta stop aralığı var (%5–10 ya da MA200 altı) → ""stop yok"" sayılmış; koşulan stop ATR×2"
+HAM:X005:355,derin_hkf_b,FARK_YOK,FARK_YOK,kismi,"SMA20/50 long dış ayar #28 ""WF aday kümesinde koştu, hiç seçilmedi"" → bu ayarın örneklem dışı sonucu yok"
+HAM:X005:388,derin_hkf_b,FARK_YOK,FARK_YOK,uyumlu,"286 ile aynı ayar (#30); hedef fiyat formülsüz, dışarıda bırakılması doğru"
+HAM:X005:507,derin_hkf_b,FARK_YOK,FARK_YOK,uyumlu,"D1H1Macd varsayılanı (cikis_modu 1, 12/26/9, long) kaynakla birebir; v1 30m/1h WF (18 aday)"
+HAM:X005:532,derin_hkf_b,FARK_YOK,FARK_YOK,uyumlu,"v3 sınıfı kaynağın kodu; DK_SPX 30m tek ayar koştu (121 işlem, elendi). Seans kuralı, kriptoda yeniden koşulmaz"
+HAM:X005:894,derin_hkf_c,FARK_YOK,FARK_YOK,kismi,"IBS 0.1/0.9/stop 3 ızgara noktası; ajan kendi notunda ""özgül kayıtla doğrulanmadı"" diyor; WF en sık seçilen 0.1/0.9/stop 5"
+HAM:X005:903,derin_hkf_c,FARK_YOK,FARK_YOK,uyumlu,"SMA10/30 long dış ayar #24, WF 1 kez seçilmiş"
+HAM:X005:115,k6_kodsuz,K6_STANDART,K6_STANDART,uyumlu,eksik yalnız σ → 2 (tablo)
+HAM:X005:147,k6_kodsuz,K6_STANDART,K6_STANDART,uyumlu,eksik yalnız ATR periyodu → 14
+HAM:X005:257,k6_kodsuz,K6_STANDART,K6_STANDART,uyumlu,"MA tipi → SMA; sayfa açılamadı, liste satırıyla aynı"
+HAM:X005:264,k6_kodsuz,K6_STANDART,K6_STANDART,uyumlu,σ ve TF eksik; tablo doğru
+HAM:X005:301,k6_kodsuz,K6_STANDART,K6_STANDART,uyumlu,RSI 14 + TF; tablo doğru
+HAM:X005:304,k6_kodsuz,K6_STANDART,K6_STANDART,uyumlu,RSI 14; tablo doğru
+HAM:X005:339,k6_kodsuz,K6_STANDART,K6_STANDART,kismi,"TF tabloya uygun; std penceresi=100 varsayımı ve ayar içindeki 5 ""varyant"" hangi hipotezin koşulacağını belirsiz bırakıyor"
+HAM:X005:346,k6_kodsuz,K6_STANDART,K6_STANDART,kismi,"2–25 platform girdi aralığının orta noktası (13); ek 3 harfine uygun ama kaynak notu ""varsayılan yok, doğrudan uygulanamaz"""
+HAM:X005:348,k6_kodsuz,K6_STANDART,K6_STANDART,kismi,5 parametrenin 5i tablo/orta nokta; BB çarpanı 0–2 girdi aralığından 1σ (tablodaki 2σ yerine). Kural fiilen bizim kurduğumuz kural; lider kararı
+HAM:X005:406,k6_kodsuz,K6_STANDART,K6_STANDART,kismi,"TF tabloya uygun; SMA/EMA × 20/50 = 4 varyant × 2 TF = 8 hipotez; kaynak bunları raporlamıyor, ""ya da"" diye sayıyor (ek 3: tek değer)"
+HAM:X005:417,k6_kodsuz,K6_STANDART,K6_STANDART,uyumlu,eksik yalnız TF
+HAM:X005:421,k6_kodsuz,K6_STANDART,K6_STANDART,kismi,"MACD ve TF tabloya uygun; EMA100 filtresi ""şart mı teyit mi"" belirsizliği iki varyantla çözülmüş (sayısal eksik değil)"
+HAM:X005:430,k6_kodsuz,K6_STANDART,K6_STANDART,uyumlu,σ → 2
+HAM:X005:438,k6_kodsuz,K6_STANDART,K6_STANDART,uyumlu,"MA tipi SMA, MACD 12/26/9; TF haftalık kaynakta"
+HAM:X005:466,k6_kodsuz,K6_STANDART,K6_STANDART,uyumlu,SAR 0.02/0.02/0.2
+HAM:X005:495,k6_kodsuz,K6_STANDART,K6_STANDART,uyumlu,MACD 12/26/9
+HAM:X005:496,k6_kodsuz,K6_STANDART,K6_STANDART,kismi,"SAR tabloya uygun; ama kaynağın öznel ilk stopu (destek/son dip) SAR ile değiştirilmiş ve ""kâr al ya da stopu sıkılaştır"" seçeneğinden biri seçilmiş → ek 3 kapsamı dışı öğe"
+HAM:X005:508,k6_kodsuz,K6_STANDART,KOSULACAK,uyumsuz,"eksik parametre yok: kaynak sabit eşik veriyor (−15.47/+18.80 bp, ±2σ −32.61/+35.93 bp). Kayan 20 pencere z-skoru kaynak kuralını değiştiriyor; 196 (RSRS sabit eşik) ile aynı ölçüyle sabit eşikli KOSULACAK olmalı"
+HAM:X005:234,derin_erisim,K6_STANDART,K6_STANDART,uyumlu,"oanda.jp sayfası açıldı: SmaCross fast=20 slow=60, long-only; TF yok → 4h|1d"
+HAM:X005:327,derin_erisim,K6_STANDART,K6_STANDART,uyumlu,"prorealcode sayfası açıldı: EMA50/100, Highest[50](close[1]) / Lowest[50](low[1]), Supertrend[3,10], BUY AT high STOP; TF yok"
+HAM:X005:257,derin_erisim,K6_STANDART,K6_STANDART,uyumlu,k6_kodsuz ile aynı satır
+HAM:X005:406,derin_erisim,K6_STANDART,K6_STANDART,kismi,k6_kodsuz ile aynı satır (8 hipotez sorunu)
+HAM:X005:508,derin_erisim,K6_STANDART,KOSULACAK,uyumsuz,k6_kodsuz ile aynı satır
+HAM:X005:498,derin_bekleyen,VERI_YOK,VERI_YOK,uyumlu,$SPXA50R genişlik verisi gerekir
+HAM:X005:512,derin_bekleyen,KURAL_YOK,KURAL_YOK,uyumlu,"Hurst hesabı kütüphane sınıfında, repoda formül yok"
+HAM:X005:563,derin_bekleyen,KURAL_YOK,KURAL_YOK,uyumlu,kod-kural çelişkisi + mutlak USD
+HAM:X005:636,derin_bekleyen,EVREN_DISI,EVREN_DISI,uyumlu,10 yen mutlak tampon; Kagi eşiği metin/kod çelişkili
+HAM:X005:220,derin_bekleyen,LOOKAHEAD,LOOKAHEAD,uyumlu,seasonal_decompose merkezli ortalama; eşik de aralık
+HAM:X005:160,derin_hkf_a,EVREN_DISI,EVREN_DISI,uyumlu,"551 hisse kesitsel contrarian (politika 4: N-bağımsız ağırlık formülü, uyarlanabilir sınıf)"
+HAM:X005:191,derin_hkf_a,EVREN_DISI,EVREN_DISI,uyumlu,açılış boşluğu + 1 dk mum (ayrıca VERI_YOK)
+HAM:X005:280,derin_hkf_a,EVREN_DISI,EVREN_DISI,emin_degil,"kural hisse başına tanımlı (BB+RSI, SMA20 çıkış, 3 ATR stop); dışarıda kalma nedeni Nifty endeks filtresi. BTC ile ikame kural değişikliği olur; karar savunulabilir"
+HAM:X005:162,derin_hkf_a,EVREN_DISI,KOSULACAK,kismi,"ana yöntem kesitsel; ama kaynağın tek-ETF varyantı (IBS<0.2 long, >0.8 short, 1 gün tut) tek varlıkta tam. dis__ibs-donus short=True, maks_tutma=1 ayarıyla koşulabilir ya da TEKRAR/FARK_YOK bağlanmalı"
+HAM:X005:169,derin_hkf_a,EVREN_DISI,EVREN_DISI,uyumlu,büyüklük beşte birliği içinde ondalık sıralama
+HAM:X005:202,derin_hkf_a,EVREN_DISI,EVREN_DISI,uyumlu,SHFE ss/ni çifti (politika 4)
+HAM:X005:518,derin_hkf_b,EVREN_DISI,EVREN_DISI,uyumlu,açılış boşluğu
+HAM:X005:545,derin_hkf_b,EVREN_DISI,EVREN_DISI,uyumlu,"5612 hisse GGR pairs (politika 4: seçim yordamı var, uyarlanabilir sınıf)"
+HAM:X005:614,derin_hkf_b,EVREN_DISI,EVREN_DISI,uyumlu,pip + seans kutusu
+HAM:X005:527,derin_hkf_b,EVREN_DISI,EVREN_DISI,uyumlu,NYSE 10 dilim
+HAM:X005:535,derin_hkf_b,EVREN_DISI,EVREN_DISI,uyumlu,NYSE 10 dilim
+HAM:X005:558,derin_hkf_b,EVREN_DISI,EVREN_DISI,uyumlu,7 ETF içinden en iyi 1 (2 güvenli liman dahil)
+HAM:X005:802,derin_hkf_c,KURAL_YOK,K6_STANDART,emin_degil,eksik yalnız TF (W%R tanımı kodda yazılı) → ek 3e göre K6 adayı; Quantopian handle_data dakikalıksa VERI_YOK. Emin değilim
+HAM:X005:836,derin_hkf_c,EVREN_DISI,EVREN_DISI,uyumlu,SPY/QQQ oranı
+HAM:X005:901,derin_hkf_c,EVREN_DISI,EVREN_DISI,uyumlu,100 hisse içinden 50/50
+HAM:X005:804,derin_hkf_c,EVREN_DISI,EVREN_DISI,uyumlu,açılış boşluğu
+HAM:X005:814,derin_hkf_c,EVREN_DISI,EVREN_DISI,uyumlu,5 ETF içinden 2
+HAM:X005:850,derin_hkf_c,EVREN_DISI,EVREN_DISI,uyumlu,GLD–USO yayılımı
+HAM:X005:419,derin_kod_a,KOSULACAK,KOSULACAK,emin_degil,liste satırıyla tutarlı; TradingView pine-facade kodunu açamadım (birincil doğrulama yok)
+HAM:X005:408,derin_kod_a,KOSULACAK,KOSULACAK,uyumlu,"egx-desk mean_reversion.py SHA 5bc35be açıldı: RSI14 ≤30/≤40, SMA20/50, rvol 1.5, 20 bar tutma birebir"
+HAM:X005:328,derin_kod_a,KURAL_YOK,KURAL_YOK,uyumlu,o partide erişim yoktu; derin_erisim açıp KOSULACAK yaptı (birleştirmede o geçerli)
+HAM:X005:397,derin_kod_a,KOSULACAK,KOSULACAK,uyumlu,"egx-desk breakout.py açıldı: kanal 55, rvol 2.5, SMA20>50, 3×ATR14 chandelier birebir; EGP ciro filtresi düşürülmüş (not edilmiş)"
+HAM:X005:446,derin_kod_a,EVREN_DISI,EVREN_DISI,kismi,tek sembol sinyali ve ATR çıkışları kodda tam; dışlama nedeni top_n sıralaması. g8_c 816/818 aynı yapıda sıralama atılıp KOSULACAK
+HAM:X005:377,derin_kod_a,KURAL_YOK,K6_STANDART,uyumsuz,"ajanın kendi cümlesi: ""KURAL_YOK yalnız TF yokluğundan"". Ek 3: TF yoksa 4h ve 1d. (1 tick stop tamponu ayrıca mutlak birim sorusu)"
+HAM:X005:883,derin_kod_b,KURAL_YOK,KURAL_YOK,uyumlu,Zorro yerleşik HighPass/FisherN/Hurst formülü kodda yok
+HAM:X005:881,derin_kod_b,KURAL_YOK,KURAL_YOK,uyumlu,Zorro yerleşik fonksiyonlar
+HAM:X005:742,derin_kod_b,KURAL_YOK,K6_STANDART,uyumsuz,"ayna depo açılmış, kural tam (Period 40, Zone 0.20), eksik yalnız TF. Aynı sayfanın Rule 1i (710) K6_STANDART"
+HAM:X005:869,derin_kod_b,KURAL_YOK,KURAL_YOK,uyumlu,"sürekli tahmin, ayrık giriş/çıkış yok"
+HAM:X005:885,derin_kod_b,KURAL_YOK,KURAL_YOK,uyumlu,pip tamponlu emir + ATRS; politika etiketi EVREN_DISI (mutlak birim) olurdu
+HAM:X005:846,derin_kod_b,EVREN_DISI,EVREN_DISI,uyumlu,eşik 7.5 mutlak fiyat birimi
+HAM:X005:750,k6_kodsuz,KURAL_YOK,KURAL_YOK,uyumlu,"RSIH formülü listede yok, sayfa açılamadı"
+HAM:X005:473,k6_kodsuz,KURAL_YOK,KURAL_YOK,uyumlu,pencere belirsiz + pip
+HAM:X005:587,k6_kodsuz,KURAL_YOK,KURAL_YOK,uyumlu,"çıkış ""kişisel tercih"""
+HAM:X005:369,derin_erisim,KURAL_YOK,KURAL_YOK,uyumlu,açılamadı; liste satırı aralık (GA ile ayarlanan) veriyor
+HAM:X005:745,derin_erisim,KURAL_YOK,KURAL_YOK,uyumlu,traders.com 403; Reversion Index formülü listede yok
+HAM:X005:489,derin_erisim,KURAL_YOK,KURAL_YOK,uyumlu,açıldı; sayılar yok
+HAM:X005:742,derin_erisim,KURAL_YOK,K6_STANDART,uyumsuz,"derin_kod_b aynayı açmıştı; burada ""kaynak erişilemedi"" yazıp en yüksek öncelikle onu eziyor. Eksik yalnız TF"
+HAM:X005:755,derin_erisim,KURAL_YOK,KURAL_YOK,uyumlu,"RR>1.0 hedef tanımı yok, stop-limit"
+HAM:X005:721,derin_erisim,EVREN_DISI,EVREN_DISI,kismi,"karar politika gereği doğru; ama neden alanı ""kaynak erişilemedi"" (karar gerekçesi ""not""ta kalmış)"
+HAM:X008:EK#2,derin_ajan2,TEKRAR,TEKRAR,uyumlu,X005:19 aynı dosya; hedef KOSULACAK
+HAM:X008:EK#5,derin_ajan2,KOSULACAK,KOSULACAK,uyumlu,StockSharp 0030; listede yok
+HAM:X008:EK#4,derin_ajan2,TEKRAR,TEKRAR,uyumlu,X005:28 aynı dosya
+HAM:X008:L17#5,derin_ajan2,TEKRAR,TEKRAR,uyumlu,X005:513 aynı strateji
+HAM:X008:EK#1,derin_ajan2,KURAL_YOK,KURAL_YOK,uyumlu,rapor link vermiyor; 4 aday depo denenmiş
+HAM:X008:L21#1,derin_ajan2,KURAL_YOK,KURAL_YOK,uyumlu,kaynak bulunamadı
+HAM:X008:L17#4,derin_ajan2,KOSULACAK,KOSULACAK,uyumlu,"ZScoreStrategy.cs yerel klondan doğrulandı (z<−2/>+2, çıkış 0, %2 stop)"
+HAM:X008:L15#2,derin_erisim,KOSULACAK,KOSULACAK,uyumlu,"tradingqna sayfası açıldı: günlük EMA8, 1h EMA50, Supertrend(10,3) doğrulandı; 6 varyant ayrı kimlik gerektirir"
+HAM:X005:328,derin_erisim,KOSULACAK,KOSULACAK,kismi,"sayfa açıldı: kural birebir. TF: sayfa ""M30 için tasarlandı"" diyor; 1h ikinci kaynaktan (doğrulayamadım), sayfadaki günlük test dışarıda"
+HAM:X005:236,derin_kod_a,KOSULACAK,EVREN_DISI,uyumsuz,giriş ve çıkış bar içi limit dolumuna bağlı (15m); politika (d) bunu EVREN_DISI sayıyor (835 ile aynı tür)
+HAM:X005:837,derin_hkf_c,EVREN_DISI,EVREN_DISI,uyumlu,"kategori doğru (pairs/kesitsel/seans); tek varlıkta kural yok. Neden metni şablon, satıra özgü değil"
+HAM:X005:864,derin_hkf_c,EVREN_DISI,EVREN_DISI,uyumlu,"kategori doğru (pairs/kesitsel/seans); tek varlıkta kural yok. Neden metni şablon, satıra özgü değil"
+HAM:X005:849,derin_hkf_c,EVREN_DISI,EVREN_DISI,uyumlu,"kategori doğru (pairs/kesitsel/seans); tek varlıkta kural yok. Neden metni şablon, satıra özgü değil"
+HAM:X005:902,derin_hkf_c,EVREN_DISI,EVREN_DISI,uyumlu,"kategori doğru (pairs/kesitsel/seans); tek varlıkta kural yok. Neden metni şablon, satıra özgü değil"
+HAM:X005:856,derin_hkf_c,EVREN_DISI,EVREN_DISI,uyumlu,"kategori doğru (pairs/kesitsel/seans); tek varlıkta kural yok. Neden metni şablon, satıra özgü değil"
+HAM:X005:744,derin_hkf_c,EVREN_DISI,EVREN_DISI,uyumlu,"kategori doğru (pairs/kesitsel/seans); tek varlıkta kural yok. Neden metni şablon, satıra özgü değil"
+HAM:X005:743,derin_hkf_c,EVREN_DISI,EVREN_DISI,uyumlu,"kategori doğru (pairs/kesitsel/seans); tek varlıkta kural yok. Neden metni şablon, satıra özgü değil"
+HAM:X005:886,derin_hkf_c,EVREN_DISI,EVREN_DISI,uyumlu,"kategori doğru (pairs/kesitsel/seans); tek varlıkta kural yok. Neden metni şablon, satıra özgü değil"
+HAM:X005:871,derin_hkf_c,EVREN_DISI,EVREN_DISI,uyumlu,"kategori doğru (pairs/kesitsel/seans); tek varlıkta kural yok. Neden metni şablon, satıra özgü değil"
+HAM:X005:105,derin_erisim,EVREN_DISI,EVREN_DISI,emin_degil,SPY için S&P500 50/200 filtresi varlığın kendi endeksi; kendi SMA50/200 ile tek varlık kuralı yazılabilir. 4 test varyantı var
+HAM:X005:422,kul_k3_g8,EVREN_DISI,EVREN_DISI,emin_degil,"12 ay ortalama üstü → endekste, değilse tahvil. Tahvil yerine nakit yazmak kuralı değiştirir; 141 (Faber, nakit) KOSULACAK"
