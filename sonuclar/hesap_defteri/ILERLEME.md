@@ -33,16 +33,16 @@ Kanıt yollarında `dal:claude/adoring-maxwell-q7t60g:<yol>` yazılır.
 ## Kaynak grupları ve durum
 | Grup | Kapsam (birincil kaynak) | ~satır | Ajan | Durum | Ara çıktı |
 |---|---|---|---|---|---|
-| G0_SONUC | 521 kodlu strateji × tüm sonuç dosyaları (k2/k3, v1 evren, kilit, final, v2, holdout keşif, paper_v2, v3) + ayar kümeleri | 521 | Sonnet | bekliyor | ara/G0_kod_akibet.csv, ara/G0_ayarlar.csv |
-| G1_KITAP | veri/kartlar_ham (137 dosya, 810 kart) + aileler/elenenler/kitap_kartlari_eslesme/kodlama d10*-d12a | 810 | Sonnet | bekliyor | ara/G1_KITAP_ham.csv |
-| G2_DIS_ESKI | dis_envanter (431), portfoy_adaylari (71), arsiv tv_eleme_dali meta (164+92) | 758 | Sonnet | bekliyor | ara/G2_DIS_ESKI_ham.csv |
-| G3_REPO | repo_kodlari (398), repo_raporlari (331), ek_77_strateji.md (77), sg-arge xlsx/md | ~810 | Sonnet | bekliyor | ara/G3_REPO_ham.csv |
-| G4_GITHUB | github_g1..g7 (1198) + kodlama_kuyrugu_github + d11f-j + ayarlar_d11j_ek | 1198 | Sonnet | bekliyor | ara/G4_GITHUB_ham.csv |
-| G5_151_SON1AY | kakushadze_151 (173) + d12b + son1ay (16) | 189 | Sonnet | bekliyor | ara/G5_151_SON1AY_ham.csv |
-| G6_V3 | v3 ham kataloglar (2592; on_eleme kapsar) + tur2/3/6 + adaylar/kartlar/kodlama_v3 | 2592 | Sonnet | bekliyor | ara/G6_V3_ham.csv |
-| G8_DIS_ARASTIRMA | ajan1 906 (dal), ajan2 26 (md), karşılaştırma/derin_gecis/tur4 | ~932 | Sonnet | bekliyor | ara/G8_DIS_ARASTIRMA_ham.csv |
-| G9_ROBOTIC | RoboticAutomations 909 dosya (dal) + kume_listesi | 909 | Sonnet | bekliyor | ara/G9_ROBOTIC_ham.csv |
-| G10_ARSIV | arsiv/* eski projeler (algo-sg, strateji-sg, swing-sg, day-trade-sg, scalp-sg, codex-algo, sg-pano, strateji-test-pano, sg-algo-proje) + haiku dalları; repo_kodlari/raporlari'nın kapsamadıkları | ? | Sonnet | bekliyor | ara/G10_ARSIV_ham.csv |
+| G0_SONUC | 521 kodlu strateji × tüm sonuç dosyaları (k2/k3, v1 evren, kilit, final, v2, holdout keşif, paper_v2, v3) + ayar kümeleri | 521 | Sonnet | sürüyor (2026-11-13) | ara/G0_kod_akibet.csv, ara/G0_ayarlar.csv |
+| G1_KITAP | veri/kartlar_ham (137 dosya, 810 kart) + aileler/elenenler/kitap_kartlari_eslesme/kodlama d10*-d12a | 810 | Sonnet | sürüyor (2026-11-13) | ara/G1_KITAP_ham.csv |
+| G2_DIS_ESKI | dis_envanter (431), portfoy_adaylari (71), arsiv tv_eleme_dali meta (164+92) | 758 | Sonnet | sürüyor (2026-11-13) | ara/G2_DIS_ESKI_ham.csv |
+| G3_REPO | repo_kodlari (398), repo_raporlari (331), ek_77_strateji.md (77), sg-arge xlsx/md | ~810 | Sonnet | sürüyor (2026-11-13) | ara/G3_REPO_ham.csv |
+| G4_GITHUB | github_g1..g7 (1198) + kodlama_kuyrugu_github + d11f-j + ayarlar_d11j_ek | 1198 | Sonnet | sürüyor (2026-11-13) | ara/G4_GITHUB_ham.csv |
+| G5_151_SON1AY | kakushadze_151 (173) + d12b + son1ay (16) | 189 | Sonnet | sürüyor (2026-11-13) | ara/G5_151_SON1AY_ham.csv |
+| G6_V3 | v3 ham kataloglar (2592; on_eleme kapsar) + tur2/3/6 + adaylar/kartlar/kodlama_v3 | 2592 | Sonnet | sürüyor (2026-11-13) | ara/G6_V3_ham.csv |
+| G8_DIS_ARASTIRMA | ajan1 906 (dal), ajan2 26 (md), karşılaştırma/derin_gecis/tur4 | ~932 | Sonnet | sürüyor (2026-11-13) | ara/G8_DIS_ARASTIRMA_ham.csv |
+| G9_ROBOTIC | RoboticAutomations 909 dosya (dal) + kume_listesi | 909 | Sonnet | sürüyor (2026-11-13) | ara/G9_ROBOTIC_ham.csv |
+| G10_ARSIV | arsiv/* eski projeler (algo-sg, strateji-sg, swing-sg, day-trade-sg, scalp-sg, codex-algo, sg-pano, strateji-test-pano, sg-algo-proje) + haiku dalları; repo_kodlari/raporlari'nın kapsamadıkları | ? | Sonnet | sürüyor (2026-11-13) | ara/G10_ARSIV_ham.csv |
 | Birleştirme | ham → tekil, akıbet | — | lider | bekliyor | ham_satirlar.csv, tekil_stratejiler.csv |
 | Öz denetim | 40 satır, tohum 20261113 | — | lider | bekliyor | ara/oz_denetim.csv |
 | Rapor + PR | — | — | lider | bekliyor | RAPOR.md |
