@@ -1,6 +1,6 @@
 # Kapanış turu ilerleme kaydı
 
-Son kontrol: 2026-11-13 13:00 UTC. **Görev bitmedi; gerçek piyasa verisi koşulmadı.** Bu dosya oturum devam noktasıdır.
+Son kontrol: 2026-11-13 11:39 UTC. **Görev bitmedi; gerçek piyasa verisi koşulmadı.** Bu dosya oturum devam noktasıdır.
 
 ## Değişmez ön kayıt
 
