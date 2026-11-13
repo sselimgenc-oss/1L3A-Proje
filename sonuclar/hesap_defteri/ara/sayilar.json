@@ -21,20 +21,20 @@
   "AYAR": 488,
   "ESDEGER": 82
  },
- "tekil": 7014,
+ "tekil": 6223,
  "tekil_tur": {
   "AYAR": 16,
-  "HAM": 6477,
+  "HAM": 5686,
   "KOD": 521
  },
  "tekil_durum": {
   "C_KODLANDI_KOSULMADI": 42,
-  "D_KODLANMADI_NEDENLI": 4260,
+  "D_KODLANMADI_NEDENLI": 3788,
   "E_KODLANMADI_NEDENSIZ": 160,
-  "H_BIZIM_EVRENDE_UYGULANAMAZ": 885,
-  "G_ML": 746,
-  "F_YASAK_TIP": 372,
-  "BELIRSIZ": 54,
+  "H_BIZIM_EVRENDE_UYGULANAMAZ": 833,
+  "G_ML": 518,
+  "F_YASAK_TIP": 352,
+  "BELIRSIZ": 35,
   "B_TEST_EDILDI_ELENDI": 485,
   "A_TEST_EDILDI_GECTI": 10
  },
@@ -44,7 +44,7 @@
   "C_KODLANDI_KOSULMADI": 26
  },
  "yapisal_kapi_evet": 73,
- "fark_test_edilmedi": 2330,
+ "fark_test_edilmedi": 2228,
  "fark_test_edilmedi_dogrulanmamis": 911,
  "B_adil": {
   "evet": 270,

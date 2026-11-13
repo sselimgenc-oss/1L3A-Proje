@@ -1,0 +1,61 @@
+url,tekil_sayisi,tekiller,kaynaklar,adlar
+dev.to/maymay5692/i-backtested-49-crypto-trading-strategies-heres-every-single-result-4gg5,31,HAM:V009:8;HAM:V015:10;HAM:V015:11;HAM:V015:12;HAM:V015:13;HAM:V015:14;HAM:V015:15;HAM:V015:16;HAM:V015:17;HAM:V015:18;HAM:V015:19;HAM:V015:2;HAM:V015:20;HAM:V015:21;HAM:V015:22;HAM:V015:23;HAM:V015:24;HAM:V015:25;HAM:V015:26;HAM:V015:27;HAM:V015:28;HAM:V015:29;HAM:V015:3;HAM:V015:30;HAM:V015:31;HAM:V015:4;HAM:V015:5;HAM:V015:6;HAM:V015:7;HAM:V015:8;HAM:V015:9,V009;V015,49 kripto strateji backtest (ema_crossover) || atr_trailing_stop || donchian_breakout || swing_trading || sma_crossover || breakout_confirmation
+repository.nwu.ac.za/bitstreams/23539fee-2f38-489c-9ad0-4d815057e8f0/download,8,HAM:V005:109;HAM:V005:110;HAM:V005:111;HAM:V005:112;HAM:V005:113;HAM:X005:400;HAM:X005:401;HAM:X005:416,V005;X005,"SMA 40/80 (uzun) - teknik kurallar, long+short evreni || EMA 30/60 (uzun) || Kanal kırılımı 60 (uzun) || Momentum 60 (uzun) || Trix 20 (uzun) || MACD (12/26/9) strategy – A framework for applied quantitati"
+arxiv.org/pdf/2202.11309,7,HAM:V009:18;HAM:V015:41;HAM:V015:42;HAM:V015:43;HAM:V015:44;HAM:V015:45;HAM:V015:46,V009;V015,"Klasik gösterge taraması (AMA/Keltner/RSI/Aroon/Bollinger/MA || Keltner non-adaptive (S&P500, T=8) || Two-Average AMA (S&P500, L=51, S=5) || Two-Average AMA (SH510300, L=19, S=3) || Keltner non-adaptive (SH510300, T=6) || MACD (SH510300, S=2, L=4, sig=2)"
+quant.csdn.net/6874be27bb9d8e0ecec234b8.html,7,HAM:V003:123;HAM:V003:20;HAM:V003:21;HAM:V003:22;HAM:V003:23;HAM:V003:30;HAM:X005:196,V002;V003;X005,"RSRS 4 varyant (beta, standart skor, düzeltilmiş skor, çarpı || RSRS varyant 1 (eğim standart puan) || RSRS varyant 2 (standart puan) || RSRS varyant 3 (düzeltilmiş standart puan) || RSRS varyant 4 (sağa çarpık standart puan) || RSRS (二) 4 strateji: slope std skoru, std skor, R2 düzeltmel"
+wikidocs.net/453571,6,HAM:V003:71;HAM:V003:72;HAM:V003:73;HAM:V003:74;HAM:V003:75;HAM:V003:76,V002;V003,"Intraday trend_follow (1 dk, 6 KR hissesi) || Intraday ma_cross (1 dk, 6 KR hissesi) || Intraday vwap_reclaim (1 dk, 6 KR hissesi) || Intraday vwap_reversion (1 dk, 6 KR hissesi) || Intraday breakout (1 dk, 6 KR hissesi) || Intraday bollinger_reversion (1 dk, 6 KR hissesi)"
+mql5.com/en/code/78380,3,HAM:P001:73;HAM:V001:184;HAM:X005:96,P001;V001;X005,GER40 Evening Coil || 370 Percent from 2022 to 2026 at 10 Percent MaxDD. The GER40 || 370 Percent from 2022 to 2026 at 10 Percent MaxDD. The GER40
+mql5.com/en/code/78581,3,HAM:P001:92;HAM:V001:178;HAM:X005:94,P001;V001;X005,GDS Renko RSI + MACD 4-Mode Demo EA || GDS Renko RSI + MACD 4-Mode Demo EA || GDS Renko RSI + MACD 4-Mode Demo EA
+dergipark.org.tr/en/download/article-file/1419417,3,HAM:V005:36;HAM:X005:271;HAM:X005:669,V005;X005,"Momentum ve asiri tepki (formasyon 1-60 ay, %20'lik gruplar) || Momentum Portfolios (12 aylık getiri sıralaması, aylık rebal || Borsa İstanbul Pay Senedi Piyasasında Aşırı Tepki (kaybeden "
+repositorio.unipampa.edu.br/bitstreams/82706f83-804f-40c4-8d01-0d8bb372d1fa/download,3,HAM:V005:117;HAM:X005:359;HAM:X005:360,V005;X005,MACD(17/34/72)+EMA200 ve EMA10/30+EMA200 || MACD (17/34/72) com filtro EMA200 — WINFUT || Cruzamento EMA 10/30 com filtro EMA200 — WINFUT
+elitetrader.com/et/threads/improved-trading-strategy-results-profit-factor-increased-to-2-41.382680,2,HAM:P001:70;HAM:V005:67,P001;V005,RSI aşırı alım/satım Forex sistemi (PF 2.41) || Forex RSI aşırı alım/satım eşikli strateji (sürüm 2)
+mql5.com/en/code/68125,2,HAM:P001:117;HAM:V011:7,P001;V011,The Playground Series v1 to V4 || Playground EA v1.04
+mql5.com/en/code/77738,2,HAM:P001:123;HAM:X005:75,P001;X005,RSI Exhaustion Reversal - EURUSD || RSI Exhaustion Reversal - EURUSD
+paperswithbacktest.com/strategies/seasonality-trend-following-and-mean-reversion-in-bitcoin,2,HAM:H006:95;HAM:P001:146,H006;P001,"Seasonality, Trend-following, and Mean reversion in Bitcoin || Seasonality, Trend-following, and Mean reversion in Bitcoin"
+quantpedia.com/strategies/market-sentiment-and-an-overnight-anomaly,2,HAM:P001:149;HAM:X005:500,P001;X005,Market Sentiment and an Overnight Anomaly || Market Sentiment and an Overnight Anomaly
+tv:tbh1kpxq,2,HAM:P001:158;HAM:X005:285,P001;X005,EMA 25/68 BIST30 Futures || EMA 25/68 BIST30 Futures
+tv:10yyqay7,2,HAM:P001:202;HAM:X005:88,P001;X005,ORB Strategy [LuciTech] || ORB Strategy [LuciTech]
+tv:6kde9bla,2,HAM:P001:204;HAM:X005:80,P001;X005,Long-Only Opening Range Breakout (ORB) with Pivot Points || Long-Only Opening Range Breakout (ORB) with Pivot Points
+quantpedia.com/can-weakening-morning-order-flow-predict-spy-reversals,2,HAM:P001:268;HAM:X005:516,P001;X005,Can Weakening Morning Order Flow Predict SPY Reversals? || Can Weakening Morning Order Flow Predict SPY Reversals?
+quantpedia.com/strategies/pairs-trading-with-country-etfs,2,HAM:P001:269;HAM:X005:171,P001;X005,Pairs Trading with Country ETFs || Pairs Trading on International ETFs (Pairs Trading with Coun
+tv:ihsfqfog,2,HAM:P001:299;HAM:X005:374,P001;X005,2-Period RSI strategy (with filter) || 2-Period RSI strategy (with filter)
+quantpedia.com/strategies/short-term-reversal-in-stocks,2,HAM:P001:390;HAM:X005:170,P001;X005,"Short-Term Reversal in Stocks - Quantpedia || Noise Trading, Slow Diffusion of Information, and Short-Term"
+github.com/freqtrade/freqtrade/releases/tag/2026.10,2,HAM:Q004:15;HAM:V001:232,Q004;V001,Freqtrade 2026.10 surumu || Freqtrade 2026.10 surumu
+mql5.com/en/code/78968,2,HAM:V001:150;HAM:X005:91,V001;X005,Algo: EMA Trend Cross on Closed Bars — XAUUSD M30 || Algo: EMA Trend Cross on Closed Bars — XAUUSD M30
+mql5.com/en/code/79021,2,HAM:V001:157;HAM:X005:72,V001;X005,Xander Grid RSI Gold || Xander Grid RSI Gold
+mql5.com/en/code/78891,2,HAM:V001:162;HAM:X005:73,V001;X005,"Awesome Oscillator Pullback EA for EURUSD, +209 Percent in a || Awesome Oscillator Pullback EA for EURUSD, +209 Percent in a"
+mql5.com/en/code/78686,2,HAM:V001:173;HAM:X005:93,V001;X005,FxCraft Example EA – MA Cross || FxCraft Example EA – MA Cross
+bigquant.com/wiki/doc/ath4umo467,2,HAM:V001:214;HAM:V902:14,V001;V902,Cin || Cin
+tv:5bqgshxl,2,HAM:V009:1;HAM:V015:1,V009;V015,"TradingView ETH 1H script (5BQgShxl) || ETH 1H strateji (kapalı kaynak, davetli)"
+elitetrader.com/et/threads/emintrader-trading-system.154069/post-2400346,2,HAM:V009:2;HAM:V015:33,V009;V015,Emintrader trading system (Elite Trader) || Emintrader sistemi (günlük açılış-kapanış)
+quantconnect.com/terminal/cache/embedded_backtest_9f6d23eb150228055222b1df75dc600d.html,2,HAM:V009:3;HAM:V015:36,V009;V015,QC gomulu backtest 9f6d23eb (hisse Sharpe secimi) || RSharpeStrategy
+ethereum-memecoin-vol-basket.tradingstrategy.ai/file,2,HAM:V009:4;HAM:V015:39,V009;V015,Ethereum memecoin vol basket (tradingstrategy) || Memecoin volatilite sepeti
+arxiv.org/pdf/2603.15848,2,HAM:V009:5;HAM:V015:47,V009;V015,"Algorithmic Trading Strategy Development and Optimisation (a || Çok faktörlü: MA200, EMA50/200, 63g momentum top-N, FinBERT "
+dev.to/ayratmurtazin/why-the-50-day-wma-dominates-a-quantitative-risk-return-analysis-in-python-3no8,2,HAM:V009:7;HAM:V015:60,V009;V015,50 gunluk WMA / SMA filtresi (S&P 500) || 50 günlük SMA long/flat
+quantconnect.com/terminal/cache/embedded_backtest_26519f84522b6246105de2983f86706b.html,2,HAM:V009:9;HAM:V015:34,V009;V015,QC gomulu backtest 26519f84 (SPY opsiyon overlay) || SPUC opsiyon şablonu (OptionsStrategyTemplateAlgorithm)
+master-vault.tradingstrategy.ai/file,2,HAM:V009:10;HAM:V015:37,V009;V015,DeFi vault rotasyonu (tradingstrategy) || Master vault (DeFi vault rotasyonu)
+base-memex.tradingstrategy.ai/file,2,HAM:V009:11;HAM:V015:40,V009;V015,Base memecoin endeksi (tradingstrategy) || Base eşit ağırlıklı memecoin endeksi
+quantconnect.com/forum/discussion/1142,2,HAM:V009:12;HAM:V015:48,V009;V015,QC forum stat-arb portfoyu (thread 1142) || 100 hisse stat-arb (1 dk çözünürlük)
+nikhilgangaram.github.io/blog/algo-trading,2,HAM:V009:14;HAM:V015:61,V009;V015,"Composer SPY/QQQ/VIXY aşırı alım rotasyonu || SPY/QQQ aşırı alım -> VIXY, yoksa SPY (Composer)"
+dev.to/trendrider/freqtrade-tutorial-2026-how-i-set-up-a-crypto-bot-that-hits-679-win-rate-18i5,2,HAM:V009:15;HAM:V015:32,V009;V015,Trendrider 15dk RSI+EMA8/21+hacim (freqtrade eğitimi) || TrendRiderStrategy (Freqtrade)
+quantconnect.com/terminal/cache/embedded_backtest_3d1eff88620b0e0af42dd7516182359a.html,2,HAM:V009:16;HAM:V015:35,V009;V015,QuantConnect Sharpe sıralamalı 10 hisse rotasyonu || RSharpeStrategy
+enzyme-ethereum-btc-eth-stoch-rsi.tradingstrategy.ai/file,2,HAM:V009:17;HAM:V015:38,V009;V015,"Stochastic RSI long (ETH/BTC, Tradingstrategy) || Stochastic RSI (BTC/ETH)"
+quantiacs.com/referee/template/588497/html,2,HAM:V009:19;HAM:V015:49,V009;V015,WMA ROC pozitifse long (Quantiacs vadeli) || WMA(20)/ROC(80) uzun-only trend
+dev.to/ayratmurtazin/python-sma-backtesting-and-parameter-tuning-for-pltr-long-term-investing-3jdc,2,HAM:V009:20;HAM:V015:59,V009;V015,"PLTR SMA kısa/uzun kesişim (parametre taraması) || 12 SMA çifti (10-50 kısa / 60-200 uzun), günlük"
+codecut.ai/backtesting-assess-trading-strategy-performance-effortlessly-in-python,2,HAM:V009:21;HAM:V015:62,V009;V015,SMA 10/20 ters dönüş (GOOG örneği) || SMA 10/20 kesişim (backtesting.py örneği)
+lonelyrookie.github.io/posts/1449386854,2,HAM:V003:124;HAM:V003:4,V002;V003,"Qlib TopkDropout (topk=30, n_drop=3, LightGBM sinyali) || Qlib LightGBM + TopkDropout (topk=30, n_drop=3)"
+damodev.csdn.net/6a43834c10ee7a33f284f279.html,2,HAM:V003:11;HAM:V003:129,V002;V003,多因子 ML hisse seçimi (seri 2) || AdaBoost ile makine öğrenmesiyle hisse seçimi
+blog.csdn.net/halps/article/details/127513495,2,HAM:V003:12;HAM:V003:131,V002;V003,"ETF 定投 (düzenli yatırım) || ETF定投 (510300 ve 159915, aylık sabit alım)"
+blog.youkuaiyun.com/arrange0/article/details/105183989,2,HAM:V003:14;HAM:V003:34,V002;V003,小市值因子选股 || 小市值因子选股策略
+jishu.proginn.com/doc/474764768343331d5,2,HAM:V003:126;HAM:V003:15,V002;V003,"S&P 500 MA kesişimi (42/252 gün, eşik 50) || 均线交叉 (42 gün / 252 gün)"
+cloud.tencent.com/developer/article/2768116,2,HAM:V003:128;HAM:V003:27,V002;V003,"MA120/MA250 trend takibi, %1 bant || 创业板ETF量化策略"
+rankia.com/foros/bolsa/temas/2351233-backtesting-automatico-prorealtime,2,HAM:V005:15;HAM:V005:25,V004;V005,"Bollinger+RSI giriş, ATR stop/TP, para yönetimi %1,5 || EMA 30-170 kesişimi + Parabolic SAR + RSI/Stokastik filtre, "
+habr.com/ru/articles/887440,2,HAM:V005:75;HAM:X005:310,V004;V005;X005,"PMA + ATR trailing stop, sadece long (LongOnlyPMAMultiTimefr || Long-only PMA multi-timeframe с ATR trailing stop"
+habr.com/ru/articles/1049720,2,HAM:V005:88;HAM:X005:312,V004;V005;X005,"İstatistiksel arbitraj (pairs, Z-skoru; 30 gün ortalama, |Z| || Статистический арбитраж: пара NG (MOEX) / NG (NYMEX)"
+reddit.birdcat.cafe/r/algotrading/comments/1f8v70e/backtest_results_for_a_simple_reversal_strategy,2,HAM:V016:1;HAM:X005:98,V016;X005,basit reversal stratejisi (başlık) || Backtest results for a simple reversal strategy
+eu.psf.lt/r/daytrading/comments/1f06cmg/backtest_results_for_a_simple_buy_the_dip_strategy,2,HAM:V016:2;HAM:X005:101,V016;X005,basit buy-the-dip (başlık) || Backtest results for a simple buy the dip strategy
+github.com/freqtrade/freqtrade-strategies/user_data/strategies/strategy001.py,2,HAM:V015:50;HAM:X005:19,V015;X005,Strategy001 (upstream) || Strategy001
+github.com/freqtrade/freqtrade-strategies/user_data/strategies/strategy002.py,2,HAM:V015:51;HAM:X005:20,V015;X005,Strategy002 || Strategy002
+github.com/freqtrade/freqtrade-strategies/user_data/strategies/strategy005.py,2,HAM:V015:54;HAM:X005:22,V015;X005,Strategy005 || Strategy005
+habr.com/ru/articles/1000664,2,HAM:V010:4;HAM:X005:324,V010;X005,Fibonacci 0.5 Retracement Strategy || Алготрейдинг по Фибоначчи 0.5 (ETH 1h)
+github.com/joseppala05/bollinger-bidir-freqtrade/strategies/bollinger_bidir.py,2,HAM:V010:23;HAM:X005:679,V010;X005,Bollinger Bidir Reversion || BollingerBidir

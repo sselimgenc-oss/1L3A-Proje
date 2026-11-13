@@ -150,6 +150,20 @@ def coz(hid, yol=()):
 
 for r in ham:
     r["tekil_id"] = coz(r["ham_id"]) or f"HAM:{r['ham_id']}"
+# lider birleştirme talimatı (alt küme katalog satırları): satır kararını korur, hedef satırın tekiline katılır
+bil = oku(ARA / "lider_birlestir_ile.csv") if (ARA / "lider_birlestir_ile.csv").exists() else []
+for b in bil:
+    r = ham_by.get(b["ham_id"]); hedef = ham_by.get(b["hedef_ham_id"])
+    if r is None or hedef is None:
+        sorunlar.append({"tur": "birlestir_ile_ham_yok", "ham_id": b["ham_id"], "aciklama": b["hedef_ham_id"]})
+        continue
+    if r["eslesme"].upper() in ("KOD", "AYAR", "ESDEGER") or r["tekil_id"] == hedef["tekil_id"]:
+        continue
+    if hedef["tekil_id"].startswith("KOD:") or hedef["tekil_id"].startswith("AYAR:"):
+        # hedef koda bağlıysa bu satır da aynı katalog kaydıdır: kod tekiline katılır
+        pass
+    r["tekil_id"] = hedef["tekil_id"]
+    r["not"] = (r["not"] + " | " if r["not"] else "") + f"alt küme katalog satırı: {b['hedef_ham_id']} ile aynı kayıt"
 
 # --- 2. tekil tablo ---
 uyeler = defaultdict(list)
@@ -197,6 +211,7 @@ def adil_turet(k, g):
                f"({','.join(sorted(v['tf']))}), {v['n_aday']} ayar adayı (varsayılan+kart/dış+ızgara)")
     return (";".join(et) if et else "evet") + " — " + gerekce
 
+benzer_say = Counter(x["hedef"] for x in ham if x["eslesme"].upper() == "BENZER")
 tekil = []
 for tid, rs in sorted(uyeler.items()):
     kaynak_set = sorted({x["kaynak_id"] for x in rs})
@@ -219,7 +234,9 @@ for tid, rs in sorted(uyeler.items()):
             sorunlar.append({"tur": "G0_satiri_yok", "ham_id": "", "aciklama": k})
         notlar = []
         if not rs:
-            notlar.append("kaynak ham satırı bağlanmadı (kod var, getirilen kaynaklarda eşleşen satır bulunamadı)")
+            nb = benzer_say.get(k, 0)
+            notlar.append(f"birebir kaynak satırı yok: {nb} kaynak satırı bu koda BENZER (kural farkı var) olarak bağlı" if nb
+                          else "kaynak ham satırı bağlanmadı (kod var; getirilen kaynaklarda eşleşen satır yok — v2/v3 eklemesi ya da web kartı olabilir)")
         esd = sum(1 for x in rs if x["eslesme"].upper() == "ESDEGER")
         if esd:
             notlar.append(f"{esd} ham satır ESDEGER (koddan doğrulanmış aynı mantık) olarak bağlı")
