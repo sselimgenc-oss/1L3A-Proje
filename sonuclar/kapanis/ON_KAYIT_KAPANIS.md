@@ -93,3 +93,13 @@ Tarih: 2026-11-13. Kullanıcı kararıyla (2026-11-13 soru-cevap: Robotic koşul
 - **BH:** Aşama 2 ailesi yine dondurulmuş aşama 2 koşu listesidir (ek 4). Kapsam dışı satırlar aileye girmez.
 - **Rapor yükümlülüğü:** Nihai rapor, kapsam dışı bırakılan satır sayısını alt küme bazında ve "incelenmedi" ifadesiyle verir. Bu satırlar bu turda sonradan kapsama alınmaz.
 - Kapılar, çarpanlar, evren ve ikinci kapı değişmez.
+
+## Ön kayıt düzeltmesi — sonuç görülmeden (7): aşama 2 daraltması
+
+Tarih: 2026-11-13. Kullanıcı kararıyla ("Fable'ın önerisiyle devam et"). Aşama 2'nin hiçbir kaydı koşulmadan ve aşama 2 listesi dondurulmadan yazıldı.
+Not (açıklık için): bu sırada aşama 1 koşusu sürüyordu ve 9 aşama 1 kaydı bitmişti. Daraltma ölçütünü öneren hakem bu sonuçlara bakmadı; ölçüt yalnız zaman dilimi, maliyet aritmetiği ve geçmiş turların taban oranlarına dayanır (`eleme/` altında Fable umut değerlendirmesi, ILERLEME.md). Lider, koşu günlüğünün son satırında tek bir aşama 1 p değeri gördü; aşama 1 listesi ve ailesi değişmez.
+
+- **Aşama 1 değişmez:** dondurulmuş 365 kayıt sonuna kadar koşulur; BH paydası 365 kalır.
+- **Aşama 2 Robotic:** ek 5 ve K3-3 elemesinden geçen 230 kayıttan yalnız zaman dilimi 1h ve üstü olanlar ile EWO-ofset (A/B/C) ve E0V1E aileleri (her TF) kalır: **87 kayıt** (`eleme/daraltma_asama2.csv`). 5m/15m/30m Freqtrade kayıtları bırakılır (maliyet ×2 gidiş-dönüş %0,28–0,40; geçmiş scalp turu 0/204).
+- **Aşama 2 küçük kümeler:** K3-5a'nın 13 hipotezi kalır. K4-11 (75 satır) incelemesi ve `ara/asama2_incele.csv`'nin 15 KOSULACAK kaydı (eski proje/kart; aynı veride önceden seçilmiş, "yeniden keşif") bırakılır.
+- Bırakılan kayıtlar koşulmaz ve aşama 2 BH ailesine girmez; raporda "ek 7 ile bırakıldı, koşulmadı" diye sayılır.
