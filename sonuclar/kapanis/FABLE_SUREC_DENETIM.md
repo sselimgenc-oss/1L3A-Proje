@@ -1,0 +1,11 @@
+# Fable süreç denetimi (kapanış koşusu)
+
+## 2026-11-13 23:20 UTC
+- İlerleme A1: 318/365 json. Uzun TF 317/318 (kalan tek kayıt: KOD:v3__donchian-ansambl-vol-hedef, pf 1d, ~50 dk'dır tek işçide; pf rastgele testi yavaş, izlenmeli). Kısa TF: 5m 1/29, 15m 0/15, 30m 0/3 (bekliyor).
+- İlerleme A2: 27/96. 4h 13/13, 1d 6/6, 6h 2/2, 1h 6/56 (son 35 dk'da 8 kayıt, 3 işçi), 5m 0/18, 30m 0/1. Ortalama süre: 1d ~20 sn, 4h ~95 sn, 1h A1 ~400 sn (en çok 1852 sn), tek 5m 919 sn.
+- HATA A1: 7 (A2: 0). (a) 4 kayıt (HAM:X005:757/184/792/493, 1d): `'dict' object has no attribute 'atr_iz_suren_k'` = parametrelerdeki `cikis_ayarlari` sözlüğü CikisAyarlari nesnesine çevrilmiyor: ALTYAPI HATASI, strateji ölçülmedi. (b) 3 funding pf kaydı: `funding_orani eksik` (BTC/ETH/SOL): veri yükleme eksiği, altyapı/veri. V001:225 henüz koşulmadı.
+- HATA kayıtlarında p=1, k1–5 boş: BH paydasında kalır, kapı geçemez (temkinli yön). Ön kayıt gereği sessiz yeniden koşu yok; düzeltilirse `sonuç sonrası` etiketi gerekir. Karar kullanıcıya sorulmalı.
+- Kapı bayrakları: tek-grafik TAMAM kayıtlarının tümünde k1/k2/k4/k5 metriklerden yeniden hesaplandı: A1 0 uyumsuz, A2 0 uyumsuz.
+- Kapı 6: A1 309 testte p<=0,05 182 (%59), T<0&p<=0,05 34: TESHIS_KAPI6 ile birebir aynı sayılar. A2 19/27 (%70), T<0 4. T>0 iken p>0,5 örnekleri de var (yön tutarlı). B=100000, gecersiz_oran 0. k1–5 VE p<=0,05: A1 33 (çoğu 1d, p tabanda 1e-5), A2 5. Şüpheli yeni örüntü yok; tek başına k6 anlamlı sayılmamalı (teşhisle aynı).
+- Ek 8/9: iki süreç de `--tf-haric 5m,15m,30m` ile çalışıyor; kısa TF koşulmuyor (uyumlu). Tek istisna HAM:X005:15#v1 (5m) ek 8'den önce bitmiş, k6 koşulsuz almış: ek 9 son maddesine uygun. ATLANDI_K1_5 henüz hiç kayıtta yok (kod yolu `kapanis_kosu.py:311`, bayrak `--k6-on-eleme-tf`); kısa TF başlatılırken bu bayrağın verildiği doğrulanmalı.
+- Sonuç: DURDUR gerektiren bulgu yok. Açık iş: 7 HATA'nın (özellikle 4 `cikis_ayarlari` kaydı) akıbeti ve kısa TF koşusunun bayrağı.
