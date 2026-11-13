@@ -20,14 +20,13 @@
   "V011": 8
  },
  "on_durum": {
-  "D_KODLANMADI_NEDENLI": 1435,
+  "D_KODLANMADI_NEDENLI": 1439,
   "H_BIZIM_EVRENDE_UYGULANAMAZ": 392,
   "F_YASAK_TIP": 112,
   "TEKRAR": 49,
   "G_ML": 539,
   "KOD": 23,
-  "BELIRSIZ": 38,
-  "E_KODLANMADI_NEDENSIZ": 4
+  "BELIRSIZ": 38
  },
  "eslesme": {
   "YOK": 2085,
@@ -49,11 +48,11 @@
   "kopya": 49,
   "ml": 539,
   "arac_sablon": 250,
-  "": 27,
+  "": 23,
   "martingale": 14,
   "oncelik_disi": 68,
   "lookahead": 32,
-  "tekrar_kart_yok": 70,
+  "tekrar_kart_yok": 72,
   "kural_belirsiz": 5,
   "stopsuz_grid": 9,
   "alt_1dk": 25,
@@ -63,7 +62,7 @@
   "onchain": 11,
   "dca": 10,
   "makro_takvim": 2,
-  "kaynak_okunamadi": 6,
+  "kaynak_okunamadi": 8,
   "altyapi_yok": 1
  },
  "final_karar": {
@@ -120,12 +119,11 @@
  },
  "kart_isleme": {
   "kodlama_veri_yok": 29,
-  "reddedildi": 91,
+  "reddedildi": 95,
   "KOD": 23,
   "temsilci_degil": 68,
   "kodlama_belirsiz": 5,
   "kodlama_tekrar": 6,
-  "E_kart_kaydi_yok": 4,
   "kodlama_altyapi_yok": 1
  },
  "hiza_duzeltme": [

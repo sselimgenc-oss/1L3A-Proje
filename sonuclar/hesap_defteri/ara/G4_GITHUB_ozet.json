@@ -1,16 +1,16 @@
 {
  "n": 1198,
  "esl": {
-  "KOD": 208,
-  "AYAR": 93,
-  "BENZER": 270,
+  "KOD": 203,
+  "AYAR": 88,
+  "BENZER": 280,
   "YOK": 609,
   "ESDEGER": 10,
   "TEKRAR": 8
  },
  "od": {
-  "KOD": 311,
-  "D_KODLANMADI_NEDENLI": 710,
+  "KOD": 301,
+  "D_KODLANMADI_NEDENLI": 720,
   "G_ML": 46,
   "F_YASAK_TIP": 25,
   "H_BIZIM_EVRENDE_UYGULANAMAZ": 98,

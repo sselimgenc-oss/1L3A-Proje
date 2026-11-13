@@ -361,7 +361,7 @@ def ayar_ara(hedef, r):
     for h, i, k, y in AYARLAR:
         if h != hedef or not k:
             continue
-        if (len(stem) >= 6 and stem not in ("strategy", "sample") and stem in k) or (len(nm) >= 8 and nm in k):
+        if r.g == "g1" and i.startswith("freqtrade:") and len(stem) >= 6 and stem not in ("strategy", "sample") and stem in k:
             sonuc.append((i, y))
     return sonuc
 
@@ -611,7 +611,7 @@ for _, r in A.iterrows():
     txt = kaynak_metni(kd)
     stem = os.path.splitext(os.path.basename(r.dosya.split(" ")[0].split(";")[0]))[0].lower()
     nm = r.ad.lower().split(" (")[0]
-    e2 = (len(stem) >= 7 and stem in txt) or (len(nm) >= 12 and nm in txt)
+    e2 = ((len(stem) >= 7 and stem in txt) or (len(nm) >= 12 and nm in txt)) and not hedef_ad.startswith("pf__")
     if e2 or (tip == "mevcut" and r.ayar_durumu.strip().lower() == "kodlandi"):
         row.update(eslesme="KOD", hedef=hedef_ad, on_durum="KOD",
                    kanit=f"{kaynak_kanit} (durum={durum}) ; {kd} ; kod_kaydi.csv#{hedef_ad}",

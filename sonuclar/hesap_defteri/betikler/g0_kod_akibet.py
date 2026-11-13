@@ -86,7 +86,7 @@ def oku(rel: str | Path, usecols=None, mutlak=False) -> pd.DataFrame:
     bas = satir_baslangiclari(yol)
     if len(bas) != len(df):
         raise RuntimeError(f"{rel}: satır sayısı tutmuyor ({len(bas)} != {len(df)})")
-    df["_satir"] = bas
+    df["satir_no"] = bas
     return df
 
 
@@ -160,7 +160,7 @@ def erken_katmanlar():
         d = oku(dosya)
         for r in d.itertuples():
             ozet[r.strateji].append(f"{etiket}(n={fx(r.satir_sayisi)},medPF={fx(r.medyan_pf, 2)},umutsuz={'E' if bayrak(r.umutsuz) else 'H'})")
-            kanit_ekle(r.strateji, dosya, r._satir)
+            kanit_ekle(r.strateji, dosya, r.satir_no)
             KOSTU[r.strateji].add(dosya)
     # K3 WF + sağlamlık
     wf_dosyalar = ["k3_kripto", "k3_dk", "k3_dk_v2", "k3_hisse_kisa", "son1ay_k3_kripto"]
@@ -177,7 +177,7 @@ def erken_katmanlar():
             sem_s = ("|".join(sem) if len(sem) <= 3 else f"{len(sem)}sembol")
             gec_s = ",".join(f"{kisa_sembol(r.sembol)}/{r.tf}" for r in gec.itertuples()) if len(gec) else "-"
             ozet[ad].append(f"{et}[{sem_s};{','.join(tfs)}]:n={len(g)},gecen={len(gec)}({gec_s})" + (f",hata={int(g.hata.notna().sum())}" if g.hata.notna().any() else ""))
-            kanit_ekle(ad, yol, g._satir.tolist())
+            kanit_ekle(ad, yol, g.satir_no.tolist())
             KOSTU[ad].add(yol)
             wf_gecen[ad] += len(gec)
             wf_toplam[ad] += len(g)
@@ -201,7 +201,7 @@ def erken_katmanlar():
                 sag_ok[ad].append((ok, f"{kisa_sembol(r.sembol)}/{r.tf}", r.kapi_basarisiz))
                 parca.append(f"{kisa_sembol(r.sembol)}/{r.tf}={'saglam' if ok else 'kaldi[' + str(r.kapi_basarisiz) + ']'}")
             ozet[ad].append(f"sag_{et}:" + ";".join(parca))
-            kanit_ekle(ad, yol, g._satir.tolist())
+            kanit_ekle(ad, yol, g.satir_no.tolist())
             KOSTU[ad].add(yol)
     for ad, L in sag_ok.items():
         gec = [x for x in L if x[0]]
@@ -211,17 +211,17 @@ def erken_katmanlar():
     d = oku("sonuclar/final_aday_havuzu_tek_grafik.csv")
     for ad, g in gruplar(d).items():
         ozet[ad].append("final_aday_havuzu:" + ",".join(f"{kisa_sembol(r.sembol)}/{r.tf}" for r in g.itertuples()))
-        kanit_ekle(ad, "sonuclar/final_aday_havuzu_tek_grafik.csv", g._satir.tolist())
+        kanit_ekle(ad, "sonuclar/final_aday_havuzu_tek_grafik.csv", g.satir_no.tolist())
         KOSTU[ad].add("final_aday_havuzu")
     d = oku("sonuclar/secim/adaylar.csv")
     for ad, g in gruplar(d).items():
         ozet[ad].append("secim_adaylar:" + ",".join(f"{kisa_sembol(r.sembol)}/{r.tf}(kume{fx(r.kume)})" for r in g.itertuples()))
-        kanit_ekle(ad, "sonuclar/secim/adaylar.csv", g._satir.tolist())
+        kanit_ekle(ad, "sonuclar/secim/adaylar.csv", g.satir_no.tolist())
         KOSTU[ad].add("secim_adaylar")
     d = oku("sonuclar/secim/oneri.csv")
     for ad, g in gruplar(d).items():
         ozet[ad].append("secim_oneri:" + ",".join(f"{r.ajan}/{r.rol}#{fx(r.sira)}" for r in g.itertuples()))
-        kanit_ekle(ad, "sonuclar/secim/oneri.csv", g._satir.tolist())
+        kanit_ekle(ad, "sonuclar/secim/oneri.csv", g.satir_no.tolist())
         KOSTU[ad].add("secim_oneri")
     # portföy WF + sağlamlık
     pf_wf = defaultdict(list)
@@ -236,7 +236,7 @@ def erken_katmanlar():
                     pf_wf[ad].append((None, f"{et}:{r.evren}=atlandi"))
                 else:
                     pf_wf[ad].append((bayrak(r.gecti), f"{et}:{r.evren}={'gecti' if bayrak(r.gecti) else 'elendi'}(sh={fx(r.sharpe, 2)})"))
-            kanit_ekle(ad, rel, g._satir.tolist())
+            kanit_ekle(ad, rel, g.satir_no.tolist())
             KOSTU[ad].add(rel)
     for ad, L in pf_wf.items():
         ozet[ad].append("wf_portfoy[" + ";".join(x[1] for x in L)[:300] + "]")
@@ -248,7 +248,7 @@ def erken_katmanlar():
         et = Path(yol).stem
         for ad, g in gruplar(d).items():
             ozet[ad].append(f"sag_{et}:" + ";".join(f"{r.evren}={'saglam' if bayrak(r.saglam_mi) else 'kaldi[' + str(r.saglam_nedenler)[:60] + ']'}" for r in g.itertuples()))
-            kanit_ekle(ad, rel, g._satir.tolist())
+            kanit_ekle(ad, rel, g.satir_no.tolist())
             KOSTU[ad].add(rel)
             ASAMA[ad].append((11, "k3_saglamlik", "gecti" if any(bayrak(x) for x in g.saglam_mi) else "elendi", f"portföy sağlamlık ({et}): " + "; ".join(str(x)[:80] for x in g.saglam_nedenler if isinstance(x, str))))
     return ozet
@@ -262,7 +262,7 @@ def kilit_ve_final():
         for r in g.itertuples():
             parca.append(f"{kisa_sembol(r.sembol)}/{r.tf}:{r.gruplar}:{'gecti' if bayrak(r.gecti) else 'kaldi'},n={fx(r.kilit_islem)},pf={fx(r.kilit_pf, 2)},net={fx(r.kilit_net, 3)}")
         kilit[ad] = ";".join(parca)
-        kanit_ekle(ad, "sonuclar/kilit/sonuc.csv", g._satir.tolist())
+        kanit_ekle(ad, "sonuclar/kilit/sonuc.csv", g.satir_no.tolist())
         KOSTU[ad].add("sonuclar/kilit/sonuc.csv")
         gec = [r for r in g.itertuples() if bayrak(r.gecti)]
         ASAMA[ad].append((13, "kilit_k4", "gecti" if gec else "elendi",
@@ -307,8 +307,8 @@ def v1_zinciri():
                 parca.append(f"{r.tf}:elendi[{k[:110]}] n={fx(r.islem_sayisi)} pf={fx(r.profit_factor, 2)}")
                 kap.append(f"{r.tf}: {k[:140]}")
         out[ad] = dict(tf=",".join(tf_sirala(tfs)), sonuc=" | ".join(parca), gecti=gec_any, kap="; ".join(kap), g=g,
-                       n_enstruman=fx(g.n_enstruman.iloc[0]), n_aday=g.n_aday.iloc[0], satirlar=g._satir.tolist())
-        kanit_ekle(ad, yol, g._satir.tolist())
+                       n_enstruman=fx(g.n_enstruman.iloc[0]), n_aday=g.n_aday.iloc[0], satirlar=g.satir_no.tolist())
+        kanit_ekle(ad, yol, g.satir_no.tolist())
         KOSTU[ad].add(yol)
         ASAMA[ad].append((20, "v1_wf", "gecti" if gec_any else "elendi", "v1 evren WF (35 enstrüman): " + "; ".join(kap)))
     # sağlamlık
@@ -326,7 +326,7 @@ def v1_zinciri():
             out[ad]["sag"] = " | ".join(parca)
         else:
             out[ad] = dict(tf="", sonuc="", sag=" | ".join(parca), gecti=False, kap="", g=None)
-        kanit_ekle(ad, yol, g._satir.tolist())
+        kanit_ekle(ad, yol, g.satir_no.tolist())
         KOSTU[ad].add(yol)
         ASAMA[ad].append((21, "v1_saglamlik", "gecti" if ok_any else "elendi", "v1 sağlamlık: " + "; ".join(kap)))
     # secim / iyi listeler (boş) + arşivler
@@ -343,7 +343,7 @@ def v1_zinciri():
         d = oku(rel, usecols=["strateji", "tf", "gecti", "islem_sayisi", "profit_factor"])
         for ad, g in gruplar(d).items():
             arsiv.setdefault(ad, []).append(f"{et}:" + ",".join(f"{r.tf}={'gecti' if bayrak(r.gecti) else 'elendi'}" for r in g.itertuples()))
-            kanit_ekle(ad, rel, g._satir.tolist())
+            kanit_ekle(ad, rel, g.satir_no.tolist())
             KOSTU[ad].add(rel)
     return out, arsiv
 
@@ -361,7 +361,7 @@ def v2_havuz_disi(ad, havuz, kume_uye, temsilci_of):
                 "stratejiler/v3_adaylar/kodlama_v3.csv; sonuclar/evren/v2/havuz_muhru.json")
     if b.tur == "portfoy":
         return ("BELIRSIZ: pf stratejisi havuzda yok; havuz_v2_olustur.py tum_portfoy_stratejileri()'nin hepsini alır, sınıf mühürden sonra eklenmiş olabilir",
-                "araclar/havuz_v2_olustur.py:aday_satirlari")
+                "araclar/havuz_v2_olustur.py:adaysatir_nolari")
     if stil != "swing":
         ek = ""
         if pre in ("daytrade", "scalp"):
@@ -376,13 +376,13 @@ def v2_havuz_disi(ad, havuz, kume_uye, temsilci_of):
             else:
                 ek = "; swing__ karşılığı yok (2.3: havuza girmez)"
         return (f"stil v2 dışı: {stil} (ON_KAYIT_V2 2.2: daytrade/scalp v2 resmi ailesine girmez; yalnız 7'li gün-içi kripto hipotezi 2.5){ek}",
-                "sonuclar/evren/ON_KAYIT_V2.md:2.2,2.3,2.5; araclar/havuz_v2_olustur.py:aday_satirlari")
+                "sonuclar/evren/ON_KAYIT_V2.md:2.2,2.3,2.5; araclar/havuz_v2_olustur.py:adaysatir_nolari")
     if ad in temsilci_of:
         t = temsilci_of[ad]
         h = havuz.loc[t]
         return (f"küme temsilcisi değil (ON_KAYIT_V2 2.7): temsilci={t} (etiket={h.etiket}/{h.alt_etiket}, kume_no={h.kume_no}, {h['not'].split(';')[0]}); "
                 f"aynı etiket+alt_etiket ve v1 WF-OOS haftalık korelasyon ≥0.7 (ya da klon) kümesi; en az sayısal parametreli temsilci seçilir (korelasyon serisi oos/*.parquet repoda yok: değer doğrulanamadı)",
-                f"stratejiler/havuz_v2.csv:{int(h['_satir'])}")
+                f"stratejiler/havuz_v2.csv:{int(h['satir_no'])}")
     return ("BELIRSIZ: swing stilinde ama havuzda da küme üyeleri listesinde de yok", "stratejiler/havuz_v2.csv")
 
 
@@ -459,7 +459,7 @@ def v2_alanlari(ad, S, bos):
     neden, kn = v2_havuz_disi(ad, havuz, S["kume_uye"], S["temsilci_of"])
     if ad in havuz.index:
         o["v2_havuzda"] = "evet"
-        kanit_ekle(ad, "stratejiler/havuz_v2.csv", int(havuz.loc[ad, "_satir"]))
+        kanit_ekle(ad, "stratejiler/havuz_v2.csv", int(havuz.loc[ad, "satir_no"]))
         KOSTU[ad].add("stratejiler/havuz_v2.csv")
     else:
         o["v2_havuzda"] = "hayir"
@@ -476,7 +476,7 @@ def v2_alanlari(ad, S, bos):
         o["v2_nedenler"] = (r.nedenler if isinstance(r.nedenler, str) else "") if r.durum != "hata" else str(r.hata)
         o["v2_n_islem_x1"], o["v2_pf_x1"], o["v2_net_x1"], o["v2_net_x2"], o["v2_kill_x1"] = (
             fx(r.n_islem_x1), fx(r.pf_x1, 3), fx(r.net_x1, 4), fx(r.net_x2, 4), fx(r.kill_x1))
-        kanit_ekle(ad, "sonuclar/evren/v2/eleme.csv", int(r._satir))
+        kanit_ekle(ad, "sonuclar/evren/v2/eleme.csv", int(r.satir_no))
         KOSTU[ad].add("sonuclar/evren/v2/eleme.csv")
         if r.durum == "hata":
             ASAMA[ad].append((30, "v2_eleme_hata", "hata", f"v2 eleme KOŞU HATASI (gerçek test yok): {str(r.hata)[:150]}"))
@@ -485,7 +485,7 @@ def v2_alanlari(ad, S, bos):
     # test
     if ad in test.index:
         t = test.loc[ad]
-        kanit_ekle(ad, "sonuclar/evren/v2/test.csv", int(t._satir))
+        kanit_ekle(ad, "sonuclar/evren/v2/test.csv", int(t.satir_no))
         KOSTU[ad].add("sonuclar/evren/v2/test.csv")
         if t.eleme_durum == "gecti":
             o["v2_test"] = (f"{t.test_durum} p={fx(t.p, 5)} (aşama {fx(t.asama)}, B1={fx(t.B1)}) BH sıra={fx(t.bh_sira)} eşik={fx(t.bh_esik, 6)} kesif={fx(bayrak(t.kesif))}"
@@ -501,7 +501,7 @@ def v2_alanlari(ad, S, bos):
     # sağlamlık
     if ad in sag.index:
         s = sag.loc[ad]
-        kanit_ekle(ad, "sonuclar/evren/v2/saglamlik.csv", int(s._satir))
+        kanit_ekle(ad, "sonuclar/evren/v2/saglamlik.csv", int(s.satir_no))
         KOSTU[ad].add("sonuclar/evren/v2/saglamlik.csv")
         ok = bool(bayrak(s.saglam))
         o["v2_saglamlik"] = (f"{s.liste} saglam={ok} S1(gecikme PF)={fx(bayrak(s.s1))}/{fx(s.s1_pf, 2)} S2(komşu ayar)={fx(bayrak(s.s2))}(medyan {fx(s.s2_medyan, 2)}, min {fx(s.s2_en_dusuk, 2)}, n={fx(s.s2_n_gecerli)}) "
@@ -521,7 +521,7 @@ def v2_alanlari(ad, S, bos):
     if ad in sag.index and bool(bayrak(sag.loc[ad].saglam)):
         if sset_ad:
             o["v2_set"] = "evet"
-            kanit_ekle(ad, "sonuclar/evren/v2/set.csv", int(sset.loc[ad]._satir))
+            kanit_ekle(ad, "sonuclar/evren/v2/set.csv", int(sset.loc[ad].satir_no))
             ASAMA[ad].append((33, "v2_set", "gecti", f"v2 sete girdi (kume {fx(sset.loc[ad].kume)}, sira {fx(sset.loc[ad].sira)})"))
         else:
             anahtar = f"{ad}|{o['v2_tf']}"
@@ -535,13 +535,13 @@ def v2_alanlari(ad, S, bos):
     if ad in ho.index:
         h = ho.loc[ad]
         o["holdout_resmi"] = f"{h.durum}: net={fx(h.net, 4)} pf_r={fx(h.pf_r, 2)} n={fx(h.n_islem)} k2_p={fx(h.k2_p, 4)}"
-        kanit_ekle(ad, "sonuclar/evren/v2/holdout/holdout.csv", int(h._satir))
+        kanit_ekle(ad, "sonuclar/evren/v2/holdout/holdout.csv", int(h.satir_no))
         KOSTU[ad].add("sonuclar/evren/v2/holdout/holdout.csv")
         ASAMA[ad].append((34, "v2_holdout", "gecti" if h.durum == "kaldi" else "elendi", "resmi holdout (2025-11-08→2026-11-06): " + o["holdout_resmi"]))
     if ad in hk.index:
         h = hk.loc[ad]
         o["holdout_kesif"] = f"{h.grup}: net={fx(h.net, 4)} pf_r={fx(h.pf_r, 2)} n={fx(h.n_islem)} k2_p={fx(h.k2_p, 4)} (sonuç sonrası keşif — kanıt değil)"
-        kanit_ekle(ad, "sonuclar/evren/v2/holdout_kesif/holdout_kesif.csv", int(h._satir))
+        kanit_ekle(ad, "sonuclar/evren/v2/holdout_kesif/holdout_kesif.csv", int(h.satir_no))
         KOSTU[ad].add("sonuclar/evren/v2/holdout_kesif/holdout_kesif.csv")
     # paper + canlı
     pap = {s["strateji"]: s for s in S["paper"]["stratejiler"]}
@@ -575,26 +575,26 @@ def v2_sonrasi():
     d = oku("sonuclar/evren/meta_test/secilenler.csv", usecols=["kesim", "strateji", "kapi_gecti", "S", "N1"])
     for ad, g in gruplar(d).items():
         s[ad].append(f"meta_test:{len(g)}kesim,kapi_gecen={int(g.kapi_gecti.map(bayrak).sum())},S(secildi)={int(g.S.map(bayrak).sum())}")
-        kanit_ekle(ad, "sonuclar/evren/meta_test/secilenler.csv", g._satir.tolist())
+        kanit_ekle(ad, "sonuclar/evren/meta_test/secilenler.csv", g.satir_no.tolist())
         KOSTU[ad].add("meta_test")
     # yeni sembol
     d = oku("sonuclar/evren/yeni_sembol/sonuc_strateji.csv", usecols=["evren", "strateji", "tf", "n_sembol", "n_x2", "pf_x2", "sum_r_x2", "yorum_x2"])
     for ad, g in gruplar(d).items():
         s[ad].append("yeni_sembol:" + "; ".join(f"{r.evren}({fx(r.n_sembol)}sembol,n={fx(r.n_x2)},PFx2={fx(r.pf_x2, 2)},ΣR={fx(r.sum_r_x2, 1)}{',' + r.yorum_x2 if isinstance(r.yorum_x2, str) else ''})" for r in g.itertuples()))
-        kanit_ekle(ad, "sonuclar/evren/yeni_sembol/sonuc_strateji.csv", g._satir.tolist())
+        kanit_ekle(ad, "sonuclar/evren/yeni_sembol/sonuc_strateji.csv", g.satir_no.tolist())
         KOSTU[ad].add("yeni_sembol")
     # teşhis
     d = oku("sonuclar/teshis/stop_cikis/sonuc.csv", usecols=["strateji", "tf", "n_islem", "tip", "beklenti_r"])
     for ad, g in gruplar(d).items():
         r = g.iloc[0]
         s[ad].append(f"teshis_stop_cikis:n={fx(r.n_islem)},beklenti_R={fx(r.beklenti_r, 3)},tip={r.tip}")
-        kanit_ekle(ad, "sonuclar/teshis/stop_cikis/sonuc.csv", g._satir.tolist())
+        kanit_ekle(ad, "sonuclar/teshis/stop_cikis/sonuc.csv", g.satir_no.tolist())
         KOSTU[ad].add("teshis")
     d = oku("sonuclar/teshis/duzenlilik/sonuc.csv", usecols=["strateji", "n_islem", "etiket", "tutmayan"])
     for ad, g in gruplar(d).items():
         r = g.iloc[0]
         s[ad].append(f"teshis_duzenlilik:n={fx(r.n_islem)},etiket={r.etiket},tutmayan={fx(r.tutmayan)}")
-        kanit_ekle(ad, "sonuclar/teshis/duzenlilik/sonuc.csv", g._satir.tolist())
+        kanit_ekle(ad, "sonuclar/teshis/duzenlilik/sonuc.csv", g.satir_no.tolist())
         KOSTU[ad].add("teshis")
     return s
 
@@ -606,16 +606,16 @@ def v3_okuma():
         ned = r.nedenler if isinstance(r.nedenler, str) else ""
         kisa = re.sub(r"\s+", " ", ned)[:230]
         out[r.strateji] = dict(durum=r.durum, nedenler=kisa, tf=r.tf, evren=str(r.evren)[:40], n_islem=r.n_islem)
-        kanit_ekle(r.strateji, "sonuclar/v3/eleme.csv", r._satir)
+        kanit_ekle(r.strateji, "sonuclar/v3/eleme.csv", r.satir_no)
         KOSTU[r.strateji].add("sonuclar/v3/eleme.csv")
         ASAMA[r.strateji].append((50, "v3_eleme", "gecti" if r.durum == "gecti" else "elendi", f"v3 eleme: {kisa}"))
-    k = oku("stratejiler/v3_adaylar/kodlama_v3.csv")
+    k = oku("stratejiler/v3_adaylar/kodlama_v3.csv").rename(columns={"not": "not_"})
     kod = {}
     for r in k.itertuples():
         if isinstance(r.strateji_ad, str):
             kod.setdefault(r.strateji_ad, []).append(r)
             if r.strateji_ad in KOD_BILGI:
-                kanit_ekle(r.strateji_ad, "stratejiler/v3_adaylar/kodlama_v3.csv", r._satir)
+                kanit_ekle(r.strateji_ad, "stratejiler/v3_adaylar/kodlama_v3.csv", r.satir_no)
     return out, kod
 
 
@@ -628,13 +628,13 @@ def haiku_okuma():
         for ad, g in gruplar(d).items():
             gec = g[g.gecti.map(bayrak) == True]  # noqa: E712
             out[ad].append(f"wf[{alt}]:n={len(g)},gecen={len(gec)}" + (f"({','.join(kisa_sembol(r.sembol) + '/' + r.tf for r in gec.itertuples())})" if len(gec) else ""))
-            KANIT[ad].append(f"{HAIKU_DAL}/{et}.csv:{','.join(map(str, g._satir.tolist()[:3]))}…")
+            KANIT[ad].append(f"{HAIKU_DAL}/{et}.csv:{','.join(map(str, g.satir_no.tolist()[:3]))}…")
             KOSTU[ad].add("haiku_arge")
     for et in ("haiku_elenen_swing", "haiku_elenen_daytrade"):
         d = oku(HAIKU / f"saglamlik/{et}.csv", usecols=["strateji", "sembol", "tf", "saglam_mi", "kapi_basarisiz"], mutlak=True)
         for ad, g in gruplar(d).items():
             out[ad].append("sag:" + ";".join(f"{kisa_sembol(r.sembol)}/{r.tf}={'saglam' if bayrak(r.saglam_mi) else 'kaldi[' + str(r.kapi_basarisiz) + ']'}" for r in g.itertuples()))
-            KANIT[ad].append(f"{HAIKU_DAL}/saglamlik/{et}.csv:{','.join(map(str, g._satir.tolist()))}")
+            KANIT[ad].append(f"{HAIKU_DAL}/saglamlik/{et}.csv:{','.join(map(str, g.satir_no.tolist()))}")
     return out, True
 
 
@@ -1066,7 +1066,7 @@ def notlar(cikti, ay, ctx):
     dd = dis.v2_havuz_disi_neden.map(sinif).value_counts()
     for k, v in dd.items():
         L.append(f"- {k}: {v}")
-    L.append("\nv1 WF'de (g1/g2) kalma, v2 havuzuna girişin ÖLÇÜTÜ DEĞİLDİR: `araclar/havuz_v2_olustur.py::aday_satirlari` yalnız stil, klon kuralı, kümeleme ve etiketlere bakar. "
+    L.append("\nv1 WF'de (g1/g2) kalma, v2 havuzuna girişin ÖLÇÜTÜ DEĞİLDİR: `araclar/havuz_v2_olustur.py::adaysatir_nolari` yalnız stil, klon kuralı, kümeleme ve etiketlere bakar. "
              "v1 sonuçları yalnız 2.7(b) kümelemesinde haftalık OOS serisi olarak kullanılır.\n")
     L.append("### havuzda olmayıp kod_kaydi'nda olan (v1'de olmayanlar dahil) toplam\n")
     d2 = cikti[cikti.v2_havuzda == "hayir"].v2_havuz_disi_neden.map(sinif).value_counts()
