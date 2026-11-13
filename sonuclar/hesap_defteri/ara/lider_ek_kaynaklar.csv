@@ -1,0 +1,4 @@
+kaynak_id,grup,yol,tur,satir_veya_kayit,git_ilk_ekleme,not
+V901,G6_V3,dal:claude/haiku-strateji-arastirma:stratejiler/ek_kaynaklar/bolgesel_son3yil_2026-11.csv,birincil:bolgesel_dal,4,(dal),MASTER_katalog dışında kalan satırlar (G6 ajanı)
+V902,G6_V3,dal:claude/haiku-strateji-arastirma:stratejiler/ek_kaynaklar/cjk_son3yil_2026-11.csv,birincil:bolgesel_dal,4,(dal),MASTER_katalog dışında kalan satırlar (G6 ajanı)
+V903,G6_V3,dal:claude/haiku-strateji-arastirma:stratejiler/ek_kaynaklar/uzakdogu_son3yil_2026-11.csv,birincil:bolgesel_dal,3,(dal),MASTER_katalog dışında kalan satırlar (G6 ajanı)

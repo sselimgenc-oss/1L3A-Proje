@@ -1,0 +1,1476 @@
+{
+ "n": 1198,
+ "esl": {
+  "KOD": 203,
+  "AYAR": 88,
+  "BENZER": 280,
+  "YOK": 609,
+  "ESDEGER": 10,
+  "TEKRAR": 8
+ },
+ "od": {
+  "KOD": 301,
+  "D_KODLANMADI_NEDENLI": 720,
+  "G_ML": 46,
+  "F_YASAK_TIP": 25,
+  "H_BIZIM_EVRENDE_UYGULANAMAZ": 98,
+  "TEKRAR": 8
+ },
+ "bulgu": [],
+ "fam": {
+  "yeni__ust-tf-ma-yon-filtreli-ma-kesisimi": [
+   [
+    "KOD",
+    "KOD"
+   ],
+   [
+    "KOD",
+    "KOD"
+   ],
+   [
+    "KOD",
+    "KOD"
+   ],
+   [
+    "KOD",
+    "KOD"
+   ]
+  ],
+  "yeni__mabstra-ma-oran-kurali": [
+   [
+    "YOK",
+    "D_KODLANMADI_NEDENLI"
+   ]
+  ],
+  "yeni__btc-eth-rsi-es-zamanli": [
+   [
+    "YOK",
+    "D_KODLANMADI_NEDENLI"
+   ]
+  ],
+  "yeni__ozel-macd-turevleri": [
+   [
+    "YOK",
+    "D_KODLANMADI_NEDENLI"
+   ],
+   [
+    "YOK",
+    "D_KODLANMADI_NEDENLI"
+   ]
+  ],
+  "yeni__ha-bb40-cluc-dip": [
+   [
+    "KOD",
+    "KOD"
+   ],
+   [
+    "KOD",
+    "KOD"
+   ]
+  ],
+  "yeni__consensus-oy-puani-short": [
+   [
+    "YOK",
+    "D_KODLANMADI_NEDENLI"
+   ],
+   [
+    "YOK",
+    "D_KODLANMADI_NEDENLI"
+   ],
+   [
+    "YOK",
+    "D_KODLANMADI_NEDENLI"
+   ],
+   [
+    "YOK",
+    "D_KODLANMADI_NEDENLI"
+   ],
+   [
+    "YOK",
+    "D_KODLANMADI_NEDENLI"
+   ],
+   [
+    "YOK",
+    "D_KODLANMADI_NEDENLI"
+   ]
+  ],
+  "yeni__bb-alt-bant-osilator-dip": [
+   [
+    "KOD",
+    "KOD"
+   ],
+   [
+    "KOD",
+    "KOD"
+   ],
+   [
+    "KOD",
+    "KOD"
+   ],
+   [
+    "KOD",
+    "KOD"
+   ],
+   [
+    "KOD",
+    "KOD"
+   ]
+  ],
+  "yeni__sqz-momentum-dip-donusu-ewo": [
+   [
+    "AYAR",
+    "KOD"
+   ],
+   [
+    "AYAR",
+    "KOD"
+   ]
+  ],
+  "yeni__ewo-ema-ofset-asiri-satim": [
+   [
+    "KOD",
+    "KOD"
+   ],
+   [
+    "YOK",
+    "D_KODLANMADI_NEDENLI"
+   ],
+   [
+    "YOK",
+    "D_KODLANMADI_NEDENLI"
+   ],
+   [
+    "KOD",
+    "KOD"
+   ],
+   [
+    "KOD",
+    "KOD"
+   ]
+  ],
+  "yeni__vwap-alt-bant-dip": [
+   [
+    "KOD",
+    "KOD"
+   ],
+   [
+    "KOD",
+    "KOD"
+   ]
+  ],
+  "yeni__basamakli-ozel-stop": [
+   [
+    "YOK",
+    "D_KODLANMADI_NEDENLI"
+   ],
+   [
+    "YOK",
+    "D_KODLANMADI_NEDENLI"
+   ]
+  ],
+  "yeni__roi-azalan-trend-sonu-cikis": [
+   [
+    "YOK",
+    "D_KODLANMADI_NEDENLI"
+   ]
+  ],
+  "yeni__cooldown-koruma-modulleri": [
+   [
+    "YOK",
+    "D_KODLANMADI_NEDENLI"
+   ],
+   [
+    "YOK",
+    "D_KODLANMADI_NEDENLI"
+   ],
+   [
+    "YOK",
+    "D_KODLANMADI_NEDENLI"
+   ]
+  ],
+  "yeni__hilbert-sar-rejim-siniflayici": [
+   [
+    "YOK",
+    "D_KODLANMADI_NEDENLI"
+   ]
+  ],
+  "yeni__acik-islem-tikac-acici": [
+   [
+    "YOK",
+    "D_KODLANMADI_NEDENLI"
+   ]
+  ],
+  "yeni__aroon-stochrsi-ema-ofset-dip": [
+   [
+    "KOD",
+    "KOD"
+   ]
+  ],
+  "yeni__tepeden-dusus-yuzdesi-dip-alim": [
+   [
+    "KOD",
+    "KOD"
+   ],
+   [
+    "YOK",
+    "D_KODLANMADI_NEDENLI"
+   ],
+   [
+    "KOD",
+    "KOD"
+   ],
+   [
+    "KOD",
+    "KOD"
+   ]
+  ],
+  "yeni__ema-hizali-olgun-yukselis-momentum": [
+   [
+    "KOD",
+    "KOD"
+   ]
+  ],
+  "yeni__cci-yukselis-aroon-trend-dogusu": [
+   [
+    "KOD",
+    "KOD"
+   ]
+  ],
+  "yeni__cok-osilator-ekstrem-bb-disi": [
+   [
+    "KOD",
+    "KOD"
+   ],
+   [
+    "KOD",
+    "KOD"
+   ],
+   [
+    "KOD",
+    "KOD"
+   ]
+  ],
+  "yeni__marubozu-yutan-mum-devam": [
+   [
+    "AYAR",
+    "KOD"
+   ],
+   [
+    "AYAR",
+    "KOD"
+   ]
+  ],
+  "yeni__kapitulasyon-hacimli-dip": [
+   [
+    "AYAR",
+    "KOD"
+   ],
+   [
+    "AYAR",
+    "KOD"
+   ]
+  ],
+  "yeni__hacim-patlamali-48-mum-zirve-kirilimi": [
+   [
+    "AYAR",
+    "KOD"
+   ]
+  ],
+  "yeni__dortlu-stokastik-rotasyon": [
+   [
+    "KOD",
+    "KOD"
+   ]
+  ],
+  "yeni__nfi-short-trend-cokusu": [
+   [
+    "KOD",
+    "KOD"
+   ],
+   [
+    "KOD",
+    "KOD"
+   ]
+  ],
+  "yeni__nfi-pmax-ichimoku-moderi": [
+   [
+    "YOK",
+    "D_KODLANMADI_NEDENLI"
+   ]
+  ],
+  "yeni__kar-rsi-merdiveni-cikis": [
+   [
+    "YOK",
+    "D_KODLANMADI_NEDENLI"
+   ]
+  ],
+  "yeni__kismi-derisk-doom-stop": [
+   [
+    "YOK",
+    "D_KODLANMADI_NEDENLI"
+   ]
+  ],
+  "yeni__atr-chandelier-nrtr-donus": [
+   [
+    "YOK",
+    "D_KODLANMADI_NEDENLI"
+   ],
+   [
+    "AYAR",
+    "KOD"
+   ],
+   [
+    "AYAR",
+    "KOD"
+   ],
+   [
+    "AYAR",
+    "KOD"
+   ],
+   [
+    "AYAR",
+    "KOD"
+   ],
+   [
+    "AYAR",
+    "KOD"
+   ]
+  ],
+  "yeni__macd-hist-esik-osilator-onay": [
+   [
+    "KOD",
+    "KOD"
+   ],
+   [
+    "KOD",
+    "KOD"
+   ],
+   [
+    "KOD",
+    "KOD"
+   ],
+   [
+    "KOD",
+    "KOD"
+   ],
+   [
+    "KOD",
+    "KOD"
+   ]
+  ],
+  "yeni__rsi-dinamik-esik-tepe-dip-medyani": [
+   [
+    "AYAR",
+    "KOD"
+   ],
+   [
+    "YOK",
+    "D_KODLANMADI_NEDENLI"
+   ]
+  ],
+  "yeni__x2-rsi-cift-zaman-dilimi": [
+   [
+    "KOD",
+    "KOD"
+   ]
+  ],
+  "yeni__gosterge-egim-yuzde-esik": [
+   [
+    "KOD",
+    "KOD"
+   ],
+   [
+    "KOD",
+    "KOD"
+   ],
+   [
+    "KOD",
+    "KOD"
+   ],
+   [
+    "KOD",
+    "KOD"
+   ],
+   [
+    "KOD",
+    "KOD"
+   ],
+   [
+    "KOD",
+    "KOD"
+   ],
+   [
+    "KOD",
+    "KOD"
+   ],
+   [
+    "KOD",
+    "KOD"
+   ],
+   [
+    "KOD",
+    "KOD"
+   ],
+   [
+    "YOK",
+    "D_KODLANMADI_NEDENLI"
+   ],
+   [
+    "KOD",
+    "KOD"
+   ],
+   [
+    "KOD",
+    "KOD"
+   ],
+   [
+    "YOK",
+    "D_KODLANMADI_NEDENLI"
+   ],
+   [
+    "KOD",
+    "KOD"
+   ],
+   [
+    "KOD",
+    "KOD"
+   ],
+   [
+    "KOD",
+    "KOD"
+   ],
+   [
+    "KOD",
+    "KOD"
+   ],
+   [
+    "KOD",
+    "KOD"
+   ],
+   [
+    "YOK",
+    "D_KODLANMADI_NEDENLI"
+   ],
+   [
+    "KOD",
+    "KOD"
+   ],
+   [
+    "KOD",
+    "KOD"
+   ],
+   [
+    "KOD",
+    "KOD"
+   ],
+   [
+    "KOD",
+    "KOD"
+   ],
+   [
+    "KOD",
+    "KOD"
+   ],
+   [
+    "KOD",
+    "KOD"
+   ],
+   [
+    "KOD",
+    "KOD"
+   ],
+   [
+    "YOK",
+    "D_KODLANMADI_NEDENLI"
+   ],
+   [
+    "YOK",
+    "D_KODLANMADI_NEDENLI"
+   ],
+   [
+    "YOK",
+    "D_KODLANMADI_NEDENLI"
+   ],
+   [
+    "YOK",
+    "D_KODLANMADI_NEDENLI"
+   ],
+   [
+    "KOD",
+    "KOD"
+   ],
+   [
+    "YOK",
+    "D_KODLANMADI_NEDENLI"
+   ],
+   [
+    "KOD",
+    "KOD"
+   ]
+  ],
+  "yeni__iki-gosterge-egimi-ayni-yon": [
+   [
+    "KOD",
+    "KOD"
+   ],
+   [
+    "KOD",
+    "KOD"
+   ],
+   [
+    "KOD",
+    "KOD"
+   ],
+   [
+    "KOD",
+    "KOD"
+   ]
+  ],
+  "yeni__asiri-bolge-sonrasi-osilator-kesisimi": [
+   [
+    "YOK",
+    "D_KODLANMADI_NEDENLI"
+   ],
+   [
+    "KOD",
+    "KOD"
+   ],
+   [
+    "KOD",
+    "KOD"
+   ]
+  ],
+  "yeni__cok-tf-stokastik-asiri-satim": [
+   [
+    "KOD",
+    "KOD"
+   ]
+  ],
+  "yeni__ppo-tsi-uo-esik-birlesimi": [
+   [
+    "KOD",
+    "KOD"
+   ],
+   [
+    "KOD",
+    "KOD"
+   ],
+   [
+    "KOD",
+    "KOD"
+   ]
+  ],
+  "yeni__cok-gosterge-ayni-yon-teyidi": [
+   [
+    "BENZER",
+    "D_KODLANMADI_NEDENLI"
+   ],
+   [
+    "KOD",
+    "KOD"
+   ],
+   [
+    "KOD",
+    "KOD"
+   ]
+  ],
+  "yeni__jake-ppo-linreg-vosc-cci-bb": [
+   [
+    "KOD",
+    "KOD"
+   ]
+  ],
+  "yeni__adx-seviye-durumu": [
+   [
+    "KOD",
+    "KOD"
+   ]
+  ],
+  "yeni__aroon-uc-deger-ters-yon": [
+   [
+    "KOD",
+    "KOD"
+   ]
+  ],
+  "yeni__rsi-boga-ayi-rejim-esikleri": [
+   [
+    "KOD",
+    "KOD"
+   ],
+   [
+    "BENZER",
+    "D_KODLANMADI_NEDENLI"
+   ],
+   [
+    "KOD",
+    "KOD"
+   ],
+   [
+    "KOD",
+    "KOD"
+   ],
+   [
+    "YOK",
+    "D_KODLANMADI_NEDENLI"
+   ],
+   [
+    "YOK",
+    "D_KODLANMADI_NEDENLI"
+   ],
+   [
+    "YOK",
+    "D_KODLANMADI_NEDENLI"
+   ]
+  ],
+  "yeni__osilator-esik-donusu-gosterge-modlari": [
+   [
+    "AYAR",
+    "KOD"
+   ],
+   [
+    "AYAR",
+    "KOD"
+   ],
+   [
+    "AYAR",
+    "KOD"
+   ],
+   [
+    "AYAR",
+    "KOD"
+   ],
+   [
+    "AYAR",
+    "KOD"
+   ],
+   [
+    "YOK",
+    "D_KODLANMADI_NEDENLI"
+   ],
+   [
+    "AYAR",
+    "KOD"
+   ]
+  ],
+  "yeni__yuzde-zigzag-donus": [
+   [
+    "KOD",
+    "KOD"
+   ],
+   [
+    "KOD",
+    "KOD"
+   ]
+  ],
+  "yeni__uo-obv-dip": [
+   [
+    "KOD",
+    "KOD"
+   ]
+  ],
+  "yeni__macd-seviye-cok-zaman-dilimi": [
+   [
+    "KOD",
+    "KOD"
+   ]
+  ],
+  "yeni__lineer-regresyon-cizgisi-rsi-dip": [
+   [
+    "KOD",
+    "KOD"
+   ]
+  ],
+  "yeni__pivot-onayli-ters-stop": [
+   [
+    "AYAR",
+    "KOD"
+   ]
+  ],
+  "yeni__kapanis-kanali-min-dip-alim": [
+   [
+    "AYAR",
+    "KOD"
+   ],
+   [
+    "AYAR",
+    "KOD"
+   ]
+  ],
+  "yeni__ardisik-mum-degisimi-al-sat": [
+   [
+    "AYAR",
+    "KOD"
+   ]
+  ],
+  "yeni__cok-osilator-esik-and": [
+   [
+    "KOD",
+    "KOD"
+   ]
+  ],
+  "yeni__robbot-yukselis-ortalamasi-taban": [
+   [
+    "YOK",
+    "D_KODLANMADI_NEDENLI"
+   ]
+  ],
+  "yeni__getiri-oynaklik-katsayisi-momentum": [
+   [
+    "YOK",
+    "D_KODLANMADI_NEDENLI"
+   ],
+   [
+    "KOD",
+    "KOD"
+   ]
+  ],
+  "yeni__stratlv-sma-ustu-dar-bolge": [
+   [
+    "YOK",
+    "D_KODLANMADI_NEDENLI"
+   ]
+  ],
+  "yeni__hacim-ve-govde-patlamasi-devam": [
+   [
+    "KOD",
+    "KOD"
+   ],
+   [
+    "KOD",
+    "KOD"
+   ],
+   [
+    "KOD",
+    "KOD"
+   ]
+  ],
+  "yeni__bb-stoch-gu-orani-dip": [
+   [
+    "KOD",
+    "KOD"
+   ],
+   [
+    "KOD",
+    "KOD"
+   ]
+  ],
+  "yeni__cci-stochrsi-donus": [
+   [
+    "KOD",
+    "KOD"
+   ]
+  ],
+  "yeni__gosterge-sinyal-sifir-kesisimi": [
+   [
+    "AYAR",
+    "KOD"
+   ],
+   [
+    "AYAR",
+    "KOD"
+   ],
+   [
+    "AYAR",
+    "KOD"
+   ],
+   [
+    "AYAR",
+    "KOD"
+   ],
+   [
+    "AYAR",
+    "KOD"
+   ],
+   [
+    "AYAR",
+    "KOD"
+   ],
+   [
+    "AYAR",
+    "KOD"
+   ],
+   [
+    "AYAR",
+    "KOD"
+   ],
+   [
+    "YOK",
+    "D_KODLANMADI_NEDENLI"
+   ],
+   [
+    "AYAR",
+    "KOD"
+   ],
+   [
+    "AYAR",
+    "KOD"
+   ],
+   [
+    "AYAR",
+    "KOD"
+   ]
+  ],
+  "yeni__renko-tugla-donusu-basit": [
+   [
+    "AYAR",
+    "KOD"
+   ]
+  ],
+  "yeni__ichimoku-puan-skoru": [
+   [
+    "AYAR",
+    "KOD"
+   ]
+  ],
+  "yeni__mama-fama-itrend-cma-ma-turleri": [
+   [
+    "AYAR",
+    "KOD"
+   ],
+   [
+    "AYAR",
+    "KOD"
+   ],
+   [
+    "AYAR",
+    "KOD"
+   ]
+  ],
+  "yeni__bant-dokunusu-stokastik-onayi": [
+   [
+    "AYAR",
+    "KOD"
+   ],
+   [
+    "AYAR",
+    "KOD"
+   ],
+   [
+    "AYAR",
+    "KOD"
+   ]
+  ],
+  "yeni__ma-kumelenme-kirilimi": [
+   [
+    "KOD",
+    "KOD"
+   ]
+  ],
+  "yeni__sma400-sapma-choppiness-tukenme": [
+   [
+    "KOD",
+    "KOD"
+   ]
+  ],
+  "yeni__obv-onculu-fiyat-gecikmesi": [
+   [
+    "KOD",
+    "KOD"
+   ]
+  ],
+  "yeni__hafta-sonu-bosluk-doldurma": [
+   [
+    "KOD",
+    "KOD"
+   ]
+  ],
+  "yeni__trailing-trade-atr-stop-piramit": [
+   [
+    "YOK",
+    "D_KODLANMADI_NEDENLI"
+   ],
+   [
+    "YOK",
+    "D_KODLANMADI_NEDENLI"
+   ]
+  ],
+  "yeni__rsi-zskor-ma-sapma-giris-kapisi": [
+   [
+    "AYAR",
+    "KOD"
+   ]
+  ],
+  "yeni__gunluk-yukselenler-tarama-1s-teyit": [
+   [
+    "YOK",
+    "H_BIZIM_EVRENDE_UYGULANAMAZ"
+   ]
+  ],
+  "yeni__atr-rsi-momentum-yeni-periyot": [
+   [
+    "AYAR",
+    "KOD"
+   ]
+  ],
+  "yeni__bant-ust-alt-kirilim-stop-giris": [
+   [
+    "AYAR",
+    "KOD"
+   ],
+   [
+    "AYAR",
+    "KOD"
+   ],
+   [
+    "AYAR",
+    "KOD"
+   ],
+   [
+    "AYAR",
+    "KOD"
+   ],
+   [
+    "AYAR",
+    "KOD"
+   ]
+  ],
+  "yeni__gosterge-oy-toplami-hedef-pozisyon": [
+   [
+    "KOD",
+    "KOD"
+   ]
+  ],
+  "yeni__ust-tf-ma-trendinde-rsi-momentum": [
+   [
+    "KOD",
+    "KOD"
+   ]
+  ],
+  "yeni__pump-mumu-devam-tek-giris": [
+   [
+    "KOD",
+    "KOD"
+   ]
+  ],
+  "yeni__korelasyon-matrisi-batch-ornegi": [
+   [
+    "YOK",
+    "D_KODLANMADI_NEDENLI"
+   ]
+  ],
+  "yeni__funding-pozitif-short": [
+   [
+    "AYAR",
+    "KOD"
+   ]
+  ],
+  "yeni__kesit-skor-kombinasyonu-momentum-carry": [
+   [
+    "AYAR",
+    "KOD"
+   ],
+   [
+    "YOK",
+    "D_KODLANMADI_NEDENLI"
+   ]
+  ],
+  "yeni__portfoy-agirlik-semalari-hrp-minvar-mvo": [
+   [
+    "AYAR",
+    "KOD"
+   ],
+   [
+    "AYAR",
+    "KOD"
+   ],
+   [
+    "YOK",
+    "D_KODLANMADI_NEDENLI"
+   ],
+   [
+    "AYAR",
+    "KOD"
+   ]
+  ],
+  "yeni__faktor-notr-agirlik-pole": [
+   [
+    "YOK",
+    "D_KODLANMADI_NEDENLI"
+   ]
+  ],
+  "yeni__rsi-kisa-uzun-ortalama-skoru": [
+   [
+    "YOK",
+    "D_KODLANMADI_NEDENLI"
+   ]
+  ],
+  "yeni__adx-evaluator-ema2-ema20": [
+   [
+    "YOK",
+    "D_KODLANMADI_NEDENLI"
+   ]
+  ],
+  "yeni__macd-histogram-wm-deseni": [
+   [
+    "KOD",
+    "KOD"
+   ]
+  ],
+  "yeni__klinger-hacim-osilatoru-skoru": [
+   [
+    "KOD",
+    "KOD"
+   ],
+   [
+    "KOD",
+    "KOD"
+   ]
+  ],
+  "yeni__rsi-dip-klinger-donus-kademeli-satis": [
+   [
+    "YOK",
+    "D_KODLANMADI_NEDENLI"
+   ]
+  ],
+  "yeni__sma2-sapma-skoru": [
+   [
+    "AYAR",
+    "KOD"
+   ],
+   [
+    "AYAR",
+    "KOD"
+   ]
+  ],
+  "yeni__ama-egri-donus-filtresi": [
+   [
+    "KOD",
+    "KOD"
+   ],
+   [
+    "KOD",
+    "KOD"
+   ],
+   [
+    "KOD",
+    "KOD"
+   ]
+  ],
+  "yeni__haftalik-macd-gunluk-ma-yarim-pozisyon": [
+   [
+    "KOD",
+    "KOD"
+   ],
+   [
+    "KOD",
+    "KOD"
+   ]
+  ],
+  "yeni__ozsermaye-egrisi-suzgeci-ve-kayan-sistem-secimi": [
+   [
+    "YOK",
+    "D_KODLANMADI_NEDENLI"
+   ],
+   [
+    "YOK",
+    "D_KODLANMADI_NEDENLI"
+   ]
+  ],
+  "yeni__elder-guvenli-bolge-stop": [
+   [
+    "YOK",
+    "D_KODLANMADI_NEDENLI"
+   ]
+  ],
+  "yeni__sabit-yuzde-stop-hedef-sure-cikisi": [
+   [
+    "YOK",
+    "D_KODLANMADI_NEDENLI"
+   ]
+  ],
+  "yeni__guclu-hisse-dinamik-ma-egimi": [
+   [
+    "AYAR",
+    "KOD"
+   ]
+  ],
+  "yeni__stockbee-momentum-burst": [
+   [
+    "KOD",
+    "KOD"
+   ],
+   [
+    "KOD",
+    "KOD"
+   ]
+  ],
+  "yeni__parabolik-hisse-short-ilk-kirmizi-mum": [
+   [
+    "KOD",
+    "KOD"
+   ],
+   [
+    "KOD",
+    "KOD"
+   ]
+  ],
+  "yeni__vwap-basarisizligi-lower-high-short": [
+   [
+    "KOD",
+    "KOD"
+   ]
+  ],
+  "yeni__oncu-takipci-gecikmeli-korelasyon": [
+   [
+    "YOK",
+    "H_BIZIM_EVRENDE_UYGULANAMAZ"
+   ]
+  ],
+  "yeni__ay-mevsimsellik-filtresi": [
+   [
+    "KOD",
+    "KOD"
+   ]
+  ],
+  "yeni__piyasa-rejim-filtreleri-genislik-ftd-dagitim": [
+   [
+    "AYAR",
+    "KOD"
+   ],
+   [
+    "AYAR",
+    "KOD"
+   ],
+   [
+    "AYAR",
+    "KOD"
+   ],
+   [
+    "YOK",
+    "D_KODLANMADI_NEDENLI"
+   ]
+  ],
+  "yeni__haftalik-key-reversal": [
+   [
+    "KOD",
+    "KOD"
+   ]
+  ],
+  "yeni__yukari-bosluk-secici": [
+   [
+    "YOK",
+    "H_BIZIM_EVRENDE_UYGULANAMAZ"
+   ]
+  ],
+  "yeni__tongdaxin-stokastik-seciciler": [
+   [
+    "YOK",
+    "D_KODLANMADI_NEDENLI"
+   ]
+  ],
+  "yeni__andean-osilator-teyitli": [
+   [
+    "KOD",
+    "KOD"
+   ],
+   [
+    "YOK",
+    "D_KODLANMADI_NEDENLI"
+   ],
+   [
+    "YOK",
+    "D_KODLANMADI_NEDENLI"
+   ]
+  ],
+  "yeni__cok-macd-periyot-geri-cekilme": [
+   [
+    "KOD",
+    "KOD"
+   ],
+   [
+    "KOD",
+    "KOD"
+   ]
+  ],
+  "yeni__momentum-ema-dizilim-9-bar": [
+   [
+    "KOD",
+    "KOD"
+   ]
+  ],
+  "yeni__uc-ema-dizilim-geri-cekilme-fraktal": [
+   [
+    "AYAR",
+    "KOD"
+   ]
+  ],
+  "yeni__lineer-regresyon-mumlari-teyitli": [
+   [
+    "KOD",
+    "KOD"
+   ],
+   [
+    "KOD",
+    "KOD"
+   ]
+  ],
+  "yeni__nadaraya-watson-zarfi-rsi": [
+   [
+    "KOD",
+    "KOD"
+   ]
+  ],
+  "yeni__darvas-kutusu-kirilimi": [
+   [
+    "KOD",
+    "KOD"
+   ]
+  ],
+  "yeni__carstens-pazartesi-dar-aralik-ters": [
+   [
+    "KOD",
+    "KOD"
+   ]
+  ],
+  "yeni__carstens-9-gun-dip-atr-genislemesi": [
+   [
+    "KOD",
+    "KOD"
+   ]
+  ],
+  "yeni__polinom-regresyon-trend": [
+   [
+    "KOD",
+    "KOD"
+   ]
+  ],
+  "yeni__trend-yapi-sabit-seviye-yesil-mum": [
+   [
+    "YOK",
+    "D_KODLANMADI_NEDENLI"
+   ]
+  ],
+  "yeni__smc-htf-supurme-ltf-choch-ob": [
+   [
+    "KOD",
+    "KOD"
+   ]
+  ],
+  "yeni__rsi-uyarlanir-esik-ve-periyot": [
+   [
+    "AYAR",
+    "KOD"
+   ],
+   [
+    "AYAR",
+    "KOD"
+   ],
+   [
+    "AYAR",
+    "KOD"
+   ],
+   [
+    "AYAR",
+    "KOD"
+   ]
+  ],
+  "yeni__alligator-dizilim-gator": [
+   [
+    "KOD",
+    "KOD"
+   ],
+   [
+    "KOD",
+    "KOD"
+   ]
+  ],
+  "yeni__fraktal-ok-girisi": [
+   [
+    "KOD",
+    "KOD"
+   ],
+   [
+    "KOD",
+    "KOD"
+   ]
+  ],
+  "yeni__bant-dokunusu-orta-cizgi-egimi": [
+   [
+    "AYAR",
+    "KOD"
+   ],
+   [
+    "AYAR",
+    "KOD"
+   ],
+   [
+    "YOK",
+    "D_KODLANMADI_NEDENLI"
+   ],
+   [
+    "YOK",
+    "D_KODLANMADI_NEDENLI"
+   ],
+   [
+    "AYAR",
+    "KOD"
+   ]
+  ],
+  "yeni__heiken-ashi-ea31337": [
+   [
+    "AYAR",
+    "KOD"
+   ]
+  ],
+  "yeni__ma-kirilim-aralik-orani": [
+   [
+    "YOK",
+    "D_KODLANMADI_NEDENLI"
+   ]
+  ],
+  "yeni__ma-gunluk-pivot-kesisimi": [
+   [
+    "KOD",
+    "KOD"
+   ],
+   [
+    "KOD",
+    "KOD"
+   ],
+   [
+    "YOK",
+    "D_KODLANMADI_NEDENLI"
+   ]
+  ],
+  "yeni__osilator-cizgi-kesisimi-genel": [
+   [
+    "AYAR",
+    "KOD"
+   ],
+   [
+    "AYAR",
+    "KOD"
+   ],
+   [
+    "YOK",
+    "D_KODLANMADI_NEDENLI"
+   ],
+   [
+    "YOK",
+    "D_KODLANMADI_NEDENLI"
+   ]
+  ],
+  "yeni__osilator-diverjansi-ea31337": [
+   [
+    "AYAR",
+    "KOD"
+   ]
+  ],
+  "yeni__mum-formasyon-bit-alani": [
+   [
+    "BENZER",
+    "D_KODLANMADI_NEDENLI"
+   ]
+  ],
+  "yeni__spinning-top-rsi-ea31337": [
+   [
+    "KOD",
+    "KOD"
+   ]
+  ],
+  "yeni__camarilla-bolgesi-ea31337": [
+   [
+    "AYAR",
+    "KOD"
+   ]
+  ],
+  "yeni__tma-cg-kanal-oku": [
+   [
+    "YOK",
+    "D_KODLANMADI_NEDENLI"
+   ]
+  ],
+  "yeni__zigzag-bacak-devami": [
+   [
+    "KOD",
+    "KOD"
+   ]
+  ],
+  "yeni__onceki-mum-ekstrem-kapanis-donusu": [
+   [
+    "KOD",
+    "KOD"
+   ]
+  ],
+  "yeni__uzun-yonlu-cift-dunku-getiri": [
+   [
+    "AYAR",
+    "KOD"
+   ]
+  ],
+  "yeni__spx-sse-esikli-gecis": [
+   [
+    "YOK",
+    "D_KODLANMADI_NEDENLI"
+   ]
+  ],
+  "yeni__ilk-30dk-son-30dk-r12": [
+   [
+    "AYAR",
+    "KOD"
+   ]
+  ],
+  "yeni__alma-macd-kesisimi": [
+   [
+    "KOD",
+    "KOD"
+   ]
+  ],
+  "yeni__momentum-roc-filtreli-uzun-yonlu": [
+   [
+    "KOD",
+    "KOD"
+   ],
+   [
+    "KOD",
+    "KOD"
+   ],
+   [
+    "KOD",
+    "KOD"
+   ]
+  ],
+  "yeni__uclu-rsi-uzun-orta-kisa": [
+   [
+    "KOD",
+    "KOD"
+   ]
+  ],
+  "yeni__eski-tepe-asma-geri-cekilme-sonrasi": [
+   [
+    "KOD",
+    "KOD"
+   ]
+  ],
+  "yeni__vcp-oynaklik-daralmasi-kirilimi": [
+   [
+    "KOD",
+    "KOD"
+   ],
+   [
+    "KOD",
+    "KOD"
+   ]
+  ],
+  "yeni__rsrs-egim-esigi": [
+   [
+    "KOD",
+    "KOD"
+   ],
+   [
+    "YOK",
+    "D_KODLANMADI_NEDENLI"
+   ]
+  ],
+  "yeni__rotasyon-skor-modlari-triplersi-bb": [
+   [
+    "AYAR",
+    "KOD"
+   ],
+   [
+    "AYAR",
+    "KOD"
+   ]
+  ]
+ }
+}

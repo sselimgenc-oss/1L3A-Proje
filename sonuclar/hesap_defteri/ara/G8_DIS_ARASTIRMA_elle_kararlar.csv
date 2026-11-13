@@ -1,0 +1,175 @@
+dis_id,eslesme,hedef,fark,dogrulama
+S0001,BENZER,dis__dual-thrust,"Jesse: anchor (üst TF) mum açılışı, n=21 anchor mumu (ızgara n 3/5/10 dışı), k1=0,71/k2=0,67 (ızgarada k1 0,3-0,7; k2 ayrı gridlenmiyor); sınıf seans-gün tabanlı.",kodla_acildi
+S0002,ESDEGER,swing__donchian-kirilim,yok,kodla_acildi
+S0008,ESDEGER,swing__ma-kesisim,yok,kodla_acildi
+S0010,BENZER,swing__rsi-asiri-donus,Kaynakta acil çıkış RSI<10 ve %10 TP + çıkış RSI 75; sınıfta bunlar yok (giriş RSI5/35 ayarlarda var).,kodla_acildi
+S0011,BENZER,swing__donchian-kirilim,"Turtle Sistem 1 20/10 + 2xATR stop aynı; kaynakta piramit (4 ekleme, 0,5 ATR) ve %1/ATR(20) birim büyüklük; motor tek pozisyon, piramit yok.",kodla_acildi
+S0014,ESDEGER,dis__ft-binhv45,yok,kodla_acildi
+S0015,ESDEGER,dis__ft-cluc-may2018,yok,kodla_acildi
+S0017,BENZER,dis__ft-cci-cmf-mfi,"CCI(170)&CCI(34), CMF, MFI<25, SMA dizilimi (25/50/100/200) ve çıkışta CMF>0,3/SMA dizilimi; sınıf CCI 20/10, CMF/MFI eşik, çıkış CCI>100.",kodla_acildi
+S0018,BENZER,dis__ft-bandtastic,"Kaynak varsayılanı: yalnız kapanış<BB(20,1σ,tipik fiyat) alt, RSI/MFI/EMA filtreleri KAPALI, çıkış MFI>46 + üst BB(2σ); sınıf RSI<35 VE MFI<35 VE EMA20>EMA50 VE BB(20,2σ) alt, çıkış RSI>65.",kodla_acildi
+S0021,ESDEGER,dis__ft-strategy003,yok,kodla_acildi
+S0024,BENZER,scalp__ma-kesisim,SMA3/6 + ADX>25 girişi ayarda var; kaynakta çıkış ADX<25 ve ters kesişim + ROI %10; sınıfta yalnız ters kesişim çıkışı.,kodla_acildi
+S0026,ESDEGER,dis__volatility-system,yok,kodla_acildi
+S0027,BENZER,scalp__ma-kesisim,SMA12/48 + ADX>30 L/S ayarda var; kaynakta çıkış ADX<30 olunca ve ROI tablosu; sınıfta ters kesişim çıkışı.,kodla_acildi
+S0029,ESDEGER,dis__ft-cofibit,yok,kodla_acildi
+S0030,BENZER,swing__ma-kesisim,"Kaynakta üst zaman dilimi (x12) SMA50 filtresi + ROI %50; sınıfta filtre aynı TF EMA/SMA(trend_ma), üst-TF yok (yaklaşık).",kodla_acildi
+S0032,ESDEGER,dis__gun-ici-donus,yok,kodla_acildi
+S0036,BENZER,dis__dual-thrust,"Aralık son 20 adet 30dk bar (n seans değil; ayarda n=2 seans yaklaşıklığı), eşik son bar KAPANIŞINA göre, içgörü 5 gün; sınıfta seans açılışı + seans sonu çıkış.",kodla_acildi
+S0037,BENZER,swing__macd-sinyal,"Giriş (MACD-sinyal)/EMA_hızlı > %0,25 histogram eşiği; sınıfta mod esik = MACD hattı x sabit eşik, göreli histogram eşiği yok.",kodla_acildi
+S0038,ESDEGER,swing__ma-kesisim,yok,kodla_acildi
+S0040,ESDEGER,dis__btfd-gunluk-dip,yok,kodla_acildi
+S0042,ESDEGER,swing__rsi-asiri-donus,yok,kodla_acildi
+S0043,BENZER,swing__ma-kesisim,Kaynakta çıkış yalnız 2xATR iz süren stop (ters kesişim çıkışı yok); sınıfta ters kesişimde çıkış + sabit ATR stop; SMA10/25 çifti ayarda var (atr_periyot 100).,kodla_acildi
+S0047,BENZER,swing__ma-kesisim,SMA100/300 çifti ızgara/ayar kümesinde yok (en yakın 50/200); 100 hisse hedef pozisyon.,kodla_acildi
+S0049,BENZER,swing__bant-donus,"Kaynakta giriş bant DIŞINDA/temasta (kapanış bant dışı = al); sınıfta giriş bant içine geri dönüş mumunda (önceki kapanış dışarıda, şimdiki içeride). RSI14<30 teyidi ayarda var; 1m TF bizde yok (5m scalp).",kodla_acildi
+S0051,ESDEGER,swing__rsi-asiri-donus,yok,kodla_acildi
+S0052,BENZER,dis__connors-etf,"Revize kural: RSI(2)<10 + SMA200 + RSI>70 çıkışı, 3 gün düşüş koşulu YOK; sınıfta r3 modu 3 gün düşüş/3 gün önce<60 koşullu, rsi4 modu rsi_n=4/25/55 (RSI2 10/70 ayarı kümede yok).",kodla_acildi
+S0053,ESDEGER,dis__ibs-donus,yok,kodla_acildi
+S0054,BENZER,dis__ibs-donus,"Filtre EMA(252) ve çıkış IBS>0,9 (ızgara ust 0,7-0,9 içinde); sınıfta trend filtresi SMA(trend_n) (252/EMA ayarı kümede yok), maks. işlem süresi opsiyonu.",kodla_acildi
+S0055,BENZER,daytrade__vwap-donus,"VWAP+-2SD dışında RSI>30 dönüş + MACD kesişimi + 10 pip uzaklık teyidi (5 bar penceresi); sınıf boğa mum/zirve kırılımı tetikli, RSI yalnız eşik filtresi, MACD yok.",kodla_acildi
+S0056,ESDEGER,swing__rsi-asiri-donus,yok,kodla_acildi
+S0057,ESDEGER,swing__bant-donus,yok,kodla_acildi
+S0071,BENZER,daytrade__vwap-donus,"Giriş alt VWAP std bandını yukarı kesişi (kesişim tetiği), saat/gün filtreleri, gün sonu ve günlük limit çıkışı; sınıf mum-dizisi tetikli.",kodla_acildi
+S0076,ESDEGER,swing__donchian-kirilim,yok,kodla_acildi
+S0081,BENZER,swing__ma-kesisim,MA 5/10 (tür belirsiz): yavaş MA 10 ızgara dışı (21-50) ve ayar kümesinde 5/10 yok.,kodla_acildi
+S0083,BENZER,swing__donchian-kirilim,"Trend filtresi EMA200 (sınıfta SMA(trend_ma)), hedef_r=2 ve ATR(20) stop ızgara/ayar kümesinde yok; H4 XAUUSD.",kodla_acildi
+S0093,BENZER,swing__ma-kesisim,"Kaynakta sabit TP 600 puan (+SL 300 puan); sınıfta ters kesişim + ATR stop, TP yok (motor kâr-al modülü aday kümesinde değil).",kodla_acildi
+S0105,BENZER,swing__rsi-asiri-donus,Kaynakta S&P 500 endeksi SMA50>SMA200 rejim filtresi (ayrı enstrüman); sınıfta trend_ma yalnız kendi fiyatı EMA (0/200).,kodla_acildi
+S0107,BENZER,swing__rsi-asiri-donus,Kaynakta endeks/sektör 5g SMA>200g SMA filtresi ve çıkış RSI 70/75/80 seçenekleri; sınıfta endeks filtresi yok.,kodla_acildi
+S0114,BENZER,swing__bant-donus,"Giriş 2,5σ-3σ bantları ARASINDA kapanışta (bölge girişi), 1. hedef orta bant sonra başabaş + 2. hedef karşı 2,5σ (iki kademeli çıkış); sınıfta tek hedef.",kodla_acildi
+S0115,BENZER,swing__bant-donus,"Kaynakta giriş bant DIŞINDA/temasta (kapanış bant dışı = al); sınıfta giriş bant içine geri dönüş mumunda (önceki kapanış dışarıda, şimdiki içeride). BB(30)+RSI(13) çift teyit.",kodla_acildi
+S0116,ESDEGER,dis__connors-etf,yok,kodla_acildi
+S0119,BENZER,swing__ma-kesisim,SMA100/400 çifti ızgara/ayar kümesi dışında.,kodla_acildi
+S0128,BENZER,swing__ma-kesisim,"Haftalık EMA10/40 (~günlük 50/200 ile yaklaşık); haftalık TF bizde yok, birebir değil.",kodla_acildi
+S0144,BENZER,swing__ma-kesisim,"EMA çiftleri (3,12),(8,32),(32,128) kümede yok; 60g EWMA vol ölçekleme.",kodla_acildi
+S0145,BENZER,dis__ewmac-carver,"Aylık barlarda EMA(5 ay)/σ işareti, her zaman piyasada; sınıf günlük/4h EWMAC varyantları ve eşikli birleşik tahmin.",kodla_acildi
+S0150,ESDEGER,dis__ilk-yarim-saat-son-yarim-saat,yok,kodla_acildi
+S0157,BENZER,dis__sma200-ls,"Aylık karar, k=4-18 ay MA seçimi genişleyen pencerede Sharpe optimizasyonuyla; sınıfta sma_n 150/200/250 günlük, optimizasyonlu seçim yok.",kodla_acildi
+S0172,ESDEGER,scalp__ma-kesisim,yok,kodla_acildi
+S0173,BENZER,dis__dual-thrust,"N=5 ama K1=K2=0,2 (ızgara 0,3-0,7 dışı); Çin vadeli seansı, 14:55 çıkışı/tick tetik.",kodla_acildi
+S0184,BENZER,swing__macd-sinyal,"TRIX(12) sinyal SMA9 kesişimi (gosterge=trix ayarı var, osc_n 14) + giriş±3ATR kâr-al; sınıfta kâr-al hedefi yok.",kodla_acildi
+S0188,BENZER,dis__volatility-system,"Günlük TF: fiyat>önceki kapanış+2xATR (sınıf 1h + 3h üst TF, ust_tf 2h/3h/4h); +%6,8 stop ve kârda iz stop.",kodla_acildi
+S0193,BENZER,swing__ma-kesisim,SMA20/120 çifti ızgara/ayar kümesi dışında.,kodla_acildi
+S0194,ESDEGER,swing__macd-sinyal,yok,kodla_acildi
+S0199,BENZER,v3__gunici-momentum-noise-alani,"Karar yalnız 10:29/11:29/13:59 (3 sabit saat), dakikalık bant, Çin ETF evreni (SSE50/CSI300); sınıf 30 dk mum kapanışlarında tüm gün karar, DK_SPX/SPY.",kodla_acildi
+S0213,BENZER,swing__rsi-asiri-donus,"Çıkış RSI>85 (ayar kümesinde 50/70) ve %35 sonrası zirveden %6,8 iz stop; sınıfta iz stop yok.",kodla_acildi
+S0215,ESDEGER,swing__rsi-asiri-donus,yok,kodla_acildi
+S0216,BENZER,swing__bant-donus,"Kaynakta giriş bant DIŞINDA/temasta (kapanış bant dışı = al); sınıfta giriş bant içine geri dönüş mumunda (önceki kapanış dışarıda, şimdiki içeride). Stopsuz, hedef orta bant.",kodla_acildi
+S0219,BENZER,swing__bant-donus,"Kaynakta giriş bant DIŞINDA/temasta (kapanış bant dışı = al); sınıfta giriş bant içine geri dönüş mumunda (önceki kapanış dışarıda, şimdiki içeride). BB periyodu 25 (ızgara 20/30/40 arası), çıkış karşı banda ulaşınca.",kodla_acildi
+S0234,BENZER,swing__ma-kesisim,SMA20/60 çifti kümede yok (yavaş 60 ızgara dışı).,kodla_acildi
+S0237,BENZER,dis__bant-kirilim-trend,"Bollinger 350 gün MA + 2,5σ (n ızgara 40-100 dışı), kârda piramitleme, ertesi açılışta dolum.",kodla_acildi
+S0238,ESDEGER,swing__ma-kesisim,yok,kodla_acildi
+S0242,BENZER,swing__rsi-asiri-donus,Filtre fiyat>MA25 (sınıfta trend_ma 0/200 EMA) ve RSI 30-40 bölgesinden dönüş.,kodla_acildi
+S0247,BENZER,swing__bant-donus,"Kaynakta giriş bant DIŞINDA/temasta (kapanış bant dışı = al); sınıfta giriş bant içine geri dönüş mumunda (önceki kapanış dışarıda, şimdiki içeride). RSI14<30 teyidi; 5m.",kodla_acildi
+S0251,BENZER,swing__ma-kesisim,SMA 5-60/5-120/20-60/20-120 çiftleri kümede yok; varyant 2 sabit tutma süresi çıkışı.,kodla_acildi
+S0252,ESDEGER,swing__rsi-asiri-donus,yok,kodla_acildi
+S0254,BENZER,swing__bant-donus,Çıkış üst bandı aşağı kesince; sınıfta hedef orta/karşı banda temas; yatay piyasa filtresi (ADX<25) sınıfta var. Giriş (alt bandı yukarı kesme) aynı.,kodla_acildi
+S0257,BENZER,dis__ema50-sapma,"이격도 (fiyat/MA) alt çizgi 95 YUKARI kesince al, üst 105 aşağı kesince sat (L/S); sınıf fark<=+esik% iken long (farklı anlam), ema_n 34-100.",kodla_acildi
+S0260,ESDEGER,swing__rsi-asiri-donus,yok,kodla_acildi
+S0264,BENZER,swing__bant-donus,Giriş/çıkışta bant içine dönüş mumunun renk teyidi (yükseliş/düşüş mumu) var; sınıfta mum rengi teyidi yok; trend varyantında orta hat kırılımı çıkışı.,kodla_acildi
+S0265,ESDEGER,swing__ma-kesisim,yok,kodla_acildi
+S0268,BENZER,swing__bant-donus,"Kaynakta giriş bant DIŞINDA/temasta (kapanış bant dışı = al); sınıfta giriş bant içine geri dönüş mumunda (önceki kapanış dışarıda, şimdiki içeride). Stop sinyal mumunun dibi.",kodla_acildi
+S0269,BENZER,dis__sma200-ls,Fiyat>EMA(50) durumu long-only; sınıfta SMA(n) n=150-250 (EMA ve 50 kümede yok).,kodla_acildi
+S0270,ESDEGER,swing__ma-kesisim,yok,kodla_acildi
+S0286,ESDEGER,swing__ma-kesisim,yok,kodla_acildi
+S0288,BENZER,swing__bant-donus,Giriş (alt bandın altından içeri) aynı; çıkış long için üst bandın üstünden içeri dönüşte; sınıfta hedef orta/karşı banda temas.,kodla_acildi
+S0290,BENZER,swing__rsi-asiri-donus,Williams %R(14) -80/-20; sınıf gosterge=wpr ayarı periyot 18 / eşik 10; -80/-20 ayarı kümede yok.,kodla_acildi
+S0291,ESDEGER,swing__rsi-asiri-donus,yok,kodla_acildi
+S0292,ESDEGER,swing__ichimoku,yok,kodla_acildi
+S0293,ESDEGER,swing__supertrend-psar,yok,kodla_acildi
+S0299,BENZER,swing__bant-donus,"Kaynakta giriş bant DIŞINDA/temasta (kapanış bant dışı = al); sınıfta giriş bant içine geri dönüş mumunda (önceki kapanış dışarıda, şimdiki içeride). Bantların yatay/paralel olması (orta_egim) filtresi ayar kümesinde yalnız eğim=0 ile; hedef üst bant.",kodla_acildi
+S0303,ESDEGER,swing__rsi-asiri-donus,yok,kodla_acildi
+S0304,BENZER,swing__rsi-momentum-esik,"Cardwell 40/60 aralık kuralı (40 yukarı kes al, 60 altına inince sat); sınıfta esik=60 ise long 60 yukarı / short 40 aşağı (farklı anlam).",kodla_acildi
+S0306,BENZER,swing__ma-kesisim,"Kaynakta +-%1 BANT (BLL) bandı var; sınıfta bant yok, MA çiftleri (1,2,5 x 10-60) kısmen kümede.",kodla_acildi
+S0313,BENZER,swing__rsi-asiri-donus,"RSI kendi 20 bar ortalaması +-2 std bandı ve çıkış RSI ortalamasına dönünce; sınıfta uyarlanır eşik pencere 50, çıkış RSI 50/70.",kodla_acildi
+S0316,BENZER,swing__ma-kesisim,EMA100/400 çifti kümede yok (1dk TF).,kodla_acildi
+S0318,ESDEGER,dis__connors-etf,yok,kodla_acildi
+S0332,BENZER,swing__bant-donus,"BB periyodu 10 (ızgara 20-40 dışı), iğne alt bandın altında + kapanış içeride (bar içi), çıkış 14 periyot ortalamada limit.",kodla_acildi
+S0340,ESDEGER,swing__rsi-asiri-donus,yok,kodla_acildi
+S0342,BENZER,swing__ma-kesisim,"Stop ara SMA(11) seviyesinde (yapısal MA stop) ve medyan fiyat (H+L)/2 kaynağı; sınıfta ATR stop, kaynak=kapanis/ohlc4.",kodla_acildi
+S0344,ESDEGER,dis__sma200-ls,yok,kodla_acildi
+S0346,BENZER,swing__donchian-kirilim,N=2-25 bar aralığı; ızgarada yalnız 10 ve 20 (2-9 yok); dur-ve-dön çıkış cikis_n=giris_n ayarı.,kodla_acildi
+S0347,BENZER,dis__adx-di-esik-kesisimi,"Kural DI+/DI- EMA kesişimi + ADX>20 + ATR eşiği + stop emirli giriş; önceki ajanın hedefi swing__macd-sinyal (MACD) yanlış; en yakın sınıf adx-di-esik-kesisimi (DI/ADX eşik, long-only, ADX(7)) mantık olarak farklı.",kodla_acildi
+S0348,BENZER,swing__bant-donus,"RSI aşırı bölge + alt BB altı kapanışı birleşik giriş, ters sinyal çıkışı; sınıfta zone girişi yok.",kodla_acildi
+S0349,ESDEGER,swing__rsi-asiri-donus,yok,kodla_acildi
+S0350,BENZER,dis__lien-20-gun-sahte-kirilim,"Turtle Soup: zaman çıkışı (nExistBars) ve buy-stop girişi; sınıf çıkış modu hedef/iz, zaman çıkışı yok.",kodla_acildi
+S0354,BENZER,dis__asiri-bolge-osilator-kesisimi,"Kaynakta RSI<40 + MACD kesişimi + fiyat>EMA14 + 40 puan TP/20 puan SL + saat penceresi; sınıf mod rsi_macd (RSI 30/70, pencere 5-20), EMA filtresi ve TP puan yok.",kodla_acildi
+S0355,ESDEGER,swing__ma-kesisim,yok,kodla_acildi
+S0358,BENZER,dis__ema-kesisim-123-kurulumu,Haftalık EMA8>EMA80 trend filtresi + günlük 123 deseni; haftalık TF ve MTF filtresi sınıfta yok (doğrulama kısmi).,kodla_acildi
+S0364,BENZER,swing__ma-kesisim,MA12/108 çifti kümede yok (yavaş 108 dışı).,kodla_acildi
+S0366,ESDEGER,swing__macd-sinyal,yok,kodla_acildi
+S0367,BENZER,swing__ma-kesisim,Haftalık 5/50 + +-%1 bant; bant sınıfta yok.,kodla_acildi
+S0369,BENZER,dis__ema-esik-trend,"Hızlı EMA 2-5 / yavaş 6-9 ve eşik 0,01-0,15 (ızgara 10-30 / 50-100, eşik 0-0,005 dışı).",kodla_acildi
+S0371,BENZER,swing__rsi-asiri-donus,Çıkış son iki mumun tepesine ulaşınca (dis__ifr2 sınıfında var); rsi-asiri-donus sınıfında bu çıkış yok.,kodla_acildi
+S0379,BENZER,swing__rsi-asiri-donus,"Çıkış hedefi son 15 günün en yükseği; sınıfta bu çıkış yok (RSI 15 periyot, eşik 30).",kodla_acildi
+S0383,BENZER,swing__rsi-asiri-donus,Haftalık TF (sınıf 4h/1d) ve RSI(15) long-only; 14 ile yakın ama TF komşu değil.,kodla_acildi
+S0387,BENZER,swing__rsi-asiri-donus,"Sabit puan TP 60 / SL 30 (hedef_r=2 ayarı kümede yok), RSI14 30/70 L/S.",kodla_acildi
+S0388,ESDEGER,swing__ma-kesisim,yok,kodla_acildi
+S0389,BENZER,swing__ma-kesisim,SMA100/200 L/S çifti kümede yok (50/200 var); stop = SMA dinamik stop.,kodla_acildi
+S0391,BENZER,swing__ma-kesisim,EMA20/50 kesişimine ek RSI<30 al / RSI>70 sat birleşik sinyal sınıfta yok.,kodla_acildi
+S0392,ESDEGER,dis__sma200-ls,yok,kodla_acildi
+S0393,ESDEGER,swing__ma-kesisim,yok,kodla_acildi
+S0394,BENZER,swing__ma-kesisim,Kaynakta %6 kâr-al ve günlük zarar durdurma; sınıfta TP yok.,kodla_acildi
+S0395,BENZER,dis__ema-esik-trend,"VMA (1,50),(1,150),(1,200),(5,150),(2,200) +-%1 bant (esik ızgarada en çok 0,005) ve kaldıraçla maruziyeti ikiye katlama, nakit yerine tahvil.",kodla_acildi
+S0397,BENZER,swing__donchian-kirilim,"Donchian 55 + göreli hacim>=2,5 (hacim_k var) ama ek SMA20>SMA50 filtresi, ciro filtresi ve Chandelier 3xATR iz stop çıkışı sınıfta yok.",kodla_acildi
+S0406,BENZER,swing__bant-donus,"Bant = ortalama +-1σ (SMA/EMA 20/50), bölge girişi; sınıfta bb_sapma 2-3 (1,0 yalnız bir ayarda).",kodla_acildi
+S0407,BENZER,swing__bant-donus,"Kaynakta giriş bant DIŞINDA/temasta (kapanış bant dışı = al); sınıfta giriş bant içine geri dönüş mumunda (önceki kapanış dışarıda, şimdiki içeride). Çıkış orta bandı yukarı kesince ya da üst banda temas.",kodla_acildi
+S0410,BENZER,swing__rsi-asiri-donus,"Kaynakta %6 kâr-al + çıkış RSI70 aşağı kesişte; sınıfta çıkış yukarı kesişte (cikis_rsi), TP yok.",kodla_acildi
+S0411,ESDEGER,scalp__rsi-asiri-donus,yok,kodla_acildi
+S0417,BENZER,swing__bant-donus,"Kaynakta giriş bant DIŞINDA/temasta (kapanış bant dışı = al); sınıfta giriş bant içine geri dönüş mumunda (önceki kapanış dışarıda, şimdiki içeride). TF 5m-1d belirsiz.",kodla_acildi
+S0427,BENZER,dis__sma200-ls,Fiyat>EMA(150) aylık güncelleme; sınıf SMA ve günlük karar.,kodla_acildi
+S0430,BENZER,swing__bant-donus,Giriş: >=2 gün alt bant altında kaldıktan sonra yükselip hala bandın altındayken; çıkış üst bandı kesince; sınıfta bu giriş mantığı yok.,kodla_acildi
+S0441,BENZER,swing__rsi-asiri-donus,RSI70 aşağı kesişi + sabit hedef + 3x zaman stopu; sınıfta zaman/hedef çıkışı yok.,kodla_acildi
+S0448,BENZER,swing__bant-donus,"RSI18<31 + alt BB(37,2) altı kapanış + rejim SMA216 birleşik; BB periyodu ızgara dışı; çıkış RSI>69 ya da orta bant.",kodla_acildi
+S0449,ESDEGER,swing__rsi-asiri-donus,yok,kodla_acildi
+S0461,BENZER,dis__yuzde-zigzag,"Filtre eşikleri x=%0,5-%10 ve değerlendirme/tutma/gecikme parametre ızgarası; sınıfta yuzde 1-3%, zaman_cikisi 0/48/96.",kodla_acildi
+S0468,BENZER,dis__bant-kirilim-trend,"BB(20) 1,6-2σ: n=20 ızgara (40-100) dışı; 400 puan kâr hedefi ve 50-100 puan stop.",kodla_acildi
+S0469,BENZER,swing__bant-donus,"Kaynakta giriş bant DIŞINDA/temasta (kapanış bant dışı = al); sınıfta giriş bant içine geri dönüş mumunda (önceki kapanış dışarıda, şimdiki içeride). Karşı banda çevirme (sürekli piyasada), 50 puan sabit stop.",kodla_acildi
+S0481,BENZER,dis__sma200-ls,RSL=kapanış/27 günlük ortalama>1; sma_n=27 ızgara (150-250) dışı.,kodla_acildi
+S0483,ESDEGER,swing__macd-sinyal,yok,kodla_acildi
+S0484,BENZER,swing__rsi-asiri-donus,Long-only; çıkış RSI70 aşağı kesişte; sınıfta long-only için bu çıkış yok (cikis_rsi=0 yalnız dur-ve-dön).,kodla_acildi
+S0501,BENZER,dis__ay-donumu,"Giriş ayın sondan 5. işlem günü; sınıf giris_kalan 1-3 (5 ızgara dışı), çıkış 3. gün ızgarada.",kodla_acildi
+S0507,ESDEGER,dis__d1h1-macd,yok,kodla_acildi
+S0513,BENZER,daytrade__vwap-donus,"Bant ATR tabanlı (VWAP+-2xATR), sapma std değil; kapanış bant dışında girişi (mum teyidi yok), 5m.",kodla_acildi
+S0517,BENZER,swing__donchian-kirilim,"Kanal takvim ayı/haftası seviyeleri (önceki ay yükseği, önceki hafta çıkış); sınıfta kayan N-mum (20/5 yaklaşık), takvim hizası yok.",kodla_acildi
+S0521,BENZER,swing__ichimoku,"Yalnız bulut (Senkou A ve B) kırılımı; sınıfta kijun_bulut (bulut + Kijun) ve tk_bulut (Tenkan>Kijun) modları var, saf bulut kırılım modu yok.",kodla_acildi
+S0525,BENZER,dis__aurora-kama,"KAMA-SMA(100) işaret/eşik L/S çevirme; sınıfta KAMA yükselen (2-4 mum) + SMA(100/200/300) filtresi, stop %4.",kodla_acildi
+S0532,ESDEGER,v3__gunici-momentum-noise-alani,yok,kodla_acildi
+S0543,BENZER,swing__donchian-kirilim,"Kanal 1-12 hafta, her yıl önceki 3 yılın en kârlısı seçilerek yeniden optimizasyon; gün içi yüksek/açılışla tetik; sınıfta sabit giris_n, kapanış tetiği.",kodla_acildi
+S0544,BENZER,swing__bant-donus,BB periyodları N=10/20/50/250 (ızgara 20-40; 10/50/250 dışı); çıkış üst bandı aşağı kesince; long-only.,kodla_acildi
+S0548,ESDEGER,dis__ft-adx-momentum,yok,kodla_acildi
+S0549,BENZER,dis__ft-awesome-macd,"Kaynakta AO SIFIRI yukarı kesince giriş + %10 ROI; sınıfta AO yukarı DÖNÜŞ (AO[t]>AO[t-1], AO[t-1]<=AO[t-2]) + ADX>=adx_min filtresi.",kodla_acildi
+S0554,BENZER,dis__sma200-ls,"EMA(800) 1h (~33g) yukarı kesişim, çıkış EMA %1 altı eşik, %15 + iz stop; sma_n ızgara dışı ve EMA.",kodla_acildi
+S0567,ESDEGER,dis__ft-cmc-winner,yok,kodla_acildi
+S0572,BENZER,dis__ft-swinghightosky,"Kaynak CCI(72)<-175 ve RSI(36), çıkış CCI(66)/RSI(45) ve çok basamaklı ROI; sınıf cci_esik 100-200 ızgarası ve rsi_alt 25-35 (periyotlar/eşikler farklı).",kodla_acildi
+S0573,ESDEGER,dis__ft-strategy004,yok,kodla_acildi
+S0574,BENZER,swing__rsi-asiri-donus,Trend filtresi mum düşüğü>EMA100 ve çıkışta EMA100 altı; sınıfta trend_ma yalnız 0/200 ve filtre girişte.,kodla_acildi
+S0586,BENZER,dis__connors-etf,"RSI(2) ardışık düşüş + SMA200 aynı ailede (r3) ama eşikler 65 (başlangıç) / 75 (çıkış); sınıfta r3_onceki=60, r3_cikis=70 (ızgarada yok).",kodla_acildi
+S0600,BENZER,swing__ichimoku,Saf Kumo kırılımı L/S ve bulut kenarı iz stop; sınıf modları ek Kijun/Tenkan şartı içerir (stop_tipi bulut var ama iz değil).,kodla_acildi
+S0603,BENZER,swing__rsi-asiri-donus,Endeks+hisse SMA50>SMA200 filtresi ve RSI 5/10/14 seçimi; sınıfta bu SMA rejim filtresi yok.,kodla_acildi
+S0607,ESDEGER,swing__donchian-kirilim,yok,kodla_acildi
+S0620,ESDEGER,swing__supertrend-psar,yok,kodla_acildi
+S0622,BENZER,daytrade__vwap-donus,"1dk TF (min 5m), z-skor>=2 temas girişi, |z|<=0,3 çıkış, z>3,5 stop, 14:50 zorunlu kapanış; sınıf mum-dizisi tetikli, hedef VWAP.",kodla_acildi
+S0634,BENZER,swing__ichimoku,"Bulut kırılımı + Tenkan>Kijun girişi sınıf tk_bulut ile yakın; ek 120 saat zaman çıkışı, 2,5xATR iz stop, bulut tabanı çıkışı sınıfta yok.",kodla_acildi
+S0650,BENZER,dis__roc20-ls,5 günlük getiri>0 long-only/nakit; roc_n=5 ızgara (10/20/40) dışı.,kodla_acildi
+S0659,BENZER,swing__bant-donus,Alt banda temas girişi (z<=-2) + SMA200 + ADX<20 (ızgarada var) + isteğe RSI/çekiç; 5 seans zaman stopu ve sinyal günü dibi stop; sınıfta zaman stopu yok.,kodla_acildi
+S0660,BENZER,swing__donchian-kirilim,"Dış kanal 79 (aralık 30-100) ve iç 24 (ızgara giris 10/20/55, cikis 5/10/20 dışı); TF 5/10/15 dk, sınıfın scalp klonu yok.",kodla_acildi
+S0670,ESDEGER,swing__rsi-momentum-esik,yok,kodla_acildi
+S0684,BENZER,daytrade__vwap-donus,"Sabit +-%0,2 bant (VWAP oranı), 3 periyot VWAP, her aralıkta pozisyon=sinyal; sınıf std bandı ve mum tetikli.",kodla_acildi
+S0687,BENZER,dis__yuzde-zigzag,Optimum X çoğunlukla %1 altı ve hisse bazında örneklem içi optimize (sınıf yuzde 1-3); çıkış alım sonrası zirveden X% düşüş (iz stop).,kodla_acildi
+S0690,ESDEGER,swing__ma-kesisim,yok,kodla_acildi
+S0693,BENZER,dis__bant-kirilim-trend,"BB(20,2) üst bant kapanışı long-only, alt banda inince çık; n=20 ızgara (40-100) dışı.",kodla_acildi
+S0705,BENZER,dis__ma-dizilim-5-10-30,"SMA3/9/21 dizilimi; sınıf hizli 3-8, orta 10-20, yavas 30-50 (yavaş 21 ve orta 9 ızgara dışı).",kodla_acildi
+S0706,ESDEGER,swing__bant-donus,yok,kodla_acildi
+S0721,BENZER,swing__ma-kesisim,Kaynakta izleyen stop (kapanış-2 puan) çıkışı; sınıfta sabit ATR stop.,kodla_acildi
+S0780,BENZER,dis__dual-thrust,"N=4,K=0,5 aynı; kaynak HER ZAMAN piyasada (gece taşır, yalnız ters tetikte çevirir), sınıf seans sonunda zorunlu çıkış yapar; SPY saatlik.",kodla_acildi
+S0782,ESDEGER,dis__ilk-yarim-saat-son-yarim-saat,yok,kodla_acildi
+S0790,BENZER,swing__rsi-asiri-donus,LEAN içgörü süresi 14 bar (zaman çıkışı) + 35/65 sıfırlama; sınıfta zaman çıkışı yok.,kodla_acildi
+S0792,BENZER,swing__ma-kesisim,LEAN içgörü süresi 12 bar (zaman çıkışı) var; sınıfta zaman çıkışı ayarı yok.,kodla_acildi
+S0839,BENZER,swing__ma-kesisim,"EMA15/70 (yavaş 70 ızgara/ayar dışı; 50 en yakın) + %0,015 tolerans.",kodla_acildi
+S0842,BENZER,swing__ma-kesisim,SMA42/252 L/S çifti kümede yok (en yakın 50/200).,kodla_acildi
+S0843,BENZER,dis__roc20-ls,N=1 (ve 2) günlük ortalama log getiri işareti L/S; roc_n 1-2 ızgara (10-40) dışı.,kodla_acildi
+S0844,BENZER,dis__roc20-ls,60 günlük ortalama getiri işareti L/S; roc_n=60 ızgara (10-40) dışı.,kodla_acildi
+S0894,ESDEGER,dis__ibs-donus,yok,kodla_acildi
+S0903,ESDEGER,swing__ma-kesisim,yok,kodla_acildi

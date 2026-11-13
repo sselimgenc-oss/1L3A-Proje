@@ -1,0 +1,27 @@
+kaynak_id,grup,yol,tur,satir_veya_kayit,git_ilk_ekleme,not
+A001,G10_ARSIV,arsiv/algo-sg/STRATEJILER.md,birincil:eski_proje_rapor,8,,"algo-sg A1/A2/B + elenen fikirler (S1-S3, geri test, 24s momentum)"
+A002,G10_ARSIV,arsiv/algo-sg/STRATEJILER_GUNLUK.md,birincil:eski_proje_rapor,7,,"algo-sg 1W/1D: D1, D2 + elenen girisler"
+A003,G10_ARSIV,arsiv/algo-sg/docs/A_V2_VE_KALDIRAC.md,birincil:eski_proje_rapor,1,,A v2 (rejime bagli short); kaldirac testi strateji degil
+A004,G10_ARSIV,arsiv/swing-sg/STRATEJILER.md,birincil:eski_proje_rapor,3,,swing-sg S1/S2/S3
+A005,G10_ARSIV,arsiv/swing-sg/deneyler/CODEX_ADAYLAR.md,birincil:kullanici_listesi,11,,Codex 1. liste: 11 GitHub repo (baslik 12 diyor); C1-C4 testleri bu repolarin 4'u
+A006,G10_ARSIV,arsiv/swing-sg/deneyler/CODEX2_ADAYLAR.md,birincil:kullanici_listesi,6,,Codex 2. liste: 6 yeni repo; D1-D3 testleri bu repolarin 3'u
+A007,G10_ARSIV,arsiv/swing-sg/trend/stratejiler.py,birincil:kullanici_listesi,8,,"brainbrick-trades long-only 8 kural (docstring satir 7-14); trend/OZET.md, SONUCLAR_TREND.md sonuc"
+A008,G10_ARSIV,arsiv/strateji-sg/RAPOR.md,birincil:eski_proje_rapor,4,,"strateji-sg Faz 1: SAKK, GPK, Faz-1 A/B ortak payda testleri"
+A009,G10_ARSIV,arsiv/strateji-sg/RAPOR_KRIPTO.md,birincil:eski_proje_rapor,3,,KGT v1-v3 + 'calismayanlar' tablosundaki girisler
+A010,G10_ARSIV,arsiv/strateji-sg/RAPOR_PA.md,birincil:eski_proje_rapor,7,,SKA(CBF) + elenen PA kurulumlari (Galen Woods)
+A011,G10_ARSIV,arsiv/strateji-sg/RAPOR_EPA.md,birincil:kullanici_listesi,2,,kullanicinin EPA fikri: A (pullback) ve B (breakout)
+A012,G10_ARSIV,arsiv/strateji-sg/RAPOR_S2.md,birincil:eski_proje_rapor,4,,KMN + ortalamaya donus denemeleri
+A013,G10_ARSIV,arsiv/strateji-sg/RAPOR_HGT.md,birincil:eski_proje_rapor,1,,"HGT (20 Strateji Sistem #5 uyarlamasi, 52 varyant tek strateji sayildi)"
+A014,G10_ARSIV,arsiv/day-trade-sg/daytrade/strategies.py,birincil:eski_proje_kod,14,,STRATEGIES sozlugu 15 anahtar; S11 = S10'un at_utc=14 ayari -> 14 ayri mantik; hepsi repo_kodlari.csv daytrade_py (G3)
+A015,G10_ARSIV,arsiv/scalp-sg/src/strategies.py,birincil:eski_proje_kod,3,,s1/s2/s3; repo_kodlari.csv scalp_py (G3)
+A016,G10_ARSIV,arsiv/codex-algo/src/codex_algo/strategies.py,birincil:eski_proje_kod,9,,STRATEGIES 9 kural; repo_kodlari.csv codex_py (G3)
+A017,G10_ARSIV,arsiv/codex-algo/src/codex_algo/mtf_strategies.py,birincil:eski_proje_kod,8,,MTF 8 kural; repo_kodlari.csv codex_py (G3)
+A018,G10_ARSIV,arsiv/algo-sg/DIS_STRATEJILER.md,bilgi:G2_kapsami,0,,"186 sonuc satiri = stratejiler/dis_envanter.csv (freqtrade 68, awesome 32, jesuistm 11, kural 73) = G2 (D001); ham satir YAPILMADI"
+A019,G10_ARSIV,arsiv/OZET.md,bilgi:esleme_belgesi,0,,S2 esleme tablosu ve S3 'denendi-basarisiz' = 1L3A karari; esleme kaniti
+A020,G10_ARSIV,arsiv/strateji-sg/tv/aday.csv ; tv_eleme_dali/ham/meta*.json,bilgi:G2_kapsami,0,,TradingView 164 + 41 aday = G2; ham satir YAPILMADI
+A901,G10_ARSIV,dal:claude/haiku-arge-5-enstruman:sonuclar/haiku_arge/GELISTIRME_ON_KAYIT.md,bilgi:birlesmemis_dal,0,,12 gelistirme varyanti: YENI STRATEJI SAYILMADI (karar NOTLAR'da); haiku__varyant sinif dosyasi dalda
+A902,G10_ARSIV,dal:claude/haiku-arge-5-enstruman:sonuclar/haiku_arge/SONUC_GELISTIRME.md,bilgi:birlesmemis_dal,0,,"12 varyantin akibeti: WF 5 gecti, hicbiri K2/K3'ten gecmedi"
+A911,G10_ARSIV,dal:claude/haiku-strateji-arastirma:stratejiler/ek_kaynaklar/test/SONUC_2026-11.md,birincil:birlesmemis_dal,3,,"TrendRider, Leah E015, ETH 4s kirilim yeniden testi"
+A912,G10_ARSIV,dal:claude/haiku-strateji-arastirma:stratejiler/ek_kaynaklar/test/PORTFOY_SONUC_2026-11.md,birincil:birlesmemis_dal,3,,"GTAA 10 ay SMA, momentum varlik dagilimi, sektor momentum"
+A913,G10_ARSIV,dal:claude/haiku-strateji-arastirma:stratejiler/ek_kaynaklar/test/PORTFOY_DERIN_2026-11.md,bilgi:birlesmemis_dal,0,,A912'deki kurallarin saglamlik testi (yeni strateji yok)
+A914,G10_ARSIV,dal:claude/haiku-strateji-arastirma:stratejiler/ek_kaynaklar/test/SON_ADIMLAR_2026-11.md,bilgi:birlesmemis_dal,0,,GTAA paper onerisi + 20 varlik GTAA/momentum (A912 kurallarinin evren varyanti)

@@ -1,0 +1,169 @@
+tur,anahtar,karar,hedef,aciklama
+kume,K001,BENZER,dis__alligator-dizilim,önceki: BENZERI_TEST/dis__alligator-dizilim; çekirdek: EMA28>EMA48 durumu + StochRSI<eşik (1h); sınıf Williams Alligator (LWMA çene/diş/dudak dizilimi)
+kume,K002,BENZER,dis__alma-macd-kesisimi,önceki: BENZERI_TEST/dis__ema-macd-ikili ; dis__alma-macd-kesisimi; çekirdek: MACD yukarı kesişim + SMA kısa/orta kesişimi + macd>-1e-5; sınıf: kapanış>ALMA + MACD kesişimi
+kume,K013,BENZER,dis__ft-binh-cluc,"önceki: ZATEN_TEST/dis__ft-binh-cluc; Cluc kolu (EMA100, BB(20,2)x0.985, hacim<20xSMA30, çıkış orta bant) aynı; sınıfta ek BinH kolu ve varsayım eşikleri; V2/V3 varyant eşikleri açılmadı"
+kume,K019,BENZER,dis__ft-binhv27,önceki: ZATEN_TEST/dis__ft-binhv27 ; dis__ft-binhv45; çekirdek metni dolaylı giriş (atom çıkmadı); sınıf ile satır satır kıyas yapılamadı
+kume,K023,BENZER,dis__ha-bb40-cluc,"önceki: ZATEN_TEST/dis__ha-bb40-cluc; çekirdek: HA kapanış<EMA yavaş ve <alt BB x çarpan, çıkış HA/EMA hızlı; sınıf: HA tipik fiyat BB(40), önceki alt bant + HA kuyruk/fark koşulları, çıkış farklı"
+kume,K024,BENZER,dis__ha-bb40-cluc,"önceki: ZATEN_TEST/dis__ha-bb40-cluc; çekirdek: HA kapanış<EMA yavaş ve <alt BB x çarpan (5m ClucHAnix); sınıf BB(40) HA tipik fiyat + ek koşullar, 15m"
+kume,K025,BENZER,dis__ft-binh-cluc,"önceki: BENZERI_TEST/dis__kuvvet-endeksi-bollinger ; dis__bbpower-sqz; önceki eşleşmeler (kuvvet-endeksi-bollinger, bbpower-sqz) reddedildi; V5: Cluc+BinH karışımı (close<=önceki kapanış, close<önceki alt bant, hacim<xSMA, EMA yavaş), çıkış üst BB; sınıf VEYA kollu BinH/Cluc ayrı eşikli"
+kume,K026,YOK,,"önceki: BENZERI_TEST/dis__rsi-ma-kesisim ; dis__ema-serit-yelpaze; çekirdek metni yok (row['buy']==1, özel kod); önceki eşleşmeler (rsi-ma-kesisim, ema-serit-yelpaze) alakasız reddedildi; olası akraba dis__ft-binh-cluc yalnız ad ailesi, doğrulanamadı"
+kume,K037,BENZER,swing__cci-esik,"önceki: BENZERI_TEST/dis__cok-osilator-ekstrem ; swing__cci-esik; çekirdek: CCI<=-57 + MFI<24 + kapanış<alt BB üçlü süzgeci, çıkış MFI/CCI/üst BB; sınıf yalnız CCI eşik kesişimi (Lambert ±100 vb.)"
+kume,K038,BENZER,dis__ft-reinforced-quickie,"önceki: ZATEN_TEST/dis__ft-reinforced-quickie; çekirdek: üst TF SMA yönü + MFI<30 + hacim filtresi + alt BB, çıkış MFI>80/RSI>70/üst BB; sınıf: EMA20/50 altı + alt BB + dip_n, çıkış EMA20 üstü"
+kume,K039,YOK,,"önceki: BENZERI_TEST/dis__gosterge-oy-toplami ; dis__cok-gosterge-teyit; çekirdek metni çelişkili (mfi<20 ve mfi>80 aynı koşulda); önceki eşleşme (gosterge-oy-toplami, cok-gosterge-teyit) reddedildi"
+kume,K040,YOK,,"önceki: BENZERI_TEST/swing__ardisik-bar-tukenme ; scalp__ardisik-bar-tukenme; çekirdek canlı trailing-buy/dry_run kodu (iloc[-1], Trade); önceki eşleşme (ardisik-bar-tukenme) alakasız, reddedildi"
+kume,K041,YOK,,"önceki: BENZERI_TEST/dis__adx-seviye-durumu ; dis__adx-di-esik-kesisimi; çekirdek: çoklu TF +DI/-DI (5m/15m/30m) çelişkili metin; önceki eşleşme (adx-seviye-durumu, adx-di-esik-kesisimi) örtüşmüyor, reddedildi"
+kume,K042,YOK,,"önceki: BENZERI_TEST/swing__bant-donus ; dis__bb-stoch-gu-dip; çekirdek metni çelişkili (mfi<25 ve >75) + 1h BB bölge limitleri; önceki eşleşme (bant-donus, bb-stoch-gu-dip) doğrulanamadı, reddedildi"
+kume,K053,YOK,,"önceki: BENZERI_TEST/swing__ma-kesisim; çekirdek: yalnız TEMA eğimi pozitif (1m); sınıf swing__ma-kesisim MA kesişimi kuralı değil, önceki eşleşme reddedildi"
+kume,K054,BENZER,dis__bbrsi-donus,"önceki: BENZERI_TEST/dis__bbrsi-donus; çekirdek: aynı mumda RSI<30 + kapanış<alt BB(20), çıkış RSI>70; sınıf: önceki mumda RSI(7)<30 & kapanış<alt BB(500), şimdi dönüş (kapanış banda geri)"
+kume,K055,YOK,,"önceki: BENZERI_TEST/dis__codex-wd-gunluk-donus ; dis__qqe-giris; çekirdek: TEMA alt BB'yi yukarı keser + RSI dönüş (hyperopt, ROI/trailing); önceki eşleşme (codex-wd-gunluk-donus, qqe-giris) örtüşmüyor, reddedildi"
+kume,K057,BENZER,dis__ft-bandtastic,"önceki: ZATEN_TEST/dis__ft-bandtastic; çekirdek yalnız tetik seçimi (bb_lower1..4), süzgeçler kesik; sınıf RSI<35/MFI<35/EMA20>EMA50 varsayım eşikli"
+kume,K061,YOK,,"önceki: BENZERI_TEST/pf__sinif_kesit_mom; çekirdek: CMO sıfır yukarı geçişi (hyperopt, ROI/trailing); önceki eşleşme (pf__sinif_kesit_mom, kesitsel momentum portföyü) alakasız, reddedildi"
+kume,K063,ESDEGER,dis__ft-cluc-may2018,önceki: ZATEN_TEST/dis__ft-cluc-may2018; yok
+kume,K064,YOK,,"önceki: BENZERI_TEST/dis__pivot-hacim-ema150; çekirdek: BB alt bant teması + destek + EMA altında düşüş mumu (1m, özel kod); önceki eşleşme (pivot-hacim-ema150) örtüşmüyor, reddedildi"
+kume,K066,YOK,,"önceki: BENZERI_TEST/dis__rsi-gauss-velocity ; dis__stochrsi-uc-4h; çekirdek: +DI>0.5, ADX>65, RSI<35, fastd<35 (uç eşikli deneme); önceki eşleşme (rsi-gauss-velocity, stochrsi-uc-4h) örtüşmüyor, reddedildi"
+kume,K070,ESDEGER,dis__ft-low-bb,önceki: ZATEN_TEST/dis__ft-low-bb; yok
+kume,K071,BENZER,dis__flawless-bbrsi,"önceki: BENZERI_TEST/dis__twap-rsi ; dis__rsi-ma-kesisim; önceki eşleşmeler (twap-rsi, rsi-ma-kesisim) reddedildi; çekirdek: kapanış<alt BB(2σ) + RSI>30, çıkış üst BB; sınıf: alt BB(1σ) altı + RSI>42, çıkış üst band + RSI>70"
+kume,K076,ESDEGER,dis__ft-simple-macd-rsi,önceki: ZATEN_TEST/dis__ft-simple-macd-rsi; yok
+kume,K077,ESDEGER,dis__smooth-operator,önceki: ZATEN_TEST/dis__smooth-operator; yok
+kume,K081,BENZER,swing__ma-kesisim,"önceki: BENZERI_TEST/dis__codex-wd-hacim-akisi ; dis__ft-ema-skip-pump; önceki eşleşmeler (codex-wd-hacim-akisi, ft-ema-skip-pump) reddedildi; çekirdek: EMA5 EMA10'u yukarı keser (1m); sınıf MA kesişimi, hızlı/yavaş periyot ızgarası 5/10'u içerdiği doğrulanmadı"
+kume,K087,YOK,,"önceki: BENZERI_TEST/dis__nw-zarf-rsi ; dis__flawless-bbrsi; çekirdek: Keltner bandı iki yönlü taşma + 4h BB genişliği + 30m RSI/ortalaması; önceki eşleşme (nw-zarf-rsi, flawless-bbrsi) örtüşmüyor, reddedildi"
+kume,K088,BENZER,swing__bant-donus,"önceki: BENZERI_TEST/swing__bant-donus ; dis__sqz-donus; çekirdek: Keltner orta bandı arası + BB%b aşırı satım geri dönüşü (iki bant); sınıf: Bollinger/envelope bandı dışından geri dönüş, hedef orta bant"
+kume,K090,ESDEGER,dis__heracles,önceki: ZATEN_TEST/dis__heracles; yok
+kume,K094,BENZER,dis__ema-esik-trend,önceki: BENZERI_TEST/dis__ema-esik-trend; çekirdek: üst TF EMA50>EMA100>EMA200 hizası + SSL yukarı; sınıf EMA20>EMA60x(1+eşik) durumu
+kume,K098,BENZER,dis__ha-bb40-cluc,"önceki: BENZERI_TEST/dis__ha-bb40-cluc ; swing__bollinger-cift-bant-trend; çekirdek: HA close delta>%0.8 + Williams %R(14) -90..-80 + KC/BB delta bandı (5m); sınıf: HA BB(40) dip + ek kuyruk/fark koşulları, Williams/KC yok"
+kume,K102,BENZER,dis__ewo-ema-ofset,"önceki: ZATEN_TEST/dis__ewo-ema-ofset; çekirdek: ma_buy ofset + RSI buy + EWO(50,200) alt/üst aralığı, çıkış ma_sell ofset; sınıf: EMA8x0.96 + EWO%(5,35)<-3 + RSI14<30 + RSI4<45 + CTI20<-0.5, çıkış EMA16/32 mum/3xATR stop; EWO ölçeği farklı"
+kume,K111,BENZER,dis__ewo-ema-ofset,"önceki: ZATEN_TEST/dis__ewo-ema-ofset; çekirdek: ma_sell x high_offset altı + RSI<25 + RSI eşiği + EWO<ewo_low, çıkış rsi_fast>rsi_slow/ROI; sınıf: EMA8x0.96 + EWO%(5,35)<-3 + RSI14<30 + RSI4<45 + CTI20<-0.5, çıkış EMA16/32 mum/3xATR stop; EWO ölçeği farklı"
+kume,K113,BENZER,dis__ewo-ema-ofset,"önceki: ZATEN_TEST/dis__ewo-ema-ofset; çekirdek: ma_buy ofset + RSI + kayan EWO eşiği/açı filtresi (AngleWave), ROI tablosu; sınıf: EMA8x0.96 + EWO%(5,35)<-3 + RSI14<30 + RSI4<45 + CTI20<-0.5, çıkış EMA16/32 mum/3xATR stop; açı filtresi sınıfta yok"
+kume,K115,BENZER,dis__ma20-rsi-cmf,önceki: BENZERI_TEST/dis__ma20-rsi-cmf; çekirdek: kapanış>SMA20 durumu + RSI 30-70 bandı + kapanış>alt BB (EMA dalga adlı şablon); sınıf: SMA20 yukarı KIRILIMI + RSI trend çizgisi kırılımı + CMF
+kume,K117,BENZER,dis__ewo-ema-ofset,"önceki: ZATEN_TEST/dis__ewo-ema-ofset; çekirdek: 15m max<close x profit_threshold pump süzgeci + ofset + RSI<25 (NASOSv5), EWO yok; sınıf: EMA8x0.96 + EWO%(5,35)<-3 + RSI14<30 + RSI4<45 + CTI20<-0.5, çıkış EMA16/32 mum/3xATR stop; "
+kume,K119,BENZER,dis__ewo-ema-ofset,"önceki: ZATEN_TEST/dis__ewo-ema-ofset; çekirdek: close<ema_20 + EWO aralığı + ofset (NFI 5m HO), 1h RSI farkı çıkışı + ROI/trailing; sınıf: EMA8x0.96 + EWO%(5,35)<-3 + RSI14<30 + RSI4<45 + CTI20<-0.5, çıkış EMA16/32 mum/3xATR stop; "
+kume,K123,BENZER,dis__ft-reinforced-smoothscalp,"önceki: ZATEN_TEST/dis__ft-reinforced-smoothscalp; çekirdek: %K/%D yukarı kesişimi + üst TF SMA + MFI + fastd eşiği; sınıf: kesişimsiz seviye (%K,%D<eşik) + açılış<EMA5 düşük x ac_k"
+kume,K131,BENZER,swing__heikin-ashi-donus,"önceki: BENZERI_TEST/swing__heikin-ashi-donus ; scalp__heikin-ashi-donus; çekirdek: HA kapanış/açılış eğimi ve tahmin serisi dönüşü (HSI, 5m); sınıf HA renk dönüşü serisi"
+kume,K132,BENZER,swing__heikin-ashi-donus,önceki: BENZERI_TEST/swing__heikin-ashi-donus ; dis__cok-macd-geri-cekilme; çekirdek: son 5 mumda HA MACD+SSL+momentum yukarı çaprazlarının üçü birden; sınıf: HA renk dönüşü serisi (ATR stop)
+kume,K142,BENZER,dis__vwap-alt-bant-dip,"önceki: BENZERI_TEST/dis__bb-alt-bant-osilator ; dis__vwap-alt-bant-dip; çekirdek: VWAP low>close + kapanış<BB3 alt x0.995 + CTI + RSI14<53, çıkış zaman/RSI hızlı; sınıf: yuvarlanan VWAP(20) alt bandı dip (BB3/CTI yok)"
+kume,K144,BENZER,swing__mum-coklu-formasyon,önceki: BENZERI_TEST/swing__geri-cekilme-fiyat-eylemi ; scalp__geri-cekilme-fiyat-eylemi; çekirdek: TA-Lib CDL3INSIDE>=0 + ADX>13 + kapanış<kapanış[2] + RSI<50 (1d); sınıf: ATR eşikli 3+ mum desenleri + R hedefi (önceki geri-cekilme eşleşmesi reddedildi)
+kume,K149,BENZER,swing__ichimoku,"önceki: BENZERI_TEST/swing__ichimoku ; daytrade__ichimoku; çekirdek: yalnız kapanış>senkou A ve B (bulut üstü durum); sınıf kijun_bulut modu: kapanış>bulut ve >kijun, ATR stop"
+kume,K167,BENZER,dis__rf-ha-scalper,"önceki: BENZERI_TEST/dis__rf-ha-scalper; çekirdek: Range-filter benzeri filtre yükseliyor, kapanış filtrenin ±%1 içinde (3m, çıkış ±%2); sınıf: Range Filter yönü + yumuşatılmış HA yönü + üst TF"
+kume,K180,ESDEGER,dis__ft-ema-skip-pump,önceki: ZATEN_TEST/dis__ft-ema-skip-pump; yok
+kume,K184,BENZER,dis__ust-tf-ma-yon-kesisim,önceki: ZATEN_TEST/dis__ust-tf-ma-yon-kesisim; çekirdek: EMA20>EMA50 durumu + 15m kapanış>SMA20 (durum); sınıf: hızlı MA yavaşı yukarı KESER + üst TF yön filtresi
+kume,K187,BENZER,dis__pmax-giris,önceki: BENZERI_TEST/dis__ewo-ema-ofset ; dis__pmax-giris; çekirdek: RSI hızlı<30 + kapanış<TRIMA ofset(2 kat) + pmax eşiği (MultiMA TSL); sınıf: PMax yapışkan bant yön değişimi
+kume,K190,BENZER,dis__ewo-ema-ofset,"önceki: ZATEN_TEST/dis__ewo-ema-ofset; çekirdek: çoklu MA ofset (Lambo) + EWO aralığı, RSI süzgeci yok; sınıf: EMA8x0.96 + EWO%(5,35)<-3 + RSI14<30 + RSI4<45 + CTI20<-0.5, çıkış EMA16/32 mum/3xATR stop; "
+kume,K191,BENZER,dis__ewo-ema-ofset,"önceki: ZATEN_TEST/dis__ewo-ema-ofset; çekirdek: EMA ofset + EWO>0 (yön ters: sınıf EWO<-3); sınıf: EMA8x0.96 + EWO%(5,35)<-3 + RSI14<30 + RSI4<45 + CTI20<-0.5, çıkış EMA16/32 mum/3xATR stop; "
+kume,K192,BENZER,dis__ewo-ema-ofset,"önceki: ZATEN_TEST/dis__ewo-ema-ofset; çekirdek: ma_sell x high_offset altı + RSI<25 + RSI eşiği + EWO<ewo_low (uzi3), trailing; sınıf: EMA8x0.96 + EWO%(5,35)<-3 + RSI14<30 + RSI4<45 + CTI20<-0.5, çıkış EMA16/32 mum/3xATR stop; "
+kume,K195,BENZER,dis__stochrsi-uc-4h,önceki: BENZERI_TEST/dis__stochrsi-uc-4h ; dis__cci-stochrsi-donus; çekirdek: 3EMA + StochRSI + ATR bileşik sinyal go_long yukarı geçişi; sınıf StochRSI %K<20 saf uç değer girişi
+kume,K197,BENZER,daytrade__renko-sr,"önceki: BENZERI_TEST/daytrade__renko-sr; çekirdek: Renko trend dönüşü (previous-trend False->True) tek koşul, stopsuz; sınıf: Renko dönüş tuğlası + RSI/StochRSI aşırı bölge + destek bölgesi + ATR stop"
+kume,K198,YOK,,"önceki: BENZERI_TEST/dis__ft-ema-skip-pump ; daytrade__vwap-donus; çekirdek: kırmızı mum gövdesi>gövde SMA (4h, stopsuz); önceki eşleşme (ft-ema-skip-pump, vwap-donus) örtüşmüyor, reddedildi"
+kume,K200,BENZER,dis__ewo-ema-ofset,"önceki: ZATEN_TEST/dis__ewo-ema-ofset; çekirdek: RSI buy + ma_buy ofset + EWO aralığı, çıkış ma_sell aşağı kesişim; sınıf: EMA8x0.96 + EWO%(5,35)<-3 + RSI14<30 + RSI4<45 + CTI20<-0.5, çıkış EMA16/32 mum/3xATR stop; "
+kume,K204,BENZER,swing__mum-coklu-formasyon,önceki: BENZERI_TEST/swing__ma-geri-cekilme ; scalp__ma-geri-cekilme; çekirdek: TA-Lib ENGULFING/HARAMI/ABANDONEDBABY/3LINESTRIKE birleşimi + EMA açılış<kapanış süzgeci; sınıf ATR eşikli desen tanımları (önceki ma-geri-cekilme eşleşmesi reddedildi)
+kume,K207,BENZER,dis__ewo-ema-ofset,"önceki: ZATEN_TEST/dis__ewo-ema-ofset; çekirdek: RSI + açılış<ma_buy ofset + EWO<ewo_high (AngleWaveCT/AWATRCT), ROI tablosu; sınıf: EMA8x0.96 + EWO%(5,35)<-3 + RSI14<30 + RSI4<45 + CTI20<-0.5, çıkış EMA16/32 mum/3xATR stop; "
+kume,K219,BENZER,dis__aroon-stochrsi-ema-dip,"önceki: BENZERI_TEST/dis__aroon-stochrsi-ema-dip ; dis__bb-alt-bant-osilator ; dis__cci-aroon-dogus ; dis__cok-osilator-ekstrem ; dis__ewo-ema-ofset ; dis__nfi-short-cokus ; dis__dortlu-stokastik-rotasyon ; dis__ema-hizali-olgun-yukselis; NFI X2 monoliti (çok kollu; çekirdek metni index==1); ilk 8 sınıf yalnız seçili çekirdek kolları kodluyor, monolit bütünü yok"
+kume,K223,BENZER,dis__ewo-ema-ofset,"önceki: ZATEN_TEST/dis__ewo-ema-ofset; çekirdek: NASOSv5 DanMod: pump süzgeci + ofset + RSI<25, trailing; sınıf: EMA8x0.96 + EWO%(5,35)<-3 + RSI14<30 + RSI4<45 + CTI20<-0.5, çıkış EMA16/32 mum/3xATR stop; "
+kume,K227,BENZER,swing__rsi-diverjans,önceki: BENZERI_TEST/swing__rsi-diverjans ; scalp__rsi-diverjans ; dis__momentum-macd-diverjans; çekirdek: çok göstergeli boğa diverjans sayımı>0 (pivot geriye yazma şüphesi); sınıf tek osilatör (RSI/CCI) diverjansı
+kume,K229,BENZER,dis__ft-fsupertrend,"önceki: BENZERI_TEST/swing__supertrend-psar ; dis__ft-fsupertrend; çekirdek: üç Supertrend (hyperopt periyot/çarpan) 'up'; çıkış birleşimi çekirdekte kesik; sınıf 8/4, 9/7, 8/1 varsayım değerleri, üç satım Supertrend'i"
+kume,K237,ESDEGER,swing__supertrend-psar,önceki: BENZERI_TEST/swing__supertrend-psar ; scalp__supertrend-psar; yok
+kume,K241,BENZER,dis__ewo-ema-ofset,"önceki: ZATEN_TEST/dis__ewo-ema-ofset; çekirdek: ma_entry ofset + RSI entry + EWO<ewo_low + ma_exit üstü; sınıf: EMA8x0.96 + EWO%(5,35)<-3 + RSI14<30 + RSI4<45 + CTI20<-0.5, çıkış EMA16/32 mum/3xATR stop; "
+kume,K243,BENZER,dis__e0v1en,"önceki: ZATEN_TEST/dis__e0v1en; E0V1E_53_Sharpe: eşikler farklı (RSI4<65, RSI14>19, SMA15x0.961, CTI<-0.04), çıkış kârda fastk/CCI, stop -%25+trailing, 5m, 24s filtresi yok; E0V1E__2: giriş eşikleri aynı ama çıkış/stop/TF/24s filtresi farklı (canli_akraba/e0v1e_karsilastirma.csv)"
+kume,K247,BENZER,dis__asiri-bolge-osilator-kesisimi,"önceki: BENZERI_TEST/dis__osilator-esik-birlesimi ; dis__asiri-bolge-osilator-kesisimi; çekirdek: MACD yukarı kesişim + son 8 mumda RSI min<41 + kapanış>EMA200, çıkış RSI max>93/MACD>0; sınıf: son pencerede RSI<=alt + MACD kesişimi (EMA200 filtresi yok)"
+kume,K249,BENZER,swing__rsi-asiri-donus,"önceki: BENZERI_TEST/swing__rsi-asiri-donus ; scalp__rsi-asiri-donus; çekirdek: SMA hızlı/yavaş durumu + RSI eşikleri (çelişkili metin); sınıf RSI aşırı bölgeden dönüş (alt'ı yukarı keser), SMA süzgeci yok"
+kume,K250,BENZER,dis__mtf-rsi-trend,önceki: BENZERI_TEST/dis__mtf-rsi-trend; çekirdek: 12h RSI>49 + kapanış>12h MA50 + dolar hacim>2M (1h); sınıf: günlük ve haftalık RSI(30)>70 + MA hizası
+kume,K251,BENZER,dis__e0v1en,"önceki: ZATEN_TEST/dis__e0v1en; Robotic E0V1E.py kırpık/bozuk: giriş fiilen yalnız RSI4<40 (diğer koşullar yorumda); çıkış fastk/CCI kârda, stop -%25, 5m, 24s filtresi yok"
+kume,K259,ESDEGER,dis__ft-adx-momentum,önceki: ZATEN_TEST/dis__ft-adx-momentum; yok
+kume,K264,BENZER,dis__ft-awesome-macd,önceki: ZATEN_TEST/dis__ft-awesome-macd; çekirdek: MACD>sinyal + AO yukarı (ao>ao.shift); sınıf: MACD>0 + AO dönüş (t-1<=t-2) + ADX>=20 (varsayım)
+kume,K265,BENZER,dis__ft-awesome-macd,"önceki: ZATEN_TEST/dis__ft-awesome-macd; çekirdek: ao.shift<0, macd>0, ao>0 (AO sıfır yukarı geçişi); sınıf AO dönüşü + ADX>=20"
+kume,K266,BENZER,dis__ft-cci-cmf-mfi,"önceki: ZATEN_TEST/dis__ft-cci-cmf-mfi; çekirdek: üst TF MA'lar + MFI<25 + CMF<-0.1 + CCI<-100; sınıf CCI(20)&CCI(10)<-100 + CMF + MFI<30 (MA yok), çıkış CCI>100"
+kume,K267,BENZER,dis__ft-cmc-winner,"önceki: ZATEN_TEST/dis__ft-cmc-winner; çekirdek giriş değerleri shift(1) (1 mum gecikmeli: cmo<-50, cci<-100, mfi<20); sınıf anlık mum değerleri"
+kume,K269,BENZER,dis__ft-cofibit,önceki: ZATEN_TEST/dis__ft-cofibit; çekirdek: açılış<ema_low (çarpansız) + %K/%D kesişimi + ADX eşiği; sınıf ac_k=0.99/cik_k=1.01 çarpanları ve ADX>20 varsayım
+kume,K278,ESDEGER,dis__ft-macd-cci,önceki: ZATEN_TEST/dis__ft-macd-cci; yok
+kume,K279,ESDEGER,dis__ft-macd-cci-kesisim,önceki: ZATEN_TEST/dis__ft-macd-cci-kesisim; yok
+kume,K285,BENZER,swing__macd-sinyal,"önceki: BENZERI_TEST/swing__macd-sinyal ; scalp__macd-sinyal; çekirdek: MACD histogram dönüşü (hist<0, yükselmeye başlıyor) + korelasyon filtresi; sınıf MACD çizgisi/sinyal kesişimi ya da sıfır geçişi"
+kume,K287,BENZER,dis__ft-multi-rsi,"önceki: ZATEN_TEST/dis__ft-multi-rsi; çekirdek: çoklu üst TF RSI eşikleri (x8, x2); sınıf tek üst TF + sabit eşik (varsayım 35/50/70)"
+kume,K295,BENZER,dis__ft-swinghightosky,"önceki: ZATEN_TEST/dis__ft-swinghightosky; çekirdek: CCI/RSI periyotları hyperopt (cciTime/rsiTime); sınıf tek periyot (CCI20, RSI14, kayma 1) varsayım eşikli"
+kume,K296,BENZER,dis__stoch-macd-cift,önceki: BENZERI_TEST/dis__stoch-macd-cift ; dis__macd-kdj-4h; çekirdek: EMA5 kapanış>=açılış + kapanış yükseliyor + fastd<=80 + MACD ve sinyal yükseliyor; sınıf: yavaş stokastik K/D kesişimi + MACD hist sıfır geçişi
+kume,K298,BENZER,dis__iki-gosterge-egimi,önceki: BENZERI_TEST/dis__iki-gosterge-egimi; çekirdek: TRIX histogram>0 + StochRSI<eşik (seviye koşulları); sınıf: iki göstergenin eğim işareti (trix-fab dahil)
+kume,K301,YOK,,"önceki: BENZERI_TEST/dis__adx-di-esik-kesisimi ; daytrade__adx-trend-baslangici; çekirdek: Aroon up/down + ADX eşikleri (1m); önceki eşleşme (adx-di-esik-kesisimi, adx-trend-baslangici) Aroon içermiyor, reddedildi"
+kume,K305,BENZER,dis__hma-atr-rider,önceki: BENZERI_TEST/dis__hma-atr-rider; çekirdek: HMA kısa-uzun farkı yükseliyor (2 mum) + Williams %R eşiği (15m); sınıf: HMA(20) eğimi/ATR + rejim hizası
+kume,K310,ESDEGER,dis__ft-strategy002,önceki: ZATEN_TEST/dis__ft-strategy002; yok
+kume,K311,BENZER,dis__ft-strategy003,önceki: ZATEN_TEST/dis__ft-strategy003; çekirdek: fastd/EMA50>EMA100/EMA5-10 kesişimi + MFI<16; sınıf: RSI<28 + Fisher RSI<-0.94 + kapanış<SMA40 + MFI<16
+kume,K312,BENZER,dis__ft-strategy004,önceki: ZATEN_TEST/dis__ft-strategy004; çekirdek: hacim ortalaması + stokastik kesişimi + slowk önceki<30; sınıf: ADX/yavaş ADX + CCI<-100 + stokastik kesişimi
+kume,K313,ESDEGER,dis__strategy005,önceki: ZATEN_TEST/dis__strategy005; yok
+kume,K314,BENZER,dis__ft-scalp-ema-adx,önceki: ZATEN_TEST/dis__ft-smoothscalp ; dis__ft-scalp-ema-adx; çekirdek: açılış<ema_low + ADX>30 + %K/%D yukarı KESİŞİMİ + <30; sınıf (Scalp/SmoothScalp): kesişimsiz seviye koşulu (+MFI SmoothScalp'ta)
+kume,K315,BENZER,swing__supertrend-psar,"önceki: BENZERI_TEST/dis__trend-analysis ; dis__ott-bantlari; önceki eşleşmeler (trend-analysis, ott-bantlari) reddedildi; çekirdek: Supertrend üstü + EMA dizilimi + ADX>25 + VOSC>0; sınıf yalnız Supertrend/PSAR yön değişimi (+opsiyonel RSI)"
+kume,K316,YOK,,"önceki: BENZERI_TEST/dis__ft-binhv27 ; dis__voltarget-trend; çekirdek: RSI<aşırı alım + SMA50>SMA200 + ADX>eşik (kâr hedefli çıkış); önceki eşleşme (ft-binhv27, voltarget-trend) örtüşmüyor, reddedildi"
+kume,K317,BENZER,dis__wtc-wavetrend,"önceki: BENZERI_TEST/dis__gosterge-rezonansi ; dis__ema-macd-ortalamaya-donus; önceki eşleşmeler (gosterge-rezonansi, ema-macd-ortalamaya-donus) reddedildi; çekirdek: wt1 wt2'yi yukarı keser + macd>sinyal; sınıf: WT kesişimi + stokastik/fark bandı (MACD yok)"
+kume,K318,BENZER,dis__ft-fsupertrend,"önceki: BENZERI_TEST/dis__vwap-basarisizlik-short ; dis__ft-fsupertrend; çekirdek: üç Supertrend 'up'; çıkış iki satım Supertrend'i 'down' (hyperopt Opt); sınıf: üç satım Supertrend'inin ÜÇÜ de düşüşte, varsayım periyotlar"
+kume,K319,ESDEGER,dis__quickie,önceki: ZATEN_TEST/dis__quickie; yok
+kume,K323,BENZER,dis__cryptofrog-dip,önceki: ZATEN_TEST/dis__cryptofrog-dip; çekirdek metni yalnız tek tetik (MFI<30) gösteriyor; sınıf dört tetikli (BB genişleme/SAR+StochRSI/...) ve HA dip ön koşulu; 9 varyant ayrıca açılmadı
+kume,K326,YOK,,"önceki: BENZERI_TEST/onceki__s1-geri-cekilme ; dis__bch-ha-rsi-fade; çekirdek: RSI + EMA7/TEMA aşağı kesişimi + canlı bid fiyatı (best_bid); önceki eşleşme (s1-geri-cekilme, bch-ha-rsi-fade) örtüşmüyor, reddedildi"
+kume,K338,BENZER,swing__mum-coklu-formasyon,"önceki: BENZERI_TEST/swing__mum-coklu-formasyon; çekirdek: TA-Lib iki-mum desen toplamı (pattern==4, pattern_mean>4); sınıf: 3+ mum ATR eşikli desenler"
+kume,K341,ESDEGER,dis__trend-following-ema-obv,önceki: ZATEN_TEST/dis__trend-following-ema-obv; yok
+kume,K346,BENZER,dis__ayin-ilk-gunu-deseni,önceki: BENZERI_TEST/dis__ayin-ilk-gunu-deseni ; dis__ay-mevsimsellik ; dis__maas-gunu; çekirdek: sabit ay-günü x hafta-günü x saat 00:00 takvim girişi (çıkış 23:00); sınıf: ayın ilk günü + önceki gün getirisi eşiği
+kume,K348,ESDEGER,dis__hour-based,önceki: ZATEN_TEST/dis__hour-based; yok
+kume,K349,BENZER,dis__momentum-roc-filtreli,önceki: BENZERI_TEST/v2__tsmom-oy ; dis__momentum-roc-filtreli; çekirdek: ROCR>1.1 ve ikinci ROCR>1.01 (1m); sınıf: momentum>0/ROC+stokastik/SMA50 modları
+kume,K351,BENZER,dis__ft-highwave,"önceki: BENZERI_TEST/dis__ft-highwave; çekirdek: seçilen TA-Lib mum örüntüsü hyperopt parametresi (buy_pr1==buy_vol1), günlük; sınıf yalnız CDLHIGHWAVE tanımı"
+kume,K352,BENZER,dis__power-tower,"önceki: ZATEN_TEST/dis__power-tower; çekirdek ham üslü fiyat karşılaştırması (close.shift(2)>close.shift(4)**pow, fiyat birimine bağlı); sınıf birimsiz oran yeniden yazımı"
+kume,K354,BENZER,dis__oncekigun-kirilim,önceki: BENZERI_TEST/dis__oncekigun-kirilim ; swing__aralik-ticareti; çekirdek: kapanış 30 günlük dibi (üst TF) yukarı keser; sınıf önceki UTC günün tepe/dip seviye kırılımı
+kume,K355,ESDEGER,dis__td-sequential,önceki: ZATEN_TEST/dis__td-sequential; yok
+kume,K356,ESDEGER,dis__technical-cmf,önceki: ZATEN_TEST/dis__technical-cmf; yok
+kume,K361,YOK,,"önceki: BENZERI_TEST/dis__linreg-rsi-dip ; dis__kst-skyrexio; çekirdek: RSI-MA eğimi + WaveTrend t1>=t2 (6h/1d, ROI -0.01); önceki eşleşme (linreg-rsi-dip, kst-skyrexio) örtüşmüyor, reddedildi"
+kume,K362,BENZER,dis__wtc-wavetrend,"önceki: BENZERI_TEST/dis__wtc-wavetrend ; dis__wavetrend-halftrend; çekirdek: wt1 aşırı satım/alım seviye bandı içinde (kesişim yok), çıkış wt1 işareti; sınıf wt1/wt2 kesişimi + stokastik/fark bant süzgeçleri"
+tekrar,strategies/rsi-momentum/ADXMomentum.py,TEKRAR,H001:1,dis__ft-adx-momentum açıldı: ADX>25+mom>0+DI>25 giriş aynı
+tekrar,strategies/rsi-momentum/AdxSmas.py,TEKRAR,H001:2,ad aynı + çekirdek mantık özetle uyumlu (sınıf açılmadı)
+tekrar,strategies/rsi-momentum/ASDTSRockwellTrading.py,TEKRAR,H001:4,ad aynı + çekirdek mantık özetle uyumlu (sınıf açılmadı)
+tekrar,strategies/grid-dca/AverageStrategy.py,TEKRAR,H001:5,ad aynı + çekirdek mantık özetle uyumlu (sınıf açılmadı)
+tekrar,strategies/bollinger/Bandtastic.py,TEKRAR,H001:7,ad aynı + çekirdek mantık özetle uyumlu (sınıf açılmadı)
+tekrar,strategies/bollinger/BbandRsi.py,TEKRAR,H001:8,"bbrsi: RSI<30+kapanış<alt BB, çıkış RSI>70 (çekirdek=H001 özeti)"
+tekrar,strategies/binh-cluc-mad/BinHV27.py,TEKRAR,H001:9,ad aynı + çekirdek mantık özetle uyumlu (sınıf açılmadı)
+tekrar,strategies/binh-cluc-mad/BinHV45.py,TEKRAR,H001:10,ad aynı + çekirdek mantık özetle uyumlu (sınıf açılmadı)
+tekrar,strategies/uncategorized/BreakEven.py,TEKRAR,H001:11,ad aynı + çekirdek mantık özetle uyumlu (sınıf açılmadı)
+tekrar,strategies/rsi-momentum/CCIStrategy.py,TEKRAR,H001:12,ad aynı + çekirdek mantık özetle uyumlu (sınıf açılmadı)
+tekrar,strategies/bollinger/ClucMay72018.py,TEKRAR,H001:13,"dis__ft-cluc-may2018 açıldı: EMA100+0.985xBB alt+hacim<20xSMA30, çıkış orta bant aynı"
+tekrar,strategies/rsi-momentum/CMCWinner.py,TEKRAR,H001:14,dis__ft-cmc-winner açıldı: CMO/CCI/MFI girişi aynı (çekirdekte shift(1))
+tekrar,strategies/rsi-momentum/CofiBitStrategy.py,TEKRAR,H001:15,ad aynı + çekirdek mantık özetle uyumlu (sınıf açılmadı)
+tekrar,strategies/binh-cluc-mad/CombinedBinHAndCluc.py,TEKRAR,H001:16,dis__ft-binh-cluc açıldı: Cluc kolu aynı; BinH kolu sınıfta varsayım eşikli
+tekrar,strategies/rsi-momentum/CustomStoplossWithPSAR.py,TEKRAR,H001:17,ad aynı + çekirdek mantık özetle uyumlu (sınıf açılmadı)
+tekrar,strategies/bollinger/DevilStra.py,TEKRAR,H001:18,ad aynı + çekirdek mantık özetle uyumlu (sınıf açılmadı)
+tekrar,strategies/moving-average/Diamond.py,TEKRAR,H001:19,ad aynı + çekirdek mantık özetle uyumlu (sınıf açılmadı)
+tekrar,strategies/uncategorized/DoesNothingStrategy.py,TEKRAR,H001:20,ad aynı + çekirdek mantık özetle uyumlu (sınıf açılmadı)
+tekrar,strategies/moving-average/EMASkipPump.py,TEKRAR,H001:21,dis__ft-ema-skip-pump açıldı: giriş/çıkış aynı
+tekrar,strategies/rsi-momentum/FixedRiskRewardLoss.py,TEKRAR,H001:23,ad aynı + çekirdek mantık özetle uyumlu (sınıf açılmadı)
+tekrar,strategies/hyperopt-and-tools/Freqtrade_backtest_validation_freqtrade1.py,TEKRAR,H001:26,ad aynı + çekirdek mantık özetle uyumlu (sınıf açılmadı)
+tekrar,strategies/ichimoku/GodStra.py,TEKRAR,H001:29,ad aynı + çekirdek mantık özetle uyumlu (sınıf açılmadı)
+tekrar,strategies/channels/Heracles.py,TEKRAR,H001:31,"dis__heracles açıldı: aynı kaynak (4h, ROI/stop aynı)"
+tekrar,strategies/scalping/hlhb.py,TEKRAR,H001:32,ad aynı + çekirdek mantık özetle uyumlu (sınıf açılmadı)
+tekrar,strategies/uncategorized/HourBasedStrategy.py,TEKRAR,H001:33,dis__hour-based açıldı: saat aralığı girişi aynı
+tekrar,strategies/moving-average/InformativeSample.py,TEKRAR,H001:34,ad aynı + çekirdek mantık özetle uyumlu (sınıf açılmadı)
+tekrar,strategies/bollinger/Low_BB.py,TEKRAR,H001:35,dis__ft-low-bb açıldı: kapanış<alt BB x0.98 (alt_pay=0.02 varsayılan) aynı
+tekrar,strategies/moving-average/mabStra.py,TEKRAR,H001:36,ad aynı + çekirdek mantık özetle uyumlu (sınıf açılmadı)
+tekrar,strategies/rsi-momentum/MACDStrategy.py,TEKRAR,H001:37,dis__ft-macd-cci açıldı: MACD>sinyal+CCI eşik; sınıf VARSAYIM -50/100 eşikleri
+tekrar,strategies/rsi-momentum/MACDStrategy_crossed.py,TEKRAR,H001:38,dis__ft-macd-cci-kesisim açıldı: MACD yukarı kesişim+CCI<=-50 aynı
+tekrar,strategies/rsi-momentum/multi_tf.py,TEKRAR,H001:39,ad aynı + çekirdek mantık özetle uyumlu (sınıf açılmadı)
+tekrar,strategies/moving-average/MultiMa.py,TEKRAR,H001:40,ad aynı + çekirdek mantık özetle uyumlu (sınıf açılmadı)
+tekrar,strategies/rsi-momentum/MultiRSI.py,TEKRAR,H001:41,ad aynı + çekirdek mantık özetle uyumlu (sınıf açılmadı)
+tekrar,strategies/uncategorized/PatternRecognition.py,TEKRAR,H001:42,ad aynı + çekirdek mantık özetle uyumlu (sınıf açılmadı)
+tekrar,strategies/uncategorized/PowerTower.py,TEKRAR,H001:43,"dis__power-tower açıldı: sınıf birimsiz yeniden yazım (üs yerine oran), çekirdek ham üslü"
+tekrar,strategies/scalping/Quickie.py,TEKRAR,H001:44,dis__quickie açıldı: ADX>30+TEMA<BB orta+yükseliyor+SMA200 üstü giriş aynı
+tekrar,strategies/freqai-models/ReinforcedAverageStrategy.py,TEKRAR,H001:45,ad aynı + çekirdek mantık özetle uyumlu (sınıf açılmadı)
+tekrar,strategies/freqai-models/ReinforcedSmoothScalp.py,TEKRAR,H001:47,ad aynı + çekirdek mantık özetle uyumlu (sınıf açılmadı)
+tekrar,strategies/scalping/Scalp.py,TEKRAR,H001:48,ad aynı + çekirdek mantık özetle uyumlu (sınıf açılmadı)
+tekrar,strategies/bollinger/Simple.py,TEKRAR,H001:49,"dis__ft-simple-macd-rsi açıldı: RSI>70+üst BB yükseliyor+MACD>0,>sinyal aynı"
+tekrar,strategies/bollinger/SmoothOperator.py,TEKRAR,H001:50,dis__smooth-operator açıldı: MFI/RSI/CCI girişi ve karışım çıkışı aynı
+tekrar,strategies/samples-and-templates/Strategy001.py,TEKRAR,H001:52,ad aynı + çekirdek mantık özetle uyumlu (sınıf açılmadı)
+tekrar,strategies/heikin-ashi/Strategy001_custom_exit.py,TEKRAR,H001:53,ad aynı + çekirdek mantık özetle uyumlu (sınıf açılmadı)
+tekrar,strategies/samples-and-templates/Strategy002.py,TEKRAR,H001:54,dis__ft-strategy002 açıldı: çekiç+alt BB+RSI<30+slowk<20 girişi aynı
+tekrar,strategies/samples-and-templates/Strategy005.py,TEKRAR,H001:57,dis__strategy005 açıldı: fisher_rsi_norma/fastd/rsi/sma girişi aynı
+tekrar,strategies/pivot-supertrend/Supertrend.py,TEKRAR,H001:58,ad aynı + çekirdek mantık özetle uyumlu (sınıf açılmadı)
+tekrar,strategies/rsi-momentum/SwingHighToSky.py,TEKRAR,H001:59,ad aynı + çekirdek mantık özetle uyumlu (sınıf açılmadı)
+tekrar,strategies/uncategorized/TDSequentialStrategy.py,TEKRAR,H001:60,dis__td-sequential açıldı: sayım>8 giriş aynı
+tekrar,strategies/uncategorized/TechnicalExampleStrategy.py,TEKRAR,H001:61,dis__technical-cmf açıldı: CMF<0 long seviye kuralı aynı
+tekrar,AIRA - open code v2/strategies/uncategorized/TrendFollowingStrategy.py,TEKRAR,H001:62,dis__trend-following-ema-obv açıldı: EMA kesişimi+OBV girişi aynı
+tekrar,strategies/moving-average/UniversalMACD.py,TEKRAR,H001:64,ad aynı + çekirdek mantık özetle uyumlu (sınıf açılmadı)
+olasi_tekrar_degil,AIRA - open code v2/strategies/rsi-momentum/E0V1E.py,TEKRAR_DEGIL,H001:75,ssssi/freqtrade_strs akraba; çekirdek farklı/doğrulanamadı
+olasi_tekrar_degil,strategies/binh-cluc-mad/ClucHAnix.py,TEKRAR_DEGIL,H001:76,ssssi/freqtrade_strs akraba; çekirdek farklı/doğrulanamadı
+olasi_tekrar_degil,strategies/binh-cluc-mad/ClucHAnix_5m.py,TEKRAR_DEGIL,H001:76,ssssi/freqtrade_strs akraba; çekirdek farklı/doğrulanamadı
+olasi_tekrar_degil,strategies/bollinger/GodStra.py,TEKRAR_DEGIL,H001:29,"ad aynı, mantık doğrulanamadı"
+olasi_tekrar_degil,strategies/freqai-models/ReinforcedQuickie.py,TEKRAR_DEGIL,H001:46,ReinforcedQuickie: Robotic çekirdek üst TF SMA+MFI+hacim; H001 özeti EMA altı+alt bant+dip (farklı)
+olasi_tekrar_degil,strategies/rsi-momentum/AwesomeMacd.py,TEKRAR_DEGIL,H001:6,AwesomeMacd: Robotic çekirdek MACD>sinyal+AO yukarı; H001 özeti MACD>0+AO dönüşü (farklı)
+olasi_tekrar_degil,strategies/samples-and-templates/Strategy003.py,TEKRAR_DEGIL,H001:55,Strategy003: Robotic çekirdek stokastik/EMA kesişimi; H001 özeti RSI<28+Fisher+SMA (farklı)
+olasi_tekrar_degil,strategies/samples-and-templates/Strategy004.py,TEKRAR_DEGIL,H001:56,Strategy004: Robotic çekirdek stokastik dönüşü+hacim; H001 özeti ADX/CCI/stokastik (farklı)
+olasi_tekrar_degil,strategies/scalping/SmoothScalp.py,TEKRAR_DEGIL,H001:51,SmoothScalp: Robotic çekirdeğinde MFI yok (Scalp ile aynı); H001 özeti MFI'lı (farklı)
+olasi_tekrar_degil,strategies/wavetrend/wtc.py,TEKRAR_DEGIL,H001:66,wtc: Robotic çekirdek yalnız wt1/wt2 kesişimi; H001 özeti stokastik/bant süzgeçleri (doğrulanamadı)
