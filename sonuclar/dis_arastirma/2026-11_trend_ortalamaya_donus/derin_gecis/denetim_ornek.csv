@@ -1,0 +1,41 @@
+﻿ornek_kumesi,dis_id,dis_strateji,ilk_sinif,ilk_eslesen_arsiv_id,ilk_eslesen_durum,kullanilabilir,denetim_sonucu,dogru_sinif,gerekce
+ZATEN_TEST,S0053,Internal Bar Strength (IBS) Strategy,ZATEN_TEST,dis__ibs-donus,v2_elendi,evet,DOGRU,ZATEN_TEST,"dis__ibs-donus alt 0,2/üst 0,8, 1d; kural birebir; saat penceresi opsiyonel."
+ZATEN_TEST,S0008,SMACrossover,ZATEN_TEST,swing__ma-kesisim,v2_elendi,evet,DOGRU,ZATEN_TEST,SMA50/200 L/S: kart ve dış ayar var; TF 3h (4h/1d ara değer).
+ZATEN_TEST,S0586,The Improved R2 Strategy: 84% Correct with Just 6 Rules,ZATEN_TEST,dis__connors-etf,v2_elendi,hayir,HATA,BENZERI_TEST (FARK_TEST_EDILMEDI),"Dış kural RSI(2) için aşırı satım eşiği koymuyor (1. gün <65, sonra 2 gün üst üste düşüş, 3. gün alım; çıkış RSI>75). dis__connors-etf r3 modu ise 3 gün düşüş + RSI(3)<10 şartlı; giriş koşulu farklı. kullanilabilir=hayir."
+ZATEN_TEST,S0036,VIXDualThrustAlpha,ZATEN_TEST,dis__dual-thrust,elendi_v1,evet,DOGRU,ZATEN_TEST,"dis__dual-thrust (VIX Dual Thrust #62 birleşik), 30m; k=0,63 aynı."
+ZATEN_TEST,S0188,ATR标策略 (ATR_STOCK),ZATEN_TEST,dis__volatility-system,elendi_v1,evet,INCE_HATA,ZATEN_TEST (TF 1d: FARK_TEST_EDILMEDI),"Kural (önceki kapanış ±2xATR) dis__volatility-system ile aynı, ama o strateji yalnız 1h/30m koştu; dış kural günlük."
+ZATEN_TEST,S0410,RsiReversion (WallexB – ربات معامله‌گر والکس),ZATEN_TEST,swing__rsi-asiri-donus,v2_elendi,evet,DOGRU,ZATEN_TEST,"swing__rsi-asiri-donus: RSI14 30 yukarı kesişim, RSI 70 çıkışı; 1h daytrade klonunda var."
+ZATEN_TEST,S0003,IFR2,ZATEN_TEST,dis__ifr2,v2_elendi,evet,INCE_HATA,BENZERI_TEST (FARK_TEST_EDILMEDI),dis__ifr2 yalnız 1d/4h; dış kural 1h ve Hilbert trend-modu filtreli; arşivde HT filtresi yok.
+ZATEN_TEST,S0265,이동평균선 매매법 (5일선/20일선 골든크로스),ZATEN_TEST,swing__ma-kesisim,v2_elendi,evet,DOGRU,ZATEN_TEST,SMA5/21 ve MA60 trend filtresi (kart sharpe trend_ma=60) ızgarada.
+ZATEN_TEST,S0021,Strategy003,ZATEN_TEST,dis__ft-strategy003,elendi_v1,evet,INCE_HATA,ZATEN_TEST (sadeleştirilmiş),"dis__ft-strategy003 RSI<28+Fisher+SMA40+MFI<16 var, fakat dış kuraldaki (EMA50>EMA100 veya EMA5xEMA10) ve fastd>fastk koşulları arşiv uyarlamasında yok; arşiv daha çok işlem üretir."
+ZATEN_TEST,S0293,BIST-Backtesting – Supertrend stratejisi,ZATEN_TEST,swing__supertrend-psar,v2_elendi,evet,DOGRU,ZATEN_TEST,"Supertrend(10,3) sınıf varsayılanı; 1d."
+ZATEN_TEST,S0028,Supertrend,ZATEN_TEST,dis__ft-fsupertrend,elendi_v1,evet,DOGRU,ZATEN_TEST,"dis__ft-fsupertrend aynı 3+3 Supertrend kuralı, 1h."
+ZATEN_TEST,S0015,ClucMay72018,ZATEN_TEST,dis__ft-cluc-may2018,v2_elendi,evet,DOGRU,ZATEN_TEST,"dis__ft-cluc-may2018 (EMA100/50 küçük fark), 5m/15m, v2 gün içi kripto setinde de koştu."
+ZATEN_TEST,S0215,RSI 均值回归策略 (EasyQuant 教程),ZATEN_TEST,swing__rsi-asiri-donus,v2_elendi,evet,DOGRU,ZATEN_TEST,swing__rsi-asiri-donus RSI14 30/70 (bolgede modu); %8 stop kozmetik.
+ZATEN_TEST,S0318,Larry Connors RSI 3 (0970),ZATEN_TEST,dis__connors-etf,v2_elendi,hayir,DOGRU,ZATEN_TEST,"dis__connors-etf r3 (RSI3 üç gün düşüş<10, SMA200, çıkış >70); kullanilabilir=hayir."
+ZATEN_TEST,S0030,ReinforcedAverageStrategy,ZATEN_TEST,swing__ma-kesisim,v2_elendi,evet,INCE_HATA,ZATEN_TEST (filtre uzunluğu farklı),Dış kuralda üst-TF (48 saat) SMA50 = 4h grafikte ≈SMA600; arşiv ayarı 4h EMA50 (12 kat kısa). Filtre uzunluğu ızgara dışı (50/60/200).
+ZATEN_TEST,S0366,Estrategia MACD — bono del Tesoro EE.UU. 10 años (Bloomberg BT),ZATEN_TEST,swing__macd-sinyal,v2_elendi,evet,DOGRU,ZATEN_TEST,"MACD(12,26,9) sinyal kesişimi varsayılan; tf bilinmiyor."
+ZATEN_TEST,S0153,Systematic Trend-Following with Adaptive Portfolio Construction (AdaptiveTrend),ZATEN_TEST,v3__adaptivetrend-6s-momentum,test_edilmedi,evet,HATA,FARK_TEST_EDILMEDI (KODLU_KOSULMADI),v3__adaptivetrend-6s-momentum sonuç dosyalarında yok (test_edilmedi); ZATEN denemez. Ayrıca eksik L/theta/ATR değerleri arşivde uydurma sabitlerle (20/0/3xATR).
+ZATEN_TEST,S0011,TurtleRules,ZATEN_TEST,swing__donchian-kirilim,v2_elendi,evet,INCE_HATA,BENZERI_TEST,Taban kural (20/10 + 2xATR) koşuldu; kâr-ekleme piramidi ve ATR birim boyutlandırması motorda/arşivde yok.
+ZATEN_TEST,S0150,Market Intraday Momentum (first half-hour predicts last half-hour),ZATEN_TEST,dis__ilk-yarim-saat-son-yarim-saat,elendi_v1,hayir,DOGRU,ZATEN_TEST,dis__ilk-yarim-saat-son-yarim-saat (30m) birebir; kullanilabilir=hayir (seans saati).
+ZATEN_TEST,S0690,EMA 10/21 + Stop ATR x1.5 (Oro GC=F),ZATEN_TEST,swing__ma-kesisim,v2_elendi,evet,DOGRU,ZATEN_TEST,"EMA10/21 yalnız long + 1,5xATR stop: ma-kesisim ızgarasında (atr_k=1.5; 9/21 komşu)."
+BIZDE_YOK,S0378,"MY BOX by Gustavo (PFR com alvo Fibonacci 1,618)",BIZDE_YOK,,,evet,DOGRU,BIZDE_YOK,PFR (preço de fechamento reverso) arşivde yok; PFR yalnız tesadüfi alt-dize (EPFRAGHU).
+BIZDE_YOK,S0050,grid_mm (Grid market making),BIZDE_YOK,,,hayir,DOGRU,BIZDE_YOK,"Grid market making: arşivde yalnız YASAK olarak var, kodlu strateji yok; proje yasağı."
+BIZDE_YOK,S0623,螺纹热卷套利交易系统 — 布林带价差突破反转策略,BIZDE_YOK,,,hayir,INCE_HATA,BENZERI_TEST,"Spread Bollinger(120,3σ) dönüşü: pf__pairs (mesafe/z-skor) benzeri var (ilk geçişte M15 satırları BENZERI sayılmıştı, tutarsız). kullanilabilir=hayir."
+BIZDE_YOK,S0163,Winner-Loser Reversals in National Stock Market Indices (Mean Reversion Effect in Country Equity Indexes),BIZDE_YOK,,,hayir,INCE_HATA,BENZERI_TEST (düşük güven),"pf__kesit_ls skor=donus lookback parametresiyle kaybeden-uzun/kazanan-kısa dönüşü var (36 ay denenmedi, ≈35 sembol evreninde anlamsız). kullanilabilir=hayir."
+BIZDE_YOK,S0412,شاخص قدرت نسبی تجمعی وزنی مبتنی بر سبد میانگین-واریانس (مدیریت ریسک با RSI),BIZDE_YOK,,,hayir,DOGRU,BIZDE_YOK,PSO ağırlıklı kümülatif RSI sektör sepeti; arşivde yok; çok varlıklı optimizasyon.
+BIZDE_YOK,S0677,Estrategia de regresión a la media (Merval en U$S),BIZDE_YOK,,,hayir,DOGRU,BIZDE_YOK,"Merval USD mutlak eşik; makro seri, arşivde yok."
+BIZDE_YOK,S0516,Can Weakening Morning Order Flow Predict SPY Reversals?,BIZDE_YOK,,,hayir,DOGRU,BIZDE_YOK,Emir akışı dengesizliği (OFI) verisi yok.
+BIZDE_YOK,S0034,PriceGapMeanReversionAlpha,BIZDE_YOK,,,hayir,HATA,BENZERI_TEST (KODLU_KOSULMADI),v3__saatlik-asiri-tepki (1 saatlik getiri önceki 48 saat 2σ aşınca ters yön) aynı fikir; kodlandı ama hiç koşulmadı. kullanilabilir=hayir (1m veri).
+BIZDE_YOK,S0463,USDT↔TMN Arbitrage (Wallex–Nobitex spread z-band),BIZDE_YOK,,,hayir,DOGRU,BIZDE_YOK,Çapraz borsa arbitrajı; arşivde yok; yasak tip.
+BIZDE_YOK,S0069,DMI Swings (by Coinrule),BIZDE_YOK,,,evet,DOGRU,BIZDE_YOK,-DI>+DI & ADX>45 kontrarian: arşivde ters-yön DMI kuralı yok.
+BIZDE_YOK,S0467,Contrarian Stochastic rule (Nairobi Stock Index),BIZDE_YOK,,,evet,DOGRU,BIZDE_YOK,Kontrarian stokastik (%K<%D ve %D düşüyor iken long) yok.
+BIZDE_YOK,S0685,Relación Merval en USD y Riesgo País — estrategia equity/bonos,BIZDE_YOK,,,hayir,DOGRU,BIZDE_YOK,EMBI+ x Merval USD makro regresyonu; yok.
+BIZDE_YOK,S0112,A different indicator (DV2),BIZDE_YOK,,,evet,DOGRU,BIZDE_YOK,DV2 göstergesi arşivde yok (kod/envanterde arandı).
+BIZDE_YOK,S0066,"Semi-HFT Grid Bot, Two-sided seed-bump-martingale grid with basket take profit",BIZDE_YOK,,,hayir,DOGRU,BIZDE_YOK,"İki taraflı martingale grid; yasak, arşivde kodlu değil."
+BIZDE_YOK,S0415,SAVI 2-period RSI rule (SAVI as a tool for market timing on the JSE),BIZDE_YOK,,,hayir,DOGRU,BIZDE_YOK,Volatilite endeksi SAVI verisi yok.
+BIZDE_YOK,S0592,Trading The Fear Index (Markos Katsanos) – Traders' Tips Aug 2022 (long VIX ETF sistemi),BIZDE_YOK,,,hayir,DOGRU,BIZDE_YOK,VIX/VIX ETF verisi yok.
+BIZDE_YOK,S0499,The Pre-Holiday Effect,BIZDE_YOK,,,hayir,DOGRU,BIZDE_YOK,ABD tatil-öncesi etkisi; v3 takvim sınıfları tatil takvimini kullanıyor ama bu kuralı kodlayan sınıf yok.
+BIZDE_YOK,S0154,Industry Information and the 52-Week High Effect (52-Weeks High Effect in Stocks),BIZDE_YOK,,,hayir,DOGRU,BIZDE_YOK,Sektör kesitsel 52 hafta zirve sıralaması; yok (hisse sektör verisi yok).
+BIZDE_YOK,S0512,Hurst Exponent Reversion Strategy (0228),BIZDE_YOK,,,hayir,DOGRU,BIZDE_YOK,Hurst üssü arşivde yok (Hurst eşleşmeleri Hurst-Ooi-Pedersen yazar adı); ŞÜPHELİ bayraklı.
+BIZDE_YOK,S0362,Backtest Larry Williams 9.1 (exemplo) - JB,BIZDE_YOK,,,evet,DOGRU,BIZDE_YOK,Larry Williams 9.1 (EMA9 yön dönüşü + referans mum kırılımı) arşivde yok.
