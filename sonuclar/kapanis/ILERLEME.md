@@ -215,3 +215,4 @@ Lider kararları:
 
 ### KODLAMA AŞAMASI (kullanıcının belgeleri önce)
 Talimat: `KODLAMA_TALIMATI.md`. Girdi: `kod_girdi/` (birleştirme betiğinin nihai kararından). G8: 49 mevcut sınıf+ayar (kod gerekmez), 317 YENI → 8 parti (g8_kod_1..8). Sonra G9 Robotic (325 YENI), sonra COK_KOLLU ve diğer katmanlar.
+- g8_kod_4: 36 sınıf, 56 varyant kaydı, 62 test geçti. KODLANAMADI 4 (400, 401, 416 pozisyon yaşına bağlı çıkış; 419 SAR + pozisyona bağlı stop). 397 kapanış bazlı chandelier sınıf içinde yaklaşık (giriş mumu sinyal serisinden) → motora "pozisyon bilinçli çıkış" modülü eklenince yeniden yazılacak; KODLANAMADI'larla birlikte.
