@@ -74,6 +74,7 @@ class Baglam:
     sembol_40: tuple = ()
     cikti: Path = CIKTI
     esik: dict = field(default_factory=lambda: dict(ESIK))
+    k6_on_eleme_tf: tuple = ()        # ön kayıt eki 9: bu TF'lerde kapı 6 yalnız kapı 1–5'i geçenlere koşulur (geçmeyen p=1)
 
 
 _CTX: Baglam | None = None
@@ -306,6 +307,9 @@ def tek_grafik_kos(satir: dict, b: Baglam) -> dict:
            "analiz_bas": str(analiz_bas), "tf_kaynak": aciklama, **k}
     if m2.get("islem_sayisi", 0) == 0:
         out.update(p=1.0, k6_durum="ISLEM_YOK")
+        return out
+    if tf in b.k6_on_eleme_tf and not all(k[x] for x in ("k1", "k2", "k3", "k4", "k5")):
+        out.update(p=1.0, k6_durum="ATLANDI_K1_5")
         return out
     p6 = rastgele_giris_p(satir, ham[2.0], analiz_bas, mumlar_s, b, tf, evren)
     out["k6"] = p6
@@ -610,6 +614,7 @@ def main(argv=None) -> int:
     ap.add_argument("--kuru", action="store_true", help="yalnız çözümleme; backtest/mum okuma yok")
     ap.add_argument("--birlestir", action="store_true")
     ap.add_argument("--tf-haric", default="", help="virgüllü TF listesi; koşulmaz (ek 8)")
+    ap.add_argument("--k6-on-eleme-tf", default="", help="virgüllü TF listesi; kapı 6 yalnız kapı 1-5'i geçenlere (ek 9)")
     ap.add_argument("--eksik-izin", action="store_true", help="birleştirmede bitmemiş kimliklere izin (p=1, KOSULMADI)")
     a = ap.parse_args(argv)
     ek = f"asama{a.asama}"
@@ -628,7 +633,7 @@ def main(argv=None) -> int:
         for r in df[df["durum"] != "TAMAM"].itertuples():
             print("  ", r.kimlik, r.durum, "|", r.sorun)
         return 0
-    b = baglam_kur(cikti=Path(a.cikti))
+    b = baglam_kur(cikti=Path(a.cikti), k6_on_eleme_tf=tuple(x for x in a.k6_on_eleme_tf.split(",") if x))
     if a.birlestir:
         print(birlestir(satirlar, b, eksik_izin=a.eksik_izin, sonuc_csv=KAPANIS / f"sonuc_{ek}.csv", ozet_md=KAPANIS / f"ozet_{ek}.md"))
         return 0

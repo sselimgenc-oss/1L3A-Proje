@@ -112,3 +112,11 @@ Tarih: 2026-11-13. Kullanıcı kararıyla. **Sapma kaydıdır:** aşama 1 koşus
 - BH paydası değişmez: aşama 1 = 365, aşama 2 = 96 (dondurulmuş listeler). Koşulmayanlar ailede p=1 ile kalır; bu, sonuçları yalnız daha temkinli yapar.
 - Aşama 1'de kısa TF olup daha önce biten kayıtlar (koşu sırası gereği bitenler) sonuçlarıyla aileye girer; bu kayıtlar dışarıda bırakılmaz (seçici çıkarma yapılmaz).
 - Raporda koşulmayan kayıt sayısı TF'ye göre "ek 8 ile koşulmadı" diye verilir.
+
+## Ön kayıt düzeltmesi (9): kısa TF kayıtları için ucuz yol — ek 8'i değiştirir
+
+Tarih: 2026-11-13. Kullanıcının "koşmadıklarımız arasında iyiler varsa?" sorusu üzerine; kısa TF kayıtlarının hiçbir sonucu görülmeden yazıldı.
+
+- Ek 8'deki "koşulmaz" yerine: 5m/15m/30m kayıtları (aşama 1 ve 2) uzun TF'ler bittikten sonra **kapı 1–5 ile koşulur**. Kapı 6 (rastgele giriş testi, asıl süre maliyeti) yalnız kapı 1–5'in **hepsini** geçen kayıtlara uygulanır; geçmeyenler `ATLANDI_K1_5`, **p=1**.
+- Gerekçe: kapı 1–5'i geçmeyen bir kayıt hangi p ile olursa olsun birinci kapıyı geçemez; p=1 yazmak BH'yi yalnız daha temkinli yapar (diğer kayıtların eşiğini gevşetmez). v2'deki uygulamayla aynı.
+- Uzun TF kayıtları (ve ek 8'den önce biten kısa TF kayıtları) kapı 6'yı ön kayıttaki gibi koşulsuz alır. BH paydaları değişmez (365 / 96).
