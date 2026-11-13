@@ -38,7 +38,7 @@ Kanıt yollarında `dal:claude/adoring-maxwell-q7t60g:<yol>` yazılır.
 | G2_DIS_ESKI | dis_envanter (431), portfoy_adaylari (71), arsiv tv_eleme_dali meta (164+92) | 758 | Sonnet | sürüyor (2026-11-13) | ara/G2_DIS_ESKI_ham.csv |
 | G3_REPO | repo_kodlari (398), repo_raporlari (331), ek_77_strateji.md (77), sg-arge xlsx/md | ~810 | Sonnet | sürüyor (2026-11-13) | ara/G3_REPO_ham.csv |
 | G4_GITHUB | github_g1..g7 (1198) + kodlama_kuyrugu_github + d11f-j + ayarlar_d11j_ek | 1198 | Sonnet | sürüyor (2026-11-13) | ara/G4_GITHUB_ham.csv |
-| G5_151_SON1AY | kakushadze_151 (173) + d12b + son1ay (16) | 189 | Sonnet | sürüyor (2026-11-13) | ara/G5_151_SON1AY_ham.csv |
+| G5_151_SON1AY | kakushadze_151 (173) + d12b + son1ay (16) | 189 | Sonnet | denetlendi | ara/G5_151_SON1AY_ham.csv |
 | G6_V3 | v3 ham kataloglar (2592; on_eleme kapsar) + tur2/3/6 + adaylar/kartlar/kodlama_v3 | 2592 | Sonnet | sürüyor (2026-11-13) | ara/G6_V3_ham.csv |
 | G8_DIS_ARASTIRMA | ajan1 906 (dal), ajan2 26 (md), karşılaştırma/derin_gecis/tur4 | ~932 | Sonnet | sürüyor (2026-11-13) | ara/G8_DIS_ARASTIRMA_ham.csv |
 | G9_ROBOTIC | RoboticAutomations 909 dosya (dal) + kume_listesi | 909 | Sonnet | sürüyor (2026-11-13) | ara/G9_ROBOTIC_ham.csv |
@@ -48,7 +48,10 @@ Kanıt yollarında `dal:claude/adoring-maxwell-q7t60g:<yol>` yazılır.
 | Rapor + PR | — | — | lider | bekliyor | RAPOR.md |
 
 ## Denetim günlüğü (lider: her ajan çıktısından ≥10 satır kaynağa izlenir)
-_(boş)_
+- **G5** (189 satır: H 117, D 51, KOD 15, G 5, F 1): rastgele 12 satır kakushadze_151.csv'ye izlendi → 12/12 tutarlı.
+  d12b iddiası lider tarafından doğrulandı: `ayarlar_d12b_ek.json` motor/ ve araclar/ içinde okunmuyor; 7 ayarın modları
+  (kesit_ls skor ibs/dusuk_vol/r2_alfa, agirlik orantili; rotasyon agirlik getiri_vol) ne `baglama.BAGLAMA`'da ne ızgarada.
+  Nüans: `dusuk_vol` yalnız long rotasyon olarak `pf__rotasyon` BAGLAMA satır 35/40'ta var (L/S hali koşulmadı).
 
 ## Commit günlüğü
 _(boş)_
