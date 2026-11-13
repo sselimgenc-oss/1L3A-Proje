@@ -122,6 +122,9 @@ class _Poz:
     kismi_sayisi: int = 0
     kismi_net: Decimal = Decimal(0)           # kısmi parçaların brüt - çıkış komisyonu
     kismi_bekleyen: tuple = ()                # ((seviye_fiyati, oran), ...) henüz dolmamış
+    giris_i: int = 0                          # giriş mumunun indeksi (yalnız kanca için)
+    yuk: float = 0.0                          # girişten beri en yüksek / en düşük (yalnız kanca varken izlenir)
+    dus: float = 0.0
 
 
 class CikisYokHatasi(ValueError):
@@ -152,7 +155,8 @@ def backtest(mumlar: pd.DataFrame, strateji: Strateji, ayarlar: MotorAyarlari = 
     ca = strateji.cikis_ayarlari
     # Kısmi kâr ve başabaş tek başına çıkış sayılmaz: kalan pozisyon yine yalnız stopla kapanır (lider kararı).
     if not (strateji.cikis_var_mi() or ca.atr_iz_suren_k or ca.zaman_cikisi_mum
-            or ca.sabit_r_hedefi or ca.azalan_roi or ca.geri_cekilme_yuzde or ca.kar_rsi_esikleri):
+            or ca.sabit_r_hedefi or ca.azalan_roi or ca.geri_cekilme_yuzde or ca.kar_rsi_esikleri
+            or ca.yasa_bagli_zarar_cikisi or ca.kapanis_chandelier_k or getattr(strateji, "pozisyon_cikisi", None)):
         raise CikisYokHatasi(MESAJ_CIKIS_YOK)
     L = SERT_LIMITLER
     uyarilar = []
@@ -208,6 +212,9 @@ def backtest(mumlar: pd.DataFrame, strateji: Strateji, ayarlar: MotorAyarlari = 
     n = len(mumlar)
     atr = (gst.atr(mumlar["yuksek"], mumlar["dusuk"], mumlar["kapanis"], cks_ayar.atr_periyot).to_numpy()
            if (cks_ayar.atr_iz_suren_k or cks_ayar.agresif_iz_atr_k) else np.full(n, np.nan))
+    atr_kc = (gst.atr(mumlar["yuksek"], mumlar["dusuk"], mumlar["kapanis"], cks_ayar.kapanis_chandelier_periyot).to_numpy()
+              if cks_ayar.kapanis_chandelier_k else None)
+    kanca = getattr(strateji, "pozisyon_cikisi", None)
     rsi_dizi = (gst.rsi(mumlar["kapanis"], cks_ayar.rsi_periyot).to_numpy()
                 if cks_ayar.kar_rsi_esikleri else np.full(n, np.nan))
     son_stop_i = None         # son stop/stop_gap çıkışının mum indeksi (stop_sonrasi_bekleme_mum)
@@ -358,8 +365,14 @@ def backtest(mumlar: pd.DataFrame, strateji: Strateji, ayarlar: MotorAyarlari = 
                 zc_n = int(zc) if not np.isnan(zc) else cks_ayar.zaman_cikisi_mum
                 kis = tuple((_tick(D(cks.r_hedef_fiyati(yon, float(fiyat), float(risk_birim), r_k)), tick), D(oran))
                             for r_k, oran in sorted(cks_ayar.kismi))
+                if cks_ayar.kismi_yuzde:
+                    kis = tuple(sorted(
+                        kis + tuple((_tick(D(float(fiyat) * (1 + yon * ky / 100.0)), tick), D(oran))
+                                    for ky, oran in cks_ayar.kismi_yuzde),
+                        key=lambda e: e[0] * yon))
                 poz = _Poz(yon, miktar, fiyat, t, stop, stop, hedef, kom, t, float(fiyat), zc_n,
-                           ilk_miktar=miktar, kismi_bekleyen=kis)
+                           ilk_miktar=miktar, kismi_bekleyen=kis,
+                           giris_i=i, yuk=float(fiyat), dus=float(fiyat))
         bekleyen_giris = None
 
         # 3) mum içi stop / hedef
@@ -463,6 +476,8 @@ def backtest(mumlar: pd.DataFrame, strateji: Strateji, ayarlar: MotorAyarlari = 
             p = poz
             p.tutulan += 1
             p.ekstrem = max(p.ekstrem, h) if p.yon == 1 else min(p.ekstrem, l)
+            if kanca is not None:
+                p.yuk, p.dus = max(p.yuk, h), min(p.dus, l)
             risk_birim_f = float(abs(p.giris - p.ilk_stop))
             yeni = float(p.stop)
             if cks_ayar.basabas_r_esigi:
@@ -490,7 +505,10 @@ def backtest(mumlar: pd.DataFrame, strateji: Strateji, ayarlar: MotorAyarlari = 
                 bekleyen_cikis = "kill_switch"
             elif gunluk_blok and not olc:
                 bekleyen_cikis = "gunluk_limit"
-            elif (s_cikis_l[i] if p.yon == 1 else s_cikis_s[i]):
+            elif (s_cikis_l[i] if p.yon == 1 else s_cikis_s[i]) and (
+                    (cks_ayar.min_tutma_mum is None or p.tutulan >= cks_ayar.min_tutma_mum)
+                    and (not cks_ayar.yalniz_karda_cikis
+                         or cks.kar_yuzde(p.yon, float(p.giris), c) > cks_ayar.yalniz_karda_min_kar_yuzde)):
                 bekleyen_cikis = "sinyal"
             elif cks.zaman_doldu(p.tutulan, p.zaman_limit):
                 bekleyen_cikis = "zaman"
@@ -504,6 +522,14 @@ def backtest(mumlar: pd.DataFrame, strateji: Strateji, ayarlar: MotorAyarlari = 
                     bekleyen_cikis = "geri_cekilme"
                 elif cks.kar_rsi_doldu(p.yon, kar_c, rsi_dizi[i], cks_ayar.kar_rsi_esikleri):
                     bekleyen_cikis = "kar_rsi"
+                elif cks_ayar.yasa_bagli_zarar_cikisi and cks.yasa_zarar_doldu(p.tutulan, kar_c, cks_ayar.yasa_bagli_zarar_cikisi):
+                    bekleyen_cikis = "yasa_zarar"
+                elif cks_ayar.kapanis_chandelier_k and cks.kapanis_chandelier_doldu(
+                        p.yon, c, p.ekstrem, atr_kc[i], cks_ayar.kapanis_chandelier_k):
+                    bekleyen_cikis = "kapanis_chandelier"
+                elif kanca is not None and kanca(cks.PozisyonDurumu(
+                        p.yon, float(p.giris), p.giris_i, i, p.tutulan, p.yuk, p.dus, c, kar_c)):
+                    bekleyen_cikis = "kanca"
         if s_yon[i] != 0:
             bekleyen_giris = (int(s_yon[i]), s_stop[i], s_hedef[i], s_zc[i])
 
