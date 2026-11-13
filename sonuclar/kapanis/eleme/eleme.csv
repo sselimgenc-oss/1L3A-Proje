@@ -1,0 +1,495 @@
+kimlik,sinif,karar,gerekce_turu,gerekce,tf,katman
+HAM:X005:5#v1,kapanis__macd-ema-s0005,KOŞ,,K1 (MacdEmaS0005) ile aynı hipotez: koşu listesinde tek kimlik (çift kayıt varsa G8 kaydı düşer).,1h,varyant
+HAM:X005:6#v1,kapanis__linreg-adx-s0006,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,4h,varyant
+HAM:X005:6#v2,kapanis__linreg-adx-s0006,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:7#v1,kapanis__rsi2-sma200-s0007,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,3h,varyant
+HAM:X005:9#v1,kapanis__bb-hl2-ichimoku-s0009,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1h,varyant
+HAM:X005:10#v1,kapanis__rsi5-tv-s0010,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1h,varyant
+HAM:X005:12#v1,kapanis__rsi-bb-tipik-s0012,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1h,varyant
+HAM:X005:15#v1,kapanis__cluc-may-s0015,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,5m,varyant
+HAM:X005:16#v1,kapanis__multi-rsi-s0016,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,5m,varyant
+HAM:X005:18#v1,kapanis__bandtastic-s0018,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,15m,varyant
+HAM:X005:19#v1,kapanis__ha-ema-s0019,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,5m,varyant
+HAM:X005:23#v1,kapanis__hlhb-s0023,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,4h,varyant
+HAM:X005:24#v1,kapanis__adx-smas-s0024,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1h,varyant
+HAM:X005:25#v1,kapanis__ema-obv-s0025,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,5m,varyant
+HAM:X005:27#v1,kapanis__adx-sma1248-s0027,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1h,varyant
+HAM:X005:28#v1,kapanis__uc-supertrend-s0028,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1h,varyant
+HAM:X005:29#v1,kapanis__cofibit-s0029,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,5m,varyant
+HAM:X005:30#v1,kapanis__ema821-ust48-s0030,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,4h,varyant
+HAM:X005:36#v1,kapanis__aralik-kirilim-s0036,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,30m,varyant
+HAM:X005:37#v1,kapanis__macd-tolerans-s0037,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:38#v1,kapanis__ema-bant-s0038,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:41#v1,kapanis__macd-sma-iz-s0041,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:43#v1,kapanis__sma-kesis-iz-s0043,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:51#v1,kapanis__rsi4-donus-s0051,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,4h,varyant
+HAM:X005:54#v1,kapanis__ibs-ema252-s0054,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:56#v1,kapanis__rsi14-seviye-s0056,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,4h,varyant
+HAM:X005:56#v2,kapanis__rsi14-seviye-s0056,ÇIKAR,b,1d RSI14 30/70 long: X005:215 ile aynı giriş/çıkış (yalnız stop %8 ↔ ATRx3). K6 4h kaydı (#v1) kalır (d).,1d,varyant
+HAM:X005:67#v1,kapanis__rsi-h1-d1-s0067,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1h,varyant
+HAM:X005:70#v1,kapanis__ma-ibs-s0070,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:73#v1,kapanis__ao-wma-dun-s0073,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1h,varyant
+HAM:X005:74#v1,kapanis__ibs-pazartesi-s0074,KOŞ,,Takvim kuralı (hisse kökenli) ama lider takvim kurallarını KOSULACAK kabul etmişti; işlem sayısı yeterli → KOŞ.,1d,varyant
+HAM:X005:81#v1,kapanis__sma-kesis-don-s0081,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,4h,varyant
+HAM:X005:83#v1,kapanis__donchian-ema-2r-s0083,KOŞ,,K2 sınıfıyla aynı hipotez: koşu listesinde tek kimlik (çift kayıt varsa G8 kaydı düşer).,4h,varyant
+HAM:X005:84#v1,kapanis__macd-haftalik-s0084,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:85#v1,kapanis__macd-sma200-sar-s0085,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,4h,varyant
+HAM:X005:95#v1,kapanis__supertrend-adx-s0095,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,4h,varyant
+HAM:X005:97#v1,kapanis__ibs-bant-donus-s0097,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:104#v1,kapanis__yedi-gun-dip-sma200-s0104,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:108#v1,kapanis__rsi2-sma200-s0108,KOŞ,,253 / 638 ile aynı kuralın tek temsilcisi.,1d,varyant
+HAM:X005:115#v1,kapanis__bb-rsi-orta-bant-s0115,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:118#v1,kapanis__rsi2-sma50-s0118,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:136#v1,kapanis__haftalik-kapanis-kanali-s0136,ÇIKAR,a,"13 sembol x ~5,5 yıl ≈ 70 sembol-yıl; 200 işlem için sembol başına yılda ≥2,9 işlem gerekir. Haftalık 20 hafta kapanış kanalı: yılda ~0,5-1 kırılım/sembol → ~35-70 işlem.",1d,varyant
+HAM:X005:138#v1,kapanis__sma-kesis-sabit-tutma-s0138,ÇIKAR,c,"Kaynağın 8 tutma süresinden (olay çalışması; kaynak sonucu kendi beyanıyla olumsuz, önerilen varyant yok) 2 temsilci kalır: 5 gün (#v3) ve 30 gün (#v6). Giriş hepsinde aynı (SMA10/50 yukarı kesiş).",1d,varyant
+HAM:X005:138#v2,kapanis__sma-kesis-sabit-tutma-s0138,ÇIKAR,c,"Kaynağın 8 tutma süresinden (olay çalışması; kaynak sonucu kendi beyanıyla olumsuz, önerilen varyant yok) 2 temsilci kalır: 5 gün (#v3) ve 30 gün (#v6). Giriş hepsinde aynı (SMA10/50 yukarı kesiş).",1d,varyant
+HAM:X005:138#v3,kapanis__sma-kesis-sabit-tutma-s0138,KOŞ,,138 tutma süresi temsilcisi.,1d,varyant
+HAM:X005:138#v4,kapanis__sma-kesis-sabit-tutma-s0138,ÇIKAR,c,"Kaynağın 8 tutma süresinden (olay çalışması; kaynak sonucu kendi beyanıyla olumsuz, önerilen varyant yok) 2 temsilci kalır: 5 gün (#v3) ve 30 gün (#v6). Giriş hepsinde aynı (SMA10/50 yukarı kesiş).",1d,varyant
+HAM:X005:138#v5,kapanis__sma-kesis-sabit-tutma-s0138,ÇIKAR,c,"Kaynağın 8 tutma süresinden (olay çalışması; kaynak sonucu kendi beyanıyla olumsuz, önerilen varyant yok) 2 temsilci kalır: 5 gün (#v3) ve 30 gün (#v6). Giriş hepsinde aynı (SMA10/50 yukarı kesiş).",1d,varyant
+HAM:X005:138#v6,kapanis__sma-kesis-sabit-tutma-s0138,KOŞ,,138 tutma süresi temsilcisi.,1d,varyant
+HAM:X005:138#v7,kapanis__sma-kesis-sabit-tutma-s0138,ÇIKAR,c,"Kaynağın 8 tutma süresinden (olay çalışması; kaynak sonucu kendi beyanıyla olumsuz, önerilen varyant yok) 2 temsilci kalır: 5 gün (#v3) ve 30 gün (#v6). Giriş hepsinde aynı (SMA10/50 yukarı kesiş).",1d,varyant
+HAM:X005:138#v8,kapanis__sma-kesis-sabit-tutma-s0138,ÇIKAR,c,"Kaynağın 8 tutma süresinden (olay çalışması; kaynak sonucu kendi beyanıyla olumsuz, önerilen varyant yok) 2 temsilci kalır: 5 gün (#v3) ve 30 gün (#v6). Giriş hepsinde aynı (SMA10/50 yukarı kesiş).",1d,varyant
+HAM:X005:141#v1,kapanis__aylik-sma10-gtaa-s0141,ÇIKAR,a,"13 sembol x ~5,5 yıl ≈ 70 sembol-yıl; 200 işlem için sembol başına yılda ≥2,9 işlem gerekir. Aylık kapanış x 10 aylık SMA: yılda ~0,7-1 giriş/sembol → ~50-70 işlem.",1d,varyant
+HAM:X005:144#v1,kapanis__ewma-kutle-merkezi-s0144,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:144#v2,kapanis__ewma-kutle-merkezi-s0144,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:144#v3,kapanis__ewma-kutle-merkezi-s0144,KOŞ,,"Sınırda (a): EWMA 32/128 ~2 çevirme/yıl/sembol ≈ 140 işlem tahmini; akademik ana kaynak, belirsiz → KOŞ.",1d,varyant
+HAM:X005:147#v1,kapanis__tum-zaman-zirve-iz-s0147,ÇIKAR,a,"13 sembol x ~5,5 yıl ≈ 70 sembol-yıl; 200 işlem için sembol başına yılda ≥2,9 işlem gerekir. Tüm zaman zirvesi + 10xATR iz stopu: pozisyon aylarca/yıllarca taşınır, yeniden giriş yeni zirve ister → sembol başına toplam 3-6 işlem (~40-80).",1d,varyant
+HAM:X005:173#v1,kapanis__dual-thrust-s0173,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:174#v1,kapanis__keltner-5m-iz-yuzde-s0174,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,5m,varyant
+HAM:X005:177#v1,kapanis__bollinger-cci-15m-s0177,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,15m,varyant
+HAM:X005:181#v1,kapanis__bb-breakout-orta-bant-s0181,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:182#v1,kapanis__aroon-kesis-s0182,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:183#v1,kapanis__ema-atr-bant-s0183,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:185#v1,kapanis__hma-atr-kesis-s0185,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:186#v1,kapanis__bb-bant-yonu-s0186,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:187#v1,kapanis__sma-kesis-adx-di-s0187,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:188#v1,kapanis__atr-kirilim-s0188,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:189#v1,kapanis__uyarlanir-ma-kanal-s0189,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:192#v1,kapanis__ma-dizilim-ar-s0192,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:197#v1,kapanis__timsah-dizilim-s0197,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:208#v1,kapanis__z-skor-ort-donus-s0208,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:209#v1,kapanis__rsi6-donus-s0209,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:210#v1,kapanis__cci10-durum-gecis-s0210,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:212#v1,kapanis__stokastik-533-s0212,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:213#v1,kapanis__rsi14-asiri-2585-s0213,KOŞ,,Sınırda (a): tahmini 110-170 işlem; belirsiz → KOŞ.,1d,varyant
+HAM:X005:215#v1,kapanis__rsi14-asiri-3070-s0215,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:216#v1,kapanis__bb-alt-orta-cikis-s0216,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:217#v1,kapanis__bb-alt-ust-cikis-s0217,KOŞ,,830 / 828 ile aynı kuralın tek temsilcisi.,1d,varyant
+HAM:X005:219#v1,kapanis__bb25-karsi-bant-s0219,ÇIKAR,b,X005:829 (BB20 alt/üst bant dur-ve-çevir) ile yalnız periyot 25↔20 farkı; aynı karşı-bant mantığı.,1d,varyant
+HAM:X005:222#v1,kapanis__bb-kurulum-teyit-4h-s0222,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,4h,varyant
+HAM:X005:222#v2,kapanis__bb-kurulum-teyit-4h-s0222,ÇIKAR,c,Stop varyantı B (iki önceki mum dibi) A'nın küçük parametre türevi; A (#v1) kalır.,4h,varyant
+HAM:X005:229#v1,kapanis__rsi3-coklu-tf-15m-s0229,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,15m,varyant
+HAM:X005:234#v1,kapanis__sma20-60-kesis-s0234,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,4h,varyant
+HAM:X005:234#v2,kapanis__sma20-60-kesis-s0234,ÇIKAR,b,"1d SMA20/60 long kesişimi: mevcut X005:355 (SMA20/50 long, ATRx3) ile yalnız 50→60 farkı; ayrıca ~2/yıl/sembol ile kapı 2 sınırında. 4h kaydı (#v1) kalır.",1d,varyant
+HAM:X005:241#v1,kapanis__sma75-asagi-kesis-s0241,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:244#v1,kapanis__gun-ici-kirilim-1h-s0244,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1h,varyant
+HAM:X005:247#v1,kapanis__bb-rsi-alt-s0247,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,5m,varyant
+HAM:X005:253#v1,kapanis__rsi2-sma5-s0253,ÇIKAR,b,"X005:108 ile aynı işlem yolu: RSI(2)≤5 iken kapanış<SMA5 koşulu zaten sağlanır; tek fark ≤/< . Sınıf X005:594 (eşik 10, kripto kaynağı) ile koşmaya devam eder.",1d,varyant
+HAM:X005:257#v1,kapanis__ikyori-sma60-s0257,KOŞ,,Sınırda (a): tahmini 110-170 işlem; belirsiz → KOŞ.,1d,varyant
+HAM:X005:259#v1,kapanis__bb1sigma-rsi-s0259,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:260#v1,kapanis__rsi-30-70-s0260,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1h,varyant
+HAM:X005:264#v1,kapanis__bb-sarkma-donus-s0264,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,4h,varyant
+HAM:X005:264#v2,kapanis__bb-sarkma-donus-s0264,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:268#v1,kapanis__bb-cift-yon-s0268,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:278#v1,kapanis__uc-supertrend-s0278,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:283#v1,kapanis__bb-alt-geri-hedef-s0283,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:287#v1,kapanis__cci-gunluk-s0287,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1h,varyant
+HAM:X005:287#v2,kapanis__cci-gunluk-s0287,ÇIKAR,c,Sayfa TF listesi 1h|2h|4h; 2h ara değer. 1h (#v1) ve 4h (#v3) kalır.,2h,varyant
+HAM:X005:287#v3,kapanis__cci-gunluk-s0287,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,4h,varyant
+HAM:X005:288#v1,kapanis__bb-geri-donus-s0288,ÇIKAR,b,"X005:706#v1 (günlük BTC tezi, kripto kaynağı) ile birebir: alt bandın altından içeri dönüşte al, üst bandın üstünden içeri dönüşte çık. Temsilci 706#v1.",1d,varyant
+HAM:X005:289#v1,kapanis__stokastik-kesisim-s0289,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:290#v1,kapanis__williams-r-kesisim-s0290,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:291#v1,kapanis__rsi-sma-kesisim-s0291,ÇIKAR,b,"X005:484 ile aynı kural (RSI14 30 yukarı kesiş al / 70 aşağı kesiş sat, ATRx3); tek fark RSI ortalama tipi (basit ↔ Wilder).",1d,varyant
+HAM:X005:292#v1,kapanis__ichimoku-ayni-bar-s0292,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:294#v1,kapanis__bb-iz-stop-s0294,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,15m,varyant
+HAM:X005:294#v2,kapanis__bb-iz-stop-s0294,ÇIKAR,c,İz stop %3 yalnız başlık yorumunda; kodun varsayılanı %7 (#v1) kalır.,15m,varyant
+HAM:X005:295#v1,kapanis__rsi-macd-s0295,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1h,varyant
+HAM:X005:296#v1,kapanis__rott-var-s0296,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,4h,varyant
+HAM:X005:296#v2,kapanis__rott-var-s0296,ÇIKAR,a,"13 sembol x ~5,5 yıl ≈ 70 sembol-yıl; 200 işlem için sembol başına yılda ≥2,9 işlem gerekir. ROTT: VAR uzunluğu 1000 bar → 1d'de 1000 gün (~2,7 yıl) ısınma verinin yarısını yer; %7 OTT bandı çok yavaş → çok az işlem. 4h kaydı (#v1) kalır.",1d,varyant
+HAM:X005:297#v1,kapanis__risotto-s0297,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,4h,varyant
+HAM:X005:297#v2,kapanis__risotto-s0297,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:301#v1,kapanis__rsi-ema-50-200-s0301,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,4h,varyant
+HAM:X005:301#v2,kapanis__rsi-ema-50-200-s0301,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:304#v1,kapanis__cardwell-rsi-s0304,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:306#v1,kapanis__sma-bant-s0306,ÇIKAR,c,"Kaynağın 36 kuralından (kısa 1/2/5 x uzun 10..60 x bant 0/%1) temsilci 2 kayıt kalır: #v17 (2/30, bant 0; ızgara ortası) ve #v35 (5/60, bant 0; yavaş uç). Bant ve fiyat-x-MA biçimleri X005:395#1/#2/#7, 481, 265 ile zaten temsil ediliyor. BH ailesi şişmesi.",1d,varyant
+HAM:X005:306#v2,kapanis__sma-bant-s0306,ÇIKAR,c,"Kaynağın 36 kuralından (kısa 1/2/5 x uzun 10..60 x bant 0/%1) temsilci 2 kayıt kalır: #v17 (2/30, bant 0; ızgara ortası) ve #v35 (5/60, bant 0; yavaş uç). Bant ve fiyat-x-MA biçimleri X005:395#1/#2/#7, 481, 265 ile zaten temsil ediliyor. BH ailesi şişmesi.",1d,varyant
+HAM:X005:306#v3,kapanis__sma-bant-s0306,ÇIKAR,c,"Kaynağın 36 kuralından (kısa 1/2/5 x uzun 10..60 x bant 0/%1) temsilci 2 kayıt kalır: #v17 (2/30, bant 0; ızgara ortası) ve #v35 (5/60, bant 0; yavaş uç). Bant ve fiyat-x-MA biçimleri X005:395#1/#2/#7, 481, 265 ile zaten temsil ediliyor. BH ailesi şişmesi.",1d,varyant
+HAM:X005:306#v4,kapanis__sma-bant-s0306,ÇIKAR,c,"Kaynağın 36 kuralından (kısa 1/2/5 x uzun 10..60 x bant 0/%1) temsilci 2 kayıt kalır: #v17 (2/30, bant 0; ızgara ortası) ve #v35 (5/60, bant 0; yavaş uç). Bant ve fiyat-x-MA biçimleri X005:395#1/#2/#7, 481, 265 ile zaten temsil ediliyor. BH ailesi şişmesi.",1d,varyant
+HAM:X005:306#v5,kapanis__sma-bant-s0306,ÇIKAR,c,"Kaynağın 36 kuralından (kısa 1/2/5 x uzun 10..60 x bant 0/%1) temsilci 2 kayıt kalır: #v17 (2/30, bant 0; ızgara ortası) ve #v35 (5/60, bant 0; yavaş uç). Bant ve fiyat-x-MA biçimleri X005:395#1/#2/#7, 481, 265 ile zaten temsil ediliyor. BH ailesi şişmesi.",1d,varyant
+HAM:X005:306#v6,kapanis__sma-bant-s0306,ÇIKAR,c,"Kaynağın 36 kuralından (kısa 1/2/5 x uzun 10..60 x bant 0/%1) temsilci 2 kayıt kalır: #v17 (2/30, bant 0; ızgara ortası) ve #v35 (5/60, bant 0; yavaş uç). Bant ve fiyat-x-MA biçimleri X005:395#1/#2/#7, 481, 265 ile zaten temsil ediliyor. BH ailesi şişmesi.",1d,varyant
+HAM:X005:306#v7,kapanis__sma-bant-s0306,ÇIKAR,c,"Kaynağın 36 kuralından (kısa 1/2/5 x uzun 10..60 x bant 0/%1) temsilci 2 kayıt kalır: #v17 (2/30, bant 0; ızgara ortası) ve #v35 (5/60, bant 0; yavaş uç). Bant ve fiyat-x-MA biçimleri X005:395#1/#2/#7, 481, 265 ile zaten temsil ediliyor. BH ailesi şişmesi.",1d,varyant
+HAM:X005:306#v8,kapanis__sma-bant-s0306,ÇIKAR,c,"Kaynağın 36 kuralından (kısa 1/2/5 x uzun 10..60 x bant 0/%1) temsilci 2 kayıt kalır: #v17 (2/30, bant 0; ızgara ortası) ve #v35 (5/60, bant 0; yavaş uç). Bant ve fiyat-x-MA biçimleri X005:395#1/#2/#7, 481, 265 ile zaten temsil ediliyor. BH ailesi şişmesi.",1d,varyant
+HAM:X005:306#v9,kapanis__sma-bant-s0306,ÇIKAR,b,"(S=1,L=50,bant 0) = X005:395#1 ile birebir (kapanış x SMA50 long/flat).",1d,varyant
+HAM:X005:306#v10,kapanis__sma-bant-s0306,ÇIKAR,c,"Kaynağın 36 kuralından (kısa 1/2/5 x uzun 10..60 x bant 0/%1) temsilci 2 kayıt kalır: #v17 (2/30, bant 0; ızgara ortası) ve #v35 (5/60, bant 0; yavaş uç). Bant ve fiyat-x-MA biçimleri X005:395#1/#2/#7, 481, 265 ile zaten temsil ediliyor. BH ailesi şişmesi.",1d,varyant
+HAM:X005:306#v11,kapanis__sma-bant-s0306,ÇIKAR,c,"Kaynağın 36 kuralından (kısa 1/2/5 x uzun 10..60 x bant 0/%1) temsilci 2 kayıt kalır: #v17 (2/30, bant 0; ızgara ortası) ve #v35 (5/60, bant 0; yavaş uç). Bant ve fiyat-x-MA biçimleri X005:395#1/#2/#7, 481, 265 ile zaten temsil ediliyor. BH ailesi şişmesi.",1d,varyant
+HAM:X005:306#v12,kapanis__sma-bant-s0306,ÇIKAR,c,"Kaynağın 36 kuralından (kısa 1/2/5 x uzun 10..60 x bant 0/%1) temsilci 2 kayıt kalır: #v17 (2/30, bant 0; ızgara ortası) ve #v35 (5/60, bant 0; yavaş uç). Bant ve fiyat-x-MA biçimleri X005:395#1/#2/#7, 481, 265 ile zaten temsil ediliyor. BH ailesi şişmesi.",1d,varyant
+HAM:X005:306#v13,kapanis__sma-bant-s0306,ÇIKAR,c,"Kaynağın 36 kuralından (kısa 1/2/5 x uzun 10..60 x bant 0/%1) temsilci 2 kayıt kalır: #v17 (2/30, bant 0; ızgara ortası) ve #v35 (5/60, bant 0; yavaş uç). Bant ve fiyat-x-MA biçimleri X005:395#1/#2/#7, 481, 265 ile zaten temsil ediliyor. BH ailesi şişmesi.",1d,varyant
+HAM:X005:306#v14,kapanis__sma-bant-s0306,ÇIKAR,c,"Kaynağın 36 kuralından (kısa 1/2/5 x uzun 10..60 x bant 0/%1) temsilci 2 kayıt kalır: #v17 (2/30, bant 0; ızgara ortası) ve #v35 (5/60, bant 0; yavaş uç). Bant ve fiyat-x-MA biçimleri X005:395#1/#2/#7, 481, 265 ile zaten temsil ediliyor. BH ailesi şişmesi.",1d,varyant
+HAM:X005:306#v15,kapanis__sma-bant-s0306,ÇIKAR,c,"Kaynağın 36 kuralından (kısa 1/2/5 x uzun 10..60 x bant 0/%1) temsilci 2 kayıt kalır: #v17 (2/30, bant 0; ızgara ortası) ve #v35 (5/60, bant 0; yavaş uç). Bant ve fiyat-x-MA biçimleri X005:395#1/#2/#7, 481, 265 ile zaten temsil ediliyor. BH ailesi şişmesi.",1d,varyant
+HAM:X005:306#v16,kapanis__sma-bant-s0306,ÇIKAR,c,"Kaynağın 36 kuralından (kısa 1/2/5 x uzun 10..60 x bant 0/%1) temsilci 2 kayıt kalır: #v17 (2/30, bant 0; ızgara ortası) ve #v35 (5/60, bant 0; yavaş uç). Bant ve fiyat-x-MA biçimleri X005:395#1/#2/#7, 481, 265 ile zaten temsil ediliyor. BH ailesi şişmesi.",1d,varyant
+HAM:X005:306#v17,kapanis__sma-bant-s0306,KOŞ,,306 ailesinin temsilcisi.,1d,varyant
+HAM:X005:306#v18,kapanis__sma-bant-s0306,ÇIKAR,c,"Kaynağın 36 kuralından (kısa 1/2/5 x uzun 10..60 x bant 0/%1) temsilci 2 kayıt kalır: #v17 (2/30, bant 0; ızgara ortası) ve #v35 (5/60, bant 0; yavaş uç). Bant ve fiyat-x-MA biçimleri X005:395#1/#2/#7, 481, 265 ile zaten temsil ediliyor. BH ailesi şişmesi.",1d,varyant
+HAM:X005:306#v19,kapanis__sma-bant-s0306,ÇIKAR,c,"Kaynağın 36 kuralından (kısa 1/2/5 x uzun 10..60 x bant 0/%1) temsilci 2 kayıt kalır: #v17 (2/30, bant 0; ızgara ortası) ve #v35 (5/60, bant 0; yavaş uç). Bant ve fiyat-x-MA biçimleri X005:395#1/#2/#7, 481, 265 ile zaten temsil ediliyor. BH ailesi şişmesi.",1d,varyant
+HAM:X005:306#v20,kapanis__sma-bant-s0306,ÇIKAR,c,"Kaynağın 36 kuralından (kısa 1/2/5 x uzun 10..60 x bant 0/%1) temsilci 2 kayıt kalır: #v17 (2/30, bant 0; ızgara ortası) ve #v35 (5/60, bant 0; yavaş uç). Bant ve fiyat-x-MA biçimleri X005:395#1/#2/#7, 481, 265 ile zaten temsil ediliyor. BH ailesi şişmesi.",1d,varyant
+HAM:X005:306#v21,kapanis__sma-bant-s0306,ÇIKAR,c,"Kaynağın 36 kuralından (kısa 1/2/5 x uzun 10..60 x bant 0/%1) temsilci 2 kayıt kalır: #v17 (2/30, bant 0; ızgara ortası) ve #v35 (5/60, bant 0; yavaş uç). Bant ve fiyat-x-MA biçimleri X005:395#1/#2/#7, 481, 265 ile zaten temsil ediliyor. BH ailesi şişmesi.",1d,varyant
+HAM:X005:306#v22,kapanis__sma-bant-s0306,ÇIKAR,c,"Kaynağın 36 kuralından (kısa 1/2/5 x uzun 10..60 x bant 0/%1) temsilci 2 kayıt kalır: #v17 (2/30, bant 0; ızgara ortası) ve #v35 (5/60, bant 0; yavaş uç). Bant ve fiyat-x-MA biçimleri X005:395#1/#2/#7, 481, 265 ile zaten temsil ediliyor. BH ailesi şişmesi.",1d,varyant
+HAM:X005:306#v23,kapanis__sma-bant-s0306,ÇIKAR,c,"Kaynağın 36 kuralından (kısa 1/2/5 x uzun 10..60 x bant 0/%1) temsilci 2 kayıt kalır: #v17 (2/30, bant 0; ızgara ortası) ve #v35 (5/60, bant 0; yavaş uç). Bant ve fiyat-x-MA biçimleri X005:395#1/#2/#7, 481, 265 ile zaten temsil ediliyor. BH ailesi şişmesi.",1d,varyant
+HAM:X005:306#v24,kapanis__sma-bant-s0306,ÇIKAR,c,"Kaynağın 36 kuralından (kısa 1/2/5 x uzun 10..60 x bant 0/%1) temsilci 2 kayıt kalır: #v17 (2/30, bant 0; ızgara ortası) ve #v35 (5/60, bant 0; yavaş uç). Bant ve fiyat-x-MA biçimleri X005:395#1/#2/#7, 481, 265 ile zaten temsil ediliyor. BH ailesi şişmesi.",1d,varyant
+HAM:X005:306#v25,kapanis__sma-bant-s0306,ÇIKAR,c,"Kaynağın 36 kuralından (kısa 1/2/5 x uzun 10..60 x bant 0/%1) temsilci 2 kayıt kalır: #v17 (2/30, bant 0; ızgara ortası) ve #v35 (5/60, bant 0; yavaş uç). Bant ve fiyat-x-MA biçimleri X005:395#1/#2/#7, 481, 265 ile zaten temsil ediliyor. BH ailesi şişmesi.",1d,varyant
+HAM:X005:306#v26,kapanis__sma-bant-s0306,ÇIKAR,c,"Kaynağın 36 kuralından (kısa 1/2/5 x uzun 10..60 x bant 0/%1) temsilci 2 kayıt kalır: #v17 (2/30, bant 0; ızgara ortası) ve #v35 (5/60, bant 0; yavaş uç). Bant ve fiyat-x-MA biçimleri X005:395#1/#2/#7, 481, 265 ile zaten temsil ediliyor. BH ailesi şişmesi.",1d,varyant
+HAM:X005:306#v27,kapanis__sma-bant-s0306,ÇIKAR,b,"(S=5,L=20,bant 0) = mevcut X005:265 (SMA5/20 long, ATRx3) ile birebir.",1d,varyant
+HAM:X005:306#v28,kapanis__sma-bant-s0306,ÇIKAR,c,"Kaynağın 36 kuralından (kısa 1/2/5 x uzun 10..60 x bant 0/%1) temsilci 2 kayıt kalır: #v17 (2/30, bant 0; ızgara ortası) ve #v35 (5/60, bant 0; yavaş uç). Bant ve fiyat-x-MA biçimleri X005:395#1/#2/#7, 481, 265 ile zaten temsil ediliyor. BH ailesi şişmesi.",1d,varyant
+HAM:X005:306#v29,kapanis__sma-bant-s0306,ÇIKAR,c,"Kaynağın 36 kuralından (kısa 1/2/5 x uzun 10..60 x bant 0/%1) temsilci 2 kayıt kalır: #v17 (2/30, bant 0; ızgara ortası) ve #v35 (5/60, bant 0; yavaş uç). Bant ve fiyat-x-MA biçimleri X005:395#1/#2/#7, 481, 265 ile zaten temsil ediliyor. BH ailesi şişmesi.",1d,varyant
+HAM:X005:306#v30,kapanis__sma-bant-s0306,ÇIKAR,c,"Kaynağın 36 kuralından (kısa 1/2/5 x uzun 10..60 x bant 0/%1) temsilci 2 kayıt kalır: #v17 (2/30, bant 0; ızgara ortası) ve #v35 (5/60, bant 0; yavaş uç). Bant ve fiyat-x-MA biçimleri X005:395#1/#2/#7, 481, 265 ile zaten temsil ediliyor. BH ailesi şişmesi.",1d,varyant
+HAM:X005:306#v31,kapanis__sma-bant-s0306,ÇIKAR,c,"Kaynağın 36 kuralından (kısa 1/2/5 x uzun 10..60 x bant 0/%1) temsilci 2 kayıt kalır: #v17 (2/30, bant 0; ızgara ortası) ve #v35 (5/60, bant 0; yavaş uç). Bant ve fiyat-x-MA biçimleri X005:395#1/#2/#7, 481, 265 ile zaten temsil ediliyor. BH ailesi şişmesi.",1d,varyant
+HAM:X005:306#v32,kapanis__sma-bant-s0306,ÇIKAR,c,"Kaynağın 36 kuralından (kısa 1/2/5 x uzun 10..60 x bant 0/%1) temsilci 2 kayıt kalır: #v17 (2/30, bant 0; ızgara ortası) ve #v35 (5/60, bant 0; yavaş uç). Bant ve fiyat-x-MA biçimleri X005:395#1/#2/#7, 481, 265 ile zaten temsil ediliyor. BH ailesi şişmesi.",1d,varyant
+HAM:X005:306#v33,kapanis__sma-bant-s0306,ÇIKAR,c,"Kaynağın 36 kuralından (kısa 1/2/5 x uzun 10..60 x bant 0/%1) temsilci 2 kayıt kalır: #v17 (2/30, bant 0; ızgara ortası) ve #v35 (5/60, bant 0; yavaş uç). Bant ve fiyat-x-MA biçimleri X005:395#1/#2/#7, 481, 265 ile zaten temsil ediliyor. BH ailesi şişmesi.",1d,varyant
+HAM:X005:306#v34,kapanis__sma-bant-s0306,ÇIKAR,c,"Kaynağın 36 kuralından (kısa 1/2/5 x uzun 10..60 x bant 0/%1) temsilci 2 kayıt kalır: #v17 (2/30, bant 0; ızgara ortası) ve #v35 (5/60, bant 0; yavaş uç). Bant ve fiyat-x-MA biçimleri X005:395#1/#2/#7, 481, 265 ile zaten temsil ediliyor. BH ailesi şişmesi.",1d,varyant
+HAM:X005:306#v35,kapanis__sma-bant-s0306,KOŞ,,306 ailesinin temsilcisi.,1d,varyant
+HAM:X005:306#v36,kapanis__sma-bant-s0306,ÇIKAR,c,"Kaynağın 36 kuralından (kısa 1/2/5 x uzun 10..60 x bant 0/%1) temsilci 2 kayıt kalır: #v17 (2/30, bant 0; ızgara ortası) ve #v35 (5/60, bant 0; yavaş uç). Bant ve fiyat-x-MA biçimleri X005:395#1/#2/#7, 481, 265 ile zaten temsil ediliyor. BH ailesi şişmesi.",1d,varyant
+HAM:X005:310#v1,kapanis__pma-haftalik-s0310,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:313#v1,kapanis__rsi-bant-s0313,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,5m,varyant
+HAM:X005:314#v1,kapanis__donchian200-orta-s0314,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,15m,varyant
+HAM:X005:317#v1,kapanis__atr-daralma-sma20-s0317,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,5m,varyant
+HAM:X005:320#v1,kapanis__ardisik-kapanis-s0320,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:320#v2,kapanis__ardisik-kapanis-s0320,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:320#v3,kapanis__ardisik-kapanis-s0320,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:325#v1,kapanis__coklu-tf-sma-iz-s0325,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,5m,varyant
+HAM:X005:327#v1,kapanis__trend-takip-supertrend-s0327,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,4h,varyant
+HAM:X005:327#v2,kapanis__trend-takip-supertrend-s0327,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:328#v1,kapanis__rsi2-sma200-iki-s0328,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,30m,varyant
+HAM:X005:328#v2,kapanis__rsi2-sma200-iki-s0328,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1h,varyant
+HAM:X005:332#v1,kapanis__bb-fitil-sma14-s0332,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,15m,varyant
+HAM:X005:335#v1,kapanis__rsi2-rsi22-s0335,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:338#v1,kapanis__rsi2-iki-yon-s0338,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:339#v1,kapanis__rsi-bant-trend-s0339,ÇIKAR,c,"Kaynağın 5 çıkış varyantından kaynağın kendi ""en iyi"" dediği v2 (çıkış ort−2σ) kalır: #v3 (4h), #v4 (1d). Diğerleri aynı girişin çıkış/kâr-al/stop türevi.",4h,varyant
+HAM:X005:339#v2,kapanis__rsi-bant-trend-s0339,ÇIKAR,c,"Kaynağın 5 çıkış varyantından kaynağın kendi ""en iyi"" dediği v2 (çıkış ort−2σ) kalır: #v3 (4h), #v4 (1d). Diğerleri aynı girişin çıkış/kâr-al/stop türevi.",1d,varyant
+HAM:X005:339#v3,kapanis__rsi-bant-trend-s0339,KOŞ,,"Kaynağın ""en iyi"" varyantı (çıkış −2σ).",4h,varyant
+HAM:X005:339#v4,kapanis__rsi-bant-trend-s0339,KOŞ,,"Kaynağın ""en iyi"" varyantı (çıkış −2σ).",1d,varyant
+HAM:X005:339#v5,kapanis__rsi-bant-trend-s0339,ÇIKAR,c,"Kaynağın 5 çıkış varyantından kaynağın kendi ""en iyi"" dediği v2 (çıkış ort−2σ) kalır: #v3 (4h), #v4 (1d). Diğerleri aynı girişin çıkış/kâr-al/stop türevi.",4h,varyant
+HAM:X005:339#v6,kapanis__rsi-bant-trend-s0339,ÇIKAR,c,"Kaynağın 5 çıkış varyantından kaynağın kendi ""en iyi"" dediği v2 (çıkış ort−2σ) kalır: #v3 (4h), #v4 (1d). Diğerleri aynı girişin çıkış/kâr-al/stop türevi.",1d,varyant
+HAM:X005:339#v7,kapanis__rsi-bant-trend-s0339,ÇIKAR,c,"Kaynağın 5 çıkış varyantından kaynağın kendi ""en iyi"" dediği v2 (çıkış ort−2σ) kalır: #v3 (4h), #v4 (1d). Diğerleri aynı girişin çıkış/kâr-al/stop türevi.",4h,varyant
+HAM:X005:339#v8,kapanis__rsi-bant-trend-s0339,ÇIKAR,c,"Kaynağın 5 çıkış varyantından kaynağın kendi ""en iyi"" dediği v2 (çıkış ort−2σ) kalır: #v3 (4h), #v4 (1d). Diğerleri aynı girişin çıkış/kâr-al/stop türevi.",1d,varyant
+HAM:X005:339#v9,kapanis__rsi-bant-trend-s0339,ÇIKAR,c,"Kaynağın 5 çıkış varyantından kaynağın kendi ""en iyi"" dediği v2 (çıkış ort−2σ) kalır: #v3 (4h), #v4 (1d). Diğerleri aynı girişin çıkış/kâr-al/stop türevi.",4h,varyant
+HAM:X005:339#v10,kapanis__rsi-bant-trend-s0339,ÇIKAR,c,"Kaynağın 5 çıkış varyantından kaynağın kendi ""en iyi"" dediği v2 (çıkış ort−2σ) kalır: #v3 (4h), #v4 (1d). Diğerleri aynı girişin çıkış/kâr-al/stop türevi.",1d,varyant
+HAM:X005:341#v1,kapanis__rsi5-sma50-s0341,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:346#v1,kapanis__band-kirilim-13-s0346,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,4h,varyant
+HAM:X005:346#v2,kapanis__band-kirilim-13-s0346,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:348#v1,kapanis__rsi-bb1-iki-s0348,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,4h,varyant
+HAM:X005:348#v2,kapanis__rsi-bb1-iki-s0348,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:357#v1,kapanis__bb038-ema80-s0357,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,4h,varyant
+HAM:X005:357#v2,kapanis__bb038-ema80-s0357,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:362#v1,kapanis__ema9-stopemir-s0362,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,4h,varyant
+HAM:X005:362#v2,kapanis__ema9-stopemir-s0362,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:366#v1,kapanis__macd-s0366,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,4h,varyant
+HAM:X005:366#v2,kapanis__macd-s0366,ÇIKAR,b,"X005:194 (mevcut sınıf swing__macd-sinyal, long, ATRx3) ile birebir 1d MACD kesişimi; tek temsilci 194. 4h kaydı (#v1) kalır.",1d,varyant
+HAM:X005:367#v1,kapanis__vma-bant-s0367,ÇIKAR,a,"13 sembol x ~5,5 yıl ≈ 70 sembol-yıl; 200 işlem için sembol başına yılda ≥2,9 işlem gerekir. Haftalık SMA5/SMA50 (%1 bant): 50 hafta ısınma + yılda <0,5 geçiş → ~20-30 işlem.",1d,varyant
+HAM:X005:371#v1,kapanis__rsi2-tepe-s0371,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:372#v1,kapanis__rsi2-15-72-s0372,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1h,varyant
+HAM:X005:372#v2,kapanis__rsi2-15-72-s0372,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:373#v1,kapanis__rsi2-kesisim-s0373,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:373#v2,kapanis__rsi2-kesisim-s0373,ÇIKAR,c,Eşik 25 Pine varsayılanı; tezde test edilen ana değer 20 (#v1) kalır.,1d,varyant
+HAM:X005:374#v1,kapanis__rsi2-sma200-s0374,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:375#v1,kapanis__rsi14basit-s0375,ÇIKAR,a,"13 sembol x ~5,5 yıl ≈ 70 sembol-yıl; 200 işlem için sembol başına yılda ≥2,9 işlem gerekir. RSI14(basit)<25 → >75: yılda ~1,5 olay/sembol → ~100-130; ayrıca (b) X005:215/213'ün eşik kopyası ve (g) kaynak açılamadı + emin_degil.",1d,varyant
+HAM:X005:379#v1,kapanis__rsi15-tepe15-s0379,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:384#v1,kapanis__stok50-s0384,ÇIKAR,a,"13 sembol x ~5,5 yıl ≈ 70 sembol-yıl; 200 işlem için sembol başına yılda ≥2,9 işlem gerekir. Haftalık %K(50) 20 seviyesini yukarı kesiş: 50 hafta ısınma, olay ayı piyasası dibinde bir kez → ~20-40 işlem.",1d,varyant
+HAM:X005:390#v1,kapanis__ema-rsi-trend-s0390,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:391#v1,kapanis__ema-veya-rsi-s0391,ÇIKAR,e,"Kaynak yalnız ""güven 0,8/0,6"" skor ağırlıkları veriyor; ""EMA kesişimi VEYA RSI<30"" ikili kuralı bizim varsayımımız (emin_degil) → kaynağa sadık değil; parçaları (EMA20/50, RSI 30/70) başka kayıtlarda ayrı ayrı koşuluyor.",1d,varyant
+HAM:X005:393#v1,kapanis__sma-kesisim-s0393,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,4h,varyant
+HAM:X005:393#v2,kapanis__sma-kesisim-s0393,ÇIKAR,b,"1d SMA9/21 long kesişimi: mevcut X005:270 (EMA 9/21 long, 1d, ATRx3) ile yalnız MA tipi farkı. K6 4h kaydı (#v1) kalır (d).",1d,varyant
+HAM:X005:394#v1,kapanis__sma-kesisim-tp-s0394,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1h,varyant
+HAM:X005:395#1#v1,kapanis__vma-bant-s0395-1,KOŞ,,JSE VMA bant ailesinin temsilcisi (K2 kimliği; koşu listesinde tek kayıt).,1d,varyant
+HAM:X005:395#2#v1,kapanis__vma-bant-s0395-2,KOŞ,,JSE VMA bant ailesinin temsilcisi (K2 kimliği; koşu listesinde tek kayıt).,1d,varyant
+HAM:X005:395#3#v1,kapanis__vma-bant-s0395-3,ÇIKAR,c,"JSE VMA bant ailesinin 10 kuralından 3 temsilci kalır: #1 (1/50, bant 0), #2 (1/50, bant %1; bant fikrinin temsilcisi), #7 (1/200, bant 0). 150/200 uzun MA'lı diğerleri birbirinin parametre kopyası ve yılda ~1-2,5 giriş/sembol ile kapı 2 sınırının altında/üstünde (a).",1d,varyant
+HAM:X005:395#4#v1,kapanis__vma-bant-s0395-4,ÇIKAR,c,"JSE VMA bant ailesinin 10 kuralından 3 temsilci kalır: #1 (1/50, bant 0), #2 (1/50, bant %1; bant fikrinin temsilcisi), #7 (1/200, bant 0). 150/200 uzun MA'lı diğerleri birbirinin parametre kopyası ve yılda ~1-2,5 giriş/sembol ile kapı 2 sınırının altında/üstünde (a).",1d,varyant
+HAM:X005:395#5#v1,kapanis__vma-bant-s0395-5,KOŞ,c,"lider: Fable önerisiyle 4. temsilci olarak geri alındı (5/150) ; JSE VMA bant ailesinin 10 kuralından 3 temsilci kalır: #1 (1/50, bant 0), #2 (1/50, bant %1; bant fikrinin temsilcisi), #7 (1/200, bant 0). 150/200 uzun MA'lı diğerleri birbirinin parametre kopyası ve yılda ~1-2,5 giriş/sembol ile kapı 2 sınırının altında/üstünde (a).",1d,varyant
+HAM:X005:395#6#v1,kapanis__vma-bant-s0395-6,ÇIKAR,c,"JSE VMA bant ailesinin 10 kuralından 3 temsilci kalır: #1 (1/50, bant 0), #2 (1/50, bant %1; bant fikrinin temsilcisi), #7 (1/200, bant 0). 150/200 uzun MA'lı diğerleri birbirinin parametre kopyası ve yılda ~1-2,5 giriş/sembol ile kapı 2 sınırının altında/üstünde (a).",1d,varyant
+HAM:X005:395#7#v1,kapanis__vma-bant-s0395-7,KOŞ,,JSE VMA bant ailesinin temsilcisi (K2 kimliği; koşu listesinde tek kayıt).,1d,varyant
+HAM:X005:395#8#v1,kapanis__vma-bant-s0395-8,ÇIKAR,c,"JSE VMA bant ailesinin 10 kuralından 3 temsilci kalır: #1 (1/50, bant 0), #2 (1/50, bant %1; bant fikrinin temsilcisi), #7 (1/200, bant 0). 150/200 uzun MA'lı diğerleri birbirinin parametre kopyası ve yılda ~1-2,5 giriş/sembol ile kapı 2 sınırının altında/üstünde (a).",1d,varyant
+HAM:X005:395#9#v1,kapanis__vma-bant-s0395-9,ÇIKAR,c,"JSE VMA bant ailesinin 10 kuralından 3 temsilci kalır: #1 (1/50, bant 0), #2 (1/50, bant %1; bant fikrinin temsilcisi), #7 (1/200, bant 0). 150/200 uzun MA'lı diğerleri birbirinin parametre kopyası ve yılda ~1-2,5 giriş/sembol ile kapı 2 sınırının altında/üstünde (a).",1d,varyant
+HAM:X005:395#10#v1,kapanis__vma-bant-s0395-10,ÇIKAR,c,"JSE VMA bant ailesinin 10 kuralından 3 temsilci kalır: #1 (1/50, bant 0), #2 (1/50, bant %1; bant fikrinin temsilcisi), #7 (1/200, bant 0). 150/200 uzun MA'lı diğerleri birbirinin parametre kopyası ve yılda ~1-2,5 giriş/sembol ile kapı 2 sınırının altında/üstünde (a).",1d,varyant
+HAM:X005:397#v1,kapanis__donchian55-rvol-s0397,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:405#v1,kapanis__rsi2-ema200-iki-s0405,ÇIKAR,b,"4h RSI2 10/90 + MA200 + SMA5 çıkışı: X005:7 (3h, aynı eşikler) ile neredeyse aynı; kaynakta 1d ana, 4h alternatif (d). Ana varyant #v2 kalır.",4h,varyant
+HAM:X005:405#v2,kapanis__rsi2-ema200-iki-s0405,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:405#v3,kapanis__rsi2-ema200-iki-s0405,ÇIKAR,c,"Kaynağın ""agresif"" 5/95 yan varyantı; ana varyant 10/90 1d (#v2) kalır.",4h,varyant
+HAM:X005:405#v4,kapanis__rsi2-ema200-iki-s0405,ÇIKAR,c,"Kaynağın ""agresif"" 5/95 yan varyantı; ana varyant 10/90 1d (#v2) kalır.",1d,varyant
+HAM:X005:406#v1,kapanis__bant-donus-s0406,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,4h,varyant
+HAM:X005:406#v2,kapanis__bant-donus-s0406,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:406#v3,kapanis__bant-donus-s0406,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,4h,varyant
+HAM:X005:406#v4,kapanis__bant-donus-s0406,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:406#v5,kapanis__bant-donus-s0406,ÇIKAR,c,MA±1σ dönüş: EMA varyantları SMA varyantlarının (#v1-#v4) MA tipi kopyası; 4 kayıt (SMA20/SMA50 x 4h/1d) kalır.,4h,varyant
+HAM:X005:406#v6,kapanis__bant-donus-s0406,ÇIKAR,c,MA±1σ dönüş: EMA varyantları SMA varyantlarının (#v1-#v4) MA tipi kopyası; 4 kayıt (SMA20/SMA50 x 4h/1d) kalır.,1d,varyant
+HAM:X005:406#v7,kapanis__bant-donus-s0406,ÇIKAR,c,MA±1σ dönüş: EMA varyantları SMA varyantlarının (#v1-#v4) MA tipi kopyası; 4 kayıt (SMA20/SMA50 x 4h/1d) kalır.,4h,varyant
+HAM:X005:406#v8,kapanis__bant-donus-s0406,ÇIKAR,c,MA±1σ dönüş: EMA varyantları SMA varyantlarının (#v1-#v4) MA tipi kopyası; 4 kayıt (SMA20/SMA50 x 4h/1d) kalır.,1d,varyant
+HAM:X005:407#v1,kapanis__bb-alt-al-s0407,ÇIKAR,b,"X005:216 ile aynı kural: BB(20,2) alt bandı altı al, orta banda dönüşte çık (üst bant çıkışı fiilen hiç devreye girmez), aynı ATRx3 stop.",1d,varyant
+HAM:X005:408#v1,kapanis__rsi-hacim-sma-s0408,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:410#v1,kapanis__rsi-kesisim-tp-s0410,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1h,varyant
+HAM:X005:411#v1,kapanis__rsi14-30-70-s0411,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,15m,varyant
+HAM:X005:417#v1,kapanis__bb-donus-s0417,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,4h,varyant
+HAM:X005:417#v2,kapanis__bb-donus-s0417,ÇIKAR,b,"X005:268 ile birebir (1d, BB20/2σ iki yön, orta bant çıkışı, ATRx3). 4h kaydı (#v1) kalır.",1d,varyant
+HAM:X005:418#v1,kapanis__cdc-actionzone-s0418,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:421#v1,kapanis__macd-ema100-s0421,ÇIKAR,b,"X005:366#v1 ile birebir (4h MACD 12/26/9 kesişimi, long, ATRx3; ema_filtre yok). EMA100 filtreli #v3/#v4 kalır.",4h,varyant
+HAM:X005:421#v2,kapanis__macd-ema100-s0421,ÇIKAR,b,"X005:194 (mevcut sınıf) = X005:366#v2 = X005:483 ile birebir (1d MACD kesişimi long, ATRx3).",1d,varyant
+HAM:X005:421#v3,kapanis__macd-ema100-s0421,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,4h,varyant
+HAM:X005:421#v4,kapanis__macd-ema100-s0421,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:427#v1,kapanis__ay-sonu-ema150-s0427,ÇIKAR,a,"13 sembol x ~5,5 yıl ≈ 70 sembol-yıl; 200 işlem için sembol başına yılda ≥2,9 işlem gerekir. Pozisyon yalnız ay sonunda güncellenir (kapanış>EMA150): yılda ~1 giriş/sembol → ~70-90 işlem.",1d,varyant
+HAM:X005:428#v1,kapanis__cci-esik-s0428,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:428#v2,kapanis__cci-esik-s0428,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:430#v1,kapanis__bb-alt-ardisik-s0430,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:432#v1,kapanis__rsi-yuzde-sl-tp-s0432,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,5m,varyant
+HAM:X005:435#v1,kapanis__macd-rsi-atr7-s0435,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:438#v1,kapanis__haftalik-sma-macd-s0438,ÇIKAR,a,"13 sembol x ~5,5 yıl ≈ 70 sembol-yıl; 200 işlem için sembol başına yılda ≥2,9 işlem gerekir. Haftalık SMA20 + haftalık MACD: yılda ~1,3 giriş/sembol → ~80-100 işlem.",1d,varyant
+HAM:X005:448#v1,kapanis__rejim-rsi-bant-s0448,ÇIKAR,a,"13 sembol x ~5,5 yıl ≈ 70 sembol-yıl; 200 işlem için sembol başına yılda ≥2,9 işlem gerekir. Çelişen birleşim: kapanış>SMA216 iken RSI(18)<31 VE kapanış<BB(37,2) alt bandı; günlükte yılda <0,5 olay/sembol → ~20-35 işlem.",1d,varyant
+HAM:X005:449#v1,kapanis__ultimate-osc-s0449,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1h,varyant
+HAM:X005:450#v1,kapanis__sma500-rsi9-destek-s0450,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1h,varyant
+HAM:X005:454#v1,kapanis__sma-kesisim-rsi-gecmis-s0454,ÇIKAR,a,"13 sembol x ~5,5 yıl ≈ 70 sembol-yıl; 200 işlem için sembol başına yılda ≥2,9 işlem gerekir. SMA9/SMA21 kesişimi VE son 5 barda RSI14≤30 (ayna ≥70): kesişim dipten 8-15 gün sonra gelir, 5 bar penceresine nadiren düşer → yılda <0,5/sembol/yön (~≤70).",1d,varyant
+HAM:X005:456#v1,kapanis__ema-rsi-kademeli-s0456,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,4h,varyant
+HAM:X005:466#v1,kapanis__ters-psar-s0466,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:467#v1,kapanis__kontrarian-stok-s0467,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:484#v1,kapanis__rsi-30-70-kesisim-s0484,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:485#v1,kapanis__stok-kd-kesisim-s0485,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:492#v1,kapanis__rsi-boga-yutan-s0492,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:494#v1,kapanis__nr7-icgun-short-s0494,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:495#v1,kapanis__sezonsal-macd-s0495,ÇIKAR,a,"13 sembol x ~5,5 yıl ≈ 70 sembol-yıl; 200 işlem için sembol başına yılda ≥2,9 işlem gerekir. Yılda tek giriş (16 Ekim–20 Nisan sezonu) → en çok ~70-85 işlem; ayrıca (f) hisse senedi ""Sell in May"" takvim anomalisi.",1d,varyant
+HAM:X005:502#v1,kapanis__nr7-kapanis-s0502,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:503#v1,kapanis__zirve-yakinlik-s0503,KOŞ,,Sınırda (a): tahmini 110-170 işlem; belirsiz → KOŞ.,1d,varyant
+HAM:X005:508#v1,kapanis__fonlama-ters-s0508,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,8h,varyant
+HAM:X005:508#v2,kapanis__fonlama-ters-s0508,ÇIKAR,a,"Fonlama ±2σ eşiği (−32,61 / +35,93 bp, BitMEX XBTUSD dağılımından): Binance fonlamasında bu uç değerler çok nadir (tavan civarı) → <100 işlem; (c) kaynağın ikinci varyantı. #v1 (±1σ) kalır.",8h,varyant
+HAM:X005:509#v1,kapanis__ma200-ma5-seri-s0509,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:510#v1,kapanis__keltner-donus-s0510,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,5m,varyant
+HAM:X005:513#v1,kapanis__vwap-atr-donus-s0513,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,5m,varyant
+HAM:X005:519#v1,kapanis__ay-gunu-dusen-s0519,KOŞ,,Takvim kuralı (hisse kökenli) ama lider takvim kurallarını KOSULACAK kabul etmişti; işlem sayısı yeterli → KOŞ.,1d,varyant
+HAM:X005:521#v1,kapanis__ichimoku-bulut-s0521,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:525#v1,kapanis__kama-sma-fark-s0525,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:540#v1,kapanis__tsmom-sma-durum-s0540,ÇIKAR,c,Kaynağın 8 varyantından (TSMOM/SMA x N 10/50/100/200) temsilci: TSMOM N=50 (#v2) ve N=200 (#v4). SMA kolu X005:395/306/481 ile aynı kural (b).,1d,varyant
+HAM:X005:540#v2,kapanis__tsmom-sma-durum-s0540,KOŞ,,540 TSMOM temsilcisi.,1d,varyant
+HAM:X005:540#v3,kapanis__tsmom-sma-durum-s0540,ÇIKAR,c,Kaynağın 8 varyantından (TSMOM/SMA x N 10/50/100/200) temsilci: TSMOM N=50 (#v2) ve N=200 (#v4). SMA kolu X005:395/306/481 ile aynı kural (b).,1d,varyant
+HAM:X005:540#v4,kapanis__tsmom-sma-durum-s0540,KOŞ,,540 TSMOM temsilcisi.,1d,varyant
+HAM:X005:540#v5,kapanis__tsmom-sma-durum-s0540,ÇIKAR,c,Kaynağın 8 varyantından (TSMOM/SMA x N 10/50/100/200) temsilci: TSMOM N=50 (#v2) ve N=200 (#v4). SMA kolu X005:395/306/481 ile aynı kural (b).,1d,varyant
+HAM:X005:540#v6,kapanis__tsmom-sma-durum-s0540,ÇIKAR,b,SMA kuralı N=50 = X005:395#1 ile birebir (kapanış>SMA50 long/flat).,1d,varyant
+HAM:X005:540#v7,kapanis__tsmom-sma-durum-s0540,ÇIKAR,c,Kaynağın 8 varyantından (TSMOM/SMA x N 10/50/100/200) temsilci: TSMOM N=50 (#v2) ve N=200 (#v4). SMA kolu X005:395/306/481 ile aynı kural (b).,1d,varyant
+HAM:X005:540#v8,kapanis__tsmom-sma-durum-s0540,ÇIKAR,b,SMA kuralı N=200 = X005:395#7 ile birebir (kapanış>SMA200 long/flat).,1d,varyant
+HAM:X005:544#v1,kapanis__bb-alt-yukari-s0544,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:544#v2,kapanis__bb-alt-yukari-s0544,ÇIKAR,b,"X005:706#v1 / 288 ile birebir (BB20/2σ alt bandı yukarı kesiş al, üst bandı aşağı kesiş çık).",1d,varyant
+HAM:X005:544#v3,kapanis__bb-alt-yukari-s0544,ÇIKAR,a,"13 sembol x ~5,5 yıl ≈ 70 sembol-yıl; 200 işlem için sembol başına yılda ≥2,9 işlem gerekir. BB(50) alt bandı yukarı kesiş → üst bandı aşağı kesişte çıkış döngüsü: yılda ~1,3/sembol → ~90. (c) Kaynağın 4 N varyantından temsilci #v1 (N=10) kalır.",1d,varyant
+HAM:X005:544#v4,kapanis__bb-alt-yukari-s0544,ÇIKAR,a,"13 sembol x ~5,5 yıl ≈ 70 sembol-yıl; 200 işlem için sembol başına yılda ≥2,9 işlem gerekir. BB(250): 250 gün ısınma + yılda <0,5 döngü → ~30 işlem.",1d,varyant
+HAM:X005:548#v1,kapanis__adx-mom-di-roi-s0548,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1h,varyant
+HAM:X005:549#v1,kapanis__macd-ao-roi-s0549,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1h,varyant
+HAM:X005:550#v1,kapanis__var-ott-s0550,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1h,varyant
+HAM:X005:552#v1,kapanis__macd-bb-rsi-roi-s0552,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,5m,varyant
+HAM:X005:554#v1,kapanis__ema800-kesisim-s0554,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1h,varyant
+HAM:X005:555#v1,kapanis__macd-sifir-alti-ema-s0555,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1h,varyant
+HAM:X005:556#v1,kapanis__ichimoku-senkou-s0556,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,4h,varyant
+HAM:X005:557#v1,kapanis__sma-serit-s0557,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:561#v1,kapanis__yuksek20-temas-s0561,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:567#v1,kapanis__cmc-winner-s0567,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,15m,varyant
+HAM:X005:570#v1,kapanis__td-sayim-gunsonusuz-s0570,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1h,varyant
+HAM:X005:571#v1,kapanis__ema-oran-bant-s0571,ÇIKAR,g,"Kaynak kuralı kendi içinde bozuk: çıkış bandı çelişkili (hiç tetiklenmez), giriş EMA12/EMA26 oranının dar bir hyperopt aralığı ([-1,416%, -1,176%]); emin_degil. Fikir değil, optimizasyon kalıntısı.",5m,varyant
+HAM:X005:572#v1,kapanis__cci72-rsi36-s0572,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,15m,varyant
+HAM:X005:574#v1,kapanis__rsi4-ema100-s0574,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1h,varyant
+HAM:X005:576#v1,kapanis__vwap-dip-s0576,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,5m,varyant
+HAM:X005:577#v1,kapanis__donchian-agirlikli-bb-s0577,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,5m,varyant
+HAM:X005:578#v1,kapanis__slowpotato-s0578,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,5m,varyant
+HAM:X005:582#v1,kapanis__sma20-iki-dip-s0582,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,6h,varyant
+HAM:X005:583#v1,kapanis__mmm-s0583,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1h,varyant
+HAM:X005:586#v1,kapanis__rsi2-3gun-dusen-s0586,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:594#v1,kapanis__rsi2-sma5-s0253,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:600#v1,kapanis__kumo-iz-s0600,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:606#v1,kapanis__aylik-sma10-rsi2-s0606,ÇIKAR,a,"13 sembol x ~5,5 yıl ≈ 70 sembol-yıl; 200 işlem için sembol başına yılda ≥2,9 işlem gerekir. Aylık bar (SMA 10 ay + RSI2): toplam ~860 aylık mum; yılda ~1 işlem/sembol → ~70.",1d,varyant
+HAM:X005:608#v1,kapanis__ma5-dusen-gunler-s0608,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:608#v2,kapanis__ma5-dusen-gunler-s0608,ÇIKAR,b,#v1 ile yalnız SMA 200↔220 farkı; aynı işlem yolu.,1d,varyant
+HAM:X005:611#v1,kapanis__pazartesi-dus-s0611,KOŞ,,Takvim kuralı (hisse kökenli) ama lider takvim kurallarını KOSULACAK kabul etmişti; işlem sayısı yeterli → KOŞ.,1d,varyant
+HAM:X005:621#v1,kapanis__tk-kesisim-don-s0621,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1h,varyant
+HAM:X005:625#v1,kapanis__icu-ma-s0625,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:626#v1,kapanis__vm-hma-s0626,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:630#v1,kapanis__va-skor-s0630,ÇIKAR,g,"Şablon-üretimli (LLM) kod havuzundan çok faktörlü skor (ağırlıklar 1,1/0,4/0,4 gerekçesiz), backtest kanıtı yok, emin_degil.",1h,varyant
+HAM:X005:631#v1,kapanis__aralik-kanal-s0631,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,5m,varyant
+HAM:X005:633#v1,kapanis__bb-donus-h4-s0633,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1h,varyant
+HAM:X005:634#v1,kapanis__ichimoku-bulut-kirilim-s0634,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1h,varyant
+HAM:X005:635#v1,kapanis__crsi2-s0635,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:638#v1,kapanis__rsi2-5-sma10-s0638,ÇIKAR,b,"X005:108'in parametre kopyası (RSI2≤5 + SMA200; yalnız çıkış SMA10/20 gün ve stop 2,5 ATR farkı).",1d,varyant
+HAM:X005:639#v1,kapanis__weinstein40-s0639,ÇIKAR,a,"13 sembol x ~5,5 yıl ≈ 70 sembol-yıl; 200 işlem için sembol başına yılda ≥2,9 işlem gerekir. Weinstein 40 haftalık SMA yukarı kesişi: yılda ~0,7/sembol, 40 hafta ısınma → ~40-50 işlem.",1d,varyant
+HAM:X005:640#v1,kapanis__macd525-uzaklik-s0640,KOŞ,,Sınırda (a): tahmini 110-170 işlem; belirsiz → KOŞ.,1d,varyant
+HAM:X005:649#v1,kapanis__keltner-durum-s0649,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:651#v1,kapanis__donchian-yuksek-dusuk-s0651,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:653#v1,kapanis__sd-donus-s0653,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:655#v1,kapanis__52h-zirve-kirilim-s0655,ÇIKAR,a,"13 sembol x ~5,5 yıl ≈ 70 sembol-yıl; 200 işlem için sembol başına yılda ≥2,9 işlem gerekir. Haftalık 52 hafta zirve kırılımı, +%300 hedef / 24 hafta dip çıkışı: yılda ~0,5/sembol → ~35 işlem (ayrıca ""yaklaşık"" işaretli).",1d,varyant
+HAM:X005:659#v1,kapanis__bb-adx-sma200-s0659,ÇIKAR,a,"13 sembol x ~5,5 yıl ≈ 70 sembol-yıl; 200 işlem için sembol başına yılda ≥2,9 işlem gerekir. kapanış>SMA200 VE ADX<20 VE kapanış<BB alt bandı: yılda ~0,9 olay/sembol → ~60-100 işlem.",1d,varyant
+HAM:X005:661#v1,kapanis__mcginley-sar-s0661,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:664#v1,kapanis__wavetrend-s0664,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:666#v1,kapanis__zirve-hacim-s0666,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:671#v1,kapanis__stok-5-5-3-s0671,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:672#v1,kapanis__var-pmax-s0672,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,5m,varyant
+HAM:X005:674#v1,kapanis__ha-wma-psar-macd-s0674,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,15m,varyant
+HAM:X005:676#v1,kapanis__alphatrend-s0676,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,4h,varyant
+HAM:X005:676#v2,kapanis__alphatrend-s0676,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:678#v1,kapanis__bb-kesisim-rsi-s0678,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,15m,varyant
+HAM:X005:679#v1,kapanis__bb-hacim-roi-s0679,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,15m,varyant
+HAM:X005:680#v1,kapanis__sma-rsi-durum-s0680,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1h,varyant
+HAM:X005:680#v2,kapanis__sma-rsi-durum-s0680,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:681#v1,kapanis__bb27-orta-s0681,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1h,varyant
+HAM:X005:682#v1,kapanis__tumzaman-zirve-s0682,KOŞ,,Sınırda (a): tahmini 110-170 işlem; belirsiz → KOŞ.,1d,varyant
+HAM:X005:683#v1,kapanis__sma20-donus-s0683,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:684#v1,kapanis__vwap3-oran-s0684,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,15m,varyant
+HAM:X005:684#v2,kapanis__vwap3-oran-s0684,ÇIKAR,d,"Kaynak 15m ve 30m veriyor; kanıt zayıf (1 aylık, maliyetsiz test; emin_degil) → tek TF (15m, #v1) yeter (g).",30m,varyant
+HAM:X005:693#v1,kapanis__bb-ust-al-s0693,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,4h,varyant
+HAM:X005:693#v2,kapanis__bb-ust-al-s0693,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:695#v1,kapanis__sma20-geri-onay-s0695,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:697#v1,kapanis__sma20-kanal-sar-s0697,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,4h,varyant
+HAM:X005:697#v2,kapanis__sma20-kanal-sar-s0697,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:698#v1,kapanis__yavas-stok-s0698,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,4h,varyant
+HAM:X005:698#v2,kapanis__yavas-stok-s0698,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:706#v1,kapanis__bb-ici-donus-s0706,KOŞ,,288 / 544#v2 ile aynı kuralın tek temsilcisi (kripto kaynağı).,1d,varyant
+HAM:X005:706#v2,kapanis__bb-ici-donus-s0706,ÇIKAR,a,"13 sembol x ~5,5 yıl ≈ 70 sembol-yıl; 200 işlem için sembol başına yılda ≥2,9 işlem gerekir. 2,5σ dışı kapanış → içeri dönüş; çıkış üst 2,5σ aynası: yılda ≤1,5 döngü → ~100. (c) Temsilci #v1 (2σ) kalır.",1d,varyant
+HAM:X005:706#v3,kapanis__bb-ici-donus-s0706,ÇIKAR,a,"13 sembol x ~5,5 yıl ≈ 70 sembol-yıl; 200 işlem için sembol başına yılda ≥2,9 işlem gerekir. 3σ dışı günlük kapanış çok nadir: yılda ~0,3/sembol → ~20-30 işlem.",1d,varyant
+HAM:X005:710#v1,kapanis__lr40-egim-s0710,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,4h,varyant
+HAM:X005:710#v2,kapanis__lr40-egim-s0710,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:711#v1,kapanis__lr20-kanal-s0711,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,4h,varyant
+HAM:X005:711#v2,kapanis__lr20-kanal-s0711,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:718#v1,kapanis__korelasyon-trend-s0718,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:724#v1,kapanis__st-yatay-kurulum-s0724,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:725#v1,kapanis__st-2-3-s0725,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:727#v1,kapanis__ha-tipik-ema-s0727,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,4h,varyant
+HAM:X005:727#v2,kapanis__ha-tipik-ema-s0727,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:730#v1,kapanis__obvm-s0730,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,4h,varyant
+HAM:X005:730#v2,kapanis__obvm-s0730,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:733#v1,kapanis__adx-sma50-s0733,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:737#v1,kapanis__aylik-sma8-s0737,ÇIKAR,a,"13 sembol x ~5,5 yıl ≈ 70 sembol-yıl; 200 işlem için sembol başına yılda ≥2,9 işlem gerekir. Aylık kapanış x SMA(8 ay) dur-ve-çevir: yılda ~1 çevirme/sembol → ~70 işlem.",1d,varyant
+HAM:X005:751#v1,kapanis__rsi-trend20-s0751,ÇIKAR,a,"13 sembol x ~5,5 yıl ≈ 70 sembol-yıl; 200 işlem için sembol başına yılda ≥2,9 işlem gerekir. ""Yükseliş trendi"" (zirveden %20 geri çekilmeyle biter) içinde günlük RSI14 30'u aşağı kesmeli: kriptoda RSI<30, %20 düşüşten önce nadiren gelir → yılda ≤0,5-1/sembol (~35-70).",1d,varyant
+HAM:X005:756#v1,kapanis__bb12-kesisim-s0756,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:758#v1,kapanis__rsi5-donus-s0758,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:759#v1,kapanis__zskor-sma-s0759,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:760#v1,kapanis__zskor-asiri-s0760,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:762#v1,kapanis__sma200-rsi3-s0762,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:763#v1,kapanis__rsi3-sma200-egim-s0763,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:764#v1,kapanis__dmi-stokastik-s0764,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:768#v1,kapanis__roc-bant-iki-yon-s0768,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:769#v1,kapanis__roc-bant-donus-s0769,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:771#v1,kapanis__stokastik-colby-s0771,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:772#v1,kapanis__stokastik-ema271-s0772,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:779#v1,kapanis__dinamik-kirilim-s0779,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:780#v1,kapanis__dual-thrust-utc-s0780,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1h,varyant
+HAM:X005:790#v1,kapanis__rsi-alfa-histerezis-s0790,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:793#v1,kapanis__macd-sinyal-oran-s0793,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:809#v1,kapanis__adx-di-cevir-s0809,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:812#v1,kapanis__macd-hedef25-stop5-s0812,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,30m,varyant
+HAM:X005:816#v1,kapanis__trend-rsi2-dip-s0816,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:817#v1,kapanis__rsi3-asiri-short-s0817,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:818#v1,kapanis__bb-rsi3-dip-s0818,ÇIKAR,a,"13 sembol x ~5,5 yıl ≈ 70 sembol-yıl; 200 işlem için sembol başına yılda ≥2,9 işlem gerekir. kapanış>SMA50>SMA150 iken kapanış ≤ BB(21,2) alt bandı VE RSI3<30: alt bandın SMA50 üstünde olması gerekir → yılda ~0,5/sembol (~35).",1d,varyant
+HAM:X005:819#v1,kapanis__ema21-geri-cekilme-s0819,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:820#v1,kapanis__rsi3-adx7-dip-s0820,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:822#v1,kapanis__sma50-geri-alim-s0822,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:824#v1,kapanis__powertrend-s0824,KOŞ,,Sınırda (a): tahmini 110-170 işlem; belirsiz → KOŞ.,1d,varyant
+HAM:X005:827#v1,kapanis__ibs-alt-bant-s0827,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:828#v1,kapanis__bb-alt-al-365g-s0828,ÇIKAR,b,X005:217 ile aynı; tek fark 365 günlük azami tutma (fiilen bağlamaz).,1d,varyant
+HAM:X005:829#v1,kapanis__bb-cevir-s0829,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:830#v1,kapanis__bb-alt-al-ust-sat-s0830,ÇIKAR,b,"X005:217 ile birebir (kapanış<alt bant al, kapanış>üst bant çık, ATRx3).",1d,varyant
+HAM:X005:831#v1,kapanis__rsi2-basit-s0831,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:832#v1,kapanis__rsi-esik-cevir-s0832,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:839#v1,kapanis__ema15-70-tolerans-s0839,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:840#v1,kapanis__sikisma-cikisi-s0840,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1h,varyant
+HAM:X005:853#v1,kapanis__z-ters-pozisyon-s0853,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:876#v1,kapanis__sma200-teyit-s0876,ÇIKAR,a,"13 sembol x ~5,5 yıl ≈ 70 sembol-yıl; 200 işlem için sembol başına yılda ≥2,9 işlem gerekir. 5 gün üst üste SMA200 üstü teyitli giriş: yılda ~1,2/sembol → ~85; ayrıca X005:395#7 (kapanış x SMA200) kuralının teyitli yakın kopyası.",1d,varyant
+HAM:X005:877#v1,kapanis__ma-kanali-s0877,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:878#v1,kapanis__techtrader-s0878,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:880#v1,kapanis__bb-kirilim-3sd-s0880,ÇIKAR,a,"13 sembol x ~5,5 yıl ≈ 70 sembol-yıl; 200 işlem için sembol başına yılda ≥2,9 işlem gerekir. Kapanış > SMA100 + 3σ kırılımı: yılda ≤1/sembol → ~50-70 işlem.",1d,varyant
+HAM:X005:896#v1,kapanis__momentum20-esik-s0896,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:802#v1,kapanis__rsi-williams-kapanis-s0802,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,4h,varyant
+HAM:X005:802#v2,kapanis__rsi-williams-kapanis-s0802,ÇIKAR,d,"Kaynak ""büyük olasılıkla dakika"" grafiği; 1d kaynağın TF'sinden en uzak ve RSI14<30 girişleriyle ~2/yıl/sembol (kapı 2 sınırı). 4h (#v1) kalır.",1d,varyant
+HAM:X008:EK#5#v1,kapanis__vwap-sapma-rsi-x8ek-5,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,5m,varyant
+HAM:X008:L17#3#v1,kapanis__bb-donus-x8l17-3,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,5m,varyant
+HAM:X008:L17#4#v1,kapanis__z-skor-donus-x8l17-4,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,5m,varyant
+HAM:X008:L15#2#v1,kapanis__sar-ema-supertrend-x8l15-2,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X008:L15#2#v2,kapanis__sar-ema-supertrend-x8l15-2,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,4h,varyant
+HAM:X008:L15#2#v3,kapanis__sar-ema-supertrend-x8l15-2,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1h,varyant
+HAM:X008:L15#2#v4,kapanis__sar-ema-supertrend-x8l15-2,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X008:L15#2#v5,kapanis__sar-ema-supertrend-x8l15-2,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,4h,varyant
+HAM:X008:L15#2#v6,kapanis__sar-ema-supertrend-x8l15-2,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1h,varyant
+HAM:X005:4#v1,kapanis__kdj-j-d-s0004,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:20#v1,kapanis__ft-strategy002-s0020,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,5m,varyant
+HAM:X005:21#v1,kapanis__ft-strategy003-s0021,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,5m,varyant
+HAM:X005:22#v1,kapanis__ft-strategy005-s0022,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,5m,varyant
+HAM:X005:60#v1,kapanis__kc-ema-trend-s0060,ÇIKAR,c,"Kaynak 4 TF öneriyor (15m|1h|4h|1d), ana TF yok; kayıt ayrıca ""yaklaşık"". İki orta TF (1h #v2, 4h #v3) temsilci kalır.",15m,varyant
+HAM:X005:60#v2,kapanis__kc-ema-trend-s0060,KOŞ,,"""Yaklaşık"" ama sapma küçük (bar içi seviye yerine kapanışta sınama); koşu bilgi verir.",1h,varyant
+HAM:X005:60#v3,kapanis__kc-ema-trend-s0060,KOŞ,,"""Yaklaşık"" ama sapma küçük (bar içi seviye yerine kapanışta sınama); koşu bilgi verir.",4h,varyant
+HAM:X005:60#v4,kapanis__kc-ema-trend-s0060,ÇIKAR,c,"Kaynak 4 TF öneriyor (15m|1h|4h|1d), ana TF yok; kayıt ayrıca ""yaklaşık"". İki orta TF (1h #v2, 4h #v3) temsilci kalır.",1d,varyant
+HAM:X005:79#v1,kapanis__supertrend-ikili-kademe-s0079,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,6h,varyant
+HAM:X005:400#v1,kapanis__macd-minmaks-s0400,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:401#v1,kapanis__roc60-minmaks-s0401,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:416#v1,kapanis__rsi60-minmaks-s0416,ÇIKAR,a,Günlük RSI(60) < 5 koşulu pratikte hiç oluşmaz (60 periyotluk RSI 20'nin altına bile nadiren iner) → ~0 işlem; kapı 2 imkânsız.,1d,varyant
+HAM:X005:436#v1,kapanis__macd-hist-rsi-atr-s0436,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:446#v1,kapanis__kama-geri-donus-s0446,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:447#v1,kapanis__rejim-adx-iz-s0447,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:573#v1,kapanis__ft-strategy004-s0573,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,5m,varyant
+HAM:X005:584#v1,kapanis__ema-dusuk-yuksek-s0584,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,4h,varyant
+HAM:X005:584#v2,kapanis__ema-dusuk-yuksek-s0584,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:629#v1,kapanis__bb-kurulum-macd-s0629,KOŞ,,"""Yaklaşık"" ama sapma küçük (bar içi seviye yerine kapanışta sınama); koşu bilgi verir.",5m,varyant
+HAM:X005:643#v1,kapanis__zskor-kismi-s0643,ÇIKAR,a,"13 sembol x ~5,5 yıl ≈ 70 sembol-yıl; 200 işlem için sembol başına yılda ≥2,9 işlem gerekir. z20≤-2 VE RSI<40 VE ADX<20 VE 52 hafta zirvesine ≤%30 uzaklık VE 52 hafta dibine >%5: yılda ~0,7/sembol → ~50 (iyimser 100). Ayrıca hisse tarama filtreleri (52 hafta, PER) kalıntısı.",1d,varyant
+HAM:X005:644#v1,kapanis__rsi-adx-kismi-s0644,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:699#v1,kapanis__bb3-agirlikli-s0699,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,4h,varyant
+HAM:X005:699#v2,kapanis__bb3-agirlikli-s0699,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:726#v1,kapanis__rsi-iki-bacak-haftalik-s0726,ÇIKAR,a,"13 sembol x ~5,5 yıl ≈ 70 sembol-yıl; 200 işlem için sembol başına yılda ≥2,9 işlem gerekir. Haftalık iki bacaklı RSI (17/5) + SMA40/10 hafta: 40 hafta ısınma, yılda ≤1,5-2 giriş/sembol → ~90-120 işlem; haftalık yapı.",1d,varyant
+HAM:X005:736#v1,kapanis__sma-bant-iz-s0736,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,4h,varyant
+HAM:X005:736#v2,kapanis__sma-bant-iz-s0736,KOŞ,,Ayrı fikir/kaynak; sonuçtan bağımsız güçlü eleme gerekçesi yok.,1d,varyant
+HAM:X005:879#v1,kapanis__flipper-kanca-s0879,KOŞ,,K2 sınıfıyla aynı hipotez: koşu listesinde tek kimlik (çift kayıt varsa G8 kaydı düşer).,1d,varyant
+HAM:X005:2,jesse_kaynak.py:DonchianS0002,KOŞ,,K2 (DonchianS0002) kimliği: koşu listesinde tek kayıt.,6h,mevcut
+HAM:X005:8,swing__ma-kesisim,KOŞ,,Mevcut sınıf + kaynak ayarı; güçlü eleme gerekçesi yok.,3h,mevcut
+HAM:X005:42,swing__rsi-asiri-donus,KOŞ,,Mevcut sınıf + kaynak ayarı; güçlü eleme gerekçesi yok.,1d,mevcut
+HAM:X005:47,swing__ma-kesisim,ÇIKAR,a,"13 sembol x ~5,5 yıl ≈ 70 sembol-yıl; 200 işlem için sembol başına yılda ≥2,9 işlem gerekir. SMA100/300 durum kuralı: 300 gün ısınma, yılda ~0,5 geçiş → ~25-40 işlem.",1d,mevcut
+HAM:X005:76,swing__donchian-kirilim,KOŞ,,"Arşiv sınıfıyla FARK_YOK ama lider ""kendi sonucu yok"" diyerek KOSULACAK yaptı → KOŞ.",1d,mevcut
+HAM:X005:116,dis__connors-etf,KOŞ,,Mevcut sınıf + kaynak ayarı; güçlü eleme gerekçesi yok.,1d,mevcut
+HAM:X005:119,swing__ma-kesisim,ÇIKAR,a,"13 sembol x ~5,5 yıl ≈ 70 sembol-yıl; 200 işlem için sembol başına yılda ≥2,9 işlem gerekir. SMA100/400: 400 gün ısınma, yılda <0,5 kesişim → ~15-30 işlem.",1d,mevcut
+HAM:X005:128,swing__ma-kesisim,ÇIKAR,a,"13 sembol x ~5,5 yıl ≈ 70 sembol-yıl; 200 işlem için sembol başına yılda ≥2,9 işlem gerekir. Haftalık EMA10/40 kesişimi: yılda <0,5/sembol → ~20-30 işlem.",1w,mevcut
+HAM:X005:162,dis__ibs-donus,KOŞ,,Mevcut sınıf + kaynak ayarı; güçlü eleme gerekçesi yok.,1d,mevcut
+HAM:X005:178,dis__ust-tf-ma-rsi-momentum,KOŞ,,Mevcut sınıf + kaynak ayarı; güçlü eleme gerekçesi yok.,5m,mevcut
+HAM:X005:184,swing__macd-sinyal,KOŞ,,Mevcut sınıf + kaynak ayarı; güçlü eleme gerekçesi yok.,1d,mevcut
+HAM:X005:193,swing__ma-kesisim,ÇIKAR,a,"13 sembol x ~5,5 yıl ≈ 70 sembol-yıl; 200 işlem için sembol başına yılda ≥2,9 işlem gerekir. SMA20/120 long kesişimi (yalnız kesişim olayında giriş): yılda ~1,3/sembol → ~90.",1d,mevcut
+HAM:X005:194,swing__macd-sinyal,KOŞ,,Mevcut sınıf + kaynak ayarı; güçlü eleme gerekçesi yok.,1d,mevcut
+HAM:X005:196#a1,dis__rsrs-egim-esigi,KOŞ,,Mevcut sınıf + kaynak ayarı; güçlü eleme gerekçesi yok.,1d,mevcut
+HAM:X005:196#a2,dis__rsrs-egim-esigi,KOŞ,,Mevcut sınıf + kaynak ayarı; güçlü eleme gerekçesi yok.,1d,mevcut
+HAM:X005:245,v3__volatilite-kirilim-k05,KOŞ,,Mevcut sınıf + kaynak ayarı; güçlü eleme gerekçesi yok.,1h,mevcut
+HAM:X005:265,swing__ma-kesisim,KOŞ,,Mevcut sınıf + kaynak ayarı; güçlü eleme gerekçesi yok.,1d,mevcut
+HAM:X005:269,swing__ma-kesisim,ÇIKAR,b,Kapanış x EMA50 long/flat: X005:395#1 (kapanış x SMA50) ile yalnız MA tipi farkı.,1d,mevcut
+HAM:X005:270#a1,swing__ma-kesisim,KOŞ,,Mevcut sınıf + kaynak ayarı; güçlü eleme gerekçesi yok.,1d,mevcut
+HAM:X005:270#a2,swing__ma-kesisim,KOŞ,,Sınırda (a): EMA25/50 long ~2/yıl/sembol ≈ 140; belirsiz → KOŞ.,1d,mevcut
+HAM:X005:270#a3,swing__ma-kesisim,ÇIKAR,a,"13 sembol x ~5,5 yıl ≈ 70 sembol-yıl; 200 işlem için sembol başına yılda ≥2,9 işlem gerekir. EMA50/100 long kesişimi: yılda ~1-1,5/sembol → ~70-100 (ayrıca X005:307 ile aynı ayar).",1d,mevcut
+HAM:X005:270#a4,swing__ma-kesisim,ÇIKAR,a,"13 sembol x ~5,5 yıl ≈ 70 sembol-yıl; 200 işlem için sembol başına yılda ≥2,9 işlem gerekir. EMA100/200 long kesişimi: yılda ~0,6/sembol → ~40.",1d,mevcut
+HAM:X005:293,swing__supertrend-psar,KOŞ,,Mevcut sınıf + kaynak ayarı; güçlü eleme gerekçesi yok.,1d,mevcut
+HAM:X005:307#a1,swing__ma-kesisim,ÇIKAR,a,"13 sembol x ~5,5 yıl ≈ 70 sembol-yıl; 200 işlem için sembol başına yılda ≥2,9 işlem gerekir. EMA50/100 long: ~70-100 işlem.",1d,mevcut
+HAM:X005:307#a2,swing__ma-kesisim,ÇIKAR,a,"13 sembol x ~5,5 yıl ≈ 70 sembol-yıl; 200 işlem için sembol başına yılda ≥2,9 işlem gerekir. EMA50/200 long (altın haç): yılda ~1,1/sembol → ~70.",1d,mevcut
+HAM:X005:307#a3,swing__ma-kesisim,ÇIKAR,a,"13 sembol x ~5,5 yıl ≈ 70 sembol-yıl; 200 işlem için sembol başına yılda ≥2,9 işlem gerekir. EMA100/200 long: ~40 işlem.",1d,mevcut
+HAM:X005:318,dis__connors-etf,KOŞ,,Mevcut sınıf + kaynak ayarı; güçlü eleme gerekçesi yok.,1d,mevcut
+HAM:X005:355,swing__ma-kesisim,KOŞ,,"Sınırda (a): SMA20/50 long ~2/yıl/sembol ≈ 110-150; lider kararıyla eklendi, belirsiz → KOŞ.",1d,mevcut
+HAM:X005:383,swing__rsi-asiri-donus,ÇIKAR,a,"13 sembol x ~5,5 yıl ≈ 70 sembol-yıl; 200 işlem için sembol başına yılda ≥2,9 işlem gerekir. Haftalık RSI(15)<30: yılda ~0,3/sembol → ~20 işlem.",1w,mevcut
+HAM:X005:389,swing__ma-kesisim,ÇIKAR,a,"13 sembol x ~5,5 yıl ≈ 70 sembol-yıl; 200 işlem için sembol başına yılda ≥2,9 işlem gerekir. SMA100/200 iki yön: yılda ~0,8-1,2 çevirme/sembol → ~55-85.",1d,mevcut
+HAM:X005:392,dis__sma200-ls,ÇIKAR,b,"X005:395#7 (kapanış x SMA200 long/flat, bant 0) ile birebir; tek kimlik 395#7.",1d,mevcut
+HAM:X005:396#a1,swing__donchian-kirilim,ÇIKAR,a,"13 sembol x ~5,5 yıl ≈ 70 sembol-yıl; 200 işlem için sembol başına yılda ≥2,9 işlem gerekir. Donchian L=50/150/200 günlük kırılım, çıkış aynı L günlük dip (long): L=50 için yılda ~1,3/sembol (~90; arşivde koşulan 55 ayarının da yakın kopyası), 150/200 için <0,5 → kapı 2 geçilemez.",1d,mevcut
+HAM:X005:396#a2,swing__donchian-kirilim,ÇIKAR,a,"13 sembol x ~5,5 yıl ≈ 70 sembol-yıl; 200 işlem için sembol başına yılda ≥2,9 işlem gerekir. Donchian L=50/150/200 günlük kırılım, çıkış aynı L günlük dip (long): L=50 için yılda ~1,3/sembol (~90; arşivde koşulan 55 ayarının da yakın kopyası), 150/200 için <0,5 → kapı 2 geçilemez.",1d,mevcut
+HAM:X005:396#a3,swing__donchian-kirilim,ÇIKAR,a,"13 sembol x ~5,5 yıl ≈ 70 sembol-yıl; 200 işlem için sembol başına yılda ≥2,9 işlem gerekir. Donchian L=50/150/200 günlük kırılım, çıkış aynı L günlük dip (long): L=50 için yılda ~1,3/sembol (~90; arşivde koşulan 55 ayarının da yakın kopyası), 150/200 için <0,5 → kapı 2 geçilemez.",1d,mevcut
+HAM:X005:396#a4,swing__donchian-kirilim,ÇIKAR,a,"13 sembol x ~5,5 yıl ≈ 70 sembol-yıl; 200 işlem için sembol başına yılda ≥2,9 işlem gerekir. Donchian L=50/150/200 günlük kırılım, çıkış aynı L günlük dip (long): L=50 için yılda ~1,3/sembol (~90; arşivde koşulan 55 ayarının da yakın kopyası), 150/200 için <0,5 → kapı 2 geçilemez.",1d,mevcut
+HAM:X005:396#a5,swing__donchian-kirilim,ÇIKAR,a,"13 sembol x ~5,5 yıl ≈ 70 sembol-yıl; 200 işlem için sembol başına yılda ≥2,9 işlem gerekir. Donchian L=50/150/200 günlük kırılım, çıkış aynı L günlük dip (long): L=50 için yılda ~1,3/sembol (~90; arşivde koşulan 55 ayarının da yakın kopyası), 150/200 için <0,5 → kapı 2 geçilemez.",1d,mevcut
+HAM:X005:396#a6,swing__donchian-kirilim,ÇIKAR,a,"13 sembol x ~5,5 yıl ≈ 70 sembol-yıl; 200 işlem için sembol başına yılda ≥2,9 işlem gerekir. Donchian L=50/150/200 günlük kırılım, çıkış aynı L günlük dip (long): L=50 için yılda ~1,3/sembol (~90; arşivde koşulan 55 ayarının da yakın kopyası), 150/200 için <0,5 → kapı 2 geçilemez.",1d,mevcut
+HAM:X005:481,dis__sma200-ls,KOŞ,,Mevcut sınıf + kaynak ayarı; güçlü eleme gerekçesi yok.,1d,mevcut
+HAM:X005:483,swing__macd-sinyal,ÇIKAR,b,"X005:194 ile birebir aynı sınıf+ayar (swing__macd-sinyal 12/26/9, long, ATRx3).",1d,mevcut
+HAM:X005:493,swing__dar-aralik-kirilim,KOŞ,,Mevcut sınıf + kaynak ayarı; güçlü eleme gerekçesi yok.,1d,mevcut
+HAM:X005:501,dis__ay-donumu,KOŞ,,Arşivde dis__ay-donumu (giris_kalan 1) kendi sonucuyla elendi; bu ayar tutmayı 4 gün uzatıyor (küçük değil) → KOŞ.,1d,mevcut
+HAM:X005:607#a1,swing__donchian-kirilim,KOŞ,,Mevcut sınıf + kaynak ayarı; güçlü eleme gerekçesi yok.,1d,mevcut
+HAM:X005:607#a2,swing__donchian-kirilim,KOŞ,,Mevcut sınıf + kaynak ayarı; güçlü eleme gerekçesi yok.,1d,mevcut
+HAM:X005:620,scalp__supertrend-psar,KOŞ,,Mevcut sınıf + kaynak ayarı; güçlü eleme gerekçesi yok.,15m,mevcut
+HAM:X005:624,swing__donchian-kirilim,ÇIKAR,b,X005:607 (Donchian 20/20 iki yön) ile yalnız stop modu farkı (ATR3 ↔ kanal); zaten bagli_kimlik ile aynı sınıf ayarına bağlı.,1d,mevcut
+HAM:X005:650,dis__roc20-ls,KOŞ,,Mevcut sınıf + kaynak ayarı; güçlü eleme gerekçesi yok.,1d,mevcut
+HAM:X005:660,swing__donchian-kirilim,KOŞ,,Mevcut sınıf + kaynak ayarı; güçlü eleme gerekçesi yok.,5m,mevcut
+HAM:X005:670,swing__rsi-momentum-esik,KOŞ,,Mevcut sınıf + kaynak ayarı; güçlü eleme gerekçesi yok.,1d,mevcut
+HAM:X005:690,swing__ma-kesisim,KOŞ,,Mevcut sınıf + kaynak ayarı; güçlü eleme gerekçesi yok.,1d,mevcut
+HAM:X005:705,dis__ma-dizilim-5-10-30,KOŞ,,Mevcut sınıf + kaynak ayarı; güçlü eleme gerekçesi yok.,1d,mevcut
+HAM:X005:757,swing__rsi-asiri-donus,KOŞ,,Mevcut sınıf + kaynak ayarı; güçlü eleme gerekçesi yok.,1d,mevcut
+HAM:X005:781,dis__hp-filtre-ma,KOŞ,,Mevcut sınıf + kaynak ayarı; güçlü eleme gerekçesi yok.,1d,mevcut
+HAM:X005:792,swing__ma-kesisim,KOŞ,,Mevcut sınıf + kaynak ayarı; güçlü eleme gerekçesi yok.,1d,mevcut
+HAM:X005:838,swing__donchian-kirilim,ÇIKAR,a,"13 sembol x ~5,5 yıl ≈ 70 sembol-yıl; 200 işlem için sembol başına yılda ≥2,9 işlem gerekir. Donchian 100 iki yön dur-ve-çevir: yılda ~1,2 çevirme/sembol → ~85.",1d,mevcut
+HAM:X005:842,swing__ma-kesisim,KOŞ,,Sınırda (a): SMA42/252 iki yön ~2 çevirme/yıl ≈ 120-140; belirsiz → KOŞ.,1d,mevcut
+HAM:X005:843,dis__roc20-ls,KOŞ,,Mevcut sınıf + kaynak ayarı; güçlü eleme gerekçesi yok.,1d,mevcut
+HAM:X005:844,dis__roc20-ls,KOŞ,,Mevcut sınıf + kaynak ayarı; güçlü eleme gerekçesi yok.,1d,mevcut
+HAM:X005:874,swing__donchian-kirilim,ÇIKAR,a,"13 sembol x ~5,5 yıl ≈ 70 sembol-yıl; 200 işlem için sembol başına yılda ≥2,9 işlem gerekir. Donchian 250 long: 250 gün ısınma, yılda <0,5 kırılım → ~20-30.",1d,mevcut
+HAM:X005:875,swing__donchian-kirilim,ÇIKAR,a,"13 sembol x ~5,5 yıl ≈ 70 sembol-yıl; 200 işlem için sembol başına yılda ≥2,9 işlem gerekir. Donchian 100 long: yılda ~0,8/sembol → ~55.",1d,mevcut
+HAM:X005:894,dis__ibs-donus,KOŞ,,Mevcut sınıf + kaynak ayarı; güçlü eleme gerekçesi yok.,1d,mevcut
+HAM:X005:905,swing__ma-kesisim,KOŞ,,Mevcut sınıf + kaynak ayarı; güçlü eleme gerekçesi yok.,15m,mevcut
