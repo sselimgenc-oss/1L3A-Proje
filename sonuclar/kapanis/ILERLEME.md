@@ -153,3 +153,13 @@ Tablolardaki `INCELEME_BEKLIYOR` bir hüküm değildir. `kanit` sütununda eski 
 - **TUTARSIZLIK (çözülecek):** çok kollu NFI/BigZ/Combined aileleri g9_a'da KOSULACAK (emin_degil=evet), g9_b'de KURAL_YOK "tek kural değil". Tek politika gerek; Fable hakem görüşü + lider kararı, sonra iki parti aynı kurala çekilecek (sonuç öncesi, veri görülmedi).
 - kul_k4_g9_c (148): 10/10 örnek kaynak kodla uyumlu (ema.py, BuyOnly.py doğrulandı). FARK_YOK 0; 776 (EMA50/200 1d) sınıf ayarıyla aynı sinyal, yalnız -%15 stop farkı → Fable'a sorulacak. Çok kollu NFI/Nostalgia burada da KURAL_YOK (g9_b ile aynı, g9_a ile çelişkili).
 - 7 kul_* partisi bitti (970 satır). Sıradaki: Fable bağımsız denetim (kullanıcı isteği).
+
+### DERİN GEÇİŞ — 906'lık trend/ortalamaya dönüş listesi (kullanıcı: "hiçbir kod atlanmayacak")
+906 satırın kapanıştaki durumu tarandı: 602 satır kapanışta (220 KOSULACAK, 213 KURAL_YOK, 90 INCELEME_BEKLIYOR, 49 EVREN_DISI, 19 VERI_YOK, 5 YASAK, 5 FARK_YOK, 1 TEKRAR); 304 satır kapanışa HİÇ girmemişti (eski defter: 221 H "evrende uygulanamaz", 55 KOD "arşivde var", 28 F "yasak" — hiçbiri doğrulanmamıştı).
+Yeni partiler (girdi/ altında; çıktı ara/<parti>.csv):
+| parti | satır | iş |
+|---|---|---|
+| derin_bekleyen | 90 | K3 kararı verilmemiş satırlar |
+| derin_hkf_a/b/c | 101/101/102 | H/KOD/F etiketlerini yeniden yargıla (KOD → FARK_YOK prosedürü) |
+| derin_kod_a/b | 64/64 | KURAL_YOK ama kaynakta kod var → kodu açıp eksik parametreyi ara |
+Kalan 85 KURAL_YOK (kaynakta kod yok) için seçenek kullanıcıya soruldu.
