@@ -1,6 +1,6 @@
 # Kapanış turu ilerleme kaydı
 
-Son kontrol: 2026-11-13 11:39 UTC. **Görev bitmedi; gerçek piyasa verisi koşulmadı.** Bu dosya oturum devam noktasıdır.
+Son kontrol: 2026-11-13 12:02 UTC. **Görev bitmedi; gerçek piyasa verisi koşulmadı.** Bu dosya oturum devam noktasıdır.
 
 ## Değişmez ön kayıt
 
@@ -13,7 +13,7 @@ Son kontrol: 2026-11-13 11:39 UTC. **Görev bitmedi; gerçek piyasa verisi koşu
 
 | Katman | Girdi | Karar tablosu | Son karar | Kod/koşu | Durum |
 |---|---:|---:|---:|---|---|
-| K1 | 48 = 26 v3 + 18 ek ayar + 4 teknik hata | 48 | 2 kaynak/evren ret; 46 açık | 18 ayar okuyucusu kuruldu; 26 v3 kartı ve 18 ayar kaynağı satıra bağlandı; dört teknik hata için TF seçildi ve sentetik sinyal testi geçti; koşu bağı yok | sürüyor |
+| K1 | 48 = 26 v3 + 18 ek ayar + 4 teknik hata | 48 | 3 kaynak/evren ret; 45 açık | 18 ayar okuyucusu kuruldu; 26 v3 kartı ve 18 ayar kaynağı satıra bağlandı; dört teknik hata için TF seçildi ve sentetik sinyal testi geçti; koşu bağı yok | sürüyor |
 | K2 | 7 kaynak biçimi (saatlik, T61, T21, S0002, S0005, Ichimoku, Argus); S0083 gibi alt kaynaklar K4'te | ayrı karar tablosu yok | 0 | S0002 ve S0005 yeni sınıfları + sentetik test | sürüyor |
 | K3 | 1.816 = 161 E + 35 belirsiz + 1.620 diğer D | 1.816 | 0 | kaynak uygunluğu incelenmedi | başlamadı |
 | K4 | 2.204 `benzer_hedef` dolu D (K2'ye ayrılan 5 dahil) | 2.204 | 0 | kaynak ↔ arşiv kodu tek tek karşılaştırılmadı | başlamadı |
@@ -32,7 +32,9 @@ Tablolardaki `INCELEME_BEKLIYOR` bir hüküm değildir. `kanit` sütununda eski 
 - `AYAR:dis__funding-carry:d11j:funding-pozitif-short:esik0_short` **KURAL_YOK**: `github_g3_cerceve.csv:24` pozitif funding’de short açma API örneği; kaynak çıkışı yok. JSON’daki 16 saat çıkışı kaynakta yazmıyor.
 - `KOD:v3__ters-fvg-nq-long` **EVREN_DISI**: NQ 5m/15m ve NQ puan tamponu gerekir; ön kayıt evreninde NQ yok.
 - V2 teknik hatalı dört kod için eski 1d üst-TF hatasını önleyen TF kaydı: Norn 4h, SHM 4h, önceki 4s kırılım 4h, KGT 1h; hepsi v2 kripto 13 sembol. Dört sınıf 1.100 sentetik mumla sinyal üretti, hiçbir giriş stopsuz değil (`testler/test_kapanis_k1_teknik.py`, 4 geçti). Kaynak/çıkış uyumu ve hesap koşu bağı hâlâ açık.
-- Kalan 46 satırın kaynak biçimi/uyarlama ve araştırma hesabı koşu bağı henüz kesinleşmedi. Özellikle eski tek grafik Donchian ansamblı, kaynak biçiminden farklı olduğu için doğrudan koşuya alınmaz; yeni portföy biçimiyle sonuç/kimlik bağı denetlenir.
+- `v3__momentum-sifir-kesisim` birincil `ChandanP001/Quant-foundations` notebook commit `c222dd2` ile doğrulandı: 20 günlük yüzde getiri, long/flat, ertesi gün. `v3__z-skor-karsit` için `NadirAliOfficial/contrarian-strategy` commit `9034fce` README ve `utils.py` 20 günlük getiri z-skoru ±2/sıfır kuralını veriyor; aynı deponun `script.py` dosyası ise başka, DCA yapan yasak bir kod ve kullanılmaz. Bu iki sınıfın 1d/kripto uyarlama izi var; koşu bağı açık.
+- `v3__saatlik-asiri-tepki` **KURAL_YOK**: `kod_kontrol_tur8.csv:38` ve `kaynak_dogrulama_tur4.csv:108` yalnız özet doğrulamış; eşik/tutuş kaynakta yok ve birincil metin bu ortamda 403. Mevcut 2σ/48s/1s değerleri bizim varsayımımız.
+- Kalan 45 satırın kaynak biçimi/uyarlama ve araştırma hesabı koşu bağı henüz kesinleşmedi. Özellikle eski tek grafik Donchian ansamblı, kaynak biçiminden farklı olduğu için doğrudan koşuya alınmaz; yeni portföy biçimiyle sonuç/kimlik bağı denetlenir.
 
 ## İlk kaynak denetiminde bulunan ayrımlar
 
@@ -56,7 +58,7 @@ Tablolardaki `INCELEME_BEKLIYOR` bir hüküm değildir. `kanit` sütununda eski 
 
 ## Devam sırası
 
-1. K1'in kalan 46 satırına kaynak TF, evren, ayar ve çalıştırılabilirlik kararı ver. 18 ayarın okuyucusunu koşuya bağla; 1h portföy ve araştırma risk/kill hesabını canlı limitlere dokunmadan çöz. K5'in 621 iz akıbetini ana K1/K3/K4 kararına bağla.
+1. K1'in kalan 45 satırına kaynak TF, evren, ayar ve çalıştırılabilirlik kararı ver. 18 ayarın okuyucusunu koşuya bağla; 1h portföy ve araştırma risk/kill hesabını canlı limitlere dokunmadan çöz. K5'in 621 iz akıbetini ana K1/K3/K4 kararına bağla.
 2. K2 kısa listesinin kaynak metnini/kodunu doğrula; yalnız tam kuralı belli biçimleri kodla, belirsizleri kanıtla dışla.
 3. K3'ün 1.816 satırını kanıtla karara bağla.
 4. K4'ün 2.204 satırında arşiv kodunu açıp anlamlı farkı denetle; K5 bağlarının nihai akıbetini de kapat. Bütün katmanlarda girdi = karar satırı kontrolü yap.
