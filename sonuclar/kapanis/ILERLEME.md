@@ -22,6 +22,19 @@ Ajan çıktısı ham haliyle `ara/`'ya yazılır; lider denetler, sonra `k*_kara
 | D: k4_p02..p10 | — | bekliyor |
 | E: K5, F: koşu listesi, G: koşu betiği, H: pytest, rapor | — | bekliyor |
 
+### Anlık özet (2026-11-13, lider) — sayı kontrolü
+| Katman | Girdi | Karar verilen (denetlendi) | KOSULACAK | Kalan |
+|---|---:|---:|---:|---:|
+| K1 | 48 | 48 | 19 (5 YENI sınıf) | 0 |
+| K2 | 7 biçim → 18 hipotez satırı (T21 = 10) | 18 | 16 (15 YENI, kodlandı: `motor/strateji/kapanis/k2_kaynak.py`) | 0 |
+| K3 | 1.816 | 908 (p01–p04) | 53 (p01: 52 YENI, p03: 1 mevcut sınıf+ayar) | 908 (p05–p08 sürüyor) |
+| K4 | 2.204 | 0 | — | 2.204 (p01 sürüyor, p02–p10 bekliyor) |
+| K5 | 706 | 85 ayar izi kararlı (Codex) | — | 621 (K1/K3/K4 bitince bağlanacak) |
+Denetlenen toplam 974 karar: KURAL_YOK 627, KOSULACAK 88, VERI_YOK 83, ML 69, LOOKAHEAD 62, EVREN_DISI 34, YASAK 9, TEKRAR 2.
+Kod: portföy araştırma hesabı (`motor/arastirma/kapanis/portfoy.py`), K2 sınıfları, Rsi32 testleri hazır; kapanış testleri 44/44 geçti.
+Henüz yok: KOSULACAK+YENI sınıfların kodu (K1 5 + K3 52 + K4 ?), K5 bağlama, koşu listesi (F), `araclar/kapanis_kosu.py` (G), tam pytest (H), nihai rapor.
+Sıradaki: kalan K3/K4 partileri → YENI sınıf kod partileri (ajan başına 3–6 sınıf, ayrı dosyalar) → K5 → koşu listesi dondurma.
+
 Denetim günlüğü (parti, örneklem, hata, aksiyon):
 - k3_p02 (227: KURAL_YOK 201, VERI_YOK 15, LOOKAHEAD 4, EVREN_DISI 3, YASAK 2, ML 2): `ara/denetim.py k3_p02 12 20261113` → 12/12 kaynak metniyle tutarlı (şablon/başlık/koruma modülü/kapalı kaynak). 1 tartışmalı: H001:80 (consensus oyları açık `technical` kütüphanesinde tanımlı olabilir). Kabul.
 - B portföy hesabı: kod okundu (SERT_LIMITLER geçici bağlam yöneticisiyle, finally geri yükler; dönem sonrası veri HoldoutSizintisi). Lider kararları ön kayıt eki 2'de (portföy toplam stop riski %7,5, kapılar ×2, v2 portföy kapı karşılıkları).
