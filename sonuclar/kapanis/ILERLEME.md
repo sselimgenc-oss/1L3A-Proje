@@ -210,3 +210,4 @@ Lider kararları:
 - derin_erisim `neden` alanı EVREN_DISI satırlarında asıl gerekçeyle düzeltilecek; 742 derin_kod_b bilgisi korunacak.
 - Kesitsel rotasyon/pairs (politika 4): Fable "EVREN_DISI kalsın; istenirse ayrı ön kayıt ekiyle dar katman" diyor → kullanıcıya soruldu.
 - Kullanıcı kararı (politika 4): kesitsel rotasyon ve pairs kuralları EVREN_DISI kalır; ek katman açılmaz.
+- duzeltme_fable2.csv (49 satır, yalnız değişen kayıtlar; birleştirmede en yüksek öncelik): lider kararları uygulandı; 18 satırın 15'i + 51, 84, 366, 802, 372 → K6; 376/377 → EVREN_DISI; FARK_YOK 5 → KOSULACAK; 446 → KOSULACAK (sıralama atıldı, 816/818 ile aynı); 496/728 → KURAL_YOK.
