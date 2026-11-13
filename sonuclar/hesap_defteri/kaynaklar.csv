@@ -1,0 +1,492 @@
+kaynak_id,grup,yol,tur,satir_veya_kayit,git_ilk_ekleme,not
+K001,G1_KITAP,veri/kartlar_ham/daytrade/20_Trading_Stratejisi_28_sayfa.json,birincil:kitap_kartlari,1,2026-11-09,PDF başına bir kart dosyası
+K002,G1_KITAP,veri/kartlar_ham/daytrade/401k_Day_Trading_-_Dakikalar_İçinde_Dalgalı_Bir_Piyasadan_Nakit_Kazanma_Sanatı_-_Richard_S.json,birincil:kitap_kartlari,1,2026-11-09,PDF başına bir kart dosyası
+K003,G1_KITAP,veri/kartlar_ham/daytrade/51_Trading_Stratejisi_433_sayfa.json,birincil:kitap_kartlari,51,2026-11-06,PDF başına bir kart dosyası
+K004,G1_KITAP,veri/kartlar_ham/daytrade/Algoritmik_Trading_-_Edward_Leshik_ve_Jane_Cralle_229_sayfa.json,birincil:kitap_kartlari,1,2026-11-09,PDF başına bir kart dosyası
+K005,G1_KITAP,veri/kartlar_ham/daytrade/Algoritmik_Trading_Stratejileri_-_Scotty_Ratford_83_sayfa.json,birincil:kitap_kartlari,6,2026-11-09,PDF başına bir kart dosyası
+K006,G1_KITAP,veri/kartlar_ham/daytrade/Algoritmik_Trading_için_Makine_Öğrenimi_-_Stefan_Jansen_-_Orijinal_1161_sayfa.json,birincil:kitap_kartlari,1,2026-11-09,PDF başına bir kart dosyası
+K007,G1_KITAP,veri/kartlar_ham/daytrade/Day_Trade_Forex_Sistemi_44_sayfa.json,birincil:kitap_kartlari,5,2026-11-09,PDF başına bir kart dosyası
+K008,G1_KITAP,veri/kartlar_ham/daytrade/Day_Trader_Pro_-_Duarte_Maza_116_sayfa.json,birincil:kitap_kartlari,2,2026-11-06,PDF başına bir kart dosyası
+K009,G1_KITAP,veri/kartlar_ham/daytrade/Day_Trading_-_Ann_C_Logue_360_sayfa.json,birincil:kitap_kartlari,3,2026-11-09,PDF başına bir kart dosyası
+K010,G1_KITAP,veri/kartlar_ham/daytrade/Day_Trading_-_Carole_Christensen_88_sayfa.json,birincil:kitap_kartlari,7,2026-11-09,PDF başına bir kart dosyası
+K011,G1_KITAP,veri/kartlar_ham/daytrade/Day_Trading_-_David_Bennett_148_sayfa.json,birincil:kitap_kartlari,1,2026-11-09,PDF başına bir kart dosyası
+K012,G1_KITAP,veri/kartlar_ham/daytrade/Day_Trading_-_Don_Charles_117_sayfa.json,birincil:kitap_kartlari,4,2026-11-09,PDF başına bir kart dosyası
+K013,G1_KITAP,veri/kartlar_ham/daytrade/Day_Trading_-_Douglas_Allen_472_sayfa.json,birincil:kitap_kartlari,7,2026-11-09,PDF başına bir kart dosyası
+K014,G1_KITAP,veri/kartlar_ham/daytrade/Day_Trading_-_Hızlı_Başlangıç_Kılavuzu_-_Troy_Noonan_518_sayfa.json,birincil:kitap_kartlari,6,2026-11-09,PDF başına bir kart dosyası
+K015,G1_KITAP,veri/kartlar_ham/daytrade/Day_Trading_-_Justin_Kuepper_196_sayfa.json,birincil:kitap_kartlari,4,2026-11-09,PDF başına bir kart dosyası
+K016,G1_KITAP,veri/kartlar_ham/daytrade/Day_Trading_-_Mark_Vogel_132_sayfa.json,birincil:kitap_kartlari,1,2026-11-09,PDF başına bir kart dosyası
+K017,G1_KITAP,veri/kartlar_ham/daytrade/Day_Trading_-_Rajiv_LB_Roy_71_sayfa.json,birincil:kitap_kartlari,12,2026-11-09,PDF başına bir kart dosyası
+K018,G1_KITAP,veri/kartlar_ham/daytrade/Day_Trading_101_-_Joe_Duarte_215_sayfa.json,birincil:kitap_kartlari,1,2026-11-09,PDF başına bir kart dosyası
+K019,G1_KITAP,veri/kartlar_ham/daytrade/Day_Trading_Forex_-_Odin_Velez_85_sayfa.json,birincil:kitap_kartlari,6,2026-11-09,PDF başına bir kart dosyası
+K020,G1_KITAP,veri/kartlar_ham/daytrade/Day_Trading_Oyununu_Kazanmak_-_Thomas_L_Busby_-_Patsy_Busby_Dow_188_sayfa.json,birincil:kitap_kartlari,1,2026-11-09,PDF başına bir kart dosyası
+K021,G1_KITAP,veri/kartlar_ham/daytrade/Day_Trading_ve_Pivotlar_-_Tranquil_Trader_233_sayfa.json,birincil:kitap_kartlari,4,2026-11-09,PDF başına bir kart dosyası
+K022,G1_KITAP,veri/kartlar_ham/daytrade/Day_Trading_ve_Swing_Trading_-_Kathy_Lien_278_sayfa.json,birincil:kitap_kartlari,6,2026-11-09,PDF başına bir kart dosyası
+K023,G1_KITAP,veri/kartlar_ham/daytrade/En_Başarılı_10_Price_Action_Modeli_-_Al_Brooks_24_sayfa.json,birincil:kitap_kartlari,8,2026-11-09,PDF başına bir kart dosyası
+K024,G1_KITAP,veri/kartlar_ham/daytrade/Forex_Day_Trading_-_Gavin_Wallace_69_sayfa.json,birincil:kitap_kartlari,5,2026-11-09,PDF başına bir kart dosyası
+K025,G1_KITAP,veri/kartlar_ham/daytrade/Günlük_Alım_Satım_ve_Swing_Trading_için_Hisse_Senedi_Formasyonları_-_Barry_Rudd_-_Orijinal.json,birincil:kitap_kartlari,4,2026-11-09,PDF başına bir kart dosyası
+K026,G1_KITAP,veri/kartlar_ham/daytrade/Kendi_Day_Trading_İmparatorluğunuzu_Kurmak_İçin_İpuçları_-_Issac_Derr_112_sayfa.json,birincil:kitap_kartlari,8,2026-11-06,PDF başına bir kart dosyası
+K027,G1_KITAP,veri/kartlar_ham/daytrade/Price_Action_Algo_Konsepti_232_sayfa.json,birincil:kitap_kartlari,3,2026-11-09,PDF başına bir kart dosyası
+K028,G1_KITAP,veri/kartlar_ham/daytrade/Price_Action_Trading_Ranges_-_Al_Brooks_572_sayfa.json,birincil:kitap_kartlari,13,2026-11-09,PDF başına bir kart dosyası
+K029,G1_KITAP,veri/kartlar_ham/daytrade/Price_Action_Trading_Ranges_-_Al_Brooks_572_sayfa__tam_brooks_ranges_1.json,birincil:kitap_kartlari,3,2026-11-09,PDF başına bir kart dosyası
+K030,G1_KITAP,veri/kartlar_ham/daytrade/Price_Action_Trading_Ranges_-_Al_Brooks_572_sayfa__tam_brooks_ranges_2.json,birincil:kitap_kartlari,6,2026-11-09,PDF başına bir kart dosyası
+K031,G1_KITAP,veri/kartlar_ham/daytrade/Price_Action_Trading_Ranges_-_Al_Brooks_572_sayfa__tam_brooks_ranges_3.json,birincil:kitap_kartlari,10,2026-11-09,PDF başına bir kart dosyası
+K032,G1_KITAP,veri/kartlar_ham/daytrade/Price_Action_Trends_-_Al_Brooks_439_sayfa.json,birincil:kitap_kartlari,10,2026-11-09,PDF başına bir kart dosyası
+K033,G1_KITAP,veri/kartlar_ham/daytrade/Price_Action_Trends_-_Al_Brooks_439_sayfa__tam_brooks_trends_1.json,birincil:kitap_kartlari,9,2026-11-09,PDF başına bir kart dosyası
+K034,G1_KITAP,veri/kartlar_ham/daytrade/Price_Action_Trends_-_Al_Brooks_439_sayfa__tam_brooks_trends_2.json,birincil:kitap_kartlari,10,2026-11-09,PDF başına bir kart dosyası
+K035,G1_KITAP,veri/kartlar_ham/daytrade/Price_Action_ile_Günlük_Trading_Teknikleri_-_Galen_Woods_-_Volume_3_227_sayfa.json,birincil:kitap_kartlari,9,2026-11-06,PDF başına bir kart dosyası
+K036,G1_KITAP,veri/kartlar_ham/daytrade/Python_Algoritmik_Trading_Kitabı_-_Pushpak_Dagade_-_Orijinal_515_sayfa.json,birincil:kitap_kartlari,2,2026-11-09,PDF başına bir kart dosyası
+K037,G1_KITAP,veri/kartlar_ham/daytrade/Swing_Trader_-_Alan_S_Farley_306_sayfa.json,birincil:kitap_kartlari,1,2026-11-09,PDF başına bir kart dosyası
+K038,G1_KITAP,veri/kartlar_ham/daytrade/Swing_Trader_-_Alan_S_Farley_306_sayfa__tam_farley_1.json,birincil:kitap_kartlari,1,2026-11-09,PDF başına bir kart dosyası
+K039,G1_KITAP,veri/kartlar_ham/daytrade/Swing_Trader_-_Alan_S_Farley_306_sayfa__tam_farley_2.json,birincil:kitap_kartlari,2,2026-11-09,PDF başına bir kart dosyası
+K040,G1_KITAP,veri/kartlar_ham/daytrade/Swing_and_Day_Trading_-_Thomas_N_Bulkowski_284_sayfa.json,birincil:kitap_kartlari,52,2026-11-06,PDF başına bir kart dosyası
+K041,G1_KITAP,veri/kartlar_ham/daytrade/Teknik_Analiz_ve_Algoritmik_İşlemler_-_Bist_100_Endeksi_Üzerine_Bir_Uygulama_-_Yüksek_Lisa.json,birincil:kitap_kartlari,4,2026-11-09,PDF başına bir kart dosyası
+K042,G1_KITAP,veri/kartlar_ham/daytrade/The_Ultimate_Algorithmic_Trading_System_-_Orijinal_-_George_Pruitt_342_sayfa.json,birincil:kitap_kartlari,1,2026-11-09,PDF başına bir kart dosyası
+K043,G1_KITAP,veri/kartlar_ham/daytrade/TradeStation_EasyLanguage_for_Algorithmic_Trading_-_Domenico_Derrico_-_Orijinal_258_sayfa.json,birincil:kitap_kartlari,2,2026-11-09,PDF başına bir kart dosyası
+K044,G1_KITAP,veri/kartlar_ham/daytrade/Ultimate_Day_Trader_-_Jacob_Bernstein_232_sayfa.json,birincil:kitap_kartlari,7,2026-11-09,PDF başına bir kart dosyası
+K045,G1_KITAP,veri/kartlar_ham/daytrade/Yeni_Başlayanlar_için_Day_Trading_-_Mark_Denham_114_sayfa.json,birincil:kitap_kartlari,3,2026-11-09,PDF başına bir kart dosyası
+K046,G1_KITAP,veri/kartlar_ham/daytrade/Yüksek_Frekanslı_Trading_-_Algoritmik_Stratejiler_ve_Trading_Sistemleri_için_Pratik_Bir_Kı.json,birincil:kitap_kartlari,1,2026-11-09,PDF başına bir kart dosyası
+K047,G1_KITAP,veri/kartlar_ham/daytrade/Yüksek_Olasılıklı_Day_Trading_Stratejileri_ve_Sistemleri_-_Manny_Backus_122_sayfa.json,birincil:kitap_kartlari,4,2026-11-06,PDF başına bir kart dosyası
+K048,G1_KITAP,veri/kartlar_ham/daytrade/Ölçülü_Hareketle_Trading_-_Algoritmalar_ve_Yüksek_Frekanslı_Ticaret_Dünyasında_Başarılı_Bi.json,birincil:kitap_kartlari,3,2026-11-09,PDF başına bir kart dosyası
+K049,G1_KITAP,veri/kartlar_ham/scalp/1_Dakikalık_Forex_Scalping_Stratejisi_-_Trevor_Candle_96_sayfa.json,birincil:kitap_kartlari,1,2026-11-06,PDF başına bir kart dosyası
+K050,G1_KITAP,veri/kartlar_ham/scalp/20_Trading_Stratejisi_28_sayfa.json,birincil:kitap_kartlari,19,2026-11-09,PDF başına bir kart dosyası
+K051,G1_KITAP,veri/kartlar_ham/scalp/5_Dakikalık_Scalp_Stratejisi_8_sayfa.json,birincil:kitap_kartlari,1,2026-11-06,PDF başına bir kart dosyası
+K052,G1_KITAP,veri/kartlar_ham/scalp/AK47_Scalping_Stratejisi_-_Türkçe_ve_İngilizce_-_Siya_Vezi_26_sayfa.json,birincil:kitap_kartlari,2,2026-11-06,PDF başına bir kart dosyası
+K053,G1_KITAP,veri/kartlar_ham/scalp/Algoritmik_Trading_-_Edward_Leshik_ve_Jane_Cralle_229_sayfa.json,birincil:kitap_kartlari,4,2026-11-09,PDF başına bir kart dosyası
+K054,G1_KITAP,veri/kartlar_ham/scalp/Algoritmik_Trading_Stratejileri_-_Scotty_Ratford_83_sayfa.json,birincil:kitap_kartlari,12,2026-11-09,PDF başına bir kart dosyası
+K055,G1_KITAP,veri/kartlar_ham/scalp/Currency_Grail_-_Benim_Gizli_Kayıpsız_Forex_Scalping_Sistemim_-_Türkçe_ve_İngilizce_38_say.json,birincil:kitap_kartlari,1,2026-11-06,PDF başına bir kart dosyası
+K056,G1_KITAP,veri/kartlar_ham/scalp/E-mini_Dow_ve_Mini_DAX_için_Hızlı_Al-Sat_Scalping_Yöntemleri_-_Teva_Lama_78_sayfa.json,birincil:kitap_kartlari,4,2026-11-06,PDF başına bir kart dosyası
+K057,G1_KITAP,veri/kartlar_ham/scalp/EMA14_ve_EMA50_Scalping_Stratejisi_-_Waqar_-_Türkçe_ve_İngilizce_28_sayfa.json,birincil:kitap_kartlari,1,2026-11-06,PDF başına bir kart dosyası
+K058,G1_KITAP,veri/kartlar_ham/scalp/Eğlenceli_Scalping_2_-_Heikin_Ashi_Trader_44_sayfa.json,birincil:kitap_kartlari,5,2026-11-06,PDF başına bir kart dosyası
+K059,G1_KITAP,veri/kartlar_ham/scalp/Forex_Piyasasında_Nasıl_Scalp_Yapılır_-_Binary_Forex_Brokers_27_sayfa.json,birincil:kitap_kartlari,3,2026-11-09,PDF başına bir kart dosyası
+K060,G1_KITAP,veri/kartlar_ham/scalp/Forex_Scalping_Stratejisi_28_sayfa.json,birincil:kitap_kartlari,1,2026-11-06,PDF başına bir kart dosyası
+K061,G1_KITAP,veri/kartlar_ham/scalp/GBPJPY_M1_Scalp_Stratejisi_-_Green_Forex_4_sayfa.json,birincil:kitap_kartlari,1,2026-11-09,PDF başına bir kart dosyası
+K062,G1_KITAP,veri/kartlar_ham/scalp/Gavin_Holmes_Scalp_Stratejisi_24_sayfa.json,birincil:kitap_kartlari,2,2026-11-09,PDF başına bir kart dosyası
+K063,G1_KITAP,veri/kartlar_ham/scalp/Göstergeyle_Scalping_El_Kitabı_-_Yüksek_Kazanma_Oranlı_Gösterge_-_Marcello_Ferrazzi_79_say.json,birincil:kitap_kartlari,9,2026-11-09,PDF başına bir kart dosyası
+K064,G1_KITAP,veri/kartlar_ham/scalp/Günlük_Alım_Satım_Hızlı_Daha_Hızlı_Scalping_-_Philipp_Schroder_ve_Valentin_Rossiwall_283_s.json,birincil:kitap_kartlari,18,2026-11-06,PDF başına bir kart dosyası
+K065,G1_KITAP,veri/kartlar_ham/scalp/Günlük_Alım_Satım_ve_Swing_Trading_için_Hisse_Senedi_Formasyonları_-_Barry_Rudd_-_Orijinal.json,birincil:kitap_kartlari,1,2026-11-09,PDF başına bir kart dosyası
+K066,G1_KITAP,veri/kartlar_ham/scalp/LBR_Scalp_İşlem_Kurulumları_-_Kevin_Ho_4_sayfa.json,birincil:kitap_kartlari,6,2026-11-09,PDF başına bir kart dosyası
+K067,G1_KITAP,veri/kartlar_ham/scalp/M1-M5_Forex_Scalping_Stratejisi_6_sayfa.json,birincil:kitap_kartlari,1,2026-11-06,PDF başına bir kart dosyası
+K068,G1_KITAP,veri/kartlar_ham/scalp/Payapa_Scalping_Stratejisi_-_Türkçe_ve_İngilizce_12_sayfa.json,birincil:kitap_kartlari,1,2026-11-09,PDF başına bir kart dosyası
+K069,G1_KITAP,veri/kartlar_ham/scalp/Price_Action_Scalper_10_sayfa.json,birincil:kitap_kartlari,1,2026-11-06,PDF başına bir kart dosyası
+K070,G1_KITAP,veri/kartlar_ham/scalp/Price_Action_Scalping_-_Bob_Volman_38_sayfa.json,birincil:kitap_kartlari,4,2026-11-06,PDF başına bir kart dosyası
+K071,G1_KITAP,veri/kartlar_ham/scalp/Price_Action_Scalping_Stratejisi_-_Christopher_121_sayfa.json,birincil:kitap_kartlari,2,2026-11-06,PDF başına bir kart dosyası
+K072,G1_KITAP,veri/kartlar_ham/scalp/RSI_Pro_Scalping_Stratejisi_-_You_Learn_Forex_30_sayfa.json,birincil:kitap_kartlari,1,2026-11-09,PDF başına bir kart dosyası
+K073,G1_KITAP,veri/kartlar_ham/scalp/Scalping_Eğlencelidir_-_Heikin_Ashi_Trader_22_sayfa.json,birincil:kitap_kartlari,1,2026-11-09,PDF başına bir kart dosyası
+K074,G1_KITAP,veri/kartlar_ham/scalp/Scalping_Kılavuzu_-_Gary_Norden_-_Türkçe_ve_İngilizce_114_sayfa.json,birincil:kitap_kartlari,3,2026-11-09,PDF başına bir kart dosyası
+K075,G1_KITAP,veri/kartlar_ham/scalp/Scalping_Kılavuzu_-_Gary_Norden_-_Türkçe_ve_İngilizce_114_sayfa__tam_norden.json,birincil:kitap_kartlari,4,2026-11-09,PDF başına bir kart dosyası
+K076,G1_KITAP,veri/kartlar_ham/scalp/Scalping_Stratejileri_-_S_Connell_33_sayfa.json,birincil:kitap_kartlari,3,2026-11-06,PDF başına bir kart dosyası
+K077,G1_KITAP,veri/kartlar_ham/scalp/Scalping_Stratejileri_101_-_Usiere_Uko_80_sayfa.json,birincil:kitap_kartlari,7,2026-11-06,PDF başına bir kart dosyası
+K078,G1_KITAP,veri/kartlar_ham/scalp/Scalping_Trading_İşlemlerinde_En_İyi_5_Strateji_-_Para_Kazanma_Yöntemleri_-_Andrew_C_Ellis.json,birincil:kitap_kartlari,5,2026-11-06,PDF başına bir kart dosyası
+K079,G1_KITAP,veri/kartlar_ham/scalp/Scalping_ve_Day_Trading_-_İşlemlerinizin_Başarısını_Arttırın_-_Anthony_Busiere_239_sayfa.json,birincil:kitap_kartlari,4,2026-11-06,PDF başına bir kart dosyası
+K080,G1_KITAP,veri/kartlar_ham/scalp/Scalping_İşlemlerine_İlişkin_Kesin_Kılavuz_-_Türkçe_ve_İngilizce_56_sayfa.json,birincil:kitap_kartlari,3,2026-11-09,PDF başına bir kart dosyası
+K081,G1_KITAP,veri/kartlar_ham/scalp/Super_Scalper_-_Gavin_Holmes_27_sayfa.json,birincil:kitap_kartlari,2,2026-11-06,PDF başına bir kart dosyası
+K082,G1_KITAP,veri/kartlar_ham/scalp/Ultimate_Scalper_-_Gün_İçi_İşlem_Metodolojisi_496_sayfa.json,birincil:kitap_kartlari,6,2026-11-09,PDF başına bir kart dosyası
+K083,G1_KITAP,veri/kartlar_ham/scalp/Yüksek_Başarı_Olasılığına_Sahip_Scalping_Stratejileri_El_Kitabı_-_Zackary_Carson_99_sayfa.json,birincil:kitap_kartlari,20,2026-11-06,PDF başına bir kart dosyası
+K084,G1_KITAP,veri/kartlar_ham/scalp/Yüksek_Kazanma_Oranı_ile_Ortalama_Dönüş_Scalping_Stratejileri_-_Max_Stevenson_64_sayfa.json,birincil:kitap_kartlari,8,2026-11-06,PDF başına bir kart dosyası
+K085,G1_KITAP,veri/kartlar_ham/swing/13_Swing_Trading_Stratejisi_-_Pankaj_Ladha_ve_Anant_Ladha_140_sayfa.json,birincil:kitap_kartlari,13,2026-11-06,PDF başına bir kart dosyası
+K086,G1_KITAP,veri/kartlar_ham/swing/2023te_Etkili_Swing_Trading_Stratejileri_-_Dennis_Sharpe_45_sayfa.json,birincil:kitap_kartlari,6,2026-11-06,PDF başına bir kart dosyası
+K087,G1_KITAP,veri/kartlar_ham/swing/4_Saatlik_Grafik_Kullanarak_Swing_Trading_-_Heikin_Ashi_Trader_108_sayfa.json,birincil:kitap_kartlari,8,2026-11-06,PDF başına bir kart dosyası
+K088,G1_KITAP,veri/kartlar_ham/swing/5_Adımlı_Swing_Trading_Planı_-_Swing_Trade_Pro_20_-_Frank_Ochoa_123_sayfa.json,birincil:kitap_kartlari,5,2026-11-09,PDF başına bir kart dosyası
+K089,G1_KITAP,veri/kartlar_ham/swing/Algoritmik_Kalıp_Tanıma_için_Teknik_Analiz_-_Prodromos_E_Tsinaslanidis_ve_Achilleas_D_Zapr.json,birincil:kitap_kartlari,5,2026-11-09,PDF başına bir kart dosyası
+K090,G1_KITAP,veri/kartlar_ham/swing/Algoritmik_Trading_-_Kalara_Koru_-_Türkçe_ve_İngilizce_126_sayfa.json,birincil:kitap_kartlari,2,2026-11-09,PDF başına bir kart dosyası
+K091,G1_KITAP,veri/kartlar_ham/swing/Algoritmik_Trading_Kısayol_Kodları_-_Kevin_J_Davey_-_Orijinal_193_sayfa.json,birincil:kitap_kartlari,10,2026-11-09,PDF başına bir kart dosyası
+K092,G1_KITAP,veri/kartlar_ham/swing/Algoritmik_Trading_Pro_-_Hayden_Van_Der_Post_-_Orijinal_750_sayfa.json,birincil:kitap_kartlari,1,2026-11-09,PDF başına bir kart dosyası
+K093,G1_KITAP,veri/kartlar_ham/swing/Algoritmik_Trading_Sistemleri_ve_Stratejileri_-_Viktoria_Dolzhenko_-_Orijinal_450_sayfa.json,birincil:kitap_kartlari,2,2026-11-09,PDF başına bir kart dosyası
+K094,G1_KITAP,veri/kartlar_ham/swing/Bounce_-_Swing_Trading_Sanatı_-_Amit_Ghosh_113_sayfa.json,birincil:kitap_kartlari,2,2026-11-09,PDF başına bir kart dosyası
+K095,G1_KITAP,veri/kartlar_ham/swing/Dave_Landrynin_En_İyi_10_Swing_Trade_Formasyonu_ve_Stratejisi_-_Dave_Landry_-_Orijinal_179.json,birincil:kitap_kartlari,10,2026-11-06,PDF başına bir kart dosyası
+K096,G1_KITAP,veri/kartlar_ham/swing/Day_Trading_ve_Swing_Trading_-_Kathy_Lien_278_sayfa.json,birincil:kitap_kartlari,5,2026-11-09,PDF başına bir kart dosyası
+K097,G1_KITAP,veri/kartlar_ham/swing/Düşük_Riskli_Swing_Trading_için_Gün_İçi_Zamanlama_-_Walter_Bressert_-_Orijinal_20_sayfa.json,birincil:kitap_kartlari,0,2026-11-06,PDF başına bir kart dosyası
+K098,G1_KITAP,veri/kartlar_ham/swing/Forex_Swing_Trading_-_Abraham_Robert_C_50_sayfa.json,birincil:kitap_kartlari,3,2026-11-09,PDF başına bir kart dosyası
+K099,G1_KITAP,veri/kartlar_ham/swing/Forex_Swing_Trading_Rehberi_-_Danq_Brown_85_sayfa.json,birincil:kitap_kartlari,3,2026-11-09,PDF başına bir kart dosyası
+K100,G1_KITAP,veri/kartlar_ham/swing/Gelişmiş_Swing_Trading_-_John_Crane_-_Orijinal_217_sayfa.json,birincil:kitap_kartlari,14,2026-11-06,PDF başına bir kart dosyası
+K101,G1_KITAP,veri/kartlar_ham/swing/Geçimini_Sağlamak_için_Swing_Trading_-_Christopher_118_sayfa.json,birincil:kitap_kartlari,4,2026-11-06,PDF başına bir kart dosyası
+K102,G1_KITAP,veri/kartlar_ham/swing/Günlük_Alım_Satım_ve_Swing_Trading_için_Hisse_Senedi_Formasyonları_-_Barry_Rudd_-_Orijinal.json,birincil:kitap_kartlari,3,2026-11-09,PDF başına bir kart dosyası
+K103,G1_KITAP,veri/kartlar_ham/swing/Heiken_Ashi_ve_Stokastik_Göstergeyle_Swing_Trading_-_Edward_Munroe_29_sayfa.json,birincil:kitap_kartlari,3,2026-11-09,PDF başına bir kart dosyası
+K104,G1_KITAP,veri/kartlar_ham/swing/Kazançlı_Günlük_ve_Swing_Trading_-_Harry_Boxer_171_sayfa.json,birincil:kitap_kartlari,14,2026-11-06,PDF başına bir kart dosyası
+K105,G1_KITAP,veri/kartlar_ham/swing/Pivotlar_Formasyonlar_ve_Gün_İçi_Swing_İşlemleri_-_M_William_Scheier_224_sayfa.json,birincil:kitap_kartlari,21,2026-11-06,PDF başına bir kart dosyası
+K106,G1_KITAP,veri/kartlar_ham/swing/RSI_Swing_Trading_Stratejisi_-_TMP_13_sayfa.json,birincil:kitap_kartlari,1,2026-11-09,PDF başına bir kart dosyası
+K107,G1_KITAP,veri/kartlar_ham/swing/Short_Swing_Trading_-_David_Graeme_Smith_120_sayfa.json,birincil:kitap_kartlari,1,2026-11-09,PDF başına bir kart dosyası
+K108,G1_KITAP,veri/kartlar_ham/swing/Stratejik_Swing_Trading_-_Metal_Piyasalarının_Haritalanması_ve_Çerçevelenmesi_-_Timothy_Mo.json,birincil:kitap_kartlari,0,2026-11-06,PDF başına bir kart dosyası
+K109,G1_KITAP,veri/kartlar_ham/swing/Swing_Failure_Pattern_11_sayfa.json,birincil:kitap_kartlari,1,2026-11-09,PDF başına bir kart dosyası
+K110,G1_KITAP,veri/kartlar_ham/swing/Swing_Trade_Stratejileri_-_Simon_Jordan_208_sayfa.json,birincil:kitap_kartlari,12,2026-11-06,PDF başına bir kart dosyası
+K111,G1_KITAP,veri/kartlar_ham/swing/Swing_Trader_-_Alan_S_Farley_306_sayfa.json,birincil:kitap_kartlari,2,2026-11-09,PDF başına bir kart dosyası
+K112,G1_KITAP,veri/kartlar_ham/swing/Swing_Trader_-_Alan_S_Farley_306_sayfa__tam_farley_1.json,birincil:kitap_kartlari,11,2026-11-09,PDF başına bir kart dosyası
+K113,G1_KITAP,veri/kartlar_ham/swing/Swing_Trader_-_Alan_S_Farley_306_sayfa__tam_farley_2.json,birincil:kitap_kartlari,9,2026-11-09,PDF başına bir kart dosyası
+K114,G1_KITAP,veri/kartlar_ham/swing/Swing_Traderlar_için_Zamanlama_Çözümleri_-_Robert_TH_Lee_ve_Peter_A_Tryde_192_sayfa.json,birincil:kitap_kartlari,2,2026-11-09,PDF başına bir kart dosyası
+K115,G1_KITAP,veri/kartlar_ham/swing/Swing_Trading_-_Andrew_Anderson_127_sayfa.json,birincil:kitap_kartlari,4,2026-11-09,PDF başına bir kart dosyası
+K116,G1_KITAP,veri/kartlar_ham/swing/Swing_Trading_-_Marc_Rivalland_206_sayfa.json,birincil:kitap_kartlari,4,2026-11-09,PDF başına bir kart dosyası
+K117,G1_KITAP,veri/kartlar_ham/swing/Swing_Trading_-_Piyasa_Dalgalarında_Sörf_Yapmak_-_Jan_Arps_37_sayfa.json,birincil:kitap_kartlari,3,2026-11-09,PDF başına bir kart dosyası
+K118,G1_KITAP,veri/kartlar_ham/swing/Swing_Trading_Leandro_Yöntemi_67_sayfa.json,birincil:kitap_kartlari,3,2026-11-09,PDF başına bir kart dosyası
+K119,G1_KITAP,veri/kartlar_ham/swing/Swing_Trading_Stratejileri_-_Benjamin_McArthur_-_Orijinal_74_sayfa.json,birincil:kitap_kartlari,2,2026-11-06,PDF başına bir kart dosyası
+K120,G1_KITAP,veri/kartlar_ham/swing/Swing_Trading_Stratejileri_-_Joe_Penn_110_sayfa.json,birincil:kitap_kartlari,10,2026-11-06,PDF başına bir kart dosyası
+K121,G1_KITAP,veri/kartlar_ham/swing/Swing_Trading_Stratejileri_-_Mark_Make_109_sayfa.json,birincil:kitap_kartlari,10,2026-11-06,PDF başına bir kart dosyası
+K122,G1_KITAP,veri/kartlar_ham/swing/Swing_Trading_Stratejileri_-_Razaq_Adekunle_113_sayfa.json,birincil:kitap_kartlari,9,2026-11-06,PDF başına bir kart dosyası
+K123,G1_KITAP,veri/kartlar_ham/swing/Swing_Trading_Taktikleri_-_Oliver_Velez_81_sayfa.json,birincil:kitap_kartlari,5,2026-11-06,PDF başına bir kart dosyası
+K124,G1_KITAP,veri/kartlar_ham/swing/Swing_Trading_Uzmanlığı_-_Nikos_Mermigas_120_sayfa.json,birincil:kitap_kartlari,1,2026-11-09,PDF başına bir kart dosyası
+K125,G1_KITAP,veri/kartlar_ham/swing/Swing_Trading_ile_Basit_Kazançlar_-_Jea_Yu_118_sayfa.json,birincil:kitap_kartlari,2,2026-11-06,PDF başına bir kart dosyası
+K126,G1_KITAP,veri/kartlar_ham/swing/Swing_Trading_ve_Vadeli_İşlemlerle_Yatırım_-_Timothy_T_Hogan_445_sayfa.json,birincil:kitap_kartlari,11,2026-11-06,PDF başına bir kart dosyası
+K127,G1_KITAP,veri/kartlar_ham/swing/Swing_Tradinge_Giriş_-_Michael_C_Thomsett_198_sayfa.json,birincil:kitap_kartlari,1,2026-11-09,PDF başına bir kart dosyası
+K128,G1_KITAP,veri/kartlar_ham/swing/Swing_Yatırımcıları_için_Trend_Takibi_Stratejileri_-_Aaron_Lee_Johnson_149_sayfa.json,birincil:kitap_kartlari,18,2026-11-06,PDF başına bir kart dosyası
+K129,G1_KITAP,veri/kartlar_ham/swing/Swing_Yüksekleri_ve_Swing_Düşüklerini_Kullanarak_Pazarın_Ne_Durumda_Olduğunu_Daha_İyi_Anla.json,birincil:kitap_kartlari,1,2026-11-09,PDF başına bir kart dosyası
+K130,G1_KITAP,veri/kartlar_ham/swing/Swing_ve_Günlük_Trading_-_Jeremy_Walters_220_sayfa.json,birincil:kitap_kartlari,3,2026-11-09,PDF başına bir kart dosyası
+K131,G1_KITAP,veri/kartlar_ham/swing/Swing_ve_Günlük_Trading_Stratejileri_-_Dave_Robert_Warren_Graham_338_sayfa.json,birincil:kitap_kartlari,30,2026-11-06,PDF başına bir kart dosyası
+K132,G1_KITAP,veri/kartlar_ham/swing/The_Ultimate_Algorithmic_Trading_System_-_Orijinal_-_George_Pruitt_342_sayfa.json,birincil:kitap_kartlari,14,2026-11-09,PDF başına bir kart dosyası
+K133,G1_KITAP,veri/kartlar_ham/swing/TradeStation_EasyLanguage_for_Algorithmic_Trading_-_Domenico_Derrico_-_Orijinal_258_sayfa.json,birincil:kitap_kartlari,4,2026-11-09,PDF başına bir kart dosyası
+K134,G1_KITAP,veri/kartlar_ham/swing/Yeni_Başlayanlar_için_Algoritmik_Trading_-_Travis_Selley_117_sayfa.json,birincil:kitap_kartlari,1,2026-11-09,PDF başına bir kart dosyası
+K135,G1_KITAP,veri/kartlar_ham/swing/Yeni_Başlayanlar_için_Swing_Trading_Stratejileri_-_Andrew_David_Kratter_103_sayfa.json,birincil:kitap_kartlari,11,2026-11-06,PDF başına bir kart dosyası
+K136,G1_KITAP,veri/kartlar_ham/swing/Yeni_Başlayanlar_İçin_Swing_Trading_Stratejileri_-_Edward_Day_131_sayfa.json,birincil:kitap_kartlari,8,2026-11-06,PDF başına bir kart dosyası
+K137,G1_KITAP,veri/kartlar_ham/swing/Yüksek_Kazançlı_Swing_Ticaretinin_5_Sırrı_-_Ivayla_Ivanov_52_sayfa.json,birincil:kitap_kartlari,3,2026-11-09,PDF başına bir kart dosyası
+K138,G1_KITAP,veri/kart_dizini.csv,esleme:kart_dizini,438,2026-11-06,Aşama 0 438 kartın dizini (810'un alt kümesi)
+K139,G1_KITAP,stratejiler/aileler.json,esleme:aile_birlestirme,100,2026-11-09,kart -> aile
+K140,G1_KITAP,stratejiler/elenenler.json,karar:elenen_kartlar,70,2026-11-09,
+K141,G1_KITAP,stratejiler/yazar_denetimi.csv,karar:yazar_denetimi,210,2026-11-09,
+K142,G1_KITAP,stratejiler/ADAY_RAPORU.md,karar:aday_raporu,,2026-11-06,
+K143,G1_KITAP,stratejiler/ek_kaynaklar/kitap_kartlari_eslesme.csv,esleme:yeni_kartlar,372,2026-11-09,
+K144,G1_KITAP,stratejiler/ek_kaynaklar/tam_okuma_brooks_ranges_1.md,karar:tam_okuma_raporu,,2026-11-09,
+K145,G1_KITAP,stratejiler/ek_kaynaklar/tam_okuma_brooks_ranges_2.md,karar:tam_okuma_raporu,,2026-11-09,
+K146,G1_KITAP,stratejiler/ek_kaynaklar/tam_okuma_brooks_ranges_3.md,karar:tam_okuma_raporu,,2026-11-09,
+K147,G1_KITAP,stratejiler/ek_kaynaklar/tam_okuma_brooks_trends_1.md,karar:tam_okuma_raporu,,2026-11-09,
+K148,G1_KITAP,stratejiler/ek_kaynaklar/tam_okuma_brooks_trends_2.md,karar:tam_okuma_raporu,,2026-11-09,
+K149,G1_KITAP,stratejiler/ek_kaynaklar/tam_okuma_farley_1.md,karar:tam_okuma_raporu,,2026-11-09,
+K150,G1_KITAP,stratejiler/ek_kaynaklar/tam_okuma_farley_2.md,karar:tam_okuma_raporu,,2026-11-09,
+K151,G1_KITAP,stratejiler/ek_kaynaklar/tam_okuma_norden.md,karar:tam_okuma_raporu,,2026-11-09,
+K152,G1_KITAP,stratejiler/ek_kaynaklar/tam_okuma_ultimate_scalper.md,karar:tam_okuma_raporu,,2026-11-09,
+K153,G1_KITAP,stratejiler/ek_kaynaklar/tam_okuma_guncelleme_ozet.csv,esleme:tam_okuma_guncelleme,171,2026-11-09,mevcut kartlara öneri
+K154,G1_KITAP,stratejiler/ek_kaynaklar/kodlama_kuyrugu_tam_okuma.csv,esleme:kodlama_kuyrugu,8,2026-11-09,
+K155,G1_KITAP,stratejiler/kodlama_2026-11-07_d10a.csv,esleme:kodlama_kaydi,22,2026-11-09,yeni_aile -> kod adı
+K156,G1_KITAP,stratejiler/kodlama_2026-11-07_d10b.csv,esleme:kodlama_kaydi,21,2026-11-09,yeni_aile -> kod adı
+K157,G1_KITAP,stratejiler/kodlama_2026-11-07_d10c.csv,esleme:kodlama_kaydi,20,2026-11-09,yeni_aile -> kod adı
+K158,G1_KITAP,stratejiler/kodlama_2026-11-07_d10d.csv,esleme:kodlama_kaydi,20,2026-11-09,yeni_aile -> kod adı
+K159,G1_KITAP,stratejiler/kodlama_2026-11-07_d10e.csv,esleme:kodlama_kaydi,14,2026-11-09,yeni_aile -> kod adı
+K160,G1_KITAP,stratejiler/kodlama_2026-11-07_d12a.csv,esleme:kodlama_kaydi,10,2026-11-09,yeni_aile -> kod adı
+K161,G1_KITAP,stratejiler/cikis_modulleri_ek.csv,esleme:cikis_modulu,8,2026-11-09,
+K162,G1_KITAP,stratejiler/cikis_risk_modulleri.json,esleme:cikis_modulu,13,2026-11-06,
+D001,G2_DIS_ESKI,stratejiler/dis_envanter.csv,birincil:dis_envanter,431,2026-11-09,tv/freqtrade/kural/awesome/jesuistm
+D002,G2_DIS_ESKI,stratejiler/portfoy_adaylari.csv,birincil:portfoy_adaylari,71,2026-11-09,
+D003,G2_DIS_ESKI,stratejiler/dis_kodlanacak.csv,esleme:kodlama_kuyrugu,94,2026-11-09,
+D004,G2_DIS_ESKI,stratejiler/kodlama_2026-11-07_a.csv,esleme:kodlama_kaydi,43,2026-11-09,
+D005,G2_DIS_ESKI,stratejiler/kodlama_2026-11-07_pf.csv,esleme:kodlama_kaydi,17,2026-11-09,
+D006,G2_DIS_ESKI,stratejiler/dis_ayarlari/daytrade__bant-donus.json,esleme:dis_ayar,1,2026-11-09,
+D007,G2_DIS_ESKI,stratejiler/dis_ayarlari/daytrade__gap-doldurma.json,esleme:dis_ayar,1,2026-11-09,
+D008,G2_DIS_ESKI,stratejiler/dis_ayarlari/daytrade__konsolidasyon-kirilim.json,esleme:dis_ayar,1,2026-11-09,
+D009,G2_DIS_ESKI,stratejiler/dis_ayarlari/daytrade__orb.json,esleme:dis_ayar,12,2026-11-09,
+D010,G2_DIS_ESKI,stratejiler/dis_ayarlari/daytrade__pivot-seviye.json,esleme:dis_ayar,2,2026-11-09,
+D011,G2_DIS_ESKI,stratejiler/dis_ayarlari/daytrade__renko-sr.json,esleme:dis_ayar,1,2026-11-09,
+D012,G2_DIS_ESKI,stratejiler/dis_ayarlari/daytrade__vwap-donus.json,esleme:dis_ayar,3,2026-11-09,
+D013,G2_DIS_ESKI,stratejiler/dis_ayarlari/daytrade__vwap-trend.json,esleme:dis_ayar,1,2026-11-09,
+D014,G2_DIS_ESKI,stratejiler/dis_ayarlari/dis__atr-rsi-liwei.json,esleme:dis_ayar,1,2026-11-09,
+D015,G2_DIS_ESKI,stratejiler/dis_ayarlari/dis__bant-kirilim-trend.json,esleme:dis_ayar,3,2026-11-09,
+D016,G2_DIS_ESKI,stratejiler/dis_ayarlari/dis__dual-thrust.json,esleme:dis_ayar,2,2026-11-09,
+D017,G2_DIS_ESKI,stratejiler/dis_ayarlari/dis__hacim-patlama-kirilimi.json,esleme:dis_ayar,1,2026-11-09,
+D018,G2_DIS_ESKI,stratejiler/dis_ayarlari/dis__ilk-yarim-saat-son-yarim-saat.json,esleme:dis_ayar,2,2026-11-09,
+D019,G2_DIS_ESKI,stratejiler/dis_ayarlari/dis__min10-dip.json,esleme:dis_ayar,1,2026-11-09,
+D020,G2_DIS_ESKI,stratejiler/dis_ayarlari/dis__pivot-ters-stop.json,esleme:dis_ayar,1,2026-11-09,
+D021,G2_DIS_ESKI,stratejiler/dis_ayarlari/dis__son1ay-donchian-adx.json,esleme:dis_ayar,1,2026-11-09,
+D022,G2_DIS_ESKI,stratejiler/dis_ayarlari/dis__son1ay-kanal-20-10.json,esleme:dis_ayar,2,2026-11-09,
+D023,G2_DIS_ESKI,stratejiler/dis_ayarlari/dis__sqz-donus.json,esleme:dis_ayar,1,2026-11-09,
+D024,G2_DIS_ESKI,stratejiler/dis_ayarlari/dis__trend-yargisi.json,esleme:dis_ayar,1,2026-11-09,
+D025,G2_DIS_ESKI,stratejiler/dis_ayarlari/onceki__kapitulasyon.json,esleme:dis_ayar,2,2026-11-09,
+D026,G2_DIS_ESKI,stratejiler/dis_ayarlari/scalp__ma-kesisim.json,esleme:dis_ayar,3,2026-11-09,
+D027,G2_DIS_ESKI,stratejiler/dis_ayarlari/swing__aralik-ticareti.json,esleme:dis_ayar,1,2026-11-09,
+D028,G2_DIS_ESKI,stratejiler/dis_ayarlari/swing__ardisik-bar-tukenme.json,esleme:dis_ayar,1,2026-11-09,
+D029,G2_DIS_ESKI,stratejiler/dis_ayarlari/swing__bant-donus.json,esleme:dis_ayar,9,2026-11-09,
+D030,G2_DIS_ESKI,stratejiler/dis_ayarlari/swing__bb-sikisma-kirilim.json,esleme:dis_ayar,2,2026-11-09,
+D031,G2_DIS_ESKI,stratejiler/dis_ayarlari/swing__bollinger-cift-bant-trend.json,esleme:dis_ayar,1,2026-11-09,
+D032,G2_DIS_ESKI,stratejiler/dis_ayarlari/swing__dar-aralik-kirilim.json,esleme:dis_ayar,1,2026-11-09,
+D033,G2_DIS_ESKI,stratejiler/dis_ayarlari/swing__donchian-kirilim.json,esleme:dis_ayar,8,2026-11-09,
+D034,G2_DIS_ESKI,stratejiler/dis_ayarlari/swing__fib-geri-cekilme.json,esleme:dis_ayar,1,2026-11-09,
+D035,G2_DIS_ESKI,stratejiler/dis_ayarlari/swing__heikin-ashi-donus.json,esleme:dis_ayar,2,2026-11-09,
+D036,G2_DIS_ESKI,stratejiler/dis_ayarlari/swing__ichimoku.json,esleme:dis_ayar,4,2026-11-09,
+D037,G2_DIS_ESKI,stratejiler/dis_ayarlari/swing__konsolidasyon-kirilim.json,esleme:dis_ayar,1,2026-11-09,
+D038,G2_DIS_ESKI,stratejiler/dis_ayarlari/swing__ma-geri-cekilme.json,esleme:dis_ayar,4,2026-11-09,
+D039,G2_DIS_ESKI,stratejiler/dis_ayarlari/swing__ma-kesisim.json,esleme:dis_ayar,36,2026-11-09,
+D040,G2_DIS_ESKI,stratejiler/dis_ayarlari/swing__macd-sinyal.json,esleme:dis_ayar,20,2026-11-09,
+D041,G2_DIS_ESKI,stratejiler/dis_ayarlari/swing__mum-yutan-donus.json,esleme:dis_ayar,3,2026-11-09,
+D042,G2_DIS_ESKI,stratejiler/dis_ayarlari/swing__rsi-asiri-donus.json,esleme:dis_ayar,14,2026-11-09,
+D043,G2_DIS_ESKI,stratejiler/dis_ayarlari/swing__rsi-diverjans.json,esleme:dis_ayar,2,2026-11-09,
+D044,G2_DIS_ESKI,stratejiler/dis_ayarlari/swing__rsi-momentum-esik.json,esleme:dis_ayar,4,2026-11-09,
+D045,G2_DIS_ESKI,stratejiler/dis_ayarlari/swing__sahte-kirilim.json,esleme:dis_ayar,2,2026-11-09,
+D046,G2_DIS_ESKI,stratejiler/dis_ayarlari/swing__seviye-tepki.json,esleme:dis_ayar,1,2026-11-09,
+D047,G2_DIS_ESKI,stratejiler/dis_ayarlari/swing__supertrend-psar.json,esleme:dis_ayar,15,2026-11-09,
+D048,G2_DIS_ESKI,stratejiler/dis_ayarlari/swing__talep-arz-bolgesi.json,esleme:dis_ayar,1,2026-11-09,
+D049,G2_DIS_ESKI,stratejiler/dis_ayarlari/swing__trend-cizgisi-kanal.json,esleme:dis_ayar,1,2026-11-09,
+D050,G2_DIS_ESKI,arsiv/strateji-sg/tv_eleme_dali/ham/meta.json,birincil:tradingview_eski,164,2026-11-09,eski proje TV betikleri
+D051,G2_DIS_ESKI,arsiv/strateji-sg/tv_eleme_dali/ham/meta3.json,birincil:tradingview_eski,92,2026-11-09,
+D052,G2_DIS_ESKI,arsiv/strateji-sg/tv_eleme_dali/RAPOR.md,sonuc:eski_proje,,2026-11-09,
+P001,G3_REPO,stratejiler/ek_kaynaklar/repo_kodlari.csv,birincil:repo_kod_envanteri,398,2026-11-09,
+P002,G3_REPO,stratejiler/ek_kaynaklar/repo_raporlari.csv,birincil:repo_rapor_envanteri,331,2026-11-09,
+P003,G3_REPO,stratejiler/ek_kaynaklar/ek_77_strateji.md,birincil:ek77,,2026-11-09,77 strateji (md)
+P004,G3_REPO,stratejiler/ek_kaynaklar/kodlama_kuyrugu_2026-11-07.csv,esleme:kodlama_kuyrugu,133,2026-11-09,
+P005,G3_REPO,stratejiler/kodlama_2026-11-07_b.csv,esleme:kodlama_kaydi,88,2026-11-09,
+P006,G3_REPO,arsiv/sg-arge-/strateji_listesi.xlsx,birincil:excel_liste,,2026-11-09,
+P007,G3_REPO,arsiv/sg-arge-/strateji_listesi (2).xlsx,birincil:excel_liste,,2026-11-09,
+P008,G3_REPO,arsiv/sg-arge-/day_trade_swing_trade_strateji_listesi.md,birincil:md_liste,,2026-11-09,
+P009,G3_REPO,arsiv/sg-arge-/dpay_trade_swing_trade_strateji_listesi.md,birincil:md_liste,,2026-11-09,
+H001,G4_GITHUB,stratejiler/ek_kaynaklar/github_g1_freqtrade.csv,birincil:github_tarama,153,2026-11-09,50 repo
+H002,G4_GITHUB,stratejiler/ek_kaynaklar/github_g2_kripto_bot.csv,birincil:github_tarama,207,2026-11-09,50 repo
+H003,G4_GITHUB,stratejiler/ek_kaynaklar/github_g3_cerceve.csv,birincil:github_tarama,74,2026-11-09,50 repo
+H004,G4_GITHUB,stratejiler/ek_kaynaklar/github_g4_platform.csv,birincil:github_tarama,154,2026-11-09,50 repo
+H005,G4_GITHUB,stratejiler/ek_kaynaklar/github_g5_mt_pine.csv,birincil:github_tarama,166,2026-11-09,50 repo
+H006,G4_GITHUB,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv,birincil:github_tarama,389,2026-11-09,50 repo
+H007,G4_GITHUB,stratejiler/ek_kaynaklar/github_g7_kutuphane.csv,birincil:github_tarama,55,2026-11-09,50 repo
+H008,G4_GITHUB,stratejiler/ek_kaynaklar/kodlama_kuyrugu_github.csv,esleme:kodlama_kuyrugu,137,2026-11-09,
+H009,G4_GITHUB,stratejiler/kodlama_github_d11f.csv,esleme:kodlama_kaydi,21,2026-11-09,
+H010,G4_GITHUB,stratejiler/kodlama_github_d11g.csv,esleme:kodlama_kaydi,19,2026-11-09,
+H011,G4_GITHUB,stratejiler/kodlama_github_d11h.csv,esleme:kodlama_kaydi,20,2026-11-09,
+H012,G4_GITHUB,stratejiler/kodlama_github_d11i.csv,esleme:kodlama_kaydi,18,2026-11-09,
+H013,G4_GITHUB,stratejiler/kodlama_github_d11j.csv,esleme:kodlama_kaydi,35,2026-11-09,
+H014,G4_GITHUB,stratejiler/ayarlar_d11j_ek.json,esleme:ek_ayar,11,2026-11-09,yalnız testlerde okunuyor (doğrulanacak)
+Q001,G5_151_SON1AY,stratejiler/ek_kaynaklar/kakushadze_151.csv,birincil:kakushadze_151,173,2026-11-09,
+Q002,G5_151_SON1AY,stratejiler/kodlama_151_d12b.csv,esleme:kodlama_kaydi,8,2026-11-09,
+Q003,G5_151_SON1AY,stratejiler/ayarlar_d12b_ek.json,esleme:ek_ayar,7,2026-11-09,yalnız testlerde okunuyor (doğrulanacak)
+Q004,G5_151_SON1AY,stratejiler/ek_kaynaklar/son1ay_2026-11.csv,birincil:son1ay,16,2026-11-09,
+Q005,G5_151_SON1AY,stratejiler/ek_kaynaklar/son1ay_2026-11.md,karar:son1ay,,2026-11-09,
+V001,G6_V3,stratejiler/v3_adaylar/ham/MASTER_katalog_2026-11.csv,birincil:v3_ham_katalog,251,2026-11-10,on_eleme.csv hepsini kapsar
+V002,G6_V3,stratejiler/v3_adaylar/ham/asya-siteleri-katalog__b_duzeyi.csv,birincil:v3_ham_katalog,50,2026-11-10,on_eleme.csv hepsini kapsar
+V003,G6_V3,stratejiler/v3_adaylar/ham/asya-siteleri-katalog__tumu.csv,birincil:v3_ham_katalog,135,2026-11-10,on_eleme.csv hepsini kapsar
+V004,G6_V3,stratejiler/v3_adaylar/ham/bolgesel-katalog__b_duzeyi.csv,birincil:v3_ham_katalog,9,2026-11-10,on_eleme.csv hepsini kapsar
+V005,G6_V3,stratejiler/v3_adaylar/ham/bolgesel-katalog__tumu.csv,birincil:v3_ham_katalog,137,2026-11-10,on_eleme.csv hepsini kapsar
+V006,G6_V3,stratejiler/v3_adaylar/ham/chatgpt_dr_tur1_gunici_kripto.csv,birincil:v3_ham_katalog,7,2026-11-10,on_eleme.csv hepsini kapsar
+V007,G6_V3,stratejiler/v3_adaylar/ham/chatgpt_dr_tur2_funding.csv,birincil:v3_ham_katalog,4,2026-11-10,on_eleme.csv hepsini kapsar
+V008,G6_V3,stratejiler/v3_adaylar/ham/chatgpt_dr_tur3_akademik_kismi.csv,birincil:v3_ham_katalog,2,2026-11-10,on_eleme.csv hepsini kapsar
+V009,G6_V3,stratejiler/v3_adaylar/ham/diger-siteler-derin-21.csv,birincil:v3_ham_katalog,21,2026-11-10,on_eleme.csv hepsini kapsar
+V010,G6_V3,stratejiler/v3_adaylar/ham/gemini_dr_6bolge.csv,birincil:v3_ham_katalog,69,2026-11-10,on_eleme.csv hepsini kapsar
+V011,G6_V3,stratejiler/v3_adaylar/ham/gemini_dr_afrika.csv,birincil:v3_ham_katalog,8,2026-11-10,on_eleme.csv hepsini kapsar
+V012,G6_V3,stratejiler/v3_adaylar/ham/github-backtest-katalog-denetimli__dogrulanan_48.csv,birincil:v3_ham_katalog,48,2026-11-10,on_eleme.csv hepsini kapsar
+V013,G6_V3,stratejiler/v3_adaylar/ham/github-backtest-katalog-denetimli__gercek_ek.csv,birincil:v3_ham_katalog,586,2026-11-10,on_eleme.csv hepsini kapsar
+V014,G6_V3,stratejiler/v3_adaylar/ham/github-backtest-katalog-denetimli__tumu.csv,birincil:v3_ham_katalog,999,2026-11-10,on_eleme.csv hepsini kapsar
+V015,G6_V3,stratejiler/v3_adaylar/ham/github-backtest-katalog-v4__diger_siteler.csv,birincil:v3_ham_katalog,66,2026-11-10,on_eleme.csv hepsini kapsar
+V016,G6_V3,stratejiler/v3_adaylar/ham/github-backtest-katalog-v4__reddit.csv,birincil:v3_ham_katalog,56,2026-11-10,on_eleme.csv hepsini kapsar
+V017,G6_V3,stratejiler/v3_adaylar/ham/github-backtest-katalog-v4__sayfa_dogrulamasi.csv,birincil:v3_ham_katalog,144,2026-11-10,on_eleme.csv hepsini kapsar
+V018,G6_V3,stratejiler/v3_adaylar/ham/MASTER_OZET_2026-11.md,karar:v3_ham_ozet,,2026-11-10,
+V019,G6_V3,stratejiler/v3_adaylar/ham/profesyonel_derin_2026-11.md,karar:v3_ham_ozet,,2026-11-10,
+V020,G6_V3,stratejiler/v3_adaylar/ham/profesyonel_yayin_kanallari_2026-11.md,karar:v3_ham_ozet,,2026-11-10,
+V021,G6_V3,stratejiler/v3_adaylar/on_eleme.csv,karar:v3_on_eleme,2592,2026-11-10,
+V022,G6_V3,stratejiler/v3_adaylar/on_eleme_tur2_kod_yok.csv,karar:v3_on_eleme,799,2026-11-10,
+V023,G6_V3,stratejiler/v3_adaylar/on_eleme_tur3.csv,karar:v3_on_eleme,122,2026-11-11,
+V024,G6_V3,stratejiler/v3_adaylar/on_eleme_tur3_gorev2.csv,karar:v3_on_eleme,19,2026-11-11,
+V025,G6_V3,stratejiler/v3_adaylar/veri_yok_etiket_tur6.csv,karar:v3_veri_yok,514,2026-11-11,
+V026,G6_V3,stratejiler/v3_adaylar/REDDEDILENLER.txt,karar:v3_reddedilen,13,2026-11-10,
+V027,G6_V3,stratejiler/v3_adaylar/REDDEDILENLER_tur2.txt,karar:v3_reddedilen,109,2026-11-10,
+V028,G6_V3,stratejiler/v3_adaylar/REDDEDILENLER_tur3.txt,karar:v3_reddedilen,27,2026-11-11,
+V029,G6_V3,stratejiler/v3_adaylar/REDDEDILENLER_tur9.txt,karar:v3_reddedilen,33,2026-11-11,
+V030,G6_V3,stratejiler/v3_adaylar/adaylar.csv,karar:v3_adaylar,154,2026-11-10,
+V031,G6_V3,stratejiler/v3_adaylar/aileler_v3.csv,karar:v3_aileler,154,2026-11-11,
+V032,G6_V3,stratejiler/v3_adaylar/kodlama_v3.csv,esleme:kodlama_kaydi,76,2026-11-10,
+V033,G6_V3,stratejiler/v3_adaylar/fable_hakem.csv,karar:v3_hakem,153,2026-11-10,
+V034,G6_V3,stratejiler/v3_adaylar/RAPOR.md,karar:v3_rapor,,2026-11-10,
+V035,G6_V3,stratejiler/v3_adaylar/kartlar/daytrade__12s-seans-ters-donus-btc__mdpi-jrfm.json,esleme:v3_kart,26,2026-11-11,
+V036,G6_V3,stratejiler/v3_adaylar/kartlar/daytrade__adaptif-trend-geri-cekilme-piramit__adnanpbi.json,esleme:v3_kart,26,2026-11-11,
+V037,G6_V3,stratejiler/v3_adaylar/kartlar/daytrade__adx-ema-macd-rsi-geri-cekilme__andrey1224.json,esleme:v3_kart,26,2026-11-10,
+V038,G6_V3,stratejiler/v3_adaylar/kartlar/daytrade__alligator-ha-donus-zigzag-1s-15m__samisuleman10.json,esleme:v3_kart,26,2026-11-11,
+V039,G6_V3,stratejiler/v3_adaylar/kartlar/daytrade__aralik-kirilim-bekleyen-emir__fxcraft.json,esleme:v3_kart,26,2026-11-10,
+V040,G6_V3,stratejiler/v3_adaylar/kartlar/daytrade__asya-kutu-kirilim-ma50__mutiiria.json,esleme:v3_kart,26,2026-11-10,
+V041,G6_V3,stratejiler/v3_adaylar/kartlar/daytrade__bb-ust-kirilim-rsi-4s__tradingstrategy-ai.json,esleme:v3_kart,26,2026-11-11,
+V042,G6_V3,stratejiler/v3_adaylar/kartlar/daytrade__bollinger-alt-bant-donus-long__rauterfrank-ui.json,esleme:v3_kart,26,2026-11-11,
+V043,G6_V3,stratejiler/v3_adaylar/kartlar/daytrade__btc-eth-hurst-korelasyon-supertrend__hskad.json,esleme:v3_kart,26,2026-11-11,
+V044,G6_V3,stratejiler/v3_adaylar/kartlar/daytrade__btcusdt-rsi20-rejim-geri-cekilme__denniskid2520.json,esleme:v3_kart,26,2026-11-10,
+V045,G6_V3,stratejiler/v3_adaylar/kartlar/daytrade__ce-zlsma-ha-anahtar-mum__ha56412003-lab.json,esleme:v3_kart,26,2026-11-11,
+V046,G6_V3,stratejiler/v3_adaylar/kartlar/daytrade__coklu-gosterge-3-4-onay-m5__morh492bunu-debug.json,esleme:v3_kart,26,2026-11-11,
+V047,G6_V3,stratejiler/v3_adaylar/kartlar/daytrade__cuma-15-est-tutma-saatlik__miralles.json,esleme:v3_kart,26,2026-11-11,
+V048,G6_V3,stratejiler/v3_adaylar/kartlar/daytrade__donchian-20-4s-1g-makro-filtre__mrismail-m.json,esleme:v3_kart,26,2026-11-11,
+V049,G6_V3,stratejiler/v3_adaylar/kartlar/daytrade__donchian20-ema100-400-xau-1s__guannings.json,esleme:v3_kart,26,2026-11-11,
+V050,G6_V3,stratejiler/v3_adaylar/kartlar/daytrade__dusuk-yuksek-mum-ema10-atr-btc15m__ilyasustun.json,esleme:v3_kart,26,2026-11-11,
+V051,G6_V3,stratejiler/v3_adaylar/kartlar/daytrade__ema-9-21-50-rsi-hacim__gooddinosaur.json,esleme:v3_kart,26,2026-11-10,
+V052,G6_V3,stratejiler/v3_adaylar/kartlar/daytrade__ema-sma-trend-durumu-hacim__abbysallord.json,esleme:v3_kart,26,2026-11-11,
+V053,G6_V3,stratejiler/v3_adaylar/kartlar/daytrade__ema21-geri-cekilme-h4-yapi-xau__abbujo.json,esleme:v3_kart,26,2026-11-11,
+V054,G6_V3,stratejiler/v3_adaylar/kartlar/daytrade__fib-4s-yapi-pin-yutan-limit__h0peson1.json,esleme:v3_kart,26,2026-11-11,
+V055,G6_V3,stratejiler/v3_adaylar/kartlar/daytrade__funding-1s-devam__octopustakopi.json,esleme:v3_kart,26,2026-11-10,
+V056,G6_V3,stratejiler/v3_adaylar/kartlar/daytrade__gap-fade-trend-uyumlu-1s-teyit__logiccrafterdz.json,esleme:v3_kart,26,2026-11-11,
+V057,G6_V3,stratejiler/v3_adaylar/kartlar/daytrade__geri-cekilme-penceresi__ilahuerta.json,esleme:v3_kart,26,2026-11-10,
+V058,G6_V3,stratejiler/v3_adaylar/kartlar/daytrade__gunici-momentum-noise-alani__zarattini.json,esleme:v3_kart,26,2026-11-10,
+V059,G6_V3,stratejiler/v3_adaylar/kartlar/daytrade__hacim-delta-vekil-swing-tuzagi-gld__yingliupabot.json,esleme:v3_kart,26,2026-11-11,
+V060,G6_V3,stratejiler/v3_adaylar/kartlar/daytrade__hacim-klimaksi-bant-donus__rafael-silvaa.json,esleme:v3_kart,26,2026-11-11,
+V061,G6_V3,stratejiler/v3_adaylar/kartlar/daytrade__ilk-yari-saat-momentum__shen.json,esleme:v3_kart,26,2026-11-10,
+V062,G6_V3,stratejiler/v3_adaylar/kartlar/daytrade__kama-mama-derin-dusus-alim-5m__mastaaa1987.json,esleme:v3_kart,26,2026-11-11,
+V063,G6_V3,stratejiler/v3_adaylar/kartlar/daytrade__kayan-vwap-sekme-rsi__alwin48.json,esleme:v3_kart,26,2026-11-11,
+V064,G6_V3,stratejiler/v3_adaylar/kartlar/daytrade__kesit-bosluk-z-fade-acilis-kapanis__lhcbenac.json,esleme:v3_kart,26,2026-11-11,
+V065,G6_V3,stratejiler/v3_adaylar/kartlar/daytrade__kesit-z-skor-ters-6s-4coin__kashapp10.json,esleme:v3_kart,26,2026-11-11,
+V066,G6_V3,stratejiler/v3_adaylar/kartlar/daytrade__killzone-h4-ema200-altin__bakome-hub.json,esleme:v3_kart,26,2026-11-11,
+V067,G6_V3,stratejiler/v3_adaylar/kartlar/daytrade__l-sekli-ma-kirilim-long__mgcha85.json,esleme:v3_kart,26,2026-11-10,
+V068,G6_V3,stratejiler/v3_adaylar/kartlar/daytrade__londra-volatilite-kirilim__zhangxingthang.json,esleme:v3_kart,26,2026-11-10,
+V069,G6_V3,stratejiler/v3_adaylar/kartlar/daytrade__momentum-itkisi-10atr-20bar-long-5m__tomasbatovsky.json,esleme:v3_kart,26,2026-11-11,
+V070,G6_V3,stratejiler/v3_adaylar/kartlar/daytrade__orb-15dk-etf-aralik-hedef__liamrr18.json,esleme:v3_kart,26,2026-11-11,
+V071,G6_V3,stratejiler/v3_adaylar/kartlar/daytrade__orb-4s-hacim-atr__saadtahir995.json,esleme:v3_kart,26,2026-11-10,
+V072,G6_V3,stratejiler/v3_adaylar/kartlar/daytrade__orb-5dk-oynak-hisse-hacim__zarattini.json,esleme:v3_kart,26,2026-11-11,
+V073,G6_V3,stratejiler/v3_adaylar/kartlar/daytrade__order-block-bos-retest-ema100__logiccrafterdz.json,esleme:v3_kart,26,2026-11-11,
+V074,G6_V3,stratejiler/v3_adaylar/kartlar/daytrade__pin-bar-sonrasi-long-4s__atm4tech.json,esleme:v3_kart,26,2026-11-11,
+V075,G6_V3,stratejiler/v3_adaylar/kartlar/daytrade__pivot-ma-macd-rsi-altin__monkeyattack.json,esleme:v3_kart,26,2026-11-11,
+V076,G6_V3,stratejiler/v3_adaylar/kartlar/daytrade__pullback-pencere-usdjpy__ilahuerta.json,esleme:v3_kart,26,2026-11-10,
+V077,G6_V3,stratejiler/v3_adaylar/kartlar/daytrade__renko-macd-sinyal-xau__gavaav.json,esleme:v3_kart,26,2026-11-11,
+V078,G6_V3,stratejiler/v3_adaylar/kartlar/daytrade__rsi-asiri-bolge-geri-donus__hooper18.json,esleme:v3_kart,26,2026-11-11,
+V079,G6_V3,stratejiler/v3_adaylar/kartlar/daytrade__rsi-bb-ema-geri-donus-5m__nickfloman.json,esleme:v3_kart,26,2026-11-11,
+V080,G6_V3,stratejiler/v3_adaylar/kartlar/daytrade__rsi32-yon-hedef4-btc-1h__noahroboros.json,esleme:v3_kart,26,2026-11-10,
+V081,G6_V3,stratejiler/v3_adaylar/kartlar/daytrade__saat-21-23-utc__padysak.json,esleme:v3_kart,26,2026-11-10,
+V082,G6_V3,stratejiler/v3_adaylar/kartlar/daytrade__saatlik-asiri-tepki-tersine__denicola.json,esleme:v3_kart,26,2026-11-10,
+V083,G6_V3,stratejiler/v3_adaylar/kartlar/daytrade__saatlik-kesit-ters-donus__apex.json,esleme:v3_kart,26,2026-11-10,
+V084,G6_V3,stratejiler/v3_adaylar/kartlar/daytrade__seans-tepe-dip-kirilim-geri-test-h4-xau__abbujo.json,esleme:v3_kart,26,2026-11-11,
+V085,G6_V3,stratejiler/v3_adaylar/kartlar/daytrade__sessiz-surukleme-nikkei-m15__forszpaniak.json,esleme:v3_kart,26,2026-11-11,
+V086,G6_V3,stratejiler/v3_adaylar/kartlar/daytrade__skor-ma-rsi-macd-adx-bb-atr__drewisonline.json,esleme:v3_kart,26,2026-11-11,
+V087,G6_V3,stratejiler/v3_adaylar/kartlar/daytrade__sma-atr-bant-donus__ryanxiaoo.json,esleme:v3_kart,26,2026-11-11,
+V088,G6_V3,stratejiler/v3_adaylar/kartlar/daytrade__sma-trend-rsi-atr-btc15m__devansh-dek.json,esleme:v3_kart,26,2026-11-10,
+V089,G6_V3,stratejiler/v3_adaylar/kartlar/daytrade__smoothoperator-rsi-cci-mfi-5m__buymeanicecream.json,esleme:v3_kart,26,2026-11-11,
+V090,G6_V3,stratejiler/v3_adaylar/kartlar/daytrade__stokastik-kesisim-ters-mum-bb-hedef__muokapwambua.json,esleme:v3_kart,26,2026-11-11,
+V091,G6_V3,stratejiler/v3_adaylar/kartlar/daytrade__supertrend-30m-chop-er-rejim-3-asama-stop__xunxuntj.json,esleme:v3_kart,26,2026-11-11,
+V092,G6_V3,stratejiler/v3_adaylar/kartlar/daytrade__ters-fvg-nq__prashanthaitha24.json,esleme:v3_kart,26,2026-11-10,
+V093,G6_V3,stratejiler/v3_adaylar/kartlar/daytrade__trend-pullback-ema16-adx-skor-kapisi__darkvolg.json,esleme:v3_kart,26,2026-11-11,
+V094,G6_V3,stratejiler/v3_adaylar/kartlar/daytrade__vwap-kesisim-ters-cevir__aatmanjoshi.json,esleme:v3_kart,26,2026-11-11,
+V095,G6_V3,stratejiler/v3_adaylar/kartlar/daytrade__vwap-kontrol-donusu-retest__styleretech.json,esleme:v3_kart,26,2026-11-11,
+V096,G6_V3,stratejiler/v3_adaylar/kartlar/daytrade__xau-bos-retest-ema-rsi__zoulouhh.json,esleme:v3_kart,26,2026-11-11,
+V097,G6_V3,stratejiler/v3_adaylar/kartlar/daytrade__yarim-fitil__tesudesu.json,esleme:v3_kart,26,2026-11-10,
+V098,G6_V3,stratejiler/v3_adaylar/kartlar/daytrade__z-skor-trend-rejim-hibrit-15m__dorian68.json,esleme:v3_kart,26,2026-11-11,
+V099,G6_V3,stratejiler/v3_adaylar/kartlar/daytrade__z7-sapma-kirilim-90mum__gauravsingh.json,esleme:v3_kart,26,2026-11-11,
+V100,G6_V3,stratejiler/v3_adaylar/kartlar/swing__100g-roc-yuzde30-endeks-rejim-iz-stop20__laffuste.json,esleme:v3_kart,26,2026-11-11,
+V101,G6_V3,stratejiler/v3_adaylar/kartlar/swing__12-1-momentum-decile__kyraroy.json,esleme:v3_kart,26,2026-11-10,
+V102,G6_V3,stratejiler/v3_adaylar/kartlar/swing__12ay-dongu-kesit__heston.json,esleme:v3_kart,26,2026-11-10,
+V103,G6_V3,stratejiler/v3_adaylar/kartlar/swing__12ay-getiri-esik-tahvile-gecis__haghani.json,esleme:v3_kart,26,2026-11-10,
+V104,G6_V3,stratejiler/v3_adaylar/kartlar/swing__12s-1g-ma357-hizalama-geri-cekilme__tranduy216.json,esleme:v3_kart,26,2026-11-11,
+V105,G6_V3,stratejiler/v3_adaylar/kartlar/swing__252g-zirve-kirilim-yuzde16-iz__yashkondawar.json,esleme:v3_kart,26,2026-11-10,
+V106,G6_V3,stratejiler/v3_adaylar/kartlar/swing__4s-kirilim-ema200-adx__epfraghu.json,esleme:v3_kart,26,2026-11-11,
+V107,G6_V3,stratejiler/v3_adaylar/kartlar/swing__50g-kirilim-sma-filtre-3atr-iz__wilki2021.json,esleme:v3_kart,26,2026-11-10,
+V108,G6_V3,stratejiler/v3_adaylar/kartlar/swing__adaptivetrend-6s-momentum__arxiv.json,esleme:v3_kart,26,2026-11-10,
+V109,G6_V3,stratejiler/v3_adaylar/kartlar/swing__altin-rejim-olasilik-atr__singha.json,esleme:v3_kart,26,2026-11-11,
+V110,G6_V3,stratejiler/v3_adaylar/kartlar/swing__altin-tahvil-12ay-rejim__dujava.json,esleme:v3_kart,26,2026-11-11,
+V111,G6_V3,stratejiler/v3_adaylar/kartlar/swing__bab-ulke-endeks__frazzini.json,esleme:v3_kart,26,2026-11-10,
+V112,G6_V3,stratejiler/v3_adaylar/kartlar/swing__bb-genislik-rejim-psar__wchia016.json,esleme:v3_kart,26,2026-11-10,
+V113,G6_V3,stratejiler/v3_adaylar/kartlar/swing__btc-gecelik-max10-hafta-sonu__dujava.json,esleme:v3_kart,26,2026-11-11,
+V114,G6_V3,stratejiler/v3_adaylar/kartlar/swing__carpiklik-emtia__dujava.json,esleme:v3_kart,26,2026-11-10,
+V115,G6_V3,stratejiler/v3_adaylar/kartlar/swing__cok-ufuk-momentum-vol-filtre__sidharthguptax.json,esleme:v3_kart,26,2026-11-11,
+V116,G6_V3,stratejiler/v3_adaylar/kartlar/swing__d200-roc-mesafe-atr-stop-hisse__calmdude.json,esleme:v3_kart,26,2026-11-11,
+V117,G6_V3,stratejiler/v3_adaylar/kartlar/swing__donchian-ansambl-vol-hedef__zarattini.json,esleme:v3_kart,26,2026-11-10,
+V118,G6_V3,stratejiler/v3_adaylar/kartlar/swing__donchian-yuzde-iz-surme-cevir__nl2992.json,esleme:v3_kart,26,2026-11-11,
+V119,G6_V3,stratejiler/v3_adaylar/kartlar/swing__donchian10-ema200-egim-impuls-3atr-iz__tientung2501.json,esleme:v3_kart,26,2026-11-11,
+V120,G6_V3,stratejiler/v3_adaylar/kartlar/swing__dusuk-vol-momentum-rank__drishti7033.json,esleme:v3_kart,26,2026-11-10,
+V121,G6_V3,stratejiler/v3_adaylar/kartlar/swing__dusuk-volatilite-desil__blitz.json,esleme:v3_kart,26,2026-11-10,
+V122,G6_V3,stratejiler/v3_adaylar/kartlar/swing__dusus-1-5pct-sonrasi-giris__yuvarajvm.json,esleme:v3_kart,26,2026-11-10,
+V123,G6_V3,stratejiler/v3_adaylar/kartlar/swing__dusus-2pct-5g-tutma__rishon1245.json,esleme:v3_kart,26,2026-11-10,
+V124,G6_V3,stratejiler/v3_adaylar/kartlar/swing__entropi-rejim-sigmoid__akshathp0.json,esleme:v3_kart,26,2026-11-10,
+V125,G6_V3,stratejiler/v3_adaylar/kartlar/swing__erc-vol-hedef-6etf__quantucf.json,esleme:v3_kart,26,2026-11-10,
+V126,G6_V3,stratejiler/v3_adaylar/kartlar/swing__eslesmis-gecis-hisse-tahvil__maewal.json,esleme:v3_kart,26,2026-11-10,
+V127,G6_V3,stratejiler/v3_adaylar/kartlar/swing__etf-momentum-varyans-orani-rotasyon__he6s.json,esleme:v3_kart,26,2026-11-11,
+V128,G6_V3,stratejiler/v3_adaylar/kartlar/swing__fip-kesitsel-momentum__baptoudur.json,esleme:v3_kart,26,2026-11-10,
+V129,G6_V3,stratejiler/v3_adaylar/kartlar/swing__fomc-oncesi-gun__tori.json,esleme:v3_kart,26,2026-11-10,
+V130,G6_V3,stratejiler/v3_adaylar/kartlar/swing__funding-7g-haftalik-tercil__vine.json,esleme:v3_kart,26,2026-11-10,
+V131,G6_V3,stratejiler/v3_adaylar/kartlar/swing__funding-azalan-agirlik-fark-kesit__prestolabs.json,esleme:v3_kart,26,2026-11-11,
+V132,G6_V3,stratejiler/v3_adaylar/kartlar/swing__funding-ewma-histerezis-carry__samuelahou-g20.json,esleme:v3_kart,26,2026-11-11,
+V133,G6_V3,stratejiler/v3_adaylar/kartlar/swing__funding-kesit-decil-carry__octopustakopi.json,esleme:v3_kart,26,2026-11-10,
+V134,G6_V3,stratejiler/v3_adaylar/kartlar/swing__funding-z90-3gun__octopustakopi.json,esleme:v3_kart,26,2026-11-10,
+V135,G6_V3,stratejiler/v3_adaylar/kartlar/swing__graf-laplasyen-kalinti-tda-rejim__ciaranmccarthy1.json,esleme:v3_kart,26,2026-11-11,
+V136,G6_V3,stratejiler/v3_adaylar/kartlar/swing__gun-zirve-kirilim-mmr__kechprog.json,esleme:v3_kart,26,2026-11-11,
+V137,G6_V3,stratejiler/v3_adaylar/kartlar/swing__hacim-patlamasi-sma50-rsi-atr-btc1g__parakh20.json,esleme:v3_kart,26,2026-11-11,
+V138,G6_V3,stratejiler/v3_adaylar/kartlar/swing__haftalik-30sma-20h-kirilim-trix__ccadic.json,esleme:v3_kart,26,2026-11-10,
+V139,G6_V3,stratejiler/v3_adaylar/kartlar/swing__kalman-cift-zskor__octaviodegodoy.json,esleme:v3_kart,26,2026-11-10,
+V140,G6_V3,stratejiler/v3_adaylar/kartlar/swing__kesit-dusuk-hacim-haftalik__liu.json,esleme:v3_kart,26,2026-11-10,
+V141,G6_V3,stratejiler/v3_adaylar/kartlar/swing__kesit-funding-baz-vekil__chi.json,esleme:v3_kart,26,2026-11-10,
+V142,G6_V3,stratejiler/v3_adaylar/kartlar/swing__kirmizi-mum-2x-hacim-ertesi-gun__habr.json,esleme:v3_kart,26,2026-11-10,
+V143,G6_V3,stratejiler/v3_adaylar/kartlar/swing__kisa-vade-momentum-2-3-hafta-kesit__liu-tsyvinski-wu.json,esleme:v3_kart,26,2026-11-11,
+V144,G6_V3,stratejiler/v3_adaylar/kartlar/swing__kisa-vade-tersine-donus__groot.json,esleme:v3_kart,26,2026-11-10,
+V145,G6_V3,stratejiler/v3_adaylar/kartlar/swing__kripto-30g-momentum-vol-yonetimli__grobys.json,esleme:v3_kart,26,2026-11-11,
+V146,G6_V3,stratejiler/v3_adaylar/kartlar/swing__kripto-max-piyango-kesit__ozdamar.json,esleme:v3_kart,26,2026-11-11,
+V147,G6_V3,stratejiler/v3_adaylar/kartlar/swing__ma-v-kalman-cift__yibaii.json,esleme:v3_kart,26,2026-11-10,
+V148,G6_V3,stratejiler/v3_adaylar/kartlar/swing__ma50-200-trend-rsi55-geri-cekilme__samsondoski.json,esleme:v3_kart,26,2026-11-11,
+V149,G6_V3,stratejiler/v3_adaylar/kartlar/swing__macd-hist-mad-bb-atr__bachng0111.json,esleme:v3_kart,26,2026-11-11,
+V150,G6_V3,stratejiler/v3_adaylar/kartlar/swing__macd-rsi-atr-momentum__algotrade-education.json,esleme:v3_kart,26,2026-11-11,
+V151,G6_V3,stratejiler/v3_adaylar/kartlar/swing__macd-sinyal-kesisim-cevir__0jas99.json,esleme:v3_kart,26,2026-11-11,
+V152,G6_V3,stratejiler/v3_adaylar/kartlar/swing__markov-gecis-matrisi-rejim-sinyali__bpeters19.json,esleme:v3_kart,26,2026-11-11,
+V153,G6_V3,stratejiler/v3_adaylar/kartlar/swing__max-hisse-kesit-short__bali.json,esleme:v3_kart,26,2026-11-11,
+V154,G6_V3,stratejiler/v3_adaylar/kartlar/swing__momentum-btc-rejim-top5__adensvaz.json,esleme:v3_kart,26,2026-11-10,
+V155,G6_V3,stratejiler/v3_adaylar/kartlar/swing__momentum-carpiklik-filtre-top50-aylik__alesarabandi.json,esleme:v3_kart,26,2026-11-11,
+V156,G6_V3,stratejiler/v3_adaylar/kartlar/swing__momentum-sifir-kesisim__chandanp001.json,esleme:v3_kart,26,2026-11-10,
+V157,G6_V3,stratejiler/v3_adaylar/kartlar/swing__olcekli-kirilim-24bar__trade-ai-lab.json,esleme:v3_kart,26,2026-11-10,
+V158,G6_V3,stratejiler/v3_adaylar/kartlar/swing__ols-coz-pairs-eski__akkuya.json,esleme:v3_kart,26,2026-11-10,
+V159,G6_V3,stratejiler/v3_adaylar/kartlar/swing__opsiyon-vade-haftasi__stivers.json,esleme:v3_kart,26,2026-11-10,
+V160,G6_V3,stratejiler/v3_adaylar/kartlar/swing__ozvektor-merkeziyet-momentum__dermawan.json,esleme:v3_kart,26,2026-11-10,
+V161,G6_V3,stratejiler/v3_adaylar/kartlar/swing__pairs-coz-60-ols__rw762.json,esleme:v3_kart,26,2026-11-10,
+V162,G6_V3,stratejiler/v3_adaylar/kartlar/swing__payday-ayin-16si__ma-pratt.json,esleme:v3_kart,26,2026-11-10,
+V163,G6_V3,stratejiler/v3_adaylar/kartlar/swing__pazartesi-dip-endeks__mql5.json,esleme:v3_kart,26,2026-11-10,
+V164,G6_V3,stratejiler/v3_adaylar/kartlar/swing__permanent-portfoy-4-varlik__psystat.json,esleme:v3_kart,26,2026-11-10,
+V165,G6_V3,stratejiler/v3_adaylar/kartlar/swing__perp-spot-baz-esik-kapama__he-manela.json,esleme:v3_kart,26,2026-11-11,
+V166,G6_V3,stratejiler/v3_adaylar/kartlar/swing__petrol-hisse-zamanlama__driesprong.json,esleme:v3_kart,26,2026-11-10,
+V167,G6_V3,stratejiler/v3_adaylar/kartlar/swing__pre-fomc-surunme__delphic.json,esleme:v3_kart,26,2026-11-10,
+V168,G6_V3,stratejiler/v3_adaylar/kartlar/swing__ramazan-mevsimsel__bialkowski.json,esleme:v3_kart,26,2026-11-10,
+V169,G6_V3,stratejiler/v3_adaylar/kartlar/swing__ranked-alloc-etf-5__stef.json,esleme:v3_kart,26,2026-11-10,
+V170,G6_V3,stratejiler/v3_adaylar/kartlar/swing__rsi-bb-asiri-donus-atr__akariba.json,esleme:v3_kart,26,2026-11-11,
+V171,G6_V3,stratejiler/v3_adaylar/kartlar/swing__rsi-geri-cekilme-ema-yigin-gunluk__kunal14901.json,esleme:v3_kart,26,2026-11-11,
+V172,G6_V3,stratejiler/v3_adaylar/kartlar/swing__rsi-macd-ayni-bar-donus__hrnewcoll.json,esleme:v3_kart,26,2026-11-11,
+V173,G6_V3,stratejiler/v3_adaylar/kartlar/swing__rsi14-ema200-izleyen-stop__tamnguyen.json,esleme:v3_kart,26,2026-11-10,
+V174,G6_V3,stratejiler/v3_adaylar/kartlar/swing__rsi2-sma200-geri-cekilme__toney.json,esleme:v3_kart,26,2026-11-10,
+V175,G6_V3,stratejiler/v3_adaylar/kartlar/swing__rsi2-sma200-hacim__anshs527.json,esleme:v3_kart,26,2026-11-10,
+V176,G6_V3,stratejiler/v3_adaylar/kartlar/swing__rsi30-hacim-ema200__ainayoon.json,esleme:v3_kart,26,2026-11-10,
+V177,G6_V3,stratejiler/v3_adaylar/kartlar/swing__rsi5-esik-70-momentum__aries744.json,esleme:v3_kart,26,2026-11-11,
+V178,G6_V3,stratejiler/v3_adaylar/kartlar/swing__sma-pullback-rsi-sl5-tp10__adobyy.json,esleme:v3_kart,26,2026-11-11,
+V179,G6_V3,stratejiler/v3_adaylar/kartlar/swing__sma30-yuzde-bant-donus__gaurav-raj64.json,esleme:v3_kart,26,2026-11-11,
+V180,G6_V3,stratejiler/v3_adaylar/kartlar/swing__smma-rsi-cci-kesisim__mutiiria.json,esleme:v3_kart,26,2026-11-10,
+V181,G6_V3,stratejiler/v3_adaylar/kartlar/swing__stocks-on-the-move__clenow.json,esleme:v3_kart,26,2026-11-10,
+V182,G6_V3,stratejiler/v3_adaylar/kartlar/swing__tatil-oncesi-gun__hansen.json,esleme:v3_kart,26,2026-11-10,
+V183,G6_V3,stratejiler/v3_adaylar/kartlar/swing__ust-fitil-yankisi-gunluk__co0ki3.json,esleme:v3_kart,26,2026-11-11,
+V184,G6_V3,stratejiler/v3_adaylar/kartlar/swing__vol-yonetimli-long__moreira.json,esleme:v3_kart,26,2026-11-11,
+V185,G6_V3,stratejiler/v3_adaylar/kartlar/swing__volatilite-kirilim-k05__mskim.json,esleme:v3_kart,26,2026-11-10,
+V186,G6_V3,stratejiler/v3_adaylar/kartlar/swing__yahudi-3-etf-esit-yillik__psystat.json,esleme:v3_kart,26,2026-11-10,
+V187,G6_V3,stratejiler/v3_adaylar/kartlar/swing__z-skor-karsit-spy__nadirali.json,esleme:v3_kart,26,2026-11-10,
+V188,G6_V3,stratejiler/v3_adaylar/kartlar/swing__zs-momentum-vol-hedef__fiction-junction.json,esleme:v3_kart,26,2026-11-10,
+R001,G0_SONUC,sonuclar/v3/eleme.csv,sonuc:v3_eleme,9,2026-11-11,
+R002,G0_SONUC,sonuclar/v3/ELEME_RAPORU.md,sonuc:v3_eleme,,2026-11-11,
+R003,G0_SONUC,sonuclar/evren/v2/eleme.csv,sonuc:v2_eleme,222,2026-11-09,
+R004,G0_SONUC,sonuclar/evren/v2/test.csv,sonuc:v2_test,222,2026-11-09,
+R005,G0_SONUC,sonuclar/evren/v2/saglamlik.csv,sonuc:v2_saglamlik,7,2026-11-09,
+R006,G0_SONUC,sonuclar/evren/v2/set.csv,sonuc:v2_set,2,2026-11-09,
+R007,G0_SONUC,stratejiler/havuz_v2.csv,sonuc:v2_havuz,222,2026-11-09,
+R008,G0_SONUC,stratejiler/havuz_v2_etiketler.csv,sonuc:v2_havuz,223,2026-11-09,
+R009,G0_SONUC,stratejiler/paper_v2_seti.json,sonuc:paper_v2,10,2026-11-10,
+R010,G0_SONUC,stratejiler/final_set.json,sonuc:final_v1,7,2026-11-09,
+R011,G0_SONUC,sonuclar/evren/2017_gelistirme/wf_evren.csv,sonuc:v1_evren_wf,939,2026-11-09,
+R012,G0_SONUC,sonuclar/evren/2017_gelistirme/saglamlik.csv,sonuc:v1_evren_saglamlik,58,2026-11-09,
+R013,G0_SONUC,sonuclar/evren/2017_gelistirme/pbo.csv,sonuc:v1_evren_pbo,9,2026-11-09,
+R014,G0_SONUC,sonuclar/evren/2017_gelistirme/iyi_liste.csv,sonuc:v1_evren_secim,0,2026-11-09,
+R015,G0_SONUC,sonuclar/evren/2017_gelistirme/iyiye_yakin_liste.csv,sonuc:v1_evren_secim,0,2026-11-09,
+R016,G0_SONUC,sonuclar/tarama/k2_ana_ozet.csv,sonuc:k2_tarama,192,2026-11-09,
+R017,G0_SONUC,sonuclar/wf/k3_dk.csv,sonuc:k3_wf,3180,2026-11-09,
+R018,G0_SONUC,sonuclar/wf/k3_dk_v2.csv,sonuc:k3_wf,3180,2026-11-09,
+R019,G0_SONUC,sonuclar/wf/k3_hisse_kisa.csv,sonuc:k3_wf,1358,2026-11-09,
+R020,G0_SONUC,sonuclar/wf/k3_kripto.csv,sonuc:k3_wf,1242,2026-11-09,
+R021,G0_SONUC,sonuclar/wf/son1ay_k3_kripto.csv,sonuc:k3_wf,12,2026-11-09,
+R022,G0_SONUC,sonuclar/saglamlik/k3_dk.csv,sonuc:k3_saglamlik,195,2026-11-09,
+R023,G0_SONUC,sonuclar/saglamlik/k3_dk_v2.csv,sonuc:k3_saglamlik,198,2026-11-09,
+R024,G0_SONUC,sonuclar/saglamlik/k3_hisse_kisa.csv,sonuc:k3_saglamlik,27,2026-11-09,
+R025,G0_SONUC,sonuclar/saglamlik/k3_kripto.csv,sonuc:k3_saglamlik,35,2026-11-09,
+R026,G0_SONUC,sonuclar/saglamlik/son1ay_k3_kripto.csv,sonuc:k3_saglamlik,1,2026-11-09,
+R027,G0_SONUC,sonuclar/wf_portfoy/p3_emtia_v3.csv,sonuc:portfoy_wf,15,2026-11-09,
+R028,G0_SONUC,sonuclar/wf_portfoy/p3_hepsi.csv,sonuc:portfoy_wf,15,2026-11-09,
+R029,G0_SONUC,sonuclar/wf_portfoy/p3_hepsi_v2.csv,sonuc:portfoy_wf,15,2026-11-09,
+R030,G0_SONUC,sonuclar/wf_portfoy/p3_hepsi_v3.csv,sonuc:portfoy_wf,15,2026-11-09,
+R031,G0_SONUC,sonuclar/wf_portfoy/p3_hisse_emtia_v3.csv,sonuc:portfoy_wf,15,2026-11-09,
+R032,G0_SONUC,sonuclar/wf_portfoy/p3_hisse_v3.csv,sonuc:portfoy_wf,15,2026-11-09,
+R033,G0_SONUC,sonuclar/wf_portfoy/p3_kripto.csv,sonuc:portfoy_wf,15,2026-11-09,
+R034,G0_SONUC,sonuclar/wf_portfoy/p3_kripto_v2.csv,sonuc:portfoy_wf,15,2026-11-09,
+R035,G0_SONUC,sonuclar/wf_portfoy/son1ay_p3_kripto.csv,sonuc:portfoy_wf,1,2026-11-09,
+R036,G0_SONUC,sonuclar/wf_portfoy/son1ay_p3_makro.csv,sonuc:portfoy_wf,1,2026-11-09,
+R037,G0_SONUC,sonuclar/kilit/sonuc.csv,sonuc:k4_kilit,322,2026-11-09,
+R038,G0_SONUC,sonuclar/final_aday_havuzu_tek_grafik.csv,sonuc:final_aday_havuzu,51,2026-11-09,
+R039,G0_SONUC,sonuclar/secim/adaylar.csv,sonuc:secim,55,2026-11-09,
+X001,G8_DIS_ARASTIRMA,sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/karsilastirma/arsiv_envanteri.csv,karar:dis_karsilastirma,821,2026-11-13,main'deki 707 karşılaştırması
+X002,G8_DIS_ARASTIRMA,sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/karsilastirma/fikir_grubu_ozeti.csv,karar:dis_karsilastirma,119,2026-11-13,main'deki 707 karşılaştırması
+X003,G8_DIS_ARASTIRMA,sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/karsilastirma/karsilastirma.csv,karar:dis_karsilastirma,707,2026-11-13,main'deki 707 karşılaştırması
+X004,G8_DIS_ARASTIRMA,sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/karsilastirma/RAPOR.md,karar:dis_karsilastirma,,2026-11-13,
+X005,G8_DIS_ARASTIRMA,dal:claude/adoring-maxwell-q7t60g:sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/ajan1/strateji_listesi.csv,birincil:dis_ajan1_tur4,906,2026-11-13 (dal),906 (tur1-3'ün üst kümesi)
+X006,G8_DIS_ARASTIRMA,dal:claude/adoring-maxwell-q7t60g:sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/ajan1/fikir_gruplari.csv,esleme:fikir_grubu,906,2026-11-13 (dal),
+X007,G8_DIS_ARASTIRMA,dal:claude/adoring-maxwell-q7t60g:sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/ajan1/test_oncelik_listesi.csv,karar:oncelik,30,2026-11-13 (dal),
+X008,G8_DIS_ARASTIRMA,dal:claude/adoring-maxwell-q7t60g:sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/ajan2/derin_arastirma_26_kayit_raporu.md,birincil:dis_ajan2,,2026-11-13 (dal),"26 kayıt, CSV yok"
+X009,G8_DIS_ARASTIRMA,dal:claude/adoring-maxwell-q7t60g:sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/derin_gecis/aile_kapsami.csv,karar:derin_gecis,119,2026-11-13 (dal),
+X010,G8_DIS_ARASTIRMA,dal:claude/adoring-maxwell-q7t60g:sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/derin_gecis/benzeri_derin.csv,karar:derin_gecis,301,2026-11-13 (dal),
+X011,G8_DIS_ARASTIRMA,dal:claude/adoring-maxwell-q7t60g:sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/derin_gecis/denetim_ornek.csv,karar:derin_gecis,40,2026-11-13 (dal),
+X012,G8_DIS_ARASTIRMA,dal:claude/adoring-maxwell-q7t60g:sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/derin_gecis/ADAYLAR.md,karar:derin_gecis,,2026-11-13 (dal),
+X013,G8_DIS_ARASTIRMA,dal:claude/adoring-maxwell-q7t60g:sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/derin_gecis/RAPOR.md,karar:derin_gecis,,2026-11-13 (dal),
+X014,G8_DIS_ARASTIRMA,dal:claude/adoring-maxwell-q7t60g:sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/tur4_degerlendirme/oncelik30_hukum.csv,karar:tur4,30,2026-11-13 (dal),
+X015,G8_DIS_ARASTIRMA,dal:claude/adoring-maxwell-q7t60g:sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/tur4_degerlendirme/yeni_199.csv,karar:tur4,199,2026-11-13 (dal),
+X016,G8_DIS_ARASTIRMA,dal:claude/adoring-maxwell-q7t60g:sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/tur4_degerlendirme/RAPOR.md,karar:tur4,,2026-11-13 (dal),
+B001,G9_ROBOTIC,dal:claude/adoring-maxwell-q7t60g:sonuclar/dis_arastirma/2026-11_freqtrade_robotic/dosya_listesi.csv,birincil:robotic_909,909,2026-11-13 (dal),
+B002,G9_ROBOTIC,dal:claude/adoring-maxwell-q7t60g:sonuclar/dis_arastirma/2026-11_freqtrade_robotic/kume_listesi.csv,karar:robotic_kume,540,2026-11-13 (dal),
+B003,G9_ROBOTIC,dal:claude/adoring-maxwell-q7t60g:sonuclar/dis_arastirma/2026-11_freqtrade_robotic/RAPOR.md,karar:robotic_rapor,,2026-11-13 (dal),
+B004,G9_ROBOTIC,dal:claude/adoring-maxwell-q7t60g:sonuclar/dis_arastirma/2026-11_freqtrade_robotic/canli_akraba/RAPOR.md,karar:robotic_canli_akraba,,2026-11-13 (dal),
+B005,G9_ROBOTIC,dal:claude/adoring-maxwell-q7t60g:sonuclar/dis_arastirma/2026-11_freqtrade_robotic/canli_akraba/e0v1e_karsilastirma.csv,karar:robotic_canli_akraba,24,2026-11-13 (dal),
+B006,G9_ROBOTIC,dal:claude/adoring-maxwell-q7t60g:sonuclar/dis_arastirma/2026-11_freqtrade_robotic/canli_akraba/ewo_aile.csv,karar:robotic_canli_akraba,96,2026-11-13 (dal),
