@@ -1,0 +1,12 @@
+konu,beyan,olcum,hukum,kanit
+460 tek grafik +19 portföy,"DURUM.md:407, 2026-11-08",c10e79d: 460 + 19; güncel:492 +29=521,Tarihsel sayı doğru; bugünkü tüm kaynak veya test adedi değil,Git c10e79d; ara/P2_kod_denetimli.csv
+~120 ek ayar/mod,DURUM.md:407,"177 dis_ayarlari +11 d11j +7 d12b=195 yazılı ayar; kitap226 ile421. 336 ayar için özgül kaynak kimlikli koşu kaydı,85 için yok.",Yaklaşık sayının birimi açık değil;195 yazılı kayıtla birebir eşit değil. Kod ailesinin testi her ayarın testi değil.,ara/P5_ayar_kosu_izleri.csv; c10e79d aynı ayar dosyaları
+Kart dizini,veri/kart_dizini.csv:438,810 güncel kitap kartı; v3 kartları154 ayrı,Dizin kitap kartlarının tamamını kapsamıyor,ara/P4_kitap_sayim.json; ara/P4_kitap_izleri.csv
+v3 kod ve koşu,35 kod tanımı / eleme9,35=9 sonuç+26 koşu kanıtsız,"Doğrulandı; C gerçek kod listesi26, kaynak profilleriyle53 görünmesi53 ayrı kod değil",ara/P8_v3_kosulmayan_26.csv; sonuclar/v3/eleme.csv
+v2 yapısal eleme,222 havuz;73 E1/E3 geçtiği halde elendi,"222,73; ayrıca6 hata",Doğrulandı; hata performans elemesi değil,ara/P3_v2_yapisal_kapi.csv; ara/P3_v2_hata_satirlari.csv
+GitHub g1..g7,DURUM.md:1198,1198,Satır sayısı; bağımsız strateji/test sayısı değil,ara/P4_P7_sayi_kontrolu.csv
+Kakushadze 151,Kitap/katalog adı151,CSV173,Kitap başlığı ile envanter alt strateji satırı farklı birim,stratejiler/ek_kaynaklar/kakushadze_151.csv
+Repo raporları,DURUM.md eski314,Güncel CSV331,Farklı sürüm;314 bugünkü kapsam sayısı değil,stratejiler/ek_kaynaklar/repo_raporlari.csv
+Dış liste turları,417/547/707/906,906 son liste;707+199=906,Üst kümeler; eski turlar ham sayımda yok.18 kural/parametre sürüm farkı korundu,ara/P7_sayim.json; ara/P7_surum_mantik_farklari.csv
+Robotic909/540,909 dosya/540küme,"909 dosya,540 üyelik kümesi; toplamsal üyelik909",Üyelik doğrulandı;540 mantıksal tekil strateji olduğu ispatlanmadı,ara/P7_robotic_kume_uyelik.csv
+ChatGPT26,Ajan2 raporu26,Tekil CSV yok;1 eksik-liste toplu kaydı,26 adı/kuralı uydurulmadı; satır kapsamı doğrulanamaz,sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/ajan2/derin_arastirma_26_kayit_raporu.md

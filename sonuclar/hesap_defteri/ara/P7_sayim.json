@@ -1,0 +1,26 @@
+{
+  "son_liste": 906,
+  "eski_turlar_sayima_dahil": false,
+  "surum_mantik_ve_link_fark_kaydi": 18,
+  "dosya": 909,
+  "kume": 540,
+  "robotic_dosya_sinif_beyani": {
+    "ML_FREQAI": 122,
+    "KULLANILABILIR": 606,
+    "DCA_POZISYON_BUYUTME": 112,
+    "DIGER_KULLANILAMAZ": 18,
+    "LOOKAHEAD_YUKSEK": 51
+  },
+  "robotic_kume_sinif_beyani": {
+    "BENZERI_TEST": 244,
+    "BELIRSIZ": 45,
+    "ZATEN_TEST": 51,
+    "BIZDE_YOK": 26,
+    "KULLANILAMAZ_ML_FREQAI": 55,
+    "KULLANILAMAZ_DCA": 71,
+    "KULLANILAMAZ_LOOKAHEAD": 32,
+    "KULLANILAMAZ_DCA+LOOKAHEAD": 1,
+    "KULLANILAMAZ_DIGER": 15
+  },
+  "not_": "Kume uyeligi dogrulandi; kopya/benzer mantik iddialari dogrulanmadi. Ajan2 26 tekil satir CSVsi mevcut degil."
+}

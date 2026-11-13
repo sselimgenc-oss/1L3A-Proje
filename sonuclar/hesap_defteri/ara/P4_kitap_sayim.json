@@ -1,0 +1,14 @@
+{
+  "kart": 810,
+  "tekil_kart_id": 810,
+  "yonlendirme_turu": {
+    "yeni_kitap_eslesmesi": 372,
+    "giris_ailesi": 333,
+    "ret_kaydi": 70,
+    "cikis_risk_modulu": 35
+  },
+  "ayari_olan_kart": 226,
+  "kayitli_ayar_kosusu_olan_kart": 226,
+  "yonlendirme_kaydi_yok": 0,
+  "index_kaydi": 438
+}

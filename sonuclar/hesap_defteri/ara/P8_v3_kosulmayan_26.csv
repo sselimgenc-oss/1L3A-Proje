@@ -1,0 +1,144 @@
+tekil_id,ad,aile,kisa_mantik,kaynak_sayisi,durum,asama,tf_evren,kapi_ve_deger,yapisal_kapi,adil_test,kod_dosyasi,kanit_dosyasi,not_
+pf__v3-funding-1s-devam,pf__v3-funding-1s-devam,BELIRSIZ,"00:00 UTC funding kesitinde yüksek long/düşük short, bir sonraki saatte yeniden sıfırla.
+
+Kaynak: https://github.com/OctopusTakopi/funding-rate-alpha. Portföy motoru
+hedefi bir sonraki bar açılışında doldurduğundan saatlik veri kullanılmalıdır.",,C_KODLANDI_KOSULMADI,mevcut sonuc tablolari kapsaminda,,,hayir,BELIRSIZ,motor/portfoy/stratejiler/v3.py:109:Funding1sDevam,sonuclar/hesap_defteri/ara/P3_sayi_kontrolu.csv,Kaynak stratejilerle mantik denkligi bu tabloda kurulmaz. 57 sonuç tablosu ve 135 arşiv JSONu kapsamı denetlendi; burada kayıtlı kod için araştırma koşusu kanıtı bulunmadı. Birim test ayrı birimdir.
+pf__v3-funding-kesit-decil-carry,pf__v3-funding-kesit-decil-carry,BELIRSIZ,"Günlük düşük funding long/yüksek funding short decil carry.
+
+Kaynak: https://github.com/OctopusTakopi/funding-rate-alpha.",,C_KODLANDI_KOSULMADI,mevcut sonuc tablolari kapsaminda,,,hayir,BELIRSIZ,motor/portfoy/stratejiler/v3.py:128:FundingKesitCarry,sonuclar/hesap_defteri/ara/P3_sayi_kontrolu.csv,Kaynak stratejilerle mantik denkligi bu tabloda kurulmaz. 57 sonuç tablosu ve 135 arşiv JSONu kapsamı denetlendi; burada kayıtlı kod için araştırma koşusu kanıtı bulunmadı. Birim test ayrı birimdir.
+pf__v3-funding-z90-3gun,pf__v3-funding-z90-3gun,BELIRSIZ,"90 günlük kendi-tarihçe funding z-skoruyla üç günde bir decil L/S.
+
+Kaynak: https://github.com/OctopusTakopi/funding-rate-alpha. Üst üste
+binen kohort kaynakta belirsiz olduğundan tek kohort üç günde bir yenilenir.",,C_KODLANDI_KOSULMADI,mevcut sonuc tablolari kapsaminda,,,hayir,BELIRSIZ,motor/portfoy/stratejiler/v3.py:154:FundingZ90UcGun,sonuclar/hesap_defteri/ara/P3_sayi_kontrolu.csv,Kaynak stratejilerle mantik denkligi bu tabloda kurulmaz. 57 sonuç tablosu ve 135 arşiv JSONu kapsamı denetlendi; burada kayıtlı kod için araştırma koşusu kanıtı bulunmadı. Birim test ayrı birimdir.
+v3__asya-kutu-kirilim-ma50,v3__asya-kutu-kirilim-ma50,BELIRSIZ,"23:00-03:00 UTC kutusu; SMA50 yönünde ilk kapanış kırılımı, 13:00 çıkışı.
+
+Kaynak: https://www.mql5.com/ja/articles/17239. Bekleyen emrin mum içi
+sırasını OHLC ile varsaymamak için kırılım kapanışta doğrulanır. Kaynaktaki
+belirsiz 10 point sapma yerine 0.1 ATR tampon kullanılır.",,C_KODLANDI_KOSULMADI,mevcut sonuc tablolari kapsaminda,,,hayir,BELIRSIZ,motor/strateji/dis/v3_adaylar.py:32:AsyaKutuKirilimMa50,sonuclar/hesap_defteri/ara/P3_sayi_kontrolu.csv,Kaynak stratejilerle mantik denkligi bu tabloda kurulmaz. 57 sonuç tablosu ve 135 arşiv JSONu kapsamı denetlendi; burada kayıtlı kod için araştırma koşusu kanıtı bulunmadı. Birim test ayrı birimdir.
+v3__saat-21-23-utc,v3__saat-21-23-utc,BELIRSIZ,"Her gün 21:00 UTC açılışında long, iki saat tut.
+
+Kaynak: https://quantpedia.com/are-there-seasonal-intraday-or-overnight-anomalies-in-bitcoin/
+Sinyal önceki mum kapanışında verilir. Kaynakta stop yok; 2 ATR kullanılır.",,C_KODLANDI_KOSULMADI,mevcut sonuc tablolari kapsaminda,,,hayir,BELIRSIZ,motor/strateji/dis/v3_adaylar.py:77:Saat2123Utc,sonuclar/hesap_defteri/ara/P3_sayi_kontrolu.csv,Kaynak stratejilerle mantik denkligi bu tabloda kurulmaz. 57 sonuç tablosu ve 135 arşiv JSONu kapsamı denetlendi; burada kayıtlı kod için araştırma koşusu kanıtı bulunmadı. Birim test ayrı birimdir.
+v3__saatlik-asiri-tepki,v3__saatlik-asiri-tepki,BELIRSIZ,"Bir saatlik getiri önceki 48 saatin 2 standart sapmasını aşınca ters yön.
+
+Kaynak: https://epub.ub.uni-muenchen.de/97651/. Kaynakta bulunmayan eşik,
+stop ve süre için standart 2 sigma, 2 ATR ve bir mum seçildi.",,C_KODLANDI_KOSULMADI,mevcut sonuc tablolari kapsaminda,,,hayir,BELIRSIZ,motor/strateji/dis/v3_adaylar.py:103:SaatlikAsiriTepki,sonuclar/hesap_defteri/ara/P3_sayi_kontrolu.csv,Kaynak stratejilerle mantik denkligi bu tabloda kurulmaz. 57 sonuç tablosu ve 135 arşiv JSONu kapsamı denetlendi; burada kayıtlı kod için araştırma koşusu kanıtı bulunmadı. Birim test ayrı birimdir.
+v3__adaptivetrend-6s-momentum,v3__adaptivetrend-6s-momentum,BELIRSIZ,"6 saatlik momentum ve ATR iz stopunun tek-grafik çekirdeği.
+
+Kaynak: https://arxiv.org/html/2602.11708v1. Eksik L/theta/ATR değerleri
+20 mum, sıfır ve ATR(14)*3 olarak sabitlendi. Aylık evren seçimi ve 70/30
+tahsis portföy katmanının işidir; bu sınıf yön sinyalini üretir.",,C_KODLANDI_KOSULMADI,mevcut sonuc tablolari kapsaminda,,,hayir,BELIRSIZ,motor/strateji/dis/v3_adaylar.py:125:AdaptiveTrend6s,sonuclar/hesap_defteri/ara/P3_sayi_kontrolu.csv,Kaynak stratejilerle mantik denkligi bu tabloda kurulmaz. 57 sonuç tablosu ve 135 arşiv JSONu kapsamı denetlendi; burada kayıtlı kod için araştırma koşusu kanıtı bulunmadı. Birim test ayrı birimdir.
+v3__donchian-ansambl-vol-hedef,v3__donchian-ansambl-vol-hedef,BELIRSIZ,"20/55/100 günlük Donchian oylarının long-only ansamblı.
+
+Kaynak: https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5209907.
+Özet sayfasında bulunmayan pencereler havuzdaki Turtle/Donchian standartlarıdır.
+Boyutlandırma motorun stop riskine bırakılır; 3 ATR stop zorunlu korunmadır.",,C_KODLANDI_KOSULMADI,mevcut sonuc tablolari kapsaminda,,,hayir,BELIRSIZ,motor/strateji/dis/v3_adaylar.py:150:DonchianAnsambl,sonuclar/hesap_defteri/ara/P3_sayi_kontrolu.csv,Kaynak stratejilerle mantik denkligi bu tabloda kurulmaz. 57 sonuç tablosu ve 135 arşiv JSONu kapsamı denetlendi; burada kayıtlı kod için araştırma koşusu kanıtı bulunmadı. Birim test ayrı birimdir.
+v3__haftalik-sma-trix-kirilim,v3__haftalik-sma-trix-kirilim,BELIRSIZ,"30 SMA trendinde 20 haftalık kırılım ve TRIX teyidi.
+
+Kaynak: https://github.com/ccadic/yahoo-weekly-trading-bot (GPL; kod
+kopyalanmadı). Eksik TRIX/ATR değerleri 15/9 ve 14; piyasa endeksi ayrı
+seri gerektirdiğinden tek-grafik çekirdekte hisse kendi SMA30 filtresini kullanır.",,C_KODLANDI_KOSULMADI,mevcut sonuc tablolari kapsaminda,,,hayir,BELIRSIZ,motor/strateji/dis/v3_adaylar.py:174:HaftalikSmaTrixKirilim,sonuclar/hesap_defteri/ara/P3_sayi_kontrolu.csv,Kaynak stratejilerle mantik denkligi bu tabloda kurulmaz. 57 sonuç tablosu ve 135 arşiv JSONu kapsamı denetlendi; burada kayıtlı kod için araştırma koşusu kanıtı bulunmadı. Birim test ayrı birimdir.
+v3__kirmizi-mum-2x-hacim,v3__kirmizi-mum-2x-hacim,BELIRSIZ,"Kırmızı mum ve önceki 60 gün ortalamasının 2 katı hacim sonrası bir gün long.
+
+Kaynak: https://habr.com/ru/articles/960670/. Kaynakta stop yok; 2 ATR.",,C_KODLANDI_KOSULMADI,mevcut sonuc tablolari kapsaminda,,,hayir,BELIRSIZ,motor/strateji/dis/v3_adaylar.py:203:KirmiziMumHacim,sonuclar/hesap_defteri/ara/P3_sayi_kontrolu.csv,Kaynak stratejilerle mantik denkligi bu tabloda kurulmaz. 57 sonuç tablosu ve 135 arşiv JSONu kapsamı denetlendi; burada kayıtlı kod için araştırma koşusu kanıtı bulunmadı. Birim test ayrı birimdir.
+v3__volatilite-kirilim-k05,v3__volatilite-kirilim-k05,BELIRSIZ,"Önceki seans aralığının yarısı üstündeki gün içi kırılım.
+
+Kaynak: https://mskim8717.tistory.com/122. Günlük OHLC'de mum içi sıra
+bilinmediğinden gün içi mumlarda kapanışla doğrulanır. Kaynakta stop yok;
+2 ATR stop kullanılır ve seans değişiminde çıkılır.",,C_KODLANDI_KOSULMADI,mevcut sonuc tablolari kapsaminda,,,hayir,BELIRSIZ,motor/strateji/dis/v3_adaylar.py:223:VolatiliteKirilimK05,sonuclar/hesap_defteri/ara/P3_sayi_kontrolu.csv,Kaynak stratejilerle mantik denkligi bu tabloda kurulmaz. 57 sonuç tablosu ve 135 arşiv JSONu kapsamı denetlendi; burada kayıtlı kod için araştırma koşusu kanıtı bulunmadı. Birim test ayrı birimdir.
+v3__aralik-kirilim-bekleyen-emir,v3__aralik-kirilim-bekleyen-emir,BELIRSIZ,"00:00-07:00 UTC aralığının ilk kapanış kırılımı; karşı uç stop, 1R hedef.
+
+Kaynak: https://www.mql5.com/en/code/78688. Kaynaktaki sunucu saati UTC,
+20 puanlık sembole bağlı tampon ise 0.1 ATR kabul edildi. Bekleyen emrin
+mum içi dolum sırası bilinmediğinden kırılım kapanışla doğrulanır.",,C_KODLANDI_KOSULMADI,mevcut sonuc tablolari kapsaminda,,,hayir,BELIRSIZ,motor/strateji/dis/v3_adaylar_2.py:36:AralikKirilimBekleyenEmir,sonuclar/hesap_defteri/ara/P3_sayi_kontrolu.csv,Kaynak stratejilerle mantik denkligi bu tabloda kurulmaz. 57 sonuç tablosu ve 135 arşiv JSONu kapsamı denetlendi; burada kayıtlı kod için araştırma koşusu kanıtı bulunmadı. Birim test ayrı birimdir.
+v3__l-sekli-ma-kirilim-long,v3__l-sekli-ma-kirilim-long,BELIRSIZ,"20 mumluk düşüş ve üç mumluk sıkışma sonrası SMA100 üstüne boğa kırılımı.
+
+Kaynak: https://github.com/mgcha85/btc-lshape-long. MA türü kaynakta
+belirtilmediğinden SMA; düşüş, önceki 20 mumun tepe-dip aralığı olarak
+tanımlandı. Karttaki örnek profil TP %10 ve SL %5 ile yalnız longdur.",,C_KODLANDI_KOSULMADI,mevcut sonuc tablolari kapsaminda,,,hayir,BELIRSIZ,motor/strateji/dis/v3_adaylar_2.py:75:LSekliMaKirilimLong,sonuclar/hesap_defteri/ara/P3_sayi_kontrolu.csv,Kaynak stratejilerle mantik denkligi bu tabloda kurulmaz. 57 sonuç tablosu ve 135 arşiv JSONu kapsamı denetlendi; burada kayıtlı kod için araştırma koşusu kanıtı bulunmadı. Birim test ayrı birimdir.
+v3__orb-4s-hacim-atr,v3__orb-4s-hacim-atr,BELIRSIZ,"UTC gününün ilk dört saatini hacimli kıran simetrik ORB.
+
+Kaynak: https://github.com/saadtahir995/orb-trading-bot. Kaynakta eksik
+yön ve ATR periyodu simetrik long/short ve ATR(14) kabul edildi. Başlangıç
+stopu 2 ATR, motor çıkışı 1 ATR iz süren stoptur.",,C_KODLANDI_KOSULMADI,mevcut sonuc tablolari kapsaminda,,,hayir,BELIRSIZ,motor/strateji/dis/v3_adaylar_2.py:108:Orb4sHacimAtr,sonuclar/hesap_defteri/ara/P3_sayi_kontrolu.csv,Kaynak stratejilerle mantik denkligi bu tabloda kurulmaz. 57 sonuç tablosu ve 135 arşiv JSONu kapsamı denetlendi; burada kayıtlı kod için araştırma koşusu kanıtı bulunmadı. Birim test ayrı birimdir.
+v3__ters-fvg-nq-long,v3__ters-fvg-nq-long,BELIRSIZ,"Aktif 15m boğa FVG içinde oluşan 5m FVG retestinde long.
+
+Kaynak: https://github.com/prashanthaitha24/nq-strategy-b-bot. 15m değer
+yalnız mum kapandıktan sonra ``ust_zaman`` ile görünür. Kaynaktaki NQ sabit
+değerleri 5 puan bölge tamponu ve 2 puan stop tamponu olarak korunmuştur.",,C_KODLANDI_KOSULMADI,mevcut sonuc tablolari kapsaminda,,,hayir,BELIRSIZ,motor/strateji/dis/v3_adaylar_2.py:159:TersFvgNqLong,sonuclar/hesap_defteri/ara/P3_sayi_kontrolu.csv,Kaynak stratejilerle mantik denkligi bu tabloda kurulmaz. 57 sonuç tablosu ve 135 arşiv JSONu kapsamı denetlendi; burada kayıtlı kod için araştırma koşusu kanıtı bulunmadı. Birim test ayrı birimdir.
+v3__ema-9-21-50-rsi-hacim,v3__ema-9-21-50-rsi-hacim,BELIRSIZ,"EMA9/21 kesişimi, EMA50 yönü, RSI14 ve hacim teyidi.",,C_KODLANDI_KOSULMADI,mevcut sonuc tablolari kapsaminda,,,hayir,BELIRSIZ,motor/strateji/dis/v3_adaylar_3.py:37:EmaRsiHacimKesisim,sonuclar/hesap_defteri/ara/P3_sayi_kontrolu.csv,Kaynak stratejilerle mantik denkligi bu tabloda kurulmaz. 57 sonuç tablosu ve 135 arşiv JSONu kapsamı denetlendi; burada kayıtlı kod için araştırma koşusu kanıtı bulunmadı. Birim test ayrı birimdir.
+v3__londra-volatilite-kirilim,v3__londra-volatilite-kirilim,BELIRSIZ,Londra 08:00-11:00 arasında önceki 60 dakikanın aralık kırılımı.,,C_KODLANDI_KOSULMADI,mevcut sonuc tablolari kapsaminda,,,hayir,BELIRSIZ,motor/strateji/dis/v3_adaylar_3.py:68:LondraVolatiliteKirilim,sonuclar/hesap_defteri/ara/P3_sayi_kontrolu.csv,Kaynak stratejilerle mantik denkligi bu tabloda kurulmaz. 57 sonuç tablosu ve 135 arşiv JSONu kapsamı denetlendi; burada kayıtlı kod için araştırma koşusu kanıtı bulunmadı. Birim test ayrı birimdir.
+v3__rsi32-yon-hedef4,v3__rsi32-yon-hedef4,BELIRSIZ,"Sınıf açıklaması yok; gerçek giriş/hedef gövdesi: def sinyaller(self, m):
+    p, k = (self.parametreler, m['kapanis'])
+    r = g.rsi(k, int(p['rsi_n']))
+    a = g.atr(m['yuksek'], m['dusuk'], k, int(p['atr_n'])) * p['atr_k']
+    out = cerceve(m, r > p['orta'], r < p['orta'], k - a, k + a, k * (1 + p['hedef']), k * (1 - p['hedef']))
+    out['cikis_long'] = (r >= p['cikis_ust']) | (r >= p['guven_ust'])
+    out['cikis_short'] = (r <= p['cikis_alt']) | (r <= p['guven_alt'])
+    return out",,C_KODLANDI_KOSULMADI,mevcut sonuc tablolari kapsaminda,,,hayir,BELIRSIZ,motor/strateji/dis/v3_adaylar_3.py:100:Rsi32Yon,sonuclar/hesap_defteri/ara/P3_sayi_kontrolu.csv,Kaynak stratejilerle mantik denkligi bu tabloda kurulmaz. 57 sonuç tablosu ve 135 arşiv JSONu kapsamı denetlendi; burada kayıtlı kod için araştırma koşusu kanıtı bulunmadı. Birim test ayrı birimdir.
+v3__sma-trend-rsi-atr,v3__sma-trend-rsi-atr,BELIRSIZ,"Sınıf açıklaması yok; gerçek giriş/hedef gövdesi: def sinyaller(self, m):
+    p, k = (self.parametreler, m['kapanis'])
+
+    def hesapla(x):
+        return pd.DataFrame({'h': g.sma(x['kapanis'], int(p['sma_h'])), 'y': g.sma(x['kapanis'], int(p['sma_y']))}, index=x.index)
+    ust = ust_zaman(m, p['ust_tf'], hesapla)
+    r = g.rsi(k, int(p['rsi_n']))
+    fark = r - r.shift(1)
+    a = g.atr(m['yuksek'], m['dusuk'], k, int(p['atr_n']))
+    out = cerceve(m, (ust.h > ust.y) & (fark >= p['rsi_fark']), (ust.h < ust.y) & (fark <= -p['rsi_fark']), k - p['stop_atr'] * a, k + p['stop_atr'] * a, k + p['hedef_atr'] * a, k - p['hedef_atr'] * a)
+    out['cikis_long'], out['cikis_short'] = ((k < ust.h).fillna(False), (k > ust.h).fillna(False))
+    return out",,C_KODLANDI_KOSULMADI,mevcut sonuc tablolari kapsaminda,,,hayir,BELIRSIZ,motor/strateji/dis/v3_adaylar_3.py:119:SmaTrendRsiAtr,sonuclar/hesap_defteri/ara/P3_sayi_kontrolu.csv,Kaynak stratejilerle mantik denkligi bu tabloda kurulmaz. 57 sonuç tablosu ve 135 arşiv JSONu kapsamı denetlendi; burada kayıtlı kod için araştırma koşusu kanıtı bulunmadı. Birim test ayrı birimdir.
+v3__yarim-fitil,v3__yarim-fitil,BELIRSIZ,"Sınıf açıklaması yok; gerçek giriş/hedef gövdesi: def sinyaller(self, m):
+    p, idx = (self.parametreler, m.index)
+    o, h, d, k = (m[x] for x in ('acilis', 'yuksek', 'dusuk', 'kapanis'))
+    ar = (h - d).where(lambda x: x > 0)
+    ny = idx.tz_convert('America/New_York')
+    dk = ny.hour * 60 + ny.minute
+    seans = pd.Series((dk >= 9 * 60 + 30) & (dk < p['son_giris'] * 60), index=idx)
+    lo = seans & (k > o) & ((h - k) / ar).between(p['fitil_min'], p['fitil_maks']) & ((o - d) / ar <= p['karsi_maks'])
+    sh = seans & (k < o) & ((k - d) / ar).between(p['fitil_min'], p['fitil_maks']) & ((h - o) / ar <= p['karsi_maks'])
+    cik = _saatten_onceki_son_kapanis(idx, int(p['cikis']), zaman_dilimi='America/New_York')
+    return cerceve(m, lo, sh, d, h, h, d, cik)",,C_KODLANDI_KOSULMADI,mevcut sonuc tablolari kapsaminda,,,hayir,BELIRSIZ,motor/strateji/dis/v3_adaylar_3.py:144:YarimFitil,sonuclar/hesap_defteri/ara/P3_sayi_kontrolu.csv,Kaynak stratejilerle mantik denkligi bu tabloda kurulmaz. 57 sonuç tablosu ve 135 arşiv JSONu kapsamı denetlendi; burada kayıtlı kod için araştırma koşusu kanıtı bulunmadı. Birim test ayrı birimdir.
+v3__momentum-sifir-kesisim,v3__momentum-sifir-kesisim,BELIRSIZ,"Sınıf açıklaması yok; gerçek giriş/hedef gövdesi: def sinyaller(self, m):
+    p = self.parametreler
+    mom = m['kapanis'].pct_change(int(p['momentum_n']))
+    out = _atr_cerceve(m, mom > 0, False, p['atr_k'], p['atr_n'])
+    out['cikis_long'] = (mom <= 0).fillna(False)
+    return out",,C_KODLANDI_KOSULMADI,mevcut sonuc tablolari kapsaminda,,,hayir,BELIRSIZ,motor/strateji/dis/v3_adaylar_3.py:164:MomentumSifirKesisim,sonuclar/hesap_defteri/ara/P3_sayi_kontrolu.csv,Kaynak stratejilerle mantik denkligi bu tabloda kurulmaz. 57 sonuç tablosu ve 135 arşiv JSONu kapsamı denetlendi; burada kayıtlı kod için araştırma koşusu kanıtı bulunmadı. Birim test ayrı birimdir.
+v3__pazartesi-dip-endeks,v3__pazartesi-dip-endeks,BELIRSIZ,"Sınıf açıklaması yok; gerçek giriş/hedef gövdesi: def sinyaller(self, m):
+    p, k = (self.parametreler, m['kapanis'])
+    ar = (m['yuksek'] - m['dusuk']).where(lambda x: x > 0)
+    ibs = (k - m['dusuk']) / ar
+    lo = (m.index.day_of_week == 0) & (k < k.shift(1)) & (ibs <= p['ibs_maks']) & (k < g.sma(k, int(p['sma_n'])))
+    cik = pd.Series(m.index.day_of_week == 2, index=m.index)
+    return cerceve(m, lo, False, k * (1 - p['stop_yuzde']), None, None, None, cik)",,C_KODLANDI_KOSULMADI,mevcut sonuc tablolari kapsaminda,,,hayir,BELIRSIZ,motor/strateji/dis/v3_adaylar_3.py:179:PazartesiDip,sonuclar/hesap_defteri/ara/P3_sayi_kontrolu.csv,Kaynak stratejilerle mantik denkligi bu tabloda kurulmaz. 57 sonuç tablosu ve 135 arşiv JSONu kapsamı denetlendi; burada kayıtlı kod için araştırma koşusu kanıtı bulunmadı. Birim test ayrı birimdir.
+v3__rsi14-ema200-izleyen-stop,v3__rsi14-ema200-izleyen-stop,BELIRSIZ,"Sınıf açıklaması yok; gerçek giriş/hedef gövdesi: def sinyaller(self, m):
+    p, k = (self.parametreler, m['kapanis'])
+    r = g.rsi(k, int(p['rsi_n']))
+    out = cerceve(m, (k > g.ema(k, int(p['ema_n']))) & (r < p['giris']), False, k * (1 - p['iz_yuzde']), None)
+    out['cikis_long'] = (r > p['cikis']).fillna(False)
+    return out",,C_KODLANDI_KOSULMADI,mevcut sonuc tablolari kapsaminda,,,hayir,BELIRSIZ,motor/strateji/dis/v3_adaylar_3.py:195:Rsi14Ema200Iz,sonuclar/hesap_defteri/ara/P3_sayi_kontrolu.csv,Kaynak stratejilerle mantik denkligi bu tabloda kurulmaz. 57 sonuç tablosu ve 135 arşiv JSONu kapsamı denetlendi; burada kayıtlı kod için araştırma koşusu kanıtı bulunmadı. Birim test ayrı birimdir.
+v3__rsi2-sma200-hacim,v3__rsi2-sma200-hacim,BELIRSIZ,"Sınıf açıklaması yok; gerçek giriş/hedef gövdesi: def sinyaller(self, m):
+    p, k = (self.parametreler, m['kapanis'])
+    r, sm = (g.rsi(k, int(p['rsi_n'])), g.sma(k, int(p['sma_n'])))
+    hv = m['hacim'].shift(1).rolling(int(p['hacim_n']), min_periods=int(p['hacim_n'])).mean()
+    out = _atr_cerceve(m, (r < p['giris']) & (k > sm) & (m['hacim'] > p['hacim_k'] * hv), False, p['atr_k'], p['atr_n'])
+    out['cikis_long'] = ((r > p['cikis']) | (k < sm)).fillna(False)
+    return out",,C_KODLANDI_KOSULMADI,mevcut sonuc tablolari kapsaminda,,,hayir,BELIRSIZ,motor/strateji/dis/v3_adaylar_3.py:212:Rsi2Sma200Hacim,sonuclar/hesap_defteri/ara/P3_sayi_kontrolu.csv,Kaynak stratejilerle mantik denkligi bu tabloda kurulmaz. 57 sonuç tablosu ve 135 arşiv JSONu kapsamı denetlendi; burada kayıtlı kod için araştırma koşusu kanıtı bulunmadı. Birim test ayrı birimdir.
+v3__rsi30-hacim-ema200,v3__rsi30-hacim-ema200,BELIRSIZ,"Sınıf açıklaması yok; gerçek giriş/hedef gövdesi: def sinyaller(self, m):
+    p, k = (self.parametreler, m['kapanis'])
+    r, em = (g.rsi(k, int(p['rsi_n'])), g.ema(k, int(p['ema_n'])))
+    hv = m['hacim'].shift(1).rolling(int(p['hacim_n']), min_periods=int(p['hacim_n'])).mean()
+    yuk = (r.shift(1) <= p['giris']) & (r > p['giris'])
+    out = _atr_cerceve(m, yuk & (k > em) & (m['hacim'] > p['hacim_k'] * hv), False, p['atr_k'], p['atr_n'])
+    out['cikis_long'] = ((r.shift(1) >= p['cikis']) & (r < p['cikis'])).fillna(False)
+    return out",,C_KODLANDI_KOSULMADI,mevcut sonuc tablolari kapsaminda,,,hayir,BELIRSIZ,motor/strateji/dis/v3_adaylar_3.py:230:Rsi30HacimEma200,sonuclar/hesap_defteri/ara/P3_sayi_kontrolu.csv,Kaynak stratejilerle mantik denkligi bu tabloda kurulmaz. 57 sonuç tablosu ve 135 arşiv JSONu kapsamı denetlendi; burada kayıtlı kod için araştırma koşusu kanıtı bulunmadı. Birim test ayrı birimdir.
+v3__z-skor-karsit,v3__z-skor-karsit,BELIRSIZ,"Sınıf açıklaması yok; gerçek giriş/hedef gövdesi: def sinyaller(self, m):
+    p = self.parametreler
+    r = m['kapanis'].pct_change()
+    n = int(p['pencere'])
+    sd = r.rolling(n, min_periods=n).std()
+    z = (r - r.rolling(n, min_periods=n).mean()) / sd.where(sd > 0)
+    out = _atr_cerceve(m, z < -p['giris_z'], z > p['giris_z'], p['atr_k'], p['atr_n'])
+    out['cikis_long'], out['cikis_short'] = ((z >= 0).fillna(False), (z <= 0).fillna(False))
+    return out",,C_KODLANDI_KOSULMADI,mevcut sonuc tablolari kapsaminda,,,hayir,BELIRSIZ,motor/strateji/dis/v3_adaylar_3.py:249:ZSkorKarsit,sonuclar/hesap_defteri/ara/P3_sayi_kontrolu.csv,Kaynak stratejilerle mantik denkligi bu tabloda kurulmaz. 57 sonuç tablosu ve 135 arşiv JSONu kapsamı denetlendi; burada kayıtlı kod için araştırma koşusu kanıtı bulunmadı. Birim test ayrı birimdir.

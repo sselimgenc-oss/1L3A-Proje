@@ -1,0 +1,74 @@
+strateji,tf,evren,ayar,e1,e2,e3,e4,e5,nedenler,net_x1,net_x2,pf_x1,n_islem_x1,kill_x1
+dis__ao-ac-bolgeleri,1d,genel,varsayilan,True,True,True,True,False,E5 kill_olayi(x1) 1 (hayatta kalma),0.5281691550776915,0.46446731675332,1.634586349371996,276.0,1.0
+dis__ao-tabak,1d,genel,varsayilan,True,True,True,False,False,E4 payı ≥ %15 olan sınıf 1 < 2 ya da ΣR <= 0; E5 kill_olayi(x1) 1 (hayatta kalma),0.4883056698199437,0.43499517524064224,1.4714910860568131,253.0,1.0
+dis__aurora-kama,1d,genel,varsayilan,True,False,True,False,False,E2 işlem 169 < 200; E4 payı ≥ %15 olan sınıf 1 < 2 ya da ΣR <= 0; E5 kill_olayi(x1) 1 (hayatta kalma),0.5265061625639933,0.4471903242029809,1.5946348475367593,169.0,1.0
+dis__ay-mevsimsellik,1d,genel,varsayilan,True,False,True,True,True,E2 işlem 187 < 200,0.5025038518251552,0.44098960525177167,1.6462698612193543,187.0,0.0
+dis__codex-wd-cift-momentum,1d,genel,varsayilan,True,True,True,False,False,E4 payı ≥ %15 olan sınıf 1 < 2 ya da ΣR <= 0; E5 kill_olayi(x1) 1 (hayatta kalma),0.5695841973870288,0.40808258917308415,1.386070428160899,661.0,1.0
+dis__confluence-rank,1d,genel,varsayilan,True,True,True,False,False,E4 payı ≥ %15 olan sınıf 1 < 2 ya da ΣR <= 0; E5 kill_olayi(x1) 1 (hayatta kalma),0.6044788207499634,0.5158157929132183,1.541666368035864,343.0,1.0
+dis__darvas-kutusu-kirilimi,1d,genel,varsayilan,True,True,True,False,True,E4 payı ≥ %15 olan sınıf 1 < 2 ya da ΣR <= 0,1.0768928242552116,0.7993497775577278,1.244931864760071,941.0,0.0
+dis__ema-esik-trend,1d,genel,varsayilan,True,False,True,True,False,E2 işlem 121 < 200; E5 kill_olayi(x1) 1 (hayatta kalma),0.6117016860462503,0.533511452638382,2.5073431342170514,121.0,1.0
+dis__ewmac-carry,1d,kripto,varsayilan,True,False,True,True,True,E2 işlem 84 < 200,0.523441022764995,0.5165572209840474,2.7789146806490135,84.0,0.0
+dis__ewmac-carver,1d,genel,varsayilan,True,False,True,True,True,E2 işlem 98 < 200,0.17050377677743156,0.1560925014312602,1.4350068015325326,98.0,0.0
+dis__farley-bosluk-turleri,1d,genel,varsayilan,True,False,True,False,True,E2 işlem 106 < 200; E4 payı ≥ %15 olan sınıf 1 < 2 ya da ΣR <= 0,0.13937660566907373,0.057909075548623345,1.2198225575910668,106.0,0.0
+dis__ft-highwave,1d,genel,varsayilan,True,True,True,False,True,E4 payı ≥ %15 olan sınıf 1 < 2 ya da ΣR <= 0,1.389929560188679,1.0218575531823908,1.3502518859729247,708.0,0.0
+dis__gauss-kanal,1d,genel,varsayilan,True,True,True,False,True,E4 payı ≥ %15 olan sınıf 1 < 2 ya da ΣR <= 0,5.3187868983380255,4.781517797057044,2.663132036139517,669.0,0.0
+dis__gmma-ls,1d,genel,varsayilan,True,True,True,False,False,E4 payı ≥ %15 olan sınıf 1 < 2 ya da ΣR <= 0; E5 kill_olayi(x1) 1 (hayatta kalma),1.4753448896283872,1.3135050957668057,1.6708436536862064,548.0,1.0
+dis__golden-trident,1d,genel,varsayilan,True,False,True,False,True,E2 işlem 187 < 200; E4 payı ≥ %15 olan sınıf 1 < 2 ya da ΣR <= 0,0.32965278902750916,0.32639368910517264,1.829929599941583,187.0,0.0
+dis__granville-ma-kurallari,1d,genel,varsayilan,True,False,True,False,True,E2 işlem 174 < 200; E4 payı ≥ %15 olan sınıf 1 < 2 ya da ΣR <= 0,0.29761157378134606,0.21507724679293405,1.4202005323164646,174.0,0.0
+dis__haftalik-key-reversal,1d,genel,varsayilan,True,False,True,False,True,E2 işlem 119 < 200; E4 payı ≥ %15 olan sınıf 1 < 2 ya da ΣR <= 0,0.07042852660376497,0.042738302759443014,1.2022029172179003,119.0,0.0
+dis__hma-atr-rider,1d,genel,varsayilan,True,True,True,True,False,E5 kill_olayi(x1) 1 (hayatta kalma),0.25197056258283834,0.15738973682250945,1.2065688848419425,617.0,1.0
+dis__hp-filtre-ma,1d,genel,varsayilan,True,True,True,False,False,E4 payı ≥ %15 olan sınıf 1 < 2 ya da ΣR <= 0; E5 kill_olayi(x1) 1 (hayatta kalma),1.1423353837123367,0.7880765368559803,1.5560816373283337,498.0,1.0
+dis__jt-awesome-osilator,1d,genel,varsayilan,True,True,True,True,False,E5 kill_olayi(x1) 1 (hayatta kalma),0.44776342591874485,0.39213824050021806,1.5665870241110218,278.0,1.0
+dis__kapanis-ma5,1d,genel,varsayilan,True,True,True,False,True,E4 payı ≥ %15 olan sınıf 1 < 2 ya da ΣR <= 0,1.342612826971041,0.4089605790648658,1.3044324816202784,2374.0,0.0
+dis__kelly-atr-bant,1d,genel,varsayilan,True,True,True,False,True,E4 payı ≥ %15 olan sınıf 1 < 2 ya da ΣR <= 0,5.40372267640555,5.612805114586226,1.9067369273050165,504.0,0.0
+dis__laguerre-rsi,1d,genel,varsayilan,True,True,True,False,True,E4 payı ≥ %15 olan sınıf 1 < 2 ya da ΣR <= 0,2.187095028824956,2.3626047463528557,2.2134618557882013,493.0,0.0
+dis__lube,1d,genel,varsayilan,True,False,True,True,True,E2 işlem 133 < 200,1.5883469475646494,1.4795908198254768,2.826226077293357,133.0,0.0
+dis__ma-cift-cross,1d,genel,varsayilan,True,True,True,False,True,E4 payı ≥ %15 olan sınıf 1 < 2 ya da ΣR <= 0,2.6314464842824346,2.64454648003186,2.921255918005748,340.0,0.0
+dis__ma-dizilim-5-10-30,1d,genel,varsayilan,True,True,True,True,False,E5 kill_olayi(x1) 1 (hayatta kalma),1.0402728680459132,0.772970364000436,1.6106676925237933,616.0,1.0
+dis__ma-mukemmel-siralama,1d,genel,varsayilan,True,True,True,False,False,E4 payı ≥ %15 olan sınıf 1 < 2 ya da ΣR <= 0; E5 kill_olayi(x1) 1 (hayatta kalma),1.1169804553088931,1.0076387416398473,1.8606647745171492,210.0,1.0
+dis__macd-sma-cift,1d,genel,varsayilan,True,False,True,False,True,E2 işlem 128 < 200; E4 payı ≥ %15 olan sınıf 1 < 2 ya da ΣR <= 0,0.714949445519071,0.6536063175796676,3.0833681926630794,128.0,0.0
+dis__ocak-barometresi,1d,genel,varsayilan,True,False,True,False,True,E2 işlem 28 < 200; E4 payı ≥ %15 olan sınıf 1 < 2 ya da ΣR <= 0,1.2369562789167587,1.2131845148893206,8.760667866157767,28.0,0.0
+dis__ochoa-genisleme-gunu,1d,genel,varsayilan,True,False,True,True,True,E2 işlem 186 < 200,0.2371401797181596,0.18051340428410345,1.3004957131288617,186.0,0.0
+dis__osilator-esik-birlesimi,1d,genel,varsayilan,True,True,True,False,False,E4 payı ≥ %15 olan sınıf 1 < 2 ya da ΣR <= 0; E5 kill_olayi(x1) 1 (hayatta kalma),0.7988554403287433,0.6798841737859831,1.506304691184752,458.0,1.0
+dis__pivot-ters-stop,1d,genel,varsayilan,True,True,True,False,False,E4 payı ≥ %15 olan sınıf 1 < 2 ya da ΣR <= 0; E5 kill_olayi(x1) 1 (hayatta kalma),2.2415028330297653,1.9004159418488102,1.5790950793661573,773.0,1.0
+dis__roc20-ls,1d,genel,varsayilan,True,True,True,False,False,E4 payı ≥ %15 olan sınıf 1 < 2 ya da ΣR <= 0; E5 kill_olayi(x1) 1 (hayatta kalma),2.171768431351648,1.822674763721726,1.6555097017722467,1371.0,1.0
+dis__rsi-ma-normal,1d,genel,varsayilan,True,True,True,False,True,E4 payı ≥ %15 olan sınıf 1 < 2 ya da ΣR <= 0,1.1172967814166204,1.0997344538608913,1.7867035574914558,347.0,0.0
+dis__rsi-ma-uc,1d,genel,varsayilan,True,False,True,True,False,E2 işlem 159 < 200; E5 kill_olayi(x1) 1 (hayatta kalma),0.6380358366640073,0.605780282755014,1.8431362304075245,159.0,1.0
+dis__rsi-t3-sqz,1d,genel,varsayilan,True,False,True,True,True,E2 işlem 184 < 200,0.9449828998455674,0.8573836756054958,1.844204716710963,184.0,0.0
+dis__son1ay-donchian-adx,1d,genel,varsayilan,True,True,True,False,False,E4 payı ≥ %15 olan sınıf 1 < 2 ya da ΣR <= 0; E5 kill_olayi(x1) 1 (hayatta kalma),0.47158666748508016,0.36997647243327525,1.2793543757605885,344.0,1.0
+dis__son1ay-kanal-20-10,1d,genel,varsayilan,True,True,True,False,True,E4 payı ≥ %15 olan sınıf 1 < 2 ya da ΣR <= 0,1.3014186034399544,1.217187204012629,2.283497934928959,334.0,0.0
+dis__sott,1d,genel,varsayilan,True,False,True,True,True,E2 işlem 150 < 200,1.390627237574611,1.5248121544924165,2.5480513811118644,150.0,0.0
+dis__sst-dmi-50ma,1d,genel,varsayilan,True,True,True,False,True,E4 payı ≥ %15 olan sınıf 1 < 2 ya da ΣR <= 0,1.0961121544004522,0.9655486472588717,1.855774537805059,421.0,0.0
+dis__trend-analysis,1d,genel,varsayilan,True,True,True,False,True,E4 payı ≥ %15 olan sınıf 1 < 2 ya da ΣR <= 0,0.6568629483124042,0.5576608235483034,1.2234845070850144,533.0,0.0
+dis__trend-cizgisi-kirilim-retest,1d,genel,varsayilan,True,False,True,True,True,E2 işlem 61 < 200,0.21548338476992024,0.15182455253182914,1.7645915622897386,61.0,0.0
+dis__tsmom,1d,genel,varsayilan,True,False,True,False,False,E2 işlem 33 < 200; E4 payı ≥ %15 olan sınıf 1 < 2 ya da ΣR <= 0; E5 kill_olayi(x1) 1 (hayatta kalma),0.142611816523317,0.1048845371758178,5.342508766626877,33.0,1.0
+dis__uc-ortalama-boga-sma60,1d,genel,varsayilan,True,True,True,False,True,E4 payı ≥ %15 olan sınıf 1 < 2 ya da ΣR <= 0,0.3608872767258051,0.30209643942222075,1.4846670796272183,309.0,0.0
+dis__uclu-rsi,1d,genel,varsayilan,True,False,True,False,True,E2 işlem 81 < 200; E4 payı ≥ %15 olan sınıf 1 < 2 ya da ΣR <= 0,0.8348418668769766,0.7881181109226643,1.9429781155359762,81.0,0.0
+dis__ust-tf-trend-60dk-donus,1d,genel,varsayilan,True,True,True,False,True,E4 payı ≥ %15 olan sınıf 1 < 2 ya da ΣR <= 0,0.5210491795546999,0.4678084997821279,1.6793003012673773,312.0,0.0
+dis__vcp-daralma-kirilimi,1d,genel,varsayilan,True,False,True,True,True,E2 işlem 102 < 200,0.5953029954470721,0.5512685716086676,2.294122010094236,102.0,0.0
+dis__voltarget-trend,1d,genel,varsayilan,True,True,True,False,True,E4 payı ≥ %15 olan sınıf 1 < 2 ya da ΣR <= 0,0.5619908164458178,0.4630787646489489,1.4420863881434514,395.0,0.0
+dis__voltran-1b,1d,genel,varsayilan,True,True,True,True,False,E5 kill_olayi(x1) 1 (hayatta kalma),0.3642638528965523,0.216201441754597,1.3452583009956287,509.0,1.0
+dis__voltran-r1,1d,genel,varsayilan,True,True,True,True,False,E5 kill_olayi(x1) 1 (hayatta kalma),0.6341573692778342,0.35982006535504363,1.2260756809533897,883.0,1.0
+dis__z65-rejim,1d,genel,varsayilan,True,True,True,False,True,E4 payı ≥ %15 olan sınıf 1 < 2 ya da ΣR <= 0,1.7766274376149882,0.3593707260736916,1.66382841928615,733.0,0.0
+onceki__kapitulasyon,1d,genel,varsayilan,True,False,True,False,True,E2 işlem 181 < 200; E4 payı ≥ %15 olan sınıf 1 < 2 ya da ΣR <= 0,0.8614530197814878,0.8822053488943653,2.3707505145420456,181.0,0.0
+onceki__s1-geri-cekilme,1d,genel,varsayilan,True,True,True,True,False,E5 kill_olayi(x1) 1 (hayatta kalma),0.6443257251176235,0.45522398647313,1.4587213557650438,392.0,1.0
+swing__bayrak-flama,1d,genel,kart:daytrade__yuksek-ve-sikli-bayrak__bulkowski,True,False,True,False,True,E2 işlem 32 < 200; E4 payı ≥ %15 olan sınıf 1 < 2 ya da ΣR <= 0,0.0899507871353249,0.07727547988565697,1.4006712848885257,32.0,0.0
+swing__bb-sikisma-kirilim,1d,genel,kart:swing__bb-sikisma-kirilim__johnson,True,True,True,False,True,E4 payı ≥ %15 olan sınıf 1 < 2 ya da ΣR <= 0,3.694313445474669,0.591965399358497,1.6691785074169065,690.0,0.0
+swing__donchian-kirilim,1d,genel,kart:swing__aralik-kirilimi__ladha,True,True,True,False,False,E4 payı ≥ %15 olan sınıf 1 < 2 ya da ΣR <= 0; E5 kill_olayi(x1) 1 (hayatta kalma),1.6536385553538806,1.5192840989364726,2.0450549098047373,219.0,1.0
+swing__heikin-ashi-donus,1d,genel,kart:swing__heikin-ashi-degistirilmis__graham,True,True,True,False,False,E4 payı ≥ %15 olan sınıf 1 < 2 ya da ΣR <= 0; E5 kill_olayi(x1) 1 (hayatta kalma),3.2257899770736342,1.9298546756032873,1.2944930026603603,1821.0,1.0
+swing__ma-geri-cekilme,1d,genel,kart:swing__dip-alim-geri-cekilme__ladha,True,True,True,False,False,E4 payı ≥ %15 olan sınıf 1 < 2 ya da ΣR <= 0; E5 kill_olayi(x1) 1 (hayatta kalma),2.100329945877008,1.8101243672215994,1.8378843531912856,561.0,1.0
+swing__ma-kesisim,1d,genel,kart:scalp__altin-hac-olum-hac-rejim__schroder,True,False,True,False,False,E2 işlem 95 < 200; E4 payı ≥ %15 olan sınıf 1 < 2 ya da ΣR <= 0; E5 kill_olayi(x1) 1 (hayatta kalma),1.4513422219912973,1.2929247219449351,3.353437685381039,95.0,1.0
+swing__macd-sinyal,1d,genel,kart:swing__macd-sinyal-sifir-gecis__boxer,True,True,True,False,False,E4 payı ≥ %15 olan sınıf 1 < 2 ya da ΣR <= 0; E5 kill_olayi(x1) 1 (hayatta kalma),3.965250382181236,3.380421309157229,1.4816741551524677,1154.0,1.0
+swing__rsi-momentum-esik,1d,genel,kart:swing__rsi-50-gecis__sharpe,True,True,True,False,False,E4 payı ≥ %15 olan sınıf 1 < 2 ya da ΣR <= 0; E5 kill_olayi(x1) 1 (hayatta kalma),3.374933530518863,2.7296887932876976,1.8944754453204649,1089.0,1.0
+swing__uc-cubuklu-net-hat,1d,genel,kart:daytrade__uc-cubuklu-net-hat-trend-degisimi__bulkowski,True,True,True,False,False,E4 payı ≥ %15 olan sınıf 1 < 2 ya da ΣR <= 0; E5 kill_olayi(x1) 1 (hayatta kalma),1.1327139427402,0.5603481065166569,1.2882098724383608,1041.0,1.0
+swing__ucgen-dikdortgen-kirilim,1d,genel,kart:daytrade__ucgen-kirilim-hacim__singhal,True,False,True,True,True,E2 işlem 25 < 200,0.12015929736951358,0.10851827045256224,1.7224046125668142,25.0,0.0
+swing__yuvarlak-dip-fincan,1d,genel,kart:swing__fincan-sap-kirilim__jordan,True,False,True,True,True,E2 işlem 27 < 200,0.18406858602250487,0.17662343998213204,2.686283219789365,27.0,0.0
+v2__tsmom-oy,1d,genel,varsayilan,True,True,True,False,True,E4 payı ≥ %15 olan sınıf 1 < 2 ya da ΣR <= 0,1.2356149538712353,1.0962927587720452,1.8214218216471192,841.0,0.0
+pf__btc_hedge,1d,genel,,True,True,True,True,False,E5 kill_olayi(x1) 6,1.453561433177219,1.332314875022408,,,6.0
+pf__goreceli_guc,1d,genel,,True,True,True,True,False,E5 kill_olayi(x1) 6,1.030177451617579,0.8372347172392351,,,6.0
+pf__kanarya,1d,genel,,True,True,True,True,False,E5 kill_olayi(x1) 6,1.9089802426526576,1.7356368668038664,,,6.0
+pf__rotasyon,1d,genel,,True,True,True,True,False,E5 kill_olayi(x1) 7,4.739963594106442,4.338596765564373,,,7.0
+pf__sabit_sepet,1d,genel,,True,True,True,True,False,E5 kill_olayi(x1) 22,1.831271012783339,1.7247543246880848,,,22.0
+pf__sinif_kesit_mom,1d,genel,,True,True,True,True,False,E5 kill_olayi(x1) 4,0.45874613375992124,0.3742010521150676,,,4.0
+pf__son1ay_trendrider,1d,genel,,True,True,True,True,False,E5 kill_olayi(x1) 13,1.467336705253531,1.371767669378805,,,13.0
+pf__trend_sepet,1d,genel,,True,True,True,True,False,E5 kill_olayi(x1) 8,1.3070399729423952,1.1877203734140074,,,8.0

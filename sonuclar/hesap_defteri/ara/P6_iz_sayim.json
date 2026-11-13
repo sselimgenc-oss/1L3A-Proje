@@ -1,0 +1,19 @@
+{
+  "katalog_dosya": 17,
+  "katalog_kayit": 2592,
+  "ilk_karar_kayit": 2592,
+  "baglanti_denetimi": {
+    "ad_ayni": 1903,
+    "yalniz_acik_satir_atfi_isim_URL_dogrulamasi_bekliyor": 54,
+    "URL_ayni": 635
+  },
+  "ilk_karar_dagilimi": {
+    "kart": 96,
+    "kod_yok": 818,
+    "veri_yok": 530,
+    "tekrar": 388,
+    "yasak": 521,
+    "arac": 220,
+    "belirsiz": 19
+  }
+}

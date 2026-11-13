@@ -1,0 +1,22 @@
+{
+  "toplam_kayit_dugumu": 8197,
+  "durum": {
+    "BELIRSIZ": 6221,
+    "B_TEST_EDILDI_ELENDI": 582,
+    "C_KODLANDI_KOSULMADI": 53,
+    "H_BIZIM_EVRENDE_UYGULANAMAZ": 71,
+    "D_KODLANMADI_NEDENLI": 1121,
+    "F_YASAK_TIP": 4,
+    "G_ML": 127,
+    "A_TEST_EDILDI_GECTI": 18
+  },
+  "birim_turu": {
+    "kaynak_strateji_kaydi": 7407,
+    "cikis_risk_modulu": 35,
+    "arac_veya_yazi": 225,
+    "toplu_katalog_kaydi": 8,
+    "toplu_beyan": 1,
+    "operasyonel_kod": 521
+  },
+  "not_": "ARA SURUM: kayit dugumleri matematiksel bagimsiz strateji sayisi degildir; prototip/temsilci ve asli kaynak ayridir. Son mantik ve oz denetim bitmedi."
+}

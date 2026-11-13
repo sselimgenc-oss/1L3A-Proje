@@ -1,0 +1,18 @@
+dosya,kaynak_kayit,karar_kayit,fark,satir_no_kurali
+stratejiler/v3_adaylar/ham/MASTER_katalog_2026-11.csv,251,251,0,kayit_no + 1; kaynakta dosyaya gore farkli
+stratejiler/v3_adaylar/ham/asya-siteleri-katalog__b_duzeyi.csv,50,50,0,kayit_no + 1; kaynakta dosyaya gore farkli
+stratejiler/v3_adaylar/ham/asya-siteleri-katalog__tumu.csv,135,135,0,kayit_no + 1; kaynakta dosyaya gore farkli
+stratejiler/v3_adaylar/ham/bolgesel-katalog__b_duzeyi.csv,9,9,0,kayit_no + 1; kaynakta dosyaya gore farkli
+stratejiler/v3_adaylar/ham/bolgesel-katalog__tumu.csv,137,137,0,kayit_no + 1; kaynakta dosyaya gore farkli
+stratejiler/v3_adaylar/ham/chatgpt_dr_tur1_gunici_kripto.csv,7,7,0,kayit_no + 1; kaynakta dosyaya gore farkli
+stratejiler/v3_adaylar/ham/chatgpt_dr_tur2_funding.csv,4,4,0,kayit_no + 1; kaynakta dosyaya gore farkli
+stratejiler/v3_adaylar/ham/chatgpt_dr_tur3_akademik_kismi.csv,2,2,0,kayit_no + 1; kaynakta dosyaya gore farkli
+stratejiler/v3_adaylar/ham/diger-siteler-derin-21.csv,21,21,0,kayit_no + 1; kaynakta dosyaya gore farkli
+stratejiler/v3_adaylar/ham/gemini_dr_6bolge.csv,69,69,0,kayit_no + 0; kaynakta dosyaya gore farkli
+stratejiler/v3_adaylar/ham/gemini_dr_afrika.csv,8,8,0,kayit_no + 0; kaynakta dosyaya gore farkli
+stratejiler/v3_adaylar/ham/github-backtest-katalog-denetimli__dogrulanan_48.csv,48,48,0,kayit_no + 1; kaynakta dosyaya gore farkli
+stratejiler/v3_adaylar/ham/github-backtest-katalog-denetimli__gercek_ek.csv,586,586,0,kayit_no + 1; kaynakta dosyaya gore farkli
+stratejiler/v3_adaylar/ham/github-backtest-katalog-denetimli__tumu.csv,999,999,0,kayit_no + 1; kaynakta dosyaya gore farkli
+stratejiler/v3_adaylar/ham/github-backtest-katalog-v4__diger_siteler.csv,66,66,0,kayit_no + 1; kaynakta dosyaya gore farkli
+stratejiler/v3_adaylar/ham/github-backtest-katalog-v4__reddit.csv,56,56,0,kayit_no + 1; kaynakta dosyaya gore farkli
+stratejiler/v3_adaylar/ham/github-backtest-katalog-v4__sayfa_dogrulamasi.csv,144,144,0,kayit_no + 1; kaynakta dosyaya gore farkli

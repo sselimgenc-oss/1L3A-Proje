@@ -1,0 +1,15 @@
+{
+  "tohum": 20261113,
+  "nufus": 8197,
+  "sirala": "tekil_id artan",
+  "ornek": 40,
+  "ilk_taslak_sistematik_etkilenen": 12,
+  "ilk_ornek_hata_orani": 0.3,
+  "ilk_ornek_sinir": "İlk taslak hata anının tam değişmez snapshotı yok; gözlenen 7 ad+5 tür/kanıt sorununun eski 40 üzerindeki etkisi kaydedildi.",
+  "ikinci_gecis_hata": 2,
+  "ikinci_gecis_hata_orani": 0.05,
+  "ikinci_duzeltme_sonrasi_ayni_40_kalan_hata": 0,
+  "son_ayni_40_kontrol_hata_orani": 0.0,
+  "tekil_tablo_sha256": "06cb8b36d3307e03f4f749968be027f0b00c63219e94649c0cfe25359a66da52",
+  "sinir": "Son sıfır oran aynı 40 üzerindeki düzeltme kontrolüdür; yeni bağımsız üçüncü örneklem veya tüm tablonun hatasızlık güvencesi değildir. BELIRSIZ etiketler özgün kod eksikliğini gidermez."
+}

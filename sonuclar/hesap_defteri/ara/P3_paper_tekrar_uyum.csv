@@ -1,0 +1,11 @@
+strateji,dosya,tf,etiket,referans_net,paper_tekrar_net,referans_n,paper_tekrar_n,asama
+dis__e0v1en,sonuclar/paper_v2/uyum/dis__e0v1en.json,15m,iyi_gorundu,0.0196940008710855,0.01540837486724695,83,84,geçmiş paper tekrar uyum raporu; ileri paper performansı DEĞİL
+dis__ewo-ema-ofset,sonuclar/paper_v2/uyum/dis__ewo-ema-ofset.json,15m,dogrulandi,0.0366951909275194,0.03642494310840093,46,46,geçmiş paper tekrar uyum raporu; ileri paper performansı DEĞİL
+dis__gauss-stoch-eth,sonuclar/paper_v2/uyum/dis__gauss-stoch-eth.json,1d,dogrulandi,0.1037033216428326,0.06109579916312089,159,123,geçmiş paper tekrar uyum raporu; ileri paper performansı DEĞİL
+dis__haftalik-macd-gunluk-ma,sonuclar/paper_v2/uyum/dis__haftalik-macd-gunluk-ma.json,1d,iyi_gorundu,0.023743755279052,0.02346680349417844,65,57,geçmiş paper tekrar uyum raporu; ileri paper performansı DEĞİL
+dis__hma-atr-rider,sonuclar/paper_v2/uyum/dis__hma-atr-rider.json,1d,iyi_gorundu,0.027895410642579,0.0960795595042623,282,279,geçmiş paper tekrar uyum raporu; ileri paper performansı DEĞİL
+dis__jt-awesome-osilator,sonuclar/paper_v2/uyum/dis__jt-awesome-osilator.json,1d,iyi_gorundu,0.2309154357798586,0.08896924000772238,208,70,geçmiş paper tekrar uyum raporu; ileri paper performansı DEĞİL
+dis__lube,sonuclar/paper_v2/uyum/dis__lube.json,1d,iyi_gorundu,0.0298936835531971,0.02552075599312436,20,21,geçmiş paper tekrar uyum raporu; ileri paper performansı DEĞİL
+dis__uc-ortalama-boga-sma60,sonuclar/paper_v2/uyum/dis__uc-ortalama-boga-sma60.json,1d,iyi_gorundu,0.0903708292013265,0.0930540666567375,48,42,geçmiş paper tekrar uyum raporu; ileri paper performansı DEĞİL
+dis__voltarget-trend,sonuclar/paper_v2/uyum/dis__voltarget-trend.json,1d,iyi_gorundu,0.0251627153000699,0.01273809499700124,140,22,geçmiş paper tekrar uyum raporu; ileri paper performansı DEĞİL
+pf__sabit_sepet,sonuclar/paper_v2/uyum/pf__sabit_sepet.json,1d,iyi_gorundu,0.077612432174875,0.07804198311921806,363,21,geçmiş paper tekrar uyum raporu; ileri paper performansı DEĞİL

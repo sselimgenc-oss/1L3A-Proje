@@ -1,0 +1,1266 @@
+[
+  {
+    "ornek_no": "1",
+    "tekil_id": "KAYIT:H47fcef37f4136ed9",
+    "ad": "Yapay zeka tabanlı XAUUSD botu",
+    "atanan_durum": "BELIRSIZ",
+    "akibet_gerekcesi": "Yapay zeka (ML) tabanlı bot; kopya fork ve %3780 getiri şüpheli.",
+    "asil_kaynak": {
+      "repo": "andywarui/xauusd-ai-trading-bot",
+      "güvenilirlik": "GERÇEK",
+      "strateji": "Yapay zeka tabanlı XAUUSD botu",
+      "piyasa": "XAUUSD",
+      "dönem": "7 ay",
+      "sharpe": "?",
+      "getiri/CAGR": "3780% (net $1,890)",
+      "maxDD": "19.5%",
+      "kazanma/işlem": "66.2% / ?",
+      "not": "Backtest; 3780% getiri ~$50 sermayeye karşılık, şüpheli",
+      "yıldız": "12.0",
+      "dil": "Python",
+      "lisans": "",
+      "son_push": "2025-12-12",
+      "aile": "Faktör / momentum / rotasyon",
+      "framework": "False",
+      "OOS_işareti": "False",
+      "maliyet_işareti": "False",
+      "url": "https://github.com/andywarui/xauusd-ai-trading-bot",
+      "denetim_bayrağı": "kopya_fork; şüpheli_getiri>1000%",
+      "nihai": "KOPYA",
+      "doğrulama_seviyesi(sayfa)": "C",
+      "doğrulama_notu": "Getiri rakamı çelişiyor, doğrulama yolu görünmüyor."
+    }
+  },
+  {
+    "ornek_no": "2",
+    "tekil_id": "DIS906:S0299",
+    "ad": "Bollinger Bounce (DSC kiến thức)",
+    "atanan_durum": "BELIRSIZ",
+    "akibet_gerekcesi": "BENZERI_TEST: Bantlar yatay/paralelken alt banda değince al, hedef üst bant; bant eğimi filtresi (orta_egim_n) benzeri var ama farklı hedef.",
+    "asil_kaynak": {
+      "id": "S0299",
+      "aile": "ORTALAMAYA_DONUS",
+      "alt_tur": "BB_REVERSION",
+      "strateji_adi": "Bollinger Bounce (DSC kiến thức)",
+      "kaynak_link": "https://www.dsc.com.vn/kien-thuc/chien-luoc-giao-dich-ket-hop-bollinger-bands-va-duong-ma",
+      "platform": "DSC Chứng khoán (aracı kurum eğitim sayfası)",
+      "ulke_veya_dil": "Vietnam / Vietnamca",
+      "yazar": "DSC (yazar belirtilmemiş)",
+      "yayin_yili": "bilinmiyor",
+      "populerlik_olcusu": "bilinmiyor",
+      "piyasa": "hisse",
+      "zaman_dilimi": "günlük seans (phiên)",
+      "giris_kurali": "Bantlar yatay ve paralelken fiyat alt Bollinger bandına değince al; bant tek yönde belirgin genişliyorsa uygulanmaz.",
+      "cikis_kurali": "Kâr hedefi üst bant.",
+      "stop_kurali": "kaynakta yok",
+      "parametreler": "BB(20 seans, 2 SD)",
+      "kodu_var_mi": "hayir",
+      "lisans": "lisanssız",
+      "iddia_edilen_performans": "bilinmiyor",
+      "kanit_turu": "yok",
+      "bayraklar": "yok",
+      "ek_kaynaklar": "yok",
+      "notlar": "orijinal_id: A7-034 ; Örnek hisse VCB (HOSE). ; aynı kaynakta birden fazla farklı strateji (2): S0299, S0300"
+    }
+  },
+  {
+    "ornek_no": "3",
+    "tekil_id": "KAYIT:H0194a66c21e3c114",
+    "ad": "EMA kesişimi stratejisi, buy&hold ile karşılaştırma",
+    "atanan_durum": "BELIRSIZ",
+    "akibet_gerekcesi": "EMA kesişimi, standart kural; sonuç tablosu yok ve aile zaten var.",
+    "asil_kaynak": {
+      "repo": "ShorieAbhinav/quant-projects",
+      "güvenilirlik": "BELİRSİZ",
+      "strateji": "EMA kesişimi stratejisi, buy&hold ile karşılaştırma",
+      "piyasa": "AAPL (hisse)",
+      "dönem": "2020-01 – 2026-03",
+      "sharpe": "?",
+      "getiri/CAGR": "?",
+      "maxDD": "?",
+      "kazanma/işlem": "? / ?",
+      "not": "Sonuç tablosunun değerleri parçada yok",
+      "yıldız": "",
+      "dil": "",
+      "lisans": "",
+      "son_push": "",
+      "aile": "Trend takip / MA",
+      "framework": "False",
+      "OOS_işareti": "False",
+      "maliyet_işareti": "False",
+      "url": "https://github.com/ShorieAbhinav/quant-projects",
+      "denetim_bayrağı": "",
+      "nihai": "BELİRSİZ",
+      "doğrulama_seviyesi(sayfa)": "",
+      "doğrulama_notu": ""
+    }
+  },
+  {
+    "ornek_no": "4",
+    "tekil_id": "KURAL:29d5de3be9ae8d44786d",
+    "ad": "Cluster Breakout Strategy v6 (Robust)",
+    "atanan_durum": "BELIRSIZ",
+    "akibet_gerekcesi": "Envanter beyanı: {\"durum\": \"ayar:daytrade__konsolidasyon-kirilim\", \"ayar_durumu\": \"dis_envanter: durum=test_edilebilir; ayar:daytrade__konsolidasyon-kirilim; eşleşme ad benzerliğiyle (olası aynı betik, ad: Cluster Breakout Strategy v8 (Partial+BE)); yazar(lar): ruchiragrawal\", \"benzer_1l3a_aile\": \"daytrade__konsolidasyon-kirilim\", \"onceki_sonuc\": \"yok (listede yalnız ad/beğeni; yazar sonuç paylaşmamış)\"}",
+    "asil_kaynak": {
+      "kaynak": "tv_listesi",
+      "ad": "Cluster Breakout Strategy v6 (Robust)",
+      "dosya": "veri/pdf_metin_2/rapor/en-begenilen-100-strateji.txt;veri/pdf_metin_2/rapor/codex.txt",
+      "gostergeler": "Dar aralık kümelenmesi, ATR, hacim",
+      "mekanik_ozet": "10 mumluk dar aralık kırılımı ve hacim onayı; seans sonu kapanış, %0.5 stop, kısmi kâr.",
+      "zaman_dilimi": "",
+      "veri_ihtiyaci": "ohlcv",
+      "onceki_sonuc": "yok (listede yalnız ad/beğeni; yazar sonuç paylaşmamış)",
+      "kategori": "kirilim",
+      "benzer_1l3a_aile": "daytrade__konsolidasyon-kirilim",
+      "durum": "ayar:daytrade__konsolidasyon-kirilim",
+      "ayar_durumu": "dis_envanter: durum=test_edilebilir; ayar:daytrade__konsolidasyon-kirilim; eşleşme ad benzerliğiyle (olası aynı betik, ad: Cluster Breakout Strategy v8 (Partial+BE)); yazar(lar): ruchiragrawal",
+      "stil": "daytrade",
+      "kaynak_pdf": "en-begenilen-100-strateji.pdf;codex.pdf",
+      "sayfa": "3;3"
+    }
+  },
+  {
+    "ornek_no": "5",
+    "tekil_id": "DIS906:S0158",
+    "ad": "Pairs Trading: Performance of a Relative-Value Arbitrage Rule (Pairs Trading with Stocks)",
+    "atanan_durum": "BELIRSIZ",
+    "akibet_gerekcesi": "BENZERI_TEST: GGR mesafe yöntemi: 12 ay oluşum, SSD en küçük çiftler, 6 ay işlem; bizde mesafe yöntemi 120g/5 çift ve 365g/20 çift.",
+    "asil_kaynak": {
+      "id": "S0158",
+      "aile": "ORTALAMAYA_DONUS",
+      "alt_tur": "PAIRS_COINT",
+      "strateji_adi": "Pairs Trading: Performance of a Relative-Value Arbitrage Rule (Pairs Trading with Stocks)",
+      "kaynak_link": "https://quantpedia.com/strategies/pairs-trading-with-stocks",
+      "platform": "Quantpedia (ücretsiz kısım)",
+      "ulke_veya_dil": "İngilizce (ABD)",
+      "yazar": "Evan Gatev, William Goetzmann, K. Geert Rouwenhorst (Quantpedia özeti)",
+      "yayin_yili": "1999 (NBER w7032), 2006 (RFS)",
+      "populerlik_olcusu": "bilinmiyor",
+      "piyasa": "hisse",
+      "zaman_dilimi": "günlük",
+      "giris_kurali": "12 aylık oluşum döneminde normalize toplam getiri endeksleri arasında kare sapma toplamı en küçük eşleşmeler bulunur; en yakın 20 çift seçilir; işlem döneminde çiftin fiyatları oluşum dönemi std'sinin 2 katı ayrışınca yükselen açığa satılır, düşen alınır.",
+      "cikis_kurali": "Fiyatlar tekrar kesiştiğinde kapatılır; en geç 6 aylık işlem dönemi sonunda kapatılır (AA özeti).",
+      "stop_kurali": "kaynakta yok (zaman stopu: 6 ay)",
+      "parametreler": "Oluşum 12 ay; işlem 6 ay; 2σ giriş; ilk 20 çift; her ay yeni çift seti (örtüşen portföyler)",
+      "kodu_var_mi": "hayir",
+      "lisans": "lisanssız",
+      "iddia_edilen_performans": "iddia: ilk 20 çift tahmini maliyet sonrası yıllık %11.16, oynaklık %5.85, Sharpe 1.22 (Quantpedia); NBER özeti: kendini finanse eden portföylerde yıllık %12'ye kadar fazla getiri (1962-1997); yayın sonrası 1999-2002 OOS yıllık %10.4; dönem: 1962-2002",
+      "kanit_turu": "akademik makale",
+      "bayraklar": "yok",
+      "ek_kaynaklar": "https://nber.org/papers/w7032 ; https://alphaarchitect.com/2013/06/pairs-trading-kicks-butt/ ; https://rpc.cfainstitute.org/research/financial-analysts-journal/2010/does-simple-pairs-trading-still-work",
+      "notlar": "orijinal_id: A4-018 ; Gerçek yayın-sonrası OOS var (1999-2002). Eleştiri: Do & Faff (2010, FAJ) kârlılıktaki düşüş eğiliminin sürdüğünü, ancak türbülans dönemlerinde (2008 dahil) güçlü olduğunu raporluyor. -%17 MDD kaynakta 'not stated'. ; kanit_eki: [çürütüyor] GGR (12 ay oluşum, 6 ay işlem, 2σ) Çin A paylarında 100 bp maliyetle çoğu portföyde sıfıra yakın; Do-Faff (2010) aktarımı: ABD'de getiriler 1989 sonrası belirgin düştü (1962-2009). (https://www.wne.uw.edu.pl/download_file/6166/0)"
+    }
+  },
+  {
+    "ornek_no": "6",
+    "tekil_id": "KURAL:d80f3c6ed72ee3ced17e",
+    "ad": "Trading Volume Effects of Moving Average Heuristics",
+    "atanan_durum": "BELIRSIZ",
+    "akibet_gerekcesi": "Envanter beyanı: {\"durum\": \"ayar:swing__ma-kesisim\", \"ayar_durumu\": \"heuristik_esleme (anahtar kelime, dogrulanmadi); liste_id=A5-013; platform=PapersWithBacktest; kod_dili=?; kod_erisim=?; url=https://paperswithbacktest.com/strategies/trading-volume-effects-of-moving-average-heuristics\", \"benzer_1l3a_aile\": \"swing__ma-kesisim\", \"onceki_sonuc\": \"yazar/platform beyanı (dogrulanmamis): dönem: 1990-01-02 – 2026 (platform); Sharpe: 1.01; getiri: 11.27% (Annual return); maks DD: 34.28%\"}",
+    "asil_kaynak": {
+      "kaynak": "liste_xlsx",
+      "ad": "Trading Volume Effects of Moving Average Heuristics",
+      "dosya": "strateji_listesi (2).xlsx#A5-013",
+      "gostergeler": "Hareketli ortalama (pencere belirtilmemiş)",
+      "mekanik_ozet": "Hareketli ortalama sezgiselinin al/sat sinyal günlerinde işlem hacminin nasıl değiştiğini inceleyen makale; platform bunu günlük bir long strateji olarak backtest ediyor. Giriş: Al sinyali günü (MA heuristiği; kesin tanım belirtilmemiş) Çıkış: Sat sinyali günü (belirtilmemiş)",
+      "zaman_dilimi": "1D",
+      "veri_ihtiyaci": "ohlcv",
+      "onceki_sonuc": "yazar/platform beyanı (dogrulanmamis): dönem: 1990-01-02 – 2026 (platform); Sharpe: 1.01; getiri: 11.27% (Annual return); maks DD: 34.28%",
+      "kategori": "trend_takip",
+      "benzer_1l3a_aile": "swing__ma-kesisim",
+      "durum": "ayar:swing__ma-kesisim",
+      "ayar_durumu": "heuristik_esleme (anahtar kelime, dogrulanmadi); liste_id=A5-013; platform=PapersWithBacktest; kod_dili=?; kod_erisim=?; url=https://paperswithbacktest.com/strategies/trading-volume-effects-of-moving-average-heuristics",
+      "stil": "swing",
+      "repo": "sg-arge-"
+    }
+  },
+  {
+    "ornek_no": "7",
+    "tekil_id": "EXCELKURAL:ab2d3193c16411caa760",
+    "ad": "Delta-RSI Strategy (with filters)",
+    "atanan_durum": "BELIRSIZ",
+    "akibet_gerekcesi": "BELIRSIZ: kaynak kaydı mevcut; açık uygulama veya gerekçeli eleme zinciri bulunamadı. Sadece ad benzerliğiyle bağ kurulmadı.",
+    "asil_kaynak": {
+      "ID": "P3-009",
+      "Strateji Adı": "Delta-RSI Strategy (with filters)",
+      "Tür": "Belirsiz (Day/Swing)",
+      "Platform": "TradingView",
+      "URL": "https://www.tradingview.com/script/0OdCms2T-Delta-RSI-Strategy-with-filters/",
+      "Yazar": "tbtkg",
+      "Yayın Tarihi": "2021-03-19 (güncelleme 2021-03-22)",
+      "Piyasa": "belirtilmemiş",
+      "Enstrüman": "belirtilmemiş",
+      "Zaman Dilimi": "belirtilmemiş",
+      "Ort. Pozisyon Süresi": "belirtilmemiş",
+      "Özet": "Delta-RSI osilatörünün giriş/çıkış filtreleri, tarih aralığı ve TP/SL seçenekleri eklenmiş strateji sürümü.",
+      "Giriş": "Delta-RSI sinyal çizgisi kesişimi (+ seçilebilir filtreler)",
+      "Çıkış": "Ters sinyal veya TP/SL",
+      "Göstergeler": "Delta-RSI",
+      "Kod Dili": "Pine Script",
+      "Kod Erişimi": "Açık kaynak (open-source script)",
+      "Backtest Dönemi": "belirtilmemiş",
+      "İşlem Sayısı": "belirtilmemiş",
+      "Kazanma Oranı": "belirtilmemiş",
+      "Profit Factor": "belirtilmemiş",
+      "Sharpe": "belirtilmemiş",
+      "Getiri": "belirtilmemiş",
+      "Maks. Düşüş (DD)": "belirtilmemiş",
+      "Maliyet Dahil mi": "belirtilmemiş",
+      "Metrik Kaynağı": "yok (sayfada sayısal backtest metriği verilmemiş / alınmadı)",
+      "Popülerlik Türü": "TradingView boost / yorum / görüntülenme",
+      "Popülerlik Değeri": "3351 boost; 23 yorum; 79 534 görüntülenme (Views)",
+      "Uyarılar (Kırmızı Bayraklar)": "Strateji Tester sonuçları kullanıcının sembol/zaman dilimine göre değişir; yayınlanmış metrik yok.; Tür kaynakta belirtilmemiş (zaman dilimi kullanıcıya bağlı)",
+      "Notlar (diğer kaynaklar)": "Yeni; TV 'tüm zamanlar' sıralaması arayüzde yok: sayaçlar strateji filtreli arama (relevance) kartlarındaki aria etiketlerinden ('N boosts','N comments') ve script sayfasından (Boost/Comment/Views) birebir alındı",
+      "Kaynak Kontrolü": "Üçüncü tur (P2/P3, 2026-10-21): kaynaktan/görselden okundu, örneklem kontrolü değil",
+      "Erişim Tarihi": "2026-10-21"
+    }
+  },
+  {
+    "ornek_no": "8",
+    "tekil_id": "ROBOTIC:9da3ebc584099c6def13",
+    "ad": "dirty LA/from-AIRA/orderbook-volume/BotOwskyStrategy__2.py",
+    "atanan_durum": "BELIRSIZ",
+    "akibet_gerekcesi": "ML_FREQAI: ML-kutuphane:sklearn,torch ; adjust_trade_position (pozisyon buyutme) ; LA:negative_shift ; LA:negative_shift_var ; LA:extrema_scan ; LA:global_scaler",
+    "asil_kaynak": {
+      "dosya": "dirty LA/from-AIRA/orderbook-volume/BotOwskyStrategy__2.py",
+      "aile_klasor": "orderbook-volume",
+      "kume_id": "K468",
+      "dosya_sinif": "ML_FREQAI",
+      "neden": "ML-kutuphane:sklearn,torch ; adjust_trade_position (pozisyon buyutme) ; LA:negative_shift ; LA:negative_shift_var ; LA:extrema_scan ; LA:global_scaler",
+      "bayraklar": "ILOC_SON_SATIR ; KAUSAL_OLMAYAN_FILTRE_ADAYI ; SHORT",
+      "tf": "1h",
+      "stoploss": "-0.08",
+      "hyperopt_param": "14",
+      "katalog_LA_high": "2",
+      "katalog_LA_medium": "0",
+      "kendi_LA_yuksek": "negative_shift ; negative_shift_var ; extrema_scan ; global_scaler",
+      "kopya_sayisi": "0"
+    }
+  },
+  {
+    "ornek_no": "9",
+    "tekil_id": "KAYIT:H04557d89908c04e2",
+    "ad": "Momentum ve volatilite faktör stratejisi",
+    "atanan_durum": "BELIRSIZ",
+    "akibet_gerekcesi": "Momentum-volatilite rank skoru, günlük eşit ağırlık; momentum ailesi elimizde var.",
+    "asil_kaynak": {
+      "repo": "Florian7777777777/pet-quant-project",
+      "güvenilirlik": "GERÇEK",
+      "strateji": "Momentum ve volatilite faktör stratejisi",
+      "piyasa": "Hisse (?)",
+      "dönem": "?",
+      "sharpe": "~0.34",
+      "getiri/CAGR": "?",
+      "maxDD": "~-%47.7",
+      "kazanma/işlem": "?",
+      "not": "Vol ~%31.4; yaklaşık değerler; dönem, OOS ?",
+      "yıldız": "",
+      "dil": "",
+      "lisans": "",
+      "son_push": "",
+      "aile": "Faktör / momentum / rotasyon",
+      "framework": "False",
+      "OOS_işareti": "False",
+      "maliyet_işareti": "False",
+      "url": "https://github.com/Florian7777777777/pet-quant-project",
+      "denetim_bayrağı": "piyasa_belirsiz_işaretli",
+      "nihai": "GERÇEK-TEMİZ",
+      "doğrulama_seviyesi(sayfa)": "",
+      "doğrulama_notu": ""
+    }
+  },
+  {
+    "ornek_no": "10",
+    "tekil_id": "KART:scalp__5dk-sistem-5-3-5-15-45-ema-ghl-qti__carter",
+    "ad": "5 Dakika Sistem #5: 3/5/15/45 EMA Demeti + GHL + QTI Çoklu Zaman Dilimi",
+    "atanan_durum": "BELIRSIZ",
+    "akibet_gerekcesi": "Aile/ayar atfı tek başına kaynak kuralının test edildiğini kanıtlamaz.",
+    "asil_kaynak": {
+      "kart_id": "scalp__5dk-sistem-5-3-5-15-45-ema-ghl-qti__carter",
+      "ad": "5 Dakika Sistem #5: 3/5/15/45 EMA Demeti + GHL + QTI Çoklu Zaman Dilimi",
+      "stil": "scalp",
+      "kaynak": {
+        "pdf": "20 Trading Stratejisi (28 sayfa) - @eseckal.pdf",
+        "sayfalar": [
+          6,
+          7,
+          8
+        ]
+      },
+      "ozet": "15 dk'da fiyat>3EMA>5EMA>15EMA>45EMA ve GHL/QTI yeşil iken fiyat 5 EMA'ya dokunana kadar geri çekilir; 5 dk'ya inilir, fiyat tüm EMA'ların üstünde kapanır ve histogramlar yeşil ise AL; stop son dip, hedef = stop (1:1).",
+      "kategori": "trend_takip",
+      "piyasa_rejimi": "trend",
+      "orijinal_piyasa": "forex",
+      "zaman_dilimi": {
+        "islem": "5m",
+        "ust_filtre": "15m"
+      },
+      "gostergeler": [
+        {
+          "ad": "EMA",
+          "parametreler": {
+            "periyot": 3,
+            "kayma": 1
+          }
+        },
+        {
+          "ad": "EMA",
+          "parametreler": {
+            "periyot": 5,
+            "kayma": 3
+          }
+        },
+        {
+          "ad": "EMA",
+          "parametreler": {
+            "periyot": 15,
+            "kayma": 3
+          }
+        },
+        {
+          "ad": "EMA",
+          "parametreler": {
+            "periyot": 45,
+            "kayma": 3
+          }
+        },
+        {
+          "ad": "GHL (HiLo Activator)",
+          "parametreler": {}
+        },
+        {
+          "ad": "QTI (Quick Trend Index)",
+          "parametreler": {}
+        }
+      ],
+      "long_giris": [
+        "15dk: fiyat>3>5>15>45 EMA, GHL ve QTI yeşil",
+        "15dk: fiyat 5 EMA'ya dokunana kadar geri çeker (mum 5 EMA'da kapanmak zorunda değil)",
+        "5dk: fiyat tüm EMA'ların üstünde kapanır, 15EMA>45EMA, iki histogram yeşil, 15dk trendi hala geçerli -> mum kapanışında AL"
+      ],
+      "short_giris": [
+        "Ayna (fiyat<3<5<15<45, GHL/QTI kırmızı, 5 EMA'ya yükseliş)"
+      ],
+      "stop_loss": "Son dip (short: son zirve)",
+      "kar_al": "Stop mesafesine eşit (1:1)",
+      "iz_suren_stop": null,
+      "zaman_cikisi": null,
+      "filtreler": [],
+      "pozisyon_risk": null,
+      "iddia_edilen_performans": null,
+      "kodlanabilirlik": {
+        "puan": 1,
+        "gerekce": "GHL ve QTI özel göstergeler."
+      },
+      "belirsizlikler": [
+        "GHL/QTI parametreleri ve formülleri kitapta yok",
+        "EMA kayma (shift) değerleri tuhaf tanımlı"
+      ],
+      "uyumluluk_notu": "5m forex sistemi; pip tabanlı sabit stop/hedef ATR ile ölçeklenmeli; hacim gerekmez; kripto/emtia perpetual'larda pip yerine ATR/% kullanılmalı.",
+      "varyantlar": [],
+      "anahtar_kelimeler": [
+        "ema-demeti",
+        "coklu-zaman",
+        "ghl",
+        "qti"
+      ]
+    }
+  },
+  {
+    "ornek_no": "11",
+    "tekil_id": "DIS906:S0794",
+    "ad": "basic_pairs_trading_template (ABGB/FSLR)",
+    "atanan_durum": "BELIRSIZ",
+    "akibet_gerekcesi": "BENZERI_TEST: ABGB−FSLR fiyat farkı z-skoru ±0.2 giriş, 0.1 çıkış.",
+    "asil_kaynak": {
+      "id": "S0794",
+      "aile": "ORTALAMAYA_DONUS",
+      "alt_tur": "PAIRS_COINT",
+      "strateji_adi": "basic_pairs_trading_template (ABGB/FSLR)",
+      "kaynak_link": "https://github.com/quantopian/research_public/blob/master/template_algorithms/basic_pairs_trading_template.py",
+      "platform": "Quantopian (GitHub arşivi)",
+      "ulke_veya_dil": "İngilizce / ABD",
+      "yazar": "Delaney Granizo-Mackenzie (Quantopian)",
+      "yayin_yili": "bilinmiyor",
+      "populerlik_olcusu": "2.9k yıldız (quantopian/research_public), 2026-11-13",
+      "piyasa": "hisse",
+      "zaman_dilimi": "günlük (kapanıştan 60 dk önce)",
+      "giris_kurali": "Fiyat farkı (ABGB−FSLR) 1 günlük ortalamasının 30 günlük ortalama/std'ye göre z-skoru +0.2'yi aşarsa ABGB −%50 / FSLR +%50; −0.2'nin altına inerse ABGB +%50 / FSLR −%50.",
+      "cikis_kurali": "|z| < 0.1 olunca iki bacak sıfırlanır.",
+      "stop_kurali": "kaynakta yok",
+      "parametreler": "long_ma 30 gün; short_ma 1 gün; giriş eşiği 0.2; çıkış eşiği 0.1; bacak ±%50",
+      "kodu_var_mi": "evet (Python, Quantopian API)",
+      "lisans": "lisanssız",
+      "iddia_edilen_performans": "bilinmiyor",
+      "kanit_turu": "yok",
+      "bayraklar": "yok",
+      "ek_kaynaklar": "yok",
+      "notlar": "orijinal_id: D2-022 ; fikir_ozeti: fiyat farkı z-skoru dar eşiklerle çift ticareti (atölye örneği; kaynak 'öğrenme örneği, bununla işlem yapmayın' uyarısı taşır) ; lisans notu: kaynakta lisans belirtilmemiş (tüm haklar yazarda); kod kopyalanmadı, yalnız kural özeti ; tur: 4 (hacim: açık kod kütüphaneleri)"
+    }
+  },
+  {
+    "ornek_no": "12",
+    "tekil_id": "KURAL:5dcedb068c1c8e79ea7e",
+    "ad": "wtc",
+    "atanan_durum": "BELIRSIZ",
+    "akibet_gerekcesi": "Envanter beyanı: {\"durum\": \"test_edilebilir\", \"ayar_durumu\": \"kodlandi\", \"onceki_sonuc\": \"PF IS 0.78 / OOS 0.94; Sh IS -1.06 / OOS -0.29 → kaldı (sonuc_freqtrade_dakika.csv)\"}",
+    "asil_kaynak": {
+      "kaynak": "freqtrade",
+      "ad": "wtc",
+      "dosya": "arsiv/algo-sg/dis_kaynak/ft/strategies/wtc.py",
+      "gostergeler": "WaveTrend (wt1/wt2), stokastik, def",
+      "mekanik_ozet": "WaveTrend kesişimi ve stokastik/def aralık filtreleriyle long/short; ters kesişimde çıkış.",
+      "zaman_dilimi": "30m",
+      "veri_ihtiyaci": "ohlcv",
+      "onceki_sonuc": "PF IS 0.78 / OOS 0.94; Sh IS -1.06 / OOS -0.29 → kaldı (sonuc_freqtrade_dakika.csv)",
+      "kategori": "momentum",
+      "benzer_1l3a_aile": "",
+      "durum": "test_edilebilir",
+      "ayar_durumu": "kodlandi"
+    }
+  },
+  {
+    "ornek_no": "13",
+    "tekil_id": "DIS906:S0854",
+    "ad": "AUDCAD_unequal.py (Johansen AUD.USD vs USD.CAD)",
+    "atanan_durum": "BELIRSIZ",
+    "akibet_gerekcesi": "BENZERI_TEST: AUD.USD/USD.CAD Johansen özvektör ağırlıklı portföy −z (250 gün). pairs sınıfında Johansen var.",
+    "asil_kaynak": {
+      "id": "S0854",
+      "aile": "ORTALAMAYA_DONUS",
+      "alt_tur": "PAIRS_COINT",
+      "strateji_adi": "AUDCAD_unequal.py (Johansen AUD.USD vs USD.CAD)",
+      "kaynak_link": "https://github.com/welly87/epchanbooks/blob/main/book2/AUDCAD_unequal.py",
+      "platform": "GitHub (kitap eşlik kodunun Python portu: E. Chan 'Algorithmic Trading' / 'Quantitative Trading')",
+      "ulke_veya_dil": "ABD (kitap) / İngilizce",
+      "yazar": "Ernest P. Chan (orijinal MATLAB) ; Python portu: welly87",
+      "yayin_yili": "bilinmiyor (repo son commit 2021-04-18)",
+      "populerlik_olcusu": "5 yıldız, 2026-11-13",
+      "piyasa": "forex",
+      "zaman_dilimi": "günlük",
+      "giris_kurali": "Her gün önceki 250 günle Johansen testi; ilk özvektör hedge ağırlıkları. Son 20 günlük portföy değerinin z-skoru alınır; pozisyon = −z birim portföy.",
+      "cikis_kurali": "Ayrı çıkış yok; z sıfıra döndükçe pozisyon küçülür.",
+      "stop_kurali": "kaynakta yok",
+      "parametreler": "trainlen 250 ; lookback 20 ; CAD = 1/USDCAD ; AUD = AUDUSD ; Johansen det_order 0, k_ar_diff 1",
+      "kodu_var_mi": "evet (Python)",
+      "lisans": "Apache-2.0 (port reposu); orijinal kitap kodu yazarın telifinde",
+      "iddia_edilen_performans": "iddia (dosya sonundaki kayıtlı çıktı yorumu; maliyetsiz): APR %6,45, Sharpe 1,36; dönem: dosyada yazmıyor",
+      "kanit_turu": "backtest iddiası",
+      "bayraklar": "yok",
+      "ek_kaynaklar": "yok",
+      "notlar": "orijinal_id: D3-013 ; fikir_ozeti: kayan Johansen hedge'li döviz çifti doğrusal MR ; git clone ile okundu. ; lisans notu: Apache-2.0 yalnız Python port deposu için; özgün kitap kodu E. Chan'in telifinde (kitaplar ücretli) ; denetim düzeltmesi (4. tur, 2026-11-13): örneklem dışı tarama: performans 'bilinmiyor' idi; AUDCAD_unequal.py'nin kayıtlı çıktısı ('APR=0.064512 Sharpe=1.362926') aynı betiğe ait ; tur: 4 (hacim: açık kod kütüphaneleri)"
+    }
+  },
+  {
+    "ornek_no": "14",
+    "tekil_id": "KART:swing__cok-ufuk-momentum-vol-filtre__sidharthguptax",
+    "ad": "Çok Ufuklu Momentum (20/60/120/250) + Oynaklık Oranı Filtresi",
+    "atanan_durum": "BELIRSIZ",
+    "akibet_gerekcesi": "BELIRSIZ: kaynak kaydı mevcut; açık uygulama veya gerekçeli eleme zinciri bulunamadı. Sadece ad benzerliğiyle bağ kurulmadı.",
+    "asil_kaynak": {
+      "kart_id": "swing__cok-ufuk-momentum-vol-filtre__sidharthguptax",
+      "ad": "Çok Ufuklu Momentum (20/60/120/250) + Oynaklık Oranı Filtresi",
+      "stil": "swing",
+      "kaynak": {
+        "url": "https://github.com/sidharthguptax/quant-research",
+        "lisans": "belirtilmemiş",
+        "tur": "github"
+      },
+      "ozet": "Dört pencerenin (20,60,120,250 gün) getiri toplamı kendi oynaklığına bölünüp z-skora çevrilir, 250 günlük ortalamasından arındırılır ve eşit ağırlıkla birleştirilir; birleşik sinyal kendi genişleyen standart sapmasının 0.5 katını aşarsa long, altına inerse short; kısa oynaklık uzun vadeliye göre 1.4 katını aşarsa flat.",
+      "kategori": "momentum",
+      "piyasa_rejimi": "herhangi",
+      "orijinal_piyasa": "hisse",
+      "zaman_dilimi": {
+        "islem": "1d",
+        "ust_filtre": null
+      },
+      "gostergeler": [
+        {
+          "ad": "Momentum z-skoru",
+          "parametreler": {
+            "pencereler": [
+              20,
+              60,
+              120,
+              250
+            ],
+            "hesap": "w günlük log getiri toplamı / (w günlük getiri std x karekök w)"
+          }
+        },
+        {
+          "ad": "Arındırma",
+          "parametreler": {
+            "pencere": 250,
+            "hesap": "z - z'nin 250 günlük kayan ortalaması"
+          }
+        },
+        {
+          "ad": "Oynaklık oranı",
+          "parametreler": {
+            "kisa": 20,
+            "uzun": "genişleyen std (en az 250 gün)",
+            "esik": 1.4
+          }
+        }
+      ],
+      "long_giris": [
+        "Dört arındırılmış momentum z-skorunun eşit ağırlıklı ortalaması (hepsi mevcut olmalı) > 0.5 x ortalamanın genişleyen std'si (en az 250 gün)",
+        "20 günlük getiri std / genişleyen getiri std <= 1.4 (aksi halde flat)",
+        "Sinyal bir gün geciktirilerek uygulanır"
+      ],
+      "short_giris": [
+        "Birleşik sinyal < -0.5 x genişleyen std",
+        "Aynı oynaklık filtresi (>1.4 ise flat)",
+        "Sinyal bir gün geciktirilir"
+      ],
+      "stop_loss": null,
+      "kar_al": null,
+      "iz_suren_stop": null,
+      "zaman_cikisi": "Birleşik sinyal [-0.5, +0.5] x std bandına dönünce flat; sabit süre yok",
+      "filtreler": [
+        "Oynaklık oranı > 1.4 ise pozisyon sıfırlanır (kaynağa göre fiilen yalnız short'ları eler)"
+      ],
+      "pozisyon_risk": "Sabit tam pozisyon (+1/0/-1); kaynakta oynaklık hedefleme yok",
+      "iddia_edilen_performans": "README (kaynağın kendi negatif sonucu): Sharpe -1.03 vs al-tut +0.74, yıllık getiri -%6.15, maks. düşüş -%42.5, isabet %48.9 (SPY 2010-2019) (iddia, doğrulanmadı)",
+      "kanit": "Yazar README'sinde stratejinin 5 kapıdan hiçbirini geçemediğini bildiriyor (iddia, doğrulanmadı). Kural nedensel (kayan/genişleyen pencereler); sonuç olumsuz olduğu için yalnız kural çeşitliliği değeri var.",
+      "veri_uygun": [
+        true,
+        "Günlük OHLC yeterli; kural varlıktan bağımsız. Kaynak SPY kullanıyor, ETF kapsamı Dukascopy'de doğrulanmadı; kripto perp veya hisse sepetine uygulanabilir."
+      ],
+      "kodlanabilirlik": {
+        "puan": 3,
+        "gerekce": "Tüm adımlar kodda sayısal ve nedensel; warm-up kuralı açık (NaN)."
+      },
+      "belirsizlikler": [
+        "Kaynakta sonuç olumsuz",
+        "Birleşik sinyal eşiği 0.5 sigma ve vol_cutoff 1.4 için gerekçe yok",
+        "Sinyalin bir gün geciktirilmesi backtest_signal fonksiyonunda (src/), karta README'den alındı",
+        "Maliyet varsayımı kaynağın notunda; kartta yok",
+        "Lisans belirtilmemiş: kod kopyalanmadı"
+      ],
+      "uyumluluk_notu": "Mevcut swing__momentum-sifir-kesisim__chandanp001 tek pencereli sıfır kesişimi; bu çok ufuklu, arındırılmış, 3 durumlu (long/flat/short) ve oynaklık oranı filtreli. Kripto günlükte denenebilir.",
+      "varyantlar": [],
+      "anahtar_kelimeler": [
+        "momentum",
+        "cok-ufuk",
+        "z-skor",
+        "oynaklik-filtresi",
+        "long-short"
+      ]
+    }
+  },
+  {
+    "ornek_no": "15",
+    "tekil_id": "KAYIT:Hfabeb46407c11370",
+    "ad": "Hisse swing stratejisi (açıklanmamış, %96 kazanma)",
+    "atanan_durum": "BELIRSIZ",
+    "akibet_gerekcesi": "BELIRSIZ: kaynak kaydı mevcut; açık uygulama veya gerekçeli eleme zinciri bulunamadı. Sadece ad benzerliğiyle bağ kurulmadı.",
+    "asil_kaynak": {
+      "ID": "O3-019",
+      "Strateji Adı": "Hisse swing stratejisi (açıklanmamış, %96 kazanma)",
+      "Tür": "Swing",
+      "Platform": "Reddit (ayna/anlık görüntü)",
+      "URL": "https://reddit.sentinel-team.org/posts/1sctlkd/snapshots/2026-04-06T18%3A02%3A16.13595Z",
+      "Yazar": "u/dineshu07",
+      "Yayın Tarihi": "~2025-09-19 (hesaplanmış)",
+      "Piyasa": "Hisse",
+      "Enstrüman": "belirtilmemiş",
+      "Zaman Dilimi": "belirtilmemiş",
+      "Ort. Pozisyon Süresi": "belirtilmemiş",
+      "Özet": "Yazılımcı yazarın kodladığı, kuralları paylaşılmamış hisse swing stratejisi.",
+      "Giriş": "belirtilmemiş",
+      "Çıkış": "belirtilmemiş",
+      "Göstergeler": "belirtilmemiş",
+      "Kod Dili": "belirtilmemiş",
+      "Kod Erişimi": "belirtilmemiş",
+      "Backtest Dönemi": "2010-2025 (yıllık tablo)",
+      "İşlem Sayısı": "364",
+      "Kazanma Oranı": "0.9615",
+      "Profit Factor": "belirtilmemiş",
+      "Sharpe": "belirtilmemiş",
+      "Getiri": "İşlem başı ort. 46.20%, medyan 23.77%",
+      "Maks. Düşüş (DD)": "belirtilmemiş",
+      "Maliyet Dahil mi": "belirtilmemiş",
+      "Metrik Kaynağı": "Yazar bildirimi",
+      "Popülerlik Türü": "upvote / yorum",
+      "Popülerlik Değeri": "0 puan, 24 yorum",
+      "Uyarılar (Kırmızı Bayraklar)": "KIRMIZI BAYRAK: Kazanma >%85; Maliyet/kayma belirtilmemiş; DÜŞÜK GÜVENİLİRLİK: Reddit ayna/anlık görüntü sayfasından okundu (reddit.com erişilemedi); Kurallar açıklanmamış; 0 puan | Kurallar yok, maliyet/DD yok; aşırı uyum şüphesi yorumlarda.",
+      "Notlar (diğer kaynaklar)": "Yeni; düşük güvenilirlik.",
+      "Kaynak Kontrolü": "İkinci tur (Opus bağımsız tarama, 2026-10-21): kaynaktan okundu, örneklem kontrolü değil",
+      "Erişim Tarihi": "2026-10-21"
+    }
+  },
+  {
+    "ornek_no": "16",
+    "tekil_id": "DIS906:S0510",
+    "ad": "Keltner Channel Reversal Strategy (0073)",
+    "atanan_durum": "BELIRSIZ",
+    "akibet_gerekcesi": "BENZERI_TEST: Keltner (EMA20-2ATR14) alt bandı altı kapanış + yeşil mum, orta banda çıkış; Keltner bandı bizde yok.",
+    "asil_kaynak": {
+      "id": "S0510",
+      "aile": "ORTALAMAYA_DONUS",
+      "alt_tur": "KELTNER_ENVELOPE_FADE",
+      "strateji_adi": "Keltner Channel Reversal Strategy (0073)",
+      "kaynak_link": "https://doc.stocksharp.com/en/api-examples/0073_Keltner_Channel_Reversal",
+      "platform": "StockSharp (doc + GitHub)",
+      "ulke_veya_dil": "İngilizce",
+      "yazar": "StockSharp",
+      "yayin_yili": "bilinmiyor",
+      "populerlik_olcusu": "bilinmiyor",
+      "piyasa": "hisse ; genel",
+      "zaman_dilimi": "5 dakika",
+      "giris_kurali": "Kapanmış mumda kapanış alt Keltner bandının (EMA20 − 2×ATR14) altında ve mum yükseliş (kapanış > açılış) ise long; kapanış üst bandın üstünde ve mum düşüş ise short; yalnız pozisyon yokken.",
+      "cikis_kurali": "Long: kapanış ≥ EMA (orta bant) olunca piyasa emriyle kapat; short: kapanış ≤ EMA.",
+      "stop_kurali": "Girişteki ATR × 2,0 sabit mesafeli koruyucu stop (0 ise devre dışı).",
+      "parametreler": "EMA=20 ; ATR=14 ; bant çarpanı=2,0 ; stop ATR çarpanı=2,0 ; mum=5 dk",
+      "kodu_var_mi": "evet (C# ; Python)",
+      "lisans": "StockSharp Custom License Notice – All rights reserved (repo LICENSE)",
+      "iddia_edilen_performans": "iddia: test ortalama yıllık getirisi ~%106, en iyi hisse piyasasında; dönem: bilinmiyor",
+      "kanit_turu": "backtest iddiası",
+      "bayraklar": "yok",
+      "ek_kaynaklar": "https://github.com/StockSharp/AlgoTrading/tree/main/API/0001-0100/0073_Keltner_Channel_Reversal",
+      "notlar": "orijinal_id: B4-019 ; fikir_ozeti: Keltner dışına taşan mumda dönüş mumuyla orta banda dönüş ; GitHub kodu git clone ile okundu (kod-kural uyumlu) ; %106 iddiası maliyet bilgisi olmadan, temkinli. ; tur: 2 (çeşitlilik turu)"
+    }
+  },
+  {
+    "ornek_no": "17",
+    "tekil_id": "KAYIT:Hf304ca33a44b5e70",
+    "ad": "Atlas Diversified Trend Portfolio",
+    "atanan_durum": "D_KODLANMADI_NEDENLI",
+    "akibet_gerekcesi": "[T2] Blog 777108'i açtım: enstrüman listesi ve kural yok, yalnız sonuç tablosu var.",
+    "asil_kaynak": {
+      "dosya": "mql_fx",
+      "platform": "MQL5 blog (satici)",
+      "URL": "https://www.mql5.com/en/blogs/post/777108",
+      "yazar": "?",
+      "tarih": "?",
+      "strateji": "Atlas Diversified Trend Portfolio",
+      "piyasa": "? (coklu varlik)",
+      "dönem": "H4, 2019.01.01-2026.06.28, %100 (778307)",
+      "Sharpe": "1.65 (778307)",
+      "getiri/CAGR": "4941.0% (778307)",
+      "maxDD": "19.74%",
+      "işlem": "1193",
+      "win rate": "33.19%",
+      "maliyet": "?",
+      "OOS/WF": "?",
+      "kod": "?",
+      "zayıflık": "Portfoy, hangi enstrumanlar belirsiz; maliyet ve OOS yok",
+      "etiket": "C",
+      "not": "PF 1.48, Recovery 6.17 (777156)."
+    }
+  },
+  {
+    "ornek_no": "18",
+    "tekil_id": "ROBOTIC:55522cd4c76eb038e0c9",
+    "ad": "strategies/binh-cluc-mad/CombinedBinHClucAndMADV6.py",
+    "atanan_durum": "BELIRSIZ",
+    "akibet_gerekcesi": "KULLANILABILIR: ",
+    "asil_kaynak": {
+      "dosya": "strategies/binh-cluc-mad/CombinedBinHClucAndMADV6.py",
+      "aile_klasor": "binh-cluc-mad",
+      "kume_id": "K018",
+      "dosya_sinif": "KULLANILABILIR",
+      "neden": "",
+      "bayraklar": "SL_TABAN_-0.99_CUSTOM_SL ; INFORMATIVE_TF",
+      "tf": "5m",
+      "stoploss": "-0.99",
+      "hyperopt_param": "0",
+      "katalog_LA_high": "0",
+      "katalog_LA_medium": "0",
+      "kendi_LA_yuksek": "",
+      "kopya_sayisi": "1"
+    }
+  },
+  {
+    "ornek_no": "19",
+    "tekil_id": "DIS906:S0230",
+    "ad": "U30（米国ウォールストリート株価指数30）でアリゲーターを利用した順張りのトレードアイデア",
+    "atanan_durum": "BELIRSIZ",
+    "akibet_gerekcesi": "BENZERI_TEST: Günlükte Alligator yükselişte + 1h teyit; çok TF Alligator.",
+    "asil_kaynak": {
+      "id": "S0230",
+      "aile": "TREND",
+      "alt_tur": "MA_RIBBON_DIZILIM",
+      "strateji_adi": "U30（米国ウォールストリート株価指数30）でアリゲーターを利用した順張りのトレードアイデア",
+      "kaynak_link": "https://www.oanda.jp/lab-education/blog_30strategy/us30_alligator/",
+      "platform": "OANDA証券 Lab-education「30の戦略」",
+      "ulke_veya_dil": "Japonya / Japonca",
+      "yazar": "OANDA証券",
+      "yayin_yili": "bilinmiyor (görsel yolu ~2023-09; son güncelleme 2026)",
+      "populerlik_olcusu": "bilinmiyor",
+      "piyasa": "endeks",
+      "zaman_dilimi": "günlük (filtre) + 1 saat (giriş)",
+      "giris_kurali": "Günlükte Alligator yükselişte (üç çizgi yukarı ve sıralı kısa>orta>uzun); 1 saatlikte de aynı dizilim varken son tepeye buy-stop ile kırılımda al.",
+      "cikis_kurali": "1 saatlikte Alligator sıralaması bozulunca kapat; alternatif hedef 1,5×stop.",
+      "stop_kurali": "Son dibe stop emri.",
+      "parametreler": "Alligator 5/8/13 (ileri kaydırmalı)",
+      "kodu_var_mi": "hayir",
+      "lisans": "lisanssız (OANDA証券 telifli eğitim sayfası)",
+      "iddia_edilen_performans": "bilinmiyor",
+      "kanit_turu": "yok",
+      "bayraklar": "yok",
+      "ek_kaynaklar": "bilinmiyor",
+      "notlar": "orijinal_id: A6-012 ; Bill Williams Alligator dizilimi; ileri kaydırma yalnız çizim, sinyal kapanmış mum ile."
+    }
+  },
+  {
+    "ornek_no": "20",
+    "tekil_id": "KAYIT:Hf909de9747e68841",
+    "ad": "Hisse faktör araştırması, IC testi",
+    "atanan_durum": "D_KODLANMADI_NEDENLI",
+    "akibet_gerekcesi": "[T3] factors.py, backtest.py ve fix_composite.py okundu: 2020-2024 tüm örneklemden hesaplanan IC ortalamaları ile pozitif IC faktörleri seçilip IC ağırlıklı bileşik kuruluyor (örneklem içi/geleceğe bakma); kesitsel Q5-Q1 long/short var ama tutma süresi, çıkış ve stop kuralı yok.",
+    "asil_kaynak": {
+      "repo": "OwenWang19/equity-alpha-research",
+      "güvenilirlik": "GERÇEK",
+      "strateji": "Hisse faktör araştırması, IC testi",
+      "piyasa": "? (hisse)",
+      "dönem": "?",
+      "sharpe": "0.549",
+      "getiri/CAGR": "%28.5 yıllık",
+      "maxDD": "?",
+      "kazanma/işlem": "?",
+      "not": "IC t=4.03; Sharpe düşük; OOS ve dönem ?",
+      "yıldız": "",
+      "dil": "",
+      "lisans": "",
+      "son_push": "",
+      "aile": "Faktör / momentum / rotasyon",
+      "framework": "False",
+      "OOS_işareti": "False",
+      "maliyet_işareti": "False",
+      "url": "https://github.com/OwenWang19/equity-alpha-research",
+      "denetim_bayrağı": "piyasa_belirsiz_işaretli",
+      "nihai": "GERÇEK-TEMİZ",
+      "doğrulama_seviyesi(sayfa)": "",
+      "doğrulama_notu": ""
+    }
+  },
+  {
+    "ornek_no": "21",
+    "tekil_id": "ROBOTIC:6a70ebcd45e5473ea729",
+    "ad": "strategies/bigz-bcmbigz/BigZ07Next.py",
+    "atanan_durum": "BELIRSIZ",
+    "akibet_gerekcesi": "KULLANILABILIR: ",
+    "asil_kaynak": {
+      "dosya": "strategies/bigz-bcmbigz/BigZ07Next.py",
+      "aile_klasor": "bigz-bcmbigz",
+      "kume_id": "K008",
+      "dosya_sinif": "KULLANILABILIR",
+      "neden": "",
+      "bayraklar": "STOPSUZ ; HP_COK(199) ; INFORMATIVE_TF ; BTC_BILGI_PARITE",
+      "tf": "5m",
+      "stoploss": "-0.99",
+      "hyperopt_param": "199",
+      "katalog_LA_high": "0",
+      "katalog_LA_medium": "0",
+      "kendi_LA_yuksek": "",
+      "kopya_sayisi": "1"
+    }
+  },
+  {
+    "ornek_no": "22",
+    "tekil_id": "KURAL:ae33a7dee3a0b544edea",
+    "ad": "Strategy: HMA 50 + Supertrend Sniper",
+    "atanan_durum": "B_TEST_EDILDI_ELENDI",
+    "akibet_gerekcesi": "[{\"gecti\": \"False\", \"tf\": \"4h\", \"olcut\": {\"n\": 10078, \"kar\": 12114.085285304851, \"pf\": 1.173727678281888, \"sharpe\": 0.9002729592565127, \"beklenti_R\": 0.11110090162004052, \"kazanma\": 0.3604881921016075, \"maxdd\": 0.09611033868094679, \"dd_gun\": 409, \"cagr\": 0.10737927589760199, \"calmar\": 1.1172500000656973, \"psr\": 0.9964248920108425, \"tutma_gun\": 3.5, \"ort_islem_getiri\": 0.004447520892600511, \"netR_toplam\": 1119.6748865267684, \"sharpe_egitim\": 1.0862088115399675, \"sharpe_oos\": 0.31286046790542754, \"oos_kar\": 1268.4665055302612, \"tur\": \"swing\", \"pf_maliyet2x\": 1.1006268026265527, \"komsu_n\": 14, \"komsu_karda\": 1.0, \"enstr_n\": 37, \"enstr_karda\": 0.7027027027027027, \"maks_kor\": 0.28714410775069527}}, {\"gecti\": \"False\", \"tf\": \"4h\", \"olcut\": {\"n\": 10083, \"kar\": 12074.962619989605, \"pf\": 1.1731098769230843, \"sharpe\": 0.8983612702184676, \"beklenti_R\": 0.11080542950129789, \"kazanma\": 0.35991272438758304, \"maxdd\": 0.09670324158532864, \"dd_gun\": 409, \"cagr\": 0.1071273011452325, \"calmar\": 1.1077943137067015, \"psr\": 0.9963604376904207, \"tutma_gun\": 3.5, \"ort_islem_getiri\": 0.004430959207970002, \"netR_toplam\": 1117.2511456615866, \"sharpe_egitim\": 1.0862088115399675, \"sharpe_oos\": 0.3043273512277786, \"oos_kar\": 1229.343840215006, \"tur\": \"swing\", \"pf_maliyet2x\": 1.1000294673932522, \"komsu_n\": 14, \"komsu_karda\": 1.0, \"enstr_n\": 37, \"enstr_karda\": 0.7027027027027027, \"maks_kor\": 0.28714410775069527}}]",
+    "asil_kaynak": {
+      "kaynak": "tv",
+      "ad": "Strategy: HMA 50 + Supertrend Sniper",
+      "dosya": "arsiv/strateji-sg/tv/pine/3SHJZytF.pine",
+      "gostergeler": "HMA(50), Supertrend",
+      "mekanik_ozet": "HMA ve Supertrend aynı yönde olunca giriş; çelişkide (choppy) çıkış.",
+      "zaman_dilimi": "",
+      "veri_ihtiyaci": "ohlcv",
+      "onceki_sonuc": "kaldı: PF 1.17, Sharpe 0.90 (arsiv/strateji-sg/tv_eleme_dali/sonuclar/hma_st.json)",
+      "kategori": "trend_takip",
+      "benzer_1l3a_aile": "swing__supertrend-psar",
+      "durum": "test_edilebilir",
+      "ayar_durumu": "atlandi:HMA50 + Supertrend teyidi"
+    }
+  },
+  {
+    "ornek_no": "23",
+    "tekil_id": "KAYIT:Hbf630404cf4660a9",
+    "ad": "strateji adı yok (yorum sayfası)",
+    "atanan_durum": "D_KODLANMADI_NEDENLI",
+    "akibet_gerekcesi": "[T2] Yorum sayfası 404 verdi; ana gönderi strateji içermiyor.",
+    "asil_kaynak": {
+      "platform": "Reddit",
+      "URL": "https://lr.sudovanilla.org/r/Daytrading/comments/1f6w20d/it_looks_good_enough/lllm2vk/?context=3",
+      "tarih": "2024-09-02",
+      "strateji": "strateji adı yok (yorum sayfası)",
+      "piyasa": "belirtilmemiş",
+      "Sharpe/getiri/maxDD": "görülmedi",
+      "açık kod": "yok",
+      "kanıt (B/C/yok)": "yok",
+      "not": "yorum linki; ana gönderi içeriği görülmedi"
+    }
+  },
+  {
+    "ornek_no": "24",
+    "tekil_id": "DIS906:S0769",
+    "ad": "ROC bands turn-up long – Traders' Tips Mart 2021 (Wealth-Lab)",
+    "atanan_durum": "BELIRSIZ",
+    "akibet_gerekcesi": "BENZERI_TEST: S0768'in long-only Wealth-Lab sürümü (ROC yukarı dönüş + alt band altından).",
+    "asil_kaynak": {
+      "id": "S0769",
+      "aile": "ORTALAMAYA_DONUS",
+      "alt_tur": "DIGER_MR",
+      "strateji_adi": "ROC bands turn-up long – Traders' Tips Mart 2021 (Wealth-Lab)",
+      "kaynak_link": "https://traders.com/Documentation/FEEDbk_docs/2021/03/TradersTips.html",
+      "platform": "Wealth-Lab (C#)",
+      "ulke_veya_dil": "İngilizce / ABD (TASC Traders' Tips)",
+      "yazar": "Vitali Apirine (makale); kod: Gene Geren (Wealth-Lab)",
+      "yayin_yili": "2021",
+      "populerlik_olcusu": "bilinmiyor",
+      "piyasa": "genel",
+      "zaman_dilimi": "1d",
+      "giris_kurali": "Açık uzun yokken kapanış EMA(200) üstünde, ROC(12) yukarı dönüyor ve önceki bar ROC alt bandın (12,3,12) altındaysa piyasa emriyle al.",
+      "cikis_kurali": "ROC aşağı dönüp üst bandı aşağı kesince piyasa emriyle kapat.",
+      "stop_kurali": "kaynakta yok",
+      "parametreler": "ROCWB 12, 3, 12; ROC 12; EMA 200",
+      "kodu_var_mi": "evet (C# Wealth-Lab)",
+      "lisans": "lisanssız",
+      "iddia_edilen_performans": "bilinmiyor",
+      "kanit_turu": "yok",
+      "bayraklar": "yok",
+      "ek_kaynaklar": "yok",
+      "notlar": "orijinal_id: D1-062 ; fikir_ozeti: alt ROC bandından dönüşte trend içi alım. Kod: 'if(roc.TurnsUp(idx) && roc[idx - 1] < rbl[idx - 1])'. erişim 2026-11-13 (WebFetch). ; lisans notu: Traders' Tips kodu traders.com'da ücretsiz yayımlanıyor ama açık lisans belirtilmemiş (telif TASC/satıcıda); kod kopyalanmadı, yalnız kural özeti ; aynı kaynakta birden fazla farklı strateji (2): S0768, S0769 ; tur: 4 (hacim: açık kod kütüphaneleri)"
+    }
+  },
+  {
+    "ornek_no": "25",
+    "tekil_id": "ROBOTIC:1fe6949f503b0c5cc876",
+    "ad": "strategies/rsi-momentum/Macd.py",
+    "atanan_durum": "BELIRSIZ",
+    "akibet_gerekcesi": "KULLANILABILIR: ",
+    "asil_kaynak": {
+      "dosya": "strategies/rsi-momentum/Macd.py",
+      "aile_klasor": "rsi-momentum",
+      "kume_id": "K284",
+      "dosya_sinif": "KULLANILABILIR",
+      "neden": "",
+      "bayraklar": "INFORMATIVE_TF ; BTC_BILGI_PARITE",
+      "tf": "1h",
+      "stoploss": "-0.1",
+      "hyperopt_param": "0",
+      "katalog_LA_high": "0",
+      "katalog_LA_medium": "0",
+      "kendi_LA_yuksek": "",
+      "kopya_sayisi": "1"
+    }
+  },
+  {
+    "ornek_no": "26",
+    "tekil_id": "KURAL:630410f5f66595a61374",
+    "ad": "Ichimoku Clouds Strategy Long and Short",
+    "atanan_durum": "BELIRSIZ",
+    "akibet_gerekcesi": "Envanter beyanı: {\"durum\": \"ayar:swing__ichimoku\", \"ayar_durumu\": \"dis_envanter: durum=test_edilebilir; ayar:swing__ichimoku; eşleşme ad benzerliğiyle (olası aynı betik, ad: Advanced Ichimoku Clouds Strategy Long and Short); yazar(lar): Skyrexio\", \"benzer_1l3a_aile\": \"swing__ichimoku\", \"onceki_sonuc\": \"en_iyi_100 (yazar beyanı, doğrulanmamış): kazanma %51.26; KF 1.77; net kâr %109; maks. DD %22.9; işlem 119 | 1h · 2023-01-01 to 2024-01-04 – Net Profit: +10 901.95 USDT (+109.02%) ... Profit Factor: 1.775 ... Total Trades: 119 (51.26% profitability) DD is 'maximum accumulated loss'\"}",
+    "asil_kaynak": {
+      "kaynak": "tv_listesi",
+      "ad": "Ichimoku Clouds Strategy Long and Short",
+      "dosya": "veri/pdf_metin_2/rapor/en_iyi_100_strateji.txt",
+      "gostergeler": "Ichimoku Tenkan/Kijun, bulut",
+      "mekanik_ozet": "Tenkan/Kijun yukarı kesişimde long; Tenkan bulut üstündeyken aşağı kesişimde çıkış.",
+      "zaman_dilimi": "",
+      "veri_ihtiyaci": "ohlcv",
+      "onceki_sonuc": "en_iyi_100 (yazar beyanı, doğrulanmamış): kazanma %51.26; KF 1.77; net kâr %109; maks. DD %22.9; işlem 119 | 1h · 2023-01-01 to 2024-01-04 – Net Profit: +10 901.95 USDT (+109.02%) ... Profit Factor: 1.775 ... Total Trades: 119 (51.26% profitability) DD is 'maximum accumulated loss'",
+      "kategori": "trend_takip",
+      "benzer_1l3a_aile": "swing__ichimoku",
+      "durum": "ayar:swing__ichimoku",
+      "ayar_durumu": "dis_envanter: durum=test_edilebilir; ayar:swing__ichimoku; eşleşme ad benzerliğiyle (olası aynı betik, ad: Advanced Ichimoku Clouds Strategy Long and Short); yazar(lar): Skyrexio",
+      "stil": "swing",
+      "kaynak_pdf": "en_iyi_100_strateji.pdf",
+      "sayfa": "7"
+    }
+  },
+  {
+    "ornek_no": "27",
+    "tekil_id": "KOD:pf__kanarya",
+    "ad": "pf__kanarya",
+    "atanan_durum": "B_TEST_EDILDI_ELENDI",
+    "akibet_gerekcesi": "E5 kill_olayi(x1) 6",
+    "asil_kaynak": {
+      "sinif": "Kanarya",
+      "satir": 320,
+      "kod_ozet": "Keller VAA / DAA (kanarya evreni) savunmacı tahsis.\n\nKaynaklar: Keller DAA (TuringTrader Keller_DAA.cs), Keller VAA (pyTAA; varlık dağılımı paketi).\nKural: 13612W momentum (12*1ay+4*3ay+2*6ay+1*12ay; takvim günü 30/91/182/365). Aylık.\n  mod=\"daa\": kanarya = `kanarya` sembolleri (evrende olanlar; B = bulunan sayı). b = momentumu negatif kanarya sayısı;\n    nakit payı CF = min(1, floor(b*T/B)/T); riskli pay (1-CF) en yüksek momentumlu t = round((1-CF)*T) riskli varlığa\n    eşit dağılır (T = `T`).\n  mod=\"vaa\": kanarya = riskli evrenin kendisi; n = momentumu negatif riskli sayısı; CF = min(1, n/vaa_b);\n    riskli pay en iyi `ust_k` riskli varlığa eşit.\n  Nakit payı: `guvenli` sembollerden momentumu en yüksek (pozitifse) olana gider, yoksa NAKİT (pozisyonsuz).\nUyarlama (belgelenmiş vekiller): VWO/BND kanaryaları evrende yok -> kanarya = BTCUSDT + DK_COPPER (risk iştahı\nvekilleri; seçimde OOS görülmedi); korunma ETF'leri (SHY/IEF/LQD) -> DK_XAU ya da nakit. Kripto-only evrende kanarya\nyalnız BTC olur. Kipnis KDA (min-varyans) kodlanmadı.",
+      "sonuc_kaniti": "sonuclar/evren/v2/eleme.csv:kayit=208"
+    }
+  },
+  {
+    "ornek_no": "28",
+    "tekil_id": "KAYIT:Hdbe5ee0d332f2dc6",
+    "ad": "Kantil regresyon fiyat tahmini, yüksek kaliteli işlemler",
+    "atanan_durum": "BELIRSIZ",
+    "akibet_gerekcesi": "Kantil regresyon (LightGBM) ML tahmini.",
+    "asil_kaynak": {
+      "repo": "kvnishkdhiman/Probabilistic-Price-Forecasting-Using-Quantile-Regression",
+      "güvenilirlik": "GERÇEK",
+      "strateji": "Kantil regresyon fiyat tahmini, yüksek kaliteli işlemler",
+      "piyasa": "?",
+      "dönem": "?",
+      "sharpe": "?",
+      "getiri/CAGR": "beklenti $5.96/işlem",
+      "maxDD": "?",
+      "kazanma/işlem": "%48.7 / ?",
+      "not": "PF 1.09 marjinal; dönem, maliyet ve OOS belirsiz",
+      "yıldız": "0.0",
+      "dil": "Python",
+      "lisans": "",
+      "son_push": "2025-12-25",
+      "aile": "Faktör / momentum / rotasyon",
+      "framework": "False",
+      "OOS_işareti": "False",
+      "maliyet_işareti": "False",
+      "url": "https://github.com/kvnishkdhiman/Probabilistic-Price-Forecasting-Using-Quantile-Regression",
+      "denetim_bayrağı": "",
+      "nihai": "GERÇEK-TEMİZ",
+      "doğrulama_seviyesi(sayfa)": "",
+      "doğrulama_notu": ""
+    }
+  },
+  {
+    "ornek_no": "29",
+    "tekil_id": "KAYIT:H0725ced34f2b0be5",
+    "ad": "Kişisel bot hedef kontrol listesi",
+    "atanan_durum": "BELIRSIZ",
+    "akibet_gerekcesi": "[T2] ml/train_signal_model.py (RandomForest), ml/train_deep_model.py (LSTM) ve güven eşiği 0.65 ile ML sinyali üretiyor; ML yasak.",
+    "asil_kaynak": {
+      "repo": "ncarper48-dot/smartbot",
+      "güvenilirlik": "ÖRNEK",
+      "strateji": "Kişisel bot hedef kontrol listesi",
+      "piyasa": "?",
+      "dönem": "?",
+      "sharpe": ">1.0 (hedef)",
+      "getiri/CAGR": "?",
+      "maxDD": "?",
+      "kazanma/işlem": ">%55 (hedef)",
+      "not": "Yalnızca hedefler; gerçek sonuç yok",
+      "yıldız": "",
+      "dil": "",
+      "lisans": "",
+      "son_push": "",
+      "aile": "Diğer",
+      "framework": "False",
+      "OOS_işareti": "False",
+      "maliyet_işareti": "False",
+      "url": "https://github.com/ncarper48-dot/smartbot",
+      "denetim_bayrağı": "",
+      "nihai": "ÖRNEK",
+      "doğrulama_seviyesi(sayfa)": "",
+      "doğrulama_notu": ""
+    }
+  },
+  {
+    "ornek_no": "30",
+    "tekil_id": "KAYIT:H36849c4fdc85b66b",
+    "ad": "Telegram kripto sinyalleri, kısmi çıkışlı backtest",
+    "atanan_durum": "D_KODLANMADI_NEDENLI",
+    "akibet_gerekcesi": "[T2] backend/backtest/engine.py çıkış fiyatını random.uniform ile simüle ediyor; sinyal kaynağı dış Telegram; deterministik strateji kuralı yok.",
+    "asil_kaynak": {
+      "repo": "chaulagainazay-dot/crypto-signal-bot",
+      "güvenilirlik": "GERÇEK",
+      "strateji": "Telegram kripto sinyalleri, kısmi çıkışlı backtest",
+      "piyasa": "Kripto",
+      "dönem": "?",
+      "sharpe": "1.87",
+      "getiri/CAGR": "beklenti %1.24/işlem",
+      "maxDD": "?",
+      "kazanma/işlem": "?",
+      "not": "Tek backtest tablosu; dönem ve OOS yok",
+      "yıldız": "",
+      "dil": "",
+      "lisans": "",
+      "son_push": "",
+      "aile": "Faktör / momentum / rotasyon",
+      "framework": "False",
+      "OOS_işareti": "False",
+      "maliyet_işareti": "False",
+      "url": "https://github.com/chaulagainazay-dot/crypto-signal-bot",
+      "denetim_bayrağı": "",
+      "nihai": "GERÇEK-TEMİZ",
+      "doğrulama_seviyesi(sayfa)": "",
+      "doğrulama_notu": ""
+    }
+  },
+  {
+    "ornek_no": "31",
+    "tekil_id": "KART:daytrade__acilis-araligi-cikis-veya-donus__denham",
+    "ad": "Açılış Aralığı Çıkışı veya Ortalamaya Dönüş",
+    "atanan_durum": "BELIRSIZ",
+    "akibet_gerekcesi": "Aile/ayar atfı tek başına kaynak kuralının test edildiğini kanıtlamaz.",
+    "asil_kaynak": {
+      "kart_id": "daytrade__acilis-araligi-cikis-veya-donus__denham",
+      "ad": "Açılış Aralığı Çıkışı veya Ortalamaya Dönüş",
+      "stil": "daytrade",
+      "kaynak": {
+        "pdf": "Yeni_Başlayanlar_için_Day_Trading_-_Mark_Denham_114_sayfa.pdf",
+        "sayfalar": [
+          85,
+          86
+        ]
+      },
+      "ozet": "Açılışın ilk dakikalarında (birkaç dakika - 1 saat) oluşan yüksek-düşük aralığı belirlenir; fiyat aralıktan çıkınca kırılım yönünde ya da bölge dışına taşarsa ortalamaya dönüş yönünde işlem düşünülür (Bollinger ±2 sapma ile birlikte).",
+      "kategori": "kirilim",
+      "piyasa_rejimi": "herhangi",
+      "orijinal_piyasa": "hisse",
+      "zaman_dilimi": {
+        "islem": "5m",
+        "ust_filtre": null
+      },
+      "gostergeler": [
+        {
+          "ad": "Bollinger",
+          "parametreler": {
+            "sapma": 2
+          }
+        }
+      ],
+      "long_giris": [
+        "Açılış aralığı (ilk 5 dk - 1 saat) üst sınırı yukarı kırılır -> kırılım long (veya aralık dışı aşırı uç -> short dönüş)"
+      ],
+      "short_giris": [
+        "Açılış aralığı alt sınırı aşağı kırılır -> short (veya aşırı uç -> long dönüş)"
+      ],
+      "stop_loss": "Kitapta yok",
+      "kar_al": "Kitapta yok",
+      "iz_suren_stop": null,
+      "zaman_cikisi": null,
+      "filtreler": [],
+      "pozisyon_risk": null,
+      "iddia_edilen_performans": null,
+      "kodlanabilirlik": {
+        "puan": 1,
+        "gerekce": "Aralık süresi kullanıcıya bırakılmış, giriş/çıkış/stop kuralı yok; kırılım mı dönüş mü belirsiz."
+      },
+      "belirsizlikler": [
+        "Aralık süresi",
+        "Kırılım/dönüş ayrımı kriteri",
+        "Stop ve hedef yok"
+      ],
+      "uyumluluk_notu": "ABD hisse odaklı (önceki kapanış, açılış aralığı); 24 saatlik piyasalarda 'gün' UTC günü olarak tanımlanmalı. ≥5m uygun, hacim gerekmez.",
+      "varyantlar": [],
+      "anahtar_kelimeler": [
+        "acilis-araligi",
+        "orb",
+        "bollinger",
+        "kirilim"
+      ]
+    }
+  },
+  {
+    "ornek_no": "32",
+    "tekil_id": "KURAL:1d3e0e6cc84eeda74b00",
+    "ad": "EMA 12/26 kesişimi (L/S)",
+    "atanan_durum": "BELIRSIZ",
+    "akibet_gerekcesi": "Envanter beyanı: {\"durum\": \"mevcut:swing__ma-kesisim\", \"ayar_durumu\": \"MA tipi parametre (ma-tipli-kesisim kuyruğu)\", \"benzer_1l3a_aile\": \"swing__ma-kesisim\", \"onceki_sonuc\": \"sentetik demo\"}",
+    "asil_kaynak": {
+      "kaynak": "github:leoncuhk/awesome-quant-ai",
+      "ad": "EMA 12/26 kesişimi (L/S)",
+      "dosya": "book/myquant/chapter1.md#1.1.2",
+      "gostergeler": "EMA(12), EMA(26)",
+      "mekanik_ozet": "Hızlı EMA yavaşın üstündeyse long, altındaysa short; ilk 26 mum nötr. SMA stratejisiyle aynı mantık, EMA ağırlıklı.",
+      "zaman_dilimi": "1d",
+      "veri_ihtiyaci": "ohlcv",
+      "onceki_sonuc": "sentetik demo",
+      "kategori": "trend_takip",
+      "benzer_1l3a_aile": "swing__ma-kesisim",
+      "durum": "mevcut:swing__ma-kesisim",
+      "ayar_durumu": "MA tipi parametre (ma-tipli-kesisim kuyruğu)",
+      "stil": "swing",
+      "repo": "leoncuhk/awesome-quant-ai",
+      "lisans": "Apache-2.0"
+    }
+  },
+  {
+    "ornek_no": "33",
+    "tekil_id": "ROBOTIC:047af125f063c8718fd6",
+    "ad": "strategies/channels/keltnerchannel.py",
+    "atanan_durum": "BELIRSIZ",
+    "akibet_gerekcesi": "KULLANILABILIR: ",
+    "asil_kaynak": {
+      "dosya": "strategies/channels/keltnerchannel.py",
+      "aile_klasor": "channels",
+      "kume_id": "K092",
+      "dosya_sinif": "KULLANILABILIR",
+      "neden": "",
+      "bayraklar": "",
+      "tf": "6h",
+      "stoploss": "-0.254",
+      "hyperopt_param": "0",
+      "katalog_LA_high": "0",
+      "katalog_LA_medium": "0",
+      "kendi_LA_yuksek": "",
+      "kopya_sayisi": "1"
+    }
+  },
+  {
+    "ornek_no": "34",
+    "tekil_id": "KURAL:6222f5f392141bcb42cb",
+    "ad": "Eşit ağırlıklı k-portföy ve ters volatilite ağırlığı (DJIA dersleri 3-4)",
+    "atanan_durum": "BELIRSIZ",
+    "akibet_gerekcesi": "Envanter beyanı: {\"durum\": \"ayar:pf__sabit_sepet\", \"ayar_durumu\": \"ters-vol ağırlık\", \"benzer_1l3a_aile\": \"pf__sabit_sepet\", \"onceki_sonuc\": \"Not defteri çıktıları (DJIA Nis2014-Nis2019)\"}",
+    "asil_kaynak": {
+      "kaynak": "github:charliedream1/ai_quant_trade",
+      "ad": "Eşit ağırlıklı k-portföy ve ters volatilite ağırlığı (DJIA dersleri 3-4)",
+      "dosya": "egs_trade/vanilla/portfolio_optimization/Lesson4_TraditionalPortfolioConstruction/Lesson4_MainContent.ipynb",
+      "gostergeler": "getiri kovaryansı",
+      "mekanik_ozet": "Eşit ağırlık (1/k) ve ters-volatilite ağırlıklı (w_i ~ 1/sigma_i) k-portföy; \"ideal\" portföyle karşılaştırma.",
+      "zaman_dilimi": "1d",
+      "veri_ihtiyaci": "ohlcv",
+      "onceki_sonuc": "Not defteri çıktıları (DJIA Nis2014-Nis2019)",
+      "kategori": "portfoy",
+      "benzer_1l3a_aile": "pf__sabit_sepet",
+      "durum": "ayar:pf__sabit_sepet",
+      "ayar_durumu": "ters-vol ağırlık",
+      "stil": "swing",
+      "repo": "charliedream1/ai_quant_trade",
+      "lisans": "Apache-2.0"
+    }
+  },
+  {
+    "ornek_no": "35",
+    "tekil_id": "KAYIT:Hca87d01003ff8ae2",
+    "ad": "VAE anomali tespitiyle kripto yapı sapması",
+    "atanan_durum": "G_ML",
+    "akibet_gerekcesi": "VAE (ML) anomali tespiti ile sinyal; sonuç zayıf.",
+    "asil_kaynak": {
+      "repo": "rohan-gogate/crypto-vae-anomaly",
+      "güvenilirlik": "GERÇEK",
+      "strateji": "VAE anomali tespitiyle kripto yapı sapması",
+      "piyasa": "kripto",
+      "dönem": "?",
+      "sharpe": "0.14",
+      "getiri/CAGR": "1.68%",
+      "maxDD": "-1.11%",
+      "kazanma/işlem": "? / ?",
+      "not": "zayıf sonuç; OOS ?",
+      "yıldız": "",
+      "dil": "",
+      "lisans": "",
+      "son_push": "",
+      "aile": "Faktör / momentum / rotasyon",
+      "framework": "False",
+      "OOS_işareti": "False",
+      "maliyet_işareti": "False",
+      "url": "https://github.com/rohan-gogate/crypto-vae-anomaly",
+      "denetim_bayrağı": "",
+      "nihai": "GERÇEK-TEMİZ",
+      "doğrulama_seviyesi(sayfa)": "",
+      "doğrulama_notu": ""
+    }
+  },
+  {
+    "ornek_no": "36",
+    "tekil_id": "KURAL:64f01e08e4f74485b440",
+    "ad": "Gold NY ORB",
+    "atanan_durum": "BELIRSIZ",
+    "akibet_gerekcesi": "Envanter beyanı: {\"durum\": \"ayar:daytrade__orb\", \"ayar_durumu\": \"liste_satiri\", \"benzer_1l3a_aile\": \"daytrade__orb\", \"onceki_sonuc\": \"PDF beyani (dogrulanmamis): WR %73 | codex-algo durumu: Dogrulama bekliyor\"}",
+    "asil_kaynak": {
+      "kaynak": "pdf_adaylari_csv",
+      "ad": "Gold NY ORB",
+      "dosya": "config/pdf_candidates.csv",
+      "gostergeler": "(PDF'den; gosterge ayrintisi yok)",
+      "mekanik_ozet": "Kural ayrintisi repoda yok (yalniz PDF kaniti ve durum satiri). Donem yok.",
+      "zaman_dilimi": "",
+      "veri_ihtiyaci": "ohlcv",
+      "onceki_sonuc": "PDF beyani (dogrulanmamis): WR %73 | codex-algo durumu: Dogrulama bekliyor",
+      "kategori": "kirilim",
+      "benzer_1l3a_aile": "daytrade__orb",
+      "durum": "ayar:daytrade__orb",
+      "ayar_durumu": "liste_satiri",
+      "stil": "daytrade",
+      "repo": "codex-algo"
+    }
+  },
+  {
+    "ornek_no": "37",
+    "tekil_id": "KOD:dis__cci3-mfi",
+    "ad": "dis__cci3-mfi",
+    "atanan_durum": "B_TEST_EDILDI_ELENDI",
+    "akibet_gerekcesi": "net -0.046 <= 0; PF 0.81 < 1.2; en iyi %5 hariç PF 0.26 < 0.9; Sharpe -0.01 < 0.5; kârlı enstrüman oranı 0.36 < 0.5; tek_enstruman hesaplanamadı; kârlı sınıf 1 < 2; net -0.135 <= 0; PF 0.93 < 1.2; en iyi %5 hariç PF 0.31 < 0.9; Sharpe -0.21 < 0.5; düşüş 0.204 > 0.2; tek_enstruman hesaplanamadı; kârlı sınıf 1 < 2",
+    "asil_kaynak": {
+      "sinif": "Cci3Mfi",
+      "satir": 175,
+      "kod_ozet": "dis__cci3-mfi (daytrade) — dis_envanter 215, TradingView \"Triple CCI Strategy MFI Confirmed\" (PETNavGq, Skyrexio, MPL-2.0).\nKural (yalnız long): CCI(14) sıfırı yukarı keser VE kapanış > EMA(50) VE CCI(25)>0 VE CCI(50)>0 VE MFI(14)>50. Stop giriş -\n1.75 x ATR(14). Çıkış: kapanış < EMA(iz_n=20). Uyarlama: Cci2Hma ile aynı — 2.25 ATR aktivasyon şartı kodlanmadı.",
+      "sonuc_kaniti": "sonuclar/evren/2017_gelistirme/wf_evren.csv:kayit=441;sonuclar/evren/2017_gelistirme/wf_evren.csv:kayit=609"
+    }
+  },
+  {
+    "ornek_no": "38",
+    "tekil_id": "ROBOTIC:cbe4f3d1d222133be39a",
+    "ad": "dirty LA/from-repo/battle-tank/kalthetank.py",
+    "atanan_durum": "BELIRSIZ",
+    "akibet_gerekcesi": "DCA_POZISYON_BUYUTME: adjust_trade_position (pozisyon buyutme) ; LA:rolling_center",
+    "asil_kaynak": {
+      "dosya": "dirty LA/from-repo/battle-tank/kalthetank.py",
+      "aile_klasor": "battle-tank",
+      "kume_id": "K393",
+      "dosya_sinif": "DCA_POZISYON_BUYUTME",
+      "neden": "adjust_trade_position (pozisyon buyutme) ; LA:rolling_center",
+      "bayraklar": "KAUSAL_OLMAYAN_FILTRE_ADAYI ; HP_COK(62) ; SADECE_KARDA_CIKIS",
+      "tf": "1h",
+      "stoploss": "-0.2",
+      "hyperopt_param": "62",
+      "katalog_LA_high": "1",
+      "katalog_LA_medium": "0",
+      "kendi_LA_yuksek": "rolling_center",
+      "kopya_sayisi": "0"
+    }
+  },
+  {
+    "ornek_no": "39",
+    "tekil_id": "DIS906:S0819",
+    "ad": "MeanReversionMaLong (EMA21'e geri çekilme alımı)",
+    "atanan_durum": "BELIRSIZ",
+    "akibet_gerekcesi": "BENZERI_TEST: SMA50>SMA150>SMA200, EMA21>SMA50, EMA7 yükselen, fiyat EMA21 ile EMA21×0.98 arasında ise al; %30 kâr / 4 gün / %5 stop. MA geri çekilme sınıfı var; bant ve çıkış paketi farklı.",
+    "asil_kaynak": {
+      "id": "S0819",
+      "aile": "ORTALAMAYA_DONUS",
+      "alt_tur": "MA_SAPMA_MR",
+      "strateji_adi": "MeanReversionMaLong (EMA21'e geri çekilme alımı)",
+      "kaynak_link": "https://github.com/oreilm49/quantconnect/blob/master/MeanReversionMaLong/main.py",
+      "platform": "QuantConnect (GitHub: oreilm49/quantconnect)",
+      "ulke_veya_dil": "İngilizce / ABD",
+      "yazar": "oreilm49 (GitHub)",
+      "yayin_yili": "bilinmiyor",
+      "populerlik_olcusu": "36 yıldız (oreilm49/quantconnect), 2026-11-13",
+      "piyasa": "hisse",
+      "zaman_dilimi": "günlük",
+      "giris_kurali": "En likit 500 hissede fiyat > SMA50 > SMA150 > SMA200, EMA21 > SMA50, EMA7 iki gün öncesinden yüksek ve fiyat EMA21 ile EMA21×0.98 arasında ise; 300 günlük ROC'a göre artan sırayla portföyün %10'u kadar alınır.",
+      "cikis_kurali": "Gerçekleşmemiş kâr ≥%30 olunca ya da pozisyon 4 günlük olunca kapatılır.",
+      "stop_kurali": "Gerçekleşmemiş zarar ≤ −%5 olunca kapatılır.",
+      "parametreler": "SMA 50/150/200; EMA 21 ve 7; bant EMA21'in %2 altı; ROC 300; kâr %30; süre 4 gün; stop %5; pozisyon %10",
+      "kodu_var_mi": "evet (Python, QuantConnect)",
+      "lisans": "lisanssız",
+      "iddia_edilen_performans": "bilinmiyor",
+      "kanit_turu": "yok",
+      "bayraklar": "yok",
+      "ek_kaynaklar": "yok",
+      "notlar": "orijinal_id: D2-047 ; fikir_ozeti: güçlü trendde fiyatın EMA21'e %2'ye kadar geri çekilmesini al; 4 günlük süre sınırı %30 hedefi fiilen erişilmez kılıyor ; lisans notu: kaynakta lisans belirtilmemiş (tüm haklar yazarda); kod kopyalanmadı, yalnız kural özeti ; tur: 4 (hacim: açık kod kütüphaneleri)"
+    }
+  },
+  {
+    "ornek_no": "40",
+    "tekil_id": "ROBOTIC:a6be358c7c05cad480ff",
+    "ad": "strategies/elliott-wave/CoreStrategy.py",
+    "atanan_durum": "BELIRSIZ",
+    "akibet_gerekcesi": "KULLANILABILIR: ",
+    "asil_kaynak": {
+      "dosya": "strategies/elliott-wave/CoreStrategy.py",
+      "aile_klasor": "elliott-wave",
+      "kume_id": "K014",
+      "dosya_sinif": "KULLANILABILIR",
+      "neden": "",
+      "bayraklar": "HP_COK(82) ; INFORMATIVE_TF",
+      "tf": "5m",
+      "stoploss": "-0.228",
+      "hyperopt_param": "82",
+      "katalog_LA_high": "0",
+      "katalog_LA_medium": "0",
+      "kendi_LA_yuksek": "",
+      "kopya_sayisi": "1"
+    }
+  }
+]

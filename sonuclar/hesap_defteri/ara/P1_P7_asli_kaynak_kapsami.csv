@@ -1,0 +1,329 @@
+kaynak_id,dosya,rol,kaynak_kayit,ham_kayit,fark,birim
+K31d40f0ffaa9,arsiv/codex-algo/config/pdf_candidates.csv,asli_katalog,32,32,0,CSV baslik haric mantiksal kayit; fiziksel bitis satiri ayrica
+K1872560c7a98,arsiv/sg-arge-/strateji_listesi (2).xlsx,asli_katalog,281,281,0,Excel strateji sayfalarinda baslik haric satir
+K24e5be9d65e9,arsiv/sg-arge-/strateji_listesi.xlsx,asli_katalog,243,243,0,Excel strateji sayfalarinda baslik haric satir
+Kc9552cf66499,sonuclar/dis_arastirma/2026-11_freqtrade_robotic/dosya_listesi.csv,asli_katalog,909,909,0,CSV baslik haric mantiksal kayit; fiziksel bitis satiri ayrica
+Ke1c5e0d071ed,sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/ajan1/strateji_listesi.csv,asli_katalog,906,906,0,CSV baslik haric mantiksal kayit; fiziksel bitis satiri ayrica
+K47ffab09dd2e,sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/ajan2/derin_arastirma_26_kayit_raporu.md,asli_katalog,1,1,0,tekil satirlari olmayan bir toplu beyan; 26 uydurma satir uretilmedi
+K0c9b76eaf9c1,stratejiler/dis_envanter.csv,asli_katalog,431,431,0,CSV baslik haric mantiksal kayit; fiziksel bitis satiri ayrica
+K5ac3565d13d8,stratejiler/ek_kaynaklar/ek_77_strateji.md,asli_katalog,77,77,0,numarali ozet tablo satiri
+Kb24b50af4439,stratejiler/ek_kaynaklar/github_g1_freqtrade.csv,asli_katalog,153,153,0,CSV baslik haric mantiksal kayit; fiziksel bitis satiri ayrica
+K6b93077e199b,stratejiler/ek_kaynaklar/github_g2_kripto_bot.csv,asli_katalog,207,207,0,CSV baslik haric mantiksal kayit; fiziksel bitis satiri ayrica
+K13a298fe90b4,stratejiler/ek_kaynaklar/github_g3_cerceve.csv,asli_katalog,74,74,0,CSV baslik haric mantiksal kayit; fiziksel bitis satiri ayrica
+K4e66a744328a,stratejiler/ek_kaynaklar/github_g4_platform.csv,asli_katalog,154,154,0,CSV baslik haric mantiksal kayit; fiziksel bitis satiri ayrica
+Kabfa5d0c6f4b,stratejiler/ek_kaynaklar/github_g5_mt_pine.csv,asli_katalog,166,166,0,CSV baslik haric mantiksal kayit; fiziksel bitis satiri ayrica
+K2e9faf818a06,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv,asli_katalog,389,389,0,CSV baslik haric mantiksal kayit; fiziksel bitis satiri ayrica
+K713d84b06a40,stratejiler/ek_kaynaklar/github_g7_kutuphane.csv,asli_katalog,55,55,0,CSV baslik haric mantiksal kayit; fiziksel bitis satiri ayrica
+K5e1ab08041d4,stratejiler/ek_kaynaklar/kakushadze_151.csv,asli_katalog,173,173,0,CSV baslik haric mantiksal kayit; fiziksel bitis satiri ayrica
+K29622276415c,stratejiler/ek_kaynaklar/repo_kodlari.csv,asli_katalog,398,398,0,CSV baslik haric mantiksal kayit; fiziksel bitis satiri ayrica
+Kebf6d1bede64,stratejiler/ek_kaynaklar/repo_raporlari.csv,asli_katalog,331,331,0,CSV baslik haric mantiksal kayit; fiziksel bitis satiri ayrica
+Ka88f7675c259,stratejiler/ek_kaynaklar/son1ay_2026-11.csv,asli_katalog,16,16,0,CSV baslik haric mantiksal kayit; fiziksel bitis satiri ayrica
+Kbcffe2c8c15b,stratejiler/v3_adaylar/ham/MASTER_katalog_2026-11.csv,asli_katalog,251,251,0,CSV baslik haric mantiksal kayit; fiziksel bitis satiri ayrica
+Kbc4066233b54,stratejiler/v3_adaylar/ham/asya-siteleri-katalog__b_duzeyi.csv,asli_katalog,50,50,0,CSV baslik haric mantiksal kayit; fiziksel bitis satiri ayrica
+K5baf88ba0d92,stratejiler/v3_adaylar/ham/asya-siteleri-katalog__tumu.csv,asli_katalog,135,135,0,CSV baslik haric mantiksal kayit; fiziksel bitis satiri ayrica
+K11b4644732ab,stratejiler/v3_adaylar/ham/bolgesel-katalog__b_duzeyi.csv,asli_katalog,9,9,0,CSV baslik haric mantiksal kayit; fiziksel bitis satiri ayrica
+K85684fedebf1,stratejiler/v3_adaylar/ham/bolgesel-katalog__tumu.csv,asli_katalog,137,137,0,CSV baslik haric mantiksal kayit; fiziksel bitis satiri ayrica
+K0817c6c5eb4c,stratejiler/v3_adaylar/ham/chatgpt_dr_tur1_gunici_kripto.csv,asli_katalog,7,7,0,CSV baslik haric mantiksal kayit; fiziksel bitis satiri ayrica
+K23750362d0e8,stratejiler/v3_adaylar/ham/chatgpt_dr_tur2_funding.csv,asli_katalog,4,4,0,CSV baslik haric mantiksal kayit; fiziksel bitis satiri ayrica
+K27506d2f67db,stratejiler/v3_adaylar/ham/chatgpt_dr_tur3_akademik_kismi.csv,asli_katalog,2,2,0,CSV baslik haric mantiksal kayit; fiziksel bitis satiri ayrica
+K42894a5c9c20,stratejiler/v3_adaylar/ham/diger-siteler-derin-21.csv,asli_katalog,21,21,0,CSV baslik haric mantiksal kayit; fiziksel bitis satiri ayrica
+K2a0936cd8164,stratejiler/v3_adaylar/ham/gemini_dr_6bolge.csv,asli_katalog,69,69,0,CSV baslik haric mantiksal kayit; fiziksel bitis satiri ayrica
+Kc7d5b0a2eaad,stratejiler/v3_adaylar/ham/gemini_dr_afrika.csv,asli_katalog,8,8,0,CSV baslik haric mantiksal kayit; fiziksel bitis satiri ayrica
+K472fd0714a40,stratejiler/v3_adaylar/ham/github-backtest-katalog-denetimli__dogrulanan_48.csv,asli_katalog,48,48,0,CSV baslik haric mantiksal kayit; fiziksel bitis satiri ayrica
+K127df2bc2edc,stratejiler/v3_adaylar/ham/github-backtest-katalog-denetimli__gercek_ek.csv,asli_katalog,586,586,0,CSV baslik haric mantiksal kayit; fiziksel bitis satiri ayrica
+K3892c3f07d6a,stratejiler/v3_adaylar/ham/github-backtest-katalog-denetimli__tumu.csv,asli_katalog,999,999,0,CSV baslik haric mantiksal kayit; fiziksel bitis satiri ayrica
+K10aff76395b4,stratejiler/v3_adaylar/ham/github-backtest-katalog-v4__diger_siteler.csv,asli_katalog,66,66,0,CSV baslik haric mantiksal kayit; fiziksel bitis satiri ayrica
+K2065b192904d,stratejiler/v3_adaylar/ham/github-backtest-katalog-v4__reddit.csv,asli_katalog,56,56,0,CSV baslik haric mantiksal kayit; fiziksel bitis satiri ayrica
+K9d2f3b3b0c93,stratejiler/v3_adaylar/ham/github-backtest-katalog-v4__sayfa_dogrulamasi.csv,asli_katalog,144,144,0,CSV baslik haric mantiksal kayit; fiziksel bitis satiri ayrica
+Ka4e7d5672a96,stratejiler/v3_adaylar/kartlar/daytrade__12s-seans-ters-donus-btc__mdpi-jrfm.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K1b50551b88cd,stratejiler/v3_adaylar/kartlar/daytrade__adaptif-trend-geri-cekilme-piramit__adnanpbi.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K2a4a82110241,stratejiler/v3_adaylar/kartlar/daytrade__adx-ema-macd-rsi-geri-cekilme__andrey1224.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K2817267eada9,stratejiler/v3_adaylar/kartlar/daytrade__alligator-ha-donus-zigzag-1s-15m__samisuleman10.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K31c15b37f3b5,stratejiler/v3_adaylar/kartlar/daytrade__aralik-kirilim-bekleyen-emir__fxcraft.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K45c1e58505ea,stratejiler/v3_adaylar/kartlar/daytrade__asya-kutu-kirilim-ma50__mutiiria.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K48d50de3d899,stratejiler/v3_adaylar/kartlar/daytrade__bb-ust-kirilim-rsi-4s__tradingstrategy-ai.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K33a13f4f439a,stratejiler/v3_adaylar/kartlar/daytrade__bollinger-alt-bant-donus-long__rauterfrank-ui.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K92b5b2110515,stratejiler/v3_adaylar/kartlar/daytrade__btc-eth-hurst-korelasyon-supertrend__hskad.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+Kf81fd13a6574,stratejiler/v3_adaylar/kartlar/daytrade__btcusdt-rsi20-rejim-geri-cekilme__denniskid2520.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+Kd32e36b9665c,stratejiler/v3_adaylar/kartlar/daytrade__ce-zlsma-ha-anahtar-mum__ha56412003-lab.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K120108de77ec,stratejiler/v3_adaylar/kartlar/daytrade__coklu-gosterge-3-4-onay-m5__morh492bunu-debug.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K4dfe18de75d6,stratejiler/v3_adaylar/kartlar/daytrade__cuma-15-est-tutma-saatlik__miralles.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K52c49ca2639c,stratejiler/v3_adaylar/kartlar/daytrade__donchian-20-4s-1g-makro-filtre__mrismail-m.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K61ceeb472805,stratejiler/v3_adaylar/kartlar/daytrade__donchian20-ema100-400-xau-1s__guannings.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K23b4301597e9,stratejiler/v3_adaylar/kartlar/daytrade__dusuk-yuksek-mum-ema10-atr-btc15m__ilyasustun.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K228df5193d60,stratejiler/v3_adaylar/kartlar/daytrade__ema-9-21-50-rsi-hacim__gooddinosaur.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K14ab5dac898f,stratejiler/v3_adaylar/kartlar/daytrade__ema-sma-trend-durumu-hacim__abbysallord.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+Kcb02a21cc759,stratejiler/v3_adaylar/kartlar/daytrade__ema21-geri-cekilme-h4-yapi-xau__abbujo.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+Kae1a086c1aa9,stratejiler/v3_adaylar/kartlar/daytrade__fib-4s-yapi-pin-yutan-limit__h0peson1.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K55958681aea2,stratejiler/v3_adaylar/kartlar/daytrade__funding-1s-devam__octopustakopi.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+Ka3323a415ebc,stratejiler/v3_adaylar/kartlar/daytrade__gap-fade-trend-uyumlu-1s-teyit__logiccrafterdz.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K741a1cc6e399,stratejiler/v3_adaylar/kartlar/daytrade__geri-cekilme-penceresi__ilahuerta.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K3b8e4f5332cc,stratejiler/v3_adaylar/kartlar/daytrade__gunici-momentum-noise-alani__zarattini.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K572daa7f3e74,stratejiler/v3_adaylar/kartlar/daytrade__hacim-delta-vekil-swing-tuzagi-gld__yingliupabot.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+Kd078bd8b6935,stratejiler/v3_adaylar/kartlar/daytrade__hacim-klimaksi-bant-donus__rafael-silvaa.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K60bfcc3b6a64,stratejiler/v3_adaylar/kartlar/daytrade__ilk-yari-saat-momentum__shen.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K6e1e8993e218,stratejiler/v3_adaylar/kartlar/daytrade__kama-mama-derin-dusus-alim-5m__mastaaa1987.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K8a61fc1c9bff,stratejiler/v3_adaylar/kartlar/daytrade__kayan-vwap-sekme-rsi__alwin48.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K9c4a58cb2597,stratejiler/v3_adaylar/kartlar/daytrade__kesit-bosluk-z-fade-acilis-kapanis__lhcbenac.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+Ka972235bc510,stratejiler/v3_adaylar/kartlar/daytrade__kesit-z-skor-ters-6s-4coin__kashapp10.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K40a269149369,stratejiler/v3_adaylar/kartlar/daytrade__killzone-h4-ema200-altin__bakome-hub.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K3ebb2dd17471,stratejiler/v3_adaylar/kartlar/daytrade__l-sekli-ma-kirilim-long__mgcha85.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K2a0db3c6bb49,stratejiler/v3_adaylar/kartlar/daytrade__londra-volatilite-kirilim__zhangxingthang.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K2f6f7fe861aa,stratejiler/v3_adaylar/kartlar/daytrade__momentum-itkisi-10atr-20bar-long-5m__tomasbatovsky.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K65e275499007,stratejiler/v3_adaylar/kartlar/daytrade__orb-15dk-etf-aralik-hedef__liamrr18.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K98881ee63394,stratejiler/v3_adaylar/kartlar/daytrade__orb-4s-hacim-atr__saadtahir995.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+Kb057abea5b0b,stratejiler/v3_adaylar/kartlar/daytrade__orb-5dk-oynak-hisse-hacim__zarattini.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+Kc6e1908438d3,stratejiler/v3_adaylar/kartlar/daytrade__order-block-bos-retest-ema100__logiccrafterdz.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K01cc9847ca65,stratejiler/v3_adaylar/kartlar/daytrade__pin-bar-sonrasi-long-4s__atm4tech.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K98b0712c121a,stratejiler/v3_adaylar/kartlar/daytrade__pivot-ma-macd-rsi-altin__monkeyattack.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K02b827bf06c5,stratejiler/v3_adaylar/kartlar/daytrade__pullback-pencere-usdjpy__ilahuerta.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K5cd996a61262,stratejiler/v3_adaylar/kartlar/daytrade__renko-macd-sinyal-xau__gavaav.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K86bac25375ec,stratejiler/v3_adaylar/kartlar/daytrade__rsi-asiri-bolge-geri-donus__hooper18.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K25e36bc089c3,stratejiler/v3_adaylar/kartlar/daytrade__rsi-bb-ema-geri-donus-5m__nickfloman.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+Kabfb2f02872d,stratejiler/v3_adaylar/kartlar/daytrade__rsi32-yon-hedef4-btc-1h__noahroboros.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K900982d74528,stratejiler/v3_adaylar/kartlar/daytrade__saat-21-23-utc__padysak.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K92d7a6e3408e,stratejiler/v3_adaylar/kartlar/daytrade__saatlik-asiri-tepki-tersine__denicola.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K8966e3057be2,stratejiler/v3_adaylar/kartlar/daytrade__saatlik-kesit-ters-donus__apex.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K96fd437d83ab,stratejiler/v3_adaylar/kartlar/daytrade__seans-tepe-dip-kirilim-geri-test-h4-xau__abbujo.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K076d1f55c731,stratejiler/v3_adaylar/kartlar/daytrade__sessiz-surukleme-nikkei-m15__forszpaniak.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K81ef5fecc8df,stratejiler/v3_adaylar/kartlar/daytrade__skor-ma-rsi-macd-adx-bb-atr__drewisonline.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K8f27d1dba345,stratejiler/v3_adaylar/kartlar/daytrade__sma-atr-bant-donus__ryanxiaoo.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K36142676cb2a,stratejiler/v3_adaylar/kartlar/daytrade__sma-trend-rsi-atr-btc15m__devansh-dek.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+Kd2ac60ad1efe,stratejiler/v3_adaylar/kartlar/daytrade__smoothoperator-rsi-cci-mfi-5m__buymeanicecream.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K5e11134580e5,stratejiler/v3_adaylar/kartlar/daytrade__stokastik-kesisim-ters-mum-bb-hedef__muokapwambua.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+Kd77cb81f762b,stratejiler/v3_adaylar/kartlar/daytrade__supertrend-30m-chop-er-rejim-3-asama-stop__xunxuntj.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K499b99026c54,stratejiler/v3_adaylar/kartlar/daytrade__ters-fvg-nq__prashanthaitha24.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K9efadc13d988,stratejiler/v3_adaylar/kartlar/daytrade__trend-pullback-ema16-adx-skor-kapisi__darkvolg.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+Ke70651c7e569,stratejiler/v3_adaylar/kartlar/daytrade__vwap-kesisim-ters-cevir__aatmanjoshi.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+Kb6ad05aae485,stratejiler/v3_adaylar/kartlar/daytrade__vwap-kontrol-donusu-retest__styleretech.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K1bd46b0ffdd3,stratejiler/v3_adaylar/kartlar/daytrade__xau-bos-retest-ema-rsi__zoulouhh.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K556edab8400c,stratejiler/v3_adaylar/kartlar/daytrade__yarim-fitil__tesudesu.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+Kee99d0bb8a9a,stratejiler/v3_adaylar/kartlar/daytrade__z-skor-trend-rejim-hibrit-15m__dorian68.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K6ecbbd56ec21,stratejiler/v3_adaylar/kartlar/daytrade__z7-sapma-kirilim-90mum__gauravsingh.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K769146de9cff,stratejiler/v3_adaylar/kartlar/swing__100g-roc-yuzde30-endeks-rejim-iz-stop20__laffuste.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K755d021c33d6,stratejiler/v3_adaylar/kartlar/swing__12-1-momentum-decile__kyraroy.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K967f54facbfc,stratejiler/v3_adaylar/kartlar/swing__12ay-dongu-kesit__heston.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+Kd9d17e39be31,stratejiler/v3_adaylar/kartlar/swing__12ay-getiri-esik-tahvile-gecis__haghani.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+Kcc41e3fd6a45,stratejiler/v3_adaylar/kartlar/swing__12s-1g-ma357-hizalama-geri-cekilme__tranduy216.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K80a83b6a4276,stratejiler/v3_adaylar/kartlar/swing__252g-zirve-kirilim-yuzde16-iz__yashkondawar.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K7da29b11cba3,stratejiler/v3_adaylar/kartlar/swing__4s-kirilim-ema200-adx__epfraghu.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K9b5a6f89d631,stratejiler/v3_adaylar/kartlar/swing__50g-kirilim-sma-filtre-3atr-iz__wilki2021.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+Kc360ffcc8e2f,stratejiler/v3_adaylar/kartlar/swing__adaptivetrend-6s-momentum__arxiv.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K6802c8edbc28,stratejiler/v3_adaylar/kartlar/swing__altin-rejim-olasilik-atr__singha.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+Kb77dcb5311f3,stratejiler/v3_adaylar/kartlar/swing__altin-tahvil-12ay-rejim__dujava.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K1ae49caa0ea1,stratejiler/v3_adaylar/kartlar/swing__bab-ulke-endeks__frazzini.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K09af4ea404be,stratejiler/v3_adaylar/kartlar/swing__bb-genislik-rejim-psar__wchia016.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K5437a42c533b,stratejiler/v3_adaylar/kartlar/swing__btc-gecelik-max10-hafta-sonu__dujava.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K846891ac36f9,stratejiler/v3_adaylar/kartlar/swing__carpiklik-emtia__dujava.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K1d5a203f588b,stratejiler/v3_adaylar/kartlar/swing__cok-ufuk-momentum-vol-filtre__sidharthguptax.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K21124ef1d625,stratejiler/v3_adaylar/kartlar/swing__d200-roc-mesafe-atr-stop-hisse__calmdude.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+Kc9d70c43ff45,stratejiler/v3_adaylar/kartlar/swing__donchian-ansambl-vol-hedef__zarattini.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K21793829d501,stratejiler/v3_adaylar/kartlar/swing__donchian-yuzde-iz-surme-cevir__nl2992.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K1355852c67c7,stratejiler/v3_adaylar/kartlar/swing__donchian10-ema200-egim-impuls-3atr-iz__tientung2501.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K21616df4c5a4,stratejiler/v3_adaylar/kartlar/swing__dusuk-vol-momentum-rank__drishti7033.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+Kf9eefc73417f,stratejiler/v3_adaylar/kartlar/swing__dusuk-volatilite-desil__blitz.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K4660c5fe136a,stratejiler/v3_adaylar/kartlar/swing__dusus-1-5pct-sonrasi-giris__yuvarajvm.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K78d7ab15e478,stratejiler/v3_adaylar/kartlar/swing__dusus-2pct-5g-tutma__rishon1245.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K8e39c6564085,stratejiler/v3_adaylar/kartlar/swing__entropi-rejim-sigmoid__akshathp0.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K588882a8544e,stratejiler/v3_adaylar/kartlar/swing__erc-vol-hedef-6etf__quantucf.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+Kcaa7fd1fa757,stratejiler/v3_adaylar/kartlar/swing__eslesmis-gecis-hisse-tahvil__maewal.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K617955ab9820,stratejiler/v3_adaylar/kartlar/swing__etf-momentum-varyans-orani-rotasyon__he6s.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K6fd76cc71688,stratejiler/v3_adaylar/kartlar/swing__fip-kesitsel-momentum__baptoudur.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K29387504aeb3,stratejiler/v3_adaylar/kartlar/swing__fomc-oncesi-gun__tori.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K06e295b83c89,stratejiler/v3_adaylar/kartlar/swing__funding-7g-haftalik-tercil__vine.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K20c8869f4d30,stratejiler/v3_adaylar/kartlar/swing__funding-azalan-agirlik-fark-kesit__prestolabs.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K517265520ca5,stratejiler/v3_adaylar/kartlar/swing__funding-ewma-histerezis-carry__samuelahou-g20.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+Kf40707284d12,stratejiler/v3_adaylar/kartlar/swing__funding-kesit-decil-carry__octopustakopi.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+Kc931b7f74e54,stratejiler/v3_adaylar/kartlar/swing__funding-z90-3gun__octopustakopi.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K92e1b6195c84,stratejiler/v3_adaylar/kartlar/swing__graf-laplasyen-kalinti-tda-rejim__ciaranmccarthy1.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+Kbbf227ddb930,stratejiler/v3_adaylar/kartlar/swing__gun-zirve-kirilim-mmr__kechprog.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K8135861f72e1,stratejiler/v3_adaylar/kartlar/swing__hacim-patlamasi-sma50-rsi-atr-btc1g__parakh20.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K9bfebb8ae1e3,stratejiler/v3_adaylar/kartlar/swing__haftalik-30sma-20h-kirilim-trix__ccadic.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+Kcd567bf942fe,stratejiler/v3_adaylar/kartlar/swing__kalman-cift-zskor__octaviodegodoy.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+Kcc65b694dbce,stratejiler/v3_adaylar/kartlar/swing__kesit-dusuk-hacim-haftalik__liu.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K3d07cdceaa1b,stratejiler/v3_adaylar/kartlar/swing__kesit-funding-baz-vekil__chi.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+Kcde81eaeba14,stratejiler/v3_adaylar/kartlar/swing__kirmizi-mum-2x-hacim-ertesi-gun__habr.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K7f65b144223b,stratejiler/v3_adaylar/kartlar/swing__kisa-vade-momentum-2-3-hafta-kesit__liu-tsyvinski-wu.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K116759f0ae74,stratejiler/v3_adaylar/kartlar/swing__kisa-vade-tersine-donus__groot.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K8fb601e12578,stratejiler/v3_adaylar/kartlar/swing__kripto-30g-momentum-vol-yonetimli__grobys.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K8cc90e8b24f4,stratejiler/v3_adaylar/kartlar/swing__kripto-max-piyango-kesit__ozdamar.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+Kca6851ddf622,stratejiler/v3_adaylar/kartlar/swing__ma-v-kalman-cift__yibaii.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+Ka817d7a6229e,stratejiler/v3_adaylar/kartlar/swing__ma50-200-trend-rsi55-geri-cekilme__samsondoski.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K6250edafe37c,stratejiler/v3_adaylar/kartlar/swing__macd-hist-mad-bb-atr__bachng0111.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K47ed011d9862,stratejiler/v3_adaylar/kartlar/swing__macd-rsi-atr-momentum__algotrade-education.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K50ec1e01d502,stratejiler/v3_adaylar/kartlar/swing__macd-sinyal-kesisim-cevir__0jas99.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K65785c809e8f,stratejiler/v3_adaylar/kartlar/swing__markov-gecis-matrisi-rejim-sinyali__bpeters19.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+Ka31083c587cc,stratejiler/v3_adaylar/kartlar/swing__max-hisse-kesit-short__bali.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K9587716aca6c,stratejiler/v3_adaylar/kartlar/swing__momentum-btc-rejim-top5__adensvaz.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K214506a180f6,stratejiler/v3_adaylar/kartlar/swing__momentum-carpiklik-filtre-top50-aylik__alesarabandi.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K5bd80b899a1e,stratejiler/v3_adaylar/kartlar/swing__momentum-sifir-kesisim__chandanp001.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K1ab2d0a823ff,stratejiler/v3_adaylar/kartlar/swing__olcekli-kirilim-24bar__trade-ai-lab.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K7ca36aa2abb4,stratejiler/v3_adaylar/kartlar/swing__ols-coz-pairs-eski__akkuya.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+Kf3b92cf749a2,stratejiler/v3_adaylar/kartlar/swing__opsiyon-vade-haftasi__stivers.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K4742d1e31530,stratejiler/v3_adaylar/kartlar/swing__ozvektor-merkeziyet-momentum__dermawan.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K3f7aefd08851,stratejiler/v3_adaylar/kartlar/swing__pairs-coz-60-ols__rw762.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+Ka02b891f93fa,stratejiler/v3_adaylar/kartlar/swing__payday-ayin-16si__ma-pratt.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K45dac323861d,stratejiler/v3_adaylar/kartlar/swing__pazartesi-dip-endeks__mql5.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+Ka667e3408494,stratejiler/v3_adaylar/kartlar/swing__permanent-portfoy-4-varlik__psystat.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K75760cd3cb44,stratejiler/v3_adaylar/kartlar/swing__perp-spot-baz-esik-kapama__he-manela.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+Kd31d9f858177,stratejiler/v3_adaylar/kartlar/swing__petrol-hisse-zamanlama__driesprong.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K61962ab61680,stratejiler/v3_adaylar/kartlar/swing__pre-fomc-surunme__delphic.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K1e0190da1fcb,stratejiler/v3_adaylar/kartlar/swing__ramazan-mevsimsel__bialkowski.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K5bfcb4450cd6,stratejiler/v3_adaylar/kartlar/swing__ranked-alloc-etf-5__stef.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K8ed7878d0f72,stratejiler/v3_adaylar/kartlar/swing__rsi-bb-asiri-donus-atr__akariba.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K6b39661aa292,stratejiler/v3_adaylar/kartlar/swing__rsi-geri-cekilme-ema-yigin-gunluk__kunal14901.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K178eb5075cbd,stratejiler/v3_adaylar/kartlar/swing__rsi-macd-ayni-bar-donus__hrnewcoll.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+Kfefb1344d9ef,stratejiler/v3_adaylar/kartlar/swing__rsi14-ema200-izleyen-stop__tamnguyen.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K588fa2ad6410,stratejiler/v3_adaylar/kartlar/swing__rsi2-sma200-geri-cekilme__toney.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+Kef24889ac973,stratejiler/v3_adaylar/kartlar/swing__rsi2-sma200-hacim__anshs527.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+Kc31995e702f4,stratejiler/v3_adaylar/kartlar/swing__rsi30-hacim-ema200__ainayoon.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+Ka199494ac0fd,stratejiler/v3_adaylar/kartlar/swing__rsi5-esik-70-momentum__aries744.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K785e87605478,stratejiler/v3_adaylar/kartlar/swing__sma-pullback-rsi-sl5-tp10__adobyy.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K5fcd23232a77,stratejiler/v3_adaylar/kartlar/swing__sma30-yuzde-bant-donus__gaurav-raj64.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K7b0246031423,stratejiler/v3_adaylar/kartlar/swing__smma-rsi-cci-kesisim__mutiiria.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K18a19b3c4df4,stratejiler/v3_adaylar/kartlar/swing__stocks-on-the-move__clenow.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+Kfeea89971cc9,stratejiler/v3_adaylar/kartlar/swing__tatil-oncesi-gun__hansen.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K7bdf0e63489e,stratejiler/v3_adaylar/kartlar/swing__ust-fitil-yankisi-gunluk__co0ki3.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+Kbd6044dec803,stratejiler/v3_adaylar/kartlar/swing__vol-yonetimli-long__moreira.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+Kbd52e5c87f51,stratejiler/v3_adaylar/kartlar/swing__volatilite-kirilim-k05__mskim.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+Kdeea7977d2fd,stratejiler/v3_adaylar/kartlar/swing__yahudi-3-etf-esit-yillik__psystat.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K0155fd828a5b,stratejiler/v3_adaylar/kartlar/swing__z-skor-karsit-spy__nadirali.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+Kaab4749f46fb,stratejiler/v3_adaylar/kartlar/swing__zs-momentum-vol-hedef__fiction-junction.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+Kda30344234d5,stratejiler/v3_adaylar/yeni_aday_taramasi_tur5.md,asli_katalog,7,7,0,bes madde ve iki toplu ret paragrafi; paragraf uyeleri bagimsiz tekil sayilmadi
+Kd4a712f55caa,veri/kartlar_ham/daytrade/20_Trading_Stratejisi_28_sayfa.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K07e731e5e210,veri/kartlar_ham/daytrade/401k_Day_Trading_-_Dakikalar_İçinde_Dalgalı_Bir_Piyasadan_Nakit_Kazanma_Sanatı_-_Richard_S.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+Kbeffb6e8abe0,veri/kartlar_ham/daytrade/51_Trading_Stratejisi_433_sayfa.json,asli_kart,51,51,0,JSON listesi/kart nesnesi
+Ke77b4c259cc0,veri/kartlar_ham/daytrade/Algoritmik_Trading_-_Edward_Leshik_ve_Jane_Cralle_229_sayfa.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K7a696a69e554,veri/kartlar_ham/daytrade/Algoritmik_Trading_Stratejileri_-_Scotty_Ratford_83_sayfa.json,asli_kart,6,6,0,JSON listesi/kart nesnesi
+Kae59189c4d6e,veri/kartlar_ham/daytrade/Algoritmik_Trading_için_Makine_Öğrenimi_-_Stefan_Jansen_-_Orijinal_1161_sayfa.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K23aaf0233fb4,veri/kartlar_ham/daytrade/Day_Trade_Forex_Sistemi_44_sayfa.json,asli_kart,5,5,0,JSON listesi/kart nesnesi
+K7d2ff6a6d707,veri/kartlar_ham/daytrade/Day_Trader_Pro_-_Duarte_Maza_116_sayfa.json,asli_kart,2,2,0,JSON listesi/kart nesnesi
+K48e68335af83,veri/kartlar_ham/daytrade/Day_Trading_-_Ann_C_Logue_360_sayfa.json,asli_kart,3,3,0,JSON listesi/kart nesnesi
+Ka9808c92c3b9,veri/kartlar_ham/daytrade/Day_Trading_-_Carole_Christensen_88_sayfa.json,asli_kart,7,7,0,JSON listesi/kart nesnesi
+Kdbd07bbd98c1,veri/kartlar_ham/daytrade/Day_Trading_-_David_Bennett_148_sayfa.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K6826a0d295ac,veri/kartlar_ham/daytrade/Day_Trading_-_Don_Charles_117_sayfa.json,asli_kart,4,4,0,JSON listesi/kart nesnesi
+K387e7c49de7d,veri/kartlar_ham/daytrade/Day_Trading_-_Douglas_Allen_472_sayfa.json,asli_kart,7,7,0,JSON listesi/kart nesnesi
+K882a11e4c80b,veri/kartlar_ham/daytrade/Day_Trading_-_Hızlı_Başlangıç_Kılavuzu_-_Troy_Noonan_518_sayfa.json,asli_kart,6,6,0,JSON listesi/kart nesnesi
+Kd5eb4898b57d,veri/kartlar_ham/daytrade/Day_Trading_-_Justin_Kuepper_196_sayfa.json,asli_kart,4,4,0,JSON listesi/kart nesnesi
+K3e86b86c682c,veri/kartlar_ham/daytrade/Day_Trading_-_Mark_Vogel_132_sayfa.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+Kdc8f06e21897,veri/kartlar_ham/daytrade/Day_Trading_-_Rajiv_LB_Roy_71_sayfa.json,asli_kart,12,12,0,JSON listesi/kart nesnesi
+K37a884bdc108,veri/kartlar_ham/daytrade/Day_Trading_101_-_Joe_Duarte_215_sayfa.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K3d88e0363ba3,veri/kartlar_ham/daytrade/Day_Trading_Forex_-_Odin_Velez_85_sayfa.json,asli_kart,6,6,0,JSON listesi/kart nesnesi
+K75b962e8ac84,veri/kartlar_ham/daytrade/Day_Trading_Oyununu_Kazanmak_-_Thomas_L_Busby_-_Patsy_Busby_Dow_188_sayfa.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+Kff80f7a45fa3,veri/kartlar_ham/daytrade/Day_Trading_ve_Pivotlar_-_Tranquil_Trader_233_sayfa.json,asli_kart,4,4,0,JSON listesi/kart nesnesi
+K0025a431a0d4,veri/kartlar_ham/daytrade/Day_Trading_ve_Swing_Trading_-_Kathy_Lien_278_sayfa.json,asli_kart,6,6,0,JSON listesi/kart nesnesi
+K26dd04e5b2f4,veri/kartlar_ham/daytrade/En_Başarılı_10_Price_Action_Modeli_-_Al_Brooks_24_sayfa.json,asli_kart,8,8,0,JSON listesi/kart nesnesi
+K5c8c1b6f26fa,veri/kartlar_ham/daytrade/Forex_Day_Trading_-_Gavin_Wallace_69_sayfa.json,asli_kart,5,5,0,JSON listesi/kart nesnesi
+K60db2e0631ee,veri/kartlar_ham/daytrade/Günlük_Alım_Satım_ve_Swing_Trading_için_Hisse_Senedi_Formasyonları_-_Barry_Rudd_-_Orijinal.json,asli_kart,4,4,0,JSON listesi/kart nesnesi
+K95f4ac48299c,veri/kartlar_ham/daytrade/Kendi_Day_Trading_İmparatorluğunuzu_Kurmak_İçin_İpuçları_-_Issac_Derr_112_sayfa.json,asli_kart,8,8,0,JSON listesi/kart nesnesi
+Ka8b5218b7cc2,veri/kartlar_ham/daytrade/Price_Action_Algo_Konsepti_232_sayfa.json,asli_kart,3,3,0,JSON listesi/kart nesnesi
+K4b4fdc99f952,veri/kartlar_ham/daytrade/Price_Action_Trading_Ranges_-_Al_Brooks_572_sayfa.json,asli_kart,13,13,0,JSON listesi/kart nesnesi
+K0f28c065583a,veri/kartlar_ham/daytrade/Price_Action_Trading_Ranges_-_Al_Brooks_572_sayfa__tam_brooks_ranges_1.json,asli_kart,3,3,0,JSON listesi/kart nesnesi
+K20eca138d8cb,veri/kartlar_ham/daytrade/Price_Action_Trading_Ranges_-_Al_Brooks_572_sayfa__tam_brooks_ranges_2.json,asli_kart,6,6,0,JSON listesi/kart nesnesi
+Kcd5ea074a848,veri/kartlar_ham/daytrade/Price_Action_Trading_Ranges_-_Al_Brooks_572_sayfa__tam_brooks_ranges_3.json,asli_kart,10,10,0,JSON listesi/kart nesnesi
+K87406c2099ec,veri/kartlar_ham/daytrade/Price_Action_Trends_-_Al_Brooks_439_sayfa.json,asli_kart,10,10,0,JSON listesi/kart nesnesi
+K11d45099afa4,veri/kartlar_ham/daytrade/Price_Action_Trends_-_Al_Brooks_439_sayfa__tam_brooks_trends_1.json,asli_kart,9,9,0,JSON listesi/kart nesnesi
+K328287b493ca,veri/kartlar_ham/daytrade/Price_Action_Trends_-_Al_Brooks_439_sayfa__tam_brooks_trends_2.json,asli_kart,10,10,0,JSON listesi/kart nesnesi
+K48f734d32373,veri/kartlar_ham/daytrade/Price_Action_ile_Günlük_Trading_Teknikleri_-_Galen_Woods_-_Volume_3_227_sayfa.json,asli_kart,9,9,0,JSON listesi/kart nesnesi
+Kb05273c43cc4,veri/kartlar_ham/daytrade/Python_Algoritmik_Trading_Kitabı_-_Pushpak_Dagade_-_Orijinal_515_sayfa.json,asli_kart,2,2,0,JSON listesi/kart nesnesi
+Ka260806c73fb,veri/kartlar_ham/daytrade/Swing_Trader_-_Alan_S_Farley_306_sayfa.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+Keedd25fe141c,veri/kartlar_ham/daytrade/Swing_Trader_-_Alan_S_Farley_306_sayfa__tam_farley_1.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K05b0af1a9c64,veri/kartlar_ham/daytrade/Swing_Trader_-_Alan_S_Farley_306_sayfa__tam_farley_2.json,asli_kart,2,2,0,JSON listesi/kart nesnesi
+K4415ce7cb08d,veri/kartlar_ham/daytrade/Swing_and_Day_Trading_-_Thomas_N_Bulkowski_284_sayfa.json,asli_kart,52,52,0,JSON listesi/kart nesnesi
+Kc22088e2b6e3,veri/kartlar_ham/daytrade/Teknik_Analiz_ve_Algoritmik_İşlemler_-_Bist_100_Endeksi_Üzerine_Bir_Uygulama_-_Yüksek_Lisa.json,asli_kart,4,4,0,JSON listesi/kart nesnesi
+K4deb4061d5ff,veri/kartlar_ham/daytrade/The_Ultimate_Algorithmic_Trading_System_-_Orijinal_-_George_Pruitt_342_sayfa.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K2e04d8ae5dc2,veri/kartlar_ham/daytrade/TradeStation_EasyLanguage_for_Algorithmic_Trading_-_Domenico_Derrico_-_Orijinal_258_sayfa.json,asli_kart,2,2,0,JSON listesi/kart nesnesi
+Kb62fa5a70ad3,veri/kartlar_ham/daytrade/Ultimate_Day_Trader_-_Jacob_Bernstein_232_sayfa.json,asli_kart,7,7,0,JSON listesi/kart nesnesi
+K0e675d11db21,veri/kartlar_ham/daytrade/Yeni_Başlayanlar_için_Day_Trading_-_Mark_Denham_114_sayfa.json,asli_kart,3,3,0,JSON listesi/kart nesnesi
+K44547ceca808,veri/kartlar_ham/daytrade/Yüksek_Frekanslı_Trading_-_Algoritmik_Stratejiler_ve_Trading_Sistemleri_için_Pratik_Bir_Kı.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K51b384c225b6,veri/kartlar_ham/daytrade/Yüksek_Olasılıklı_Day_Trading_Stratejileri_ve_Sistemleri_-_Manny_Backus_122_sayfa.json,asli_kart,4,4,0,JSON listesi/kart nesnesi
+Kfb68e323197d,veri/kartlar_ham/daytrade/Ölçülü_Hareketle_Trading_-_Algoritmalar_ve_Yüksek_Frekanslı_Ticaret_Dünyasında_Başarılı_Bi.json,asli_kart,3,3,0,JSON listesi/kart nesnesi
+Kf40f25869635,veri/kartlar_ham/scalp/1_Dakikalık_Forex_Scalping_Stratejisi_-_Trevor_Candle_96_sayfa.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+Ke40ba8d2009d,veri/kartlar_ham/scalp/20_Trading_Stratejisi_28_sayfa.json,asli_kart,19,19,0,JSON listesi/kart nesnesi
+K83d0e2425cc5,veri/kartlar_ham/scalp/5_Dakikalık_Scalp_Stratejisi_8_sayfa.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K2bc4da635ffe,veri/kartlar_ham/scalp/AK47_Scalping_Stratejisi_-_Türkçe_ve_İngilizce_-_Siya_Vezi_26_sayfa.json,asli_kart,2,2,0,JSON listesi/kart nesnesi
+K242e81d9cab8,veri/kartlar_ham/scalp/Algoritmik_Trading_-_Edward_Leshik_ve_Jane_Cralle_229_sayfa.json,asli_kart,4,4,0,JSON listesi/kart nesnesi
+Kea142254bbab,veri/kartlar_ham/scalp/Algoritmik_Trading_Stratejileri_-_Scotty_Ratford_83_sayfa.json,asli_kart,12,12,0,JSON listesi/kart nesnesi
+K379d54bafa87,veri/kartlar_ham/scalp/Currency_Grail_-_Benim_Gizli_Kayıpsız_Forex_Scalping_Sistemim_-_Türkçe_ve_İngilizce_38_say.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K465d8c45d19a,veri/kartlar_ham/scalp/E-mini_Dow_ve_Mini_DAX_için_Hızlı_Al-Sat_Scalping_Yöntemleri_-_Teva_Lama_78_sayfa.json,asli_kart,4,4,0,JSON listesi/kart nesnesi
+Kab45a7ae256f,veri/kartlar_ham/scalp/EMA14_ve_EMA50_Scalping_Stratejisi_-_Waqar_-_Türkçe_ve_İngilizce_28_sayfa.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K3cc9b08a5e64,veri/kartlar_ham/scalp/Eğlenceli_Scalping_2_-_Heikin_Ashi_Trader_44_sayfa.json,asli_kart,5,5,0,JSON listesi/kart nesnesi
+K571d9c0c1237,veri/kartlar_ham/scalp/Forex_Piyasasında_Nasıl_Scalp_Yapılır_-_Binary_Forex_Brokers_27_sayfa.json,asli_kart,3,3,0,JSON listesi/kart nesnesi
+K149fb0fd0f4d,veri/kartlar_ham/scalp/Forex_Scalping_Stratejisi_28_sayfa.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K1f3f8d830cc8,veri/kartlar_ham/scalp/GBPJPY_M1_Scalp_Stratejisi_-_Green_Forex_4_sayfa.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K62737b1a766d,veri/kartlar_ham/scalp/Gavin_Holmes_Scalp_Stratejisi_24_sayfa.json,asli_kart,2,2,0,JSON listesi/kart nesnesi
+Kb7ff3bd3e311,veri/kartlar_ham/scalp/Göstergeyle_Scalping_El_Kitabı_-_Yüksek_Kazanma_Oranlı_Gösterge_-_Marcello_Ferrazzi_79_say.json,asli_kart,9,9,0,JSON listesi/kart nesnesi
+K31b498d5c7ff,veri/kartlar_ham/scalp/Günlük_Alım_Satım_Hızlı_Daha_Hızlı_Scalping_-_Philipp_Schroder_ve_Valentin_Rossiwall_283_s.json,asli_kart,18,18,0,JSON listesi/kart nesnesi
+Kf601911408f3,veri/kartlar_ham/scalp/Günlük_Alım_Satım_ve_Swing_Trading_için_Hisse_Senedi_Formasyonları_-_Barry_Rudd_-_Orijinal.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K0c94cb04ff10,veri/kartlar_ham/scalp/LBR_Scalp_İşlem_Kurulumları_-_Kevin_Ho_4_sayfa.json,asli_kart,6,6,0,JSON listesi/kart nesnesi
+Ke3ddc2f7b537,veri/kartlar_ham/scalp/M1-M5_Forex_Scalping_Stratejisi_6_sayfa.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+Kb1b3f93a0874,veri/kartlar_ham/scalp/Payapa_Scalping_Stratejisi_-_Türkçe_ve_İngilizce_12_sayfa.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K1b4f94bb017e,veri/kartlar_ham/scalp/Price_Action_Scalper_10_sayfa.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K664c5d591313,veri/kartlar_ham/scalp/Price_Action_Scalping_-_Bob_Volman_38_sayfa.json,asli_kart,4,4,0,JSON listesi/kart nesnesi
+K53172d3185f8,veri/kartlar_ham/scalp/Price_Action_Scalping_Stratejisi_-_Christopher_121_sayfa.json,asli_kart,2,2,0,JSON listesi/kart nesnesi
+Kcdf892d0fcbd,veri/kartlar_ham/scalp/RSI_Pro_Scalping_Stratejisi_-_You_Learn_Forex_30_sayfa.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K24fdefada3a0,veri/kartlar_ham/scalp/Scalping_Eğlencelidir_-_Heikin_Ashi_Trader_22_sayfa.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+Kbab3acfbc326,veri/kartlar_ham/scalp/Scalping_Kılavuzu_-_Gary_Norden_-_Türkçe_ve_İngilizce_114_sayfa.json,asli_kart,3,3,0,JSON listesi/kart nesnesi
+K1a4616fb1217,veri/kartlar_ham/scalp/Scalping_Kılavuzu_-_Gary_Norden_-_Türkçe_ve_İngilizce_114_sayfa__tam_norden.json,asli_kart,4,4,0,JSON listesi/kart nesnesi
+Kee78e1270110,veri/kartlar_ham/scalp/Scalping_Stratejileri_-_S_Connell_33_sayfa.json,asli_kart,3,3,0,JSON listesi/kart nesnesi
+K0b9e2955396a,veri/kartlar_ham/scalp/Scalping_Stratejileri_101_-_Usiere_Uko_80_sayfa.json,asli_kart,7,7,0,JSON listesi/kart nesnesi
+Kdd835061540b,veri/kartlar_ham/scalp/Scalping_Trading_İşlemlerinde_En_İyi_5_Strateji_-_Para_Kazanma_Yöntemleri_-_Andrew_C_Ellis.json,asli_kart,5,5,0,JSON listesi/kart nesnesi
+K39b8f5fa0f9a,veri/kartlar_ham/scalp/Scalping_ve_Day_Trading_-_İşlemlerinizin_Başarısını_Arttırın_-_Anthony_Busiere_239_sayfa.json,asli_kart,4,4,0,JSON listesi/kart nesnesi
+Ke16c3e3e1e56,veri/kartlar_ham/scalp/Scalping_İşlemlerine_İlişkin_Kesin_Kılavuz_-_Türkçe_ve_İngilizce_56_sayfa.json,asli_kart,3,3,0,JSON listesi/kart nesnesi
+K57bf89ae1b43,veri/kartlar_ham/scalp/Super_Scalper_-_Gavin_Holmes_27_sayfa.json,asli_kart,2,2,0,JSON listesi/kart nesnesi
+K2e1f649a9969,veri/kartlar_ham/scalp/Ultimate_Scalper_-_Gün_İçi_İşlem_Metodolojisi_496_sayfa.json,asli_kart,6,6,0,JSON listesi/kart nesnesi
+Kb0979ab27583,veri/kartlar_ham/scalp/Yüksek_Başarı_Olasılığına_Sahip_Scalping_Stratejileri_El_Kitabı_-_Zackary_Carson_99_sayfa.json,asli_kart,20,20,0,JSON listesi/kart nesnesi
+Ke5a68ff950dc,veri/kartlar_ham/scalp/Yüksek_Kazanma_Oranı_ile_Ortalama_Dönüş_Scalping_Stratejileri_-_Max_Stevenson_64_sayfa.json,asli_kart,8,8,0,JSON listesi/kart nesnesi
+K0e7f1cdf71ab,veri/kartlar_ham/swing/13_Swing_Trading_Stratejisi_-_Pankaj_Ladha_ve_Anant_Ladha_140_sayfa.json,asli_kart,13,13,0,JSON listesi/kart nesnesi
+Ke83c0a3767ef,veri/kartlar_ham/swing/2023te_Etkili_Swing_Trading_Stratejileri_-_Dennis_Sharpe_45_sayfa.json,asli_kart,6,6,0,JSON listesi/kart nesnesi
+K097bab513486,veri/kartlar_ham/swing/4_Saatlik_Grafik_Kullanarak_Swing_Trading_-_Heikin_Ashi_Trader_108_sayfa.json,asli_kart,8,8,0,JSON listesi/kart nesnesi
+K47dd3574fc85,veri/kartlar_ham/swing/5_Adımlı_Swing_Trading_Planı_-_Swing_Trade_Pro_20_-_Frank_Ochoa_123_sayfa.json,asli_kart,5,5,0,JSON listesi/kart nesnesi
+K846898656bf8,veri/kartlar_ham/swing/Algoritmik_Kalıp_Tanıma_için_Teknik_Analiz_-_Prodromos_E_Tsinaslanidis_ve_Achilleas_D_Zapr.json,asli_kart,5,5,0,JSON listesi/kart nesnesi
+K2e85531beef3,veri/kartlar_ham/swing/Algoritmik_Trading_-_Kalara_Koru_-_Türkçe_ve_İngilizce_126_sayfa.json,asli_kart,2,2,0,JSON listesi/kart nesnesi
+K637c7a1eadf6,veri/kartlar_ham/swing/Algoritmik_Trading_Kısayol_Kodları_-_Kevin_J_Davey_-_Orijinal_193_sayfa.json,asli_kart,10,10,0,JSON listesi/kart nesnesi
+Keab289efdb3e,veri/kartlar_ham/swing/Algoritmik_Trading_Pro_-_Hayden_Van_Der_Post_-_Orijinal_750_sayfa.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K442b115e0701,veri/kartlar_ham/swing/Algoritmik_Trading_Sistemleri_ve_Stratejileri_-_Viktoria_Dolzhenko_-_Orijinal_450_sayfa.json,asli_kart,2,2,0,JSON listesi/kart nesnesi
+K6941e1cd8bed,veri/kartlar_ham/swing/Bounce_-_Swing_Trading_Sanatı_-_Amit_Ghosh_113_sayfa.json,asli_kart,2,2,0,JSON listesi/kart nesnesi
+Kd0e6735031de,veri/kartlar_ham/swing/Dave_Landrynin_En_İyi_10_Swing_Trade_Formasyonu_ve_Stratejisi_-_Dave_Landry_-_Orijinal_179.json,asli_kart,10,10,0,JSON listesi/kart nesnesi
+K14a3ef16b3f6,veri/kartlar_ham/swing/Day_Trading_ve_Swing_Trading_-_Kathy_Lien_278_sayfa.json,asli_kart,5,5,0,JSON listesi/kart nesnesi
+K3c0a8a10001c,veri/kartlar_ham/swing/Düşük_Riskli_Swing_Trading_için_Gün_İçi_Zamanlama_-_Walter_Bressert_-_Orijinal_20_sayfa.json,asli_kart,0,0,0,JSON listesi/kart nesnesi
+K9aeea045060a,veri/kartlar_ham/swing/Forex_Swing_Trading_-_Abraham_Robert_C_50_sayfa.json,asli_kart,3,3,0,JSON listesi/kart nesnesi
+Kd8636f398508,veri/kartlar_ham/swing/Forex_Swing_Trading_Rehberi_-_Danq_Brown_85_sayfa.json,asli_kart,3,3,0,JSON listesi/kart nesnesi
+K5e666ab87d65,veri/kartlar_ham/swing/Gelişmiş_Swing_Trading_-_John_Crane_-_Orijinal_217_sayfa.json,asli_kart,14,14,0,JSON listesi/kart nesnesi
+Kd6aaee30f149,veri/kartlar_ham/swing/Geçimini_Sağlamak_için_Swing_Trading_-_Christopher_118_sayfa.json,asli_kart,4,4,0,JSON listesi/kart nesnesi
+Kfac98f6a024c,veri/kartlar_ham/swing/Günlük_Alım_Satım_ve_Swing_Trading_için_Hisse_Senedi_Formasyonları_-_Barry_Rudd_-_Orijinal.json,asli_kart,3,3,0,JSON listesi/kart nesnesi
+Ke00bdaf727ba,veri/kartlar_ham/swing/Heiken_Ashi_ve_Stokastik_Göstergeyle_Swing_Trading_-_Edward_Munroe_29_sayfa.json,asli_kart,3,3,0,JSON listesi/kart nesnesi
+K060eeee447f8,veri/kartlar_ham/swing/Kazançlı_Günlük_ve_Swing_Trading_-_Harry_Boxer_171_sayfa.json,asli_kart,14,14,0,JSON listesi/kart nesnesi
+Kca5f4b8cbb9d,veri/kartlar_ham/swing/Pivotlar_Formasyonlar_ve_Gün_İçi_Swing_İşlemleri_-_M_William_Scheier_224_sayfa.json,asli_kart,21,21,0,JSON listesi/kart nesnesi
+Kb26a0e425532,veri/kartlar_ham/swing/RSI_Swing_Trading_Stratejisi_-_TMP_13_sayfa.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+Kdb4c6f9c3e99,veri/kartlar_ham/swing/Short_Swing_Trading_-_David_Graeme_Smith_120_sayfa.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K1485c58d25c7,veri/kartlar_ham/swing/Stratejik_Swing_Trading_-_Metal_Piyasalarının_Haritalanması_ve_Çerçevelenmesi_-_Timothy_Mo.json,asli_kart,0,0,0,JSON listesi/kart nesnesi
+Ka87fa6b05b88,veri/kartlar_ham/swing/Swing_Failure_Pattern_11_sayfa.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K6a85a8fb3f7a,veri/kartlar_ham/swing/Swing_Trade_Stratejileri_-_Simon_Jordan_208_sayfa.json,asli_kart,12,12,0,JSON listesi/kart nesnesi
+K5394c1dd6c7e,veri/kartlar_ham/swing/Swing_Trader_-_Alan_S_Farley_306_sayfa.json,asli_kart,2,2,0,JSON listesi/kart nesnesi
+K757db3dc63aa,veri/kartlar_ham/swing/Swing_Trader_-_Alan_S_Farley_306_sayfa__tam_farley_1.json,asli_kart,11,11,0,JSON listesi/kart nesnesi
+Kd9fa150078f2,veri/kartlar_ham/swing/Swing_Trader_-_Alan_S_Farley_306_sayfa__tam_farley_2.json,asli_kart,9,9,0,JSON listesi/kart nesnesi
+K154846c30652,veri/kartlar_ham/swing/Swing_Traderlar_için_Zamanlama_Çözümleri_-_Robert_TH_Lee_ve_Peter_A_Tryde_192_sayfa.json,asli_kart,2,2,0,JSON listesi/kart nesnesi
+Kf406aa4735f8,veri/kartlar_ham/swing/Swing_Trading_-_Andrew_Anderson_127_sayfa.json,asli_kart,4,4,0,JSON listesi/kart nesnesi
+K9071aa65965d,veri/kartlar_ham/swing/Swing_Trading_-_Marc_Rivalland_206_sayfa.json,asli_kart,4,4,0,JSON listesi/kart nesnesi
+Kee9beb1b1313,veri/kartlar_ham/swing/Swing_Trading_-_Piyasa_Dalgalarında_Sörf_Yapmak_-_Jan_Arps_37_sayfa.json,asli_kart,3,3,0,JSON listesi/kart nesnesi
+Kd845a5970e62,veri/kartlar_ham/swing/Swing_Trading_Leandro_Yöntemi_67_sayfa.json,asli_kart,3,3,0,JSON listesi/kart nesnesi
+K580090c54272,veri/kartlar_ham/swing/Swing_Trading_Stratejileri_-_Benjamin_McArthur_-_Orijinal_74_sayfa.json,asli_kart,2,2,0,JSON listesi/kart nesnesi
+K41e875f80344,veri/kartlar_ham/swing/Swing_Trading_Stratejileri_-_Joe_Penn_110_sayfa.json,asli_kart,10,10,0,JSON listesi/kart nesnesi
+K855786de1b96,veri/kartlar_ham/swing/Swing_Trading_Stratejileri_-_Mark_Make_109_sayfa.json,asli_kart,10,10,0,JSON listesi/kart nesnesi
+K264e790bc5a1,veri/kartlar_ham/swing/Swing_Trading_Stratejileri_-_Razaq_Adekunle_113_sayfa.json,asli_kart,9,9,0,JSON listesi/kart nesnesi
+K0991b988ba6e,veri/kartlar_ham/swing/Swing_Trading_Taktikleri_-_Oliver_Velez_81_sayfa.json,asli_kart,5,5,0,JSON listesi/kart nesnesi
+Kd461c43af0fa,veri/kartlar_ham/swing/Swing_Trading_Uzmanlığı_-_Nikos_Mermigas_120_sayfa.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+K3237df4849e6,veri/kartlar_ham/swing/Swing_Trading_ile_Basit_Kazançlar_-_Jea_Yu_118_sayfa.json,asli_kart,2,2,0,JSON listesi/kart nesnesi
+Kbfbc0f56f277,veri/kartlar_ham/swing/Swing_Trading_ve_Vadeli_İşlemlerle_Yatırım_-_Timothy_T_Hogan_445_sayfa.json,asli_kart,11,11,0,JSON listesi/kart nesnesi
+Ked39c4200bc2,veri/kartlar_ham/swing/Swing_Tradinge_Giriş_-_Michael_C_Thomsett_198_sayfa.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+Ke6972c89421f,veri/kartlar_ham/swing/Swing_Yatırımcıları_için_Trend_Takibi_Stratejileri_-_Aaron_Lee_Johnson_149_sayfa.json,asli_kart,18,18,0,JSON listesi/kart nesnesi
+K7ef286c52133,veri/kartlar_ham/swing/Swing_Yüksekleri_ve_Swing_Düşüklerini_Kullanarak_Pazarın_Ne_Durumda_Olduğunu_Daha_İyi_Anla.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+Kaf8cc9c8afb3,veri/kartlar_ham/swing/Swing_ve_Günlük_Trading_-_Jeremy_Walters_220_sayfa.json,asli_kart,3,3,0,JSON listesi/kart nesnesi
+K475ea2eb881f,veri/kartlar_ham/swing/Swing_ve_Günlük_Trading_Stratejileri_-_Dave_Robert_Warren_Graham_338_sayfa.json,asli_kart,30,30,0,JSON listesi/kart nesnesi
+K8bf0697f19ae,veri/kartlar_ham/swing/The_Ultimate_Algorithmic_Trading_System_-_Orijinal_-_George_Pruitt_342_sayfa.json,asli_kart,14,14,0,JSON listesi/kart nesnesi
+K2ebd8578988f,veri/kartlar_ham/swing/TradeStation_EasyLanguage_for_Algorithmic_Trading_-_Domenico_Derrico_-_Orijinal_258_sayfa.json,asli_kart,4,4,0,JSON listesi/kart nesnesi
+K6e1519bec228,veri/kartlar_ham/swing/Yeni_Başlayanlar_için_Algoritmik_Trading_-_Travis_Selley_117_sayfa.json,asli_kart,1,1,0,JSON listesi/kart nesnesi
+Kb8e29d638674,veri/kartlar_ham/swing/Yeni_Başlayanlar_için_Swing_Trading_Stratejileri_-_Andrew_David_Kratter_103_sayfa.json,asli_kart,11,11,0,JSON listesi/kart nesnesi
+Kacf7474479dd,veri/kartlar_ham/swing/Yeni_Başlayanlar_İçin_Swing_Trading_Stratejileri_-_Edward_Day_131_sayfa.json,asli_kart,8,8,0,JSON listesi/kart nesnesi
+K26bfdc3d6ef3,veri/kartlar_ham/swing/Yüksek_Kazançlı_Swing_Ticaretinin_5_Sırrı_-_Ivayla_Ivanov_52_sayfa.json,asli_kart,3,3,0,JSON listesi/kart nesnesi
