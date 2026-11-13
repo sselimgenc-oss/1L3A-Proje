@@ -45,7 +45,7 @@ Kanıt yollarında `dal:claude/adoring-maxwell-q7t60g:<yol>` yazılır.
 | G10_ARSIV | arsiv/* eski projeler (algo-sg, strateji-sg, swing-sg, day-trade-sg, scalp-sg, codex-algo, sg-pano, strateji-test-pano, sg-algo-proje) + haiku dalları; repo_kodlari/raporlari'nın kapsamadıkları | ? | Sonnet | denetlendi | ara/G10_ARSIV_ham.csv |
 | Birleştirme | ham → tekil, akıbet | — | lider | bitti | ham_satirlar.csv, tekil_stratejiler.csv |
 | Öz denetim | 40 satır, tohum 20261113 | — | lider | bitti (3/40 = %7.5) | ara/oz_denetim.csv |
-| Rapor + PR | — | — | lider | RAPOR.md bitti; PR sırada | RAPOR.md |
+| Rapor + PR | — | — | lider | bitti (PR #57) | RAPOR.md |
 
 ## Denetim günlüğü (lider: her ajan çıktısından ≥10 satır kaynağa izlenir)
 - **G5** (189 satır: H 117, D 51, KOD 15, G 5, F 1): rastgele 12 satır kakushadze_151.csv'ye izlendi → 12/12 tutarlı.
