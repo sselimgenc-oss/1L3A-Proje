@@ -1,0 +1,12 @@
+{
+ "durum": "HATA",
+ "evren": "kripto13",
+ "hata": "ValueError: pf__v3-funding-z90-3gun: funding_orani eksik: ['BTCUSDT', 'ETHUSDT', 'SOLUSDT']",
+ "iz": "Traceback (most recent call last):\n  File \"/home/user/1L3A-Proje/araclar/kapanis_kosu.py\", line 399, in kimlik_isle\n    return {**taban, \"durum\": \"COZULEMEDI\", \"hata\": satir[\"notlar\"]}\n            ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/user/1L3A-Proje/araclar/kapanis_kosu.py\", line 346, in portfoy_kos_satir\n    \"disarida\": pk.disarida, \"analiz_bas\": m.get(\"analiz_bas\"), \"tf_kaynak\": aciklama, **k}\n            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/user/1L3A-Proje/araclar/kapanis_kosu.py\", line 366, in pf_rastgele_p\n    sec = wp.gerekli_semboller(st, evren_t)\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/user/1L3A-Proje/motor/arastirma/saglamlik_portfoy.py\", line 223, in __init__\n    h = st.hedefler(veriler)\n  File \"/home/user/1L3A-Proje/motor/portfoy/stratejiler/v3.py\", line 67, in hedefler\n    ev = self._evren(veriler)\n  File \"/home/user/1L3A-Proje/motor/portfoy/stratejiler/v3.py\", line 52, in _evren\n    raise ValueError(f\"{self.ad}: {self.funding_sutunu} eksik: {eksik}\")\nValueError: pf__v3-funding-z90-3gun: funding_orani eksik: ['BTCUSDT', 'ETHUSDT', 'SOLUSDT']\n",
+ "katman": "K1",
+ "kimlik": "KOD:pf__v3-funding-z90-3gun",
+ "p": 1.0,
+ "sinif": "pf__v3-funding-z90-3gun",
+ "sure_sn": 15.0,
+ "tf": "1h"
+}
