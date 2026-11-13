@@ -319,7 +319,12 @@ def dondur(kapanis: Path = KAPANIS, yeniden: bool = False) -> dict:
 
 
 def dogrula(kapanis: Path = KAPANIS) -> str:
-    yol, sha_yolu = kapanis / "kosu_listesi_asama1.csv", kapanis / "kosu_listesi_asama1.csv.sha256"
+    return dogrula_dosya(kapanis / "kosu_listesi_asama1.csv")
+
+
+def dogrula_dosya(yol: Path) -> str:
+    """Herhangi bir dondurulmuş koşu listesini (<liste>.csv + <liste>.csv.sha256) doğrular."""
+    sha_yolu = yol.with_name(yol.name + ".sha256")
     if not yol.exists() or not sha_yolu.exists():
         raise FileNotFoundError("dondurulmuş liste ya da .sha256 yok")
     gercek = hashlib.sha256(yol.read_bytes()).hexdigest()

@@ -240,3 +240,12 @@ Talimat: `KODLAMA_TALIMATI.md`. Girdi: `kod_girdi/` (birleştirme betiğinin nih
   (2) K1'deki iki `pf__rotasyon` ayarı kullanıcının "rotasyon evren dışı" kararıyla EVREN_DISI (ayrıca mevcut sınıfla eşlenemiyordu).
 - Kapı 6 tüm adaylarda koşulur (kapı 7 BH tüm adayların p'sini ister). Tek sembollü kimlikler kapı 3'ü yapısal olarak geçemez — ön kayda harfiyen uyuldu.
 - Kuru mod: 365/365 TAMAM. Gerçek koşu: `araclar/kapanis_kosu.py --isci 4`, kontrol noktaları `sonuclar/kapanis/kosu_asama1/`.
+
+## 2026-11-13 — Aşama 2 hazır (ekler 5–7), aşama 1 sürüyor
+- Kullanıcı kararları: Robotic koşulsun; COK_KOLLU çıksın; eski katmanlar triyajla kapansın (ek 6); Fable'ın umut değerlendirmesiyle aşama 2 daraltması (ek 7).
+- Robotic kodlama: 8 parti + 8b (Sonnet). Lider denetimi: parti testleri + `testler/test_kapanis_kesme_g9.py` (tüm kayıtlar, kesme/lookahead) geçti.
+  CryptoFrog ailesi (846/847) kodlanamadı; elenen 6 üyesi aynı giriş/çıkış sinyalini kullandığından geri alınacak temsilci yok.
+- Aşama 2 listesi `kosu_listesi_asama2.csv` (SHA dondurulmuş): 96 kayıt (Robotic 83, K3 13); 4 KODLANAMADI ayrı dosyada (3 BTC çapraz-sembol, 1 lookahead).
+  HAM:V001:225 `stop_sonrasi_bekleme_mum` kullandığı için kapı 6 HATA (p=1) olacak — ön kayıt gereği gizlenmez.
+- Koşucu `araclar/kapanis_kosu.py --asama 2` (ayrı çıktı/BH ailesi). Aşama 2 koşusu aşama 1 bittikten sonra başlatılacak (CPU paylaşımı).
+- Lider notu: aşama 1'i yeniden başlatırken koşu günlüğünün son satırında tek bir aşama 1 p değeri görüldü; hiçbir karar buna dayanmadı.

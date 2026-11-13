@@ -596,20 +596,24 @@ def ozet_uret(df: pd.DataFrame, m: int, bh: dict, b: Baglam) -> str:
 
 # ---------------------------------------------------------------- CLI
 def main(argv=None) -> int:
-    ap = argparse.ArgumentParser(description="Kapanış aşama 1 koşucusu")
-    ap.add_argument("--liste", default=str(LISTE))
-    ap.add_argument("--cikti", default=str(CIKTI))
+    ap = argparse.ArgumentParser(description="Kapanış koşucusu (aşama 1 / aşama 2: ayrı dondurulmuş liste, ayrı BH ailesi)")
+    ap.add_argument("--asama", type=int, choices=(1, 2), default=1)
+    ap.add_argument("--liste", default=None)
+    ap.add_argument("--cikti", default=None)
     ap.add_argument("--isci", type=int, default=4)
     ap.add_argument("--sinir", type=int, default=None, help="ilk K kimlik (deneme)")
     ap.add_argument("--kuru", action="store_true", help="yalnız çözümleme; backtest/mum okuma yok")
     ap.add_argument("--birlestir", action="store_true")
     ap.add_argument("--eksik-izin", action="store_true", help="birleştirmede bitmemiş kimliklere izin (p=1, KOSULMADI)")
     a = ap.parse_args(argv)
-    kl.dogrula(Path(a.liste).parent)                     # donmuş liste SHA'sı tutmuyorsa DUR
+    ek = f"asama{a.asama}"
+    a.liste = a.liste or str(KAPANIS / f"kosu_listesi_{ek}.csv")
+    a.cikti = a.cikti or str(KAPANIS / f"kosu_{ek}")
+    kl.dogrula_dosya(Path(a.liste))                      # donmuş liste SHA'sı tutmuyorsa DUR
     satirlar = liste_oku(Path(a.liste))
     if a.kuru:
         rapor = kuru(satirlar if a.sinir is None else satirlar[:a.sinir])
-        yol = KAPANIS / "kosu_asama1_kuru.csv"
+        yol = KAPANIS / f"kosu_{ek}_kuru.csv"
         pd.DataFrame(rapor).to_csv(yol, index=False)
         df = pd.DataFrame(rapor)
         uniq = {x for r in df["semboller"].dropna() for x in r.split(",")}
@@ -620,7 +624,7 @@ def main(argv=None) -> int:
         return 0
     b = baglam_kur(cikti=Path(a.cikti))
     if a.birlestir:
-        print(birlestir(satirlar, b, eksik_izin=a.eksik_izin))
+        print(birlestir(satirlar, b, eksik_izin=a.eksik_izin, sonuc_csv=KAPANIS / f"sonuc_{ek}.csv", ozet_md=KAPANIS / f"ozet_{ek}.md"))
         return 0
     print(kos(satirlar, isci=a.isci, sinir=a.sinir, b=b))
     return 0
