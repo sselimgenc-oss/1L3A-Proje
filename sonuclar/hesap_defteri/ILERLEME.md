@@ -43,9 +43,9 @@ Kanıt yollarında `dal:claude/adoring-maxwell-q7t60g:<yol>` yazılır.
 | G8_DIS_ARASTIRMA | ajan1 906 (dal), ajan2 26 (md), karşılaştırma/derin_gecis/tur4 | ~932 | Sonnet | denetlendi | ara/G8_DIS_ARASTIRMA_ham.csv |
 | G9_ROBOTIC | RoboticAutomations 909 dosya (dal) + kume_listesi | 909 | Sonnet | denetlendi | ara/G9_ROBOTIC_ham.csv |
 | G10_ARSIV | arsiv/* eski projeler (algo-sg, strateji-sg, swing-sg, day-trade-sg, scalp-sg, codex-algo, sg-pano, strateji-test-pano, sg-algo-proje) + haiku dalları; repo_kodlari/raporlari'nın kapsamadıkları | ? | Sonnet | denetlendi | ara/G10_ARSIV_ham.csv |
-| Birleştirme | ham → tekil, akıbet | — | lider | bekliyor | ham_satirlar.csv, tekil_stratejiler.csv |
-| Öz denetim | 40 satır, tohum 20261113 | — | lider | bekliyor | ara/oz_denetim.csv |
-| Rapor + PR | — | — | lider | bekliyor | RAPOR.md |
+| Birleştirme | ham → tekil, akıbet | — | lider | bitti | ham_satirlar.csv, tekil_stratejiler.csv |
+| Öz denetim | 40 satır, tohum 20261113 | — | lider | bitti (3/40 = %7.5) | ara/oz_denetim.csv |
+| Rapor + PR | — | — | lider | RAPOR.md bitti; PR sırada | RAPOR.md |
 
 ## Denetim günlüğü (lider: her ajan çıktısından ≥10 satır kaynağa izlenir)
 - **G5** (189 satır: H 117, D 51, KOD 15, G 5, F 1): rastgele 12 satır kakushadze_151.csv'ye izlendi → 12/12 tutarlı.
@@ -87,6 +87,11 @@ o zaman ajan mevcut ara dosyayı ve betiği okuyup üstüne devam etsin, baştan
 | G9_ROBOTIC | ac679425a8291102b | ham 909 satır var, NOTLAR yok |
 | G10_ARSIV | a6add8fc83e9791c8 | yalnız betik (g10_arsiv.py) |
 Not: ara/ altındaki NOTLAR'ı olmayan dosyalar TASLAK'tır; lider denetiminden geçmedi.
+
+## Son durum (2026-11-13)
+Tüm gruplar denetlendi; birleştirme, öz denetim ve RAPOR.md tamam. Yeniden üretim sırası RAPOR.md §10'da.
+Lider düzeltmeleri: `ara/lider_duzeltmeleri.csv`, `ara/lider_birlestir_ile.csv` (837 alt küme katalog satırı);
+birlestir.py içinde: BAGLAMA ayarları → sınıf tekili; F yalnız martingale/DCA/ort.düşürme/stopsuz grid; adil_test türetmesi.
 
 ## Zamanlanmış kontrol
 - 2026-11-13 08:35 TSİ (05:35 UTC): otomatik devam mesajı kurulu (kullanıcı isteği; limit yenilenince devam).
