@@ -9,7 +9,7 @@ günde eksik mum ve boşluk sayısı, veri kaynağı. Eksik mum = ardışık iki
   - maliyet tablosu: kendi mühür dosyası `sonuclar/evren/maliyet_tablosu.sha256` (araştırma katmanı koşulardan önce yazar);
   - diğerleri: `sonuclar/final/butunluk_kayit.json` (`python -m motor.canli.guven --kaydet --set eski` ile, kullanıcı onayıyla yazılır; bu modül otomatik YAZMAZ).
   PAPER V2 profili (`profil="v2"`): izlenen dosyalar `IZLENEN_V2` (paper_v2_seti.json, havuz_v2.csv, maliyet_tablosu_v2.csv + kendi .sha256 mührü),
-  kayıt `sonuclar/final/butunluk_kayit_v2.json` (`python -m motor.canli.guven --kaydet`), maliyet_modeli = HESAP BAŞINA PortfoyAyarlari özeti
+  kayıt `stratejiler/butunluk_kayit_v2_16.json` (`python -m motor.canli.guven --kaydet`), maliyet_modeli = HESAP BAŞINA PortfoyAyarlari özeti
   (paper_v2.hesap_ayarlari: v2 tablosundan sembol bazlı maliyet); sert_limitler aynı kod sabiti.
   Eşleşmeme gizlenmez: `durum` = eslesti | uyusmuyor | kayit_yok | dosya_yok. Ayar yenilemesi `guncel_ayarlar.csv`'yi bilerek değiştirir:
   bu "uyusmuyor" gösterir ve kullanıcı yeni özeti kaydedene kadar öyle kalır (sessizce uydurulmaz).
@@ -38,7 +38,8 @@ from motor.veri.depo import aralik_suresi
 KOK = Path(__file__).resolve().parents[2]
 VERI_DIZINI = KOK / "veri" / "mumlar"
 KAYIT_YOLU = KOK / "sonuclar" / "final" / "butunluk_kayit.json"
-KAYIT_YOLU_V2 = KOK / "sonuclar" / "final" / "butunluk_kayit_v2.json"
+KAYIT_YOLU_V2_ESKI = KOK / "sonuclar" / "final" / "butunluk_kayit_v2.json"      # MÜHÜRLÜ: 10'lu setin kaydı; artık okunmaz/yazılmaz (kanıt olarak durur)
+KAYIT_YOLU_V2 = KOK / "stratejiler" / "butunluk_kayit_v2_16.json"                  # 16'lı set (10 + 6 kapanış adayı, 2026-11-14) kaydı; yalnız paper v2 profili
 GUVEN_PENCERE_GUN = 30
 GIT_ZAMAN_ASIMI_SN = 10
 GIT_YOLLARI = ("motor", "stratejiler", "araclar", "sonuclar/final", "sonuclar/kilit", "sonuclar/evren")   # kirli denetimi (kilit_acilis.jsonl günlüğü hariç)
@@ -64,7 +65,7 @@ IZLENEN_V2 = (
 )
 PROFILLER = {
     "eski": {"izlenen": IZLENEN, "kayit_yolu": KAYIT_YOLU, "kayit_adi": "butunluk_kayit.json"},
-    "v2": {"izlenen": IZLENEN_V2, "kayit_yolu": KAYIT_YOLU_V2, "kayit_adi": "butunluk_kayit_v2.json"},
+    "v2": {"izlenen": IZLENEN_V2, "kayit_yolu": KAYIT_YOLU_V2, "kayit_adi": "butunluk_kayit_v2_16.json"},
 }
 
 
@@ -224,7 +225,7 @@ _BUTUNLUK_ONBELLEK: dict = {}
 
 def butunluk(kaynak: str, zaman: str, ayarlar=None, kok: Path = KOK, kayit_yolu: Optional[Path] = None, onbellek_sn: float = ONBELLEK_SN,
              profil: str = "eski", maliyet: Optional[dict] = None) -> dict:
-    """butunluk.json içeriği. profil: "eski" (7'li final set) | "v2" (paper v2 seti; kayıt butunluk_kayit_v2.json, `maliyet` = hesap başına model). Hesap pahalı değil ama her turda git çağırmamak için `onbellek_sn` kadar kod sürümü önbelleğe alınır
+    """butunluk.json içeriği. profil: "eski" (7'li final set) | "v2" (paper v2 seti; kayıt butunluk_kayit_v2_16.json, `maliyet` = hesap başına model). Hesap pahalı değil ama her turda git çağırmamak için `onbellek_sn` kadar kod sürümü önbelleğe alınır
     (dosya özetleri mtime ile zaten önbellekli; değişiklik anında görünür)."""
     kayit_yolu = kayit_yolu or _profil(profil)["kayit_yolu"]
     kayit = kayit_oku(kayit_yolu)
@@ -361,7 +362,7 @@ def main(argv=None) -> int:
     ap.add_argument("--kaydet", action="store_true", help="güncel özetleri sonuclar/final/butunluk_kayit.json'a yaz")
     ap.add_argument("--goster", action="store_true", help="kayıtlı değerlerle karşılaştırmayı yazdır (varsayılan)")
     ap.add_argument("--set", choices=tuple(PROFILLER), default="v2", dest="set_adi",
-                    help="v2 (varsayılan): paper v2 seti, kayıt butunluk_kayit_v2.json | eski: 7'li final set, kayıt butunluk_kayit.json")
+                    help="v2 (varsayılan): paper v2 seti, kayıt butunluk_kayit_v2_16.json | eski: 7'li final set, kayıt butunluk_kayit.json")
     a = ap.parse_args(argv)
     from motor.portfoy.motor import PortfoyAyarlari
     ay = PortfoyAyarlari(limit_modu="uygula")

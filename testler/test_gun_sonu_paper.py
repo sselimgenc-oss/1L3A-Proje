@@ -83,8 +83,7 @@ def test_gun_sonu_bayragi_paper_kararinda_yalniz_seansli_veride(veri, strateji):
 # ------------------------------------------------------------------ Y-2: desteklenmeyen çıkış ayarı -> kurulum hatası
 DESTEKSIZ = [
     dict(stop_basamaklari=((1.0, 0.0),)),
-    dict(azalan_roi=((0, 4.0), (30, 1.0))),
-    dict(geri_cekilme_yuzde=1.0),
+    # azalan_roi / geri_cekilme_*: 2026-11-14'ten itibaren paper motorunda UYGULANIR (bkz. test_paper_v2_kapanis.py: backtest eşdeğerliği)
     dict(kar_rsi_esikleri=((1.0, 70.0),)),
     dict(elder_guvenli_bolge_k=2.0),
     dict(agresif_iz_esigi=0.75, agresif_iz_atr_k=1.0),
@@ -116,5 +115,7 @@ def test_desteklenen_cikis_ayarlari_kabul_edilir():
     ca = CikisAyarlari(atr_iz_suren_k=2.0, atr_periyot=10, zaman_cikisi_mum=5, sabit_r_hedefi=2.0, basabas_r_esigi=1.0,
                        kismi=((1.0, 0.25),))
     assert desteklenmeyen_cikis_alanlari(ca) == []
+    ca2 = CikisAyarlari(zaman_cikisi_mum=5, azalan_roi=((0, 4.0), (30, 1.0)), geri_cekilme_yuzde=1.0, geri_cekilme_min_kar_yuzde=2.0)
+    assert desteklenmeyen_cikis_alanlari(ca2) == []
     m.birim_ekle(_birim(ca))
     assert "b" in m.birimler

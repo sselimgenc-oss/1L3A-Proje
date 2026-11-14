@@ -101,7 +101,7 @@ def test_pano_beklenmeyen_dusme_uyari_kalir(tmp_path):
 # ---------------------------------------------------------------------------- bütünlük: v2 profili
 def test_v2_kaydi_depoyla_eslesir_ve_sert_limitler_degismedi():
     mal = v2.cevrimdisi_maliyet_modeli()
-    assert len(mal) == 10
+    assert len(mal) == 16
     b = gv.butunluk("paper", "2026-11-12T00:00:00Z", None, profil="v2", maliyet=mal, onbellek_sn=0)
     assert b["genel_durum"] == "eslesti", [(x["id"], x["durum"]) for x in b["dosyalar"] + b["sanal"] if x["durum"] != "eslesti"]
     ids = {x["id"]: x for x in b["dosyalar"]}
@@ -110,7 +110,7 @@ def test_v2_kaydi_depoyla_eslesir_ve_sert_limitler_degismedi():
     assert ids["maliyet_tablosu"]["kayit_kaynagi"] == "sonuclar/evren/v2/maliyet_tablosu_v2.sha256"
     # SERT_LIMITLER değişmedi: v2 kaydı ile eski kayıt aynı özeti taşır
     eski = json.loads((KOK / "sonuclar/final/butunluk_kayit.json").read_text())["sanal"]["sert_limitler"]["sha256"]
-    yeni = json.loads((KOK / "sonuclar/final/butunluk_kayit_v2.json").read_text())["sanal"]["sert_limitler"]["sha256"]
+    yeni = json.loads((KOK / "stratejiler/butunluk_kayit_v2_16.json").read_text())["sanal"]["sert_limitler"]["sha256"]
     assert eski == yeni == gv.sha256_sozluk(gv.sert_limitler())
 
 

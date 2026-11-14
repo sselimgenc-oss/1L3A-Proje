@@ -209,6 +209,9 @@ Her kasanın tam dosyaları `durum/hesaplar/<strateji>/` altındadır.
 **Geri dönüş (gerekirse):** `systemctl stop 1l3a-paper; cd /var/lib/1l3a-paper; mv durum durum_v2_deneme; mv durum_eski_7li_* durum`, sonra
 `/etc/systemd/system/1l3a-paper.service` içindeki `ExecStart` satırının sonuna `--set eski` ekleyip `systemctl daemon-reload && systemctl start 1l3a-paper`.
 
+### 12b. Kapanış turunun 6 stratejisini ekleme (10 -> 16 hesap, 2026-11-14)
+Mevcut paper durumu korunur, yeni 6 hesap sıfırdan açılır: adım adım talimat ve tek komutlu betik `deploy/KAPANIS_EKLEME_SUNUCU_ADIMLARI.md` / `deploy/v2_kapanis_ekle.sh`.
+
 ## 13. Canlı (gerçek emirli) yürütücü — küçük bütçe
 > **Uyarı:** Bu bölüm GERÇEK PARA ile ilgilidir. Önce **kuru**, sonra **testnet**, ancak ikisi de günlerce sorunsuz çalıştıktan sonra **canlı**.
 > **1L3A v2 planı (2026-11-11, `sonuclar/canli/CANLI_PLAN_V2.md`):** testnet'te YALNIZ e0v1en (testnet tek hesap = tek strateji;
