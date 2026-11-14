@@ -1,0 +1,61 @@
+{
+ "analiz_bas": "2019-07-05 00:00:00+00:00",
+ "bh_sharpe_x2": 0.8530310774305532,
+ "durum": "HATA",
+ "evren": "kripto13",
+ "hata": "desteklenmeyen çıkış (rastgele giriş testi yok): ['stop_sonrasi_bekleme_mum']",
+ "hata_k6": "desteklenmeyen çıkış (rastgele giriş testi yok): ['stop_sonrasi_bekleme_mum']",
+ "k1": true,
+ "k2": false,
+ "k3": true,
+ "k3a": true,
+ "k3b": true,
+ "k4": false,
+ "k5": false,
+ "k6": {
+  "desteklenmeyen": [
+   "stop_sonrasi_bekleme_mum"
+  ],
+  "p": 1.0
+ },
+ "k6_durum": "HATA",
+ "katman": "K3",
+ "kill_x1": 1,
+ "kill_x2": 1,
+ "kimlik": "HAM:V001:225#v1",
+ "long_only": true,
+ "n_islem_x1": 200,
+ "n_islem_x2": 199,
+ "net_x1": 2.906919593374958,
+ "net_x2": 2.542957986680061,
+ "p": 1.0,
+ "pf_x1": 2.0511403800989343,
+ "pf_x2": 1.9808095359040132,
+ "r_enstruman": {
+  "ADAUSDT": 22.732928693294525,
+  "BCHUSDT": -2.147305727005005,
+  "BNBUSDT": 53.31811108067632,
+  "BTCUSDT": 13.051490247249603,
+  "DOGEUSDT": 5.037727475166321,
+  "ETHUSDT": 12.678426180034876,
+  "LINKUSDT": -8.524791359901428,
+  "SOLUSDT": 21.53504577279091,
+  "TRXUSDT": -0.5181778743863106,
+  "XLMUSDT": -5.615157246589661,
+  "XRPUSDT": 22.93119168281555,
+  "ZECUSDT": -2.6154005751013756
+ },
+ "r_yil": {
+  "2019": -6.738063424825668,
+  "2020": 68.14612494781613,
+  "2021": 88.44214063510299,
+  "2022": -11.94132398813963,
+  "2023": -6.0447898209095
+ },
+ "sharpe_x2": 0.7017551322978125,
+ "sinif": "kapanis__haftalik-kirilim-rejim-k3v001-225",
+ "sure_sn": 10.8,
+ "tf": "1h",
+ "tf_kaynak": "5m -> 1h yeniden örnekleme (yeniden_ornekle, eksik mumlar atılır)",
+ "tur": "tek"
+}
