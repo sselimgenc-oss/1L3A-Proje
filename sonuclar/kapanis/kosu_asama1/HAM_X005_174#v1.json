@@ -1,0 +1,42 @@
+{
+ "analiz_bas": "2019-07-05 00:00:00+00:00",
+ "bh_sharpe_x2": null,
+ "durum": "TAMAM",
+ "evren": "kripto13",
+ "hata": "",
+ "k1": false,
+ "k2": false,
+ "k3": false,
+ "k3a": false,
+ "k3b": false,
+ "k4": false,
+ "k5": true,
+ "k6_durum": "ATLANDI_K1_5",
+ "katman": "G8",
+ "kill_x1": 1,
+ "kill_x2": 1,
+ "kimlik": "HAM:X005:174#v1",
+ "long_only": false,
+ "n_islem_x1": 79,
+ "n_islem_x2": 63,
+ "net_x1": -0.28066904074110366,
+ "net_x2": -0.30356792295028834,
+ "p": 1.0,
+ "pf_x1": 0.4315162763333023,
+ "pf_x2": 0.20689731722470955,
+ "r_enstruman": {
+  "DOGEUSDT": -14.276916615664959,
+  "LINKUSDT": -1.452117681503296,
+  "TRXUSDT": -1.6175252199172974,
+  "ZECUSDT": -21.74925784993684
+ },
+ "r_yil": {
+  "2019": -39.09581736702239
+ },
+ "sharpe_x2": -1.3017762211144142,
+ "sinif": "kapanis__keltner-5m-iz-yuzde-s0174",
+ "sure_sn": 97.1,
+ "tf": "5m",
+ "tf_kaynak": "5m",
+ "tur": "tek"
+}

@@ -1,0 +1,41 @@
+{
+ "analiz_bas": "2019-07-05 00:00:00+00:00",
+ "bh_sharpe_x2": null,
+ "durum": "TAMAM",
+ "evren": "kripto13",
+ "hata": "",
+ "k1": false,
+ "k2": true,
+ "k3": false,
+ "k3a": false,
+ "k3b": false,
+ "k4": false,
+ "k5": true,
+ "k6_durum": "ATLANDI_K1_5",
+ "katman": "G8",
+ "kill_x1": 1,
+ "kill_x2": 1,
+ "kimlik": "HAM:X005:684#v1",
+ "long_only": false,
+ "n_islem_x1": 579,
+ "n_islem_x2": 216,
+ "net_x1": -0.3002313081693757,
+ "net_x2": -0.3020794125413441,
+ "p": 1.0,
+ "pf_x1": 0.6236944024063577,
+ "pf_x2": 0.23121800919005414,
+ "r_enstruman": {
+  "DOGEUSDT": -8.759887689724565,
+  "LINKUSDT": -7.8036009344796184,
+  "ZECUSDT": -13.253702476155013
+ },
+ "r_yil": {
+  "2019": -29.817191100359196
+ },
+ "sharpe_x2": -1.2318374569786303,
+ "sinif": "kapanis__vwap3-oran-s0684",
+ "sure_sn": 66.1,
+ "tf": "15m",
+ "tf_kaynak": "5m -> 15m yeniden örnekleme (yeniden_ornekle, eksik mumlar atılır)",
+ "tur": "tek"
+}

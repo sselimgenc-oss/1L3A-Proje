@@ -1,0 +1,41 @@
+{
+ "analiz_bas": "2019-07-05 00:00:00+00:00",
+ "bh_sharpe_x2": null,
+ "durum": "TAMAM",
+ "evren": "kripto13",
+ "hata": "",
+ "k1": false,
+ "k2": true,
+ "k3": false,
+ "k3a": false,
+ "k3b": false,
+ "k4": false,
+ "k5": true,
+ "k6_durum": "ATLANDI_K1_5",
+ "katman": "G8",
+ "kill_x1": 1,
+ "kill_x2": 1,
+ "kimlik": "HAM:X005:313#v1",
+ "long_only": false,
+ "n_islem_x1": 325,
+ "n_islem_x2": 247,
+ "net_x1": -0.29952419313501677,
+ "net_x2": -0.30894299935709046,
+ "p": 1.0,
+ "pf_x1": 0.5129678178705384,
+ "pf_x2": 0.46617051739307097,
+ "r_enstruman": {
+  "DOGEUSDT": -2.898793274536729,
+  "LINKUSDT": -15.485014121979475,
+  "ZECUSDT": -15.389181046251906
+ },
+ "r_yil": {
+  "2019": -33.77298844276811
+ },
+ "sharpe_x2": -1.308965840961668,
+ "sinif": "kapanis__rsi-bant-s0313",
+ "sure_sn": 110.9,
+ "tf": "5m",
+ "tf_kaynak": "5m",
+ "tur": "tek"
+}
