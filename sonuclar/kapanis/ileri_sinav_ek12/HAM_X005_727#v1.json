@@ -1,0 +1,42 @@
+{
+ "a_net_pozitif": false,
+ "asama": 1,
+ "b_kill_yok": true,
+ "bh_net_x2": null,
+ "c_al_tutu_gecti": null,
+ "donem_bas": "2025-11-08 00:00:00+00:00",
+ "donem_bit": "2026-11-07 00:00:00+00:00",
+ "hata": "",
+ "karar": "paper_cikar",
+ "kill_x1": 0,
+ "kill_x2": 0,
+ "kimlik": "HAM:X005:727#v1",
+ "long_only": false,
+ "max_dusus_x2": 0.11562296282864781,
+ "n_islem": 768,
+ "n_islem_x1": 768,
+ "net_x1": -0.06294030393714645,
+ "net_x2": -0.11371492490212953,
+ "ort_r": -0.011500027710629487,
+ "parametreler": {
+  "ha_ema": 8,
+  "stop_pct": 25.0,
+  "tip_ema": 5
+ },
+ "pf_x1": 0.8860910797260477,
+ "pf_x2": 0.7811855198791727,
+ "r_enstruman": {
+  "BCHUSDT": -0.0829528272151947,
+  "BNBUSDT": -2.170849102549255,
+  "BTCUSDT": -1.1875988777028397,
+  "ETHUSDT": -2.7346579444711097,
+  "HYPEUSDT": -0.3832607567310333,
+  "SOLUSDT": 0.3732974957674742,
+  "TRXUSDT": -0.039163220673799515,
+  "XRPUSDT": -2.0901524100918323,
+  "ZECUSDT": -0.5166836380958557
+ },
+ "sinif": "kapanis__ha-tipik-ema-s0727",
+ "tf": "4h",
+ "yetersiz_ornek": false
+}

@@ -232,7 +232,7 @@ Dosya yoksa (eski motor) pano "veri yok" der. Ölçülemeyen değer `null` + ned
 ## Genişletme (Paper v2 seti: 10 strateji, her biri kendi kasasında; 2026-11-10; sürüm 1 içinde EKLEMELİ)
 Kod: `motor/canli/paper_v2.py`; set tanımı `stratejiler/paper_v2_seti.json`. Üst düzey `durum/` dosyaları 10 kasanın TOPLAMIDIR (toplamda sert limit
 uygulanmaz; her kasanın kendi motoru limitleri ayrı uygular). Eski alanlar değişmedi; eski motor/dosyalarda yeni alanlar yoktur (pano yokluğu tolere eder).
-- **`stratejiler.json` → her strateji**: `etiket` ("dogrulandi" = resmi v2 holdout kapısını geçti; "iyi_gorundu" = sonuç sonrası keşif, KANIT DEĞİL; "kapanis_aday" (2026-11-14, EKLEMELİ) = kapanış turu paper adayı — ileri dönem sınavı gerekli, yeterli değil; eski sette `null`),
+- **`stratejiler.json` → her strateji**: `etiket` ("dogrulandi" = resmi v2 holdout kapısını geçti; "iyi_gorundu" = sonuç sonrası keşif, KANIT DEĞİL; "kapanis_aday" (2026-11-14, EKLEMELİ) = kapanış turu paper adayı — ileri dönem sınavı gerekli, yeterli değil; "kapanis_aday_ek" (2026-11-14, EKLEMELİ) = ileri dönem sınavından SONRA seçildi (sonuç sonrası seçim), canlı adayı olamaz; eski sette `null`),
   `hesap {baslangic, ozsermaye (para), getiri, zirveden_dusus, kill, gunluk_blok, risk_yuzde (işlem başı %), kaldirac, acik_stop_riski}` (stratejinin kendi sanal kasası),
   `kol`: "tek_evren" (aynı strateji evrendeki tüm sembollerde, TEK kasada) | "portfoy"; `kol_payi` v2'de grup payı (pf için s = 0.5, tek_evren için 1).
 - **`durum/hesaplar/<klasör>/`** (klasör = kimlik; dosya sistemi için `:`/`#` gibi karakterler `_` olur: `HAM:X005:664#v1` -> `HAM_X005_664_v1`): her kasanın tam dosya seti (ozet, stratejiler, islemler, saglik, ... aynı şema; `ozet.baslangic_ozsermaye` 10000). Yeni satır

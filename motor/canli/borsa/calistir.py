@@ -70,8 +70,8 @@ def onkontrol(ayar: ca.CanliAyar) -> None:
         t = tanimlar.get(s.id)
         if t is None:
             raise ca.CanliAyarHatasi(f"{s.id}: paper_v2 setinde yok")
-        if t.etiket == "kapanis_aday":      # 12 hafta paper + kullanıcı onayı şartı KODDA: kapanış adayı gerçek (hatta kuru/testnet) yürütücüye alınmaz
-            raise CanliDesteklemiyorHatasi(f"{s.id}: kapanış turu paper adayı (etiket kapanis_aday) canlıya alınamaz: "
+        if t.etiket in ("kapanis_aday", "kapanis_aday_ek"):      # 12 hafta paper + kullanıcı onayı şartı KODDA: kapanış adayı gerçek (hatta kuru/testnet) yürütücüye alınmaz
+            raise CanliDesteklemiyorHatasi(f"{s.id}: kapanış turu paper adayı (etiket kapanis_aday / kapanis_aday_ek) canlıya alınamaz: "
                                            "12 hafta paper + kullanıcı onayı şartı sağlanmadan canlı ayarına yazılamaz")
         if t.kol == "portfoy":
             raise CanliDesteklemiyorHatasi(f"{s.id}: portföy (ağırlık) stratejisi canlıda henüz desteklenmiyor")

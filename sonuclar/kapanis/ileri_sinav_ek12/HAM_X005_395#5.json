@@ -1,0 +1,43 @@
+{
+ "a_net_pozitif": true,
+ "asama": 1,
+ "b_kill_yok": true,
+ "bh_net_x2": -0.18720604291740606,
+ "c_al_tutu_gecti": true,
+ "donem_bas": "2025-11-08 00:00:00+00:00",
+ "donem_bit": "2026-11-07 00:00:00+00:00",
+ "hata": "",
+ "karar": "gecti",
+ "kill_x1": 0,
+ "kill_x2": 0,
+ "kimlik": "HAM:X005:395#5",
+ "long_only": true,
+ "max_dusus_x2": 0.06922647350899958,
+ "n_islem": 18,
+ "n_islem_x1": 18,
+ "net_x1": 0.10117712531404699,
+ "net_x2": 0.09627281569947965,
+ "ort_r": 0.35164857490195167,
+ "parametreler": {
+  "atr_k": 3.0,
+  "atr_n": 14,
+  "b": 0,
+  "l": 150,
+  "s": 5
+ },
+ "pf_x1": 1.8761509998709827,
+ "pf_x2": 1.8111137295710675,
+ "r_enstruman": {
+  "ADAUSDT": -0.4664381146430969,
+  "BCHUSDT": -1.7254567593336105,
+  "BTCUSDT": -0.9051469713449478,
+  "HYPEUSDT": 5.489134788513184,
+  "LINKUSDT": 1.887578010559082,
+  "TRXUSDT": 1.1537685841321945,
+  "XLMUSDT": -1.5457965731620789,
+  "ZECUSDT": 2.4420313835144043
+ },
+ "sinif": "kapanis__vma-bant",
+ "tf": "1d",
+ "yetersiz_ornek": true
+}

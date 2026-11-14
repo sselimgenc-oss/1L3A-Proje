@@ -1,0 +1,41 @@
+{
+ "a_net_pozitif": true,
+ "asama": 1,
+ "b_kill_yok": true,
+ "bh_net_x2": -0.18720604291740606,
+ "c_al_tutu_gecti": true,
+ "donem_bas": "2025-11-08 00:00:00+00:00",
+ "donem_bit": "2026-11-07 00:00:00+00:00",
+ "hata": "",
+ "karar": "gecti",
+ "kill_x1": 0,
+ "kill_x2": 0,
+ "kimlik": "HAM:X005:822#v1",
+ "long_only": true,
+ "max_dusus_x2": 0.04134697268431427,
+ "n_islem": 26,
+ "n_islem_x1": 26,
+ "net_x1": 0.07017039633955968,
+ "net_x2": 0.06283519624327516,
+ "ort_r": 0.15702528291596815,
+ "parametreler": {
+  "alt_kapanis_cikis": 2,
+  "atr_k": 3.0,
+  "atr_n": 14,
+  "sma_hizli": 50,
+  "sma_yavas": 200
+ },
+ "pf_x1": 1.6831587990286931,
+ "pf_x2": 1.581100533221,
+ "r_enstruman": {
+  "BCHUSDT": -0.6666665785014629,
+  "BNBUSDT": -0.0339859314262867,
+  "HYPEUSDT": 2.358938544988632,
+  "TRXUSDT": -2.4010932110249996,
+  "XLMUSDT": -0.7361396253108978,
+  "ZECUSDT": 5.561604157090187
+ },
+ "sinif": "kapanis__sma50-geri-alim-s0822",
+ "tf": "1d",
+ "yetersiz_ornek": false
+}

@@ -1,0 +1,43 @@
+{
+ "a_net_pozitif": false,
+ "asama": 1,
+ "b_kill_yok": true,
+ "bh_net_x2": null,
+ "c_al_tutu_gecti": null,
+ "donem_bas": "2025-11-08 00:00:00+00:00",
+ "donem_bit": "2026-11-07 00:00:00+00:00",
+ "hata": "",
+ "karar": "paper_cikar",
+ "kill_x1": 0,
+ "kill_x2": 0,
+ "kimlik": "HAM:X005:781",
+ "long_only": false,
+ "max_dusus_x2": 0.16286523823710689,
+ "n_islem": 354,
+ "n_islem_x1": 354,
+ "net_x1": -0.039196798981474545,
+ "net_x2": -0.09029428680663665,
+ "ort_r": -0.012228939550044804,
+ "parametreler": {
+  "hizli": 1,
+  "hp_lambda": 100.0,
+  "hp_pencere": 1800,
+  "stop_atr_k": 3.0,
+  "yavas": 2,
+  "yonler": "ls"
+ },
+ "pf_x1": 1.004659740962479,
+ "pf_x2": 0.9200725987495563,
+ "r_enstruman": {
+  "BNBUSDT": -3.397084861062467,
+  "BTCUSDT": -1.9603815535083413,
+  "DOGEUSDT": -0.16027909517288208,
+  "ETHUSDT": -0.7602261324645951,
+  "LINKUSDT": -0.1282399594783783,
+  "TRXUSDT": -0.018255125731229782,
+  "XRPUSDT": 2.095422126702033
+ },
+ "sinif": "dis__hp-filtre-ma",
+ "tf": "1d",
+ "yetersiz_ornek": false
+}

@@ -1,0 +1,63 @@
+{
+ "a_net_pozitif": false,
+ "asama": 2,
+ "b_kill_yok": true,
+ "bh_net_x2": -0.18720604291740606,
+ "c_al_tutu_gecti": true,
+ "donem_bas": "2025-11-08 00:00:00+00:00",
+ "donem_bit": "2026-11-07 00:00:00+00:00",
+ "hata": "",
+ "karar": "paper_cikar",
+ "kill_x1": 0,
+ "kill_x2": 0,
+ "kimlik": "HAM:B001:626#v1",
+ "long_only": true,
+ "max_dusus_x2": 0.18893549573640767,
+ "n_islem": 167,
+ "n_islem_x1": 167,
+ "net_x1": -0.025736042735624687,
+ "net_x2": -0.096045172231493,
+ "ort_r": -0.03974221069031133,
+ "parametreler": {
+  "atr_k": 3.0,
+  "atr_n": 14,
+  "kademeler": [
+   [
+    0.15,
+    0.035
+   ],
+   [
+    0.2,
+    0.045
+   ],
+   [
+    0.3,
+    0.05
+   ]
+  ],
+  "kaydir": 30,
+  "kijun": 60,
+  "senkou_b": 120,
+  "tenkan": 20
+ },
+ "pf_x1": 0.993588635691928,
+ "pf_x2": 0.925362191341162,
+ "r_enstruman": {
+  "ADAUSDT": -0.6556424498558044,
+  "BCHUSDT": -1.3786459863185883,
+  "BNBUSDT": 4.366424202919006,
+  "BTCUSDT": 2.940993010997772,
+  "DOGEUSDT": -3.6275129318237305,
+  "ETHUSDT": 0.5937635824084282,
+  "HYPEUSDT": -2.135537013411522,
+  "LINKUSDT": 0.04911148548126221,
+  "SOLUSDT": 1.0138849020004272,
+  "TRXUSDT": -4.637205272912979,
+  "XLMUSDT": -1.642880242317915,
+  "XRPUSDT": -3.313062071800232,
+  "ZECUSDT": 1.789359599351883
+ },
+ "sinif": "kapanis__ichimoku-v12-iki-giris-b0626",
+ "tf": "4h",
+ "yetersiz_ornek": false
+}

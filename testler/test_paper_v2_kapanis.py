@@ -1,6 +1,6 @@
-"""Paper v2 seti: kapanış turu paper adayları (6 kayıt, 16 hesap; kullanıcı onayı 2026-11-14). Sentetik veri; ağ/gerçek veri yok.
+"""Paper v2 seti: kapanış turu paper adayları (6 kayıt + 4 kapanis_aday_ek = 20 hesap; kullanıcı onayı 2026-11-14). Sentetik veri; ağ/gerçek veri yok.
 Kapsam: set yükleme + dondurulmuş liste doğrulaması, imza, mevcut 10'un DEĞİŞMEDİĞİ, fail-closed, azalan ROI / geri çekilme çıkışının
-backtest ile eşdeğerliği, 10 -> 16 hesap geçişi (mevcut durum korunur, yeni hesaplar sıfırdan)."""
+backtest ile eşdeğerliği, 10 -> 20 ve 16 -> 20 hesap geçişi (mevcut durum korunur, yeni hesaplar sıfırdan)."""
 import copy
 import json
 import shutil
@@ -24,15 +24,22 @@ from testler.test_paper_v2 import OrtalamaTrend, SEM, islem_ozeti, kos, sentetik
 
 KOK = Path(__file__).resolve().parents[1]
 ESKI_IMZA = "985f914d0bb6b643"                      # 2026-11-10'daki 10'lu setin imzası (sunucudaki mevcut durum dosyasında yazılı)
+ESKI16_IMZA = "4c22e27149b65a14"                    # 16'lı setin imzası (sunucuda 10 -> 16 uygulanmışsa durum dosyasında yazılı)
 KAPANIS_KIMLIKLER = ["HAM:X005:664#v1", "HAM:X005:705", "HAM:X005:301#v1", "HAM:X005:138#v3", "HAM:B001:670#v1", "HAM:B001:574#v1"]
+EK_KIMLIKLER = ["HAM:X005:730#v2", "HAM:X005:259#v1", "HAM:X005:793#v1", "HAM:B001:538#v1"]
 
 
 # ---------------------------------------------------------------------------- set yükleme + doğrulama
-def test_set_16_kayit_6_kapanis_etiketli():
+def test_set_20_kayit_6_kapanis_4_ek_etiketli():
     s = v2.set_yukle()
-    assert len(s["stratejiler"]) == 16 and "kapanis_aday" in s["etiketler"]
+    assert len(s["stratejiler"]) == 20 and "kapanis_aday" in s["etiketler"] and "kapanis_aday_ek" in s["etiketler"]
+    assert "kapanis_aday_ek" in v2.ETIKETLER
     kap = [k for k in s["stratejiler"] if v2.kapanis_mi(k)]
-    assert [k["kimlik"] for k in kap] == KAPANIS_KIMLIKLER
+    assert [k["kimlik"] for k in kap] == KAPANIS_KIMLIKLER + EK_KIMLIKLER
+    ek = kap[6:]
+    assert all(k["etiket"] == "kapanis_aday_ek" and k["evren"] == "kripto13" and k["tur"] == "tek" for k in ek)
+    assert [(k["tf"], k["liste"]) for k in ek] == [("1d", "kosu_listesi_asama1.csv")] * 3 + [("6h", "kosu_listesi_asama2.csv")]
+    kap = kap[:6]
     assert all(k["etiket"] == "kapanis_aday" and k["evren"] == "kripto13" and k["tur"] == "tek" for k in kap)
     assert [(k["tf"], k["liste"]) for k in kap] == [("1d", "kosu_listesi_asama1.csv")] * 2 + [("4h", "kosu_listesi_asama1.csv"),
                                                                                               ("1d", "kosu_listesi_asama1.csv"),
@@ -83,6 +90,11 @@ def test_kapanis_dogrulama_sha_kimlik_tf_etiket_acik_hata(tmp_path):
     yol.write_text(json.dumps(s5))
     with pytest.raises(v2.PaperV2Hatasi, match="yalnız kapanış kaydına"):
         v2.set_yukle(yol)
+    s5b = copy.deepcopy(s)
+    s5b["stratejiler"][0]["etiket"] = "kapanis_aday_ek"
+    yol.write_text(json.dumps(s5b))
+    with pytest.raises(v2.PaperV2Hatasi, match="yalnız kapanış kaydına"):
+        v2.set_yukle(yol)
     # izin verilmeyen liste
     s6 = copy.deepcopy(s)
     s6["stratejiler"][10]["liste"] = "baska.csv"
@@ -97,22 +109,35 @@ def test_imza_degisti_onceki_imza_eski_10lu_ile_ayni():
     assert v2.set_imzasi(s) != ESKI_IMZA
     assert v2.onceki_set_imzasi(s) == ESKI_IMZA                       # kapanış kayıtları çıkarılınca imza, sunucudaki kayıtlı imzayla BİREBİR aynı
     assert len(v2.onceki_set(s)["stratejiler"]) == 10
+    assert v2.set16_imzasi(s) == ESKI16_IMZA and v2.set_imzasi(s) not in (ESKI_IMZA, ESKI16_IMZA)
+    assert len(v2.set16(s)["stratejiler"]) == 16
+    assert set(v2.gecis_imzalari(s)) == {ESKI_IMZA, ESKI16_IMZA}
+    assert v2.gecis_imzalari(s)[ESKI_IMZA] == set(KAPANIS_KIMLIKLER + EK_KIMLIKLER) and v2.gecis_imzalari(s)[ESKI16_IMZA] == set(EK_KIMLIKLER)
 
 
 def test_mevcut_10_hesabin_tanimlari_degismedi():
     s = v2.set_yukle()
     tum = v2.tanimlari_yukle(s)
     eski = v2.tanimlari_yukle(v2.onceki_set(s))
-    assert len(tum) == 16 and len(eski) == 10
+    assert len(tum) == 20 and len(eski) == 10
     for a, b in zip(tum[:10], eski):
         assert (a.kimlik, a.kol, a.tf, tuple(a.evren), a.etiket, a.ayar, a.grup_payi, a.ajan) == (b.kimlik, b.kol, b.tf, tuple(b.evren), b.etiket, b.ayar, b.grup_payi, b.ajan)
         assert type(a.nesne) is type(b.nesne) and getattr(a.nesne, "parametreler", None) == getattr(b.nesne, "parametreler", None)
         assert getattr(a.nesne, "cikis_ayarlari", None) == getattr(b.nesne, "cikis_ayarlari", None)
         assert v2.hesap_ayarlari(a, s) == v2.hesap_ayarlari(b, v2.onceki_set(s))
-    assert [t.kimlik for t in tum[10:]] == KAPANIS_KIMLIKLER
+    assert [t.kimlik for t in tum[10:]] == KAPANIS_KIMLIKLER + EK_KIMLIKLER
+    # mevcut 16'nın tanımları (10 + 6 kapanış) 16'lı setle birebir aynı: yeni 4 kayıt hiçbirini değiştirmedi
+    s16 = v2.set16(s)
+    t16 = v2.tanimlari_yukle(s16)
+    assert len(t16) == 16
+    for a, b in zip(tum[:16], t16):
+        assert (a.kimlik, a.kol, a.tf, tuple(a.evren), a.etiket, a.ayar, a.grup_payi, a.ajan) == (b.kimlik, b.kol, b.tf, tuple(b.evren), b.etiket, b.ayar, b.grup_payi, b.ajan)
+        assert type(a.nesne) is type(b.nesne) and getattr(a.nesne, "parametreler", None) == getattr(b.nesne, "parametreler", None)
+        assert getattr(a.nesne, "cikis_ayarlari", None) == getattr(b.nesne, "cikis_ayarlari", None)
+        assert v2.hesap_ayarlari(a, s) == v2.hesap_ayarlari(b, s16)
 
 
-def test_16_hesap_kapanis_tanimlari_listeden_ayni_kasa_ayni_s():
+def test_20_hesap_kapanis_tanimlari_listeden_ayni_kasa_ayni_s():
     import csv
     s = v2.set_yukle()
     tans = {t.kimlik: t for t in v2.tanimlari_yukle(s)}
@@ -121,18 +146,35 @@ def test_16_hesap_kapanis_tanimlari_listeden_ayni_kasa_ayni_s():
     for a in ("kosu_listesi_asama1.csv", "kosu_listesi_asama2.csv"):
         with open(KOK / "sonuclar/kapanis" / a, newline="", encoding="utf-8") as f:
             satirlar.update({r["kimlik"]: r for r in csv.DictReader(f)})
-    for k in KAPANIS_KIMLIKLER:
+    for k in KAPANIS_KIMLIKLER + EK_KIMLIKLER:
         t, r = tans[k], satirlar[k]
-        assert t.kol == "tek_evren" and t.tf == r["tf"] and t.etiket == "kapanis_aday" and t.grup_payi == Decimal(1)
+        assert t.kol == "tek_evren" and t.tf == r["tf"] and t.grup_payi == Decimal(1)
+        assert t.etiket == ("kapanis_aday" if k in KAPANIS_KIMLIKLER else "kapanis_aday_ek")
         assert tuple(t.evren) == sabit.evren_listesi("kripto") and len(t.evren) == 13
         par = json.loads(r["parametreler"])
         assert all(getattr(t.nesne, "parametreler", {}).get(a, v) == v for a, v in par.items() if a != "cikis_ayarlari")
         ay = v2.hesap_ayarlari(t, s)
         assert ay.baslangic_sermaye == 10000 and ay.risk_yuzde == 0.5 and ay.limit_modu == "uygula"
-    assert len({t.kimlik for t in tans.values()}) == 16
+    assert len({t.kimlik for t in tans.values()}) == 20
 
 
 # ---------------------------------------------------------------------------- fail-closed + hangi çıkış alanları
+def test_ek_stratejilerin_cikis_alanlari_paper_destekli_kanca_yok():
+    """Fail-closed tespiti (2026-11-14 ek 4 kayıt): 730/259 varsayılan çıkış; 793 yalnız zaman_cikisi_mum=12; 538 yalnız azalan_roi=((0, 10000),)
+    (fiilen devre dışı eşik). Hepsi PAPER_CIKIS_ALANLARI içinde; pozisyon_cikisi kancası yok -> dördü de eklenebilir."""
+    import dataclasses
+    tans = {t.kimlik: t for t in v2.tanimlari_yukle()}
+    varsayilan = CikisAyarlari()
+    beklenen = {"HAM:X005:730#v2": set(), "HAM:X005:259#v1": set(), "HAM:X005:793#v1": {"zaman_cikisi_mum"}, "HAM:B001:538#v1": {"azalan_roi"}}
+    for k, b in beklenen.items():
+        ca = tans[k].nesne.cikis_ayarlari
+        assert {f.name for f in dataclasses.fields(ca) if getattr(ca, f.name) != getattr(varsayilan, f.name)} == b, k
+        assert getattr(tans[k].nesne, "pozisyon_cikisi", None) is None
+        assert pm.desteklenmeyen_cikis_alanlari(ca) == []
+    assert tans["HAM:X005:793#v1"].nesne.cikis_ayarlari.zaman_cikisi_mum == 12
+    assert tans["HAM:B001:538#v1"].tf == "6h"
+
+
 def test_kapanis_stratejilerinin_cikis_alanlari_ve_destek():
     """4 X005 kaydı varsayılan çıkış ayarlı; iki NASOS (5m) azalan_roi + geri çekilme kullanır (paper motoru artık uygular). Kanca yok."""
     import dataclasses
@@ -260,10 +302,11 @@ def _cokus_mumu(n, seed, vol=0.002, aralik=350):
 
 
 def test_gercek_kapanis_stratejileri_sentetik_mumda_paper_backtest_ile_ayni():
-    """6 kapanış stratejisinin GERÇEK sınıf/parametreleri (NASOS: azalan ROI + geri çekilme dahil), tek sembol, sentetik mum: aynı işlemler."""
-    fr = {"1d": "D", "4h": "4h"}
-    n_tf = {"1d": 500, "4h": 1200}
-    vol = {"1d": 0.03, "4h": 0.015}
+    """10 kapanış stratejisinin (6 + 4 ek) GERÇEK sınıf/parametreleri (NASOS: azalan ROI + geri çekilme; 793: zaman çıkışı; 538: 6h), tek sembol,
+    sentetik mum: aynı işlemler."""
+    fr = {"1d": "D", "4h": "4h", "6h": "6h"}
+    n_tf = {"1d": 500, "4h": 1200, "6h": 900}
+    vol = {"1d": 0.03, "4h": 0.015, "6h": 0.02}
     toplam = {}
     for t in v2.tanimlari_yukle()[10:]:
         alt = t.alt_tanim("BTCUSDT")
@@ -284,11 +327,11 @@ def test_gercek_kapanis_stratejileri_sentetik_mumda_paper_backtest_ile_ayni():
 
 
 # ---------------------------------------------------------------------------- 10 -> 16 hesap geçişi
-def _yeni_set(eski: dict, *kapanis_kimlik) -> dict:
+def _yeni_set(eski: dict, *kapanis_kimlik, etiket="kapanis_aday") -> dict:
     y = copy.deepcopy(eski)
     for k in kapanis_kimlik:
         y["stratejiler"].append({"kaynak": "kapanis", "kimlik": k, "liste": "kosu_listesi_asama1.csv", "tf": "1d", "evren": "genel", "tur": "tek",
-                                 "etiket": "kapanis_aday"})
+                                 "etiket": etiket})
     return y
 
 
@@ -403,16 +446,19 @@ def test_hesap_dizin_adi_guvenli():
     assert v2.hesap_dizin_adi("HAM:X005:664#v1") == "HAM_X005_664_v1"
     assert v2.hesap_dizin_adi("dis__lube") == "dis__lube" and v2.hesap_dizin_adi("pf__sabit_sepet") == "pf__sabit_sepet"
     s = v2.set_yukle()
-    assert len({v2.hesap_dizin_adi(v2.hesap_adi(k)) for k in s["stratejiler"]}) == 16
+    assert len({v2.hesap_dizin_adi(v2.hesap_adi(k)) for k in s["stratejiler"]}) == 20
 
 
-def test_butunluk_16_hesap_kayitla_eslesir_ve_sert_limitler_ayni():
+def test_butunluk_20_hesap_kayitla_eslesir_ve_sert_limitler_ayni():
     from motor.canli import guven as gv
     mal = v2.cevrimdisi_maliyet_modeli()
-    assert len(mal) == 16
+    assert len(mal) == 20
     b = gv.butunluk("paper", "2026-11-14T00:00:00Z", None, profil="v2", maliyet=mal, onbellek_sn=0)
     assert b["genel_durum"] == "eslesti"
     assert gv.sert_limitler() is not None
+    assert gv.KAYIT_YOLU_V2.name == "butunluk_kayit_v2_20.json" and gv.PROFILLER["v2"]["kayit_adi"] == "butunluk_kayit_v2_20.json"
+    assert (KOK / "stratejiler/butunluk_kayit_v2_16.json").exists()                      # 16'lık kayıt dosyası arşivde kalır
+    assert json.loads(gv.KAYIT_YOLU_V2.read_text())["sanal"]["sert_limitler"]["sha256"] == gv.sha256_sozluk(gv.sert_limitler())
 
 
 # ---------------------------------------------------------------------------- canlı kapısı: kapanış adayı canlıya alınamaz
@@ -420,7 +466,111 @@ def test_canli_onkontrol_kapanis_adayini_reddeder_havuz_stratejisini_etkilemez()
     from types import SimpleNamespace as NS
     from motor.canli.borsa import calistir as cal
     from motor.canli.borsa.motor_kopru import CanliDesteklemiyorHatasi
-    for k in KAPANIS_KIMLIKLER:
+    for k in KAPANIS_KIMLIKLER + EK_KIMLIKLER:          # kapanis_aday_ek de reddedilir
         with pytest.raises(CanliDesteklemiyorHatasi, match="kapanis_aday|12 hafta"):
             cal.onkontrol(NS(stratejiler=[NS(id=k)]))
     cal.onkontrol(NS(stratejiler=[NS(id="dis__e0v1en")]))              # mevcut havuz stratejisi: davranış aynı (hata yok)
+
+
+# ---------------------------------------------------------------------------- 10 -> 20 ve 16 -> 20 tek seferlik geçiş
+def _gecis_kur():
+    mum = veri()
+    a, b = tanim("a", SEM, OrtalamaTrend(n=10)), tanim("b", SEM, OrtalamaTrend(n=20))
+    c = tanim("c", ["ETHUSDT", "SOLUSDT"], OrtalamaTrend(n=15), etiket="kapanis_aday")
+    d = tanim("d", ["BTCUSDT", "SOLUSDT"], OrtalamaTrend(n=12), etiket="kapanis_aday_ek")
+    s10 = set_("a", "b")
+    s16 = _yeni_set(s10, "c")
+    s20 = _yeni_set(s16, "d", etiket="kapanis_aday_ek")
+    return mum, mum[("BTCUSDT", "1d")].index, (a, b, c, d), (s10, s16, s20)
+
+
+def test_gecis_10dan_20ye_ve_16dan_20ye_mevcut_hesaplar_aynen_yeniler_sifirdan(tmp_path):
+    mum, ix, (a, b, c, d), (s10, s16, s20) = _gecis_kur()
+    assert len({v2.set_imzasi(x) for x in (s10, s16, s20)}) == 3
+    assert v2.onceki_set_imzasi(s20) == v2.set_imzasi(s10) and v2.set16_imzasi(s20) == v2.set_imzasi(s16)
+    # kesintisiz 20'li referans (a, b, c, d hepsi aynı anda 150. günde başlayanlar hariç: a, b 120'den)
+    tam = v2.kasalar_kur([a, b], mum, {}, s10, pencere={"1d": 300})
+    tam.baslat(ix[120])
+    tam.adim(ix[-1] + pd.Timedelta(days=1))
+    # (1) 10 -> 20: c ve d sıfırdan
+    y10 = tmp_path / "s10.json"
+    p1 = v2.kasalar_kur([a, b], mum, {}, s10, pencere={"1d": 300})
+    p1.baslat(ix[120])
+    p1.adim(ix[150])
+    p1.kaydet(y10)
+    p2 = v2.kasalar_kur([a, b, c, d], mum, {}, s20, pencere={"1d": 300})
+    assert p2.yukle(y10) is True and p2.yeni_hesaplar == ["c", "d"]
+    assert p2.yeni_hesaplari_baslat(ix[150]) == ["c", "d"]
+    p2.adim(ix[-1] + pd.Timedelta(days=1))
+    for k in ("a", "b"):
+        assert islem_ozeti(p2.hesaplar[k]) == islem_ozeti(tam.hesaplar[k]) and p2.hesaplar[k].motor.ozsermaye() == tam.hesaplar[k].motor.ozsermaye()
+    for k in ("c", "d"):
+        assert D0(p2.hesaplar[k].ayarlar.baslangic_sermaye) == 10000
+        assert all(pd.Timestamp(x["giris_zamani"]) >= ix[150] for x in p2.hesaplar[k].motor.islemler)
+    p2.kaydet(y10)
+    dd = json.loads(y10.read_text())
+    assert dd["set_imza"] == v2.set_imzasi(s20) and set(dd["hesaplar"]) == {"a", "b", "c", "d"}
+    assert v2.kasalar_kur([a, b, c, d], mum, {}, s20, pencere={"1d": 300}).yukle(y10) is True      # ikinci yükleme normal yol
+    # (2) 16 -> 20: c (16'lıdan) AYNEN, yalnız d sıfırdan
+    y16 = tmp_path / "s16.json"
+    q1 = v2.kasalar_kur([a, b, c], mum, {}, s16, pencere={"1d": 300})
+    q1.baslat(ix[120])
+    q1.adim(ix[150])
+    q1.kaydet(y16)
+    ref16 = v2.kasalar_kur([a, b, c], mum, {}, s16, pencere={"1d": 300})
+    ref16.baslat(ix[120])
+    ref16.adim(ix[-1] + pd.Timedelta(days=1))
+    q2 = v2.kasalar_kur([a, b, c, d], mum, {}, s20, pencere={"1d": 300})
+    assert q2.yukle(y16) is True and q2.yeni_hesaplar == ["d"]
+    assert q2.yeni_hesaplari_baslat(ix[150]) == ["d"]
+    q2.adim(ix[-1] + pd.Timedelta(days=1))
+    for k in ("a", "b", "c"):
+        assert islem_ozeti(q2.hesaplar[k]) == islem_ozeti(ref16.hesaplar[k]) and q2.hesaplar[k].motor.ozsermaye() == ref16.hesaplar[k].motor.ozsermaye()
+    assert all(pd.Timestamp(x["giris_zamani"]) >= ix[150] for x in q2.hesaplar["d"].motor.islemler)
+    assert json.loads(y16.read_text())["set_imza"] == v2.set_imzasi(s16)                     # yükleme dosyayı değiştirmedi
+
+
+def test_gecis_yabanci_imza_ve_izinsiz_eksik_hesap_acik_hata(tmp_path):
+    mum, ix, (a, b, c, d), (s10, s16, s20) = _gecis_kur()
+    yol = tmp_path / "paper_state.json"
+    # yabancı imza: s farklı bir 16'lı set (10 ya da 16 imzası değil)
+    p = v2.kasalar_kur([a, b, c], mum, {}, _yeni_set(set_("a", "b", s=0.4), "c"), pencere={"1d": 300})
+    p.baslat(ix[120])
+    p.kaydet(yol)
+    ham = yol.read_text()
+    with pytest.raises(v2.PaperV2Hatasi, match="set imzası"):
+        v2.kasalar_kur([a, b, c, d], mum, {}, s20, pencere={"1d": 300}).yukle(yol)
+    # yabancı imza: 16'lı set ama kapanış kaydının TF'i/evreni değişmiş (imza girdisi: tf farklı)
+    s16x = copy.deepcopy(s16)
+    s16x["stratejiler"][2]["tf"] = "4h"
+    p = v2.kasalar_kur([a, b, c], mum, {}, s16x, pencere={"1d": 300})
+    p.baslat(ix[120])
+    p.kaydet(yol)
+    with pytest.raises(v2.PaperV2Hatasi, match="set imzası"):
+        v2.kasalar_kur([a, b, c, d], mum, {}, s20, pencere={"1d": 300}).yukle(yol)
+    # 16 imzası ama kayıtta kapanis_aday hesabı (c) yok: 16'lıdan geçişte yalnız kapanis_aday_ek eksik olabilir
+    p = v2.kasalar_kur([a, b, c], mum, {}, s16, pencere={"1d": 300})
+    p.baslat(ix[120])
+    p.kaydet(yol)
+    dd = json.loads(yol.read_text())
+    del dd["hesaplar"]["c"]
+    yol.write_text(json.dumps(dd))
+    with pytest.raises(v2.PaperV2Hatasi, match="yalnız kapanış"):
+        v2.kasalar_kur([a, b, c, d], mum, {}, s20, pencere={"1d": 300}).yukle(yol)
+    # 10 imzası, havuz hesabı (b) eksik
+    p = v2.kasalar_kur([a, b], mum, {}, s10, pencere={"1d": 300})
+    p.baslat(ix[120])
+    p.kaydet(yol)
+    dd = json.loads(yol.read_text())
+    del dd["hesaplar"]["b"]
+    yol.write_text(json.dumps(dd))
+    with pytest.raises(v2.PaperV2Hatasi, match="yalnız kapanış"):
+        v2.kasalar_kur([a, b, c, d], mum, {}, s20, pencere={"1d": 300}).yukle(yol)
+    assert yol.exists() and ham                                       # dosya asla silinmez
+
+
+def test_gercek_set_gecis_imzalari_sunucudaki_kayitlarla_ayni():
+    s = v2.set_yukle()
+    izinli = v2.gecis_imzalari(s)
+    assert izinli[ESKI_IMZA] == set(KAPANIS_KIMLIKLER + EK_KIMLIKLER) and izinli[ESKI16_IMZA] == set(EK_KIMLIKLER)
+    assert v2.set_imzasi(s) not in izinli                              # 20'li imza geçiş değil, normal yükleme

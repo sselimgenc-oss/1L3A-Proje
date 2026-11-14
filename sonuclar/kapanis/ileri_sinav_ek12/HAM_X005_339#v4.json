@@ -1,0 +1,41 @@
+{
+ "a_net_pozitif": true,
+ "asama": 1,
+ "b_kill_yok": true,
+ "bh_net_x2": -0.18720604291740606,
+ "c_al_tutu_gecti": true,
+ "donem_bas": "2025-11-08 00:00:00+00:00",
+ "donem_bit": "2026-11-07 00:00:00+00:00",
+ "hata": "",
+ "karar": "gecti",
+ "kill_x1": 0,
+ "kill_x2": 0,
+ "kimlik": "HAM:X005:339#v4",
+ "long_only": true,
+ "max_dusus_x2": 0.04793742607306073,
+ "n_islem": 15,
+ "n_islem_x1": 15,
+ "net_x1": 0.025705051749671526,
+ "net_x2": 0.02203799115092364,
+ "ort_r": 0.10071970808009306,
+ "parametreler": {
+  "alt_std": 2.0
+ },
+ "pf_x1": 1.2525037785007451,
+ "pf_x2": 1.2182300862710485,
+ "r_enstruman": {
+  "ADAUSDT": -1.4108341932296753,
+  "BCHUSDT": 0.9529867004603148,
+  "BNBUSDT": 2.3203635215759277,
+  "BTCUSDT": -0.1300809532403946,
+  "DOGEUSDT": -0.7409522533416748,
+  "ETHUSDT": -1.0499286651611328,
+  "HYPEUSDT": 3.07023948431015,
+  "LINKUSDT": -1.0428342819213867,
+  "SOLUSDT": 1.4602166414260864,
+  "TRXUSDT": -1.9183803796768188
+ },
+ "sinif": "kapanis__rsi-bant-trend-s0339",
+ "tf": "1d",
+ "yetersiz_ornek": true
+}

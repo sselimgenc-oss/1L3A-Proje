@@ -1,0 +1,36 @@
+{
+ "a_net_pozitif": true,
+ "asama": 1,
+ "b_kill_yok": true,
+ "bh_net_x2": null,
+ "c_al_tutu_gecti": null,
+ "donem_bas": "2025-11-08 00:00:00+00:00",
+ "donem_bit": "2026-11-07 00:00:00+00:00",
+ "hata": "",
+ "karar": "gecti",
+ "kill_x1": 0,
+ "kill_x2": 0,
+ "kimlik": "HAM:X005:144#v2",
+ "long_only": false,
+ "max_dusus_x2": 0.041324970985158034,
+ "n_islem": 28,
+ "n_islem_x1": 28,
+ "net_x1": 0.0751522118286978,
+ "net_x2": 0.0706943401815936,
+ "ort_r": 0.2580439741058009,
+ "parametreler": {
+  "hizli_com": 8,
+  "yavas_com": 32
+ },
+ "pf_x1": 1.8163379569960663,
+ "pf_x2": 1.7389459163734895,
+ "r_enstruman": {
+  "BCHUSDT": 0.5046847462654114,
+  "BNBUSDT": 2.2436976432800293,
+  "ETHUSDT": 4.144262254238129,
+  "TRXUSDT": 0.3325866311788559
+ },
+ "sinif": "kapanis__ewma-kutle-merkezi-s0144",
+ "tf": "1d",
+ "yetersiz_ornek": false
+}

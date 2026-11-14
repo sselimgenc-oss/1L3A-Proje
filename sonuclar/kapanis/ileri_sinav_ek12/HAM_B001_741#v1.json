@@ -1,0 +1,43 @@
+{
+ "a_net_pozitif": false,
+ "asama": 2,
+ "b_kill_yok": true,
+ "bh_net_x2": -0.18720604291740606,
+ "c_al_tutu_gecti": true,
+ "donem_bas": "2025-11-08 00:00:00+00:00",
+ "donem_bit": "2026-11-07 00:00:00+00:00",
+ "hata": "",
+ "karar": "paper_cikar",
+ "kill_x1": 0,
+ "kill_x2": 0,
+ "kimlik": "HAM:B001:741#v1",
+ "long_only": true,
+ "max_dusus_x2": 0.21258144210041632,
+ "n_islem": 434,
+ "n_islem_x1": 441,
+ "net_x1": -0.12276208879233563,
+ "net_x2": -0.17497159710717614,
+ "ort_r": -0.04096771503234291,
+ "parametreler": {
+  "fark": 0.1,
+  "rsi_esik": 50.0,
+  "sl": 0.15,
+  "sma_n": 7
+ },
+ "pf_x1": 0.748406041277734,
+ "pf_x2": 0.6634608859406982,
+ "r_enstruman": {
+  "BCHUSDT": 0.2204456776380539,
+  "BNBUSDT": -4.339543989510275,
+  "BTCUSDT": -3.3097484674071893,
+  "ETHUSDT": -4.290263260016218,
+  "HYPEUSDT": 0.6203974485397339,
+  "SOLUSDT": -0.5353584066033363,
+  "XLMUSDT": 0.023582665249705315,
+  "XRPUSDT": -6.835174566600472,
+  "ZECUSDT": 0.6656745746731758
+ },
+ "sinif": "kapanis__prawnstar-obv-b0741",
+ "tf": "1h",
+ "yetersiz_ornek": false
+}
