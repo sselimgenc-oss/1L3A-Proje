@@ -1,0 +1,41 @@
+{
+ "a_net_pozitif": true,
+ "asama": 1,
+ "b_kill_yok": true,
+ "bh_net_x2": null,
+ "c_al_tutu_gecti": null,
+ "donem_bas": "2025-11-08 00:00:00+00:00",
+ "donem_bit": "2026-11-07 00:00:00+00:00",
+ "hata": "",
+ "karar": "gecti",
+ "kill_x1": 0,
+ "kill_x2": 0,
+ "kimlik": "HAM:X005:661#v1",
+ "long_only": false,
+ "max_dusus_x2": 0.08805548279646747,
+ "n_islem": 105,
+ "n_islem_x1": 105,
+ "net_x1": 0.18233634857904946,
+ "net_x2": 0.15759270609876985,
+ "ort_r": 0.11244736603860345,
+ "parametreler": {
+  "mcginley_n": 25,
+  "sl_yuzde": 10.0,
+  "teyit_bar": 3,
+  "tp_yuzde": 40.0
+ },
+ "pf_x1": 1.5190091403402037,
+ "pf_x2": 1.4308571951249314,
+ "r_enstruman": {
+  "BCHUSDT": 1.0664599388837814,
+  "BTCUSDT": 0.9524323707446456,
+  "ETHUSDT": 4.687445038929582,
+  "HYPEUSDT": 2.0814876556396484,
+  "TRXUSDT": -1.0688635054975748,
+  "XLMUSDT": 3.4572893679142,
+  "XRPUSDT": 0.6307225674390793
+ },
+ "sinif": "kapanis__mcginley-sar-s0661",
+ "tf": "1d",
+ "yetersiz_ornek": false
+}

@@ -1,0 +1,35 @@
+{
+ "a_net_pozitif": false,
+ "asama": 1,
+ "b_kill_yok": true,
+ "bh_net_x2": -0.18720604291740606,
+ "c_al_tutu_gecti": true,
+ "donem_bas": "2025-11-08 00:00:00+00:00",
+ "donem_bit": "2026-11-07 00:00:00+00:00",
+ "hata": "",
+ "karar": "paper_cikar",
+ "kill_x1": 0,
+ "kill_x2": 0,
+ "kimlik": "HAM:X005:508#v1",
+ "long_only": true,
+ "max_dusus_x2": 0.024355779399897793,
+ "n_islem": 9,
+ "n_islem_x1": 9,
+ "net_x1": -0.018449078386451268,
+ "net_x2": -0.022426761607970302,
+ "ort_r": -0.18271765692366493,
+ "parametreler": {
+  "atr_k": 3.0,
+  "atr_n": 14,
+  "esik_long_bp": -15.47,
+  "esik_short_bp": 18.8
+ },
+ "pf_x1": 0.22154041145221182,
+ "pf_x2": 0.13458108740441282,
+ "r_enstruman": {
+  "TRXUSDT": -1.6444589123129845
+ },
+ "sinif": "kapanis__fonlama-ters-s0508",
+ "tf": "8h",
+ "yetersiz_ornek": true
+}

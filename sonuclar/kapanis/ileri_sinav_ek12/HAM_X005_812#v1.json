@@ -1,0 +1,39 @@
+{
+ "a_net_pozitif": false,
+ "asama": 1,
+ "b_kill_yok": false,
+ "bh_net_x2": null,
+ "c_al_tutu_gecti": null,
+ "donem_bas": "2025-11-08 00:00:00+00:00",
+ "donem_bit": "2026-11-07 00:00:00+00:00",
+ "hata": "",
+ "karar": "paper_cikar",
+ "kill_x1": 1,
+ "kill_x2": 1,
+ "kimlik": "HAM:X005:812#v1",
+ "long_only": false,
+ "max_dusus_x2": 0.2972990285755913,
+ "n_islem": 749,
+ "n_islem_x1": 1121,
+ "net_x1": -0.09482570018892233,
+ "net_x2": -0.22161087537322055,
+ "ort_r": -0.02584773018490756,
+ "parametreler": {
+  "hedef_yuzde": 0.25,
+  "hizli": 12,
+  "sinyal": 9,
+  "stop_yuzde": 0.05,
+  "yavas": 26
+ },
+ "pf_x1": 0.9580018156485888,
+ "pf_x2": 0.8244991774448218,
+ "r_enstruman": {
+  "ETHUSDT": -2.530209640506655,
+  "HYPEUSDT": -9.707675141849904,
+  "SOLUSDT": 2.9176309020258486,
+  "TRXUSDT": -10.039696028165054
+ },
+ "sinif": "kapanis__macd-hedef25-stop5-s0812",
+ "tf": "30m",
+ "yetersiz_ornek": false
+}

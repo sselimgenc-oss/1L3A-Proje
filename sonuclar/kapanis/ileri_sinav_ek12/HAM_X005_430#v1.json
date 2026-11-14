@@ -1,0 +1,43 @@
+{
+ "a_net_pozitif": false,
+ "asama": 1,
+ "b_kill_yok": true,
+ "bh_net_x2": -0.18720604291740606,
+ "c_al_tutu_gecti": true,
+ "donem_bas": "2025-11-08 00:00:00+00:00",
+ "donem_bit": "2026-11-07 00:00:00+00:00",
+ "hata": "",
+ "karar": "paper_cikar",
+ "kill_x1": 0,
+ "kill_x2": 0,
+ "kimlik": "HAM:X005:430#v1",
+ "long_only": true,
+ "max_dusus_x2": 0.037830849468612926,
+ "n_islem": 8,
+ "n_islem_x1": 8,
+ "net_x1": -0.03724034640858542,
+ "net_x2": -0.037830849468612926,
+ "ort_r": -0.3276411406695843,
+ "parametreler": {
+  "atr_k": 3.0,
+  "atr_n": 14,
+  "bb_n": 20,
+  "bb_std": 2.0,
+  "min_bant_alti_gun": 2
+ },
+ "pf_x1": 0.3883540587013437,
+ "pf_x2": 0.3780781184183033,
+ "r_enstruman": {
+  "ADAUSDT": 0.8632526397705078,
+  "BCHUSDT": -0.9812352657318115,
+  "BNBUSDT": -1.0231117010116577,
+  "BTCUSDT": -0.30076006054878235,
+  "DOGEUSDT": -0.5027005076408386,
+  "ETHUSDT": -1.0455796718597412,
+  "HYPEUSDT": -0.361176073551178,
+  "LINKUSDT": 0.7301815152168274
+ },
+ "sinif": "kapanis__bb-alt-ardisik-s0430",
+ "tf": "1d",
+ "yetersiz_ornek": true
+}

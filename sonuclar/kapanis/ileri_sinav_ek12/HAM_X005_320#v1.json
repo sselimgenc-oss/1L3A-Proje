@@ -1,0 +1,36 @@
+{
+ "a_net_pozitif": false,
+ "asama": 1,
+ "b_kill_yok": false,
+ "bh_net_x2": null,
+ "c_al_tutu_gecti": null,
+ "donem_bas": "2025-11-08 00:00:00+00:00",
+ "donem_bit": "2026-11-07 00:00:00+00:00",
+ "hata": "",
+ "karar": "paper_cikar",
+ "kill_x1": 1,
+ "kill_x2": 1,
+ "kimlik": "HAM:X005:320#v1",
+ "long_only": false,
+ "max_dusus_x2": 0.3019305768863367,
+ "n_islem": 736,
+ "n_islem_x1": 840,
+ "net_x1": -0.30551781839088377,
+ "net_x2": -0.29596099154187516,
+ "ort_r": -0.037728898124521,
+ "parametreler": {
+  "n": 1
+ },
+ "pf_x1": 0.6298023279652654,
+ "pf_x2": 0.5873023399391417,
+ "r_enstruman": {
+  "BNBUSDT": -6.853738689533202,
+  "BTCUSDT": -7.3278832846554,
+  "ETHUSDT": -6.1699055538047105,
+  "SOLUSDT": -0.09272341430187225,
+  "XRPUSDT": -7.3242180773522705
+ },
+ "sinif": "kapanis__ardisik-kapanis-s0320",
+ "tf": "1d",
+ "yetersiz_ornek": false
+}

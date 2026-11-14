@@ -1,0 +1,41 @@
+{
+ "a_net_pozitif": false,
+ "asama": 2,
+ "b_kill_yok": true,
+ "bh_net_x2": -0.18720604291740606,
+ "c_al_tutu_gecti": true,
+ "donem_bas": "2025-11-08 00:00:00+00:00",
+ "donem_bit": "2026-11-07 00:00:00+00:00",
+ "hata": "",
+ "karar": "paper_cikar",
+ "kill_x1": 0,
+ "kill_x2": 0,
+ "kimlik": "HAM:B001:231#v1",
+ "long_only": true,
+ "max_dusus_x2": 0.004034851153991048,
+ "n_islem": 4,
+ "n_islem_x1": 4,
+ "net_x1": -0.0031750633978749887,
+ "net_x2": -0.004034851153991048,
+ "ort_r": -0.06974371755495667,
+ "parametreler": {
+  "bb_k": 2.0,
+  "bb_n": 20,
+  "buy_rsi": 30.0,
+  "rsi": 14,
+  "sell_rsi": 70.0,
+  "sl": 0.1,
+  "tema": 9
+ },
+ "pf_x1": 0.0076922813678065435,
+ "pf_x2": 0.0,
+ "r_enstruman": {
+  "ETHUSDT": -0.01582319848239422,
+  "HYPEUSDT": -0.01811746135354042,
+  "LINKUSDT": -0.08279668539762497,
+  "SOLUSDT": -0.1622375249862671
+ },
+ "sinif": "kapanis__rsi-macd-bb-tema-b0231",
+ "tf": "1h",
+ "yetersiz_ornek": true
+}

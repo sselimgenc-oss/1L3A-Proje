@@ -1,0 +1,39 @@
+{
+ "a_net_pozitif": true,
+ "asama": 1,
+ "b_kill_yok": true,
+ "bh_net_x2": -0.18720604291740606,
+ "c_al_tutu_gecti": true,
+ "donem_bas": "2025-11-08 00:00:00+00:00",
+ "donem_bit": "2026-11-07 00:00:00+00:00",
+ "hata": "",
+ "karar": "gecti",
+ "kill_x1": 0,
+ "kill_x2": 0,
+ "kimlik": "HAM:X005:192#v1",
+ "long_only": true,
+ "max_dusus_x2": 0.0,
+ "n_islem": 2,
+ "n_islem_x1": 2,
+ "net_x1": 0.10346515182948135,
+ "net_x2": 0.09961713646941783,
+ "ort_r": 3.4125568866729736,
+ "parametreler": {
+  "ar_cikis": 130.0,
+  "ar_giris": 75.0,
+  "ar_n": 26,
+  "ma1": 5,
+  "ma2": 10,
+  "ma3": 30,
+  "sl": 0.068
+ },
+ "pf_x1": null,
+ "pf_x2": null,
+ "r_enstruman": {
+  "BNBUSDT": 3.703645706176758,
+  "TRXUSDT": 3.1214680671691895
+ },
+ "sinif": "kapanis__ma-dizilim-ar-s0192",
+ "tf": "1d",
+ "yetersiz_ornek": true
+}
