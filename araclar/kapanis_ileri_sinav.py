@@ -46,6 +46,7 @@ KAPANIS = KOK / "sonuclar" / "kapanis"
 CIKTI = KAPANIS / "ileri_sinav"
 ISARET = ".kilit_acildi"
 GEREKCE = "kapanış ek 10 tek seferlik ileri dönem sınavı (kullanıcı kararı 2026-11-14)"
+ISCI = 1
 DONEM_BAS = sabit.HOLDOUT_BAS                      # 2025-11-08 00:00 UTC
 MIN_ISLEM = 20
 KAYITLAR = (("HAM:X005:664#v1", 1), ("HAM:X005:705", 1), ("HAM:X005:301#v1", 1), ("HAM:X005:138#v3", 1),
@@ -69,6 +70,28 @@ def kayitlar_ek11() -> tuple:
         d = _pd.read_csv(KAPANIS / f"sonuc_asama{asama}.csv")
         out += [(k, asama) for k in d.loc[d["paper_adayi"] == True, "kimlik"] if k not in ek10]  # noqa: E712
     return tuple(out)
+
+
+def kayitlar_ek12() -> tuple:
+    """Ek 12: iki aşamanın dondurulmuş listelerindeki TÜM kayıtlar, ek 10 + ek 11 (41 paper adayı) hariç. -> (kayıtlar, portföy_dışı)."""
+    haric = {k for k, _ in KAYITLAR} | {k for k, _ in kayitlar_ek11()}
+    out, pf_disi = [], []
+    for asama, yol in LISTELER.items():
+        for s in kk.liste_oku(Path(yol)):
+            if s["kimlik"] in haric or s["durum"] != "KOSULACAK":
+                continue
+            _, pf = kl.sinif_coz(s["sinif"], s["modul"])
+            (pf_disi if pf else out).append((s["kimlik"], asama))
+    return tuple(out), tuple(pf_disi)
+
+
+def _isci(arg):
+    s, bas = arg
+    try:
+        return kayit_kos(s, bas=bas)
+    except Exception as e:  # noqa: BLE001
+        return {"kimlik": s["kimlik"], "asama": s.get("asama"), "sinif": s["sinif"], "tf": s["tf"], "karar": "HATA",
+                "hata": f"{type(e).__name__}: {e}"}
 
 
 def kayit_satirlari(kayitlar=KAYITLAR, listeler=None, dogrula: bool = True) -> list:
@@ -278,12 +301,20 @@ def kos(satirlar: list, cikti: Path = CIKTI, tablo: Path = kk.TABLO, veri_al=Non
     Path(cikti).mkdir(parents=True, exist_ok=True)
     (Path(cikti) / ISARET).write_text(f"{datetime.now(timezone.utc).isoformat()}\n{GEREKCE}\n", encoding="utf-8")   # veri açılmadan ÖNCE
     sonuclar = []
-    for s in satirlar:
-        try:
-            sonuclar.append(kayit_kos(s, tablo, veri_al, ham_fn, bas))
-        except Exception as e:  # noqa: BLE001 — kayıt HATA olarak yazılır; sınav yeniden koşulmaz
-            sonuclar.append({"kimlik": s["kimlik"], "asama": s.get("asama"), "sinif": s["sinif"], "tf": s["tf"],
-                             "karar": "HATA", "hata": f"{type(e).__name__}: {e}"})
+    if ISCI > 1 and veri_al is None and ham_fn is None:
+        import multiprocessing as mp
+        with mp.get_context("fork").Pool(ISCI) as havuz:
+            for r in havuz.imap(_isci, [(s, bas) for s in satirlar], chunksize=1):
+                sonuclar.append(r)
+                kk.atomik_yaz(Path(cikti) / f"{kk.guvenli(r['kimlik'])}.json", r)
+                print("[ileri]", r["kimlik"], r.get("karar"), flush=True)
+    else:
+        for s in satirlar:
+            try:
+                sonuclar.append(kayit_kos(s, tablo, veri_al, ham_fn, bas))
+            except Exception as e:  # noqa: BLE001 — kayıt HATA olarak yazılır; sınav yeniden koşulmaz
+                sonuclar.append({"kimlik": s["kimlik"], "asama": s.get("asama"), "sinif": s["sinif"], "tf": s["tf"],
+                                 "karar": "HATA", "hata": f"{type(e).__name__}: {e}"})
     sonuclari_yaz(sonuclar, cikti)
     return sonuclar
 
@@ -294,9 +325,18 @@ def main(argv=None) -> int:
     ap.add_argument("--kuru", action="store_true", help="holdout okumadan yalnız kurulum/çözümleme kontrolü")
     ap.add_argument("--cikti", default=None)
     ap.add_argument("--ek11", action="store_true", help="ek 11: kalan 35 paper adayı (ek 10'daki 6 hariç), ayrı çıktı ve gerekçe")
+    ap.add_argument("--ek12", action="store_true", help="ek 12: kalan TÜM kayıtlar (41 paper adayı hariç; portföy kapsam dışı), bilgi amaçlı")
+    ap.add_argument("--isci", type=int, default=1)
     a = ap.parse_args(argv)
-    global GEREKCE
-    if a.ek11:
+    global GEREKCE, ISCI
+    ISCI = a.isci
+    if a.ek12:
+        GEREKCE = "kapanış ek 12 ileri dönem sınavı, kalan tüm kayıtlar bilgi amaçlı (kullanıcı kararı 2026-11-14)"
+        a.cikti = a.cikti or str(KAPANIS / "ileri_sinav_ek12")
+        kay, pf_disi = kayitlar_ek12()
+        print(f"[ek12] {len(kay)} kayıt; portföy kapsam dışı {len(pf_disi)}: {[k for k, _ in pf_disi]}")
+        satirlar = kayit_satirlari(kay)
+    elif a.ek11:
         GEREKCE = "kapanış ek 11 ileri dönem sınavı, kalan paper adayları (kullanıcı kararı 2026-11-14)"
         a.cikti = a.cikti or str(KAPANIS / "ileri_sinav_ek11")
         satirlar = kayit_satirlari(kayitlar_ek11())
