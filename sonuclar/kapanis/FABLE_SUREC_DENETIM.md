@@ -27,3 +27,11 @@
 - Çift koşu YOK: A1 için tek süreç (pid 8645, `--tf-haric 5m,15m,30m`), A2 için tek ana süreç (13942) + 3 işçi; zincir betiği süreç listesinde yok. Toplam 4 yoğun süreç / 4 çekirdek.
 - Kapı bayrakları (yeni 20 A2 kaydı, k1/k2/k3a/k3b/k3/k4/k5 yeniden hesaplandı, B=100000, gecersiz_oran 0): 1 görünür fark, HAM:B001:817#v1 k1=True iken JSON'da pf_x2=null (3 işlem, kayıp yok → PF sonsuz, JSON'a null yazılmış). Koddaki karar doğru olabilir, sonuç değişmez (k2 3<200 ile kalıyor); raporda PF "sonsuz/tanımsız" diye gösterilmeli. Diğer 19 kayıt uyumlu.
 - Kapı 6 (yeni 20): p<=0,05 17, bunların 11'i T<0; k1–5 VE p<=0,05: 0. Önceki teşhisle aynı yön (1h'de kapı 6 ayırt etmiyor). Sonuç: DURDUR gerektiren bulgu yok.
+
+## 02:12 UTC
+- Ek 9 uygulaması DOĞRU (A1, 01:56'dan beri koşulan 26 kısa TF kaydı): hepsi k1–5'ten en az birini kaçırmış, hepsi `ATLANDI_K1_5`, p=1; uzun TF'de ATLANDI_K1_5 yok. k1–5'in hepsini geçen kısa TF kaydı henüz HİÇ yok → "geçen kapı 6 alır" yolu canlıda henüz sınanmadı (ilk geçen kayıtta bakılmalı).
+- Tutarsızlık (ciddi değil): HAM:X005:15#v1 (5m, A1) ek 9 öncesinden (13 Kas 15:57) kalma; k1–5'i geçmediği hâlde kapı 6 almış, p=1e-5. Sonuç değişmez (zaten eleniyor) ama tabloda diğer kısa TF'lerle aynı görünmesi için ya p=1/ATLANDI'ya çevrilmeli ya dipnot düşülmeli. Ayrıca `kosu_asama1/_kismi/` içinde 19:27–19:36'dan kalma bayat X005:16, X005:18 klasörleri var.
+- YENİ HATA 1 (A2): HAM:V001:225#v1 (1h) "desteklenmeyen çıkış (rastgele giriş testi yok): stop_sonrasi_bekleme_mum" → durum HATA, p=1. Çökme değil, kontrollü; raporda "test edilemedi" diye ayrı sayılmalı, "başarısız" diye değil. A1'de yeni hata 0 (kosu.log'daki 7 eski).
+- İlerleme: A1 347/365, kalan 18'in hepsi 5m; hız ~26 kayıt/14 dk → ~10 dk (kapı 6 alan çıkarsa uzar). A2 76/96; kalan 18×5m + 1×30m + 1×1h. A2 kısa TF koşusu henüz BAŞLAMADI (A2 süreci hâlâ `--tf-haric`) → A1 bitince ayrıca başlatılmalı, ~15 dk daha.
+- İzlenecek: A2'nin son uzun TF kaydı HAM:B001:842 (1h) 01:43'ten beri sürüyor, `_kismi`'de tek dosya (ADAUSDT, 01:52), 19 dk'dır yenisi yok; işçi %99 CPU'da, yani çalışıyor ama yavaş. 02:30'a kadar ilerlemezse takılma say.
+- Çift koşu YOK: A1 (pid 15650, `--k6-on-eleme-tf`, 3 işçi) ve A2 (pid 13942, `--tf-haric`, 3 işçi, yalnız 1'i aktif) ayrı listeler; yük ort. 4,2 / 4 çekirdek. DURDUR gerektiren bulgu yok.
