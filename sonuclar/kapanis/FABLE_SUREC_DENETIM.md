@@ -35,3 +35,11 @@
 - İlerleme: A1 347/365, kalan 18'in hepsi 5m; hız ~26 kayıt/14 dk → ~10 dk (kapı 6 alan çıkarsa uzar). A2 76/96; kalan 18×5m + 1×30m + 1×1h. A2 kısa TF koşusu henüz BAŞLAMADI (A2 süreci hâlâ `--tf-haric`) → A1 bitince ayrıca başlatılmalı, ~15 dk daha.
 - İzlenecek: A2'nin son uzun TF kaydı HAM:B001:842 (1h) 01:43'ten beri sürüyor, `_kismi`'de tek dosya (ADAUSDT, 01:52), 19 dk'dır yenisi yok; işçi %99 CPU'da, yani çalışıyor ama yavaş. 02:30'a kadar ilerlemezse takılma say.
 - Çift koşu YOK: A1 (pid 15650, `--k6-on-eleme-tf`, 3 işçi) ve A2 (pid 13942, `--tf-haric`, 3 işçi, yalnız 1'i aktif) ayrı listeler; yük ort. 4,2 / 4 çekirdek. DURDUR gerektiren bulgu yok.
+
+## 03:12 UTC
+- A1 TAMAMLANDI: 365/365 JSON, 365 tekil kimlik, bozuk dosya yok, durum 365 TAMAM / 0 HATA (7 eski hata `_hata_v1/`'de, düzeltilmişleri koşulmuş). k3=k3a∧k3b 0 uyumsuz.
+- Ek 9 (A1 kısa TF 47 kaydın tamamı): 45'i k1–5'ten kalıp `ATLANDI_K1_5`, p=1; k1–5'i geçen tek kayıt HAM:X005:576#v1 (5m) kapı 6 almış (p=1e-5) → "geçen kapı 6 alır" yolu artık canlıda doğrulandı. Tek istisna yine HAM:X005:15#v1 (ek 9 öncesi, kalmış ama kapı 6 almış; sonucu değiştirmez, dipnot gerek). Uzun TF'de ATLANDI yok. `kosu_asama1/_kismi/`'de 13 Kas'tan bayat X005:16, X005:18 klasörleri duruyor (zararsız).
+- A2: 84/96, 83 TAMAM + 1 HATA (HAM:V001:225#v1, bilinen "desteklenmeyen çıkış"; yeni hata yok). Kısa TF 8 kayıt: 5 ATLANDI_K1_5 (p=1), 3'ü (B001:205/558/561, 5m) k1–5'i geçip kapı 6 almış, p=1e-5: bayrak/durum tutarlı. Kalan 11 kısa TF + 842.
+- Çift koşu YOK: iki A2 süreci ayrık kümelerde (pid 16937 `--tf-haric 1h,4h,6h,1d` 2 işçi → yalnız kısa TF; pid 17183 `--tf-haric 5m,15m,30m` 1 işçi → yalnız 842); kosu2.log'da yinelenen kimlik yok; A1 süreci kalmadı. 3 yoğun süreç / 4 çekirdek.
+- UYARI (DURDUR değil): HAM:B001:842 çok yavaş: `_kismi`'de 13 semboldan 2'si bitti (ADA 01:52, BCH 02:21 → ~29 dk/sembol; kısa TF 673'te sembol 15–60 sn). 02:46'daki yeniden başlatmadan beri 25 dk'dır yeni dosya yok. Bu hızla ~5 saat daha (≈08:00). Bekleme/erteleme kararı kullanıcıya sorulmalı; A2 birleştirmesi bu kayıt olmadan eksik kalır.
+- Zincir: kısa TF A2 bitince `--birlestir` (varsayılan `--asama 1`) başlayacak; A1 tam olduğu için sorun yok, 842 ile aynı anda koşacak (CPU yeter). Sonuç: DURDUR gerektiren bulgu yok.
