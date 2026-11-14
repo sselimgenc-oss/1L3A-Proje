@@ -186,6 +186,8 @@ def test_alti_kayit_cozulur():
     assert {x["tf"] for x in s} == {"1d", "4h", "5m"}
 
 
+@pytest.mark.skipif(not ik.depo.mum_yolu("BTCUSDT", "5m").exists(),
+                    reason="yerel 5m mum verisi yok (veri/mumlar repoda değil; CI'da kuru mod veri dosyası denetimi yapılamaz)")
 def test_kuru_holdout_okumaz(monkeypatch, capsys):
     def yasak(*a, **k):
         raise AssertionError("kuru modda veri okunmamalı")
