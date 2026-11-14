@@ -1,0 +1,7 @@
+kimlik,asama,sinif,tf,yon,gun,dengeleme,sharpe_x1,sharpe_x2,net_x1,net_x2,max_dusus_x2,kill_x1,kill_x2,long_only,bh_net_x2,a_net_pozitif,b_kill_yok,c_al_tutu_gecti,karar,hata
+AYAR:pf__kesit_ls:d12b:kesit-ibs:ibs_k3_gunluk,1,pf__kesit_ls,1d,iki,363,258,-2.6813203734437017,-4.219956268783344,-0.2246005009278247,-0.28476010753490466,0.30276726642247953,0,1,False,nan,False,False,,paper_cikar,
+AYAR:pf__kesit_ls:d12b:kesit-orantili-agirlik:donus_orantili,1,pf__kesit_ls,1d,iki,363,66,1.8368346407104572,1.5779608236050695,0.21053902052296802,0.17725637134091388,0.06434156438510888,0,0,False,nan,True,True,,gecti,
+KOD:pf__v3-funding-1s-devam,1,pf__v3-funding-1s-devam,1h,iki,363,111,-10.272182383761148,-9.533020009155381,-0.30185602841150017,-0.3021493228140001,0.3021493228140001,1,1,False,nan,False,False,,paper_cikar,
+KOD:pf__v3-funding-kesit-decil-carry,1,pf__v3-funding-kesit-decil-carry,1d,iki,363,317,-0.5245879564977936,-2.0266476868134524,-0.06167827367514145,-0.20610193761976614,0.21306287164070314,0,0,False,nan,False,True,,paper_cikar,
+KOD:pf__v3-funding-z90-3gun,1,pf__v3-funding-z90-3gun,1h,iki,363,216,-0.18295430424146275,-1.3676588595818344,-0.04596365949651138,-0.22851873231907027,0.2741600076835095,0,0,False,nan,False,True,,paper_cikar,
+KOD:v3__donchian-ansambl-vol-hedef,1,pf__v3-donchian-ansambl,1d,long,363,325,-0.20995146432437334,-0.31969467100802945,-0.012526531817500963,-0.018266239783458427,0.04333680408791407,0,0,True,-0.18720604291740606,False,True,True,paper_cikar,
