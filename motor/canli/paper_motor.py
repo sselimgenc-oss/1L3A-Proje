@@ -47,7 +47,10 @@ NAN = float("nan")
 # Paper (= portföy çekirdeği) çıkış alanlarından YALNIZ bunları uygular. CikisAyarlari'ndaki diğer alanlar (stop_basamaklari, azalan_roi,
 # geri_cekilme_*, kar_rsi_*, elder_*, agresif_iz_*, stop_sonrasi_bekleme_mum ...) yalnız tek-sembol backtest motorundadır; paper'da
 # sessizce yok sayılırsa paper backtest'ten farklı işlem yapardı. Varsayılandan farklı bir değer = kurulumda açık hata (fail-closed).
-PAPER_CIKIS_ALANLARI = frozenset({"atr_iz_suren_k", "atr_periyot", "zaman_cikisi_mum", "sabit_r_hedefi", "basabas_r_esigi", "kismi"})
+# 2026-11-14 (kapanış turu paper adayları): azalan_roi + geri_cekilme_yuzde + geri_cekilme_min_kar_yuzde PaperMotor._karar_sinyal'de
+# uygulanır (backtest motoruyla AYNI semantik: yalnız kapanmış mumdan, çıkış sonraki açılışta). Risk/limit mantığına dokunmaz.
+PAPER_CIKIS_ALANLARI = frozenset({"atr_iz_suren_k", "atr_periyot", "zaman_cikisi_mum", "sabit_r_hedefi", "basabas_r_esigi", "kismi",
+                                  "azalan_roi", "geri_cekilme_yuzde", "geri_cekilme_min_kar_yuzde"})
 
 
 class PaperDesteklemiyorHatasi(ValueError):
@@ -263,6 +266,25 @@ class PaperMotor(_Motor):
                 k.s_cikis_l, k.s_cikis_s, k.s_zc, k.atr = _Yuva(False), _Yuva(False), _Yuva(), _Yuva()
                 k.s_gsk = _Yuva(False)
             self.tum_kollar.append(k)
+
+    def _karar_sinyal(self, kol, i, t) -> None:
+        """Portföy çekirdeğinin kararı + (yalnız ayarlıysa) azalan ROI / zirveden geri çekilme çıkışı. Öncelik backtest motoruyla aynı:
+        kill > günlük limit > sinyal > zaman > roi > geri çekilme (çekirdek önce çalışır; çıkış emri doluysa burada dokunulmaz).
+        Kâr/zirve yalnız KAPANMIŞ mumdan (kapanış ve girişten beri en yüksek/düşük); çıkış sonraki açılışta. Varsayılan ayarda (alanlar
+        boş) bu ek hiçbir şey yapmaz: mevcut stratejilerin davranışı değişmez."""
+        super()._karar_sinyal(kol, i, t)
+        ca = kol.cikis_ayarlari
+        if not (ca.azalan_roi or ca.geri_cekilme_yuzde):
+            return
+        p = self.acik.get(kol.kimlik)
+        if p is None or kol.cikis_emri is not None:
+            return
+        kar_c = cks.kar_yuzde(p.yon, float(p.giris), float(self.C[kol.sembol][i]))
+        if ca.azalan_roi and cks.azalan_roi_doldu(p.tutulan, kar_c, ca.azalan_roi):
+            kol.cikis_emri = "roi"
+        elif cks.geri_cekilme_doldu(cks.kar_yuzde(p.yon, float(p.giris), p.ekstrem), kar_c, ca.geri_cekilme_yuzde,
+                                    ca.geri_cekilme_min_kar_yuzde):
+            kol.cikis_emri = "geri_cekilme"
 
     def fiyat_serisi(self, s: str, idx: pd.DatetimeIndex, acilislar: np.ndarray):
         """Funding fiyatı için sembolün (en ince serinin) açılış fiyatları."""

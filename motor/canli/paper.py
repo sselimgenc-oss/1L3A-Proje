@@ -530,6 +530,10 @@ def canli_calistir(durum_dizini: Path, tohum_dizin: Optional[Path] = None, ayar_
     p.bildirim = bld.olay                      # teknik olaylar gönderilmez; sorun sürerse tek uyarı; sel koruması
     yuklendi = p.yukle(ayar_guncelle=ayar_guncelle)
     p.surec_basla(simdi, durum_dizini, yuklendi)         # kalp atışı + yeniden başlatma kesintisi (süresiyle `yeniden_baslatma` olayı)
+    if yuklendi and v2_modu and getattr(p, "yeni_hesaplar", None):
+        yeni_h = p.yeni_hesaplari_baslat(simdi)          # set'e eklenen kapanış hesapları SIFIRDAN açılır; mevcut hesaplara dokunulmaz
+        p.kaydet()
+        log.info("yeni hesaplar sıfırdan açıldı: %s", yeni_h)
     if not yuklendi:
         p.baslat(simdi)
         p.olay_ekle("baslangic", f"Paper başlatıldı, başlangıç sermayesi {p.ayarlar.baslangic_sermaye}", simdi)
