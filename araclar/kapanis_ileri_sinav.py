@@ -60,6 +60,17 @@ class TekKosuHatasi(RuntimeError):
 
 
 # ---------------------------------------------------------------- kayıt seçimi
+def kayitlar_ek11() -> tuple:
+    """Ek 11: aşama 1/2 sonuç tablolarındaki paper_adayi=True kayıtlar, ek 10'daki 6 hariç (sıra: tablo sırası)."""
+    import pandas as _pd
+    ek10 = {k for k, _ in KAYITLAR}
+    out = []
+    for asama in (1, 2):
+        d = _pd.read_csv(KAPANIS / f"sonuc_asama{asama}.csv")
+        out += [(k, asama) for k in d.loc[d["paper_adayi"] == True, "kimlik"] if k not in ek10]  # noqa: E712
+    return tuple(out)
+
+
 def kayit_satirlari(kayitlar=KAYITLAR, listeler=None, dogrula: bool = True) -> list:
     """6 kimliğin satırları (dondurulmuş listelerden; SHA doğrulanır). Bulunamayan/KOSULACAK olmayan/portföy kayıt -> hata."""
     listeler = listeler or LISTELER
@@ -281,9 +292,17 @@ def kos(satirlar: list, cikti: Path = CIKTI, tablo: Path = kk.TABLO, veri_al=Non
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description="Kapanış ek 10: tek seferlik ileri dönem sınavı (yeniden koşu/--zorla yok)")
     ap.add_argument("--kuru", action="store_true", help="holdout okumadan yalnız kurulum/çözümleme kontrolü")
-    ap.add_argument("--cikti", default=str(CIKTI))
+    ap.add_argument("--cikti", default=None)
+    ap.add_argument("--ek11", action="store_true", help="ek 11: kalan 35 paper adayı (ek 10'daki 6 hariç), ayrı çıktı ve gerekçe")
     a = ap.parse_args(argv)
-    satirlar = kayit_satirlari()
+    global GEREKCE
+    if a.ek11:
+        GEREKCE = "kapanış ek 11 ileri dönem sınavı, kalan paper adayları (kullanıcı kararı 2026-11-14)"
+        a.cikti = a.cikti or str(KAPANIS / "ileri_sinav_ek11")
+        satirlar = kayit_satirlari(kayitlar_ek11())
+    else:
+        a.cikti = a.cikti or str(CIKTI)
+        satirlar = kayit_satirlari()
     if a.kuru:
         rapor = kk.kuru(satirlar)
         for r in rapor:

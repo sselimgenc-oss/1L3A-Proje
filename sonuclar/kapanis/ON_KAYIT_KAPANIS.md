@@ -131,3 +131,9 @@ Not: 2025-11-08 sonrası dönem v2 turunda başka stratejiler için açıldı (t
 - **Tek koşu.** Sonuç ne olursa olsun yeniden koşu, ayar ya da evren değişikliği yok.
 - **Geçme ölçütü (her kayıt ayrı):** (a) maliyet ×2'de net getiri > 0, (b) %1,5 işlem riskiyle −%30 kill tetiklenmez, (c) long-only davranan kayıtlarda (işlemlerin tamamı long) aynı dönem, aynı 13 sembol, günlük dengeli eşit ağırlıklı al-tut net getirisinden (maliyet ×2) düşük olmamak. İşlem sayısı ve ortalama R raporlanır; az işlem (<20) "yetersiz örnek" etiketi alır ama (a)–(c) yine uygulanır.
 - **Sonuca bağlı karar (önceden):** (a) ya da (b)'yi geçemeyen kayıt paper listesinden çıkarılır. (c)'yi geçemeyen trend kaydı paper'da kalır ama "al-tutu geçemedi" etiketi alır. Geçen kayıt için bu sınav "gerekli, yeterli değil" sayılır; canlı şartı (12 hafta paper + kullanıcı onayı) değişmez.
+
+## Ön kayıt eki (11): ileri dönem sınavının kalan 35 paper adayına genişletilmesi — kullanıcı kararı, SAPMA
+
+Tarih: 2026-11-14. Kullanıcı, ek 10'un kapsamını kendisi belirlemek istemişti; lider soruyu yanlış anlayıp yalnız 6 kaydı koştu (lider hatası, kayda geçer). Kullanıcı kararıyla aynı sınav, ek 10 ile birebir aynı dönem, ölçüt ve sonuca bağlı kuralla, aşama 1 ve 2'nin kalan 35 paper adayına (`sonuc_asama1.csv` / `sonuc_asama2.csv` `paper_adayi=True`, ek 10'daki 6 kayıt hariç) uygulanır. Bu 35 kaydın sınav dönemindeki sonucu bu ek yazılırken görülmemiştir; ek 10'un 6 sonucu görülmüştür ve değişmez.
+- Tek koşu, ayrı çıktı dizini `ileri_sinav_ek11/`, kilit gerekçesi "kapanış ek 11 ...". Sonuç ne olursa olsun yeniden koşu yok.
+- Geçen kayıtlar otomatik olarak paper'a girmez; paper listesine ekleme ayrı kullanıcı kararıdır (Fable kopya/şüpheli notları dikkate alınarak).
