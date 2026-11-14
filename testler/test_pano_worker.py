@@ -106,3 +106,17 @@ def test_betik_secret_yalniz_degisince(tmp_path):
     log.unlink()
     r, log = _calistir(tmp_path, PANO_SIFRE=s)           # ikinci yayın: secret put yok
     assert r.returncode == 0 and "secret put" not in log.read_text() and "deploy" in log.read_text()
+
+
+def test_betik_kilitsiz_sifresiz_yayin(tmp_path):
+    """Kullanıcı kararı: PANO_KILITSIZ=1 ise şifre istenmez; Worker kilidi yüklenmez, secret put yok."""
+    r, log = _calistir(tmp_path, PANO_KILITSIZ="1")
+    assert r.returncode == 0, r.stderr
+    cagri = log.read_text()
+    assert "deploy" in cagri and "secret put" not in cagri
+    assert "ŞİFRESİZ" in r.stdout
+
+
+def test_betik_kilitsiz_baska_deger_kilitli_kalir(tmp_path):
+    r, log = _calistir(tmp_path, PANO_KILITSIZ="evet")
+    assert r.returncode != 0 and "PANO_SIFRE" in r.stderr and not log.exists()
