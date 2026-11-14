@@ -43,3 +43,9 @@
 - Çift koşu YOK: iki A2 süreci ayrık kümelerde (pid 16937 `--tf-haric 1h,4h,6h,1d` 2 işçi → yalnız kısa TF; pid 17183 `--tf-haric 5m,15m,30m` 1 işçi → yalnız 842); kosu2.log'da yinelenen kimlik yok; A1 süreci kalmadı. 3 yoğun süreç / 4 çekirdek.
 - UYARI (DURDUR değil): HAM:B001:842 çok yavaş: `_kismi`'de 13 semboldan 2'si bitti (ADA 01:52, BCH 02:21 → ~29 dk/sembol; kısa TF 673'te sembol 15–60 sn). 02:46'daki yeniden başlatmadan beri 25 dk'dır yeni dosya yok. Bu hızla ~5 saat daha (≈08:00). Bekleme/erteleme kararı kullanıcıya sorulmalı; A2 birleştirmesi bu kayıt olmadan eksik kalır.
 - Zincir: kısa TF A2 bitince `--birlestir` (varsayılan `--asama 1`) başlayacak; A1 tam olduğu için sorun yok, 842 ile aynı anda koşacak (CPU yeter). Sonuç: DURDUR gerektiren bulgu yok.
+
+## 2026-11-14 04:11 UTC
+- A2: 89/96 (88 TAMAM + 1 bilinen HATA V001:225; yeni hata yok, günlükte tek HATA satırı o). Son denetimden beri 5 yeni kayıt (B001:673/564/570/574/590, hepsi 5m): k1–5 true, `k6_durum=TAMAM`, B=100000, p=1e-5, `desteklenmeyen=[]`, geçersiz oran 0, kill 0 → bayrak/durum tutarlı; ek 9 doğru (k1–5 geçen kapı 6 almış, yeni ATLANDI yok). Kalan: 6 kısa TF (670 11/13 sembol, 573 4/13) + 842.
+- Çift koşu YOK: aynı iki ayrık süreç (pid 16937 kısa TF 2 işçi; pid 17183 yalnız 842), yük 3.1/4 çekirdek, günlükte yinelenen kimlik yok.
+- UYARI (DURDUR değil): 842 daha da yavaşladı: 4/13 sembol (BNB 03:21 → BTC 04:02 ≈ 41 dk/sembol); kalan 9 sembol ≈ 6 saat (≈10:00 UTC), önceki 08:00 tahmini tutmuyor. Bekle/ertele kararı kullanıcıya sorulmalı.
+- Not (doğrulanmadı): `r_enstruman` 673'te 13 sembol (HYPE dahil), 564/570/574/590'da 12 (HYPE yok). Muhtemelen işlemsiz sembol yazılmıyor; raporda "13 enstrüman" denmeden önce kodda teyit edilmeli. Sonuç: DURDUR gerektiren bulgu yok.
