@@ -120,3 +120,14 @@ Tarih: 2026-11-13. Kullanıcının "koşmadıklarımız arasında iyiler varsa?"
 - Ek 8'deki "koşulmaz" yerine: 5m/15m/30m kayıtları (aşama 1 ve 2) uzun TF'ler bittikten sonra **kapı 1–5 ile koşulur**. Kapı 6 (rastgele giriş testi, asıl süre maliyeti) yalnız kapı 1–5'in **hepsini** geçen kayıtlara uygulanır; geçmeyenler `ATLANDI_K1_5`, **p=1**.
 - Gerekçe: kapı 1–5'i geçmeyen bir kayıt hangi p ile olursa olsun birinci kapıyı geçemez; p=1 yazmak BH'yi yalnız daha temkinli yapar (diğer kayıtların eşiğini gevşetmez). v2'deki uygulamayla aynı.
 - Uzun TF kayıtları (ve ek 8'den önce biten kısa TF kayıtları) kapı 6'yı ön kayıttaki gibi koşulsuz alır. BH paydaları değişmez (365 / 96).
+
+## Ön kayıt eki (10): tek seferlik ileri dönem sınavı — kullanıcı kararı, SAPMA
+
+Tarih: 2026-11-14. Kullanıcı kararıyla ("tek seferlik sınav", paper listesi onaylandı). Kapanış turu sonuçları görüldükten SONRA yazıldı; bu sınav ön kayıtlı kanıt değildir, ayrı bir sapma kaydıdır. Ölçütler sınav verisi açılmadan yazılmıştır.
+Not: 2025-11-08 sonrası dönem v2 turunda başka stratejiler için açıldı (temiz holdout değil); bu 6 kayıt o dönemde hiç koşulmadı.
+
+- **Kapsam (6 kayıt, kullanıcının paper listesi):** HAM:X005:664#v1, HAM:X005:705, HAM:X005:301#v1, HAM:X005:138#v3 (aşama 1); HAM:B001:670#v1, HAM:B001:574#v1 (aşama 2). Aynı sınıf, aynı parametre, aynı TF, kripto13 evreni, aynı motor ve maliyet tablosu.
+- **Dönem:** 2025-11-08 00:00 UTC → mevcut en son kapanmış mum. Isınma için gösterge geçmişi bu tarihten önceki veriden okunabilir; işlem ve ölçüm yalnız dönem içinde.
+- **Tek koşu.** Sonuç ne olursa olsun yeniden koşu, ayar ya da evren değişikliği yok.
+- **Geçme ölçütü (her kayıt ayrı):** (a) maliyet ×2'de net getiri > 0, (b) %1,5 işlem riskiyle −%30 kill tetiklenmez, (c) long-only davranan kayıtlarda (işlemlerin tamamı long) aynı dönem, aynı 13 sembol, günlük dengeli eşit ağırlıklı al-tut net getirisinden (maliyet ×2) düşük olmamak. İşlem sayısı ve ortalama R raporlanır; az işlem (<20) "yetersiz örnek" etiketi alır ama (a)–(c) yine uygulanır.
+- **Sonuca bağlı karar (önceden):** (a) ya da (b)'yi geçemeyen kayıt paper listesinden çıkarılır. (c)'yi geçemeyen trend kaydı paper'da kalır ama "al-tutu geçemedi" etiketi alır. Geçen kayıt için bu sınav "gerekli, yeterli değil" sayılır; canlı şartı (12 hafta paper + kullanıcı onayı) değişmez.
