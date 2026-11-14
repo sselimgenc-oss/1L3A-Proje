@@ -38,7 +38,8 @@ sudo -u l3a git branch --show-current # dal adını da not edin
 ```
 **3. Yeni kodu çekin**
 ```bash
-sudo -u l3a git pull --ff-only
+git pull --ff-only                    # root ile (GitHub anahtarı root'ta)
+chown -R l3a:l3a /opt/1l3a            # dosyaların sahibi yine l3a olsun (paper yazabilsin)
 ```
 **4. Betiği çalıştırın** (durum imzasını kontrol eder, ön kontrol yapar, paper'ı başlatır, 3 dk sonra kontrol çıktısı yazar)
 ```bash
