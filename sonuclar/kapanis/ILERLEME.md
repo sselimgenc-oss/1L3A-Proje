@@ -254,3 +254,9 @@ Talimat: `KODLAMA_TALIMATI.md`. Girdi: `kod_girdi/` (birleştirme betiğinin nih
 - Fable saatlik süreç denetimi (FABLE_SUREC_DENETIM.md) 7 HATA buldu, hepsi altyapı: (a) 4 kayıtta `cikis_ayarlari` sözlük→`CikisAyarlari` dönüşümü eksik (`kapanis_kosu_listesi.strateji_kur`), (b) 3 funding pf kaydında kapı 6 yoluna `funding_orani` aktarılmıyordu (`kapanis_kosu.pf_rastgele_p`).
 - Ön kayıt gereği: eski HATA JSON'ları `kosu_asama1/_hata_v1/`'de korunur; 7 kayıt düzeltilmiş kodla yeniden koşuldu, JSON'larda `sonuc_sonrasi_duzeltme` alanı var. Raporda "sonuç sonrası" diye ayrıca gösterilecek.
 - Kapı 6 teşhisi (TESHIS_KAPI6.md): simülatörde hata yok; negatif T ile küçük p birlikte çıkabilir (rastgele giriş maliyet sürüklenmesi); asıl süzgeç kapı 1–5 + BH + ikinci kapı.
+
+## 2026-11-14 — Kapanış koşusu tamamlandı
+- Aşama 1: 365/365; BH k*=187; birinci kapı 36; ikinci kapı 31 paper adayı. Fable (HAKEM_FABLE_SONUC_ASAMA1.md): hata yok; 31 aday tek faktör (kripto long trend, 1d); güçlü 0, orta 8; temsilci 664, 705, 301, 138 (+481).
+- Aşama 2: 96/96 (1 bilinen HATA V001:225); BH k*=73; birinci kapı 16; ikinci kapı 10. Fable (HAKEM_FABLE_SONUC_ASAMA2.md): hata yok, 5m maliyet doğru; 10 aday = 2 fikir (Robotic çöküş-sonrası dip alımı ailesi + aşama 1 trend kopyaları); dip ailesi trend ailesiyle düşük korelasyonlu.
+- Fable'ın önerdiği nihai paper listesi (en çok 6): 664, 705, 301, 138 + B001:670, B001:574. Karar kullanıcıda (paper seçimi, ölçütlerin önceden yazılması, olası holdout sınavı).
+- Kozmetik: ozet_asama2.md başlığı "aşama 1" yazıyor (koşucu şablonu).
