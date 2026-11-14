@@ -1,0 +1,51 @@
+{
+ "a_net_pozitif": true,
+ "asama": 1,
+ "b_kill_yok": true,
+ "bh_net_x2": null,
+ "c_al_tutu_gecti": null,
+ "donem_bas": "2025-11-08 00:00:00+00:00",
+ "donem_bit": "2026-11-07 00:00:00+00:00",
+ "hata": "",
+ "karar": "gecti",
+ "kill_x1": 0,
+ "kill_x2": 0,
+ "kimlik": "HAM:X005:792",
+ "long_only": false,
+ "max_dusus_x2": 0.11120712140346362,
+ "n_islem": 91,
+ "n_islem_x1": 91,
+ "net_x1": 0.07213339129770335,
+ "net_x2": 0.0560316833969936,
+ "ort_r": 0.07793369535152074,
+ "parametreler": {
+  "atr_k": 3.0,
+  "cikis_ayarlari": {
+   "zaman_cikisi_mum": 12
+  },
+  "hizli": 12,
+  "ma_tipi": "ema",
+  "short": true,
+  "yavas": 26
+ },
+ "pf_x1": 1.341377948507447,
+ "pf_x2": 1.2778061486761172,
+ "r_enstruman": {
+  "ADAUSDT": -1.8747180104255676,
+  "BCHUSDT": -0.33812202513217926,
+  "BNBUSDT": -0.0451072845607996,
+  "BTCUSDT": 0.42474836856126785,
+  "DOGEUSDT": 1.4981598556041718,
+  "ETHUSDT": 1.7945034354925156,
+  "HYPEUSDT": 0.1474754363298416,
+  "LINKUSDT": 0.40150779485702515,
+  "SOLUSDT": 2.0396115332841873,
+  "TRXUSDT": -0.8430617898702621,
+  "XLMUSDT": -1.7561435848474503,
+  "XRPUSDT": 0.7814961373806,
+  "ZECUSDT": 4.861616410315037
+ },
+ "sinif": "swing__ma-kesisim",
+ "tf": "1d",
+ "yetersiz_ornek": false
+}
