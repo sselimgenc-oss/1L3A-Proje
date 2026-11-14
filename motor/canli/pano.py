@@ -739,7 +739,8 @@ def _poz_satiri(p: dict) -> str:
 
 ETIKET_GOSTERIM = {"dogrulandi": ("doğrulandı", "iyi", "Resmi v2 holdout set kapısını geçti (gerekli, yeterli değil: asıl sınav paper)."),
                    "iyi_gorundu": ("iyi göründü", "uyari", "Sonuç sonrası keşif — KANIT DEĞİL (holdout sonucu görüldükten sonra seçildi)."),
-                   "kapanis_aday": ("kapanış adayı", "uyari", "Kapanış turu paper adayı — ileri dönem sınavı gerekli, yeterli değil.")}
+                   "kapanis_aday": ("kapanış adayı", "uyari", "Kapanış turu paper adayı — ileri dönem sınavı gerekli, yeterli değil."),
+                   "kapanis_aday_ek": ("kapanış adayı (ek)", "uyari", "Kapanış adayı — ileri dönem sınavından SONRA seçildi (sonuç sonrası seçim); 12 haftada canlı adayı olamaz, en fazla kapanis_aday'a yükselir.")}
 
 
 def _etiket_cipi(etiket) -> str:

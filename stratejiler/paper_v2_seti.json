@@ -2,14 +2,15 @@
   "surum": 1,
   "ad": "paper_v2",
   "tarih": "2026-11-10",
-  "kaynak": "DURUM.md lider günlüğü 2026-11-10 (KULLANICI onayı): paper seti = 10 strateji; 2026-11-14 (KULLANICI onayı): kapanış turunun 6 stratejisi eklendi (16 hesap)",
+  "kaynak": "DURUM.md lider günlüğü 2026-11-10 (KULLANICI onayı): paper seti = 10 strateji; 2026-11-14 (KULLANICI onayı): kapanış turunun 6 stratejisi eklendi (16 hesap); 2026-11-14 (KULLANICI onayı, sonuclar/kapanis/HAKEM_FABLE_PAPER_GENISLETME.md): 4 kapanis_aday_ek eklendi (20 hesap)",
   "s": 0.5,
   "baslangic_sermaye": 10000,
   "not": "Her strateji KENDİ sanal kasasında (tek başına tek kasa; v2 holdout ölçümüyle aynı): işlem başı risk s x %1 = %0.5 (maliyet dahil), sert limitler kasa başına. Ayarlar v2 VARSAYILAN ayarlardır (motor/arastirma/v2/ham.py varsayilan_strateji / varsayilan_pf). Evren ve tf stratejiler/havuz_v2.csv satırından (tf/evren burada yinelenir ve havuzla uyuşmak zorundadır). Kapanış kayıtları (kaynak=kapanis, kimlik=...): sınıf+parametre+tf+evren dondurulmuş koşu listesinden (sonuclar/kapanis/kosu_listesi_asama{1,2}.csv, SHA-256 doğrulanır), strateji nesnesi backtest ile aynı kurucudan (araclar/kapanis_kosu_listesi.strateji_kur); her biri kendi kasası, aynı s ve başlangıç sermayesi. Portföy stratejisinde s, grup payı (ağırlık ölçeği) olarak uygulanır: holdout pf_net = prod(1 + s x günlük getiri) - 1 ile aynı mantık.",
   "etiketler": {
     "dogrulandi": "resmi v2 holdout set kapısını geçti (sonuclar/evren/v2/holdout/paper_girdisi.json); gerekli, yeterli değil: asıl sınav paper",
     "iyi_gorundu": "sonuç sonrası keşif — KANIT DEĞİL (sonuclar/evren/v2/holdout_kesif/holdout_kesif.csv); şansla beklenen ≈ 2.75 / 8",
-    "kapanis_aday": "kapanış turu paper adayı — ileri dönem sınavı gerekli, yeterli değil (sonuclar/kapanis/ileri_sinav/rapor.md; canlı şartı: 12 hafta paper + kullanıcı onayı)"
+    "kapanis_aday": "kapanış turu paper adayı — ileri dönem sınavı gerekli, yeterli değil (sonuclar/kapanis/ileri_sinav/rapor.md; canlı şartı: 12 hafta paper + kullanıcı onayı)",
+    "kapanis_aday_ek": "kapanış adayı — ileri dönem sınavından SONRA seçildi (sonuç sonrası seçim); 12 haftada canlı adayı olamaz, en fazla kapanis_aday'a yükselir"
   },
   "stratejiler": [
     {"strateji": "dis__gauss-stoch-eth", "tf": "1d", "evren": "genel", "tur": "tek", "etiket": "dogrulandi"},
@@ -27,6 +28,10 @@
     {"kaynak": "kapanis", "kimlik": "HAM:X005:301#v1", "liste": "kosu_listesi_asama1.csv", "tf": "4h", "evren": "kripto13", "tur": "tek", "etiket": "kapanis_aday"},
     {"kaynak": "kapanis", "kimlik": "HAM:X005:138#v3", "liste": "kosu_listesi_asama1.csv", "tf": "1d", "evren": "kripto13", "tur": "tek", "etiket": "kapanis_aday"},
     {"kaynak": "kapanis", "kimlik": "HAM:B001:670#v1", "liste": "kosu_listesi_asama2.csv", "tf": "5m", "evren": "kripto13", "tur": "tek", "etiket": "kapanis_aday"},
-    {"kaynak": "kapanis", "kimlik": "HAM:B001:574#v1", "liste": "kosu_listesi_asama2.csv", "tf": "5m", "evren": "kripto13", "tur": "tek", "etiket": "kapanis_aday"}
+    {"kaynak": "kapanis", "kimlik": "HAM:B001:574#v1", "liste": "kosu_listesi_asama2.csv", "tf": "5m", "evren": "kripto13", "tur": "tek", "etiket": "kapanis_aday"},
+    {"kaynak": "kapanis", "kimlik": "HAM:X005:730#v2", "liste": "kosu_listesi_asama1.csv", "tf": "1d", "evren": "kripto13", "tur": "tek", "etiket": "kapanis_aday_ek"},
+    {"kaynak": "kapanis", "kimlik": "HAM:X005:259#v1", "liste": "kosu_listesi_asama1.csv", "tf": "1d", "evren": "kripto13", "tur": "tek", "etiket": "kapanis_aday_ek"},
+    {"kaynak": "kapanis", "kimlik": "HAM:X005:793#v1", "liste": "kosu_listesi_asama1.csv", "tf": "1d", "evren": "kripto13", "tur": "tek", "etiket": "kapanis_aday_ek"},
+    {"kaynak": "kapanis", "kimlik": "HAM:B001:538#v1", "liste": "kosu_listesi_asama2.csv", "tf": "6h", "evren": "kripto13", "tur": "tek", "etiket": "kapanis_aday_ek"}
   ]
 }

@@ -100,7 +100,7 @@ def islem_ozeti(h):
 # ---------------------------------------------------------------------------- set tanımı
 def test_set_10_strateji_etiketler_holdout_dosyalariyla_tutarli():
     s = v2.set_yukle()
-    assert len(s["stratejiler"]) == 16 and s["s"] == 0.5 and s["baslangic_sermaye"] == 10000      # 10 havuz + 6 kapanış (2026-11-14)
+    assert len(s["stratejiler"]) == 20 and s["s"] == 0.5 and s["baslangic_sermaye"] == 10000      # 10 havuz + 6 kapanış + 4 kapanış ek (2026-11-14)
     s = v2.onceki_set(s)                                                                         # holdout dosyalarıyla tutarlılık: ilk 10
     assert len(s["stratejiler"]) == 10
     et = {k["strateji"]: k["etiket"] for k in s["stratejiler"]}
@@ -138,7 +138,7 @@ def test_set_havuzla_uyusmazlik_acik_hata(tmp_path):
 def test_tanimlar_v2_varsayilan_ayar_ve_evren():
     from motor.arastirma.v2 import sabit
     tans = {t.kimlik: t for t in v2.tanimlari_yukle()}
-    assert len(tans) == 16                                                      # 10 havuz + 6 kapanış (2026-11-14)
+    assert len(tans) == 20                                                      # 10 havuz + 6 kapanış + 4 kapanış ek (2026-11-14)
     assert all(t.ayar == "varsayilan" for t in tans.values())
     assert tans["dis__ewo-ema-ofset"].tf == "15m" and tans["dis__e0v1en"].tf == "15m"
     assert tuple(tans["dis__ewo-ema-ofset"].evren) == sabit.evren_listesi("kripto") and len(tans["dis__ewo-ema-ofset"].evren) == 13
@@ -146,7 +146,7 @@ def test_tanimlar_v2_varsayilan_ayar_ve_evren():
     pf = tans["pf__sabit_sepet"]
     assert pf.kol == "portfoy" and pf.grup_payi == Decimal("0.5") and set(pf.evren) == {"BTCUSDT", "ETHUSDT", "SOLUSDT"}
     assert tans["dis__hma-atr-rider"].nesne.cikis_ayarlari.atr_iz_suren_k == 2.0       # desteklenen gelişmiş çıkış alanı
-    assert {t.etiket for t in tans.values()} == {"dogrulandi", "iyi_gorundu", "kapanis_aday"}
+    assert {t.etiket for t in tans.values()} == {"dogrulandi", "iyi_gorundu", "kapanis_aday", "kapanis_aday_ek"}
 
 
 def test_hesap_ayarlari_risk_yarim_yuzde_ve_sembol_maliyeti():

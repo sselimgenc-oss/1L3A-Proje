@@ -1,4 +1,4 @@
-"""Paper v2 seti (10 strateji, HER BİRİ KENDİ SANAL KASASINDA) — gerçek emir YOK, API anahtarı YOK.
+"""Paper v2 seti (20 strateji: 10 + 6 kapanış adayı + 4 kapanış ek adayı, HER BİRİ KENDİ SANAL KASASINDA) — gerçek emir YOK, API anahtarı YOK.
 
 Karar (kullanıcı onayı 2026-11-10, DURUM.md): paper seti = stratejiler/paper_v2_seti.json. Her strateji kendi 10.000 USD'lik
 kasasında koşar (v2 holdout "tek başına tek kasa" ölçümüyle aynı), böylece şanslı olanlar tek tek elenebilir. Etiketler:
@@ -9,7 +9,7 @@ bir kez örneklenir (`HesapPaper`);
 hepsi aynı veri kaynağını (CanliKaynak / TekrarKaynagi) paylaşır. `PaperKasalar` bunları sarar ve `Paper` ile aynı arayüzü sunar
 (servis döngüsü, durum yazıcısı, Telegram aynen çalışır). Sert limitler (işlem başı %1 maliyet dahil, toplam stop riski %5, brüt 3x,
 günlük -%3, kill -%20) HER HESABIN KENDİ PaperMotor'unda uygulanır; burada gevşetilen/aşılan bir şey yoktur. Üst düzey `durum/`
-dosyaları 10 hesabın TOPLAMIDIR (pano için; toplamda sert limit uygulanmaz, hesapların toplamı gösterilir); her hesabın tam dosya seti
+dosyaları 20 hesabın TOPLAMIDIR (pano için; toplamda sert limit uygulanmaz, hesapların toplamı gösterilir); her hesabın tam dosya seti
 `durum/hesaplar/<kimlik>/` altındadır.
 
 Risk ölçeği: işlem başı risk = s x %1 (s = 0.5 -> %0.5, maliyet dahil), holdout `strateji_olc` ile aynı. Portföy stratejisinde (pf__sabit_sepet)
@@ -49,8 +49,10 @@ HAVUZ_CSV = KOK / "stratejiler" / "havuz_v2.csv"
 TABLO_YOLU = KOK / "sonuclar" / "evren" / "v2" / "maliyet_tablosu_v2.csv"
 SET_ADI = "paper_v2"
 STATE_SURUM = 2
-ETIKETLER = ("dogrulandi", "iyi_gorundu", "kapanis_aday")
+ETIKETLER = ("dogrulandi", "iyi_gorundu", "kapanis_aday", "kapanis_aday_ek")
 KAPANIS_ETIKET = "kapanis_aday"                              # kapanış turu paper adayı — ileri dönem sınavı gerekli, yeterli değil
+KAPANIS_EK_ETIKET = "kapanis_aday_ek"                        # ileri dönem sınavından SONRA seçildi (sonuç sonrası seçim); canlı adayı olamaz
+KAPANIS_ETIKETLERI = (KAPANIS_ETIKET, KAPANIS_EK_ETIKET)
 KAPANIS_DIZIN = KOK / "sonuclar" / "kapanis"
 KAPANIS_LISTELER = ("kosu_listesi_asama1.csv", "kosu_listesi_asama2.csv")     # dondurulmuş koşu listeleri (+ .sha256)
 HOLDOUT_BAS = pd.Timestamp("2025-11-08", tz="UTC")           # sabit.HOLDOUT_BAS ile aynı (tests/uyum testi kontrol eder)
@@ -130,12 +132,12 @@ def set_yukle(yol: Path = SET_YOLU, havuz_yolu: Path = HAVUZ_CSV, kapanis_dizin:
         if k["etiket"] not in ETIKETLER:
             raise PaperV2Hatasi(f"{hesap_adi(k)}: etiket {k['etiket']!r} geçersiz ({ETIKETLER})")
         if kapanis_mi(k):
-            if k["etiket"] != KAPANIS_ETIKET:
-                raise PaperV2Hatasi(f"{hesap_adi(k)}: kapanış kaydının etiketi {KAPANIS_ETIKET!r} olmalı")
+            if k["etiket"] not in KAPANIS_ETIKETLERI:
+                raise PaperV2Hatasi(f"{hesap_adi(k)}: kapanış kaydının etiketi {KAPANIS_ETIKET!r} ya da {KAPANIS_EK_ETIKET!r} olmalı")
             kapanis_satiri(k, kapanis_dizin)
             continue
-        if k["etiket"] == KAPANIS_ETIKET:
-            raise PaperV2Hatasi(f"{hesap_adi(k)}: {KAPANIS_ETIKET!r} etiketi yalnız kapanış kaydına verilir")
+        if k["etiket"] in KAPANIS_ETIKETLERI:
+            raise PaperV2Hatasi(f"{hesap_adi(k)}: {k['etiket']!r} etiketi yalnız kapanış kaydına verilir")
         if k["tur"] not in ("tek", "pf"):
             raise PaperV2Hatasi(f"{k['strateji']}: tur 'tek' | 'pf' olmalı")
         if k["strateji"] not in havuz.index:
@@ -161,6 +163,28 @@ def onceki_set(s: dict) -> dict:
 
 def onceki_set_imzasi(s: dict) -> str:
     return set_imzasi(onceki_set(s))
+
+
+def set16(s: dict) -> dict:
+    """`kapanis_aday_ek` kayıtları ÇIKARILMIŞ set (= 2026-11-14 ilk eklemedeki 16'lı set)."""
+    return {**s, "stratejiler": [k for k in s["stratejiler"] if k["etiket"] != KAPANIS_EK_ETIKET]}
+
+
+def set16_imzasi(s: dict) -> str:
+    return set_imzasi(set16(s))
+
+
+def gecis_imzalari(s: dict) -> dict:
+    """İzinli tek seferlik geçiş: {kayıtlı imza: o imzalı setin DIŞINDA kalıp sıfırdan açılabilecek hesap adları}.
+    10'lu imza -> tüm kapanış hesapları (16 + ek); 16'lı imza -> yalnız `kapanis_aday_ek` hesapları. Başka her imza açık hatadır."""
+    kapanis_ad = {hesap_adi(k) for k in s["stratejiler"] if kapanis_mi(k)}
+    ek_ad = {hesap_adi(k) for k in s["stratejiler"] if k["etiket"] == KAPANIS_EK_ETIKET}
+    out = {}
+    if kapanis_ad:
+        out[onceki_set_imzasi(s)] = kapanis_ad
+    if ek_ad:
+        out[set16_imzasi(s)] = ek_ad
+    return out
 
 
 def fail_closed_kontrol(tanimlar: list) -> None:
@@ -296,7 +320,7 @@ def _birlestir_gunluk(seriler: list, baslangic: Decimal) -> dict:
 
 
 class ToplamMotor:
-    """10 hesabın toplamını `PaperMotor` benzeri salt-okunur görünümde sunar (paper_durum.olustur için). `yenile()` listeleri/toplamları
+    """20 hesabın toplamını `PaperMotor` benzeri salt-okunur görünümde sunar (paper_durum.olustur için). `yenile()` listeleri/toplamları
     yeniden kurar; hesapların hiçbirinin durumunu DEĞİŞTİRMEZ. Sert limitler burada UYGULANMAZ (hesap başına uygulanır)."""
 
     def __init__(self, ust: "PaperKasalar"):
@@ -365,10 +389,10 @@ class ToplamMotor:
 
 
 class PaperKasalar(Paper):
-    """10 bağımsız hesap; `Paper` arayüzünün servis/durum yazıcısının kullandığı alt kümesi. (Paper.__init__ BİLEREK çağrılmaz:
+    """20 bağımsız hesap; `Paper` arayüzünün servis/durum yazıcısının kullandığı alt kümesi. (Paper.__init__ BİLEREK çağrılmaz:
     tek hesap/tek motor varsayımı burada geçerli değildir; ortak kalp atışı/olay kodu miras alınır.)"""
 
-    butunluk_profili = "v2"             # guven.butunluk: v2 dosyaları + kayıt butunluk_kayit_v2_16.json
+    butunluk_profili = "v2"             # guven.butunluk: v2 dosyaları + kayıt butunluk_kayit_v2_20.json
 
     def __init__(self, tanimlar: list, kaynak: TekrarKaynagi, kurallar: dict, s: Optional[dict] = None,
                  durum_yolu: Optional[Path] = None, her_satir_kaydet: bool = False, tablo_yolu: Path = TABLO_YOLU,
@@ -470,12 +494,12 @@ class PaperKasalar(Paper):
                 f"--durum ile boş bir dizin verin.")
         yeni_adlar: list = []
         if d.get("set_imza") != set_imzasi(self.set_):
-            # TEK izinli geçiş: kayıt, kapanış kayıtları eklenmeden önceki 10'lu setin imzasını taşıyor (2026-11-14 kapanış paper adayları).
+            # TEK SEFERLİK izinli geçiş (2026-11-14): kayıt, 10'lu (kapanışsız) ya da 16'lı (kapanis_aday_ek'siz) setin imzasını taşıyor.
             # Mevcut hesaplar AYNEN yüklenir; kayıtta olmayan kapanış hesapları sıfırdan açılır. Başka her imza farkı açık hatadır.
-            kapanis_ad = {hesap_adi(k) for k in self.set_["stratejiler"] if kapanis_mi(k)}
-            if kapanis_ad and d.get("set_imza") == onceki_set_imzasi(self.set_):
+            izinli = gecis_imzalari(self.set_)
+            if d.get("set_imza") in izinli:
                 yeni_adlar = [k for k in self.hesaplar if k not in d["hesaplar"]]
-                if any(k not in kapanis_ad for k in yeni_adlar):
+                if any(k not in izinli[d["set_imza"]] for k in yeni_adlar):
                     raise PaperV2Hatasi(f"{yol}: kayıtta olmayan hesaplar yalnız kapanış kayıtları olabilir: {yeni_adlar}")
             else:
                 raise PaperV2Hatasi(f"{yol}: kayıtlı set imzası {d.get('set_imza')} != şimdiki {set_imzasi(self.set_)} "
@@ -544,7 +568,8 @@ def durum_yaz(p: PaperKasalar, kaynak, dizin: Path, simdi, servis=None, kaynak_a
     notlar.append(f"PAPER v2 SETİ: {len(p.hesaplar)} strateji, HER BİRİ KENDİ {float(p.set_['baslangic_sermaye']):,.0f} USD kasasında; üst düzey sayılar kasaların TOPLAMIDIR "
                   "(toplamda sert limit uygulanmaz; limitler her kasada ayrıdır, bkz. stratejiler[].hesap ve durum/hesaplar/<klasör>/). "
                   "'dogrulandi' = resmi holdout kapısını geçti; 'iyi_gorundu' = sonuç sonrası keşif, KANIT DEĞİL; "
-                  "'kapanis_aday' = kapanış turu paper adayı — ileri dönem sınavı gerekli, yeterli değil.")
+                  "'kapanis_aday' = kapanış turu paper adayı — ileri dönem sınavı gerekli, yeterli değil; "
+                  "'kapanis_aday_ek' = ileri dönem sınavından SONRA seçildi (sonuç sonrası seçim), canlı adayı olamaz.")
     o = pdr.olustur(p, simdi, kaynak_saglik=sag, olaylar=p.olaylar, uyarilar=p.uyarilar, servis=servis, kaynak=kaynak_adi,
                     veri_yok_notlari=notlar, veri_dizini=veri_dizini)
     for sj in o["stratejiler"]["stratejiler"]:

@@ -98,3 +98,26 @@ değişikliğe katılmamalı): `onkontrol`'e `kapanis_aday` etiketini reddeden s
 Kapanış koşuları (ve ileri dönem sınavı) her sembolü AYRI backtest etti; paper'da 13 sembol TEK 10.000 USD kasada (toplam risk tavanı %5 →
 aynı anda en çok 10 pozisyon; kaldıraç tavanı 3). Sinyaller aynı, ama eşzamanlı sinyallerde bazı girişler reddedilebilir; paper sonucu
 kapanış tablolarıyla birebir karşılaştırılmamalı. Mevcut 10 hesapla aynı kural, yeni bir sapma değil.
+
+## Ek: 16 → 20 denetimi
+
+Tarih: 2026-11-14. Kapsam: commit edilmemiş değişiklik (4 `kapanis_aday_ek` kaydı: HAM:X005:730#v2, 259#v1, 793#v1, HAM:B001:538#v1 → 20 hesap).
+**Sonuç: KOŞULLU ONAY** (kod tarafında engel yok; koşullar teslim/dağıtım düzeni).
+
+| # | Soru | Bulgu |
+|---|---|---|
+| 1 | Limit / kill / canlı emir yolu, `sonuclar/final/` | DEĞİŞMEDİ. `paper_motor.py` ve `sonuclar/final/` diff'te yok. `borsa/calistir.py`'deki tek değişiklik onkontrol'ün ret listesine `kapanis_aday_ek` eklenmesi (yalnız sıkılaştırma). |
+| 2 | Geçiş mantığı | GÜVENLİ. `gecis_imzalari`: 10'lu imza `985f914d0bb6b643` → yalnız 10 kapanış hesabı, 16'lı imza `4c22e27149b65a14` → yalnız 4 ek hesap sıfırdan açılabilir; başka her imza ve izinli küme dışı eksik hesap açık hata. Mevcut hesaplar `sozlukten_yukle` ile aynen. 16'lı imza HEAD'deki set dosyasıyla bağımsız doğrulandı; 20'li imza `be84a61831ca9bbc`. |
+| 3 | onkontrol `kapanis_aday_ek` reddi | VAR (`etiket in ("kapanis_aday", "kapanis_aday_ek")`), kuru/testnet dahil. |
+| 4 | 793 ve 538 paper = backtest | AYNI. `zaman_cikisi_mum` ve `azalan_roi` paper motorunun desteklediği alanlar (fail-closed geçiyor); gerçek sınıflarla sentetik mumda paper/backtest işlem eşleşmesi testi 10 kapanış stratejisinin hepsinde geçiyor (6h dahil). |
+| 4b | 6h tohum geçmişi | DÜŞÜK RİSK. Tohum yoksa Binance REST'ten ~1500 bar (375 gün) çekilir; strateji SMA20/RSI14 kullanıyor, ısınma fazlasıyla yeter. Tohum dizininde 5m varsa 6h zaten oradan türetilir. Not: `PENCERE` sözlüğünde "6h" anahtarı yok, canlıda varsayılan 1500 devreye giriyor (çalışır, ama açık yazılması daha temiz). |
+| 5 | Deploy betiği ve adımlar | DOĞRU. İmzalar kodla birebir; 10/16 dışı imzada başlatmaz, 20 ise çıkar; önce kopya yedek; `git pull` yapmaz; gizli anahtar yok. Geri dönüş bölümü "20'li kayıt eski koda yüklenmez, yedeği geri koy" diyor (doğru). |
+| 6 | Testler | `pytest testler/test_paper_v2*.py testler/test_canli_borsa*.py` → 121 geçti, 0 hata. `python -m motor.canli.guven` → genel: eslesti. |
+
+### Koşullar
+1. `stratejiler/butunluk_kayit_v2_20.json` şu an git'te İZLENMİYOR; kodla AYNI commit'e girmeli. Girmezse sunucuda bütünlük "kayit_yok" görünür.
+2. Betik, durum zaten 20 hesaplıysa paper'ı durdurmuş olarak çıkıyor (0. aşamada durdurup 2. aşamada `exit 0`). Tehlikesiz ama paper kapalı kalır: ya o dalda `systemctl start` yapılsın ya da adımlar dosyasında "bu mesajı görürseniz start komutunu çalıştırın" açıkça yazsın (mesaj betikte var, dosyada da olsun).
+
+### Öneriler (koşul değil)
+- `PENCERE`'ye `"6h": 1500` açıkça eklenebilir (davranış değişmez; tekrar modundaki `kasalar_kur` 6h'de pencere uygulamıyor, canlı 1500 uyguluyor — küçük tutarsızlık).
+- onkontrol'ün `kapanis_aday_ek` reddi testle korunuyor (`testler/test_paper_v2_kapanis.py`, 4 ek kimlik döngüde); ek iş gerekmez.
