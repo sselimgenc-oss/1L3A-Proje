@@ -19,3 +19,11 @@
 - KOD:v3__donchian-ansambl-vol-hedef TAKILMAMIŞ: `_kismi/.../a2/sharpe.npy` 45 sn'de 7125 → 7150 (hedef 10000, ~2000/saat) → ~85 dk kaldı (≈01:40). a1 (B=500) p<=0,02 çıktığı için ikinci aşamada; yavaşlık pf simülasyonunun doğası.
 - UYARI (DURDUR değil): zincir betiği A1 bitince `--asama 2 --isci 4`'ü yeniden başlatacak; A2 zaten ayrı süreçte (3 işçi) koşuyor ve koşucuda kilit yok (yalnız "JSON var mı" bakıyor). İkisi çakışırsa süren kayıtlar çift koşulur, aynı `_kismi` dizinine yazılır, CPU 7 süreç/4 çekirdek olur. Sonuç tohumlu olduğundan değişmemeli ama kısmi dosya bozulma riski var: A1 bitmeden zincirin 2. adımı çıkarılmalı ya da A2 bitene kadar bekletilmeli. Kısa TF adımlarında `--k6-on-eleme-tf 5m,15m,30m` bayrağı zincirde mevcut (doğrulandı).
 - Sonuç: DURDUR gerektiren bulgu yok.
+
+## 2026-11-14 01:12 UTC
+- İlerleme A1: 318/365 (uzun TF'de kalan tek kayıt donchian pf). A2: 67/96 (uzun TF 67/77; son ~60 dk 20 kayıt, 3 işçi) → kalan 10 kayıt ~30–40 dk.
+- Donchian TAKILMAMIŞ: `a2/sharpe.npy` 7150 → 9100/10000 (57 dk'da ~1950, hız sabit), dosya taze → ~25–30 dk kaldı (≈01:40).
+- HATA: A1 0, A2 0 (yeni 20 kaydın tümü TAMAM; kosu2.log'da hata satırı yok; kosu.log'daki 7 eski, düzeltilmiş).
+- Çift koşu YOK: A1 için tek süreç (pid 8645, `--tf-haric 5m,15m,30m`), A2 için tek ana süreç (13942) + 3 işçi; zincir betiği süreç listesinde yok. Toplam 4 yoğun süreç / 4 çekirdek.
+- Kapı bayrakları (yeni 20 A2 kaydı, k1/k2/k3a/k3b/k3/k4/k5 yeniden hesaplandı, B=100000, gecersiz_oran 0): 1 görünür fark, HAM:B001:817#v1 k1=True iken JSON'da pf_x2=null (3 işlem, kayıp yok → PF sonsuz, JSON'a null yazılmış). Koddaki karar doğru olabilir, sonuç değişmez (k2 3<200 ile kalıyor); raporda PF "sonsuz/tanımsız" diye gösterilmeli. Diğer 19 kayıt uyumlu.
+- Kapı 6 (yeni 20): p<=0,05 17, bunların 11'i T<0; k1–5 VE p<=0,05: 0. Önceki teşhisle aynı yön (1h'de kapı 6 ayırt etmiyor). Sonuç: DURDUR gerektiren bulgu yok.
