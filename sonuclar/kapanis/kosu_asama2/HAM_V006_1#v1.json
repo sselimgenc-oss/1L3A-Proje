@@ -1,0 +1,51 @@
+{
+ "analiz_bas": "2019-07-05 00:00:00+00:00",
+ "bh_sharpe_x2": null,
+ "durum": "TAMAM",
+ "evren": "kripto13",
+ "hata": "",
+ "k1": false,
+ "k2": true,
+ "k3": false,
+ "k3a": false,
+ "k3b": false,
+ "k4": false,
+ "k5": true,
+ "k6": {
+  "B": 100000,
+  "T": -6606.427363569594,
+  "desteklenmeyen": [],
+  "gecersiz_oran": 0.0,
+  "n_islem": 53282,
+  "p": 9.99990000099999e-06,
+  "tohum": 1870115754
+ },
+ "k6_durum": "TAMAM",
+ "katman": "K3",
+ "kill_x1": 1,
+ "kill_x2": 1,
+ "kimlik": "HAM:V006:1#v1",
+ "long_only": false,
+ "n_islem_x1": 296,
+ "n_islem_x2": 248,
+ "net_x1": -0.10678296169220058,
+ "net_x2": -0.23188171475127495,
+ "p": 9.99990000099999e-06,
+ "pf_x1": 0.934700870214776,
+ "pf_x2": 0.8264963029783163,
+ "r_enstruman": {
+  "BNBUSDT": -8.096611194312572,
+  "BTCUSDT": 2.5704635307192802,
+  "ETHUSDT": -7.736433133482933,
+  "XRPUSDT": -7.177159560844302
+ },
+ "r_yil": {
+  "2019": -20.439740357920527
+ },
+ "sharpe_x2": -0.2894496509155488,
+ "sinif": "kapanis__gece-gunduz-ters-k3v006-1",
+ "sure_sn": 1320.5,
+ "tf": "1h",
+ "tf_kaynak": "5m -> 1h yeniden örnekleme (yeniden_ornekle, eksik mumlar atılır)",
+ "tur": "tek"
+}

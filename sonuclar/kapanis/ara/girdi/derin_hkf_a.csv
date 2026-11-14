@@ -1,0 +1,102 @@
+kaynak_id,karar,neden,kanit,not
+HAM:X005:8,KOD,,motor/strateji/ma_kesisim.py:23 ; sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/karsilastirma/karsilastirma.csv#S0008,hesap_defteri hedef=swing__ma-kesisim ; eslesme=ESDEGER
+HAM:X005:14,KOD,,motor/strateji/dis/d2_freqtrade.py:131 ; sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/karsilastirma/karsilastirma.csv#S0014,hesap_defteri hedef=dis__ft-binhv45 ; eslesme=ESDEGER
+HAM:X005:15,KOD,,motor/strateji/dis/d9_atlanan_b.py:237 ; sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/karsilastirma/karsilastirma.csv#S0015,hesap_defteri hedef=dis__ft-cluc-may2018 ; eslesme=ESDEGER
+HAM:X005:21,KOD,,motor/strateji/dis/d9_atlanan_b.py:570 ; sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/karsilastirma/karsilastirma.csv#S0021,hesap_defteri hedef=dis__ft-strategy003 ; eslesme=ESDEGER
+HAM:X005:26,KOD,,motor/strateji/dis/d3_freqtrade_ust.py:139 ; sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/karsilastirma/karsilastirma.csv#S0026,hesap_defteri hedef=dis__volatility-system ; eslesme=ESDEGER
+HAM:X005:29,KOD,,motor/strateji/dis/d9_atlanan_b.py:273 ; sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/karsilastirma/karsilastirma.csv#S0029,hesap_defteri hedef=dis__ft-cofibit ; eslesme=ESDEGER
+HAM:X005:31,H_BIZIM_EVRENDE_UYGULANAMAZ,hisse_kesitsel,sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/karsilastirma/karsilastirma.csv#S0031,hesap_defteri hedef= ; eslesme=YOK
+HAM:X005:32,KOD,,motor/strateji/dis/d5_ek.py:532 ; sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/karsilastirma/karsilastirma.csv#S0032,hesap_defteri hedef=dis__gun-ici-donus ; eslesme=ESDEGER
+HAM:X005:33,H_BIZIM_EVRENDE_UYGULANAMAZ,hisse_kesitsel,sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/karsilastirma/karsilastirma.csv#S0033,hesap_defteri hedef= ; eslesme=YOK
+HAM:X005:35,H_BIZIM_EVRENDE_UYGULANAMAZ,pairs,sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/karsilastirma/karsilastirma.csv#S0035,hesap_defteri hedef= ; eslesme=YOK
+HAM:X005:38,KOD,,motor/strateji/ma_kesisim.py:23 ; sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/karsilastirma/karsilastirma.csv#S0038,hesap_defteri hedef=swing__ma-kesisim ; eslesme=ESDEGER
+HAM:X005:40,KOD,,motor/strateji/dis/d9_atlanan_b.py:625 ; sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/karsilastirma/karsilastirma.csv#S0040,hesap_defteri hedef=dis__btfd-gunluk-dip ; eslesme=ESDEGER
+HAM:X005:42,KOD,,motor/strateji/swing/rsi_asiri_donus.py:41 ; sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/karsilastirma/karsilastirma.csv#S0042,hesap_defteri hedef=swing__rsi-asiri-donus ; eslesme=ESDEGER
+HAM:X005:45,H_BIZIM_EVRENDE_UYGULANAMAZ,pairs,sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/karsilastirma/karsilastirma.csv#S0045,hesap_defteri hedef= ; eslesme=YOK
+HAM:X005:48,H_BIZIM_EVRENDE_UYGULANAMAZ,hisse_kesitsel,sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/karsilastirma/karsilastirma.csv#S0048,hesap_defteri hedef= ; eslesme=YOK
+HAM:X005:50,F_YASAK_TIP,stopsuz_grid,sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/karsilastirma/karsilastirma.csv#S0050,hesap_defteri hedef= ; eslesme=YOK
+HAM:X005:51,KOD,,motor/strateji/swing/rsi_asiri_donus.py:41 ; sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/karsilastirma/karsilastirma.csv#S0051,hesap_defteri hedef=swing__rsi-asiri-donus ; eslesme=ESDEGER
+HAM:X005:53,KOD,,motor/strateji/dis/d5_ek.py:399 ; sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/karsilastirma/karsilastirma.csv#S0053,hesap_defteri hedef=dis__ibs-donus ; eslesme=ESDEGER
+HAM:X005:56,KOD,,motor/strateji/swing/rsi_asiri_donus.py:41 ; sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/karsilastirma/karsilastirma.csv#S0056,hesap_defteri hedef=swing__rsi-asiri-donus ; eslesme=ESDEGER
+HAM:X005:57,KOD,,motor/strateji/swing/bant_donus.py:32 ; sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/karsilastirma/karsilastirma.csv#S0057,hesap_defteri hedef=swing__bant-donus ; eslesme=ESDEGER
+HAM:X005:61,H_BIZIM_EVRENDE_UYGULANAMAZ,seans_gap,sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/karsilastirma/karsilastirma.csv#S0061,hesap_defteri hedef= ; eslesme=YOK
+HAM:X005:62,H_BIZIM_EVRENDE_UYGULANAMAZ,seans_gap,sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/karsilastirma/karsilastirma.csv#S0062,hesap_defteri hedef= ; eslesme=YOK
+HAM:X005:63,H_BIZIM_EVRENDE_UYGULANAMAZ,seans_gap,sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/karsilastirma/karsilastirma.csv#S0063,hesap_defteri hedef= ; eslesme=YOK
+HAM:X005:65,F_YASAK_TIP,stopsuz_grid,sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/karsilastirma/karsilastirma.csv#S0065,hesap_defteri hedef= ; eslesme=YOK
+HAM:X005:66,F_YASAK_TIP,stopsuz_grid,sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/karsilastirma/karsilastirma.csv#S0066,hesap_defteri hedef= ; eslesme=YOK
+HAM:X005:72,F_YASAK_TIP,stopsuz_grid,sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/karsilastirma/karsilastirma.csv#S0072,hesap_defteri hedef= ; eslesme=YOK
+HAM:X005:75,H_BIZIM_EVRENDE_UYGULANAMAZ,seans_gap,sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/karsilastirma/karsilastirma.csv#S0075,hesap_defteri hedef= ; eslesme=YOK
+HAM:X005:76,KOD,,motor/strateji/swing/donchian_kirilim.py:28 ; sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/karsilastirma/karsilastirma.csv#S0076,hesap_defteri hedef=swing__donchian-kirilim ; eslesme=ESDEGER
+HAM:X005:80,H_BIZIM_EVRENDE_UYGULANAMAZ,seans_gap,sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/karsilastirma/karsilastirma.csv#S0080,hesap_defteri hedef= ; eslesme=YOK
+HAM:X005:88,H_BIZIM_EVRENDE_UYGULANAMAZ,seans_gap,sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/karsilastirma/karsilastirma.csv#S0088,hesap_defteri hedef= ; eslesme=YOK
+HAM:X005:90,H_BIZIM_EVRENDE_UYGULANAMAZ,seans_gap,sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/karsilastirma/karsilastirma.csv#S0090,hesap_defteri hedef= ; eslesme=YOK
+HAM:X005:92,H_BIZIM_EVRENDE_UYGULANAMAZ,seans_gap,sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/karsilastirma/karsilastirma.csv#S0092,hesap_defteri hedef= ; eslesme=YOK
+HAM:X005:99,H_BIZIM_EVRENDE_UYGULANAMAZ,hisse_kesitsel,sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/karsilastirma/karsilastirma.csv#S0099,hesap_defteri hedef= ; eslesme=YOK
+HAM:X005:100,H_BIZIM_EVRENDE_UYGULANAMAZ,seans_gap,sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/karsilastirma/karsilastirma.csv#S0100,hesap_defteri hedef= ; eslesme=YOK
+HAM:X005:102,H_BIZIM_EVRENDE_UYGULANAMAZ,pairs,sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/karsilastirma/karsilastirma.csv#S0102,hesap_defteri hedef= ; eslesme=YOK
+HAM:X005:109,H_BIZIM_EVRENDE_UYGULANAMAZ,seans_gap,sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/karsilastirma/karsilastirma.csv#S0109,hesap_defteri hedef= ; eslesme=YOK
+HAM:X005:110,H_BIZIM_EVRENDE_UYGULANAMAZ,seans_gap,sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/karsilastirma/karsilastirma.csv#S0110,hesap_defteri hedef= ; eslesme=YOK
+HAM:X005:111,H_BIZIM_EVRENDE_UYGULANAMAZ,hft,sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/karsilastirma/karsilastirma.csv#S0111,hesap_defteri hedef= ; eslesme=YOK
+HAM:X005:116,KOD,,motor/strateji/dis/d5_ek.py:285 ; sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/karsilastirma/karsilastirma.csv#S0116,hesap_defteri hedef=dis__connors-etf ; eslesme=ESDEGER
+HAM:X005:122,H_BIZIM_EVRENDE_UYGULANAMAZ,hisse_kesitsel,sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/karsilastirma/karsilastirma.csv#S0122,hesap_defteri hedef= ; eslesme=YOK
+HAM:X005:123,H_BIZIM_EVRENDE_UYGULANAMAZ,seans_gap,sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/karsilastirma/karsilastirma.csv#S0123,hesap_defteri hedef= ; eslesme=YOK
+HAM:X005:124,H_BIZIM_EVRENDE_UYGULANAMAZ,seans_gap,sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/karsilastirma/karsilastirma.csv#S0124,hesap_defteri hedef= ; eslesme=YOK
+HAM:X005:130,H_BIZIM_EVRENDE_UYGULANAMAZ,hisse_kesitsel,sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/karsilastirma/karsilastirma.csv#S0130,hesap_defteri hedef= ; eslesme=YOK
+HAM:X005:137,H_BIZIM_EVRENDE_UYGULANAMAZ,seans_gap,sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/karsilastirma/karsilastirma.csv#S0137,hesap_defteri hedef= ; eslesme=YOK
+HAM:X005:140,H_BIZIM_EVRENDE_UYGULANAMAZ,hisse_kesitsel,sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/karsilastirma/karsilastirma.csv#S0140,hesap_defteri hedef= ; eslesme=YOK
+HAM:X005:141,H_BIZIM_EVRENDE_UYGULANAMAZ,hisse_kesitsel,sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/karsilastirma/karsilastirma.csv#S0141,hesap_defteri hedef= ; eslesme=YOK
+HAM:X005:146,H_BIZIM_EVRENDE_UYGULANAMAZ,hisse_kesitsel,sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/karsilastirma/karsilastirma.csv#S0146,hesap_defteri hedef= ; eslesme=YOK
+HAM:X005:148,H_BIZIM_EVRENDE_UYGULANAMAZ,hisse_kesitsel,sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/karsilastirma/karsilastirma.csv#S0148,hesap_defteri hedef= ; eslesme=YOK
+HAM:X005:149,H_BIZIM_EVRENDE_UYGULANAMAZ,seans_gap,sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/karsilastirma/karsilastirma.csv#S0149,hesap_defteri hedef= ; eslesme=YOK
+HAM:X005:150,KOD,,motor/strateji/dis/d10d_kitap.py:584 ; sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/karsilastirma/karsilastirma.csv#S0150,hesap_defteri hedef=dis__ilk-yarim-saat-son-yarim-saat ; eslesme=ESDEGER
+HAM:X005:151,H_BIZIM_EVRENDE_UYGULANAMAZ,seans_gap,sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/karsilastirma/karsilastirma.csv#S0151,hesap_defteri hedef= ; eslesme=YOK
+HAM:X005:152,H_BIZIM_EVRENDE_UYGULANAMAZ,seans_gap,sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/karsilastirma/karsilastirma.csv#S0152,hesap_defteri hedef= ; eslesme=YOK
+HAM:X005:154,H_BIZIM_EVRENDE_UYGULANAMAZ,hisse_kesitsel,sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/karsilastirma/karsilastirma.csv#S0154,hesap_defteri hedef= ; eslesme=YOK
+HAM:X005:155,H_BIZIM_EVRENDE_UYGULANAMAZ,hisse_kesitsel,sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/karsilastirma/karsilastirma.csv#S0155,hesap_defteri hedef= ; eslesme=YOK
+HAM:X005:156,H_BIZIM_EVRENDE_UYGULANAMAZ,hisse_kesitsel,sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/karsilastirma/karsilastirma.csv#S0156,hesap_defteri hedef= ; eslesme=YOK
+HAM:X005:158,H_BIZIM_EVRENDE_UYGULANAMAZ,pairs,sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/karsilastirma/karsilastirma.csv#S0158,hesap_defteri hedef= ; eslesme=YOK
+HAM:X005:159,H_BIZIM_EVRENDE_UYGULANAMAZ,hisse_kesitsel,sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/karsilastirma/karsilastirma.csv#S0159,hesap_defteri hedef= ; eslesme=YOK
+HAM:X005:160,H_BIZIM_EVRENDE_UYGULANAMAZ,hisse_kesitsel,sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/karsilastirma/karsilastirma.csv#S0160,hesap_defteri hedef= ; eslesme=YOK
+HAM:X005:161,H_BIZIM_EVRENDE_UYGULANAMAZ,arbitraj,sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/karsilastirma/karsilastirma.csv#S0161,hesap_defteri hedef= ; eslesme=YOK
+HAM:X005:162,H_BIZIM_EVRENDE_UYGULANAMAZ,hisse_kesitsel,sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/karsilastirma/karsilastirma.csv#S0162,hesap_defteri hedef= ; eslesme=YOK
+HAM:X005:163,H_BIZIM_EVRENDE_UYGULANAMAZ,hisse_kesitsel,sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/karsilastirma/karsilastirma.csv#S0163,hesap_defteri hedef= ; eslesme=YOK
+HAM:X005:165,H_BIZIM_EVRENDE_UYGULANAMAZ,hisse_kesitsel,sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/karsilastirma/karsilastirma.csv#S0165,hesap_defteri hedef= ; eslesme=YOK
+HAM:X005:166,H_BIZIM_EVRENDE_UYGULANAMAZ,pairs,sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/karsilastirma/karsilastirma.csv#S0166,hesap_defteri hedef= ; eslesme=YOK
+HAM:X005:167,H_BIZIM_EVRENDE_UYGULANAMAZ,pairs,sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/karsilastirma/karsilastirma.csv#S0167,hesap_defteri hedef= ; eslesme=YOK
+HAM:X005:168,H_BIZIM_EVRENDE_UYGULANAMAZ,hisse_kesitsel,sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/karsilastirma/karsilastirma.csv#S0168,hesap_defteri hedef= ; eslesme=YOK
+HAM:X005:169,H_BIZIM_EVRENDE_UYGULANAMAZ,hisse_kesitsel,sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/karsilastirma/karsilastirma.csv#S0169,hesap_defteri hedef= ; eslesme=YOK
+HAM:X005:170,H_BIZIM_EVRENDE_UYGULANAMAZ,hisse_kesitsel,sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/karsilastirma/karsilastirma.csv#S0170,hesap_defteri hedef= ; eslesme=YOK
+HAM:X005:171,H_BIZIM_EVRENDE_UYGULANAMAZ,pairs,sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/karsilastirma/karsilastirma.csv#S0171,hesap_defteri hedef= ; eslesme=YOK
+HAM:X005:172,KOD,,motor/strateji/scalp/ma_kesisim.py:28 ; sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/karsilastirma/karsilastirma.csv#S0172,hesap_defteri hedef=scalp__ma-kesisim ; eslesme=ESDEGER
+HAM:X005:180,H_BIZIM_EVRENDE_UYGULANAMAZ,seans_gap,sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/karsilastirma/karsilastirma.csv#S0180,hesap_defteri hedef= ; eslesme=YOK
+HAM:X005:190,H_BIZIM_EVRENDE_UYGULANAMAZ,seans_gap,sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/karsilastirma/karsilastirma.csv#S0190,hesap_defteri hedef= ; eslesme=YOK
+HAM:X005:191,H_BIZIM_EVRENDE_UYGULANAMAZ,seans_gap,sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/karsilastirma/karsilastirma.csv#S0191,hesap_defteri hedef= ; eslesme=YOK
+HAM:X005:194,KOD,,motor/strateji/swing/macd_sinyal.py:31 ; sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/karsilastirma/karsilastirma.csv#S0194,hesap_defteri hedef=swing__macd-sinyal ; eslesme=ESDEGER
+HAM:X005:200,H_BIZIM_EVRENDE_UYGULANAMAZ,pairs,sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/karsilastirma/karsilastirma.csv#S0200,hesap_defteri hedef= ; eslesme=YOK
+HAM:X005:201,H_BIZIM_EVRENDE_UYGULANAMAZ,pairs,sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/karsilastirma/karsilastirma.csv#S0201,hesap_defteri hedef= ; eslesme=YOK
+HAM:X005:202,H_BIZIM_EVRENDE_UYGULANAMAZ,pairs,sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/karsilastirma/karsilastirma.csv#S0202,hesap_defteri hedef= ; eslesme=YOK
+HAM:X005:203,H_BIZIM_EVRENDE_UYGULANAMAZ,pairs,sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/karsilastirma/karsilastirma.csv#S0203,hesap_defteri hedef= ; eslesme=YOK
+HAM:X005:204,H_BIZIM_EVRENDE_UYGULANAMAZ,pairs,sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/karsilastirma/karsilastirma.csv#S0204,hesap_defteri hedef= ; eslesme=YOK
+HAM:X005:205,H_BIZIM_EVRENDE_UYGULANAMAZ,pairs,sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/karsilastirma/karsilastirma.csv#S0205,hesap_defteri hedef= ; eslesme=YOK
+HAM:X005:206,F_YASAK_TIP,stopsuz_grid,sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/karsilastirma/karsilastirma.csv#S0206,hesap_defteri hedef= ; eslesme=YOK
+HAM:X005:207,F_YASAK_TIP,stopsuz_grid,sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/karsilastirma/karsilastirma.csv#S0207,hesap_defteri hedef= ; eslesme=YOK
+HAM:X005:214,F_YASAK_TIP,martingale,sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/karsilastirma/karsilastirma.csv#S0214,hesap_defteri hedef= ; eslesme=YOK
+HAM:X005:215,KOD,,motor/strateji/swing/rsi_asiri_donus.py:41 ; sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/karsilastirma/karsilastirma.csv#S0215,hesap_defteri hedef=swing__rsi-asiri-donus ; eslesme=ESDEGER
+HAM:X005:223,H_BIZIM_EVRENDE_UYGULANAMAZ,hft,sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/karsilastirma/karsilastirma.csv#S0223,hesap_defteri hedef= ; eslesme=YOK
+HAM:X005:227,H_BIZIM_EVRENDE_UYGULANAMAZ,seans_gap,sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/karsilastirma/karsilastirma.csv#S0227,hesap_defteri hedef= ; eslesme=YOK
+HAM:X005:233,H_BIZIM_EVRENDE_UYGULANAMAZ,hisse_kesitsel,sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/karsilastirma/karsilastirma.csv#S0233,hesap_defteri hedef= ; eslesme=YOK
+HAM:X005:238,KOD,,motor/strateji/ma_kesisim.py:23 ; sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/karsilastirma/karsilastirma.csv#S0238,hesap_defteri hedef=swing__ma-kesisim ; eslesme=ESDEGER
+HAM:X005:252,KOD,,motor/strateji/swing/rsi_asiri_donus.py:41 ; sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/karsilastirma/karsilastirma.csv#S0252,hesap_defteri hedef=swing__rsi-asiri-donus ; eslesme=ESDEGER
+HAM:X005:260,KOD,,motor/strateji/swing/rsi_asiri_donus.py:41 ; sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/karsilastirma/karsilastirma.csv#S0260,hesap_defteri hedef=swing__rsi-asiri-donus ; eslesme=ESDEGER
+HAM:X005:265,KOD,,motor/strateji/ma_kesisim.py:23 ; sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/karsilastirma/karsilastirma.csv#S0265,hesap_defteri hedef=swing__ma-kesisim ; eslesme=ESDEGER
+HAM:X005:266,H_BIZIM_EVRENDE_UYGULANAMAZ,pairs,sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/karsilastirma/karsilastirma.csv#S0266,hesap_defteri hedef= ; eslesme=YOK
+HAM:X005:267,H_BIZIM_EVRENDE_UYGULANAMAZ,pairs,sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/karsilastirma/karsilastirma.csv#S0267,hesap_defteri hedef= ; eslesme=YOK
+HAM:X005:270,KOD,,motor/strateji/ma_kesisim.py:23 ; sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/karsilastirma/karsilastirma.csv#S0270,hesap_defteri hedef=swing__ma-kesisim ; eslesme=ESDEGER
+HAM:X005:271,H_BIZIM_EVRENDE_UYGULANAMAZ,hisse_kesitsel,sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/karsilastirma/karsilastirma.csv#S0271,hesap_defteri hedef= ; eslesme=YOK
+HAM:X005:273,H_BIZIM_EVRENDE_UYGULANAMAZ,seans_gap,sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/karsilastirma/karsilastirma.csv#S0273,hesap_defteri hedef= ; eslesme=YOK
+HAM:X005:274,H_BIZIM_EVRENDE_UYGULANAMAZ,seans_gap,sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/karsilastirma/karsilastirma.csv#S0274,hesap_defteri hedef= ; eslesme=YOK
+HAM:X005:275,H_BIZIM_EVRENDE_UYGULANAMAZ,seans_gap,sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/karsilastirma/karsilastirma.csv#S0275,hesap_defteri hedef= ; eslesme=YOK
+HAM:X005:276,H_BIZIM_EVRENDE_UYGULANAMAZ,seans_gap,sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/karsilastirma/karsilastirma.csv#S0276,hesap_defteri hedef= ; eslesme=YOK
+HAM:X005:279,F_YASAK_TIP,martingale,sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/karsilastirma/karsilastirma.csv#S0279,hesap_defteri hedef= ; eslesme=YOK
+HAM:X005:280,H_BIZIM_EVRENDE_UYGULANAMAZ,hisse_kesitsel,sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/karsilastirma/karsilastirma.csv#S0280,hesap_defteri hedef= ; eslesme=YOK
+HAM:X005:281,H_BIZIM_EVRENDE_UYGULANAMAZ,pairs,sonuclar/dis_arastirma/2026-11_trend_ortalamaya_donus/karsilastirma/karsilastirma.csv#S0281,hesap_defteri hedef= ; eslesme=YOK

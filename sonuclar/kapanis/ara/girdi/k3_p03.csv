@@ -1,0 +1,228 @@
+kaynak_id,karar,neden,kanit,not
+HAM:H006:126,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:127,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:127,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:128,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:128,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:129,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:129,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:130,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:13,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:14,veri_yok (gerekli veri evrende yok (kaynak satır durumu: veri_yok) (FX paritesi evrende yok; mantık pf__kesit_ls ile aynı)) |
+HAM:H006:130,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:131,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:131,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:132,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:132,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:133,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:133,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:134,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:134,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:135,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:135,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:136,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:136,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:137,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:137,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:138,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:138,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:139,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:139,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:140,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:140,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:141,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:141,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:142,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:142,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:143,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:144,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:145,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:145,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:146,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:146,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:147,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:147,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:148,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:148,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:149,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:149,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:150,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:150,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:151,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:151,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:152,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:153,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:154,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:154,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:155,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:155,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:156,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:156,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:157,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:157,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:158,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:158,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:159,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:16,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:17,veri_yok (gerekli veri evrende yok (kaynak satır durumu: veri_yok) (faiz verisi)) |
+HAM:H006:160,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:161,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:161,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:162,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:162,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:163,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:163,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:164,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:164,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:165,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:165,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:166,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:166,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:167,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:168,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:169,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:169,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:170,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:170,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:171,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:171,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:172,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:172,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:173,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:173,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:174,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:174,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:175,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:175,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:176,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:178,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:179,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:179,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:180,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:18,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:19,veri_yok (gerekli veri evrende yok (kaynak satır durumu: veri_yok) (olay verisi)) |
+HAM:H006:180,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:181,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:181,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:182,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:182,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:183,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:183,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:184,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:184,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:185,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:185,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:186,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:186,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:187,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:188,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:189,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:189,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:190,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:190,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:191,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:191,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:192,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:192,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:193,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:194,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:195,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:195,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:196,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:196,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:197,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:197,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:198,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:198,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:199,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:199,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:200,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:20,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:21,veri_yok (gerekli veri evrende yok (kaynak satır durumu: veri_yok) (ESG verisi)) |
+HAM:H006:200,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:201,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:201,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:202,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:202,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:203,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:203,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:204,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:204,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:205,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:205,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:206,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:206,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:207,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:207,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:208,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:208,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:209,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:209,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:210,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:210,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:211,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:211,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:212,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:214,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:215,kural_belirsiz (veri_yok denmiş ama kaynakta kural metni de yok (kural_metni_yok)) |
+HAM:H006:215,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:216,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:218,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:219,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:219,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:220,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:220,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:221,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:221,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:222,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:222,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:223,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:223,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:224,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:224,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:225,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:225,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:226,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:226,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:227,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:227,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:228,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:228,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:229,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:229,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:230,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:23,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:24,veri_yok (gerekli veri evrende yok (kaynak satır durumu: veri_yok) (metin verisi)) |
+HAM:H006:230,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:231,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:231,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:232,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:232,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:233,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:233,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:234,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:234,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:235,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:235,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:236,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:236,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:237,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:237,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:238,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:238,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:239,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:239,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:240,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:240,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:241,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:241,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:242,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:242,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:243,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:243,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:244,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:244,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:245,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:245,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:246,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:246,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:247,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:247,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:248,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:248,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:249,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:249,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:250,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:250,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:251,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:251,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:252,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:252,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:253,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:253,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:254,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:254,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:255,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:255,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:256,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:256,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:257,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:257,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:258,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:258,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:259,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:259,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:260,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:260,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:261,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:261,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:262,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:262,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:263,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:263,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:264,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:264,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:265,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:265,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:266,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:266,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:267,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:267,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:268,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:268,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:269,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:269,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:270,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:27,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:28,veri_yok (gerekli veri evrende yok (kaynak satır durumu: veri_yok) (VIX ve duygu endeksi evrende yok (gecelik kısmı yeni__gecelik-gunici-etki ile kapsanıyor))) |
+HAM:H006:270,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:271,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:271,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:272,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:272,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:273,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:273,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:274,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:274,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:275,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:275,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:276,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:276,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:277,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:277,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:278,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:278,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:279,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:279,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:280,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:280,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:281,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:281,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:282,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:282,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:283,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:283,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:284,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:284,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:285,kural_belirsiz (veri_yok denmiş ama kaynakta kural metni de yok (kural_metni_yok)) |
+HAM:H006:285,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:286,kural_belirsiz (veri_yok denmiş ama kaynakta kural metni de yok (kural_metni_yok)) |
+HAM:H006:286,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:287,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:313,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:314,veri_yok (gerekli veri evrende yok (kaynak satır durumu: veri_yok) (ima edilen volatilite (VIX/Deribit IV) evrende yok)) |
+HAM:H006:316,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:317,veri_yok (gerekli veri evrende yok (kaynak satır durumu: veri_yok) (tahvil verim verisi)) |
+HAM:H006:319,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:320,arac_sablon (strateji değil: araç/şablon/iskelet: tahsis yöntemi; strateji değil (lider katmanı/risk motoru konusu)) |
+HAM:H006:321,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:322,veri_yok (gerekli veri evrende yok (kaynak satır durumu: veri_yok) (VIX ve likidite stres göstergesi evrende yok (risk limitleri kodda zaten ayrı))) |
+HAM:H006:322,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:323,arac_sablon (strateji değil: araç/şablon/iskelet: risk kuralı (strateji değil); risk limitleri kodda sabit) |
+HAM:H006:327,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:328,arac_sablon (strateji değil: araç/şablon/iskelet: strateji değil fiyat dinamiği modeli) |
+HAM:H006:33,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:34,veri_yok (gerekli veri evrende yok (kaynak satır durumu: veri_yok) (fon evreni evrende yok)) |
+HAM:H006:334,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:335,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok; değer verisi gerekir) |
+HAM:H006:335,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:336,arac_sablon (strateji değil: araç/şablon/iskelet: kural_metni_yok; tahsis yöntemi) |
+HAM:H006:336,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:337,arac_sablon (strateji değil: araç/şablon/iskelet: kural_metni_yok; tahsis yöntemi) |
+HAM:H006:338,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:339,"arac_sablon (strateji değil: araç/şablon/iskelet: strateji değil, metodoloji) |"
+HAM:H006:344,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:345,kural_belirsiz (kaynakta işlem kuralı metni yok: PDF içeriği okunmadı; seviye tepkisi ailesiyle ilgili) | ilk tarama benzer_1l3a_aile=swing__seviye-tepki (kural metni olmadığından karşılaştırılamadı)
+HAM:H006:345,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:346,kural_belirsiz (kaynakta işlem kuralı metni yok: LLM karar; deterministik kural yok) |
+HAM:H006:350,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:351,kural_belirsiz (kaynakta işlem kuralı metni yok: README 'upcoming project'; işlem kuralı yok) |
+HAM:H006:351,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:352,kural_belirsiz (kaynakta işlem kuralı metni yok: işe yaramadığı raporlanmış tahmin yöntemi; alım-satım kuralı yok) |
+HAM:H006:358,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/kodlama_kuyrugu_github.csv#yeni__spx-sse-esikli-gecis (öncelik C: kodlanamaz/kural eksik),veri_yok (Şanghai endeksi verisi yok; eşikler tek örnekte optimize edilmiş görünüyor. pf__gem benzeri çerçeve.) | kuyrukta C öncelikli; d11f-j kodlama dosyalarında yok (kodlanmadı)
+HAM:H006:359,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:360,arac_sablon (strateji değil: araç/şablon/iskelet: örnek içi optimizasyon; strateji değil dağılım egzersizi) |
+HAM:H006:365,INCELEME_BEKLIYOR,,stratejiler/kodlama_2026-11-07_d10b.csv:yeni__gecelik-gunici-etki ; stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:366,kapsam_disi (ilk tarama 'ayar:yeni__gecelik-gunici-etki' dedi; aile kodlanmadı: Etki kapanis->ertesi acilis (gecelik) ya da acilis->kapanis (gun ici) ayrimina dayanir; moto…) |
+HAM:H006:370,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:371,veri_yok (fonlama/OI/likidasyon verisi gerekir (kaynak satırda 'veri_yok') (FX vadeli eğrisi yok; kripto funding carry (dis__funding-carry) ile benzer fikir)) |
+HAM:H006:382,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:383,veri_yok (gerekli veri evrende yok (kaynak satır durumu: veri_yok) (zincir üstü AMM verisi; strateji kuralı yok)) |
+HAM:H006:385,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:386,veri_yok (gerekli veri evrende yok (kaynak satır durumu: veri_yok) (VIX ve S&P 500 vadelisi evrende yok)) |
+HAM:H006:386,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:387,veri_yok (gerekli veri evrende yok (kaynak satır durumu: veri_yok) (piyasa genişliği (TRIN) verisi evrende yok)) |
+HAM:H006:388,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:389,arac_sablon (strateji değil: araç/şablon/iskelet: fiyatlama kodu; strateji değil) |
+HAM:H006:46,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:47,veri_yok (gerekli veri evrende yok (kaynak satır durumu: veri_yok) (açığa satış verisi)) |
+HAM:H006:48,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:49,veri_yok (gerekli veri evrende yok (kaynak satır durumu: veri_yok) (açık pozisyon (OI) verisi)) |
+HAM:H006:51,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:52,veri_yok (gerekli veri evrende yok (kaynak satır durumu: veri_yok) (maç takvimi ve futbol hisseleri)) |
+HAM:H006:52,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:53,veri_yok (gerekli veri evrende yok (kaynak satır durumu: veri_yok) (borç alma maliyeti verisi)) |
+HAM:H006:58,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:59,"veri_yok (gerekli veri evrende yok (kaynak satır durumu: veri_yok) (değer verisi (E/P, YTM))) |"
+HAM:H006:60,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:61,veri_yok (gerekli veri evrende yok (kaynak satır durumu: veri_yok) (CAPE verisi)) |
+HAM:H006:62,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:63,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:63,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:64,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:64,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:65,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:65,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:66,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:66,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:67,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:67,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:68,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:68,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:69,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:69,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:70,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:70,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:71,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:71,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:72,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:72,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:73,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:73,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:74,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:74,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:75,kural_belirsiz (veri_yok denmiş ama kaynakta kural metni de yok (kural_metni_yok)) |
+HAM:H006:75,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:76,kural_belirsiz (veri_yok denmiş ama kaynakta kural metni de yok (kural_metni_yok)) |
+HAM:H006:76,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:77,kural_belirsiz (veri_yok denmiş ama kaynakta kural metni de yok (kural_metni_yok)) |
+HAM:H006:77,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:78,kural_belirsiz (veri_yok denmiş ama kaynakta kural metni de yok (kural_metni_yok)) |
+HAM:H006:78,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:79,kural_belirsiz (veri_yok denmiş ama kaynakta kural metni de yok (kural_metni_yok)) |
+HAM:H006:79,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:80,kural_belirsiz (veri_yok denmiş ama kaynakta kural metni de yok (kural_metni_yok)) |
+HAM:H006:80,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:81,kural_belirsiz (veri_yok denmiş ama kaynakta kural metni de yok (kural_metni_yok)) |
+HAM:H006:81,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:82,kural_belirsiz (veri_yok denmiş ama kaynakta kural metni de yok (kural_metni_yok)) |
+HAM:H006:82,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:83,kural_belirsiz (veri_yok denmiş ama kaynakta kural metni de yok (kural_metni_yok)) |
+HAM:H006:83,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:84,kural_belirsiz (veri_yok denmiş ama kaynakta kural metni de yok (kural_metni_yok)) |
+HAM:H006:84,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:85,kural_belirsiz (veri_yok denmiş ama kaynakta kural metni de yok (kural_metni_yok)) |
+HAM:H006:85,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:86,kural_belirsiz (veri_yok denmiş ama kaynakta kural metni de yok (kural_metni_yok)) |
+HAM:H006:86,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:87,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:87,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:88,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:88,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:89,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:89,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:90,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:90,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:91,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:91,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:92,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:92,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:93,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:93,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:160 ; stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:94,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:94,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:168 ; stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:95,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:95,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:188 ; stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:96,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:96,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:153 ; stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:97,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:97,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:194 ; stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:98,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:98,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:177 ; stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:99,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H006:99,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:100 ; stratejiler/ek_kaynaklar/github_g6_liste_notebook.csv:178,kural_belirsiz (kaynakta işlem kuralı metni yok: kural_metni_yok) |
+HAM:H007:24,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g7_kutuphane.csv:25,kural_belirsiz (veri_yok denmiş ama kaynakta kural metni de yok) |
+HAM:H007:25,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g7_kutuphane.csv:26,kural_belirsiz (veri_yok denmiş ama kaynakta kural metni de yok) |
+HAM:H007:26,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g7_kutuphane.csv:27,kural_belirsiz (kaynakta işlem kuralı metni yok) |
+HAM:H007:48,INCELEME_BEKLIYOR,,stratejiler/kodlama_github_d11f.csv:yeni__rsrs-egim-esigi ; stratejiler/kodlama_github_d11f.csv:yeni__rsrs-egim-esigi ; stratejiler/ek_kaynaklar/kodlama_kuyrugu_github.csv#yeni__rsrs-egim-esigi,kod_yok (tek-sembol RSRS kodlandı; rotasyon sürümü kodlanmadı (pf__rotasyon'a skor='rsrs' önerisi uygulanmadı)) |
+HAM:H007:51,INCELEME_BEKLIYOR,,stratejiler/ek_kaynaklar/github_g7_kutuphane.csv:52,kural_belirsiz (kaynakta işlem kuralı metni yok) |

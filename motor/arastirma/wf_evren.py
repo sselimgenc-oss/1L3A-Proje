@@ -1179,7 +1179,7 @@ def rastgele_evren(oos: pd.DataFrame, pencere_sinirlari: list, n_sim: int, seed:
                         r = evren_k2.tek_islem_r(
                             o, h, l, c, atr, j, int(yon[k]), hk, float(mult[k]), kayma, skayma, taker,
                             ex=ci["ex_long"] if yon[k] == 1 else ci["ex_short"], hedef_r=ci["hedef_r"], iz_k=ci["iz_k"],
-                            iz_atr=iz_atr_al(ci["iz_periyot"]) if ci["iz_k"] else None, be_r=ci["be_r"])
+                            iz_atr=iz_atr_al(ci["iz_periyot"]) if ci["iz_k"] else None, be_r=ci["be_r"], ek=ci.get("ek"))
                     if r is not None:
                         top += r
                         break

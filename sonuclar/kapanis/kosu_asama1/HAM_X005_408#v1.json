@@ -1,0 +1,51 @@
+{
+ "analiz_bas": "2019-07-06 00:00:00+00:00",
+ "bh_sharpe_x2": 0.8540327457830558,
+ "durum": "TAMAM",
+ "evren": "kripto13",
+ "hata": "",
+ "k1": true,
+ "k2": false,
+ "k3": true,
+ "k3a": true,
+ "k3b": true,
+ "k4": true,
+ "k5": false,
+ "k6": {
+  "B": 100000,
+  "T": 1.5785656720399857,
+  "desteklenmeyen": [],
+  "gecersiz_oran": 0.0,
+  "n_islem": 4,
+  "p": 0.1025889741102589,
+  "tohum": 1476495389
+ },
+ "k6_durum": "TAMAM",
+ "katman": "G8",
+ "kill_x1": 0,
+ "kill_x2": 0,
+ "kimlik": "HAM:X005:408#v1",
+ "long_only": true,
+ "n_islem_x1": 4,
+ "n_islem_x2": 4,
+ "net_x1": 0.023954593987230988,
+ "net_x2": 0.023351476494181123,
+ "p": 0.1025889741102589,
+ "pf_x1": 6.322203204184315,
+ "pf_x2": 6.195020122806298,
+ "r_enstruman": {
+  "BTCUSDT": 0.9724685698747635,
+  "ETHUSDT": 0.9099584221839905,
+  "SOLUSDT": -0.3038613200187683
+ },
+ "r_yil": {
+  "2019": 0.8452316522598267,
+  "2022": 0.733334019780159
+ },
+ "sharpe_x2": 0.48628346634970193,
+ "sinif": "kapanis__rsi-hacim-sma-s0408",
+ "sure_sn": 3.7,
+ "tf": "1d",
+ "tf_kaynak": "5m -> 1d yeniden örnekleme (yeniden_ornekle, eksik mumlar atılır)",
+ "tur": "tek"
+}

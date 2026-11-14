@@ -11,6 +11,7 @@ sinyaller(mumlar) vektörel çalışır ve mumlarla AYNI indeksli bir DataFrame 
                     kapanır. İki sütun da yoksa davranış yalnız `cikis`tir. Yönlü çıkışı strateji "sanal
                     pozisyon / son giriş yönü" ile kestirmemeli; her mumda koşulu yazıp motora bırakmalı.
   zaman_cikisi_mum  (opsiyonel) int/NaN
+  Pozisyon bilinçli çıkışlar: CikisAyarlari (yalniz_karda_cikis, min_tutma_mum, ...) ve strateji kancası pozisyon_cikisi.
 Sinyal mum KAPANIŞINDA hesaplanır; motor bir sonraki mumun açılışında işlem yapar.
 Gelecek verisine bakmak (lookahead) yasaktır.
 """
@@ -44,6 +45,10 @@ class Strateji(ABC):
     def yeni(self, **parametreler) -> "Strateji":
         """Aynı yapılandırmada, bazı parametreleri değişmiş kopya (walk-forward için)."""
         return type(self)(cikis_ayarlari=self.cikis_ayarlari, **{**self.parametreler, **parametreler})
+
+    # Opsiyonel kanca: `pozisyon_cikisi(self, durum: PozisyonDurumu) -> bool`. Tanımlıysa motor her mum KAPANIŞINDA açık
+    # pozisyon için çağırır; True ise çıkış sonraki açılışta ("kanca"). None (varsayılan) = çağrı yok, sıfır maliyet.
+    pozisyon_cikisi = None
 
     def cikis_var_mi(self) -> bool:
         """Strateji mevcut parametreleriyle kendi hedefini veya `cikis` sinyalini üretiyor mu?

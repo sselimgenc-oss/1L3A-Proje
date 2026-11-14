@@ -1,0 +1,43 @@
+{
+ "a_net_pozitif": false,
+ "asama": 1,
+ "b_kill_yok": true,
+ "bh_net_x2": -0.18720604291740606,
+ "c_al_tutu_gecti": true,
+ "dengeleme": 325,
+ "disarida": [],
+ "donem_bas": "2025-11-08 00:00:00+00:00",
+ "donem_bit": "2026-11-07 00:00:00+00:00",
+ "gun": 363,
+ "hata": "",
+ "karar": "paper_cikar",
+ "kill_x1": 0,
+ "kill_x2": 0,
+ "kimlik": "KOD:v3__donchian-ansambl-vol-hedef",
+ "long_only": true,
+ "max_dusus_x2": 0.04333680408791407,
+ "net_x1": -0.012526531817500963,
+ "net_x2": -0.018266239783458427,
+ "parametreler": {
+  "hedef_vol": 0.25,
+  "model_tavan": 2.0,
+  "pencereler": [
+   5,
+   10,
+   20,
+   30,
+   60,
+   90,
+   150,
+   250,
+   360
+  ],
+  "vol_gun": 90,
+  "vol_islem_esigi": 0.2
+ },
+ "sharpe_x1": -0.20995146432437334,
+ "sharpe_x2": -0.31969467100802945,
+ "sinif": "pf__v3-donchian-ansambl",
+ "tf": "1d",
+ "yon": "long"
+}

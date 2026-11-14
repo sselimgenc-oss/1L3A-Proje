@@ -1,0 +1,47 @@
+{
+ "analiz_bas": "2019-07-06 00:00:00+00:00",
+ "bh_sharpe_x2": 0.8540327457830558,
+ "dengeleme": 1981,
+ "disarida": [],
+ "durum": "TAMAM",
+ "evren": "kripto13",
+ "gun": 2317,
+ "hata": "",
+ "k1": true,
+ "k2": true,
+ "k3": true,
+ "k3a": true,
+ "k3b": true,
+ "k4": true,
+ "k5": true,
+ "k6": {
+  "a1": {
+   "B": 500,
+   "p": 0.001996007984031936
+  },
+  "a2": {
+   "B": 10000,
+   "p": 9.999000099990002e-05
+  },
+  "tohum": 1343072946,
+  "yontem": "v2 pf_k2_simule (RastgeleAgirlik), x2"
+ },
+ "k6_durum": "TAMAM",
+ "katman": "K1",
+ "kill_x1": 0,
+ "kill_x2": 0,
+ "kimlik": "KOD:v3__donchian-ansambl-vol-hedef",
+ "long_only": true,
+ "n_islem_x2": 1633,
+ "net_en_iyi_yil_haric_x2": 0.3927998733335454,
+ "net_x1": 0.7479680642323885,
+ "net_x2": 0.6977170765678307,
+ "p": 9.999000099990002e-05,
+ "sharpe_x1": 1.0889689563217868,
+ "sharpe_x2": 1.0328749938648345,
+ "sinif": "pf__v3-donchian-ansambl",
+ "sure_sn": 11744.5,
+ "tf": "1d",
+ "tf_kaynak": "5m -> 1d yeniden örnekleme (yeniden_ornekle, eksik mumlar atılır)",
+ "tur": "pf"
+}

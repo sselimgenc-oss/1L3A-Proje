@@ -513,7 +513,10 @@ def test_k2_cikis_bilgisi_ve_desteklenmeyen(veri_dizini):
     ci = evren_k2.cikis_bilgisi(st, mumlar)
     assert len(ci["ex_long"]) == len(mumlar) and ci["ex_long"].dtype == bool and ci["ex_long"].any()
     assert ci["iz_k"] == st.cikis_ayarlari.atr_iz_suren_k and ci["desteklenmeyen"] == []
-    assert evren_k2.desteklenmeyen(CikisAyarlari(kismi=((1.0, 0.25),), geri_cekilme_yuzde=2.0)) == ["kismi", "geri_cekilme_yuzde"]
+    # kapanış kapı 6: kismi / geri çekilme artık uygulanır (bkz. test_evren_k2_esdeger.py); tek desteklenmeyen: bekleme (giriş filtresi)
+    assert evren_k2.desteklenmeyen(CikisAyarlari(kismi=((1.0, 0.25),), geri_cekilme_yuzde=2.0)) == []
+    assert evren_k2.desteklenmeyen(CikisAyarlari(stop_sonrasi_bekleme_mum=2)) == ["stop_sonrasi_bekleme_mum"]
+    assert evren_k2.desteklenmeyen_eski(CikisAyarlari(kismi=((1.0, 0.25),), geri_cekilme_yuzde=2.0)) == ["kismi", "geri_cekilme_yuzde"]
 
 
 def test_rastgele_evren_cikis_kurallarini_kullanir(veri_dizini):

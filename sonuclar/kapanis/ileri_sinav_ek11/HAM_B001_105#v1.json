@@ -1,0 +1,43 @@
+{
+ "a_net_pozitif": true,
+ "asama": 2,
+ "b_kill_yok": true,
+ "bh_net_x2": -0.18720604291740606,
+ "c_al_tutu_gecti": true,
+ "donem_bas": "2025-11-08 00:00:00+00:00",
+ "donem_bit": "2026-11-07 00:00:00+00:00",
+ "hata": "",
+ "karar": "gecti",
+ "kill_x1": 0,
+ "kill_x2": 0,
+ "kimlik": "HAM:B001:105#v1",
+ "long_only": true,
+ "max_dusus_x2": 0.0011607648723461826,
+ "n_islem": 12,
+ "n_islem_x1": 12,
+ "net_x1": 0.02505629881817395,
+ "net_x2": 0.023654277058527517,
+ "ort_r": 0.1319783398260673,
+ "parametreler": {
+  "ewo_dusuk": -19.765,
+  "ewo_hizli": 50,
+  "ewo_tur": "ema",
+  "ewo_yavas": 200,
+  "ewo_yuksek": 5.775,
+  "high_offset": 1.098,
+  "kisa": false,
+  "low_offset": 0.903,
+  "ma_al": 19,
+  "ma_sat": 58,
+  "rsi_al": 44.0,
+  "sl": 0.311
+ },
+ "pf_x1": 19.101125184707,
+ "pf_x2": 16.149237715898476,
+ "r_enstruman": {
+  "ZECUSDT": 1.5837400779128075
+ },
+ "sinif": "kapanis__overwatch-b0105",
+ "tf": "1h",
+ "yetersiz_ornek": true
+}

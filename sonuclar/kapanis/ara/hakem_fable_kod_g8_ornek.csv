@@ -1,0 +1,33 @@
+dosya,sinif,kaynak_id,uyum,sorun,oneri
+kod_g8_kod_1,EmaBantS0038,HAM:X005:38,UYUMLU,"Yok (durum girişi, EMA15<EMA30 çıkış, ATR14x3)",-
+kod_g8_kod_1,EmaObvS0025,HAM:X005:25,UYUMLU,"Çıkıştaki 'altına iner' kesişim olarak okundu (docstring'de yazılı); ROI 0/6/12 mum, stop -%26,5, iz %5/offset %10 doğru",-
+kod_g8_kod_1,MultiRsiS0016,HAM:X005:16,UYUMLU,"Üst TF (10m/40m) htf.ust_zaman ile, 1 alt mum gecikmeli (muhafazakâr); ROI %1 limit hedef olarak",-
+kod_g8_kod_1,SmaKesIzS0043,HAM:X005:43,UYUMLU_YAKLASIK,"Motor ATR izi bar içi (ILERLEME'de yaklaşık); VARYANTLAR kaydında 'yaklasik' anahtarı yok; iz_k/atr_n parametreleri CikisAyarlari'na bağlı değil (sabit 2.0/100)","VARYANTLAR'a yaklasik: True ekle"
+kod_g8_kod_2,HaftalikKapanisKanaliS0136,HAM:X005:136,UYUMLU,"tf kaydı 1d (haftalık ust_zaman ile, kapanmış hafta); girdi tf 1w - bilinçli, modül notunda yazılı",-
+kod_g8_kod_2,IbsBantDonusS0097,HAM:X005:97,UYUMLU,Yok,-
+kod_g8_kod_2,Cci10DurumGecisS0210,HAM:X005:210,KUCUK_SAPMA,"_sanal sanal pozisyon girişleri süzüyor (çıkış mumunda giriş yok); kapanış bazlı %1 stop bar içi stopa ve giriş yerine sinyal kapanışına uyarlanmış; VARYANTLAR'da yaklasik işareti yok","yaklasik: True (ya da 'sanal_suzgec' notu) ekle"
+kod_g8_kod_2,EwmaKutleMerkeziS0144,HAM:X005:144,UYUMLU,"3 varyant girdiyle aynı (3/12, 8/32, 32/128); ewm(com, adjust=False)",-
+kod_g8_kod_3,IchimokuAyniBarS0292,HAM:X005:292,UYUMLU,"Kaydırmasız bulut (kaydirma=0) kaynakta yazılı; nedensel",-
+kod_g8_kod_3,PmaHaftalikS0310,HAM:X005:310,UYUMLU_YAKLASIK,"Sanal pozisyonla kapanış bazlı iz stop; 'yaklasik' işaretli. İz başlangıcı giriş x0,90'dan başlıyor (kaynak: başlangıç tepe-2xATR) - küçük fark",Pozisyon bilinçli modülle yeniden yaz (planlı)
+kod_g8_kod_3,CardwellRsiS0304,HAM:X005:304,UYUMLU,"'60'ın altına inerse' aşağı kesişim okundu (durum okunsa giriş anında çıkardı; tek mantıklı okuma)",-
+kod_g8_kod_3,DonchianOrtaS0314,HAM:X005:314,UYUMLU,"Hedef yanlış taraftaysa sinyal düşer (belgeli ek süzgeç); stop 2xgiriş-orta, >%50 ise ATR",-
+kod_g8_kod_4,S379 (Rsi15SonTepeHedef),HAM:X005:379,UYUMLU_EMIN_DEGILIM,"Hedef sinyal anındaki 15 mum tepesinde sabit; kaynak 'son 15 günün en yükseği' kayan hedef de olabilir - emin değilim",Lider kaynağa baksın; kayan ise pozisyon bilinçli/cikis_long ile yaz
+kod_g8_kod_4,S405 (Rsi2Ema200Iki),HAM:X005:405,UYUMLU,"Kural doğru. Girdi tf sütunu '1d'; kod 4h+1d (kural_tam '1d (ve 4h)') -> 4 hipotez","Lider: 4h varyantı BH ailesine girsin mi karar ver"
+kod_g8_kod_4,S366 (MacdKesisim),HAM:X005:366,UYUMLU,Yok (4h|1d iki kayıt),-
+kod_g8_kod_4,S411 (RsiEsikAlSat),HAM:X005:411,UYUMLU,Yok,-
+kod_g8_kod_5,MacdBbRsiRoi5m,HAM:X005:552,UYUMLU,"Tek basamak ROI %1 azalan_roi ile KAPANIŞTA sınanıyor; parti 1 aynı yapıyı limit 'hedef' ile yazıyor (partiler arası tutarsızlık)",Tek basamak ROI için tek kural seç (hedef ya da azalan_roi)
+kod_g8_kod_5,MacdSifirAltiEma,HAM:X005:555,UYUMLU,Yok,-
+kod_g8_kod_5,KamaSmaFarkCevir,HAM:X005:525,UYUMLU,Yok (fark=0 long sayılır),-
+kod_g8_kod_5,MaGeriDusukSeri,HAM:X005:509,UYUMLU_EMIN_DEGILIM,"'Son 3 günde art arda' 3 karşılaştırma (4 mum) olarak kodlandı; 2 karşılaştırma (3 mum) okuması da mümkün - emin değilim",-
+kod_g8_kod_6,DonchianYuksekDusukS0651,HAM:X005:651,UYUMLU,Yok,-
+kod_g8_kod_6,EmaOranBandiS0571,HAM:X005:571,UYUMLU,"ROI 27dk->6 mum (30dk), 164dk->33 mum yukarı yuvarlama (belgeli)",-
+kod_g8_kod_6,SdDonusS0653,HAM:X005:653,UYUMLU,"756 günlük ısınma; hedef güncel SMA8 ile kapanışta (belgeli yorum)",-
+kod_g8_kod_6,Weinstein40HaftaS0639,HAM:X005:639,KURAL_UYUMLU_TF_SORUNU,"Sınıf mumları doğrudan haftalık bekliyor, VARYANTLAR tf='1w'; depo.aralik_suresi ve yeniden_ornekle '1w' tanımıyor; haftalık ATR14x3 stop mesafesi %50'yi aşabilir","136 gibi 1d + ust_zaman('1w') ile yeniden yaz ya da koşu betiğinde kapanmış haftalık bar üret; stopa %50 sınırı ekle"
+kod_g8_kod_7,S730 (ObvmKesisim),HAM:X005:730,UYUMLU,Yok,-
+kod_g8_kod_7,S758 (Rsi5DipTepeZaman4),HAM:X005:758,UYUMLU,zaman_cikisi_mum=4 doğru,-
+kod_g8_kod_7,S674 (HaWmaPsarMacd),HAM:X005:674,UYUMLU,"1h değerler kapanmış mumdan; tf kaydı 15m (girdi '15m+1h')",-
+kod_g8_kod_7,S710 (LrEgimDonusIki),HAM:X005:710,UYUMLU,Yok,-
+kod_g8_kod_8,S0896,HAM:X005:896,UYUMLU,Yok,-
+kod_g8_kod_8,S0769,HAM:X005:769,UYUMLU,"ROC = yumuşatılmış çizgi yorumu (ILERLEME'de emin_degil)",-
+kod_g8_kod_8,S0819,HAM:X005:819,UYUMLU,"Hedef %30 kapanışta (azalan_roi) + 4 mum; CikisAyarlari sınıf niteliğinde değil, __init__'te örnekte kuruluyor",Koşu betiği ayarı ÖRNEKTEN okusun (sınıftan değil)
+kod_g8_kod_8,S0812,HAM:X005:812,UYUMLU,Yok (hedef limit %25, stop %5, ters kesişim çıkışı),-

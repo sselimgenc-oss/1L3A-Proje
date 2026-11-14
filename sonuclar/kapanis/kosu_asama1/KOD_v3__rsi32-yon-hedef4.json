@@ -1,0 +1,53 @@
+{
+ "analiz_bas": "2017-08-17 00:00:00+00:00",
+ "bh_sharpe_x2": null,
+ "durum": "TAMAM",
+ "evren": "BTCUSDT",
+ "hata": "",
+ "k1": false,
+ "k2": true,
+ "k3": false,
+ "k3a": false,
+ "k3b": true,
+ "k4": false,
+ "k5": true,
+ "k6": {
+  "B": 100000,
+  "T": -47.86823134846054,
+  "desteklenmeyen": [],
+  "gecersiz_oran": 0.0,
+  "n_islem": 2202,
+  "p": 0.00010999890001099989,
+  "tohum": 455563971
+ },
+ "k6_durum": "TAMAM",
+ "katman": "K1",
+ "kill_x1": 1,
+ "kill_x2": 1,
+ "kimlik": "KOD:v3__rsi32-yon-hedef4",
+ "long_only": false,
+ "n_islem_x1": 1695,
+ "n_islem_x2": 1445,
+ "net_x1": 1.0923899497154799,
+ "net_x2": 0.20677900849165143,
+ "p": 0.00010999890001099989,
+ "pf_x1": 1.0838704596809754,
+ "pf_x2": 1.0368326190815913,
+ "r_enstruman": {
+  "BTCUSDT": 24.58828536886722
+ },
+ "r_yil": {
+  "2017": 5.961352437734604,
+  "2018": 11.58642403408885,
+  "2019": 12.01533143222332,
+  "2020": 6.151081650517881,
+  "2021": -8.14520357362926,
+  "2022": -2.9807006120681763
+ },
+ "sharpe_x2": 0.21455628185910874,
+ "sinif": "kapanis__rsi32-kaynak",
+ "sure_sn": 67.3,
+ "tf": "1h",
+ "tf_kaynak": "5m -> 1h yeniden örnekleme (yeniden_ornekle, eksik mumlar atılır)",
+ "tur": "tek"
+}
