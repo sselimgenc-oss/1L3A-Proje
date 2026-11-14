@@ -260,3 +260,10 @@ Talimat: `KODLAMA_TALIMATI.md`. Girdi: `kod_girdi/` (birleştirme betiğinin nih
 - Aşama 2: 96/96 (1 bilinen HATA V001:225); BH k*=73; birinci kapı 16; ikinci kapı 10. Fable (HAKEM_FABLE_SONUC_ASAMA2.md): hata yok, 5m maliyet doğru; 10 aday = 2 fikir (Robotic çöküş-sonrası dip alımı ailesi + aşama 1 trend kopyaları); dip ailesi trend ailesiyle düşük korelasyonlu.
 - Fable'ın önerdiği nihai paper listesi (en çok 6): 664, 705, 301, 138 + B001:670, B001:574. Karar kullanıcıda (paper seçimi, ölçütlerin önceden yazılması, olası holdout sınavı).
 - Kozmetik: ozet_asama2.md başlığı "aşama 1" yazıyor (koşucu şablonu).
+
+## 2026-11-14 — İleri dönem sınavları (ekler 10–12; sapma kayıtları)
+- Dönem 2025-11-08 → 2026-11-07; aynı 13 sembolde eşit ağırlıklı al-tut ×2: −%18,7.
+- Ek 10 (6 paper kaydı): 6/6 geçti (+%0,7…+%5,7). Ek 11 (kalan 35 paper adayı): 24 geçti, 11 elendi → 41 adayda 30/41 (%73).
+- Ek 12 (bilgi amaçlı, geliştirme döneminde elenmiş 414 tek grafik): 112/414 (%27) geçti; portföy 6 kaydın 1'i kâr etti. Elenmişlerin içinde ileri dönemde çok iyi görünenler (ör. X005:8 3h +%61) "keşif — kanıt değil".
+- Lider notu: ek 10'da kullanıcının kapsam sorusu yanlış anlaşılıp 6 kayıtla koşuldu; ek 11 ile düzeltildi.
+- Paper v2: 6 kapanış adayı eklendi (PR #60, 16 hesap); canlı onkontrol kapanis_aday'ı reddeder. Sunucu adımları deploy/KAPANIS_EKLEME_SUNUCU_ADIMLARI.md (kullanıcı uygulayacak).
