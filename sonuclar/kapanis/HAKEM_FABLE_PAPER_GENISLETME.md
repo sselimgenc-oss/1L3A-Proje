@@ -56,7 +56,7 @@ Ama sınav kazancı (+%5,8) ZEC çıkınca sıfıra iniyor. Aşama 2'de "eklenme
 | Kimlikler | Neden |
 |---|---|
 | L15#2#v4, 144, 844, 395#1, 809, A002:6 | Önceki raporlarda **şüpheli** (tek işlem/tek yıl/tek coin bağımlılığı, kıyastan muaf geçiş). Sınavda iyi çıkmaları bu notu silmez; A002:6 ve L15#2#v4'ün sınav kazancı da ağırlıkla tek-iki coin. |
-| 194, 37, 421, 718, 793, H007:48, V014:255 | 664/705'in kopyası (C kümesi, korelasyon 0,6–0,93). 37'yi MACD temsilcisi olarak önceden anmıştım, ama sınav profili 705 ile aynı (ZEC + HYPE; ZEC çıkınca eksi): yeni bilgi yok. 194'ü "37'den iyi çıktı" diye seçmek tam sonuç sonrası seçim olur. |
+| 194, 37, 421, 718, H007:48, V014:255 | 664/705'in kopyası (C kümesi, korelasyon 0,6–0,93). 37'yi MACD temsilcisi olarak önceden anmıştım, ama sınav profili 705 ile aynı (ZEC + HYPE; ZEC çıkınca eksi): yeni bilgi yok. 194'ü "37'den iyi çıktı" diye seçmek tam sonuç sonrası seçim olur. |
 | 79, 346 | 730 ile aynı küme (E); 730 temsil ediyor. |
 | 725 | 301 ile aynı küme (D); kıyastan muaf geçmişti. |
 | momentum-sıfır, 181, 779 | B kümesi (kırılım). Kümenin önceden seçilmiş temsilcisi 481 sınavı **geçemedi**, 76 −%25 yaptı; 181 ve 779 ortalama işlemde eksi (yalnız kıl payı artı). Küme bütün olarak çalışmadı; içinden iyi çıkanı almak şans seçmektir. |
@@ -110,3 +110,22 @@ bu görüntü karar vermeyi zorlaştırır. İleride istenirse doğru yol: yeni 
 - Şans tablosundaki ±%11'i elenenlerin kendi dağılımından aldım; kaba bir tahmindir, kesin bir istatistik testi değil.
 - Sınav dönemi verisi önceki turlarda görülmüştü (ek 10–12 "sapma" kaydı); bu sınav temiz bir kanıt değil, yalnız "gerekli, yeterli değil" süzgecidir.
 - 730, 259 ve 538'in paper motorunda çalışıp çalışmadığını (çıkış kancaları vb. fail-closed kontrolü) denetlemedim; ekleme öncesi kod tarafında bakılmalı.
+
+## Ek: 20. hesap
+
+Kullanıcı kararı: paper 20 hesap = 16 + 730, 259, 538 + 1 "niş" aday (41 adaylık havuzdan; ek 12'den değil).
+
+**Seçim: `HAM:X005:793#v1`** (MACD sinyal oranı, 1d, iki yönlü). Etiket: `kapanis_aday_ek`.
+
+- **Neden niş:** aşama 1 kümelemesinde **tekil** çıkan (hiçbir kümeyle haftalık korelasyonu 0,6'ya ulaşmayan) beş adaydan biri; diğer dördü ya paper'da (138),
+  ya şüpheli (395, 400), ya "sonuç sonrası düzeltme" kaydı (792). Sınav yılı profili de diğerlerinden ayrı: çoğu adayın kazancı ZEC/ETH/BTC'den gelirken
+  793'ün kazancı ADA, BNB, DOGE, LINK, BCH, XRP'den; ZEC'te **eksi** (−2,4R). Net +%8,6, düşüş %6,4, 61 işlem.
+- **Düzeltme:** yukarıdaki "eklenmesin" tablosunda 793'ü yanlışlıkla "664/705 kopyası" satırına yazmıştım; aşama 1 raporumda tekildir. Satır düzeltildi.
+- **Çekince:** aşama 1 notum "zayıf" (2020–21 dışında toplam yalnız +7R, 2025 eksi). Adı MACD ama 194/37/421 MACD ailesiyle aynı kümeye düşmemişti; sınav
+  yılındaki korelasyonunu ölçmedim. İki yönlü; short bacağının katkısını bilmiyorum. Gerçek anlamda "ortalamaya dönüş" ya da "short ağırlıklı" bir aday
+  havuzda şüphesiz/kopyasız yok; 793 "farklı fikir" değil, "aynı faktörün en az benzeyen biçimi"dir.
+- **Düşünülüp alınmayanlar:** 79 (6h iki yönlü; ama 730 ile aynı küme), B001:105 (1h; ama 670/574 ile aynı dip fikri, sınavda 12 işlem), 792 (tekil ama sonuç sonrası düzeltme kaydı).
+
+**12 hafta ölçüm satırı (önceden yazılı):** bölüm 4'teki 1–3 ve 5. maddeler aynen geçerli; zarar sınırı düşüş ≤ %13 (sınav düşüşünün 2 katı); beklenen işlem ~15.
+Ek olarak nişlik sınaması: 664, 705 ve 730 ile haftalık getiri korelasyonu **0,6'nın altında** kalmalı — 0,6 ve üzeriyse "niş değil" sayılır ve çıkarılır
+(diğer ek hesaplarda eşik 0,8; burada hesabın var olma gerekçesi farklılık olduğu için daha sıkı). Long/short neti ayrı raporlanır.
